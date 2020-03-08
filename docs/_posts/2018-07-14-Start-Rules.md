@@ -12,13 +12,6 @@ categories: jekyll
 
 
 ## 0.2. 语法
-<!-- TOC -->
-
-- [0.1. 前言](#01-前言)
-- [0.2. 语法](#02-语法)
-    - [0.2.1. 针对MIUI，FLYME等ROM](#021-针对miuiflyme等rom)
-
-<!-- /TOC -->
 规则语法为三个角色，分别是**行动**，行动包括```ALLOW（允许）```、```DENY（拒绝）```，角色，包括**启动者**和**目标**，两个应用的包名。
 也可以用`THIS`表示某个应用自己。
 
@@ -30,8 +23,3 @@ categories: jekyll
 
 支持以进程代号代替角色，目前可用代号包括：`SHELL`，`ROOT`。    
 例如，如果想允许SHELL启动任何QQ：```ALLOW SHELL com.tencent.qq```
-
-### 0.2.1. 针对MIUI，FLYME等ROM
-据用户反馈，MIUI用户需要添加如下规则：  
-```ALLOW THIS THIS```  
-解决状态栏消息点击无法跳转问题。

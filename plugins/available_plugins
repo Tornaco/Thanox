@@ -3,6 +3,7 @@
         "name": "Su Enabler",
         "versionCode": 20034,
         "versionName": "1.2.0",
+        "packageName": "github.tornaco.android.plugin.su",
         "description": "为情景模式su API提供支持",
         "minThanoxVersion": 1,
         "updateTimeMills": 332323242,

@@ -1,30 +1,22 @@
 [
     {
         "name": "Su Enabler",
-        "versionCode": 20034,
-        "versionName": "1.2.0",
+        "versionCode": 2031443,
+        "versionName": "1.2.2",
         "packageName": "github.tornaco.android.plugin.su",
         "description": "为情景模式su API提供支持",
         "minThanoxVersion": 1,
-        "updateTimeMills": 332323242,
-        "downloadUrl": "https://github.com/Tornaco"
+        "updateTimeMills": 1587822650040,
+        "downloadUrl": "https://github.com/Tornaco/Thanox/releases/download/v1.2.2/plugin_su_enabler_1.2.2-dirty.tp"
     },
     {
         "name": "Push消息代收",
-        "versionCode": 20034,
-        "versionName": "1.2.0",
+        "versionCode": 2031443,
+        "versionName": "1.2.2",
+        "packageName": "github.tornaco.android.plugin.push.message.delegate",
         "description": "微信消息代收",
         "minThanoxVersion": 1,
-        "updateTimeMills": 332323242,
-        "downloadUrl": "https://github.com/Tornaco"
-    },
-    {
-        "name": "Example",
-        "versionCode": 20034,
-        "versionName": "1.2.0",
-        "description": "示例",
-        "minThanoxVersion": 1,
-        "updateTimeMills": 332323242,
-        "downloadUrl": "https://github.com/Tornaco"
+        "updateTimeMills": 1587822650040,
+        "downloadUrl": "https://github.com/Tornaco/Thanox/releases/download/v1.2.2/plugin_push_delegate_1.2.2-dirty.tp"
     }
 ]

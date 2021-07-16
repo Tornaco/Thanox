@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://tornaco.github.io/Thanox/</loc>
+         <lastmod>2021-07-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://tornaco.github.io/Thanox/2-Install-Activate/</loc>
+         <lastmod>2021-07-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://tornaco.github.io/Thanox/3-Lazy-Mode/</loc>
+         <lastmod>2021-07-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://tornaco.github.io/Thanox/4-Start-Blocker/</loc>
+         <lastmod>2021-07-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://tornaco.github.io/Thanox/5-Start-Rules/</loc>
+         <lastmod>2021-07-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://tornaco.github.io/Thanox/6-Profile/</loc>
+         <lastmod>2021-07-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>

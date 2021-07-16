@@ -1,0 +1,2588 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://tornaco.github.io/Thanox/6-Profile/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+    
+    
+      
+        <title>情景模式（Profile） - Thanox</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1fe995fd.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#01" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Thanox" class="md-header__button md-logo" aria-label="Thanox" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Thanox
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              情景模式（Profile）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Thanox" class="md-nav__button md-logo" aria-label="Thanox" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Thanox
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        应用介绍
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-Install-Activate/" class="md-nav__link">
+        安装与激活（Install & Active）
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-Lazy-Mode/" class="md-nav__link">
+        乖巧模式
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-Start-Blocker/" class="md-nav__link">
+        后台启动管理（Start blocker）
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-Start-Rules/" class="md-nav__link">
+        关联启动规则（Rules）
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          情景模式（Profile）
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        情景模式（Profile）
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#01" class="md-nav__link">
+    0.1. 前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#02" class="md-nav__link">
+    0.2. 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#03" class="md-nav__link">
+    0.3. 新建
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#04-fatcs-params" class="md-nav__link">
+    0.4. Fatcs-params
+  </a>
+  
+    <nav class="md-nav" aria-label="0.4. Fatcs-params">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#041" class="md-nav__link">
+    0.4.1. 应用安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#042" class="md-nav__link">
+    0.4.2. 应用切换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#043" class="md-nav__link">
+    0.4.3. 任务清理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#044-activity-created" class="md-nav__link">
+    0.4.4. Activity Created
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#045-activity-resumed" class="md-nav__link">
+    0.4.5. Activity Resumed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#046-activity-changed" class="md-nav__link">
+    0.4.6. Activity Changed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#047" class="md-nav__link">
+    0.4.7. 应用停止运行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#048" class="md-nav__link">
+    0.4.8. 屏幕开关
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#049" class="md-nav__link">
+    0.4.9. 电量变化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0410" class="md-nav__link">
+    0.4.10. 蓝牙事件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0411-wifi" class="md-nav__link">
+    0.4.11. Wifi状态变化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0412" class="md-nav__link">
+    0.4.12. 系统启动
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0413" class="md-nav__link">
+    0.4.13. 推送消息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0414" class="md-nav__link">
+    0.4.14. 通知
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#05-handle" class="md-nav__link">
+    0.5. Handle
+  </a>
+  
+    <nav class="md-nav" aria-label="0.5. Handle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#051-killer" class="md-nav__link">
+    0.5.1. killer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#052-activity" class="md-nav__link">
+    0.5.2. activity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#053-power" class="md-nav__link">
+    0.5.3. power
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#054-task" class="md-nav__link">
+    0.5.4. task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#055-ui" class="md-nav__link">
+    0.5.5. ui
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#056-hw" class="md-nav__link">
+    0.5.6. hw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#057-io" class="md-nav__link">
+    0.5.7. io
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#058-data" class="md-nav__link">
+    0.5.8. data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#059-ringtone" class="md-nav__link">
+    0.5.9. ringtone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0510-sh" class="md-nav__link">
+    0.5.10. sh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0511-input" class="md-nav__link">
+    0.5.11. input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0512-pkg" class="md-nav__link">
+    0.5.12. pkg
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0513-log" class="md-nav__link">
+    0.5.13. Log
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#06" class="md-nav__link">
+    0.6. 全局变量
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#01" class="md-nav__link">
+    0.1. 前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#02" class="md-nav__link">
+    0.2. 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#03" class="md-nav__link">
+    0.3. 新建
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#04-fatcs-params" class="md-nav__link">
+    0.4. Fatcs-params
+  </a>
+  
+    <nav class="md-nav" aria-label="0.4. Fatcs-params">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#041" class="md-nav__link">
+    0.4.1. 应用安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#042" class="md-nav__link">
+    0.4.2. 应用切换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#043" class="md-nav__link">
+    0.4.3. 任务清理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#044-activity-created" class="md-nav__link">
+    0.4.4. Activity Created
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#045-activity-resumed" class="md-nav__link">
+    0.4.5. Activity Resumed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#046-activity-changed" class="md-nav__link">
+    0.4.6. Activity Changed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#047" class="md-nav__link">
+    0.4.7. 应用停止运行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#048" class="md-nav__link">
+    0.4.8. 屏幕开关
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#049" class="md-nav__link">
+    0.4.9. 电量变化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0410" class="md-nav__link">
+    0.4.10. 蓝牙事件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0411-wifi" class="md-nav__link">
+    0.4.11. Wifi状态变化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0412" class="md-nav__link">
+    0.4.12. 系统启动
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0413" class="md-nav__link">
+    0.4.13. 推送消息
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0414" class="md-nav__link">
+    0.4.14. 通知
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#05-handle" class="md-nav__link">
+    0.5. Handle
+  </a>
+  
+    <nav class="md-nav" aria-label="0.5. Handle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#051-killer" class="md-nav__link">
+    0.5.1. killer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#052-activity" class="md-nav__link">
+    0.5.2. activity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#053-power" class="md-nav__link">
+    0.5.3. power
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#054-task" class="md-nav__link">
+    0.5.4. task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#055-ui" class="md-nav__link">
+    0.5.5. ui
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#056-hw" class="md-nav__link">
+    0.5.6. hw
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#057-io" class="md-nav__link">
+    0.5.7. io
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#058-data" class="md-nav__link">
+    0.5.8. data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#059-ringtone" class="md-nav__link">
+    0.5.9. ringtone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0510-sh" class="md-nav__link">
+    0.5.10. sh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0511-input" class="md-nav__link">
+    0.5.11. input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0512-pkg" class="md-nav__link">
+    0.5.12. pkg
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0513-log" class="md-nav__link">
+    0.5.13. Log
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#06" class="md-nav__link">
+    0.6. 全局变量
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>情景模式（Profile）</h1>
+                
+                <!-- TOC -->
+
+<ul>
+<li><a href="#01-前言">0.1. 前言</a></li>
+<li><a href="#02-介绍">0.2. 介绍</a></li>
+<li><a href="#03-新建">0.3. 新建</a></li>
+<li><a href="#04-fatcs-params">0.4. Fatcs-params</a></li>
+<li><a href="#041-应用安装">0.4.1. 应用安装</a></li>
+<li><a href="#042-应用切换">0.4.2. 应用切换</a></li>
+<li><a href="#043-任务清理">0.4.3. 任务清理</a></li>
+<li><a href="#044-activity-created">0.4.4. Activity Created</a></li>
+<li><a href="#045-activity-resumed">0.4.5. Activity Resumed</a></li>
+<li><a href="#046-activity-changed">0.4.6. Activity Changed</a></li>
+<li><a href="#047-应用停止运行">0.4.7. 应用停止运行</a></li>
+<li><a href="#048-屏幕开关">0.4.8. 屏幕开关</a></li>
+<li><a href="#049-电量变化">0.4.9. 电量变化</a></li>
+<li><a href="#0410-蓝牙事件">0.4.10. 蓝牙事件</a></li>
+<li><a href="#0411-wifi状态变化">0.4.11. Wifi状态变化</a></li>
+<li><a href="#0412-系统启动">0.4.12. 系统启动</a></li>
+<li><a href="#0413-推送消息">0.4.13. 推送消息</a></li>
+<li><a href="#0414-通知">0.4.14. 通知</a></li>
+<li><a href="#05-handle">0.5. Handle</a></li>
+<li><a href="#051-killer">0.5.1. killer</a></li>
+<li><a href="#052-activity">0.5.2. activity</a></li>
+<li><a href="#053-power">0.5.3. power</a></li>
+<li><a href="#054-task">0.5.4. task</a></li>
+<li><a href="#055-ui">0.5.5. ui</a></li>
+<li><a href="#056-hw">0.5.6. hw</a></li>
+<li><a href="#057-io">0.5.7. io</a></li>
+<li><a href="#058-data">0.5.8. data</a></li>
+<li><a href="#059-ringtone">0.5.9. ringtone</a></li>
+<li><a href="#0510-sh">0.5.10. sh</a></li>
+<li><a href="#0511-input">0.5.11. input</a></li>
+<li><a href="#0512-pkg">0.5.12. pkg</a></li>
+<li><a href="#0513-log">0.5.13. Log</a></li>
+<li><a href="#06-全局变量">0.6. 全局变量</a></li>
+</ul>
+<!-- /TOC -->
+
+<h2 id="01">0.1. 前言</h2>
+<p>规则引擎：https://github.com/j-easy/easy-rules</p>
+<blockquote>
+<p>You can build a simple rules engine yourself. All you need is to create a bunch of objects with conditions and actions, store them in a collection, and run through them to evaluate the conditions and execute the actions.</p>
+<p><a href="http://martinfowler.com/">Martin Fowler</a> </p>
+</blockquote>
+<h2 id="02">0.2. 介绍</h2>
+<p>情景模式简单理解：</p>
+<blockquote>
+<p>什么时候，干什么。</p>
+</blockquote>
+<p>什么时候就是触发条件（condition）</p>
+<p>干什么就是动作（actions）</p>
+<h2 id="03">0.3. 新建</h2>
+<p>新建一条入门实例如下，以JSON格式为例：</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;Current pkg&quot;,
+    &quot;description&quot;: &quot;应用切换时，使用Toast显示当前应用的当前应用包名&quot;,
+    &quot;priority&quot;: 2,
+    &quot;condition&quot;: &quot;frontPkgChanged == true&quot;,
+    &quot;actions&quot;: [
+      &quot;ui.showShortToast(activity.getFrontAppPackage());&quot;
+    ]
+  }
+]
+</code></pre>
+<p>参数解释：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>请使用英文，情景模式名字，多个模式不能重复，否则会被覆盖</td>
+</tr>
+<tr>
+<td>description</td>
+<td>任意的描述</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>优先级，决定执行顺序</td>
+</tr>
+<tr>
+<td>condition</td>
+<td>触发条件，支持mvel表达式，条件可选的基于事实的facts-param请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义</td>
+</tr>
+<tr>
+<td>actions</td>
+<td>要执行的动作，支持mvel表达式，可以设置多个，动作可选的handle请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义</td>
+</tr>
+</tbody>
+</table>
+<h2 id="04-fatcs-params">0.4. Fatcs-params</h2>
+<p>除了提供规则引擎之外，Thanox也会提供常用的事实与参数，用于condition条件判断。</p>
+<h3 id="041">0.4.1. 应用安装</h3>
+<p>应用安装成功之后，thanox会发布这个事实，并注入一些参数，你可以使用这些参数做条件判断，或者执行动作时作为参数使用。</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pkgAdded</td>
+<td>Boolean（true/false）</td>
+<td>新应用已经安装</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>pkgName</td>
+<td>String（字符串）</td>
+<td>安装的应用包名</td>
+<td>如下</td>
+</tr>
+</tbody>
+</table>
+<p><strong>pkgAdded</strong> 示例</p>
+<ul>
+<li>作为条件判断：</li>
+</ul>
+<p><code>json
+  "condition":  "pkgAdded == true"</code></p>
+<p><strong>pkgName</strong>示例</p>
+<ul>
+<li>作为条件判断：</li>
+</ul>
+<p><code>json
+  "condition":  "pkgAdded == true &amp;&amp; pkgName == \"com.tencent.mm\""</code></p>
+<ul>
+<li>作为动作参数：</li>
+</ul>
+<p><code>json
+  "ui.showShortToast(pkgName);"</code></p>
+<h3 id="042">0.4.2. 应用切换</h3>
+<p>前台应用切换时，thanox也会发布这个事实，参数如下。</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>frontPkgChanged</td>
+<td>Boolean（true/false）</td>
+<td>前台应用已切换</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>from</td>
+<td>String（字符串）</td>
+<td>从哪个应用切换的，包名</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>to</td>
+<td>String（字符串）</td>
+<td>切换到哪个应用，包名</td>
+<td>略</td>
+</tr>
+</tbody>
+</table>
+<p><strong>frontPkgChanged</strong>示例</p>
+<ul>
+<li>作为条件判断：</li>
+</ul>
+<p><code>json
+  "condition":  "frontPkgChanged == true"</code></p>
+<p><strong>from</strong>示例</p>
+<ul>
+<li>作为条件判断，微信是否回到了后台：</li>
+</ul>
+<p><code>json
+  "condition":  "frontPkgChanged == true &amp;&amp; from == \"com.tencent.mm\""</code></p>
+<h3 id="043">0.4.3. 任务清理</h3>
+<p>当某个应用的任务被移除时，一般场景为最近任务中，该任务被用户划掉。此时thanox也会发布这个事实，参数如下。</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>taskRemoved</td>
+<td>Boolean（true/false）</td>
+<td>任务已移除</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>pkgName</td>
+<td>String（字符串）</td>
+<td>从哪个应用切换的，包名</td>
+<td>如下</td>
+</tr>
+</tbody>
+</table>
+<p><strong>taskRemoved</strong>示例</p>
+<ul>
+<li>作为条件判断：</li>
+</ul>
+<p><code>json
+  "condition":  "taskRemoved == true"</code></p>
+<p><strong>pkgName</strong>示例：</p>
+<ul>
+<li>作为条件判断，微信任务移除时杀死应用：</li>
+</ul>
+<p><code>json
+  "condition":  "taskRemoved == true &amp;&amp; pkgName == \"com.tencent.mm\""，
+  "actions": [
+            "ui.showShortToast(\"正在杀死微信\");",
+        "killer.killPackage(pkgName);"
+      ]</code></p>
+<h3 id="044-activity-created">0.4.4. Activity Created</h3>
+<p>通常一个应用的活动页已经创建好，可以称为<strong>Activity Created</strong>。此时thanox也会发布这个事实，参数如下。
+通常一个活动的生命周期为Created（创建好）--&gt;Resumed（显示好，可以交互了）--&gt; Paused（暂停）--&gt; Destroyed（销毁了），需要注意的是，
+如果一个活动走到Resumed状态时，被其他活动覆盖，例如被支付宝支付页面覆盖，那么它会走如下生命周期：
+Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活动销毁了，回到了该活动，那么又会恢复到Resumed，而不会再次Create）。
+详细的Android活动的生命周期可以参考：https://developer.android.com/guide/components/activities/activity-lifecycle</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>activityCreated</td>
+<td>Boolean（true/false）</td>
+<td>活动页已经创建好</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>componentNameAsString</td>
+<td>String（字符串）</td>
+<td>活动的组件全名，Thanox的显示当前活动复制来的名字就是这个</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>componentNameAsShortString</td>
+<td>String（字符串）</td>
+<td>活动的组件缩名</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>componentName</td>
+<td>ComponentName</td>
+<td>活动的组件</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>pkgName</td>
+<td>String（字符串）</td>
+<td>应用的包名</td>
+<td>如下</td>
+</tr>
+</tbody>
+</table>
+<h3 id="045-activity-resumed">0.4.5. Activity Resumed</h3>
+<p>通常一个应用的活动页已经显示，可以称为<strong>Activity Resumed</strong>。此时thanox也会发布这个事实，参数如下。</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>activityResumed</td>
+<td>Boolean（true/false）</td>
+<td>活动已经显示</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>componentNameAsString</td>
+<td>String（字符串）</td>
+<td>活动的组件全名，Thanox的显示当前活动复制来的名字就是这个</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>componentNameAsShortString</td>
+<td>String（字符串）</td>
+<td>活动的组件缩名</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>componentName</td>
+<td>ComponentName</td>
+<td>活动的组件</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>pkgName</td>
+<td>String（字符串）</td>
+<td>应用的包名</td>
+<td>如下</td>
+</tr>
+</tbody>
+</table>
+<p>通常很多应用启动首页会有一个首页显示广告，有个跳过按钮可以点击，下面是使用该事实实现的广告跳过示例：</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;AD Skip&quot;,
+    &quot;description&quot;: &quot;彩云天气广告页面点击跳过&quot;,
+    &quot;priority&quot;: 1,
+    &quot;condition&quot;: &quot;activityResumed == true &amp;&amp; componentNameAsShortString == \&quot;com.nowcasting.activity/.SplashActivity\&quot;&quot;,
+    &quot;actions&quot;: [
+      &quot;ui.showShortToast(\&quot;尝试点击跳过...\&quot;);&quot;,
+      &quot;ui.findAndClickViewByText(\&quot;跳过\&quot;, \&quot;com.nowcasting.activity/com.nowcasting.activity.SplashActivity\&quot;);&quot;
+    ]
+  }
+]
+</code></pre>
+<blockquote>
+<p>提示：</p>
+<p>此处条件只判断了彩云天气，可以使用||操作符做多条件判断。</p>
+<p>此处的ui操作后续会介绍。</p>
+</blockquote>
+<h3 id="046-activity-changed">0.4.6. Activity Changed</h3>
+<p>当前前台活动(Activity)发生改变时thanox会发布该事件。(Since Thanox(or Pro)-2.5)</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>frontActivityChanged</td>
+<td>Boolean（true/false）</td>
+<td>前台Activity改变</td>
+<td>无</td>
+</tr>
+<tr>
+<td>fromActivity</td>
+<td>ComponentName</td>
+<td>活动的组件</td>
+<td>无</td>
+</tr>
+<tr>
+<td>toActivity</td>
+<td>ComponentName</td>
+<td>活动的组件</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://developer.android.com/reference/android/content/ComponentName">ComponentName</a> 是活动组件名称。</p>
+<p>例如：<code>com.android.messaging/com.android.messaging.ui.conversationlist.ConversationListActivity</code></p>
+<p>Thanox的开发者设置中，"显示当前Activity"功能也可以显示当前activity的ComponentName。</p>
+<h3 id="047">0.4.7. 应用停止运行</h3>
+<p>应用被杀死或者其他原因停止运行，Thanox会发布该事实。</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pkgKilled</td>
+<td>Boolean（true/false）</td>
+<td>任务已移除</td>
+<td>如下</td>
+</tr>
+<tr>
+<td>pkgName</td>
+<td>String（字符串）</td>
+<td>应用包名</td>
+<td>如下</td>
+</tr>
+</tbody>
+</table>
+<h3 id="048">0.4.8. 屏幕开关</h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>screenOn</td>
+<td>Boolean（true/false）</td>
+<td>亮屏事件</td>
+<td>无</td>
+</tr>
+<tr>
+<td>screenOff</td>
+<td>Boolean（true/false）</td>
+<td>灭屏事件</td>
+<td>无</td>
+</tr>
+<tr>
+<td>userPresent</td>
+<td>Boolean（true/false）</td>
+<td>解锁事件</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<h3 id="049">0.4.9. 电量变化</h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>batteryChanged</td>
+<td>Boolean（true/false）</td>
+<td>电量发生变化</td>
+<td>无</td>
+</tr>
+<tr>
+<td>batteryLevel</td>
+<td>int</td>
+<td>电量</td>
+<td>无</td>
+</tr>
+<tr>
+<td>isCharging</td>
+<td>Boolean（true/false）</td>
+<td>是否在充电</td>
+<td>无</td>
+</tr>
+<tr>
+<td>isAcCharge</td>
+<td>Boolean（true/false）</td>
+<td>是否为AC</td>
+<td>无</td>
+</tr>
+<tr>
+<td>isUsbCharge</td>
+<td>Boolean（true/false）</td>
+<td>是否为USB</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<h3 id="0410">0.4.10. 蓝牙事件</h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>btStateChanged</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙开关状态发生变化</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btStateOff</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙为关闭状态</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btStateTurningOff</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙为正在关闭状态</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btStateOn</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙为开启状态</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btStateTurningOn</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙为正在开启状态</td>
+<td>无</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>btConnectionStateChanged</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙连接状态发生变化</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btConnectionStateConnected</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙为已连接状态</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btConnectionStateConnecting</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙为正在连接状态</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btConnectionStateDisconnected</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙为断开连接状态</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btConnectionStateDisconnecting</td>
+<td>Boolean（true/false）</td>
+<td>蓝牙为正在断开连接状态</td>
+<td>无</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>btBoundedDevices</td>
+<td>List of BluetoothDevice</td>
+<td>绑定的蓝牙设备模型列表</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btBoundedDeviceAddresses</td>
+<td>List of String</td>
+<td>绑定的蓝牙设备地址列表</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btBoundedDeviceAliasNames</td>
+<td>List of String</td>
+<td>绑定的蓝牙设备Alias列表</td>
+<td>无</td>
+</tr>
+<tr>
+<td>btBoundedDeviceBatteryLevel</td>
+<td>List of Int</td>
+<td>绑定的蓝牙设备电量信息列表</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>补充：</p>
+<blockquote>
+<p>Battery level in percents from 0 to 100, or -1 if
+     * Bluetooth is disabled, or device is disconnected, or does not have any battery reporting
+     * service, or return value is invalid</p>
+</blockquote>
+<p>示例1：</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;BT Connection State&quot;,
+    &quot;description&quot;: &quot;蓝牙连接状态监听，此处监听连接事件，Toast显示所有连接设备，并判断是不是连接的MDR-XB650BT&quot;,
+    &quot;priority&quot;: 2,
+    &quot;condition&quot;: &quot;btConnectionStateChanged == true &amp;&amp; btConnectionStateConnected == true&quot;,
+    &quot;actions&quot;: [
+      &quot;ui.showShortToast(\&quot;蓝牙连接连接到新设备了，所有设备名称为：\&quot; + btBoundedDeviceAliasNames);&quot;,
+      &quot;ui.showShortToast(\&quot;蓝牙连接连接到新设备了，包含MDR-XB650BT设备吗？\&quot; + btBoundedDeviceAliasNames.contains(\&quot;MDR-XB650BT\&quot;));&quot;
+    ]
+  }
+]
+</code></pre>
+<p>示例2：</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;BT Connection State Advanced&quot;,
+    &quot;description&quot;: &quot;同蓝牙连接状态监听，只是使用了btBoundedDevices:BluetoothDevice参数&quot;,
+    &quot;priority&quot;: 2,
+    &quot;condition&quot;: &quot;btConnectionStateChanged == true &amp;&amp; btConnectionStateConnected == true&quot;,
+    &quot;actions&quot;: [
+      &quot;ui.showShortToast(\&quot;蓝牙连接连接到新设备了，第一个设备名称为：\&quot; + btBoundedDevices.get(0).getAddress());&quot;
+    ]
+  }
+]
+</code></pre>
+<h3 id="0411-wifi">0.4.11. Wifi状态变化</h3>
+<p>Wifi状态变化时发出的事件。（Since Thanox 2.5-2）</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wifiStateChanged</td>
+<td>Boolean（true/false）</td>
+<td>Wifi状态是否改变</td>
+<td>无</td>
+</tr>
+<tr>
+<td>wifiState</td>
+<td>WifiState</td>
+<td>状态</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>WifiState:</p>
+<pre><code class="language-java">data class WifiState(
+  // 是否是开启状态
+  val enabled: Boolean, 
+  // 状态信息（例如：No network）
+  val statusLabel: String?, 
+  // SSID（例如：ChinaNet-d2Xq-5G）
+  val ssid: String?
+)
+</code></pre>
+<h3 id="0412">0.4.12. 系统启动</h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>systemReady</td>
+<td>Boolean（true/false）</td>
+<td>系统启动完成</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<h3 id="0413">0.4.13. 推送消息</h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fcmPushMessageArrived</td>
+<td>Boolean（true/false）</td>
+<td>收到GCM/FCM消息推送</td>
+<td>无</td>
+</tr>
+<tr>
+<td>pkgName</td>
+<td>String（字符串）</td>
+<td>应用包名</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<h3 id="0414">0.4.14. 通知</h3>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>notificationAdded</td>
+<td>Boolean（true/false）</td>
+<td>新通知到达</td>
+<td>无</td>
+</tr>
+<tr>
+<td>notificationRemoved</td>
+<td>Boolean（true/false）</td>
+<td>通知移除</td>
+<td>无</td>
+</tr>
+<tr>
+<td>pkgName</td>
+<td>String（字符串）</td>
+<td>通知所属应用包名</td>
+<td>无</td>
+</tr>
+<tr>
+<td>notificationTitle</td>
+<td>String（字符串）</td>
+<td>通知标题</td>
+<td>无</td>
+</tr>
+<tr>
+<td>notificationContent</td>
+<td>String（字符串）</td>
+<td>通知内容</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<h2 id="05-handle">0.5. Handle</h2>
+<p>Thanox会提供一部分执行动作所需要的handle能力。例如ui，专门用于做界面显示相关的动作。</p>
+<p>你可以使用<code>handle.action(params)</code>来执行自定义的动作。</p>
+<p>下面是目前支持的Handle能力。</p>
+<h3 id="051-killer">0.5.1. killer</h3>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>killPackage</td>
+<td>杀死应用</td>
+<td>包名</td>
+<td>killer.killPackage("com.tencent.mm")</td>
+<td>Boolean（true/false）</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;killer&quot;)
+interface IKiller {
+    boolean killPackage(String pkgName);
+}
+</code></pre>
+<p>举例：</p>
+<pre><code class="language-json">&quot;actions&quot;: [
+  // 杀死微信
+  &quot;killer.killPackage(\&quot;com.tencent.mm\&quot;)&quot;
+]
+</code></pre>
+<h3 id="052-activity">0.5.2. activity</h3>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>launchProcessForPackage</td>
+<td>启动应用进程</td>
+<td>包名</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>launchMainActivityForPackage</td>
+<td>打开应用主界面</td>
+<td>包名</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>getLaunchIntentForPackage</td>
+<td>获取用用的启动Intent</td>
+<td>包名</td>
+<td>如下</td>
+<td>Intent</td>
+</tr>
+<tr>
+<td>getFrontAppPackage</td>
+<td>获取当前前台应用包名</td>
+<td>无</td>
+<td>如下</td>
+<td>String（字符串）</td>
+</tr>
+<tr>
+<td>getFrontAppPackageComponent</td>
+<td>获取当前前台应用组件</td>
+<td>无</td>
+<td>如下</td>
+<td>ComponentName</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;activity&quot;)
+interface IActivity {
+    boolean launchProcessForPackage(String pkgName);
+
+    boolean launchActivity(Intent intent);
+
+    boolean launchMainActivityForPackage(String pkgName);
+
+    Intent getLaunchIntentForPackage(String pkgName);
+
+    String getFrontAppPackage();
+
+    ComponentName getFrontAppPackageComponent();
+}
+</code></pre>
+<p>举例：</p>
+<pre><code class="language-json">&quot;actions&quot;: [
+  // 启动微信进程
+  &quot;activity.launchProcessForPackage(\&quot;com.tencent.mm\&quot;)&quot;,
+  // 打开微信主界面
+  &quot;activity.launchMainActivityForPackage(\&quot;com.tencent.mm\&quot;)&quot;,
+  // 吐司显示目前前台应用包名
+  &quot;toast.showShortToast(activity.getFrontAppPackage())&quot;
+]
+</code></pre>
+<h3 id="053-power">0.5.3. power</h3>
+<p>电源相关能力</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sleep</td>
+<td>休眠（锁屏）</td>
+<td>延迟的毫秒数</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>wakeup</td>
+<td>唤醒</td>
+<td>延迟的毫秒数</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>setBrightness</td>
+<td>设置屏幕亮度</td>
+<td>亮度Level值(0~255)</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>getBrightness</td>
+<td>获取当前屏幕亮度</td>
+<td>无</td>
+<td>如下</td>
+<td>度Level值(0~255)</td>
+</tr>
+<tr>
+<td>setAutoBrightnessEnabled</td>
+<td>设置自动亮度开关</td>
+<td>true/false</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>isAutoBrightnessEnabled</td>
+<td>是否开启自动亮度</td>
+<td>无</td>
+<td>如下</td>
+<td>true/false</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;power&quot;)
+interface IPower {
+    void sleep(long delay);
+
+    void wakeup(long delay);
+
+    void setBrightness(int level);
+
+    int getBrightness();
+
+    void setAutoBrightnessEnabled(boolean enable);
+
+    boolean isAutoBrightnessEnabled();
+}
+
+</code></pre>
+<p>举例：</p>
+<pre><code class="language-json">{
+    &quot;actions&quot;: [
+        // 立即锁屏
+        &quot;power.sleep(0)&quot;,
+        // 1秒后亮屏
+        &quot;power.wakeup(1000)&quot;,
+        &quot;power.setAutoBrightnessEnabled(false)&quot;,
+        &quot;power.setBrightness(power.getBrightness() + 1)&quot;,
+    ]
+}
+</code></pre>
+<h3 id="054-task">0.5.4. task</h3>
+<p>任务相关能力</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>removeTasksForPackage</td>
+<td>移除应用的最近任务</td>
+<td>包名</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>hasTaskFromPackage</td>
+<td>应用是否有最近任务</td>
+<td>包名</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>clearBackgroundTasks</td>
+<td>调用thanox的任务清理功能，清理所有最近任务</td>
+<td>无</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;task&quot;)
+interface ITask {
+        void removeTasksForPackage(String pkgName);
+
+    boolean hasTaskFromPackage(String pkgName);
+
+    void clearBackgroundTasks();
+}
+
+</code></pre>
+<p>举例：</p>
+<pre><code class="language-json">{
+    // 判断微信是否有任务
+    &quot;condition&quot;: &quot;true &amp;&amp; task.hasTaskFromPackage(\&quot;com.tencent.mm\&quot;)&quot;,
+    &quot;actions&quot;: [
+        // 移除微信的最近任务
+        &quot;task.removeTasksForPackage(\&quot;com.tencent.mm\&quot;)&quot;
+    ]
+}
+</code></pre>
+<h3 id="055-ui">0.5.5. ui</h3>
+<p>界面相关</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>showShortToast</td>
+<td>显示提示</td>
+<td>无</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>showLongToast</td>
+<td>显示时间较短的提示</td>
+<td>无</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>showDialog</td>
+<td>显示对话框</td>
+<td>标题文本，信息文本，确认按钮文本</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>showNotification</td>
+<td>显示通知</td>
+<td>标签（可用于取消通知）标题文本，信息文本，是否重要</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>cancelNotification</td>
+<td>取消通知</td>
+<td>标签</td>
+<td>如下</td>
+<td></td>
+</tr>
+<tr>
+<td>findAndClickViewByText</td>
+<td>点击某文字的视图</td>
+<td>要点击视图的文本（默认在当前显示的页活动页查询）</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>findAndClickViewByText</td>
+<td>点击某文字的视图</td>
+<td>要点击视图的文本，所在活动组件</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>findAndClickViewById</td>
+<td>点击某ID的视图</td>
+<td>要点击视图的文本（默认在当前显示的页活动页查询）</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>findAndClickViewById</td>
+<td>点击某ID的视图</td>
+<td>要点击视图的文本，所在活动组件</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;ui&quot;)
+interface IUI {
+
+    void showShortToast(@NonNull String msg);
+
+    void showLongToast(@NonNull String msg);
+
+    void showDialog(@Nullable String title,
+                    @NonNull String msg,
+                    @Nullable String yes);
+
+    void showNotification(
+            @NonNull String notificationTag,
+            @NonNull String title,
+            @NonNull String msg,
+            boolean important);
+
+    void cancelNotification(@NonNull String notificationTag);
+
+    void findAndClickViewByText(@NonNull String text);
+
+    void findAndClickViewByText(@NonNull String text, @Nullable String componentNameShortString);
+}
+</code></pre>
+<p>举例：</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;AD Skip&quot;,
+    &quot;description&quot;: &quot;彩云天气广告页面点击跳过&quot;,
+    &quot;priority&quot;: 1,
+    &quot;condition&quot;: &quot;activityResumed == true &amp;&amp; componentNameAsShortString == \&quot;com.nowcasting.activity/.SplashActivity\&quot;&quot;,
+    &quot;actions&quot;: [
+      &quot;ui.showShortToast(\&quot;尝试点击跳过...\&quot;);&quot;,
+      &quot;ui.findAndClickViewByText(\&quot;跳过\&quot;, \&quot;com.nowcasting.activity/com.nowcasting.activity.SplashActivity\&quot;);&quot;
+    ]
+  }
+]
+</code></pre>
+<p><strong>提示：</strong></p>
+<p>如何获取一个View的ID？</p>
+<p>不是所有的View都会被分配一个ID，你可以借助一些开发工具来获取，不知道是否有这样的App可以直接获取，</p>
+<p>Thanox默认带了一个ViewId助手，你需要打开系统设置--开发者选项--显示布局边界，界面上会出现所有View的ID。</p>
+<p>注意，上述Handle支持的ViewId的格式为：<code>包名:id/真正的id</code>，例如：<code>com.coolapk.market:id/title_view</code></p>
+<p>在推荐一个Android开发工具：uiautomatorviewer，需要下载Android SDK。具体配置可以Google。</p>
+<p>使用如图：</p>
+<p><img alt="uiviewer" src="../img/uiviewer.png" /></p>
+<h3 id="056-hw">0.5.6. hw</h3>
+<p>硬件操作能力</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enableWifi</td>
+<td>看名字</td>
+<td>包名</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>disableWifi</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>isWifiEnabled</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>enableLocation</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>disableLocation</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>isLocationEnabled</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>enableBT</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>disableBT</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>isBTEnabled</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>enableNfc</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>disableNfc</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>isNfcEnabled</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>enabledFlashlight</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>disableFlashlight</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>isFlashlightEnabled</td>
+<td>看名字</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>isFlashlightAvailable</td>
+<td>手电筒是否可用（被占用？无硬件？）</td>
+<td>无</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;hw&quot;)
+interface IHW {
+    boolean enableWifi();
+
+    boolean disableWifi();
+
+    boolean isWifiEnabled();
+
+    boolean enableLocation();
+
+    boolean disableLocation();
+
+    boolean isLocationEnabled();
+
+    boolean enableBT();
+
+    boolean disableBT();
+
+    boolean isBTEnabled();
+
+    boolean enableNfc();
+
+    boolean disableNfc();
+
+    boolean isNfcEnabled();
+
+    boolean enabledFlashlight();
+
+    boolean disableFlashlight();
+
+    boolean isFlashlightEnabled();
+
+    boolean isFlashlightAvailable();
+}
+
+</code></pre>
+<p>举例：</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;Enable BT&quot;,
+    &quot;description&quot;: &quot;打开微信时，打开蓝牙&quot;,
+    &quot;priority&quot;: 2,
+    &quot;condition&quot;: &quot;frontPkgChanged == true &amp;&amp; to == \&quot;com.tencent.mm\&quot;&quot;,
+    &quot;actions&quot;: [
+      &quot;ui.showShortToast(\&quot;蓝牙状态\&quot; + (hw.isBTEnabled() ? \&quot;开启\&quot; : \&quot;关闭\&quot;));&quot;,
+      &quot;ui.showShortToast(\&quot;正在打开蓝牙...\&quot;);&quot;,
+      &quot;ui.showShortToast(\&quot;蓝牙打开\&quot; + (hw.enableBT() ? \&quot;成功\&quot; : \&quot;失败\&quot;));&quot;,
+      // 打开GPS
+      &quot;hw.enableLocation()&quot;,
+      &quot;hw.enableWifi()&quot;
+    ]
+  }
+]
+</code></pre>
+<h3 id="057-io">0.5.7. io</h3>
+<p>文件读写能力。</p>
+<p>注意：受限于文件权限，所有文件的根目录为/data/system/thanos/profile_user_io</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>read</td>
+<td>读取文件</td>
+<td>文件相对路径</td>
+<td>略</td>
+<td>String</td>
+</tr>
+<tr>
+<td>disableWifi</td>
+<td>写内容到文件</td>
+<td>文件相对路径</td>
+<td>略</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>writeAppend</td>
+<td>写内容到文件，追加</td>
+<td>文件相对路径</td>
+<td>略</td>
+<td>Boolean（true/false）</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;io&quot;)
+interface IIO {
+
+    String read(String path);
+
+    boolean write(String path, String content);
+
+    boolean writeAppend(String path, String content);
+}
+
+</code></pre>
+<h3 id="058-data">0.5.8. data</h3>
+<p>移动数据相关能力。</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setDataEnabled</td>
+<td>设置移动数据开启状态</td>
+<td>true打开，false关闭</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>setDataEnabled</td>
+<td>设置移动数据开启状态（可以指定卡序号）</td>
+<td>卡序号，true打开，false关闭</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>setDataEnabledForSlot</td>
+<td>设置移动数据开启状态（可以指定卡槽号）</td>
+<td>卡序号，true打开，false关闭</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>isDataEnabled</td>
+<td>获取移动数据开启状态</td>
+<td>true打开，false关闭</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>isDataEnabledForSlot</td>
+<td>获取移动数据开启状态（可以指定卡槽号）</td>
+<td>true打开，false关闭</td>
+<td>如下</td>
+<td>Boolean（true/false）</td>
+</tr>
+<tr>
+<td>setDataNetworkType</td>
+<td>设置网络模式</td>
+<td>type</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>setDataNetworkTypeForPhone</td>
+<td>设置网络模式（指定某个卡）</td>
+<td>phoneId，type</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>setDataNetworkTypeForSlot</td>
+<td>设置网络模式（指定某个卡槽号）</td>
+<td>slotId，type</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>getCurrentPreferredNetworkMode</td>
+<td>获取当前默认卡的网络模式</td>
+<td>无</td>
+<td>如下</td>
+<td>int</td>
+</tr>
+<tr>
+<td>getCurrentPreferredNetworkMode</td>
+<td>获取某subId的网络模式</td>
+<td>subId</td>
+<td>如下</td>
+<td>int</td>
+</tr>
+<tr>
+<td>getCurrentPreferredNetworkModeForSlot</td>
+<td>获取某卡槽的网络模式</td>
+<td>slotId</td>
+<td>如下</td>
+<td>int</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;data&quot;)
+interface IData {
+    void setDataEnabled(boolean enable);
+
+    void setDataEnabled(int subId, boolean enable);
+
+    void setDataEnabledForSlot(int slotId, boolean enable);
+
+    boolean isDataEnabled();
+
+    boolean isDataEnabledForSlot(int slotId);
+
+    void setDataNetworkType(int type);
+
+    void setDataNetworkTypeForPhone(int phoneId, int type);
+
+    void setDataNetworkTypeForSlot(int slotId, int type);
+
+    int getCurrentPreferredNetworkMode();
+
+    int getCurrentPreferredNetworkMode(int subId);
+
+    int getCurrentPreferredNetworkModeForSlot(int slotId);
+}
+
+</code></pre>
+<p>数据网络模式类型：</p>
+<pre><code class="language-c">// Network type enums, primarily used by android/telephony/TelephonyManager.java.
+// Do not add negative types.
+enum NetworkTypeEnum {
+    NETWORK_TYPE_UNKNOWN = 0;
+    NETWORK_TYPE_GPRS = 1;
+    NETWORK_TYPE_EDGE = 2;
+    NETWORK_TYPE_UMTS = 3;
+    NETWORK_TYPE_CDMA = 4;
+    NETWORK_TYPE_EVDO_0 = 5;
+    NETWORK_TYPE_EVDO_A = 6;
+    NETWORK_TYPE_1XRTT = 7;
+    NETWORK_TYPE_HSDPA = 8;
+    NETWORK_TYPE_HSUPA = 9;
+    NETWORK_TYPE_HSPA = 10;
+    NETWORK_TYPE_IDEN = 11;
+    NETWORK_TYPE_EVDO_B = 12;
+    NETWORK_TYPE_LTE = 13;
+    NETWORK_TYPE_EHRPD = 14;
+    NETWORK_TYPE_HSPAP = 15;
+    NETWORK_TYPE_GSM = 16;
+    NETWORK_TYPE_TD_SCDMA = 17;
+    NETWORK_TYPE_IWLAN = 18;
+    NETWORK_TYPE_LTE_CA = 19;
+    NETWORK_TYPE_NR = 20;
+}
+</code></pre>
+<p>举例：</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;Enable Data&quot;,
+    &quot;description&quot;: &quot;打开微信时，打开移动数据&quot;,
+    &quot;priority&quot;: 2,
+    &quot;condition&quot;: &quot;frontPkgChanged == true &amp;&amp; to == \&quot;com.tencent.mm\&quot;&quot;,
+    &quot;actions&quot;: [
+      &quot;ui.showShortToast(\&quot;移动数据当前\&quot; + (data.isDataEnabled() ? \&quot;开启\&quot; : \&quot;关闭\&quot;));&quot;,
+      &quot;ui.showShortToast(\&quot;正在打开移动数据...\&quot;);&quot;,
+      &quot;data.setDataEnabled(true)&quot;
+    ]
+  }
+]
+</code></pre>
+<h3 id="059-ringtone">0.5.9. ringtone</h3>
+<p>铃音振动能力。</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dingdingding</td>
+<td>看名字</td>
+<td>无或者重复次数</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+<tr>
+<td>wengwengweng</td>
+<td>看名字</td>
+<td>无或者重复次数</td>
+<td>如下</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;ringtone&quot;)
+interface IRingtone {
+    void dingdingding();
+
+    void wengwengweng();
+
+    void dingdingding(int repeat);
+
+    void wengwengweng(int repeat);
+}
+
+</code></pre>
+<h3 id="0510-sh">0.5.10. sh</h3>
+<p>Shell sh能力。</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exe</td>
+<td>执行sh命令</td>
+<td>命令字符串</td>
+<td>无</td>
+<td>结果</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;sh&quot;)
+interface ISh {
+    CommandResult exe(String command);
+}
+</code></pre>
+<h3 id="0511-input">0.5.11. input</h3>
+<p>按键输入能力。</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>injectKey</td>
+<td>执行sh命令</td>
+<td>命令字符串</td>
+<td>无</td>
+<td>结果</td>
+</tr>
+<tr>
+<td>getLastKey</td>
+<td>返回上次按键码</td>
+<td>无</td>
+<td>无</td>
+<td>按键码</td>
+</tr>
+<tr>
+<td>getLastKeyTime</td>
+<td>返回上次按键的系统时间</td>
+<td>无</td>
+<td>无</td>
+<td>系统时间mills</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;input&quot;)
+interface IInput {
+
+    boolean injectKey(int code);
+
+    int getLastKey();
+
+    long getLastKeyTime();
+}
+
+</code></pre>
+<h3 id="0512-pkg">0.5.12. pkg</h3>
+<p>包管理能力。</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>disableApplication</td>
+<td>冻结应用</td>
+<td>包名</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td>enableApplication</td>
+<td>解冻应用</td>
+<td>包名</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td>isApplicationEnabled</td>
+<td>应用是否为非冻结状态</td>
+<td>包名</td>
+<td>无</td>
+<td>Boolean(true/false)</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;pkg&quot;)
+interface IPkg {
+
+    void disableApplication(String pkg);
+
+    void enableApplication(String pkg);
+
+    boolean isApplicationEnabled(String pkg);
+}
+
+
+</code></pre>
+<h3 id="0513-log">0.5.13. Log</h3>
+<p>日志打印工具。</p>
+<p>使用示例:</p>
+<pre><code class="language-java">log.log(&quot;Log message&quot;);
+
+</code></pre>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;log&quot;)
+public interface ILog {
+    void log(String content);
+}
+</code></pre>
+<h2 id="06">0.6. 全局变量</h2>
+<p>全局变量：name-List<String>，名字---字符串列表</p>
+<p>可用于条件判断，事件处理等。</p>
+<p>Thanox支持创建，导入全局变量。发布事实时，你可以用过<code>globalVarOf$</code>拼接<code>变量名</code>来访问。以变量apps为例：</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;Use var example&quot;,
+    &quot;description&quot;: &quot;应用切换时，如果当前前台应用在定义的变量列表apps中，Toast使用输出包名&quot;,
+    &quot;priority&quot;: 1,
+    &quot;condition&quot;: &quot;frontPkgChanged == true &amp;&amp; globalVarOf$apps.contains(to)&quot;,
+    &quot;actions&quot;: [
+      &quot;ui.showShortToast(to);&quot;
+    ]
+  }
+]
+</code></pre>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../5-Start-Rules/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 关联启动规则（Rules）" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              关联启动规则（Rules）
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>

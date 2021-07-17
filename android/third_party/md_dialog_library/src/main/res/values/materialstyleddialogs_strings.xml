@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="define_materialstyleddialogs"></string>
+    <string name="library_materialstyleddialogs_author">Javier Santos</string>
+    <string name="library_materialstyleddialogs_authorWebsite">https://github.com/javiersantos</string>
+    <string name="library_materialstyleddialogs_libraryName">MaterialStyledDialogs</string>
+    <string name="library_materialstyleddialogs_libraryDescription">A library that shows a beautiful and customizable Material dialog with header and animation.</string>
+    <string name="library_materialstyleddialogs_libraryWebsite">https://github.com/javiersantos/MaterialStyledDialogs</string>
+    <string name="library_materialstyleddialogs_licenseId">apache_2_0</string>
+    <string name="library_materialstyleddialogs_isOpenSource">true</string>
+    <string name="library_materialstyleddialogs_repositoryLink">https://github.com/javiersantos/MaterialStyledDialogs</string>
+</resources>

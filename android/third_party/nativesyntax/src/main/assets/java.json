@@ -1,0 +1,33 @@
+{
+  "comment_single": {
+    "begin":"//",
+    "color":"#757575"
+  },
+  "comment_multiple": {
+    "begin":"/*",
+    "end":"*/",
+    "color":"#757575"
+  },
+  "rules":5,
+  "syntax_1":{
+    "regex":"\\b(a(bstract|ssert)|c(ontinue|a(tch|se)|har|lass|onst)|f(or|inal(ly)?|loat)|n(ew|ative)|s(witch|ort|t(atic|rictfp)|uper|ynchronized)|d(efault|ouble)|goto|p(ackage|r(ivate|otected)|ublic)|b(oolean|reak|yte)|do|i(f|m(plements|port)|n(t(erface)?|stanceof))|t(h(is)|hrows?|r(ansient|y))|e(lse|num|xtends)|return|vo(id|latile)|long|while)\\b",
+    "color":"#0000ff"
+  },
+  "syntax_2":{
+    "regex":"\\(|\\)|\\[|\\]|:|;|\\.|\\||;|\\&|\\{|\\}",
+    "color":"#b71c1c"
+  },
+  "syntax_3":{
+    "regex":"@\\w+",
+    "color":"#b87333"
+  },
+  "syntax_4":{
+    "regex":"\\b\\d+[\\.]?\\d*([eE]\\-?\\d+)?[lLdDfF]?\\b|\\b0x[a-fA-F\\d]+\\b",
+    "color":"#f4511e",
+    "style":"italic"
+  },
+  "syntax_5":{
+    "regex":"(\\\"(.*)\\\"|\\\'(.*)\\\')",
+    "color":"#ff0000"
+  }
+}

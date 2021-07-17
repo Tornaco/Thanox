@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LineCountLayout">
+        <attr name="stripColor" format="color" />
+        <attr name="numberColor" format="color" />
+        <attr name="numberSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="SyntaxHighlighter">
+        <attr name="highlightLinks" format="boolean" />
+        <attr name="readonly" format="boolean" />
+        <attr name="stripLinesInReadOnlyMode" format="boolean" />
+        <attr name="stripLineColor" format="color" />
+        <attr name="highlightCurrentLine" format="boolean" />
+    </declare-styleable>
+</resources>

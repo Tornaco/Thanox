@@ -1,0 +1,47 @@
+<resources>
+    <!-- Switch On/Off  -->
+    <string name="switch_on_text">On</string>
+    <string name="switch_off_text">Off</string>
+
+    <string name="app_category_all">All</string>
+    <string name="app_category_system">System</string>
+    <string name="app_category_system_uid">SystemCore</string>
+    <string name="app_category_3rd">3-rd</string>
+    <string name="app_category_media">SystemMedia</string>
+    <string name="app_category_phone">SystemPhone</string>
+    <string name="app_category_web_provider">WebView provider</string>
+    <string name="app_category_shortcut_proxy">快捷代理</string>
+
+    <string name="common_menu_title_batch_select">Batch select</string>
+    <string name="common_menu_title_select_all">All yes</string>
+    <string name="common_menu_title_un_select_all">All no</string>
+    <string name="common_menu_title_search">search</string>
+    <string name="common_menu_title_remove">Remove</string>
+    <string name="common_menu_title_wiki">Wiki</string>
+    <string name="common_menu_title_import_from_clipboard">Import from clipboard</string>
+    <string name="common_menu_title_export_to_clipboard">Export to clipboard</string>
+    <string name="common_fab_title_done">Done</string>
+    <string name="common_fab_title_add">Add</string>
+    <string name="common_dialog_message_are_you_sure">Are you sure? Take care!</string>
+
+    <string name="common_remember">Got</string>
+    <string name="common_tips">Tips</string>
+
+    <string name="common_toast_copied_to_clipboard">Copied to clipboard</string>
+
+    <string name="app_state_disabled">Disabled</string>
+
+    <string name="chip_title_app_only_disabled">Disabled</string>
+    <string name="chip_title_app_only_enable">Enabled</string>
+    <string name="chip_title_app_only_running">Running</string>
+    <string name="chip_title_app_only_cloned_app">Cloned</string>
+
+    <string name="app_picker_title">Pick app</string>
+
+    <string name="common_text_value_not_set">Not set</string>
+
+    <string name="common_network_error">Network unavailable, Please check your internet connection.</string>
+    <string name="common_server_error">Server error, Please try again later.</string>
+
+    <string name="common_text_wait_a_moment">Wait a moment</string>
+</resources>

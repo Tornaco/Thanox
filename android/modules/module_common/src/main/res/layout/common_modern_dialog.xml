@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/common_view_margin_default"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="18sp"
+        tools:text="Dialog title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/common_view_margin_default"
+        android:layout_marginTop="@dimen/common_view_margin_middle"
+        android:layout_marginEnd="@dimen/common_view_margin_default"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.TileSubTitle"
+        android:textSize="14sp"
+        tools:text="Do you want to reboot now? If you want to show the name of the device." />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/positive"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/common_view_margin_default"
+        android:background="?selectableItemBackground"
+        android:textAllCaps="true"
+        android:textColor="?colorAccent"
+        android:textSize="14sp"
+        tools:text="Yes" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/negative"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/positive"
+        android:layout_centerHorizontal="true"
+        android:background="?selectableItemBackground"
+        android:fontFamily="sans-serif-medium"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.TileTitle"
+        android:textColor="?colorAccent"
+        android:textSize="14sp"
+        tools:text="Noop" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/neutral"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/negative"
+        android:layout_centerHorizontal="true"
+        android:background="?selectableItemBackground"
+        android:fontFamily="sans-serif-medium"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.TileTitle"
+        android:textColor="?colorAccent"
+        android:textSize="14sp"
+        tools:text="Noop" />
+</RelativeLayout>

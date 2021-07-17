@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="common_app_categories">
+        <item>@string/app_category_3rd</item>
+        <item>@string/app_category_system</item>
+        <item>@string/app_category_media</item>
+        <item>@string/app_category_phone</item>
+        <item>@string/app_category_web_provider</item>
+        <item>@string/app_category_system_uid</item>
+        <item>@string/app_category_shortcut_proxy</item>
+        <item>@string/app_category_all</item>
+    </string-array>
+
+    <string-array name="common_swipe_refresh_colors">
+        <item>@color/md_amber_500</item>
+        <item>@color/md_lime_500</item>
+        <item>@color/md_green_500</item>
+        <item>@color/md_red_500</item>
+    </string-array>
+</resources>

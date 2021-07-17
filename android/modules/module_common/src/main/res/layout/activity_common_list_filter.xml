@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="viewModel"
+                type="github.tornaco.android.thanos.common.CommonAppListFilterViewModel" />
+
+    </data>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout app:elevation="@dimen/common_toolbar_elevation"
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="?colorPrimary"
+                android:theme="?appbarTheme">
+
+            <FrameLayout
+                    android:id="@+id/toolbar_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        app:popupTheme="?appbarPopupTheme"
+                        app:theme="?toolbarTheme"
+                        app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        app:titleTextColor="?menuIconTint"
+                        tools:title="Title very long very very long!!!!">
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/spinner"
+                            android:layout_width="?actionBarSize"
+                            android:layout_height="wrap_content"
+                            android:enabled="@{!viewModel.isDataLoading}" />
+
+                </androidx.appcompat.widget.Toolbar>
+
+
+                <com.miguelcatalan.materialsearchview.MaterialSearchView
+                        android:id="@+id/search_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+            </FrameLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/chip_container"
+                android:layout_below="@id/appbar"
+                android:orientation="vertical">
+
+            <github.tornaco.android.thanos.widget.SwitchBar
+                    android:id="@+id/switch_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:foreground="?selectableItemBackground"
+                    android:theme="?switchBarTheme"
+                    tools:ignore="UnusedAttribute" />
+
+            <include
+                    android:id="@+id/feature_desc_container"
+                    layout="@layout/common_feature_description_bar_layout" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:refreshing="@{viewModel.isDataLoading}">
+
+                <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+                        android:id="@+id/apps"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?cardsBackgroundColor"
+                        android:clipChildren="true"
+                        android:clipToPadding="true"
+                        android:listModels="@{viewModel.listModels}" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </LinearLayout>
+
+
+        <RelativeLayout
+                android:id="@+id/chip_container"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_alignParentBottom="true"
+                android:background="?colorPrimary">
+
+            <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center">
+
+                <com.google.android.material.chip.Chip
+                        android:id="@+id/chip1"
+                        style="@style/FilterChipTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:checked="true"
+                        tools:text="@string/chip_title_app_only_disabled" />
+
+                <com.google.android.material.chip.Chip
+                        android:id="@+id/chip2"
+                        style="@style/FilterChipTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:checked="true"
+                        tools:text="@string/chip_title_app_only_enable" />
+
+                <com.google.android.material.chip.Chip
+                        android:id="@+id/chip3"
+                        style="@style/FilterChipTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:checked="true"
+                        tools:text="@string/chip_title_app_only_running" />
+
+                <com.google.android.material.chip.Chip
+                        android:id="@+id/chip4"
+                        style="@style/FilterChipTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/chip_title_app_only_cloned_app" />
+
+            </com.google.android.material.chip.ChipGroup>
+        </RelativeLayout>
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/common_view_margin_default"
+                android:text="@string/common_fab_title_done"
+                android:textColor="@color/md_white"
+                android:tint="@color/md_white"
+                app:backgroundTint="?colorAccent"
+                app:icon="@drawable/module_common_ic_check_fill_white"
+                app:iconTint="@color/md_white" />
+
+    </RelativeLayout>
+</layout>

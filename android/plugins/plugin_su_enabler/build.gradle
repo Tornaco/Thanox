@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'nitro.gradle.plugin'
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        applicationId "github.tornaco.android.plugin.su"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode rootProject.ext.versionCode as int
+        versionName rootProject.ext.versionName
+        println(versionCode)
+        println(versionName)
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def versionName = variant.versionName
+            outputFileName = "plugin_su_enabler_${versionName}.apk"
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Xposed
+    compileOnly deps.xposed.api
+
+    compileOnly deps.lombok.core
+    annotationProcessor deps.lombok.core
+
+    compileOnly project(':annotation_processors:permission-requester-annotation')
+    annotationProcessor project(':annotation_processors:permission-requester-compiler')
+
+    compileOnly deps.thanos.framework_base
+    implementation project(':nitro:nitro_plugin')
+}
+
+buildDir = rootProject.projectDir.path + "/out/plugins/su_enabler"

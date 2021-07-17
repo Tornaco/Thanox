@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/md_styled_header_color"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/md_styled_dialog_header">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/md_styled_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            style="@style/MaterialStyledDialogs_TitleHeader"
+            android:id="@+id/md_styled_dialog_title"
+            android:gravity="start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/MaterialStyledDialogs_Description"
+        android:id="@+id/md_styled_dialog_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/md_styled_dialog_custom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
+    <View
+        style="@style/MaterialStyledDialogs_Divider"
+        android:id="@+id/md_styled_dialog_divider"
+        android:visibility="gone"
+        android:layout_width="match_parent" />
+</LinearLayout>

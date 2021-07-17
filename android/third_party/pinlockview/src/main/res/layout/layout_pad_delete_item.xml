@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical">
+
+    <LinearLayout
+            android:id="@+id/button"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:clickable="true"
+            android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/buttonImage"
+                android:layout_width="@dimen/default_delete_button_size"
+                android:layout_height="@dimen/default_delete_button_size"
+                android:adjustViewBounds="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_backspace"
+                android:tint="?android:textColorPrimary" />
+    </LinearLayout>
+</LinearLayout>

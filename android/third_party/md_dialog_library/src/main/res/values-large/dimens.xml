@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="md_styled_text_title">25sp</dimen>
+    <dimen name="md_styled_text_description">20sp</dimen>
+    <dimen name="md_styled_dialog_header">160dp</dimen>
+    <dimen name="md_styled_pic_size">66dp</dimen>
+</resources>

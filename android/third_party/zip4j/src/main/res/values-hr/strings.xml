@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fuzzydatetime__now">sada</string>
+
+    <plurals name="fuzzydatetime__seconds_ago">
+        <item quantity="one">prije %d sekunde</item>
+        <item quantity="two">prije %d sekunde</item>
+        <item quantity="few">prije %d sekunde</item>
+        <item quantity="other">prije %d sekundi</item>
+    </plurals>
+    <plurals name="fuzzydatetime__minutes_ago">
+        <item quantity="one">prije %d minute</item>
+        <item quantity="two">prije %d minute</item>
+        <item quantity="few">prije %d minute</item>
+        <item quantity="other">prije %d minuta</item>
+    </plurals>
+    <plurals name="fuzzydatetime__hours_ago">
+        <item quantity="one">prije %d sat</item>
+        <item quantity="two">prije %d sata</item>
+        <item quantity="few">prije %d sata</item>
+        <item quantity="other">prije %d sati</item>
+    </plurals>
+    <plurals name="fuzzydatetime__days_ago">
+        <item quantity="one">prije %d dan</item>
+        <item quantity="two">prije %d dana</item>
+        <item quantity="few">prije %d dana</item>
+        <item quantity="other">prije %d dana</item>
+    </plurals>
+    <plurals name="fuzzydatetime__weeks_ago">
+        <item quantity="one">prije %d tjedan</item>
+        <item quantity="two">prije %d tjedna</item>
+        <item quantity="few">prije %d tjedna</item>
+        <item quantity="other">prije %d tjedana</item>
+    </plurals>
+    <plurals name="fuzzydatetime__months_ago">
+        <item quantity="one">prije %d mjesec</item>
+        <item quantity="two">prije %d mjeseca</item>
+        <item quantity="few">prije %d mjeseca</item>
+        <item quantity="other">prije %d mjeseci</item>
+    </plurals>
+    <plurals name="fuzzydatetime__years_ago">
+        <item quantity="one">prije %d godine</item>
+        <item quantity="two">prije %d godine</item>
+        <item quantity="few">prije %d godine</item>
+        <item quantity="other">prije %d godina</item>
+    </plurals>
+</resources>

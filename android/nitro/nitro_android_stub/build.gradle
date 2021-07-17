@@ -1,0 +1,9 @@
+apply plugin: 'java-library'
+
+dependencies {
+    // Lombok
+    annotationProcessor deps.lombok.core
+    compileOnly deps.lombok.core
+}
+
+buildDir = rootProject.projectDir.path + "/out/nitro_android_stub"

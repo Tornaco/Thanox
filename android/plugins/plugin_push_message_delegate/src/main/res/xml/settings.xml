@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+            android:title="@string/title_wechat"
+            app:key="@string/pref_category_wechat">
+
+        <Preference
+                app:enabled="false"
+                app:summary="@string/notice_wechat_proxy" />
+
+        <SwitchPreferenceCompat
+                app:icon="@drawable/push_delegate_ic_wechat_2_fill"
+                app:key="@string/pref_key_wechat"
+                app:persistent="false"
+                app:summary="@string/title_summary_proxy"
+                app:title="@string/title_wechat_proxy" />
+
+        <SwitchPreferenceCompat
+                app:dependency="@string/pref_key_wechat"
+                app:key="@string/pref_key_wechat_content"
+                app:persistent="false"
+                app:title="@string/title_content" />
+
+        <SwitchPreferenceCompat
+                app:dependency="@string/pref_key_wechat"
+                app:key="@string/pref_key_wechat_skip_if_running"
+                app:persistent="false"
+                app:summary="@string/summary_skip_if_running"
+                app:title="@string/title_skip_if_running" />
+
+        <SwitchPreferenceCompat
+                app:dependency="@string/pref_key_wechat"
+                app:key="@string/pref_key_wechat_start_app"
+                app:persistent="false"
+                app:summary="@string/summary_start_app"
+                app:title="@string/title_start_app" />
+
+        <Preference
+                app:dependency="@string/pref_key_wechat"
+                app:key="@string/pref_key_wechat_mock"
+                app:persistent="false"
+                app:title="@string/title_mock" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

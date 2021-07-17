@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fuzzydatetime__now">zojuist</string>
+
+    <plurals name="fuzzydatetime__seconds_ago">
+        <item quantity="zero">zojuist</item>
+        <item quantity="one">%d seconde geleden</item>
+        <item quantity="other">%d seconden geleden</item>
+    </plurals>
+    <plurals name="fuzzydatetime__minutes_ago">
+        <item quantity="one">%d minuut geleden</item>
+        <item quantity="other">%d minuten geleden</item>
+    </plurals>
+    <plurals name="fuzzydatetime__hours_ago">
+        <item quantity="one">%d uur gelden</item>
+        <item quantity="other">%d uur gelden</item>
+    </plurals>
+    <plurals name="fuzzydatetime__days_ago">
+        <item quantity="one">%d dag geleden</item>
+        <item quantity="other">%d dagen geleden</item>
+    </plurals>
+    <plurals name="fuzzydatetime__weeks_ago">
+        <item quantity="one">%d week geleden</item>
+        <item quantity="other">%d weken geleden</item>
+    </plurals>
+    <plurals name="fuzzydatetime__months_ago">
+        <item quantity="one">%d maand geleden</item>
+        <item quantity="other">%d maanden geleden</item>
+    </plurals>
+    <plurals name="fuzzydatetime__years_ago">
+        <item quantity="one">%d jaar geleden</item>
+        <item quantity="other">%d jaar gelden</item>
+    </plurals>
+</resources>

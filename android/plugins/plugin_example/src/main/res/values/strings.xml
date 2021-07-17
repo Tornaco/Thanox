@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Example</string>
+    <string name="button_label">Hello world!</string>
+</resources>

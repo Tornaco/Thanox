@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TimeDurationPicker">
+        <!-- Unit to display in widget. -->
+        <attr name="timeUnits" format="enum">
+            <enum name="hhmmss" value="0"/>
+            <enum name="hhmm" value="1"/>
+            <enum name="mmss" value="2"/>
+        </attr>
+        <!-- Text appearance of the currently entered duration (the large numbers in the upper area). -->
+        <attr name="textAppearanceDisplay" format="reference"/>
+        <!-- Text appearance of the small unit labels ("h", "m", "s"). -->
+        <attr name="textAppearanceUnit" format="reference"/>
+        <!-- Text appearance of the numbers on the number pad buttons. -->
+        <attr name="textAppearanceButton" format="reference"/>
+        <!-- Drawable to be used for the backspace button. -->
+        <attr name="backspaceIcon" format="reference"/>
+        <!-- Drawable to be used for the clear input button. -->
+        <attr name="clearIcon" format="reference"/>
+        <!-- Color of the separator line between the display row and the number pad. Defaults to ?colorControlActivated from the appcompat. -->
+        <attr name="separatorColor" format="color|reference"/>
+        <!-- Background color for the display area. Transparent by default. -->
+        <attr name="durationDisplayBackground" format="color|reference"/>
+        <!-- Specifies the padding for the number pad buttons. -->
+        <attr name="numPadButtonPadding" format="dimension|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="TimeDurationPickerStyle">
+        <attr name="timeDurationPickerStyle" format="reference"/>
+    </declare-styleable>
+</resources>

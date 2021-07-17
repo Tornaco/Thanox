@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fuzzydatetime__now">sada</string>
+
+    <plurals name="fuzzydatetime__seconds_ago">
+        <item quantity="one">pre %d sekunde</item>
+        <item quantity="two">pre %d sekunde</item>
+        <item quantity="few">pre %d sekunde</item>
+        <item quantity="other">pre %d sekundi</item>
+    </plurals>
+    <plurals name="fuzzydatetime__minutes_ago">
+        <item quantity="one">pre %d minute</item>
+        <item quantity="two">pre %d minute</item>
+        <item quantity="few">pre %d minute</item>
+        <item quantity="other">pre %d minuta</item>
+    </plurals>
+    <plurals name="fuzzydatetime__hours_ago">
+        <item quantity="one">pre %d sat</item>
+        <item quantity="two">pre %d sata</item>
+        <item quantity="few">pre %d sata</item>
+        <item quantity="other">pre %d sati</item>
+    </plurals>
+    <plurals name="fuzzydatetime__days_ago">
+        <item quantity="one">pre %d dan</item>
+        <item quantity="two">pre %d dana</item>
+        <item quantity="few">pre %d dana</item>
+        <item quantity="other">pre %d dana</item>
+    </plurals>
+    <plurals name="fuzzydatetime__weeks_ago">
+        <item quantity="one">pre %d sedmice</item>
+        <item quantity="two">pre %d sedmice</item>
+        <item quantity="few">pre %d sedmice</item>
+        <item quantity="other">pre %d sedmica</item>
+    </plurals>
+    <plurals name="fuzzydatetime__months_ago">
+        <item quantity="one">pre %d mesec</item>
+        <item quantity="two">pre %d meseca</item>
+        <item quantity="few">pre %d meseca</item>
+        <item quantity="other">pre %d meseci</item>
+    </plurals>
+    <plurals name="fuzzydatetime__years_ago">
+        <item quantity="one">pre %d godine</item>
+        <item quantity="two">pre %d godine</item>
+        <item quantity="few">pre %d godine</item>
+        <item quantity="other">pre %d godina</item>
+    </plurals>
+</resources>

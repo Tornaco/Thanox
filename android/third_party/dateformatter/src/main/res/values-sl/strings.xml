@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fuzzydatetime__now">pravkar</string>
+
+    <plurals name="fuzzydatetime__seconds_ago">
+        <item quantity="one">pred %d sekundo</item>
+        <item quantity="two">pred %d sekundama</item>
+        <item quantity="few">pred %d sekundami</item>
+        <item quantity="other">pred %d sekundami</item>
+    </plurals>
+    <plurals name="fuzzydatetime__minutes_ago">
+        <item quantity="one">pred %d minuto</item>
+        <item quantity="two">pred %d minutama</item>
+        <item quantity="few">pred %d minutami</item>
+        <item quantity="other">pred %d minutami</item>
+    </plurals>
+    <plurals name="fuzzydatetime__hours_ago">
+        <item quantity="one">pred %d uro</item>
+        <item quantity="two">pred %d urama</item>
+        <item quantity="few">pred %d urami</item>
+        <item quantity="other">pred %d urami</item>
+    </plurals>
+    <plurals name="fuzzydatetime__days_ago">
+        <item quantity="one">pred %d dnevom</item>
+        <item quantity="two">pred %d dnevoma</item>
+        <item quantity="few">pred %d dnevi</item>
+        <item quantity="other">pred %d dnevi</item>
+    </plurals>
+    <plurals name="fuzzydatetime__weeks_ago">
+        <item quantity="one">pred %d tednom</item>
+        <item quantity="two">pred %d tednoma</item>
+        <item quantity="few">pred %d tedni</item>
+        <item quantity="other">pred %d tedni</item>
+    </plurals>
+    <plurals name="fuzzydatetime__months_ago">
+        <item quantity="one">pred %d mesecem</item>
+        <item quantity="two">pred %d mesecema</item>
+        <item quantity="few">pred %d meseci</item>
+        <item quantity="other">pred %d meseci</item>
+    </plurals>
+    <plurals name="fuzzydatetime__years_ago">
+        <item quantity="one">pred %d letom</item>
+        <item quantity="two">pred %d letoma</item>
+        <item quantity="few">pred %d leti</item>
+        <item quantity="other">pred %d leti</item>
+    </plurals>
+</resources>

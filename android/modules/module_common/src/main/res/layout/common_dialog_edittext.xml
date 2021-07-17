@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false">
+
+    <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_view_margin_default"
+            android:layout_marginTop="@dimen/common_view_margin_tiny"
+            android:layout_marginEnd="@dimen/common_view_margin_default"
+            tools:text="Tools" />
+</RelativeLayout>

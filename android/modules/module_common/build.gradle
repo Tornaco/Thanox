@@ -1,0 +1,69 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    // Support Libraries
+    api deps.support.app_compat
+    api deps.support.material
+    api deps.support.recyclerview
+    api deps.support.preference
+    api deps.support.constraint
+    api deps.support.interpolator
+    api deps.support.swiperefreshlayout
+
+    // Glide
+    api deps.glide.api
+    annotationProcessor deps.glide.compiler
+
+    // Arch
+    api deps.lifecycle.runtime
+    api deps.lifecycle.extensions
+    annotationProcessor deps.lifecycle.compiler
+
+    // Xposed
+    compileOnly deps.xposed.api
+
+    compileOnly deps.lombok.core
+    annotationProcessor deps.lombok.core
+
+    // Tor
+    api deps.tornaco.android_common
+
+    api deps.thanos.framework_base
+    api project(':third_party:recyclerview-fastscroll')
+    api project(':third_party:search')
+    api project(':third_party:badge')
+    api project(':third_party:md_dialog_library')
+    api project(':third_party:md_dialog_core')
+    api project(':third_party:md_dialog_commons')
+}
+
+
+buildDir = rootProject.projectDir.path + "/out/module_common"

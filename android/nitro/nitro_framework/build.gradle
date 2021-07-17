@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    resourcePrefix 'nitro_framework_'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
+    implementation deps.support.app_compat
+
+    implementation deps.support.room
+    annotationProcessor deps.support.room_compiler
+
+    implementation deps.guava
+
+    // Lombok
+    annotationProcessor deps.lombok.core
+    compileOnly deps.lombok.core
+
+    implementation deps.thanos.framework_base
+
+    testImplementation deps.junit
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+buildDir = rootProject.projectDir.path + "/out/nitro_framework"

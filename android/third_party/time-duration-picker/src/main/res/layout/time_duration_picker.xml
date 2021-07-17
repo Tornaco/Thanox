@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/displayRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/controlVPadding"
+            android:paddingBottom="@dimen/controlVPadding"
+            android:paddingLeft="@dimen/controlHPadding"
+            android:paddingRight="@dimen/controlHPadding">
+
+            <TextView
+                android:id="@+id/hours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textAppearance="@style/TextAppearance.TimeDurationPicker.Display"
+                android:text="00"/>
+
+            <TextView
+                android:id="@+id/hoursLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.TimeDurationPicker.Unit"
+                android:text="h"/>
+
+            <TextView
+                android:id="@+id/minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.TimeDurationPicker.Display"
+                android:text="00"/>
+
+            <TextView
+                android:id="@+id/minutesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.TimeDurationPicker.Unit"
+                android:text="m"/>
+
+            <TextView
+                android:id="@+id/seconds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.TimeDurationPicker.Display"
+                android:text="00"/>
+
+            <TextView
+                android:id="@+id/secondsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.TimeDurationPicker.Unit"
+                android:text="s"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_centerVertical="true"
+            android:id="@+id/backspace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/clear"
+            android:minWidth="@dimen/touchable"
+            android:minHeight="@dimen/touchable"
+            android:src="@drawable/ic_backspace_light"
+            android:background="?selectableItemBackgroundBorderless"/>
+
+        <ImageButton
+            android:layout_centerVertical="true"
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:minWidth="@dimen/touchable"
+            android:minHeight="@dimen/touchable"
+            android:src="@drawable/ic_clear_light"
+            android:background="?selectableItemBackgroundBorderless"/>
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/duration"
+            android:background="?colorControlActivated"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/numPad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/numPad1"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="1"/>
+
+            <TextView
+                android:id="@+id/numPad2"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="2"/>
+
+            <TextView
+                android:id="@+id/numPad3"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="3"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/numPad4"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="4"/>
+
+            <TextView
+                android:id="@+id/numPad5"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="5"/>
+
+            <TextView
+                android:id="@+id/numPad6"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="6"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/numPad7"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="7"/>
+
+            <TextView
+                android:id="@+id/numPad8"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="8"/>
+
+            <TextView
+                android:id="@+id/numPad9"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="9"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/numPadMeasure"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="0"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/numPad0"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="0"/>
+
+            <TextView
+                android:id="@+id/numPad00"
+                style="@style/Widget.TimeDurationPicker.NumPadButton"
+                android:text="00"/>
+        </LinearLayout>
+    </LinearLayout>
+</merge>

@@ -1,0 +1,41 @@
+apply plugin: 'java-library'
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs.add("-AModuleName=patchPushDelegate")
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Framework
+    compileOnly files('../../android_sdk/27/android-27.jar')
+    compileOnly files('../../android_sdk/27/services-27.jar')
+
+    compileOnly deps.lombok.core
+    annotationProcessor deps.lombok.core
+
+    api deps.rx.rxjava2
+
+    // Gson
+    api deps.gson
+    // Core
+    api deps.guava
+
+    // Xposed
+    compileOnly deps.xposed.api
+
+    // Sdk
+    implementation deps.thanos.framework_base
+
+    compileOnly project(":annotation_processors:xposed_hook_annotation")
+    annotationProcessor project(":annotation_processors:xposed_hook_compiler")
+
+    implementation project(':android_framework:patchx-lib')
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+apply from: 'aidl.gradle'
+
+buildDir = rootProject.projectDir.path + "/out/plugins/push_message_delegate_server"

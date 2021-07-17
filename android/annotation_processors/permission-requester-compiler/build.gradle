@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':annotation_processors:permission-requester-annotation')
+    implementation 'com.google.guava:guava:24.1-jre'
+    implementation 'com.squareup:javapoet:1.8.0'
+}

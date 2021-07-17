@@ -1,0 +1,219 @@
+/*
+ * Copyright (C) 2018 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+ext.deps = [:]
+def versions = [:]
+versions.android_gradle_plugin = '4.1.3'
+versions.kotlin = "1.3.50"
+versions.core_ktx = "1.0.2"
+versions.tornaco_logger = "1.1.3"
+versions.tornaco_android_common = "v1.0"
+versions.lombok = "1.16.16"
+versions.xposed = "82"
+versions.timber = "4.7.1"
+versions.firecrasher = "2.0.0"
+versions.rxjava2 = "2.1.3"
+versions.rx_android = "2.0.1"
+versions.guava = "20.0"
+versions.gson = "2.8.5"
+versions.lifecycle = "2.0.0"
+versions.room = "2.2.3"
+versions.appcompat = "1.2.0-rc01"
+versions.support = "1.1.0"
+versions.preference = "1.1.0"
+versions.material = "1.1.0"
+versions.interpolator = "1.0.0"
+versions.swiperefreshlayout = "1.0.0"
+versions.recyclerview = "1.1.0"
+versions.constraint = "1.1.3"
+versions.junit = "4.12"
+versions.glide_api = "4.9.0"
+versions.glide_compiler = "4.9.0"
+versions.auto_logging_plugin = "1.0.0"
+versions.chart = "v3.1.0"
+versions.rules = "3.3.0"
+versions.slf4j_android = "1.7.29"
+versions.licensesdialog = "2.1.0"
+versions.retrofit2 = "2.7.0"
+versions.logging_interceptor = "4.9.1"
+versions.common_io = "2.6"
+versions.commons_codec = "1.10"
+versions.commons_lang = "2.6"
+versions.nitro = "1.0.0"
+versions.rhino = "1.1.2-SNAPSHOT"
+versions.pro_feature = "1.0.0"
+versions.javassist = "3.26.0-GA"
+versions.thanos_framework_base = "1.0.0-SNAPSHOT"
+ext.versions = versions
+
+def deps = [:]
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+kotlin.allopen = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
+kotlin.androidx_core = "androidx.core:core-ktx:$versions.core_ktx"
+deps.kotlin = kotlin
+
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+ext.deps = deps
+
+deps.nitro_plugin = "github.tornaco.nitro:nitro_plugin:$versions.nitro"
+
+deps.rhino_plugin_stub_gen = "rhino:rhino_plugin_stub_gen:$versions.rhino"
+deps.rhino_plugin_patch_gen = "rhino:rhino_plugin_patch_gen:$versions.rhino"
+deps.rhino_runtime_framework = "rhino:rhino_runtime_framework:$versions.rhino"
+
+// https://github.com/bintray/gradle-bintray-plugin
+deps.bintray_plugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
+// https://github.com/dcendents/android-maven-gradle-plugin
+deps.maven_plugin = "com.github.dcendents:android-maven-gradle-plugin:2.1"
+
+def tornaco = [:]
+tornaco.logger = "com.github.Tornaco:Logger:$versions.tornaco_logger"
+tornaco.android_common = "com.github.Tornaco:AndroidCommon:$versions.tornaco_android_common"
+deps.tornaco = tornaco
+
+def thanos = [:]
+thanos.framework_base = "github.tornaco.android.thanos:base:$versions.thanos_framework_base"
+deps.thanos = thanos
+
+def lombok = [:]
+// https://github.com/rzwitserloot/lombok
+lombok.core = "org.projectlombok:lombok:$versions.lombok"
+deps.lombok = lombok
+
+def xposed = [:]
+// https://github.com/rovo89/Xposed
+xposed.api = "de.robv.android.xposed:api:$versions.xposed"
+deps.xposed = xposed
+
+def logging = [:]
+// https://github.com/osama-raddad/FireCrasher
+logging.firecrasher = "com.github.osama-raddad:FireCrasher:$versions.firecrasher"
+logging.slf4j_android = "org.slf4j:slf4j-android:$versions.slf4j_android"
+deps.logging = logging
+
+def rx = [:]
+rx.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+rx.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.rx = rx
+
+def build_versions = [:]
+build_versions.min_sdk = 23
+build_versions.target_sdk = 29
+build_versions.compile_sdk = 29
+build_versions.build_tools = "29.0.2"
+ext.build_versions = build_versions
+
+deps.guava = "com.google.guava:guava:$versions.guava@jar"
+deps.gson = "com.google.code.gson:gson:$versions.gson@jar"
+
+// https://github.com/j-easy/easy-rules
+def rules = [:]
+rules.core = "org.jeasy:easy-rules-core:$versions.rules"
+rules.mvel = "org.jeasy:easy-rules-mvel:$versions.rules"
+rules.support = "org.jeasy:easy-rules-support:$versions.rules"
+deps.rules = rules
+
+def lifecycle = [:]
+lifecycle.runtime = "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle"
+lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+lifecycle.java8 = "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
+lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def support = [:]
+support.annotations = "androidx.annotation:annotation:$versions.support"
+support.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
+support.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
+support.cardview = "androidx.cardview:cardview:$versions.support"
+support.material = "com.google.android.material:material:$versions.material"
+support.v4 = "androidx.legacy:legacy-support-v4:$versions.support"
+support.constraint = "com.android.support.constraint:constraint-layout:$versions.constraint"
+support.core_utils = "androidx.legacy:legacy-support-core-utils:$versions.support"
+support.preference = "androidx.preference:preference:$versions.preference"
+support.interpolator = "androidx.interpolator:interpolator:$versions.interpolator"
+support.swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swiperefreshlayout"
+support.room = "androidx.room:room-runtime:$versions.room"
+support.room_compiler = "androidx.room:room-compiler:$versions.room"
+deps.support = support
+
+def palette = [:]
+palette.core = "androidx.palette:palette:$versions.palette"
+deps.palette = palette
+
+def glide = [:]
+glide.api = "com.github.bumptech.glide:glide:$versions.glide_api"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide_compiler"
+deps.glide = glide
+
+def retrofit = [:]
+retrofit.retrofit2 = "com.squareup.retrofit2:retrofit:$versions.retrofit2"
+retrofit.logging_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor"
+retrofit.converter_gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit2"
+retrofit.adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit2"
+deps.retrofit = retrofit
+
+def apache = [:]
+// // https://mvnrepository.com/artifact/commons-io/commons-io
+//compile group: 'commons-io', name: 'commons-io', version: '2.6'
+apache.common_io = "commons-io:commons-io:$versions.common_io"
+apache.common_codec = "commons-codec:commons-codec:$versions.commons_codec"
+deps.apache = apache
+
+deps.junit = "junit:junit:$versions.junit"
+
+// https://github.com/PhilJay/MPAndroidChart
+deps.chart = "com.github.PhilJay:MPAndroidChart:$versions.chart"
+
+// https://github.com/PSDev/LicensesDialog
+deps.licensesdialog = "de.psdev.licensesdialog:licensesdialog:$versions.licensesdialog"
+
+deps.javassist = "org.javassist:javassist:$versions.javassist"
+
+ext.deps = deps
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url 'https://jitpack.io' }
+    handler.maven {
+        url "$rootProject.projectDir/nitro/nitro_gradle_plugin/prebuilt_repo"
+    }
+    handler.maven {
+        Properties properties = new Properties()
+        def localProp = project.rootProject.file('local.properties')
+        if (localProp.exists()) {
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        }
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/tornaco/Thanox-Internal")
+        credentials {
+            username = properties.containsKey("GITHUB_UNAME") ? properties.getProperty("GITHUB_UNAME") : System.getenv("USERNAME")
+            password = properties.containsKey("GITHUB_ACCESS_TOKEN") ? properties.get("GITHUB_ACCESS_TOKEN") : System.getenv("TOKEN")
+        }
+    }
+}
+
+ext.addRepos = this.&addRepos

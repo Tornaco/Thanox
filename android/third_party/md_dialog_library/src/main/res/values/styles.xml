@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MaterialStyledDialogs_Title">
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginBottom">-10dp</item>
+        <item name="android:layout_marginLeft">26dp</item>
+        <item name="android:layout_marginRight">26dp</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textColor">@android:color/primary_text_light</item>
+        <item name="android:textSize">@dimen/md_styled_text_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:alpha">0.6</item>
+    </style>
+
+    <style name="MaterialStyledDialogs_TitleHeader">
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="MaterialStyledDialogs_Description">
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">26dp</item>
+        <item name="android:layout_marginRight">26dp</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:textColor">@android:color/primary_text_light</item>
+        <item name="android:textSize">@dimen/md_styled_text_description</item>
+        <item name="android:alpha">0.6</item>
+    </style>
+
+    <style name="MaterialStyledDialogs_Divider">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:alpha">0.3</item>
+    </style>
+
+    <style name="MaterialStyledDialogs_DialogAnimationNormal">
+        <item name="android:windowEnterAnimation">@anim/md_styled_slide_up_normal</item>
+        <item name="android:windowExitAnimation">@anim/md_styled_slide_down_normal</item>
+    </style>
+
+    <style name="MaterialStyledDialogs_DialogAnimationFast">
+        <item name="android:windowEnterAnimation">@anim/md_styled_slide_up_fast</item>
+        <item name="android:windowExitAnimation">@anim/md_styled_slide_down_fast</item>
+    </style>
+
+    <style name="MaterialStyledDialogs_DialogAnimationSlow">
+        <item name="android:windowEnterAnimation">@anim/md_styled_slide_up_slow</item>
+        <item name="android:windowExitAnimation">@anim/md_styled_slide_down_slow</item>
+    </style>
+</resources>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fuzzydatetime__now">только что</string>
+
+    <plurals name="fuzzydatetime__seconds_ago">
+        <item quantity="zero">только что</item>
+        <item quantity="one">%d секунду назад</item>
+        <item quantity="few">%d секунды назад</item>
+        <item quantity="many">%d секунд назад</item>
+        <item quantity="other">%d секунд назад</item>
+    </plurals>
+    <plurals name="fuzzydatetime__minutes_ago">
+        <item quantity="zero">%d минут назад</item>
+        <item quantity="one">%d минуту назад</item>
+        <item quantity="few">%d минуты назад</item>
+        <item quantity="many">%d минут назад</item>
+        <item quantity="other">%d минут назад</item>
+    </plurals>
+    <plurals name="fuzzydatetime__hours_ago">
+        <item quantity="zero">%d часов назад</item>
+        <item quantity="one">%d час назад</item>
+        <item quantity="few">%d часа назад</item>
+        <item quantity="many">%d часов назад</item>
+        <item quantity="other">%d часов назад</item>
+    </plurals>
+    <plurals name="fuzzydatetime__days_ago">
+        <item quantity="zero">%d дней назад</item>
+        <item quantity="one">%d день назад</item>
+        <item quantity="few">%d дня назад</item>
+        <item quantity="many">%d дней назад</item>
+        <item quantity="other">%d дней назад</item>
+    </plurals>
+    <plurals name="fuzzydatetime__weeks_ago">
+        <item quantity="zero">%d недель назад</item>
+        <item quantity="one">%d неделя назад</item>
+        <item quantity="few">%d недели назад</item>
+        <item quantity="many">%d недель назад</item>
+        <item quantity="other">%d недель назад</item>
+    </plurals>
+    <plurals name="fuzzydatetime__months_ago">
+        <item quantity="zero">%d месяцев назад</item>
+        <item quantity="one">%d месяц назад</item>
+        <item quantity="few">%d месяца назад</item>
+        <item quantity="many">%d месяцев назад</item>
+        <item quantity="other">%d месяцев назад</item>
+    </plurals>
+    <plurals name="fuzzydatetime__years_ago">
+        <item quantity="zero">%d лет назад</item>
+        <item quantity="one">%d год назад</item>
+        <item quantity="few">%d года назад</item>
+        <item quantity="many">%d лет назад</item>
+        <item quantity="other">%d лет назад</item>
+    </plurals>
+
+    <plurals name="fuzzydatetime__seconds_future">
+        <item quantity="zero">сейчас</item>
+        <item quantity="one">осталась %d секунда</item>
+        <item quantity="few">осталось %d секунды</item>
+        <item quantity="many">осталось %d секунд</item>
+        <item quantity="other">осталось %d секунд</item>
+    </plurals>
+    <plurals name="fuzzydatetime__minutes_future">
+        <item quantity="zero">осталось %d минут</item>
+        <item quantity="one">осталась %d минута</item>
+        <item quantity="few">осталось %d минуты</item>
+        <item quantity="many">осталось %d минут</item>
+        <item quantity="other">осталось %d минут</item>
+    </plurals>
+    <plurals name="fuzzydatetime__hours_future">
+        <item quantity="zero">осталось %d часов</item>
+        <item quantity="one">остался %d час</item>
+        <item quantity="few">осталось %d часа</item>
+        <item quantity="many">осталось %d часов</item>
+        <item quantity="other">осталось %d часов</item>
+    </plurals>
+    <plurals name="fuzzydatetime__days_future">
+        <item quantity="zero">осталось %d дней</item>
+        <item quantity="one">остался %d день</item>
+        <item quantity="few">осталось %d дня</item>
+        <item quantity="many">осталось %d дней</item>
+        <item quantity="other">осталось %d дней</item>
+    </plurals>
+    <plurals name="fuzzydatetime__weeks_future">
+        <item quantity="zero">осталось %d недель</item>
+        <item quantity="one">осталась %d неделя</item>
+        <item quantity="few">осталось %d недели</item>
+        <item quantity="many">осталось %d недель</item>
+        <item quantity="other">осталось %d недель</item>
+    </plurals>
+    <plurals name="fuzzydatetime__months_future">
+        <item quantity="zero">осталось %d месяцев</item>
+        <item quantity="one">остался %d месяц</item>
+        <item quantity="few">осталось %d месяца</item>
+        <item quantity="many">осталось %d месяцев</item>
+        <item quantity="other">осталось %d месяцев</item>
+    </plurals>
+    <plurals name="fuzzydatetime__years_future">
+        <item quantity="zero">осталось %d лет</item>
+        <item quantity="one">остался %d год</item>
+        <item quantity="few">осталось %d года</item>
+        <item quantity="many">осталось %d лет</item>
+        <item quantity="other">осталось %d лет</item>
+    </plurals>
+</resources>

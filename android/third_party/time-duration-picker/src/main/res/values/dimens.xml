@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="touchable">48dp</dimen>
+    <dimen name="controlHPadding">6dp</dimen>
+    <dimen name="controlVPadding">2dp</dimen>
+</resources>

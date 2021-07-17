@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.android.tools.build/gradle/
+    implementation "com.android.tools.build:gradle:4.1.3"
+    implementation 'commons-io:commons-io:2.6'
+
+    implementation deps.javassist
+
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+def LOCAL_REPO_URL = "file://$project.projectDir/prebuilt_repo/"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: LOCAL_REPO_URL) {
+                pom.groupId = "github.tornaco.nitro"
+                pom.artifactId = "nitro_plugin"
+                pom.version = '1.0.0'
+            }
+        }
+    }
+}
+

@@ -20,6 +20,8 @@ jobs:
           args: '"
         source .travis/env.sh;
         source /opt/setup-android-sdk.sh;
+        export TOKEN=${{ secrets.GH_ACCESS_TOKEN }};
+        export USERNAME=${{ secrets.GH_USER_NAME }};
         cd android && ./scripts/build_plugins.sh
         "'
       - name: Upload APK

@@ -1,0 +1,26 @@
+name: Publish packages
+
+on: [ push ]
+
+jobs:
+  publish-gpr:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Dump env
+        run: echo ${GITHUB_WORKSPACE}
+
+      - name: build
+        uses: xdtianyu/actions-android-ci@master
+        with:
+          args: '"
+        source .travis/env.sh;
+        source /opt/setup-android-sdk.sh;
+        export KEYSTORE_PASS=${{ secrets.KEYSTORE_PASS }};
+        export USERNAME=${{ secrets.GPR_USER_NAME }};
+        export TOKEN=${{ secrets.GITHUB_TOKEN }};
+        cd android && ./gradlew :modules:module_common:publish
+        "'

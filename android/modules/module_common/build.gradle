@@ -64,6 +64,8 @@ dependencies {
     api project(':third_party:md_dialog_library')
     api project(':third_party:md_dialog_core')
     api project(':third_party:md_dialog_commons')
+
+    api project(':rhino:rhino_annotations')
 }
 
 apply from: '../publish_packages.gradle'

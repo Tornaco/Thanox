@@ -20,8 +20,8 @@ jobs:
         source .travis/env.sh;
         source /opt/setup-android-sdk.sh;
         export KEYSTORE_PASS=${{ secrets.KEYSTORE_PASS }};
-        export USERNAME=${{ secrets.GPR_USER_NAME }};
-        export TOKEN=${{ secrets.GITHUB_TOKEN }};
+        export TOKEN=${{ secrets.GH_ACCESS_TOKEN }};
+        export USERNAME=${{ secrets.GH_USER_NAME }};
         cd android;
         ./gradlew :modules:module_common:publish;
         ./gradlew :modules:module_ops:publish;

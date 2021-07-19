@@ -15,7 +15,7 @@ publishing {
         gpr(MavenPublication) {
             from(components.java)
 
-            groupId = 'github.tornaco.android.thanos.frmeworks'
+            groupId = 'github.tornaco.android.thanos.frameworks'
             artifactId = project.name
             version = '1.0.0-SNAPSHOT'
 

@@ -21,3 +21,5 @@ dependencies {
     implementation deps.support.app_compat
     implementation deps.support.annotations
 }
+
+apply from: '../publish_packages.gradle'

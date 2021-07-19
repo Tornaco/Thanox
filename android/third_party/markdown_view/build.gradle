@@ -32,3 +32,5 @@ dependencies {
     implementation 'com.vladsch.flexmark:flexmark-ext-attributes:0.28.32'
 
 }
+
+apply from: '../publish_packages.gradle'

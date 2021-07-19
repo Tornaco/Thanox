@@ -24,3 +24,5 @@ dependencies {
 
     implementation project(':third_party:md_dialog_core')
 }
+
+apply from: '../publish_packages.gradle'

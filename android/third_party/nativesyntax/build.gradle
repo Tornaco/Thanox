@@ -19,3 +19,5 @@ android {
 dependencies {
     implementation deps.support.app_compat
 }
+
+apply from: '../publish_packages.gradle'

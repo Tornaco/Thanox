@@ -7,3 +7,5 @@ dependencies {
     implementation 'com.google.guava:guava:24.1-jre'
     implementation 'com.squareup:javapoet:1.8.0'
 }
+
+apply from: '../publish_packages.gradle'

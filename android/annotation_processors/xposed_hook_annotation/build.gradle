@@ -7,3 +7,5 @@ dependencies {
     // Xposed
     compileOnly deps.xposed.api
 }
+
+apply from: '../publish_packages.gradle'

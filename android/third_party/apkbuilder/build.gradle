@@ -21,3 +21,5 @@ dependencies {
     implementation deps.apache.common_io
     implementation deps.apache.common_codec
 }
+
+apply from: '../publish_packages.gradle'

@@ -20,3 +20,5 @@ dependencies {
     implementation deps.support.recyclerview
     implementation deps.support.interpolator
 }
+
+apply from: '../publish_packages.gradle'

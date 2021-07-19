@@ -24,3 +24,5 @@ dependencies {
     implementation deps.support.app_compat
     implementation deps.support.recyclerview
 }
+
+apply from: '../publish_packages.gradle'

@@ -20,3 +20,5 @@ dependencies {
     implementation deps.support.app_compat
     implementation deps.support.material
 }
+
+apply from: '../publish_packages.gradle'

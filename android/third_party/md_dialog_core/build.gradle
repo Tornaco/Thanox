@@ -25,3 +25,4 @@ dependencies {
     implementation project(':third_party:md_progress')
 }
 
+apply from: '../publish_packages.gradle'

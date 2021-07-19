@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="github.tornaco.thanos.module.component.manager">
+
+    <application>
+        <activity android:name=".ActivityListActivity" />
+        <activity android:name=".ReceiverListActivity" />
+        <activity android:name=".ServiceListActivity" />
+    </application>
+
+</manifest>

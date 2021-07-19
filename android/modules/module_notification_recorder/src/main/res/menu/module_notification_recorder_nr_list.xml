@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_clear_all"
+        android:icon="@drawable/module_notification_recorder_ic_delete_bin_6_fill"
+        android:title="@string/module_notification_recorder_clear_all"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/module_common_ic_settings_fill"
+        android:title="@string/module_notification_recorder_settings"
+        app:showAsAction="ifRoom" />
+</menu>

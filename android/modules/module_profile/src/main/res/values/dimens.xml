@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="module_profile_editor_text_size">12sp</dimen>
+    <dimen name="module_profile_editor_rule_checker_indicator_size">12dp</dimen>
+    <dimen name="module_profile_rule_list_switch_container_width">96dp</dimen>
+    <dimen name="module_profile_editor_symbol_bar_height">32dp</dimen>
+</resources>

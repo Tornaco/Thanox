@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Enable BT",
+    "description": "打开微信时，打开蓝牙（仅做示例，请自行优化）",
+    "priority": 2,
+    "condition": "frontPkgChanged == true && to == \"com.tencent.mm\"",
+    "actions": [
+      "ui.showShortToast(\"蓝牙状态\" + (hw.isBTEnabled() ? \"开启\" : \"关闭\"));",
+      "ui.showShortToast(\"正在打开蓝牙...\");",
+      "ui.showShortToast(\"蓝牙打开\" + (hw.enableBT() ? \"成功\" : \"失败\"));"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {
+    "name": "BT State",
+    "description": "蓝牙开关状态监听，此处监听蓝牙打开事件",
+    "priority": 2,
+    "condition": "btStateChanged == true && btStateOn == true",
+    "actions": [
+      "ui.showShortToast(\"蓝牙状态被开启了\");"
+    ]
+  }
+]

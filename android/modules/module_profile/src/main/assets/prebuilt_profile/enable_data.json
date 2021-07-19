@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Enable Data",
+    "description": "打开微信时，打开移动数据（仅做示例，请自行优化）",
+    "priority": 2,
+    "condition": "frontPkgChanged == true && to == \"com.tencent.mm\"",
+    "actions": [
+      "ui.showShortToast(\"移动数据当前\" + (data.isDataEnabled() ? \"开启\" : \"关闭\"));",
+      "ui.showShortToast(\"正在打开移动数据...\");",
+      "data.setDataEnabled(true)"
+    ]
+  }
+]

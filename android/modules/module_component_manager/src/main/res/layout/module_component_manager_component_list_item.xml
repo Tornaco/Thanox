@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.content.pm.PackageManager" />
+
+        <variable
+                name="app"
+                type="github.tornaco.android.thanos.core.pm.AppInfo" />
+
+        <variable
+                name="component"
+                type="github.tornaco.thanos.module.component.manager.model.ComponentModel" />
+
+        <variable
+                name="isLastOne"
+                type="boolean" />
+    </data>
+
+    <RelativeLayout
+            android:id="@+id/app_item_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:minHeight="@dimen/list_item_height"
+            android:soundEffectsEnabled="false">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/list_item_app_icon_w"
+                android:layout_height="@dimen/list_item_app_icon_h"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dashboard_tile_image_margin_start"
+                android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end"
+                android:appIcon="@{app}"
+                android:padding="@dimen/dashboard_tile_image_padding"
+                tools:src="@drawable/module_common_ic_settings_fill" />
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dashboard_category_title_margin_end"
+                android:layout_marginBottom="@dimen/dashboard_category_bot_margin"
+                android:layout_toEndOf="@+id/icon">
+
+            <TextView
+                    android:id="@+id/label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="@dimen/common_view_margin_small"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_toStartOf="@id/badge1"
+                    android:ellipsize="middle"
+                    android:fadingEdge="horizontal"
+                    android:text="@{component.label}"
+                    android:textAppearance="@style/TextAppearance.TileTitle"
+                    tools:text="@string/app_name" />
+
+            <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/label"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_toStartOf="@id/item_switch"
+                    android:ellipsize="middle"
+                    android:fadingEdge="horizontal"
+                    android:text="@{component.name}"
+                    android:textAppearance="@style/TextAppearance.TileSubTitle"
+                    android:textStyle="italic"
+                    tools:text="Long text, it can be very very very very very very very very very very very very long" />
+
+
+            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                    android:id="@+id/badge1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_view_margin_small"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_toStartOf="@id/item_switch"
+                    android:background="@color/md_red_500"
+                    android:text="@string/module_component_manager_disabled_by_thanox"
+                    android:textColor="@color/md_white"
+                    android:textSize="@dimen/list_item_main_text_size_ext_small"
+                    android:visibility="@{component.disabledByThanox ? View.VISIBLE : View.GONE}" />
+
+            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                    android:id="@+id/badge2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/badge1"
+                    android:layout_marginTop="@dimen/common_view_margin_small"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_toStartOf="@id/item_switch"
+                    android:background="?colorAccent"
+                    android:text="@string/module_component_manager_component_running"
+                    android:textColor="@color/md_white"
+                    android:textSize="@dimen/list_item_main_text_size_ext_small"
+                    android:visibility="@{component.running ? View.VISIBLE : View.GONE}" />
+
+            <Switch
+                    android:id="@+id/item_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:checked="@{!component.disabled}"
+                    android:soundEffectsEnabled="false"
+                    android:theme="@style/SwitchTheme"
+                    android:track="@drawable/module_common_switch_track_material_oos"
+                    tools:checked="true" />
+        </RelativeLayout>
+
+        <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/icon"
+                android:background="?android:attr/dividerVertical"
+                android:visibility="@{isLastOne ? View.GONE : View.VISIBLE}" />
+    </RelativeLayout>
+</layout>

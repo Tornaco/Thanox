@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Ringtone example",
+    "description": "播放铃音和振动示例，屏幕点亮触发，支持设置重复次数",
+    "priority": 1,
+    "condition": "screenOn == true",
+    "actions": [
+      "ringtone.wengwengweng(2)",
+      "ringtone.dingdingding()"
+    ]
+  }
+]

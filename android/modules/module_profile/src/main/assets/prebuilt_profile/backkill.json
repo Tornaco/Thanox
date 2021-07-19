@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Back kill",
+    "description": "返回杀应用，应用名单来自全局变backkill，先判断按键是返回键（4），再判断按下时间是最近1秒",
+    "priority": 1,
+    "condition": "frontPkgChanged == true && globalVarOf$backkill.contains(from) && input.getLastKey() == 4 && (System.currentTimeMillis() - input.getLastKeyTime() <= 1000)",
+    "actions": [
+      "ui.showShortToast(from);",
+      "killer.killPackage(from);"
+    ]
+  }
+]

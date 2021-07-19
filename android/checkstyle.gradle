@@ -1,0 +1,28 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = '8.5'
+}
+
+checkstyle {
+    configFile = rootProject.file('checkstyle/checkstyle.xml')
+    configProperties.checkStyleConfigDir = rootProject.rootDir.path + "/checkstyle"
+}
+
+task checkstyle(type: Checkstyle) {
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    ignoreFailures = false
+    showViolations true
+
+    reports {
+        xml.enabled false
+        html.enabled true
+        html.stylesheet resources.text.fromFile(rootProject.rootDir.path + '/checkstyle/xsl/checkstyle-custom.xsl')
+    }
+
+    // empty classpath
+    classpath = files()
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="module_profile_pref_key_rule_engine_automation" translatable="false">
+        module_profile_pref_key_rule_engine_automation
+    </string>
+
+    <string name="module_profile_pref_key_rule_engine_push" translatable="false">
+        module_profile_pref_key_rule_engine_push
+    </string>
+</resources>

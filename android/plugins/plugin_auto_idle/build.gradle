@@ -77,7 +77,7 @@ dependencies {
     // Modules
     implementation project(':modules:module_common')
 
-    compileOnly deps.thanos.framework_base
+    compileOnly project(':android_framework:base')
     implementation project(':nitro:nitro_plugin')
 
     implementation project(':plugins:plugin_auto_idle_server')

@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Use var example",
+    "description": "应用切换时，如果当前前台应用在定义的变量列表apps中，Toast使用输出包名（仅做示例，请自行优化）",
+    "priority": 1,
+    "condition": "frontPkgChanged == true && globalVarOf$apps.contains(to)",
+    "actions": [
+      "ui.showShortToast(to);"
+    ]
+  }
+]

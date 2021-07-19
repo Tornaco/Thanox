@@ -1,0 +1,14 @@
+<resources>
+
+    <style name="ModuleLockerAppThemeVerify" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/primary</item>
+    </style>
+
+    <style name="ModuleLockerVerifyProgressStyle" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:colorControlActivated">?menuIconTint</item>
+        <item name="colorControlActivated">?menuIconTint</item>
+    </style>
+</resources>

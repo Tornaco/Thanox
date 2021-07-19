@@ -22,5 +22,18 @@ jobs:
         export KEYSTORE_PASS=${{ secrets.KEYSTORE_PASS }};
         export USERNAME=${{ secrets.GPR_USER_NAME }};
         export TOKEN=${{ secrets.GITHUB_TOKEN }};
-        cd android && ./gradlew :modules:module_common:publish
+        cd android;
+        ./gradlew :modules:module_common:publish;
+        ./gradlew :modules:module_ops:publish;
+        ./gradlew :modules:module_easteregg:publish;
+        ./gradlew :modules:module_activity_trampoline:publish;
+        ./gradlew :modules:module_profile:publish;
+        ./gradlew :modules:module_component_manager:publish;
+        ./gradlew :modules:module_exam:publish;
+        ./gradlew :modules:module_notification_recorder:publish;
+        ./gradlew :modules:module_locker:publish;
+        ./gradlew :modules:module_filepicker:publish;
+        ./gradlew :android_framework:base:publish;
+        ./gradlew :android_framework:res:publish;
+        ./gradlew :android_framework:patchx-lib:publish;
         "'

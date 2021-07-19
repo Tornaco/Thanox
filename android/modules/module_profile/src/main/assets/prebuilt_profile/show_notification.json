@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Show notification",
+    "description": "打开微信时，显示通知（仅做示例，请自行优化）",
+    "priority": 2,
+    "condition": "frontPkgChanged == true && to == \"com.tencent.mm\"",
+    "actions": [
+      "ui.showNotification(\"wexin_tag\", \"通知标题...\", \"通知内容...\", true);"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Wifi state",
+    "description": "Wifi State Example",
+    "priority": 1,
+    "condition": "wifiStateChanged == true",
+    "actions": [
+      "ui.showShortToast(\"WIFI CHANGED...\" + wifiState);"
+    ]
+  }
+]

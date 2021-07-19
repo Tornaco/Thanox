@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Sh example",
+    "description": "Shell sh 示例, 屏幕点亮执行Shell命令，或者thanox-core的版本信息",
+    "priority": 1,
+    "condition": "screenOn == true",
+    "actions": [
+      "ui.showShortToast(\"\" + sh.exe(\"dumpsys tv_input version\"));"
+    ]
+  }
+]

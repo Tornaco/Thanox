@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="timeFormatted"
+            type="String" />
+
+        <variable
+            name="nrd"
+            type="github.tornaco.android.thanos.core.n.NotificationRecord" />
+
+        <variable
+            name="app"
+            type="github.tornaco.android.thanos.core.pm.AppInfo" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dashboard_card_start_margin"
+            android:layout_marginTop="@dimen/dashboard_card_start_margin"
+            android:layout_marginEnd="@dimen/dashboard_card_start_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/module_common_clickable_item_background"
+            app:cardBackgroundColor="?cardsBackgroundColor"
+            app:cardCornerRadius="@dimen/common_view_corner_radius"
+            app:cardElevation="@dimen/common_view_elevation"
+            app:contentPadding="@dimen/common_view_margin_small">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="@dimen/common_view_margin_small"
+                    android:layout_marginEnd="@dimen/common_view_margin_small">
+
+                    <ImageView
+                        android:id="@+id/app_icon"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:appIcon="@{app}"
+                        android:src="@mipmap/ic_fallback_app_icon" />
+
+                    <View
+                        android:id="@+id/cl"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/common_view_margin_tiny"
+                        android:layout_toEndOf="@id/app_icon"
+                        android:background="@android:color/transparent" />
+
+                    <TextView
+                        android:id="@+id/app_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/cl"
+                        android:layout_alignStart="@id/cl"
+                        android:layout_marginStart="@dimen/common_view_margin_tiny"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:layout_toEndOf="@id/app_icon"
+                        android:gravity="center|start"
+                        android:text="@{app == null ? @string/module_notification_recorder_item_uninstalled_app : app.appLabel}"
+                        android:textAppearance="@style/ModuleNotificationRecorderTextAppearance.NRAppLabel"
+                        tools:text="Thanox" />
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/cl"
+                        android:layout_alignStart="@id/cl"
+                        android:layout_marginStart="@dimen/common_view_margin_tiny"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:layout_toEndOf="@id/app_icon"
+                        android:gravity="center|start"
+                        android:text="@{timeFormatted}"
+                        android:textAppearance="@style/ModuleNotificationRecorderTextAppearance.NRAppTime"
+                        tools:text="Toady 12:05" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/MaterialButtonBadged"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="@{nrd.isToast() ? @string/module_notification_recorder_item_type_toast : @string/module_notification_recorder_item_type_n}"
+                        android:textAllCaps="true"
+                        tools:text="@string/module_notification_recorder_item_type_n" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/header"
+                    android:layout_marginStart="@dimen/common_view_margin_small"
+                    android:layout_marginEnd="@dimen/common_view_margin_small"
+                    android:layout_marginBottom="@dimen/dashboard_card_start_margin">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/common_view_margin_tiny"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:gravity="center|start"
+                        android:text="@{nrd.isToast() ? @string/module_notification_recorder_item_type_toast : ((nrd.title == null || nrd.title.trim().length() == 0) ? @string/module_notification_recorder_item_no_title : nrd.title)}"
+                        android:textAppearance="@style/ModuleNotificationRecorderTextAppearance.NRContent"
+                        android:visibility="@{nrd.isToast() ? View.GONE : View.VISIBLE}"
+                        tools:text="Hello I am the title." />
+
+                    <TextView
+                        android:id="@+id/content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/title"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/common_view_margin_tiny"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:gravity="center|start"
+                        android:text="@{(nrd.content == null || nrd.content.trim().length() == 0) ? @string/module_notification_recorder_item_no_content : nrd.content}"
+                        android:textAppearance="@style/ModuleNotificationRecorderTextAppearance.NRContent"
+                        tools:text="Applications for all Summer sessions and the Fall semester are currently open. The ALP is admitting students and sending admission materials" />
+
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+</layout>

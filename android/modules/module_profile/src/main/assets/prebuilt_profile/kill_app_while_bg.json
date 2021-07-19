@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Kill app on background",
+    "description": "应用回到后台杀死他（仅做示例，请自行优化）",
+    "priority": 1,
+    "condition": "frontPkgChanged == true && !from.contains(\"launcher\") && (from != \"com.tencent.mm\")",
+    "actions": [
+      "ui.showShortToast(\"杀死他...\");",
+      "killer.killPackage(from);"
+    ]
+  }
+]

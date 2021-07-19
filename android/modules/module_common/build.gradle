@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -57,7 +56,8 @@ dependencies {
     // Tor
     api deps.tornaco.android_common
 
-    api deps.thanos.framework_base
+    api project(':android_framework:base')
+
     api project(':third_party:recyclerview-fastscroll')
     api project(':third_party:search')
     api project(':third_party:badge')
@@ -66,27 +66,6 @@ dependencies {
     api project(':third_party:md_dialog_commons')
 }
 
-afterEvaluate {
-    publishing {
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/tornaco/Thanox")
-                credentials {
-                    username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                    password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-                }
-            }
-        }
-        publications {
-            release(MavenPublication) {
-                from(components.release)
-                groupId = 'github.tornaco.android.thanos.modules'
-                artifactId = 'module-common'
-                version = '1.0.0-SNAPSHOT'
-            }
-        }
-    }
-}
+apply from: '../publish_packages.gradle'
 
 buildDir = rootProject.projectDir.path + "/out/module_common"

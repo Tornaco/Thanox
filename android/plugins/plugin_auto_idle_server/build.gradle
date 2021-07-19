@@ -25,7 +25,7 @@ dependencies {
     compileOnly deps.xposed.api
 
     // Sdk
-    implementation deps.thanos.framework_base
+    implementation project(':android_framework:base')
 
     compileOnly project(":annotation_processors:xposed_hook_annotation")
     annotationProcessor project(":annotation_processors:xposed_hook_compiler")

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Auto inactive",
+    "description": "自动休眠应用，应用名单来自全局变idle",
+    "priority": 1,
+    "condition": "frontPkgChanged == true && globalVarOf$idle.contains(from)",
+    "actions": [
+      "ui.showShortToast(\"自动休眠\" + from);",
+      "activity.setInactive(from);"
+    ]
+  }
+]

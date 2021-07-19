@@ -1,0 +1,19 @@
+<!--
+  ~ This Source Code Form is subject to the terms of the Mozilla Public
+  ~ License, v. 2.0. If a copy of the MPL was not distributed with this
+  ~ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  -->
+
+<resources>
+    <string name="nnf_new_folder">新建文件夾</string>
+    <string name="nnf_create_folder_error">文件夾創建失敗</string>
+    <string name="nnf_name">名稱</string>
+    <string name="nnf_select_something_first">請先選擇</string>
+    <string name="nnf_need_valid_filename">請輸入合法的文件名</string>
+    <string name="nnf_permission_external_write_denied">沒有權限訪問你的文件</string>
+    <string name="nnf_filename">文件名</string>
+    <string name="nnf_list_ok">@android:string/ok</string>
+    <string name="nnf_list_cancel">@android:string/cancel</string>
+    <string name="nnf_new_folder_ok">@android:string/ok</string>
+    <string name="nnf_new_folder_cancel">@android:string/cancel</string>
+</resources>

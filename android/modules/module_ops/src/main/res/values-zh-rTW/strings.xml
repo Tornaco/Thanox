@@ -1,0 +1,41 @@
+<resources>
+    <string name="module_ops_category_location">位置</string>
+    <string name="module_ops_category_personal">個人</string>
+    <string name="module_ops_category_message">信息</string>
+    <string name="module_ops_category_media">媒體</string>
+    <string name="module_ops_category_device">設備</string>
+    <string name="module_ops_category_bg">後台</string>
+    <string name="module_ops_category_remaining">其他</string>
+    <string name="module_ops_category_thanox">Thanox</string>
+
+    <string name="module_ops_title_op_remind_apps">受監視的應用</string>
+
+    <string name="module_ops_title_reset_ops_mode_for_all">重置全部應用的配置</string>
+
+    <string name="module_ops_feature_title_app_ops_list">權限管理</string>
+    <string name="module_ops_feature_summary_app_ops_list">按應用</string>
+    <string name="module_ops_activity_title_app_ops_list">按應用</string>
+
+    <string name="module_ops_feature_title_a_manage">活動管理</string>
+    <string name="module_ops_feature_title_s_manage">服務管理</string>
+    <string name="module_ops_feature_title_r_manage">廣播接收器管理</string>
+
+    <string name="module_ops_feature_title_block_uninstall">阻止卸载</string>
+    <string name="module_ops_feature_title_block_clear_data">阻止清除数据</string>
+
+    <string name="module_ops_feature_title_ops_app_list">權限管理</string>
+    <string name="module_ops_feature_summary_ops_app_list">按權限</string>
+    <string name="module_ops_activity_title_ops_app_list">按權限（%s）</string>
+
+    <string name="module_ops_feature_title_ops_remind_list">OP提醒</string>
+    <string name="module_ops_feature_summary_ops_remind">應用使用某些權限時發出提醒</string>
+
+    <string name="module_ops_mode_allow">始終允許</string>
+    <string name="module_ops_mode_foreground">前台允許</string>
+    <string name="module_ops_mode_ignore">拒絕</string>
+    <string name="module_ops_mode_all">全部</string>
+
+    <string name="module_ops_mode_allow_all">全部 始終允許</string>
+    <string name="module_ops_mode_foreground_all">全部 前台允許</string>
+    <string name="module_ops_mode_ignore_all">全部 拒絕</string>
+</resources>

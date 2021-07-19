@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Disable package",
+    "description": "冻结，解冻等包管理，根据自己的条件，使用包API来冻结、解冻应用",
+    "priority": 1,
+    "condition": "false",
+    "actions": [
+      "pkg.enableApplication(\"要解冻的包名\")",
+      "pkg.disableApplication(\"要冻结包名\")"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/action_reset_all_modes"
+            android:icon="@drawable/module_common_ic_settings_fill"
+            android:title="@string/module_ops_title_reset_ops_mode_for_all"
+            app:showAsAction="never" />
+
+</menu>

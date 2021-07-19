@@ -41,7 +41,7 @@ dependencies {
     annotationProcessor deps.lombok.core
     compileOnly deps.lombok.core
 
-    implementation deps.thanos.framework_base
+    implementation project(':android_framework:base')
 
     testImplementation deps.junit
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

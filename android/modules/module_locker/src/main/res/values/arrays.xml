@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="module_locker_app_list_filter_categories">
+        <item>@string/module_locker_user_installed_apps</item>
+        <item>@string/module_locker_system_installed_apps</item>
+    </string-array>
+
+    <string-array name="module_locker_locker_methods">
+        <item>@string/module_locker_key_verify_lock_method_pin</item>
+        <item>@string/module_locker_key_verify_lock_method_pattern</item>
+    </string-array>
+
+    <string-array name="module_locker_swipe_refresh_colors">
+        <item>@color/md_amber_500</item>
+        <item>@color/md_lime_500</item>
+        <item>@color/md_green_500</item>
+        <item>@color/md_red_500</item>
+    </string-array>
+</resources>

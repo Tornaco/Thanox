@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Screen and user state",
+    "description": "屏幕开关事件，用户解锁事件",
+    "priority": 1,
+    "condition": "screenOff == true || screenOn == true || userPresent",
+    "actions": [
+      "ui.showShortToast(\"屏幕开关事件，用户解锁事件\");"
+    ]
+  }
+]

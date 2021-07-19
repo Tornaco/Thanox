@@ -1,0 +1,70 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    resourcePrefix 'module_exam_'
+}
+
+dependencies {
+    // Test
+    testImplementation deps.junit
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Support Libraries
+    implementation deps.support.app_compat
+    implementation deps.support.material
+    implementation deps.support.recyclerview
+    implementation deps.support.preference
+    implementation deps.support.constraint
+
+    implementation deps.support.room
+    annotationProcessor deps.support.room_compiler
+
+    implementation deps.retrofit.retrofit2
+    implementation deps.retrofit.converter_gson
+    implementation deps.retrofit.adapter_rxjava2
+
+    // Tor
+    implementation deps.tornaco.logger
+
+    implementation deps.guava
+
+    // Lombok
+    annotationProcessor deps.lombok.core
+    compileOnly deps.lombok.core
+
+    implementation project(':modules:module_common')
+
+    implementation project(':android_framework:base')
+}
+
+buildDir = rootProject.projectDir.path + "/out/module_exam"
+
+apply from: '../publish_packages.gradle'

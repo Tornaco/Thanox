@@ -8,7 +8,6 @@ include ':annotation_processors:xposed_hook_compiler'
 include ':annotation_processors:permission-requester-annotation'
 include ':annotation_processors:permission-requester-compiler'
 
-
 include ':plugins:plugin_push_message_delegate'
 include ':plugins:plugin_push_message_delegate_server'
 include ':plugins:plugin_example'
@@ -17,7 +16,17 @@ include ':plugins:plugin_auto_idle'
 include ':plugins:plugin_auto_idle_server'
 include ':plugins:plugin_toolbox'
 
+// Modules.
+include ':modules:module_ops'
+include ':modules:module_easteregg'
+include ':modules:module_activity_trampoline'
+include ':modules:module_profile'
+include ':modules:module_component_manager'
+include ':modules:module_exam'
+include ':modules:module_notification_recorder'
+include ':modules:module_locker'
 include ':modules:module_common'
+include ':modules:module_filepicker'
 
 include ':third_party:dateformatter'
 include ':third_party:patternlockview'
@@ -36,4 +45,8 @@ include ':third_party:time-duration-picker'
 include ':third_party:markdown_view'
 
 
+include ':android_framework:base'
+include ':android_framework:res'
 include ':android_framework:patchx-lib'
+
+include ':android_framework:packages:installer'

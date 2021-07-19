@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Show last keycode",
+    "description": "应用切换时，显示最后一次按键事件",
+    "priority": 2,
+    "condition": "frontPkgChanged == true",
+    "actions": [
+      "ui.showLongToast(\"上次按键事件为: \" + input.getLastKey() + \"\n时间为: \" + input.getLastKeyTime() + \"\n格式化后时间为: \" + new java.util.Date(input.getLastKeyTime()) + \"\n距离现在毫秒数: \" + (System.currentTimeMillis() - input.getLastKeyTime()));"
+    ]
+  }
+]

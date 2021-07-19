@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="ruleInfo"
+                type="github.tornaco.android.thanos.core.profile.RuleInfo" />
+
+        <variable
+                name="placeholder"
+                type="String" />
+
+        <variable
+                name="format"
+                type="String" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.AppBarLayout app:elevation="@dimen/common_toolbar_elevation"
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="?appbarTheme"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:popupTheme="?appbarPopupTheme"
+                    app:theme="?toolbarTheme"
+                    app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    app:titleTextColor="?menuIconTint">
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.vic797.syntaxhighlight.LineCountLayout
+                android:id="@+id/line_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/editor_actions_toolbar"
+                android:layout_below="@id/app_bar"
+                app:numberColor="?colorAccent"
+                app:numberSize="12sp"
+                app:stripColor="?colorPrimary">
+
+            <com.vic797.syntaxhighlight.SyntaxHighlighter
+                    android:id="@+id/edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@{ruleInfo== null? placeholder : ruleInfo.ruleString}"
+                    android:textSize="@dimen/module_profile_editor_text_size"
+                    app:stripLineColor="?colorPrimary" />
+
+        </com.vic797.syntaxhighlight.LineCountLayout>
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/editor_actions_toolbar_symbols1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/module_profile_editor_symbol_bar_height"
+                android:layout_above="@id/editor_actions_toolbar_symbols2"
+                android:background="?attr/colorPrimary"
+                android:gravity="center"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="?appbarPopupTheme"
+                app:theme="?toolbarTheme" />
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/editor_actions_toolbar_symbols2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/module_profile_editor_symbol_bar_height"
+                android:layout_above="@id/editor_actions_toolbar_symbols3"
+                android:background="?attr/colorPrimary"
+                android:gravity="center"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="?appbarPopupTheme"
+                app:theme="?toolbarTheme" />
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/editor_actions_toolbar_symbols3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/module_profile_editor_symbol_bar_height"
+                android:layout_above="@id/editor_actions_toolbar"
+                android:background="?attr/colorPrimary"
+                android:gravity="center"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="?appbarPopupTheme"
+                app:theme="?toolbarTheme" />
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/editor_actions_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_alignParentBottom="true"
+                android:background="?attr/colorPrimary"
+                android:gravity="center"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="?appbarPopupTheme"
+                app:theme="?toolbarTheme">
+
+            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                    android:id="@+id/badge1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/icon"
+                    android:background="?colorAccent"
+                    android:text="@{format}"
+                    android:textColor="@color/md_white"
+                    android:textSize="@dimen/list_item_main_text_size_ext_small"
+                    tools:text="JSON" />
+
+            <View
+                    android:layout_width="@dimen/common_view_margin_default"
+                    android:layout_height="wrap_content" />
+
+            <ImageView
+                    android:id="@+id/ruleCheckIndicator"
+                    android:layout_width="@dimen/module_profile_editor_rule_checker_indicator_size"
+                    android:layout_height="@dimen/module_profile_editor_rule_checker_indicator_size"
+                    android:src="@drawable/module_profile_ic_rule_valid_green_fill" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </RelativeLayout>
+</layout>

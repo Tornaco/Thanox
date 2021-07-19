@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="github.tornaco.thanos.android.module.profile">
+
+    <application>
+        <activity android:name=".RuleListActivity" />
+        <activity
+                android:name=".RuleEditorActivity"
+                android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name=".RuleEngineSettingsActivity" />
+        <activity android:name=".GlobalVarListActivity" />
+        <activity android:name=".GlobalVarEditorActivity" />
+    </application>
+</manifest>

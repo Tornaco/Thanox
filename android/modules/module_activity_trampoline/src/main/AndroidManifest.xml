@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="github.tornaco.android.thanox.module.activity.trampoline">
+
+    <application>
+        <activity
+                android:name=".ActivityTrampolineActivity"
+                android:label="@string/module_activity_trampoline_app_name" />
+    </application>
+</manifest>

@@ -1,0 +1,41 @@
+<resources>
+    <string name="module_profile_feature_name">Profile</string>
+    <string name="module_profile_feature_summary">Perform custom actions if match given condition</string>
+
+    <string name="module_profile_title_global_var">Global variant</string>
+    <string name="module_profile_title_rule_engine">Engine</string>
+    <string name="module_profile_summary_rule_engine">引擎是发布事实的工具，Thanox默认启用了多个发布器，下面的引擎支持打开或者关闭。请注意引擎描述，关闭引擎可能会导致一些Profile无法正常被触发或执行</string>
+    <string name="module_profile_pref_title_rule_engine_automation">Automation</string>
+    <string name="module_profile_pref_summary_rule_engine_automation">支持执行自动点击，查找view</string>
+    <string name="module_profile_pref_title_rule_engine_push">Push</string>
+    <string name="module_profile_pref_summary_rule_engine_push">publish facts of push message arrival</string>
+
+    <string name="module_profile_rule_edit_action_save">Save</string>
+    <string name="module_profile_rule_edit_action_discard">Discard</string>
+    <string name="module_profile_rule_edit_action_text_size_inc">Increase</string>
+    <string name="module_profile_rule_edit_action_text_size_dec">Decrease</string>
+
+    <string name="module_profile_rule_wiki">Wiki</string>
+    <string name="module_profile_rule_impor_from_file">Import from file</string>
+    <string name="module_profile_rule_impor_example">Import examples</string>
+
+    <string name="module_profile_rule_edit">Edit</string>
+    <string name="module_profile_rule_new">New</string>
+    <string name="module_profile_rule_example"></string>
+
+    <string name="module_profile_editor_select_format">Choose format</string>
+    <string name="module_profile_editor_save_success">Save success, you can enable it</string>
+    <string name="module_profile_editor_save_check_error">Bad content</string>
+
+    <string name="module_profile_editor_discard_dialog_title">Discard</string>
+    <string name="module_profile_editor_discard_dialog_message">Are you sure?</string>
+
+    <string name="module_profile_editor_delete_dialog_title">Delete</string>
+    <string name="module_profile_editor_delete_dialog_message">Are you sure?</string>
+
+    <string name="module_profile_edit_delete">Delete</string>
+    <string name="module_profile_edit_show_hide_symbols">Symbol bar</string>
+
+    <string name="module_profile_edit_var_title_hint">Please input name</string>
+    <string name="module_profile_var_list_item_size">%s variants</string>
+</resources>

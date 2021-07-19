@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="rule"
+                type="github.tornaco.android.thanos.core.profile.RuleInfo" />
+
+        <variable
+                name="ruleItemClickListener"
+                type="github.tornaco.thanos.android.module.profile.RuleItemClickListener" />
+
+        <variable
+                name="switchListener"
+                type="github.tornaco.thanos.android.module.profile.RuleItemSwitchChangeListener" />
+
+        <variable
+                name="isLastOne"
+                type="boolean" />
+    </data>
+
+    <RelativeLayout
+            android:id="@+id/app_item_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dashboard_category_bot_margin"
+            android:minHeight="@dimen/common_list_item_height"
+            android:soundEffectsEnabled="false">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/switch_container"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:minHeight="@dimen/common_list_item_height"
+                android:onClick="@{() -> ruleItemClickListener.onItemClick(rule)}">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dashboard_tile_image_margin_start"
+                    android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end"
+                    android:src="@drawable/module_profile_ic_thunderstorms_fill_purple"
+                    android:tint="@color/md_grey_500" />
+
+            <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="@dimen/common_view_margin_small"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_toEndOf="@+id/icon"
+                    android:ellipsize="middle"
+                    android:fadingEdge="horizontal"
+                    android:text="@{rule.name}"
+                    android:textAppearance="@style/TextAppearance.TileTitle"
+                    tools:text="@string/app_name" />
+
+            <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_marginBottom="@dimen/common_view_margin_small"
+                    android:layout_toEndOf="@+id/icon"
+                    android:ellipsize="middle"
+                    android:fadingEdge="horizontal"
+                    android:text="@{rule.description}"
+                    android:textAppearance="@style/TextAppearance.TileSubTitle"
+                    tools:text="This is a long text example, it can be very long...." />
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/switch_container"
+                android:layout_width="@dimen/module_profile_rule_list_switch_container_width"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:minHeight="@dimen/list_item_height">
+
+            <Switch
+                    android:id="@+id/item_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:checked="@{rule.enabled}"
+                    android:ruleInfo="@{rule}"
+                    android:ruleSwitchListener="@{switchListener}"
+                    android:soundEffectsEnabled="false"
+                    android:theme="@style/SwitchTheme"
+                    android:thumb="@drawable/module_common_switch_thumb_material_oos"
+                    android:track="@drawable/module_common_switch_track_material_oos"
+                    tools:checked="true" />
+        </RelativeLayout>
+
+        <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/common_view_margin_default"
+                android:layout_marginEnd="@dimen/common_view_margin_default"
+                android:background="?android:attr/dividerVertical"
+                android:visibility="@{isLastOne ? View.GONE : View.GONE}"
+                tools:visibility="visible" />
+    </RelativeLayout>
+</layout>

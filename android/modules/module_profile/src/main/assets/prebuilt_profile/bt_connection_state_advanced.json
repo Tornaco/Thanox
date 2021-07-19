@@ -1,0 +1,11 @@
+[
+  {
+    "name": "BT Connection State Advanced",
+    "description": "同蓝牙连接状态监听，只是使用了btBoundedDevices:BluetoothDevice参数",
+    "priority": 2,
+    "condition": "btConnectionStateChanged == true && btConnectionStateConnected == true",
+    "actions": [
+      "ui.showShortToast(\"蓝牙连接连接到新设备了，第一个设备名称为：\" + btBoundedDevices.get(0).getAddress());"
+    ]
+  }
+]

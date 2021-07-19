@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Current pkg",
+    "description": "应用切换时，使用Toast显示当前应用的当前应用包名（仅做示例，请自行优化）",
+    "priority": 2,
+    "condition": "frontPkgChanged == true",
+    "actions": [
+      "ui.showShortToast(activity.getFrontAppPackage());"
+    ]
+  }
+]

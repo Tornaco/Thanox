@@ -1,0 +1,12 @@
+[
+  {
+    "name": "坐标点击",
+    "description": "点击坐标，以安徽电信为例，点击右上角跳过视图",
+    "priority": 1,
+    "condition": "activityResumed == true && componentNameAsShortString == \"com.wondertek.ahPalm10000/com.eris.activity.AppActivity\"",
+    "actions": [
+      "ui.showShortToast(\"尝试点击坐标...\");",
+      "ui.clickDelay(960, 171, 1000);"
+    ]
+  }
+]

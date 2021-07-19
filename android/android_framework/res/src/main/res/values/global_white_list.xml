@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="white_list_packages">
+
+        <item>android</item>
+        <item>com.android.systemui</item>
+        <item>com.android.phone</item>
+        <item>com.android.mtp</item>
+        <item>android.ext.shared</item>
+        <item>com.android.pacprocessor</item>
+        <item>com.android.server.telecom</item>
+        <item>com.android.carrierconfig</item>
+        <item>com.android.defcontainer</item>
+        <item>com.android.mms.service</item>
+        <item>com.validation</item>
+        <item>com.android.calllogbackup</item>
+        <item>com.android.server.telecom</item>
+        <item>com.android.carrierdefaultapp</item>
+        <item>com.android.cellbroadcastreceiver</item>
+        <item>android.ext.shared</item>
+        <item>com.android.egg</item>
+        <item>com.android.onetimeinitializer</item>
+        <item>jp.co.omronsoft.openwnn</item>
+        <item>com.android.defcontainer</item>
+        <item>com.android.packageinstaller</item>
+        <item>com.android.pacprocessor</item>
+        <item>com.android.proxyhandler</item>
+        <item>android.ext.services</item>
+
+        <item>com.android.statementservice</item>
+        <item>com.android.inputdevices</item>
+        <item>com.android.externalstorage</item>
+        <item>com.example.android.livecubes</item>
+        <item>com.android.emergency</item>
+        <item>com.android.development_settings</item>
+        <item>com.android.bips</item>
+        <item>com.android.customlocale2</item>
+        <item>com.android.companiondevicemanager</item>
+        <item>com.genymotion.systempatcher</item>
+        <item>com.android.wallpaperpicker</item>
+        <item>com.android.wallpaperbackup</item>
+        <item>com.android.wallpapercropper</item>
+        <item>com.android.provision</item>
+        <item>com.android.cts.priv.ctsshim</item>
+        <item>com.android.certinstaller</item>
+        <item>com.android.dreams.basic</item>
+        <item>com.android.gesture.builder</item>
+        <item>com.android.cts.ctsshim</item>
+        <item>com.android.captiveportallogin</item>
+        <item>com.android.bluetoothmidiservice</item>
+        <item>com.android.bluetooth</item>
+        <item>android.ext.services</item>
+        <item>com.android.proxyhandler</item>
+        <item>com.android.backupconfirm</item>
+        <item>com.android.sharedstoragebackup</item>
+        <item>com.android.smspush</item>
+        <item>om.genymotion.genyd</item>
+        <item>com.android.location.fused</item>
+        <item>com.android.htmlviewer</item>
+        <item>com.android.keychain</item>
+        <item>com.android.wallpaper.livepicker</item>
+        <item>com.android.nfc</item>
+
+
+        <!--providers-->
+        <item>com.android.bookmarkprovider</item>
+        <item>com.android.providers.media</item>
+        <item>com.android.providers.calendar</item>
+        <item>com.android.providers.downloads</item>
+        <item>com.android.providers.downloads.ui</item>
+        <item>com.android.providers.settings</item>
+        <item>com.android.providers.telephony</item>
+        <item>com.android.providers.userdictionary</item>
+        <item>com.android.providers.phone</item>
+        <item>com.android.providers.blockednumber</item>
+        <item>com.android.providers.contacts</item>
+
+        <item>com.zui.incallui</item>
+
+        <item>github.tornaco.xposedmoduletest</item>
+        <item>de.robv.android.xposed.installer</item>
+
+        <item>com.qualcomm.uimremoteclient</item>
+        <item>com.qualcomm.qti.uceShimService</item>
+        <item>vendor.qti.hardware.cacert.server</item>
+        <item>com.qualcomm.qti.telephonyservice</item>
+        <item>vendor.qti.iwlan</item>
+        <item>com.qualcomm.uimremoteserver</item>
+        <item>com.qti.qualcomm.datastatusnotification</item>
+        <item>com.qualcomm.qti.callfeaturessetting</item>
+        <item>com.miui.vsimcore</item>
+        <item>com.qti.qualcomm.deviceinfo</item>
+        <item>com.android.ons</item>
+        <item>com.android.stk</item>
+        <item>org.codeaurora.ims</item>
+        <item>com.qualcomm.qti.dynamicddsservice</item>
+        <item>com.qualcomm.qcrilmsgtunnel</item>
+        <item>com.qti.dpmserviceapp</item>
+        <item>com.qti.xdivert</item>
+        <item>com.qualcomm.qti.cne</item>
+        <item>com.qualcomm.qti.lpa</item>
+        <item>com.qualcomm.qti.uim</item>
+        <item>com.qualcomm.qti.uimGbaApp</item>
+        <item>com.android.providers.telephony</item>
+        <item>com.android.mms.service</item>
+        <item>com.android.phone</item>
+
+        <item>com.miui.securitycore</item>
+
+    </string-array>
+
+    <string-array name="white_list_packages_hooks">
+        <item>com.tencent.pb</item>
+    </string-array>
+
+    <string-array name="app_lock_white_list_activity">
+        <item>com.tencent.mm/com.tencent.mm.plugin.voip.ui.VideoActivity</item>
+        <item>com.tencent.mobileqq/com.tencent.av.ui.VideoInviteFull</item>
+        <item>com.tencent.mobileqq/com.tencent.av.ui.AVActivity</item>
+        <item>com.tencent.mobileqq/com.tencent.av.ui.VideoInviteLock</item>
+        <item>com.tencent.mobileqq/.activity.QQLSActivity</item>
+    </string-array>
+
+    <string-array name="start_blocker_caller_whitelist">
+        <item>com.xiaomi.xmsf</item>
+        <item>com.miui.notification</item>
+    </string-array>
+
+    <string-array name="op_remind_whitelist">
+        <item>com.miui.face</item>
+        <item>com.miui.face</item>
+    </string-array>
+
+    <string-array name="task_removal_multiple_task_check_list">
+        <item>com.tencent.mm</item>
+    </string-array>
+</resources>

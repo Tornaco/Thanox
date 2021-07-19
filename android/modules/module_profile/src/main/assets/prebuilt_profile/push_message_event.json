@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Push message api",
+    "description": "感知GCM FCM推送",
+    "priority": 2,
+    "condition": "fcmPushMessageArrived == true && pkgName == \"org.telegram.plus\"",
+    "actions": [
+      "ui.showShortToast(\"Plus messenger 收到了推送，该干啥干啥\"));"
+    ]
+  }
+]

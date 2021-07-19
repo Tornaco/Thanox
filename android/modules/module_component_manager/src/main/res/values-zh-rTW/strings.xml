@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="module_component_manager_disabled_by_thanox">通過thanox禁用</string>
+    <string name="module_component_manager_component_running">運行中</string>
+    <string name="module_component_manager_feature_desc">Thanox使用了Android系統的API來禁用組件，這意味著哪怕你把Thanox卸載，這些組件的狀態依然會保留\n\nThanox會阻止通過thanox禁用的組件被其他應用重新啟用</string>
+    <string name="module_component_manager_keep_service_smart_standby">導入到乖巧模式KEEP清單</string>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+        "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <!--Ignore aidl java files.-->
+    <suppress files="I.*" checks=".*" />
+    <suppress files=".*BuildProp.java" checks=".*" />
+    <suppress files=".*AppOpsManager.java" checks=".*" />
+    <!--Ignore github/tornaco/android/thanos/core/util/-->
+    <suppress files=".*[/\\]github[/\\]tornaco[/\\]android[/\\]thanos[/\\]core[/\\]util[/\\].*" checks=".*" />
+    <suppress files=".*[/\\]github[/\\]tornaco[/\\]android[/\\]thanos[/\\]core[/\\]compat[/\\].*" checks=".*" />
+    <suppress files=".*[/\\]github[/\\]tornaco[/\\]android[/\\]thanos[/\\]core[/\\]process[/\\].*" checks=".*" />
+    <suppress files=".*[/\\]com[/\\]elvishew[/\\]xlog[/\\].*" checks=".*" />
+    <suppress files=".*[/\\]lang3[/\\].*" checks=".*" />
+    <suppress files=".*[/\\]rx2[/\\].*" checks=".*" />
+    <suppress files=".*[/\\]util[/\\].*" checks=".*" />
+</suppressions>

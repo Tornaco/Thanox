@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Disable BT killed",
+    "description": "微信被杀死，关闭蓝牙（仅做示例，请自行优化）",
+    "priority": 2,
+    "condition": "pkgKilled == true && pkgName == \"com.tencent.mm\"",
+    "actions": [
+      "ui.showShortToast(\"蓝牙状态\" + (hw.isBTEnabled() ? \"开启\" : \"关闭\"));",
+      "ui.showShortToast(\"正在关闭蓝牙...\");",
+      "ui.showShortToast(\"蓝牙关闭\" + (hw.disableBT() ? \"成功\" : \"失败\"));"
+    ]
+  }
+]

@@ -60,7 +60,6 @@ versions.nitro = "1.0.0"
 versions.rhino = "1.1.2-SNAPSHOT"
 versions.pro_feature = "1.0.0"
 versions.javassist = "3.26.0-GA"
-versions.thanos_framework_base = "1.0.0-SNAPSHOT"
 ext.versions = versions
 
 def deps = [:]
@@ -91,10 +90,6 @@ def tornaco = [:]
 tornaco.logger = "com.github.Tornaco:Logger:$versions.tornaco_logger"
 tornaco.android_common = "com.github.Tornaco:AndroidCommon:$versions.tornaco_android_common"
 deps.tornaco = tornaco
-
-def thanos = [:]
-thanos.framework_base = "github.tornaco.android.thanos:base:$versions.thanos_framework_base"
-deps.thanos = thanos
 
 def lombok = [:]
 // https://github.com/rzwitserloot/lombok
@@ -200,19 +195,6 @@ def addRepos(RepositoryHandler handler) {
     handler.maven { url 'https://jitpack.io' }
     handler.maven {
         url "$rootProject.projectDir/nitro/nitro_gradle_plugin/prebuilt_repo"
-    }
-    handler.maven {
-        Properties properties = new Properties()
-        def localProp = project.rootProject.file('local.properties')
-        if (localProp.exists()) {
-            properties.load(project.rootProject.file('local.properties').newDataInputStream())
-        }
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/tornaco/Thanox-Internal")
-        credentials {
-            username = properties.containsKey("GITHUB_UNAME") ? properties.getProperty("GITHUB_UNAME") : System.getenv("USERNAME")
-            password = properties.containsKey("GITHUB_ACCESS_TOKEN") ? properties.get("GITHUB_ACCESS_TOKEN") : System.getenv("TOKEN")
-        }
     }
 }
 

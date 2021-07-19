@@ -1,0 +1,12 @@
+[
+  {
+    "name": "BT Connection State",
+    "description": "蓝牙连接状态监听，此处监听连接事件，Toast显示所有连接设备，并判断是不是连接的MDR-XB650BT",
+    "priority": 2,
+    "condition": "btConnectionStateChanged == true && btConnectionStateConnected == true",
+    "actions": [
+      "ui.showShortToast(\"蓝牙连接连接到新设备了，所有设备名称为：\" + btBoundedDeviceAliasNames);",
+      "ui.showShortToast(\"蓝牙连接连接到新设备了，包含MDR-XB650BT设备吗？\" + btBoundedDeviceAliasNames.contains(\"MDR-XB650BT\"));"
+    ]
+  }
+]

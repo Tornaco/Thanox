@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Adjust brightness",
+    "description": "打开微信时，增加亮度",
+    "priority": 2,
+    "condition": "frontPkgChanged == true && to == \"com.tencent.mm\"",
+    "actions": [
+      "power.setBrightness(255);"
+    ]
+  }
+]

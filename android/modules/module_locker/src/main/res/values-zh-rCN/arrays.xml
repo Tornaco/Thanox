@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="module_locker_user_installed_apps">用户应用</string>
+    <string name="module_locker_system_installed_apps">系统应用</string>
+</resources>

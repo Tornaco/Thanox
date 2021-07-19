@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="viewmodel"
+                type="github.tornaco.practice.honeycomb.locker.ui.setup.SetupViewModel" />
+
+    </data>
+
+    <RelativeLayout
+            android:id="@+id/verify_displayer_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?colorPrimaryDark">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <com.google.android.material.appbar.AppBarLayout app:elevation="@dimen/common_toolbar_elevation"
+                    android:id="@+id/appbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:background="?colorPrimaryDark"
+                    android:gravity="center"
+                    android:theme="?appbarTheme">
+
+                <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:toolbarAction="@{viewmodel}"
+                        app:popupTheme="?appbarPopupTheme"
+                        app:theme="?toolbarTheme"
+                        app:titleTextColor="?menuIconTint" />
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/appbar">
+
+                    <RelativeLayout
+                            android:id="@+id/info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:paddingBottom="@dimen/common_view_margin_small">
+
+                        <ImageView
+                                android:id="@+id/icon"
+                                android:layout_width="@dimen/verify_app_icon_w"
+                                android:layout_height="@dimen/verify_app_icon_h"
+                                android:layout_centerHorizontal="true"
+                                android:lockAppItemImage="@{viewmodel}"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/module_locker_ic_looks_one_white_24dp"
+                                android:tint="?menuIconTint"
+                                android:visibility="visible" />
+
+                        <TextView
+                                android:id="@+id/label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/icon"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/common_view_margin_small"
+                                android:layout_marginTop="@dimen/common_view_margin_default"
+                                android:textAllCaps="true"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="?android:textColorPrimary"
+                                android:tips="@{viewmodel}"
+                                tools:text="ACD" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+            <RelativeLayout
+                    android:id="@+id/pin_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginTop="@dimen/common_view_margin_default"
+                    android:layout_weight="3"
+                    android:gravity="center|bottom">
+
+                <com.andrognito.pinlockview.IndicatorDots
+                        android:id="@+id/indicator_dots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        app:dotEmptyBackground="@drawable/dot_empty"
+                        app:dotFilledBackground="@drawable/module_locker_dot_filled"
+                        app:indicatorType="fixed"
+                        app:pinLength="6" />
+
+                <com.andrognito.pinlockview.PinLockView
+                        android:id="@+id/pin_lock_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/indicator_dots"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/common_view_margin_default"
+                        android:verifyAction="@{viewmodel}"
+                        app:keypadTextColor="?android:textColorPrimary"
+                        app:keypadTextSize="25sp"
+                        app:pinLength="6" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_marginBottom="@dimen/common_view_margin_default"
+                    android:lockerFabAction="@{viewmodel}"
+                    android:src="@drawable/module_locker_ic_arrow_forward_white_24dp"
+                    android:tint="?menuIconTint" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

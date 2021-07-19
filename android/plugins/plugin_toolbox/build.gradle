@@ -64,7 +64,7 @@ dependencies {
     compileOnly project(':annotation_processors:permission-requester-annotation')
     annotationProcessor project(':annotation_processors:permission-requester-compiler')
 
-    compileOnly deps.thanos.framework_base
+    compileOnly project(':android_framework:base')
     implementation project(':nitro:nitro_plugin')
 
     // Framework

@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Enable Flashlight",
+    "description": "打开微信时，打开手电筒（仅做示例，请自行优化）",
+    "priority": 2,
+    "condition": "frontPkgChanged == true && to == \"com.tencent.mm\"",
+    "actions": [
+      "ui.showShortToast(\"手电筒状态\" + (hw.isFlashlightEnabled() ? \"开启\" : \"关闭\"));",
+      "ui.showShortToast(\"正在打开手电筒...\");",
+      "ui.showShortToast(\"手电筒打开\" + (hw.enabledFlashlight() ? \"成功\" : \"失败\"));"
+    ]
+  }
+]

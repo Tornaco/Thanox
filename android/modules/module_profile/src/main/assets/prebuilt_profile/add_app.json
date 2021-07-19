@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Start app process",
+    "description": "Thanox被杀死时，启动Thanox进程",
+    "priority": 1,
+    "condition": "pkgKilled == true && (pkgName == \"github.tornaco.android.thanos\" || pkgName == \"github.tornaco.android.thanos.pro\")",
+    "actions": [
+      "ui.showShortToast(\"启动Thanox...\");",
+      "activity.launchProcessForPackage(\"github.tornaco.android.thanos\")",
+      "activity.launchProcessForPackage(\"github.tornaco.android.thanos.pro\")"
+    ]
+  }
+]

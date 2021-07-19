@@ -14,3 +14,5 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 buildDir = rootProject.projectDir.path + "/out/framework/patchx-lib"
+
+apply from: '../publish_packages.gradle'

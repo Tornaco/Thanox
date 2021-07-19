@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2015 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+                name="viewmodel"
+                type="github.tornaco.android.thanos.installer.permission.GrantPermissionsViewModel"/>
+
+    </data>
+
+
+    <github.tornaco.android.thanos.installer.permission.ManualLayoutFrame
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clipChildren="false"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="32dp"
+            android:clipToPadding="false">
+
+        <ScrollView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:id="@+id/dialog_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:elevation="16dp"
+                    android:background="@drawable/installer_dialog_background">
+
+                <FrameLayout
+                        android:id="@+id/desc_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="18dip"
+                        android:paddingStart="20dip"
+                        android:paddingEnd="16dip">
+
+
+                    <LinearLayout
+                            android:id="@+id/perm_desc_root"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center">
+
+                        <ImageView
+                                android:id="@+id/permission_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tint="?colorAccent"
+                                android:src="@drawable/installer_ic_perm_icon_default"
+                                android:scaleType="fitCenter">
+                        </ImageView>
+
+                        <TextView
+                                android:id="@+id/permission_message"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="16dip"
+                                android:paddingEnd="16dip"
+                                android:text="@string/installer_permission_request_title"
+                                style="@style/TextAppearance.MaterialComponents.Subtitle1">
+                        </TextView>
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="20dip"
+                        android:paddingEnd="16dip">
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingStart="6dip"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp">
+
+                        <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                            <!-- dummy to enforce correct height -->
+                            <Button
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    style="?android:attr/buttonBarButtonStyle"
+                                    android:visibility="invisible">
+                            </Button>
+
+                            <TextView
+                                    android:id="@+id/current_page_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingEnd="12dp"
+                                    android:singleLine="true"
+                                    android:text="1/1"
+                                    style="?android:attr/textAppearanceSmall"
+                                    android:textColor="?android:attr/textColorSecondary"
+                                    android:visibility="visible">
+                            </TextView>
+
+                            <Button
+                                    android:id="@+id/permission_more_info_button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="?android:attr/buttonBarButtonStyle"
+                                    android:text="/grant_dialog_button_more_info"
+                                    android:visibility="gone">
+                            </Button>
+                        </LinearLayout>
+
+                        <github.tornaco.android.thanos.installer.permission.ButtonBarLayout
+                                android:id="@+id/button_group"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="bottom">
+
+                            <Space
+                                    android:id="@+id/spacer"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:visibility="invisible">
+                            </Space>
+
+                            <Button
+                                    android:id="@+id/permission_deny_button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="?buttonBarButtonStyle"
+                                    android:text="DENY">
+                            </Button>
+
+                            <Button
+                                    android:id="@+id/permission_allow_button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="?buttonBarButtonStyle"
+                                    android:text="ALLOW">
+                            </Button>
+
+                        </github.tornaco.android.thanos.installer.permission.ButtonBarLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </github.tornaco.android.thanos.installer.permission.ManualLayoutFrame>
+</layout>

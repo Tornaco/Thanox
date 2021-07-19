@@ -1,0 +1,13 @@
+[
+  {
+    "name": "IO example",
+    "description": "文件读写，示例为屏幕点亮时读写文件，支持追加和覆盖。受限于文件权限，所有文件的根目录为/data/system/thanos/profile_user_io",
+    "priority": 1,
+    "condition": "screenOn == true",
+    "actions": [
+      "ui.showShortToast(\"写文件\");",
+      "io.write(\"thanox/profile/screen.txt\", \"屏幕点亮了\");",
+      "io.writeAppend(\"thanox/profile/screen_append.txt\", \"屏幕点亮了\");"
+    ]
+  }
+]

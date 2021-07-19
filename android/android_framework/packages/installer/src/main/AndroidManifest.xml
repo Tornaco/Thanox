@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="github.tornaco.android.thanos.installer">
+
+    <application>
+        <activity android:name="github.tornaco.android.thanos.installer.permission.GrantPermissionsActivity"
+                  android:theme="@style/InstallerPermission"
+                  android:launchMode="singleTask"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:excludeFromRecents="true">
+            <intent-filter android:priority="8">
+                <action android:name="github.tornaco.thanos.pm.action.REQUEST_PERMISSIONS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

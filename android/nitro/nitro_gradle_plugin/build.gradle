@@ -27,3 +27,4 @@ uploadArchives {
     }
 }
 
+apply from: '../publish_packages.gradle'

@@ -39,3 +39,5 @@ dependencies {
 }
 
 buildDir = rootProject.projectDir.path + "/out/nitro_plugin"
+
+apply from: '../publish_packages_aar.gradle'

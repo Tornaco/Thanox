@@ -48,7 +48,10 @@ include ':third_party:markdown_view'
 include ':android_framework:base'
 include ':android_framework:res'
 include ':android_framework:patchx-lib'
+include ':android_framework:hidden-api'
 
+include ':android_framework:patch-magisk:module'
+include ':android_framework:patch-magisk:bridge'
 
 include ':rhino:rhino_annotations'
 

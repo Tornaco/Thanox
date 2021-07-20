@@ -1,0 +1,225 @@
+apply plugin: 'com.android.library'
+apply from: file("../module.thanox.gradle")
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            // Specifies the ABI configurations of your native
+            // libraries Gradle should build and package with your APK.
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
+                arguments "-DMODULE_NAME:STRING=$moduleLibraryName",
+                        "-DRIRU_MODULE_API_VERSION=$moduleRiruApiVersion",
+                        "-DRIRU_MODULE_VERSION=$moduleVersionCode",
+                        "-DRIRU_MODULE_VERSION_NAME:STRING=\"$moduleVersion\"",
+                        "-DRIRU_MODULE_MIN_API_VERSION=$moduleMinRiruApiVersion"
+
+            }
+        }
+    }
+    buildFeatures {
+        prefab true
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+    maven { url 'https://dl.bintray.com/rikkaw/Libraries' }
+}
+
+dependencies {
+    // This is prefab aar which contains "riru.h"
+    // If you want to use older versions of AGP,
+    // you can copy this file from https://github.com/RikkaApps/Riru/blob/master/riru/src/main/cpp/include_riru/riru.h
+
+    // The default version of prefab in AGP has problem to process header only package,
+    // you may have to add android.prefabVersion=1.1.2 in your gradle.properties.
+    // See https://github.com/google/prefab/issues/122
+
+    implementation 'dev.rikka.ndk:riru:25.0.0'
+}
+
+def outDir = file("$rootDir/out")
+def magiskDir = file("$outDir/magisk_module")
+def isWindows = org.gradle.internal.os.OperatingSystem.current().isWindows()
+
+import org.apache.tools.ant.filters.FixCrLfFilter
+
+import java.nio.file.Files
+import java.security.MessageDigest
+
+static def calcSha256(file) {
+    def md = MessageDigest.getInstance("SHA-256")
+    file.eachByte 4096, { bytes, size ->
+        md.update(bytes, 0, size);
+    }
+    return md.digest().encodeHex()
+}
+
+afterEvaluate {
+    android.libraryVariants.forEach { variant ->
+        def variantCapped = variant.name.capitalize()
+        def variantLowered = variant.name.toLowerCase()
+        def zipName = "${magiskModuleId.replace('_', '-')}-${moduleVersion}-${variantLowered}.zip"
+
+        task("prepareMagiskFiles${variantCapped}") {
+            dependsOn("assemble$variantCapped")
+
+            doFirst {
+                delete { delete magiskDir }
+
+                copy {
+                    from "../template/magisk_module"
+                    into magiskDir.path
+                    exclude 'riru.sh'
+                }
+
+                copy {
+                    from "../template/magisk_module"
+                    into magiskDir.path
+                    include 'riru.sh'
+                    filter { line ->
+                        def replaced = line.replaceAll('%%%RIRU_MODULE_API_VERSION%%%', moduleRiruApiVersion.toString())
+                                .replaceAll('%%%RIRU_MODULE_MIN_API_VERSION%%%', moduleMinRiruApiVersion.toString())
+                                .replaceAll('%%%RIRU_MODULE_MIN_RIRU_VERSION_NAME%%%', moduleMinRiruVersionName)
+                        if (moduleMinRiruApiVersion >= 24) {
+                            replaced.replaceAll('%%%RIRU_MODULE_LIB_NAME%%%', moduleLibraryName)
+                        } else {
+                            replaced.replaceAll('%%%RIRU_MODULE_LIB_NAME%%%', moduleLibraryName)
+                                    .replaceAll('%%%RIRU_MODULE_ID_PRE24%%%', moduleLibraryName.substring("riru_".length()))
+                        }
+                    }
+                    filter(FixCrLfFilter.class,
+                            eol: FixCrLfFilter.CrLf.newInstance("lf"))
+                }
+
+                // Copy .git files manually since gradle exclude it by default
+                Files.copy(file("../template/magisk_module/.gitattributes").toPath(), file("${magiskDir.path}/.gitattributes").toPath())
+
+                def moduleProp = [
+                        id         : magiskModuleId,
+                        name       : moduleName,
+                        version    : moduleVersion,
+                        versionCode: moduleVersionCode.toString(),
+                        author     : moduleAuthor,
+                        description: moduleDescription,
+                ]
+
+                def modulePropText = ""
+                moduleProp.each { k, v -> modulePropText += "$k=$v\n" }
+                modulePropText = modulePropText.trim()
+                file("$magiskDir/module.prop").text = modulePropText
+            }
+
+            def nativeOutDir = file("build/intermediates/cmake/$variant.name/obj")
+
+            doLast {
+                copy {
+                    from "$nativeOutDir"
+                    into "$magiskDir/lib"
+                    exclude "**/*.txt"
+                }
+
+                // copy jars
+                bridgeDex(magiskDir.path)
+
+                // generate sha1sum
+                fileTree("$magiskDir").matching {
+                    exclude "README.md", "META-INF"
+                }.visit { f ->
+                    if (f.directory) return
+                    file(f.file.path + ".sha256sum").text = calcSha256(f.file)
+                }
+            }
+        }
+
+        task("zip${variantCapped}", type: org.gradle.api.tasks.bundling.Zip) {
+            dependsOn("prepareMagiskFiles${variantCapped}")
+            from magiskDir
+            archiveName zipName
+            destinationDir outDir
+        }
+
+        task("push${variantCapped}", type: org.gradle.api.tasks.Exec) {
+            dependsOn("assemble${variantCapped}")
+            workingDir outDir
+            def commands = [android.adbExecutable, "push",
+                            zipName,
+                            "/data/local/tmp/"]
+            if (isWindows) {
+                commandLine 'cmd', '/c', commands.join(" ")
+            } else {
+                commandLine commands
+            }
+        }
+
+        task("flash${variantCapped}", type: org.gradle.api.tasks.Exec) {
+            dependsOn("push${variantCapped}")
+            def commands = [android.adbExecutable, "shell", "su", "-c",
+                            "magisk --install-module /data/local/tmp/${zipName}"]
+            if (isWindows) {
+                commandLine 'cmd', '/c', commands.join(" ")
+            } else {
+                commandLine commands
+            }
+        }
+
+        task("flashAndReboot${variantCapped}", type: org.gradle.api.tasks.Exec) {
+            dependsOn("flash${variantCapped}")
+            def commands = [android.adbExecutable, "shell", "reboot"]
+            if (isWindows) {
+                commandLine 'cmd', '/c', commands.join(" ")
+            } else {
+                commandLine commands
+            }
+        }
+
+        variant.assembleProvider.get().finalizedBy("zip${variantCapped}")
+    }
+}
+
+void bridgeDex(String magiskDir) {
+    def dexOutDir = file("${magiskDir}/system/framework/")
+    dexOutDir.mkdirs()
+    def output = file("${dexOutDir}/thanox-bridge.jar")
+    def input = file("../bridge/build/libs/bridge-full.jar")
+    dex(input, output)
+}
+
+void dex(File input, File output) {
+    def androidSdkDir = android.sdkDirectory.path
+    println "SDK DIR--->" + androidSdkDir
+    def buildToolsVersion = build_versions.build_tools
+
+    def d8
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        d8 = androidSdkDir + "\\build-tools\\" + buildToolsVersion + '\\d8.bat'
+    } else {
+        d8 = androidSdkDir + "/build-tools/" + buildToolsVersion + '/d8'
+    }
+
+    def arg = "-JXmx5000m --output ${output.path} --min-api 29 ${input.path}"
+    println("D8 args: $arg")
+
+    def proc = "$d8 $arg".execute()
+    proc.waitForProcessOutput(System.out, System.err)
+}

@@ -12,7 +12,6 @@ import androidx.appcompat.app.AlertDialog;
 import github.tornaco.android.thanos.module.common.R;
 import lombok.Setter;
 
-@Setter
 public class ModernAlertDialog extends AlertDialog {
     private String dialogTitle;
     private String dialogMessage;
@@ -76,5 +75,37 @@ public class ModernAlertDialog extends AlertDialog {
             }
             dismiss();
         });
+    }
+
+    public void setDialogTitle(String dialogTitle) {
+        this.dialogTitle = dialogTitle;
+    }
+
+    public void setDialogMessage(String dialogMessage) {
+        this.dialogMessage = dialogMessage;
+    }
+
+    public void setPositive(String positive) {
+        this.positive = positive;
+    }
+
+    public void setNegative(String negative) {
+        this.negative = negative;
+    }
+
+    public void setNeutral(String neutral) {
+        this.neutral = neutral;
+    }
+
+    public void setOnPositive(@Nullable Runnable onPositive) {
+        this.onPositive = onPositive;
+    }
+
+    public void setOnNegative(@Nullable Runnable onNegative) {
+        this.onNegative = onNegative;
+    }
+
+    public void setOnNeutral(@Nullable Runnable onNeutral) {
+        this.onNeutral = onNeutral;
     }
 }

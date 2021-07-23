@@ -14,7 +14,7 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:maxLines="1"
-        android:textSize="18sp"
+        android:textSize="20sp"
         tools:text="Dialog title" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -29,13 +29,14 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.TileSubTitle"
-        android:textSize="14sp"
+        android:textSize="16sp"
         tools:text="Do you want to reboot now? If you want to show the name of the device." />
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/positive"
         style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_marginHorizontal="@dimen/common_view_margin_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/message"
@@ -50,6 +51,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/negative"
         style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_marginHorizontal="@dimen/common_view_margin_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/positive"
@@ -65,6 +67,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/neutral"
         style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_marginHorizontal="@dimen/common_view_margin_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/negative"
@@ -76,4 +79,9 @@
         android:textColor="?colorAccent"
         android:textSize="14sp"
         tools:text="Noop" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_view_margin_middle"
+        android:layout_below="@id/neutral" />
 </RelativeLayout>

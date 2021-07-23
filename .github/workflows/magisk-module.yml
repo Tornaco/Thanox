@@ -28,4 +28,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: magisk-module
-          path: out/riru-thanox*.zip
+          path: android/out/riru-thanox*.zip

@@ -5,7 +5,7 @@ buildscript {
     addRepos(repositories)
     dependencies {
         classpath deps.android_gradle_plugin
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10"
+        classpath deps.kotlin.plugin
         // Plugin framework
         classpath deps.nitro_plugin
     }

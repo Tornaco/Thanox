@@ -138,7 +138,13 @@ public interface IPrinter extends android.os.IInterface
     static final int TRANSACTION_println = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_print = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.IPrinter impl) {
-      if (Stub.Proxy.sDefaultImpl == null && impl != null) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
         Stub.Proxy.sDefaultImpl = impl;
         return true;
       }

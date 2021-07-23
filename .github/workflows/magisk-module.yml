@@ -1,0 +1,31 @@
+name: Magisk module
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Dump env
+        run: echo ${GITHUB_WORKSPACE}
+
+      - name: build
+        uses: xdtianyu/actions-android-ci@master
+        with:
+          args: '"
+        source .travis/env.sh;
+        source /opt/setup-android-sdk.sh;
+        export TOKEN=${{ secrets.GH_ACCESS_TOKEN }};
+        export USERNAME=${{ secrets.GH_USER_NAME }};
+        cd android;
+        ./scripts/build_magisk_patch.sh
+        "'
+      - name: Upload Magisk module
+        uses: actions/upload-artifact@v2
+        with:
+          name: magisk-module
+          path: out/riru-thanox*.zip

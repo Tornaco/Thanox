@@ -168,7 +168,4 @@ interface IActivityManager {
 
     // Bridge API to report app events.
     void reportOnRemoveTask(int taskId);
-    void reportOnStartActivity(String callingPackage, in Intent intent);
-    void reportOnActivityStopped(in IBinder token);
-    void reportOnActivityResumed(in IBinder token);
 }

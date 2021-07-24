@@ -65,4 +65,8 @@ interface IActivityStackSupervisor {
     boolean isAppLockWorkaroundEnabled();
     void setAppLockWorkaroundEnabled(boolean enable);
 
+    // Bridge API to report app events.
+    void reportOnStartActivity(String callingPackage, in Intent intent);
+    void reportOnActivityStopped(in IBinder token);
+    void reportOnActivityResumed(in IBinder token);
 }

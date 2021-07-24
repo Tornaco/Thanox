@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.core.annotation.DrawableRes;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -198,7 +197,7 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
 
   public static AppInfo dummy() {
     return new AppInfo(
-        BuildProp.THANOS_APP_PKG_NAME,
+        "com.android.settings",
         null,
         "Dummy",
         0,

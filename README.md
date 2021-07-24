@@ -1,8 +1,15 @@
-## 文档&教程
+## Snapshot Builds
+
+[Magisk module](https://github.com/Tornaco/Thanox/actions/workflows/magisk-module.yml)
+
+[Plugins](https://github.com/Tornaco/Thanox/actions/workflows/plugins.yml)
+
+
+## Documents
 
 [Github.io](https://tornaco.github.io/Thanox/)
 
-## 看板
+## Project
 
 [Github.project](https://github.com/Tornaco/Thanox/projects)
 

@@ -19,7 +19,7 @@ public class Args {
 
         for (int i = 0; i < args.length; i++) {
             Object arg = args[i];
-            if (arg.getClass() == clazzToLookup) {
+            if (arg != null && arg.getClass() == clazzToLookup) {
                 // Cache.
                 KEY_TO_INDEX.put(cacheKey, i);
                 return (T) arg;

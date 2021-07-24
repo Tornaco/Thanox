@@ -6,6 +6,7 @@ import android.app.IActivityTaskManager;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.IInterface;
+import android.util.Log;
 
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
@@ -32,21 +33,27 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                     return (IInterface) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
                             new Class[]{IActivityTaskManager.class},
                             (instance, method, args) -> {
+                                logging("IActivityTaskManager %s %s", method.getName(), Arrays.toString(args));
                                 // Early return...
                                 if (!ThanosManagerNative.isServiceInstalled()) {
+                                    logging("IActivityTaskManager, Thanox not installed...");
                                     return tryInvoke(am, method, args);
                                 }
 
-                                logging("IActivityTaskManager %s %s", method.getName(), Arrays.toString(args));
-                                if ("removeTask".equals(method.getName())) {
-                                    handleRemoveTask(args);
-                                } else if ("activityResumed".equals(method.getName())) {
-                                    handleActivityResumed(args);
-                                } else if ("activityStopped".equals(method.getName())) {
-                                    handleActivityStopped(args);
-                                } else if ("startActivity".equals(method.getName())) {
-                                    handleStartActivity(args);
+                                try {
+                                    if ("removeTask".equals(method.getName())) {
+                                        handleRemoveTask(args);
+                                    } else if ("activityResumed".equals(method.getName())) {
+                                        handleActivityResumed(args);
+                                    } else if ("activityStopped".equals(method.getName())) {
+                                        handleActivityStopped(args);
+                                    } else if ("startActivity".equals(method.getName())) {
+                                        handleStartActivity(args);
+                                    }
+                                } catch (Throwable e) {
+                                    logging("Error handle IActivityTaskManager" + Log.getStackTraceString(e));
                                 }
+
                                 return tryInvoke(am, method, args);
                             });
                 }
@@ -59,18 +66,21 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
         ThanosManagerNative.getDefault()
                 .getActivityManager()
                 .reportOnRemoveTask((Integer) args[0]);
+        logging("ActivityTaskManagerProxyProvider reportOnRemoveTask");
     }
 
     private void handleActivityResumed(Object[] args) throws android.os.RemoteException {
         ThanosManagerNative.getDefault()
-                .getActivityManager()
+                .getActivityStackSupervisor()
                 .reportOnActivityResumed((IBinder) args[0]);
+        logging("ActivityTaskManagerProxyProvider handleActivityResumed");
     }
 
     private void handleActivityStopped(Object[] args) throws android.os.RemoteException {
         ThanosManagerNative.getDefault()
-                .getActivityManager()
+                .getActivityStackSupervisor()
                 .reportOnActivityStopped((IBinder) args[0]);
+        logging("ActivityTaskManagerProxyProvider handleActivityStopped");
     }
 
     // Android 30.
@@ -83,14 +93,20 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
         String callingPackage = (String) args[1];
         // We'd better dynamic look up.
         // Android 29 -> 30 arg index has been changed.
-        Intent intent = Args.getFirstTypeOfArgOrNull(
+        int intentIndex = Args.getFirstTypeOfArgIndexOr(
                 Intent.class,
                 args,
-                "ActivityTaskManagerProxyProvider#handleStartActivity");
+                "ActivityTaskManagerProxyProvider#handleStartActivity",
+                -1);
+        Intent intent = intentIndex > 0 ? (Intent) args[intentIndex] : null;
         if (callingPackage != null && intent != null) {
-            ThanosManagerNative.getDefault()
-                    .getActivityManager()
+            Intent realIntent = ThanosManagerNative.getDefault()
+                    .getActivityStackSupervisor()
                     .reportOnStartActivity(callingPackage, intent);
+            if (realIntent != null) {
+                logging("handleStartActivity, Replacing Intent");
+                args[intentIndex] = realIntent;
+            }
         }
     }
 }

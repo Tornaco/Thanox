@@ -1,5 +1,7 @@
 package github.tornaco.android.thanox.magisk.bridge.proxy;
 
+import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
+
 import android.app.IActivityManager;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -7,9 +9,9 @@ import android.os.IInterface;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
-
 public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
+    private static final boolean DEBUG_AMS = false;
+
     @Override
     public IBinder provide(IBinder legacyBinder) {
         return proxyActivityManager(legacyBinder);
@@ -29,8 +31,7 @@ public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTra
                     return (IInterface) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
                             new Class[]{IActivityManager.class},
                             (instance, method, args) -> {
-                                if (!"checkPermission".equals(method.getName())
-                                        && !"handleIncomingUser".equals(method.getName())) {
+                                if (DEBUG_AMS) {
                                     logging("IActivityManager %s %s", method.getName(), Arrays.toString(args));
                                 }
                                 return tryInvoke(am, method, args);

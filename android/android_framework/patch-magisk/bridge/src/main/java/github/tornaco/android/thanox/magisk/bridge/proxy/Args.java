@@ -8,13 +8,21 @@ public class Args {
 
     @SuppressWarnings("unchecked")
     public static <T> T getFirstTypeOfArgOrNull(Class<? extends T> clazzToLookup, Object[] args, String cacheKey) {
+        int index = getFirstTypeOfArgIndexOr(clazzToLookup, args, cacheKey, -1);
+        if (index != -1) {
+            return (T) args[index];
+        }
+        return null;
+    }
+
+    public static int getFirstTypeOfArgIndexOr(Class<?> clazzToLookup, Object[] args, String cacheKey, int orElse) {
         if (args == null || args.length == 0) {
-            return null;
+            return orElse;
         }
 
         Integer cachedIndex = KEY_TO_INDEX.get(cacheKey);
         if (cachedIndex != null && cachedIndex > 0 && cachedIndex < args.length) {
-            return (T) args[cachedIndex];
+            return cachedIndex;
         }
 
         for (int i = 0; i < args.length; i++) {
@@ -22,9 +30,9 @@ public class Args {
             if (arg != null && arg.getClass() == clazzToLookup) {
                 // Cache.
                 KEY_TO_INDEX.put(cacheKey, i);
-                return (T) arg;
+                return i;
             }
         }
-        return null;
+        return orElse;
     }
 }

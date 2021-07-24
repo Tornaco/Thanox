@@ -1,5 +1,7 @@
 package github.tornaco.android.thanox.magisk.bridge.proxy;
 
+import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
+
 import android.app.AppOpsManager;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -13,9 +15,9 @@ import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
-
 public class AppOpsManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
+    private static final boolean DEBUG_OPS = false;
+
     @Override
     public IBinder provide(IBinder legacyBinder) {
         return proxyAppOpsManager(legacyBinder);
@@ -35,7 +37,9 @@ public class AppOpsManagerProxyProvider implements ProxyProvider, ExceptionTrans
                     return (IInterface) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
                             new Class[]{IAppOpsService.class},
                             (instance, method, args) -> {
-                                logging("IAppOpsService %s %s", method.getName(), Arrays.toString(args));
+                                if (DEBUG_OPS) {
+                                    logging("IAppOpsService %s %s", method.getName(), Arrays.toString(args));
+                                }
 
                                 IThanos thanos = ThanosManagerNative.getDefault();
                                 if (thanos == null) {

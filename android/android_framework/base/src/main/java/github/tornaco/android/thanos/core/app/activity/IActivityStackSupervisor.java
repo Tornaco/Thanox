@@ -137,8 +137,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     }
     // Bridge API to report app events.
 
-    @Override public void reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException
+    @Override public android.content.Intent reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException
     {
+      return null;
     }
     @Override public void reportOnActivityStopped(android.os.IBinder token) throws android.os.RemoteException
     {
@@ -615,8 +616,15 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           else {
             _arg1 = null;
           }
-          this.reportOnStartActivity(_arg0, _arg1);
+          android.content.Intent _result = this.reportOnStartActivity(_arg0, _arg1);
           reply.writeNoException();
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
           return true;
         }
         case TRANSACTION_reportOnActivityStopped:
@@ -1466,10 +1474,11 @@ public interface IActivityStackSupervisor extends android.os.IInterface
       }
       // Bridge API to report app events.
 
-      @Override public void reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException
+      @Override public android.content.Intent reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
+        android.content.Intent _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(callingPackage);
@@ -1482,15 +1491,21 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_reportOnStartActivity, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().reportOnStartActivity(callingPackage, intent);
-            return;
+            return getDefaultImpl().reportOnStartActivity(callingPackage, intent);
           }
           _reply.readException();
+          if ((0!=_reply.readInt())) {
+            _result = android.content.Intent.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
         }
         finally {
           _reply.recycle();
           _data.recycle();
         }
+        return _result;
       }
       @Override public void reportOnActivityStopped(android.os.IBinder token) throws android.os.RemoteException
       {
@@ -1628,7 +1643,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public void setAppLockWorkaroundEnabled(boolean enable) throws android.os.RemoteException;
   // Bridge API to report app events.
 
-  public void reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException;
+  public android.content.Intent reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException;
   public void reportOnActivityStopped(android.os.IBinder token) throws android.os.RemoteException;
   public void reportOnActivityResumed(android.os.IBinder token) throws android.os.RemoteException;
 }

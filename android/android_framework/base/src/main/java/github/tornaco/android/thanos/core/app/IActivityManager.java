@@ -384,6 +384,15 @@ public interface IActivityManager extends android.os.IInterface
     @Override public void reportOnRemoveTask(int taskId) throws android.os.RemoteException
     {
     }
+    @Override public void reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException
+    {
+    }
+    @Override public void reportOnActivityStopped(android.os.IBinder token) throws android.os.RemoteException
+    {
+    }
+    @Override public void reportOnActivityResumed(android.os.IBinder token) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1421,6 +1430,40 @@ public interface IActivityManager extends android.os.IInterface
           int _arg0;
           _arg0 = data.readInt();
           this.reportOnRemoveTask(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_reportOnStartActivity:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          android.content.Intent _arg1;
+          if ((0!=data.readInt())) {
+            _arg1 = android.content.Intent.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg1 = null;
+          }
+          this.reportOnStartActivity(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_reportOnActivityStopped:
+        {
+          data.enforceInterface(descriptor);
+          android.os.IBinder _arg0;
+          _arg0 = data.readStrongBinder();
+          this.reportOnActivityStopped(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_reportOnActivityResumed:
+        {
+          data.enforceInterface(descriptor);
+          android.os.IBinder _arg0;
+          _arg0 = data.readStrongBinder();
+          this.reportOnActivityResumed(_arg0);
           reply.writeNoException();
           return true;
         }
@@ -3539,6 +3582,70 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(callingPackage);
+          if ((intent!=null)) {
+            _data.writeInt(1);
+            intent.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_reportOnStartActivity, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().reportOnStartActivity(callingPackage, intent);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void reportOnActivityStopped(android.os.IBinder token) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeStrongBinder(token);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_reportOnActivityStopped, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().reportOnActivityStopped(token);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void reportOnActivityResumed(android.os.IBinder token) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeStrongBinder(token);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_reportOnActivityResumed, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().reportOnActivityResumed(token);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -3641,6 +3748,9 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_isNetStatTrackerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 97);
     static final int TRANSACTION_checkGetContentProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 98);
     static final int TRANSACTION_reportOnRemoveTask = (android.os.IBinder.FIRST_CALL_TRANSACTION + 99);
+    static final int TRANSACTION_reportOnStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 100);
+    static final int TRANSACTION_reportOnActivityStopped = (android.os.IBinder.FIRST_CALL_TRANSACTION + 101);
+    static final int TRANSACTION_reportOnActivityResumed = (android.os.IBinder.FIRST_CALL_TRANSACTION + 102);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -3776,4 +3886,7 @@ public interface IActivityManager extends android.os.IInterface
   // Bridge API to report app events.
 
   public void reportOnRemoveTask(int taskId) throws android.os.RemoteException;
+  public void reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException;
+  public void reportOnActivityStopped(android.os.IBinder token) throws android.os.RemoteException;
+  public void reportOnActivityResumed(android.os.IBinder token) throws android.os.RemoteException;
 }

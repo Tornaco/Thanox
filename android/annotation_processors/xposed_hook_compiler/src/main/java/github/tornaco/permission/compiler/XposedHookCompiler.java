@@ -245,7 +245,7 @@ public class XposedHookCompiler extends AbstractProcessor {
                 type.toString(),
                 annotation.targetSdkVersion(),
                 annotation.active(),
-                annotation.proirity());
+                annotation.priority());
 
         Logger.debug("XposedHook process: " + xposedHookInfo);
         if (xposedHookInfo.isActive()) {

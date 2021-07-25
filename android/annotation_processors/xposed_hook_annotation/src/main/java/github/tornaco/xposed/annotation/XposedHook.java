@@ -14,7 +14,7 @@ public @interface XposedHook {
 
   boolean active() default true;
 
-  int proirity() default 1;
+  int priority() default 1;
 
   interface SdkVersions {
     int _21 = 21;
@@ -27,7 +27,8 @@ public @interface XposedHook {
     int _28 = 28;
     int _29 = 29;
     int _30 = 30;
+    int _31 = 31;
 
-    int[] ALL = {_21, _22, _23, _24, _25, _26, _27, _28, _29, _30};
+    int[] ALL = {_21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31};
   }
 }

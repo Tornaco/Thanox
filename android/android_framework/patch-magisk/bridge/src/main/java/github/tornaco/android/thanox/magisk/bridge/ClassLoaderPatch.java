@@ -1,15 +1,14 @@
 package github.tornaco.android.thanox.magisk.bridge;
 
+import static github.tornaco.android.thanos.core.util.AppUtils.currentApplicationInfo;
+import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
+
 import android.content.pm.ApplicationInfo;
 import android.os.Binder;
 import android.util.Log;
 
-import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import util.XposedHelpers;
-
-import static github.tornaco.android.thanos.core.util.AppUtils.currentApplicationInfo;
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
 
 public class ClassLoaderPatch {
     private static final boolean LOGV = false;
@@ -112,11 +111,10 @@ public class ClassLoaderPatch {
 
                     ThanoxBridge.nativeInstallAppHook();
 
-                    if (!pkgName.contains(BuildProp.THANOS_APP_PKG_NAME_PREFIX)) {
-                        SystemServiceHookInstaller.installIServiceManagerHook();
-                        SystemServiceHookInstaller.installServiceManagerCacheHook();
-                        SystemServiceHookInstaller.installActivityManager();
-                    }
+                    // Hook all apps!
+                    SystemServiceHookInstaller.installIServiceManagerHook();
+                    SystemServiceHookInstaller.installServiceManagerCacheHook();
+                    SystemServiceHookInstaller.installActivityManager();
                 }
             }.setName("onAppProcess").run();
         }

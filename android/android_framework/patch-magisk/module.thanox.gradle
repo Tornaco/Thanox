@@ -24,7 +24,7 @@ ext {
 
     moduleName = "Thanox-Core"
     moduleAuthor = "Tornaco"
-    moduleDescription = "Provide android framework and app hooks for thanox, requires Riru $moduleMinRiruVersionName or above."
+    moduleDescription = "Provide android framework and app hooks for thanox, requires Riru $moduleMinRiruVersionName or above(需要安装riru). Only support Android11(只支持Android11)"
     moduleVersion = rootProject.ext.versionName
     moduleVersionCode = rootProject.ext.versionCode as int
 }

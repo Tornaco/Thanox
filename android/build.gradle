@@ -11,6 +11,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'com.gladed.androidgitversion' version '0.4.10'
+}
+
 allprojects {
     addRepos(repositories)
 
@@ -33,7 +37,33 @@ task clean(type: Delete) {
 }
 
 
+androidGitVersion {
+    prefix 'v'
+    codeFormat = 'MMNNPP'
+    baseCode = 2121212
+    // 1000000
+    // 191011
+    // First rel version
+    // 1191011
+    // 2041540
+}
+
+
 ext {
-    versionCode = 3000000
-    versionName = "3.0.0"
+    gitCommitCount = getGitCommitCount()
+    println "### gitCommitCount: ${gitCommitCount} ###"
+    versionCode = (androidGitVersion.code() as int) + gitCommitCount
+    println "### versionCode: ${versionCode} ###"
+    println "### androidGitVersion: ${androidGitVersion.code()} ###"
+    versionName = androidGitVersion.name()
+}
+
+@SuppressWarnings("GrMethodMayBeStatic")
+def getGitCommitCount() {
+    try {
+        return Integer.parseInt('git rev-list --count HEAD'.execute().text.trim())
+    } catch (Throwable e) {
+        e.printStackTrace()
+        return 0
+    }
 }

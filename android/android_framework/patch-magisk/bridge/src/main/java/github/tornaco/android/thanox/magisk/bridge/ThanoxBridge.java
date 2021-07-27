@@ -5,6 +5,7 @@ import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
 import android.util.Log;
 
 import github.tornaco.android.thanox.magisk.bridge.proxy.SystemPropProxy;
+import github.tornaco.android.thanox.magisk.bridge.proxy.SystemServiceRegistryProxy;
 
 public class ThanoxBridge {
 
@@ -12,13 +13,10 @@ public class ThanoxBridge {
         logging("ThanoxBridge, Bridge main with args: %s", arg);
         switch (arg) {
             case "system":
-                try {
-                    ClassLoaderPatch.install();
-                } catch (Throwable e) {
-                    Logging.logging("Error %s", Log.getStackTraceString(e));
-                }
+                ClassLoaderPatch.install();
                 break;
             case "app":
+                SystemServiceRegistryProxy.install();
                 break;
         }
     }
@@ -35,5 +33,7 @@ public class ThanoxBridge {
         }
     }
 
+    // Deprecated： Use Java hook instead.
+    @Deprecated
     public static native void nativeInstallAppHook();
 }

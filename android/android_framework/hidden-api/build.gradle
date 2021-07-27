@@ -2,7 +2,7 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api files('../../android_sdk/29/android-29.jar')
+    api files('../../android_sdk/30/android-30.jar')
 }
 
 sourceCompatibility = "1.8"

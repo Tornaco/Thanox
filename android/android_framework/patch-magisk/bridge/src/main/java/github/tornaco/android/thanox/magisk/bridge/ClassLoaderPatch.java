@@ -76,13 +76,11 @@ public class ClassLoaderPatch {
 
             if (className.equals("android.app.Application")) {
                 ApplicationInfo currentApp = currentApplicationInfo();
-                logging("HookedBootClassLoader#currentApp: " + currentApp);
                 if (currentApp != null) {
                     isInstalled = true;
                     onAppProcess(currentApp);
                 }
             }
-
             return super.loadClass(className, resolve);
         }
 
@@ -109,10 +107,9 @@ public class ClassLoaderPatch {
 
                     // 2021-07-08 10:47:49.756 190-190/? E/SELinux: avc:  denied  { find } for pid=5258 uid=10149 name=appops scontext=u:r:permissioncontroller_app:s0:c149,c256,c512,c768 tcontext=u:object_r:appops_service:s0 tclass=service_manager permissive=0
 
-                    ThanoxBridge.nativeInstallAppHook();
-
-                    // Hook all apps!
+                    // Remote binder ins.
                     SystemServiceHookInstaller.installIServiceManagerHook();
+                    // These service set into ServiceManager by AMS when bind add.
                     SystemServiceHookInstaller.installServiceManagerCacheHook();
                     SystemServiceHookInstaller.installActivityManager();
                 }

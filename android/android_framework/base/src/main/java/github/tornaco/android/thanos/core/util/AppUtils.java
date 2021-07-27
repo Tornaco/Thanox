@@ -1,6 +1,8 @@
 package github.tornaco.android.thanos.core.util;
 
 import android.app.ActivityThread;
+import android.app.Application;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 
 import util.XposedHelpers;
@@ -34,5 +36,12 @@ public class AppUtils {
         if (processName == null)
             return "android";
         return processName;
+    }
+
+    public static Application currentApplication() {
+        ActivityThread am = ActivityThread.currentActivityThread();
+        if (am == null)
+            return null;
+        return am.getApplication();
     }
 }

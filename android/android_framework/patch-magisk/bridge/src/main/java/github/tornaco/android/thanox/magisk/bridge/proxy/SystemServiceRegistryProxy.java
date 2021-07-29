@@ -28,15 +28,7 @@ public class SystemServiceRegistryProxy {
                     new SystemServiceRegistry.ContextAwareServiceProducerWithoutBinder<TelephonyManager>() {
                         @Override
                         public TelephonyManager createService(Context context) {
-                            return new TelephonyManager(context) {
-                                @Override
-                                public String getNetworkOperator() {
-                                    String res = super.getNetworkOperator();
-                                    String caller = context.getPackageName();
-                                    XLog.w("SystemServiceRegistryProxy TelephonyManager getNetworkOperator called %s %s", caller, res);
-                                    return res;
-                                }
-                            };
+                            return TelephonyManagerProxyProvider.provide(context);
                         }
                     }
             );

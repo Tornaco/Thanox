@@ -11,8 +11,7 @@ public class Proxies {
             new AppOpsManagerProxyProvider()
     );
     private static final List<ProxyProvider> PROVIDERS_BI = Lists.newArrayList(
-            new ActivityTaskManagerProxyProvider(),
-            new TelephonyManagerProxyProvider()
+            new ActivityTaskManagerProxyProvider()
     );
 
     public static IBinder forCached(String name, IBinder legacyBinder) {

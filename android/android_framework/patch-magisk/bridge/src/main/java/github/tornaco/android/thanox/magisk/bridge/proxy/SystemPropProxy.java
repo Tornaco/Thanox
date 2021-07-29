@@ -11,6 +11,7 @@ import github.tornaco.android.thanos.core.util.AppUtils;
 
 import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
 
+@Deprecated
 public class SystemPropProxy {
     public static String getProp(String key) throws RemoteException {
         String callerPkg = AppUtils.currentProcessName();

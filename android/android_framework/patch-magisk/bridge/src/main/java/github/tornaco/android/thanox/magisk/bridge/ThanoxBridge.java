@@ -21,6 +21,7 @@ public class ThanoxBridge {
         }
     }
 
+    @Deprecated
     public static String getProp(String key) {
         if (key == null) {
             return null;

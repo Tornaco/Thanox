@@ -1,174 +1,160 @@
 package github.tornaco.android.thanox.magisk.bridge.proxy;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.IBinder;
-import android.os.IInterface;
-import android.text.TextUtils;
+import android.telephony.TelephonyManager;
 
-import com.android.internal.telephony.ITelephony;
 import com.elvishew.xlog.XLog;
-
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.util.Arrays;
 
 import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.secure.IPrivacyManager;
 import github.tornaco.android.thanos.core.secure.PrivacyManager;
 import github.tornaco.android.thanos.core.secure.field.Fields;
+import github.tornaco.android.thanos.core.util.function.Function;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
+public class TelephonyManagerProxyProvider {
 
-public class TelephonyManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
-    @Override
-    public IBinder provide(IBinder legacyBinder) {
-        return proxyTelephonyManager(legacyBinder);
+    public static TelephonyManager provide(Context context) {
+        return new TelephonyManagerProxy(context);
     }
 
-    @Override
-    public boolean isForService(String name) {
-        return name.equals(Context.TELEPHONY_SERVICE);
-    }
+    @SuppressLint("HardwareIds")
+    private static final class TelephonyManagerProxy extends TelephonyManager {
+        private final String opPkgName;
 
-    private IBinder proxyTelephonyManager(IBinder original) {
-        return new BinderProxy(original, new BinderProxy.InvocationHandler() {
-            @Override
-            public IInterface onQueryLocalInterface(String descriptor, IInterface iInterface) {
-                if (ITelephony.class.getName().equals(descriptor)) {
-                    ITelephony iTelephony = ITelephony.Stub.asInterface(original);
-                    return (IInterface) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
-                            new Class[]{ITelephony.class},
-                            (instance, method, args) -> {
-                                logging("ITelephony %s %s", method.getName(), Arrays.toString(args));
+        private TelephonyManagerProxy(Context context) {
+            super(context);
+            this.opPkgName = context.getOpPackageName();
+        }
 
-                                // getDeviceId
-                                if ("getDeviceId".equals(method.getName())
-                                        || "getDeviceIdWithFeature".equals(method.getName())) {
-                                    return handleGetDeviceIdWithFeature(iTelephony, instance, method, args);
-                                }
+        @Override
+        public String getDeviceId() {
+            String superRes = super.getDeviceId();
+            return getHookedDeviceIdOr(superRes);
+        }
 
-                                if ("getLine1NumberForDisplay".equals(method.getName())) {
-                                    return handleGetLine1NumberForDisplay(iTelephony, instance, method, args);
-                                }
+        @Override
+        public String getDeviceId(int slotIndex) {
+            String superRes = super.getDeviceId(slotIndex);
+            return getHookedDeviceIdOr(superRes);
+        }
 
-                                if ("getImeiForSlot".equals(method.getName())) {
-                                    return handleGetImeiForSlot(iTelephony, instance, method, args);
-                                }
+        @Override
+        public String getLine1Number() {
+            String superRes = super.getLine1Number();
+            return getHookedLine1NumberOr(superRes);
+        }
 
-                                return tryInvoke(iTelephony, method, args);
-                            });
+        @Override
+        public String getLine1Number(int subId) {
+            String superRes = super.getLine1Number(subId);
+            return getHookedLine1NumberOr(superRes);
+        }
+
+        @Override
+        public String getImei() {
+            String superRes = super.getImei();
+            return getHookedImeiOr(getSlotIndex(), superRes);
+        }
+
+        @Override
+        public String getImei(int slotIndex) {
+            String superRes = super.getImei(slotIndex);
+            return getHookedImeiOr(slotIndex, superRes);
+        }
+
+        @Override
+        public String getSimOperator() {
+            return getHookSimOperatorOr(super.getSimOperator());
+        }
+
+        @Override
+        public String getSimOperator(int subId) {
+            return getHookSimOperatorOr(super.getSimOperator(subId));
+        }
+
+        @Override
+        public String getSimOperatorName() {
+            return getHookSimOperatorNameOr(super.getSimOperatorName());
+        }
+
+        @Override
+        public String getSimOperatorName(int subId) {
+            return getHookSimOperatorNameOr(super.getSimOperatorName(subId));
+        }
+
+        @Override
+        public String getSimCountryIso() {
+            return getHookedSimCountryIsoOr(super.getSimCountryIso());
+        }
+
+        private String getHookedDeviceIdOr(String elseValue) {
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_DEVICE_ID,
+                    Fields::getDeviceId, elseValue);
+        }
+
+        private String getHookedLine1NumberOr(String elseValue) {
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_LINE1NUM,
+                    Fields::getLine1Number, elseValue);
+        }
+
+        private String getHookedImeiOr(int slotIndex, String elseValue) {
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_IMEI, input -> input.getImei(slotIndex), elseValue);
+        }
+
+        private String getHookedSimCountryIsoOr(String elseValue) {
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_SIM_CONTRY_ISO, Fields::getSimCountryIso, elseValue);
+        }
+
+        private String getHookSimOperatorNameOr(String elseValue) {
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_OPERATOR_NAME, Fields::getNetOperatorName, elseValue);
+        }
+
+        private String getHookSimOperatorOr(String elseValue) {
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_OPERATOR, Fields::getNetOperator, elseValue);
+        }
+
+        private <T> T getHookFieldProfileOr(int privacyOp, Function<Fields, T> mapper, T orElseValue) {
+            try {
+                String callPackageName = opPkgName;
+                if (callPackageName == null) {
+                    return orElseValue;
                 }
-                return iInterface;
+
+                IThanos thanos = ThanosManagerNative.getDefault();
+                if (thanos == null) {
+                    return orElseValue;
+                }
+                IPrivacyManager priv = thanos.getPrivacyManager();
+                if (priv == null) {
+                    return orElseValue;
+                }
+                if (!priv.isPrivacyEnabled()) {
+                    return orElseValue;
+                }
+
+                boolean enabledUid = priv.isPackageFieldsProfileSelected(callPackageName);
+                if (!enabledUid) {
+                    return orElseValue;
+                }
+
+                // Skip if not set.
+                Fields f = priv
+                        .getSelectedFieldsProfileForPackage(callPackageName, privacyOp);
+                if (f == null) {
+                    return orElseValue;
+                }
+                T res = mapper.apply(f);
+                if (res == null) {
+                    return orElseValue;
+                }
+                return res;
+            } catch (Throwable e) {
+                XLog.e("getHookFieldProfileOr error", e);
+                return orElseValue;
             }
-        });
+        }
     }
 
-    // String getDeviceId(String callingPackage) throws RemoteException;
-    // String getDeviceIdWithFeature(String callingPackage, String callingFeatureId) throws RemoteException;
-    private Object handleGetDeviceIdWithFeature(ITelephony iTelephony, Object proxy, Method method, Object[] args) throws Throwable {
-        String callerPkg = (String) args[0];
-        if (callerPkg == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        IThanos thanos = ThanosManagerNative.getDefault();
-        if (thanos == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        IPrivacyManager priv = thanos.getPrivacyManager();
-        if (priv == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        if (!priv.isPrivacyEnabled()) {
-            return tryInvoke(iTelephony, method, args);
-        }
-
-        boolean selected = priv.isPackageFieldsProfileSelected(callerPkg);
-        if (!selected) {
-            return tryInvoke(iTelephony, method, args);
-        }
-
-        // Skip if not set.
-        Fields f = priv
-                .getSelectedFieldsProfileForPackage(callerPkg, PrivacyManager.PrivacyOp.OP_DEVICE_ID);
-        if (f == null || TextUtils.isEmpty(f.getDeviceId())) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        XLog.w("getDeviceIdWithFeature: %s, using value: %s", callerPkg, f.getDeviceId());
-        return f.getDeviceId();
-    }
-
-    // public String getLine1NumberForDisplay(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
-    private Object handleGetLine1NumberForDisplay(ITelephony iTelephony, Object proxy, Method method, Object[] args) throws Throwable {
-        String callPackageName = (String) args[1];
-
-        if (callPackageName == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-
-        IThanos thanos = ThanosManagerNative.getDefault();
-        if (thanos == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        IPrivacyManager priv = thanos.getPrivacyManager();
-        if (priv == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        if (!priv.isPrivacyEnabled()) {
-            return tryInvoke(iTelephony, method, args);
-        }
-
-        boolean selected = priv.isPackageFieldsProfileSelected(callPackageName);
-        if (!selected) {
-            return tryInvoke(iTelephony, method, args);
-        }
-
-        // Skip if not set.
-        Fields f = priv
-                .getSelectedFieldsProfileForPackage(callPackageName, PrivacyManager.PrivacyOp.OP_LINE1NUM);
-        if (f == null || TextUtils.isEmpty(f.getLine1Number())) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        XLog.w("getLine1NumberForDisplay: %s, using value: %s", callPackageName, f.getLine1Number());
-        return f.getLine1Number();
-    }
-
-    // public String getImeiForSlot(int slotIndex, String callingPackage, String callingFeatureId) throws RemoteException
-    private Object handleGetImeiForSlot(ITelephony iTelephony, Object proxy, Method method, Object[] args) throws Throwable {
-        String callPackageName = (String) args[1];
-        if (callPackageName == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-
-        IThanos thanos = ThanosManagerNative.getDefault();
-        if (thanos == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        IPrivacyManager priv = thanos.getPrivacyManager();
-        if (priv == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        if (!priv.isPrivacyEnabled()) {
-            return tryInvoke(iTelephony, method, args);
-        }
-
-        boolean enabledUid = priv.isPackageFieldsProfileSelected(callPackageName);
-        if (!enabledUid) {
-            return tryInvoke(iTelephony, method, args);
-        }
-
-        // Skip if not set.
-        Fields f = priv
-                .getSelectedFieldsProfileForPackage(callPackageName, PrivacyManager.PrivacyOp.OP_IMEI);
-        if (f == null) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        int slotIndex = (int) args[0];
-        String res = f.getImei(slotIndex);
-        if (TextUtils.isEmpty(res)) {
-            return tryInvoke(iTelephony, method, args);
-        }
-        XLog.w("getImei: %s, index: %s, using value: %s", callPackageName, slotIndex, res);
-        return res;
-    }
 }

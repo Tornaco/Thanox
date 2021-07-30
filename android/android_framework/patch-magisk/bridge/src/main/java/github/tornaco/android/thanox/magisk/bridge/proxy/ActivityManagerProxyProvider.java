@@ -7,8 +7,6 @@ import android.content.ComponentName;
 import android.os.IBinder;
 import android.os.IInterface;
 
-import com.elvishew.xlog.XLog;
-
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
@@ -41,8 +39,10 @@ public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTra
                                 if ("bindIsolatedService".equals(method.getName())) {
                                     // FIX Service binding error.
                                     int res = (int) tryInvoke(am, method, args);
+                                    logging("IActivityManager bindIsolatedService, res=" + res);
                                     if (res < 0) {
-                                        XLog.w("IActivityManager bindIsolatedService result < 0, we will fix it to 0.");
+                                        logging("IActivityManager bindIsolatedService result < 0, we will fix it to 0, "
+                                                + Arrays.toString(args));
                                         res = 0;
                                     }
                                     return res;
@@ -59,7 +59,8 @@ public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTra
                                     if (componentName.getPackageName().equals("!")
                                             || componentName.getPackageName().equals("?")
                                             || componentName.getPackageName().equals("!!")) {
-                                        XLog.w("IActivityManager Try to fix startServiceLocked ERROR throw by system!!!");
+                                        logging("IActivityManager Try to fix startServiceLocked ERROR throw by system!!!"
+                                                + Arrays.toString(args));
                                         return null;
                                     }
                                     return componentName;

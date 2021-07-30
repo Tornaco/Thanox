@@ -1,5 +1,7 @@
 package github.tornaco.android.thanox.magisk.bridge;
 
+import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
+
 import android.app.ActivityManager;
 import android.app.IActivityManager;
 import android.content.Context;
@@ -19,14 +21,13 @@ import github.tornaco.android.thanox.magisk.bridge.proxy.Proxies;
 import lombok.AllArgsConstructor;
 import util.XposedHelpers;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
-
 public class SystemServiceHookInstaller {
     private static final Singleton<IActivityManager> IActivityManagerSingletonProxy =
             new Singleton<IActivityManager>() {
                 @Override
                 protected IActivityManager create() {
-                    final IBinder b = new ActivityManagerProxyProvider().provide(ServiceManager.getService(Context.ACTIVITY_SERVICE));
+                    final IBinder orig = ServiceManager.getService(Context.ACTIVITY_SERVICE);
+                    final IBinder b = orig == null ? null : new ActivityManagerProxyProvider().provide(orig);
                     final IActivityManager am = IActivityManager.Stub.asInterface(b);
                     logging("IActivityManagerSingletonProxy create " + am);
                     return am;

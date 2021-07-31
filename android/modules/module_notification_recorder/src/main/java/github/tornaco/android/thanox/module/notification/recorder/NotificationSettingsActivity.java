@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 import java.util.Objects;
 
-import github.tornaco.android.rhino.annotations.Verify;
+import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 

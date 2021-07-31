@@ -24,7 +24,7 @@ import com.elvishew.xlog.XLog;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import github.tornaco.android.rhino.annotations.Verify;
+import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;

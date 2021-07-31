@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
-import github.tornaco.android.rhino.annotations.Verify;
+import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.practice.honeycomb.locker.databinding.ModuleLockerPinLockSetupFragmentBinding;
 

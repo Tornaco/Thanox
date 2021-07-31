@@ -24,7 +24,7 @@ import com.vic797.syntaxhighlight.SyntaxListener;
 
 import java.util.Objects;
 
-import github.tornaco.android.rhino.annotations.Verify;
+import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleAddCallback;

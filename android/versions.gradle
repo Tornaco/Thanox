@@ -57,9 +57,9 @@ versions.common_io = "2.6"
 versions.commons_codec = "1.10"
 versions.commons_lang = "2.6"
 versions.nitro = "1.0.0"
-versions.rhino = "1.1.2-SNAPSHOT"
 versions.pro_feature = "1.0.0"
 versions.javassist = "3.26.0-GA"
+versions.thanos_internal_version = "1.0.0-SNAPSHOT"
 ext.versions = versions
 
 def deps = [:]
@@ -77,9 +77,6 @@ ext.deps = deps
 
 deps.nitro_plugin = "github.tornaco.nitro:nitro_plugin:$versions.nitro"
 
-deps.rhino_plugin_stub_gen = "rhino:rhino_plugin_stub_gen:$versions.rhino"
-deps.rhino_plugin_patch_gen = "rhino:rhino_plugin_patch_gen:$versions.rhino"
-deps.rhino_runtime_framework = "rhino:rhino_runtime_framework:$versions.rhino"
 
 // https://github.com/bintray/gradle-bintray-plugin
 deps.bintray_plugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
@@ -185,12 +182,18 @@ deps.licensesdialog = "de.psdev.licensesdialog:licensesdialog:$versions.licenses
 
 deps.javassist = "org.javassist:javassist:$versions.javassist"
 
+def thanos_internal = [:]
+def group_rhino = "github.tornaco.android.thanos.rhino-verify"
+thanos_internal.rhino = "$group_rhino:rhino_plugin_stub_gen:$versions.thanos_internal_version"
+deps.thanos_internal = thanos_internal
+
 ext.deps = deps
 
 def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
     handler.mavenCentral()
+    handler.mavenLocal()
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     handler.maven { url 'https://jitpack.io' }
     handler.maven {

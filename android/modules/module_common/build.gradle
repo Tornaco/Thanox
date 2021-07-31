@@ -59,7 +59,7 @@ dependencies {
 
     // Tor
     api deps.tornaco.android_common
-    api deps.thanos_internal.rhino
+    api deps.thanos_internal.rhino_annotations
 
     api project(':android_framework:base')
 

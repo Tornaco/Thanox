@@ -184,7 +184,8 @@ deps.javassist = "org.javassist:javassist:$versions.javassist"
 
 def thanos_internal = [:]
 def group_rhino = "github.tornaco.android.thanos.rhino-verify"
-thanos_internal.rhino = "$group_rhino:rhino_plugin_stub_gen:$versions.thanos_internal_version"
+thanos_internal.rhino_annotations = "$group_rhino:rhino_annotations:$versions.thanos_internal_version"
+thanos_internal.rhino_plugin = "$group_rhino:rhino_plugin_stub_gen:$versions.thanos_internal_version"
 deps.thanos_internal = thanos_internal
 
 ext.deps = deps

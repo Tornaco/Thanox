@@ -103,22 +103,22 @@ public class TelephonyManagerProxyProvider {
 
         @Override
         public String getNetworkCountryIso() {
-            return getHookedSimCountryIsoOr(super.getNetworkCountryIso());
+            return getHookedNetworkCountryIsoOr(super.getNetworkCountryIso());
         }
 
         @Override
         public String getNetworkCountryIso(int slotIndex) {
-            return getHookedSimCountryIsoOr(super.getNetworkCountryIso(slotIndex));
+            return getHookedNetworkCountryIsoOr(super.getNetworkCountryIso(slotIndex));
         }
 
         @Override
         public String getNetworkOperatorName() {
-            return getHookSimOperatorNameOr(super.getNetworkOperatorName());
+            return getHookNetworkOperatorNameOr(super.getNetworkOperatorName());
         }
 
         @Override
         public String getNetworkOperatorName(int subId) {
-            return getHookSimOperatorNameOr(super.getNetworkOperatorName(subId));
+            return getHookNetworkOperatorNameOr(super.getNetworkOperatorName(subId));
         }
 
         @Override
@@ -128,12 +128,12 @@ public class TelephonyManagerProxyProvider {
 
         @Override
         public String getNetworkOperator(int subId) {
-            return getHookSimOperatorOr(super.getNetworkOperator(subId));
+            return getHookNetworkOperatorOr(super.getNetworkOperator(subId));
         }
 
         @Override
         public String getNetworkOperatorForPhone(int phoneId) {
-            return getHookSimOperatorOr(super.getNetworkOperatorForPhone(phoneId));
+            return getHookNetworkOperatorOr(super.getNetworkOperatorForPhone(phoneId));
         }
 
         private String getHookedDeviceIdOr(String elseValue) {
@@ -155,11 +155,23 @@ public class TelephonyManagerProxyProvider {
         }
 
         private String getHookSimOperatorNameOr(String elseValue) {
-            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_OPERATOR_NAME, Fields::getNetOperatorName, elseValue);
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_SIM_OPERATOR_NAME, Fields::getSimOperatorName, elseValue);
         }
 
         private String getHookSimOperatorOr(String elseValue) {
-            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_OPERATOR, Fields::getNetOperator, elseValue);
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_SIM_OPERATOR, Fields::getSimOperator, elseValue);
+        }
+
+        private String getHookedNetworkCountryIsoOr(String elseValue) {
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_NETWORK_CONTRY_ISO, Fields::getNetCountryIso, elseValue);
+        }
+
+        private String getHookNetworkOperatorNameOr(String elseValue) {
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_NETWORK_OPERATOR_NAME, Fields::getNetOperatorName, elseValue);
+        }
+
+        private String getHookNetworkOperatorOr(String elseValue) {
+            return getHookFieldProfileOr(PrivacyManager.PrivacyOp.OP_NETWORK_OPERATOR, Fields::getNetOperator, elseValue);
         }
 
         private <T> T getHookFieldProfileOr(int privacyOp, Function<Fields, T> mapper, T orElseValue) {

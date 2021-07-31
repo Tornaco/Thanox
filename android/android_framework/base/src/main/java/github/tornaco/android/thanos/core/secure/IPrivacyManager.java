@@ -112,6 +112,18 @@ public interface IPrivacyManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public java.lang.String getOriginalSimOp(int subId) throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public java.lang.String getOriginalSimOpName(int subId) throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public java.lang.String getOriginalNetworkCountryIso() throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override public java.lang.String getOriginalNetworkOp(int subId) throws android.os.RemoteException
     {
       return null;
@@ -426,6 +438,34 @@ public interface IPrivacyManager extends android.os.IInterface
         {
           data.enforceInterface(descriptor);
           java.lang.String _result = this.getOriginalSimCountryIso();
+          reply.writeNoException();
+          reply.writeString(_result);
+          return true;
+        }
+        case TRANSACTION_getOriginalSimOp:
+        {
+          data.enforceInterface(descriptor);
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _result = this.getOriginalSimOp(_arg0);
+          reply.writeNoException();
+          reply.writeString(_result);
+          return true;
+        }
+        case TRANSACTION_getOriginalSimOpName:
+        {
+          data.enforceInterface(descriptor);
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _result = this.getOriginalSimOpName(_arg0);
+          reply.writeNoException();
+          reply.writeString(_result);
+          return true;
+        }
+        case TRANSACTION_getOriginalNetworkCountryIso:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _result = this.getOriginalNetworkCountryIso();
           reply.writeNoException();
           reply.writeString(_result);
           return true;
@@ -1043,6 +1083,68 @@ public interface IPrivacyManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public java.lang.String getOriginalSimOp(int subId) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(subId);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalSimOp, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getOriginalSimOp(subId);
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public java.lang.String getOriginalSimOpName(int subId) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(subId);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalSimOpName, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getOriginalSimOpName(subId);
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public java.lang.String getOriginalNetworkCountryIso() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalNetworkCountryIso, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getOriginalNetworkCountryIso();
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       @Override public java.lang.String getOriginalNetworkOp(int subId) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -1114,8 +1216,11 @@ public interface IPrivacyManager extends android.os.IInterface
     static final int TRANSACTION_getUsageForFieldsProfile = (android.os.IBinder.FIRST_CALL_TRANSACTION + 24);
     static final int TRANSACTION_getUsagePackagesForFieldsProfile = (android.os.IBinder.FIRST_CALL_TRANSACTION + 25);
     static final int TRANSACTION_getOriginalSimCountryIso = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
-    static final int TRANSACTION_getOriginalNetworkOp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
-    static final int TRANSACTION_getOriginalNetworkOpName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
+    static final int TRANSACTION_getOriginalSimOp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
+    static final int TRANSACTION_getOriginalSimOpName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
+    static final int TRANSACTION_getOriginalNetworkCountryIso = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
+    static final int TRANSACTION_getOriginalNetworkOp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
+    static final int TRANSACTION_getOriginalNetworkOpName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.secure.IPrivacyManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1160,6 +1265,9 @@ public interface IPrivacyManager extends android.os.IInterface
   public int getUsageForFieldsProfile(java.lang.String id) throws android.os.RemoteException;
   public java.util.List<java.lang.String> getUsagePackagesForFieldsProfile(java.lang.String id) throws android.os.RemoteException;
   public java.lang.String getOriginalSimCountryIso() throws android.os.RemoteException;
+  public java.lang.String getOriginalSimOp(int subId) throws android.os.RemoteException;
+  public java.lang.String getOriginalSimOpName(int subId) throws android.os.RemoteException;
+  public java.lang.String getOriginalNetworkCountryIso() throws android.os.RemoteException;
   public java.lang.String getOriginalNetworkOp(int subId) throws android.os.RemoteException;
   public java.lang.String getOriginalNetworkOpName(int subId) throws android.os.RemoteException;
 }

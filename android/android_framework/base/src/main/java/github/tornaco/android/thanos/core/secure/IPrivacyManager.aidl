@@ -41,6 +41,11 @@ interface IPrivacyManager {
     List<String> getUsagePackagesForFieldsProfile(String id);
 
     String getOriginalSimCountryIso();
+    String getOriginalSimOp(int subId);
+    String getOriginalSimOpName(int subId);
+
+    String getOriginalNetworkCountryIso();
     String getOriginalNetworkOp(int subId);
     String getOriginalNetworkOpName(int subId);
+
 }

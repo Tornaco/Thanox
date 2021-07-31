@@ -1,5 +1,6 @@
 package github.tornaco.android.thanos.core.secure;
 
+import android.os.RemoteException;
 import android.telephony.SubscriptionInfo;
 
 import java.util.List;
@@ -14,15 +15,22 @@ public class PrivacyManager {
   public static class PrivacyOp {
 
     public static final int OP_NO_OP = -1;
+
     public static final int OP_ANDROID_ID = 0x1;
     public static final int OP_DEVICE_ID = 0x2;
     public static final int OP_LINE1NUM = 0x3;
     public static final int OP_SIM_SERIAL = 0x4;
     public static final int OP_IMEI = 0x5;
     public static final int OP_MEID = 0x6;
+
+    // SIM
     public static final int OP_SIM_CONTRY_ISO = 0x7;
-    public static final int OP_OPERATOR_NAME = 0x8;
-    public static final int OP_OPERATOR = 0x9;
+    public static final int OP_SIM_OPERATOR_NAME = 0x8;
+    public static final int OP_SIM_OPERATOR = 0x9;
+
+    public static final int OP_NETWORK_CONTRY_ISO = 0x10;
+    public static final int OP_NETWORK_OPERATOR_NAME = 0x11;
+    public static final int OP_NETWORK_OPERATOR = 0x12;
   }
 
   private final IPrivacyManager server;
@@ -170,5 +178,20 @@ public class PrivacyManager {
   @SneakyThrows
   public String getOriginalNetworkOpName(int subId) {
     return server.getOriginalNetworkOpName(subId);
+  }
+
+  @SneakyThrows
+  public String getOriginalSimOp(int subId) {
+    return server.getOriginalSimOp(subId);
+  }
+
+  @SneakyThrows
+  public String getOriginalSimOpName(int subId) {
+    return server.getOriginalSimOpName(subId);
+  }
+
+  @SneakyThrows
+  public String getOriginalNetworkCountryIso() {
+    return server.getOriginalNetworkCountryIso();
   }
 }

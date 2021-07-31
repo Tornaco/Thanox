@@ -40,14 +40,14 @@ public class SystemPropProxy {
             return composeTelephonyPropValuesWithPhoneCount(f.getSimCountryIso());
         } else if ("gsm.operator.numeric".equals(key)) {
             Fields f = priv
-                    .getSelectedFieldsProfileForPackage(callerPkg, PrivacyManager.PrivacyOp.OP_OPERATOR);
+                    .getSelectedFieldsProfileForPackage(callerPkg, PrivacyManager.PrivacyOp.OP_SIM_OPERATOR);
             if (f == null) {
                 return null;
             }
             return composeTelephonyPropValuesWithPhoneCount(f.getNetOperator());
         } else if ("gsm.operator.alpha".equals(key)) {
             Fields f = priv
-                    .getSelectedFieldsProfileForPackage(callerPkg, PrivacyManager.PrivacyOp.OP_OPERATOR_NAME);
+                    .getSelectedFieldsProfileForPackage(callerPkg, PrivacyManager.PrivacyOp.OP_SIM_OPERATOR_NAME);
             if (f == null) {
                 return null;
             }

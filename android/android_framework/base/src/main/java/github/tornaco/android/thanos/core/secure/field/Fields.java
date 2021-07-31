@@ -28,6 +28,11 @@ public final class Fields implements Parcelable {
   private String simSerial;
 
   private String simCountryIso;
+  private String simOperatorName;
+  private String simOperator;
+
+
+  private String netCountryIso;
   private String netOperatorName;
   private String netOperator;
 
@@ -53,6 +58,10 @@ public final class Fields implements Parcelable {
     simSerial = in.readString();
 
     simCountryIso = in.readString();
+    simOperatorName = in.readString();
+    simOperator = in.readString();
+
+    netCountryIso = in.readString();
     netOperatorName = in.readString();
     netOperator = in.readString();
 
@@ -94,6 +103,11 @@ public final class Fields implements Parcelable {
     parcel.writeString(simSerial);
 
     parcel.writeString(simCountryIso);
+    parcel.writeString(simOperatorName);
+    parcel.writeString(simOperator);
+
+
+    parcel.writeString(netCountryIso);
     parcel.writeString(netOperatorName);
     parcel.writeString(netOperator);
 

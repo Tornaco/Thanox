@@ -204,3 +204,9 @@
 -keep class util.** {*;}
 
 -keep class github.tornaco.android.thanos.BuildProp {*;}
+
+
+-keep class androidx.databinding.** {*;}
+# keep setters in Views so that animations can still work.
+# see http://proguard.sourceforge.net/manual/examples.html#beans
+-keep class * extends androidx.databinding.DataBinderMapper {*;}

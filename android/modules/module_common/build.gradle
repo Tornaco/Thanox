@@ -66,9 +66,6 @@ dependencies {
     api project(':third_party:recyclerview-fastscroll')
     api project(':third_party:search')
     api project(':third_party:badge')
-    api project(':third_party:md_dialog_library')
-    api project(':third_party:md_dialog_core')
-    api project(':third_party:md_dialog_commons')
 }
 
 apply from: '../publish_packages.gradle'

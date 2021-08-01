@@ -1,1 +1,0 @@
-$('.tooltip').tooltipster({trigger: 'click', timer: 1500});

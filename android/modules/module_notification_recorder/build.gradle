@@ -32,11 +32,6 @@ android {
 }
 
 dependencies {
-    // Test
-    testImplementation deps.junit
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     // Support Libraries
     implementation deps.support.app_compat
     implementation deps.support.material
@@ -58,6 +53,9 @@ dependencies {
     implementation project(':third_party:dateformatter')
 
     implementation project(':android_framework:base')
+    implementation project(':third_party:recyclerview-fastscroll')
+    implementation project(':third_party:search')
+    implementation project(':third_party:badge')
 }
 
 buildDir = rootProject.projectDir.path + "/out/module_notification_recorder"

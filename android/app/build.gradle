@@ -94,6 +94,7 @@ android {
         exclude 'META-INF/LICENSE-LGPL-3.txt'
         exclude 'META-INF/LICENSE-W3C-TEST'
         exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/base.kotlin_module'
     }
 }
 
@@ -155,8 +156,14 @@ dependencies {
     implementation deps.thanos_internal.services
     implementation deps.thanos_internal.patchx_entry
 
-
     implementation project(':nitro:nitro_framework')
+
+    implementation project(':third_party:apkbuilder')
+    implementation project(':third_party:badge')
+    implementation project(':third_party:time-duration-picker')
+    implementation project(':third_party:dateformatter')
+    implementation project(':third_party:recyclerview-fastscroll')
+    implementation project(':third_party:search')
 }
 
 buildDir = rootProject.projectDir.path + "/out/app/"

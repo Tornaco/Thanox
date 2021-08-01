@@ -61,15 +61,11 @@ dependencies {
     api deps.tornaco.android_common
     api deps.thanos_internal.rhino_annotations
 
-    api project(':android_framework:base')
+    implementation project(':android_framework:base')
 
-    api project(':third_party:recyclerview-fastscroll')
-    api project(':third_party:search')
-    api project(':third_party:badge')
-    api project(':third_party:apkbuilder')
-    api project(':third_party:dateformatter')
-    api project(':third_party:time-duration-picker')
-
+    implementation project(':third_party:recyclerview-fastscroll')
+    implementation project(':third_party:search')
+    implementation project(':third_party:badge')
 }
 
 apply from: '../publish_packages.gradle'

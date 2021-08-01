@@ -67,11 +67,15 @@ dependencies {
     // Projects
     implementation project(":third_party:pinlockview")
     implementation project(":third_party:patternlockview")
-    implementation project(':third_party:recyclerview-fastscroll')
 
     implementation project(':modules:module_common')
 
     implementation project(':android_framework:base')
+
+    implementation project(':third_party:badge')
+    implementation project(':third_party:recyclerview-fastscroll')
+    implementation project(':third_party:search')
+    implementation project(':third_party:badge')
 }
 
 buildDir = rootProject.projectDir.path + "/out/module_locker"

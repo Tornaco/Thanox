@@ -50,16 +50,16 @@ public class ProcessManageAdapter extends RecyclerView.Adapter<ProcessManageAdap
             return true;
         });
 
-        holder.binding.setBadge1(model.mSizeStr);
+        holder.binding.setBadge1Str(model.mSizeStr);
         XLog.v("mCurSizeStr: %s", model.mCurSizeStr);
         XLog.v("mSizeStr: %s", model.mSizeStr);
         XLog.v("mSize: %s", model.mSize);
 
         String idleBadge = holder.binding.appItemRoot.getContext().getString(R.string.badge_app_idle);
         if (appInfo.isIdle()) {
-            holder.binding.setBadge2(idleBadge);
+            holder.binding.setBadge2Str(idleBadge);
         } else {
-            holder.binding.setBadge2(null);
+            holder.binding.setBadge2Str(null);
         }
 
         holder.binding.executePendingBindings();

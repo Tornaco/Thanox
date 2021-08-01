@@ -64,6 +64,9 @@ dependencies {
     annotationProcessor project(':annotation_processors:permission-requester-compiler')
 
     implementation project(':modules:module_filepicker')
+    implementation project(':third_party:recyclerview-fastscroll')
+    implementation project(':third_party:search')
+    implementation project(':third_party:badge')
 }
 
 buildDir = rootProject.projectDir.path + "/out/module_activity_trampoline_"

@@ -32,11 +32,6 @@ android {
 }
 
 dependencies {
-    // Test
-    testImplementation deps.junit
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     // Support Libraries
     implementation deps.support.app_compat
     implementation deps.support.material

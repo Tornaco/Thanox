@@ -19,11 +19,11 @@
                 type="android.view.View.OnClickListener" />
 
         <variable
-                name="badge1"
+                name="badge1Str"
                 type="String" />
 
         <variable
-                name="badge2"
+                name="badge2Str"
                 type="String" />
     </data>
 
@@ -88,7 +88,7 @@
                     android:layout_toStartOf="@id/badge2"
                     android:background="?colorAccent"
                     android:singleLine="true"
-                    android:text="@{badge1}"
+                    android:text="@{badge1Str}"
                     android:textColor="@color/md_white"
                     android:textSize="@dimen/list_item_main_text_size_ext_small"
                     android:visibility="@{badge1 == null ? View.INVISIBLE : View.VISIBLE}"
@@ -105,7 +105,7 @@
                     android:layout_marginEnd="@dimen/common_view_margin_default"
                     android:background="@color/md_grey_500"
                     android:singleLine="true"
-                    android:text="@{badge2}"
+                    android:text="@{badge2Str}"
                     android:textColor="@color/md_white"
                     android:textSize="@dimen/list_item_main_text_size_ext_small"
                     android:visibility="@{badge2 == null ? View.INVISIBLE : View.VISIBLE}"

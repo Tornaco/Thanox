@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="process_manage_categories">
+        <item>@string/running_process_running</item>
+        <item>@string/running_process_background</item>
+        <item>@string/running_process_all</item>
+    </string-array>
+
+    <string-array name="swipe_refresh_colors">
+        <item>@color/md_amber_500</item>
+        <item>@color/md_lime_500</item>
+        <item>@color/md_green_500</item>
+        <item>@color/md_red_500</item>
+    </string-array>
+
+    <string-array name="smart_freeze_screen_off_clean_delay_entry">
+        <item>No</item>
+        <item>1 min</item>
+        <item>2 min</item>
+        <item>3 min</item>
+        <item>5 min</item>
+        <item>8 min</item>
+        <item>10 min</item>
+        <item>20 min</item>
+        <item>60 min</item>
+    </string-array>
+
+    <string-array name="smart_freeze__screen_off_clean_delay_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>5</item>
+        <item>8</item>
+        <item>10</item>
+        <item>20</item>
+        <item>60</item>
+    </string-array>
+
+    <string-array name="recent_task_exclude_entry">
+        <item>@string/pre_entry_exclude_recent_task_default</item>
+        <item>@string/pre_entry_exclude_recent_task_include</item>
+        <item>@string/pre_entry_exclude_recent_task_exclude</item>
+    </string-array>
+
+    <string-array name="recent_task_exclude_value">
+        <item>0</item>
+        <item>1</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="start_record_chart_categories">
+        <item>@string/start_record_blocked</item>
+        <item>@string/start_record_allowed</item>
+        <item>@string/start_record_merged</item>
+    </string-array>
+</resources>

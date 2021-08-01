@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="tile"
+                type="github.tornaco.android.thanos.dashboard.Tile" />
+
+        <variable
+                name="isLastOne"
+                type="boolean" />
+
+        <variable
+                name="checkable"
+                type="boolean" />
+
+    </data>
+
+    <RelativeLayout
+            android:id="@+id/tile_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/dashboard_tile_image_size_large"
+                android:layout_height="@dimen/dashboard_tile_image_size_large"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dashboard_tile_image_margin_end"
+                android:featureIcon="@{tile.iconRes}"
+                android:iconThemeColor="@{tile.themeColor}"
+                android:padding="@dimen/dashboard_tile_image_padding"
+                tools:src="@drawable/module_common_ic_settings_fill" />
+
+        <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/common_view_margin_small"
+                android:layout_marginTop="@dimen/common_view_margin_small"
+                android:layout_marginEnd="@dimen/common_view_margin_small"
+                android:layout_marginBottom="@dimen/common_view_margin_small"
+                android:gravity="center"
+                android:text="@{tile.title}"
+                android:textAppearance="@style/TextAppearance.TileSubTitle"
+                tools:text="Long title display example" />
+
+        <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                android:id="@+id/badge1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/icon"
+                android:layout_marginEnd="@dimen/common_view_margin_default"
+                android:layout_toEndOf="@id/icon"
+                android:background="@color/md_red_500"
+                android:singleLine="true"
+                android:text="@{tile.badge1}"
+                android:textColor="@color/md_white"
+                android:textSize="@dimen/list_item_main_text_size_ext_small"
+                android:visibility="@{tile.badge1 == null ? View.GONE : View.VISIBLE}"
+                tools:text="55"
+                tools:visibility="visible" />
+
+    </RelativeLayout>
+</layout>

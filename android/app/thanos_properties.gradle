@@ -1,0 +1,29 @@
+import java.nio.charset.Charset
+
+def updateProps() {
+    println("*** updateProps ***")
+    Properties serviceProps = new Properties()
+    // Src.
+    serviceProps.load(project.rootProject.file("thanos.properties").newDataInputStream())
+
+    // Write fields.
+    serviceProps.setProperty("thanox.build.version.code", rootProject.ext.versionCode.toString())
+    serviceProps.setProperty("thanox.build.version.name", rootProject.ext.versionName)
+    serviceProps.setProperty("thanox.build.variant", rootProject.ext.thanosBuildVariant)
+    serviceProps.setProperty("thanox.build.debuggable", rootProject.ext.thanosBuildDebug)
+    serviceProps.setProperty("thanox.build.flavor", rootProject.ext.thanosBuildFlavor)
+    serviceProps.setProperty("thanox.build.host", rootProject.ext.thanosBuildHost)
+    serviceProps.setProperty("thanox.build.fp", 'thanos@tornaco:' + UUID.nameUUIDFromBytes(
+            String.valueOf(System.currentTimeMillis()).getBytes(Charset.defaultCharset())))
+    serviceProps.setProperty("thanox.build.date", new Date().toString())
+    serviceProps.setProperty("thanox.build.app.package.name", rootProject.ext.thanosApplicationId)
+    serviceProps.setProperty("thanox.build.app.package.name.prefix", rootProject.ext.thanosApplicationIdPrefix)
+    serviceProps.setProperty("thanox.build.shortcut.package.name.prefix", rootProject.ext.thanosShortcutApplicationIdPrefix)
+
+
+    // Write to app resources.
+    serviceProps.store(project.file("src/main/resources/META-INF/thanos.properties").newDataOutputStream(), "Auto Generated, Do Not Modify.")
+    println("*** updateProps done***")
+}
+
+updateProps()

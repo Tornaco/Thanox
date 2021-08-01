@@ -66,6 +66,10 @@ dependencies {
     api project(':third_party:recyclerview-fastscroll')
     api project(':third_party:search')
     api project(':third_party:badge')
+    api project(':third_party:apkbuilder')
+    api project(':third_party:dateformatter')
+    api project(':third_party:time-duration-picker')
+
 }
 
 apply from: '../publish_packages.gradle'

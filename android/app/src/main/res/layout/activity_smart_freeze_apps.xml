@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="viewmodel"
+                type="github.tornaco.android.thanos.power.SmartFreezeAppsViewModel" />
+
+    </data>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?cardsBackgroundColor">
+
+        <com.google.android.material.appbar.AppBarLayout app:elevation="@dimen/common_toolbar_elevation"
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="?colorPrimary"
+                android:theme="?appbarTheme">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    app:popupTheme="?appbarPopupTheme"
+                    app:theme="?toolbarTheme"
+                    app:title="@string/feature_title_smart_app_freeze"
+                    app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    app:titleTextColor="?menuIconTint">
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/appbar"
+                android:orientation="vertical">
+
+            <github.tornaco.android.thanos.widget.SwitchBar
+                    android:id="@+id/switch_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:foreground="?selectableItemBackground"
+                    android:theme="?switchBarTheme"
+                    tools:ignore="UnusedAttribute" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:refreshing="@{viewmodel.isDataLoading}">
+
+                <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+                        android:id="@+id/apps"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?cardsBackgroundColor"
+                        android:listModels="@{viewmodel.listModels}"
+                        android:paddingStart="@dimen/common_view_margin_small"
+                        android:paddingTop="@dimen/common_view_margin_small"
+                        android:paddingEnd="@dimen/common_view_margin_small" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/common_view_margin_default"
+                android:textColor="@color/md_white"
+                android:tint="@color/md_white"
+                app:backgroundTint="?colorAccent"
+                app:icon="@drawable/ic_add_fill"
+                app:iconTint="@color/md_white" />
+
+    </RelativeLayout>
+
+</layout>

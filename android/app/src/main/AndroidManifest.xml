@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="github.tornaco.android.thanos">
+
+    <application
+        android:name=".ThanosApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="n">
+
+        <activity
+            android:name=".process.ProcessManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".start.StartRestrictActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".start.BackgroundRestrictActivity"
+            android:exported="false" />
+        <activity
+            android:name=".task.CleanUpOnTaskRemovedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".privacy.DataCheatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.SettingsDashboardActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".settings.UiSettingsActivity"
+            android:label="@string/pre_title_ui" />
+        <activity
+            android:name=".settings.StrategySettingsActivity"
+            android:label="@string/pre_title_strategy" />
+        <activity
+            android:name=".settings.PowerSettingsActivity"
+            android:label="@string/pre_title_power" />
+        <activity
+            android:name=".settings.DataSettingsActivity"
+            android:label="@string/pre_title_data" />
+        <activity
+            android:name=".settings.DevSettingsActivity"
+            android:label="@string/pre_title_developer" />
+        <activity
+            android:name=".settings.AboutSettingsActivity"
+            android:label="@string/pre_title_about" />
+        <activity android:name=".apps.AppsManageActivity" />
+        <activity android:name=".privacy.CheatFieldSettingsActivity" />
+        <activity android:name=".start.BgRestrictSettingsActivity" />
+
+        <activity
+            android:name=".apps.AppDetailsActivity"
+            android:enabled="true"
+            android:exported="true" />
+        <activity android:name=".notification.ScreenOnNotificationActivity" />
+        <activity android:name=".task.RecentTaskBlurListActivity" />
+        <activity android:name=".power.SmartStandbyV2Activity" />
+        <activity
+            android:name=".apps.SuggestedAppsActivity"
+            android:label="@string/feature_title_apps_manager" />
+        <activity android:name=".start.StartChartActivity" />
+        <activity android:name=".start.StartRuleActivity" />
+        <activity android:name=".power.StandByRuleActivity" />
+        <activity
+            android:name=".main.NeedRestartActivity"
+            android:theme="@style/AppThemeNeedRestart" />
+        <activity android:name=".power.SmartFreezeActivity" />
+        <activity
+            android:name=".power.ShortcutStubActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/AppThemeShortcut" />
+
+        <activity android:name=".power.SmartFreezeSettingsActivity" />
+
+        <activity android:name=".process.RunningServicesDetailsActivity" />
+        <activity android:name=".power.SmartStandbySettingsActivity" />
+        <activity android:name=".privacy.CheatRecordViewerActivity" />
+        <activity android:name=".start.DetailedStartRecordsActivity" />
+        <activity
+            android:name=".main.OneKeyBoostShortcutActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/AppThemeShortcut" />
+        <activity android:name=".main.PluginMarketActivity" />
+        <activity android:name=".infinite.InfiniteZActivity" />
+        <activity
+            android:name=".main.PluginListActivity"
+            android:label="@string/nav_title_plugin" />
+        <activity android:name=".privacy.FieldsTemplateListActivity" />
+        <activity android:name=".apps.PackageSetListActivity" />
+        <activity android:name=".apps.PackageSetEditorActivity" />
+
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="I am thanos!" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="53" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
+        <service
+            android:name=".qs.QuickConfigAppTile"
+            android:icon="@drawable/ic_settings_line_black"
+            android:label="@string/feature_title_apps_manager"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".qs.ShowCurrentActivityTile"
+            android:icon="@drawable/ic_radio_button_fill_black"
+            android:label="@string/title_show_current_activity"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".qs.ShowNetStatsTile"
+            android:icon="@drawable/ic_numbers_fill_black"
+            android:label="@string/title_net_stats"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".qs.ProfileOnOffTile"
+            android:icon="@drawable/module_profile_ic_thunderstorms_fill"
+            android:label="@string/module_profile_feature_name"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".qs.TrampolineOnOffTile"
+            android:icon="@drawable/ic_guide_fill"
+            android:label="@string/module_activity_trampoline_app_name"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".service.SuSupportService"
+            android:exported="true"
+            tools:ignore="ExportedService" />
+    </application>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+    <!-- Required permission to check licensing. -->
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+</manifest>

@@ -1,3 +1,6 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -8,6 +11,7 @@ buildscript {
         classpath deps.kotlin.plugin
         // Plugin framework
         classpath deps.nitro_plugin
+        classpath deps.thanos_internal.rhino_plugin
     }
 }
 
@@ -48,8 +52,19 @@ androidGitVersion {
     // 2041540
 }
 
-
 ext {
+    thanosApplicationIdPrefix = "github.tornaco.android.thanos"
+    thanosShortcutApplicationIdPrefix = "github.tornaco.android.thanos.shortcut"
+    thanosBuildVariant = getCurrentVariant()
+    thanosBuildDebug = Boolean.valueOf(thanosBuildVariant == "debug").toString()
+    thanosBuildFlavor = getCurrentFlavor()
+    thanosApplicationId = thanosBuildFlavor == "row" ? "${thanosApplicationIdPrefix}.pro" : "${thanosApplicationIdPrefix}"
+    thanosBuildHost = getHostName()
+    println "### thanosBuildHost: ${thanosBuildHost} ###"
+    println "### thanosBuildVariant: ${thanosBuildVariant} ###"
+    println "### thanosApplicationId: $thanosApplicationId ###"
+    lockerApplicationId = "github.tornaco.practice.honeycomb.locker"
+
     gitCommitCount = getGitCommitCount()
     println "### gitCommitCount: ${gitCommitCount} ###"
     versionCode = (androidGitVersion.code() as int) + gitCommitCount
@@ -65,5 +80,57 @@ def getGitCommitCount() {
     } catch (Throwable e) {
         e.printStackTrace()
         return 0
+    }
+}
+
+@SuppressWarnings("GrMethodMayBeStatic")
+def getHostName() {
+    return InetAddress.getLocalHost().getHostName()
+}
+
+def getCurrentVariant() {
+    Gradle gradle = getGradle()
+    String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+    println "tskReqStr: ${tskReqStr}"
+
+    Pattern pattern
+
+    if (tskReqStr.contains("assemble")) {
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    } else if (tskReqStr.contains("install")) {
+        pattern = Pattern.compile("install(\\w+)(Release|Debug)")
+    } else {
+        println("Unable to detect variant...")
+        return ""
+    }
+
+    Matcher matcher = pattern.matcher(tskReqStr)
+
+    if (matcher.find()) {
+        return matcher.group(2).toLowerCase()
+    } else {
+        println "NO MATCH FOUND"
+        return ""
+    }
+}
+
+def getCurrentFlavor() {
+    Gradle gradle = getGradle()
+    String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+
+    Pattern pattern
+
+    if (tskReqStr.contains("assemble"))
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    else
+        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+    Matcher matcher = pattern.matcher(tskReqStr)
+
+    if (matcher.find())
+        return matcher.group(1).toLowerCase()
+    else {
+        println "NO MATCH FOUND"
+        return "";
     }
 }

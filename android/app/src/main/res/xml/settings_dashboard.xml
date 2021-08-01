@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/pre_category_general">
+        <Preference
+                android:key="@string/key_app_ui"
+                app:summary="@string/pre_title_ui"
+                app:title="@string/pre_category_ui" />
+        <Preference
+                android:key="@string/key_strategy"
+                app:summary="@string/pre_title_strategy"
+                app:title="@string/pre_category_strategy" />
+        <Preference
+                android:key="@string/key_power"
+                app:summary="@string/pre_title_power"
+                app:title="@string/pre_category_power" />
+        <Preference
+                android:key="@string/key_data"
+                app:summary="@string/pre_title_data"
+                app:title="@string/pre_category_data" />
+        <Preference
+                android:key="@string/key_developer"
+                app:summary="@string/pre_title_developer"
+                app:title="@string/pre_category_dev_tools" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pre_category_about">
+        <Preference
+                android:key="@string/key_about"
+                app:summary="@string/pre_title_about"
+                app:title="@string/pre_category_about" />
+    </PreferenceCategory>
+</PreferenceScreen>

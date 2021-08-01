@@ -1,0 +1,364 @@
+<resources>
+    <string name="app_name">Thanox</string>
+
+    <!-- Switch On/Off  -->
+    <string name="switch_on_text">On</string>
+    <string name="switch_off_text">Off</string>
+
+    <string name="status_active">Active</string>
+    <string name="status_not_active">Not active</string>
+    <string name="message_active_needed">Please active thanox in XposedInstaller</string>
+    <string name="status_need_reboot">Reboot</string>
+    <string name="title_framework_error">Framework error</string>
+    <string name="message_framework_error">Thanox framework got error during initializing, please report the logs under /data/system/thanos/log to developer</string>
+
+    <string name="nav_title_boost">Boost</string>
+    <string name="nav_title_secure">Privacy</string>
+    <string name="nav_title_settings">Settings</string>
+    <string name="nav_title_feedback">Feedback</string>
+    <string name="nav_title_exp">Extension</string>
+    <string name="nav_title_plugin">Plugin</string>
+    <string name="nav_title_plugin_repo">Plugin repo</string>
+    <string name="nav_title_thanox">Thanox</string>
+
+    <string name="priv_title_fields_template">Templates</string>
+    <string name="priv_title_fields_usage_count">Selected for %s apps</string>
+    <string name="priv_title_fields_usage_count_noop">Not used</string>
+
+    <string name="title_package_sets">Package sets</string>
+    <string name="title_package_add_set">Add Package set</string>
+    <string name="title_package_edit_set">View &amp; Edit</string>
+    <string name="title_package_delete_set">Delete</string>
+    <string name="title_package_count_set">%s Apps</string>
+
+    <string name="dialog_title_plugin_installing">Installing plugin</string>
+    <string name="dialog_title_plugin_updating">Updating plugin</string>
+    <string name="dialog_title_plugin_uninstalling">Uninstalling plugin</string>
+    <string name="dialog_title_plugin_uninstall_confirm">Are you sure to uninstall this plugin?</string>
+    <string name="menu_title_uninstall_plugin">Uninstall</string>
+    <string name="menu_title_view_plugin_info">Details</string>
+
+    <string name="title_download">Download</string>
+    <string name="title_install">Install</string>
+
+    <string name="tile_category_plugin_installed">Installed</string>
+    <string name="tile_category_plugin_update_available">New version</string>
+
+    <string name="card_title_plugin_available">Install thanox plugin</string>
+    <string name="card_message_plugin_available">Discovery unstable features from thanox</string>
+
+    <string name="dialog_message_feedback">请在聊天软件群组或者前往github/tornaco/Thanox新建issue进行反馈。\n\n<b>反馈问题请务必提供下列信息：</b>\n\n1. 问题描述：xxxx  \n2. 对于这个问题我做了什么尝试，例如（如果反馈的是智能休眠不work）我尝试看了使用说明，打开了系统设置中的xxx。 \n3. 发生问题的Thanox app版本，系统的Android版本。\n4. 首先需要开启Thanox设置-开发者与极客-日志功能，查找：/sdcard/Android/data/github…thanos/cache/logging，以及/data/system/thanos/logging下的日志。</string>
+
+    <string name="title_no_plugins_installed">No plugin available</string>
+    <string name="title_plugin_reboot_take_effect">Please reboot</string>
+
+    <string name="title_show_current_activity">Show current activity</string>
+    <string name="title_net_stats">Show net stats</string>
+    <string name="reboot_needed">Reboot</string>
+    <string name="message_reboot_needed">Reboot your device to update thanox-core</string>
+    <string name="reboot_now">Reboot now</string>
+    <string name="reboot_later">Not now</string>
+
+    <string name="badge_app_running">Running</string>
+    <string name="badge_app_idle">Idle</string>
+
+    <string name="boost_status_running_apps">&#160;apps is running</string>
+    <string name="boost_status_blocked_start_count">Blocked %s app start requests</string>
+    <string name="boost_status_mem_usage_percent">Available memory %s</string>
+
+    <string name="secure_privacy_enabled_apps">apps has been restricted</string>
+    <string name="secure_privacy_request_count">Handle %s app privacy data requests</string>
+
+    <string name="boost_status_system_memory">Memory</string>
+    <string name="boost_status_system_storage">Storage</string>
+
+    <string name="feature_category_start_manage">Start</string>
+    <string name="feature_title_one_key_boost">One key boost</string>
+    <string name="feature_title_start_restrict">Background start</string>
+    <string name="feature_desc_start_restrict">Allow apps to start from background</string>
+    <string name="feature_title_bg_restrict">Background task</string>
+    <string name="feature_desc_bg_restrict_brief">Allow apps running in background</string>
+    <string name="feature_desc_bg_restrict">Allow selected apps keep running in background even if screen has been turned off, and skip these apps on one-key boost action</string>
+
+    <string name="menu_title_start_restrict_charts">Start record</string>
+    <string name="menu_title_rules">Rules</string>
+
+    <string name="feature_summary_start_restrict_rules">You can refine the association start control by making rules. For details, please refer to the novice manual. \n\nNote: The priority of the rule is greater than all other settings (for example, greening, associated startup list). \n\n Tip: Turning off rule checking may save device power.</string>
+    <string name="feature_summary_standby_restrict_rules">You can control to retain certain services, usage: KEEP $COMPONENT-NAME  \ne.g. KEEP xxx/.XService</string>
+
+    <string name="feature_category_app_clean_up">Clean</string>
+    <string name="feature_title_clean_when_task_removed">Clean tasks</string>
+    <string name="feature_desc_clean_when_task_removed">Clean background process if below selected app has been removed from recent task</string>
+    <string name="feature_desc_clean_when_task_removed_brief">Clean background process on task removed</string>
+
+    <string name="activity_title_start_restrict">Background start</string>
+    <string name="activity_title_bg_restrict">Background task</string>
+    <string name="activity_title_clean_when_task_removed">Clean tasks</string>
+
+    <string name="feature_title_process_manage">Process manager</string>
+    <string name="activity_title_process_manage">Running（%s）</string>
+    <string name="item_summary_process_count">%s processes</string>
+    <string name="item_summary_mem_size">%s</string>
+    <string name="item_summary_running_process_and_service">%1$s process(es) %2$s service(s) %3$s</string>
+    <string name="snack_process_update_message">Process list changed, please update</string>
+    <string name="snack_process_update_refresh">Update</string>
+    <string name="title_cached_background_process">缓存的后台进程</string>
+
+    <string name="feature_category_app_manage">Apps</string>
+    <string name="feature_title_apps_manager">App manager</string>
+    <string name="activity_title_apps_manager">App manager</string>
+    <string name="feature_summary_apps_manager">Manage and config per app</string>
+    <string name="titile_suggested_apps_recent_used">Recent used apps</string>
+    <string name="title_suggested_apps_view_all">Show all %s apps</string>
+
+    <string name="feature_category_privacy">Privacy</string>
+    <string name="feature_category_manage">Manage</string>
+    <string name="feature_category_protect">Protect</string>
+    <string name="feature_category_remind">Reminding</string>
+
+    <string name="feature_title_recent_task_blur">Task blur</string>
+    <string name="feature_summary_recent_task_blur">Add blur effect to recent tasks</string>
+
+    <string name="feature_title_app_lock">App lock</string>
+    <string name="feature_summary_app_lock">Show lock interface before app launch</string>
+
+    <string name="feature_category_notification">Notification</string>
+    <string name="feature_title_light_on_notification">Light up</string>
+    <string name="feature_summary_light_on_notification">Light up screen on new notification</string>
+    <string name="feature_title_push_delegate">Push delegate</string>
+
+    <string name="feature_category_plugins">Available features</string>
+
+    <string name="feature_category_ext">Extension</string>
+    <string name="feature_category_power_save">Power</string>
+    <string name="feature_title_smart_app_standby">X mode</string>
+    <string name="feature_summary_smart_app_standby">Work with selected apps below, Stop all service or make it inactive for background apps</string>
+    <string name="feature_summary_smart_app_standby_brief">Stop service or inactive for bg apps</string>
+    <string name="feature_desc_smart_app_standby">
+        1. Background apps will go into standby mode.\n
+        2. This feature works only if Adaptive battery is enabled @Android Pie+.\n
+        3. Apps in not-optimized list will be ignored.\n
+        4. Won-t work during charging
+    </string>
+
+    <string name="feature_category_apps">应用</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps">Remove and de-freeze all</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps_temp">De-freeze all temporary</string>
+    <string name="feature_title_smart_app_freeze">Smart freeze</string>
+    <string name="feature_summary_smart_app_freeze">Auto disable apps according to the profile</string>
+    <string name="feature_desc_smart_app_freeze">注意，冻结应用使用了Android系统的能力，意味着这些状态会跟随系统持久化，即使你卸载了Thanox，这些状态将依然会保留</string>
+    <string name="menu_title_create_shortcut">Create shortcut</string>
+    <string name="menu_title_create_shortcut_apk">Create proxy apk</string>
+    <string name="menu_title_broadcast_intent_shortcut">Broadcast intent shortcut</string>
+    <string name="menu_title_activity_intent_shortcut">Activity intent shortcut</string>
+    <string name="dialog_message_create_shortcut_apk">Create a shortcut stub apk, you can install this app to make a workaround of the launcher icon for disable apps</string>
+
+    <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">Enabled Adaptive Battery</string>
+    <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">
+        This feature works only if Adaptive battery is enabled @Android Pie+.
+    </string>
+
+    <string name="feature_title_infinite_z">App clone</string>
+
+    <string name="menu_title_copy">Copy</string>
+
+    <string name="menu_title_copy_pkg_name">Copy package name</string>
+    <string name="menu_title_launch_app">Launch</string>
+    <string name="menu_title_launch_system_settings">System settings</string>
+
+    <string name="feature_title_data_cheat">Incognito</string>
+    <string name="feature_desc_data_cheat">Hide SIM info, serial id etc</string>
+    <string name="activity_title_data_cheat">Incognito</string>
+    <string name="feature_summary_pkg_data_cheat">Incognito</string>
+
+    <string name="title_allow">Allow</string>
+    <string name="title_block">Deny</string>
+
+    <string name="menu_start_manage_info">Help</string>
+    <string name="info_title_start_restrict">Tips</string>
+    <string name="info_message_start_restrict">Prevent apps start from background</string>
+    <string name="info_title_bg_restrict">Tips</string>
+    <string name="info_message_bg_restrict">Background process will be clear if screen has been turned off</string>
+
+    <string name="pre_category_ui">Looks</string>
+    <string name="pre_title_ui">Themes and Icons</string>
+    <string name="pre_title_app_theme">Theme</string>
+    <string name="pre_title_app_icon_pack">Icon pack</string>
+    <string name="pre_title_app_icon_crop_to_circle">Circle icon</string>
+    <string name="pre_category_strategy">Strategy</string>
+    <string name="pre_title_strategy">Profiles and templates</string>
+    <string name="pre_category_profile">Profile</string>
+    <string name="pre_category_data">Data</string>
+    <string name="pre_title_data">Backup restore</string>
+    <string name="pre_category_about">About</string>
+    <string name="pre_title_about">About Thanox</string>
+    <string name="pre_category_dev_tools">Developers</string>
+    <string name="pre_title_developer">Developer tools</string>
+    <string name="pre_title_power">Power save settings</string>
+    <string name="pre_category_power">Power</string>
+    <string name="pre_category_app_feature_info">App info</string>
+    <string name="pre_category_app_feature_config">Configs</string>
+    <string name="pre_category_app_disable_enable">Disable</string>
+
+    <string name="pref_title_enable_logging">Enable logging</string>
+    <string name="pref_summary_enable_logging">Show logging info in console</string>
+    <string name="pref_title_show_current_activity">Show current activity</string>
+    <string name="pref_title_enable_global_white_list">Global whitelist</string>
+    <string name="pref_summary_enable_global_white_list">注意，该设置为危险设置项，经验不够丰富的同学请不要轻易尝试关闭此开关。\n为防止误操作导致系统发生致命错误，Thanox默认维护一个全局白名单，包含系统的一部分组件、电话、媒体等核心应用。\n如果你强烈希望不启用这个名单，请关闭这个开关。</string>
+    <string name="pref_title_build_info_app">App info</string>
+    <string name="pref_title_build_info_server">Core info</string>
+    <string name="pref_title_patch_info">Patch info</string>
+    <string name="pre_title_ignore_system_app">Exclude system apps</string>
+    <string name="pre_summary_ignore_system_app">Put system apps into white lists</string>
+    <string name="pref_title_enable_power_save">Power save</string>
+    <string name="dialog_title_battery_drain_fast_by_thanox">Battery drain</string>
+    <string name="dialog_message_battery_drain_fast_by_thanox">Thanox正在进行启动记录，权限访问记录，隐匿记录等，这些数据会被实时存储到文件中，这可能会加快电量的消耗速度，建议按需开启省电配置</string>
+    <string name="pref_title_enable_high_battery_drain_app_reminding">高耗电提醒</string>
+    <string name="pref_summary_enable_high_battery_drain_app_reminding">检测到耗电量高的应用之后发出通知进行提醒</string>
+
+    <string name="pref_summary_enable_power_save">Stop recording app start, ops accessing, privacy data access to save battery as much as possible</string>
+
+    <string name="pref_title_open_source_license">Open source licenses</string>
+
+    <string name="pref_title_icon_maker_remix_icon">Icon provider</string>
+    <string name="pref_summary_icon_maker_remix_icon">Remix Design © 2018 https://remixicon.com</string>
+
+    <string name="pref_title_rss_e">Groups</string>
+    <string name="pref_summary_rss_e">TG@THANOX</string>
+
+    <string name="pref_title_app_state_enabled">App is enabled</string>
+    <string name="pref_title_app_to_disable">Disable</string>
+    <string name="pref_title_app_state_disabled">App is disabled</string>
+    <string name="pref_title_app_to_enable">Enable</string>
+
+    <string name="pre_title_backup">Backup</string>
+    <string name="pre_summary_backup">Backup thanox settings to external storage</string>
+    <string name="pre_title_restore">Restore</string>
+    <string name="pre_sumary_restore">Restore thanox settings from external file. If it got failure, you can try to delete dir /data/system/thanos/ manually, or you can try to set the dir owner to 1000</string>
+    <string name="pre_title_restore_default">Restore default</string>
+    <string name="pre_summary_restore_default">Restore thanox default settings</string>
+
+    <string name="pref_title_new_installed_apps_config_enabled">Auto config</string>
+    <string name="pref_summary_new_installed_apps_config_enabled">Auto config new installed apps</string>
+    <string name="pref_title_new_installed_apps_config">Config template</string>
+    <string name="pref_summary_new_installed_apps_config">Edit template for auto configuration</string>
+
+    <string name="pref_title_config_template_category">Templates</string>
+    <string name="pref_action_create_new_config_template">Create templates</string>
+    <string name="pref_action_edit_or_view_config_template">View &amp; Edit</string>
+    <string name="pref_action_delete_config_template">Delete</string>
+    <string name="pref_action_apply_config_template">Apply from template</string>
+
+    <string name="pre_message_restore_success">Restore success, please reboot to take effect</string>
+    <string name="pre_message_backup_success">Backup success</string>
+
+    <string name="pre_cheat_field_category_original">Original field</string>
+    <string name="pre_cheat_field_category_cheated">Incognito field</string>
+    <string name="pre_cheat_field_category_others">Others</string>
+    <string name="pre_title_cheat_sim_serial">SIM serial</string>
+    
+    <string name="pre_title_cheat_sim_country_iso">SIM Country ISO</string>
+    <string name="pre_title_cheat_net_country_iso">Network Country ISO</string>
+
+    <string name="pre_title_cheat_net_op_1">Network Operator(Slot 1)</string>
+    <string name="pre_title_cheat_net_op_2">Network Operator(Slot 2)</string>
+    <string name="pre_title_cheat_net_op_3">Network Operator(Slot 3)</string>
+    <string name="pre_title_cheat_net_op_name_1">Network Operator name(Slot 1)</string>
+    <string name="pre_title_cheat_net_op_name_2">Network Operator name(Slot 2)</string>
+    <string name="pre_title_cheat_net_op_name_3">Network Operator name(Slot 3)</string>
+
+    <string name="pre_title_cheat_sim_op_1">Sim Operator(Slot 1)</string>
+    <string name="pre_title_cheat_sim_op_2">Sim Operator(Slot 2)</string>
+    <string name="pre_title_cheat_sim_op_3">Sim Operator(Slot 3)</string>
+    <string name="pre_title_cheat_sim_op_name_1">Sim Operator name(Slot 1)</string>
+    <string name="pre_title_cheat_sim_op_name_2">Sim Operator name(Slot 2)</string>
+    <string name="pre_title_cheat_sim_op_name_3">Sim Operator name(Slot 3)</string>
+
+    <string name="pre_title_cheat_net_op_name">Network Operator name(Any Slots)</string>
+    <string name="pre_title_cheat_net_op">Network Operator(Any Slots)</string>
+
+    <string name="pre_title_cheat_sim_op_name">SIM Operator name(Any Slots)</string>
+    <string name="pre_title_cheat_sim_op">SIM Operator(Any Slots)</string>
+
+
+    <string name="pre_title_cheat_line_one_num">Phone number</string>
+    <string name="pre_title_cheat_device_id">Device ID(Deprecated API)</string>
+    <string name="pre_title_cheat_android_id">Android ID</string>
+
+    <string name="pre_title_cheat_imei_slot1">IMEI(Slot 1)</string>
+    <string name="pre_title_cheat_imei_slot2">IMEI(Slot 2)</string>
+    <string name="pre_title_cheat_imei_slot3">IMEI(Slot 3)</string>
+
+    <string name="pre_title_cheat_meid_slot1">MEID(Slot 1)</string>
+    <string name="pre_title_cheat_meid_slot2">MEID(Slot 2)</string>
+    <string name="pre_title_cheat_meid_slot3">MEID(Slot 3)</string>
+
+    <string name="pre_title_cheat_not_set">Not set, won\'t cheat this field</string>
+    <string name="pre_title_cheat_installed_apps">Hide installed aps</string>
+    <string name="pre_title_cheat_show_cheated_apps_notifications">Show notification</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_delay">Screen off clean delay</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_audio">Audio playing</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_audio">Keep audio playing apps</string>
+
+    <string name="pre_title_exclude_recent_task">Exclude recent task</string>
+    <string name="pre_summary_exclude_recent_task">Set force exclude or include recent task for this app</string>
+    <string name="pre_entry_exclude_recent_task_default">Default</string>
+    <string name="pre_entry_exclude_recent_task_include">Include</string>
+    <string name="pre_entry_exclude_recent_task_exclude">Exclude</string>
+
+    <string name="cheat_field_auto_gen">Fill with random fields</string>
+
+    <string name="start_record_allowed">Allowed</string>
+    <string name="start_record_blocked">Blocked</string>
+    <string name="start_record_merged">Merged</string>
+
+    <string name="privacy_record">Cheat Records</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_skip_notification">Keep apps has notification</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">Keep apps has recent task</string>
+
+    <string name="pre_title_bg_restrict_show_notification">Show notification</string>
+    <string name="pre_summary_bg_restrict_show_notification">Display notification when pending clean up process detected</string>
+
+    <string name="badge_trying_app">TRAIL</string>
+    <string name="badge_paid_app">Paid</string>
+    <string name="badge_framework_err">Error</string>
+    <string name="badge_power_save_off">Battery</string>
+
+    <string name="title_remember">Remember</string>
+    <string name="title_app_notice">Be careful!</string>
+    <string name="message_app_notice">In some cases, your device might no longer boot after installing Thanox.\n\nIf you never heard about \"soft brick\" and \"bootloop\" before or if you don\'t know how to recover from such a situation, do <b>NOT</b> install Thanox!\n\nIn any case, having a recent backup is highly recommended.</string>
+
+    <string name="menu_title_feature_desc">Feature wiki</string>
+    <string name="menu_title_start_restrict_charts_reset">Reset</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records">View detailed records</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">Only show those of current app</string>
+    <string name="pre_category_general">General</string>
+
+    <string name="pre_title_smart_freeze_screen_off_clean_up_delay">Freeze on screen off</string>
+    <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">Freeze all apps on screen off</string>
+    <string name="pre_title_smart_freeze_screen_off_clean_up">Screen off freeze delay</string>
+
+    <string name="pre_title_smart_freeze_hide_package_change_event">Hide in Launcher</string>
+    <string name="pre_summary_smart_freeze_hide_package_change_event">If this switch enabled, Thanox will block PACKAGE CHANGED event for this package, so Launch apps will not be able to detect the package enable event.</string>
+
+    <string name="pre_category_summary_smart_freeze">By default, Thanox will freeze apps when it stopped running, task removed. \nThanox will freeze all apps during device booting up, process clean up. \nYou can also choose additional settings below.</string>
+
+    <string name="pre_category_summary_smart_standby">应用回到后台通常可能会有一些服务，进程保持活跃，这些服务或进程都有自己的使命，但遗憾的是我们用户可能无法准确的知道这些服务和进程的具体作用。\n\n你可以选择下面的干涉方式，对回到后台的应用做相应的操作，值得一提的是如果我们干涉了某个应用，它可能无法正确工作。</string>
+    <string name="pre_title_smart_standby_stop_service">停止服务</string>
+    <string name="pre_summary_smart_standby_stop_service">这会尝试停止它不在KEEP规则清单里的所有服务</string>
+    <string name="pre_title_smart_standby_bypass_if_has_n">跳过有通知的</string>
+    <string name="pre_summary_smart_standby_bypass_if_has_n">不干涉有通知的应用</string>
+    <string name="pre_title_smart_standby_set_inactive">休眠应用</string>
+    <string name="pre_summary_smart_standby_set_inactive">尝试设置应用为idle状态，基于Android默认的app standby机制实现</string>
+    <string name="pre_title_smart_standby_block_bg_service_start">阻止后台服务重启</string>
+    <string name="pre_summary_smart_standby_block_bg_service_start">应用的服务被停止以后，很有可能还会触发再次启动，打开这个开关可以阻止回到后台被停止的服务重启。需要注意，这些阻止事件也会出现在后台启动界面的阻止记录中</string>
+
+
+    <string name="title_stub_apk_app_name">App label</string>
+    <string name="title_stub_apk_app_version_code">Version code</string>
+    <string name="title_stub_apk_app_version_name">Version name</string>
+
+
+</resources>

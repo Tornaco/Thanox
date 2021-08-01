@@ -1,0 +1,21 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    compileOnly deps.lombok.core
+    annotationProcessor deps.lombok.core
+
+    compileOnly project(':android_framework:hidden-api')
+
+    implementation project(':android_framework:base')
+    implementation deps.thanos_internal.services
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="viewModel"
+                type="github.tornaco.android.thanos.process.ProcessManageViewModel" />
+
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:refreshing="@{viewModel.isDataLoading}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/apps"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?cardsBackgroundColor"
+                    android:scrollbars="none"
+                    android:mergedRunningStateItems="@{viewModel.mergedItems}" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+</layout>

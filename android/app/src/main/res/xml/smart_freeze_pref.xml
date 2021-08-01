@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/pre_category_strategy">
+
+        <Preference android:summary="@string/pre_category_summary_smart_freeze" />
+
+        <SwitchPreferenceCompat
+                android:persistent="false"
+                app:key="@string/key_smart_freeze_hide_package_change_event"
+                app:summary="@string/pre_summary_smart_freeze_hide_package_change_event"
+                app:title="@string/pre_title_smart_freeze_hide_package_change_event" />
+
+        <SwitchPreferenceCompat
+                android:persistent="false"
+                app:key="@string/key_smart_freeze_screen_off_clean_up"
+                app:summary="@string/pre_summary_smart_freeze_screen_off_clean_up_delay"
+                app:title="@string/pre_title_smart_freeze_screen_off_clean_up_delay" />
+
+        <DropDownPreference
+                android:entries="@array/smart_freeze_screen_off_clean_delay_entry"
+                android:entryValues="@array/smart_freeze__screen_off_clean_delay_value"
+                app:key="@string/key_smart_freeze_screen_off_clean_up_delay"
+                app:persistent="false"
+                app:title="@string/pre_title_smart_freeze_screen_off_clean_up"
+                app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

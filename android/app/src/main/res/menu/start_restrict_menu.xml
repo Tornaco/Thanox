@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_search"
+            android:icon="@drawable/module_common_ic_search_2_line"
+            android:title="@string/common_menu_title_search"
+            app:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/action_select_all"
+            android:title="@string/common_menu_title_select_all"
+            app:showAsAction="never" />
+
+    <item
+            android:id="@+id/action_un_select_all"
+            android:title="@string/common_menu_title_un_select_all"
+            app:showAsAction="never" />
+
+    <item
+            android:id="@+id/action_view_start_restrict_chart"
+            android:icon="@drawable/ic_file_chart_fill"
+            android:title="@string/menu_title_start_restrict_charts"
+            app:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/action_start_rule"
+            android:icon="@drawable/module_common_ic_settings_fill"
+            android:title="@string/menu_title_rules"
+            app:showAsAction="ifRoom" />
+</menu>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory>
+
+        <SwitchPreferenceCompat
+                app:key="@string/key_enable_power_save"
+                app:persistent="false"
+                app:summary="@string/pref_summary_enable_power_save"
+                app:title="@string/pref_title_enable_power_save" />
+
+        <SwitchPreferenceCompat
+                app:key="@string/key_enable_battery_drain_app_reminging"
+                app:persistent="false"
+                app:summary="@string/pref_summary_enable_high_battery_drain_app_reminding"
+                app:title="@string/pref_title_enable_high_battery_drain_app_reminding" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

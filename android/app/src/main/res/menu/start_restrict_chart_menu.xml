@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_reset"
+            android:icon="@drawable/ic_delete_bin_2_fill"
+            android:title="@string/menu_title_start_restrict_charts_reset"
+            app:showAsAction="ifRoom" />
+</menu>

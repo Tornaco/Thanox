@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/pre_cheat_field_category_cheated">
+
+        <EditTextPreference
+                app:key="@string/key_cheat_field_device_id"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_device_id" />
+
+        <EditTextPreference
+                app:key="@string/key_cheat_field_android_id"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_android_id" />
+
+        <EditTextPreference
+                app:key="@string/key_cheat_field_line1_num"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_line_one_num" />
+
+        <EditTextPreference
+                app:key="@string/key_cheat_field_sim_serial"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_sim_serial" />
+
+        <EditTextPreference
+                app:key="@string/key_cheat_field_net_country_iso"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_country_iso" />
+
+        <EditTextPreference
+                app:key="@string/key_cheat_field_net_op"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_op" />
+
+        <EditTextPreference
+                app:key="@string/key_cheat_field_net_op_name"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_op_name" />
+
+
+        <EditTextPreference
+            app:key="@string/key_cheat_field_sim_country_iso"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_country_iso" />
+
+        <EditTextPreference
+            app:key="@string/key_cheat_field_sim_op"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_op" />
+
+        <EditTextPreference
+            app:key="@string/key_cheat_field_sim_op_name"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_op_name" />
+
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_cheat_field_imei_slot_1"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_imei_slot1" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_cheat_field_imei_slot_2"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_imei_slot2" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_cheat_field_imei_slot_3"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_imei_slot3" />
+
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_cheat_field_meid_slot_1"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_meid_slot1" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_cheat_field_meid_slot_2"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_meid_slot2" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_cheat_field_meid_slot_3"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_meid_slot3" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory app:title="@string/pre_cheat_field_category_original">
+
+        <EditTextPreference
+                app:key="@string/key_original_field_device_id"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_device_id" />
+
+        <EditTextPreference
+                app:key="@string/key_original_field_android_id"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_android_id" />
+
+        <EditTextPreference
+                app:key="@string/key_original_field_line1_num"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_line_one_num" />
+
+        <EditTextPreference
+                app:key="@string/key_original_field_sim_serial"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_sim_serial" />
+
+        <EditTextPreference
+                app:key="@string/key_original_field_net_country_iso"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_country_iso" />
+
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_net_op_1"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_op_1" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_net_op_2"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_op_2" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_net_op_3"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_op_3" />
+
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_net_op_name_1"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_op_name_1" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_net_op_name_2"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_op_name_2" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_net_op_name_3"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_net_op_name_3" />
+
+
+        <EditTextPreference
+            app:key="@string/key_original_field_sim_country_iso"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_country_iso" />
+
+        <EditTextPreference
+            app:isPreferenceVisible="false"
+            app:key="@string/key_original_field_sim_op_1"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_op_1" />
+        <EditTextPreference
+            app:isPreferenceVisible="false"
+            app:key="@string/key_original_field_sim_op_2"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_op_2" />
+        <EditTextPreference
+            app:isPreferenceVisible="false"
+            app:key="@string/key_original_field_sim_op_3"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_op_3" />
+
+        <EditTextPreference
+            app:isPreferenceVisible="false"
+            app:key="@string/key_original_field_sim_op_name_1"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_op_name_1" />
+        <EditTextPreference
+            app:isPreferenceVisible="false"
+            app:key="@string/key_original_field_sim_op_name_2"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_op_name_2" />
+        <EditTextPreference
+            app:isPreferenceVisible="false"
+            app:key="@string/key_original_field_sim_op_name_3"
+            app:persistent="false"
+            app:title="@string/pre_title_cheat_sim_op_name_3" />
+
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_imei_slot_1"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_imei_slot1" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_imei_slot_2"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_imei_slot2" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_imei_slot_3"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_imei_slot3" />
+
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_meid_slot_1"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_meid_slot1" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_meid_slot_2"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_meid_slot2" />
+        <EditTextPreference
+                app:isPreferenceVisible="false"
+                app:key="@string/key_original_field_meid_slot_3"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_meid_slot3" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pre_cheat_field_category_others">
+        <SwitchPreferenceCompat
+                app:key="@string/key_cheat_field_show_cheated_app_notifications"
+                app:persistent="false"
+                app:title="@string/pre_title_cheat_show_cheated_apps_notifications" />
+    </PreferenceCategory>
+</PreferenceScreen>

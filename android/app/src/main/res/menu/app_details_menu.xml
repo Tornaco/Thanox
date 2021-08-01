@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_apply_template"
+            android:icon="@drawable/module_common_ic_settings_fill"
+            android:title="@string/pref_action_apply_config_template"
+            app:showAsAction="never" />
+</menu>

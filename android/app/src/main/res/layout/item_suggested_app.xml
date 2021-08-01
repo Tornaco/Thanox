@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="app"
+                type="github.tornaco.android.thanos.core.pm.AppInfo" />
+
+        <variable
+                name="listener"
+                type="github.tornaco.android.thanos.common.AppItemClickListener" />
+
+    </data>
+
+    <RelativeLayout
+            android:id="@+id/app_item_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:minHeight="@dimen/list_item_height"
+            android:onClick="@{() -> listener.onAppItemClick(app)}"
+            android:soundEffectsEnabled="false">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/suggested_app_icon_w"
+                android:layout_height="@dimen/suggested_app_icon_h"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dashboard_tile_image_margin_end"
+                android:appIcon="@{app}"
+                android:padding="@dimen/dashboard_tile_image_padding"
+                tools:src="@mipmap/ic_fallback_app_icon" />
+
+        <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/common_view_margin_small"
+                android:layout_marginBottom="@dimen/common_view_margin_small"
+                android:ellipsize="middle"
+                android:fadingEdge="horizontal"
+                android:maxLength="18"
+                android:singleLine="true"
+                android:text="@{app.appLabel}"
+                android:textAppearance="@style/TextAppearance.Small"
+                android:textSize="@dimen/list_item_main_text_size_small"
+                tools:text="@string/app_name" />
+
+    </RelativeLayout>
+</layout>

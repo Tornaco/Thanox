@@ -186,6 +186,13 @@ def thanos_internal = [:]
 def group_rhino = "github.tornaco.android.thanos.rhino-verify"
 thanos_internal.rhino_annotations = "$group_rhino:rhino_annotations:$versions.thanos_internal_version"
 thanos_internal.rhino_plugin = "$group_rhino:rhino_plugin_stub_gen:$versions.thanos_internal_version"
+
+def group_modules = "github.tornaco.android.thanos.modules"
+thanos_internal.module_donate = "$group_modules:module-donate:$versions.thanos_internal_version"
+
+def group_frameworks = "github.tornaco.android.thanos.frameworks"
+thanos_internal.services = "$group_frameworks:services:$versions.thanos_internal_version"
+thanos_internal.patchx_entry = "$group_frameworks:patchx-entry:$versions.thanos_internal_version"
 deps.thanos_internal = thanos_internal
 
 ext.deps = deps

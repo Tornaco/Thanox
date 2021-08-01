@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="github.tornaco.android.thanos.main.State" />
+
+        <variable
+            name="viewmodel"
+            type="github.tornaco.android.thanos.main.NavViewModel" />
+
+        <variable
+            name="stateBadgeClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="tryingBadgeClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="frameworkErrorClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="powerSaveClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout app:elevation="@dimen/common_toolbar_elevation"
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="?colorPrimary">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:title="@null"
+                app:titleTextColor="?menuIconTint">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/thanos_status_text"
+                    android:layout_alignParentEnd="true"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:src="@drawable/ic_checkbox_blank_circle_fill"
+                    android:thanosStateTint="@{viewmodel.state}"
+                    android:tint="@color/md_green_500"
+                    android:visibility="gone" />
+
+                <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?colorAccentDark"
+                    android:text="@{viewmodel.channel}"
+                    android:textColor="@color/md_white"
+                    android:visibility="@{(viewmodel.channel == null) ? View.GONE : View.VISIBLE}"
+                    tools:text="Beta" />
+
+                <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/md_purple_300"
+                    android:onClick="@{tryingBadgeClickListener}"
+                    android:text="@string/badge_trying_app"
+                    android:textColor="@color/md_white"
+                    android:visibility="@{viewmodel.isPaid ? View.GONE : View.VISIBLE}"
+                    tools:text="@string/badge_trying_app" />
+
+                <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/md_red_500"
+                    android:onClick="@{stateBadgeClickListener}"
+                    android:textColor="@color/md_white"
+                    android:thanosStateText="@{viewmodel.state}"
+                    android:visibility="@{viewmodel.state == State.Active ? View.GONE : View.VISIBLE}"
+                    tools:text="Active" />
+
+                <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/md_red_500"
+                    android:onClick="@{frameworkErrorClickListener}"
+                    android:text="@string/badge_framework_err"
+                    android:textColor="@color/md_white"
+                    android:visibility="@{viewmodel.hasFrameworkError ? View.VISIBLE : View.GONE}"
+                    tools:text="Error" />
+
+                <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/md_amber_700"
+                    android:onClick="@{powerSaveClickListener}"
+                    android:text="@string/badge_power_save_off"
+                    android:textColor="@color/md_white"
+                    android:visibility="@{viewmodel.isPowerSaveEnabled ? View.GONE : View.VISIBLE}"
+                    tools:text="Battery" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:id="@+id/product_slogan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appbar"
+            android:layout_marginTop="@dimen/common_view_margin_default"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="--- THANOS ---"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textStyle="italic"
+                tools:ignore="HardcodedText" />
+        </RelativeLayout>
+
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/product_slogan" />
+
+    </RelativeLayout>
+</layout>

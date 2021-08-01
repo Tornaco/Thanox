@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <root-path
+            name="root"
+            path="." />
+
+    <external-cache-path
+            name="ext_c"
+            path="." />
+</paths>

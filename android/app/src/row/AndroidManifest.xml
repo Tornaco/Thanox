@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="github.tornaco.android.thanos">
+
+    <application>
+        <activity
+            android:name=".app.MainActivity"
+            android:label="@string/nav_title_thanox">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+        <activity
+            android:name=".main.NavActivity"
+            android:label="@string/nav_title_thanox" >
+
+            <intent-filter>
+                <action android:name="github.tornaco.android.thanos.action.NAV_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+    </application>
+</manifest>

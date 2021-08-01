@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+            android:key="@string/key_app_ui"
+            app:title="@string/pre_category_ui">
+
+        <DropDownPreference
+                android:entries="@array/themes_entry"
+                android:entryValues="@array/themes_value"
+                app:key="@string/key_app_theme"
+                app:persistent="false"
+                app:title="@string/pre_title_app_theme"
+                app:useSimpleSummaryProvider="true" />
+
+        <DropDownPreference
+                app:key="@string/key_app_icon_pack"
+                app:persistent="false"
+                app:title="@string/pre_title_app_icon_pack" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pre_category_profile">
+
+        <SwitchPreferenceCompat
+                app:key="@string/key_new_installed_apps_config_enabled"
+                app:persistent="false"
+                app:summary="@string/pref_summary_new_installed_apps_config_enabled"
+                app:title="@string/pref_title_new_installed_apps_config_enabled" />
+
+        <Preference
+                app:key="@string/key_new_installed_apps_config"
+                app:persistent="false"
+                app:summary="@string/pref_summary_new_installed_apps_config"
+                app:title="@string/pref_title_new_installed_apps_config" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pre_category_data">
+
+        <Preference
+                app:key="@string/key_data_backup"
+                app:persistent="false"
+                app:summary="@string/pre_summary_backup"
+                app:title="@string/pre_title_backup" />
+        <Preference
+                app:key="@string/key_data_restore"
+                app:persistent="false"
+                app:summary="@string/pre_sumary_restore"
+                app:title="@string/pre_title_restore" />
+
+        <Preference
+                app:key="@string/key_restore_default"
+                app:persistent="false"
+                app:summary="@string/pre_summary_restore_default"
+                app:title="@string/pre_title_restore_default" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pre_category_dev_tools">
+
+        <SwitchPreferenceCompat
+                app:key="@string/key_enable_logging"
+                app:persistent="false"
+                app:summary="@string/pref_summary_enable_logging"
+                app:title="@string/pref_title_enable_logging" />
+
+        <SwitchPreferenceCompat
+                app:key="@string/key_show_current_activity"
+                app:persistent="false"
+                app:title="@string/pref_title_show_current_activity" />
+
+        <Preference
+                app:key="@string/key_build_info_app"
+                app:persistent="false"
+                app:title="@string/pref_title_build_info_app" />
+
+        <Preference
+                app:key="@string/key_build_info_server"
+                app:persistent="false"
+                app:title="@string/pref_title_build_info_server" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pre_category_about">
+        <Preference
+                app:key="@string/key_rss_e"
+                app:persistent="false"
+                app:summary="@string/pref_summary_rss_e"
+                app:title="@string/pref_title_rss_e" />
+        <Preference
+                app:key="@string/key_donate"
+                app:persistent="false"
+                app:title="@string/module_donate_title" />
+        <Preference
+                app:key="@string/key_icon_maker"
+                app:persistent="false"
+                app:summary="@string/pref_summary_icon_maker_remix_icon"
+                app:title="@string/pref_title_icon_maker_remix_icon" />
+        <Preference
+                app:key="@string/key_open_source_license"
+                app:persistent="false"
+                app:title="@string/pref_title_open_source_license" />
+
+        <Preference
+                app:key="@string/key_contributors"
+                app:persistent="false"
+                app:title="Contributors" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

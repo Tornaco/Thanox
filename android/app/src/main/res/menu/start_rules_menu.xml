@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/action_import"
+            android:title="@string/common_menu_title_import_from_clipboard"
+            app:showAsAction="never" />
+
+    <item
+            android:id="@+id/action_export"
+            android:title="@string/common_menu_title_export_to_clipboard"
+            app:showAsAction="never" />
+
+    <item
+            android:id="@+id/action_info"
+            android:icon="@drawable/ic_information_fill"
+            android:title="@string/menu_title_rules"
+            app:showAsAction="ifRoom" />
+</menu>

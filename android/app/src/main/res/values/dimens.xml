@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="boost_progress_bar_size">48dp</dimen>
+
+    <dimen name="app_details_app_icon_w">64dp</dimen>
+    <dimen name="app_details_app_icon_h">64dp</dimen>
+
+    <dimen name="suggested_app_icon_w">48dp</dimen>
+    <dimen name="suggested_app_icon_h">48dp</dimen>
+
+    <dimen name="smart_freeze_app_icon_w">48dp</dimen>
+    <dimen name="smart_freeze_app_icon_h">48dp</dimen>
+
+    <dimen name="need_reboot_icon_size">72dp</dimen>
+
+    <dimen name="fab_standard_45">45dp</dimen>
+    <dimen name="fab_standard_60">68dp</dimen>
+    <dimen name="fab_standard_120">138dp</dimen>
+</resources>

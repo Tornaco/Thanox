@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="key_app_ui" translatable="false">key_app_ui</string>
+    <string name="key_app_theme" translatable="false">key_app_theme</string>
+    <string name="key_app_icon_pack" translatable="false">key_app_icon_pack</string>
+    <string name="key_use_round_icon" translatable="false">key_use_round_icon</string>
+
+    <string name="key_developer" translatable="false">key_developer</string>
+    <string name="key_power" translatable="false">key_power</string>
+    <string name="key_enable_logging" translatable="false">key_enable_logging</string>
+    <string name="key_show_current_activity" translatable="false">key_show_current_activity</string>
+    <string name="key_show_net_stat" translatable="false">key_show_net_stat</string>
+    <string name="key_enable_global_white_list" translatable="false">key_enable_global_white_list</string>
+    <string name="key_enable_power_save" translatable="false">key_enable_power_save</string>
+    <string name="key_enable_battery_drain_app_reminging" translatable="false">key_enable_battery_drain_app_reminging</string>
+
+    <string name="key_about" translatable="false">key_about</string>
+    <string name="key_build_info_server" translatable="false">key_build_info_server</string>
+    <string name="key_build_info_app" translatable="false">key_build_info_app</string>
+    <string name="key_patch_info" translatable="false">key_patch_info</string>
+    <string name="key_ignore_system_app" translatable="false">key_ignore_system_app</string>
+    <string name="key_donate" translatable="false">key_donate</string>
+    <string name="key_icon_maker" translatable="false">key_icon_maker</string>
+    <string name="key_open_source_license" translatable="false">key_open_source_license</string>
+    <string name="key_rss_e" translatable="false">key_rss_e</string>
+    <string name="key_email" translatable="false">key_email</string>
+    <string name="key_contributors" translatable="false">key_contributors</string>
+
+    <string name="key_cheat_field_line1_num" translatable="false">key_cheat_field_line1_num</string>
+    <string name="key_cheat_field_device_id" translatable="false">key_cheat_field_device_id</string>
+    <string name="key_cheat_field_android_id" translatable="false">key_cheat_field_android_id</string>
+    <string name="key_cheat_field_sim_serial" translatable="false">key_cheat_field_sim_serial</string>
+
+    <string name="key_cheat_field_net_country_iso" translatable="false">key_cheat_field_net_country_iso</string>
+    <string name="key_cheat_field_net_op" translatable="false">key_cheat_field_net_op</string>
+    <string name="key_cheat_field_net_op_name" translatable="false">key_cheat_field_net_op_name</string>
+
+    <string name="key_cheat_field_sim_country_iso" translatable="false">key_cheat_field_sim_country_iso</string>
+    <string name="key_cheat_field_sim_op" translatable="false">key_cheat_field_sim_op</string>
+    <string name="key_cheat_field_sim_op_name" translatable="false">key_cheat_field_sim_op_name</string>
+
+
+    <string name="key_cheat_field_imei_slot_" translatable="false">key_cheat_field_imei_slot_</string>
+    <string name="key_cheat_field_imei_slot_1" translatable="false">key_cheat_field_imei_slot_1</string>
+    <string name="key_cheat_field_imei_slot_2" translatable="false">key_cheat_field_imei_slot_2</string>
+    <string name="key_cheat_field_imei_slot_3" translatable="false">key_cheat_field_imei_slot_3</string>
+
+    <string name="key_cheat_field_meid_slot_" translatable="false">key_cheat_field_meid_slot_</string>
+    <string name="key_cheat_field_meid_slot_1" translatable="false">key_cheat_field_meid_slot_1</string>
+    <string name="key_cheat_field_meid_slot_2" translatable="false">key_cheat_field_meid_slot_2</string>
+    <string name="key_cheat_field_meid_slot_3" translatable="false">key_cheat_field_meid_slot_3</string>
+
+    <string name="key_cheat_field_installed_apps" translatable="false">key_cheat_field_installed_apps</string>
+    <string name="key_cheat_field_show_cheated_app_notifications" translatable="false">key_cheat_field_show_cheated_app_notifications</string>
+
+    <string name="key_original_field_line1_num" translatable="false">key_original_field_line1_num</string>
+    <string name="key_original_field_device_id" translatable="false">key_original_field_device_id</string>
+    <string name="key_original_field_android_id" translatable="false">key_original_field_android_id</string>
+    <string name="key_original_field_sim_serial" translatable="false">key_original_field_sim_serial</string>
+
+    <string name="key_original_field_sim_country_iso" translatable="false">key_original_field_sim_country_iso</string>
+    <string name="key_original_field_net_country_iso" translatable="false">key_original_field_net_country_iso</string>
+
+    <string name="key_original_field_net_op_" translatable="false">key_original_field_net_op_</string>
+    <string name="key_original_field_net_op_1" translatable="false">key_original_field_net_op_1</string>
+    <string name="key_original_field_net_op_2" translatable="false">key_original_field_net_op_2</string>
+    <string name="key_original_field_net_op_3" translatable="false">key_original_field_net_op_3</string>
+
+    <string name="key_original_field_net_op_name_" translatable="false">key_original_field_net_op_name_</string>
+    <string name="key_original_field_net_op_name_1" translatable="false">key_original_field_net_op_name_1</string>
+    <string name="key_original_field_net_op_name_2" translatable="false">key_original_field_net_op_name_2</string>
+    <string name="key_original_field_net_op_name_3" translatable="false">key_original_field_net_op_name_3</string>
+
+
+    <string name="key_original_field_sim_op_" translatable="false">key_original_field_sim_op_</string>
+    <string name="key_original_field_sim_op_1" translatable="false">key_original_field_sim_op_1</string>
+    <string name="key_original_field_sim_op_2" translatable="false">key_original_field_sim_op_2</string>
+    <string name="key_original_field_sim_op_3" translatable="false">key_original_field_sim_op_3</string>
+
+    <string name="key_original_field_sim_op_name_" translatable="false">key_original_field_sim_op_name_</string>
+    <string name="key_original_field_sim_op_name_1" translatable="false">key_original_field_sim_op_name_1</string>
+    <string name="key_original_field_sim_op_name_2" translatable="false">key_original_field_sim_op_name_2</string>
+    <string name="key_original_field_sim_op_name_3" translatable="false">key_original_field_sim_op_name_3</string>
+
+    <string name="key_original_field_imei_slot_" translatable="false">key_original_field_imei_slot_</string>
+    <string name="key_original_field_imei_slot_1" translatable="false">key_original_field_imei_slot_1</string>
+    <string name="key_original_field_imei_slot_2" translatable="false">key_original_field_imei_slot_2</string>
+    <string name="key_original_field_imei_slot_3" translatable="false">key_original_field_imei_slot_3</string>
+
+    <string name="key_original_field_meid_slot_" translatable="false">key_original_field_meid_slot_</string>
+    <string name="key_original_field_meid_slot_1" translatable="false">key_original_field_meid_slot_1</string>
+    <string name="key_original_field_meid_slot_2" translatable="false">key_original_field_meid_slot_2</string>
+    <string name="key_original_field_meid_slot_3" translatable="false">key_original_field_meid_slot_3</string>
+
+    <string name="key_bg_screen_off_clean_up_delay" translatable="false">key_bg_screen_off_clean_up_delay</string>
+    <string name="key_bg_screen_off_clean_up_skip_audio" translatable="false">key_bg_screen_off_clean_up_skip_audio
+    </string>
+    <string name="key_bg_screen_off_clean_up_skip_notification" translatable="false">
+        key_bg_screen_off_clean_up_skip_notification
+    </string>
+    <string name="key_bg_screen_off_clean_up_skip_recent_task" translatable="false">
+        key_bg_screen_off_clean_up_skip_recent_task
+    </string>
+    <string name="key_bg_restrict_show_notification" translatable="false">
+        key_bg_restrict_show_notification
+    </string>
+
+    <string name="key_data" translatable="false">key_data</string>
+    <string name="key_data_backup" translatable="false">key_data_backup</string>
+    <string name="key_data_restore" translatable="false">key_data_restore</string>
+    <string name="key_restore_default" translatable="false">key_restore_default</string>
+
+    <string name="key_app_feature_config_start_restrict" translatable="false">key_app_feature_config_start_restrict
+    </string>
+    <string name="key_app_feature_config_bg_restrict" translatable="false">key_app_feature_config_bg_restrict</string>
+    <string name="key_app_feature_config_task_clean_up" translatable="false">key_app_feature_config_task_clean_up
+    </string>
+    <string name="key_app_feature_config_privacy_cheat" translatable="false">key_app_feature_config_privacy_cheat
+    </string>
+    <string name="key_app_feature_config_op_remind" translatable="false">key_app_feature_config_op_remind
+    </string>
+    <string name="key_app_feature_config_screen_on_notification" translatable="false">key_app_feature_config_screen_on_notification
+    </string>
+    <string name="key_app_feature_config_recent_task_blur" translatable="false">
+        key_app_feature_config_recent_task_blur
+    </string>
+    <string name="key_app_feature_config_smart_standby" translatable="false">
+        key_app_feature_config_smart_standby
+    </string>
+    <string name="key_app_feature_config_app_lock" translatable="false">
+        key_app_feature_config_app_lock
+    </string>
+    <string name="key_app_feature_config_smart_freeze" translatable="false">
+        key_app_feature_config_smart_freeze
+    </string>
+
+    <string name="key_app_feature_config_app_to_enable" translatable="false">key_app_feature_config_app_to_enable
+    </string>
+    <string name="key_app_feature_config_app_to_disable" translatable="false">key_app_feature_config_app_to_disable
+    </string>
+
+    <string name="key_app_feature_config_ops" translatable="false">key_app_feature_config_ops</string>
+
+    <string name="key_app_feature_config_a_manage" translatable="false">key_app_feature_config_a_manage</string>
+    <string name="key_app_feature_config_r_manage" translatable="false">key_app_feature_config_r_manage</string>
+    <string name="key_app_feature_config_s_manage" translatable="false">key_app_feature_config_s_manage</string>
+
+    <string name="key_app_feature_config_block_uninstall" translatable="false">key_app_feature_config_block_uninstall</string>
+    <string name="key_app_feature_config_block_clear_data" translatable="false">key_app_feature_config_block_clear_data</string>
+
+    <string name="key_strategy" translatable="false">key_strategy</string>
+    <string name="key_new_installed_apps_config" translatable="false">key_new_installed_apps_config</string>
+    <string name="key_new_installed_apps_config_enabled" translatable="false">key_new_installed_apps_config_enabled</string>
+    <string name="key_config_template_category" translatable="false">key_config_template_category</string>
+
+    <string name="key_recent_task_exclude_settings" translatable="false">key_recent_task_exclude_settings</string>
+
+    <string name="key_app_feature_config_app_info_detailed" translatable="false">key_app_feature_config_app_info_detailed</string>
+
+    <string name="key_smart_freeze_screen_off_clean_up_delay" translatable="false">key_smart_freeze_screen_off_clean_up_delay</string>
+    <string name="key_smart_freeze_screen_off_clean_up" translatable="false">key_smart_freeze_screen_off_clean_up</string>
+    <string name="key_smart_freeze_hide_package_change_event" translatable="false">key_smart_freeze_hide_package_change_event</string>
+
+    <string name="key_smart_standby_stop_service" translatable="false">key_smart_standby_stop_service</string>
+    <string name="key_smart_standby_set_inactive" translatable="false">key_smart_standby_set_inactive</string>
+    <string name="key_smart_standby_bypass_if_has_n" translatable="false">key_smart_standby_bypass_if_has_n</string>
+    <string name="key_smart_standby_block_bg_service_start" translatable="false">key_smart_standby_block_bg_service_start</string>
+</resources>

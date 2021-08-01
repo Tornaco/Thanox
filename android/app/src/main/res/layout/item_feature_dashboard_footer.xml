@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="footerInfo"
+                type="github.tornaco.android.thanos.dashboard.StatusFooterInfo" />
+
+    </data>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <github.tornaco.android.thanos.widget.GoogleProductSansTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/common_view_margin_default"
+                android:gravity="center"
+                android:text="@{footerInfo.footerString1}"
+                android:textColor="@color/md_grey_500"
+                android:textSize="@dimen/list_item_main_text_size_ext_small"
+                android:visibility="invisible"
+                tools:text="Powered by thanox" />
+
+    </RelativeLayout>
+
+</layout>

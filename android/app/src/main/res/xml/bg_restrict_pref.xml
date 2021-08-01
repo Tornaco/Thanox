@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/pre_category_strategy">
+
+        <Preference
+                app:key="@string/key_bg_screen_off_clean_up_delay"
+                app:persistent="false"
+                app:title="@string/pre_title_bg_screen_off_clean_up_delay" />
+
+        <SwitchPreferenceCompat
+                android:persistent="false"
+                app:key="@string/key_bg_screen_off_clean_up_skip_audio"
+                app:summary="@string/pre_summary_bg_screen_off_clean_up_skip_audio"
+                app:title="@string/pre_title_bg_screen_off_clean_up_skip_audio" />
+
+        <SwitchPreferenceCompat
+                android:persistent="false"
+                app:key="@string/key_bg_screen_off_clean_up_skip_notification"
+                app:title="@string/pre_title_bg_screen_off_clean_up_skip_notification" />
+
+        <SwitchPreferenceCompat
+                android:persistent="false"
+                app:key="@string/key_bg_screen_off_clean_up_skip_recent_task"
+                app:title="@string/pre_title_bg_screen_off_clean_up_skip_recent_task" />
+
+        <SwitchPreferenceCompat
+                android:persistent="false"
+                app:key="@string/key_bg_restrict_show_notification"
+                app:summary="@string/pre_summary_bg_restrict_show_notification"
+                app:title="@string/pre_title_bg_restrict_show_notification" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

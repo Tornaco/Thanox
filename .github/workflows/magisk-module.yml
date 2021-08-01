@@ -27,5 +27,4 @@ jobs:
       - name: Upload Magisk module
         uses: actions/upload-artifact@v2
         with:
-          name: magisk-module
           path: android/out/riru-thanox*.zip

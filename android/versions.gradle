@@ -207,6 +207,20 @@ def addRepos(RepositoryHandler handler) {
     handler.maven {
         url "$rootProject.projectDir/nitro/nitro_gradle_plugin/prebuilt_repo"
     }
+
+    handler.maven {
+        Properties properties = new Properties()
+        def localProp = project.rootProject.file('local.properties')
+        if (localProp.exists()) {
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        }
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/tornaco/Thanox-Internal")
+        credentials {
+            username = properties.containsKey("GITHUB_UNAME") ? properties.getProperty("GITHUB_UNAME") : System.getenv("USERNAME")
+            password = properties.containsKey("GITHUB_ACCESS_TOKEN") ? properties.get("GITHUB_ACCESS_TOKEN") : System.getenv("TOKEN")
+        }
+    }
 }
 
 ext.addRepos = this.&addRepos

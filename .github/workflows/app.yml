@@ -11,10 +11,10 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Dump env
-        run: echo ${GITHUB_WORKSPACE}
+        run: java -version; which java
 
       - name: Decrypt android key store
-        run:  openssl enc -aes-256-cbc -d -K ${{ secrets.K }} -iv ${{ secrets.IV }} -in ${GITHUB_WORKSPACE}/environment/keys/android-key-enc -out ${GITHUB_WORKSPACE}/environment/keys/android.jks
+        run:  openssl enc -aes-256-cbc -d -K ${{ secrets.K }} -iv ${{ secrets.IV }} -in ${GITHUB_WORKSPACE}/android/environment/keys/android-key-enc -out ${GITHUB_WORKSPACE}/android/environment/keys/android.jks
 
       - name: build
         uses: xdtianyu/actions-android-ci@master

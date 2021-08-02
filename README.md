@@ -1,8 +1,10 @@
 ## Snapshot Builds
 
-[Magisk module](https://github.com/Tornaco/Thanox/actions/workflows/magisk-module.yml)
+[![App](https://github.com/Tornaco/Thanox/actions/workflows/app.yml/badge.svg)](https://github.com/Tornaco/Thanox/actions/workflows/app.yml)
 
-[Plugins](https://github.com/Tornaco/Thanox/actions/workflows/plugins.yml)
+[![Magisk module](https://github.com/Tornaco/Thanox/actions/workflows/magisk-module.yml/badge.svg)](https://github.com/Tornaco/Thanox/actions/workflows/magisk-module.yml)
+
+[![Build Plugins](https://github.com/Tornaco/Thanox/actions/workflows/plugins.yml/badge.svg)](https://github.com/Tornaco/Thanox/actions/workflows/plugins.yml)
 
 
 ## Documents

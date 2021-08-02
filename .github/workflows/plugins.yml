@@ -27,12 +27,12 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: push-message-plugin
+          name: push-message-plugin.apk
           path: android/out/plugins/push_message_delegate/outputs/apk/debug/plugin_*.apk
           
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: su-enabler-plugin
+          name: su-enabler-plugin.apk
           path: android/out/plugins/su_enabler/outputs/apk/debug/plugin_*.apk
 

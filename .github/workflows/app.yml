@@ -34,5 +34,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: thanox.apk
-          path: out/app/outputs/apk/prc/release/thanox_*.apk
+          path: android/out/app/outputs/apk/prc/release/thanox_*.apk
 

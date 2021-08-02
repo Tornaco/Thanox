@@ -220,6 +220,10 @@ void dex(File input, File output) {
     def arg = "-JXmx5000m --output ${output.path} --min-api 29 ${input.path}"
     println("D8 args: $arg")
 
+    println "DUMP JAVA ENV"
+    def javav = "java -version".execute()
+    javav.waitForProcessOutput(System.out, System.err)
+
     def proc = "$d8 $arg".execute()
     proc.waitForProcessOutput(System.out, System.err)
 }

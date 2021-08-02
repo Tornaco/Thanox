@@ -62,6 +62,8 @@ def outDir = file("$rootDir/out")
 def magiskDir = file("$outDir/magisk_module")
 def isWindows = org.gradle.internal.os.OperatingSystem.current().isWindows()
 
+
+import org.apache.commons.io.FileUtils
 import org.apache.tools.ant.filters.FixCrLfFilter
 
 import java.nio.file.Files
@@ -201,29 +203,6 @@ void bridgeDex(String magiskDir) {
     def dexOutDir = file("${magiskDir}/system/framework/")
     dexOutDir.mkdirs()
     def output = file("${dexOutDir}/thanox-bridge.jar")
-    def input = file("../bridge/build/libs/bridge-full.jar")
-    dex(input, output)
-}
-
-void dex(File input, File output) {
-    def androidSdkDir = android.sdkDirectory.path
-    println "SDK DIR--->" + androidSdkDir
-    def buildToolsVersion = build_versions.build_tools
-
-    def d8
-    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
-        d8 = androidSdkDir + "\\build-tools\\" + buildToolsVersion + '\\d8.bat'
-    } else {
-        d8 = androidSdkDir + "/build-tools/" + buildToolsVersion + '/d8'
-    }
-
-    def arg = "-JXmx5000m --output ${output.path} --min-api 29 ${input.path}"
-    println("D8 args: $arg")
-
-    println "DUMP JAVA ENV"
-    def javav = "java -version".execute()
-    javav.waitForProcessOutput(System.out, System.err)
-
-    def proc = "$d8 $arg".execute()
-    proc.waitForProcessOutput(System.out, System.err)
+    def input = file("../bridge-dex-app/build/outputs/thanox-bridge.jar")
+    FileUtils.copyFile(input, output)
 }

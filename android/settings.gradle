@@ -46,6 +46,7 @@ include ':android_framework:hidden-api'
 
 include ':android_framework:patch-magisk:module'
 include ':android_framework:patch-magisk:bridge'
+include ':android_framework:patch-magisk:bridge-dex-app'
 include ':android_framework:patch-magisk:patch-framework'
 
 include ':android_framework:packages:installer'

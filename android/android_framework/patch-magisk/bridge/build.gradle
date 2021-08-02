@@ -1,17 +1,5 @@
-buildscript {
-    dependencies {
-        classpath deps.kotlin.plugin
-        classpath 'com.github.jengelman.gradle.plugins:shadow:5.1.0'
-    }
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-}
-
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
-apply plugin: 'com.github.johnrengelman.shadow'
 
 dependencies {
     implementation project(':android_framework:base')
@@ -29,12 +17,3 @@ compileKotlin {
         jvmTarget = "1.8"
     }
 }
-
-version = ""
-// Output to build/libs/XXX-full.jar
-shadowJar {
-    baseName = project.name + '-full'
-    classifier = null
-}
-
-build.dependsOn shadowJar

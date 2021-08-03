@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Airplane mode",
+    "description": "Show Airplane mode toast when app switched.",
+    "priority": 2,
+    "condition": "frontPkgChanged == true",
+    "actions": [
+      "ui.showShortToast(\"isAirplaneModeEnabled? \" + data.isAirplaneModeEnabled());"
+    ]
+  }
+]

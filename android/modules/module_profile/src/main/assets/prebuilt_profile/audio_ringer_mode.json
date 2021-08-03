@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Audio ringer mode",
+    "description": "Show ringer mode toast when app switched.",
+    "priority": 2,
+    "condition": "frontPkgChanged == true",
+    "actions": [
+      "ui.showShortToast(\"getRingerMode\" + audio.getRingerMode());"
+    ]
+  }
+]

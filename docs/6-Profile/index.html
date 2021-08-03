@@ -507,6 +507,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#0514-audio" class="md-nav__link">
+    0.5.14. Audio
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -781,6 +788,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#0514-audio" class="md-nav__link">
+    0.5.14. Audio
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -808,46 +822,7 @@
                 
                   <h1>情景模式（Profile）</h1>
                 
-                <!-- TOC -->
-
-<ul>
-<li><a href="#01-前言">0.1. 前言</a></li>
-<li><a href="#02-介绍">0.2. 介绍</a></li>
-<li><a href="#03-新建">0.3. 新建</a></li>
-<li><a href="#04-fatcs-params">0.4. Fatcs-params</a></li>
-<li><a href="#041-应用安装">0.4.1. 应用安装</a></li>
-<li><a href="#042-应用切换">0.4.2. 应用切换</a></li>
-<li><a href="#043-任务清理">0.4.3. 任务清理</a></li>
-<li><a href="#044-activity-created">0.4.4. Activity Created</a></li>
-<li><a href="#045-activity-resumed">0.4.5. Activity Resumed</a></li>
-<li><a href="#046-activity-changed">0.4.6. Activity Changed</a></li>
-<li><a href="#047-应用停止运行">0.4.7. 应用停止运行</a></li>
-<li><a href="#048-屏幕开关">0.4.8. 屏幕开关</a></li>
-<li><a href="#049-电量变化">0.4.9. 电量变化</a></li>
-<li><a href="#0410-蓝牙事件">0.4.10. 蓝牙事件</a></li>
-<li><a href="#0411-wifi状态变化">0.4.11. Wifi状态变化</a></li>
-<li><a href="#0412-系统启动">0.4.12. 系统启动</a></li>
-<li><a href="#0413-推送消息">0.4.13. 推送消息</a></li>
-<li><a href="#0414-通知">0.4.14. 通知</a></li>
-<li><a href="#05-handle">0.5. Handle</a></li>
-<li><a href="#051-killer">0.5.1. killer</a></li>
-<li><a href="#052-activity">0.5.2. activity</a></li>
-<li><a href="#053-power">0.5.3. power</a></li>
-<li><a href="#054-task">0.5.4. task</a></li>
-<li><a href="#055-ui">0.5.5. ui</a></li>
-<li><a href="#056-hw">0.5.6. hw</a></li>
-<li><a href="#057-io">0.5.7. io</a></li>
-<li><a href="#058-data">0.5.8. data</a></li>
-<li><a href="#059-ringtone">0.5.9. ringtone</a></li>
-<li><a href="#0510-sh">0.5.10. sh</a></li>
-<li><a href="#0511-input">0.5.11. input</a></li>
-<li><a href="#0512-pkg">0.5.12. pkg</a></li>
-<li><a href="#0513-log">0.5.13. Log</a></li>
-<li><a href="#06-全局变量">0.6. 全局变量</a></li>
-</ul>
-<!-- /TOC -->
-
-<h2 id="01">0.1. 前言</h2>
+                <h2 id="01">0.1. 前言</h2>
 <p>规则引擎：https://github.com/j-easy/easy-rules</p>
 <blockquote>
 <p>You can build a simple rules engine yourself. All you need is to create a bunch of objects with conditions and actions, store them in a collection, and run through them to evaluate the conditions and execute the actions.</p>
@@ -2255,6 +2230,13 @@ interface IIO {
 <td>如下</td>
 <td>int</td>
 </tr>
+<tr>
+<td>isAirplaneModeEnabled</td>
+<td>是否开启了飞行模式</td>
+<td>无</td>
+<td>无</td>
+<td>Boolean</td>
+</tr>
 </tbody>
 </table>
 <p>接口定义：</p>
@@ -2503,6 +2485,50 @@ interface IPkg {
 <pre><code class="language-java">@HandlerName(&quot;log&quot;)
 public interface ILog {
     void log(String content);
+}
+</code></pre>
+<h3 id="0514-audio">0.5.14. Audio</h3>
+<p>声音管理相关。</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getRingerMode</td>
+<td>获取铃音模式</td>
+<td>无</td>
+<td>无</td>
+<td>模式的int值</td>
+</tr>
+<tr>
+<td>setRingerMode</td>
+<td>设置铃音模式</td>
+<td>模式的int值</td>
+<td>无</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>铃音模式的int值标识：https://developer.android.com/reference/android/media/AudioManager#RINGER_MODE_SILENT</p>
+<p><code>int RINGER_MODE_SILENT = 0;
+int RINGER_MODE_VIBRATE = 1;
+int RINGER_MODE_NORMAL = 2;</code></p>
+</blockquote>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;audio&quot;)
+interface IAudio {
+    int getRingerMode();
+
+    // https://developer.android.com/reference/android/media/AudioManager#setRingerMode(int)
+    void setRingerMode(int ringerMode);
 }
 </code></pre>
 <h2 id="06">0.6. 全局变量</h2>

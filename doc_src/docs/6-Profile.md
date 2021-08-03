@@ -3,46 +3,6 @@ layout: post
 title: 情景模式（Profile）
 ---
 
-<!-- TOC -->
-
-- [0.1. 前言](#01-前言)
-- [0.2. 介绍](#02-介绍)
-- [0.3. 新建](#03-新建)
-- [0.4. Fatcs-params](#04-fatcs-params)
-  - [0.4.1. 应用安装](#041-应用安装)
-  - [0.4.2. 应用切换](#042-应用切换)
-  - [0.4.3. 任务清理](#043-任务清理)
-  - [0.4.4. Activity Created](#044-activity-created)
-  - [0.4.5. Activity Resumed](#045-activity-resumed)
-  - [0.4.6. Activity Changed](#046-activity-changed)
-  - [0.4.7. 应用停止运行](#047-应用停止运行)
-  - [0.4.8. 屏幕开关](#048-屏幕开关)
-  - [0.4.9. 电量变化](#049-电量变化)
-  - [0.4.10. 蓝牙事件](#0410-蓝牙事件)
-  - [0.4.11. Wifi状态变化](#0411-wifi状态变化)
-  - [0.4.12. 系统启动](#0412-系统启动)
-  - [0.4.13. 推送消息](#0413-推送消息)
-  - [0.4.14. 通知](#0414-通知)
-- [0.5. Handle](#05-handle)
-  - [0.5.1. killer](#051-killer)
-  - [0.5.2. activity](#052-activity)
-  - [0.5.3. power](#053-power)
-  - [0.5.4. task](#054-task)
-  - [0.5.5. ui](#055-ui)
-  - [0.5.6. hw](#056-hw)
-  - [0.5.7. io](#057-io)
-  - [0.5.8. data](#058-data)
-  - [0.5.9. ringtone](#059-ringtone)
-  - [0.5.10. sh](#0510-sh)
-  - [0.5.11. input](#0511-input)
-  - [0.5.12. pkg](#0512-pkg)
-  - [0.5.13. Log](#0513-log)
-- [0.6. 全局变量](#06-全局变量)
-
-<!-- /TOC -->
-
-
-
 ## 0.1. 前言
 
 规则引擎：https://github.com/j-easy/easy-rules
@@ -761,6 +721,7 @@ interface IIO {
 | getCurrentPreferredNetworkMode        | 获取当前默认卡的网络模式               | 无                          | 如下 | int                   |
 | getCurrentPreferredNetworkMode        | 获取某subId的网络模式                  | subId                       | 如下 | int                   |
 | getCurrentPreferredNetworkModeForSlot | 获取某卡槽的网络模式                   | slotId                      | 如下 | int                   |
+| isAirplaneModeEnabled                 | 是否开启了飞行模式                     | 无                          | 无   | Boolean               |
 
 接口定义：
 
@@ -955,6 +916,40 @@ public interface ILog {
     void log(String content);
 }
 ```
+
+
+### 0.5.14. Audio
+
+声音管理相关。
+
+
+| 能力           | 含义                   | 参数       | 举例 | 返回值        |
+| -------------- | ---------------------- | ---------- | ---- | ------------- |
+| getRingerMode | 获取铃音模式      | 无 | 无   | 模式的int值   |
+| setRingerMode | 设置铃音模式   | 模式的int值  | 无   | 无        |
+
+> 铃音模式的int值标识：https://developer.android.com/reference/android/media/AudioManager#RINGER_MODE_SILENT
+>
+> ```
+> int RINGER_MODE_SILENT = 0;
+> int RINGER_MODE_VIBRATE = 1;
+> int RINGER_MODE_NORMAL = 2;
+> ```
+
+
+
+接口定义：
+
+```java
+@HandlerName("audio")
+interface IAudio {
+    int getRingerMode();
+  
+  	// https://developer.android.com/reference/android/media/AudioManager#setRingerMode(int)
+    void setRingerMode(int ringerMode);
+}
+```
+
 
 
 ## 0.6. 全局变量

@@ -25,6 +25,7 @@ public class TelephonyManagerProxyProvider {
     private static final class TelephonyManagerProxy extends TelephonyManager {
         private final String opPkgName;
 
+        @SuppressLint("NewApi")
         private TelephonyManagerProxy(Context context) {
             super(context);
             this.opPkgName = context.getOpPackageName();

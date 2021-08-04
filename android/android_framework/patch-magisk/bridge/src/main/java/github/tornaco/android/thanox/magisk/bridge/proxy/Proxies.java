@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Proxies {
     private static final List<ProxyProvider> PROVIDERS_CACHE = Lists.newArrayList(
-            new AppOpsManagerProxyProvider()
     );
     private static final List<ProxyProvider> PROVIDERS_BI = Lists.newArrayList(
             new ActivityTaskManagerProxyProvider()

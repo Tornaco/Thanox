@@ -16,7 +16,7 @@
     
     
       
-        <title>安装与激活（Install & Active） - Thanox</title>
+        <title>安装与激活 - Thanox</title>
       
     
     
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              安装与激活（Install & Active）
+              安装与激活
             
           </span>
         </div>
@@ -196,12 +196,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          安装与激活（Install & Active）
+          安装与激活
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        安装与激活（Install & Active）
+        安装与激活
       </a>
       
         
@@ -227,6 +227,26 @@
   <a href="#02" class="md-nav__link">
     0.2. 激活
   </a>
+  
+    <nav class="md-nav" aria-label="0.2. 激活">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#021-xposed" class="md-nav__link">
+    0.2.1 Xposed模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#022-magisk" class="md-nav__link">
+    0.2.2 Magisk补丁模式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -339,6 +359,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7-Ref/" class="md-nav__link">
+        其他文章参考
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -373,6 +408,26 @@
   <a href="#02" class="md-nav__link">
     0.2. 激活
   </a>
+  
+    <nav class="md-nav" aria-label="0.2. 激活">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#021-xposed" class="md-nav__link">
+    0.2.1 Xposed模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#022-magisk" class="md-nav__link">
+    0.2.2 Magisk补丁模式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -430,26 +485,33 @@
               
                 
                 
-                  <h1>安装与激活（Install & Active）</h1>
+                  <h1>安装与激活</h1>
                 
-                <!-- more -->
-
-<h2 id="01">0.1. 安装</h2>
+                <h2 id="01">0.1. 安装</h2>
 <ol>
 <li>Thanox是一个独立的apk，只需要下载apk安装到设备上即可。</li>
 <li>目前仅支持<strong>Android 6.0及其以上</strong>版本的ROM。</li>
 <li>开发基于<strong>AOSP</strong>开发，理论上兼容所有类原生以及其他大部分国产ROM。</li>
 </ol>
 <h2 id="02">0.2. 激活</h2>
+<p>Thanox中大部分的功能都是在系统进程中完成的，因此Thanox会对Android系统打补丁。</p>
+<p>目前支持Xposed模式（只需要安装apk即可）与Magisk模式（需要安装apk，同时安装magisk补丁）。</p>
+<h3 id="021-xposed">0.2.1 Xposed模式</h3>
 <ol>
-<li>Thanox依赖与<strong>Xposed框架</strong>，因此你的设备必须已经正确安装了<strong>Xposed框架</strong>（或者其他类似支持Xposed API框架）。</li>
+<li>你的设备必须已经正确安装了<strong>Xposed框架</strong>（或者其他类似支持Xposed API框架）。</li>
 <li>安装Thanox apk后，进入<strong>Xposed installer</strong>应用，勾选Thanox。</li>
 <li>勾选完成，重启设备。</li>
 </ol>
+<h3 id="022-magisk">0.2.2 Magisk补丁模式</h3>
+<ol>
+<li>你的设备必须已经正确安装了<strong>Magisk框架</strong>。</li>
+<li>你的设备必须已经正确安装了<strong>riru</strong>框架。</li>
+<li>下载安装thanox的magisk模块（riru-thanox-xxx.zip），通常在<a href="https://github.com/Tornaco/Thanox/releases">github release</a>发布。</li>
+</ol>
 <h2 id="03">0.3. 更新</h2>
 <ol>
-<li>安装新版本后，请按照<strong>Xposed installer</strong>的提示进行重启。</li>
-<li>如果未收到Xposed installer的更新提示，请进入Xposed installer手动重新勾选（保持Xposed installed存储的插件apk路径为当前版本）后重新启动设备。</li>
+<li>安装新版本后，请按照<strong>Thanox</strong>或<strong>Xposed installer</strong>的提示进行重启。</li>
+<li>基于Xposed模式时，如果未收到<strong>Xposed installer</strong>的更新提示，请进入<strong>Xposed installer</strong>手动重新勾选后重新启动设备。</li>
 </ol>
 <h2 id="04">0.4. 问题排查</h2>
 <h3 id="041">0.4.1. 无法激活？</h3>
@@ -460,7 +522,7 @@
 <h3 id="043">0.4.3. 尝试上述手段依然未激活</h3>
 <p>请截取如下日志，前往github新建issue，并把日志附上：
 1. 打开<strong>Xposed installer</strong>，点击<strong>日志</strong>（log）菜单，保存日志文件。
-2. 点击这里<a href="https://github.com/Tornaco/Thanox/issues/new/choose">新建issue</a></p>
+2. 点击这里 <a href="https://github.com/Tornaco/Thanox/issues/new/choose">新建issue</a></p>
                 
                   
                 

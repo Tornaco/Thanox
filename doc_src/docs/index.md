@@ -17,7 +17,16 @@ categories: jekyll
 
 因此，**Thanox**应用在Android初始化的时候就完成了部署，设备启动完成后，用户无需进行后台的维护。
 
+
+
+![thanox-arch](assets/images/thanox-arch.png)
+
+
+
+
+
 ## 数据存储
+
 由于**Thanox**整体架构分两层，其数据也分两部分存储。
 
 * **FW**层的数据包括各功能开关有**FW**负责处理，存储在`/data/system/thanos`下。

@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://tornaco.github.io/Thanox/5-Start-Rules/">
+        <link rel="canonical" href="https://tornaco.github.io/Thanox/7-Ref/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
     
     
       
-        <title>关联启动规则（Rules） - Thanox</title>
+        <title>其他文章参考 - Thanox</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#01" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              关联启动规则（Rules）
+              其他文章参考
             
           </span>
         </div>
@@ -231,54 +231,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          关联启动规则（Rules）
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../5-Start-Rules/" class="md-nav__link">
         关联启动规则（Rules）
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#01" class="md-nav__link">
-    0.1. 前言
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#02" class="md-nav__link">
-    0.2. 语法
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -304,11 +261,21 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../7-Ref/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         其他文章参考
       </a>
+      
     </li>
   
 
@@ -329,28 +296,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#01" class="md-nav__link">
-    0.1. 前言
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#02" class="md-nav__link">
-    0.2. 语法
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -363,23 +310,7 @@
               
                 
                 
-                  <h1>关联启动规则（Rules）</h1>
-                
-                <!-- more -->
-
-<h2 id="01">0.1. 前言</h2>
-<p>注意，正常情况下，加入关联启动限制 列表中的应用会被禁止任何应用偷偷后台启动），可以满足正常使用需求。规则设置只是提供给<strong>非新手</strong>使用，用来做更精细的控制。<strong>新手无需尝试</strong>！</p>
-<h2 id="02">0.2. 语法</h2>
-<p>规则语法为三个角色，分别是<strong>行动</strong>，行动包括<code>ALLOW（允许）</code>、<code>DENY（拒绝）</code>，角色，包括<strong>启动者</strong>和<strong>目标</strong>，两个应用的包名。
-也可以用<code>THIS</code>表示某个应用自己。</p>
-<p>举例说明：</p>
-<p>如果想允许微信启动QQ，可以添加规则：<code>ALLOW com.tencent.mm com.tencent.qq</code>；<br />
-如果想允许Android系统启动所有应用，可以添加规则：<code>ALLOW android *</code>；<br />
-如果想要拒绝任何应用启动微信：<code>DENY * com.tencent.mm</code>。  </p>
-<p>支持以进程代号代替角色，目前可用代号包括：<code>SHELL</code>，<code>ROOT</code>。  <br />
-例如，如果想允许SHELL启动任何QQ：<code>ALLOW SHELL com.tencent.qq</code></p>
-                
-                  
+                <h1 id="_1">其他文章参考</h1>
                 
               
               
@@ -399,7 +330,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../4-Start-Blocker/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 后台启动管理（Start blocker）" rel="prev">
+        <a href="../6-Profile/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 情景模式（Profile）" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -408,26 +339,11 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              后台启动管理（Start blocker）
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../6-Profile/" class="md-footer__link md-footer__link--next" aria-label="Next: 情景模式（Profile）" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
               情景模式（Profile）
             </div>
           </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
         </a>
+      
       
     </nav>
   

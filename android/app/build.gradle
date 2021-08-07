@@ -154,6 +154,7 @@ dependencies {
     implementation project(':android_framework:patch-magisk:patch-framework')
 
     implementation deps.thanos_internal.services
+    implementation deps.thanos_internal.db
     implementation deps.thanos_internal.patchx_entry
 
     implementation project(':nitro:nitro_framework')

@@ -193,6 +193,7 @@ thanos_internal.module_donate = "$group_modules:module-donate:$versions.thanos_i
 def group_frameworks = "github.tornaco.android.thanos.frameworks"
 thanos_internal.services = "$group_frameworks:services:$versions.thanos_internal_version"
 thanos_internal.patchx_entry = "$group_frameworks:patchx-entry:$versions.thanos_internal_version"
+thanos_internal.db = "$group_frameworks:db:$versions.thanos_internal_version"
 deps.thanos_internal = thanos_internal
 
 ext.deps = deps

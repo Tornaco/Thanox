@@ -91,26 +91,26 @@
                     android:text="@{badge1Str}"
                     android:textColor="@color/md_white"
                     android:textSize="@dimen/list_item_main_text_size_ext_small"
-                    android:visibility="@{badge1 == null ? View.INVISIBLE : View.VISIBLE}"
+                    android:visibility="@{badge1Str == null ? View.INVISIBLE : View.VISIBLE}"
                     tools:text="Active"
                     tools:visibility="visible" />
 
 
             <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
-                    android:id="@+id/badge2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/common_view_margin_default"
-                    android:background="@color/md_grey_500"
-                    android:singleLine="true"
-                    android:text="@{badge2Str}"
-                    android:textColor="@color/md_white"
-                    android:textSize="@dimen/list_item_main_text_size_ext_small"
-                    android:visibility="@{badge2 == null ? View.INVISIBLE : View.VISIBLE}"
-                    tools:text="Active"
-                    tools:visibility="invisible" />
+                android:id="@+id/badge2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/common_view_margin_default"
+                android:background="@color/md_grey_500"
+                android:singleLine="true"
+                android:text="@{badge2Str}"
+                android:textColor="@color/md_white"
+                android:textSize="@dimen/list_item_main_text_size_ext_small"
+                android:visibility="@{badge2Str == null ? View.INVISIBLE : View.VISIBLE}"
+                tools:text="Active"
+                tools:visibility="invisible" />
 
         </RelativeLayout>
 

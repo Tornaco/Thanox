@@ -89,7 +89,7 @@ public class ClassLoaderPatch {
                 @Override
                 public void runSafety() {
                     ThanoxHookInstance.get().install(true);
-                    SystemServiceHookInstaller.installActivityManager();
+                    SystemServiceHookInstaller.installActivityManager(true);
                 }
             }.setName("onSystemServerProcess").run();
         }
@@ -112,7 +112,7 @@ public class ClassLoaderPatch {
                     SystemServiceHookInstaller.installIServiceManagerHook();
                     // These service set into ServiceManager by AMS when bind add.
                     SystemServiceHookInstaller.installServiceManagerCacheHook();
-                    SystemServiceHookInstaller.installActivityManager();
+                    SystemServiceHookInstaller.installActivityManager(false);
                 }
             }.setName("onAppProcess").run();
         }

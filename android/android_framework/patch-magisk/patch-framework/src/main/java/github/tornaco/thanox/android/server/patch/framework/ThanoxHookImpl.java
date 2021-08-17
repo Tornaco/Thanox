@@ -33,6 +33,7 @@ public class ThanoxHookImpl implements IThanoxHook {
         FEATURES.add(BuildProp.THANOX_FEATURE_PROFILE);
         FEATURES.add(BuildProp.THANOX_FEATURE_APP_SMART_SERVICE_STOPPER);
         FEATURES.add(BuildProp.THANOX_FEATURE_START_BLOCKER);
+        FEATURES.add(BuildProp.THANOX_FEATURE_APP_SMART_STAND_BY);
 
         if (BuildProp.THANOS_BUILD_DEBUG) {
             FEATURES.add(BuildProp.THANOX_FEATURE_PLUGIN_SUPPORT);

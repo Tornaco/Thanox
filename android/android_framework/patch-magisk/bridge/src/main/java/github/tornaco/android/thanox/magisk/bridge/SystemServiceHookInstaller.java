@@ -34,10 +34,10 @@ public class SystemServiceHookInstaller {
                 }
             };
 
-    public static void installActivityManager() {
+    public static void installActivityManager(boolean isSystemServer) {
         // private static final Singleton<IActivityManager> IActivityManagerSingleton
         XposedHelpers.setStaticObjectField(ActivityManager.class, "IActivityManagerSingleton", IActivityManagerSingletonProxy);
-        logging("installActivityManager done.");
+        logging("installActivityManager done, isSystemServer? %s", isSystemServer);
     }
 
     public static void installServiceManagerCacheHook() {

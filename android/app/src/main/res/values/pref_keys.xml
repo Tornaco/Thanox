@@ -25,6 +25,7 @@
     <string name="key_rss_e" translatable="false">key_rss_e</string>
     <string name="key_email" translatable="false">key_email</string>
     <string name="key_contributors" translatable="false">key_contributors</string>
+    <string name="key_open_source" translatable="false">key_open_source</string>
 
     <string name="key_cheat_field_line1_num" translatable="false">key_cheat_field_line1_num</string>
     <string name="key_cheat_field_device_id" translatable="false">key_cheat_field_device_id</string>

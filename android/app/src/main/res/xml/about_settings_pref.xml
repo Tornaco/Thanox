@@ -42,6 +42,12 @@
                 app:key="@string/key_contributors"
                 app:persistent="false"
                 app:title="Contributors" />
+
+        <Preference
+            app:key="@string/key_open_source"
+            app:persistent="false"
+            app:title="Open source"
+            app:summary="Part of the source code is hosted on github.com/Tornaco/Thanox"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

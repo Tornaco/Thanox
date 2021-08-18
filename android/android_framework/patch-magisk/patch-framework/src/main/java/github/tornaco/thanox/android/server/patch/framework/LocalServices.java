@@ -15,12 +15,13 @@ import util.XposedHelpers;
 
 public class LocalServices {
 
-    public static Optional<SystemService> getService(Class<?> serviceClass) {
+    @SuppressWarnings("unchecked")
+    public static <T extends SystemService> Optional<T> getService(Class<T> serviceClass) {
         val services = getServices();
         if (services != null) {
             for (SystemService service : services) {
                 if (serviceClass == service.getClass()) {
-                    return Optional.of(service);
+                    return Optional.of((T) service);
                 }
             }
         }

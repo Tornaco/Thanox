@@ -1,7 +1,5 @@
 package github.tornaco.thanox.android.server.patch.framework;
 
-import static github.tornaco.thanox.android.server.patch.framework.Logging.logging;
-
 import android.app.ActivityManagerInternal;
 import android.app.ActivityThread;
 import android.app.Application;
@@ -10,6 +8,7 @@ import android.os.Build;
 import android.os.SystemProperties;
 
 import com.android.server.LocalServices;
+import com.elvishew.xlog.XLog;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -48,21 +47,21 @@ public class ThanoxHookImpl implements IThanoxHook {
 
     @Override
     public void installHooks(boolean isSystemServer) {
-        logging("ThanoxHookImpl, installHooks...isSystemServer? " + isSystemServer);
+        XLog.d("ThanoxHookImpl, installHooks...isSystemServer? " + isSystemServer);
         if (isSystemServer) {
             waitForSystemReady(new AbstractSafeR() {
                 @Override
                 public void runSafety() {
                     ActivityThread at = ActivityThread.currentActivityThread();
-                    logging("ActivityThread.currentActivityThread()= " + at);
+                    XLog.d("ActivityThread.currentActivityThread()= " + at);
                     if (at == null) {
                         return;
                     }
 
                     Application application = at.getApplication();
-                    logging("ActivityThread.getApplication()= " + application);
+                    XLog.d("ActivityThread.getApplication()= " + application);
                     Context context = at.getSystemContext();
-                    logging("ActivityThread.getSystemContext()= " + context);
+                    XLog.d("ActivityThread.getSystemContext()= " + context);
 
                     if (context != null) {
                         BootStrap.main("Magisk", FEATURES.toArray(new String[0]));
@@ -71,7 +70,7 @@ public class ThanoxHookImpl implements IThanoxHook {
                         SystemServerHooks.install();
                         // Broadcaster.
                         Broadcaster.install(context);
-                        logging("Invoke BootStrap!");
+                        XLog.d("Invoke BootStrap!");
                     }
                 }
             });
@@ -84,7 +83,7 @@ public class ThanoxHookImpl implements IThanoxHook {
             public void run() {
                 while (ActivityThread.currentActivityThread() == null) {
                     try {
-                        logging("waitForActivityThread, wait 1s.");
+                        XLog.d("waitForActivityThread, wait 1s.");
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         // Noop.
@@ -101,7 +100,7 @@ public class ThanoxHookImpl implements IThanoxHook {
             public void run() {
                 while (!ActivityThread.isSystem() || !isSystemReady()) {
                     try {
-                        logging("waitForSystemReady, wait 1s.");
+                        XLog.d("waitForSystemReady, wait 1s.");
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         // Noop.
@@ -118,7 +117,7 @@ public class ThanoxHookImpl implements IThanoxHook {
             public void run() {
                 while (!"1".equals(SystemProperties.get("sys.boot_completed"))) {
                     try {
-                        logging("waitForBootComplete, wait 1s.");
+                        XLog.d("waitForBootComplete, wait 1s.");
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
                         // Noop.

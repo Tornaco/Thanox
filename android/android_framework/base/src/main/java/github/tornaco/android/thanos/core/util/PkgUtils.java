@@ -232,7 +232,7 @@ public class PkgUtils {
                 || (uid > UserHandle.PER_USER_RANGE && (uid % UserHandle.PER_USER_RANGE <= 2000));
     }
 
-    public static boolean isSystemCall(int uid) {
+    public static boolean isSystemCall(long uid) {
         return uid == 1000
                 || (uid > UserHandle.PER_USER_RANGE && (uid % UserHandle.PER_USER_RANGE == 1000));
     }

@@ -74,6 +74,12 @@ public interface INotificationManager extends android.os.IInterface
     @Override public void setNREnabled(int type, boolean enabled) throws android.os.RemoteException
     {
     }
+    // For searching.
+
+    @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, java.lang.String keyword) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -297,6 +303,20 @@ public interface INotificationManager extends android.os.IInterface
           _arg1 = (0!=data.readInt());
           this.setNREnabled(_arg0, _arg1);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getAllNotificationRecordsByPageAndKeyword:
+        {
+          data.enforceInterface(descriptor);
+          int _arg0;
+          _arg0 = data.readInt();
+          int _arg1;
+          _arg1 = data.readInt();
+          java.lang.String _arg2;
+          _arg2 = data.readString();
+          java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> _result = this.getAllNotificationRecordsByPageAndKeyword(_arg0, _arg1, _arg2);
+          reply.writeNoException();
+          reply.writeTypedList(_result);
           return true;
         }
         default:
@@ -705,6 +725,31 @@ public interface INotificationManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      // For searching.
+
+      @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, java.lang.String keyword) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(start);
+          _data.writeInt(limit);
+          _data.writeString(keyword);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getAllNotificationRecordsByPageAndKeyword, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllNotificationRecordsByPageAndKeyword(start, limit, keyword);
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.n.NotificationRecord.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.n.INotificationManager sDefaultImpl;
     }
     static final int TRANSACTION_getShowingNotificationRecordsForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -726,6 +771,7 @@ public interface INotificationManager extends android.os.IInterface
     static final int TRANSACTION_isShowToastAppInfoEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
     static final int TRANSACTION_isNREnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
     static final int TRANSACTION_setNREnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
+    static final int TRANSACTION_getAllNotificationRecordsByPageAndKeyword = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.n.INotificationManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -762,4 +808,7 @@ public interface INotificationManager extends android.os.IInterface
   public boolean isShowToastAppInfoEnabled() throws android.os.RemoteException;
   public boolean isNREnabled(int type) throws android.os.RemoteException;
   public void setNREnabled(int type, boolean enabled) throws android.os.RemoteException;
+  // For searching.
+
+  public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, java.lang.String keyword) throws android.os.RemoteException;
 }

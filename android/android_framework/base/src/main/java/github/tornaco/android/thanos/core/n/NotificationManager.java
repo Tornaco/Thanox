@@ -16,6 +16,11 @@ public class NotificationManager {
     }
 
     @SneakyThrows
+    public List<NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, String keyword) {
+        return service.getAllNotificationRecordsByPageAndKeyword(start, limit, keyword);
+    }
+
+    @SneakyThrows
     public boolean hasShowingNotificationRecordsForPackage(String packageName) {
         return service.hasShowingNotificationRecordsForPackage(packageName);
     }

@@ -3,31 +3,26 @@ package github.tornaco.android.thanox.module.notification.recorder;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
-import androidx.databinding.ObservableInt;
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
+
+import com.elvishew.xlog.XLog;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.core.n.NotificationRecord;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.util.DateUtils;
-import github.tornaco.android.thanos.core.util.Rxs;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.BiConsumer;
 import io.reactivex.schedulers.Schedulers;
 import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
-import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 import util.CollectionUtils;
 import util.Consumer;
 
@@ -35,11 +30,11 @@ public class NRDListViewModel extends AndroidViewModel {
 
     @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
-    private final List<Disposable> disposables = new ArrayList<>();
+    private final CompositeDisposable disposables = new CompositeDisposable();
     @Getter
-    protected final ObservableArrayList<NotificationRecordModelGroup> recordModelGroups = new ObservableArrayList<>();
-    @Getter
-    private final ObservableInt nCount = new ObservableInt(0);
+    protected final MutableLiveData<List<NotificationRecordModelGroup>> recordModelGroups = new MutableLiveData<>();
+
+    private final ObservableField<String> queryText = new ObservableField<>("");
 
     public NRDListViewModel(@NonNull Application application) {
         super(application);
@@ -61,21 +56,23 @@ public class NRDListViewModel extends AndroidViewModel {
     }
 
     private void loadModels() {
-        if (isDataLoading.get()) return;
+        disposables.clear();
+        recordModelGroups.postValue(new ArrayList<>(0));
         isDataLoading.set(true);
         disposables.add(Single
                 .create((SingleOnSubscribe<List<NotificationRecordModelGroup>>) emitter ->
                         emitter.onSuccess(loadModelsSync()))
-                .flatMapObservable((Function<List<NotificationRecordModelGroup>, ObservableSource<NotificationRecordModelGroup>>) Observable::fromIterable)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> recordModelGroups.clear())
-                .subscribe(recordModelGroups::add,
-                        Rxs.ON_ERROR_LOGGING,
-                        () -> {
-                            isDataLoading.set(false);
-                            nCount.set(countModulesOfCurrentLoadedGroups());
-                        }));
+                .subscribe(new BiConsumer<List<NotificationRecordModelGroup>, Throwable>() {
+                    @Override
+                    public void accept(List<NotificationRecordModelGroup> notificationRecordModelGroups,
+                                       Throwable throwable) throws Exception {
+                        isDataLoading.set(false);
+                        recordModelGroups.postValue(notificationRecordModelGroups);
+                        XLog.i("loadModels error? %s", throwable);
+                    }
+                }));
     }
 
     private void registerEventReceivers() {
@@ -94,23 +91,27 @@ public class NRDListViewModel extends AndroidViewModel {
                 getApplication().getString(R.string.module_notification_recorder_before_today),
                 new ArrayList<>());
 
+        String keyword = queryText.get();
         ThanosManager.from(getApplication()).ifServiceInstalled(
                 thanosManager -> {
                     long todayTimeInMills = DateUtils.getToadyStartTimeInMills();
                     CollectionUtils.consumeRemaining(
-                            thanosManager.getNotificationManager()
-                                    .getAllNotificationRecordsByPage(0, 1024),
+                            thanosManager.getNotificationManager().getAllNotificationRecordsByPageAndKeyword(0, 2048, keyword),
                             notificationRecord -> {
+                                XLog.v("loadModelsSync notificationRecord: %s", notificationRecord);
+
                                 AppInfo appInfo = thanosManager
                                         .getPkgManager()
                                         .getAppInfo(notificationRecord.getPkgName());
                                 if (appInfo != null && appInfo.isSystemUid()) {
                                     return;
                                 }
-                                String timeF = FuzzyDateTimeFormatter
-                                        .getTimeAgo(getApplication(), new Date(notificationRecord.getWhen()));
+                                boolean isToday = notificationRecord.getWhen() >= todayTimeInMills;
+                                String timeF = isToday ?
+                                        DateUtils.formatShortForMessageTime(notificationRecord.getWhen())
+                                        : DateUtils.formatLongForMessageTime(notificationRecord.getWhen());
                                 NotificationRecordModel model = new NotificationRecordModel(notificationRecord, appInfo, timeF);
-                                if (notificationRecord.getWhen() >= todayTimeInMills) {
+                                if (isToday) {
                                     today.getModels().add(model);
                                 } else {
                                     otherDay.getModels().add(model);
@@ -124,25 +125,31 @@ public class NRDListViewModel extends AndroidViewModel {
         if (!CollectionUtils.isNullOrEmpty(otherDay.getModels())) {
             res.add(otherDay);
         }
+
+        if (res.isEmpty()) {
+            NotificationRecordModelGroup emptyTips = new NotificationRecordModelGroup(
+                    "\uD83D\uDC40",
+                    new ArrayList<>());
+            res.add(emptyTips);
+        }
+
         return res;
     }
 
-    private int countModulesOfCurrentLoadedGroups() {
-        if (CollectionUtils.isNullOrEmpty(recordModelGroups)) return 0;
-        AtomicInteger c = new AtomicInteger(0);
-        CollectionUtils.consumeRemaining(recordModelGroups, new Consumer<NotificationRecordModelGroup>() {
-            @Override
-            public void accept(NotificationRecordModelGroup notificationRecordModelGroup) {
-                c.addAndGet(CollectionUtils.sizeOf(notificationRecordModelGroup.getModels()));
-            }
-        });
-        return c.get();
+    void clearSearchText() {
+        queryText.set(null);
+        loadModels();
+    }
+
+    void setSearchText(String query) {
+        queryText.set(query);
+        loadModels();
     }
 
     @Override
     protected void onCleared() {
         super.onCleared();
-        CollectionUtils.consumeRemaining(disposables, Disposable::dispose);
+        disposables.clear();
         unRegisterEventReceivers();
     }
 }

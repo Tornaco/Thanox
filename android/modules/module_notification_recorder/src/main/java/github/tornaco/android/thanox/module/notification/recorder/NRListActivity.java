@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
 import java.util.Objects;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -67,6 +69,35 @@ public class NRListActivity extends ThemeActivity {
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
         onSetupSwitchBar(binding.switchBar);
+
+        // Search.
+        binding.searchView.setOnQueryTextListener(
+                new MaterialSearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        viewModel.setSearchText(query);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        viewModel.setSearchText(newText);
+                        return true;
+                    }
+                });
+
+        binding.searchView.setOnSearchViewListener(
+                new MaterialSearchView.SearchViewListener() {
+                    @Override
+                    public void onSearchViewShown() {
+                        // Noop.
+                    }
+
+                    @Override
+                    public void onSearchViewClosed() {
+                        viewModel.clearSearchText();
+                    }
+                });
     }
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {
@@ -103,6 +134,8 @@ public class NRListActivity extends ThemeActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.module_notification_recorder_nr_list, menu);
+        MenuItem item = menu.findItem(github.tornaco.android.thanos.module.common.R.id.action_search);
+        binding.searchView.setMenuItem(item);
         return true;
     }
 

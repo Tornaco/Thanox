@@ -15,6 +15,8 @@ import java.util.Locale;
 public class DateUtils {
 
     private static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd-HH:mm:ss";
+    private static final String DATE_FORMAT_PATTERN_MESSAGE_TIME_SHORT = "HH:mm:ss";
+    private static final String DATE_FORMAT_PATTERN_MESSAGE_TIME_LONG = "yyyy-MM-dd HH:mm:ss";
 
     public static String formatLong(long l) {
         String time;
@@ -27,6 +29,18 @@ public class DateUtils {
 
     public static String formatForFileName(long l) {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_PATTERN, Locale.ENGLISH);
+        Date d1 = new Date(l);
+        return format.format(d1);
+    }
+
+    public static String formatShortForMessageTime(long l) {
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_PATTERN_MESSAGE_TIME_SHORT, Locale.ENGLISH);
+        Date d1 = new Date(l);
+        return format.format(d1);
+    }
+
+    public static String formatLongForMessageTime(long l) {
+        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT_PATTERN_MESSAGE_TIME_LONG, Locale.ENGLISH);
         Date d1 = new Date(l);
         return format.format(d1);
     }

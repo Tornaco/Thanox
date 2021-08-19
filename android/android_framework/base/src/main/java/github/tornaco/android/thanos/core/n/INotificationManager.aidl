@@ -32,4 +32,7 @@ interface INotificationManager {
 
     boolean isNREnabled(int type);
     void setNREnabled(int type, boolean enabled);
+
+    // For searching.
+    List<NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, String keyword);
 }

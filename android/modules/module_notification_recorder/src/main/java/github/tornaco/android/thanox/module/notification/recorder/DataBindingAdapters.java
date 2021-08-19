@@ -12,7 +12,7 @@ public class DataBindingAdapters {
 
 
     @BindingAdapter("android:notificationRecordModels")
-    public static void setMotificationRecordModels(RecyclerView recyclerView, List<NotificationRecordModelGroup> models) {
+    public static void setNotificationRecordModels(RecyclerView recyclerView, List<NotificationRecordModelGroup> models) {
         @SuppressWarnings("unchecked")
         Consumer<List<NotificationRecordModelGroup>> consumer = (Consumer<List<NotificationRecordModelGroup>>) recyclerView.getAdapter();
         Objects.requireNonNull(consumer).accept(models);

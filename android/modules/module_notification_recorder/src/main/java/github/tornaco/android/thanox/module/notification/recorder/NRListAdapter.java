@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -145,7 +144,9 @@ public class NRListAdapter extends SectioningAdapter implements Consumer<List<No
     @Override
     public void accept(List<NotificationRecordModelGroup> nrds) {
         this.nrdList.clear();
-        this.nrdList.addAll(nrds);
+        if (nrds != null) {
+            this.nrdList.addAll(nrds);
+        }
         notifyAllSectionsDataSetChanged();
     }
 

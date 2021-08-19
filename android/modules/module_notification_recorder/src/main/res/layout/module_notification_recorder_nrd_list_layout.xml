@@ -26,6 +26,11 @@
                 android:background="?colorPrimary"
                 android:theme="?appbarTheme">
 
+            <FrameLayout
+                android:id="@+id/toolbar_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -37,6 +42,13 @@
                     tools:title="Title very long very very long!!!!">
 
             </androidx.appcompat.widget.Toolbar>
+
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            </FrameLayout>
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout

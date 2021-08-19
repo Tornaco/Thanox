@@ -10,6 +10,9 @@ import android.os.IInterface;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
+import github.tornaco.android.thanos.core.app.ThanosManagerNative;
+import github.tornaco.android.thanos.core.n.NotificationRecord;
+
 public class NotificationManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
     @Override
     public IBinder provide(IBinder legacyBinder) {
@@ -31,11 +34,36 @@ public class NotificationManagerProxyProvider implements ProxyProvider, Exceptio
                             new Class[]{INotificationManager.class},
                             (instance, method, args) -> {
                                 logging("INotificationManager %s %s", method.getName(), Arrays.toString(args));
+                                if ("enqueueTextToast".equals(method.getName())) {
+                                    handleEnqueueTextToast(args);
+                                }
                                 return tryInvoke(am, method, args);
                             });
                 }
                 return iInterface;
             }
         });
+    }
+
+    // void enqueueTextToast(String pkg, IBinder token, CharSequence text,
+    private void handleEnqueueTextToast(Object[] args) {
+        try {
+            String pkg = (String) args[0];
+            CharSequence text = (CharSequence) args[2];
+            NotificationRecord nr = NotificationRecord.builder()
+                    .pkgName(pkg)
+                    .when(System.currentTimeMillis())
+                    .content(text == null ? null : String.valueOf(text))
+                    .creationTime(System.currentTimeMillis())
+                    .type(NotificationRecord.Types.TYPE_TOAST)
+                    .build();
+            if (ThanosManagerNative.isServiceInstalled()) {
+                ThanosManagerNative.getDefault()
+                        .getNotificationManager()
+                        .onAddNotificationRecord(nr);
+            }
+        } catch (Throwable e) {
+            logging("handleEnqueueTextToast error", e);
+        }
     }
 }

@@ -159,4 +159,13 @@ public class NRListActivity extends ThemeActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (binding.searchView.isSearchOpen()) {
+            binding.searchView.closeSearch();
+            return;
+        }
+        super.onBackPressed();
+    }
 }

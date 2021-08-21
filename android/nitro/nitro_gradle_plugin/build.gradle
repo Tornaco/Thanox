@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'maven'
 
 dependencies {
     // https://mvnrepository.com/artifact/com.android.tools.build/gradle/
@@ -13,18 +12,9 @@ dependencies {
     implementation localGroovy()
 }
 
-def LOCAL_REPO_URL = "file://$project.projectDir/prebuilt_repo/"
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: LOCAL_REPO_URL) {
-                pom.groupId = "github.tornaco.nitro"
-                pom.artifactId = "nitro_plugin"
-                pom.version = '1.0.0'
-            }
-        }
-    }
-}
-
 apply from: '../publish_packages.gradle'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}

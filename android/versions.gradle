@@ -56,7 +56,6 @@ versions.logging_interceptor = "4.9.1"
 versions.common_io = "2.6"
 versions.commons_codec = "1.10"
 versions.commons_lang = "2.6"
-versions.nitro = "1.0.0"
 versions.pro_feature = "1.0.0"
 versions.javassist = "3.26.0-GA"
 versions.thanos_internal_version = "1.0.0-SNAPSHOT"
@@ -75,11 +74,8 @@ deps.kotlin = kotlin
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 ext.deps = deps
 
-deps.nitro_plugin = "github.tornaco.nitro:nitro_plugin:$versions.nitro"
+deps.nitro_plugin = "github.tornaco.android.thanos.nitro:nitro_gradle_plugin:1.0.0-SNAPSHOT"
 
-
-// https://github.com/bintray/gradle-bintray-plugin
-deps.bintray_plugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
 // https://github.com/dcendents/android-maven-gradle-plugin
 deps.maven_plugin = "com.github.dcendents:android-maven-gradle-plugin:2.1"
 
@@ -205,23 +201,6 @@ def addRepos(RepositoryHandler handler) {
     handler.mavenLocal()
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     handler.maven { url 'https://jitpack.io' }
-    handler.maven {
-        url "$rootProject.projectDir/nitro/nitro_gradle_plugin/prebuilt_repo"
-    }
-
-    handler.maven {
-        Properties properties = new Properties()
-        def localProp = project.rootProject.file('local.properties')
-        if (localProp.exists()) {
-            properties.load(project.rootProject.file('local.properties').newDataInputStream())
-        }
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/tornaco/Thanox-Internal")
-        credentials {
-            username = properties.containsKey("GITHUB_UNAME") ? properties.getProperty("GITHUB_UNAME") : System.getenv("USERNAME")
-            password = properties.containsKey("GITHUB_ACCESS_TOKEN") ? properties.get("GITHUB_ACCESS_TOKEN") : System.getenv("TOKEN")
-        }
-    }
 }
 
 ext.addRepos = this.&addRepos

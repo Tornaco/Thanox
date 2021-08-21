@@ -392,7 +392,7 @@ interface IKiller {
 | ---------------------------- | -------------------- | ---- | ---- | --------------------- |
 | launchProcessForPackage      | 启动应用进程             | 包名 | 如下 | Boolean（true/false） |
 | launchMainActivityForPackage | 打开应用主界面       | 包名 | 如下 | Boolean（true/false） |
-| getLaunchIntentForPackage    | 获取用用的启动Intent | 包名 | 如下 | Intent                |
+| getLaunchIntentForPackage    | 获取应用的启动Intent | 包名 | 如下 | Intent                |
 | getFrontAppPackage           | 获取当前前台应用包名 | 无   | 如下 | String（字符串）      |
 | getFrontAppPackageComponent  | 获取当前前台应用组件 | 无   | 如下 | ComponentName         |
 

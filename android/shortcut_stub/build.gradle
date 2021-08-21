@@ -3,14 +3,15 @@ import com.google.common.io.Files
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion build_versions.compile_sdk
+    buildToolsVersion build_versions.build_tools
+
     defaultConfig {
         applicationId "github.tornaco.android.thanox.shortcut.stub"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode rootProject.ext.versionCode as int
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {

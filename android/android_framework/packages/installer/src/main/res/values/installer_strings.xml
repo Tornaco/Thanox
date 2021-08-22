@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="installer_permission_request_title">要允许%s获取%权限吗？</string>
-</resources>

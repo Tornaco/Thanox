@@ -53,7 +53,7 @@ class AGPCompat {
 
     static File getAapt2FromMavenCompat(def variant) {
         try {
-            Class class_Aapt2MavenUtils = Class.forName("com.android.build.gradle.internal.res.Aapt2MavenUtils")
+            Class class_Aapt2MavenUtils = Class.forName("com.android.build.gradle.kts.internal.res.Aapt2MavenUtils")
             Method method_getAapt2FromMaven = class_Aapt2MavenUtils.getDeclaredMethod("getAapt2FromMaven", GlobalScope)
             method_getAapt2FromMaven.setAccessible(true)
             def versionAGP = VersionNumber.parse(getAndroidGradlePluginVersionCompat())
@@ -150,7 +150,7 @@ class AGPCompat {
         boolean aapt2Enabled = false
         try {
             def projectOptions = getProjectOptions(project)
-            Object enumValue = resolveEnumValue("ENABLE_AAPT2", Class.forName("com.android.build.gradle.options.BooleanOption"))
+            Object enumValue = resolveEnumValue("ENABLE_AAPT2", Class.forName("com.android.build.gradle.kts.options.BooleanOption"))
             aapt2Enabled = projectOptions.get(enumValue)
         } catch (Exception e) {
             //ignored
@@ -175,12 +175,12 @@ class AGPCompat {
     }
 
     /**
-     * get com.android.build.gradle.options.ProjectOptions obj by reflect
+     * get com.android.build.gradle.kts.options.ProjectOptions obj by reflect
      */
     private static def getProjectOptions(Project project) {
         try {
             def basePlugin = project.getPlugins().hasPlugin('com.android.application') ? project.getPlugins().findPlugin('com.android.application') : project.getPlugins().findPlugin('com.android.library')
-            return Class.forName("com.android.build.gradle.BasePlugin").getMetaClass().getProperty(basePlugin, 'projectOptions')
+            return Class.forName("com.android.build.gradle.kts.BasePlugin").getMetaClass().getProperty(basePlugin, 'projectOptions')
         } catch (Exception e) {
         }
         return null
@@ -282,7 +282,7 @@ class AGPCompat {
         try {
             classDeviceProvider = Class.forName("com.android.builder.testing.ConnectedDeviceProvider")
         } catch (Throwable e) {
-            classDeviceProvider = Class.forName("com.android.build.gradle.internal.testing.ConnectedDeviceProvider")
+            classDeviceProvider = Class.forName("com.android.build.gradle.kts.internal.testing.ConnectedDeviceProvider")
         }
         if (classDeviceProvider != null) {
             Constructor constructor = classDeviceProvider.getDeclaredConstructor(File.class, int.class, ILogger.class)

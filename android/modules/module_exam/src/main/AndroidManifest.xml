@@ -1,8 +1,0 @@
-<manifest
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        package="github.tornaco.android.thanos.app.exam">
-
-    <application>
-        <activity android:name="github.tornaco.android.thanos.app.donate.DonateActivity"/>
-    </application>
-</manifest>

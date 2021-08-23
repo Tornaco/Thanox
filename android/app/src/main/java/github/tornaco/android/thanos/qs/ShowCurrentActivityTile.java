@@ -6,9 +6,10 @@ import android.service.quicksettings.TileService;
 
 import androidx.annotation.RequiresApi;
 
+import com.elvishew.xlog.XLog;
+
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pref.PrefChangeListener;
-import com.elvishew.xlog.XLog;
 import util.Consumer;
 
 @RequiresApi(api = Build.VERSION_CODES.N)

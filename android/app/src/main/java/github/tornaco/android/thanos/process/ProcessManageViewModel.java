@@ -27,20 +27,15 @@ import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 import util.Consumer;
 
 public class ProcessManageViewModel extends AndroidViewModel {
-    @Getter
     private final ObservableBoolean isProcessNeedUpdate = new ObservableBoolean(false);
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final List<Disposable> disposables = new ArrayList<>();
-    @Getter
     private final ObservableList<RunningState.MergedItem> mergedItems = new ObservableArrayList<>();
-    @Getter
     private final ObservableField<RunningCategoryIndex> categoryIndex = new ObservableField<>(RunningCategoryIndex.Running);
 
     private ThanosManager thanos = ThanosManager.from(getApplication().getApplicationContext());
@@ -172,5 +167,21 @@ public class ProcessManageViewModel extends AndroidViewModel {
     void setAppCategoryFilter(int index) {
         categoryIndex.set(RunningCategoryIndex.values()[index]);
         start();
+    }
+
+    public ObservableBoolean getIsProcessNeedUpdate() {
+        return this.isProcessNeedUpdate;
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableList<RunningState.MergedItem> getMergedItems() {
+        return this.mergedItems;
+    }
+
+    public ObservableField<RunningCategoryIndex> getCategoryIndex() {
+        return this.categoryIndex;
     }
 }

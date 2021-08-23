@@ -1,10 +1,15 @@
 package github.tornaco.android.thanos.apps;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.AndroidViewModel;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.common.AppListModel;
@@ -15,21 +20,14 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
-import rx2.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import rx2.android.schedulers.AndroidSchedulers;
 
 public class SuggestedAppsViewModel extends AndroidViewModel {
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     protected final List<Disposable> disposables = new ArrayList<>();
-    @Getter
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
 
     public SuggestedAppsViewModel(@NonNull Application application) {
@@ -73,5 +71,13 @@ public class SuggestedAppsViewModel extends AndroidViewModel {
             }
         }
         return res;
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<AppListModel> getListModels() {
+        return this.listModels;
     }
 }

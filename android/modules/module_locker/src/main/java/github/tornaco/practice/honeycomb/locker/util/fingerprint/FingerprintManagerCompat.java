@@ -25,13 +25,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.os.CancellationSignal;
 
+import com.elvishew.xlog.XLog;
+
 import java.security.Signature;
 
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 
 import github.tornaco.android.thanos.core.util.OsUtils;
-import com.elvishew.xlog.XLog;
 
 
 /**

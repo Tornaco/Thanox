@@ -16,6 +16,8 @@
 
 package github.tornaco.android.thanos.process;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -48,8 +50,6 @@ import github.tornaco.android.thanos.core.process.RunningState;
 import github.tornaco.android.thanos.core.util.MemInfoReader;
 import github.tornaco.android.thanos.databinding.DataBindingAdapters;
 import github.tornaco.android.thanos.util.GlideApp;
-
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class RunningProcessesView extends FrameLayout
         implements AdapterView.OnItemClickListener, RecyclerListener {

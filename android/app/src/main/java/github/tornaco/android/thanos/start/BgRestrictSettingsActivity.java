@@ -3,15 +3,16 @@ package github.tornaco.android.thanos.start;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.Objects;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
-
-import java.util.Objects;
 
 public class BgRestrictSettingsActivity extends ThemeActivity {
 

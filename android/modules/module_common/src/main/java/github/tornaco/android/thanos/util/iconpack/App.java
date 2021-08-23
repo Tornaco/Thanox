@@ -18,11 +18,12 @@ package github.tornaco.android.thanos.util.iconpack;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import github.tornaco.android.thanos.util.BitmapUtil;
 
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import github.tornaco.android.thanos.util.BitmapUtil;
 
 public class App {
 

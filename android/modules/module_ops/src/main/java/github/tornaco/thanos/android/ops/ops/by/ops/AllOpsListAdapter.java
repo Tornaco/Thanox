@@ -14,7 +14,6 @@ import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemOpsBinding;
 import github.tornaco.thanos.android.ops.model.Op;
 import github.tornaco.thanos.android.ops.model.OpGroup;
 import github.tornaco.thanos.android.ops.ops.OpItemClickListener;
-import lombok.Getter;
 import util.Consumer;
 
 public class AllOpsListAdapter extends SectioningAdapter implements Consumer<List<OpGroup>> {
@@ -98,7 +97,6 @@ public class AllOpsListAdapter extends SectioningAdapter implements Consumer<Lis
         return true;
     }
 
-    @Getter
     final static class HVH extends HeaderViewHolder {
         private ModuleOpsItemHeaderBinding binding;
 
@@ -106,9 +104,12 @@ public class AllOpsListAdapter extends SectioningAdapter implements Consumer<Lis
             super(binding.getRoot());
             this.binding = binding;
         }
+
+        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemHeaderBinding getBinding() {
+            return this.binding;
+        }
     }
 
-    @Getter
     final static class IVH extends ItemViewHolder {
         private ModuleOpsItemOpsBinding binding;
 
@@ -116,15 +117,22 @@ public class AllOpsListAdapter extends SectioningAdapter implements Consumer<Lis
             super(binding.getRoot());
             this.binding = binding;
         }
+
+        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemOpsBinding getBinding() {
+            return this.binding;
+        }
     }
 
-    @Getter
     final static class FVH extends FooterViewHolder {
         private ModuleOpsItemFooterBinding binding;
 
         FVH(ModuleOpsItemFooterBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemFooterBinding getBinding() {
+            return this.binding;
         }
     }
 }

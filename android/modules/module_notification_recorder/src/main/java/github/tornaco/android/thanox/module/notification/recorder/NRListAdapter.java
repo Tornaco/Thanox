@@ -22,7 +22,6 @@ import github.tornaco.android.thanos.widget.section.SectioningAdapter;
 import github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderItemBinding;
 import github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderItemFooterBinding;
 import github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderItemHeaderBinding;
-import lombok.Getter;
 import util.Consumer;
 
 public class NRListAdapter extends SectioningAdapter implements Consumer<List<NotificationRecordModelGroup>> {
@@ -150,7 +149,6 @@ public class NRListAdapter extends SectioningAdapter implements Consumer<List<No
         notifyAllSectionsDataSetChanged();
     }
 
-    @Getter
     final static class HVH extends HeaderViewHolder {
         private ModuleNotificationRecorderItemHeaderBinding binding;
 
@@ -158,9 +156,12 @@ public class NRListAdapter extends SectioningAdapter implements Consumer<List<No
             super(binding.getRoot());
             this.binding = binding;
         }
+
+        public github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderItemHeaderBinding getBinding() {
+            return this.binding;
+        }
     }
 
-    @Getter
     final static class IVH extends ItemViewHolder {
         private ModuleNotificationRecorderItemBinding binding;
 
@@ -168,15 +169,22 @@ public class NRListAdapter extends SectioningAdapter implements Consumer<List<No
             super(binding.getRoot());
             this.binding = binding;
         }
+
+        public github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderItemBinding getBinding() {
+            return this.binding;
+        }
     }
 
-    @Getter
     final static class FVH extends FooterViewHolder {
         private ModuleNotificationRecorderItemFooterBinding binding;
 
         FVH(ModuleNotificationRecorderItemFooterBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderItemFooterBinding getBinding() {
+            return this.binding;
         }
     }
 }

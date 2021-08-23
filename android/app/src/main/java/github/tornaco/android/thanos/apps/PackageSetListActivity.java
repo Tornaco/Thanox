@@ -4,11 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
+
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
@@ -23,9 +30,6 @@ import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.EditTextDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.SwitchBar;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import util.CollectionUtils;
 import util.Consumer;
 

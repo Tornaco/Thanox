@@ -5,18 +5,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+
+import java.util.Objects;
+
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.section.StickyHeaderLayoutManager;
 import github.tornaco.thanos.android.ops.R;
 import github.tornaco.thanos.android.ops.databinding.ModuleOpsLayoutRemindOpsListBinding;
-
-import java.util.Objects;
 
 public class RemindOpsActivity extends ThemeActivity {
 

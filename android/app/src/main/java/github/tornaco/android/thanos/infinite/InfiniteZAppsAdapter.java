@@ -14,7 +14,6 @@ import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.databinding.ItemInfiniteZAppBinding;
-import lombok.Getter;
 import util.Consumer;
 
 public class InfiniteZAppsAdapter extends RecyclerView.Adapter<InfiniteZAppsAdapter.VH>
@@ -65,13 +64,16 @@ public class InfiniteZAppsAdapter extends RecyclerView.Adapter<InfiniteZAppsAdap
         notifyDataSetChanged();
     }
 
-    @Getter
     static final class VH extends RecyclerView.ViewHolder {
         private ItemInfiniteZAppBinding binding;
 
         VH(@NonNull ItemInfiniteZAppBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public github.tornaco.android.thanos.databinding.ItemInfiniteZAppBinding getBinding() {
+            return this.binding;
         }
     }
 }

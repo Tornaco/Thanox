@@ -31,17 +31,14 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 import util.Consumer;
 
 public abstract class ComponentListViewModel extends AndroidViewModel {
 
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final CompositeDisposable disposables = new CompositeDisposable();
-    @Getter
     private final ObservableArrayList<ComponentModel> componentModels = new ObservableArrayList<>();
 
     private AppInfo appInfo;
@@ -153,6 +150,14 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
         }).delay(1000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::start));
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<ComponentModel> getComponentModels() {
+        return this.componentModels;
     }
 
     public interface ComponentsLoader {

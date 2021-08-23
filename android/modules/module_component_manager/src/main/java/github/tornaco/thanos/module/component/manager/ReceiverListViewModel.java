@@ -1,7 +1,6 @@
 package github.tornaco.thanos.module.component.manager;
 
 import android.app.Application;
-import android.content.ComponentName;
 import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;

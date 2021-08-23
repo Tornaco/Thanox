@@ -72,7 +72,7 @@ object Libs {
         const val coreUtils = "androidx.legacy:legacy-support-core-utils:1.1.0"
         const val preference = "androidx.preference:preference:1.1.0"
         const val interpolator = "androidx.interpolator:interpolator:1.0.0"
-        const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+        const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 
         const val lifeCycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"

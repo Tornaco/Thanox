@@ -3,8 +3,9 @@ package github.tornaco.android.thanos.qs;
 import android.os.IBinder;
 import android.service.quicksettings.TileService;
 
-import util.XposedHelpers;
 import com.elvishew.xlog.XLog;
+
+import util.XposedHelpers;
 
 class QsHelper {
 

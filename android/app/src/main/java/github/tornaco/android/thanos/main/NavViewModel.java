@@ -27,7 +27,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Observer;
 
 import github.tornaco.android.nitro.framework.Nitro;
 import github.tornaco.android.nitro.framework.host.install.InstallCallback;
@@ -51,28 +50,27 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 import util.ObjectsUtils;
 
 public class NavViewModel extends AndroidViewModel {
 
-  @Getter private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
-  @Getter private final ObservableField<State> state = new ObservableField<>(State.InActive);
-  @Getter private final ObservableInt storageUsagePercent = new ObservableInt(24);
+  private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
+  private final ObservableField<State> state = new ObservableField<>(State.InActive);
+  private final ObservableInt storageUsagePercent = new ObservableInt(24);
 
-  @Getter private final ObservableField<String> channel = new ObservableField<>();
-  @Getter private final ObservableBoolean isPaid = new ObservableBoolean(false);
-  @Getter private final ObservableBoolean isPowerSaveEnabled = new ObservableBoolean(false);
-  @Getter private final ObservableBoolean hasFrameworkError = new ObservableBoolean(false);
+  private final ObservableField<String> channel = new ObservableField<>();
+  private final ObservableBoolean isPaid = new ObservableBoolean(false);
+  private final ObservableBoolean isPowerSaveEnabled = new ObservableBoolean(false);
+  private final ObservableBoolean hasFrameworkError = new ObservableBoolean(false);
 
   private final List<Disposable> disposables = new ArrayList<>();
 
-  @Getter private final ObservableList<TileGroup> prebuiltFeatures = new ObservableArrayList<>();
+  private final ObservableList<TileGroup> prebuiltFeatures = new ObservableArrayList<>();
 
-  @Getter private final ObservableList<Tile> pluginFeatures = new ObservableArrayList<>();
-  @Getter private final ObservableBoolean hasAnyPluginFeatures = new ObservableBoolean(false);
+  private final ObservableList<Tile> pluginFeatures = new ObservableArrayList<>();
+  private final ObservableBoolean hasAnyPluginFeatures = new ObservableBoolean(false);
 
   public NavViewModel(@NonNull Application application) {
     super(application);
@@ -568,7 +566,47 @@ public class NavViewModel extends AndroidViewModel {
     getApplication().sendBroadcast(new Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR));
   }
 
-  public interface PluginInstallResUi {
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableField<State> getState() {
+        return this.state;
+    }
+
+    public ObservableInt getStorageUsagePercent() {
+        return this.storageUsagePercent;
+    }
+
+    public ObservableField<String> getChannel() {
+        return this.channel;
+    }
+
+    public ObservableBoolean getIsPaid() {
+        return this.isPaid;
+    }
+
+    public ObservableBoolean getIsPowerSaveEnabled() {
+        return this.isPowerSaveEnabled;
+    }
+
+    public ObservableBoolean getHasFrameworkError() {
+        return this.hasFrameworkError;
+    }
+
+    public ObservableList<TileGroup> getPrebuiltFeatures() {
+        return this.prebuiltFeatures;
+    }
+
+    public ObservableList<Tile> getPluginFeatures() {
+        return this.pluginFeatures;
+    }
+
+    public ObservableBoolean getHasAnyPluginFeatures() {
+        return this.hasAnyPluginFeatures;
+    }
+
+    public interface PluginInstallResUi {
     void showInstallBegin();
 
     void showInstallSuccess(@NonNull InstalledPlugin plugin);

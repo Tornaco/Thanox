@@ -15,7 +15,6 @@ import java.util.List;
 
 import github.tornaco.android.thanos.core.profile.RuleInfo;
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileRuleListItemBinding;
-import lombok.Getter;
 import util.Consumer;
 
 class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
@@ -83,12 +82,15 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        @Getter
         private ModuleProfileRuleListItemBinding itemBinding;
 
         VH(@NonNull ModuleProfileRuleListItemBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
+        }
+
+        public github.tornaco.thanos.android.module.profile.databinding.ModuleProfileRuleListItemBinding getItemBinding() {
+            return this.itemBinding;
         }
     }
 }

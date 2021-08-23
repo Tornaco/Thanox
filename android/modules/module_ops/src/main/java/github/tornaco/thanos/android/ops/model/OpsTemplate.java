@@ -4,9 +4,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
 import github.tornaco.thanos.android.ops.R;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class OpsTemplate {
 
     public github.tornaco.android.thanos.core.secure.ops.OpsTemplate legacy;
@@ -98,4 +96,12 @@ public class OpsTemplate {
           //  RUN_IN_BACKGROUND_TEMPLATE,
             REMAINING_TEMPLATE
     };
+
+    public OpsTemplate(github.tornaco.android.thanos.core.secure.ops.OpsTemplate legacy, int titleRes, int summaryRes, int iconRes, int sort) {
+        this.legacy = legacy;
+        this.titleRes = titleRes;
+        this.summaryRes = summaryRes;
+        this.iconRes = iconRes;
+        this.sort = sort;
+    }
 }

@@ -1,15 +1,19 @@
 package github.tornaco.thanos.android.ops.ops.repo;
 
 import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
-import github.tornaco.android.thanos.core.util.ArrayUtils;
 import github.tornaco.thanos.android.ops.model.Op;
 import github.tornaco.thanos.android.ops.model.OpGroup;
 import github.tornaco.thanos.android.ops.model.Ops;
 import github.tornaco.thanos.android.ops.model.OpsTemplate;
-
-import java.util.*;
 
 public class RemindOpsLoader {
 

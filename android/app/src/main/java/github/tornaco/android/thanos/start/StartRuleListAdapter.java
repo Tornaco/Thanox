@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.tornaco.android.thanos.databinding.StartRuleListItemBinding;
-import lombok.Getter;
 import util.Consumer;
 
 class StartRuleListAdapter extends RecyclerView.Adapter<StartRuleListAdapter.VH>
@@ -53,12 +52,15 @@ class StartRuleListAdapter extends RecyclerView.Adapter<StartRuleListAdapter.VH>
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        @Getter
         private StartRuleListItemBinding itemBinding;
 
         VH(@NonNull StartRuleListItemBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
+        }
+
+        public github.tornaco.android.thanos.databinding.StartRuleListItemBinding getItemBinding() {
+            return this.itemBinding;
         }
     }
 }

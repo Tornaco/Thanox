@@ -39,7 +39,9 @@ dependencies {
     implementation(Libs.AndroidX.appCompat)
     implementation(Libs.AndroidX.material)
     implementation(Libs.AndroidX.recyclerview)
-
+    implementation(Libs.AndroidX.swipeRefreshLayout)
+    implementation(Libs.Others.glide)
+    annotationProcessor(Libs.Others.glideCompiler)
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))

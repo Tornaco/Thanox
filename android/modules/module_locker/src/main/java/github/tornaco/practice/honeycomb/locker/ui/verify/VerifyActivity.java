@@ -7,7 +7,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-import github.tornaco.android.common.util.ApkUtil;
 import github.tornaco.android.thanos.core.T;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.util.Preconditions;

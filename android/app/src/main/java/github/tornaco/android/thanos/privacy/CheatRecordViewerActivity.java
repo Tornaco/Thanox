@@ -10,7 +10,6 @@ import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.google.common.collect.Lists;
 
-import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,6 +26,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.PrivacyCheatRecord;
 import github.tornaco.android.thanos.core.secure.PrivacyManager;
+import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;

@@ -5,15 +5,8 @@ import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import util.PinyinComparatorUtils;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class ComponentModel implements Comparable<ComponentModel> {
     private String name;
     private ComponentName componentName;
@@ -22,6 +15,23 @@ public class ComponentModel implements Comparable<ComponentModel> {
     private Object componentObject;
     private boolean isDisabledByThanox;
     private boolean isRunning;
+
+    public ComponentModel(String name, ComponentName componentName, String label, int enableSetting, Object componentObject, boolean isDisabledByThanox, boolean isRunning) {
+        this.name = name;
+        this.componentName = componentName;
+        this.label = label;
+        this.enableSetting = enableSetting;
+        this.componentObject = componentObject;
+        this.isDisabledByThanox = isDisabledByThanox;
+        this.isRunning = isRunning;
+    }
+
+    public ComponentModel() {
+    }
+
+    public static ComponentModelBuilder builder() {
+        return new ComponentModelBuilder();
+    }
 
     public boolean isDisabled() {
         return enableSetting != PackageManager.COMPONENT_ENABLED_STATE_ENABLED
@@ -72,5 +82,61 @@ public class ComponentModel implements Comparable<ComponentModel> {
         }
 
         return PinyinComparatorUtils.compare(this.name, o.name);
+    }
+
+    public static class ComponentModelBuilder {
+        private String name;
+        private ComponentName componentName;
+        private String label;
+        private int enableSetting;
+        private Object componentObject;
+        private boolean isDisabledByThanox;
+        private boolean isRunning;
+
+        ComponentModelBuilder() {
+        }
+
+        public ComponentModel.ComponentModelBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ComponentModel.ComponentModelBuilder componentName(ComponentName componentName) {
+            this.componentName = componentName;
+            return this;
+        }
+
+        public ComponentModel.ComponentModelBuilder label(String label) {
+            this.label = label;
+            return this;
+        }
+
+        public ComponentModel.ComponentModelBuilder enableSetting(int enableSetting) {
+            this.enableSetting = enableSetting;
+            return this;
+        }
+
+        public ComponentModel.ComponentModelBuilder componentObject(Object componentObject) {
+            this.componentObject = componentObject;
+            return this;
+        }
+
+        public ComponentModel.ComponentModelBuilder isDisabledByThanox(boolean isDisabledByThanox) {
+            this.isDisabledByThanox = isDisabledByThanox;
+            return this;
+        }
+
+        public ComponentModel.ComponentModelBuilder isRunning(boolean isRunning) {
+            this.isRunning = isRunning;
+            return this;
+        }
+
+        public ComponentModel build() {
+            return new ComponentModel(name, componentName, label, enableSetting, componentObject, isDisabledByThanox, isRunning);
+        }
+
+        public String toString() {
+            return "ComponentModel.ComponentModelBuilder(name=" + this.name + ", componentName=" + this.componentName + ", label=" + this.label + ", enableSetting=" + this.enableSetting + ", componentObject=" + this.componentObject + ", isDisabledByThanox=" + this.isDisabledByThanox + ", isRunning=" + this.isRunning + ")";
+        }
     }
 }

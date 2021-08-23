@@ -7,11 +7,8 @@ import androidx.annotation.NonNull;
 import java.util.Observable;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import util.Singleton;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AppThemePreferences extends Observable {
 
     private static final String PREF_KEY_APP_THEME = "PREF_KEY_APP_THEME";
@@ -26,6 +23,9 @@ public class AppThemePreferences extends Observable {
             return new AppThemePreferences();
         }
     };
+
+    private AppThemePreferences() {
+    }
 
     public static AppThemePreferences getInstance() {
         return sPref.get();

@@ -150,6 +150,7 @@ dependencies {
     implementation(Libs.Accompanist.navigationAnim)
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
+    add("kapt", project(":annotation_processors:permission-requester-compiler"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
 
     implementation(Libs.ThanoxInternal.moduleDonate)

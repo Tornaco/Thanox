@@ -32,17 +32,14 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 import util.Consumer;
 
 public class StandByRuleViewModel extends AndroidViewModel {
 
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final CompositeDisposable disposables = new CompositeDisposable();
-    @Getter
     private final ObservableArrayList<StandbyRule> standbyRules = new ObservableArrayList<>();
 
     private RulesLoader loader = new RulesLoader() {
@@ -143,6 +140,14 @@ public class StandByRuleViewModel extends AndroidViewModel {
             sb.append(r).append(System.lineSeparator());
         }
         ClipboardUtils.copyToClipboard(getApplication(), "rules", sb.toString());
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<StandbyRule> getStandbyRules() {
+        return this.standbyRules;
     }
 
     public interface RulesLoader {

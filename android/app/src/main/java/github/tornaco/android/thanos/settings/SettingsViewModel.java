@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.elvishew.xlog.XLog;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
 
@@ -24,7 +25,6 @@ import github.tornaco.android.thanos.core.backup.IFileDescriptorConsumer;
 import github.tornaco.android.thanos.core.backup.IFileDescriptorInitializer;
 import github.tornaco.android.thanos.core.util.DevNull;
 import github.tornaco.android.thanos.core.util.FileUtils;
-import com.elvishew.xlog.XLog;
 import io.reactivex.Observable;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.IoUtils;

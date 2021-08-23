@@ -3,7 +3,6 @@ package github.tornaco.android.thanos.apps;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +18,6 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
-import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,6 +28,7 @@ import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.core.util.function.Function;
@@ -39,7 +38,6 @@ import github.tornaco.thanos.android.ops.ops.by.app.AppOpsListActivity;
 import github.tornaco.thanos.module.component.manager.ActivityListActivity;
 import github.tornaco.thanos.module.component.manager.ReceiverListActivity;
 import github.tornaco.thanos.module.component.manager.ServiceListActivity;
-import lombok.AllArgsConstructor;
 import util.Consumer;
 
 public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
@@ -611,12 +609,15 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
     }
   }
 
-  @AllArgsConstructor
   abstract class FeaturePref {
 
     private String key;
 
-    abstract boolean current();
+      public FeaturePref(String key) {
+          this.key = key;
+      }
+
+      abstract boolean current();
 
     abstract void setTo(boolean value);
 

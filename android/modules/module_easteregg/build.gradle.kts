@@ -54,6 +54,7 @@ dependencies {
     implementation(project(":android_framework:base"))
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
+    add("kapt", project(":annotation_processors:permission-requester-compiler"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
 }
 

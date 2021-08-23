@@ -3,17 +3,19 @@ package github.tornaco.android.thanos.common;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import github.tornaco.android.thanos.core.util.function.Predicate;
 import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.module.common.databinding.ItemCommonAppBinding;
-import java.util.ArrayList;
-import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
 import util.Consumer;
 
 public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppListFilterAdapter.VH>
@@ -21,7 +23,6 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
     FastScrollRecyclerView.SectionedAdapter,
     FastScrollRecyclerView.MeasurableAdapter<CommonAppListFilterAdapter.VH> {
 
-  @Getter
   private final List<AppListModel> listModels = new ArrayList<>();
 
   @Nullable
@@ -31,7 +32,6 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
 
   private StateImageProvider stateImageProvider;
 
-  @Setter
   private boolean iconCheckable = false;
 
   public CommonAppListFilterAdapter(@Nullable AppItemClickListener itemClickListener) {
@@ -158,8 +158,15 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
     return String.valueOf(appName.charAt(0));
   }
 
-  @Getter
-  static final class VH extends RecyclerView.ViewHolder {
+    public List<AppListModel> getListModels() {
+        return this.listModels;
+    }
+
+    public void setIconCheckable(boolean iconCheckable) {
+        this.iconCheckable = iconCheckable;
+    }
+
+    static final class VH extends RecyclerView.ViewHolder {
 
     private ItemCommonAppBinding binding;
 
@@ -167,5 +174,9 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
       super(binding.getRoot());
       this.binding = binding;
     }
-  }
+
+        public github.tornaco.android.thanos.module.common.databinding.ItemCommonAppBinding getBinding() {
+            return this.binding;
+        }
+    }
 }

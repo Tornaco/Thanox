@@ -26,6 +26,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import com.elvishew.xlog.XLog;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -40,7 +42,6 @@ import java.util.List;
 import java.util.Locale;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import com.elvishew.xlog.XLog;
 
 public class IconPack extends App {
 

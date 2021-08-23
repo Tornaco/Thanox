@@ -11,11 +11,11 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.apps.AppDetailsActivity;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.process.RunningState;
-import github.tornaco.android.thanos.app.BaseTrustedActivity;
 
 /**
  * Created by Tornaco on 2018/5/2 15:05.

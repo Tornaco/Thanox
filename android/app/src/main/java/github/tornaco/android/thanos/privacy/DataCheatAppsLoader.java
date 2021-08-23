@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.google.common.collect.Lists;
 
-import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,17 +17,20 @@ import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewMod
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.PrivacyManager;
+import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import github.tornaco.android.thanos.core.secure.field.Fields;
-import lombok.AllArgsConstructor;
 import util.CollectionUtils;
 
-@AllArgsConstructor
 public class DataCheatAppsLoader implements CommonFuncToggleAppListFilterViewModel.ListModelLoader {
 
   @NonNull
   private final Context context;
 
-  @Override
+    public DataCheatAppsLoader(Context context) {
+        this.context = context;
+    }
+
+    @Override
   public List<AppListModel> load(@NonNull CategoryIndex index) {
     ThanosManager thanos = ThanosManager.from(context);
     if (!thanos.isServiceInstalled()) {

@@ -6,6 +6,8 @@
 
 package com.nononsenseapps.filepicker;
 
+import static com.nononsenseapps.filepicker.Utils.appendPath;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
@@ -37,8 +39,6 @@ import androidx.recyclerview.widget.SortedList;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
-import static com.nononsenseapps.filepicker.Utils.appendPath;
 
 /**
  * A fragment representing a list of Files.

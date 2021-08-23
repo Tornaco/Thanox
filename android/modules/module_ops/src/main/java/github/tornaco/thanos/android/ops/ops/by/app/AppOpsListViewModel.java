@@ -24,17 +24,14 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 import util.Consumer;
 
 public class AppOpsListViewModel extends AndroidViewModel {
 
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final List<Disposable> disposables = new ArrayList<>();
-    @Getter
     protected final ObservableArrayList<OpGroup> opGroups = new ObservableArrayList<>();
 
     private final ObservableInt categoryIndex = new ObservableInt(PkgOpsLoader.FILTER_ALL /* All */);
@@ -103,5 +100,13 @@ public class AppOpsListViewModel extends AndroidViewModel {
             }
         });
         start(appInfo);
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<OpGroup> getOpGroups() {
+        return this.opGroups;
     }
 }

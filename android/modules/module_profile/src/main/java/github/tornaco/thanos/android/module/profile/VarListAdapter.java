@@ -11,7 +11,6 @@ import java.util.List;
 
 import github.tornaco.android.thanos.core.profile.GlobalVar;
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileVarListItemBinding;
-import lombok.Getter;
 import util.Consumer;
 
 class VarListAdapter extends RecyclerView.Adapter<VarListAdapter.VH>
@@ -54,12 +53,15 @@ class VarListAdapter extends RecyclerView.Adapter<VarListAdapter.VH>
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        @Getter
         private ModuleProfileVarListItemBinding itemBinding;
 
         VH(@NonNull ModuleProfileVarListItemBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
+        }
+
+        public github.tornaco.thanos.android.module.profile.databinding.ModuleProfileVarListItemBinding getItemBinding() {
+            return this.itemBinding;
         }
     }
 }

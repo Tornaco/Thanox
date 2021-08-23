@@ -16,7 +16,6 @@ import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemHeaderBinding;
 import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemRemindOpsCheckableBinding;
 import github.tornaco.thanos.android.ops.model.Op;
 import github.tornaco.thanos.android.ops.model.OpGroup;
-import lombok.Getter;
 import util.Consumer;
 
 public class RemindOpsListAdapter extends SectioningAdapter implements Consumer<List<OpGroup>> {
@@ -106,7 +105,6 @@ public class RemindOpsListAdapter extends SectioningAdapter implements Consumer<
         return true;
     }
 
-    @Getter
     final static class HVH extends HeaderViewHolder {
         private ModuleOpsItemHeaderBinding binding;
 
@@ -114,9 +112,12 @@ public class RemindOpsListAdapter extends SectioningAdapter implements Consumer<
             super(binding.getRoot());
             this.binding = binding;
         }
+
+        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemHeaderBinding getBinding() {
+            return this.binding;
+        }
     }
 
-    @Getter
     final static class IVH extends ItemViewHolder {
         private ModuleOpsItemRemindOpsCheckableBinding binding;
 
@@ -124,15 +125,22 @@ public class RemindOpsListAdapter extends SectioningAdapter implements Consumer<
             super(binding.getRoot());
             this.binding = binding;
         }
+
+        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemRemindOpsCheckableBinding getBinding() {
+            return this.binding;
+        }
     }
 
-    @Getter
     final static class FVH extends FooterViewHolder {
         private ModuleOpsItemFooterBinding binding;
 
         FVH(ModuleOpsItemFooterBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemFooterBinding getBinding() {
+            return this.binding;
         }
     }
 }

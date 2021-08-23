@@ -6,8 +6,9 @@ import android.service.quicksettings.TileService;
 
 import androidx.annotation.RequiresApi;
 
-import github.tornaco.android.thanos.core.app.ThanosManager;
 import com.elvishew.xlog.XLog;
+
+import github.tornaco.android.thanos.core.app.ThanosManager;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class QuickConfigAppTile extends TileService {

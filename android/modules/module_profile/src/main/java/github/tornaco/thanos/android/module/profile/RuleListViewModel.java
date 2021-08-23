@@ -37,16 +37,13 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.PinyinComparatorUtils;
 
 public class RuleListViewModel extends AndroidViewModel {
 
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final CompositeDisposable disposables = new CompositeDisposable();
-    @Getter
     private final ObservableArrayList<RuleInfo> ruleInfoList = new ObservableArrayList<>();
 
     private RuleLoader loader = () -> {
@@ -186,6 +183,14 @@ public class RuleListViewModel extends AndroidViewModel {
         super.onCleared();
         disposables.clear();
         unRegisterEventReceivers();
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<RuleInfo> getRuleInfoList() {
+        return this.ruleInfoList;
     }
 
     public interface RuleLoader {

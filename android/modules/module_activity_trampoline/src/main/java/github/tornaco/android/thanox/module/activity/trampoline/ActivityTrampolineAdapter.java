@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.tornaco.android.thanox.module.activity.trampoline.databinding.ModuleActivityTrampolineCompReplacementListItemBinding;
-import lombok.Getter;
 import util.Consumer;
 
 class ActivityTrampolineAdapter extends RecyclerView.Adapter<ActivityTrampolineAdapter.VH>
@@ -55,12 +54,15 @@ class ActivityTrampolineAdapter extends RecyclerView.Adapter<ActivityTrampolineA
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        @Getter
         private ModuleActivityTrampolineCompReplacementListItemBinding itemBinding;
 
         VH(@NonNull ModuleActivityTrampolineCompReplacementListItemBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
+        }
+
+        public github.tornaco.android.thanox.module.activity.trampoline.databinding.ModuleActivityTrampolineCompReplacementListItemBinding getItemBinding() {
+            return this.itemBinding;
         }
     }
 }

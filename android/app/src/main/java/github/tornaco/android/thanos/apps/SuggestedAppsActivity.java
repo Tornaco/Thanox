@@ -12,11 +12,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.databinding.ActivitySuggestAppsBinding;
-import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import util.Consumer;
 

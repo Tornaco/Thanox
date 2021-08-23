@@ -7,11 +7,8 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Observable;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import util.Singleton;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CommonPreferences extends Observable {
 
     private static final String PREF_KEY_FEATURE_DESC_READ_PREFIX = "PREF_FEATURE_DESC_READ_";
@@ -22,6 +19,9 @@ public class CommonPreferences extends Observable {
             return new CommonPreferences();
         }
     };
+
+    private CommonPreferences() {
+    }
 
     public static CommonPreferences getInstance() {
         return sPref.get();

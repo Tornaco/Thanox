@@ -17,8 +17,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.databinding.ActivityProcessManageBinding;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
+import github.tornaco.android.thanos.databinding.ActivityProcessManageBinding;
 import github.tornaco.android.thanos.util.ActivityUtils;
 
 

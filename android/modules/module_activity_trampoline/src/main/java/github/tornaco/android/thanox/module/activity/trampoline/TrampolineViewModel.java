@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +22,6 @@ import com.google.common.io.CharSource;
 import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.newstand.logger.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,7 +45,6 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 import util.IoUtils;
@@ -55,19 +53,13 @@ import util.PinyinComparatorUtils;
 
 public class TrampolineViewModel extends AndroidViewModel {
 
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final List<Disposable> disposables = new ArrayList<>();
-    @Getter
     private final ObservableArrayList<ActivityTrampolineModel> replacements = new ObservableArrayList<>();
 
-    @Getter
     private ObservableInt exportSuccessSignal = new ObservableInt();
-    @Getter
     private ObservableInt exportFailSignal = new ObservableInt();
-    @Getter
     private ObservableInt importSuccessSignal = new ObservableInt();
-    @Getter
     private ObservableInt importFailSignal = new ObservableInt();
 
     private TrampolineLoader trampolineLoader = () -> {
@@ -218,7 +210,7 @@ public class TrampolineViewModel extends AndroidViewModel {
                         emitter.onSuccess(false);
                     }
                 } catch (Exception ex) {
-                    Logger.e(Logger.getStackTraceString(ex));
+                    XLog.e(Log.getStackTraceString(ex));
                     emitter.onSuccess(false);
                 }
             }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(res -> {
@@ -254,7 +246,7 @@ public class TrampolineViewModel extends AndroidViewModel {
                     emitter.onSuccess(false);
                 }
             } catch (IOException ioe) {
-                Logger.e(Logger.getStackTraceString(ioe));
+                XLog.e(Log.getStackTraceString(ioe));
                 emitter.onSuccess(false);
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(res -> {
@@ -275,6 +267,30 @@ public class TrampolineViewModel extends AndroidViewModel {
             XLog.e(throwable);
         }
         return null;
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<ActivityTrampolineModel> getReplacements() {
+        return this.replacements;
+    }
+
+    public ObservableInt getExportSuccessSignal() {
+        return this.exportSuccessSignal;
+    }
+
+    public ObservableInt getExportFailSignal() {
+        return this.exportFailSignal;
+    }
+
+    public ObservableInt getImportSuccessSignal() {
+        return this.importSuccessSignal;
+    }
+
+    public ObservableInt getImportFailSignal() {
+        return this.importFailSignal;
     }
 
     public interface TrampolineLoader {

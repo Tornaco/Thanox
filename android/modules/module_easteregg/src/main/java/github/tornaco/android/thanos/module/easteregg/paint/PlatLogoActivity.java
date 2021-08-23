@@ -20,7 +20,15 @@ import android.animation.TimeAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PixelFormat;
+import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -30,9 +38,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import org.json.JSONObject;
+
 import github.tornaco.android.thanos.module.easteregg.R;
 import github.tornaco.android.thanos.util.ActivityUtils;
-import org.json.JSONObject;
 
 /**
  * @hide

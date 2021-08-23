@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import github.tornaco.android.thanos.databinding.ItemFeatureDashboardTileOfCardBinding;
-import lombok.AllArgsConstructor;
 import util.CollectionUtils;
 
 public class TilesContainerView extends RecyclerView {
@@ -37,11 +36,16 @@ public class TilesContainerView extends RecyclerView {
         setAdapter(adapter);
     }
 
-    @AllArgsConstructor
     class Adapter extends RecyclerView.Adapter<VH> {
         private TileGroup tileGroup;
         private OnTileClickListener onTileClickListener;
         private OnTileLongClickListener onTileLongClickListener;
+
+        public Adapter(TileGroup tileGroup, OnTileClickListener onTileClickListener, OnTileLongClickListener onTileLongClickListener) {
+            this.tileGroup = tileGroup;
+            this.onTileClickListener = onTileClickListener;
+            this.onTileLongClickListener = onTileLongClickListener;
+        }
 
         @NonNull
         @Override

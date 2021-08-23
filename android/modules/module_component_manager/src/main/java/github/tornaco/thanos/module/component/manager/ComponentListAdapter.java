@@ -15,7 +15,6 @@ import java.util.List;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.thanos.module.component.manager.databinding.ModuleComponentManagerComponentListItemBinding;
 import github.tornaco.thanos.module.component.manager.model.ComponentModel;
-import lombok.Getter;
 import util.Consumer;
 
 public class ComponentListAdapter extends RecyclerView.Adapter<ComponentListAdapter.VH>
@@ -23,7 +22,6 @@ public class ComponentListAdapter extends RecyclerView.Adapter<ComponentListAdap
         FastScrollRecyclerView.SectionedAdapter,
         FastScrollRecyclerView.MeasurableAdapter<ComponentListAdapter.VH> {
 
-    @Getter
     private final List<ComponentModel> listModels = new ArrayList<>();
 
     @NonNull
@@ -82,13 +80,20 @@ public class ComponentListAdapter extends RecyclerView.Adapter<ComponentListAdap
         notifyDataSetChanged();
     }
 
+    public List<ComponentModel> getListModels() {
+        return this.listModels;
+    }
+
     static final class VH extends RecyclerView.ViewHolder {
-        @Getter
         private final ModuleComponentManagerComponentListItemBinding binding;
 
         VH(ModuleComponentManagerComponentListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public github.tornaco.thanos.module.component.manager.databinding.ModuleComponentManagerComponentListItemBinding getBinding() {
+            return this.binding;
         }
     }
 }

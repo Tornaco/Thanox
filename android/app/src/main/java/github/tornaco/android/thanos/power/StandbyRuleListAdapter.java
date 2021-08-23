@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.tornaco.android.thanos.databinding.StandbyRuleListItemBinding;
-import lombok.Getter;
 import util.Consumer;
 
 class StandbyRuleListAdapter extends RecyclerView.Adapter<StandbyRuleListAdapter.VH>
@@ -53,12 +52,15 @@ class StandbyRuleListAdapter extends RecyclerView.Adapter<StandbyRuleListAdapter
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        @Getter
         private StandbyRuleListItemBinding itemBinding;
 
         VH(@NonNull StandbyRuleListItemBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
+        }
+
+        public github.tornaco.android.thanos.databinding.StandbyRuleListItemBinding getItemBinding() {
+            return this.itemBinding;
         }
     }
 }

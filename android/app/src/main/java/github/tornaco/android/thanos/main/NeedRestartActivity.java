@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.databinding.ActivityNeedRestartBinding;
 import github.tornaco.android.thanos.util.ActivityUtils;
-import github.tornaco.android.thanos.util.TypefaceHelper;
 
 public class NeedRestartActivity extends AppCompatActivity {
 

@@ -20,10 +20,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.elvishew.xlog.XLog;
+
 import java.util.List;
 
 import github.tornaco.android.thanos.R;
-import com.elvishew.xlog.XLog;
 import util.CollectionUtils;
 
 @SuppressWarnings("WeakerAccess")

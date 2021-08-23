@@ -20,12 +20,15 @@ import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.thanos.android.ops.model.Op;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class OpsPackageLoader implements CommonAppListFilterViewModel.ListModelLoader {
     private Context context;
     private Op op;
+
+    public OpsPackageLoader(Context context, Op op) {
+        this.context = context;
+        this.op = op;
+    }
 
     @Override
     public List<AppListModel> load(@NonNull CategoryIndex index) {

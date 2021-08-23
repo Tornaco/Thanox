@@ -27,7 +27,6 @@ import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ArrayUtils;
 import github.tornaco.android.thanos.core.util.Optional;
 import lang3.RandomStringUtils;
-import lombok.AllArgsConstructor;
 
 public class CheatFieldSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
   private String fieldId;
@@ -637,12 +636,16 @@ public class CheatFieldSettingsFragment extends BaseWithFabPreferenceFragmentCom
     }
   }
 
-  @AllArgsConstructor
   abstract class FieldPrefHandler {
     private String key;
     private boolean isOriginal;
 
-    void bind() {
+      public FieldPrefHandler(String key, boolean isOriginal) {
+          this.key = key;
+          this.isOriginal = isOriginal;
+      }
+
+      void bind() {
       Optional.ofNullable((EditTextPreference) findPreference(key)).ifPresent(this::onBind);
     }
 

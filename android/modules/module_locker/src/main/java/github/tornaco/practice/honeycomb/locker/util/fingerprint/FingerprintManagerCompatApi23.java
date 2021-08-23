@@ -16,6 +16,8 @@
 
 package github.tornaco.practice.honeycomb.locker.util.fingerprint;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
@@ -28,8 +30,6 @@ import java.security.Signature;
 
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
-
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 /**
  * Actual FingerprintManagerCompat implementation for API level 23 and later.

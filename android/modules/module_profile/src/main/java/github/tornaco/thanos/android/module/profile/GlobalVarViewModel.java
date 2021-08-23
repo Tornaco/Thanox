@@ -9,6 +9,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.elvishew.xlog.XLog;
 import com.google.common.io.CharStreams;
 
 import java.io.InputStreamReader;
@@ -22,7 +23,6 @@ import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.GlobalVar;
 import github.tornaco.android.thanos.core.util.Rxs;
-import com.elvishew.xlog.XLog;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;
@@ -30,15 +30,12 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 
 public class GlobalVarViewModel extends AndroidViewModel {
 
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final CompositeDisposable disposables = new CompositeDisposable();
-    @Getter
     private final ObservableArrayList<GlobalVar> globalVars = new ObservableArrayList<>();
 
     private GlobalVarLoader loader = () -> new ArrayList<>(Arrays.asList(
@@ -98,6 +95,14 @@ public class GlobalVarViewModel extends AndroidViewModel {
         super.onCleared();
         disposables.clear();
         unRegisterEventReceivers();
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<GlobalVar> getGlobalVars() {
+        return this.globalVars;
     }
 
     public interface GlobalVarLoader {

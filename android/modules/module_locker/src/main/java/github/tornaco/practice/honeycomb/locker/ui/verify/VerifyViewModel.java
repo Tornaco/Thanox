@@ -1,5 +1,9 @@
 package github.tornaco.practice.honeycomb.locker.ui.verify;
 
+import static github.tornaco.android.thanos.core.app.activity.VerifyResult.REASON_USER_CANCEL;
+import static github.tornaco.android.thanos.core.app.activity.VerifyResult.REASON_USER_FP_INCORRECT;
+import static github.tornaco.android.thanos.core.app.activity.VerifyResult.REASON_USER_KEY_NOT_SET;
+
 import android.Manifest;
 import android.app.Application;
 import android.content.pm.PackageManager;
@@ -21,17 +25,10 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.app.activity.VerifyResult;
 import github.tornaco.practice.honeycomb.locker.util.fingerprint.FingerprintManagerCompat;
-import lombok.Setter;
-
-import static github.tornaco.android.thanos.core.app.activity.VerifyResult.REASON_USER_CANCEL;
-import static github.tornaco.android.thanos.core.app.activity.VerifyResult.REASON_USER_FP_INCORRECT;
-import static github.tornaco.android.thanos.core.app.activity.VerifyResult.REASON_USER_KEY_NOT_SET;
 
 public class VerifyViewModel extends AndroidViewModel {
     private static final long PROGRESS_MAX = ActivityStackSupervisor.LOCKER_VERIFY_TIMEOUT_MILLS;
-    @Setter
     private int requestCode;
-    @Setter
     public String pkg;
 
     public ObservableBoolean verified = new ObservableBoolean(false);
@@ -218,5 +215,13 @@ public class VerifyViewModel extends AndroidViewModel {
         lockerManager = ThanosManager.from(getApplication().getApplicationContext())
                 .getActivityStackSupervisor();
         return lockerManager;
+    }
+
+    public void setRequestCode(int requestCode) {
+        this.requestCode = requestCode;
+    }
+
+    public void setPkg(String pkg) {
+        this.pkg = pkg;
     }
 }

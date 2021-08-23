@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.elvishew.xlog.XLog;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -17,14 +18,15 @@ import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewMod
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
-import com.elvishew.xlog.XLog;
-import lombok.AllArgsConstructor;
 import util.CollectionUtils;
 
-@AllArgsConstructor
 public class CleanUpTaskRemovalAppsLoader implements CommonFuncToggleAppListFilterViewModel.ListModelLoader {
     @NonNull
     private final Context context;
+
+    public CleanUpTaskRemovalAppsLoader(Context context) {
+        this.context = context;
+    }
 
     @Override
     public List<AppListModel> load(@NonNull CategoryIndex index) {

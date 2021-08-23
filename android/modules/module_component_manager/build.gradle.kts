@@ -44,6 +44,7 @@ dependencies {
     implementation(Libs.AndroidX.recyclerview)
     implementation(Libs.AndroidX.preference)
     implementation(Libs.AndroidX.constraint)
+    implementation(Libs.AndroidX.swipeRefreshLayout)
 
     implementation(Libs.Others.guavaAndroid)
 
@@ -54,6 +55,7 @@ dependencies {
     implementation(project(":android_framework:base"))
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
+    add("kapt", project(":annotation_processors:permission-requester-compiler"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
 
     implementation(project(":third_party:recyclerview-fastscroll"))

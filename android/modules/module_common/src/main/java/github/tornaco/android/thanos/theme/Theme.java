@@ -3,9 +3,7 @@ package github.tornaco.android.thanos.theme;
 import androidx.annotation.StyleRes;
 
 import github.tornaco.android.thanos.module.common.R;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public enum Theme {
     Light(R.style.AppThemeLight_NoActionBar),
     LightRed(R.style.AppThemeLightRed_NoActionBar),
@@ -26,4 +24,8 @@ public enum Theme {
 
     @StyleRes
     public int themeRes;
+
+    private Theme(int themeRes) {
+        this.themeRes = themeRes;
+    }
 }

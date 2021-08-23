@@ -13,7 +13,6 @@ import java.util.List;
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.databinding.ItemSuggestedAppBinding;
-import lombok.Getter;
 import util.Consumer;
 
 public class SuggestedAppsAdapter extends RecyclerView.Adapter<SuggestedAppsAdapter.VH>
@@ -55,13 +54,16 @@ public class SuggestedAppsAdapter extends RecyclerView.Adapter<SuggestedAppsAdap
         notifyDataSetChanged();
     }
 
-    @Getter
     static final class VH extends RecyclerView.ViewHolder {
         private ItemSuggestedAppBinding binding;
 
         VH(@NonNull ItemSuggestedAppBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public github.tornaco.android.thanos.databinding.ItemSuggestedAppBinding getBinding() {
+            return this.binding;
         }
     }
 }

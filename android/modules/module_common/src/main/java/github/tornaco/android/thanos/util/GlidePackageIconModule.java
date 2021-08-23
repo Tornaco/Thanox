@@ -20,15 +20,13 @@ import com.bumptech.glide.load.model.ModelLoaderFactory;
 import com.bumptech.glide.load.model.MultiModelLoaderFactory;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.signature.ObjectKey;
+import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.common.util.ApkUtil;
 import github.tornaco.android.thanos.core.pm.AppInfo;
-import com.elvishew.xlog.XLog;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.util.iconpack.IconPack;
 import github.tornaco.android.thanos.util.iconpack.IconPackManager;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import util.Singleton2;
 
 /**
@@ -39,12 +37,15 @@ import util.Singleton2;
 public class GlidePackageIconModule extends AppGlideModule {
 
     @SuppressWarnings("NullableProblems")
-    @AllArgsConstructor
     private static class PackageInfoDataFetcher implements DataFetcher<Bitmap> {
 
-        @Getter
         private AppInfo info;
         private Context context;
+
+        public PackageInfoDataFetcher(AppInfo info, Context context) {
+            this.info = info;
+            this.context = context;
+        }
 
         @Override
         public void loadData(Priority priority, DataCallback<? super Bitmap> callback) {
@@ -101,9 +102,12 @@ public class GlidePackageIconModule extends AppGlideModule {
         public DataSource getDataSource() {
             return DataSource.LOCAL;
         }
+
+        public AppInfo getInfo() {
+            return this.info;
+        }
     }
 
-    @AllArgsConstructor
     private static class PackageIconModuleLoaderFactory
             implements ModelLoaderFactory<AppInfo, Bitmap> {
         private Context context;
@@ -129,6 +133,10 @@ public class GlidePackageIconModule extends AppGlideModule {
                 };
             }
         };
+
+        public PackageIconModuleLoaderFactory(Context context) {
+            this.context = context;
+        }
 
 
         private static ModelLoader<AppInfo, Bitmap> singleInstanceLoader(Context context) {

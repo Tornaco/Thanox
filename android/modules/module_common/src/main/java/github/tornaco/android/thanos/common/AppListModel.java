@@ -5,9 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import github.tornaco.android.thanos.core.pm.AppInfo;
-import lombok.ToString;
 
-@ToString
 public class AppListModel extends ListModel<AppListModel> {
     @NonNull
     public AppInfo appInfo;
@@ -71,5 +69,9 @@ public class AppListModel extends ListModel<AppListModel> {
     @Override
     public int compareTo(@NonNull AppListModel listModel) {
         return this.appInfo.compareTo(listModel.appInfo);
+    }
+
+    public String toString() {
+        return "AppListModel(appInfo=" + this.appInfo + ", badge=" + this.badge + ", badge2=" + this.badge2 + ", badge1BgColor=" + this.badge1BgColor + ", badge2BgColor=" + this.badge2BgColor + ", description=" + this.description + ", showStateBadge=" + this.showStateBadge + ")";
     }
 }

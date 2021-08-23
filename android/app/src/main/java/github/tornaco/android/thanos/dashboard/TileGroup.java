@@ -2,9 +2,6 @@ package github.tornaco.android.thanos.dashboard;
 
 import java.util.List;
 
-import lombok.Getter;
-
-@Getter
 public class TileGroup {
     private StatusHeaderInfo headerInfo;
     private StatusFooterInfo footerInfo;
@@ -27,5 +24,21 @@ public class TileGroup {
 
     public boolean hasAtLeastOneTile() {
         return tiles != null && !tiles.isEmpty();
+    }
+
+    public StatusHeaderInfo getHeaderInfo() {
+        return this.headerInfo;
+    }
+
+    public StatusFooterInfo getFooterInfo() {
+        return this.footerInfo;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public List<Tile> getTiles() {
+        return this.tiles;
     }
 }

@@ -1,5 +1,7 @@
 package github.tornaco.thanos.android.ops.model;
 
+import static github.tornaco.android.thanos.core.secure.ops.AppOpsManager._NUM_OP;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 
@@ -10,8 +12,6 @@ import github.tornaco.android.thanos.core.annotation.Nullable;
 import github.tornaco.android.thanos.core.util.ArrayUtils;
 import github.tornaco.android.thanos.core.util.Preconditions;
 import github.tornaco.thanos.android.ops.R;
-
-import static github.tornaco.android.thanos.core.secure.ops.AppOpsManager._NUM_OP;
 
 @SuppressWarnings("WeakerAccess")
 public class Ops {

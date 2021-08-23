@@ -21,17 +21,14 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.BiConsumer;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 import util.Consumer;
 
 public class NRDListViewModel extends AndroidViewModel {
 
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final CompositeDisposable disposables = new CompositeDisposable();
-    @Getter
     protected final MutableLiveData<List<NotificationRecordModelGroup>> recordModelGroups = new MutableLiveData<>();
 
     private final ObservableField<String> queryText = new ObservableField<>("");
@@ -151,5 +148,13 @@ public class NRDListViewModel extends AndroidViewModel {
         super.onCleared();
         disposables.clear();
         unRegisterEventReceivers();
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public MutableLiveData<List<NotificationRecordModelGroup>> getRecordModelGroups() {
+        return this.recordModelGroups;
     }
 }

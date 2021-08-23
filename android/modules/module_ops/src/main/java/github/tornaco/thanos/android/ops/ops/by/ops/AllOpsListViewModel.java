@@ -17,19 +17,16 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
-import rx2.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
+import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 
 public class AllOpsListViewModel extends AndroidViewModel {
 
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final List<Disposable> disposables = new ArrayList<>();
-    @Getter
     protected final ObservableArrayList<OpGroup> opGroups = new ObservableArrayList<>();
 
     public AllOpsListViewModel(@NonNull Application application) {
@@ -65,5 +62,13 @@ public class AllOpsListViewModel extends AndroidViewModel {
         super.onCleared();
         CollectionUtils.consumeRemaining(disposables, Disposable::dispose);
         unRegisterEventReceivers();
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<OpGroup> getOpGroups() {
+        return this.opGroups;
     }
 }

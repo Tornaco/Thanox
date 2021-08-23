@@ -14,7 +14,6 @@ import androidx.lifecycle.AndroidViewModel;
 import com.elvishew.xlog.XLog;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -30,24 +29,18 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
-import lombok.Setter;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 
 public class CommonAppListFilterViewModel extends AndroidViewModel {
 
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     protected final List<Disposable> disposables = new ArrayList<>();
-    @Getter
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
-    @Getter
     private final ObservableField<CategoryIndex> categoryIndex = new ObservableField<>(CategoryIndex._3rd);
 
     private final ObservableField<String> queryText = new ObservableField<>("");
 
-    @Setter
     private ListModelLoader listModelLoader;
 
     public CommonAppListFilterViewModel(@NonNull Application application) {
@@ -131,6 +124,22 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
         if (TextUtils.isEmpty(query)) return;
         queryText.set(query);
         loadModels();
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<AppListModel> getListModels() {
+        return this.listModels;
+    }
+
+    public ObservableField<CategoryIndex> getCategoryIndex() {
+        return this.categoryIndex;
+    }
+
+    public void setListModelLoader(ListModelLoader listModelLoader) {
+        this.listModelLoader = listModelLoader;
     }
 
     public interface ListModelLoader {

@@ -23,11 +23,11 @@ import android.content.pm.ResolveInfo;
 
 import androidx.annotation.NonNull;
 
+import com.elvishew.xlog.XLog;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.elvishew.xlog.XLog;
-import lombok.Getter;
 import util.Singleton;
 
 public class IconPackManager {
@@ -43,7 +43,6 @@ public class IconPackManager {
         return sManager.get();
     }
 
-    @Getter
     private final List<IconPack> cachedIconPacks = new ArrayList<>();
 
     private boolean mCachedOnce = false;
@@ -116,4 +115,7 @@ public class IconPackManager {
         return packages;
     }
 
+    public List<IconPack> getCachedIconPacks() {
+        return this.cachedIconPacks;
+    }
 }

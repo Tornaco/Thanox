@@ -14,7 +14,6 @@ import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.databinding.ItemSmartFreezeAppBinding;
-import lombok.Getter;
 import util.Consumer;
 
 public class SmartFreezeAppsAdapter extends RecyclerView.Adapter<SmartFreezeAppsAdapter.VH>
@@ -65,13 +64,16 @@ public class SmartFreezeAppsAdapter extends RecyclerView.Adapter<SmartFreezeApps
         notifyDataSetChanged();
     }
 
-    @Getter
     static final class VH extends RecyclerView.ViewHolder {
         private ItemSmartFreezeAppBinding binding;
 
         VH(@NonNull ItemSmartFreezeAppBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public github.tornaco.android.thanos.databinding.ItemSmartFreezeAppBinding getBinding() {
+            return this.binding;
         }
     }
 }

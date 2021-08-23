@@ -4,13 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
+
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
@@ -21,14 +28,10 @@ import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.PackageManager;
 import github.tornaco.android.thanos.core.pm.PackageSet;
 import github.tornaco.android.thanos.core.util.Optional;
-import github.tornaco.android.thanos.core.util.function.Predicate;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.SwitchBar;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import util.CollectionUtils;
 import util.ObjectsUtils;
 

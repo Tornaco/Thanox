@@ -16,7 +16,6 @@ import github.tornaco.android.thanos.common.AppItemViewLongClickListener;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.process.RunningState;
 import github.tornaco.android.thanos.databinding.ItemProcessManageBinding;
-import lombok.Getter;
 import util.Consumer;
 
 public class ProcessManageAdapter extends RecyclerView.Adapter<ProcessManageAdapter.VH>
@@ -77,13 +76,16 @@ public class ProcessManageAdapter extends RecyclerView.Adapter<ProcessManageAdap
         notifyDataSetChanged();
     }
 
-    @Getter
     static final class VH extends RecyclerView.ViewHolder {
         private ItemProcessManageBinding binding;
 
         VH(@NonNull ItemProcessManageBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public github.tornaco.android.thanos.databinding.ItemProcessManageBinding getBinding() {
+            return this.binding;
         }
     }
 }

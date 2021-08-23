@@ -23,14 +23,11 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import lombok.Getter;
 import rx2.android.schedulers.AndroidSchedulers;
 
 public class InfiniteZAppsViewModel extends AndroidViewModel {
-    @Getter
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     protected final List<Disposable> disposables = new ArrayList<>();
-    @Getter
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
 
     public InfiniteZAppsViewModel(@NonNull Application application) {
@@ -76,5 +73,13 @@ public class InfiniteZAppsViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
         disposables.clear();
+    }
+
+    public ObservableBoolean getIsDataLoading() {
+        return this.isDataLoading;
+    }
+
+    public ObservableArrayList<AppListModel> getListModels() {
+        return this.listModels;
     }
 }

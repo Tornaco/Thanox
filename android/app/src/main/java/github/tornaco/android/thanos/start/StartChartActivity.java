@@ -44,7 +44,6 @@ import github.tornaco.android.thanos.databinding.ActivityStartChartBinding;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.TypefaceHelper;
-import lombok.AllArgsConstructor;
 
 public class StartChartActivity extends ThemeActivity implements OnChartValueSelectedListener {
 
@@ -332,10 +331,14 @@ public class StartChartActivity extends ThemeActivity implements OnChartValueSel
         return super.onOptionsItemSelected(item);
     }
 
-    @AllArgsConstructor
     class StartEntry implements Comparable<StartEntry> {
         long times;
         String pkg;
+
+        public StartEntry(long times, String pkg) {
+            this.times = times;
+            this.pkg = pkg;
+        }
 
         @Override
         public int compareTo(@NonNull StartEntry o) {

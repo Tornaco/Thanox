@@ -15,7 +15,6 @@ import java.util.List;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.module.common.databinding.ItemCommonCheckableAppBinding;
-import lombok.Getter;
 import util.Consumer;
 
 class CommonFuncToggleAppListFilterAdapter extends RecyclerView.Adapter<CommonFuncToggleAppListFilterAdapter.VH>
@@ -107,13 +106,16 @@ class CommonFuncToggleAppListFilterAdapter extends RecyclerView.Adapter<CommonFu
         return String.valueOf(appName.charAt(0));
     }
 
-    @Getter
     static final class VH extends RecyclerView.ViewHolder {
         private ItemCommonCheckableAppBinding binding;
 
         VH(@NonNull ItemCommonCheckableAppBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        public github.tornaco.android.thanos.module.common.databinding.ItemCommonCheckableAppBinding getBinding() {
+            return this.binding;
         }
     }
 }

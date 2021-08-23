@@ -58,9 +58,6 @@ subprojects {
     tasks.withType<JavaCompile> {
         options.compilerArgs.addAll(
             arrayOf(
-                "-parameters",
-                "-Xdoclint:none",
-                "-Xlint:all",
                 "-Xmaxerrs",
                 "1000"))
         options.encoding = "UTF-8"

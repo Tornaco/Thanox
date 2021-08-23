@@ -113,6 +113,7 @@ dependencies {
     implementation(Libs.AndroidX.recyclerview)
     implementation(Libs.AndroidX.preference)
     implementation(Libs.AndroidX.constraint)
+    implementation(Libs.AndroidX.swipeRefreshLayout)
     implementation(Libs.AndroidX.lifeCycleRuntimeKtx)
     annotationProcessor(Libs.AndroidX.lifeCycleCompiler)
 

@@ -92,13 +92,14 @@ android {
         kotlinCompilerExtensionVersion = Compose.composeVersion
     }
 
-    applicationVariants.forEach { variant ->
-        println("applicationVariants@${project.name}-> $variant")
-        variant.outputs.forEach { output ->
-            val flavor = variant.name
-            val versionName = variant.versionName
-            //FIXME
-            // outputFileName = "thanox_${versionName}.apk"
+    applicationVariants.all {
+        log("applicationVariants@${project.name}-> $this")
+        val versionName = versionName
+        outputs.all {
+            println("applicationVariants@${outputFile}-> $this")
+            val impl = this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
+            impl.outputFileName = "thanox_${versionName}(${Configs.thanoxVersionCode}).apk"
+            log("impl.outputFileName changed to:${impl.outputFileName}")
         }
     }
 

@@ -1,19 +1,16 @@
-import tornaco.project.android.thanox.Compose
-import tornaco.project.android.thanox.Configs
-import tornaco.project.android.thanox.Configs.thanoxAppId
-import tornaco.project.android.thanox.Libs
-import tornaco.project.android.thanox.Tests
+import Build_gradle.Date
+import Build_gradle.Properties
+import tornaco.project.android.thanox.*
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
-    id("github.tornaco.rhino.plugin.stub_gen")
 }
 
 android {
     defaultConfig {
-        applicationId = thanoxAppId
+        applicationId = Configs.thanoxAppId
         vectorDrawables.useSupportLibrary = true
         versionName = Configs.thanoxVersionName
         versionCode = Configs.thanoxVersionCode
@@ -38,8 +35,18 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
-            isShrinkResources = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("release")
+        }
+
+        getByName("debug") {
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -183,4 +190,46 @@ dependencies {
 
     testImplementation(Tests.junit)
     testImplementation(Tests.junitKotlin)
+}
+
+
+typealias Properties = java.util.Properties
+typealias UUID = java.util.UUID
+typealias Date = java.util.Date
+
+tasks.register("updateProps") {
+    group = "prop"
+
+    log("*** updateProps ***")
+    val serviceProps = Properties()
+    // Src.
+    serviceProps.load(project.rootProject.file("thanos.properties").inputStream())
+
+    // Write fields.
+    serviceProps.setProperty("thanox.build.version.code", Configs.thanoxVersionCode.toString())
+    serviceProps.setProperty("thanox.build.version.name", Configs.thanoxVersionName)
+    serviceProps.setProperty("thanox.build.variant", Configs.thanoxBuildVariant)
+    serviceProps.setProperty("thanox.build.debuggable", Configs.thanoxBuildIsDebug.toString())
+    serviceProps.setProperty("thanox.build.flavor", Configs.thanoxBuildFlavor)
+    serviceProps.setProperty("thanox.build.host", Configs.thanoxBuildHostName)
+    serviceProps.setProperty("thanox.build.fp", Configs.thanoxBuildFP)
+    serviceProps.setProperty("thanox.build.date", Date().toString())
+    serviceProps.setProperty("thanox.build.app.package.name", Configs.thanoxAppId)
+    serviceProps.setProperty("thanox.build.app.package.name.prefix",
+        Configs.thanoxAppIdPrefix)
+    serviceProps.setProperty("thanox.build.shortcut.package.name.prefix",
+        Configs.thanoxShortcutAppIdPrefix)
+
+
+    // Write to app resources.
+    serviceProps.store(
+        project.file("src/main/resources/META-INF/thanos.properties").outputStream(),
+        "Auto Generated, Do Not Modify.")
+    log("*** updateProps done***")
+}
+
+afterEvaluate {
+    android.applicationVariants.forEach { variant ->
+        variant.assembleProvider.get().finalizedBy("updateProps")
+    }
 }

@@ -1,6 +1,7 @@
 import tornaco.project.android.thanox.Configs.outDir
 import tornaco.project.android.thanox.Configs.thanoxVersionCode
 import tornaco.project.android.thanox.Configs.thanoxVersionName
+import tornaco.project.android.thanox.log
 
 buildscript {
     repositories {
@@ -40,8 +41,9 @@ androidGitVersion {
 
 thanoxVersionCode = androidGitVersion.code()
 thanoxVersionName = androidGitVersion.name()
-println("### thanoxVersionCode: $thanoxVersionCode")
-println("### thanoxVersionName: $thanoxVersionName")
+
+log("thanoxVersionCode: $thanoxVersionCode")
+log("thanoxVersionName: $thanoxVersionName")
 
 subprojects {
     repositories {

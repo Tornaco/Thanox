@@ -5,7 +5,6 @@ import org.gradle.api.Project
 import java.io.File
 import java.net.InetAddress
 import java.util.*
-import java.util.regex.Pattern
 
 private val props = Properties()
 
@@ -19,15 +18,16 @@ object Configs {
     var thanoxVersionCode: Int? = 0
     var thanoxVersionName: String? = null
 
-    val Project.thanoxAppIdPrefix: String get() = "github.tornaco.android.thanos"
-    val Project.thanoxShortcutAppIdPrefix: String get() = "github.tornaco.android.thanos.shortcut"
-    val Project.thanoxAppId: String get() = if (thanoxBuildIsRow) "$thanoxAppIdPrefix.pro" else thanoxAppIdPrefix
+    var thanoxAppId: String? = null
+    var thanoxBuildHostName: String? = null
+    var thanoxBuildFlavor: String? = null
+    var thanoxBuildVariant: String? = null
+    var thanoxBuildIsDebug: Boolean? = false
+    var thanoxBuildIsRow: Boolean? = false
 
-    val Project.thanoxBuildHostName: String get() = InetAddress.getLocalHost().hostName
-    val Project.thanoxBuildFlavor: String get() = getBuildTaskRequestPartInGroup(1)
-    val Project.thanoxBuildVariant: String get() = getBuildTaskRequestPartInGroup(2)
-    val Project.thanoxBuildIsDebug: Boolean get() = thanoxBuildVariant == "debug"
-    val Project.thanoxBuildIsRow: Boolean get() = thanoxBuildFlavor == "row"
+    val thanoxAppIdPrefix: String get() = "github.tornaco.android.thanos"
+    val thanoxBuildFP: String get() = "Thanox@tornaco:${UUID.randomUUID().toString()}"
+    val thanoxShortcutAppIdPrefix: String get() = "github.tornaco.android.thanos.shortcut"
 
 
     val Project.resPrefix: String get() = "${this.name}_"
@@ -38,34 +38,17 @@ object Configs {
         val v = props[key] as? String ?: return null
         return if (v.isBlank()) null else v
     }
-
-    private fun Project.getBuildTaskRequestPartInGroup(group: Int): String {
-        val gradle = this.rootProject.gradle
-        val tskReqStr = gradle.startParameter.taskRequests.toString()
-
-        val pattern = when {
-            tskReqStr.contains("assemble") -> {
-                Pattern.compile("assemble(\\w+)(Release|Debug)")
-            }
-            tskReqStr.contains("install") -> {
-                Pattern.compile("install(\\w+)(Release|Debug)")
-            }
-            else -> {
-                System.err.println("Unable to detect variant...")
-                return ""
-            }
-        }
-
-        val matcher = pattern.matcher(tskReqStr)
-
-        return if (matcher.find()) {
-            matcher.group(2).toLowerCase(Locale.getDefault())
-        } else {
-            throw IllegalArgumentException("getBuildTaskRequestPartInGroup#$group, NO MATCH FOUND...")
-        }
-    }
 }
 
+enum class Flavors {
+    ROW,
+    PRC
+}
+
+enum class Variant {
+    DEBUG,
+    RELEASE
+}
 
 object MagiskModConfigs {
     /*
@@ -101,6 +84,7 @@ object MagiskModConfigs {
     val moduleVersionCode = Configs.thanoxVersionCode
 }
 
+@ExperimentalStdlibApi
 class ThanoxProjectBuildPlugin : Plugin<Project> {
     override fun apply(project: Project) = project.applyPlugin()
 
@@ -108,6 +92,50 @@ class ThanoxProjectBuildPlugin : Plugin<Project> {
         props.clear()
         rootProject.file("gradle.properties").inputStream().use { props.load(it) }
         rootProject.file("local.properties").inputStream().use { props.load(it) }
+
+        updateBuildConfigFields()
     }
 
+    private fun Project.updateBuildConfigFields() {
+        Configs.thanoxBuildHostName = InetAddress.getLocalHost().hostName
+        Configs.thanoxBuildFlavor = getBuildFlavor().name.lowercase()
+        Configs.thanoxBuildVariant = getBuildVariant().name.lowercase()
+        Configs.thanoxBuildIsDebug = Configs.thanoxBuildVariant == "debug"
+        val isRow = Configs.thanoxBuildFlavor == "row"
+        Configs.thanoxBuildIsRow = isRow
+        Configs.thanoxAppId =
+            if (isRow) "$${Configs.thanoxAppIdPrefix}.pro" else Configs.thanoxAppIdPrefix
+
+        log("thanoxBuildHostName: ${Configs.thanoxBuildHostName}")
+        log("thanoxBuildFlavor: ${Configs.thanoxBuildFlavor}")
+        log("thanoxBuildVariant: ${Configs.thanoxBuildVariant}")
+        log("thanoxBuildIsDebug: ${Configs.thanoxBuildIsDebug}")
+        log("thanoxAppId: ${Configs.thanoxAppId}")
+    }
+
+    private fun Project.getBuildFlavor(): Flavors {
+        val tskReqStr = gradle.startParameter.taskRequests.map {
+            it.args
+        }.toString()
+        log("tskReqStr: $tskReqStr")
+        val isRow = tskReqStr.contains(Flavors.ROW.name, ignoreCase = true)
+        return if (isRow) {
+            Flavors.ROW
+        } else {
+            Flavors.PRC
+        }
+    }
+
+    private fun Project.getBuildVariant(): Variant {
+        val tskReqStr = gradle.startParameter.taskRequests.map {
+            it.args
+        }.toString()
+        log("tskReqStr: $tskReqStr")
+        val isDebug = tskReqStr.contains(Variant.DEBUG.name, ignoreCase = true)
+        return if (isDebug) {
+            Variant.DEBUG
+        } else {
+            Variant.RELEASE
+        }
+    }
 }

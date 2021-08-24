@@ -1,5 +1,7 @@
 package github.tornaco.android.thanos;
 
+import static github.tornaco.android.thanos.CrashHandlerKt.installCrashHandler;
+
 import android.content.Context;
 
 import com.elvishew.xlog.XLog;
@@ -36,7 +38,7 @@ public class ThanosApp extends MultipleModulesApp {
         }
 
         Init.init(this);
-        CrashHandler.install(this);
+        installCrashHandler(this);
     }
 
     public static boolean isPrc() {

@@ -93,10 +93,8 @@ android {
     }
 
     applicationVariants.all {
-        log("applicationVariants@${project.name}-> $this")
         val versionName = versionName
         outputs.all {
-            println("applicationVariants@${outputFile}-> $this")
             val impl = this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
             impl.outputFileName = "thanox_${versionName}(${Configs.thanoxVersionCode}).apk"
             log("impl.outputFileName changed to:${impl.outputFileName}")
@@ -162,10 +160,7 @@ dependencies {
     add("kapt", project(":annotation_processors:permission-requester-compiler"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
 
-    implementation(Libs.ThanoxInternal.moduleDonate)
-    implementation(Libs.ThanoxInternal.frameworkServices)
-    implementation(Libs.ThanoxInternal.frameworkDB)
-    implementation(Libs.ThanoxInternal.frameworkPatchxEntry)
+
 
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_ops"))
@@ -176,10 +171,13 @@ dependencies {
     implementation(project(":modules:module_locker"))
     implementation(project(":modules:module_filepicker"))
     implementation(project(":modules:module_profile"))
+    implementation(project(":modules:module_donate"))
 
     implementation(project(":android_framework:base"))
     implementation(project(":android_framework:res"))
     implementation(project(":android_framework:patch-magisk:patch-framework"))
+    implementation(project(":android_framework:services"))
+    implementation(project(":android_framework:patchx-entry"))
 
     implementation(project(":nitro:nitro_framework"))
     implementation(project(":third_party:apkbuilder"))

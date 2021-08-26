@@ -37,4 +37,3 @@ dependencies {
     implementation(Libs.Others.apacheCommonCodec)
 }
 
-apply(from = "../publish_packages.gradle")

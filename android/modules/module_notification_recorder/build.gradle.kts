@@ -67,5 +67,3 @@ dependencies {
     implementation(project(":third_party:dateformatter"))
 
 }
-
-apply(from = "../publish_packages.gradle")

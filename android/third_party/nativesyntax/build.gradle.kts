@@ -35,4 +35,4 @@ dependencies {
     implementation(Libs.AndroidX.appCompat)
 }
 
-apply(from = "../publish_packages.gradle")
+

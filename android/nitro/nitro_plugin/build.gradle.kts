@@ -49,5 +49,3 @@ dependencies {
     compileOnly(files("../../android_sdk/27/android-27.jar"))
     compileOnly(project(":nitro:nitro_android_stub"))
 }
-
-apply(from = "../publish_packages_aar.gradle")

@@ -71,6 +71,3 @@ dependencies {
     implementation(project(":third_party:search"))
     implementation(project(":third_party:badge"))
 }
-
-apply(from = "../publish_packages.gradle")
-

@@ -55,4 +55,23 @@ include(":android_framework:patch-magisk:patch-framework")
 //
 //include(":shortcut_stub")
 
+val internalProjects = listOf(
+    ":modules:module_donate",
+    ":third_party:sec_net",
+    ":android_framework:db",
+    ":android_framework:services",
+    ":android_framework:patchx-entry",
+    ":android_framework:patchx",
+    ":android_framework:patchx-29",
+    ":android_framework:patchx-30",
+    ":android_framework:patchx-31",
+    ":rhino:rhino_annotations",
+    ":rhino:rhino_plugin_stub_gen",
+)
 
+internalProjects.forEach {
+    println("internalProject: $it")
+    include(it)
+    project(it).projectDir =
+        file("internal/Thanox-Internal${it.replace(File.pathSeparator, File.separator)}")
+}

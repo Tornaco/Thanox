@@ -26,7 +26,7 @@ object Configs {
     var thanoxBuildIsRow: Boolean? = false
 
     val thanoxAppIdPrefix: String get() = "github.tornaco.android.thanos"
-    val thanoxBuildFP: String get() = "Thanox@tornaco:${UUID.randomUUID().toString()}"
+    val thanoxBuildFP: String get() = "thanox@tornaco:${UUID.randomUUID().toString()}"
     val thanoxShortcutAppIdPrefix: String get() = "github.tornaco.android.thanos.shortcut"
 
 

@@ -36,4 +36,4 @@ dependencies {
     implementation(Libs.AndroidX.recyclerview)
 }
 
-apply(from = "../publish_packages.gradle")
+

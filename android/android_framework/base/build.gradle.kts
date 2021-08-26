@@ -52,6 +52,3 @@ tasks.withType<Checkstyle> {
 }
 
 addAidlTask()
-
-apply(from = "../publish_packages.gradle")
-

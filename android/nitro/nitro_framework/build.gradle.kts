@@ -46,5 +46,3 @@ dependencies {
 
     implementation(project(":android_framework:base"))
 }
-
-apply(from = "../publish_packages_aar.gradle")

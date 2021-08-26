@@ -36,4 +36,4 @@ dependencies {
     implementation(Libs.AndroidX.interpolator)
 }
 
-apply(from = "../publish_packages.gradle")
+

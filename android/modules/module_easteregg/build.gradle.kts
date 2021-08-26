@@ -57,5 +57,3 @@ dependencies {
     add("kapt", project(":annotation_processors:permission-requester-compiler"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
 }
-
-apply(from = "../publish_packages.gradle")

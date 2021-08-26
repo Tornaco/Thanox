@@ -46,5 +46,3 @@ dependencies {
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))
 }
-
-apply(from = "../publish_packages.gradle")

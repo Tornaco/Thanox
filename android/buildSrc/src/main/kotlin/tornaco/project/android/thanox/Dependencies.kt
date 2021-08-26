@@ -96,6 +96,7 @@ object Libs {
         const val retrofit = "com.squareup.retrofit2:retrofit:2.7.1"
         const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:2.7.1"
         const val retrofitAdapterRxJava2 = "com.squareup.retrofit2:adapter-rxjava2:2.7.1"
+        const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
         // for testing retrofit.
         const val mockWebServer = "com.squareup.okhttp3:mockwebserver:4.9.1"
@@ -129,6 +130,13 @@ object Libs {
         const val javassist = "org.javassist:javassist:3.26.0-GA"
     }
 
+    object Rules {
+        private const val version = "3.3.0"
+        const val core = "org.jeasy:easy-rules-core:$version"
+        const val mvel = "org.jeasy:easy-rules-mvel:$version"
+        const val support = "org.jeasy:easy-rules-support:$version"
+    }
+
     object Accompanist {
         private const val version = "0.16.0"
         const val navigationAnim =
@@ -140,18 +148,9 @@ object Libs {
 
         private const val groupRhino = "github.tornaco.android.thanos.rhino-verify"
         private const val groupNitro = "github.tornaco.android.thanos.nitro"
-        private const val groupModules = "github.tornaco.android.thanos.modules"
-        private const val groupFrameworks = "github.tornaco.android.thanos.frameworks"
 
         const val rhinoAnnotations = "$groupRhino:rhino_annotations:$version"
         const val rhinoGradlePlugin = "$groupRhino:rhino_plugin_stub_gen:$version"
-
-        const val moduleDonate = "$groupModules:module-donate:$version"
-
-        const val frameworkServices = "$groupFrameworks:services:$version"
-        const val frameworkPatchxEntry = "$groupFrameworks:patchx-entry:$version"
-        const val frameworkDB = "$groupFrameworks:db:$version"
-
         const val nitroGradlePlugin = "$groupNitro:nitro_gradle_plugin:$version"
     }
 }

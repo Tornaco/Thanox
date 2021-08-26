@@ -29,5 +29,3 @@ android {
         dataBinding = false
     }
 }
-
-apply(from = "../publish_packages_aar.gradle")

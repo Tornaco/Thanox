@@ -66,6 +66,3 @@ dependencies {
     implementation(project(":third_party:badge"))
     implementation(project(":third_party:nativesyntax"))
 }
-
-apply(from = "../publish_packages.gradle")
-

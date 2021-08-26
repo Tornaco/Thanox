@@ -10,8 +10,8 @@ dependencies {
     annotationProcessor(Libs.Others.lombok)
 
     implementation(project(":android_framework:base"))
+    implementation(project(":android_framework:services"))
     compileOnly(project(":android_framework:hidden-api"))
-    implementation(Libs.ThanoxInternal.frameworkServices)
 
 }
 

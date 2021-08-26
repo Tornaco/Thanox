@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import github.tornaco.android.thanos.R
@@ -56,6 +57,7 @@ class NeedToRestartActivity : ComponentActivity() {
                         contentDescription = "AlertIcon")
                     Text(modifier = Modifier.padding(16.dp),
                         color = Color.White,
+                        textAlign = TextAlign.Center,
                         text = stringResource(id = R.string.message_reboot_needed),
                         style = MaterialTheme.typography.h6)
                 }

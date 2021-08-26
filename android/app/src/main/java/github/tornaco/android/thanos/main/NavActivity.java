@@ -156,7 +156,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
 
     private void showRebootPage() {
         // Now navigate to reboot activity.
-        NeedRestartActivity.start(thisActivity());
+        NeedToRestartActivity.Starter.INSTANCE.start(thisActivity());
     }
 
     private void showActiveDialog() {

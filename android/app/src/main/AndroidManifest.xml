@@ -74,7 +74,7 @@
         <activity android:name=".start.StartRuleActivity" />
         <activity android:name=".power.StandByRuleActivity" />
         <activity
-            android:name=".main.NeedRestartActivity"
+            android:name=".main.NeedToRestartActivity"
             android:theme="@style/AppThemeNeedRestart" />
         <activity android:name=".power.SmartFreezeActivity" />
         <activity

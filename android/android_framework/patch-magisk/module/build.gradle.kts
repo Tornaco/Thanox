@@ -12,6 +12,7 @@ import tornaco.project.android.thanox.MagiskModConfigs.moduleName
 import tornaco.project.android.thanox.MagiskModConfigs.moduleRiruApiVersion
 import tornaco.project.android.thanox.MagiskModConfigs.moduleVersion
 import tornaco.project.android.thanox.MagiskModConfigs.moduleVersionCode
+import tornaco.project.android.thanox.log
 import java.nio.file.Files
 import java.security.MessageDigest
 
@@ -153,7 +154,9 @@ afterEvaluate {
                 file("$magiskDir/module.prop").writeText(modulePropText)
             }
 
-            val nativeOutDir = file("build/intermediates/cmake/$variant.name/obj")
+            val nativeOutDir = file("$buildDir/intermediates/cmake/${variant.name}/obj")
+            log("nativeOutDir: $nativeOutDir")
+            log("nativeOutDir: ${nativeOutDir.list()?.map { it }}")
 
             doLast {
                 copy {
@@ -165,7 +168,7 @@ afterEvaluate {
                 copy {
                     val dexOutDir = file("${magiskDir}/system/framework/")
                     from(file("$outDir/android_framework/patch-magisk/bridge-dex-app/outputs/thanox-bridge.jar"))
-                    into(file("${dexOutDir}/thanox-bridge.jar"))
+                    into(file("${dexOutDir}"))
                 }
 
                 // generate sha1sum

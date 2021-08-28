@@ -2,16 +2,27 @@ package github.tornaco.android.thanox.magisk.bridge.proxy;
 
 import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
 
+import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.IActivityTaskManager;
+import android.app.TaskInfo;
 import android.content.Intent;
+import android.content.pm.ParceledListSlice;
 import android.os.IBinder;
 import android.os.IInterface;
+import android.os.RemoteException;
 import android.util.Log;
 
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
+import github.tornaco.android.thanos.core.util.PkgUtils;
+import util.ObjectsUtils;
 
 public class ActivityTaskManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
     @Override
@@ -49,6 +60,8 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                                         handleActivityStopped(args);
                                     } else if ("startActivity".equals(method.getName())) {
                                         handleStartActivity(args);
+                                    } else if ("getRecentTasks".equals(method.getName())) {
+                                        return handleGetRecentTask(am, method, args);
                                     }
                                 } catch (Throwable e) {
                                     logging("Error handle IActivityTaskManager" + Log.getStackTraceString(e));
@@ -108,5 +121,56 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                 args[intentIndex] = realIntent;
             }
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    @SuppressLint("NewApi" /* We will only support N above */)
+    private ParceledListSlice<ActivityManager.RecentTaskInfo> handleGetRecentTask(
+            IActivityTaskManager am,
+            Method method,
+            Object[] args) throws Throwable {
+        ParceledListSlice<ActivityManager.RecentTaskInfo> recentTasks
+                = (ParceledListSlice<ActivityManager.RecentTaskInfo>) tryInvoke(am, method, args);
+        List<ActivityManager.RecentTaskInfo> taskInfoList = recentTasks.getList();
+        logging("getRecentTasks: %s", Arrays.toString(taskInfoList.toArray()));
+        taskInfoList = taskInfoList.stream().filter((Predicate<TaskInfo>) taskInfo -> {
+            try {
+                return !shouldHideFromRecent(taskInfo);
+            } catch (RemoteException e) {
+                logging("shouldHideFromRecent error");
+                return true;
+            }
+        }).collect(Collectors.toList());
+        return new ParceledListSlice<>(taskInfoList);
+    }
+
+    @SuppressLint("NewApi" /* We will only support P above */)
+    private boolean shouldHideFromRecent(TaskInfo taskInfo) throws RemoteException {
+        Intent intent = taskInfo.baseIntent;
+        if (intent == null) {
+            logging("isVisibleRecentTask, intent is null for task: %s", taskInfo);
+            return false;
+        }
+        String pkgName = PkgUtils.packageNameOf(intent);
+        if (pkgName == null) {
+            return false;
+        }
+
+        if (ObjectsUtils.equals(
+                ThanosManagerNative.getDefault().getActivityStackSupervisor().getCurrentFrontApp(),
+                pkgName)) {
+            logging("isVisibleRecentTask, %s is current top, won't check.", pkgName);
+            return false;
+        }
+
+        int setting =
+                ThanosManagerNative.getDefault()
+                        .getActivityManager()
+                        .getRecentTaskExcludeSettingForPackage(pkgName);
+        boolean res = setting
+                == github.tornaco.android.thanos.core.app.ActivityManager.ExcludeRecentSetting
+                .EXCLUDE;
+        logging("isVisibleRecentTask hidden? %s %s", pkgName, res);
+        return res;
     }
 }

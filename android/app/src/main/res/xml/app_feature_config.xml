@@ -95,7 +95,7 @@
 
         <DropDownPreference
                 android:entries="@array/recent_task_exclude_entry_default_include_exclude"
-                android:entryValues="@array/recent_task_exclude_value"
+                android:entryValues="@array/recent_task_exclude_value_default_include_exclude"
                 app:key="@string/key_recent_task_exclude_settings"
                 app:persistent="false"
                 app:summary="@string/pre_summary_exclude_recent_task"

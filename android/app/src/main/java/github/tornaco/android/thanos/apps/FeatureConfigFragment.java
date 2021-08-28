@@ -27,6 +27,7 @@ import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
+import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
@@ -303,9 +304,19 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
     Objects.requireNonNull(pref).setEntries(supportForceInclude
             ? R.array.recent_task_exclude_entry_default_include_exclude
             : R.array.recent_task_exclude_entry_default_exclude);
+    Objects.requireNonNull(pref).setEntryValues(supportForceInclude
+            ? R.array.recent_task_exclude_value_default_include_exclude
+            : R.array.recent_task_exclude_value_default_exclude);
 
     int currentMode =
         thanos.getActivityManager().getRecentTaskExcludeSettingForPackage(appInfo.getPkgName());
+
+    if (!supportForceInclude && currentMode == ActivityManager.ExcludeRecentSetting.INCLUDE) {
+      // Force change to default mode since we can not support this mode.
+      currentMode = ActivityManager.ExcludeRecentSetting.NONE;
+      thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(appInfo.getPkgName(), currentMode);
+    }
+
     pref.setValue(String.valueOf(currentMode));
     pref.setOnPreferenceChangeListener(
         (preference, newValue) -> {

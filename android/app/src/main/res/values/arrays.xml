@@ -48,9 +48,14 @@
         <item>@string/pre_entry_exclude_recent_task_exclude</item>
     </string-array>
 
-    <string-array name="recent_task_exclude_value">
+    <string-array name="recent_task_exclude_value_default_include_exclude">
         <item>0</item>
         <item>1</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="recent_task_exclude_value_default_exclude">
+        <item>0</item>
         <item>-1</item>
     </string-array>
 

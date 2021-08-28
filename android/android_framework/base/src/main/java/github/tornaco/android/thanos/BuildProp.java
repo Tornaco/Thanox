@@ -88,6 +88,8 @@ public class BuildProp {
     public static final String THANOX_FEATURE_COMPONENT_MANAGER = "thanox.feature.component.manager";
     public static final String THANOX_FEATURE_START_BLOCKER = "thanox.feature.start.blocker";
     public static final String THANOX_FEATURE_RECENT_TASK_REMOVAL = "thanox.feature.recent.task.removal";
+    public static final String THANOX_FEATURE_RECENT_TASK_FORCE_EXCLUDE = "thanox.feature.recent.force.exclude";
+    public static final String THANOX_FEATURE_RECENT_TASK_FORCE_INCLUDE = "thanox.feature.recent.force.include";
     public static final String THANOX_FEATURE_BG_TASK_CLEAN = "thanox.feature.background.task.clean";
     public static final String THANOX_FEATURE_PRIVACY_DATA_CHEAT = "thanox.feature.privacy.data.cheat";
     public static final String THANOX_FEATURE_PRIVACY_OPS = "thanox.feature.privacy.ops";
@@ -98,6 +100,8 @@ public class BuildProp {
     public static final String THANOX_FEATURE_EXT_N_RECORDER = "thanox.feature.ext.n.recorder";
     public static final String THANOX_FEATURE_EXT_APP_SMART_FREEZE = "thanox.feature.ext.app.smart.freeze";
     public static final String THANOX_FEATURE_PLUGIN_SUPPORT = "thanox.feature.plugin.support";
+    public static final String THANOX_FEATURE_PREVENT_UNINSTALL = "thanox.feature.prevent.uninstall";
+    public static final String THANOX_FEATURE_PREVENT_CLEAR_DATA = "thanox.feature.prevent.clear.data";
 
     public static final String THANOX_CONTRIBUTORS = getString("thanox.dev.contributors");
     public static final String THANOX_CONTACT_EMAIL = getString("thanox.contact.email");

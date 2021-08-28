@@ -23,6 +23,7 @@ import java.util.Objects;
 
 import github.tornaco.android.common.util.ApkUtil;
 import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
@@ -147,7 +148,8 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
     SwitchPreferenceCompat preference =
         findPreference(getString(R.string.key_app_feature_config_block_uninstall));
     Objects.requireNonNull(preference)
-        .setChecked(thanos.getPkgManager().isPackageBlockUninstallEnabled(appInfo.getPkgName()));
+            .setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_UNINSTALL));
+    preference.setChecked(thanos.getPkgManager().isPackageBlockUninstallEnabled(appInfo.getPkgName()));
     preference.setOnPreferenceChangeListener(
         new Preference.OnPreferenceChangeListener() {
           @Override
@@ -167,7 +169,8 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
 
     preference = findPreference(getString(R.string.key_app_feature_config_block_clear_data));
     Objects.requireNonNull(preference)
-        .setChecked(thanos.getPkgManager().isPackageBlockClearDataEnabled(appInfo.getPkgName()));
+            .setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_CLEAR_DATA));
+    preference.setChecked(thanos.getPkgManager().isPackageBlockClearDataEnabled(appInfo.getPkgName()));
     preference.setOnPreferenceChangeListener(
         new Preference.OnPreferenceChangeListener() {
           @Override
@@ -295,9 +298,15 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
   private void bindRecentTaskExcludePref() {
     ThanosManager thanos = ThanosManager.from(getContext());
     DropDownPreference pref = findPreference(getString(R.string.key_recent_task_exclude_settings));
+
+    boolean supportForceInclude = thanos.hasFeature(BuildProp.THANOX_FEATURE_RECENT_TASK_FORCE_INCLUDE);
+    Objects.requireNonNull(pref).setEntries(supportForceInclude
+            ? R.array.recent_task_exclude_entry_default_include_exclude
+            : R.array.recent_task_exclude_entry_default_exclude);
+
     int currentMode =
         thanos.getActivityManager().getRecentTaskExcludeSettingForPackage(appInfo.getPkgName());
-    Objects.requireNonNull(pref).setValue(String.valueOf(currentMode));
+    pref.setValue(String.valueOf(currentMode));
     pref.setOnPreferenceChangeListener(
         (preference, newValue) -> {
           if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
@@ -319,6 +328,7 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
 
   private void bindOpsPref() {
     Preference opsPref = findPreference(getString(R.string.key_app_feature_config_ops));
+    opsPref.setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS));
     Objects.requireNonNull(opsPref)
         .setOnPreferenceClickListener(
             preference -> {
@@ -472,6 +482,11 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
           .getActivityManager()
           .setPkgRecentTaskBlurEnabled(appInfo.getPkgName(), value);
     }
+
+    @Override
+    boolean visible() {
+      return ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PRIVACY_TASK_BLUR);
+    }
   }
 
   class TaskCleanUp extends FeaturePref {
@@ -548,7 +563,7 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
 
     @Override
     boolean visible() {
-      return true;
+      return ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_EXT_N_UP);
     }
   }
 
@@ -605,7 +620,7 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
 
     @Override
     boolean visible() {
-      return true;
+      return ThanosManager.from(getContext()).hasFeature(BuildProp.ACTION_APP_LOCK);
     }
   }
 

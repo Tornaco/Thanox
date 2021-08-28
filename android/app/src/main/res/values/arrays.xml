@@ -37,9 +37,14 @@
         <item>60</item>
     </string-array>
 
-    <string-array name="recent_task_exclude_entry">
+    <string-array name="recent_task_exclude_entry_default_include_exclude">
         <item>@string/pre_entry_exclude_recent_task_default</item>
         <item>@string/pre_entry_exclude_recent_task_include</item>
+        <item>@string/pre_entry_exclude_recent_task_exclude</item>
+    </string-array>
+
+    <string-array name="recent_task_exclude_entry_default_exclude">
+        <item>@string/pre_entry_exclude_recent_task_default</item>
         <item>@string/pre_entry_exclude_recent_task_exclude</item>
     </string-array>
 

@@ -94,7 +94,7 @@
                 app:title="@string/module_ops_feature_title_app_ops_list" />
 
         <DropDownPreference
-                android:entries="@array/recent_task_exclude_entry"
+                android:entries="@array/recent_task_exclude_entry_default_include_exclude"
                 android:entryValues="@array/recent_task_exclude_value"
                 app:key="@string/key_recent_task_exclude_settings"
                 app:persistent="false"

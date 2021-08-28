@@ -35,6 +35,8 @@ public class ThanoxHookImpl implements IThanoxHook {
         FEATURES.add(BuildProp.THANOX_FEATURE_APP_SMART_STAND_BY);
         FEATURES.add(BuildProp.THANOX_FEATURE_EXT_N_RECORDER);
 
+        FEATURES.add(BuildProp.THANOX_FEATURE_RECENT_TASK_FORCE_EXCLUDE);
+
         if (BuildProp.THANOS_BUILD_DEBUG) {
             FEATURES.add(BuildProp.THANOX_FEATURE_PLUGIN_SUPPORT);
         }

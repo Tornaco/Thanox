@@ -100,6 +100,7 @@
         <activity android:name=".privacy.FieldsTemplateListActivity" />
         <activity android:name=".apps.PackageSetListActivity" />
         <activity android:name=".apps.PackageSetEditorActivity" />
+        <activity android:name=".settings.BuildPropActivity" />
 
         <meta-data
             android:name="xposedmodule"

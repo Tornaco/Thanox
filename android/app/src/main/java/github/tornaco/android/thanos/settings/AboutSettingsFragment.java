@@ -6,12 +6,6 @@ import android.widget.Toast;
 
 import androidx.preference.Preference;
 
-import com.elvishew.xlog.XLog;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildConfig;
 import github.tornaco.android.thanos.BuildProp;
@@ -21,8 +15,6 @@ import github.tornaco.android.thanos.app.donate.DonateActivity;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity;
-import util.CollectionUtils;
-import util.Consumer;
 
 public class AboutSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
     private int buildInfoClickTimes = 0;
@@ -108,23 +100,7 @@ public class AboutSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
 
     private void showBuildProp() {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            XLog.w("BuildProp" + System.lineSeparator() + String.join(System.lineSeparator(), getBuildProp()));
+            BuildPropActivity.Starter.INSTANCE.start(getActivity());
         }
-    }
-
-    private List<String> getBuildProp() {
-        List<String> res = new ArrayList<>();
-        CollectionUtils.consumeRemaining(BuildProp.class.getDeclaredFields()
-                , new Consumer<Field>() {
-                    @Override
-                    public void accept(Field field) {
-                        try {
-                            res.add(field.getName() + "=" + field.get(null));
-                        } catch (Throwable e) {
-                            XLog.e("Reflect getBuildProp error", e);
-                        }
-                    }
-                });
-        return res;
     }
 }

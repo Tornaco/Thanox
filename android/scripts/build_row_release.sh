@@ -1,3 +1,6 @@
-./gradlew clean; ./gradlew -no-daemon -Penable-row-verify=true app:assembleRowRelease
-# ./gradlew :plugins:plugin_su_enabler:clean;  ./gradlew :plugins:plugin_su_enabler:assembleDebug
-# ./gradlew :plugins:plugin_push_message_delegate:clean;  ./gradlew :plugins:plugin_push_message_delegate:assembleDebug
+./gradlew clean
+
+ ./gradlew -no-daemon :android_framework:patch-magisk:bridge-dex-app:extractBridgeJar
+./gradlew -no-daemon :android_framework:patch-magisk:module:zipRelease
+
+ ./gradlew -no-daemon -Penable-row-verify=true app:assembleRowRelease

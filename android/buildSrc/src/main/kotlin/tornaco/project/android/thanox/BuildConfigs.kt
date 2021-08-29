@@ -104,7 +104,7 @@ class ThanoxProjectBuildPlugin : Plugin<Project> {
         val isRow = Configs.thanoxBuildFlavor == "row"
         Configs.thanoxBuildIsRow = isRow
         Configs.thanoxAppId =
-            if (isRow) "$${Configs.thanoxAppIdPrefix}.pro" else Configs.thanoxAppIdPrefix
+            if (isRow) "${Configs.thanoxAppIdPrefix}.pro" else Configs.thanoxAppIdPrefix
 
         log("thanoxBuildHostName: ${Configs.thanoxBuildHostName}")
         log("thanoxBuildFlavor: ${Configs.thanoxBuildFlavor}")

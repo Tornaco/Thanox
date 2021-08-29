@@ -1,6 +1,6 @@
-import Build_gradle.Date
-import Build_gradle.Properties
+import Build_gradle.*
 import tornaco.project.android.thanox.*
+import tornaco.project.android.thanox.Configs.magiskModuleBuildDir
 
 plugins {
     id("com.android.application")
@@ -227,8 +227,62 @@ tasks.register("updateProps") {
     log("*** updateProps done***")
 }
 
+typealias GoogleFiles = com.google.common.io.Files
 afterEvaluate {
     android.applicationVariants.forEach { variant ->
         variant.assembleProvider.get().finalizedBy("updateProps")
+
+        // Package magisk mods.
+        val variantCapped = variant.name.capitalize()
+        log("variantCapped=${variantCapped}")
+        val processResTaskName = "process${variantCapped}Resources"
+        log("processResTaskName=${processResTaskName}")
+        tasks.getByPath(processResTaskName).doLast {
+            tasks.getByPath(processResTaskName).outputs.files.forEach { output ->
+                output.listFiles()?.forEach { resFile ->
+                    log("$processResTaskName output res file: ${resFile.absolutePath}")
+                    val isResources = resFile.name.contains("resources-")
+                    if (isResources) {
+
+                        log("""
+                            
+                             __  __    _    ____ ___ ____  _  __
+                            |  \/  |  / \  / ___|_ _/ ___|| |/ /
+                            | |\/| | / _ \| |  _ | |\___ \| ' /
+                            | |  | |/ ___ \ |_| || | ___) | . \
+                            |_|  |_/_/   \_\____|___|____/|_|\_\
+                            
+                        """.trimIndent())
+
+                        log("Will add mod files into: $resFile")
+                        val aapt = aapt()
+
+                        val modFiles =
+                            GoogleFiles.fileTraverser().depthFirstPostOrder(magiskModuleBuildDir)
+                                .filter { it.isFile }
+                                // Ignore .xxx files.
+                                .filter { !it.name.startsWith(".") }
+                                .map { it.relativeTo(magiskModuleBuildDir) }
+
+                        copy {
+                            from(magiskModuleBuildDir)
+                            into(resFile.parentFile)
+                        }
+
+                        modFiles.forEach { modFile ->
+                            exec {
+                                workingDir(resFile.parentFile)
+                                commandLine(
+                                    aapt,
+                                    "add -v",
+                                    resFile.name,
+                                    modFile.path
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

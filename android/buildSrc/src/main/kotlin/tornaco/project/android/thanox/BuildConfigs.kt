@@ -29,10 +29,10 @@ object Configs {
     val thanoxBuildFP: String get() = "thanox@tornaco:${UUID.randomUUID().toString()}"
     val thanoxShortcutAppIdPrefix: String get() = "github.tornaco.android.thanos.shortcut"
 
-
     val Project.resPrefix: String get() = "${this.name}_"
 
     val Project.outDir: File get() = rootProject.file("out")
+    val Project.magiskModuleBuildDir get() = File("${outDir}/magisk_module")
 
     operator fun get(key: String): String? {
         val v = props[key] as? String ?: return null

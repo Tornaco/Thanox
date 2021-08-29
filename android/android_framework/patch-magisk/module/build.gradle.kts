@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.daemon.common.toHexString
 import tornaco.project.android.thanox.Configs
+import tornaco.project.android.thanox.Configs.magiskModuleBuildDir
 import tornaco.project.android.thanox.Configs.outDir
 import tornaco.project.android.thanox.MagiskModConfigs
 import tornaco.project.android.thanox.MagiskModConfigs.magiskModuleId
@@ -90,7 +91,7 @@ dependencies {
 }
 
 
-val magiskDir = file("$outDir/magisk_module")
+val magiskDir = magiskModuleBuildDir
 val isWindows = org.gradle.internal.os.OperatingSystem.current().isWindows
 
 fun calcSha256(file: File): String {
@@ -161,7 +162,7 @@ afterEvaluate {
             doLast {
                 copy {
                     from("$nativeOutDir")
-                    into("$magiskDir/lib")
+                    into("$magiskDir/libriru")
                     exclude("**/*.txt")
                 }
 

@@ -68,6 +68,7 @@ class BuildPropActivity : ComponentActivity() {
 
     private fun props(): List<Pair<String, String>> {
         return BuildProp::class.java.declaredFields.map {
+            it.isAccessible = true
             it.name to (it.get(null) ?: "").toString()
         }
     }

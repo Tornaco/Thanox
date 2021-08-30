@@ -1,3 +1,12 @@
+```
+_____ _   _    _    _   _  _____  __
+|_   _| | | |  / \  | \ | |/ _ \ \/ /
+  | | | |_| | / _ \ |  \| | | | \  /
+  | | |  _  |/ ___ \| |\  | |_| /  \
+  |_| |_| |_/_/   \_\_| \_|\___/_/\_\
+```
+
+
 ## Snapshot Builds
 
 [![App](https://github.com/Tornaco/Thanox/actions/workflows/app.yml/badge.svg)](https://github.com/Tornaco/Thanox/actions/workflows/app.yml)

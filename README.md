@@ -24,3 +24,9 @@ _____ _   _    _    _   _  _____  __
 
 [Github.project](https://github.com/Tornaco/Thanox/projects)
 
+## Contribute
+
+### Translate
+
+[Help us improve international translation.](doc_src/github/Translate)
+

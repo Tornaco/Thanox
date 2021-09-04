@@ -42,7 +42,6 @@ public class ThanoxHookImpl implements IThanoxHook {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            FEATURES.add(BuildProp.THANOX_FEATURE_PROFILE_A11Y);
             FEATURES.add(BuildProp.THANOX_FEATURE_PRIVACY_FIELD_MEID);
             FEATURES.add(BuildProp.THANOX_FEATURE_PRIVACY_FIELD_IMEI);
         }

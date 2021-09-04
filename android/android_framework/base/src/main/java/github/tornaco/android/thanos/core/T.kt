@@ -436,6 +436,7 @@ object T {
                 ThanosFeature("PREF_PROFILE_SU_ENABLED", false)
 
         @JvmField
+        @Deprecated("Not supported any more.")
         val PREF_PROFILE_ENGINE_UI_AUTOMATION_ENABLED =
                 ThanosFeature("PREF_PROFILE_ENGINE_UI_AUTOMATION_ENABLED", false)
 

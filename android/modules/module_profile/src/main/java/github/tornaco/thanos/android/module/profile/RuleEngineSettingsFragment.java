@@ -26,7 +26,8 @@ public class RuleEngineSettingsFragment extends BaseWithFabPreferenceFragmentCom
         }
 
         SwitchPreferenceCompat automationPref = findPreference(getString(R.string.module_profile_pref_key_rule_engine_automation));
-        Objects.requireNonNull(automationPref).setChecked(thanos.getProfileManager().isProfileEngineUiAutomationEnabled());
+        assert automationPref != null;
+        automationPref.setVisible(false);
         automationPref.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean value = (boolean) newValue;
             thanos.getProfileManager().setProfileEngineUiAutomationEnabled(value);

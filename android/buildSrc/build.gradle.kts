@@ -12,8 +12,8 @@ plugins {
 
 gradlePlugin {
     plugins {
-        register("ThanoxProjectBuildPlugin") {
-            id = "ThanoxProjectBuildPlugin"
+        register("thanox-proj") {
+            id = "thanox-proj"
             implementationClass = "tornaco.project.android.thanox.ThanoxProjectBuildPlugin"
         }
     }

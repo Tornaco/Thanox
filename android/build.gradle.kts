@@ -25,7 +25,7 @@ buildscript {
 plugins {
     id("com.diffplug.spotless").version("5.7.0")
     id("com.gladed.androidgitversion").version("0.4.10")
-    id("ThanoxProjectBuildPlugin")
+    id("thanox-proj")
 }
 
 androidGitVersion {

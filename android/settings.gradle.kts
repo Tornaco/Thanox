@@ -66,7 +66,6 @@ val internalProjects = listOf(
     ":android_framework:patchx-30",
     ":android_framework:patchx-31",
     ":rhino:rhino_annotations",
-    ":rhino:rhino_plugin_stub_gen",
 )
 
 internalProjects.forEach {

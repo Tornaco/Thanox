@@ -28,5 +28,5 @@ _____ _   _    _    _   _  _____  __
 
 ### Translate
 
-[Help us improve international translation.](doc_src/github/Translate)
+[Help us improve international translation.](doc_src/github/Translate.md)
 

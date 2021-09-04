@@ -4,8 +4,6 @@ import tornaco.project.android.thanox.Libs
 
 plugins {
     id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
 }
 
 android {

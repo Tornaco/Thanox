@@ -48,9 +48,6 @@ dependencies {
 
     implementation(Libs.Others.guavaAndroid)
 
-    compileOnly(Libs.Others.lombok)
-    annotationProcessor(Libs.Others.lombok)
-
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))
 

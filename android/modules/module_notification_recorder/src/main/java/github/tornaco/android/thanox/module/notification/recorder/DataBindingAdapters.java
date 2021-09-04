@@ -10,7 +10,6 @@ import util.Consumer;
 
 public class DataBindingAdapters {
 
-
     @BindingAdapter("android:notificationRecordModels")
     public static void setNotificationRecordModels(RecyclerView recyclerView, List<NotificationRecordModelGroup> models) {
         @SuppressWarnings("unchecked")

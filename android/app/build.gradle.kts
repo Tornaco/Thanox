@@ -122,6 +122,7 @@ dependencies {
     implementation(Libs.AndroidX.swipeRefreshLayout)
     implementation(Libs.AndroidX.lifeCycleRuntimeKtx)
     annotationProcessor(Libs.AndroidX.lifeCycleCompiler)
+    kapt(Libs.AndroidX.lifeCycleCompiler)
 
     implementation(Compose.runtimeSaveAble)
     implementation(Compose.ui)
@@ -144,11 +145,9 @@ dependencies {
 
     implementation(Libs.Others.glide)
     annotationProcessor(Libs.Others.glideCompiler)
+    kapt(Libs.Others.glideCompiler)
 
     implementation(Libs.Others.xposedApi)
-
-    compileOnly(Libs.Others.lombok)
-    annotationProcessor(Libs.Others.lombok)
 
     implementation(Libs.Others.retrofit)
     implementation(Libs.Others.retrofitConverterGson)
@@ -157,10 +156,8 @@ dependencies {
     implementation(Libs.Accompanist.navigationAnim)
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
-    add("kapt", project(":annotation_processors:permission-requester-compiler"))
+    kapt(project(":annotation_processors:permission-requester-compiler"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
-
-
 
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_ops"))

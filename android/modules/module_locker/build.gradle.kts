@@ -4,8 +4,6 @@ import tornaco.project.android.thanox.Libs
 
 plugins {
     id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
 }
 
 android {
@@ -37,7 +35,6 @@ android {
 }
 
 dependencies {
-    implementation(Libs.Kotlin.stdlib)
     implementation(Libs.AndroidX.androidXCore)
 
     implementation(Libs.AndroidX.appCompat)
@@ -58,7 +55,6 @@ dependencies {
     implementation(project(":android_framework:base"))
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
-    add("kapt", project(":annotation_processors:permission-requester-compiler"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
 
     implementation(files("libs/flyme_fingerprint.jar"))

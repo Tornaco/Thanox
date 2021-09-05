@@ -3,7 +3,11 @@ package github.tornaco.thanox.android.server.patch.framework.hooks;
 import android.Manifest;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Binder;
+import android.os.Handler;
+import android.os.UserHandle;
 
 import com.android.server.SystemService;
 import com.elvishew.xlog.XLog;
@@ -60,6 +64,28 @@ public class SystemServiceContextHooks {
                 return;
             }
             super.enforceCallingPermission(permission, message);
+        }
+
+        @Override
+        public boolean bindServiceAsUser(Intent service, ServiceConnection conn, int flags, UserHandle user) {
+            XLog.i("SystemServiceContextHooks bindServiceAsUser %s", service);
+            try {
+                return super.bindServiceAsUser(service, conn, flags, user);
+            } catch (Throwable e) {
+                XLog.e("SystemServiceContextHooks bindServiceAsUser error", e);
+                return false;
+            }
+        }
+
+        @Override
+        public boolean bindServiceAsUser(Intent service, ServiceConnection conn, int flags, Handler handler, UserHandle user) {
+            XLog.i("SystemServiceContextHooks bindServiceAsUser %s", service);
+            try {
+                return super.bindServiceAsUser(service, conn, flags, handler, user);
+            } catch (Throwable e) {
+                XLog.e("SystemServiceContextHooks bindServiceAsUser error", e);
+                return false;
+            }
         }
     }
 }

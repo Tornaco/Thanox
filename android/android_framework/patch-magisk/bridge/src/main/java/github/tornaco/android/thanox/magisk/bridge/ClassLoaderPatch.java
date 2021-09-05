@@ -89,7 +89,6 @@ public class ClassLoaderPatch {
                 @Override
                 public void runSafety() {
                     ThanoxHookInstance.get().install(true);
-                    SystemServiceHookInstaller.installActivityManager(true);
                 }
             }.setName("onSystemServerProcess").run();
         }

@@ -147,7 +147,7 @@ dependencies {
     annotationProcessor(Libs.Others.glideCompiler)
     kapt(Libs.Others.glideCompiler)
 
-    implementation(Libs.Others.xposedApi)
+    compileOnly(Libs.Others.xposedApi)
 
     implementation(Libs.Others.retrofit)
     implementation(Libs.Others.retrofitConverterGson)

@@ -5,6 +5,7 @@ import com.elvishew.xlog.XLog;
 import github.tornaco.thanox.android.server.patch.framework.hooks.AMSHooks;
 import github.tornaco.thanox.android.server.patch.framework.hooks.AppOpsHooks;
 import github.tornaco.thanox.android.server.patch.framework.hooks.NotificationManagerServiceHooks;
+import github.tornaco.thanox.android.server.patch.framework.hooks.SyncManagerHooks;
 import github.tornaco.thanox.android.server.patch.framework.hooks.SystemServiceContextHooks;
 
 public class SystemServerHooks {
@@ -15,6 +16,7 @@ public class SystemServerHooks {
         AppOpsHooks.install();
         SystemServiceContextHooks.install();
         NotificationManagerServiceHooks.install();
+        SyncManagerHooks.install();
     }
 
     private static void dumpLockGuards() {

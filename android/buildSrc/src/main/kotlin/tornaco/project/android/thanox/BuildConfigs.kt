@@ -79,7 +79,7 @@ object MagiskModConfigs {
     const val moduleDescription =
         "Provide android framework and app hooks for thanox, " +
                 "requires Riru $moduleMinRiruVersionName or above(需要安装riru). " +
-                "Only support Android11(只支持Android11)"
+                "Only support Android11+(只支持Android11及以上版本)"
     val moduleVersion = Configs.thanoxVersionName
     val moduleVersionCode = Configs.thanoxVersionCode
 }

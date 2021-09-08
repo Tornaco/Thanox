@@ -29,10 +29,9 @@ public class PkgOpsLoader {
         ThanosManager thanos = ThanosManager.from(context);
         Map<OpsTemplate, OpGroup> opsCategoryOpGroupMap = new HashMap<>();
         Set<String> permissions = Sets.newHashSet(PkgUtils.getAllDeclaredPermissions(context, appInfo.getPkgName()));
-        int numOp = AppOpsManager._NUM_OP;
         if (thanos.isServiceInstalled()) {
             AppOpsManager ops = thanos.getAppOpsManager();
-            for (int op = 0; op < numOp; op++) {
+            for (int op : AppOpsManager.getAllOp()) {
                 int mode = ops.checkOperationNonCheck(op, appInfo.getUid(), appInfo.getPkgName());
 
                 // Check filter.

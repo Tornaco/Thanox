@@ -448,6 +448,9 @@ object T {
         val PREF_OPS_ENABLED = ThanosFeature("PREF_OPS_ENABLED", false)
 
         @JvmField
+        val PREF_OPS_HAS_MIGRATE_TO_ANDROID_S = ThanosFeature("PREF_OPS_HAS_MIGRATE_TO_ANDROID_S", false)
+
+        @JvmField
         val PREF_FIRST_ACTIVATE =
                 ThanosFeature("PREF_FIRST_ACTIVATE_" + BuildProp.THANOS_BUILD_FINGERPRINT, true)
 

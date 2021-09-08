@@ -1,6 +1,8 @@
 package github.tornaco.thanos.android.ops.model;
 
 import static github.tornaco.android.thanos.core.secure.ops.AppOpsManager._NUM_OP;
+import static github.tornaco.android.thanos.core.secure.ops.AppOpsManager._OP_THANOX_BASE;
+import static github.tornaco.android.thanos.core.secure.ops.AppOpsManager.getOpResIndex;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,6 +11,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 import github.tornaco.android.thanos.core.annotation.Nullable;
+import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
 import github.tornaco.android.thanos.core.util.ArrayUtils;
 import github.tornaco.android.thanos.core.util.Preconditions;
 import github.tornaco.thanos.android.ops.R;
@@ -62,7 +65,7 @@ public class Ops {
     public static int opIcon(@NonNull Context context, int op) {
         TypedArray array = context.getResources().obtainTypedArray(R.array.module_ops_op_icon);
         try {
-            return array.getResourceId(op, R.drawable.module_ops_ic_contacts_fill /* fallback */);
+            return array.getResourceId(getOpResIndex(op), R.drawable.module_ops_ic_contacts_fill /* fallback */);
         } finally {
             array.recycle();
         }
@@ -72,13 +75,13 @@ public class Ops {
     public static String opLabel(@NonNull Context context, int op) {
         String[] array = context.getResources().getStringArray(R.array.module_ops_app_ops_labels);
         Preconditions.checkArgument(array.length == _NUM_OP, "Bad label array, expected: " + _NUM_OP + ", got: " + array.length);
-        return array[op];
+        return array[getOpResIndex(op)];
     }
 
     @NonNull
     public static String opSummary(@NonNull Context context, int op) {
         String[] array = context.getResources().getStringArray(R.array.module_ops_app_ops_summaries);
         Preconditions.checkArgument(array.length == _NUM_OP, "Bad summary array, expected: " + _NUM_OP + ", got: " + array.length);
-        return array[op];
+        return array[getOpResIndex(op)];
     }
 }

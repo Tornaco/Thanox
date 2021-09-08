@@ -22,9 +22,8 @@ public class AllOpsLoader {
     public List<OpGroup> getAllOps(Context context) {
         ThanosManager thanos = ThanosManager.from(context);
         Map<OpsTemplate, OpGroup> opsCategoryOpGroupMap = new HashMap<>();
-        int numOp = AppOpsManager._NUM_OP;
         if (thanos.isServiceInstalled()) {
-            for (int op = 0; op < numOp; op++) {
+            for (int op : AppOpsManager.getAllOp()) {
                 OpsTemplate template = Ops.templateOfOp(op);
                 XLog.v("template for op: %s %s", template, op);
                 if (template != null) {

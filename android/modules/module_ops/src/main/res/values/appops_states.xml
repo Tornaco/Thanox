@@ -112,15 +112,16 @@
         <item>Accessing accessibility features</item>
         <item>Read the device identifiers (IMEI / MEID, IMSI, SIM / Build serial)</item>
 
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Active platform VPN</item>
+        <item>Loader usage stats</item>
         <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
 
         <item>Query other installed package info by package name</item>
         <item>Adjust screen brightness</item>
@@ -222,15 +223,16 @@
         <item>Accessing accessibility features</item>
         <item>Read the device identifiers</item>
 
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Active platform VPN</item>
+        <item>Loader usage stats</item>
         <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
 
         <item>Get package info</item>
         <item>Screen brightness</item>
@@ -340,6 +342,8 @@
         <item>@drawable/module_common_ic_settings_fill</item>
         <item>@drawable/module_common_ic_settings_fill</item>
         <item>@drawable/module_common_ic_settings_fill</item>
+        <item>@drawable/module_common_ic_settings_fill</item>
+
         <item>@drawable/module_common_ic_settings_fill</item>
         <item>@drawable/module_ops_ic_brightness_5_black_24dp</item>
         <item>@drawable/module_ops_ic_apps_fill</item>

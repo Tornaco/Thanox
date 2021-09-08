@@ -113,15 +113,16 @@
         <item>使用辅助功能</item>
         <item>读取设备信息(IMEI / MEID, IMSI, SIM / Build serial)</item>
 
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Active platform VPN</item>
+        <item>Loader usage stats</item>
         <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
 
         <item>通过包名查询其他已安装应用的信息，请谨慎设定，禁用该权限可能导致该应用无法与其他应用交互，甚至造成其他异常问题</item>
         <item>调节屏幕亮度</item>
@@ -223,15 +224,16 @@
         <item>使用辅助功能</item>
         <item>读取设备信息</item>
 
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Active platform VPN</item>
+        <item>Loader usage stats</item>
         <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
-        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
 
         <item>查询其他应用信息</item>
         <item>屏幕亮度</item>

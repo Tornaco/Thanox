@@ -43,7 +43,7 @@ static void forkAndSpecializePost(JNIEnv *env, jclass clazz, jint res) {
         // If this modules has hooks installed, DONOT set it to true, or there will be SIGSEGV
         // This value will be automatically reset to false before the "pre" function is called
         riru_set_unload_allowed(false);
-        startThanox(env, "app");
+        startThanox(env, "forkAndSpecializePost-App");
     } else {
         // In zygote process
     }
@@ -68,6 +68,7 @@ static void specializeAppProcessPost(
     // If this modules has hooks installed, DONOT set it to true, or there will be SIGSEGV
     // This value will be automatically reset to false before the "pre" function is called
     riru_set_unload_allowed(true);
+    startThanox(env, "specializeAppProcessPost");
 }
 
 static void forkSystemServerPre(
@@ -83,7 +84,7 @@ static void forkSystemServerPost(JNIEnv *env, jclass clazz, jint res) {
 
     if (res == 0) {
         // In system server process
-        startThanox(env, "system-server");
+        startThanox(env, "forkSystemServerPost");
     } else {
         // In zygote process
     }

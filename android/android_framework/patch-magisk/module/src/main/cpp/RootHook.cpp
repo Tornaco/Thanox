@@ -20,7 +20,7 @@ void onRuntimeStart(JNIEnv *env) {
     env->GetJavaVM(&jvm);
     JniHelper::setJavaVM(jvm);
     // Start Thanox Java.
-    startThanox(env, "system");
+    startThanox(env, "onRuntimeStart");
 }
 
 NEW_FUNC_DEF(int, _ZN7android14AndroidRuntime8startRegEP7_JNIEnv, JNIEnv *env) {

@@ -11,9 +11,9 @@ import com.elvishew.xlog.printer.Printer;
 
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanox.magisk.bridge.proxy.SystemPropProxy;
-import github.tornaco.android.thanox.magisk.bridge.proxy.SystemServiceRegistryProxy;
 
 public class ThanoxBridge {
+    private final ProcessHandler processHandler = new ProcessHookInstaller();
 
     static {
         Printer androidPrinter = new AndroidPrinter();
@@ -25,20 +25,7 @@ public class ThanoxBridge {
     }
 
     public static void main(String arg) {
-        if (!OsUtils.isROrAbove()) {
-            System.err.println("Not supported android version: " + Build.VERSION.SDK_INT);
-            return;
-        }
-
-        XLog.d("ThanoxBridge, Bridge main with args: %s", arg);
-        switch (arg) {
-            case "system":
-                ClassLoaderPatchInstaller.install(new ProcessHookInstaller());
-                break;
-            case "app":
-                SystemServiceRegistryProxy.install();
-                break;
-        }
+        new ThanoxBridge().run(arg);
     }
 
     @Deprecated
@@ -58,4 +45,37 @@ public class ThanoxBridge {
     @SuppressWarnings("JavaJniMissingFunction")
     @Deprecated
     public static native void nativeInstallAppHook();
+
+
+    private void run(String arg) {
+        if (!OsUtils.isROrAbove()) {
+            System.err.println("Not supported android version: " + Build.VERSION.SDK_INT);
+            return;
+        }
+
+        NativeEvent event = NativeEvent.valueOf(arg);
+
+        XLog.d("ThanoxBridge, Bridge main with args: %s", event);
+        switch (event) {
+            case onRuntimeStart:
+                ClassLoaderPatchInstaller.install(processHandler);
+                break;
+            case forkAndSpecializePostApp:
+                processHandler.onAppProcess();
+                break;
+            case forkSystemServerPost:
+            case specializeAppProcessPost:
+                break;
+        }
+    }
+
+    /**
+     * Do not bother the typo and case.
+     */
+    enum NativeEvent {
+        forkAndSpecializePostApp,
+        specializeAppProcessPost,
+        forkSystemServerPost,
+        onRuntimeStart
+    }
 }

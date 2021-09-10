@@ -27,6 +27,7 @@ public class ClassLoaderPatchInstaller {
 
     public static void install(ProcessHandler processHandler) {
         try {
+            XLog.i("ClassLoaderPatchInstaller install");
             new ClassLoaderPatchInstaller(processHandler).init0();
         } catch (Throwable e) {
             XLog.d("ClassLoaderPatchInstaller init error: " + Log.getStackTraceString(e));
@@ -92,7 +93,7 @@ public class ClassLoaderPatchInstaller {
             new AbstractSafeR() {
                 @Override
                 public void runSafety() {
-                    processHandler.onSystemServerProcess();
+                    processHandler.onStartSystemServer();
                 }
             }.setName("onSystemServerProcess").run();
         }
@@ -104,7 +105,7 @@ public class ClassLoaderPatchInstaller {
                     if (currentApp == null) {
                         return;
                     }
-                    processHandler.onAppProcess(currentApp);
+                    processHandler.onStartApplication(currentApp);
                 }
             }.setName("onAppProcess").run();
         }

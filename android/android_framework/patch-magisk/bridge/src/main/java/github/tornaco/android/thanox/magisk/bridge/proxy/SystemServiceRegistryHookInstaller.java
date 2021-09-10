@@ -9,7 +9,7 @@ import com.elvishew.xlog.XLog;
 
 import util.XposedHelpers;
 
-public class SystemServiceRegistryProxy {
+public class SystemServiceRegistryHookInstaller {
 
     public static void install() {
         // private static final Map<String, ServiceFetcher<?>> SYSTEM_SERVICE_FETCHERS =

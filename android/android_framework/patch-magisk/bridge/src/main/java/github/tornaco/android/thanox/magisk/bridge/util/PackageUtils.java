@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge;
+package github.tornaco.android.thanox.magisk.bridge.util;
 
 import android.content.pm.PackageParser;
 import android.os.Environment;

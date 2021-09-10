@@ -1,7 +1,5 @@
 package github.tornaco.android.thanox.magisk.bridge.proxy;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -9,6 +7,8 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.ServiceManager;
+
+import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
@@ -19,7 +19,7 @@ public class ClipboardManagerProxyProvider {
         try {
             return new ClipboardManagerProxy(context);
         } catch (Throwable e) {
-            logging("Fail provide ClipboardManager", e);
+            XLog.d("Fail provide ClipboardManager", e);
             throw new IllegalStateException("Fail provide ClipboardManager", e);
         }
     }
@@ -36,7 +36,7 @@ public class ClipboardManagerProxyProvider {
 
         @Override
         public ClipData getPrimaryClip() {
-            logging("ClipboardManagerProxy getPrimaryClip");
+            XLog.d("ClipboardManagerProxy getPrimaryClip");
             ThanosManager.from(context).ifServiceInstalled(new Consumer<ThanosManager>() {
                 @Override
                 public void accept(ThanosManager thanosManager) {
@@ -52,7 +52,7 @@ public class ClipboardManagerProxyProvider {
 
         @Override
         public void setPrimaryClip(ClipData clip) {
-            logging("ClipboardManagerProxy setPrimaryClip");
+            XLog.d("ClipboardManagerProxy setPrimaryClip");
             ThanosManager.from(context).ifServiceInstalled(new Consumer<ThanosManager>() {
                 @Override
                 public void accept(ThanosManager thanosManager) {

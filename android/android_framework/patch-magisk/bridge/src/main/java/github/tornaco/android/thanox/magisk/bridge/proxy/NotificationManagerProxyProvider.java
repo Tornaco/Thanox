@@ -1,11 +1,11 @@
 package github.tornaco.android.thanox.magisk.bridge.proxy;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
-
 import android.app.INotificationManager;
 import android.content.Context;
 import android.os.IBinder;
 import android.os.IInterface;
+
+import com.elvishew.xlog.XLog;
 
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
@@ -33,7 +33,7 @@ public class NotificationManagerProxyProvider implements ProxyProvider, Exceptio
                     return (IInterface) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
                             new Class[]{INotificationManager.class},
                             (instance, method, args) -> {
-                                logging("INotificationManager %s %s", method.getName(), Arrays.toString(args));
+                                XLog.d("INotificationManager %s %s", method.getName(), Arrays.toString(args));
                                 if ("enqueueTextToast".equals(method.getName())) {
                                     handleEnqueueTextToast(args);
                                 }
@@ -63,7 +63,7 @@ public class NotificationManagerProxyProvider implements ProxyProvider, Exceptio
                         .onAddNotificationRecord(nr);
             }
         } catch (Throwable e) {
-            logging("handleEnqueueTextToast error", e);
+            XLog.d("handleEnqueueTextToast error", e);
         }
     }
 }

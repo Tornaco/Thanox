@@ -1,31 +1,35 @@
 package github.tornaco.android.thanox.magisk.bridge;
 
 import static github.tornaco.android.thanos.core.util.AppUtils.currentApplicationInfo;
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
 
 import android.content.pm.ApplicationInfo;
 import android.os.Binder;
 import android.util.Log;
 
+import com.elvishew.xlog.XLog;
+
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import util.XposedHelpers;
 
-public class ClassLoaderPatch {
+public class ClassLoaderPatchInstaller {
     private static final boolean LOGV = false;
 
     private final ClassLoader system;
     private final ClassLoader boot;
 
-    private ClassLoaderPatch() {
+    private final ProcessHandler processHandler;
+
+    private ClassLoaderPatchInstaller(ProcessHandler processHandler) {
         this.system = ClassLoader.getSystemClassLoader();
         this.boot = system.getParent();
+        this.processHandler = processHandler;
     }
 
-    public static void install() {
+    public static void install(ProcessHandler processHandler) {
         try {
-            new ClassLoaderPatch().init0();
+            new ClassLoaderPatchInstaller(processHandler).init0();
         } catch (Throwable e) {
-            logging("ClassLoaderPatchInstaller init error: " + Log.getStackTraceString(e));
+            XLog.d("ClassLoaderPatchInstaller init error: " + Log.getStackTraceString(e));
         }
     }
 
@@ -33,7 +37,7 @@ public class ClassLoaderPatch {
         HookedSystemClassLoader wrappedSystem = new HookedSystemClassLoader();
         Class<?> systemClassLoaderClass = Class.forName("java.lang.ClassLoader$SystemClassLoader");
         XposedHelpers.setStaticObjectField(systemClassLoaderClass, "loader", wrappedSystem);
-        logging("ClassLoaderPatchInstaller installed: " + wrappedSystem);
+        XLog.d("ClassLoaderPatchInstaller installed: " + wrappedSystem);
     }
 
     class HookedSystemClassLoader extends ClassLoader {
@@ -41,12 +45,12 @@ public class ClassLoaderPatch {
             super(system);
             ClassLoader wrappedBoot = new HookedBootClassLoader();
             XposedHelpers.setObjectField(this, "parent", wrappedBoot);
-            logging("parent now is: " + getParent());
+            XLog.d("parent now is: " + getParent());
         }
 
         @Override
         protected Class<?> loadClass(String className, boolean resolve) throws ClassNotFoundException {
-            if (LOGV) logging("HookedSystemClassLoader#loadClass: " + className);
+            if (LOGV) XLog.d("HookedSystemClassLoader#loadClass: " + className);
             return super.loadClass(className, resolve);
         }
     }
@@ -60,14 +64,14 @@ public class ClassLoaderPatch {
 
         @Override
         protected Class<?> loadClass(String className, boolean resolve) throws ClassNotFoundException {
-            if (LOGV) logging("HookedBootClassLoader#loadClass: " + className);
+            if (LOGV) XLog.d("HookedBootClassLoader#loadClass: " + className);
             if (isInstalled) {
                 return super.loadClass(className, resolve);
             }
 
             if (className.startsWith("com.android.server")) {
                 int uid = Binder.getCallingUid();
-                logging("onLoadSystemServer. calling uid: " + uid);
+                XLog.d("onLoadSystemServer. calling uid: " + uid);
                 if (uid == 1000) {
                     isInstalled = true;
                     onSystemServerProcess();
@@ -88,7 +92,7 @@ public class ClassLoaderPatch {
             new AbstractSafeR() {
                 @Override
                 public void runSafety() {
-                    ThanoxHookInstance.get().install(true);
+                    processHandler.onSystemServerProcess();
                 }
             }.setName("onSystemServerProcess").run();
         }
@@ -100,18 +104,7 @@ public class ClassLoaderPatch {
                     if (currentApp == null) {
                         return;
                     }
-                    String pkgName = currentApp.packageName;
-                    if (pkgName == null) {
-                        return;
-                    }
-
-                    // 2021-07-08 10:47:49.756 190-190/? E/SELinux: avc:  denied  { find } for pid=5258 uid=10149 name=appops scontext=u:r:permissioncontroller_app:s0:c149,c256,c512,c768 tcontext=u:object_r:appops_service:s0 tclass=service_manager permissive=0
-
-                    // Remote binder ins.
-                    SystemServiceHookInstaller.installIServiceManagerHook();
-                    // These service set into ServiceManager by AMS when bind add.
-                    SystemServiceHookInstaller.installServiceManagerCacheHook();
-                    SystemServiceHookInstaller.installActivityManager(false);
+                    processHandler.onAppProcess(currentApp);
                 }
             }.setName("onAppProcess").run();
         }

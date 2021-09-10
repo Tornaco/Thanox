@@ -1,7 +1,5 @@
 package github.tornaco.android.thanox.magisk.bridge.proxy;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
-
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.IActivityTaskManager;
@@ -12,6 +10,8 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.RemoteException;
 import android.util.Log;
+
+import com.elvishew.xlog.XLog;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -44,10 +44,10 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                     return (IInterface) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
                             new Class[]{IActivityTaskManager.class},
                             (instance, method, args) -> {
-                                logging("IActivityTaskManager %s %s", method.getName(), Arrays.toString(args));
+                                XLog.d("IActivityTaskManager %s %s", method.getName(), Arrays.toString(args));
                                 // Early return...
                                 if (!ThanosManagerNative.isServiceInstalled()) {
-                                    logging("IActivityTaskManager, Thanox not installed...");
+                                    XLog.d("IActivityTaskManager, Thanox not installed...");
                                     return tryInvoke(am, method, args);
                                 }
 
@@ -64,7 +64,7 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                                         return handleGetRecentTask(am, method, args);
                                     }
                                 } catch (Throwable e) {
-                                    logging("Error handle IActivityTaskManager" + Log.getStackTraceString(e));
+                                    XLog.d("Error handle IActivityTaskManager" + Log.getStackTraceString(e));
                                 }
 
                                 return tryInvoke(am, method, args);
@@ -79,21 +79,21 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
         ThanosManagerNative.getDefault()
                 .getActivityManager()
                 .reportOnRemoveTask((Integer) args[0]);
-        logging("ActivityTaskManagerProxyProvider reportOnRemoveTask");
+        XLog.d("ActivityTaskManagerProxyProvider reportOnRemoveTask");
     }
 
     private void handleActivityResumed(Object[] args) throws android.os.RemoteException {
         ThanosManagerNative.getDefault()
                 .getActivityStackSupervisor()
                 .reportOnActivityResumed((IBinder) args[0]);
-        logging("ActivityTaskManagerProxyProvider handleActivityResumed");
+        XLog.d("ActivityTaskManagerProxyProvider handleActivityResumed");
     }
 
     private void handleActivityStopped(Object[] args) throws android.os.RemoteException {
         ThanosManagerNative.getDefault()
                 .getActivityStackSupervisor()
                 .reportOnActivityStopped((IBinder) args[0]);
-        logging("ActivityTaskManagerProxyProvider handleActivityStopped");
+        XLog.d("ActivityTaskManagerProxyProvider handleActivityStopped");
     }
 
     // Android 30.
@@ -117,7 +117,7 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                     .getActivityStackSupervisor()
                     .reportOnStartActivity(callingPackage, intent);
             if (realIntent != null) {
-                logging("handleStartActivity, Replacing Intent");
+                XLog.d("handleStartActivity, Replacing Intent");
                 args[intentIndex] = realIntent;
             }
         }
@@ -132,12 +132,12 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
         ParceledListSlice<ActivityManager.RecentTaskInfo> recentTasks
                 = (ParceledListSlice<ActivityManager.RecentTaskInfo>) tryInvoke(am, method, args);
         List<ActivityManager.RecentTaskInfo> taskInfoList = recentTasks.getList();
-        logging("getRecentTasks: %s", Arrays.toString(taskInfoList.toArray()));
+        XLog.d("getRecentTasks: %s", Arrays.toString(taskInfoList.toArray()));
         taskInfoList = taskInfoList.stream().filter((Predicate<TaskInfo>) taskInfo -> {
             try {
                 return !shouldHideFromRecent(taskInfo);
             } catch (RemoteException e) {
-                logging("shouldHideFromRecent error");
+                XLog.d("shouldHideFromRecent error");
                 return true;
             }
         }).collect(Collectors.toList());
@@ -148,7 +148,7 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
     private boolean shouldHideFromRecent(TaskInfo taskInfo) throws RemoteException {
         Intent intent = taskInfo.baseIntent;
         if (intent == null) {
-            logging("isVisibleRecentTask, intent is null for task: %s", taskInfo);
+            XLog.d("isVisibleRecentTask, intent is null for task: %s", taskInfo);
             return false;
         }
         String pkgName = PkgUtils.packageNameOf(intent);
@@ -159,7 +159,7 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
         if (ObjectsUtils.equals(
                 ThanosManagerNative.getDefault().getActivityStackSupervisor().getCurrentFrontApp(),
                 pkgName)) {
-            logging("isVisibleRecentTask, %s is current top, won't check.", pkgName);
+            XLog.d("isVisibleRecentTask, %s is current top, won't check.", pkgName);
             return false;
         }
 
@@ -170,7 +170,7 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
         boolean res = setting
                 == github.tornaco.android.thanos.core.app.ActivityManager.ExcludeRecentSetting
                 .EXCLUDE;
-        logging("isVisibleRecentTask hidden? %s %s", pkgName, res);
+        XLog.d("isVisibleRecentTask hidden? %s %s", pkgName, res);
         return res;
     }
 }

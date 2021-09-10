@@ -10,9 +10,7 @@ public class Proxies {
     private static final List<ProxyProvider> PROVIDERS_CACHE = Lists.newArrayList(
             new NotificationManagerProxyProvider()
     );
-    private static final List<ProxyProvider> PROVIDERS_BI = Lists.newArrayList(
-            new ActivityTaskManagerProxyProvider()
-    );
+    private static final List<ProxyProvider> PROVIDERS_BI = Lists.newArrayList();
 
     public static IBinder forCached(String name, IBinder legacyBinder) {
         if (name == null || legacyBinder == null) {

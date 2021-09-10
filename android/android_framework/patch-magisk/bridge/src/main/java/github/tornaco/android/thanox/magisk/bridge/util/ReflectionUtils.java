@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge;
+package github.tornaco.android.thanox.magisk.bridge.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

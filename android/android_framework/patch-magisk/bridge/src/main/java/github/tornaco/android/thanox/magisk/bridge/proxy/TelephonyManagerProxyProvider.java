@@ -1,7 +1,5 @@
 package github.tornaco.android.thanox.magisk.bridge.proxy;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.telephony.TelephonyManager;
@@ -177,32 +175,32 @@ public class TelephonyManagerProxyProvider {
 
         private <T> T getHookFieldProfileOr(int privacyOp, Function<Fields, T> mapper, T orElseValue) {
             try {
-                logging("getHookFieldProfileOr %s %s", privacyOp, opPkgName);
+                XLog.d("getHookFieldProfileOr %s %s", privacyOp, opPkgName);
 
                 String callPackageName = opPkgName;
                 if (callPackageName == null) {
-                    logging("getHookFieldProfileOr, callPackageName == null");
+                    XLog.d("getHookFieldProfileOr, callPackageName == null");
                     return orElseValue;
                 }
 
                 IThanos thanos = ThanosManagerNative.getDefault();
                 if (thanos == null) {
-                    logging("getHookFieldProfileOr, thanos == null");
+                    XLog.d("getHookFieldProfileOr, thanos == null");
                     return orElseValue;
                 }
                 IPrivacyManager priv = thanos.getPrivacyManager();
                 if (priv == null) {
-                    logging("getHookFieldProfileOr, priv == null");
+                    XLog.d("getHookFieldProfileOr, priv == null");
                     return orElseValue;
                 }
                 if (!priv.isPrivacyEnabled()) {
-                    logging("getHookFieldProfileOr, !isPrivacyEnabled");
+                    XLog.d("getHookFieldProfileOr, !isPrivacyEnabled");
                     return orElseValue;
                 }
 
                 boolean enabledUid = priv.isPackageFieldsProfileSelected(callPackageName);
                 if (!enabledUid) {
-                    logging("getHookFieldProfileOr, !enabledUid");
+                    XLog.d("getHookFieldProfileOr, !enabledUid");
                     return orElseValue;
                 }
 
@@ -210,15 +208,15 @@ public class TelephonyManagerProxyProvider {
                 Fields f = priv
                         .getSelectedFieldsProfileForPackage(callPackageName, privacyOp);
                 if (f == null) {
-                    logging("getHookFieldProfileOr, selected f is null");
+                    XLog.d("getHookFieldProfileOr, selected f is null");
                     return orElseValue;
                 }
                 T res = mapper.apply(f);
                 if (res == null) {
-                    logging("getHookFieldProfileOr, mapper.apply is null");
+                    XLog.d("getHookFieldProfileOr, mapper.apply is null");
                     return orElseValue;
                 }
-                logging("getHookFieldProfileOr, return cheat value %s %s %s", privacyOp, opPkgName, res);
+                XLog.d("getHookFieldProfileOr, return cheat value %s %s %s", privacyOp, opPkgName, res);
                 return res;
             } catch (Throwable e) {
                 XLog.e("getHookFieldProfileOr error", e);

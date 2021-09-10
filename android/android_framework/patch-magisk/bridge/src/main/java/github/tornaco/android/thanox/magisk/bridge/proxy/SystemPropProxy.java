@@ -2,6 +2,8 @@ package github.tornaco.android.thanox.magisk.bridge.proxy;
 
 import android.os.RemoteException;
 
+import com.elvishew.xlog.XLog;
+
 import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.secure.IPrivacyManager;
@@ -9,13 +11,11 @@ import github.tornaco.android.thanos.core.secure.PrivacyManager;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.AppUtils;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
-
 @Deprecated
 public class SystemPropProxy {
     public static String getProp(String key) throws RemoteException {
         String callerPkg = AppUtils.currentProcessName();
-        logging("SystemPropProxy getProp %s %s", callerPkg, key);
+        XLog.d("SystemPropProxy getProp %s %s", callerPkg, key);
 
         IThanos thanos = ThanosManagerNative.getDefault();
         if (thanos == null) {

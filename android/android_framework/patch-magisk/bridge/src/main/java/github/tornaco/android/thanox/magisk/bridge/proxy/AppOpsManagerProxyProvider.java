@@ -1,12 +1,11 @@
 package github.tornaco.android.thanox.magisk.bridge.proxy;
 
-import static github.tornaco.android.thanox.magisk.bridge.Logging.logging;
-
 import android.app.AppOpsManager;
 import android.os.IBinder;
 import android.os.IInterface;
 
 import com.android.internal.app.IAppOpsService;
+import com.elvishew.xlog.XLog;
 
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
@@ -38,7 +37,7 @@ public class AppOpsManagerProxyProvider implements ProxyProvider, ExceptionTrans
                             new Class[]{IAppOpsService.class},
                             (instance, method, args) -> {
                                 if (DEBUG_OPS) {
-                                    logging("IAppOpsService %s %s", method.getName(), Arrays.toString(args));
+                                    XLog.d("IAppOpsService %s %s", method.getName(), Arrays.toString(args));
                                 }
 
                                 IThanos thanos = ThanosManagerNative.getDefault();

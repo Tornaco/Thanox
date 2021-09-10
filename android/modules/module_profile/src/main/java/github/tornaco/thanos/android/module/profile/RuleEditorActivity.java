@@ -226,8 +226,8 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
 
-        binding.editText.setTypeface(TypefaceHelper.googleSourceCodePro(thisActivity()));
-        binding.lineLayout.setTypeface(TypefaceHelper.googleSourceCodePro(thisActivity()));
+        binding.editText.setTypeface(TypefaceHelper.jetbrainsMono(thisActivity()));
+        binding.lineLayout.setTypeface(TypefaceHelper.jetbrainsMono(thisActivity()));
         binding.editText.setListener(this);
         binding.editText.addSyntax(getAssets(), "json.json");
         binding.lineLayout.attachEditText(binding.editText);

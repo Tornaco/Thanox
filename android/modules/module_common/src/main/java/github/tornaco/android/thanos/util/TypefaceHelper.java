@@ -39,4 +39,13 @@ public class TypefaceHelper {
             return sGoogleSourceCodePro;
         }
     }
+
+    public static Typeface jetbrainsMono(Context context) {
+        synchronized (TypefaceHelper.class) {
+            if (sGoogleSourceCodePro == null) {
+                sGoogleSourceCodePro = Typeface.createFromAsset(context.getAssets(), "fonts/google/jetbrains/JetBrainsMonoRegular.ttf");
+            }
+            return sGoogleSourceCodePro;
+        }
+    }
 }

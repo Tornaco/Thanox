@@ -12,6 +12,7 @@ import util.XposedHelpers;
 public class SystemServiceRegistryHookInstaller {
 
     public static void install() {
+        XLog.d("SystemServiceRegistryHookInstaller install");
         // private static final Map<String, ServiceFetcher<?>> SYSTEM_SERVICE_FETCHERS =
         //            new ArrayMap<String, ServiceFetcher<?>>();
         try {

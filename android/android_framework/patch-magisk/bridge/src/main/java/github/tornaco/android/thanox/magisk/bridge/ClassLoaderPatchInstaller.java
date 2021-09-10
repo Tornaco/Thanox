@@ -1,8 +1,5 @@
 package github.tornaco.android.thanox.magisk.bridge;
 
-import static github.tornaco.android.thanos.core.util.AppUtils.currentApplicationInfo;
-
-import android.content.pm.ApplicationInfo;
 import android.os.Binder;
 import android.util.Log;
 
@@ -80,11 +77,8 @@ public class ClassLoaderPatchInstaller {
             }
 
             if (className.equals("android.app.Application")) {
-                ApplicationInfo currentApp = currentApplicationInfo();
-                if (currentApp != null) {
-                    isInstalled = true;
-                    onAppProcess(currentApp);
-                }
+                isInstalled = true;
+                onAppProcess();
             }
             return super.loadClass(className, resolve);
         }
@@ -98,14 +92,11 @@ public class ClassLoaderPatchInstaller {
             }.setName("onSystemServerProcess").run();
         }
 
-        private void onAppProcess(ApplicationInfo currentApp) {
+        private void onAppProcess() {
             new AbstractSafeR() {
                 @Override
                 public void runSafety() {
-                    if (currentApp == null) {
-                        return;
-                    }
-                    processHandler.onStartApplication(currentApp);
+                    processHandler.onStartApplication();
                 }
             }.setName("onAppProcess").run();
         }

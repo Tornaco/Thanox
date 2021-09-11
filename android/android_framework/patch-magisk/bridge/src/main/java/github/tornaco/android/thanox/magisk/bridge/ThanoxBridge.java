@@ -61,10 +61,10 @@ public class ThanoxBridge {
                 ClassLoaderPatchInstaller.install(processHandler);
                 break;
             case forkAndSpecializePostApp:
-                processHandler.onAppProcess();
-                break;
             case forkSystemServerPost:
+                break;
             case specializeAppProcessPost:
+                processHandler.onAppProcess();
                 break;
         }
     }

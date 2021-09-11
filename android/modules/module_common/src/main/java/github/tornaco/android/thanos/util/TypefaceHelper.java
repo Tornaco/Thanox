@@ -11,7 +11,7 @@ public class TypefaceHelper {
 
     private static Typeface sGoogleFont;
     private static Typeface sGoogleFontBold;
-    private static Typeface sGoogleSourceCodePro;
+    private static Typeface sJetbrainsMono;
 
     public static Typeface googleSans(Context context) {
         synchronized (TypefaceHelper.class) {
@@ -31,21 +31,12 @@ public class TypefaceHelper {
         }
     }
 
-    public static Typeface googleSourceCodePro(Context context) {
-        synchronized (TypefaceHelper.class) {
-            if (sGoogleSourceCodePro == null) {
-                sGoogleSourceCodePro = Typeface.createFromAsset(context.getAssets(), "fonts/google/SourceSansPro-Regular.ttf");
-            }
-            return sGoogleSourceCodePro;
-        }
-    }
-
     public static Typeface jetbrainsMono(Context context) {
         synchronized (TypefaceHelper.class) {
-            if (sGoogleSourceCodePro == null) {
-                sGoogleSourceCodePro = Typeface.createFromAsset(context.getAssets(), "fonts/google/jetbrains/JetBrainsMonoRegular.ttf");
+            if (sJetbrainsMono == null) {
+                sJetbrainsMono = Typeface.createFromAsset(context.getAssets(), "fonts/google/jetbrains/JetBrainsMonoRegular.ttf");
             }
-            return sGoogleSourceCodePro;
+            return sJetbrainsMono;
         }
     }
 }

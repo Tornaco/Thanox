@@ -1,5 +1,6 @@
 package github.tornaco.android.thanos.main;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.Observable;
 import androidx.fragment.app.FragmentActivity;
@@ -23,17 +25,24 @@ import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.app.donate.DonateActivity;
+import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivityNavBinding;
 import github.tornaco.android.thanos.pref.AppPreference;
+import github.tornaco.android.thanos.settings.ExportPatchUi;
 import github.tornaco.android.thanos.settings.PowerSettingsActivity;
 import github.tornaco.android.thanos.settings.SettingsDashboardActivity;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
+import github.tornaco.permission.requester.RequiresPermission;
+import github.tornaco.permission.requester.RuntimePermissions;
 
+@RuntimePermissions
 public class NavActivity extends BaseTrustedActivity implements NavFragment.FragmentAttachListener {
 
     private ActivityNavBinding binding;
     private NavViewModel navViewModel;
     private boolean isFirstRunDialogShown;
+
+    private ExportPatchUi exportPatchUi;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, NavActivity.class);
@@ -139,6 +148,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
 
     private void setupView() {
         setSupportActionBar(binding.toolbar);
+        exportPatchUi = ExportPatchUi.from(this);
     }
 
     @Verify
@@ -160,14 +170,23 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
     }
 
     private void showActiveDialog() {
-        new AlertDialog.Builder(NavActivity.this)
-                .setTitle(R.string.status_not_active)
-                .setMessage(R.string.message_active_needed)
-                .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
-                    // Noop.
-                })
-                .create()
-                .show();
+        if (OsUtils.isROrAbove()) {
+            exportPatchUi.show(new Runnable() {
+                @Override
+                public void run() {
+                    NavActivityPermissionRequester.exportMagiskZipRequestedChecked(NavActivity.this);
+                }
+            });
+        } else {
+            new AlertDialog.Builder(NavActivity.this)
+                    .setTitle(R.string.status_not_active)
+                    .setMessage(R.string.message_active_needed)
+                    .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+                        // Noop.
+                    })
+                    .create()
+                    .show();
+        }
     }
 
     private void showFrameworkErrorDialog() {
@@ -205,5 +224,16 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
 
     @Override
     public void onFragmentAttach(NavFragment fragment) {
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        exportPatchUi.handleActivityResult(requestCode, resultCode, data);
+    }
+
+    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void exportMagiskZipRequested() {
+        // Noop, just request perm.
     }
 }

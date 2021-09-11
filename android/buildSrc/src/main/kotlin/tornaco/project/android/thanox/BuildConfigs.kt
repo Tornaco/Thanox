@@ -76,11 +76,7 @@ object MagiskModConfigs {
 
     const val moduleName = "Thanox-Core"
     const val moduleAuthor = "Tornaco"
-    const val moduleDescription = """
-        Magisk module that provides android framework and app hooks for Thanox,
-        requires Riru $moduleMinRiruVersionName or above.
-        Support Android11 & Android12.
-    """
+    const val moduleDescription = """Magisk module that provides android framework and app hooks for Thanox, requires Riru $moduleMinRiruVersionName or above. Support Android11 & Android12."""
     val moduleVersion = Configs.thanoxVersionName
     val moduleVersionCode = Configs.thanoxVersionCode
 }

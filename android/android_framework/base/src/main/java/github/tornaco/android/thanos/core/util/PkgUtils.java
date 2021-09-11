@@ -350,4 +350,10 @@ public class PkgUtils {
         }
         return null;
     }
+
+    public static String getApkPath(Context context, String pkgName) {
+        ApplicationInfo applicationInfo = getApplicationInfo(context, pkgName);
+        if (applicationInfo == null) return null;
+        return applicationInfo.publicSourceDir;
+    }
 }

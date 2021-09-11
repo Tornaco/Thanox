@@ -1,10 +1,25 @@
 package github.tornaco.android.thanos.settings;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
+
+import com.elvishew.xlog.XLog;
+import com.google.common.io.Files;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Objects;
 
 import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildConfig;
@@ -14,9 +29,19 @@ import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateActivity;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
+import github.tornaco.android.thanos.core.util.OsUtils;
+import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity;
+import github.tornaco.android.thanos.util.ToastUtils;
+import github.tornaco.permission.requester.RequiresPermission;
+import github.tornaco.permission.requester.RuntimePermissions;
+import util.IoUtils;
 
+@RuntimePermissions
 public class AboutSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+    private final static int REQUEST_CODE_EXPORT_MAGISK_FILE_PICKED = 0x100;
+
     private int buildInfoClickTimes = 0;
 
     @Override
@@ -57,7 +82,9 @@ public class AboutSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
             findPreference(getString(R.string.key_build_info_server))
                     .setSummary(thanos.getVersionName() + "\n" + thanos.fingerPrint());
             findPreference(getString(R.string.key_patch_info)).setOnPreferenceClickListener(preference -> {
-                ExportPatchUi.show(getActivity());
+                if (OsUtils.isROrAbove()) {
+                    ExportPatchUi.show(getActivity(), this::exportMagiskZip);
+                }
                 return true;
             });
             findPreference(getString(R.string.key_patch_info)).setSummary(thanos.getPatchingSource());
@@ -102,9 +129,74 @@ public class AboutSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
         findPreference(getString(R.string.key_email)).setSummary(BuildProp.THANOX_CONTACT_EMAIL);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        XLog.d("onActivityResult: %s %s %s", requestCode, resultCode, ObjectToStringUtils.intentToString(data));
+        if (requestCode == REQUEST_CODE_EXPORT_MAGISK_FILE_PICKED && resultCode == Activity.RESULT_OK) {
+            onExportMagiskFilePickRequestResultQ(data);
+        }
+    }
+
     private void showBuildProp() {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             BuildPropActivity.Starter.INSTANCE.start(getActivity());
+        }
+    }
+
+    private void exportMagiskZip() {
+        AboutSettingsFragmentPermissionRequester.exportMagiskZipRequestedChecked(AboutSettingsFragment.this);
+    }
+
+    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void exportMagiskZipRequested() {
+        exportMagiskZipQAndAbove();
+    }
+
+    private void exportMagiskZipQAndAbove() {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        // you can set file mime-type
+        intent.setType("*/*");
+        // default file name
+        String backupFileNameWithExt = "magisk-riru-thanox-" + BuildProp.THANOS_VERSION_NAME + ".zip";
+        intent.putExtra(Intent.EXTRA_TITLE, backupFileNameWithExt);
+        try {
+            startActivityForResult(intent, REQUEST_CODE_EXPORT_MAGISK_FILE_PICKED);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(requireContext(), "Activity not found, please install Files app", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void onExportMagiskFilePickRequestResultQ(Intent data) {
+        if (data == null) {
+            XLog.e("No data.");
+            return;
+        }
+
+        Uri fileUri = data.getData();
+
+        if (fileUri == null) {
+            Toast.makeText(getActivity(), "fileUri == null", Toast.LENGTH_LONG).show();
+            XLog.e("No fileUri.");
+            return;
+        }
+
+        XLog.d("fileUri == %s", fileUri);
+        OutputStream os = null;
+        try {
+            os = requireContext().getContentResolver().openOutputStream(fileUri);
+            //noinspection UnstableApiUsage
+            Files.asByteSource(
+                    new File(Objects.requireNonNull(PkgUtils.getApkPath(requireContext(), requireContext().getPackageName()))))
+                    .copyTo(os);
+
+            ToastUtils.ok(requireContext());
+        } catch (IOException e) {
+            XLog.e(e);
+            Toast.makeText(getActivity(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
+        } finally {
+            IoUtils.closeQuietly(os);
         }
     }
 }

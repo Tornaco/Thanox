@@ -2,9 +2,7 @@ package github.tornaco.android.thanox.magisk.bridge;
 
 import static github.tornaco.android.thanos.core.util.AppUtils.currentApplicationInfo;
 
-import android.app.Activity;
 import android.app.ActivityThread;
-import android.app.Instrumentation;
 import android.content.pm.ApplicationInfo;
 
 import com.elvishew.xlog.XLog;

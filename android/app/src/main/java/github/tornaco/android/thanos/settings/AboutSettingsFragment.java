@@ -56,6 +56,10 @@ public class AboutSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
         if (thanos.isServiceInstalled()) {
             findPreference(getString(R.string.key_build_info_server))
                     .setSummary(thanos.getVersionName() + "\n" + thanos.fingerPrint());
+            findPreference(getString(R.string.key_patch_info)).setOnPreferenceClickListener(preference -> {
+                ExportPatchUi.show(getActivity());
+                return true;
+            });
             findPreference(getString(R.string.key_patch_info)).setSummary(thanos.getPatchingSource());
         } else {
             findPreference(getString(R.string.key_build_info_server))

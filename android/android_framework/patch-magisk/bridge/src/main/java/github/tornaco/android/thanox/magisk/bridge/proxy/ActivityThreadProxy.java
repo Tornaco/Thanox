@@ -48,7 +48,6 @@ final class XHandler implements Handler.Callback {
 
     @Override
     public boolean handleMessage(Message msg) {
-        XLog.d("XHandler handleMessage@ " + msg);
         original.handleMessage(msg);
         handleMessageX(msg);
         return true;
@@ -58,6 +57,7 @@ final class XHandler implements Handler.Callback {
         runNamed(new AbstractSafeR() {
             @Override
             public void runSafety() throws RemoteException {
+                XLog.v("XHandler handleMessageX: %s %s", msg, HandlerCodes.codeToString(msg.what));
                 if (msg.what == HandlerCodes.EXECUTE_TRANSACTION) {
                     handleClientTransactionMsg(msg);
                 }
@@ -163,7 +163,7 @@ class HandlerCodes {
     public static final int PURGE_RESOURCES = 161;
     public static final int ATTACH_STARTUP_AGENTS = 162;
 
-    String codeToString(int code) {
+    static String codeToString(int code) {
         switch (code) {
             case BIND_APPLICATION:
                 return "BIND_APPLICATION";
@@ -244,7 +244,7 @@ class HandlerCodes {
             case ATTACH_STARTUP_AGENTS:
                 return "ATTACH_STARTUP_AGENTS";
         }
-        return String.valueOf(code);
+        return "UNKNOWN_CODE: " + code;
     }
 }
 

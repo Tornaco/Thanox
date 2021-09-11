@@ -40,7 +40,7 @@ public class SystemServiceRegistryHookInstaller {
 
             XposedHelpers.setStaticBooleanField(SystemServiceRegistry.class, "sInitializing", false);
         } catch (Throwable e) {
-            XLog.e("serviceFetchers error", e);
+            XLog.e("SystemServiceRegistryHookInstaller install error", e);
         }
     }
 }

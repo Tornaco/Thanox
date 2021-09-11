@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Handler;
 
 import com.android.dx.stock.ProxyBuilder;
+import com.android.server.am.ActivityManagerService;
 import com.android.server.firewall.IntentFirewall;
 import com.elvishew.xlog.XLog;
 
@@ -20,8 +21,7 @@ import github.tornaco.android.thanos.services.BootStrap;
 import github.tornaco.android.thanos.services.app.ActiveServicesProxy;
 import github.tornaco.android.thanos.services.app.ActivityManagerServiceProxy;
 import github.tornaco.android.thanox.proxy.BaseProxyFactory;
-import github.tornaco.thanox.android.server.patch.framework.LockGuard;
-import util.ObjectsUtils;
+import github.tornaco.thanox.android.server.patch.framework.LocalServices;
 import util.XposedHelpers;
 
 public class AMSHooks {
@@ -32,17 +32,19 @@ public class AMSHooks {
     private static void installHooksForAMS() {
         XLog.i("AMSHooks installHooksForAMS");
         try {
-            Object ams = LockGuard.retrieveServices(LockGuard.INDEX_ACTIVITY);
-            if (ams == null) {
-                return;
-            }
-            if (!ObjectsUtils.equals("ActivityManagerService", ams.getClass().getSimpleName())) {
-                return;
-            }
-            XLog.i("AMSHooks installHooksForAMS, ams: %s", ams);
+            LocalServices.getService(ActivityManagerService.Lifecycle.class)
+                    .ifPresent(lifecycle -> {
+                        XLog.d("AMSHooks Lifecycle: %s", lifecycle);
+                        ActivityManagerService ams = lifecycle.getService();
+                        XLog.i("AMSHooks installHooksForAMS, ams: %s", ams);
+                        if (ams == null) {
+                            XLog.w("AMSHooks ams is null...");
+                            return;
+                        }
 
-            attachActiveServices(ams);
-            installIFW(ams);
+                        attachActiveServices(ams);
+                        installIFW(ams);
+                    });
 
         } catch (Throwable e) {
             XLog.e("AMSHooks Error SystemServerHooks installHooksForAMS", e);

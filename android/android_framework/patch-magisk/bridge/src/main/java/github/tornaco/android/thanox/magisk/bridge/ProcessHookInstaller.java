@@ -19,6 +19,7 @@ public class ProcessHookInstaller implements ProcessHandler {
 
     @Override
     public void onStartApplication() {
+        XLog.d("ProcessHookInstaller onStartApplication");
         ActivityThread am = ActivityThread.currentActivityThread();
         if (am == null) {
             XLog.w("onStartApplication ActivityThread is null");
@@ -44,6 +45,7 @@ public class ProcessHookInstaller implements ProcessHandler {
 
     @Override
     public void onAppProcess() {
+        XLog.d("ProcessHookInstaller onAppProcess");
         // Hooks for Register.
         // It should run early on app process start.
         SystemServiceRegistryHookInstaller.install();

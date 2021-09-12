@@ -54,7 +54,8 @@ public class ClassLoaderPatchInstaller {
     }
 
     class HookedBootClassLoader extends ClassLoader {
-        private boolean isInstalled = false;
+        private static final String SYSTEM_SERVER_CLASS_NAME = "com.android.server.SystemServer";
+        private static final String APPLICATION_CLASS_NAME = "android.app.Application";
 
         public HookedBootClassLoader() {
             super(boot);
@@ -63,42 +64,36 @@ public class ClassLoaderPatchInstaller {
         @Override
         protected Class<?> loadClass(String className, boolean resolve) throws ClassNotFoundException {
             if (LOGV) XLog.d("HookedBootClassLoader#loadClass: " + className);
-            if (isInstalled) {
-                return super.loadClass(className, resolve);
-            }
 
-            if (className.startsWith("com.android.server")) {
+            if (SYSTEM_SERVER_CLASS_NAME.equals(className)) {
                 int uid = Binder.getCallingUid();
                 XLog.d("onLoadSystemServer. calling uid: " + uid);
                 if (uid == 1000) {
-                    isInstalled = true;
-                    onSystemServerProcess();
+                    onStartSystemServer();
                 }
+            } else if (APPLICATION_CLASS_NAME.equals(className)) {
+                onStartApplication();
             }
 
-            if (className.equals("android.app.Application")) {
-                isInstalled = true;
-                onAppProcess();
-            }
             return super.loadClass(className, resolve);
         }
 
-        private void onSystemServerProcess() {
+        private void onStartSystemServer() {
             new AbstractSafeR() {
                 @Override
                 public void runSafety() {
                     processHandler.onStartSystemServer();
                 }
-            }.setName("onSystemServerProcess").run();
+            }.setName("onStartSystemServer").run();
         }
 
-        private void onAppProcess() {
+        private void onStartApplication() {
             new AbstractSafeR() {
                 @Override
                 public void runSafety() {
                     processHandler.onStartApplication();
                 }
-            }.setName("onAppProcess").run();
+            }.setName("onStartApplication").run();
         }
     }
 }

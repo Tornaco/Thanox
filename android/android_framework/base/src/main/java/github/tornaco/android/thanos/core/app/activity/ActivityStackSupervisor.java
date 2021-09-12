@@ -44,11 +44,6 @@ public class ActivityStackSupervisor {
     }
 
     @SneakyThrows
-    public void reportActivityLaunching(Intent intent, String reason) {
-        supervisor.reportActivityLaunching(intent, reason);
-    }
-
-    @SneakyThrows
     public String getCurrentFrontApp() {
         return supervisor.getCurrentFrontApp();
     }

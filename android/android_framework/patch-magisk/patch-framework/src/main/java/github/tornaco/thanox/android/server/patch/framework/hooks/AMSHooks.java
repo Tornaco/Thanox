@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Handler;
 
+import com.android.dx.stock.BaseProxyFactory;
 import com.android.dx.stock.ProxyBuilder;
 import com.android.server.am.ActivityManagerService;
 import com.android.server.firewall.IntentFirewall;
@@ -20,7 +21,6 @@ import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.services.BootStrap;
 import github.tornaco.android.thanos.services.app.ActiveServicesProxy;
 import github.tornaco.android.thanos.services.app.ActivityManagerServiceProxy;
-import github.tornaco.android.thanox.proxy.BaseProxyFactory;
 import github.tornaco.thanox.android.server.patch.framework.LocalServices;
 import util.XposedHelpers;
 

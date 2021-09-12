@@ -14,9 +14,6 @@ interface IActivityStackSupervisor {
     void verifyActivityStarting(in Bundle options, String pkg, in ComponentName componentName,
                     int uid, int pid, in IVerifyCallback callback);
 
-    void reportActivityLaunching(in Intent intent, String reason);
-    void reportActivityLaunched(in Intent intent, String reason);
-
     String getCurrentFrontApp();
 
     void setAppLockEnabled(boolean enabled);
@@ -50,8 +47,6 @@ interface IActivityStackSupervisor {
 
     void registerTopPackageChangeListener(in ITopPackageChangeListener listener);
     void unRegisterTopPackageChangeListener(in ITopPackageChangeListener listener);
-
-    void reportRealStartActivity(in Intent intent, String reason);
 
     boolean isVerifyOnScreenOffEnabled();
     void setVerifyOnScreenOffEnabled(boolean enabled);

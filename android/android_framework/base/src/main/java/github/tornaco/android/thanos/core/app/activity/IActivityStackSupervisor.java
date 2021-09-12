@@ -22,12 +22,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     @Override public void verifyActivityStarting(android.os.Bundle options, java.lang.String pkg, android.content.ComponentName componentName, int uid, int pid, github.tornaco.android.thanos.core.app.activity.IVerifyCallback callback) throws android.os.RemoteException
     {
     }
-    @Override public void reportActivityLaunching(android.content.Intent intent, java.lang.String reason) throws android.os.RemoteException
-    {
-    }
-    @Override public void reportActivityLaunched(android.content.Intent intent, java.lang.String reason) throws android.os.RemoteException
-    {
-    }
     @Override public java.lang.String getCurrentFrontApp() throws android.os.RemoteException
     {
       return null;
@@ -102,9 +96,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     {
     }
     @Override public void unRegisterTopPackageChangeListener(github.tornaco.android.thanos.core.app.activity.ITopPackageChangeListener listener) throws android.os.RemoteException
-    {
-    }
-    @Override public void reportRealStartActivity(android.content.Intent intent, java.lang.String reason) throws android.os.RemoteException
     {
     }
     @Override public boolean isVerifyOnScreenOffEnabled() throws android.os.RemoteException
@@ -271,38 +262,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           github.tornaco.android.thanos.core.app.activity.IVerifyCallback _arg5;
           _arg5 = github.tornaco.android.thanos.core.app.activity.IVerifyCallback.Stub.asInterface(data.readStrongBinder());
           this.verifyActivityStarting(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
-          reply.writeNoException();
-          return true;
-        }
-        case TRANSACTION_reportActivityLaunching:
-        {
-          data.enforceInterface(descriptor);
-          android.content.Intent _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = android.content.Intent.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
-          java.lang.String _arg1;
-          _arg1 = data.readString();
-          this.reportActivityLaunching(_arg0, _arg1);
-          reply.writeNoException();
-          return true;
-        }
-        case TRANSACTION_reportActivityLaunched:
-        {
-          data.enforceInterface(descriptor);
-          android.content.Intent _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = android.content.Intent.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
-          java.lang.String _arg1;
-          _arg1 = data.readString();
-          this.reportActivityLaunched(_arg0, _arg1);
           reply.writeNoException();
           return true;
         }
@@ -517,22 +476,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           github.tornaco.android.thanos.core.app.activity.ITopPackageChangeListener _arg0;
           _arg0 = github.tornaco.android.thanos.core.app.activity.ITopPackageChangeListener.Stub.asInterface(data.readStrongBinder());
           this.unRegisterTopPackageChangeListener(_arg0);
-          reply.writeNoException();
-          return true;
-        }
-        case TRANSACTION_reportRealStartActivity:
-        {
-          data.enforceInterface(descriptor);
-          android.content.Intent _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = android.content.Intent.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
-          java.lang.String _arg1;
-          _arg1 = data.readString();
-          this.reportRealStartActivity(_arg0, _arg1);
           reply.writeNoException();
           return true;
         }
@@ -781,58 +724,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           boolean _status = mRemote.transact(Stub.TRANSACTION_verifyActivityStarting, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
             getDefaultImpl().verifyActivityStarting(options, pkg, componentName, uid, pid, callback);
-            return;
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
-      @Override public void reportActivityLaunching(android.content.Intent intent, java.lang.String reason) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          if ((intent!=null)) {
-            _data.writeInt(1);
-            intent.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
-          _data.writeString(reason);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_reportActivityLaunching, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().reportActivityLaunching(intent, reason);
-            return;
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
-      @Override public void reportActivityLaunched(android.content.Intent intent, java.lang.String reason) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          if ((intent!=null)) {
-            _data.writeInt(1);
-            intent.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
-          _data.writeString(reason);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_reportActivityLaunched, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().reportActivityLaunched(intent, reason);
             return;
           }
           _reply.readException();
@@ -1290,32 +1181,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void reportRealStartActivity(android.content.Intent intent, java.lang.String reason) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          if ((intent!=null)) {
-            _data.writeInt(1);
-            intent.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
-          _data.writeString(reason);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_reportRealStartActivity, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().reportRealStartActivity(intent, reason);
-            return;
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
       @Override public boolean isVerifyOnScreenOffEnabled() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -1551,42 +1416,39 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     static final int TRANSACTION_replaceActivityStartingIntent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_shouldVerifyActivityStarting = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
     static final int TRANSACTION_verifyActivityStarting = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-    static final int TRANSACTION_reportActivityLaunching = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
-    static final int TRANSACTION_reportActivityLaunched = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
-    static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
-    static final int TRANSACTION_setAppLockEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 7);
-    static final int TRANSACTION_isAppLockEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 8);
-    static final int TRANSACTION_isPackageLocked = (android.os.IBinder.FIRST_CALL_TRANSACTION + 9);
-    static final int TRANSACTION_setPackageLocked = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
-    static final int TRANSACTION_setVerifyResult = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
-    static final int TRANSACTION_setLockerMethod = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
-    static final int TRANSACTION_getLockerMethod = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
-    static final int TRANSACTION_setLockerKey = (android.os.IBinder.FIRST_CALL_TRANSACTION + 14);
-    static final int TRANSACTION_isLockerKeyValid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
-    static final int TRANSACTION_isLockerKeySet = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
-    static final int TRANSACTION_isFingerPrintEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
-    static final int TRANSACTION_setFingerPrintEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
-    static final int TRANSACTION_addComponentReplacement = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
-    static final int TRANSACTION_removeComponentReplacement = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
-    static final int TRANSACTION_getComponentReplacements = (android.os.IBinder.FIRST_CALL_TRANSACTION + 21);
-    static final int TRANSACTION_setActivityTrampolineEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 22);
-    static final int TRANSACTION_isActivityTrampolineEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 23);
-    static final int TRANSACTION_setShowCurrentComponentViewEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 24);
-    static final int TRANSACTION_isShowCurrentComponentViewEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 25);
-    static final int TRANSACTION_registerTopPackageChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
-    static final int TRANSACTION_unRegisterTopPackageChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
-    static final int TRANSACTION_reportRealStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
-    static final int TRANSACTION_isVerifyOnScreenOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
-    static final int TRANSACTION_setVerifyOnScreenOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
-    static final int TRANSACTION_isVerifyOnAppSwitchEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
-    static final int TRANSACTION_setVerifyOnAppSwitchEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 32);
-    static final int TRANSACTION_isVerifyOnTaskRemovedEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 33);
-    static final int TRANSACTION_setVerifyOnTaskRemovedEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 34);
-    static final int TRANSACTION_isAppLockWorkaroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 35);
-    static final int TRANSACTION_setAppLockWorkaroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 36);
-    static final int TRANSACTION_reportOnStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 37);
-    static final int TRANSACTION_reportOnActivityStopped = (android.os.IBinder.FIRST_CALL_TRANSACTION + 38);
-    static final int TRANSACTION_reportOnActivityResumed = (android.os.IBinder.FIRST_CALL_TRANSACTION + 39);
+    static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+    static final int TRANSACTION_setAppLockEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+    static final int TRANSACTION_isAppLockEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
+    static final int TRANSACTION_isPackageLocked = (android.os.IBinder.FIRST_CALL_TRANSACTION + 7);
+    static final int TRANSACTION_setPackageLocked = (android.os.IBinder.FIRST_CALL_TRANSACTION + 8);
+    static final int TRANSACTION_setVerifyResult = (android.os.IBinder.FIRST_CALL_TRANSACTION + 9);
+    static final int TRANSACTION_setLockerMethod = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
+    static final int TRANSACTION_getLockerMethod = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
+    static final int TRANSACTION_setLockerKey = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
+    static final int TRANSACTION_isLockerKeyValid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
+    static final int TRANSACTION_isLockerKeySet = (android.os.IBinder.FIRST_CALL_TRANSACTION + 14);
+    static final int TRANSACTION_isFingerPrintEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
+    static final int TRANSACTION_setFingerPrintEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
+    static final int TRANSACTION_addComponentReplacement = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
+    static final int TRANSACTION_removeComponentReplacement = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
+    static final int TRANSACTION_getComponentReplacements = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
+    static final int TRANSACTION_setActivityTrampolineEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
+    static final int TRANSACTION_isActivityTrampolineEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 21);
+    static final int TRANSACTION_setShowCurrentComponentViewEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 22);
+    static final int TRANSACTION_isShowCurrentComponentViewEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 23);
+    static final int TRANSACTION_registerTopPackageChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 24);
+    static final int TRANSACTION_unRegisterTopPackageChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 25);
+    static final int TRANSACTION_isVerifyOnScreenOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
+    static final int TRANSACTION_setVerifyOnScreenOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
+    static final int TRANSACTION_isVerifyOnAppSwitchEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
+    static final int TRANSACTION_setVerifyOnAppSwitchEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
+    static final int TRANSACTION_isVerifyOnTaskRemovedEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
+    static final int TRANSACTION_setVerifyOnTaskRemovedEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
+    static final int TRANSACTION_isAppLockWorkaroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 32);
+    static final int TRANSACTION_setAppLockWorkaroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 33);
+    static final int TRANSACTION_reportOnStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 34);
+    static final int TRANSACTION_reportOnActivityStopped = (android.os.IBinder.FIRST_CALL_TRANSACTION + 35);
+    static final int TRANSACTION_reportOnActivityResumed = (android.os.IBinder.FIRST_CALL_TRANSACTION + 36);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1608,8 +1470,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent) throws android.os.RemoteException;
   public boolean shouldVerifyActivityStarting(android.content.ComponentName componentName, java.lang.String pkg, java.lang.String source) throws android.os.RemoteException;
   public void verifyActivityStarting(android.os.Bundle options, java.lang.String pkg, android.content.ComponentName componentName, int uid, int pid, github.tornaco.android.thanos.core.app.activity.IVerifyCallback callback) throws android.os.RemoteException;
-  public void reportActivityLaunching(android.content.Intent intent, java.lang.String reason) throws android.os.RemoteException;
-  public void reportActivityLaunched(android.content.Intent intent, java.lang.String reason) throws android.os.RemoteException;
   public java.lang.String getCurrentFrontApp() throws android.os.RemoteException;
   public void setAppLockEnabled(boolean enabled) throws android.os.RemoteException;
   public boolean isAppLockEnabled() throws android.os.RemoteException;
@@ -1632,7 +1492,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public boolean isShowCurrentComponentViewEnabled() throws android.os.RemoteException;
   public void registerTopPackageChangeListener(github.tornaco.android.thanos.core.app.activity.ITopPackageChangeListener listener) throws android.os.RemoteException;
   public void unRegisterTopPackageChangeListener(github.tornaco.android.thanos.core.app.activity.ITopPackageChangeListener listener) throws android.os.RemoteException;
-  public void reportRealStartActivity(android.content.Intent intent, java.lang.String reason) throws android.os.RemoteException;
   public boolean isVerifyOnScreenOffEnabled() throws android.os.RemoteException;
   public void setVerifyOnScreenOffEnabled(boolean enabled) throws android.os.RemoteException;
   public boolean isVerifyOnAppSwitchEnabled() throws android.os.RemoteException;

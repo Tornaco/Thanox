@@ -28,11 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.setup.SetupActivity"
-                android:exported="false"
-                android:theme="@style/ModuleLockerAppThemeVerify" />
-        <activity
-                android:name=".ui.setup.SettingsActivity"
+                android:name=".ui.setup.LockSettingsActivity"
                 android:label="@string/module_locker_title_settings" />
     </application>
 

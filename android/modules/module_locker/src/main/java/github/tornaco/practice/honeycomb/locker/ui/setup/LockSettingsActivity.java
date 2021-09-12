@@ -9,10 +9,10 @@ import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.practice.honeycomb.locker.R;
 
-public class SettingsActivity extends ThemeActivity {
+public class LockSettingsActivity extends ThemeActivity {
 
     public static void start(Context context) {
-        ActivityUtils.startActivity(context, SettingsActivity.class);
+        ActivityUtils.startActivity(context, LockSettingsActivity.class);
     }
 
     @Override

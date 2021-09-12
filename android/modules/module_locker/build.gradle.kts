@@ -1,9 +1,12 @@
 import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.resPrefix
 import tornaco.project.android.thanox.Libs
+import tornaco.project.android.thanox.*
 
 plugins {
     id("com.android.library")
+    id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -21,7 +24,7 @@ android {
     }
 
     buildFeatures {
-        compose = false
+        compose = true
         buildConfig = true
         aidl = true
         renderScript = false
@@ -29,6 +32,14 @@ android {
         shaders = false
         viewBinding = true
         dataBinding = true
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Compose.composeVersion
     }
 
     resourcePrefix = resPrefix
@@ -43,24 +54,34 @@ dependencies {
     implementation(Libs.AndroidX.preference)
     implementation(Libs.AndroidX.constraint)
     implementation(Libs.AndroidX.swipeRefreshLayout)
+    implementation(Libs.AndroidX.biometric)
+
+    implementation(Compose.runtimeSaveAble)
+    implementation(Compose.ui)
+    implementation(Compose.runtime)
+    implementation(Compose.material)
+    implementation(Compose.activityCompose)
+    implementation(Compose.viewmodel)
+    implementation(Compose.navigationCompose)
+    implementation(Compose.hiltNavigation)
+    implementation(Compose.tooling)
+    implementation(Compose.toolingPreview)
+    implementation(Compose.coil)
+
+    implementation(Libs.Kotlin.stdlib)
+    implementation(Libs.Coroutines.android)
 
     implementation(Libs.Others.guavaAndroid)
     implementation(Libs.Others.glide)
     annotationProcessor(Libs.Others.glideCompiler)
-
-    compileOnly(Libs.Others.lombok)
-    annotationProcessor(Libs.Others.lombok)
+    kapt(Libs.Others.glideCompiler)
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
-
-    implementation(files("libs/flyme_fingerprint.jar"))
-
-    implementation(project(":third_party:pinlockview"))
-    implementation(project(":third_party:patternlockview"))
+    kapt(project(":annotation_processors:permission-requester-compiler"))
 
     implementation(project(":android_framework:base"))
     implementation(project(":third_party:recyclerview-fastscroll"))

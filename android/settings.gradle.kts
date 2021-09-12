@@ -32,8 +32,6 @@ include(":modules:module_common")
 include(":modules:module_filepicker")
 
 include(":third_party:dateformatter")
-include(":third_party:patternlockview")
-include(":third_party:pinlockview")
 include(":third_party:recyclerview-fastscroll")
 include(":third_party:search")
 include(":third_party:badge")

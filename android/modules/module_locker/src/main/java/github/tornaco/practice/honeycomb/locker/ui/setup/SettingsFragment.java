@@ -11,8 +11,6 @@ import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.practice.honeycomb.locker.R;
-import github.tornaco.practice.honeycomb.locker.util.fingerprint.FingerprintManagerCompat;
-import util.Consumer;
 
 public class SettingsFragment extends BaseWithFabPreferenceFragmentCompat {
 
@@ -48,11 +46,6 @@ public class SettingsFragment extends BaseWithFabPreferenceFragmentCompat {
         Objects.requireNonNull(reVerifyTaskRemoved).setChecked(supervisor.isVerifyOnTaskRemovedEnabled());
         Objects.requireNonNull(enableWorkaround).setChecked(supervisor.isAppLockWorkaroundEnabled());
 
-        boolean isFingerPrintSupported = FingerprintManagerCompat.from(getActivity())
-                .isHardwareDetected();
-        Objects.requireNonNull(enableFP).setEnabled(isFingerPrintSupported);
-        enableFP.setChecked(isFingerPrintSupported && supervisor.isFingerPrintEnabled());
-
         reVerifyScreenOff.setOnPreferenceClickListener(preference -> {
             supervisor.setVerifyOnScreenOffEnabled(reVerifyScreenOff.isChecked());
             return true;
@@ -65,41 +58,5 @@ public class SettingsFragment extends BaseWithFabPreferenceFragmentCompat {
             supervisor.setVerifyOnTaskRemovedEnabled(reVerifyTaskRemoved.isChecked());
             return true;
         });
-        enableWorkaround.setOnPreferenceClickListener(preference -> {
-            supervisor.setAppLockWorkaroundEnabled(enableWorkaround.isChecked());
-            return true;
-        });
-        if (isFingerPrintSupported) {
-            enableFP.setOnPreferenceClickListener(preference -> {
-                supervisor.setFingerPrintEnabled(enableFP.isChecked());
-                return true;
-            });
-        }
-
-        Objects.requireNonNull(lockMethod).setSummary(getCurrentLockMethodString());
-        Objects.requireNonNull(lockMethod).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                LockerMethodSelectionUi.showLockerMethodSelections(getActivity(), new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer method) {
-                        SetupActivity.start(getContext(), method);
-                    }
-                });
-                return true;
-            }
-        });
-    }
-
-    private String getCurrentLockMethodString() {
-        ActivityStackSupervisor supervisor = ThanosManager.from(getContext()).getActivityStackSupervisor();
-        int method = supervisor.getLockerMethod();
-        if (method == ActivityStackSupervisor.LockerMethod.PIN) {
-            return getString(R.string.module_locker_key_verify_lock_method_pin);
-        }
-        if (method == ActivityStackSupervisor.LockerMethod.PATTERN) {
-            return getString(R.string.module_locker_key_verify_lock_method_pattern);
-        }
-        return "Noop";
     }
 }

@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.app.activity;
 import github.tornaco.android.thanos.core.app.activity.IVerifyCallback;
 import github.tornaco.android.thanos.core.app.activity.ITopPackageChangeListener;
 import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
+import github.tornaco.android.thanos.core.IPrinter;
 
 interface IActivityStackSupervisor {
     boolean checkActivity(in ComponentName componentName);
@@ -64,4 +65,6 @@ interface IActivityStackSupervisor {
     Intent reportOnStartActivity(String callingPackage, in Intent intent);
     void reportOnActivityStopped(in IBinder token);
     void reportOnActivityResumed(in IBinder token);
+
+    void dump(in IPrinter p);
 }

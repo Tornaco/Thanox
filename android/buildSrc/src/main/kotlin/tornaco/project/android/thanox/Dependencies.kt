@@ -22,6 +22,8 @@ object Compose {
     const val navigationCompose = "androidx.navigation:navigation-compose:2.4.0-alpha03"
     const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
     const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
+
+    const val coil = "io.coil-kt:coil-compose:1.3.2"
 }
 
 object Tests {
@@ -80,6 +82,8 @@ object Libs {
         const val lifeCycleExt = "androidx.lifecycle:lifecycle-extensions:2.2.0"
         const val lifeCycleCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:2.3.1"
         const val lifeCycleCompiler = "androidx.lifecycle:lifecycle-compiler:2.3.1"
+
+        const val biometric = "androidx.biometric:biometric:1.2.0-alpha03"
     }
 
     object Room {

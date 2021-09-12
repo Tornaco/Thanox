@@ -75,20 +75,6 @@ public class LicenseHelper {
 
         notices.addNotice(
                 new Notice(
-                        "PatternLockView",
-                        "https://github.com/aritraroy/PatternLockView",
-                        null,
-                        new ApacheSoftwareLicense20()));
-
-        notices.addNotice(
-                new Notice(
-                        "PinLockView",
-                        "https://github.com/aritraroy/PinLockView",
-                        null,
-                        new ApacheSoftwareLicense20()));
-
-        notices.addNotice(
-                new Notice(
                         "MPAndroidChart",
                         "https://github.com/PhilJay/MPAndroidChart",
                         "Copyright 2019 Philipp Jahoda",
@@ -106,13 +92,6 @@ public class LicenseHelper {
                         "Timber",
                         "https://github.com/JakeWharton/timber",
                         "Copyright 2013 Jake Wharton",
-                        new ApacheSoftwareLicense20()));
-
-        notices.addNotice(
-                new Notice(
-                        "FireCrasher",
-                        "https://github.com/osama-raddad/FireCrasher",
-                        "Copyright 2019, Osama Raddad",
                         new ApacheSoftwareLicense20()));
 
         notices.addNotice(
@@ -145,13 +124,6 @@ public class LicenseHelper {
 
         notices.addNotice(
                 new Notice(
-                        "zip4j",
-                        "https://github.com/srikanth-lingala/zip4j",
-                        null,
-                        new ApacheSoftwareLicense20()));
-
-        notices.addNotice(
-                new Notice(
                         "android_native_code_view",
                         "https://github.com/vic797/android_native_code_view",
                         "Copyright 2017 Victor Campos",
@@ -163,13 +135,6 @@ public class LicenseHelper {
                         "https://github.com/spacecowboy/NoNonsense-FilePicker",
                         null,
                         new MozillaPublicLicense20()));
-
-        notices.addNotice(
-                new Notice(
-                        "Flipper",
-                        "https://github.com/baldapps/Flipper",
-                        null,
-                        new MITLicense()));
 
         notices.addNotice(
                 new Notice(
@@ -211,13 +176,6 @@ public class LicenseHelper {
                         "MaterialProgressBar",
                         "https://github.com/zhanghai/MaterialProgressBar",
                         "Copyright 2015 Hai Zhang",
-                        new ApacheSoftwareLicense20()));
-
-        notices.addNotice(
-                new Notice(
-                        "MaterialStyledDialogs",
-                        "https://github.com/javiersantos/MaterialStyledDialogs",
-                        "Copyright 2016-2018 Javier Santos",
                         new ApacheSoftwareLicense20()));
 
         notices.addNotice(

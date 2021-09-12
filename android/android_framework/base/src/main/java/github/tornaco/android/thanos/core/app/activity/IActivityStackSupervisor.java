@@ -138,6 +138,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     @Override public void reportOnActivityResumed(android.os.IBinder token) throws android.os.RemoteException
     {
     }
+    @Override public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -585,6 +588,15 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           android.os.IBinder _arg0;
           _arg0 = data.readStrongBinder();
           this.reportOnActivityResumed(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_dump:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.IPrinter _arg0;
+          _arg0 = github.tornaco.android.thanos.core.IPrinter.Stub.asInterface(data.readStrongBinder());
+          this.dump(_arg0);
           reply.writeNoException();
           return true;
         }
@@ -1410,6 +1422,25 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_dump, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().dump(p);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor sDefaultImpl;
     }
     static final int TRANSACTION_checkActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1449,6 +1480,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     static final int TRANSACTION_reportOnStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 34);
     static final int TRANSACTION_reportOnActivityStopped = (android.os.IBinder.FIRST_CALL_TRANSACTION + 35);
     static final int TRANSACTION_reportOnActivityResumed = (android.os.IBinder.FIRST_CALL_TRANSACTION + 36);
+    static final int TRANSACTION_dump = (android.os.IBinder.FIRST_CALL_TRANSACTION + 37);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1505,4 +1537,5 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public android.content.Intent reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException;
   public void reportOnActivityStopped(android.os.IBinder token) throws android.os.RemoteException;
   public void reportOnActivityResumed(android.os.IBinder token) throws android.os.RemoteException;
+  public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException;
 }

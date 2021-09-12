@@ -2,20 +2,6 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/module_locker_title_security">
-        <SwitchPreferenceCompat
-                app:key="@string/module_locker_key_fp"
-                app:persistent="false"
-                app:title="@string/module_locker_title_verify_fp_enabled" />
-        <SwitchPreferenceCompat
-                app:key="@string/module_locker_key_verify_workaround_enabled"
-                app:persistent="false"
-                app:summary="@string/module_locker_summary_verify_workaround_enabled"
-                app:title="@string/module_locker_title_verify_workaround_enabled" />
-        <Preference
-                app:key="@string/module_locker_key_verify_lock_method"
-                app:persistent="false"
-                app:summary="@string/module_locker_key_verify_lock_method_pin"
-                app:title="@string/module_locker_title_verify_lock_method" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/module_locker_title_verify_settings">

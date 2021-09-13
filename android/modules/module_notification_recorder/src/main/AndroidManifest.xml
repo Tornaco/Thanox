@@ -1,10 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="github.tornaco.android.thanox.module.notification.recorder">
+    package="github.tornaco.android.thanox.module.notification.recorder">
 
     <application>
         <activity
-                android:name=".NRListActivity"
-                android:label="@string/module_notification_recorder_feature_title_notification_recorder" />
-        <activity android:name=".NotificationSettingsActivity" />
+            android:name=".NotificationRecordListActivity"
+            android:exported="false"
+            android:label="@string/module_notification_recorder_feature_title_notification_recorder" />
+        <activity
+            android:name=".NotificationRecordSettingsActivity"
+            android:exported="false" />
     </application>
 </manifest>

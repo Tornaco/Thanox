@@ -53,7 +53,7 @@ import github.tornaco.android.thanos.theme.ThemeActivity;
  *
  * @param <T>
  */
-public abstract class AbstractFilePickerActivity<T> extends ThemeActivity
+public abstract class AbsFilePickerActivity<T> extends ThemeActivity
         implements AbstractFilePickerFragment.OnFilePickedListener {
 
     public static final String EXTRA_START_PATH = "nononsense.intent" + ".START_PATH";

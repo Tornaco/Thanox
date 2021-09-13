@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 
-public class FilePickerActivity extends AbstractFilePickerActivity<File> {
+public class FilePickerActivity extends AbsFilePickerActivity<File> {
     @Override
     protected AbstractFilePickerFragment<File> getFragment(
             @Nullable final String startPath, final int mode, final boolean allowMultiple,

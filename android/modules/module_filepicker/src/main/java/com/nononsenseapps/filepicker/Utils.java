@@ -1,7 +1,7 @@
 package com.nononsenseapps.filepicker;
 
-import static com.nononsenseapps.filepicker.AbstractFilePickerActivity.EXTRA_ALLOW_MULTIPLE;
-import static com.nononsenseapps.filepicker.AbstractFilePickerActivity.EXTRA_PATHS;
+import static com.nononsenseapps.filepicker.AbsFilePickerActivity.EXTRA_ALLOW_MULTIPLE;
+import static com.nononsenseapps.filepicker.AbsFilePickerActivity.EXTRA_PATHS;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -112,7 +112,7 @@ public class Utils {
     /**
      * Parses the returned files from a filepicker activity into a nice list
      *
-     * @param data returned by the {@link AbstractFilePickerActivity}
+     * @param data returned by the {@link AbsFilePickerActivity}
      * @return a {@link List<Uri>} of files (uris) which the user selected in the picker.
      */
     @NonNull

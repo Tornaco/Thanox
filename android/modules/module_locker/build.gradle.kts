@@ -71,6 +71,8 @@ dependencies {
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)
 
+    implementation(Libs.Accompanist.appcompatTheme)
+
     implementation(Libs.Others.guavaAndroid)
     implementation(Libs.Others.glide)
     annotationProcessor(Libs.Others.glideCompiler)

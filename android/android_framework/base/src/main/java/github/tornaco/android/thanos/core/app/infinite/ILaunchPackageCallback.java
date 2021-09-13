@@ -21,7 +21,6 @@ public interface ILaunchPackageCallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.infinite.ILaunchPackageCallback
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.infinite.ILaunchPackageCallback";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -56,6 +55,9 @@ public interface ILaunchPackageCallback extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_onSuccess:
         {
           data.enforceInterface(descriptor);
@@ -102,9 +104,11 @@ public interface ILaunchPackageCallback extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onSuccess, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onSuccess();
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onSuccess();
+              return;
+            }
           }
           _reply.readException();
         }
@@ -122,9 +126,11 @@ public interface ILaunchPackageCallback extends android.os.IInterface
           _data.writeString(errorMessage);
           _data.writeInt(errorCode);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onError, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onError(errorMessage, errorCode);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onError(errorMessage, errorCode);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -154,6 +160,7 @@ public interface ILaunchPackageCallback extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.infinite.ILaunchPackageCallback";
   public void onSuccess() throws android.os.RemoteException;
   public void onError(java.lang.String errorMessage, int errorCode) throws android.os.RemoteException;
 }

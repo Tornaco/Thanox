@@ -40,67 +40,120 @@
         </activity>
         <activity
             android:name=".settings.UiSettingsActivity"
+            android:exported="false"
             android:label="@string/pre_title_ui" />
         <activity
             android:name=".settings.StrategySettingsActivity"
+            android:exported="false"
             android:label="@string/pre_title_strategy" />
         <activity
             android:name=".settings.PowerSettingsActivity"
+            android:exported="false"
             android:label="@string/pre_title_power" />
         <activity
             android:name=".settings.DataSettingsActivity"
+            android:exported="false"
             android:label="@string/pre_title_data" />
         <activity
             android:name=".settings.DevSettingsActivity"
+            android:exported="false"
             android:label="@string/pre_title_developer" />
         <activity
             android:name=".settings.AboutSettingsActivity"
+            android:exported="false"
             android:label="@string/pre_title_about" />
-        <activity android:name=".apps.AppsManageActivity" />
-        <activity android:name=".privacy.CheatFieldSettingsActivity" />
-        <activity android:name=".start.BgRestrictSettingsActivity" />
+        <activity
+            android:name=".apps.AppsManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".privacy.CheatFieldSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".start.BgRestrictSettingsActivity"
+            android:exported="false" />
 
         <activity
             android:name=".apps.AppDetailsActivity"
             android:enabled="true"
             android:exported="true" />
-        <activity android:name=".notification.ScreenOnNotificationActivity" />
-        <activity android:name=".task.RecentTaskBlurListActivity" />
-        <activity android:name=".power.SmartStandbyV2Activity" />
+        <activity
+            android:name=".notification.ScreenOnNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".task.RecentTaskBlurListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".power.SmartStandbyV2Activity"
+            android:exported="false" />
         <activity
             android:name=".apps.SuggestedAppsActivity"
+            android:exported="false"
             android:label="@string/feature_title_apps_manager" />
-        <activity android:name=".start.StartChartActivity" />
-        <activity android:name=".start.StartRuleActivity" />
-        <activity android:name=".power.StandByRuleActivity" />
+        <activity
+            android:name=".start.StartChartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".start.StartRuleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".power.StandByRuleActivity"
+            android:exported="false" />
         <activity
             android:name=".main.NeedToRestartActivity"
+            android:exported="false"
             android:theme="@style/AppThemeNeedRestart" />
-        <activity android:name=".power.SmartFreezeActivity" />
+        <activity
+            android:name=".power.SmartFreezeActivity"
+            android:exported="false" />
         <activity
             android:name=".power.ShortcutStubActivity"
             android:excludeFromRecents="true"
+            android:exported="false"
             android:theme="@style/AppThemeShortcut" />
 
-        <activity android:name=".power.SmartFreezeSettingsActivity" />
+        <activity
+            android:name=".power.SmartFreezeSettingsActivity"
+            android:exported="false" />
 
-        <activity android:name=".process.RunningServicesDetailsActivity" />
-        <activity android:name=".power.SmartStandbySettingsActivity" />
-        <activity android:name=".privacy.CheatRecordViewerActivity" />
-        <activity android:name=".start.DetailedStartRecordsActivity" />
+        <activity
+            android:name=".process.RunningServicesDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".power.SmartStandbySettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".privacy.CheatRecordViewerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".start.DetailedStartRecordsActivity"
+            android:exported="false" />
         <activity
             android:name=".main.OneKeyBoostShortcutActivity"
             android:excludeFromRecents="true"
+            android:exported="false"
             android:theme="@style/AppThemeShortcut" />
-        <activity android:name=".main.PluginMarketActivity" />
-        <activity android:name=".infinite.InfiniteZActivity" />
+        <activity
+            android:name=".main.PluginMarketActivity"
+            android:exported="false" />
+        <activity
+            android:name=".infinite.InfiniteZActivity"
+            android:exported="false" />
         <activity
             android:name=".main.PluginListActivity"
+            android:exported="false"
             android:label="@string/nav_title_plugin" />
-        <activity android:name=".privacy.FieldsTemplateListActivity" />
-        <activity android:name=".apps.PackageSetListActivity" />
-        <activity android:name=".apps.PackageSetEditorActivity" />
-        <activity android:name=".settings.BuildPropActivity" />
+        <activity
+            android:name=".privacy.FieldsTemplateListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".apps.PackageSetListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".apps.PackageSetEditorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.BuildPropActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"
@@ -123,6 +176,7 @@
         </provider>
 
         <service
+            android:exported="true"
             android:name=".qs.QuickConfigAppTile"
             android:icon="@drawable/ic_settings_line_black"
             android:label="@string/feature_title_apps_manager"
@@ -132,6 +186,7 @@
             </intent-filter>
         </service>
         <service
+            android:exported="true"
             android:name=".qs.ShowCurrentActivityTile"
             android:icon="@drawable/ic_radio_button_fill_black"
             android:label="@string/title_show_current_activity"
@@ -141,6 +196,7 @@
             </intent-filter>
         </service>
         <service
+            android:exported="true"
             android:name=".qs.ShowNetStatsTile"
             android:icon="@drawable/ic_numbers_fill_black"
             android:label="@string/title_net_stats"
@@ -150,6 +206,7 @@
             </intent-filter>
         </service>
         <service
+            android:exported="true"
             android:name=".qs.ProfileOnOffTile"
             android:icon="@drawable/module_profile_ic_thunderstorms_fill"
             android:label="@string/module_profile_feature_name"
@@ -160,6 +217,7 @@
         </service>
 
         <service
+            android:exported="true"
             android:name=".qs.TrampolineOnOffTile"
             android:icon="@drawable/ic_guide_fill"
             android:label="@string/module_activity_trampoline_app_name"

@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="github.tornaco.android.thanos.module.easteregg">
+    package="github.tornaco.android.thanos.module.easteregg">
+
     <application>
-        <activity android:name=".paint.PlatLogoActivity"
-                  android:theme="@android:style/Theme.DeviceDefault"/>
+        <activity
+            android:name=".paint.PlatLogoActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.DeviceDefault" />
     </application>
 </manifest>

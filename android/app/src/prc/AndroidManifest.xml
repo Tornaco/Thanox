@@ -5,6 +5,7 @@
     <application>
         <activity
             android:name=".main.NavActivity"
+            android:exported="true"
             android:label="@string/nav_title_thanox"
             android:theme="@style/AppThemeLauncher">
             <intent-filter>

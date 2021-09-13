@@ -9,10 +9,10 @@ import java.util.*
 private val props = Properties()
 
 object Configs {
-    const val compileSdkVersion = 30
-    const val minSdkVersion = 27
-    const val targetSdkVersion = 30
-    const val buildToolsVersion = "30.0.3"
+    const val compileSdkVersion = 31
+    const val minSdkVersion = 26
+    const val targetSdkVersion = 31
+    const val buildToolsVersion = "31.0.0-rc5"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     var thanoxVersionCode: Int? = 0

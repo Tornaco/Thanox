@@ -39,7 +39,7 @@ public class ThemeActivity extends BaseDefaultMenuItemHandlingAppCompatActivity 
 
     }
 
-    private Theme getAppTheme() {
+    protected Theme getAppTheme() {
         Theme userTheme = AppThemePreferences.getInstance().getTheme(this);
         return userTheme == Theme.Auto ? getDayNightTheme() : userTheme;
     }

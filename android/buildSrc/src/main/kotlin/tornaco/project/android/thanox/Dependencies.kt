@@ -142,9 +142,11 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.16.0"
+        private const val version = "0.18.0"
         const val navigationAnim =
             "com.google.accompanist:accompanist-navigation-animation:$version"
+
+        const val appcompatTheme = "com.google.accompanist:accompanist-appcompat-theme:$version"
     }
 
     object ThanoxInternal {

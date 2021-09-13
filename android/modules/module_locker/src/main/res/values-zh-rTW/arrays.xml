@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="module_locker_user_installed_apps">用戶應用</string>
-    <string name="module_locker_system_installed_apps">系統應用</string>
-</resources>

@@ -54,9 +54,9 @@ public class AppThemePreferences extends Observable {
     public void setPreferLDTheme(@NonNull Context context, @NonNull Theme theme) {
         ThanosManager thanos = ThanosManager.from(context);
         if (!thanos.isServiceInstalled()) return;
-        if (theme.name().startsWith("Light")) {
+        if (theme.isLight) {
             thanos.getPrefManager().putString(PREF_KEY_APP_THEME_PREFER_L, theme.name());
-        } else if (theme.name().startsWith("Dark")) {
+        } else {
             thanos.getPrefManager().putString(PREF_KEY_APP_THEME_PREFER_D, theme.name());
         }
     }

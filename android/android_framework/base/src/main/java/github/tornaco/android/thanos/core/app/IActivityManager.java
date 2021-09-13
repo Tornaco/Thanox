@@ -89,7 +89,6 @@ public interface IActivityManager extends android.os.IInterface
       return 0L;
     }
     // 启动管理设置
-
     @Override public boolean isStartBlockEnabled() throws android.os.RemoteException
     {
       return false;
@@ -105,7 +104,6 @@ public interface IActivityManager extends android.os.IInterface
       return false;
     }
     // Task removal
-
     @Override public boolean isCleanUpOnTaskRemovalEnabled() throws android.os.RemoteException
     {
       return false;
@@ -121,7 +119,6 @@ public interface IActivityManager extends android.os.IInterface
       return false;
     }
     // 后台运行设置
-
     @Override public boolean isBgRestrictEnabled() throws android.os.RemoteException
     {
       return false;
@@ -144,7 +141,6 @@ public interface IActivityManager extends android.os.IInterface
       return false;
     }
     // Task blur
-
     @Override public boolean isRecentTaskBlurEnabled() throws android.os.RemoteException
     {
       return false;
@@ -160,7 +156,6 @@ public interface IActivityManager extends android.os.IInterface
       return false;
     }
     // Audio focused app.
-
     @Override public boolean isBgTaskCleanUpSkipAudioFocusedAppEnabled() throws android.os.RemoteException
     {
       return false;
@@ -169,7 +164,6 @@ public interface IActivityManager extends android.os.IInterface
     {
     }
     // Notification record app.
-
     @Override public boolean isBgTaskCleanUpSkipWhichHasNotificationEnabled() throws android.os.RemoteException
     {
       return false;
@@ -178,7 +172,6 @@ public interface IActivityManager extends android.os.IInterface
     {
     }
     // 后台运行锁屏清理延迟
-
     @Override public void setBgTaskCleanUpDelayTimeMills(long delayMills) throws android.os.RemoteException
     {
     }
@@ -234,7 +227,6 @@ public interface IActivityManager extends android.os.IInterface
     {
     }
     // Keep when has recent task.
-
     @Override public boolean isBgTaskCleanUpSkipWhenHasRecentTaskEnabled() throws android.os.RemoteException
     {
       return false;
@@ -380,7 +372,6 @@ public interface IActivityManager extends android.os.IInterface
       return false;
     }
     // Bridge API to report app events.
-
     @Override public void reportOnRemoveTask(int taskId) throws android.os.RemoteException
     {
     }
@@ -392,7 +383,6 @@ public interface IActivityManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.IActivityManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.IActivityManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -427,6 +417,9 @@ public interface IActivityManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_getCurrentFrontApp:
         {
           data.enforceInterface(descriptor);
@@ -1453,8 +1446,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getCurrentFrontApp, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getCurrentFrontApp();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getCurrentFrontApp();
+            }
           }
           _reply.readException();
           _result = _reply.readString();
@@ -1473,9 +1468,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_forceStopPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().forceStopPackage(packageName);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().forceStopPackage(packageName);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1492,9 +1489,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_idlePackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().idlePackage(packageName);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().idlePackage(packageName);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1512,8 +1511,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageIdle, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPackageIdle(packageName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isPackageIdle(packageName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1539,8 +1540,10 @@ public interface IActivityManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkBroadcastingIntent, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkBroadcastingIntent(intent);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().checkBroadcastingIntent(intent);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1574,8 +1577,10 @@ public interface IActivityManager extends android.os.IInterface
           }
           _data.writeInt(callerUid);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkService(intent, service, callerUid);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().checkService(intent, service, callerUid);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1602,8 +1607,10 @@ public interface IActivityManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkRestartService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkRestartService(packageName, componentName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().checkRestartService(packageName, componentName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1631,8 +1638,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInt(receiverUid);
           _data.writeInt(callerUid);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkBroadcast, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkBroadcast(intent, receiverUid, callerUid);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().checkBroadcast(intent, receiverUid, callerUid);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1660,8 +1669,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeString(hostType);
           _data.writeString(hostName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkStartProcess, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkStartProcess(applicationInfo, hostType, hostName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().checkStartProcess(applicationInfo, hostType, hostName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1686,9 +1697,11 @@ public interface IActivityManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onStartProcessLocked, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onStartProcessLocked(appInfo);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onStartProcessLocked(appInfo);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1705,8 +1718,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppProcess, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRunningAppProcess();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRunningAppProcess();
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArray(github.tornaco.android.thanos.core.process.ProcessRecord.CREATOR);
@@ -1725,8 +1740,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppPackages, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRunningAppPackages();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRunningAppPackages();
+            }
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -1746,8 +1763,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(max);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningServiceLegacy, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRunningServiceLegacy(max);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRunningServiceLegacy(max);
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(android.app.ActivityManager.RunningServiceInfo.CREATOR);
@@ -1766,8 +1785,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppProcessLegacy, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRunningAppProcessLegacy();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRunningAppProcessLegacy();
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(android.app.ActivityManager.RunningAppProcessInfo.CREATOR);
@@ -1786,8 +1807,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppsCount, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRunningAppsCount();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRunningAppsCount();
+            }
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -1807,8 +1830,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppProcessForPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRunningAppProcessForPackage(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRunningAppProcessForPackage(pkgName);
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArray(github.tornaco.android.thanos.core.process.ProcessRecord.CREATOR);
@@ -1828,8 +1853,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageRunning, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPackageRunning(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isPackageRunning(pkgName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1849,8 +1876,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getStartRecordsByPackageName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getStartRecordsByPackageName(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getStartRecordsByPackageName(pkgName);
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.start.StartRecord.CREATOR);
@@ -1869,8 +1898,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getStartRecordBlockedPackages, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getStartRecordBlockedPackages();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getStartRecordBlockedPackages();
+            }
           }
           _reply.readException();
           _result = _reply.createStringArrayList();
@@ -1889,8 +1920,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getStartRecordsBlockedCount, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getStartRecordsBlockedCount();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getStartRecordsBlockedCount();
+            }
           }
           _reply.readException();
           _result = _reply.readLong();
@@ -1910,8 +1943,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getStartRecordBlockedCountByPackageName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getStartRecordBlockedCountByPackageName(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getStartRecordBlockedCountByPackageName(pkgName);
+            }
           }
           _reply.readException();
           _result = _reply.readLong();
@@ -1923,7 +1958,6 @@ public interface IActivityManager extends android.os.IInterface
         return _result;
       }
       // 启动管理设置
-
       @Override public boolean isStartBlockEnabled() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -1932,8 +1966,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isStartBlockEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isStartBlockEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isStartBlockEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1952,9 +1988,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setStartBlockEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setStartBlockEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setStartBlockEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1972,9 +2010,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgStartBlockEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPkgStartBlockEnabled(pkgName, enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setPkgStartBlockEnabled(pkgName, enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1992,8 +2032,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgStartBlocking, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPkgStartBlocking(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isPkgStartBlocking(pkgName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2005,7 +2047,6 @@ public interface IActivityManager extends android.os.IInterface
         return _result;
       }
       // Task removal
-
       @Override public boolean isCleanUpOnTaskRemovalEnabled() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -2014,8 +2055,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isCleanUpOnTaskRemovalEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isCleanUpOnTaskRemovalEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isCleanUpOnTaskRemovalEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2034,9 +2077,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setCleanUpOnTaskRemovalEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setCleanUpOnTaskRemovalEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setCleanUpOnTaskRemovalEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2054,9 +2099,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgCleanUpOnTaskRemovalEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPkgCleanUpOnTaskRemovalEnabled(pkgName, enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setPkgCleanUpOnTaskRemovalEnabled(pkgName, enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2074,8 +2121,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgCleanUpOnTaskRemovalEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPkgCleanUpOnTaskRemovalEnabled(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isPkgCleanUpOnTaskRemovalEnabled(pkgName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2087,7 +2136,6 @@ public interface IActivityManager extends android.os.IInterface
         return _result;
       }
       // 后台运行设置
-
       @Override public boolean isBgRestrictEnabled() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -2096,8 +2144,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isBgRestrictEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isBgRestrictEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isBgRestrictEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2116,9 +2166,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setBgRestrictEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setBgRestrictEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setBgRestrictEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2136,9 +2188,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgBgRestrictEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPkgBgRestrictEnabled(pkgName, enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setPkgBgRestrictEnabled(pkgName, enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2156,8 +2210,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgBgRestricted, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPkgBgRestricted(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isPkgBgRestricted(pkgName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2176,9 +2232,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setBgRestrictNotificationEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setBgRestrictNotificationEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setBgRestrictNotificationEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2195,8 +2253,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isBgRestrictNotificationEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isBgRestrictNotificationEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isBgRestrictNotificationEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2208,7 +2268,6 @@ public interface IActivityManager extends android.os.IInterface
         return _result;
       }
       // Task blur
-
       @Override public boolean isRecentTaskBlurEnabled() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -2217,8 +2276,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isRecentTaskBlurEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isRecentTaskBlurEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isRecentTaskBlurEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2237,9 +2298,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setRecentTaskBlurEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setRecentTaskBlurEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setRecentTaskBlurEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2257,9 +2320,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgRecentTaskBlurEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPkgRecentTaskBlurEnabled(pkgName, enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setPkgRecentTaskBlurEnabled(pkgName, enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2277,8 +2342,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgRecentTaskBlurEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPkgRecentTaskBlurEnabled(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isPkgRecentTaskBlurEnabled(pkgName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2290,7 +2357,6 @@ public interface IActivityManager extends android.os.IInterface
         return _result;
       }
       // Audio focused app.
-
       @Override public boolean isBgTaskCleanUpSkipAudioFocusedAppEnabled() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -2299,8 +2365,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isBgTaskCleanUpSkipAudioFocusedAppEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isBgTaskCleanUpSkipAudioFocusedAppEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isBgTaskCleanUpSkipAudioFocusedAppEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2319,9 +2387,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setBgTaskCleanUpSkipAudioFocusedAppEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setBgTaskCleanUpSkipAudioFocusedAppEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setBgTaskCleanUpSkipAudioFocusedAppEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2331,7 +2401,6 @@ public interface IActivityManager extends android.os.IInterface
         }
       }
       // Notification record app.
-
       @Override public boolean isBgTaskCleanUpSkipWhichHasNotificationEnabled() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -2340,8 +2409,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isBgTaskCleanUpSkipWhichHasNotificationEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isBgTaskCleanUpSkipWhichHasNotificationEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isBgTaskCleanUpSkipWhichHasNotificationEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2360,9 +2431,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setBgTaskCleanUpSkipWhichHasNotificationEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setBgTaskCleanUpSkipWhichHasNotificationEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setBgTaskCleanUpSkipWhichHasNotificationEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2372,7 +2445,6 @@ public interface IActivityManager extends android.os.IInterface
         }
       }
       // 后台运行锁屏清理延迟
-
       @Override public void setBgTaskCleanUpDelayTimeMills(long delayMills) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -2381,9 +2453,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeLong(delayMills);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setBgTaskCleanUpDelayTimeMills, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setBgTaskCleanUpDelayTimeMills(delayMills);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setBgTaskCleanUpDelayTimeMills(delayMills);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2400,8 +2474,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getBgTaskCleanUpDelayTimeMills, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getBgTaskCleanUpDelayTimeMills();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getBgTaskCleanUpDelayTimeMills();
+            }
           }
           _reply.readException();
           _result = _reply.readLong();
@@ -2427,9 +2503,11 @@ public interface IActivityManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_notifyTaskCreated, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().notifyTaskCreated(taskId, componentName);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().notifyTaskCreated(taskId, componentName);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2446,8 +2524,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getMemoryInfo, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getMemoryInfo();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getMemoryInfo();
+            }
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -2472,8 +2552,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeIntArray(pids);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getProcessPss, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getProcessPss(pids);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getProcessPss(pids);
+            }
           }
           _reply.readException();
           _result = _reply.createLongArray();
@@ -2501,9 +2583,11 @@ public interface IActivityManager extends android.os.IInterface
           }
           _data.writeString(stackTrace);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onApplicationCrashing, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onApplicationCrashing(eventType, processName, process, stackTrace);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onApplicationCrashing(eventType, processName, process, stackTrace);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2521,8 +2605,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(taskId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageNameForTaskId, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPackageNameForTaskId(taskId);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getPackageNameForTaskId(taskId);
+            }
           }
           _reply.readException();
           _result = _reply.readString();
@@ -2541,8 +2627,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPlatformAppIdleEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPlatformAppIdleEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isPlatformAppIdleEnabled();
+            }
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -2561,8 +2649,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartStandByEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isSmartStandByEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isSmartStandByEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2581,9 +2671,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartStandByEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setSmartStandByEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setSmartStandByEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2601,9 +2693,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgSmartStandByEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPkgSmartStandByEnabled(pkgName, enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setPkgSmartStandByEnabled(pkgName, enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2621,8 +2715,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgSmartStandByEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPkgSmartStandByEnabled(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isPkgSmartStandByEnabled(pkgName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2642,8 +2738,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(count);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getLastRecentUsedPackages, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getLastRecentUsedPackages(count);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getLastRecentUsedPackages(count);
+            }
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -2663,8 +2761,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRecentTaskExcludeSettingForPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRecentTaskExcludeSettingForPackage(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRecentTaskExcludeSettingForPackage(pkgName);
+            }
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -2684,9 +2784,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(setting);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setRecentTaskExcludeSettingForPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setRecentTaskExcludeSettingForPackage(pkgName, setting);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setRecentTaskExcludeSettingForPackage(pkgName, setting);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2696,7 +2798,6 @@ public interface IActivityManager extends android.os.IInterface
         }
       }
       // Keep when has recent task.
-
       @Override public boolean isBgTaskCleanUpSkipWhenHasRecentTaskEnabled() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -2705,8 +2806,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isBgTaskCleanUpSkipWhenHasRecentTaskEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isBgTaskCleanUpSkipWhenHasRecentTaskEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isBgTaskCleanUpSkipWhenHasRecentTaskEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2725,9 +2828,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setBgTaskCleanUpSkipWhenHasRecentTaskEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setBgTaskCleanUpSkipWhenHasRecentTaskEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setBgTaskCleanUpSkipWhenHasRecentTaskEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2744,9 +2849,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_launchAppDetailsActivity, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().launchAppDetailsActivity(pkgName);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().launchAppDetailsActivity(pkgName);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2762,9 +2869,11 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_resetStartRecordsBlocked, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().resetStartRecordsBlocked();
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().resetStartRecordsBlocked();
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2781,9 +2890,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(targetPkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addApp, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addApp(targetPkg);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().addApp(targetPkg);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2800,8 +2911,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isStartRuleEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isStartRuleEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isStartRuleEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2820,9 +2933,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setStartRuleEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setStartRuleEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setStartRuleEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2839,9 +2954,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(rule);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addStartRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addStartRule(rule);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().addStartRule(rule);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2858,9 +2975,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(rule);
           boolean _status = mRemote.transact(Stub.TRANSACTION_deleteStartRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().deleteStartRule(rule);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().deleteStartRule(rule);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2877,8 +2996,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllStartRules, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAllStartRules();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAllStartRules();
+            }
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -2897,8 +3018,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isStandbyRuleEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isStandbyRuleEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isStandbyRuleEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2917,9 +3040,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setStandbyRuleEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setStandbyRuleEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setStandbyRuleEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2936,9 +3061,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(rule);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addStandbyRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addStandbyRule(rule);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().addStandbyRule(rule);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2955,9 +3082,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(rule);
           boolean _status = mRemote.transact(Stub.TRANSACTION_deleteStandbyRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().deleteStandbyRule(rule);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().deleteStandbyRule(rule);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -2974,8 +3103,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllStandbyRules, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAllStandbyRules();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAllStandbyRules();
+            }
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -2995,8 +3126,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppServiceForPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRunningAppServiceForPackage(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRunningAppServiceForPackage(pkgName);
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArray(github.tornaco.android.thanos.core.app.RunningServiceInfoCompat.CREATOR);
@@ -3016,8 +3149,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasRunningServiceForPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasRunningServiceForPackage(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().hasRunningServiceForPackage(pkgName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -3037,8 +3172,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(userHandle);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getUserInfo, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getUserInfo(userHandle);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getUserInfo(userHandle);
+            }
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -3068,9 +3205,11 @@ public interface IActivityManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_stopService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().stopService(intent);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().stopService(intent);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3087,9 +3226,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_killBackgroundProcesses, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().killBackgroundProcesses(packageName);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().killBackgroundProcesses(packageName);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3106,8 +3247,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartStandByStopServiceEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isSmartStandByStopServiceEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isSmartStandByStopServiceEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -3126,9 +3269,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartStandByStopServiceEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setSmartStandByStopServiceEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setSmartStandByStopServiceEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3145,8 +3290,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartStandByInactiveEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isSmartStandByInactiveEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isSmartStandByInactiveEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -3165,9 +3312,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartStandByInactiveEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setSmartStandByInactiveEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setSmartStandByInactiveEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3184,8 +3333,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartStandByByPassIfHasNotificationEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isSmartStandByByPassIfHasNotificationEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isSmartStandByByPassIfHasNotificationEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -3204,9 +3355,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartStandByByPassIfHasNotificationEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setSmartStandByByPassIfHasNotificationEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setSmartStandByByPassIfHasNotificationEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3223,8 +3376,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartStandByBlockBgServiceStartEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isSmartStandByBlockBgServiceStartEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isSmartStandByBlockBgServiceStartEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -3243,9 +3398,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartStandByBlockBgServiceStartEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setSmartStandByBlockBgServiceStartEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setSmartStandByBlockBgServiceStartEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3262,8 +3419,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getStartRecordAllowedPackages, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getStartRecordAllowedPackages();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getStartRecordAllowedPackages();
+            }
           }
           _reply.readException();
           _result = _reply.createStringArrayList();
@@ -3282,8 +3441,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getStartRecordsAllowedCount, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getStartRecordsAllowedCount();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getStartRecordsAllowedCount();
+            }
           }
           _reply.readException();
           _result = _reply.readLong();
@@ -3303,8 +3464,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getStartRecordAllowedCountByPackageName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getStartRecordAllowedCountByPackageName(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getStartRecordAllowedCountByPackageName(pkgName);
+            }
           }
           _reply.readException();
           _result = _reply.readLong();
@@ -3324,8 +3487,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getStartRecordsAllowedByPackageName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getStartRecordsAllowedByPackageName(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getStartRecordsAllowedByPackageName(pkgName);
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.start.StartRecord.CREATOR);
@@ -3345,8 +3510,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getStartRecordsBlockedByPackageName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getStartRecordsBlockedByPackageName(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getStartRecordsBlockedByPackageName(pkgName);
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.start.StartRecord.CREATOR);
@@ -3364,9 +3531,11 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_resetStartRecordsAllowed, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().resetStartRecordsAllowed();
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().resetStartRecordsAllowed();
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3386,8 +3555,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInt(((allowed)?(1):(0)));
           _data.writeInt(((blocked)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllStartRecordsWithRes, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAllStartRecordsWithRes(appFlags, allowed, blocked);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAllStartRecordsWithRes(appFlags, allowed, blocked);
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.start.StartRecord.CREATOR);
@@ -3407,8 +3578,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(appFlags);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllStartRecords, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAllStartRecords(appFlags);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAllStartRecords(appFlags);
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.start.StartRecord.CREATOR);
@@ -3427,9 +3600,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_dump, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().dump(p);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().dump(p);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3446,9 +3621,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_dumpCpu, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().dumpCpu(p);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().dumpCpu(p);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3465,9 +3642,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setNetStatTrackerEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setNetStatTrackerEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setNetStatTrackerEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3484,8 +3663,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isNetStatTrackerEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isNetStatTrackerEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isNetStatTrackerEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -3506,8 +3687,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeString(callerPkg);
           _data.writeString(name);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkGetContentProvider, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkGetContentProvider(callerPkg, name);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().checkGetContentProvider(callerPkg, name);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -3519,7 +3702,6 @@ public interface IActivityManager extends android.os.IInterface
         return _result;
       }
       // Bridge API to report app events.
-
       @Override public void reportOnRemoveTask(int taskId) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -3528,9 +3710,11 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(taskId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_reportOnRemoveTask, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().reportOnRemoveTask(taskId);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().reportOnRemoveTask(taskId);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -3658,6 +3842,7 @@ public interface IActivityManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.IActivityManager";
   public java.lang.String getCurrentFrontApp() throws android.os.RemoteException;
   public void forceStopPackage(java.lang.String packageName) throws android.os.RemoteException;
   public void idlePackage(java.lang.String packageName) throws android.os.RemoteException;
@@ -3680,19 +3865,16 @@ public interface IActivityManager extends android.os.IInterface
   public long getStartRecordsBlockedCount() throws android.os.RemoteException;
   public long getStartRecordBlockedCountByPackageName(java.lang.String pkgName) throws android.os.RemoteException;
   // 启动管理设置
-
   public boolean isStartBlockEnabled() throws android.os.RemoteException;
   public void setStartBlockEnabled(boolean enable) throws android.os.RemoteException;
   public void setPkgStartBlockEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException;
   public boolean isPkgStartBlocking(java.lang.String pkgName) throws android.os.RemoteException;
   // Task removal
-
   public boolean isCleanUpOnTaskRemovalEnabled() throws android.os.RemoteException;
   public void setCleanUpOnTaskRemovalEnabled(boolean enable) throws android.os.RemoteException;
   public void setPkgCleanUpOnTaskRemovalEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException;
   public boolean isPkgCleanUpOnTaskRemovalEnabled(java.lang.String pkgName) throws android.os.RemoteException;
   // 后台运行设置
-
   public boolean isBgRestrictEnabled() throws android.os.RemoteException;
   public void setBgRestrictEnabled(boolean enable) throws android.os.RemoteException;
   public void setPkgBgRestrictEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException;
@@ -3700,21 +3882,17 @@ public interface IActivityManager extends android.os.IInterface
   public void setBgRestrictNotificationEnabled(boolean enabled) throws android.os.RemoteException;
   public boolean isBgRestrictNotificationEnabled() throws android.os.RemoteException;
   // Task blur
-
   public boolean isRecentTaskBlurEnabled() throws android.os.RemoteException;
   public void setRecentTaskBlurEnabled(boolean enable) throws android.os.RemoteException;
   public void setPkgRecentTaskBlurEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException;
   public boolean isPkgRecentTaskBlurEnabled(java.lang.String pkgName) throws android.os.RemoteException;
   // Audio focused app.
-
   public boolean isBgTaskCleanUpSkipAudioFocusedAppEnabled() throws android.os.RemoteException;
   public void setBgTaskCleanUpSkipAudioFocusedAppEnabled(boolean enable) throws android.os.RemoteException;
   // Notification record app.
-
   public boolean isBgTaskCleanUpSkipWhichHasNotificationEnabled() throws android.os.RemoteException;
   public void setBgTaskCleanUpSkipWhichHasNotificationEnabled(boolean enable) throws android.os.RemoteException;
   // 后台运行锁屏清理延迟
-
   public void setBgTaskCleanUpDelayTimeMills(long delayMills) throws android.os.RemoteException;
   public long getBgTaskCleanUpDelayTimeMills() throws android.os.RemoteException;
   public void notifyTaskCreated(int taskId, android.content.ComponentName componentName) throws android.os.RemoteException;
@@ -3731,7 +3909,6 @@ public interface IActivityManager extends android.os.IInterface
   public int getRecentTaskExcludeSettingForPackage(java.lang.String pkgName) throws android.os.RemoteException;
   public void setRecentTaskExcludeSettingForPackage(java.lang.String pkgName, int setting) throws android.os.RemoteException;
   // Keep when has recent task.
-
   public boolean isBgTaskCleanUpSkipWhenHasRecentTaskEnabled() throws android.os.RemoteException;
   public void setBgTaskCleanUpSkipWhenHasRecentTaskEnabled(boolean enable) throws android.os.RemoteException;
   public void launchAppDetailsActivity(java.lang.String pkgName) throws android.os.RemoteException;
@@ -3774,6 +3951,5 @@ public interface IActivityManager extends android.os.IInterface
   public boolean isNetStatTrackerEnabled() throws android.os.RemoteException;
   public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name) throws android.os.RemoteException;
   // Bridge API to report app events.
-
   public void reportOnRemoveTask(int taskId) throws android.os.RemoteException;
 }

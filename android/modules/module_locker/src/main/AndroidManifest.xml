@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="github.tornaco.practice.honeycomb.locker">
+    package="github.tornaco.practice.honeycomb.locker">
 
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application>
 
         <activity
-                android:name=".ui.start.LockerStartActivity"
-                android:exported="true"
-                android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="github.tornaco.practice.honeycomb.bee.action.START" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:name=".ui.start.LockerStartActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
         <activity
-                android:name=".ui.verify.VerifyActivity"
-                android:excludeFromRecents="true"
-                android:exported="true"
-                android:taskAffinity="ui.verify.VerifyActivity"
-                android:theme="@style/ModuleLockerAppThemeVerify">
+            android:name=".ui.verify.VerifyActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:taskAffinity="ui.verify.VerifyActivity"
+            android:theme="@style/ModuleLockerAppThemeVerify">
             <intent-filter>
                 <action android:name="github.tornaco.practice.honeycomb.locker.action.VERIFY" />
 
@@ -28,8 +24,8 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.setup.LockSettingsActivity"
-                android:label="@string/module_locker_title_settings" />
+            android:name=".ui.setup.LockSettingsActivity"
+            android:label="@string/module_locker_title_settings" />
     </application>
 
 </manifest>

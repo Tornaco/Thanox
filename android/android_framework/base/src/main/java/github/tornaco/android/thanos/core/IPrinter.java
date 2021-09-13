@@ -21,7 +21,6 @@ public interface IPrinter extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.IPrinter
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.IPrinter";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -56,6 +55,9 @@ public interface IPrinter extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_println:
         {
           data.enforceInterface(descriptor);
@@ -103,9 +105,11 @@ public interface IPrinter extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(content);
           boolean _status = mRemote.transact(Stub.TRANSACTION_println, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().println(content);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().println(content);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -122,9 +126,11 @@ public interface IPrinter extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(content);
           boolean _status = mRemote.transact(Stub.TRANSACTION_print, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().print(content);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().print(content);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -154,6 +160,7 @@ public interface IPrinter extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.IPrinter";
   public void println(java.lang.String content) throws android.os.RemoteException;
   public void print(java.lang.String content) throws android.os.RemoteException;
 }

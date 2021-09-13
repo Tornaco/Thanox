@@ -1,17 +1,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="github.tornaco.thanos.android.ops">
+    package="github.tornaco.thanos.android.ops">
 
     <application>
-        <activity android:name=".ops.by.app.AppOpsListActivity"
-                  android:label="@string/module_ops_activity_title_app_ops_list"/>
-        <activity android:name=".ops.by.app.AppListActivity"
-                  android:label="@string/module_ops_activity_title_app_ops_list"/>
-        <activity android:name=".ops.by.ops.AllOpsListActivity"
-                  android:label="@string/module_ops_feature_title_ops_app_list"/>
-        <activity android:name=".ops.by.ops.OpsAppListActivity"/>
-        <activity android:name=".ops.remind.RemindOpsActivity"
-                  android:label="@string/module_ops_feature_title_ops_remind_list"/>
-        <activity android:name=".ops.remind.AppListActivity"
-                  android:label="@string/module_ops_title_op_remind_apps"/>
+        <activity
+            android:name=".ops.by.app.AppOpsListActivity"
+            android:exported="false"
+            android:label="@string/module_ops_activity_title_app_ops_list" />
+        <activity
+            android:name=".ops.by.app.AppListActivity"
+            android:exported="false"
+            android:label="@string/module_ops_activity_title_app_ops_list" />
+        <activity
+            android:name=".ops.by.ops.AllOpsListActivity"
+            android:exported="false"
+            android:label="@string/module_ops_feature_title_ops_app_list" />
+        <activity
+            android:name=".ops.by.ops.OpsAppListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ops.remind.RemindOpsActivity"
+            android:exported="false"
+            android:label="@string/module_ops_feature_title_ops_remind_list" />
+        <activity
+            android:name=".ops.remind.AppListActivity"
+            android:exported="false"
+            android:label="@string/module_ops_title_op_remind_apps" />
     </application>
 </manifest>

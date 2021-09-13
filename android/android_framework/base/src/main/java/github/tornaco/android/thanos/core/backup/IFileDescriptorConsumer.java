@@ -3,14 +3,12 @@
  */
 package github.tornaco.android.thanos.core.backup;
 // oneway
-
 public interface IFileDescriptorConsumer extends android.os.IInterface
 {
   /** Default implementation for IFileDescriptorConsumer. */
   public static class Default implements github.tornaco.android.thanos.core.backup.IFileDescriptorConsumer
   {
     // IO.
-
     @Override public void acceptAppParcelFileDescriptor(android.os.ParcelFileDescriptor pfd) throws android.os.RemoteException
     {
     }
@@ -22,7 +20,6 @@ public interface IFileDescriptorConsumer extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.backup.IFileDescriptorConsumer
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.backup.IFileDescriptorConsumer";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -57,6 +54,9 @@ public interface IFileDescriptorConsumer extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_acceptAppParcelFileDescriptor:
         {
           data.enforceInterface(descriptor);
@@ -92,7 +92,6 @@ public interface IFileDescriptorConsumer extends android.os.IInterface
         return DESCRIPTOR;
       }
       // IO.
-
       @Override public void acceptAppParcelFileDescriptor(android.os.ParcelFileDescriptor pfd) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -106,9 +105,11 @@ public interface IFileDescriptorConsumer extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_acceptAppParcelFileDescriptor, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().acceptAppParcelFileDescriptor(pfd);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().acceptAppParcelFileDescriptor(pfd);
+              return;
+            }
           }
         }
         finally {
@@ -135,7 +136,7 @@ public interface IFileDescriptorConsumer extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.backup.IFileDescriptorConsumer";
   // IO.
-
   public void acceptAppParcelFileDescriptor(android.os.ParcelFileDescriptor pfd) throws android.os.RemoteException;
 }

@@ -13,10 +13,10 @@ import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 
-public class NotificationSettingsActivity extends ThemeActivity {
+public class NotificationRecordSettingsActivity extends ThemeActivity {
 
     public static void start(Context context) {
-        ActivityUtils.startActivity(context, NotificationSettingsActivity.class);
+        ActivityUtils.startActivity(context, NotificationRecordSettingsActivity.class);
     }
 
     @Override

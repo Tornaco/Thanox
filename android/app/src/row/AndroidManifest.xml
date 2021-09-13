@@ -5,6 +5,7 @@
     <application>
         <activity
             android:name=".app.MainActivity"
+            android:exported="true"
             android:label="@string/nav_title_thanox">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +19,8 @@
 
         <activity
             android:name=".main.NavActivity"
-            android:label="@string/nav_title_thanox" >
+            android:exported="true"
+            android:label="@string/nav_title_thanox">
 
             <intent-filter>
                 <action android:name="github.tornaco.android.thanos.action.NAV_ACTIVITY" />

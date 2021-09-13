@@ -27,7 +27,6 @@ public interface IPushManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.push.IPushManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.push.IPushManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -62,6 +61,9 @@ public interface IPushManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_registerChannel:
         {
           data.enforceInterface(descriptor);
@@ -145,9 +147,11 @@ public interface IPushManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerChannel, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().registerChannel(channel);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().registerChannel(channel);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -170,9 +174,11 @@ public interface IPushManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterChannel, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().unRegisterChannel(channel);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().unRegisterChannel(channel);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -190,9 +196,11 @@ public interface IPushManager extends android.os.IInterface
           _data.writeString(channelId);
           _data.writeStrongBinder((((handler!=null))?(handler.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerChannelHandler, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().registerChannelHandler(channelId, handler);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().registerChannelHandler(channelId, handler);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -209,9 +217,11 @@ public interface IPushManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((handler!=null))?(handler.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterChannelHandler, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().unRegisterChannelHandler(handler);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().unRegisterChannelHandler(handler);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -243,6 +253,7 @@ public interface IPushManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.push.IPushManager";
   public void registerChannel(github.tornaco.android.thanos.core.push.PushChannel channel) throws android.os.RemoteException;
   public void unRegisterChannel(github.tornaco.android.thanos.core.push.PushChannel channel) throws android.os.RemoteException;
   public void registerChannelHandler(java.lang.String channelId, github.tornaco.android.thanos.core.push.IChannelHandler handler) throws android.os.RemoteException;

@@ -26,13 +26,13 @@ import github.tornaco.android.thanos.widget.SwitchBar;
 import github.tornaco.android.thanos.widget.section.StickyHeaderLayoutManager;
 import github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderNrdListLayoutBinding;
 
-public class NRListActivity extends ThemeActivity {
+public class NotificationRecordListActivity extends ThemeActivity {
 
     private ModuleNotificationRecorderNrdListLayoutBinding binding;
     private NRDListViewModel viewModel;
 
     public static void start(Context context) {
-        ActivityUtils.startActivity(context, NRListActivity.class);
+        ActivityUtils.startActivity(context, NotificationRecordListActivity.class);
     }
 
     public static NRDListViewModel obtainViewModel(FragmentActivity activity) {
@@ -155,7 +155,7 @@ public class NRListActivity extends ThemeActivity {
                     }).show();
         }
         if (item.getItemId() == R.id.action_settings) {
-            NotificationSettingsActivity.start(thisActivity());
+            NotificationRecordSettingsActivity.start(thisActivity());
         }
         return super.onOptionsItemSelected(item);
     }

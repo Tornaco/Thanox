@@ -26,7 +26,6 @@ public interface IServiceManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.os.IServiceManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.os.IServiceManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -61,6 +60,9 @@ public interface IServiceManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_hasService:
         {
           data.enforceInterface(descriptor);
@@ -122,8 +124,10 @@ public interface IServiceManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(name);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasService(name);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().hasService(name);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -143,9 +147,11 @@ public interface IServiceManager extends android.os.IInterface
           _data.writeString(name);
           _data.writeStrongBinder(binder);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addService(name, binder);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().addService(name, binder);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -163,8 +169,10 @@ public interface IServiceManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(name);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getService(name);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getService(name);
+            }
           }
           _reply.readException();
           _result = _reply.readStrongBinder();
@@ -197,6 +205,7 @@ public interface IServiceManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.os.IServiceManager";
   public boolean hasService(java.lang.String name) throws android.os.RemoteException;
   public void addService(java.lang.String name, android.os.IBinder binder) throws android.os.RemoteException;
   public android.os.IBinder getService(java.lang.String name) throws android.os.RemoteException;

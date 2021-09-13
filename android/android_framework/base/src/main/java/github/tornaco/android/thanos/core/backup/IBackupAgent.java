@@ -25,7 +25,6 @@ public interface IBackupAgent extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.backup.IBackupAgent
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.backup.IBackupAgent";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -60,6 +59,9 @@ public interface IBackupAgent extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_performBackup:
         {
           data.enforceInterface(descriptor);
@@ -132,9 +134,11 @@ public interface IBackupAgent extends android.os.IInterface
           _data.writeString(path);
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_performBackup, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().performBackup(init, domain, path, callback);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().performBackup(init, domain, path, callback);
+              return;
+            }
           }
         }
         finally {
@@ -157,9 +161,11 @@ public interface IBackupAgent extends android.os.IInterface
           _data.writeString(path);
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_performRestore, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().performRestore(pfd, domain, path, callback);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().performRestore(pfd, domain, path, callback);
+              return;
+            }
           }
         }
         finally {
@@ -174,8 +180,10 @@ public interface IBackupAgent extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_restoreDefault, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().restoreDefault();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().restoreDefault();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -208,6 +216,7 @@ public interface IBackupAgent extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.backup.IBackupAgent";
   public void performBackup(github.tornaco.android.thanos.core.backup.IFileDescriptorInitializer init, java.lang.String domain, java.lang.String path, github.tornaco.android.thanos.core.backup.IBackupCallback callback) throws android.os.RemoteException;
   public void performRestore(android.os.ParcelFileDescriptor pfd, java.lang.String domain, java.lang.String path, github.tornaco.android.thanos.core.backup.IBackupCallback callback) throws android.os.RemoteException;
   public boolean restoreDefault() throws android.os.RemoteException;

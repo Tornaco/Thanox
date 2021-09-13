@@ -8,7 +8,9 @@ import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,6 +27,7 @@ import coil.fetch.FetchResult
 import coil.fetch.Fetcher
 import coil.size.Size
 import com.elvishew.xlog.XLog
+import com.google.accompanist.appcompattheme.AppCompatTheme
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.app.activity.VerifyResult
@@ -40,7 +43,9 @@ class VerifyActivity : ThemeActivity() {
         super.onCreate(savedInstanceState)
         if (resolveIntent()) {
             setContent {
-                AppVerifyContent()
+                AppCompatTheme {
+                    AppVerifyContent()
+                }
             }
             startVerifyWithBiometrics(appInfo!!)
         } else {
@@ -66,7 +71,11 @@ class VerifyActivity : ThemeActivity() {
     private fun AppVerifyContent() {
         var visible by remember { mutableStateOf(false) }
 
-        Surface(modifier = Modifier.fillMaxSize()) {
+        Surface(modifier = Modifier
+            .fillMaxSize()
+            .background(
+                color = MaterialTheme.colors.background
+            )) {
             AnimatedVisibility(
                 visible = visible,
                 enter = slideInVertically(

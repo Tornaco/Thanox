@@ -48,9 +48,6 @@ interface IActivityStackSupervisor {
     boolean isVerifyOnTaskRemovedEnabled();
     void setVerifyOnTaskRemovedEnabled(boolean enabled);
 
-    boolean isAppLockWorkaroundEnabled();
-    void setAppLockWorkaroundEnabled(boolean enable);
-
     // Bridge API to report app events.
     Intent reportOnStartActivity(String callingPackage, in Intent intent);
     void reportOnActivityStopped(in IBinder token);

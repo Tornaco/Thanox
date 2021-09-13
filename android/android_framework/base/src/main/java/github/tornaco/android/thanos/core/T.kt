@@ -385,9 +385,6 @@ object T {
                 ThanosFeature("PREF_APP_LOCK_WORKAROUND_ENABLED", false)
 
         @JvmField
-        val PREF_APP_LOCK_WORKAROUND_DELAY = ThanosFeature("PREF_APP_LOCK_WORKAROUND_DELAY", 500L)
-
-        @JvmField
         val PREF_PRIVACY_ENABLED = ThanosFeature("PREF_PRIVACY_ENABLED", false)
 
         @JvmField

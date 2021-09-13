@@ -139,13 +139,4 @@ public class ActivityStackSupervisor {
         supervisor.setVerifyOnTaskRemovedEnabled(enabled);
     }
 
-    @SneakyThrows
-    public boolean isAppLockWorkaroundEnabled() {
-        return supervisor.isAppLockWorkaroundEnabled();
-    }
-
-    @SneakyThrows
-    public void setAppLockWorkaroundEnabled(boolean enable) {
-        supervisor.setAppLockWorkaroundEnabled(enable);
-    }
 }

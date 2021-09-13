@@ -2,7 +2,6 @@ package github.tornaco.practice.honeycomb.locker.ui.setup;
 
 import android.os.Bundle;
 
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
@@ -34,17 +33,12 @@ public class SettingsFragment extends BaseWithFabPreferenceFragmentCompat {
         SwitchPreferenceCompat reVerifyScreenOff = (SwitchPreferenceCompat) findPreference(getString(R.string.module_locker_key_re_verify_on_screen_off));
         SwitchPreferenceCompat reVerifyAppSwitch = (SwitchPreferenceCompat) findPreference(getString(R.string.module_locker_key_re_verify_on_app_switch));
         SwitchPreferenceCompat reVerifyTaskRemoved = (SwitchPreferenceCompat) findPreference(getString(R.string.module_locker_key_re_verify_on_task_removed));
-        SwitchPreferenceCompat enableWorkaround = (SwitchPreferenceCompat) findPreference(getString(R.string.module_locker_key_verify_workaround_enabled));
-        SwitchPreferenceCompat enableFP = (SwitchPreferenceCompat) findPreference(getString(R.string.module_locker_key_fp));
-
-        Preference lockMethod = findPreference(getString(R.string.module_locker_key_verify_lock_method));
 
         ActivityStackSupervisor supervisor = ThanosManager.from(getContext()).getActivityStackSupervisor();
 
         Objects.requireNonNull(reVerifyScreenOff).setChecked(supervisor.isVerifyOnScreenOffEnabled());
         Objects.requireNonNull(reVerifyAppSwitch).setChecked(supervisor.isVerifyOnAppSwitchEnabled());
         Objects.requireNonNull(reVerifyTaskRemoved).setChecked(supervisor.isVerifyOnTaskRemovedEnabled());
-        Objects.requireNonNull(enableWorkaround).setChecked(supervisor.isAppLockWorkaroundEnabled());
 
         reVerifyScreenOff.setOnPreferenceClickListener(preference -> {
             supervisor.setVerifyOnScreenOffEnabled(reVerifyScreenOff.isChecked());

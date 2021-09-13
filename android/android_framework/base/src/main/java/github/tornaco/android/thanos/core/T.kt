@@ -378,19 +378,11 @@ object T {
                 ThanosFeature("PREF_APP_LOCK_VERIFY_ON_TASK_REMOVED", true)
 
         @JvmField
-        val PREF_APP_LOCK_METHOD =
-                ThanosFeature("PREF_APP_LOCK_METHOD", ActivityStackSupervisor.LockerMethod.NONE)
-
-        @JvmField
         val PREF_APP_LOCK_FP_ENABLED = ThanosFeature("PREF_APP_LOCK_FP_ENABLED", false)
 
         @JvmField
         val PREF_APP_LOCK_WORKAROUND_ENABLED =
                 ThanosFeature("PREF_APP_LOCK_WORKAROUND_ENABLED", false)
-
-        @JvmField
-        val PREF_APP_LOCK_KEY_PREFIX_ =
-                ThanosFeature("PREF_APP_LOCK_KEY_PREFIX_", "PREF_APP_LOCK_KEY_PREFIX_")
 
         @JvmField
         val PREF_APP_LOCK_WORKAROUND_DELAY = ThanosFeature("PREF_APP_LOCK_WORKAROUND_DELAY", 500L)
@@ -500,7 +492,6 @@ object T {
         const val ACTION_LOCKER_VERIFY_ACTION =
                 "github.tornaco.practice.honeycomb.locker.action.VERIFY"
         const val ACTION_LOCKER_VERIFY_EXTRA_PACKAGE = "pkg"
-        const val ACTION_LOCKER_VERIFY_EXTRA_METHOD = "method"
         const val ACTION_LOCKER_VERIFY_EXTRA_REQUEST_CODE = "request_code"
     }
 

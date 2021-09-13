@@ -3,9 +3,4 @@
     <string name="module_locker_key_re_verify_on_app_switch" translatable="false">key_re_verify_on_app_switch</string>
     <string name="module_locker_key_re_verify_on_screen_off" translatable="false">key_re_verify_on_screen_off</string>
     <string name="module_locker_key_re_verify_on_task_removed" translatable="false">key_re_verify_on_task_removed</string>
-    <string name="module_locker_key_verify_workaround_enabled" translatable="false">key_verify_workaround_enabled</string>
-    <string name="module_locker_key_verify_workaround_delay" translatable="false">key_verify_workaround_delay</string>
-    <string name="module_locker_key_fp" translatable="false">key_fp</string>
-    <string name="module_locker_key_verify_lock_method" translatable="false">key_verify_lock_method</string>
-    <string name="module_locker_key_verify_security_qa" translatable="false">key_verify_security_qa</string>
 </resources>

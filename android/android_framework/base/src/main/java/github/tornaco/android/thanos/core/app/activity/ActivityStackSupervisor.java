@@ -12,16 +12,7 @@ import lombok.SneakyThrows;
 
 @AllArgsConstructor
 public class ActivityStackSupervisor {
-
-    public static final long LOCKER_VERIFY_TIMEOUT_MILLS = 60 * 1000;
-
-    public class LockerMethod {
-        public static final int NONE = -1;
-        public static final int PIN = 0;
-        public static final int PATTERN = 1;
-    }
-
-    private IActivityStackSupervisor supervisor;
+    private final IActivityStackSupervisor supervisor;
 
     @SneakyThrows
     public boolean checkActivity(ComponentName componentName) {
@@ -71,41 +62,6 @@ public class ActivityStackSupervisor {
     @SneakyThrows
     public void setVerifyResult(int request, int result, int reason) {
         supervisor.setVerifyResult(request, result, reason);
-    }
-
-    @SneakyThrows
-    public void setLockerMethod(int method) {
-        supervisor.setLockerMethod(method);
-    }
-
-    @SneakyThrows
-    public int getLockerMethod() {
-        return supervisor.getLockerMethod();
-    }
-
-    @SneakyThrows
-    public void setLockerKey(int method, String key) {
-        supervisor.setLockerKey(method, key);
-    }
-
-    @SneakyThrows
-    public boolean isLockerKeyValid(int method, String key) {
-        return supervisor.isLockerKeyValid(method, key);
-    }
-
-    @SneakyThrows
-    public boolean isLockerKeySet(int method) {
-        return supervisor.isLockerKeySet(method);
-    }
-
-    @SneakyThrows
-    public boolean isFingerPrintEnabled() {
-        return supervisor.isFingerPrintEnabled();
-    }
-
-    @SneakyThrows
-    public void setFingerPrintEnabled(boolean enable) {
-        supervisor.setFingerPrintEnabled(enable);
     }
 
     @SneakyThrows

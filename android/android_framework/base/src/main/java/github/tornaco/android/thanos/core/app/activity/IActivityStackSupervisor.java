@@ -43,31 +43,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     @Override public void setVerifyResult(int request, int result, int reason) throws android.os.RemoteException
     {
     }
-    @Override public void setLockerMethod(int method) throws android.os.RemoteException
-    {
-    }
-    @Override public int getLockerMethod() throws android.os.RemoteException
-    {
-      return 0;
-    }
-    @Override public void setLockerKey(int method, java.lang.String key) throws android.os.RemoteException
-    {
-    }
-    @Override public boolean isLockerKeyValid(int method, java.lang.String key) throws android.os.RemoteException
-    {
-      return false;
-    }
-    @Override public boolean isLockerKeySet(int method) throws android.os.RemoteException
-    {
-      return false;
-    }
-    @Override public boolean isFingerPrintEnabled() throws android.os.RemoteException
-    {
-      return false;
-    }
-    @Override public void setFingerPrintEnabled(boolean enable) throws android.os.RemoteException
-    {
-    }
     @Override public void addComponentReplacement(github.tornaco.android.thanos.core.app.component.ComponentReplacement replacement) throws android.os.RemoteException
     {
     }
@@ -325,73 +300,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           int _arg2;
           _arg2 = data.readInt();
           this.setVerifyResult(_arg0, _arg1, _arg2);
-          reply.writeNoException();
-          return true;
-        }
-        case TRANSACTION_setLockerMethod:
-        {
-          data.enforceInterface(descriptor);
-          int _arg0;
-          _arg0 = data.readInt();
-          this.setLockerMethod(_arg0);
-          reply.writeNoException();
-          return true;
-        }
-        case TRANSACTION_getLockerMethod:
-        {
-          data.enforceInterface(descriptor);
-          int _result = this.getLockerMethod();
-          reply.writeNoException();
-          reply.writeInt(_result);
-          return true;
-        }
-        case TRANSACTION_setLockerKey:
-        {
-          data.enforceInterface(descriptor);
-          int _arg0;
-          _arg0 = data.readInt();
-          java.lang.String _arg1;
-          _arg1 = data.readString();
-          this.setLockerKey(_arg0, _arg1);
-          reply.writeNoException();
-          return true;
-        }
-        case TRANSACTION_isLockerKeyValid:
-        {
-          data.enforceInterface(descriptor);
-          int _arg0;
-          _arg0 = data.readInt();
-          java.lang.String _arg1;
-          _arg1 = data.readString();
-          boolean _result = this.isLockerKeyValid(_arg0, _arg1);
-          reply.writeNoException();
-          reply.writeInt(((_result)?(1):(0)));
-          return true;
-        }
-        case TRANSACTION_isLockerKeySet:
-        {
-          data.enforceInterface(descriptor);
-          int _arg0;
-          _arg0 = data.readInt();
-          boolean _result = this.isLockerKeySet(_arg0);
-          reply.writeNoException();
-          reply.writeInt(((_result)?(1):(0)));
-          return true;
-        }
-        case TRANSACTION_isFingerPrintEnabled:
-        {
-          data.enforceInterface(descriptor);
-          boolean _result = this.isFingerPrintEnabled();
-          reply.writeNoException();
-          reply.writeInt(((_result)?(1):(0)));
-          return true;
-        }
-        case TRANSACTION_setFingerPrintEnabled:
-        {
-          data.enforceInterface(descriptor);
-          boolean _arg0;
-          _arg0 = (0!=data.readInt());
-          this.setFingerPrintEnabled(_arg0);
           reply.writeNoException();
           return true;
         }
@@ -877,161 +785,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           if (!_status) {
             if (getDefaultImpl() != null) {
               getDefaultImpl().setVerifyResult(request, result, reason);
-              return;
-            }
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
-      @Override public void setLockerMethod(int method) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(method);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_setLockerMethod, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setLockerMethod(method);
-              return;
-            }
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
-      @Override public int getLockerMethod() throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        int _result;
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_getLockerMethod, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getLockerMethod();
-            }
-          }
-          _reply.readException();
-          _result = _reply.readInt();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-        return _result;
-      }
-      @Override public void setLockerKey(int method, java.lang.String key) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(method);
-          _data.writeString(key);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_setLockerKey, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setLockerKey(method, key);
-              return;
-            }
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
-      @Override public boolean isLockerKeyValid(int method, java.lang.String key) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        boolean _result;
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(method);
-          _data.writeString(key);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_isLockerKeyValid, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isLockerKeyValid(method, key);
-            }
-          }
-          _reply.readException();
-          _result = (0!=_reply.readInt());
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-        return _result;
-      }
-      @Override public boolean isLockerKeySet(int method) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        boolean _result;
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(method);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_isLockerKeySet, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isLockerKeySet(method);
-            }
-          }
-          _reply.readException();
-          _result = (0!=_reply.readInt());
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-        return _result;
-      }
-      @Override public boolean isFingerPrintEnabled() throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        boolean _result;
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_isFingerPrintEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isFingerPrintEnabled();
-            }
-          }
-          _reply.readException();
-          _result = (0!=_reply.readInt());
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-        return _result;
-      }
-      @Override public void setFingerPrintEnabled(boolean enable) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(((enable)?(1):(0)));
-          boolean _status = mRemote.transact(Stub.TRANSACTION_setFingerPrintEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setFingerPrintEnabled(enable);
               return;
             }
           }
@@ -1529,34 +1282,27 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     static final int TRANSACTION_isPackageLocked = (android.os.IBinder.FIRST_CALL_TRANSACTION + 7);
     static final int TRANSACTION_setPackageLocked = (android.os.IBinder.FIRST_CALL_TRANSACTION + 8);
     static final int TRANSACTION_setVerifyResult = (android.os.IBinder.FIRST_CALL_TRANSACTION + 9);
-    static final int TRANSACTION_setLockerMethod = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
-    static final int TRANSACTION_getLockerMethod = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
-    static final int TRANSACTION_setLockerKey = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
-    static final int TRANSACTION_isLockerKeyValid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
-    static final int TRANSACTION_isLockerKeySet = (android.os.IBinder.FIRST_CALL_TRANSACTION + 14);
-    static final int TRANSACTION_isFingerPrintEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
-    static final int TRANSACTION_setFingerPrintEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
-    static final int TRANSACTION_addComponentReplacement = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
-    static final int TRANSACTION_removeComponentReplacement = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
-    static final int TRANSACTION_getComponentReplacements = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
-    static final int TRANSACTION_setActivityTrampolineEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
-    static final int TRANSACTION_isActivityTrampolineEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 21);
-    static final int TRANSACTION_setShowCurrentComponentViewEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 22);
-    static final int TRANSACTION_isShowCurrentComponentViewEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 23);
-    static final int TRANSACTION_registerTopPackageChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 24);
-    static final int TRANSACTION_unRegisterTopPackageChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 25);
-    static final int TRANSACTION_isVerifyOnScreenOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
-    static final int TRANSACTION_setVerifyOnScreenOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
-    static final int TRANSACTION_isVerifyOnAppSwitchEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
-    static final int TRANSACTION_setVerifyOnAppSwitchEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
-    static final int TRANSACTION_isVerifyOnTaskRemovedEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
-    static final int TRANSACTION_setVerifyOnTaskRemovedEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
-    static final int TRANSACTION_isAppLockWorkaroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 32);
-    static final int TRANSACTION_setAppLockWorkaroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 33);
-    static final int TRANSACTION_reportOnStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 34);
-    static final int TRANSACTION_reportOnActivityStopped = (android.os.IBinder.FIRST_CALL_TRANSACTION + 35);
-    static final int TRANSACTION_reportOnActivityResumed = (android.os.IBinder.FIRST_CALL_TRANSACTION + 36);
-    static final int TRANSACTION_dump = (android.os.IBinder.FIRST_CALL_TRANSACTION + 37);
+    static final int TRANSACTION_addComponentReplacement = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
+    static final int TRANSACTION_removeComponentReplacement = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
+    static final int TRANSACTION_getComponentReplacements = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
+    static final int TRANSACTION_setActivityTrampolineEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
+    static final int TRANSACTION_isActivityTrampolineEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 14);
+    static final int TRANSACTION_setShowCurrentComponentViewEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
+    static final int TRANSACTION_isShowCurrentComponentViewEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
+    static final int TRANSACTION_registerTopPackageChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
+    static final int TRANSACTION_unRegisterTopPackageChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
+    static final int TRANSACTION_isVerifyOnScreenOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
+    static final int TRANSACTION_setVerifyOnScreenOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
+    static final int TRANSACTION_isVerifyOnAppSwitchEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 21);
+    static final int TRANSACTION_setVerifyOnAppSwitchEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 22);
+    static final int TRANSACTION_isVerifyOnTaskRemovedEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 23);
+    static final int TRANSACTION_setVerifyOnTaskRemovedEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 24);
+    static final int TRANSACTION_isAppLockWorkaroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 25);
+    static final int TRANSACTION_setAppLockWorkaroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
+    static final int TRANSACTION_reportOnStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
+    static final int TRANSACTION_reportOnActivityStopped = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
+    static final int TRANSACTION_reportOnActivityResumed = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
+    static final int TRANSACTION_dump = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1585,13 +1331,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public boolean isPackageLocked(java.lang.String pkg) throws android.os.RemoteException;
   public void setPackageLocked(java.lang.String pkg, boolean locked) throws android.os.RemoteException;
   public void setVerifyResult(int request, int result, int reason) throws android.os.RemoteException;
-  public void setLockerMethod(int method) throws android.os.RemoteException;
-  public int getLockerMethod() throws android.os.RemoteException;
-  public void setLockerKey(int method, java.lang.String key) throws android.os.RemoteException;
-  public boolean isLockerKeyValid(int method, java.lang.String key) throws android.os.RemoteException;
-  public boolean isLockerKeySet(int method) throws android.os.RemoteException;
-  public boolean isFingerPrintEnabled() throws android.os.RemoteException;
-  public void setFingerPrintEnabled(boolean enable) throws android.os.RemoteException;
   public void addComponentReplacement(github.tornaco.android.thanos.core.app.component.ComponentReplacement replacement) throws android.os.RemoteException;
   public void removeComponentReplacement(github.tornaco.android.thanos.core.app.component.ComponentReplacement replacement) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.component.ComponentReplacement> getComponentReplacements() throws android.os.RemoteException;

@@ -25,16 +25,6 @@ interface IActivityStackSupervisor {
 
     void setVerifyResult(int request, int result, int reason);
 
-    void setLockerMethod(int method);
-    int getLockerMethod();
-
-    void setLockerKey(int method, String key);
-    boolean isLockerKeyValid(int method, String key);
-    boolean isLockerKeySet(int method);
-
-    boolean isFingerPrintEnabled();
-    void setFingerPrintEnabled(boolean enable);
-
     void addComponentReplacement(in ComponentReplacement replacement);
     void removeComponentReplacement(in ComponentReplacement replacement);
 

@@ -2,11 +2,7 @@
     <string name="module_locker_app_name">locker</string>
     <string name="module_locker_verify_input_password">Unlock %1$s</string>
     <string name="module_locker_menu_search">Search</string>
-    <string name="module_locker_menu_sort">Sort</string>
-    <string name="module_locker_menu_view">View</string>
 
-    <string name="module_locker_user_installed_apps">用户应用</string>
-    <string name="module_locker_system_installed_apps">系统应用</string>
     <string name="module_locker_locker_key_not_set">Please setup your lock method</string>
     <string name="module_locker_locker_key_setup_now">Setup</string>
     <string name="module_locker_locker_key_setup">设置</string>
@@ -16,9 +12,6 @@
     <string name="module_locker_setup_complete">设置完成</string>
     <string name="module_locker_setup_verify_err_mismatch">密码错误</string>
     <string name="module_locker_setup_verify_pass">已解锁</string>
-    <string name="module_locker_title_err_locker_server_not_present">未激活</string>
-    <string name="module_locker_message_err_locker_server_not_present">请先激活本模块后使用，本模块依赖于Honeycomb，如果未安装请前往市场安装激活。
-    </string>
     <string name="module_locker_title_settings">设置</string>
     <string name="module_locker_title_security">安全</string>
     <string name="module_locker_title_re_verify_on_screen_off">锁屏后重新验证</string>

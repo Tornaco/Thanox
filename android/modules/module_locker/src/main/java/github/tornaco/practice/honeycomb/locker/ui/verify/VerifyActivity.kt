@@ -141,6 +141,14 @@ class VerifyActivity : ThemeActivity() {
     }
 
     private fun startVerifyWithBiometrics(appInfo: AppInfo) {
+        if (!isBiometricReady(this)) {
+            ThanosManager.from(this).activityStackSupervisor.setVerifyResult(requestCode,
+                VerifyResult.ALLOW,
+                VerifyResult.REASON_USER_KEY_NOT_SET)
+            finish()
+            return
+        }
+
         authenticateWithBiometric(appInfo) { success: Boolean, message: String ->
             XLog.i("authenticateWithBiometric result: $success $message")
             if (success) {

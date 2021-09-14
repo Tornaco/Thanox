@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/module_locker_title_verify_settings">
+    <PreferenceCategory app:title="@string/module_locker_title_settings">
         <SwitchPreferenceCompat
             app:key="@string/module_locker_key_re_verify_on_screen_off"
             app:persistent="false"

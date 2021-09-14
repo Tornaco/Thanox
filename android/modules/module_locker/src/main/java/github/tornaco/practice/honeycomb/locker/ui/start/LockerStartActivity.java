@@ -1,6 +1,8 @@
 package github.tornaco.practice.honeycomb.locker.ui.start;
 
 import android.content.Context;
+import android.content.Intent;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Switch;
@@ -21,8 +23,10 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.practice.honeycomb.locker.R;
 import github.tornaco.practice.honeycomb.locker.ui.setup.LockSettingsActivity;
+import github.tornaco.practice.honeycomb.locker.ui.verify.BiometricsKt;
 import util.CollectionUtils;
 
 public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
@@ -77,6 +81,12 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
     @Override
     protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
+
+        if (isChecked && !BiometricsKt.isBiometricReady(thisActivity())) {
+            showBiometricNotReadyDialog();
+            return;
+        }
+
         ThanosManager thanosManager = ThanosManager.from(getApplicationContext());
         if (thanosManager.isServiceInstalled()) {
             thanosManager.getActivityStackSupervisor().setAppLockEnabled(isChecked);
@@ -95,5 +105,19 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showBiometricNotReadyDialog() {
+        ModernAlertDialog dialog = new ModernAlertDialog(thisActivity());
+        dialog.setDialogTitle(getString(R.string.module_locker_biometric_not_set_dialog_title));
+        dialog.setDialogMessage(getString(R.string.module_locker_biometric_not_set_dialog_message));
+        dialog.setCancelable(true);
+        dialog.setPositive(getString(R.string.module_locker_title_settings));
+        dialog.setNegative(getString(android.R.string.cancel));
+        dialog.setOnPositive(() -> {
+            Intent enrollIntent = new Intent(Settings.ACTION_SETTINGS);
+            startActivity(enrollIntent);
+        });
+        dialog.show();
     }
 }

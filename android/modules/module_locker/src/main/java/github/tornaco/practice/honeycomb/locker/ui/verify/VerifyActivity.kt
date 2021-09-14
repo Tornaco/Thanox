@@ -150,23 +150,26 @@ class VerifyActivity : ThemeActivity() {
     }
 
     private fun startVerifyWithBiometrics(appInfo: AppInfo) {
+        val thanox = ThanosManager.from(this)
         if (!isBiometricReady(this)) {
-            ThanosManager.from(this).activityStackSupervisor.setVerifyResult(requestCode,
+            thanox.activityStackSupervisor.setVerifyResult(requestCode,
                 VerifyResult.ALLOW,
                 VerifyResult.REASON_USER_KEY_NOT_SET)
             finish()
+            // Disable app lock
+            thanox.activityStackSupervisor.isAppLockEnabled = false
             return
         }
 
         authenticateWithBiometric(appInfo) { success: Boolean, message: String ->
             XLog.i("authenticateWithBiometric result: $success $message")
             if (success) {
-                ThanosManager.from(this).activityStackSupervisor.setVerifyResult(requestCode,
+                thanox.activityStackSupervisor.setVerifyResult(requestCode,
                     VerifyResult.ALLOW,
                     VerifyResult.REASON_USER_INPUT_CORRECT)
                 finish()
             } else {
-                ThanosManager.from(this).activityStackSupervisor.setVerifyResult(requestCode,
+                thanox.activityStackSupervisor.setVerifyResult(requestCode,
                     VerifyResult.IGNORE,
                     VerifyResult.REASON_USER_INPUT_INCORRECT)
             }

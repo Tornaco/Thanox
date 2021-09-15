@@ -84,6 +84,7 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
 
         if (isChecked && !BiometricsKt.isBiometricReady(thisActivity())) {
             showBiometricNotReadyDialog();
+            switchBar.setChecked(false);
             return;
         }
 

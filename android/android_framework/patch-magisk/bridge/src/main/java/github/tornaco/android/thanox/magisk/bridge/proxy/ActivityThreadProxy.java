@@ -57,7 +57,7 @@ final class XHandler implements Handler.Callback {
         runNamed(new AbstractSafeR() {
             @Override
             public void runSafety() throws RemoteException {
-                XLog.v("XHandler handleMessageX: %s %s", msg, HandlerCodes.codeToString(msg.what));
+                XLog.v("XHandler handleMessageX: %s %s", HandlerCodes.codeToString(msg.what), msg);
                 if (msg.what == HandlerCodes.EXECUTE_TRANSACTION) {
                     handleClientTransactionMsg(msg);
                 }

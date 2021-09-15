@@ -213,8 +213,8 @@
         <item name="switchBarTrackUnCheckedColor">@color/md_grey_350</item>
         <item name="switchBarThumbCheckedColor">@color/md_pink_400</item>
         <item name="switchBarThumbUnCheckedColor">@color/md_pink_100</item>
-        <item name="colorPrimary">@color/md_grey_100</item>
-        <item name="colorPrimaryDark">@color/md_grey_200</item>
+        <item name="colorPrimary">@color/md_white</item>
+        <item name="colorPrimaryDark">@color/md_white</item>
         <item name="menuIconTint">@color/md_pink_300</item>
         <item name="switchBarTheme">@style/SwitchBarTheme.Light</item>
         <item name="appbarPopupTheme">@style/PopupOverlayLight</item>

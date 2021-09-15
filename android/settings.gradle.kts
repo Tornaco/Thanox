@@ -1,6 +1,7 @@
 rootProject.name = "Thanox"
 
 include(":app")
+include(":sdk-demo")
 
 include(":nitro:nitro_framework")
 include(":nitro:nitro_plugin")

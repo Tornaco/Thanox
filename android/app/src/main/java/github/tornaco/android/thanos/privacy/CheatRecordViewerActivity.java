@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatSpinner;
 
+import com.google.android.material.chip.Chip;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -46,8 +47,9 @@ public class CheatRecordViewerActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupSpinner(AppCompatSpinner spinner) {
-        spinner.setVisibility(View.GONE);
+    protected void onSetupFilter(Chip filterAnchor) {
+        super.onSetupFilter(filterAnchor);
+        filterAnchor.setVisibility(View.GONE);
         setTitle(getTitleRes());
     }
 

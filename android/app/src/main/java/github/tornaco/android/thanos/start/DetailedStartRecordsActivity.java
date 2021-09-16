@@ -100,15 +100,14 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    @Verify
-    protected void onSetupSpinner(AppCompatSpinner spinner) {
+    protected void onSetupFilter(Chip filterAnchor) {
         if (targetPackageName != null) {
-            spinner.setVisibility(View.GONE);
+            filterAnchor.setVisibility(View.GONE);
             setTitle(getTitleRes());
             viewModel.setAppCategoryFilter(CategoryIndex.All.ordinal());
             return;
         }
-        super.onSetupSpinner(spinner);
+        super.onSetupFilter(filterAnchor);
     }
 
     @NonNull

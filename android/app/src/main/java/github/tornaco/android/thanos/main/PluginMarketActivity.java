@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.chip.Chip;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,9 +57,9 @@ public class PluginMarketActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupSpinner(AppCompatSpinner spinner) {
-        super.onSetupSpinner(spinner);
-        spinner.setVisibility(View.GONE);
+    protected void onSetupFilter(Chip filterAnchor) {
+        super.onSetupFilter(filterAnchor);
+        filterAnchor.setVisibility(View.GONE);
         setTitle(getTitleRes());
     }
 

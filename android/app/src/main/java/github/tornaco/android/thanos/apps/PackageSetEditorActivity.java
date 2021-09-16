@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.common.collect.Lists;
 
@@ -70,9 +71,10 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
   }
 
   @Override
-  protected void onSetupSpinner(AppCompatSpinner spinner) {
-    spinner.setVisibility(View.GONE);
-    setTitle(getTitleString());
+  protected void onSetupFilter(Chip filterAnchor) {
+    super.onSetupFilter(filterAnchor);
+    filterAnchor.setVisibility(View.GONE);
+    setTitle(getTitleRes());
   }
 
   @Override

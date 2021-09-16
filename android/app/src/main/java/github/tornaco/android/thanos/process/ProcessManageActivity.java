@@ -1,19 +1,22 @@
 package github.tornaco.android.thanos.process;
 
+import static github.tornaco.android.thanos.common.CommonAppListFilterViewModel.DEFAULT_CATEGORY_INDEX;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.google.android.material.chip.Chip;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
@@ -49,29 +52,33 @@ public class ProcessManageActivity extends BaseTrustedActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        //Creating the ArrayAdapter instance having the category list
-        String[] category = getResources().getStringArray(R.array.process_manage_categories);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.ghost_text_view, category);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        binding.spinner.setAdapter(arrayAdapter);
-        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
-                setTitle(getString(R.string.activity_title_process_manage, category[index]));
-                startManageViewModel.setAppCategoryFilter(index);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        setTitle(R.string.feature_title_process_manage);
+        onSetupFilter(binding.filterChip);
 
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, new ProcessManageFragment())
                 .commitAllowingStateLoss();
+    }
+
+    protected void onSetupFilter(Chip filterAnchor) {
+        //Creating the ArrayAdapter instance having the category list
+        String[] categoryArray = getResources().getStringArray(R.array.process_manage_categories);
+        filterAnchor.setText(categoryArray[DEFAULT_CATEGORY_INDEX.ordinal()]);
+
+        filterAnchor.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(thisActivity(), filterAnchor);
+            for (int i = 0; i < categoryArray.length; i++) {
+                popupMenu.getMenu().add(1000, i, Menu.NONE, categoryArray[i]);
+            }
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int index = item.getItemId();
+                startManageViewModel.setAppCategoryFilter(index);
+                filterAnchor.setText(categoryArray[index]);
+                return false;
+            });
+            popupMenu.show();
+        });
     }
 
     private void setupViewModel() {

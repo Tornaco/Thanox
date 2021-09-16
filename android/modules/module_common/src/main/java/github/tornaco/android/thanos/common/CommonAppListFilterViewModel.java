@@ -33,11 +33,12 @@ import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 
 public class CommonAppListFilterViewModel extends AndroidViewModel {
+    public static final CategoryIndex DEFAULT_CATEGORY_INDEX = CategoryIndex._3rd;
 
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     protected final List<Disposable> disposables = new ArrayList<>();
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
-    private final ObservableField<CategoryIndex> categoryIndex = new ObservableField<>(CategoryIndex._3rd);
+    private final ObservableField<CategoryIndex> categoryIndex = new ObservableField<>(DEFAULT_CATEGORY_INDEX);
 
     private final ObservableField<String> queryText = new ObservableField<>("");
 

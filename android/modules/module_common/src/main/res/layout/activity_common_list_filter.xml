@@ -22,7 +22,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
             android:background="?colorPrimary"
             android:fitsSystemWindows="false"
@@ -88,12 +88,10 @@
                     android:id="@+id/switch_bar_container"
                     layout="@layout/module_common_switchbar_container" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="?actionBarSize"
-                    android:enabled="@{!viewModel.isDataLoading}"
-                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/filter_chip_container"
+                    layout="@layout/module_common_filter_chip" />
 
                 <include
                     android:id="@+id/feature_desc_container"

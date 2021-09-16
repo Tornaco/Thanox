@@ -1,26 +1,27 @@
 package github.tornaco.android.thanos.common;
 
+import static github.tornaco.android.thanos.common.CommonAppListFilterViewModel.DEFAULT_CATEGORY_INDEX;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -56,7 +57,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
 
         setTitle(getTitleString());
 
-        onSetupFilterSpinner(binding.spinner);
+        onSetupFilter(binding.filterChipContainer.filterChip);
         onSetupChip(binding.chipContainer, binding.chipGroup);
 
         // List.
@@ -103,23 +104,23 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
         onSetupDescription(binding.featureDescContainer);
     }
 
-    protected void onSetupFilterSpinner(AppCompatSpinner spinner) {
-        //Creating the ArrayAdapter instance having the category list
-        String[] category = getResources().getStringArray(R.array.common_app_categories);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.ghost_text_view, category);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        spinner.setAdapter(arrayAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
+    protected void onSetupFilter(Chip filterAnchor) {
+        // Creating the ArrayAdapter instance having the categoryArray list
+        String[] categoryArray = getResources().getStringArray(R.array.common_app_categories);
+        filterAnchor.setText(categoryArray[DEFAULT_CATEGORY_INDEX.ordinal()]);
+
+        filterAnchor.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(thisActivity(), filterAnchor);
+            for (int i = 0; i < categoryArray.length; i++) {
+                popupMenu.getMenu().add(1000, i, Menu.NONE, categoryArray[i]);
+            }
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int index = item.getItemId();
                 commonFuncToggleListFilterViewModel.setAppCategoryFilter(index);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
+                filterAnchor.setText(categoryArray[index]);
+                return false;
+            });
+            popupMenu.show();
         });
     }
 

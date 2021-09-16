@@ -53,6 +53,8 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
       actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
+    setTitle(getTitleString());
+
     onSetupSpinner(binding.spinner);
     onSetupChip(
         binding.chipContainer,
@@ -70,7 +72,7 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
         getResources().getIntArray(R.array.common_swipe_refresh_colors));
 
     // Switch.
-    onSetupSwitchBar(binding.switchBar);
+    onSetupSwitchBar(binding.switchBarContainer.switchBar);
 
     // Search.
     binding.searchView.setOnQueryTextListener(
@@ -161,7 +163,6 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
         new AdapterView.OnItemSelectedListener() {
           @Override
           public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
-            setTitle(getTitleString() + "-" + category[index]);
             viewModel.setAppCategoryFilter(index);
           }
 

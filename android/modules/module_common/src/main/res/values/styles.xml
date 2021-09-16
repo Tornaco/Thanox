@@ -32,8 +32,8 @@
     </style>
 
     <style name="SwitchBarTheme.Light">
-        <item name="switchBarBackgroundColor">@color/md_grey_300</item>
-        <item name="switchBarBackgroundColorChecked">@color/md_grey_300</item>
+        <item name="switchBarBackgroundColor">@color/md_white</item>
+        <item name="switchBarBackgroundColorChecked">@color/md_white</item>
         <item name="switchBarTextColor">@color/md_black</item>
     </style>
 

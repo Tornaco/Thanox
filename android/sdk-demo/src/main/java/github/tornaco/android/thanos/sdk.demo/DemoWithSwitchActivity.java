@@ -1,6 +1,5 @@
 package github.tornaco.android.thanos.sdk.demo;
 
-import android.content.Intent;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
@@ -10,12 +9,13 @@ import java.util.List;
 
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CategoryIndex;
-import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
+import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivity;
+import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.theme.Theme;
 
-public class DemoActivity extends CommonAppListFilterActivity {
+public class DemoWithSwitchActivity extends CommonFuncToggleAppListFilterActivity {
     @Override
     protected Theme getAppTheme() {
         return Theme.LightPink;
@@ -24,7 +24,6 @@ public class DemoActivity extends CommonAppListFilterActivity {
     @Override
     protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
-        startActivity(new Intent(this, DemoWithSwitchActivity.class));
     }
 
     @NonNull
@@ -48,5 +47,16 @@ public class DemoActivity extends CommonAppListFilterActivity {
     @Override
     protected String getTitleString() {
         return "Sdk demo";
+    }
+
+    @NonNull
+    @Override
+    protected OnAppItemSelectStateChangeListener onCreateAppItemSelectStateChangeListener() {
+        return new OnAppItemSelectStateChangeListener() {
+            @Override
+            public void onAppItemSelectionChanged(AppInfo appInfo, boolean selected) {
+
+            }
+        };
     }
 }

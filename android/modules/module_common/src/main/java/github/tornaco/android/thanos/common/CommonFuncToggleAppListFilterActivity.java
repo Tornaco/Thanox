@@ -54,6 +54,8 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        setTitle(getTitleString());
+
         onSetupFilterSpinner(binding.spinner);
         onSetupChip(binding.chipContainer, binding.chipGroup);
 
@@ -69,7 +71,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
         binding.swipe.setColorSchemeColors(getResources().getIntArray(R.array.common_swipe_refresh_colors));
 
         // Switch.
-        onSetupSwitchBar(binding.switchBar);
+        onSetupSwitchBar(binding.switchBarContainer.switchBar);
 
         // Search.
         binding.searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
@@ -111,7 +113,6 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
-                setTitle(String.format("%s - %s", getTitleString(), category[index]));
                 commonFuncToggleListFilterViewModel.setAppCategoryFilter(index);
             }
 

@@ -41,8 +41,8 @@
     <dimen name="dashboard_tile_image_size">24dp</dimen>
     <dimen name="dashboard_tile_image_size_large">32dp</dimen>
 
-    <dimen name="dashboard_card_start_margin">8dp</dimen>
-    <dimen name="dashboard_card_top_margin">8dp</dimen>
+    <dimen name="dashboard_card_start_margin">10dp</dimen>
+    <dimen name="dashboard_card_top_margin">10dp</dimen>
 
     <!-- Dashboard tile image margin start / end -->
     <dimen name="dashboard_tile_image_padding">0dp</dimen>

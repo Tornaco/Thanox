@@ -94,12 +94,14 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
                 new MaterialSearchView.SearchViewListener() {
                     @Override
                     public void onSearchViewShown() {
-                        // Noop.
+                        binding.toolbarLayout.setTitleEnabled(false);
+                        binding.appbar.setExpanded(false, true);
                     }
 
                     @Override
                     public void onSearchViewClosed() {
                         viewModel.clearSearchText();
+                        binding.toolbarLayout.setTitleEnabled(true);
                     }
                 });
 

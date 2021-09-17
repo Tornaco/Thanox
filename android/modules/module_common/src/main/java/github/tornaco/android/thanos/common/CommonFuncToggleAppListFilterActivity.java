@@ -92,12 +92,14 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
         binding.searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-                // Noop.
+                binding.toolbarLayout.setTitleEnabled(false);
+                binding.appbar.setExpanded(false, true);
             }
 
             @Override
             public void onSearchViewClosed() {
                 commonFuncToggleListFilterViewModel.clearSearchText();
+                binding.toolbarLayout.setTitleEnabled(true);
             }
         });
 

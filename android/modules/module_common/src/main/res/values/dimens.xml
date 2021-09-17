@@ -36,5 +36,5 @@
     <dimen name="list_item_footer_height">8dp</dimen>
 
     <dimen name="tab_indicator_height">2dp</dimen>
-    <dimen name="common_coll_appbar_height">180dp</dimen>
+    <dimen name="common_coll_appbar_height">160dp</dimen>
 </resources>

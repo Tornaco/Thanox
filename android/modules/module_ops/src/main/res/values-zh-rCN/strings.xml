@@ -27,7 +27,7 @@
     <string name="module_ops_feature_summary_ops_app_list">按权限</string>
     <string name="module_ops_activity_title_ops_app_list">按权限（%s）</string>
 
-    <string name="module_ops_feature_title_ops_remind_list">OP提醒</string>
+    <string name="module_ops_feature_title_ops_remind_list">隐私提醒</string>
     <string name="module_ops_feature_summary_ops_remind">应用使用某些权限时发出提醒</string>
 
     <string name="module_ops_mode_allow">始终允许</string>

@@ -68,7 +68,7 @@ public class NotificationRecordListActivity extends ThemeActivity {
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
-        onSetupSwitchBar(binding.switchBar);
+        onSetupSwitchBar(binding.switchBarContainer.switchBar);
 
         // Search.
         binding.searchView.setOnQueryTextListener(
@@ -90,12 +90,14 @@ public class NotificationRecordListActivity extends ThemeActivity {
                 new MaterialSearchView.SearchViewListener() {
                     @Override
                     public void onSearchViewShown() {
-                        // Noop.
+                        binding.toolbarLayout.setTitleEnabled(false);
+                        binding.appbar.setExpanded(false, true);
                     }
 
                     @Override
                     public void onSearchViewClosed() {
                         viewModel.clearSearchText();
+                        binding.toolbarLayout.setTitleEnabled(true);
                     }
                 });
     }

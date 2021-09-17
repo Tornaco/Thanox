@@ -11,7 +11,7 @@ public class DataBindingAdapters {
 
     @SuppressWarnings({"unchecked", "ConstantConditions"})
     @BindingAdapter("android:replacements")
-    public static void setReplacements(RecyclerView view, List<ActivityTrampolineModel> models) {
+    public static void bindReplacements(RecyclerView view, List<ActivityTrampolineModel> models) {
         Consumer<List<ActivityTrampolineModel>> consumer = (Consumer<List<ActivityTrampolineModel>>) view.getAdapter();
         consumer.accept(models);
     }

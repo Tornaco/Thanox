@@ -99,7 +99,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
         // Switch.
-        onSetupSwitchBar(binding.switchBar);
+        onSetupSwitchBar(binding.switchBarContainer.switchBar);
 
         binding.fab.setOnClickListener(v -> {
             ThanosManager.from(getApplicationContext())

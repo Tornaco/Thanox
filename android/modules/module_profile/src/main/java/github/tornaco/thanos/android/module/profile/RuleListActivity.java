@@ -83,7 +83,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
                 github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
         // Switch.
-        onSetupSwitchBar(binding.switchBar);
+        onSetupSwitchBar(binding.switchBarContainer.switchBar);
 
         // Has overlap issue.
         binding.fab.hide();

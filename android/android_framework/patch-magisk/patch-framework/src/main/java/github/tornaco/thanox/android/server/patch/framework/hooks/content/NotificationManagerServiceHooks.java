@@ -16,6 +16,7 @@ import util.Consumer;
 import util.XposedHelpers;
 
 public class NotificationManagerServiceHooks {
+
     public static void install() {
         installNotificationListHooks();
     }

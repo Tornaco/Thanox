@@ -15,6 +15,10 @@ import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.services.BootStrap;
 import util.XposedHelpers;
 
+/**
+ * We use this hook to track app process kill event and report to thanox service.
+ * Tested on Android12.
+ */
 class AppExitInfoTrackerHooks {
 
     static void installAppExitInfoTracker(ActivityManagerService ams) {

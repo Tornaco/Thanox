@@ -1,4 +1,4 @@
-package github.tornaco.thanox.android.server.patch.framework.hooks;
+package github.tornaco.thanox.android.server.patch.framework.hooks.content;
 
 import android.content.Context;
 
@@ -7,6 +7,7 @@ import com.android.server.content.SyncManager;
 import com.elvishew.xlog.XLog;
 
 import github.tornaco.thanox.android.server.patch.framework.LocalServices;
+import github.tornaco.thanox.android.server.patch.framework.hooks.ContextProxy;
 import util.XposedHelpers;
 
 public class SyncManagerHooks {

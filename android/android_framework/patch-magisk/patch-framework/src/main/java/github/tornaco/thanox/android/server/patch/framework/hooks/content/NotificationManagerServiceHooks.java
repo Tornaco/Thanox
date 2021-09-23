@@ -1,4 +1,4 @@
-package github.tornaco.thanox.android.server.patch.framework.hooks;
+package github.tornaco.thanox.android.server.patch.framework.hooks.content;
 
 import com.android.server.notification.NotificationManagerService;
 import com.elvishew.xlog.XLog;

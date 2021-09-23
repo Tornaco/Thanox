@@ -1,4 +1,4 @@
-package github.tornaco.thanox.android.server.patch.framework.hooks;
+package github.tornaco.thanox.android.server.patch.framework.hooks.am;
 
 import android.annotation.Nullable;
 import android.content.ComponentName;

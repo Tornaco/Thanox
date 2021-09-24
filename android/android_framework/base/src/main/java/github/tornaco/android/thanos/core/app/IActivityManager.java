@@ -371,10 +371,6 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
-    // Bridge API to report app events.
-    @Override public void reportOnRemoveTask(int taskId) throws android.os.RemoteException
-    {
-    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1406,15 +1402,6 @@ public interface IActivityManager extends android.os.IInterface
           boolean _result = this.checkGetContentProvider(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
-        }
-        case TRANSACTION_reportOnRemoveTask:
-        {
-          data.enforceInterface(descriptor);
-          int _arg0;
-          _arg0 = data.readInt();
-          this.reportOnRemoveTask(_arg0);
-          reply.writeNoException();
           return true;
         }
         default:
@@ -3701,28 +3688,6 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      // Bridge API to report app events.
-      @Override public void reportOnRemoveTask(int taskId) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeInt(taskId);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_reportOnRemoveTask, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().reportOnRemoveTask(taskId);
-              return;
-            }
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -3824,7 +3789,6 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_setNetStatTrackerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 96);
     static final int TRANSACTION_isNetStatTrackerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 97);
     static final int TRANSACTION_checkGetContentProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 98);
-    static final int TRANSACTION_reportOnRemoveTask = (android.os.IBinder.FIRST_CALL_TRANSACTION + 99);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -3950,6 +3914,4 @@ public interface IActivityManager extends android.os.IInterface
   public void setNetStatTrackerEnabled(boolean enabled) throws android.os.RemoteException;
   public boolean isNetStatTrackerEnabled() throws android.os.RemoteException;
   public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name) throws android.os.RemoteException;
-  // Bridge API to report app events.
-  public void reportOnRemoveTask(int taskId) throws android.os.RemoteException;
 }

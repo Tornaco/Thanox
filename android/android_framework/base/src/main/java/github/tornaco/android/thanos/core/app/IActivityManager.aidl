@@ -165,7 +165,4 @@ interface IActivityManager {
     boolean isNetStatTrackerEnabled();
 
     boolean checkGetContentProvider(String callerPkg, String name);
-
-    // Bridge API to report app events.
-    void reportOnRemoveTask(int taskId);
 }

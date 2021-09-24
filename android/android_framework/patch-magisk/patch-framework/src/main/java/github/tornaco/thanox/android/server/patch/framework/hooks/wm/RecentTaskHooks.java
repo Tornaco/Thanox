@@ -2,16 +2,16 @@ package github.tornaco.thanox.android.server.patch.framework.hooks.wm;
 
 import android.annotation.SuppressLint;
 
-import com.android.server.wm.ActivityStackSupervisor;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.elvishew.xlog.XLog;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Arrays;
 
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
+import github.tornaco.android.thanos.services.BootStrap;
+import github.tornaco.android.thanos.services.patch.common.wm.XTask;
+import github.tornaco.android.thanos.services.patch.common.wm.XTaskHelper;
+import util.ProxyUtils;
 import util.XposedHelpers;
 
 /**
@@ -29,33 +29,37 @@ public class RecentTaskHooks {
     }
 
     private static void installRecentTasksCallback0(ActivityTaskManagerService atm) throws ClassNotFoundException {
-        final Object callbackShell = new String("RecentTaskHooks#callbackInstance");
+        XLog.i("RecentTaskHooks, installRecentTasksCallback0: %s", atm);
         @SuppressLint("PrivateApi")
         Class<?> recentTaskCallbackClass = Class.forName("com.android.server.wm.RecentTasks$Callbacks");
         Object callbackInstance = Proxy.newProxyInstance(recentTaskCallbackClass.getClassLoader(),
                 new Class[]{recentTaskCallbackClass},
-                new InvocationHandler() {
-                    @Override
-                    public Object invoke(Object o, Method method, Object[] objects) {
-                        XLog.d("RecentTaskHooks %s %s", method.getName(), Arrays.toString(objects));
-                        if ("toString".equals(method.getName())) {
-                            return callbackShell.toString();
-                        }
-                        if ("hashcode".equals(method.getName())) {
-                            return callbackShell.hashCode();
-                        }
-                        return null;
+                (o, method, objects) -> {
+                    if ("onRecentTaskAdded".equals(method.getName())) {
+                        onRecentTaskAdded(objects);
+                    } else if ("onRecentTaskRemoved".equals(method.getName())) {
+                        onRecentTaskRemoved(objects);
                     }
+                    return ProxyUtils.relaxedMethodCallRes("RecentTaskHooks#Callback", o, method, objects);
                 });
         XLog.i("RecentTaskHooks, callbackInstance: %s", callbackInstance);
 
-        ActivityStackSupervisor ass = (ActivityStackSupervisor) XposedHelpers.getObjectField(atm, "mStackSupervisor");
-        XLog.i("RecentTaskHooks ass: %s", ass);
-
-        Object recentTasks = XposedHelpers.getObjectField(ass, "mRecentTasks");
+        Object recentTasks = XposedHelpers.getObjectField(atm, "mRecentTasks");
         XLog.i("RecentTaskHooks recentTasks: %s", recentTasks);
 
         XposedHelpers.callMethod(recentTasks, "registerCallback", callbackInstance);
         XLog.i("RecentTaskHooks recentTasks installed.");
+    }
+
+    private static void onRecentTaskAdded(Object[] args) {
+        XTask tr = XTaskHelper.toXTask(args[0]);
+        XLog.i("RecentTaskHooks onRecentTaskAdded: %s", tr);
+        BootStrap.THANOS_X.getActivityManagerService().notifyTaskCreated(tr.getTaskId(), tr.getIntent().getComponent());
+    }
+
+    private static void onRecentTaskRemoved(Object[] args) {
+        XTask tr = XTaskHelper.toXTask(args[0]);
+        XLog.i("RecentTaskHooks onRecentTaskRemoved: %s", tr);
+        BootStrap.THANOS_X.getActivityManagerService().onTaskRemoving(tr.getIntent(), tr.getUserId());
     }
 }

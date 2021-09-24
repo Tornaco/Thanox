@@ -46,6 +46,7 @@ include(":android_framework:res")
 include(":android_framework:patchx-lib")
 include(":android_framework:hidden-api")
 include(":android_framework:dex-maker")
+include(":android_framework:patch-common")
 
 include(":android_framework:patch-magisk:module")
 include(":android_framework:patch-magisk:bridge")

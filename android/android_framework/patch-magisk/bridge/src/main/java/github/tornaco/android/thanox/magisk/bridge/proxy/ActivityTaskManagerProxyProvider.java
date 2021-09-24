@@ -52,9 +52,7 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                                 }
 
                                 try {
-                                    if ("removeTask".equals(method.getName())) {
-                                        handleRemoveTask(args);
-                                    } else if ("startActivity".equals(method.getName())) {
+                                    if ("startActivity".equals(method.getName())) {
                                         handleStartActivity(args);
                                     } else if ("getRecentTasks".equals(method.getName())) {
                                         return handleGetRecentTask(am, method, args);
@@ -69,13 +67,6 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                 return iInterface;
             }
         });
-    }
-
-    private void handleRemoveTask(Object[] args) throws android.os.RemoteException {
-        ThanosManagerNative.getDefault()
-                .getActivityManager()
-                .reportOnRemoveTask((Integer) args[0]);
-        XLog.d("ActivityTaskManagerProxyProvider reportOnRemoveTask");
     }
 
     // Android 30.

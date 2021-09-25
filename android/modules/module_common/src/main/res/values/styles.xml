@@ -122,4 +122,13 @@
     <style name="ToolbarExpandedTitleTextAppearance" parent="@style/TextAppearance.AppCompat.Display1">
         <item name="android:textColor">?menuIconTint</item>
     </style>
+
+    <style name="ModernDialogButton" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">?colorAccent</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_marginEnd">@dimen/common_view_margin_default</item>
+        <item name="android:layout_marginStart">@dimen/common_view_margin_default</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
 </resources>

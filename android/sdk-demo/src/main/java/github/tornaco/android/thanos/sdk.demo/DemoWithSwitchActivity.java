@@ -14,6 +14,7 @@ import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivit
 import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.theme.Theme;
+import github.tornaco.android.thanos.widget.ModernAlertDialog;
 
 public class DemoWithSwitchActivity extends CommonFuncToggleAppListFilterActivity {
     @Override
@@ -55,7 +56,13 @@ public class DemoWithSwitchActivity extends CommonFuncToggleAppListFilterActivit
         return new OnAppItemSelectStateChangeListener() {
             @Override
             public void onAppItemSelectionChanged(AppInfo appInfo, boolean selected) {
-
+                ModernAlertDialog dialog = new ModernAlertDialog(DemoWithSwitchActivity.this);
+                dialog.setDialogTitle("Title");
+                dialog.setDialogMessage("Hello world!");
+                dialog.setCancelable(false);
+                dialog.setPositive(getString(android.R.string.ok));
+                dialog.setNegative(getString(android.R.string.cancel));
+                dialog.show();
             }
         };
     }

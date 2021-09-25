@@ -32,52 +32,34 @@
         android:textSize="16sp"
         tools:text="Do you want to reboot now? If you want to show the name of the device." />
 
+    <View
+        android:id="@+id/spacer1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_view_margin_default"
+        android:layout_below="@id/message" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/positive"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-        android:layout_marginHorizontal="@dimen/common_view_margin_default"
+        style="@style/ModernDialogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/message"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/common_view_margin_default"
-        android:background="?selectableItemBackground"
-        android:textAllCaps="true"
-        android:textColor="?colorAccent"
-        android:textSize="14sp"
+        android:layout_below="@id/spacer1"
         tools:text="Yes" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/negative"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-        android:layout_marginHorizontal="@dimen/common_view_margin_default"
+        style="@style/ModernDialogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/positive"
-        android:layout_centerHorizontal="true"
-        android:background="?selectableItemBackground"
-        android:fontFamily="sans-serif-medium"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.TileTitle"
-        android:textColor="?colorAccent"
-        android:textSize="14sp"
         tools:text="Noop" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/neutral"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-        android:layout_marginHorizontal="@dimen/common_view_margin_default"
+        style="@style/ModernDialogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/negative"
-        android:layout_centerHorizontal="true"
-        android:background="?selectableItemBackground"
-        android:fontFamily="sans-serif-medium"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.TileTitle"
-        android:textColor="?colorAccent"
-        android:textSize="14sp"
         tools:text="Noop" />
 
     <View

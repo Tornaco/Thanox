@@ -88,6 +88,7 @@ object Libs {
         const val lifeCycleCompiler = "androidx.lifecycle:lifecycle-compiler:2.3.1"
 
         const val biometric = "androidx.biometric:biometric:1.2.0-alpha03"
+        const val browser = "androidx.browser:browser:1.3.0"
     }
 
     object Room {

@@ -43,6 +43,9 @@ dependencies {
     implementation(Libs.AndroidX.constraint)
     implementation(Libs.AndroidX.interpolator)
     implementation(Libs.AndroidX.swipeRefreshLayout)
+    implementation(Libs.AndroidX.browser) {
+        exclude(group = "com.google.guava", module = "listenablefuture")
+    }
 
     implementation(Libs.Others.glide)
     annotationProcessor(Libs.Others.glideCompiler)

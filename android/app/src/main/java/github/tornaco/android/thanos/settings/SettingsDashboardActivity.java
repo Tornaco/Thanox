@@ -1,8 +1,6 @@
 package github.tornaco.android.thanos.settings;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +15,7 @@ import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.util.BrowserUtils;
 
 public class SettingsDashboardActivity extends ThemeActivity {
 
@@ -43,12 +42,7 @@ public class SettingsDashboardActivity extends ThemeActivity {
         findViewById(R.id.guide).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(BuildProp.THANOX_URL_DOCS_HOME));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(Intent.createChooser(intent, ""));
-                }
+                BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_HOME);
             }
         });
     }

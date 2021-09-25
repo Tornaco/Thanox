@@ -2,8 +2,6 @@ package github.tornaco.android.thanos.start;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -29,6 +27,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.databinding.ActivityStartRulesBinding;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
 
 public class StartRuleActivity extends ThemeActivity implements StartRuleItemClickListener {
@@ -180,12 +179,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                final Intent intent = new Intent();
-                                intent.setAction(Intent.ACTION_VIEW);
-                                intent.setData(Uri.parse(BuildProp.THANOX_URL_DOCS_START_RULES));
-                                if (intent.resolveActivity(getPackageManager()) != null) {
-                                    startActivity(Intent.createChooser(intent, ""));
-                                }
+                                BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_START_RULES);
                             }
                         })
                 .setCancelable(false)

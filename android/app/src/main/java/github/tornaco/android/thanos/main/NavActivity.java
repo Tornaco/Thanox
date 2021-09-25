@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +30,7 @@ import github.tornaco.android.thanos.pref.AppPreference;
 import github.tornaco.android.thanos.settings.ExportPatchUi;
 import github.tornaco.android.thanos.settings.PowerSettingsActivity;
 import github.tornaco.android.thanos.settings.SettingsDashboardActivity;
+import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
@@ -81,12 +81,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
                 SettingsDashboardActivity.start(this);
                 return true;
             case R.id.guide:
-                final Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(BuildProp.THANOX_URL_DOCS_HOME));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(Intent.createChooser(intent, ""));
-                }
+                BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_HOME);
                 return true;
         }
         return false;

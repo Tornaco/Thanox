@@ -31,6 +31,7 @@ import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import github.tornaco.permission.requester.RequiresPermission;
@@ -135,12 +136,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_view_wiki == item.getItemId()) {
-            final Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(BuildProp.THANOX_URL_DOCS_PROFILE));
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(Intent.createChooser(intent, ""));
-            }
+            BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_PROFILE);
             return true;
         }
 

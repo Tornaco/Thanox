@@ -5,14 +5,8 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
 import util.ObjectsUtils;
 
-@AllArgsConstructor
-@Getter
-@ToString
 public class ProcessRecord implements Parcelable {
 
     private final String packageName;
@@ -42,6 +36,15 @@ public class ProcessRecord implements Parcelable {
             return new ProcessRecord[size];
         }
     };
+
+    public ProcessRecord(String packageName, String processName, long pid, int uid, boolean notResponding, boolean crashing) {
+        this.packageName = packageName;
+        this.processName = processName;
+        this.pid = pid;
+        this.uid = uid;
+        this.notResponding = notResponding;
+        this.crashing = crashing;
+    }
 
     @Override
     public int describeContents() {
@@ -78,5 +81,39 @@ public class ProcessRecord implements Parcelable {
 
     public boolean isMainProcess() {
         return ObjectsUtils.equals(packageName, processName);
+    }
+
+    public String getPackageName() {
+        return this.packageName;
+    }
+
+    public String getProcessName() {
+        return this.processName;
+    }
+
+    public long getPid() {
+        return this.pid;
+    }
+
+    public int getUid() {
+        return this.uid;
+    }
+
+    public boolean isNotResponding() {
+        return this.notResponding;
+    }
+
+    public boolean isCrashing() {
+        return this.crashing;
+    }
+
+    @Override
+    public String toString() {
+        return "ProcessRecord{" +
+                "packageName='" + packageName + '\'' +
+                ", processName='" + processName + '\'' +
+                ", pid=" + pid +
+                ", uid=" + uid +
+                '}';
     }
 }

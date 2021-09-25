@@ -100,4 +100,17 @@ public class XposedHelpersExt {
     }
     throw new ClassNotFoundException(Arrays.toString(classNames));
   }
+
+  public static int getIntFieldWithPotentialNames(Object obj, String... potentialFieldNames) throws NoSuchFieldException {
+    for (String fieldName: potentialFieldNames) {
+      try {
+        int res = XposedHelpers.getIntField(obj, fieldName);
+        XLog.w("getIntField, find field for name: " + fieldName);
+        return res;
+      } catch (Throwable e){
+        XLog.w("getIntField, no field for this name: " + fieldName);
+      }
+    }
+    throw new NoSuchFieldException(Arrays.toString(potentialFieldNames));
+  }
 }

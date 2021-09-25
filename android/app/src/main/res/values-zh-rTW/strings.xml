@@ -35,6 +35,7 @@
     <string name="card_message_plugin_available">插件主要承載一些不穩定或非關鍵功能。</string>
 
     <string name="tile_category_plugin_installed">已安裝</string>
+    <string name="tile_category_plugin_already_installed">该插件无法被覆盖安装，请卸载现有版本后重新安装</string>
     <string name="tile_category_plugin_update_available">可更新</string>
 
     <string name="dialog_title_plugin_installing">正在安裝插件</string>

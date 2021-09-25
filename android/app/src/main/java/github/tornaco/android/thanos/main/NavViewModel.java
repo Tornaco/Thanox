@@ -30,6 +30,7 @@ import java.util.List;
 
 import github.tornaco.android.nitro.framework.Nitro;
 import github.tornaco.android.nitro.framework.host.install.InstallCallback;
+import github.tornaco.android.nitro.framework.host.install.PluginInstaller;
 import github.tornaco.android.nitro.framework.host.install.UnInstallCallback;
 import github.tornaco.android.nitro.framework.host.manager.data.model.InstalledPlugin;
 import github.tornaco.android.rhino.plugin.Verify;
@@ -93,7 +94,11 @@ public class NavViewModel extends AndroidViewModel {
           @Override
           public void onPostInstallFail(int code, @NonNull Throwable err) {
             XLog.e("onPostInstallFail: %s %s", code, err);
-            ui.showInstallFail(err.getMessage());
+            if (code == PluginInstaller.ErrorCodes.DUP) {
+              ui.showInstallFail(getApplication().getString(R.string.tile_category_plugin_already_installed));
+            } else {
+              ui.showInstallFail(err.getMessage());
+            }
           }
         });
   }

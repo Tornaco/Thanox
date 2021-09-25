@@ -10,7 +10,7 @@
 
         <meta-data
             android:name="thanox.plugin.description"
-            android:value="Push message proxy plugin" />
+            android:value="Wechat消息代收插件（实验性）" />
 
         <meta-data
             android:name="thanox.plugin.minThanoxVersion"

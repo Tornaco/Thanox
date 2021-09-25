@@ -38,7 +38,7 @@ import util.IoUtils;
 import util.ObjectsUtils;
 
 @SuppressWarnings("UnstableApiUsage")
-public class Installer {
+public class PluginInstaller {
     private static final String EXPECTED_PLUGIN_FILE_EXT = "tp";
 
     private static File pluginInstallDirForPackage(Context context, String pluginPkgName) {

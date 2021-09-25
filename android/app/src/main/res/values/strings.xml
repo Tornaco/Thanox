@@ -42,6 +42,7 @@
     <string name="title_install">Install</string>
 
     <string name="tile_category_plugin_installed">Installed</string>
+    <string name="tile_category_plugin_already_installed">Already installed, please uninstall and try again.</string>
     <string name="tile_category_plugin_update_available">New version</string>
 
     <string name="card_title_plugin_available">Install thanox plugin</string>

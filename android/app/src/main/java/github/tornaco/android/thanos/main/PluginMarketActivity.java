@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.elvishew.xlog.XLog;
 import com.google.android.material.chip.Chip;
@@ -19,7 +18,7 @@ import java.util.List;
 
 import github.tornaco.android.nitro.framework.Nitro;
 import github.tornaco.android.nitro.framework.host.install.InstallCallback;
-import github.tornaco.android.nitro.framework.host.install.Installer;
+import github.tornaco.android.nitro.framework.host.install.PluginInstaller;
 import github.tornaco.android.nitro.framework.host.manager.data.model.InstalledPlugin;
 import github.tornaco.android.thanos.BuildConfig;
 import github.tornaco.android.thanos.BuildProp;
@@ -111,7 +110,7 @@ public class PluginMarketActivity extends CommonAppListFilterActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (code == Installer.ErrorCodes.DUP) {
+                            if (code == PluginInstaller.ErrorCodes.DUP) {
                                 Toast.makeText(thisActivity(), R.string.tile_category_plugin_installed, Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(thisActivity(), Log.getStackTraceString(err), Toast.LENGTH_LONG).show();

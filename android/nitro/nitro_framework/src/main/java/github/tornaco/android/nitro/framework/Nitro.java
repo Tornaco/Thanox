@@ -14,13 +14,13 @@ import java.util.concurrent.Executors;
 
 import github.tornaco.android.nitro.framework.host.Launcher;
 import github.tornaco.android.nitro.framework.host.install.InstallCallback;
-import github.tornaco.android.nitro.framework.host.install.Installer;
+import github.tornaco.android.nitro.framework.host.install.PluginInstaller;
 import github.tornaco.android.nitro.framework.host.install.UnInstallCallback;
 import github.tornaco.android.nitro.framework.host.manager.data.Repo;
 import github.tornaco.android.nitro.framework.host.manager.data.model.InstalledPlugin;
 
 public class Nitro {
-    private static final Installer INSTALLER = new Installer();
+    private static final PluginInstaller INSTALLER = new PluginInstaller();
     private static final Executor EXECUTOR = Executors.newSingleThreadExecutor();
 
     @MainThread

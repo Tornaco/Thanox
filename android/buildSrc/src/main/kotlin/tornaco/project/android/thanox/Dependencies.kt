@@ -2,6 +2,10 @@ package tornaco.project.android.thanox
 
 object ClassPaths {
     const val gradlePlugin = "com.android.tools.build:gradle:7.0.1"
+    const val gradleApi = "com.android.tools.build:gradle-api:7.0.1"
+    const val gradleBuilderModel = "com.android.tools.build:builder-model:7.0.1"
+    const val androidToolsCommon = "com.android.tools:common:30.0.1"
+
     const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
 }
 
@@ -150,13 +154,14 @@ object Libs {
     }
 
     object ThanoxInternal {
-        private const val version = "1.0.0-SNAPSHOT"
+        const val version = "1.0.0-SNAPSHOT"
 
         private const val groupRhino = "github.tornaco.android.thanos.rhino-verify"
-        private const val groupNitro = "github.tornaco.android.thanos.nitro"
+        const val groupNitro = "github.tornaco.android.thanos.nitro"
+        const val artifactNitro = "nitro_gradle_plugin"
 
         const val rhinoAnnotations = "$groupRhino:rhino_annotations:$version"
         const val rhinoGradlePlugin = "$groupRhino:rhino_plugin_stub_gen:$version"
-        const val nitroGradlePlugin = "$groupNitro:nitro_gradle_plugin:$version"
+        const val nitroGradlePlugin = "$groupNitro:$artifactNitro:$version"
     }
 }

@@ -1,15 +1,26 @@
+import tornaco.project.android.thanox.ClassPaths.gradlePlugin
+import tornaco.project.android.thanox.ClassPaths.gradleApi
+import tornaco.project.android.thanox.ClassPaths.gradleBuilderModel
+import tornaco.project.android.thanox.ClassPaths.androidToolsCommon
 import tornaco.project.android.thanox.Libs
+import tornaco.project.android.thanox.Libs.ThanoxInternal
 
 plugins {
     id("java")
     id("groovy")
+    id("maven-publish")
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/com.android.tools.build/gradle/
-    implementation("com.android.tools.build:gradle:4.1.3")
-    implementation("commons-io:commons-io:2.6")
+    implementation(gradleApi)
+    implementation(gradlePlugin)
+    implementation(gradleBuilderModel)
+    implementation(androidToolsCommon)
 
+    implementation("commons-io:commons-io:2.6")
+    implementation("commons-codec:commons-codec:1.10")
+
+    implementation(Libs.Others.guavaJre)
     implementation(Libs.Others.javassist)
     implementation(gradleApi())
     implementation(localGroovy())
@@ -18,4 +29,16 @@ dependencies {
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("Local") {
+            groupId = ThanoxInternal.groupNitro
+            artifactId = ThanoxInternal.artifactNitro
+            version = ThanoxInternal.version
+
+            from(components["java"])
+        }
+    }
 }

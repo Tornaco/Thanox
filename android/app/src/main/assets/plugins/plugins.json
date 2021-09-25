@@ -11,12 +11,12 @@
   },
   {
     "name": "Push消息代收",
-    "versionCode": 2031524,
-    "versionName": "1.2.6-dirty",
+    "versionCode": 3060129,
+    "versionName": "3.0",
     "packageName": "github.tornaco.android.plugin.push.message.delegate",
     "description": "微信消息代收",
     "minThanoxVersion": 1,
-    "updateTimeMills": 1589113763606,
-    "downloadUrl": "plugins/plugin_push_delegate_1.2.6-dirty.tp"
+    "updateTimeMills": 1632572682337,
+    "downloadUrl": "plugins/plugin_wechat_push_3.0.tp"
   }
 ]

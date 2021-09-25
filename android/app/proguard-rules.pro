@@ -31,7 +31,7 @@
 -keepattributes InnerClasses
 
 -keep public class * extends android.app.Activity
--keep public class * extends android.support.v4.app.Fragment
+-keep public class * extends androidx.fragment.app.Fragment
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
 -keep public class * extends android.content.BroadcastReceiver
@@ -44,11 +44,6 @@
 -dontskipnonpubliclibraryclassmembers
 -printconfiguration
 -keep,allowobfuscation @interface android.support.annotation.Keep
-
--keep @android.support.annotation.Keep class *
--keepclassmembers class * {
-    @android.support.annotation.Keep *;
-}
 
 # Supports
 -keep class android.support.** { *; }
@@ -121,18 +116,6 @@
 # See http://sourceforge.net/p/proguard/bugs/466/
 -keep,allowobfuscation @interface com.facebook.crypto.proguard.annotations.DoNotStrip
 -keep,allowobfuscation @interface com.facebook.crypto.proguard.annotations.KeepGettersAndSetters
-
-# Do not strip any method/class that is annotated with @DoNotStrip
--keep @com.facebook.crypto.proguard.annotations.DoNotStrip class *
--keepclassmembers class * {
-    @com.facebook.crypto.proguard.annotations.DoNotStrip *;
-}
-
--keepclassmembers @com.facebook.crypto.proguard.annotations.KeepGettersAndSetters class * {
-  void set*(***);
-  *** get*();
-}
-
 
 # Configuration for Guava 18.0
 #

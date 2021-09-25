@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="PushDelegateTheme" parent="@style/Theme.MaterialComponents.NoActionBar">
+    <style name="PushDelegateTheme" parent="@style/AppThemeAmber.NoActionBar">
 
     </style>
 </resources>

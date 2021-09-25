@@ -31,7 +31,7 @@
 -keepattributes InnerClasses
 
 -keep public class * extends android.app.Activity
--keep public class * extends androidx.fragment.app.Fragment
+-keep public class * extends android.support.v4.app.Fragment
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
 -keep public class * extends android.content.BroadcastReceiver
@@ -44,6 +44,11 @@
 -dontskipnonpubliclibraryclassmembers
 -printconfiguration
 -keep,allowobfuscation @interface android.support.annotation.Keep
+
+-keep @android.support.annotation.Keep class *
+-keepclassmembers class * {
+    @android.support.annotation.Keep *;
+}
 
 # Supports
 -keep class android.support.** { *; }
@@ -96,6 +101,13 @@
     void *(**On*Event);
 }
 
+# Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
 # Gson uses generic type information stored in a class file when working with fields. Proguard
 # removes such information by default, so configure it to keep all of it.
 -keepattributes Signature
@@ -104,6 +116,45 @@
 -dontwarn com.squareup.**
 -dontwarn okio.**
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+# Keep our interfaces so they can be used by other ProGuard rules.
+# See http://sourceforge.net/p/proguard/bugs/466/
+-keep,allowobfuscation @interface com.facebook.crypto.proguard.annotations.DoNotStrip
+-keep,allowobfuscation @interface com.facebook.crypto.proguard.annotations.KeepGettersAndSetters
+
+# Do not strip any method/class that is annotated with @DoNotStrip
+-keep @com.facebook.crypto.proguard.annotations.DoNotStrip class *
+-keepclassmembers class * {
+    @com.facebook.crypto.proguard.annotations.DoNotStrip *;
+}
+
+-keepclassmembers @com.facebook.crypto.proguard.annotations.KeepGettersAndSetters class * {
+  void set*(***);
+  *** get*();
+}
+
+
+# Configuration for Guava 18.0
+#
+# disagrees with instructions provided by Guava project: https://code.google.com/p/guava-libraries/wiki/UsingProGuardWithGuava
+
+-keep class com.google.common.io.Resources {
+    public static <methods>;
+}
+-keep class com.google.common.collect.Lists {
+    public static ** reverse(**);
+}
+-keep class com.google.common.base.Charsets {
+    public static <fields>;
+}
+
+-keep class com.google.common.base.Joiner {
+    public static com.google.common.base.Joiner on(java.lang.String);
+    public ** join(...);
+}
+
+-keep class com.google.common.collect.MapMakerInternalMap$ReferenceEntry
+-keep class com.google.common.cache.LocalCache$ReferenceEntry
 
 # http://stackoverflow.com/questions/9120338/proguard-configuration-for-guava-with-obfuscation-and-optimization
 -dontwarn javax.annotation.**
@@ -117,6 +168,14 @@
 
 -dontwarn com.google.common.**
 
+# Glide http://bumptech.github.io/glide/doc/download-setup.html#proguard
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
 # If you're targeting any API level less than Android API 27, also include:
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 
@@ -124,6 +183,7 @@
 -dontwarn rx.**
 
 # XposedEntry
+-keep class github.tornaco.android.thanos.services.xposed.XposedHookEntry
 -keep class github.tornaco.** {*;}
 
 # Slf

@@ -3,11 +3,12 @@ package github.tornaco.android.plugin.push.message.delegate;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreferenceCompat;
 
+import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+
 @SuppressWarnings("ConstantConditions")
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends BaseWithFabPreferenceFragmentCompat {
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();

@@ -111,5 +111,8 @@ dependencies {
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
+
+    implementation(project(":modules:module_common"))
+
     implementation(project(":android_framework:base"))
 }

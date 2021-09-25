@@ -9,13 +9,10 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Objects;
 
 import github.tornaco.android.thanos.theme.ThemeActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ThemeActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +24,6 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.container, SettingsFragment.newInstance())
                     .commit();
         }
-    }
-
-    private void showHomeAsUpNavigator() {
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override

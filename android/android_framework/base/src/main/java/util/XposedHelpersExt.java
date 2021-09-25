@@ -8,12 +8,14 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
 import github.tornaco.android.thanos.core.annotation.RequiresApi;
+import github.tornaco.android.thanos.core.util.OsUtils;
 
 public class XposedHelpersExt {
 
@@ -83,5 +85,19 @@ public class XposedHelpersExt {
       XLog.e(e, "getFirstArgIndexWithType");
     }
     return -1;
+  }
+
+  public static Class<?> anyClassFromNames(ClassLoader classLoader, String... classNames)
+          throws ClassNotFoundException {
+    for (String className: classNames) {
+      try {
+        Class<?> res = XposedHelpers.findClass(className, classLoader);
+        XLog.w("anyClassFromNames, find class for name: " + className);
+        return res;
+      } catch (Throwable e) {
+        XLog.w("anyClassFromNames, no class for this name: " + className);
+      }
+    }
+    throw new ClassNotFoundException(Arrays.toString(classNames));
   }
 }

@@ -8,8 +8,8 @@
         <item name="switchBarTrackUnCheckedColor">@color/md_grey_700</item>
         <item name="switchBarThumbCheckedColor">@color/md_blue_a700</item>
         <item name="switchBarThumbUnCheckedColor">@color/md_blue_100</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryDark">@color/primary_light</item>
         <item name="menuIconTint">@color/md_blue_a700</item>
         <item name="switchBarTheme">@style/SwitchBarTheme</item>
         <item name="appbarPopupTheme">@style/PopupOverlay</item>
@@ -37,8 +37,8 @@
         <item name="switchBarTrackUnCheckedColor">@color/md_grey_700</item>
         <item name="switchBarThumbCheckedColor">@color/md_red_a800</item>
         <item name="switchBarThumbUnCheckedColor">@color/md_red_100</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryDark">@color/primary_light</item>
         <item name="menuIconTint">@color/md_red_a800</item>
         <item name="switchBarTheme">@style/SwitchBarTheme</item>
         <item name="appbarPopupTheme">@style/PopupOverlay</item>
@@ -95,8 +95,8 @@
         <item name="switchBarThumbCheckedColor">@color/md_teal_500</item>
         <item name="switchBarThumbUnCheckedColor">@color/md_teal_100</item>
         <item name="colorAccentDark">@color/md_teal_500</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryDark">@color/primary_light</item>
         <item name="menuIconTint">@color/md_grey_700</item>
         <item name="switchBarTheme">@style/SwitchBarTheme</item>
         <item name="appbarPopupTheme">@style/PopupOverlay</item>
@@ -124,8 +124,8 @@
         <item name="switchBarTrackUnCheckedColor">@color/md_grey_700</item>
         <item name="switchBarThumbCheckedColor">@color/md_amber_900</item>
         <item name="switchBarThumbUnCheckedColor">@color/md_amber_100</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryDark">@color/primary_light</item>
         <item name="menuIconTint">@color/md_amber_900</item>
         <item name="switchBarTheme">@style/SwitchBarTheme</item>
         <item name="appbarPopupTheme">@style/PopupOverlay</item>

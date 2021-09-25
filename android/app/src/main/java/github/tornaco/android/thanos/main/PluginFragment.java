@@ -145,6 +145,11 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
         navViewModel = obtainViewModel(getActivity());
         pluginBinding.setViewmodel(navViewModel);
         pluginBinding.executePendingBindings();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         navViewModel.loadPluginFeatures();
     }
 

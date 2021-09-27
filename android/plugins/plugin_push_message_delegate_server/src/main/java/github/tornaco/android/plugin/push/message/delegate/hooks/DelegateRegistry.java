@@ -15,9 +15,10 @@ import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._27;
 import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._28;
 import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._29;
 import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._30;
+import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._31;
 
 @AllArgsConstructor
-@XposedHook(targetSdkVersion = {_21, _22, _23, _24, _25, _26, _27, _28, _29, _30})
+@XposedHook(targetSdkVersion = {_21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31})
 public class DelegateRegistry implements IXposedHook {
 
     @Override

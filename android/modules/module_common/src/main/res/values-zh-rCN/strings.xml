@@ -26,6 +26,7 @@
 
     <string name="common_remember">不再提醒</string>
     <string name="common_tips">提示</string>
+    <string name="common_retry">重试</string>
 
     <string name="common_toast_copied_to_clipboard">已经复制到剪贴板</string>
 

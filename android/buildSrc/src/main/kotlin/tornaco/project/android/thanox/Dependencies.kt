@@ -152,6 +152,14 @@ object Libs {
             "com.google.accompanist:accompanist-navigation-animation:$version"
 
         const val appcompatTheme = "com.google.accompanist:accompanist-appcompat-theme:$version"
+        const val systemUiController =
+            "com.google.accompanist:accompanist-systemuicontroller:$version"
+    }
+
+    object Lottie {
+        private const val version = "4.1.0"
+        const val composeLottie = "com.airbnb.android:lottie-compose:${version}"
+        const val lottie = "com.airbnb.android:lottie:${version}"
     }
 
     object ThanoxInternal {

@@ -24,6 +24,7 @@
     <string name="common_fab_title_add">Add</string>
     <string name="common_dialog_message_are_you_sure">Are you sure? Take care!</string>
 
+    <string name="common_retry">Retry</string>
     <string name="common_remember">Got</string>
     <string name="common_tips">Tips</string>
 

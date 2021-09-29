@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name=".app.MainActivity"
+            android:name=".app.RowMainActivity"
             android:exported="true"
             android:label="@string/nav_title_thanox">
             <intent-filter>

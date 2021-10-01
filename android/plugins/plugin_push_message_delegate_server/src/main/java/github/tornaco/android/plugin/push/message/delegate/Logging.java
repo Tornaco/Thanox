@@ -8,7 +8,7 @@ import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 
 public class Logging {
 
-    private static IPluginLogger sLogger;
+    private static IPluginLogger sLogger = fallbackLogger();
 
     public static void main(String... args) {
         try {

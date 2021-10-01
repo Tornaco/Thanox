@@ -6,7 +6,6 @@ import android.content.Context;
 import github.tornaco.android.plugin.push.message.delegate.Logging;
 import github.tornaco.android.plugin.push.message.delegate.server.PushDelegateServer;
 
-@SuppressWarnings("UnstableApiUsage")
 public class Entry {
 
     @SuppressLint("StaticFieldLeak")

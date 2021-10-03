@@ -26,6 +26,7 @@ import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.app.donate.DonateActivity;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivityNavBinding;
+import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
 import github.tornaco.android.thanos.pref.AppPreference;
 import github.tornaco.android.thanos.settings.ExportPatchUi;
 import github.tornaco.android.thanos.settings.PowerSettingsActivity;
@@ -59,6 +60,14 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
         setupView();
         setupPagers(savedInstanceState);
         setupViewModel();
+        checkOnBoarding();
+    }
+
+    private void checkOnBoarding() {
+        if (!AppPreference.hasOnBoarding(thisActivity())) {
+            OnBoardingActivity.Starter.INSTANCE.start(thisActivity());
+            finish();
+        }
     }
 
     @Override

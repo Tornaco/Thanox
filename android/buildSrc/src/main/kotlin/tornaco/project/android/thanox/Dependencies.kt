@@ -28,6 +28,9 @@ object Compose {
     const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
 
     const val coil = "io.coil-kt:coil-compose:1.3.2"
+
+    const val composeMaterialIconsExtended =
+        "androidx.compose.material:material-icons-extended:${composeVersion}"
 }
 
 object Tests {
@@ -154,6 +157,8 @@ object Libs {
         const val appcompatTheme = "com.google.accompanist:accompanist-appcompat-theme:$version"
         const val systemUiController =
             "com.google.accompanist:accompanist-systemuicontroller:$version"
+        const val pager =
+            "com.google.accompanist:accompanist-pager:$version"
     }
 
     object Lottie {

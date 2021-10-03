@@ -30,6 +30,7 @@ include(":modules:module_component_manager")
 include(":modules:module_notification_recorder")
 include(":modules:module_locker")
 include(":modules:module_common")
+include(":modules:module_compose_common")
 include(":modules:module_filepicker")
 
 include(":third_party:dateformatter")

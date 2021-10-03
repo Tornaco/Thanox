@@ -363,4 +363,16 @@
     <string name="export_patch_message">Thanox支持Xposed和Magisk兩種激活方式。對於Xposed用戶，在Xposed模塊頁面勾選Thanox即可。
         對於Magisk用戶，你可以將下載的Thanox安裝包文件拓展名，由.apk修改為.zip後通過MagiskManager刷入。如果你找不到Thanox安裝包，你可以點擊下面導出按鈕，導出Magisk模塊的zip包</string>
     <string name="export_patch_export_magisk">導出</string>
+
+    <string name="onboarding_text_complete">那就开始吧</string>
+    <string name="onboarding_next">继续</string>
+    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_xposed_tips_title">Xposed模式</string>
+    <string name="onboarding_xposed_tips_desc">1. 在Xposed管理器中勾选Thanox \n2. 重启设备 \n3. 记住一件事，每次更新Thanox之后都要在Xposed管理器中重新勾选之后再重启</string>
+
+    <string name="onboarding_magisk_tips_title">Magisk模式（实验性）</string>
+    <string name="onboarding_magisk_tips_desc">1. Thanox apk同时也是Magisk模块，只需要重命名为zip即可 \n2. 另外你也可以在设置-关于-补丁状态中导出Magisk模块 \n3. 记住一件事，每次更新Thanox后，请同时更新magisk模块并重启</string>
+
+    <string name="onboarding_github_tips_title">保持更新</string>
+    <string name="onboarding_github_tips_desc">你可以在Github/Thanox上追踪我们发布的预测试版本</string>
 </resources>

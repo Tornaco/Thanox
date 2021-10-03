@@ -154,6 +154,9 @@
         <activity
             android:name=".settings.BuildPropActivity"
             android:exported="false" />
+        <activity
+            android:name=".onboarding.OnBoardingActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"
@@ -176,8 +179,8 @@
         </provider>
 
         <service
-            android:exported="true"
             android:name=".qs.QuickConfigAppTile"
+            android:exported="true"
             android:icon="@drawable/ic_settings_line_black"
             android:label="@string/feature_title_apps_manager"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -186,8 +189,8 @@
             </intent-filter>
         </service>
         <service
-            android:exported="true"
             android:name=".qs.ShowCurrentActivityTile"
+            android:exported="true"
             android:icon="@drawable/ic_radio_button_fill_black"
             android:label="@string/title_show_current_activity"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -196,8 +199,8 @@
             </intent-filter>
         </service>
         <service
-            android:exported="true"
             android:name=".qs.ShowNetStatsTile"
+            android:exported="true"
             android:icon="@drawable/ic_numbers_fill_black"
             android:label="@string/title_net_stats"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -206,8 +209,8 @@
             </intent-filter>
         </service>
         <service
-            android:exported="true"
             android:name=".qs.ProfileOnOffTile"
+            android:exported="true"
             android:icon="@drawable/module_profile_ic_thunderstorms_fill"
             android:label="@string/module_profile_feature_name"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -217,8 +220,8 @@
         </service>
 
         <service
-            android:exported="true"
             android:name=".qs.TrampolineOnOffTile"
+            android:exported="true"
             android:icon="@drawable/ic_guide_fill"
             android:label="@string/module_activity_trampoline_app_name"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">

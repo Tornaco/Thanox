@@ -10,6 +10,7 @@ import github.tornaco.android.thanos.BuildProp;
 public class AppPreference {
 
     private static final String PREF_KEY_FIRST_RUN = "PREF_KEY_FIRST_RUN_" + BuildProp.THANOS_BUILD_FINGERPRINT;
+    private static final String PREF_KEY_ON_BOARDING = "PREF_KEY_ON_BOARDING_" + BuildProp.THANOS_BUILD_FINGERPRINT;
 
     @Verify
     public static boolean isFirstRun(Context context) {
@@ -36,6 +37,21 @@ public class AppPreference {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(feature, first)
+                .apply();
+    }
+
+
+    @Verify
+    public static boolean hasOnBoarding(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(PREF_KEY_ON_BOARDING, false);
+    }
+
+    @Verify
+    public static void setHasOnBoarding(Context context, boolean value) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(PREF_KEY_ON_BOARDING, value)
                 .apply();
     }
 }

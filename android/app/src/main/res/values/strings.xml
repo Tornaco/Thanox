@@ -367,4 +367,17 @@
     For Magisk user, you can rename downloaded Thanox apk from .apk to .zip and then install in Magisk manager, or if you can not find the downloaded apk, we also have option
     to export the patch zip to local external storage.</string>
     <string name="export_patch_export_magisk">Export</string>
+
+    <string name="onboarding_text_complete">Let\'s Begin</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_xposed_tips_title">Xposed supported</string>
+    <string name="onboarding_xposed_tips_desc">1. Select and check Thanox in Xposed Manager \n2. Reboot and enjoy \n3. Remember, after every update, re-check thanox in Xposed manager and reboot!</string>
+
+    <string name="onboarding_magisk_tips_title">Magisk supported(experimental)</string>
+    <string name="onboarding_magisk_tips_desc">1. Thanox apk is also the magisk module, just rename it to zip \n2. You can also export magisk module from Settings-About-Patch info \n3. Remember, after every update, also update magisk module in Magisk manager and reboot!</string>
+
+    <string name="onboarding_github_tips_title">Update tracking</string>
+    <string name="onboarding_github_tips_desc">You can track our pre-release on \nGithub/Thanox</string>
+
 </resources>

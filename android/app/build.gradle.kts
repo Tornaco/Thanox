@@ -134,6 +134,10 @@ dependencies {
     implementation(Compose.hiltNavigation)
     implementation(Compose.tooling)
     implementation(Compose.toolingPreview)
+    implementation(Compose.composeMaterialIconsExtended)
+    implementation(Libs.Accompanist.appcompatTheme)
+    implementation(Libs.Accompanist.systemUiController)
+    implementation(Libs.Accompanist.pager)
 
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)
@@ -160,6 +164,7 @@ dependencies {
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
 
     implementation(project(":modules:module_common"))
+    implementation(project(":modules:module_compose_common"))
     implementation(project(":modules:module_ops"))
     implementation(project(":modules:module_easteregg"))
     implementation(project(":modules:module_activity_trampoline"))

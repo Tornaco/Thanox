@@ -16,11 +16,11 @@
 
 package com.google.android.vending.licensing;
 
+import android.text.TextUtils;
+
+import com.elvishew.xlog.XLog;
 import com.google.android.vending.licensing.util.Base64;
 import com.google.android.vending.licensing.util.Base64DecoderException;
-
-import android.text.TextUtils;
-import android.util.Log;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -33,7 +33,7 @@ import java.security.SignatureException;
  * and process the response.
  */
 class LicenseValidator {
-    private static final String TAG = "LicenseValidator";
+    private static final String TAG = "LicenseValidator %s";
 
     // Server response codes.
     private static final int LICENSED = 0x0;
@@ -55,7 +55,7 @@ class LicenseValidator {
     private final DeviceLimiter mDeviceLimiter;
 
     LicenseValidator(Policy policy, DeviceLimiter deviceLimiter, LicenseCheckerCallback callback,
-             int nonce, String packageName, String versionCode) {
+                     int nonce, String packageName, String versionCode) {
         mPolicy = policy;
         mDeviceLimiter = deviceLimiter;
         mCallback = callback;
@@ -81,10 +81,10 @@ class LicenseValidator {
     /**
      * Verifies the response from server and calls appropriate callback method.
      *
-     * @param publicKey public key associated with the developer account
+     * @param publicKey    public key associated with the developer account
      * @param responseCode server response code
-     * @param signedData signed data from server
-     * @param signature server signature
+     * @param signedData   signed data from server
+     * @param signature    server signature
      */
     public void verify(PublicKey publicKey, int responseCode, String signedData, String signature) {
         String userId = null;
@@ -95,7 +95,7 @@ class LicenseValidator {
             // Verify signature.
             try {
                 if (TextUtils.isEmpty(signedData)) {
-                    Log.e(TAG, "Signature verification failed: signedData is empty. " +
+                    XLog.e(TAG, "Signature verification failed: signedData is empty. " +
                             "(Device not signed-in to any Google accounts?)");
                     handleInvalidResponse();
                     return;
@@ -106,7 +106,7 @@ class LicenseValidator {
                 sig.update(signedData.getBytes());
 
                 if (!sig.verify(Base64.decode(signature))) {
-                    Log.e(TAG, "Signature verification failed.");
+                    XLog.e(TAG, "Signature verification failed.");
                     handleInvalidResponse();
                     return;
                 }
@@ -119,7 +119,7 @@ class LicenseValidator {
             } catch (SignatureException e) {
                 throw new RuntimeException(e);
             } catch (Base64DecoderException e) {
-                Log.e(TAG, "Could not Base64-decode signature.");
+                XLog.e(TAG, "Could not Base64-decode signature.");
                 handleInvalidResponse();
                 return;
             }
@@ -128,31 +128,31 @@ class LicenseValidator {
             try {
                 data = ResponseData.parse(signedData);
             } catch (IllegalArgumentException e) {
-                Log.e(TAG, "Could not parse response.");
+                XLog.e(TAG, "Could not parse response.");
                 handleInvalidResponse();
                 return;
             }
 
             if (data.responseCode != responseCode) {
-                Log.e(TAG, "Response codes don't match.");
+                XLog.e(TAG, "Response codes don't match.");
                 handleInvalidResponse();
                 return;
             }
 
             if (data.nonce != mNonce) {
-                Log.e(TAG, "Nonce doesn't match.");
+                XLog.e(TAG, "Nonce doesn't match.");
                 handleInvalidResponse();
                 return;
             }
 
             if (!data.packageName.equals(mPackageName)) {
-                Log.e(TAG, "Package name doesn't match.");
+                XLog.e(TAG, "Package name doesn't match.");
                 handleInvalidResponse();
                 return;
             }
 
             if (!data.versionCode.equals(mVersionCode)) {
-                Log.e(TAG, "Version codes don't match.");
+                XLog.e(TAG, "Version codes don't match.");
                 handleInvalidResponse();
                 return;
             }
@@ -160,7 +160,7 @@ class LicenseValidator {
             // Application-specific user identifier.
             userId = data.userId;
             if (TextUtils.isEmpty(userId)) {
-                Log.e(TAG, "User identifier is empty.");
+                XLog.e(TAG, "User identifier is empty.");
                 handleInvalidResponse();
                 return;
             }
@@ -176,15 +176,15 @@ class LicenseValidator {
                 handleResponse(Policy.NOT_LICENSED, data);
                 break;
             case ERROR_CONTACTING_SERVER:
-                Log.w(TAG, "Error contacting licensing server.");
+                XLog.w(TAG, "Error contacting licensing server.");
                 handleResponse(Policy.RETRY, data);
                 break;
             case ERROR_SERVER_FAILURE:
-                Log.w(TAG, "An error has occurred on the licensing server.");
+                XLog.w(TAG, "An error has occurred on the licensing server.");
                 handleResponse(Policy.RETRY, data);
                 break;
             case ERROR_OVER_QUOTA:
-                Log.w(TAG, "Licensing server is refusing to talk to this device, over quota.");
+                XLog.w(TAG, "Licensing server is refusing to talk to this device, over quota.");
                 handleResponse(Policy.RETRY, data);
                 break;
             case ERROR_INVALID_PACKAGE_NAME:
@@ -197,7 +197,7 @@ class LicenseValidator {
                 handleApplicationError(LicenseCheckerCallback.ERROR_NOT_MARKET_MANAGED);
                 break;
             default:
-                Log.e(TAG, "Unknown response code for license check.");
+                XLog.e(TAG, "Unknown response code for license check.");
                 handleInvalidResponse();
         }
     }

@@ -16,8 +16,9 @@
 
 package com.google.android.vending.licensing;
 
-import android.util.Log;
+import com.elvishew.xlog.XLog;
 import com.google.android.vending.licensing.util.URIQueryDecoder;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ import java.util.Map;
  */
 public class StrictPolicy implements Policy {
 
-    private static final String TAG = "StrictPolicy";
+    private static final String TAG = "StrictPolicy %s";
 
     private int mLastResponse;
     private String mLicensingUrl;
@@ -56,7 +57,7 @@ public class StrictPolicy implements Policy {
      * extra is still extracted in cases where the app is unlicensed.
      *
      * @param response the result from validating the server response
-     * @param rawData the raw server response data
+     * @param rawData  the raw server response data
      */
     public void processServerResponse(int response, ResponseData rawData) {
         mLastResponse = response;
@@ -69,7 +70,7 @@ public class StrictPolicy implements Policy {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * This implementation allows access if and only if a LICENSED response
      * was received the last time the server was contacted.
      */
@@ -82,7 +83,7 @@ public class StrictPolicy implements Policy {
     }
 
     private Map<String, String> decodeExtras(
-        com.google.android.vending.licensing.ResponseData rawData) {
+            com.google.android.vending.licensing.ResponseData rawData) {
         Map<String, String> results = new HashMap<String, String>();
         if (rawData == null) {
             return results;
@@ -92,7 +93,7 @@ public class StrictPolicy implements Policy {
             URI rawExtras = new URI("?" + rawData.extra);
             URIQueryDecoder.DecodeQuery(rawExtras, results);
         } catch (URISyntaxException e) {
-            Log.w(TAG, "Invalid syntax error while decoding extras data from server.");
+            XLog.w(TAG, "Invalid syntax error while decoding extras data from server.");
         }
         return results;
     }

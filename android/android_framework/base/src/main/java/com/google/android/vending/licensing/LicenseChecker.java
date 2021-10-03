@@ -28,10 +28,10 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.provider.Settings.Secure;
-import android.util.Log;
 
 import com.android.vending.licensing.ILicenseResultListener;
 import com.android.vending.licensing.ILicensingService;
+import com.elvishew.xlog.XLog;
 import com.google.android.vending.licensing.util.Base64;
 import com.google.android.vending.licensing.util.Base64DecoderException;
 
@@ -50,7 +50,7 @@ import java.util.Set;
 /**
  * Client library for Google Play license verifications.
  * <p>
- * The LicenseChecker is configured via a {@link Policy} which contains the logic to determine
+ * The LicenseChecker is configured via a {@link Policy} which contains the XLogic to determine
  * whether a user should have access to the application. For example, the Policy can define a
  * threshold for allowable number of server or client failures before the library reports the user
  * as not having access.
@@ -59,12 +59,12 @@ import java.util.Set;
  * public key is obtainable from the publisher site.
  */
 public class LicenseChecker implements ServiceConnection {
-    private static final String TAG = "LicenseChecker";
+    private static final String TAG = "LicenseChecker %s";
 
     private static final String KEY_FACTORY_ALGORITHM = "RSA";
 
     // Timeout value (in milliseconds) for calls to service.
-    private static final int TIMEOUT_MS = 10 * 1000;
+    private static final int TIMEOUT_MS = 30 * 1000;
 
     private static final SecureRandom RANDOM = new SecureRandom();
     private static final boolean DEBUG_LICENSE_ERROR = false;
@@ -85,8 +85,8 @@ public class LicenseChecker implements ServiceConnection {
     private final Queue<LicenseValidator> mPendingChecks = new LinkedList<LicenseValidator>();
 
     /**
-     * @param context a Context
-     * @param policy implementation of Policy
+     * @param context          a Context
+     * @param policy           implementation of Policy
      * @param encodedPublicKey Base64-encoded RSA public key
      * @throws IllegalArgumentException if encodedPublicKey is invalid
      */
@@ -117,10 +117,10 @@ public class LicenseChecker implements ServiceConnection {
             // This won't happen in an Android-compatible environment.
             throw new RuntimeException(e);
         } catch (Base64DecoderException e) {
-            Log.e(TAG, "Could not decode from Base64.");
+            XLog.e(TAG, "Could not decode from Base64.");
             throw new IllegalArgumentException(e);
         } catch (InvalidKeySpecException e) {
-            Log.e(TAG, "Invalid key specification.");
+            XLog.e(TAG, "Invalid key specification.");
             throw new IllegalArgumentException(e);
         }
     }
@@ -134,21 +134,21 @@ public class LicenseChecker implements ServiceConnection {
      * <p>
      * source string: "com.android.vending.licensing.ILicensingService"
      * <p>
-     * 
+     *
      * @param callback
      */
     public synchronized void checkAccess(LicenseCheckerCallback callback) {
         // If we have a valid recent LICENSED response, we can skip asking
         // Market.
         if (mPolicy.allowAccess()) {
-            Log.i(TAG, "Using cached license response");
+            XLog.i(TAG, "Using cached license response");
             callback.allow(Policy.LICENSED);
         } else {
             LicenseValidator validator = new LicenseValidator(mPolicy, new NullDeviceLimiter(),
                     callback, generateNonce(), mPackageName, mVersionCode);
 
             if (mService == null) {
-                Log.i(TAG, "Binding to licensing service.");
+                XLog.i(TAG, "Binding to licensing service.");
                 try {
                     boolean bindResult = mContext
                             .bindService(
@@ -158,37 +158,34 @@ public class LicenseChecker implements ServiceConnection {
                                                     // com.android.vending.licensing.ILicensingService
                                                     // Consider encoding this in another way in your
                                                     // code to improve security
-                                                    Base64.decode(
-                                                            "Y29tLmFuZHJvaWQudmVuZGluZy5saWNlbnNpbmcuSUxpY2Vuc2luZ1NlcnZpY2U=")))
-                                                                    // As of Android 5.0, implicit
-                                                                    // Service Intents are no longer
-                                                                    // allowed because it's not
-                                                                    // possible for the user to
-                                                                    // participate in disambiguating
-                                                                    // them. This does mean we break
-                                                                    // compatibility with Android
-                                                                    // Cupcake devices with this
-                                                                    // release, since setPackage was
-                                                                    // added in Donut.
-                                                                    .setPackage(
-                                                                            new String(
-                                                                                    // Base64
-                                                                                    // encoded -
-                                                                                    // com.android.vending
-                                                                                    Base64.decode(
-                                                                                            "Y29tLmFuZHJvaWQudmVuZGluZw=="))),
+                                                    Base64.decode("Y29tLmFuZHJvaWQudmVuZGluZy5saWNlbnNpbmcuSUxpY2Vuc2luZ1NlcnZpY2U=")))
+                                            // As of Android 5.0, implicit
+                                            // Service Intents are no longer
+                                            // allowed because it's not
+                                            // possible for the user to
+                                            // participate in disambiguating
+                                            // them. This does mean we break
+                                            // compatibility with Android
+                                            // Cupcake devices with this
+                                            // release, since setPackage was
+                                            // added in Donut.
+                                            .setPackage(new String(
+                                                    // Base64
+                                                    // encoded -
+                                                    // com.android.vending
+                                                    Base64.decode("Y29tLmFuZHJvaWQudmVuZGluZw=="))),
                                     this, // ServiceConnection.
                                     Context.BIND_AUTO_CREATE);
                     if (bindResult) {
                         mPendingChecks.offer(validator);
                     } else {
-                        Log.e(TAG, "Could not bind to service.");
+                        XLog.e(TAG, "Could not bind to service.");
                         handleServiceConnectionError(validator);
                     }
                 } catch (SecurityException e) {
                     callback.applicationError(LicenseCheckerCallback.ERROR_MISSING_PERMISSION);
                 } catch (Base64DecoderException e) {
-                    e.printStackTrace();
+                    XLog.e(e, "checkAccess");
                 }
             } else {
                 mPendingChecks.offer(validator);
@@ -219,13 +216,13 @@ public class LicenseChecker implements ServiceConnection {
         LicenseValidator validator;
         while ((validator = mPendingChecks.poll()) != null) {
             try {
-                Log.i(TAG, "Calling checkLicense on service for " + validator.getPackageName());
+                XLog.i(TAG, "Calling checkLicense on service for " + validator.getPackageName());
                 mService.checkLicense(
                         validator.getNonce(), validator.getPackageName(),
                         new ResultListener(validator));
                 mChecksInProgress.add(validator);
             } catch (RemoteException e) {
-                Log.w(TAG, "RemoteException in checkLicense call.", e);
+                XLog.w(TAG, "RemoteException in checkLicense call." + e);
                 handleServiceConnectionError(validator);
             }
         }
@@ -246,7 +243,7 @@ public class LicenseChecker implements ServiceConnection {
             mValidator = validator;
             mOnTimeout = new Runnable() {
                 public void run() {
-                    Log.i(TAG, "Check timed out.");
+                    XLog.i(TAG, "Check timed out.");
                     handleServiceConnectionError(mValidator);
                     finishCheck(mValidator);
                 }
@@ -261,10 +258,10 @@ public class LicenseChecker implements ServiceConnection {
         // Runs in IPC thread pool. Post it to the Handler, so we can guarantee
         // either this or the timeout runs.
         public void verifyLicense(final int responseCode, final String signedData,
-                final String signature) {
+                                  final String signature) {
             mHandler.post(new Runnable() {
                 public void run() {
-                    Log.i(TAG, "Received response.");
+                    XLog.i(TAG, "Received response.");
                     // Make sure it hasn't already timed out.
                     if (mChecksInProgress.contains(mValidator)) {
                         clearTimeout();
@@ -272,32 +269,32 @@ public class LicenseChecker implements ServiceConnection {
                         finishCheck(mValidator);
                     }
                     if (DEBUG_LICENSE_ERROR) {
-                        boolean logResponse;
+                        boolean XLogResponse;
                         String stringError = null;
                         switch (responseCode) {
                             case ERROR_CONTACTING_SERVER:
-                                logResponse = true;
+                                XLogResponse = true;
                                 stringError = "ERROR_CONTACTING_SERVER";
                                 break;
                             case ERROR_INVALID_PACKAGE_NAME:
-                                logResponse = true;
+                                XLogResponse = true;
                                 stringError = "ERROR_INVALID_PACKAGE_NAME";
                                 break;
                             case ERROR_NON_MATCHING_UID:
-                                logResponse = true;
+                                XLogResponse = true;
                                 stringError = "ERROR_NON_MATCHING_UID";
                                 break;
                             default:
-                                logResponse = false;
+                                XLogResponse = false;
                         }
 
-                        if (logResponse) {
+                        if (XLogResponse) {
                             String android_id = Secure.getString(mContext.getContentResolver(),
                                     Secure.ANDROID_ID);
                             Date date = new Date();
-                            Log.d(TAG, "Server Failure: " + stringError);
-                            Log.d(TAG, "Android ID: " + android_id);
-                            Log.d(TAG, "Time: " + date.toGMTString());
+                            XLog.d(TAG, "Server Failure: " + stringError);
+                            XLog.d(TAG, "Android ID: " + android_id);
+                            XLog.d(TAG, "Time: " + date.toGMTString());
                         }
                     }
 
@@ -306,12 +303,12 @@ public class LicenseChecker implements ServiceConnection {
         }
 
         private void startTimeout() {
-            Log.i(TAG, "Start monitoring timeout.");
+            XLog.i(TAG, "Start monitoring timeout.");
             mHandler.postDelayed(mOnTimeout, TIMEOUT_MS);
         }
 
         private void clearTimeout() {
-            Log.i(TAG, "Clearing timeout.");
+            XLog.i(TAG, "Clearing timeout.");
             mHandler.removeCallbacks(mOnTimeout);
         }
     }
@@ -325,7 +322,7 @@ public class LicenseChecker implements ServiceConnection {
         // Called when the connection with the service has been
         // unexpectedly disconnected. That is, Market crashed.
         // If there are any checks in progress, the timeouts will handle them.
-        Log.w(TAG, "Service unexpectedly disconnected.");
+        XLog.w(TAG, "Service unexpectedly disconnected.");
         mService = null;
     }
 
@@ -343,7 +340,9 @@ public class LicenseChecker implements ServiceConnection {
         }
     }
 
-    /** Unbinds service if necessary and removes reference to it. */
+    /**
+     * Unbinds service if necessary and removes reference to it.
+     */
     private void cleanupService() {
         if (mService != null) {
             try {
@@ -351,7 +350,7 @@ public class LicenseChecker implements ServiceConnection {
             } catch (IllegalArgumentException e) {
                 // Somehow we've already been unbound. This is a non-fatal
                 // error.
-                Log.e(TAG, "Unable to unbind from licensing service (already unbound)");
+                XLog.e(TAG, "Unable to unbind from licensing service (already unbound)");
             }
             mService = null;
         }
@@ -370,7 +369,9 @@ public class LicenseChecker implements ServiceConnection {
         mHandler.getLooper().quit();
     }
 
-    /** Generates a nonce (number used once). */
+    /**
+     * Generates a nonce (number used once).
+     */
     private int generateNonce() {
         return RANDOM.nextInt();
     }
@@ -387,7 +388,7 @@ public class LicenseChecker implements ServiceConnection {
             return String.valueOf(
                     context.getPackageManager().getPackageInfo(packageName, 0).versionCode);
         } catch (NameNotFoundException e) {
-            Log.e(TAG, "Package not found. could not get version code.");
+            XLog.e(TAG, "Package not found. could not get version code.");
             return "";
         }
     }

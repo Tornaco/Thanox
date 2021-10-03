@@ -163,24 +163,22 @@
 
                 </com.google.android.material.chip.ChipGroup>
             </RelativeLayout>
-
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/common_view_margin_default"
-                android:text="@string/common_fab_title_done"
-                android:textColor="@color/md_white"
-                android:tint="@color/md_white"
-                app:backgroundTint="?colorAccent"
-                app:icon="@drawable/module_common_ic_check_fill_white"
-                app:iconTint="@color/md_white"
-                tools:ignore="RelativeOverlap" />
-
         </RelativeLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/common_view_margin_default"
+            android:text="@string/common_fab_title_done"
+            android:textColor="@color/md_white"
+            android:tint="@color/md_white"
+            app:backgroundTint="?colorAccent"
+            app:icon="@drawable/module_common_ic_check_fill_white"
+            app:iconTint="@color/md_white"
+            tools:ignore="RelativeOverlap" />
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -43,16 +43,18 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:background="?cardsBackgroundColor"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <FrameLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?cardsBackgroundColor" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/common_view_margin_default">
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/guide"
@@ -60,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@id/fab"
                 android:layout_alignParentEnd="true"
-                android:layout_margin="@dimen/common_view_margin_default"
+                android:layout_marginBottom="@dimen/common_view_margin_default"
                 android:text="@string/common_menu_title_wiki"
                 android:textColor="@color/md_white"
                 android:tint="@color/md_white"
@@ -74,7 +76,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/common_view_margin_default"
                 android:text="@string/nav_title_feedback"
                 android:textColor="@color/md_white"
                 android:tint="@color/md_white"

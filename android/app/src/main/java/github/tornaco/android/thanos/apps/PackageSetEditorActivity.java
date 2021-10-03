@@ -74,7 +74,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
   protected void onSetupFilter(Chip filterAnchor) {
     super.onSetupFilter(filterAnchor);
     filterAnchor.setVisibility(View.GONE);
-    setTitle(getTitleRes());
+    setTitle(getTitleString());
   }
 
   @Override

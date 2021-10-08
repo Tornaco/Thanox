@@ -6,15 +6,71 @@ import android.os.UserHandle
 import com.elvishew.xlog.XLog
 import com.google.common.io.Files
 import github.tornaco.android.thanos.BuildProp
-import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor
+import lang3.RandomStringUtils
 import java.io.File
+import java.util.concurrent.atomic.AtomicBoolean
 
 object T {
+    const val THANOS_BASE_SERVER_DIR_NAME = "thanos"
+
+    private val baseServerDirInitialized = AtomicBoolean(false)
+    private var baseServerDir: File? = null
+
+    private fun baseServerDirMayInit(): File {
+        if (baseServerDirInitialized.get()) {
+            return baseServerDir!!
+        }
+
+        val legacyBaseServerDir = legacyBaseServerDir()
+
+        // Rename to random one for legacy.
+        if (legacyBaseServerDir.exists()) {
+            with(randomBaseServerDir()) {
+                if (legacyBaseServerDir.renameTo(this)) {
+                    XLog.i("baseServerDirMayInit, rename to: $this")
+                } else {
+                    val deleted = legacyBaseServerDir.deleteRecursively()
+                    XLog.w("baseServerDirMayInit, rename to: $this failed. deleted it anyway, deleted? $deleted")
+                }
+            }
+        }
+
+        // Search any existing
+        systemDir().listFiles()?.forEach {
+            if (it.isDirectory && it.name.startsWith(THANOS_BASE_SERVER_DIR_NAME)) {
+                XLog.i("baseServerDirMayInit, found thanos dir: $it")
+                baseServerDir = it
+            }
+        }
+
+        if (baseServerDir == null) {
+            baseServerDir = randomBaseServerDir()
+            XLog.i("baseServerDirMayInit, new random dir: $baseServerDir")
+        }
+
+        baseServerDirInitialized.set(true)
+        XLog.i("baseServerDirMayInit, finally we will use: $baseServerDir")
+        return baseServerDir!!
+    }
+
+    private fun randomBaseServerDir(): File {
+        return File(
+            systemDir(),
+            "${THANOS_BASE_SERVER_DIR_NAME}_${RandomStringUtils.randomAlphabetic(16)}"
+        )
+    }
+
+    private fun legacyBaseServerDir(): File {
+        return File(systemDir(), THANOS_BASE_SERVER_DIR_NAME)
+    }
+
+    private fun systemDir(): File {
+        return File(Environment.getDataDirectory(), "system")
+    }
 
     @JvmStatic
     fun baseServerDir(): File {
-        val systemFile = File(Environment.getDataDirectory(), "system")
-        return File(systemFile, "thanos")
+        return baseServerDirMayInit()
     }
 
     @JvmStatic
@@ -266,7 +322,7 @@ object T {
         // Server Settings.
         @JvmField
         val PREF_BY_PASS_SYSTEM_APPS_ENABLED =
-                ThanosFeature("PREF_BY_PASS_SYSTEM_APPS_ENABLED", true)
+            ThanosFeature("PREF_BY_PASS_SYSTEM_APPS_ENABLED", true)
 
         @JvmField
         val PREF_START_BLOCKER_ENABLED = ThanosFeature("PREF_START_BLOCKER_ENABLED", false)
@@ -279,128 +335,130 @@ object T {
 
         @JvmField
         val PREF_BG_TASK_CLEAN_UP_SKIP_AUDIO_FOCUSED =
-                ThanosFeature("PREF_BG_TASK_CLEAN_UP_SKIP_AUDIO_FOCUSED", false)
+            ThanosFeature("PREF_BG_TASK_CLEAN_UP_SKIP_AUDIO_FOCUSED", false)
 
         @JvmField
         val PREF_BG_TASK_CLEAN_UP_SKIP_NOTIFICATION =
-                ThanosFeature("PREF_BG_TASK_CLEAN_UP_SKIP_NOTIFICATION", false)
+            ThanosFeature("PREF_BG_TASK_CLEAN_UP_SKIP_NOTIFICATION", false)
 
         @JvmField
         val PREF_BG_TASK_CLEAN_UP_DELAY_MILLS =
-                ThanosFeature("PREF_BG_TASK_CLEAN_UP_DELAY_MILLS", 0L /*Noop*/)
+            ThanosFeature("PREF_BG_TASK_CLEAN_UP_DELAY_MILLS", 0L /*Noop*/)
 
         @JvmField
         val PREF_BG_TASK_CLEAN_UP_SKIP_WHEN_HAS_RECENT_TASK =
-                ThanosFeature("PREF_BG_TASK_CLEAN_UP_SKIP_WHEN_HAS_RECENT_TASK", false)
+            ThanosFeature("PREF_BG_TASK_CLEAN_UP_SKIP_WHEN_HAS_RECENT_TASK", false)
 
         @JvmField
         val PREF_CLEAN_UP_ON_TASK_REMOVED = ThanosFeature("PREF_CLEAN_UP_ON_TASK_REMOVED", false)
 
         @JvmField
         val PREF_SHOW_BG_RESTRICT_APPS_NOTIFICATION_ENABLED =
-                ThanosFeature("PREF_SHOW_BG_RESTRICT_APPS_NOTIFICATION_ENABLED", false)
+            ThanosFeature("PREF_SHOW_BG_RESTRICT_APPS_NOTIFICATION_ENABLED", false)
 
         @JvmField
         val PREF_RECENT_TASK_BLUR_ENABLED =
-                ThanosFeature("PREF_RECENT_TASK_BLUR_ENABLED", false)
+            ThanosFeature("PREF_RECENT_TASK_BLUR_ENABLED", false)
 
         @JvmField
         @Deprecated("Use v2 instead.")
         val PREF_SMART_STANDBY_ENABLED =
-                ThanosFeature("PREF_SMART_STANDBY_ENABLED", false)
+            ThanosFeature("PREF_SMART_STANDBY_ENABLED", false)
 
         @JvmField
         val PREF_SMART_STANDBY_V2_ENABLED =
-                ThanosFeature("PREF_SMART_STANDBY_V2_ENABLED", false)
+            ThanosFeature("PREF_SMART_STANDBY_V2_ENABLED", false)
 
         @JvmField
         val PREF_SMART_STANDBY_STOP_SERVICE_ENABLED =
-                ThanosFeature("PREF_SMART_STANDBY_STOP_SERVICE_ENABLED", false)
+            ThanosFeature("PREF_SMART_STANDBY_STOP_SERVICE_ENABLED", false)
 
         @JvmField
         val PREF_SMART_STANDBY_INACTIVE_ENABLED =
-                ThanosFeature("PREF_SMART_STANDBY_INACTIVE_ENABLED", true)
+            ThanosFeature("PREF_SMART_STANDBY_INACTIVE_ENABLED", true)
 
         @JvmField
         val PREF_SMART_STANDBY_BY_PASS_IF_HAS_N_ENABLED =
-                ThanosFeature("PREF_SMART_STANDBY_BY_PASS_IF_HAS_N_ENABLED", false)
+            ThanosFeature("PREF_SMART_STANDBY_BY_PASS_IF_HAS_N_ENABLED", false)
 
         @JvmField
         val PREF_SMART_STANDBY_BY_BLOCK_BG_SERVICE_START_ENABLED =
-                ThanosFeature("PREF_SMART_STANDBY_BY_BLOCK_BG_SERVICE_START_ENABLED", false)
+            ThanosFeature("PREF_SMART_STANDBY_BY_BLOCK_BG_SERVICE_START_ENABLED", false)
 
         @JvmField
         val PREF_SMART_STANDBY_RULE_ENABLED =
-                ThanosFeature("PREF_SMART_STANDBY_RULE_ENABLED", false)
+            ThanosFeature("PREF_SMART_STANDBY_RULE_ENABLED", false)
 
         @JvmField
         val PREF_NET_STAT_TRACKER_ENABLED =
-                ThanosFeature("PREF_NET_STAT_TRACKER_ENABLED", false)
+            ThanosFeature("PREF_NET_STAT_TRACKER_ENABLED", false)
 
         // No toggle.
         @JvmField
         val PREF_SMART_FREEZE_ENABLED =
-                ThanosFeature("PREF_SMART_FREEZE_ENABLED", true)
+            ThanosFeature("PREF_SMART_FREEZE_ENABLED", true)
 
         @JvmField
         val PREF_SMART_FREEZE_SCREEN_OFF_CHECK_ENABLED =
-                ThanosFeature("PREF_SMART_FREEZE_SCREEN_OFF_CHECK_ENABLED", false)
+            ThanosFeature("PREF_SMART_FREEZE_SCREEN_OFF_CHECK_ENABLED", false)
 
         @JvmField
         val PREF_SMART_FREEZE_HIDE_PACKAGE_CHANGE_EVENT_ENABLED =
-                ThanosFeature("PREF_SMART_FREEZE_HIDE_PACKAGE_CHANGE_EVENT_ENABLED", false)
+            ThanosFeature("PREF_SMART_FREEZE_HIDE_PACKAGE_CHANGE_EVENT_ENABLED", false)
 
         @JvmField
         val PREF_SMART_FREEZE_SCREEN_OFF_CHECK_DELAY_MILLS =
-                ThanosFeature("PREF_SMART_FREEZE_SCREEN_OFF_CHECK_DELAY_MILLS", 0L /*Noop*/)
+            ThanosFeature("PREF_SMART_FREEZE_SCREEN_OFF_CHECK_DELAY_MILLS", 0L /*Noop*/)
 
         @JvmField
         val PREF_ACTIVITY_TRAMPOLINE_ENABLED =
-                ThanosFeature("PREF_ACTIVITY_TRAMPOLINE_ENABLED", false)
+            ThanosFeature("PREF_ACTIVITY_TRAMPOLINE_ENABLED", false)
 
         @JvmField
         val PREF_SHOW_CURRENT_ACTIVITY_COMPONENT_ENABLED =
-                ThanosFeature("PREF_SHOW_CURRENT_ACTIVITY_COMPONENT_ENABLED", false)
+            ThanosFeature("PREF_SHOW_CURRENT_ACTIVITY_COMPONENT_ENABLED", false)
 
         @JvmField
         val PREF_APP_LOCK_ENABLED = ThanosFeature("PREF_APP_LOCK_ENABLED", false)
 
         @JvmField
         val PREF_APP_LOCK_VERIFY_ON_SCREEN_OFF =
-                ThanosFeature("PREF_APP_LOCK_VERIFY_ON_SCREEN_OFF", true)
+            ThanosFeature("PREF_APP_LOCK_VERIFY_ON_SCREEN_OFF", true)
 
         @JvmField
         val PREF_APP_LOCK_VERIFY_ON_APP_SWITCH =
-                ThanosFeature("PREF_APP_LOCK_VERIFY_ON_APP_SWITCH", false)
+            ThanosFeature("PREF_APP_LOCK_VERIFY_ON_APP_SWITCH", false)
 
         @JvmField
         val PREF_APP_LOCK_VERIFY_ON_TASK_REMOVED =
-                ThanosFeature("PREF_APP_LOCK_VERIFY_ON_TASK_REMOVED", true)
+            ThanosFeature("PREF_APP_LOCK_VERIFY_ON_TASK_REMOVED", true)
 
         @JvmField
         val PREF_APP_LOCK_FP_ENABLED = ThanosFeature("PREF_APP_LOCK_FP_ENABLED", false)
 
         @JvmField
         val PREF_APP_LOCK_WORKAROUND_ENABLED =
-                ThanosFeature("PREF_APP_LOCK_WORKAROUND_ENABLED", false)
+            ThanosFeature("PREF_APP_LOCK_WORKAROUND_ENABLED", false)
 
         @JvmField
         val PREF_PRIVACY_ENABLED = ThanosFeature("PREF_PRIVACY_ENABLED", false)
 
         @JvmField
         val PREF_SCREEN_ON_NOTIFICATION_ENABLED =
-                ThanosFeature("PREF_SCREEN_ON_NOTIFICATION_ENABLED", false)
+            ThanosFeature("PREF_SCREEN_ON_NOTIFICATION_ENABLED", false)
 
         @JvmField
         val PREF_PERSIST_ON_NEW_NOTIFICATION_ENABLED =
-                ThanosFeature("PREF_PERSIST_ON_NEW_NOTIFICATION_ENABLED", false)
+            ThanosFeature("PREF_PERSIST_ON_NEW_NOTIFICATION_ENABLED", false)
 
         @JvmField
         val PREF_SHOW_TOAST_APP_INFO_ENABLED =
             ThanosFeature("PREF_SHOW_TOAST_APP_INFO_ENABLED", false)
+
         @JvmField
         val PREF_NR_N_ENABLED =
             ThanosFeature("PREF_NR_N_ENABLED", true)
+
         @JvmField
         val PREF_NR_T_ENABLED =
             ThanosFeature("PREF_NR_T_ENABLED", true)
@@ -410,46 +468,47 @@ object T {
 
         @JvmField
         val PREF_AUTO_CONFIG_NEW_INSTALLED_APPS_ENABLED =
-                ThanosFeature("PREF_AUTO_CONFIG_NEW_INSTALLED_APPS_ENABLED", false)
+            ThanosFeature("PREF_AUTO_CONFIG_NEW_INSTALLED_APPS_ENABLED", false)
 
         @JvmField
         val PREF_PROFILE_AUTO_CONFIG_TEMPLATE_SELECTION_ID =
-                ThanosFeature("PREF_PROFILE_AUTO_CONFIG_TEMPLATE_SELECTION_ID", null)
+            ThanosFeature("PREF_PROFILE_AUTO_CONFIG_TEMPLATE_SELECTION_ID", null)
 
         @JvmField
         val PREF_PROFILE_ENABLED =
-                ThanosFeature("PREF_PROFILE_ENABLED", false)
+            ThanosFeature("PREF_PROFILE_ENABLED", false)
 
         @JvmField
         val PREF_PROFILE_SU_ENABLED =
-                ThanosFeature("PREF_PROFILE_SU_ENABLED", false)
+            ThanosFeature("PREF_PROFILE_SU_ENABLED", false)
 
         @JvmField
         @Deprecated("Not supported any more.")
         val PREF_PROFILE_ENGINE_UI_AUTOMATION_ENABLED =
-                ThanosFeature("PREF_PROFILE_ENGINE_UI_AUTOMATION_ENABLED", false)
+            ThanosFeature("PREF_PROFILE_ENGINE_UI_AUTOMATION_ENABLED", false)
 
         @JvmField
         val PREF_PROFILE_ENGINE_PUSH_ENABLED =
-                ThanosFeature("PREF_PROFILE_ENGINE_PUSH_ENABLED", false)
+            ThanosFeature("PREF_PROFILE_ENGINE_PUSH_ENABLED", false)
 
         @JvmField
         val PREF_OPS_ENABLED = ThanosFeature("PREF_OPS_ENABLED", false)
 
         @JvmField
-        val PREF_OPS_HAS_MIGRATE_TO_ANDROID_S = ThanosFeature("PREF_OPS_HAS_MIGRATE_TO_ANDROID_S", false)
+        val PREF_OPS_HAS_MIGRATE_TO_ANDROID_S =
+            ThanosFeature("PREF_OPS_HAS_MIGRATE_TO_ANDROID_S", false)
 
         @JvmField
         val PREF_FIRST_ACTIVATE =
-                ThanosFeature("PREF_FIRST_ACTIVATE_" + BuildProp.THANOS_BUILD_FINGERPRINT, true)
+            ThanosFeature("PREF_FIRST_ACTIVATE_" + BuildProp.THANOS_BUILD_FINGERPRINT, true)
 
         @JvmField
         val PREF_PROTECTED_WHITE_LIST_ENABLED =
-                ThanosFeature("PREF_PROTECTED_WHITE_LIST_ENABLED", true)
+            ThanosFeature("PREF_PROTECTED_WHITE_LIST_ENABLED", true)
 
         @JvmField
         val PREF_POWER_SAVE_ENABLED =
-                ThanosFeature("PREF_POWER_SAVE_ENABLED", false)
+            ThanosFeature("PREF_POWER_SAVE_ENABLED", false)
 
         @JvmField
         val PREF_GEN_DID =
@@ -460,18 +519,18 @@ object T {
         const val ACTION_FRONT_PKG_CHANGED = "thanox.a.front_pkg.changed"
         const val ACTION_FRONT_ACTIVITY_CHANGED = "thanox.a.front_activity.changed"
         const val ACTION_FRONT_PKG_CHANGED_EXTRA_PACKAGE_FROM =
-                "thanox.a.extra.front_activity.changed.pkg.from"
+            "thanox.a.extra.front_activity.changed.pkg.from"
         const val ACTION_FRONT_PKG_CHANGED_EXTRA_PACKAGE_TO =
-                "thanox.a.extra.front_activity.changed.pkg.to"
+            "thanox.a.extra.front_activity.changed.pkg.to"
 
         const val ACTION_ACTIVITY_RESUMED = "thanox.a.activity.resumed"
         const val ACTION_ACTIVITY_RESUMED_EXTRA_COMPONENT_NAME =
-                "thanox.a.activity.resumed.extra.name"
+            "thanox.a.activity.resumed.extra.name"
         const val ACTION_ACTIVITY_RESUMED_EXTRA_PACKAGE_NAME = "thanox.a.activity.resumed.extra.pkg"
 
         const val ACTION_ACTIVITY_CREATED = "thanox.a.activity.created"
         const val ACTION_ACTIVITY_CREATED_EXTRA_COMPONENT_NAME =
-                "thanox.a.activity.created.extra.name"
+            "thanox.a.activity.created.extra.name"
         const val ACTION_ACTIVITY_CREATED_EXTRA_PACKAGE_NAME = "thanox.a.activity.created.extra.pkg"
 
         const val ACTION_PACKAGE_STOPPED = "thanox.a.package.stopped"
@@ -487,7 +546,7 @@ object T {
         const val ACTION_RESTART_DEVICE = "thanox.a.device.restart"
 
         const val ACTION_LOCKER_VERIFY_ACTION =
-                "github.tornaco.practice.honeycomb.locker.action.VERIFY"
+            "github.tornaco.practice.honeycomb.locker.action.VERIFY"
         const val ACTION_LOCKER_VERIFY_EXTRA_PACKAGE = "pkg"
         const val ACTION_LOCKER_VERIFY_EXTRA_REQUEST_CODE = "request_code"
     }

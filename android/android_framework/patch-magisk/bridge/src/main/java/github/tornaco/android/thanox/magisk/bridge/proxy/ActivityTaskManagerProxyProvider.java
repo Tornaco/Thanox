@@ -90,8 +90,8 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                     .getActivityStackSupervisor()
                     .reportOnStartActivity(callingPackage, intent);
             if (realIntent != null) {
-                XLog.d("handleStartActivity, Replacing Intent");
-                args[intentIndex] = realIntent;
+                XLog.d("handleStartActivity, Replacing Intent component");
+                intent.setComponent(realIntent.getComponent());
             }
         }
     }

@@ -66,8 +66,6 @@ public class UsageStatsManagerInternalHooks {
 
         @Override
         public Object invoke(Object o, Method method, Object[] args) throws Throwable {
-            XLog.d("UsageStatsManagerInternalHooks %s %s", method, Arrays.toString(args));
-
             // public abstract void reportEvent(ComponentName component,
             // @UserIdInt int userId, int eventType, int instanceId, ComponentName taskRoot);
             if (XposedHelpersExt.matchMethodNameAndArgs(method, "reportEvent",

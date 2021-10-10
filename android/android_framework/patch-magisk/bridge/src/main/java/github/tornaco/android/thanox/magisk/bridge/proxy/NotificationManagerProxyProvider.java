@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.n.NotificationRecord;
+import util.ExceptionTransformedInvocationHandler;
 
 public class NotificationManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
     @Override

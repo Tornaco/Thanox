@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge.proxy;
+package util;
 
 import android.os.RemoteException;
 import android.util.Log;
@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public interface ExceptionTransformedInvocationHandler {
+
     default Object tryInvoke(Object proxy, Method method, Object[] args)
             throws Throwable {
         try {

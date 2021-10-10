@@ -3,6 +3,7 @@ package github.tornaco.thanox.android.server.patch.framework.hooks.am;
 import static github.tornaco.thanox.android.server.patch.framework.hooks.am.ActiveServicesHooks.attachActiveServices;
 import static github.tornaco.thanox.android.server.patch.framework.hooks.am.AppExitInfoTrackerHooks.installAppExitInfoTracker;
 import static github.tornaco.thanox.android.server.patch.framework.hooks.am.IFWHooks.installIFW;
+import static github.tornaco.thanox.android.server.patch.framework.hooks.app.usage.UsageStatsManagerInternalHooks.installUsageStatsService;
 
 import com.android.server.am.ActivityManagerService;
 import com.elvishew.xlog.XLog;
@@ -31,6 +32,7 @@ public class AMSHooks {
                         attachActiveServices(ams);
                         installIFW(ams);
                         installAppExitInfoTracker(ams);
+                        installUsageStatsService(ams);
                     });
 
         } catch (Throwable e) {

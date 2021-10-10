@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.util.PkgUtils;
+import util.ExceptionTransformedInvocationHandler;
 import util.ObjectsUtils;
 
 public class ActivityTaskManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {

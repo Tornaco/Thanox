@@ -7,7 +7,6 @@ import android.content.pm.ApplicationInfo;
 
 import com.elvishew.xlog.XLog;
 
-import github.tornaco.android.thanox.magisk.bridge.proxy.ActivityThreadProxy;
 import github.tornaco.android.thanox.magisk.bridge.proxy.SystemServiceRegistryHookInstaller;
 
 public class ProcessHookInstaller implements ProcessHandler {
@@ -40,7 +39,6 @@ public class ProcessHookInstaller implements ProcessHandler {
         }
 
         AppProcessSystemServiceHookInstaller.install();
-        ActivityThreadProxy.install();
     }
 
     @Override

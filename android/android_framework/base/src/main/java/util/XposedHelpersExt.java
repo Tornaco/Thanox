@@ -113,4 +113,11 @@ public class XposedHelpersExt {
     }
     throw new NoSuchFieldException(Arrays.toString(potentialFieldNames));
   }
+
+  public static boolean matchMethodNameAndArgs(Method methodToCheck, String methodNameExpected, Class<?>... argTypesExpected) {
+    if (!methodNameExpected.equals(methodToCheck.getName())){
+      return false;
+    }
+    return Arrays.equals(methodToCheck.getParameterTypes(), argTypesExpected);
+  }
 }

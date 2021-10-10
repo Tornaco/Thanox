@@ -13,6 +13,7 @@ import java.util.Arrays;
 import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.util.PkgUtils;
+import util.ExceptionTransformedInvocationHandler;
 
 public class AppOpsManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
     private static final boolean DEBUG_OPS = false;

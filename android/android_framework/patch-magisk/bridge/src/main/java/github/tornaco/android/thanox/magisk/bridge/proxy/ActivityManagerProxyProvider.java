@@ -10,6 +10,8 @@ import com.elvishew.xlog.XLog;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
+import util.ExceptionTransformedInvocationHandler;
+
 public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
     private static final boolean DEBUG_AMS = false;
 

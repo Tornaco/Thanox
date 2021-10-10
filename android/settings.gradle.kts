@@ -1,3 +1,18 @@
+@file:Suppress("UnstableApiUsage")
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+        jcenter()
+        maven(url = "https://jitpack.io")
+        maven(url = "https://oss.sonatype.org/content/repositories/snapshots")
+    }
+}
+
+
 rootProject.name = "Thanox"
 
 include(":app")
@@ -74,5 +89,5 @@ internalProjects.forEach {
     println("internalProject: $it")
     include(it)
     project(it).projectDir =
-        file("internal/Thanox-Internal${it.replace(File.pathSeparator, File.separator)}")
+        file("internal/Thanox-Internal${it.replace(":", File.separator)}")
 }

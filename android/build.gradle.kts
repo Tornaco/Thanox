@@ -8,16 +8,12 @@ buildscript {
         google()
         mavenCentral()
         mavenLocal()
-        jcenter()
-        maven(url = "https://jitpack.io")
-        maven(url = "https://oss.sonatype.org/content/repositories/snapshots")
     }
 
     dependencies {
         classpath(tornaco.project.android.thanox.ClassPaths.gradlePlugin)
         classpath(tornaco.project.android.thanox.ClassPaths.kotlinPlugin)
         classpath(tornaco.project.android.thanox.Libs.Hilt.gradlePlugin)
-        classpath(tornaco.project.android.thanox.Libs.ThanoxInternal.rhinoGradlePlugin)
         classpath(tornaco.project.android.thanox.Libs.ThanoxInternal.nitroGradlePlugin)
     }
 }
@@ -48,13 +44,11 @@ log("thanoxVersionCode: $thanoxVersionCode")
 log("thanoxVersionName: $thanoxVersionName")
 
 subprojects {
+    log("subprojects: ${this.name}")
     repositories {
         google()
         mavenCentral()
         mavenLocal()
-        jcenter()
-        maven(url = "https://jitpack.io")
-        maven(url = "https://oss.sonatype.org/content/repositories/snapshots")
     }
 
     apply(plugin = "com.diffplug.spotless")

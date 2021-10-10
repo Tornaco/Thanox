@@ -13,6 +13,7 @@ object Configs {
     const val minSdkVersion = 26
     const val targetSdkVersion = 31
     const val buildToolsVersion = "31.0.0-rc5"
+    const val ndkVersion = "21.1.6352462"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     var thanoxVersionCode: Int? = 0

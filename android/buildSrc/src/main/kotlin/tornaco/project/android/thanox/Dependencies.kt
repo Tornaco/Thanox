@@ -170,12 +170,15 @@ object Libs {
     object ThanoxInternal {
         const val version = "1.0.0-SNAPSHOT"
 
-        private const val groupRhino = "github.tornaco.android.thanos.rhino-verify"
+        const val groupRhino = "github.tornaco.android.thanos.rhino-verify"
+        const val artifactRhinoAnnotations = "rhino_annotations"
+
         const val groupNitro = "github.tornaco.android.thanos.nitro"
         const val artifactNitro = "nitro_gradle_plugin"
 
-        const val rhinoAnnotations = "$groupRhino:rhino_annotations:$version"
+        const val rhinoAnnotations = "$groupRhino:$artifactRhinoAnnotations:$version"
         const val rhinoGradlePlugin = "$groupRhino:rhino_plugin_stub_gen:$version"
+
         const val nitroGradlePlugin = "$groupNitro:$artifactNitro:$version"
     }
 }

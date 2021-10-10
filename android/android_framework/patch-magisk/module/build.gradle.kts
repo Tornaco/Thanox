@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.daemon.common.toHexString
 import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.magiskModuleBuildDir
+import tornaco.project.android.thanox.Configs.ndkVersion
 import tornaco.project.android.thanox.Configs.outDir
 import tornaco.project.android.thanox.MagiskModConfigs
 import tornaco.project.android.thanox.MagiskModConfigs.magiskModuleId
@@ -69,6 +70,7 @@ android {
         dataBinding = false
         prefab = true
     }
+    ndkVersion = Configs.ndkVersion
 }
 
 repositories {
@@ -157,7 +159,7 @@ afterEvaluate {
 
             val nativeOutDir = file("$buildDir/intermediates/cmake/${variant.name}/obj")
             log("nativeOutDir: $nativeOutDir")
-            log("nativeOutDir: ${nativeOutDir.list()?.map { it }}")
+            log("nativeOutDir list: ${nativeOutDir.list()?.map { it }}")
 
             doLast {
                 copy {

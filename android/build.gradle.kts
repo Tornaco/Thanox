@@ -27,7 +27,7 @@ plugins {
 androidGitVersion {
     prefix = "v"
     codeFormat = "MMNNPP"
-    baseCode = 3030124
+    baseCode = 3030134
     // 1000000
     // 191011
     // First rel version
@@ -35,6 +35,7 @@ androidGitVersion {
     // 2041540
     // 3030123
     // 3030124 Catch up with row
+    // 3030134 3.0 final
 }
 
 thanoxVersionCode = androidGitVersion.code()

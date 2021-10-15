@@ -158,8 +158,10 @@ title: 情景模式（Profile）
 
 通常一个应用的活动页已经创建好，可以称为**Activity Created**。此时thanox也会发布这个事实，参数如下。
 通常一个活动的生命周期为Created（创建好）-->Resumed（显示好，可以交互了）--> Paused（暂停）--> Destroyed（销毁了），需要注意的是，
+
 如果一个活动走到Resumed状态时，被其他活动覆盖，例如被支付宝支付页面覆盖，那么它会走如下生命周期：
 Resumed--> Paused（被其他活动覆盖）-->Resumed（如果其他活动销毁了，回到了该活动，那么又会恢复到Resumed，而不会再次Create）。
+
 详细的Android活动的生命周期可以参考：https://developer.android.com/guide/components/activities/activity-lifecycle
 
 | 参数名                     | 类型                  | 含义                                                     | 示例 |
@@ -523,11 +525,7 @@ interface ITask {
 | showLongToast          | 显示时间较短的提示          | 无                                       | 如下 | 无     |
 | showDialog             | 显示对话框       | 标题文本，信息文本，确认按钮文本                   | 如下 | 无     |
 | showNotification       | 显示通知         | 标签（可用于取消通知）标题文本，信息文本，是否重要 | 如下 | 无     |
-| cancelNotification     | 取消通知         | 标签                                               | 如下 |        |
-| findAndClickViewByText | 点击某文字的视图 | 要点击视图的文本（默认在当前显示的页活动页查询）   | 如下 | 无     |
-| findAndClickViewByText | 点击某文字的视图 | 要点击视图的文本，所在活动组件                     | 如下 | 无     |
-| findAndClickViewById | 点击某ID的视图 | 要点击视图的文本（默认在当前显示的页活动页查询）   | 如下 | 无     |
-| findAndClickViewById | 点击某ID的视图 | 要点击视图的文本，所在活动组件                     | 如下 | 无     |
+| cancelNotification     | 取消通知         | 标签                                               | 如下 | 无 |
 
 接口定义：
 
@@ -550,45 +548,8 @@ interface IUI {
             boolean important);
 
     void cancelNotification(@NonNull String notificationTag);
-
-    void findAndClickViewByText(@NonNull String text);
-
-    void findAndClickViewByText(@NonNull String text, @Nullable String componentNameShortString);
 }
 ```
-
-举例：
-
-```json
-[
-  {
-    "name": "AD Skip",
-    "description": "彩云天气广告页面点击跳过",
-    "priority": 1,
-    "condition": "activityResumed == true && componentNameAsShortString == \"com.nowcasting.activity/.SplashActivity\"",
-    "actions": [
-      "ui.showShortToast(\"尝试点击跳过...\");",
-      "ui.findAndClickViewByText(\"跳过\", \"com.nowcasting.activity/com.nowcasting.activity.SplashActivity\");"
-    ]
-  }
-]
-```
-
-**提示：**
-
-如何获取一个View的ID？
-
-不是所有的View都会被分配一个ID，你可以借助一些开发工具来获取，不知道是否有这样的App可以直接获取，
-
-Thanox默认带了一个ViewId助手，你需要打开系统设置--开发者选项--显示布局边界，界面上会出现所有View的ID。
-
-注意，上述Handle支持的ViewId的格式为：`包名:id/真正的id`，例如：`com.coolapk.market:id/title_view`
-
-在推荐一个Android开发工具：uiautomatorviewer，需要下载Android SDK。具体配置可以Google。
-
-使用如图：
-
-![uiviewer](../img/uiviewer.png)
 
 
 ### 0.5.6. hw

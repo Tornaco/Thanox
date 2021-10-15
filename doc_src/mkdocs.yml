@@ -1,2 +1,32 @@
 site_name: Thanox
 site_url: https://tornaco.github.io/Thanox/
+site_author: Tornaco
+site_description: >-
+  Simple steps about how to use Thanox
+
+theme:
+  name: material
+  custom_dir: !ENV [THEME_DIR, "overrides"]
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: red
+      accent: red
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  
+  icon:
+    logo: logo
+
+
+# Copyright
+copyright: Copyright &copy; 2016 - 2021 Tornaco

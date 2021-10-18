@@ -35,4 +35,6 @@
 
     <string name="service_notification_title_thanox_active">Thanox已激活</string>
     <string name="service_notification_message_thanox_active">版本%1$s已经成功激活，恭喜</string>
+
+    <string name="service_notification_message_thanox_app_enabled_on_create">智能冻结: %1$s 因活动请求而被启用</string>
 </resources>

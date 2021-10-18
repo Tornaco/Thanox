@@ -35,4 +35,6 @@
 
     <string name="service_notification_title_thanox_active">Thanox is active</string>
     <string name="service_notification_message_thanox_active">Thanox %1$s is up!</string>
+
+    <string name="service_notification_message_thanox_app_enabled_on_create">Smart freeze: %1$s is enabled on Launch request</string>
 </resources>

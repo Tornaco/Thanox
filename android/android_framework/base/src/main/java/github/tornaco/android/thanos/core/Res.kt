@@ -71,6 +71,9 @@ abstract class Res {
             "service_notification_title_thanox_active"
         const val STRING_SERVICE_NOTIFICATION_MESSAGE_THANOX_ACTIVE =
             "service_notification_message_thanox_active"
+
+        const val STRING_SERVICE_NOTIFICATION_MESSAGE_APP_ENABLED_ON_CREATE =
+            "service_notification_message_thanox_app_enabled_on_create"
     }
 
     object Drawables {

@@ -355,6 +355,10 @@
     <string name="pre_title_smart_freeze_hide_package_change_event">不在桌面顯示</string>
     <string name="pre_summary_smart_freeze_hide_package_change_event">打開這個開關後，Thanox會攔截該應用的包啟用事件，這樣一來，桌面應用就不會感知到應用的啟用，達到隱藏應用的效果</string>
 
+
+    <string name="pre_title_smart_freeze_with_suspend">掛起應用</string>
+    <string name="pre_summary_smart_freeze_with_suspend">默認情況下我們使用禁用應用來凍結app，如果你打開這個開關，我們將會使用掛起app來達到凍結app的目的；稍微有些區別，掛起的應用桌面上仍然會保留一個圖標</string>
+
     <string name="title_stub_apk_app_name">應用名稱</string>
     <string name="title_stub_apk_app_version_code">版本號</string>
     <string name="title_stub_apk_app_version_name">版本名稱</string>

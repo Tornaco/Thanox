@@ -513,6 +513,10 @@ object T {
         @JvmField
         val PREF_GEN_DID =
             ThanosFeature("PREF_GEN_DID", "")
+
+        @JvmField
+        val PREF_FREEZE_PKG_USE_SUSPEND =
+            ThanosFeature("PREF_FREEZE_PKG_USE_SUSPEND", BuildProp.THANOS_BUILD_DEBUG)
     }
 
     object Actions {

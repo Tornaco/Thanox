@@ -219,6 +219,13 @@ public interface IPkgManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public void setFreezePkgWithSuspendEnabled(boolean enable) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isFreezePkgWithSuspendEnabled() throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -872,6 +879,23 @@ public interface IPkgManager extends android.os.IInterface
           java.util.List<java.lang.String> _result = this.getPackageSetLabelsThatContainsPkg(_arg0);
           reply.writeNoException();
           reply.writeStringList(_result);
+          return true;
+        }
+        case TRANSACTION_setFreezePkgWithSuspendEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          this.setFreezePkgWithSuspendEnabled(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isFreezePkgWithSuspendEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _result = this.isFreezePkgWithSuspendEnabled();
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         default:
@@ -2221,6 +2245,49 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public void setFreezePkgWithSuspendEnabled(boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setFreezePkgWithSuspendEnabled, _data, _reply, 0);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setFreezePkgWithSuspendEnabled(enable);
+              return;
+            }
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isFreezePkgWithSuspendEnabled() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isFreezePkgWithSuspendEnabled, _data, _reply, 0);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isFreezePkgWithSuspendEnabled();
+            }
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.pm.IPkgManager sDefaultImpl;
     }
     static final int TRANSACTION_getPkgNameForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -2280,6 +2347,8 @@ public interface IPkgManager extends android.os.IInterface
     static final int TRANSACTION_removeFromPackageSet = (android.os.IBinder.FIRST_CALL_TRANSACTION + 54);
     static final int TRANSACTION_getPackageSetThatContainsPkg = (android.os.IBinder.FIRST_CALL_TRANSACTION + 55);
     static final int TRANSACTION_getPackageSetLabelsThatContainsPkg = (android.os.IBinder.FIRST_CALL_TRANSACTION + 56);
+    static final int TRANSACTION_setFreezePkgWithSuspendEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 57);
+    static final int TRANSACTION_isFreezePkgWithSuspendEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 58);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pm.IPkgManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -2356,4 +2425,6 @@ public interface IPkgManager extends android.os.IInterface
   public void removeFromPackageSet(java.lang.String pkg, java.lang.String id) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getPackageSetThatContainsPkg(java.lang.String pkg) throws android.os.RemoteException;
   public java.util.List<java.lang.String> getPackageSetLabelsThatContainsPkg(java.lang.String pkg) throws android.os.RemoteException;
+  public void setFreezePkgWithSuspendEnabled(boolean enable) throws android.os.RemoteException;
+  public boolean isFreezePkgWithSuspendEnabled() throws android.os.RemoteException;
 }

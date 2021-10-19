@@ -344,6 +344,9 @@
     <string name="pre_title_smart_freeze_hide_package_change_event">Hide in Launcher</string>
     <string name="pre_summary_smart_freeze_hide_package_change_event">If this switch enabled, Thanox will block PACKAGE CHANGED event for this package, so Launch apps will not be able to detect the package enable event.</string>
 
+    <string name="pre_title_smart_freeze_with_suspend">Suspend package</string>
+    <string name="pre_summary_smart_freeze_with_suspend">By default we freeze package by disabling package. If this switch is on we will use suspend instead of disable to package freeze it</string>
+
     <string name="pre_category_summary_smart_freeze">By default, Thanox will freeze apps when it stopped running, task removed. \nThanox will freeze all apps during device booting up, process clean up. \nYou can also choose additional settings below.</string>
 
     <string name="pre_category_summary_smart_standby">应用回到后台通常可能会有一些服务，进程保持活跃，这些服务或进程都有自己的使命，但遗憾的是我们用户可能无法准确的知道这些服务和进程的具体作用。\n\n你可以选择下面的干涉方式，对回到后台的应用做相应的操作，值得一提的是如果我们干涉了某个应用，它可能无法正确工作。</string>

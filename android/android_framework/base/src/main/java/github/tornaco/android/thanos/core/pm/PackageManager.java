@@ -361,4 +361,14 @@ public class PackageManager {
   public List<String> getPackageSetLabelsThatContainsPkg(String pkg) {
     return pm.getPackageSetLabelsThatContainsPkg(pkg);
   }
+
+  @SneakyThrows
+  public void setFreezePkgWithSuspendEnabled(boolean enable) {
+    pm.setFreezePkgWithSuspendEnabled(enable);
+  }
+
+  @SneakyThrows
+  public boolean isFreezePkgWithSuspendEnabled() {
+    return pm.isFreezePkgWithSuspendEnabled();
+  }
 }

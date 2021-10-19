@@ -85,4 +85,6 @@ interface IPkgManager {
     List<PackageSet> getPackageSetThatContainsPkg(String pkg);
     List<String> getPackageSetLabelsThatContainsPkg(String pkg);
 
+    void setFreezePkgWithSuspendEnabled(boolean enable);
+    boolean isFreezePkgWithSuspendEnabled();
 }

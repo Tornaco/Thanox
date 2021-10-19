@@ -64,5 +64,14 @@ public class SmartFreezeSettingsFragment extends BaseWithFabPreferenceFragmentCo
                 return true;
             }
         });
+
+
+        SwitchPreferenceCompat suspendPref = findPreference(getString(R.string.key_smart_freeze_with_suspend));
+        Objects.requireNonNull(suspendPref).setChecked(thanos.getPkgManager().isFreezePkgWithSuspendEnabled());
+        suspendPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean checked = (boolean) newValue;
+            thanos.getPkgManager().setFreezePkgWithSuspendEnabled(checked);
+            return true;
+        });
     }
 }

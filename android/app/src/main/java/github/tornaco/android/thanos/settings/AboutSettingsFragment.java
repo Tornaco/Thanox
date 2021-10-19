@@ -21,6 +21,7 @@ import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity;
+import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 
@@ -120,6 +121,14 @@ public class AboutSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
         donatePref.setVisible(ThanosApp.isPrc());
 
         findPreference(getString(R.string.key_email)).setSummary(BuildProp.THANOX_CONTACT_EMAIL);
+
+        findPreference(getString(R.string.key_rss_e)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL);
+                return true;
+            }
+        });
     }
 
 

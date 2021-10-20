@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.services.BootStrap;
+import github.tornaco.android.thanos.services.config.ServiceConfigs;
 import util.ExceptionTransformedInvocationHandler;
 import util.XposedHelpers;
 import util.XposedHelpersExt;
@@ -37,7 +38,7 @@ public class UsageStatsManagerInternalHooks {
         // UsageStatsManagerInternal mUsageStatsService;
         UsageStatsManagerInternal original = (UsageStatsManagerInternal) XposedHelpers.getObjectField(ams, "mUsageStatsService");
         XLog.i("UsageStatsManagerInternalHooks install, original: %s", original);
-        UsageStatsManagerInternal proxy = new UsageStatsManagerProxyFactory().newProxy(original);
+        UsageStatsManagerInternal proxy = new UsageStatsManagerProxyFactory().newProxy(original, ServiceConfigs.baseServerTmpDir());
         XLog.i("UsageStatsManagerInternalHooks install, proxy: %s", proxy);
         XposedHelpers.setObjectField(ams, "mUsageStatsService", proxy);
         XLog.i("UsageStatsManagerInternalHooks installed");

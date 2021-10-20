@@ -72,7 +72,7 @@ object Libs {
     object AndroidX {
         const val androidXCore = "androidx.core:core-ktx:1.3.2"
         const val appCompat = "androidx.appcompat:appcompat:1.3.1"
-        const val material = "com.google.android.material:material:1.4.0"
+        const val material = "com.google.android.material:material:1.5.0-alpha04"
         const val annotations = "androidx.annotation:annotation:1.1.0"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
         const val cardview = "androidx.cardview:cardview:1.1.0"

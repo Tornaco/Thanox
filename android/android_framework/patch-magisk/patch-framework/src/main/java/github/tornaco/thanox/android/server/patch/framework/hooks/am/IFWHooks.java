@@ -18,6 +18,7 @@ import java.util.Arrays;
 
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.services.BootStrap;
+import github.tornaco.android.thanos.services.config.ServiceConfigs;
 import util.XposedHelpers;
 
 class IFWHooks {
@@ -48,7 +49,7 @@ class IFWHooks {
             IntentFirewall.AMSInterface amsInterface =
                     (IntentFirewall.AMSInterface) XposedHelpers.getObjectField(ifw, "mAms");
             Handler handler = (Handler) XposedHelpers.getObjectField(ifw, "mHandler");
-            return new IWFProxyFactory(amsInterface, handler).newProxy(ifw);
+            return new IWFProxyFactory(amsInterface, handler).newProxy(ifw, ServiceConfigs.baseServerTmpDir());
         }
 
         @SuppressWarnings("rawtypes")

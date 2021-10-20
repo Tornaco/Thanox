@@ -1,15 +1,18 @@
 package github.tornaco.android.thanos.widget;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import github.tornaco.android.thanos.module.common.R;
+import lombok.Setter;
 
-public class ModernAlertDialog {
-    private final Context context;
-
+public class ModernAlertDialog extends AlertDialog {
     private String dialogTitle;
     private String dialogMessage;
     private String positive;
@@ -22,10 +25,56 @@ public class ModernAlertDialog {
     @Nullable
     private Runnable onNeutral;
 
-    private boolean cancelable;
-
     public ModernAlertDialog(@NonNull Context context) {
-        this.context = context;
+        super(context);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.common_modern_dialog);
+
+        // getWindow().getAttributes().gravity = Gravity.BOTTOM;
+
+        TextView titleView = findViewById(R.id.title);
+        TextView messageView = findViewById(R.id.message);
+        TextView positiveView = findViewById(R.id.positive);
+        TextView negativeView = findViewById(R.id.negative);
+        TextView neutralView = findViewById(R.id.neutral);
+
+        titleView.setVisibility(dialogTitle == null ? View.GONE : View.VISIBLE);
+        messageView.setVisibility(dialogMessage == null ? View.GONE : View.VISIBLE);
+        positiveView.setVisibility(positive == null ? View.GONE : View.VISIBLE);
+        negativeView.setVisibility(negative == null ? View.GONE : View.VISIBLE);
+        neutralView.setVisibility(neutral == null ? View.GONE : View.VISIBLE);
+
+        titleView.setText(dialogTitle);
+        messageView.setText(dialogMessage);
+        positiveView.setText(positive);
+        negativeView.setText(negative);
+        neutralView.setText(neutral);
+
+        positiveView.setOnClickListener(view -> {
+            if (onPositive != null) {
+                onPositive.run();
+            }
+            dismiss();
+        });
+
+        negativeView.setOnClickListener(view -> {
+            if (onNegative != null) {
+                onNegative.run();
+            }
+            dismiss();
+        });
+
+        neutralView.setOnClickListener(view -> {
+            if (onNeutral != null) {
+                onNeutral.run();
+            }
+            dismiss();
+        });
     }
 
     public void setDialogTitle(String dialogTitle) {
@@ -58,32 +107,5 @@ public class ModernAlertDialog {
 
     public void setOnNeutral(@Nullable Runnable onNeutral) {
         this.onNeutral = onNeutral;
-    }
-
-    public void setCancelable(boolean cancelable) {
-        this.cancelable = cancelable;
-    }
-
-    public void show() {
-        new MaterialAlertDialogBuilder(context)
-                .setTitle(dialogTitle)
-                .setMessage(dialogMessage)
-                .setPositiveButton(positive, (dialog, which) -> {
-                    if (onPositive != null) {
-                        onPositive.run();
-                    }
-                })
-                .setNegativeButton(negative, (dialog, which) -> {
-                    if (onNegative != null) {
-                        onNegative.run();
-                    }
-                })
-                .setNeutralButton(neutral, (dialog, which) -> {
-                    if (onNeutral != null) {
-                        onNeutral.run();
-                    }
-                })
-                .setCancelable(cancelable)
-                .show();
     }
 }

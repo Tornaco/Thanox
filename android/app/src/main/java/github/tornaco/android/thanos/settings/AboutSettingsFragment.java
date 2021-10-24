@@ -20,7 +20,7 @@ import github.tornaco.android.thanos.app.donate.DonateActivity;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.OsUtils;
-import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity;
+import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity3;
 import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
@@ -62,12 +62,10 @@ public class AboutSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
         findPreference(getString(R.string.key_build_info_app))
                 .setOnPreferenceClickListener(
                         preference -> {
-                            PlatLogoActivity.start(getActivity());
+                            PlatLogoActivity3.start(getActivity());
                             Toast.makeText(
                                     getActivity(),
-                                    "Thanox is build against Android 11, patching against "
-                                            + thanos.getPatchingSource(),
-                                    Toast.LENGTH_LONG)
+                                    "Thanox is build against Android S", Toast.LENGTH_LONG)
                                     .show();
                             return true;
                         });

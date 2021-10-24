@@ -1,7 +1,5 @@
 package github.tornaco.android.thanos.common;
 
-import static github.tornaco.android.thanos.common.CommonAppListFilterViewModel.DEFAULT_CATEGORY_INDEX;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,6 +24,9 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import java.util.List;
+
+import github.tornaco.android.thanos.core.pm.PackageSet;
 import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.module.common.databinding.ActivityCommonListFilterBinding;
 import github.tornaco.android.thanos.module.common.databinding.CommonFeatureDescriptionBarLayoutBinding;
@@ -41,6 +42,7 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCommonListFilterBinding.inflate(LayoutInflater.from(this), null, false);
+        viewModel = obtainViewModel(this);
         setContentView(binding.getRoot());
         setupView();
         setupViewModel();
@@ -128,7 +130,6 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
     }
 
     private void setupViewModel() {
-        viewModel = obtainViewModel(this);
         viewModel.setListModelLoader(onCreateListModelLoader());
         viewModel.start();
 
@@ -155,26 +156,30 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
 
     protected void onSetupFilter(Chip filterAnchor) {
         // Creating the ArrayAdapter instance having the categoryArray list
-        String[] categoryArray = getToolbarSpinnerCategory();
-        filterAnchor.setText(categoryArray[DEFAULT_CATEGORY_INDEX.ordinal()]);
+        List<PackageSet> menuItemList = viewModel.getAllPackageSetFilterItems();
+        PackageSet currentPackageSet = viewModel.getCurrentPackageSet();
+        if (currentPackageSet != null) {
+            filterAnchor.setText(currentPackageSet.getLabel());
+        }
 
         filterAnchor.setOnClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(thisActivity(), filterAnchor);
-            for (int i = 0; i < categoryArray.length; i++) {
-                popupMenu.getMenu().add(1000, i, Menu.NONE, categoryArray[i]);
+            for (int i = 0; i < menuItemList.size(); i++) {
+                PackageSet pkgSetItem = menuItemList.get(i);
+                popupMenu.getMenu().add(
+                        1000,
+                        i,
+                        Menu.NONE,
+                        pkgSetItem.getLabel());
             }
             popupMenu.setOnMenuItemClickListener(item -> {
                 int index = item.getItemId();
-                viewModel.setAppCategoryFilter(index);
-                filterAnchor.setText(categoryArray[index]);
+                viewModel.setAppCategoryFilter(menuItemList.get(index).getId());
+                filterAnchor.setText(menuItemList.get(index).getLabel());
                 return false;
             });
             popupMenu.show();
         });
-    }
-
-    protected String[] getToolbarSpinnerCategory() {
-        return getResources().getStringArray(R.array.common_app_categories);
     }
 
     protected void onSetupChip(

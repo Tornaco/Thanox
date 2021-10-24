@@ -12,12 +12,16 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.elvishew.xlog.XLog;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.pm.PackageSet;
+import github.tornaco.android.thanos.core.pm.PrebuiltPkgSetsKt;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;
@@ -31,9 +35,10 @@ import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
+import util.ObjectsUtils;
 
 public class CommonAppListFilterViewModel extends AndroidViewModel {
-    public static final CategoryIndex DEFAULT_CATEGORY_INDEX = CategoryIndex._3rd;
+    public static final CategoryIndex DEFAULT_CATEGORY_INDEX = CategoryIndex.from(PrebuiltPkgSetsKt.PREBUILT_PACKAGE_SET_ID_3RD);
 
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     protected final List<Disposable> disposables = new ArrayList<>();
@@ -111,9 +116,34 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
         unRegisterEventReceivers();
     }
 
-    public void setAppCategoryFilter(int index) {
-        categoryIndex.set(CategoryIndex.values()[index]);
+    public void setAppCategoryFilter(String id) {
+        categoryIndex.set(CategoryIndex.from(id));
         start();
+    }
+
+    List<PackageSet> getAllPackageSetFilterItems() {
+        ThanosManager thanox = ThanosManager.from(getApplication());
+        if (!thanox.isServiceInstalled()) {
+            return Lists.newArrayListWithCapacity(0);
+        }
+        return thanox.getPkgManager().getAllPackageSets();
+    }
+
+    PackageSet getCurrentPackageSet() {
+        CategoryIndex currentIndex = categoryIndex.get();
+        if (currentIndex == null) {
+            return null;
+        }
+        List<PackageSet> all = getAllPackageSetFilterItems();
+        if (all.isEmpty()) {
+            return null;
+        }
+        for (PackageSet set : all) {
+            if (ObjectsUtils.equals(set.getId(), currentIndex.pkgSetId)) {
+                return set;
+            }
+        }
+        return null;
     }
 
     void clearSearchText() {

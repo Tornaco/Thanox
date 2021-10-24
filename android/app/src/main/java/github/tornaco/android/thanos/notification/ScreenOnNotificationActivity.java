@@ -47,7 +47,7 @@ public class ScreenOnNotificationActivity extends CommonFuncToggleAppListFilterA
         return index -> {
             ThanosManager thanos = ThanosManager.from(getApplicationContext());
             if (!thanos.isServiceInstalled()) return Lists.newArrayListWithCapacity(0);
-            List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgs(index.flag);
+            List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
                 appInfo.setSelected(thanos.getNotificationManager().isScreenOnNotificationEnabledForPkg(appInfo.getPkgName()));

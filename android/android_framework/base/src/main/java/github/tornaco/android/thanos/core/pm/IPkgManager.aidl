@@ -87,4 +87,6 @@ interface IPkgManager {
 
     void setFreezePkgWithSuspendEnabled(boolean enable);
     boolean isFreezePkgWithSuspendEnabled();
+
+    List<AppInfo> getInstalledPkgsByPackageSetId(String pkgSetId);
 }

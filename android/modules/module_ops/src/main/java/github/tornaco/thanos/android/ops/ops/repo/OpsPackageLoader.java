@@ -36,7 +36,7 @@ public class OpsPackageLoader implements CommonAppListFilterViewModel.ListModelL
         if (!thanosManager.isServiceInstalled()) {
             return new ArrayList<>(0);
         }
-        List<AppInfo> installed = Lists.newArrayList(thanosManager.getPkgManager().getInstalledPkgs(index.flag));
+        List<AppInfo> installed = Lists.newArrayList(thanosManager.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId));
         List<AppListModel> res = new ArrayList<>();
         String perm = AppOpsManager.opToPermission(op.getCode());
         for (AppInfo appInfo : installed) {

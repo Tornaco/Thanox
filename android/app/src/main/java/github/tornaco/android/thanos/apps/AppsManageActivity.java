@@ -53,7 +53,7 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
             }
             List<AppListModel> res = new ArrayList<>();
             CompositeDisposable disposable = new CompositeDisposable();
-            disposable.add(Observable.fromIterable(thanos.getPkgManager().getInstalledPkgs(index.flag))
+            disposable.add(Observable.fromIterable(thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId))
                     .distinct()
                     .doOnComplete(disposable::dispose)
                     .subscribe(appInfo -> res.add(new AppListModel(

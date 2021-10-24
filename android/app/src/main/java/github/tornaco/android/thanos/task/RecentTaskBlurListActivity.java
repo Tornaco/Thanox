@@ -60,7 +60,7 @@ public class RecentTaskBlurListActivity extends CommonFuncToggleAppListFilterAct
             ThanosManager thanos = ThanosManager.from(getApplicationContext());
             if (!thanos.isServiceInstalled()) return Lists.newArrayListWithCapacity(0);
             ActivityManager am = thanos.getActivityManager();
-            List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgs(index.flag);
+            List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
                 appInfo.setSelected(am.isPkgRecentTaskBlurEnabled(appInfo.getPkgName()));

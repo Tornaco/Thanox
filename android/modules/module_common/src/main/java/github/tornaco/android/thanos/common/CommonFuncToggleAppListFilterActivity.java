@@ -1,7 +1,5 @@
 package github.tornaco.android.thanos.common;
 
-import static github.tornaco.android.thanos.common.CommonAppListFilterViewModel.DEFAULT_CATEGORY_INDEX;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,6 +23,9 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import java.util.List;
+
+import github.tornaco.android.thanos.core.pm.PackageSet;
 import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.module.common.databinding.ActivityCommonFuncToggleListFilterBinding;
 import github.tornaco.android.thanos.module.common.databinding.CommonFeatureDescriptionBarLayoutBinding;
@@ -35,12 +36,13 @@ import github.tornaco.android.thanos.widget.SwitchBar;
 
 public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivity {
 
-    private CommonFuncToggleAppListFilterViewModel commonFuncToggleListFilterViewModel;
+    private CommonFuncToggleAppListFilterViewModel viewModel;
     private ActivityCommonFuncToggleListFilterBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = obtainViewModel(this);
         binding = ActivityCommonFuncToggleListFilterBinding.inflate(
                 LayoutInflater.from(this), null, false);
         setContentView(binding.getRoot());
@@ -66,7 +68,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
         binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                commonFuncToggleListFilterViewModel.start();
+                viewModel.start();
             }
         });
         binding.swipe.setColorSchemeColors(getResources().getIntArray(R.array.common_swipe_refresh_colors));
@@ -78,13 +80,13 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
         binding.searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                commonFuncToggleListFilterViewModel.setSearchText(query);
+                viewModel.setSearchText(query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                commonFuncToggleListFilterViewModel.setSearchText(newText);
+                viewModel.setSearchText(newText);
                 return true;
             }
         });
@@ -98,7 +100,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
 
             @Override
             public void onSearchViewClosed() {
-                commonFuncToggleListFilterViewModel.clearSearchText();
+                viewModel.clearSearchText();
                 binding.toolbarLayout.setTitleEnabled(true);
             }
         });
@@ -108,18 +110,26 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
 
     protected void onSetupFilter(Chip filterAnchor) {
         // Creating the ArrayAdapter instance having the categoryArray list
-        String[] categoryArray = getResources().getStringArray(R.array.common_app_categories);
-        filterAnchor.setText(categoryArray[DEFAULT_CATEGORY_INDEX.ordinal()]);
+        List<PackageSet> menuItemList = viewModel.getAllPackageSetFilterItems();
+        PackageSet currentPackageSet = viewModel.getCurrentPackageSet();
+        if (currentPackageSet != null) {
+            filterAnchor.setText(currentPackageSet.getLabel());
+        }
 
         filterAnchor.setOnClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(thisActivity(), filterAnchor);
-            for (int i = 0; i < categoryArray.length; i++) {
-                popupMenu.getMenu().add(1000, i, Menu.NONE, categoryArray[i]);
+            for (int i = 0; i < menuItemList.size(); i++) {
+                PackageSet pkgSetItem = menuItemList.get(i);
+                popupMenu.getMenu().add(
+                        1000,
+                        i,
+                        Menu.NONE,
+                        pkgSetItem.getLabel());
             }
             popupMenu.setOnMenuItemClickListener(item -> {
                 int index = item.getItemId();
-                commonFuncToggleListFilterViewModel.setAppCategoryFilter(index);
-                filterAnchor.setText(categoryArray[index]);
+                viewModel.setAppCategoryFilter(menuItemList.get(index).getId());
+                filterAnchor.setText(menuItemList.get(index).getLabel());
                 return false;
             });
             popupMenu.show();
@@ -198,12 +208,11 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
     protected abstract OnAppItemSelectStateChangeListener onCreateAppItemSelectStateChangeListener();
 
     private void setupViewModel() {
-        commonFuncToggleListFilterViewModel = obtainViewModel(this);
-        commonFuncToggleListFilterViewModel.setListModelLoader(onCreateListModelLoader());
-        commonFuncToggleListFilterViewModel.setSelectStateChangeListener(onCreateAppItemSelectStateChangeListener());
-        commonFuncToggleListFilterViewModel.start();
+        viewModel.setListModelLoader(onCreateListModelLoader());
+        viewModel.setSelectStateChangeListener(onCreateAppItemSelectStateChangeListener());
+        viewModel.start();
 
-        binding.setViewModel(commonFuncToggleListFilterViewModel);
+        binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
     }
@@ -220,7 +229,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
             dialog.setDialogMessage(getString(R.string.common_dialog_message_are_you_sure));
             dialog.setPositive(getString(android.R.string.ok));
             dialog.setNegative(getString(android.R.string.cancel));
-            dialog.setOnPositive(() -> commonFuncToggleListFilterViewModel.selectAll());
+            dialog.setOnPositive(() -> viewModel.selectAll());
             dialog.show();
             return true;
         }
@@ -230,7 +239,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
             dialog.setDialogMessage(getString(R.string.common_dialog_message_are_you_sure));
             dialog.setPositive(getString(android.R.string.ok));
             dialog.setNegative(getString(android.R.string.cancel));
-            dialog.setOnPositive(() -> commonFuncToggleListFilterViewModel.unSelectAll());
+            dialog.setOnPositive(() -> viewModel.unSelectAll());
             dialog.show();
             return true;
         }

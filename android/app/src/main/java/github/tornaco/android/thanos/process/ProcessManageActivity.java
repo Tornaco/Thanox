@@ -1,7 +1,5 @@
 package github.tornaco.android.thanos.process;
 
-import static github.tornaco.android.thanos.common.CommonAppListFilterViewModel.DEFAULT_CATEGORY_INDEX;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -64,7 +62,7 @@ public class ProcessManageActivity extends BaseTrustedActivity {
     protected void onSetupFilter(Chip filterAnchor) {
         //Creating the ArrayAdapter instance having the category list
         String[] categoryArray = getResources().getStringArray(R.array.process_manage_categories);
-        filterAnchor.setText(categoryArray[DEFAULT_CATEGORY_INDEX.ordinal()]);
+        filterAnchor.setText(categoryArray[ProcessManageViewModel.DEFAULT_CATEGORY_INDEX.ordinal()]);
 
         filterAnchor.setOnClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(thisActivity(), filterAnchor);

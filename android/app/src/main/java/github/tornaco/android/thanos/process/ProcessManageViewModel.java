@@ -32,11 +32,14 @@ import util.CollectionUtils;
 import util.Consumer;
 
 public class ProcessManageViewModel extends AndroidViewModel {
+
+    public static final RunningCategoryIndex DEFAULT_CATEGORY_INDEX = RunningCategoryIndex.Running;
+
     private final ObservableBoolean isProcessNeedUpdate = new ObservableBoolean(false);
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final List<Disposable> disposables = new ArrayList<>();
     private final ObservableList<RunningState.MergedItem> mergedItems = new ObservableArrayList<>();
-    private final ObservableField<RunningCategoryIndex> categoryIndex = new ObservableField<>(RunningCategoryIndex.Running);
+    private final ObservableField<RunningCategoryIndex> categoryIndex = new ObservableField<>(DEFAULT_CATEGORY_INDEX);
 
     private ThanosManager thanos = ThanosManager.from(getApplication().getApplicationContext());
 

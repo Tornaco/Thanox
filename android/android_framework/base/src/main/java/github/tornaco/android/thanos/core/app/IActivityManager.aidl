@@ -165,4 +165,6 @@ interface IActivityManager {
     boolean isNetStatTrackerEnabled();
 
     boolean checkGetContentProvider(String callerPkg, String name);
+
+    List<StartRecord> getAllStartRecordsForPackageSetWithRes(String pkgSetId, boolean allowed, boolean blocked);
 }

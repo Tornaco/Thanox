@@ -24,7 +24,6 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
-import github.tornaco.android.thanos.common.CategoryIndex;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
@@ -98,9 +97,6 @@ public class AppDetailsActivity extends BaseTrustedActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setTitle(appInfo.getAppLabel());
         binding.setApp(appInfo);
-
-        CategoryIndex categoryIndex = CategoryIndex.fromFlags(appInfo.getFlags());
-        binding.setCate(categoryIndex);
     }
 
     @Verify

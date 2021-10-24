@@ -10,7 +10,6 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.chip.Chip;
@@ -27,7 +26,6 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.apps.AppDetailsActivity;
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppListModel;
-import github.tornaco.android.thanos.common.CategoryIndex;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
 import github.tornaco.android.thanos.core.app.ActivityManager;
@@ -36,6 +34,7 @@ import github.tornaco.android.thanos.core.app.start.StartReason;
 import github.tornaco.android.thanos.core.app.start.StartRecord;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.PackageManager;
+import github.tornaco.android.thanos.core.pm.PrebuiltPkgSetsKt;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
@@ -104,7 +103,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
         if (targetPackageName != null) {
             filterAnchor.setVisibility(View.GONE);
             setTitle(getTitleRes());
-            viewModel.setAppCategoryFilter(CategoryIndex.All.ordinal());
+            viewModel.setAppCategoryFilter(PrebuiltPkgSetsKt.PREBUILT_PACKAGE_SET_ID_3RD);
             return;
         }
         super.onSetupFilter(filterAnchor);
@@ -147,7 +146,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
             List<StartRecord> startRecordList = new ArrayList<>();
 
             if (targetPackageName == null) {
-                startRecordList = Lists.newArrayList(activityManager.getAllStartRecordsWithRes(index.flag, showAllowed, showBlocked));
+                startRecordList = Lists.newArrayList(activityManager.getAllStartRecordsForPackageSetWithRes(index.pkgSetId, showAllowed, showBlocked));
             } else {
                 if (showAllowed) {
                     startRecordList.addAll(activityManager.getStartRecordsAllowedByPackageName(targetPackageName));

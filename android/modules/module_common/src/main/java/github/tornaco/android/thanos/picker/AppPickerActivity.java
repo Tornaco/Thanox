@@ -115,7 +115,7 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
             if (!thanos.isServiceInstalled()) {
                 return Lists.newArrayList(new AppListModel(AppInfo.dummy()));
             }
-            List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgs(index.flag);
+            List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
                 if (excludePkgs.contains(appInfo.getPkgName())) {

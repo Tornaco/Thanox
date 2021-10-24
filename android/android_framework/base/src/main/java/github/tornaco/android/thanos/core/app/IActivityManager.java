@@ -371,6 +371,10 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
+    @Override public java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> getAllStartRecordsForPackageSetWithRes(java.lang.String pkgSetId, boolean allowed, boolean blocked) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1402,6 +1406,20 @@ public interface IActivityManager extends android.os.IInterface
           boolean _result = this.checkGetContentProvider(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_getAllStartRecordsForPackageSetWithRes:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          boolean _arg2;
+          _arg2 = (0!=data.readInt());
+          java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> _result = this.getAllStartRecordsForPackageSetWithRes(_arg0, _arg1, _arg2);
+          reply.writeNoException();
+          reply.writeTypedList(_result);
           return true;
         }
         default:
@@ -3688,6 +3706,31 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> getAllStartRecordsForPackageSetWithRes(java.lang.String pkgSetId, boolean allowed, boolean blocked) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(pkgSetId);
+          _data.writeInt(((allowed)?(1):(0)));
+          _data.writeInt(((blocked)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getAllStartRecordsForPackageSetWithRes, _data, _reply, 0);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAllStartRecordsForPackageSetWithRes(pkgSetId, allowed, blocked);
+            }
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.start.StartRecord.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -3789,6 +3832,7 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_setNetStatTrackerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 96);
     static final int TRANSACTION_isNetStatTrackerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 97);
     static final int TRANSACTION_checkGetContentProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 98);
+    static final int TRANSACTION_getAllStartRecordsForPackageSetWithRes = (android.os.IBinder.FIRST_CALL_TRANSACTION + 99);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -3914,4 +3958,5 @@ public interface IActivityManager extends android.os.IInterface
   public void setNetStatTrackerEnabled(boolean enabled) throws android.os.RemoteException;
   public boolean isNetStatTrackerEnabled() throws android.os.RemoteException;
   public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> getAllStartRecordsForPackageSetWithRes(java.lang.String pkgSetId, boolean allowed, boolean blocked) throws android.os.RemoteException;
 }

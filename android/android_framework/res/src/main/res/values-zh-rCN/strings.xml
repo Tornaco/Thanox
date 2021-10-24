@@ -37,4 +37,15 @@
     <string name="service_notification_message_thanox_active">版本%1$s已经成功激活，恭喜</string>
 
     <string name="service_notification_message_thanox_app_enabled_on_create">智能冻结: %1$s 因活动请求而被启用</string>
+
+    <string name="service_app_set_all">全部</string>
+    <string name="service_app_set_system">系统普通</string>
+    <string name="service_app_set_system_uid">系统核心</string>
+    <string name="service_app_set_3rd">三方</string>
+    <string name="service_app_set_media">系统媒体</string>
+    <string name="service_app_set_phone">系统电话</string>
+    <string name="service_app_set_web_provider">WebView提供者</string>
+    <string name="service_app_set_shortcut_proxy">快捷代理</string>
+    <string name="service_app_set_white_listed">允许名单</string>
+
 </resources>

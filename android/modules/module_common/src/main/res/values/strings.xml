@@ -3,15 +3,6 @@
     <string name="switch_on_text">On</string>
     <string name="switch_off_text">Off</string>
 
-    <string name="app_category_all">All</string>
-    <string name="app_category_system">System</string>
-    <string name="app_category_system_uid">SystemCore</string>
-    <string name="app_category_3rd">3-rd</string>
-    <string name="app_category_media">SystemMedia</string>
-    <string name="app_category_phone">SystemPhone</string>
-    <string name="app_category_web_provider">WebView provider</string>
-    <string name="app_category_shortcut_proxy">快捷代理</string>
-
     <string name="common_menu_title_batch_select">Batch select</string>
     <string name="common_menu_title_select_all">All yes</string>
     <string name="common_menu_title_un_select_all">All no</string>

@@ -74,6 +74,18 @@ abstract class Res {
 
         const val STRING_SERVICE_NOTIFICATION_MESSAGE_APP_ENABLED_ON_CREATE =
             "service_notification_message_thanox_app_enabled_on_create"
+
+        object AppSet {
+            const val STRING_SERVICE_APP_SET_ALL = "service_app_set_all"
+            const val STRING_SERVICE_APP_SET_SYSTEM = "service_app_set_system"
+            const val STRING_SERVICE_APP_SET_SYSTEM_UID = "service_app_set_system_uid"
+            const val STRING_SERVICE_APP_SET_MEDIA = "service_app_set_media"
+            const val STRING_SERVICE_APP_SET_PHONE = "service_app_set_phone"
+            const val STRING_SERVICE_APP_SET_WEB_PROVIDER = "service_app_set_web_provider"
+            const val STRING_SERVICE_APP_SET_SHORTCUT_PROXY = "service_app_set_shortcut_proxy"
+            const val STRING_SERVICE_APP_SET_3RD = "service_app_set_3rd"
+            const val STRING_SERVICE_APP_SET_WHITE_LISTED = "service_app_set_white_listed"
+        }
     }
 
     object Drawables {

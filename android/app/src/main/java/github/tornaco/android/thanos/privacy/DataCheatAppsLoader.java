@@ -38,7 +38,7 @@ public class DataCheatAppsLoader implements CommonFuncToggleAppListFilterViewMod
     }
     PrivacyManager priv = thanos.getPrivacyManager();
     List<AppInfo> installed =
-        thanos.getPkgManager().getInstalledPkgs(index.flag);
+        thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
     List<AppListModel> res = new ArrayList<>();
     CollectionUtils.consumeRemaining(
         installed,

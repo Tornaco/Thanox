@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
+import android.os.RemoteException;
 
 import java.util.List;
 
@@ -168,6 +169,11 @@ public class ActivityManager {
   public List<StartRecord> getAllStartRecordsWithRes(
       int appFlags, boolean allowed, boolean blocked) {
     return server.getAllStartRecordsWithRes(appFlags, allowed, blocked);
+  }
+
+  @SneakyThrows
+  public List<StartRecord> getAllStartRecordsForPackageSetWithRes(String pkgSetId, boolean allowed, boolean blocked) {
+    return server.getAllStartRecordsForPackageSetWithRes(pkgSetId, allowed, blocked);
   }
 
   @SneakyThrows

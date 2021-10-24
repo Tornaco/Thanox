@@ -61,7 +61,7 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
             if (!thanos.isServiceInstalled()) return Lists.newArrayListWithCapacity(0);
 
             ActivityStackSupervisor am = thanos.getActivityStackSupervisor();
-            List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgs(index.flag);
+            List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
                 appInfo.setSelected(am.isPackageLocked(appInfo.getPkgName()));

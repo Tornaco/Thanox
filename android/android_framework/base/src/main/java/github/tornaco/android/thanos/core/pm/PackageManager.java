@@ -371,4 +371,9 @@ public class PackageManager {
   public boolean isFreezePkgWithSuspendEnabled() {
     return pm.isFreezePkgWithSuspendEnabled();
   }
+
+  @SneakyThrows
+  public List<AppInfo> getInstalledPkgsByPackageSetId(String pkgSetId) {
+    return pm.getInstalledPkgsByPackageSetId(pkgSetId);
+  }
 }

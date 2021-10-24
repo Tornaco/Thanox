@@ -189,8 +189,8 @@ public class NavViewModel extends AndroidViewModel {
   }
 
   private void loadPrebuiltFeatures() {
+    isDataLoading.set(true);
     Resources resources = getApplication().getResources();
-    ThanosManager thanosManager = ThanosManager.from(getApplication());
 
     List<TileGroup> tileGroups = new ArrayList<>();
 
@@ -393,6 +393,7 @@ public class NavViewModel extends AndroidViewModel {
 
     prebuiltFeatures.clear();
     prebuiltFeatures.addAll(tileGroups);
+    isDataLoading.set(false);
   }
 
   private List<Tile> onlyEnabled(List<Tile> all) {

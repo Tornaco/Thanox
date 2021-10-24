@@ -363,8 +363,8 @@
     <string name="title_stub_apk_app_version_name">版本名称</string>
 
     <string name="export_patch_title">导出补丁</string>
-    <string name="export_patch_message">Thanox支持Xposed和Magisk两种激活方式。对于Xposed用户，在Xposed模块页面勾选Thanox即可。
-        对于Magisk用户，你可以将下载的Thanox安装包文件拓展名，由.apk修改为.zip后通过MagiskManager刷入。如果你找不到Thanox安装包，你可以点击下面导出按钮，导出Magisk模块的zip包</string>
+    <string name="export_patch_message">Thanox支持Xposed和Magisk两种激活方式。\n\n对于Xposed用户，在Xposed模块页面勾选Thanox即可。\n\n
+        对于Magisk用户，你可以将下载的Thanox安装包文件拓展名，由.apk修改为.zip后通过MagiskManager刷入。\n如果你找不到Thanox安装包，你可以点击下面导出按钮，导出Magisk模块的zip包</string>
     <string name="export_patch_export_magisk">导出</string>
 
     <string name="onboarding_text_complete">那就开始吧</string>

@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
@@ -68,6 +69,9 @@ public class PrebuiltFeatureFragment extends NavFragment
   private void setupView() {
     prebuiltFeaturesBinding.features.setLayoutManager(new GridLayoutManager(getContext(), 1));
     prebuiltFeaturesBinding.features.setAdapter(new DashboardCardAdapter(this, this, this));
+    prebuiltFeaturesBinding.swipe.setColorSchemeColors(getResources().getIntArray(
+            github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
+    prebuiltFeaturesBinding.swipe.setOnRefreshListener(() -> navViewModel.start());
   }
 
   @SuppressWarnings("ConstantConditions")

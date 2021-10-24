@@ -1,7 +1,10 @@
 package github.tornaco.android.thanos.main;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +57,14 @@ public class PrebuiltFeatureFragment extends NavFragment
   private FragmentPrebuiltFeaturesBinding prebuiltFeaturesBinding;
   private NavViewModel navViewModel;
 
+  private Handler uiHandler;
+
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    this.uiHandler = new Handler(Looper.getMainLooper());
+  }
+
   @Nullable
   @Override
   public View onCreateView(
@@ -98,6 +109,8 @@ public class PrebuiltFeatureFragment extends NavFragment
           return;
         }
         navViewModel.cleanUpBackgroundTasks();
+        // Delay 1.5s to refresh
+        uiHandler.postDelayed(() -> navViewModel.start(), 1500);
         break;
       case R.id.id_background_start:
         StartRestrictActivity.start(getActivity());

@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.elvishew.xlog.XLog;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.common.collect.Lists;
@@ -94,37 +95,44 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        viewModel.start();
+        XLog.i("onActivityResult, resultCode=%s", resultCode);
+        if (resultCode == RESULT_OK) {
+            viewModel.start();
+        }
     }
 
     @Override
     protected CommonAppListFilterAdapter onCreateCommonAppListFilterAdapter() {
         return new CommonAppListFilterAdapter(
-                (appInfo, itemView) -> QuickDropdown.show(
-                        thisActivity(),
-                        itemView,
-                        index -> {
-                            switch (index) {
-                                case 0:
-                                    return getString(R.string.title_package_edit_set);
-                                case 1:
-                                    return getString(R.string.title_package_delete_set);
-                            }
-                            return null;
-                        },
-                        id -> {
-                            switch (id) {
-                                case 0:
-                                    PackageSetEditorActivity.start(PackageSetListActivity.this, (String) appInfo.getObj(), REQ_CODE_EDIT);
-                                    break;
-                                case 1:
-                                    ThanosManager.from(thisActivity())
-                                            .getPkgManager()
-                                            .removePackageSet((String) appInfo.getObj());
-                                    viewModel.start();
-                                    break;
-                            }
-                        }));
+                (appInfo, itemView) -> {
+                    boolean isPrebuilt = appInfo.isSelected();
+                    if (isPrebuilt) {
+                        PackageSetEditorActivity.start(PackageSetListActivity.this, (String) appInfo.getObj(), REQ_CODE_EDIT);
+                    } else {
+                        QuickDropdown.show(thisActivity(), itemView, index -> {
+                                    switch (index) {
+                                        case 0:
+                                            return getString(R.string.title_package_edit_set);
+                                        case 1:
+                                            return getString(R.string.title_package_delete_set);
+                                    }
+                                    return null;
+                                },
+                                id -> {
+                                    switch (id) {
+                                        case 0:
+                                            PackageSetEditorActivity.start(PackageSetListActivity.this, (String) appInfo.getObj(), REQ_CODE_EDIT);
+                                            break;
+                                        case 1:
+                                            ThanosManager.from(thisActivity())
+                                                    .getPkgManager()
+                                                    .removePackageSet((String) appInfo.getObj());
+                                            viewModel.start();
+                                            break;
+                                    }
+                                });
+                    }
+                });
     }
 
 
@@ -137,7 +145,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
                 return Lists.newArrayListWithCapacity(0);
             }
             PackageManager pm = thanos.getPkgManager();
-            List<PackageSet> packageSets = pm.getAllPackageSets();
+            List<PackageSet> packageSets = pm.getAllPackageSets(true);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(
                     packageSets,
@@ -148,6 +156,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
                         appInfo.setIconDrawable(R.drawable.module_common_ic_nothing);
                         appInfo.setAppLabel(packageSet.getLabel());
                         appInfo.setArg3(packageSet.getCreateAt());
+                        appInfo.setSelected(packageSet.isPrebuilt());
                         int count = packageSet.getPackageCount();
                         appInfo.setArg1(count);
                         res.add(

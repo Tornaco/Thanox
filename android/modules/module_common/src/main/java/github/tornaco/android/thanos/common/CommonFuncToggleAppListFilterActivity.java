@@ -44,6 +44,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = obtainViewModel(this);
+        viewModel.bindFeatureId("thanox_app_feature_" + getClass().getName());
         binding = ActivityCommonFuncToggleListFilterBinding.inflate(
                 LayoutInflater.from(this), null, false);
         setContentView(binding.getRoot());
@@ -116,7 +117,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
             @Override
             public int compare(PackageSet o1, PackageSet o2) {
                 if (o1.isPrebuilt() != o2.isPrebuilt()) {
-                    return o1.isPrebuilt() ? -1 : 1;
+                    return o1.isPrebuilt() ? 1 : -1;
                 }
                 return Long.compare(o1.getCreateAt(), o2.getCreateAt());
             }

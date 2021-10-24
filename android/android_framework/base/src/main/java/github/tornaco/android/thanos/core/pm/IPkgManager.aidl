@@ -76,8 +76,8 @@ interface IPkgManager {
 
     PackageSet createPackageSet(String label);
     boolean removePackageSet(String id);
-    PackageSet getPackageSetById(String id);
-    List<PackageSet> getAllPackageSets();
+    PackageSet getPackageSetById(String id, boolean withPackages);
+    List<PackageSet> getAllPackageSets(boolean withPackages);
     List<String> getAllPackageSetIds();
     void addToPackageSet(String pkg, String id);
     void removeFromPackageSet(String pkg, String id);

@@ -16,7 +16,7 @@ public class BaseDefaultMenuItemHandlingAppCompatActivity extends AppCompatActiv
     }
 
     protected boolean onHomeMenuSelected() {
-        finish();
+        onBackPressed();
         return true;
     }
 

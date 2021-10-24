@@ -193,11 +193,11 @@ public interface IPkgManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id) throws android.os.RemoteException
+    @Override public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages) throws android.os.RemoteException
     {
       return null;
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getAllPackageSets() throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getAllPackageSets(boolean withPackages) throws android.os.RemoteException
     {
       return null;
     }
@@ -816,7 +816,9 @@ public interface IPkgManager extends android.os.IInterface
           data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
-          github.tornaco.android.thanos.core.pm.PackageSet _result = this.getPackageSetById(_arg0);
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          github.tornaco.android.thanos.core.pm.PackageSet _result = this.getPackageSetById(_arg0, _arg1);
           reply.writeNoException();
           if ((_result!=null)) {
             reply.writeInt(1);
@@ -830,7 +832,9 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getAllPackageSets:
         {
           data.enforceInterface(descriptor);
-          java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> _result = this.getAllPackageSets();
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> _result = this.getAllPackageSets(_arg0);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -2097,7 +2101,7 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id) throws android.os.RemoteException
+      @Override public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -2105,10 +2109,11 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
+          _data.writeInt(((withPackages)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetById, _data, _reply, 0);
           if (!_status) {
             if (getDefaultImpl() != null) {
-              return getDefaultImpl().getPackageSetById(id);
+              return getDefaultImpl().getPackageSetById(id, withPackages);
             }
           }
           _reply.readException();
@@ -2125,17 +2130,18 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getAllPackageSets() throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getAllPackageSets(boolean withPackages) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((withPackages)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllPackageSets, _data, _reply, 0);
           if (!_status) {
             if (getDefaultImpl() != null) {
-              return getDefaultImpl().getAllPackageSets();
+              return getDefaultImpl().getAllPackageSets(withPackages);
             }
           }
           _reply.readException();
@@ -2456,8 +2462,8 @@ public interface IPkgManager extends android.os.IInterface
   public int getInstalledPackagesCount(int appFlags) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.pm.PackageSet createPackageSet(java.lang.String label) throws android.os.RemoteException;
   public boolean removePackageSet(java.lang.String id) throws android.os.RemoteException;
-  public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id) throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getAllPackageSets() throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getAllPackageSets(boolean withPackages) throws android.os.RemoteException;
   public java.util.List<java.lang.String> getAllPackageSetIds() throws android.os.RemoteException;
   public void addToPackageSet(java.lang.String pkg, java.lang.String id) throws android.os.RemoteException;
   public void removeFromPackageSet(java.lang.String pkg, java.lang.String id) throws android.os.RemoteException;

@@ -328,13 +328,13 @@ public class PackageManager {
   }
 
   @SneakyThrows
-  public PackageSet getPackageSetById(String id) {
-    return pm.getPackageSetById(id);
+  public PackageSet getPackageSetById(String id, boolean withPackages) {
+    return pm.getPackageSetById(id, withPackages);
   }
 
   @SneakyThrows
-  public List<PackageSet> getAllPackageSets() {
-    return pm.getAllPackageSets();
+  public List<PackageSet> getAllPackageSets(boolean withPackages) {
+    return pm.getAllPackageSets(withPackages);
   }
 
   @SneakyThrows

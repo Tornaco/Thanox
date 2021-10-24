@@ -10,6 +10,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.preference.PreferenceManager;
 
 import com.elvishew.xlog.XLog;
 import com.google.common.collect.Lists;
@@ -38,6 +39,8 @@ import util.CollectionUtils;
 import util.ObjectsUtils;
 
 public class CommonAppListFilterViewModel extends AndroidViewModel {
+    private static final String PREF_KEY_DEF_CATEGORY_ID_PREFIX = "pref.default.app.category.id_";
+
     public static final CategoryIndex DEFAULT_CATEGORY_INDEX = CategoryIndex.from(PrebuiltPkgSetsKt.PREBUILT_PACKAGE_SET_ID_3RD);
 
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
@@ -49,6 +52,8 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
 
     private ListModelLoader listModelLoader;
 
+    private String featureId;
+
     public CommonAppListFilterViewModel(@NonNull Application application) {
         super(application);
         registerEventReceivers();
@@ -56,6 +61,20 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
 
     public void start() {
         loadModels();
+    }
+
+    public void bindFeatureId(String featureId) {
+        this.featureId = featureId;
+        String preferredPkgSetId = PreferenceManager.getDefaultSharedPreferences(getApplication())
+                .getString(PREF_KEY_DEF_CATEGORY_ID_PREFIX + featureId, DEFAULT_CATEGORY_INDEX.pkgSetId);
+        // Check if valid
+        ThanosManager thanox = ThanosManager.from(getApplication());
+        if (thanox.isServiceInstalled()
+                && thanox.getPkgManager().getPackageSetById(preferredPkgSetId, false) != null) {
+            categoryIndex.set(CategoryIndex.from(preferredPkgSetId));
+        } else {
+            categoryIndex.set(DEFAULT_CATEGORY_INDEX);
+        }
     }
 
     private void loadModels() {
@@ -118,6 +137,10 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
 
     public void setAppCategoryFilter(String id) {
         categoryIndex.set(CategoryIndex.from(id));
+        PreferenceManager.getDefaultSharedPreferences(getApplication())
+                .edit()
+                .putString(PREF_KEY_DEF_CATEGORY_ID_PREFIX + featureId, id)
+                .apply();
         start();
     }
 
@@ -126,7 +149,7 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
         if (!thanox.isServiceInstalled()) {
             return Lists.newArrayListWithCapacity(0);
         }
-        return thanox.getPkgManager().getAllPackageSets();
+        return thanox.getPkgManager().getAllPackageSets(false);
     }
 
     PackageSet getCurrentPackageSet() {

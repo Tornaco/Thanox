@@ -44,6 +44,7 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCommonListFilterBinding.inflate(LayoutInflater.from(this), null, false);
         viewModel = obtainViewModel(this);
+        viewModel.bindFeatureId("thanox_app_feature_" + getClass().getName());
         setContentView(binding.getRoot());
         setupView();
         setupViewModel();
@@ -162,7 +163,7 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
             @Override
             public int compare(PackageSet o1, PackageSet o2) {
                 if (o1.isPrebuilt() != o2.isPrebuilt()) {
-                    return o1.isPrebuilt() ? -1 : 1;
+                    return o1.isPrebuilt() ? 1 : -1;
                 }
                 return Long.compare(o1.getCreateAt(), o2.getCreateAt());
             }
@@ -274,11 +275,18 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
 
     @Override
     public void onBackPressed() {
-        if (binding.searchView.isSearchOpen()) {
-            binding.searchView.closeSearch();
+        if (closeSearch()) {
             return;
         }
         super.onBackPressed();
+    }
+
+    protected boolean closeSearch() {
+        if (binding.searchView.isSearchOpen()) {
+            binding.searchView.closeSearch();
+            return true;
+        }
+        return false;
     }
 
     public static CommonAppListFilterViewModel obtainViewModel(FragmentActivity activity) {

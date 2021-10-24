@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.core.pm;
 
 import github.tornaco.android.thanos.core.pm.IAddPluginCallback;
+import github.tornaco.android.thanos.core.pm.IPackageSetChangeListener;
 import github.tornaco.android.thanos.core.IPrinter;
 
 interface IPkgManager {
@@ -89,4 +90,7 @@ interface IPkgManager {
     boolean isFreezePkgWithSuspendEnabled();
 
     List<AppInfo> getInstalledPkgsByPackageSetId(String pkgSetId);
+
+    void registerPackageSetChangeListener(in IPackageSetChangeListener listener);
+    void unRegisterPackageSetChangeListener(in IPackageSetChangeListener listener);
 }

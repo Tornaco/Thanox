@@ -376,4 +376,14 @@ public class PackageManager {
   public List<AppInfo> getInstalledPkgsByPackageSetId(String pkgSetId) {
     return pm.getInstalledPkgsByPackageSetId(pkgSetId);
   }
+
+  @SneakyThrows
+  public void registerPackageSetChangeListener(PackageSetChangeListener listener) {
+    pm.registerPackageSetChangeListener(listener.stub);
+  }
+
+  @SneakyThrows
+  public void unRegisterPackageSetChangeListener(PackageSetChangeListener listener) {
+    pm.unRegisterPackageSetChangeListener(listener.stub);
+  }
 }

@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.apps;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -26,6 +27,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.PackageManager;
 import github.tornaco.android.thanos.core.pm.PackageSet;
+import github.tornaco.android.thanos.core.pm.PackageSetChangeListener;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.EditTextDialog;
@@ -37,8 +39,29 @@ import util.Consumer;
 public class PackageSetListActivity extends CommonAppListFilterActivity {
     private static final int REQ_CODE_EDIT = 100;
 
+    private final PackageSetChangeListener packageSetChangeListener = new PackageSetChangeListener() {
+        @Override
+        public void onPackageSetChanged(String pkgSetId) {
+            super.onPackageSetChanged(pkgSetId);
+            XLog.d("onPackageSetChanged...");
+            viewModel.start(); 
+        }
+    };
+
     public static void start(Activity activity) {
         ActivityUtils.startActivity(activity, PackageSetListActivity.class);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ThanosManager.from(this).getPkgManager().registerPackageSetChangeListener(packageSetChangeListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ThanosManager.from(this).getPkgManager().unRegisterPackageSetChangeListener(packageSetChangeListener);
     }
 
     @Override

@@ -172,11 +172,7 @@ public class NavViewModel extends AndroidViewModel {
                   ActivityManager.MemoryInfo memoryInfo =
                       thanosManager.getActivityManager().getMemoryInfo();
                   if (memoryInfo != null) {
-                    usedPercent[0] =
-                        (int)
-                            (100
-                                * (((float) (memoryInfo.totalMem - memoryInfo.availMem)
-                                    / (float) memoryInfo.totalMem)));
+                    usedPercent[0] = (int) (100 * (((float) (memoryInfo.totalMem - memoryInfo.availMem) / (float) memoryInfo.totalMem)));
                     long availableMB = memoryInfo.availMem;
                     memAvailablePercentString[0] =
                         Formatter.formatFileSize(getApplication(), availableMB);
@@ -385,6 +381,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build())));
 
     tileGroups.add(new TileGroup(loadStatusHeaderInfo()));
+
     if (boost.hasAtLeastOneTile()) tileGroups.add(boost);
     if (secure.hasAtLeastOneTile()) tileGroups.add(secure);
     if (ext.hasAtLeastOneTile()) tileGroups.add(ext);

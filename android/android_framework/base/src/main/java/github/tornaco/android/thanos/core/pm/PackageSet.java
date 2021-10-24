@@ -14,6 +14,7 @@ public class PackageSet implements Parcelable {
     private String id;
     private long createAt;
     private List<String> pkgNames;
+    private boolean isPrebuilt;
 
     protected PackageSet(Parcel in) {
         label = in.readString();
@@ -23,13 +24,15 @@ public class PackageSet implements Parcelable {
         if (pkgNames == null) {
             pkgNames = new ArrayList<>();
         }
+        isPrebuilt = in.readInt() == 1;
     }
 
-    public PackageSet(String label, String id, long createAt, List<String> pkgNames) {
+    public PackageSet(String label, String id, long createAt, List<String> pkgNames, boolean isPrebuilt) {
         this.label = label;
         this.id = id;
         this.createAt = createAt;
         this.pkgNames = pkgNames;
+        this.isPrebuilt = isPrebuilt;
     }
 
     public PackageSet() {
@@ -64,6 +67,10 @@ public class PackageSet implements Parcelable {
         return CollectionUtils.sizeOf(pkgNames);
     }
 
+    public boolean isPrebuilt() {
+        return isPrebuilt;
+    }
+
     public static final Creator<PackageSet> CREATOR = new Creator<PackageSet>() {
         @Override
         public PackageSet createFromParcel(Parcel in) {
@@ -87,6 +94,7 @@ public class PackageSet implements Parcelable {
         parcel.writeString(id);
         parcel.writeLong(createAt);
         parcel.writeStringList(pkgNames);
+        parcel.writeInt(isPrebuilt ? 1 : 0);
     }
 
     @Override
@@ -128,6 +136,7 @@ public class PackageSet implements Parcelable {
         private String id;
         private long createAt;
         private List<String> pkgNames;
+        private boolean isPrebuilt;
 
         PackageSetBuilder() {
         }
@@ -152,12 +161,13 @@ public class PackageSet implements Parcelable {
             return this;
         }
 
-        public PackageSet build() {
-            return new PackageSet(label, id, createAt, pkgNames);
+        public PackageSet.PackageSetBuilder prebuilt(boolean isPrebuilt) {
+            this.isPrebuilt = isPrebuilt;
+            return this;
         }
 
-        public String toString() {
-            return "PackageSet.PackageSetBuilder(label=" + this.label + ", id=" + this.id + ", createAt=" + this.createAt + ", pkgNames=" + this.pkgNames + ")";
+        public PackageSet build() {
+            return new PackageSet(label, id, createAt, pkgNames, isPrebuilt);
         }
     }
 }

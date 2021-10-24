@@ -23,6 +23,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import java.util.Comparator;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.pm.PackageSet;
@@ -111,6 +112,15 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
     protected void onSetupFilter(Chip filterAnchor) {
         // Creating the ArrayAdapter instance having the categoryArray list
         List<PackageSet> menuItemList = viewModel.getAllPackageSetFilterItems();
+        menuItemList.sort(new Comparator<PackageSet>() {
+            @Override
+            public int compare(PackageSet o1, PackageSet o2) {
+                if (o1.isPrebuilt() != o2.isPrebuilt()) {
+                    return o1.isPrebuilt() ? -1 : 1;
+                }
+                return Long.compare(o1.getCreateAt(), o2.getCreateAt());
+            }
+        });
         PackageSet currentPackageSet = viewModel.getCurrentPackageSet();
         if (currentPackageSet != null) {
             filterAnchor.setText(currentPackageSet.getLabel());

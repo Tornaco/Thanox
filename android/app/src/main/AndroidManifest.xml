@@ -16,6 +16,29 @@
         tools:targetApi="n">
 
         <activity
+            android:name=".main.NavActivity"
+            android:exported="true"
+            android:label="@string/nav_title_thanox"
+            android:theme="@style/Theme.AppSplash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="github.tornaco.android.thanos.action.NAV_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+
+        <activity
             android:name=".process.ProcessManageActivity"
             android:exported="false" />
         <activity

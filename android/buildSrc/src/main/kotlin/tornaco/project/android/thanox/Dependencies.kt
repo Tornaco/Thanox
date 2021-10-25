@@ -92,6 +92,8 @@ object Libs {
 
         const val biometric = "androidx.biometric:biometric:1.2.0-alpha03"
         const val browser = "androidx.browser:browser:1.3.0"
+
+        const val splash = "androidx.core:core-splashscreen:1.0.0-alpha01"
     }
 
     object Room {

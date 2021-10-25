@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.databinding.Observable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -54,6 +55,11 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
     @Verify
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (NavActivityPlugin.onCreate(this)) {
+            finish();
+            return;
+        }
         binding = ActivityNavBinding.inflate(
                 LayoutInflater.from(this), null, false);
         setContentView(binding.getRoot());

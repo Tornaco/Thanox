@@ -121,6 +121,7 @@ dependencies {
     implementation(Libs.AndroidX.constraint)
     implementation(Libs.AndroidX.swipeRefreshLayout)
     implementation(Libs.AndroidX.lifeCycleRuntimeKtx)
+    implementation(Libs.AndroidX.splash)
     annotationProcessor(Libs.AndroidX.lifeCycleCompiler)
     kapt(Libs.AndroidX.lifeCycleCompiler)
 

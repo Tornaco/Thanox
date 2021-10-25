@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.AppSplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/md_white</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/AppThemeLight.NoActionBar</item>
+
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- API 31+ specific attributes -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/animated_splash_logo</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/branding_image_layer_list
+        </item>
+    </style>
+
+    <color name="branding_text_color">#1E1E1E</color>
+</resources>

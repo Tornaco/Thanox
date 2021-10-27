@@ -9,14 +9,12 @@
 
         <activity
             android:name=".ui.start.LockerStartActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme" />
+            android:exported="false" />
         <activity
             android:name=".ui.verify.VerifyActivity"
             android:excludeFromRecents="true"
             android:exported="true"
-            android:taskAffinity="ui.verify.VerifyActivity"
-            android:theme="@style/ModuleLockerAppThemeVerify">
+            android:taskAffinity="ui.verify.VerifyActivity">
             <intent-filter>
                 <action android:name="github.tornaco.practice.honeycomb.locker.action.VERIFY" />
 

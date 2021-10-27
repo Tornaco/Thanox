@@ -104,7 +104,7 @@ public class StartChartActivity extends ThemeActivity implements OnChartValueSel
         int[] attrs = {
                 android.R.attr.textColorPrimary,
                 android.R.attr.windowBackground,
-                R.attr.cardsBackgroundColor};
+                android.R.attr.windowBackground};
         TypedArray ta = obtainStyledAttributes(attrs);
         @SuppressLint("ResourceType") int textColorPrimaryRes = ta.getResourceId(0, R.color.md_red_700);
         @SuppressLint("ResourceType") int windowBgColorRes = ta.getResourceId(1, R.color.md_white);

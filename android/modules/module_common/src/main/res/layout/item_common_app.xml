@@ -99,40 +99,37 @@
             android:layout_marginEnd="@dimen/common_view_margin_default"
             android:orientation="horizontal">
 
-            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/state_badge"
+                style="@style/MaterialButtonBadged"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/md_grey_200"
                 android:singleLine="true"
                 android:text="@string/app_state_disabled"
-                android:textColor="@color/md_black"
                 android:textSize="@dimen/list_item_main_text_size_ext_small"
                 android:visibility="@{(showStateBadge &amp;&amp; app.disabled()) ? View.VISIBLE : View.GONE}"
                 tools:visibility="visible" />
 
-            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/badge1_view"
+                style="@style/MaterialButtonBadged"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="?colorAccent"
                 android:text="@{badge1}"
-                android:textColor="@color/md_white"
                 android:textSize="@dimen/list_item_main_text_size_ext_small"
                 android:visibility="@{badge1 == null ? View.GONE : View.VISIBLE}"
                 tools:text="Active"
                 tools:visibility="visible" />
 
-            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/badge2_view"
+                style="@style/MaterialButtonBadged"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/md_grey_500"
                 android:text="@{badge2}"
-                android:textColor="@color/md_white"
                 android:textSize="@dimen/list_item_main_text_size_ext_small"
                 android:visibility="@{badge2 == null ? View.GONE : View.VISIBLE}"
                 tools:text="Active"

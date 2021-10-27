@@ -1,15 +1,15 @@
 package github.tornaco.android.thanos.databinding;
 
+import static github.tornaco.android.thanos.common.CommonDataBindingAdapters.setIconTint;
+
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.util.Pair;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
@@ -17,8 +17,8 @@ import androidx.databinding.ObservableList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.GenericTransitionOptions;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.matrixxun.starry.badgetextview.MaterialBadgeTextView;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,29 +39,6 @@ import github.tornaco.android.thanos.util.GlideRequest;
 import util.Consumer;
 
 public class DataBindingAdapters {
-
-    @BindingAdapter("android:activeStatusFabImage")
-    public static void setActiveStatusFabImage(FloatingActionButton fab, ObservableField<State> state) {
-        if (state.get() == null) {
-            return;
-        }
-        switch (Objects.requireNonNull(state.get())) {
-            case Active:
-                fab.setImageResource(R.drawable.module_ops_ic_checkbox_circle_fill);
-                fab.setSupportBackgroundTintList(ColorStateList.valueOf(fab.getResources().getColor(R.color.accent)));
-                break;
-            case InActive:
-                fab.setImageResource(R.drawable.ic_forbid_fill);
-                fab.setSupportBackgroundTintList(ColorStateList.valueOf(fab.getResources().getColor(R.color.md_red_600)));
-                break;
-            case RebootNeeded:
-                fab.setImageResource(R.drawable.ic_information_fill);
-                fab.setSupportBackgroundTintList(ColorStateList.valueOf(fab.getResources().getColor(R.color.md_amber_600)));
-                break;
-            default:
-                break;
-        }
-    }
 
     @BindingAdapter("android:boostStatusAppsCount")
     public static void setBoostStatusAppsCount(TextView textView, int count) {
@@ -123,13 +100,6 @@ public class DataBindingAdapters {
     public static void setFeatureIcon(ImageView imageView, @DrawableRes int res) {
         imageView.setImageResource(res);
     }
-
-    @BindingAdapter("android:iconThemeColor")
-    public static void setIconTint(ImageView imageView, @ColorRes int res) {
-        if (res == 0) return;
-        imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), res));
-    }
-
 
     @SuppressWarnings({"ConstantConditions", "unchecked"})
     @BindingAdapter({"android:appsAllowed", "android:appsDisAllowed"})
@@ -201,7 +171,7 @@ public class DataBindingAdapters {
     }
 
     @BindingAdapter({"android:thanosStateText"})
-    public static void setThanosStateText(MaterialBadgeTextView view, @NonNull ObservableField<State> state) {
+    public static void setThanosStateText(MaterialButton view, @NonNull ObservableField<State> state) {
         setThanosStateText((TextView) view, state);
     }
 

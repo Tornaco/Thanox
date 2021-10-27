@@ -5,6 +5,6 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_view_margin_small"
-            android:background="?cardsBackgroundSecondaryColor">
+            android:background="?colorSurface">
     </LinearLayout>
 </layout>

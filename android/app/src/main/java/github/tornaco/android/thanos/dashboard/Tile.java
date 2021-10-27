@@ -4,23 +4,25 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 
 public class Tile {
-    private int id;
-    private String title;
-    private String summary;
-    private String category;
+    private final int id;
+    private final String title;
+    private final String summary;
+    private final String category;
     @DrawableRes
-    private int iconRes;
+    private final int iconRes;
     @ColorRes
-    private int themeColor;
-    private boolean disabled;
-    private Object payload;
-    private boolean checkable;
+    private final int themeColor;
+    private final boolean disabled;
+    private final Object payload;
+    private final boolean checkable;
     private boolean checked;
-    private String badge1, badge2;
+    private final String badge1;
+    private final String badge2;
 
-    private String requiredFeature;
+    private final String requiredFeature;
 
-    public Tile(int id, String title, String summary, String category, int iconRes, int themeColor, boolean disabled, Object payload, boolean checkable, boolean checked, String badge1, String badge2, String requiredFeature) {
+    public Tile(int id, String title, String summary, String category, int iconRes, int themeColor, boolean disabled,
+                Object payload, boolean checkable, boolean checked, String badge1, String badge2, String requiredFeature) {
         this.id = id;
         this.title = title;
         this.summary = summary;
@@ -90,10 +92,6 @@ public class Tile {
 
     public String getRequiredFeature() {
         return this.requiredFeature;
-    }
-
-    public String toString() {
-        return "Tile(id=" + this.getId() + ", title=" + this.getTitle() + ", summary=" + this.getSummary() + ", category=" + this.getCategory() + ", iconRes=" + this.getIconRes() + ", themeColor=" + this.getThemeColor() + ", disabled=" + this.isDisabled() + ", payload=" + this.getPayload() + ", checkable=" + this.isCheckable() + ", checked=" + this.isChecked() + ", badge1=" + this.getBadge1() + ", badge2=" + this.getBadge2() + ", requiredFeature=" + this.getRequiredFeature() + ")";
     }
 
     public void setChecked(boolean checked) {
@@ -185,10 +183,6 @@ public class Tile {
 
         public Tile build() {
             return new Tile(id, title, summary, category, iconRes, themeColor, disabled, payload, checkable, checked, badge1, badge2, requiredFeature);
-        }
-
-        public String toString() {
-            return "Tile.TileBuilder(id=" + this.id + ", title=" + this.title + ", summary=" + this.summary + ", category=" + this.category + ", iconRes=" + this.iconRes + ", themeColor=" + this.themeColor + ", disabled=" + this.disabled + ", payload=" + this.payload + ", checkable=" + this.checkable + ", checked=" + this.checked + ", badge1=" + this.badge1 + ", badge2=" + this.badge2 + ", requiredFeature=" + this.requiredFeature + ")";
         }
     }
 }

@@ -71,7 +71,7 @@
                     android:textAppearance="@style/TextAppearance.TileSubTitle"
                     tools:text="This is summary" />
 
-            <Switch
+            <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/item_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,9 +79,9 @@
                     android:layout_centerVertical="true"
                     android:checked="@{op.remind}"
                     android:soundEffectsEnabled="false"
-                    android:theme="@style/SwitchTheme"
-                    android:thumb="@drawable/module_common_switch_thumb_material_oos"
-                    android:track="@drawable/module_common_switch_track_material_oos"
+
+
+
                     tools:checked="true" />
         </RelativeLayout>
 

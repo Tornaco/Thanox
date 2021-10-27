@@ -2,13 +2,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Splash Screen Theme. -->
     <style name="Theme.AppSplash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/md_black</item>
+        <item name="windowSplashScreenBackground">@color/md_blue_a700</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_background</item>
         <item name="windowSplashScreenAnimationDuration">300</item>
-        <item name="postSplashScreenTheme">@style/AppTheme.NoActionBar</item>
+        <item name="postSplashScreenTheme">@style/AppThemeDark.NoActionBar</item>
 
-        <item name="android:statusBarColor" tools:targetApi="l">@color/md_black</item>
-        <item name="android:navigationBarColor">@color/md_black</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/md_blue_a700</item>
+        <item name="android:navigationBarColor">@color/md_blue_a700</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

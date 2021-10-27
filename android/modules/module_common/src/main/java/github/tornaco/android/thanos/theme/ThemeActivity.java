@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.color.DynamicColors;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -30,6 +31,9 @@ public class ThemeActivity extends BaseDefaultMenuItemHandlingAppCompatActivity 
         AppThemePreferences.getInstance().addObserver(themeObserver);
         Theme theme = getAppTheme();
         setTheme(getThemeRes(theme));
+        if (theme.shouldApplyDynamic) {
+            DynamicColors.applyIfAvailable(this);
+        }
         super.onCreate(savedInstanceState);
     }
 

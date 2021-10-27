@@ -8,5 +8,5 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/common_view_margin_default"
     android:textColor="@color/md_black"
-    app:chipBackgroundColor="?switchBarThumbUnCheckedColor"
+    app:chipBackgroundColor="?colorPrimaryContainer"
     tools:text="@string/chip_title_app_only_cloned_app" />

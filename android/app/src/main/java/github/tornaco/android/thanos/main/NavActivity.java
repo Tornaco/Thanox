@@ -19,6 +19,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
@@ -222,7 +224,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
     }
 
     private void showPowerSaveDialog() {
-        new AlertDialog.Builder(NavActivity.this)
+        new MaterialAlertDialogBuilder(NavActivity.this)
                 .setTitle(R.string.dialog_title_battery_drain_fast_by_thanox)
                 .setMessage(R.string.dialog_message_battery_drain_fast_by_thanox)
                 .setNegativeButton(android.R.string.cancel, null)

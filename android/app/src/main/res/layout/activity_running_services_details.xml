@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout app:elevation="@dimen/common_toolbar_elevation"
-                android:id="@+id/appbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:background="?colorPrimary"
-                android:theme="?appbarTheme">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:theme="?appbarTheme"
+            app:elevation="@dimen/common_toolbar_elevation">
 
             <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    app:popupTheme="?appbarPopupTheme"
-                    app:theme="?toolbarTheme"
-                    app:titleTextColor="?menuIconTint">
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:popupTheme="?appbarPopupTheme"
+                app:theme="?toolbarTheme"
+                app:titleTextColor="?attr/colorControlNormal">
 
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/appbar"
-                android:background="?cardsBackgroundColor" />
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appbar"
+             />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/app_config"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/stop_app"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="@dimen/common_view_margin_default"
-                android:text="@string/feature_title_apps_manager"
-                android:textColor="@color/md_white"
-                android:tint="@color/md_white"
-                app:backgroundTint="?colorAccent"
-                app:icon="@drawable/module_common_ic_settings_fill"
-                app:iconTint="@color/md_white" />
+            android:id="@+id/app_config"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/stop_app"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/common_view_margin_default"
+            android:text="@string/feature_title_apps_manager"
+            android:textColor="?colorPrimary"
+            android:tint="?colorPrimary"
+            app:backgroundTint="?colorPrimaryContainer"
+            app:icon="@drawable/module_common_ic_settings_fill"
+            app:iconTint="?colorPrimary" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/stop_app"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/common_view_margin_default"
-                android:text="@string/service_stop"
-                android:textColor="@color/md_white"
-                android:tint="@color/md_white"
-                app:backgroundTint="@color/md_red_400"
-                app:icon="@drawable/ic_close_fill"
-                app:iconTint="@color/md_white" />
+            android:id="@+id/stop_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/common_view_margin_default"
+            android:text="@string/service_stop"
+            android:textColor="@color/md_white"
+            android:tint="@color/md_white"
+            app:backgroundTint="?colorPrimaryContainer"
+            app:icon="@drawable/ic_close_fill"
+            app:iconTint="?colorPrimary" />
     </RelativeLayout>
 </layout>

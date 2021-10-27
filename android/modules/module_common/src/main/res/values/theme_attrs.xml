@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="colorAccentDark" format="color" />
-    <attr name="menuIconTint" format="color" />
-    <attr name="textColorMain" format="color" />
     <attr name="appbarPopupTheme" format="reference" />
     <attr name="appbarTheme" format="reference" />
     <attr name="toolbarTheme" format="reference" />
-    <attr name="textSizeListPrimary" format="dimension" />
-    <attr name="cardsBackgroundColor" format="color" />
-    <attr name="cardsBackgroundSecondaryColor" format="color" />
-    <attr name="dialogBackgroundColor" format="color" />
-
-    <attr name="switchBarTheme" format="reference" />
-    <attr name="switchBarBackgroundColor" format="color" />
-    <attr name="switchBarBackgroundColorChecked" format="color" />
-    <attr name="switchBarMarginStart" format="dimension" />
-    <attr name="switchBarMarginEnd" format="dimension" />
-    <attr name="switchBarTextColor" format="color" />
-
-    <attr name="switchBarTrackCheckedColor" format="color" />
-    <attr name="switchBarTrackUnCheckedColor" format="color" />
-    <attr name="switchBarThumbCheckedColor" format="color" />
-    <attr name="switchBarThumbUnCheckedColor" format="color" />
+    <attr name="collapsingToolbarTheme" format="reference" />
 </resources>

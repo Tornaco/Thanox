@@ -72,22 +72,18 @@ object Libs {
     object AndroidX {
         const val androidXCore = "androidx.core:core-ktx:1.3.2"
         const val appCompat = "androidx.appcompat:appcompat:1.3.1"
-        const val material = "com.google.android.material:material:1.5.0-alpha04"
+        const val material = "com.google.android.material:material:1.5.0-alpha05"
         const val annotations = "androidx.annotation:annotation:1.1.0"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
         const val cardview = "androidx.cardview:cardview:1.1.0"
-        const val v4 = "androidx.legacy:legacy-support-v4:1.1.0"
         const val constraint = "com.android.support.constraint:constraint-layout:1.1.3"
-        const val coreUtils = "androidx.legacy:legacy-support-core-utils:1.1.0"
         const val preference = "androidx.preference:preference:1.1.0"
         const val interpolator = "androidx.interpolator:interpolator:1.0.0"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-
         const val lifeCycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
         const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime:2.3.1"
         const val lifeCycleExt = "androidx.lifecycle:lifecycle-extensions:2.2.0"
-        const val lifeCycleCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:2.3.1"
         const val lifeCycleCompiler = "androidx.lifecycle:lifecycle-compiler:2.3.1"
 
         const val biometric = "androidx.biometric:biometric:1.2.0-alpha03"

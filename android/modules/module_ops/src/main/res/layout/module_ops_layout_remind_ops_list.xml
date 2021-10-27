@@ -23,19 +23,18 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
-            android:background="?colorPrimary"
             android:theme="?appbarTheme"
             app:elevation="@dimen/common_toolbar_elevation">
 
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                style="?collapsingToolbarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                app:contentScrim="?attr/colorPrimary"
+                app:contentScrim="?attr/colorSurface"
                 app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleCollapseMode="scale"
@@ -49,7 +48,7 @@
                     app:popupTheme="?appbarPopupTheme"
                     app:theme="?toolbarTheme"
                     app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    app:titleTextColor="?menuIconTint"
+                    app:titleTextColor="?attr/colorControlNormal"
                     tools:title="Title very long very very long!!!!">
 
                 </androidx.appcompat.widget.Toolbar>
@@ -72,7 +71,7 @@
                     android:id="@+id/apps"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="?cardsBackgroundColor"
+
                     android:opGroups="@{viewModel.opGroups}"
                     app:fastScrollEnabled="false" />
 

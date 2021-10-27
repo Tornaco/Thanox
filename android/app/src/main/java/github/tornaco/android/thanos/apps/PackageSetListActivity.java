@@ -85,11 +85,10 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
 
     @Override
     protected void onSetupFab(ExtendedFloatingActionButton fab) {
-        fab.setText(null);
+        fab.setText(R.string.common_fab_title_add);
         fab.setIconResource(R.drawable.module_common_ic_add_fill);
         fab.show();
-        fab.setOnClickListener(
-                v -> onRequestAddPackageSet());
+        fab.setOnClickListener(v -> onRequestAddPackageSet());
     }
 
     private void onRequestAddPackageSet() {

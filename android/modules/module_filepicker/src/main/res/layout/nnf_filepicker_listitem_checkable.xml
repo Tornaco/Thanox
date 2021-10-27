@@ -26,7 +26,7 @@
             android:layout_height="?android:listPreferredItemHeight"
             android:adjustViewBounds="true"
             android:scaleType="center"
-            android:tint="?menuIconTint"
+            android:tint="?attr/colorControlNormal"
             android:visibility="visible"
             app:srcCompat="@drawable/nnf_ic_folder_black_48dp"
             tools:ignore="ContentDescription" />

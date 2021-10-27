@@ -5,13 +5,13 @@
 
     <item
             android:id="@+id/reboot"
-            android:icon="@drawable/ic_restart_line"
+            android:icon="@drawable/ic_md_outline_restart_alt_24"
             android:title="@string/reboot_now"
             app:showAsAction="ifRoom"
             tools:ignore="AlwaysShowAction" />
     <item
             android:id="@+id/settings"
-            android:icon="@drawable/ic_settings_line"
+            android:icon="@drawable/ic_md_outline_settings_24"
             android:title="@string/nav_title_settings"
             app:showAsAction="ifRoom" />
 

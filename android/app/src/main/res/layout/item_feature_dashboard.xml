@@ -1,142 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
 
         <variable
-                name="tile"
-                type="github.tornaco.android.thanos.dashboard.Tile" />
+            name="tile"
+            type="github.tornaco.android.thanos.dashboard.Tile" />
 
         <variable
-                name="isLastOne"
-                type="boolean" />
+            name="isLastOne"
+            type="boolean" />
 
         <variable
-                name="checkable"
-                type="boolean" />
+            name="checkable"
+            type="boolean" />
 
     </data>
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
-                android:id="@+id/category_title"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dashboard_category_title_height"
-                android:layout_alignParentTop="true"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:paddingStart="@dimen/dashboard_category_title_margin_start"
-                android:paddingEnd="@dimen/dashboard_category_title_margin_start"
-                android:singleLine="true"
-                android:text="@{tile.category}"
-                android:textAppearance="@style/TextAppearance.CategoryTitle"
-                android:textColor="?colorAccent"
-                android:visibility="@{(tile.category == null) ? View.GONE : View.VISIBLE}"
-                tools:text="@string/app_name" />
+            android:id="@+id/category_title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dashboard_category_title_height"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dashboard_category_title_margin_start"
+            android:paddingEnd="@dimen/dashboard_category_title_margin_start"
+            android:singleLine="true"
+            android:text="@{tile.category}"
+            android:textAppearance="@style/TextAppearance.CategoryTitle"
+            android:textColor="?colorAccent"
+            android:visibility="@{(tile.category == null) ? View.GONE : View.VISIBLE}"
+            tools:text="@string/app_name" />
 
         <RelativeLayout
-                android:id="@+id/tile_root"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/category_title"
-                android:background="@drawable/module_common_clickable_item_background"
-                android:minHeight="@dimen/dashboard_tile_minimum_height">
+            android:id="@+id/tile_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_title"
+            android:background="@drawable/module_common_clickable_item_background"
+            android:minHeight="@dimen/dashboard_tile_minimum_height">
 
             <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/icon"
-                    android:layout_width="@dimen/dashboard_tile_image_size"
-                    android:layout_height="@dimen/dashboard_tile_image_size"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dashboard_tile_image_margin_start"
-                    android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end"
-                    android:featureIcon="@{tile.iconRes}"
-                    android:iconThemeColor="@{tile.themeColor}"
-                    android:padding="@dimen/dashboard_tile_image_padding"
-                    tools:src="@drawable/module_common_ic_settings_fill" />
+                android:id="@+id/icon"
+                android:layout_width="@dimen/dashboard_tile_image_size"
+                android:layout_height="@dimen/dashboard_tile_image_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dashboard_tile_image_margin_start"
+                android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end"
+                android:featureIcon="@{tile.iconRes}"
+                android:iconThemeColor="@{tile.themeColor}"
+                android:padding="@dimen/dashboard_tile_image_padding"
+                tools:src="@drawable/module_common_ic_settings_fill" />
 
             <RelativeLayout
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dashboard_category_title_margin_end"
+                android:layout_marginBottom="@dimen/dashboard_category_bot_margin"
+                android:layout_toStartOf="@id/badge1"
+                android:layout_toEndOf="@+id/icon">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/dashboard_category_title_margin_end"
-                    android:layout_marginBottom="@dimen/dashboard_category_bot_margin"
-                    android:layout_toStartOf="@id/badge1"
-                    android:layout_toEndOf="@+id/icon">
+                    android:fadingEdge="horizontal"
+                    android:text="@{tile.title}"
+                    android:textAppearance="@style/TextAppearance.TileTitle"
+                    tools:text="@string/app_name" />
 
                 <TextView
-                        android:id="@+id/title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fadingEdge="horizontal"
-                        android:text="@{tile.title}"
-                        android:textAppearance="@style/TextAppearance.TileTitle"
-                        tools:text="@string/app_name" />
-
-                <TextView
-                        android:id="@+id/summary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title"
-                        android:layout_alignStart="@android:id/title"
-                        android:ellipsize="end"
-                        android:maxLines="30"
-                        android:text="@{tile.summary}"
-                        android:textAppearance="@style/TextAppearance.TileSubTitle"
-                        android:visibility="@{tile.summary == null ? View.GONE : View.VISIBLE}"
-                        tools:text="This is summary" />
+                    android:id="@+id/summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:layout_alignStart="@android:id/title"
+                    android:ellipsize="end"
+                    android:maxLines="30"
+                    android:text="@{tile.summary}"
+                    android:textAppearance="@style/TextAppearance.TileSubTitle"
+                    android:visibility="@{tile.summary == null ? View.GONE : View.VISIBLE}"
+                    tools:text="This is summary" />
             </RelativeLayout>
 
 
-            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
-                    android:id="@+id/badge1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/common_view_margin_default"
-                    android:layout_toStartOf="@id/badge2"
-                    android:background="@color/md_red_500"
-                    android:singleLine="true"
-                    android:text="@{tile.badge1}"
-                    android:textColor="@color/md_white"
-                    android:textSize="@dimen/list_item_main_text_size_ext_small"
-                    android:visibility="@{tile.badge1 == null ? View.GONE : View.VISIBLE}"
-                    tools:text="Active"
-                    tools:visibility="visible" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/badge1"
+                style="@style/MaterialButtonBadged"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/common_view_margin_default"
+                android:layout_toStartOf="@id/badge2"
+                android:singleLine="true"
+                android:text="@{tile.badge1}"
+                android:textSize="@dimen/list_item_main_text_size_ext_small"
+                android:visibility="@{tile.badge1 == null ? View.GONE : View.VISIBLE}"
+                tools:text="Active"
+                tools:visibility="visible" />
 
-            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
-                    android:id="@+id/badge2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/common_view_margin_default"
-                    android:layout_toStartOf="@id/tile_switch"
-                    android:background="@color/md_red_500"
-                    android:singleLine="true"
-                    android:text="@{tile.badge2}"
-                    android:textColor="@color/md_white"
-                    android:textSize="@dimen/list_item_main_text_size_ext_small"
-                    android:visibility="@{tile.badge2 == null ? View.GONE : View.VISIBLE}"
-                    tools:text="Active"
-                    tools:visibility="visible" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/badge2"
+                style="@style/MaterialButtonBadged"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/common_view_margin_default"
+                android:layout_toStartOf="@id/tile_switch"
+                android:singleLine="true"
+                android:text="@{tile.badge2}"
+                android:textSize="@dimen/list_item_main_text_size_ext_small"
+                android:visibility="@{tile.badge2 == null ? View.GONE : View.VISIBLE}"
+                tools:text="Active"
+                tools:visibility="visible" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/tile_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/common_view_margin_default"
-                    android:checked="@{tile.checked}"
-                    android:soundEffectsEnabled="false"
-                    android:theme="@style/SwitchTheme"
-                    android:visibility="@{checkable ? View.VISIBLE : View.GONE}"
-                    tools:checked="true" />
+                android:id="@+id/tile_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/common_view_margin_default"
+                android:checked="@{tile.checked}"
+                android:soundEffectsEnabled="false"
+
+                android:visibility="@{checkable ? View.VISIBLE : View.GONE}"
+                tools:checked="true" />
 
         </RelativeLayout>
 

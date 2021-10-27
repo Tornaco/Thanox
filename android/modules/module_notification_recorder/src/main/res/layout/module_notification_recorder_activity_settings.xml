@@ -11,7 +11,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:background="?colorPrimary"
             android:theme="?appbarTheme"
             app:elevation="@dimen/common_toolbar_elevation">
 
@@ -22,7 +21,7 @@
                 app:popupTheme="?appbarPopupTheme"
                 app:theme="?toolbarTheme"
                 app:title="@string/module_notification_recorder_settings"
-                app:titleTextColor="?menuIconTint">
+                app:titleTextColor="?attr/colorControlNormal">
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -33,6 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/appbar"
-            android:background="?cardsBackgroundColor" />
+             />
     </RelativeLayout>
 </layout>

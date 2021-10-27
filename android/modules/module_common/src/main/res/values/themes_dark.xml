@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppThemeDark" parent="Theme.Material3.Dark">
+        <item name="colorAccent">@color/md_blue_a700</item>
+        <item name="colorPrimaryContainer">@color/md_blue_900</item>
+
+        <item name="colorPrimary">?colorAccent</item>
+        <item name="colorPrimaryDark">?colorPrimary</item>
+        <item name="colorPrimaryVariant">?colorPrimary</item>
+        <item name="colorSecondary">?colorPrimary</item>
+        <item name="colorSecondaryContainer">?colorPrimaryContainer</item>
+        <item name="colorSecondaryVariant">?colorPrimary</item>
+        <item name="colorOnSecondary">@color/md_white</item>
+        <item name="colorTertiary">?colorPrimary</item>
+        <item name="colorOnTertiary">@color/md_white</item>
+        <item name="colorError">@color/md_red_500</item>
+
+        <item name="colorSurface">@color/md_dark</item>
+        <item name="colorOnSurface">@color/md_grey_350</item>
+
+        <item name="appbarPopupTheme">@style/PopupOverlay</item>
+        <item name="appbarTheme">@style/AppBarOverlay</item>
+        <item name="toolbarTheme">@style/ToolbarThemeCommon</item>
+        <item name="collapsingToolbarTheme">@style/CollapsingToolbarThemeCommon</item>
+        <item name="android:windowBackground">@color/md_black</item>
+        <item name="alertDialogTheme">@style/DialogThemeCommon</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/md_dark</item>
+        <item name="android:navigationBarColor">@color/md_dark</item>
+        <item name="preferenceFragmentCompatStyle">@style/PrefFragmentCompatThemeCommon</item>
+    </style>
+
+    <style name="AppThemeDark.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeDark.Red">
+        <item name="colorAccent">@color/md_red_400</item>
+        <item name="colorPrimaryContainer">@color/md_red_a800</item>
+    </style>
+
+    <style name="AppThemeDark.Red.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeDark.Grey">
+        <item name="colorAccent">@color/md_teal_300</item>
+        <item name="colorPrimaryContainer">@color/md_teal_900</item>
+    </style>
+
+    <style name="AppThemeDark.Grey.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeDark.Amber">
+        <item name="colorAccent">@color/md_amber_900</item>
+        <item name="colorPrimaryContainer">@color/md_deep_orange_a700</item>
+    </style>
+
+    <style name="AppThemeDark.Amber.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>

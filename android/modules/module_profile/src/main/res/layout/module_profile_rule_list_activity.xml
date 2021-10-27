@@ -22,18 +22,17 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
-            android:background="?colorPrimary"
             android:theme="?appbarTheme"
             app:elevation="@dimen/common_toolbar_elevation">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                style="?collapsingToolbarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                app:contentScrim="?attr/colorPrimary"
+                app:contentScrim="?attr/colorSurface"
                 app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleCollapseMode="scale"
@@ -48,7 +47,7 @@
                     app:theme="?toolbarTheme"
                     app:title="@string/module_profile_feature_name"
                     app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    app:titleTextColor="?menuIconTint"
+                    app:titleTextColor="?attr/colorControlNormal"
                     tools:title="Title very long very very long!!!!">
 
                 </androidx.appcompat.widget.Toolbar>
@@ -58,7 +57,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?cardsBackgroundColor"
+
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -76,7 +75,7 @@
                     android:id="@+id/rule_list_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="?cardsBackgroundColor"
+
                     android:focusableInTouchMode="true"
                     android:ruleInfoList="@{viewModel.ruleInfoList}" />
 
@@ -92,6 +91,6 @@
             android:tint="@color/md_white"
             app:backgroundTint="@color/md_indigo_300"
             app:icon="@drawable/module_profile_ic_add_fill"
-            app:iconTint="@color/md_white" />
+            app:iconTint="?colorPrimary" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -63,6 +63,10 @@ public abstract class OsUtils {
         return Build.VERSION.SDK_INT >= 30;
     }
 
+    public static boolean isSOrAbove() {
+        return Build.VERSION.SDK_INT >= 31;
+    }
+
     public static boolean hasTvFeature(Context context) {
         PackageManager pm = context.getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_LIVE_TV);

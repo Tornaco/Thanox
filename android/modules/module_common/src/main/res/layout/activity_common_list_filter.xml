@@ -24,19 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
-            android:background="?colorPrimary"
             android:fitsSystemWindows="false"
             android:theme="?appbarTheme"
             app:elevation="@dimen/common_toolbar_elevation">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                style="?collapsingToolbarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                app:contentScrim="?attr/colorPrimary"
+                app:contentScrim="?attr/colorSurface"
                 app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleCollapseMode="scale"
@@ -55,7 +54,7 @@
                         app:popupTheme="?appbarPopupTheme"
                         app:theme="?toolbarTheme"
                         app:titleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                        app:titleTextColor="?menuIconTint"
+                        app:titleTextColor="?attr/colorControlNormal"
                         tools:title="Title of Toolbar">
 
                     </androidx.appcompat.widget.Toolbar>
@@ -81,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/chip_container"
-                android:background="?cardsBackgroundColor"
+
                 android:orientation="vertical">
 
                 <include
@@ -107,7 +106,7 @@
                         android:id="@+id/apps"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="?cardsBackgroundColor"
+
                         android:clipChildren="true"
                         android:clipToPadding="true"
                         android:listModels="@{viewModel.listModels}" />
@@ -172,11 +171,11 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/common_view_margin_default"
             android:text="@string/common_fab_title_done"
-            android:textColor="@color/md_white"
-            android:tint="@color/md_white"
-            app:backgroundTint="?colorAccent"
+            android:textColor="?colorPrimary"
+            android:tint="?colorPrimary"
+            app:backgroundTint="?colorPrimaryContainer"
             app:icon="@drawable/module_common_ic_check_fill_white"
-            app:iconTint="@color/md_white"
+            app:iconTint="?colorPrimary"
             tools:ignore="RelativeOverlap" />
 
 

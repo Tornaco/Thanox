@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppThemeMD3" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">?colorSurface</item>
+        <item name="colorPrimaryDark">?colorSurface</item>
+        <item name="android:windowBackground">@color/md_white</item>
+        <item name="appbarPopupTheme">@style/PopupOverlayLight</item>
+        <item name="appbarTheme">@style/AppBarOverlayLight</item>
+        <item name="toolbarTheme">@style/ToolbarThemeCommon</item>
+        <item name="collapsingToolbarTheme">@style/CollapsingToolbarThemeCommon</item>
+        <item name="alertDialogTheme">@style/DialogThemeCommon</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?colorPrimaryDark</item>
+        <item name="android:navigationBarColor">?colorPrimaryDark</item>
+        <item name="preferenceFragmentCompatStyle">@style/PrefFragmentCompatThemeCommon</item>
+    </style>
+
+    <style name="AppThemeMD3.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

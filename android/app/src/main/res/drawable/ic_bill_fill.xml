@@ -4,6 +4,6 @@
         android:viewportWidth="24"
         android:viewportHeight="24">
     <path
-            android:fillColor="?menuIconTint"
+            android:fillColor="?attr/colorControlNormal"
             android:pathData="M20,22L4,22a1,1 0,0 1,-1 -1L3,3a1,1 0,0 1,1 -1h16a1,1 0,0 1,1 1v18a1,1 0,0 1,-1 1zM8,9v2h8L16,9L8,9zM8,13v2h8v-2L8,13z" />
 </vector>

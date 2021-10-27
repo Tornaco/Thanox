@@ -323,7 +323,7 @@
     <string name="pre_title_bg_restrict_show_notification">Show notification</string>
     <string name="pre_summary_bg_restrict_show_notification">Display notification when pending clean up process detected</string>
 
-    <string name="badge_trying_app">TRAIL</string>
+    <string name="badge_trying_app">Trail</string>
     <string name="badge_paid_app">Paid</string>
     <string name="badge_framework_err">Error</string>
     <string name="badge_power_save_off">Battery</string>

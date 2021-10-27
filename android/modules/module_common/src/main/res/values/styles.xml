@@ -17,37 +17,25 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <!-- Used to color the switch bar controls -->
-    <style name="ThemeOverlay.SwitchBar" parent="ThemeOverlay.AppCompat">
-        <!-- Used by controls, e.g. CheckBox, ProgressBar, etc. -->
-        <item name="colorAccent">?attr/colorAccent</item>
-    </style>
-
-    <style name="SwitchBarTheme" parent="Widget.AppCompat.ActionBar">
-        <item name="switchBarMarginStart">@dimen/common_view_margin_default</item>
-        <item name="switchBarMarginEnd">@dimen/common_view_margin_default</item>
-        <item name="switchBarBackgroundColorChecked">@color/md_grey_800</item>
-        <item name="switchBarBackgroundColor">@color/md_grey_800</item>
-        <item name="switchBarTextColor">@color/md_white</item>
-    </style>
-
-    <style name="SwitchBarTheme.Light">
-        <item name="switchBarBackgroundColor">@color/md_white</item>
-        <item name="switchBarBackgroundColorChecked">@color/md_white</item>
-        <item name="switchBarTextColor">@color/md_black</item>
-    </style>
-
     <style name="ToolbarThemeCommon">
-        <item name="colorControlNormal">?menuIconTint</item>
-        <!--<item name="colorControlActivated">?torMenuIconTintColor</item>-->
-        <item name="android:colorControlNormal">?menuIconTint</item>
+        <item name="colorControlNormal">?attr/colorControlNormal</item>
+        <item name="android:colorControlNormal">?attr/colorControlNormal</item>
         <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
-        <!--<item name="android:colorControlActivated">?torMenuIconTintColor</item>-->
+    </style>
+
+    <style name="CollapsingToolbarThemeCommon" parent="Widget.AppCompat.Toolbar">
+        <item name="colorControlNormal">?attr/colorControlNormal</item>
+        <item name="android:colorControlNormal">?attr/colorControlNormal</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
+    </style>
+
+    <style name="AppBarOverlayLight" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:homeAsUpIndicator">@drawable/module_common_ic_home_as_up</item>
     </style>
 
     <!-- This style is where you define the tint color of your overflow menu button -->
     <style name="OverflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:tint">?menuIconTint</item>
+        <item name="android:tint">?attr/colorControlNormal</item>
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
@@ -56,20 +44,8 @@
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat" />
 
-    <style name="AppBarOverlayLight" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:homeAsUpIndicator">@drawable/module_common_ic_home_as_up</item>
-    </style>
-
     <style name="PopupOverlayLight" parent="ThemeOverlay.AppCompat" />
 
-
-    <style name="SwitchTheme" parent="Widget.AppCompat.CompoundButton.Switch">
-
-    </style>
-
-    <style name="SwitchPrefTheme" parent="@style/Preference.SwitchPreferenceCompat.Material">
-        <item name="android:widgetLayout">@layout/preference_widget_switch_compat_oos</item>
-    </style>
 
     <style name="FilterChipTheme" parent="@style/Widget.MaterialComponents.Chip.Choice">
         <item name="android:textColor">@color/choice_chip_text_color</item>
@@ -83,52 +59,41 @@
         <item name="rippleColor">@color/mtrl_choice_chip_ripple_color</item>
     </style>
 
-    <style name="MaterialButtonBadged" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="MaterialButtonBadged" parent="Widget.Material3.Badge">
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetLeft">0dp</item>
         <item name="android:insetRight">0dp</item>
         <item name="android:minHeight">0dp</item>
         <item name="android:minWidth">0dp</item>
-        <item name="android:textSize">10sp</item>
-        <item name="strokeColor">?menuIconTint</item>
-        <item name="android:textColor">?menuIconTint</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">6dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="backgroundTint">?colorPrimaryContainer</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 
-    <style name="MaterialButtonBadged.Red">
-        <item name="strokeColor">@color/md_red_500</item>
-        <item name="android:textColor">@color/md_red_500</item>
-    </style>
-
-    <style name="MaterialButtonBadged.Amber">
-        <item name="strokeColor">@color/md_amber_600</item>
-        <item name="android:textColor">@color/md_amber_600</item>
-    </style>
-
-    <style name="MaterialButtonBadged.Grey">
-        <item name="strokeColor">@color/md_grey_500</item>
-        <item name="android:textColor">@color/md_grey_500</item>
-    </style>
-
-    <style name="MaterialButtonBadged.Blue">
-        <item name="strokeColor">@color/md_blue_a700</item>
-        <item name="android:textColor">@color/md_blue_a700</item>
+    <style name="MaterialButtonBadged.Error">
+        <item name="backgroundTint">?colorError</item>
     </style>
 
     <style name="ToolbarCollapsedTitleTextAppearance" parent="@style/TextAppearance.AppCompat.Medium">
-        <item name="android:textColor">?menuIconTint</item>
+        <item name="android:textColor">?attr/colorControlNormal</item>
     </style>
 
     <style name="ToolbarExpandedTitleTextAppearance" parent="@style/TextAppearance.AppCompat.Display1">
-        <item name="android:textColor">?menuIconTint</item>
+        <item name="android:textColor">?attr/colorControlNormal</item>
     </style>
 
-    <style name="ModernDialogButton" parent="@style/Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">?colorAccent</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:layout_marginEnd">@dimen/common_view_margin_default</item>
-        <item name="android:layout_marginStart">@dimen/common_view_margin_default</item>
-        <item name="android:layout_centerHorizontal">true</item>
+    <style name="DialogThemeCommon" parent="@style/MaterialAlertDialog.Material3" />
+
+    <style name="PrefFragmentCompatThemeCommon" parent="@style/PreferenceFragment.Material">
+        <item name="android:layout">@layout/preference_list_with_fab_fragment</item>
     </style>
 </resources>

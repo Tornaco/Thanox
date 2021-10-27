@@ -29,7 +29,7 @@
             android:layout_marginBottom="@dimen/common_view_margin_small"
             android:focusable="true"
             android:visibility="@{viewmodel.hasAnyPluginFeatures ? View.GONE : View.VISIBLE}"
-            app:cardBackgroundColor="?cardsBackgroundColor"
+
             app:cardCornerRadius="@dimen/common_view_corner_radius"
             app:cardElevation="@dimen/common_view_elevation">
 
@@ -111,7 +111,7 @@
             android:layout_marginEnd="@dimen/common_view_margin_small"
             android:layout_marginBottom="@dimen/common_view_margin_small"
             android:focusable="true"
-            app:cardBackgroundColor="?cardsBackgroundColor"
+
             app:cardCornerRadius="@dimen/common_view_corner_radius"
             app:cardElevation="@dimen/common_view_elevation"
             tools:visibility="gone">
@@ -136,7 +136,7 @@
             app:backgroundTint="@color/md_blue_700"
             app:elevation="0dp"
             app:icon="@drawable/ic_store_fill"
-            app:iconTint="@color/md_white" />
+            app:iconTint="?colorPrimary" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_file"
@@ -150,7 +150,7 @@
             app:backgroundTint="@color/md_amber_500"
             app:elevation="0dp"
             app:icon="@drawable/ic_file_3_fill"
-            app:iconTint="@color/md_white" />
+            app:iconTint="?colorPrimary" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab"
@@ -163,6 +163,6 @@
             android:tint="@color/md_white"
             app:backgroundTint="@color/md_red_400"
             app:icon="@drawable/ic_add_fill"
-            app:iconTint="@color/md_white" />
+            app:iconTint="?colorPrimary" />
     </RelativeLayout>
 </layout>

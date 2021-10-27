@@ -5,6 +5,7 @@ import static github.tornaco.android.thanos.CrashHandlerKt.installCrashHandler;
 import android.content.Context;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.color.DynamicColors;
 
 import github.tornaco.android.thanos.app.Init;
 import github.tornaco.android.thanos.core.app.AppGlobals;

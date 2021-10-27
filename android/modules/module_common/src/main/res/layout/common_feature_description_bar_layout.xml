@@ -5,7 +5,7 @@
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?cardsBackgroundColor"
+
             android:padding="@dimen/common_view_margin_default">
 
         <TextView

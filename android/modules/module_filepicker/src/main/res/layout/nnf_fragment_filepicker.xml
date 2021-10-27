@@ -21,7 +21,7 @@
             app:popupTheme="?appbarPopupTheme"
             app:theme="?toolbarTheme"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
-            app:titleTextColor="?menuIconTint">
+            app:titleTextColor="?attr/colorControlNormal">
 
         <TextView
                 android:id="@+id/nnf_current_dir"

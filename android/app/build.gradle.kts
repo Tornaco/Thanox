@@ -184,7 +184,7 @@ dependencies {
 
     implementation(project(":nitro:nitro_framework"))
     implementation(project(":third_party:apkbuilder"))
-    implementation(project(":third_party:badge"))
+
     implementation(project(":third_party:time-duration-picker"))
     implementation(project(":third_party:dateformatter"))
     implementation(project(":third_party:recyclerview-fastscroll"))

@@ -14,12 +14,12 @@
 -->
 
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetLeft="24dp"
-    android:insetTop="24dp"
-    android:insetRight="24dp"
-    android:insetBottom="24dp">
+    android:insetLeft="28dp"
+    android:insetTop="28dp"
+    android:insetRight="28dp"
+    android:insetBottom="28dp">
     <shape android:shape="rectangle">
-        <corners android:radius="16dp" />
-        <solid android:color="?dialogBackgroundColor" />
+        <corners android:radius="18dp" />
+        <solid android:color="?colorSurface" />
     </shape>
 </inset>

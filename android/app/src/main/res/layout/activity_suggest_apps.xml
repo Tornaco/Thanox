@@ -1,90 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?cardsBackgroundColor">
-
-    <TextView
-      android:id="@+id/text_recent_used"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/common_view_margin_default"
-      android:layout_below="@id/appbar"
-      android:layout_centerHorizontal="true"
-      android:text="@string/titile_suggested_apps_recent_used" />
-
-    <com.google.android.material.appbar.AppBarLayout app:elevation="@dimen/common_toolbar_elevation"
-      android:id="@+id/appbar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:background="?colorPrimary"
-      android:theme="?appbarTheme">
-
-      <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        app:popupTheme="?appbarPopupTheme"
-        app:theme="?toolbarTheme"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
-        app:titleTextColor="?menuIconTint">
+        android:layout_height="match_parent"
+        >
 
-      </androidx.appcompat.widget.Toolbar>
+        <TextView
+            android:id="@+id/text_recent_used"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appbar"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/common_view_margin_default"
+            android:text="@string/titile_suggested_apps_recent_used" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:theme="?appbarTheme"
+            app:elevation="@dimen/common_toolbar_elevation">
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-      android:id="@+id/text_view_all_apps"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/common_view_margin_default"
-      android:layout_alignParentBottom="true"
-      android:layout_alignParentEnd="true"
-      android:text="@string/title_suggested_apps_view_all"
-      android:textColor="@color/md_white"
-      android:tint="@color/md_white"
-      app:backgroundTint="?colorAccent"
-      app:icon="@drawable/ic_apps_fill"
-      app:iconTint="@color/md_white" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:popupTheme="?appbarPopupTheme"
+                app:theme="?toolbarTheme"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
+                app:titleTextColor="?attr/colorControlNormal">
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-      android:id="@+id/package_sets"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/common_view_margin_default"
-      android:layout_above="@id/text_view_all_apps"
-      android:layout_alignParentEnd="true"
-      android:text="@string/title_package_sets"
-      android:textColor="@color/md_white"
-      android:tint="@color/md_white"
-      app:backgroundTint="?colorAccent"
-      app:icon="@drawable/ic_price_tag_3_fill"
-      app:iconTint="@color/md_white" />
+            </androidx.appcompat.widget.Toolbar>
 
-    <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-      android:id="@+id/apps"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_above="@id/package_sets"
-      android:layout_below="@id/text_recent_used"
-      android:paddingTop="@dimen/common_view_margin_small"
-      android:paddingStart="@dimen/common_view_margin_small"
-      android:paddingEnd="@dimen/common_view_margin_small"
-      android:background="?cardsBackgroundColor"
-      android:listModels="@{viewmodel.listModels}" />
-  </RelativeLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-  <data>
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/text_view_all_apps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/common_view_margin_default"
+            android:text="@string/title_suggested_apps_view_all"
+            android:textColor="?colorPrimary"
+            android:tint="?colorPrimary"
+            app:backgroundTint="?colorPrimaryContainer"
+            app:icon="@drawable/ic_apps_fill"
+            app:iconTint="?colorPrimary" />
 
-    <import type="android.view.View" />
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/package_sets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/text_view_all_apps"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/common_view_margin_default"
+            android:text="@string/title_package_sets"
+            android:textColor="?colorPrimary"
+            android:tint="?colorPrimary"
+            app:backgroundTint="?colorPrimaryContainer"
+            app:icon="@drawable/ic_price_tag_3_fill"
+            app:iconTint="?colorPrimary" />
 
-    <variable
-      name="viewmodel"
-      type="github.tornaco.android.thanos.apps.SuggestedAppsViewModel" />
+        <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+            android:id="@+id/apps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/package_sets"
+            android:layout_below="@id/text_recent_used"
 
-  </data>
+            android:listModels="@{viewmodel.listModels}"
+            android:paddingStart="@dimen/common_view_margin_small"
+            android:paddingTop="@dimen/common_view_margin_small"
+            android:paddingEnd="@dimen/common_view_margin_small" />
+    </RelativeLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="github.tornaco.android.thanos.apps.SuggestedAppsViewModel" />
+
+    </data>
 </layout>

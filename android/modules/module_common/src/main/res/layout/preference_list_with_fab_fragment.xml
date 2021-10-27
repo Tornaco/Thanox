@@ -15,35 +15,36 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="NewApi">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="NewApi">
 
     <FrameLayout
-            android:id="@android:id/list_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:id="@android:id/list_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <TextView
-            android:id="@android:id/empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:padding="8dp"
-            android:visibility="gone" />
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:padding="8dp"
+        android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/common_view_margin_default"
-            android:tint="@color/md_white"
-            app:backgroundTint="?colorAccent"
-            app:icon="@drawable/module_common_ic_add_fill"
-            app:iconTint="@color/md_white" />
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/common_view_margin_default"
+        android:textColor="?colorPrimary"
+        android:tint="?colorPrimary"
+        app:backgroundTint="?colorPrimaryContainer"
+        app:icon="@drawable/module_common_ic_add_fill"
+        app:iconTint="?colorPrimary" />
 </RelativeLayout>

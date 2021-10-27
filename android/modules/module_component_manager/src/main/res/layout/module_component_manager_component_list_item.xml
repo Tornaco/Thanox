@@ -79,20 +79,20 @@
                     tools:text="Long text, it can be very very very very very very very very very very very very long" />
 
 
-            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+            <com.google.android.material.button.MaterialButton
+                style="@style/MaterialButtonBadged"
                     android:id="@+id/badge1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/common_view_margin_small"
                     android:layout_marginEnd="@dimen/common_view_margin_default"
                     android:layout_toStartOf="@id/item_switch"
-                    android:background="@color/md_red_500"
                     android:text="@string/module_component_manager_disabled_by_thanox"
-                    android:textColor="@color/md_white"
                     android:textSize="@dimen/list_item_main_text_size_ext_small"
                     android:visibility="@{component.disabledByThanox ? View.VISIBLE : View.GONE}" />
 
-            <com.matrixxun.starry.badgetextview.MaterialBadgeTextView
+            <com.google.android.material.button.MaterialButton
+                style="@style/MaterialButtonBadged"
                     android:id="@+id/badge2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,13 +100,11 @@
                     android:layout_marginTop="@dimen/common_view_margin_small"
                     android:layout_marginEnd="@dimen/common_view_margin_default"
                     android:layout_toStartOf="@id/item_switch"
-                    android:background="?colorAccent"
                     android:text="@string/module_component_manager_component_running"
-                    android:textColor="@color/md_white"
                     android:textSize="@dimen/list_item_main_text_size_ext_small"
                     android:visibility="@{component.running ? View.VISIBLE : View.GONE}" />
 
-            <Switch
+            <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/item_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,8 +112,8 @@
                     android:layout_centerVertical="true"
                     android:checked="@{!component.disabled}"
                     android:soundEffectsEnabled="false"
-                    android:theme="@style/SwitchTheme"
-                    android:track="@drawable/module_common_switch_track_material_oos"
+
+
                     tools:checked="true" />
         </RelativeLayout>
 

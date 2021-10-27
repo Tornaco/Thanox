@@ -9,7 +9,7 @@
         android:label="SdkDemo"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
+        android:theme="@style/AppThemeLight.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:label"
         tools:targetApi="n">

@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
 
         <variable
-                name="headerInfo"
-                type="github.tornaco.android.thanos.dashboard.StatusHeaderInfo" />
+            name="headerInfo"
+            type="github.tornaco.android.thanos.dashboard.StatusHeaderInfo" />
 
     </data>
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-                android:id="@+id/status_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?selectableItemBackground"
-                app:cardBackgroundColor="?cardsBackgroundColor"
-                app:cardCornerRadius="@dimen/common_view_corner_radius"
-                app:cardElevation="@dimen/common_view_elevation">
+            android:id="@+id/status_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            app:cardBackgroundColor="?colorSurface"
+            app:cardCornerRadius="@dimen/common_view_corner_radius"
+            app:cardElevation="@dimen/common_view_elevation">
 
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <github.tornaco.android.thanos.widget.GoogleProductSansTextView
-                        android:id="@+id/text_running_apps_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="@dimen/common_view_margin_default"
-                        android:layout_marginTop="@dimen/common_view_margin_default"
-                        android:boostStatusAppsCount="@{headerInfo.runningAppsCount}"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        tools:text="9" />
+                    android:id="@+id/text_running_apps_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/common_view_margin_default"
+                    android:layout_marginTop="@dimen/common_view_margin_default"
+                    android:boostStatusAppsCount="@{headerInfo.runningAppsCount}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    tools:text="9" />
 
                 <TextView
-                        android:id="@+id/text_running_apps"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@id/text_running_apps_count"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="@dimen/common_view_margin_default"
-                        android:layout_marginEnd="@dimen/common_view_margin_default"
-                        android:layout_toEndOf="@id/text_running_apps_count"
-                        android:text="@string/boost_status_running_apps"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:id="@+id/text_running_apps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/text_running_apps_count"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="@dimen/common_view_margin_default"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_toEndOf="@id/text_running_apps_count"
+                    android:text="@string/boost_status_running_apps"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <TextView
-                        android:id="@+id/thanos_status_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/text_running_apps"
-                        android:layout_marginStart="@dimen/common_view_margin_default"
-                        android:layout_marginTop="@dimen/common_view_margin_default"
-                        android:layout_marginEnd="@dimen/common_view_margin_default"
-                        android:text="@{String.format(@string/boost_status_mem_usage_percent, headerInfo.memAvailablePercentString)}"
-                        android:textAppearance="@style/TextAppearance.TileSubTitle"
-                        tools:text="@string/boost_status_mem_usage_percent" />
+                    android:id="@+id/thanos_status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_running_apps"
+                    android:layout_marginStart="@dimen/common_view_margin_default"
+                    android:layout_marginTop="@dimen/common_view_margin_default"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:text="@{String.format(@string/boost_status_mem_usage_percent, headerInfo.memAvailablePercentString)}"
+                    android:textAppearance="@style/TextAppearance.TileSubTitle"
+                    tools:text="@string/boost_status_mem_usage_percent" />
 
                 <ProgressBar
-                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@id/thanos_status_text"
-                        android:layout_marginTop="@dimen/common_view_margin_default"
-                        android:max="100"
-                        android:progress="@{headerInfo.memUsagePercent}"
-                        android:progressDrawable="@drawable/nav_card_progress_horizontal_material"
-                        tools:progress="64" />
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/thanos_status_text"
+                    android:layout_marginTop="@dimen/common_view_margin_default"
+                    android:max="100"
+                    android:progress="@{headerInfo.memUsagePercent}"
+                    android:progressDrawable="@drawable/nav_card_progress_horizontal_material"
+                    tools:progress="64" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

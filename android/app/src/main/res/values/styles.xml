@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="AppThemeLauncher" parent="Theme.MaterialComponents.Light.NoActionBar">
-    <item name="android:windowBackground">@drawable/splash_background</item>
-    <item name="colorPrimary">@color/md_blue_a700</item>
-    <item name="colorPrimaryDark">@color/md_blue_a700</item>
-    <item name="colorAccent">@color/md_blue_a700</item>
-  </style>
+    <style name="AppThemeShortcut" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 
-  <style name="AppThemeShortcut" parent="android:Theme">
-    <item name="android:windowIsTranslucent">true</item>
-    <item name="android:windowBackground">@android:color/transparent</item>
-    <item name="android:windowContentOverlay">@null</item>
-    <item name="android:windowNoTitle">true</item>
-    <item name="android:windowIsFloating">true</item>
-    <item name="android:backgroundDimEnabled">false</item>
-  </style>
+    <style name="AppThemeNeedRestart" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/md_red_a700</item>
+        <item name="colorPrimary">@color/md_red_a700</item>
+        <item name="colorPrimaryDark">@color/md_red_a700</item>
+        <item name="android:windowBackground">@color/md_red_a700</item>
+    </style>
 
-  <style name="AppThemeNeedRestart" parent="Theme.MaterialComponents.NoActionBar">
-    <item name="windowActionBar">false</item>
-    <item name="windowNoTitle">true</item>
-    <item name="colorAccent">@color/md_red_a700</item>
-    <item name="colorPrimary">@color/md_red_a700</item>
-    <item name="colorPrimaryDark">@color/md_red_a700</item>
-    <item name="android:windowBackground">@color/md_red_a700</item>
-  </style>
+    <style name="ButtonColored" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
 
-  <style name="ButtonColored" parent="Widget.AppCompat.Button.Colored">
-    <item name="android:textColor">?android:textColorPrimary</item>
-  </style>
-
-  <style name="MaterialButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
-    <item name="android:textColor">?android:textColorPrimary</item>
-  </style>
+    <style name="MaterialButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
 </resources>

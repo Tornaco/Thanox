@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="primary">#101010</color>
-    <color name="primary_dark">#000000</color>
-    <color name="primary_light">#101010</color>
-    <color name="accent">@color/md_purple_200</color>
-</resources>

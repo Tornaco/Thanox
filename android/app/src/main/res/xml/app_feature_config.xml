@@ -78,6 +78,11 @@
                 app:key="@string/key_app_feature_config_app_to_enable"
                 app:summary="@string/pref_title_app_state_disabled"
                 app:title="@string/pref_title_app_to_enable" />
+
+        <SwitchPreferenceCompat
+            android:persistent="false"
+            app:key="@string/key_app_feature_config_enable_package_on_launch"
+            app:title="@string/feature_title_enable_package_on_launch" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/feature_category_privacy">

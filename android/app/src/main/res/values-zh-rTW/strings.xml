@@ -147,6 +147,7 @@
     <string name="menu_title_smart_app_freeze_enable_all_apps">全部解凍並移除</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps_temp">全部臨時解凍</string>
     <string name="feature_summary_smart_app_freeze">把不常用的應用凍結起來</string>
+    <string name="feature_title_enable_package_on_launch">检测到活动请求时启用该App</string>
     <string name="feature_desc_smart_app_freeze">注意，凍結應用使用了Android系統的能力，意味著這些狀態會跟隨系統持久化，即使你卸載了Thanox，這些狀態將依然會保留</string>
     <string name="menu_title_create_shortcut">創建啟動快捷方式</string>
     <string name="menu_title_create_shortcut_apk">生成代理應用</string>

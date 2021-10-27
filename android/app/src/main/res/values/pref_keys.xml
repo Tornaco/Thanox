@@ -134,6 +134,9 @@
     <string name="key_app_feature_config_smart_freeze" translatable="false">
         key_app_feature_config_smart_freeze
     </string>
+    <string name="key_app_feature_config_enable_package_on_launch" translatable="false">
+        key_app_feature_config_enable_package_on_launch
+    </string>
 
     <string name="key_app_feature_config_app_to_enable" translatable="false">key_app_feature_config_app_to_enable
     </string>

@@ -93,4 +93,7 @@ interface IPkgManager {
 
     void registerPackageSetChangeListener(in IPackageSetChangeListener listener);
     void unRegisterPackageSetChangeListener(in IPackageSetChangeListener listener);
+
+    void setEnablePackageOnLaunchRequestEnabled(String pkg, boolean enable);
+    boolean isEnablePackageOnLaunchRequestEnabled(String pkg);
 }

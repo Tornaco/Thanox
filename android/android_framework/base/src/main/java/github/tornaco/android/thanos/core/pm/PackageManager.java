@@ -386,4 +386,14 @@ public class PackageManager {
   public void unRegisterPackageSetChangeListener(PackageSetChangeListener listener) {
     pm.unRegisterPackageSetChangeListener(listener.stub);
   }
+
+  @SneakyThrows
+  public void setEnablePackageOnLaunchRequestEnabled(String pkg, boolean enable) {
+    pm.setEnablePackageOnLaunchRequestEnabled(pkg, enable);
+  }
+
+  @SneakyThrows
+  public boolean isEnablePackageOnLaunchRequestEnabled(String pkg) {
+    return pm.isEnablePackageOnLaunchRequestEnabled(pkg);
+  }
 }

@@ -236,6 +236,13 @@ public interface IPkgManager extends android.os.IInterface
     @Override public void unRegisterPackageSetChangeListener(github.tornaco.android.thanos.core.pm.IPackageSetChangeListener listener) throws android.os.RemoteException
     {
     }
+    @Override public void setEnablePackageOnLaunchRequestEnabled(java.lang.String pkg, boolean enable) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isEnablePackageOnLaunchRequestEnabled(java.lang.String pkg) throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -938,6 +945,27 @@ public interface IPkgManager extends android.os.IInterface
           _arg0 = github.tornaco.android.thanos.core.pm.IPackageSetChangeListener.Stub.asInterface(data.readStrongBinder());
           this.unRegisterPackageSetChangeListener(_arg0);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_setEnablePackageOnLaunchRequestEnabled:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          this.setEnablePackageOnLaunchRequestEnabled(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isEnablePackageOnLaunchRequestEnabled:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          boolean _result = this.isEnablePackageOnLaunchRequestEnabled(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         default:
@@ -2397,6 +2425,51 @@ public interface IPkgManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void setEnablePackageOnLaunchRequestEnabled(java.lang.String pkg, boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(pkg);
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setEnablePackageOnLaunchRequestEnabled, _data, _reply, 0);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setEnablePackageOnLaunchRequestEnabled(pkg, enable);
+              return;
+            }
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isEnablePackageOnLaunchRequestEnabled(java.lang.String pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(pkg);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isEnablePackageOnLaunchRequestEnabled, _data, _reply, 0);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isEnablePackageOnLaunchRequestEnabled(pkg);
+            }
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.pm.IPkgManager sDefaultImpl;
     }
     static final int TRANSACTION_getPkgNameForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -2461,6 +2534,8 @@ public interface IPkgManager extends android.os.IInterface
     static final int TRANSACTION_getInstalledPkgsByPackageSetId = (android.os.IBinder.FIRST_CALL_TRANSACTION + 59);
     static final int TRANSACTION_registerPackageSetChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 60);
     static final int TRANSACTION_unRegisterPackageSetChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 61);
+    static final int TRANSACTION_setEnablePackageOnLaunchRequestEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 62);
+    static final int TRANSACTION_isEnablePackageOnLaunchRequestEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 63);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pm.IPkgManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -2542,4 +2617,6 @@ public interface IPkgManager extends android.os.IInterface
   public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgsByPackageSetId(java.lang.String pkgSetId) throws android.os.RemoteException;
   public void registerPackageSetChangeListener(github.tornaco.android.thanos.core.pm.IPackageSetChangeListener listener) throws android.os.RemoteException;
   public void unRegisterPackageSetChangeListener(github.tornaco.android.thanos.core.pm.IPackageSetChangeListener listener) throws android.os.RemoteException;
+  public void setEnablePackageOnLaunchRequestEnabled(java.lang.String pkg, boolean enable) throws android.os.RemoteException;
+  public boolean isEnablePackageOnLaunchRequestEnabled(java.lang.String pkg) throws android.os.RemoteException;
 }

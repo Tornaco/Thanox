@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.List;
@@ -430,6 +431,17 @@ public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
             return true;
           }
         });
+
+    SwitchPreferenceCompat enableOnLaunchPref = findPreference(getString(R.string.key_app_feature_config_enable_package_on_launch));
+    Objects.requireNonNull(enableOnLaunchPref).setChecked(thanos.getPkgManager().isEnablePackageOnLaunchRequestEnabled(appInfo.getPkgName()));
+    enableOnLaunchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+      @Override
+      public boolean onPreferenceChange(Preference preference, Object newValue) {
+        boolean checked = (boolean) newValue;
+        thanos.getPkgManager().setEnablePackageOnLaunchRequestEnabled(appInfo.getPkgName(), checked);
+        return true;
+      }
+    });
   }
 
   class StartRestrictPref extends FeaturePref {

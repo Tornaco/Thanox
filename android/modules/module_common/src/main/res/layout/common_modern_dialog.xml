@@ -10,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/common_view_margin_default"
+        android:layout_marginTop="18dp"
         android:textStyle="bold"
         android:gravity="center"
         android:maxLines="1"
-        android:textSize="20sp"
+        android:textSize="18sp"
         tools:text="Dialog title" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -24,7 +24,7 @@
         android:layout_below="@id/title"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/common_view_margin_default"
-        android:layout_marginTop="@dimen/common_view_margin_middle"
+        android:layout_marginTop="@dimen/common_view_margin_default"
         android:layout_marginEnd="@dimen/common_view_margin_default"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.TileSubTitle"
@@ -63,6 +63,6 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/common_view_margin_middle"
+        android:layout_height="8dp"
         android:layout_below="@id/neutral" />
 </RelativeLayout>

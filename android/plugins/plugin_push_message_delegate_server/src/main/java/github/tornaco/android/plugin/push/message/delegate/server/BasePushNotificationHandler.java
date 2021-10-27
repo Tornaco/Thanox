@@ -168,7 +168,7 @@ public abstract class BasePushNotificationHandler implements PushNotificationHan
         launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         int nId = ThanosManagerNative.getDefault().getNotificationManager().nextNotificationId();
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), nId, launchIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), nId, launchIntent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), pushMessage.getChannelId());
 

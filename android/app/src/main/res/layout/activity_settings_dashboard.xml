@@ -54,9 +54,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/common_view_margin_default">
+            android:padding="@dimen/common_view_margin_default">
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                app:elevation="@dimen/common_toolbar_elevation"
                 android:id="@+id/guide"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,6 +72,7 @@
                 app:iconTint="@color/md_white" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                app:elevation="@dimen/common_toolbar_elevation"
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

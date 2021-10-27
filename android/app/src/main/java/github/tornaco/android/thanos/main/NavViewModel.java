@@ -215,7 +215,7 @@ public class NavViewModel extends AndroidViewModel {
                         .themeColor(R.color.md_blue_500)
                         .build(),
                     Tile.builder()
-                        .iconRes(R.drawable.ic_restart_line)
+                        .iconRes(R.drawable.ic_refresh_line)
                         .id(R.id.id_background_restrict)
                         .title(resources.getString(R.string.feature_title_bg_restrict))
                         .summary(resources.getString(R.string.feature_desc_bg_restrict_brief))

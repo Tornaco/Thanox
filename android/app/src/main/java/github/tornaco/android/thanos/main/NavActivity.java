@@ -14,17 +14,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.splashscreen.SplashScreen;
 import androidx.databinding.Observable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import github.tornaco.android.rhino.plugin.Verify;
-import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.app.donate.DonateActivity;
+import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivityNavBinding;
 import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
@@ -32,7 +31,6 @@ import github.tornaco.android.thanos.pref.AppPreference;
 import github.tornaco.android.thanos.settings.ExportPatchUi;
 import github.tornaco.android.thanos.settings.PowerSettingsActivity;
 import github.tornaco.android.thanos.settings.SettingsDashboardActivity;
-import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
@@ -91,13 +89,13 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.settings:
-                SettingsDashboardActivity.start(this);
-                return true;
-            case R.id.guide:
-                BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_HOME);
-                return true;
+        int itemId = item.getItemId();
+        if (itemId == R.id.settings) {
+            SettingsDashboardActivity.start(this);
+            return true;
+        } else if (itemId == R.id.reboot) {
+            showRebootDialog();
+            return true;
         }
         return false;
     }
@@ -108,6 +106,19 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
                 .setMessage(R.string.dialog_message_feedback)
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
+    }
+
+    private void showRebootDialog() {
+        ModernAlertDialog dialog = new ModernAlertDialog(NavActivity.this);
+        dialog.setDialogTitle(getString(R.string.reboot_now));
+        dialog.setDialogMessage(getString(R.string.common_dialog_message_are_you_sure));
+        dialog.setCancelable(true);
+        dialog.setPositive(getString(android.R.string.ok));
+        dialog.setNegative(getString(android.R.string.cancel));
+        dialog.setOnPositive(() -> {
+            ThanosManager.from(thisActivity()).getPowerManager().reboot();
+        });
+        dialog.show();
     }
 
     private void initFirstRun() {

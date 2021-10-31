@@ -18,7 +18,7 @@ public enum Theme {
     DarkRed(R.style.AppThemeDark_Red_NoActionBar, true),
     DarkGrey(R.style.AppThemeDark_Grey_NoActionBar, true),
 
-    MD3(R.style.AppThemeMD3_NoActionBar, true, true),
+    MD3(R.style.ThemeMD3_App_NoActionBar, true, true),
 
     Auto(R.style.AppThemeLight_NoActionBar, true);
 

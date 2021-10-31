@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 import com.vic797.syntaxhighlight.SyntaxListener;
 
@@ -117,7 +118,7 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
                 }
                 List<String> stringList = GlobalVar.listFromJson(getCurrentEditingContent());
                 if (stringList == null) {
-                    new AlertDialog.Builder(thisActivity())
+                    new MaterialAlertDialogBuilder(thisActivity())
                             .setMessage(R.string.module_profile_editor_save_check_error)
                             .setCancelable(true)
                             .setPositiveButton(android.R.string.ok, null)
@@ -212,7 +213,7 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
             finish();
             return;
         }
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.module_profile_editor_discard_dialog_title)
                 .setMessage(R.string.module_profile_editor_discard_dialog_message)
                 .setCancelable(true)
@@ -222,7 +223,7 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
     }
 
     private void onRequestDelete() {
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.module_profile_editor_delete_dialog_title)
                 .setMessage(R.string.module_profile_editor_delete_dialog_message)
                 .setCancelable(true)

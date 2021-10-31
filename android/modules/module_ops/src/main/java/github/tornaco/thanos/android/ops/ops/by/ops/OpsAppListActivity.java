@@ -9,8 +9,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 
 import github.tornaco.android.thanos.common.AppItemClickListener;
@@ -75,27 +75,24 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
         if (currentMode == AppOpsManager.MODE_IGNORED) {
             currentSelection = 2;
         }
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(appInfo.getAppLabel())
-                .setSingleChoiceItems(items, currentSelection, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        int newMode = AppOpsManager.MODE_ALLOWED;
-                        if (which == 1) {
-                            newMode = AppOpsManager.MODE_FOREGROUND;
-                        }
-                        if (which == 2) {
-                            newMode = AppOpsManager.MODE_IGNORED;
-                        }
-                        int finalNewMode = newMode;
-                        ThanosManager.from(getApplicationContext())
-                                .ifServiceInstalled(thanosManager -> thanosManager.getAppOpsManager()
-                                        .setMode(op.getCode(), appInfo.getUid(), appInfo.getPkgName(), finalNewMode));
-
-                        appInfo.setStr(String.valueOf(newMode));
-                        appListFilterAdapter.notifyDataSetChanged();
+                .setSingleChoiceItems(items, currentSelection, (dialog, which) -> {
+                    dialog.dismiss();
+                    int newMode = AppOpsManager.MODE_ALLOWED;
+                    if (which == 1) {
+                        newMode = AppOpsManager.MODE_FOREGROUND;
                     }
+                    if (which == 2) {
+                        newMode = AppOpsManager.MODE_IGNORED;
+                    }
+                    int finalNewMode = newMode;
+                    ThanosManager.from(getApplicationContext())
+                            .ifServiceInstalled(thanosManager -> thanosManager.getAppOpsManager()
+                                    .setMode(op.getCode(), appInfo.getUid(), appInfo.getPkgName(), finalNewMode));
+
+                    appInfo.setStr(String.valueOf(newMode));
+                    appListFilterAdapter.notifyDataSetChanged();
                 })
                 .setCancelable(true)
                 .show();
@@ -166,36 +163,21 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_select_all_allow == item.getItemId()) {
-            new AlertDialog.Builder(thisActivity())
+            new MaterialAlertDialogBuilder(thisActivity())
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            selectAll(AppOpsManager.MODE_ALLOWED);
-                        }
-                    }).show();
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(AppOpsManager.MODE_ALLOWED)).show();
             return true;
         }
         if (R.id.action_select_all_foreground == item.getItemId()) {
-            new AlertDialog.Builder(thisActivity())
+            new MaterialAlertDialogBuilder(thisActivity())
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            selectAll(AppOpsManager.MODE_FOREGROUND);
-                        }
-                    }).show();
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(AppOpsManager.MODE_FOREGROUND)).show();
             return true;
         }
         if (R.id.action_un_select_all_ignore == item.getItemId()) {
-            new AlertDialog.Builder(thisActivity())
+            new MaterialAlertDialogBuilder(thisActivity())
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            selectAll(AppOpsManager.MODE_IGNORED);
-                        }
-                    }).show();
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(AppOpsManager.MODE_IGNORED)).show();
             return true;
         }
 
@@ -203,14 +185,11 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
     }
 
     private void selectAll(int mode) {
-        CollectionUtils.consumeRemaining(appListFilterAdapter.getListModels(), new Consumer<AppListModel>() {
-            @Override
-            public void accept(AppListModel model) {
-                AppInfo appInfo = model.appInfo;
-                ThanosManager.from(getApplicationContext())
-                        .ifServiceInstalled(thanosManager -> thanosManager.getAppOpsManager()
-                                .setMode(op.getCode(), appInfo.getUid(), appInfo.getPkgName(), mode));
-            }
+        CollectionUtils.consumeRemaining(appListFilterAdapter.getListModels(), model -> {
+            AppInfo appInfo = model.appInfo;
+            ThanosManager.from(getApplicationContext())
+                    .ifServiceInstalled(thanosManager -> thanosManager.getAppOpsManager()
+                            .setMode(op.getCode(), appInfo.getUid(), appInfo.getPkgName(), mode));
         });
         viewModel.start();
     }

@@ -10,10 +10,11 @@ import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
@@ -111,7 +112,7 @@ public class AllOpsListActivity extends ThemeActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_reset_all_modes == item.getItemId()) {
-            new AlertDialog.Builder(thisActivity())
+            new MaterialAlertDialogBuilder(thisActivity())
                     .setMessage(R.string.module_ops_title_reset_ops_mode_for_all)
                     .setPositiveButton(android.R.string.ok, (dialog, which) ->
                             ThanosManager.from(getApplicationContext())

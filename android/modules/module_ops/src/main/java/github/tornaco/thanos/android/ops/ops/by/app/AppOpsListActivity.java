@@ -1,7 +1,6 @@
 package github.tornaco.thanos.android.ops.ops.by.app;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,12 +11,12 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
@@ -130,36 +129,21 @@ public class AppOpsListActivity extends ThemeActivity {
     @Verify
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_select_all_allow == item.getItemId()) {
-            new AlertDialog.Builder(thisActivity())
+            new MaterialAlertDialogBuilder(thisActivity())
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            viewModel.selectAll(appInfo, AppOpsManager.MODE_ALLOWED);
-                        }
-                    }).show();
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> viewModel.selectAll(appInfo, AppOpsManager.MODE_ALLOWED)).show();
             return true;
         }
         if (R.id.action_select_all_foreground == item.getItemId()) {
-            new AlertDialog.Builder(thisActivity())
+            new MaterialAlertDialogBuilder(thisActivity())
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            viewModel.selectAll(appInfo, AppOpsManager.MODE_FOREGROUND);
-                        }
-                    }).show();
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> viewModel.selectAll(appInfo, AppOpsManager.MODE_FOREGROUND)).show();
             return true;
         }
         if (R.id.action_un_select_all_ignore == item.getItemId()) {
-            new AlertDialog.Builder(thisActivity())
+            new MaterialAlertDialogBuilder(thisActivity())
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            viewModel.selectAll(appInfo, AppOpsManager.MODE_IGNORED);
-                        }
-                    }).show();
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> viewModel.selectAll(appInfo, AppOpsManager.MODE_IGNORED)).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

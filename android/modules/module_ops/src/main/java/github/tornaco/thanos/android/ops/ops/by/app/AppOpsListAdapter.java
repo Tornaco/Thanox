@@ -1,15 +1,14 @@
 package github.tornaco.thanos.android.ops.ops.by.app;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -70,18 +69,8 @@ public class AppOpsListAdapter extends SectioningAdapter implements Consumer<Lis
         OpGroup opGroup = opGroups.get(sectionIndex);
         Op op = opGroup.getOpList().get(itemIndex);
         ivh.binding.setOp(op);
-        ivh.binding.appItemRoot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showModeSelectionDialog(op, v, sectionIndex, itemIndex);
-            }
-        });
-        ivh.binding.itemState.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                quickSwitch(op, sectionIndex, itemIndex);
-            }
-        });
+        ivh.binding.appItemRoot.setOnClickListener(v -> showModeSelectionDialog(op, v, sectionIndex, itemIndex));
+        ivh.binding.itemState.setOnClickListener(v -> quickSwitch(op, sectionIndex, itemIndex));
         ivh.binding.setApp(appInfo);
         ivh.binding.executePendingBindings();
     }
@@ -121,26 +110,23 @@ public class AppOpsListAdapter extends SectioningAdapter implements Consumer<Lis
         if (currentMode == AppOpsManager.MODE_IGNORED) {
             currentSelection = 2;
         }
-        new AlertDialog.Builder(activity)
+        new MaterialAlertDialogBuilder(activity)
                 .setTitle(op.getTitle())
-                .setSingleChoiceItems(items, currentSelection, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        int newMode = AppOpsManager.MODE_ALLOWED;
-                        if (which == 1) {
-                            newMode = AppOpsManager.MODE_FOREGROUND;
-                        }
-                        if (which == 2) {
-                            newMode = AppOpsManager.MODE_IGNORED;
-                        }
-                        int finalNewMode = newMode;
-                        ThanosManager.from(activity)
-                                .ifServiceInstalled(thanosManager -> thanosManager.getAppOpsManager()
-                                        .setMode(op.getCode(), appInfo.getUid(), appInfo.getPkgName(), finalNewMode));
-                        op.setMode(finalNewMode);
-                        notifySectionItemChanged(sectionIndex, itemIndex);
+                .setSingleChoiceItems(items, currentSelection, (dialog, which) -> {
+                    dialog.dismiss();
+                    int newMode = AppOpsManager.MODE_ALLOWED;
+                    if (which == 1) {
+                        newMode = AppOpsManager.MODE_FOREGROUND;
                     }
+                    if (which == 2) {
+                        newMode = AppOpsManager.MODE_IGNORED;
+                    }
+                    int finalNewMode = newMode;
+                    ThanosManager.from(activity)
+                            .ifServiceInstalled(thanosManager -> thanosManager.getAppOpsManager()
+                                    .setMode(op.getCode(), appInfo.getUid(), appInfo.getPkgName(), finalNewMode));
+                    op.setMode(finalNewMode);
+                    notifySectionItemChanged(sectionIndex, itemIndex);
                 })
                 .setCancelable(true)
                 .show();

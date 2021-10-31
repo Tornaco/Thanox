@@ -3,14 +3,15 @@ package github.tornaco.android.thanos.util;
 import android.content.Context;
 
 import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class DialogUtils {
     private DialogUtils() {
     }
 
     public static void showMessage(Context context, @StringRes int titleRes, @StringRes int messageRes) {
-        new AlertDialog.Builder(context)
+        new MaterialAlertDialogBuilder(context)
                 .setTitle(titleRes)
                 .setMessage(messageRes)
                 .setCancelable(true)
@@ -18,7 +19,7 @@ public class DialogUtils {
     }
 
     public static void showMessage(Context context, String titleRes, String messageRes) {
-        new AlertDialog.Builder(context)
+        new MaterialAlertDialogBuilder(context)
                 .setTitle(titleRes)
                 .setMessage(messageRes)
                 .setCancelable(true)

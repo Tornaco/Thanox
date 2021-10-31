@@ -12,12 +12,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.io.Files;
 import com.nononsenseapps.filepicker.FilePickerActivity;
 import com.nononsenseapps.filepicker.Utils;
@@ -26,7 +26,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Objects;
 
 import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
@@ -68,19 +67,19 @@ public class DataSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
             return true;
         });
         findPreference(getString(R.string.key_restore_default)).setOnPreferenceClickListener(preference -> {
-            new AlertDialog.Builder(getActivity())
+            new MaterialAlertDialogBuilder(getActivity())
                     .setMessage(R.string.pre_title_restore_default)
                     .setPositiveButton(android.R.string.ok, (dialog, which) ->
                             ThanosManager.from(getActivity())
                                     .ifServiceInstalled(thanosManager -> {
                                         if (thanosManager.getBackupAgent().restoreDefault()) {
-                                            new AlertDialog.Builder(getActivity())
+                                            new MaterialAlertDialogBuilder(getActivity())
                                                     .setMessage(getString(R.string.pre_message_restore_success))
                                                     .setCancelable(false)
                                                     .setPositiveButton(android.R.string.ok, null)
                                                     .show();
                                         } else {
-                                            new AlertDialog.Builder(getActivity())
+                                            new MaterialAlertDialogBuilder(getActivity())
                                                     .setMessage("Error:(")
                                                     .setCancelable(false)
                                                     .setPositiveButton(android.R.string.ok, null)
@@ -131,7 +130,7 @@ public class DataSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
                             public void onSuccess() {
                                 if (getActivity() == null) return;
                                 Completable.fromAction(() ->
-                                        new AlertDialog.Builder(getActivity())
+                                        new MaterialAlertDialogBuilder(getActivity())
                                                 .setMessage(getString(R.string.pre_message_restore_success))
                                                 .setCancelable(false)
                                                 .setPositiveButton(android.R.string.ok, null)
@@ -173,7 +172,7 @@ public class DataSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
 
     private void onBackupFileAvailableQ(@NonNull Uri fileUri) {
         try {
-            OutputStream os = Objects.requireNonNull(getContext()).getContentResolver().openOutputStream(fileUri);
+            OutputStream os = requireContext().getContentResolver().openOutputStream(fileUri);
             invokeBackup(fileUri.getPath(), os);
         } catch (IOException e) {
             XLog.e(e);
@@ -226,7 +225,7 @@ public class DataSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
                             @Override
                             public void onSuccess() {
                                 if (getActivity() == null) return;
-                                new AlertDialog.Builder(getActivity())
+                                new MaterialAlertDialogBuilder(getActivity())
                                         .setMessage(getString(R.string.pre_message_backup_success) + "\n" + destPathToTellUser)
                                         .setCancelable(true)
                                         .setPositiveButton(android.R.string.ok, null)

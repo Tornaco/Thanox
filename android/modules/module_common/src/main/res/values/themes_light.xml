@@ -25,7 +25,7 @@
         <item name="appbarTheme">@style/AppBarOverlayLight</item>
         <item name="toolbarTheme">@style/ToolbarThemeCommon</item>
         <item name="collapsingToolbarTheme">@style/CollapsingToolbarThemeCommon</item>
-        <item name="android:windowBackground">@color/md_grey_200</item>
+        <item name="android:windowBackground">@color/md_white</item>
 
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/md_grey_200</item>

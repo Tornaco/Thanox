@@ -14,13 +14,13 @@ import android.widget.Switch;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -200,7 +200,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
     private void onRequestAddNewRule() {
         AtomicInteger format = new AtomicInteger(ProfileManager.RULE_FORMAT_JSON);
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.module_profile_editor_select_format)
                 .setSingleChoiceItems(new String[]{
                         "JSON",

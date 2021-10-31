@@ -7,7 +7,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
@@ -57,7 +58,7 @@ public class SettingsDashboardActivity extends ThemeActivity {
     }
 
     private void showFeedbackDialog() {
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.nav_title_feedback)
                 .setMessage(R.string.dialog_message_feedback)
                 .setPositiveButton(android.R.string.ok, null)

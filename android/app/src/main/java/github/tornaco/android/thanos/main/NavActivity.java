@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.Observable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -103,7 +102,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
     }
 
     private void showFeedbackDialog() {
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.nav_title_feedback)
                 .setMessage(R.string.dialog_message_feedback)
                 .setPositiveButton(android.R.string.ok, null)
@@ -201,7 +200,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
                 }
             });
         } else {
-            new AlertDialog.Builder(NavActivity.this)
+            new MaterialAlertDialogBuilder(NavActivity.this)
                     .setTitle(R.string.status_not_active)
                     .setMessage(R.string.message_active_needed)
                     .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
@@ -213,7 +212,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
     }
 
     private void showFrameworkErrorDialog() {
-        new AlertDialog.Builder(NavActivity.this)
+        new MaterialAlertDialogBuilder(NavActivity.this)
                 .setTitle(R.string.title_framework_error)
                 .setMessage(R.string.message_framework_error)
                 .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {

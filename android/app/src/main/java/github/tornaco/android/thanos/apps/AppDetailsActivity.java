@@ -10,10 +10,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +155,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
             }
         }
 
-        AlertDialog alertDialog = new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.pref_action_apply_config_template)
                 .setSingleChoiceItems(entries.toArray(new String[0]),
                         selectionIndex,
@@ -179,9 +180,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
                                     ToastUtils.nook(getApplicationContext());
                                 }
                             }
-                        })
-                .create();
-        alertDialog.show();
+                        }).show();
     }
 
     public static AppDetailsViewModel obtainViewModel(FragmentActivity activity) {

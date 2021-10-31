@@ -1,19 +1,17 @@
 package github.tornaco.android.thanos.start;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -70,23 +68,17 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
     protected void onSetupChip(ViewGroup chipContainer, ChipGroup chipGroup, Chip chip1, Chip chip2, Chip chip3, Chip chip4) {
         chip1.setText(R.string.title_allow);
         chip1.setChecked(showAllowed);
-        chip1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                showAllowed = isChecked;
-                viewModel.start();
-            }
+        chip1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            showAllowed = isChecked;
+            viewModel.start();
         });
 
 
         chip2.setText(R.string.title_block);
         chip2.setChecked(showBlocked);
-        chip2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                showBlocked = isChecked;
-                viewModel.start();
-            }
+        chip2.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            showBlocked = isChecked;
+            viewModel.start();
         });
 
         chip3.setVisibility(View.GONE);
@@ -114,22 +106,12 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
     protected AppItemClickListener onCreateAppItemViewClickListener() {
         return appInfo -> {
             // Noop.
-            new AlertDialog.Builder(thisActivity())
+            new MaterialAlertDialogBuilder(thisActivity())
                     .setTitle(appInfo.getAppLabel())
                     .setMessage(appInfo.getStr())
                     .setPositiveButton(R.string.feature_title_apps_manager,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    AppDetailsActivity.start(thisActivity(), appInfo);
-                                }
-                            }).setNegativeButton(R.string.menu_title_start_restrict_charts_view_detailed_records_for_this_package,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            DetailedStartRecordsActivity.start(thisActivity(), appInfo.getPkgName());
-                        }
-                    })
+                            (dialog, which) -> AppDetailsActivity.start(thisActivity(), appInfo)).setNegativeButton(R.string.menu_title_start_restrict_charts_view_detailed_records_for_this_package,
+                    (dialog, which) -> DetailedStartRecordsActivity.start(thisActivity(), appInfo.getPkgName()))
                     .show();
 
         };

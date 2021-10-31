@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,6 +23,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.Objects;
@@ -285,7 +285,7 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
 
     private void showPluginDetailsDialog(InstalledPlugin plugin) {
         if (getActivity() == null) return;
-        new AlertDialog.Builder(getActivity())
+        new MaterialAlertDialogBuilder(getActivity())
                 .setTitle(plugin.getLabel())
                 .setMessage(String.format("%s\n%s\n%s\nwithHooks? %s\nstable? %s\ncallback:%s",
                         plugin.getVersionName(),
@@ -300,7 +300,7 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
 
     private void showUnInstallPluginConfirmDialog(InstalledPlugin plugin) {
         if (getActivity() == null) return;
-        new AlertDialog.Builder(getActivity())
+        new MaterialAlertDialogBuilder(getActivity())
                 .setMessage(R.string.dialog_title_plugin_uninstall_confirm)
                 .setPositiveButton(android.R.string.ok, (dialog, which) ->
                         navViewModel.uninstallPlugin(plugin, PluginFragment.this))

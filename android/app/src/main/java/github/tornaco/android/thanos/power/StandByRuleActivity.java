@@ -1,7 +1,6 @@
 package github.tornaco.android.thanos.power;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,12 +12,13 @@ import android.widget.Switch;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
@@ -118,35 +118,29 @@ public class StandByRuleActivity extends ThemeActivity implements StartRuleItemC
 
         AppCompatEditText editText = new AppCompatEditText(thisActivity());
         editText.setText(ruleIfEdit);
-        AlertDialog.Builder builder = new AlertDialog.Builder(thisActivity())
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.menu_title_rules)
                 .setView(editText)
                 .setCancelable(false)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (editText.getText() == null) {
-                            return;
-                        }
-                        String newRule = editText.getText().toString();
-                        if (TextUtils.isEmpty(newRule)) {
-                            return;
-                        }
-                        if (ruleIfEdit != null) {
-                            thanosManager.getActivityManager().deleteStandbyRule(ruleIfEdit);
-                        }
-                        thanosManager.getActivityManager().addStandbyRule(newRule);
-                        viewModel.start();
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    if (editText.getText() == null) {
+                        return;
                     }
+                    String newRule = editText.getText().toString();
+                    if (TextUtils.isEmpty(newRule)) {
+                        return;
+                    }
+                    if (ruleIfEdit != null) {
+                        thanosManager.getActivityManager().deleteStandbyRule(ruleIfEdit);
+                    }
+                    thanosManager.getActivityManager().addStandbyRule(newRule);
+                    viewModel.start();
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         if (!TextUtils.isEmpty(ruleIfEdit)) {
-            builder.setNeutralButton(R.string.common_menu_title_remove, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    thanosManager.getActivityManager().deleteStandbyRule(ruleIfEdit);
-                    viewModel.start();
-                }
+            builder.setNeutralButton(R.string.common_menu_title_remove, (dialog, which) -> {
+                thanosManager.getActivityManager().deleteStandbyRule(ruleIfEdit);
+                viewModel.start();
             });
         }
 
@@ -191,7 +185,7 @@ public class StandByRuleActivity extends ThemeActivity implements StartRuleItemC
     }
 
     private void showInfoDialog() {
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.menu_title_rules)
                 .setMessage(R.string.feature_summary_standby_restrict_rules)
                 .setCancelable(false)

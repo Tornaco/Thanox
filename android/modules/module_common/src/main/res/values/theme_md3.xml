@@ -4,7 +4,6 @@
     <style name="AppThemeMD3" parent="Theme.Material3.DayNight">
         <item name="colorPrimary">?colorSurface</item>
         <item name="colorPrimaryDark">?colorSurface</item>
-        <item name="android:windowBackground">@color/md_white</item>
         <item name="appbarPopupTheme">@style/PopupOverlayLight</item>
         <item name="appbarTheme">@style/AppBarOverlayLight</item>
         <item name="toolbarTheme">@style/ToolbarThemeCommon</item>

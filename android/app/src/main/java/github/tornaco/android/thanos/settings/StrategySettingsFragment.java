@@ -46,14 +46,7 @@ public class StrategySettingsFragment extends BaseWithFabPreferenceFragmentCompa
     }
 
     showFab();
-    getFab()
-        .setOnClickListener(
-            new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                requestAddTemplate();
-              }
-            });
+    getFab().setOnClickListener(v -> requestAddTemplate());
 
     // Auto config.
     SwitchPreferenceCompat autoConfigPref =
@@ -85,13 +78,10 @@ public class StrategySettingsFragment extends BaseWithFabPreferenceFragmentCompa
 
     CollectionUtils.consumeRemaining(
         profileManager.getAllConfigTemplates(),
-        new Consumer<ConfigTemplate>() {
-          @Override
-          public void accept(ConfigTemplate template) {
-            entries.add(template.getTitle());
-            values.add(template.getId());
-          }
-        });
+            template -> {
+              entries.add(template.getTitle());
+              values.add(template.getId());
+            });
     DropDownPreference newInstalledAppsConfig =
         findPreference(getString(R.string.key_new_installed_apps_config));
     Objects.requireNonNull(newInstalledAppsConfig).setEntries(entries.toArray(new String[0]));
@@ -100,16 +90,13 @@ public class StrategySettingsFragment extends BaseWithFabPreferenceFragmentCompa
     newInstalledAppsConfig.setSummary(
         selectedTemplate == null ? valueNotSet : selectedTemplate.getTitle());
     newInstalledAppsConfig.setOnPreferenceChangeListener(
-        new Preference.OnPreferenceChangeListener() {
-          @Override
-          public boolean onPreferenceChange(Preference preference, Object newValue) {
-            String newId = (String) newValue;
-            profileManager.setAutoConfigTemplateSelection(newId);
+            (preference, newValue) -> {
+              String newId = (String) newValue;
+              profileManager.setAutoConfigTemplateSelection(newId);
 
-            updateAutoConfigSelection();
-            return true;
-          }
-        });
+              updateAutoConfigSelection();
+              return true;
+            });
   }
 
   private void updateConfigTemplatePrefs() {
@@ -124,14 +111,11 @@ public class StrategySettingsFragment extends BaseWithFabPreferenceFragmentCompa
       tp.setKey(template.getId());
       tp.setDefaultValue(template);
       tp.setOnPreferenceClickListener(
-          new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-              ViewAwarePreference vp = (ViewAwarePreference) preference;
-              showConfigTemplateOptionsDialog(template, vp.getView());
-              return true;
-            }
-          });
+              preference -> {
+                ViewAwarePreference vp = (ViewAwarePreference) preference;
+                showConfigTemplateOptionsDialog(template, vp.getView());
+                return true;
+              });
       templatesCategory.addPreference(tp);
     }
   }
@@ -140,74 +124,65 @@ public class StrategySettingsFragment extends BaseWithFabPreferenceFragmentCompa
     EditTextDialog.show(
         getActivity(),
         getString(R.string.pref_action_create_new_config_template),
-        new Consumer<String>() {
-          @Override
-          public void accept(String content) {
-            if (TextUtils.isEmpty(content)) {
-              return;
-            }
-            String uuid = UUID.randomUUID().toString();
-            ConfigTemplate template =
-                ConfigTemplate.builder()
-                    .title(content)
-                    .id(uuid)
-                    .dummyPackageName(
-                        ProfileManager
-                                .PROFILE_AUTO_APPLY_NEW_INSTALLED_APPS_CONFIG_TEMPLATE_PACKAGE_PREFIX
-                            + uuid)
-                    .createAt(System.currentTimeMillis())
-                    .build();
-            boolean added =
-                ThanosManager.from(getContext()).getProfileManager().addConfigTemplate(template);
-            if (added) {
-              updateConfigTemplatePrefs();
-              updateAutoConfigSelection();
-            }
-          }
-        });
+            content -> {
+              if (TextUtils.isEmpty(content)) {
+                return;
+              }
+              String uuid = UUID.randomUUID().toString();
+              ConfigTemplate template =
+                  ConfigTemplate.builder()
+                      .title(content)
+                      .id(uuid)
+                      .dummyPackageName(
+                          ProfileManager
+                                  .PROFILE_AUTO_APPLY_NEW_INSTALLED_APPS_CONFIG_TEMPLATE_PACKAGE_PREFIX
+                              + uuid)
+                      .createAt(System.currentTimeMillis())
+                      .build();
+              boolean added =
+                  ThanosManager.from(getContext()).getProfileManager().addConfigTemplate(template);
+              if (added) {
+                updateConfigTemplatePrefs();
+                updateAutoConfigSelection();
+              }
+            });
   }
 
   private void showConfigTemplateOptionsDialog(ConfigTemplate template, View anchor) {
     QuickDropdown.show(
         requireActivity(),
         anchor,
-        new Function<Integer, String>() {
-          @Override
-          public String apply(Integer input) {
-            switch (input) {
-              case 0:
-                return getString(R.string.pref_action_edit_or_view_config_template);
-              case 1:
-                return getString(R.string.pref_action_delete_config_template);
-            }
-            return null;
-          }
-        },
-        new Consumer<Integer>() {
-          @Override
-          public void accept(Integer id) {
-            switch (id) {
-              case 0:
-                AppInfo appInfo = new AppInfo();
-                appInfo.setSelected(false);
-                appInfo.setPkgName(template.getDummyPackageName());
-                appInfo.setAppLabel(template.getTitle());
-                appInfo.setDummy(true);
-                appInfo.setVersionCode(-1);
-                appInfo.setVersionCode(-1);
-                appInfo.setUid(-1);
-                AppDetailsActivity.start(getActivity(), appInfo);
-                break;
-              case 1:
-                if (ThanosManager.from(getContext())
-                    .getProfileManager()
-                    .deleteConfigTemplate(template)) {
-                  updateConfigTemplatePrefs();
-                  updateAutoConfigSelection();
-                }
-                break;
-            }
-          }
-        });
+            input -> {
+              switch (input) {
+                case 0:
+                  return getString(R.string.pref_action_edit_or_view_config_template);
+                case 1:
+                  return getString(R.string.pref_action_delete_config_template);
+              }
+              return null;
+            },
+            id -> {
+              switch (id) {
+                case 0:
+                  AppInfo appInfo = new AppInfo();
+                  appInfo.setSelected(false);
+                  appInfo.setPkgName(template.getDummyPackageName());
+                  appInfo.setAppLabel(template.getTitle());
+                  appInfo.setDummy(true);
+                  appInfo.setVersionCode(-1);
+                  appInfo.setVersionCode(-1);
+                  appInfo.setUid(-1);
+                  AppDetailsActivity.start(getActivity(), appInfo);
+                  break;
+                case 1:
+                  if (ThanosManager.from(getContext())
+                      .getProfileManager()
+                      .deleteConfigTemplate(template)) {
+                    updateConfigTemplatePrefs();
+                    updateAutoConfigSelection();
+                  }
+                  break;
+              }
+            });
   }
 }

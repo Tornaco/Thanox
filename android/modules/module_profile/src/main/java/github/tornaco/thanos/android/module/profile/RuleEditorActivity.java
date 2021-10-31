@@ -16,10 +16,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.vic797.syntaxhighlight.SyntaxListener;
 
 import java.util.Objects;
@@ -165,7 +165,7 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
                                     @Override
                                     protected void onRuleAddFail(int errorCode, String errorMessage) {
                                         super.onRuleAddFail(errorCode, errorMessage);
-                                        new AlertDialog.Builder(thisActivity())
+                                        new MaterialAlertDialogBuilder(thisActivity())
                                                 .setTitle(R.string.module_profile_editor_save_check_error)
                                                 .setMessage(errorMessage)
                                                 .setCancelable(true)
@@ -273,7 +273,7 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
             finish();
             return;
         }
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.module_profile_editor_discard_dialog_title)
                 .setMessage(R.string.module_profile_editor_discard_dialog_message)
                 .setCancelable(true)
@@ -283,7 +283,7 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
     }
 
     private void onRequestDelete() {
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.module_profile_editor_delete_dialog_title)
                 .setMessage(R.string.module_profile_editor_delete_dialog_message)
                 .setCancelable(true)

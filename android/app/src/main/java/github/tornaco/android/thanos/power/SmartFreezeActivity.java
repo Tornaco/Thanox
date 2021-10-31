@@ -1,7 +1,6 @@
 package github.tornaco.android.thanos.power;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -226,17 +225,14 @@ public class SmartFreezeActivity extends ThemeActivity {
                 Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return false;
             }
-            new AlertDialog.Builder(this)
+            new MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps)
                     .setMessage(R.string.common_dialog_message_are_you_sure)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ThanosManager.from(getApplicationContext())
-                                    .getPkgManager()
-                                    .enableAllThanoxDisabledPackages(true);
-                            viewModel.start();
-                        }
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        ThanosManager.from(getApplicationContext())
+                                .getPkgManager()
+                                .enableAllThanoxDisabledPackages(true);
+                        viewModel.start();
                     })
                     .setNegativeButton(android.R.string.cancel, null)
                     .show();
@@ -247,17 +243,14 @@ public class SmartFreezeActivity extends ThemeActivity {
                 Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return false;
             }
-            new AlertDialog.Builder(this)
+            new MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_temp)
                     .setMessage(R.string.common_dialog_message_are_you_sure)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ThanosManager.from(getApplicationContext())
-                                    .getPkgManager()
-                                    .enableAllThanoxDisabledPackages(false);
-                            viewModel.start();
-                        }
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        ThanosManager.from(getApplicationContext())
+                                .getPkgManager()
+                                .enableAllThanoxDisabledPackages(false);
+                        viewModel.start();
                     })
                     .setNegativeButton(android.R.string.cancel, null)
                     .show();
@@ -275,32 +268,27 @@ public class SmartFreezeActivity extends ThemeActivity {
         Objects.requireNonNull(appVersionCodeView).setText(String.valueOf(appInfo.getVersionCode()));
         Objects.requireNonNull(appVersionNameView).setText(appInfo.getVersionName());
 
-        AlertDialog alertDialog = new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setView(dialogView)
                 .setTitle(R.string.menu_title_create_shortcut_apk)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String appName = appNameView.getText().toString();
-                        String appVersionName = appVersionNameView.getText().toString();
-                        int appVersionCode = appInfo.getVersionCode();
-                        try {
-                            appVersionCode = Integer.parseInt(appVersionCodeView.getText().toString());
-                        } catch (NumberFormatException ignored) {
-                        }
-                        viewModel.createShortcutStubApkForAsync(appInfo, appName, appVersionName, appVersionCode);
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    String appName = appNameView.getText().toString();
+                    String appVersionName = appVersionNameView.getText().toString();
+                    int appVersionCode = appInfo.getVersionCode();
+                    try {
+                        appVersionCode = Integer.parseInt(appVersionCodeView.getText().toString());
+                    } catch (NumberFormatException ignored) {
                     }
-                })
-                .create();
-        alertDialog.show();
+                    viewModel.createShortcutStubApkForAsync(appInfo, appName, appVersionName, appVersionCode);
+                }).show();
     }
 
     private void showFeatureDialogIfNeed() {
         if (AppPreference.isFeatureNoticeAccepted(getApplicationContext(), "SmartFreeze")) {
             return;
         }
-        new AlertDialog.Builder(thisActivity())
+        new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.feature_title_smart_app_freeze)
                 .setMessage(R.string.feature_desc_smart_app_freeze)
                 .setCancelable(false)

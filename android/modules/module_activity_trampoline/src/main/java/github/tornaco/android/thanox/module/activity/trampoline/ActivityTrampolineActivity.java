@@ -33,6 +33,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.io.Files;
 import com.nononsenseapps.filepicker.Utils;
 
@@ -169,7 +170,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
         toEditText.setFilters(new InputFilter[]{new EmojiExcludeFilter()});
         toEditText.setText(to);
 
-        AlertDialog d = new AlertDialog.Builder(ActivityTrampolineActivity.this)
+        AlertDialog d = new MaterialAlertDialogBuilder(ActivityTrampolineActivity.this)
                 .setTitle(canDelete
                         ? R.string.module_activity_trampoline_edit_dialog_title
                         : R.string.module_activity_trampoline_add_dialog_title)
@@ -294,7 +295,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
     // Null means all.
     private void onRequestExport(@Nullable String componentReplacementKey) {
         String[] items = getResources().getStringArray(R.array.module_activity_trampoline_title_export_selections);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.module_activity_trampoline_title_export_comp_replacements)
                 .setSingleChoiceItems(items, -1,
                         (d, which) -> {
@@ -345,7 +346,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
     private void onRequestImport() {
         String[] items = getResources().getStringArray(R.array.module_activity_trampoline_title_import_selections);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.module_activity_trampoline_title_import_comp_replacements)
                 .setSingleChoiceItems(items, -1,
                         (d, which) -> {

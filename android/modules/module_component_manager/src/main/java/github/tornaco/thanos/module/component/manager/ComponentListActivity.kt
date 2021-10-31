@@ -6,10 +6,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.miguelcatalan.materialsearchview.MaterialSearchView.SearchViewListener
 import github.tornaco.android.rhino.plugin.Verify
@@ -160,7 +160,7 @@ abstract class ComponentListActivity : ThemeActivity() {
             return true
         }
         if (R.id.action_select_all == item.itemId) {
-            AlertDialog.Builder(thisActivity())
+            MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.common_menu_title_select_all)
                 .setMessage(R.string.common_dialog_message_are_you_sure)
                 .setPositiveButton(
@@ -171,7 +171,7 @@ abstract class ComponentListActivity : ThemeActivity() {
             return true
         }
         if (R.id.action_un_select_all == item.itemId) {
-            AlertDialog.Builder(thisActivity())
+            MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.common_menu_title_un_select_all)
                 .setMessage(R.string.common_dialog_message_are_you_sure)
                 .setPositiveButton(
@@ -184,7 +184,7 @@ abstract class ComponentListActivity : ThemeActivity() {
     }
 
     private fun showFeatureDesc() {
-        AlertDialog.Builder(thisActivity())
+        MaterialAlertDialogBuilder(thisActivity())
             .setTitle(github.tornaco.thanos.module.component.manager.R.string.module_component_manager_disabled_by_thanox)
             .setMessage(github.tornaco.thanos.module.component.manager.R.string.module_component_manager_feature_desc)
             .setCancelable(false)

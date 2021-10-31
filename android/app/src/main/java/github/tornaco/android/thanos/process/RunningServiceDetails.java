@@ -9,7 +9,6 @@ import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
@@ -29,7 +28,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -507,13 +506,10 @@ public class RunningServiceDetails extends PreferenceFragment {
     }
 
     private void finish() {
-        (new Handler()).post(new Runnable() {
-            @Override
-            public void run() {
-                Activity a = getActivity();
-                if (a != null) {
-                    a.onBackPressed();
-                }
+        (new Handler()).post(() -> {
+            Activity a = getActivity();
+            if (a != null) {
+                a.onBackPressed();
             }
         });
     }
@@ -601,28 +597,24 @@ public class RunningServiceDetails extends PreferenceFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             int id = getArguments().getInt("id");
-            switch (id) {
-                case DIALOG_CONFIRM_STOP: {
-                    final ComponentName comp = getArguments().getParcelable("comp");
-                    if (getOwner().activeDetailForService(comp) == null) {
-                        return null;
-                    }
-
-                    return new AlertDialog.Builder(getActivity())
-                            .setTitle(getActivity().getString(R.string.runningservicedetails_stop_dlg_title))
-                            .setMessage(getActivity().getString(R.string.runningservicedetails_stop_dlg_text))
-                            .setPositiveButton(android.R.string.ok,
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            ActiveDetail ad = getOwner().activeDetailForService(comp);
-                                            if (ad != null) {
-                                                ad.stopActiveService(true);
-                                            }
-                                        }
-                                    })
-                            .setNegativeButton(android.R.string.cancel, null)
-                            .create();
+            if (id == DIALOG_CONFIRM_STOP) {
+                final ComponentName comp = getArguments().getParcelable("comp");
+                if (getOwner().activeDetailForService(comp) == null) {
+                    return null;
                 }
+
+                return new MaterialAlertDialogBuilder(getActivity())
+                        .setTitle(getActivity().getString(R.string.runningservicedetails_stop_dlg_title))
+                        .setMessage(getActivity().getString(R.string.runningservicedetails_stop_dlg_text))
+                        .setPositiveButton(android.R.string.ok,
+                                (dialog, which) -> {
+                                    ActiveDetail ad = getOwner().activeDetailForService(comp);
+                                    if (ad != null) {
+                                        ad.stopActiveService(true);
+                                    }
+                                })
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .create();
             }
             throw new IllegalArgumentException("unknown id " + id);
         }

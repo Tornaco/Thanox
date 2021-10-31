@@ -10,11 +10,11 @@ import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.Objects;
@@ -144,7 +144,7 @@ public class NotificationRecordListActivity extends ThemeActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_clear_all) {
-            new AlertDialog.Builder(thisActivity())
+            new MaterialAlertDialogBuilder(thisActivity())
                     .setTitle(R.string.module_notification_recorder_clear_all)
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
                     .setNegativeButton(android.R.string.cancel, null)

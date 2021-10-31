@@ -35,30 +35,24 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/app_config"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/stop_app"
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/common_view_margin_default"
             android:text="@string/feature_title_apps_manager"
-            android:textColor="?colorPrimary"
-            android:tint="?colorPrimary"
-            app:backgroundTint="?colorPrimaryContainer"
-            app:icon="@drawable/module_common_ic_settings_fill"
-            app:iconTint="?colorPrimary" />
+            app:icon="@drawable/module_common_ic_settings_fill"/>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/stop_app"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/common_view_margin_default"
             android:text="@string/service_stop"
-            android:textColor="@color/md_white"
-            android:tint="@color/md_white"
-            app:backgroundTint="?colorPrimaryContainer"
-            app:icon="@drawable/ic_close_fill"
-            app:iconTint="?colorPrimary" />
+            app:icon="@drawable/ic_close_fill" />
     </RelativeLayout>
 </layout>

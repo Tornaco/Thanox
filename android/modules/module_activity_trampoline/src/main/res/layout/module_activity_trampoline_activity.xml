@@ -84,13 +84,12 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/common_view_margin_default"
             android:text="@string/common_fab_title_add"
-            android:tint="@color/md_white"
-            app:backgroundTint="?colorPrimaryContainer"
             app:icon="@drawable/module_activity_trampoline_ic_add_fill"
             app:iconTint="?colorPrimary" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

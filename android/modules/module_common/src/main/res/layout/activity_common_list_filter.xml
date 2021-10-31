@@ -166,16 +166,13 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/common_view_margin_default"
             android:text="@string/common_fab_title_done"
-            android:textColor="?colorPrimary"
-            android:tint="?colorPrimary"
-            app:backgroundTint="?colorPrimaryContainer"
             app:icon="@drawable/module_common_ic_check_fill_white"
-            app:iconTint="?colorPrimary"
             tools:ignore="RelativeOverlap" />
 
 

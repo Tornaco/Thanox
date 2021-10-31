@@ -56,6 +56,7 @@
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/guide"
+                style="@style/FloatingActionButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/fab"
@@ -63,13 +64,11 @@
                 android:layout_marginEnd="@dimen/common_view_margin_default"
                 android:layout_marginBottom="@dimen/common_view_margin_default"
                 android:text="@string/common_menu_title_wiki"
-                android:textColor="?colorPrimary"
-                app:elevation="@dimen/common_toolbar_elevation"
-                app:icon="@drawable/ic_book_3_fill"
-                app:iconTint="?attr/colorControlNormal" />
+                app:icon="@drawable/ic_book_3_fill" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/fab"
+                style="@style/FloatingActionButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -77,11 +76,7 @@
                 android:layout_marginEnd="@dimen/common_view_margin_default"
                 android:layout_marginBottom="@dimen/common_view_margin_default"
                 android:text="@string/nav_title_feedback"
-                android:textColor="?colorPrimary"
-                android:tint="?colorPrimary"
-                app:elevation="@dimen/common_toolbar_elevation"
-                app:icon="@drawable/ic_feedback_fill"
-                app:iconTint="?colorPrimary" />
+                app:icon="@drawable/ic_feedback_fill" />
         </RelativeLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

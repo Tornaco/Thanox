@@ -8,12 +8,13 @@
         <item name="colorPrimary">?colorAccent</item>
         <item name="colorPrimaryDark">?colorPrimary</item>
         <item name="colorPrimaryVariant">?colorPrimary</item>
+        <item name="colorOnPrimary">@color/md_white</item>
         <item name="colorSecondary">?colorPrimary</item>
         <item name="colorSecondaryContainer">?colorPrimaryContainer</item>
         <item name="colorSecondaryVariant">?colorPrimary</item>
-        <item name="colorOnSecondary">@color/md_white</item>
+        <item name="colorOnSecondary">?colorOnPrimary</item>
         <item name="colorTertiary">?colorPrimary</item>
-        <item name="colorOnTertiary">@color/md_white</item>
+        <item name="colorOnTertiary">?colorOnPrimary</item>
         <item name="colorError">@color/md_red_500</item>
 
         <item name="colorSurface">@color/md_dark</item>

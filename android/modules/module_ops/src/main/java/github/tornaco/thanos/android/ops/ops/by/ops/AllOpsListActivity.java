@@ -68,7 +68,7 @@ public class AllOpsListActivity extends ThemeActivity {
                 getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
         // Switch.
-        onSetupSwitchBar(binding.switchBar);
+        onSetupSwitchBar(binding.switchBarContainer.switchBar);
     }
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {

@@ -39,31 +39,25 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/text_view_all_apps"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/common_view_margin_default"
             android:text="@string/title_suggested_apps_view_all"
-            android:textColor="?colorPrimary"
-            android:tint="?colorPrimary"
-            app:backgroundTint="?colorPrimaryContainer"
-            app:icon="@drawable/ic_apps_fill"
-            app:iconTint="?colorPrimary" />
+            app:icon="@drawable/ic_apps_fill"/>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/package_sets"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/text_view_all_apps"
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/common_view_margin_default"
             android:text="@string/title_package_sets"
-            android:textColor="?colorPrimary"
-            android:tint="?colorPrimary"
-            app:backgroundTint="?colorPrimaryContainer"
-            app:icon="@drawable/ic_price_tag_3_fill"
-            app:iconTint="?colorPrimary" />
+            app:icon="@drawable/ic_price_tag_3_fill"/>
 
         <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
             android:id="@+id/apps"

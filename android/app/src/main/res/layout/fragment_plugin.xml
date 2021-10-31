@@ -126,34 +126,29 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_market"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="@dimen/fab_standard_45"
             android:layout_height="@dimen/fab_standard_45"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="@dimen/common_view_margin_default"
             android:layout_marginBottom="@dimen/common_view_margin_default"
-            android:tint="@color/md_white"
-            app:backgroundTint="@color/md_blue_700"
-            app:elevation="0dp"
-            app:icon="@drawable/ic_store_fill"
-            app:iconTint="?colorPrimary" />
+            app:icon="@drawable/ic_store_fill" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_file"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="@dimen/fab_standard_45"
             android:layout_height="@dimen/fab_standard_45"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="@dimen/common_view_margin_default"
             android:layout_marginBottom="@dimen/common_view_margin_default"
-            android:tint="@color/md_white"
-            app:backgroundTint="@color/md_amber_500"
-            app:elevation="0dp"
-            app:icon="@drawable/ic_file_3_fill"
-            app:iconTint="?colorPrimary" />
+            app:icon="@drawable/ic_file_3_fill" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -161,8 +156,6 @@
             android:layout_marginEnd="@dimen/common_view_margin_default"
             android:layout_marginBottom="@dimen/common_view_margin_default"
             android:tint="@color/md_white"
-            app:backgroundTint="@color/md_red_400"
-            app:icon="@drawable/ic_add_fill"
-            app:iconTint="?colorPrimary" />
+            app:icon="@drawable/ic_add_fill" />
     </RelativeLayout>
 </layout>

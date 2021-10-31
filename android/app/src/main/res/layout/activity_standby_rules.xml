@@ -71,14 +71,12 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/common_view_margin_default"
-            android:tint="@color/md_white"
-            app:backgroundTint="@color/md_blue_500"
-            app:icon="@drawable/ic_add_fill"
-            app:iconTint="?colorPrimary" />
+            app:icon="@drawable/ic_add_fill"/>
     </RelativeLayout>
 </layout>

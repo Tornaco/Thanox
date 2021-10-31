@@ -74,8 +74,8 @@
         <item name="android:paddingRight">6dp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:paddingBottom">4dp</item>
-        <item name="backgroundTint">?colorPrimaryContainer</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="backgroundTint">?colorAccent</item>
+        <item name="android:textColor">?colorOnPrimary</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
 
@@ -95,5 +95,12 @@
 
     <style name="PrefFragmentCompatThemeCommon" parent="@style/PreferenceFragment.Material">
         <item name="android:layout">@layout/preference_list_with_fab_fragment</item>
+    </style>
+
+    <style name="FloatingActionButtonStyle">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:tint">?colorPrimary</item>
+        <item name="elevation">@dimen/common_toolbar_elevation</item>
+        <item name="iconTint">?colorPrimary</item>
     </style>
 </resources>

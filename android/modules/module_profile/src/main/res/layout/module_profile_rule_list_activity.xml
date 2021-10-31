@@ -84,13 +84,11 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab"
+            style="@style/FloatingActionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/common_view_margin_default"
-            android:tint="@color/md_white"
-            app:backgroundTint="@color/md_indigo_300"
-            app:icon="@drawable/module_profile_ic_add_fill"
-            app:iconTint="?colorPrimary" />
+            app:icon="@drawable/module_profile_ic_add_fill" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

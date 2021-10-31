@@ -57,38 +57,61 @@
                     android:text="@string/boost_status_running_apps"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <com.google.android.material.progressindicator.LinearProgressIndicator
-                    android:id="@+id/mem_progress"
+                <LinearLayout
+                    android:id="@+id/mem_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_running_apps"
-                    android:layout_marginStart="@dimen/common_view_margin_default"
-                    android:layout_marginTop="@dimen/common_view_margin_default"
-                    android:layout_marginEnd="@dimen/common_view_margin_default"
-                    android:max="100"
-                    android:progress="@{headerInfo.memUsagePercent}"
-                    app:trackCornerRadius="6dp"
-                    app:trackThickness="6dp"
-                    tools:progress="68" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/thanos_status_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/mem_progress"
-                    android:layout_marginStart="@dimen/common_view_margin_default"
-                    android:layout_marginTop="@dimen/common_view_margin_default"
-                    android:layout_marginEnd="@dimen/common_view_margin_default"
-                    android:layout_marginBottom="@dimen/common_view_margin_default"
-                    android:text="@{String.format(@string/boost_status_mem_usage_percent, headerInfo.memAvailablePercentString)}"
-                    android:textAppearance="@style/TextAppearance.TileSubTitle"
-                    tools:text="@string/boost_status_mem_usage_percent" />
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/mem_progress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_view_margin_default"
+                        android:layout_marginTop="@dimen/common_view_margin_default"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:max="100"
+                        android:progress="@{headerInfo.memUsagePercent}"
+                        app:trackCornerRadius="6dp"
+                        app:trackThickness="6dp"
+                        tools:progress="68" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_view_margin_default"
+                        android:layout_marginTop="@dimen/common_view_margin_middle"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:layout_marginBottom="@dimen/common_view_margin_default"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleX="0.6"
+                            android:scaleY="0.6"
+                            android:src="@drawable/ic_checkbox_blank_circle_fill"
+                            android:tint="?colorPrimaryContainer"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/thanos_status_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{String.format(@string/boost_status_mem_usage_percent, headerInfo.memAvailablePercentString)}"
+                            android:textAppearance="@style/TextAppearance.TileSubTitle"
+                            tools:text="@string/boost_status_mem_usage_percent" />
+
+                    </LinearLayout>
+                </LinearLayout>
 
                 <ProgressBar
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_below="@id/thanos_status_text"
+                    android:layout_below="@id/mem_container"
                     android:layout_marginTop="@dimen/common_view_margin_default"
                     android:max="100"
                     android:progress="@{headerInfo.memUsagePercent}"

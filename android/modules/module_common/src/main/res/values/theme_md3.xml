@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppThemeMD3" parent="Theme.Material3.DayNight">
+    <style name="ThemeMD3" parent="Theme.Material3.DayNight">
         <item name="colorPrimary">?colorSurface</item>
         <item name="colorPrimaryDark">?colorSurface</item>
         <item name="appbarPopupTheme">@style/PopupOverlayLight</item>
@@ -13,9 +13,14 @@
         <item name="android:statusBarColor" tools:targetApi="l">?colorPrimaryDark</item>
         <item name="android:navigationBarColor">?colorPrimaryDark</item>
         <item name="preferenceFragmentCompatStyle">@style/PrefFragmentCompatThemeCommon</item>
+
     </style>
 
-    <style name="AppThemeMD3.NoActionBar">
+    <style name="ThemeMD3.App">
+        <item name="android:windowBackground">@color/md_white</item>
+    </style>
+
+    <style name="ThemeMD3.App.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

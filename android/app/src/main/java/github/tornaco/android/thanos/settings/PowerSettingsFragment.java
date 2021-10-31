@@ -4,11 +4,11 @@ import android.os.Bundle;
 
 import androidx.preference.SwitchPreferenceCompat;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 
-public class PowerSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class PowerSettingsFragment extends BasePreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.power_settings_pref, rootKey);

@@ -46,13 +46,9 @@
             android:layout_below="@id/appbar"
             android:orientation="vertical">
 
-            <github.tornaco.android.thanos.widget.SwitchBar
-                android:id="@+id/switch_bar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:foreground="?selectableItemBackground"
-
-                tools:ignore="UnusedAttribute" />
+            <include
+                android:id="@+id/switch_bar_container"
+                layout="@layout/module_common_switchbar_container" />
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe"

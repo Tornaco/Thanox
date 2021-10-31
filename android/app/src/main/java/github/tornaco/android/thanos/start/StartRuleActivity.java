@@ -68,7 +68,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
         binding.fab.setOnClickListener((View v) -> showEditOrAddDialog(null));
 
         // Switch.
-        onSetupSwitchBar(binding.switchBar);
+        onSetupSwitchBar(binding.switchBarContainer.switchBar);
     }
 
     private void setupViewModel() {

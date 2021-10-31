@@ -16,14 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.List;
 import java.util.Objects;
 
 import github.tornaco.android.common.util.ApkUtil;
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
@@ -43,7 +42,7 @@ import github.tornaco.thanos.module.component.manager.ReceiverListActivity;
 import github.tornaco.thanos.module.component.manager.ServiceListActivity;
 import util.Consumer;
 
-public class FeatureConfigFragment extends BaseWithFabPreferenceFragmentCompat {
+public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
   private AppInfo appInfo;
 

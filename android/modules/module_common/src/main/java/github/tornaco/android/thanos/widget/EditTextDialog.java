@@ -29,5 +29,6 @@ public class EditTextDialog {
         builder.setNegativeButton(context.getString(android.R.string.cancel), (dialog, which) -> {
             // Noop.
         });
+        builder.show();
     }
 }

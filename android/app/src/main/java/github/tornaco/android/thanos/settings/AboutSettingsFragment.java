@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildConfig;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
@@ -26,7 +26,7 @@ import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 
 @RuntimePermissions
-public class AboutSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
 
     private int buildInfoClickTimes = 0;
     private ExportPatchUi exportPatchUi;

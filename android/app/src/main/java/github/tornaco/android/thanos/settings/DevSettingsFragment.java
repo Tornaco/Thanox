@@ -4,11 +4,11 @@ import android.os.Bundle;
 
 import androidx.preference.SwitchPreferenceCompat;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 
-public class DevSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class DevSettingsFragment extends BasePreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.dev_settings_pref, rootKey);

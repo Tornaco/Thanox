@@ -3,12 +3,12 @@ package github.tornaco.android.thanos.settings;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 
-public class SettingsDashboardFragment extends BaseWithFabPreferenceFragmentCompat {
+public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.settings_dashboard, rootKey);

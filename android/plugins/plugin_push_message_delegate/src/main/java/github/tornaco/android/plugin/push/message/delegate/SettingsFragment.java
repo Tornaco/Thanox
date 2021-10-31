@@ -5,10 +5,10 @@ import android.os.Bundle;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 
 @SuppressWarnings("ConstantConditions")
-public class SettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class SettingsFragment extends BasePreferenceFragmentCompat {
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();

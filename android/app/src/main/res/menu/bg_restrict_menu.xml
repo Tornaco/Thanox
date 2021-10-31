@@ -18,7 +18,7 @@
 
     <item
             android:id="@+id/action_settings"
-            android:icon="@drawable/ic_settings_line"
+            android:icon="@drawable/module_common_ic_md_outline_settings_24"
             android:title="@string/nav_title_settings"
-            app:showAsAction="always"/>
+            app:showAsAction="never"/>
 </menu>

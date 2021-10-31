@@ -18,8 +18,6 @@
     <PreferenceCategory
             app:key="@string/key_config_template_category"
             app:title="@string/pref_title_config_template_category">
-
-
     </PreferenceCategory>
 
 </PreferenceScreen>

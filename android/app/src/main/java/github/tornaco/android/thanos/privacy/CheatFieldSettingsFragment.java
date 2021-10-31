@@ -18,7 +18,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.Arrays;
 import java.util.Objects;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -27,7 +27,7 @@ import github.tornaco.android.thanos.core.util.ArrayUtils;
 import github.tornaco.android.thanos.core.util.Optional;
 import lang3.RandomStringUtils;
 
-public class CheatFieldSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
     private String fieldId;
 
     public static CheatFieldSettingsFragment newInstance(String fieldId) {

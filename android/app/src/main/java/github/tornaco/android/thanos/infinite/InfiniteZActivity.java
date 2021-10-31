@@ -130,7 +130,7 @@ public class InfiniteZActivity extends ThemeActivity {
         binding.swipe.setColorSchemeColors(getResources()
                 .getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
-        onSetupSwitchBar(binding.switchBar);
+        onSetupSwitchBar(binding.switchBarContainer.switchBar);
 
         binding.fab.setOnClickListener(v -> ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
             ArrayList<String> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());

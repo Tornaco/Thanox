@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
@@ -23,7 +23,7 @@ import github.tornaco.android.thanos.util.iconpack.IconPackManager;
 import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
 
-public class UiSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class UiSettingsFragment extends BasePreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

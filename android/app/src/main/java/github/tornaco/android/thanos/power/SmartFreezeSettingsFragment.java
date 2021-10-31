@@ -9,13 +9,13 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 
-public class SmartFreezeSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.DateUtils;
@@ -42,7 +42,7 @@ import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 
 @RuntimePermissions
-public class DataSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class DataSettingsFragment extends BasePreferenceFragmentCompat {
 
     private final static int REQUEST_CODE_BACKUP_FILE_PICK = 0x100;
     private final static int REQUEST_CODE_BACKUP_FILE_PICK_Q = 0x300;
@@ -68,7 +68,8 @@ public class DataSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
         });
         findPreference(getString(R.string.key_restore_default)).setOnPreferenceClickListener(preference -> {
             new MaterialAlertDialogBuilder(getActivity())
-                    .setMessage(R.string.pre_title_restore_default)
+                    .setTitle(R.string.pre_title_restore_default)
+                    .setMessage(R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) ->
                             ThanosManager.from(getActivity())
                                     .ifServiceInstalled(thanosManager -> {

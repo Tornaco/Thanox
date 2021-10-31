@@ -6,10 +6,10 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 
-public class RuleEngineSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

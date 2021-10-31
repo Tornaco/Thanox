@@ -19,13 +19,13 @@
 
     <item
             android:id="@+id/action_standby_rules"
-            android:icon="@drawable/ic_settings_line"
+            android:icon="@drawable/module_common_ic_md_outline_settings_24"
             android:title="@string/menu_title_rules"
             app:showAsAction="never" />
 
     <item
             android:id="@+id/action_settings"
-            android:icon="@drawable/ic_settings_line"
+            android:icon="@drawable/module_common_ic_md_outline_settings_24"
             android:title="@string/nav_title_settings"
-            app:showAsAction="ifRoom" />
+            app:showAsAction="never" />
 </menu>

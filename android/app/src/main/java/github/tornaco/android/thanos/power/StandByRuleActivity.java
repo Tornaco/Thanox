@@ -68,7 +68,7 @@ public class StandByRuleActivity extends ThemeActivity implements StartRuleItemC
         binding.fab.setOnClickListener((View v) -> showEditOrAddDialog(null));
 
         // Switch.
-        onSetupSwitchBar(binding.switchBar);
+        onSetupSwitchBar(binding.switchBarContainer.switchBar);
     }
 
     @Verify

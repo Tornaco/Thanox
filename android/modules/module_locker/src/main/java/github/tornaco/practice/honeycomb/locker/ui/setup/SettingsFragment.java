@@ -6,12 +6,12 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.practice.honeycomb.locker.R;
 
-public class SettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class SettingsFragment extends BasePreferenceFragmentCompat {
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();

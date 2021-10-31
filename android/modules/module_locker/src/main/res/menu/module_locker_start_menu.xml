@@ -19,7 +19,7 @@
 
     <item
             android:id="@+id/action_settings"
-            android:icon="@drawable/module_common_ic_settings_fill"
+            android:icon="@drawable/module_common_ic_md_outline_settings_24"
             android:title="@string/module_locker_title_settings"
-            app:showAsAction="always" />
+            app:showAsAction="never" />
 </menu>

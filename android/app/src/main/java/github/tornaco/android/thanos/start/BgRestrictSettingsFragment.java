@@ -7,14 +7,14 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import mobi.upod.timedurationpicker.TimeDurationPicker;
 import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
 import mobi.upod.timedurationpicker.TimeDurationUtil;
 
-public class BgRestrictSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class BgRestrictSettingsFragment extends BasePreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

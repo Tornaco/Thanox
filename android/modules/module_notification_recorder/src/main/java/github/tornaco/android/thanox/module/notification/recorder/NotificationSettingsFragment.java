@@ -6,11 +6,11 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
 
-import github.tornaco.android.thanos.BaseWithFabPreferenceFragmentCompat;
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.n.NotificationRecord;
 
-public class NotificationSettingsFragment extends BaseWithFabPreferenceFragmentCompat {
+public class NotificationSettingsFragment extends BasePreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

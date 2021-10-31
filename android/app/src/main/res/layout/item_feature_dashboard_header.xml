@@ -57,14 +57,29 @@
                     android:text="@string/boost_status_running_apps"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <TextView
-                    android:id="@+id/thanos_status_text"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/mem_progress"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_running_apps"
                     android:layout_marginStart="@dimen/common_view_margin_default"
                     android:layout_marginTop="@dimen/common_view_margin_default"
                     android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:max="100"
+                    android:progress="@{headerInfo.memUsagePercent}"
+                    app:trackCornerRadius="6dp"
+                    app:trackThickness="6dp"
+                    tools:progress="68" />
+
+                <TextView
+                    android:id="@+id/thanos_status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mem_progress"
+                    android:layout_marginStart="@dimen/common_view_margin_default"
+                    android:layout_marginTop="@dimen/common_view_margin_default"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_marginBottom="@dimen/common_view_margin_default"
                     android:text="@{String.format(@string/boost_status_mem_usage_percent, headerInfo.memAvailablePercentString)}"
                     android:textAppearance="@style/TextAppearance.TileSubTitle"
                     tools:text="@string/boost_status_mem_usage_percent" />
@@ -78,6 +93,7 @@
                     android:max="100"
                     android:progress="@{headerInfo.memUsagePercent}"
                     android:progressDrawable="@drawable/nav_card_progress_horizontal_material"
+                    android:visibility="gone"
                     tools:progress="64" />
 
             </RelativeLayout>

@@ -7,7 +7,7 @@
 
         <item name="colorPrimary">?colorAccent</item>
         <item name="colorPrimaryDark">?colorAccent</item>
-        <item name="colorOnPrimary">@color/md_white</item>
+        <item name="colorOnPrimary">@color/md_grey_200</item>
         <item name="colorPrimaryVariant">?colorPrimary</item>
         <item name="colorSecondary">?colorPrimary</item>
 
@@ -18,7 +18,7 @@
         <item name="colorOnTertiary">?colorOnPrimary</item>
         <item name="colorError">@color/md_red_500</item>
 
-        <item name="colorSurface">@color/md_white</item>
+        <item name="colorSurface">@color/md_grey_100</item>
         <item name="colorOnSurface">@color/md_grey_800</item>
 
         <item name="appbarPopupTheme">@style/PopupOverlayLight</item>

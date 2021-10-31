@@ -62,6 +62,10 @@
                     android:tint="@color/md_green_500"
                     android:visibility="gone" />
 
+                <View
+                    android:layout_width="@dimen/common_view_margin_small"
+                    android:layout_height="wrap_content"/>
+
                 <com.google.android.material.button.MaterialButton
                     style="@style/MaterialButtonBadged"
                     android:layout_width="wrap_content"

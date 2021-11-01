@@ -102,6 +102,7 @@ public class SmartFreezeActivity extends ThemeActivity {
                 ThanosManager.from(getApplicationContext())
                         .getPkgManager()
                         .launchSmartFreezePkg(appInfo.getPkgName());
+                viewModel.start();
             }
 
             @Override
@@ -198,12 +199,15 @@ public class SmartFreezeActivity extends ThemeActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (REQ_PICK_APPS == requestCode && resultCode == RESULT_OK && data != null && data.hasExtra("apps")) {
+            binding.swipe.setRefreshing(true);
             List<AppInfo> appInfos = data.getParcelableArrayListExtra("apps");
             CollectionUtils.consumeRemaining(appInfos, appInfo -> ThanosManager.from(getApplicationContext())
                     .getPkgManager()
                     .setPkgSmartFreezeEnabled(appInfo.getPkgName(), true));
-
-            viewModel.start();
+            postOnUiDelayed(() -> {
+                binding.swipe.setRefreshing(false);
+                viewModel.start();
+            }, 1000);
         }
     }
 

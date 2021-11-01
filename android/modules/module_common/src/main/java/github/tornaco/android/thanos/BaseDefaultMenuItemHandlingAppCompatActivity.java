@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
-public class BaseDefaultMenuItemHandlingAppCompatActivity extends AppCompatActivity {
+public class BaseDefaultMenuItemHandlingAppCompatActivity extends BaseAppCompatActivity {
 
     protected void showHomeAsUpNavigator() {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

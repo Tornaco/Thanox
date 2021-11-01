@@ -42,4 +42,6 @@
 
     <string name="module_profile_edit_var_title_hint">请输入名称</string>
     <string name="module_profile_var_list_item_size">%s个变量</string>
+    <string name="title_shortcut_fact_value">Fact value</string>
+    <string name="title_shortcut_label">Shortcut label</string>
 </resources>

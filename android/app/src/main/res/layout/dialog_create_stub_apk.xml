@@ -91,14 +91,14 @@
             android:padding="@dimen/common_view_margin_small">
 
         <ImageView
-                android:id="@+id/tip_img"
-                android:layout_width="@dimen/common_image_size_14dp"
-                android:layout_height="@dimen/common_image_size_14dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_lightbulb_fill"
-                app:tint="@color/md_grey_700" />
+            android:id="@+id/tip_img"
+            android:layout_width="@dimen/common_image_size_14dp"
+            android:layout_height="@dimen/common_image_size_14dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/module_common_ic_lightbulb_fill"
+            app:tint="@color/md_grey_700" />
 
         <TextView
                 android:layout_width="wrap_content"

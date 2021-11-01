@@ -83,6 +83,10 @@
         <item name="backgroundTint">?colorError</item>
     </style>
 
+    <style name="MaterialButtonBadged.Grey">
+        <item name="backgroundTint">@color/md_grey_600</item>
+    </style>
+
     <style name="ToolbarCollapsedTitleTextAppearance" parent="@style/TextAppearance.AppCompat.Medium">
         <item name="android:textColor">?attr/colorControlNormal</item>
     </style>

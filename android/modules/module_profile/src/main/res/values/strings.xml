@@ -41,4 +41,6 @@
 
     <string name="module_profile_edit_var_title_hint">Please input name</string>
     <string name="module_profile_var_list_item_size">%s variants</string>
+    <string name="title_shortcut_fact_value">Fact value</string>
+    <string name="title_shortcut_label">Shortcut label</string>
 </resources>

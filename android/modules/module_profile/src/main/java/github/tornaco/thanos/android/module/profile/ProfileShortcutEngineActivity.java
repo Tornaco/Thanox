@@ -16,6 +16,7 @@ import androidx.core.graphics.drawable.IconCompat;
 import com.elvishew.xlog.XLog;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.util.ShortcutReceiver;
@@ -50,7 +51,7 @@ public class ProfileShortcutEngineActivity extends Activity {
                 Bitmap resource = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_fallback_app_icon);
                 Intent shortcutInfoIntent = ProfileShortcutEngineActivity.createIntent(context, factValue);
                 shortcutInfoIntent.setAction(Intent.ACTION_VIEW);
-                ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(context, "Shortcut-of-thanox-for-profile-engine")
+                ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(context, "Shortcut-of-thanox-for-profile-engine" + UUID.randomUUID().toString())
                         .setIcon(IconCompat.createWithBitmap(Objects.requireNonNull(resource)))
                         .setShortLabel(label)
                         .setIntent(shortcutInfoIntent)

@@ -1,9 +1,13 @@
 package github.tornaco.thanos.android.module.profile;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
@@ -43,15 +47,28 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
         });
 
         findPreference(R.string.module_profile_pref_key_rule_engine_from_shortcut).setOnPreferenceClickListener(
-                        new Preference.OnPreferenceClickListener() {
-                            @Override
-                            public boolean onPreferenceClick(Preference preference) {
-                                ProfileShortcutEngineActivity.ShortcutHelper.addShortcut(getActivity(),
-                                        "Label",
-                                        "testValue");
-                                return true;
-                            }
-                        }
-                );
+                preference -> {
+                    onRequestAddShortcut();
+                    return true;
+                }
+        );
+    }
+
+    void onRequestAddShortcut() {
+        View dialogView = LayoutInflater.from(getActivity()).inflate(R.layout.module_profile_dialog_create_shortcut, null, false);
+        EditText factValueText = dialogView.findViewById(R.id.fact_value);
+        EditText labelText = dialogView.findViewById(R.id.label);
+
+        new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()))
+                .setView(dialogView)
+                .setTitle(R.string.module_profile_pref_title_rule_engine_shortcut)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    String factValue = factValueText.getText().toString();
+                    String label = labelText.getText().toString();
+                    ProfileShortcutEngineActivity.ShortcutHelper.addShortcut(getActivity(),
+                            label,
+                            factValue);
+                }).show();
     }
 }

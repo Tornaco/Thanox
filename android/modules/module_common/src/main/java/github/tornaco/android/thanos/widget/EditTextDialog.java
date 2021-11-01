@@ -5,12 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.StringRes;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import github.tornaco.android.thanos.module.common.R;
 import util.Consumer;
 
 public class EditTextDialog {
+
+    public static void show(Context context, @StringRes int titleRes, Consumer<String> stringConsumer) {
+        show(context, context.getString(titleRes), stringConsumer);
+    }
 
     public static void show(Context context, String title, Consumer<String> stringConsumer) {
         final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);

@@ -13,14 +13,14 @@
         <meta name="author" content="Tornaco">
       
       
-        <link rel="canonical" href="https://tornaco.github.io/Thanox/2-Install-Activate/">
+        <link rel="canonical" href="https://tornaco.github.io/Thanox/4-Activity-Replace/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
     
     
       
-        <title>安装与激活 - Thanox</title>
+        <title>移花接木 - Thanox</title>
       
     
     
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              安装与激活
+              移花接木
             
           </span>
         </div>
@@ -216,74 +216,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          安装与激活
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../2-Install-Activate/" class="md-nav__link">
         安装与激活
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    安装
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    激活
-  </a>
-  
-    <nav class="md-nav" aria-label="激活">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#xposed" class="md-nav__link">
-    Xposed模式
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#magisk" class="md-nav__link">
-    Magisk模式
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -309,11 +246,61 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../4-Activity-Replace/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          移花接木
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         移花接木
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    功能介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    有什么用?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    怎么用?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -403,35 +390,22 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    安装
+    功能介绍
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    激活
-  </a>
-  
-    <nav class="md-nav" aria-label="激活">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#xposed" class="md-nav__link">
-    Xposed模式
+    有什么用?
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#magisk" class="md-nav__link">
-    Magisk模式
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    怎么用?
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -448,45 +422,35 @@
               
                 
                 
-                  <h1>安装与激活</h1>
+                  <h1>移花接木</h1>
                 
-                <h2 id="_1">安装</h2>
-<ol>
-<li>Thanox是一个独立的apk，只需要下载apk安装到设备上即可。</li>
-<li>目前仅支持<strong>Android 6.0及其以上</strong>版本的ROM。</li>
-<li>开发基于<strong>AOSP</strong>开发，理论上兼容所有类原生以及其他大部分国产ROM。</li>
-</ol>
-<h2 id="_2">激活</h2>
-<p>Thanox中大部分的功能都是在系统进程中完成的，因此Thanox会对Android系统打补丁。</p>
-<p>目前支持两种模式激活（二选一）：</p>
-<ul>
-<li>Xposed模式， Android6+</li>
-<li>Magisk模式，Android11+</li>
-</ul>
-<h3 id="xposed">Xposed模式</h3>
-<ol>
-<li>你的设备必须已经正确安装了<strong>Xposed框架</strong>（或者其他类似支持Xposed API的框架）</li>
-<li>安装Thanox apk后，进入<strong>Xposed installer</strong>应用，勾选Thanox</li>
-<li>勾选完成，重启设备</li>
-<li>对于支持作用域的Xposed框架，请至少勾选Android系统，如要对某个app启用隐匿功能，则还需要勾选目标app</li>
-</ol>
-<blockquote>
-<p>注意，每次更新Thanox后，建议都重新勾选Thanox后重启</p>
-</blockquote>
-<h3 id="magisk">Magisk模式</h3>
-<ol>
-<li>你的设备必须已经正确安装了<strong>Magisk框架</strong></li>
-<li>你的设备必须已经正确安装了<strong>riru</strong>框架</li>
-<li>安装最新Thanox 应用</li>
-<li>点击Thaox设置--关于--补丁状态，导出magisk补丁；或者直接将thanox apk重命名为.zip格式即为magisk补丁</li>
-<li>刷入上个步骤获取到的magisk补丁</li>
-</ol>
-<blockquote>
-<p>注意，每次更新Thanox，都需要更新magisk补丁</p>
-</blockquote>
-<hr />
-<p><strong>导出页面如图所示：</strong></p>
-<p><img alt="export-patch" src="../assets/images/export-patch.png" /></p>
+                <!-- more -->
+
+<h2 id="_1">功能介绍</h2>
+<p>移花接木可以配置应用活动之间的跳转。在使用之前需要了解Android里常见的几个概念。</p>
+<p><strong>活动 - Activity</strong></p>
+<p>Android世界里，页面通常都是一个叫Activity（中文暂且翻译为活动）的东西；因此页面跳转我们现在可以统一语言：活动跳转。</p>
+<p><strong>活动怎么标识？</strong></p>
+<p>每个活动都有个标识，就好比每个网站页面有个路径一样。</p>
+<p>Android里活动的标识格式通常为：</p>
+<pre><code class="language-java">&quot;${包名}/${活动名}&quot;
+</code></pre>
+<p>例如微信的首页活动页标识为：</p>
+<pre><code class="language-java">&quot;com.tencent.mm/com.tencent.mm.LauncherUI&quot;
+</code></pre>
+<h2 id="_2">有什么用?</h2>
+<p>先看一个需求：一个App有三个活动页，A、B、C；</p>
+<p>常规下该App的启动顺序为A---&gt;B---&gt;C</p>
+<p>现在小明有个需求，他不想看到 B 这个页面，他希望直接从 A 可以跳转到 C，可以吗？</p>
+<p>可以！</p>
+<h2 id="_3">怎么用?</h2>
+<p>按照上面的例子，在活动启动的时候，只要想办法把 B 换成 C 不就行了；也就是偷梁换柱，移花接木。</p>
+<p>因此移花接木功能里，你只要知道 B 和 C 的活动页，就可以新增一条配置，把 B 换成 C。</p>
+<p><strong>举例如图：</strong></p>
+<p><img alt="activity-replace" src="../assets/images/activity-replace.png" /></p>
+<p><strong>那么怎么知道这些App的活动页都是什么呢？</strong></p>
+<p>贴心的开发者为你准备了这个功能，打开Thanox设置---开发者---显示当前活动；此后应用的每个活动都会以浮窗展示，点击浮窗可以复制活动标识。</p>
+<p><img alt="show-current-activity" src="../assets/images/show-current-activity.png" /></p>
                 
                   
                 
@@ -508,7 +472,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: 应用介绍" rel="prev">
+        <a href="../3-Lazy-Mode/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 乖巧模式" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -517,20 +481,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              应用介绍
+              乖巧模式
             </div>
           </div>
         </a>
       
       
         
-        <a href="../3-Lazy-Mode/" class="md-footer__link md-footer__link--next" aria-label="Next: 乖巧模式" rel="next">
+        <a href="../5-Start-Rules/" class="md-footer__link md-footer__link--next" aria-label="Next: 后台启动规则" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              乖巧模式
+              后台启动规则
             </div>
           </div>
           <div class="md-footer__button md-icon">

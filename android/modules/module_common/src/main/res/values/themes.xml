@@ -1,35 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="themes_entry">
-        <item>Light</item>
-        <item>Light red</item>
-        <item>Light green</item>
-        <item>Light amber</item>
-        <item>Light black</item>
-        <item>Light oppo</item>
-        <item>Light pink</item>
-        <item>Dark</item>
-        <item>Dark red</item>
-        <item>Dark amber</item>
-        <item>Dark grey</item>
-        <item>Material you</item>
-        <item>Auto</item>
-    </string-array>
+    <style name="AppThemeShortcut" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 
-    <string-array name="themes_value">
-        <item>Light</item>
-        <item>LightRed</item>
-        <item>LightGreen</item>
-        <item>LightAmber</item>
-        <item>LightBlack</item>
-        <item>LightOppo</item>
-        <item>LightPink</item>
-        <item>Dark</item>
-        <item>DarkRed</item>
-        <item>DarkAmber</item>
-        <item>DarkGrey</item>
-        <item>MD3</item>
-        <item>Auto</item>
-    </string-array>
 </resources>

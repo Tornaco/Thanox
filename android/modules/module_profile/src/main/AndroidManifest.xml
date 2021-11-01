@@ -20,6 +20,8 @@
             android:exported="false" />
 
         <activity android:name=".ProfileShortcutEngineActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/AppThemeShortcut"
             android:exported="false"/>
     </application>
 </manifest>

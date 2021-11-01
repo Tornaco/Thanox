@@ -8,7 +8,10 @@
     <string name="module_profile_pref_title_rule_engine_automation">Automation</string>
     <string name="module_profile_pref_summary_rule_engine_automation">支持执行自动点击，查找view</string>
     <string name="module_profile_pref_title_rule_engine_push">Push</string>
-    <string name="module_profile_pref_summary_rule_engine_push">publish facts of push message arrival</string>
+    <string name="module_profile_pref_summary_rule_engine_push">Publish facts of push message arrival</string>
+
+    <string name="module_profile_pref_title_rule_engine_shortcut">Create shortcut</string>
+    <string name="module_profile_pref_summary_rule_engine_shortcut">Create a launcher shortcut, when this shortcut launched, thanox will publish a fact with the shortcut fact value</string>
 
     <string name="module_profile_rule_edit_action_save">Save</string>
     <string name="module_profile_rule_edit_action_discard">Discard</string>

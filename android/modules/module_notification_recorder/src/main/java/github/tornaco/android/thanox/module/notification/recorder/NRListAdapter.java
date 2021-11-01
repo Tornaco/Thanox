@@ -97,7 +97,7 @@ public class NRListAdapter extends SectioningAdapter implements Consumer<List<No
                         context,
                         String.valueOf(System.currentTimeMillis()).hashCode(),
                         new Intent("thanox.action.mock.notification"),
-                        PendingIntent.FLAG_UPDATE_CURRENT),
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE),
                         true)
                 .build();
         NotificationManagerCompat.from(context)

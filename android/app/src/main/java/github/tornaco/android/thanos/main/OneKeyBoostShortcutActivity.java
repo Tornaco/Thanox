@@ -16,7 +16,7 @@ import java.util.Objects;
 
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.T;
-import github.tornaco.android.thanos.power.ShortcutReceiver;
+import github.tornaco.android.thanos.util.ShortcutReceiver;
 
 public class OneKeyBoostShortcutActivity extends Activity {
 

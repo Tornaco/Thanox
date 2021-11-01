@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory>
 
         <Preference android:summary="@string/module_profile_summary_rule_engine" />
 
         <SwitchPreferenceCompat
-                android:persistent="false"
-                app:key="@string/module_profile_pref_key_rule_engine_automation"
-                app:summary="@string/module_profile_pref_summary_rule_engine_automation"
-                app:title="@string/module_profile_pref_title_rule_engine_automation" />
+            android:persistent="false"
+            app:key="@string/module_profile_pref_key_rule_engine_automation"
+            app:summary="@string/module_profile_pref_summary_rule_engine_automation"
+            app:title="@string/module_profile_pref_title_rule_engine_automation" />
 
 
         <SwitchPreferenceCompat
-                android:persistent="false"
-                app:key="@string/module_profile_pref_key_rule_engine_push"
-                app:summary="@string/module_profile_pref_summary_rule_engine_push"
-                app:title="@string/module_profile_pref_title_rule_engine_push" />
+            android:persistent="false"
+            app:key="@string/module_profile_pref_key_rule_engine_push"
+            app:summary="@string/module_profile_pref_summary_rule_engine_push"
+            app:title="@string/module_profile_pref_title_rule_engine_push" />
+
+
+        <Preference
+            android:persistent="false"
+            app:key="@string/module_profile_pref_key_rule_engine_from_shortcut"
+            app:summary="@string/module_profile_pref_summary_rule_engine_shortcut"
+            app:title="@string/module_profile_pref_title_rule_engine_shortcut" />
 
     </PreferenceCategory>
 

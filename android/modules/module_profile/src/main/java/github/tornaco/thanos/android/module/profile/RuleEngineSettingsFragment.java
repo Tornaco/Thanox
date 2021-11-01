@@ -2,6 +2,7 @@ package github.tornaco.thanos.android.module.profile;
 
 import android.os.Bundle;
 
+import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
@@ -26,8 +27,7 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         SwitchPreferenceCompat automationPref = findPreference(getString(R.string.module_profile_pref_key_rule_engine_automation));
-        assert automationPref != null;
-        automationPref.setVisible(false);
+        Objects.requireNonNull(automationPref).setVisible(false);
         automationPref.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean value = (boolean) newValue;
             thanos.getProfileManager().setProfileEngineUiAutomationEnabled(value);
@@ -42,5 +42,16 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
             return true;
         });
 
+        findPreference(R.string.module_profile_pref_key_rule_engine_from_shortcut).setOnPreferenceClickListener(
+                        new Preference.OnPreferenceClickListener() {
+                            @Override
+                            public boolean onPreferenceClick(Preference preference) {
+                                ProfileShortcutEngineActivity.ShortcutHelper.addShortcut(getActivity(),
+                                        "Label",
+                                        "testValue");
+                                return true;
+                            }
+                        }
+                );
     }
 }

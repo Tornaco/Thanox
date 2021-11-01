@@ -18,5 +18,8 @@
         <activity
             android:name=".GlobalVarEditorActivity"
             android:exported="false" />
+
+        <activity android:name=".ProfileShortcutEngineActivity"
+            android:exported="false"/>
     </application>
 </manifest>

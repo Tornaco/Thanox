@@ -1,4 +1,4 @@
-package github.tornaco.android.thanos.power;
+package github.tornaco.android.thanos.util;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -18,7 +18,7 @@ public class ShortcutReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (Intent.ACTION_LOCALE_CHANGED.equals(intent.getAction())) {
-
+            // Noop.
         } else if (ACTION_PIN_REQUEST_ACCEPTED.equals(intent.getAction())) {
             Completable.fromRunnable(() ->
                     Toast.makeText(context, "\uD83D\uDC4D", Toast.LENGTH_LONG).show())
@@ -29,7 +29,6 @@ public class ShortcutReceiver extends BroadcastReceiver {
     public static PendingIntent getPinRequestAcceptedIntent(Context context) {
         final Intent intent = new Intent(ACTION_PIN_REQUEST_ACCEPTED);
         intent.setComponent(new ComponentName(context, ShortcutReceiver.class));
-
-        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 }

@@ -55,4 +55,6 @@ interface IProfileManager {
     boolean applyConfigTemplateForPackage(String packageName, in ConfigTemplate template);
 
     void addRuleIfNotExists(String ruleJson, in IRuleAddCallback callback, int format);
+
+    void publishStringFact(String factValue, long delayMills);
 }

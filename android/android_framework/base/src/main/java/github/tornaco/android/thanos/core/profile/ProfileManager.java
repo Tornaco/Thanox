@@ -186,4 +186,9 @@ public class ProfileManager {
     public boolean applyConfigTemplateForPackage(String packageName, ConfigTemplate template) {
         return server.applyConfigTemplateForPackage(packageName, template);
     }
+
+    @SneakyThrows
+    public void publishStringFact(String factValue, long delayMills) {
+        server.publishStringFact(factValue, delayMills);
+    }
 }

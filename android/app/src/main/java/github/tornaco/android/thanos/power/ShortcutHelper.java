@@ -28,6 +28,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.util.GlideApp;
 import github.tornaco.android.thanos.util.GlideUtils;
+import github.tornaco.android.thanos.util.ShortcutReceiver;
 
 @SuppressWarnings("UnstableApiUsage")
 class ShortcutHelper {

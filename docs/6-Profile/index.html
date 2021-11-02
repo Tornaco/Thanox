@@ -433,6 +433,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#0515" class="md-nav__link">
+    0.5.15 快捷方式
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -744,6 +751,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#0515" class="md-nav__link">
+    0.5.15 快捷方式
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -888,6 +902,8 @@
 <p>You can build a simple rules engine yourself. All you need is to create a bunch of objects with conditions and actions, store them in a collection, and run through them to evaluate the conditions and execute the actions.</p>
 <p><a href="http://martinfowler.com/">Martin Fowler</a> </p>
 </blockquote>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <h2 id="02">0.2. 介绍</h2>
 <p>情景模式简单理解：</p>
 <blockquote>
@@ -895,6 +911,8 @@
 </blockquote>
 <p>什么时候就是触发条件（condition）</p>
 <p>干什么就是动作（actions）</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <h2 id="03">0.3. 新建</h2>
 <p>新建一条入门实例如下，以JSON格式为例：</p>
 <pre><code class="language-json">[
@@ -940,8 +958,11 @@
 </tr>
 </tbody>
 </table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <h2 id="04-fatcs-params">0.4. Fatcs-params</h2>
 <p>除了提供规则引擎之外，Thanox也会提供常用的事实与参数，用于condition条件判断。</p>
+<p>&nbsp;</p>
 <h3 id="041">0.4.1. 应用安装</h3>
 <p>应用安装成功之后，thanox会发布这个事实，并注入一些参数，你可以使用这些参数做条件判断，或者执行动作时作为参数使用。</p>
 <table>
@@ -985,6 +1006,7 @@
 </ul>
 <p><code>json
   "ui.showShortToast(pkgName);"</code></p>
+<p>&nbsp;</p>
 <h3 id="042">0.4.2. 应用切换</h3>
 <p>前台应用切换时，thanox也会发布这个事实，参数如下。</p>
 <table>
@@ -1029,6 +1051,7 @@
 </ul>
 <p><code>json
   "condition":  "frontPkgChanged == true &amp;&amp; from == \"com.tencent.mm\""</code></p>
+<p>&nbsp;</p>
 <h3 id="043">0.4.3. 任务清理</h3>
 <p>当某个应用的任务被移除时，一般场景为最近任务中，该任务被用户划掉。此时thanox也会发布这个事实，参数如下。</p>
 <table>
@@ -1071,6 +1094,7 @@
             "ui.showShortToast(\"正在杀死微信\");",
         "killer.killPackage(pkgName);"
       ]</code></p>
+<p>&nbsp;</p>
 <h3 id="044-activity-created">0.4.4. Activity Created</h3>
 <p>通常一个应用的活动页已经创建好，可以称为<strong>Activity Created</strong>。此时thanox也会发布这个事实，参数如下。
 通常一个活动的生命周期为Created（创建好）--&gt;Resumed（显示好，可以交互了）--&gt; Paused（暂停）--&gt; Destroyed（销毁了），需要注意的是，</p>
@@ -1119,6 +1143,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
 </tr>
 </tbody>
 </table>
+<p>&nbsp;</p>
 <h3 id="045-activity-resumed">0.4.5. Activity Resumed</h3>
 <p>通常一个应用的活动页已经显示，可以称为<strong>Activity Resumed</strong>。此时thanox也会发布这个事实，参数如下。</p>
 <table>
@@ -1182,6 +1207,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
 <p>此处条件只判断了彩云天气，可以使用||操作符做多条件判断。</p>
 <p>此处的ui操作后续会介绍。</p>
 </blockquote>
+<p>&nbsp;</p>
 <h3 id="046-activity-changed">0.4.6. Activity Changed</h3>
 <p>当前前台活动(Activity)发生改变时thanox会发布该事件。(Since Thanox(or Pro)-2.5)</p>
 <table>
@@ -1217,6 +1243,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
 <p><a href="https://developer.android.com/reference/android/content/ComponentName">ComponentName</a> 是活动组件名称。</p>
 <p>例如：<code>com.android.messaging/com.android.messaging.ui.conversationlist.ConversationListActivity</code></p>
 <p>Thanox的开发者设置中，"显示当前Activity"功能也可以显示当前activity的ComponentName。</p>
+<p>&nbsp;</p>
 <h3 id="047">0.4.7. 应用停止运行</h3>
 <p>应用被杀死或者其他原因停止运行，Thanox会发布该事实。</p>
 <table>
@@ -1243,6 +1270,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
 </tr>
 </tbody>
 </table>
+<p>&nbsp;</p>
 <h3 id="048">0.4.8. 屏幕开关</h3>
 <table>
 <thead>
@@ -1274,6 +1302,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
 </tr>
 </tbody>
 </table>
+<p>&nbsp;</p>
 <h3 id="049">0.4.9. 电量变化</h3>
 <table>
 <thead>
@@ -1317,6 +1346,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
 </tr>
 </tbody>
 </table>
+<p>&nbsp;</p>
 <h3 id="0410">0.4.10. 蓝牙事件</h3>
 <table>
 <thead>
@@ -1459,6 +1489,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
   }
 ]
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="0411-wifi">0.4.11. Wifi状态变化</h3>
 <p>Wifi状态变化时发出的事件。（Since Thanox 2.5-2）</p>
 <table>
@@ -1495,6 +1526,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
   val ssid: String?
 )
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="0412">0.4.12. 系统启动</h3>
 <table>
 <thead>
@@ -1514,6 +1546,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
 </tr>
 </tbody>
 </table>
+<p>&nbsp;</p>
 <h3 id="0413">0.4.13. 推送消息</h3>
 <table>
 <thead>
@@ -1539,6 +1572,7 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
 </tr>
 </tbody>
 </table>
+<p>&nbsp;</p>
 <h3 id="0414">0.4.14. 通知</h3>
 <table>
 <thead>
@@ -1582,10 +1616,38 @@ Resumed--&gt; Paused（被其他活动覆盖）--&gt;Resumed（如果其他活�
 </tr>
 </tbody>
 </table>
+<p>&nbsp;</p>
+<h3 id="0515">0.5.15 快捷方式</h3>
+<p>你可以创建一个有”意义的“桌面快捷方式，当你点击这个桌面快捷方式的时候，Thanox会发布这个快捷方式代表的事实。</p>
+<p>例如；实现一个一键锁屏快捷方式，即：点击桌面一键锁屏快捷方式时锁屏。</p>
+<p>&nbsp;</p>
+<p>首先创建一个快捷方式引擎：</p>
+<p>&nbsp;</p>
+<p><img alt="prlfile-shortcut-create" src="../assets/images/prlfile-shortcut-create.png" />&nbsp;</p>
+<p>&nbsp;</p>
+<p>接下来，添加一个情景模式，监听这个快捷方式的启动事件，并指定锁屏命令：</p>
+<p>&nbsp;</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;Profile shortcut&quot;,
+    &quot;description&quot;: &quot;监听一个快捷方式启动事件，以一键锁屏为例&quot;,
+    &quot;priority&quot;: 2,
+    &quot;condition&quot;: &quot;shortcutLaunched == true &amp;&amp; shortcutValue == \&quot;turn screen off\&quot;&quot;,
+    &quot;actions&quot;: [
+      &quot;power.sleep(0);&quot;
+    ]
+  }
+]
+</code></pre>
+<p>&nbsp;</p>
+<p>保存之后，点击桌面上的一键锁屏快捷方式即可实现一键锁屏功能了。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <h2 id="05-handle">0.5. Handle</h2>
 <p>Thanox会提供一部分执行动作所需要的handle能力。例如ui，专门用于做界面显示相关的动作。</p>
 <p>你可以使用<code>handle.action(params)</code>来执行自定义的动作。</p>
 <p>下面是目前支持的Handle能力。</p>
+<p>&nbsp;</p>
 <h3 id="051-killer">0.5.1. killer</h3>
 <table>
 <thead>
@@ -1619,6 +1681,7 @@ interface IKiller {
   &quot;killer.killPackage(\&quot;com.tencent.mm\&quot;)&quot;
 ]
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="052-activity">0.5.2. activity</h3>
 <table>
 <thead>
@@ -1694,6 +1757,7 @@ interface IActivity {
   &quot;toast.showShortToast(activity.getFrontAppPackage())&quot;
 ]
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="053-power">0.5.3. power</h3>
 <p>电源相关能力</p>
 <table>
@@ -1780,6 +1844,7 @@ interface IPower {
     ]
 }
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="054-task">0.5.4. task</h3>
 <p>任务相关能力</p>
 <table>
@@ -1837,6 +1902,7 @@ interface ITask {
     ]
 }
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="055-ui">0.5.5. ui</h3>
 <p>界面相关</p>
 <table>
@@ -1908,6 +1974,7 @@ interface IUI {
     void cancelNotification(@NonNull String notificationTag);
 }
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="056-hw">0.5.6. hw</h3>
 <p>硬件操作能力</p>
 <table>
@@ -2097,6 +2164,7 @@ interface IHW {
   }
 ]
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="057-io">0.5.7. io</h3>
 <p>文件读写能力。</p>
 <p>注意：受限于文件权限，所有文件的根目录为/data/system/thanos/profile_user_io</p>
@@ -2146,6 +2214,7 @@ interface IIO {
 }
 
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="058-data">0.5.8. data</h3>
 <p>移动数据相关能力。</p>
 <table>
@@ -2314,6 +2383,7 @@ enum NetworkTypeEnum {
   }
 ]
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="059-ringtone">0.5.9. ringtone</h3>
 <p>铃音振动能力。</p>
 <table>
@@ -2356,6 +2426,7 @@ interface IRingtone {
 }
 
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="0510-sh">0.5.10. sh</h3>
 <p>Shell sh能力。</p>
 <table>
@@ -2384,6 +2455,7 @@ interface ISh {
     CommandResult exe(String command);
 }
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="0511-input">0.5.11. input</h3>
 <p>按键输入能力。</p>
 <table>
@@ -2432,6 +2504,7 @@ interface IInput {
 }
 
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="0512-pkg">0.5.12. pkg</h3>
 <p>包管理能力。</p>
 <table>
@@ -2481,6 +2554,7 @@ interface IPkg {
 
 
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="0513-log">0.5.13. Log</h3>
 <p>日志打印工具。</p>
 <p>使用示例:</p>
@@ -2493,6 +2567,7 @@ public interface ILog {
     void log(String content);
 }
 </code></pre>
+<p>&nbsp;</p>
 <h3 id="0514-audio">0.5.14. Audio</h3>
 <p>声音管理相关。</p>
 <table>
@@ -2537,6 +2612,8 @@ interface IAudio {
     void setRingerMode(int ringerMode);
 }
 </code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <h2 id="06">0.6. 全局变量</h2>
 <p>全局变量：name-List<String>，名字---字符串列表</p>
 <p>可用于条件判断，事件处理等。</p>

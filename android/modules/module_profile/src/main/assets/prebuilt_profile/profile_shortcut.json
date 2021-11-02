@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Profile shortcut",
+    "description": "监听一个快捷方式启动事件，以一键锁屏为例",
+    "priority": 2,
+    "condition": "shortcutLaunched == true && shortcutValue == \"turn screen off\"",
+    "actions": [
+      "power.sleep(0);"
+    ]
+  }
+]

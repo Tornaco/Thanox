@@ -13,6 +13,9 @@ title: 情景模式（Profile）
 >
 > [Martin Fowler](http://martinfowler.com/) 
 
+&nbsp;
+
+&nbsp;
 
 ## 0.2. 介绍
 
@@ -24,7 +27,9 @@ title: 情景模式（Profile）
 
 干什么就是动作（actions）
 
+&nbsp;
 
+&nbsp;
 
 ## 0.3. 新建
 
@@ -54,11 +59,15 @@ title: 情景模式（Profile）
 | condition   | 触发条件，支持mvel表达式，条件可选的基于事实的facts-param请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义 |
 | actions     | 要执行的动作，支持mvel表达式，可以设置多个，动作可选的handle请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义 |
 
+&nbsp;
 
+&nbsp;
 
 ## 0.4. Fatcs-params
 
 除了提供规则引擎之外，Thanox也会提供常用的事实与参数，用于condition条件判断。
+
+&nbsp;
 
 ### 0.4.1. 应用安装
 
@@ -91,7 +100,7 @@ title: 情景模式（Profile）
   "ui.showShortToast(pkgName);"
   ```
 
-  
+  &nbsp;
 
 ### 0.4.2. 应用切换
 
@@ -119,7 +128,7 @@ title: 情景模式（Profile）
   "condition":  "frontPkgChanged == true && from == \"com.tencent.mm\""
   ```
 
-  
+  &nbsp;
 
 ### 0.4.3. 任务清理
 
@@ -150,9 +159,8 @@ title: 情景模式（Profile）
       ]
   ```
 
-  
 
-
+&nbsp;
 
 ### 0.4.4. Activity Created
 
@@ -172,6 +180,7 @@ Resumed--> Paused（被其他活动覆盖）-->Resumed（如果其他活动销�
 | componentName              | ComponentName         | 活动的组件                                               | 如下 |
 | pkgName                    | String（字符串）      | 应用的包名                                               | 如下 |
 
+&nbsp;
 
 ### 0.4.5. Activity Resumed
 
@@ -208,7 +217,10 @@ Resumed--> Paused（被其他活动覆盖）-->Resumed（如果其他活动销�
 >
 > 此处的ui操作后续会介绍。
 
+&nbsp;
+
 ### 0.4.6. Activity Changed
+
 当前前台活动(Activity)发生改变时thanox会发布该事件。(Since Thanox(or Pro)-2.5)
 
 | 参数名    | 类型                  | 含义       | 示例 |
@@ -223,6 +235,8 @@ Resumed--> Paused（被其他活动覆盖）-->Resumed（如果其他活动销�
 
 Thanox的开发者设置中，"显示当前Activity"功能也可以显示当前activity的ComponentName。
 
+&nbsp;
+
 ### 0.4.7. 应用停止运行
 
 应用被杀死或者其他原因停止运行，Thanox会发布该事实。
@@ -232,6 +246,8 @@ Thanox的开发者设置中，"显示当前Activity"功能也可以显示当前a
 | pkgKilled | Boolean（true/false） | 任务已移除 | 如下 |
 | pkgName   | String（字符串）      | 应用包名   | 如下 |
 
+&nbsp;
+
 ### 0.4.8. 屏幕开关
 
 | 参数名    | 类型                  | 含义       | 示例 |
@@ -239,6 +255,8 @@ Thanox的开发者设置中，"显示当前Activity"功能也可以显示当前a
 | screenOn | Boolean（true/false） | 亮屏事件 | 无 |
 | screenOff   | Boolean（true/false）      | 灭屏事件   | 无 |
 | userPresent   | Boolean（true/false）      | 解锁事件   | 无 |
+
+&nbsp;
 
 ### 0.4.9. 电量变化
 
@@ -249,6 +267,8 @@ Thanox的开发者设置中，"显示当前Activity"功能也可以显示当前a
 | isCharging   | Boolean（true/false）      | 是否在充电   | 无 |
 | isAcCharge   | Boolean（true/false）      | 是否为AC   | 无 |
 | isUsbCharge   | Boolean（true/false）      | 是否为USB   | 无 |
+
+&nbsp;
 
 ### 0.4.10. 蓝牙事件
 
@@ -309,6 +329,8 @@ Thanox的开发者设置中，"显示当前Activity"功能也可以显示当前a
 ]
 ```
 
+&nbsp;
+
 ### 0.4.11. Wifi状态变化
 
 Wifi状态变化时发出的事件。（Since Thanox 2.5-2）
@@ -330,7 +352,7 @@ data class WifiState(
 )
 ```
 
-
+&nbsp;
 
 ### 0.4.12. 系统启动
 
@@ -338,12 +360,16 @@ data class WifiState(
 | --------- | --------------------- | ---------- | ---- |
 | systemReady | Boolean（true/false） | 系统启动完成 | 无 |
 
+&nbsp;
+
 ### 0.4.13. 推送消息
 
 | 参数名    | 类型                  | 含义       | 示例 |
 | --------- | --------------------- | ---------- | ---- |
 | fcmPushMessageArrived | Boolean（true/false） | 收到GCM/FCM消息推送 | 无 |
 | pkgName | String（字符串） | 应用包名 | 无 |
+
+&nbsp;
 
 ### 0.4.14. 通知
 
@@ -355,6 +381,49 @@ data class WifiState(
 | notificationTitle | String（字符串） | 通知标题 | 无 |
 | notificationContent | String（字符串） | 通知内容 | 无 |
 
+&nbsp;
+
+### 0.5.15 快捷方式
+
+你可以创建一个有”意义的“追哦面快捷方式，当你点击这个桌面快捷方式的时候，Thanox会发布这个快捷方式代表的事实。
+
+例如；实现一个一键锁屏快捷方式，即：点击桌面一键锁屏快捷方式时锁屏。
+
+&nbsp;
+
+首先创建一个快捷方式引擎：
+
+&nbsp;
+
+![prlfile-shortcut-create](assets/images/prlfile-shortcut-create.png)&nbsp;
+
+&nbsp;
+
+接下来，添加一个情景模式，监听这个快捷方式的启动事件，并指定锁屏命令：
+
+&nbsp;
+
+```json
+[
+  {
+    "name": "Profile shortcut",
+    "description": "监听一个快捷方式启动事件，以一键锁屏为例",
+    "priority": 2,
+    "condition": "shortcutLaunched == true && shortcutValue == \"turn screen off\"",
+    "actions": [
+      "power.sleep(0);"
+    ]
+  }
+]
+```
+
+&nbsp;
+
+保存之后，点击桌面上的一键锁屏快捷方式即可实现一键锁屏功能了。
+
+&nbsp;
+
+&nbsp;
 
 ## 0.5. Handle
 
@@ -363,6 +432,8 @@ Thanox会提供一部分执行动作所需要的handle能力。例如ui，专门
 你可以使用`handle.action(params)`来执行自定义的动作。
 
 下面是目前支持的Handle能力。
+
+&nbsp;
 
 ### 0.5.1. killer
 
@@ -387,6 +458,8 @@ interface IKiller {
   "killer.killPackage(\"com.tencent.mm\")"
 ]
 ```
+
+&nbsp;
 
 ### 0.5.2. activity
 
@@ -429,6 +502,8 @@ interface IActivity {
   "toast.showShortToast(activity.getFrontAppPackage())"
 ]
 ```
+
+&nbsp;
 
 ### 0.5.3. power
 
@@ -478,6 +553,8 @@ interface IPower {
 }
 ```
 
+&nbsp;
+
 ### 0.5.4. task
 
 任务相关能力
@@ -515,6 +592,8 @@ interface ITask {
 }
 ```
 
+&nbsp;
+
 ### 0.5.5. ui
 
 界面相关
@@ -551,6 +630,7 @@ interface IUI {
 }
 ```
 
+&nbsp;
 
 ### 0.5.6. hw
 
@@ -637,6 +717,8 @@ interface IHW {
 ]
 ```
 
+&nbsp;
+
 ### 0.5.7. io
 
 文件读写能力。
@@ -664,6 +746,7 @@ interface IIO {
 
 ```
 
+&nbsp;
 
 ### 0.5.8. data
 
@@ -762,7 +845,7 @@ enum NetworkTypeEnum {
 ]
 ```
 
-
+&nbsp;
 
 ### 0.5.9. ringtone
 
@@ -789,6 +872,7 @@ interface IRingtone {
 
 ```
 
+&nbsp;
 
 ### 0.5.10. sh
 
@@ -806,6 +890,8 @@ interface ISh {
     CommandResult exe(String command);
 }
 ```
+
+&nbsp;
 
 ### 0.5.11. input
 
@@ -831,6 +917,8 @@ interface IInput {
 }
 
 ```
+
+&nbsp;
 
 ### 0.5.12. pkg
 
@@ -858,6 +946,7 @@ interface IPkg {
 
 ```
 
+&nbsp;
 
 ### 0.5.13. Log
 
@@ -878,6 +967,7 @@ public interface ILog {
 }
 ```
 
+&nbsp;
 
 ### 0.5.14. Audio
 
@@ -911,7 +1001,9 @@ interface IAudio {
 }
 ```
 
+&nbsp;
 
+&nbsp;
 
 ## 0.6. 全局变量
 

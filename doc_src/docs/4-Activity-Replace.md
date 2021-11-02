@@ -13,14 +13,18 @@ categories: jekyll
 
 移花接木可以配置应用活动之间的跳转。在使用之前需要了解Android里常见的几个概念。
 
+&nbsp;
 
+&nbsp;
 
 
 **活动 - Activity**
 
 Android世界里，页面通常都是一个叫Activity（中文暂且翻译为活动）的东西；因此页面跳转我们现在可以统一语言：活动跳转。
 
+&nbsp;
 
+&nbsp;
 
 **活动怎么标识？**
 
@@ -38,7 +42,9 @@ Android里活动的标识格式通常为：
 "com.tencent.mm/com.tencent.mm.LauncherUI"
 ```
 
+&nbsp;
 
+&nbsp;
 
 ## 有什么用?
 
@@ -52,7 +58,9 @@ Android里活动的标识格式通常为：
 
 可以！
 
+&nbsp;
 
+&nbsp;
 
 ## 怎么用?
 
@@ -60,7 +68,7 @@ Android里活动的标识格式通常为：
 
 因此移花接木功能里，你只要知道 B 和 C 的活动页，就可以新增一条配置，把 B 换成 C。
 
-
+&nbsp;
 
 **举例如图：**
 

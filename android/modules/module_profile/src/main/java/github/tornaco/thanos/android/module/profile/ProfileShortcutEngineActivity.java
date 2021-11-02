@@ -34,14 +34,17 @@ public class ProfileShortcutEngineActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getIntent() != null) {
-            String factValue = getIntent().getStringExtra(EXTRA_PROFILE_FACT_VALUE);
-            XLog.i("factValue= %s", factValue);
-            if (!TextUtils.isEmpty(factValue)) {
-                ThanosManager.from(this).ifServiceInstalled(thanosManager -> thanosManager.getProfileManager().publishStringFact(factValue, 0));
+        try {
+            if (getIntent() != null) {
+                String factValue = getIntent().getStringExtra(EXTRA_PROFILE_FACT_VALUE);
+                if (!TextUtils.isEmpty(factValue)) {
+                    XLog.i("publish factValue= %s", factValue);
+                    ThanosManager.from(this).ifServiceInstalled(thanosManager -> thanosManager.getProfileManager().publishStringFact(factValue, 0));
+                }
             }
+        } finally {
+            finishAffinity();
         }
-        finish();
     }
 
     public static class ShortcutHelper {

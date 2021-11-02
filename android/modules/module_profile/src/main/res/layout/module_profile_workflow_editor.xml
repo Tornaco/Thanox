@@ -23,6 +23,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?android:attr/windowBackground"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -37,7 +38,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="?appbarPopupTheme"
                 app:theme="?toolbarTheme"
@@ -56,16 +56,16 @@
             android:layout_below="@id/app_bar"
             app:numberColor="?colorAccent"
             app:numberSize="12sp"
-            app:stripColor="?colorPrimary">
+            app:stripColor="?colorSurface">
 
             <com.vic797.syntaxhighlight.SyntaxHighlighter
                 android:id="@+id/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:text="@{ruleInfo== null? placeholder : ruleInfo.ruleString}"
                 android:textSize="@dimen/module_profile_editor_text_size"
-                app:stripLineColor="?colorPrimary" />
+                app:stripLineColor="?colorSurface" />
 
         </com.vic797.syntaxhighlight.LineCountLayout>
 
@@ -74,7 +74,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/module_profile_editor_symbol_bar_height"
             android:layout_above="@id/editor_actions_toolbar_symbols2"
-            android:background="?attr/colorPrimary"
             android:gravity="center"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="?appbarPopupTheme"
@@ -85,7 +84,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/module_profile_editor_symbol_bar_height"
             android:layout_above="@id/editor_actions_toolbar_symbols3"
-            android:background="?attr/colorPrimary"
             android:gravity="center"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="?appbarPopupTheme"
@@ -96,7 +94,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/module_profile_editor_symbol_bar_height"
             android:layout_above="@id/editor_actions_toolbar"
-            android:background="?attr/colorPrimary"
             android:gravity="center"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="?appbarPopupTheme"
@@ -107,7 +104,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentBottom="true"
-            android:background="?attr/colorPrimary"
             android:gravity="center"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="?appbarPopupTheme"

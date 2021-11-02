@@ -18,14 +18,10 @@
     </style>
 
     <style name="ToolbarThemeCommon">
-        <item name="colorControlNormal">?attr/colorControlNormal</item>
-        <item name="android:colorControlNormal">?attr/colorControlNormal</item>
         <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
     </style>
 
     <style name="CollapsingToolbarThemeCommon" parent="Widget.AppCompat.Toolbar">
-        <item name="colorControlNormal">?attr/colorControlNormal</item>
-        <item name="android:colorControlNormal">?attr/colorControlNormal</item>
         <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
     </style>
 

@@ -33,7 +33,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="?appbarPopupTheme"
                 app:theme="?toolbarTheme"
@@ -61,7 +60,7 @@
             android:layout_below="@id/app_bar"
             app:numberColor="?colorAccent"
             app:numberSize="12sp"
-            app:stripColor="?colorPrimary">
+            app:stripColor="?colorSurface">
 
             <com.vic797.syntaxhighlight.SyntaxHighlighter
                 android:id="@+id/edit_text"
@@ -70,7 +69,7 @@
                 android:padding="5dp"
                 android:text="@{var== null? placeholder : var.listToJson()}"
                 android:textSize="@dimen/module_profile_editor_text_size"
-                app:stripLineColor="?colorPrimary" />
+                app:stripLineColor="?colorSurface" />
 
         </com.vic797.syntaxhighlight.LineCountLayout>
 
@@ -79,7 +78,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentBottom="true"
-            android:background="?attr/colorPrimary"
             android:gravity="center"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="?appbarPopupTheme"

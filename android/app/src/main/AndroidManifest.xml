@@ -40,7 +40,15 @@
 
         <activity
             android:name=".process.ProcessManageActivity"
-            android:exported="false" />
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="thanox.a.running_process.viewer" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".start.StartRestrictActivity"
             android:exported="false" />

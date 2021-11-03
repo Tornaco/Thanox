@@ -270,6 +270,19 @@
     数据存储
   </a>
   
+    <nav class="md-nav" aria-label="数据存储">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    卸载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -447,6 +460,19 @@
     数据存储
   </a>
   
+    <nav class="md-nav" aria-label="数据存储">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    卸载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -468,30 +494,32 @@
 
 <h2 id="_1">开源计划</h2>
 <p>目前Thanox代码约80%已经公开在<a href="https://github.com/Tornaco/Thanox/tree/master/android">Github</a>上。</p>
+<p>&nbsp;</p>
 <h2 id="_2">版本发布</h2>
 <p>Thanox目前在酷安和Google play商店发布。</p>
 <ul>
-<li>
-<p><a href="https://www.coolapk.com/">酷安</a>发布的版本为国内稳定版，如果要体验测试版，请前往<a href="https://github.com/Tornaco/Thanox/releases">Github-Release</a>页面下载</p>
-</li>
-<li>
-<p><a href="https://play.google.com/store/apps/details?id=github.tornaco.android.thanos.pro&amp;hl=en&amp;gl=US">Google play</a>发布的版本为pro版本，功能与国内版本基本一致；得益于Google play的便利性，你可以选择加入Beta计划体验pro的测试版本</p>
-</li>
+<li><a href="https://www.coolapk.com/">酷安</a>发布的版本为国内稳定版，如果要体验测试版，请前往<a href="https://github.com/Tornaco/Thanox/releases">Github-Release</a>页面下载</li>
+<li><a href="https://play.google.com/store/apps/details?id=github.tornaco.android.thanos.pro&amp;hl=en&amp;gl=US">Google play</a>发布的版本为pro版本，功能与国内版本基本一致；得益于Google play的便利性，你可以选择加入Beta计划体验pro的测试版本</li>
 </ul>
+<p>&nbsp;</p>
 <h2 id="_3">工作原理</h2>
 <p><strong>Thanox</strong>整体架构分两层，分别是<strong>App</strong>层，<strong>Framework</strong>层。</p>
 <ul>
 <li><strong>Framework</strong>层运行于<code>system_server</code>进程，负责核心管理逻辑，拥有system级别的权限。</li>
 <li><strong>App</strong>层仅是一个普通的应用，负责为用户提供UI交互。</li>
 </ul>
+<p>&nbsp;</p>
 <h3 id="_4">架构图</h3>
 <p><img alt="thanox-arch" src="assets/images/thanox-arch.png" /></p>
+<p>&nbsp;</p>
 <h2 id="_5">数据存储</h2>
 <p>由于<strong>Thanox</strong>整体架构分两层，其数据也分两部分存储。</p>
 <ul>
 <li><strong>Framework</strong>层的数据存储在<code>/data/system/thanos${16位随机字母}</code>下，Thanox各个功能的数据也存在此处。</li>
 <li><strong>App</strong>层仅仅存储一些简单的UI配置数据，使用系统设置清除数据并不会清除Thanox各个功能的数据。</li>
 </ul>
+<p>&nbsp;</p>
+<h3 id="_6">卸载</h3>
 <p>如果想要卸载<strong>Thanox</strong>模块并清除其所有数据，可以前往<strong>Thanox</strong>的<em>设置-备份与还原-立即卸载</em>。</p>
 <p>如果依然无法删除，请在卸载Thanox应用后，手动删除<code>/data/system/thanos_${xxxxxx}</code>目录。</p>
                 

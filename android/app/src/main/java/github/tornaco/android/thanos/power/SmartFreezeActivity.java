@@ -102,7 +102,7 @@ public class SmartFreezeActivity extends ThemeActivity {
                 ThanosManager.from(getApplicationContext())
                         .getPkgManager()
                         .launchSmartFreezePkg(appInfo.getPkgName());
-                viewModel.start();
+                postOnUiDelayed(() -> viewModel.start(), 2000);
             }
 
             @Override

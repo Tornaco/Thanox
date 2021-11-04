@@ -27,11 +27,11 @@ class OnBoardingActivity : ThemeActivity() {
             AppCompatTheme {
                 val systemUiController = rememberSystemUiController()
                 val useDarkIcons = MaterialTheme.colors.isLight
-                val colorPrimary = MaterialTheme.colors.primary
+                val colorSurface = MaterialTheme.colors.surface
 
                 SideEffect {
                     systemUiController.setSystemBarsColor(
-                        color = colorPrimary,
+                        color = colorSurface,
                         darkIcons = useDarkIcons
                     )
                 }

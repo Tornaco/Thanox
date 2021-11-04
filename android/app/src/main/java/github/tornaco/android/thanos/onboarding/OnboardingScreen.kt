@@ -79,6 +79,7 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
                             R.string.onboarding_next
                         )
                     },
+                    color = MaterialTheme.colors.onSurface,
                     modifier = Modifier.padding(horizontal = 32.dp)
                 )
             }

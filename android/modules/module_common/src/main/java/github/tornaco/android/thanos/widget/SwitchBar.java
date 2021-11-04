@@ -33,6 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import java.util.ArrayList;
 
 import github.tornaco.android.thanos.module.common.R;
@@ -220,7 +222,7 @@ public class SwitchBar extends FrameLayout
          * @param switchView The Switch view whose state has changed.
          * @param isChecked  The new checked state of switchView.
          */
-        void onSwitchChanged(Switch switchView, boolean isChecked);
+        void onSwitchChanged(SwitchMaterial switchView, boolean isChecked);
     }
 
     static class SavedState extends BaseSavedState {

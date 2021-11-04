@@ -11,6 +11,7 @@
     android:gravity="center"
     android:padding="@dimen/common_view_margin_default"
     app:cardBackgroundColor="?colorPrimaryContainer"
+    android:foreground="?selectableItemBackground"
     app:cardCornerRadius="28dp"
     app:cardElevation="0dp">
 
@@ -36,12 +37,12 @@
 
         <github.tornaco.android.thanos.widget.ToggleSwitch
             android:id="@+id/switch_widget"
+            style="@style/SwitchStyleApple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:background="@null" />
+            android:layout_gravity="center_vertical" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

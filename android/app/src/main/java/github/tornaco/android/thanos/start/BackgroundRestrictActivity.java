@@ -56,7 +56,7 @@ public class BackgroundRestrictActivity extends CommonFuncToggleAppListFilterAct
 
     @Override
     @Verify
-    protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(com.google.android.material.switchmaterial.SwitchMaterial switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
         ThanosManager.from(this).getActivityManager().setBgRestrictEnabled(isChecked);
     }

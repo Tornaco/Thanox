@@ -22,7 +22,7 @@ public class DemoActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(com.google.android.material.switchmaterial.SwitchMaterial switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
         startActivity(new Intent(this, DemoWithSwitchActivity.class));
     }

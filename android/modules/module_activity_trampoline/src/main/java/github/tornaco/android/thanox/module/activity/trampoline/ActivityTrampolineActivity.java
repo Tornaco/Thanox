@@ -34,6 +34,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.common.io.Files;
 import com.nononsenseapps.filepicker.Utils;
 
@@ -119,7 +120,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
                 .isActivityTrampolineEnabled();
     }
 
-    private void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    private void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
         ThanosManager.from(getApplicationContext())
                 .ifServiceInstalled(thanosManager -> thanosManager.getActivityStackSupervisor()
                         .setActivityTrampolineEnabled(isChecked));

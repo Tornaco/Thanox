@@ -87,7 +87,7 @@ public class StartRestrictActivity extends CommonFuncToggleAppListFilterActivity
 
     @Override
     @Verify
-    protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(com.google.android.material.switchmaterial.SwitchMaterial switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
         ThanosManager.from(this).getActivityManager().setStartBlockEnabled(isChecked);
     }

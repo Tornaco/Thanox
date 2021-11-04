@@ -12,6 +12,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor" tools:targetApi="l">?colorPrimaryDark</item>
         <item name="android:navigationBarColor">?colorPrimaryDark</item>
+        <item name="switchPreferenceCompatStyle">@style/SwitchPrefTheme</item>
         <item name="preferenceFragmentCompatStyle">@style/PrefFragmentCompatThemeCommon</item>
 
     </style>

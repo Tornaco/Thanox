@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -164,7 +165,7 @@ public class InfiniteZActivity extends ThemeActivity {
         switchBar.setChecked(ThanosManager.from(thisActivity()).getInfiniteZ().isEnabled());
         switchBar.addOnSwitchChangeListener(new SwitchBar.OnSwitchChangeListener() {
             @Override
-            public void onSwitchChanged(Switch switchView, boolean isChecked) {
+            public void onSwitchChanged(SwitchMaterial switchView, boolean isChecked) {
                 ThanosManager.from(getApplicationContext()).getInfiniteZ()
                         .setEnabled(isChecked, new EnableCallback() {
                             @Override

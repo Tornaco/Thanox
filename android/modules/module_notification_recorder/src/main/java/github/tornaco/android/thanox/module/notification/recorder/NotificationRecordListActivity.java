@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.Objects;
@@ -114,7 +115,7 @@ public class NotificationRecordListActivity extends ThemeActivity {
                 .isPersistOnNewNotificationEnabled();
     }
 
-    protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
         ThanosManager.from(getApplicationContext())
                 .getNotificationManager()
                 .setPersistOnNewNotificationEnabled(isChecked);

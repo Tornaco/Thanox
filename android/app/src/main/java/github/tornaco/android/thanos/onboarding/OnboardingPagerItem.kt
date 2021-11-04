@@ -31,13 +31,15 @@ fun OnboardingPagerItem(item: Onboard) {
             text = stringResource(id = item.title),
             style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.ExtraBold),
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
+            color = MaterialTheme.colors.onSurface
         )
         Text(
             text = stringResource(id = item.description),
             style = MaterialTheme.typography.body1,
             textAlign = TextAlign.Start,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 16.dp),
+            color = MaterialTheme.colors.onSurface
         )
     }
 }

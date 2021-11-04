@@ -31,6 +31,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/md_grey_200</item>
         <item name="android:navigationBarColor">@color/md_grey_200</item>
         <item name="alertDialogTheme">@style/DialogThemeCommon</item>
+        <item name="switchPreferenceCompatStyle">@style/SwitchPrefTheme</item>
         <item name="preferenceFragmentCompatStyle">@style/PrefFragmentCompatThemeCommon</item>
 
     </style>

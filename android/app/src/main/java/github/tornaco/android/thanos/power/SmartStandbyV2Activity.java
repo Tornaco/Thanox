@@ -3,7 +3,6 @@ package github.tornaco.android.thanos.power;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +45,7 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
 
     @Override
     @Verify
-    protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(com.google.android.material.switchmaterial.SwitchMaterial switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
         ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager ->
                 thanosManager.getActivityManager().setSmartStandByEnabled(isChecked));

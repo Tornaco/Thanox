@@ -21,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.Comparator;
@@ -156,7 +157,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
         switchBar.setChecked(getSwitchBarCheckState());
         switchBar.addOnSwitchChangeListener(new SwitchBar.OnSwitchChangeListener() {
             @Override
-            public void onSwitchChanged(Switch switchBar1, boolean isChecked) {
+            public void onSwitchChanged(SwitchMaterial switchBar1, boolean isChecked) {
                 CommonFuncToggleAppListFilterActivity.this.onSwitchBarCheckChanged(switchBar1, isChecked);
             }
         });
@@ -166,7 +167,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends ThemeActivit
         return false;
     }
 
-    protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
         // Noop.
     }
 

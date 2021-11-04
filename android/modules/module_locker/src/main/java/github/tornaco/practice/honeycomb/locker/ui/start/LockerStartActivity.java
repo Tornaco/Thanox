@@ -79,7 +79,7 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
     }
 
     @Override
-    protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(com.google.android.material.switchmaterial.SwitchMaterial switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
 
         if (isChecked && !BiometricsKt.isBiometricReady(thisActivity())) {

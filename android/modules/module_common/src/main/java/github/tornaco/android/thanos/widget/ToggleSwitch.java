@@ -20,7 +20,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Switch;
 
-public class ToggleSwitch extends Switch {
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
+public class ToggleSwitch extends SwitchMaterial {
 
     private OnBeforeCheckedChangeListener mOnBeforeListener;
 

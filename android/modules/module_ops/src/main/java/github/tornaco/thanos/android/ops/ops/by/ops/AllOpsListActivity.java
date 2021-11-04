@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.Objects;
 
@@ -84,7 +85,7 @@ public class AllOpsListActivity extends ThemeActivity {
                 .getAppOpsManager().isOpsEnabled();
     }
 
-    protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
         ThanosManager.from(getApplicationContext())
                 .ifServiceInstalled(thanosManager -> thanosManager.getAppOpsManager()
                         .setOpsEnabled(isChecked));

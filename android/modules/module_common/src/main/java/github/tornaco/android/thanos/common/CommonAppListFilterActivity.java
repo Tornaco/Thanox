@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.Comparator;
@@ -152,7 +153,7 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
         return false;
     }
 
-    protected void onSwitchBarCheckChanged(Switch switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
         // Noop.
     }
 

@@ -3,51 +3,40 @@
 
     <PreferenceCategory>
         <Preference
-                app:key="@string/key_build_info_app"
-                app:persistent="false"
-                app:title="@string/pref_title_build_info_app" />
-
-        <Preference
-                app:key="@string/key_build_info_server"
-                app:persistent="false"
-                app:title="@string/pref_title_build_info_server" />
-        <Preference
-                app:key="@string/key_patch_info"
-                app:persistent="false"
-                app:title="@string/pref_title_patch_info" />
-        <Preference
-                app:key="@string/key_rss_e"
-                app:persistent="false"
-                app:summary="@string/pref_summary_rss_e"
-                app:title="@string/pref_title_rss_e" />
-        <Preference
-                app:key="@string/key_email"
-                app:persistent="false"
-                app:title="Email" />
-        <Preference
-                app:key="@string/key_donate"
-                app:persistent="false"
-                app:title="@string/module_donate_title" />
-        <Preference
-                app:key="@string/key_icon_maker"
-                app:persistent="false"
-                app:summary="@string/pref_summary_icon_maker_remix_icon"
-                app:title="@string/pref_title_icon_maker_remix_icon" />
-        <Preference
-                app:key="@string/key_open_source_license"
-                app:persistent="false"
-                app:title="@string/pref_title_open_source_license" />
-
-        <Preference
-                app:key="@string/key_contributors"
-                app:persistent="false"
-                app:title="Contributors" />
-
-        <Preference
-            app:key="@string/key_open_source"
+            app:key="@string/key_build_info_app"
             app:persistent="false"
-            app:title="Open source"
-            app:summary="Part of the source code is hosted on github.com/Tornaco/Thanox"/>
+            app:title="@string/pref_title_build_info_app" />
+
+        <Preference
+            app:key="@string/key_build_info_server"
+            app:persistent="false"
+            app:title="@string/pref_title_build_info_server" />
+        <Preference
+            app:key="@string/key_patch_info"
+            app:persistent="false"
+            app:title="@string/pref_title_patch_info" />
+        <Preference
+            app:key="@string/key_rss_e"
+            app:persistent="false"
+            app:summary="@string/pref_summary_rss_e"
+            app:title="@string/pref_title_rss_e" />
+        <Preference
+            app:key="@string/key_email"
+            app:persistent="false"
+            app:title="Email" />
+        <Preference
+            app:key="@string/key_donate"
+            app:persistent="false"
+            app:title="@string/module_donate_title" />
+        <Preference
+            app:key="@string/key_icon_maker"
+            app:persistent="false"
+            app:summary="@string/pref_summary_icon_maker_remix_icon"
+            app:title="@string/pref_title_icon_maker_remix_icon" />
+        <Preference
+            app:key="@string/key_open_source_license"
+            app:persistent="false"
+            app:title="@string/pref_title_open_source_license" />
     </PreferenceCategory>
 
 </PreferenceScreen>

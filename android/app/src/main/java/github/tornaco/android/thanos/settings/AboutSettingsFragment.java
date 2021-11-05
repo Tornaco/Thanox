@@ -3,13 +3,14 @@ package github.tornaco.android.thanos.settings;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildConfig;
@@ -19,6 +20,7 @@ import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateActivity;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity3;
 import github.tornaco.android.thanos.util.BrowserUtils;
@@ -115,25 +117,28 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
                     return true;
                 });
 
-        findPreference(getString(R.string.key_contributors)).setSummary(BuildProp.THANOX_CONTRIBUTORS);
         donatePref.setVisible(ThanosApp.isPrc());
 
         findPreference(getString(R.string.key_email)).setSummary(BuildProp.THANOX_CONTACT_EMAIL);
 
-        findPreference(getString(R.string.key_rss_e)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL);
-                return true;
-            }
+        findPreference(getString(R.string.key_rss_e)).setOnPreferenceClickListener(preference -> {
+            showTgAndQQDialog();
+            return true;
         });
     }
 
+    private void showTgAndQQDialog() {
+        new MaterialAlertDialogBuilder(requireActivity())
+                .setTitle(R.string.pref_title_rss_e)
+                .setMessage(R.string.pref_summary_rss_e)
+                .setPositiveButton("QQ", (dialog, which) -> {
+                    ClipboardUtils.copyToClipboard(requireActivity(), "thanox QQ", BuildProp.THANOX_QQ_PRIMARY);
+                    Toast.makeText(requireContext(), R.string.common_toast_copied_to_clipboard, Toast.LENGTH_LONG).show();
+                }).setNegativeButton("TG", (dialog, which) -> BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL)).show();
+    }
 
     private void showBuildProp() {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            BuildPropActivity.Starter.INSTANCE.start(getActivity());
-        }
+        BuildPropActivity.Starter.INSTANCE.start(getActivity());
     }
 
 

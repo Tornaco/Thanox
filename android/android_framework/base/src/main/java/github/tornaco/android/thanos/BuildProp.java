@@ -106,6 +106,7 @@ public class BuildProp {
     public static final String THANOX_CONTRIBUTORS = getString("thanox.dev.contributors");
     public static final String THANOX_CONTACT_EMAIL = getString("thanox.contact.email");
     public static final String THANOX_TG_CHANNEL = getString("thanox.tg");
+    public static final String THANOX_QQ_PRIMARY = getString("thanox.qq.primary");
 
     // Base url.
     @Dynamic

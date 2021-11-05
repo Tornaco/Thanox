@@ -5,7 +5,7 @@
 
     <item
             android:id="@+id/action_show_feature_desc"
-            android:icon="@drawable/module_component_manager_ic_error_warning_fill"
+            android:icon="@drawable/module_common_ic_outline_info_24"
             android:title="@string/module_component_manager_disabled_by_thanox"
             app:showAsAction="always" />
 

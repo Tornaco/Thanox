@@ -38,7 +38,6 @@ import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileWor
 import util.ObjectsUtils;
 
 public class RuleEditorActivity extends ThemeActivity implements SyntaxListener {
-
     private ModuleProfileWorkflowEditorBinding binding;
     @Nullable
     private RuleInfo ruleInfo;
@@ -254,7 +253,18 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (R.id.action_info == item.getItemId()) {
+            showTipsInfo();
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showTipsInfo() {
+        new MaterialAlertDialogBuilder(thisActivity())
+                .setTitle(R.string.module_profile_rule_format_tips_title)
+                .setMessage(R.string.module_profile_rule_format_tips_message)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
     }
 
     @Override

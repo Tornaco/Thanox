@@ -19,15 +19,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/status_card"
+            style="@style/CardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?selectableItemBackground"
-            app:cardBackgroundColor="?colorSurface"
-            app:cardCornerRadius="@dimen/common_view_corner_radius"
-            app:cardElevation="@dimen/common_view_elevation">
+            android:foreground="?selectableItemBackground">
 
             <RelativeLayout
                 android:layout_width="match_parent"

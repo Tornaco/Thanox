@@ -34,10 +34,8 @@
             android:layout_marginEnd="@dimen/dashboard_card_start_margin"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/module_common_clickable_item_background"
+            style="@style/CardViewStyle"
 
-            app:cardCornerRadius="@dimen/common_view_corner_radius"
-            app:cardElevation="@dimen/common_view_elevation"
             app:contentPadding="@dimen/common_view_margin_small">
 
             <RelativeLayout

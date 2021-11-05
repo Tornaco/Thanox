@@ -21,6 +21,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/plugin_tips_card"
+            style="@style/CardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_view_margin_small"
@@ -28,10 +29,7 @@
             android:layout_marginEnd="@dimen/common_view_margin_small"
             android:layout_marginBottom="@dimen/common_view_margin_small"
             android:focusable="true"
-            android:visibility="@{viewmodel.hasAnyPluginFeatures ? View.GONE : View.VISIBLE}"
-
-            app:cardCornerRadius="@dimen/common_view_corner_radius"
-            app:cardElevation="@dimen/common_view_elevation">
+            android:visibility="@{viewmodel.hasAnyPluginFeatures ? View.GONE : View.VISIBLE}">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -104,6 +102,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            style="@style/CardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_view_margin_small"
@@ -111,9 +110,6 @@
             android:layout_marginEnd="@dimen/common_view_margin_small"
             android:layout_marginBottom="@dimen/common_view_margin_small"
             android:focusable="true"
-
-            app:cardCornerRadius="@dimen/common_view_corner_radius"
-            app:cardElevation="@dimen/common_view_elevation"
             tools:visibility="gone">
 
             <androidx.recyclerview.widget.RecyclerView

@@ -15,6 +15,8 @@
         <item name="switchPreferenceCompatStyle">@style/SwitchPrefTheme</item>
         <item name="preferenceFragmentCompatStyle">@style/PrefFragmentCompatThemeCommon</item>
 
+        <item name="appCardBackground">@color/md_grey_100</item>
+
     </style>
 
     <style name="ThemeMD3.App">

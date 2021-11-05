@@ -4,4 +4,6 @@
     <attr name="appbarTheme" format="reference" />
     <attr name="toolbarTheme" format="reference" />
     <attr name="collapsingToolbarTheme" format="reference" />
+
+    <attr name="appCardBackground" format="color" />
 </resources>

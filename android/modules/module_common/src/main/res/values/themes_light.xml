@@ -20,6 +20,7 @@
 
         <item name="colorSurface">@color/md_grey_100</item>
         <item name="colorOnSurface">@color/md_grey_800</item>
+        <item name="appCardBackground">@color/md_grey_100</item>
 
         <item name="appbarPopupTheme">@style/PopupOverlayLight</item>
         <item name="appbarTheme">@style/AppBarOverlayLight</item>
@@ -52,7 +53,7 @@
     </style>
 
     <style name="AppThemeLight.Pink">
-        <item name="colorAccent">@color/md_pink_400</item>
+        <item name="colorAccent">@color/md_pink_600</item>
         <item name="colorPrimaryContainer">@color/md_pink_200</item>
     </style>
 

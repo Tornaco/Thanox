@@ -27,7 +27,7 @@ plugins {
 androidGitVersion {
     prefix = "v"
     codeFormat = "MMNNPP"
-    baseCode = 3030138
+    baseCode = 3030140
     // 1000000
     // 191011
     // First rel version

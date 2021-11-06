@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="@{stateBadgeClickListener}"
                     android:thanosStateText="@{viewmodel.state}"
-                    android:visibility="gone"
+                    android:visibility="@{viewmodel.state == State.Active ? View.GONE : View.VISIBLE}"
                     tools:text="Active" />
 
                 <com.google.android.material.button.MaterialButton

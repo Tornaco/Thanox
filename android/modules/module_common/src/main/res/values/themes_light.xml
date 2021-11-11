@@ -63,7 +63,7 @@
     </style>
 
     <style name="AppThemeLight.Green">
-        <item name="colorAccent">@color/md_green_500</item>
+        <item name="colorAccent">@color/md_green_800</item>
         <item name="colorPrimaryContainer">@color/md_green_100</item>
     </style>
 
@@ -93,7 +93,7 @@
     </style>
 
     <style name="AppThemeLight.Oppo">
-        <item name="colorAccent">@color/md_teal_a700</item>
+        <item name="colorAccent">@color/md_teal_900</item>
         <item name="colorPrimaryContainer">@color/md_teal_200</item>
     </style>
 

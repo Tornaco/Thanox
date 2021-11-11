@@ -92,6 +92,11 @@ data class Onboard(val title: Int, val description: Int, val lottieFile: String)
 
 val onboardingList = listOf(
     Onboard(
+        R.string.onboarding_mode_tips_title,
+        R.string.onboarding_mode_tips_desc,
+        "lottie/24616-two-blue-shapes.json"
+    ),
+    Onboard(
         R.string.onboarding_xposed_tips_title,
         R.string.onboarding_xposed_tips_desc,
         "lottie/19527-select-option.json"
@@ -105,6 +110,11 @@ val onboardingList = listOf(
         R.string.onboarding_github_tips_title,
         R.string.onboarding_github_tips_desc,
         "lottie/28189-github-octocat.json"
+    ),
+    Onboard(
+        R.string.onboarding_guide_tips_title,
+        R.string.onboarding_guide_tips_desc,
+        "lottie/8617-open-book.json"
     ),
 )
 

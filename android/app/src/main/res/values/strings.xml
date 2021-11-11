@@ -258,7 +258,7 @@
     <string name="pre_cheat_field_category_cheated">Incognito field</string>
     <string name="pre_cheat_field_category_others">Others</string>
     <string name="pre_title_cheat_sim_serial">SIM serial</string>
-    
+
     <string name="pre_title_cheat_sim_country_iso">SIM Country ISO</string>
     <string name="pre_title_cheat_net_country_iso">Network Country ISO</string>
 
@@ -383,5 +383,11 @@
 
     <string name="onboarding_github_tips_title">Update tracking</string>
     <string name="onboarding_github_tips_desc">You can track our pre-release on \nGithub/Thanox</string>
+
+    <string name="onboarding_mode_tips_title">Activation methods</string>
+    <string name="onboarding_mode_tips_desc">Thanox currently supports two activation methods: Xposed patch or Magisk patch (experimental, supports Android11+); you can choose one of them to explore.</string>
+
+    <string name="onboarding_guide_tips_title">Wiki available</string>
+    <string name="onboarding_guide_tips_desc">You can find the instructions on the homepage of the settings. It is strongly recommended that you spend more time looking at these instructions. Maybe it will help you.</string>
 
 </resources>

@@ -380,4 +380,10 @@
 
     <string name="onboarding_github_tips_title">保持更新</string>
     <string name="onboarding_github_tips_desc">你可以在Github/Thanox上追踪我们发布的预测试版本</string>
+
+    <string name="onboarding_mode_tips_title">两种激活模式</string>
+    <string name="onboarding_mode_tips_desc">Thanox目前支持Xposed补丁或Magisk补丁（实验性，支持Android11+）两种激活方式；你可以任选其中一种进行探索。</string>
+
+    <string name="onboarding_guide_tips_title">使用指导</string>
+    <string name="onboarding_guide_tips_desc">你可以在设置主页中找到使用指导，强烈建议你多花一些时间看看这些指导，说不定会帮到你。</string>
 </resources>

@@ -34,16 +34,16 @@ public class AppThemePreferences extends Observable {
 
     public Theme getTheme(@NonNull Context context) {
         ThanosManager thanos = ThanosManager.from(context);
-        if (!thanos.isServiceInstalled()) return defaultThemeForPlatform();
+        if (!thanos.isServiceInstalled()) return defaultThemeForPlatform(true);
         try {
-            return Theme.fromStringOrElse(thanos.getPrefManager().getString(PREF_KEY_APP_THEME, null), defaultThemeForPlatform());
+            return Theme.fromStringOrElse(thanos.getPrefManager().getString(PREF_KEY_APP_THEME, null), defaultThemeForPlatform(true));
         } catch (Throwable e) {
-            return defaultThemeForPlatform();
+            return defaultThemeForPlatform(true);
         }
     }
 
-    private static Theme defaultThemeForPlatform() {
-        return OsUtils.isSOrAbove() ? Theme.MD3 : Theme.Light;
+    private static Theme defaultThemeForPlatform(boolean isLight) {
+        return OsUtils.isSOrAbove() ? Theme.MD3 : (isLight ? Theme.Light : Theme.Dark);
     }
 
     public void setTheme(@NonNull Context context, @NonNull Theme theme) {
@@ -68,7 +68,7 @@ public class AppThemePreferences extends Observable {
         ThanosManager thanos = ThanosManager.from(context);
         if (!thanos.isServiceInstalled()) return Theme.Dark;
         try {
-            return Theme.fromStringOrElse(thanos.getPrefManager().getString(PREF_KEY_APP_THEME_PREFER_D, null), defaultThemeForPlatform());
+            return Theme.fromStringOrElse(thanos.getPrefManager().getString(PREF_KEY_APP_THEME_PREFER_D, null), defaultThemeForPlatform(false));
         } catch (Throwable e) {
             return Theme.Dark;
         }
@@ -78,7 +78,7 @@ public class AppThemePreferences extends Observable {
         ThanosManager thanos = ThanosManager.from(context);
         if (!thanos.isServiceInstalled()) return Theme.Light;
         try {
-            return Theme.fromStringOrElse(thanos.getPrefManager().getString(PREF_KEY_APP_THEME_PREFER_L, null), defaultThemeForPlatform());
+            return Theme.fromStringOrElse(thanos.getPrefManager().getString(PREF_KEY_APP_THEME_PREFER_L, null), defaultThemeForPlatform(true));
         } catch (Throwable e) {
             return Theme.Light;
         }

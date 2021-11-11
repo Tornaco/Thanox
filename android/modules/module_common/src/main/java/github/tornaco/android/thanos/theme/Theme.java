@@ -13,10 +13,10 @@ public enum Theme {
     LightOppo(R.style.AppThemeLight_Oppo_NoActionBar, true),
     LightPink(R.style.AppThemeLight_Pink_NoActionBar, true),
 
-    Dark(R.style.AppThemeDark_NoActionBar, true),
-    DarkAmber(R.style.AppThemeDark_Amber_NoActionBar, true),
-    DarkRed(R.style.AppThemeDark_Red_NoActionBar, true),
-    DarkGrey(R.style.AppThemeDark_Grey_NoActionBar, true),
+    Dark(R.style.AppThemeDark_NoActionBar, false),
+    DarkAmber(R.style.AppThemeDark_Amber_NoActionBar, false),
+    DarkRed(R.style.AppThemeDark_Red_NoActionBar, false),
+    DarkGrey(R.style.AppThemeDark_Grey_NoActionBar, false),
 
     MD3(R.style.ThemeMD3_App_NoActionBar, true, true),
 

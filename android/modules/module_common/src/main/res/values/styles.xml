@@ -122,4 +122,8 @@
         <item name="cardCornerRadius">@dimen/common_view_corner_radius</item>
         <item name="cardElevation">@dimen/common_view_elevation</item>
     </style>
+
+    <style name="SearchViewStyle">
+        <item name="searchBackground">?colorSurface</item>
+    </style>
 </resources>

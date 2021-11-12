@@ -58,19 +58,9 @@ public class RemindOpsListAdapter extends SectioningAdapter implements Consumer<
         OpGroup opGroup = opGroups.get(sectionIndex);
         Op op = opGroup.getOpList().get(itemIndex);
         ivh.binding.setOp(op);
-        ivh.binding.appItemRoot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ivh.binding.itemSwitch.performClick();
-            }
-        });
+        ivh.binding.appItemRoot.setOnClickListener(v -> ivh.binding.itemSwitch.performClick());
         ivh.binding.executePendingBindings();
-        ivh.binding.itemSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemSwitchChangeListener.onOpItemSwitchChanged(op, ((Checkable) v).isChecked());
-            }
-        });
+        ivh.binding.itemSwitch.setOnClickListener(v -> itemSwitchChangeListener.onOpItemSwitchChanged(op, ((Checkable) v).isChecked()));
     }
 
     @Override

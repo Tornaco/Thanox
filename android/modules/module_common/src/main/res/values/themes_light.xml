@@ -3,7 +3,7 @@
 
     <style name="AppThemeLight" parent="Theme.Material3.Light">
         <item name="colorAccent">@color/md_blue_a700</item>
-        <item name="colorPrimaryContainer">@color/md_blue_200</item>
+        <item name="colorPrimaryContainer">@color/md_light_blue_50</item>
 
         <item name="colorPrimary">?colorAccent</item>
         <item name="colorPrimaryDark">?colorAccent</item>
@@ -43,7 +43,7 @@
     </style>
 
     <style name="AppThemeLight.Red">
-        <item name="colorAccent">@color/md_red_a800</item>
+        <item name="colorAccent">@color/md_red_800</item>
         <item name="colorPrimaryContainer">@color/md_red_200</item>
     </style>
 
@@ -93,7 +93,7 @@
     </style>
 
     <style name="AppThemeLight.Oppo">
-        <item name="colorAccent">@color/md_teal_900</item>
+        <item name="colorAccent">@color/md_teal_800</item>
         <item name="colorPrimaryContainer">@color/md_teal_200</item>
     </style>
 

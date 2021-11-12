@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.Switch;
 
 import androidx.annotation.ColorRes;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.List;
 
@@ -92,7 +92,7 @@ public class CommonDataBindingAdapters {
 
     @BindingAdapter({"android:switchApp", "android:switchListener"})
     public static void setSwitchAppAndListener(
-            SwitchCompat view, AppInfo appInfo, final AppItemActionListener listener) {
+            SwitchMaterial view, AppInfo appInfo, final AppItemActionListener listener) {
         view.setOnClickListener(
                 (b) -> listener.onAppItemSwitchStateChange(appInfo, ((Checkable) b).isChecked()));
     }

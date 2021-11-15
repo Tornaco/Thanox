@@ -148,12 +148,12 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
         LayoutInflater.from(mContext).inflate(R.layout.search_view, this, true);
         mSearchLayout = findViewById(R.id.search_layout);
 
-        mSearchTopBar = (RelativeLayout) mSearchLayout.findViewById(R.id.search_top_bar);
-        mSuggestionsListView = (ListView) mSearchLayout.findViewById(R.id.suggestion_list);
-        mSearchSrcTextView = (EditText) mSearchLayout.findViewById(R.id.searchTextView);
-        mBackBtn = (ImageButton) mSearchLayout.findViewById(R.id.action_up_btn);
-        mVoiceBtn = (ImageButton) mSearchLayout.findViewById(R.id.action_voice_btn);
-        mEmptyBtn = (ImageButton) mSearchLayout.findViewById(R.id.action_empty_btn);
+        mSearchTopBar = mSearchLayout.findViewById(R.id.search_top_bar);
+        mSuggestionsListView = mSearchLayout.findViewById(R.id.suggestion_list);
+        mSearchSrcTextView = mSearchLayout.findViewById(R.id.searchTextView);
+        mBackBtn = mSearchLayout.findViewById(R.id.action_up_btn);
+        mVoiceBtn = mSearchLayout.findViewById(R.id.action_voice_btn);
+        mEmptyBtn = mSearchLayout.findViewById(R.id.action_empty_btn);
         mTintView = mSearchLayout.findViewById(R.id.transparent_view);
 
         mSearchSrcTextView.setOnClickListener(mOnClickListener);
@@ -173,12 +173,9 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
     }
 
     private void initSearchView() {
-        mSearchSrcTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                onSubmitQuery();
-                return true;
-            }
+        mSearchSrcTextView.setOnEditorActionListener((v, actionId, event) -> {
+            onSubmitQuery();
+            return true;
         });
 
         mSearchSrcTextView.addTextChangedListener(new TextWatcher() {
@@ -200,13 +197,10 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
             }
         });
 
-        mSearchSrcTextView.setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    showKeyboard(mSearchSrcTextView);
-                    showSuggestions();
-                }
+        mSearchSrcTextView.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                showKeyboard(mSearchSrcTextView);
+                showSuggestions();
             }
         });
     }
@@ -418,12 +412,7 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
             final SearchAdapter adapter = new SearchAdapter(mContext, suggestions, suggestionIcon, ellipsize);
             setAdapter(adapter);
 
-            setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    setQuery((String) adapter.getItem(position), submit);
-                }
-            });
+            setOnItemClickListener((parent, view, position, id) -> setQuery((String) adapter.getItem(position), submit));
         } else {
             mTintView.setVisibility(GONE);
         }
@@ -476,12 +465,9 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
      */
     public void setMenuItem(MenuItem menuItem) {
         this.mMenuItem = menuItem;
-        mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                showSearch();
-                return true;
-            }
+        mMenuItem.setOnMenuItemClickListener(item -> {
+            showSearch();
+            return true;
         });
     }
 

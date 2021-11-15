@@ -23,6 +23,18 @@ Thanox目前在酷安和Google play商店发布。
 * [酷安](https://www.coolapk.com/)发布的版本为国内稳定版，如果要体验测试版，请前往[Github-Release](https://github.com/Tornaco/Thanox/releases)页面下载
 * [Google play](https://play.google.com/store/apps/details?id=github.tornaco.android.thanos.pro&hl=en&gl=US)发布的版本为pro版本，功能与国内版本基本一致；得益于Google play的便利性，你可以选择加入Beta计划体验pro的测试版本
 
+
+
+## Android版本支持
+
+Android6.0 - Android11（**Thanox 2.x** 版本均支持）
+
+Android12（从**Thanox 3.x**开始支持）
+
+&nbsp;
+
+后续将主力维护Android最新三个大版本。
+
 &nbsp;
 
 ## 工作原理

@@ -46,3 +46,15 @@ categories: jekyll
 
 &nbsp;
 
+**你这个软件儿怎么不支持Android12**
+
+> Android12支持还在测试中。
+>
+> 请更新至最新测试版：Play版本请加入beta计划；国内版本请前往[github release](https://github.com/Tornaco/Thanox/releases)页面下载。
+
+&nbsp;
+
+**能和应用管理（X-APM）同时使用吗？**
+
+> 不能
+

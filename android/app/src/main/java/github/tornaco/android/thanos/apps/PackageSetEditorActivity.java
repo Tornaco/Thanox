@@ -92,6 +92,10 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
 
     @Override
     protected void onSetupFab(ExtendedFloatingActionButton fab) {
+        if (packageSet.isPrebuilt()) {
+            fab.hide();
+            return;
+        }
         fab.setText(null);
         fab.setIconResource(R.drawable.module_common_ic_add_fill);
         fab.show();

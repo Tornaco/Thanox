@@ -389,5 +389,6 @@
 
     <string name="onboarding_guide_tips_title">Wiki available</string>
     <string name="onboarding_guide_tips_desc">You can find the instructions on the homepage of the settings. It is strongly recommended that you spend more time looking at these instructions. Maybe it will help you.</string>
+    <string name="title_package_prebuilt_set">Prebuilt</string>
 
 </resources>

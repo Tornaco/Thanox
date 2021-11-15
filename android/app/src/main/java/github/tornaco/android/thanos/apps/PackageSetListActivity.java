@@ -15,7 +15,6 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import github.tornaco.android.thanos.R;
@@ -44,7 +43,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
         public void onPackageSetChanged(String pkgSetId) {
             super.onPackageSetChanged(pkgSetId);
             XLog.d("onPackageSetChanged...");
-            viewModel.start(); 
+            viewModel.start();
         }
     };
 
@@ -169,6 +168,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
             PackageManager pm = thanos.getPkgManager();
             List<PackageSet> packageSets = pm.getAllPackageSets(true);
             List<AppListModel> res = new ArrayList<>();
+            String prebuiltBadgeStr = getString(R.string.title_package_prebuilt_set);
             CollectionUtils.consumeRemaining(
                     packageSets,
                     packageSet -> {
@@ -184,15 +184,12 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
                         res.add(
                                 new AppListModel(
                                         appInfo,
+                                        packageSet.isPrebuilt() ? prebuiltBadgeStr : null,
                                         null,
-                                        null,
-                                        getString(
-                                                R.string.title_package_count_set, String.valueOf(count))));
+                                        getString(R.string.title_package_count_set, String.valueOf(count))));
                     });
             // Sort by time.
-            Collections.sort(
-                    res,
-                    (o1, o2) -> -Long.compare(o1.appInfo.getArg3(), o2.appInfo.getArg3()));
+            res.sort((o1, o2) -> -Long.compare(o1.appInfo.getArg3(), o2.appInfo.getArg3()));
             return res;
         };
     }

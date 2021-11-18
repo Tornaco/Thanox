@@ -139,6 +139,8 @@ object Libs {
         const val apacheCommonCodec = "commons-codec:commons-codec:1.10"
 
         const val javassist = "org.javassist:javassist:3.26.0-GA"
+
+        const val tinypinyin = "com.github.promeg:tinypinyin:2.0.3"
     }
 
     object Rules {

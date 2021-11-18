@@ -45,6 +45,8 @@ dependencies {
         exclude(group = "com.google.guava", module = "listenablefuture")
     }
 
+    implementation(Libs.Others.tinypinyin)
+
     implementation(Libs.Others.glide)
     annotationProcessor(Libs.Others.glideCompiler)
 

@@ -3,15 +3,15 @@ package github.tornaco.android.thanos.common;
 import android.text.TextUtils;
 
 import com.elvishew.xlog.XLog;
+import com.github.promeg.pinyinhelper.Pinyin;
 
-import java.util.Locale;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import lang3.StringUtils;
-import lombok.val;
-import util.HanziToPinyin;
 
 public class AppLabelSearchFilter {
+    private static final String TOKEN_SPLITTER = "-";
 
     public boolean matches(String keyword, String appLabel) {
         if (TextUtils.isEmpty(keyword) || TextUtils.isEmpty(appLabel)) {
@@ -22,17 +22,13 @@ public class AppLabelSearchFilter {
             return true;
         }
 
-        val tokens = HanziToPinyin.getInstance().get(appLabel);
-        if (tokens == null || tokens.isEmpty()) {
+        String fullPinyinWithToken = Pinyin.toPinyin(appLabel, TOKEN_SPLITTER);
+
+        if (TextUtils.isEmpty(fullPinyinWithToken)) {
             return false;
         }
 
-        // Match full pinyin
-        String fullPinyin = tokens
-                .stream()
-                .map(token -> token.target)
-                .collect(Collectors.joining())
-                .toLowerCase(Locale.US);
+        String fullPinyin = fullPinyinWithToken.replace(TOKEN_SPLITTER, "");
 
         XLog.d("AppLabelSearchFilter fullPinyin: %s", fullPinyin);
 
@@ -41,11 +37,9 @@ public class AppLabelSearchFilter {
         }
 
         // Match first letter of full pinyin
-        String firstLetterOfFullPinyin = tokens
-                .stream()
-                .map(token -> String.valueOf(token.target.charAt(0)))
-                .collect(Collectors.joining())
-                .toLowerCase(Locale.US);
+        String firstLetterOfFullPinyin = Arrays.stream(fullPinyinWithToken.split(TOKEN_SPLITTER))
+                .map(s -> String.valueOf(s.charAt(0)))
+                .collect(Collectors.joining());
         XLog.d("AppLabelSearchFilter firstLetterOfFullPinyin: %s", firstLetterOfFullPinyin);
         return StringUtils.containsIgnoreCase(firstLetterOfFullPinyin, keyword);
     }

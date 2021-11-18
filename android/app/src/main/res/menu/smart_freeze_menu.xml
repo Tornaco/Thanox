@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-            android:id="@+id/action_settings"
-            android:icon="@drawable/module_common_ic_md_outline_settings_24"
-            android:title="@string/nav_title_settings"
-            app:showAsAction="never"
-            tools:ignore="AlwaysShowAction" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item
-            android:id="@+id/action_enable_all"
-            android:icon="@drawable/ic_apps_line"
-            android:title="@string/menu_title_smart_app_freeze_enable_all_apps"
-            app:showAsAction="never" />
+        android:id="@+id/action_search"
+        android:icon="@drawable/module_common_ic_search_2_line"
+        android:title="@string/common_menu_title_search"
+        app:showAsAction="ifRoom" />
 
     <item
-            android:id="@+id/action_enable_all_temp"
-            android:icon="@drawable/ic_apps_line"
-            android:title="@string/menu_title_smart_app_freeze_enable_all_apps_temp"
-            app:showAsAction="never" />
+        android:id="@+id/action_settings"
+        android:icon="@drawable/module_common_ic_md_outline_settings_24"
+        android:title="@string/nav_title_settings"
+        app:showAsAction="never"
+        tools:ignore="AlwaysShowAction" />
+
+    <item
+        android:id="@+id/action_enable_all"
+        android:icon="@drawable/ic_apps_line"
+        android:title="@string/menu_title_smart_app_freeze_enable_all_apps"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_enable_all_temp"
+        android:icon="@drawable/ic_apps_line"
+        android:title="@string/menu_title_smart_app_freeze_enable_all_apps_temp"
+        app:showAsAction="never" />
 </menu>

@@ -2,11 +2,13 @@ package github.tornaco.android.thanos.power;
 
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.elvishew.xlog.XLog;
@@ -15,6 +17,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.common.AppListModel;
@@ -37,6 +40,8 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     protected final List<Disposable> disposables = new ArrayList<>();
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
 
+    private final ObservableField<String> queryText = new ObservableField<>("");
+
     public SmartFreezeAppsViewModel(@NonNull Application application) {
         super(application);
     }
@@ -57,6 +62,11 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                     return listModels;
                 })
                 .flatMapObservable((Function<List<AppListModel>, ObservableSource<AppListModel>>) Observable::fromIterable)
+                .filter(listModel -> {
+                    String query = queryText.get();
+                    return TextUtils.isEmpty(query)
+                            || listModel.appInfo.getAppLabel().toLowerCase(Locale.US).contains(query.toLowerCase(Locale.US));
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> listModels.clear())
@@ -117,5 +127,16 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
 
     public ObservableArrayList<AppListModel> getListModels() {
         return this.listModels;
+    }
+
+    void clearSearchText() {
+        queryText.set(null);
+        loadModels();
+    }
+
+    void setSearchText(String query) {
+        if (TextUtils.isEmpty(query)) return;
+        queryText.set(query);
+        loadModels();
     }
 }

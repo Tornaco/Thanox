@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +94,35 @@ public class SmartFreezeActivity extends ThemeActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        // Search.
+        binding.searchView.setOnQueryTextListener(
+                new MaterialSearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        viewModel.setSearchText(query);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        viewModel.setSearchText(newText);
+                        return true;
+                    }
+                });
+
+        binding.searchView.setOnSearchViewListener(
+                new MaterialSearchView.SearchViewListener() {
+                    @Override
+                    public void onSearchViewShown() {
+                        // Noop.
+                    }
+
+                    @Override
+                    public void onSearchViewClosed() {
+                        viewModel.clearSearchText();
+                    }
+                });
 
         // List.
         binding.apps.setLayoutManager(new GridLayoutManager(this, 5));
@@ -214,6 +244,8 @@ public class SmartFreezeActivity extends ThemeActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.smart_freeze_menu, menu);
+        MenuItem item = menu.findItem(github.tornaco.android.thanos.module.common.R.id.action_search);
+        binding.searchView.setMenuItem(item);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -302,6 +334,22 @@ public class SmartFreezeActivity extends ThemeActivity {
                         AppPreference.setFeatureNoticeAccepted(getApplicationContext(), "SmartFreeze", true))
                 .show();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (closeSearch()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    protected boolean closeSearch() {
+        if (binding.searchView.isSearchOpen()) {
+            binding.searchView.closeSearch();
+            return true;
+        }
+        return false;
     }
 
     public static SmartFreezeAppsViewModel obtainViewModel(FragmentActivity activity) {

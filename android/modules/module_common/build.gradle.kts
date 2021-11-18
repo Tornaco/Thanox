@@ -1,6 +1,6 @@
 import tornaco.project.android.thanox.Configs
-import tornaco.project.android.thanox.Configs.resPrefix
 import tornaco.project.android.thanox.Libs
+import tornaco.project.android.thanox.Tests
 
 plugins {
     id("com.android.library")
@@ -64,4 +64,6 @@ dependencies {
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
 
+    testImplementation(Tests.junit)
+    androidTestImplementation(Tests.androidXRunner)
 }

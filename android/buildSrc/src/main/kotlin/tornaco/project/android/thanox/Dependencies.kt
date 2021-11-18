@@ -42,6 +42,7 @@ object Tests {
     const val mockk = "io.mockk:mockk:1.12.0"
     const val mockito = "org.mockito:mockito-core:3.3.3"
     const val androidXCoreTest = "androidx.arch.core:core-testing:2.1.0"
+    const val androidXRunner = "androidx.test:runner:1.4.0"
 
     // https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/
     const val ktxCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1"

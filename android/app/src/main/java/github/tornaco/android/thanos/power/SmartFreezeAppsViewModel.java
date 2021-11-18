@@ -17,9 +17,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import github.tornaco.android.rhino.plugin.Verify;
+import github.tornaco.android.thanos.common.AppLabelSearchFilter;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
@@ -41,6 +41,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
 
     private final ObservableField<String> queryText = new ObservableField<>("");
+    private final AppLabelSearchFilter appLabelSearchFilter = new AppLabelSearchFilter();
 
     public SmartFreezeAppsViewModel(@NonNull Application application) {
         super(application);
@@ -65,7 +66,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                 .filter(listModel -> {
                     String query = queryText.get();
                     return TextUtils.isEmpty(query)
-                            || listModel.appInfo.getAppLabel().toLowerCase(Locale.US).contains(query.toLowerCase(Locale.US));
+                            || appLabelSearchFilter.matches(query, listModel.appInfo.getAppLabel());
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

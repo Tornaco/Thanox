@@ -17,7 +17,6 @@ import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -49,6 +48,7 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
     private final ObservableField<CategoryIndex> categoryIndex = new ObservableField<>(DEFAULT_CATEGORY_INDEX);
 
     private final ObservableField<String> queryText = new ObservableField<>("");
+    private final AppLabelSearchFilter appLabelSearchFilter = new AppLabelSearchFilter();
 
     private ListModelLoader listModelLoader;
 
@@ -93,7 +93,7 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                     public boolean test(AppListModel listModel) throws Exception {
                         String query = queryText.get();
                         return TextUtils.isEmpty(query)
-                                || listModel.appInfo.getAppLabel().toLowerCase(Locale.US).contains(query.toLowerCase(Locale.US));
+                                || appLabelSearchFilter.matches(query, listModel.appInfo.getAppLabel());
                     }
                 })
                 .subscribeOn(Schedulers.io())

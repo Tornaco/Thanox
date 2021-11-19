@@ -3,7 +3,7 @@
 
     <style name="AppThemeDark" parent="Theme.Material3.Dark">
         <item name="colorAccent">@color/md_blue_a700</item>
-        <item name="colorPrimaryContainer">@color/md_blue_900</item>
+        <item name="colorPrimaryContainer">@color/md_grey_800</item>
 
         <item name="colorPrimary">?colorAccent</item>
         <item name="colorPrimaryDark">?colorPrimary</item>
@@ -41,7 +41,6 @@
 
     <style name="AppThemeDark.Red">
         <item name="colorAccent">@color/md_red_400</item>
-        <item name="colorPrimaryContainer">@color/md_red_a800</item>
     </style>
 
     <style name="AppThemeDark.Red.NoActionBar">
@@ -51,7 +50,6 @@
 
     <style name="AppThemeDark.Grey">
         <item name="colorAccent">@color/md_teal_300</item>
-        <item name="colorPrimaryContainer">@color/md_teal_900</item>
     </style>
 
     <style name="AppThemeDark.Grey.NoActionBar">
@@ -61,7 +59,6 @@
 
     <style name="AppThemeDark.Amber">
         <item name="colorAccent">@color/md_amber_900</item>
-        <item name="colorPrimaryContainer">@color/md_deep_orange_a700</item>
     </style>
 
     <style name="AppThemeDark.Amber.NoActionBar">

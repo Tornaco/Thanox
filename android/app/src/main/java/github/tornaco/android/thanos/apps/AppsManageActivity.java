@@ -13,6 +13,7 @@ import java.util.List;
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemClickListener;
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
@@ -44,6 +45,7 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
     @Override
     @Verify
     protected CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
+        AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
         String runningBadge = getString(R.string.badge_app_running);
         String idleBadge = getApplicationContext().getString(R.string.badge_app_idle);
         return index -> {
@@ -60,7 +62,7 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
                             appInfo,
                             thanos.getActivityManager().isPackageRunning(appInfo.getPkgName()) ? runningBadge : null,
                             thanos.getActivityManager().isPackageIdle(appInfo.getPkgName()) ? idleBadge : null,
-                            null))));
+                            composer.getAppItemDescription(appInfo)))));
             Collections.sort(res);
             return res;
         };

@@ -5,6 +5,10 @@
     <string name="key_app_icon_pack" translatable="false">key_app_icon_pack</string>
     <string name="key_use_round_icon" translatable="false">key_use_round_icon</string>
 
+    <string name="key_app_list_item" translatable="false">key_app_list_item</string>
+    <string name="key_app_list_item_show_pkg" translatable="false">key_app_list_item_show_pkg</string>
+    <string name="key_app_list_item_show_version" translatable="false">key_app_list_item_show_version</string>
+
     <string name="key_developer" translatable="false">key_developer</string>
     <string name="key_power" translatable="false">key_power</string>
     <string name="key_enable_logging" translatable="false">key_enable_logging</string>

@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter;
@@ -137,6 +138,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
     @NonNull
     @Override
     protected CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
+        AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
         return index -> {
             if (packageSet == null || packageSet.getPackageCount() == 0) {
                 return Lists.newArrayList();
@@ -152,7 +154,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
                 if (appInfo == null) {
                     continue;
                 }
-                res.add(new AppListModel(appInfo));
+                res.add(new AppListModel(appInfo, null, null, composer.getAppItemDescription(appInfo)));
             }
             Collections.sort(res);
             return res;

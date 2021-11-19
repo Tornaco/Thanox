@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
@@ -56,6 +57,7 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
     @NonNull
     @Override
     protected CommonFuncToggleAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
+        AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
         return index -> {
             ThanosManager thanos = ThanosManager.from(getApplicationContext());
             if (!thanos.isServiceInstalled()) return Lists.newArrayListWithCapacity(0);
@@ -65,7 +67,7 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
                 appInfo.setSelected(am.isPackageLocked(appInfo.getPkgName()));
-                res.add(new AppListModel(appInfo));
+                res.add(new AppListModel(appInfo, null, null, composer.getAppItemDescription(appInfo)));
             });
             Collections.sort(res);
             return res;

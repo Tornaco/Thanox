@@ -15,6 +15,7 @@ import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
+import github.tornaco.android.thanos.common.CommonPreferences;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.theme.Theme;
@@ -93,6 +94,22 @@ public class UiSettingsFragment extends BasePreferenceFragmentCompat {
         usedCircleIconPref.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean use = (boolean) newValue;
             AppThemePreferences.getInstance().setUseRoundIcon(getContext(), use);
+            return true;
+        });
+
+        SwitchPreferenceCompat showPkg = findPreference(R.string.key_app_list_item_show_pkg);
+        showPkg.setChecked(CommonPreferences.getInstance().isAppListShowPkgNameEnabled(requireContext()));
+        showPkg.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean newBoolValue = (boolean) newValue;
+            CommonPreferences.getInstance().setAppListShowPkgNameEnabled(requireContext(), newBoolValue);
+            return true;
+        });
+
+        SwitchPreferenceCompat showVersion = findPreference(R.string.key_app_list_item_show_version);
+        showVersion.setChecked(CommonPreferences.getInstance().isAppListShowVersionEnabled(requireContext()));
+        showVersion.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean newBoolValue = (boolean) newValue;
+            CommonPreferences.getInstance().setAppListShowVersionEnabled(requireContext(), newBoolValue);
             return true;
         });
     }

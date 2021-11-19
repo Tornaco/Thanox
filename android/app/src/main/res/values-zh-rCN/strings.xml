@@ -387,4 +387,8 @@
     <string name="onboarding_guide_tips_title">使用指导</string>
     <string name="onboarding_guide_tips_desc">你可以在设置主页中找到使用指导，强烈建议你多花一些时间看看这些指导，说不定会帮到你。</string>
     <string name="title_package_prebuilt_set">预设</string>
+
+    <string name="pre_title_app_list_item_show_pkg">显示包名</string>
+    <string name="pre_title_app_list_item_show_version">显示版本信息</string>
+    <string name="pre_title_app_list_item">应用列表项</string>
 </resources>

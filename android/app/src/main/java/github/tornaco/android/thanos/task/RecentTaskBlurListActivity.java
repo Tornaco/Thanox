@@ -1,7 +1,6 @@
 package github.tornaco.android.thanos.task;
 
 import android.content.Context;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 
@@ -12,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
@@ -56,15 +56,17 @@ public class RecentTaskBlurListActivity extends CommonFuncToggleAppListFilterAct
     @NonNull
     @Override
     protected CommonFuncToggleAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
+        AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
         return index -> {
             ThanosManager thanos = ThanosManager.from(getApplicationContext());
-            if (!thanos.isServiceInstalled()) return Lists.newArrayListWithCapacity(0);
+            if (!thanos.isServiceInstalled())
+                return Lists.newArrayListWithCapacity(0);
             ActivityManager am = thanos.getActivityManager();
             List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
                 appInfo.setSelected(am.isPkgRecentTaskBlurEnabled(appInfo.getPkgName()));
-                res.add(new AppListModel(appInfo));
+                res.add(new AppListModel(appInfo, null, null, composer.getAppItemDescription(appInfo)));
             });
             Collections.sort(res);
             return res;

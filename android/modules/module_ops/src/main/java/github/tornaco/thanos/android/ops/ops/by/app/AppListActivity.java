@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import github.tornaco.android.thanos.common.AppItemClickListener;
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
@@ -41,6 +42,7 @@ public class AppListActivity extends CommonAppListFilterActivity {
     @NonNull
     @Override
     protected CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
+        AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
         return index -> {
             ThanosManager thanos = ThanosManager.from(getApplicationContext());
             if (!thanos.isServiceInstalled()) {
@@ -49,7 +51,7 @@ public class AppListActivity extends CommonAppListFilterActivity {
             List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo ->
-                    res.add(new AppListModel(appInfo, null, null, null)));
+                    res.add(new AppListModel(appInfo, null, null, composer.getAppItemDescription(appInfo))));
             Collections.sort(res);
             return res;
         };

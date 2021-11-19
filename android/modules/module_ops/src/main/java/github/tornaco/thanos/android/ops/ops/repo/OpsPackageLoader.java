@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CategoryIndex;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
@@ -32,6 +33,7 @@ public class OpsPackageLoader implements CommonAppListFilterViewModel.ListModelL
 
     @Override
     public List<AppListModel> load(@NonNull CategoryIndex index) {
+        AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(context);
         ThanosManager thanosManager = ThanosManager.from(context);
         if (!thanosManager.isServiceInstalled()) {
             return new ArrayList<>(0);
@@ -46,10 +48,10 @@ public class OpsPackageLoader implements CommonAppListFilterViewModel.ListModelL
             if (perm != null && mode == AppOpsManager.MODE_ALLOWED) {
                 Set<String> permissions = Sets.newHashSet(PkgUtils.getAllDeclaredPermissions(context, appInfo.getPkgName()));
                 if (permissions.contains(perm)) {
-                    res.add(new AppListModel(appInfo));
+                    res.add(new AppListModel(appInfo, null, null, composer.getAppItemDescription(appInfo)));
                 }
             } else {
-                res.add(new AppListModel(appInfo));
+                res.add(new AppListModel(appInfo, null, null, composer.getAppItemDescription(appInfo)));
             }
         }
         Collections.sort(res);

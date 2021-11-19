@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CategoryIndex;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
@@ -30,9 +31,11 @@ public class CleanUpTaskRemovalAppsLoader implements CommonFuncToggleAppListFilt
 
     @Override
     public List<AppListModel> load(@NonNull CategoryIndex index) {
+        AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(context);
         XLog.d("Loading apps in: %s", Thread.currentThread());
         ThanosManager thanos = ThanosManager.from(context);
-        if (!thanos.isServiceInstalled()) return Lists.newArrayListWithCapacity(0);
+        if (!thanos.isServiceInstalled())
+            return Lists.newArrayListWithCapacity(0);
 
         String runningBadge = context.getString(R.string.badge_app_running);
         ActivityManager am = thanos.getActivityManager();
@@ -40,7 +43,10 @@ public class CleanUpTaskRemovalAppsLoader implements CommonFuncToggleAppListFilt
         List<AppListModel> res = new ArrayList<>();
         CollectionUtils.consumeRemaining(installed, appInfo -> {
             appInfo.setSelected(am.isPkgCleanUpOnTaskRemovalEnabled(appInfo.getPkgName()));
-            res.add(new AppListModel(appInfo, thanos.getActivityManager().isPackageRunning(appInfo.getPkgName()) ? runningBadge : null));
+            res.add(new AppListModel(appInfo,
+                    thanos.getActivityManager().isPackageRunning(appInfo.getPkgName()) ? runningBadge : null,
+                    null,
+                    composer.getAppItemDescription(appInfo)));
         });
         Collections.sort(res);
         return res;

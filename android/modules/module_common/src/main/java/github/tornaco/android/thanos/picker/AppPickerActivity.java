@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import github.tornaco.android.thanos.common.AppItemClickListener;
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter;
@@ -110,6 +111,7 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
     @NonNull
     @Override
     protected CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
+        AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
         return index -> {
             ThanosManager thanos = ThanosManager.from(getApplicationContext());
             if (!thanos.isServiceInstalled()) {
@@ -122,7 +124,7 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
                     return;
                 }
                 appInfo.setSelected(selectedAppInfoMap.containsKey(appInfo.getPkgName()));
-                res.add(new AppListModel(appInfo, null, null, null));
+                res.add(new AppListModel(appInfo, null, null, composer.getAppItemDescription(appInfo)));
             });
             Collections.sort(res);
             return res;

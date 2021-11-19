@@ -390,5 +390,8 @@
     <string name="onboarding_guide_tips_title">Wiki available</string>
     <string name="onboarding_guide_tips_desc">You can find the instructions on the homepage of the settings. It is strongly recommended that you spend more time looking at these instructions. Maybe it will help you.</string>
     <string name="title_package_prebuilt_set">Prebuilt</string>
+    <string name="pre_title_app_list_item_show_pkg">Show package name</string>
+    <string name="pre_title_app_list_item_show_version">Show version</string>
+    <string name="pre_title_app_list_item">App list item</string>
 
 </resources>

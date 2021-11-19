@@ -15,6 +15,7 @@ import java.util.List;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
@@ -69,8 +70,10 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
     @Override
     protected CommonFuncToggleAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
         return index -> {
+            AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
             ThanosManager thanos = ThanosManager.from(getApplicationContext());
-            if (!thanos.isServiceInstalled()) return Lists.newArrayListWithCapacity(0);
+            if (!thanos.isServiceInstalled())
+                return Lists.newArrayListWithCapacity(0);
 
             String runningBadge = getApplicationContext().getString(R.string.badge_app_running);
             String idleBadge = getApplicationContext().getString(R.string.badge_app_idle);
@@ -79,9 +82,11 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
                 appInfo.setSelected(am.isPkgSmartStandByEnabled(appInfo.getPkgName()));
-                res.add(new AppListModel(appInfo,
+                res.add(new AppListModel(
+                        appInfo,
                         thanos.getActivityManager().isPackageRunning(appInfo.getPkgName()) ? runningBadge : null,
-                        thanos.getActivityManager().isPackageIdle(appInfo.getPkgName()) ? idleBadge : null));
+                        thanos.getActivityManager().isPackageIdle(appInfo.getPkgName()) ? idleBadge : null,
+                        composer.getAppItemDescription(appInfo)));
             });
             Collections.sort(res);
             return res;

@@ -1,7 +1,6 @@
 package github.tornaco.android.thanos.apps;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,7 +33,6 @@ import github.tornaco.android.thanos.databinding.ActivityAppDetailsBinding;
 import github.tornaco.android.thanos.settings.StrategySettingsActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
-import util.ObjectsUtils;
 
 public class AppDetailsActivity extends BaseTrustedActivity {
     private ActivityAppDetailsBinding binding;
@@ -134,8 +132,6 @@ public class AppDetailsActivity extends BaseTrustedActivity {
         ProfileManager profileManager = thanos.getProfileManager();
         List<String> entries = new ArrayList<>();
         List<String> values = new ArrayList<>();
-        String selectedId = profileManager.getAutoConfigTemplateSelectionId();
-        int selectionIndex = 0;
 
         List<ConfigTemplate> allConfigTemplates = profileManager.getAllConfigTemplates();
 
@@ -149,36 +145,28 @@ public class AppDetailsActivity extends BaseTrustedActivity {
             ConfigTemplate template = allConfigTemplates.get(i);
             entries.add(template.getTitle());
             values.add(template.getId());
-            if (selectedId != null
-                    && ObjectsUtils.equals(template.getId(), selectedId)) {
-                selectionIndex = i;
-            }
         }
 
         new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.pref_action_apply_config_template)
-                .setSingleChoiceItems(entries.toArray(new String[0]),
-                        selectionIndex,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                .setItems(entries.toArray(new String[0]),
+                        (dialog, which) -> {
+                            dialog.dismiss();
 
-                                ConfigTemplate selectedTemplate = profileManager.getConfigTemplateById(values.get(which));
+                            ConfigTemplate selectedTemplate = profileManager.getConfigTemplateById(values.get(which));
 
-                                if (selectedTemplate == null) {
-                                    ToastUtils.nook(getApplicationContext());
-                                    return;
-                                }
+                            if (selectedTemplate == null) {
+                                ToastUtils.nook(getApplicationContext());
+                                return;
+                            }
 
-                                Toast.makeText(thisActivity(), selectedTemplate.getTitle(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(thisActivity(), selectedTemplate.getTitle(), Toast.LENGTH_SHORT).show();
 
-                                if (profileManager.applyConfigTemplateForPackage(appInfo.getPkgName(), selectedTemplate)) {
-                                    ToastUtils.ok(getApplicationContext());
-                                    reAddFragment();
-                                } else {
-                                    ToastUtils.nook(getApplicationContext());
-                                }
+                            if (profileManager.applyConfigTemplateForPackage(appInfo.getPkgName(), selectedTemplate)) {
+                                ToastUtils.ok(getApplicationContext());
+                                reAddFragment();
+                            } else {
+                                ToastUtils.nook(getApplicationContext());
                             }
                         }).show();
     }

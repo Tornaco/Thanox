@@ -74,13 +74,19 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
         super.onSetupFilter(filterAnchor);
         filterAnchor.setVisibility(View.GONE);
         setTitle(getTitleRes());
+        filterAnchor.setChipIconVisible(false);
+    }
+
+    @Override
+    protected void onSetupSorter(Chip sorterAnchor) {
+        super.onSetupSorter(sorterAnchor);
+        sorterAnchor.setVisibility(View.GONE);
     }
 
     @Override
     protected int getTitleRes() {
         return R.string.title_package_sets;
     }
-
 
     @Override
     protected void onSetupFab(ExtendedFloatingActionButton fab) {
@@ -181,12 +187,11 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
                         appInfo.setSelected(packageSet.isPrebuilt());
                         int count = packageSet.getPackageCount();
                         appInfo.setArg1(count);
-                        res.add(
-                                new AppListModel(
-                                        appInfo,
-                                        packageSet.isPrebuilt() ? prebuiltBadgeStr : null,
-                                        null,
-                                        getString(R.string.title_package_count_set, String.valueOf(count))));
+                        res.add(new AppListModel(
+                                appInfo,
+                                packageSet.isPrebuilt() ? prebuiltBadgeStr : null,
+                                null,
+                                getString(R.string.title_package_count_set, String.valueOf(count))));
                     });
             // Sort by time.
             res.sort((o1, o2) -> -Long.compare(o1.appInfo.getArg3(), o2.appInfo.getArg3()));

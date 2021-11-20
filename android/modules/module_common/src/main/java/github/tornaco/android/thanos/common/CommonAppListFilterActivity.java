@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -61,6 +60,8 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
         setTitle(getTitleString());
 
         onSetupFilter(binding.filterChipContainer.filterChip);
+        onSetupSorter(binding.sortChipContainer.sortChip);
+
         onSetupChip(
                 binding.chipContainer,
                 binding.chipGroup,
@@ -155,6 +156,10 @@ public abstract class CommonAppListFilterActivity extends ThemeActivity {
 
     protected void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
         // Noop.
+    }
+
+    protected void onSetupSorter(Chip sorterAnchor) {
+
     }
 
     protected void onSetupFilter(Chip filterAnchor) {

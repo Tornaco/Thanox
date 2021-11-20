@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/filter_chip"
+    android:id="@+id/sort_chip"
     style="@style/ActionChipTheme"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/common_view_margin_default"
+    android:maxLength="4"
+    android:text="@string/common_sort_by_last_used_time"
     android:textColor="?android:textColorPrimary"
     app:chipBackgroundColor="?colorPrimaryContainer"
     app:chipEndPadding="@dimen/common_view_margin_middle"
-    app:chipIcon="@drawable/module_common_ic_outline_filter_alt_24"
+    app:chipIcon="@drawable/module_common_ic_outline_sort_24"
     app:chipIconSize="18dp"
     app:chipStartPadding="@dimen/common_view_margin_default"
     app:layout_anchorGravity="center"
-    app:textStartPadding="@dimen/common_view_margin_mini"
-    tools:text="@string/chip_title_app_only_enable" />
+    app:textStartPadding="@dimen/common_view_margin_mini" />

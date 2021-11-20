@@ -87,9 +87,29 @@
                     android:id="@+id/switch_bar_container"
                     layout="@layout/module_common_switchbar_container" />
 
-                <include
-                    android:id="@+id/filter_chip_container"
-                    layout="@layout/module_common_filter_chip" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/common_view_margin_default"
+                    android:paddingTop="@dimen/common_view_margin_tiny"
+                    android:paddingEnd="@dimen/common_view_margin_default"
+                    android:paddingBottom="@dimen/common_view_margin_tiny">
+
+                    <include
+                        android:id="@+id/filter_chip_container"
+                        layout="@layout/module_common_filter_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/common_view_margin_small" />
+
+                    <include
+                        android:id="@+id/sort_chip_container"
+                        layout="@layout/module_common_sort_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <include
                     android:id="@+id/feature_desc_container"
@@ -106,7 +126,6 @@
                         android:id="@+id/apps"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
                         android:clipChildren="true"
                         android:clipToPadding="true"
                         android:listModels="@{viewModel.listModels}" />

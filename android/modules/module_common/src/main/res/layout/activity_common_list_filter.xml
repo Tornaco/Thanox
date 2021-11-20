@@ -13,7 +13,6 @@
 
     </data>
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,8 +60,8 @@
 
 
                     <com.miguelcatalan.materialsearchview.MaterialSearchView
-                        style="@style/SearchViewStyle"
                         android:id="@+id/search_view"
+                        style="@style/SearchViewStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </FrameLayout>
@@ -81,17 +80,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/chip_container"
-
                 android:orientation="vertical">
 
                 <include
                     android:id="@+id/switch_bar_container"
                     layout="@layout/module_common_switchbar_container" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/common_view_margin_default"
+                    android:paddingEnd="@dimen/common_view_margin_default">
 
-                <include
-                    android:id="@+id/filter_chip_container"
-                    layout="@layout/module_common_filter_chip" />
+                    <include
+                        android:id="@+id/filter_chip_container"
+                        layout="@layout/module_common_filter_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/common_view_margin_small" />
+
+                    <include
+                        android:id="@+id/sort_chip_container"
+                        layout="@layout/module_common_sort_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
                 <include
                     android:id="@+id/feature_desc_container"

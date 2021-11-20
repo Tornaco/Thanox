@@ -62,55 +62,43 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
     protected CommonAppListFilterAdapter onCreateCommonAppListFilterAdapter() {
         appListFilterAdapter =
                 new CommonAppListFilterAdapter(
-                        new AppItemViewClickListener() {
-                            @Override
-                            public void onAppItemClick(AppInfo appInfo, View itemView) {
-                                String noSelectionStr = getString(R.string.common_text_value_not_set);
-                                List<Fields> fields =
+                        (appInfo, itemView) -> {
+                            String noSelectionStr = getString(R.string.common_text_value_not_set);
+                            List<Fields> fields =
+                                    ThanosManager.from(getApplicationContext())
+                                            .getPrivacyManager()
+                                            .getAllFieldsProfiles();
+                            Fields dummyNoop = Fields.builder().label(noSelectionStr).id(null).build();
+                            fields.add(dummyNoop);
+                            QuickDropdown.show(
+                                    thisActivity(),
+                                    itemView,
+                                    index -> {
+                                        if (index + 1 > fields.size()) {
+                                            return null;
+                                        }
+                                        Fields f = fields.get(index);
+                                        return f.getLabel();
+                                    },
+                                    id -> {
+                                        Fields f = fields.get(id);
+                                        boolean isDummyNoop = f.getId() == null;
                                         ThanosManager.from(getApplicationContext())
                                                 .getPrivacyManager()
-                                                .getAllFieldsProfiles();
-                                Fields dummyNoop = Fields.builder().label(noSelectionStr).id(null).build();
-                                fields.add(dummyNoop);
-                                QuickDropdown.show(
-                                        thisActivity(),
-                                        itemView,
-                                        new Function<Integer, String>() {
-                                            @Override
-                                            public String apply(Integer index) {
-                                                if (index + 1 > fields.size()) {
-                                                    return null;
-                                                }
-                                                Fields f = fields.get(index);
-                                                return f.getLabel();
-                                            }
-                                        },
-                                        new Consumer<Integer>() {
-                                            @Override
-                                            public void accept(Integer id) {
-                                                Fields f = fields.get(id);
-                                                boolean isDummyNoop = f.getId() == null;
-                                                ThanosManager.from(getApplicationContext())
-                                                        .getPrivacyManager()
-                                                        .selectFieldsProfileForPackage(
-                                                                appInfo.getPkgName(), isDummyNoop ? null : f.getId());
+                                                .selectFieldsProfileForPackage(
+                                                        appInfo.getPkgName(), isDummyNoop ? null : f.getId());
 
-                                                appListFilterAdapter.updateSingleItem(
-                                                        new Predicate<AppListModel>() {
-                                                            @Override
-                                                            public boolean test(AppListModel input) {
-                                                                // Find by pkg and update badge.
-                                                                if (input.appInfo.getPkgName().equals(appInfo.getPkgName())) {
-                                                                    input.badge = isDummyNoop ? null : f.getLabel();
-                                                                    input.appInfo.setObj(isDummyNoop ? null : f);
-                                                                    return true;
-                                                                }
-                                                                return false;
-                                                            }
-                                                        });
-                                            }
-                                        });
-                            }
+                                        appListFilterAdapter.updateSingleItem(
+                                                input -> {
+                                                    // Find by pkg and update badge.
+                                                    if (input.appInfo.getPkgName().equals(appInfo.getPkgName())) {
+                                                        input.badge = isDummyNoop ? null : f.getLabel();
+                                                        input.appInfo.setObj(isDummyNoop ? null : f);
+                                                        return true;
+                                                    }
+                                                    return false;
+                                                });
+                                    });
                         });
         return appListFilterAdapter;
     }
@@ -180,22 +168,14 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
                     .setCancelable(true)
                     .setNegativeButton(
                             android.R.string.cancel,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
+                            (dialog, which) -> dialog.dismiss())
                     .setItems(
                             labels.toArray(new String[0]),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Fields f = allFs.get(which);
-                                    boolean isDummyNoop = f.getId() == null;
-                                    applyBatchSelection(isDummyNoop ? null : f.getId());
-                                    dialog.dismiss();
-                                }
+                            (dialog, which) -> {
+                                Fields f = allFs.get(which);
+                                boolean isDummyNoop = f.getId() == null;
+                                applyBatchSelection(isDummyNoop ? null : f.getId());
+                                dialog.dismiss();
                             })
                     .show();
 
@@ -212,12 +192,7 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
         p.show();
         CollectionUtils.consumeRemaining(
                 appListFilterAdapter.getListModels(),
-                new Consumer<AppListModel>() {
-                    @Override
-                    public void accept(AppListModel appListModel) {
-                        priv.selectFieldsProfileForPackage(appListModel.appInfo.getPkgName(), id);
-                    }
-                });
+                appListModel -> priv.selectFieldsProfileForPackage(appListModel.appInfo.getPkgName(), id));
         viewModel.start();
         p.dismiss();
     }

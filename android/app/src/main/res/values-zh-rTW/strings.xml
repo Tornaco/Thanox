@@ -391,4 +391,6 @@
     <string name="pre_title_app_list_item_show_pkg">显示包名</string>
     <string name="pre_title_app_list_item_show_version">显示版本信息</string>
     <string name="pre_title_app_list_item">应用列表项</string>
+
+    <string name="menu_title_app_info_detailed">详细信息</string>
 </resources>

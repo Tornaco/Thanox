@@ -393,5 +393,6 @@
     <string name="pre_title_app_list_item_show_pkg">Show package name</string>
     <string name="pre_title_app_list_item_show_version">Show version</string>
     <string name="pre_title_app_list_item">App list item</string>
+    <string name="menu_title_app_info_detailed">Details</string>
 
 </resources>

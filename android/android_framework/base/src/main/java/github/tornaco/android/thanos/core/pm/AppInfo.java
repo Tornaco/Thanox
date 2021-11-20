@@ -51,7 +51,8 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
   private String appLabel;
   private int versionCode;
   private String versionName;
-  private String packageSetShortDesc;
+  private String apkPath;
+  private String dataDir;
   private int flags;
   private int uid;
 
@@ -88,7 +89,8 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
     appLabel = in.readString();
     versionCode = in.readInt();
     versionName = in.readString();
-    packageSetShortDesc = in.readString();
+    apkPath = in.readString();
+    dataDir = in.readString();
     flags = in.readInt();
     uid = in.readInt();
     debuggable = in.readInt() == 1;
@@ -124,7 +126,8 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
     dest.writeString(this.appLabel);
     dest.writeInt(this.versionCode);
     dest.writeString(this.versionName);
-    dest.writeString(this.packageSetShortDesc);
+    dest.writeString(this.apkPath);
+    dest.writeString(this.dataDir);
     dest.writeInt(this.flags);
     dest.writeInt(this.uid);
     dest.writeInt(this.debuggable ? 1 : 0);
@@ -202,7 +205,8 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
         "Dummy",
         0,
         "0",
-        "packageSetShortDesc",
+        "apk path",
+        "data dir",
         FLAGS_USER,
         Integer.MAX_VALUE,
         false,

@@ -18,6 +18,8 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +29,7 @@ import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
+import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
@@ -84,16 +87,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
       return;
     }
     Objects.requireNonNull(preference).setTitle(appInfo.getAppLabel());
-    preference.setSummary(
-        String.format(
-            "%s\n%s\n%s\nUID: %s\nMin sdk: %s\nTarget sdk: %s\nDebuggable: %s",
-            appInfo.getPkgName(),
-            appInfo.getVersionName(),
-            appInfo.getVersionCode(),
-            appInfo.getUid(),
-            appInfo.getMinSdkVersion(),
-            appInfo.getTargetSdkVersion(),
-            appInfo.isDebuggable()));
+    preference.setSummary(new AppListItemDescriptionComposer(requireContext()).getAppItemDescription(appInfo));
     //noinspection ConstantConditions
     preference.setIcon(ApkUtil.loadIconByPkgName(getContext(), appInfo.getPkgName()));
     preference.setOnPreferenceClickListener(
@@ -139,9 +133,32 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             getActivity().startActivity(intent);
             return true;
           }
+          if (item.getItemId() == R.id.action_system_details) {
+            showAppDetailsDialog();
+            return true;
+          }
           return false;
         });
     popupMenu.show();
+  }
+
+  private void showAppDetailsDialog() {
+    String details =  String.format(
+            "%s\n%s\n%s\nUID: %s\nMin sdk: %s\nTarget sdk: %s\nDebuggable: %s\n\nApk path:%s\n\nData dir:%s\n",
+            appInfo.getPkgName(),
+            appInfo.getVersionName(),
+            appInfo.getVersionCode(),
+            appInfo.getUid(),
+            appInfo.getMinSdkVersion(),
+            appInfo.getTargetSdkVersion(),
+            appInfo.isDebuggable(),
+            appInfo.getApkPath(),
+            appInfo.getDataDir());
+
+    new MaterialAlertDialogBuilder(requireActivity())
+            .setTitle(appInfo.getAppLabel())
+            .setMessage(details)
+            .show();
   }
 
   private void bindProtectPrefs() {

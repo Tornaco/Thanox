@@ -60,6 +60,12 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
     }
 
     @Override
+    protected void onSetupSorter(Chip sorterAnchor) {
+        super.onSetupSorter(sorterAnchor);
+        sorterAnchor.setVisibility(View.GONE);
+    }
+
+    @Override
     protected int getTitleRes() {
         return R.string.priv_title_fields_template;
     }
@@ -172,7 +178,8 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
             @Override
             public List<AppListModel> load(@NonNull CategoryIndex index) {
                 ThanosManager thanos = ThanosManager.from(getApplicationContext());
-                if (!thanos.isServiceInstalled()) return Lists.newArrayListWithCapacity(0);
+                if (!thanos.isServiceInstalled())
+                    return Lists.newArrayListWithCapacity(0);
                 PrivacyManager priv = thanos.getPrivacyManager();
                 List<Fields> fields = priv.getAllFieldsProfiles();
                 List<AppListModel> res = new ArrayList<>();

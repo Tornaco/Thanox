@@ -16,9 +16,11 @@ import com.elvishew.xlog.XLog;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
+import github.tornaco.android.thanos.common.sort.AppSort;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.PackageSet;
 import github.tornaco.android.thanos.core.pm.PrebuiltPkgSetsKt;
@@ -44,8 +46,11 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
 
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     protected final List<Disposable> disposables = new ArrayList<>();
+
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
+
     private final ObservableField<CategoryIndex> categoryIndex = new ObservableField<>(DEFAULT_CATEGORY_INDEX);
+    private final ObservableField<AppSort> currentSort = new ObservableField<>(AppSort.Default);
 
     private final ObservableField<String> queryText = new ObservableField<>("");
     private final AppLabelSearchFilter appLabelSearchFilter = new AppLabelSearchFilter();
@@ -84,7 +89,12 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                 .create(new SingleOnSubscribe<List<AppListModel>>() {
                     @Override
                     public void subscribe(SingleEmitter<List<AppListModel>> emitter) throws Exception {
-                        emitter.onSuccess(Objects.requireNonNull(listModelLoader.load(Objects.requireNonNull(categoryIndex.get()))));
+                        List<AppListModel> res = Objects.requireNonNull(listModelLoader.load(Objects.requireNonNull(categoryIndex.get())));
+                        Comparator<AppListModel> comparator = Objects.requireNonNull(currentSort.get()).comparator;
+                        if (comparator != null) {
+                            res.sort(comparator);
+                        }
+                        emitter.onSuccess(res);
                     }
                 })
                 .flatMapObservable((Function<List<AppListModel>, ObservableSource<AppListModel>>) Observable::fromIterable)
@@ -190,6 +200,15 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
 
     public ObservableField<CategoryIndex> getCategoryIndex() {
         return this.categoryIndex;
+    }
+
+    public AppSort getCurrentAppSort() {
+        return currentSort.get();
+    }
+
+    public void setAppSort(AppSort sort) {
+        currentSort.set(sort);
+        start();
     }
 
     public void setListModelLoader(ListModelLoader listModelLoader) {

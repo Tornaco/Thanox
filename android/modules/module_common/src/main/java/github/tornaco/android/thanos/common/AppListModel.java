@@ -70,8 +70,4 @@ public class AppListModel extends ListModel<AppListModel> {
     public int compareTo(@NonNull AppListModel listModel) {
         return this.appInfo.compareTo(listModel.appInfo);
     }
-
-    public String toString() {
-        return "AppListModel(appInfo=" + this.appInfo + ", badge=" + this.badge + ", badge2=" + this.badge2 + ", badge1BgColor=" + this.badge1BgColor + ", badge2BgColor=" + this.badge2BgColor + ", description=" + this.description + ", showStateBadge=" + this.showStateBadge + ")";
-    }
 }

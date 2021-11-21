@@ -17,7 +17,6 @@ public class CommonFuncToggleAppListFilterViewModel extends CommonAppListFilterV
         super(application);
     }
 
-
     void selectAll() {
         disposables.add(Observable.fromIterable(listModels)
                 .doOnNext(listModel -> selectStateChangeListener.onAppItemSelectionChanged(listModel.appInfo, true))

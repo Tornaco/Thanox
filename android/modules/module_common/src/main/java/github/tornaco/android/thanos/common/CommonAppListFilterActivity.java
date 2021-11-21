@@ -26,7 +26,6 @@ public abstract class CommonAppListFilterActivity extends BaseAppListFilterActiv
         return new LinearLayoutManager(this);
     }
 
-
     protected AppItemClickListener onCreateAppItemViewClickListener() {
         return null;
     }

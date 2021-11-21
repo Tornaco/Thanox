@@ -16,7 +16,7 @@ import com.elvishew.xlog.XLog;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,6 +50,8 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
 
     private final ObservableField<CategoryIndex> categoryIndex = new ObservableField<>(DEFAULT_CATEGORY_INDEX);
+
+    private final ObservableBoolean sortReverse = new ObservableBoolean(false);
     private final ObservableField<AppSort> currentSort = new ObservableField<>(AppSort.Default);
 
     private final ObservableField<String> queryText = new ObservableField<>("");
@@ -90,9 +92,12 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                     @Override
                     public void subscribe(SingleEmitter<List<AppListModel>> emitter) throws Exception {
                         List<AppListModel> res = Objects.requireNonNull(listModelLoader.load(Objects.requireNonNull(categoryIndex.get())));
-                        Comparator<AppListModel> comparator = Objects.requireNonNull(currentSort.get()).comparator;
-                        if (comparator != null) {
-                            res.sort(comparator);
+                        AppSort.AppSorterProvider appSorterProvider = Objects.requireNonNull(currentSort.get()).provider;
+                        if (appSorterProvider != null) {
+                            res.sort(appSorterProvider.comparator(getApplication()));
+                            if (sortReverse.get()) {
+                                Collections.reverse(res);
+                            }
                         }
                         emitter.onSuccess(res);
                     }
@@ -116,8 +121,16 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                 })
                 .subscribe(new Consumer<AppListModel>() {
                     @Override
-                    public void accept(AppListModel object) throws Exception {
-                        listModels.add(object);
+                    public void accept(AppListModel model) throws Exception {
+                        // Append info from the sorter.
+                        AppSort.AppSorterProvider appSorterProvider = Objects.requireNonNull(currentSort.get()).provider;
+                        if (appSorterProvider != null) {
+                            String appSortDescription = appSorterProvider.getAppSortDescription(getApplication(), model);
+                            if (!TextUtils.isEmpty(appSortDescription)) {
+                                model.description = (model.description == null ? "" : model.description) + "\n" + appSortDescription;
+                            }
+                        }
+                        listModels.add(model);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -200,6 +213,15 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
 
     public ObservableField<CategoryIndex> getCategoryIndex() {
         return this.categoryIndex;
+    }
+
+    public boolean isSortReverse() {
+        return sortReverse.get();
+    }
+
+    public void setSortReverse(boolean reverse) {
+        sortReverse.set(reverse);
+        start();
     }
 
     public AppSort getCurrentAppSort() {

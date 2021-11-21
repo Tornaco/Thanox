@@ -56,6 +56,9 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
   private int flags;
   private int uid;
 
+  public long firstInstallTime;
+  public long lastUpdateTime;
+
   private boolean debuggable;
   private int minSdkVersion;
   private int targetSdkVersion;
@@ -93,6 +96,8 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
     dataDir = in.readString();
     flags = in.readInt();
     uid = in.readInt();
+    firstInstallTime = in.readLong();
+    lastUpdateTime = in.readLong();
     debuggable = in.readInt() == 1;
     minSdkVersion = in.readInt();
     targetSdkVersion = in.readInt();
@@ -130,6 +135,8 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
     dest.writeString(this.dataDir);
     dest.writeInt(this.flags);
     dest.writeInt(this.uid);
+    dest.writeLong(this.firstInstallTime);
+    dest.writeLong(this.lastUpdateTime);
     dest.writeInt(this.debuggable ? 1 : 0);
     dest.writeInt(this.minSdkVersion);
     dest.writeInt(this.targetSdkVersion);
@@ -209,6 +216,8 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
         "data dir",
         FLAGS_USER,
         Integer.MAX_VALUE,
+        System.currentTimeMillis(),
+        System.currentTimeMillis(),
         false,
         0,
         0,

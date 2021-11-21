@@ -158,6 +158,16 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
             MenuBuilder menuBuilder = new MenuBuilder(this);
             MenuPopupHelper menuPopupHelper = new MenuPopupHelper(this, menuBuilder, view);
             menuPopupHelper.setForceShowIcon(true);
+
+            int reverseItemId = 10086;
+            MenuItem reverseItem = menuBuilder.add(1000,
+                    reverseItemId,
+                    Menu.NONE,
+                    R.string.common_sort_reverse);
+            reverseItem.setCheckable(true);
+            reverseItem.setChecked(viewModel.isSortReverse());
+            reverseItem.setIcon(R.drawable.module_common_ic_arrow_up_down_line);
+
             for (int i = 0; i < appSortArray.length; i++) {
                 AppSort sort = appSortArray[i];
                 menuBuilder.add(
@@ -170,8 +180,13 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
                 @Override
                 public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
                     int index = item.getItemId();
-                    viewModel.setAppSort(appSortArray[index]);
-                    sorterAnchor.setText(appSortArray[index].labelRes);
+                    if (index == reverseItemId) {
+                        viewModel.setSortReverse(!viewModel.isSortReverse());
+                        item.setChecked(viewModel.isSortReverse());
+                    } else {
+                        viewModel.setAppSort(appSortArray[index]);
+                        sorterAnchor.setText(appSortArray[index].labelRes);
+                    }
                     return true;
                 }
 

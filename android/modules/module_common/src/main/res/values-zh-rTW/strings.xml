@@ -37,6 +37,7 @@
 
     <string name="common_text_wait_a_moment">稍等一会</string>
 
+    <string name="common_sort_reverse">逆转</string>
     <string name="common_sort_by_default">默认</string>
     <string name="common_sort_by_install_time">安装时间</string>
     <string name="common_sort_by_update_time">更新时间</string>

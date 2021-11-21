@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/common_view_margin_default"
-                android:textColor="@color/md_black"
+                android:textColor="?android:textColorPrimary"
                 app:chipBackgroundColor="?colorPrimaryContainer"
                 tools:text="@string/chip_title_app_only_cloned_app" />
 

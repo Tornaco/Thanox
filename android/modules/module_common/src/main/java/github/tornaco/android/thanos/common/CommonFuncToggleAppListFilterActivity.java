@@ -28,6 +28,7 @@ public abstract class CommonFuncToggleAppListFilterActivity extends BaseAppListF
             }
         });
         binding.swipe.setColorSchemeColors(getResources().getIntArray(R.array.common_swipe_refresh_colors));
+        viewModel.setSelectStateChangeListener(onCreateAppItemSelectStateChangeListener());
     }
 
     @NonNull

@@ -127,7 +127,7 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                         if (appSorterProvider != null) {
                             String appSortDescription = appSorterProvider.getAppSortDescription(getApplication(), model);
                             if (!TextUtils.isEmpty(appSortDescription)) {
-                                model.description = (model.description == null ? "" : model.description) + "\n" + appSortDescription;
+                                model.description = ((model.description == null ? "" : model.description) + "\n" + appSortDescription).trim();
                             }
                         }
                         listModels.add(model);

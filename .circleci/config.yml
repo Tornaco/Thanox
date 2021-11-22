@@ -34,7 +34,7 @@ jobs:
       - run: git submodule update --init --recursive --jobs 8
       - run: echo "Git submodule update complete"
       
-      - run: openssl enc -aes-256-cbc -d -K $KEY_STORE_K -iv $KEYSTORE_IV -in ${CIRCLE_WORKING_DIRECTORY}/android/environment/keys/android-key-enc -out ${CIRCLE_WORKING_DIRECTORY}/android/environment/keys/android.jks
+      - run: openssl enc -aes-256-cbc -d -K $KEY_STORE_K -iv $KEYSTORE_IV -in android/environment/keys/android-key-enc -out android/environment/keys/android.jks
 
       # And finally run the release build
       - run:

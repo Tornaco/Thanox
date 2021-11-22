@@ -1,5 +1,7 @@
 import tornaco.project.android.thanox.Compose
 import tornaco.project.android.thanox.Configs
+import tornaco.project.android.thanox.Configs.keyStoreAlias
+import tornaco.project.android.thanox.Configs.keyStorePassword
 import tornaco.project.android.thanox.Libs
 import tornaco.project.android.thanox.log
 
@@ -26,9 +28,9 @@ android {
         create("release") {
             Configs.KeyStorePath.also {
                 storeFile = rootProject.file(it)
-                storePassword = Configs.keyStorePassword()
-                keyAlias = Configs.keyStoreAlias()
-                keyPassword = Configs.keyStorePassword()
+                storePassword = keyStorePassword()
+                keyAlias = keyStoreAlias()
+                keyPassword = keyStorePassword()
             }
         }
     }

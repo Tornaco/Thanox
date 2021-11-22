@@ -46,12 +46,12 @@ object Configs {
         return if (v.isBlank()) null else v
     }
 
-    fun keyStoreAlias(): String {
-        return Configs["keyAlias"] ?: System.getProperty("KEYSTORE_ALIAS_NAME")
+    fun Project.keyStoreAlias(): String {
+        return Configs["keyAlias"] ?: this.property("keyAlias")?.toString() ?: ""
     }
 
-    fun keyStorePassword(): String {
-        return Configs["keyPassword"] ?: System.getProperty("KEYSTORE_PASS")
+    fun Project.keyStorePassword(): String {
+        return Configs["keyPassword"] ?: this.property("keyPassword")?.toString() ?: ""
     }
 }
 

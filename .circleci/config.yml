@@ -39,6 +39,7 @@ jobs:
       # And finally run the release build
       - run:
           name: Assemble release build
+          no_output_timeout: 30m
           command: |
             cd android && ./gradlew assemblePrcRelease -PkeyAlias=${KEYSTORE_ALIAS_NAME} -PkeyPassword=${KEYSTORE_PASS}   --stacktrace
 

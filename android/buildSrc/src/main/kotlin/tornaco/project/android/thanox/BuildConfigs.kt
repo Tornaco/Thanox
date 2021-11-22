@@ -12,7 +12,10 @@ object Configs {
     const val compileSdkVersion = 31
     const val minSdkVersion = 26
     const val targetSdkVersion = 31
-    const val buildToolsVersion = "31.0.0-rc5"
+    // We use this value to find some build tools binaries.
+    // consider to find the latest version more gracefully
+    // currently we set to 30.0.3 to test circle ci.
+    const val buildToolsVersion = "30.0.3"
     const val ndkVersion = "21.1.6352462"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
 

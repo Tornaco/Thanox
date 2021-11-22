@@ -177,7 +177,6 @@ object Libs {
         const val groupNitro = "github.tornaco.android.thanos.nitro"
         const val artifactNitro = "nitro_gradle_plugin"
 
-        const val rhinoAnnotations = "$groupRhino:$artifactRhinoAnnotations:$version"
         const val rhinoGradlePlugin = "$groupRhino:rhino_plugin_stub_gen:$version"
 
         const val nitroGradlePlugin = "$groupNitro:$artifactNitro:$version"

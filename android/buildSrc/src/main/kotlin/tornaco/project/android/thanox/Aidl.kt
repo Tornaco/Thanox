@@ -16,6 +16,7 @@ fun Project.addAidlTask() {
             val javaSrcDirs = project.the<SourceSetContainer>()["main"].java.srcDirs
             println("aidlTask, javaSrcDirs: $javaSrcDirs")
 
+            println("aidl executable file: ${aidl()}, is it exists? ${File(aidl()).exists()}")
 
             javaSrcDirs.forEach { srcDir ->
                 val tree = fileTree(srcDir)

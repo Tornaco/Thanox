@@ -60,7 +60,7 @@ dependencies {
     annotationProcessor(Libs.Others.lombok)
 
     api(Libs.Others.androidCommon)
-    api(Libs.ThanoxInternal.rhinoAnnotations)
+    api(project(":rhino:rhino_annotations"))
 
     implementation(project(":android_framework:base"))
     implementation(project(":third_party:recyclerview-fastscroll"))

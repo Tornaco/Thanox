@@ -32,12 +32,18 @@ java {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "ProjectRepo"
+            url = uri(layout.projectDirectory.dir("prebuilt-repo"))
+        }
+    }
+
     publications {
         create<MavenPublication>("Local") {
             groupId = ThanoxInternal.groupNitro
             artifactId = ThanoxInternal.artifactNitro
             version = ThanoxInternal.version
-
             from(components["java"])
         }
     }

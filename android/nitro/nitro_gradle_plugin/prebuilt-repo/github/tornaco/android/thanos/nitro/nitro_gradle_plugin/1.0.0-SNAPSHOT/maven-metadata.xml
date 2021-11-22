@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>github.tornaco.android.thanos.nitro</groupId>
+  <artifactId>nitro_gradle_plugin</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20211122.103211</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20211122103211</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.0.0-20211122.103211-1</value>
+        <updated>20211122103211</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>module</extension>
+        <value>1.0.0-20211122.103211-1</value>
+        <updated>20211122103211</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.0.0-20211122.103211-1</value>
+        <updated>20211122103211</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>

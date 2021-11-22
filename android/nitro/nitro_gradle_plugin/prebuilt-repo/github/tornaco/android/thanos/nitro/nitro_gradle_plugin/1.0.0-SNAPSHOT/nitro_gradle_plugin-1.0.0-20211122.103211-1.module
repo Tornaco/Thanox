@@ -1,0 +1,118 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "github.tornaco.android.thanos.nitro",
+    "module": "nitro_gradle_plugin",
+    "version": "1.0.0-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.0.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "nitro_gradle_plugin-1.0.0-SNAPSHOT.jar",
+          "url": "nitro_gradle_plugin-1.0.0-SNAPSHOT.jar",
+          "size": 82797,
+          "sha512": "99c51180b4a9608d4539f7d22a061cf6f5a4b29af45a27e52d538eb4d2ce51582fa82593b9fbedcc9ad4d2543cc1dc730874ded01a643a9cc89305b5bab23b58",
+          "sha256": "78ac34b1d72fd670b0b8958df16a64fd8898702ae554c5252b4e4a8546dd3a51",
+          "sha1": "26562e9a17c4f71a0638de60d5720ffc11ac0377",
+          "md5": "a84096c63489091b4f9a114872159aff"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools.build",
+          "module": "gradle-api",
+          "version": {
+            "requires": "7.0.1"
+          }
+        },
+        {
+          "group": "com.android.tools.build",
+          "module": "gradle",
+          "version": {
+            "requires": "7.0.1"
+          }
+        },
+        {
+          "group": "com.android.tools.build",
+          "module": "builder-model",
+          "version": {
+            "requires": "7.0.1"
+          }
+        },
+        {
+          "group": "com.android.tools",
+          "module": "common",
+          "version": {
+            "requires": "30.0.1"
+          }
+        },
+        {
+          "group": "commons-io",
+          "module": "commons-io",
+          "version": {
+            "requires": "2.6"
+          }
+        },
+        {
+          "group": "commons-codec",
+          "module": "commons-codec",
+          "version": {
+            "requires": "1.10"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "24.1-jre"
+          }
+        },
+        {
+          "group": "org.javassist",
+          "module": "javassist",
+          "version": {
+            "requires": "3.26.0-GA"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "nitro_gradle_plugin-1.0.0-SNAPSHOT.jar",
+          "url": "nitro_gradle_plugin-1.0.0-SNAPSHOT.jar",
+          "size": 82797,
+          "sha512": "99c51180b4a9608d4539f7d22a061cf6f5a4b29af45a27e52d538eb4d2ce51582fa82593b9fbedcc9ad4d2543cc1dc730874ded01a643a9cc89305b5bab23b58",
+          "sha256": "78ac34b1d72fd670b0b8958df16a64fd8898702ae554c5252b4e4a8546dd3a51",
+          "sha1": "26562e9a17c4f71a0638de60d5720ffc11ac0377",
+          "md5": "a84096c63489091b4f9a114872159aff"
+        }
+      ]
+    }
+  ]
+}

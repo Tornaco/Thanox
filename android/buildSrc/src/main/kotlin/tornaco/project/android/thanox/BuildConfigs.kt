@@ -12,7 +12,11 @@ object Configs {
     const val compileSdkVersion = 31
     const val minSdkVersion = 26
     const val targetSdkVersion = 31
-    const val buildToolsVersion = "31.0.0-rc5"
+
+    // We use this value to find some build tools binaries.
+    // consider to find the latest version more gracefully
+    // currently we set to 30.0.3 to test circle ci.
+    const val buildToolsVersion = "30.0.3"
     const val ndkVersion = "21.1.6352462"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -35,9 +39,19 @@ object Configs {
     val Project.outDir: File get() = rootProject.file("out")
     val Project.magiskModuleBuildDir get() = File("${outDir}/magisk_module")
 
+    const val KeyStorePath = "environment/keys/android.jks"
+
     operator fun get(key: String): String? {
         val v = props[key] as? String ?: return null
         return if (v.isBlank()) null else v
+    }
+
+    fun Project.keyStoreAlias(): String {
+        return Configs["keyAlias"] ?: this.property("keyAlias")?.toString() ?: ""
+    }
+
+    fun Project.keyStorePassword(): String {
+        return Configs["keyPassword"] ?: this.property("keyPassword")?.toString() ?: ""
     }
 }
 
@@ -77,7 +91,8 @@ object MagiskModConfigs {
 
     const val moduleName = "Thanox-Core"
     const val moduleAuthor = "Tornaco"
-    const val moduleDescription = """Magisk module that provides android framework and app hooks for Thanox, requires Riru $moduleMinRiruVersionName or above. Support Android11 & Android12."""
+    const val moduleDescription =
+        """Magisk module that provides android framework and app hooks for Thanox, requires Riru $moduleMinRiruVersionName or above. Support Android11 & Android12."""
     val moduleVersion = Configs.thanoxVersionName
     val moduleVersionCode = Configs.thanoxVersionCode
 }
@@ -88,8 +103,16 @@ class ThanoxProjectBuildPlugin : Plugin<Project> {
 
     private fun Project.applyPlugin() {
         props.clear()
-        rootProject.file("gradle.properties").inputStream().use { props.load(it) }
-        rootProject.file("local.properties").inputStream().use { props.load(it) }
+        rootProject.file("gradle.properties").let { propFile ->
+            if (propFile.exists()) {
+                propFile.inputStream().use { props.load(it) }
+            }
+        }
+        rootProject.file("local.properties").let { propFile ->
+            if (propFile.exists()) {
+                propFile.inputStream().use { props.load(it) }
+            }
+        }
 
         updateBuildConfigFields()
     }

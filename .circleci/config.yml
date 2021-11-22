@@ -24,21 +24,17 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - run: echo "Git checkout complete"
 
-      # The next step will run the unit tests
-      - android/run-tests:
-          test-command: ./gradlew lint testDebug --continue
-
-      # Then start the emulator and run the Instrumentation tests!
-      - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedDebugAndroidTest
-          system-image: system-images;android-25;google_apis;x86
+      - run: git submodule sync
+      - run: git submodule update --init
+      - run: echo "Git submodule update complete"
 
       # And finally run the release build
       - run:
           name: Assemble release build
           command: |
-            ./gradlew assembleRelease
+            ./gradlew assemblePrcRelease
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

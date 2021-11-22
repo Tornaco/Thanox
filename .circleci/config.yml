@@ -19,6 +19,8 @@ jobs:
     executor:
       name: android/android-machine
 
+    working_directory: ~/thanox_workspace
+
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
@@ -27,19 +29,19 @@ jobs:
       - run: echo "Git checkout complete"
 
       - run: git submodule sync
-      - run: git submodule update --init
+      - run: git submodule update --init --recursive --jobs 8
       - run: echo "Git submodule update complete"
 
       # And finally run the release build
       - run:
           name: Assemble release build
           command: |
-            ./gradlew assemblePrcRelease
+            cd android && ./gradlew assemblePrcRelease
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+  thanox-release: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test

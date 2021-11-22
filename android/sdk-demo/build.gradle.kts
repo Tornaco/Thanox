@@ -1,4 +1,3 @@
-import Build_gradle.*
 import tornaco.project.android.thanox.*
 
 plugins {
@@ -23,11 +22,11 @@ android {
 
     signingConfigs {
         create("release") {
-            Configs["keyStore"]?.also {
+            Configs.KeyStorePath.also {
                 storeFile = rootProject.file(it)
-                storePassword = Configs["storePassword"]
-                keyAlias = Configs["keyAlias"]
-                keyPassword = Configs["keyPassword"]
+                storePassword = Configs.keyStorePassword()
+                keyAlias = Configs.keyStoreAlias()
+                keyPassword = Configs.keyStorePassword()
             }
         }
     }

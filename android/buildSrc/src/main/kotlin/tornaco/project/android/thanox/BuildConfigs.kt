@@ -12,6 +12,7 @@ object Configs {
     const val compileSdkVersion = 31
     const val minSdkVersion = 26
     const val targetSdkVersion = 31
+
     // We use this value to find some build tools binaries.
     // consider to find the latest version more gracefully
     // currently we set to 30.0.3 to test circle ci.
@@ -38,9 +39,19 @@ object Configs {
     val Project.outDir: File get() = rootProject.file("out")
     val Project.magiskModuleBuildDir get() = File("${outDir}/magisk_module")
 
+    const val KeyStorePath = "environment/keys/android.jks"
+
     operator fun get(key: String): String? {
         val v = props[key] as? String ?: return null
         return if (v.isBlank()) null else v
+    }
+
+    fun keyStoreAlias(): String {
+        return Configs["keyAlias"] ?: System.getProperty("KEYSTORE_ALIAS_NAME")
+    }
+
+    fun keyStorePassword(): String {
+        return Configs["keyPassword"] ?: System.getProperty("KEYSTORE_PASS")
     }
 }
 

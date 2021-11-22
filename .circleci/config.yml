@@ -26,8 +26,7 @@ jobs:
     steps:
       - run: ls -l /opt/android/sdk/build-tools
 
-      - name: Decrypt android key store
-        run:  openssl enc -aes-256-cbc -d -K $KEY_STORE_K -iv $KEYSTORE_IV -in ${CIRCLE_WORKING_DIRECTORY}/android/environment/keys/android-key-enc -out ${CIRCLE_WORKING_DIRECTORY}/android/environment/keys/android.jks
+      - run:  openssl enc -aes-256-cbc -d -K $KEY_STORE_K -iv $KEYSTORE_IV -in ${CIRCLE_WORKING_DIRECTORY}/android/environment/keys/android-key-enc -out ${CIRCLE_WORKING_DIRECTORY}/android/environment/keys/android.jks
     
       # Checkout the code as the first step.
       - checkout

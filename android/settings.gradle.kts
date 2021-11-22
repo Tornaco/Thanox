@@ -23,6 +23,8 @@ include(":nitro:nitro_plugin")
 include(":nitro:nitro_gradle_plugin")
 include(":nitro:nitro_android_stub")
 
+include(":rhino:rhino_annotations")
+
 include(":annotation_processors:xposed_hook_annotation")
 include(":annotation_processors:xposed_hook_compiler")
 include(":annotation_processors:permission-requester-annotation")
@@ -81,12 +83,13 @@ val internalProjects = listOf(
     ":android_framework:patchx-29",
     ":android_framework:patchx-30",
     ":android_framework:patchx-31",
-    ":rhino:rhino_annotations",
 )
 
 internalProjects.forEach {
     println("internalProject: $it")
     include(it)
-    project(it).projectDir =
-        file("internal/Thanox-Internal${it.replace(":", File.separator)}")
+
+    val dir = file("internal/Thanox-Internal${it.replace(":", File.separator)}")
+    project(it).projectDir = dir
+
 }

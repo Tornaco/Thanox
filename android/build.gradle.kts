@@ -8,6 +8,11 @@ buildscript {
         google()
         mavenCentral()
         mavenLocal()
+
+        // Local repos
+        val nitroPluginRepo = file(rootProject.projectDir.path + "/nitro/nitro_gradle_plugin/prebuilt-repo")
+        println("nitroPluginRepo= $nitroPluginRepo")
+        maven(url = nitroPluginRepo)
     }
 
     dependencies {
@@ -42,6 +47,11 @@ subprojects {
         google()
         mavenCentral()
         mavenLocal()
+
+        // Local repos
+        val rhinoAnnotationRepo = file(rootProject.projectDir.path + "/internal/Thanox-Internal/rhino/rhino_annotations/prebuilt-repo")
+        println("rhinoPluginRepo= $rhinoAnnotationRepo")
+        maven(url = rhinoAnnotationRepo)
     }
 
     apply(plugin = "com.diffplug.spotless")

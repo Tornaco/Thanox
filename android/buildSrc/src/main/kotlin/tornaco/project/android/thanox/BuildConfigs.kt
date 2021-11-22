@@ -77,7 +77,8 @@ object MagiskModConfigs {
 
     const val moduleName = "Thanox-Core"
     const val moduleAuthor = "Tornaco"
-    const val moduleDescription = """Magisk module that provides android framework and app hooks for Thanox, requires Riru $moduleMinRiruVersionName or above. Support Android11 & Android12."""
+    const val moduleDescription =
+        """Magisk module that provides android framework and app hooks for Thanox, requires Riru $moduleMinRiruVersionName or above. Support Android11 & Android12."""
     val moduleVersion = Configs.thanoxVersionName
     val moduleVersionCode = Configs.thanoxVersionCode
 }
@@ -88,8 +89,16 @@ class ThanoxProjectBuildPlugin : Plugin<Project> {
 
     private fun Project.applyPlugin() {
         props.clear()
-        rootProject.file("gradle.properties").inputStream().use { props.load(it) }
-        rootProject.file("local.properties").inputStream().use { props.load(it) }
+        rootProject.file("gradle.properties").let { propFile ->
+            if (propFile.exists()) {
+                propFile.inputStream().use { props.load(it) }
+            }
+        }
+        rootProject.file("local.properties").let { propFile ->
+            if (propFile.exists()) {
+                propFile.inputStream().use { props.load(it) }
+            }
+        }
 
         updateBuildConfigFields()
     }

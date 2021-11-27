@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core;
 import github.tornaco.android.thanos.core.os.IServiceManager;
 import github.tornaco.android.thanos.core.pref.IPrefManager;
 import github.tornaco.android.thanos.core.app.event.IEventSubscriber;
+import github.tornaco.android.thanos.core.app.usage.IUsageStatsManager;
 import github.tornaco.android.thanos.core.app.IActivityManager;
 import github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor;
 import github.tornaco.android.thanos.core.pm.IPkgManager;
@@ -62,4 +63,6 @@ interface IThanos {
     String getPatchingSource();
 
     IRS getRS();
+
+    IUsageStatsManager getUsageStatsManager();
 }

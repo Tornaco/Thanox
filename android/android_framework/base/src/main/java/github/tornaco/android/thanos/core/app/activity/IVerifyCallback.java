@@ -18,6 +18,7 @@ public interface IVerifyCallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.activity.IVerifyCallback
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.activity.IVerifyCallback";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -52,9 +53,6 @@ public interface IVerifyCallback extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_onVerifyResult:
         {
           data.enforceInterface(descriptor);
@@ -96,11 +94,9 @@ public interface IVerifyCallback extends android.os.IInterface
           _data.writeInt(verifyResult);
           _data.writeInt(reason);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onVerifyResult, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onVerifyResult(verifyResult, reason);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onVerifyResult(verifyResult, reason);
+            return;
           }
           _reply.readException();
         }
@@ -129,6 +125,5 @@ public interface IVerifyCallback extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.activity.IVerifyCallback";
   public void onVerifyResult(int verifyResult, int reason) throws android.os.RemoteException;
 }

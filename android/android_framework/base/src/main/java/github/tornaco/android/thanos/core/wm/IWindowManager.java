@@ -19,6 +19,7 @@ public interface IWindowManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.wm.IWindowManager
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.wm.IWindowManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -53,9 +54,6 @@ public interface IWindowManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_getScreenSize:
         {
           data.enforceInterface(descriptor);
@@ -93,10 +91,8 @@ public interface IWindowManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getScreenSize, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getScreenSize();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getScreenSize();
           }
           _reply.readException();
           _result = _reply.createIntArray();
@@ -127,6 +123,5 @@ public interface IWindowManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.wm.IWindowManager";
   public int[] getScreenSize() throws android.os.RemoteException;
 }

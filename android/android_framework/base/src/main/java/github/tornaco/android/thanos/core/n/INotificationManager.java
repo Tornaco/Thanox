@@ -75,6 +75,7 @@ public interface INotificationManager extends android.os.IInterface
     {
     }
     // For searching.
+
     @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, java.lang.String keyword) throws android.os.RemoteException
     {
       return null;
@@ -87,6 +88,7 @@ public interface INotificationManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.n.INotificationManager
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.n.INotificationManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -121,9 +123,6 @@ public interface INotificationManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_getShowingNotificationRecordsForPackage:
         {
           data.enforceInterface(descriptor);
@@ -350,10 +349,8 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getShowingNotificationRecordsForPackage, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getShowingNotificationRecordsForPackage(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getShowingNotificationRecordsForPackage(packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.n.NotificationRecord.CREATOR);
@@ -373,10 +370,8 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasShowingNotificationRecordsForPackage, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().hasShowingNotificationRecordsForPackage(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().hasShowingNotificationRecordsForPackage(packageName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -395,11 +390,9 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((obs!=null))?(obs.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerObserver, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().registerObserver(obs);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().registerObserver(obs);
+            return;
           }
           _reply.readException();
         }
@@ -416,11 +409,9 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((obs!=null))?(obs.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterObserver, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().unRegisterObserver(obs);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().unRegisterObserver(obs);
+            return;
           }
           _reply.readException();
         }
@@ -437,11 +428,9 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setScreenOnNotificationEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setScreenOnNotificationEnabled(enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setScreenOnNotificationEnabled(enable);
+            return;
           }
           _reply.readException();
         }
@@ -458,10 +447,8 @@ public interface INotificationManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isScreenOnNotificationEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isScreenOnNotificationEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isScreenOnNotificationEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -481,11 +468,9 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setScreenOnNotificationEnabledForPkg, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setScreenOnNotificationEnabledForPkg(pkg, enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setScreenOnNotificationEnabledForPkg(pkg, enable);
+            return;
           }
           _reply.readException();
         }
@@ -503,10 +488,8 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isScreenOnNotificationEnabledForPkg, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isScreenOnNotificationEnabledForPkg(pkg);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isScreenOnNotificationEnabledForPkg(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -525,10 +508,8 @@ public interface INotificationManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_nextNotificationId, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().nextNotificationId();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().nextNotificationId();
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -547,11 +528,9 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPersistOnNewNotificationEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setPersistOnNewNotificationEnabled(enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPersistOnNewNotificationEnabled(enable);
+            return;
           }
           _reply.readException();
         }
@@ -568,10 +547,8 @@ public interface INotificationManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPersistOnNewNotificationEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isPersistOnNewNotificationEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPersistOnNewNotificationEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -589,11 +566,9 @@ public interface INotificationManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_cleanUpPersistNotificationRecords, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().cleanUpPersistNotificationRecords();
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().cleanUpPersistNotificationRecords();
+            return;
           }
           _reply.readException();
         }
@@ -612,10 +587,8 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInt(start);
           _data.writeInt(limit);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllNotificationRecordsByPage, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getAllNotificationRecordsByPage(start, limit);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllNotificationRecordsByPage(start, limit);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.n.NotificationRecord.CREATOR);
@@ -635,10 +608,8 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getNotificationRecordsForPackage, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getNotificationRecordsForPackage(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getNotificationRecordsForPackage(packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.n.NotificationRecord.CREATOR);
@@ -663,11 +634,9 @@ public interface INotificationManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onAddNotificationRecord, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onAddNotificationRecord(record);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onAddNotificationRecord(record);
+            return;
           }
           _reply.readException();
         }
@@ -684,11 +653,9 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setShowToastAppInfoEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setShowToastAppInfoEnabled(enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setShowToastAppInfoEnabled(enabled);
+            return;
           }
           _reply.readException();
         }
@@ -705,10 +672,8 @@ public interface INotificationManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isShowToastAppInfoEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isShowToastAppInfoEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isShowToastAppInfoEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -728,10 +693,8 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(type);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isNREnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isNREnabled(type);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isNREnabled(type);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -751,11 +714,9 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInt(type);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setNREnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setNREnabled(type, enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setNREnabled(type, enabled);
+            return;
           }
           _reply.readException();
         }
@@ -765,6 +726,7 @@ public interface INotificationManager extends android.os.IInterface
         }
       }
       // For searching.
+
       @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, java.lang.String keyword) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -776,10 +738,8 @@ public interface INotificationManager extends android.os.IInterface
           _data.writeInt(limit);
           _data.writeString(keyword);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllNotificationRecordsByPageAndKeyword, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getAllNotificationRecordsByPageAndKeyword(start, limit, keyword);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllNotificationRecordsByPageAndKeyword(start, limit, keyword);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.n.NotificationRecord.CREATOR);
@@ -829,7 +789,6 @@ public interface INotificationManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.n.INotificationManager";
   public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getShowingNotificationRecordsForPackage(java.lang.String packageName) throws android.os.RemoteException;
   public boolean hasShowingNotificationRecordsForPackage(java.lang.String packageName) throws android.os.RemoteException;
   public void registerObserver(github.tornaco.android.thanos.core.n.INotificationObserver obs) throws android.os.RemoteException;
@@ -850,5 +809,6 @@ public interface INotificationManager extends android.os.IInterface
   public boolean isNREnabled(int type) throws android.os.RemoteException;
   public void setNREnabled(int type, boolean enabled) throws android.os.RemoteException;
   // For searching.
+
   public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, java.lang.String keyword) throws android.os.RemoteException;
 }

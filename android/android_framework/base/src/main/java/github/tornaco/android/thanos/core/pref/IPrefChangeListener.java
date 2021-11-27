@@ -18,6 +18,7 @@ public interface IPrefChangeListener extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.pref.IPrefChangeListener
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pref.IPrefChangeListener";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -52,9 +53,6 @@ public interface IPrefChangeListener extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_onPrefChanged:
         {
           data.enforceInterface(descriptor);
@@ -93,11 +91,9 @@ public interface IPrefChangeListener extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(key);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onPrefChanged, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onPrefChanged(key);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onPrefChanged(key);
+            return;
           }
           _reply.readException();
         }
@@ -126,6 +122,5 @@ public interface IPrefChangeListener extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pref.IPrefChangeListener";
   public void onPrefChanged(java.lang.String key) throws android.os.RemoteException;
 }

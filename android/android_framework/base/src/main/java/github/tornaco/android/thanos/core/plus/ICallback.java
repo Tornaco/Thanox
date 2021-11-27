@@ -18,6 +18,7 @@ public interface ICallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.plus.ICallback
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.plus.ICallback";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -52,9 +53,6 @@ public interface ICallback extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_onRes:
         {
           data.enforceInterface(descriptor);
@@ -102,11 +100,9 @@ public interface ICallback extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onRes, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onRes(res);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onRes(res);
+            return;
           }
         }
         finally {
@@ -133,6 +129,5 @@ public interface ICallback extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.plus.ICallback";
   public void onRes(github.tornaco.android.thanos.core.plus.RR res) throws android.os.RemoteException;
 }

@@ -9,6 +9,7 @@ import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.app.event.IEventSubscriber;
 import github.tornaco.android.thanos.core.app.infinite.InfiniteZManager;
+import github.tornaco.android.thanos.core.app.usage.UsageStatsManager;
 import github.tornaco.android.thanos.core.backup.BackupAgent;
 import github.tornaco.android.thanos.core.input.InputManager;
 import github.tornaco.android.thanos.core.n.NotificationManager;
@@ -131,6 +132,11 @@ public class ThanosManager {
     @SneakyThrows
     public RSManager getRSManager() {
         return new RSManager(service.getRS());
+    }
+
+    @SneakyThrows
+    public UsageStatsManager getUsageStatsManager() {
+        return new UsageStatsManager(service.getUsageStatsManager());
     }
 
     @SneakyThrows

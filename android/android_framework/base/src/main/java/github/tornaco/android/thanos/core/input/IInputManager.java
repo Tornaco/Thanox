@@ -26,6 +26,7 @@ public interface IInputManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.input.IInputManager
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.input.IInputManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -60,9 +61,6 @@ public interface IInputManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_injectKey:
         {
           data.enforceInterface(descriptor);
@@ -127,10 +125,8 @@ public interface IInputManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(keyCode);
           boolean _status = mRemote.transact(Stub.TRANSACTION_injectKey, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().injectKey(keyCode);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().injectKey(keyCode);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -149,10 +145,8 @@ public interface IInputManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getLastKey, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getLastKey();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getLastKey();
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -178,11 +172,9 @@ public interface IInputManager extends android.os.IInterface
           }
           _data.writeString(source);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onKeyEvent, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onKeyEvent(keyEvent, source);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onKeyEvent(keyEvent, source);
+            return;
           }
           _reply.readException();
         }
@@ -213,7 +205,6 @@ public interface IInputManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.input.IInputManager";
   public boolean injectKey(int keyCode) throws android.os.RemoteException;
   public int getLastKey() throws android.os.RemoteException;
   public void onKeyEvent(android.view.KeyEvent keyEvent, java.lang.String source) throws android.os.RemoteException;

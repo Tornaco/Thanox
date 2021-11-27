@@ -16,6 +16,7 @@ public interface IPkgManager extends android.os.IInterface
       return 0;
     }
     // ApplicationInfo
+
     @Override public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgs(int flags) throws android.os.RemoteException
     {
       return null;
@@ -251,6 +252,7 @@ public interface IPkgManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.pm.IPkgManager
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pm.IPkgManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -285,9 +287,6 @@ public interface IPkgManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_getPkgNameForUid:
         {
           data.enforceInterface(descriptor);
@@ -998,10 +997,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(uid);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPkgNameForUid, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getPkgNameForUid(uid);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPkgNameForUid(uid);
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -1021,10 +1018,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getUidForPkgName, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getUidForPkgName(pkgName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getUidForPkgName(pkgName);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -1036,6 +1031,7 @@ public interface IPkgManager extends android.os.IInterface
         return _result;
       }
       // ApplicationInfo
+
       @Override public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgs(int flags) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -1045,10 +1041,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(flags);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInstalledPkgs, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getInstalledPkgs(flags);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getInstalledPkgs(flags);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.AppInfo.CREATOR);
@@ -1068,10 +1062,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAppInfo, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getAppInfo(pkgName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAppInfo(pkgName);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -1095,10 +1087,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getWhiteListPkgs, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getWhiteListPkgs();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getWhiteListPkgs();
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -1118,10 +1108,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgInWhiteList, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isPkgInWhiteList(pkg);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPkgInWhiteList(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1148,11 +1136,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(newState);
           _data.writeInt(flags);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setComponentEnabledSetting, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setComponentEnabledSetting(componentName, newState, flags);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setComponentEnabledSetting(componentName, newState, flags);
+            return;
           }
           _reply.readException();
         }
@@ -1176,10 +1162,8 @@ public interface IPkgManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getComponentEnabledSetting, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getComponentEnabledSetting(componentName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getComponentEnabledSetting(componentName);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -1205,10 +1189,8 @@ public interface IPkgManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isComponentDisabledByThanox, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isComponentDisabledByThanox(componentName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isComponentDisabledByThanox(componentName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1228,10 +1210,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getApplicationEnableState, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getApplicationEnableState(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getApplicationEnableState(packageName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1252,11 +1232,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(((enable)?(1):(0)));
           _data.writeInt(((tmp)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setApplicationEnableState, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setApplicationEnableState(packageName, enable, tmp);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setApplicationEnableState(packageName, enable, tmp);
+            return;
           }
           _reply.readException();
         }
@@ -1274,10 +1252,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivities, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getActivities(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getActivities(packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArray(android.content.pm.ActivityInfo.CREATOR);
@@ -1297,10 +1273,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivitiesCount, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getActivitiesCount(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getActivitiesCount(packageName);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -1322,10 +1296,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(itemCountInEachBatch);
           _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivitiesInBatch, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getActivitiesInBatch(packageName, itemCountInEachBatch, batchIndex);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getActivitiesInBatch(packageName, itemCountInEachBatch, batchIndex);
           }
           _reply.readException();
           _result = _reply.createTypedArray(android.content.pm.ActivityInfo.CREATOR);
@@ -1345,10 +1317,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getReceivers, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getReceivers(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getReceivers(packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArray(android.content.pm.ActivityInfo.CREATOR);
@@ -1368,10 +1338,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getReceiverCount, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getReceiverCount(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getReceiverCount(packageName);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -1393,10 +1361,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(itemCountInEachBatch);
           _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getReceiversInBatch, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getReceiversInBatch(packageName, itemCountInEachBatch, batchIndex);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getReceiversInBatch(packageName, itemCountInEachBatch, batchIndex);
           }
           _reply.readException();
           _result = _reply.createTypedArray(android.content.pm.ActivityInfo.CREATOR);
@@ -1416,10 +1382,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServices, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getServices(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getServices(packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArray(android.content.pm.ServiceInfo.CREATOR);
@@ -1439,10 +1403,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServiceCount, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getServiceCount(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getServiceCount(packageName);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -1464,10 +1426,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(itemCountInEachBatch);
           _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServicesInBatch, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getServicesInBatch(packageName, itemCountInEachBatch, batchIndex);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getServicesInBatch(packageName, itemCountInEachBatch, batchIndex);
           }
           _reply.readException();
           _result = _reply.createTypedArray(android.content.pm.ServiceInfo.CREATOR);
@@ -1486,11 +1446,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartFreezeEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setSmartFreezeEnabled(enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartFreezeEnabled(enable);
+            return;
           }
           _reply.readException();
         }
@@ -1507,10 +1465,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartFreezeEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isSmartFreezeEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSmartFreezeEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1530,11 +1486,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgSmartFreezeEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setPkgSmartFreezeEnabled(pkgName, enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPkgSmartFreezeEnabled(pkgName, enable);
+            return;
           }
           _reply.readException();
         }
@@ -1552,10 +1506,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgSmartFreezeEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isPkgSmartFreezeEnabled(pkgName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPkgSmartFreezeEnabled(pkgName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1574,10 +1526,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSmartFreezePkgs, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getSmartFreezePkgs();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSmartFreezePkgs();
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -1596,11 +1546,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkg, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().launchSmartFreezePkg(pkgName);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().launchSmartFreezePkg(pkgName);
+            return;
           }
           _reply.readException();
         }
@@ -1617,11 +1565,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartFreezeScreenOffCheckEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setSmartFreezeScreenOffCheckEnabled(enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartFreezeScreenOffCheckEnabled(enable);
+            return;
           }
           _reply.readException();
         }
@@ -1638,10 +1584,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartFreezeScreenOffCheckEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isSmartFreezeScreenOffCheckEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSmartFreezeScreenOffCheckEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1660,11 +1604,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeLong(delay);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartFreezeScreenOffCheckDelay, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setSmartFreezeScreenOffCheckDelay(delay);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartFreezeScreenOffCheckDelay(delay);
+            return;
           }
           _reply.readException();
         }
@@ -1681,10 +1623,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSmartFreezeScreenOffCheckDelay, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getSmartFreezeScreenOffCheckDelay();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSmartFreezeScreenOffCheckDelay();
           }
           _reply.readException();
           _result = _reply.readLong();
@@ -1704,10 +1644,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_queryLaunchIntentForPackage, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().queryLaunchIntentForPackage(pkgName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().queryLaunchIntentForPackage(pkgName);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -1732,10 +1670,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((removeFromSmartFreezeList)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_enableAllThanoxDisabledPackages, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().enableAllThanoxDisabledPackages(removeFromSmartFreezeList);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().enableAllThanoxDisabledPackages(removeFromSmartFreezeList);
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -1754,10 +1690,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_deviceHasGms, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().deviceHasGms();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().deviceHasGms();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1776,10 +1710,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_verifyBillingState, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().verifyBillingState();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().verifyBillingState();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1799,11 +1731,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeString(origin);
           boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkgThenKillOrigin, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().launchSmartFreezePkgThenKillOrigin(pkgName, origin);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().launchSmartFreezePkgThenKillOrigin(pkgName, origin);
+            return;
           }
           _reply.readException();
         }
@@ -1820,10 +1750,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isProtectedWhitelistEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isProtectedWhitelistEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isProtectedWhitelistEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1842,11 +1770,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setProtectedWhitelistEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setProtectedWhitelistEnabled(enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setProtectedWhitelistEnabled(enable);
+            return;
           }
           _reply.readException();
         }
@@ -1870,11 +1796,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pluginPackageName);
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_addPlugin, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().addPlugin(pfd, pluginPackageName, callback);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().addPlugin(pfd, pluginPackageName, callback);
+            return;
           }
         }
         finally {
@@ -1889,11 +1813,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pluginPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_removePlugin, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().removePlugin(pluginPackageName);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().removePlugin(pluginPackageName);
+            return;
           }
           _reply.readException();
         }
@@ -1911,10 +1833,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pluginPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasPlugin, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().hasPlugin(pluginPackageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().hasPlugin(pluginPackageName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1933,10 +1853,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartFreezeHidePackageEventEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isSmartFreezeHidePackageEventEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSmartFreezeHidePackageEventEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1955,11 +1873,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartFreezeHidePackageEventEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setSmartFreezeHidePackageEventEnabled(enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartFreezeHidePackageEventEnabled(enabled);
+            return;
           }
           _reply.readException();
         }
@@ -1976,11 +1892,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_dump, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().dump(p);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().dump(p);
+            return;
           }
           _reply.readException();
         }
@@ -1998,11 +1912,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPackageBlockUninstallEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setPackageBlockUninstallEnabled(pkgName, enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPackageBlockUninstallEnabled(pkgName, enable);
+            return;
           }
           _reply.readException();
         }
@@ -2020,10 +1932,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageBlockUninstallEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isPackageBlockUninstallEnabled(pkgName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPackageBlockUninstallEnabled(pkgName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2043,11 +1953,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPackageBlockClearDataEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setPackageBlockClearDataEnabled(pkgName, enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPackageBlockClearDataEnabled(pkgName, enable);
+            return;
           }
           _reply.readException();
         }
@@ -2065,10 +1973,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageBlockClearDataEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isPackageBlockClearDataEnabled(pkgName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPackageBlockClearDataEnabled(pkgName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2088,10 +1994,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(appFlags);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInstalledPackagesCount, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getInstalledPackagesCount(appFlags);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getInstalledPackagesCount(appFlags);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -2111,10 +2015,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(label);
           boolean _status = mRemote.transact(Stub.TRANSACTION_createPackageSet, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().createPackageSet(label);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().createPackageSet(label);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -2139,10 +2041,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_removePackageSet, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().removePackageSet(id);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().removePackageSet(id);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2163,10 +2063,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(id);
           _data.writeInt(((withPackages)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetById, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getPackageSetById(id, withPackages);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPackageSetById(id, withPackages);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -2191,10 +2089,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((withPackages)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllPackageSets, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getAllPackageSets(withPackages);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllPackageSets(withPackages);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.PackageSet.CREATOR);
@@ -2213,10 +2109,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllPackageSetIds, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getAllPackageSetIds();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllPackageSetIds();
           }
           _reply.readException();
           _result = _reply.createStringArrayList();
@@ -2236,11 +2130,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addToPackageSet, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().addToPackageSet(pkg, id);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().addToPackageSet(pkg, id);
+            return;
           }
           _reply.readException();
         }
@@ -2258,11 +2150,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_removeFromPackageSet, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().removeFromPackageSet(pkg, id);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().removeFromPackageSet(pkg, id);
+            return;
           }
           _reply.readException();
         }
@@ -2280,10 +2170,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetThatContainsPkg, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getPackageSetThatContainsPkg(pkg);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPackageSetThatContainsPkg(pkg);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.PackageSet.CREATOR);
@@ -2303,10 +2191,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetLabelsThatContainsPkg, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getPackageSetLabelsThatContainsPkg(pkg);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPackageSetLabelsThatContainsPkg(pkg);
           }
           _reply.readException();
           _result = _reply.createStringArrayList();
@@ -2325,11 +2211,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setFreezePkgWithSuspendEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setFreezePkgWithSuspendEnabled(enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setFreezePkgWithSuspendEnabled(enable);
+            return;
           }
           _reply.readException();
         }
@@ -2346,10 +2230,8 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isFreezePkgWithSuspendEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isFreezePkgWithSuspendEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isFreezePkgWithSuspendEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2369,10 +2251,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgSetId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInstalledPkgsByPackageSetId, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getInstalledPkgsByPackageSetId(pkgSetId);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getInstalledPkgsByPackageSetId(pkgSetId);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.AppInfo.CREATOR);
@@ -2391,11 +2271,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerPackageSetChangeListener, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().registerPackageSetChangeListener(listener);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().registerPackageSetChangeListener(listener);
+            return;
           }
           _reply.readException();
         }
@@ -2412,11 +2290,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterPackageSetChangeListener, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().unRegisterPackageSetChangeListener(listener);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().unRegisterPackageSetChangeListener(listener);
+            return;
           }
           _reply.readException();
         }
@@ -2434,11 +2310,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setEnablePackageOnLaunchRequestEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setEnablePackageOnLaunchRequestEnabled(pkg, enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setEnablePackageOnLaunchRequestEnabled(pkg, enable);
+            return;
           }
           _reply.readException();
         }
@@ -2456,10 +2330,8 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isEnablePackageOnLaunchRequestEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isEnablePackageOnLaunchRequestEnabled(pkg);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isEnablePackageOnLaunchRequestEnabled(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2553,10 +2425,10 @@ public interface IPkgManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pm.IPkgManager";
   public java.lang.String[] getPkgNameForUid(int uid) throws android.os.RemoteException;
   public int getUidForPkgName(java.lang.String pkgName) throws android.os.RemoteException;
   // ApplicationInfo
+
   public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgs(int flags) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.pm.AppInfo getAppInfo(java.lang.String pkgName) throws android.os.RemoteException;
   public java.lang.String[] getWhiteListPkgs() throws android.os.RemoteException;

@@ -87,7 +87,7 @@ public class PrebuiltFeatureFragment extends NavFragment
 
     @SuppressWarnings("ConstantConditions")
     private void setupViewModel() {
-        navViewModel = obtainViewModel(getActivity());
+        navViewModel = obtainViewModel(requireActivity());
         prebuiltFeaturesBinding.setViewmodel(navViewModel);
         prebuiltFeaturesBinding.executePendingBindings();
     }
@@ -100,81 +100,62 @@ public class PrebuiltFeatureFragment extends NavFragment
 
     @Override
     public void onClick(@NonNull Tile tile) {
-        switch (tile.getId()) {
-            case R.id.id_one_key_clear:
-                if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                    Toast.makeText(
-                            requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                            .show();
-                    return;
-                }
-                navViewModel.cleanUpBackgroundTasks();
-                // Delay 1.5s to refresh
-                uiHandler.postDelayed(() -> navViewModel.start(), 1500);
-                break;
-            case R.id.id_background_start:
-                StartRestrictActivity.start(getActivity());
-                break;
-            case R.id.id_background_restrict:
-                BackgroundRestrictActivity.start(getActivity());
-                break;
-            case R.id.id_clean_task_removal:
-                CleanUpOnTaskRemovedActivity.start(getActivity());
-                break;
-            case R.id.id_apps_manager:
-                SuggestedAppsActivity.start(getActivity());
-                break;
-            case R.id.id_screen_on_notification:
-                ScreenOnNotificationActivity.start(getActivity());
-                break;
-            case R.id.id_notification_recorder:
-                NotificationRecordListActivity.start(getActivity());
-                break;
-            case R.id.id_trampoline:
-                ActivityTrampolineActivity.start(getActivity());
-                break;
-            case R.id.id_profile:
-                RuleListActivity.start(getActivity());
-                break;
-            case R.id.id_smart_standby:
-                if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                    Toast.makeText(
-                            getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                            .show();
-                    break;
-                }
-                SmartStandbyV2Activity.start(getActivity());
-                break;
-            case R.id.id_smart_freeze:
-                SmartFreezeActivity.start(getActivity());
-                break;
-            case R.id.id_privacy_cheat:
-                DataCheatActivity.start(getActivity());
-                break;
-            case R.id.id_ops_by_ops:
-                AllOpsListActivity.start(getActivity());
-                break;
-            case R.id.id_task_blur:
-                RecentTaskBlurListActivity.start(getActivity());
-                break;
-            case R.id.id_op_remind:
-                RemindOpsActivity.start(getActivity());
-                break;
-            case R.id.id_app_lock:
-                if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                    Toast.makeText(
-                            requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                            .show();
-                    return;
-                }
-                LockerStartActivity.start(getActivity());
-                break;
-            case R.id.id_infinite_z:
-                InfiniteZActivity.start(getActivity());
-                break;
-            case R.id.id_plugins:
-                PluginListActivity.start(getActivity());
-                break;
+        if (tile.getId() == R.id.id_one_key_clear) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                Toast.makeText(
+                        requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+            navViewModel.cleanUpBackgroundTasks();
+            // Delay 1.5s to refresh
+            uiHandler.postDelayed(() -> navViewModel.start(), 1500);
+        } else if (tile.getId() == R.id.id_background_start) {
+            StartRestrictActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_background_restrict) {
+            BackgroundRestrictActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_clean_task_removal) {
+            CleanUpOnTaskRemovedActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_apps_manager) {
+            SuggestedAppsActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_screen_on_notification) {
+            ScreenOnNotificationActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_notification_recorder) {
+            NotificationRecordListActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_trampoline) {
+            ActivityTrampolineActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_profile) {
+            RuleListActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_smart_standby) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
+                Toast.makeText(
+                        requireActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+            SmartStandbyV2Activity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_smart_freeze) {
+            SmartFreezeActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_privacy_cheat) {
+            DataCheatActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_ops_by_ops) {
+            AllOpsListActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_task_blur) {
+            RecentTaskBlurListActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_op_remind) {
+            RemindOpsActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_app_lock) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                Toast.makeText(
+                        requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+            LockerStartActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_infinite_z) {
+            InfiniteZActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_plugins) {
+            PluginListActivity.start(requireActivity());
         }
     }
 
@@ -186,18 +167,18 @@ public class PrebuiltFeatureFragment extends NavFragment
     }
 
     private void showOneKeyBoostPopMenu(@NonNull View view) {
-        PopupMenu popupMenu = new PopupMenu(Objects.requireNonNull(getActivity()), view);
+        PopupMenu popupMenu = new PopupMenu(Objects.requireNonNull(requireActivity()), view);
         popupMenu.inflate(R.menu.one_key_boost_pop_menu);
         popupMenu.setOnMenuItemClickListener(
                 new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getItemId() == R.id.create_shortcut) {
-                            OneKeyBoostShortcutActivity.ShortcutHelper.addShortcut(getActivity());
+                            OneKeyBoostShortcutActivity.ShortcutHelper.addShortcut(requireActivity());
                             return true;
                         }
                         if (item.getItemId() == R.id.broadcast_intent_shortcut) {
-                            new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()))
+                            new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
                                     .setTitle(getString(R.string.menu_title_broadcast_intent_shortcut))
                                     .setMessage(T.Actions.ACTION_RUNNING_PROCESS_CLEAR)
                                     .setPositiveButton(
@@ -210,7 +191,7 @@ public class PrebuiltFeatureFragment extends NavFragment
                                                             "one-ley-boost-intent",
                                                             T.Actions.ACTION_RUNNING_PROCESS_CLEAR);
                                                     Toast.makeText(
-                                                            getActivity(),
+                                                            requireActivity(),
                                                             R.string.common_toast_copied_to_clipboard,
                                                             Toast.LENGTH_SHORT)
                                                             .show();
@@ -228,11 +209,11 @@ public class PrebuiltFeatureFragment extends NavFragment
 
     @Override
     public void onClick() {
-        if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-            Toast.makeText(getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
+        if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
+            Toast.makeText(requireActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
                     .show();
             return;
         }
-        ProcessManageActivity.start(getActivity());
+        ProcessManageActivity.start(requireActivity());
     }
 }

@@ -57,7 +57,9 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
     private final ObservableField<String> queryText = new ObservableField<>("");
     private final AppLabelSearchFilter appLabelSearchFilter = new AppLabelSearchFilter();
 
-    private ListModelLoader listModelLoader;
+    private final List<AppListModel> cachedFullAppList = new ArrayList<>();
+
+    private ListModelLoader appListLoader;
 
     private String featureId;
 
@@ -67,7 +69,7 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
     }
 
     public void start() {
-        loadModels();
+        loadModels(false);
     }
 
     public void bindFeatureId(String featureId) {
@@ -84,14 +86,28 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
         }
     }
 
-    private void loadModels() {
-        if (isDataLoading.get()) return;
+    private List<AppListModel> requestLoadOrCachedAppList(boolean preferCache) {
+        if (!preferCache) {
+            List<AppListModel> latestAppList = appListLoader.load(Objects.requireNonNull(categoryIndex.get()));
+            cachedFullAppList.clear();
+            cachedFullAppList.addAll(latestAppList);
+            return latestAppList;
+        }
+        // Check if cache exists.
+        if (cachedFullAppList.isEmpty()) {
+            cachedFullAppList.addAll(appListLoader.load(Objects.requireNonNull(categoryIndex.get())));
+        }
+        return cachedFullAppList;
+    }
+
+    private void loadModels(boolean preferCache) {
+        XLog.v("loadModels, preferCache: %s", preferCache);
         isDataLoading.set(true);
         disposables.add(Single
                 .create(new SingleOnSubscribe<List<AppListModel>>() {
                     @Override
                     public void subscribe(SingleEmitter<List<AppListModel>> emitter) throws Exception {
-                        List<AppListModel> res = Objects.requireNonNull(listModelLoader.load(Objects.requireNonNull(categoryIndex.get())));
+                        List<AppListModel> res = requestLoadOrCachedAppList(preferCache);
                         AppSort.AppSorterProvider appSorterProvider = Objects.requireNonNull(currentSort.get()).provider;
                         if (appSorterProvider != null) {
                             res.sort(appSorterProvider.comparator(getApplication()));
@@ -119,6 +135,13 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                         listModels.clear();
                     }
                 })
+                .doOnDispose(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        XLog.d("loadModels on dispose");
+                        isDataLoading.set(false);
+                    }
+                })
                 .subscribe(new Consumer<AppListModel>() {
                     @Override
                     public void accept(AppListModel model) throws Exception {
@@ -136,10 +159,12 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         XLog.e(Log.getStackTraceString(throwable));
+                        isDataLoading.set(false);
                     }
                 }, new Action() {
                     @Override
                     public void run() throws Exception {
+                        XLog.d("loadModels on complete");
                         isDataLoading.set(false);
                     }
                 }));
@@ -193,14 +218,13 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
     }
 
     void clearSearchText() {
-        queryText.set(null);
-        loadModels();
+        setSearchText(null);
     }
 
     void setSearchText(String query) {
-        if (TextUtils.isEmpty(query)) return;
         queryText.set(query);
-        loadModels();
+        disposables.clear();
+        loadModels(true);
     }
 
     public ObservableBoolean getIsDataLoading() {
@@ -233,8 +257,8 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
         start();
     }
 
-    public void setListModelLoader(ListModelLoader listModelLoader) {
-        this.listModelLoader = listModelLoader;
+    public void setAppListLoader(ListModelLoader appListLoader) {
+        this.appListLoader = appListLoader;
     }
 
     public interface ListModelLoader {

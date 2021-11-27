@@ -124,7 +124,7 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
     }
 
     private void setupViewModel() {
-        viewModel.setListModelLoader(onCreateListModelLoader());
+        viewModel.setAppListLoader(onCreateListModelLoader());
         viewModel.start();
 
         binding.setViewModel(viewModel);

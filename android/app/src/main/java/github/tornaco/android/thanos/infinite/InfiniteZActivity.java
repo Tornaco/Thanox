@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,13 +19,13 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import github.tornaco.android.rhino.plugin.Verify;
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.infinite.AddPackageCallback;
@@ -37,6 +36,7 @@ import github.tornaco.android.thanos.databinding.ActivityIniniteZAppsBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import util.CollectionUtils;
 
@@ -163,22 +163,22 @@ public class InfiniteZActivity extends ThemeActivity {
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {
         switchBar.setChecked(ThanosManager.from(thisActivity()).getInfiniteZ().isEnabled());
-        switchBar.addOnSwitchChangeListener(new SwitchBar.OnSwitchChangeListener() {
-            @Override
-            public void onSwitchChanged(SwitchMaterial switchView, boolean isChecked) {
-                ThanosManager.from(getApplicationContext()).getInfiniteZ()
-                        .setEnabled(isChecked, new EnableCallback() {
-                            @Override
-                            public void onSuccessMain(int userId) {
+        switchBar.addOnSwitchChangeListener((switchView, isChecked) -> {
+            ModernProgressDialog p = new ModernProgressDialog(thisActivity());
+            p.setMessage(getString(R.string.common_text_wait_a_moment));
+            p.show();
+            ThanosManager.from(getApplicationContext()).getInfiniteZ()
+                    .setEnabled(isChecked, new EnableCallback() {
+                        @Override
+                        public void onSuccessMain(int userId) {
+                            p.dismiss();
+                        }
 
-                            }
-
-                            @Override
-                            public void onErrorMain(String errorMessage, int errorCode) {
-
-                            }
-                        });
-            }
+                        @Override
+                        public void onErrorMain(String errorMessage, int errorCode) {
+                            p.dismiss();
+                        }
+                    });
         });
     }
 

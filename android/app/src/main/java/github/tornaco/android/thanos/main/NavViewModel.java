@@ -374,7 +374,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_infinite_z)
-                        .iconRes(R.drawable.ic_bring_forward)
+                        .iconRes(R.drawable.ic_baseline_work_outline_24)
                         .title(resources.getString(R.string.feature_title_infinite_z))
                         .disabled(!BuildProp.THANOS_BUILD_DEBUG)
                         .themeColor(R.color.md_blue_600)

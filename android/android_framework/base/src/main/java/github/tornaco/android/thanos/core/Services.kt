@@ -12,6 +12,7 @@ import android.companion.CompanionDeviceManager
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.RestrictionsManager
+import android.content.pm.LauncherApps
 import android.content.pm.ShortcutManager
 import android.hardware.ConsumerIrManager
 import android.hardware.SensorManager
@@ -325,3 +326,8 @@ val Context.wifiP2pManager: WifiP2pManager
 /** Returns the WindowManager instance. **/
 val Context.windowManager: WindowManager
     get() = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+
+/** Returns the LauncherApps instance. **/
+val Context.launcherApps: LauncherApps
+    get() = getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps

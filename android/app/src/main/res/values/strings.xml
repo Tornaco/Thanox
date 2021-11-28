@@ -395,4 +395,5 @@
     <string name="pre_title_app_list_item">App list item</string>
     <string name="menu_title_app_info_detailed">Details</string>
 
+    <string name="device_admin_description" translatable="false">Device admin of Thanox Infinite Z profile.</string>
 </resources>

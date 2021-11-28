@@ -37,6 +37,7 @@ import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.core.util.function.Function;
+import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.pref.ViewAwarePreference;
 import github.tornaco.thanos.android.ops.ops.by.app.AppOpsListActivity;
@@ -377,7 +378,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
   }
 
   private void bindAppStatePrefDelayed() {
-    ProgressDialog p = new ProgressDialog(getActivity());
+    ModernProgressDialog p = new ModernProgressDialog(getActivity());
     p.setMessage("~~~");
     p.show();
     new Handler(Looper.getMainLooper())

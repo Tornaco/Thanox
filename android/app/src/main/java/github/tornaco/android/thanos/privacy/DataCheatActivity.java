@@ -1,13 +1,9 @@
 package github.tornaco.android.thanos.privacy;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,21 +17,16 @@ import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
-import github.tornaco.android.thanos.common.AppItemViewClickListener;
-import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.PrivacyManager;
 import github.tornaco.android.thanos.core.secure.field.Fields;
-import github.tornaco.android.thanos.core.util.function.Function;
-import github.tornaco.android.thanos.core.util.function.Predicate;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import util.CollectionUtils;
-import util.Consumer;
 
 public class DataCheatActivity extends CommonAppListFilterActivity {
     private CommonAppListFilterAdapter appListFilterAdapter;
@@ -187,7 +178,7 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
 
     private void applyBatchSelection(String id) {
         PrivacyManager priv = ThanosManager.from(thisActivity()).getPrivacyManager();
-        ProgressDialog p = new ProgressDialog(thisActivity());
+        ModernProgressDialog p = new ModernProgressDialog(thisActivity());
         p.setTitle(R.string.common_menu_title_batch_select);
         p.show();
         CollectionUtils.consumeRemaining(

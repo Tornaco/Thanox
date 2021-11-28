@@ -41,6 +41,7 @@ import github.tornaco.android.thanos.dashboard.OnTileLongClickListener;
 import github.tornaco.android.thanos.dashboard.Tile;
 import github.tornaco.android.thanos.databinding.FragmentPluginBinding;
 import github.tornaco.android.thanos.util.IntentUtils;
+import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 
@@ -55,8 +56,8 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
     private FragmentPluginBinding pluginBinding;
     private NavViewModel navViewModel;
 
-    private ProgressDialog installDialog;
-    private ProgressDialog uninstallDialog;
+    private ModernProgressDialog installDialog;
+    private ModernProgressDialog uninstallDialog;
 
     private boolean isFABOpen = true;
 
@@ -222,7 +223,7 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
     private void showInstallProgressDialog() {
         if (getActivity() == null) return;
         if (installDialog == null) {
-            installDialog = new ProgressDialog(getActivity());
+            installDialog = new ModernProgressDialog(getActivity());
             installDialog.setTitle(R.string.dialog_title_plugin_installing);
         }
         if (!installDialog.isShowing()) {
@@ -243,7 +244,7 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
     private void showUnInstallProgressDialog() {
         if (getActivity() == null) return;
         if (uninstallDialog == null) {
-            uninstallDialog = new ProgressDialog(getActivity());
+            uninstallDialog = new ModernProgressDialog(getActivity());
             uninstallDialog.setTitle(R.string.dialog_title_plugin_uninstalling);
         }
         if (!uninstallDialog.isShowing()) {

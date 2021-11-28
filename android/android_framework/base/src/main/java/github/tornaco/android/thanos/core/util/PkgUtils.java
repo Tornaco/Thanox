@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.core.util;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import github.tornaco.android.thanos.core.annotation.NonNull;
 import lombok.val;
 import util.ObjectsUtils;
 
+@SuppressWarnings("deprecation")
 public class PkgUtils {
     private PkgUtils() {
     }
@@ -112,36 +114,40 @@ public class PkgUtils {
     }
 
     public static List<ApplicationInfo> getInstalledApplications(Context context) {
-        val pm = context.getPackageManager();
         if (OsUtils.isNOrAbove()) {
-            return pm.getInstalledApplications(PackageManager.MATCH_UNINSTALLED_PACKAGES);
-
+            return getInstalledApplications(context, PackageManager.MATCH_UNINSTALLED_PACKAGES);
         } else {
-            return pm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
+            return getInstalledApplications(context, PackageManager.GET_UNINSTALLED_PACKAGES);
         }
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
+    public static List<ApplicationInfo> getInstalledApplications(Context context, int flags) {
+        val pm = context.getPackageManager();
+        return pm.getInstalledApplications(flags);
+    }
+
     public static List<ApplicationInfo> getInstalledApplicationsAsUser(Context context, int userId) {
+        int flags = OsUtils.isNOrAbove() ? PackageManager.MATCH_UNINSTALLED_PACKAGES : PackageManager.GET_UNINSTALLED_PACKAGES;
         if (!OsUtils.isOOrAbove()) {
-            return getInstalledApplications(context);
+            return getInstalledApplications(context, flags);
+        }
+        return getInstalledApplicationsAsUser(context, userId, flags);
+    }
+
+    public static List<ApplicationInfo> getInstalledApplicationsAsUser(Context context, int userId, int flags) {
+        if (!OsUtils.isOOrAbove()) {
+            return getInstalledApplications(context, flags);
         }
         val pm = context.getPackageManager();
-        if (OsUtils.isNOrAbove()) {
-            return pm.getInstalledApplicationsAsUser(PackageManager.MATCH_UNINSTALLED_PACKAGES, userId);
-        } else {
-            return pm.getInstalledApplicationsAsUser(PackageManager.GET_UNINSTALLED_PACKAGES, userId);
-        }
+        return pm.getInstalledApplicationsAsUser(flags, userId);
     }
 
     public static String getPathForPackage(Context context, String pkg) {
         PackageManager pm = context.getPackageManager();
+        int flags = OsUtils.isNOrAbove() ? PackageManager.MATCH_UNINSTALLED_PACKAGES : PackageManager.GET_UNINSTALLED_PACKAGES;
         try {
-            ApplicationInfo applicationInfo = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                applicationInfo = pm.getApplicationInfo(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES);
-            } else {
-                applicationInfo = pm.getApplicationInfo(pkg, PackageManager.GET_UNINSTALLED_PACKAGES);
-            }
+            ApplicationInfo applicationInfo = pm.getApplicationInfo(pkg, flags);
             return applicationInfo.publicSourceDir;
         } catch (PackageManager.NameNotFoundException e) {
             return null;

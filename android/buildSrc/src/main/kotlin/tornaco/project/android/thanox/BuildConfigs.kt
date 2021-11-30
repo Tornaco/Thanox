@@ -43,15 +43,15 @@ object Configs {
 
     operator fun get(key: String): String? {
         val v = props[key] as? String ?: return null
-        return if (v.isBlank()) null else v
+        return v.ifBlank { null }
     }
 
     fun Project.keyStoreAlias(): String {
-        return Configs["keyAlias"] ?: this.property("keyAlias")?.toString() ?: ""
+        return Configs["keyAlias"] ?: this.findProperty("keyAlias")?.toString() ?: ""
     }
 
     fun Project.keyStorePassword(): String {
-        return Configs["keyPassword"] ?: this.property("keyPassword")?.toString() ?: ""
+        return Configs["keyPassword"] ?: this.findProperty("keyPassword")?.toString() ?: ""
     }
 }
 

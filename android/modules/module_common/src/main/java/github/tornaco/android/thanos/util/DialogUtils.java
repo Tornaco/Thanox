@@ -18,10 +18,10 @@ public class DialogUtils {
                 .show();
     }
 
-    public static void showMessage(Context context, String titleRes, String messageRes) {
+    public static void showMessage(Context context, String title, String message) {
         new MaterialAlertDialogBuilder(context)
-                .setTitle(titleRes)
-                .setMessage(messageRes)
+                .setTitle(title)
+                .setMessage(message)
                 .setCancelable(true)
                 .show();
     }

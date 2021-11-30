@@ -36,6 +36,7 @@ import github.tornaco.android.thanos.databinding.ActivityIniniteZAppsBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.util.DialogUtils;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import util.CollectionUtils;
@@ -176,6 +177,7 @@ public class InfiniteZActivity extends ThemeActivity {
 
                         @Override
                         public void onErrorMain(String errorMessage, int errorCode) {
+                            DialogUtils.showMessage(thisActivity(), String.valueOf(errorCode), errorMessage);
                             p.dismiss();
                         }
                     });
@@ -197,20 +199,24 @@ public class InfiniteZActivity extends ThemeActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (REQ_PICK_APPS == requestCode && resultCode == RESULT_OK && data != null && data.hasExtra("apps")) {
             List<AppInfo> appInfos = data.getParcelableArrayListExtra("apps");
+            ModernProgressDialog p = new ModernProgressDialog(thisActivity());
+            p.setMessage(getString(R.string.common_text_wait_a_moment));
+            p.show();
             CollectionUtils.consumeRemaining(appInfos, appInfo -> ThanosManager.from(getApplicationContext())
                     .getInfiniteZ()
                     .addPackage(appInfo.getPkgName(), new AddPackageCallback() {
                         @Override
                         public void onSuccessMain(int userId) {
-
+                            postOnUiDelayed(p::dismiss, 2400);
+                            viewModel.start();
                         }
 
                         @Override
                         public void onErrorMain(String errorMessage, int errorCode) {
-
+                            DialogUtils.showMessage(thisActivity(), String.valueOf(errorCode), errorMessage);
+                            p.dismiss();
                         }
                     }));
-            viewModel.start();
         }
     }
 

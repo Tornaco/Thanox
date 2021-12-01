@@ -38,29 +38,19 @@ public class CommonDataBindingAdapters {
     @BindingAdapter("android:appIcon")
     public static void setAppIcon(ImageView imageView, AppInfo appInfo) {
         if (appInfo != null && appInfo.getIconDrawable() > 0) {
-            RequestBuilder<Drawable> transition =
-                    Glide.with(imageView)
-                            .load(appInfo.getIconDrawable())
-                            .error(R.mipmap.ic_fallback_app_icon)
-                            .fallback(R.mipmap.ic_fallback_app_icon)
-                            .transition(GenericTransitionOptions.with(R.anim.grow_fade_in));
-            if (appInfo.disabled()) {
-                transition = transition.transform(GRAY_SCALE_TRANSFORMATION);
-            }
-            transition.into(imageView);
+            loadAppIconWithDrawable(imageView, appInfo);
             return;
         }
 
         if (appInfo != null && !TextUtils.isEmpty(appInfo.getIconUrl())) {
-            Glide.with(imageView)
-                    .load(appInfo.getIconUrl())
-                    .error(R.mipmap.ic_fallback_app_icon)
-                    .fallback(R.mipmap.ic_fallback_app_icon)
-                    .transition(GenericTransitionOptions.with(R.anim.grow_fade_in))
-                    .into(imageView);
+            loadAppIconWithUrl(imageView, appInfo);
             return;
         }
 
+        loadAppIconWithAppInfo(imageView, appInfo);
+    }
+
+    private static void loadAppIconWithAppInfo(ImageView imageView, AppInfo appInfo) {
         GlideRequest<Drawable> request =
                 GlideApp.with(imageView)
                         .load(appInfo)
@@ -74,6 +64,28 @@ public class CommonDataBindingAdapters {
             request = request.transform(GRAY_SCALE_TRANSFORMATION);
         }
         request.into(imageView);
+    }
+
+    private static void loadAppIconWithUrl(ImageView imageView, AppInfo appInfo) {
+        Glide.with(imageView)
+                .load(appInfo.getIconUrl())
+                .error(R.mipmap.ic_fallback_app_icon)
+                .fallback(R.mipmap.ic_fallback_app_icon)
+                .transition(GenericTransitionOptions.with(R.anim.grow_fade_in))
+                .into(imageView);
+    }
+
+    private static void loadAppIconWithDrawable(ImageView imageView, AppInfo appInfo) {
+        RequestBuilder<Drawable> transition =
+                Glide.with(imageView)
+                        .load(appInfo.getIconDrawable())
+                        .error(R.mipmap.ic_fallback_app_icon)
+                        .fallback(R.mipmap.ic_fallback_app_icon)
+                        .transition(GenericTransitionOptions.with(R.anim.grow_fade_in));
+        if (appInfo.disabled()) {
+            transition = transition.transform(GRAY_SCALE_TRANSFORMATION);
+        }
+        transition.into(imageView);
     }
 
     @SuppressWarnings({"unchecked", "ConstantConditions"})

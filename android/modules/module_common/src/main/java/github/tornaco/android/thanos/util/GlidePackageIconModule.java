@@ -33,8 +33,8 @@ public class GlidePackageIconModule extends AppGlideModule {
     @SuppressWarnings("NullableProblems")
     private static class PackageInfoDataFetcher implements DataFetcher<Bitmap> {
 
-        private AppInfo info;
-        private Context context;
+        private final AppInfo info;
+        private final Context context;
 
         public PackageInfoDataFetcher(AppInfo info, Context context) {
             this.info = info;
@@ -48,7 +48,7 @@ public class GlidePackageIconModule extends AppGlideModule {
                 callback.onLoadFailed(new NullPointerException("Package name is null"));
                 return;
             }
-            Bitmap bd = AppIconLoaderUtil.loadAppIconBitmapWithIconPack(context, getInfo().getPkgName());
+            Bitmap bd = AppIconLoaderUtil.loadAppIconBitmapWithIconPack(context, getInfo().getPkgName(), getInfo().getUid());
             callback.onDataReady(bd);
         }
 
@@ -81,9 +81,9 @@ public class GlidePackageIconModule extends AppGlideModule {
 
     private static class PackageIconModuleLoaderFactory
             implements ModelLoaderFactory<AppInfo, Bitmap> {
-        private Context context;
+        private final Context context;
 
-        private static Singleton2<Context, ModelLoader<AppInfo, Bitmap>> sLoader
+        private static final Singleton2<Context, ModelLoader<AppInfo, Bitmap>> sLoader
                 = new Singleton2<Context, ModelLoader<AppInfo, Bitmap>>() {
             @Override
             protected ModelLoader<AppInfo, Bitmap> create(Context context) {

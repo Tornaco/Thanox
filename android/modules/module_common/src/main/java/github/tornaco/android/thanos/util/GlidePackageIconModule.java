@@ -92,7 +92,7 @@ public class GlidePackageIconModule extends AppGlideModule {
                     @Override
                     public LoadData<Bitmap> buildLoadData(AppInfo info, int width,
                                                           int height, Options options) {
-                        Key diskCacheKey = new ObjectKey(info.getPkgName());
+                        Key diskCacheKey = new ObjectKey(info.getPkgName() + "-" + info.getUid() + "-" + info.getVersionCode());
 
                         return new LoadData<>(diskCacheKey, new PackageInfoDataFetcher(info, context));
                     }

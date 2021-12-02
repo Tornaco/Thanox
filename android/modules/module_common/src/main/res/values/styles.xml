@@ -70,8 +70,8 @@
         <item name="android:paddingRight">6dp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:paddingBottom">4dp</item>
-        <item name="backgroundTint">?colorAccent</item>
-        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="backgroundTint">?colorPrimaryContainer</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
 

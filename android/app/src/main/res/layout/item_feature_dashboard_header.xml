@@ -71,6 +71,7 @@
                         android:layout_marginEnd="@dimen/common_view_margin_default"
                         android:max="100"
                         android:progress="@{headerInfo.memUsagePercent}"
+                        app:indicatorColor="?colorPrimary"
                         app:trackCornerRadius="6dp"
                         app:trackThickness="6dp"
                         tools:progress="68" />

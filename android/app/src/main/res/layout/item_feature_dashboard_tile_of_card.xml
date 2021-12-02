@@ -35,7 +35,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dashboard_tile_image_margin_end"
             android:featureIcon="@{tile.iconRes}"
-            android:iconThemeColor="@{tile.themeColor}"
             android:padding="@dimen/dashboard_tile_image_padding"
             android:tint="?colorOutline"
             tools:src="@drawable/module_common_ic_settings_fill" />

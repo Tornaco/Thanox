@@ -24,10 +24,10 @@
             style="@style/CardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/common_view_margin_middle"
-            android:layout_marginTop="@dimen/common_view_margin_middle"
-            android:layout_marginEnd="@dimen/common_view_margin_middle"
-            android:layout_marginBottom="@dimen/common_view_margin_middle"
+            android:layout_marginStart="@dimen/common_view_margin_default"
+            android:layout_marginTop="@dimen/common_view_margin_default"
+            android:layout_marginEnd="@dimen/common_view_margin_default"
+            android:layout_marginBottom="@dimen/common_view_margin_default"
             android:focusable="true"
             android:visibility="@{viewmodel.hasAnyPluginFeatures ? View.GONE : View.VISIBLE}">
 
@@ -105,10 +105,10 @@
             style="@style/CardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/common_view_margin_small"
-            android:layout_marginTop="@dimen/common_view_margin_small"
-            android:layout_marginEnd="@dimen/common_view_margin_small"
-            android:layout_marginBottom="@dimen/common_view_margin_small"
+            android:layout_marginStart="@dimen/common_view_margin_default"
+            android:layout_marginTop="@dimen/common_view_margin_default"
+            android:layout_marginEnd="@dimen/common_view_margin_default"
+            android:layout_marginBottom="@dimen/common_view_margin_default"
             android:focusable="true"
             tools:visibility="gone">
 

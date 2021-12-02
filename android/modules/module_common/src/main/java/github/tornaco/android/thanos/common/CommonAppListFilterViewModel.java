@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.common;
 
 import android.app.Application;
+import android.app.usage.UsageStats;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -18,6 +19,7 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.common.sort.AppSort;
@@ -108,7 +110,15 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                     @Override
                     public void subscribe(SingleEmitter<List<AppListModel>> emitter) throws Exception {
                         List<AppListModel> res = requestLoadOrCachedAppList(preferCache);
-                        AppSort.AppSorterProvider appSorterProvider = Objects.requireNonNull(currentSort.get()).provider;
+
+                        AppSort sort = Objects.requireNonNull(currentSort.get());
+
+                        // inflate usage stats if necessary.
+                        if (sort.relyOnUsageStats()) {
+                            inflateAppUsageStats(res);
+                        }
+
+                        AppSort.AppSorterProvider appSorterProvider = sort.provider;
                         if (appSorterProvider != null) {
                             res.sort(appSorterProvider.comparator(getApplication()));
                             if (sortReverse.get()) {
@@ -168,6 +178,23 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                         isDataLoading.set(false);
                     }
                 }));
+    }
+
+    private void inflateAppUsageStats(List<AppListModel> res) {
+        XLog.d("inflateAppUsageStats");
+        ThanosManager thanox = ThanosManager.from(getApplication());
+        if (thanox.isServiceInstalled()) {
+            Map<String, UsageStats> statsMap = thanox.getUsageStatsManager().queryAndAggregateUsageStats(0, System.currentTimeMillis());
+            for (AppListModel app : res) {
+                if (statsMap.containsKey(app.appInfo.getPkgName())) {
+                    UsageStats stats = statsMap.get(app.appInfo.getPkgName());
+                    if (stats != null) {
+                        app.lastUsedTimeMills = stats.getLastTimeUsed();
+                        app.totalUsedTimeMills = stats.getTotalTimeInForeground();
+                    }
+                }
+            }
+        }
     }
 
     private void registerEventReceivers() {

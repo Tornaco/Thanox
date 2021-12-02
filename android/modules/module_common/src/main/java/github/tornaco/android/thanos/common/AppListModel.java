@@ -25,6 +25,9 @@ public class AppListModel extends ListModel<AppListModel> {
 
     public boolean showStateBadge = true;
 
+    public long lastUsedTimeMills = 0L;
+    public long totalUsedTimeMills = 0L;
+
     public AppListModel(@NonNull AppInfo appInfo,
                         @Nullable String badge,
                         @Nullable String badge2,

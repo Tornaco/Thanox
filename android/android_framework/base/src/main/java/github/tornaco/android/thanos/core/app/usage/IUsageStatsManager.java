@@ -11,6 +11,10 @@ public interface IUsageStatsManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public java.util.Map<java.lang.String,android.app.usage.UsageStats> queryAndAggregateUsageStats(long beginTime, long endTime) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -68,6 +72,32 @@ public interface IUsageStatsManager extends android.os.IInterface
           reply.writeTypedList(_result);
           return true;
         }
+        case TRANSACTION_queryAndAggregateUsageStats:
+        {
+          data.enforceInterface(descriptor);
+          long _arg0;
+          _arg0 = data.readLong();
+          long _arg1;
+          _arg1 = data.readLong();
+          java.util.Map<java.lang.String,android.app.usage.UsageStats> _result = this.queryAndAggregateUsageStats(_arg0, _arg1);
+          reply.writeNoException();
+          if (_result == null) {
+            reply.writeInt(-1);
+          } else {
+            reply.writeInt(_result.size());
+            _result.forEach((k, v) -> {
+              reply.writeString(k);
+              if ((v!=null)) {
+                reply.writeInt(1);
+                v.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+              }
+              else {
+                reply.writeInt(0);
+              }
+            });
+          }
+          return true;
+        }
         default:
         {
           return super.onTransact(code, data, reply, flags);
@@ -112,9 +142,46 @@ public interface IUsageStatsManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public java.util.Map<java.lang.String,android.app.usage.UsageStats> queryAndAggregateUsageStats(long beginTime, long endTime) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.Map<java.lang.String,android.app.usage.UsageStats> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeLong(beginTime);
+          _data.writeLong(endTime);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_queryAndAggregateUsageStats, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().queryAndAggregateUsageStats(beginTime, endTime);
+          }
+          _reply.readException();
+          {
+            int N = _reply.readInt();
+            _result = N < 0 ? null : new java.util.HashMap<>();
+            java.util.stream.IntStream.range(0, N).forEach(i -> {
+              String k = _reply.readString();
+              android.app.usage.UsageStats v;
+              if ((0!=_reply.readInt())) {
+                v = android.app.usage.UsageStats.CREATOR.createFromParcel(_reply);
+              }
+              else {
+                v = null;
+              }
+              _result.put(k, v);
+            });
+          }
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.usage.IUsageStatsManager sDefaultImpl;
     }
     static final int TRANSACTION_queryUsageStats = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
+    static final int TRANSACTION_queryAndAggregateUsageStats = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.usage.IUsageStatsManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -133,4 +200,5 @@ public interface IUsageStatsManager extends android.os.IInterface
     }
   }
   public java.util.List<android.app.usage.UsageStats> queryUsageStats(int intervalType, long beginTime, long endTime) throws android.os.RemoteException;
+  public java.util.Map<java.lang.String,android.app.usage.UsageStats> queryAndAggregateUsageStats(long beginTime, long endTime) throws android.os.RemoteException;
 }

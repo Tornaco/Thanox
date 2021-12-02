@@ -9,11 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import java.time.Duration;
 import java.util.Comparator;
+import java.util.Date;
 
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.module.common.R;
+import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 
 public enum AppSort {
 
@@ -63,7 +66,7 @@ public enum AppSort {
 
         @Override
         public String getAppSortDescription(@NonNull Context context, @NonNull AppListModel model) {
-            return null;
+            return FuzzyDateTimeFormatter.getTimeAgo(context, new Date(model.lastUsedTimeMills));
         }
     }),
     TotalUsedTime(R.string.common_sort_by_total_used_time, new AppSorterProvider() {
@@ -75,7 +78,7 @@ public enum AppSort {
 
         @Override
         public String getAppSortDescription(@NonNull Context context, @NonNull AppListModel model) {
-            return null;
+            return DateUtils.formatDuration(Duration.ofMillis(model.totalUsedTimeMills));
         }
     }),
     SdkVersion(R.string.common_sort_by_install_sdk_version, new AppSorterProvider() {
@@ -123,6 +126,10 @@ public enum AppSort {
     AppSort(@StringRes int labelRes, @Nullable AppSorterProvider provider) {
         this.labelRes = labelRes;
         this.provider = provider;
+    }
+
+    public boolean relyOnUsageStats() {
+        return this == TotalUsedTime || this == LastUsedTime;
     }
 
     public interface AppSorterProvider {

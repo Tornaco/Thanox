@@ -1,5 +1,7 @@
 package github.tornaco.android.thanos.common;
 
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.Checkable;
@@ -7,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 
 import androidx.annotation.ColorRes;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +36,15 @@ public class CommonDataBindingAdapters {
     public static void setIconTint(ImageView imageView, @ColorRes int res) {
         if (res == 0) return;
         imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), res));
+    }
+
+    @BindingAdapter("android:circleBgTint")
+    public static void setCircleBgTint(ImageView imageView, @ColorRes int res) {
+        if (res == 0) return;
+        Drawable bg = AppCompatResources.getDrawable(imageView.getContext(), R.drawable.module_common_circle_bg_blue);
+        if (bg == null) return;
+        bg.setColorFilter(new PorterDuffColorFilter(imageView.getContext().getColor(res), PorterDuff.Mode.SRC_IN));
+        imageView.setBackground(bg);
     }
 
     @BindingAdapter("android:appIcon")

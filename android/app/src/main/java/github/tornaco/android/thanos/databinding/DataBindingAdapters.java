@@ -3,7 +3,6 @@ package github.tornaco.android.thanos.databinding;
 import static github.tornaco.android.thanos.common.CommonDataBindingAdapters.setIconTint;
 
 import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
 import android.util.Pair;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.GenericTransitionOptions;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 import java.util.Objects;

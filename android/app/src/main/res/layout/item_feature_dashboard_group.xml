@@ -40,7 +40,7 @@
                 android:singleLine="true"
                 android:text="@{group.title}"
                 android:textAppearance="@style/TextAppearance.CategoryTitle"
-                android:textColor="?colorPrimary"
+                android:textColor="@color/md_grey_600"
                 android:visibility="@{(group.title == null) ? View.GONE : View.VISIBLE}"
                 tools:text="@string/app_name" />
 

@@ -201,21 +201,21 @@ public class NavViewModel extends AndroidViewModel {
                 Arrays.asList(
                     Tile.builder()
                         .id(R.id.id_one_key_clear)
-                        .iconRes(R.drawable.ic_rocket_line)
+                        .iconRes(R.drawable.ic_rocket_fill)
                         .title(resources.getString(R.string.feature_title_one_key_boost))
                         .requiredFeature(BuildProp.THANOX_FEATURE_BG_TASK_CLEAN)
                         .themeColor(R.color.md_green_500)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_background_start)
-                        .iconRes(R.drawable.ic_forbid_line)
+                        .iconRes(R.drawable.ic_forbid_fill)
                         .title(resources.getString(R.string.feature_title_start_restrict))
                         .category(resources.getString(R.string.feature_category_start_manage))
                         .requiredFeature(BuildProp.THANOX_FEATURE_START_BLOCKER)
                         .themeColor(R.color.md_blue_500)
                         .build(),
                     Tile.builder()
-                        .iconRes(R.drawable.ic_refresh_line)
+                        .iconRes(R.drawable.ic_refresh_fill)
                         .id(R.id.id_background_restrict)
                         .title(resources.getString(R.string.feature_title_bg_restrict))
                         .summary(resources.getString(R.string.feature_desc_bg_restrict_brief))
@@ -243,7 +243,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_apps_manager)
-                        .iconRes(R.drawable.ic_apps_2_line)
+                        .iconRes(R.drawable.ic_apps_fill)
                         .title(resources.getString(R.string.feature_title_apps_manager))
                         .summary(resources.getString(R.string.feature_summary_apps_manager))
                         .requiredFeature(BuildProp.THANOX_FEATURE_COMPONENT_MANAGER)
@@ -258,7 +258,7 @@ public class NavViewModel extends AndroidViewModel {
                 Arrays.asList(
                     Tile.builder()
                         .id(R.id.id_privacy_cheat)
-                        .iconRes(R.drawable.ic_spy_line)
+                        .iconRes(R.drawable.ic_spy_fill)
                         .title(resources.getString(R.string.feature_title_data_cheat))
                         .category(resources.getString(R.string.feature_category_privacy))
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_DATA_CHEAT)
@@ -266,7 +266,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_ops_by_app)
-                        .iconRes(R.drawable.ic_shield_star_line)
+                        .iconRes(R.drawable.ic_shield_star_fill)
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS)
                         .title(resources.getString(R.string.module_ops_feature_title_app_ops_list))
                         .summary(
@@ -277,7 +277,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_ops_by_ops)
-                        .iconRes(R.drawable.ic_shield_star_line)
+                        .iconRes(R.drawable.ic_shield_star_fill)
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS)
                         .title(resources.getString(R.string.module_ops_feature_title_ops_app_list))
                         .summary(
@@ -286,7 +286,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_app_lock)
-                        .iconRes(R.drawable.ic_phone_lock_line)
+                        .iconRes(R.drawable.ic_baseline_phonelink_lock_24)
                         .title(resources.getString(R.string.feature_title_app_lock))
                         .summary(resources.getString(R.string.feature_summary_app_lock))
                         .themeColor(R.color.md_deep_orange_500)
@@ -294,7 +294,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_task_blur)
-                        .iconRes(R.drawable.ic_brush_2_line)
+                        .iconRes(R.drawable.ic_paint_brush_fill)
                         .title(resources.getString(R.string.feature_title_recent_task_blur))
                         .summary(resources.getString(R.string.feature_summary_recent_task_blur))
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_TASK_BLUR)
@@ -302,7 +302,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_op_remind)
-                        .iconRes(R.drawable.ic_alarm_warning_line)
+                        .iconRes(R.drawable.module_ops_ic_alarm_warning_fill)
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS_REMINDER)
                         .category(resources.getString(R.string.feature_category_remind))
                         .title(
@@ -319,7 +319,7 @@ public class NavViewModel extends AndroidViewModel {
                 Arrays.asList(
                     Tile.builder()
                         .id(R.id.id_screen_on_notification)
-                        .iconRes(R.drawable.ic_notification_badge_line)
+                        .iconRes(R.drawable.ic_notification_badge_fill)
                         .title(resources.getString(R.string.feature_title_light_on_notification))
                         .summary(
                             resources.getString(R.string.feature_summary_light_on_notification))
@@ -329,7 +329,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_notification_recorder)
-                        .iconRes(R.drawable.ic_chat_1_line)
+                        .iconRes(R.drawable.ic_chat_1_fill)
                         .title(
                             resources.getString(
                                 R.string
@@ -348,7 +348,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_profile)
-                        .iconRes(R.drawable.ic_thunderstorms_line)
+                        .iconRes(R.drawable.module_profile_ic_thunderstorms_fill)
                         .title(resources.getString(R.string.module_profile_feature_name))
                         .summary(resources.getString(R.string.module_profile_feature_summary))
                         .themeColor(R.color.md_indigo_300)
@@ -356,7 +356,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_smart_standby)
-                        .iconRes(R.drawable.ic_mickey_line)
+                        .iconRes(R.drawable.ic_mickey_fill)
                         .category(resources.getString(R.string.feature_category_apps))
                         .title(resources.getString(R.string.feature_title_smart_app_standby))
                         .summary(
@@ -366,7 +366,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_plugins)
-                        .iconRes(R.drawable.ic_store_line)
+                        .iconRes(R.drawable.ic_store_fill)
                         .title(resources.getString(R.string.nav_title_plugin))
                         .requiredFeature(BuildProp.THANOX_FEATURE_PLUGIN_SUPPORT)
                         .summary(resources.getString(R.string.card_message_plugin_available))
@@ -374,7 +374,7 @@ public class NavViewModel extends AndroidViewModel {
                         .build(),
                     Tile.builder()
                         .id(R.id.id_infinite_z)
-                        .iconRes(R.drawable.ic_baseline_work_outline_24)
+                        .iconRes(R.drawable.ic_baseline_work_fill_24)
                         .title(resources.getString(R.string.feature_title_infinite_z))
                         .disabled(!BuildProp.THANOS_BUILD_DEBUG)
                         .themeColor(R.color.md_blue_600)

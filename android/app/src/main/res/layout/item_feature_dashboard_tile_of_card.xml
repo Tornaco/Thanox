@@ -34,10 +34,12 @@
             android:layout_height="@dimen/dashboard_tile_image_size_large"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dashboard_tile_image_margin_end"
+            android:background="@drawable/circle_bg_blue"
             android:featureIcon="@{tile.iconRes}"
-            android:padding="@dimen/dashboard_tile_image_padding"
-            android:tint="?colorOutline"
-            tools:src="@drawable/module_common_ic_settings_fill" />
+            android:padding="10dp"
+            android:tint="@color/md_white"
+            android:circleBgTint="@{tile.themeColor}"
+            tools:src="@drawable/ic_rocket_fill" />
 
         <TextView
             android:id="@+id/title"

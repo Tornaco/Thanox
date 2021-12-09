@@ -8,14 +8,14 @@ import androidx.lifecycle.ViewModelProviders
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.util.ActivityUtils
 
-class ReceiverListActivity : ComponentListActivity() {
+class ProviderListActivity : ComponentListActivity() {
 
     companion object {
         @JvmStatic
         fun start(context: Context, appInfo: AppInfo) {
             val data = Bundle()
             data.putParcelable("app", appInfo)
-            ActivityUtils.startActivity(context, ReceiverListActivity::class.java, data)
+            ActivityUtils.startActivity(context, ProviderListActivity::class.java, data)
         }
     }
 
@@ -23,6 +23,6 @@ class ReceiverListActivity : ComponentListActivity() {
         val factory = AndroidViewModelFactory
             .getInstance(activity.application)
         return ViewModelProviders.of(activity, factory)
-            .get(ReceiverListViewModel::class.java)
+            .get(ProviderListViewModel::class.java)
     }
 }

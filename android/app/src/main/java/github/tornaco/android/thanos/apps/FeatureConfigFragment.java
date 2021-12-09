@@ -42,6 +42,7 @@ import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.pref.ViewAwarePreference;
 import github.tornaco.thanos.android.ops.ops.by.app.AppOpsListActivity;
 import github.tornaco.thanos.module.component.manager.ActivityListActivity;
+import github.tornaco.thanos.module.component.manager.ProviderListActivity;
 import github.tornaco.thanos.module.component.manager.ReceiverListActivity;
 import github.tornaco.thanos.module.component.manager.ServiceListActivity;
 import util.Consumer;
@@ -239,6 +240,21 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
               ReceiverListActivity.start(Objects.requireNonNull(getActivity()), appInfo);
               return true;
             });
+
+    preference = findPreference(getString(R.string.key_app_feature_config_p_manage));
+    Objects.requireNonNull(preference)
+        .setOnPreferenceClickListener(
+            preference1 -> {
+              if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
+                Toast.makeText(
+                    getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
+                    .show();
+                return false;
+              }
+              ProviderListActivity.start(Objects.requireNonNull(getActivity()), appInfo);
+              return true;
+            });
+
     int rc = thanos.getPkgManager().getReceiverCount(appInfo.getPkgName());
     preference.setSummary(rc == 0 ? null : String.valueOf(rc));
 

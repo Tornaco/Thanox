@@ -19,6 +19,7 @@
     <string name="module_ops_feature_title_a_manage">活動管理</string>
     <string name="module_ops_feature_title_s_manage">服務管理</string>
     <string name="module_ops_feature_title_r_manage">廣播接收器管理</string>
+    <string name="module_ops_feature_title_p_manage">内容提供者管理</string>
 
     <string name="module_ops_feature_title_block_uninstall">阻止卸载</string>
     <string name="module_ops_feature_title_block_clear_data">阻止清除数据</string>

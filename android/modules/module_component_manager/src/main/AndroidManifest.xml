@@ -12,6 +12,9 @@
         <activity
             android:name=".ServiceListActivity"
             android:exported="false" />
+        <activity
+            android:name=".ProviderListActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

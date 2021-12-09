@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Process;
@@ -319,6 +320,10 @@ public class PkgUtils {
 
     public static ComponentName getComponentName(ServiceInfo serviceInfo) {
         return new ComponentName(serviceInfo.packageName, serviceInfo.name);
+    }
+
+    public static ComponentName getComponentName(ProviderInfo providerInfo) {
+        return new ComponentName(providerInfo.packageName, providerInfo.name);
     }
 
     public static PackageInfo getPackageInfo(Context context, String path, boolean verifySign) {

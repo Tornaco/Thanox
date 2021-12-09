@@ -97,4 +97,6 @@ interface IPkgManager {
 
     void setEnablePackageOnLaunchRequestEnabled(String pkg, boolean enable);
     boolean isEnablePackageOnLaunchRequestEnabled(String pkg);
+
+    List<ComponentInfo> getProviders(String packageName);
 }

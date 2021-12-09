@@ -152,6 +152,7 @@
     <string name="key_app_feature_config_a_manage" translatable="false">key_app_feature_config_a_manage</string>
     <string name="key_app_feature_config_r_manage" translatable="false">key_app_feature_config_r_manage</string>
     <string name="key_app_feature_config_s_manage" translatable="false">key_app_feature_config_s_manage</string>
+    <string name="key_app_feature_config_p_manage" translatable="false">key_app_feature_config_p_manage</string>
 
     <string name="key_app_feature_config_block_uninstall" translatable="false">key_app_feature_config_block_uninstall</string>
     <string name="key_app_feature_config_block_clear_data" translatable="false">key_app_feature_config_block_clear_data</string>

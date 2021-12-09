@@ -111,6 +111,11 @@ public class PackageManager {
   }
 
   @SneakyThrows
+  public List<ComponentInfo> getProviders(String packageName) {
+    return pm.getProviders(packageName);
+  }
+
+  @SneakyThrows
   @Nullable
   public List<ComponentInfo> getActivitiesInBatch(String packageName, int itemCountInEachBatch,
                                                   int batchIndex) {

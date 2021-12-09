@@ -19,6 +19,7 @@
     <string name="module_ops_feature_title_a_manage">Manage activities</string>
     <string name="module_ops_feature_title_s_manage">Manage services</string>
     <string name="module_ops_feature_title_r_manage">Manage receivers</string>
+    <string name="module_ops_feature_title_p_manage">Manage providers</string>
 
     <string name="module_ops_feature_title_block_uninstall">Prevent uninstall</string>
     <string name="module_ops_feature_title_block_clear_data">Prevent clear data</string>

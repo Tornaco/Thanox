@@ -122,6 +122,10 @@
                 android:persistent="false"
                 app:key="@string/key_app_feature_config_s_manage"
                 app:title="@string/module_ops_feature_title_s_manage" />
+        <Preference
+                android:persistent="false"
+                app:key="@string/key_app_feature_config_p_manage"
+                app:title="@string/module_ops_feature_title_p_manage" />
 
     </PreferenceCategory>
 

@@ -95,39 +95,39 @@ public class PackageManager {
   }
 
   @SneakyThrows
-  public ActivityInfo[] getActivities(String packageName) {
+  public List<ComponentInfo> getActivities(String packageName) {
     return pm.getActivities(packageName);
   }
 
   @SneakyThrows
-  public ActivityInfo[] getReceivers(String packageName) {
+  public List<ComponentInfo> getReceivers(String packageName) {
     return pm.getReceivers(packageName);
   }
 
 
   @SneakyThrows
-  public ServiceInfo[] getServices(String packageName) {
+  public List<ComponentInfo> getServices(String packageName) {
     return pm.getServices(packageName);
   }
 
   @SneakyThrows
   @Nullable
-  public ActivityInfo[] getActivitiesInBatch(String packageName, int itemCountInEachBatch,
-      int batchIndex) {
+  public List<ComponentInfo> getActivitiesInBatch(String packageName, int itemCountInEachBatch,
+                                                  int batchIndex) {
     return pm.getActivitiesInBatch(packageName, itemCountInEachBatch, batchIndex);
   }
 
   @SneakyThrows
   @Nullable
-  public ActivityInfo[] getReceiversInBatch(String packageName, int itemCountInEachBatch,
-      int batchIndex) {
+  public List<ComponentInfo> getReceiversInBatch(String packageName, int itemCountInEachBatch,
+                                                 int batchIndex) {
     return pm.getReceiversInBatch(packageName, itemCountInEachBatch, batchIndex);
   }
 
   @SneakyThrows
   @Nullable
-  public ServiceInfo[] getServicesInBatch(String packageName, int itemCountInEachBatch,
-      int batchIndex) {
+  public List<ComponentInfo> getServicesInBatch(String packageName, int itemCountInEachBatch,
+                                                int batchIndex) {
     return pm.getServicesInBatch(packageName, itemCountInEachBatch, batchIndex);
   }
 

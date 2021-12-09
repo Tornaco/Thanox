@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.core.pm;
 
 import github.tornaco.android.thanos.core.pm.IAddPluginCallback;
 import github.tornaco.android.thanos.core.pm.IPackageSetChangeListener;
+import github.tornaco.android.thanos.core.pm.ComponentInfo;
 import github.tornaco.android.thanos.core.IPrinter;
 
 interface IPkgManager {
@@ -22,17 +23,17 @@ interface IPkgManager {
     boolean getApplicationEnableState(String packageName);
     void setApplicationEnableState(String packageName, boolean enable, boolean tmp);
 
-    ActivityInfo[] getActivities(String packageName);
+    List<ComponentInfo> getActivities(String packageName);
     int getActivitiesCount(String packageName);
-    ActivityInfo[] getActivitiesInBatch(String packageName, int itemCountInEachBatch, int batchIndex);
+    List<ComponentInfo> getActivitiesInBatch(String packageName, int itemCountInEachBatch, int batchIndex);
 
-    ActivityInfo[] getReceivers(String packageName);
+    List<ComponentInfo> getReceivers(String packageName);
     int getReceiverCount(String packageName);
-    ActivityInfo[] getReceiversInBatch(String packageName, int itemCountInEachBatch, int batchIndex);
+    List<ComponentInfo> getReceiversInBatch(String packageName, int itemCountInEachBatch, int batchIndex);
 
-    ServiceInfo[] getServices(String packageName);
+    List<ComponentInfo> getServices(String packageName);
     int getServiceCount(String packageName);
-    ServiceInfo[] getServicesInBatch(String packageName, int itemCountInEachBatch, int batchIndex);
+    List<ComponentInfo> getServicesInBatch(String packageName, int itemCountInEachBatch, int batchIndex);
 
     void setSmartFreezeEnabled(boolean enable);
     boolean isSmartFreezeEnabled();

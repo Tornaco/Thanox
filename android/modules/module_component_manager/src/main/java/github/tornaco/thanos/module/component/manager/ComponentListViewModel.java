@@ -16,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
@@ -28,11 +27,9 @@ import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import rx2.android.schedulers.AndroidSchedulers;
-import util.CollectionUtils;
 import util.Consumer;
 
 public abstract class ComponentListViewModel extends AndroidViewModel {
@@ -91,25 +88,10 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
         int newState = checked ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
         if (thanox.isServiceInstalled()) {
             componentModel.setEnableSetting(newState);
-            thanox.getActivityManager().forceStopPackage(componentModel.getComponentName().getPackageName());
-            // Wait a moment.
-            disposables.add(Completable.fromRunnable(new Runnable() {
-                @Override
-                public void run() {
-                    // Empty.
-                }
-            }).delay(500, TimeUnit.MILLISECONDS)
-                    .observeOn(Schedulers.io())
-                    .subscribe(new Action() {
-                        @Override
-                        public void run() {
-                            thanox.getPkgManager().setComponentEnabledSetting(
-                                    componentModel.getComponentName(),
-                                    newState
-                                    , 0 /* Kill it */);
-                        }
-                    }));
-
+            thanox.getPkgManager().setComponentEnabledSetting(
+                    componentModel.getComponentName(),
+                    newState
+                    , 0 /* Kill it */);
         }
     }
 
@@ -137,22 +119,25 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
         loadComponents();
     }
 
-    public void selectAll(boolean enabled) {
-        CollectionUtils.consumeRemaining(componentModels, new Consumer<ComponentModel>() {
-            @Override
-            public void accept(ComponentModel componentModel) {
-                toggleComponentState(componentModel, enabled);
-            }
-        });
+    public void selectAll(boolean enabled, Consumer<String> onUpdate, Runnable onComplete) {
+        int totalCount = componentModels.size();
+        ThanosManager.from(getApplication()).getActivityManager().forceStopPackage(appInfo.getPkgName());
+
         // Wait 1s.
-        disposables.add(Completable.fromRunnable(new Runnable() {
-            @Override
-            public void run() {
-                // Noop.
+        disposables.add(Completable.fromAction(() -> {
+            for (int i = 0; i < componentModels.size(); i++) {
+                ComponentModel componentModel = componentModels.get(i);
+                onUpdate.accept((i + 1) + "/" + totalCount);
+                toggleComponentState(componentModel, enabled);
+                try {
+                    // Maybe a short delay will make it safer.
+                    Thread.sleep(100);
+                } catch (InterruptedException ignored) {
+
+                }
             }
-        }).delay(1000, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::start));
+        }).subscribeOn(Schedulers.io())
+                .subscribe(onComplete::run));
     }
 
     public ObservableBoolean getIsDataLoading() {

@@ -18,6 +18,7 @@ public class ModernProgressDialog {
     private String message;
 
     private Dialog dialog;
+    private TextView messageView;
 
     public ModernProgressDialog(Context context) {
         this.context = context;
@@ -29,6 +30,9 @@ public class ModernProgressDialog {
 
     public void setMessage(String message) {
         this.message = message;
+        if (isShowing() && messageView != null) {
+            messageView.setText(message);
+        }
     }
 
     public void setTitle(@StringRes int titleRes) {
@@ -42,7 +46,7 @@ public class ModernProgressDialog {
     public void show() {
         View progressLayout = LayoutInflater.from(context)
                 .inflate(R.layout.common_dialog_progress, null, false);
-        TextView messageView = progressLayout.findViewById(R.id.message);
+        messageView = progressLayout.findViewById(R.id.message);
         messageView.setText(message);
         this.dialog = new MaterialAlertDialogBuilder(context)
                 .setTitle(title)

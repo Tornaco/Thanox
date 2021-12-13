@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.elvishew.xlog.XLog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.miguelcatalan.materialsearchview.MaterialSearchView.SearchViewListener
@@ -17,6 +18,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.common.R
 import github.tornaco.android.thanos.theme.ThemeActivity
+import github.tornaco.android.thanos.widget.ModernProgressDialog
 import github.tornaco.thanos.module.component.manager.databinding.ModuleComponentManagerComponentListActivityBinding
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 
@@ -166,7 +168,7 @@ abstract class ComponentListActivity : ThemeActivity() {
                 .setPositiveButton(
                     android.R.string.ok
                 ) { _, _ ->
-                    viewModel.selectAll(true)
+                    onRequestSelectAll(true)
                 }.show()
             return true
         }
@@ -176,11 +178,29 @@ abstract class ComponentListActivity : ThemeActivity() {
                 .setMessage(R.string.common_dialog_message_are_you_sure)
                 .setPositiveButton(
                     android.R.string.ok
-                ) { _, _ -> viewModel.selectAll(false) }
+                ) { _, _ -> onRequestSelectAll(false) }
                 .show()
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun onRequestSelectAll(isSelectAll: Boolean) {
+        val progressDialog = ModernProgressDialog(thisActivity())
+        progressDialog.setTitle(getString(R.string.common_text_wait_a_moment))
+        progressDialog.show()
+        viewModel.selectAll(isSelectAll, {
+            runOnUiThread {
+                XLog.d("onRequestSelectAll, onUpdate: $it")
+                progressDialog.setMessage(it)
+            }
+        }, {
+            runOnUiThread {
+                XLog.d("onRequestSelectAll, onComplete")
+                progressDialog.dismiss()
+                viewModel.start()
+            }
+        })
     }
 
     private fun showFeatureDesc() {

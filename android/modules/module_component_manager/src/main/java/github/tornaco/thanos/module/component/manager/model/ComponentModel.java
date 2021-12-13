@@ -66,6 +66,10 @@ public class ComponentModel implements Comparable<ComponentModel> {
         return isRunning;
     }
 
+    public void setEnableSetting(int enableSetting) {
+        this.enableSetting = enableSetting;
+    }
+
     @Override
     public int compareTo(@NonNull ComponentModel o) {
         int thisScore = 0;

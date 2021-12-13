@@ -88,7 +88,9 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
     public void toggleComponentState(@Nullable ComponentModel componentModel, boolean checked) {
         if (componentModel == null) return;
         ThanosManager thanox = ThanosManager.from(getApplication());
+        int newState = checked ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
         if (thanox.isServiceInstalled()) {
+            componentModel.setEnableSetting(newState);
             thanox.getActivityManager().forceStopPackage(componentModel.getComponentName().getPackageName());
             // Wait a moment.
             disposables.add(Completable.fromRunnable(new Runnable() {
@@ -103,7 +105,8 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
                         public void run() {
                             thanox.getPkgManager().setComponentEnabledSetting(
                                     componentModel.getComponentName(),
-                                    checked ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0 /* Kill it */);
+                                    newState
+                                    , 0 /* Kill it */);
                         }
                     }));
 

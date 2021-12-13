@@ -113,8 +113,6 @@
                 android:layout_centerVertical="true"
                 android:checked="@{!component.disabled}"
                 android:soundEffectsEnabled="false"
-
-
                 tools:checked="true" />
         </RelativeLayout>
 

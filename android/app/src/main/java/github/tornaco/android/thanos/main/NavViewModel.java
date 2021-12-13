@@ -212,7 +212,7 @@ public class NavViewModel extends AndroidViewModel {
                         .title(resources.getString(R.string.feature_title_start_restrict))
                         .category(resources.getString(R.string.feature_category_start_manage))
                         .requiredFeature(BuildProp.THANOX_FEATURE_START_BLOCKER)
-                        .themeColor(R.color.md_blue_500)
+                        .themeColor(R.color.md_indigo_a400)
                         .build(),
                     Tile.builder()
                         .iconRes(R.drawable.ic_refresh_fill)
@@ -220,7 +220,7 @@ public class NavViewModel extends AndroidViewModel {
                         .title(resources.getString(R.string.feature_title_bg_restrict))
                         .summary(resources.getString(R.string.feature_desc_bg_restrict_brief))
                         .requiredFeature(BuildProp.THANOX_FEATURE_BG_TASK_CLEAN)
-                        .themeColor(R.color.md_amber_500)
+                        .themeColor(R.color.md_amber_800)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_clean_task_removal)
@@ -239,7 +239,7 @@ public class NavViewModel extends AndroidViewModel {
                         .title(resources.getString(R.string.feature_title_smart_app_freeze))
                         .summary(resources.getString(R.string.feature_summary_smart_app_freeze))
                         .requiredFeature(BuildProp.THANOX_FEATURE_EXT_APP_SMART_FREEZE)
-                        .themeColor(R.color.md_blue_grey_300)
+                        .themeColor(R.color.md_blue_grey_500)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_apps_manager)
@@ -248,7 +248,7 @@ public class NavViewModel extends AndroidViewModel {
                         .summary(resources.getString(R.string.feature_summary_apps_manager))
                         .requiredFeature(BuildProp.THANOX_FEATURE_COMPONENT_MANAGER)
                         .category(resources.getString(R.string.feature_category_app_manage))
-                        .themeColor(R.color.md_pink_300)
+                        .themeColor(R.color.md_pink_600)
                         .build())));
 
     TileGroup secure =
@@ -298,7 +298,7 @@ public class NavViewModel extends AndroidViewModel {
                         .title(resources.getString(R.string.feature_title_recent_task_blur))
                         .summary(resources.getString(R.string.feature_summary_recent_task_blur))
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_TASK_BLUR)
-                        .themeColor(R.color.md_cyan_300)
+                        .themeColor(R.color.md_cyan_600)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_op_remind)
@@ -309,7 +309,7 @@ public class NavViewModel extends AndroidViewModel {
                             resources.getString(R.string.module_ops_feature_title_ops_remind_list))
                         .summary(
                             resources.getString(R.string.module_ops_feature_summary_ops_remind))
-                        .themeColor(R.color.md_amber_500)
+                        .themeColor(R.color.md_amber_800)
                         .build())));
 
     TileGroup ext =
@@ -377,7 +377,7 @@ public class NavViewModel extends AndroidViewModel {
                         .iconRes(R.drawable.ic_baseline_work_fill_24)
                         .title(resources.getString(R.string.feature_title_infinite_z))
                         .disabled(!BuildProp.THANOS_BUILD_DEBUG)
-                        .themeColor(R.color.md_blue_600)
+                        .themeColor(R.color.md_deep_purple_700)
                         .build())));
 
     tileGroups.add(new TileGroup(loadStatusHeaderInfo()));

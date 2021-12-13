@@ -29,8 +29,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -90,6 +88,7 @@ public class SwitchBar extends FrameLayout
         addOnSwitchChangeListener((switchView, isChecked) -> setTextViewLabel(isChecked));
 
         setOnClickListener(this);
+        findViewById(R.id.card).setOnClickListener(this);
 
         setVisibility(INVISIBLE);
         show();

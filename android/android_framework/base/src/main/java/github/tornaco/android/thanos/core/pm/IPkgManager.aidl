@@ -99,4 +99,7 @@ interface IPkgManager {
     boolean isEnablePackageOnLaunchRequestEnabled(String pkg);
 
     List<ComponentInfo> getProviders(String packageName);
+
+    // Wrap api to skip permission check
+    String[] getPackagesForUid(int uid);
 }

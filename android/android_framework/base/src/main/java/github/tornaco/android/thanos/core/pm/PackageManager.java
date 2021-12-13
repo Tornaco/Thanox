@@ -50,6 +50,11 @@ public class PackageManager {
   }
 
   @SneakyThrows
+  public String[] getPackagesForUid(int uid) {
+    return pm.getPackagesForUid(uid);
+  }
+
+  @SneakyThrows
   public int getUidForPkgName(String pkgName) {
     return pm.getUidForPkgName(pkgName);
   }
@@ -401,4 +406,5 @@ public class PackageManager {
   public boolean isEnablePackageOnLaunchRequestEnabled(String pkg) {
     return pm.isEnablePackageOnLaunchRequestEnabled(pkg);
   }
+
 }

@@ -257,11 +257,14 @@ public class RunningState {
         boolean mIsStarted;
         long mActiveSince;
 
+        ThanosManager thanosManager;
+
         public ProcessItem(Context context, int uid, String processName) {
             super(true, UserHandle.getUserId(uid));
             mDescription = "service_process_name" + processName;
             mUid = uid;
             mProcessName = processName;
+            thanosManager = ThanosManager.from(context);
         }
 
         public void ensureLabel(PackageManager pm) {
@@ -282,7 +285,7 @@ public class RunningState {
 
             // If we couldn't get information about the overall
             // process, try to find something about the uid.
-            String[] pkgs = pm.getPackagesForUid(mUid);
+            String[] pkgs = thanosManager.getPkgManager().getPackagesForUid(mUid);
 
             // If there is one package with this uid, that is what we want.
             if (pkgs.length == 1) {

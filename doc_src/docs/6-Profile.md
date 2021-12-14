@@ -57,7 +57,7 @@ title: 情景模式（Profile）
 | description | 任意的描述                                                   |
 | priority    | 优先级，决定执行顺序                                         |
 | condition   | 触发条件，支持mvel表达式，条件可选的基于事实的facts-param请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义 |
-| actions     | 要执行的动作，支持mvel表达式，可以设置多个，动作可选的handle请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义 |
+| actions     | 要执行的动作，支持[mvel表达式](http://mvel.documentnode.com) ，可以设置多个，动作可选的handle请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义 |
 
 &nbsp;
 
@@ -999,6 +999,43 @@ interface IAudio {
   	// https://developer.android.com/reference/android/media/AudioManager#setRingerMode(int)
     void setRingerMode(int ringerMode);
 }
+```
+
+&nbsp;
+
+### 0.5.15. Actor
+
+情景模式Action相关，目前支持Action的延迟执行。
+
+
+| 能力           | 含义                   | 参数       | 举例 | 返回值        |
+| -------------- | ---------------------- | ---------- | ---- | ------------- |
+| delayed | 延迟执行一个Action      | 延迟毫秒数，Action表达式 | 无   | 无   |
+
+接口定义：
+
+```java
+@HandlerName("actor")
+public interface IActor {
+    void delayed(long delayMillis, String action);
+}
+```
+
+举例：
+
+```json
+[
+  {
+    "name": "Delayed action example",
+    "description": "Execute the action delay 2s: show a short toast and log the event 2s after app switched.",
+    "priority": 1,
+    "condition": "frontPkgChanged == true",
+    "actions": [
+      "actor.delayed(2000, \"ui.showShortToast(\\\"App switched 2s ago\\\")\")",
+      "actor.delayed(2000, \"log.log(to)\")"
+    ]
+  }
+]
 ```
 
 &nbsp;

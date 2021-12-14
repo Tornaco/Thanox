@@ -551,6 +551,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#0515-actor" class="md-nav__link">
+    0.5.15. Actor
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -869,6 +876,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#0515-actor" class="md-nav__link">
+    0.5.15. Actor
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -954,7 +968,7 @@
 </tr>
 <tr>
 <td>actions</td>
-<td>要执行的动作，支持mvel表达式，可以设置多个，动作可选的handle请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义</td>
+<td>要执行的动作，支持<a href="http://mvel.documentnode.com">mvel表达式</a> ，可以设置多个，动作可选的handle请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义</td>
 </tr>
 </tbody>
 </table>
@@ -2611,6 +2625,49 @@ interface IAudio {
     // https://developer.android.com/reference/android/media/AudioManager#setRingerMode(int)
     void setRingerMode(int ringerMode);
 }
+</code></pre>
+<p>&nbsp;</p>
+<h3 id="0515-actor">0.5.15. Actor</h3>
+<p>情景模式Action相关，目前支持Action的延迟执行。</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>含义</th>
+<th>参数</th>
+<th>举例</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>delayed</td>
+<td>延迟执行一个Action</td>
+<td>延迟毫秒数，Action表达式</td>
+<td>无</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>接口定义：</p>
+<pre><code class="language-java">@HandlerName(&quot;actor&quot;)
+public interface IActor {
+    void delayed(long delayMillis, String action);
+}
+</code></pre>
+<p>举例：</p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;Delayed action example&quot;,
+    &quot;description&quot;: &quot;Execute the action delay 2s: show a short toast and log the event 2s after app switched.&quot;,
+    &quot;priority&quot;: 1,
+    &quot;condition&quot;: &quot;frontPkgChanged == true&quot;,
+    &quot;actions&quot;: [
+      &quot;actor.delayed(2000, \&quot;ui.showShortToast(\\\&quot;App switched 2s ago\\\&quot;)\&quot;)&quot;,
+      &quot;actor.delayed(2000, \&quot;log.log(to)\&quot;)&quot;
+    ]
+  }
+]
 </code></pre>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

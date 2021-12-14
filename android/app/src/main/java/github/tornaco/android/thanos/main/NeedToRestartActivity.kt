@@ -10,12 +10,8 @@ import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -81,29 +77,27 @@ class NeedToRestartActivity : ComponentActivity() {
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             text = stringResource(id = R.string.message_reboot_needed),
-                            style = MaterialTheme.typography.h6)
+                            style = MaterialTheme.typography.bodyLarge)
                     }
 
                     Row(modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(end = 32.dp, bottom = 12.dp)) {
-                        Text(modifier = Modifier
-                            .clickable {
-                                finish()
-                            }
-                            .padding(16.dp),
-                            color = Color.White,
-                            text = AnnotatedString(stringResource(id = R.string.reboot_later)).capitalize(),
-                            style = MaterialTheme.typography.body2)
 
-                        Text(modifier = Modifier
-                            .clickable {
-                                ThanosManager.from(applicationContext).powerManager.reboot()
-                            }
-                            .padding(vertical = 16.dp),
-                            color = Color.White,
-                            text = AnnotatedString(stringResource(id = R.string.reboot_now)).capitalize(),
-                            style = MaterialTheme.typography.body2)
+                        TextButton(modifier = Modifier.padding(16.dp), onClick = { finish() }) {
+                            Text(
+                                color = Color.White,
+                                text = AnnotatedString(stringResource(id = R.string.reboot_later)).capitalize(),
+                                style = MaterialTheme.typography.bodySmall)
+                        }
+
+                        TextButton(modifier = Modifier.padding(vertical = 16.dp),
+                            onClick = { ThanosManager.from(applicationContext).powerManager.reboot() }) {
+                            Text(
+                                color = Color.White,
+                                text = AnnotatedString(stringResource(id = R.string.reboot_now)).capitalize(),
+                                style = MaterialTheme.typography.bodySmall)
+                        }
                     }
                 }
             }

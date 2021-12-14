@@ -3,12 +3,9 @@ package github.tornaco.android.thanos.onboarding
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Album
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -22,7 +19,7 @@ import com.google.accompanist.pager.rememberPagerState
 import github.tornaco.android.thanos.R
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
 fun OnBoardingScreen(onComplete: () -> Unit) {
     val pagerState = rememberPagerState(
@@ -49,7 +46,7 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
                 onboardingList.forEachIndexed { index, _ ->
                     OnboardingPagerSlide(
                         selected = index == pagerState.currentPage,
-                        MaterialTheme.colors.secondary,
+                        MaterialTheme.colorScheme.secondary,
                         Icons.Filled.Album
                     )
                 }
@@ -79,7 +76,7 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
                             R.string.onboarding_next
                         )
                     },
-                    color = MaterialTheme.colors.onSurface,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(horizontal = 32.dp)
                 )
             }

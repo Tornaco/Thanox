@@ -25,7 +25,9 @@
             android:layout_alignParentTop="true"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?selectableItemBackground">
+            android:foreground="?selectableItemBackground"
+            app:contentPaddingBottom="@dimen/common_view_margin_small"
+            app:contentPaddingTop="@dimen/common_view_margin_small">
 
             <RelativeLayout
                 android:layout_width="match_parent"

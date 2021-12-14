@@ -11,6 +11,7 @@
     app:chipBackgroundColor="?colorPrimaryContainer"
     app:chipEndPadding="@dimen/common_view_margin_middle"
     app:chipIcon="@drawable/module_common_ic_outline_filter_alt_24"
+    app:chipIconTint="?android:textColorPrimary"
     app:chipIconSize="18dp"
     app:chipStartPadding="@dimen/common_view_margin_default"
     app:layout_anchorGravity="center"

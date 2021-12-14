@@ -131,6 +131,8 @@ dependencies {
     implementation(Compose.ui)
     implementation(Compose.runtime)
     implementation(Compose.material)
+    implementation(Compose.material3)
+    implementation(Compose.material3Adapter)
     implementation(Compose.activityCompose)
     implementation(Compose.viewmodel)
     implementation(Compose.navigationCompose)

@@ -15,6 +15,8 @@ object Compose {
     const val animation = "androidx.compose.animation:animation:$composeVersion"
     const val iconsExtended = "androidx.compose.material:material-icons-extended:$composeVersion"
     const val material = "androidx.compose.material:material:$composeVersion"
+    const val material3 = "androidx.compose.material3:material3:1.0.0-alpha02"
+    const val material3Adapter = "com.google.android.material:compose-theme-adapter-3:1.0.1"
     const val runtime = "androidx.compose.runtime:runtime:$composeVersion"
     const val runtimeSaveAble = "androidx.compose.runtime:runtime-saveable:$composeVersion"
     const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"

@@ -75,6 +75,11 @@ abstract class Res {
         const val STRING_SERVICE_NOTIFICATION_MESSAGE_APP_ENABLED_ON_CREATE =
             "service_notification_message_thanox_app_enabled_on_create"
 
+        const val STRING_THANOX_REMOVED_DIALOG_TITLE = "service_dialog_title_thanox_removed"
+        const val STRING_THANOX_REMOVED_DIALOG_MESSAGE = "service_dialog_message_thanox_removed"
+        const val STRING_THANOX_REMOVED_DIALOG_KEEP_DATA = "service_dialog_button_thanox_removed_keep_data"
+        const val STRING_THANOX_REMOVED_DIALOG_DELETE_DATA = "service_dialog_button_thanox_removed_remove_data"
+
         object AppSet {
             const val STRING_SERVICE_APP_SET_ALL = "service_app_set_all"
             const val STRING_SERVICE_APP_SET_SYSTEM = "service_app_set_system"

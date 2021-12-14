@@ -146,7 +146,7 @@ object Libs {
     }
 
     object Rules {
-        private const val version = "3.3.0"
+        private const val version = "4.1.0"
         const val core = "org.jeasy:easy-rules-core:$version"
         const val mvel = "org.jeasy:easy-rules-mvel:$version"
         const val support = "org.jeasy:easy-rules-support:$version"

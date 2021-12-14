@@ -83,7 +83,7 @@ public class RuleListViewModel extends AndroidViewModel {
         if (isDataLoading.get()) return;
         isDataLoading.set(true);
         disposables.add(Single.create((SingleOnSubscribe<List<RuleInfo>>) emitter ->
-                        emitter.onSuccess(Objects.requireNonNull(loader.load())))
+                emitter.onSuccess(Objects.requireNonNull(loader.load())))
                 .flatMapObservable((Function<List<RuleInfo>,
                         ObservableSource<RuleInfo>>) Observable::fromIterable)
                 .subscribeOn(Schedulers.io())
@@ -123,13 +123,37 @@ public class RuleListViewModel extends AndroidViewModel {
                             Toast.LENGTH_LONG)
                             .show();
                 }
+
+                @Override
+                protected void onRuleAddFail(int errorCode, String errorMessage) {
+                    super.onRuleAddFail(errorCode, errorMessage);
+                    ThanosManager.from(getApplication())
+                            .getProfileManager()
+                            .addRule(ruleString, new RuleAddCallback() {
+                                @Override
+                                protected void onRuleAddSuccess() {
+                                    super.onRuleAddSuccess();
+                                    Toast.makeText(getApplication(),
+                                            R.string.module_profile_editor_save_success,
+                                            Toast.LENGTH_LONG)
+                                            .show();
+                                }
+
+                                @Override
+                                protected void onRuleAddFail(int errorCode, String errorMessage) {
+                                    super.onRuleAddFail(errorCode, errorMessage);
+                                    Toast.makeText(getApplication(),
+                                            errorMessage,
+                                            Toast.LENGTH_LONG)
+                                            .show();
+                                }
+                            }, ProfileManager.RULE_FORMAT_YAML);
+                }
             };
+            // Try json first.
             ThanosManager.from(getApplication())
                     .getProfileManager()
                     .addRule(ruleString, callback, ProfileManager.RULE_FORMAT_JSON);
-            ThanosManager.from(getApplication())
-                    .getProfileManager()
-                    .addRule(ruleString, callback, ProfileManager.RULE_FORMAT_YAML);
         } catch (Exception e) {
             XLog.e(e);
         }

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Delayed action example",
+    "description": "Execute the action delay 2s: show a short toast and log the event 2s after app switched.",
+    "priority": 1,
+    "condition": "frontPkgChanged == true",
+    "actions": [
+      "actor.delayed(2000, \"ui.showShortToast(\\\"App switched 2s ago\\\")\")",
+      "actor.delayed(2000, \"log.log(to)\")"
+    ]
+  }
+]

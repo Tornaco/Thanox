@@ -76,7 +76,6 @@
                     android:id="@+id/replacements"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:replacements="@{viewModel.replacements}" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

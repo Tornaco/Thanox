@@ -23,99 +23,103 @@
             type="boolean" />
     </data>
 
-    <RelativeLayout
-        android:id="@+id/app_item_root"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        style="@style/CardViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dashboard_category_bot_margin"
+        android:layout_marginStart="@dimen/dashboard_card_start_margin"
+        android:layout_marginTop="@dimen/common_view_margin_small"
+        android:layout_marginEnd="@dimen/dashboard_card_start_margin"
+        android:layout_marginBottom="@dimen/common_view_margin_mini"
+        android:clickable="true"
+        android:focusable="true"
         android:minHeight="@dimen/common_list_item_height"
         android:soundEffectsEnabled="false">
 
         <RelativeLayout
+            android:id="@+id/app_item_root"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/switch_container"
-            android:background="?selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:minHeight="@dimen/common_list_item_height"
-            android:onClick="@{() -> ruleItemClickListener.onItemClick(rule)}">
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/icon"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dashboard_tile_image_margin_start"
-                android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end"
-                android:src="@drawable/module_profile_ic_thunderstorms_fill_purple"
-                android:tint="@color/md_grey_500" />
+                android:layout_toStartOf="@id/switch_container"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:minHeight="@dimen/common_list_item_height"
+                android:onClick="@{() -> ruleItemClickListener.onItemClick(rule)}">
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="@dimen/common_view_margin_small"
-                android:layout_marginEnd="@dimen/common_view_margin_default"
-                android:layout_toEndOf="@+id/icon"
-                android:ellipsize="middle"
-                android:fadingEdge="horizontal"
-                android:text="@{rule.name}"
-                android:textAppearance="@style/TextAppearance.TileTitle"
-                tools:text="@string/app_name" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dashboard_tile_image_margin_start"
+                    android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end"
+                    android:src="@drawable/module_profile_ic_thunderstorms_fill_purple"
+                    android:tint="@color/md_grey_500" />
 
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:layout_marginEnd="@dimen/common_view_margin_default"
-                android:layout_marginBottom="@dimen/common_view_margin_small"
-                android:layout_toEndOf="@+id/icon"
-                android:ellipsize="middle"
-                android:fadingEdge="horizontal"
-                android:text="@{rule.description}"
-                android:textAppearance="@style/TextAppearance.TileSubTitle"
-                tools:text="This is a long text example, it can be very long...." />
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/icon"
+                    android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/switch_container"
-            android:layout_width="@dimen/module_profile_rule_list_switch_container_width"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="?selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:minHeight="@dimen/list_item_height">
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_view_margin_small"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:ellipsize="middle"
+                        android:fadingEdge="horizontal"
+                        android:text="@{rule.name}"
+                        android:textAppearance="@style/TextAppearance.TileTitle"
+                        tools:text="Profile name" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/item_switch"
-                style="@style/SwitchStyleApple"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:layout_marginBottom="@dimen/common_view_margin_small"
+                        android:ellipsize="middle"
+                        android:fadingEdge="horizontal"
+                        android:text="@{rule.description}"
+                        android:textAppearance="@style/TextAppearance.TileSubTitle"
+                        tools:text="This is a long text example, This is a long text example, This is a long text example" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/switch_container"
+                android:layout_width="@dimen/module_profile_rule_list_switch_container_width"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:layout_marginEnd="@dimen/common_view_margin_default"
-                android:checked="@{rule.enabled}"
-                android:ruleInfo="@{rule}"
-                android:ruleSwitchListener="@{switchListener}"
-                android:soundEffectsEnabled="false"
-                tools:checked="true" />
-        </RelativeLayout>
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:minHeight="@dimen/list_item_height">
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="@dimen/common_view_margin_default"
-            android:layout_marginEnd="@dimen/common_view_margin_default"
-            android:background="?android:attr/dividerVertical"
-            android:visibility="@{isLastOne ? View.GONE : View.GONE}"
-            tools:visibility="visible" />
-    </RelativeLayout>
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/item_switch"
+                    style="@style/SwitchStyleApple"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:checked="@{rule.enabled}"
+                    android:ruleInfo="@{rule}"
+                    android:ruleSwitchListener="@{switchListener}"
+                    android:soundEffectsEnabled="false"
+                    tools:checked="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

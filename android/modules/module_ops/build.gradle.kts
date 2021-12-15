@@ -4,6 +4,8 @@ import tornaco.project.android.thanox.Libs
 
 plugins {
     id("com.android.library")
+    id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -35,6 +37,7 @@ android {
 }
 dependencies {
     implementation(Libs.AndroidX.androidXCore)
+    implementation(Libs.Kotlin.stdlib)
 
     implementation(Libs.AndroidX.appCompat)
     implementation(Libs.AndroidX.material)
@@ -42,19 +45,19 @@ dependencies {
     implementation(Libs.AndroidX.preference)
     implementation(Libs.AndroidX.constraint)
     implementation(Libs.AndroidX.swipeRefreshLayout)
+    implementation(Libs.AndroidX.navigationFragment)
+    implementation(Libs.AndroidX.navigationUI)
 
     implementation(Libs.Others.guavaAndroid)
     implementation(Libs.Others.glide)
     annotationProcessor(Libs.Others.glideCompiler)
-
-    compileOnly(Libs.Others.lombok)
-    annotationProcessor(Libs.Others.lombok)
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
+    add("kapt", project(":annotation_processors:permission-requester-compiler"))
 
     implementation(project(":modules:module_filepicker"))
     implementation(project(":third_party:recyclerview-fastscroll"))

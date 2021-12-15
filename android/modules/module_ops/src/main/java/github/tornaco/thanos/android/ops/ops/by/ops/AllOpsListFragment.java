@@ -3,25 +3,21 @@ package github.tornaco.thanos.android.ops.ops.by.ops;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
-import java.util.Objects;
-
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.theme.ThemeActivity;
-import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import github.tornaco.android.thanos.widget.section.StickyHeaderLayoutManager;
 import github.tornaco.thanos.android.ops.R;
@@ -29,39 +25,38 @@ import github.tornaco.thanos.android.ops.databinding.ModuleOpsLayoutAllOpsBindin
 import github.tornaco.thanos.android.ops.model.Op;
 import github.tornaco.thanos.android.ops.ops.OpItemClickListener;
 
-public class AllOpsListActivity extends ThemeActivity {
+public class AllOpsListFragment extends Fragment {
 
     private ModuleOpsLayoutAllOpsBinding binding;
     private AllOpsListViewModel viewModel;
 
-    public static void start(@NonNull Context context) {
-        ActivityUtils.startActivity(context, AllOpsListActivity.class);
+    public static AllOpsListFragment newInstance() {
+        return new AllOpsListFragment();
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ModuleOpsLayoutAllOpsBinding.inflate(LayoutInflater.from(this));
-        setContentView(binding.getRoot());
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        setHasOptionsMenu(true);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = ModuleOpsLayoutAllOpsBinding.inflate(LayoutInflater.from(requireContext()));
         setupView();
         setupViewModel();
+        return binding.getRoot();
     }
 
     private void setupView() {
-        setSupportActionBar(binding.toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        binding.toolbar.setTitle(getString(R.string.module_ops_feature_title_ops_app_list));
 
-        StickyHeaderLayoutManager stickyHeaderLayoutManager = new StickyHeaderLayoutManager();
-        // set a header position callback to set elevation on sticky headers, because why not
-        stickyHeaderLayoutManager.setHeaderPositionChangedCallback((sectionIndex, header, oldPosition, newPosition) -> {
-            boolean elevated = newPosition == StickyHeaderLayoutManager.HeaderPosition.STICKY;
-            header.setElevation(elevated ? 8 : 0);
-        });
-        binding.apps.setLayoutManager(stickyHeaderLayoutManager);
+        binding.apps.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.apps.setAdapter(new AllOpsListAdapter(new OpItemClickListener() {
             @Override
             public void onOpItemClick(@NonNull Op op, @NonNull View anchor) {
-                OpsAppListActivity.start(getApplicationContext(), op);
+                OpsAppListActivity.start(requireActivity(), op);
             }
         }));
 
@@ -71,6 +66,23 @@ public class AllOpsListActivity extends ThemeActivity {
 
         // Switch.
         onSetupSwitchBar(binding.switchBarContainer.switchBar);
+
+        binding.toolbar.inflateMenu(R.menu.module_ops_list);
+        binding.toolbar.setOnMenuItemClickListener(item -> {
+            if (R.id.action_reset_all_modes == item.getItemId()) {
+                new MaterialAlertDialogBuilder(requireActivity())
+                        .setTitle(R.string.module_ops_title_reset_ops_mode_for_all)
+                        .setMessage(R.string.common_dialog_message_are_you_sure)
+                        .setPositiveButton(android.R.string.ok, (dialog, which) ->
+                                ThanosManager.from(requireContext())
+                                        .ifServiceInstalled(thanosManager ->
+                                                thanosManager.getAppOpsManager().resetAllModes("*")))
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .show();
+                return true;
+            }
+            return false;
+        });
     }
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {
@@ -79,51 +91,29 @@ public class AllOpsListActivity extends ThemeActivity {
     }
 
     protected boolean getSwitchBarCheckState() {
-        return ThanosManager.from(getApplicationContext())
+        return ThanosManager.from(requireContext())
                 .isServiceInstalled()
-                && ThanosManager.from(getApplicationContext())
+                && ThanosManager.from(requireContext())
                 .getAppOpsManager().isOpsEnabled();
     }
 
     protected void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
-        ThanosManager.from(getApplicationContext())
+        ThanosManager.from(requireContext())
                 .ifServiceInstalled(thanosManager -> thanosManager.getAppOpsManager()
                         .setOpsEnabled(isChecked));
     }
 
     private void setupViewModel() {
-        viewModel = obtainViewModel(this);
+        viewModel = obtainViewModel(requireActivity());
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         viewModel.start();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.module_ops_list, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (R.id.action_reset_all_modes == item.getItemId()) {
-            new MaterialAlertDialogBuilder(thisActivity())
-                    .setMessage(R.string.module_ops_title_reset_ops_mode_for_all)
-                    .setPositiveButton(android.R.string.ok, (dialog, which) ->
-                            ThanosManager.from(getApplicationContext())
-                                    .ifServiceInstalled(thanosManager ->
-                                            thanosManager.getAppOpsManager().resetAllModes("*")))
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public static AllOpsListViewModel obtainViewModel(FragmentActivity activity) {

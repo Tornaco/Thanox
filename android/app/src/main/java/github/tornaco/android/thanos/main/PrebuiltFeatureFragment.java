@@ -49,7 +49,7 @@ import github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampoli
 import github.tornaco.android.thanox.module.notification.recorder.NotificationRecordListActivity;
 import github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity;
 import github.tornaco.thanos.android.module.profile.RuleListActivity;
-import github.tornaco.thanos.android.ops.ops.by.ops.AllOpsListActivity;
+import github.tornaco.thanos.android.ops.OpsBottomNavActivity;
 import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity;
 
 public class PrebuiltFeatureFragment extends NavFragment
@@ -139,7 +139,7 @@ public class PrebuiltFeatureFragment extends NavFragment
         } else if (tile.getId() == R.id.id_privacy_cheat) {
             DataCheatActivity.start(requireActivity());
         } else if (tile.getId() == R.id.id_ops_by_ops) {
-            AllOpsListActivity.start(requireActivity());
+            OpsBottomNavActivity.Starter.start(requireActivity());
         } else if (tile.getId() == R.id.id_task_blur) {
             RecentTaskBlurListActivity.start(requireActivity());
         } else if (tile.getId() == R.id.id_op_remind) {

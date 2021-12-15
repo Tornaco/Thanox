@@ -75,7 +75,7 @@ object Libs {
     object AndroidX {
         const val androidXCore = "androidx.core:core-ktx:1.3.2"
         const val appCompat = "androidx.appcompat:appcompat:1.3.1"
-        const val material = "com.google.android.material:material:1.5.0-alpha05"
+        const val material = "com.google.android.material:material:1.5.0-rc01"
         const val annotations = "androidx.annotation:annotation:1.1.0"
         const val recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
         const val cardview = "androidx.cardview:cardview:1.1.0"
@@ -83,6 +83,8 @@ object Libs {
         const val preference = "androidx.preference:preference:1.1.0"
         const val interpolator = "androidx.interpolator:interpolator:1.0.0"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:2.3.5"
+        const val navigationUI = "androidx.navigation:navigation-ui:2.3.5"
 
         const val lifeCycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
         const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime:2.3.1"

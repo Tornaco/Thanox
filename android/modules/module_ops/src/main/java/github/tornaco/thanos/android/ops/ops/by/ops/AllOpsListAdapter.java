@@ -1,7 +1,6 @@
 package github.tornaco.thanos.android.ops.ops.by.ops;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -56,12 +55,7 @@ public class AllOpsListAdapter extends SectioningAdapter implements Consumer<Lis
         OpGroup opGroup = opGroups.get(sectionIndex);
         Op op = opGroup.getOpList().get(itemIndex);
         ivh.binding.setOp(op);
-        ivh.binding.appItemRoot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onOpItemClick(op, v);
-            }
-        });
+        ivh.binding.card.setOnClickListener(v -> listener.onOpItemClick(op, v));
         ivh.binding.executePendingBindings();
     }
 

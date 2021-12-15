@@ -12,22 +12,12 @@ public abstract class EnableCallback extends IEnableCallback.Stub {
 
     @Override
     public final void onSuccess(int userId) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                onSuccessMain(userId);
-            }
-        });
+        handler.post(() -> onSuccessMain(userId));
     }
 
     @Override
     public final void onError(String errorMessage, int errorCode) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                onErrorMain(errorMessage, errorCode);
-            }
-        });
+        handler.post(() -> onErrorMain(errorMessage, errorCode));
     }
 
     @UiThread

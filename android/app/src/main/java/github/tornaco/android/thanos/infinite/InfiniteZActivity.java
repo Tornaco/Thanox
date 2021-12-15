@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.elvishew.xlog.XLog;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -48,13 +49,13 @@ public class InfiniteZActivity extends ThemeActivity {
     private ActivityIniniteZAppsBinding binding;
 
     private Handler uiHandler;
-    private Runnable hideFabRunnable = new Runnable() {
+    private final Runnable hideFabRunnable = new Runnable() {
         @Override
         public void run() {
             binding.fab.hide();
         }
     };
-    private Runnable showFabRunnable = new Runnable() {
+    private final Runnable showFabRunnable = new Runnable() {
         @Override
         public void run() {
             binding.fab.show();
@@ -128,7 +129,7 @@ public class InfiniteZActivity extends ThemeActivity {
         });
 
 
-        binding.swipe.setOnRefreshListener(() -> viewModel.start());
+        binding.swipe.setOnRefreshListener(this::refreshState);
         binding.swipe.setColorSchemeColors(getResources()
                 .getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
@@ -140,6 +141,10 @@ public class InfiniteZActivity extends ThemeActivity {
         }));
 
         delayHideFab();
+    }
+
+    private void refreshState() {
+        viewModel.start();
     }
 
     private void nowHideFab() {
@@ -173,12 +178,15 @@ public class InfiniteZActivity extends ThemeActivity {
                         @Override
                         public void onSuccessMain(int userId) {
                             p.dismiss();
+                            refreshState();
                         }
 
                         @Override
                         public void onErrorMain(String errorMessage, int errorCode) {
-                            DialogUtils.showMessage(thisActivity(), String.valueOf(errorCode), errorMessage);
+                            XLog.e("Disable infiniteZ fail: %s %s", errorCode, errorMessage);
+                            DialogUtils.showMessage(thisActivity(), null, getString(R.string.common_generic_error));
                             p.dismiss();
+                            refreshState();
                         }
                     });
         });

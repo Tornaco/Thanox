@@ -34,6 +34,7 @@
 
     <string name="common_network_error">Network unavailable, Please check your internet connection.</string>
     <string name="common_server_error">Server error, Please try again later.</string>
+    <string name="common_generic_error">Oops. Something went wrong</string>
 
     <string name="common_text_wait_a_moment">Wait a moment</string>
 

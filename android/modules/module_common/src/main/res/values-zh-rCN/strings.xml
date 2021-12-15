@@ -34,6 +34,7 @@
 
     <string name="common_network_error">网络异常，请检查设备网络连接后重试</string>
     <string name="common_server_error">服务器暂时不可用，请稍后重试，或尝试更新到软件最新版本</string>
+    <string name="common_generic_error">抱歉，发生了一些错误</string>
 
     <string name="common_text_wait_a_moment">稍等一下</string>
 

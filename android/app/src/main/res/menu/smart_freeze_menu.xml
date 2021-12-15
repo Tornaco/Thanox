@@ -10,6 +10,12 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/module_common_ic_add_fill"
+        android:title="@string/common_fab_title_add"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_settings"
         android:icon="@drawable/module_common_ic_md_outline_settings_24"
         android:title="@string/nav_title_settings"

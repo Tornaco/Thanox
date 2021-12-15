@@ -3,8 +3,6 @@ package github.tornaco.android.thanos.power;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,20 +49,6 @@ public class SmartFreezeActivity extends ThemeActivity {
     private SmartFreezeAppsViewModel viewModel;
     private ActivitySmartFreezeAppsBinding binding;
 
-    private Handler uiHandler;
-    private Runnable hideFabRunnable = new Runnable() {
-        @Override
-        public void run() {
-            binding.fab.hide();
-        }
-    };
-    private Runnable showFabRunnable = new Runnable() {
-        @Override
-        public void run() {
-            binding.fab.show();
-        }
-    };
-
     @Verify
     public static void start(Context context) {
         ActivityUtils.startActivity(context, SmartFreezeActivity.class);
@@ -76,7 +60,6 @@ public class SmartFreezeActivity extends ThemeActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySmartFreezeAppsBinding.inflate(
                 LayoutInflater.from(this), null, false);
-        uiHandler = new Handler(Looper.getMainLooper());
         setContentView(binding.getRoot());
         setupView();
         setupViewModel();
@@ -140,45 +123,11 @@ public class SmartFreezeActivity extends ThemeActivity {
 
             }
         }, this::showItemPopMenu));
-        binding.apps.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    delayHideFab();
-                } else {
-                    nowShowFab();
-                }
-            }
-        });
-
 
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
         onSetupSwitchBar(binding.switchBarContainer.switchBar);
-
-        binding.fab.setOnClickListener(v -> ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
-            ArrayList<String> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
-            AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
-        }));
-
-        delayHideFab();
-    }
-
-    private void nowHideFab() {
-        uiHandler.removeCallbacks(hideFabRunnable);
-        uiHandler.post(hideFabRunnable);
-    }
-
-    private void delayHideFab() {
-        uiHandler.removeCallbacks(hideFabRunnable);
-        uiHandler.postDelayed(hideFabRunnable, 1800);
-    }
-
-    private void nowShowFab() {
-        uiHandler.removeCallbacks(showFabRunnable);
-        uiHandler.post(showFabRunnable);
     }
 
     @Verify
@@ -254,6 +203,10 @@ public class SmartFreezeActivity extends ThemeActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_settings == item.getItemId()) {
             SmartFreezeSettingsActivity.start(this);
+            return true;
+        }
+        if (R.id.action_add == item.getItemId()) {
+            onRequestAddNewApps();
             return true;
         }
         if (R.id.action_enable_all == item.getItemId()) {
@@ -350,6 +303,13 @@ public class SmartFreezeActivity extends ThemeActivity {
             return true;
         }
         return false;
+    }
+
+    private void onRequestAddNewApps() {
+        ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
+            ArrayList<String> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
+            AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
+        });
     }
 
     public static SmartFreezeAppsViewModel obtainViewModel(FragmentActivity activity) {

@@ -3,8 +3,6 @@ package github.tornaco.android.thanos.infinite;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +15,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.elvishew.xlog.XLog;
 import com.google.common.collect.Lists;
@@ -48,20 +45,6 @@ public class InfiniteZActivity extends ThemeActivity {
     private InfiniteZAppsViewModel viewModel;
     private ActivityIniniteZAppsBinding binding;
 
-    private Handler uiHandler;
-    private final Runnable hideFabRunnable = new Runnable() {
-        @Override
-        public void run() {
-            binding.fab.hide();
-        }
-    };
-    private final Runnable showFabRunnable = new Runnable() {
-        @Override
-        public void run() {
-            binding.fab.show();
-        }
-    };
-
     @Verify
     public static void start(Context context) {
         ActivityUtils.startActivity(context, InfiniteZActivity.class);
@@ -73,7 +56,6 @@ public class InfiniteZActivity extends ThemeActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityIniniteZAppsBinding.inflate(
                 LayoutInflater.from(this), null, false);
-        uiHandler = new Handler(Looper.getMainLooper());
         setContentView(binding.getRoot());
         setupView();
         setupViewModel();
@@ -116,50 +98,16 @@ public class InfiniteZActivity extends ThemeActivity {
 
             }
         }, this::showItemPopMenu));
-        binding.apps.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    delayHideFab();
-                } else {
-                    nowShowFab();
-                }
-            }
-        });
-
 
         binding.swipe.setOnRefreshListener(this::refreshState);
         binding.swipe.setColorSchemeColors(getResources()
                 .getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
         onSetupSwitchBar(binding.switchBarContainer.switchBar);
-
-        binding.fab.setOnClickListener(v -> ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
-            ArrayList<String> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
-            AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
-        }));
-
-        delayHideFab();
     }
 
     private void refreshState() {
         viewModel.start();
-    }
-
-    private void nowHideFab() {
-        uiHandler.removeCallbacks(hideFabRunnable);
-        uiHandler.post(hideFabRunnable);
-    }
-
-    private void delayHideFab() {
-        uiHandler.removeCallbacks(hideFabRunnable);
-        uiHandler.postDelayed(hideFabRunnable, 1800);
-    }
-
-    private void nowShowFab() {
-        uiHandler.removeCallbacks(showFabRunnable);
-        uiHandler.post(showFabRunnable);
     }
 
     @Verify
@@ -230,13 +178,25 @@ public class InfiniteZActivity extends ThemeActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.infinite_z, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     @Verify
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (R.id.action_add == item.getItemId()) {
+            onRequestAddApp();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onRequestAddApp() {
+        ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
+            ArrayList<String> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
+            AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
+        });
     }
 
     public static InfiniteZAppsViewModel obtainViewModel(FragmentActivity activity) {

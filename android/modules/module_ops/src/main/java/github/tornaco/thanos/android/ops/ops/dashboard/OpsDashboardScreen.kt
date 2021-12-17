@@ -10,10 +10,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.material.composethemeadapter3.Mdc3Theme
-import github.tornaco.thanos.android.ops.ops.dashboard.pie.CenterText
-import github.tornaco.thanos.android.ops.ops.dashboard.pie.ChartItem
-import github.tornaco.thanos.android.ops.ops.dashboard.pie.Legend
-import github.tornaco.thanos.android.ops.ops.dashboard.pie.PieChart
+import github.tornaco.android.thanos.widget.pie.CenterText
+import github.tornaco.android.thanos.widget.pie.ChartItem
+import github.tornaco.android.thanos.widget.pie.Legend
+import github.tornaco.android.thanos.widget.pie.PieChart
 
 @Composable
 fun OpsDashboardScreen() {

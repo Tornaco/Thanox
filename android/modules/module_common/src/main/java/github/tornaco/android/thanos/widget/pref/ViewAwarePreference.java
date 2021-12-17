@@ -7,9 +7,6 @@ import android.view.View;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import lombok.Getter;
-
-@Getter
 public class ViewAwarePreference extends Preference {
   private View view;
 
@@ -34,5 +31,9 @@ public class ViewAwarePreference extends Preference {
   public void onBindViewHolder(PreferenceViewHolder holder) {
     super.onBindViewHolder(holder);
     this.view = holder.itemView;
+  }
+
+  public View getView() {
+    return this.view;
   }
 }

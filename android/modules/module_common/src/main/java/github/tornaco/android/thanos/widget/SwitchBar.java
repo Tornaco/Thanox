@@ -36,8 +36,6 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.ArrayList;
 
 import github.tornaco.android.thanos.module.common.R;
-import lombok.Getter;
-import lombok.Setter;
 
 public class SwitchBar extends FrameLayout
         implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
@@ -63,8 +61,6 @@ public class SwitchBar extends FrameLayout
         this(context, attrs, defStyleAttr, 0);
     }
 
-    @Setter
-    @Getter
     private int onRes, offRes;
 
 
@@ -212,6 +208,22 @@ public class SwitchBar extends FrameLayout
         mSwitch.setOnCheckedChangeListener(ss.visible ? this : null);
 
         requestLayout();
+    }
+
+    public int getOnRes() {
+        return this.onRes;
+    }
+
+    public int getOffRes() {
+        return this.offRes;
+    }
+
+    public void setOnRes(int onRes) {
+        this.onRes = onRes;
+    }
+
+    public void setOffRes(int offRes) {
+        this.offRes = offRes;
     }
 
     public interface OnSwitchChangeListener {

@@ -22,8 +22,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     buildFeatures {
-        compose = false
+        compose = true
         buildConfig = true
         aidl = true
         renderScript = false
@@ -31,6 +35,10 @@ android {
         shaders = false
         viewBinding = true
         dataBinding = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = tornaco.project.android.thanox.Compose.composeVersion
     }
 
     resourcePrefix = resPrefix
@@ -47,6 +55,23 @@ dependencies {
     implementation(Libs.AndroidX.swipeRefreshLayout)
     implementation(Libs.AndroidX.navigationFragment)
     implementation(Libs.AndroidX.navigationUI)
+
+    implementation(tornaco.project.android.thanox.Compose.runtimeSaveAble)
+    implementation(tornaco.project.android.thanox.Compose.ui)
+    implementation(tornaco.project.android.thanox.Compose.runtime)
+    implementation(tornaco.project.android.thanox.Compose.material)
+    implementation(tornaco.project.android.thanox.Compose.material3)
+    implementation(tornaco.project.android.thanox.Compose.material3Adapter)
+    implementation(tornaco.project.android.thanox.Compose.activityCompose)
+    implementation(tornaco.project.android.thanox.Compose.viewmodel)
+    implementation(tornaco.project.android.thanox.Compose.navigationCompose)
+    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
+    implementation(tornaco.project.android.thanox.Compose.tooling)
+    implementation(tornaco.project.android.thanox.Compose.toolingPreview)
+    implementation(tornaco.project.android.thanox.Compose.composeMaterialIconsExtended)
+    implementation(Libs.Accompanist.appcompatTheme)
+    implementation(Libs.Accompanist.systemUiController)
+    implementation(Libs.Accompanist.pager)
 
     implementation(Libs.Others.guavaAndroid)
     implementation(Libs.Others.glide)

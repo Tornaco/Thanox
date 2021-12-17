@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.thanos.android.ops.databinding.ModuleOpsLayoutBottomNavBinding
-import github.tornaco.thanos.android.ops.ops.OpsDashboardFragment
+import github.tornaco.thanos.android.ops.ops.dashboard.OpsDashboardFragment
 import github.tornaco.thanos.android.ops.ops.by.ops.AllOpsListFragment
 
 class OpsBottomNavActivity : ThemeActivity() {

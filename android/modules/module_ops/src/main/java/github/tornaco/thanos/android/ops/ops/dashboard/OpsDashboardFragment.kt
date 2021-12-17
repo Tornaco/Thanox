@@ -1,13 +1,14 @@
-package github.tornaco.thanos.android.ops.ops
+package github.tornaco.thanos.android.ops.ops.dashboard
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OpsDashboardFragment : Fragment() {
 
     companion object {
@@ -21,6 +22,10 @@ class OpsDashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        return LinearLayout(requireContext()).apply { setBackgroundColor(Color.BLUE) }
+        return ComposeView(requireContext()).apply {
+            setContent {
+                OpsDashboardScreen()
+            }
+        }
     }
 }

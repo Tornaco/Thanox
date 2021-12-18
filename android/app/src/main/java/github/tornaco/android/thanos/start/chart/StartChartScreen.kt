@@ -1,5 +1,6 @@
 package github.tornaco.android.thanos.start.chart
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
@@ -140,7 +141,7 @@ fun FilterDropDown(
             Text(text = stringResource(id = selectedCategory.labelRes))
         }
         DropdownMenu(
-            modifier = Modifier,
+            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {

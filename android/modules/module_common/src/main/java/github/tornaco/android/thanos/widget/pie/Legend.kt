@@ -49,7 +49,8 @@ fun <T> Legend(
                     modifier = Modifier.padding(horizontal = 8.dp),
                     text = state.chartItem.label,
                     maxLines = 1,
-                    style = MaterialTheme.typography.bodySmall)
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface)
             }
         }
     }

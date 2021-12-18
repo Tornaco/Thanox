@@ -188,6 +188,9 @@
         <activity
             android:name=".onboarding.OnBoardingActivity"
             android:exported="false" />
+        <activity
+            android:name=".start.chart.ComposeStartChartActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

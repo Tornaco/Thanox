@@ -19,13 +19,13 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Legend(
+fun <T> Legend(
     modifier: Modifier = Modifier,
     itemPadding: PaddingValues = PaddingValues(2.dp),
     columnCount: Int = 1,
     dotSize: Dp = 12.dp,
     shape: Shape = CircleShape,
-    chartItems: List<ChartItem>,
+    chartItems: List<ChartItem<T>>,
 ) {
 
     val stateList = chartItems.toStateList()

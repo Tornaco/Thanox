@@ -3,7 +3,6 @@ package github.tornaco.android.thanos.start;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +16,7 @@ import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivit
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
 import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.start.chart.ComposeStartChartActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 
 public class StartRestrictActivity extends CommonFuncToggleAppListFilterActivity {
@@ -72,7 +72,7 @@ public class StartRestrictActivity extends CommonFuncToggleAppListFilterActivity
                 Toast.makeText(thisActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return false;
             }
-            StartChartActivity.start(this);
+            ComposeStartChartActivity.Starter.INSTANCE.start(this);
         }
         if (R.id.action_start_rule == item.getItemId()) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(thisActivity())) {

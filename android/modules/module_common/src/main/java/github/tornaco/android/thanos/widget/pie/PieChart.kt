@@ -29,17 +29,17 @@ const val TAP_CENTER_DISTANCE = 100f
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun PieChart(
+fun <T> PieChart(
     modifier: Modifier = Modifier,
     centerText: CenterText? = null,
     strokeSize: Dp,
-    chartItems: List<ChartItem>,
-    onItemSelected: ((ChartItem) -> Unit)? = null,
+    chartItems: List<ChartItem<T>>,
+    onItemSelected: ((ChartItem<T>) -> Unit)? = null,
     onCenterSelected: (() -> Unit)? = null,
 ) {
     val stateList = chartItems.toStateList()
     var centerOffset: Offset = Offset.Zero
-    val itemAngleMap = mutableMapOf<Pair<Float, Float>, ChartItemState>()
+    val itemAngleMap = mutableMapOf<Pair<Float, Float>, ChartItemState<T>>()
 
     Canvas(modifier = modifier
         .pointerInput(chartItems) {
@@ -68,53 +68,65 @@ fun PieChart(
             val spaceAngle = 1f
             val totalAngle = 360f - spaceAngle * stateList.size
             var startAngle = 0f
-            stateList.forEach { state ->
-                val initialStartAngle = startAngle
-                // Item Arc
-                val sweepAngle = totalAngle * state.percent
-                drawArc(color = state.chartItem.color,
-                    startAngle = startAngle,
-                    sweepAngle = sweepAngle,
+
+            val isEmpty = stateList.isEmpty()
+            if (isEmpty) {
+                drawArc(color = Color.LightGray,
+                    startAngle = 0f,
+                    sweepAngle = 360f,
                     useCenter = false,
                     size = arcSize,
                     style = Stroke(width = strokeSize.toPx()))
-                startAngle += sweepAngle
+            } else {
+                stateList.forEach { state ->
+                    val initialStartAngle = startAngle
+                    // Item Arc
+                    val sweepAngle = totalAngle * state.percent
+                    drawArc(color = state.chartItem.color,
+                        startAngle = startAngle,
+                        sweepAngle = sweepAngle,
+                        useCenter = false,
+                        size = arcSize,
+                        style = Stroke(width = strokeSize.toPx()))
+                    startAngle += sweepAngle
 
-                // Space Arc
-                drawArc(color = Color.Transparent,
-                    startAngle = startAngle,
-                    sweepAngle = spaceAngle,
-                    useCenter = false,
-                    size = arcSize,
-                    style = Stroke(width = strokeSize.toPx()))
-                startAngle += spaceAngle
+                    // Space Arc
+                    drawArc(color = Color.Transparent,
+                        startAngle = startAngle,
+                        sweepAngle = spaceAngle,
+                        useCenter = false,
+                        size = arcSize,
+                        style = Stroke(width = strokeSize.toPx()))
+                    startAngle += spaceAngle
 
 
-                // Cache angle to map
-                itemAngleMap[Pair(initialStartAngle, startAngle)] = state
+                    // Cache angle to map
+                    itemAngleMap[Pair(initialStartAngle, startAngle)] = state
+                }
+            }
 
-                // Center Text
-                centerText?.let { centerText ->
-                    val paint = Paint()
-                    paint.isAntiAlias = true
-                    paint.textAlign = Paint.Align.CENTER
-                    paint.textSize = centerText.size.toPx()
-                    paint.color = centerText.color.toArgb()
-                    paint.typeface = Typeface.DEFAULT_BOLD
-                    drawIntoCanvas {
-                        it.nativeCanvas.drawText(centerText.text,
-                            center.x,
-                            center.y,
-                            paint)
-                    }
+
+            // Center Text
+            centerText?.let { centerText ->
+                val paint = Paint()
+                paint.isAntiAlias = true
+                paint.textAlign = Paint.Align.CENTER
+                paint.textSize = centerText.size.toPx()
+                paint.color = centerText.color.toArgb()
+                paint.typeface = Typeface.DEFAULT_BOLD
+                drawIntoCanvas {
+                    it.nativeCanvas.drawText(centerText.text,
+                        center.x,
+                        center.y,
+                        paint)
                 }
             }
         }
     )
 }
 
-private fun detectTappedItems(
-    itemAngleMap: MutableMap<Pair<Float, Float>, ChartItemState>,
+private fun <T> detectTappedItems(
+    itemAngleMap: MutableMap<Pair<Float, Float>, ChartItemState<T>>,
     touchAngle: Float,
 ) = itemAngleMap.filter { itemAngle ->
     touchAngle >= itemAngle.key.first && touchAngle <= itemAngle.key.second
@@ -150,18 +162,24 @@ fun ChartPreview() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val items = listOf(
-            ChartItem(color = Color(0xFFE57600), value = 1, label = "Contacts"),
-            ChartItem(color = Color(0xFF4485AA), value = 2, label = "Camera"),
-            ChartItem(color = Color(0xFF94E287),
+            ChartItem("",
+                color = Color(0xFFE57600),
+                value = 1,
+                label = "Contacts"),
+            ChartItem("",
+                color = Color(0xFF4485AA),
+                value = 2,
+                label = "Camera"),
+            ChartItem("", color = Color(0xFF94E287),
                 value = 3,
                 label = "External Photos"),
-            ChartItem(color = Color(0xFF0093E5),
+            ChartItem("", color = Color(0xFF0093E5),
                 value = 6,
                 label = "Device Id"),
-            ChartItem(color = Color(0xFFB446C8),
+            ChartItem("", color = Color(0xFFB446C8),
                 value = 4,
                 label = "Audio recorder"),
-            ChartItem(color = Color(0xFF5A5AE6), value = 4, label = "Vib"),
+            ChartItem("", color = Color(0xFF5A5AE6), value = 4, label = "Vib"),
         )
         PieChart(modifier = Modifier
             .background(color = Color.LightGray)

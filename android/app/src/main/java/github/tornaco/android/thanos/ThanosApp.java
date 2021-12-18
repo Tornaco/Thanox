@@ -5,12 +5,13 @@ import static github.tornaco.android.thanos.CrashHandlerKt.installCrashHandler;
 import android.content.Context;
 
 import com.elvishew.xlog.XLog;
-import com.google.android.material.color.DynamicColors;
 
+import dagger.hilt.android.HiltAndroidApp;
 import github.tornaco.android.thanos.app.Init;
 import github.tornaco.android.thanos.core.app.AppGlobals;
 import io.reactivex.plugins.RxJavaPlugins;
 
+@HiltAndroidApp
 public class ThanosApp extends MultipleModulesApp {
 
     @Override

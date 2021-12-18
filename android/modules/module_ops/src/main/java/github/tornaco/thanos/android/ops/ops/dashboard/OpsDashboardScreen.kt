@@ -33,18 +33,24 @@ private fun OpsDashboardContent() {
         Spacer(modifier = Modifier.size(64.dp))
 
         val items = listOf(
-            ChartItem(color = Color(0xFFE57600), value = 1, label = "Contacts"),
-            ChartItem(color = Color(0xFF4485AA), value = 2, label = "Camera"),
-            ChartItem(color = Color(0xFF94E287),
+            ChartItem("",
+                color = Color(0xFFE57600),
+                value = 1,
+                label = "Contacts"),
+            ChartItem("",
+                color = Color(0xFF4485AA),
+                value = 2,
+                label = "Camera"),
+            ChartItem("", color = Color(0xFF94E287),
                 value = 3,
                 label = "External Photos"),
-            ChartItem(color = Color(0xFF0093E5),
+            ChartItem("", color = Color(0xFF0093E5),
                 value = 6,
                 label = "Device Id"),
-            ChartItem(color = Color(0xFFB446C8),
+            ChartItem("", color = Color(0xFFB446C8),
                 value = 4,
                 label = "Audio recorder"),
-            ChartItem(color = Color(0xFF5A5AE6), value = 4, label = "Vib"),
+            ChartItem("", color = Color(0xFF5A5AE6), value = 4, label = "Vib"),
         )
 
         PieChart(modifier = Modifier

@@ -8,6 +8,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -97,8 +98,10 @@ android {
     applicationVariants.all {
         val versionName = versionName
         outputs.all {
-            val impl = this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
-            impl.outputFileName = "thanox_${versionName}(${Configs.thanoxVersionCode}).apk"
+            val impl =
+                this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
+            impl.outputFileName =
+                "thanox_${versionName}(${Configs.thanoxVersionCode}).apk"
             log("impl.outputFileName changed to:${impl.outputFileName}")
         }
     }
@@ -136,13 +139,16 @@ dependencies {
     implementation(Compose.activityCompose)
     implementation(Compose.viewmodel)
     implementation(Compose.navigationCompose)
-    implementation(Compose.hiltNavigation)
     implementation(Compose.tooling)
     implementation(Compose.toolingPreview)
     implementation(Compose.composeMaterialIconsExtended)
     implementation(Libs.Accompanist.appcompatTheme)
     implementation(Libs.Accompanist.systemUiController)
     implementation(Libs.Accompanist.pager)
+
+    implementation(Compose.hiltNavigation)
+    implementation(Libs.Hilt.library)
+    kapt(Libs.Hilt.googleAndroidCompiler)
 
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)
@@ -209,18 +215,23 @@ tasks.register("updateProps") {
     log("*** updateProps ***")
     val serviceProps = Properties()
     // Src.
-    serviceProps.load(project.rootProject.file("thanos.properties").inputStream())
+    serviceProps.load(project.rootProject.file("thanos.properties")
+        .inputStream())
 
     // Write fields.
-    serviceProps.setProperty("thanox.build.version.code", Configs.thanoxVersionCode.toString())
-    serviceProps.setProperty("thanox.build.version.name", Configs.thanoxVersionName)
+    serviceProps.setProperty("thanox.build.version.code",
+        Configs.thanoxVersionCode.toString())
+    serviceProps.setProperty("thanox.build.version.name",
+        Configs.thanoxVersionName)
     serviceProps.setProperty("thanox.build.variant", Configs.thanoxBuildVariant)
-    serviceProps.setProperty("thanox.build.debuggable", Configs.thanoxBuildIsDebug.toString())
+    serviceProps.setProperty("thanox.build.debuggable",
+        Configs.thanoxBuildIsDebug.toString())
     serviceProps.setProperty("thanox.build.flavor", Configs.thanoxBuildFlavor)
     serviceProps.setProperty("thanox.build.host", Configs.thanoxBuildHostName)
     serviceProps.setProperty("thanox.build.fp", Configs.thanoxBuildFP)
     serviceProps.setProperty("thanox.build.date", Date().toString())
-    serviceProps.setProperty("thanox.build.app.package.name", Configs.thanoxAppId)
+    serviceProps.setProperty("thanox.build.app.package.name",
+        Configs.thanoxAppId)
     serviceProps.setProperty("thanox.build.app.package.name.prefix",
         Configs.thanoxAppIdPrefix)
     serviceProps.setProperty("thanox.build.shortcut.package.name.prefix",
@@ -229,7 +240,8 @@ tasks.register("updateProps") {
 
     // Write to app resources.
     serviceProps.store(
-        project.file("src/main/resources/META-INF/thanos.properties").outputStream(),
+        project.file("src/main/resources/META-INF/thanos.properties")
+            .outputStream(),
         "Auto Generated, Do Not Modify.")
     log("*** updateProps done***")
 }
@@ -265,7 +277,8 @@ afterEvaluate {
                         val aapt = aapt()
 
                         val modFiles =
-                            GoogleFiles.fileTraverser().depthFirstPostOrder(magiskModuleBuildDir)
+                            GoogleFiles.fileTraverser()
+                                .depthFirstPostOrder(magiskModuleBuildDir)
                                 .filter { it.isFile }
                                 // Ignore .xxx files.
                                 .filter { !it.name.startsWith(".") }

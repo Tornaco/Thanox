@@ -2,11 +2,13 @@ package github.tornaco.android.thanos.widget.pie
 
 import android.graphics.Paint
 import android.graphics.Typeface
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -22,7 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.elvishew.xlog.XLog
+import kotlinx.coroutines.delay
 import kotlin.math.acos
+import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 const val TAP_CENTER_DISTANCE = 100f
@@ -40,6 +44,19 @@ fun <T> PieChart(
     val stateList = chartItems.toStateList()
     var centerOffset: Offset = Offset.Zero
     val itemAngleMap = mutableMapOf<Pair<Float, Float>, ChartItemState<T>>()
+
+    val spaceAngle = 1f
+    val totalAngle = 360f - spaceAngle * stateList.size
+
+    var animStarted by remember { mutableStateOf(false) }
+    val animPercent by animateFloatAsState(
+        targetValue = if (!animStarted) 0f else 1f,
+        animationSpec = tween(1000)
+    )
+    LaunchedEffect(key1 = stateList) {
+        delay(180)
+        animStarted = true
+    }
 
     Canvas(modifier = modifier
         .pointerInput(chartItems) {
@@ -65,8 +82,6 @@ fun <T> PieChart(
             val arcHeight = size.height
             val arcSize = Size(arcWidth, arcHeight)
 
-            val spaceAngle = 1f
-            val totalAngle = 360f - spaceAngle * stateList.size
             var startAngle = 0f
 
             val isEmpty = stateList.isEmpty()
@@ -81,13 +96,15 @@ fun <T> PieChart(
                 stateList.forEach { state ->
                     val initialStartAngle = startAngle
                     // Item Arc
-                    val sweepAngle = totalAngle * state.percent
+                    val sweepAngle = totalAngle * animPercent * state.percent
+
                     drawArc(color = state.chartItem.color,
                         startAngle = startAngle,
                         sweepAngle = sweepAngle,
                         useCenter = false,
                         size = arcSize,
                         style = Stroke(width = strokeSize.toPx()))
+
                     startAngle += sweepAngle
 
                     // Space Arc
@@ -111,7 +128,7 @@ fun <T> PieChart(
                 val paint = Paint()
                 paint.isAntiAlias = true
                 paint.textAlign = Paint.Align.CENTER
-                paint.textSize = centerText.size.toPx()
+                paint.textSize = centerText.size.toPx() * animPercent
                 paint.color = centerText.color.toArgb()
                 paint.typeface = Typeface.DEFAULT_BOLD
                 drawIntoCanvas {
@@ -122,6 +139,7 @@ fun <T> PieChart(
                 }
             }
         }
+
     )
 }
 

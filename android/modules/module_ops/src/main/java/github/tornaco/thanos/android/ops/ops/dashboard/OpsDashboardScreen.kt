@@ -10,10 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.material.composethemeadapter3.Mdc3Theme
-import github.tornaco.android.thanos.widget.pie.CenterText
-import github.tornaco.android.thanos.widget.pie.ChartItem
-import github.tornaco.android.thanos.widget.pie.Legend
-import github.tornaco.android.thanos.widget.pie.PieChart
+import github.tornaco.android.thanos.widget.bar.BarChart
+import github.tornaco.android.thanos.widget.bar.ChartItem
 
 @Composable
 fun OpsDashboardScreen() {
@@ -33,45 +31,16 @@ private fun OpsDashboardContent() {
         Spacer(modifier = Modifier.size(64.dp))
 
         val items = listOf(
-            ChartItem("",
-                color = Color(0xFFE57600),
-                value = 1,
-                label = "Contacts"),
-            ChartItem("",
-                color = Color(0xFF4485AA),
-                value = 2,
-                label = "Camera"),
-            ChartItem("", color = Color(0xFF94E287),
-                value = 3,
-                label = "External Photos"),
-            ChartItem("", color = Color(0xFF0093E5),
-                value = 6,
-                label = "Device Id"),
-            ChartItem("", color = Color(0xFFB446C8),
-                value = 4,
-                label = "Audio recorder"),
-            ChartItem("", color = Color(0xFF5A5AE6), value = 4, label = "Vib"),
+            ChartItem("", Color.Red, 12, "Label", false),
+            ChartItem("", Color.Red, 77, "Label", false),
+            ChartItem("", Color.Red, 20, "Label", false),
+            ChartItem("", Color.Red, 30, "Label", true),
+            ChartItem("", Color.Red, 100, "Label", false),
+            ChartItem("", Color.Red, 70, "Label", false),
+            ChartItem("", Color.Red, 43, "Label", false),
         )
-
-        PieChart(modifier = Modifier
-            .fillMaxWidth(0.6f)
-            .aspectRatio(1f),
-            strokeSize = 38.dp,
-            chartItems = items,
-            centerText = CenterText(
-                text = "Thanox",
-                color = Color.DarkGray,
-                size = 24.dp
-            ))
-
-        Spacer(modifier = Modifier.size(32.dp))
-
-        Legend(
-            modifier = Modifier
-                .fillMaxWidth(0.6f)
-                .padding(32.dp),
-            chartItems = items,
-            columnCount = 1,
-        )
+        BarChart(modifier = Modifier
+            .fillMaxWidth(),
+            items = items)
     }
 }

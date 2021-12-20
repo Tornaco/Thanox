@@ -31,13 +31,13 @@ private fun OpsDashboardContent() {
         Spacer(modifier = Modifier.size(64.dp))
 
         val items = listOf(
-            ChartItem("", Color.Red, 12, "Label", false),
-            ChartItem("", Color.Red, 77, "Label", false),
-            ChartItem("", Color.Red, 20, "Label", false),
-            ChartItem("", Color.Red, 30, "Label", true),
-            ChartItem("", Color.Red, 100, "Label", false),
-            ChartItem("", Color.Red, 70, "Label", false),
-            ChartItem("", Color.Red, 43, "Label", false),
+            ChartItem("", Color.Red, 12, "A", false),
+            ChartItem("", Color.Red, 77, "B", false),
+            ChartItem("", Color.Red, 20, "C", false),
+            ChartItem("", Color.Red, 30, "D", true),
+            ChartItem("", Color.Red, 100, "E", false),
+            ChartItem("", Color.Red, 70, "F", false),
+            ChartItem("", Color.Red, 43, "G", false),
         )
         BarChart(modifier = Modifier
             .fillMaxWidth(),

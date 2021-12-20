@@ -49,7 +49,7 @@ class StartChartViewModel @Inject constructor(@ApplicationContext val context: C
         delay(1000)
 
         withContext(Dispatchers.IO) {
-            val pkgs = mutableListOf<String>()
+            val pkgs = mutableSetOf<String>()
             val category = _flow.value.category
 
             val activityManager = thanos.activityManager

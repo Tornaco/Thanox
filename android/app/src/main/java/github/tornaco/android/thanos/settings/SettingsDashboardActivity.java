@@ -3,7 +3,6 @@ package github.tornaco.android.thanos.settings;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +13,7 @@ import java.util.Objects;
 
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.BrowserUtils;
@@ -40,11 +40,10 @@ public class SettingsDashboardActivity extends ThemeActivity {
         }
 
         findViewById(R.id.fab).setOnClickListener(v -> showFeedbackDialog());
-        findViewById(R.id.guide).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_HOME);
-            }
+        findViewById(R.id.guide).setOnClickListener(v -> BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_HOME));
+        findViewById(R.id.guide).setOnLongClickListener(v -> {
+            OnBoardingActivity.Starter.INSTANCE.start(thisActivity());
+            return true;
         });
     }
 

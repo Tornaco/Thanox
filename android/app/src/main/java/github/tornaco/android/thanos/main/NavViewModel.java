@@ -282,7 +282,7 @@ public class NavViewModel extends AndroidViewModel {
                         .title(resources.getString(R.string.module_ops_feature_title_ops_app_list))
                         .summary(
                             resources.getString(R.string.module_ops_feature_summary_ops_app_list))
-                        .themeColor(R.color.md_teal_500)
+                        .themeColor(R.color.md_blue_700)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_app_lock)
@@ -298,7 +298,7 @@ public class NavViewModel extends AndroidViewModel {
                         .title(resources.getString(R.string.feature_title_recent_task_blur))
                         .summary(resources.getString(R.string.feature_summary_recent_task_blur))
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_TASK_BLUR)
-                        .themeColor(R.color.md_cyan_600)
+                        .themeColor(R.color.md_teal_800)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_op_remind)

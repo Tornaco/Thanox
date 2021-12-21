@@ -88,7 +88,7 @@ class NeedToRestartActivity : ComponentActivity() {
                             Text(
                                 color = Color.White,
                                 text = AnnotatedString(stringResource(id = R.string.reboot_later)).capitalize(),
-                                style = MaterialTheme.typography.bodySmall)
+                                style = MaterialTheme.typography.bodyMedium)
                         }
 
                         TextButton(modifier = Modifier.padding(vertical = 16.dp),
@@ -96,7 +96,7 @@ class NeedToRestartActivity : ComponentActivity() {
                             Text(
                                 color = Color.White,
                                 text = AnnotatedString(stringResource(id = R.string.reboot_now)).capitalize(),
-                                style = MaterialTheme.typography.bodySmall)
+                                style = MaterialTheme.typography.bodyMedium)
                         }
                     }
                 }

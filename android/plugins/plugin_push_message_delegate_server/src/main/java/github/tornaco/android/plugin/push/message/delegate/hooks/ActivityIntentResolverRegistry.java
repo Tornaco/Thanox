@@ -27,8 +27,9 @@ import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._28;
 import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._29;
 import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._30;
 import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._31;
+import static github.tornaco.xposed.annotation.XposedHook.SdkVersions._32;
 
-@XposedHook(targetSdkVersion = {_21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31})
+@XposedHook(targetSdkVersion = {_21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32})
 public class ActivityIntentResolverRegistry implements IXposedHook {
 
     // https://github.com/LineageOS/android_frameworks_base/blob/lineage-15.1/services/core/java/com/android/server/am/BroadcastQueue.java

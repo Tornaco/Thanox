@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="40dp"
+                android:height="40dp" />
+            <solid android:color="#3def9a9a" />
+        </shape>
+    </item>
+    <item
+        android:id="@+id/settings_ic_foreground"
+        android:drawable="@drawable/ic_baseline_work_outline_24"
+        android:gravity="center" />
+</layer-list>

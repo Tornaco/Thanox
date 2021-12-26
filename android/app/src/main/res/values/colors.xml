@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingDefaultResource">
+
+    <color name="nav_icon_boost">#4caf50</color>
+    <color name="nav_icon_bg_start">#f36352</color>
+    <color name="nav_icon_bg_restrict">#ffa800</color>
+    <color name="nav_icon_task_removal">#be5ee7</color>
+    <color name="nav_icon_smart_freeze">#2c8aff</color>
+    <color name="nav_icon_apps_manager">#ffa800</color>
+    <color name="nav_icon_priv_cheat">#8262ff</color>
+    <color name="nav_icon_ops">#f36352</color>
+    <color name="nav_icon_app_lock">#90ce02</color>
+    <color name="nav_icon_task_blur">#e9244a</color>
+    <color name="nav_icon_op_remind">#939393</color>
+    <color name="nav_icon_screen_on_notification">#51b4cd</color>
+    <color name="nav_icon_nr">#8262ff</color>
+    <color name="nav_icon_activity_replacement">#5d4037</color>
+    <color name="nav_icon_profile">#e91e63</color>
+    <color name="nav_icon_smart_standby">#ffa800</color>
+    <color name="nav_icon_plugin">#939393</color>
+    <color name="nav_icon_app_clone">#f36352</color>
+</resources>

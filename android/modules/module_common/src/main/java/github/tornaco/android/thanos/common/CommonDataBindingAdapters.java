@@ -39,19 +39,6 @@ public class CommonDataBindingAdapters {
         imageView.setColorFilter(ContextCompat.getColor(imageView.getContext(), res));
     }
 
-    @BindingAdapter("android:circleBgTint")
-    public static void setCircleBgTint(ImageView imageView, @ColorRes int res) {
-        if (res == 0) return;
-        Drawable bg = AppCompatResources.getDrawable(imageView.getContext(), R.drawable.module_common_circle_bg_blue);
-        if (bg == null) return;
-        int iconColor = imageView.getContext().getColor(res);
-        int lColor = ColorUtils.INSTANCE.lightenColor(iconColor, 0.5f);
-
-        imageView.setColorFilter(iconColor);
-        bg.setColorFilter(new PorterDuffColorFilter(lColor, PorterDuff.Mode.SRC_IN));
-        imageView.setBackground(bg);
-    }
-
     @BindingAdapter("android:appIcon")
     public static void setAppIcon(ImageView imageView, AppInfo appInfo) {
         if (appInfo != null && appInfo.getIconDrawable() > 0) {

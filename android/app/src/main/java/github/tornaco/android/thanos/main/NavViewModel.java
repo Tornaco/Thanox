@@ -201,54 +201,54 @@ public class NavViewModel extends AndroidViewModel {
                 Arrays.asList(
                     Tile.builder()
                         .id(R.id.id_one_key_clear)
-                        .iconRes(R.drawable.ic_rocket_fill)
+                        .iconRes(R.drawable.ic_nav_boost)
                         .title(resources.getString(R.string.feature_title_one_key_boost))
                         .requiredFeature(BuildProp.THANOX_FEATURE_BG_TASK_CLEAN)
-                        .themeColor(R.color.md_green_500)
+                        .themeColor(R.color.nav_icon_boost)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_background_start)
-                        .iconRes(R.drawable.ic_forbid_fill)
+                        .iconRes(R.drawable.ic_nav_bg_start)
                         .title(resources.getString(R.string.feature_title_start_restrict))
                         .category(resources.getString(R.string.feature_category_start_manage))
                         .requiredFeature(BuildProp.THANOX_FEATURE_START_BLOCKER)
-                        .themeColor(R.color.md_indigo_a400)
+                        .themeColor(R.color.nav_icon_bg_start)
                         .build(),
                     Tile.builder()
-                        .iconRes(R.drawable.ic_refresh_fill)
+                        .iconRes(R.drawable.ic_nav_bg_restrict)
                         .id(R.id.id_background_restrict)
                         .title(resources.getString(R.string.feature_title_bg_restrict))
                         .summary(resources.getString(R.string.feature_desc_bg_restrict_brief))
                         .requiredFeature(BuildProp.THANOX_FEATURE_BG_TASK_CLEAN)
-                        .themeColor(R.color.md_amber_800)
+                        .themeColor(R.color.nav_icon_bg_restrict)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_clean_task_removal)
-                        .iconRes(R.drawable.ic_clear_all_black_24dp)
+                        .iconRes(R.drawable.ic_nav_task_removal)
                         .title(resources.getString(R.string.feature_title_clean_when_task_removed))
                         .requiredFeature(BuildProp.THANOX_FEATURE_RECENT_TASK_REMOVAL)
                         .summary(
                             resources.getString(
                                 R.string.feature_desc_clean_when_task_removed_brief))
                         .category(resources.getString(R.string.feature_category_app_clean_up))
-                        .themeColor(R.color.md_grey_500)
+                        .themeColor(R.color.nav_icon_task_removal)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_smart_freeze)
-                        .iconRes(R.drawable.ic_ac_unit_black_24dp)
+                        .iconRes(R.drawable.ic_nav_smart_freeze)
                         .title(resources.getString(R.string.feature_title_smart_app_freeze))
                         .summary(resources.getString(R.string.feature_summary_smart_app_freeze))
                         .requiredFeature(BuildProp.THANOX_FEATURE_EXT_APP_SMART_FREEZE)
-                        .themeColor(R.color.md_blue_grey_500)
+                        .themeColor(R.color.nav_icon_smart_freeze)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_apps_manager)
-                        .iconRes(R.drawable.ic_apps_fill)
+                        .iconRes(R.drawable.ic_nav_app_manager)
                         .title(resources.getString(R.string.feature_title_apps_manager))
                         .summary(resources.getString(R.string.feature_summary_apps_manager))
                         .requiredFeature(BuildProp.THANOX_FEATURE_COMPONENT_MANAGER)
                         .category(resources.getString(R.string.feature_category_app_manage))
-                        .themeColor(R.color.md_pink_600)
+                        .themeColor(R.color.nav_icon_apps_manager)
                         .build())));
 
     TileGroup secure =
@@ -258,58 +258,47 @@ public class NavViewModel extends AndroidViewModel {
                 Arrays.asList(
                     Tile.builder()
                         .id(R.id.id_privacy_cheat)
-                        .iconRes(R.drawable.ic_spy_fill)
+                        .iconRes(R.drawable.ic_nav_priv_cheat)
                         .title(resources.getString(R.string.feature_title_data_cheat))
                         .category(resources.getString(R.string.feature_category_privacy))
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_DATA_CHEAT)
-                        .themeColor(R.color.md_grey_700)
-                        .build(),
-                    Tile.builder()
-                        .id(R.id.id_ops_by_app)
-                        .iconRes(R.drawable.ic_shield_star_fill)
-                        .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS)
-                        .title(resources.getString(R.string.module_ops_feature_title_app_ops_list))
-                        .summary(
-                            resources.getString(R.string.module_ops_feature_summary_app_ops_list))
-                        .themeColor(R.color.md_lime_600)
-                        // Dup with apps manager.
-                        .disabled(true)
+                        .themeColor(R.color.nav_icon_priv_cheat)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_ops_by_ops)
-                        .iconRes(R.drawable.ic_shield_star_fill)
+                        .iconRes(R.drawable.ic_nav_ops)
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS)
                         .title(resources.getString(R.string.module_ops_feature_title_ops_app_list))
                         .summary(
                             resources.getString(R.string.module_ops_feature_summary_ops_app_list))
-                        .themeColor(R.color.md_blue_700)
+                        .themeColor(R.color.nav_icon_ops)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_app_lock)
-                        .iconRes(R.drawable.ic_baseline_phonelink_lock_24)
+                        .iconRes(R.drawable.ic_nav_app_lock)
                         .title(resources.getString(R.string.feature_title_app_lock))
                         .summary(resources.getString(R.string.feature_summary_app_lock))
-                        .themeColor(R.color.md_deep_orange_500)
+                        .themeColor(R.color.nav_icon_app_lock)
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_APPLOCK)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_task_blur)
-                        .iconRes(R.drawable.ic_paint_brush_fill)
+                        .iconRes(R.drawable.ic_nav_task_blur)
                         .title(resources.getString(R.string.feature_title_recent_task_blur))
                         .summary(resources.getString(R.string.feature_summary_recent_task_blur))
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_TASK_BLUR)
-                        .themeColor(R.color.md_teal_800)
+                        .themeColor(R.color.nav_icon_task_blur)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_op_remind)
-                        .iconRes(R.drawable.module_ops_ic_alarm_warning_fill)
+                        .iconRes(R.drawable.ic_nav_op_remind)
                         .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS_REMINDER)
                         .category(resources.getString(R.string.feature_category_remind))
                         .title(
                             resources.getString(R.string.module_ops_feature_title_ops_remind_list))
                         .summary(
                             resources.getString(R.string.module_ops_feature_summary_ops_remind))
-                        .themeColor(R.color.md_amber_800)
+                        .themeColor(R.color.nav_icon_op_remind)
                         .build())));
 
     TileGroup ext =
@@ -319,65 +308,65 @@ public class NavViewModel extends AndroidViewModel {
                 Arrays.asList(
                     Tile.builder()
                         .id(R.id.id_screen_on_notification)
-                        .iconRes(R.drawable.ic_notification_badge_fill)
+                        .iconRes(R.drawable.ic_nav_screen_on_notification)
                         .title(resources.getString(R.string.feature_title_light_on_notification))
                         .summary(
                             resources.getString(R.string.feature_summary_light_on_notification))
                         .category(resources.getString(R.string.feature_category_notification))
                         .requiredFeature(BuildProp.THANOX_FEATURE_EXT_N_UP)
-                        .themeColor(R.color.md_red_500)
+                        .themeColor(R.color.nav_icon_screen_on_notification)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_notification_recorder)
-                        .iconRes(R.drawable.ic_chat_1_fill)
+                        .iconRes(R.drawable.ic_nav_nr)
                         .title(
                             resources.getString(
                                 R.string
                                     .module_notification_recorder_feature_title_notification_recorder))
                         .requiredFeature(BuildProp.THANOX_FEATURE_EXT_N_RECORDER)
-                        .themeColor(R.color.md_cyan_600)
+                        .themeColor(R.color.nav_icon_nr)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_trampoline)
-                        .iconRes(R.drawable.ic_guide_fill)
+                        .iconRes(R.drawable.ic_nav_activity_replacement)
                         .category(resources.getString(R.string.feature_category_ext))
                         .title(resources.getString(R.string.module_activity_trampoline_app_name))
                         .requiredFeature(BuildProp.THANOX_FEATURE_APP_TRAMPOLINE)
                         .summary("\uD83C\uDF6D \uD83C\uDF6D \uD83C\uDF6D")
-                        .themeColor(R.color.md_green_a700)
+                        .themeColor(R.color.nav_icon_activity_replacement)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_profile)
-                        .iconRes(R.drawable.module_profile_ic_thunderstorms_fill)
+                        .iconRes(R.drawable.ic_nav_profile)
                         .title(resources.getString(R.string.module_profile_feature_name))
                         .summary(resources.getString(R.string.module_profile_feature_summary))
-                        .themeColor(R.color.md_indigo_300)
+                        .themeColor(R.color.nav_icon_profile)
                         .requiredFeature(BuildProp.THANOX_FEATURE_PROFILE)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_smart_standby)
-                        .iconRes(R.drawable.ic_mickey_fill)
+                        .iconRes(R.drawable.ic_nav_smart_standby)
                         .category(resources.getString(R.string.feature_category_apps))
                         .title(resources.getString(R.string.feature_title_smart_app_standby))
                         .summary(
                             resources.getString(R.string.feature_summary_smart_app_standby_brief))
                         .requiredFeature(BuildProp.THANOX_FEATURE_APP_SMART_STAND_BY)
-                        .themeColor(R.color.md_deep_orange_300)
+                        .themeColor(R.color.nav_icon_smart_standby)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_plugins)
-                        .iconRes(R.drawable.ic_store_fill)
+                        .iconRes(R.drawable.ic_nav_plugins)
                         .title(resources.getString(R.string.nav_title_plugin))
                         .requiredFeature(BuildProp.THANOX_FEATURE_PLUGIN_SUPPORT)
                         .summary(resources.getString(R.string.card_message_plugin_available))
-                        .themeColor(R.color.md_grey_400)
+                        .themeColor(R.color.nav_icon_plugin)
                         .build(),
                     Tile.builder()
                         .id(R.id.id_infinite_z)
-                        .iconRes(R.drawable.ic_baseline_work_fill_24)
+                        .iconRes(R.drawable.ic_nav_app_clone)
                         .title(resources.getString(R.string.feature_title_infinite_z))
                         .disabled(!BuildProp.THANOS_BUILD_DEBUG)
-                        .themeColor(R.color.md_deep_purple_700)
+                        .themeColor(R.color.nav_icon_app_clone)
                         .build())));
 
     tileGroups.add(new TileGroup(loadStatusHeaderInfo()));

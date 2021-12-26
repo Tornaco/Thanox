@@ -45,7 +45,7 @@ fun <T> PieChart(
     var centerOffset: Offset = Offset.Zero
     val itemAngleMap = mutableMapOf<Pair<Float, Float>, ChartItemState<T>>()
 
-    val spaceAngle = 1f
+    val spaceAngle = 2f
     val totalAngle = 360f - spaceAngle * stateList.size
 
     var animStarted by remember { mutableStateOf(false) }

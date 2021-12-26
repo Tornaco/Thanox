@@ -58,23 +58,27 @@ class StartChartViewModel @Inject constructor(@ApplicationContext val context: C
 
             var totalTimes = 0L
 
-            val startEntryList = pkgs.map { pkgName ->
-                var times = 0L
-                if (category.withAllowed) {
-                    times += activityManager.getStartRecordAllowedCountByPackageName(pkgName)
+            val startEntryList = pkgs
+                .filter {
+                    it != "android" && it != "com.android.systemui"
                 }
+                .map { pkgName ->
+                    var times = 0L
+                    if (category.withAllowed) {
+                        times += activityManager.getStartRecordAllowedCountByPackageName(pkgName)
+                    }
 
-                if (category.withBlocked) {
-                    times += activityManager.getStartRecordBlockedCountByPackageName(pkgName)
-                }
+                    if (category.withBlocked) {
+                        times += activityManager.getStartRecordBlockedCountByPackageName(pkgName)
+                    }
 
-                totalTimes += times
+                    totalTimes += times
 
-                StartEntry(
-                    pkg = pkgName,
-                    appLabel = thanos.pkgManager.getAppInfo(pkgName)?.appLabel ?: pkgName,
-                    times = times)
-            }.sortedByDescending { it.times }
+                    StartEntry(
+                        pkg = pkgName,
+                        appLabel = thanos.pkgManager.getAppInfo(pkgName)?.appLabel ?: pkgName,
+                        times = times)
+                }.sortedByDescending { it.times }
 
             val chartItems = startEntryList.mapIndexed { index, startEntry ->
                 ChartItem(

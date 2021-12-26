@@ -24,6 +24,7 @@ import java.util.List;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
+import github.tornaco.android.thanos.util.ColorUtils;
 import github.tornaco.android.thanos.util.GlideApp;
 import github.tornaco.android.thanos.util.GlideRequest;
 import github.tornaco.android.thanos.widget.GrayscaleTransformation;
@@ -43,7 +44,11 @@ public class CommonDataBindingAdapters {
         if (res == 0) return;
         Drawable bg = AppCompatResources.getDrawable(imageView.getContext(), R.drawable.module_common_circle_bg_blue);
         if (bg == null) return;
-        bg.setColorFilter(new PorterDuffColorFilter(imageView.getContext().getColor(res), PorterDuff.Mode.SRC_IN));
+        int iconColor = imageView.getContext().getColor(res);
+        int lColor = ColorUtils.INSTANCE.lightenColor(iconColor, 0.5f);
+
+        imageView.setColorFilter(iconColor);
+        bg.setColorFilter(new PorterDuffColorFilter(lColor, PorterDuff.Mode.SRC_IN));
         imageView.setBackground(bg);
     }
 

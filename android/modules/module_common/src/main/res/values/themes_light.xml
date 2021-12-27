@@ -3,11 +3,11 @@
 
     <style name="AppThemeLight" parent="Theme.Material3.Light">
         <item name="colorAccent">@color/md_blue_a700</item>
-        <item name="colorPrimaryContainer">@color/md_light_blue_50</item>
+        <item name="colorPrimaryContainer">@color/md_light_blue_100</item>
 
         <item name="colorPrimary">?colorAccent</item>
         <item name="colorPrimaryDark">?colorAccent</item>
-        <item name="colorOnPrimary">@color/md_grey_200</item>
+        <item name="colorOnPrimary">@color/md_grey_100</item>
         <item name="colorPrimaryVariant">?colorPrimary</item>
         <item name="colorSecondary">?colorPrimary</item>
 
@@ -44,7 +44,7 @@
 
     <style name="AppThemeLight.Red">
         <item name="colorAccent">@color/md_red_800</item>
-        <item name="colorPrimaryContainer">@color/md_red_50</item>
+        <item name="colorPrimaryContainer">@color/md_red_100</item>
     </style>
 
     <style name="AppThemeLight.Red.NoActionBar">
@@ -54,7 +54,7 @@
 
     <style name="AppThemeLight.Pink">
         <item name="colorAccent">@color/md_pink_600</item>
-        <item name="colorPrimaryContainer">@color/md_pink_50</item>
+        <item name="colorPrimaryContainer">@color/md_pink_100</item>
     </style>
 
     <style name="AppThemeLight.Pink.NoActionBar">
@@ -64,7 +64,7 @@
 
     <style name="AppThemeLight.Green">
         <item name="colorAccent">@color/md_green_800</item>
-        <item name="colorPrimaryContainer">@color/md_green_50</item>
+        <item name="colorPrimaryContainer">@color/md_green_100</item>
     </style>
 
     <style name="AppThemeLight.Green.NoActionBar">
@@ -74,7 +74,7 @@
 
     <style name="AppThemeLight.Amber">
         <item name="colorAccent">@color/md_amber_800</item>
-        <item name="colorPrimaryContainer">@color/md_amber_50</item>
+        <item name="colorPrimaryContainer">@color/md_amber_100</item>
     </style>
 
     <style name="AppThemeLight.Amber.NoActionBar">
@@ -94,7 +94,7 @@
 
     <style name="AppThemeLight.Oppo">
         <item name="colorAccent">@color/md_teal_800</item>
-        <item name="colorPrimaryContainer">@color/md_teal_50</item>
+        <item name="colorPrimaryContainer">@color/md_teal_100</item>
     </style>
 
     <style name="AppThemeLight.Oppo.NoActionBar">

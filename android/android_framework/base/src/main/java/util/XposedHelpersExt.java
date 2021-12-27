@@ -92,10 +92,10 @@ public class XposedHelpersExt {
     for (String className: classNames) {
       try {
         Class<?> res = XposedHelpers.findClass(className, classLoader);
-        XLog.w("anyClassFromNames, find class for name: " + className);
+        XLog.d("anyClassFromNames, find class for name: " + className);
         return res;
       } catch (Throwable e) {
-        XLog.w("anyClassFromNames, no class for this name: " + className);
+        XLog.d("anyClassFromNames, no class for this name: " + className);
       }
     }
     throw new ClassNotFoundException(Arrays.toString(classNames));
@@ -105,10 +105,10 @@ public class XposedHelpersExt {
     for (String fieldName: potentialFieldNames) {
       try {
         int res = XposedHelpers.getIntField(obj, fieldName);
-        XLog.w("getIntField, find field for name: " + fieldName);
+        XLog.d("getIntField, find field for name: " + fieldName);
         return res;
       } catch (Throwable e){
-        XLog.w("getIntField, no field for this name: " + fieldName);
+        XLog.d("getIntField, no field for this name: " + fieldName);
       }
     }
     throw new NoSuchFieldException(Arrays.toString(potentialFieldNames));

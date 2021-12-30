@@ -59,6 +59,10 @@ public abstract class OsUtils {
         return Build.VERSION.SDK_INT >= 29;
     }
 
+    public static boolean isQ() {
+        return Build.VERSION.SDK_INT == 29;
+    }
+
     public static boolean isROrAbove() {
         return Build.VERSION.SDK_INT >= 30;
     }

@@ -78,6 +78,8 @@ val internalProjects = listOf(
     ":third_party:sec_net",
     ":android_framework:db",
     ":android_framework:services",
+    ":android_framework:services-29",
+    ":android_framework:services-30",
     ":android_framework:patchx-entry",
     ":android_framework:patchx",
     ":android_framework:patchx-29",

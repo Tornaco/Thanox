@@ -12,14 +12,14 @@
         <meta name="author" content="Tornaco">
       
       
-        <link rel="canonical" href="https://tornaco.github.io/Thanox/5-Start-Rules/">
+        <link rel="canonical" href="https://tornaco.github.io/Thanox/9-%20Feedback/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.4">
     
     
       
-        <title>后台启动规则 - Thanox</title>
+        <title>反馈与建议 - Thanox</title>
       
     
     
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              后台启动规则
+              反馈与建议
             
           </span>
         </div>
@@ -267,55 +267,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          后台启动规则
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../5-Start-Rules/" class="md-nav__link">
         后台启动规则
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    功能介绍
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    规则语法
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -371,11 +327,55 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../9-%20Feedback/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          反馈与建议
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         反馈与建议
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    功能建议
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    问题反馈
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -406,14 +406,14 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    功能介绍
+    功能建议
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    规则语法
+    问题反馈
   </a>
   
 </li>
@@ -431,30 +431,37 @@
               
                 
 
-  <h1>后台启动规则</h1>
+  <h1>反馈与建议</h1>
 
 <!-- more -->
 
-<h2 id="_1">功能介绍</h2>
-<p>Thanox的后台启动功能可以有效的拦截app在后台被偷偷启动的问题，通常一个app如果被禁止了后台启动，那么这个app无论何时都是无法在后台启动的。</p>
-<p>后台启动规则可以更精确的控制app的后台启动行为，例如；通过规则，可以只允许微信在后台被QQ启动而禁止被其他app启动。</p>
-<h2 id="_2">规则语法</h2>
-<p>规则语法为两个部分：</p>
-<ul>
+<h2 id="_1">功能建议</h2>
+<p>功能建议请在github页面，通过<a href="https://github.com/Tornaco/Thanox/issues/new/choose">新建Feature request</a>的方式提交。</p>
+<p>注意，功能描述越详细越好，最好能图文并茂。</p>
+<h2 id="_2">问题反馈</h2>
+<p>问题反馈请在github页面，通过<a href="https://github.com/Tornaco/Thanox/issues/new/choose">新建issue</a>的方式提交。</p>
+<p><strong>Thanox本身提供的配置很多都是会对系统或app造成影响，所以很多时候如果你只是描述问题现象，我是无法分析定位的。</strong></p>
+<p><strong>所以问题反馈请务必提供更详细的信息。</strong></p>
+<ol>
 <li>
-<p><strong>行动</strong>；行动包括两种，分别是：<code>ALLOW（允许）</code>、<code>DENY（拒绝）</code></p>
+<p>系统版本</p>
 </li>
 <li>
-<p>角色；包括<strong>启动者app</strong>和<strong>目标app</strong>，分别为对用两个app的包名，也可以用<code>THIS</code>表示某个应用自己。</p>
+<p>Thanox版本，补丁方式（xposed还是magisk？）</p>
 </li>
-</ul>
-<p>举例说明：</p>
-<p>如果想允许微信启动QQ，可以添加规则：<code>ALLOW com.tencent.mm com.tencent.qq</code>；<br />
-如果想允许Android系统启动所有应用，可以添加规则：<code>ALLOW android *</code>；<br />
-如果想要拒绝任何应用启动微信：<code>DENY * com.tencent.mm</code>。  </p>
-<p>便利：</p>
-<p>支持一些常用的名称代替角色，目前可用代号包括：<code>SHELL</code>，<code>ROOT</code>。  <br />
-例如，如果想允许Shell启动任何QQ：<code>ALLOW SHELL com.tencent.qq</code></p>
+<li>
+<p>问题现象的详细描述，有图或者视频更好</p>
+</li>
+<li>
+<p>不激活thanox有问题吗？</p>
+</li>
+<li>
+<p>Thanox激活后不做任何配置有问题吗？</p>
+</li>
+<li>
+<p>按照app内的提示抓取日志并上传到issue里</p>
+</li>
+</ol>
 
               
             </article>
@@ -468,7 +475,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../4-Activity-Replace/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 移花接木" rel="prev">
+        <a href="../8-Q-A/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 常见问题" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -477,26 +484,11 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              移花接木
+              常见问题
             </div>
           </div>
         </a>
       
-      
-        
-        <a href="../6-Profile/" class="md-footer__link md-footer__link--next" aria-label="Next: 情景模式（Profile）" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              情景模式（Profile）
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
       
     </nav>
   

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="ThemeMD3.App">
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowBackground">@color/md_black</item>
-        <item name="appCardBackground">@color/md_dark</item>
-    </style>
-</resources>

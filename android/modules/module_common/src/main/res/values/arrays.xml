@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="common_swipe_refresh_colors">
-        <item>@color/md_amber_500</item>
-        <item>@color/md_lime_500</item>
-        <item>@color/md_green_500</item>
-        <item>@color/md_red_500</item>
-    </string-array>
-</resources>

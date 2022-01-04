@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<device-admin>
-    <uses-policies>
-        <force-lock/>
-        <wipe-data/>
-        <disable-camera/>
-        <disable-keyguard-features/>
-    </uses-policies>
-</device-admin>

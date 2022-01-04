@@ -1,7 +1,0 @@
-<resources>
-
-    <style name="ModuleLockerVerifyProgressStyle" parent="Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:colorControlActivated">?attr/colorControlNormal</item>
-        <item name="colorControlActivated">?attr/colorControlNormal</item>
-    </style>
-</resources>

@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.Objects;
 
@@ -42,6 +43,13 @@ public class CheatFieldSettingsActivity extends ThemeActivity {
           .replace(R.id.container, CheatFieldSettingsFragment.newInstance(id))
           .commit();
     }
+  }
+
+  @Override
+  public void setTitle(CharSequence title) {
+    super.setTitle(title);
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    toolbar.setTitle(title);
   }
 
   @Override

@@ -19,10 +19,15 @@ public class EditTextDialog {
     }
 
     public static void show(Context context, String title, Consumer<String> stringConsumer) {
+        show(context, title, null, stringConsumer);
+    }
+
+    public static void show(Context context, String title, String hint, Consumer<String> stringConsumer) {
         final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
         View editorLayout = LayoutInflater.from(context).inflate(R.layout.common_dialog_edittext, null, false);
         builder.setView(editorLayout);
         final EditText editText = editorLayout.findViewById(R.id.editor);
+        editText.setHint(hint);
 
         builder.setCancelable(false);
         builder.setTitle(title);

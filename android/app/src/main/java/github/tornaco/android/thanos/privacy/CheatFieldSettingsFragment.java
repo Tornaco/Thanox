@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.elvishew.xlog.XLog;
@@ -25,6 +25,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ArrayUtils;
 import github.tornaco.android.thanos.core.util.Optional;
+import github.tornaco.android.thanos.widget.EditTextDialog;
 import lang3.RandomStringUtils;
 
 public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
@@ -42,12 +43,12 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        fieldId = Objects.requireNonNull(getArguments()).getString("id");
+        fieldId = requireArguments().getString("id");
         // Update title.
         if (!TextUtils.isEmpty(fieldId)) {
             Fields f = ThanosManager.from(getContext()).getPrivacyManager().getFieldsProfileById(fieldId);
             if (f != null) {
-                Objects.requireNonNull(getActivity()).setTitle(f.getLabel());
+                requireActivity().setTitle(f.getLabel());
             }
         }
     }
@@ -395,7 +396,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         @Override
-        void onBind(EditTextPreference editTextPreference) {
+        void onBind(Preference editTextPreference) {
             editTextPreference.setVisible(true);
             super.onBind(editTextPreference);
         }
@@ -430,7 +431,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         @Override
-        void onBind(EditTextPreference editTextPreference) {
+        void onBind(Preference editTextPreference) {
             editTextPreference.setVisible(true);
             super.onBind(editTextPreference);
         }
@@ -465,7 +466,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         @Override
-        void onBind(EditTextPreference editTextPreference) {
+        void onBind(Preference editTextPreference) {
             editTextPreference.setVisible(true);
             super.onBind(editTextPreference);
         }
@@ -500,7 +501,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         @Override
-        void onBind(EditTextPreference editTextPreference) {
+        void onBind(Preference editTextPreference) {
             editTextPreference.setVisible(true);
             super.onBind(editTextPreference);
         }
@@ -590,7 +591,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         @Override
-        void onBind(EditTextPreference editTextPreference) {
+        void onBind(Preference editTextPreference) {
             editTextPreference.setVisible(true);
             super.onBind(editTextPreference);
         }
@@ -626,7 +627,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         @Override
-        void onBind(EditTextPreference editTextPreference) {
+        void onBind(Preference editTextPreference) {
             editTextPreference.setVisible(true);
             super.onBind(editTextPreference);
         }
@@ -642,10 +643,10 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         void bind() {
-            Optional.ofNullable((EditTextPreference) findPreference(key)).ifPresent(this::onBind);
+            Optional.ofNullable((Preference) findPreference(key)).ifPresent(this::onBind);
         }
 
-        void onBind(EditTextPreference editTextPreference) {
+        void onBind(Preference editTextPreference) {
             String currentValue = getCurrentCheatValue();
             editTextPreference.setSummary(
                     isOriginal
@@ -654,22 +655,25 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
                             ? getString(R.string.pre_title_cheat_not_set)
                             : currentValue));
             if (!isOriginal) {
-                editTextPreference.setOnBindEditTextListener(
-                        editText -> editText.setHint(getCurrentCheatValue()));
-                editTextPreference.setOnPreferenceChangeListener(
-                        (preference, newValue) -> {
-                            boolean res = updateValue(newValue.toString());
-                            if (res) {
-                                String newCurrentValue = getCurrentCheatValue();
-                                editTextPreference.setSummary(
-                                        isOriginal
-                                                ? getOriginalValue()
-                                                : (TextUtils.isEmpty(newCurrentValue)
-                                                ? getString(R.string.pre_title_cheat_not_set)
-                                                : newCurrentValue));
-                            }
-                            return res;
-                        });
+                editTextPreference.setOnPreferenceClickListener(preference -> {
+                    EditTextDialog.show(requireActivity(),
+                            String.valueOf(editTextPreference.getTitle()),
+                            getCurrentCheatValue(),
+                            newValue -> {
+                                boolean res = updateValue(newValue);
+                                if (res) {
+                                    String newCurrentValue = getCurrentCheatValue();
+                                    editTextPreference.setSummary(
+                                            isOriginal
+                                                    ? getOriginalValue()
+                                                    : (TextUtils.isEmpty(newCurrentValue)
+                                                    ? getString(R.string.pre_title_cheat_not_set)
+                                                    : newCurrentValue));
+                                }
+                            });
+
+                    return true;
+                });
             } else {
                 editTextPreference.setEnabled(false);
             }

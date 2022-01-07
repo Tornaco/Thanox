@@ -80,7 +80,7 @@ object Libs {
         const val recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
         const val cardview = "androidx.cardview:cardview:1.1.0"
         const val constraint = "com.android.support.constraint:constraint-layout:1.1.3"
-        const val preference = "androidx.preference:preference:1.1.0"
+        const val preference = "androidx.preference:preference:1.2.0-rc01"
         const val interpolator = "androidx.interpolator:interpolator:1.0.0"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:2.3.5"

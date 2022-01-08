@@ -1,4 +1,4 @@
-package github.tornaco.android.thanos.widget.pie
+package github.tornaco.android.thanos.module.compose.common.widget.pie
 
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import com.elvishew.xlog.XLog
 import kotlinx.coroutines.delay
 import kotlin.math.acos
-import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 const val TAP_CENTER_DISTANCE = 100f

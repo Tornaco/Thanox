@@ -58,21 +58,26 @@ dependencies {
     implementation(tornaco.project.android.thanox.Compose.ui)
     implementation(tornaco.project.android.thanox.Compose.runtime)
     implementation(tornaco.project.android.thanox.Compose.material)
+    implementation(tornaco.project.android.thanox.Compose.material3)
+    implementation(tornaco.project.android.thanox.Compose.material3Adapter)
     implementation(tornaco.project.android.thanox.Compose.activityCompose)
     implementation(tornaco.project.android.thanox.Compose.viewmodel)
     implementation(tornaco.project.android.thanox.Compose.navigationCompose)
     implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
     implementation(tornaco.project.android.thanox.Compose.tooling)
     implementation(tornaco.project.android.thanox.Compose.toolingPreview)
+    implementation(tornaco.project.android.thanox.Compose.composeMaterialIconsExtended)
     implementation(Libs.Accompanist.appcompatTheme)
     implementation(Libs.Accompanist.systemUiController)
     implementation(Libs.Lottie.composeLottie)
     implementation(Libs.Lottie.lottie)
+    implementation(Libs.Accompanist.pager)
 
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)
 
     implementation(project(":modules:module_common"))
+    implementation(project(":android_framework:base"))
 }
 
 

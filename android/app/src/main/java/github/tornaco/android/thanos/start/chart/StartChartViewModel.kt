@@ -8,8 +8,8 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
-import github.tornaco.android.thanos.widget.pie.ChartItem
-import github.tornaco.android.thanos.widget.pie.chartColorOfIndex
+import github.tornaco.android.thanos.module.compose.common.widget.pie.ChartItem
+import github.tornaco.android.thanos.module.compose.common.widget.pie.chartColorOfIndex
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

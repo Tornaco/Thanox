@@ -15,10 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.widget.pie.CenterText
-import github.tornaco.android.thanos.widget.pie.ChartItem
-import github.tornaco.android.thanos.widget.pie.Legend
-import github.tornaco.android.thanos.widget.pie.PieChart
+import github.tornaco.android.thanos.module.compose.common.widget.pie.CenterText
+import github.tornaco.android.thanos.module.compose.common.widget.pie.ChartItem
+import github.tornaco.android.thanos.module.compose.common.widget.pie.Legend
+import github.tornaco.android.thanos.module.compose.common.widget.pie.PieChart
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

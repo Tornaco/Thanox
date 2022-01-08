@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.material.composethemeadapter3.Mdc3Theme
-import github.tornaco.android.thanos.widget.bar.BarChart
-import github.tornaco.android.thanos.widget.bar.ChartItem
+import github.tornaco.android.thanos.module.compose.common.widget.bar.BarChart
+import github.tornaco.android.thanos.module.compose.common.widget.bar.ChartItem
 
 @Composable
 fun OpsDashboardScreen() {

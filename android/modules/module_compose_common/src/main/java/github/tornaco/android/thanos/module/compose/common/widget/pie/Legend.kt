@@ -1,4 +1,4 @@
-package github.tornaco.android.thanos.widget.pie
+package github.tornaco.android.thanos.module.compose.common.widget.pie
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background

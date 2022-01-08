@@ -1,4 +1,4 @@
-package github.tornaco.android.thanos.widget.bar
+package github.tornaco.android.thanos.module.compose.common.widget.bar
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.Orientation

@@ -46,7 +46,7 @@ import github.tornaco.android.thanos.start.StartRestrictActivity;
 import github.tornaco.android.thanos.task.CleanUpOnTaskRemovedActivity;
 import github.tornaco.android.thanos.task.RecentTaskBlurListActivity;
 import github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampolineActivity;
-import github.tornaco.android.thanox.module.notification.recorder.NotificationRecordListActivity;
+import github.tornaco.android.thanox.module.notification.recorder.ui.NotificationRecordActivity;
 import github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity;
 import github.tornaco.thanos.android.module.profile.RuleListActivity;
 import github.tornaco.thanos.android.ops.OpsBottomNavActivity;
@@ -121,7 +121,7 @@ public class PrebuiltFeatureFragment extends NavFragment
         } else if (tile.getId() == R.id.id_screen_on_notification) {
             ScreenOnNotificationActivity.start(requireActivity());
         } else if (tile.getId() == R.id.id_notification_recorder) {
-            NotificationRecordListActivity.start(requireActivity());
+            NotificationRecordActivity.Starter.start(requireActivity());
         } else if (tile.getId() == R.id.id_trampoline) {
             ActivityTrampolineActivity.start(requireActivity());
         } else if (tile.getId() == R.id.id_profile) {

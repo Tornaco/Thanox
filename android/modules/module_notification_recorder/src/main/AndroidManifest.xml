@@ -3,11 +3,11 @@
 
     <application>
         <activity
-            android:name=".NotificationRecordListActivity"
-            android:exported="false"
-            android:label="@string/module_notification_recorder_feature_title_notification_recorder" />
-        <activity
             android:name=".NotificationRecordSettingsActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.NotificationRecordActivity"
+            android:exported="false"
+            android:label="@string/module_notification_recorder_feature_title_notification_recorder" />
     </application>
 </manifest>

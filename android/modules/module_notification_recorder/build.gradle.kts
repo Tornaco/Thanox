@@ -67,6 +67,7 @@ dependencies {
     implementation(Libs.AndroidX.preference)
     implementation(Libs.AndroidX.constraint)
     implementation(Libs.AndroidX.swipeRefreshLayout)
+    implementation(Libs.AndroidX.paging3)
 
     implementation(Libs.Others.guavaAndroid)
     implementation(Libs.Others.glide)

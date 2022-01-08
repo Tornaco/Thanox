@@ -7,10 +7,6 @@
 
         <import type="android.view.View" />
 
-        <variable
-            name="viewModel"
-            type="github.tornaco.android.thanox.module.notification.recorder.NRDListViewModel" />
-
     </data>
 
 
@@ -79,8 +75,7 @@
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:refreshing="@{viewModel.isDataLoading}">
+                android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/apps"
@@ -89,8 +84,8 @@
                     android:layout_marginStart="@dimen/dashboard_card_start_margin"
                     android:layout_marginTop="@dimen/dashboard_card_top_margin"
                     android:layout_marginEnd="@dimen/dashboard_card_start_margin"
-                    android:notificationRecordModels="@{viewModel.recordModelGroups}"
-                    app:fastScrollEnabled="false" />
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </LinearLayout>

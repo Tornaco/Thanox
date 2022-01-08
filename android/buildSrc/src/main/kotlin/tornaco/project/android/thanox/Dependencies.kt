@@ -95,10 +95,12 @@ object Libs {
         const val browser = "androidx.browser:browser:1.3.0"
 
         const val splash = "androidx.core:core-splashscreen:1.0.0-alpha01"
+
+        const val paging3 = "androidx.paging:paging-runtime:3.1.0"
     }
 
     object Room {
-        private const val roomVersion = "2.4.0-alpha04"
+        private const val roomVersion = "2.4.0"
         const val runtime = "androidx.room:room-runtime:$roomVersion"
         const val annotationProcessor = "androidx.room:room-compiler:$roomVersion"
         const val ktx = "androidx.room:room-ktx:$roomVersion"

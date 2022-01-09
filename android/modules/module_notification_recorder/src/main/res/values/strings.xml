@@ -18,4 +18,6 @@
     <string name="pref_title_enable_toast_info">Toast info</string>
     <string name="pref_title_enable_nr_n">Record notifications</string>
     <string name="pref_title_enable_nr_t">Record Toasts</string>
+    <string name="module_notification_recorder_reproduce">Reproduce</string>
+    <string name="module_notification_recorder_zoom">Zoom</string>
 </resources>

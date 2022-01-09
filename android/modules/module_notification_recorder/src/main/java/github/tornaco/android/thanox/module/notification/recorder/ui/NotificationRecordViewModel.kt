@@ -11,7 +11,7 @@ import github.tornaco.android.thanox.module.notification.recorder.source.Notific
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 
-private const val PAGE_SIZE = 10
+private const val PAGE_SIZE = 20
 
 class NotificationRecordViewModel(
     private val savedStateHandle: SavedStateHandle,

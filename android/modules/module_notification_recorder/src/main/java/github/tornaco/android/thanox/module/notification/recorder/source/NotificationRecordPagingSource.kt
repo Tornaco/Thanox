@@ -1,5 +1,6 @@
 package github.tornaco.android.thanox.module.notification.recorder.source
 
+import android.content.Context
 import androidx.paging.PagingSource
 import androidx.paging.PagingSource.LoadResult.Page
 import androidx.paging.PagingState
@@ -9,13 +10,15 @@ import github.tornaco.android.thanos.core.n.NotificationRecord
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanox.module.notification.recorder.NotificationRecordModel
+import github.tornaco.android.thanox.module.notification.recorder.R
 
 class NotificationRecordPagingSource(
-    private val thanox: ThanosManager,
+    private val context: Context,
     private val keyword: String
 ) :
     PagingSource<Int, NotificationRecordModel>() {
 
+    private val thanox: ThanosManager = ThanosManager.from(context)
     private var todayTimeInMills: Long = DateUtils.getToadyStartTimeInMills()
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NotificationRecordModel> {
@@ -43,12 +46,20 @@ class NotificationRecordPagingSource(
     private fun NotificationRecord.toModel(): NotificationRecordModel {
         XLog.v("toModel notificationRecord: %s", this)
 
-        val appInfo = thanox.pkgManager.getAppInfo(this.pkgName) ?: AppInfo.dummy()
+        val appInfo = thanox.pkgManager.getAppInfo(this.pkgName) ?: uninstalledAppInfo(this)
         val isToday: Boolean = this.getWhen() >= todayTimeInMills
         val timeF =
             if (isToday) DateUtils.formatShortForMessageTime(this.getWhen()) else DateUtils.formatLongForMessageTime(
                 this.getWhen()
             )
         return NotificationRecordModel(this, appInfo, timeF)
+    }
+
+    private fun uninstalledAppInfo(record: NotificationRecord): AppInfo {
+        val dummy = AppInfo.dummy()
+        dummy.appLabel =
+            context.getString(R.string.module_notification_recorder_item_uninstalled_app)
+        dummy.pkgName = record.pkgName
+        return dummy
     }
 }

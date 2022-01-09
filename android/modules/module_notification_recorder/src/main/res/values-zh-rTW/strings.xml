@@ -15,4 +15,6 @@
     <string name="pref_title_enable_toast_info">显示吐司信息</string>
     <string name="pref_title_enable_nr_n">记录状态栏通知</string>
     <string name="pref_title_enable_nr_t">记录应用吐司</string>
+    <string name="module_notification_recorder_reproduce">重现</string>
+    <string name="module_notification_recorder_zoom">Zoom</string>
 </resources>

@@ -36,7 +36,7 @@ class NotificationRecordActivity : ThemeActivity() {
                 modelClass: Class<T>,
                 handle: SavedStateHandle
             ): T {
-                val repo = NotificationRecordRepository(ThanosManager.from(applicationContext))
+                val repo = NotificationRecordRepository(applicationContext)
                 @Suppress("UNCHECKED_CAST")
                 return NotificationRecordViewModel(handle, repo) as T
             }

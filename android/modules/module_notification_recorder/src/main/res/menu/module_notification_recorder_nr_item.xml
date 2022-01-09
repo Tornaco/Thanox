@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_copy_content"
+        android:title="@android:string/copy"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_reproduce"
+        android:title="@string/module_notification_recorder_reproduce"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_view_zoom"
+        android:title="@string/module_notification_recorder_zoom"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_view_delete"
+        android:title="@string/common_menu_title_remove"
+        android:visible="false"
+        app:showAsAction="never" />
+</menu>

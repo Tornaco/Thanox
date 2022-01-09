@@ -53,8 +53,8 @@
     <string name="title_no_plugins_installed">暂无插件可用</string>
     <string name="title_plugin_reboot_take_effect">重启生效</string>
 
-    <string name="title_show_current_activity">显示当前活动</string>
-    <string name="title_net_stats">显示网络使用详情</string>
+    <string name="title_show_current_activity">当前活动</string>
+    <string name="title_net_stats">流量详情</string>
     <string name="reboot_needed">需要重启</string>
     <string name="message_reboot_needed">核心已更新，请重启系统</string>
     <string name="reboot_now">立即重启</string>

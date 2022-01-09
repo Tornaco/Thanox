@@ -53,8 +53,8 @@
     <string name="title_no_plugins_installed">No plugin available</string>
     <string name="title_plugin_reboot_take_effect">Please reboot</string>
 
-    <string name="title_show_current_activity">Show current activity</string>
-    <string name="title_net_stats">Show net stats</string>
+    <string name="title_show_current_activity">Current activity</string>
+    <string name="title_net_stats">Net stats</string>
     <string name="reboot_needed">Reboot</string>
     <string name="message_reboot_needed">Reboot your device to update thanox-core</string>
     <string name="reboot_now">Reboot now</string>

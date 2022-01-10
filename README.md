@@ -26,5 +26,5 @@ Thanox的目标是作为原生Android系统的手机管家，重点关注应用�
 
 ### 翻译
 
-[Help us improve international translation.](doc_src/github/Translate.md)
+[Help us improve international translation.](https://github.com/Tornaco/Thanox/blob/docs/doc_src/github/Translate.md)
 

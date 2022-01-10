@@ -55,7 +55,6 @@
 
     <string name="title_show_current_activity">當前活動</string>
     <string name="title_net_stats">流量详情</string>
-    <string name="reboot_needed">需要重啟</string>
     <string name="message_reboot_needed">核心已更新，需重啟系統</string>
     <string name="reboot_now">立即重啟</string>
     <string name="reboot_later">稍後重啟</string>
@@ -135,12 +134,6 @@
     <string name="feature_title_smart_app_standby">乖巧模式</string>
     <string name="feature_summary_smart_app_standby">對勾選的應用生效，應用回到後台自動停止所有服務或者使其處於待機狀態；如需設置例外服務，請使用規則</string>
     <string name="feature_summary_smart_app_standby_brief">應用回到後台接受處置</string>
-    <string name="feature_desc_smart_app_standby">
-        1. 應用回到後台會被自動休眠。\n
-        2. 智能休眠需要開啟系統設置中的電池-自適應電池選項才能正常工作。\n
-        3. 在系統電池優化白名單中的應用將不會被休眠。\n
-        4. 充電時將不會休眠應用。
-    </string>
 
     <string name="feature_category_apps">應用</string>
     <string name="feature_title_smart_app_freeze">智能凍結</string>

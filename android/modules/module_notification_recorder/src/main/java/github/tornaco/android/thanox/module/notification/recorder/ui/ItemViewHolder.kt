@@ -10,29 +10,33 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import github.tornaco.android.thanos.core.util.ClipboardUtils
-import github.tornaco.android.thanox.module.notification.recorder.NotificationRecordModel
 import github.tornaco.android.thanox.module.notification.recorder.R
 import github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderItemBinding
+import github.tornaco.android.thanox.module.notification.recorder.model.NotificationRecordModel
 
-class NotificationRecordViewHolder(private val binding: ModuleNotificationRecorderItemBinding) :
+class ItemViewHolder(private val binding: ModuleNotificationRecorderItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(model: NotificationRecordModel?) {
-        if (model == null) {
+    fun bind(item: NotificationRecordModel.Item?) {
+        if (item == null) {
             binding.card.visibility = View.INVISIBLE
             return
         }
 
-        binding.app = model.appInfo
-        binding.nrd = model.record
-        binding.timeFormatted = model.formattedTime
+        bindItem(item)
+    }
+
+    private fun bindItem(item: NotificationRecordModel.Item) {
+        binding.app = item.appInfo
+        binding.nrd = item.record
+        binding.timeFormatted = item.formattedTime
         binding.card.setOnClickListener {
-            showOptionsMenuForRecordItem(binding.root, model)
+            showOptionsMenuForRecordItem(binding.root, item)
         }
         binding.executePendingBindings()
     }
 
-    private fun showOptionsMenuForRecordItem(rootView: View, model: NotificationRecordModel) {
+    private fun showOptionsMenuForRecordItem(rootView: View, model: NotificationRecordModel.Item) {
         val popupMenu = PopupMenu(rootView.context, rootView)
         popupMenu.inflate(R.menu.module_notification_recorder_nr_item)
         popupMenu.setOnMenuItemClickListener { item ->
@@ -52,7 +56,7 @@ class NotificationRecordViewHolder(private val binding: ModuleNotificationRecord
         popupMenu.show()
     }
 
-    private fun zoom(rootView: View, model: NotificationRecordModel) {
+    private fun zoom(rootView: View, model: NotificationRecordModel.Item) {
         val holder = create(LinearLayout(rootView.context))
         holder.bind(model)
         holder.binding.card.setCardBackgroundColor(Color.TRANSPARENT)
@@ -61,7 +65,7 @@ class NotificationRecordViewHolder(private val binding: ModuleNotificationRecord
             .show()
     }
 
-    private fun reproduce(model: NotificationRecordModel) {
+    private fun reproduce(model: NotificationRecordModel.Item) {
         if (model.record.isToast) {
             TimeMachine.mockToast(itemView.context, model.record.content)
         } else {
@@ -74,7 +78,7 @@ class NotificationRecordViewHolder(private val binding: ModuleNotificationRecord
         }
     }
 
-    private fun copyNotificationToClipboard(model: NotificationRecordModel) {
+    private fun copyNotificationToClipboard(model: NotificationRecordModel.Item) {
         ClipboardUtils.copyToClipboard(
             itemView.context,
             "thanox.notification.content",
@@ -88,8 +92,8 @@ class NotificationRecordViewHolder(private val binding: ModuleNotificationRecord
     }
 
     companion object Factory {
-        fun create(parent: ViewGroup): NotificationRecordViewHolder =
-            NotificationRecordViewHolder(
+        fun create(parent: ViewGroup): ItemViewHolder =
+            ItemViewHolder(
                 ModuleNotificationRecorderItemBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 )

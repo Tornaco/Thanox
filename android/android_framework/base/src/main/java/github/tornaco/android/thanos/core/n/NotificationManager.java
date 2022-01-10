@@ -76,6 +76,11 @@ public class NotificationManager {
     }
 
     @SneakyThrows
+    public List<NotificationRecord> getAllNotificationRecordsByPageAndKeywordInDateRange(int start, int limit, long startTimeMills, long endTimeMills, String keyword) {
+        return service.getAllNotificationRecordsByPageAndKeywordInDateRange(start, limit, startTimeMills, endTimeMills, keyword);
+    }
+
+    @SneakyThrows
     public List<NotificationRecord> getNotificationRecordsForPackage(String packageName) {
         return service.getNotificationRecordsForPackage(packageName);
     }

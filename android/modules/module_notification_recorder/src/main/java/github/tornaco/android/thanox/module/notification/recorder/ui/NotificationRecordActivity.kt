@@ -22,6 +22,7 @@ import github.tornaco.android.thanox.module.notification.recorder.NotificationRe
 import github.tornaco.android.thanox.module.notification.recorder.R
 import github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderNrdListLayoutBinding
 import github.tornaco.android.thanox.module.notification.recorder.source.NotificationRecordRepository
+import github.tornaco.android.thanox.module.notification.recorder.ui.stats.StatsActivity
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -168,6 +169,9 @@ class NotificationRecordActivity : ThemeActivity() {
         }
         if (item.itemId == R.id.action_settings) {
             NotificationRecordSettingsActivity.start(thisActivity())
+        }
+        if (item.itemId == R.id.action_stats) {
+            StatsActivity.Starter.start(thisActivity())
         }
         return super.onOptionsItemSelected(item)
     }

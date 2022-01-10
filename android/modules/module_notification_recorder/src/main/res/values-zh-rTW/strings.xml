@@ -17,4 +17,7 @@
     <string name="pref_title_enable_nr_t">记录应用吐司</string>
     <string name="module_notification_recorder_reproduce">重现</string>
     <string name="module_notification_recorder_zoom">Zoom</string>
+    <string name="module_notification_recorder_yesterday">昨天</string>
+    <string name="module_notification_recorder_the_day_before_yesterday">前天</string>
+    <string name="module_notification_recorder_stats">统计</string>
 </resources>

@@ -20,4 +20,7 @@
     <string name="pref_title_enable_nr_t">Record Toasts</string>
     <string name="module_notification_recorder_reproduce">Reproduce</string>
     <string name="module_notification_recorder_zoom">Zoom</string>
+    <string name="module_notification_recorder_yesterday">Yesterday</string>
+    <string name="module_notification_recorder_the_day_before_yesterday">Two days ago</string>
+    <string name="module_notification_recorder_stats">Stats</string>
 </resources>

@@ -10,6 +10,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanox.module.notification.recorder.source.NotificationRecordRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 
 private const val PAGE_SIZE = 20
 

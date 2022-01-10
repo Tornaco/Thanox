@@ -15,6 +15,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_stats"
+        android:icon="@drawable/module_common_ic_settings_fill"
+        android:title="@string/module_notification_recorder_stats"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_settings"
         android:icon="@drawable/module_common_ic_settings_fill"
         android:title="@string/module_notification_recorder_settings"

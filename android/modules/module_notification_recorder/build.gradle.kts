@@ -6,6 +6,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -58,6 +59,10 @@ dependencies {
     implementation(Libs.Accompanist.appcompatTheme)
     implementation(Libs.Accompanist.systemUiController)
     implementation(Libs.Accompanist.pager)
+
+    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
+    implementation(Libs.Hilt.library)
+    kapt(Libs.Hilt.googleAndroidCompiler)
 
     implementation(Libs.AndroidX.androidXCore)
 

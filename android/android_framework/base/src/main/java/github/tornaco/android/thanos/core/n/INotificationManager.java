@@ -80,6 +80,10 @@ public interface INotificationManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeywordInDateRange(int start, int limit, long startTimeMills, long endTimeMills, java.lang.String keyword) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -315,6 +319,24 @@ public interface INotificationManager extends android.os.IInterface
           java.lang.String _arg2;
           _arg2 = data.readString();
           java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> _result = this.getAllNotificationRecordsByPageAndKeyword(_arg0, _arg1, _arg2);
+          reply.writeNoException();
+          reply.writeTypedList(_result);
+          return true;
+        }
+        case TRANSACTION_getAllNotificationRecordsByPageAndKeywordInDateRange:
+        {
+          data.enforceInterface(descriptor);
+          int _arg0;
+          _arg0 = data.readInt();
+          int _arg1;
+          _arg1 = data.readInt();
+          long _arg2;
+          _arg2 = data.readLong();
+          long _arg3;
+          _arg3 = data.readLong();
+          java.lang.String _arg4;
+          _arg4 = data.readString();
+          java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> _result = this.getAllNotificationRecordsByPageAndKeywordInDateRange(_arg0, _arg1, _arg2, _arg3, _arg4);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -750,6 +772,31 @@ public interface INotificationManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeywordInDateRange(int start, int limit, long startTimeMills, long endTimeMills, java.lang.String keyword) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(start);
+          _data.writeInt(limit);
+          _data.writeLong(startTimeMills);
+          _data.writeLong(endTimeMills);
+          _data.writeString(keyword);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getAllNotificationRecordsByPageAndKeywordInDateRange, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllNotificationRecordsByPageAndKeywordInDateRange(start, limit, startTimeMills, endTimeMills, keyword);
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.n.NotificationRecord.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.n.INotificationManager sDefaultImpl;
     }
     static final int TRANSACTION_getShowingNotificationRecordsForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -772,6 +819,7 @@ public interface INotificationManager extends android.os.IInterface
     static final int TRANSACTION_isNREnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
     static final int TRANSACTION_setNREnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
     static final int TRANSACTION_getAllNotificationRecordsByPageAndKeyword = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
+    static final int TRANSACTION_getAllNotificationRecordsByPageAndKeywordInDateRange = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.n.INotificationManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -811,4 +859,5 @@ public interface INotificationManager extends android.os.IInterface
   // For searching.
 
   public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, java.lang.String keyword) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeywordInDateRange(int start, int limit, long startTimeMills, long endTimeMills, java.lang.String keyword) throws android.os.RemoteException;
 }

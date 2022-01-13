@@ -202,6 +202,9 @@ dependencies {
 
     testImplementation(Tests.junit)
     testImplementation(Tests.junitKotlin)
+
+    // UiAutomator Testing
+    androidTestImplementation(Tests.uiAutomation)
 }
 
 

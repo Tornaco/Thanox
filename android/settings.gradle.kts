@@ -76,6 +76,7 @@ include(":android_framework:patch-magisk:patch-framework")
 val internalProjects = listOf(
     ":modules:module_donate",
     ":third_party:sec_net",
+    ":android_framework:tests",
     ":android_framework:db",
     ":android_framework:services",
     ":android_framework:services-29",

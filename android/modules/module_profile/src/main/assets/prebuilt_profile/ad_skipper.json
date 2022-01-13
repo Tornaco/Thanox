@@ -1,0 +1,12 @@
+[
+  {
+    "name": "AD Skip",
+    "description": "彩云天气广告页面点击跳过",
+    "priority": 1,
+    "condition": "activityResumed == true && componentNameAsShortString == \"com.nowcasting.activity/.SplashActivity\"",
+    "actions": [
+      "ui.showShortToast(\"尝试点击跳过...\");",
+      "ui.findAndClickViewByText(\"跳过\", \"com.nowcasting.activity/com.nowcasting.activity.SplashActivity\");"
+    ]
+  }
+]

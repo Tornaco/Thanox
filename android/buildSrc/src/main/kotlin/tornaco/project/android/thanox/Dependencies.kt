@@ -48,6 +48,8 @@ object Tests {
 
     // https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/
     const val ktxCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1"
+
+    const val uiAutomation = "androidx.test.uiautomator:uiautomator:2.2.0"
 }
 
 object Libs {

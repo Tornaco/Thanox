@@ -7,9 +7,11 @@ import android.os.IInterface;
 
 import com.elvishew.xlog.XLog;
 
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
+import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import util.ExceptionTransformedInvocationHandler;
 
 public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
@@ -69,11 +71,34 @@ public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTra
                                     // BREAK!!!
                                 }
 
+                                // ContentProviderHolder getContentProvider(IApplicationThread caller, String callingPackage, String name, int userId, boolean stable);
+                                if ("getContentProvider".equals(method.getName())) {
+                                    return handleGetProvider(am, method, args);
+                                }
+
                                 return tryInvoke(am, method, args);
                             });
                 }
                 return iInterface;
             }
         });
+    }
+
+    private Object handleGetProvider(IActivityManager am, Method method, Object[] args) throws Throwable {
+        if (!ThanosManagerNative.isServiceInstalled()) {
+            XLog.d("IActivityTaskManager, handleGetProvider, Thanox not installed...");
+            return tryInvoke(am, method, args);
+        }
+        String callingPackage = (String) args[1];
+        String name = (String) args[2];
+        XLog.d("IActivityManager getContentProvider: %s %s", callingPackage, name);
+        boolean res =
+                ThanosManagerNative.getDefault()
+                        .getActivityManager()
+                        .checkGetContentProvider(name, callingPackage);
+        if (!res) {
+            return null;
+        }
+        return tryInvoke(am, method, args);
     }
 }

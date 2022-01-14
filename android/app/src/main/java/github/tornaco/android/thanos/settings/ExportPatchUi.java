@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -28,6 +27,10 @@ import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
+import github.tornaco.android.thanos.widget.ModernProgressDialog;
+import io.reactivex.Completable;
+import io.reactivex.schedulers.Schedulers;
+import rx2.android.schedulers.AndroidSchedulers;
 import util.IoUtils;
 
 public class ExportPatchUi {
@@ -74,7 +77,7 @@ public class ExportPatchUi {
     public void handleActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         XLog.d("onActivityResult: %s %s %s", requestCode, resultCode, ObjectToStringUtils.intentToString(data));
         if (requestCode == REQUEST_CODE_EXPORT_MAGISK_FILE_PICKED && resultCode == Activity.RESULT_OK) {
-            onExportMagiskFilePickRequestResultQ(data);
+            onExportMagiskFilePickRequestResultQAsync(data);
         }
     }
 
@@ -97,10 +100,27 @@ public class ExportPatchUi {
         }
     }
 
-    private void onExportMagiskFilePickRequestResultQ(Intent data) {
+    private void onExportMagiskFilePickRequestResultQAsync(Intent data) {
+        ModernProgressDialog dialog = new ModernProgressDialog(requireContext());
+        dialog.setMessage(R.string.common_text_wait_a_moment);
+        dialog.show();
+        Completable.fromAction(() -> {
+            boolean success = onExportMagiskFilePickRequestResultQ(data);
+            Completable.fromRunnable(() -> {
+                dialog.dismiss();
+                if (success) {
+                    ToastUtils.ok(requireContext());
+                } else {
+                    ToastUtils.nook(requireContext());
+                }
+            }).subscribeOn(AndroidSchedulers.mainThread()).subscribe();
+        }).subscribeOn(Schedulers.io()).subscribe();
+    }
+
+    private boolean onExportMagiskFilePickRequestResultQ(Intent data) {
         if (data == null) {
             XLog.e("No data.");
-            return;
+            return false;
         }
 
         Uri fileUri = data.getData();
@@ -108,7 +128,7 @@ public class ExportPatchUi {
         if (fileUri == null) {
             Toast.makeText(requireContext(), "fileUri == null", Toast.LENGTH_LONG).show();
             XLog.e("No fileUri.");
-            return;
+            return false;
         }
 
         XLog.d("fileUri == %s", fileUri);
@@ -119,14 +139,13 @@ public class ExportPatchUi {
             Files.asByteSource(
                     new File(Objects.requireNonNull(PkgUtils.getApkPath(requireContext(), requireContext().getPackageName()))))
                     .copyTo(os);
-
-            ToastUtils.ok(requireContext());
+            return true;
         } catch (IOException e) {
             XLog.e(e);
-            Toast.makeText(requireContext(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
         } finally {
             IoUtils.closeQuietly(os);
         }
+        return false;
     }
 
     private Context requireContext() {

@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge.proxy;
+package github.tornaco.android.thanox.magisk.bridge.proxy.content;
 
 import android.content.Context;
 import android.os.IBinder;
@@ -9,6 +9,8 @@ import com.elvishew.xlog.XLog;
 import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
+import github.tornaco.android.thanox.magisk.bridge.proxy.BinderProxy;
+import github.tornaco.android.thanox.magisk.bridge.proxy.ProxyProvider;
 
 public class DropBoxManagerProxyProvider implements ProxyProvider {
     @Override

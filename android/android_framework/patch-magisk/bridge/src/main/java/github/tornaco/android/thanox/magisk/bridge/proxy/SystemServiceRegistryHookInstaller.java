@@ -9,6 +9,8 @@ import com.elvishew.xlog.XLog;
 
 import java.util.Map;
 
+import github.tornaco.android.thanox.magisk.bridge.proxy.content.ClipboardManagerProxyProvider;
+import github.tornaco.android.thanox.magisk.bridge.proxy.phone.TelephonyManagerProxyFactory;
 import util.XposedHelpers;
 
 @SuppressWarnings("unchecked")
@@ -39,7 +41,7 @@ public class SystemServiceRegistryHookInstaller {
                     new SystemServiceRegistry.ContextAwareServiceProducerWithoutBinder<TelephonyManager>() {
                         @Override
                         public TelephonyManager createService(Context context) {
-                            return TelephonyManagerProxyProvider.provide(context);
+                            return TelephonyManagerProxyFactory.newProxy(context);
                         }
                     }
             );

@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge.proxy;
+package github.tornaco.android.thanox.magisk.bridge.proxy.phone;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,9 +13,9 @@ import github.tornaco.android.thanos.core.secure.PrivacyManager;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.function.Function;
 
-public class TelephonyManagerProxyProvider {
+public class TelephonyManagerProxyFactory {
 
-    public static TelephonyManager provide(Context context) {
+    public static TelephonyManager newProxy(Context context) {
         return new TelephonyManagerProxy(context);
     }
 

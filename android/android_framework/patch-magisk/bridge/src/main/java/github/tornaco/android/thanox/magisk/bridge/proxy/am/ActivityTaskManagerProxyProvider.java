@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge.proxy;
+package github.tornaco.android.thanox.magisk.bridge.proxy.am;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -22,6 +22,9 @@ import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.util.PkgUtils;
+import github.tornaco.android.thanox.magisk.bridge.proxy.Args;
+import github.tornaco.android.thanox.magisk.bridge.proxy.BinderProxy;
+import github.tornaco.android.thanox.magisk.bridge.proxy.ProxyProvider;
 import util.ExceptionTransformedInvocationHandler;
 import util.ObjectsUtils;
 

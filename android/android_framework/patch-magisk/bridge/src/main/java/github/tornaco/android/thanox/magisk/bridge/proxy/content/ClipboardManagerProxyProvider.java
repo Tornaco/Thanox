@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge.proxy;
+package github.tornaco.android.thanox.magisk.bridge.proxy.content;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;

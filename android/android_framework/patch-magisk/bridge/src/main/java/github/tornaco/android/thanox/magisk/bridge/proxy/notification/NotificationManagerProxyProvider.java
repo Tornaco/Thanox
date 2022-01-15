@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge.proxy;
+package github.tornaco.android.thanox.magisk.bridge.proxy.notification;
 
 import android.app.INotificationManager;
 import android.content.Context;
@@ -12,6 +12,8 @@ import java.util.Arrays;
 
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.n.NotificationRecord;
+import github.tornaco.android.thanox.magisk.bridge.proxy.BinderProxy;
+import github.tornaco.android.thanox.magisk.bridge.proxy.ProxyProvider;
 import util.ExceptionTransformedInvocationHandler;
 
 public class NotificationManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {

@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge.proxy;
+package github.tornaco.android.thanox.magisk.bridge.proxy.am;
 
 import android.app.IActivityManager;
 import android.content.ComponentName;
@@ -12,6 +12,8 @@ import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
+import github.tornaco.android.thanox.magisk.bridge.proxy.BinderProxy;
+import github.tornaco.android.thanox.magisk.bridge.proxy.ProxyProvider;
 import util.ExceptionTransformedInvocationHandler;
 
 public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {

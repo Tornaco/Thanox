@@ -6,6 +6,8 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
+import github.tornaco.android.thanox.magisk.bridge.proxy.notification.NotificationManagerProxyProvider;
+
 public class Proxies {
     private static final List<ProxyProvider> PROVIDERS_CACHE = Lists.newArrayList(
             new NotificationManagerProxyProvider()

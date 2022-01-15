@@ -19,8 +19,8 @@ import com.elvishew.xlog.XLog;
 
 import java.util.Arrays;
 
-import github.tornaco.android.thanox.magisk.bridge.proxy.ActivityManagerProxyProvider;
-import github.tornaco.android.thanox.magisk.bridge.proxy.ActivityTaskManagerProxyProvider;
+import github.tornaco.android.thanox.magisk.bridge.proxy.am.ActivityManagerProxyProvider;
+import github.tornaco.android.thanox.magisk.bridge.proxy.am.ActivityTaskManagerProxyProvider;
 import github.tornaco.android.thanox.magisk.bridge.proxy.Proxies;
 import lombok.AllArgsConstructor;
 import util.XposedHelpers;

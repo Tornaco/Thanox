@@ -188,7 +188,7 @@ public class LogConfiguration {
 
         private static final int DEFAULT_LOG_LEVEL = LogLevel.ALL;
 
-        private static final String DEFAULT_TAG = "X-LOG";
+        private static final String DEFAULT_TAG = "ThanoxLog";
 
         /**
          * The log level, the logs below of which would not be printed.

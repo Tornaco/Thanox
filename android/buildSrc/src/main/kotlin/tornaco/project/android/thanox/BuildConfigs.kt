@@ -118,7 +118,7 @@ class ThanoxProjectBuildPlugin : Plugin<Project> {
     }
 
     private fun Project.updateBuildConfigFields() {
-        Configs.thanoxBuildHostName = InetAddress.getLocalHost().hostName
+        Configs.thanoxBuildHostName = System.getProperty("os.name", "UnKnown host")
         Configs.thanoxBuildFlavor = getBuildFlavor().name.lowercase()
         Configs.thanoxBuildVariant = getBuildVariant().name.lowercase()
         Configs.thanoxBuildIsDebug = Configs.thanoxBuildVariant == "debug"

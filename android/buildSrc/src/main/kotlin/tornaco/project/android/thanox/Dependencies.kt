@@ -1,9 +1,9 @@
 package tornaco.project.android.thanox
 
 object ClassPaths {
-    const val gradlePlugin = "com.android.tools.build:gradle:7.0.1"
-    const val gradleApi = "com.android.tools.build:gradle-api:7.0.1"
-    const val gradleBuilderModel = "com.android.tools.build:builder-model:7.0.1"
+    const val gradlePlugin = "com.android.tools.build:gradle:7.0.4"
+    const val gradleApi = "com.android.tools.build:gradle-api:7.0.4"
+    const val gradleBuilderModel = "com.android.tools.build:builder-model:7.0.4"
     const val androidToolsCommon = "com.android.tools:common:30.0.1"
 
     const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"

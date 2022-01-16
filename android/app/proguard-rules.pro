@@ -189,6 +189,7 @@
 -keep class github.tornaco.android.thanos.db** {*;}
 -keep class github.tornaco.android.thanox.magisk** {*;}
 -keep class github.tornaco.thanox.android.server** {*;}
+-keep class github.tornaco.xposed.patchx** {*;}
 
 # Slf
 -keep class org.slf4j.** {*;}

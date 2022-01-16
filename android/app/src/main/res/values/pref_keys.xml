@@ -157,6 +157,8 @@
     <string name="key_app_feature_config_block_uninstall" translatable="false">key_app_feature_config_block_uninstall</string>
     <string name="key_app_feature_config_block_clear_data" translatable="false">key_app_feature_config_block_clear_data</string>
 
+    <string name="key_app_feature_config_dialog_force_cancelable" translatable="false">key_app_feature_config_dialog_force_cancelable</string>
+
     <string name="key_strategy" translatable="false">key_strategy</string>
     <string name="key_new_installed_apps_config" translatable="false">key_new_installed_apps_config</string>
     <string name="key_new_installed_apps_config_enabled" translatable="false">key_new_installed_apps_config_enabled</string>

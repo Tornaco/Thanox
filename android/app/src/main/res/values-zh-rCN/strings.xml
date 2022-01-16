@@ -115,6 +115,7 @@
     <string name="feature_category_manage">管理</string>
     <string name="feature_category_protect">保护</string>
     <string name="feature_category_remind">提醒</string>
+    <string name="feature_category_misc">杂项</string>
 
     <string name="feature_title_recent_task_blur">卡片模糊</string>
     <string name="feature_summary_recent_task_blur">给最近任务卡片加上模糊效果</string>
@@ -308,6 +309,9 @@
     <string name="pre_entry_exclude_recent_task_default">默认</string>
     <string name="pre_entry_exclude_recent_task_include">强制显示</string>
     <string name="pre_entry_exclude_recent_task_exclude">强制隐藏</string>
+
+    <string name="pre_title_force_dialog_cancelable">取消对话框</string>
+    <string name="pre_summary_force_dialog_cancelable">强制让该应用的原生弹出对话框可以取消，需要为该应用开启Xposed作用域才能生效</string>
 
     <string name="pre_title_bg_screen_off_clean_up_skip_notification">不清理有通知应用</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">不清理最近任务里的应用</string>

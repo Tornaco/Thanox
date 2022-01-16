@@ -115,6 +115,7 @@
     <string name="feature_category_manage">Manage</string>
     <string name="feature_category_protect">Protect</string>
     <string name="feature_category_remind">Reminder</string>
+    <string name="feature_category_misc">Misc</string>
 
     <string name="feature_title_recent_task_blur">Task blur</string>
     <string name="feature_summary_recent_task_blur">Add blur effect to recent tasks</string>
@@ -302,6 +303,9 @@
     <string name="pre_entry_exclude_recent_task_default">Default</string>
     <string name="pre_entry_exclude_recent_task_include">Include</string>
     <string name="pre_entry_exclude_recent_task_exclude">Exclude</string>
+
+    <string name="pre_title_force_dialog_cancelable">Dialog cancelable</string>
+    <string name="pre_summary_force_dialog_cancelable">Force app dialog to be cancelable for, please enable Xposed installer scope for this app</string>
 
     <string name="cheat_field_auto_gen">Fill with random fields</string>
 

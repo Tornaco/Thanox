@@ -102,6 +102,7 @@ public class BuildProp {
     public static final String THANOX_FEATURE_PLUGIN_SUPPORT = "thanox.feature.plugin.support";
     public static final String THANOX_FEATURE_PREVENT_UNINSTALL = "thanox.feature.prevent.uninstall";
     public static final String THANOX_FEATURE_PREVENT_CLEAR_DATA = "thanox.feature.prevent.clear.data";
+    public static final String THANOX_FEATURE_DIALOG_FORCE_CANCELABLE = "thanox.feature.dialog.force.cancelable";
 
     public static final String THANOX_CONTRIBUTORS = getString("thanox.dev.contributors");
     public static final String THANOX_CONTACT_EMAIL = getString("thanox.contact.email");

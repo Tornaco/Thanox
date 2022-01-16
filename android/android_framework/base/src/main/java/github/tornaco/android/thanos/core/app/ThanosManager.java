@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.core.app;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.os.RemoteException;
 
 import com.elvishew.xlog.XLog;
 
@@ -22,6 +23,8 @@ import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.push.PushManager;
 import github.tornaco.android.thanos.core.secure.PrivacyManager;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
+import github.tornaco.android.thanos.core.wm.IWindowManager;
+import github.tornaco.android.thanos.core.wm.WindowManager;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import util.Consumer;
@@ -137,6 +140,11 @@ public class ThanosManager {
     @SneakyThrows
     public UsageStatsManager getUsageStatsManager() {
         return new UsageStatsManager(service.getUsageStatsManager());
+    }
+
+    @SneakyThrows
+    public WindowManager getWindowManager(){
+        return new WindowManager(service.getWindowManager());
     }
 
     @SneakyThrows

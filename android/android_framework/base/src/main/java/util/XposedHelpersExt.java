@@ -6,16 +6,12 @@ import com.elvishew.xlog.XLog;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import github.tornaco.android.thanos.core.annotation.RequiresApi;
-import github.tornaco.android.thanos.core.util.OsUtils;
 
 public class XposedHelpersExt {
 
@@ -87,13 +83,36 @@ public class XposedHelpersExt {
     return -1;
   }
 
-  public static Class<?> anyClassFromNames(ClassLoader classLoader, String... classNames)
+  public static Class<?> anyClassFromNames(ClassLoader classLoader, String[] classNames)
           throws ClassNotFoundException {
+    XLog.d("anyClassFromNames, " + Arrays.toString(classNames));
     for (String className: classNames) {
       try {
         Class<?> res = XposedHelpers.findClass(className, classLoader);
         XLog.d("anyClassFromNames, find class for name: " + className);
         return res;
+      } catch (Throwable e) {
+        XLog.d("anyClassFromNames, no class for this name: " + className);
+      }
+    }
+    throw new ClassNotFoundException(Arrays.toString(classNames));
+  }
+
+  public static Class<?> anyClassFromNames(ClassLoader classLoader, String methodNameToFind, String[] classNames)
+          throws ClassNotFoundException {
+    XLog.d("anyClassFromNames, classNames: %s, methodNameToFind: %s", Arrays.toString(classNames), methodNameToFind);
+    for (String className : classNames) {
+      try {
+        Class<?> res = XposedHelpers.findClass(className, classLoader);
+        XLog.d("anyClassFromNames, found class for this name: %s, will check if method exists", className);
+        boolean methodExists = false;
+        for (Method method : res.getDeclaredMethods()) {
+          if (method.getName().equals(methodNameToFind)) {
+            methodExists = true;
+          }
+        }
+        XLog.d("anyClassFromNames, find class for name: %s, methodExists? %s", className, methodExists);
+        if (methodExists) return res;
       } catch (Throwable e) {
         XLog.d("anyClassFromNames, no class for this name: " + className);
       }

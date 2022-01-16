@@ -164,7 +164,7 @@
     <string name="menu_title_launch_system_settings">System settings</string>
 
     <string name="feature_title_data_cheat">Incognito</string>
-    <string name="feature_desc_data_cheat">Hide SIM info, serial id etc</string>
+    <string name="feature_desc_data_cheat">Hide SIM info, serial id etc. please enable Xposed installer scope for selected app</string>
     <string name="activity_title_data_cheat">Incognito</string>
     <string name="feature_summary_pkg_data_cheat">Incognito</string>
 

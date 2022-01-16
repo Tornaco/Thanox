@@ -163,7 +163,7 @@
     <string name="menu_title_launch_system_settings">系统设置</string>
 
     <string name="feature_title_data_cheat">隐匿</string>
-    <string name="feature_desc_data_cheat">对勾选的应用生效，隐藏手机号，SIM序列等敏感信息</string>
+    <string name="feature_desc_data_cheat">对勾选的应用生效，隐藏手机号，SIM序列等敏感信息。需要为应用开启Xposed作用域才能生效</string>
     <string name="activity_title_data_cheat">隐匿</string>
     <string name="feature_summary_pkg_data_cheat">身份隐藏</string>
 

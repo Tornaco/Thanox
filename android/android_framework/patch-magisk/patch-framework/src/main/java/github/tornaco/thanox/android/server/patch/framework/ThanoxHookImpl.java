@@ -72,8 +72,6 @@ public class ThanoxHookImpl implements IThanoxHook {
                         BootStrap.start(context);
                         BootStrap.ready();
                         SystemServerHooks.install();
-                        // Broadcaster.
-                        Broadcaster.install(context);
                         XLog.d("Invoke BootStrap!");
                     }
                 }

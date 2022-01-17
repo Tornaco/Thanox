@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="scope">
+        <item>android</item>
+    </string-array>
+    
     <string-array name="process_manage_categories">
         <item>@string/running_process_running</item>
         <item>@string/running_process_background</item>

@@ -75,10 +75,10 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
             ruleInfo.setEnabled(checked);
             if (checked) ThanosManager.from(getApplicationContext())
                     .getProfileManager()
-                    .enableRule(ruleInfo.getName());
+                    .enableRule(ruleInfo.getId());
             else ThanosManager.from(getApplicationContext())
                     .getProfileManager()
-                    .disableRule(ruleInfo.getName());
+                    .disableRule(ruleInfo.getId());
         }));
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(

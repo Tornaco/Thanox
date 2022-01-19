@@ -141,38 +141,45 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
                 if (TextUtils.isEmpty(getCurrentEditingContent())) {
                     return false;
                 }
-                ThanosManager.from(getApplicationContext())
-                        .getProfileManager()
-                        .addRule(getCurrentEditingContent(),
-                                new RuleAddCallback() {
-                                    @Override
-                                    protected void onRuleAddSuccess() {
-                                        super.onRuleAddSuccess();
-                                        Toast.makeText(getApplicationContext(),
-                                                R.string.module_profile_editor_save_success,
-                                                Toast.LENGTH_LONG)
-                                                .show();
-                                        // Disable rule since it has been changed.
-                                        if (ruleInfo != null) {
-                                            ThanosManager.from(getApplicationContext())
-                                                    .getProfileManager()
-                                                    .disableRule(ruleInfo.getName());
-                                        }
-                                        finish();
-                                    }
+                RuleAddCallback callback = new RuleAddCallback() {
+                    @Override
+                    protected void onRuleAddSuccess() {
+                        super.onRuleAddSuccess();
+                        Toast.makeText(getApplicationContext(),
+                                R.string.module_profile_editor_save_success,
+                                Toast.LENGTH_LONG)
+                                .show();
+                        // Disable rule since it has been changed.
+                        if (ruleInfo != null) {
+                            ThanosManager.from(getApplicationContext())
+                                    .getProfileManager()
+                                    .disableRule(ruleInfo.getId());
+                        }
+                        finish();
+                    }
 
-                                    @Override
-                                    protected void onRuleAddFail(int errorCode, String errorMessage) {
-                                        super.onRuleAddFail(errorCode, errorMessage);
-                                        new MaterialAlertDialogBuilder(thisActivity())
-                                                .setTitle(R.string.module_profile_editor_save_check_error)
-                                                .setMessage(errorMessage)
-                                                .setCancelable(true)
-                                                .setPositiveButton(android.R.string.ok, null)
-                                                .show();
-                                    }
-                                },
-                                format);
+                    @Override
+                    protected void onRuleAddFail(int errorCode, String errorMessage) {
+                        super.onRuleAddFail(errorCode, errorMessage);
+                        new MaterialAlertDialogBuilder(thisActivity())
+                                .setTitle(R.string.module_profile_editor_save_check_error)
+                                .setMessage(errorMessage)
+                                .setCancelable(true)
+                                .setPositiveButton(android.R.string.ok, null)
+                                .show();
+                    }
+                };
+
+                if (ruleInfo != null) {
+                    ThanosManager.from(getApplicationContext())
+                            .getProfileManager()
+                            .updateRule(ruleInfo.getId(), getCurrentEditingContent(), callback, format);
+                } else {
+                    ThanosManager.from(getApplicationContext())
+                            .getProfileManager()
+                            .addRule(getCurrentEditingContent(), callback, format);
+                }
+
                 return true;
             }
             if (item.getItemId() == R.id.action_text_size_inc) {
@@ -301,7 +308,7 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
                     if (ruleInfo != null) {
                         ThanosManager.from(getApplicationContext())
                                 .getProfileManager()
-                                .deleteRule(ruleInfo.getName());
+                                .deleteRule(ruleInfo.getId());
                         finish();
                     }
                 })

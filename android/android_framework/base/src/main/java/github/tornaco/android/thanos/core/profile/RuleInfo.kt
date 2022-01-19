@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class RuleInfo(
+    val id: Int,
     var name: String,
     var description: String,
     var ruleString: String,
@@ -14,6 +15,7 @@ data class RuleInfo(
 ) : Parcelable {
 
     private constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -24,6 +26,7 @@ data class RuleInfo(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeString(ruleString)
@@ -43,6 +46,7 @@ data class RuleInfo(
 
         other as RuleInfo
 
+        if (id != other.id) return false
         if (name != other.name) return false
         if (description != other.description) return false
         if (ruleString != other.ruleString) return false

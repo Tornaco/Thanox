@@ -10,12 +10,12 @@ interface IProfileManager {
     boolean isAutoApplyForNewInstalledAppsEnabled();
 
     void addRule(String ruleJson, in IRuleAddCallback callback, int format);
-    void deleteRule(String ruleName);
+    void deleteRule(int ruleId);
 
-    boolean enableRule(String ruleName);
-    boolean disableRule(String ruleName);
-    boolean isRuleEnabled(String ruleName);
-    boolean isRuleExists(String ruleName);
+    boolean enableRule(int ruleId);
+    boolean disableRule(int ruleId);
+    boolean isRuleEnabled(int ruleId);
+    boolean isRuleExists(int ruleId);
 
     void checkRule(String ruleJson, in IRuleCheckCallback callback, int format);
 
@@ -57,4 +57,6 @@ interface IProfileManager {
     void addRuleIfNotExists(String ruleJson, in IRuleAddCallback callback, int format);
 
     void publishStringFact(String factValue, long delayMills);
+
+    void updateRule(int ruleId, String ruleJson, in IRuleAddCallback callback, int format);
 }

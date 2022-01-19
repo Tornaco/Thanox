@@ -33,22 +33,27 @@ public class ProfileManager {
     }
 
     @SneakyThrows
+    public void updateRule(int ruleId, String ruleJson, RuleAddCallback callback, int format) {
+        server.updateRule(ruleId, ruleJson, callback.getStub(), format);
+    }
+
+    @SneakyThrows
     public void addRuleIfNotExists(String ruleString, RuleAddCallback callback, int format) {
         server.addRuleIfNotExists(ruleString, callback.getStub(), format);
     }
 
     @SneakyThrows
-    public void deleteRule(String ruleId) {
+    public void deleteRule(int ruleId) {
         server.deleteRule(ruleId);
     }
 
     @SneakyThrows
-    public boolean enableRule(String ruleId) {
+    public boolean enableRule(int ruleId) {
         return server.enableRule(ruleId);
     }
 
     @SneakyThrows
-    public boolean disableRule(String ruleId) {
+    public boolean disableRule(int ruleId) {
         return server.disableRule(ruleId);
     }
 
@@ -58,13 +63,8 @@ public class ProfileManager {
     }
 
     @SneakyThrows
-    public void isRuleEnabled(String ruleId) {
+    public void isRuleEnabled(int ruleId) {
         server.isRuleEnabled(ruleId);
-    }
-
-    @SneakyThrows
-    public boolean isRuleExists(String ruleName) {
-        return server.isRuleExists(ruleName);
     }
 
     @SneakyThrows

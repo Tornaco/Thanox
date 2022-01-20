@@ -57,7 +57,7 @@ public class DefaultsFactory {
 
     private static final String DEFAULT_LOG_FILE_NAME = "log";
 
-    private static final long DEFAULT_LOG_FILE_MAX_SIZE = 1024 * 1024; // 1M bytes;
+    private static final long DEFAULT_LOG_FILE_MAX_SIZE = 10 * 1024 * 1024; // 10M bytes;
 
     private static final Map<Class<?>, ObjectFormatter<?>> BUILTIN_OBJECT_FORMATTERS;
 

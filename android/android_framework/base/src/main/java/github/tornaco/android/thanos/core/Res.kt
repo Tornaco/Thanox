@@ -80,6 +80,9 @@ abstract class Res {
         const val STRING_THANOX_REMOVED_DIALOG_KEEP_DATA = "service_dialog_button_thanox_removed_keep_data"
         const val STRING_THANOX_REMOVED_DIALOG_DELETE_DATA = "service_dialog_button_thanox_removed_remove_data"
 
+        const val STRING_UNTRUSTED_PACKAGE_TITLE = "billing_state_row_not_trust_title"
+        const val STRING_UNTRUSTED_PACKAGE_MSG = "billing_state_row_not_trust_message"
+
         object AppSet {
             const val STRING_SERVICE_APP_SET_ALL = "service_app_set_all"
             const val STRING_SERVICE_APP_SET_SYSTEM = "service_app_set_system"

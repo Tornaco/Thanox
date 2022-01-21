@@ -64,6 +64,7 @@
                 android:layout_marginEnd="@dimen/common_view_margin_default"
                 android:layout_marginBottom="@dimen/common_view_margin_default"
                 android:text="@string/common_menu_title_wiki"
+                android:visibility="gone"
                 app:icon="@drawable/ic_book_3_fill" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -76,6 +77,7 @@
                 android:layout_marginEnd="@dimen/common_view_margin_default"
                 android:layout_marginBottom="@dimen/common_view_margin_default"
                 android:text="@string/nav_title_feedback"
+                android:visibility="gone"
                 app:icon="@drawable/ic_feedback_fill" />
         </RelativeLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

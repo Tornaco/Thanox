@@ -1,12 +1,10 @@
 package github.tornaco.android.thanos.main;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -23,6 +21,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
+import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
@@ -37,6 +36,7 @@ import github.tornaco.android.thanos.dashboard.Tile;
 import github.tornaco.android.thanos.databinding.FragmentPrebuiltFeaturesBinding;
 import github.tornaco.android.thanos.infinite.InfiniteZActivity;
 import github.tornaco.android.thanos.notification.ScreenOnNotificationActivity;
+import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
 import github.tornaco.android.thanos.power.SmartFreezeActivity;
 import github.tornaco.android.thanos.power.SmartStandbyV2Activity;
 import github.tornaco.android.thanos.privacy.DataCheatActivity;
@@ -45,6 +45,7 @@ import github.tornaco.android.thanos.start.BackgroundRestrictActivity;
 import github.tornaco.android.thanos.start.StartRestrictActivity;
 import github.tornaco.android.thanos.task.CleanUpOnTaskRemovedActivity;
 import github.tornaco.android.thanos.task.RecentTaskBlurListActivity;
+import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampolineActivity;
 import github.tornaco.android.thanox.module.notification.recorder.ui.NotificationRecordActivity;
 import github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity;
@@ -156,13 +157,27 @@ public class PrebuiltFeatureFragment extends NavFragment
             InfiniteZActivity.start(requireActivity());
         } else if (tile.getId() == R.id.id_plugins) {
             PluginListActivity.start(requireActivity());
+        } else if (tile.getId() == R.id.id_feedback) {
+            showFeedbackDialog();
+        } else if (tile.getId() == R.id.id_guide) {
+            BrowserUtils.launch(requireActivity(), BuildProp.THANOX_URL_DOCS_HOME);
         }
+    }
+
+    private void showFeedbackDialog() {
+        new MaterialAlertDialogBuilder(requireActivity())
+                .setTitle(R.string.nav_title_feedback)
+                .setMessage(R.string.dialog_message_feedback)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
     }
 
     @Override
     public void onLongClick(@NonNull Tile tile, @NonNull View view) {
         if (tile.getId() == R.id.id_one_key_clear) {
             showOneKeyBoostPopMenu(view);
+        } else if (tile.getId() == R.id.id_guide) {
+            OnBoardingActivity.Starter.INSTANCE.start(requireActivity());
         }
     }
 
@@ -170,39 +185,33 @@ public class PrebuiltFeatureFragment extends NavFragment
         PopupMenu popupMenu = new PopupMenu(Objects.requireNonNull(requireActivity()), view);
         popupMenu.inflate(R.menu.one_key_boost_pop_menu);
         popupMenu.setOnMenuItemClickListener(
-                new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        if (item.getItemId() == R.id.create_shortcut) {
-                            OneKeyBoostShortcutActivity.ShortcutHelper.addShortcut(requireActivity());
-                            return true;
-                        }
-                        if (item.getItemId() == R.id.broadcast_intent_shortcut) {
-                            new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
-                                    .setTitle(getString(R.string.menu_title_broadcast_intent_shortcut))
-                                    .setMessage(T.Actions.ACTION_RUNNING_PROCESS_CLEAR)
-                                    .setPositiveButton(
-                                            R.string.menu_title_copy,
-                                            new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    ClipboardUtils.copyToClipboard(
-                                                            Objects.requireNonNull(getContext()),
-                                                            "one-ley-boost-intent",
-                                                            T.Actions.ACTION_RUNNING_PROCESS_CLEAR);
-                                                    Toast.makeText(
-                                                            requireActivity(),
-                                                            R.string.common_toast_copied_to_clipboard,
-                                                            Toast.LENGTH_SHORT)
-                                                            .show();
-                                                }
-                                            })
-                                    .setCancelable(true)
-                                    .show();
-                            return true;
-                        }
-                        return false;
+                item -> {
+                    if (item.getItemId() == R.id.create_shortcut) {
+                        OneKeyBoostShortcutActivity.ShortcutHelper.addShortcut(requireActivity());
+                        return true;
                     }
+                    if (item.getItemId() == R.id.broadcast_intent_shortcut) {
+                        new MaterialAlertDialogBuilder(Objects.requireNonNull(requireActivity()))
+                                .setTitle(getString(R.string.menu_title_broadcast_intent_shortcut))
+                                .setMessage(T.Actions.ACTION_RUNNING_PROCESS_CLEAR)
+                                .setPositiveButton(
+                                        R.string.menu_title_copy,
+                                        (dialog, which) -> {
+                                            ClipboardUtils.copyToClipboard(
+                                                    requireContext(),
+                                                    "one-ley-boost-intent",
+                                                    T.Actions.ACTION_RUNNING_PROCESS_CLEAR);
+                                            Toast.makeText(
+                                                    requireActivity(),
+                                                    R.string.common_toast_copied_to_clipboard,
+                                                    Toast.LENGTH_SHORT)
+                                                    .show();
+                                        })
+                                .setCancelable(true)
+                                .show();
+                        return true;
+                    }
+                    return false;
                 });
         popupMenu.show();
     }

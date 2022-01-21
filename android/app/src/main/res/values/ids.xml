@@ -19,4 +19,6 @@
     <item name="id_smart_freeze" type="id"/>
     <item name="id_infinite_z" type="id"/>
     <item name="id_plugins" type="id"/>
+    <item name="id_feedback" type="id"/>
+    <item name="id_guide" type="id"/>
 </resources>

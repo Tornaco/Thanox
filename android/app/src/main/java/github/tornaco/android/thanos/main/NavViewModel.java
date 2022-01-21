@@ -369,11 +369,31 @@ public class NavViewModel extends AndroidViewModel {
                         .themeColor(R.color.nav_icon_app_clone)
                         .build())));
 
+      TileGroup guide =
+              new TileGroup(
+                      resources.getString(R.string.nav_title_guide),
+                      onlyEnabled(
+                              Arrays.asList(
+                                      Tile.builder()
+                                              .id(R.id.id_feedback)
+                                              .iconRes(R.drawable.ic_nav_feedback)
+                                              .title(resources.getString(R.string.nav_title_feedback))
+                                              .themeColor(R.color.nav_icon_screen_on_notification)
+                                              .build(),
+                                      Tile.builder()
+                                              .id(R.id.id_guide)
+                                              .iconRes(R.drawable.ic_nav_guide)
+                                              .title(resources.getString(R.string.common_menu_title_wiki))
+                                              .disabled(!BuildProp.THANOS_BUILD_DEBUG)
+                                              .themeColor(R.color.nav_icon_app_clone)
+                                              .build())));
+
     tileGroups.add(new TileGroup(loadStatusHeaderInfo()));
 
     if (boost.hasAtLeastOneTile()) tileGroups.add(boost);
     if (secure.hasAtLeastOneTile()) tileGroups.add(secure);
     if (ext.hasAtLeastOneTile()) tileGroups.add(ext);
+    if (guide.hasAtLeastOneTile()) tileGroups.add(guide);
     tileGroups.add(
         new TileGroup(
             StatusFooterInfo.builder()

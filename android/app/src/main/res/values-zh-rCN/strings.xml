@@ -389,4 +389,5 @@
     <string name="pre_title_app_list_item">应用列表项</string>
 
     <string name="menu_title_app_info_detailed">详细信息</string>
+    <string name="nav_title_guide">入门</string>
 </resources>

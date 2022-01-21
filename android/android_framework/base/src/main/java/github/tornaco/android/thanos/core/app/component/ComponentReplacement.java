@@ -1,23 +1,25 @@
 package github.tornaco.android.thanos.core.app.component;
 
-import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public final class ComponentReplacement implements Parcelable {
 
-    public ComponentName from, to;
+    public ComponentNameBrief from, to;
 
     private ComponentReplacement(Parcel in) {
-        from = in.readParcelable(ComponentName.class.getClassLoader());
-        to = in.readParcelable(ComponentName.class.getClassLoader());
+        from = in.readParcelable(ComponentNameBrief.class.getClassLoader());
+        to = in.readParcelable(ComponentNameBrief.class.getClassLoader());
+    }
+
+    public ComponentReplacement(ComponentNameBrief from, ComponentNameBrief to) {
+        this.from = from;
+        this.to = to;
+    }
+
+    public ComponentReplacement() {
     }
 
     @Override
@@ -42,4 +44,9 @@ public final class ComponentReplacement implements Parcelable {
             return new ComponentReplacement[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "ComponentReplacement(from=" + this.from + ", to=" + this.to + ")";
+    }
 }

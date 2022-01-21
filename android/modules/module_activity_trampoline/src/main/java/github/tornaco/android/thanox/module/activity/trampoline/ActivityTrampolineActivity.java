@@ -1,8 +1,9 @@
 package github.tornaco.android.thanox.module.activity.trampoline;
 
+import static com.nononsenseapps.filepicker.FilePickerActivityUtils.pickSingleDirIntent;
+
 import android.Manifest;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,6 +47,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
+import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.theme.ThemeActivity;
@@ -56,8 +57,6 @@ import github.tornaco.android.thanos.widget.SwitchBar;
 import github.tornaco.android.thanox.module.activity.trampoline.databinding.ModuleActivityTrampolineActivityBinding;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
-
-import static com.nononsenseapps.filepicker.FilePickerActivityUtils.pickSingleDirIntent;
 
 @RuntimePermissions
 public class ActivityTrampolineActivity extends ThemeActivity
@@ -196,12 +195,12 @@ public class ActivityTrampolineActivity extends ThemeActivity
             showComponentEmptyTips();
             return;
         }
-        ComponentName fromCompName = ComponentName.unflattenFromString(f);
+        ComponentNameBrief fromCompName = ComponentNameBrief.unflattenFromString(f);
         if (fromCompName == null) {
             showComponentFromInvalidTips();
             return;
         }
-        ComponentName toCompName = ComponentName.unflattenFromString(t);
+        ComponentNameBrief toCompName = ComponentNameBrief.unflattenFromString(t);
         if (toCompName == null) {
             showComponentToInvalidTips();
             return;
@@ -214,12 +213,12 @@ public class ActivityTrampolineActivity extends ThemeActivity
             showComponentEmptyTips();
             return;
         }
-        ComponentName fromCompName = ComponentName.unflattenFromString(f);
+        ComponentNameBrief fromCompName = ComponentNameBrief.unflattenFromString(f);
         if (fromCompName == null) {
             showComponentFromInvalidTips();
             return;
         }
-        ComponentName toCompName = ComponentName.unflattenFromString(t);
+        ComponentNameBrief toCompName = ComponentNameBrief.unflattenFromString(t);
         if (toCompName == null) {
             showComponentToInvalidTips();
             return;

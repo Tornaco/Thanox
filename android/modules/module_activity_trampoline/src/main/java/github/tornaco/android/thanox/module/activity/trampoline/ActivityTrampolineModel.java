@@ -6,9 +6,9 @@ import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 
 public class ActivityTrampolineModel {
-    private ComponentReplacement replacement;
+    private final ComponentReplacement replacement;
     @Nullable
-    private AppInfo app;
+    private final AppInfo app;
 
     public ActivityTrampolineModel(ComponentReplacement replacement, AppInfo app) {
         this.replacement = replacement;

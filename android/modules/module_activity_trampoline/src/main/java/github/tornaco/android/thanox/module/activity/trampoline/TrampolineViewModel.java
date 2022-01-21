@@ -30,6 +30,7 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -37,6 +38,7 @@ import java.util.Objects;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 import github.tornaco.android.thanos.core.util.Rxs;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -118,7 +120,7 @@ public class TrampolineViewModel extends AndroidViewModel {
         unRegisterEventReceivers();
     }
 
-    void onRequestAddNewReplacement(ComponentName f, ComponentName t) {
+    void onRequestAddNewReplacement(ComponentNameBrief f, ComponentNameBrief t) {
         ThanosManager.from(getApplication())
                 .ifServiceInstalled(thanosManager -> {
                     thanosManager.getActivityStackSupervisor()
@@ -128,7 +130,7 @@ public class TrampolineViewModel extends AndroidViewModel {
                 });
     }
 
-    void onRequestRemoveNewReplacement(ComponentName f, ComponentName t) {
+    void onRequestRemoveNewReplacement(ComponentNameBrief f, ComponentNameBrief t) {
         ThanosManager.from(getApplication())
                 .ifServiceInstalled(thanosManager -> {
                     thanosManager.getActivityStackSupervisor()
@@ -139,6 +141,7 @@ public class TrampolineViewModel extends AndroidViewModel {
     }
 
     void exportToClipboard(@Nullable String componentReplacementKey) {
+        XLog.d("exportToClipboard: %s", JsonFormatter.toPrettyJson(ComponentNameBrief.unflattenFromString("com.a.c/.xxx")));
         XLog.d("exportToClipboard: %s", componentReplacementKey);
         disposables.add(Single.create((SingleOnSubscribe<String>) emitter -> {
             List<ComponentReplacement> componentReplacements = new ArrayList<>();
@@ -148,6 +151,7 @@ public class TrampolineViewModel extends AndroidViewModel {
                     componentReplacements.add(model.getReplacement());
                 }
             }
+            XLog.d("exportToClipboard: %s", Arrays.toString(componentReplacements.toArray()));
             emitter.onSuccess(JsonFormatter.toPrettyJson(componentReplacements));
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

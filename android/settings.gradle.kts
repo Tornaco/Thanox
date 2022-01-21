@@ -49,6 +49,7 @@ include(":modules:module_locker")
 include(":modules:module_common")
 include(":modules:module_compose_common")
 include(":modules:module_filepicker")
+include(":modules:module_push_message_delegate")
 
 include(":third_party:dateformatter")
 include(":third_party:recyclerview-fastscroll")

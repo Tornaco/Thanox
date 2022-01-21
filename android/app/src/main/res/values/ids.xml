@@ -16,6 +16,7 @@
     <item name="id_trampoline" type="id"/>
     <item name="id_profile" type="id"/>
     <item name="id_smart_standby" type="id"/>
+    <item name="id_wechat_push" type="id"/>
     <item name="id_smart_freeze" type="id"/>
     <item name="id_infinite_z" type="id"/>
     <item name="id_plugins" type="id"/>

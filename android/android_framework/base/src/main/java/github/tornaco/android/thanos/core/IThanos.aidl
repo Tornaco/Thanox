@@ -20,6 +20,7 @@ import github.tornaco.android.thanos.core.input.IInputManager;
 import github.tornaco.android.thanos.core.plus.IRS;
 import github.tornaco.android.thanos.core.IPluginLogger;
 import github.tornaco.android.thanos.core.app.infinite.InfiniteZ;
+import github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager;
 
 import android.content.IntentFilter;
 
@@ -65,4 +66,5 @@ interface IThanos {
     IRS getRS();
 
     IUsageStatsManager getUsageStatsManager();
+    IPushDelegateManager getPushDelegateManager();
 }

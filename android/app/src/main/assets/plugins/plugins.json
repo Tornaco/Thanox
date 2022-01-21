@@ -8,15 +8,5 @@
     "minThanoxVersion": 1,
     "updateTimeMills": 1587822650040,
     "downloadUrl": "plugins/plugin_su_enabler_1.2.2-dirty.tp"
-  },
-  {
-    "name": "Push消息代收",
-    "versionCode": 3060129,
-    "versionName": "3.0",
-    "packageName": "github.tornaco.android.plugin.push.message.delegate",
-    "description": "微信消息代收",
-    "minThanoxVersion": 1,
-    "updateTimeMills": 1632572682337,
-    "downloadUrl": "plugins/plugin_wechat_push_3.0.tp"
   }
 ]

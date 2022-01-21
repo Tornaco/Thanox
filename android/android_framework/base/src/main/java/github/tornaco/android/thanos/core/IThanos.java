@@ -122,6 +122,10 @@ public interface IThanos extends android.os.IInterface
     {
       return null;
     }
+    @Override public github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager getPushDelegateManager() throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -407,6 +411,14 @@ public interface IThanos extends android.os.IInterface
         {
           data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.app.usage.IUsageStatsManager _result = this.getUsageStatsManager();
+          reply.writeNoException();
+          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
+          return true;
+        }
+        case TRANSACTION_getPushDelegateManager:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager _result = this.getPushDelegateManager();
           reply.writeNoException();
           reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
           return true;
@@ -1018,6 +1030,26 @@ public interface IThanos extends android.os.IInterface
         }
         return _result;
       }
+      @Override public github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager getPushDelegateManager() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getPushDelegateManager, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPushDelegateManager();
+          }
+          _reply.readException();
+          _result = github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager.Stub.asInterface(_reply.readStrongBinder());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.IThanos sDefaultImpl;
     }
     static final int TRANSACTION_getServiceManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1049,6 +1081,7 @@ public interface IThanos extends android.os.IInterface
     static final int TRANSACTION_getPatchingSource = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
     static final int TRANSACTION_getRS = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
     static final int TRANSACTION_getUsageStatsManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
+    static final int TRANSACTION_getPushDelegateManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.IThanos impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1095,4 +1128,5 @@ public interface IThanos extends android.os.IInterface
   public java.lang.String getPatchingSource() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.plus.IRS getRS() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.app.usage.IUsageStatsManager getUsageStatsManager() throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager getPushDelegateManager() throws android.os.RemoteException;
 }

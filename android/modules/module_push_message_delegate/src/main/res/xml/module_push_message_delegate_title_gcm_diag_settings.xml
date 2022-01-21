@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="@string/module_push_message_delegate_title_wechat"
+        app:key="@string/module_push_message_delegate_pref_category_wechat">
+
+        <Preference
+            app:enabled="false"
+            app:summary="@string/module_push_message_delegate_notice_wechat_proxy" />
+
+        <SwitchPreferenceCompat
+            app:icon="@drawable/module_push_message_delegate_ic_wechat_2_fill"
+            app:key="@string/module_push_message_delegate_pref_key_wechat"
+            app:persistent="false"
+            app:summary="@string/module_push_message_delegate_title_summary_proxy"
+            app:title="@string/module_push_message_delegate_title_wechat_proxy" />
+
+        <SwitchPreferenceCompat
+            app:dependency="@string/module_push_message_delegate_pref_key_wechat"
+            app:key="@string/module_push_message_delegate_pref_key_wechat_content"
+            app:persistent="false"
+            app:title="@string/module_push_message_delegate_title_content" />
+
+        <SwitchPreferenceCompat
+            app:dependency="@string/module_push_message_delegate_pref_key_wechat"
+            app:key="@string/module_push_message_delegate_pref_key_wechat_skip_if_running"
+            app:persistent="false"
+            app:summary="@string/module_push_message_delegate_summary_skip_if_running"
+            app:title="@string/module_push_message_delegate_title_skip_if_running" />
+
+        <SwitchPreferenceCompat
+            app:dependency="@string/module_push_message_delegate_pref_key_wechat"
+            app:key="@string/module_push_message_delegate_pref_key_wechat_start_app"
+            app:persistent="false"
+            app:summary="@string/module_push_message_delegate_summary_start_app"
+            app:title="@string/module_push_message_delegate_title_start_app" />
+
+        <Preference
+            app:dependency="@string/module_push_message_delegate_pref_key_wechat"
+            app:key="@string/module_push_message_delegate_pref_key_wechat_mock"
+            app:persistent="false"
+            app:title="@string/module_push_message_delegate_title_mock" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

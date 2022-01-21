@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="github.tornaco.android.plugin.push.message.delegate">
+
+    <application>
+
+        <activity
+            android:name=".WechatPushDeleteMainActivity"
+            android:exported="false" />
+
+    </application>
+
+</manifest>

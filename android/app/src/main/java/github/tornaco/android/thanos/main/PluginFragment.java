@@ -2,14 +2,12 @@ package github.tornaco.android.thanos.main;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -25,8 +23,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-
-import java.util.Objects;
 
 import github.tornaco.android.nitro.framework.Nitro;
 import github.tornaco.android.nitro.framework.host.manager.data.model.InstalledPlugin;
@@ -132,12 +128,9 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
         isFABOpen = false;
         pluginBinding.fabMarket.animate().translationY(0);
         pluginBinding.fabFile.animate().translationY(0);
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                pluginBinding.fabFile.hide();
-                pluginBinding.fabMarket.hide();
-            }
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            pluginBinding.fabFile.hide();
+            pluginBinding.fabMarket.hide();
         }, 300);
     }
 
@@ -255,7 +248,7 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
     @Override
     public void onClick(@NonNull Tile tile) {
         InstalledPlugin plugin = (InstalledPlugin) tile.getPayload();
-        Nitro.launchMainActivity(Objects.requireNonNull(getActivity()), plugin);
+        Nitro.launchMainActivity(requireActivity(), plugin);
     }
 
     @Override
@@ -265,21 +258,18 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
     }
 
     private void showPluginPopMenu(InstalledPlugin plugin, @NonNull View view) {
-        PopupMenu popupMenu = new PopupMenu(Objects.requireNonNull(getActivity()), view);
+        PopupMenu popupMenu = new PopupMenu(requireActivity(), view);
         popupMenu.inflate(R.menu.plugin_item_pop_menu);
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.action_uninstall_plugin) {
-                    showUnInstallPluginConfirmDialog(plugin);
-                    return true;
-                }
-                if (item.getItemId() == R.id.action_view_plugin_details) {
-                    showPluginDetailsDialog(plugin);
-                    return true;
-                }
-                return false;
+        popupMenu.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_uninstall_plugin) {
+                showUnInstallPluginConfirmDialog(plugin);
+                return true;
             }
+            if (item.getItemId() == R.id.action_view_plugin_details) {
+                showPluginDetailsDialog(plugin);
+                return true;
+            }
+            return false;
         });
         popupMenu.show();
     }

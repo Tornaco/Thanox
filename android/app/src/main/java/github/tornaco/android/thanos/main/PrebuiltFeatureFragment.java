@@ -21,6 +21,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
+import github.tornaco.android.plugin.push.message.delegate.WechatPushDeleteMainActivity;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
@@ -161,6 +162,14 @@ public class PrebuiltFeatureFragment extends NavFragment
             showFeedbackDialog();
         } else if (tile.getId() == R.id.id_guide) {
             BrowserUtils.launch(requireActivity(), BuildProp.THANOX_URL_DOCS_HOME);
+        } else if (tile.getId() == R.id.id_wechat_push) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                Toast.makeText(
+                        requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
+                        .show();
+                return;
+            }
+            WechatPushDeleteMainActivity.start(requireActivity());
         }
     }
 

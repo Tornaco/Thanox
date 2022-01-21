@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_coll_appbar_height"
+            android:layout_alignParentTop="true"
+            android:fitsSystemWindows="false"
+            android:theme="?appbarTheme"
+            app:elevation="@dimen/common_toolbar_elevation">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                style="?collapsingToolbarTheme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
+                app:contentScrim="?attr/colorSurface"
+                app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleCollapseMode="scale"
+                app:toolbarId="@+id/toolbar">
+
+                <FrameLayout
+                    android:id="@+id/toolbar_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        app:popupTheme="?appbarPopupTheme"
+                        app:theme="?toolbarTheme"
+                        app:title="@string/module_push_message_delegate_title_wechat_proxy"
+                        app:titleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
+                        app:titleTextColor="?attr/colorControlNormal" />
+                </FrameLayout>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

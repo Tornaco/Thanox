@@ -19,4 +19,7 @@
     <color name="nav_icon_smart_standby">#ffa800</color>
     <color name="nav_icon_plugin">#939393</color>
     <color name="nav_icon_app_clone">#f36352</color>
+    <color name="nav_icon_wechat_push">#4caf50</color>
+    <color name="nav_icon_feedback">#51b4cd</color>
+    <color name="nav_icon_guide">#f36352</color>
 </resources>

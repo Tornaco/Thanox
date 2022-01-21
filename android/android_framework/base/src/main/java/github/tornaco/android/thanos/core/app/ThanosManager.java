@@ -2,7 +2,6 @@ package github.tornaco.android.thanos.core.app;
 
 import android.content.Context;
 import android.content.IntentFilter;
-import android.os.RemoteException;
 
 import com.elvishew.xlog.XLog;
 
@@ -21,9 +20,9 @@ import github.tornaco.android.thanos.core.power.PowerManager;
 import github.tornaco.android.thanos.core.pref.PrefManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.push.PushManager;
+import github.tornaco.android.thanos.core.push.wechat.PushDelegateManager;
 import github.tornaco.android.thanos.core.secure.PrivacyManager;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
-import github.tornaco.android.thanos.core.wm.IWindowManager;
 import github.tornaco.android.thanos.core.wm.WindowManager;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -143,13 +142,18 @@ public class ThanosManager {
     }
 
     @SneakyThrows
-    public WindowManager getWindowManager(){
+    public WindowManager getWindowManager() {
         return new WindowManager(service.getWindowManager());
     }
 
     @SneakyThrows
     public InfiniteZManager getInfiniteZ() {
         return new InfiniteZManager(service.getInfiniteZ());
+    }
+
+    @SneakyThrows
+    public PushDelegateManager getPushDelegateManager() {
+        return new PushDelegateManager(service.getPushDelegateManager());
     }
 
     @SneakyThrows

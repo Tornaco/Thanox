@@ -36,11 +36,11 @@ public final class PushChannel implements Parcelable {
     }, "mi:mipush", "1A733BD6-9FB7-43CF-8CDA-513C0CF83DB7");
 
     @NonNull
-    private String[] actions;
+    private final String[] actions;
     @NonNull
-    private String channelName;
+    private final String channelName;
 
-    private String channelId;
+    private final String channelId;
 
     private PushChannel(Parcel in) {
         actions = in.readStringArray();

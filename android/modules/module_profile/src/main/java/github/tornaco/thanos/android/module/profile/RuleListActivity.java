@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +33,7 @@ import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
+import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
@@ -71,7 +71,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
         // List.
         binding.ruleListView.setLayoutManager(new LinearLayoutManager(this));
-        binding.ruleListView.setAdapter(new RuleListAdapter(this, (ruleInfo, checked) -> {
+        binding.ruleListView.setAdapter(new RuleListAdapter(this, this::onRequestDeleteRule, (ruleInfo, checked) -> {
             ruleInfo.setEnabled(checked);
             if (checked) ThanosManager.from(getApplicationContext())
                     .getProfileManager()
@@ -89,6 +89,17 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
         // Has overlap issue.
         binding.fab.hide();
+    }
+
+    private void onRequestDeleteRule(RuleInfo ruleInfo) {
+        ModernAlertDialog dialog = new ModernAlertDialog(thisActivity());
+        dialog.setDialogTitle(getString(R.string.common_menu_title_remove));
+        dialog.setDialogMessage(getString(R.string.common_menu_title_remove) + "\t" + ruleInfo.getName());
+        dialog.setNegative(getString(android.R.string.cancel));
+        dialog.setPositive(getString(R.string.common_menu_title_remove));
+        dialog.setOnPositive(() -> viewModel.deleteRule(ruleInfo));
+        dialog.setCancelable(true);
+        dialog.show();
     }
 
     private void onSetupSwitchBar(SwitchBar switchBar) {
@@ -120,12 +131,6 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
     @Override
     public void onItemClick(@NonNull RuleInfo ruleInfo) {
         RuleEditorActivity.start(thisActivity(), ruleInfo, ruleInfo.getFormat());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        viewModel.resume();
     }
 
     @Override

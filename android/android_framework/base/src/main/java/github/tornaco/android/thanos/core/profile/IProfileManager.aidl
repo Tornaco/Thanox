@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.core.profile;
 
 import github.tornaco.android.thanos.core.profile.IRuleAddCallback;
 import github.tornaco.android.thanos.core.profile.IRuleCheckCallback;
+import github.tornaco.android.thanos.core.profile.IRuleChangeListener;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 
 interface IProfileManager {
@@ -59,4 +60,9 @@ interface IProfileManager {
     void publishStringFact(String factValue, long delayMills);
 
     void updateRule(int ruleId, String ruleJson, in IRuleAddCallback callback, int format);
+
+    void registerRuleChangeListener(in IRuleChangeListener listener);
+    void unRegisterRuleChangeListener(in IRuleChangeListener listener);
+
+    RuleInfo getRuleById(int ruleId);
 }

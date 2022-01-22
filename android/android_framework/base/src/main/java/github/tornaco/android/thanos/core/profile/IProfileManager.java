@@ -139,6 +139,16 @@ public interface IProfileManager extends android.os.IInterface
     @Override public void updateRule(int ruleId, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
     {
     }
+    @Override public void registerRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException
+    {
+    }
+    @Override public void unRegisterRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException
+    {
+    }
+    @Override public github.tornaco.android.thanos.core.profile.RuleInfo getRuleById(int ruleId) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -553,6 +563,40 @@ public interface IProfileManager extends android.os.IInterface
           _arg3 = data.readInt();
           this.updateRule(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_registerRuleChangeListener:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.profile.IRuleChangeListener _arg0;
+          _arg0 = github.tornaco.android.thanos.core.profile.IRuleChangeListener.Stub.asInterface(data.readStrongBinder());
+          this.registerRuleChangeListener(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_unRegisterRuleChangeListener:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.profile.IRuleChangeListener _arg0;
+          _arg0 = github.tornaco.android.thanos.core.profile.IRuleChangeListener.Stub.asInterface(data.readStrongBinder());
+          this.unRegisterRuleChangeListener(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getRuleById:
+        {
+          data.enforceInterface(descriptor);
+          int _arg0;
+          _arg0 = data.readInt();
+          github.tornaco.android.thanos.core.profile.RuleInfo _result = this.getRuleById(_arg0);
+          reply.writeNoException();
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
           return true;
         }
         default:
@@ -1333,6 +1377,70 @@ public interface IProfileManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void registerRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_registerRuleChangeListener, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().registerRuleChangeListener(listener);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void unRegisterRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterRuleChangeListener, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().unRegisterRuleChangeListener(listener);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public github.tornaco.android.thanos.core.profile.RuleInfo getRuleById(int ruleId) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        github.tornaco.android.thanos.core.profile.RuleInfo _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(ruleId);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getRuleById, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getRuleById(ruleId);
+          }
+          _reply.readException();
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.profile.RuleInfo.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.profile.IProfileManager sDefaultImpl;
     }
     static final int TRANSACTION_setAutoApplyForNewInstalledAppsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1371,6 +1479,9 @@ public interface IProfileManager extends android.os.IInterface
     static final int TRANSACTION_addRuleIfNotExists = (android.os.IBinder.FIRST_CALL_TRANSACTION + 33);
     static final int TRANSACTION_publishStringFact = (android.os.IBinder.FIRST_CALL_TRANSACTION + 34);
     static final int TRANSACTION_updateRule = (android.os.IBinder.FIRST_CALL_TRANSACTION + 35);
+    static final int TRANSACTION_registerRuleChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 36);
+    static final int TRANSACTION_unRegisterRuleChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 37);
+    static final int TRANSACTION_getRuleById = (android.os.IBinder.FIRST_CALL_TRANSACTION + 38);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IProfileManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1424,4 +1535,7 @@ public interface IProfileManager extends android.os.IInterface
   public void addRuleIfNotExists(java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
   public void publishStringFact(java.lang.String factValue, long delayMills) throws android.os.RemoteException;
   public void updateRule(int ruleId, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
+  public void registerRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException;
+  public void unRegisterRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.profile.RuleInfo getRuleById(int ruleId) throws android.os.RemoteException;
 }

@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.profile.RuleInfo;
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileRuleListItemBinding;
+import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 import util.Consumer;
 
 class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
@@ -24,13 +26,16 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
 
     private final List<RuleInfo> ruleInfoList = new ArrayList<>();
 
-    private RuleItemClickListener ruleItemClickListener;
-    private RuleItemSwitchChangeListener ruleItemSwitchChangeListener;
+    private final RuleItemClickListener ruleItemClickListener;
+    private final RuleItemSwitchChangeListener ruleItemSwitchChangeListener;
+    private final RuleItemDeleteClickListener ruleItemDeleteClickListener;
 
     RuleListAdapter(RuleItemClickListener ruleItemClickListener,
+                    RuleItemDeleteClickListener ruleItemDeleteClickListener,
                     RuleItemSwitchChangeListener ruleItemSwitchChangeListener) {
         this.ruleItemClickListener = ruleItemClickListener;
         this.ruleItemSwitchChangeListener = ruleItemSwitchChangeListener;
+        this.ruleItemDeleteClickListener = ruleItemDeleteClickListener;
     }
 
     @NonNull
@@ -48,6 +53,8 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
         holder.itemBinding.setSwitchListener(ruleItemSwitchChangeListener);
         holder.itemBinding.setIsLastOne(position == getItemCount() - 1);
         holder.itemBinding.switchContainer.setOnClickListener(v -> holder.itemBinding.itemSwitch.performClick());
+        holder.itemBinding.setUpdateTimeString(FuzzyDateTimeFormatter.getTimeAgo(holder.itemView.getContext(), new Date(model.getUpdateTimeMills())));
+        holder.itemBinding.delete.setOnClickListener(v -> ruleItemDeleteClickListener.onDeleteItemClick(model));
         holder.itemBinding.executePendingBindings();
     }
 
@@ -82,7 +89,7 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        private ModuleProfileRuleListItemBinding itemBinding;
+        private final ModuleProfileRuleListItemBinding itemBinding;
 
         VH(@NonNull ModuleProfileRuleListItemBinding itemBinding) {
             super(itemBinding.getRoot());

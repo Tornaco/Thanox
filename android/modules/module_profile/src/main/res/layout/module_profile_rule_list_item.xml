@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -21,6 +22,10 @@
         <variable
             name="isLastOne"
             type="boolean" />
+
+        <variable
+            name="updateTimeString"
+            type="String" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -43,6 +48,7 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
+                android:id="@+id/rule_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/switch_container"
@@ -52,21 +58,12 @@
                 android:minHeight="@dimen/common_list_item_height"
                 android:onClick="@{() -> ruleItemClickListener.onItemClick(rule)}">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dashboard_tile_image_margin_start"
-                    android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end"
-                    android:src="@drawable/module_profile_ic_thunderstorms_fill_purple"
-                    android:tint="@color/md_grey_500" />
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/icon"
+                    android:layout_marginStart="@dimen/common_view_margin_default"
+                    android:layout_marginTop="@dimen/common_view_margin_default"
                     android:orientation="vertical">
 
                     <TextView
@@ -77,20 +74,33 @@
                         android:layout_marginEnd="@dimen/common_view_margin_default"
                         android:ellipsize="middle"
                         android:fadingEdge="horizontal"
+                        android:fontFamily="sans-serif-medium"
                         android:text="@{rule.name}"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         tools:text="Profile name" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_view_margin_mini"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:layout_marginBottom="@dimen/common_view_margin_small"
+                        android:text="@{updateTimeString}"
+                        android:textAppearance="@style/TextAppearance.TileSubTitle"
+                        tools:text="2022-01-02:11:36:18" />
+
+                    <TextView
                         android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_view_margin_small"
                         android:layout_marginEnd="@dimen/common_view_margin_default"
                         android:layout_marginBottom="@dimen/common_view_margin_small"
                         android:ellipsize="middle"
                         android:fadingEdge="horizontal"
                         android:text="@{rule.description}"
                         android:textAppearance="@style/TextAppearance.TileSubTitle"
+                        android:textSize="14sp"
                         tools:text="This is a long text example, This is a long text example, This is a long text example" />
                 </LinearLayout>
 
@@ -120,6 +130,26 @@
                     android:soundEffectsEnabled="false"
                     tools:checked="true" />
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rule_container">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/delete"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/common_view_margin_tiny"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_marginBottom="@dimen/common_view_margin_tiny"
+                    android:text="@string/common_menu_title_remove"
+                    app:icon="@drawable/ic_delete_bin_fill" />
+            </RelativeLayout>
         </RelativeLayout>
+
+
     </androidx.cardview.widget.CardView>
 </layout>

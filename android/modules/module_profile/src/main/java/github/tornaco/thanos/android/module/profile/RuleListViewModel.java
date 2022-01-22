@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
@@ -20,7 +19,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,6 +26,7 @@ import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleAddCallback;
+import github.tornaco.android.thanos.core.profile.RuleChangeListener;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
 import github.tornaco.android.thanos.core.util.Rxs;
 import io.reactivex.Observable;
@@ -46,12 +45,14 @@ public class RuleListViewModel extends AndroidViewModel {
     private final CompositeDisposable disposables = new CompositeDisposable();
     private final ObservableArrayList<RuleInfo> ruleInfoList = new ObservableArrayList<>();
 
-    private RuleLoader loader = () -> {
+    private ThanosManager thanosManager;
+
+    private final RuleLoader loader = () -> {
         List<RuleInfo> res = new ArrayList<>(Arrays.asList(
                 ThanosManager.from(getApplication())
                         .getProfileManager()
                         .getAllRules()));
-        Collections.sort(res, (o1, o2) -> {
+        res.sort((o1, o2) -> {
             if (o1.getEnabled() && !o2.getEnabled()) {
                 return -1;
             }
@@ -63,8 +64,63 @@ public class RuleListViewModel extends AndroidViewModel {
         return res;
     };
 
+    private final RuleChangeListener ruleChangeListener = new RuleChangeListener() {
+        @Override
+        protected void onRuleEnabledStateChanged(int ruleId, boolean enabled) {
+            super.onRuleEnabledStateChanged(ruleId, enabled);
+            for (int index = 0; index < ruleInfoList.size(); index++) {
+                RuleInfo info = ruleInfoList.get(index);
+                if (info.getId() == ruleId) {
+                    XLog.i("RuleListViewModel onRuleEnabledStateChanged update enable state");
+                    info.setEnabled(enabled);
+                    ruleInfoList.set(index, info);
+                }
+            }
+        }
+
+        @Override
+        protected void onRuleUpdated(int ruleId) {
+            super.onRuleUpdated(ruleId);
+            for (int index = 0; index < ruleInfoList.size(); index++) {
+                RuleInfo info = ruleInfoList.get(index);
+                if (info.getId() == ruleId) {
+                    RuleInfo updatedRule = thanosManager.getProfileManager().getRuleById(ruleId);
+                    if (updatedRule != null) {
+                        XLog.i("RuleListViewModel onRuleUpdated update rule");
+                        ruleInfoList.set(index, updatedRule);
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onRuleRemoved(int ruleId) {
+            super.onRuleRemoved(ruleId);
+            int index = -1;
+            for (int i = 0; i < ruleInfoList.size(); i++) {
+                RuleInfo info = ruleInfoList.get(i);
+                if (info.getId() == ruleId) {
+                    index = i;
+                }
+            }
+            if (index >= 0) {
+                XLog.i("RuleListViewModel onRuleRemoved remove rule");
+                ruleInfoList.remove(index);
+            }
+        }
+
+        @Override
+        protected void onRuleAdd(int ruleId) {
+            super.onRuleAdd(ruleId);
+            RuleInfo updatedRule = thanosManager.getProfileManager().getRuleById(ruleId);
+            XLog.i("RuleListViewModel onRuleAdd add rule");
+            ruleInfoList.add(0, updatedRule);
+        }
+    };
+
     public RuleListViewModel(@NonNull Application application) {
         super(application);
+        this.thanosManager = ThanosManager.from(application);
         registerEventReceivers();
     }
 
@@ -73,13 +129,8 @@ public class RuleListViewModel extends AndroidViewModel {
         loadModels();
     }
 
-    @UiThread
-    public void resume() {
-        loadModels();
-    }
-
     private void loadModels() {
-        if (!ThanosManager.from(getApplication()).isServiceInstalled()) return;
+        if (!thanosManager.isServiceInstalled()) return;
         if (isDataLoading.get()) return;
         isDataLoading.set(true);
         disposables.add(Single.create((SingleOnSubscribe<List<RuleInfo>>) emitter ->
@@ -93,9 +144,11 @@ public class RuleListViewModel extends AndroidViewModel {
     }
 
     private void registerEventReceivers() {
+        thanosManager.getProfileManager().registerRuleChangeListener(ruleChangeListener);
     }
 
     private void unRegisterEventReceivers() {
+        thanosManager.getProfileManager().unRegisterRuleChangeListener(ruleChangeListener);
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -188,8 +241,6 @@ public class RuleListViewModel extends AndroidViewModel {
                             @Override
                             protected void onRuleAddSuccess() {
                                 super.onRuleAddSuccess();
-                                // Reload.
-                                resume();
                             }
                         }, type);
             }
@@ -215,6 +266,10 @@ public class RuleListViewModel extends AndroidViewModel {
 
     public ObservableArrayList<RuleInfo> getRuleInfoList() {
         return this.ruleInfoList;
+    }
+
+    public void deleteRule(RuleInfo ruleInfo) {
+        thanosManager.getProfileManager().deleteRule(ruleInfo.getId());
     }
 
     public interface RuleLoader {

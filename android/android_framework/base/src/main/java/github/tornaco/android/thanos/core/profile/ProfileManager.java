@@ -1,5 +1,7 @@
 package github.tornaco.android.thanos.core.profile;
 
+import android.os.RemoteException;
+
 import java.util.List;
 
 import lombok.SneakyThrows;
@@ -190,5 +192,20 @@ public class ProfileManager {
     @SneakyThrows
     public void publishStringFact(String factValue, long delayMills) {
         server.publishStringFact(factValue, delayMills);
+    }
+
+    @SneakyThrows
+    public void registerRuleChangeListener(RuleChangeListener listener) {
+        server.registerRuleChangeListener(listener.getStub());
+    }
+
+    @SneakyThrows
+    public void unRegisterRuleChangeListener(RuleChangeListener listener) {
+        server.unRegisterRuleChangeListener(listener.getStub());
+    }
+
+    @SneakyThrows
+    public RuleInfo getRuleById(int ruleId) {
+        return server.getRuleById(ruleId);
     }
 }

@@ -14,8 +14,8 @@
 #include <cstdlib>
 #include <string>
 #include <sys/system_properties.h>
-#include "xh/xhook.h"
-#include "helper/Log.h"
+#include "../xh/xhook.h"
+#include "../helper/Log.h"
 #include "ThanoxBridge.h"
 #include "HookCommon.h"
 #include "TelephonyProps.h"

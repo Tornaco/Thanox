@@ -3,9 +3,9 @@
 //
 
 #include "HookCommon.h"
-#include "helper/Log.h"
-#include "xh/xhook.h"
-#include "helper/JniHelper.h"
+#include "../helper/Log.h"
+#include "../xh/xhook.h"
+#include "../helper/JniHelper.h"
 #include "ThanoxBridge.h"
 #include <jni.h>
 

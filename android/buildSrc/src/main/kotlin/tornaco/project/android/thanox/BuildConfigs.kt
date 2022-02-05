@@ -3,7 +3,6 @@ package tornaco.project.android.thanox
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import java.io.File
-import java.net.InetAddress
 import java.util.*
 
 private val props = Properties()
@@ -70,16 +69,7 @@ object MagiskModConfigs {
        This name will be used in the name of the so file ("lib${moduleLibraryName}.so").
        If this module need to support Riru pre-v24 (API < 24), moduleLibraryName must start with "riru_".
     */
-    const val moduleLibraryName = "riru_thanox"
-
-    /* Minimal supported Riru API version, used in the version check of riru.sh */
-    const val moduleMinRiruApiVersion = 25
-
-    /* The version name of minimal supported Riru, used in the version check of riru.sh */
-    const val moduleMinRiruVersionName = "v22.0"
-
-    /* Maximum supported Riru API version, used in the version check of riru.sh */
-    const val moduleRiruApiVersion = 25
+    const val moduleLibraryName = "zygisk_thanox"
 
     /*
        Magisk module ID
@@ -87,12 +77,12 @@ object MagiskModConfigs {
        Note, the older version of the template uses '-' instead of '_', if your are upgrading from
        the older version, please pay attention.
     */
-    const val magiskModuleId = "riru_thanox"
+    const val magiskModuleId = "zygisk_thanox"
 
     const val moduleName = "Thanox-Core"
     const val moduleAuthor = "Tornaco"
     const val moduleDescription =
-        """Magisk module that provides android framework and app hooks for Thanox, requires Riru $moduleMinRiruVersionName or above. Support Android11 & Android12."""
+        """Magisk module that provides android framework and app hooks for Thanox, requires zygisk. Support Android11 & Android12."""
     val moduleVersion = Configs.thanoxVersionName
     val moduleVersionCode = Configs.thanoxVersionCode
 }

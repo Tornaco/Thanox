@@ -3,9 +3,9 @@
 //
 
 #include "ThanoxBridge.h"
-#include "helper/Log.h"
+#include "../helper/Log.h"
 #include "AppHook.h"
-#include "helper/JniHelper.h"
+#include "../helper/JniHelper.h"
 #include <jni.h>
 #include <cstring>
 #include <cstdlib>

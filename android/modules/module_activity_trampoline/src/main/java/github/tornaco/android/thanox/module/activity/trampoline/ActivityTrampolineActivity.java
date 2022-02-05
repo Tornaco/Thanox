@@ -77,6 +77,11 @@ public class ActivityTrampolineActivity extends ThemeActivity
     }
 
     @Override
+    public boolean isADVF() {
+        return true;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ModuleActivityTrampolineActivityBinding.inflate(LayoutInflater.from(this));

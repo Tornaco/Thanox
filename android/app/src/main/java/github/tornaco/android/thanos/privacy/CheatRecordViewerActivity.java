@@ -41,6 +41,11 @@ public class CheatRecordViewerActivity extends CommonAppListFilterActivity {
     }
 
     @Override
+    public boolean isADVF() {
+        return true;
+    }
+
+    @Override
     protected void onSetupSwitchBar(SwitchBar switchBar) {
         super.onSetupSwitchBar(switchBar);
         switchBar.hide();

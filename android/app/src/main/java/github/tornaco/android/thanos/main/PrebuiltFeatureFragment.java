@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
@@ -28,6 +29,7 @@ import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.apps.SuggestedAppsActivity;
 import github.tornaco.android.thanos.core.T;
+import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.dashboard.DashboardCardAdapter;
 import github.tornaco.android.thanos.dashboard.OnHeaderClickListener;
@@ -87,7 +89,6 @@ public class PrebuiltFeatureFragment extends NavFragment
         prebuiltFeaturesBinding.swipe.setOnRefreshListener(() -> navViewModel.start());
     }
 
-    @SuppressWarnings("ConstantConditions")
     private void setupViewModel() {
         navViewModel = obtainViewModel(requireActivity());
         prebuiltFeaturesBinding.setViewmodel(navViewModel);
@@ -102,6 +103,7 @@ public class PrebuiltFeatureFragment extends NavFragment
 
     @Override
     public void onClick(@NonNull Tile tile) {
+        ThanosManager thanosManager = ThanosManager.from(requireContext());
         if (tile.getId() == R.id.id_one_key_clear) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
                 Toast.makeText(
@@ -125,6 +127,17 @@ public class PrebuiltFeatureFragment extends NavFragment
         } else if (tile.getId() == R.id.id_notification_recorder) {
             NotificationRecordActivity.Starter.start(requireActivity());
         } else if (tile.getId() == R.id.id_trampoline) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
+                Toast.makeText(
+                        requireActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
+                        .show();
+                // Disable this feature, since it is free to use before.
+                thanosManager.ifServiceInstalled(manager -> {
+                    XLog.w("Disabling ActivityTrampoline.");
+                    manager.getActivityStackSupervisor().setActivityTrampolineEnabled(false);
+                });
+                return;
+            }
             ActivityTrampolineActivity.start(requireActivity());
         } else if (tile.getId() == R.id.id_profile) {
             RuleListActivity.start(requireActivity());

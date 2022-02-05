@@ -32,6 +32,11 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
         ActivityUtils.startActivity(context, SmartStandbyV2Activity.class);
     }
 
+    @Override
+    public boolean isADVF() {
+        return true;
+    }
+
     @NonNull
     @Override
     protected String getTitleString() {

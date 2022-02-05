@@ -21,6 +21,11 @@ public class WechatPushDeleteMainActivity extends ThemeActivity {
     }
 
     @Override
+    public boolean isADVF() {
+        return true;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.module_push_message_delegate_main);

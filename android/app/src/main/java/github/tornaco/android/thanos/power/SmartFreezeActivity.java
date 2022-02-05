@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
@@ -306,6 +305,15 @@ public class SmartFreezeActivity extends ThemeActivity {
     }
 
     private void onRequestAddNewApps() {
+        int size = viewModel.listModels.size();
+        // Limit free to add at most 9 apps.
+        if (size > 3) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(thisActivity())) {
+                Toast.makeText(thisActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
         ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
             ArrayList<String> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
             AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);

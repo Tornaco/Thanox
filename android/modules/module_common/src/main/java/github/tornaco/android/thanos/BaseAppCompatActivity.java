@@ -5,9 +5,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class BaseAppCompatActivity extends AppCompatActivity {
+public class BaseAppCompatActivity extends BaseFeatureActivity {
     protected Handler uiHandler;
 
     @Override

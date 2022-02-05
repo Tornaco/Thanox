@@ -36,6 +36,11 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
         ActivityUtils.startActivity(context, LockerStartActivity.class);
     }
 
+    @Override
+    public boolean isADVF() {
+        return true;
+    }
+
     @NonNull
     @Override
     protected String getTitleString() {

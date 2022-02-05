@@ -42,6 +42,11 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
     }
 
     @Override
+    public boolean isADVF() {
+        return true;
+    }
+
+    @Override
     @Verify
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

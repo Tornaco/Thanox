@@ -22,6 +22,10 @@ class ComposeStartChartActivity : ThemeActivity() {
         }
     }
 
+    override fun isADVF(): Boolean {
+        return true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

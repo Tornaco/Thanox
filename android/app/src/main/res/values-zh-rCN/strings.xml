@@ -138,6 +138,8 @@
 
     <string name="feature_category_apps">应用</string>
     <string name="feature_title_enable_package_on_launch">检测到活动请求时启用该App</string>
+    <string name="pref_title_enable_package_on_launch_by_default">检测到活动请求时启用该App</string>
+    <string name="pref_summary_enable_package_on_launch_by_default">当应用加入智能冻结列表时，默认开启　\"检测到活动请求时启用该App\"　开关</string>
     <string name="feature_title_smart_app_freeze">智能冻结</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps">全部解冻并移除</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps_temp">全部临时解冻</string>

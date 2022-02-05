@@ -104,4 +104,7 @@ interface IPkgManager {
     String[] getPackagesForUid(int uid);
 
     boolean mayEnableAppOnStartActivityIntent(in Intent intent);
+
+    boolean isEnablePkgOnLaunchByDefault();
+    void setEnablePkgOnLaunchByDefaultEnabled(boolean byDefault);
 }

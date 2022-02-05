@@ -31,6 +31,7 @@ import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
+import github.tornaco.android.thanos.apps.AppDetailsActivity;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
@@ -152,6 +153,14 @@ public class SmartFreezeActivity extends ThemeActivity {
                     return false;
                 }
                 onRequestShortcutStubApk(appInfo);
+                return true;
+            }
+            if (item.getItemId() == R.id.action_apps_manager) {
+                if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                AppDetailsActivity.start(getApplicationContext(), appInfo);
                 return true;
             }
             return false;

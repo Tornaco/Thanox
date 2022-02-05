@@ -73,5 +73,13 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
             thanos.getPkgManager().setFreezePkgWithSuspendEnabled(checked);
             return true;
         });
+
+        SwitchPreferenceCompat enableOnLaunchByDefault = findPreference(getString(R.string.key_smart_freeze_enable_on_launch_by_default));
+        Objects.requireNonNull(enableOnLaunchByDefault).setChecked(thanos.getPkgManager().isEnablePkgOnLaunchByDefault());
+        enableOnLaunchByDefault.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean checked = (boolean) newValue;
+            thanos.getPkgManager().setEnablePkgOnLaunchByDefaultEnabled(checked);
+            return true;
+        });
     }
 }

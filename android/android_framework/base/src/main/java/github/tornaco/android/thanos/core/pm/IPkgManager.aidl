@@ -102,4 +102,6 @@ interface IPkgManager {
 
     // Wrap api to skip permission check
     String[] getPackagesForUid(int uid);
+
+    boolean mayEnableAppOnStartActivityIntent(in Intent intent);
 }

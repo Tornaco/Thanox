@@ -254,6 +254,10 @@ public interface IPkgManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public boolean mayEnableAppOnStartActivityIntent(android.content.Intent intent) throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -995,6 +999,21 @@ public interface IPkgManager extends android.os.IInterface
           java.lang.String[] _result = this.getPackagesForUid(_arg0);
           reply.writeNoException();
           reply.writeStringArray(_result);
+          return true;
+        }
+        case TRANSACTION_mayEnableAppOnStartActivityIntent:
+        {
+          data.enforceInterface(descriptor);
+          android.content.Intent _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = android.content.Intent.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _result = this.mayEnableAppOnStartActivityIntent(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         default:
@@ -2416,6 +2435,33 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public boolean mayEnableAppOnStartActivityIntent(android.content.Intent intent) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((intent!=null)) {
+            _data.writeInt(1);
+            intent.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_mayEnableAppOnStartActivityIntent, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().mayEnableAppOnStartActivityIntent(intent);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.pm.IPkgManager sDefaultImpl;
     }
     static final int TRANSACTION_getPkgNameForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -2484,6 +2530,7 @@ public interface IPkgManager extends android.os.IInterface
     static final int TRANSACTION_isEnablePackageOnLaunchRequestEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 63);
     static final int TRANSACTION_getProviders = (android.os.IBinder.FIRST_CALL_TRANSACTION + 64);
     static final int TRANSACTION_getPackagesForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 65);
+    static final int TRANSACTION_mayEnableAppOnStartActivityIntent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 66);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pm.IPkgManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -2571,4 +2618,5 @@ public interface IPkgManager extends android.os.IInterface
   // Wrap api to skip permission check
 
   public java.lang.String[] getPackagesForUid(int uid) throws android.os.RemoteException;
+  public boolean mayEnableAppOnStartActivityIntent(android.content.Intent intent) throws android.os.RemoteException;
 }

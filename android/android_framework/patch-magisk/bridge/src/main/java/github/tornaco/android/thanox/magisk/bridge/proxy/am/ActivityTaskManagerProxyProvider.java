@@ -92,11 +92,12 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
         if (callingPackage != null && intent != null) {
             Intent realIntent = ThanosManagerNative.getDefault()
                     .getActivityStackSupervisor()
-                    .reportOnStartActivity(callingPackage, intent);
+                    .replaceActivityStartingIntent(intent);
             if (realIntent != null) {
                 XLog.d("handleStartActivity, Replacing Intent component");
                 intent.setComponent(realIntent.getComponent());
             }
+            ThanosManagerNative.getDefault().getPkgManager().mayEnableAppOnStartActivityIntent(realIntent);
         }
     }
 

@@ -33,6 +33,16 @@ public class ProcessManageActivity extends BaseTrustedActivity {
     private ActivityProcessManageBinding binding;
 
     @Override
+    public boolean isF() {
+        return true;
+    }
+
+    @Override
+    public boolean isADVF() {
+        return true;
+    }
+
+    @Override
     @Verify
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

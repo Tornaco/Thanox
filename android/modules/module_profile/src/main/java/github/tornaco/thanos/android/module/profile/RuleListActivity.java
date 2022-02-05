@@ -52,6 +52,11 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
     }
 
     @Override
+    public boolean isF() {
+        return true;
+    }
+
+    @Override
     @Verify
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

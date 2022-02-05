@@ -29,6 +29,11 @@ public class SuggestedAppsActivity extends BaseTrustedActivity {
     }
 
     @Override
+    public boolean isF() {
+        return true;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySuggestAppsBinding.inflate(

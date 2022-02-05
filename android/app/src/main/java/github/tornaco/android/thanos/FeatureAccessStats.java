@@ -33,14 +33,15 @@ public class FeatureAccessStats {
         XLog.i("FA: %s", activity);
         if (activity instanceof BaseFeatureActivity) {
             BaseFeatureActivity baseFeatureActivity = (BaseFeatureActivity) activity;
-            boolean isADVF = baseFeatureActivity.isADVF();
-            if (isADVF) {
-                if (ThanosApp.isPrc()) {
+            if (baseFeatureActivity.isADVF()) {
+                if (Init.isPrc()) {
                     if (!DonateSettings.isActivated(thanosApp)) {
                         __sig();
                     }
                 }
+            }
 
+            if (baseFeatureActivity.isF()) {
                 if (!Init.isPrc()) {
                     // Check LVL
                     if (!Init.isLVLChecked(thanosApp) && Init.s == 0) {

@@ -30,6 +30,10 @@ import kotlinx.coroutines.flow.collectLatest
 class NotificationRecordActivity : ThemeActivity() {
     private lateinit var binding: ModuleNotificationRecorderNrdListLayoutBinding
 
+    override fun isF(): Boolean {
+        return true
+    }
+
     private val model: NotificationRecordViewModel by viewModels {
         object : AbstractSavedStateViewModelFactory(this, null) {
             override fun <T : ViewModel?> create(

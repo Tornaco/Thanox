@@ -9,4 +9,8 @@ public class BaseFeatureActivity extends AppCompatActivity {
     public boolean isADVF() {
         return false;
     }
+
+    public boolean isF() {
+        return false;
+    }
 }

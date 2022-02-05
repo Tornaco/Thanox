@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import java.util.Observable;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.core.util.OsUtils;
 import util.Singleton;
 
 public class AppThemePreferences extends Observable {
@@ -43,7 +42,7 @@ public class AppThemePreferences extends Observable {
     }
 
     private static Theme defaultThemeForPlatform(boolean isLight) {
-        return OsUtils.isSOrAbove() ? Theme.MD3 : (isLight ? Theme.Light : Theme.Dark);
+        return isLight ? Theme.Light : Theme.Dark;
     }
 
     public void setTheme(@NonNull Context context, @NonNull Theme theme) {

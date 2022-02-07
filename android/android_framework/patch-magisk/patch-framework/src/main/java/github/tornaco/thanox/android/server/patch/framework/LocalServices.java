@@ -1,27 +1,30 @@
 package github.tornaco.thanox.android.server.patch.framework;
 
-import com.android.server.SystemService;
-import com.android.server.SystemServiceManager;
 import com.elvishew.xlog.XLog;
 
 import java.util.Arrays;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.util.Optional;
-import lombok.val;
+import github.tornaco.android.thanos.services.patch.common.LocalServicesHelper;
+import github.tornaco.android.thanos.services.patch.common.SystemServiceManagerHelper;
 import util.CollectionUtils;
 import util.Consumer;
 import util.XposedHelpers;
 
 public class LocalServices {
+    private final ClassLoader classLoader;
 
-    @SuppressWarnings("unchecked")
-    public static <T extends SystemService> Optional<T> getService(Class<T> serviceClass) {
-        val services = getServices();
+    public LocalServices(ClassLoader classLoader) {
+        this.classLoader = classLoader;
+    }
+
+    public Optional<Object> getService(Class<?> serviceClass) {
+        List<Object> services = getServices();
         if (services != null) {
-            for (SystemService service : services) {
+            for (Object service : services) {
                 if (serviceClass == service.getClass()) {
-                    return Optional.of((T) service);
+                    return Optional.of(service);
                 }
             }
         }
@@ -29,8 +32,8 @@ public class LocalServices {
     }
 
 
-    public static void allServices(Consumer<SystemService> consumer) {
-        val services = getServices();
+    public void allServices(Consumer<Object> consumer) {
+        List<Object> services = getServices();
         if (services != null) {
             CollectionUtils.consumeRemaining(services, consumer);
         }
@@ -38,22 +41,21 @@ public class LocalServices {
 
 
     @SuppressWarnings("unchecked")
-    private static List<SystemService> getServices() {
-        SystemServiceManager systemServiceManager = getSystemServiceManager();
+    private List<Object> getServices() {
+        Object systemServiceManager = getSystemServiceManager();
         if (systemServiceManager == null) {
             XLog.d("LocalServices.getService, systemServiceManager is null.");
             return null;
         }
         // private final ArrayList<SystemService> mServices = new ArrayList();
-        List<SystemService> mServices = (List<SystemService>) XposedHelpers.getObjectField(systemServiceManager, "mServices");
+        List<Object> mServices = (List<Object>) XposedHelpers.getObjectField(systemServiceManager, "mServices");
         XLog.d("LocalServices.getService, mServices= %s", Arrays.toString(mServices.toArray()));
         return mServices;
     }
 
 
     // LocalServices.addService(SystemServiceManager.class, mSystemServiceManager);
-    private static SystemServiceManager getSystemServiceManager() {
-        return com.android.server.LocalServices.getService(SystemServiceManager.class);
+    private Object getSystemServiceManager() {
+        return LocalServicesHelper.INSTANCE.getService(SystemServiceManagerHelper.INSTANCE.systemServiceManagerClass(classLoader), classLoader);
     }
-
 }

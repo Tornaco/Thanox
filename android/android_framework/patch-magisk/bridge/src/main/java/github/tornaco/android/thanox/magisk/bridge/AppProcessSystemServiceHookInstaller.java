@@ -104,9 +104,12 @@ public class AppProcessSystemServiceHookInstaller {
         XLog.d("installServiceManagerHook, proxySM installed.");
     }
 
-    @AllArgsConstructor
     private static class SMProxy implements IServiceManager {
         private final IServiceManager orig;
+
+        public SMProxy(IServiceManager orig) {
+            this.orig = orig;
+        }
 
         @Override
         public IBinder getService(String name) throws RemoteException {

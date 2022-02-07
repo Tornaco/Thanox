@@ -9,6 +9,7 @@ import com.elvishew.xlog.XLog;
 import com.elvishew.xlog.printer.AndroidPrinter;
 import com.elvishew.xlog.printer.Printer;
 
+import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanox.magisk.bridge.proxy.SystemPropProxy;
 
@@ -57,25 +58,41 @@ public class ThanoxBridge {
 
         XLog.d("ThanoxBridge, Bridge main with args: %s", event);
         switch (event) {
-            case onRuntimeStart:
-                ClassLoaderPatchInstaller.install(processHandler);
+            case postSpecializeSystemServer:
+                onSystemServerProcess();
                 break;
-            case forkSystemServerPost:
-                break;
-            case forkAndSpecializePostApp:
-            case specializeAppProcessPost:
-                processHandler.onAppProcess();
+            case postSpecializeApp:
+                onAppProcess();
                 break;
         }
+    }
+
+    private void onSystemServerProcess() {
+        new AbstractSafeR() {
+            @Override
+            public void runSafety() {
+                processHandler.onSystemServerProcess();
+            }
+        }.setName("onStartSystemServer").run();
+    }
+
+    private void onAppProcess() {
+        new AbstractSafeR() {
+            @Override
+            public void runSafety() {
+                processHandler.onAppProcess();
+            }
+        }.setName("onAppProcess").run();
     }
 
     /**
      * Do not bother the typo and case.
      */
     enum NativeEvent {
-        forkAndSpecializePostApp,
-        specializeAppProcessPost,
-        forkSystemServerPost,
-        onRuntimeStart
+        preSpecializeApp,
+        preSpecializeSystemServer,
+        postSpecializeApp,
+        postSpecializeSystemServer,
+        onRuntimeStart,
     }
 }

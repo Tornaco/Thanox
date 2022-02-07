@@ -2,27 +2,26 @@ package github.tornaco.thanox.android.server.patch.framework.hooks;
 
 import android.content.Context;
 
-import com.android.server.SystemService;
 import com.elvishew.xlog.XLog;
 
 import github.tornaco.thanox.android.server.patch.framework.LocalServices;
 import util.XposedHelpers;
 
 public class SystemServiceContextHooks {
-    public static void install() {
-        installContextHooksForAllSystemServices();
+    public static void install(ClassLoader classLoader) {
+        installContextHooksForAllSystemServices(classLoader);
     }
 
-    private static void installContextHooksForAllSystemServices() {
+    private static void installContextHooksForAllSystemServices(ClassLoader classLoader) {
         XLog.i("SystemServiceContextHooks installContextHooksForAllSystemServices");
         try {
-            LocalServices.allServices(SystemServiceContextHooks::installContextHooksForSystemService);
+            new LocalServices(classLoader).allServices(SystemServiceContextHooks::installContextHooksForSystemService);
         } catch (Throwable e) {
             XLog.e("SystemServiceContextHooks installContextHooksForAllSystemServices error ", e);
         }
     }
 
-    private static void installContextHooksForSystemService(SystemService service) {
+    private static void installContextHooksForSystemService(Object service) {
         XLog.i("SystemServiceContextHooks installContextHooksForSystemService: %s", service);
 
         Context originalContext = (Context) XposedHelpers.getObjectField(service, "mContext");

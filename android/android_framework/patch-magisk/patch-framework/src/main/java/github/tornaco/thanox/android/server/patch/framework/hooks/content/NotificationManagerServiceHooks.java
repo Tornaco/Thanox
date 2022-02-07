@@ -1,6 +1,5 @@
 package github.tornaco.thanox.android.server.patch.framework.hooks.content;
 
-import com.android.server.notification.NotificationManagerService;
 import com.elvishew.xlog.XLog;
 
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.List;
 import github.tornaco.android.thanos.core.n.NotificationRecord;
 import github.tornaco.android.thanos.core.util.obs.ListProxy;
 import github.tornaco.android.thanos.services.BootStrap;
+import github.tornaco.android.thanos.services.patch.common.notification.NMSHelper;
 import github.tornaco.android.thanos.services.util.NotificationRecordUtils;
 import github.tornaco.thanox.android.server.patch.framework.LocalServices;
 import io.reactivex.Completable;
@@ -17,18 +17,18 @@ import util.XposedHelpers;
 
 public class NotificationManagerServiceHooks {
 
-    public static void install() {
-        installNotificationListHooks();
+    public static void install(ClassLoader classLoader) {
+        installNotificationListHooks(classLoader);
     }
 
-    private static void installNotificationListHooks() {
+    private static void installNotificationListHooks(ClassLoader classLoader) {
         XLog.i("NotificationManagerServiceHooks.installNotificationListHooks");
         try {
-            LocalServices.getService(NotificationManagerService.class)
-                    .ifPresent(new Consumer<NotificationManagerService>() {
+            new LocalServices(classLoader).getService(NMSHelper.INSTANCE.nmsClass(classLoader))
+                    .ifPresent(new Consumer<Object>() {
                         @SuppressWarnings("rawtypes")
                         @Override
-                        public void accept(NotificationManagerService service) {
+                        public void accept(Object service) {
                             XLog.i("NotificationManagerServiceHooks.installNotificationListHooks service: %s", service);
                             // Install list proxy.
                             List mNotificationList =

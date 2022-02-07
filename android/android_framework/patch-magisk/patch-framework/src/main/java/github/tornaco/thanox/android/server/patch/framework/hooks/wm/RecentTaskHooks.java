@@ -2,13 +2,13 @@ package github.tornaco.thanox.android.server.patch.framework.hooks.wm;
 
 import android.annotation.SuppressLint;
 
-import com.android.server.wm.ActivityTaskManagerService;
 import com.elvishew.xlog.XLog;
 
 import java.lang.reflect.Proxy;
 
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.services.BootStrap;
+import github.tornaco.android.thanos.services.patch.common.wm.RecentTasksHelper;
 import github.tornaco.android.thanos.services.patch.common.wm.XTask;
 import github.tornaco.android.thanos.services.patch.common.wm.XTaskHelper;
 import util.ProxyUtils;
@@ -19,19 +19,20 @@ import util.XposedHelpers;
  */
 public class RecentTaskHooks {
 
-    static void installRecentTasksCallback(ActivityTaskManagerService atm) {
+    static void installRecentTasksCallback(Object atm, ClassLoader classLoader) {
         new AbstractSafeR() {
             @Override
-            public void runSafety() throws ClassNotFoundException {
-                installRecentTasksCallback0(atm);
+            public void runSafety() {
+                installRecentTasksCallback0(atm, classLoader);
             }
         }.setName("RecentTaskHooks installRecentTasksCallback").run();
     }
 
-    private static void installRecentTasksCallback0(ActivityTaskManagerService atm) throws ClassNotFoundException {
+    private static void installRecentTasksCallback0(Object atm, ClassLoader classLoader) {
         XLog.i("RecentTaskHooks, installRecentTasksCallback0: %s", atm);
+        // com.android.server.wm.RecentTasks$Callbacks
         @SuppressLint("PrivateApi")
-        Class<?> recentTaskCallbackClass = Class.forName("com.android.server.wm.RecentTasks$Callbacks");
+        Class<?> recentTaskCallbackClass = RecentTasksHelper.INSTANCE.recentTaskCallbacksClass(classLoader);
         Object callbackInstance = Proxy.newProxyInstance(recentTaskCallbackClass.getClassLoader(),
                 new Class[]{recentTaskCallbackClass},
                 (o, method, objects) -> {

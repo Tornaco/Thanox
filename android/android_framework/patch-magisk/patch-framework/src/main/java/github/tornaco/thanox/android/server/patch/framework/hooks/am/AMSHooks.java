@@ -5,24 +5,24 @@ import static github.tornaco.thanox.android.server.patch.framework.hooks.am.AppE
 import static github.tornaco.thanox.android.server.patch.framework.hooks.am.IFWHooks.installIFW;
 import static github.tornaco.thanox.android.server.patch.framework.hooks.app.usage.UsageStatsManagerInternalHooks.installUsageStatsService;
 
-import com.android.server.am.ActivityManagerService;
 import com.elvishew.xlog.XLog;
 
+import github.tornaco.android.thanos.services.patch.common.am.AMSLifeCycleHelper;
 import github.tornaco.thanox.android.server.patch.framework.LocalServices;
 
 public class AMSHooks {
 
-    public static void install() {
-        installHooksForAMS();
+    public static void install(ClassLoader classLoader) {
+        installHooksForAMS(classLoader);
     }
 
-    private static void installHooksForAMS() {
+    private static void installHooksForAMS(ClassLoader classLoader) {
         XLog.i("AMSHooks installHooksForAMS");
         try {
-            LocalServices.getService(ActivityManagerService.Lifecycle.class)
+            new LocalServices(classLoader).getService(AMSLifeCycleHelper.INSTANCE.lifeCycleClass(classLoader))
                     .ifPresent(lifecycle -> {
                         XLog.d("AMSHooks Lifecycle: %s", lifecycle);
-                        ActivityManagerService ams = lifecycle.getService();
+                        Object ams = AMSLifeCycleHelper.INSTANCE.getService(lifecycle);
                         XLog.i("AMSHooks installHooksForAMS, ams: %s", ams);
                         if (ams == null) {
                             XLog.w("AMSHooks ams is null...");
@@ -30,9 +30,9 @@ public class AMSHooks {
                         }
 
                         attachActiveServices(ams);
-                        installIFW(ams);
+                        installIFW(ams, classLoader);
                         installAppExitInfoTracker(ams);
-                        installUsageStatsService(ams);
+                        installUsageStatsService(ams, classLoader);
                     });
 
         } catch (Throwable e) {

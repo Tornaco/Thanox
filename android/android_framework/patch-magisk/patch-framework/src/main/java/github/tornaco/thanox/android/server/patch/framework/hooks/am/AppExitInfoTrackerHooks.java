@@ -5,9 +5,6 @@ import android.app.ApplicationExitInfo;
 import android.os.Handler;
 import android.os.Message;
 
-import com.android.server.am.ActivityManagerService;
-import com.android.server.am.AppExitInfoTracker;
-import com.android.server.am.ProcessList;
 import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.thanos.core.process.ProcessRecord;
@@ -21,7 +18,7 @@ import util.XposedHelpers;
  */
 class AppExitInfoTrackerHooks {
 
-    static void installAppExitInfoTracker(ActivityManagerService ams) {
+    static void installAppExitInfoTracker(Object ams) {
         new AbstractSafeR() {
             @Override
             public void runSafety() {
@@ -30,16 +27,16 @@ class AppExitInfoTrackerHooks {
         }.setName("AppExitInfoTrackerHooks installAppExitInfoTracker").run();
     }
 
-    private static void installAppExitInfoTracker0(ActivityManagerService ams) {
+    private static void installAppExitInfoTracker0(Object ams) {
         XLog.i("AppExitInfoTrackerHooks installAppExitInfoTracker");
         // final ProcessList mProcessList
-        ProcessList processList = (ProcessList) XposedHelpers.getObjectField(ams, "mProcessList");
+        Object processList = XposedHelpers.getObjectField(ams, "mProcessList");
         XLog.i("AppExitInfoTrackerHooks installAppExitInfoTracker, processList: %s", processList);
         if (processList == null) {
             return;
         }
         // final AppExitInfoTracker mAppExitInfoTracker
-        AppExitInfoTracker appExitInfoTracker = (AppExitInfoTracker) XposedHelpers.getObjectField(processList, "mAppExitInfoTracker");
+        Object appExitInfoTracker = XposedHelpers.getObjectField(processList, "mAppExitInfoTracker");
         XLog.i("AppExitInfoTrackerHooks installAppExitInfoTracker, appExitInfoTracker: %s", appExitInfoTracker);
         if (appExitInfoTracker == null) {
             return;

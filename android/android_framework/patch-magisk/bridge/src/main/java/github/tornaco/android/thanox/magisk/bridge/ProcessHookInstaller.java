@@ -11,13 +11,39 @@ import github.tornaco.android.thanox.magisk.bridge.proxy.SystemServiceRegistryHo
 
 public class ProcessHookInstaller implements ProcessHandler {
     @Override
-    public void onStartSystemServer() {
+    public void onSystemServerProcess() {
         XLog.d("ProcessHookInstaller onSystemServerProcess");
         SystemSeverProcessFrameworkHookInstaller.install(true);
     }
 
     @Override
-    public void onStartApplication() {
+    public void onAppProcess() {
+        XLog.d("ProcessHookInstaller onAppProcess");
+        // Hooks for Register.
+        // It should run early on app process start.
+        SystemServiceRegistryHookInstaller.install();
+
+
+    }
+
+    private void waitForActivityThread(Runnable runnable) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (ActivityThread.currentActivityThread() == null) {
+                    try {
+                        XLog.d("waitForActivityThread, wait 1s.");
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        // Noop.
+                    }
+                }
+                runnable.run();
+            }
+        }).start();
+    }
+
+    private void onStartApplication() {
         XLog.d("ProcessHookInstaller onStartApplication");
         ActivityThread am = ActivityThread.currentActivityThread();
         if (am == null) {
@@ -39,13 +65,5 @@ public class ProcessHookInstaller implements ProcessHandler {
         }
 
         AppProcessSystemServiceHookInstaller.install();
-    }
-
-    @Override
-    public void onAppProcess() {
-        XLog.d("ProcessHookInstaller onAppProcess");
-        // Hooks for Register.
-        // It should run early on app process start.
-        SystemServiceRegistryHookInstaller.install();
     }
 }

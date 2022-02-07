@@ -10,6 +10,4 @@
 
 void startThanox(JNIEnv *env, const char *args);
 
-const char *getReplacedSystemProp(const char *key);
-
 #endif //THANOX_INTERNAL_THANOXBRIDGE_H

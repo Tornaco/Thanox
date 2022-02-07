@@ -3,6 +3,7 @@ package github.tornaco.thanox.android.server.patch.framework;
 import android.app.ActivityManagerInternal;
 import android.app.ActivityThread;
 import android.app.Application;
+import android.app.LoadedApk;
 import android.content.Context;
 import android.os.Build;
 import android.os.SystemProperties;
@@ -67,11 +68,17 @@ public class ThanoxHookImpl implements IThanoxHook {
                     Context context = at.getSystemContext();
                     XLog.d("ActivityThread.getSystemContext()= " + context);
 
+                    LoadedApk loadedApk = application.mLoadedApk;
+                    XLog.d("ActivityThread.loadedApk()= " + loadedApk);
+
+                    final ClassLoader classLoader = loadedApk.getClassLoader();
+                    XLog.d("ActivityThread.classLoader= " + classLoader);
+
                     if (context != null) {
                         BootStrap.main("Magisk", FEATURES.toArray(new String[0]));
                         BootStrap.start(context);
                         BootStrap.ready();
-                        SystemServerHooks.install();
+                        SystemServerHooks.install(classLoader);
                         XLog.d("Invoke BootStrap!");
                     }
                 }
@@ -119,8 +126,8 @@ public class ThanoxHookImpl implements IThanoxHook {
             public void run() {
                 while (!"1".equals(SystemProperties.get("sys.boot_completed"))) {
                     try {
-                        XLog.d("waitForBootComplete, wait 1s.");
-                        Thread.sleep(500);
+                        XLog.d("waitForBootComplete, wait 100 ms.");
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         // Noop.
                     }

@@ -1,13 +1,11 @@
 package github.tornaco.thanox.android.server.patch.framework.hooks.app.usage;
 
 import android.app.usage.UsageEvents;
-import android.app.usage.UsageStatsManagerInternal;
 import android.content.ComponentName;
 import android.content.Intent;
 
 import com.android.dx.stock.BaseProxyFactory;
 import com.android.dx.stock.ProxyBuilder;
-import com.android.server.am.ActivityManagerService;
 import com.elvishew.xlog.XLog;
 
 import java.io.File;
@@ -18,37 +16,44 @@ import java.util.Arrays;
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.services.BootStrap;
 import github.tornaco.android.thanos.services.config.ServiceConfigs;
+import github.tornaco.android.thanos.services.patch.common.usage.UsageStatsManagerInternalHelper;
 import util.ExceptionTransformedInvocationHandler;
 import util.XposedHelpers;
 import util.XposedHelpersExt;
 
 public class UsageStatsManagerInternalHooks {
 
-    public static void installUsageStatsService(ActivityManagerService ams) {
+    public static void installUsageStatsService(Object ams, ClassLoader classLoader) {
         new AbstractSafeR() {
             @Override
             public void runSafety() {
-                installUsageStatsService0(ams);
+                installUsageStatsService0(ams, classLoader);
             }
         }.setName("UsageStatsManagerInternalHooks.install").run();
     }
 
-    private static void installUsageStatsService0(ActivityManagerService ams) {
+    private static void installUsageStatsService0(Object ams, ClassLoader classLoader) {
         XLog.i("UsageStatsManagerInternalHooks install, ams: %s", ams);
         // UsageStatsManagerInternal mUsageStatsService;
-        UsageStatsManagerInternal original = (UsageStatsManagerInternal) XposedHelpers.getObjectField(ams, "mUsageStatsService");
+        // android.app.usage.UsageStatsManagerInternal is in services package.
+        Object original = XposedHelpers.getObjectField(ams, "mUsageStatsService");
         XLog.i("UsageStatsManagerInternalHooks install, original: %s", original);
-        UsageStatsManagerInternal proxy = new UsageStatsManagerProxyFactory().newProxy(original, ServiceConfigs.baseServerTmpDir());
+        Object proxy = new UsageStatsManagerProxyFactory(classLoader).newProxy(original, ServiceConfigs.baseServerTmpDir());
         XLog.i("UsageStatsManagerInternalHooks install, proxy: %s", proxy);
         XposedHelpers.setObjectField(ams, "mUsageStatsService", proxy);
         XLog.i("UsageStatsManagerInternalHooks installed");
     }
 
-    private static class UsageStatsManagerProxyFactory extends BaseProxyFactory<UsageStatsManagerInternal> {
+    private static class UsageStatsManagerProxyFactory extends BaseProxyFactory<Object> {
+        private final ClassLoader classLoader;
+
+        public UsageStatsManagerProxyFactory(ClassLoader classLoader) {
+            this.classLoader = classLoader;
+        }
 
         @Override
-        protected UsageStatsManagerInternal onCreateProxy(UsageStatsManagerInternal original, File dexCacheDir) throws Exception {
-            return ProxyBuilder.forClass(UsageStatsManagerInternal.class)
+        protected Object onCreateProxy(Object original, File dexCacheDir) throws Exception {
+            return ProxyBuilder.forClass(UsageStatsManagerInternalHelper.INSTANCE.usmInternalClass(classLoader))
                     .dexCache(dexCacheDir)
                     .withSharedClassLoader()
                     .markTrusted()
@@ -59,9 +64,10 @@ public class UsageStatsManagerInternalHooks {
 
     private static class UsageStatsManagerInvocationHandler implements InvocationHandler,
             ExceptionTransformedInvocationHandler {
-        private final UsageStatsManagerInternal original;
+        // UsageStatsManagerInternal
+        private final Object original;
 
-        public UsageStatsManagerInvocationHandler(UsageStatsManagerInternal original) {
+        public UsageStatsManagerInvocationHandler(Object original) {
             this.original = original;
         }
 

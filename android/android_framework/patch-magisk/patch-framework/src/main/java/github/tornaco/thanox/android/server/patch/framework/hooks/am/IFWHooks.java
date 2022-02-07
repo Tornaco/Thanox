@@ -7,7 +7,6 @@ import android.os.Handler;
 
 import com.android.dx.stock.BaseProxyFactory;
 import com.android.dx.stock.ProxyBuilder;
-import com.android.server.firewall.IntentFirewall;
 import com.elvishew.xlog.XLog;
 
 import java.io.File;
@@ -19,11 +18,12 @@ import java.util.Arrays;
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.services.BootStrap;
 import github.tornaco.android.thanos.services.config.ServiceConfigs;
+import github.tornaco.android.thanos.services.patch.common.firewall.IFWHelper;
 import util.XposedHelpers;
 
 class IFWHooks {
 
-    static void installIFW(Object ams) {
+    static void installIFW(Object ams, ClassLoader classLoader) {
         // public final IntentFirewall mIntentFirewall;
         // mIntentFirewall = new IntentFirewall(new IntentFirewallInterface(), mHandler);
         // this.mAms = ams;
@@ -31,7 +31,7 @@ class IFWHooks {
             @Override
             public void runSafety() {
                 XposedHelpers.setObjectField(
-                        ams, "mIntentFirewall", IFWProxyBuilder.proxy(ams));
+                        ams, "mIntentFirewall", IFWProxyBuilder.proxy(ams, classLoader));
                 XLog.w("IFWHooks installIFW done");
             }
         }.setName("IFWHooks installIFW").run();
@@ -41,26 +41,28 @@ class IFWHooks {
     private static class IFWProxyBuilder {
         @SuppressWarnings("unchecked")
         @Nullable
-        public static Object proxy(Object ams) {
+        public static Object proxy(Object ams, ClassLoader classLoader) {
             // IFW.
             // public /*final*/ IntentFirewall mIntentFirewall;
-            IntentFirewall ifw = (IntentFirewall) XposedHelpers.getObjectField(ams, "mIntentFirewall");
+            Object ifw = (Object) XposedHelpers.getObjectField(ams, "mIntentFirewall");
             XLog.i("IFWHooks IFWProxyBuilder installHooksForAMS, ifw: %s", ifw);
-            IntentFirewall.AMSInterface amsInterface =
-                    (IntentFirewall.AMSInterface) XposedHelpers.getObjectField(ifw, "mAms");
+            // (IntentFirewall.AMSInterface)
+            Object amsInterface = XposedHelpers.getObjectField(ifw, "mAms");
             Handler handler = (Handler) XposedHelpers.getObjectField(ifw, "mHandler");
-            return new IWFProxyFactory(amsInterface, handler).newProxy(ifw, ServiceConfigs.baseServerTmpDir());
+            return new IWFProxyFactory(amsInterface, handler, classLoader).newProxy(ifw, ServiceConfigs.baseServerTmpDir());
         }
 
         @SuppressWarnings("rawtypes")
         private static class IWFProxyFactory extends BaseProxyFactory {
-            private final IntentFirewall.AMSInterface amsInterface;
+            // IntentFirewall.AMSInterface
+            private final Object amsInterface;
             private final Handler handler;
+            private final ClassLoader systemServerClassLoader;
 
-            private IWFProxyFactory(IntentFirewall.AMSInterface amsInterface,
-                                    Handler handler) {
+            public IWFProxyFactory(Object amsInterface, Handler handler, ClassLoader systemServerClassLoader) {
                 this.amsInterface = amsInterface;
                 this.handler = handler;
+                this.systemServerClassLoader = systemServerClassLoader;
             }
 
             @Override
@@ -72,10 +74,10 @@ class IFWHooks {
                 if (local == null) return null;
                 XLog.i("IFWHooks IWFProxyFactory#newProxy0, local: %s", local);
 
-                return ProxyBuilder.forClass(IntentFirewall.class)
+                return ProxyBuilder.forClass(IFWHelper.INSTANCE.ifwClass(systemServerClassLoader))
                         .dexCache(dexCacheDir)
                         // public IntentFirewall(AMSInterface ams, Handler handler)
-                        .constructorArgTypes(IntentFirewall.AMSInterface.class, Handler.class)
+                        .constructorArgTypes(IFWHelper.INSTANCE.amsInterfaceClass(systemServerClassLoader), Handler.class)
                         .constructorArgValues(amsInterface, handler)
                         .withSharedClassLoader()
                         .markTrusted()

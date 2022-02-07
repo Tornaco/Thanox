@@ -23,25 +23,25 @@ public class ThanoxBridge {
                 androidPrinter);
     }
 
-    public static void main(String arg) {
-        new ThanoxBridge().run(arg);
+    public static void main(String command, String arg) {
+        new ThanoxBridge().run(command, arg);
     }
 
-    private void run(String arg) {
+    private void run(String event, String arg) {
         if (!OsUtils.isROrAbove()) {
             System.err.println("Not supported android version: " + Build.VERSION.SDK_INT);
             return;
         }
 
-        NativeEvent event = NativeEvent.valueOf(arg);
+        NativeEvent nativeEvent = NativeEvent.valueOf(event);
+        XLog.d("ThanoxBridge, Bridge main with event: %s, args: %s", nativeEvent, arg);
 
-        XLog.d("ThanoxBridge, Bridge main with args: %s", event);
-        switch (event) {
+        switch (nativeEvent) {
             case postSpecializeSystemServer:
                 onSystemServerProcess();
                 break;
             case postSpecializeApp:
-                onAppProcess();
+                onAppProcess(arg);
                 break;
         }
     }
@@ -55,11 +55,11 @@ public class ThanoxBridge {
         }.setName("onStartSystemServer").run();
     }
 
-    private void onAppProcess() {
+    private void onAppProcess(String processName) {
         new AbstractSafeR() {
             @Override
             public void runSafety() {
-                processHandler.onAppProcess();
+                processHandler.onAppProcess(processName);
             }
         }.setName("onAppProcess").run();
     }

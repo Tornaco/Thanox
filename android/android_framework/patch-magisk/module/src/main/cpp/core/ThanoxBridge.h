@@ -8,6 +8,6 @@
 
 #include <jni.h>
 
-void startThanox(JNIEnv *env, const char *args);
+void startThanox(JNIEnv *env, const char *event, const char *args);
 
 #endif //THANOX_INTERNAL_THANOXBRIDGE_H

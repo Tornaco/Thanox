@@ -14,7 +14,7 @@
 
 #define MAIN_METHOD_NAME "main"
 
-static int invokeMain(JNIEnv *env, const char *args) {
+static int invokeMain(JNIEnv *env, const char *event, const char *args) {
     jclass pathClassLoaderClazz = env->FindClass("dalvik/system/PathClassLoader");
     jmethodID constructor = env->GetMethodID(pathClassLoaderClazz, "<init>",
                                              "(Ljava/lang/String;Ljava/lang/ClassLoader;)V");
@@ -48,7 +48,7 @@ static int invokeMain(JNIEnv *env, const char *args) {
     }
 
     jmethodID mainMethod = env->GetStaticMethodID(bridgeClazz, MAIN_METHOD_NAME,
-                                                  "(Ljava/lang/String;)V");
+                                                  "(Ljava/lang/String;Ljava/lang/String;)V");
 
     LOGI("invokeMain, bridgeClazz=%p mainMethod=%p", bridgeClazz, mainMethod);
 
@@ -59,15 +59,16 @@ static int invokeMain(JNIEnv *env, const char *args) {
 
     env->CallStaticVoidMethod(bridgeClazz,
                               mainMethod,
+                              env->NewStringUTF(event),
                               env->NewStringUTF(args));
     env->ExceptionClear();
 
     return JNI_TRUE;
 }
 
-void startThanox(JNIEnv *env, const char *args) {
+void startThanox(JNIEnv *env, const char *event, const char *args) {
     LOGD("startThanox, args: %s", args);
-    if (invokeMain(env, args)) {
+    if (invokeMain(env, event, args)) {
         LOGW("invokeMain OK");
     } else {
         LOGW("invokeMain FAIL");

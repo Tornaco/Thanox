@@ -50,12 +50,12 @@ private:
 
     void postSpecializeApp(const char *process) {
         LOGD("postSpecializeApp, process=[%s]", process);
-        startThanox(zEnv, "postSpecializeApp");
+        startThanox(zEnv, "postSpecializeApp", process);
     }
 
     void postSpecializeSystemServer() {
         LOGD("postSpecializeSystemServer");
-        startThanox(zEnv, "postSpecializeSystemServer");
+        startThanox(zEnv, "postSpecializeSystemServer", ":-");
     }
 };
 

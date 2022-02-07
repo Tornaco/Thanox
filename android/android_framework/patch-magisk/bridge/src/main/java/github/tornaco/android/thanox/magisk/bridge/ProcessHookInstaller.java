@@ -23,23 +23,20 @@ public class ProcessHookInstaller implements ProcessHandler {
         // It should run early on app process start.
         SystemServiceRegistryHookInstaller.install();
 
-
+        waitForActivityThread(this::onStartApplication);
     }
 
     private void waitForActivityThread(Runnable runnable) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (ActivityThread.currentActivityThread() == null) {
-                    try {
-                        XLog.d("waitForActivityThread, wait 1s.");
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        // Noop.
-                    }
+        new Thread(() -> {
+            while (ActivityThread.currentActivityThread() == null) {
+                try {
+                    XLog.d("waitForActivityThread, wait 100ms.");
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    // Noop.
                 }
-                runnable.run();
             }
+            runnable.run();
         }).start();
     }
 

@@ -14,7 +14,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${C_FLAGS} ${CXX_FLAGS}")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${LINKER_FLAGS}")
 set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} ${LINKER_FLAGS}")
 
-add_library(${MODULE_NAME} SHARED helper/JniHelper.cpp core/ThanoxBridge.cpp zygisk/thanox.cpp)
+add_library(${MODULE_NAME} SHARED core/ThanoxBridge.cpp zygisk/thanox.cpp)
 
 target_link_libraries(${MODULE_NAME} log)
 set_target_properties(${MODULE_NAME} PROPERTIES LINK_FLAGS_RELEASE -s)

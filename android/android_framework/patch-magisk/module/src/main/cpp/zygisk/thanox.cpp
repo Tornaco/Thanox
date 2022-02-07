@@ -4,7 +4,7 @@
 #include <android/log.h>
 
 #include "zygisk.hpp"
-#include "../helper/Log.h"
+#include "../util/Log.h"
 #include "../core/ThanoxBridge.h"
 
 using zygisk::Api;
@@ -21,12 +21,12 @@ public:
     void preAppSpecialize(AppSpecializeArgs *args) override {
         // Use JNI to fetch our process name
         const char *process = zEnv->GetStringUTFChars(args->nice_name, nullptr);
-        preSpecializeApp(process);
+        preSpecialize(process);
         zEnv->ReleaseStringUTFChars(args->nice_name, process);
     }
 
     void preServerSpecialize(ServerSpecializeArgs *args) override {
-        preSpecializeSystemServer();
+        preSpecialize("system_server");
     }
 
     void postAppSpecialize(const AppSpecializeArgs *args) override {
@@ -43,19 +43,18 @@ private:
     Api *zApi;
     JNIEnv *zEnv;
 
-    void preSpecializeApp(const char *process) {
-
-    }
-
-    void preSpecializeSystemServer() {
-        LOGD("preSpecialize, process=[system_server]");
+    void preSpecialize(const char *process) {
+        LOGD("preSpecializeApp, process=[%s]", process);
+        zApi->setOption(zygisk::DLCLOSE_MODULE_LIBRARY);
     }
 
     void postSpecializeApp(const char *process) {
+        LOGD("postSpecializeApp, process=[%s]", process);
+        startThanox(zEnv, "postSpecializeApp");
     }
 
     void postSpecializeSystemServer() {
-        LOGD("postSpecialize, process=[system_server]");
+        LOGD("postSpecializeSystemServer");
         startThanox(zEnv, "postSpecializeSystemServer");
     }
 };

@@ -3,18 +3,16 @@
 //
 
 #include "ThanoxBridge.h"
-#include "../helper/Log.h"
-#include "../helper/JniHelper.h"
+#include "../util/Log.h"
 #include <jni.h>
 #include <cstring>
 #include <cstdlib>
+#include <ctime>
 
 #define JAVA_BRIDGE_CLASS "github/tornaco/android/thanox/magisk/bridge/ThanoxBridge"
 #define DEX_PATH  "system/framework/thanox-bridge.jar"
 
 #define MAIN_METHOD_NAME "main"
-
-static jclass bridgeClazz;
 
 static int invokeMain(JNIEnv *env, const char *args) {
     jclass pathClassLoaderClazz = env->FindClass("dalvik/system/PathClassLoader");
@@ -36,17 +34,16 @@ static int invokeMain(JNIEnv *env, const char *args) {
                                                        jBridgeDexPath, jParent);
 
     jstring clazzName = env->NewStringUTF(JAVA_BRIDGE_CLASS);
-    jclass tmpBridgeClazz = static_cast<jclass>(env->CallObjectMethod(jBridgePathClassLoaderIns,
-                                                                      loadClazz,
-                                                                      clazzName));
+    jclass bridgeClazz = static_cast<jclass>(env->CallObjectMethod(jBridgePathClassLoaderIns,
+                                                                   loadClazz,
+                                                                   clazzName));
     // https://stackoverflow.com/questions/14765776/jni-error-app-bug-accessed-stale-local-reference-0xbc00021-index-8-in-a-tabl
     // droid.systemu: JNI ERROR (app bug): accessed stale Local 0x49  (index 4 in a table of size 2)
     // New ref, or it will be recycled by gc.
-    bridgeClazz = (jclass) env->NewGlobalRef(tmpBridgeClazz);
     env->ExceptionClear();
 
-    if (bridgeClazz == NULL) {
-        LOGE("invokeMain, bridgeClazz == NULL");
+    if (bridgeClazz == nullptr) {
+        LOGE("invokeMain, bridgeClazz == null");
         return JNI_FALSE;
     }
 
@@ -69,7 +66,7 @@ static int invokeMain(JNIEnv *env, const char *args) {
 }
 
 void startThanox(JNIEnv *env, const char *args) {
-    LOGD("startThanox");
+    LOGD("startThanox, args: %s", args);
     if (invokeMain(env, args)) {
         LOGW("invokeMain OK");
     } else {

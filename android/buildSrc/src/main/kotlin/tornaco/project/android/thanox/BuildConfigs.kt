@@ -79,10 +79,10 @@ object MagiskModConfigs {
     */
     const val magiskModuleId = "zygisk_thanox"
 
-    const val moduleName = "Thanox-Core"
+    const val moduleName = "Zygisk-Thanox"
     const val moduleAuthor = "Tornaco"
     const val moduleDescription =
-        """Magisk module that provides android framework and app hooks for Thanox, requires zygisk. Support Android11 & Android12."""
+        """Provides hooks for Thanox. Support Android11 & Android12. Requires Magisk 24.0+ and Zygisk"""
     val moduleVersion = Configs.thanoxVersionName
     val moduleVersionCode = Configs.thanoxVersionCode
 }

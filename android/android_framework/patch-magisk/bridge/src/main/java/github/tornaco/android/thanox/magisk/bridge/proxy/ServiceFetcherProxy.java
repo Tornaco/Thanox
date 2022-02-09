@@ -15,6 +15,7 @@ import java.util.Map;
 import github.tornaco.android.thanox.magisk.bridge.util.ReflectionUtils;
 
 class ServiceFetcherProxy {
+    private static final boolean DEBUG = false;
 
     static void installInto(Map<String, Object> fetcherMap) {
         for (String name : fetcherMap.keySet().toArray(new String[0])) {
@@ -49,7 +50,9 @@ class ServiceFetcherProxy {
                         return "ServiceFetcherProxy@" + name;
                     }
                     Object res = method.invoke(originalFetcher, args);
-                    XLog.d("ServiceFetcherProxy invoke: %s %s %s", method.getName(), Arrays.toString(args), res);
+                    if (DEBUG) {
+                        XLog.d("ServiceFetcherProxy invoke: %s %s %s", method.getName(), Arrays.toString(args), res);
+                    }
                     return res;
                 }
             });

@@ -87,7 +87,7 @@ public class ExportPatchUi {
         // you can set file mime-type
         intent.setType("*/*");
         // default file name
-        String backupFileNameWithExt = "magisk-riru-thanox-" + BuildProp.THANOS_VERSION_NAME + ".zip";
+        String backupFileNameWithExt = "zygisk_thanox-" + BuildProp.THANOS_VERSION_NAME + ".zip";
         intent.putExtra(Intent.EXTRA_TITLE, backupFileNameWithExt);
         try {
             if (activity != null) {

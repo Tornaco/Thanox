@@ -40,6 +40,7 @@ import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.pref.AppPreference;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import util.CollectionUtils;
 
@@ -222,14 +223,14 @@ public class SmartFreezeActivity extends ThemeActivity {
             onRequestAddNewApps();
             return true;
         }
-        if (R.id.action_enable_all == item.getItemId()) {
+        if (R.id.action_enable_all_smart_freeze == item.getItemId()) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
                 Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return false;
             }
             new MaterialAlertDialogBuilder(this)
-                    .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps)
-                    .setMessage(R.string.common_dialog_message_are_you_sure)
+                    .setTitle(R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps)
+                    .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_smart_freeze_apps)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                         ThanosManager.from(getApplicationContext())
                                 .getPkgManager()
@@ -240,14 +241,14 @@ public class SmartFreezeActivity extends ThemeActivity {
                     .show();
             return true;
         }
-        if (R.id.action_enable_all_temp == item.getItemId()) {
+        if (R.id.action_enable_all_smart_freeze_temp == item.getItemId()) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
                 Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return false;
             }
             new MaterialAlertDialogBuilder(this)
-                    .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_temp)
-                    .setMessage(R.string.common_dialog_message_are_you_sure)
+                    .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp)
+                    .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                         ThanosManager.from(getApplicationContext())
                                 .getPkgManager()
@@ -258,7 +259,34 @@ public class SmartFreezeActivity extends ThemeActivity {
                     .show();
             return true;
         }
+        if (R.id.action_enable_all_apps == item.getItemId()) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
+                Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            new MaterialAlertDialogBuilder(this)
+                    .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps)
+                    .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps)
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        onRequestEnableAllApps();
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+            return true;
+        }
+
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onRequestEnableAllApps() {
+        ModernProgressDialog progress = new ModernProgressDialog(thisActivity());
+        progress.setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps);
+        viewModel.onRequestEnableAllApps(appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
+            progress.dismiss();
+            viewModel.start();
+        });
+        progress.show();
     }
 
     void onRequestShortcutStubApk(AppInfo appInfo) {

@@ -23,14 +23,20 @@
         tools:ignore="AlwaysShowAction" />
 
     <item
-        android:id="@+id/action_enable_all"
+        android:id="@+id/action_enable_all_smart_freeze"
         android:icon="@drawable/ic_apps_line"
-        android:title="@string/menu_title_smart_app_freeze_enable_all_apps"
+        android:title="@string/menu_title_smart_app_freeze_enable_all_smart_freeze_apps"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_enable_all_temp"
+        android:id="@+id/action_enable_all_smart_freeze_temp"
         android:icon="@drawable/ic_apps_line"
-        android:title="@string/menu_title_smart_app_freeze_enable_all_apps_temp"
+        android:title="@string/menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_enable_all_apps"
+        android:icon="@drawable/ic_apps_line"
+        android:title="@string/menu_title_smart_app_freeze_enable_all_apps"
         app:showAsAction="never" />
 </menu>

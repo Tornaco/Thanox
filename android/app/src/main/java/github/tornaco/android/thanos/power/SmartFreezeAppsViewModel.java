@@ -26,6 +26,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.core.util.Rxs;
 import github.tornaco.android.thanos.util.InstallerUtils;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;
@@ -34,9 +35,12 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import rx2.android.schedulers.AndroidSchedulers;
+import util.CollectionUtils;
+import util.Consumer;
 
 public class SmartFreezeAppsViewModel extends AndroidViewModel {
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
+
     protected final List<Disposable> disposables = new ArrayList<>();
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
 
@@ -139,5 +143,25 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         if (TextUtils.isEmpty(query)) return;
         queryText.set(query);
         loadModels();
+    }
+
+    public void onRequestEnableAllApps(Consumer<AppInfo> onProgress, Consumer<Boolean> onComplete) {
+        ThanosManager thanosManager = ThanosManager.from(getApplication());
+        if (!thanosManager.isServiceInstalled()) {
+            onComplete.accept(false);
+            return;
+        }
+        disposables.add(Completable.fromRunnable(() -> CollectionUtils.consumeRemaining(thanosManager.getPkgManager().getInstalledPkgs(AppInfo.FLAGS_ALL), appInfo -> {
+            boolean enabled = thanosManager.getPkgManager().getApplicationEnableState(appInfo.getPkgName());
+            if (!enabled) {
+                onProgress.accept(appInfo);
+                thanosManager.getPkgManager().setApplicationEnableState(appInfo.getPkgName(), true, false);
+                // Give system a rest
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException ignored) {
+                }
+            }
+        })).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(() -> onComplete.accept(true)));
     }
 }

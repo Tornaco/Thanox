@@ -20,7 +20,19 @@ import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 
 public enum AppSort {
 
-    Default(R.string.common_sort_by_default, null),
+    Default(R.string.common_sort_by_default, new AppSorterProvider() {
+        @NonNull
+        @Override
+        public Comparator<AppListModel> comparator(@NonNull Context context) {
+            return AppListModel::compareTo;
+        }
+
+        @Nullable
+        @Override
+        public String getAppSortDescription(@NonNull Context context, @NonNull AppListModel model) {
+            return null;
+        }
+    }),
     AppLabel(R.string.common_sort_by_install_app_label, new AppSorterProvider() {
         @NonNull
         @Override

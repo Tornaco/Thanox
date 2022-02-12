@@ -175,11 +175,14 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
 
             for (int i = 0; i < appSortArray.length; i++) {
                 AppSort sort = appSortArray[i];
-                menuBuilder.add(
-                        1000,
+                MenuItem sortItem = menuBuilder.add(1000,
                         i,
                         Menu.NONE,
                         sort.labelRes);
+                boolean isSelected = viewModel.getCurrentAppSort() == sort;
+                if (isSelected) {
+                    sortItem.setTitle(getString(sort.labelRes) + " \uD83C\uDFAF");
+                }
             }
             menuBuilder.setCallback(new MenuBuilder.Callback() {
                 @Override

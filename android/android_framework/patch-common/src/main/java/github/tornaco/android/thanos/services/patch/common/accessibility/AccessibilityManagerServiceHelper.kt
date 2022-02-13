@@ -10,4 +10,11 @@ object AccessibilityManagerServiceHelper {
             classLoader
         )
     }
+
+    fun lifeCycleClass(classLoader: ClassLoader): Class<*> {
+        return XposedHelpers.findClass(
+            "com.android.server.accessibility.AccessibilityManagerService\$Lifecycle",
+            classLoader
+        )
+    }
 }

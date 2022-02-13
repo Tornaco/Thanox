@@ -41,6 +41,8 @@ class StartResult : Parcelable {
         @JvmField
         val BY_PASS_DEFAULT = StartResult(true, "BY_PASS_DEFAULT")
         @JvmField
+        val BY_PASS_ACCESSIBILITY_SERVICE = StartResult(true, "BY_PASS_ACCESSIBILITY_SERVICE")
+        @JvmField
         val BY_PASS_DEFAULT_THANOS_ERROR = StartResult(true, "BY_PASS_DEFAULT_THANOS_ERROR")
         @JvmField
         val BY_PASS_DEFAULT_THANOS_TIMEOUT = StartResult(true, "BY_PASS_DEFAULT_THANOS_TIMEOUT")

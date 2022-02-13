@@ -13,7 +13,7 @@ public class SystemServiceContextHooks {
     }
 
     private static void installContextHooksForAllSystemServices(ClassLoader classLoader) {
-        XLog.i("SystemServiceContextHooks installContextHooksForAllSystemServices");
+        XLog.w("SystemServiceContextHooks installContextHooksForAllSystemServices");
         try {
             new LocalServices(classLoader).allServices(SystemServiceContextHooks::installContextHooksForSystemService);
         } catch (Throwable e) {
@@ -22,13 +22,13 @@ public class SystemServiceContextHooks {
     }
 
     private static void installContextHooksForSystemService(Object service) {
-        XLog.i("SystemServiceContextHooks installContextHooksForSystemService: %s", service);
+        XLog.w("SystemServiceContextHooks installContextHooksForSystemService: %s", service);
 
         Context originalContext = (Context) XposedHelpers.getObjectField(service, "mContext");
-        XLog.i("SystemServiceContextHooks installContextHooksForSystemService, originalContext: %s", originalContext);
+        XLog.w("SystemServiceContextHooks installContextHooksForSystemService, originalContext: %s", originalContext);
 
         Context proxyContext = new ContextProxy(originalContext, service.getClass().getSimpleName());
         XposedHelpers.setObjectField(service, "mContext", proxyContext);
-        XLog.i("SystemServiceContextHooks installContextHooksForSystemService done.");
+        XLog.w("SystemServiceContextHooks installContextHooksForSystemService done.");
     }
 }

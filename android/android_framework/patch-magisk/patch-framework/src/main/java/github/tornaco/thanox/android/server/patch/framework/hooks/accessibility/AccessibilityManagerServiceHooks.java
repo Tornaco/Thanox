@@ -19,13 +19,13 @@ public class AccessibilityManagerServiceHooks {
     }
 
     private static void installContextForAccService(ClassLoader classLoader) {
-        XLog.i("AccessibilityManagerServiceHooks installContextForSyncManager");
+        XLog.w("AccessibilityManagerServiceHooks installContextForSyncManager");
         new LocalServices(classLoader).getService(AccessibilityManagerServiceHelper
                 .INSTANCE.accessibilityManagerServiceClass(classLoader)).ifPresent(service -> {
-            XLog.i("AccessibilityManagerServiceHooks service: %s", service);
+            XLog.w("AccessibilityManagerServiceHooks service: %s", service);
             // Update mContext.
             Context context = (Context) XposedHelpers.getObjectField(service, "mContext");
-            XLog.i("AccessibilityManagerServiceHooks service.context: %s", context);
+            XLog.w("AccessibilityManagerServiceHooks service.context: %s", context);
             XposedHelpers.setObjectField(service, "mContext", new ContextProxy(context, "AccessibilityManagerService"));
         });
 

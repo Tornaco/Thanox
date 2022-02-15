@@ -52,7 +52,7 @@ class IFWHooks {
             return new IWFProxyFactory(amsInterface, handler, classLoader).newProxy(ifw, ServiceConfigs.baseServerTmpDir());
         }
 
-        @SuppressWarnings("rawtypes")
+        @SuppressWarnings({"rawtypes", "Convert2Lambda"})
         private static class IWFProxyFactory extends BaseProxyFactory {
             // IntentFirewall.AMSInterface
             private final Object amsInterface;
@@ -86,17 +86,8 @@ class IFWHooks {
                             public Object invoke(Object proxy, Method method, Object[] args)
                                     throws Throwable {
                                 method.setAccessible(true);
-
                                 XLog.v("IFWHooks: %s %s", method.getName(), Arrays.toString(args));
-
                                 try {
-                                    if ("checkService".equals(method.getName())) {
-                                        Boolean hookRes = handleCheckService(args);
-                                        if (hookRes != null && !hookRes) {
-                                            return false;
-                                        }
-                                    }
-
                                     if ("checkBroadcast".equals(method.getName())) {
                                         Boolean hookRes = handleCheckBroadcast(args);
                                         if (hookRes != null && !hookRes) {
@@ -128,6 +119,12 @@ class IFWHooks {
                 return null;
             }
 
+            /**
+             * The checkService interception will cause the bindService to throw an exception. Based on the magisk mode,
+             * it is not easy to prevent the app or system from crashing by hooking the context.
+             * So we don't need IFW to intercept service startup.
+             */
+            @Deprecated
             private Boolean handleCheckService(Object[] args) {
                 Intent intent = (Intent) args[1];
                 ComponentName componentName = (ComponentName) args[0];

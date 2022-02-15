@@ -1,5 +1,6 @@
 package github.tornaco.thanox.android.server.patch.framework.hooks.am;
 
+import static github.tornaco.thanox.android.server.patch.framework.hooks.am.AMSPackageInternalHooks.installPackageManagerInternalHooks;
 import static github.tornaco.thanox.android.server.patch.framework.hooks.am.ActiveServicesHooks.attachActiveServices;
 import static github.tornaco.thanox.android.server.patch.framework.hooks.am.AppExitInfoTrackerHooks.installAppExitInfoTracker;
 import static github.tornaco.thanox.android.server.patch.framework.hooks.am.IFWHooks.installIFW;
@@ -30,6 +31,7 @@ public class AMSHooks {
                         }
 
                         attachActiveServices(ams);
+                        installPackageManagerInternalHooks(ams, classLoader);
                         installIFW(ams, classLoader);
                         installAppExitInfoTracker(ams);
                         installUsageStatsService(ams, classLoader);

@@ -19,6 +19,7 @@ import github.tornaco.android.thanos.services.BootStrap;
 import github.tornaco.android.thanos.services.config.ServiceConfigs;
 import github.tornaco.android.thanos.services.patch.common.content.pm.PackageManagerInternalHelper;
 import util.XposedHelpers;
+import util.XposedHelpersExt;
 
 /**
  * We provide this hook to interrupt Android Services startup.
@@ -35,7 +36,8 @@ public class AMSPackageInternalHooks {
             @SuppressWarnings("unchecked")
             public void runSafety() {
                 // PackageManagerInternal mPackageManagerInt;
-                Object mPackageManagerInt = XposedHelpers.callMethod(ams, "getPackageManagerInternal");
+                // https://github.com/LineageOS/android_frameworks_base/blob/lineage-17.1/services/core/java/com/android/server/am/ActivityManagerService.java
+                Object mPackageManagerInt = XposedHelpersExt.callMethodWithPreferredNames(ams, new String[]{"getPackageManagerInternal", "getPackageManagerInternalLocked"});
                 XLog.w("AMSPackageInternalHooks installPackageManagerInternalHooks, mPackageManagerInt: %s", mPackageManagerInt);
                 if (mPackageManagerInt == null) return;
                 Object proxy = new PackageManagerInternalProxyFactory(classLoader)

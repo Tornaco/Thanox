@@ -139,4 +139,15 @@ public class XposedHelpersExt {
     }
     return Arrays.equals(methodToCheck.getParameterTypes(), argTypesExpected);
   }
+
+  public static Object callMethodWithPreferredNames(Object obj, String[] methodNames, Object... args) {
+    for (String methodName : methodNames) {
+      try {
+        return XposedHelpers.callMethod(obj, methodName, args);
+      } catch (NoSuchMethodError ignored) {
+        // Try next one.
+      }
+    }
+    return null;
+  }
 }

@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.core.app;
 
-import android.content.Context;
+import static github.tornaco.android.thanos.core.app.ThanosManager.PROXIED_ANDROID_SERVICE_NAME;
+
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
@@ -18,7 +19,7 @@ public class ThanosManagerNative {
     @Setter
     private static IThanos localService;
 
-    private static Singleton<IThanos> sIThanosSingleton = new Singleton<IThanos>() {
+    private static final Singleton<IThanos> sIThanosSingleton = new Singleton<IThanos>() {
         @Override
         protected IThanos create() {
             if (localService != null) {
@@ -34,7 +35,7 @@ public class ThanosManagerNative {
             val data = Parcel.obtain();
             val reply = Parcel.obtain();
             try {
-                val backup = ServiceManager.getService(Context.DROPBOX_SERVICE);
+                val backup = ServiceManager.getService(PROXIED_ANDROID_SERVICE_NAME);
                 if (backup == null) {
                     XLog.w("Get Thanos from IPC_TRANS_CODE_THANOS_SERVER, service is null.");
                     return null;

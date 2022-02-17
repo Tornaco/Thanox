@@ -29,6 +29,7 @@ import lombok.SneakyThrows;
 import util.Consumer;
 
 public class ThanosManager {
+    public static final String PROXIED_ANDROID_SERVICE_NAME = Context.DROPBOX_SERVICE;
     public static final int IPC_TRANS_CODE_THANOS_SERVER = "github.tornaco.android.thanos.core.IPC_TRANS_CODE_THANOS_SERVER".hashCode();
 
     private IThanos service;

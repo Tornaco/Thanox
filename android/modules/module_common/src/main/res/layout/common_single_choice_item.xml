@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="description"
+            type="String" />
+
+        <variable
+            name="isSelected"
+            type="Boolean" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:id="@+id/item_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:minHeight="@dimen/list_item_height"
+        android:soundEffectsEnabled="false">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/icon"
+            android:layout_width="@dimen/list_item_app_icon_w"
+            android:layout_height="@dimen/list_item_app_icon_h"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dashboard_tile_image_margin_start"
+            android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end"
+            android:checked="@{isSelected}"
+            android:padding="@dimen/dashboard_tile_image_padding"
+            tools:checked="true"
+            tools:src="@mipmap/ic_fallback_app_icon" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/common_view_margin_small"
+            android:layout_marginEnd="@dimen/dashboard_category_title_margin_end"
+            android:layout_marginBottom="@dimen/dashboard_category_bot_margin"
+            android:layout_toEndOf="@id/icon">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:fadingEdge="horizontal"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@{title}"
+                android:textAppearance="@style/TextAppearance.TileTitle"
+                tools:text="Title example" />
+
+            <TextView
+                android:id="@+id/desc_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:layout_alignStart="@id/title"
+                android:text="@{description}"
+                android:textSize="@dimen/list_item_main_text_size_small"
+                android:visibility="@{(description != null) ? View.VISIBLE : View.GONE}"
+                tools:text="Long desc desc desc desc desc desc des long name name name name name name name name name name name name name name name"
+                tools:visibility="visible" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

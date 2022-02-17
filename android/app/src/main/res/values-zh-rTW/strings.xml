@@ -396,4 +396,10 @@
 
     <string name="menu_title_app_info_detailed">详细信息</string>
     <string name="nav_title_guide">入门</string>
+
+    <string name="pre_title_smart_freeze_freeze_method">凍結方式</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable">PM disable</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable 是Android系統提供的可以"停用"某個應用的功能；使用這種方式"凍結"應用的時候，被凍結應用的桌面圖標會消失，只能通過智能凍結頁面或創建的快捷方式、代理應用啟動。</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend">PM suspend</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend，是Android提供用於DPC管理的功能；被掛起的應用桌面通常會保留一個灰色的圖標，但是無法直接啟動該應用的活動，一般會彈出一個對話框提示這個應用已被管理員限制使用。你可以為該應用打開"活檢啟用"開關，這樣一來，Thanox檢測到啟動該應用活動頁的請求會解凍該應用。</string>
 </resources>

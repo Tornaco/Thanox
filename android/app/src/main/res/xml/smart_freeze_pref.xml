@@ -12,11 +12,10 @@
             app:summary="@string/pre_summary_smart_freeze_hide_package_change_event"
             app:title="@string/pre_title_smart_freeze_hide_package_change_event" />
 
-        <SwitchPreferenceCompat
+        <Preference
             android:persistent="false"
-            app:key="@string/key_smart_freeze_with_suspend"
-            app:summary="@string/pre_summary_smart_freeze_with_suspend"
-            app:title="@string/pre_title_smart_freeze_with_suspend" />
+            app:key="@string/key_smart_freeze_method"
+            app:title="@string/pre_title_smart_freeze_freeze_method" />
 
         <SwitchPreferenceCompat
             android:persistent="false"

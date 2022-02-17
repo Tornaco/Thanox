@@ -7,6 +7,8 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.google.common.collect.Lists;
+
 import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
@@ -14,6 +16,8 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.widget.ModernSingleChoiceDialog;
+import util.Consumer;
 
 public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
 
@@ -66,11 +70,14 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
         });
 
 
-        SwitchPreferenceCompat suspendPref = findPreference(getString(R.string.key_smart_freeze_with_suspend));
-        Objects.requireNonNull(suspendPref).setChecked(thanos.getPkgManager().isFreezePkgWithSuspendEnabled());
-        suspendPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            boolean checked = (boolean) newValue;
-            thanos.getPkgManager().setFreezePkgWithSuspendEnabled(checked);
+        Preference freezeMethodPref = findPreference(getString(R.string.key_smart_freeze_method));
+        Runnable updatePrefSummary = () -> Objects.requireNonNull(freezeMethodPref).setSummary(
+                thanos.getPkgManager().isFreezePkgWithSuspendEnabled()
+                        ? R.string.pre_title_smart_freeze_freeze_method_suspend
+                        : R.string.pre_title_smart_freeze_freeze_method_disable);
+        updatePrefSummary.run();
+        Objects.requireNonNull(freezeMethodPref).setOnPreferenceClickListener(preference -> {
+            showSuspendOrDisablePackageDialog(res -> updatePrefSummary.run());
             return true;
         });
 
@@ -81,5 +88,27 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
             thanos.getPkgManager().setEnablePkgOnLaunchByDefaultEnabled(checked);
             return true;
         });
+    }
+
+    private void showSuspendOrDisablePackageDialog(Consumer<Boolean> suspendConsumer) {
+        ThanosManager thanos = ThanosManager.from(getContext());
+        ModernSingleChoiceDialog dialog = new ModernSingleChoiceDialog(requireActivity());
+        dialog.setTitle(getString(R.string.pre_title_smart_freeze_freeze_method));
+        dialog.setItems(Lists.newArrayList(
+                new ModernSingleChoiceDialog.Item("disable",
+                        getString(R.string.pre_title_smart_freeze_freeze_method_disable),
+                        getString(R.string.pre_title_smart_freeze_freeze_method_disable_summary)),
+
+                new ModernSingleChoiceDialog.Item("suspend",
+                        getString(R.string.pre_title_smart_freeze_freeze_method_suspend),
+                        getString(R.string.pre_title_smart_freeze_freeze_method_suspend_summary))));
+
+        dialog.setCheckedId(thanos.getPkgManager().isFreezePkgWithSuspendEnabled() ? "suspend" : "disable");
+        dialog.setOnConfirm(id -> {
+            boolean susp = id.equals("suspend");
+            thanos.getPkgManager().setFreezePkgWithSuspendEnabled(susp);
+            suspendConsumer.accept(susp);
+        });
+        dialog.show();
     }
 }

@@ -145,9 +145,10 @@
     <string name="menu_title_smart_app_freeze_enable_all_apps">解凍所有应用</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps">將會解凍你的系統中所有被凍結或掛起的應用，包含所有已安裝或系統應用，你確定要這樣做嗎？</string>
     <string name="feature_summary_smart_app_freeze">把不常用的應用凍結起來</string>
-    <string name="feature_title_enable_package_on_launch">检测到活动请求时启用该App</string>
-    <string name="pref_title_enable_package_on_launch_by_default">检测到活动请求时启用该App</string>
-    <string name="pref_summary_enable_package_on_launch_by_default">当应用加入智能冻结列表时，默认开启　\"检测到活动请求时启用该App\"　开关</string>
+    <string name="feature_title_enable_package_on_launch">活檢解凍（DOL）</string>
+    <string name="feature_summary_enable_package_on_launch">應用被智能凍結後，當檢測到該應用的活動啟動請求，Thanox會自動解凍該應用</string>
+    <string name="pref_title_enable_package_on_launch_by_default">自動打開\"活檢解凍\"</string>
+    <string name="pref_summary_enable_package_on_launch_by_default">當某個應用被加入智能凍結列表時，自動為這個應用開啟\"活檢解凍\"開關</string>
     <string name="feature_desc_smart_app_freeze">注意，凍結應用使用了Android系統的能力，意味著這些狀態會跟隨系統持久化，即使你卸載了Thanox，這些狀態將依然會保留</string>
     <string name="menu_title_create_shortcut">創建啟動快捷方式</string>
     <string name="menu_title_create_shortcut_apk">生成代理應用</string>
@@ -399,7 +400,7 @@
 
     <string name="pre_title_smart_freeze_freeze_method">凍結方式</string>
     <string name="pre_title_smart_freeze_freeze_method_disable">PM disable</string>
-    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable 是Android系統提供的可以"停用"某個應用的功能；使用這種方式"凍結"應用的時候，被凍結應用的桌面圖標會消失，只能通過智能凍結頁面或創建的快捷方式、代理應用啟動。</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable 是Android系統提供的可以\"停用\"某個應用的功能；使用這種方式\"凍結\"應用的時候，被凍結應用的桌面圖標會消失，只能通過智能凍結頁面或創建的快捷方式、代理應用啟動。</string>
     <string name="pre_title_smart_freeze_freeze_method_suspend">PM suspend</string>
-    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend，是Android提供用於DPC管理的功能；被掛起的應用桌面通常會保留一個灰色的圖標，但是無法直接啟動該應用的活動，一般會彈出一個對話框提示這個應用已被管理員限制使用。你可以為該應用打開"活檢啟用"開關，這樣一來，Thanox檢測到啟動該應用活動頁的請求會解凍該應用。</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend，是Android提供用於DPC管理的功能；被掛起的應用桌面通常會保留一個灰色的圖標，但是無法直接啟動該應用的活動，一般會彈出一個對話框提示這個應用已被管理員限制使用。你可以為該應用打開\"活檢解冻\"開關，這樣一來，Thanox檢測到啟動該應用活動頁的請求會解凍該應用。</string>
 </resources>

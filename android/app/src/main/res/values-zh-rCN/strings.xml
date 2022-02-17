@@ -137,9 +137,10 @@
     <string name="feature_summary_smart_app_standby_brief">应用回到后台接受处置</string>
 
     <string name="feature_category_apps">应用</string>
-    <string name="feature_title_enable_package_on_launch">检测到活动请求时启用该App</string>
-    <string name="pref_title_enable_package_on_launch_by_default">检测到活动请求时启用该App</string>
-    <string name="pref_summary_enable_package_on_launch_by_default">当应用加入智能冻结列表时，默认开启　\"检测到活动请求时启用该App\"　开关</string>
+    <string name="feature_title_enable_package_on_launch">活检解冻（DOL）</string>
+    <string name="feature_summary_enable_package_on_launch">应用被智能冻结后，当检测到该应用的活动启动请求，Thanox会自动解冻该应用</string>
+    <string name="pref_title_enable_package_on_launch_by_default">自动打开\"活检解冻\"</string>
+    <string name="pref_summary_enable_package_on_launch_by_default">当某个应用被加入智能冻结列表时，自动为这个应用开启\"活检解冻\"开关</string>
     <string name="feature_title_smart_app_freeze">智能冻结</string>
     <string name="menu_title_smart_app_freeze_enable_all_smart_freeze_apps">全部解冻并移除列表中的应用</string>
     <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">将智能冻结的应用全部解冻，并从智能冻结列表中移除，你确定要这样做吗？</string>
@@ -399,7 +400,7 @@
 
     <string name="pre_title_smart_freeze_freeze_method">冻结方式</string>
     <string name="pre_title_smart_freeze_freeze_method_disable">PM disable</string>
-    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable 是Android系统提供的可以"停用"某个应用的功能；使用这种方式"冻结"应用的时候，被冻结应用的桌面图标会消失，只能通过智能冻结页面或创建的快捷方式、代理应用启动。</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable 是Android系统提供的可以\"停用\"某个应用的功能；使用这种方式\"冻结\"应用的时候，被冻结应用的桌面图标会消失，只能通过智能冻结页面或创建的快捷方式、代理应用启动。</string>
     <string name="pre_title_smart_freeze_freeze_method_suspend">PM suspend</string>
-    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend，是Android提供用于DPC管理的功能；被挂起的应用桌面通常会保留一个灰色的图标，但是无法直接启动该应用的活动，一般会弹出一个对话框提示这个应用已被管理员限制使用。你可以为该应用打开"活检启用"开关，这样一来，Thanox检测到启动该应用活动页的请求会解冻该应用。</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend，是Android提供用于DPC管理的功能；被挂起的应用桌面通常会保留一个灰色的图标，但是无法直接启动该应用的活动，一般会弹出一个对话框提示这个应用已被管理员限制使用。你可以为该应用打开\"活检解冻\"开关，这样一来，Thanox检测到启动该应用活动页的请求会解冻该应用。</string>
 </resources>

@@ -19,7 +19,6 @@ public interface IAudioManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.audio.IAudioManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.audio.IAudioManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -54,6 +53,9 @@ public interface IAudioManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_hasAudioFocus:
         {
           data.enforceInterface(descriptor);
@@ -94,8 +96,10 @@ public interface IAudioManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasAudioFocus, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasAudioFocus(pkgName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().hasAudioFocus(pkgName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -126,5 +130,6 @@ public interface IAudioManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.audio.IAudioManager";
   public boolean hasAudioFocus(java.lang.String pkgName) throws android.os.RemoteException;
 }

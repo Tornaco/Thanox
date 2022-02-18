@@ -3,7 +3,6 @@
  */
 package github.tornaco.android.thanos.core;
 // DO NOT CHANGE ORDER.
-
 public interface IThanos extends android.os.IInterface
 {
   /** Default implementation for IThanos. */
@@ -134,7 +133,6 @@ public interface IThanos extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.IThanos
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.IThanos";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -169,6 +167,9 @@ public interface IThanos extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_getServiceManager:
         {
           data.enforceInterface(descriptor);
@@ -452,8 +453,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServiceManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getServiceManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getServiceManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.os.IServiceManager.Stub.asInterface(_reply.readStrongBinder());
@@ -472,8 +475,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPrefManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPrefManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getPrefManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.pref.IPrefManager.Stub.asInterface(_reply.readStrongBinder());
@@ -492,8 +497,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivityManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getActivityManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getActivityManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.app.IActivityManager.Stub.asInterface(_reply.readStrongBinder());
@@ -512,8 +519,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPkgManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPkgManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getPkgManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.pm.IPkgManager.Stub.asInterface(_reply.readStrongBinder());
@@ -532,8 +541,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivityStackSupervisor, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getActivityStackSupervisor();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getActivityStackSupervisor();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor.Stub.asInterface(_reply.readStrongBinder());
@@ -552,8 +563,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPrivacyManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPrivacyManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getPrivacyManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.secure.IPrivacyManager.Stub.asInterface(_reply.readStrongBinder());
@@ -572,8 +585,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAppOpsService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAppOpsService();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAppOpsService();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.secure.ops.IAppOpsService.Stub.asInterface(_reply.readStrongBinder());
@@ -592,8 +607,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPushManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPushManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getPushManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.push.IPushManager.Stub.asInterface(_reply.readStrongBinder());
@@ -612,8 +629,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getNotificationManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getNotificationManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getNotificationManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.n.INotificationManager.Stub.asInterface(_reply.readStrongBinder());
@@ -632,8 +651,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAudioManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAudioManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAudioManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.audio.IAudioManager.Stub.asInterface(_reply.readStrongBinder());
@@ -652,8 +673,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getProfileManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getProfileManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getProfileManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.profile.IProfileManager.Stub.asInterface(_reply.readStrongBinder());
@@ -672,8 +695,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getBackupAgent, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getBackupAgent();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getBackupAgent();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.backup.IBackupAgent.Stub.asInterface(_reply.readStrongBinder());
@@ -692,8 +717,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getWindowManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getWindowManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getWindowManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.wm.IWindowManager.Stub.asInterface(_reply.readStrongBinder());
@@ -712,8 +739,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPowerManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPowerManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getPowerManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.power.IPowerManager.Stub.asInterface(_reply.readStrongBinder());
@@ -732,8 +761,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInputManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getInputManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getInputManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.input.IInputManager.Stub.asInterface(_reply.readStrongBinder());
@@ -759,9 +790,11 @@ public interface IThanos extends android.os.IInterface
           }
           _data.writeStrongBinder((((subscriber!=null))?(subscriber.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerEventSubscriber, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().registerEventSubscriber(filter, subscriber);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().registerEventSubscriber(filter, subscriber);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -778,9 +811,11 @@ public interface IThanos extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((subscriber!=null))?(subscriber.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterEventSubscriber, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().unRegisterEventSubscriber(subscriber);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().unRegisterEventSubscriber(subscriber);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -797,8 +832,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_fingerPrint, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().fingerPrint();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().fingerPrint();
+            }
           }
           _reply.readException();
           _result = _reply.readString();
@@ -817,8 +854,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getVersionName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getVersionName();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getVersionName();
+            }
           }
           _reply.readException();
           _result = _reply.readString();
@@ -837,8 +876,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_whoAreYou, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().whoAreYou();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().whoAreYou();
+            }
           }
           _reply.readException();
           _result = _reply.readString();
@@ -857,8 +898,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isLoggingEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isLoggingEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isLoggingEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -877,9 +920,11 @@ public interface IThanos extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setLoggingEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setLoggingEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setLoggingEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -897,8 +942,10 @@ public interface IThanos extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(feature);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasFeature, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasFeature(feature);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().hasFeature(feature);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -917,8 +964,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasFrameworkInitializeError, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasFrameworkInitializeError();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().hasFrameworkInitializeError();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -938,8 +987,10 @@ public interface IThanos extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pluginAlias);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPluginLogger, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPluginLogger(pluginAlias);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getPluginLogger(pluginAlias);
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.IPluginLogger.Stub.asInterface(_reply.readStrongBinder());
@@ -958,8 +1009,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInfiniteZ, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getInfiniteZ();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getInfiniteZ();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.app.infinite.InfiniteZ.Stub.asInterface(_reply.readStrongBinder());
@@ -978,8 +1031,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPatchingSource, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPatchingSource();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getPatchingSource();
+            }
           }
           _reply.readException();
           _result = _reply.readString();
@@ -998,8 +1053,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRS, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRS();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRS();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.plus.IRS.Stub.asInterface(_reply.readStrongBinder());
@@ -1018,8 +1075,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getUsageStatsManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getUsageStatsManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getUsageStatsManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.app.usage.IUsageStatsManager.Stub.asInterface(_reply.readStrongBinder());
@@ -1038,8 +1097,10 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPushDelegateManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPushDelegateManager();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getPushDelegateManager();
+            }
           }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager.Stub.asInterface(_reply.readStrongBinder());
@@ -1099,6 +1160,7 @@ public interface IThanos extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.IThanos";
   public github.tornaco.android.thanos.core.os.IServiceManager getServiceManager() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.pref.IPrefManager getPrefManager() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.app.IActivityManager getActivityManager() throws android.os.RemoteException;

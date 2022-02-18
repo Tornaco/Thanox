@@ -23,7 +23,6 @@ public interface IUsageStatsManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.usage.IUsageStatsManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.usage.IUsageStatsManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -58,6 +57,9 @@ public interface IUsageStatsManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_queryUsageStats:
         {
           data.enforceInterface(descriptor);
@@ -130,8 +132,10 @@ public interface IUsageStatsManager extends android.os.IInterface
           _data.writeLong(beginTime);
           _data.writeLong(endTime);
           boolean _status = mRemote.transact(Stub.TRANSACTION_queryUsageStats, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().queryUsageStats(intervalType, beginTime, endTime);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().queryUsageStats(intervalType, beginTime, endTime);
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(android.app.usage.UsageStats.CREATOR);
@@ -152,8 +156,10 @@ public interface IUsageStatsManager extends android.os.IInterface
           _data.writeLong(beginTime);
           _data.writeLong(endTime);
           boolean _status = mRemote.transact(Stub.TRANSACTION_queryAndAggregateUsageStats, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().queryAndAggregateUsageStats(beginTime, endTime);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().queryAndAggregateUsageStats(beginTime, endTime);
+            }
           }
           _reply.readException();
           {
@@ -199,6 +205,7 @@ public interface IUsageStatsManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.usage.IUsageStatsManager";
   public java.util.List<android.app.usage.UsageStats> queryUsageStats(int intervalType, long beginTime, long endTime) throws android.os.RemoteException;
   public java.util.Map<java.lang.String,android.app.usage.UsageStats> queryAndAggregateUsageStats(long beginTime, long endTime) throws android.os.RemoteException;
 }

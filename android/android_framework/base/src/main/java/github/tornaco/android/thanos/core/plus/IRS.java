@@ -3,24 +3,20 @@
  */
 package github.tornaco.android.thanos.core.plus;
 // Remote Server
-
 public interface IRS extends android.os.IInterface
 {
   /** Default implementation for IRS. */
   public static class Default implements github.tornaco.android.thanos.core.plus.IRS
   {
     // Bind code.
-
     @Override public void bc(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException
     {
     }
     // Verify binding.
-
     @Override public void vb(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException
     {
     }
     // Set generated id.
-
     @Override public void sid(java.lang.String deviceId) throws android.os.RemoteException
     {
     }
@@ -32,7 +28,6 @@ public interface IRS extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.plus.IRS
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.plus.IRS";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -67,6 +62,9 @@ public interface IRS extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_bc:
         {
           data.enforceInterface(descriptor);
@@ -124,7 +122,6 @@ public interface IRS extends android.os.IInterface
         return DESCRIPTOR;
       }
       // Bind code.
-
       @Override public void bc(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -135,9 +132,11 @@ public interface IRS extends android.os.IInterface
           _data.writeString(deviceId);
           _data.writeStrongBinder((((cb!=null))?(cb.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_bc, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().bc(code, deviceId, cb);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().bc(code, deviceId, cb);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -147,7 +146,6 @@ public interface IRS extends android.os.IInterface
         }
       }
       // Verify binding.
-
       @Override public void vb(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -158,9 +156,11 @@ public interface IRS extends android.os.IInterface
           _data.writeString(deviceId);
           _data.writeStrongBinder((((cb!=null))?(cb.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_vb, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().vb(code, deviceId, cb);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().vb(code, deviceId, cb);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -170,7 +170,6 @@ public interface IRS extends android.os.IInterface
         }
       }
       // Set generated id.
-
       @Override public void sid(java.lang.String deviceId) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -179,9 +178,11 @@ public interface IRS extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(deviceId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_sid, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().sid(deviceId);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().sid(deviceId);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -212,13 +213,11 @@ public interface IRS extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.plus.IRS";
   // Bind code.
-
   public void bc(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException;
   // Verify binding.
-
   public void vb(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException;
   // Set generated id.
-
   public void sid(java.lang.String deviceId) throws android.os.RemoteException;
 }

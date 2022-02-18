@@ -157,7 +157,6 @@ public interface IProfileManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.profile.IProfileManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IProfileManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -192,6 +191,9 @@ public interface IProfileManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_setAutoApplyForNewInstalledAppsEnabled:
         {
           data.enforceInterface(descriptor);
@@ -628,9 +630,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setAutoApplyForNewInstalledAppsEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setAutoApplyForNewInstalledAppsEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setAutoApplyForNewInstalledAppsEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -647,8 +651,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isAutoApplyForNewInstalledAppsEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isAutoApplyForNewInstalledAppsEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isAutoApplyForNewInstalledAppsEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -669,9 +675,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           _data.writeInt(format);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addRule(ruleJson, callback, format);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().addRule(ruleJson, callback, format);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -688,9 +696,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(ruleId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_deleteRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().deleteRule(ruleId);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().deleteRule(ruleId);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -708,8 +718,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(ruleId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_enableRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().enableRule(ruleId);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().enableRule(ruleId);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -729,8 +741,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(ruleId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_disableRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().disableRule(ruleId);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().disableRule(ruleId);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -750,8 +764,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(ruleId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isRuleEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isRuleEnabled(ruleId);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isRuleEnabled(ruleId);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -771,8 +787,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(ruleId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isRuleExists, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isRuleExists(ruleId);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isRuleExists(ruleId);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -793,9 +811,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           _data.writeInt(format);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().checkRule(ruleJson, callback, format);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().checkRule(ruleJson, callback, format);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -812,8 +832,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllRules, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAllRules();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAllRules();
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArray(github.tornaco.android.thanos.core.profile.RuleInfo.CREATOR);
@@ -832,8 +854,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getEnabledRules, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getEnabledRules();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getEnabledRules();
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArray(github.tornaco.android.thanos.core.profile.RuleInfo.CREATOR);
@@ -852,9 +876,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setProfileEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setProfileEnabled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setProfileEnabled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -871,8 +897,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isProfileEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isProfileEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isProfileEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -893,8 +921,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeString(varName);
           _data.writeStringArray(varArray);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addGlobalRuleVar, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().addGlobalRuleVar(varName, varArray);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().addGlobalRuleVar(varName, varArray);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -915,8 +945,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeString(varName);
           _data.writeStringArray(varArray);
           boolean _status = mRemote.transact(Stub.TRANSACTION_appendGlobalRuleVar, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().appendGlobalRuleVar(varName, varArray);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().appendGlobalRuleVar(varName, varArray);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -936,8 +968,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(varName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_removeGlobalRuleVar, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().removeGlobalRuleVar(varName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().removeGlobalRuleVar(varName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -956,8 +990,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllGlobalRuleVarNames, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAllGlobalRuleVarNames();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAllGlobalRuleVarNames();
+            }
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -977,8 +1013,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(varName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getGlobalRuleVarByName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getGlobalRuleVarByName(varName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getGlobalRuleVarByName(varName);
+            }
           }
           _reply.readException();
           _result = _reply.createStringArray();
@@ -997,8 +1035,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllGlobalRuleVar, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAllGlobalRuleVar();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAllGlobalRuleVar();
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArray(github.tornaco.android.thanos.core.profile.GlobalVar.CREATOR);
@@ -1018,8 +1058,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(varName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isGlobalRuleVarByNameExists, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isGlobalRuleVarByNameExists(varName);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isGlobalRuleVarByNameExists(varName);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1038,9 +1080,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setProfileEngineUiAutomationEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setProfileEngineUiAutomationEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setProfileEngineUiAutomationEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1057,8 +1101,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isProfileEngineUiAutomationEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isProfileEngineUiAutomationEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isProfileEngineUiAutomationEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1077,9 +1123,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setProfileEnginePushEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setProfileEnginePushEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setProfileEnginePushEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1096,8 +1144,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isProfileEnginePushEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isProfileEnginePushEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isProfileEnginePushEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1116,9 +1166,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setShellSuSupportInstalled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setShellSuSupportInstalled(enable);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setShellSuSupportInstalled(enable);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1135,8 +1187,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isShellSuSupportInstalled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isShellSuSupportInstalled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().isShellSuSupportInstalled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1162,8 +1216,10 @@ public interface IProfileManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_addConfigTemplate, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().addConfigTemplate(template);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().addConfigTemplate(template);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1189,8 +1245,10 @@ public interface IProfileManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_deleteConfigTemplate, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().deleteConfigTemplate(template);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().deleteConfigTemplate(template);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1209,8 +1267,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllConfigTemplates, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAllConfigTemplates();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAllConfigTemplates();
+            }
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.profile.ConfigTemplate.CREATOR);
@@ -1230,8 +1290,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getConfigTemplateById, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getConfigTemplateById(id);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getConfigTemplateById(id);
+            }
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -1255,9 +1317,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setAutoConfigTemplateSelection, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setAutoConfigTemplateSelection(id);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setAutoConfigTemplateSelection(id);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1274,8 +1338,10 @@ public interface IProfileManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAutoConfigTemplateSelectionId, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAutoConfigTemplateSelectionId();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getAutoConfigTemplateSelectionId();
+            }
           }
           _reply.readException();
           _result = _reply.readString();
@@ -1302,8 +1368,10 @@ public interface IProfileManager extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_applyConfigTemplateForPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().applyConfigTemplateForPackage(packageName, template);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().applyConfigTemplateForPackage(packageName, template);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1324,9 +1392,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           _data.writeInt(format);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addRuleIfNotExists, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addRuleIfNotExists(ruleJson, callback, format);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().addRuleIfNotExists(ruleJson, callback, format);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1344,9 +1414,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeString(factValue);
           _data.writeLong(delayMills);
           boolean _status = mRemote.transact(Stub.TRANSACTION_publishStringFact, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().publishStringFact(factValue, delayMills);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().publishStringFact(factValue, delayMills);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1366,9 +1438,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           _data.writeInt(format);
           boolean _status = mRemote.transact(Stub.TRANSACTION_updateRule, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().updateRule(ruleId, ruleJson, callback, format);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().updateRule(ruleId, ruleJson, callback, format);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1385,9 +1459,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerRuleChangeListener, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().registerRuleChangeListener(listener);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().registerRuleChangeListener(listener);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1404,9 +1480,11 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterRuleChangeListener, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().unRegisterRuleChangeListener(listener);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().unRegisterRuleChangeListener(listener);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -1424,8 +1502,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(ruleId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRuleById, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRuleById(ruleId);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getRuleById(ruleId);
+            }
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -1499,6 +1579,7 @@ public interface IProfileManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IProfileManager";
   public void setAutoApplyForNewInstalledAppsEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isAutoApplyForNewInstalledAppsEnabled() throws android.os.RemoteException;
   public void addRule(java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;

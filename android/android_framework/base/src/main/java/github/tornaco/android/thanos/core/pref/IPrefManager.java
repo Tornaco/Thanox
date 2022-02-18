@@ -55,7 +55,6 @@ public interface IPrefManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.pref.IPrefManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pref.IPrefManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -90,6 +89,9 @@ public interface IPrefManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_putInt:
         {
           data.enforceInterface(descriptor);
@@ -237,8 +239,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeString(key);
           _data.writeInt(value);
           boolean _status = mRemote.transact(Stub.TRANSACTION_putInt, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().putInt(key, value);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().putInt(key, value);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -259,8 +263,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeString(key);
           _data.writeInt(def);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInt, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getInt(key, def);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getInt(key, def);
+            }
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -281,8 +287,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeString(key);
           _data.writeString(value);
           boolean _status = mRemote.transact(Stub.TRANSACTION_putString, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().putString(key, value);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().putString(key, value);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -303,8 +311,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeString(key);
           _data.writeString(def);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getString, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getString(key, def);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getString(key, def);
+            }
           }
           _reply.readException();
           _result = _reply.readString();
@@ -325,8 +335,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeString(key);
           _data.writeInt(((value)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_putBoolean, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().putBoolean(key, value);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().putBoolean(key, value);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -347,8 +359,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeString(key);
           _data.writeInt(((def)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getBoolean, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getBoolean(key, def);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getBoolean(key, def);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -369,8 +383,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeString(key);
           _data.writeLong(value);
           boolean _status = mRemote.transact(Stub.TRANSACTION_putLong, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().putLong(key, value);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().putLong(key, value);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -391,8 +407,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeString(key);
           _data.writeLong(def);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getLong, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getLong(key, def);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().getLong(key, def);
+            }
           }
           _reply.readException();
           _result = _reply.readLong();
@@ -412,8 +430,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerSettingsChangeListener, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().registerSettingsChangeListener(listener);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().registerSettingsChangeListener(listener);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -433,8 +453,10 @@ public interface IPrefManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterSettingsChangeListener, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().unRegisterSettingsChangeListener(listener);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().unRegisterSettingsChangeListener(listener);
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -474,6 +496,7 @@ public interface IPrefManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pref.IPrefManager";
   public boolean putInt(java.lang.String key, int value) throws android.os.RemoteException;
   public int getInt(java.lang.String key, int def) throws android.os.RemoteException;
   public boolean putString(java.lang.String key, java.lang.String value) throws android.os.RemoteException;

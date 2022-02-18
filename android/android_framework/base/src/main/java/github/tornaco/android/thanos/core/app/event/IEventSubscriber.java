@@ -18,7 +18,6 @@ public interface IEventSubscriber extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.event.IEventSubscriber
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.event.IEventSubscriber";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -53,6 +52,9 @@ public interface IEventSubscriber extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_onEvent:
         {
           data.enforceInterface(descriptor);
@@ -102,9 +104,11 @@ public interface IEventSubscriber extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onEvent, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onEvent(e);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onEvent(e);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -133,5 +137,6 @@ public interface IEventSubscriber extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.event.IEventSubscriber";
   public void onEvent(github.tornaco.android.thanos.core.app.event.ThanosEvent e) throws android.os.RemoteException;
 }

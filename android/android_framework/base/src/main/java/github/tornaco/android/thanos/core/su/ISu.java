@@ -19,7 +19,6 @@ public interface ISu extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.su.ISu
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.su.ISu";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -54,6 +53,9 @@ public interface ISu extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_exe:
         {
           data.enforceInterface(descriptor);
@@ -100,8 +102,10 @@ public interface ISu extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStringArray(command);
           boolean _status = mRemote.transact(Stub.TRANSACTION_exe, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().exe(command);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().exe(command);
+            }
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -137,5 +141,6 @@ public interface ISu extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.su.ISu";
   public github.tornaco.android.thanos.core.su.SuRes exe(java.lang.String[] command) throws android.os.RemoteException;
 }

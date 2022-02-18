@@ -18,7 +18,6 @@ public interface ILicensingService extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements com.android.vending.licensing.ILicensingService
   {
-    private static final java.lang.String DESCRIPTOR = "com.android.vending.licensing.ILicensingService";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -53,6 +52,9 @@ public interface ILicensingService extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_checkLicense:
         {
           data.enforceInterface(descriptor);
@@ -95,9 +97,11 @@ public interface ILicensingService extends android.os.IInterface
           _data.writeString(packageName);
           _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkLicense, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().checkLicense(nonce, packageName, listener);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().checkLicense(nonce, packageName, listener);
+              return;
+            }
           }
         }
         finally {
@@ -124,5 +128,6 @@ public interface ILicensingService extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "com.android.vending.licensing.ILicensingService";
   public void checkLicense(long nonce, java.lang.String packageName, com.android.vending.licensing.ILicenseResultListener listener) throws android.os.RemoteException;
 }

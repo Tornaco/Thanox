@@ -24,7 +24,6 @@ public interface IPackageSetChangeListener extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.pm.IPackageSetChangeListener
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pm.IPackageSetChangeListener";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -59,6 +58,9 @@ public interface IPackageSetChangeListener extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_onPackageSetAdded:
         {
           data.enforceInterface(descriptor);
@@ -111,9 +113,11 @@ public interface IPackageSetChangeListener extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgSetId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onPackageSetAdded, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onPackageSetAdded(pkgSetId);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onPackageSetAdded(pkgSetId);
+              return;
+            }
           }
         }
         finally {
@@ -127,9 +131,11 @@ public interface IPackageSetChangeListener extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgSetId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onPackageSetRemoved, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onPackageSetRemoved(pkgSetId);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onPackageSetRemoved(pkgSetId);
+              return;
+            }
           }
         }
         finally {
@@ -143,9 +149,11 @@ public interface IPackageSetChangeListener extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgSetId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onPackageSetChanged, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onPackageSetChanged(pkgSetId);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onPackageSetChanged(pkgSetId);
+              return;
+            }
           }
         }
         finally {
@@ -174,6 +182,7 @@ public interface IPackageSetChangeListener extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pm.IPackageSetChangeListener";
   public void onPackageSetAdded(java.lang.String pkgSetId) throws android.os.RemoteException;
   public void onPackageSetRemoved(java.lang.String pkgSetId) throws android.os.RemoteException;
   public void onPackageSetChanged(java.lang.String pkgSetId) throws android.os.RemoteException;

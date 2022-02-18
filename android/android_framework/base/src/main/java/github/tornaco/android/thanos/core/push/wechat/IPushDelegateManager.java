@@ -68,7 +68,6 @@ public interface IPushDelegateManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -103,6 +102,9 @@ public interface IPushDelegateManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_wechatEnabled:
         {
           data.enforceInterface(descriptor);
@@ -266,8 +268,10 @@ public interface IPushDelegateManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_wechatEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().wechatEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().wechatEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -286,9 +290,11 @@ public interface IPushDelegateManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setWeChatEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setWeChatEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setWeChatEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -305,8 +311,10 @@ public interface IPushDelegateManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_wechatSoundEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().wechatSoundEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().wechatSoundEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -325,9 +333,11 @@ public interface IPushDelegateManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setWechatSoundEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setWechatSoundEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setWechatSoundEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -344,8 +354,10 @@ public interface IPushDelegateManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_wechatContentEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().wechatContentEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().wechatContentEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -364,9 +376,11 @@ public interface IPushDelegateManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setWechatContentEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setWechatContentEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setWechatContentEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -383,8 +397,10 @@ public interface IPushDelegateManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_wechatVibrateEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().wechatVibrateEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().wechatVibrateEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -403,9 +419,11 @@ public interface IPushDelegateManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setWechatVibrateEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setWechatVibrateEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setWechatVibrateEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -421,9 +439,11 @@ public interface IPushDelegateManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_mockWechatMessage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().mockWechatMessage();
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().mockWechatMessage();
+              return;
+            }
           }
           _reply.readException();
         }
@@ -440,8 +460,10 @@ public interface IPushDelegateManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_startWechatOnPushEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().startWechatOnPushEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().startWechatOnPushEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -460,9 +482,11 @@ public interface IPushDelegateManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setStartWechatOnPushEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setStartWechatOnPushEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setStartWechatOnPushEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -479,8 +503,10 @@ public interface IPushDelegateManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_skipIfWeChatAppRunningEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().skipIfWeChatAppRunningEnabled();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().skipIfWeChatAppRunningEnabled();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -499,9 +525,11 @@ public interface IPushDelegateManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSkipIfWeChatAppRunningEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setSkipIfWeChatAppRunningEnabled(enabled);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().setSkipIfWeChatAppRunningEnabled(enabled);
+              return;
+            }
           }
           _reply.readException();
         }
@@ -518,8 +546,10 @@ public interface IPushDelegateManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_shouldHookBroadcastPerformResult, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().shouldHookBroadcastPerformResult();
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().shouldHookBroadcastPerformResult();
+            }
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -546,8 +576,10 @@ public interface IPushDelegateManager extends android.os.IInterface
           }
           _data.writeInt(resultCode);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onHookBroadcastPerformResult, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().onHookBroadcastPerformResult(intent, resultCode);
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              return getDefaultImpl().onHookBroadcastPerformResult(intent, resultCode);
+            }
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -592,6 +624,7 @@ public interface IPushDelegateManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager";
   public boolean wechatEnabled() throws android.os.RemoteException;
   public void setWeChatEnabled(boolean enabled) throws android.os.RemoteException;
   public boolean wechatSoundEnabled() throws android.os.RemoteException;

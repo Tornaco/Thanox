@@ -18,7 +18,6 @@ public interface ILicenseResultListener extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements com.android.vending.licensing.ILicenseResultListener
   {
-    private static final java.lang.String DESCRIPTOR = "com.android.vending.licensing.ILicenseResultListener";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -53,6 +52,9 @@ public interface ILicenseResultListener extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_verifyLicense:
         {
           data.enforceInterface(descriptor);
@@ -95,9 +97,11 @@ public interface ILicenseResultListener extends android.os.IInterface
           _data.writeString(signedData);
           _data.writeString(signature);
           boolean _status = mRemote.transact(Stub.TRANSACTION_verifyLicense, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().verifyLicense(responseCode, signedData, signature);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().verifyLicense(responseCode, signedData, signature);
+              return;
+            }
           }
         }
         finally {
@@ -124,5 +128,6 @@ public interface ILicenseResultListener extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "com.android.vending.licensing.ILicenseResultListener";
   public void verifyLicense(int responseCode, java.lang.String signedData, java.lang.String signature) throws android.os.RemoteException;
 }

@@ -27,7 +27,6 @@ public interface IBackupCallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.backup.IBackupCallback
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.backup.IBackupCallback";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -62,6 +61,9 @@ public interface IBackupCallback extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_onBackupFinished:
         {
           data.enforceInterface(descriptor);
@@ -127,9 +129,11 @@ public interface IBackupCallback extends android.os.IInterface
           _data.writeString(domain);
           _data.writeString(path);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onBackupFinished, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onBackupFinished(domain, path);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onBackupFinished(domain, path);
+              return;
+            }
           }
         }
         finally {
@@ -144,9 +148,11 @@ public interface IBackupCallback extends android.os.IInterface
           _data.writeString(domain);
           _data.writeString(path);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onRestoreFinished, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onRestoreFinished(domain, path);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onRestoreFinished(domain, path);
+              return;
+            }
           }
         }
         finally {
@@ -160,9 +166,11 @@ public interface IBackupCallback extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(message);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onFail, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onFail(message);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onFail(message);
+              return;
+            }
           }
         }
         finally {
@@ -176,9 +184,11 @@ public interface IBackupCallback extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(progressMessage);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onProgress, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onProgress(progressMessage);
-            return;
+          if (!_status) {
+            if (getDefaultImpl() != null) {
+              getDefaultImpl().onProgress(progressMessage);
+              return;
+            }
           }
         }
         finally {
@@ -208,6 +218,7 @@ public interface IBackupCallback extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.backup.IBackupCallback";
   public void onBackupFinished(java.lang.String domain, java.lang.String path) throws android.os.RemoteException;
   public void onRestoreFinished(java.lang.String domain, java.lang.String path) throws android.os.RemoteException;
   public void onFail(java.lang.String message) throws android.os.RemoteException;

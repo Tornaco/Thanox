@@ -13,9 +13,9 @@ import java.util.Arrays;
 import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.util.PkgUtils;
-import github.tornaco.android.thanox.magisk.bridge.proxy.BinderProxy;
 import github.tornaco.android.thanox.magisk.bridge.proxy.ProxyProvider;
 import util.ExceptionTransformedInvocationHandler;
+import util.os.BinderProxy;
 
 public class AppOpsManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
     private static final boolean DEBUG_OPS = false;

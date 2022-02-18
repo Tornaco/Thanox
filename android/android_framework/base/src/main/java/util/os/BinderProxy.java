@@ -1,4 +1,4 @@
-package github.tornaco.android.thanox.magisk.bridge.proxy;
+package util.os;
 
 import android.os.IBinder;
 import android.os.IInterface;

@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanox.magisk.bridge.proxy.Args;
-import github.tornaco.android.thanox.magisk.bridge.proxy.BinderProxy;
 import github.tornaco.android.thanox.magisk.bridge.proxy.ProxyProvider;
 import util.ExceptionTransformedInvocationHandler;
 import util.ObjectsUtils;
+import util.os.BinderProxy;
 
 public class ActivityTaskManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
     @Override

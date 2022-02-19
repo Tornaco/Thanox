@@ -3,15 +3,13 @@ package github.tornaco.android.thanox.magisk.bridge;
 
 import android.app.ActivityManager;
 import android.app.ActivityTaskManager;
+import android.app.AppGlobals;
 import android.app.IActivityManager;
 import android.app.IActivityTaskManager;
 import android.content.Context;
 import android.os.IBinder;
-import android.os.IClientCallback;
-import android.os.IServiceCallback;
-import android.os.IServiceManager;
-import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Singleton;
 
@@ -19,23 +17,34 @@ import com.elvishew.xlog.XLog;
 
 import java.util.Arrays;
 
+import github.tornaco.android.thanos.core.util.PkgUtils;
+import github.tornaco.android.thanox.magisk.bridge.proxy.Proxies;
 import github.tornaco.android.thanox.magisk.bridge.proxy.am.ActivityManagerProxyProvider;
 import github.tornaco.android.thanox.magisk.bridge.proxy.am.ActivityTaskManagerProxyProvider;
-import github.tornaco.android.thanox.magisk.bridge.proxy.Proxies;
-import lombok.AllArgsConstructor;
 import util.XposedHelpers;
 
 public class AppProcessSystemServiceHookInstaller {
-    public static void install() {
-        // Remote binder ins.
-        AppProcessSystemServiceHookInstaller.installIServiceManagerHook();
-        // These service set into ServiceManager by AMS when bind add.
-        AppProcessSystemServiceHookInstaller.installServiceManagerCacheHook();
-        AppProcessSystemServiceHookInstaller.installActivityManager();
-        AppProcessSystemServiceHookInstaller.installActivityTaskManager();
+    private final String processName;
+
+    public AppProcessSystemServiceHookInstaller(String processName) {
+        this.processName = processName;
     }
 
-    private static final Singleton<IActivityManager> IActivityManagerSingletonProxy =
+    public void install() {
+        String initialPackage = AppGlobals.getInitialPackage();
+        XLog.d("AppProcessSystemServiceHookInstaller about install to process: %s, initialPackage: %s", processName, initialPackage);
+        if (!TextUtils.isEmpty(initialPackage) && PkgUtils.isAndroid(initialPackage)) {
+            XLog.e("AppProcessSystemServiceHookInstaller skip install to android!!!");
+            return;
+        }
+        // These service set into ServiceManager by AMS when bind add.
+        // We should only install hooks for no-system-server process
+        installServiceManagerCacheHook();
+        installActivityManager();
+        installActivityTaskManager();
+    }
+
+    private final Singleton<IActivityManager> IActivityManagerSingletonProxy =
             new Singleton<IActivityManager>() {
                 @Override
                 protected IActivityManager create() {
@@ -47,7 +56,7 @@ public class AppProcessSystemServiceHookInstaller {
                 }
             };
 
-    private static final Singleton<IActivityTaskManager> IActivityTaskManagerSingleton =
+    private final Singleton<IActivityTaskManager> IActivityTaskManagerSingleton =
             new Singleton<IActivityTaskManager>() {
                 @Override
                 protected IActivityTaskManager create() {
@@ -60,19 +69,19 @@ public class AppProcessSystemServiceHookInstaller {
             };
 
 
-    private static void installActivityManager() {
+    private void installActivityManager() {
         // private static final Singleton<IActivityManager> IActivityManagerSingleton
         XposedHelpers.setStaticObjectField(ActivityManager.class, "IActivityManagerSingleton", IActivityManagerSingletonProxy);
         XLog.d("installActivityManager done");
     }
 
-    private static void installActivityTaskManager() {
+    private void installActivityTaskManager() {
         // private static final Singleton<IActivityTaskManager> IActivityTaskManagerSingleton
         XposedHelpers.setStaticObjectField(ActivityTaskManager.class, "IActivityTaskManagerSingleton", IActivityTaskManagerSingleton);
         XLog.d("installActivityTaskManager done");
     }
 
-    private static void installServiceManagerCacheHook() {
+    private void installServiceManagerCacheHook() {
         @SuppressWarnings("unchecked")
         ArrayMap<String, IBinder> arrayMap = (ArrayMap<String, IBinder>) XposedHelpers.getStaticObjectField(ServiceManager.class, "sCache");
         XLog.d("installServiceManagerCacheHook.. %s", Arrays.toString(arrayMap.keySet().toArray()));
@@ -87,89 +96,6 @@ public class AppProcessSystemServiceHookInstaller {
             } else {
                 XLog.d("SMProxy#installServiceManagerHook， legacy == null， for: %s", name);
             }
-        }
-    }
-
-    private static void installIServiceManagerHook() {
-        // getIServiceManager
-        IServiceManager originalSM = (IServiceManager) XposedHelpers.callStaticMethod(ServiceManager.class, "getIServiceManager");
-        XLog.d("installServiceManagerHook, originalSM=" + originalSM);
-        if (originalSM instanceof SMProxy) {
-            XLog.d("installServiceManagerHook, proxySM already installed...");
-            return;
-        }
-        IServiceManager proxySM = new SMProxy(originalSM);
-        // private static IServiceManager sServiceManager;
-        XposedHelpers.setStaticObjectField(ServiceManager.class, "sServiceManager", proxySM);
-        XLog.d("installServiceManagerHook, proxySM installed.");
-    }
-
-    private static class SMProxy implements IServiceManager {
-        private final IServiceManager orig;
-
-        public SMProxy(IServiceManager orig) {
-            this.orig = orig;
-        }
-
-        @Override
-        public IBinder getService(String name) throws RemoteException {
-            XLog.d("SMProxy#getService: %s", name);
-            IBinder legacy = orig.getService(name);
-            if (legacy == null) {
-                XLog.d("SMProxy#getService， legacy == null， for: %s", name);
-                return null;
-            }
-            IBinder proxyBinder = Proxies.forBinderInternal(name, legacy);
-            if (proxyBinder != null) {
-                return proxyBinder;
-            }
-            return legacy;
-        }
-
-        @Override
-        public IBinder checkService(String name) throws RemoteException {
-            return orig.checkService(name);
-        }
-
-        @Override
-        public void addService(String name, IBinder service, boolean allowIsolated, int dumpPriority) throws RemoteException {
-            XLog.d("SMProxy addService: %s %s", name, service);
-            orig.addService(name, service, allowIsolated, dumpPriority);
-        }
-
-        @Override
-        public String[] listServices(int dumpPriority) throws RemoteException {
-            return orig.listServices(dumpPriority);
-        }
-
-        @Override
-        public void registerForNotifications(String name, IServiceCallback callback) throws RemoteException {
-            orig.registerForNotifications(name, callback);
-        }
-
-        @Override
-        public void unregisterForNotifications(String name, IServiceCallback callback) throws RemoteException {
-            orig.unregisterForNotifications(name, callback);
-        }
-
-        @Override
-        public boolean isDeclared(String name) throws RemoteException {
-            return orig.isDeclared(name);
-        }
-
-        @Override
-        public void registerClientCallback(String name, IBinder service, IClientCallback callback) throws RemoteException {
-            orig.registerClientCallback(name, service, callback);
-        }
-
-        @Override
-        public void tryUnregisterService(String name, IBinder service) throws RemoteException {
-            orig.tryUnregisterService(name, service);
-        }
-
-        @Override
-        public IBinder asBinder() {
-            return orig.asBinder();
         }
     }
 }

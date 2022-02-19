@@ -12,7 +12,6 @@ public class Proxies {
     private static final List<ProxyProvider> PROVIDERS_CACHE = Lists.newArrayList(
             new NotificationManagerProxyProvider()
     );
-    private static final List<ProxyProvider> PROVIDERS_BI = Lists.newArrayList();
 
     public static IBinder forCached(String name, IBinder legacyBinder) {
         if (name == null || legacyBinder == null) {
@@ -26,20 +25,4 @@ public class Proxies {
         }
         return null;
     }
-
-
-    public static IBinder forBinderInternal(String name, IBinder legacyBinder) {
-        if (name == null || legacyBinder == null) {
-            return null;
-        }
-        for (ProxyProvider p : PROVIDERS_BI) {
-            IBinder pb = p.isForService(name) ? p.provide(legacyBinder) : null;
-            if (pb != null) {
-                return pb;
-            }
-        }
-        return null;
-    }
-
-
 }

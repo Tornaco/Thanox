@@ -6,6 +6,7 @@ import android.app.Application;
 import android.app.LoadedApk;
 import android.content.Context;
 import android.os.Build;
+import android.os.ServiceManager;
 
 import com.android.server.LocalServices;
 import com.elvishew.xlog.XLog;
@@ -57,40 +58,45 @@ public class ThanoxHookImpl implements IThanoxHook {
                 @Override
                 public void runSafety() {
                     ActivityThread at = ActivityThread.currentActivityThread();
-                    XLog.d("ActivityThread.currentActivityThread()= " + at);
+                    XLog.w("ActivityThread.currentActivityThread()= " + at);
                     if (at == null) {
                         return;
                     }
-
                     Application application = at.getApplication();
-                    XLog.d("ActivityThread.getApplication()= " + application);
+                    XLog.w("ActivityThread.getApplication()= " + application);
                     Context context = at.getSystemContext();
-                    XLog.d("ActivityThread.getSystemContext()= " + context);
+                    XLog.w("ActivityThread.getSystemContext()= " + context);
 
                     LoadedApk loadedApk = application.mLoadedApk;
-                    XLog.d("ActivityThread.loadedApk()= " + loadedApk);
+                    XLog.w("ActivityThread.loadedApk()= " + loadedApk);
 
                     final ClassLoader classLoader = loadedApk.getClassLoader();
-                    XLog.d("ActivityThread.classLoader= " + classLoader);
+                    XLog.w("ActivityThread.classLoader= " + classLoader);
 
                     if (context != null) {
                         BootStrap.main("Magisk", FEATURES.toArray(new String[0]));
                         BootStrap.start(context);
                         BootStrap.ready();
                         SystemServerHooks.install(classLoader);
-                        XLog.d("Invoke BootStrap!");
+                        XLog.w("Invoke BootStrap!");
                     }
                 }
             });
         }
     }
 
+    @SuppressWarnings("BusyWait")
     private void waitForSystemReady(Runnable runnable) {
+        XLog.w("waitForSystemReady, current thread: %s", Thread.currentThread());
         new Thread(() -> {
+            ServiceManager.waitForService("package");
+            ServiceManager.waitForService("activity");
+            ServiceManager.waitForService(Context.USER_SERVICE);
+            ServiceManager.waitForService(Context.APP_OPS_SERVICE);
             while (!ActivityThread.isSystem() || !isSystemReady()) {
                 try {
-                    XLog.d("waitForSystemReady, wait 1s.");
-                    Thread.sleep(1000);
+                    XLog.d("waitForSystemReady, wait a moment.");
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     // Noop.
                 }

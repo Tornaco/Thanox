@@ -17,7 +17,7 @@ import util.ExceptionTransformedInvocationHandler;
 import util.os.BinderProxy;
 
 public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
-    private static final boolean DEBUG_AMS = true;
+    private static final boolean DEBUG_AMS = false;
 
     @Override
     public IBinder provide(IBinder legacyBinder) {

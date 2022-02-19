@@ -15,14 +15,13 @@ public class ProcessHookInstaller implements ProcessHandler {
     @Override
     public void onAppProcess(String processName) {
         XLog.d("ProcessHookInstaller onAppProcess: %s", processName);
-        // Hooks for Register.
-        // It should run early on app process start.
-        SystemServiceRegistryHookInstaller.install();
         onStartApplication(processName);
     }
 
     private void onStartApplication(String processName) {
         XLog.d("ProcessHookInstaller onStartApplication: %s", processName);
-        AppProcessSystemServiceHookInstaller.install();
+        // It should run early on app process start.
+        SystemServiceRegistryHookInstaller.install();
+        new AppProcessSystemServiceHookInstaller(processName).install();
     }
 }

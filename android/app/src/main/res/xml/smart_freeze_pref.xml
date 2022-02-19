@@ -13,12 +13,6 @@
 
         <SwitchPreferenceCompat
             android:persistent="false"
-            app:key="@string/key_smart_freeze_hide_package_change_event"
-            app:summary="@string/pre_summary_smart_freeze_hide_package_change_event"
-            app:title="@string/pre_title_smart_freeze_hide_package_change_event" />
-
-        <SwitchPreferenceCompat
-            android:persistent="false"
             app:key="@string/key_smart_freeze_screen_off_clean_up"
             app:summary="@string/pre_summary_smart_freeze_screen_off_clean_up_delay"
             app:title="@string/pre_title_smart_freeze_screen_off_clean_up_delay" />
@@ -40,6 +34,12 @@
             app:key="@string/key_smart_freeze_enable_on_launch_by_default"
             app:summary="@string/pref_summary_enable_package_on_launch_by_default"
             app:title="@string/pref_title_enable_package_on_launch_by_default" />
+
+        <SwitchPreferenceCompat
+            android:persistent="false"
+            app:key="@string/key_smart_freeze_hide_package_change_event"
+            app:summary="@string/pre_summary_smart_freeze_hide_package_change_event"
+            app:title="@string/pre_title_smart_freeze_hide_package_change_event" />
     </PreferenceCategory>
 
 </PreferenceScreen>

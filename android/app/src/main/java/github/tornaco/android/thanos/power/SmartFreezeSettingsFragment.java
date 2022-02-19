@@ -56,17 +56,15 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
 
         SwitchPreferenceCompat hidePackagePref = findPreference(getString(R.string.key_smart_freeze_hide_package_change_event));
         Objects.requireNonNull(hidePackagePref).setChecked(thanos.getPkgManager().isSmartFreezeHidePackageEventEnabled());
-        hidePackagePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                    Toast.makeText(getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-                boolean checked = (boolean) newValue;
-                thanos.getPkgManager().setSmartFreezeHidePackageEventEnabled(checked);
-                return true;
+        hidePackagePref.setEnabled(!thanos.getPkgManager().isFreezePkgWithSuspendEnabled());
+        hidePackagePref.setOnPreferenceChangeListener((preference, newValue) -> {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
+                Toast.makeText(getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                return false;
             }
+            boolean checked = (boolean) newValue;
+            thanos.getPkgManager().setSmartFreezeHidePackageEventEnabled(checked);
+            return true;
         });
 
 
@@ -77,7 +75,10 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
                         : R.string.pre_title_smart_freeze_freeze_method_disable);
         updatePrefSummary.run();
         Objects.requireNonNull(freezeMethodPref).setOnPreferenceClickListener(preference -> {
-            showSuspendOrDisablePackageDialog(res -> updatePrefSummary.run());
+            showSuspendOrDisablePackageDialog(res -> {
+                updatePrefSummary.run();
+                hidePackagePref.setEnabled(!thanos.getPkgManager().isFreezePkgWithSuspendEnabled());
+            });
             return true;
         });
 

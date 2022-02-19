@@ -27,6 +27,7 @@ public interface IRuleChangeListener extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.profile.IRuleChangeListener
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IRuleChangeListener";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -61,9 +62,6 @@ public interface IRuleChangeListener extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_onRuleEnabledStateChanged:
         {
           data.enforceInterface(descriptor);
@@ -127,11 +125,9 @@ public interface IRuleChangeListener extends android.os.IInterface
           _data.writeInt(ruleId);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_onRuleEnabledStateChanged, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onRuleEnabledStateChanged(ruleId, enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onRuleEnabledStateChanged(ruleId, enabled);
+            return;
           }
         }
         finally {
@@ -145,11 +141,9 @@ public interface IRuleChangeListener extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(ruleId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onRuleUpdated, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onRuleUpdated(ruleId);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onRuleUpdated(ruleId);
+            return;
           }
         }
         finally {
@@ -163,11 +157,9 @@ public interface IRuleChangeListener extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(ruleId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onRuleRemoved, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onRuleRemoved(ruleId);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onRuleRemoved(ruleId);
+            return;
           }
         }
         finally {
@@ -181,11 +173,9 @@ public interface IRuleChangeListener extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(ruleId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onRuleAdd, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onRuleAdd(ruleId);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onRuleAdd(ruleId);
+            return;
           }
         }
         finally {
@@ -215,7 +205,6 @@ public interface IRuleChangeListener extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IRuleChangeListener";
   public void onRuleEnabledStateChanged(int ruleId, boolean enabled) throws android.os.RemoteException;
   public void onRuleUpdated(int ruleId) throws android.os.RemoteException;
   public void onRuleRemoved(int ruleId) throws android.os.RemoteException;

@@ -59,6 +59,7 @@ public interface IAppOpsService extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.secure.ops.IAppOpsService
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.secure.ops.IAppOpsService";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -93,9 +94,6 @@ public interface IAppOpsService extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_setMode:
         {
           data.enforceInterface(descriptor);
@@ -278,11 +276,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeString(packageName);
           _data.writeInt(mode);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setMode, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setMode(code, uid, packageName, mode);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setMode(code, uid, packageName, mode);
+            return;
           }
           _reply.readException();
         }
@@ -299,11 +295,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(reqPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_resetAllModes, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().resetAllModes(reqPackageName);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().resetAllModes(reqPackageName);
+            return;
           }
           _reply.readException();
         }
@@ -323,10 +317,8 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(uid);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkOperation, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().checkOperation(code, uid, packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().checkOperation(code, uid, packageName);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -345,10 +337,8 @@ public interface IAppOpsService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isOpsEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isOpsEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isOpsEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -367,11 +357,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setOpsEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setOpsEnabled(enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setOpsEnabled(enabled);
+            return;
           }
           _reply.readException();
         }
@@ -391,11 +379,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(uid);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onStartOp, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onStartOp(token, code, uid, packageName);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onStartOp(token, code, uid, packageName);
+            return;
           }
           _reply.readException();
         }
@@ -415,11 +401,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(uid);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onFinishOp, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onFinishOp(token, code, uid, packageName);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onFinishOp(token, code, uid, packageName);
+            return;
           }
           _reply.readException();
         }
@@ -437,11 +421,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(code);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setOpRemindEnable, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setOpRemindEnable(code, enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setOpRemindEnable(code, enable);
+            return;
           }
           _reply.readException();
         }
@@ -459,10 +441,8 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(code);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isOpRemindEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isOpRemindEnabled(code);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isOpRemindEnabled(code);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -482,11 +462,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgOpRemindEnable, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setPkgOpRemindEnable(pkg, enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPkgOpRemindEnable(pkg, enable);
+            return;
           }
           _reply.readException();
         }
@@ -504,10 +482,8 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgOpRemindEnable, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isPkgOpRemindEnable(pkg);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPkgOpRemindEnable(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -529,10 +505,8 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(uid);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkOperationNonCheck, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().checkOperationNonCheck(code, uid, packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().checkOperationNonCheck(code, uid, packageName);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -551,11 +525,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_dump, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().dump(p);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().dump(p);
+            return;
           }
           _reply.readException();
         }
@@ -596,7 +568,6 @@ public interface IAppOpsService extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.secure.ops.IAppOpsService";
   public void setMode(int code, int uid, java.lang.String packageName, int mode) throws android.os.RemoteException;
   public void resetAllModes(java.lang.String reqPackageName) throws android.os.RemoteException;
   public int checkOperation(int code, int uid, java.lang.String packageName) throws android.os.RemoteException;

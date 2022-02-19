@@ -21,6 +21,7 @@ public interface IAddPackageCallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.infinite.IAddPackageCallback
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.infinite.IAddPackageCallback";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -55,9 +56,6 @@ public interface IAddPackageCallback extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_onSuccess:
         {
           data.enforceInterface(descriptor);
@@ -104,11 +102,9 @@ public interface IAddPackageCallback extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(userId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onSuccess, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onSuccess(userId);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onSuccess(userId);
+            return;
           }
         }
         finally {
@@ -123,11 +119,9 @@ public interface IAddPackageCallback extends android.os.IInterface
           _data.writeString(errorMessage);
           _data.writeInt(errorCode);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onError, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onError(errorMessage, errorCode);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onError(errorMessage, errorCode);
+            return;
           }
         }
         finally {
@@ -155,7 +149,6 @@ public interface IAddPackageCallback extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.infinite.IAddPackageCallback";
   public void onSuccess(int userId) throws android.os.RemoteException;
   public void onError(java.lang.String errorMessage, int errorCode) throws android.os.RemoteException;
 }

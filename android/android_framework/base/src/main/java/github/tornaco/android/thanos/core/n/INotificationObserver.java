@@ -21,6 +21,7 @@ public interface INotificationObserver extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.n.INotificationObserver
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.n.INotificationObserver";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -55,9 +56,6 @@ public interface INotificationObserver extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_onNewNotification:
         {
           data.enforceInterface(descriptor);
@@ -118,11 +116,9 @@ public interface INotificationObserver extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onNewNotification, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onNewNotification(record);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onNewNotification(record);
+            return;
           }
         }
         finally {
@@ -142,11 +138,9 @@ public interface INotificationObserver extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onNotificationRemoved, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onNotificationRemoved(record);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onNotificationRemoved(record);
+            return;
           }
         }
         finally {
@@ -174,7 +168,6 @@ public interface INotificationObserver extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.n.INotificationObserver";
   public void onNewNotification(github.tornaco.android.thanos.core.n.NotificationRecord record) throws android.os.RemoteException;
   public void onNotificationRemoved(github.tornaco.android.thanos.core.n.NotificationRecord record) throws android.os.RemoteException;
 }

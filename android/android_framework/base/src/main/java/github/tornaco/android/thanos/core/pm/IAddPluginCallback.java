@@ -24,6 +24,7 @@ public interface IAddPluginCallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.pm.IAddPluginCallback
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pm.IAddPluginCallback";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -58,9 +59,6 @@ public interface IAddPluginCallback extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_onPluginAdd:
         {
           data.enforceInterface(descriptor);
@@ -110,11 +108,9 @@ public interface IAddPluginCallback extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onPluginAdd, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onPluginAdd();
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onPluginAdd();
+            return;
           }
         }
         finally {
@@ -128,11 +124,9 @@ public interface IAddPluginCallback extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(message);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onFail, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onFail(message);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onFail(message);
+            return;
           }
         }
         finally {
@@ -146,11 +140,9 @@ public interface IAddPluginCallback extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(progressMessage);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onProgress, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onProgress(progressMessage);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onProgress(progressMessage);
+            return;
           }
         }
         finally {
@@ -179,7 +171,6 @@ public interface IAddPluginCallback extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pm.IAddPluginCallback";
   public void onPluginAdd() throws android.os.RemoteException;
   public void onFail(java.lang.String message) throws android.os.RemoteException;
   public void onProgress(java.lang.String progressMessage) throws android.os.RemoteException;

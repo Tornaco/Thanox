@@ -95,6 +95,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     {
     }
     // Bridge API to report app events.
+
     @Override public android.content.Intent reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException
     {
       return null;
@@ -116,6 +117,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -150,9 +152,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_checkActivity:
         {
           data.enforceInterface(descriptor);
@@ -521,10 +520,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkActivity, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().checkActivity(componentName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().checkActivity(componentName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -550,10 +547,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_replaceActivityStartingIntent, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().replaceActivityStartingIntent(intent);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().replaceActivityStartingIntent(intent);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -586,10 +581,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeString(source);
           boolean _status = mRemote.transact(Stub.TRANSACTION_shouldVerifyActivityStarting, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().shouldVerifyActivityStarting(componentName, pkg, source);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().shouldVerifyActivityStarting(componentName, pkg, source);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -625,11 +618,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInt(pid);
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_verifyActivityStarting, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().verifyActivityStarting(options, pkg, componentName, uid, pid, callback);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().verifyActivityStarting(options, pkg, componentName, uid, pid, callback);
+            return;
           }
           _reply.readException();
         }
@@ -646,10 +637,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getCurrentFrontApp, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getCurrentFrontApp();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getCurrentFrontApp();
           }
           _reply.readException();
           _result = _reply.readString();
@@ -668,11 +657,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setAppLockEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setAppLockEnabled(enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setAppLockEnabled(enabled);
+            return;
           }
           _reply.readException();
         }
@@ -689,10 +676,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isAppLockEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isAppLockEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isAppLockEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -712,10 +697,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageLocked, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isPackageLocked(pkg);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPackageLocked(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -735,11 +718,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeInt(((locked)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPackageLocked, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setPackageLocked(pkg, locked);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPackageLocked(pkg, locked);
+            return;
           }
           _reply.readException();
         }
@@ -758,11 +739,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInt(result);
           _data.writeInt(reason);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setVerifyResult, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setVerifyResult(request, result, reason);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setVerifyResult(request, result, reason);
+            return;
           }
           _reply.readException();
         }
@@ -785,11 +764,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_addComponentReplacement, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().addComponentReplacement(replacement);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().addComponentReplacement(replacement);
+            return;
           }
           _reply.readException();
         }
@@ -812,11 +789,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_removeComponentReplacement, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().removeComponentReplacement(replacement);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().removeComponentReplacement(replacement);
+            return;
           }
           _reply.readException();
         }
@@ -833,10 +808,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getComponentReplacements, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getComponentReplacements();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getComponentReplacements();
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.component.ComponentReplacement.CREATOR);
@@ -855,11 +828,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setActivityTrampolineEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setActivityTrampolineEnabled(enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setActivityTrampolineEnabled(enabled);
+            return;
           }
           _reply.readException();
         }
@@ -876,10 +847,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isActivityTrampolineEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isActivityTrampolineEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isActivityTrampolineEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -898,11 +867,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setShowCurrentComponentViewEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setShowCurrentComponentViewEnabled(enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setShowCurrentComponentViewEnabled(enabled);
+            return;
           }
           _reply.readException();
         }
@@ -919,10 +886,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isShowCurrentComponentViewEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isShowCurrentComponentViewEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isShowCurrentComponentViewEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -941,11 +906,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerTopPackageChangeListener, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().registerTopPackageChangeListener(listener);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().registerTopPackageChangeListener(listener);
+            return;
           }
           _reply.readException();
         }
@@ -962,11 +925,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterTopPackageChangeListener, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().unRegisterTopPackageChangeListener(listener);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().unRegisterTopPackageChangeListener(listener);
+            return;
           }
           _reply.readException();
         }
@@ -983,10 +944,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isVerifyOnScreenOffEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isVerifyOnScreenOffEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isVerifyOnScreenOffEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1005,11 +964,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setVerifyOnScreenOffEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setVerifyOnScreenOffEnabled(enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setVerifyOnScreenOffEnabled(enabled);
+            return;
           }
           _reply.readException();
         }
@@ -1026,10 +983,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isVerifyOnAppSwitchEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isVerifyOnAppSwitchEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isVerifyOnAppSwitchEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1048,11 +1003,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setVerifyOnAppSwitchEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setVerifyOnAppSwitchEnabled(enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setVerifyOnAppSwitchEnabled(enabled);
+            return;
           }
           _reply.readException();
         }
@@ -1069,10 +1022,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isVerifyOnTaskRemovedEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isVerifyOnTaskRemovedEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isVerifyOnTaskRemovedEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1091,11 +1042,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setVerifyOnTaskRemovedEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setVerifyOnTaskRemovedEnabled(enabled);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setVerifyOnTaskRemovedEnabled(enabled);
+            return;
           }
           _reply.readException();
         }
@@ -1105,6 +1054,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         }
       }
       // Bridge API to report app events.
+
       @Override public android.content.Intent reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -1121,10 +1071,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_reportOnStartActivity, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().reportOnStartActivity(callingPackage, intent);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().reportOnStartActivity(callingPackage, intent);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -1148,11 +1096,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder(token);
           boolean _status = mRemote.transact(Stub.TRANSACTION_reportOnActivityStopped, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().reportOnActivityStopped(token);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().reportOnActivityStopped(token);
+            return;
           }
           _reply.readException();
         }
@@ -1169,11 +1115,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder(token);
           boolean _status = mRemote.transact(Stub.TRANSACTION_reportOnActivityResumed, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().reportOnActivityResumed(token);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().reportOnActivityResumed(token);
+            return;
           }
           _reply.readException();
         }
@@ -1190,11 +1134,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_dump, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().dump(p);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().dump(p);
+            return;
           }
           _reply.readException();
         }
@@ -1251,7 +1193,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor";
   public boolean checkActivity(android.content.ComponentName componentName) throws android.os.RemoteException;
   public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent) throws android.os.RemoteException;
   public boolean shouldVerifyActivityStarting(android.content.ComponentName componentName, java.lang.String pkg, java.lang.String source) throws android.os.RemoteException;
@@ -1278,6 +1219,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public boolean isVerifyOnTaskRemovedEnabled() throws android.os.RemoteException;
   public void setVerifyOnTaskRemovedEnabled(boolean enabled) throws android.os.RemoteException;
   // Bridge API to report app events.
+
   public android.content.Intent reportOnStartActivity(java.lang.String callingPackage, android.content.Intent intent) throws android.os.RemoteException;
   public void reportOnActivityStopped(android.os.IBinder token) throws android.os.RemoteException;
   public void reportOnActivityResumed(android.os.IBinder token) throws android.os.RemoteException;

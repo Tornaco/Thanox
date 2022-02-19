@@ -21,6 +21,7 @@ public interface IRuleCheckCallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.profile.IRuleCheckCallback
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IRuleCheckCallback";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -55,9 +56,6 @@ public interface IRuleCheckCallback extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_onValid:
         {
           data.enforceInterface(descriptor);
@@ -101,11 +99,9 @@ public interface IRuleCheckCallback extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onValid, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onValid();
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onValid();
+            return;
           }
         }
         finally {
@@ -120,11 +116,9 @@ public interface IRuleCheckCallback extends android.os.IInterface
           _data.writeInt(errorCode);
           _data.writeString(errorMessage);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onInvalid, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().onInvalid(errorCode, errorMessage);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onInvalid(errorCode, errorMessage);
+            return;
           }
         }
         finally {
@@ -152,7 +146,6 @@ public interface IRuleCheckCallback extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IRuleCheckCallback";
   public void onValid() throws android.os.RemoteException;
   public void onInvalid(int errorCode, java.lang.String errorMessage) throws android.os.RemoteException;
 }

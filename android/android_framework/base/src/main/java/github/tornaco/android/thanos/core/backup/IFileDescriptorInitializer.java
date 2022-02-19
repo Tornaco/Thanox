@@ -3,6 +3,7 @@
  */
 package github.tornaco.android.thanos.core.backup;
 // oneway
+
 public interface IFileDescriptorInitializer extends android.os.IInterface
 {
   /** Default implementation for IFileDescriptorInitializer. */
@@ -19,6 +20,7 @@ public interface IFileDescriptorInitializer extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.backup.IFileDescriptorInitializer
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.backup.IFileDescriptorInitializer";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -53,9 +55,6 @@ public interface IFileDescriptorInitializer extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_initParcelFileDescriptor:
         {
           data.enforceInterface(descriptor);
@@ -98,11 +97,9 @@ public interface IFileDescriptorInitializer extends android.os.IInterface
           _data.writeString(path);
           _data.writeStrongBinder((((consumer!=null))?(consumer.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_initParcelFileDescriptor, _data, null, android.os.IBinder.FLAG_ONEWAY);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().initParcelFileDescriptor(domain, path, consumer);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().initParcelFileDescriptor(domain, path, consumer);
+            return;
           }
         }
         finally {
@@ -129,6 +126,5 @@ public interface IFileDescriptorInitializer extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.backup.IFileDescriptorInitializer";
   public void initParcelFileDescriptor(java.lang.String domain, java.lang.String path, github.tornaco.android.thanos.core.backup.IFileDescriptorConsumer consumer) throws android.os.RemoteException;
 }

@@ -59,6 +59,7 @@ public interface IPowerManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.power.IPowerManager
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.power.IPowerManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -93,9 +94,6 @@ public interface IPowerManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_reboot:
         {
           data.enforceInterface(descriptor);
@@ -234,11 +232,9 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_reboot, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().reboot();
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().reboot();
+            return;
           }
           _reply.readException();
         }
@@ -254,11 +250,9 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_softReboot, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().softReboot();
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().softReboot();
+            return;
           }
           _reply.readException();
         }
@@ -275,11 +269,9 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeLong(delay);
           boolean _status = mRemote.transact(Stub.TRANSACTION_goToSleep, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().goToSleep(delay);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().goToSleep(delay);
+            return;
           }
           _reply.readException();
         }
@@ -296,11 +288,9 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPowerSaveModeEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setPowerSaveModeEnabled(enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPowerSaveModeEnabled(enable);
+            return;
           }
           _reply.readException();
         }
@@ -317,10 +307,8 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPowerSaveModeEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isPowerSaveModeEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPowerSaveModeEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -339,10 +327,8 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSeenWakeLocks, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getSeenWakeLocks();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSeenWakeLocks();
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR);
@@ -362,10 +348,8 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSeenWakeLocksByPackageName, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getSeenWakeLocksByPackageName(packageName);
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSeenWakeLocksByPackageName(packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR);
@@ -384,11 +368,9 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_dump, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().dump(p);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().dump(p);
+            return;
           }
           _reply.readException();
         }
@@ -405,11 +387,9 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeLong(delay);
           boolean _status = mRemote.transact(Stub.TRANSACTION_wakeUp, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().wakeUp(delay);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().wakeUp(delay);
+            return;
           }
           _reply.readException();
         }
@@ -426,11 +406,9 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(level);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setBrightness, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setBrightness(level);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setBrightness(level);
+            return;
           }
           _reply.readException();
         }
@@ -447,10 +425,8 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getBrightness, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().getBrightness();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getBrightness();
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -469,11 +445,9 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setAutoBrightnessEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              getDefaultImpl().setAutoBrightnessEnabled(enable);
-              return;
-            }
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setAutoBrightnessEnabled(enable);
+            return;
           }
           _reply.readException();
         }
@@ -490,10 +464,8 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isAutoBrightnessEnabled, _data, _reply, 0);
-          if (!_status) {
-            if (getDefaultImpl() != null) {
-              return getDefaultImpl().isAutoBrightnessEnabled();
-            }
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isAutoBrightnessEnabled();
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -536,7 +508,6 @@ public interface IPowerManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.power.IPowerManager";
   public void reboot() throws android.os.RemoteException;
   public void softReboot() throws android.os.RemoteException;
   public void goToSleep(long delay) throws android.os.RemoteException;

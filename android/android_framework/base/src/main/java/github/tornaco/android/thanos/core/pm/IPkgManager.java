@@ -254,9 +254,9 @@ public interface IPkgManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public boolean mayEnableAppOnStartActivityIntent(android.content.Intent intent) throws android.os.RemoteException
+    @Override public java.lang.String mayEnableAppOnStartActivityIntent(android.content.Intent intent) throws android.os.RemoteException
     {
-      return false;
+      return null;
     }
     @Override public boolean isEnablePkgOnLaunchByDefault() throws android.os.RemoteException
     {
@@ -1018,9 +1018,9 @@ public interface IPkgManager extends android.os.IInterface
           else {
             _arg0 = null;
           }
-          boolean _result = this.mayEnableAppOnStartActivityIntent(_arg0);
+          java.lang.String _result = this.mayEnableAppOnStartActivityIntent(_arg0);
           reply.writeNoException();
-          reply.writeInt(((_result)?(1):(0)));
+          reply.writeString(_result);
           return true;
         }
         case TRANSACTION_isEnablePkgOnLaunchByDefault:
@@ -2459,11 +2459,11 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public boolean mayEnableAppOnStartActivityIntent(android.content.Intent intent) throws android.os.RemoteException
+      @Override public java.lang.String mayEnableAppOnStartActivityIntent(android.content.Intent intent) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
-        boolean _result;
+        java.lang.String _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           if ((intent!=null)) {
@@ -2478,7 +2478,7 @@ public interface IPkgManager extends android.os.IInterface
             return getDefaultImpl().mayEnableAppOnStartActivityIntent(intent);
           }
           _reply.readException();
-          _result = (0!=_reply.readInt());
+          _result = _reply.readString();
         }
         finally {
           _reply.recycle();
@@ -2683,7 +2683,7 @@ public interface IPkgManager extends android.os.IInterface
   // Wrap api to skip permission check
 
   public java.lang.String[] getPackagesForUid(int uid) throws android.os.RemoteException;
-  public boolean mayEnableAppOnStartActivityIntent(android.content.Intent intent) throws android.os.RemoteException;
+  public java.lang.String mayEnableAppOnStartActivityIntent(android.content.Intent intent) throws android.os.RemoteException;
   public boolean isEnablePkgOnLaunchByDefault() throws android.os.RemoteException;
   public void setEnablePkgOnLaunchByDefaultEnabled(boolean byDefault) throws android.os.RemoteException;
 }

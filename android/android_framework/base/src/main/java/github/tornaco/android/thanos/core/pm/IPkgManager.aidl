@@ -103,7 +103,7 @@ interface IPkgManager {
     // Wrap api to skip permission check
     String[] getPackagesForUid(int uid);
 
-    boolean mayEnableAppOnStartActivityIntent(in Intent intent);
+    String mayEnableAppOnStartActivityIntent(in Intent intent);
 
     boolean isEnablePkgOnLaunchByDefault();
     void setEnablePkgOnLaunchByDefaultEnabled(boolean byDefault);

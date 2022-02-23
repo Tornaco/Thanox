@@ -1,7 +1,5 @@
 package github.tornaco.android.thanos.core.profile;
 
-import android.os.RemoteException;
-
 import java.util.List;
 
 import lombok.SneakyThrows;
@@ -57,6 +55,16 @@ public class ProfileManager {
     @SneakyThrows
     public boolean disableRule(int ruleId) {
         return server.disableRule(ruleId);
+    }
+
+    @SneakyThrows
+    public boolean enableRuleByName(String ruleName) {
+        return server.enableRuleByName(ruleName);
+    }
+
+    @SneakyThrows
+    public boolean disableRuleByName(String ruleName) {
+        return server.disableRuleByName(ruleName);
     }
 
     @SneakyThrows

@@ -149,6 +149,14 @@ public interface IProfileManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public boolean enableRuleByName(java.lang.String ruleName) throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public boolean disableRuleByName(java.lang.String ruleName) throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -597,6 +605,26 @@ public interface IProfileManager extends android.os.IInterface
           else {
             reply.writeInt(0);
           }
+          return true;
+        }
+        case TRANSACTION_enableRuleByName:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          boolean _result = this.enableRuleByName(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_disableRuleByName:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          boolean _result = this.disableRuleByName(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         default:
@@ -1441,6 +1469,48 @@ public interface IProfileManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public boolean enableRuleByName(java.lang.String ruleName) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(ruleName);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_enableRuleByName, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().enableRuleByName(ruleName);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public boolean disableRuleByName(java.lang.String ruleName) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(ruleName);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_disableRuleByName, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().disableRuleByName(ruleName);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.profile.IProfileManager sDefaultImpl;
     }
     static final int TRANSACTION_setAutoApplyForNewInstalledAppsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1482,6 +1552,8 @@ public interface IProfileManager extends android.os.IInterface
     static final int TRANSACTION_registerRuleChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 36);
     static final int TRANSACTION_unRegisterRuleChangeListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 37);
     static final int TRANSACTION_getRuleById = (android.os.IBinder.FIRST_CALL_TRANSACTION + 38);
+    static final int TRANSACTION_enableRuleByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 39);
+    static final int TRANSACTION_disableRuleByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 40);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IProfileManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1538,4 +1610,6 @@ public interface IProfileManager extends android.os.IInterface
   public void registerRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException;
   public void unRegisterRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.profile.RuleInfo getRuleById(int ruleId) throws android.os.RemoteException;
+  public boolean enableRuleByName(java.lang.String ruleName) throws android.os.RemoteException;
+  public boolean disableRuleByName(java.lang.String ruleName) throws android.os.RemoteException;
 }

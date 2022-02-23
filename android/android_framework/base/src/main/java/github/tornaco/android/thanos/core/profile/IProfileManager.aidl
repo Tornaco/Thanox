@@ -65,4 +65,7 @@ interface IProfileManager {
     void unRegisterRuleChangeListener(in IRuleChangeListener listener);
 
     RuleInfo getRuleById(int ruleId);
+
+    boolean enableRuleByName(String ruleName);
+    boolean disableRuleByName(String ruleName);
 }

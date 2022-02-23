@@ -64,7 +64,7 @@
 
                 <View
                     android:layout_width="@dimen/common_view_margin_small"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/MaterialButtonBadged"
@@ -88,16 +88,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{stateBadgeClickListener}"
+                    android:textColor="@color/md_white"
                     android:thanosStateText="@{viewmodel.state}"
                     android:visibility="@{viewmodel.state == State.Active ? View.GONE : View.VISIBLE}"
                     tools:text="Active" />
 
                 <com.google.android.material.button.MaterialButton
-                    style="@style/MaterialButtonBadged"
+                    style="@style/MaterialButtonBadged.Warn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{frameworkErrorClickListener}"
                     android:text="@string/badge_framework_err"
+                    android:textColor="@color/md_white"
                     android:visibility="@{viewmodel.hasFrameworkError ? View.VISIBLE : View.GONE}"
                     tools:text="Error" />
 

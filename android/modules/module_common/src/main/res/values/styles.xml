@@ -68,8 +68,8 @@
         <item name="elevation">0dp</item>
         <item name="android:paddingLeft">6dp</item>
         <item name="android:paddingRight">6dp</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
         <item name="backgroundTint">?colorPrimaryContainer</item>
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:stateListAnimator">@null</item>
@@ -81,6 +81,10 @@
 
     <style name="MaterialButtonBadged.Grey">
         <item name="backgroundTint">@color/md_grey_600</item>
+    </style>
+
+    <style name="MaterialButtonBadged.Warn">
+        <item name="backgroundTint">@color/md_amber_900</item>
     </style>
 
     <style name="ToolbarCollapsedTitleTextAppearance" parent="@style/TextAppearance.AppCompat.Medium">

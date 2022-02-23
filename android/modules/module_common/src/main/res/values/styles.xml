@@ -80,7 +80,12 @@
     </style>
 
     <style name="MaterialButtonBadged.Grey">
-        <item name="backgroundTint">@color/md_grey_600</item>
+        <item name="backgroundTint">@color/md_grey_500</item>
+    </style>
+
+    <style name="MaterialButtonBadged.LightGrey">
+        <item name="backgroundTint">@color/md_grey_400</item>
+        <item name="android:textColor">@color/md_black</item>
     </style>
 
     <style name="MaterialButtonBadged.Warn">

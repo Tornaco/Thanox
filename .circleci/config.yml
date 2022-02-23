@@ -41,7 +41,7 @@ jobs:
           name: Assemble release build
           no_output_timeout: 30m
           command: |
-            cd android && ./scripts/build_magisk_patch.sh && ./gradlew assemblePrcRelease -PkeyAlias=${KEYSTORE_ALIAS_NAME} -PkeyPassword=${KEYSTORE_PASS}   --stacktrace
+            cd android && ./scripts/build_magisk_patch.sh && ./gradlew assemblePrcDebug -PkeyAlias=${KEYSTORE_ALIAS_NAME} -PkeyPassword=${KEYSTORE_PASS}   --stacktrace
 
       - store_artifacts:
           path: android/out/app/outputs/apk

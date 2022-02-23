@@ -78,7 +78,7 @@
     <string name="feature_desc_start_restrict">Allow apps to start from background</string>
     <string name="feature_title_bg_restrict">Background task</string>
     <string name="feature_desc_bg_restrict_brief">Allow apps running in background</string>
-    <string name="feature_desc_bg_restrict">Allow selected apps to continue running even if the screen is locked, and exclude these apps from one-key boost</string>
+    <string name="feature_desc_bg_restrict">When the \"Background task\" feature is enabled, Thanox will perform a process cleanup after the screen is turned off. Allow selected apps to continue running even if the screen is locked, and exclude these apps from one-key boost</string>
 
     <string name="menu_title_start_restrict_charts">Start record</string>
     <string name="menu_title_rules">Rules</string>

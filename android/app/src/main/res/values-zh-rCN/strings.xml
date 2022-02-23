@@ -77,7 +77,7 @@
     <string name="feature_title_start_restrict">后台启动</string>
     <string name="feature_desc_start_restrict">允许选中的应用自启动、关联启动</string>
     <string name="feature_title_bg_restrict">后台运行</string>
-    <string name="feature_desc_bg_restrict">允许勾选的应用锁屏后继续运行，也就是说锁屏清理时不清理这些应用，另外在执行一键加速（一键加速就是清理下面这些没勾选的应用的后台）时，保留这些应用</string>
+    <string name="feature_desc_bg_restrict">\"后台运行\"开关打开后，Thanox会在屏幕熄灭后进行一次进程清理；勾选的应用锁屏后可以继续运行，也就是说锁屏清理时不清理这些应用，另外在执行一键加速（一键加速就是清理下面这些没勾选的应用的后台）时，保留这些应用</string>
     <string name="feature_desc_bg_restrict_brief">允许应用后台运行</string>
 
     <string name="menu_title_start_restrict_charts">启动记录</string>

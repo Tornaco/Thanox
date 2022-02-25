@@ -34,7 +34,6 @@ public class App {
     public long lastUpdated;
     public long version;
     public byte[] icon;
-    public byte[] icon_low_res;
     public CharSequence label;
 
     public App() {
@@ -50,8 +49,6 @@ public class App {
 
     public String getFormattedDate() {
         DateFormat f = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
-
         return f.format(new Date(lastUpdated));
     }
-
 }

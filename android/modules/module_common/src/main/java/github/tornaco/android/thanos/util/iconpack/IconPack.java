@@ -19,12 +19,13 @@ package github.tornaco.android.thanos.util.iconpack;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import com.elvishew.xlog.XLog;
 
@@ -35,13 +36,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.util.PkgUtils;
 
 public class IconPack extends App {
 
@@ -55,22 +55,10 @@ public class IconPack extends App {
         this.mContext = context;
         this.label = resolveInfo.loadLabel(mContext.getPackageManager());
         this.packageName = resolveInfo.activityInfo.packageName;
-        // this.icon = FrameworkBitmapUtil.drawableToByteArray(resolveInfo.loadIcon(mContext.getPackageManager()), false);
     }
 
     public boolean isInstalled() {
-        PackageManager pm = mContext.getPackageManager();
-        try {
-            ApplicationInfo info = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                info = pm.getApplicationInfo(packageName, PackageManager.MATCH_UNINSTALLED_PACKAGES);
-            } else {
-                info = pm.getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES);
-            }
-            return info != null;
-        } catch (PackageManager.NameNotFoundException var4) {
-            return false;
-        }
+        return PkgUtils.isPkgInstalled(mContext, packageName);
     }
 
     private void load() {
@@ -109,8 +97,10 @@ public class IconPack extends App {
                             mAllDrawables.add(drawableName);
                         }
 
-                        if (!mPackagesDrawables.containsKey(componentName))
+                        if (!mPackagesDrawables.containsKey(componentName)) {
                             mPackagesDrawables.put(componentName, drawableName);
+                            XLog.d("add drawable name: %s %s", componentName, drawableName);
+                        }
                     }
                     eventType = xpp.next();
                 }
@@ -126,16 +116,17 @@ public class IconPack extends App {
     }
 
     public List<String> getAllDrawables() {
-        if (!mLoaded) load();
+        if (!mLoaded) {
+            load();
+        }
 
-        Collections.sort(mAllDrawables, new Comparator<String>() {
-            @Override
-            public int compare(String s, String t1) {
-                if (s == null || t1 == null) return -1;
-
-                return s.compareTo(t1);
-
+        mAllDrawables.sort((s, t1) -> {
+            if (s == null || t1 == null) {
+                return -1;
             }
+
+            return s.compareTo(t1);
+
         });
         return mAllDrawables;
     }
@@ -143,41 +134,59 @@ public class IconPack extends App {
     public Drawable loadDrawable(String drawableName) {
         int id = mIconPackRes.getIdentifier(drawableName, "drawable", packageName);
         if (id > 0) {
-            return mIconPackRes.getDrawable(id);
+            return ResourcesCompat.getDrawable(mIconPackRes, id, null);
         }
         return null;
     }
 
     public Drawable getDrawableIconForPackage(String appPackageName) {
-        if (!mLoaded) load();
+        if (!mLoaded) {
+            load();
+        }
 
+        // Query from Android.
         PackageManager pm = mContext.getPackageManager();
         Intent launchIntent = pm.getLaunchIntentForPackage(appPackageName);
-        String componentName = null;
-        if (launchIntent != null)
-            componentName = pm.getLaunchIntentForPackage(appPackageName).getComponent().toString();
-        if (componentName == null) {
+        String componentNameString = null;
+        if (launchIntent != null && launchIntent.getComponent() != null) {
+            componentNameString = launchIntent.getComponent().toString();
+        }
+
+        // Query from Thanos.
+        if (componentNameString == null) {
             ThanosManager thanosManager = ThanosManager.from(mContext);
             if (thanosManager.isServiceInstalled()) {
                 Intent intent = thanosManager.getPkgManager().queryLaunchIntentForPackage(appPackageName);
                 if (intent != null && intent.getComponent() != null) {
-                    componentName = intent.getComponent().toString();
+                    componentNameString = intent.getComponent().toString();
                 }
             }
         }
-        XLog.v("getDrawableIconForPackage componentName: " + componentName);
-        String drawable = mPackagesDrawables.get(componentName);
+
+        // Fallback, find first.
+        if (componentNameString == null) {
+            for (String key : mPackagesDrawables.keySet()) {
+                if (key.contains(appPackageName)) {
+                    XLog.d("Fallback componentNameString: %s", key);
+                    componentNameString = key;
+                }
+            }
+        }
+
+        XLog.v("getDrawableIconForPackage componentNameString: " + componentNameString);
+        String drawable = mPackagesDrawables.get(componentNameString);
         if (drawable != null) {
             return loadDrawable(drawable);
         } else {
             // try to get a resource with the component filename
-            if (componentName != null) {
-                int start = componentName.indexOf("{") + 1;
-                int end = componentName.indexOf("}", start);
+            if (componentNameString != null) {
+                int start = componentNameString.indexOf("{") + 1;
+                int end = componentNameString.indexOf("}", start);
                 if (end > start) {
-                    drawable = componentName.substring(start, end).toLowerCase(Locale.getDefault()).replace(".", "_").replace("/", "_");
-                    if (mIconPackRes.getIdentifier(drawable, "drawable", packageName) > 0)
+                    drawable = componentNameString.substring(start, end).toLowerCase(Locale.getDefault()).replace(".", "_").replace("/", "_");
+                    if (mIconPackRes.getIdentifier(drawable, "drawable", packageName) > 0) {
                         return loadDrawable(drawable);
+                    }
                 }
             }
         }

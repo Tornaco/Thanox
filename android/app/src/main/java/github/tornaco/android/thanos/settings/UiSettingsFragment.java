@@ -19,6 +19,7 @@ import github.tornaco.android.thanos.common.CommonPreferences;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.theme.Theme;
+import github.tornaco.android.thanos.util.GlideApp;
 import github.tornaco.android.thanos.util.iconpack.IconPack;
 import github.tornaco.android.thanos.util.iconpack.IconPackManager;
 import io.reactivex.Completable;
@@ -75,10 +76,10 @@ public class UiSettingsFragment extends BasePreferenceFragmentCompat {
         }
         iconPref.setOnPreferenceChangeListener((preference, newValue) -> {
             AppThemePreferences.getInstance().setIconPack(getContext(), String.valueOf(newValue));
-            Completable.fromRunnable(() -> Glide.get(getContext()).clearDiskCache()).subscribeOn(Schedulers.io()).subscribe();
             IconPack pack = IconPackManager.getInstance().getIconPackage(getContext(), String.valueOf(newValue));
-            if (pack != null) {
+            if (pack != null && pack.isInstalled()) {
                 preference.setSummary(pack.label);
+                invalidateIconPack(pack);
             } else {
                 preference.setSummary("Noop");
             }
@@ -112,5 +113,13 @@ public class UiSettingsFragment extends BasePreferenceFragmentCompat {
             CommonPreferences.getInstance().setAppListShowVersionEnabled(requireContext(), newBoolValue);
             return true;
         });
+    }
+
+    private void invalidateIconPack(IconPack pack) {
+        GlideApp.get(requireContext()).clearMemory();
+        Completable.fromRunnable(() -> {
+            GlideApp.get(requireContext()).clearDiskCache();
+            pack.getAllDrawables();
+        }).subscribeOn(Schedulers.io()).subscribe();
     }
 }

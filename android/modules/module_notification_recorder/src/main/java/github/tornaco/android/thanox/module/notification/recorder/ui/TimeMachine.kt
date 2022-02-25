@@ -16,7 +16,7 @@ object TimeMachine {
         Toast.makeText(context, content, Toast.LENGTH_LONG).show()
     }
 
-    fun mockNotification(context: Context, title: String, content: String, `when`: Long) {
+    fun mockNotification(context: Context, title: String?, content: String?, `when`: Long) {
         createNotificationChannelIfNeed(context)
         val n = NotificationCompat.Builder(context, "NR-Mock")
             .setContentTitle(title)

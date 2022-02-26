@@ -1,5 +1,7 @@
 package github.tornaco.android.thanos.core.app;
 
+import static android.content.Context.CONTEXT_IGNORE_SECURITY;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,22 +10,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.util.Log;
-import github.tornaco.android.thanos.core.util.PkgUtils;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.content.Context.CONTEXT_IGNORE_SECURITY;
+import github.tornaco.android.thanos.core.util.PkgUtils;
 
 /**
  * Created by Tornaco on 2018/4/4 10:56.
  * God bless no bug!
  */
 
-@AllArgsConstructor
-@Getter
 public class AppResources {
 
     private static final String LOG_TAG = "AppResources";
@@ -32,8 +29,21 @@ public class AppResources {
     private static final Map<Object, String> S_STRING_RES_CACHE = new HashMap<>();
     private static final Map<Object, String[]> S_STRING_ARRAY_RES_CACHE = new HashMap<>();
 
-    private Context context;
-    private String appPackageName;
+    private final Context context;
+    private final String appPackageName;
+
+    public AppResources(Context context, String appPackageName) {
+        this.context = context;
+        this.appPackageName = appPackageName;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public String getAppPackageName() {
+        return appPackageName;
+    }
 
     public Bitmap getBitmap(String resName) {
         if (!PkgUtils.isPkgInstalled(this.context, appPackageName)) {

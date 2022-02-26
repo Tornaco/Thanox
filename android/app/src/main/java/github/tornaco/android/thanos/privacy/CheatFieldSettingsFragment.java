@@ -16,6 +16,7 @@ import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
@@ -88,19 +89,19 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
             return;
         }
 
-        new AndroidId(null, false).updateValue(RandomStringUtils.randomAlphanumeric(12));
-        new DeviceId(null, false).updateValue(RandomStringUtils.randomAlphanumeric(12));
+        new AndroidId(null, false).updateValue(RandomStringUtils.randomAlphanumeric(16).toLowerCase(Locale.ENGLISH));
+        new DeviceId(null, false).updateValue(RandomStringUtils.randomNumeric(14));
 
         new Line1Num(null, false).updateValue(RandomStringUtils.randomNumeric(11));
-        new SimSerial(null, false).updateValue(RandomStringUtils.randomAlphanumeric(16));
+        new SimSerial(null, false).updateValue(RandomStringUtils.randomNumeric(20));
 
         new SimCountryIso(null, false).updateValue("us");
         new SimOp(null, false, -1).updateValue(RandomStringUtils.randomNumeric(5));
-        new SimOpName(null, false, -1).updateValue(RandomStringUtils.randomAlphabetic(6));
+        new SimOpName(null, false, -1).updateValue(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ENGLISH));
 
         new NetCountryIso(null, false).updateValue("jp");
         new NetOp(null, false, -1).updateValue(RandomStringUtils.randomNumeric(5));
-        new NetOpName(null, false, -1).updateValue(RandomStringUtils.randomAlphabetic(6));
+        new NetOpName(null, false, -1).updateValue(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ENGLISH));
 
         int phoneCount = thanos.getPrivacyManager().getPhoneCount();
         XLog.w("genForAllFields phoneCount: %s", phoneCount);
@@ -117,7 +118,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
             for (SubscriptionInfo sub : subscriptionInfos) {
                 int slotId = sub.getSimSlotIndex();
                 XLog.w("genForAllFields nameIndex: %s, slotId: %s", nameIndex, slotId);
-                new Imei(null, false, slotId).updateValue(RandomStringUtils.randomAlphanumeric(16));
+                new Imei(null, false, slotId).updateValue(RandomStringUtils.randomNumeric(15));
                 nameIndex++;
             }
         }
@@ -128,7 +129,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
             for (SubscriptionInfo sub : subscriptionInfos) {
                 int slotId = sub.getSimSlotIndex();
                 XLog.w("genForAllFields nameIndex: %s, slotId: %s", nameIndex, slotId);
-                new Meid(null, false, slotId).updateValue(RandomStringUtils.randomAlphanumeric(16));
+                new Meid(null, false, slotId).updateValue(RandomStringUtils.randomNumeric(15));
                 nameIndex++;
             }
         }

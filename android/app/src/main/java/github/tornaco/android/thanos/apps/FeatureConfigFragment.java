@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.apps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +23,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.List;
 import java.util.Objects;
 
-import github.tornaco.android.common.util.ApkUtil;
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
@@ -36,6 +36,7 @@ import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
+import github.tornaco.android.thanos.util.AppIconLoaderUtil;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.pref.ViewAwarePreference;
@@ -89,8 +90,9 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         }
         Objects.requireNonNull(preference).setTitle(appInfo.getAppLabel());
         preference.setSummary(new AppListItemDescriptionComposer(requireContext()).getAppItemDescription(appInfo));
-        //noinspection ConstantConditions
-        preference.setIcon(ApkUtil.loadIconByPkgName(getContext(), appInfo.getPkgName()));
+        preference.setIcon(new BitmapDrawable(
+                getResources(),
+                AppIconLoaderUtil.loadAppIconBitmapWithIconPack(getContext(), appInfo.getPkgName(), appInfo.getUid())));
         preference.setOnPreferenceClickListener(
                 _it -> {
                     showAppInfoPopMenu(getListView().getChildAt(2));
@@ -145,11 +147,12 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
     private void showAppDetailsDialog() {
         String details = String.format(
-                "%s\n%s\n%s\nUID: %s\nMin sdk: %s\nTarget sdk: %s\nDebuggable: %s\n\nApk path:%s\n\nData dir:%s\n",
+                "%s\n%s\n%s\nUID: %s\nUser: %s\nMin sdk: %s\nTarget sdk: %s\nDebuggable: %s\n\nApk path:%s\n\nData dir:%s\n",
                 appInfo.getPkgName(),
                 appInfo.getVersionName(),
                 appInfo.getVersionCode(),
                 appInfo.getUid(),
+                appInfo.getUserId(),
                 appInfo.getMinSdkVersion(),
                 appInfo.getTargetSdkVersion(),
                 appInfo.isDebuggable(),

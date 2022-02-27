@@ -99,6 +99,7 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                 XLog.d("handleStartActivity, Replacing Intent component");
                 intent.setComponent(realIntent.getComponent());
             }
+            XLog.d("handleStartActivity %s user: %s", realIntent, userId);
             ThanosManagerNative.getDefault().getPkgManager().mayEnableAppOnStartActivityIntent(realIntent, userId);
         }
     }

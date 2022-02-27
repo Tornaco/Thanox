@@ -97,7 +97,7 @@ public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTra
         boolean res =
                 ThanosManagerNative.getDefault()
                         .getActivityManager()
-                        .checkGetContentProvider(name, callingPackage);
+                        .checkGetContentProvider(callingPackage, name);
         if (!res) {
             return null;
         }

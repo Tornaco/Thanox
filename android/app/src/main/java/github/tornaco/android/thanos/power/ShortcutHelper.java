@@ -48,7 +48,7 @@ class ShortcutHelper {
                     .into(new CustomTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            Intent shortcutInfoIntent = ShortcutStubActivity.createIntent(context, appInfo.getPkgName());
+                            Intent shortcutInfoIntent = ShortcutStubActivity.createIntent(context, appInfo.getPkgName(), appInfo.getUserId());
                             shortcutInfoIntent.setAction(Intent.ACTION_VIEW);
                             ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(context, "Shortcut-of-thanox-for-" + appInfo.getPkgName())
                                     .setIcon(IconCompat.createWithBitmap(Objects.requireNonNull(resource)))

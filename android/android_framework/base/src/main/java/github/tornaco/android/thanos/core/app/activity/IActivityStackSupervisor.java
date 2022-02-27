@@ -11,7 +11,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     {
       return false;
     }
-    @Override public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent) throws android.os.RemoteException
+    @Override public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId) throws android.os.RemoteException
     {
       return null;
     }
@@ -177,7 +177,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           else {
             _arg0 = null;
           }
-          android.content.Intent _result = this.replaceActivityStartingIntent(_arg0);
+          int _arg1;
+          _arg1 = data.readInt();
+          android.content.Intent _result = this.replaceActivityStartingIntent(_arg0, _arg1);
           reply.writeNoException();
           if ((_result!=null)) {
             reply.writeInt(1);
@@ -532,7 +534,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         }
         return _result;
       }
-      @Override public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent) throws android.os.RemoteException
+      @Override public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -546,9 +548,10 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           else {
             _data.writeInt(0);
           }
+          _data.writeInt(userId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_replaceActivityStartingIntent, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().replaceActivityStartingIntent(intent);
+            return getDefaultImpl().replaceActivityStartingIntent(intent, userId);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -1194,7 +1197,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     }
   }
   public boolean checkActivity(android.content.ComponentName componentName) throws android.os.RemoteException;
-  public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent) throws android.os.RemoteException;
+  public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId) throws android.os.RemoteException;
   public boolean shouldVerifyActivityStarting(android.content.ComponentName componentName, java.lang.String pkg, java.lang.String source) throws android.os.RemoteException;
   public void verifyActivityStarting(android.os.Bundle options, java.lang.String pkg, android.content.ComponentName componentName, int uid, int pid, github.tornaco.android.thanos.core.app.activity.IVerifyCallback callback) throws android.os.RemoteException;
   public java.lang.String getCurrentFrontApp() throws android.os.RemoteException;

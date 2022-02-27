@@ -20,8 +20,8 @@ public class ActivityStackSupervisor {
     }
 
     @SneakyThrows
-    public Intent replaceActivityStartingIntent(Intent intent) {
-        return supervisor.replaceActivityStartingIntent(intent);
+    public Intent replaceActivityStartingIntent(Intent intent, int userId) {
+        return supervisor.replaceActivityStartingIntent(intent, userId);
     }
 
     @SneakyThrows

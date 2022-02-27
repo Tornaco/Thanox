@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
@@ -29,6 +30,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.PackageManager;
 import github.tornaco.android.thanos.core.pm.PackageSet;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.Optional;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
@@ -102,7 +104,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
         fab.show();
         fab.setOnClickListener(
                 v -> {
-                    ArrayList<String> exclude = Lists.newArrayList(packageSet.getPkgNames());
+                    ArrayList<Pkg> exclude = packageSet.getPkgNames().stream().map(Pkg::systemUserPkg).collect(Collectors.toCollection(Lists::newArrayList));
                     AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
                 });
     }

@@ -34,6 +34,7 @@ object T {
 
         const val ACTION_PACKAGE_STOPPED = "thanox.a.package.stopped"
         const val ACTION_PACKAGE_STOPPED_EXTRA_PACKAGE_NAME = "thanox.a.package.stopped.extra.pkg"
+        const val ACTION_PACKAGE_STOPPED_EXTRA_PACKAGE_UID = "thanox.a.package.stopped.extra.uid"
 
         const val ACTION_TASK_REMOVED = "thanox.a.task.removed"
         const val ACTION_TASK_REMOVED_EXTRA_PACKAGE_NAME = "thanox.a.task.removed.pkg"

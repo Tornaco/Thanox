@@ -55,6 +55,7 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
         });
 
         SwitchPreferenceCompat hidePackagePref = findPreference(getString(R.string.key_smart_freeze_hide_package_change_event));
+        hidePackagePref.setVisible(false);
         Objects.requireNonNull(hidePackagePref).setChecked(thanos.getPkgManager().isSmartFreezeHidePackageEventEnabled());
         hidePackagePref.setEnabled(!thanos.getPkgManager().isFreezePkgWithSuspendEnabled());
         hidePackagePref.setOnPreferenceChangeListener((preference, newValue) -> {

@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.pm;
 import github.tornaco.android.thanos.core.pm.IAddPluginCallback;
 import github.tornaco.android.thanos.core.pm.IPackageSetChangeListener;
 import github.tornaco.android.thanos.core.pm.ComponentInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.IPrinter;
 
 interface IPkgManager {
@@ -12,6 +13,7 @@ interface IPkgManager {
     // ApplicationInfo
     List<AppInfo> getInstalledPkgs(int flags);
     AppInfo getAppInfo(String pkgName);
+    AppInfo getAppInfoForUser(String pkgName, int userId);
 
     String[] getWhiteListPkgs();
     boolean isPkgInWhiteList(String pkg);
@@ -20,8 +22,8 @@ interface IPkgManager {
     int getComponentEnabledSetting(in ComponentName componentName);
     boolean isComponentDisabledByThanox(in ComponentName componentName);
 
-    boolean getApplicationEnableState(String packageName);
-    void setApplicationEnableState(String packageName, boolean enable, boolean tmp);
+    boolean getApplicationEnableState(in Pkg pkg);
+    void setApplicationEnableState(in Pkg pkg, boolean enable, boolean tmp);
 
     List<ComponentInfo> getActivities(String packageName);
     int getActivitiesCount(String packageName);
@@ -37,10 +39,10 @@ interface IPkgManager {
 
     void setSmartFreezeEnabled(boolean enable);
     boolean isSmartFreezeEnabled();
-    void setPkgSmartFreezeEnabled(String pkgName, boolean enable);
-    boolean isPkgSmartFreezeEnabled(String pkgName);
-    String[] getSmartFreezePkgs();
-    void launchSmartFreezePkg(String pkgName);
+    void setPkgSmartFreezeEnabled(in Pkg pkgName, boolean enable);
+    boolean isPkgSmartFreezeEnabled(in Pkg pkgName);
+    List<Pkg> getSmartFreezePkgs();
+    void launchSmartFreezePkg(in Pkg pkgName);
 
     void setSmartFreezeScreenOffCheckEnabled(boolean enable);
     boolean isSmartFreezeScreenOffCheckEnabled();
@@ -49,12 +51,10 @@ interface IPkgManager {
 
     Intent queryLaunchIntentForPackage(String pkgName);
 
-    String[] enableAllThanoxDisabledPackages(boolean removeFromSmartFreezeList);
+    List<Pkg> enableAllThanoxDisabledPackages(boolean removeFromSmartFreezeList);
 
     boolean deviceHasGms();
     boolean verifyBillingState();
-
-    void launchSmartFreezePkgThenKillOrigin(String pkgName, String origin);
 
     boolean isProtectedWhitelistEnabled();
     void setProtectedWhitelistEnabled(boolean enable);
@@ -95,15 +95,15 @@ interface IPkgManager {
     void registerPackageSetChangeListener(in IPackageSetChangeListener listener);
     void unRegisterPackageSetChangeListener(in IPackageSetChangeListener listener);
 
-    void setEnablePackageOnLaunchRequestEnabled(String pkg, boolean enable);
-    boolean isEnablePackageOnLaunchRequestEnabled(String pkg);
+    void setEnablePackageOnLaunchRequestEnabled(in Pkg pkg, boolean enable);
+    boolean isEnablePackageOnLaunchRequestEnabled(in Pkg pkg);
 
     List<ComponentInfo> getProviders(String packageName);
 
     // Wrap api to skip permission check
     String[] getPackagesForUid(int uid);
 
-    String mayEnableAppOnStartActivityIntent(in Intent intent);
+    String mayEnableAppOnStartActivityIntent(in Intent intent, int userId);
 
     boolean isEnablePkgOnLaunchByDefault();
     void setEnablePkgOnLaunchByDefaultEnabled(boolean byDefault);

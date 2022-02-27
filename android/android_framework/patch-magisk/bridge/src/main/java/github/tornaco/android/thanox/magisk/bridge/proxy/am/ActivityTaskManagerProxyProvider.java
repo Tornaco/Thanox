@@ -9,6 +9,7 @@ import android.content.pm.ParceledListSlice;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.Log;
 
 import com.elvishew.xlog.XLog;
@@ -90,14 +91,15 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                 -1);
         Intent intent = intentIndex > 0 ? (Intent) args[intentIndex] : null;
         if (callingPackage != null && intent != null) {
+            int userId = UserHandle.getCallingUserId();
             Intent realIntent = ThanosManagerNative.getDefault()
                     .getActivityStackSupervisor()
-                    .replaceActivityStartingIntent(intent);
+                    .replaceActivityStartingIntent(intent, userId);
             if (realIntent != null) {
                 XLog.d("handleStartActivity, Replacing Intent component");
                 intent.setComponent(realIntent.getComponent());
             }
-            ThanosManagerNative.getDefault().getPkgManager().mayEnableAppOnStartActivityIntent(realIntent);
+            ThanosManagerNative.getDefault().getPkgManager().mayEnableAppOnStartActivityIntent(realIntent, userId);
         }
     }
 

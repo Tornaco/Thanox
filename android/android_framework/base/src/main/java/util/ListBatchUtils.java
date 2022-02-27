@@ -4,18 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.annotation.NonNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
 
 public class ListBatchUtils {
-
-    @Getter
-    @AllArgsConstructor
-    @ToString
     public static class Batch<T> {
         @NonNull
-        private List<List<T>> batches;
+        private final List<List<T>> batches;
+
+        public Batch(List<List<T>> batches) {
+            this.batches = batches;
+        }
+
+        public List<List<T>> getBatches() {
+            return batches;
+        }
+
+        @Override
+        public String toString() {
+            return "Batch{" +
+                    "batches=" + batches +
+                    '}';
+        }
     }
 
     public static <T> Batch<T> toArrayBatch(List<T> sources, int itemCountEachBatch) {

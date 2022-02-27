@@ -35,6 +35,7 @@ import github.tornaco.android.thanos.apps.AppDetailsActivity;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.databinding.ActivitySmartFreezeAppsBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.pref.AppPreference;
@@ -120,7 +121,7 @@ public class SmartFreezeActivity extends ThemeActivity {
             public void onAppItemClick(AppInfo appInfo) {
                 ThanosManager.from(getApplicationContext())
                         .getPkgManager()
-                        .launchSmartFreezePkg(appInfo.getPkgName());
+                        .launchSmartFreezePkg(Pkg.fromAppInfo(appInfo));
                 postOnUiDelayed(() -> viewModel.start(), 2000);
             }
 
@@ -144,7 +145,7 @@ public class SmartFreezeActivity extends ThemeActivity {
             if (item.getItemId() == R.id.action_remove_from_smart_freeze) {
                 ThanosManager.from(getApplicationContext())
                         .getPkgManager()
-                        .setPkgSmartFreezeEnabled(appInfo.getPkgName(), false);
+                        .setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), false);
                 viewModel.requestUnInstallStubApkIfInstalled(getApplicationContext(), appInfo);
                 viewModel.start();
                 return true;
@@ -196,7 +197,7 @@ public class SmartFreezeActivity extends ThemeActivity {
             List<AppInfo> appInfos = data.getParcelableArrayListExtra("apps");
             CollectionUtils.consumeRemaining(appInfos, appInfo -> ThanosManager.from(getApplicationContext())
                     .getPkgManager()
-                    .setPkgSmartFreezeEnabled(appInfo.getPkgName(), true));
+                    .setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), true));
             postOnUiDelayed(() -> {
                 binding.swipe.setRefreshing(false);
                 viewModel.start();
@@ -357,7 +358,7 @@ public class SmartFreezeActivity extends ThemeActivity {
         }
 
         ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
-            ArrayList<String> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
+            ArrayList<Pkg> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
             AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
         });
     }

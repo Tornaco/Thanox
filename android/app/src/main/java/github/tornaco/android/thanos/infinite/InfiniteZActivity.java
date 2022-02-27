@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
@@ -30,6 +31,7 @@ import github.tornaco.android.thanos.core.app.infinite.AddPackageCallback;
 import github.tornaco.android.thanos.core.app.infinite.EnableCallback;
 import github.tornaco.android.thanos.core.app.infinite.LaunchPackageCallback;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.databinding.ActivityIniniteZAppsBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.theme.ThemeActivity;
@@ -194,7 +196,7 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void onRequestAddApp() {
         ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
-            ArrayList<String> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
+            ArrayList<Pkg> exclude = thanosManager.getInfiniteZ().getInstalledPackages().stream().map(Pkg::fromAppInfo).collect(Collectors.toCollection(Lists::newArrayList));
             AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
         });
     }

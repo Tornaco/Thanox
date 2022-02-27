@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.ParcelFileDescriptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import github.tornaco.android.thanos.BuildProp;
@@ -68,6 +69,11 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    public AppInfo getAppInfoForUser(String pkgName, int userId) {
+        return pm.getAppInfoForUser(pkgName, userId);
+    }
+
+    @SneakyThrows
     public String[] getWhiteListPkgs() {
         return pm.getWhiteListPkgs();
     }
@@ -88,13 +94,13 @@ public class PackageManager {
     }
 
     @SneakyThrows
-    public boolean getApplicationEnableState(String packageName) {
-        return pm.getApplicationEnableState(packageName);
+    public boolean getApplicationEnableState(Pkg pkg) {
+        return pm.getApplicationEnableState(pkg);
     }
 
     @SneakyThrows
-    public void setApplicationEnableState(String packageName, boolean enable, boolean tmp) {
-        pm.setApplicationEnableState(packageName, enable, tmp);
+    public void setApplicationEnableState(Pkg pkg, boolean enable, boolean tmp) {
+        pm.setApplicationEnableState(pkg, enable, tmp);
     }
 
     @SneakyThrows
@@ -170,37 +176,32 @@ public class PackageManager {
     }
 
     @SneakyThrows
-    public void setPkgSmartFreezeEnabled(String pkgName, boolean enable) {
+    public void setPkgSmartFreezeEnabled(Pkg pkgName, boolean enable) {
         pm.setPkgSmartFreezeEnabled(pkgName, enable);
     }
 
     @SneakyThrows
-    public String[] enableAllThanoxDisabledPackages(boolean removeFromSmartFreezeList) {
+    public List<Pkg> enableAllThanoxDisabledPackages(boolean removeFromSmartFreezeList) {
         return pm.enableAllThanoxDisabledPackages(removeFromSmartFreezeList);
     }
 
     @SneakyThrows
-    public boolean isPkgSmartFreezeEnabled(String pkgName) {
+    public boolean isPkgSmartFreezeEnabled(Pkg pkgName) {
         return pm.isPkgSmartFreezeEnabled(pkgName);
     }
 
     @SneakyThrows
-    public String[] getSmartFreezePkgs() {
-        String[] res = pm.getSmartFreezePkgs();
+    public List<Pkg> getSmartFreezePkgs() {
+        List<Pkg> res = pm.getSmartFreezePkgs();
         if (res == null) {
-            res = new String[0];
+            res = new ArrayList<>(0);
         }
         return res;
     }
 
     @SneakyThrows
-    public void launchSmartFreezePkg(String pkgName) {
-        pm.launchSmartFreezePkg(pkgName);
-    }
-
-    @SneakyThrows
-    public void launchSmartFreezePkgThenKillOrigin(String pkgName, String origin) {
-        pm.launchSmartFreezePkgThenKillOrigin(pkgName, origin);
+    public void launchSmartFreezePkg(Pkg pkg) {
+        pm.launchSmartFreezePkg(pkg);
     }
 
     @SneakyThrows
@@ -396,12 +397,12 @@ public class PackageManager {
     }
 
     @SneakyThrows
-    public void setEnablePackageOnLaunchRequestEnabled(String pkg, boolean enable) {
+    public void setEnablePackageOnLaunchRequestEnabled(Pkg pkg, boolean enable) {
         pm.setEnablePackageOnLaunchRequestEnabled(pkg, enable);
     }
 
     @SneakyThrows
-    public boolean isEnablePackageOnLaunchRequestEnabled(String pkg) {
+    public boolean isEnablePackageOnLaunchRequestEnabled(Pkg pkg) {
         return pm.isEnablePackageOnLaunchRequestEnabled(pkg);
     }
 

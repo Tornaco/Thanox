@@ -6,18 +6,20 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.util.Log;
 
 import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.T;
-import lombok.Setter;
-import lombok.val;
 import util.Singleton;
 
 public class ThanosManagerNative {
-    @Setter
     private static IThanos localService;
+
+    public static void setLocalService(IThanos localService) {
+        ThanosManagerNative.localService = localService;
+    }
 
     private static final Singleton<IThanos> sIThanosSingleton = new Singleton<IThanos>() {
         @Override
@@ -30,12 +32,11 @@ public class ThanosManagerNative {
             if (thanos != null) {
                 return thanos;
             }
-            XLog.w("Get Thanos from IPC_TRANS_CODE_THANOS_SERVER");
 
-            val data = Parcel.obtain();
-            val reply = Parcel.obtain();
+            Parcel data = Parcel.obtain();
+            Parcel reply = Parcel.obtain();
             try {
-                val backup = ServiceManager.getService(PROXIED_ANDROID_SERVICE_NAME);
+                IBinder backup = ServiceManager.getService(PROXIED_ANDROID_SERVICE_NAME);
                 if (backup == null) {
                     XLog.w("Get Thanos from IPC_TRANS_CODE_THANOS_SERVER, service is null.");
                     return null;

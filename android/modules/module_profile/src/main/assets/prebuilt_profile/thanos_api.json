@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Thanos API",
+    "description": "Example actions with thanos API",
+    "priority": 2,
+    "condition": "frontPkgChanged == true && to == \"com.tencent.mm\"",
+    "actions": [
+      "thanos.getProfileManager().enableRuleByName(\"my_we_chat_rule\");"
+    ]
+  }
+]

@@ -32,6 +32,7 @@ import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
@@ -123,7 +124,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                     if (item.getItemId() == R.id.action_launch_app) {
                         ThanosManager.from(getActivity())
                                 .getPkgManager()
-                                .launchSmartFreezePkg(appInfo.getPkgName());
+                                .launchSmartFreezePkg(Pkg.fromAppInfo(appInfo));
                         return true;
                     }
                     if (item.getItemId() == R.id.action_system_settings) {
@@ -419,15 +420,14 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         }
 
         ThanosManager thanos = ThanosManager.from(getContext());
-        boolean disabled = !thanos.getPkgManager().getApplicationEnableState(appInfo.getPkgName());
+        boolean disabled = !thanos.getPkgManager().getApplicationEnableState(Pkg.fromAppInfo(appInfo));
 
         Objects.requireNonNull(toEnablePref).setVisible(disabled);
         toEnablePref.setOnPreferenceClickListener(
                 preference -> {
                     thanos
                             .getPkgManager()
-                            .setApplicationEnableState(
-                                    appInfo.getPkgName(), true, true);
+                            .setApplicationEnableState(Pkg.fromAppInfo(appInfo), true, true);
                     // Reload.
                     bindAppStatePrefDelayed();
                     return true;
@@ -440,18 +440,18 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                     thanos
                             .getPkgManager()
                             .setApplicationEnableState(
-                                    appInfo.getPkgName(), false, false);
+                                    Pkg.fromAppInfo(appInfo), false, false);
                     // Reload.
                     bindAppStatePrefDelayed();
                     return true;
                 });
 
         Objects.requireNonNull(smartFreezePref)
-                .setChecked(thanos.getPkgManager().isPkgSmartFreezeEnabled(appInfo.getPkgName()));
+                .setChecked(thanos.getPkgManager().isPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo)));
         smartFreezePref.setOnPreferenceChangeListener(
                 (preference, newValue) -> {
                     boolean enable = (boolean) newValue;
-                    thanos.getPkgManager().setPkgSmartFreezeEnabled(appInfo.getPkgName(), enable);
+                    thanos.getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), enable);
                     // Reload.
                     // Wait 500ms for app state setup.
                     new Handler(Looper.getMainLooper())
@@ -460,10 +460,10 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 });
 
         SwitchPreferenceCompat enableOnLaunchPref = findPreference(getString(R.string.key_app_feature_config_enable_package_on_launch));
-        Objects.requireNonNull(enableOnLaunchPref).setChecked(thanos.getPkgManager().isEnablePackageOnLaunchRequestEnabled(appInfo.getPkgName()));
+        Objects.requireNonNull(enableOnLaunchPref).setChecked(thanos.getPkgManager().isEnablePackageOnLaunchRequestEnabled(Pkg.fromAppInfo(appInfo)));
         enableOnLaunchPref.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean checked = (boolean) newValue;
-            thanos.getPkgManager().setEnablePackageOnLaunchRequestEnabled(appInfo.getPkgName(), checked);
+            thanos.getPkgManager().setEnablePackageOnLaunchRequestEnabled(Pkg.fromAppInfo(appInfo), checked);
             return true;
         });
     }

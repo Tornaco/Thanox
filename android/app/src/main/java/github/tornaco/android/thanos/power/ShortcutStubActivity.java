@@ -9,14 +9,17 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.pm.Pkg;
 
 public class ShortcutStubActivity extends Activity {
 
     private static final String EXTRA_TARGET_PKG = "stub.extra.pkg";
+    private static final String EXTRA_TARGET_USER_ID = "stub.extra.userId";
 
-    public static Intent createIntent(Context context, String targetPackage) {
+    public static Intent createIntent(Context context, String targetPackage, int userId) {
         Intent intent = new Intent(context, ShortcutStubActivity.class);
         intent.putExtra(EXTRA_TARGET_PKG, targetPackage);
+        intent.putExtra(EXTRA_TARGET_USER_ID, userId);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
     }
@@ -43,8 +46,10 @@ public class ShortcutStubActivity extends Activity {
             return;
         }
 
+        int userId = intent.getIntExtra(EXTRA_TARGET_USER_ID, 0);
+
         ThanosManager.from(getApplicationContext())
                 .ifServiceInstalled(thanosManager ->
-                        thanosManager.getPkgManager().launchSmartFreezePkg(target));
+                        thanosManager.getPkgManager().launchSmartFreezePkg(new Pkg(target, userId)));
     }
 }

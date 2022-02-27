@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
@@ -21,9 +20,11 @@ import com.vic797.syntaxhighlight.SyntaxListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.profile.GlobalVar;
 import github.tornaco.android.thanos.core.util.TextWatcherAdapter;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
@@ -191,7 +192,8 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_pick_app == item.getItemId()) {
             ArrayList<String> exclude = GlobalVar.listFromJson(getCurrentEditingContent());
-            AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
+            ArrayList<Pkg> pkgs = exclude.stream().map(Pkg::systemUserPkg).collect(Collectors.toCollection(Lists::newArrayList));
+            AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, pkgs);
             return true;
         }
         return super.onOptionsItemSelected(item);

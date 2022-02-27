@@ -23,6 +23,7 @@ import github.tornaco.android.thanos.common.AppLabelSearchFilter;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.core.util.Rxs;
 import github.tornaco.android.thanos.util.InstallerUtils;
@@ -84,8 +85,8 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
             return new ArrayList<>(0);
         }
         List<AppListModel> res = new ArrayList<>();
-        for (String pkg : thanosManager.getPkgManager().getSmartFreezePkgs()) {
-            AppInfo appInfo = thanosManager.getPkgManager().getAppInfo(pkg);
+        for (Pkg pkg : thanosManager.getPkgManager().getSmartFreezePkgs()) {
+            AppInfo appInfo = thanosManager.getPkgManager().getAppInfoForUser(pkg.getPkgName(), pkg.getUserId());
             if (appInfo != null) {
                 XLog.v("getSmartFreezeApps app: %s, enabled: %s", appInfo.getPkgName(), !appInfo.disabled());
                 AppListModel model = new AppListModel(appInfo);
@@ -152,10 +153,10 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
             return;
         }
         disposables.add(Completable.fromRunnable(() -> CollectionUtils.consumeRemaining(thanosManager.getPkgManager().getInstalledPkgs(AppInfo.FLAGS_ALL), appInfo -> {
-            boolean enabled = thanosManager.getPkgManager().getApplicationEnableState(appInfo.getPkgName());
+            boolean enabled = thanosManager.getPkgManager().getApplicationEnableState(Pkg.fromAppInfo(appInfo));
             if (!enabled) {
                 onProgress.accept(appInfo);
-                thanosManager.getPkgManager().setApplicationEnableState(appInfo.getPkgName(), true, false);
+                thanosManager.getPkgManager().setApplicationEnableState(Pkg.fromAppInfo(appInfo), true, false);
                 // Give system a rest
                 try {
                     Thread.sleep(200);

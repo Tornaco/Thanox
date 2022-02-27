@@ -26,6 +26,7 @@ import github.tornaco.android.thanos.common.CommonAppListFilterAdapter;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
@@ -35,7 +36,7 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
     private static final String EXTRA_EXCLUDE_PKGS = "github.tornaco.android.thanos.picker.extra.EXTRA_EXCLUDE_PKGS";
 
     private final Map<String, AppInfo> selectedAppInfoMap = Maps.newHashMap();
-    private final ArrayList<String> excludePkgs = Lists.newArrayList();
+    private final ArrayList<Pkg> excludePkgs = Lists.newArrayList();
     private CommonAppListFilterAdapter appListFilterAdapter = null;
 
     private final AppItemClickListener appItemClickListener = appInfo -> {
@@ -50,9 +51,9 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
         start(context, requestCode, new ArrayList<>(0));
     }
 
-    public static void start(Activity context, int requestCode, ArrayList<String> excludePkgs) {
+    public static void start(Activity context, int requestCode, ArrayList<Pkg> excludePkgs) {
         Bundle data = new Bundle();
-        data.putStringArrayList(EXTRA_EXCLUDE_PKGS, excludePkgs);
+        data.putParcelableArrayList(EXTRA_EXCLUDE_PKGS, excludePkgs);
         ActivityUtils.startActivityForResult(context, AppPickerActivity.class, requestCode, data);
     }
 
@@ -72,7 +73,7 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
 
     private void resolveIntent() {
         if (getIntent() != null && getIntent().hasExtra(EXTRA_EXCLUDE_PKGS)) {
-            ArrayList<String> exclude = getIntent().getStringArrayListExtra(EXTRA_EXCLUDE_PKGS);
+            ArrayList<Pkg> exclude = getIntent().getParcelableArrayListExtra(EXTRA_EXCLUDE_PKGS);
             if (exclude != null) {
                 excludePkgs.addAll(exclude);
             }
@@ -120,7 +121,7 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
             List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
-                if (excludePkgs.contains(appInfo.getPkgName())) {
+                if (excludePkgs.contains(Pkg.fromAppInfo(appInfo))) {
                     return;
                 }
                 appInfo.setSelected(selectedAppInfoMap.containsKey(appInfo.getPkgName()));

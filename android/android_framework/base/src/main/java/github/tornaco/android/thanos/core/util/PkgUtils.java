@@ -23,7 +23,6 @@ import com.elvishew.xlog.XLog;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.annotation.NonNull;
-import lombok.val;
 import util.ObjectsUtils;
 
 @SuppressWarnings("deprecation")
@@ -43,7 +42,11 @@ public class PkgUtils {
     }
 
     public static boolean isPkgInstalled(Context context, String pkg) {
-        return getApplicationInfo(context, pkg) != null;
+        return isPkgInstalled(context, pkg, UserHandle.getCallingUserId());
+    }
+
+    public static boolean isPkgInstalled(Context context, String pkg, int userId) {
+        return getApplicationInfoAsUser(context, pkg, userId) != null;
     }
 
     public static ApplicationInfo getApplicationInfoAsUser(Context context, String pkg, int userId) {
@@ -53,11 +56,7 @@ public class PkgUtils {
         PackageManager pm = context.getPackageManager();
         try {
             ApplicationInfo info;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                info = pm.getApplicationInfoAsUser(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES, userId);
-            } else {
-                info = pm.getApplicationInfoAsUser(pkg, PackageManager.GET_UNINSTALLED_PACKAGES, userId);
-            }
+            info = pm.getApplicationInfoAsUser(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES, userId);
             return info;
         } catch (Throwable e) {
             return null;
@@ -68,11 +67,7 @@ public class PkgUtils {
         PackageManager pm = context.getPackageManager();
         try {
             ApplicationInfo info;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                info = pm.getApplicationInfo(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES);
-            } else {
-                info = pm.getApplicationInfo(pkg, PackageManager.GET_UNINSTALLED_PACKAGES);
-            }
+            info = pm.getApplicationInfo(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES);
             return info;
         } catch (Throwable e) {
             return null;
@@ -83,11 +78,7 @@ public class PkgUtils {
         PackageManager pm = context.getPackageManager();
         try {
             PackageInfo info;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                info = pm.getPackageInfo(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES);
-            } else {
-                info = pm.getPackageInfo(pkg, PackageManager.GET_UNINSTALLED_PACKAGES);
-            }
+            info = pm.getPackageInfo(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES);
             return info;
         } catch (Throwable e) {
             XLog.e(e);
@@ -102,11 +93,7 @@ public class PkgUtils {
         PackageManager pm = context.getPackageManager();
         try {
             PackageInfo info;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                info = pm.getPackageInfoAsUser(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES, userId);
-            } else {
-                info = pm.getPackageInfoAsUser(pkg, PackageManager.GET_UNINSTALLED_PACKAGES, userId);
-            }
+            info = pm.getPackageInfoAsUser(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES, userId);
             return info;
         } catch (Throwable e) {
             XLog.e(e);
@@ -124,7 +111,7 @@ public class PkgUtils {
 
     @SuppressLint("QueryPermissionsNeeded")
     public static List<ApplicationInfo> getInstalledApplications(Context context, int flags) {
-        val pm = context.getPackageManager();
+        PackageManager pm = context.getPackageManager();
         return pm.getInstalledApplications(flags);
     }
 
@@ -140,7 +127,7 @@ public class PkgUtils {
         if (!OsUtils.isOOrAbove()) {
             return getInstalledApplications(context, flags);
         }
-        val pm = context.getPackageManager();
+        PackageManager pm = context.getPackageManager();
         return pm.getInstalledApplicationsAsUser(flags, userId);
     }
 

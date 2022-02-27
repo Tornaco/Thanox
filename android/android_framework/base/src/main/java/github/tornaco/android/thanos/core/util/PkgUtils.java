@@ -57,6 +57,7 @@ public class PkgUtils {
         try {
             return pm.getApplicationInfoAsUser(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES, userId);
         } catch (Throwable e) {
+            XLog.e("getApplicationInfoAsUser error", e);
             return null;
         }
     }
@@ -68,6 +69,7 @@ public class PkgUtils {
             info = pm.getApplicationInfo(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES);
             return info;
         } catch (Throwable e) {
+            XLog.e("getApplicationInfo error", e);
             return null;
         }
     }

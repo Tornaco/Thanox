@@ -211,3 +211,5 @@
 # keep setters in Views so that animations can still work.
 # see http://proguard.sourceforge.net/manual/examples.html#beans
 -keep class * extends androidx.databinding.DataBinderMapper {*;}
+
+-keep class org.jeasy.rules.core.** {*;}

@@ -55,9 +55,7 @@ public class PkgUtils {
         }
         PackageManager pm = context.getPackageManager();
         try {
-            ApplicationInfo info;
-            info = pm.getApplicationInfoAsUser(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES, userId);
-            return info;
+            return pm.getApplicationInfoAsUser(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES, userId);
         } catch (Throwable e) {
             return null;
         }

@@ -4,6 +4,7 @@ import github.tornaco.android.thanos.core.profile.IRuleAddCallback;
 import github.tornaco.android.thanos.core.profile.IRuleCheckCallback;
 import github.tornaco.android.thanos.core.profile.IRuleChangeListener;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
+import github.tornaco.android.thanos.core.IPrinter;
 
 interface IProfileManager {
 
@@ -68,4 +69,6 @@ interface IProfileManager {
 
     boolean enableRuleByName(String ruleName);
     boolean disableRuleByName(String ruleName);
+
+    void dump(in IPrinter p);
 }

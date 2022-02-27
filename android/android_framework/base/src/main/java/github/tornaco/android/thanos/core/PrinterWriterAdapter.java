@@ -2,14 +2,16 @@ package github.tornaco.android.thanos.core;
 
 import java.io.PrintWriter;
 
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
 
-@AllArgsConstructor
 public class PrinterWriterAdapter extends IPrinter.Stub {
 
     @NonNull
     private final PrintWriter writer;
+
+    public PrinterWriterAdapter(PrintWriter writer) {
+        this.writer = writer;
+    }
 
     @Override
     public void println(String content) {

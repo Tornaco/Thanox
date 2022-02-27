@@ -357,6 +357,21 @@ public class ArrayUtils {
     return cur;
   }
 
+  public static @Nullable String[] removeFirst(@Nullable String[] cur) {
+    if (cur == null) {
+      return null;
+    }
+    if (cur.length == 0) {
+      return cur;
+    }
+    if (cur.length == 1) {
+      return new String[0];
+    }
+    String[] res = new String[cur.length -1];
+    System.arraycopy(cur, 1, res, 0, res.length);
+    return res;
+  }
+
   /** Adds value to given array if not already present, providing set-like behavior. */
   public static @NonNull long[] appendLong(
       @Nullable long[] cur, long val, boolean allowDuplicates) {

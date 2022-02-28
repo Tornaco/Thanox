@@ -1,5 +1,7 @@
 package com.stardust.autojs.apkbuilder;
 
+import android.text.TextUtils;
+
 import com.stardust.autojs.apkbuilder.util.StreamUtils;
 
 import java.io.File;
@@ -36,6 +38,7 @@ public class ApkPackager {
         ZipInputStream zis = new ZipInputStream(mApkInputStream);
         for (ZipEntry e = zis.getNextEntry(); e != null; e = zis.getNextEntry()) {
             String name = e.getName();
+            if (TextUtils.isEmpty(name)) continue;
             if (!e.isDirectory()) {
                 File file = new File(mWorkspacePath, name);
                 System.out.println(file);

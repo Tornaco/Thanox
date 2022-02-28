@@ -16,6 +16,7 @@ import util.EncryptUtils;
 
 @AllArgsConstructor
 public class PackageManager {
+    private static final String SHORTCUT_PROXY_PKG_USERID_SPLITTER = "__";
 
     private IPkgManager pm;
 
@@ -250,15 +251,17 @@ public class PackageManager {
     }
 
     @Nullable
-    public String resolveShortcutPackageName(String pkgName) {
+    public Pkg resolveShortcutPackageName(String pkgName) {
         // Compat.
         if (!pkgName.endsWith("_thanox_shortcut_enc")) {
-            return pkgName.replace(BuildProp.THANOS_SHORTCUT_PKG_NAME_PREFIX, "");
+            return Pkg.systemUserPkg(pkgName.replace(BuildProp.THANOS_SHORTCUT_PKG_NAME_PREFIX, ""));
         }
         try {
-            return EncryptUtils.decrypt(
+            String pkgNameAndUserId = EncryptUtils.decrypt(
                     pkgName.replace(BuildProp.THANOS_SHORTCUT_PKG_NAME_PREFIX, "")
                             .replace("_thanox_shortcut_enc", ""));
+            String[] spl = pkgNameAndUserId.split(SHORTCUT_PROXY_PKG_USERID_SPLITTER);
+            return new Pkg(spl[0], Integer.parseInt(spl[1]));
         } catch (Throwable e) {
             return null;
         }
@@ -268,7 +271,7 @@ public class PackageManager {
     public String createShortcutStubPkgName(AppInfo appInfo) {
         try {
             return BuildProp.THANOS_SHORTCUT_PKG_NAME_PREFIX
-                    + EncryptUtils.encrypt(appInfo.getPkgName())
+                    + EncryptUtils.encrypt(appInfo.getPkgName() + SHORTCUT_PROXY_PKG_USERID_SPLITTER + appInfo.getUserId())
                     + "_thanox_shortcut_enc";
         } catch (Throwable e) {
             return BuildProp.THANOS_SHORTCUT_PKG_NAME_PREFIX + appInfo.getPkgName();

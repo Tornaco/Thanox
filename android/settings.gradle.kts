@@ -16,6 +16,7 @@ dependencyResolutionManagement {
 rootProject.name = "Thanox"
 
 include(":app")
+include(":shortcut_stub")
 include(":sdk-demo")
 
 include(":nitro:nitro_framework")

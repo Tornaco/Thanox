@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.pm.Pkg;
 
 public class MainActivity extends Activity {
 
@@ -21,9 +22,9 @@ public class MainActivity extends Activity {
             ThanosManager.from(getApplicationContext())
                     .ifServiceInstalled(thanosManager -> {
                         String pkgName = getPackageName();
-                        String realPkgName = thanosManager.getPkgManager().resolveShortcutPackageName(pkgName);
-                        if (realPkgName != null) {
-                            thanosManager.getPkgManager().launchSmartFreezePkgThenKillOrigin(realPkgName, pkgName);
+                        Pkg pkg = thanosManager.getPkgManager().resolveShortcutPackageName(pkgName);
+                        if (pkg != null) {
+                            thanosManager.getPkgManager().launchSmartFreezePkgThenKillOriginForUser(pkg, pkgName);
                         }
                     });
         } finally {

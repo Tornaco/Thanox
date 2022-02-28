@@ -105,7 +105,10 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(file -> requestInstallStubApk(getApplication(), file),
-                        throwable -> Toast.makeText(getApplication(), throwable.getMessage(), Toast.LENGTH_LONG).show()));
+                        throwable -> {
+                            XLog.e("createShortcutStubApkForAsync error", throwable);
+                            Toast.makeText(getApplication(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+                        }));
     }
 
     private void requestInstallStubApk(Context context, File apk) {

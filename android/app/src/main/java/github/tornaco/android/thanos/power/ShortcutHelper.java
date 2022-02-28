@@ -103,6 +103,7 @@ class ShortcutHelper {
                         + OUT_APK_PATH
                         + File.separator
                         + appInfo.getPkgName()));
+
         Files.createParentDirs(outApk);
         Files.createParentDirs(workDir);
         XLog.w("createShortcutStubApkFor: %s %s %s", appInfo, outApk, workDir);

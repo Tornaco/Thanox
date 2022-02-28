@@ -12,8 +12,8 @@ interface IPkgManager {
 
     // ApplicationInfo
     List<AppInfo> getInstalledPkgs(int flags);
+    /** @deprecated use {@link #getAppInfoForUser} instead */
     AppInfo getAppInfo(String pkgName);
-    AppInfo getAppInfoForUser(String pkgName, int userId);
 
     String[] getWhiteListPkgs();
     boolean isPkgInWhiteList(String pkg);
@@ -42,7 +42,8 @@ interface IPkgManager {
     void setPkgSmartFreezeEnabled(in Pkg pkgName, boolean enable);
     boolean isPkgSmartFreezeEnabled(in Pkg pkgName);
     List<Pkg> getSmartFreezePkgs();
-    void launchSmartFreezePkg(in Pkg pkgName);
+    /** @deprecated use {@link #launchSmartFreezePkgForUser} instead */
+    void launchSmartFreezePkg(String pkgName);
 
     void setSmartFreezeScreenOffCheckEnabled(boolean enable);
     boolean isSmartFreezeScreenOffCheckEnabled();
@@ -55,6 +56,9 @@ interface IPkgManager {
 
     boolean deviceHasGms();
     boolean verifyBillingState();
+
+     /** @deprecated use {@link #launchSmartFreezePkgThenKillOriginForUser} instead */
+    void launchSmartFreezePkgThenKillOrigin(String pkgName, String origin);
 
     boolean isProtectedWhitelistEnabled();
     void setProtectedWhitelistEnabled(boolean enable);
@@ -107,4 +111,9 @@ interface IPkgManager {
 
     boolean isEnablePkgOnLaunchByDefault();
     void setEnablePkgOnLaunchByDefaultEnabled(boolean byDefault);
+
+    AppInfo getAppInfoForUser(String pkgName, int userId);
+    void launchSmartFreezePkgForUser(in Pkg pkg);
+
+    void launchSmartFreezePkgThenKillOriginForUser(in Pkg targetPkg, String origin);
 }

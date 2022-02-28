@@ -21,11 +21,8 @@ public interface IPkgManager extends android.os.IInterface
     {
       return null;
     }
+    /** @deprecated use {@link #getAppInfoForUser} instead */
     @Override public github.tornaco.android.thanos.core.pm.AppInfo getAppInfo(java.lang.String pkgName) throws android.os.RemoteException
-    {
-      return null;
-    }
-    @Override public github.tornaco.android.thanos.core.pm.AppInfo getAppInfoForUser(java.lang.String pkgName, int userId) throws android.os.RemoteException
     {
       return null;
     }
@@ -109,7 +106,8 @@ public interface IPkgManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public void launchSmartFreezePkg(github.tornaco.android.thanos.core.pm.Pkg pkgName) throws android.os.RemoteException
+    /** @deprecated use {@link #launchSmartFreezePkgForUser} instead */
+    @Override public void launchSmartFreezePkg(java.lang.String pkgName) throws android.os.RemoteException
     {
     }
     @Override public void setSmartFreezeScreenOffCheckEnabled(boolean enable) throws android.os.RemoteException
@@ -141,6 +139,10 @@ public interface IPkgManager extends android.os.IInterface
     @Override public boolean verifyBillingState() throws android.os.RemoteException
     {
       return false;
+    }
+    /** @deprecated use {@link #launchSmartFreezePkgThenKillOriginForUser} instead */
+    @Override public void launchSmartFreezePkgThenKillOrigin(java.lang.String pkgName, java.lang.String origin) throws android.os.RemoteException
+    {
     }
     @Override public boolean isProtectedWhitelistEnabled() throws android.os.RemoteException
     {
@@ -266,6 +268,16 @@ public interface IPkgManager extends android.os.IInterface
     @Override public void setEnablePkgOnLaunchByDefaultEnabled(boolean byDefault) throws android.os.RemoteException
     {
     }
+    @Override public github.tornaco.android.thanos.core.pm.AppInfo getAppInfoForUser(java.lang.String pkgName, int userId) throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public void launchSmartFreezePkgForUser(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+    }
+    @Override public void launchSmartFreezePkgThenKillOriginForUser(github.tornaco.android.thanos.core.pm.Pkg targetPkg, java.lang.String origin) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -345,24 +357,6 @@ public interface IPkgManager extends android.os.IInterface
           java.lang.String _arg0;
           _arg0 = data.readString();
           github.tornaco.android.thanos.core.pm.AppInfo _result = this.getAppInfo(_arg0);
-          reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
-        }
-        case TRANSACTION_getAppInfoForUser:
-        {
-          data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          int _arg1;
-          _arg1 = data.readInt();
-          github.tornaco.android.thanos.core.pm.AppInfo _result = this.getAppInfoForUser(_arg0, _arg1);
           reply.writeNoException();
           if ((_result!=null)) {
             reply.writeInt(1);
@@ -633,13 +627,8 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_launchSmartFreezePkg:
         {
           data.enforceInterface(descriptor);
-          github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          java.lang.String _arg0;
+          _arg0 = data.readString();
           this.launchSmartFreezePkg(_arg0);
           reply.writeNoException();
           return true;
@@ -718,6 +707,17 @@ public interface IPkgManager extends android.os.IInterface
           boolean _result = this.verifyBillingState();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_launchSmartFreezePkgThenKillOrigin:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          this.launchSmartFreezePkgThenKillOrigin(_arg0, _arg1);
+          reply.writeNoException();
           return true;
         }
         case TRANSACTION_isProtectedWhitelistEnabled:
@@ -1085,6 +1085,54 @@ public interface IPkgManager extends android.os.IInterface
           reply.writeNoException();
           return true;
         }
+        case TRANSACTION_getAppInfoForUser:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          int _arg1;
+          _arg1 = data.readInt();
+          github.tornaco.android.thanos.core.pm.AppInfo _result = this.getAppInfoForUser(_arg0, _arg1);
+          reply.writeNoException();
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
+          return true;
+        }
+        case TRANSACTION_launchSmartFreezePkgForUser:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          this.launchSmartFreezePkgForUser(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_launchSmartFreezePkgThenKillOriginForUser:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          this.launchSmartFreezePkgThenKillOriginForUser(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
         default:
         {
           return super.onTransact(code, data, reply, flags);
@@ -1171,6 +1219,7 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
+      /** @deprecated use {@link #getAppInfoForUser} instead */
       @Override public github.tornaco.android.thanos.core.pm.AppInfo getAppInfo(java.lang.String pkgName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -1182,33 +1231,6 @@ public interface IPkgManager extends android.os.IInterface
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAppInfo, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
             return getDefaultImpl().getAppInfo(pkgName);
-          }
-          _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = github.tornaco.android.thanos.core.pm.AppInfo.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-        return _result;
-      }
-      @Override public github.tornaco.android.thanos.core.pm.AppInfo getAppInfoForUser(java.lang.String pkgName, int userId) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        github.tornaco.android.thanos.core.pm.AppInfo _result;
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
-          _data.writeInt(userId);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_getAppInfoForUser, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAppInfoForUser(pkgName, userId);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -1707,19 +1729,14 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void launchSmartFreezePkg(github.tornaco.android.thanos.core.pm.Pkg pkgName) throws android.os.RemoteException
+      /** @deprecated use {@link #launchSmartFreezePkgForUser} instead */
+      @Override public void launchSmartFreezePkg(java.lang.String pkgName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((pkgName!=null)) {
-            _data.writeInt(1);
-            pkgName.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkg, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
             getDefaultImpl().launchSmartFreezePkg(pkgName);
@@ -1896,6 +1913,27 @@ public interface IPkgManager extends android.os.IInterface
           _data.recycle();
         }
         return _result;
+      }
+      /** @deprecated use {@link #launchSmartFreezePkgThenKillOriginForUser} instead */
+      @Override public void launchSmartFreezePkgThenKillOrigin(java.lang.String pkgName, java.lang.String origin) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(pkgName);
+          _data.writeString(origin);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkgThenKillOrigin, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().launchSmartFreezePkgThenKillOrigin(pkgName, origin);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
       }
       @Override public boolean isProtectedWhitelistEnabled() throws android.os.RemoteException
       {
@@ -2620,43 +2658,121 @@ public interface IPkgManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public github.tornaco.android.thanos.core.pm.AppInfo getAppInfoForUser(java.lang.String pkgName, int userId) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        github.tornaco.android.thanos.core.pm.AppInfo _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(pkgName);
+          _data.writeInt(userId);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getAppInfoForUser, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAppInfoForUser(pkgName, userId);
+          }
+          _reply.readException();
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.pm.AppInfo.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void launchSmartFreezePkgForUser(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkgForUser, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().launchSmartFreezePkgForUser(pkg);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void launchSmartFreezePkgThenKillOriginForUser(github.tornaco.android.thanos.core.pm.Pkg targetPkg, java.lang.String origin) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((targetPkg!=null)) {
+            _data.writeInt(1);
+            targetPkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeString(origin);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkgThenKillOriginForUser, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().launchSmartFreezePkgThenKillOriginForUser(targetPkg, origin);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.pm.IPkgManager sDefaultImpl;
     }
     static final int TRANSACTION_getPkgNameForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_getUidForPkgName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_getInstalledPkgs = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
     static final int TRANSACTION_getAppInfo = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-    static final int TRANSACTION_getAppInfoForUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
-    static final int TRANSACTION_getWhiteListPkgs = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
-    static final int TRANSACTION_isPkgInWhiteList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
-    static final int TRANSACTION_setComponentEnabledSetting = (android.os.IBinder.FIRST_CALL_TRANSACTION + 7);
-    static final int TRANSACTION_getComponentEnabledSetting = (android.os.IBinder.FIRST_CALL_TRANSACTION + 8);
-    static final int TRANSACTION_isComponentDisabledByThanox = (android.os.IBinder.FIRST_CALL_TRANSACTION + 9);
-    static final int TRANSACTION_getApplicationEnableState = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
-    static final int TRANSACTION_setApplicationEnableState = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
-    static final int TRANSACTION_getActivities = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
-    static final int TRANSACTION_getActivitiesCount = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
-    static final int TRANSACTION_getActivitiesInBatch = (android.os.IBinder.FIRST_CALL_TRANSACTION + 14);
-    static final int TRANSACTION_getReceivers = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
-    static final int TRANSACTION_getReceiverCount = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
-    static final int TRANSACTION_getReceiversInBatch = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
-    static final int TRANSACTION_getServices = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
-    static final int TRANSACTION_getServiceCount = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
-    static final int TRANSACTION_getServicesInBatch = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
-    static final int TRANSACTION_setSmartFreezeEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 21);
-    static final int TRANSACTION_isSmartFreezeEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 22);
-    static final int TRANSACTION_setPkgSmartFreezeEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 23);
-    static final int TRANSACTION_isPkgSmartFreezeEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 24);
-    static final int TRANSACTION_getSmartFreezePkgs = (android.os.IBinder.FIRST_CALL_TRANSACTION + 25);
-    static final int TRANSACTION_launchSmartFreezePkg = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
-    static final int TRANSACTION_setSmartFreezeScreenOffCheckEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
-    static final int TRANSACTION_isSmartFreezeScreenOffCheckEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
-    static final int TRANSACTION_setSmartFreezeScreenOffCheckDelay = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
-    static final int TRANSACTION_getSmartFreezeScreenOffCheckDelay = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
-    static final int TRANSACTION_queryLaunchIntentForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
-    static final int TRANSACTION_enableAllThanoxDisabledPackages = (android.os.IBinder.FIRST_CALL_TRANSACTION + 32);
-    static final int TRANSACTION_deviceHasGms = (android.os.IBinder.FIRST_CALL_TRANSACTION + 33);
-    static final int TRANSACTION_verifyBillingState = (android.os.IBinder.FIRST_CALL_TRANSACTION + 34);
+    static final int TRANSACTION_getWhiteListPkgs = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+    static final int TRANSACTION_isPkgInWhiteList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+    static final int TRANSACTION_setComponentEnabledSetting = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
+    static final int TRANSACTION_getComponentEnabledSetting = (android.os.IBinder.FIRST_CALL_TRANSACTION + 7);
+    static final int TRANSACTION_isComponentDisabledByThanox = (android.os.IBinder.FIRST_CALL_TRANSACTION + 8);
+    static final int TRANSACTION_getApplicationEnableState = (android.os.IBinder.FIRST_CALL_TRANSACTION + 9);
+    static final int TRANSACTION_setApplicationEnableState = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
+    static final int TRANSACTION_getActivities = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
+    static final int TRANSACTION_getActivitiesCount = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
+    static final int TRANSACTION_getActivitiesInBatch = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
+    static final int TRANSACTION_getReceivers = (android.os.IBinder.FIRST_CALL_TRANSACTION + 14);
+    static final int TRANSACTION_getReceiverCount = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
+    static final int TRANSACTION_getReceiversInBatch = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
+    static final int TRANSACTION_getServices = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
+    static final int TRANSACTION_getServiceCount = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
+    static final int TRANSACTION_getServicesInBatch = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
+    static final int TRANSACTION_setSmartFreezeEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
+    static final int TRANSACTION_isSmartFreezeEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 21);
+    static final int TRANSACTION_setPkgSmartFreezeEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 22);
+    static final int TRANSACTION_isPkgSmartFreezeEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 23);
+    static final int TRANSACTION_getSmartFreezePkgs = (android.os.IBinder.FIRST_CALL_TRANSACTION + 24);
+    static final int TRANSACTION_launchSmartFreezePkg = (android.os.IBinder.FIRST_CALL_TRANSACTION + 25);
+    static final int TRANSACTION_setSmartFreezeScreenOffCheckEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
+    static final int TRANSACTION_isSmartFreezeScreenOffCheckEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
+    static final int TRANSACTION_setSmartFreezeScreenOffCheckDelay = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
+    static final int TRANSACTION_getSmartFreezeScreenOffCheckDelay = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
+    static final int TRANSACTION_queryLaunchIntentForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
+    static final int TRANSACTION_enableAllThanoxDisabledPackages = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
+    static final int TRANSACTION_deviceHasGms = (android.os.IBinder.FIRST_CALL_TRANSACTION + 32);
+    static final int TRANSACTION_verifyBillingState = (android.os.IBinder.FIRST_CALL_TRANSACTION + 33);
+    static final int TRANSACTION_launchSmartFreezePkgThenKillOrigin = (android.os.IBinder.FIRST_CALL_TRANSACTION + 34);
     static final int TRANSACTION_isProtectedWhitelistEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 35);
     static final int TRANSACTION_setProtectedWhitelistEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 36);
     static final int TRANSACTION_addPlugin = (android.os.IBinder.FIRST_CALL_TRANSACTION + 37);
@@ -2691,6 +2807,9 @@ public interface IPkgManager extends android.os.IInterface
     static final int TRANSACTION_mayEnableAppOnStartActivityIntent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 66);
     static final int TRANSACTION_isEnablePkgOnLaunchByDefault = (android.os.IBinder.FIRST_CALL_TRANSACTION + 67);
     static final int TRANSACTION_setEnablePkgOnLaunchByDefaultEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 68);
+    static final int TRANSACTION_getAppInfoForUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + 69);
+    static final int TRANSACTION_launchSmartFreezePkgForUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + 70);
+    static final int TRANSACTION_launchSmartFreezePkgThenKillOriginForUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + 71);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pm.IPkgManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -2713,8 +2832,8 @@ public interface IPkgManager extends android.os.IInterface
   // ApplicationInfo
 
   public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgs(int flags) throws android.os.RemoteException;
+  /** @deprecated use {@link #getAppInfoForUser} instead */
   public github.tornaco.android.thanos.core.pm.AppInfo getAppInfo(java.lang.String pkgName) throws android.os.RemoteException;
-  public github.tornaco.android.thanos.core.pm.AppInfo getAppInfoForUser(java.lang.String pkgName, int userId) throws android.os.RemoteException;
   public java.lang.String[] getWhiteListPkgs() throws android.os.RemoteException;
   public boolean isPkgInWhiteList(java.lang.String pkg) throws android.os.RemoteException;
   public void setComponentEnabledSetting(android.content.ComponentName componentName, int newState, int flags) throws android.os.RemoteException;
@@ -2736,7 +2855,8 @@ public interface IPkgManager extends android.os.IInterface
   public void setPkgSmartFreezeEnabled(github.tornaco.android.thanos.core.pm.Pkg pkgName, boolean enable) throws android.os.RemoteException;
   public boolean isPkgSmartFreezeEnabled(github.tornaco.android.thanos.core.pm.Pkg pkgName) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getSmartFreezePkgs() throws android.os.RemoteException;
-  public void launchSmartFreezePkg(github.tornaco.android.thanos.core.pm.Pkg pkgName) throws android.os.RemoteException;
+  /** @deprecated use {@link #launchSmartFreezePkgForUser} instead */
+  public void launchSmartFreezePkg(java.lang.String pkgName) throws android.os.RemoteException;
   public void setSmartFreezeScreenOffCheckEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isSmartFreezeScreenOffCheckEnabled() throws android.os.RemoteException;
   public void setSmartFreezeScreenOffCheckDelay(long delay) throws android.os.RemoteException;
@@ -2745,6 +2865,8 @@ public interface IPkgManager extends android.os.IInterface
   public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> enableAllThanoxDisabledPackages(boolean removeFromSmartFreezeList) throws android.os.RemoteException;
   public boolean deviceHasGms() throws android.os.RemoteException;
   public boolean verifyBillingState() throws android.os.RemoteException;
+  /** @deprecated use {@link #launchSmartFreezePkgThenKillOriginForUser} instead */
+  public void launchSmartFreezePkgThenKillOrigin(java.lang.String pkgName, java.lang.String origin) throws android.os.RemoteException;
   public boolean isProtectedWhitelistEnabled() throws android.os.RemoteException;
   public void setProtectedWhitelistEnabled(boolean enable) throws android.os.RemoteException;
   public void addPlugin(android.os.ParcelFileDescriptor pfd, java.lang.String pluginPackageName, github.tornaco.android.thanos.core.pm.IAddPluginCallback callback) throws android.os.RemoteException;
@@ -2781,4 +2903,7 @@ public interface IPkgManager extends android.os.IInterface
   public java.lang.String mayEnableAppOnStartActivityIntent(android.content.Intent intent, int userId) throws android.os.RemoteException;
   public boolean isEnablePkgOnLaunchByDefault() throws android.os.RemoteException;
   public void setEnablePkgOnLaunchByDefaultEnabled(boolean byDefault) throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.pm.AppInfo getAppInfoForUser(java.lang.String pkgName, int userId) throws android.os.RemoteException;
+  public void launchSmartFreezePkgForUser(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void launchSmartFreezePkgThenKillOriginForUser(github.tornaco.android.thanos.core.pm.Pkg targetPkg, java.lang.String origin) throws android.os.RemoteException;
 }

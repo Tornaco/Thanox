@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.main;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,7 +33,8 @@ public class OneKeyBoostShortcutActivity extends Activity {
         try {
             sendBroadcast(new Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR));
         } finally {
-            finish();
+            finishAffinity();
+            ActivityManager am  = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         }
     }
 

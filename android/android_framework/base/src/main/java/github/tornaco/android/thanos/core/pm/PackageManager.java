@@ -201,7 +201,7 @@ public class PackageManager {
 
     @SneakyThrows
     public void launchSmartFreezePkg(Pkg pkg) {
-        pm.launchSmartFreezePkg(pkg);
+        pm.launchSmartFreezePkgForUser(pkg);
     }
 
     @SneakyThrows
@@ -237,6 +237,16 @@ public class PackageManager {
     @SneakyThrows
     public Intent queryLaunchIntentForPackage(String pkgName) {
         return pm.queryLaunchIntentForPackage(pkgName);
+    }
+
+    @SneakyThrows
+    public void launchSmartFreezePkgThenKillOrigin(String pkgName, String origin) {
+        pm.launchSmartFreezePkgThenKillOrigin(pkgName, origin);
+    }
+
+    @SneakyThrows
+    public void launchSmartFreezePkgThenKillOriginForUser(Pkg targetPkg, String origin) {
+        pm.launchSmartFreezePkgThenKillOriginForUser(targetPkg, origin);
     }
 
     @Nullable

@@ -61,8 +61,7 @@ public class SwitchBar extends FrameLayout
         this(context, attrs, defStyleAttr, 0);
     }
 
-    private int onRes, offRes;
-
+    private String onLabel, offLabel;
 
     @SuppressWarnings("ResourceType")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -91,7 +90,9 @@ public class SwitchBar extends FrameLayout
     }
 
     public void setTextViewLabel(boolean isChecked) {
-        mLabel = getResources().getString(isChecked ? (onRes > 0 ? onRes : R.string.switch_on_text) : (offRes > 0 ? offRes : R.string.switch_off_text));
+        mLabel = isChecked ?
+                (onLabel == null ? getResources().getString(R.string.switch_on_text) : onLabel)
+                : (offLabel == null ? getResources().getString(R.string.switch_off_text) : offLabel);
         updateText();
     }
 
@@ -210,20 +211,12 @@ public class SwitchBar extends FrameLayout
         requestLayout();
     }
 
-    public int getOnRes() {
-        return this.onRes;
+    public void setOnLabel(String onLabel) {
+        this.onLabel = onLabel;
     }
 
-    public int getOffRes() {
-        return this.offRes;
-    }
-
-    public void setOnRes(int onRes) {
-        this.onRes = onRes;
-    }
-
-    public void setOffRes(int offRes) {
-        this.offRes = offRes;
+    public void setOffLabel(String offLabel) {
+        this.offLabel = offLabel;
     }
 
     public interface OnSwitchChangeListener {

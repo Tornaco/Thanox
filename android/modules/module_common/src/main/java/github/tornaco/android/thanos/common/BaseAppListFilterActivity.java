@@ -141,6 +141,8 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
     protected abstract CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader();
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {
+        switchBar.setOnLabel(getString(R.string.common_switchbar_title_format, getTitleString()));
+        switchBar.setOffLabel(getString(R.string.common_switchbar_title_format, getTitleString()));
         switchBar.setChecked(getSwitchBarCheckState());
         switchBar.addOnSwitchChangeListener(this::onSwitchBarCheckChanged);
     }

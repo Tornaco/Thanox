@@ -94,6 +94,18 @@ class NotificationRecordActivity : ThemeActivity() {
     }
 
     private fun onSetupSwitchBar(switchBar: SwitchBar) {
+        switchBar.setOnLabel(
+            getString(
+                github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
+                getString(R.string.module_notification_recorder_feature_title_notification_recorder)
+            )
+        )
+        switchBar.setOffLabel(
+            getString(
+                github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
+                getString(R.string.module_notification_recorder_feature_title_notification_recorder)
+            )
+        )
         switchBar.isChecked = getSwitchBarCheckState()
         switchBar.addOnSwitchChangeListener { _: SwitchMaterial?, isChecked: Boolean ->
             onSwitchBarCheckChanged(

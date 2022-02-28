@@ -31,10 +31,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/common_view_margin_small"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAlignment="viewStart"
-            android:textAllCaps="true"
+            android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.Switch"
             android:textColor="?android:textColorPrimary"
             tools:text="Label" />

@@ -19,7 +19,6 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.widget.SwitchBar;
-import github.tornaco.android.thanos.widget.section.StickyHeaderLayoutManager;
 import github.tornaco.thanos.android.ops.R;
 import github.tornaco.thanos.android.ops.databinding.ModuleOpsLayoutAllOpsBinding;
 import github.tornaco.thanos.android.ops.model.Op;
@@ -86,6 +85,10 @@ public class AllOpsListFragment extends Fragment {
     }
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {
+        switchBar.setOnLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
+                getString(R.string.module_ops_feature_title_ops_app_list)));
+        switchBar.setOffLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
+                getString(R.string.module_ops_feature_title_ops_app_list)));
         switchBar.setChecked(getSwitchBarCheckState());
         switchBar.addOnSwitchChangeListener(this::onSwitchBarCheckChanged);
     }

@@ -108,6 +108,10 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
     }
 
     private void onSetupSwitchBar(SwitchBar switchBar) {
+        switchBar.setOnLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
+                getString(R.string.module_profile_feature_name)));
+        switchBar.setOffLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
+                getString(R.string.module_profile_feature_name)));
         switchBar.setChecked(getSwitchBarCheckState());
         switchBar.addOnSwitchChangeListener(this::onSwitchBarCheckChanged);
     }

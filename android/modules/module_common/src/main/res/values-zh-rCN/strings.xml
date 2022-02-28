@@ -48,4 +48,6 @@
     <string name="common_sort_by_install_sdk_version">目标SDK</string>
     <string name="common_sort_by_install_apk_size">应用体积</string>
     <string name="common_sort_by_install_app_uid">UID</string>
+
+    <string name="common_switchbar_title_format">使用“%s”</string >
 </resources>

@@ -48,4 +48,6 @@
     <string name="common_sort_by_install_sdk_version">Target SDK</string>
     <string name="common_sort_by_install_apk_size">Apk size</string>
     <string name="common_sort_by_install_app_uid">UID</string>
+
+    <string name="common_switchbar_title_format">Use \"%s\"</string>
 </resources>

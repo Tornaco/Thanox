@@ -114,6 +114,10 @@ public class ActivityTrampolineActivity extends ThemeActivity
     }
 
     private void onSetupSwitchBar(SwitchBar switchBar) {
+        switchBar.setOnLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
+                getString(R.string.module_activity_trampoline_app_name)));
+        switchBar.setOffLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
+                getString(R.string.module_activity_trampoline_app_name)));
         switchBar.setChecked(getSwitchBarCheckState());
         switchBar.addOnSwitchChangeListener(this::onSwitchBarCheckChanged);
     }

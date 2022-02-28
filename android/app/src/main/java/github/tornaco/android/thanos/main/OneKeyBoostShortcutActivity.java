@@ -34,7 +34,17 @@ public class OneKeyBoostShortcutActivity extends Activity {
             sendBroadcast(new Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR));
         } finally {
             finishAffinity();
-            ActivityManager am  = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+            ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+            tryRemoveAllTasks(am);
+        }
+    }
+
+    private void tryRemoveAllTasks(ActivityManager am) {
+        try {
+            for (ActivityManager.AppTask task : am.getAppTasks()) {
+                task.finishAndRemoveTask();
+            }
+        } catch (Throwable ignored) {
         }
     }
 

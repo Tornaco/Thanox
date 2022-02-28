@@ -212,11 +212,11 @@ public class SwitchBar extends FrameLayout
     }
 
     public void setOnLabel(String onLabel) {
-        this.onLabel = onLabel;
+        // We are not ready for the modern ui design...
     }
 
     public void setOffLabel(String offLabel) {
-        this.offLabel = offLabel;
+        // We are not ready for the modern ui design...
     }
 
     public interface OnSwitchChangeListener {

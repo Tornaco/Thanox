@@ -48,6 +48,12 @@ public class AllOpsListFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel.start();
+    }
+
     private void setupView() {
         binding.toolbar.setTitle(getString(R.string.module_ops_feature_title_ops_app_list));
 
@@ -111,12 +117,6 @@ public class AllOpsListFragment extends Fragment {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        viewModel.start();
     }
 
     public static AllOpsListViewModel obtainViewModel(FragmentActivity activity) {

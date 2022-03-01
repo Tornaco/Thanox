@@ -65,6 +65,12 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
     }
 
     @Override
+    protected void onSetupSorter(Chip sorterAnchor) {
+        sorterAnchor.setVisibility(View.GONE);
+        viewModel.setAppSort(null);
+    }
+
+    @Override
     protected void onSetupChip(ViewGroup chipContainer, ChipGroup chipGroup, Chip chip1, Chip chip2, Chip chip3, Chip chip4) {
         chip1.setText(R.string.title_allow);
         chip1.setChecked(showAllowed);

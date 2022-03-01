@@ -111,20 +111,22 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                     public void subscribe(SingleEmitter<List<AppListModel>> emitter) throws Exception {
                         List<AppListModel> res = requestLoadOrCachedAppList(preferCache);
 
-                        AppSort sort = Objects.requireNonNull(currentSort.get());
+                        AppSort sort = currentSort.get();
+                        if (sort != null) {
+                            // inflate usage stats if necessary.
+                            if (sort.relyOnUsageStats()) {
+                                inflateAppUsageStats(res);
+                            }
 
-                        // inflate usage stats if necessary.
-                        if (sort.relyOnUsageStats()) {
-                            inflateAppUsageStats(res);
-                        }
-
-                        AppSort.AppSorterProvider appSorterProvider = sort.provider;
-                        if (appSorterProvider != null) {
-                            res.sort(appSorterProvider.comparator(getApplication()));
-                            if (sortReverse.get()) {
-                                Collections.reverse(res);
+                            AppSort.AppSorterProvider appSorterProvider = sort.provider;
+                            if (appSorterProvider != null) {
+                                res.sort(appSorterProvider.comparator(getApplication()));
+                                if (sortReverse.get()) {
+                                    Collections.reverse(res);
+                                }
                             }
                         }
+
                         emitter.onSuccess(res);
                     }
                 })
@@ -156,11 +158,14 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                     @Override
                     public void accept(AppListModel model) throws Exception {
                         // Append info from the sorter.
-                        AppSort.AppSorterProvider appSorterProvider = Objects.requireNonNull(currentSort.get()).provider;
-                        if (appSorterProvider != null) {
-                            String appSortDescription = appSorterProvider.getAppSortDescription(getApplication(), model);
-                            if (!TextUtils.isEmpty(appSortDescription)) {
-                                model.description = ((model.description == null ? "" : model.description) + "\n" + appSortDescription).trim();
+                        AppSort sort = currentSort.get();
+                        if (sort != null) {
+                            AppSort.AppSorterProvider appSorterProvider = sort.provider;
+                            if (appSorterProvider != null) {
+                                String appSortDescription = appSorterProvider.getAppSortDescription(getApplication(), model);
+                                if (!TextUtils.isEmpty(appSortDescription)) {
+                                    model.description = ((model.description == null ? "" : model.description) + "\n" + appSortDescription).trim();
+                                }
                             }
                         }
                         listModels.add(model);

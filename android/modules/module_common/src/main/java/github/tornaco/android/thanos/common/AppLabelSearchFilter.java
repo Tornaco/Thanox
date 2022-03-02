@@ -6,6 +6,7 @@ import com.elvishew.xlog.XLog;
 import com.github.promeg.pinyinhelper.Pinyin;
 
 import java.util.Arrays;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import lang3.StringUtils;
@@ -43,7 +44,10 @@ public class AppLabelSearchFilter {
 
             // Match first letter of full pinyin
             String firstLetterOfFullPinyin = Arrays.stream(fullPinyinWithToken.split(TOKEN_SPLITTER))
-                    .map(s -> String.valueOf(s.charAt(0)))
+                    .map(s -> {
+                        if (TextUtils.isEmpty(s)) return "";
+                        return String.valueOf(s.charAt(0));
+                    })
                     .collect(Collectors.joining());
             XLog.d("AppLabelSearchFilter firstLetterOfFullPinyin: %s", firstLetterOfFullPinyin);
             return StringUtils.containsIgnoreCase(firstLetterOfFullPinyin, keyword);

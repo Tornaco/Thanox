@@ -37,9 +37,12 @@ android {
     }
 
     buildTypes {
+        val noMinify = project.findProperty("no-minify")?.toString().toBoolean()
+        log("noMinify: $noMinify")
+
         getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = !noMinify
+            isShrinkResources = !noMinify
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -48,8 +51,8 @@ android {
         }
 
         getByName("debug") {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = !noMinify
+            isShrinkResources = !noMinify
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -219,34 +222,49 @@ tasks.register("updateProps") {
     log("*** updateProps ***")
     val serviceProps = Properties()
     // Src.
-    serviceProps.load(project.rootProject.file("thanos.properties")
-        .inputStream())
+    serviceProps.load(
+        project.rootProject.file("thanos.properties")
+            .inputStream()
+    )
 
     // Write fields.
-    serviceProps.setProperty("thanox.build.version.code",
-        Configs.thanoxVersionCode.toString())
-    serviceProps.setProperty("thanox.build.version.name",
-        Configs.thanoxVersionName)
+    serviceProps.setProperty(
+        "thanox.build.version.code",
+        Configs.thanoxVersionCode.toString()
+    )
+    serviceProps.setProperty(
+        "thanox.build.version.name",
+        Configs.thanoxVersionName
+    )
     serviceProps.setProperty("thanox.build.variant", Configs.thanoxBuildVariant)
-    serviceProps.setProperty("thanox.build.debuggable",
-        Configs.thanoxBuildIsDebug.toString())
+    serviceProps.setProperty(
+        "thanox.build.debuggable",
+        Configs.thanoxBuildIsDebug.toString()
+    )
     serviceProps.setProperty("thanox.build.flavor", Configs.thanoxBuildFlavor)
     serviceProps.setProperty("thanox.build.host", Configs.thanoxBuildHostName)
     serviceProps.setProperty("thanox.build.fp", Configs.thanoxBuildFP)
     serviceProps.setProperty("thanox.build.date", Date().toString())
-    serviceProps.setProperty("thanox.build.app.package.name",
-        Configs.thanoxAppId)
-    serviceProps.setProperty("thanox.build.app.package.name.prefix",
-        Configs.thanoxAppIdPrefix)
-    serviceProps.setProperty("thanox.build.shortcut.package.name.prefix",
-        Configs.thanoxShortcutAppIdPrefix)
+    serviceProps.setProperty(
+        "thanox.build.app.package.name",
+        Configs.thanoxAppId
+    )
+    serviceProps.setProperty(
+        "thanox.build.app.package.name.prefix",
+        Configs.thanoxAppIdPrefix
+    )
+    serviceProps.setProperty(
+        "thanox.build.shortcut.package.name.prefix",
+        Configs.thanoxShortcutAppIdPrefix
+    )
 
 
     // Write to app resources.
     serviceProps.store(
         project.file("src/main/resources/META-INF/thanos.properties")
             .outputStream(),
-        "Auto Generated, Do Not Modify.")
+        "Auto Generated, Do Not Modify."
+    )
     log("*** updateProps done***")
 }
 
@@ -267,7 +285,8 @@ afterEvaluate {
                     val isResources = resFile.name.contains("resources-")
                     if (isResources) {
 
-                        log("""
+                        log(
+                            """
                             
                              __  __    _    ____ ___ ____  _  __
                             |  \/  |  / \  / ___|_ _/ ___|| |/ /
@@ -275,7 +294,8 @@ afterEvaluate {
                             | |  | |/ ___ \ |_| || | ___) | . \
                             |_|  |_/_/   \_\____|___|____/|_|\_\
                             
-                        """.trimIndent())
+                        """.trimIndent()
+                        )
 
                         log("Will add mod files into: $resFile")
                         val aapt = aapt()

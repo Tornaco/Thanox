@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.picker;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -55,6 +56,14 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
         Bundle data = new Bundle();
         data.putParcelableArrayList(EXTRA_EXCLUDE_PKGS, excludePkgs);
         ActivityUtils.startActivityForResult(context, AppPickerActivity.class, requestCode, data);
+    }
+
+    public static Intent getIntent(Context context, ArrayList<Pkg> excludePkgs) {
+        Intent intent = new Intent(context, AppPickerActivity.class);
+        Bundle data = new Bundle();
+        data.putParcelableArrayList(EXTRA_EXCLUDE_PKGS, excludePkgs);
+        intent.putExtras(data);
+        return intent;
     }
 
     @Override

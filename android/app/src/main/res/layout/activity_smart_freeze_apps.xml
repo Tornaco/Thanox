@@ -12,55 +12,66 @@
 
     </data>
 
-    <RelativeLayout
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
+            android:fitsSystemWindows="false"
             android:theme="?appbarTheme"
             app:elevation="@dimen/common_toolbar_elevation">
 
-
-            <FrameLayout
-                android:id="@+id/toolbar_container"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                style="?collapsingToolbarTheme"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_collapseMode="pin">
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
+                app:contentScrim="?attr/colorSurface"
+                app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleCollapseMode="scale"
+                app:toolbarId="@+id/toolbar">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
+                <FrameLayout
+                    android:id="@+id/toolbar_container"
                     android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    app:popupTheme="?appbarPopupTheme"
-                    app:theme="?toolbarTheme"
-                    app:title="@string/feature_title_smart_app_freeze"
-                    app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    app:titleTextColor="?attr/colorControlNormal" />
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin">
 
-                <com.miguelcatalan.materialsearchview.MaterialSearchView
-                    android:id="@+id/search_view"
-                    style="@style/SearchViewStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        app:popupTheme="?appbarPopupTheme"
+                        app:theme="?toolbarTheme"
+                        app:title="@string/feature_title_smart_app_freeze"
+                        app:titleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
+                        app:titleTextColor="?attr/colorControlNormal" />
 
-            </FrameLayout>
+                    <com.miguelcatalan.materialsearchview.MaterialSearchView
+                        android:id="@+id/search_view"
+                        style="@style/SearchViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
+                </FrameLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appbar"
-            android:orientation="vertical">
-
-            <include
-                android:id="@+id/switch_bar_container"
-                layout="@layout/module_common_switchbar_container" />
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe"
@@ -72,14 +83,12 @@
                     android:id="@+id/apps"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:listModels="@{viewmodel.listModels}"
                     android:paddingStart="@dimen/common_view_margin_small"
                     android:paddingTop="@dimen/common_view_margin_small"
                     android:paddingEnd="@dimen/common_view_margin_small" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </LinearLayout>
-
-    </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

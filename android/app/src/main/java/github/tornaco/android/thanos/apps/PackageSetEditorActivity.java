@@ -165,27 +165,37 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
 
     @Override
     protected CommonAppListFilterAdapter onCreateCommonAppListFilterAdapter() {
-        adapter = new CommonAppListFilterAdapter(
-                (appInfo, itemView) -> QuickDropdown.show(
-                        thisActivity(),
-                        itemView,
-                        index -> {
-                            if (index == 0) {
-                                return getString(R.string.title_package_delete_set);
-                            }
-                            return null;
-                        },
-                        id -> {
-                            if (id == 0) {
-                                ThanosManager.from(thisActivity())
-                                        .getPkgManager()
-                                        .removeFromPackageSet(appInfo.getPkgName(), packageSet.getId());
-                                packageSet.removePackage(appInfo.getPkgName());
-                                adapter.removeItem(
-                                        input -> ObjectsUtils.equals(input.appInfo.getPkgName(), appInfo.getPkgName()));
-                                changed = true;
-                            }
-                        }));
+        adapter = new CommonAppListFilterAdapter((appInfo, itemView) -> {
+            if (packageSet == null || packageSet.isPrebuilt()) {
+                AppDetailsActivity.start(thisActivity(), appInfo);
+                return;
+            }
+
+            QuickDropdown.show(
+                    thisActivity(),
+                    itemView,
+                    index -> {
+                        if (index == 0) {
+                            return getString(R.string.title_package_delete_set);
+                        } else if (index == 1) {
+                            return getString(R.string.feature_title_apps_manager);
+                        }
+                        return null;
+                    },
+                    id -> {
+                        if (id == 0) {
+                            ThanosManager.from(thisActivity())
+                                    .getPkgManager()
+                                    .removeFromPackageSet(appInfo.getPkgName(), packageSet.getId());
+                            packageSet.removePackage(appInfo.getPkgName());
+                            adapter.removeItem(
+                                    input -> ObjectsUtils.equals(input.appInfo.getPkgName(), appInfo.getPkgName()));
+                            changed = true;
+                        } else if (id == 1) {
+                            AppDetailsActivity.start(thisActivity(), appInfo);
+                        }
+                    });
+        });
         return adapter;
     }
 

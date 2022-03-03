@@ -160,6 +160,7 @@
     <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">
         Android 9+設備使用智能休眠需要開啟系統設置中的電池-自適應電池選項才能正常工作。\n\nThanox當前無法準確判斷你的系統是否支持並開啟了該選項。
     </string>
+    <string name="message_do_you_want_to_add_apps_to_pkg_set">還要將這些應用程序添加到當前的應用集中嗎？</string>
 
     <string name="feature_title_infinite_z">双开</string>
 

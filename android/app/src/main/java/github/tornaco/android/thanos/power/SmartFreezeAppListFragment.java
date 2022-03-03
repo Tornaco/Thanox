@@ -1,18 +1,19 @@
 package github.tornaco.android.thanos.power;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Objects;
 
 import github.tornaco.android.rhino.plugin.Verify;
+import github.tornaco.android.thanos.BaseFragment;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
@@ -35,56 +37,43 @@ import github.tornaco.android.thanos.apps.AppDetailsActivity;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.PackageManager;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.databinding.ActivitySmartFreezeAppsBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
-import github.tornaco.android.thanos.pref.AppPreference;
-import github.tornaco.android.thanos.theme.ThemeActivity;
-import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
-import github.tornaco.android.thanos.widget.SwitchBar;
-import util.CollectionUtils;
 
-public class SmartFreezeActivity extends ThemeActivity {
-    private static final int REQ_PICK_APPS = 0x100;
+public class SmartFreezeAppListFragment extends BaseFragment {
+    private static final String ARG_PKG_SET = "arg.pkg.set.id";
 
     private SmartFreezeAppsViewModel viewModel;
     private ActivitySmartFreezeAppsBinding binding;
 
-    @Verify
-    public static void start(Context context) {
-        ActivityUtils.startActivity(context, SmartFreezeActivity.class);
+    public static SmartFreezeAppListFragment newInstance(@Nullable String pkgSetId) {
+        SmartFreezeAppListFragment freezeAppListFragment = new SmartFreezeAppListFragment();
+        Bundle data = new Bundle();
+        data.putString(ARG_PKG_SET, pkgSetId);
+        freezeAppListFragment.setArguments(data);
+        return freezeAppListFragment;
     }
 
-    @Override
-    public boolean isF() {
-        return true;
-    }
-
+    @Nullable
     @Override
     @Verify
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivitySmartFreezeAppsBinding.inflate(
-                LayoutInflater.from(this), null, false);
-        setContentView(binding.getRoot());
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = ActivitySmartFreezeAppsBinding.inflate(inflater, container, false);
+        createOptionsMenu();
         setupView();
-        setupViewModel();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        showFeatureDialogIfNeed();
+        Bundle data = getArguments();
+        String pkgSetId = Objects.requireNonNull(data, "Missing arg: " + ARG_PKG_SET).getString(ARG_PKG_SET, null);
+        setupViewModel(pkgSetId);
+        return binding.getRoot();
     }
 
     private void setupView() {
-        setSupportActionBar(binding.toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
+        binding.toolbar.setNavigationIcon(R.drawable.module_common_ic_arrow_back_24dp);
+        binding.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
         // Search.
         binding.searchView.setOnQueryTextListener(
                 new MaterialSearchView.OnQueryTextListener() {
@@ -105,24 +94,26 @@ public class SmartFreezeActivity extends ThemeActivity {
                 new MaterialSearchView.SearchViewListener() {
                     @Override
                     public void onSearchViewShown() {
-                        // Noop.
+                        binding.toolbarLayout.setTitleEnabled(false);
+                        binding.appbar.setExpanded(false, true);
                     }
 
                     @Override
                     public void onSearchViewClosed() {
                         viewModel.clearSearchText();
+                        binding.toolbarLayout.setTitleEnabled(true);
                     }
                 });
 
         // List.
-        binding.apps.setLayoutManager(new GridLayoutManager(this, 5));
+        binding.apps.setLayoutManager(new GridLayoutManager(requireContext(), 5));
         binding.apps.setAdapter(new SmartFreezeAppsAdapter(new AppItemActionListener() {
             @Override
             public void onAppItemClick(AppInfo appInfo) {
-                ThanosManager.from(getApplicationContext())
-                        .getPkgManager()
-                        .launchSmartFreezePkg(Pkg.fromAppInfo(appInfo));
-                postOnUiDelayed(() -> viewModel.start(), 2000);
+                PackageManager pm = ThanosManager.from(requireContext())
+                        .getPkgManager();
+                pm.launchSmartFreezePkg(Pkg.fromAppInfo(appInfo));
+                appInfo.setState(AppInfo.STATE_ENABLED);
             }
 
             @Override
@@ -134,40 +125,39 @@ public class SmartFreezeActivity extends ThemeActivity {
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
-        onSetupSwitchBar(binding.switchBarContainer.switchBar);
     }
 
     @Verify
     private void showItemPopMenu(@NonNull View anchor, @NonNull AppInfo appInfo) {
-        PopupMenu popupMenu = new PopupMenu(thisActivity(), anchor);
+        PopupMenu popupMenu = new PopupMenu(requireActivity(), anchor);
         popupMenu.inflate(R.menu.smart_freeze_item_menu);
         popupMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.action_remove_from_smart_freeze) {
-                ThanosManager.from(getApplicationContext())
+                ThanosManager.from(requireContext())
                         .getPkgManager()
                         .setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), false);
-                viewModel.requestUnInstallStubApkIfInstalled(getApplicationContext(), appInfo);
+                viewModel.requestUnInstallStubApkIfInstalled(requireContext(), appInfo);
                 viewModel.start();
                 return true;
             }
             if (item.getItemId() == R.id.action_create_shortcut) {
-                ShortcutHelper.addShortcut(thisActivity(), appInfo);
+                ShortcutHelper.addShortcut(requireActivity(), appInfo);
                 return true;
             }
             if (item.getItemId() == R.id.action_create_shortcut_apk) {
-                if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
-                    Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                    Toast.makeText(requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 onRequestShortcutStubApk(appInfo);
                 return true;
             }
             if (item.getItemId() == R.id.action_apps_manager) {
-                if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
-                    Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                    Toast.makeText(requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                     return false;
                 }
-                AppDetailsActivity.start(getApplicationContext(), appInfo);
+                AppDetailsActivity.start(requireContext(), appInfo);
                 return true;
             }
             return false;
@@ -175,14 +165,11 @@ public class SmartFreezeActivity extends ThemeActivity {
         popupMenu.show();
     }
 
-    protected void onSetupSwitchBar(SwitchBar switchBar) {
-        switchBar.hide();
-    }
 
     @Verify
-    private void setupViewModel() {
-        viewModel = obtainViewModel(this);
-        viewModel.start();
+    private void setupViewModel(String pkgSetId) {
+        viewModel = obtainViewModel(requireActivity());
+        viewModel.setPkgSetId(pkgSetId);
 
         binding.setViewmodel(viewModel);
         binding.setLifecycleOwner(this);
@@ -190,34 +177,57 @@ public class SmartFreezeActivity extends ThemeActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (REQ_PICK_APPS == requestCode && resultCode == RESULT_OK && data != null && data.hasExtra("apps")) {
-            binding.swipe.setRefreshing(true);
-            List<AppInfo> appInfos = data.getParcelableArrayListExtra("apps");
-            CollectionUtils.consumeRemaining(appInfos, appInfo -> ThanosManager.from(getApplicationContext())
-                    .getPkgManager()
-                    .setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), true));
-            postOnUiDelayed(() -> {
-                binding.swipe.setRefreshing(false);
-                viewModel.start();
-            }, 1000);
-        }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // A little delay make ui looks smoother
+        postOnUiDelayed(() -> viewModel.start(), 100);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.smart_freeze_menu, menu);
-        MenuItem item = menu.findItem(github.tornaco.android.thanos.module.common.R.id.action_search);
+    private final ActivityResultLauncher<Intent> pickApps
+            = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null && result.getData().hasExtra("apps")) {
+                    List<AppInfo> appInfos = result.getData().getParcelableArrayListExtra("apps");
+                    onRequestAddToSmartFreezeListAskIfAddToPkgSet(appInfos);
+                }
+            });
+
+    private void onRequestAddToSmartFreezeList(List<AppInfo> appInfos, boolean alsoAddToPkgSet) {
+        ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
+        progress.setTitle(R.string.common_text_wait_a_moment);
+        viewModel.addToSmartFreezeList(appInfos,
+                alsoAddToPkgSet,
+                appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())),
+                success -> {
+                    progress.dismiss();
+                    viewModel.start();
+                });
+        progress.show();
+    }
+
+    private void onRequestAddToSmartFreezeListAskIfAddToPkgSet(List<AppInfo> appInfos) {
+        ModernAlertDialog dialog = new ModernAlertDialog(requireActivity());
+        dialog.setDialogTitle(getString(R.string.common_fab_title_add));
+        dialog.setDialogMessage(getString(R.string.message_do_you_want_to_add_apps_to_pkg_set));
+        dialog.setCancelable(false);
+        dialog.setNegative(getString(android.R.string.no));
+        dialog.setOnNegative(() -> onRequestAddToSmartFreezeList(appInfos, false));
+        dialog.setPositive(getString(R.string.common_fab_title_add));
+        dialog.setOnPositive(() -> onRequestAddToSmartFreezeList(appInfos, true));
+        dialog.show();
+    }
+
+    private void createOptionsMenu() {
+        binding.toolbar.inflateMenu(R.menu.smart_freeze_menu);
+        MenuItem item = binding.toolbar.getMenu().findItem(github.tornaco.android.thanos.module.common.R.id.action_search);
         binding.searchView.setMenuItem(item);
-        return super.onCreateOptionsMenu(menu);
+        binding.toolbar.setOnMenuItemClickListener(this::handleOptionsItemSelected);
     }
 
-    @Override
     @Verify
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    private boolean handleOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_settings == item.getItemId()) {
-            SmartFreezeSettingsActivity.start(this);
+            SmartFreezeSettingsActivity.start(requireActivity());
             return true;
         }
         if (R.id.action_add == item.getItemId()) {
@@ -225,47 +235,41 @@ public class SmartFreezeActivity extends ThemeActivity {
             return true;
         }
         if (R.id.action_enable_all_smart_freeze == item.getItemId()) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
-                Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                Toast.makeText(requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return false;
             }
-            new MaterialAlertDialogBuilder(this)
+            new MaterialAlertDialogBuilder(requireActivity())
                     .setTitle(R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps)
                     .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_smart_freeze_apps)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                        ThanosManager.from(getApplicationContext())
-                                .getPkgManager()
-                                .enableAllThanoxDisabledPackages(true);
-                        viewModel.start();
+                        onRequestEnableAllSmartFreezeApps();
                     })
                     .setNegativeButton(android.R.string.cancel, null)
                     .show();
             return true;
         }
         if (R.id.action_enable_all_smart_freeze_temp == item.getItemId()) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
-                Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                Toast.makeText(requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return false;
             }
-            new MaterialAlertDialogBuilder(this)
+            new MaterialAlertDialogBuilder(requireActivity())
                     .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp)
                     .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                        ThanosManager.from(getApplicationContext())
-                                .getPkgManager()
-                                .enableAllThanoxDisabledPackages(false);
-                        viewModel.start();
+                        onRequestEnableAllSmartFreezeAppsTemp();
                     })
                     .setNegativeButton(android.R.string.cancel, null)
                     .show();
             return true;
         }
         if (R.id.action_enable_all_apps == item.getItemId()) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
-                Toast.makeText(getApplicationContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                Toast.makeText(requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return false;
             }
-            new MaterialAlertDialogBuilder(this)
+            new MaterialAlertDialogBuilder(requireActivity())
                     .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps)
                     .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -280,8 +284,28 @@ public class SmartFreezeActivity extends ThemeActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void onRequestEnableAllSmartFreezeApps() {
+        ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
+        progress.setTitle(R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps);
+        viewModel.enableAllThanoxDisabledPackages(true, appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
+            progress.dismiss();
+            viewModel.start();
+        });
+        progress.show();
+    }
+
+    private void onRequestEnableAllSmartFreezeAppsTemp() {
+        ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
+        progress.setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp);
+        viewModel.enableAllThanoxDisabledPackages(false, appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
+            progress.dismiss();
+            viewModel.start();
+        });
+        progress.show();
+    }
+
     private void onRequestEnableAllApps() {
-        ModernProgressDialog progress = new ModernProgressDialog(thisActivity());
+        ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
         progress.setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps);
         viewModel.onRequestEnableAllApps(appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
             progress.dismiss();
@@ -291,7 +315,7 @@ public class SmartFreezeActivity extends ThemeActivity {
     }
 
     void onRequestShortcutStubApk(AppInfo appInfo) {
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_create_stub_apk, null, false);
+        View dialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_create_stub_apk, null, false);
         EditText appNameView = dialogView.findViewById(R.id.app_name);
         EditText appVersionCodeView = dialogView.findViewById(R.id.app_version_code);
         EditText appVersionNameView = dialogView.findViewById(R.id.app_version_name);
@@ -299,7 +323,7 @@ public class SmartFreezeActivity extends ThemeActivity {
         Objects.requireNonNull(appVersionCodeView).setText(String.valueOf(appInfo.getVersionCode()));
         Objects.requireNonNull(appVersionNameView).setText(appInfo.getVersionName());
 
-        new MaterialAlertDialogBuilder(thisActivity())
+        new MaterialAlertDialogBuilder(requireActivity())
                 .setView(dialogView)
                 .setTitle(R.string.menu_title_create_shortcut_apk)
                 .setNegativeButton(android.R.string.cancel, null)
@@ -315,28 +339,9 @@ public class SmartFreezeActivity extends ThemeActivity {
                 }).show();
     }
 
-    private void showFeatureDialogIfNeed() {
-        if (AppPreference.isFeatureNoticeAccepted(getApplicationContext(), "SmartFreeze")) {
-            return;
-        }
-        new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.feature_title_smart_app_freeze)
-                .setMessage(R.string.feature_desc_smart_app_freeze)
-                .setCancelable(false)
-                .setPositiveButton(android.R.string.ok, null)
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> finish())
-                .setNeutralButton(R.string.title_remember, (dialog, which) ->
-                        AppPreference.setFeatureNoticeAccepted(getApplicationContext(), "SmartFreeze", true))
-                .show();
-
-    }
-
     @Override
-    public void onBackPressed() {
-        if (closeSearch()) {
-            return;
-        }
-        super.onBackPressed();
+    public boolean onBackPressed() {
+        return closeSearch();
     }
 
     protected boolean closeSearch() {
@@ -351,15 +356,15 @@ public class SmartFreezeActivity extends ThemeActivity {
         int size = viewModel.listModels.size();
         // Limit free to add at most 9 apps.
         if (size > 3) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(thisActivity())) {
-                Toast.makeText(thisActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
+                Toast.makeText(requireActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return;
             }
         }
 
-        ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
+        ThanosManager.from(requireContext()).ifServiceInstalled(thanosManager -> {
             ArrayList<Pkg> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
-            AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
+            pickApps.launch(AppPickerActivity.getIntent(requireContext(), exclude));
         });
     }
 

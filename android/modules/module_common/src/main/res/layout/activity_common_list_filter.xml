@@ -54,10 +54,7 @@
                         app:theme="?toolbarTheme"
                         app:titleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
                         app:titleTextColor="?attr/colorControlNormal"
-                        tools:title="Title of Toolbar">
-
-                    </androidx.appcompat.widget.Toolbar>
-
+                        tools:title="Title of Toolbar" />
 
                     <com.miguelcatalan.materialsearchview.MaterialSearchView
                         android:id="@+id/search_view"

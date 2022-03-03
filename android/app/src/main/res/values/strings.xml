@@ -162,6 +162,8 @@
         This feature works only if Adaptive battery is enabled @Android Pie+.
     </string>
 
+    <string name="message_do_you_want_to_add_apps_to_pkg_set">Also add these Apps to current Package Set?</string>
+
     <string name="feature_title_infinite_z">App clone</string>
 
     <string name="menu_title_copy">Copy</string>

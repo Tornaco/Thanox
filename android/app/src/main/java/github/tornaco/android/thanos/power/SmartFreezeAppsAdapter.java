@@ -13,6 +13,7 @@ import java.util.List;
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener;
 import github.tornaco.android.thanos.common.AppListModel;
+import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.databinding.ItemSmartFreezeAppBinding;
 import util.Consumer;
 
@@ -42,7 +43,15 @@ public class SmartFreezeAppsAdapter extends RecyclerView.Adapter<SmartFreezeApps
     public void onBindViewHolder(@NonNull VH holder, int position) {
         AppListModel model = appListModels.get(position);
         holder.binding.setApp(model.appInfo);
-        holder.binding.setListener(itemViewClickListener);
+        holder.binding.setListener(new AppItemClickListener() {
+            @Override
+            public void onAppItemClick(AppInfo appInfo) {
+                if (itemViewClickListener != null) {
+                    itemViewClickListener.onAppItemClick(appInfo);
+                    notifyItemChanged(holder.getLayoutPosition());
+                }
+            }
+        });
         holder.binding.appItemRoot.setOnLongClickListener(v -> {
             if (itemViewLongClickListener != null) {
                 itemViewLongClickListener.onAppItemLongClick(holder.binding.appItemRoot, model.appInfo);

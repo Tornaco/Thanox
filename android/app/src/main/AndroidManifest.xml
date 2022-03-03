@@ -134,7 +134,7 @@
             android:exported="false"
             android:theme="@style/AppThemeNeedRestart" />
         <activity
-            android:name=".power.SmartFreezeActivity"
+            android:name=".power.SmartFreezeBottomNavActivity"
             android:exported="false" />
         <activity
             android:name=".power.ShortcutStubActivity"
@@ -203,7 +203,7 @@
             android:value="53" />
         <meta-data
             android:name="xposedscope"
-            android:resource="@array/scope"/>
+            android:resource="@array/scope" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

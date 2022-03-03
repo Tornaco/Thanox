@@ -161,6 +161,8 @@
         Android 9+设备使用智能休眠需要开启系统设置中的电池-自适应电池选项才能正常工作。\n\nThanox当前无法准确判断你的系统是否支持并开启了该选项。
     </string>
 
+    <string name="message_do_you_want_to_add_apps_to_pkg_set">还要将这些应用程序添加到当前的应用集中吗？</string>
+
     <string name="feature_title_infinite_z">双开</string>
 
     <string name="menu_title_copy">Copy</string>

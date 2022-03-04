@@ -21,6 +21,8 @@
             android:layout_alignParentBottom="true"
             android:paddingStart="@dimen/common_view_margin_default"
             android:paddingEnd="@dimen/common_view_margin_default"
+            android:paddingBottom="@dimen/common_view_margin_tiny"
+            android:paddingTop="@dimen/common_view_margin_tiny"
             app:tabGravity="start"
             app:tabIndicatorAnimationMode="elastic"
             app:tabMode="scrollable"

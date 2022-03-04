@@ -36,14 +36,17 @@ class SmartFreezeBottomNavActivity : ThemeActivity() {
         binding = SmartFreezeLayoutBottomNavBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.getTabs(this)
+        inflateTabs()
+    }
 
+    private fun inflateTabs() {
+        viewModel.getTabs(this)
+        binding.bottomNavigation.removeAllTabs()
         viewModel.tabItems.forEach {
             binding.bottomNavigation.addTab(
                 binding.bottomNavigation.newTab().setId(it.id).setText(it.pkgSet.label)
             )
         }
-
         binding.bottomNavigation.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 handleTabSelect(tab)
@@ -62,9 +65,9 @@ class SmartFreezeBottomNavActivity : ThemeActivity() {
     }
 
     private fun handleTabSelect(tab: TabLayout.Tab?) {
-        tab?.let {
+        tab?.let { selectedTab ->
             viewModel.tabItems.firstOrNull {
-                it.id == tab.id
+                it.id == selectedTab.id
             }?.let { tab ->
                 replaceFragment(SmartFreezeAppListFragment.newInstance(tab.pkgSet.id))
             }

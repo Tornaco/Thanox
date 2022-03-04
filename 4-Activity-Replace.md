@@ -1,9 +1,9 @@
 ---
-layout: post
+layout: default
 title:  "移花接木"
 summary: "自定义活动启动"
 date:   2020-07-14 15:58:00
-categories: jekyll
+nav_order: 5
 
 ---
 

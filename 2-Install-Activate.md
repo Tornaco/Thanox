@@ -1,6 +1,7 @@
 ---
-layout: post
+layout: default
 title: 安装与激活
+nav_order: 3
 ---
 
 

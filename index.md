@@ -1,9 +1,9 @@
 ---
-layout: post
+layout: default
 title:  "应用介绍"
 summary: "Thanox工作原理"
 date:   2018-07-20 15:50:00
-categories: jekyll
+nav_order: 2
 ---
 
 <!-- more -->

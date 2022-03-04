@@ -1,9 +1,9 @@
 ---
-layout: post
+layout: default
 title:  "乖巧模式"
 summary: "实验功能"
 date:   2018-07-13 15:58:00
-categories: jekyll
+nav_order: 4
 ---
 <!-- more -->
 

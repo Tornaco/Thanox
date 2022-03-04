@@ -1,6 +1,7 @@
 ---
-layout: post
+layout: default
 title: 情景模式（Profile）
+nav_order: 7
 ---
 
 ## 0.1. 前言

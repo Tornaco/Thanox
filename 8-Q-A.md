@@ -1,9 +1,9 @@
 ---
-layout: post
+layout: default
 title:  "常见问题"
 summary: "经常问的一些问题"
 date:   20121-11-01 19:58:00
-categories: jekyll
+nav_order: 9
 ---
 <!-- more -->
 

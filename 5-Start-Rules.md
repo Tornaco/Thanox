@@ -1,9 +1,9 @@
 ---
-layout: post
+layout: default
 title:  "后台启动规则"
 summary: "面向喜欢折腾的用户"
 date:   2018-07-14 15:58:00
-categories: jekyll
+nav_order: 6
 ---
 <!-- more -->
 

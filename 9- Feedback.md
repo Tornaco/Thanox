@@ -1,9 +1,9 @@
 ---
-layout: post
+layout: default
 title:  "反馈与建议"
 summary: "问题反馈与功能建议"
 date:   20121-11-01 19:58:00
-categories: jekyll
+nav_order: 10
 ---
 <!-- more -->
 

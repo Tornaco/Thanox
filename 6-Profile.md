@@ -28,7 +28,7 @@ You can build a simple rules engine yourself. All you need is to create a bunch 
 
 情景模式简单理解：
 
-> 什么时候，干什么。
+"什么时候，干什么。"
 
 什么时候就是触发条件（condition）
 
@@ -218,11 +218,7 @@ Resumed--> Paused（被其他活动覆盖）-->Resumed（如果其他活动销�
 ]
 ```
 
-> 提示：
->
-> 此处条件只判断了彩云天气，可以使用||操作符做多条件判断。
->
-> 此处的ui操作后续会介绍。
+提示：此处条件只判断了彩云天气，可以使用||操作符做多条件判断。此处的ui操作后续会介绍。
 
 &nbsp;
 
@@ -298,10 +294,8 @@ Thanox的开发者设置中，"显示当前Activity"功能也可以显示当前a
 | btBoundedDeviceAliasNames   | List of String      | 绑定的蓝牙设备Alias列表   | 无 |
 | btBoundedDeviceBatteryLevel   | List of Int      | 绑定的蓝牙设备电量信息列表   | 无 |
 
-补充：
-> Battery level in percents from 0 to 100, or -1 if
-     * Bluetooth is disabled, or device is disconnected, or does not have any battery reporting
-     * service, or return value is invalid
+提示：
+Battery level in percents from 0 to 100, or -1 if Bluetooth is disabled, or device is disconnected, or does not have any battery reportingservice, or return value is invalid
 
 示例1：
 

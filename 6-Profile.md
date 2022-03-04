@@ -4,19 +4,25 @@ title: 情景模式（Profile）
 nav_order: 7
 ---
 
+# 情景模式
+{: .no_toc }
+
+
+{: .fs-6 .fw-300 }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 ## 0.1. 前言
 
-规则引擎：https://github.com/j-easy/easy-rules
-
-
-
-> You can build a simple rules engine yourself. All you need is to create a bunch of objects with conditions and actions, store them in a collection, and run through them to evaluate the conditions and execute the actions.
->
-> [Martin Fowler](http://martinfowler.com/) 
-
+You can build a simple rules engine yourself. All you need is to create a bunch of objects with conditions and actions, store them in a collection, and run through them to evaluate the conditions and execute the actions. [Martin Fowler](http://martinfowler.com/)
 &nbsp;
 
-&nbsp;
 
 ## 0.2. 介绍
 

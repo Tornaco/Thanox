@@ -32,7 +32,7 @@ Thanox中大部分的功能都是在系统进程中完成的，因此Thanox会�
 3. 勾选完成，重启设备
 4. 对于支持作用域的Xposed框架，请至少勾选Android系统，如要对某个app启用隐匿功能，则还需要勾选目标app
 
-> 注意，每次更新Thanox后，建议都重新勾选Thanox后重启
+**注意，每次更新Thanox后，建议都重新勾选Thanox后重启**
 
 &nbsp;
 
@@ -44,7 +44,7 @@ Thanox中大部分的功能都是在系统进程中完成的，因此Thanox会�
 4. 点击Thaox设置--关于--补丁状态，导出magisk补丁；或者直接将thanox apk重命名为.zip格式即为magisk补丁
 5. 刷入上个步骤获取到的magisk补丁
 
-> 注意，每次更新Thanox，都需要更新magisk补丁
+**注意，每次更新Thanox，都需要更新magisk补丁。**
 
 &nbsp;
 

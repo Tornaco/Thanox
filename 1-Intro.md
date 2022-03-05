@@ -70,4 +70,3 @@ Android12（从**Thanox 3.x**开始支持）
 如果想要卸载**Thanox**模块并清除其所有数据，可以前往**Thanox**的*设置-备份与还原-立即卸载*。
 
 如果依然无法删除，请在卸载Thanox应用后，手动删除`/data/system/thanos_${xxxxxx}`目录。
-

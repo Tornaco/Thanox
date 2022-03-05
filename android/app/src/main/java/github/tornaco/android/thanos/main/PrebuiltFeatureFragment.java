@@ -40,7 +40,7 @@ import github.tornaco.android.thanos.databinding.FragmentPrebuiltFeaturesBinding
 import github.tornaco.android.thanos.infinite.InfiniteZActivity;
 import github.tornaco.android.thanos.notification.ScreenOnNotificationActivity;
 import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
-import github.tornaco.android.thanos.power.SmartFreezeBottomNavActivity;
+import github.tornaco.android.thanos.power.SmartFreezeActivity;
 import github.tornaco.android.thanos.power.SmartStandbyV2Activity;
 import github.tornaco.android.thanos.privacy.DataCheatActivity;
 import github.tornaco.android.thanos.process.ProcessManageActivity;
@@ -150,7 +150,7 @@ public class PrebuiltFeatureFragment extends NavFragment
             }
             SmartStandbyV2Activity.start(requireActivity());
         } else if (tile.getId() == R.id.id_smart_freeze) {
-            SmartFreezeBottomNavActivity.Starter.start(requireActivity());
+            SmartFreezeActivity.Starter.start(requireActivity());
         } else if (tile.getId() == R.id.id_privacy_cheat) {
             DataCheatActivity.start(requireActivity());
         } else if (tile.getId() == R.id.id_ops_by_ops) {

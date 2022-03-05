@@ -35,6 +35,7 @@ import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.apps.AppDetailsActivity;
 import github.tornaco.android.thanos.common.AppItemActionListener;
+import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.PackageManager;
@@ -128,16 +129,13 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     }
 
     @Verify
-    private void showItemPopMenu(@NonNull View anchor, @NonNull AppInfo appInfo) {
+    private void showItemPopMenu(@NonNull View anchor, @NonNull AppListModel model) {
+        AppInfo appInfo = model.appInfo;
         PopupMenu popupMenu = new PopupMenu(requireActivity(), anchor);
         popupMenu.inflate(R.menu.smart_freeze_item_menu);
         popupMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.action_remove_from_smart_freeze) {
-                ThanosManager.from(requireContext())
-                        .getPkgManager()
-                        .setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), false);
-                viewModel.requestUnInstallStubApkIfInstalled(requireContext(), appInfo);
-                viewModel.start();
+                viewModel.disableSmartFreeze(model);
                 return true;
             }
             if (item.getItemId() == R.id.action_create_shortcut) {

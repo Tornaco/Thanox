@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemActionListener;
+import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.infinite.AddPackageCallback;
 import github.tornaco.android.thanos.core.app.infinite.EnableCallback;
@@ -113,7 +114,7 @@ public class InfiniteZActivity extends ThemeActivity {
     }
 
     @Verify
-    private void showItemPopMenu(@NonNull View anchor, @NonNull AppInfo appInfo) {
+    private void showItemPopMenu(@NonNull View anchor, @NonNull AppListModel model) {
 
     }
 

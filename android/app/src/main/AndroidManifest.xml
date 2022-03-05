@@ -134,7 +134,7 @@
             android:exported="false"
             android:theme="@style/AppThemeNeedRestart" />
         <activity
-            android:name=".power.SmartFreezeBottomNavActivity"
+            android:name=".power.SmartFreezeActivity"
             android:exported="false" />
         <activity
             android:name=".power.ShortcutStubActivity"

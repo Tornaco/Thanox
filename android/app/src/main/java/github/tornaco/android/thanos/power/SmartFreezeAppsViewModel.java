@@ -67,6 +67,10 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         loadModels();
     }
 
+    void remove() {
+
+    }
+
     @Verify
     private void loadModels() {
         if (isDataLoading.get()) return;
@@ -228,5 +232,14 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                 }
             });
         }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(() -> onComplete.accept(true)));
+    }
+
+    public void disableSmartFreeze(AppListModel model) {
+        AppInfo appInfo = model.appInfo;
+        ThanosManager.from(getApplication())
+                .getPkgManager()
+                .setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), false);
+        listModels.remove(model);
+        requestUnInstallStubApkIfInstalled(getApplication(), appInfo);
     }
 }

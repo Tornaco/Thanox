@@ -13,6 +13,7 @@ import java.util.List;
 
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener;
+import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.process.RunningState;
 import github.tornaco.android.thanos.databinding.ItemProcessManageBinding;
@@ -45,7 +46,7 @@ public class ProcessManageAdapter extends RecyclerView.Adapter<ProcessManageAdap
         holder.binding.setIsLastOne(false);
         holder.binding.setListener(view -> listener.onAppItemClick(model));
         holder.binding.appItemRoot.setOnLongClickListener(v -> {
-            longClickListener.onAppItemLongClick(holder.binding.appItemRoot, appInfo);
+            longClickListener.onAppItemLongClick(holder.binding.appItemRoot, new AppListModel(appInfo));
             return true;
         });
 

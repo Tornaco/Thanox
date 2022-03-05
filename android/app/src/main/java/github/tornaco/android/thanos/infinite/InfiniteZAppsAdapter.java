@@ -45,7 +45,7 @@ public class InfiniteZAppsAdapter extends RecyclerView.Adapter<InfiniteZAppsAdap
         holder.binding.setListener(itemViewClickListener);
         holder.binding.appItemRoot.setOnLongClickListener(v -> {
             if (itemViewLongClickListener != null) {
-                itemViewLongClickListener.onAppItemLongClick(holder.binding.appItemRoot, model.appInfo);
+                itemViewLongClickListener.onAppItemLongClick(holder.binding.appItemRoot, model);
             }
             return true;
         });

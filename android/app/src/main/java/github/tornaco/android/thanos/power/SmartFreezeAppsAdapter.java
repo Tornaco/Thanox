@@ -54,7 +54,7 @@ public class SmartFreezeAppsAdapter extends RecyclerView.Adapter<SmartFreezeApps
         });
         holder.binding.appItemRoot.setOnLongClickListener(v -> {
             if (itemViewLongClickListener != null) {
-                itemViewLongClickListener.onAppItemLongClick(holder.binding.appItemRoot, model.appInfo);
+                itemViewLongClickListener.onAppItemLongClick(holder.binding.appItemRoot, model);
             }
             return true;
         });

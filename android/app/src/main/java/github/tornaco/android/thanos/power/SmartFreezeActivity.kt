@@ -15,12 +15,12 @@ import github.tornaco.android.thanos.pref.AppPreference
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 
-class SmartFreezeBottomNavActivity : ThemeActivity() {
+class SmartFreezeActivity : ThemeActivity() {
     private val viewModel: SmartFreezeBottomNavViewModel by viewModels()
 
     companion object Starter {
         fun start(context: Context) {
-            ActivityUtils.startActivity(context, SmartFreezeBottomNavActivity::class.java)
+            ActivityUtils.startActivity(context, SmartFreezeActivity::class.java)
         }
     }
 

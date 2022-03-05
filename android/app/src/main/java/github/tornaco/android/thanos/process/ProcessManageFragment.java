@@ -40,7 +40,7 @@ public class ProcessManageFragment extends Fragment {
                     Bundle args = RunningServiceDetails.makeServiceDetailsActivityBundle(mergedItem);
                     RunningServicesDetailsActivity.start(getActivity(), args);
                 },
-                (view, appInfo) -> viewModel.killApp(appInfo)));
+                (view, model) -> viewModel.killApp(model.appInfo)));
 
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(R.array.swipe_refresh_colors));
@@ -53,7 +53,7 @@ public class ProcessManageFragment extends Fragment {
     }
 
     private void setupViewModel() {
-        viewModel = obtainViewModel(Objects.requireNonNull(getActivity()));
+        viewModel = obtainViewModel(requireActivity());
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();

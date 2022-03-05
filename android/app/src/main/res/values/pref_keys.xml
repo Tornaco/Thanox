@@ -173,6 +173,7 @@
     <string name="key_smart_freeze_hide_package_change_event" translatable="false">key_smart_freeze_hide_package_change_event</string>
     <string name="key_smart_freeze_method" translatable="false">key_smart_freeze_method</string>
     <string name="key_smart_freeze_enable_on_launch_by_default" translatable="false">key_smart_freeze_enable_on_launch_by_default</string>
+    <string name="key_smart_freeze_dol_tips" translatable="false">key_smart_freeze_dol_tips</string>
 
     <string name="key_smart_standby_stop_service" translatable="false">key_smart_standby_stop_service</string>
     <string name="key_smart_standby_set_inactive" translatable="false">key_smart_standby_set_inactive</string>

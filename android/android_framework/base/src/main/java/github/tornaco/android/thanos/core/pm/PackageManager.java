@@ -428,4 +428,14 @@ public class PackageManager {
     public void setEnablePkgOnLaunchByDefaultEnabled(boolean byDefault) {
         pm.setEnablePkgOnLaunchByDefaultEnabled(byDefault);
     }
+
+    @SneakyThrows
+    public void setDOLTipsEnabled(boolean enable) {
+        pm.setDOLTipsEnabled(enable);
+    }
+
+    @SneakyThrows
+    public boolean isDOLTipsEnabled() {
+        return pm.isDOLTipsEnabled();
+    }
 }

@@ -116,4 +116,7 @@ interface IPkgManager {
     void launchSmartFreezePkgForUser(in Pkg pkg);
 
     void launchSmartFreezePkgThenKillOriginForUser(in Pkg targetPkg, String origin);
+
+    void setDOLTipsEnabled(boolean enable);
+    boolean isDOLTipsEnabled();
 }

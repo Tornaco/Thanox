@@ -148,6 +148,7 @@
     <string name="feature_title_enable_package_on_launch">活檢解凍（DOL）</string>
     <string name="feature_summary_enable_package_on_launch">應用被智能凍結後，當檢測到該應用的活動啟動請求，Thanox會自動解凍該應用</string>
     <string name="pref_title_enable_package_on_launch_by_default">自動打開\"活檢解凍\"</string>
+    <string name="pref_title_dol_tips">DOL提示</string>
     <string name="pref_summary_enable_package_on_launch_by_default">當某個應用被加入智能凍結列表時，自動為這個應用開啟\"活檢解凍\"開關</string>
     <string name="feature_desc_smart_app_freeze">注意，凍結應用使用了Android系統的能力，意味著這些狀態會跟隨系統持久化，即使你卸載了Thanox，這些狀態將依然會保留</string>
     <string name="menu_title_create_shortcut">創建啟動快捷方式</string>

@@ -278,6 +278,13 @@ public interface IPkgManager extends android.os.IInterface
     @Override public void launchSmartFreezePkgThenKillOriginForUser(github.tornaco.android.thanos.core.pm.Pkg targetPkg, java.lang.String origin) throws android.os.RemoteException
     {
     }
+    @Override public void setDOLTipsEnabled(boolean enable) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isDOLTipsEnabled() throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1131,6 +1138,23 @@ public interface IPkgManager extends android.os.IInterface
           _arg1 = data.readString();
           this.launchSmartFreezePkgThenKillOriginForUser(_arg0, _arg1);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_setDOLTipsEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          this.setDOLTipsEnabled(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isDOLTipsEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _result = this.isDOLTipsEnabled();
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         default:
@@ -2736,6 +2760,45 @@ public interface IPkgManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void setDOLTipsEnabled(boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setDOLTipsEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setDOLTipsEnabled(enable);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isDOLTipsEnabled() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isDOLTipsEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isDOLTipsEnabled();
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.pm.IPkgManager sDefaultImpl;
     }
     static final int TRANSACTION_getPkgNameForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -2810,6 +2873,8 @@ public interface IPkgManager extends android.os.IInterface
     static final int TRANSACTION_getAppInfoForUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + 69);
     static final int TRANSACTION_launchSmartFreezePkgForUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + 70);
     static final int TRANSACTION_launchSmartFreezePkgThenKillOriginForUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + 71);
+    static final int TRANSACTION_setDOLTipsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 72);
+    static final int TRANSACTION_isDOLTipsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 73);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pm.IPkgManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -2906,4 +2971,6 @@ public interface IPkgManager extends android.os.IInterface
   public github.tornaco.android.thanos.core.pm.AppInfo getAppInfoForUser(java.lang.String pkgName, int userId) throws android.os.RemoteException;
   public void launchSmartFreezePkgForUser(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public void launchSmartFreezePkgThenKillOriginForUser(github.tornaco.android.thanos.core.pm.Pkg targetPkg, java.lang.String origin) throws android.os.RemoteException;
+  public void setDOLTipsEnabled(boolean enable) throws android.os.RemoteException;
+  public boolean isDOLTipsEnabled() throws android.os.RemoteException;
 }

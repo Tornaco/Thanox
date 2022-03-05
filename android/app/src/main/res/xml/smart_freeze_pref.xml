@@ -37,6 +37,11 @@
 
         <SwitchPreferenceCompat
             android:persistent="false"
+            app:key="@string/key_smart_freeze_dol_tips"
+            app:title="@string/pref_title_dol_tips" />
+
+        <SwitchPreferenceCompat
+            android:persistent="false"
             app:key="@string/key_smart_freeze_hide_package_change_event"
             app:summary="@string/pre_summary_smart_freeze_hide_package_change_event"
             app:title="@string/pre_title_smart_freeze_hide_package_change_event" />

@@ -39,6 +39,7 @@ import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.PackageManager;
+import github.tornaco.android.thanos.core.pm.PackageSet;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.databinding.ActivitySmartFreezeAppsBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
@@ -186,7 +187,13 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null && result.getData().hasExtra("apps")) {
                     List<AppInfo> appInfos = result.getData().getParcelableArrayListExtra("apps");
-                    onRequestAddToSmartFreezeListAskIfAddToPkgSet(appInfos);
+                    PackageSet packageSet = viewModel.getPackageSet();
+                    if (packageSet == null) return;
+                    if (packageSet.isPrebuilt()) {
+                        onRequestAddToSmartFreezeList(appInfos, false);
+                    } else {
+                        onRequestAddToSmartFreezeListAskIfAddToPkgSet(appInfos);
+                    }
                 }
             });
 

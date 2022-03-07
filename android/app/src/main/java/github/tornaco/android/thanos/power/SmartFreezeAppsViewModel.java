@@ -63,12 +63,13 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         this.pkgSetId = pkgSetId;
     }
 
-    void start() {
-        loadModels();
+    @Nullable
+    public PackageSet getPackageSet() {
+        return pkgSetId == null ? null : ThanosManager.from(getApplication()).getPkgManager().getPackageSetById(pkgSetId, true);
     }
 
-    void remove() {
-
+    void start() {
+        loadModels();
     }
 
     @Verify

@@ -7,7 +7,7 @@
     <string name="module_profile_title_rule_engine">引擎</string>
     <string name="module_profile_summary_rule_engine">引擎是发布事实的工具，Thanox默认启用了多个发布器，下面的引擎支持打开或者关闭。请注意引擎描述，关闭引擎可能会导致一些Profile无法正常被触发或执行</string>
     <string name="module_profile_pref_title_rule_engine_automation">Automation</string>
-    <string name="module_profile_pref_summary_rule_engine_automation">支持执行自动点击，查找view</string>
+    <string name="module_profile_pref_summary_rule_engine_automation">支持执行自动点击，查找view。\n\n📢 注意：该引擎可能会导致一些应用的辅助功能无法生效</string>
     <string name="module_profile_pref_title_rule_engine_push">推送消息</string>
     <string name="module_profile_pref_summary_rule_engine_push">发布推送消息事实，目前支持FCM，GCM</string>
 

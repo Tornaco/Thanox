@@ -4,9 +4,10 @@
 
     <string name="module_profile_title_global_var">Global variant</string>
     <string name="module_profile_title_rule_engine">Engine</string>
-    <string name="module_profile_summary_rule_engine">引擎是发布事实的工具，Thanox默认启用了多个发布器，下面的引擎支持打开或者关闭。请注意引擎描述，关闭引擎可能会导致一些Profile无法正常被触发或执行</string>
+    <string name="module_profile_summary_rule_engine">The engine is a tool for publishing facts. Thanox has multiple publishers enabled by default. The following engines support turning on or off. Please pay attention to the engine description, shutting down the engine may cause some profiles to not be triggered or executed normally</string>
     <string name="module_profile_pref_title_rule_engine_automation">Automation</string>
-    <string name="module_profile_pref_summary_rule_engine_automation">支持执行自动点击，查找view</string>
+    <string name="module_profile_pref_summary_rule_engine_automation">Supports performing automatic clicks and find views. \n\n📢
+        Note: This engine may cause some app accessibility service to not work</string>
     <string name="module_profile_pref_title_rule_engine_push">Push</string>
     <string name="module_profile_pref_summary_rule_engine_push">Publish facts of push message arrival</string>
 

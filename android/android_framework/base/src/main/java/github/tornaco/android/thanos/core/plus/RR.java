@@ -10,9 +10,6 @@ import lombok.ToString;
 /**
  * Remote res.
  */
-@AllArgsConstructor
-@Getter
-@ToString
 public final class RR implements Parcelable {
     public static final int SUCCESS = 0;
 
@@ -24,6 +21,24 @@ public final class RR implements Parcelable {
         result = in.readInt();
         msg = in.readString();
         k = in.readString();
+    }
+
+    public RR(int result, String msg, String k) {
+        this.result = result;
+        this.msg = msg;
+        this.k = k;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public String getK() {
+        return k;
     }
 
     public static final Creator<RR> CREATOR = new Creator<RR>() {

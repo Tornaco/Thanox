@@ -1,7 +1,5 @@
 package github.tornaco.android.thanos.core.plus;
 
-import android.os.RemoteException;
-
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 

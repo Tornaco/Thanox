@@ -59,12 +59,12 @@ public class TrampolineViewModel extends AndroidViewModel {
     private final List<Disposable> disposables = new ArrayList<>();
     private final ObservableArrayList<ActivityTrampolineModel> replacements = new ObservableArrayList<>();
 
-    private ObservableInt exportSuccessSignal = new ObservableInt();
-    private ObservableInt exportFailSignal = new ObservableInt();
-    private ObservableInt importSuccessSignal = new ObservableInt();
-    private ObservableInt importFailSignal = new ObservableInt();
+    private final ObservableInt exportSuccessSignal = new ObservableInt();
+    private final ObservableInt exportFailSignal = new ObservableInt();
+    private final ObservableInt importSuccessSignal = new ObservableInt();
+    private final ObservableInt importFailSignal = new ObservableInt();
 
-    private TrampolineLoader trampolineLoader = () -> {
+    private final TrampolineLoader trampolineLoader = () -> {
         List<ActivityTrampolineModel> res = new ArrayList<>();
         ThanosManager.from(getApplication())
                 .ifServiceInstalled(thanosManager -> CollectionUtils.consumeRemaining(thanosManager.getActivityStackSupervisor()

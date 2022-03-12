@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="module_common_export_selections">
+        <item>剪貼板</item>
+        <item>導出為文件</item>
+    </string-array>
+
+    <string-array name="module_common_import_selections">
+        <item>剪貼板</item>
+        <item>從文件導入</item>
+    </string-array>
+</resources>

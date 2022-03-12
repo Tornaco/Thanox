@@ -146,6 +146,7 @@
     <string name="menu_title_smart_app_freeze_enable_all_smart_freeze_apps">全部解冻并移除列表中的应用</string>
     <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">将智能冻结的应用全部解冻，并从智能冻结列表中移除，你确定要这样做吗？</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp">全部临时解冻列表中的应用</string>
+    <string name="menu_title_smart_app_freeze_export_package_list">导出应用列表</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">将智能冻结列表中的应用全部临时解冻，你确定要这样做吗？</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps">解冻所有应用</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps">将会解冻你的系统中所有被冻结或挂起的应用，包含所有已安装或系统应用，你确定要这样做吗？</string>

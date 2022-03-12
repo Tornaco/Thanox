@@ -1,8 +1,13 @@
 package github.tornaco.android.thanos.power;
 
+import static com.nononsenseapps.filepicker.FilePickerActivityUtils.pickSingleDirIntent;
+
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,16 +19,23 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
+import com.google.common.io.Files;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.nononsenseapps.filepicker.Utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -41,11 +53,18 @@ import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.PackageManager;
 import github.tornaco.android.thanos.core.pm.PackageSet;
 import github.tornaco.android.thanos.core.pm.Pkg;
+import github.tornaco.android.thanos.core.util.DateUtils;
+import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivitySmartFreezeAppsBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
+import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
+import github.tornaco.permission.requester.RequiresPermission;
+import github.tornaco.permission.requester.RuntimePermissions;
 
+@SuppressWarnings("UnstableApiUsage")
+@RuntimePermissions
 public class SmartFreezeAppListFragment extends BaseFragment {
     private static final String ARG_PKG_SET = "arg.pkg.set.id";
 
@@ -197,6 +216,25 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                 }
             });
 
+    private final ActivityResultLauncher<Intent> chooseFileExportPackageListQBelow
+            = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    // Use the provided utility method to parse the result
+                    List<Uri> files = Utils.getSelectedFilesFromResult(result.getData());
+                    File file = Utils.getFileForUri(files.get(0));
+                    doExportPackageListChooseFileQBelow(file);
+                }
+            });
+
+    private final ActivityResultLauncher<Intent> chooseFileExportPackageListQAndAbove
+            = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    doExportPackageListChooseFileQAndAbove(result.getData());
+                }
+            });
+
     private void onRequestAddToSmartFreezeList(List<AppInfo> appInfos, boolean alsoAddToPkgSet) {
         ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
         progress.setTitle(R.string.common_text_wait_a_moment);
@@ -285,8 +323,108 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             return true;
         }
 
+        if (R.id.action_export_package_list == item.getItemId()) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                Toast.makeText(requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            onRequestExportPackageList();
+
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onRequestExportPackageList() {
+        String[] items = getResources().getStringArray(R.array.module_common_export_selections);
+        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity())
+                .setTitle(R.string.menu_title_smart_app_freeze_export_package_list)
+                .setSingleChoiceItems(items, -1,
+                        (d, which) -> {
+                            d.dismiss();
+                            if (which == 0) {
+                                onRequestExportPackageListToClipBoard();
+                            } else {
+                                onRequestExportPackageListChooseFile();
+                            }
+                        }).create();
+        dialog.show();
+    }
+
+    private void onRequestExportPackageListToClipBoard() {
+        viewModel.exportPackageListToClipBoard(() -> ToastUtils.ok(requireActivity()), throwable -> {
+            XLog.e("exportPackageListToClipBoard failed", throwable);
+            ToastUtils.nook(requireActivity());
+        });
+    }
+
+    @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    void onRequestExportPackageListChooseFile() {
+        if (OsUtils.isQOrAbove()) {
+            onRequestExportPackageListChooseFileQAndAbove();
+        } else {
+            onRequestExportPackageListChooseFileQBelow();
+        }
+    }
+
+    private void onRequestExportPackageListChooseFileQAndAbove() {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        // you can set file mime-type
+        intent.setType("*/*");
+        // default file name
+        String expFileNameWithExt = "SmartFreeze-Apps" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
+        intent.putExtra(Intent.EXTRA_TITLE, expFileNameWithExt);
+        chooseFileExportPackageListQAndAbove.launch(intent);
+    }
+
+    private void onRequestExportPackageListChooseFileQBelow() {
+        Intent intent = pickSingleDirIntent(requireActivity());
+        chooseFileExportPackageListQBelow.launch(intent);
+    }
+
+    private void doExportPackageListChooseFileQBelow(File file) {
+        try {
+            String expFileNameWithExt = "SmartFreeze-Apps-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
+            File expFile = new File(file, expFileNameWithExt);
+            Files.createParentDirs(expFile);
+            OutputStream os = Files.asByteSink(expFile).openStream();
+            viewModel.exportPackageListToFile(os,
+                    () -> ToastUtils.ok(requireActivity()),
+                    throwable -> Toast.makeText(requireActivity(), Log.getStackTraceString(throwable), Toast.LENGTH_LONG).show());
+        } catch (Throwable e) {
+            XLog.e("doExportPackageListChooseFileQBelow error", e);
+            Toast.makeText(requireActivity(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void doExportPackageListChooseFileQAndAbove(Intent data) {
+        if (data == null) {
+            XLog.e("doExportPackageListChooseFileQAndAbove, No data.");
+            return;
+        }
+
+        Uri fileUri = data.getData();
+
+        if (fileUri == null) {
+            Toast.makeText(requireContext(), "fileUri == null", Toast.LENGTH_LONG).show();
+            XLog.e("doExportPackageListChooseFileQAndAbove, No fileUri.");
+            return;
+        }
+
+        XLog.d("doExportPackageListChooseFileQAndAbove, fileUri == %s", fileUri);
+        try {
+            OutputStream os = Objects.requireNonNull(requireContext()).getContentResolver().openOutputStream(fileUri);
+            viewModel.exportPackageListToFile(os,
+                    () -> ToastUtils.ok(requireActivity()),
+                    throwable -> Toast.makeText(requireActivity(), Log.getStackTraceString(throwable), Toast.LENGTH_LONG).show());
+        } catch (IOException e) {
+            XLog.e(e);
+            Toast.makeText(requireContext(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void onRequestEnableAllSmartFreezeApps() {

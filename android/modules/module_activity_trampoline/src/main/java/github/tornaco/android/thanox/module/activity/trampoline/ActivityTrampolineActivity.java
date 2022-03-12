@@ -303,7 +303,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
     // Null means all.
     private void onRequestExport(@Nullable String componentReplacementKey) {
-        String[] items = getResources().getStringArray(R.array.module_activity_trampoline_title_export_selections);
+        String[] items = getResources().getStringArray(R.array.module_common_export_selections);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.module_activity_trampoline_title_export_comp_replacements)
                 .setSingleChoiceItems(items, -1,
@@ -354,7 +354,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
     }
 
     private void onRequestImport() {
-        String[] items = getResources().getStringArray(R.array.module_activity_trampoline_title_import_selections);
+        String[] items = getResources().getStringArray(R.array.module_common_import_selections);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.module_activity_trampoline_title_import_comp_replacements)
                 .setSingleChoiceItems(items, -1,
@@ -428,7 +428,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
     private void onExportFilePickQ(Intent data, String componentReplacementKey) {
         if (data == null) {
-            XLog.e("No data.");
+            XLog.e("onExportFilePickQ, No data.");
             return;
         }
 
@@ -436,12 +436,12 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
         if (fileUri == null) {
             Toast.makeText(thisActivity(), "fileUri == null", Toast.LENGTH_LONG).show();
-            XLog.e("No fileUri.");
+            XLog.e("onExportFilePickQ, No fileUri.");
             return;
         }
 
-        XLog.d("fileUri == %s", fileUri);
-        XLog.d("componentReplacementKey=%s", componentReplacementKey);
+        XLog.d("onExportFilePickQ, fileUri == %s", fileUri);
+        XLog.d("onExportFilePickQ, componentReplacementKey=%s", componentReplacementKey);
 
         onExportFilePickAvailableQ(fileUri, componentReplacementKey);
     }

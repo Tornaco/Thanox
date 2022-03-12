@@ -1,6 +1,8 @@
 package github.tornaco.android.thanos.power;
 
 import android.app.Application;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
@@ -13,10 +15,17 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.elvishew.xlog.XLog;
+import com.google.common.io.ByteStreams;
+import com.google.common.io.CharSource;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.common.AppLabelSearchFilter;
@@ -39,8 +48,11 @@ import io.reactivex.schedulers.Schedulers;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 import util.Consumer;
+import util.IoUtils;
+import util.JsonFormatter;
 import util.PinyinComparatorUtils;
 
+@SuppressWarnings("UnstableApiUsage")
 public class SmartFreezeAppsViewModel extends AndroidViewModel {
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     @Nullable
@@ -242,5 +254,32 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                 .setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), false);
         listModels.remove(model);
         requestUnInstallStubApkIfInstalled(getApplication(), appInfo);
+    }
+
+    public void exportPackageListToClipBoard(Runnable onSuccess, Consumer<Throwable> onError) {
+        disposables.add(Completable.fromRunnable(() -> {
+            String json = getExportPackageListContent();
+            ClipboardManager cmb = (ClipboardManager) getApplication().getSystemService(Context.CLIPBOARD_SERVICE);
+            XLog.w("content: " + json);
+            cmb.setPrimaryClip(ClipData.newPlainText("package-list", json));
+        }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(onSuccess::run, onError::accept));
+    }
+
+    private String getExportPackageListContent() {
+        Set<String> pkgSet = listModels.stream().map(model -> model.appInfo.getPkgName()).collect(Collectors.toSet());
+        return JsonFormatter.toPrettyJson(pkgSet);
+    }
+
+    public void exportPackageListToFile(OutputStream os, Runnable onSuccess, Consumer<Throwable> onError) {
+        XLog.d("exportPackageListToFile");
+        disposables.add(Single.create((SingleOnSubscribe<Boolean>) emitter -> {
+            InputStream in = CharSource.wrap(getExportPackageListContent()).asByteSource(Charset.defaultCharset()).openStream();
+            ByteStreams.copy(in, os);
+            emitter.onSuccess(true);
+            IoUtils.closeQuietly(in);
+            IoUtils.closeQuietly(os);
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(res -> onSuccess.run(), onError::accept));
     }
 }

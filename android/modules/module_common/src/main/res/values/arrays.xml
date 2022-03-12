@@ -6,4 +6,15 @@
         <item>@color/md_green_500</item>
         <item>@color/md_red_500</item>
     </string-array>
+
+    <string-array name="module_common_export_selections">
+        <item>Clipboard</item>
+        <item>Choose a file</item>
+    </string-array>
+
+
+    <string-array name="module_common_import_selections">
+        <item>Clipboard</item>
+        <item>Choose a file</item>
+    </string-array>
 </resources>

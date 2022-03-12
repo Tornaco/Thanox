@@ -141,6 +141,7 @@
     <string name="menu_title_smart_app_freeze_enable_all_smart_freeze_apps">Remove and de-freeze all listed</string>
     <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">De-freeze all Smart Freeze apps and remove them from the Smart Freeze list. Are you sure you want to do this?</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp">De-freeze all listed temporary</string>
+    <string name="menu_title_smart_app_freeze_export_package_list">Export app list</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">Temporarily de-freeze all apps in the Smart Freeze list, are you sure you want to do this?</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps">De-freeze all apps</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps">Will de-freeze all disabled or suspended apps on your device, including all installed or system apps, are you sure you want to do this?</string>

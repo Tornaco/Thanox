@@ -360,6 +360,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .id(R.id.id_wechat_push)
                                                 .iconRes(R.drawable.ic_nav_wechat_push)
                                                 .title(resources.getString(R.string.module_push_message_delegate_title_wechat_proxy))
+                                                .requiredFeature(BuildProp.THANOX_FEATURE_PUSH_DELEGATE)
                                                 .themeColor(R.color.nav_icon_wechat_push)
                                                 .build(),
                                         Tile.builder()

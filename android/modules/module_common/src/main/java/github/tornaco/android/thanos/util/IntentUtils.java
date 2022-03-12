@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import com.elvishew.xlog.XLog;
 
 public class IntentUtils {
-
     @MainThread
     public static void startFilePickerActivityForRes(Activity activity, int requestCode) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);

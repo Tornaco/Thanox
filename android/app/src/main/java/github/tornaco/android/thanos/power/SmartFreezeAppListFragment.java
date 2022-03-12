@@ -57,6 +57,7 @@ import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivitySmartFreezeAppsBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
+import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
@@ -66,6 +67,7 @@ import github.tornaco.permission.requester.RuntimePermissions;
 @SuppressWarnings("UnstableApiUsage")
 @RuntimePermissions
 public class SmartFreezeAppListFragment extends BaseFragment {
+    private static final int REQUEST_CODE_PICK_IMPORT_PATH = 0x111;
     private static final String ARG_PKG_SET = "arg.pkg.set.id";
 
     private SmartFreezeAppsViewModel viewModel;
@@ -328,14 +330,66 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                 Toast.makeText(requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
                 return false;
             }
-
             onRequestExportPackageList();
+            return true;
+        }
 
+        if (R.id.action_import_package_list == item.getItemId()) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                Toast.makeText(requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            onRequestImportPackageList();
             return true;
         }
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onRequestImportPackageList() {
+        String[] items = getResources().getStringArray(R.array.module_common_import_selections);
+        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity())
+                .setTitle(R.string.menu_title_smart_app_freeze_import_package_list)
+                .setSingleChoiceItems(items, -1,
+                        (d, which) -> {
+                            d.dismiss();
+                            if (which == 0) {
+                                onRequestImportPackageListFromClipBoard();
+                            } else {
+                                SmartFreezeAppListFragmentPermissionRequester.onRequestImportPackageListFromFileChecked(this);
+                            }
+                        }).create();
+        dialog.show();
+    }
+
+    @RequiresPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+    void onRequestImportPackageListFromFile() {
+        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PICK_IMPORT_PATH);
+    }
+
+    private void doImportPackageListFromFile(Intent data) {
+        if (data == null) {
+            XLog.e("doImportPackageListFromFile, No data.");
+            return;
+        }
+        Uri uri = data.getData();
+        if (uri == null) {
+            Toast.makeText(requireActivity(), "uri == null", Toast.LENGTH_LONG).show();
+            XLog.e("doImportPackageListFromFile, No uri.");
+            return;
+        }
+        viewModel.importPackageListFromFile(uri, success -> {
+            if (success) ToastUtils.ok(requireActivity());
+            else ToastUtils.nook(requireActivity());
+        });
+    }
+
+    private void onRequestImportPackageListFromClipBoard() {
+        viewModel.importPackageListFromClipboard(success -> {
+            if (success) ToastUtils.ok(requireActivity());
+            else ToastUtils.nook(requireActivity());
+        });
     }
 
     private void onRequestExportPackageList() {
@@ -348,7 +402,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                             if (which == 0) {
                                 onRequestExportPackageListToClipBoard();
                             } else {
-                                onRequestExportPackageListChooseFile();
+                                SmartFreezeAppListFragmentPermissionRequester.onRequestExportPackageListChooseFileChecked(this);
                             }
                         }).create();
         dialog.show();
@@ -509,6 +563,20 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             ArrayList<Pkg> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
             pickApps.launch(AppPickerActivity.getIntent(requireContext(), exclude));
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        SmartFreezeAppListFragmentPermissionRequester.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_PICK_IMPORT_PATH && resultCode == Activity.RESULT_OK) {
+            doImportPackageListFromFile(data);
+        }
     }
 
     public static SmartFreezeAppsViewModel obtainViewModel(FragmentActivity activity) {

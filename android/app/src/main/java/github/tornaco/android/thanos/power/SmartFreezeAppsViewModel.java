@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,13 +19,19 @@ import androidx.lifecycle.AndroidViewModel;
 import com.elvishew.xlog.XLog;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.CharSource;
+import com.google.common.io.CharStreams;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -130,7 +138,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                                        String versionName,
                                        int versionCode) {
         disposables.add(Single.create((SingleOnSubscribe<File>) emitter ->
-                emitter.onSuccess(ShortcutHelper.createShortcutStubApkFor(getApplication(), appInfo, appLabel, versionName, versionCode)))
+                        emitter.onSuccess(ShortcutHelper.createShortcutStubApkFor(getApplication(), appInfo, appLabel, versionName, versionCode)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(file -> requestInstallStubApk(getApplication(), file),
@@ -273,13 +281,89 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     public void exportPackageListToFile(OutputStream os, Runnable onSuccess, Consumer<Throwable> onError) {
         XLog.d("exportPackageListToFile");
         disposables.add(Single.create((SingleOnSubscribe<Boolean>) emitter -> {
-            InputStream in = CharSource.wrap(getExportPackageListContent()).asByteSource(Charset.defaultCharset()).openStream();
-            ByteStreams.copy(in, os);
-            emitter.onSuccess(true);
-            IoUtils.closeQuietly(in);
-            IoUtils.closeQuietly(os);
-        }).subscribeOn(Schedulers.io())
+                    InputStream in = CharSource.wrap(getExportPackageListContent()).asByteSource(Charset.defaultCharset()).openStream();
+                    ByteStreams.copy(in, os);
+                    emitter.onSuccess(true);
+                    IoUtils.closeQuietly(in);
+                    IoUtils.closeQuietly(os);
+                }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(res -> onSuccess.run(), onError::accept));
+    }
+
+    public void importPackageListFromClipboard(Consumer<Boolean> onRes) {
+        ClipboardManager cmb = (ClipboardManager) getApplication().getSystemService(Context.CLIPBOARD_SERVICE);
+        if (cmb != null && cmb.hasPrimaryClip()) {
+            disposables.add(Single.create((SingleOnSubscribe<Boolean>) emitter -> {
+                try {
+                    ClipData.Item item = Objects.requireNonNull(cmb.getPrimaryClip()).getItemAt(0);
+                    if (item == null) return;
+                    String content = item.getText().toString();
+                    XLog.w("importPackageListFromClipboard, content: " + content);
+                    Set<String> packageSet = parseJsonToPackages(content);
+                    if (!CollectionUtils.isNullOrEmpty(packageSet)) {
+                        ThanosManager.from(getApplication())
+                                .ifServiceInstalled(thanosManager ->
+                                        CollectionUtils.consumeRemaining(packageSet, pkg ->
+                                                thanosManager
+                                                        .getPkgManager()
+                                                        .setPkgSmartFreezeEnabled(Pkg.systemUserPkg(pkg), true)));
+                        emitter.onSuccess(true);
+                        start();
+                    } else {
+                        emitter.onSuccess(false);
+                    }
+                } catch (Exception ex) {
+                    XLog.e("importPackageListFromClipboard error", Log.getStackTraceString(ex));
+                    emitter.onSuccess(false);
+                }
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(onRes::accept));
+        }
+    }
+
+    private Set<String> parseJsonToPackages(String content) {
+        try {
+            Set<String> res = new Gson()
+                    .fromJson(content, new TypeToken<Set<String>>() {
+                    }.getType());
+            if (!CollectionUtils.isNullOrEmpty(res)) {
+                return res;
+            }
+        } catch (Throwable throwable) {
+            XLog.e("parseJsonToPackages", throwable);
+        }
+        return null;
+    }
+
+    public void importPackageListFromFile(Uri uri, Consumer<Boolean> onRes) {
+        disposables.add(Single.create((SingleOnSubscribe<Boolean>) emitter -> {
+            try {
+                InputStream inputStream = getApplication()
+                        .getContentResolver()
+                        .openInputStream(uri);
+                if (inputStream == null) {
+                    return;
+                }
+                @SuppressWarnings("UnstableApiUsage")
+                String content = CharStreams.toString(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+                XLog.w("importPackageListFromFile, content: " + content);
+                Set<String> packageSet = parseJsonToPackages(content);
+                if (!CollectionUtils.isNullOrEmpty(packageSet)) {
+                    ThanosManager.from(getApplication())
+                            .ifServiceInstalled(thanosManager ->
+                                    CollectionUtils.consumeRemaining(packageSet, pkg ->
+                                            thanosManager
+                                                    .getPkgManager()
+                                                    .setPkgSmartFreezeEnabled(Pkg.systemUserPkg(pkg), true)));
+                    emitter.onSuccess(true);
+                    start();
+                } else {
+                    emitter.onSuccess(false);
+                }
+            } catch (Throwable ex) {
+                XLog.e("importPackageListFromClipboard error", Log.getStackTraceString(ex));
+                emitter.onSuccess(false);
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(onRes::accept));
     }
 }

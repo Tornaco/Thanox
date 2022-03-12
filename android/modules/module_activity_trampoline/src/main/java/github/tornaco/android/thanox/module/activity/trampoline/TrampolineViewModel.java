@@ -199,7 +199,7 @@ public class TrampolineViewModel extends AndroidViewModel {
                     ClipData.Item item = Objects.requireNonNull(cmb.getPrimaryClip()).getItemAt(0);
                     if (item == null) return;
                     String content = item.getText().toString();
-                    XLog.w("content: " + content);
+                    XLog.w("importFromClipboard, content: " + content);
                     List<ComponentReplacement> componentReplacements = parseJson(content);
                     if (!CollectionUtils.isNullOrEmpty(componentReplacements)) {
                         ThanosManager.from(getApplication())

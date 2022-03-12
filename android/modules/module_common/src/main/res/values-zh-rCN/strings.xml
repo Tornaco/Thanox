@@ -50,4 +50,5 @@
     <string name="common_sort_by_install_app_uid">UID</string>
 
     <string name="common_switchbar_title_format">使用“%s”</string >
+    <string name="module_common_title_tools">工具</string>
 </resources>

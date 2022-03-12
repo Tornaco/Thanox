@@ -50,4 +50,5 @@
     <string name="common_sort_by_install_app_uid">UID</string>
 
     <string name="common_switchbar_title_format">Use \"%s\"</string>
+    <string name="module_common_title_tools">Tools</string>
 </resources>

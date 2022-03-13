@@ -88,8 +88,24 @@ public abstract class BitmapUtil {
             return getBitmap(ad);
 
         } else {
-            XLog.e("getBitmap error", "Unsupported drawable type:" + drawable);
-            return null;
+            XLog.w("getBitmap", "Got drawable type:" + drawable);
+            // https://cs.android.com/android/platform/superproject/+/master:packages/apps/Dialer/java/com/android/dialer/util/DrawableConverter.java?q=drawableToBitmap
+            Bitmap bitmap;
+            if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+                // Needed for drawables that are just a colour.
+                bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            } else {
+                bitmap = Bitmap.createBitmap(
+                        drawable.getIntrinsicWidth(),
+                        drawable.getIntrinsicHeight(),
+                        Bitmap.Config.ARGB_8888);
+            }
+
+            XLog.i("created bitmap with width: %d, height: %d", bitmap.getWidth(), bitmap.getHeight());
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            return bitmap;
         }
     }
 

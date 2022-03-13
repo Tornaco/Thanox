@@ -2,6 +2,7 @@ package github.tornaco.practice.honeycomb.locker.ui.verify
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.CubicBezierEasing
@@ -71,11 +72,13 @@ class VerifyActivity : ThemeActivity() {
     private fun AppVerifyContent() {
         var visible by remember { mutableStateOf(false) }
 
-        Surface(modifier = Modifier
-            .fillMaxSize()
-            .background(
-                color = MaterialTheme.colors.background
-            )) {
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    color = MaterialTheme.colors.background
+                )
+        ) {
             AnimatedVisibility(
                 visible = visible,
                 enter = slideInVertically(
@@ -90,13 +93,17 @@ class VerifyActivity : ThemeActivity() {
                 ),
             ) {
                 Box {
-                    Column(modifier = Modifier.fillMaxSize(),
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
 
-                        Spacer(modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(fraction = 0.3f))
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(fraction = 0.3f)
+                        )
 
                         AppIcon(modifier = Modifier.size(72.dp), appInfo!!)
                     }
@@ -128,8 +135,11 @@ class VerifyActivity : ThemeActivity() {
                             options: Options,
                         ): FetchResult {
                             return DrawableResult(
-                                drawable = loadAppIconDrawableWithIconPack(context,
-                                    appInfo.pkgName),
+                                drawable = loadAppIconDrawableWithIconPack(context, appInfo.pkgName)
+                                    ?: AppCompatResources.getDrawable(
+                                        context,
+                                        github.tornaco.android.thanos.module.common.R.mipmap.ic_fallback_app_icon
+                                    )!!,
                                 isSampled = false,
                                 dataSource = DataSource.MEMORY
                             )
@@ -152,9 +162,11 @@ class VerifyActivity : ThemeActivity() {
     private fun startVerifyWithBiometrics(appInfo: AppInfo) {
         val thanox = ThanosManager.from(this)
         if (!isBiometricReady(this)) {
-            thanox.activityStackSupervisor.setVerifyResult(requestCode,
+            thanox.activityStackSupervisor.setVerifyResult(
+                requestCode,
                 VerifyResult.ALLOW,
-                VerifyResult.REASON_USER_KEY_NOT_SET)
+                VerifyResult.REASON_USER_KEY_NOT_SET
+            )
             finish()
             // Disable app lock
             thanox.activityStackSupervisor.isAppLockEnabled = false
@@ -164,21 +176,27 @@ class VerifyActivity : ThemeActivity() {
         authenticateWithBiometric(appInfo) { success: Boolean, message: String ->
             XLog.i("authenticateWithBiometric result: $success $message")
             if (success) {
-                thanox.activityStackSupervisor.setVerifyResult(requestCode,
+                thanox.activityStackSupervisor.setVerifyResult(
+                    requestCode,
                     VerifyResult.ALLOW,
-                    VerifyResult.REASON_USER_INPUT_CORRECT)
+                    VerifyResult.REASON_USER_INPUT_CORRECT
+                )
                 finish()
             } else {
-                thanox.activityStackSupervisor.setVerifyResult(requestCode,
+                thanox.activityStackSupervisor.setVerifyResult(
+                    requestCode,
                     VerifyResult.IGNORE,
-                    VerifyResult.REASON_USER_INPUT_INCORRECT)
+                    VerifyResult.REASON_USER_INPUT_INCORRECT
+                )
             }
         }
     }
 
     override fun onBackPressed() {
-        ThanosManager.from(this).activityStackSupervisor.setVerifyResult(requestCode,
+        ThanosManager.from(this).activityStackSupervisor.setVerifyResult(
+            requestCode,
             VerifyResult.IGNORE,
-            VerifyResult.REASON_USER_CANCEL)
+            VerifyResult.REASON_USER_CANCEL
+        )
     }
 }

@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.common.util.ApkUtil;
@@ -14,12 +16,20 @@ import github.tornaco.android.thanos.util.iconpack.IconPack;
 import github.tornaco.android.thanos.util.iconpack.IconPackManager;
 
 public class AppIconLoaderUtil {
+
+    @Nullable
     public static Bitmap loadAppIconBitmapWithIconPack(Context context, String pkgName, int pkgUid) {
-        Drawable icon = loadAppIconDrawableWithIconPack(context, pkgName);
-        Drawable badged = context.getPackageManager().getUserBadgedIcon(icon, UserHandle.getUserHandleForUid(pkgUid));
-        return BitmapUtil.getBitmap(context, badged);
+        try {
+            Drawable icon = loadAppIconDrawableWithIconPack(context, pkgName);
+            Drawable badged = context.getPackageManager().getUserBadgedIcon(icon, UserHandle.getUserHandleForUid(pkgUid));
+            return BitmapUtil.getBitmap(context, badged);
+        } catch (Throwable e) {
+            XLog.e("loadAppIconBitmapWithIconPack error: " + Log.getStackTraceString(e));
+            return null;
+        }
     }
 
+    @Nullable
     public static Drawable loadAppIconDrawableWithIconPack(Context context, String pkgName) {
         try {
             String iconPackPackage = AppThemePreferences.getInstance().getIconPack(context, null);
@@ -38,9 +48,10 @@ public class AppIconLoaderUtil {
                     }
                 }
             }
+            return ApkUtil.loadIconByPkgName(context, pkgName);
         } catch (Throwable e) {
-            XLog.e("Fail load icon from pack: " + Log.getStackTraceString(e));
+            XLog.e("loadAppIconDrawableWithIconPack error: " + Log.getStackTraceString(e));
+            return null;
         }
-        return ApkUtil.loadIconByPkgName(context, pkgName);
     }
 }

@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.apps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -90,9 +91,9 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         }
         Objects.requireNonNull(preference).setTitle(appInfo.getAppLabel());
         preference.setSummary(new AppListItemDescriptionComposer(requireContext()).getAppItemDescription(appInfo));
-        preference.setIcon(new BitmapDrawable(
-                getResources(),
-                AppIconLoaderUtil.loadAppIconBitmapWithIconPack(getContext(), appInfo.getPkgName(), appInfo.getUid())));
+
+        Bitmap iconBitmap = AppIconLoaderUtil.loadAppIconBitmapWithIconPack(getContext(), appInfo.getPkgName(), appInfo.getUid());
+        preference.setIcon(new BitmapDrawable(getResources(), iconBitmap));
         preference.setOnPreferenceClickListener(
                 _it -> {
                     showAppInfoPopMenu(getListView().getChildAt(2));

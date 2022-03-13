@@ -16,6 +16,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
+import com.elvishew.xlog.XLog;
+
 import java.io.ByteArrayOutputStream;
 
 
@@ -86,7 +88,8 @@ public abstract class BitmapUtil {
             return getBitmap(ad);
 
         } else {
-            throw new IllegalArgumentException("Unsupported drawable type:" + drawable);
+            XLog.e("getBitmap error", "Unsupported drawable type:" + drawable);
+            return null;
         }
     }
 

@@ -68,7 +68,7 @@
             android:layout_toEndOf="@id/icon">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -81,8 +81,8 @@
                 android:id="@+id/desc_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title"
-                android:layout_alignStart="@id/title"
+                android:layout_below="@id/item_title"
+                android:layout_alignStart="@id/item_title"
                 android:text="@{description}"
                 android:textSize="@dimen/list_item_main_text_size_small"
                 android:visibility="@{(description != null) ? View.VISIBLE : View.GONE}"

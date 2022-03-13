@@ -24,7 +24,7 @@
         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
     <TextView
-            android:id="@+id/title"
+            android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:ellipsize="marquee"

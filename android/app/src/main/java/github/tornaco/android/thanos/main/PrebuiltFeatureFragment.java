@@ -43,7 +43,7 @@ import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
 import github.tornaco.android.thanos.power.SmartFreezeActivity;
 import github.tornaco.android.thanos.power.SmartStandbyV2Activity;
 import github.tornaco.android.thanos.privacy.DataCheatActivity;
-import github.tornaco.android.thanos.process.ProcessManageActivity;
+import github.tornaco.android.thanos.process.v2.ProcessManageActivityV2;
 import github.tornaco.android.thanos.start.BackgroundRestrictActivity;
 import github.tornaco.android.thanos.start.StartRestrictActivity;
 import github.tornaco.android.thanos.task.CleanUpOnTaskRemovedActivity;
@@ -245,6 +245,6 @@ public class PrebuiltFeatureFragment extends NavFragment
                     .show();
             return;
         }
-        ProcessManageActivity.start(requireActivity());
+        ProcessManageActivityV2.Starter.INSTANCE.start(requireActivity());
     }
 }

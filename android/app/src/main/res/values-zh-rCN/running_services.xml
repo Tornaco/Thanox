@@ -4,6 +4,7 @@
     <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g>个进程和<xliff:g id="NUMSERVICES">%2$d</xliff:g>个服务"</string>
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g>个进程和<xliff:g id="NUMSERVICES">%2$d</xliff:g>个服务"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g>个进程和<xliff:g id="NUMSERVICES">%2$d</xliff:g>个服务"</string>
+    <string name="running_processes_item_description_p">%1$d个进程</string>
     <string name="running_processes_header_title" msgid="6588371727640789560">"设备内存"</string>
     <string name="running_processes_header_footer" msgid="723908176275428442">"应用内存使用情况"</string>
     <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"系统"</string>

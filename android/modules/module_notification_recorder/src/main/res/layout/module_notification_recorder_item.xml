@@ -114,7 +114,7 @@
                     android:layout_marginBottom="@dimen/dashboard_card_start_margin">
 
                     <TextView
-                        android:id="@+id/title"
+                        android:id="@+id/item_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -130,7 +130,7 @@
                         android:id="@+id/content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/title"
+                        android:layout_below="@id/item_title"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/common_view_margin_tiny"
                         android:layout_marginEnd="@dimen/common_view_margin_default"

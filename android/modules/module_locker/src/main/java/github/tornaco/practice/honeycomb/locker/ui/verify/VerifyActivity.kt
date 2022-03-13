@@ -2,13 +2,11 @@ package github.tornaco.practice.honeycomb.locker.ui.verify
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -16,25 +14,15 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
-import coil.bitmap.BitmapPool
-import coil.compose.rememberImagePainter
-import coil.decode.DataSource
-import coil.decode.Options
-import coil.fetch.DrawableResult
-import coil.fetch.FetchResult
-import coil.fetch.Fetcher
-import coil.size.Size
 import com.elvishew.xlog.XLog
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.app.activity.VerifyResult
 import github.tornaco.android.thanos.core.pm.AppInfo
+import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.theme.ThemeActivity
-import github.tornaco.android.thanos.util.AppIconLoaderUtil.loadAppIconDrawableWithIconPack
 
 class VerifyActivity : ThemeActivity() {
     private var requestCode = 0
@@ -114,49 +102,6 @@ class VerifyActivity : ThemeActivity() {
         LaunchedEffect(true) {
             visible = true
         }
-    }
-
-
-    @OptIn(ExperimentalCoilApi::class)
-    @Composable
-    fun AppIcon(modifier: Modifier, appInfo: AppInfo) {
-        val context = LocalContext.current
-        // Advanced
-        Image(
-            modifier = modifier,
-            painter = rememberImagePainter(
-                data = appInfo,
-                builder = {
-                    fetcher(object : Fetcher<AppInfo> {
-                        override suspend fun fetch(
-                            pool: BitmapPool,
-                            data: AppInfo,
-                            size: Size,
-                            options: Options,
-                        ): FetchResult {
-                            return DrawableResult(
-                                drawable = loadAppIconDrawableWithIconPack(context, appInfo.pkgName)
-                                    ?: AppCompatResources.getDrawable(
-                                        context,
-                                        github.tornaco.android.thanos.module.common.R.mipmap.ic_fallback_app_icon
-                                    )!!,
-                                isSampled = false,
-                                dataSource = DataSource.MEMORY
-                            )
-                        }
-
-                        override fun key(data: AppInfo): String {
-                            return data.pkgName + data.versionCode
-                        }
-
-                        override fun handles(data: AppInfo): Boolean {
-                            return true
-                        }
-                    })
-                }
-            ),
-            contentDescription = appInfo.appLabel
-        )
     }
 
     private fun startVerifyWithBiometrics(appInfo: AppInfo) {

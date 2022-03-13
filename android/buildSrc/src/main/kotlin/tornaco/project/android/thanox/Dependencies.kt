@@ -6,11 +6,11 @@ object ClassPaths {
     const val gradleBuilderModel = "com.android.tools.build:builder-model:7.0.4"
     const val androidToolsCommon = "com.android.tools:common:30.0.1"
 
-    const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
+    const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
 }
 
 object Compose {
-    const val composeVersion = "1.1.0-alpha01"
+    const val composeVersion = "1.1.1"
 
     const val animation = "androidx.compose.animation:animation:$composeVersion"
     const val iconsExtended = "androidx.compose.material:material-icons-extended:$composeVersion"
@@ -28,6 +28,7 @@ object Compose {
     const val navigationCompose = "androidx.navigation:navigation-compose:2.4.0-alpha03"
     const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
     const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
+    const val landscapistGlide = "com.github.skydoves:landscapist-glide:1.5.0"
 
     const val coil = "io.coil-kt:coil-compose:1.3.2"
 
@@ -126,8 +127,8 @@ object Libs {
         const val chart = "com.github.PhilJay:MPAndroidChart:v3.1.0"
         const val licensesDialog = "de.psdev.licensesdialog:licensesdialog:2.1.0"
 
-        const val glide = "com.github.bumptech.glide:glide:4.9.0"
-        const val glideCompiler = "com.github.bumptech.glide:compiler:4.9.0"
+        const val glide = "com.github.bumptech.glide:glide:4.13.0"
+        const val glideCompiler = "com.github.bumptech.glide:compiler:4.13.0"
 
         const val xposedApi = "de.robv.android.xposed:api:82"
 
@@ -170,6 +171,12 @@ object Libs {
             "com.google.accompanist:accompanist-systemuicontroller:$version"
         const val pager =
             "com.google.accompanist:accompanist-pager:$version"
+        const val insets =
+            "com.google.accompanist:accompanist-insets:$version"
+        const val insetsUi =
+            "com.google.accompanist:accompanist-insets-ui:$version"
+        const val swipeRefresh =
+            "com.google.accompanist:accompanist-swiperefresh:$version"
     }
 
     object Lottie {

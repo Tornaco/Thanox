@@ -147,9 +147,13 @@ dependencies {
     implementation(Compose.tooling)
     implementation(Compose.toolingPreview)
     implementation(Compose.composeMaterialIconsExtended)
+    implementation(Compose.landscapistGlide)
     implementation(Libs.Accompanist.appcompatTheme)
     implementation(Libs.Accompanist.systemUiController)
     implementation(Libs.Accompanist.pager)
+    implementation(Libs.Accompanist.insets)
+    implementation(Libs.Accompanist.swipeRefresh)
+    implementation(Libs.Accompanist.insetsUi)
 
     implementation(Compose.hiltNavigation)
     implementation(Libs.Hilt.library)

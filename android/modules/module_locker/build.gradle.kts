@@ -79,6 +79,7 @@ dependencies {
     kapt(Libs.Others.glideCompiler)
 
     implementation(project(":modules:module_common"))
+    implementation(project(":modules:module_compose_common"))
     implementation(project(":android_framework:base"))
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))

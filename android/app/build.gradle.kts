@@ -117,6 +117,8 @@ android {
         resources.excludes.add("META-INF/LICENSE-W3C-TEST")
         resources.excludes.add("META-INF/DEPENDENCIES")
         resources.excludes.add("META-INF/base.kotlin_module")
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
     }
 }
 
@@ -155,6 +157,7 @@ dependencies {
 
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)
+    implementation(Libs.Coroutines.core)
 
     implementation(Libs.Others.timber)
     implementation(Libs.Others.coil)
@@ -203,14 +206,7 @@ dependencies {
     implementation(project(":third_party:dateformatter"))
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
-
-    testImplementation(Tests.junit)
-    testImplementation(Tests.junitKotlin)
-
-    // UiAutomator Testing
-    androidTestImplementation(Tests.uiAutomation)
 }
-
 
 typealias Properties = java.util.Properties
 typealias UUID = java.util.UUID

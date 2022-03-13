@@ -67,7 +67,7 @@ android {
     }
 
     buildFeatures {
-        compose = true
+        compose = false
         buildConfig = true
         aidl = true
         renderScript = false
@@ -98,6 +98,8 @@ android {
         resources.excludes.add("META-INF/LICENSE-W3C-TEST")
         resources.excludes.add("META-INF/DEPENDENCIES")
         resources.excludes.add("META-INF/base.kotlin_module")
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
     }
 }
 
@@ -112,4 +114,14 @@ dependencies {
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))
+
+
+    testImplementation(tornaco.project.android.thanox.Tests.junit)
+    testImplementation(tornaco.project.android.thanox.Tests.junitKotlin)
+    implementation(Libs.Coroutines.test)
+    // UiAutomator Testing
+    androidTestImplementation(tornaco.project.android.thanox.Tests.uiAutomation)
+    androidTestImplementation(tornaco.project.android.thanox.Tests.androidXTestJunit)
+    androidTestImplementation(tornaco.project.android.thanox.Tests.androidXTestEspresso)
+    androidTestImplementation(Libs.Coroutines.test)
 }

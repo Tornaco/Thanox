@@ -11,6 +11,7 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.android.material.composethemeadapter3.Mdc3Theme
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.process.ProcessManageActivity
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 
@@ -50,7 +51,13 @@ class ProcessManageActivityV2 : ThemeActivity() {
                 }
                 ProvideWindowInsets {
                     Surface {
-                        ProcessManageScreen()
+                        ProcessManageScreen(
+                            onBackPressed = {
+                                finish()
+                            },
+                            toLegacyUi = {
+                                ProcessManageActivity.start(thisActivity())
+                            })
                     }
                 }
             }

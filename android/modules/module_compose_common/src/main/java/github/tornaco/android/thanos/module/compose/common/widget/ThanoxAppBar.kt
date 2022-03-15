@@ -74,7 +74,7 @@ fun ThanoxAppBar(
             }
         },
         actions = actions,
-        elevation = 1.dp
+        elevation = 0.dp
     )
 }
 

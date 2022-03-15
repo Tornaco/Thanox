@@ -24,6 +24,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cached
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -91,13 +94,29 @@ fun ProcessManageScreen(
                 SwipeRefreshIndicator(
                     state = state,
                     refreshTriggerDistance = refreshTriggerDistance,
-                    scale = true
+                    scale = true,
+                    arrowEnabled = false,
+                    contentColor = MaterialTheme.colorScheme.primary
                 )
             }
         ) {
-            RunningAppList(state, contentPadding)
+            Column(modifier = Modifier.fillMaxSize()) {
+                AppFilterDropDown()
+                RunningAppList(state, contentPadding)
+            }
         }
     }
+}
+
+@Composable
+fun AppFilterDropDown() {
+    FilterDropDown(
+        allItems = listOf(
+            AppSetFilterItem("System", false),
+            AppSetFilterItem("Installed", true),
+            AppSetFilterItem("Media provider", false),
+        )
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -109,12 +128,19 @@ fun RunningAppList(state: ProcessManageState, contentPadding: PaddingValues) {
             .background(color = MaterialTheme.colorScheme.surface)
             .fillMaxSize()
     ) {
-        item { GroupHeader(false) }
+        item { GroupHeader(false, state.runningAppStates.size) }
         items(state.runningAppStates) {
             RunningAppItem(it)
         }
 
-        item { GroupHeader(true) }
+        item {
+            Spacer(
+                modifier = Modifier
+                    .size(24.dp)
+            )
+        }
+
+        item { GroupHeader(true, state.runningAppStatesBg.size) }
         items(state.runningAppStatesBg) {
             RunningAppItem(it)
         }
@@ -122,26 +148,27 @@ fun RunningAppList(state: ProcessManageState, contentPadding: PaddingValues) {
 }
 
 @Composable
-fun GroupHeader(isTotallyCached: Boolean) {
+fun GroupHeader(isTotallyCached: Boolean, itemCount: Int) {
     Row(
         modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.primaryContainer)
             .fillMaxWidth()
             .padding(horizontal = 20.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            painter = if (isTotallyCached) {
-                painterResource(id = R.drawable.ic_baseline_cached_24)
-            } else painterResource(id = R.drawable.ic_baseline_visibility_24),
-            contentDescription = "Icon"
-        )
-        Spacer(modifier = Modifier.size(6.dp))
-        Text(
-            text = if (isTotallyCached) stringResource(id = R.string.running_process_background)
-            else stringResource(id = R.string.running_process_running),
-            style = MaterialTheme.typography.titleMedium
-        )
+        val text = if (isTotallyCached) stringResource(id = R.string.running_process_background)
+        else stringResource(id = R.string.running_process_running)
+        TextButton(onClick = {}) {
+            Icon(
+                if (isTotallyCached) Icons.Filled.Cached else Icons.Filled.Visibility,
+                contentDescription = "isTotallyCached",
+                modifier = Modifier.size(ButtonDefaults.IconSize)
+            )
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+            Text(
+                text = "$text $itemCount",
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
     }
 }
 

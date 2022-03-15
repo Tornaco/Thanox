@@ -23,37 +23,23 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.AppBarDefaults
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.primarySurface
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.navigationBarsHeight
-import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
-import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
-import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
-import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
-import github.tornaco.android.thanos.module.compose.common.widget.md3.LargeTopAppBarX
-import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarScrollBehaviorX
+import github.tornaco.android.thanos.module.compose.common.widget.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -68,25 +54,30 @@ fun ProcessManageScreen(
         viewModel.startLoading()
     }
 
-    val scrollBehavior = remember { TopAppBarDefaults.enterAlwaysScrollBehavior() }
-    com.google.accompanist.insets.ui.Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            AppBar(
-                scrollBehavior = scrollBehavior,
-                onBackPressed = onBackPressed,
-                toLegacyUi = toLegacyUi
+    ThanoxScaffold(
+        title = {
+            Text(
+                stringResource(id = R.string.feature_title_process_manage),
+                style = MaterialTheme.typography.headlineLarge,
             )
         },
-        bottomBar = {
-            // We add a spacer as a bottom bar, which is the same height as
-            // the navigation bar
-            Spacer(
-                Modifier
-                    .navigationBarsHeight()
-                    .fillMaxWidth()
+        smallTitle = {
+            Text(
+                stringResource(id = R.string.feature_title_process_manage),
+                style = MaterialTheme.typography.titleMedium,
             )
         },
+        actions = {
+            IconButton(onClick = {
+                toLegacyUi()
+            }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_aliens_fill),
+                    contentDescription = "Clear"
+                )
+            }
+        },
+        onBackPressed = onBackPressed
     ) { contentPadding ->
         SwipeRefresh(
             state = rememberSwipeRefreshState(state.isLoading),
@@ -106,86 +97,6 @@ fun ProcessManageScreen(
         ) {
             RunningAppList(state, contentPadding)
         }
-    }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun AppBar(
-    scrollBehavior: TopAppBarScrollBehaviorX,
-    onBackPressed: () -> Unit,
-    toLegacyUi: () -> Unit
-) {
-    MD3TopAppBar(
-        scrollBehavior = scrollBehavior,
-        modifier = Modifier.fillMaxWidth(),
-        contentPadding = rememberInsetsPaddingValues(
-            LocalWindowInsets.current.statusBars,
-            applyBottom = false,
-        ),
-        title = {
-            Text(
-                stringResource(id = R.string.feature_title_process_manage),
-                style = MaterialTheme.typography.headlineLarge,
-            )
-        },
-        smallTitle = {
-            Text(
-                stringResource(id = R.string.feature_title_process_manage),
-                style = MaterialTheme.typography.titleMedium,
-            )
-        },
-        backgroundColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
-        navigationIcon = {
-            IconButton(onClick = {
-                onBackPressed()
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.module_common_ic_arrow_back_24dp),
-                    contentDescription = "Back"
-                )
-            }
-        },
-        actions = {
-            IconButton(onClick = {
-                toLegacyUi()
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_aliens_fill),
-                    contentDescription = "Clear"
-                )
-            }
-        },
-        elevation = 1.dp
-    )
-}
-
-@Composable
-fun MD3TopAppBar(
-    title: @Composable () -> Unit,
-    smallTitle: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
-    navigationIcon: @Composable (() -> Unit) = {},
-    actions: @Composable RowScope.() -> Unit = {},
-    backgroundColor: Color = androidx.compose.material.MaterialTheme.colors.primarySurface,
-    elevation: Dp = AppBarDefaults.TopAppBarElevation,
-    scrollBehavior: TopAppBarScrollBehaviorX? = null
-) {
-    androidx.compose.material.Surface(
-        color = backgroundColor,
-        elevation = elevation,
-        modifier = modifier
-    ) {
-        LargeTopAppBarX(
-            title = title,
-            smallTitle = smallTitle,
-            navigationIcon = navigationIcon,
-            actions = actions,
-            modifier = Modifier.padding(contentPadding),
-            scrollBehaviorX = scrollBehavior
-        )
     }
 }
 

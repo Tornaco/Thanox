@@ -17,6 +17,7 @@
 
 package github.tornaco.android.thanos.module.compose.common.widget.md3
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationState
 import androidx.compose.animation.core.DecayAnimationSpec
 import androidx.compose.animation.core.FastOutLinearInEasing
@@ -205,7 +206,10 @@ object TopAppBarDefaults {
     @Composable
     fun largeTopAppBarColors(
         containerColor: Color = MaterialTheme.colorScheme.surface,
-        scrolledContainerColor: Color = MaterialTheme.colorScheme.surface,
+        scrolledContainerColor: Color = MaterialTheme.colorScheme.applyTonalElevation(
+            backgroundColor = containerColor,
+            elevation = 2.dp
+        ),
         navigationIconContentColor: Color = MaterialTheme.colorScheme.onSurface,
         titleContentColor: Color = MaterialTheme.colorScheme.onSurface,
         actionIconContentColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -272,6 +276,12 @@ object TopAppBarDefaults {
     ): TopAppBarScrollBehaviorX =
         ExitUntilCollapsedScrollBehaviorX(decayAnimationSpec, canScroll)
 }
+
+// Padding minus IconButton's min touch target expansion
+private val BottomAppBarHorizontalPadding = 16.dp - 12.dp
+
+// Padding minus IconButton's min touch target expansion
+private val BottomAppBarVerticalPadding = 16.dp - 12.dp
 
 /**
  * A two-rows top app bar that is designed to be called by the Large and Medium top app bar
@@ -525,6 +535,54 @@ private fun TopAppBarLayout(
             )
         }
     }
+}
+
+/**
+ * A [TopAppBarColors] implementation that animates the container color according to the top app
+ * bar scroll state.
+ *
+ * This default implementation does not animate the leading, headline, or trailing colors.
+ */
+@Stable
+private class AnimatingTopAppBarColors(
+    private val containerColor: Color,
+    private val scrolledContainerColor: Color,
+    navigationIconContentColor: Color,
+    titleContentColor: Color,
+    actionIconContentColor: Color
+) : TopAppBarColors {
+
+    // In this TopAppBarColors implementation, the following colors never change their value as the
+    // app bar scrolls.
+    private val navigationIconColorState: State<Color> = mutableStateOf(navigationIconContentColor)
+    private val titleColorState: State<Color> = mutableStateOf(titleContentColor)
+    private val actionIconColorState: State<Color> = mutableStateOf(actionIconContentColor)
+
+    @Composable
+    override fun containerColor(scrollFraction: Float): State<Color> {
+        return animateColorAsState(
+            // Check if scrollFraction is slightly over zero to overcome float precision issues.
+            targetValue = if (scrollFraction > 0.01f) {
+                scrolledContainerColor
+            } else {
+                containerColor
+            },
+            animationSpec = tween(
+                durationMillis = TopAppBarAnimationDurationMillis,
+                easing = LinearOutSlowInEasing
+            )
+        )
+    }
+
+    @Composable
+    override fun navigationIconContentColor(scrollFraction: Float): State<Color> =
+        navigationIconColorState
+
+    @Composable
+    override fun titleContentColor(scrollFraction: Float): State<Color> = titleColorState
+
+    @Composable
+    override fun actionIconContentColor(scrollFraction: Float): State<Color> = actionIconColorState
 }
 
 /**
@@ -826,6 +884,7 @@ private val MediumTitleBottomPadding = 24.dp
 private val LargeTitleBottomPadding = 28.dp
 private val TopAppBarHorizontalPadding = 4.dp
 
+// TODO: this should probably be part of the touch target of the start and end icons, clarify this
 private val AppBarHorizontalPadding = 4.dp
 
 // A title inset when the App-Bar is a Medium or Large one. Also used to size a spacer when the

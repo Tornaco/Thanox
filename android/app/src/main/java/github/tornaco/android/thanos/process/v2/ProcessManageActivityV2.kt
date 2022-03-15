@@ -6,11 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.google.android.material.composethemeadapter3.Mdc3Theme
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
 import github.tornaco.android.thanos.process.ProcessManageActivity
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
@@ -40,14 +41,15 @@ class ProcessManageActivityV2 : ThemeActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            Mdc3Theme {
+            ThanoxTheme {
                 // Update the system bars to be translucent
                 val systemUiController = rememberSystemUiController()
                 val useDarkIcons = MaterialTheme.colors.isLight
-                val color =
-                    androidx.compose.material3.MaterialTheme.colorScheme.surface.copy(alpha = 0.95f)
                 SideEffect {
-                    systemUiController.setSystemBarsColor(color, darkIcons = useDarkIcons)
+                    systemUiController.setSystemBarsColor(
+                        Color.Transparent,
+                        darkIcons = useDarkIcons
+                    )
                 }
                 ProvideWindowInsets {
                     Surface {

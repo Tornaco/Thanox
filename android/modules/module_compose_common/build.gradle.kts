@@ -68,8 +68,14 @@ dependencies {
     implementation(tornaco.project.android.thanox.Compose.toolingPreview)
     implementation(tornaco.project.android.thanox.Compose.composeMaterialIconsExtended)
     implementation(tornaco.project.android.thanox.Compose.landscapistGlide)
+
     implementation(Libs.Accompanist.appcompatTheme)
     implementation(Libs.Accompanist.systemUiController)
+    implementation(Libs.Accompanist.pager)
+    implementation(Libs.Accompanist.insets)
+    implementation(Libs.Accompanist.swipeRefresh)
+    implementation(Libs.Accompanist.insetsUi)
+
     implementation(Libs.Lottie.composeLottie)
     implementation(Libs.Lottie.lottie)
     implementation(Libs.Accompanist.pager)

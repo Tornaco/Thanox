@@ -22,10 +22,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.AppBarDefaults
-import androidx.compose.material.primarySurface
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,9 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import github.tornaco.android.thanos.module.compose.common.R
-import github.tornaco.android.thanos.module.compose.common.widget.md3.LargeTopAppBarX
 import github.tornaco.android.thanos.module.compose.common.widget.md3.XTopAppBarDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarScrollBehaviorX
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,7 +41,7 @@ fun ThanoxAppBar(
     title: @Composable () -> Unit,
     smallTitle: @Composable () -> Unit,
     actions: @Composable RowScope.() -> Unit = {},
-    scrollBehavior: TopAppBarScrollBehaviorX,
+    scrollBehavior: TopAppBarScrollBehavior,
     onBackPressed: () -> Unit,
 ) {
     val backgroundColors = XTopAppBarDefaults.largeTopAppBarColors()
@@ -86,22 +81,23 @@ private fun MD3TopAppBar(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     navigationIcon: @Composable (() -> Unit) = {},
     actions: @Composable RowScope.() -> Unit = {},
-    backgroundColor: Color = androidx.compose.material.MaterialTheme.colors.primarySurface,
+    backgroundColor: Color,
     elevation: Dp = AppBarDefaults.TopAppBarElevation,
-    scrollBehavior: TopAppBarScrollBehaviorX? = null
+    scrollBehavior: TopAppBarScrollBehavior? = null
 ) {
     androidx.compose.material.Surface(
         color = backgroundColor,
         elevation = elevation,
         modifier = modifier
     ) {
-        LargeTopAppBarX(
+        MediumTopAppBar(
             title = title,
-            smallTitle = smallTitle,
             navigationIcon = navigationIcon,
             actions = actions,
-            modifier = Modifier.padding(contentPadding),
-            scrollBehaviorX = scrollBehavior
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(contentPadding),
+            scrollBehavior = scrollBehavior
         )
     }
 }

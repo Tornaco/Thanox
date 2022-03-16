@@ -27,11 +27,11 @@ import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarScrollBehaviorX
 import github.tornaco.android.thanos.module.compose.common.widget.md3.XTopAppBarDefaults
 
 interface FilterItem {
@@ -42,7 +42,7 @@ interface FilterItem {
 
 @Composable
 fun <T : FilterItem> FilterDropDown(
-    scrollBehavior: TopAppBarScrollBehaviorX,
+    scrollBehavior: TopAppBarScrollBehavior,
     allItems: List<T>,
     onItemSelected: (T) -> Unit = {},
 ) {

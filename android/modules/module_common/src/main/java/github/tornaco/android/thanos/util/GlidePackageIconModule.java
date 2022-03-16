@@ -43,7 +43,7 @@ public class GlidePackageIconModule extends AppGlideModule {
 
         @Override
         public void loadData(Priority priority, DataCallback<? super Bitmap> callback) {
-            XLog.d("loadData: " + info.getPkgName());
+            XLog.d("loadData: " + info.getPkgName() + "@" + Thread.currentThread());
             if (info.getPkgName() == null) {
                 callback.onLoadFailed(new NullPointerException("Package name is null"));
                 return;

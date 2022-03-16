@@ -38,12 +38,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.elvishew.xlog.XLog
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.widget.*
-import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarScrollBehaviorX
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,13 +62,7 @@ fun ProcessManageScreen(
         title = {
             Text(
                 stringResource(id = R.string.feature_title_process_manage),
-                style = MaterialTheme.typography.headlineLarge,
-            )
-        },
-        smallTitle = {
-            Text(
-                stringResource(id = R.string.feature_title_process_manage),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.headlineMedium,
             )
         },
         actions = {
@@ -83,6 +77,8 @@ fun ProcessManageScreen(
         },
         onBackPressed = onBackPressed
     ) { contentPadding, scrollBehavior ->
+        XLog.d("scrollBehavior ${scrollBehavior.scrollFraction}")
+        XLog.d("scrollBehavior contentOffset ${scrollBehavior.contentOffset}")
         SwipeRefresh(
             state = rememberSwipeRefreshState(state.isLoading),
             onRefresh = { viewModel.startLoading() },
@@ -114,7 +110,7 @@ fun ProcessManageScreen(
 }
 
 @Composable
-fun AppFilterDropDown(scrollBehavior: TopAppBarScrollBehaviorX) {
+fun AppFilterDropDown(scrollBehavior: TopAppBarScrollBehavior) {
     FilterDropDown(
         scrollBehavior = scrollBehavior,
         allItems = listOf(

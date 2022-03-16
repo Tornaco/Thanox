@@ -22,24 +22,26 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.google.accompanist.insets.navigationBarsHeight
-import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarScrollBehaviorX
-import github.tornaco.android.thanos.module.compose.common.widget.md3.XTopAppBarDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThanoxScaffold(
     title: @Composable () -> Unit,
-    smallTitle: @Composable () -> Unit,
+    smallTitle: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
     onBackPressed: () -> Unit,
-    content: @Composable (PaddingValues, TopAppBarScrollBehaviorX) -> Unit
+    content: @Composable (PaddingValues, TopAppBarScrollBehavior) -> Unit
 ) {
-    val scrollBehavior = remember { XTopAppBarDefaults.enterAlwaysScrollBehavior() }
+    val scrollBehavior = remember {
+        TopAppBarDefaults.pinnedScrollBehavior()
+    }
     com.google.accompanist.insets.ui.Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {

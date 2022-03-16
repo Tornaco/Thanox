@@ -23,21 +23,24 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.imageResource
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.skydoves.landscapist.glide.GlideImage
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.common.R
+import github.tornaco.android.thanos.util.GlideApp
 
 @Composable
 fun AppIcon(modifier: Modifier, appInfo: AppInfo) {
-    val context = LocalContext.current
     GlideImage(
         modifier = modifier,
         imageModel = appInfo,
         // Crop, Fit, Inside, FillHeight, FillWidth, None
         contentScale = ContentScale.Crop,
-        // shows a placeholder while loading the image.
-        placeHolder = ImageBitmap.imageResource(R.mipmap.ic_fallback_app_icon),
         // shows an error ImageBitmap when the request failed.
-        error = ImageBitmap.imageResource(R.mipmap.ic_fallback_app_icon)
+        error = ImageBitmap.imageResource(R.mipmap.ic_fallback_app_icon),
+        requestBuilder = {
+            GlideApp.with(LocalContext.current.applicationContext).asDrawable()
+                .transition(withCrossFade())
+        },
     )
 }

@@ -36,7 +36,7 @@ import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import github.tornaco.android.thanos.module.compose.common.R
 import github.tornaco.android.thanos.module.compose.common.widget.md3.LargeTopAppBarX
-import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarDefaults
+import github.tornaco.android.thanos.module.compose.common.widget.md3.XTopAppBarDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarScrollBehaviorX
 
 
@@ -49,7 +49,7 @@ fun ThanoxAppBar(
     scrollBehavior: TopAppBarScrollBehaviorX,
     onBackPressed: () -> Unit,
 ) {
-    val backgroundColors = TopAppBarDefaults.largeTopAppBarColors()
+    val backgroundColors = XTopAppBarDefaults.largeTopAppBarColors()
     val backgroundColor = backgroundColors.containerColor(
         scrollFraction = scrollBehavior.scrollFraction
     ).value

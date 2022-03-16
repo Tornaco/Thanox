@@ -27,7 +27,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.google.accompanist.insets.navigationBarsHeight
-import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarDefaults
+import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarScrollBehaviorX
+import github.tornaco.android.thanos.module.compose.common.widget.md3.XTopAppBarDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,9 +37,9 @@ fun ThanoxScaffold(
     smallTitle: @Composable () -> Unit,
     actions: @Composable RowScope.() -> Unit = {},
     onBackPressed: () -> Unit,
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable (PaddingValues, TopAppBarScrollBehaviorX) -> Unit
 ) {
-    val scrollBehavior = remember { TopAppBarDefaults.enterAlwaysScrollBehavior() }
+    val scrollBehavior = remember { XTopAppBarDefaults.enterAlwaysScrollBehavior() }
     com.google.accompanist.insets.ui.Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
@@ -58,6 +59,8 @@ fun ThanoxScaffold(
                     .navigationBarsHeight()
                     .fillMaxWidth()
             )
-        }, content = content
+        }, content = {
+            content(it, scrollBehavior)
+        }
     )
 }

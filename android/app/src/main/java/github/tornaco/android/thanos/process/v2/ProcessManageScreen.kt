@@ -43,6 +43,7 @@ import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.widget.*
+import github.tornaco.android.thanos.module.compose.common.widget.md3.TopAppBarScrollBehaviorX
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,7 +82,7 @@ fun ProcessManageScreen(
             }
         },
         onBackPressed = onBackPressed
-    ) { contentPadding ->
+    ) { contentPadding, scrollBehavior ->
         SwipeRefresh(
             state = rememberSwipeRefreshState(state.isLoading),
             onRefresh = { viewModel.startLoading() },
@@ -100,8 +101,12 @@ fun ProcessManageScreen(
                 )
             }
         ) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                AppFilterDropDown()
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = contentPadding.calculateTopPadding())
+            ) {
+                AppFilterDropDown(scrollBehavior)
                 RunningAppList(state, contentPadding)
             }
         }
@@ -109,8 +114,9 @@ fun ProcessManageScreen(
 }
 
 @Composable
-fun AppFilterDropDown() {
+fun AppFilterDropDown(scrollBehavior: TopAppBarScrollBehaviorX) {
     FilterDropDown(
+        scrollBehavior = scrollBehavior,
         allItems = listOf(
             AppSetFilterItem("System", false),
             AppSetFilterItem("Installed", true),
@@ -123,7 +129,8 @@ fun AppFilterDropDown() {
 @Composable
 fun RunningAppList(state: ProcessManageState, contentPadding: PaddingValues) {
     LazyColumn(
-        contentPadding = contentPadding,
+        // Edge to edge.
+        contentPadding = PaddingValues(bottom = contentPadding.calculateBottomPadding()),
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.surface)
             .fillMaxSize()

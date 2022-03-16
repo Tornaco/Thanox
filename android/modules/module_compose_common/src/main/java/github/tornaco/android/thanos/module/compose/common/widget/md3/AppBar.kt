@@ -59,7 +59,7 @@ fun LargeTopAppBarX(
     modifier: Modifier = Modifier,
     navigationIcon: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
-    colors: TopAppBarColors = TopAppBarDefaults.largeTopAppBarColors(),
+    colors: TopAppBarColors = XTopAppBarDefaults.largeTopAppBarColors(),
     scrollBehaviorX: TopAppBarScrollBehaviorX? = null
 ) {
     TwoRowsTopAppBar(
@@ -82,9 +82,9 @@ fun LargeTopAppBarX(
  * A TopAppBarScrollBehavior defines how an app bar should behave when the content under it is
  * scrolled.
  *
- * @see [TopAppBarDefaults.pinnedScrollBehavior]
- * @see [TopAppBarDefaults.enterAlwaysScrollBehavior]
- * @see [TopAppBarDefaults.exitUntilCollapsedScrollBehavior]
+ * @see [XTopAppBarDefaults.pinnedScrollBehavior]
+ * @see [XTopAppBarDefaults.enterAlwaysScrollBehavior]
+ * @see [XTopAppBarDefaults.exitUntilCollapsedScrollBehavior]
  */
 @Stable
 interface TopAppBarScrollBehaviorX {
@@ -103,7 +103,7 @@ interface TopAppBarScrollBehaviorX {
      * while `1.0`
      * represents a collapsed one (e.g. the app bar is scrolled to its target offset). Note that
      * this value will be updated on scroll even if the [offset] is pinned to a specific
-     * value (see [TopAppBarDefaults.pinnedScrollBehavior]). In this case a value of 1.0 represents
+     * value (see [XTopAppBarDefaults.pinnedScrollBehavior]). In this case a value of 1.0 represents
      * that the scroll value has exceeded the height of the pinned app bar, as if the app bar was
      * collapsing.
      */
@@ -138,8 +138,8 @@ interface TopAppBarScrollBehaviorX {
 /**
  * Represents the colors used by a top app bar in different states.
  *
- * Each app bar has their own default implementation available in [TopAppBarDefaults], such as
- * [TopAppBarDefaults.smallTopAppBarColors] for [SmallTopAppBar].
+ * Each app bar has their own default implementation available in [XTopAppBarDefaults], such as
+ * [XTopAppBarDefaults.smallTopAppBarColors] for [SmallTopAppBar].
  */
 @Stable
 interface TopAppBarColors {
@@ -185,7 +185,7 @@ interface TopAppBarColors {
 }
 
 /** Contains default values used for the top app bar implementations. */
-object TopAppBarDefaults {
+object XTopAppBarDefaults {
 
     private fun ColorScheme.applyTonalElevation(backgroundColor: Color, elevation: Dp): Color {
         return if (backgroundColor == surface) {

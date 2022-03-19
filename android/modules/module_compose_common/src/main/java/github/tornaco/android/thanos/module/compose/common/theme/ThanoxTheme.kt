@@ -24,6 +24,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -248,3 +249,5 @@ private const val ThemeModeKey = "themeMode"
 private const val ColorModeKey = "colorMode"
 private const val FontScaleKey = "fontScale"
 private const val TextDirectionKey = "textDirection"
+
+

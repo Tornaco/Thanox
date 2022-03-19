@@ -24,9 +24,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cached
-import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -38,11 +35,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.elvishew.xlog.XLog
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
+import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefauts.appBarTitleTextStyle
 import github.tornaco.android.thanos.module.compose.common.widget.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,7 +60,7 @@ fun ProcessManageScreen(
         title = {
             Text(
                 stringResource(id = R.string.feature_title_process_manage),
-                style = MaterialTheme.typography.headlineMedium,
+                style = appBarTitleTextStyle()
             )
         },
         actions = {
@@ -76,9 +74,7 @@ fun ProcessManageScreen(
             }
         },
         onBackPressed = onBackPressed
-    ) { contentPadding, scrollBehavior ->
-        XLog.d("scrollBehavior ${scrollBehavior.scrollFraction}")
-        XLog.d("scrollBehavior contentOffset ${scrollBehavior.contentOffset}")
+    ) { contentPadding ->
         SwipeRefresh(
             state = rememberSwipeRefreshState(state.isLoading),
             onRefresh = { viewModel.startLoading() },
@@ -97,22 +93,14 @@ fun ProcessManageScreen(
                 )
             }
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = contentPadding.calculateTopPadding())
-            ) {
-                AppFilterDropDown(scrollBehavior)
-                RunningAppList(state, contentPadding)
-            }
+            RunningAppList(state, contentPadding)
         }
     }
 }
 
 @Composable
-fun AppFilterDropDown(scrollBehavior: TopAppBarScrollBehavior) {
+fun AppFilterDropDown() {
     FilterDropDown(
-        scrollBehavior = scrollBehavior,
         allItems = listOf(
             AppSetFilterItem("System", false),
             AppSetFilterItem("Installed", true),
@@ -125,13 +113,11 @@ fun AppFilterDropDown(scrollBehavior: TopAppBarScrollBehavior) {
 @Composable
 fun RunningAppList(state: ProcessManageState, contentPadding: PaddingValues) {
     LazyColumn(
-        // Edge to edge.
-        contentPadding = PaddingValues(bottom = contentPadding.calculateBottomPadding()),
+        contentPadding = contentPadding,
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.surface)
             .fillMaxSize()
     ) {
-        item { GroupHeader(false, state.runningAppStates.size) }
         items(state.runningAppStates) {
             RunningAppItem(it)
         }
@@ -143,7 +129,6 @@ fun RunningAppList(state: ProcessManageState, contentPadding: PaddingValues) {
             )
         }
 
-        item { GroupHeader(true, state.runningAppStatesBg.size) }
         items(state.runningAppStatesBg) {
             RunningAppItem(it)
         }
@@ -152,27 +137,23 @@ fun RunningAppList(state: ProcessManageState, contentPadding: PaddingValues) {
 
 @Composable
 fun GroupHeader(isTotallyCached: Boolean, itemCount: Int) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        val text = if (isTotallyCached) stringResource(id = R.string.running_process_background)
-        else stringResource(id = R.string.running_process_running)
-        TextButton(onClick = {}) {
-            Icon(
-                if (isTotallyCached) Icons.Filled.Cached else Icons.Filled.Visibility,
-                contentDescription = "isTotallyCached",
-                modifier = Modifier.size(ButtonDefaults.IconSize)
-            )
-            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+    Surface(tonalElevation = 2.dp) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(ColorDefaults.backgroundSurfaceColor())
+                .padding(horizontal = 20.dp, vertical = 8.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            val text = if (isTotallyCached) stringResource(id = R.string.running_process_background)
+            else stringResource(id = R.string.running_process_running)
             Text(
                 text = "$text $itemCount",
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.headlineSmall
             )
         }
     }
+
 }
 
 @OptIn(ExperimentalMaterialApi::class)

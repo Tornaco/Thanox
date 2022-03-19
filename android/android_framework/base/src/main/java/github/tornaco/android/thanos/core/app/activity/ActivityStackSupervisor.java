@@ -15,11 +15,6 @@ public class ActivityStackSupervisor {
     private final IActivityStackSupervisor supervisor;
 
     @SneakyThrows
-    public boolean checkActivity(ComponentName componentName) {
-        return supervisor.checkActivity(componentName);
-    }
-
-    @SneakyThrows
     public Intent replaceActivityStartingIntent(Intent intent, int userId) {
         return supervisor.replaceActivityStartingIntent(intent, userId);
     }

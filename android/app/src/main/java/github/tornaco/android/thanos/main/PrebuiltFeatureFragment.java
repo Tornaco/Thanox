@@ -17,19 +17,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
-import github.tornaco.android.plugin.push.message.delegate.WechatPushDeleteMainActivity;
-import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
-import github.tornaco.android.thanos.apps.SuggestedAppsActivity;
 import github.tornaco.android.thanos.core.T;
-import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.dashboard.DashboardCardAdapter;
 import github.tornaco.android.thanos.dashboard.OnHeaderClickListener;
@@ -37,26 +32,10 @@ import github.tornaco.android.thanos.dashboard.OnTileClickListener;
 import github.tornaco.android.thanos.dashboard.OnTileLongClickListener;
 import github.tornaco.android.thanos.dashboard.Tile;
 import github.tornaco.android.thanos.databinding.FragmentPrebuiltFeaturesBinding;
-import github.tornaco.android.thanos.infinite.InfiniteZActivity;
-import github.tornaco.android.thanos.notification.ScreenOnNotificationActivity;
 import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
-import github.tornaco.android.thanos.power.SmartFreezeActivity;
-import github.tornaco.android.thanos.power.SmartStandbyV2Activity;
 import github.tornaco.android.thanos.pref.AppPreference;
-import github.tornaco.android.thanos.privacy.DataCheatActivity;
 import github.tornaco.android.thanos.process.ProcessManageActivity;
 import github.tornaco.android.thanos.process.v2.ProcessManageActivityV2;
-import github.tornaco.android.thanos.start.BackgroundRestrictActivity;
-import github.tornaco.android.thanos.start.StartRestrictActivity;
-import github.tornaco.android.thanos.task.CleanUpOnTaskRemovedActivity;
-import github.tornaco.android.thanos.task.RecentTaskBlurListActivity;
-import github.tornaco.android.thanos.util.BrowserUtils;
-import github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampolineActivity;
-import github.tornaco.android.thanox.module.notification.recorder.ui.NotificationRecordActivity;
-import github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity;
-import github.tornaco.thanos.android.module.profile.RuleListActivity;
-import github.tornaco.thanos.android.ops.OpsBottomNavActivity;
-import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity;
 
 public class PrebuiltFeatureFragment extends NavFragment
         implements OnTileClickListener, OnTileLongClickListener, OnHeaderClickListener {
@@ -64,6 +43,7 @@ public class PrebuiltFeatureFragment extends NavFragment
     private NavViewModel navViewModel;
 
     private Handler uiHandler;
+    private PrebuiltFeatureLauncher featureLauncher;
 
     @Override
     public void onAttach(Context context) {
@@ -95,6 +75,8 @@ public class PrebuiltFeatureFragment extends NavFragment
         navViewModel = obtainViewModel(requireActivity());
         prebuiltFeaturesBinding.setViewmodel(navViewModel);
         prebuiltFeaturesBinding.executePendingBindings();
+
+        this.featureLauncher = new PrebuiltFeatureLauncher(requireActivity(), navViewModel, uiHandler);
     }
 
     private static NavViewModel obtainViewModel(FragmentActivity activity) {
@@ -105,103 +87,17 @@ public class PrebuiltFeatureFragment extends NavFragment
 
     @Override
     public void onClick(@NonNull Tile tile) {
-        ThanosManager thanosManager = ThanosManager.from(requireContext());
-        if (tile.getId() == R.id.id_one_key_clear) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                Toast.makeText(
-                        requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
-                return;
-            }
-            navViewModel.cleanUpBackgroundTasks();
-            // Delay 1.5s to refresh
-            uiHandler.postDelayed(() -> navViewModel.start(), 1500);
-        } else if (tile.getId() == R.id.id_background_start) {
-            StartRestrictActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_background_restrict) {
-            BackgroundRestrictActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_clean_task_removal) {
-            CleanUpOnTaskRemovedActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_apps_manager) {
-            SuggestedAppsActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_screen_on_notification) {
-            ScreenOnNotificationActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_notification_recorder) {
-            NotificationRecordActivity.Starter.start(requireActivity());
-        } else if (tile.getId() == R.id.id_trampoline) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
-                Toast.makeText(
-                        requireActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
-                // Disable this feature, since it is free to use before.
-                thanosManager.ifServiceInstalled(manager -> {
-                    XLog.w("Disabling ActivityTrampoline.");
-                    manager.getActivityStackSupervisor().setActivityTrampolineEnabled(false);
-                });
-                return;
-            }
-            ActivityTrampolineActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_profile) {
-            RuleListActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_smart_standby) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
-                Toast.makeText(
-                        requireActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
-                return;
-            }
-            SmartStandbyV2Activity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_smart_freeze) {
-            SmartFreezeActivity.Starter.start(requireActivity());
-        } else if (tile.getId() == R.id.id_privacy_cheat) {
-            DataCheatActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_ops_by_ops) {
-            OpsBottomNavActivity.Starter.start(requireActivity());
-        } else if (tile.getId() == R.id.id_task_blur) {
-            RecentTaskBlurListActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_op_remind) {
-            RemindOpsActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_app_lock) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                Toast.makeText(
-                        requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
-                return;
-            }
-            LockerStartActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_infinite_z) {
-            InfiniteZActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_plugins) {
-            PluginListActivity.start(requireActivity());
-        } else if (tile.getId() == R.id.id_feedback) {
-            showFeedbackDialog();
-        } else if (tile.getId() == R.id.id_guide) {
-            BrowserUtils.launch(requireActivity(), BuildProp.THANOX_URL_DOCS_HOME);
-        } else if (tile.getId() == R.id.id_wechat_push) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                Toast.makeText(
-                        requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
-                return;
-            }
-            WechatPushDeleteMainActivity.start(requireActivity());
-        }
-    }
-
-    private void showFeedbackDialog() {
-        new MaterialAlertDialogBuilder(requireActivity())
-                .setTitle(R.string.nav_title_feedback)
-                .setMessage(R.string.dialog_message_feedback)
-                .setPositiveButton(android.R.string.ok, null)
-                .show();
+        featureLauncher.launch(tile.getId());
     }
 
     @Override
     public void onLongClick(@NonNull Tile tile, @NonNull View view) {
-        if (tile.getId() == R.id.id_one_key_clear) {
+        if (tile.getId() == PrebuiltFeatureIds.ID_ONE_KEY_CLEAR) {
             showOneKeyBoostPopMenu(view);
-        } else if (tile.getId() == R.id.id_guide) {
+        } else if (tile.getId() == PrebuiltFeatureIds.ID_GUIDE) {
             OnBoardingActivity.Starter.INSTANCE.start(requireActivity());
+        } else {
+            showCommonTilePopMenu(view, tile);
         }
     }
 
@@ -233,6 +129,20 @@ public class PrebuiltFeatureFragment extends NavFragment
                                         })
                                 .setCancelable(true)
                                 .show();
+                        return true;
+                    }
+                    return false;
+                });
+        popupMenu.show();
+    }
+
+    private void showCommonTilePopMenu(@NonNull View view, @NonNull Tile tile) {
+        PopupMenu popupMenu = new PopupMenu(Objects.requireNonNull(requireActivity()), view);
+        popupMenu.inflate(R.menu.nav_common_feature_pop_up_menu);
+        popupMenu.setOnMenuItemClickListener(
+                item -> {
+                    if (item.getItemId() == R.id.create_shortcut) {
+                        PrebuiltFeatureShortcutActivity.ShortcutHelper.addShortcut(requireActivity(), tile);
                         return true;
                     }
                     return false;

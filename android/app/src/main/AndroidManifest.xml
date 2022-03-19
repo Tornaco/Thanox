@@ -40,7 +40,7 @@
         <activity
             android:name=".process.v2.ProcessManageActivityV2"
             android:exported="false"
-            android:label="@string/activity_title_process_manage"/>
+            android:label="@string/activity_title_process_manage" />
 
         <activity
             android:name=".process.ProcessManageActivity"
@@ -196,6 +196,11 @@
         <activity
             android:name=".start.chart.ComposeStartChartActivity"
             android:exported="false" />
+        <activity
+            android:name=".main.PrebuiltFeatureShortcutActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/AppThemeShortcut" />
 
         <meta-data
             android:name="xposedmodule"

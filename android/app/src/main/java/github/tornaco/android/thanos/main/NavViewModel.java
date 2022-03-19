@@ -195,14 +195,14 @@ public class NavViewModel extends AndroidViewModel {
                         onlyEnabled(
                                 Arrays.asList(
                                         Tile.builder()
-                                                .id(R.id.id_one_key_clear)
+                                                .id(PrebuiltFeatureIds.ID_ONE_KEY_CLEAR)
                                                 .iconRes(R.drawable.ic_nav_boost)
                                                 .title(resources.getString(R.string.feature_title_one_key_boost))
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_BG_TASK_CLEAN)
                                                 .themeColor(R.color.nav_icon_boost)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_background_start)
+                                                .id(PrebuiltFeatureIds.ID_BACKGROUND_START)
                                                 .iconRes(R.drawable.ic_nav_bg_start)
                                                 .title(resources.getString(R.string.feature_title_start_restrict))
                                                 .category(resources.getString(R.string.feature_category_start_manage))
@@ -211,14 +211,14 @@ public class NavViewModel extends AndroidViewModel {
                                                 .build(),
                                         Tile.builder()
                                                 .iconRes(R.drawable.ic_nav_bg_restrict)
-                                                .id(R.id.id_background_restrict)
+                                                .id(PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT)
                                                 .title(resources.getString(R.string.feature_title_bg_restrict))
                                                 .summary(resources.getString(R.string.feature_desc_bg_restrict_brief))
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_BG_TASK_CLEAN)
                                                 .themeColor(R.color.nav_icon_bg_restrict)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_clean_task_removal)
+                                                .id(PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL)
                                                 .iconRes(R.drawable.ic_nav_task_removal)
                                                 .title(resources.getString(R.string.feature_title_clean_when_task_removed))
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_RECENT_TASK_REMOVAL)
@@ -229,7 +229,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_task_removal)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_smart_freeze)
+                                                .id(PrebuiltFeatureIds.ID_SMART_FREEZE)
                                                 .iconRes(R.drawable.ic_nav_smart_freeze)
                                                 .title(resources.getString(R.string.feature_title_smart_app_freeze))
                                                 .summary(resources.getString(R.string.feature_summary_smart_app_freeze))
@@ -237,7 +237,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_smart_freeze)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_apps_manager)
+                                                .id(PrebuiltFeatureIds.ID_APPS_MANAGER)
                                                 .iconRes(R.drawable.ic_nav_app_manager)
                                                 .title(resources.getString(R.string.feature_title_apps_manager))
                                                 .summary(resources.getString(R.string.feature_summary_apps_manager))
@@ -252,7 +252,7 @@ public class NavViewModel extends AndroidViewModel {
                         onlyEnabled(
                                 Arrays.asList(
                                         Tile.builder()
-                                                .id(R.id.id_privacy_cheat)
+                                                .id(PrebuiltFeatureIds.ID_PRIVACY_CHEAT)
                                                 .iconRes(R.drawable.ic_nav_priv_cheat)
                                                 .title(resources.getString(R.string.feature_title_data_cheat))
                                                 .category(resources.getString(R.string.feature_category_privacy))
@@ -260,7 +260,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_priv_cheat)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_ops_by_ops)
+                                                .id(PrebuiltFeatureIds.ID_OPS_BY_OPS)
                                                 .iconRes(R.drawable.ic_nav_ops)
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS)
                                                 .title(resources.getString(R.string.module_ops_feature_title_ops_app_list))
@@ -269,7 +269,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_ops)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_app_lock)
+                                                .id(PrebuiltFeatureIds.ID_APP_LOCK)
                                                 .iconRes(R.drawable.ic_nav_app_lock)
                                                 .title(resources.getString(R.string.feature_title_app_lock))
                                                 .summary(resources.getString(R.string.feature_summary_app_lock))
@@ -277,7 +277,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_APPLOCK)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_task_blur)
+                                                .id(PrebuiltFeatureIds.ID_TASK_BLUR)
                                                 .iconRes(R.drawable.ic_nav_task_blur)
                                                 .title(resources.getString(R.string.feature_title_recent_task_blur))
                                                 .summary(resources.getString(R.string.feature_summary_recent_task_blur))
@@ -285,7 +285,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_task_blur)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_op_remind)
+                                                .id(PrebuiltFeatureIds.ID_OP_REMIND)
                                                 .iconRes(R.drawable.ic_nav_op_remind)
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS_REMINDER)
                                                 .category(resources.getString(R.string.feature_category_remind))
@@ -302,7 +302,7 @@ public class NavViewModel extends AndroidViewModel {
                         onlyEnabled(
                                 Arrays.asList(
                                         Tile.builder()
-                                                .id(R.id.id_screen_on_notification)
+                                                .id(PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION)
                                                 .iconRes(R.drawable.ic_nav_screen_on_notification)
                                                 .title(resources.getString(R.string.feature_title_light_on_notification))
                                                 .summary(
@@ -312,7 +312,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_screen_on_notification)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_notification_recorder)
+                                                .id(PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER)
                                                 .iconRes(R.drawable.ic_nav_nr)
                                                 .title(
                                                         resources.getString(
@@ -322,7 +322,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_nr)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_trampoline)
+                                                .id(PrebuiltFeatureIds.ID_TRAMPOLINE)
                                                 .iconRes(R.drawable.ic_nav_activity_replacement)
                                                 .category(resources.getString(R.string.feature_category_ext))
                                                 .title(resources.getString(R.string.module_activity_trampoline_app_name))
@@ -331,7 +331,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_activity_replacement)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_profile)
+                                                .id(PrebuiltFeatureIds.ID_PROFILE)
                                                 .iconRes(R.drawable.ic_nav_profile)
                                                 .title(resources.getString(R.string.module_profile_feature_name))
                                                 .summary(resources.getString(R.string.module_profile_feature_summary))
@@ -339,7 +339,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_PROFILE)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_smart_standby)
+                                                .id(PrebuiltFeatureIds.ID_SMART_STANDBY)
                                                 .iconRes(R.drawable.ic_nav_smart_standby)
                                                 .category(resources.getString(R.string.feature_category_apps))
                                                 .title(resources.getString(R.string.feature_title_smart_app_standby))
@@ -349,7 +349,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_smart_standby)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_plugins)
+                                                .id(PrebuiltFeatureIds.ID_PLUGINS)
                                                 .iconRes(R.drawable.ic_nav_plugins)
                                                 .title(resources.getString(R.string.nav_title_plugin))
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_PLUGIN_SUPPORT)
@@ -357,14 +357,14 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_plugin)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_wechat_push)
+                                                .id(PrebuiltFeatureIds.ID_WECHAT_PUSH)
                                                 .iconRes(R.drawable.ic_nav_wechat_push)
                                                 .title(resources.getString(R.string.module_push_message_delegate_title_wechat_proxy))
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_PUSH_DELEGATE)
                                                 .themeColor(R.color.nav_icon_wechat_push)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_infinite_z)
+                                                .id(PrebuiltFeatureIds.ID_INFINITE_Z)
                                                 .iconRes(R.drawable.ic_nav_app_clone)
                                                 .title(resources.getString(R.string.feature_title_infinite_z))
                                                 .disabled(!BuildProp.THANOS_BUILD_DEBUG)
@@ -377,13 +377,13 @@ public class NavViewModel extends AndroidViewModel {
                         onlyEnabled(
                                 Arrays.asList(
                                         Tile.builder()
-                                                .id(R.id.id_feedback)
+                                                .id(PrebuiltFeatureIds.ID_FEEDBACK)
                                                 .iconRes(R.drawable.ic_nav_feedback)
                                                 .title(resources.getString(R.string.nav_title_feedback))
                                                 .themeColor(R.color.nav_icon_feedback)
                                                 .build(),
                                         Tile.builder()
-                                                .id(R.id.id_guide)
+                                                .id(PrebuiltFeatureIds.ID_GUIDE)
                                                 .iconRes(R.drawable.ic_nav_guide)
                                                 .title(resources.getString(R.string.common_menu_title_wiki))
                                                 .themeColor(R.color.nav_icon_guide)
@@ -434,24 +434,24 @@ public class NavViewModel extends AndroidViewModel {
         disposables.add(
                 Observable.fromIterable(Nitro.getAllInstalledPlugin(getApplication()))
                         .map(plugin -> {
-                                    try {
-                                        int pluginStatus = plugin.isWithHooks() ? Nitro.invokePluginStatus(getApplication(), plugin, -1) : -1;
-                                        return Tile.builder()
-                                                .id(plugin.getPackageName().hashCode())
-                                                .category(first[0] ? resources.getString(R.string.tile_category_plugin_installed) : null)
-                                                .iconRes(R.drawable.ic_extension_blue)
-                                                .themeColor(R.color.md_grey_400)
-                                                .title(plugin.getLabel())
-                                                .summary(plugin.getDescription())
-                                                .payload(plugin)
-                                                .badge1(pluginStatus == 9 ? resources.getString(R.string.title_plugin_reboot_take_effect) : null)
-                                                .checkable(plugin.isWithHooks())
-                                                .checked(plugin.isWithHooks() && thanosManager.isServiceInstalled() && thanosManager.getPkgManager().hasPlugin(plugin.getPackageName()))
-                                                .build();
-                                    } finally {
-                                        first[0] = false;
-                                    }
-                                })
+                            try {
+                                int pluginStatus = plugin.isWithHooks() ? Nitro.invokePluginStatus(getApplication(), plugin, -1) : -1;
+                                return Tile.builder()
+                                        .id(plugin.getPackageName().hashCode())
+                                        .category(first[0] ? resources.getString(R.string.tile_category_plugin_installed) : null)
+                                        .iconRes(R.drawable.ic_extension_blue)
+                                        .themeColor(R.color.md_grey_400)
+                                        .title(plugin.getLabel())
+                                        .summary(plugin.getDescription())
+                                        .payload(plugin)
+                                        .badge1(pluginStatus == 9 ? resources.getString(R.string.title_plugin_reboot_take_effect) : null)
+                                        .checkable(plugin.isWithHooks())
+                                        .checked(plugin.isWithHooks() && thanosManager.isServiceInstalled() && thanosManager.getPkgManager().hasPlugin(plugin.getPackageName()))
+                                        .build();
+                            } finally {
+                                first[0] = false;
+                            }
+                        })
                         .filter(tile -> !tile.isDisabled())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())

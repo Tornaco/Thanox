@@ -11,6 +11,7 @@ public class AppPreference {
 
     private static final String PREF_KEY_FIRST_RUN = "PREF_KEY_FIRST_RUN_" + BuildProp.THANOS_BUILD_FINGERPRINT;
     private static final String PREF_KEY_ON_BOARDING = "PREF_KEY_ON_BOARDING_" + BuildProp.THANOS_BUILD_FINGERPRINT;
+    private static final String PREF_KEY_PROCESS_MANAGE_UI_V2 = "PREF_KEY_PROCESS_MANAGE_UI_V2";
 
     @Verify
     public static boolean isFirstRun(Context context) {
@@ -52,6 +53,20 @@ public class AppPreference {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(PREF_KEY_ON_BOARDING, value)
+                .apply();
+    }
+
+    @Verify
+    public static boolean isProcessManagerV2Enabled(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(PREF_KEY_PROCESS_MANAGE_UI_V2, false);
+    }
+
+    @Verify
+    public static void setProcessManagerV2Enabled(Context context, boolean value) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(PREF_KEY_PROCESS_MANAGE_UI_V2, value)
                 .apply();
     }
 }

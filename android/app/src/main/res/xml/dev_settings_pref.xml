@@ -3,26 +3,31 @@
     <PreferenceCategory>
 
         <SwitchPreferenceCompat
-                app:key="@string/key_enable_logging"
-                app:persistent="false"
-                app:summary="@string/pref_summary_enable_logging"
-                app:title="@string/pref_title_enable_logging" />
+            app:key="@string/key_enable_logging"
+            app:persistent="false"
+            app:summary="@string/pref_summary_enable_logging"
+            app:title="@string/pref_title_enable_logging" />
 
         <SwitchPreferenceCompat
-                app:key="@string/key_show_current_activity"
-                app:persistent="false"
-                app:title="@string/pref_title_show_current_activity" />
+            app:key="@string/key_show_current_activity"
+            app:persistent="false"
+            app:title="@string/pref_title_show_current_activity" />
 
         <SwitchPreferenceCompat
-                app:key="@string/key_show_net_stat"
-                app:persistent="false"
-                app:title="@string/title_net_stats" />
+            app:key="@string/key_show_net_stat"
+            app:persistent="false"
+            app:title="@string/title_net_stats" />
 
         <SwitchPreferenceCompat
-                app:key="@string/key_enable_global_white_list"
-                app:persistent="false"
-                app:summary="@string/pref_summary_enable_global_white_list"
-                app:title="@string/pref_title_enable_global_white_list" />
+            app:key="@string/key_process_manage_ui_v2"
+            app:persistent="false"
+            app:title="New Process manager UI" />
+
+        <SwitchPreferenceCompat
+            app:key="@string/key_enable_global_white_list"
+            app:persistent="false"
+            app:summary="@string/pref_summary_enable_global_white_list"
+            app:title="@string/pref_title_enable_global_white_list" />
 
     </PreferenceCategory>
 

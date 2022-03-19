@@ -40,15 +40,7 @@
         <activity
             android:name=".process.v2.ProcessManageActivityV2"
             android:exported="false"
-            android:label="@string/activity_title_process_manage">
-
-            <intent-filter>
-                <action android:name="thanox.a.running_process.viewer" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-
-        </activity>
+            android:label="@string/activity_title_process_manage"/>
 
         <activity
             android:name=".process.ProcessManageActivity"

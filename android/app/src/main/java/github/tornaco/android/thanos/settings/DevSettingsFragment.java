@@ -7,6 +7,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.pref.AppPreference;
 
 public class DevSettingsFragment extends BasePreferenceFragmentCompat {
     @Override
@@ -68,5 +69,13 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
                 return true;
             });
         }
+
+        SwitchPreferenceCompat processManagerV2Pref = findPreference(getString(R.string.key_process_manage_ui_v2));
+        processManagerV2Pref.setChecked(AppPreference.isProcessManagerV2Enabled(requireContext()));
+        processManagerV2Pref.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean checked = (boolean) newValue;
+            AppPreference.setProcessManagerV2Enabled(requireContext(), checked);
+            return true;
+        });
     }
 }

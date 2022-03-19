@@ -29,6 +29,7 @@
         <item name="android:windowBackground">@color/md_white</item>
 
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/md_grey_200</item>
         <item name="android:navigationBarColor">@color/md_grey_200</item>
         <item name="alertDialogTheme">@style/DialogThemeCommon</item>

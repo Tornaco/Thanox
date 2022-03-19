@@ -10,6 +10,7 @@
         <item name="collapsingToolbarTheme">@style/CollapsingToolbarThemeCommon</item>
         <item name="alertDialogTheme">@style/DialogThemeCommon</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:statusBarColor" tools:targetApi="l">?colorPrimaryDark</item>
         <item name="android:navigationBarColor">?colorPrimaryDark</item>
         <item name="switchPreferenceCompatStyle">@style/SwitchPrefTheme</item>

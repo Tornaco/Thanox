@@ -28,6 +28,7 @@
         <item name="android:windowBackground">@color/md_black</item>
         <item name="alertDialogTheme">@style/DialogThemeCommon</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/md_dark</item>
         <item name="android:navigationBarColor">@color/md_dark</item>
         <item name="switchPreferenceCompatStyle">@style/SwitchPrefTheme</item>

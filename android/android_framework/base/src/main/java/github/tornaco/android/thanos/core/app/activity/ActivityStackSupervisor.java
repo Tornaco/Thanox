@@ -15,11 +15,6 @@ public class ActivityStackSupervisor {
     private final IActivityStackSupervisor supervisor;
 
     @SneakyThrows
-    public Intent replaceActivityStartingIntent(Intent intent, int userId) {
-        return supervisor.replaceActivityStartingIntent(intent, userId);
-    }
-
-    @SneakyThrows
     public boolean shouldVerifyActivityStarting(ComponentName componentName, String pkg, String source) {
         return supervisor.shouldVerifyActivityStarting(componentName, pkg, source);
     }

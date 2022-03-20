@@ -91,10 +91,18 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
                 -1);
         Intent intent = intentIndex > 0 ? (Intent) args[intentIndex] : null;
         if (callingPackage != null && intent != null) {
+
+            int resultToIndex = Args.getFirstTypeOfArgIndexOr(
+                    IBinder.class,
+                    args,
+                    "ActivityTaskManagerProxyProvider#handleStartActivity",
+                    -1);
+            IBinder resultTo = resultToIndex > 0 ? (IBinder) args[resultToIndex] : null;
+
             int userId = UserHandle.getCallingUserId();
             Intent realIntent = ThanosManagerNative.getDefault()
                     .getActivityStackSupervisor()
-                    .replaceActivityStartingIntent(intent, userId);
+                    .replaceActivityStartingIntent(intent, userId, resultTo);
             if (realIntent != null) {
                 XLog.d("handleStartActivity, Replacing Intent component");
                 intent.setComponent(realIntent.getComponent());

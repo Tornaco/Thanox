@@ -8,7 +8,7 @@ import github.tornaco.android.thanos.core.IPrinter;
 interface IActivityStackSupervisor {
     boolean checkActivity(in ComponentName componentName);
 
-    Intent replaceActivityStartingIntent(in Intent intent, int userId);
+    Intent replaceActivityStartingIntent(in Intent intent, int userId, in IBinder resultTo);
 
     boolean shouldVerifyActivityStarting(in ComponentName componentName, String pkg, String source);
 

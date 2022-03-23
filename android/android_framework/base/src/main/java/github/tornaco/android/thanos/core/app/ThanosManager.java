@@ -5,6 +5,11 @@ import android.content.IntentFilter;
 
 import com.elvishew.xlog.XLog;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.app.event.IEventSubscriber;
@@ -198,8 +203,8 @@ public class ThanosManager {
     }
 
     @SneakyThrows
-    public String getPatchingSource() {
-        return service.getPatchingSource();
+    public List<String> getPatchingSource() {
+        return service.getPatchingSource().stream().filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     public static ThanosManager from(Context context) {

@@ -110,7 +110,7 @@ public interface IThanos extends android.os.IInterface
     {
       return null;
     }
-    @Override public java.lang.String getPatchingSource() throws android.os.RemoteException
+    @Override public java.util.List<java.lang.String> getPatchingSource() throws android.os.RemoteException
     {
       return null;
     }
@@ -394,9 +394,9 @@ public interface IThanos extends android.os.IInterface
         case TRANSACTION_getPatchingSource:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _result = this.getPatchingSource();
+          java.util.List<java.lang.String> _result = this.getPatchingSource();
           reply.writeNoException();
-          reply.writeString(_result);
+          reply.writeStringList(_result);
           return true;
         }
         case TRANSACTION_getRS:
@@ -970,11 +970,11 @@ public interface IThanos extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.lang.String getPatchingSource() throws android.os.RemoteException
+      @Override public java.util.List<java.lang.String> getPatchingSource() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
-        java.lang.String _result;
+        java.util.List<java.lang.String> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPatchingSource, _data, _reply, 0);
@@ -982,7 +982,7 @@ public interface IThanos extends android.os.IInterface
             return getDefaultImpl().getPatchingSource();
           }
           _reply.readException();
-          _result = _reply.readString();
+          _result = _reply.createStringArrayList();
         }
         finally {
           _reply.recycle();
@@ -1125,7 +1125,7 @@ public interface IThanos extends android.os.IInterface
   public boolean hasFrameworkInitializeError() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.IPluginLogger getPluginLogger(java.lang.String pluginAlias) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.app.infinite.InfiniteZ getInfiniteZ() throws android.os.RemoteException;
-  public java.lang.String getPatchingSource() throws android.os.RemoteException;
+  public java.util.List<java.lang.String> getPatchingSource() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.plus.IRS getRS() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.app.usage.IUsageStatsManager getUsageStatsManager() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager getPushDelegateManager() throws android.os.RemoteException;

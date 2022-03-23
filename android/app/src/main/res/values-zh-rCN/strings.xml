@@ -12,6 +12,9 @@
     <string name="title_framework_error">核心初始化错误</string>
     <string name="message_framework_error">Thanox可信初始化时遇到兼容性错误，可能会影响某些功能，请把/data/system/thanos/log下面的日志反馈给开发者</string>
 
+    <string name="title_multiple_patch_applied_error">应用了多个补丁</string>
+    <string name="message_multiple_patch_applied_error">Thanox激活只需要采用一种补丁，而你同时采用了多个补丁: %s，这会导致一些额外的使用故障，请务必参阅使用指南</string>
+
     <string name="nav_title_boost">加速</string>
     <string name="nav_title_secure">隐私</string>
     <string name="nav_title_settings">设置</string>

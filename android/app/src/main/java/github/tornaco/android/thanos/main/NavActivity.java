@@ -18,9 +18,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.Arrays;
+import java.util.List;
+
 import github.tornaco.android.rhino.plugin.Verify;
+import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.app.donate.DonateActivity;
@@ -32,6 +37,7 @@ import github.tornaco.android.thanos.pref.AppPreference;
 import github.tornaco.android.thanos.settings.ExportPatchUi;
 import github.tornaco.android.thanos.settings.PowerSettingsActivity;
 import github.tornaco.android.thanos.settings.SettingsDashboardActivity;
+import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
@@ -66,6 +72,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
         setupPagers(savedInstanceState);
         setupViewModel();
         checkOnBoarding();
+        checkPatchSource();
     }
 
     private void checkOnBoarding() {
@@ -73,6 +80,16 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
             OnBoardingActivity.Starter.INSTANCE.start(thisActivity());
             finish();
         }
+    }
+
+    private void checkPatchSource() {
+        ThanosManager.from(thisActivity()).ifServiceInstalled(thanosManager -> {
+            List<String> patches = thanosManager.getPatchingSource();
+            XLog.d("checkPatchSource: " + Arrays.toString(patches.toArray()));
+            if (patches.size() > 1) {
+                showMultiplePatchAppliedDialog(patches);
+            }
+        });
     }
 
     @Override
@@ -232,6 +249,17 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
                     public void onClick(DialogInterface dialog, int which) {
                         PowerSettingsActivity.start(thisActivity());
                     }
+                })
+                .create()
+                .show();
+    }
+
+    private void showMultiplePatchAppliedDialog(List<String> patches) {
+        new MaterialAlertDialogBuilder(NavActivity.this)
+                .setTitle(R.string.title_multiple_patch_applied_error)
+                .setMessage(getString(R.string.message_multiple_patch_applied_error, String.join(", ", patches)))
+                .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+                    BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_HOME);
                 })
                 .create()
                 .show();

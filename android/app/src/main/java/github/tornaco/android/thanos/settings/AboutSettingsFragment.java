@@ -74,7 +74,7 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
         if (thanos.isServiceInstalled()) {
             findPreference(getString(R.string.key_build_info_server))
                     .setSummary(thanos.getVersionName() + "\n" + thanos.fingerPrint());
-            findPreference(getString(R.string.key_patch_info)).setSummary(thanos.getPatchingSource());
+            findPreference(getString(R.string.key_patch_info)).setSummary(String.join("\n", thanos.getPatchingSource()));
         } else {
             findPreference(getString(R.string.key_build_info_server))
                     .setSummary(R.string.status_not_active);

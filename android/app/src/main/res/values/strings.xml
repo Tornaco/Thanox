@@ -12,6 +12,9 @@
     <string name="title_framework_error">Framework error</string>
     <string name="message_framework_error">There is an error during the initialization of the Thanox framework. Please report the logs under /data/system/thanos/log to the developer.</string>
 
+    <string name="title_multiple_patch_applied_error">Multiple patch applied</string>
+    <string name="message_multiple_patch_applied_error">You only needs to apply one patch to active Thanox, but you apply multiple patches at the same time: %s, be sure to read the usage guide</string>
+
     <string name="nav_title_boost">Boost</string>
     <string name="nav_title_secure">Privacy</string>
     <string name="nav_title_settings">Settings</string>

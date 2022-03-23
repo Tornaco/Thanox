@@ -61,7 +61,7 @@ interface IThanos {
 
     InfiniteZ getInfiniteZ();
 
-    String getPatchingSource();
+    List<String> getPatchingSource();
 
     IRS getRS();
 

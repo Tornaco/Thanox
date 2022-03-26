@@ -20,7 +20,7 @@ class ServiceFetcherProxy {
     static void installInto(Map<String, Object> fetcherMap) {
         for (String name : fetcherMap.keySet().toArray(new String[0])) {
             Object originalFetcher = fetcherMap.get(name);
-            XLog.d("ServiceFetcherProxy, installInto, originalFetcher: name", name);
+            XLog.d("ServiceFetcherProxy, installInto, originalFetcher " + name);
             if (originalFetcher != null) {
                 Object proxyFetcher = newProxy(originalFetcher, name);
                 XLog.d("ServiceFetcherProxy, installInto, proxyFetcher: %s", proxyFetcher);
@@ -37,7 +37,7 @@ class ServiceFetcherProxy {
     @Nullable
     private static Object newProxy(Object originalFetcher, String name) {
         try {
-            XLog.d("ServiceFetcherProxy newProxy");
+            XLog.d("ServiceFetcherProxy newProxy: " + name);
             @SuppressLint("PrivateApi")
             Class<?> serviceFetcherClass = Class.forName("android.app.SystemServiceRegistry$ServiceFetcher");
             XLog.d("ServiceFetcherProxy serviceFetcherClass: %s", serviceFetcherClass);

@@ -30,6 +30,8 @@ import util.ObjectsUtils;
 import util.os.BinderProxy;
 
 public class ActivityTaskManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
+    private static final boolean DEBUG = false;
+
     @Override
     public IBinder provide(IBinder legacyBinder) {
         return proxyActivityTaskManager(legacyBinder);
@@ -81,22 +83,23 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
     //            int flags, in ProfilerInfo profilerInfo, in Bundle options);
     //    int startActivities(in IApplicationThread caller, in String callingPackage,
     private void handleStartActivity(Object[] args) throws android.os.RemoteException {
+        if (DEBUG) XLog.v("handleStartActivity, args = " + Arrays.toString(args));
         String callingPackage = (String) args[1];
         // We'd better dynamic look up.
         // Android 29 -> 30 arg index has been changed.
         int intentIndex = Args.getFirstTypeOfArgIndexOr(
                 Intent.class,
                 args,
-                "ActivityTaskManagerProxyProvider#handleStartActivity",
+                "ActivityTaskManagerProxyProvider#handleStartActivity-intentIndex",
                 -1);
         Intent intent = intentIndex > 0 ? (Intent) args[intentIndex] : null;
         if (callingPackage != null && intent != null) {
-
             int resultToIndex = Args.getFirstTypeOfArgIndexOr(
-                    IBinder.class,
+                    android.os.BinderProxy.class,
                     args,
-                    "ActivityTaskManagerProxyProvider#handleStartActivity",
+                    "ActivityTaskManagerProxyProvider#handleStartActivity-resultToIndex",
                     -1);
+            if (DEBUG) XLog.v("handleStartActivity, resultToIndex = " + resultToIndex);
             IBinder resultTo = resultToIndex > 0 ? (IBinder) args[resultToIndex] : null;
 
             int userId = UserHandle.getCallingUserId();

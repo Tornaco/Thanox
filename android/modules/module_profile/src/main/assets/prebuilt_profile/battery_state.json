@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Get battery state",
+    "description": "Show battery level toast on Front package changed",
+    "priority": 1,
+    "condition": "frontPkgChanged == true",
+    "actions": [
+      "ui.showShortToast(battery.getBatteryState().batteryLevel);"
+    ]
+  }
+]

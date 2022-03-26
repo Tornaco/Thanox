@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.core.profile.handle;
 
 @HandlerName("power")
+public
 interface IPower {
 
     void sleep(long delay);

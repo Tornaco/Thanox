@@ -4,6 +4,7 @@ import github.tornaco.android.thanos.core.annotation.NonNull;
 import github.tornaco.android.thanos.core.annotation.Nullable;
 
 @HandlerName("ui")
+public
 interface IUI {
 
     void showShortToast(@NonNull Object msg);

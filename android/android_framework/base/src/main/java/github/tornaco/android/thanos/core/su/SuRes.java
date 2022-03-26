@@ -5,15 +5,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@Getter
 public final class SuRes implements Parcelable {
     /**
      * Shell result output.
@@ -32,6 +23,39 @@ public final class SuRes implements Parcelable {
         out = in.createStringArrayList();
         err = in.createStringArrayList();
         code = in.readInt();
+    }
+
+    public SuRes(List<String> out, List<String> err, int code) {
+        this.out = out;
+        this.err = err;
+        this.code = code;
+    }
+
+    public SuRes() {
+    }
+
+    public List<String> getOut() {
+        return out;
+    }
+
+    public void setOut(List<String> out) {
+        this.out = out;
+    }
+
+    public List<String> getErr() {
+        return err;
+    }
+
+    public void setErr(List<String> err) {
+        this.err = err;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public static final Creator<SuRes> CREATOR = new Creator<SuRes>() {
@@ -56,5 +80,14 @@ public final class SuRes implements Parcelable {
         parcel.writeStringList(out);
         parcel.writeStringList(err);
         parcel.writeInt(code);
+    }
+
+    @Override
+    public String toString() {
+        return "SuRes{" +
+                "out=" + out +
+                ", err=" + err +
+                ", code=" + code +
+                '}';
     }
 }

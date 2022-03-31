@@ -21,4 +21,9 @@
         android:id="@+id/action_apps_manager"
         android:title="@string/feature_title_apps_manager"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_package_set"
+        android:title="@string/title_package_sets"
+        app:showAsAction="never" />
 </menu>

@@ -46,6 +46,7 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.apps.AppDetailsActivity;
+import github.tornaco.android.thanos.apps.PackageSetChooserDialog;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -178,6 +179,19 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                     return false;
                 }
                 AppDetailsActivity.start(requireContext(), appInfo);
+                return true;
+            }
+            if (item.getItemId() == R.id.action_package_set) {
+                if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
+                    Toast.makeText(requireContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                new PackageSetChooserDialog(requireActivity(), appInfo.getPkgName(), changed -> {
+                    if (changed) {
+                        viewModel.start();
+                    }
+                    return null;
+                }).show();
                 return true;
             }
             return false;

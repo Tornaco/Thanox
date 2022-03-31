@@ -15,6 +15,7 @@ import dagger.hilt.android.HiltAndroidApp;
 import github.tornaco.android.thanos.app.Init;
 import github.tornaco.android.thanos.core.app.AppGlobals;
 import github.tornaco.android.thanos.util.ActivityLifecycleCallbacksAdapter;
+import github.tornaco.thanos.android.noroot.NoRootSupport;
 import io.reactivex.plugins.RxJavaPlugins;
 
 @HiltAndroidApp
@@ -24,6 +25,7 @@ public class ThanosApp extends MultipleModulesApp {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         AppGlobals.setContext(base);
+        installCrashHandler(this);
     }
 
     @Override
@@ -47,7 +49,7 @@ public class ThanosApp extends MultipleModulesApp {
 
         Init.init(this);
         FeatureAccessStats.init(this);
-        installCrashHandler(this);
+        NoRootSupport.INSTANCE.install();
     }
 
     public static boolean isPrc() {

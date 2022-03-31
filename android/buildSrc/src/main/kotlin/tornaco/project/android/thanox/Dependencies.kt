@@ -198,4 +198,9 @@ object Libs {
 
         const val nitroGradlePlugin = "$groupNitro:$artifactNitro:$version"
     }
+
+    object RootLess {
+        const val shizukuApi = "dev.rikka.shizuku:api:12.1.0"
+        const val shizukuProvider = "dev.rikka.shizuku:provider:12.1.0"
+    }
 }

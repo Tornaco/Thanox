@@ -196,6 +196,7 @@ dependencies {
     implementation(project(":modules:module_profile"))
     implementation(project(":modules:module_push_message_delegate"))
     implementation(project(":modules:module_donate"))
+    implementation(project(":modules:module_noroot_support"))
 
     implementation(project(":android_framework:base"))
     implementation(project(":android_framework:res"))

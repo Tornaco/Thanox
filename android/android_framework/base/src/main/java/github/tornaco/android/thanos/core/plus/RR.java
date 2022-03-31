@@ -3,10 +3,6 @@ package github.tornaco.android.thanos.core.plus;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
-
 /**
  * Remote res.
  */
@@ -61,8 +57,8 @@ public final class RR implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(result);
-        parcel.writeStringNoHelper(msg);
-        parcel.writeStringNoHelper(k);
+        parcel.writeString(msg);
+        parcel.writeString(k);
     }
 
     public boolean isSuccess() {

@@ -8,6 +8,7 @@ import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.pref.AppPreference;
+import github.tornaco.thanos.android.noroot.ServiceBindings;
 
 public class DevSettingsFragment extends BasePreferenceFragmentCompat {
     @Override
@@ -77,5 +78,14 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
             AppPreference.setProcessManagerV2Enabled(requireContext(), checked);
             return true;
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (ServiceBindings.INSTANCE.checkPermission(1)) {
+            ServiceBindings.INSTANCE.bindUserService();
+        }
     }
 }

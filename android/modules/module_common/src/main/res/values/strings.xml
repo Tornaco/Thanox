@@ -7,6 +7,7 @@
     <string name="common_menu_title_select_all">All yes</string>
     <string name="common_menu_title_un_select_all">All no</string>
     <string name="common_menu_title_search">search</string>
+    <string name="common_menu_title_rename">Rename</string>
     <string name="common_menu_title_remove">Remove</string>
     <string name="common_menu_title_wiki">Wiki</string>
     <string name="common_menu_title_import_from_clipboard">Import from clipboard</string>

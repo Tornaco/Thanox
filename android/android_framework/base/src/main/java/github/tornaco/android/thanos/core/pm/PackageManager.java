@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.pm;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -372,6 +373,11 @@ public class PackageManager {
     @SneakyThrows
     public void removeFromPackageSet(String pkg, String id) {
         pm.removeFromPackageSet(pkg, id);
+    }
+
+    @SneakyThrows
+    public void updatePackageSetLabel(String newLabel, String id) {
+        pm.updatePackageSetLabel(newLabel, id);
     }
 
     @SneakyThrows

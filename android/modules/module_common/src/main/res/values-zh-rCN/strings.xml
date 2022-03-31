@@ -7,6 +7,7 @@
     <string name="common_menu_title_select_all">全部</string>
     <string name="common_menu_title_un_select_all">全不</string>
     <string name="common_menu_title_search">搜索</string>
+    <string name="common_menu_title_rename">重命名</string>
     <string name="common_menu_title_remove">移除</string>
     <string name="common_menu_title_wiki">指南</string>
     <string name="common_menu_title_import_from_clipboard">从剪贴板导入</string>

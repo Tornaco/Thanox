@@ -119,4 +119,6 @@ interface IPkgManager {
 
     void setDOLTipsEnabled(boolean enable);
     boolean isDOLTipsEnabled();
+
+    void updatePackageSetLabel(String newLabel, String id);
 }

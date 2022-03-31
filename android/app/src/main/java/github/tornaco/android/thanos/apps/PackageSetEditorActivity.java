@@ -3,6 +3,8 @@ package github.tornaco.android.thanos.apps;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -34,6 +36,7 @@ import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.Optional;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.widget.EditTextDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import util.CollectionUtils;
@@ -135,6 +138,25 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
                 changed = true;
             }
         }
+    }
+
+    @Override
+    protected void onInflateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_package_set_editor, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (R.id.action_rename == item.getItemId()) {
+            EditTextDialog.show(thisActivity(), getString(R.string.common_menu_title_rename), packageSet.getLabel(),
+                    s -> {
+                        ThanosManager.from(thisActivity()).getPkgManager().updatePackageSetLabel(s, packageSet.getId());
+                        packageSet.setLabel(s);
+                        setTitle(getTitleString());
+                    });
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @NonNull

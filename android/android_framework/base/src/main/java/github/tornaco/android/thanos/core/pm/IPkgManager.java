@@ -285,6 +285,9 @@ public interface IPkgManager extends android.os.IInterface
     {
       return false;
     }
+    @Override public void updatePackageSetLabel(java.lang.String newLabel, java.lang.String id) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1155,6 +1158,17 @@ public interface IPkgManager extends android.os.IInterface
           boolean _result = this.isDOLTipsEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_updatePackageSetLabel:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          this.updatePackageSetLabel(_arg0, _arg1);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -2799,6 +2813,26 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public void updatePackageSetLabel(java.lang.String newLabel, java.lang.String id) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(newLabel);
+          _data.writeString(id);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_updatePackageSetLabel, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().updatePackageSetLabel(newLabel, id);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.pm.IPkgManager sDefaultImpl;
     }
     static final int TRANSACTION_getPkgNameForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -2875,6 +2909,7 @@ public interface IPkgManager extends android.os.IInterface
     static final int TRANSACTION_launchSmartFreezePkgThenKillOriginForUser = (android.os.IBinder.FIRST_CALL_TRANSACTION + 71);
     static final int TRANSACTION_setDOLTipsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 72);
     static final int TRANSACTION_isDOLTipsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 73);
+    static final int TRANSACTION_updatePackageSetLabel = (android.os.IBinder.FIRST_CALL_TRANSACTION + 74);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pm.IPkgManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -2973,4 +3008,5 @@ public interface IPkgManager extends android.os.IInterface
   public void launchSmartFreezePkgThenKillOriginForUser(github.tornaco.android.thanos.core.pm.Pkg targetPkg, java.lang.String origin) throws android.os.RemoteException;
   public void setDOLTipsEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isDOLTipsEnabled() throws android.os.RemoteException;
+  public void updatePackageSetLabel(java.lang.String newLabel, java.lang.String id) throws android.os.RemoteException;
 }

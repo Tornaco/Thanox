@@ -123,6 +123,10 @@ public class PackageSet implements Parcelable {
         return this.label;
     }
 
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     public String getId() {
         return this.id;
     }

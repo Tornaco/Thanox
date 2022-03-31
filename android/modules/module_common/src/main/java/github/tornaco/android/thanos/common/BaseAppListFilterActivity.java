@@ -314,6 +314,7 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
     public void setTitle(CharSequence title) {
         super.setTitle(title);
         binding.toolbar.setTitle(title);
+        binding.toolbarLayout.setTitle(title);
     }
 
     @Override

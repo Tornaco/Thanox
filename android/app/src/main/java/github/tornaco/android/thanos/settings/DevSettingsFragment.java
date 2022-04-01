@@ -2,6 +2,8 @@ package github.tornaco.android.thanos.settings;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
@@ -78,14 +80,15 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
             AppPreference.setProcessManagerV2Enabled(requireContext(), checked);
             return true;
         });
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        if (ServiceBindings.INSTANCE.checkPermission(1)) {
-            ServiceBindings.INSTANCE.bindUserService();
-        }
+        findPreference(getString(R.string.key_rootless_support)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(@NonNull Preference preference) {
+                if (ServiceBindings.INSTANCE.checkPermission(1)) {
+                    ServiceBindings.INSTANCE.bindUserService();
+                }
+                return false;
+            }
+        });
     }
 }

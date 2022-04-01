@@ -23,6 +23,11 @@
             app:persistent="false"
             app:title="New Process manager UI" />
 
+        <Preference
+            app:key="@string/key_rootless_support"
+            app:persistent="false"
+            app:title="NoRoot support" />
+
         <SwitchPreferenceCompat
             app:key="@string/key_enable_global_white_list"
             app:persistent="false"

@@ -235,6 +235,10 @@ public class PkgUtils {
                 || (uid > UserHandle.PER_USER_RANGE && (uid % UserHandle.PER_USER_RANGE == 1000));
     }
 
+    public static boolean isShell(int uid) {
+        return uid == 2000;
+    }
+
     public static boolean isSharedUserIdSystem(String sharedUid) {
         return ObjectsUtils.equals(sharedUid, github.tornaco.android.thanos.core.pm.PackageManager.sharedUserIdOfSystem());
     }

@@ -23,8 +23,8 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.IBinder
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.BuildProp
-import github.tornaco.android.thanos.core.plus.ICallback
-import github.tornaco.android.thanos.core.plus.RR
+import github.tornaco.android.thanos.core.IThanosProvider
+import github.tornaco.android.thanos.core.app.ThanosManagerNative
 import rikka.shizuku.Shizuku
 
 object ServiceBindings {
@@ -36,7 +36,7 @@ object ServiceBindings {
     }
 
     private val userServiceArgs = Shizuku.UserServiceArgs(
-        ComponentName(BuildProp.THANOS_APP_PKG_NAME, UserService::class.java.name)
+        ComponentName(BuildProp.THANOS_APP_PKG_NAME, ThanosProviderService::class.java.name)
     ).daemon(false)
         .processNameSuffix("noroot_service")
         .debuggable(BuildProp.THANOS_BUILD_DEBUG)
@@ -49,8 +49,8 @@ object ServiceBindings {
             val res = StringBuilder()
             res.append("onServiceConnected: ").append(componentName.className).append('\n')
             if (binder != null && binder.pingBinder()) {
-                val service: ICallback = ICallback.Stub.asInterface(binder)
-                service.onRes(RR(0, "Hello", "World"))
+                val service: IThanosProvider = IThanosProvider.Stub.asInterface(binder)
+                ThanosManagerNative.setLocalService(service.thanos)
             } else {
                 XLog.e("ServiceBindings, Invalid binder received")
             }

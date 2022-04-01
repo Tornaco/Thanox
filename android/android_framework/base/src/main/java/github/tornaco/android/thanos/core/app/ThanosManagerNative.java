@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.util.Log;
 
 import com.elvishew.xlog.XLog;
 
@@ -18,6 +17,7 @@ public class ThanosManagerNative {
     private static IThanos localService;
 
     public static void setLocalService(IThanos localService) {
+        XLog.w("ThanosManagerNative, setLocalService: " + localService);
         ThanosManagerNative.localService = localService;
     }
 

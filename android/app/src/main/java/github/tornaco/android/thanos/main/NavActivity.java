@@ -30,7 +30,6 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.app.donate.DonateActivity;
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivityNavBinding;
 import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
 import github.tornaco.android.thanos.pref.AppPreference;
@@ -209,23 +208,14 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
     }
 
     private void showActiveDialog() {
-        if (OsUtils.isROrAbove()) {
-            exportPatchUi.show(new Runnable() {
-                @Override
-                public void run() {
-                    NavActivityPermissionRequester.exportMagiskZipRequestedChecked(NavActivity.this);
-                }
-            });
-        } else {
-            new MaterialAlertDialogBuilder(NavActivity.this)
-                    .setTitle(R.string.status_not_active)
-                    .setMessage(R.string.message_active_needed)
-                    .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
-                        // Noop.
-                    })
-                    .create()
-                    .show();
-        }
+        new MaterialAlertDialogBuilder(NavActivity.this)
+                .setTitle(R.string.status_not_active)
+                .setMessage(R.string.message_active_needed)
+                .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+                    // Noop.
+                })
+                .create()
+                .show();
     }
 
     private void showFrameworkErrorDialog() {

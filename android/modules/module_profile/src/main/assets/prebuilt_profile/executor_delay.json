@@ -1,12 +1,12 @@
 [
   {
     "name": "Delayed action example",
-    "description": "Execute the action delay 2s: show a short toast and log the event 2s after app switched.",
+    "description": "Execute the action delay 2000 ms: show a short toast 2s after app switched.",
     "priority": 1,
+    "delay": 2000,
     "condition": "frontPkgChanged == true",
     "actions": [
-      "actor.delayed(2000, \"ui.showShortToast(\\\"App switched 2s ago\\\")\")",
-      "actor.delayed(2000, \"log.log(to)\")"
+      "ui.showShortToast(\"App switched 2s ago to: \" + thanos.getPkgManager().getAppInfo(to).getAppLabel())"
     ]
   }
 ]

@@ -27,6 +27,7 @@ import android.content.IntentFilter;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.Process;
+import android.os.UserHandle;
 
 import androidx.annotation.Nullable;
 
@@ -88,6 +89,11 @@ public class ThanosProviderService extends IThanosProvider.Stub {
 
         @Override
         public Intent registerReceiver(@Nullable BroadcastReceiver receiver, IntentFilter filter, @Nullable String broadcastPermission, @Nullable Handler scheduler, int flags) {
+            XLog.w("ShellProcessContext, drop registerReceiver call..." + receiver);
+            return new Intent();
+        }
+
+        public Intent registerReceiverAsUser(BroadcastReceiver receiver, UserHandle user, IntentFilter filter, String broadcastPermission, Handler scheduler) {
             XLog.w("ShellProcessContext, drop registerReceiver call..." + receiver);
             return new Intent();
         }

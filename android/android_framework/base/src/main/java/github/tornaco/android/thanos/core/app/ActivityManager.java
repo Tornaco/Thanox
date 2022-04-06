@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.app.start.StartRecord;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.process.ProcessRecord;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -96,8 +97,8 @@ public class ActivityManager {
   }
 
   @SneakyThrows
-  public ProcessRecord[] getRunningAppProcessForPackage(String pkgName) {
-    return server.getRunningAppProcessForPackage(pkgName);
+  public ProcessRecord[] getRunningAppProcessForPackage(Pkg pkg) {
+    return server.getRunningAppProcessForPackage(pkg);
   }
 
   @SneakyThrows
@@ -448,7 +449,7 @@ public class ActivityManager {
 
   @SneakyThrows
   public void killBackgroundProcesses(String packageName) {
-    server.killBackgroundProcesses(packageName);
+    server.killBackgroundProcesses(Pkg.systemUserPkg(packageName));
   }
 
   @SneakyThrows
@@ -509,6 +510,47 @@ public class ActivityManager {
   @SneakyThrows
   public boolean checkGetContentProvider(String callerPkg, String name) {
     return server.checkGetContentProvider(callerPkg, name);
+  }
+
+  // ******************************************************************
+  // CAF API
+  // https://source.android.com/devices/tech/perf/cached-apps-freezer
+  //
+  // ******************************************************************
+
+  @SneakyThrows
+  public boolean isCachedAppsFreezerSupported() {
+    return server.isCachedAppsFreezerSupported();
+  }
+
+  @SneakyThrows
+  public void freezeApp(String pkgName) {
+    server.freezeApp(Pkg.systemUserPkg(pkgName));
+  }
+
+  @SneakyThrows
+  public void freezeApp(Pkg pkg) {
+    server.freezeApp(pkg);
+  }
+
+  @SneakyThrows
+  public void freezeAppProcess(long pid) {
+    server.freezeAppProcess(pid);
+  }
+
+  @SneakyThrows
+  public void unfreezeApp(Pkg pkg) {
+    server.unfreezeApp(pkg);
+  }
+
+  @SneakyThrows
+  public void unfreezeApp(String pkgName) {
+    server.unfreezeApp(Pkg.systemUserPkg(pkgName));
+  }
+
+  @SneakyThrows
+  public void unfreezeAppProcess(long pid) {
+    server.unfreezeAppProcess(pid);
   }
 
   public IBinder asBinder() {

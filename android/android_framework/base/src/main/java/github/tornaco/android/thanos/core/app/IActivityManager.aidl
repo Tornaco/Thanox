@@ -32,7 +32,7 @@ interface IActivityManager {
 
     int getRunningAppsCount();
 
-    ProcessRecord[] getRunningAppProcessForPackage(String pkgName);
+    ProcessRecord[] getRunningAppProcessForPackage(in Pkg pkg);
     boolean isPackageRunning(String pkgName);
 
     List<StartRecord> getStartRecordsByPackageName(String pkgName);
@@ -131,7 +131,7 @@ interface IActivityManager {
     UserInfo getUserInfo(int userHandle);
 
     void stopService(in Intent intent);
-    void killBackgroundProcesses(String packageName);
+    void killBackgroundProcesses(in Pkg pkg);
 
     boolean isSmartStandByStopServiceEnabled();
     void setSmartStandByStopServiceEnabled(boolean enable);
@@ -167,4 +167,15 @@ interface IActivityManager {
     boolean checkGetContentProvider(String callerPkg, String name);
 
     List<StartRecord> getAllStartRecordsForPackageSetWithRes(String pkgSetId, boolean allowed, boolean blocked);
+
+    // ******************************************************************
+    // CAF API
+    // https://source.android.com/devices/tech/perf/cached-apps-freezer
+    //
+    // ******************************************************************
+    boolean isCachedAppsFreezerSupported();
+    void freezeApp(in Pkg pkg);
+    void unfreezeApp(in Pkg pkg);
+    void freezeAppProcess(long pid);
+    void unfreezeAppProcess(long pid);
 }

@@ -64,7 +64,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return 0;
     }
-    @Override public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return null;
     }
@@ -300,7 +300,7 @@ public interface IActivityManager extends android.os.IInterface
     @Override public void stopService(android.content.Intent intent) throws android.os.RemoteException
     {
     }
-    @Override public void killBackgroundProcesses(java.lang.String packageName) throws android.os.RemoteException
+    @Override public void killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
     }
     @Override public boolean isSmartStandByStopServiceEnabled() throws android.os.RemoteException
@@ -382,6 +382,28 @@ public interface IActivityManager extends android.os.IInterface
     @Override public java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> getAllStartRecordsForPackageSetWithRes(java.lang.String pkgSetId, boolean allowed, boolean blocked) throws android.os.RemoteException
     {
       return null;
+    }
+    // ******************************************************************
+    // CAF API
+    // https://source.android.com/devices/tech/perf/cached-apps-freezer
+    //
+    // ******************************************************************
+
+    @Override public boolean isCachedAppsFreezerSupported() throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public void freezeApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+    }
+    @Override public void unfreezeApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+    }
+    @Override public void freezeAppProcess(long pid) throws android.os.RemoteException
+    {
+    }
+    @Override public void unfreezeAppProcess(long pid) throws android.os.RemoteException
+    {
     }
     @Override
     public android.os.IBinder asBinder() {
@@ -615,8 +637,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_getRunningAppProcessForPackage:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           github.tornaco.android.thanos.core.process.ProcessRecord[] _result = this.getRunningAppProcessForPackage(_arg0);
           reply.writeNoException();
           reply.writeTypedArray(_result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
@@ -1216,8 +1243,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_killBackgroundProcesses:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           this.killBackgroundProcesses(_arg0);
           reply.writeNoException();
           return true;
@@ -1426,6 +1458,60 @@ public interface IActivityManager extends android.os.IInterface
           java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> _result = this.getAllStartRecordsForPackageSetWithRes(_arg0, _arg1, _arg2);
           reply.writeNoException();
           reply.writeTypedList(_result);
+          return true;
+        }
+        case TRANSACTION_isCachedAppsFreezerSupported:
+        {
+          data.enforceInterface(descriptor);
+          boolean _result = this.isCachedAppsFreezerSupported();
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_freezeApp:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          this.freezeApp(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_unfreezeApp:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          this.unfreezeApp(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_freezeAppProcess:
+        {
+          data.enforceInterface(descriptor);
+          long _arg0;
+          _arg0 = data.readLong();
+          this.freezeAppProcess(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_unfreezeAppProcess:
+        {
+          data.enforceInterface(descriptor);
+          long _arg0;
+          _arg0 = data.readLong();
+          this.unfreezeAppProcess(_arg0);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -1802,17 +1888,23 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         github.tornaco.android.thanos.core.process.ProcessRecord[] _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppProcessForPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRunningAppProcessForPackage(pkgName);
+            return getDefaultImpl().getRunningAppProcessForPackage(pkg);
           }
           _reply.readException();
           _result = _reply.createTypedArray(github.tornaco.android.thanos.core.process.ProcessRecord.CREATOR);
@@ -3083,16 +3175,22 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void killBackgroundProcesses(java.lang.String packageName) throws android.os.RemoteException
+      @Override public void killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(packageName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_killBackgroundProcesses, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().killBackgroundProcesses(packageName);
+            getDefaultImpl().killBackgroundProcesses(pkg);
             return;
           }
           _reply.readException();
@@ -3545,6 +3643,120 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      // ******************************************************************
+      // CAF API
+      // https://source.android.com/devices/tech/perf/cached-apps-freezer
+      //
+      // ******************************************************************
+
+      @Override public boolean isCachedAppsFreezerSupported() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isCachedAppsFreezerSupported, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isCachedAppsFreezerSupported();
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void freezeApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_freezeApp, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().freezeApp(pkg);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void unfreezeApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_unfreezeApp, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().unfreezeApp(pkg);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void freezeAppProcess(long pid) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeLong(pid);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_freezeAppProcess, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().freezeAppProcess(pid);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void unfreezeAppProcess(long pid) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeLong(pid);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_unfreezeAppProcess, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().unfreezeAppProcess(pid);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -3647,6 +3859,11 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_isNetStatTrackerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 97);
     static final int TRANSACTION_checkGetContentProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 98);
     static final int TRANSACTION_getAllStartRecordsForPackageSetWithRes = (android.os.IBinder.FIRST_CALL_TRANSACTION + 99);
+    static final int TRANSACTION_isCachedAppsFreezerSupported = (android.os.IBinder.FIRST_CALL_TRANSACTION + 100);
+    static final int TRANSACTION_freezeApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 101);
+    static final int TRANSACTION_unfreezeApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 102);
+    static final int TRANSACTION_freezeAppProcess = (android.os.IBinder.FIRST_CALL_TRANSACTION + 103);
+    static final int TRANSACTION_unfreezeAppProcess = (android.os.IBinder.FIRST_CALL_TRANSACTION + 104);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -3679,7 +3896,7 @@ public interface IActivityManager extends android.os.IInterface
   public java.util.List<android.app.ActivityManager.RunningServiceInfo> getRunningServiceLegacy(int max) throws android.os.RemoteException;
   public java.util.List<android.app.ActivityManager.RunningAppProcessInfo> getRunningAppProcessLegacy() throws android.os.RemoteException;
   public int getRunningAppsCount() throws android.os.RemoteException;
-  public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(java.lang.String pkgName) throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean isPackageRunning(java.lang.String pkgName) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> getStartRecordsByPackageName(java.lang.String pkgName) throws android.os.RemoteException;
   public java.util.List<java.lang.String> getStartRecordBlockedPackages() throws android.os.RemoteException;
@@ -3757,7 +3974,7 @@ public interface IActivityManager extends android.os.IInterface
   public boolean hasRunningServiceForPackage(java.lang.String pkgName) throws android.os.RemoteException;
   public android.content.pm.UserInfo getUserInfo(int userHandle) throws android.os.RemoteException;
   public void stopService(android.content.Intent intent) throws android.os.RemoteException;
-  public void killBackgroundProcesses(java.lang.String packageName) throws android.os.RemoteException;
+  public void killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean isSmartStandByStopServiceEnabled() throws android.os.RemoteException;
   public void setSmartStandByStopServiceEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isSmartStandByInactiveEnabled() throws android.os.RemoteException;
@@ -3780,4 +3997,15 @@ public interface IActivityManager extends android.os.IInterface
   public boolean isNetStatTrackerEnabled() throws android.os.RemoteException;
   public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> getAllStartRecordsForPackageSetWithRes(java.lang.String pkgSetId, boolean allowed, boolean blocked) throws android.os.RemoteException;
+  // ******************************************************************
+  // CAF API
+  // https://source.android.com/devices/tech/perf/cached-apps-freezer
+  //
+  // ******************************************************************
+
+  public boolean isCachedAppsFreezerSupported() throws android.os.RemoteException;
+  public void freezeApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void unfreezeApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void freezeAppProcess(long pid) throws android.os.RemoteException;
+  public void unfreezeAppProcess(long pid) throws android.os.RemoteException;
 }

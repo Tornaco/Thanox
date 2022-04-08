@@ -17,7 +17,34 @@
 
 package github.tornaco.android.thanos.process.v2
 
+import android.content.Context
+import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.module.compose.common.widget.FilterItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 data class AppSetFilterItem(override val label: String, override val isSelected: Boolean) :
     FilterItem
+
+
+object Loader {
+    suspend fun loadAllFromAppSet(
+        context: Context,
+        selection: ((PackageSet) -> Boolean)? = null
+    ): List<AppSetFilterItem> {
+        val thanos = ThanosManager.from(context)
+        return withContext(Dispatchers.IO) {
+            if (!thanos.isServiceInstalled) {
+                emptyList()
+            } else {
+                thanos.pkgManager.getAllPackageSets(false).mapIndexed { index, packageSet ->
+                    AppSetFilterItem(
+                        packageSet.label,
+                        if (selection == null) index == 0 else selection(packageSet)
+                    )
+                }
+            }
+        }
+    }
+}

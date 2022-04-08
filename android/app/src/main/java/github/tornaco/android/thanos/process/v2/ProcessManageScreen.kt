@@ -24,6 +24,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -93,44 +95,61 @@ fun ProcessManageScreen(
                 )
             }
         ) {
-            RunningAppList(state, contentPadding)
+            RunningAppList(state, contentPadding) {
+                viewModel.onFilterItemSelected(it)
+            }
         }
     }
 }
 
 @Composable
-fun AppFilterDropDown() {
+fun AppFilterDropDown(state: ProcessManageState, onFilterItemSelected: (AppSetFilterItem) -> Unit) {
     FilterDropDown(
-        allItems = listOf(
-            AppSetFilterItem("System", false),
-            AppSetFilterItem("Installed", true),
-            AppSetFilterItem("Media provider", false),
-        )
+        icon = Icons.Filled.FilterAlt,
+        allItems = state.appFilterItems,
+        onItemSelected = onFilterItemSelected
     )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun RunningAppList(state: ProcessManageState, contentPadding: PaddingValues) {
+fun RunningAppList(
+    state: ProcessManageState,
+    contentPadding: PaddingValues,
+    onFilterItemSelected: (AppSetFilterItem) -> Unit
+) {
     LazyColumn(
         contentPadding = contentPadding,
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.surface)
             .fillMaxSize()
     ) {
-        items(state.runningAppStates) {
-            RunningAppItem(it)
-        }
-
         item {
-            Spacer(
+            Row(
                 modifier = Modifier
-                    .size(24.dp)
-            )
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                AppFilterDropDown(state, onFilterItemSelected)
+                Spacer(modifier = Modifier.size(16.dp))
+            }
         }
 
-        items(state.runningAppStatesBg) {
-            RunningAppItem(it)
+        if (state.runningAppStates.isNotEmpty()) {
+            item { GroupHeader(false, state.runningAppStates.size) }
+            items(state.runningAppStates) {
+                RunningAppItem(it)
+            }
+        }
+
+        if (state.runningAppStatesBg.isNotEmpty()) {
+            item {
+                Spacer(modifier = Modifier.size(24.dp))
+            }
+            item { GroupHeader(true, state.runningAppStatesBg.size) }
+            items(state.runningAppStatesBg) {
+                RunningAppItem(it)
+            }
         }
     }
 }
@@ -149,7 +168,7 @@ fun GroupHeader(isTotallyCached: Boolean, itemCount: Int) {
             else stringResource(id = R.string.running_process_running)
             Text(
                 text = "$text $itemCount",
-                style = MaterialTheme.typography.headlineSmall
+                style = MaterialTheme.typography.titleMedium
             )
         }
     }

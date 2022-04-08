@@ -19,19 +19,17 @@ package github.tornaco.android.thanos.module.compose.common.widget
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 
 interface FilterItem {
     val label: String
@@ -41,33 +39,44 @@ interface FilterItem {
 
 @Composable
 fun <T : FilterItem> FilterDropDown(
+    icon: ImageVector? = null,
     allItems: List<T>,
     onItemSelected: (T) -> Unit = {},
 ) {
-    var expanded by remember { mutableStateOf(false) }
-    val selectedItem = allItems.find { it.isSelected }
-    requireNotNull(selectedItem) { "At least 1 selected item required." }
-    Box(
-        modifier = Modifier
-            .background(ColorDefaults.backgroundSurfaceColor())
-            .fillMaxWidth()
-            .padding(8.dp)
-            .wrapContentSize(Alignment.TopStart)
-    ) {
-        FilledTonalButton(onClick = { expanded = true }) {
-            Text(text = selectedItem.label)
-        }
-        DropdownMenu(
-            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
+    if (allItems.isNotEmpty()) {
+        Box(
+            modifier = Modifier.wrapContentSize(Alignment.TopStart)
         ) {
-            allItems.forEach { item ->
-                DropdownMenuItem(onClick = {
-                    onItemSelected(item)
-                    expanded = false
-                }) {
-                    Text(text = item.label)
+            var expanded by remember { mutableStateOf(false) }
+            val selectedItem = allItems.find { it.isSelected }
+            requireNotNull(selectedItem) { "At least 1 selected item required." }
+            FilledTonalButton(
+                onClick = { expanded = true }) {
+                icon?.let {
+                    Icon(
+                        it,
+                        contentDescription = "FilterDropDown",
+                        modifier = Modifier.size(ButtonDefaults.IconSize)
+                    )
+                    Spacer(Modifier.size(4.dp))
+                }
+                Text(
+                    text = selectedItem.label,
+                    style = MaterialTheme.typography.labelLarge
+                )
+            }
+            DropdownMenu(
+                modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                allItems.forEach { item ->
+                    DropdownMenuItem(onClick = {
+                        onItemSelected(item)
+                        expanded = false
+                    }) {
+                        Text(text = item.label)
+                    }
                 }
             }
         }

@@ -21,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProcessManageViewModel @Inject constructor(@ApplicationContext private val context: Context) :
     ViewModel() {
-    private val _state = MutableStateFlow(ProcessManageState(true, emptyList(), emptyList()))
+    private val _state =
+        MutableStateFlow(ProcessManageState(true, emptyList(), emptyList(), emptyList()))
     val state = _state.asStateFlow()
 
     private val thanox by lazy { ThanosManager.from(context) }
@@ -61,14 +62,21 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         val runningAppStatesGroupByCached = runningAppStates.groupBy { it.allProcessIsCached }
         XLog.d("startLoading: %s", runningAppStatesGroupByCached)
 
+        val appFilterListItems = Loader.loadAllFromAppSet(context)
+
         _state.value = _state.value.copy(
             isLoading = false,
             runningAppStates = runningAppStatesGroupByCached[false] ?: emptyList(),
-            runningAppStatesBg = runningAppStatesGroupByCached[true] ?: emptyList()
+            runningAppStatesBg = runningAppStatesGroupByCached[true] ?: emptyList(),
+            appFilterItems = appFilterListItems
         )
     }
 
     private fun updateLoadingState(isLoading: Boolean) {
         _state.value = _state.value.copy(isLoading = isLoading)
+    }
+
+    fun onFilterItemSelected(it: AppSetFilterItem) {
+
     }
 }

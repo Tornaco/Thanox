@@ -80,7 +80,7 @@ private fun ThanoxSmallTopAppBar(
         scrolledContainerColor = Color.Transparent
     )
     Surface(color = backgroundColor) {
-        SmallTopAppBar(
+        MediumTopAppBar(
             colors = foregroundColors,
             modifier = Modifier
                 .padding(

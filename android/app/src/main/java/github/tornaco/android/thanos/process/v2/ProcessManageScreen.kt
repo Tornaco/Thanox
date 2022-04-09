@@ -55,7 +55,7 @@ fun ProcessManageScreen(
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(viewModel) {
-        viewModel.startLoading()
+        viewModel.init()
     }
 
     ThanoxScaffold(
@@ -79,7 +79,7 @@ fun ProcessManageScreen(
     ) { contentPadding ->
         SwipeRefresh(
             state = rememberSwipeRefreshState(state.isLoading),
-            onRefresh = { viewModel.startLoading() },
+            onRefresh = { viewModel.refresh() },
             // Shift the indicator to match the list content padding
             indicatorPadding = contentPadding,
             // We want the indicator to draw within the padding
@@ -106,6 +106,7 @@ fun ProcessManageScreen(
 fun AppFilterDropDown(state: ProcessManageState, onFilterItemSelected: (AppSetFilterItem) -> Unit) {
     FilterDropDown(
         icon = Icons.Filled.FilterAlt,
+        selectedItem = state.selectedAppSetFilterItem,
         allItems = state.appFilterItems,
         onItemSelected = onFilterItemSelected
     )

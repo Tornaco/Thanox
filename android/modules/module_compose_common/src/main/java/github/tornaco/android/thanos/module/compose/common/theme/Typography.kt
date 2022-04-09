@@ -23,5 +23,5 @@ import androidx.compose.ui.unit.sp
 
 object TypographyDefauts {
     @Composable
-    fun appBarTitleTextStyle() = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp)
+    fun appBarTitleTextStyle() = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp)
 }

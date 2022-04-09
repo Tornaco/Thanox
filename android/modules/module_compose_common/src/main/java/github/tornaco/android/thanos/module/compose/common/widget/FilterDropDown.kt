@@ -32,24 +32,22 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 interface FilterItem {
+    val id: String
     val label: String
-
-    val isSelected: Boolean
 }
 
 @Composable
 fun <T : FilterItem> FilterDropDown(
     icon: ImageVector? = null,
+    selectedItem: T?,
     allItems: List<T>,
     onItemSelected: (T) -> Unit = {},
 ) {
-    if (allItems.isNotEmpty()) {
+    if (selectedItem != null && allItems.isNotEmpty()) {
         Box(
             modifier = Modifier.wrapContentSize(Alignment.TopStart)
         ) {
             var expanded by remember { mutableStateOf(false) }
-            val selectedItem = allItems.find { it.isSelected }
-            requireNotNull(selectedItem) { "At least 1 selected item required." }
             FilledTonalButton(
                 onClick = { expanded = true }) {
                 icon?.let {

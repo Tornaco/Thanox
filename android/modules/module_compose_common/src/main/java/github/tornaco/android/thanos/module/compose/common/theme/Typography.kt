@@ -19,9 +19,8 @@ package github.tornaco.android.thanos.module.compose.common.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.sp
 
-object TypographyDefauts {
+object TypographyDefaults {
     @Composable
-    fun appBarTitleTextStyle() = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp)
+    fun appBarTitleTextStyle() = MaterialTheme.typography.titleLarge
 }

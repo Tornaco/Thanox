@@ -172,6 +172,8 @@ dependencies {
     annotationProcessor(Libs.Others.glideCompiler)
     kapt(Libs.Others.glideCompiler)
 
+    implementation(Libs.Others.listenablefutureEmpty)
+
     compileOnly(Libs.Others.xposedApi)
 
     implementation(Libs.Others.retrofit)

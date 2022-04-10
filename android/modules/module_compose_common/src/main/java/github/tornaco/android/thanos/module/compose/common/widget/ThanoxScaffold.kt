@@ -18,6 +18,9 @@
 package github.tornaco.android.thanos.module.compose.common.widget
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.BottomSheetScaffoldState
+import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -26,14 +29,120 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.navigationBarsHeight
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import github.tornaco.android.thanos.module.compose.common.R
 
+
+@OptIn(ExperimentalMaterial3Api::class, androidx.compose.material.ExperimentalMaterialApi::class)
+@Composable
+fun ThanoxBottomSheetScaffold(
+    title: @Composable () -> Unit,
+    actions: @Composable (RowScope.() -> Unit) = {},
+    onBackPressed: () -> Unit,
+    scaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState(),
+    sheetContent: @Composable ColumnScope.() -> Unit = {},
+    content: @Composable (PaddingValues) -> Unit,
+) {
+    val containerColor = MaterialTheme.colorScheme.surfaceVariant
+    val contentColor = contentColorFor(containerColor)
+    CompositionLocalProvider(LocalContentColor provides contentColor) {
+        val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
+        BottomSheetScaffold(
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            scaffoldState = scaffoldState,
+            topBar = {
+                ThanoxMediumTopAppBar(scrollBehavior, title, actions, onBackPressed)
+            },
+            sheetContent = sheetContent,
+            sheetPeekHeight = 0.dp,
+            content = {
+                content(it)
+            }
+        )
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ThanoxScaffold(
+fun ThanoxMediumAppBarScaffold(
+    modifier: Modifier = Modifier,
+    title: @Composable () -> Unit,
+    actions: @Composable (RowScope.() -> Unit) = {},
+    onBackPressed: () -> Unit,
+    content: @Composable (PaddingValues) -> Unit
+) {
+    val containerColor = MaterialTheme.colorScheme.surfaceVariant
+    val contentColor = contentColorFor(containerColor)
+    CompositionLocalProvider(LocalContentColor provides contentColor) {
+        val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
+        com.google.accompanist.insets.ui.Scaffold(
+            modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            topBar = {
+                ThanoxMediumTopAppBar(scrollBehavior, title, actions, onBackPressed)
+            },
+            bottomBar = {
+                // We add a spacer as a bottom bar, which is the same height as
+                // the navigation bar
+                Spacer(
+                    Modifier
+                        .navigationBarsHeight()
+                        .fillMaxWidth()
+                )
+            }, content = {
+                content(it)
+            }
+        )
+    }
+}
+
+@Composable
+private fun ThanoxMediumTopAppBar(
+    scrollBehavior: TopAppBarScrollBehavior,
+    title: @Composable () -> Unit,
+    actions: @Composable (RowScope.() -> Unit),
+    onBackPressed: () -> Unit
+) {
+    val backgroundColors = TopAppBarDefaults.smallTopAppBarColors()
+    val backgroundColor = backgroundColors.containerColor(
+        scrollFraction = scrollBehavior.scrollFraction
+    ).value
+    val foregroundColors = TopAppBarDefaults.smallTopAppBarColors(
+        containerColor = Color.Transparent,
+        scrolledContainerColor = Color.Transparent
+    )
+    Surface(color = backgroundColor) {
+        MediumTopAppBar(
+            colors = foregroundColors,
+            modifier = Modifier
+                .padding(
+                    rememberInsetsPaddingValues(
+                        LocalWindowInsets.current.statusBars,
+                        applyBottom = false,
+                    )
+                ),
+            title = title,
+            actions = actions,
+            navigationIcon = {
+                IconButton(onClick = {
+                    onBackPressed()
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.module_common_ic_arrow_back_24dp),
+                        contentDescription = "Back"
+                    )
+                }
+            },
+            scrollBehavior = scrollBehavior
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ThanoxSmallAppBarScaffold(
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit) = {},
     onBackPressed: () -> Unit,
@@ -65,7 +174,7 @@ fun ThanoxScaffold(
 }
 
 @Composable
-private fun ThanoxSmallTopAppBar(
+fun ThanoxSmallTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
@@ -80,7 +189,7 @@ private fun ThanoxSmallTopAppBar(
         scrolledContainerColor = Color.Transparent
     )
     Surface(color = backgroundColor) {
-        MediumTopAppBar(
+        SmallTopAppBar(
             colors = foregroundColors,
             modifier = Modifier
                 .padding(

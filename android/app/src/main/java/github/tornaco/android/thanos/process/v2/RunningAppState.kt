@@ -32,5 +32,10 @@ data class RunningAppState(
 
 data class RunningProcessState(
     val process: ActivityManager.RunningAppProcessInfo,
-    val runningServices: List<ActivityManager.RunningServiceInfo>
+    val runningServices: List<RunningService>
+)
+
+data class RunningService(
+    val running: ActivityManager.RunningServiceInfo,
+    val serviceLabel: String
 )

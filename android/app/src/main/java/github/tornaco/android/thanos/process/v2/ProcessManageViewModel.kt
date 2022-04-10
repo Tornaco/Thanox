@@ -65,6 +65,9 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                 RunningProcessState(process = process,
                     runningServices = runningServices.filter { service ->
                         service.pid == process.pid
+                    }.map {
+                        val label = getServiceLabel(it)
+                        RunningService(it, label.toString())
                     })
             }
             val isAllProcessCached =
@@ -93,6 +96,20 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         )
     }
 
+    private fun getServiceLabel(runningService: ActivityManager.RunningServiceInfo): String {
+        return kotlin.runCatching {
+            val serviceInfo = context.packageManager.getServiceInfo(runningService.service, 0)
+            return if (serviceInfo.labelRes != 0 || serviceInfo.nonLocalizedLabel != null) {
+                serviceInfo.loadLabel(context.packageManager).toString()
+            } else {
+                runningService.service.className.substringAfterLast(".")
+            }
+        }.getOrElse {
+            runningService.service.className.substringAfterLast(".")
+        }
+    }
+
+
     private suspend fun loadDefaultAppFilterItems() {
         val appFilterListItems = Loader.loadAllFromAppSet(context)
         _state.value = _state.value.copy(
@@ -108,8 +125,12 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         _state.value = _state.value.copy(isLoading = isLoading)
     }
 
-    fun onFilterItemSelected(it: AppSetFilterItem) {
-        _state.value = _state.value.copy(selectedAppSetFilterItem = it)
+    fun onFilterItemSelected(appSetFilterItem: AppSetFilterItem) {
+        _state.value = _state.value.copy(selectedAppSetFilterItem = appSetFilterItem)
         refresh()
+    }
+
+    fun onRunningAppStateItemSelected(runningAppState: RunningAppState) {
+        _state.value = _state.value.copy(selectedRunningAppStateItem = runningAppState)
     }
 }

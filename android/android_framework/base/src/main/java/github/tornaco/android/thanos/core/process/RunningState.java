@@ -353,6 +353,7 @@ public class RunningState {
                     si.mServiceInfo = ActivityThread.getPackageManager().getServiceInfo(
                             service.service, 0,
                             UserHandle.getUserId(service.uid));
+                    XLog.d("getServiceInfo: " + service.service + "--> " + si.mServiceInfo);
 
                     if (si.mServiceInfo == null) {
                         Log.d("RunningService", "getServiceInfo returned null for: "

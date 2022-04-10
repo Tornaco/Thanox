@@ -16,6 +16,7 @@
  */
 package github.tornaco.android.thanos.process.v2
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +27,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
+import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -33,7 +35,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,11 +42,17 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.module.compose.common.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
-import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefauts.appBarTitleTextStyle
-import github.tornaco.android.thanos.module.compose.common.widget.*
+import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
+import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
+import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
+import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxBottomSheetScaffold
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ProcessManageScreen(
     onBackPressed: () -> Unit,
@@ -58,7 +65,10 @@ fun ProcessManageScreen(
         viewModel.init()
     }
 
-    ThanoxScaffold(
+    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
+
+    ThanoxBottomSheetScaffold(
         title = {
             Text(
                 stringResource(id = R.string.feature_title_process_manage),
@@ -75,7 +85,15 @@ fun ProcessManageScreen(
                 )
             }
         },
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        scaffoldState = bottomSheetScaffoldState,
+        sheetContent = {
+            RunningAppStateDetailsScreen(state) {
+                coroutineScope.launch {
+                    bottomSheetScaffoldState.bottomSheetState.collapse()
+                }
+            }
+        },
     ) { contentPadding ->
         SwipeRefresh(
             state = rememberSwipeRefreshState(state.isLoading),
@@ -95,8 +113,24 @@ fun ProcessManageScreen(
                 )
             }
         ) {
-            RunningAppList(state, contentPadding) {
-                viewModel.onFilterItemSelected(it)
+            RunningAppList(
+                state = state,
+                contentPadding = contentPadding,
+                onItemClick = {
+                    viewModel.onRunningAppStateItemSelected(it)
+                    coroutineScope.launch {
+                        delay(200)
+                        bottomSheetScaffoldState.bottomSheetState.expand()
+                    }
+                },
+                onFilterItemSelected = {
+                    viewModel.onFilterItemSelected(it)
+                })
+
+            BackHandler(enabled = !bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
+                coroutineScope.launch {
+                    bottomSheetScaffoldState.bottomSheetState.collapse()
+                }
             }
         }
     }
@@ -117,6 +151,7 @@ fun AppFilterDropDown(state: ProcessManageState, onFilterItemSelected: (AppSetFi
 fun RunningAppList(
     state: ProcessManageState,
     contentPadding: PaddingValues,
+    onItemClick: (RunningAppState) -> Unit,
     onFilterItemSelected: (AppSetFilterItem) -> Unit
 ) {
     LazyColumn(
@@ -139,7 +174,7 @@ fun RunningAppList(
         if (state.runningAppStates.isNotEmpty()) {
             item { GroupHeader(false, state.runningAppStates.size) }
             items(state.runningAppStates) {
-                RunningAppItem(it)
+                RunningAppItem(it, onItemClick)
             }
         }
 
@@ -149,7 +184,7 @@ fun RunningAppList(
             }
             item { GroupHeader(true, state.runningAppStatesBg.size) }
             items(state.runningAppStatesBg) {
-                RunningAppItem(it)
+                RunningAppItem(it, onItemClick)
             }
         }
     }
@@ -178,13 +213,15 @@ fun GroupHeader(isTotallyCached: Boolean, itemCount: Int) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun RunningAppItem(appState: RunningAppState) {
+fun RunningAppItem(appState: RunningAppState, onItemClick: (RunningAppState) -> Unit) {
     Box(
         modifier = Modifier
             .clickable(interactionSource = remember { MutableInteractionSource() },
                 // You can also change the color and radius of the ripple
                 indication = rememberRipple(bounded = true),
-                onClick = {})
+                onClick = {
+                    onItemClick(appState)
+                })
     ) {
         Row(
             modifier = Modifier
@@ -202,7 +239,10 @@ fun RunningAppItem(appState: RunningAppState) {
                 AppIcon(modifier = Modifier.size(38.dp), appState.appInfo)
                 Spacer(modifier = Modifier.size(12.dp))
                 Column(verticalArrangement = Arrangement.Center) {
-                    AppLabelText(appState)
+                    AppLabelText(
+                        Modifier.sizeIn(maxWidth = 220.dp),
+                        appState.appInfo.appLabel
+                    )
                     if (appState.serviceCount == 0) {
                         PText(appState)
                     } else {
@@ -221,7 +261,7 @@ fun MemSizeBadge(appState: RunningAppState) {
 }
 
 @Composable
-private fun PSText(appState: RunningAppState) {
+fun PSText(appState: RunningAppState) {
     Text(
         text = stringResource(
             id = R.string.running_processes_item_description_p_s,
@@ -233,7 +273,7 @@ private fun PSText(appState: RunningAppState) {
 }
 
 @Composable
-private fun PText(appState: RunningAppState) {
+fun PText(appState: RunningAppState) {
     Text(
         text = stringResource(
             id = R.string.running_processes_item_description_p,
@@ -242,19 +282,3 @@ private fun PText(appState: RunningAppState) {
         fontSize = 12.sp
     )
 }
-
-@Composable
-private fun AppLabelText(appState: RunningAppState) {
-    AutoResizeText(
-        text = appState.appInfo.appLabel,
-        maxLines = 1,
-        modifier = Modifier.sizeIn(maxWidth = 220.dp),
-        fontSizeRange = FontSizeRange(
-            min = 12.sp,
-            max = 16.sp,
-        ),
-        overflow = TextOverflow.Ellipsis,
-        style = MaterialTheme.typography.titleMedium,
-    )
-}
-

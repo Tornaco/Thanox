@@ -171,7 +171,7 @@
 
     <string name="feature_title_infinite_z">双开</string>
 
-    <string name="menu_title_copy">Copy</string>
+    <string name="menu_title_copy">复制</string>
 
     <string name="menu_title_copy_pkg_name">复制包名</string>
     <string name="menu_title_launch_app">启动应用</string>

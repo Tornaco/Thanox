@@ -16,7 +16,6 @@
  */
 package github.tornaco.android.thanos.process.v2
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,7 +26,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
-import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -38,9 +36,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import com.elvishew.xlog.XLog
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import dev.enro.core.compose.navigationHandle
+import dev.enro.core.forward
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
@@ -48,9 +50,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxBottomSheetScaffold
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -60,15 +60,14 @@ fun ProcessManageScreen(
 ) {
     val viewModel = hiltViewModel<ProcessManageViewModel>()
     val state by viewModel.state.collectAsState()
+    val navHandle = navigationHandle()
+    XLog.d("viewModel= $viewModel by owner: ${LocalViewModelStoreOwner.current}")
 
     LaunchedEffect(viewModel) {
         viewModel.init()
     }
 
-    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
-    val coroutineScope = rememberCoroutineScope()
-
-    ThanoxBottomSheetScaffold(
+    ThanoxMediumAppBarScaffold(
         title = {
             Text(
                 stringResource(id = R.string.feature_title_process_manage),
@@ -85,15 +84,7 @@ fun ProcessManageScreen(
                 )
             }
         },
-        onBackPressed = onBackPressed,
-        scaffoldState = bottomSheetScaffoldState,
-        sheetContent = {
-            RunningAppStateDetailsScreen(state) {
-                coroutineScope.launch {
-                    bottomSheetScaffoldState.bottomSheetState.collapse()
-                }
-            }
-        },
+        onBackPressed = onBackPressed
     ) { contentPadding ->
         SwipeRefresh(
             state = rememberSwipeRefreshState(state.isLoading),
@@ -118,20 +109,11 @@ fun ProcessManageScreen(
                 contentPadding = contentPadding,
                 onItemClick = {
                     viewModel.onRunningAppStateItemSelected(it)
-                    coroutineScope.launch {
-                        delay(200)
-                        bottomSheetScaffoldState.bottomSheetState.expand()
-                    }
+                    navHandle.forward(RunningAppStateDetails)
                 },
                 onFilterItemSelected = {
                     viewModel.onFilterItemSelected(it)
                 })
-
-            BackHandler(enabled = !bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
-                coroutineScope.launch {
-                    bottomSheetScaffoldState.bottomSheetState.collapse()
-                }
-            }
         }
     }
 }

@@ -32,6 +32,9 @@ object Compose {
 
     const val coil = "io.coil-kt:coil-compose:1.3.2"
 
+    const val enro = "dev.enro:enro:1.9.0"
+    const val enroApt = "dev.enro:enro-processor:1.9.0"
+
     const val composeMaterialIconsExtended =
         "androidx.compose.material:material-icons-extended:${composeVersion}"
 }

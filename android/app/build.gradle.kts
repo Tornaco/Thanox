@@ -8,6 +8,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
 }
 
@@ -148,6 +149,8 @@ dependencies {
     implementation(Compose.toolingPreview)
     implementation(Compose.composeMaterialIconsExtended)
     implementation(Compose.landscapistGlide)
+    implementation(Compose.enro)
+    kapt(Compose.enroApt)
     implementation(Libs.Accompanist.appcompatTheme)
     implementation(Libs.Accompanist.systemUiController)
     implementation(Libs.Accompanist.pager)

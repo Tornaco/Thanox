@@ -23,21 +23,48 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.elvishew.xlog.XLog
+import dev.enro.annotations.ExperimentalComposableDestination
+import dev.enro.annotations.NavigationDestination
+import dev.enro.core.NavigationKey
+import dev.enro.core.close
+import dev.enro.core.compose.navigationHandle
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+object RunningAppStateDetails : NavigationKey
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RunningAppStateDetailsScreen(state: ProcessManageState, onBackPressed: () -> Unit) {
+@ExperimentalComposableDestination
+@NavigationDestination(RunningAppStateDetails::class)
+fun RunningAppStateDetailsPage() {
+    val navHandle = navigationHandle()
+    val viewModel = hiltViewModel<ProcessManageViewModel>()
+    XLog.d("viewModel= $viewModel")
+    val state by viewModel.state.collectAsState()
+    RunningAppStateDetailsScreen(state) {
+        navHandle.close()
+    }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun RunningAppStateDetailsScreen(state: ProcessManageState, onBackPressed: () -> Unit) {
     state.selectedRunningAppStateItem?.let { runningAppState ->
         ThanoxMediumAppBarScaffold(
             title = {

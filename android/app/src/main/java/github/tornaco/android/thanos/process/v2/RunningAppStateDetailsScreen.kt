@@ -17,21 +17,18 @@
 
 package github.tornaco.android.thanos.process.v2
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.elvishew.xlog.XLog
 import dev.enro.annotations.ExperimentalComposableDestination
 import dev.enro.annotations.NavigationDestination
 import dev.enro.core.NavigationKey
@@ -46,55 +43,50 @@ import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-object RunningAppStateDetails : NavigationKey
+data class RunningAppStateDetails(val state: RunningAppState) : NavigationKey
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @ExperimentalComposableDestination
 @NavigationDestination(RunningAppStateDetails::class)
 fun RunningAppStateDetailsPage() {
-    val navHandle = navigationHandle()
-    val viewModel = hiltViewModel<ProcessManageViewModel>()
-    XLog.d("viewModel= $viewModel")
-    val state by viewModel.state.collectAsState()
-    RunningAppStateDetailsScreen(state) {
+    val navHandle = navigationHandle<RunningAppStateDetails>()
+    val viewModel: RunningAppDetailViewModel = hiltViewModel()
+    val state = navHandle.key.state
+    RunningAppStateDetailsScreen(state, viewModel) {
         navHandle.close()
     }
 }
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun RunningAppStateDetailsScreen(state: ProcessManageState, onBackPressed: () -> Unit) {
-    state.selectedRunningAppStateItem?.let { runningAppState ->
-        ThanoxMediumAppBarScaffold(
-            title = {
-                Text(
-                    text = runningAppState.appInfo.appLabel,
-                    style = TypographyDefaults.appBarTitleTextStyle()
-                )
-            }, onBackPressed = onBackPressed
+private fun RunningAppStateDetailsScreen(
+    runningAppState: RunningAppState,
+    viewModel: RunningAppDetailViewModel,
+    onBackPressed: () -> Unit
+) {
+    ThanoxMediumAppBarScaffold(
+        title = {
+            Text(
+                text = runningAppState.appInfo.appLabel,
+                style = TypographyDefaults.appBarTitleTextStyle()
+            )
+        }, onBackPressed = onBackPressed
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+                .verticalScroll(rememberScrollState())
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(it)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                runningAppState.processState.forEach { runningProcessState ->
-                    Card(
-                        modifier = Modifier.padding(16.dp),
-                        containerColor = ColorDefaults.backgroundSurfaceColor()
-                    ) {
-                        Column {
-                            ProcessSection(runningProcessState)
-                            Spacer(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .height(2.dp)
-                                    .background(MaterialTheme.colorScheme.background)
-                            )
-                            ServiceSection(runningAppState, runningProcessState)
-                        }
+            runningAppState.processState.forEach { runningProcessState ->
+                Card(
+                    modifier = Modifier.padding(16.dp),
+                    containerColor = ColorDefaults.backgroundSurfaceColor()
+                ) {
+                    Column {
+                        ProcessSection(runningProcessState, viewModel)
+                        ServiceSection(runningAppState, runningProcessState, viewModel)
                     }
                 }
             }
@@ -105,17 +97,22 @@ private fun RunningAppStateDetailsScreen(state: ProcessManageState, onBackPresse
 @Composable
 private fun ServiceSection(
     runningAppState: RunningAppState,
-    runningProcessState: RunningProcessState
-) {
+    runningProcessState: RunningProcessState,
+    viewModel: RunningAppDetailViewModel,
+
+    ) {
     Column(modifier = Modifier.padding(16.dp)) {
+        val runningServiceCount = runningProcessState.runningServices.size
         Row(verticalAlignment = CenterVertically) {
             Text(
-                text = stringResource(id = R.string.runningservicedetails_services_title),
-                style = MaterialTheme.typography.titleLarge
+                text = if (runningServiceCount > 0) stringResource(
+                    id = R.string.running_processes_item_description_s, runningServiceCount
+                ) else stringResource(id = R.string.runningservicedetails_services_title),
+                style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp)
             )
         }
         Spacer(modifier = Modifier.size(8.dp))
-        if (runningProcessState.runningServices.isEmpty()) {
+        if (runningServiceCount == 0) {
             Text(
                 text = stringResource(id = R.string.no_running_services),
                 style = MaterialTheme.typography.titleSmall
@@ -143,11 +140,15 @@ private fun ServiceSection(
                             .padding(top = 4.dp),
                         horizontalArrangement = Arrangement.End
                     ) {
-                        FilledTonalButton(onClick = { }) {
+                        FilledTonalButton(onClick = {
+                            viewModel.stopService(service)
+                        }) {
                             Text(text = stringResource(id = R.string.service_stop))
                         }
                         Spacer(modifier = Modifier.size(12.dp))
-                        FilledTonalButton(onClick = { }) {
+                        FilledTonalButton(onClick = {
+                            viewModel.copyServiceName(service)
+                        }) {
                             Text(text = stringResource(id = R.string.menu_title_copy))
                         }
                     }
@@ -160,7 +161,10 @@ private fun ServiceSection(
 }
 
 @Composable
-private fun ProcessSection(runningProcessState: RunningProcessState) {
+private fun ProcessSection(
+    runningProcessState: RunningProcessState,
+    viewModel: RunningAppDetailViewModel
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -168,12 +172,19 @@ private fun ProcessSection(runningProcessState: RunningProcessState) {
             .padding(16.dp)
     ) {
         Column {
-            Text(
-                text = stringResource(id = R.string.runningservicedetails_processes_title),
-                style = MaterialTheme.typography.titleLarge
-            )
+            Row {
+                Text(
+                    modifier = Modifier.alignByBaseline(),
+                    text = stringResource(id = R.string.runningservicedetails_processes_title),
+                    style = MaterialTheme.typography.titleLarge
+                )
+                Text(
+                    modifier = Modifier.alignByBaseline(),
+                    text = " (id: ${runningProcessState.process.pid})",
+                    style = MaterialTheme.typography.labelMedium
+                )
+            }
             Spacer(modifier = Modifier.size(12.dp))
-            AppLabelText(appLabel = "id: ${runningProcessState.process.pid}")
             AppLabelText(appLabel = runningProcessState.process.processName)
             Spacer(modifier = Modifier.size(12.dp))
             Row(
@@ -186,7 +197,9 @@ private fun ProcessSection(runningProcessState: RunningProcessState) {
                     Text(text = stringResource(id = R.string.service_stop))
                 }
                 Spacer(modifier = Modifier.size(12.dp))
-                FilledTonalButton(onClick = { }) {
+                FilledTonalButton(onClick = {
+                    viewModel.copyProcessName(runningProcessState)
+                }) {
                     Text(text = stringResource(id = R.string.menu_title_copy))
                 }
             }

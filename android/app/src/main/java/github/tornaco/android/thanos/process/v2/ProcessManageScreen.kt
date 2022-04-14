@@ -31,6 +31,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -45,6 +46,7 @@ import dev.enro.core.compose.navigationHandle
 import dev.enro.core.forward
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.AppLabelText
+import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
@@ -58,7 +60,7 @@ fun ProcessManageScreen(
     onBackPressed: () -> Unit,
     toLegacyUi: () -> Unit
 ) {
-    val viewModel = hiltViewModel<ProcessManageViewModel>()
+    val viewModel = hiltViewModel<ProcessManageViewModel>(LocalContext.current.requireActivity())
     val state by viewModel.state.collectAsState()
     val navHandle = navigationHandle()
     XLog.d("viewModel= $viewModel by owner: ${LocalViewModelStoreOwner.current}")
@@ -109,7 +111,7 @@ fun ProcessManageScreen(
                 contentPadding = contentPadding,
                 onItemClick = {
                     viewModel.onRunningAppStateItemSelected(it)
-                    navHandle.forward(RunningAppStateDetails)
+                    navHandle.forward(RunningAppStateDetails(it))
                 },
                 onFilterItemSelected = {
                     viewModel.onFilterItemSelected(it)

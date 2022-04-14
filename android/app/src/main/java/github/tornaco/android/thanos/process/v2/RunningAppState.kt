@@ -18,24 +18,29 @@
 package github.tornaco.android.thanos.process.v2
 
 import android.app.ActivityManager
+import android.os.Parcelable
 import github.tornaco.android.thanos.core.pm.AppInfo
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class RunningAppState(
     val appInfo: AppInfo,
     val processState: List<RunningProcessState>,
     val allProcessIsCached: Boolean,
     val totalPss: Long,
     val sizeStr: String
-) {
+) : Parcelable {
     val serviceCount: Int get() = processState.flatMap { it.runningServices }.size
 }
 
+@Parcelize
 data class RunningProcessState(
     val process: ActivityManager.RunningAppProcessInfo,
     val runningServices: List<RunningService>
-)
+) : Parcelable
 
+@Parcelize
 data class RunningService(
     val running: ActivityManager.RunningServiceInfo,
     val serviceLabel: String
-)
+) : Parcelable

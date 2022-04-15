@@ -18,17 +18,17 @@ package github.tornaco.android.thanos.process.v2
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -46,6 +46,7 @@ import dev.enro.core.compose.navigationHandle
 import dev.enro.core.forward
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.AppLabelText
+import github.tornaco.android.thanos.module.compose.common.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
@@ -200,12 +201,9 @@ fun GroupHeader(isTotallyCached: Boolean, itemCount: Int) {
 fun RunningAppItem(appState: RunningAppState, onItemClick: (RunningAppState) -> Unit) {
     Box(
         modifier = Modifier
-            .clickable(interactionSource = remember { MutableInteractionSource() },
-                // You can also change the color and radius of the ripple
-                indication = rememberRipple(bounded = true),
-                onClick = {
-                    onItemClick(appState)
-                })
+            .clickableWithRipple {
+                onItemClick(appState)
+            }
     ) {
         Row(
             modifier = Modifier

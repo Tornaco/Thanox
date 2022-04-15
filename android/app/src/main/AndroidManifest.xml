@@ -43,6 +43,11 @@
             android:label="@string/activity_title_process_manage" />
 
         <activity
+            android:name=".process.v2.RunningAppStateDetailsActivity"
+            android:exported="false"
+            android:label="@string/activity_title_process_manage" />
+
+        <activity
             android:name=".process.ProcessManageActivity"
             android:exported="true"
             android:label="@string/activity_title_process_manage">

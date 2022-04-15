@@ -36,7 +36,7 @@
     <string name="cached" msgid="1059590879740175019">"缓存的后台进程"</string>
     <string name="show_cached" msgid="1059590879740175019">"切换显示缓存进程"</string>
     <string name="no_running_services" msgid="2059536495597645347">"当前未运行任何服务。"</string>
-    <string name="service_started_by_app" msgid="818675099014723551">"由应用启动。"</string>
+    <string name="service_started_by_app" msgid="818675099014723551">"由应用启动"</string>
     <string name="service_client_name" msgid="818675099014723551">"客户端 %1$s"</string>
     <string name="service_process_name" msgid="818675099014723551">"进程 %1$s"</string>
 
@@ -45,6 +45,7 @@
     <string name="running_process_all">全部</string>
     <string name="service_stop">停止</string>
     <string name="service_report">报告</string>
+    <string name="service_running_time">已运行</string>
 
     <!--Colors-->
     <color name="running_processes_system_ram">#ff384248</color>

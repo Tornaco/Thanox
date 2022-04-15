@@ -42,5 +42,6 @@ data class RunningProcessState(
 @Parcelize
 data class RunningService(
     val running: ActivityManager.RunningServiceInfo,
-    val serviceLabel: String
+    val serviceLabel: String,
+    val clientLabel: String? = null
 ) : Parcelable

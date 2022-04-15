@@ -39,4 +39,8 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
         thanox.activityManager.stopService(Intent().apply { component = service.running.service })
         ToastUtils.ok(context)
     }
+
+    fun forceStop(runningAppState: RunningAppState) {
+        thanox.activityManager.forceStopPackage(runningAppState.appInfo.pkgName)
+    }
 }

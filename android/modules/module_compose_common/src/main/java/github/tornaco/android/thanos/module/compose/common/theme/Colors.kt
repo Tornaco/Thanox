@@ -27,6 +27,10 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.ln
 
 object ColorDefaults {
+
+    @Composable
+    fun cardBackgroundColor() = MaterialTheme.colorScheme
+
     @Composable
     fun backgroundSurfaceColor() = MaterialTheme.colorScheme.applyTonalElevation(
         MaterialTheme.colorScheme.surface,

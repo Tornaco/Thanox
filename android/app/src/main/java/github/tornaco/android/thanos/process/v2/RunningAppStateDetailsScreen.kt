@@ -17,42 +17,43 @@
 
 package github.tornaco.android.thanos.process.v2
 
+import android.os.SystemClock
+import android.text.format.DateUtils
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import dev.enro.annotations.ExperimentalComposableDestination
-import dev.enro.annotations.NavigationDestination
-import dev.enro.core.NavigationKey
 import dev.enro.core.close
 import dev.enro.core.compose.navigationHandle
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.module.compose.common.AppLabelText
+import github.tornaco.android.thanos.apps.AppDetailsActivity
+import github.tornaco.android.thanos.module.compose.common.*
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
-data class RunningAppStateDetails(val state: RunningAppState) : NavigationKey
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@ExperimentalComposableDestination
-@NavigationDestination(RunningAppStateDetails::class)
 fun RunningAppStateDetailsPage() {
     val navHandle = navigationHandle<RunningAppStateDetails>()
     val viewModel: RunningAppDetailViewModel = hiltViewModel()
     val state = navHandle.key.state
+
     RunningAppStateDetailsScreen(state, viewModel) {
         navHandle.close()
     }
@@ -65,13 +66,25 @@ private fun RunningAppStateDetailsScreen(
     viewModel: RunningAppDetailViewModel,
     onBackPressed: () -> Unit
 ) {
+    val context = LocalContext.current
     ThanoxMediumAppBarScaffold(
         title = {
             Text(
                 text = runningAppState.appInfo.appLabel,
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
-        }, onBackPressed = onBackPressed
+        },
+        actions = {
+            IconButton(onClick = {
+                AppDetailsActivity.start(context, runningAppState.appInfo)
+            }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.module_common_ic_md_outline_settings_24),
+                    contentDescription = "Settings"
+                )
+            }
+        },
+        onBackPressed = onBackPressed
     ) {
         Column(
             modifier = Modifier
@@ -85,8 +98,11 @@ private fun RunningAppStateDetailsScreen(
                     containerColor = ColorDefaults.backgroundSurfaceColor()
                 ) {
                     Column {
+                        StandardSpacer()
                         ProcessSection(runningProcessState, viewModel)
+                        StandardSpacer()
                         ServiceSection(runningAppState, runningProcessState, viewModel)
+                        StandardSpacer()
                     }
                 }
             }
@@ -99,11 +115,10 @@ private fun ServiceSection(
     runningAppState: RunningAppState,
     runningProcessState: RunningProcessState,
     viewModel: RunningAppDetailViewModel,
-
-    ) {
-    Column(modifier = Modifier.padding(16.dp)) {
+) {
+    Column(modifier = Modifier) {
         val runningServiceCount = runningProcessState.runningServices.size
-        Row(verticalAlignment = CenterVertically) {
+        Row(modifier = Modifier.padding(horizontal = 16.dp), verticalAlignment = CenterVertically) {
             Text(
                 text = if (runningServiceCount > 0) stringResource(
                     id = R.string.running_processes_item_description_s, runningServiceCount
@@ -114,47 +129,104 @@ private fun ServiceSection(
         Spacer(modifier = Modifier.size(8.dp))
         if (runningServiceCount == 0) {
             Text(
+                modifier = Modifier.padding(16.dp),
                 text = stringResource(id = R.string.no_running_services),
                 style = MaterialTheme.typography.titleSmall
             )
         } else {
             runningProcessState.runningServices.forEach { service ->
-                Column(
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Spacer(modifier = Modifier.size(12.dp))
-                    Row(verticalAlignment = CenterVertically) {
-                        AppIcon(modifier = Modifier.size(24.dp), appInfo = runningAppState.appInfo)
-                        Spacer(modifier = Modifier.size(8.dp))
-                        AppLabelText(appLabel = service.serviceLabel)
-                    }
-                    Text(
-                        text = service.running.service.flattenToShortString(),
-                        style = MaterialTheme.typography.labelMedium
-                    )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 4.dp),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        FilledTonalButton(onClick = {
-                            viewModel.stopService(service)
-                        }) {
-                            Text(text = stringResource(id = R.string.service_stop))
-                        }
-                        Spacer(modifier = Modifier.size(12.dp))
-                        FilledTonalButton(onClick = {
-                            viewModel.copyServiceName(service)
-                        }) {
-                            Text(text = stringResource(id = R.string.menu_title_copy))
-                        }
-                    }
+                ServiceTile(runningAppState, service, viewModel)
+            }
+        }
+    }
+}
 
-                    Spacer(modifier = Modifier.size(12.dp))
-                }
+@Composable
+private fun ServiceTile(
+    runningAppState: RunningAppState,
+    service: RunningService,
+    viewModel: RunningAppDetailViewModel
+) {
+    val popMenuExpend = remember { mutableStateOf(false) }
+    Column(
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickableWithRipple {
+                popMenuExpend.value = true
+            }
+            .padding(horizontal = 16.dp)
+    ) {
+        Spacer(modifier = Modifier.size(12.dp))
+        Row(verticalAlignment = CenterVertically) {
+            AppIcon(modifier = Modifier.size(36.dp), appInfo = runningAppState.appInfo)
+            Spacer(modifier = Modifier.size(8.dp))
+            Column(verticalArrangement = Arrangement.Center) {
+                AppLabelText(appLabel = service.serviceLabel)
+                ServiceRunningTime(service)
+            }
+        }
+        TinySpacer()
+        Text(
+            text = service.running.service.flattenToShortString(),
+            style = MaterialTheme.typography.labelMedium
+        )
+        Spacer(modifier = Modifier.size(12.dp))
+        ServicePopupMenu(popMenuExpend, service, viewModel)
+    }
+}
+
+@Composable
+private fun ServiceRunningTime(service: RunningService) {
+    val activeSince: Long =
+        if (service.running.restarting == 0L) service.running.activeSince else -1
+    if (activeSince > 0) {
+        val runningTimeStr = DateUtils.formatElapsedTime(
+            StringBuilder(),
+            (SystemClock.elapsedRealtime() - activeSince) / 1000
+        )
+        Text(
+            text = "${service.clientLabel ?: stringResource(id = R.string.service_started_by_app)} • ${
+                stringResource(
+                    id = R.string.service_running_time
+                )
+            } $runningTimeStr",
+            style = MaterialTheme.typography.labelMedium
+        )
+    }
+}
+
+@Composable
+private fun ServicePopupMenu(
+    popMenuExpend: MutableState<Boolean>,
+    service: RunningService,
+    viewModel: RunningAppDetailViewModel
+) {
+    DropdownPopUpMenu(
+        popMenuExpend,
+        items = listOf(
+            MenuItem(
+                "copy",
+                stringResource(id = R.string.menu_title_copy),
+                R.drawable.ic_file_copy_fill
+            ),
+            MenuItem(
+                "stop",
+                stringResource(id = R.string.service_stop),
+                R.drawable.ic_close_fill
+            )
+        )
+    ) {
+        when (it.id) {
+            "copy" -> {
+                viewModel.copyServiceName(service)
+            }
+            "stop" -> {
+                viewModel.stopService(service)
+            }
+            else -> {
+
             }
         }
     }
@@ -165,13 +237,18 @@ private fun ProcessSection(
     runningProcessState: RunningProcessState,
     viewModel: RunningAppDetailViewModel
 ) {
+    val popMenuExpend = remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(72.dp)
-            .padding(16.dp)
+            .clickableWithRipple {
+                popMenuExpend.value = true
+            }
+            .padding(horizontal = 16.dp)
     ) {
         Column {
+            Spacer(modifier = Modifier.size(12.dp))
             Row {
                 Text(
                     modifier = Modifier.alignByBaseline(),
@@ -187,21 +264,42 @@ private fun ProcessSection(
             Spacer(modifier = Modifier.size(12.dp))
             AppLabelText(appLabel = runningProcessState.process.processName)
             Spacer(modifier = Modifier.size(12.dp))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 4.dp),
-                horizontalArrangement = Arrangement.End
-            ) {
-                FilledTonalButton(onClick = { }) {
-                    Text(text = stringResource(id = R.string.service_stop))
-                }
-                Spacer(modifier = Modifier.size(12.dp))
-                FilledTonalButton(onClick = {
-                    viewModel.copyProcessName(runningProcessState)
-                }) {
-                    Text(text = stringResource(id = R.string.menu_title_copy))
-                }
+
+            ProcessPopupMenu(popMenuExpend, viewModel, runningProcessState)
+        }
+    }
+}
+
+@Composable
+private fun ProcessPopupMenu(
+    popMenuExpend: MutableState<Boolean>,
+    viewModel: RunningAppDetailViewModel,
+    runningProcessState: RunningProcessState
+) {
+    DropdownPopUpMenu(
+        popMenuExpend,
+        items = listOf(
+            MenuItem(
+                "copy",
+                stringResource(id = R.string.menu_title_copy),
+                R.drawable.ic_file_copy_fill
+            ),
+            MenuItem(
+                "stop",
+                stringResource(id = R.string.service_stop),
+                R.drawable.ic_close_fill
+            )
+        )
+    ) {
+        when (it.id) {
+            "copy" -> {
+                viewModel.copyProcessName(runningProcessState)
+            }
+            "stop" -> {
+                viewModel.stopProcess(runningProcessState)
+            }
+            else -> {
+
             }
         }
     }

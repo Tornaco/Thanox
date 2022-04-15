@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.process.v2
 import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context
+import android.content.res.Resources
 import android.text.format.Formatter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -35,6 +36,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
     val state = _state.asStateFlow()
 
     private val thanox by lazy { ThanosManager.from(context) }
+    private val pm by lazy { context.packageManager }
 
     fun init() {
         viewModelScope.launch {
@@ -67,7 +69,13 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                         service.pid == process.pid
                     }.map {
                         val label = getServiceLabel(it)
-                        RunningService(it, label.toString())
+                        val clientLabel = if (it.clientPackage != null && it.clientLabel > 0) {
+                            val clientR: Resources = pm.getResourcesForApplication(it.clientPackage)
+                            clientR.getString(it.clientLabel)
+                        } else {
+                            null
+                        }
+                        RunningService(it, label, clientLabel)
                     })
             }
             val isAllProcessCached =

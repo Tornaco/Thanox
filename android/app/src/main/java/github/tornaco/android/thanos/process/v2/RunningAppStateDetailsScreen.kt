@@ -23,10 +23,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -45,6 +42,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
+import kotlinx.coroutines.delay
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -182,10 +180,14 @@ private fun ServiceRunningTime(service: RunningService) {
     val activeSince: Long =
         if (service.running.restarting == 0L) service.running.activeSince else -1
     if (activeSince > 0) {
-        val runningTimeStr = DateUtils.formatElapsedTime(
-            StringBuilder(),
-            (SystemClock.elapsedRealtime() - activeSince) / 1000
-        )
+        var runningSeconds by remember {
+            mutableStateOf((SystemClock.elapsedRealtime() - activeSince) / 1000L)
+        }
+        LaunchedEffect(runningSeconds) {
+            delay(1000L)
+            runningSeconds += 1
+        }
+        val runningTimeStr = DateUtils.formatElapsedTime(null, runningSeconds)
         Text(
             text = "${service.clientLabel ?: stringResource(id = R.string.service_started_by_app)} • ${
                 stringResource(

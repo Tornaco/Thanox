@@ -20,6 +20,7 @@ package github.tornaco.android.thanos.module.compose.common.widget
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetScaffoldState
+import androidx.compose.material.FabPosition
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -72,6 +73,9 @@ fun ThanoxMediumAppBarScaffold(
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit) = {},
     onBackPressed: () -> Unit,
+    floatingActionButton: @Composable () -> Unit = {},
+    floatingActionButtonPosition: FabPosition = FabPosition.End,
+    isFloatingActionButtonDocked: Boolean = false,
     content: @Composable (PaddingValues) -> Unit
 ) {
     val containerColor = MaterialTheme.colorScheme.surfaceVariant
@@ -83,6 +87,9 @@ fun ThanoxMediumAppBarScaffold(
             topBar = {
                 ThanoxMediumTopAppBar(scrollBehavior, title, actions, onBackPressed)
             },
+            floatingActionButton = floatingActionButton,
+            floatingActionButtonPosition = floatingActionButtonPosition,
+            isFloatingActionButtonDocked = isFloatingActionButtonDocked,
             bottomBar = {
                 // We add a spacer as a bottom bar, which is the same height as
                 // the navigation bar

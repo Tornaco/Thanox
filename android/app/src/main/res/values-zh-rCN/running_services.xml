@@ -40,6 +40,7 @@
     <string name="service_client_name" msgid="818675099014723551">"客户端 %1$s"</string>
     <string name="service_process_name" msgid="818675099014723551">"进程 %1$s"</string>
 
+    <string name="running_process_not_running">未在运行</string>
     <string name="running_process_running">运行中</string>
     <string name="running_process_background">缓存中</string>
     <string name="running_process_all">全部</string>

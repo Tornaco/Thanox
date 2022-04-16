@@ -20,10 +20,13 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -45,15 +48,14 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dev.enro.core.compose.navigationHandle
 import dev.enro.core.forward
 import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.apps.AppDetailsActivity
+import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
-import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
-import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
-import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.*
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -70,6 +72,8 @@ fun ProcessManageScreen(
         viewModel.init()
     }
 
+    val listState = rememberLazyListState()
+
     ThanoxMediumAppBarScaffold(
         title = {
             Text(
@@ -82,9 +86,22 @@ fun ProcessManageScreen(
                 toLegacyUi()
             }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_aliens_fill),
-                    contentDescription = "Clear"
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = "Search"
                 )
+            }
+        },
+        floatingActionButton = {
+            ExtendableFloatingActionButton(
+                extended = !listState.isScrollInProgress,
+                text = { Text(text = stringResource(id = R.string.feature_title_one_key_boost)) },
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_rocket_line),
+                        contentDescription = "Boost"
+                    )
+                }) {
+                viewModel.clearBgTasks()
             }
         },
         onBackPressed = onBackPressed
@@ -107,12 +124,16 @@ fun ProcessManageScreen(
                 )
             }
         ) {
+            val context = LocalContext.current
             RunningAppList(
+                lazyListState = listState,
                 state = state,
                 contentPadding = contentPadding,
-                onItemClick = {
-                    viewModel.onRunningAppStateItemSelected(it)
+                onRunningItemClick = {
                     navHandle.forward(RunningAppStateDetails(it))
+                },
+                onNotRunningItemClick = {
+                    AppDetailsActivity.start(context, it)
                 },
                 onFilterItemSelected = {
                     viewModel.onFilterItemSelected(it)
@@ -134,12 +155,15 @@ fun AppFilterDropDown(state: ProcessManageState, onFilterItemSelected: (AppSetFi
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RunningAppList(
+    lazyListState: LazyListState = rememberLazyListState(),
     state: ProcessManageState,
     contentPadding: PaddingValues,
-    onItemClick: (RunningAppState) -> Unit,
+    onRunningItemClick: (RunningAppState) -> Unit,
+    onNotRunningItemClick: (AppInfo) -> Unit,
     onFilterItemSelected: (AppSetFilterItem) -> Unit
 ) {
     LazyColumn(
+        state = lazyListState,
         contentPadding = contentPadding,
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.surface)
@@ -157,26 +181,30 @@ fun RunningAppList(
         }
 
         if (state.runningAppStates.isNotEmpty()) {
-            item { GroupHeader(false, state.runningAppStates.size) }
+            item { RunningGroupHeader(state.runningAppStates.size) }
             items(state.runningAppStates) {
-                RunningAppItem(it, onItemClick)
+                RunningAppItem(it, onRunningItemClick)
             }
         }
 
         if (state.runningAppStatesBg.isNotEmpty()) {
-            item {
-                Spacer(modifier = Modifier.size(24.dp))
-            }
-            item { GroupHeader(true, state.runningAppStatesBg.size) }
+            item { CachedGroupHeader(state.runningAppStatesBg.size) }
             items(state.runningAppStatesBg) {
-                RunningAppItem(it, onItemClick)
+                RunningAppItem(it, onRunningItemClick)
+            }
+        }
+
+        if (state.appsNotRunning.isNotEmpty()) {
+            item { NotRunningGroupHeader(state.appsNotRunning.size) }
+            items(state.appsNotRunning) {
+                NotRunningAppItem(it, onNotRunningItemClick)
             }
         }
     }
 }
 
 @Composable
-fun GroupHeader(isTotallyCached: Boolean, itemCount: Int) {
+fun CachedGroupHeader(itemCount: Int) {
     Surface(tonalElevation = 2.dp) {
         Box(
             modifier = Modifier
@@ -185,15 +213,51 @@ fun GroupHeader(isTotallyCached: Boolean, itemCount: Int) {
                 .padding(horizontal = 20.dp, vertical = 8.dp),
             contentAlignment = Alignment.CenterStart
         ) {
-            val text = if (isTotallyCached) stringResource(id = R.string.running_process_background)
-            else stringResource(id = R.string.running_process_running)
+            val text = stringResource(id = R.string.running_process_background)
             Text(
-                text = "$text $itemCount",
+                text = "$text($itemCount)",
                 style = MaterialTheme.typography.titleMedium
             )
         }
     }
+}
 
+@Composable
+fun RunningGroupHeader(itemCount: Int) {
+    Surface(tonalElevation = 2.dp) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(ColorDefaults.backgroundSurfaceColor())
+                .padding(horizontal = 20.dp, vertical = 8.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            val text = stringResource(id = R.string.running_process_running)
+            Text(
+                text = "$text($itemCount)",
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
+    }
+}
+
+@Composable
+fun NotRunningGroupHeader(itemCount: Int) {
+    Surface(tonalElevation = 2.dp) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(ColorDefaults.backgroundSurfaceColor())
+                .padding(horizontal = 20.dp, vertical = 8.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            val text = stringResource(id = R.string.running_process_not_running)
+            Text(
+                text = "$text($itemCount)",
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -236,6 +300,43 @@ fun RunningAppItem(appState: RunningAppState, onItemClick: (RunningAppState) -> 
         }
     }
 }
+
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun NotRunningAppItem(appInfo: AppInfo, onItemClick: (AppInfo) -> Unit) {
+    Box(
+        modifier = Modifier
+            .clickableWithRipple {
+                onItemClick(appInfo)
+            }
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .heightIn(min = 64.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(
+                modifier = Modifier,
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start
+            ) {
+                AppIcon(modifier = Modifier.size(38.dp), appInfo)
+                Spacer(modifier = Modifier.size(12.dp))
+                Column(verticalArrangement = Arrangement.Center) {
+                    AppLabelText(
+                        Modifier.sizeIn(maxWidth = 220.dp),
+                        appInfo.appLabel
+                    )
+                }
+            }
+        }
+    }
+}
+
 
 @Composable
 fun MemSizeBadge(appState: RunningAppState) {

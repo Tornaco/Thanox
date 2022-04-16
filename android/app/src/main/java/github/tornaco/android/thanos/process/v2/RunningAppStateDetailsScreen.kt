@@ -160,7 +160,7 @@ private fun ServiceTile(
     ) {
         Spacer(modifier = Modifier.size(12.dp))
         Row(verticalAlignment = CenterVertically) {
-            AppIcon(modifier = Modifier.size(36.dp), appInfo = runningAppState.appInfo)
+            AppIcon(modifier = Modifier.size(42.dp), appInfo = runningAppState.appInfo)
             Spacer(modifier = Modifier.size(8.dp))
             Column(verticalArrangement = Arrangement.Center) {
                 AppLabelText(appLabel = service.serviceLabel)

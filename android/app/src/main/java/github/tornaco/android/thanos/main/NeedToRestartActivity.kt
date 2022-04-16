@@ -11,13 +11,14 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PublishedWithChanges
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.capitalize
@@ -65,30 +66,39 @@ class NeedToRestartActivity : ComponentActivity() {
                 ),
             ) {
                 Box(modifier = Modifier.background(color = colorResource(id = R.color.md_red_a700))) {
-                    Column(modifier = Modifier.fillMaxSize(),
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
 
-                        Icon(modifier = Modifier.size(72.dp),
+                        Icon(
+                            modifier = Modifier.size(72.dp),
                             tint = Color.White,
-                            painter = painterResource(id = R.drawable.ic_alert_fill),
-                            contentDescription = "AlertIcon")
-                        Text(modifier = Modifier.padding(16.dp),
+                            imageVector = Icons.Filled.PublishedWithChanges,
+                            contentDescription = "AlertIcon"
+                        )
+                        Text(
+                            modifier = Modifier.padding(16.dp),
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             text = stringResource(id = R.string.message_reboot_needed),
-                            style = MaterialTheme.typography.bodyLarge)
+                            style = MaterialTheme.typography.bodyLarge
+                        )
                     }
 
-                    Row(modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(end = 32.dp, bottom = 12.dp)) {
+                    Row(
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(end = 32.dp, bottom = 12.dp)
+                    ) {
 
                         TextButton(modifier = Modifier.padding(16.dp), onClick = { finish() }) {
                             Text(
                                 color = Color.White,
                                 text = AnnotatedString(stringResource(id = R.string.reboot_later)).capitalize(),
-                                style = MaterialTheme.typography.bodyMedium)
+                                style = MaterialTheme.typography.bodyMedium
+                            )
                         }
 
                         TextButton(modifier = Modifier.padding(vertical = 16.dp),
@@ -96,7 +106,8 @@ class NeedToRestartActivity : ComponentActivity() {
                             Text(
                                 color = Color.White,
                                 text = AnnotatedString(stringResource(id = R.string.reboot_now)).capitalize(),
-                                style = MaterialTheme.typography.bodyMedium)
+                                style = MaterialTheme.typography.bodyMedium
+                            )
                         }
                     }
                 }

@@ -12,8 +12,8 @@
         <item>Dark red</item>
         <item>Dark amber</item>
         <item>Dark grey</item>
-        <item>Material you</item>
         <item>Auto</item>
+        <item>Material you</item>
     </string-array>
 
     <string-array name="themes_value">
@@ -28,8 +28,8 @@
         <item>DarkRed</item>
         <item>DarkAmber</item>
         <item>DarkGrey</item>
-        <item>MD3</item>
         <item>Auto</item>
+        <item>MD3</item>
     </string-array>
 
 </resources>

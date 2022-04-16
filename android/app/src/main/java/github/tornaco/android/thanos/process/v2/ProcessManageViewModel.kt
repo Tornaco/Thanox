@@ -66,13 +66,16 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
 
         val runningServices = thanox.activityManager.getRunningServiceLegacy(Int.MAX_VALUE)
         val runningAppProcess =
-            thanox.activityManager.runningAppProcessLegacy.filter { it.pkgList.isNotEmpty() }
+            thanox.activityManager.runningAppProcessLegacy.filter { it.pkgList != null && it.pkgList.isNotEmpty() }
         val runningPackages = runningAppProcess.map { it.pkgList[0] }.distinct()
 
         val runningAppStates = runningAppProcess.groupBy { it.pkgList[0] }.map { entry ->
             val pkgName = entry.key
             val runningProcessStates = entry.value.map { process ->
-                RunningProcessState(process = process,
+                val processPss =
+                    thanox.activityManager.getProcessPss(intArrayOf(process.pid)).sum()
+                RunningProcessState(
+                    process = process,
                     runningServices = runningServices.filter { service ->
                         service.pid == process.pid
                     }.map {
@@ -84,7 +87,9 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                             null
                         }
                         RunningService(it, label, clientLabel)
-                    })
+                    },
+                    sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
+                )
             }.sortedByDescending { it.runningServices.size }
             val isAllProcessCached =
                 entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }

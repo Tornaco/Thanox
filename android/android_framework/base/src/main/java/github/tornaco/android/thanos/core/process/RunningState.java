@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import util.PinyinComparatorUtils;
@@ -105,11 +106,11 @@ public class RunningState {
     final SparseArray<MergedItem> mOtherUserBackgroundItems = new SparseArray<MergedItem>();
 
     static class AppProcessInfo {
-        final ActivityManager.RunningAppProcessInfo info;
+        final RunningAppProcessInfoCompat info;
         boolean hasServices;
         boolean hasForegroundServices;
 
-        AppProcessInfo(ActivityManager.RunningAppProcessInfo _info) {
+        AppProcessInfo(RunningAppProcessInfoCompat _info) {
             info = _info;
         }
     }
@@ -143,9 +144,9 @@ public class RunningState {
             if (rhs.mProcess == null) return 1;
             if (DEBUG_COMPARE) Log.i(TAG, "    Label " + lhs.mProcess.mLabel
                     + " with " + rhs.mProcess.mLabel);
-            final ActivityManager.RunningAppProcessInfo lhsInfo
+            final RunningAppProcessInfoCompat lhsInfo
                     = lhs.mProcess.mRunningProcessInfo;
-            final ActivityManager.RunningAppProcessInfo rhsInfo
+            final RunningAppProcessInfoCompat rhsInfo
                     = rhs.mProcess.mRunningProcessInfo;
             final boolean lhsBg = lhsInfo.importance
                     >= ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND;
@@ -246,7 +247,7 @@ public class RunningState {
         int mLastNumDependentProcesses;
 
         int mRunningSeq;
-        public ActivityManager.RunningAppProcessInfo mRunningProcessInfo;
+        public RunningAppProcessInfoCompat mRunningProcessInfo;
 
         MergedItem mMergedItem;
 
@@ -623,7 +624,7 @@ public class RunningState {
         }
     }
 
-    private boolean isInterestingProcess(ActivityManager.RunningAppProcessInfo pi) {
+    private boolean isInterestingProcess(RunningAppProcessInfoCompat pi) {
         if ((pi.flags & ActivityManager.RunningAppProcessInfo.FLAG_CANT_SAVE_STATE) != 0) {
             return true;
         }
@@ -682,12 +683,12 @@ public class RunningState {
 
         // Retrieve list of running processes, organizing them into a sparse
         // array for easy retrieval.
-        List<ActivityManager.RunningAppProcessInfo> processes
+        List<RunningAppProcessInfoCompat> processes
                 = ThanosManager.from(context).getActivityManager().getRunningAppProcessLegacy();
         final int NP = processes != null ? processes.size() : 0;
         mTmpAppProcesses.clear();
         for (int i = 0; i < NP; i++) {
-            ActivityManager.RunningAppProcessInfo pi = processes.get(i);
+            RunningAppProcessInfoCompat pi = processes.get(i);
             mTmpAppProcesses.put(pi.pid, new AppProcessInfo(pi));
         }
 
@@ -778,7 +779,7 @@ public class RunningState {
         // Now update the map of other processes that are running (but
         // don't have services actively running inside them).
         for (int i = 0; i < NP; i++) {
-            ActivityManager.RunningAppProcessInfo pi = processes.get(i);
+            RunningAppProcessInfoCompat pi = processes.get(i);
             ProcessItem proc = mServiceProcessesByPid.get(pi.pid);
             if (proc == null) {
                 // This process is not one that is a direct container

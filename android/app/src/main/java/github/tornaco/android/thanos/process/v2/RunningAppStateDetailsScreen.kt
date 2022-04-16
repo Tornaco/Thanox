@@ -17,6 +17,7 @@
 
 package github.tornaco.android.thanos.process.v2
 
+import android.app.ActivityManager
 import android.os.SystemClock
 import android.text.format.DateUtils
 import androidx.compose.foundation.layout.*
@@ -37,10 +38,12 @@ import dev.enro.core.close
 import dev.enro.core.compose.navigationHandle
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.apps.AppDetailsActivity
+import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.*
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
+import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import kotlinx.coroutines.delay
 
@@ -97,7 +100,7 @@ private fun RunningAppStateDetailsScreen(
                 ) {
                     Column {
                         StandardSpacer()
-                        ProcessSection(runningProcessState, viewModel)
+                        ProcessSection(runningAppState.appInfo, runningProcessState, viewModel)
                         StandardSpacer()
                         ServiceSection(runningAppState, runningProcessState, viewModel)
                         StandardSpacer()
@@ -236,10 +239,13 @@ private fun ServicePopupMenu(
 
 @Composable
 private fun ProcessSection(
+    appInfo: AppInfo,
     runningProcessState: RunningProcessState,
     viewModel: RunningAppDetailViewModel
 ) {
     val popMenuExpend = remember { mutableStateOf(false) }
+    val isCached =
+        runningProcessState.process.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -264,9 +270,26 @@ private fun ProcessSection(
                 )
             }
             Spacer(modifier = Modifier.size(12.dp))
-            AppLabelText(appLabel = runningProcessState.process.processName)
-            Spacer(modifier = Modifier.size(12.dp))
 
+            Row(verticalAlignment = CenterVertically) {
+                AppIcon(modifier = Modifier.size(42.dp), appInfo = appInfo)
+                Spacer(modifier = Modifier.size(8.dp))
+                Column(verticalArrangement = Arrangement.Center) {
+                    AppLabelText(appLabel = runningProcessState.process.processName)
+                    SmallSpacer()
+                    Row(verticalAlignment = CenterVertically) {
+                        Text(
+                            text = if (isCached) stringResource(id = R.string.cached) else stringResource(
+                                id = R.string.running_process_running
+                            ),
+                            style = MaterialTheme.typography.labelMedium
+                        )
+                        SmallSpacer()
+                        MD3Badge(runningProcessState.sizeStr)
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.size(12.dp))
             ProcessPopupMenu(popMenuExpend, viewModel, runningProcessState)
         }
     }

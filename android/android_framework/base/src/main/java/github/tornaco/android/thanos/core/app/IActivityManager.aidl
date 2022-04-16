@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.app;
 import github.tornaco.android.thanos.core.app.RunningServiceInfoCompat;
 import android.content.pm.UserInfo;
 import github.tornaco.android.thanos.core.IPrinter;
+import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat;
 
 interface IActivityManager {
     String getCurrentFrontApp();
@@ -28,7 +29,7 @@ interface IActivityManager {
     String[] getRunningAppPackages();
 
     List<RunningServiceInfo> getRunningServiceLegacy(int max);
-    List<RunningAppProcessInfo> getRunningAppProcessLegacy();
+    List<RunningAppProcessInfoCompat> getRunningAppProcessLegacy();
 
     int getRunningAppsCount();
 

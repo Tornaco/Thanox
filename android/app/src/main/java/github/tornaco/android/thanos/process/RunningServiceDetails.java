@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.process.RunningState;
 
@@ -375,7 +376,7 @@ public class RunningServiceDetails extends PreferenceFragment {
         } else {
             int textid = 0;
             CharSequence label = null;
-            ActivityManager.RunningAppProcessInfo rpi = pi.mRunningProcessInfo;
+            RunningAppProcessInfoCompat rpi = pi.mRunningProcessInfo;
             final ComponentName comp = rpi.importanceReasonComponent;
             //Log.i(TAG, "Secondary proc: code=" + rpi.importanceReasonCode
             //        + " pid=" + rpi.importanceReasonPid + " comp=" + comp);

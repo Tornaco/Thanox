@@ -56,7 +56,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public java.util.List<android.app.ActivityManager.RunningAppProcessInfo> getRunningAppProcessLegacy() throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat> getRunningAppProcessLegacy() throws android.os.RemoteException
     {
       return null;
     }
@@ -621,7 +621,7 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_getRunningAppProcessLegacy:
         {
           data.enforceInterface(descriptor);
-          java.util.List<android.app.ActivityManager.RunningAppProcessInfo> _result = this.getRunningAppProcessLegacy();
+          java.util.List<github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat> _result = this.getRunningAppProcessLegacy();
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -1848,11 +1848,11 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<android.app.ActivityManager.RunningAppProcessInfo> getRunningAppProcessLegacy() throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat> getRunningAppProcessLegacy() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
-        java.util.List<android.app.ActivityManager.RunningAppProcessInfo> _result;
+        java.util.List<github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppProcessLegacy, _data, _reply, 0);
@@ -1860,7 +1860,7 @@ public interface IActivityManager extends android.os.IInterface
             return getDefaultImpl().getRunningAppProcessLegacy();
           }
           _reply.readException();
-          _result = _reply.createTypedArrayList(android.app.ActivityManager.RunningAppProcessInfo.CREATOR);
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -3894,7 +3894,7 @@ public interface IActivityManager extends android.os.IInterface
   public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcess() throws android.os.RemoteException;
   public java.lang.String[] getRunningAppPackages() throws android.os.RemoteException;
   public java.util.List<android.app.ActivityManager.RunningServiceInfo> getRunningServiceLegacy(int max) throws android.os.RemoteException;
-  public java.util.List<android.app.ActivityManager.RunningAppProcessInfo> getRunningAppProcessLegacy() throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat> getRunningAppProcessLegacy() throws android.os.RemoteException;
   public int getRunningAppsCount() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean isPackageRunning(java.lang.String pkgName) throws android.os.RemoteException;

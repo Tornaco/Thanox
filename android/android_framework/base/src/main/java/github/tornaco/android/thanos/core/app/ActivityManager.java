@@ -11,6 +11,7 @@ import com.elvishew.xlog.XLog;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.app.start.StartRecord;
+import github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.process.ProcessRecord;
 import lombok.AllArgsConstructor;
@@ -552,6 +553,16 @@ public class ActivityManager {
     @SneakyThrows
     public void unfreezeAppProcess(long pid) {
         server.unfreezeAppProcess(pid);
+    }
+
+    @SneakyThrows
+    public void updateProcessCpuUsageStats() {
+        server.updateProcessCpuUsageStats();
+    }
+
+    @SneakyThrows
+    public List<ProcessCpuUsageStats> queryProcessCpuUsageStats(long[] pids, boolean update) {
+        return server.queryProcessCpuUsageStats(pids, update);
     }
 
     public IBinder asBinder() {

@@ -54,8 +54,13 @@ fun RunningAppStateDetailsPage() {
     val navHandle = navigationHandle<RunningAppStateDetails>()
     val viewModel: RunningAppDetailViewModel = hiltViewModel()
     val state = navHandle.key.state
+    val cpuUsageStatsState by viewModel.state.collectAsState()
 
-    RunningAppStateDetailsScreen(state, viewModel) {
+    LaunchedEffect(viewModel) {
+        viewModel.startQueryCpuUsage(state)
+    }
+
+    RunningAppStateDetailsScreen(state, cpuUsageStatsState, viewModel) {
         navHandle.close()
     }
 }
@@ -64,6 +69,7 @@ fun RunningAppStateDetailsPage() {
 @OptIn(ExperimentalMaterial3Api::class)
 private fun RunningAppStateDetailsScreen(
     runningAppState: RunningAppState,
+    cpuUsageStatsState: CpuUsageStatsState,
     viewModel: RunningAppDetailViewModel,
     onBackPressed: () -> Unit
 ) {
@@ -100,7 +106,12 @@ private fun RunningAppStateDetailsScreen(
                 ) {
                     Column {
                         StandardSpacer()
-                        ProcessSection(runningAppState.appInfo, runningProcessState, viewModel)
+                        ProcessSection(
+                            runningAppState.appInfo,
+                            runningProcessState,
+                            cpuUsageStatsState,
+                            viewModel
+                        )
                         StandardSpacer()
                         ServiceSection(runningAppState, runningProcessState, viewModel)
                         StandardSpacer()
@@ -241,6 +252,7 @@ private fun ServicePopupMenu(
 private fun ProcessSection(
     appInfo: AppInfo,
     runningProcessState: RunningProcessState,
+    cpuUsageStatsState: CpuUsageStatsState,
     viewModel: RunningAppDetailViewModel
 ) {
     val popMenuExpend = remember { mutableStateOf(false) }
@@ -263,11 +275,19 @@ private fun ProcessSection(
                     text = stringResource(id = R.string.runningservicedetails_processes_title),
                     style = MaterialTheme.typography.titleLarge
                 )
-                Text(
-                    modifier = Modifier.alignByBaseline(),
-                    text = " (id: ${runningProcessState.process.pid})",
-                    style = MaterialTheme.typography.labelMedium
-                )
+
+                Row(modifier = Modifier.alignByBaseline(), verticalAlignment = CenterVertically) {
+                    Text(
+                        text = " (id: ${runningProcessState.process.pid})",
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                    SmallSpacer()
+                    MD3Badge(runningProcessState.sizeStr)
+                    cpuUsageStatsState.forPid(runningProcessState.process.pid)?.let { stats ->
+                        SmallSpacer()
+                        MD3Badge("CPU ${stats.cpuRatioString}%")
+                    }
+                }
             }
             Spacer(modifier = Modifier.size(12.dp))
 
@@ -277,16 +297,12 @@ private fun ProcessSection(
                 Column(verticalArrangement = Arrangement.Center) {
                     AppLabelText(appLabel = runningProcessState.process.processName)
                     SmallSpacer()
-                    Row(verticalAlignment = CenterVertically) {
-                        Text(
-                            text = if (isCached) stringResource(id = R.string.cached) else stringResource(
-                                id = R.string.running_process_running
-                            ),
-                            style = MaterialTheme.typography.labelMedium
-                        )
-                        SmallSpacer()
-                        MD3Badge(runningProcessState.sizeStr)
-                    }
+                    Text(
+                        text = if (isCached) stringResource(id = R.string.cached) else stringResource(
+                            id = R.string.running_process_running
+                        ),
+                        style = MaterialTheme.typography.labelMedium
+                    )
                 }
             }
             Spacer(modifier = Modifier.size(12.dp))

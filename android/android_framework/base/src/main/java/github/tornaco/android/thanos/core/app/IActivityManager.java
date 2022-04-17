@@ -405,6 +405,13 @@ public interface IActivityManager extends android.os.IInterface
     @Override public void unfreezeAppProcess(long pid) throws android.os.RemoteException
     {
     }
+    @Override public void updateProcessCpuUsageStats() throws android.os.RemoteException
+    {
+    }
+    @Override public java.util.List<github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats> queryProcessCpuUsageStats(long[] pids, boolean update) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1512,6 +1519,25 @@ public interface IActivityManager extends android.os.IInterface
           _arg0 = data.readLong();
           this.unfreezeAppProcess(_arg0);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_updateProcessCpuUsageStats:
+        {
+          data.enforceInterface(descriptor);
+          this.updateProcessCpuUsageStats();
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_queryProcessCpuUsageStats:
+        {
+          data.enforceInterface(descriptor);
+          long[] _arg0;
+          _arg0 = data.createLongArray();
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          java.util.List<github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats> _result = this.queryProcessCpuUsageStats(_arg0, _arg1);
+          reply.writeNoException();
+          reply.writeTypedList(_result);
           return true;
         }
         default:
@@ -3757,6 +3783,46 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void updateProcessCpuUsageStats() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_updateProcessCpuUsageStats, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().updateProcessCpuUsageStats();
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.util.List<github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats> queryProcessCpuUsageStats(long[] pids, boolean update) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeLongArray(pids);
+          _data.writeInt(((update)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_queryProcessCpuUsageStats, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().queryProcessCpuUsageStats(pids, update);
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -3864,6 +3930,8 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_unfreezeApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 102);
     static final int TRANSACTION_freezeAppProcess = (android.os.IBinder.FIRST_CALL_TRANSACTION + 103);
     static final int TRANSACTION_unfreezeAppProcess = (android.os.IBinder.FIRST_CALL_TRANSACTION + 104);
+    static final int TRANSACTION_updateProcessCpuUsageStats = (android.os.IBinder.FIRST_CALL_TRANSACTION + 105);
+    static final int TRANSACTION_queryProcessCpuUsageStats = (android.os.IBinder.FIRST_CALL_TRANSACTION + 106);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -4008,4 +4076,6 @@ public interface IActivityManager extends android.os.IInterface
   public void unfreezeApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public void freezeAppProcess(long pid) throws android.os.RemoteException;
   public void unfreezeAppProcess(long pid) throws android.os.RemoteException;
+  public void updateProcessCpuUsageStats() throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats> queryProcessCpuUsageStats(long[] pids, boolean update) throws android.os.RemoteException;
 }

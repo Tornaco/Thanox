@@ -4,6 +4,7 @@ import github.tornaco.android.thanos.core.app.RunningServiceInfoCompat;
 import android.content.pm.UserInfo;
 import github.tornaco.android.thanos.core.IPrinter;
 import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat;
+import github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats;
 
 interface IActivityManager {
     String getCurrentFrontApp();
@@ -179,4 +180,7 @@ interface IActivityManager {
     void unfreezeApp(in Pkg pkg);
     void freezeAppProcess(long pid);
     void unfreezeAppProcess(long pid);
+
+    void updateProcessCpuUsageStats();
+    List<ProcessCpuUsageStats> queryProcessCpuUsageStats(in long[] pids, boolean update);
 }

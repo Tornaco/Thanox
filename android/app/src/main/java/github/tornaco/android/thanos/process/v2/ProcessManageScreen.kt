@@ -126,9 +126,9 @@ fun ProcessManageScreen(
         ) {
             val context = LocalContext.current
             RunningAppList(
+                modifier = Modifier.padding(contentPadding),
                 lazyListState = listState,
                 state = state,
-                contentPadding = contentPadding,
                 onRunningItemClick = {
                     navHandle.forward(RunningAppStateDetails(it))
                 },
@@ -155,17 +155,16 @@ fun AppFilterDropDown(state: ProcessManageState, onFilterItemSelected: (AppSetFi
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RunningAppList(
+    modifier: Modifier,
     lazyListState: LazyListState = rememberLazyListState(),
     state: ProcessManageState,
-    contentPadding: PaddingValues,
     onRunningItemClick: (RunningAppState) -> Unit,
     onNotRunningItemClick: (AppInfo) -> Unit,
     onFilterItemSelected: (AppSetFilterItem) -> Unit
 ) {
     LazyColumn(
         state = lazyListState,
-        contentPadding = contentPadding,
-        modifier = Modifier
+        modifier = modifier
             .background(color = MaterialTheme.colorScheme.surface)
             .fillMaxSize()
     ) {
@@ -181,21 +180,21 @@ fun RunningAppList(
         }
 
         if (state.runningAppStates.isNotEmpty()) {
-            item { RunningGroupHeader(state.runningAppStates.size) }
+            stickyHeader { RunningGroupHeader(state.runningAppStates.size) }
             items(state.runningAppStates) {
                 RunningAppItem(it, onRunningItemClick)
             }
         }
 
         if (state.runningAppStatesBg.isNotEmpty()) {
-            item { CachedGroupHeader(state.runningAppStatesBg.size) }
+            stickyHeader { CachedGroupHeader(state.runningAppStatesBg.size) }
             items(state.runningAppStatesBg) {
                 RunningAppItem(it, onRunningItemClick)
             }
         }
 
         if (state.appsNotRunning.isNotEmpty()) {
-            item { NotRunningGroupHeader(state.appsNotRunning.size) }
+            stickyHeader { NotRunningGroupHeader(state.appsNotRunning.size) }
             items(state.appsNotRunning) {
                 NotRunningAppItem(it, onNotRunningItemClick)
             }

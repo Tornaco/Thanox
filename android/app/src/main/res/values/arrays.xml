@@ -68,4 +68,17 @@
         <item>@string/start_record_allowed</item>
         <item>@string/start_record_merged</item>
     </string-array>
+
+    <string-array name="nav_footer_tips">
+        <item>Magisk补丁和Xposed补丁只能选一个，不能同时使用，否则会出现🐛</item>
+        <item>使用之前多读读文档指南，通常能解决后面遇到的90%的问题💡</item>
+        <item>除su插件外，Thanox无需保持后台即可工作！</item>
+        <item>你可以通过应用管理，创建应用集，对你的应用进行分类</item>
+        <item>应用耗电通常是由于消耗CPU，持有唤醒锁，频繁的网络请求，Wifi，蓝牙扫描</item>
+        <item>微信等常用应用不建议开启乖巧模式，否则可能会收不到消息💩</item>
+        <item>Thanox内置一些实验功能，例如：应用双开，非root模式，这些功能还尚在开发测试</item>
+        <item>Thanox的80%代码开源在github/thanox上</item>
+        <item>Thanox部分UI使用了Google最新推出的Jetpack Compose进行开发🎉</item>
+        <item>Thanox = Thanos + Xposed，后来又支持了Magisk补丁模式（实验性）🧪</item>
+    </string-array>
 </resources>

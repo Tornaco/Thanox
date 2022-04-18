@@ -1,37 +1,29 @@
 package github.tornaco.android.thanos.dashboard;
 
+import java.util.List;
+
+import util.Consumer;
+
 public class StatusFooterInfo {
-    private String footerString1;
 
-    StatusFooterInfo(String footerString1) {
-        this.footerString1 = footerString1;
+    private final List<String> tips;
+    private int currentTipIndex;
+    private final Consumer<Integer> indexUpdateListener;
+
+    public StatusFooterInfo(List<String> tips, int lastTipIndex, Consumer<Integer> indexUpdateListener) {
+        this.tips = tips;
+        this.currentTipIndex = lastTipIndex;
+        this.indexUpdateListener = indexUpdateListener;
     }
 
-    public static StatusFooterInfoBuilder builder() {
-        return new StatusFooterInfoBuilder();
-    }
-
-    public String getFooterString1() {
-        return this.footerString1;
-    }
-
-    public static class StatusFooterInfoBuilder {
-        private String footerString1;
-
-        StatusFooterInfoBuilder() {
+    public String nextTip() {
+        if (tips.isEmpty()) return null;
+        if (currentTipIndex < 0 || currentTipIndex >= tips.size()) {
+            currentTipIndex = 0;
         }
-
-        public StatusFooterInfo.StatusFooterInfoBuilder footerString1(String footerString1) {
-            this.footerString1 = footerString1;
-            return this;
-        }
-
-        public StatusFooterInfo build() {
-            return new StatusFooterInfo(footerString1);
-        }
-
-        public String toString() {
-            return "StatusFooterInfo.StatusFooterInfoBuilder(footerString1=" + this.footerString1 + ")";
-        }
+        String tip = tips.get(currentTipIndex);
+        currentTipIndex += 1;
+        indexUpdateListener.accept(currentTipIndex);
+        return tip;
     }
 }

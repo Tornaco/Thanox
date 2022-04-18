@@ -1,5 +1,6 @@
 package github.tornaco.android.thanos.dashboard;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,14 @@ import github.tornaco.android.thanos.databinding.ItemFeatureDashboardFooterBindi
 import github.tornaco.android.thanos.databinding.ItemFeatureDashboardGroupBinding;
 import github.tornaco.android.thanos.databinding.ItemFeatureDashboardHeaderBinding;
 
+@SuppressLint("NotifyDataSetChanged")
 public class DashboardCardAdapter extends RecyclerView.Adapter<DashboardCardAdapter.Holder> {
 
     private final List<TileGroup> groups = new ArrayList<>();
 
-    private OnTileClickListener onTileClickListener;
-    private OnTileLongClickListener onTileLongClickListener;
-    private OnHeaderClickListener onHeaderClickListener;
+    private final OnTileClickListener onTileClickListener;
+    private final OnTileLongClickListener onTileLongClickListener;
+    private final OnHeaderClickListener onHeaderClickListener;
 
     public DashboardCardAdapter(OnTileClickListener onTileClickListener,
                                 OnTileLongClickListener onTileLongClickListener,
@@ -63,12 +65,7 @@ public class DashboardCardAdapter extends RecyclerView.Adapter<DashboardCardAdap
             case ViewType.HEADER:
                 HeaderHolder headerHolder = (HeaderHolder) holder;
                 headerHolder.binding.setHeaderInfo(group.getHeaderInfo());
-                headerHolder.binding.statusCard.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onHeaderClickListener.onClick();
-                    }
-                });
+                headerHolder.binding.statusCard.setOnClickListener(v -> onHeaderClickListener.onClick());
                 headerHolder.binding.executePendingBindings();
                 break;
             case ViewType.ITEM:
@@ -99,7 +96,7 @@ public class DashboardCardAdapter extends RecyclerView.Adapter<DashboardCardAdap
     }
 
     static final class GroupHolder extends Holder {
-        private ItemFeatureDashboardGroupBinding binding;
+        private final ItemFeatureDashboardGroupBinding binding;
 
         GroupHolder(@NonNull ItemFeatureDashboardGroupBinding binding) {
             super(binding.getRoot());
@@ -108,7 +105,7 @@ public class DashboardCardAdapter extends RecyclerView.Adapter<DashboardCardAdap
     }
 
     static final class HeaderHolder extends Holder {
-        private ItemFeatureDashboardHeaderBinding binding;
+        private final ItemFeatureDashboardHeaderBinding binding;
 
         HeaderHolder(@NonNull ItemFeatureDashboardHeaderBinding binding) {
             super(binding.getRoot());
@@ -117,7 +114,8 @@ public class DashboardCardAdapter extends RecyclerView.Adapter<DashboardCardAdap
     }
 
     static final class FooterHolder extends Holder {
-        private ItemFeatureDashboardFooterBinding binding;
+        private final ItemFeatureDashboardFooterBinding binding;
+
 
         FooterHolder(@NonNull ItemFeatureDashboardFooterBinding binding) {
             super(binding.getRoot());
@@ -125,7 +123,7 @@ public class DashboardCardAdapter extends RecyclerView.Adapter<DashboardCardAdap
         }
     }
 
-    class ViewType {
+    static class ViewType {
         static final int HEADER = 0X1;
         static final int ITEM = 0x2;
         static final int FOOTER = 0x3;

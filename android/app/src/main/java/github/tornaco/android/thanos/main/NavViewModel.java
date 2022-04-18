@@ -21,6 +21,7 @@ import androidx.databinding.ObservableList;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.elvishew.xlog.XLog;
+import com.google.common.collect.Lists;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,6 +47,7 @@ import github.tornaco.android.thanos.dashboard.StatusFooterInfo;
 import github.tornaco.android.thanos.dashboard.StatusHeaderInfo;
 import github.tornaco.android.thanos.dashboard.Tile;
 import github.tornaco.android.thanos.dashboard.TileGroup;
+import github.tornaco.android.thanos.pref.AppPreference;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -395,15 +397,16 @@ public class NavViewModel extends AndroidViewModel {
         if (secure.hasAtLeastOneTile()) tileGroups.add(secure);
         if (ext.hasAtLeastOneTile()) tileGroups.add(ext);
         if (guide.hasAtLeastOneTile()) tileGroups.add(guide);
-        tileGroups.add(
-                new TileGroup(
-                        StatusFooterInfo.builder()
-                                .footerString1("Powered by thanox@" + BuildProp.THANOS_VERSION_NAME)
-                                .build()));
+        tileGroups.add(new TileGroup(new StatusFooterInfo(getFooterTips(), AppPreference.getCurrentTipIndex(getApplication()),
+                integer -> AppPreference.setCurrentTipIndex(getApplication(), integer))));
 
         prebuiltFeatures.clear();
         prebuiltFeatures.addAll(tileGroups);
         isDataLoading.set(false);
+    }
+
+    private List<String> getFooterTips() {
+        return Lists.newArrayList(getApplication().getResources().getStringArray(R.array.nav_footer_tips));
     }
 
     private List<Tile> onlyEnabled(List<Tile> all) {

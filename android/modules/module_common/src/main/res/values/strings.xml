@@ -19,6 +19,7 @@
     <string name="common_retry">Retry</string>
     <string name="common_remember">Got</string>
     <string name="common_tips">Tips</string>
+    <string name="common_tips_qut">Tips:</string>
 
     <string name="common_toast_copied_to_clipboard">Copied to clipboard</string>
 

@@ -29,7 +29,7 @@ data class RunningAppState(
     val processState: List<RunningProcessState>,
     val allProcessIsCached: Boolean,
     val totalPss: Long,
-    val sizeStr: String
+    val sizeStr: String,
 ) : Parcelable {
     val serviceCount: Int get() = processState.flatMap { it.runningServices }.size
 }

@@ -183,4 +183,5 @@ interface IActivityManager {
 
     void updateProcessCpuUsageStats();
     List<ProcessCpuUsageStats> queryProcessCpuUsageStats(in long[] pids, boolean update);
+    float queryCpuUsageRatio(in long[] pids, boolean update);
 }

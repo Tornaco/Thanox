@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -36,7 +37,8 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                 runningAppStates = emptyList(),
                 runningAppStatesBg = emptyList(),
                 appFilterItems = emptyList(),
-                appsNotRunning = emptyList()
+                appsNotRunning = emptyList(),
+                cpuUsageRatioState = emptyMap()
             )
         )
     val state = _state.asStateFlow()
@@ -163,6 +165,23 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
             updateLoadingState(true)
             delay(1000)
             refresh()
+        }
+    }
+
+    suspend fun startQueryCpuUsage() {
+        XLog.w("startQueryCpuUsage...")
+        while (true) {
+            val cpuUsageMap = mutableMapOf<AppInfo, String>()
+            thanox.activityManager.updateProcessCpuUsageStats()
+            (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
+                val appInfo = it.appInfo
+                val pidsForThisApp =
+                    it.processState.map { process -> process.process.pid.toLong() }.toLongArray()
+                val cpuRatio = thanox.activityManager.queryCpuUsageRatio(pidsForThisApp, false)
+                cpuUsageMap[appInfo] = "${(cpuRatio * 100).toInt()}"
+            }
+            _state.value = _state.value.copy(cpuUsageRatioState = cpuUsageMap)
+            delay(1000)
         }
     }
 }

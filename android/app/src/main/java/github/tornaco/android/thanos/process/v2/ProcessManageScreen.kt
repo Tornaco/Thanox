@@ -51,6 +51,7 @@ import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.apps.AppDetailsActivity
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.AppLabelText
+import github.tornaco.android.thanos.module.compose.common.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
@@ -70,6 +71,7 @@ fun ProcessManageScreen(
 
     LaunchedEffect(viewModel) {
         viewModel.init()
+        viewModel.startQueryCpuUsage()
     }
 
     val listState = rememberLazyListState()
@@ -182,14 +184,14 @@ fun RunningAppList(
         if (state.runningAppStates.isNotEmpty()) {
             stickyHeader { RunningGroupHeader(state.runningAppStates.size) }
             items(state.runningAppStates) {
-                RunningAppItem(it, onRunningItemClick)
+                RunningAppItem(it, state.cpuUsageRatioState[it.appInfo], onRunningItemClick)
             }
         }
 
         if (state.runningAppStatesBg.isNotEmpty()) {
             stickyHeader { CachedGroupHeader(state.runningAppStatesBg.size) }
             items(state.runningAppStatesBg) {
-                RunningAppItem(it, onRunningItemClick)
+                RunningAppItem(it, state.cpuUsageRatioState[it.appInfo], onRunningItemClick)
             }
         }
 
@@ -261,7 +263,11 @@ fun NotRunningGroupHeader(itemCount: Int) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun RunningAppItem(appState: RunningAppState, onItemClick: (RunningAppState) -> Unit) {
+fun RunningAppItem(
+    appState: RunningAppState,
+    cpuRatio: String?,
+    onItemClick: (RunningAppState) -> Unit
+) {
     Box(
         modifier = Modifier
             .clickableWithRipple {
@@ -285,7 +291,7 @@ fun RunningAppItem(appState: RunningAppState, onItemClick: (RunningAppState) -> 
                 Spacer(modifier = Modifier.size(12.dp))
                 Column(verticalArrangement = Arrangement.Center) {
                     AppLabelText(
-                        Modifier.sizeIn(maxWidth = 220.dp),
+                        Modifier.sizeIn(maxWidth = 180.dp),
                         appState.appInfo.appLabel
                     )
                     if (appState.serviceCount == 0) {
@@ -295,7 +301,16 @@ fun RunningAppItem(appState: RunningAppState, onItemClick: (RunningAppState) -> 
                     }
                 }
             }
-            MemSizeBadge(appState)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ) {
+                MemSizeBadge(appState)
+                cpuRatio?.let {
+                    SmallSpacer()
+                    MD3Badge("CPU $it%")
+                }
+            }
         }
     }
 }

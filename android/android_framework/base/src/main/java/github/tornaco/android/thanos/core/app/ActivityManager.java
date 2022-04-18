@@ -561,6 +561,11 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    public float queryCpuUsageRatio(long[] pids, boolean update) {
+        return server.queryCpuUsageRatio(pids, update);
+    }
+
+    @SneakyThrows
     public List<ProcessCpuUsageStats> queryProcessCpuUsageStats(long[] pids, boolean update) {
         return server.queryProcessCpuUsageStats(pids, update);
     }

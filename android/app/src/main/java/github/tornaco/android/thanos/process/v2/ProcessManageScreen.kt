@@ -16,6 +16,7 @@
  */
 package github.tornaco.android.thanos.process.v2
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -75,8 +76,13 @@ fun ProcessManageScreen(
     }
 
     val listState = rememberLazyListState()
+    val searchBarState = rememberSearchBarState()
 
-    ThanoxMediumAppBarScaffold(
+    BackHandler(searchBarState.showSearchBar) {
+        searchBarState.closeSearchBar()
+    }
+
+    ThanoxSmallAppBarScaffold(
         title = {
             Text(
                 stringResource(id = R.string.feature_title_process_manage),
@@ -85,7 +91,7 @@ fun ProcessManageScreen(
         },
         actions = {
             IconButton(onClick = {
-                toLegacyUi()
+                searchBarState.showSearchBar()
             }) {
                 Icon(
                     imageVector = Icons.Filled.Search,
@@ -93,6 +99,7 @@ fun ProcessManageScreen(
                 )
             }
         },
+        searchBarState = searchBarState,
         floatingActionButton = {
             ExtendableFloatingActionButton(
                 extended = !listState.isScrollInProgress,

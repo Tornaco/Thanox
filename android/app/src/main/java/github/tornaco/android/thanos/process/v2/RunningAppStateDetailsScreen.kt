@@ -44,7 +44,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import kotlinx.coroutines.delay
 
 
@@ -74,7 +74,7 @@ private fun RunningAppStateDetailsScreen(
     onBackPressed: () -> Unit
 ) {
     val context = LocalContext.current
-    ThanoxMediumAppBarScaffold(
+    ThanoxSmallAppBarScaffold(
         title = {
             Text(
                 text = runningAppState.appInfo.appLabel,

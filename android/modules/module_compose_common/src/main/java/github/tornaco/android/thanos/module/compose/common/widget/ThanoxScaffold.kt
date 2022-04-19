@@ -17,24 +17,30 @@
 
 package github.tornaco.android.thanos.module.compose.common.widget
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetScaffoldState
 import androidx.compose.material.FabPosition
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.navigationBarsHeight
 import com.google.accompanist.insets.rememberInsetsPaddingValues
-import github.tornaco.android.thanos.module.compose.common.R
 
 
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.material.ExperimentalMaterialApi::class)
@@ -44,6 +50,7 @@ fun ThanoxBottomSheetScaffold(
     actions: @Composable (RowScope.() -> Unit) = {},
     onBackPressed: () -> Unit,
     scaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState(),
+    searchBarState: SearchBarState = rememberSearchBarState(),
     sheetContent: @Composable ColumnScope.() -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
@@ -55,7 +62,13 @@ fun ThanoxBottomSheetScaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             scaffoldState = scaffoldState,
             topBar = {
-                ThanoxMediumTopAppBar(scrollBehavior, title, actions, onBackPressed)
+                ThanoxSmallTopAppBarContainer(
+                    searchBarState,
+                    scrollBehavior,
+                    title,
+                    actions,
+                    onBackPressed
+                )
             },
             sheetContent = sheetContent,
             sheetPeekHeight = 0.dp,
@@ -68,7 +81,7 @@ fun ThanoxBottomSheetScaffold(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ThanoxMediumAppBarScaffold(
+fun ThanoxSmallAppBarScaffold(
     modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit) = {},
@@ -76,6 +89,7 @@ fun ThanoxMediumAppBarScaffold(
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     isFloatingActionButtonDocked: Boolean = false,
+    searchBarState: SearchBarState = rememberSearchBarState(),
     content: @Composable (PaddingValues) -> Unit
 ) {
     val containerColor = MaterialTheme.colorScheme.surfaceVariant
@@ -85,7 +99,13 @@ fun ThanoxMediumAppBarScaffold(
         com.google.accompanist.insets.ui.Scaffold(
             modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-                ThanoxMediumTopAppBar(scrollBehavior, title, actions, onBackPressed)
+                ThanoxSmallTopAppBarContainer(
+                    searchBarState,
+                    scrollBehavior,
+                    title,
+                    actions,
+                    onBackPressed
+                )
             },
             floatingActionButton = floatingActionButton,
             floatingActionButtonPosition = floatingActionButtonPosition,
@@ -106,7 +126,8 @@ fun ThanoxMediumAppBarScaffold(
 }
 
 @Composable
-private fun ThanoxMediumTopAppBar(
+private fun ThanoxSmallTopAppBarContainer(
+    searchBarState: SearchBarState = rememberSearchBarState(),
     scrollBehavior: TopAppBarScrollBehavior,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
@@ -121,103 +142,153 @@ private fun ThanoxMediumTopAppBar(
         scrolledContainerColor = Color.Transparent
     )
     Surface(color = backgroundColor) {
-        MediumTopAppBar(
-            colors = foregroundColors,
-            modifier = Modifier
-                .padding(
-                    rememberInsetsPaddingValues(
-                        LocalWindowInsets.current.statusBars,
-                        applyBottom = false,
-                    )
-                ),
-            title = title,
-            actions = actions,
-            navigationIcon = {
-                IconButton(onClick = {
-                    onBackPressed()
-                }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.module_common_ic_arrow_back_24dp),
-                        contentDescription = "Back"
-                    )
-                }
-            },
-            scrollBehavior = scrollBehavior
-        )
+        AnimatedVisibility(
+            visible = searchBarState.showSearchBar,
+            enter = fadeIn(), exit = fadeOut()
+        ) {
+            SearchBar(scrollBehavior, searchBarState)
+        }
+        AnimatedVisibility(
+            visible = !searchBarState.showSearchBar,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
+            ThanoxSmallTopAppBar(foregroundColors, title, actions, onBackPressed, scrollBehavior)
+        }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ThanoxSmallAppBarScaffold(
+private fun ThanoxSmallTopAppBar(
+    foregroundColors: TopAppBarColors,
     title: @Composable () -> Unit,
-    actions: @Composable (RowScope.() -> Unit) = {},
+    actions: @Composable (RowScope.() -> Unit),
     onBackPressed: () -> Unit,
-    content: @Composable (PaddingValues) -> Unit
+    scrollBehavior: TopAppBarScrollBehavior
 ) {
-    val containerColor = MaterialTheme.colorScheme.surfaceVariant
-    val contentColor = contentColorFor(containerColor)
-    CompositionLocalProvider(LocalContentColor provides contentColor) {
-
-        val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
-        com.google.accompanist.insets.ui.Scaffold(
-            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-            topBar = {
-                ThanoxSmallTopAppBar(scrollBehavior, title, actions, onBackPressed)
-            },
-            bottomBar = {
-                // We add a spacer as a bottom bar, which is the same height as
-                // the navigation bar
-                Spacer(
-                    Modifier
-                        .navigationBarsHeight()
-                        .fillMaxWidth()
+    SmallTopAppBar(
+        colors = foregroundColors,
+        modifier = Modifier
+            .padding(
+                rememberInsetsPaddingValues(
+                    LocalWindowInsets.current.statusBars,
+                    applyBottom = false,
                 )
-            }, content = {
-                content(it)
+            ),
+        title = title,
+        actions = actions,
+        navigationIcon = {
+            IconButton(onClick = {
+                onBackPressed()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back"
+                )
             }
-        )
-    }
+        },
+        scrollBehavior = scrollBehavior
+    )
 }
 
 @Composable
-fun ThanoxSmallTopAppBar(
-    scrollBehavior: TopAppBarScrollBehavior,
-    title: @Composable () -> Unit,
-    actions: @Composable (RowScope.() -> Unit),
-    onBackPressed: () -> Unit
-) {
-    val backgroundColors = TopAppBarDefaults.smallTopAppBarColors()
-    val backgroundColor = backgroundColors.containerColor(
-        scrollFraction = scrollBehavior.scrollFraction
-    ).value
+private fun SearchBar(scrollBehavior: TopAppBarScrollBehavior, searchBarState: SearchBarState) {
     val foregroundColors = TopAppBarDefaults.smallTopAppBarColors(
         containerColor = Color.Transparent,
         scrolledContainerColor = Color.Transparent
     )
-    Surface(color = backgroundColor) {
-        SmallTopAppBar(
-            colors = foregroundColors,
+    val scrollFraction = scrollBehavior.scrollFraction
+    val appBarContainerColor by foregroundColors.containerColor(scrollFraction)
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                rememberInsetsPaddingValues(
+                    LocalWindowInsets.current.statusBars,
+                    applyBottom = false,
+                )
+            )
+            .padding(horizontal = 4.dp, vertical = 4.dp),
+        color = appBarContainerColor,
+    ) {
+        val focusRequester = remember {
+            FocusRequester()
+        }
+        Row(
             modifier = Modifier
-                .padding(
-                    rememberInsetsPaddingValues(
-                        LocalWindowInsets.current.statusBars,
-                        applyBottom = false,
-                    )
-                ),
-            title = title,
-            actions = actions,
-            navigationIcon = {
-                IconButton(onClick = {
-                    onBackPressed()
-                }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.module_common_ic_arrow_back_24dp),
-                        contentDescription = "Back"
-                    )
-                }
-            },
-            scrollBehavior = scrollBehavior
-        )
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = {
+                searchBarState.closeSearchBar()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back"
+                )
+            }
+            SearchTextField(searchBarState, focusRequester)
+        }
+
+        SideEffect {
+            focusRequester.requestFocus()
+        }
+    }
+}
+
+@Composable
+private fun SearchTextField(searchBarState: SearchBarState, focusRequester: FocusRequester) {
+    TextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .focusRequester(focusRequester),
+        value = searchBarState.keyword,
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        ),
+        shape = RoundedCornerShape(6.dp),
+        maxLines = 1,
+        trailingIcon = {
+            IconButton(onClick = {
+                searchBarState.inputKeyword("")
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Close,
+                    contentDescription = "Clear keywords"
+                )
+            }
+        },
+        onValueChange = {
+            searchBarState.inputKeyword(it)
+        })
+}
+
+@Composable
+fun rememberSearchBarState(): SearchBarState {
+    return remember {
+        SearchBarState()
+    }
+}
+
+class SearchBarState {
+    private var _showSearchBar by mutableStateOf(false)
+    val showSearchBar get() = _showSearchBar
+
+    private var _keyword by mutableStateOf("")
+    val keyword get() = _keyword
+
+    fun inputKeyword(value: String) {
+        _keyword = value
+    }
+
+    fun closeSearchBar() {
+        _showSearchBar = false
+    }
+
+    fun showSearchBar() {
+        _showSearchBar = true
     }
 }

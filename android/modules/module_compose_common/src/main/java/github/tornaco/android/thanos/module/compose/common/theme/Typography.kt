@@ -22,5 +22,5 @@ import androidx.compose.runtime.Composable
 
 object TypographyDefaults {
     @Composable
-    fun appBarTitleTextStyle() = MaterialTheme.typography.titleLarge
+    fun appBarTitleTextStyle() = MaterialTheme.typography.titleMedium
 }

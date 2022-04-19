@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
@@ -63,7 +64,10 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         updateLoadingState(true)
 
         val filterPackages = state.value.selectedAppSetFilterItem?.let {
-            thanox.pkgManager.getPackageSetById(it.id, true).pkgNames
+            thanox.pkgManager.getPackageSetById(
+                it.id,
+                true
+            ).pkgNames.filterNot { pkgName -> pkgName == BuildProp.THANOS_APP_PKG_NAME }
         } ?: emptyList()
 
         val runningServices = thanox.activityManager.getRunningServiceLegacy(Int.MAX_VALUE)

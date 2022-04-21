@@ -33,8 +33,6 @@ import github.tornaco.android.thanos.dashboard.OnTileLongClickListener;
 import github.tornaco.android.thanos.dashboard.Tile;
 import github.tornaco.android.thanos.databinding.FragmentPrebuiltFeaturesBinding;
 import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
-import github.tornaco.android.thanos.pref.AppPreference;
-import github.tornaco.android.thanos.process.ProcessManageActivity;
 import github.tornaco.android.thanos.process.v2.ProcessManageActivityV2;
 
 public class PrebuiltFeatureFragment extends NavFragment
@@ -157,10 +155,6 @@ public class PrebuiltFeatureFragment extends NavFragment
                     .show();
             return;
         }
-        if (AppPreference.isProcessManagerV2Enabled(requireContext())) {
-            ProcessManageActivityV2.Starter.INSTANCE.start(requireActivity());
-        } else {
-            ProcessManageActivity.start(requireActivity());
-        }
+        ProcessManageActivityV2.Starter.INSTANCE.start(requireActivity());
     }
 }

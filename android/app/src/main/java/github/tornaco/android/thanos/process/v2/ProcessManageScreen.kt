@@ -43,8 +43,7 @@ import com.elvishew.xlog.XLog
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import dev.enro.core.compose.navigationHandle
-import dev.enro.core.forward
+import dev.enro.core.compose.registerForNavigationResult
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.apps.AppDetailsActivity
 import github.tornaco.android.thanos.core.pm.AppInfo
@@ -65,7 +64,11 @@ fun ProcessManageScreen(
 ) {
     val viewModel = hiltViewModel<ProcessManageViewModel>(LocalContext.current.requireActivity())
     val state by viewModel.state.collectAsState()
-    val navHandle = navigationHandle()
+    val navHandle = registerForNavigationResult<Boolean> { shouldUpdate ->
+        if (shouldUpdate) {
+            viewModel.refresh(0)
+        }
+    }
     XLog.d("viewModel= $viewModel by owner: ${LocalViewModelStoreOwner.current}")
 
     LaunchedEffect(viewModel) {
@@ -145,7 +148,7 @@ fun ProcessManageScreen(
                 lazyListState = listState,
                 state = state,
                 onRunningItemClick = {
-                    navHandle.forward(RunningAppStateDetails(it))
+                    navHandle.open(RunningAppStateDetails(it))
                 },
                 onNotRunningItemClick = {
                     AppDetailsActivity.start(context, it)

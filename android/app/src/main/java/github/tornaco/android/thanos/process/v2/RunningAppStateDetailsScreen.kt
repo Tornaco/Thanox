@@ -34,8 +34,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import dev.enro.core.close
 import dev.enro.core.compose.navigationHandle
+import dev.enro.core.result.closeWithResult
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.apps.AppDetailsActivity
 import github.tornaco.android.thanos.core.pm.AppInfo
@@ -61,7 +61,7 @@ fun RunningAppStateDetailsPage() {
     }
 
     RunningAppStateDetailsScreen(state, cpuUsageStatsState, viewModel) {
-        navHandle.close()
+        navHandle.closeWithResult(it)
     }
 }
 
@@ -71,7 +71,7 @@ private fun RunningAppStateDetailsScreen(
     runningAppState: RunningAppState,
     cpuUsageStatsState: CpuUsageStatsState,
     viewModel: RunningAppDetailViewModel,
-    onBackPressed: () -> Unit
+    closeScreen: (Boolean) -> Unit
 ) {
     val context = LocalContext.current
     ThanoxSmallAppBarScaffold(
@@ -91,7 +91,9 @@ private fun RunningAppStateDetailsScreen(
                 )
             }
         },
-        onBackPressed = onBackPressed
+        onBackPressed = {
+            closeScreen(false)
+        }
     ) {
         Column(
             modifier = Modifier
@@ -117,6 +119,17 @@ private fun RunningAppStateDetailsScreen(
                         StandardSpacer()
                     }
                 }
+            }
+
+            FilledTonalButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                onClick = {
+                    viewModel.forceStop(runningAppState)
+                    closeScreen(true)
+                }) {
+                Text(text = "${stringResource(id = R.string.service_stop)} ${runningAppState.appInfo.appLabel}")
             }
         }
     }

@@ -58,6 +58,7 @@ public class AppPreference {
     }
 
     @Verify
+    @Deprecated
     public static boolean isProcessManagerV2Enabled(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(PREF_KEY_PROCESS_MANAGE_UI_V2, false);

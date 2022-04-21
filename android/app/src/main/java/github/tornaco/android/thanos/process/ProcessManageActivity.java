@@ -22,7 +22,7 @@ import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.databinding.ActivityProcessManageBinding;
 import github.tornaco.android.thanos.util.ActivityUtils;
 
-
+@Deprecated
 public class ProcessManageActivity extends BaseTrustedActivity {
 
     public static void start(Context context) {

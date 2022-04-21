@@ -12,16 +12,14 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.BuildProp
+import github.tornaco.android.thanos.common.AppLabelSearchFilter
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.Collator
 import java.util.*
 import javax.inject.Inject
@@ -47,6 +45,11 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
     private val thanox by lazy { ThanosManager.from(context) }
     private val pm by lazy { context.packageManager }
 
+    private var searchKeyword: String = ""
+    private val appLabelSearchFilter = AppLabelSearchFilter()
+
+    private var searchJobs: MutableList<Job> = mutableListOf()
+
     fun init() {
         viewModelScope.launch {
             loadDefaultAppFilterItems()
@@ -54,8 +57,9 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         }
     }
 
-    fun refresh() {
-        viewModelScope.launch {
+    fun refresh(delay: Long = 0L): Job {
+        return viewModelScope.launch {
+            delay(delay)
             loadProcessStates()
         }
     }
@@ -123,11 +127,29 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
 
         _state.value = _state.value.copy(
             isLoading = false,
-            runningAppStates = runningAppStatesGroupByCached[false] ?: emptyList(),
-            runningAppStatesBg = runningAppStatesGroupByCached[true] ?: emptyList(),
-            appsNotRunning = notRunningApps
+            runningAppStates = runningAppStatesGroupByCached[false]?.filter {
+                searchFilter(it.appInfo)
+            } ?: emptyList(),
+            runningAppStatesBg = runningAppStatesGroupByCached[true]?.filter {
+                searchFilter(it.appInfo)
+            } ?: emptyList(),
+            appsNotRunning = notRunningApps.filter {
+                searchFilter(it)
+            }
         )
     }
+
+    private fun searchFilter(app: AppInfo) =
+        searchKeyword.isEmpty()
+                // Package name.
+                || searchKeyword.length > 2 && app.pkgName.contains(
+            searchKeyword,
+            ignoreCase = true
+            // Label.
+        ) || appLabelSearchFilter.matches(
+            searchKeyword,
+            app.appLabel
+        )
 
     private fun getServiceLabel(runningService: ActivityManager.RunningServiceInfo): String {
         return kotlin.runCatching {
@@ -187,5 +209,18 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
             _state.value = _state.value.copy(cpuUsageRatioState = cpuUsageMap)
             delay(1000)
         }
+    }
+
+    fun keywordChanged(keyword: String) {
+        searchKeyword = keyword
+
+        searchJobs.removeAll {
+            kotlin.runCatching {
+                it.cancel()
+                true
+            }.getOrDefault(false)
+        }
+        // Wait the user to be quiet
+        searchJobs.add(refresh(delay = 200))
     }
 }

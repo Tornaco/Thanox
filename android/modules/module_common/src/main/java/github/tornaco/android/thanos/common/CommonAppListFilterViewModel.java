@@ -136,6 +136,8 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
                     public boolean test(AppListModel listModel) throws Exception {
                         String query = queryText.get();
                         return TextUtils.isEmpty(query)
+                                // Match package name.
+                                || (query != null && query.length() > 2 && listModel.appInfo.getPkgName().contains(query))
                                 || appLabelSearchFilter.matches(query, listModel.appInfo.getAppLabel());
                     }
                 })

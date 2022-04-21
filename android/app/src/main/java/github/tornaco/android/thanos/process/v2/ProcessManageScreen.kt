@@ -29,10 +29,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -58,6 +55,7 @@ import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
 import github.tornaco.android.thanos.module.compose.common.widget.*
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -77,6 +75,14 @@ fun ProcessManageScreen(
 
     val listState = rememberLazyListState()
     val searchBarState = rememberSearchBarState()
+
+    LaunchedEffect(searchBarState) {
+        snapshotFlow { searchBarState.keyword }
+            .distinctUntilChanged()
+            .collect {
+                viewModel.keywordChanged(it)
+            }
+    }
 
     BackHandler(searchBarState.showSearchBar) {
         searchBarState.closeSearchBar()
@@ -223,7 +229,7 @@ fun CachedGroupHeader(itemCount: Int) {
         ) {
             val text = stringResource(id = R.string.running_process_background)
             Text(
-                text = "$text($itemCount)",
+                text = "$text - $itemCount",
                 style = MaterialTheme.typography.titleMedium
             )
         }
@@ -242,7 +248,7 @@ fun RunningGroupHeader(itemCount: Int) {
         ) {
             val text = stringResource(id = R.string.running_process_running)
             Text(
-                text = "$text($itemCount)",
+                text = "$text - $itemCount",
                 style = MaterialTheme.typography.titleMedium
             )
         }
@@ -261,7 +267,7 @@ fun NotRunningGroupHeader(itemCount: Int) {
         ) {
             val text = stringResource(id = R.string.running_process_not_running)
             Text(
-                text = "$text($itemCount)",
+                text = "$text - $itemCount",
                 style = MaterialTheme.typography.titleMedium
             )
         }

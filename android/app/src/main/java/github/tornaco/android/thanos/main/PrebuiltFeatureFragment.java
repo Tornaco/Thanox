@@ -149,7 +149,7 @@ public class PrebuiltFeatureFragment extends NavFragment
     }
 
     @Override
-    public void onClick() {
+    public void onHeaderClick() {
         if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
             Toast.makeText(requireActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
                     .show();

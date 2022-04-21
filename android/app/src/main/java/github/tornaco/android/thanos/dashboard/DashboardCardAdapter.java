@@ -65,7 +65,7 @@ public class DashboardCardAdapter extends RecyclerView.Adapter<DashboardCardAdap
             case ViewType.HEADER:
                 HeaderHolder headerHolder = (HeaderHolder) holder;
                 headerHolder.binding.setHeaderInfo(group.getHeaderInfo());
-                headerHolder.binding.statusCard.setOnClickListener(v -> onHeaderClickListener.onClick());
+                headerHolder.binding.statusCard.setOnClickListener(v -> onHeaderClickListener.onHeaderClick());
                 headerHolder.binding.executePendingBindings();
                 break;
             case ViewType.ITEM:

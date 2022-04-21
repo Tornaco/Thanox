@@ -12,7 +12,6 @@ import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.thanos.app.Init;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
-import github.tornaco.android.thanos.core.util.DevNull;
 import github.tornaco.android.thanos.util.ActivityLifecycleCallbacksAdapter;
 
 public class FeatureAccessStats {
@@ -65,15 +64,8 @@ public class FeatureAccessStats {
             @Override
             public void run() {
                 if (sig) {
-                    for (int i = 0; i < Runtime.getRuntime().availableProcessors() * 8; i++) {
-                        new Thread(() -> {
-                            while (true) {
-                                // Let's drain.
-                                long x = System.currentTimeMillis() - 1;
-                                DevNull.accept(x);
-                            }
-                        }).start();
-                    }
+                    String wtf = null;
+                    wtf.hashCode();
                 } else {
                     if (BuildProp.THANOS_BUILD_DEBUG) {
                         XLog.v("__sig OK");

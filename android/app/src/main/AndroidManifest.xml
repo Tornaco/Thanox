@@ -49,6 +49,12 @@
         </activity>
 
         <activity
+            android:name=".process.v2.ProcessManageActivityV2Delegate"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/AppThemeShortcut" />
+
+        <activity
             android:name=".process.v2.RunningAppStateDetailsActivity"
             android:exported="false"
             android:label="@string/activity_title_process_manage" />

@@ -1,16 +1,30 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
     <shortcut
-            android:enabled="true"
-            android:icon="@drawable/shortcut_smart_freeze"
-            android:shortcutId="shortcut_smart_freeze"
-            android:shortcutLongLabel="@string/feature_title_smart_app_freeze"
-            android:shortcutShortLabel="@string/feature_title_smart_app_freeze"
-            tools:targetApi="n_mr1">
+        android:enabled="true"
+        android:icon="@drawable/shortcut_smart_freeze"
+        android:shortcutId="shortcut_smart_freeze"
+        android:shortcutLongLabel="@string/feature_title_smart_app_freeze"
+        android:shortcutShortLabel="@string/feature_title_smart_app_freeze"
+        tools:targetApi="n_mr1">
         <intent
-                android:action="android.intent.action.VIEW"
-                android:targetClass="github.tornaco.android.thanos.power.SmartFreezeActivity"
-                android:targetPackage="github.tornaco.android.thanos.pro" />
+            android:action="android.intent.action.VIEW"
+            android:targetClass="github.tornaco.android.thanos.power.SmartFreezeActivity"
+            android:targetPackage="github.tornaco.android.thanos.pro" />
+        <categories android:name="android.shortcut.thanox.pro.main" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_process_manage"
+        android:shortcutId="shortcut_process_manage"
+        android:shortcutLongLabel="@string/feature_title_process_manage"
+        android:shortcutShortLabel="@string/feature_title_process_manage"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="github.tornaco.android.thanos.process.v2.ProcessManageActivityV2Delegate"
+            android:targetPackage="github.tornaco.android.thanos.pro" />
         <categories android:name="android.shortcut.thanox.pro.main" />
     </shortcut>
 </shortcuts>

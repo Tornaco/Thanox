@@ -27,6 +27,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
+            style="@style/CardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dashboard_card_start_margin"
@@ -34,7 +35,6 @@
             android:layout_marginEnd="@dimen/dashboard_card_start_margin"
             android:clickable="true"
             android:focusable="true"
-            style="@style/CardViewStyle"
             app:contentPadding="@dimen/common_view_margin_small">
 
             <RelativeLayout
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:text="@{nrd.isToast() ? @string/module_notification_recorder_item_type_toast : @string/module_notification_recorder_item_type_n}"
+                        android:text="@{nrd.isToast() ? @string/module_notification_recorder_item_type_toast : (nrd.isNotification() ? @string/module_notification_recorder_item_type_n : @string/module_notification_recorder_item_type_clip)}"
                         android:textAllCaps="true"
                         tools:text="@string/module_notification_recorder_item_type_n" />
                 </RelativeLayout>

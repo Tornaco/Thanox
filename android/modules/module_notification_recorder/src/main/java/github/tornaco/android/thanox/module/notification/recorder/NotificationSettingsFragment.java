@@ -7,6 +7,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
+import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.n.NotificationRecord;
 
@@ -42,6 +43,17 @@ public class NotificationSettingsFragment extends BasePreferenceFragmentCompat {
             nrn.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean checked = (boolean) newValue;
                 thanos.getNotificationManager().setNREnabled(NotificationRecord.Types.TYPE_GENERAL_NOTIFICATION, checked);
+                return true;
+            });
+        }
+
+        SwitchPreferenceCompat nrClip = findPreference(getString(R.string.key_enable_nr_clip));
+        if (thanos.isServiceInstalled() && thanos.hasFeature(BuildProp.THANOX_FEATURE_EXT_N_RECORDER_CLIPBOARD)) {
+            Objects.requireNonNull(nrClip).setVisible(true);
+            Objects.requireNonNull(nrClip).setChecked(thanos.getNotificationManager().isNREnabled(NotificationRecord.Types.TYPE_CLIPBOARD));
+            nrClip.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean checked = (boolean) newValue;
+                thanos.getNotificationManager().setNREnabled(NotificationRecord.Types.TYPE_CLIPBOARD, checked);
                 return true;
             });
         }

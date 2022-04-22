@@ -1,5 +1,6 @@
 package github.tornaco.android.thanos.core.pm;
 
+import android.os.Binder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
@@ -78,5 +79,9 @@ public class Pkg implements Parcelable {
 
     public static Pkg systemUserPkg(String pkgName) {
         return new Pkg(pkgName, UserHandle.USER_SYSTEM);
+    }
+
+    public static Pkg currentUserPkg(String pkgName) {
+        return new Pkg(pkgName, UserHandle.getUserId(Binder.getCallingUid()));
     }
 }

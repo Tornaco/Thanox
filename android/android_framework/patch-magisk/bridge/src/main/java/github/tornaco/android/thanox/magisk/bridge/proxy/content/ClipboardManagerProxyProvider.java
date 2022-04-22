@@ -13,6 +13,7 @@ import android.os.ServiceManager;
 import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
 import util.Consumer;
 import util.XposedHelpers;
@@ -59,15 +60,14 @@ public class ClipboardManagerProxyProvider {
         @Override
         public void setPrimaryClip(ClipData clip) {
             XLog.d("ClipboardManagerProxy setPrimaryClip");
-            ThanosManager.from(context).ifServiceInstalled(new Consumer<ThanosManager>() {
-                @Override
-                public void accept(ThanosManager thanosManager) {
-                    thanosManager.getAppOpsManager()
-                            .onStartOp(new Binder(),
-                                    AppOpsManager.OP_WRITE_CLIPBOARD,
-                                    Binder.getCallingUid(),
-                                    context.getPackageName());
-                }
+            ThanosManager.from(context).ifServiceInstalled(thanosManager -> {
+                thanosManager.getAppOpsManager()
+                        .onStartOp(new Binder(),
+                                AppOpsManager.OP_WRITE_CLIPBOARD,
+                                Binder.getCallingUid(),
+                                context.getPackageName());
+
+                thanosManager.getNotificationManager().onSetPrimaryClip(clip, Pkg.currentUserPkg(context.getPackageName()));
             });
             super.setPrimaryClip(clip);
         }

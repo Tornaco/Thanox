@@ -1,9 +1,10 @@
 <resources>
-    <string name="module_notification_recorder_feature_title_notification_recorder">通知记录</string>
+    <string name="module_notification_recorder_feature_title_notification_recorder">记录器</string>
     <string name="module_notification_recorder_item_app_label_and_when">%1$s %2$s</string>
     <string name="module_notification_recorder_item_no_title">无标题</string>
     <string name="module_notification_recorder_item_type_toast">吐司</string>
     <string name="module_notification_recorder_item_type_n">通知</string>
+    <string name="module_notification_recorder_item_type_clip">剪贴板</string>
     <string name="module_notification_recorder_item_no_content">这条通知没有内容</string>
     <string name="module_notification_recorder_item_uninstalled_app">已卸载应用</string>
     <string name="module_notification_recorder_total_message_count">总共%1$s条通知</string>
@@ -15,6 +16,7 @@
     <string name="pref_title_enable_toast_info">显示吐司信息</string>
     <string name="pref_title_enable_nr_n">记录状态栏通知</string>
     <string name="pref_title_enable_nr_t">记录应用吐司</string>
+    <string name="pref_title_enable_nr_clip">记录剪贴板</string>
     <string name="module_notification_recorder_reproduce">重现</string>
     <string name="module_notification_recorder_zoom">Zoom</string>
     <string name="module_notification_recorder_yesterday">昨天</string>

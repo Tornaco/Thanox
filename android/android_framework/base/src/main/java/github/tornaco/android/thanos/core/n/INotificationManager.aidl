@@ -36,4 +36,6 @@ interface INotificationManager {
     // For searching.
     List<NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, String keyword);
     List<NotificationRecord> getAllNotificationRecordsByPageAndKeywordInDateRange(int start, int limit, long startTimeMills, long endTimeMills, String keyword);
+
+    void onSetPrimaryClip(in ClipData clip, in Pkg caller);
 }

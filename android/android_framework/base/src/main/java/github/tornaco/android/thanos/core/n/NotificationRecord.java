@@ -21,19 +21,20 @@ public final class NotificationRecord implements Parcelable {
     public static class Types {
         public static final int TYPE_TOAST = 1;
         public static final int TYPE_GENERAL_NOTIFICATION = 0;
+        public static final int TYPE_CLIPBOARD = 2;
     }
 
-    private int id;
-    private String pkgName;
-    private long when;
-    private long creationTime;
-    private String title;
-    private String content;
-    private String tickerText;
-    private String channelId;
-    private String notificationId;
-    private int visibility;
-    private int type;
+    private final int id;
+    private final String pkgName;
+    private final long when;
+    private final long creationTime;
+    private final String title;
+    private final String content;
+    private final String tickerText;
+    private final String channelId;
+    private final String notificationId;
+    private final int visibility;
+    private final int type;
 
     private NotificationRecord(Parcel in) {
         id = in.readInt();
@@ -83,5 +84,9 @@ public final class NotificationRecord implements Parcelable {
 
     public boolean isToast() {
         return type == Types.TYPE_TOAST;
+    }
+
+    public boolean isNotification() {
+        return type == Types.TYPE_GENERAL_NOTIFICATION;
     }
 }

@@ -1,7 +1,10 @@
 package github.tornaco.android.thanos.core.n;
 
+import android.content.ClipData;
+
 import java.util.List;
 
+import github.tornaco.android.thanos.core.pm.Pkg;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -103,5 +106,10 @@ public class NotificationManager {
     @SneakyThrows
     public void setNREnabled(int type, boolean enabled) {
         service.setNREnabled(type, enabled);
+    }
+
+    @SneakyThrows
+    public void onSetPrimaryClip(ClipData clip, Pkg caller) {
+        service.onSetPrimaryClip(clip, caller);
     }
 }

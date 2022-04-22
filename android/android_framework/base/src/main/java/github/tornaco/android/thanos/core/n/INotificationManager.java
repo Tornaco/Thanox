@@ -84,6 +84,9 @@ public interface INotificationManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public void onSetPrimaryClip(android.content.ClipData clip, github.tornaco.android.thanos.core.pm.Pkg caller) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -339,6 +342,27 @@ public interface INotificationManager extends android.os.IInterface
           java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> _result = this.getAllNotificationRecordsByPageAndKeywordInDateRange(_arg0, _arg1, _arg2, _arg3, _arg4);
           reply.writeNoException();
           reply.writeTypedList(_result);
+          return true;
+        }
+        case TRANSACTION_onSetPrimaryClip:
+        {
+          data.enforceInterface(descriptor);
+          android.content.ClipData _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = android.content.ClipData.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          github.tornaco.android.thanos.core.pm.Pkg _arg1;
+          if ((0!=data.readInt())) {
+            _arg1 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg1 = null;
+          }
+          this.onSetPrimaryClip(_arg0, _arg1);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -797,6 +821,38 @@ public interface INotificationManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public void onSetPrimaryClip(android.content.ClipData clip, github.tornaco.android.thanos.core.pm.Pkg caller) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((clip!=null)) {
+            _data.writeInt(1);
+            clip.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          if ((caller!=null)) {
+            _data.writeInt(1);
+            caller.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_onSetPrimaryClip, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onSetPrimaryClip(clip, caller);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.n.INotificationManager sDefaultImpl;
     }
     static final int TRANSACTION_getShowingNotificationRecordsForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -820,6 +876,7 @@ public interface INotificationManager extends android.os.IInterface
     static final int TRANSACTION_setNREnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
     static final int TRANSACTION_getAllNotificationRecordsByPageAndKeyword = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
     static final int TRANSACTION_getAllNotificationRecordsByPageAndKeywordInDateRange = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
+    static final int TRANSACTION_onSetPrimaryClip = (android.os.IBinder.FIRST_CALL_TRANSACTION + 21);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.n.INotificationManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -860,4 +917,5 @@ public interface INotificationManager extends android.os.IInterface
 
   public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, java.lang.String keyword) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeywordInDateRange(int start, int limit, long startTimeMills, long endTimeMills, java.lang.String keyword) throws android.os.RemoteException;
+  public void onSetPrimaryClip(android.content.ClipData clip, github.tornaco.android.thanos.core.pm.Pkg caller) throws android.os.RemoteException;
 }

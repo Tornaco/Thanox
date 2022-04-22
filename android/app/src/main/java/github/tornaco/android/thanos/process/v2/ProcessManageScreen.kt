@@ -27,6 +27,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
+import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -99,13 +100,26 @@ fun ProcessManageScreen(
             )
         },
         actions = {
-            IconButton(onClick = {
-                searchBarState.showSearchBar()
-            }) {
-                Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = "Search"
-                )
+            Row(
+                modifier = Modifier,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(onClick = {
+                    toLegacyUi()
+                }) {
+                    Icon(
+                        imageVector = Icons.Filled.OpenInNew,
+                        contentDescription = "Back to legacy ui"
+                    )
+                }
+                IconButton(onClick = {
+                    searchBarState.showSearchBar()
+                }) {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "Search"
+                    )
+                }
             }
         },
         searchBarState = searchBarState,

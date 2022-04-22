@@ -2,17 +2,18 @@ package github.tornaco.android.thanox.module.notification.recorder.ui.stats
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.TopAppBar
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.pie.CenterText
 import github.tornaco.android.thanos.module.compose.common.widget.pie.ChartItem
 import github.tornaco.android.thanos.module.compose.common.widget.pie.Legend
@@ -32,37 +33,20 @@ fun StatsChartScreen(
     LaunchedEffect(viewModel) {
         viewModel.startLoading()
     }
-    Scaffold(topBar = {
-        AppBar(onBackPressed = onBackPressed)
-    }) {
-        StatsChartContent(
-            chartState = chartState.value,
-            onItemSelected = onItemSelected,
-            onCenterSelected = onCenterSelected
-        )
-    }
-}
-
-@Composable
-private fun AppBar(onBackPressed: () -> Unit) {
-    TopAppBar(title = {
+    ThanoxSmallAppBarScaffold(title = {
         Text(
             stringResource(id = R.string.module_notification_recorder_stats),
             style = MaterialTheme.typography.titleMedium
         )
-    },
-        backgroundColor = MaterialTheme.colorScheme.surface,
-        elevation = 0.dp,
-        navigationIcon = {
-            IconButton(onClick = {
-                onBackPressed()
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.module_common_ic_arrow_back_24dp),
-                    contentDescription = "Back"
-                )
-            }
-        })
+    }, onBackPressed = onBackPressed) {
+        Box(Modifier.padding(it)) {
+            StatsChartContent(
+                chartState = chartState.value,
+                onItemSelected = onItemSelected,
+                onCenterSelected = onCenterSelected
+            )
+        }
+    }
 }
 
 @Composable

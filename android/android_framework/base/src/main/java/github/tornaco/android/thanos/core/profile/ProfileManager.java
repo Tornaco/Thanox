@@ -1,5 +1,8 @@
 package github.tornaco.android.thanos.core.profile;
 
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
+
 import java.util.List;
 
 import lombok.SneakyThrows;
@@ -215,5 +218,20 @@ public class ProfileManager {
     @SneakyThrows
     public RuleInfo getRuleById(int ruleId) {
         return server.getRuleById(ruleId);
+    }
+
+    @SneakyThrows
+    public ParcelFileDescriptor getLogFD() {
+        return server.getLogFD();
+    }
+
+    @SneakyThrows
+    public String getLogPath() {
+        return server.getLogPath();
+    }
+
+    @SneakyThrows
+    public void clearLogs() {
+        server.clearLogs();
     }
 }

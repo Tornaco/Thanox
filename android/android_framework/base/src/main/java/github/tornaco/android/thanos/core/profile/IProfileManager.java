@@ -160,6 +160,17 @@ public interface IProfileManager extends android.os.IInterface
     @Override public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException
     {
     }
+    @Override public android.os.ParcelFileDescriptor getLogFD() throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public java.lang.String getLogPath() throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public void clearLogs() throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -636,6 +647,35 @@ public interface IProfileManager extends android.os.IInterface
           github.tornaco.android.thanos.core.IPrinter _arg0;
           _arg0 = github.tornaco.android.thanos.core.IPrinter.Stub.asInterface(data.readStrongBinder());
           this.dump(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getLogFD:
+        {
+          data.enforceInterface(descriptor);
+          android.os.ParcelFileDescriptor _result = this.getLogFD();
+          reply.writeNoException();
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
+          return true;
+        }
+        case TRANSACTION_getLogPath:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _result = this.getLogPath();
+          reply.writeNoException();
+          reply.writeString(_result);
+          return true;
+        }
+        case TRANSACTION_clearLogs:
+        {
+          data.enforceInterface(descriptor);
+          this.clearLogs();
           reply.writeNoException();
           return true;
         }
@@ -1542,6 +1582,69 @@ public interface IProfileManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public android.os.ParcelFileDescriptor getLogFD() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        android.os.ParcelFileDescriptor _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getLogFD, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getLogFD();
+          }
+          _reply.readException();
+          if ((0!=_reply.readInt())) {
+            _result = android.os.ParcelFileDescriptor.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public java.lang.String getLogPath() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getLogPath, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getLogPath();
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void clearLogs() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_clearLogs, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().clearLogs();
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.profile.IProfileManager sDefaultImpl;
     }
     static final int TRANSACTION_setAutoApplyForNewInstalledAppsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1586,6 +1689,9 @@ public interface IProfileManager extends android.os.IInterface
     static final int TRANSACTION_enableRuleByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 39);
     static final int TRANSACTION_disableRuleByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 40);
     static final int TRANSACTION_dump = (android.os.IBinder.FIRST_CALL_TRANSACTION + 41);
+    static final int TRANSACTION_getLogFD = (android.os.IBinder.FIRST_CALL_TRANSACTION + 42);
+    static final int TRANSACTION_getLogPath = (android.os.IBinder.FIRST_CALL_TRANSACTION + 43);
+    static final int TRANSACTION_clearLogs = (android.os.IBinder.FIRST_CALL_TRANSACTION + 44);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IProfileManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1645,4 +1751,7 @@ public interface IProfileManager extends android.os.IInterface
   public boolean enableRuleByName(java.lang.String ruleName) throws android.os.RemoteException;
   public boolean disableRuleByName(java.lang.String ruleName) throws android.os.RemoteException;
   public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException;
+  public android.os.ParcelFileDescriptor getLogFD() throws android.os.RemoteException;
+  public java.lang.String getLogPath() throws android.os.RemoteException;
+  public void clearLogs() throws android.os.RemoteException;
 }

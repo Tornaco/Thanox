@@ -1,47 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item
-            android:id="@+id/action_add"
-            android:icon="@drawable/module_profile_ic_add_fill"
-            android:title="@string/module_profile_rule_new"
-            app:showAsAction="always"
-            tools:ignore="AlwaysShowAction" />
+        android:id="@+id/action_add"
+        android:icon="@drawable/module_profile_ic_add_fill"
+        android:title="@string/module_profile_rule_new"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
 
     <item
-            android:id="@+id/action_view_wiki"
-            android:icon="@drawable/ic_book_open_fill"
-            android:title="@string/module_profile_rule_wiki"
-            app:showAsAction="never"
-            tools:ignore="AlwaysShowAction" />
+        android:id="@+id/action_view_wiki"
+        android:icon="@drawable/ic_book_open_fill"
+        android:title="@string/module_profile_rule_wiki"
+        app:showAsAction="never"
+        tools:ignore="AlwaysShowAction" />
 
     <item
-            android:id="@+id/action_import_from_file"
-            android:icon="@drawable/ic_download_cloud_fill"
-            android:title="@string/module_profile_rule_impor_from_file"
-            app:showAsAction="never"
-            tools:ignore="AlwaysShowAction" />
+        android:id="@+id/action_import_from_file"
+        android:icon="@drawable/ic_download_cloud_fill"
+        android:title="@string/module_profile_rule_impor_from_file"
+        app:showAsAction="never"
+        tools:ignore="AlwaysShowAction" />
 
     <item
-            android:id="@+id/action_import_examples"
-            android:icon="@drawable/ic_download_cloud_fill"
-            android:title="@string/module_profile_rule_impor_example"
-            app:showAsAction="never"
-            tools:ignore="AlwaysShowAction" />
+        android:id="@+id/action_import_examples"
+        android:icon="@drawable/ic_download_cloud_fill"
+        android:title="@string/module_profile_rule_impor_example"
+        app:showAsAction="never"
+        tools:ignore="AlwaysShowAction" />
 
     <item
-            android:id="@+id/action_global_var"
-            android:icon="@drawable/ic_download_cloud_fill"
-            android:title="@string/module_profile_title_global_var"
-            app:showAsAction="never"
-            tools:ignore="AlwaysShowAction" />
+        android:id="@+id/action_global_var"
+        android:icon="@drawable/ic_download_cloud_fill"
+        android:title="@string/module_profile_title_global_var"
+        app:showAsAction="never"
+        tools:ignore="AlwaysShowAction" />
 
     <item
-            android:id="@+id/action_rule_engine"
-            android:icon="@drawable/module_common_ic_settings_fill"
-            android:title="@string/module_profile_title_rule_engine"
-            app:showAsAction="never"
-            tools:ignore="AlwaysShowAction" />
+        android:id="@+id/action_rule_engine"
+        android:icon="@drawable/module_common_ic_settings_fill"
+        android:title="@string/module_profile_title_rule_engine"
+        app:showAsAction="never"
+        tools:ignore="AlwaysShowAction" />
+
+    <item
+        android:id="@+id/action_rule_log"
+        android:icon="@drawable/module_common_ic_settings_fill"
+        android:title="Log"
+        app:showAsAction="never"
+        tools:ignore="AlwaysShowAction" />
 </menu>

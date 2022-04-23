@@ -71,4 +71,8 @@ interface IProfileManager {
     boolean disableRuleByName(String ruleName);
 
     void dump(in IPrinter p);
+
+    ParcelFileDescriptor getLogFD();
+    String getLogPath();
+    void clearLogs();
 }

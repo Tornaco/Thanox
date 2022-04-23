@@ -19,9 +19,13 @@
             android:name=".GlobalVarEditorActivity"
             android:exported="false" />
 
-        <activity android:name=".ProfileShortcutEngineActivity"
+        <activity
+            android:name=".ProfileShortcutEngineActivity"
             android:excludeFromRecents="true"
-            android:theme="@style/AppThemeShortcut"
-            android:exported="false"/>
+            android:exported="false"
+            android:theme="@style/AppThemeShortcut" />
+        <activity
+            android:name=".LogActivity"
+            android:exported="false" />
     </application>
 </manifest>

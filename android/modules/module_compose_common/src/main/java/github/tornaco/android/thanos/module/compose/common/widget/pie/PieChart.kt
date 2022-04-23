@@ -42,9 +42,8 @@ fun <T> PieChart(
 ) {
     val stateList = chartItems.toStateList()
     var centerOffset: Offset = Offset.Zero
-    val itemAngleMap = mutableMapOf<Pair<Float, Float>, ChartItemState<T>>()
 
-    val spaceAngle = 2f
+    val spaceAngle = 1f
     val totalAngle = 360f - spaceAngle * stateList.size
 
     var animStarted by remember { mutableStateOf(false) }
@@ -52,7 +51,7 @@ fun <T> PieChart(
         targetValue = if (!animStarted) 0f else 1f,
         animationSpec = tween(1000)
     )
-    LaunchedEffect(key1 = stateList) {
+    LaunchedEffect(stateList) {
         delay(180)
         animStarted = true
     }
@@ -66,8 +65,10 @@ fun <T> PieChart(
                     onCenterSelected?.invoke()
                 } else {
                     val touchAngle = calculateAngleForPoint(centerOffset, it)
+                    XLog.d("PieChart touchAngle: $touchAngle")
                     val tappedItems =
-                        detectTappedItems(itemAngleMap, touchAngle)
+                        detectTappedItems(stateList, touchAngle)
+                    XLog.d("PieChart tappedItems: $tappedItems")
                     tappedItems.firstOrNull()?.let { tapped ->
                         onItemSelected?.invoke(tapped.chartItem)
                     }
@@ -82,42 +83,55 @@ fun <T> PieChart(
             val arcSize = Size(arcWidth, arcHeight)
 
             var startAngle = 0f
+            var startAngleDesired = 0f
 
             val isEmpty = stateList.isEmpty()
             if (isEmpty) {
-                drawArc(color = Color.LightGray,
+                drawArc(
+                    color = Color.LightGray,
                     startAngle = 0f,
                     sweepAngle = 360f,
                     useCenter = false,
                     size = arcSize,
-                    style = Stroke(width = strokeSize.toPx()))
+                    style = Stroke(width = strokeSize.toPx())
+                )
             } else {
                 stateList.forEach { state ->
                     val initialStartAngle = startAngle
                     // Item Arc
                     val sweepAngle = totalAngle * animPercent * state.percent
 
-                    drawArc(color = state.chartItem.color,
+                    val initialStartAngleDesired = startAngleDesired
+                    val sweepAngleDesired = totalAngle * state.percent
+
+                    drawArc(
+                        color = state.chartItem.color,
                         startAngle = startAngle,
                         sweepAngle = sweepAngle,
                         useCenter = false,
                         size = arcSize,
-                        style = Stroke(width = strokeSize.toPx()))
+                        style = Stroke(width = strokeSize.toPx())
+                    )
 
                     startAngle += sweepAngle
+                    startAngleDesired += sweepAngleDesired
 
                     // Space Arc
-                    drawArc(color = Color.Transparent,
+                    drawArc(
+                        color = Color.Transparent,
                         startAngle = startAngle,
                         sweepAngle = spaceAngle,
                         useCenter = false,
                         size = arcSize,
-                        style = Stroke(width = strokeSize.toPx()))
+                        style = Stroke(width = strokeSize.toPx())
+                    )
                     startAngle += spaceAngle
-
+                    startAngleDesired += spaceAngle
 
                     // Cache angle to map
-                    itemAngleMap[Pair(initialStartAngle, startAngle)] = state
+                    XLog.d("PieChart, Cache angle to map ${state.chartItem.label} ($initialStartAngleDesired, $startAngleDesired)")
+                    state.fromAngle = initialStartAngleDesired
+                    state.toAngle = startAngleDesired
                 }
             }
 
@@ -131,10 +145,12 @@ fun <T> PieChart(
                 paint.color = centerText.color.toArgb()
                 paint.typeface = Typeface.DEFAULT_BOLD
                 drawIntoCanvas {
-                    it.nativeCanvas.drawText(centerText.text,
+                    it.nativeCanvas.drawText(
+                        centerText.text,
                         center.x,
                         center.y,
-                        paint)
+                        paint
+                    )
                 }
             }
         }
@@ -143,11 +159,12 @@ fun <T> PieChart(
 }
 
 private fun <T> detectTappedItems(
-    itemAngleMap: MutableMap<Pair<Float, Float>, ChartItemState<T>>,
+    stateList: List<ChartItemState<T>>,
     touchAngle: Float,
-) = itemAngleMap.filter { itemAngle ->
-    touchAngle >= itemAngle.key.first && touchAngle <= itemAngle.key.second
-}.values
+) = stateList.filter { state ->
+    XLog.d("PieChart, detectTappedItems itemAngle: ${state.fromAngle} ${state.toAngle}")
+    touchAngle >= state.fromAngle && touchAngle <= state.toAngle
+}
 
 private fun calculateAngleForPoint(center: Offset, point: Offset): Float {
     val x = point.x
@@ -174,41 +191,54 @@ private fun calculateAngleForPoint(center: Offset, point: Offset): Float {
 @Composable
 @Preview(showSystemUi = true, showBackground = true)
 fun ChartPreview() {
-    Column(modifier = Modifier.fillMaxSize(),
+    Column(
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val items = listOf(
-            ChartItem("",
+            ChartItem(
+                "",
                 color = Color(0xFFE57600),
                 value = 1,
-                label = "Contacts"),
-            ChartItem("",
+                label = "Contacts"
+            ),
+            ChartItem(
+                "",
                 color = Color(0xFF4485AA),
                 value = 2,
-                label = "Camera"),
-            ChartItem("", color = Color(0xFF94E287),
+                label = "Camera"
+            ),
+            ChartItem(
+                "", color = Color(0xFF94E287),
                 value = 3,
-                label = "External Photos"),
-            ChartItem("", color = Color(0xFF0093E5),
+                label = "External Photos"
+            ),
+            ChartItem(
+                "", color = Color(0xFF0093E5),
                 value = 6,
-                label = "Device Id"),
-            ChartItem("", color = Color(0xFFB446C8),
+                label = "Device Id"
+            ),
+            ChartItem(
+                "", color = Color(0xFFB446C8),
                 value = 4,
-                label = "Audio recorder"),
+                label = "Audio recorder"
+            ),
             ChartItem("", color = Color(0xFF5A5AE6), value = 4, label = "Vib"),
         )
-        PieChart(modifier = Modifier
-            .background(color = Color.LightGray)
-            .fillMaxWidth(0.6f)
-            .aspectRatio(1f),
+        PieChart(
+            modifier = Modifier
+                .background(color = Color.LightGray)
+                .fillMaxWidth(0.6f)
+                .aspectRatio(1f),
             chartItems = items,
             strokeSize = 38.dp,
             centerText = CenterText(
                 text = "Thanox",
                 color = Color.DarkGray,
                 size = 24.dp
-            ))
+            )
+        )
 
         Spacer(modifier = Modifier.size(32.dp))
 

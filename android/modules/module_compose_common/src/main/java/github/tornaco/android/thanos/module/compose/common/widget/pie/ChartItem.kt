@@ -19,4 +19,7 @@ internal fun <T> List<ChartItem<T>>.toStateList(): List<ChartItemState<T>> {
 internal data class ChartItemState<T>(
     val chartItem: ChartItem<T>,
     val percent: Float,
+
+    var fromAngle: Float = 0f,
+    var toAngle: Float = 0f,
 )

@@ -48,7 +48,7 @@ fun <T> Legend(
                 Text(
                     modifier = Modifier.padding(horizontal = 8.dp),
                     text = state.chartItem.label,
-                    maxLines = 1,
+                    maxLines = 3,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurface)
             }

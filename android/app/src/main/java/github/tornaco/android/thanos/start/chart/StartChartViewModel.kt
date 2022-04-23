@@ -85,7 +85,7 @@ class StartChartViewModel @Inject constructor(@ApplicationContext val context: C
                     data = startEntry.pkg,
                     color = chartColorOfIndex(index),
                     value = startEntry.times,
-                    label = startEntry.appLabel + "\t" + startEntry.times)
+                    label = startEntry.appLabel + " - " + startEntry.times)
             }.subList(0, min(startEntryList.size, 24))
             _flow.value = _flow.value.copy(isLoading = false,
                 totalTimes = totalTimes,

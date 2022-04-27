@@ -27,6 +27,9 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
         )
     val state = _state.asStateFlow()
 
+    val appStateChanged get() = _appStateChanged
+    private var _appStateChanged: Boolean = false
+
     fun copyProcessName(state: RunningProcessState) {
         ClipboardUtils.copyToClipboard(context, "Process name", state.process.processName)
         ToastUtils.copiedToClipboard(context)
@@ -45,9 +48,13 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
         ToastUtils.copiedToClipboard(context)
     }
 
-    fun stopService(service: RunningService) {
-        thanox.activityManager.stopService(Intent().apply { component = service.running.service })
-        ToastUtils.ok(context)
+    fun stopService(service: RunningService): Boolean {
+        return thanox.activityManager.stopService(Intent().apply {
+            component = service.running.service
+            putExtra("uid", service.running.uid)
+        }).also {
+            if (it) _appStateChanged = true
+        }
     }
 
     fun forceStop(runningAppState: RunningAppState) {

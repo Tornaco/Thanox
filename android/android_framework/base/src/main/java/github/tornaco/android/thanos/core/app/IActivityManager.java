@@ -297,11 +297,13 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public void stopService(android.content.Intent intent) throws android.os.RemoteException
+    @Override public boolean stopService(android.content.Intent intent) throws android.os.RemoteException
     {
+      return false;
     }
-    @Override public void killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    @Override public boolean killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
+      return false;
     }
     @Override public boolean isSmartStandByStopServiceEnabled() throws android.os.RemoteException
     {
@@ -1247,8 +1249,9 @@ public interface IActivityManager extends android.os.IInterface
           else {
             _arg0 = null;
           }
-          this.stopService(_arg0);
+          boolean _result = this.stopService(_arg0);
           reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         case TRANSACTION_killBackgroundProcesses:
@@ -1261,8 +1264,9 @@ public interface IActivityManager extends android.os.IInterface
           else {
             _arg0 = null;
           }
-          this.killBackgroundProcesses(_arg0);
+          boolean _result = this.killBackgroundProcesses(_arg0);
           reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         case TRANSACTION_isSmartStandByStopServiceEnabled:
@@ -3192,10 +3196,11 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void stopService(android.content.Intent intent) throws android.os.RemoteException
+      @Override public boolean stopService(android.content.Intent intent) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           if ((intent!=null)) {
@@ -3207,20 +3212,22 @@ public interface IActivityManager extends android.os.IInterface
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_stopService, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().stopService(intent);
-            return;
+            return getDefaultImpl().stopService(intent);
           }
           _reply.readException();
+          _result = (0!=_reply.readInt());
         }
         finally {
           _reply.recycle();
           _data.recycle();
         }
+        return _result;
       }
-      @Override public void killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      @Override public boolean killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           if ((pkg!=null)) {
@@ -3232,15 +3239,16 @@ public interface IActivityManager extends android.os.IInterface
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_killBackgroundProcesses, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().killBackgroundProcesses(pkg);
-            return;
+            return getDefaultImpl().killBackgroundProcesses(pkg);
           }
           _reply.readException();
+          _result = (0!=_reply.readInt());
         }
         finally {
           _reply.recycle();
           _data.recycle();
         }
+        return _result;
       }
       @Override public boolean isSmartStandByStopServiceEnabled() throws android.os.RemoteException
       {
@@ -4080,8 +4088,8 @@ public interface IActivityManager extends android.os.IInterface
   public github.tornaco.android.thanos.core.app.RunningServiceInfoCompat[] getRunningAppServiceForPackage(java.lang.String pkgName) throws android.os.RemoteException;
   public boolean hasRunningServiceForPackage(java.lang.String pkgName) throws android.os.RemoteException;
   public android.content.pm.UserInfo getUserInfo(int userHandle) throws android.os.RemoteException;
-  public void stopService(android.content.Intent intent) throws android.os.RemoteException;
-  public void killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public boolean stopService(android.content.Intent intent) throws android.os.RemoteException;
+  public boolean killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean isSmartStandByStopServiceEnabled() throws android.os.RemoteException;
   public void setSmartStandByStopServiceEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isSmartStandByInactiveEnabled() throws android.os.RemoteException;

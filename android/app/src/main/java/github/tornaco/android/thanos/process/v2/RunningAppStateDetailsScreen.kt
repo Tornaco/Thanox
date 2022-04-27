@@ -20,6 +20,8 @@ package github.tornaco.android.thanos.process.v2
 import android.app.ActivityManager
 import android.os.SystemClock
 import android.text.format.DateUtils
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -45,6 +47,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.util.ToastUtils
 import kotlinx.coroutines.delay
 
 
@@ -92,7 +95,7 @@ private fun RunningAppStateDetailsScreen(
             }
         },
         onBackPressed = {
-            closeScreen(false)
+            closeScreen(viewModel.appStateChanged)
         }
     ) {
         Column(
@@ -133,6 +136,9 @@ private fun RunningAppStateDetailsScreen(
             }
         }
     }
+    BackHandler {
+        closeScreen(viewModel.appStateChanged)
+    }
 }
 
 @Composable
@@ -160,7 +166,9 @@ private fun ServiceSection(
             )
         } else {
             runningProcessState.runningServices.forEach { service ->
-                ServiceTile(runningAppState, service, viewModel)
+                AnimatedVisibility(visible = !service.isStopped) {
+                    ServiceTile(runningAppState, service, viewModel)
+                }
             }
         }
     }
@@ -232,6 +240,8 @@ private fun ServicePopupMenu(
     service: RunningService,
     viewModel: RunningAppDetailViewModel
 ) {
+    val context = LocalContext.current
+
     DropdownPopUpMenu(
         popMenuExpend,
         items = listOf(
@@ -252,7 +262,12 @@ private fun ServicePopupMenu(
                 viewModel.copyServiceName(service)
             }
             "stop" -> {
-                viewModel.stopService(service)
+                if (viewModel.stopService(service)) {
+                    ToastUtils.ok(context)
+                    service.isStopped = true
+                } else {
+                    ToastUtils.nook(context)
+                }
             }
             else -> {
 

@@ -445,8 +445,8 @@ public class ActivityManager {
     }
 
     @SneakyThrows
-    public void stopService(Intent intent) {
-        server.stopService(intent);
+    public boolean stopService(Intent intent) {
+        return server.stopService(intent);
     }
 
     @SneakyThrows

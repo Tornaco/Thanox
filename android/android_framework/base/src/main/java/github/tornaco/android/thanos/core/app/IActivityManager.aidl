@@ -132,8 +132,8 @@ interface IActivityManager {
 
     UserInfo getUserInfo(int userHandle);
 
-    void stopService(in Intent intent);
-    void killBackgroundProcesses(in Pkg pkg);
+    boolean stopService(in Intent intent);
+    boolean killBackgroundProcesses(in Pkg pkg);
 
     boolean isSmartStandByStopServiceEnabled();
     void setSmartStandByStopServiceEnabled(boolean enable);

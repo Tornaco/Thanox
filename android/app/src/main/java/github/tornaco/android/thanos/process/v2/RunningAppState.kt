@@ -19,6 +19,9 @@ package github.tornaco.android.thanos.process.v2
 
 import android.app.ActivityManager
 import android.os.Parcelable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat
 import github.tornaco.android.thanos.core.pm.AppInfo
 import kotlinx.parcelize.Parcelize
@@ -39,11 +42,15 @@ data class RunningProcessState(
     val process: RunningAppProcessInfoCompat,
     val runningServices: List<RunningService>,
     val sizeStr: String,
-) : Parcelable
+) : Parcelable {
+    var isStopped by mutableStateOf(false)
+}
 
 @Parcelize
 data class RunningService(
     val running: ActivityManager.RunningServiceInfo,
     val serviceLabel: String,
     val clientLabel: String? = null
-) : Parcelable
+) : Parcelable {
+    var isStopped by mutableStateOf(false)
+}

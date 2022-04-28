@@ -73,14 +73,6 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
             });
         }
 
-        SwitchPreferenceCompat processManagerV2Pref = findPreference(getString(R.string.key_process_manage_ui_v2));
-        processManagerV2Pref.setChecked(AppPreference.isProcessManagerV2Enabled(requireContext()));
-        processManagerV2Pref.setOnPreferenceChangeListener((preference, newValue) -> {
-            boolean checked = (boolean) newValue;
-            AppPreference.setProcessManagerV2Enabled(requireContext(), checked);
-            return true;
-        });
-
         findPreference(getString(R.string.key_rootless_support)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {

@@ -18,15 +18,10 @@
             app:persistent="false"
             app:title="@string/title_net_stats" />
 
-        <SwitchPreferenceCompat
-            app:key="@string/key_process_manage_ui_v2"
-            app:persistent="false"
-            app:title="New Process manager UI" />
-
         <Preference
             app:key="@string/key_rootless_support"
             app:persistent="false"
-            app:title="NoRoot support" />
+            app:title="Non-Root support" />
 
         <SwitchPreferenceCompat
             app:key="@string/key_enable_global_white_list"

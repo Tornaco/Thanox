@@ -35,8 +35,10 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
         ToastUtils.copiedToClipboard(context)
     }
 
-    fun stopProcess(state: RunningProcessState) {
-        ToastUtils.nook(context)
+    fun stopProcess(state: RunningProcessState): Boolean {
+        return thanox.activityManager.killProcess(state.process.pid.toLong()).also {
+            if (it) _appStateChanged = true
+        }
     }
 
     fun copyServiceName(service: RunningService) {

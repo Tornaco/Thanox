@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
+import android.os.RemoteException;
 
 import com.elvishew.xlog.XLog;
 
@@ -452,6 +453,11 @@ public class ActivityManager {
     @SneakyThrows
     public void killBackgroundProcesses(String packageName) {
         server.killBackgroundProcesses(Pkg.systemUserPkg(packageName));
+    }
+
+    @SneakyThrows
+    public boolean killProcess(long pid) {
+        return server.killProcess(pid);
     }
 
     @SneakyThrows

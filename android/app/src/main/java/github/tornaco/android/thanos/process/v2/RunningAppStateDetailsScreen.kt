@@ -105,21 +105,23 @@ private fun RunningAppStateDetailsScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             runningAppState.processState.forEach { runningProcessState ->
-                Card(
-                    modifier = Modifier.padding(16.dp),
-                    containerColor = ColorDefaults.backgroundSurfaceColor()
-                ) {
-                    Column {
-                        StandardSpacer()
-                        ProcessSection(
-                            runningAppState.appInfo,
-                            runningProcessState,
-                            cpuUsageStatsState,
-                            viewModel
-                        )
-                        StandardSpacer()
-                        ServiceSection(runningAppState, runningProcessState, viewModel)
-                        StandardSpacer()
+                AnimatedVisibility(visible = !runningProcessState.isStopped) {
+                    Card(
+                        modifier = Modifier.padding(16.dp),
+                        containerColor = ColorDefaults.backgroundSurfaceColor()
+                    ) {
+                        Column {
+                            StandardSpacer()
+                            ProcessSection(
+                                runningAppState.appInfo,
+                                runningProcessState,
+                                cpuUsageStatsState,
+                                viewModel
+                            )
+                            StandardSpacer()
+                            ServiceSection(runningAppState, runningProcessState, viewModel)
+                            StandardSpacer()
+                        }
                     }
                 }
             }
@@ -345,6 +347,7 @@ private fun ProcessPopupMenu(
     viewModel: RunningAppDetailViewModel,
     runningProcessState: RunningProcessState
 ) {
+    val context = LocalContext.current
     DropdownPopUpMenu(
         popMenuExpend,
         items = listOf(
@@ -365,7 +368,12 @@ private fun ProcessPopupMenu(
                 viewModel.copyProcessName(runningProcessState)
             }
             "stop" -> {
-                viewModel.stopProcess(runningProcessState)
+                if (viewModel.stopProcess(runningProcessState)) {
+                    ToastUtils.ok(context)
+                    runningProcessState.isStopped = true
+                } else {
+                    ToastUtils.nook(context)
+                }
             }
             else -> {
 

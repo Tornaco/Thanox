@@ -34,6 +34,10 @@
             name="listener"
             type="github.tornaco.android.thanos.common.AppItemClickListener" />
 
+        <variable
+            name="longClickListener"
+            type="github.tornaco.android.thanos.common.AppItemLongClickListener" />
+
     </data>
 
 
@@ -44,6 +48,7 @@
         android:background="?selectableItemBackground"
         android:minHeight="@dimen/list_item_height"
         android:onClick="@{() -> listener.onAppItemClick(app)}"
+        android:onLongClick="@{() -> longClickListener.onAppItemLongClick(app)}"
         android:soundEffectsEnabled="false">
 
         <github.tornaco.android.thanos.widget.checkable.CheckableImageView

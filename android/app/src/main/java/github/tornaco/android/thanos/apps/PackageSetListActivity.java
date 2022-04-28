@@ -131,16 +131,14 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
     @Override
     protected CommonAppListFilterAdapter onCreateCommonAppListFilterAdapter() {
         return new CommonAppListFilterAdapter(
-                (appInfo, itemView) -> {
+                (appInfo, itemView) -> PackageSetEditorActivity.start(PackageSetListActivity.this, (String) appInfo.getObj(), REQ_CODE_EDIT),
+                (view, model) -> {
+                    AppInfo appInfo = model.appInfo;
                     boolean isPrebuilt = appInfo.isSelected();
-                    if (isPrebuilt) {
-                        PackageSetEditorActivity.start(PackageSetListActivity.this, (String) appInfo.getObj(), REQ_CODE_EDIT);
-                    } else {
-                        QuickDropdown.show(thisActivity(), itemView, index -> {
+                    if (!isPrebuilt) {
+                        QuickDropdown.show(thisActivity(), view, index -> {
                                     switch (index) {
                                         case 0:
-                                            return getString(R.string.title_package_edit_set);
-                                        case 1:
                                             return getString(R.string.title_package_delete_set);
                                     }
                                     return null;
@@ -148,9 +146,6 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
                                 id -> {
                                     switch (id) {
                                         case 0:
-                                            PackageSetEditorActivity.start(PackageSetListActivity.this, (String) appInfo.getObj(), REQ_CODE_EDIT);
-                                            break;
-                                        case 1:
                                             ThanosManager.from(thisActivity())
                                                     .getPkgManager()
                                                     .removePackageSet((String) appInfo.getObj());

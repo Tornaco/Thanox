@@ -13,6 +13,7 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.util.function.Predicate;
 import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.module.common.databinding.ItemCommonAppBinding;
@@ -29,6 +30,8 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
   private AppItemClickListener itemClickListener;
   @Nullable
   private AppItemViewClickListener itemViewClickListener;
+  @Nullable
+  private AppItemViewLongClickListener itemViewLongClickListener;
 
   private StateImageProvider stateImageProvider;
 
@@ -40,6 +43,12 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
 
   public CommonAppListFilterAdapter(@Nullable AppItemViewClickListener itemViewClickListener) {
     this.itemViewClickListener = itemViewClickListener;
+  }
+
+  public CommonAppListFilterAdapter(@Nullable AppItemViewClickListener itemViewClickListener,
+                                    @Nullable AppItemViewLongClickListener appItemViewLongClickListener) {
+    this.itemViewClickListener = itemViewClickListener;
+    this.itemViewLongClickListener = appItemViewLongClickListener;
   }
 
   public CommonAppListFilterAdapter(
@@ -92,6 +101,12 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
             itemClickListener.onAppItemClick(appInfo);
           }
         });
+    holder.binding.setLongClickListener(appInfo -> {
+      if (itemViewLongClickListener != null) {
+        itemViewLongClickListener.onAppItemLongClick(holder.itemView, model);
+      }
+      return true;
+    });
 
     // Badge
     holder.binding.setBadge1(model.badge);

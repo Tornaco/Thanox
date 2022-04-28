@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.common.AppItemViewLongClickListener;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
@@ -188,11 +189,12 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
     @Override
     protected CommonAppListFilterAdapter onCreateCommonAppListFilterAdapter() {
         adapter = new CommonAppListFilterAdapter((appInfo, itemView) -> {
-            if (packageSet == null || packageSet.isPrebuilt()) {
-                AppDetailsActivity.start(thisActivity(), appInfo);
+            AppDetailsActivity.start(thisActivity(), appInfo);
+        }, (itemView, model) -> {
+            AppInfo appInfo = model.appInfo;
+            if (packageSet.isPrebuilt()) {
                 return;
             }
-
             QuickDropdown.show(
                     thisActivity(),
                     itemView,

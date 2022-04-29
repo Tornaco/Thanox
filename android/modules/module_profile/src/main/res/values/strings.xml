@@ -14,6 +14,9 @@
     <string name="module_profile_pref_title_rule_engine_shortcut">Create shortcut</string>
     <string name="module_profile_pref_summary_rule_engine_shortcut">Create a launcher shortcut, when this shortcut launched, thanox will publish a fact with the shortcut fact value</string>
 
+    <string name="module_profile_pref_title_rule_engine_date_time">Date &amp; Time</string>
+    <string name="module_profile_pref_summary_rule_engine_date_time">Schedule some repeating or timed tasks</string>
+
     <string name="module_profile_rule_edit_action_save">Save</string>
     <string name="module_profile_rule_edit_action_discard">Discard</string>
     <string name="module_profile_rule_edit_action_text_size_inc">Increase</string>

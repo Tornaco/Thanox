@@ -27,5 +27,8 @@
         <activity
             android:name=".LogActivity"
             android:exported="false" />
+        <activity
+            android:name=".engine.DateTimeEngineActivity"
+            android:exported="false" />
     </application>
 </manifest>

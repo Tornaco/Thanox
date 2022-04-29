@@ -105,6 +105,9 @@ object Libs {
         const val splash = "androidx.core:core-splashscreen:1.0.0-alpha01"
 
         const val paging3 = "androidx.paging:paging-runtime:3.1.0"
+
+        const val workRuntimeKtx  = "androidx.work:work-runtime-ktx:2.7.1"
+        const val workRuntime  = "androidx.work:work-runtime:2.7.1"
     }
 
     object Room {

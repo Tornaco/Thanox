@@ -75,6 +75,8 @@ dependencies {
     implementation(Libs.AndroidX.preference)
     implementation(Libs.AndroidX.swipeRefreshLayout)
     implementation(Libs.AndroidX.constraint)
+    implementation(Libs.AndroidX.workRuntime)
+    implementation(Libs.AndroidX.workRuntimeKtx)
 
     implementation(Libs.Others.guavaAndroid)
     implementation(Libs.Others.glide)

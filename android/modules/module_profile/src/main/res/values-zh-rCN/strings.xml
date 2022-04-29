@@ -13,6 +13,8 @@
 
     <string name="module_profile_pref_title_rule_engine_shortcut">从快捷方式</string>
     <string name="module_profile_pref_summary_rule_engine_shortcut">创建一个桌面快捷方式，当这个快捷方式被点击启动时，thanox会发布该快捷方式表示的事实</string>
+    <string name="module_profile_pref_title_rule_engine_date_time">时间与日期</string>
+    <string name="module_profile_pref_summary_rule_engine_date_time">安排一些重复或定时任务</string>
 
     <string name="module_profile_rule_edit_action_save">保存</string>
     <string name="module_profile_rule_edit_action_discard">取消</string>

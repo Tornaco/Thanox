@@ -15,15 +15,25 @@
  *
  */
 
-package github.tornaco.android.thanos.module.compose.common.theme
+package github.tornaco.thanos.android.module.profile.engine
 
-import androidx.compose.material3.MaterialTheme
+import android.content.Context
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.sp
+import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.util.ActivityUtils
 
-object TypographyDefaults {
+@AndroidEntryPoint
+class DateTimeEngineActivity : ComposeThemeActivity() {
+
+    object Starter {
+        fun start(context: Context?) {
+            ActivityUtils.startActivity(context, DateTimeEngineActivity::class.java)
+        }
+    }
+
     @Composable
-    fun appBarTitleTextStyle() = MaterialTheme.typography.titleMedium.copy(
-        fontSize = 18.sp
-    )
+    override fun Content() {
+        DateTimeEngineScreen()
+    }
 }

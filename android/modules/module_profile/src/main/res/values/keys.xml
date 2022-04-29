@@ -11,4 +11,8 @@
     <string name="module_profile_pref_key_rule_engine_from_shortcut" translatable="false">
         module_profile_pref_key_rule_engine_from_shortcut
     </string>
+
+    <string name="module_profile_pref_key_rule_engine_date_time" translatable="false">
+        module_profile_pref_key_rule_engine_date_time
+    </string>
 </resources>

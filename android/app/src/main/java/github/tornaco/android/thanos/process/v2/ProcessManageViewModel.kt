@@ -121,7 +121,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
 
         val notRunningApps = filterPackages.filterNot { runningPackages.contains(it) }.map {
             thanox.pkgManager.getAppInfo(it)
-        }.sortedWith { o1, o2 ->
+        }.filterNotNull().sortedWith { o1, o2 ->
             Collator.getInstance(Locale.CHINESE).compare(o1.appLabel, o2.appLabel)
         }
 

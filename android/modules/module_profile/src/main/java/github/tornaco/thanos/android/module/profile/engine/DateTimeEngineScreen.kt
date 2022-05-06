@@ -20,19 +20,18 @@ package github.tornaco.thanos.android.module.profile.engine
 import android.app.Activity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.LockClock
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.thanos.android.module.profile.R
 
 private class UIState {
+    var showCreateRegularIntervalDialog by mutableStateOf(false)
 }
 
 @Composable
@@ -42,10 +41,12 @@ fun Activity.DateTimeEngineScreen() {
     val dialogState =
         rememberDialogState(title = stringResource(id = R.string.module_profile_rule_new),
             items = listOf(
-                SingleChoiceItem(id = "", icon = Icons.Filled.Schedule, label = "Time of a day"),
-                SingleChoiceItem(id = "", icon = Icons.Filled.Timer, label = "Regular interval"),
+                SingleChoiceItem(id = "", icon = Icons.Filled.Schedule, label = "Time of a day (coming soon)"),
+                SingleChoiceItem(id = "", icon = Icons.Filled.Timer, label = "Regular interval (coming soon)"),
             ),
-            onItemClick = {})
+            onItemClick = {
+                uiState.showCreateRegularIntervalDialog = true
+            })
 
     ThanoxSmallAppBarScaffold(title = {
         Text(
@@ -72,6 +73,15 @@ fun Activity.DateTimeEngineScreen() {
         SingleChoiceDialog(state = dialogState)
     }
 }
+
+
+@Composable
+private fun CreateRegularIntervalDialog(uiState: UIState) {
+    if (uiState.showCreateRegularIntervalDialog) {
+        // TODO Impl.
+    }
+}
+
 
 @Composable
 private fun rememberUIState(): UIState {

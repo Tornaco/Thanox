@@ -82,6 +82,7 @@ fun SingleChoiceDialog(state: SingleChoiceDialogState) {
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(8.dp))
                                 .clickableWithRipple {
+                                    state.dismiss()
                                     state.onItemClick(it.id)
                                 }
                                 .padding(16.dp),

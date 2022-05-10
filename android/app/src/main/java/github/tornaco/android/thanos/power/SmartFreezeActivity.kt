@@ -3,6 +3,8 @@ package github.tornaco.android.thanos.power
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -14,6 +16,7 @@ import github.tornaco.android.thanos.databinding.SmartFreezeLayoutBottomNavBindi
 import github.tornaco.android.thanos.pref.AppPreference
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
+import github.tornaco.android.thanos.util.pleaseReadCarefully
 
 class SmartFreezeActivity : ThemeActivity() {
     private val viewModel: SmartFreezeBottomNavViewModel by viewModels()
@@ -96,7 +99,7 @@ class SmartFreezeActivity : ThemeActivity() {
         if (AppPreference.isFeatureNoticeAccepted(this, "SmartFreeze")) {
             return
         }
-        MaterialAlertDialogBuilder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle(R.string.feature_title_smart_app_freeze)
             .setMessage(R.string.feature_desc_smart_app_freeze)
             .setCancelable(false)
@@ -112,6 +115,8 @@ class SmartFreezeActivity : ThemeActivity() {
                 )
             }
             .show()
+
+        pleaseReadCarefully(Handler(Looper.getMainLooper()), dialog, 18)
     }
 }
 

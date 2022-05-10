@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,6 +39,7 @@ import github.tornaco.android.thanos.settings.ExportPatchUi;
 import github.tornaco.android.thanos.settings.PowerSettingsActivity;
 import github.tornaco.android.thanos.settings.SettingsDashboardActivity;
 import github.tornaco.android.thanos.util.BrowserUtils;
+import github.tornaco.android.thanos.util.DialogExtKt;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
@@ -155,7 +158,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
         dialog.setNeutral(getString(R.string.title_remember));
         dialog.setOnNegative(this::finishAffinity);
         dialog.setOnNeutral(() -> AppPreference.setFirstRun(getApplication(), false));
-        dialog.show();
+        DialogExtKt.pleaseReadCarefully(new Handler(Looper.getMainLooper()), dialog.show(), 20);
     }
 
     @Verify

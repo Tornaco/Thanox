@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -64,8 +65,8 @@ public class ModernAlertDialog {
         this.cancelable = cancelable;
     }
 
-    public void show() {
-        new MaterialAlertDialogBuilder(context)
+    public AlertDialog show() {
+        return new MaterialAlertDialogBuilder(context)
                 .setTitle(dialogTitle)
                 .setMessage(dialogMessage)
                 .setPositiveButton(positive, (dialog, which) -> {

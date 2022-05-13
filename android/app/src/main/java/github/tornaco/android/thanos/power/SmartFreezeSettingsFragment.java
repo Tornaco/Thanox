@@ -14,6 +14,7 @@ import java.util.Objects;
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
+import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.widget.ModernSingleChoiceDialog;
@@ -59,7 +60,7 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
         hidePackagePref.setEnabled(!thanos.getPkgManager().isFreezePkgWithSuspendEnabled());
         hidePackagePref.setOnPreferenceChangeListener((preference, newValue) -> {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                Toast.makeText(getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                 return false;
             }
             boolean checked = (boolean) newValue;

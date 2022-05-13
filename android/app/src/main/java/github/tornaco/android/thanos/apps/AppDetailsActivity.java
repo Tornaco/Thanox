@@ -23,6 +23,7 @@ import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
+import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
@@ -124,7 +125,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
     @Verify
     private void requestApplyTemplateSelection() {
         if (ThanosApp.isPrc() && !DonateSettings.isActivated(thisActivity())) {
-            Toast.makeText(thisActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+            DonateIntroDialogKt.showDonateIntroDialog(thisActivity());
             return;
         }
 

@@ -70,6 +70,7 @@
     </string-array>
 
     <string-array name="nav_footer_tips">
+        <item>Thanox可以无限免费试用。先试用，觉得可用、满意再购买高级功能~</item>
         <item>Magisk补丁和Xposed补丁只能选一个，不能同时使用，否则会出现🐛</item>
         <item>使用之前多读读文档指南，通常能解决后面遇到的90%的问题💡</item>
         <item>除su插件外，Thanox无需保持后台即可工作！</item>

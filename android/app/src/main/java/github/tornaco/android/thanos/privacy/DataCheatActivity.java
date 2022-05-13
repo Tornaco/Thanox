@@ -16,6 +16,7 @@ import java.util.List;
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
+import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter;
@@ -135,11 +136,7 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
         }
         if (R.id.action_cheat_record == item.getItemId()) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getApplicationContext())) {
-                Toast.makeText(
-                        getApplicationContext(),
-                        R.string.module_donate_donated_available,
-                        Toast.LENGTH_SHORT)
-                        .show();
+                DonateIntroDialogKt.showDonateIntroDialog(thisActivity());
                 return false;
             }
             CheatRecordViewerActivity.start(this);

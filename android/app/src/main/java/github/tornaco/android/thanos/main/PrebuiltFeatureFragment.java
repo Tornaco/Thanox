@@ -23,6 +23,7 @@ import java.util.Objects;
 
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
+import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.T;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
@@ -151,8 +152,7 @@ public class PrebuiltFeatureFragment extends NavFragment
     @Override
     public void onHeaderClick() {
         if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
-            Toast.makeText(requireActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                    .show();
+            DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
             return;
         }
         ProcessManageActivityV2.Starter.INSTANCE.start(requireActivity());

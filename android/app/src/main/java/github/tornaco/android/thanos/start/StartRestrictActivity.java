@@ -3,7 +3,6 @@ package github.tornaco.android.thanos.start;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +10,7 @@ import androidx.annotation.Nullable;
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
+import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
@@ -69,14 +69,14 @@ public class StartRestrictActivity extends CommonFuncToggleAppListFilterActivity
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_view_start_restrict_chart == item.getItemId()) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(thisActivity())) {
-                Toast.makeText(thisActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                DonateIntroDialogKt.showDonateIntroDialog(thisActivity());
                 return false;
             }
             ComposeStartChartActivity.Starter.INSTANCE.start(this);
         }
         if (R.id.action_start_rule == item.getItemId()) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(thisActivity())) {
-                Toast.makeText(thisActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                DonateIntroDialogKt.showDonateIntroDialog(thisActivity());
                 return false;
             }
             StartRuleActivity.start(this);

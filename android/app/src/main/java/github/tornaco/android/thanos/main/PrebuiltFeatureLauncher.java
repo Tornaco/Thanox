@@ -17,6 +17,7 @@
 
 package github.tornaco.android.thanos.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import github.tornaco.android.plugin.push.message.delegate.WechatPushDeleteMainA
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
+import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.apps.SuggestedAppsActivity;
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -51,12 +53,12 @@ import github.tornaco.thanos.android.ops.OpsBottomNavActivity;
 import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity;
 
 public class PrebuiltFeatureLauncher {
-    private final Context context;
+    private final Activity context;
     @Nullable
     private final NavViewModel navViewModel;
     private final Handler uiHandler;
 
-    public PrebuiltFeatureLauncher(Context context,
+    public PrebuiltFeatureLauncher(Activity context,
                                    @Nullable NavViewModel navViewModel,
                                    Handler uiHandler) {
         this.context = context;
@@ -69,9 +71,7 @@ public class PrebuiltFeatureLauncher {
         ThanosManager thanosManager = ThanosManager.from(context);
         if (featureId == PrebuiltFeatureIds.ID_ONE_KEY_CLEAR && navViewModel != null) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(context)) {
-                Toast.makeText(
-                        context, R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
+                DonateIntroDialogKt.showDonateIntroDialog(context);
                 return;
             }
             navViewModel.cleanUpBackgroundTasks();
@@ -91,9 +91,7 @@ public class PrebuiltFeatureLauncher {
             NotificationRecordActivity.Starter.start(context);
         } else if (featureId == PrebuiltFeatureIds.ID_TRAMPOLINE) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(context)) {
-                Toast.makeText(
-                        context, R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
+                DonateIntroDialogKt.showDonateIntroDialog(context);
                 // Disable this feature, since it is free to use before.
                 thanosManager.ifServiceInstalled(manager -> {
                     XLog.w("Disabling ActivityTrampoline.");
@@ -106,9 +104,7 @@ public class PrebuiltFeatureLauncher {
             RuleListActivity.start(context);
         } else if (featureId == PrebuiltFeatureIds.ID_SMART_STANDBY) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(context)) {
-                Toast.makeText(
-                        context, R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
+                DonateIntroDialogKt.showDonateIntroDialog(context);
                 return;
             }
             SmartStandbyV2Activity.start(context);
@@ -124,9 +120,7 @@ public class PrebuiltFeatureLauncher {
             RemindOpsActivity.start(context);
         } else if (featureId == PrebuiltFeatureIds.ID_APP_LOCK) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(context)) {
-                Toast.makeText(
-                        context, R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
+                DonateIntroDialogKt.showDonateIntroDialog(context);
                 return;
             }
             LockerStartActivity.start(context);
@@ -140,9 +134,7 @@ public class PrebuiltFeatureLauncher {
             BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME);
         } else if (featureId == PrebuiltFeatureIds.ID_WECHAT_PUSH) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(context)) {
-                Toast.makeText(
-                        context, R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
+                DonateIntroDialogKt.showDonateIntroDialog(context);
                 return;
             }
             WechatPushDeleteMainActivity.start(context);

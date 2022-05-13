@@ -28,6 +28,7 @@ import github.tornaco.android.nitro.framework.Nitro;
 import github.tornaco.android.nitro.framework.host.manager.data.model.InstalledPlugin;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
+import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.Optional;
@@ -74,7 +75,7 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
 
         pluginBinding.fab.setOnClickListener(v -> {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getContext())) {
-                Toast.makeText(getContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                 return;
             }
             toggleFabMenu();
@@ -82,7 +83,7 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
 
         pluginBinding.fabFile.setOnClickListener(v -> {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getContext())) {
-                Toast.makeText(getContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                 return;
             }
             PluginFragmentPermissionRequester.installPluginRequestedChecked(PluginFragment.this);
@@ -90,7 +91,7 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
 
         pluginBinding.fabMarket.setOnClickListener(v -> {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getContext())) {
-                Toast.makeText(getContext(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT).show();
+
                 return;
             }
             PluginMarketActivity.start(getActivity());

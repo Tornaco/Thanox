@@ -28,6 +28,7 @@ import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
+import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.core.app.ActivityManager;
@@ -176,9 +177,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         preference.setOnPreferenceChangeListener(
                 (preference12, newValue) -> {
                     if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                        Toast.makeText(
-                                getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                                .show();
+                        DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                         return false;
                     }
                     thanos
@@ -194,9 +193,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         preference.setOnPreferenceChangeListener(
                 (preference1, newValue) -> {
                     if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                        Toast.makeText(
-                                getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                                .show();
+                        DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                         return false;
                     }
                     thanos
@@ -213,9 +210,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 .setOnPreferenceClickListener(
                         preference1 -> {
                             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                                Toast.makeText(
-                                        getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                                        .show();
+                                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                                 return false;
                             }
                             ActivityListActivity.start(requireActivity(), appInfo);
@@ -229,9 +224,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 .setOnPreferenceClickListener(
                         preference1 -> {
                             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                                Toast.makeText(
-                                        getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                                        .show();
+                                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                                 return false;
                             }
                             ReceiverListActivity.start(requireActivity(), appInfo);
@@ -243,9 +236,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 .setOnPreferenceClickListener(
                         preference1 -> {
                             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                                Toast.makeText(
-                                        getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                                        .show();
+                                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                                 return false;
                             }
                             ProviderListActivity.start(requireActivity(), appInfo);
@@ -260,9 +251,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 .setOnPreferenceClickListener(
                         preference1 -> {
                             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                                Toast.makeText(
-                                        getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                                        .show();
+                                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                                 return false;
                             }
                             ServiceListActivity.start(requireActivity(), appInfo);
@@ -343,9 +332,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         pref.setOnPreferenceChangeListener(
                 (preference, newValue) -> {
                     if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                        Toast.makeText(
-                                getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                                .show();
+                        DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                         return false;
                     }
                     int mode = Integer.parseInt(String.valueOf(newValue));
@@ -660,8 +647,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         @Override
         void setTo(boolean value) {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                Toast.makeText(getActivity(), R.string.module_donate_donated_available, Toast.LENGTH_SHORT)
-                        .show();
+                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                 return;
             }
             ThanosManager.from(getContext())

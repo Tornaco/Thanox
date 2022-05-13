@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CategoryIndex;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
@@ -24,7 +25,7 @@ public class DemoActivity extends CommonAppListFilterActivity {
     @Override
     protected void onSwitchBarCheckChanged(com.google.android.material.switchmaterial.SwitchMaterial switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
-        startActivity(new Intent(this, DemoWithSwitchActivity.class));
+        DonateIntroDialogKt.showDonateIntroDialog(thisActivity());
     }
 
     @NonNull

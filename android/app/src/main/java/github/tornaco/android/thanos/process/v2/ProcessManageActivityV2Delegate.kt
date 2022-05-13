@@ -20,19 +20,16 @@ package github.tornaco.android.thanos.process.v2
 
 import android.app.Activity
 import android.os.Bundle
-import android.widget.Toast
-import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.ThanosApp.Companion.isPrc
 import github.tornaco.android.thanos.app.donate.DonateSettings
+import github.tornaco.android.thanos.app.donate.showDonateIntroDialog
 
 class ProcessManageActivityV2Delegate : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (isPrc() && !DonateSettings.isActivated(this)) {
-            Toast.makeText(
-                this, R.string.module_donate_donated_available, Toast.LENGTH_SHORT
-            ).show()
+            showDonateIntroDialog(this)
             return
         }
 

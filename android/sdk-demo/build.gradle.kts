@@ -113,8 +113,10 @@ dependencies {
     implementation(Libs.AndroidX.swipeRefreshLayout)
 
     implementation(project(":modules:module_common"))
+    implementation(project(":modules:module_donate"))
     implementation(project(":android_framework:base"))
 
+    implementation(Libs.Others.listenablefutureEmpty)
 
     testImplementation(tornaco.project.android.thanox.Tests.junit)
     testImplementation(tornaco.project.android.thanox.Tests.junitKotlin)

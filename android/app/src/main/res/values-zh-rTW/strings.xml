@@ -7,7 +7,7 @@
 
     <string name="status_active">已激活</string>
     <string name="status_not_active">未激活</string>
-    <string name="message_active_needed">Thanox支持Xposed和Magisk兩種激活方式。\n\n對於Xposed用戶，在Xposed模塊頁面勾選Thanox即可。\n\n對於Magisk用戶，你可以將下載的Thanox安裝包文件拓展名，由.apk修改為.zip後通過MagiskManager刷入。\n如果你找不到Thanox安裝包，你可以点击设置，关于，补丁状态按钮，導出Magisk模塊的zip包</string>
+    <string name="message_active_needed">Thanox支持Xposed和Magisk兩種激活方式（二选一，不可同时使用）。\n\n對於Xposed用戶，在Xposed模塊頁面勾選Thanox即可。\n\n對於Magisk用戶，你可以將下載的Thanox安裝包文件拓展名，由.apk修改為.zip後通過MagiskManager刷入。\n如果你找不到Thanox安裝包，你可以点击设置，关于，补丁状态按钮，導出Magisk模塊的zip包</string>
     <string name="status_need_reboot">請重啟</string>
     <string name="title_framework_error">核心初始化錯誤</string>
     <string name="message_framework_error">Thanox遇到兼容性錯誤，可能會影響某些功能，請把/data/system/thanos_xxx/log下面的日誌反饋給開發者</string>

@@ -49,6 +49,9 @@ object T {
             "github.tornaco.practice.honeycomb.locker.action.VERIFY"
         const val ACTION_LOCKER_VERIFY_EXTRA_PACKAGE = "pkg"
         const val ACTION_LOCKER_VERIFY_EXTRA_REQUEST_CODE = "request_code"
+
+
+        const val ACTION_GET_PATCH_SOURCES_PREFIX = "thanox.a.get.patch.sources."
     }
 
     object Tags {

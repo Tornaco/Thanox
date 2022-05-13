@@ -35,6 +35,7 @@ import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.IThanosProvider;
+import github.tornaco.android.thanos.core.PatchSources;
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
 import github.tornaco.android.thanos.services.BootStrap;
 
@@ -55,7 +56,7 @@ public class ThanosProviderService extends IThanosProvider.Stub {
         XLog.w("installThanosService, currentApplication: " + BootStrap.currentApplication());
         long ident = Binder.clearCallingIdentity();
         try {
-            BootStrap.main("Shizuku", new String[0]);
+            BootStrap.main(PatchSources.Shizuku.name(), new String[0]);
             BootStrap.start(new ShellProcessContext(BootStrap.currentApplication()));
             BootStrap.ready();
         } catch (Throwable e) {

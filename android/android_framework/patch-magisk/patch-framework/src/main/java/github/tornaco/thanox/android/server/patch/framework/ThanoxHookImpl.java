@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import github.tornaco.android.thanos.BuildProp;
+import github.tornaco.android.thanos.core.PatchSources;
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.services.BootStrap;
 
@@ -75,7 +76,7 @@ public class ThanoxHookImpl implements IThanoxHook {
                     XLog.w("ActivityThread.classLoader= " + classLoader);
 
                     if (context != null) {
-                        BootStrap.main("Magisk", FEATURES.toArray(new String[0]));
+                        BootStrap.main(PatchSources.Magisk.name(), FEATURES.toArray(new String[0]));
                         BootStrap.start(context);
                         BootStrap.ready();
                         SystemServerHooks.install(classLoader);

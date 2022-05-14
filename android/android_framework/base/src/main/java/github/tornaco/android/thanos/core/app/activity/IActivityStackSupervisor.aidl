@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.core.app.activity;
 
 import github.tornaco.android.thanos.core.app.activity.IVerifyCallback;
 import github.tornaco.android.thanos.core.app.activity.ITopPackageChangeListener;
+import github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener;
 import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
 import github.tornaco.android.thanos.core.IPrinter;
 
@@ -54,4 +55,7 @@ interface IActivityStackSupervisor {
     void reportOnActivityResumed(in IBinder token);
 
     void dump(in IPrinter p);
+
+    void registerActivityLifecycleListener(in IActivityLifecycleListener listener);
+    void unRegisterActivityLifecycleListener(in IActivityLifecycleListener listener);
 }

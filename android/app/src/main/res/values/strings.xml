@@ -67,7 +67,8 @@
 
     <string name="boost_status_running_apps">&#160;apps is running</string>
     <string name="boost_status_blocked_start_count">Blocked %s app startup requests</string>
-    <string name="boost_status_mem_usage_percent">Available memory %s</string>
+    <string name="boost_status_mem_usage_percent">Memory %s</string>
+    <string name="boost_status_swap_usage_percent">Swap %s</string>
 
     <string name="secure_privacy_enabled_apps">apps has been restricted</string>
     <string name="secure_privacy_request_count">Handled %s app privacy data requests</string>

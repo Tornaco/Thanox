@@ -67,7 +67,8 @@
 
     <string name="boost_status_running_apps">个应用正在运行</string>
     <string name="boost_status_blocked_start_count">已阻止%s次应用启动请求</string>
-    <string name="boost_status_mem_usage_percent">设备剩余可用内存 %s</string>
+    <string name="boost_status_mem_usage_percent">物理内存 %s</string>
+    <string name="boost_status_swap_usage_percent">虚拟内存 %s</string>
 
     <string name="secure_privacy_enabled_apps">个应用受限</string>
     <string name="secure_privacy_request_count">已处理%s次身份信息请求</string>

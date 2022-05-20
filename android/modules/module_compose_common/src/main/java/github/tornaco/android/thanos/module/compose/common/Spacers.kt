@@ -34,6 +34,16 @@ fun TinySpacer() {
 }
 
 @Composable
+fun MediumSpacer() {
+    Spacer(modifier = Modifier.size(8.dp))
+}
+
+@Composable
 fun StandardSpacer() {
     Spacer(modifier = Modifier.size(16.dp))
+}
+
+@Composable
+fun LargeSpacer() {
+    Spacer(modifier = Modifier.size(20.dp))
 }

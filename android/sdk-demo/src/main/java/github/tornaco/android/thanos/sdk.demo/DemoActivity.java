@@ -1,20 +1,17 @@
 package github.tornaco.android.thanos.sdk.demo;
 
-import android.content.Intent;
-import android.widget.Switch;
-
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CategoryIndex;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.theme.Theme;
+import github.tornaco.android.thanos.util.DialogUtils;
 
 public class DemoActivity extends CommonAppListFilterActivity {
     @Override
@@ -25,24 +22,21 @@ public class DemoActivity extends CommonAppListFilterActivity {
     @Override
     protected void onSwitchBarCheckChanged(com.google.android.material.switchmaterial.SwitchMaterial switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
-        DonateIntroDialogKt.showDonateIntroDialog(thisActivity());
+        DialogUtils.showError(thisActivity(), new IllegalStateException("Here."));
     }
 
     @NonNull
     @Override
     protected CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
-        return new CommonAppListFilterViewModel.ListModelLoader() {
-            @Override
-            public List<AppListModel> load(@NonNull CategoryIndex index) {
-                List<AppListModel> res = new ArrayList<>();
-                for (int i = 0; i < 100; i++) {
-                    AppInfo app = new AppInfo();
-                    app.setPkgName(getPackageName());
-                    app.setAppLabel("App " + i);
-                    res.add(new AppListModel(app));
-                }
-                return res;
+        return index -> {
+            List<AppListModel> res = new ArrayList<>();
+            for (int i = 0; i < 100; i++) {
+                AppInfo app = new AppInfo();
+                app.setPkgName(getPackageName());
+                app.setAppLabel("App " + i);
+                res.add(new AppListModel(app));
             }
+            return res;
         };
     }
 

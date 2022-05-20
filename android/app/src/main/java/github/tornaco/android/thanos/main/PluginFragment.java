@@ -37,6 +37,7 @@ import github.tornaco.android.thanos.dashboard.OnTileClickListener;
 import github.tornaco.android.thanos.dashboard.OnTileLongClickListener;
 import github.tornaco.android.thanos.dashboard.Tile;
 import github.tornaco.android.thanos.databinding.FragmentPluginBinding;
+import github.tornaco.android.thanos.util.DialogUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.permission.requester.RequiresPermission;
@@ -207,6 +208,13 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
         if (getActivity() == null) return;
         dismissProgressDialog();
         Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showInstallFail(Throwable error) {
+        if (getActivity() == null) return;
+        dismissProgressDialog();
+        DialogUtils.showError(requireActivity(), error);
     }
 
     @Override

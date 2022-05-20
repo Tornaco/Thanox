@@ -97,7 +97,7 @@ public class NavViewModel extends AndroidViewModel {
                         if (code == PluginInstaller.ErrorCodes.DUP) {
                             ui.showInstallFail(getApplication().getString(R.string.tile_category_plugin_already_installed));
                         } else {
-                            ui.showInstallFail(err.getMessage());
+                            ui.showInstallFail(err);
                         }
                     }
                 });
@@ -603,6 +603,8 @@ public class NavViewModel extends AndroidViewModel {
         void showInstallSuccess(@NonNull InstalledPlugin plugin);
 
         void showInstallFail(String message);
+
+        void showInstallFail(Throwable error);
     }
 
     public interface PluginUnInstallResUi {

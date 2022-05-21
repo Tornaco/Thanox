@@ -86,7 +86,7 @@ public class PluginMarketActivity extends CommonAppListFilterActivity {
     private void installPluginFromAssets(PluginResponse response) {
         String path = response.getDownloadUrl();
         // Copy to temp.
-        File tempPluginFile = new File(getApplicationContext().getExternalCacheDir(), "plugin_tmp" + System.currentTimeMillis() + ".tp");
+        File tempPluginFile = new File(getApplicationContext().getCacheDir(), "plugin_tmp" + System.currentTimeMillis() + ".tp");
         try {
             Files.createParentDirs(tempPluginFile);
             AssetUtils.copyTo(thisActivity(), path, tempPluginFile);

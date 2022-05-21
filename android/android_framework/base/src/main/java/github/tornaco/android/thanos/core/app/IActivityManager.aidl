@@ -5,6 +5,7 @@ import android.content.pm.UserInfo;
 import github.tornaco.android.thanos.core.IPrinter;
 import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat;
 import github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats;
+import github.tornaco.android.thanos.core.os.SwapInfo;
 
 interface IActivityManager {
     String getCurrentFrontApp();
@@ -187,4 +188,6 @@ interface IActivityManager {
 
 
     boolean killProcess(long pid);
+
+    SwapInfo getSwapInfo();
 }

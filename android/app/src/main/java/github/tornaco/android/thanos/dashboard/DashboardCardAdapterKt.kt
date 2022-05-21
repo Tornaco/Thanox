@@ -161,6 +161,7 @@ private fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
     val primaryColor = getColorAttribute(R.attr.colorPrimary)
     val primaryContainerColor = getColorAttribute(R.attr.colorPrimaryContainer)
+    val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -185,7 +186,8 @@ private fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                     }) {
                     Text(
                         text = "${headerInfo.runningAppsCount}${stringResource(id = R.string.boost_status_running_apps)}",
-                        style = MaterialTheme.typography.titleMedium
+                        style = MaterialTheme.typography.titleMedium,
+                        color = Color(onSurfaceColor)
                     )
                 }
             }
@@ -207,14 +209,15 @@ private fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                     progressMax = 100f,
                     progressBarColor = Color(primaryColor),
                     progressBarWidth = 16.dp,
-                    backgroundProgressBarColor = MaterialTheme.colorScheme.surfaceVariant,
+                    backgroundProgressBarColor = Color(primaryContainerColor),
                     backgroundProgressBarWidth = 16.dp,
                     roundBorder = true,
                     startAngle = 90f,
                     centerContent = {
                         Text(
                             text = "Memory",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
+                            style = productSansBoldTypography().caption,
+                            color = Color(onSurfaceColor)
                         )
                     }
                 )
@@ -236,6 +239,8 @@ private fun MemStats(
     memUsage: MemUsage
 ) {
     val primaryColor = getColorAttribute(R.attr.colorPrimary)
+    val primaryContainerColor = getColorAttribute(R.attr.colorPrimaryContainer)
+    val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
     Row {
         Text(
             modifier = Modifier.alignByBaseline(),
@@ -243,13 +248,15 @@ private fun MemStats(
                 id = if (memUsage.memType == MemType.MEMORY) R.string.boost_status_mem_usage_percent else R.string.boost_status_swap_usage_percent,
                 "${memUsage.memUsagePercent}%"
             ),
-            style = MaterialTheme.typography.bodySmall
+            style = MaterialTheme.typography.bodySmall,
+            color = Color(onSurfaceColor)
         )
         SmallSpacer()
         Text(
             modifier = Modifier.alignByBaseline(),
             text = " (${memUsage.memUsageSizeString}/${memUsage.memTotalSizeString})",
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp)
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
+            color = Color(onSurfaceColor)
         )
     }
     TinySpacer()
@@ -260,6 +267,7 @@ private fun MemStats(
             .height(8.dp)
             .clip(RoundedCornerShape(6.dp)),
         color = Color(primaryColor),
+        trackColor = Color(primaryContainerColor),
         progress = 0.72f
     )
 }

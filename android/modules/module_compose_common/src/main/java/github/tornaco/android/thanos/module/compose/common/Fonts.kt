@@ -22,5 +22,11 @@ fun productSansBoldTypography() = Typography(
         fontFamily = fontFamily(),
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp
+    ),
+    caption = TextStyle(
+        fontFamily = fontFamily(),
+        fontWeight = FontWeight.Normal,
+        fontSize = 10.sp,
+        letterSpacing = 0.4.sp
     )
 )

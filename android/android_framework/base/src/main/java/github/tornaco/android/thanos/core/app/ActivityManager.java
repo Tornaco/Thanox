@@ -13,6 +13,7 @@ import java.util.List;
 
 import github.tornaco.android.thanos.core.app.start.StartRecord;
 import github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats;
+import github.tornaco.android.thanos.core.os.SwapInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.process.ProcessRecord;
 import lombok.AllArgsConstructor;
@@ -574,6 +575,11 @@ public class ActivityManager {
     @SneakyThrows
     public List<ProcessCpuUsageStats> queryProcessCpuUsageStats(long[] pids, boolean update) {
         return server.queryProcessCpuUsageStats(pids, update);
+    }
+
+    @SneakyThrows
+    public SwapInfo getSwapInfo() {
+        return server.getSwapInfo();
     }
 
     public IBinder asBinder() {

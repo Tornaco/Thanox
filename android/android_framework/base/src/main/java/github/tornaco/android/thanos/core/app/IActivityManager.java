@@ -422,6 +422,10 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
+    @Override public github.tornaco.android.thanos.core.os.SwapInfo getSwapInfo() throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1572,6 +1576,20 @@ public interface IActivityManager extends android.os.IInterface
           boolean _result = this.killProcess(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_getSwapInfo:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.os.SwapInfo _result = this.getSwapInfo();
+          reply.writeNoException();
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
           return true;
         }
         default:
@@ -3904,6 +3922,31 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public github.tornaco.android.thanos.core.os.SwapInfo getSwapInfo() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        github.tornaco.android.thanos.core.os.SwapInfo _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getSwapInfo, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSwapInfo();
+          }
+          _reply.readException();
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.os.SwapInfo.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -4015,6 +4058,7 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_queryProcessCpuUsageStats = (android.os.IBinder.FIRST_CALL_TRANSACTION + 106);
     static final int TRANSACTION_queryCpuUsageRatio = (android.os.IBinder.FIRST_CALL_TRANSACTION + 107);
     static final int TRANSACTION_killProcess = (android.os.IBinder.FIRST_CALL_TRANSACTION + 108);
+    static final int TRANSACTION_getSwapInfo = (android.os.IBinder.FIRST_CALL_TRANSACTION + 109);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -4163,4 +4207,5 @@ public interface IActivityManager extends android.os.IInterface
   public java.util.List<github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats> queryProcessCpuUsageStats(long[] pids, boolean update) throws android.os.RemoteException;
   public float queryCpuUsageRatio(long[] pids, boolean update) throws android.os.RemoteException;
   public boolean killProcess(long pid) throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.os.SwapInfo getSwapInfo() throws android.os.RemoteException;
 }

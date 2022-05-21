@@ -42,6 +42,7 @@ import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.T;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.os.SwapInfo;
 import github.tornaco.android.thanos.core.pm.AddPluginCallback;
 import github.tornaco.android.thanos.dashboard.MemType;
 import github.tornaco.android.thanos.dashboard.MemUsage;
@@ -161,6 +162,11 @@ public class NavViewModel extends AndroidViewModel {
         final String[] memTotalSizeString = {"N/A"};
         final String[] memUsageSizeString = {"N/A"};
         final int[] memUsedPercent = {0};
+
+        final String[] swapTotalSizeString = {"N/A"};
+        final String[] swapUsageSizeString = {"N/A"};
+        final int[] swapUsedPercent = {0};
+
         final int[] runningAppsCount = {0};
 
         // Only load for pro.
@@ -173,7 +179,14 @@ public class NavViewModel extends AndroidViewModel {
                         if (memoryInfo != null) {
                             memTotalSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem);
                             memUsageSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem - memoryInfo.availMem);
-                            memUsedPercent[0] = (int) (100 * (((float) (memoryInfo.totalMem - memoryInfo.availMem) / (float) memoryInfo.totalMem)));
+                            memUsedPercent[0] = (int) (100 * (((float) (memoryInfo.totalMem - memoryInfo.availMem) / Math.max((float) memoryInfo.totalMem, 1f))));
+                        }
+
+                        SwapInfo swapInfo = thanosManager.getActivityManager().getSwapInfo();
+                        if (swapInfo != null) {
+                            swapTotalSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap);
+                            swapUsageSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap - swapInfo.freeSwap);
+                            swapUsedPercent[0] = (int) (100 * (((float) (swapInfo.totalSwap - swapInfo.freeSwap) / Math.max((float) swapInfo.totalSwap, 1f))));
                         }
                     });
         }
@@ -188,9 +201,9 @@ public class NavViewModel extends AndroidViewModel {
                 ),
                 new MemUsage(
                         MemType.SWAP,
-                        memTotalSizeString[0],
-                        memUsedPercent[0],
-                        memUsageSizeString[0]
+                        swapTotalSizeString[0],
+                        swapUsedPercent[0],
+                        swapUsageSizeString[0]
                 )
         );
     }

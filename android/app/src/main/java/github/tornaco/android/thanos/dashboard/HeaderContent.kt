@@ -150,6 +150,6 @@ private fun MemStats(
             .clip(RoundedCornerShape(6.dp)),
         color = Color(progressColor),
         trackColor = Color(progressTrackColor),
-        progress = 0.72f
+        progress = memUsage.memUsagePercent.toFloat() / 100f
     )
 }

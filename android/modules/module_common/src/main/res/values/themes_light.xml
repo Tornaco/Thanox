@@ -55,6 +55,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppThemeLight.Indigo">
+        <item name="colorAccent">@color/md_indigo_700</item>
+        <item name="colorPrimaryContainer">@color/md_indigo_100</item>
+    </style>
+
+    <style name="AppThemeLight.Indigo.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppThemeLight.Pink">
         <item name="colorAccent">@color/md_pink_600</item>
         <item name="colorPrimaryContainer">@color/md_pink_100</item>

@@ -6,6 +6,7 @@ import github.tornaco.android.thanos.module.common.R;
 
 public enum Theme {
     Light(R.style.AppThemeLight_NoActionBar, true),
+    LightIndigo(R.style.AppThemeLight_Indigo_NoActionBar, true),
     LightRed(R.style.AppThemeLight_Red_NoActionBar, true),
     LightGreen(R.style.AppThemeLight_Green_NoActionBar, true),
     LightAmber(R.style.AppThemeLight_Amber_NoActionBar, true),
@@ -14,6 +15,7 @@ public enum Theme {
     LightPink(R.style.AppThemeLight_Pink_NoActionBar, true),
 
     Dark(R.style.AppThemeDark_NoActionBar, false),
+    DarkIndigo(R.style.AppThemeDark_Indigo_NoActionBar, false),
     DarkAmber(R.style.AppThemeDark_Amber_NoActionBar, false),
     DarkRed(R.style.AppThemeDark_Red_NoActionBar, false),
     DarkGrey(R.style.AppThemeDark_Grey_NoActionBar, false),

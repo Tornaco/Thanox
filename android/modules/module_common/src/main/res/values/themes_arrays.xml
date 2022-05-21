@@ -2,6 +2,7 @@
 <resources>
     <string-array name="themes_entry">
         <item>Light</item>
+        <item>Light indigo</item>
         <item>Light red</item>
         <item>Light green</item>
         <item>Light amber</item>
@@ -9,6 +10,7 @@
         <item>Light oppo</item>
         <item>Light pink</item>
         <item>Dark</item>
+        <item>Dark indigo</item>
         <item>Dark red</item>
         <item>Dark amber</item>
         <item>Dark grey</item>
@@ -18,6 +20,7 @@
 
     <string-array name="themes_value">
         <item>Light</item>
+        <item>LightIndigo</item>
         <item>LightRed</item>
         <item>LightGreen</item>
         <item>LightAmber</item>
@@ -25,6 +28,7 @@
         <item>LightOppo</item>
         <item>LightPink</item>
         <item>Dark</item>
+        <item>DarkIndigo</item>
         <item>DarkRed</item>
         <item>DarkAmber</item>
         <item>DarkGrey</item>

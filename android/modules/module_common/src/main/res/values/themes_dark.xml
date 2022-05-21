@@ -69,4 +69,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppThemeDark.Indigo">
+        <item name="colorAccent">@color/md_indigo_700</item>
+    </style>
+
+    <style name="AppThemeDark.Indigo.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

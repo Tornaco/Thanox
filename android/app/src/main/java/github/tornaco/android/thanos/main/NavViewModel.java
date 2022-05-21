@@ -43,6 +43,8 @@ import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.T;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AddPluginCallback;
+import github.tornaco.android.thanos.dashboard.MemType;
+import github.tornaco.android.thanos.dashboard.MemUsage;
 import github.tornaco.android.thanos.dashboard.StatusFooterInfo;
 import github.tornaco.android.thanos.dashboard.StatusHeaderInfo;
 import github.tornaco.android.thanos.dashboard.Tile;
@@ -156,33 +158,41 @@ public class NavViewModel extends AndroidViewModel {
     }
 
     private StatusHeaderInfo loadStatusHeaderInfo() {
-        final int[] usedPercent = {0};
-        final String[] memAvailablePercentString = {"N/A"};
+        final String[] memTotalSizeString = {"N/A"};
+        final String[] memUsageSizeString = {"N/A"};
+        final int[] memUsedPercent = {0};
         final int[] runningAppsCount = {0};
 
         // Only load for pro.
         if (DonateSettings.isActivated(getApplication()) || !ThanosApp.isPrc()) {
-            ThanosManager.from(getApplication())
-                    .ifServiceInstalled(
-                            thanosManager -> {
-                                runningAppsCount[0] = thanosManager.getActivityManager().getRunningAppsCount();
-
-                                ActivityManager.MemoryInfo memoryInfo =
-                                        thanosManager.getActivityManager().getMemoryInfo();
-                                if (memoryInfo != null) {
-                                    usedPercent[0] = (int) (100 * (((float) (memoryInfo.totalMem - memoryInfo.availMem) / (float) memoryInfo.totalMem)));
-                                    long availableMB = memoryInfo.availMem;
-                                    memAvailablePercentString[0] =
-                                            Formatter.formatFileSize(getApplication(), availableMB);
-                                }
-                            });
+            ThanosManager.from(getApplication()).ifServiceInstalled(
+                    thanosManager -> {
+                        runningAppsCount[0] = thanosManager.getActivityManager().getRunningAppsCount();
+                        ActivityManager.MemoryInfo memoryInfo =
+                                thanosManager.getActivityManager().getMemoryInfo();
+                        if (memoryInfo != null) {
+                            memTotalSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem);
+                            memUsageSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem - memoryInfo.availMem);
+                            memUsedPercent[0] = (int) (100 * (((float) (memoryInfo.totalMem - memoryInfo.availMem) / (float) memoryInfo.totalMem)));
+                        }
+                    });
         }
 
-        return StatusHeaderInfo.builder()
-                .runningAppsCount(runningAppsCount[0])
-                .memUsagePercent(usedPercent[0])
-                .memAvailablePercentString(memAvailablePercentString[0])
-                .build();
+        return new StatusHeaderInfo(
+                runningAppsCount[0],
+                new MemUsage(
+                        MemType.MEMORY,
+                        memTotalSizeString[0],
+                        memUsedPercent[0],
+                        memUsageSizeString[0]
+                ),
+                new MemUsage(
+                        MemType.SWAP,
+                        memTotalSizeString[0],
+                        memUsedPercent[0],
+                        memUsageSizeString[0]
+                )
+        );
     }
 
     private void loadPrebuiltFeatures() {

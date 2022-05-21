@@ -24,25 +24,26 @@ import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.recyclerview.widget.RecyclerView
+import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.databinding.ItemFeatureDashboardFooterBinding
 import github.tornaco.android.thanos.databinding.ItemFeatureDashboardGroupBinding
 import github.tornaco.android.thanos.databinding.ItemFeatureDashboardHeaderComposeBinding
 import github.tornaco.android.thanos.module.compose.common.*
 import github.tornaco.android.thanos.module.compose.common.widget.CircularProgressBar
-
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class DashboardCardAdapter(
     private val onTileClickListener: OnTileClickListener,
@@ -68,7 +69,7 @@ class DashboardCardAdapter(
             ItemFeatureDashboardHeaderComposeBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
-        )
+        ) { onHeaderClickListener.onHeaderClick() }
         if (viewType == ViewType.ITEM) return GroupHolder(
             ItemFeatureDashboardGroupBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
@@ -87,9 +88,7 @@ class DashboardCardAdapter(
         when (getItemViewType(position)) {
             ViewType.HEADER -> {
                 val headerHolder = holder as HeaderHolder
-                headerHolder.bind(group.headerInfo) {
-                    onHeaderClickListener.onHeaderClick()
-                }
+                headerHolder.bind(group.headerInfo)
                 headerHolder.binding.executePendingBindings()
             }
             ViewType.ITEM -> {
@@ -130,18 +129,35 @@ internal object ViewType {
     const val FOOTER = 0x3
 }
 
-internal class HeaderHolder(val binding: ItemFeatureDashboardHeaderComposeBinding) :
+internal class HeaderHolder(
+    val binding: ItemFeatureDashboardHeaderComposeBinding,
+    private val onHeaderClick: () -> Unit
+) :
     Holder(binding.root) {
 
-    fun bind(headerInfo: StatusHeaderInfo, onHeaderClick: () -> Unit) {
+    private val _state = MutableStateFlow(HeaderState(StatusHeaderInfo(0, MemUsage(), MemUsage())))
+
+    init {
+        XLog.d("init: HeaderHolder-${hashCode()}")
         binding.compose.setContent {
-            HeaderContent(headerInfo, onHeaderClick)
+            val state by _state.collectAsState()
+            HeaderContent(state, onHeaderClick)
         }
+    }
+
+    fun bind(headerInfo: StatusHeaderInfo) {
+        XLog.d("Bind header: HeaderHolder-${hashCode()} $headerInfo")
+        _state.value = _state.value.copy(
+            headerInfo = headerInfo
+        )
     }
 }
 
+data class HeaderState(val headerInfo: StatusHeaderInfo)
+
 @Composable
-private fun HeaderContent(headerInfo: StatusHeaderInfo, onHeaderClick: () -> Unit) {
+private fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
+    val headerInfo = state.headerInfo
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
     val primaryColor = getColorAttribute(R.attr.colorPrimary)
     val primaryContainerColor = getColorAttribute(R.attr.colorPrimaryContainer)
@@ -158,9 +174,15 @@ private fun HeaderContent(headerInfo: StatusHeaderInfo, onHeaderClick: () -> Uni
     ) {
         Column {
             Row {
-                FilledTonalButton(onClick = {
-                    onHeaderClick()
-                }) {
+                FilledTonalButton(
+                    colors = ButtonDefaults.filledTonalButtonColors(
+                        containerColor = Color(
+                            primaryContainerColor
+                        )
+                    ),
+                    onClick = {
+                        onHeaderClick()
+                    }) {
                     Text(
                         text = "${headerInfo.runningAppsCount}${stringResource(id = R.string.boost_status_running_apps)}",
                         style = MaterialTheme.typography.titleMedium
@@ -172,8 +194,7 @@ private fun HeaderContent(headerInfo: StatusHeaderInfo, onHeaderClick: () -> Uni
 
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(end = 72.dp),
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -182,57 +203,63 @@ private fun HeaderContent(headerInfo: StatusHeaderInfo, onHeaderClick: () -> Uni
                     modifier = Modifier
                         .size(88.dp)
                         .align(Alignment.CenterVertically),
-                    progress = headerInfo.memUsagePercent.toFloat(),
+                    progress = headerInfo.memory.memUsagePercent.toFloat(),
                     progressMax = 100f,
                     progressBarColor = Color(primaryColor),
                     progressBarWidth = 16.dp,
                     backgroundProgressBarColor = MaterialTheme.colorScheme.surfaceVariant,
                     backgroundProgressBarWidth = 16.dp,
                     roundBorder = true,
-                    startAngle = 90f
+                    startAngle = 90f,
+                    centerContent = {
+                        Text(
+                            text = "Memory",
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
+                        )
+                    }
                 )
 
                 StandardSpacer()
 
-                // Linear.
                 Column {
-                    Text(
-                        text = stringResource(
-                            id = R.string.boost_status_mem_usage_percent,
-                            "7GB/12GB"
-                        ),
-                        style = MaterialTheme.typography.titleSmall
-                    )
-                    SmallSpacer()
-                    LinearProgressIndicator(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(8.dp)
-                            .clip(RoundedCornerShape(6.dp)),
-                        color = Color(primaryColor),
-                        progress = 0.24f
-                    )
-
+                    MemStats(headerInfo.memory)
                     LargeSpacer()
-
-                    Text(
-                        text = stringResource(
-                            id = R.string.boost_status_swap_usage_percent,
-                            "3GB/8GB"
-                        ),
-                        style = MaterialTheme.typography.titleSmall
-                    )
-                    SmallSpacer()
-                    LinearProgressIndicator(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(8.dp)
-                            .clip(RoundedCornerShape(6.dp)),
-                        color = Color(primaryColor),
-                        progress = 0.72f
-                    )
+                    MemStats(headerInfo.swap)
                 }
             }
         }
     }
+}
+
+@Composable
+private fun MemStats(
+    memUsage: MemUsage
+) {
+    val primaryColor = getColorAttribute(R.attr.colorPrimary)
+    Row {
+        Text(
+            modifier = Modifier.alignByBaseline(),
+            text = stringResource(
+                id = if (memUsage.memType == MemType.MEMORY) R.string.boost_status_mem_usage_percent else R.string.boost_status_swap_usage_percent,
+                "${memUsage.memUsagePercent}%"
+            ),
+            style = MaterialTheme.typography.bodySmall
+        )
+        SmallSpacer()
+        Text(
+            modifier = Modifier.alignByBaseline(),
+            text = " (${memUsage.memUsageSizeString}/${memUsage.memTotalSizeString})",
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp)
+        )
+    }
+    TinySpacer()
+    LinearProgressIndicator(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(end = 48.dp)
+            .height(8.dp)
+            .clip(RoundedCornerShape(6.dp)),
+        color = Color(primaryColor),
+        progress = 0.72f
+    )
 }

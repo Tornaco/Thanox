@@ -32,6 +32,7 @@ import github.tornaco.android.thanos.dashboard.OnHeaderClickListener;
 import github.tornaco.android.thanos.dashboard.OnTileClickListener;
 import github.tornaco.android.thanos.dashboard.OnTileLongClickListener;
 import github.tornaco.android.thanos.dashboard.Tile;
+import github.tornaco.android.thanos.dashboard.ViewType;
 import github.tornaco.android.thanos.databinding.FragmentPrebuiltFeaturesBinding;
 import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
 import github.tornaco.android.thanos.process.v2.ProcessManageActivityV2;
@@ -63,6 +64,10 @@ public class PrebuiltFeatureFragment extends NavFragment
     }
 
     private void setupView() {
+        prebuiltFeaturesBinding.features.getRecycledViewPool().setMaxRecycledViews(ViewType.HEADER, 0);
+        prebuiltFeaturesBinding.features.getRecycledViewPool().setMaxRecycledViews(ViewType.ITEM, 0);
+        prebuiltFeaturesBinding.features.getRecycledViewPool().setMaxRecycledViews(ViewType.FOOTER, 0);
+
         prebuiltFeaturesBinding.features.setLayoutManager(new GridLayoutManager(getContext(), 1));
         prebuiltFeaturesBinding.features.setAdapter(new DashboardCardAdapter(this, this, this));
         prebuiltFeaturesBinding.swipe.setColorSchemeColors(getResources().getIntArray(

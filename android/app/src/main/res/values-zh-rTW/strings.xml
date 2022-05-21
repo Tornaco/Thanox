@@ -67,8 +67,8 @@
 
     <string name="boost_status_running_apps">個應用正在運行</string>
     <string name="boost_status_blocked_start_count">已阻止%s次應用啟動請求</string>
-    <string name="boost_status_mem_usage_percent">物理內存 %s</string>
-    <string name="boost_status_swap_usage_percent">虛擬內存 %s</string>
+    <string name="boost_status_mem_usage_percent">物理內存  %s</string>
+    <string name="boost_status_swap_usage_percent">虛擬內存  %s</string>
 
     <string name="secure_privacy_enabled_apps">個應用受限</string>
     <string name="secure_privacy_request_count">已處理%s次身份信息請求</string>

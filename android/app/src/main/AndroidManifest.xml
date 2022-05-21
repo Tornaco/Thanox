@@ -212,6 +212,9 @@
             android:excludeFromRecents="true"
             android:exported="false"
             android:theme="@style/AppThemeShortcut" />
+        <activity
+            android:name=".settings.ThemeAttrPreviewActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

@@ -1,5 +1,6 @@
 package github.tornaco.android.thanos.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.pref.AppPreference;
+import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.thanos.android.noroot.ServiceBindings;
 
 public class DevSettingsFragment extends BasePreferenceFragmentCompat {
@@ -73,14 +75,16 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
             });
         }
 
-        findPreference(getString(R.string.key_rootless_support)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(@NonNull Preference preference) {
-                if (ServiceBindings.INSTANCE.checkPermission(1)) {
-                    ServiceBindings.INSTANCE.bindUserService();
-                }
-                return false;
+        findPreference(getString(R.string.key_rootless_support)).setOnPreferenceClickListener(preference -> {
+            if (ServiceBindings.INSTANCE.checkPermission(1)) {
+                ServiceBindings.INSTANCE.bindUserService();
             }
+            return false;
+        });
+
+        findPreference(getString(R.string.key_theme_attr_preview)).setOnPreferenceClickListener(preference -> {
+            ActivityUtils.startActivity(requireActivity(), ThemeAttrPreviewActivity.class);
+            return true;
         });
     }
 }

@@ -1,0 +1,252 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorAccent"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorAccent"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorControlNormal"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorControlNormal"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorControlHighlight"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorControlHighlight"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorControlActivated"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorControlActivated"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorPrimary"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorOnPrimary"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorOnPrimary"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimaryContainer"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorPrimaryContainer"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimaryInverse"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorPrimaryInverse"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimarySurface"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorPrimarySurface"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimaryVariant"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorPrimaryVariant"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorSecondary"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorSecondary"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorSecondaryContainer"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorSecondaryContainer"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorSecondaryVariant"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorSecondaryVariant"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorTertiary"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorTertiary"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorTertiaryContainer"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorTertiaryContainer"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorSurface"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorSurface"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorOnSurface"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorOnSurface"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorSurfaceInverse"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorSurfaceInverse"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorSurfaceVariant"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorSurfaceVariant"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorErrorContainer"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorErrorContainer"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorOnPrimary"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorOnPrimary"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorOnSecondary"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorOnSecondary"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorOutline"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorOutline"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorError"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorError"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorErrorContainer"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="colorErrorContainer"
+        android:textSize="12sp" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SwitchMD" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SwitchCpmpat" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

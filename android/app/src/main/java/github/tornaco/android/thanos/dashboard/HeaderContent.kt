@@ -20,8 +20,6 @@ package github.tornaco.android.thanos.dashboard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,9 +37,11 @@ import github.tornaco.android.thanos.module.compose.common.widget.CircularProgre
 fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
     val headerInfo = state.headerInfo
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
-    val primaryColor = getColorAttribute(R.attr.colorPrimary)
     val primaryContainerColor = getColorAttribute(R.attr.colorPrimaryContainer)
     val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
+
+    val progressColor = getColorAttribute(R.attr.progressColor)
+    val progressTrackColor = getColorAttribute(R.attr.progressTrackColor)
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -87,9 +87,9 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                         .align(Alignment.CenterVertically),
                     progress = headerInfo.memory.memUsagePercent.toFloat(),
                     progressMax = 100f,
-                    progressBarColor = Color(primaryColor),
+                    progressBarColor = Color(progressColor),
                     progressBarWidth = 16.dp,
-                    backgroundProgressBarColor = Color(primaryContainerColor),
+                    backgroundProgressBarColor = Color(progressTrackColor),
                     backgroundProgressBarWidth = 16.dp,
                     roundBorder = true,
                     startAngle = 90f,
@@ -118,9 +118,11 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
 private fun MemStats(
     memUsage: MemUsage
 ) {
-    val primaryColor = getColorAttribute(R.attr.colorPrimary)
-    val primaryContainerColor = getColorAttribute(R.attr.colorPrimaryContainer)
     val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
+
+    val progressColor = getColorAttribute(R.attr.progressColor)
+    val progressTrackColor = getColorAttribute(R.attr.progressTrackColor)
+
     Row {
         Text(
             modifier = Modifier.alignByBaseline(),
@@ -146,8 +148,8 @@ private fun MemStats(
             .padding(end = 48.dp)
             .height(8.dp)
             .clip(RoundedCornerShape(6.dp)),
-        color = Color(primaryColor),
-        trackColor = Color(primaryContainerColor),
+        color = Color(progressColor),
+        trackColor = Color(progressTrackColor),
         progress = 0.72f
     )
 }

@@ -23,6 +23,11 @@
             app:persistent="false"
             app:title="Non-Root support" />
 
+        <Preference
+            app:key="@string/key_theme_attr_preview"
+            app:persistent="false"
+            app:title="Theme attrs" />
+
         <SwitchPreferenceCompat
             app:key="@string/key_enable_global_white_list"
             app:persistent="false"

@@ -15,11 +15,11 @@
     <string name="title_multiple_patch_applied_error">應用了多個補丁</string>
     <string name="message_multiple_patch_applied_error">Thanox激活只需要採用一種補丁，而你同時採用了多個補丁: %s，這會導致一些額外的使用故障，請務必參閱使用指南</string>
 
-    <string name="nav_title_boost">加速與清理</string>
-    <string name="nav_title_secure">隱私和安全</string>
+    <string name="nav_title_boost">加速</string>
+    <string name="nav_title_secure">隱私</string>
     <string name="nav_title_settings">設置</string>
     <string name="nav_title_feedback">反饋</string>
-    <string name="nav_title_exp">拓展功能</string>
+    <string name="nav_title_exp">拓展</string>
     <string name="nav_title_plugin">插件</string>
     <string name="nav_title_plugin_repo">插件倉庫</string>
     <string name="nav_title_thanox">Thanox</string>
@@ -403,8 +403,8 @@
     <string name="pre_title_app_list_item_show_version">显示版本信息</string>
     <string name="pre_title_app_list_item">应用列表项</string>
 
-    <string name="menu_title_app_info_detailed">詳細信息</string>
-    <string name="nav_title_guide">入门必读</string>
+    <string name="menu_title_app_info_detailed">详细信息</string>
+    <string name="nav_title_guide">入门</string>
 
     <string name="pre_title_smart_freeze_freeze_method">凍結方式</string>
     <string name="pre_title_smart_freeze_freeze_method_disable">PM disable</string>

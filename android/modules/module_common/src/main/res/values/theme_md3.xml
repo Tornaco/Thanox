@@ -17,6 +17,8 @@
         <item name="preferenceFragmentCompatStyle">@style/PrefFragmentCompatThemeCommon</item>
 
         <item name="appCardBackground">@color/md_grey_100</item>
+        <item name="progressTrackColor">@color/md_grey_300</item>
+        <item name="progressColor">?colorPrimary</item>
 
     </style>
 

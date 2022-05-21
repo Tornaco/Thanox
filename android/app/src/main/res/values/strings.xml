@@ -15,11 +15,11 @@
     <string name="title_multiple_patch_applied_error">Multiple patch applied</string>
     <string name="message_multiple_patch_applied_error">You only needs to apply one patch to active Thanox, but you apply multiple patches at the same time: %s, be sure to read the usage guide</string>
 
-    <string name="nav_title_boost">Boost &amp; Clean</string>
-    <string name="nav_title_secure">Privacy &amp; Security</string>
+    <string name="nav_title_boost">Boost</string>
+    <string name="nav_title_secure">Privacy</string>
     <string name="nav_title_settings">Settings</string>
     <string name="nav_title_feedback">Feedback</string>
-    <string name="nav_title_exp">Extensions</string>
+    <string name="nav_title_exp">Extension</string>
     <string name="nav_title_plugin">Plugin</string>
     <string name="nav_title_plugin_repo">Plugin repo</string>
     <string name="nav_title_thanox">Thanox</string>
@@ -409,7 +409,7 @@
 
     <string name="device_admin_description" translatable="false">Device admin of Thanox Infinite Z profile.</string>
 
-    <string name="nav_title_guide">For beginners</string>
+    <string name="nav_title_guide">Guide</string>
 
     <string name="pre_title_smart_freeze_freeze_method">Freeze method</string>
     <string name="pre_title_smart_freeze_freeze_method_disable">PM disable</string>

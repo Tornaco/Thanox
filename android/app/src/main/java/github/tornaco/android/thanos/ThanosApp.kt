@@ -24,6 +24,7 @@ import dev.enro.annotations.NavigationComponent
 import dev.enro.core.controller.NavigationApplication
 import dev.enro.core.controller.navigationController
 import dev.enro.core.plugins.EnroLogger
+import github.tornaco.android.thanos.app.FeatureAccessStats
 import github.tornaco.android.thanos.app.Init
 import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.thanos.android.noroot.NoRootSupport.install

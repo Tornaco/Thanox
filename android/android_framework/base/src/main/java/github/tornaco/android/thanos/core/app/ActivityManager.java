@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
-import android.os.RemoteException;
 
 import com.elvishew.xlog.XLog;
 
@@ -580,6 +579,70 @@ public class ActivityManager {
     @SneakyThrows
     public SwapInfo getSwapInfo() {
         return server.getSwapInfo();
+    }
+
+    // ******************************************************************
+    // Block API
+    //
+    // ******************************************************************
+    @SneakyThrows
+    public void setBlockAllReceiver(Pkg pkg, boolean block) {
+        server.setBlockAllReceiver(pkg, block);
+    }
+
+    @SneakyThrows
+    public boolean isBlockAllReceiver(Pkg pkg) {
+        return server.isBlockAllReceiver(pkg);
+    }
+
+    @SneakyThrows
+    public void setBlockAllReceiver(String pkgName, boolean block) {
+        setBlockAllReceiver(Pkg.currentUserPkg(pkgName), block);
+    }
+
+    @SneakyThrows
+    public boolean isBlockAllReceiver(String pkgName) {
+        return isBlockAllReceiver(Pkg.currentUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public void setBlockAllService(Pkg pkg, boolean block) {
+        server.setBlockAllService(pkg, block);
+    }
+
+    @SneakyThrows
+    public boolean isBlockAllService(Pkg pkg) {
+        return server.isBlockAllService(pkg);
+    }
+
+    @SneakyThrows
+    public void setBlockAllService(String pkgName, boolean block) {
+        setBlockAllService(Pkg.currentUserPkg(pkgName), block);
+    }
+
+    @SneakyThrows
+    public boolean isBlockAllService(String pkgName) {
+        return isBlockAllService(Pkg.currentUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public void setBlockAllProvider(Pkg pkg, boolean block) {
+        server.setBlockAllProvider(pkg, block);
+    }
+
+    @SneakyThrows
+    public boolean isBlockAllProvider(Pkg pkg) {
+        return server.isBlockAllProvider(pkg);
+    }
+
+    @SneakyThrows
+    public void setBlockAllProvider(String pkgName, boolean block) {
+        setBlockAllProvider(Pkg.currentUserPkg(pkgName), block);
+    }
+
+    @SneakyThrows
+    public boolean isBlockAllProvider(String pkgName) {
+        return isBlockAllProvider(Pkg.currentUserPkg(pkgName));
     }
 
     public IBinder asBinder() {

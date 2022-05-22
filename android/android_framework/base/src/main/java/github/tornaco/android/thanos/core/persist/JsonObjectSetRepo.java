@@ -199,7 +199,7 @@ public abstract class JsonObjectSetRepo<T> implements SetRepo<T> {
 
   @Override
   public boolean has(T s) {
-    return s != null && mStorage.contains(s);
+    return s != null && !mStorage.isEmpty() && mStorage.contains(s);
   }
 
   @Override

@@ -77,6 +77,9 @@ class StartResult : Parcelable {
         val BYPASS_USER_RULE = StartResult(true, "BYPASS_USER_RULE")
 
         @JvmField
+        val BLOCKED_BLOCK_API = StartResult(false, "BLOCKED_BLOCK_API")
+
+        @JvmField
         val CREATOR: Parcelable.Creator<StartResult> = object : Parcelable.Creator<StartResult> {
 
             override fun createFromParcel(`in`: Parcel): StartResult {

@@ -426,6 +426,33 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
+    // ******************************************************************
+    // Block API
+    // Block Receiver/Service/Provider all the time, event the package is running at foreground,
+    // may cause the app crash.
+    // ******************************************************************
+
+    @Override public void setBlockAllReceiver(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isBlockAllReceiver(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public void setBlockAllService(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isBlockAllService(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public void setBlockAllProvider(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isBlockAllProvider(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1590,6 +1617,99 @@ public interface IActivityManager extends android.os.IInterface
           else {
             reply.writeInt(0);
           }
+          return true;
+        }
+        case TRANSACTION_setBlockAllReceiver:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          this.setBlockAllReceiver(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isBlockAllReceiver:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _result = this.isBlockAllReceiver(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_setBlockAllService:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          this.setBlockAllService(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isBlockAllService:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _result = this.isBlockAllService(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_setBlockAllProvider:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          this.setBlockAllProvider(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isBlockAllProvider:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _result = this.isBlockAllProvider(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         default:
@@ -3947,6 +4067,171 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      // ******************************************************************
+      // Block API
+      // Block Receiver/Service/Provider all the time, event the package is running at foreground,
+      // may cause the app crash.
+      // ******************************************************************
+
+      @Override public void setBlockAllReceiver(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(((block)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setBlockAllReceiver, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setBlockAllReceiver(pkg, block);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isBlockAllReceiver(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isBlockAllReceiver, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isBlockAllReceiver(pkg);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setBlockAllService(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(((block)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setBlockAllService, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setBlockAllService(pkg, block);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isBlockAllService(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isBlockAllService, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isBlockAllService(pkg);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setBlockAllProvider(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(((block)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setBlockAllProvider, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setBlockAllProvider(pkg, block);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isBlockAllProvider(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isBlockAllProvider, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isBlockAllProvider(pkg);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -4059,6 +4344,12 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_queryCpuUsageRatio = (android.os.IBinder.FIRST_CALL_TRANSACTION + 107);
     static final int TRANSACTION_killProcess = (android.os.IBinder.FIRST_CALL_TRANSACTION + 108);
     static final int TRANSACTION_getSwapInfo = (android.os.IBinder.FIRST_CALL_TRANSACTION + 109);
+    static final int TRANSACTION_setBlockAllReceiver = (android.os.IBinder.FIRST_CALL_TRANSACTION + 110);
+    static final int TRANSACTION_isBlockAllReceiver = (android.os.IBinder.FIRST_CALL_TRANSACTION + 111);
+    static final int TRANSACTION_setBlockAllService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 112);
+    static final int TRANSACTION_isBlockAllService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 113);
+    static final int TRANSACTION_setBlockAllProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 114);
+    static final int TRANSACTION_isBlockAllProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 115);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -4208,4 +4499,16 @@ public interface IActivityManager extends android.os.IInterface
   public float queryCpuUsageRatio(long[] pids, boolean update) throws android.os.RemoteException;
   public boolean killProcess(long pid) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.os.SwapInfo getSwapInfo() throws android.os.RemoteException;
+  // ******************************************************************
+  // Block API
+  // Block Receiver/Service/Provider all the time, event the package is running at foreground,
+  // may cause the app crash.
+  // ******************************************************************
+
+  public void setBlockAllReceiver(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException;
+  public boolean isBlockAllReceiver(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void setBlockAllService(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException;
+  public boolean isBlockAllService(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void setBlockAllProvider(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException;
+  public boolean isBlockAllProvider(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
 }

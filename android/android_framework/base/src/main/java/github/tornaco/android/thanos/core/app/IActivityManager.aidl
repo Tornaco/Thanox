@@ -190,4 +190,18 @@ interface IActivityManager {
     boolean killProcess(long pid);
 
     SwapInfo getSwapInfo();
+
+    // ******************************************************************
+    // Block API
+    // Block Receiver/Service/Provider all the time, event the package is running at foreground,
+    // may cause the app crash.
+    // ******************************************************************
+    void setBlockAllReceiver(in Pkg pkg, boolean block);
+    boolean isBlockAllReceiver(in Pkg pkg);
+
+    void setBlockAllService(in Pkg pkg, boolean block);
+    boolean isBlockAllService(in Pkg pkg);
+
+    void setBlockAllProvider(in Pkg pkg, boolean block);
+    boolean isBlockAllProvider(in Pkg pkg);
 }

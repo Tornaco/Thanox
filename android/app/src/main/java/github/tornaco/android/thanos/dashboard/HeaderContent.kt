@@ -65,7 +65,14 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                         onHeaderClick()
                     }) {
                     Text(
-                        text = "${headerInfo.runningAppsCount}${stringResource(id = R.string.boost_status_running_apps)}",
+                        modifier = Modifier.alignByBaseline(),
+                        text = "${headerInfo.runningAppsCount}",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color(onSurfaceColor)
+                    )
+                    Text(
+                        modifier = Modifier.alignByBaseline(),
+                        text = stringResource(id = R.string.boost_status_running_apps),
                         style = MaterialTheme.typography.titleMedium,
                         color = Color(onSurfaceColor)
                     )
@@ -95,13 +102,14 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                     startAngle = 90f,
                     centerContent = {
                         Text(
-                            text = "Memory",
+                            text = stringResource(id = R.string.boost_status_system_memory),
                             style = productSansBoldTypography().caption,
                             color = Color(onSurfaceColor)
                         )
                     }
                 )
 
+                StandardSpacer()
                 StandardSpacer()
 
                 Column {

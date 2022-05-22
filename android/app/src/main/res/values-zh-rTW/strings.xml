@@ -73,7 +73,7 @@
     <string name="secure_privacy_enabled_apps">個應用受限</string>
     <string name="secure_privacy_request_count">已處理%s次身份信息請求</string>
 
-    <string name="boost_status_system_memory">系統內存</string>
+    <string name="boost_status_system_memory">內存</string>
     <string name="boost_status_system_storage">存儲空間</string>
 
     <string name="feature_category_start_manage">啟動</string>

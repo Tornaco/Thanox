@@ -28,7 +28,9 @@ data class MemUsage(
     val memTotalSizeString: String = "",
     // 0-100
     val memUsagePercent: Int = 1,
-    val memUsageSizeString: String = ""
+    val memUsageSizeString: String = "",
+    val memAvailableSizeString: String = "",
+    val isEnabled: Boolean = true
 )
 
 enum class MemType {

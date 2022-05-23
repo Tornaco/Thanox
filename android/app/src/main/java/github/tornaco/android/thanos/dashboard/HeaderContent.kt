@@ -142,9 +142,18 @@ private fun MemStats(
             color = Color(onSurfaceColor)
         )
         SmallSpacer()
+
+        val extraDesc = if (memUsage.isEnabled) {
+            stringResource(
+                id = R.string.boost_status_available,
+                memUsage.memAvailableSizeString
+            )
+        } else {
+            stringResource(id = R.string.boost_status_not_enabled)
+        }
         Text(
             modifier = Modifier.alignByBaseline(),
-            text = " (${memUsage.memUsageSizeString}/${memUsage.memTotalSizeString})",
+            text = " ($extraDesc)",
             style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
             color = Color(onSurfaceColor)
         )

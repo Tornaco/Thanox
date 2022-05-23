@@ -159,13 +159,17 @@ public class NavViewModel extends AndroidViewModel {
     }
 
     private StatusHeaderInfo loadStatusHeaderInfo() {
-        final String[] memTotalSizeString = {"N/A"};
-        final String[] memUsageSizeString = {"N/A"};
+        final String[] memTotalSizeString = {""};
+        final String[] memUsageSizeString = {""};
+        final String[] memAvailableSizeString = {""};
         final int[] memUsedPercent = {0};
 
-        final String[] swapTotalSizeString = {"N/A"};
-        final String[] swapUsageSizeString = {"N/A"};
+        final String[] swapTotalSizeString = {""};
+        final String[] swapUsageSizeString = {""};
+        final String[] swapAvailableSizeString = {""};
         final int[] swapUsedPercent = {0};
+        final boolean[] swapEnabled = {false};
+
 
         final int[] runningAppsCount = {0};
 
@@ -179,14 +183,19 @@ public class NavViewModel extends AndroidViewModel {
                         if (memoryInfo != null) {
                             memTotalSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem);
                             memUsageSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem - memoryInfo.availMem);
+                            memAvailableSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.availMem);
                             memUsedPercent[0] = (int) (100 * (((float) (memoryInfo.totalMem - memoryInfo.availMem) / Math.max((float) memoryInfo.totalMem, 1f))));
                         }
 
                         SwapInfo swapInfo = thanosManager.getActivityManager().getSwapInfo();
                         if (swapInfo != null) {
-                            swapTotalSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap);
-                            swapUsageSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap - swapInfo.freeSwap);
-                            swapUsedPercent[0] = (int) (100 * (((float) (swapInfo.totalSwap - swapInfo.freeSwap) / Math.max((float) swapInfo.totalSwap, 1f))));
+                            swapEnabled[0] = swapInfo.totalSwap > 0;
+                            if (swapEnabled[0]) {
+                                swapTotalSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap);
+                                swapUsageSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap - swapInfo.freeSwap);
+                                swapAvailableSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.freeSwap);
+                                swapUsedPercent[0] = (int) (100 * (((float) (swapInfo.totalSwap - swapInfo.freeSwap) / Math.max((float) swapInfo.totalSwap, 1f))));
+                            }
                         }
                     });
         }
@@ -197,13 +206,17 @@ public class NavViewModel extends AndroidViewModel {
                         MemType.MEMORY,
                         memTotalSizeString[0],
                         memUsedPercent[0],
-                        memUsageSizeString[0]
+                        memUsageSizeString[0],
+                        memAvailableSizeString[0],
+                        true
                 ),
                 new MemUsage(
                         MemType.SWAP,
                         swapTotalSizeString[0],
                         swapUsedPercent[0],
-                        swapUsageSizeString[0]
+                        swapUsageSizeString[0],
+                        swapAvailableSizeString[0],
+                        swapEnabled[0]
                 )
         );
     }

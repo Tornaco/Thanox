@@ -416,4 +416,8 @@
     <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable is a function provided by the Android system that can \"disable\" an application; when using this method to \"freeze\" an application, the desktop icon of the frozen application will disappear. You may create a shortcut or proxy app to launch it directly from Launcher.</string>
     <string name="pre_title_smart_freeze_freeze_method_suspend">PM suspend</string>
     <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend is a function provided by Android for DPC management; the suspended application usually retains a gray icon at Launcher, but the activities of the application cannot be started directly, and a dialog usually pops up indicating that the application has been restricted from use by the Administrator. You can turn on the \"DOL\" switch for the app, which will cause Thanox to unfreeze the app when it detects a request to launch the activity.</string>
+
+    <string name="privacy_agreement_title">Privacy agreement</string>
+    <string name="privacy_agreement_accept">Accept</string>
+    <string name="privacy_agreement_discard">Discard</string>
 </resources>

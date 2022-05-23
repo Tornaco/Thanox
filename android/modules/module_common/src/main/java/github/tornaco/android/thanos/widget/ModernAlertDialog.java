@@ -12,7 +12,7 @@ public class ModernAlertDialog {
     private final Context context;
 
     private String dialogTitle;
-    private String dialogMessage;
+    private CharSequence dialogMessage;
     private String positive;
     private String negative;
     private String neutral;
@@ -33,7 +33,7 @@ public class ModernAlertDialog {
         this.dialogTitle = dialogTitle;
     }
 
-    public void setDialogMessage(String dialogMessage) {
+    public void setDialogMessage(CharSequence dialogMessage) {
         this.dialogMessage = dialogMessage;
     }
 

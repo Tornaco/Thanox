@@ -63,7 +63,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (NavActivityPlugin.onCreate(this)) {
+        if (NavActivityPlugin.INSTANCE.onCreate(this)) {
             finish();
             return;
         }
@@ -142,7 +142,13 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
     }
 
     private void initFirstRun() {
-        if (AppPreference.isFirstRun(getApplication()) && !isFirstRunDialogShown) {
+        if (NavActivityPlugin.INSTANCE.showPrivacyAgreement(this)) {
+            return;
+        }
+
+        if (!ThanosManager.from(thisActivity()).isServiceInstalled() &&
+                AppPreference.isFirstRun(getApplication()) &&
+                !isFirstRunDialogShown) {
             showAppNoticeDialog();
         }
     }

@@ -412,4 +412,8 @@
     <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable 是Android系统提供的可以\"停用\"某个应用的功能；使用这种方式\"冻结\"应用的时候，被冻结应用的桌面图标会消失，只能通过智能冻结页面或创建的快捷方式、代理应用启动。</string>
     <string name="pre_title_smart_freeze_freeze_method_suspend">PM suspend</string>
     <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend，是Android提供用于DPC管理的功能；被挂起的应用桌面通常会保留一个灰色的图标，但是无法直接启动该应用的活动，一般会弹出一个对话框提示这个应用已被管理员限制使用。你可以为该应用打开\"活检解冻\"开关，这样一来，Thanox检测到启动该应用活动页的请求会解冻该应用。</string>
+
+    <string name="privacy_agreement_title">隐私协议</string>
+    <string name="privacy_agreement_accept">接受</string>
+    <string name="privacy_agreement_discard">不接受</string>
 </resources>

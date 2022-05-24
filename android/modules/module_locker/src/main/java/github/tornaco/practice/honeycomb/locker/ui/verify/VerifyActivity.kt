@@ -1,9 +1,7 @@
 package github.tornaco.practice.honeycomb.locker.ui.verify
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.biometric.BiometricPrompt
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.CubicBezierEasing
@@ -21,7 +19,6 @@ import com.elvishew.xlog.XLog
 import com.google.accompanist.appcompattheme.AppCompatTheme
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
-import github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener
 import github.tornaco.android.thanos.core.app.activity.VerifyResult
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
@@ -30,25 +27,6 @@ import github.tornaco.android.thanos.theme.ThemeActivity
 class VerifyActivity : ThemeActivity() {
     private var requestCode = 0
     private var appInfo: AppInfo? = null
-    private var biometricPrompt: BiometricPrompt? = null
-    private var isVerifyCanceledAndByPass: Boolean = false
-
-    private val thanox get() = ThanosManager.from(thisActivity())
-
-    private val listener: IActivityLifecycleListener = object : IActivityLifecycleListener.Stub() {
-        override fun onAboutToLaunchActivity(intent: Intent?) {
-            XLog.w("VerifyActivity onAboutToLaunchActivity: $intent")
-            isVerifyCanceledAndByPass = true
-            thanox.activityStackSupervisor.unRegisterActivityLifecycleListener(this)
-            // Let's new activity start.
-            thanox.activityStackSupervisor.setVerifyResult(
-                requestCode,
-                VerifyResult.IGNORE,
-                VerifyResult.REASON_NEW_ACTIVITY_STARTING
-            )
-            cancelVerifyAndFinish()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +36,6 @@ class VerifyActivity : ThemeActivity() {
                     AppVerifyContent()
                 }
             }
-            thanox.activityStackSupervisor.registerActivityLifecycleListener(listener)
             startVerifyWithBiometrics(appInfo!!)
         } else {
             XLog.e("VerifyActivity, bad intent.")
@@ -76,11 +53,6 @@ class VerifyActivity : ThemeActivity() {
             return false
         }
         return true
-    }
-
-    override fun onStop() {
-        super.onStop()
-        thanox.activityStackSupervisor.unRegisterActivityLifecycleListener(listener)
     }
 
     @OptIn(ExperimentalAnimationApi::class)
@@ -133,6 +105,7 @@ class VerifyActivity : ThemeActivity() {
     }
 
     private fun startVerifyWithBiometrics(appInfo: AppInfo) {
+        val thanox = ThanosManager.from(this)
         if (!isBiometricReady(this)) {
             thanox.activityStackSupervisor.setVerifyResult(
                 requestCode,
@@ -145,23 +118,19 @@ class VerifyActivity : ThemeActivity() {
             return
         }
 
-        biometricPrompt = authenticateWithBiometric(appInfo) { success: Boolean, message: String ->
+        authenticateWithBiometric(appInfo) { success: Boolean, message: String ->
             XLog.i("authenticateWithBiometric result: $success $message")
             if (success) {
-                XLog.d("setVerifyResult ALLOW")
-                thanox.activityStackSupervisor.unRegisterActivityLifecycleListener(listener)
                 thanox.activityStackSupervisor.setVerifyResult(
                     requestCode,
                     VerifyResult.ALLOW,
                     VerifyResult.REASON_USER_INPUT_CORRECT
                 )
                 finish()
-            } else if (!isVerifyCanceledAndByPass) {
-                XLog.d("setVerifyResult DENY")
-                thanox.activityStackSupervisor.unRegisterActivityLifecycleListener(listener)
+            } else {
                 thanox.activityStackSupervisor.setVerifyResult(
                     requestCode,
-                    VerifyResult.DENY,
+                    VerifyResult.IGNORE,
                     VerifyResult.REASON_USER_INPUT_INCORRECT
                 )
             }
@@ -169,16 +138,10 @@ class VerifyActivity : ThemeActivity() {
     }
 
     override fun onBackPressed() {
-        thanox.activityStackSupervisor.setVerifyResult(
+        ThanosManager.from(this).activityStackSupervisor.setVerifyResult(
             requestCode,
-            VerifyResult.DENY,
+            VerifyResult.IGNORE,
             VerifyResult.REASON_USER_CANCEL
         )
-    }
-
-    private fun cancelVerifyAndFinish() {
-        XLog.w("cancelVerifyAndFinish...")
-        kotlin.runCatching { biometricPrompt?.cancelAuthentication() }
-        finish()
     }
 }

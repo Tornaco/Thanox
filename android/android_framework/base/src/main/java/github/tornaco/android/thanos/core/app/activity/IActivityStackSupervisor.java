@@ -109,12 +109,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     @Override public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException
     {
     }
-    @Override public void registerActivityLifecycleListener(github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener listener) throws android.os.RemoteException
-    {
-    }
-    @Override public void unRegisterActivityLifecycleListener(github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener listener) throws android.os.RemoteException
-    {
-    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -491,24 +485,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           github.tornaco.android.thanos.core.IPrinter _arg0;
           _arg0 = github.tornaco.android.thanos.core.IPrinter.Stub.asInterface(data.readStrongBinder());
           this.dump(_arg0);
-          reply.writeNoException();
-          return true;
-        }
-        case TRANSACTION_registerActivityLifecycleListener:
-        {
-          data.enforceInterface(descriptor);
-          github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener _arg0;
-          _arg0 = github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener.Stub.asInterface(data.readStrongBinder());
-          this.registerActivityLifecycleListener(_arg0);
-          reply.writeNoException();
-          return true;
-        }
-        case TRANSACTION_unRegisterActivityLifecycleListener:
-        {
-          data.enforceInterface(descriptor);
-          github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener _arg0;
-          _arg0 = github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener.Stub.asInterface(data.readStrongBinder());
-          this.unRegisterActivityLifecycleListener(_arg0);
           reply.writeNoException();
           return true;
         }
@@ -1175,44 +1151,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void registerActivityLifecycleListener(github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener listener) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
-          boolean _status = mRemote.transact(Stub.TRANSACTION_registerActivityLifecycleListener, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().registerActivityLifecycleListener(listener);
-            return;
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
-      @Override public void unRegisterActivityLifecycleListener(github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener listener) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
-          boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterActivityLifecycleListener, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().unRegisterActivityLifecycleListener(listener);
-            return;
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
       public static github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor sDefaultImpl;
     }
     static final int TRANSACTION_checkActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1244,8 +1182,6 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     static final int TRANSACTION_reportOnActivityStopped = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
     static final int TRANSACTION_reportOnActivityResumed = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
     static final int TRANSACTION_dump = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
-    static final int TRANSACTION_registerActivityLifecycleListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
-    static final int TRANSACTION_unRegisterActivityLifecycleListener = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1294,6 +1230,4 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public void reportOnActivityStopped(android.os.IBinder token) throws android.os.RemoteException;
   public void reportOnActivityResumed(android.os.IBinder token) throws android.os.RemoteException;
   public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException;
-  public void registerActivityLifecycleListener(github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener listener) throws android.os.RemoteException;
-  public void unRegisterActivityLifecycleListener(github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener listener) throws android.os.RemoteException;
 }

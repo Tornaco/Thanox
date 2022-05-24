@@ -14,7 +14,6 @@
             android:name=".ui.verify.VerifyActivity"
             android:excludeFromRecents="true"
             android:exported="true"
-            android:launchMode="singleTask"
             android:taskAffinity="ui.verify.VerifyActivity">
             <intent-filter>
                 <action android:name="github.tornaco.practice.honeycomb.locker.action.VERIFY" />

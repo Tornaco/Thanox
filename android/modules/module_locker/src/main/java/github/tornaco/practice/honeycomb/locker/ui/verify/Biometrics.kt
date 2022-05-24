@@ -9,18 +9,13 @@ import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.practice.honeycomb.locker.R
 
 
-fun FragmentActivity.authenticateWithBiometric(
-    appInfo: AppInfo,
-    onResult: (Boolean, String) -> Unit
-): BiometricPrompt? {
-    return if (isBiometricReady(this)) {
+fun FragmentActivity.authenticateWithBiometric(appInfo: AppInfo, onResult: (Boolean, String) -> Unit) {
+    if (isBiometricReady(this)) {
         val promptInfo = getPromptInfo(appInfo)
         val biometricPrompt = getBiometricPrompt(onResult)
         biometricPrompt.authenticate(promptInfo)
-        biometricPrompt
     } else {
         onResult(false, "Biometric not ready")
-        null
     }
 }
 
@@ -30,8 +25,7 @@ fun isBiometricReady(context: Context) =
 private fun hasBiometricCapability(context: Context): Int {
     val biometricManager = BiometricManager.from(context)
     return biometricManager.canAuthenticate(
-        BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.DEVICE_CREDENTIAL
-    )
+        BiometricManager.Authenticators.BIOMETRIC_WEAK or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
 }
 
 private fun FragmentActivity.getBiometricPrompt(onResult: (Boolean, String) -> Unit): BiometricPrompt {
@@ -61,10 +55,8 @@ private fun FragmentActivity.getPromptInfo(appInfo: AppInfo): BiometricPrompt.Pr
     return BiometricPrompt.PromptInfo.Builder()
         .setTitle(getString(R.string.module_locker_app_name))
         .setSubtitle(getString(R.string.module_locker_verify_input_password, appInfo.appLabel))
-        .setAllowedAuthenticators(
-            BiometricManager.Authenticators.BIOMETRIC_STRONG
-                    or BiometricManager.Authenticators.BIOMETRIC_WEAK
-                    or BiometricManager.Authenticators.DEVICE_CREDENTIAL
-        )
+        .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG
+                or BiometricManager.Authenticators.BIOMETRIC_WEAK
+                or BiometricManager.Authenticators.DEVICE_CREDENTIAL)
         .build()
 }

@@ -67,7 +67,7 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                     Text(
                         modifier = Modifier.alignByBaseline(),
                         text = "${headerInfo.runningAppsCount}",
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         color = Color(onSurfaceColor)
                     )
                     Text(

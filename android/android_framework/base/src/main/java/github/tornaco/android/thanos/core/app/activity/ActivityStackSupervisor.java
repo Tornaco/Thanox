@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.app.activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.RemoteException;
 
 import java.util.List;
 
@@ -129,4 +130,13 @@ public class ActivityStackSupervisor {
         supervisor.setVerifyOnTaskRemovedEnabled(enabled);
     }
 
+    @SneakyThrows
+    public void registerActivityLifecycleListener(IActivityLifecycleListener listener) {
+        supervisor.registerActivityLifecycleListener(listener);
+    }
+
+    @SneakyThrows
+    public void unRegisterActivityLifecycleListener(IActivityLifecycleListener listener) {
+        supervisor.unRegisterActivityLifecycleListener(listener);
+    }
 }

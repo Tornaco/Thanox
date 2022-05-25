@@ -58,7 +58,7 @@ interface IProfileManager {
 
     void addRuleIfNotExists(String ruleJson, in IRuleAddCallback callback, int format);
 
-    void publishStringFact(String factValue, long delayMills);
+    void publishStringFact(int source, String factValue, long delayMills);
 
     void updateRule(int ruleId, String ruleJson, in IRuleAddCallback callback, int format);
 

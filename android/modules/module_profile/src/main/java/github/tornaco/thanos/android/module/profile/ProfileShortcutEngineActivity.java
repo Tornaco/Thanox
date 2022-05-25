@@ -1,5 +1,7 @@
 package github.tornaco.thanos.android.module.profile;
 
+import static github.tornaco.android.thanos.core.profile.ProfileManager.FACT_SOURCE_SHORTCUT;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -39,7 +41,7 @@ public class ProfileShortcutEngineActivity extends Activity {
                 String factValue = getIntent().getStringExtra(EXTRA_PROFILE_FACT_VALUE);
                 if (!TextUtils.isEmpty(factValue)) {
                     XLog.i("publish factValue= %s", factValue);
-                    ThanosManager.from(this).ifServiceInstalled(thanosManager -> thanosManager.getProfileManager().publishStringFact(factValue, 0));
+                    ThanosManager.from(this).ifServiceInstalled(thanosManager -> thanosManager.getProfileManager().publishStringFact(FACT_SOURCE_SHORTCUT, factValue, 0));
                 }
             }
         } finally {

@@ -11,6 +11,9 @@ public class ProfileManager {
     public static final int RULE_FORMAT_JSON = 0;
     public static final int RULE_FORMAT_YAML = 1;
 
+    public static final int FACT_SOURCE_SHORTCUT = 1;
+    public static final int FACT_SOURCE_DATE_TIME = 2;
+
     public static final String PROFILE_AUTO_APPLY_NEW_INSTALLED_APPS_CONFIG_TEMPLATE_PACKAGE_PREFIX
             = "thanox.config.template.";
 
@@ -201,8 +204,8 @@ public class ProfileManager {
     }
 
     @SneakyThrows
-    public void publishStringFact(String factValue, long delayMills) {
-        server.publishStringFact(factValue, delayMills);
+    public void publishStringFact(int source, String factValue, long delayMills) {
+        server.publishStringFact(source, factValue, delayMills);
     }
 
     @SneakyThrows

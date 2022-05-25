@@ -24,28 +24,43 @@ import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.thanos.android.module.profile.R
 
-private class UIState {
-    var showCreateRegularIntervalDialog by mutableStateOf(false)
-}
+private const val ID_TIME_OF_A_DAY = "tod"
+private const val ID_REGULAR_INTERVAL = "ri"
 
 @Composable
 fun Activity.DateTimeEngineScreen() {
-    val uiState = rememberUIState()
+    val durationPickerDialogState = rememberDurationPickerDialogState(title = "Regular interval") {
 
-    val dialogState =
-        rememberDialogState(title = stringResource(id = R.string.module_profile_rule_new),
+    }
+
+
+    val typeSelectDialogState =
+        rememberSingleChoiceDialogState(title = stringResource(id = R.string.module_profile_rule_new),
             items = listOf(
-                SingleChoiceItem(id = "", icon = Icons.Filled.Schedule, label = "Time of a day (coming soon)"),
-                SingleChoiceItem(id = "", icon = Icons.Filled.Timer, label = "Regular interval (coming soon)"),
+                SingleChoiceItem(
+                    id = ID_TIME_OF_A_DAY,
+                    icon = Icons.Filled.Schedule,
+                    label = "Time of a day (coming soon)"
+                ),
+                SingleChoiceItem(
+                    id = ID_REGULAR_INTERVAL,
+                    icon = Icons.Filled.Timer,
+                    label = "Regular interval"
+                ),
             ),
             onItemClick = {
-                uiState.showCreateRegularIntervalDialog = true
+                when (it) {
+                    ID_REGULAR_INTERVAL -> {
+                        durationPickerDialogState.show()
+                    }
+                    ID_TIME_OF_A_DAY -> {}
+                }
             })
 
     ThanoxSmallAppBarScaffold(title = {
@@ -66,26 +81,11 @@ fun Activity.DateTimeEngineScreen() {
                         contentDescription = stringResource(id = R.string.module_profile_rule_new)
                     )
                 }) {
-                dialogState.show()
+                typeSelectDialogState.show()
             }
         }) { contentPadding ->
 
-        SingleChoiceDialog(state = dialogState)
-    }
-}
-
-
-@Composable
-private fun CreateRegularIntervalDialog(uiState: UIState) {
-    if (uiState.showCreateRegularIntervalDialog) {
-        // TODO Impl.
-    }
-}
-
-
-@Composable
-private fun rememberUIState(): UIState {
-    return remember {
-        UIState()
+        SingleChoiceDialog(state = typeSelectDialogState)
+        DurationPickerDialog(state = durationPickerDialogState)
     }
 }

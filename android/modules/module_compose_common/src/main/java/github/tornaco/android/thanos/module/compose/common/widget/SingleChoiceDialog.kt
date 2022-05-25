@@ -53,7 +53,7 @@ class SingleChoiceDialogState(
 }
 
 @Composable
-fun rememberDialogState(
+fun rememberSingleChoiceDialogState(
     title: String,
     items: List<SingleChoiceItem>,
     onItemClick: (String) -> Unit

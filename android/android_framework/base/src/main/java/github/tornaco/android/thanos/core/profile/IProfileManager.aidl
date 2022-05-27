@@ -75,4 +75,6 @@ interface IProfileManager {
     ParcelFileDescriptor getLogFD();
     String getLogPath();
     void clearLogs();
+
+    void executeAction(String action);
 }

@@ -179,6 +179,10 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
             RuleEngineSettingsActivity.start(thisActivity());
             return true;
         }
+        if (R.id.action_rule_console == item.getItemId()) {
+            ConsoleActivity.Starter.INSTANCE.start(thisActivity());
+            return true;
+        }
         if (R.id.action_rule_log == item.getItemId()) {
             LogActivity.Starter.INSTANCE.start(thisActivity());
             return true;

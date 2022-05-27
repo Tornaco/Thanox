@@ -171,6 +171,9 @@ public interface IProfileManager extends android.os.IInterface
     @Override public void clearLogs() throws android.os.RemoteException
     {
     }
+    @Override public void executeAction(java.lang.String action) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -678,6 +681,15 @@ public interface IProfileManager extends android.os.IInterface
         {
           data.enforceInterface(descriptor);
           this.clearLogs();
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_executeAction:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          this.executeAction(_arg0);
           reply.writeNoException();
           return true;
         }
@@ -1648,6 +1660,25 @@ public interface IProfileManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void executeAction(java.lang.String action) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(action);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_executeAction, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().executeAction(action);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.profile.IProfileManager sDefaultImpl;
     }
     static final int TRANSACTION_setAutoApplyForNewInstalledAppsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1695,6 +1726,7 @@ public interface IProfileManager extends android.os.IInterface
     static final int TRANSACTION_getLogFD = (android.os.IBinder.FIRST_CALL_TRANSACTION + 42);
     static final int TRANSACTION_getLogPath = (android.os.IBinder.FIRST_CALL_TRANSACTION + 43);
     static final int TRANSACTION_clearLogs = (android.os.IBinder.FIRST_CALL_TRANSACTION + 44);
+    static final int TRANSACTION_executeAction = (android.os.IBinder.FIRST_CALL_TRANSACTION + 45);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IProfileManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1757,4 +1789,5 @@ public interface IProfileManager extends android.os.IInterface
   public android.os.ParcelFileDescriptor getLogFD() throws android.os.RemoteException;
   public java.lang.String getLogPath() throws android.os.RemoteException;
   public void clearLogs() throws android.os.RemoteException;
+  public void executeAction(java.lang.String action) throws android.os.RemoteException;
 }

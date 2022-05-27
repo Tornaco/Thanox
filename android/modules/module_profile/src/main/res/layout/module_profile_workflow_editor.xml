@@ -52,7 +52,7 @@
             android:id="@+id/line_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/editor_actions_toolbar"
+            android:layout_above="@+id/editor_actions_toolbar_symbols1"
             android:layout_below="@id/app_bar"
             app:numberColor="?colorAccent"
             app:numberSize="12sp"

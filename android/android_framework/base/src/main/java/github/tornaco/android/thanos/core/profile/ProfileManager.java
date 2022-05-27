@@ -209,6 +209,11 @@ public class ProfileManager {
     }
 
     @SneakyThrows
+    public void executeAction(String action) {
+        server.executeAction(action);
+    }
+
+    @SneakyThrows
     public void registerRuleChangeListener(RuleChangeListener listener) {
         server.registerRuleChangeListener(listener.getStub());
     }

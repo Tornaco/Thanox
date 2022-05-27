@@ -3,9 +3,9 @@ package github.tornaco.android.thanos.module.compose.common.widget.pie
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
@@ -30,15 +30,19 @@ fun <T> Legend(
 
     val stateList = chartItems.toStateList()
 
-    LazyVerticalGrid(modifier = modifier,
+    LazyVerticalGrid(
+        modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalArrangement = Arrangement.Center,
-        cells = GridCells.Fixed(columnCount)) {
+        columns = GridCells.Fixed(columnCount)
+    ) {
         items(stateList) { state ->
-            Row(modifier = Modifier
-                .padding(itemPadding),
+            Row(
+                modifier = Modifier
+                    .padding(itemPadding),
                 horizontalArrangement = Arrangement.Start,
-                verticalAlignment = Alignment.CenterVertically) {
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Box(
                     modifier = Modifier
                         .size(dotSize)
@@ -50,7 +54,8 @@ fun <T> Legend(
                     text = state.chartItem.label,
                     maxLines = 3,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface)
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             }
         }
     }

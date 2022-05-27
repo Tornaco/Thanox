@@ -245,7 +245,7 @@ private fun SearchTextField(searchBarState: SearchBarState, focusRequester: Focu
             .focusRequester(focusRequester),
         value = searchBarState.keyword,
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.Transparent,
+            containerColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),

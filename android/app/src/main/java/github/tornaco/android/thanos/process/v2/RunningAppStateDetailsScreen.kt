@@ -108,7 +108,9 @@ private fun RunningAppStateDetailsScreen(
                 AnimatedVisibility(visible = !runningProcessState.isStopped) {
                     Card(
                         modifier = Modifier.padding(16.dp),
-                        containerColor = ColorDefaults.backgroundSurfaceColor()
+                        colors = CardDefaults.cardColors(
+                            containerColor = ColorDefaults.backgroundSurfaceColor()
+                        )
                     ) {
                         Column {
                             StandardSpacer()

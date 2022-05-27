@@ -1,7 +1,6 @@
 package github.tornaco.android.thanos.core.profile;
 
 import android.os.ParcelFileDescriptor;
-import android.os.RemoteException;
 
 import java.util.List;
 
@@ -241,5 +240,15 @@ public class ProfileManager {
     @SneakyThrows
     public void clearLogs() {
         server.clearLogs();
+    }
+
+    @SneakyThrows
+    public void setLogEnabled(boolean enable) {
+        server.setLogEnabled(enable);
+    }
+
+    @SneakyThrows
+    public boolean isLogEnabled() {
+        return server.isLogEnabled();
     }
 }

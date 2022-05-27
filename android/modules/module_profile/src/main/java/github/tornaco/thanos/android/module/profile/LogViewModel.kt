@@ -35,6 +35,7 @@ import java.io.InputStreamReader
 import javax.inject.Inject
 
 data class LogState(
+    val isLogEnabled: Boolean = false,
     val isLoading: Boolean = false,
     val horizontalScrollEnabled: Boolean = false,
     val logs: List<String> = emptyList()
@@ -58,6 +59,9 @@ class LogViewModel @Inject constructor(@ApplicationContext private val context: 
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
             delay(500)
+
+            _state.value = _state.value.copy(isLogEnabled = thanox.profileManager.isLogEnabled)
+
             kotlin.runCatching {
                 val logPath = thanox.profileManager.logPath
                 val fd = thanox.profileManager.logFD
@@ -88,5 +92,10 @@ class LogViewModel @Inject constructor(@ApplicationContext private val context: 
     fun setHorizontalScrollEnabled(horizontalScrollEnabled: Boolean) {
         _state.value =
             _state.value.copy(horizontalScrollEnabled = horizontalScrollEnabled)
+    }
+
+    fun enableLog(enable: Boolean) {
+        thanox.profileManager.isLogEnabled = enable
+        _state.value = _state.value.copy(isLogEnabled = enable)
     }
 }

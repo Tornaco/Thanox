@@ -18,6 +18,7 @@
 package github.tornaco.thanos.android.module.profile.engine
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Schedule
@@ -25,9 +26,11 @@ import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.*
+import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.android.module.profile.R
 
 private const val ID_TIME_OF_A_DAY = "tod"
@@ -35,10 +38,11 @@ private const val ID_REGULAR_INTERVAL = "ri"
 
 @Composable
 fun Activity.DateTimeEngineScreen() {
+    val context = LocalContext.current
+
     val durationPickerDialogState = rememberDurationPickerDialogState(title = "Regular interval") {
-
+        Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()
     }
-
 
     val typeSelectDialogState =
         rememberSingleChoiceDialogState(title = stringResource(id = R.string.module_profile_rule_new),

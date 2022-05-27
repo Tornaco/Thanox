@@ -23,21 +23,26 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.window.DialogProperties
 import github.tornaco.android.thanos.module.compose.common.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.StandardSpacer
 import kotlin.time.Duration
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
+private class DurationState {
+    var h = mutableStateOf(0)
+    var m = mutableStateOf(0)
+    var s = mutableStateOf(0)
+}
 
 class DurationPickerDialogState(
     val title: String,
-    val onDurationPick: (Duration) -> Unit
+    val onDurationPick: (Duration) -> Unit,
 ) {
     private var _isShowing: Boolean by mutableStateOf(false)
     val isShowing get() = _isShowing
@@ -64,6 +69,7 @@ fun rememberDurationPickerDialogState(
 @Composable
 fun DurationPickerDialog(state: DurationPickerDialogState) {
     if (state.isShowing) {
+        val durationState = DurationState()
         AlertDialog(
             title = {
                 Text(text = state.title)
@@ -73,14 +79,28 @@ fun DurationPickerDialog(state: DurationPickerDialogState) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.Start
                 ) {
-                    Hour()
+                    Hour(durationState)
                     StandardSpacer()
-                    Minute()
+                    Minute(durationState)
                     StandardSpacer()
-                    Second()
+                    Second(durationState)
                 }
             },
-            confirmButton = {},
+            confirmButton = {
+                val timeMillis = (durationState.h.value * 60 * 60 * 1000
+                        + durationState.m.value * 60 * 1000
+                        + durationState.s.value * 1000)
+                TextButton(onClick = {
+                    state.onDurationPick(timeMillis.toDuration(DurationUnit.MILLISECONDS))
+                }) {
+                    Text(text = stringResource(id = android.R.string.ok))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { state.dismiss() }) {
+                    Text(text = stringResource(id = android.R.string.cancel))
+                }
+            },
             onDismissRequest = {
                 state.dismiss()
             },
@@ -90,8 +110,9 @@ fun DurationPickerDialog(state: DurationPickerDialogState) {
 }
 
 @Composable
-private fun Hour() {
+private fun Hour(durationState: DurationState) {
     Field(
+        durationState.h,
         "Hour",
         0,
         999
@@ -99,8 +120,9 @@ private fun Hour() {
 }
 
 @Composable
-private fun Minute() {
+private fun Minute(durationState: DurationState) {
     Field(
+        durationState.m,
         "Minute",
         0,
         59
@@ -108,8 +130,9 @@ private fun Minute() {
 }
 
 @Composable
-private fun Second() {
+private fun Second(durationState: DurationState) {
     Field(
+        durationState.s,
         "Second",
         0,
         59
@@ -117,10 +140,8 @@ private fun Second() {
 }
 
 @Composable
-private fun Field(label: String, min: Int = 0, max: Int) {
-    var value by remember {
-        mutableStateOf(min)
-    }
+private fun Field(fieldValue: MutableState<Int>, label: String, min: Int = 0, max: Int) {
+    var value by fieldValue
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center

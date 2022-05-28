@@ -25,24 +25,22 @@ import androidx.appcompat.widget.Toolbar
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.widget.addTextChangedListener
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.elvishew.xlog.XLog
 import com.google.accompanist.insets.navigationBarsWithImePadding
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.util.ActivityUtils
-import github.tornaco.android.thanos.util.TypefaceHelper
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileConsoleEditorBinding
 
 @AndroidEntryPoint
@@ -76,9 +74,15 @@ class ConsoleActivity : ComposeThemeActivity() {
                     )
                 }
             }) { contentPadding ->
-            Console(contentPadding, state) {
-                viewModel.input(it)
-            }
+            Console(
+                contentPadding = contentPadding,
+                state = state,
+                onInput = {
+                    viewModel.input(it)
+                },
+                insertSymbol = {
+                    viewModel.insertSymbol(it)
+                })
         }
     }
 }
@@ -87,13 +91,17 @@ class ConsoleActivity : ComposeThemeActivity() {
 private fun Console(
     contentPadding: PaddingValues,
     state: ConsoleState,
-    onInput: (String) -> Unit
+    onInput: (TextFieldValue) -> Unit,
+    insertSymbol: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(contentPadding)
+            .padding(contentPadding),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
+        CodeContent(state, onInput)
+        StandardSpacer()
         AndroidView(
             modifier = Modifier
                 .fillMaxWidth()
@@ -101,17 +109,38 @@ private fun Console(
             factory = { context ->
                 val binding =
                     ModuleProfileConsoleEditorBinding.inflate(LayoutInflater.from(context))
-                initView(context, binding, state, onInput)
+                initView(context, binding, insertSymbol)
                 return@AndroidView binding.root
             })
     }
 }
 
+// https://github.com/codeckle/compose-code-editor
+@Composable
+private fun CodeContent(
+    state: ConsoleState,
+    onInput: (TextFieldValue) -> Unit
+) {
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = TextFieldDefaults.textFieldColors(
+            containerColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        ),
+        value = state.textFieldValue,
+        onValueChange = {
+            onInput(it)
+        }
+    )
+}
+
+
 private fun initView(
     context: Context,
     binding: ModuleProfileConsoleEditorBinding,
-    state: ConsoleState,
-    onInput: (String) -> Unit
+    insertSymbol: (String) -> Unit = {}
 ) {
     var symbols: Array<String?> =
         context.resources.getStringArray(R.array.module_profile_symbols_1)
@@ -148,34 +177,10 @@ private fun initView(
     }
 
     val symbolClickListener = Toolbar.OnMenuItemClickListener { item: MenuItem ->
-        // This is symbols.
-        val s = item.title.toString()
-        XLog.i("Input: %s", s)
-        val start = binding.editText.selectionStart.coerceAtLeast(0)
-        val end = binding.editText.selectionEnd.coerceAtLeast(0)
-        if (binding.editText.text == null) return@OnMenuItemClickListener false
-        binding.editText.text!!
-            .replace(
-                start.coerceAtMost(end),
-                start.coerceAtLeast(end),
-                s,
-                0,
-                s.length
-            )
+        insertSymbol(item.title.toString())
         true
     }
     binding.editorActionsToolbarSymbols1.setOnMenuItemClickListener(symbolClickListener)
     binding.editorActionsToolbarSymbols2.setOnMenuItemClickListener(symbolClickListener)
     binding.editorActionsToolbarSymbols3.setOnMenuItemClickListener(symbolClickListener)
-
-    binding.placeholder = state.action
-    binding.editText.typeface = TypefaceHelper.jetbrainsMono(context)
-    binding.lineLayout.setTypeface(TypefaceHelper.jetbrainsMono(context))
-    binding.editText.addSyntax(context.assets, "java.json")
-    binding.lineLayout.attachEditText(binding.editText)
-    binding.editText.startHighlight(true)
-    binding.editText.updateVisibleRegion()
-    binding.editText.addTextChangedListener {
-        onInput(it.toString())
-    }
 }

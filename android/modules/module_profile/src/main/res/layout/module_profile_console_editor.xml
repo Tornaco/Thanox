@@ -2,45 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="placeholder"
-            type="String" />
-
-        <variable
-            name="format"
-            type="String" />
-
-        <import type="android.view.View" />
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
         android:fitsSystemWindows="true">
-
-        <com.vic797.syntaxhighlight.LineCountLayout
-            android:id="@+id/line_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/editor_actions_toolbar_symbols1"
-            android:layout_marginBottom="@dimen/common_view_margin_default"
-            app:numberColor="?colorAccent"
-            app:numberSize="12sp"
-            app:stripColor="?colorSurface">
-
-            <com.vic797.syntaxhighlight.SyntaxHighlighter
-                android:id="@+id/edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="@{placeholder}"
-                android:textSize="@dimen/module_profile_editor_text_size"
-                app:stripLineColor="?colorSurface" />
-
-        </com.vic797.syntaxhighlight.LineCountLayout>
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/editor_actions_toolbar_symbols1"

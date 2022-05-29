@@ -11,6 +11,7 @@
     <string name="common_menu_title_remove">Remove</string>
     <string name="common_menu_title_wiki">Wiki</string>
     <string name="common_menu_title_import_from_clipboard">Import from clipboard</string>
+    <string name="common_menu_title_import">Import</string>
     <string name="common_menu_title_export_to_clipboard">Export to clipboard</string>
     <string name="common_fab_title_done">Done</string>
     <string name="common_fab_title_add">Add</string>

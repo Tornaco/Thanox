@@ -79,4 +79,7 @@ interface IProfileManager {
     boolean isLogEnabled();
 
     void executeAction(String action);
+
+    RuleInfo parseRuleOrNull(String ruleString, int format);
+    RuleInfo getRuleByName(String ruleName);
 }

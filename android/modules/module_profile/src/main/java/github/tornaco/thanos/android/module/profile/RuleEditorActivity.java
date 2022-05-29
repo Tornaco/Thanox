@@ -43,12 +43,14 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
     private RuleInfo ruleInfo;
     private String originalContent = "";
     private int format;
+    private boolean readOnly;
 
     @Verify
-    public static void start(Context context, RuleInfo ruleInfo, int format) {
+    public static void start(Context context, RuleInfo ruleInfo, int format, boolean readOnly) {
         Bundle data = new Bundle();
         data.putParcelable("rule", ruleInfo);
         data.putInt("format", format);
+        data.putBoolean("readOnly", readOnly);
         ActivityUtils.startActivity(context, RuleEditorActivity.class, data);
     }
 
@@ -70,6 +72,7 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
         } else {
             format = getIntent().getIntExtra("format", ProfileManager.RULE_FORMAT_JSON);
         }
+        readOnly = getIntent().getBooleanExtra("readOnly", false);
         return format == ProfileManager.RULE_FORMAT_YAML || format == ProfileManager.RULE_FORMAT_JSON;
     }
 
@@ -81,10 +84,20 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
         }
 
         setTitle(ruleInfo == null ? R.string.module_profile_rule_new : R.string.module_profile_rule_edit);
+        if (readOnly) {
+            setTitle(ruleInfo.getName());
+        }
 
         if (ruleInfo != null) {
             checkRuleAndUpdateTips(ruleInfo.getRuleString());
         }
+
+        binding.editText.setEnabled(!readOnly);
+        int toolbarVisible = !readOnly ? View.VISIBLE : View.GONE;
+        binding.editorActionsToolbarSymbols1.setVisibility(toolbarVisible);
+        binding.editorActionsToolbarSymbols2.setVisibility(toolbarVisible);
+        binding.editorActionsToolbarSymbols3.setVisibility(toolbarVisible);
+        binding.editorActionsToolbar.setVisibility(toolbarVisible);
 
         binding.editText.addTextChangedListener(new TextWatcherAdapter() {
             @Override
@@ -328,8 +341,8 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
                             }
 
                             @Override
-                            protected void onValid() {
-                                super.onValid();
+                            protected void onValid(RuleInfo ruleInfo) {
+                                super.onValid(ruleInfo);
                                 XLog.w("onValid: %s", format);
                                 binding.ruleCheckIndicator.setImageResource(R.drawable.module_profile_ic_rule_valid_green_fill);
                             }

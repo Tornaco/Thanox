@@ -11,6 +11,7 @@
     <string name="common_menu_title_rename">重命名</string>
     <string name="common_menu_title_wiki">指南</string>
     <string name="common_menu_title_import_from_clipboard">從剪貼板導入</string>
+    <string name="common_menu_title_import">導入</string>
     <string name="common_menu_title_export_to_clipboard">導出到剪貼板</string>
     <string name="common_fab_title_done">完成</string>
     <string name="common_fab_title_add">添加</string>

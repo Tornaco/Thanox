@@ -181,6 +181,14 @@ public interface IProfileManager extends android.os.IInterface
     @Override public void executeAction(java.lang.String action) throws android.os.RemoteException
     {
     }
+    @Override public github.tornaco.android.thanos.core.profile.RuleInfo parseRuleOrNull(java.lang.String ruleString, int format) throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public github.tornaco.android.thanos.core.profile.RuleInfo getRuleByName(java.lang.String ruleName) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -715,6 +723,40 @@ public interface IProfileManager extends android.os.IInterface
           _arg0 = data.readString();
           this.executeAction(_arg0);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_parseRuleOrNull:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          int _arg1;
+          _arg1 = data.readInt();
+          github.tornaco.android.thanos.core.profile.RuleInfo _result = this.parseRuleOrNull(_arg0, _arg1);
+          reply.writeNoException();
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
+          return true;
+        }
+        case TRANSACTION_getRuleByName:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.profile.RuleInfo _result = this.getRuleByName(_arg0);
+          reply.writeNoException();
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
           return true;
         }
         default:
@@ -1742,6 +1784,59 @@ public interface IProfileManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public github.tornaco.android.thanos.core.profile.RuleInfo parseRuleOrNull(java.lang.String ruleString, int format) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        github.tornaco.android.thanos.core.profile.RuleInfo _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(ruleString);
+          _data.writeInt(format);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_parseRuleOrNull, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().parseRuleOrNull(ruleString, format);
+          }
+          _reply.readException();
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.profile.RuleInfo.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public github.tornaco.android.thanos.core.profile.RuleInfo getRuleByName(java.lang.String ruleName) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        github.tornaco.android.thanos.core.profile.RuleInfo _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(ruleName);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getRuleByName, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getRuleByName(ruleName);
+          }
+          _reply.readException();
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.profile.RuleInfo.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.profile.IProfileManager sDefaultImpl;
     }
     static final int TRANSACTION_setAutoApplyForNewInstalledAppsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1792,6 +1887,8 @@ public interface IProfileManager extends android.os.IInterface
     static final int TRANSACTION_setLogEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 45);
     static final int TRANSACTION_isLogEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 46);
     static final int TRANSACTION_executeAction = (android.os.IBinder.FIRST_CALL_TRANSACTION + 47);
+    static final int TRANSACTION_parseRuleOrNull = (android.os.IBinder.FIRST_CALL_TRANSACTION + 48);
+    static final int TRANSACTION_getRuleByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 49);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IProfileManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1857,4 +1954,6 @@ public interface IProfileManager extends android.os.IInterface
   public void setLogEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isLogEnabled() throws android.os.RemoteException;
   public void executeAction(java.lang.String action) throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.profile.RuleInfo parseRuleOrNull(java.lang.String ruleString, int format) throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.profile.RuleInfo getRuleByName(java.lang.String ruleName) throws android.os.RemoteException;
 }

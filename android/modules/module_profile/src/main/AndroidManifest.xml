@@ -37,5 +37,8 @@
         <activity
             android:name=".engine.NewRegularIntervalActivity"
             android:exported="false" />
+        <activity
+            android:name=".example.ProfileExampleActivity"
+            android:exported="false" />
     </application>
 </manifest>

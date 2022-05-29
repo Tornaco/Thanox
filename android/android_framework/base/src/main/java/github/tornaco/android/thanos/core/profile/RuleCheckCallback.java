@@ -2,14 +2,13 @@ package github.tornaco.android.thanos.core.profile;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.os.RemoteException;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 
 public class RuleCheckCallback {
 
-    protected void onValid() {
+    protected void onValid(RuleInfo ruleInfo) {
 
     }
 
@@ -23,12 +22,12 @@ public class RuleCheckCallback {
 
         @Override
 
-        public void onValid() throws RemoteException {
-            handler.post(RuleCheckCallback.this::onValid);
+        public void onValid(RuleInfo ruleInfo) {
+            handler.post(() -> RuleCheckCallback.this.onValid(ruleInfo));
         }
 
         @Override
-        public void onInvalid(int errorCode, String errorMessage) throws RemoteException {
+        public void onInvalid(int errorCode, String errorMessage) {
             handler.post(() -> RuleCheckCallback.this.onInvalid(errorCode, errorMessage));
         }
 

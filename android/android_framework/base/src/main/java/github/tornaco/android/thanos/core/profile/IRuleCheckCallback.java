@@ -7,7 +7,7 @@ public interface IRuleCheckCallback extends android.os.IInterface
   /** Default implementation for IRuleCheckCallback. */
   public static class Default implements github.tornaco.android.thanos.core.profile.IRuleCheckCallback
   {
-    @Override public void onValid() throws android.os.RemoteException
+    @Override public void onValid(github.tornaco.android.thanos.core.profile.RuleInfo rule) throws android.os.RemoteException
     {
     }
     @Override public void onInvalid(int errorCode, java.lang.String errorMessage) throws android.os.RemoteException
@@ -59,7 +59,14 @@ public interface IRuleCheckCallback extends android.os.IInterface
         case TRANSACTION_onValid:
         {
           data.enforceInterface(descriptor);
-          this.onValid();
+          github.tornaco.android.thanos.core.profile.RuleInfo _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.profile.RuleInfo.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          this.onValid(_arg0);
           return true;
         }
         case TRANSACTION_onInvalid:
@@ -93,14 +100,21 @@ public interface IRuleCheckCallback extends android.os.IInterface
       {
         return DESCRIPTOR;
       }
-      @Override public void onValid() throws android.os.RemoteException
+      @Override public void onValid(github.tornaco.android.thanos.core.profile.RuleInfo rule) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          if ((rule!=null)) {
+            _data.writeInt(1);
+            rule.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onValid, _data, null, android.os.IBinder.FLAG_ONEWAY);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onValid();
+            getDefaultImpl().onValid(rule);
             return;
           }
         }
@@ -146,6 +160,6 @@ public interface IRuleCheckCallback extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public void onValid() throws android.os.RemoteException;
+  public void onValid(github.tornaco.android.thanos.core.profile.RuleInfo rule) throws android.os.RemoteException;
   public void onInvalid(int errorCode, java.lang.String errorMessage) throws android.os.RemoteException;
 }

@@ -18,6 +18,10 @@ public class ToastUtils {
         Toast.makeText(context, "\uD83D\uDC4E", Toast.LENGTH_LONG).show();
     }
 
+    public static void nook(Context context, String message) {
+        Toast.makeText(context, "\uD83D\uDC4E\n" + message, Toast.LENGTH_LONG).show();
+    }
+
     public static void copiedToClipboard(Context context) {
         Toast.makeText(context, context.getString(R.string.common_toast_copied_to_clipboard), Toast.LENGTH_LONG).show();
     }

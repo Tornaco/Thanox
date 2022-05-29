@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.core.profile;
 
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 
 import java.util.List;
 
@@ -75,6 +76,11 @@ public class ProfileManager {
     @SneakyThrows
     public void checkRule(String ruleJson, RuleCheckCallback callback, int format) {
         server.checkRule(ruleJson, callback.getStub(), format);
+    }
+
+    @SneakyThrows
+    public RuleInfo parseRuleOrNull(String ruleJson, int format) {
+        return server.parseRuleOrNull(ruleJson, format);
     }
 
     @SneakyThrows
@@ -225,6 +231,11 @@ public class ProfileManager {
     @SneakyThrows
     public RuleInfo getRuleById(int ruleId) {
         return server.getRuleById(ruleId);
+    }
+
+    @SneakyThrows
+    public RuleInfo getRuleByName(String ruleName) {
+        return server.getRuleByName(ruleName);
     }
 
     @SneakyThrows

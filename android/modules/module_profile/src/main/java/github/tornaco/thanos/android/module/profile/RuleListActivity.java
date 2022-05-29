@@ -38,6 +38,7 @@ import github.tornaco.android.thanos.widget.SwitchBar;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileRuleListActivityBinding;
+import github.tornaco.thanos.android.module.profile.example.ProfileExampleActivity;
 
 @RuntimePermissions
 public class RuleListActivity extends ThemeActivity implements RuleItemClickListener {
@@ -139,7 +140,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
     @Override
     public void onItemClick(@NonNull RuleInfo ruleInfo) {
-        RuleEditorActivity.start(thisActivity(), ruleInfo, ruleInfo.getFormat());
+        RuleEditorActivity.start(thisActivity(), ruleInfo, ruleInfo.getFormat(), false);
     }
 
     @Override
@@ -161,7 +162,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
         }
 
         if (R.id.action_import_examples == item.getItemId()) {
-            viewModel.importRuleExamples();
+            ProfileExampleActivity.Starter.INSTANCE.start(thisActivity());
             return true;
         }
 
@@ -233,11 +234,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, (dialog, which)
                         -> ThanosManager.from(getApplicationContext())
-                        .ifServiceInstalled(
-                                thanosManager ->
-                                        RuleEditorActivity.start(thisActivity(),
-                                                null,
-                                                format.get())))
+                        .ifServiceInstalled(thanosManager -> RuleEditorActivity.start(thisActivity(), null, format.get(), false)))
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
     }

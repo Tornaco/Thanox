@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Use System Context",
+    "description": "调用Context，获取当前User信息",
+    "priority": 1,
+    "condition": "screenOn == true",
+    "actions": [
+      "ui.showShortToast(\"User info: \" + context.getSystemService(context.USER_SERVICE).getUserInfo(android.os.UserHandle.getCallingUserId()).name);"
+    ]
+  }
+]

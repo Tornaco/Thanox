@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Package Updated",
+    "description": "应用更新后弹出Toast提示",
+    "priority": 1,
+    "condition": "pkgUpdated == true",
+    "actions": [
+      "ui.showShortToast(\"App updated: \" + thanos.pkgManager.getAppInfo(pkgName).appLabel);"
+    ]
+  }
+]

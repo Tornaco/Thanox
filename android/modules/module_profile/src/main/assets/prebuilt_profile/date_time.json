@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Date Time event",
+    "description": "设置并监听按照时间间隔触发的事件",
+    "priority": 1,
+    "condition": "timeTick && tag == \"test\"",
+    "actions": [
+      "ui.showNotification(\"notiTag\", \"Title\", \"Msg\", true);"
+    ]
+  }
+]

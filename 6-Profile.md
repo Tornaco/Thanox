@@ -48,6 +48,7 @@ You can build a simple rules engine yourself. All you need is to create a bunch 
     "name": "Current pkg",
     "description": "应用切换时，使用Toast显示当前应用的当前应用包名",
     "priority": 2,
+    "delay": 2000,
     "condition": "frontPkgChanged == true",
     "actions": [
       "ui.showShortToast(activity.getFrontAppPackage());"
@@ -63,6 +64,7 @@ You can build a simple rules engine yourself. All you need is to create a bunch 
 | name        | 请使用英文，情景模式名字，多个模式不能重复，否则会被覆盖     |
 | description | 任意的描述                                                   |
 | priority    | 优先级，决定执行顺序                                         |
+| delay    | action 动作执行的延迟，时间单位为毫秒                                         |
 | condition   | 触发条件，支持mvel表达式，条件可选的基于事实的facts-param请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义 |
 | actions     | 要执行的动作，支持[mvel表达式](http://mvel.documentnode.com) ，可以设置多个，动作可选的handle请参考下面的章节<br />语法注意：双引号需要使用\转移字符转义 |
 
@@ -76,14 +78,16 @@ You can build a simple rules engine yourself. All you need is to create a bunch 
 
 &nbsp;
 
-### 0.4.1. 应用安装
+### 0.4.1. 应用安装、卸载、更新
 
-应用安装成功之后，thanox会发布这个事实，并注入一些参数，你可以使用这些参数做条件判断，或者执行动作时作为参数使用。
+应用安装、卸载、更新之后，thanox会发布这个事实，并注入一些参数，你可以使用这些参数做条件判断，或者执行动作时作为参数使用。
 
 | 参数名   | 类型                  | 含义           | 示例 |
 | -------- | --------------------- | -------------- | ---- |
-| pkgAdded | Boolean（true/false） | 新应用已经安装 | 如下 |
-| pkgName  | String（字符串）      | 安装的应用包名 | 如下 |
+| pkgAdded | Boolean | 新应用已经安装 | 如下 |
+| pkgRemoved | Boolean |应用被卸载 | 如下 |
+| pkgUpdated | Boolean | 应用已更新 | 如下 |
+| pkgName  | String     | 安装的应用包名 | 如下 |
 
 **pkgAdded** 示例
 
@@ -724,13 +728,13 @@ interface IHW {
 
 文件读写能力。
 
-注意：受限于文件权限，所有文件的根目录为/data/system/thanos/profile_user_io
+注意：受限于文件权限，所有文件的根目录为/data/system/thanos_xxx/profile_user_io
 
 | 能力        | 含义               | 参数         | 举例 | 返回值                |
 | ----------- | ------------------ | ------------ | ---- | --------------------- |
 | read        | 读取文件           | 文件相对路径 | 略   | String                |
-| disableWifi | 写内容到文件       | 文件相对路径 | 略   | Boolean（true/false） |
-| writeAppend | 写内容到文件，追加 | 文件相对路径 | 略   | Boolean（true/false） |
+| write | 写内容到文件       | 文件相对路径 | 略   | Boolean |
+| writeAppend | 写内容到文件，追加 | 文件相对路径 | 略   | Boolean |
 
 接口定义：
 
@@ -957,10 +961,10 @@ interface IPkg {
 
 ```java
 log.log("Log message");
-
 ```
 
 接口定义：
+
 ```java
 @HandlerName("log")
 public interface ILog {
@@ -1004,9 +1008,64 @@ interface IAudio {
 
 &nbsp;
 
-### 0.5.15. Actor
+### 0.5.15. Context
 
-情景模式Action相关，目前支持Action的延迟执行。
+Android System [Context](https://developer.android.com/reference/android/content/Context)，Android系统上下文。
+基于Context可以实现更丰富的功能调用。举例：
+
+```json
+[
+  {
+    "name": "Use System Context",
+    "description": "调用Context，获取当前User信息",
+    "priority": 1,
+    "condition": "screenOn == true",
+    "actions": [
+      "ui.showShortToast(\"User info: \" + context.getSystemService(context.USER_SERVICE).getUserInfo(android.os.UserHandle.getCallingUserId()).name);"
+    ]
+  }
+]
+```
+&nbsp;
+
+### 0.5.16. Thanos
+
+你可以使用thanox或thanos来调用[Thanos API](https://github.com/Tornaco/Thanox/blob/master/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/app/ThanosManager.java)，举例：
+
+```json
+[
+  {
+    "name": "Thanos API",
+    "description": "Example actions with thanos API",
+    "priority": 2,
+    "condition": "frontPkgChanged == true && to == \"com.tencent.mm\"",
+    "actions": [
+      "thanos.getProfileManager().enableRuleByName(\"my_we_chat_rule\");"
+    ]
+  }
+]
+```
+&nbsp;
+
+### 0.5.15. Actor(废弃)
+
+~~情景模式Action相关，目前支持Action的延迟执行。~~
+
+Actor已被废弃：请使用delay属性实现延迟效果。例如：
+
+```json
+[
+  {
+    "name": "Delayed action example",
+    "description": "...",
+    "priority": 1,
+    "delay": 2000,
+    "condition": "...",
+    "actions": [...]
+  }
+]
+```
+
 
 
 | 能力           | 含义                   | 参数       | 举例 | 返回值        |

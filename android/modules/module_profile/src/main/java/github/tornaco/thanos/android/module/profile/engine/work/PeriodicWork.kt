@@ -20,6 +20,7 @@ package github.tornaco.thanos.android.module.profile.engine.work
 import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.profile.ProfileManager
 
@@ -28,9 +29,11 @@ class PeriodicWork(private val context: Context, workerParams: WorkerParameters)
     private val thanox get() = ThanosManager.from(context)
 
     override fun doWork(): Result {
+        val tag = inputData.getString("tag")
+        XLog.w("PeriodicWork publishStringFact. $tag")
         thanox.profileManager.publishStringFact(
             ProfileManager.FACT_SOURCE_DATE_TIME,
-            inputData.getString("tag"),
+            tag,
             0L
         )
         return Result.success()

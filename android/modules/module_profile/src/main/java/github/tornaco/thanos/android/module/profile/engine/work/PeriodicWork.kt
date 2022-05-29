@@ -30,7 +30,7 @@ class PeriodicWork(private val context: Context, workerParams: WorkerParameters)
     override fun doWork(): Result {
         thanox.profileManager.publishStringFact(
             ProfileManager.FACT_SOURCE_DATE_TIME,
-            inputData.getString("fact"),
+            inputData.getString("tag"),
             0L
         )
         return Result.success()

@@ -6,6 +6,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
 }
 
@@ -81,6 +82,9 @@ dependencies {
     implementation(Libs.Others.guavaAndroid)
     implementation(Libs.Others.glide)
     annotationProcessor(Libs.Others.glideCompiler)
+
+    implementation(tornaco.project.android.thanox.Compose.enro)
+    kapt(tornaco.project.android.thanox.Compose.enroApt)
 
     compileOnly(Libs.Others.lombok)
     annotationProcessor(Libs.Others.lombok)

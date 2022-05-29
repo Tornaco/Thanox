@@ -34,5 +34,8 @@
             android:name=".ConsoleActivity"
             android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".engine.NewRegularIntervalActivity"
+            android:exported="false" />
     </application>
 </manifest>

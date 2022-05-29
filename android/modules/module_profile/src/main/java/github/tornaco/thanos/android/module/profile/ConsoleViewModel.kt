@@ -80,7 +80,7 @@ class ConsoleViewModel @Inject constructor(@ApplicationContext private val conte
         input(
             state.value.textFieldValue.copy(
                 text = textWithSymbol,
-                selection = TextRange(e + symbol.length + 1)
+                selection = TextRange(e + symbol.length)
             )
         )
     }

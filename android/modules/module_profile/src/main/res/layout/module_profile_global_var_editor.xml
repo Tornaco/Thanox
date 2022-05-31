@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="var"
-            type="github.tornaco.android.thanos.core.profile.GlobalVar" />
+            name="content"
+            type="String" />
 
         <variable
             name="placeholder"
@@ -62,12 +62,13 @@
             app:numberSize="12sp"
             app:stripColor="?colorSurface">
 
-            <com.vic797.syntaxhighlight.SyntaxHighlighter
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:padding="5dp"
-                android:text="@{var== null? placeholder : var.listToJson()}"
+                android:text="@{content}"
                 android:textSize="@dimen/module_profile_editor_text_size"
                 app:stripLineColor="?colorSurface" />
 

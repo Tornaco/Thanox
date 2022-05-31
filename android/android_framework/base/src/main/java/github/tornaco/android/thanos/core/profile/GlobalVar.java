@@ -11,17 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.annotation.Nullable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public final class GlobalVar implements Parcelable {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -44,6 +34,30 @@ public final class GlobalVar implements Parcelable {
             return new GlobalVar[size];
         }
     };
+
+    public GlobalVar(String name, List<String> stringList) {
+        this.name = name;
+        this.stringList = stringList;
+    }
+
+    public GlobalVar() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<String> getStringList() {
+        return stringList;
+    }
+
+    public void setStringList(List<String> stringList) {
+        this.stringList = stringList;
+    }
 
     @Override
     public int describeContents() {

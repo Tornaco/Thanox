@@ -20,6 +20,7 @@ import com.vic797.syntaxhighlight.SyntaxListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -150,18 +151,14 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
             return false;
         });
 
-        binding.setVar(globalVar);
+        binding.setContent(originalContent);
         binding.setPlaceholder(null);
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
 
         binding.editText.setTypeface(TypefaceHelper.jetbrainsMono(thisActivity()));
         binding.lineLayout.setTypeface(TypefaceHelper.jetbrainsMono(thisActivity()));
-        binding.editText.setListener(this);
-        binding.editText.addSyntax(getAssets(), "json.json");
         binding.lineLayout.attachEditText(binding.editText);
-        binding.editText.startHighlight(true);
-        binding.editText.updateVisibleRegion();
 
         setTitle(globalVar.getName());
     }
@@ -192,6 +189,7 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_pick_app == item.getItemId()) {
             ArrayList<String> exclude = GlobalVar.listFromJson(getCurrentEditingContent());
+            if (exclude == null) exclude = new ArrayList<>(0);
             ArrayList<Pkg> pkgs = exclude.stream().map(Pkg::systemUserPkg).collect(Collectors.toCollection(Lists::newArrayList));
             AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, pkgs);
             return true;
@@ -271,17 +269,17 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
         super.onActivityResult(requestCode, resultCode, data);
         if (REQ_PICK_APPS == requestCode && resultCode == RESULT_OK && data != null && data.hasExtra("apps")) {
             List<AppInfo> appInfos = data.getParcelableArrayListExtra("apps");
+
             List<String> stringList = new ArrayList<>();
             CollectionUtils.consumeRemaining(appInfos, appInfo -> stringList.add(appInfo.getPkgName()));
-            if (globalVar != null) {
-                if (!CollectionUtils.isNullOrEmpty(globalVar.getStringList())) {
-                    stringList.addAll(globalVar.getStringList());
-                }
-                globalVar.setStringList(stringList);
-                binding.setVar(globalVar);
-                binding.editText.startHighlight(true);
-                binding.editText.updateVisibleRegion();
+
+            List<String> editorList = GlobalVar.listFromJson(getCurrentEditingContent());
+            if (editorList != null) {
+                stringList.addAll(editorList);
             }
+
+            Objects.requireNonNull(globalVar).setStringList(stringList);
+            binding.setContent(globalVar.listToJson());
         }
     }
 

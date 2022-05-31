@@ -3,5 +3,5 @@
     <string name="app_desc">为情景模式提供su接口支持</string>
 
     <string name="dialog_desc_su_enabled">已为Thanox情景模式启用su API支持，接下来请在弹出的超级权限授予请求中点击允许，如果未收到请求，请手动打开超级用户权限。
-        \nsu命令将会以Thanox应用的身份执行，请允许Thanox应用自启。</string>
+        \n\nsu命令将会以Thanox应用的身份执行。\n\n\n ！！！！！！请允许Thanox应用自启！！！！！！</string>
 </resources>

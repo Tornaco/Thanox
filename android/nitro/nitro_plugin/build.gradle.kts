@@ -13,6 +13,7 @@ android {
         compileSdk = Configs.compileSdkVersion
         targetSdk = Configs.targetSdkVersion
         testInstrumentationRunner = Configs.testRunner
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     compileOptions {

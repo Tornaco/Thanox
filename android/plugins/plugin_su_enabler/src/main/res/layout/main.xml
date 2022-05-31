@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/switch1"
+        android:layout_centerHorizontal="true"
         android:text="@string/app_desc"
-        android:layout_centerHorizontal="true" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-    <androidx.appcompat.widget.SwitchCompat
+    <TextView
+        android:id="@+id/enabled_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/switch1"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:text="@string/dialog_desc_su_enabled"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+    <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package github.tornaco.android.plugin.example;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -7,14 +8,12 @@ import android.util.Log;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
 import github.tornaco.android.thanos.core.app.ThanosManager;
 
 public class MainActivity extends Activity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
@@ -28,7 +27,7 @@ public class MainActivity extends Activity {
             boolean installed = ThanosManager.from(getApplicationContext())
                     .getProfileManager()
                     .isShellSuSupportInstalled();
-            Switch s = findViewById(R.id.switch1);
+            @SuppressLint("UseSwitchCompatOrMaterialCode") Switch s = findViewById(R.id.switch1);
             s.setChecked(installed);
             s.setOnClickListener(v -> setSuSupportEnabled(s.isChecked()));
         } catch (Throwable e) {

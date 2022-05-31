@@ -3,9 +3,12 @@ package github.tornaco.android.nitro.framework.plugin;
 import android.content.ComponentName;
 import android.util.Log;
 
+import androidx.annotation.Keep;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Keep
 public class ComponentFactory implements Serializable {
 
     private static final String TAG = "ComponentFactory";

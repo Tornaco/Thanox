@@ -25,6 +25,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toolbar;
 
+import androidx.annotation.Keep;
+
 import java.util.Objects;
 
 import github.tornaco.android.nitro.framework.plugin.iface.HostActivityInvokerInterface;
@@ -37,6 +39,7 @@ import lombok.ToString;
 
 @ToString
 @SuppressLint({"MissingSuperCall", "Registered"})
+@Keep
 public class PluginActivity extends Activity {
     private static final String TAG = "PluginActivity";
     @Getter

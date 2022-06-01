@@ -204,4 +204,7 @@ interface IActivityManager {
 
     void setBlockAllProvider(in Pkg pkg, boolean block);
     boolean isBlockAllProvider(in Pkg pkg);
+
+    // Return 0 if it fail
+    long getProcessStartTime(int pid);
 }

@@ -453,6 +453,12 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
+    // Return 0 if it fail
+
+    @Override public long getProcessStartTime(int pid) throws android.os.RemoteException
+    {
+      return 0L;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1710,6 +1716,16 @@ public interface IActivityManager extends android.os.IInterface
           boolean _result = this.isBlockAllProvider(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_getProcessStartTime:
+        {
+          data.enforceInterface(descriptor);
+          int _arg0;
+          _arg0 = data.readInt();
+          long _result = this.getProcessStartTime(_arg0);
+          reply.writeNoException();
+          reply.writeLong(_result);
           return true;
         }
         default:
@@ -4232,6 +4248,29 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      // Return 0 if it fail
+
+      @Override public long getProcessStartTime(int pid) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        long _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(pid);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getProcessStartTime, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getProcessStartTime(pid);
+          }
+          _reply.readException();
+          _result = _reply.readLong();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -4350,6 +4389,7 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_isBlockAllService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 113);
     static final int TRANSACTION_setBlockAllProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 114);
     static final int TRANSACTION_isBlockAllProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 115);
+    static final int TRANSACTION_getProcessStartTime = (android.os.IBinder.FIRST_CALL_TRANSACTION + 116);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -4511,4 +4551,7 @@ public interface IActivityManager extends android.os.IInterface
   public boolean isBlockAllService(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public void setBlockAllProvider(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean block) throws android.os.RemoteException;
   public boolean isBlockAllProvider(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  // Return 0 if it fail
+
+  public long getProcessStartTime(int pid) throws android.os.RemoteException;
 }

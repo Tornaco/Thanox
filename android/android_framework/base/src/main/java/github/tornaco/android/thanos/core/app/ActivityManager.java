@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
+import android.os.RemoteException;
 
 import com.elvishew.xlog.XLog;
 
@@ -643,6 +644,11 @@ public class ActivityManager {
     @SneakyThrows
     public boolean isBlockAllProvider(String pkgName) {
         return isBlockAllProvider(Pkg.currentUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public long getProcessStartTime(int pid) {
+        return server.getProcessStartTime(pid);
     }
 
     public IBinder asBinder() {

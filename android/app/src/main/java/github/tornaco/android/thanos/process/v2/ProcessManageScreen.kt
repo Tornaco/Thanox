@@ -16,6 +16,7 @@
  */
 package github.tornaco.android.thanos.process.v2
 
+import android.text.format.DateUtils
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -307,8 +308,8 @@ fun RunningAppItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .heightIn(min = 64.dp),
+                .padding(horizontal = 16.dp, vertical = 4.dp)
+                .heightIn(min = 72.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -329,6 +330,7 @@ fun RunningAppItem(
                     } else {
                         PSText(appState)
                     }
+                    AppRunningTime(appState)
                 }
             }
             Row(
@@ -345,6 +347,20 @@ fun RunningAppItem(
     }
 }
 
+@Composable
+private fun AppRunningTime(appState: RunningAppState) {
+    if (appState.runningTimeMillis != null) {
+        val runningTimeStr = DateUtils.formatElapsedTime(null, appState.runningTimeMillis / 1000L)
+        Text(
+            text = "${
+                stringResource(
+                    id = R.string.service_running_time
+                )
+            } $runningTimeStr",
+            style = MaterialTheme.typography.labelMedium
+        )
+    }
+}
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

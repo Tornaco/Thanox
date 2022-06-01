@@ -5,6 +5,7 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.os.SystemClock
 import android.text.format.Formatter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -105,12 +106,19 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                 entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }
             val totalPss =
                 thanox.activityManager.getProcessPss(entry.value.map { it.pid }.toIntArray()).sum()
+            val runningTimeMillis = runningProcessStates.map {
+                thanox.activityManager.getProcessStartTime(it.process.pid)
+            }.filter { it > 0L }.minOrNull()?.let {
+                SystemClock.elapsedRealtime() - it
+            }
+
             RunningAppState(
                 appInfo = thanox.pkgManager.getAppInfo(pkgName),
                 processState = runningProcessStates,
                 allProcessIsCached = isAllProcessCached,
                 totalPss = totalPss,
-                sizeStr = Formatter.formatShortFileSize(context, totalPss * 1024)
+                sizeStr = Formatter.formatShortFileSize(context, totalPss * 1024),
+                runningTimeMillis = runningTimeMillis
             )
         }.filter {
             filterPackages.contains(it.appInfo.pkgName)

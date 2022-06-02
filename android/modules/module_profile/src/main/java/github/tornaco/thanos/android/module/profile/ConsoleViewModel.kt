@@ -30,12 +30,14 @@ import com.wakaztahir.codeeditor.utils.parseCodeAsAnnotatedString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.profile.LogSink
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 data class ConsoleState(
-    val textFieldValue: TextFieldValue
+    val textFieldValue: TextFieldValue,
+    val consoleLogOutput: String,
 )
 
 @SuppressLint("StaticFieldLeak")
@@ -55,12 +57,29 @@ class ConsoleViewModel @Inject constructor(@ApplicationContext private val conte
             ConsoleState(
                 textFieldValue = TextFieldValue(
                     text = "ui.showShortToast(\"Running apps: \" + thanos.getActivityManager().getRunningAppsCount());"
-                ).toCodeStyledTextFieldValue()
+                ).toCodeStyledTextFieldValue(),
+                consoleLogOutput = ""
             )
         )
     val state = _state.asStateFlow()
 
     private val thanox by lazy { ThanosManager.from(context) }
+
+    private val logSink = object : LogSink() {
+        override fun log(message: String?) {
+            super.log(message)
+            _state.value = _state.value.copy(consoleLogOutput = message ?: "null")
+        }
+    }
+
+    init {
+        thanox.profileManager.addConsoleLogSink(logSink)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        thanox.profileManager.removeConsoleLogSink(logSink)
+    }
 
     fun input(input: TextFieldValue) {
         val updatedValue = input.toCodeStyledTextFieldValue()
@@ -86,6 +105,7 @@ class ConsoleViewModel @Inject constructor(@ApplicationContext private val conte
     }
 
     fun execute() {
+        _state.value = _state.value.copy(consoleLogOutput = "")
         thanox.profileManager.executeAction(state.value.textFieldValue.text)
     }
 

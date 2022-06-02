@@ -1,7 +1,6 @@
 package github.tornaco.android.thanos.core.profile;
 
 import android.os.ParcelFileDescriptor;
-import android.os.RemoteException;
 
 import java.util.List;
 
@@ -216,6 +215,16 @@ public class ProfileManager {
     @SneakyThrows
     public void executeAction(String action) {
         server.executeAction(action);
+    }
+
+    @SneakyThrows
+    public void addConsoleLogSink(LogSink sink) {
+        server.addConsoleLogSink(sink.stub);
+    }
+
+    @SneakyThrows
+    public void removeConsoleLogSink(LogSink sink) {
+        server.removeConsoleLogSink(sink.stub);
     }
 
     @SneakyThrows

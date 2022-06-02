@@ -181,6 +181,12 @@ public interface IProfileManager extends android.os.IInterface
     @Override public void executeAction(java.lang.String action) throws android.os.RemoteException
     {
     }
+    @Override public void addConsoleLogSink(github.tornaco.android.thanos.core.profile.ILogSink sink) throws android.os.RemoteException
+    {
+    }
+    @Override public void removeConsoleLogSink(github.tornaco.android.thanos.core.profile.ILogSink sink) throws android.os.RemoteException
+    {
+    }
     @Override public github.tornaco.android.thanos.core.profile.RuleInfo parseRuleOrNull(java.lang.String ruleString, int format) throws android.os.RemoteException
     {
       return null;
@@ -722,6 +728,24 @@ public interface IProfileManager extends android.os.IInterface
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.executeAction(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_addConsoleLogSink:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.profile.ILogSink _arg0;
+          _arg0 = github.tornaco.android.thanos.core.profile.ILogSink.Stub.asInterface(data.readStrongBinder());
+          this.addConsoleLogSink(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_removeConsoleLogSink:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.profile.ILogSink _arg0;
+          _arg0 = github.tornaco.android.thanos.core.profile.ILogSink.Stub.asInterface(data.readStrongBinder());
+          this.removeConsoleLogSink(_arg0);
           reply.writeNoException();
           return true;
         }
@@ -1784,6 +1808,44 @@ public interface IProfileManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void addConsoleLogSink(github.tornaco.android.thanos.core.profile.ILogSink sink) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeStrongBinder((((sink!=null))?(sink.asBinder()):(null)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_addConsoleLogSink, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().addConsoleLogSink(sink);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void removeConsoleLogSink(github.tornaco.android.thanos.core.profile.ILogSink sink) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeStrongBinder((((sink!=null))?(sink.asBinder()):(null)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_removeConsoleLogSink, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().removeConsoleLogSink(sink);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       @Override public github.tornaco.android.thanos.core.profile.RuleInfo parseRuleOrNull(java.lang.String ruleString, int format) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -1887,8 +1949,10 @@ public interface IProfileManager extends android.os.IInterface
     static final int TRANSACTION_setLogEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 45);
     static final int TRANSACTION_isLogEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 46);
     static final int TRANSACTION_executeAction = (android.os.IBinder.FIRST_CALL_TRANSACTION + 47);
-    static final int TRANSACTION_parseRuleOrNull = (android.os.IBinder.FIRST_CALL_TRANSACTION + 48);
-    static final int TRANSACTION_getRuleByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 49);
+    static final int TRANSACTION_addConsoleLogSink = (android.os.IBinder.FIRST_CALL_TRANSACTION + 48);
+    static final int TRANSACTION_removeConsoleLogSink = (android.os.IBinder.FIRST_CALL_TRANSACTION + 49);
+    static final int TRANSACTION_parseRuleOrNull = (android.os.IBinder.FIRST_CALL_TRANSACTION + 50);
+    static final int TRANSACTION_getRuleByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 51);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IProfileManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1954,6 +2018,8 @@ public interface IProfileManager extends android.os.IInterface
   public void setLogEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isLogEnabled() throws android.os.RemoteException;
   public void executeAction(java.lang.String action) throws android.os.RemoteException;
+  public void addConsoleLogSink(github.tornaco.android.thanos.core.profile.ILogSink sink) throws android.os.RemoteException;
+  public void removeConsoleLogSink(github.tornaco.android.thanos.core.profile.ILogSink sink) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.profile.RuleInfo parseRuleOrNull(java.lang.String ruleString, int format) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.profile.RuleInfo getRuleByName(java.lang.String ruleName) throws android.os.RemoteException;
 }

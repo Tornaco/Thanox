@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.profile;
 import github.tornaco.android.thanos.core.profile.IRuleAddCallback;
 import github.tornaco.android.thanos.core.profile.IRuleCheckCallback;
 import github.tornaco.android.thanos.core.profile.IRuleChangeListener;
+import github.tornaco.android.thanos.core.profile.ILogSink;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 import github.tornaco.android.thanos.core.IPrinter;
 
@@ -79,6 +80,9 @@ interface IProfileManager {
     boolean isLogEnabled();
 
     void executeAction(String action);
+    void addConsoleLogSink(in ILogSink sink);
+    void removeConsoleLogSink(in ILogSink sink);
+
 
     RuleInfo parseRuleOrNull(String ruleString, int format);
     RuleInfo getRuleByName(String ruleName);

@@ -22,7 +22,11 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.*
@@ -30,14 +34,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.navigationBarsWithImePadding
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
-import github.tornaco.android.thanos.module.compose.common.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.jetbrainMonoTypography
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.util.ActivityUtils
@@ -101,7 +107,7 @@ private fun Console(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         CodeContent(state, onInput)
-        StandardSpacer()
+        ConsoleLog(state)
         AndroidView(
             modifier = Modifier
                 .fillMaxWidth()
@@ -115,25 +121,55 @@ private fun Console(
     }
 }
 
+@Composable
+private fun ConsoleLog(state: ConsoleState) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(max = 160.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+            .navigationBarsWithImePadding()
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(16.dp),
+            text = state.consoleLogOutput,
+            style = jetbrainMonoTypography().body2
+        )
+    }
+
+}
+
 // https://github.com/codeckle/compose-code-editor
 @Composable
 private fun CodeContent(
     state: ConsoleState,
     onInput: (TextFieldValue) -> Unit
 ) {
-    OutlinedTextField(
+    Box(
         modifier = Modifier
-            .fillMaxWidth(),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        ),
-        value = state.textFieldValue,
-        onValueChange = {
-            onInput(it)
-        }
-    )
+            .fillMaxWidth()
+            .heightIn(max = 160.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            ),
+            textStyle = jetbrainMonoTypography().body2,
+            value = state.textFieldValue,
+            onValueChange = {
+                onInput(it)
+            }
+        )
+    }
 }
 
 

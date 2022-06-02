@@ -12,21 +12,41 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
-fun fontFamily() = FontFamily(
+fun fontFamilyProductSans() = FontFamily(
     Font(LocalContext.current.assets, "fonts/google/ProductSansBold.ttf")
+)
+
+@OptIn(ExperimentalTextApi::class)
+@Composable
+fun fontFamilyJetBrainsMono() = FontFamily(
+    Font(LocalContext.current.assets, "fonts/google/jetbrains/JetBrainsMonoRegular.ttf")
 )
 
 @Composable
 fun productSansBoldTypography() = Typography(
     h5 = TextStyle(
-        fontFamily = fontFamily(),
+        fontFamily = fontFamilyProductSans(),
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp
     ),
     caption = TextStyle(
-        fontFamily = fontFamily(),
+        fontFamily = fontFamilyProductSans(),
         fontWeight = FontWeight.Normal,
         fontSize = 10.sp,
         letterSpacing = 0.4.sp
+    )
+)
+
+@Composable
+fun jetbrainMonoTypography() = Typography(
+    body1 = TextStyle(
+        fontFamily = fontFamilyJetBrainsMono(),
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
+    body2 = TextStyle(
+        fontFamily = fontFamilyJetBrainsMono(),
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
     )
 )

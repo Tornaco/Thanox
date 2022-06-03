@@ -467,6 +467,10 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
+    @Override public java.util.List<github.tornaco.android.thanos.core.app.ActivityAssistInfo> getTopVisibleActivities() throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1766,6 +1770,14 @@ public interface IActivityManager extends android.os.IInterface
           boolean _result = this.hasRunningForegroundService(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_getTopVisibleActivities:
+        {
+          data.enforceInterface(descriptor);
+          java.util.List<github.tornaco.android.thanos.core.app.ActivityAssistInfo> _result = this.getTopVisibleActivities();
+          reply.writeNoException();
+          reply.writeTypedList(_result);
           return true;
         }
         default:
@@ -4366,6 +4378,26 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public java.util.List<github.tornaco.android.thanos.core.app.ActivityAssistInfo> getTopVisibleActivities() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.app.ActivityAssistInfo> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getTopVisibleActivities, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getTopVisibleActivities();
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.ActivityAssistInfo.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -4487,6 +4519,7 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_getProcessStartTime = (android.os.IBinder.FIRST_CALL_TRANSACTION + 116);
     static final int TRANSACTION_isAppForeground = (android.os.IBinder.FIRST_CALL_TRANSACTION + 117);
     static final int TRANSACTION_hasRunningForegroundService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 118);
+    static final int TRANSACTION_getTopVisibleActivities = (android.os.IBinder.FIRST_CALL_TRANSACTION + 119);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -4653,4 +4686,5 @@ public interface IActivityManager extends android.os.IInterface
   public long getProcessStartTime(int pid) throws android.os.RemoteException;
   public boolean isAppForeground(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean hasRunningForegroundService(github.tornaco.android.thanos.core.pm.Pkg pkg, int foregroundServicetype) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.app.ActivityAssistInfo> getTopVisibleActivities() throws android.os.RemoteException;
 }

@@ -67,4 +67,12 @@ public class ComponentNameBrief implements Parcelable {
     public String getPackageName() {
         return this.pkg;
     }
+
+    @Override
+    public String toString() {
+        return "ComponentNameBrief{" +
+                "pkg='" + pkg + '\'' +
+                ", cls='" + cls + '\'' +
+                '}';
+    }
 }

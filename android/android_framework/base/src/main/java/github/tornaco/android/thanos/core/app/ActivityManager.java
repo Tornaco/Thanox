@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
+import android.os.UserHandle;
 
 import com.elvishew.xlog.XLog;
 
@@ -687,6 +688,32 @@ public class ActivityManager {
             }
         }
         return res;
+    }
+
+    /**
+     * Returns the top activity from each of the currently visible root tasks, and the related uid.
+     * The first entry will be the focused activity.
+     * <p>
+     * https://cs.android.com/android/platform/superproject/+/master:frameworks/base/services/core/java/com/android/server/wm/ActivityTaskManagerInternal.java
+     */
+    @SneakyThrows
+    public List<ActivityAssistInfo> getTopVisibleActivities() {
+        return server.getTopVisibleActivities();
+    }
+
+    @SneakyThrows
+    public boolean hasTopVisibleActivities(String pkgName) {
+        return getTopVisibleActivities()
+                .stream()
+                .anyMatch(activityAssistInfo -> activityAssistInfo.name.getPackageName().equals(pkgName));
+    }
+
+    @SneakyThrows
+    public boolean hasTopVisibleActivities(Pkg pkg) {
+        return getTopVisibleActivities()
+                .stream()
+                .anyMatch(activityAssistInfo -> activityAssistInfo.name.getPackageName().equals(pkg.getPkgName())
+                        && UserHandle.getUserId(activityAssistInfo.uid) == pkg.getUserId());
     }
 
     public IBinder asBinder() {

@@ -1,4 +1,5 @@
 parcelable github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat;
+parcelable github.tornaco.android.thanos.core.app.ActivityAssistInfo;
 parcelable github.tornaco.android.thanos.core.app.event.ThanosEvent;
 parcelable github.tornaco.android.thanos.core.app.start.StartRecord;
 parcelable github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats;

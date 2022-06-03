@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.core.app;
 
 import github.tornaco.android.thanos.core.app.RunningServiceInfoCompat;
+import github.tornaco.android.thanos.core.app.ActivityAssistInfo;
 import android.content.pm.UserInfo;
 import github.tornaco.android.thanos.core.IPrinter;
 import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat;
@@ -210,4 +211,6 @@ interface IActivityManager {
 
     boolean isAppForeground(in Pkg pkg);
     boolean hasRunningForegroundService(in Pkg pkg, int foregroundServicetype);
+
+    List<ActivityAssistInfo> getTopVisibleActivities();
 }

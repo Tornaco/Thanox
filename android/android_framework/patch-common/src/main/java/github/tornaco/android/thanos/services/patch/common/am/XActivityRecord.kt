@@ -50,4 +50,16 @@ object XActivityRecord {
             null
         }
     }
+
+    @JvmStatic
+    fun getUid(activityRecord: Any?): Int {
+        return if (activityRecord == null) {
+            -1
+        } else try {
+            XposedHelpers.callMethod(activityRecord, "getUid") as Int
+        } catch (e: Throwable) {
+            XLog.e("ActivityRecordUtils#getUid error", e)
+            -1
+        }
+    }
 }

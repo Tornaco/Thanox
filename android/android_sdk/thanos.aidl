@@ -23,5 +23,6 @@ parcelable github.tornaco.android.thanos.core.power.SeenWakeLock;
 parcelable github.tornaco.android.thanos.core.su.SuRes;
 parcelable github.tornaco.android.thanos.core.plus.RR;
 parcelable github.tornaco.android.thanos.core.os.SwapInfo;
+parcelable github.tornaco.android.thanos.core.wm.WindowState;
 
 parcelable android.content.pm.UserInfo;

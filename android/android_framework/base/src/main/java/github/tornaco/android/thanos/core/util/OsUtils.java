@@ -55,6 +55,7 @@ public abstract class OsUtils {
         return Build.VERSION.SDK_INT >= 28;
     }
 
+    // android 10
     public static boolean isQOrAbove() {
         return Build.VERSION.SDK_INT >= 29;
     }

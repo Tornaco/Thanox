@@ -28,7 +28,7 @@ interface IActivityManager {
     void onStartProcessLocked(in ApplicationInfo appInfo);
 
     ProcessRecord[] getRunningAppProcess();
-    String[] getRunningAppPackages();
+    List<Pkg> getRunningAppPackages();
 
     List<RunningServiceInfo> getRunningServiceLegacy(int max);
     List<RunningAppProcessInfoCompat> getRunningAppProcessLegacy();
@@ -207,4 +207,7 @@ interface IActivityManager {
 
     // Return 0 if it fail
     long getProcessStartTime(int pid);
+
+    boolean isAppForeground(in Pkg pkg);
+    boolean hasRunningForegroundService(in Pkg pkg, int foregroundServicetype);
 }

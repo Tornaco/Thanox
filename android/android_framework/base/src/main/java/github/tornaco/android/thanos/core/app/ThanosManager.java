@@ -94,7 +94,7 @@ public class ThanosManager {
 
     @SneakyThrows
     public ActivityManager getActivityManager() {
-        return new ActivityManager(service.getActivityManager());
+        return new ActivityManager(service.getActivityManager(), service.getPkgManager());
     }
 
     @SneakyThrows

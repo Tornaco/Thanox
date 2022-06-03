@@ -48,7 +48,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public java.lang.String[] getRunningAppPackages() throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getRunningAppPackages() throws android.os.RemoteException
     {
       return null;
     }
@@ -459,6 +459,14 @@ public interface IActivityManager extends android.os.IInterface
     {
       return 0L;
     }
+    @Override public boolean isAppForeground(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public boolean hasRunningForegroundService(github.tornaco.android.thanos.core.pm.Pkg pkg, int foregroundServicetype) throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -657,9 +665,9 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_getRunningAppPackages:
         {
           data.enforceInterface(descriptor);
-          java.lang.String[] _result = this.getRunningAppPackages();
+          java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _result = this.getRunningAppPackages();
           reply.writeNoException();
-          reply.writeStringArray(_result);
+          reply.writeTypedList(_result);
           return true;
         }
         case TRANSACTION_getRunningServiceLegacy:
@@ -1728,6 +1736,38 @@ public interface IActivityManager extends android.os.IInterface
           reply.writeLong(_result);
           return true;
         }
+        case TRANSACTION_isAppForeground:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _result = this.isAppForeground(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_hasRunningForegroundService:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          int _arg1;
+          _arg1 = data.readInt();
+          boolean _result = this.hasRunningForegroundService(_arg0, _arg1);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
         default:
         {
           return super.onTransact(code, data, reply, flags);
@@ -2021,11 +2061,11 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.lang.String[] getRunningAppPackages() throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getRunningAppPackages() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
-        java.lang.String[] _result;
+        java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppPackages, _data, _reply, 0);
@@ -2033,7 +2073,7 @@ public interface IActivityManager extends android.os.IInterface
             return getDefaultImpl().getRunningAppPackages();
           }
           _reply.readException();
-          _result = _reply.createStringArray();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -4271,6 +4311,61 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public boolean isAppForeground(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isAppForeground, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isAppForeground(pkg);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public boolean hasRunningForegroundService(github.tornaco.android.thanos.core.pm.Pkg pkg, int foregroundServicetype) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(foregroundServicetype);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_hasRunningForegroundService, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().hasRunningForegroundService(pkg, foregroundServicetype);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -4390,6 +4485,8 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_setBlockAllProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 114);
     static final int TRANSACTION_isBlockAllProvider = (android.os.IBinder.FIRST_CALL_TRANSACTION + 115);
     static final int TRANSACTION_getProcessStartTime = (android.os.IBinder.FIRST_CALL_TRANSACTION + 116);
+    static final int TRANSACTION_isAppForeground = (android.os.IBinder.FIRST_CALL_TRANSACTION + 117);
+    static final int TRANSACTION_hasRunningForegroundService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 118);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -4418,7 +4515,7 @@ public interface IActivityManager extends android.os.IInterface
   public boolean checkStartProcess(android.content.pm.ApplicationInfo applicationInfo, java.lang.String hostType, java.lang.String hostName) throws android.os.RemoteException;
   public void onStartProcessLocked(android.content.pm.ApplicationInfo appInfo) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcess() throws android.os.RemoteException;
-  public java.lang.String[] getRunningAppPackages() throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getRunningAppPackages() throws android.os.RemoteException;
   public java.util.List<android.app.ActivityManager.RunningServiceInfo> getRunningServiceLegacy(int max) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat> getRunningAppProcessLegacy() throws android.os.RemoteException;
   public int getRunningAppsCount() throws android.os.RemoteException;
@@ -4554,4 +4651,6 @@ public interface IActivityManager extends android.os.IInterface
   // Return 0 if it fail
 
   public long getProcessStartTime(int pid) throws android.os.RemoteException;
+  public boolean isAppForeground(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public boolean hasRunningForegroundService(github.tornaco.android.thanos.core.pm.Pkg pkg, int foregroundServicetype) throws android.os.RemoteException;
 }

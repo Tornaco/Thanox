@@ -5,15 +5,17 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
-import android.os.RemoteException;
 
 import com.elvishew.xlog.XLog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.app.start.StartRecord;
 import github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats;
 import github.tornaco.android.thanos.core.os.SwapInfo;
+import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.IPkgManager;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.process.ProcessRecord;
 import lombok.AllArgsConstructor;
@@ -28,6 +30,7 @@ public class ActivityManager {
     }
 
     private IActivityManager server;
+    private IPkgManager pkg;
 
     @SneakyThrows
     public String getCurrentFrontApp() {
@@ -81,7 +84,7 @@ public class ActivityManager {
     }
 
     @SneakyThrows
-    public String[] getRunningAppPackages() {
+    public List<Pkg> getRunningAppPackages() {
         return server.getRunningAppPackages();
     }
 
@@ -649,6 +652,41 @@ public class ActivityManager {
     @SneakyThrows
     public long getProcessStartTime(int pid) {
         return server.getProcessStartTime(pid);
+    }
+
+    @SneakyThrows
+    public boolean isAppForeground(Pkg pkg) {
+        return server.isAppForeground(pkg);
+    }
+
+    @SneakyThrows
+    public boolean isAppForeground(String pkgName) {
+        return server.isAppForeground(Pkg.currentUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public List<AppInfo> getAllForegroundApps() {
+        List<AppInfo> res = new ArrayList<>();
+        for (Pkg runningPkg : server.getRunningAppPackages()) {
+            if (isAppForeground(runningPkg)) {
+                AppInfo appInfo = pkg.getAppInfoForUser(runningPkg.getPkgName(), runningPkg.getUserId());
+                if (appInfo != null) {
+                    res.add(appInfo);
+                }
+            }
+        }
+        return res;
+    }
+
+    @SneakyThrows
+    public List<Pkg> getAllForegroundPkgs() {
+        List<Pkg> res = new ArrayList<>();
+        for (Pkg runningPkg : server.getRunningAppPackages()) {
+            if (isAppForeground(runningPkg)) {
+                res.add(runningPkg);
+            }
+        }
+        return res;
     }
 
     public IBinder asBinder() {

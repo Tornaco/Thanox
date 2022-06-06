@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Watch Audio Focus",
+    "description": "Show toast on audio focus changed",
+    "priority": 2,
+    "condition": "audioFocusChanged == true",
+    "actions": [
+      "ui.showShortToast(\"Audio\" + lastFocusedPkgNames + \"-->\" + currentFocusedPkgNames);"
+    ]
+  }
+]

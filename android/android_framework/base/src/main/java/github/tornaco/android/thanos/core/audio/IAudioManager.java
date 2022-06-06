@@ -7,7 +7,7 @@ public interface IAudioManager extends android.os.IInterface
   /** Default implementation for IAudioManager. */
   public static class Default implements github.tornaco.android.thanos.core.audio.IAudioManager
   {
-    @Override public boolean hasAudioFocus(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public boolean hasAudioFocus(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return false;
     }
@@ -57,8 +57,13 @@ public interface IAudioManager extends android.os.IInterface
         case TRANSACTION_hasAudioFocus:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.hasAudioFocus(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
@@ -85,17 +90,23 @@ public interface IAudioManager extends android.os.IInterface
       {
         return DESCRIPTOR;
       }
-      @Override public boolean hasAudioFocus(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public boolean hasAudioFocus(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasAudioFocus, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasAudioFocus(pkgName);
+            return getDefaultImpl().hasAudioFocus(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -126,5 +137,5 @@ public interface IAudioManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public boolean hasAudioFocus(java.lang.String pkgName) throws android.os.RemoteException;
+  public boolean hasAudioFocus(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
 }

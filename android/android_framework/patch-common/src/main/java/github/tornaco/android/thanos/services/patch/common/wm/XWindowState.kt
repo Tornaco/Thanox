@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.services.patch.common.wm
 
 import android.annotation.SuppressLint
+import android.view.WindowManager
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.wm.WindowState
 import util.XposedHelpers
@@ -13,7 +14,18 @@ object XWindowState {
     fun getState(state: Any?): WindowState? {
         return if (state == null) null else try {
             val visible = XposedHelpers.callMethod(state, "isVisible") as Boolean
-            val type = XposedHelpers.callMethod(state, "getWindowType") as Int
+            val type = kotlin.runCatching {
+                XposedHelpers.callMethod(state, "getWindowType") as Int
+            }.getOrElse {
+                kotlin.runCatching {
+                    val lp =
+                        XposedHelpers.getObjectField(state, "mAttrs") as WindowManager.LayoutParams
+                    lp.type
+                }.getOrElse {
+                    XLog.w("XWindowState getWindowType, try to get from mAttrs error", it)
+                    -1
+                }
+            }
             val uid = XposedHelpers.callMethod(state, "getOwningUid") as Int
             val ownPackageName =
                 XposedHelpers.callMethod(state, "getOwningPackage") as String

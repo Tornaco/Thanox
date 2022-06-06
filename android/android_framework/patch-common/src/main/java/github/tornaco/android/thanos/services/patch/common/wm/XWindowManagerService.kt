@@ -21,7 +21,7 @@ object XWindowManagerService {
                 "getInstance"
             )
         }.getOrElse {
-            XLog.e("XWindowManagerService#getInstance error")
+            XLog.e("XWindowManagerService#getInstance error", it)
             null
         }
     }
@@ -34,7 +34,7 @@ object XWindowManagerService {
                 "mRoot"
             )
         }.getOrElse {
-            XLog.e("XWindowManagerService#getRoot error")
+            XLog.e("XWindowManagerService#getRoot error", it)
             null
         }
     }
@@ -50,7 +50,7 @@ object XWindowManagerService {
                 false /* traverseTopToBottom */
             )
         }.onFailure {
-            XLog.e("XWindowManagerService#forAllWindows error")
+            XLog.e("XWindowManagerService#forAllWindows error", it)
         }
     }
 }

@@ -15,6 +15,7 @@ import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.app.event.IEventSubscriber;
 import github.tornaco.android.thanos.core.app.infinite.InfiniteZManager;
 import github.tornaco.android.thanos.core.app.usage.UsageStatsManager;
+import github.tornaco.android.thanos.core.audio.AudioManager;
 import github.tornaco.android.thanos.core.backup.BackupAgent;
 import github.tornaco.android.thanos.core.input.InputManager;
 import github.tornaco.android.thanos.core.n.NotificationManager;
@@ -150,6 +151,11 @@ public class ThanosManager {
     @SneakyThrows
     public WindowManager getWindowManager() {
         return new WindowManager(service.getWindowManager());
+    }
+
+    @SneakyThrows
+    public AudioManager getAudioManager() {
+        return new AudioManager(service.getAudioManager());
     }
 
     @SneakyThrows

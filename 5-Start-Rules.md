@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "后台启动"
-summary: "面向喜欢折腾的用户"
+summary: "后台启动"
 date:   2018-07-14 15:58:00
 nav_order: 6
 ---
@@ -23,94 +23,35 @@ Thanox会根据用户配置、App运行状态、规则等综合因素来决定�
 
 下面是`BYPASS`和`BLOCK`的对照表：
 
-@JvmField
-        val BY_PASS_WHITE_LISTED
-        val BY_PASS_CALLER_WHITE_LISTED
-        val BY_PASS_DEFAULT = StartResult(true, "BY_PASS_DEFAULT")
-        @JvmField
-        val BY_PASS_ACCESSIBILITY_SERVICE = StartResult(true, "BY_PASS_ACCESSIBILITY_SERVICE")
-        @JvmField
-        val BY_PASS_DEFAULT_THANOS_ERROR = StartResult(true, "BY_PASS_DEFAULT_THANOS_ERROR")
-        @JvmField
-        val BY_PASS_DEFAULT_THANOS_TIMEOUT = StartResult(true, "BY_PASS_DEFAULT_THANOS_TIMEOUT")
-        @JvmField
-        val BY_PASS_BAD_ARGS = StartResult(true, "BY_PASS_BAD_ARGS")
-        @JvmField
-        val BY_PASS_START_BLOCKED_DISABLED = StartResult(true, "BY_PASS_START_BLOCKED_DISABLED")
-        @JvmField
-        val BY_PASS_UI_PRESENT = StartResult(true, "BY_PASS_UI_PRESENT")
-        @JvmField
-        val BY_PASS_DEFAULT_IME_SERVICE = StartResult(true, "BY_PASS_DEFAULT_IME_SERVICE")
-        @JvmField
-        val BY_PASS_PROCESS_RUNNING = StartResult(true, "BY_PASS_PROCESS_RUNNING")
-        @JvmField
-        val BY_PASS_SAME_CALLING_UID = StartResult(true, "BY_PASS_SAME_CALLING_UID")
-        @JvmField
-        val BY_PASS_SMS_APP = StartResult(true, "BY_PASS_SMS_APP")
-        @JvmField
-        val BLOCKED_STRUGGLE = StartResult(false, "BLOCKED_STRUGGLE")
-        @JvmField
-        val BLOCKED_IN_BLOCK_LIST = StartResult(false, "BLOCKED_IN_BLOCK_LIST")
-        @JvmField
-        val BLOCKED_COMPONENT_IS_DISABLED = StartResult(false, "BLOCKED_COMPONENT_IS_DISABLED")
-        @JvmField
-        val BLOCKED_IN_SMART_STAND_BY_LIST = StartResult(false, "BLOCKED_IN_SMART_STAND_BY_LIST")
 
-        @JvmField
-        val BLOCKED_USER_RULE = StartResult(false, "BLOCKED_USER_RULE")
-        @JvmField
-        val BLOCKED_STANDBY = StartResult(false, "BLOCKED_STANDBY")
-        @JvmField
-        val BYPASS_USER_RULE = StartResult(true, "BYPASS_USER_RULE")
-
-        @JvmField
-        val BLOCKED_BLOCK_API = StartResult(false, "BLOCKED_BLOCK_API")
+| 允许原因 | 含义 | 
+| :-----| ----: | 
+|  BY PASS WHITE LISTED | 目标应用为白名单应用 | 
+|  BY PASS CALLER WHITE LISTED | 调用方应用为白名单应用 | 
+|  BY PASS ACCESSIBILITY SERVICE | 目标应用开启了辅助功能 | 
+|   BY PASS BAD ARGS | Thanox内部出问题了，那就允许吧 | 
+|   BY PASS START BLOCKED DISABLED | 没打开后台启动功能，当然允许 | 
+|   BY PASS UI PRESENT | 目标应用在前台展示，也要允许 | 
+|  BY PASS DEFAULT IME SERVICE | 目标应用是默认输入法，要允许 | 
+|   BY PASS PROCESS RUNNING | 目标应用已经在运行中了，要允许 | 
+|  BY PASS SAME CALLING UID | 应用自己调用了自己的组件进行启动，要允许，也说明该应用已经在运行中 | 
+|  BY PASS SMS APP | 短信应用 | 
+|   BYPASS USER RULE | 由于后台启动规则而允许 | 
+|  BY PASS DEFAULT | 未命中任何分支，默认为允许 | 
 
 
 
-val BY_PASS_WHITE_LISTED = StartResult(true, "BY_PASS_WHITE_LISTED")
-       
-        val BY_PASS_CALLER_WHITE_LISTED = StartResult(true, "BY_PASS_CALLER_WHITE_LISTED")
-       
-        val BY_PASS_DEFAULT = StartResult(true, "BY_PASS_DEFAULT")
-       
-        val BY_PASS_ACCESSIBILITY_SERVICE = StartResult(true, "BY_PASS_ACCESSIBILITY_SERVICE")
-       
-        val BY_PASS_DEFAULT_THANOS_ERROR = StartResult(true, "BY_PASS_DEFAULT_THANOS_ERROR")
-       
-        val BY_PASS_DEFAULT_THANOS_TIMEOUT = StartResult(true, "BY_PASS_DEFAULT_THANOS_TIMEOUT")
-       
-        val BY_PASS_BAD_ARGS = StartResult(true, "BY_PASS_BAD_ARGS")
-       
-        val BY_PASS_START_BLOCKED_DISABLED = StartResult(true, "BY_PASS_START_BLOCKED_DISABLED")
-       
-        val BY_PASS_UI_PRESENT = StartResult(true, "BY_PASS_UI_PRESENT")
-       
-        val BY_PASS_DEFAULT_IME_SERVICE = StartResult(true, "BY_PASS_DEFAULT_IME_SERVICE")
-       
-        val BY_PASS_PROCESS_RUNNING = StartResult(true, "BY_PASS_PROCESS_RUNNING")
-       
-        val BY_PASS_SAME_CALLING_UID = StartResult(true, "BY_PASS_SAME_CALLING_UID")
-       
-        val BY_PASS_SMS_APP = StartResult(true, "BY_PASS_SMS_APP")
-       
-        val BLOCKED_STRUGGLE = StartResult(false, "BLOCKED_STRUGGLE")
-       
-        val BLOCKED_IN_BLOCK_LIST = StartResult(false, "BLOCKED_IN_BLOCK_LIST")
-       
-        val BLOCKED_COMPONENT_IS_DISABLED = StartResult(false, "BLOCKED_COMPONENT_IS_DISABLED")
-       
-        val BLOCKED_IN_SMART_STAND_BY_LIST = StartResult(false, "BLOCKED_IN_SMART_STAND_BY_LIST")
 
-       
-        val BLOCKED_USER_RULE = StartResult(false, "BLOCKED_USER_RULE")
-       
-        val BLOCKED_STANDBY = StartResult(false, "BLOCKED_STANDBY")
-       
-        val BYPASS_USER_RULE = StartResult(true, "BYPASS_USER_RULE")
 
-       
-        val BLOCKED_BLOCK_API = StartResult(false, "BLOCKED_BLOCK_API")
+| 阻止原因 | 含义 | 
+| :-----| ----: | 
+|  BLOCKED STRUGGLE | 目标应用刚被杀死，短时间阻止其再次启动，主要用来对抗一些黑科技 | 
+|   BLOCKED IN BLOCK LIST | 目标应用被用户关闭了后台启动 | 
+|   BLOCKED COMPONENT IS DISABLED | 要启动的组件已经被禁用了，例如某个服务 | 
+|    BLOCKED STANDBY | 目标应用被开启了乖巧模式 | 
+|   BLOCKED USER RULE | 由于后台启动规则而阻止 |
+|    BLOCKED BLOCK API | 通过block API阻止 |
+
 
 
 ### 规则

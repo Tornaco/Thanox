@@ -213,4 +213,6 @@ interface IActivityManager {
     boolean hasRunningForegroundService(in Pkg pkg, int foregroundServicetype);
 
     List<ActivityAssistInfo> getTopVisibleActivities();
+
+    boolean checkStartActivity(in Intent intent, int callerUid);
 }

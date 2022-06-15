@@ -471,6 +471,10 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public boolean checkStartActivity(android.content.Intent intent, int callerUid) throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1778,6 +1782,23 @@ public interface IActivityManager extends android.os.IInterface
           java.util.List<github.tornaco.android.thanos.core.app.ActivityAssistInfo> _result = this.getTopVisibleActivities();
           reply.writeNoException();
           reply.writeTypedList(_result);
+          return true;
+        }
+        case TRANSACTION_checkStartActivity:
+        {
+          data.enforceInterface(descriptor);
+          android.content.Intent _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = android.content.Intent.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          int _arg1;
+          _arg1 = data.readInt();
+          boolean _result = this.checkStartActivity(_arg0, _arg1);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         default:
@@ -4398,6 +4419,34 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public boolean checkStartActivity(android.content.Intent intent, int callerUid) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((intent!=null)) {
+            _data.writeInt(1);
+            intent.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(callerUid);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_checkStartActivity, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().checkStartActivity(intent, callerUid);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -4520,6 +4569,7 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_isAppForeground = (android.os.IBinder.FIRST_CALL_TRANSACTION + 117);
     static final int TRANSACTION_hasRunningForegroundService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 118);
     static final int TRANSACTION_getTopVisibleActivities = (android.os.IBinder.FIRST_CALL_TRANSACTION + 119);
+    static final int TRANSACTION_checkStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 120);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -4687,4 +4737,5 @@ public interface IActivityManager extends android.os.IInterface
   public boolean isAppForeground(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean hasRunningForegroundService(github.tornaco.android.thanos.core.pm.Pkg pkg, int foregroundServicetype) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.ActivityAssistInfo> getTopVisibleActivities() throws android.os.RemoteException;
+  public boolean checkStartActivity(android.content.Intent intent, int callerUid) throws android.os.RemoteException;
 }

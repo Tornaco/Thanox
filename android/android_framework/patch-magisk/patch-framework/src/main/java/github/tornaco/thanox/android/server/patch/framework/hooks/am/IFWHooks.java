@@ -94,6 +94,13 @@ class IFWHooks {
                                             return false;
                                         }
                                     }
+
+                                    if ("checkStartActivity".equals(method.getName())) {
+                                        Boolean hookRes = handleCheckStartActivity(args);
+                                        if (hookRes != null && !hookRes) {
+                                            return false;
+                                        }
+                                    }
                                 } catch (Throwable e) {
                                     XLog.e("IFWHooks IWFProxy error", e);
                                 }
@@ -136,6 +143,22 @@ class IFWHooks {
                         BootStrap.THANOS_X
                                 .getActivityManagerService()
                                 .checkService(intent, componentName, callerID);
+                if (!res) {
+                    return false;
+                }
+                return null;
+            }
+
+            private Boolean handleCheckStartActivity(Object[] args) {
+                Intent intent = (Intent) args[0];
+                if (intent == null) {
+                    return null;
+                }
+                int callerID = (int) args[1];
+                boolean res =
+                        BootStrap.THANOS_X
+                                .getActivityManagerService()
+                                .checkStartActivity(intent, callerID);
                 if (!res) {
                     return false;
                 }

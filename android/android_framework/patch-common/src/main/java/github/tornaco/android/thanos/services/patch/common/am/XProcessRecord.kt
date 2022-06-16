@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.services.patch.common.am
 
 import android.content.pm.ApplicationInfo
+import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.process.ProcessRecord
 import util.XposedHelpers
 import util.XposedHelpersExt
@@ -18,5 +19,13 @@ object XProcessRecordHelper {
         return ProcessRecord(
             applicationInfo.packageName, processName, pid.toLong(), uid, false, false
         )
+    }
+
+    @JvmStatic
+    fun Any.toPkg(): Pkg {
+        val applicationInfo = XposedHelpers
+            .getObjectField(this, "info") as ApplicationInfo
+        val uid = XposedHelpersExt.getIntFieldWithPotentialNames(this, "uid", "mUid")
+        return Pkg(applicationInfo.packageName, uid)
     }
 }

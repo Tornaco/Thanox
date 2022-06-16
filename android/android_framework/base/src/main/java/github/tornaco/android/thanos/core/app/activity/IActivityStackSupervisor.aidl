@@ -7,7 +7,8 @@ import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
 import github.tornaco.android.thanos.core.IPrinter;
 
 interface IActivityStackSupervisor {
-    boolean checkActivity(in ComponentName componentName);
+    /** @deprecated use {@link #replaceActivityStartingIntent} instead */
+    boolean checkActivity(in ComponentName componentName, int userId, in IBinder resultTo);
 
     Intent replaceActivityStartingIntent(in Intent intent, int userId, in IBinder resultTo);
 

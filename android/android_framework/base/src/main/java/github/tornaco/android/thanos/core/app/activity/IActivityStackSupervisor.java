@@ -7,7 +7,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   /** Default implementation for IActivityStackSupervisor. */
   public static class Default implements github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor
   {
-    @Override public boolean checkActivity(android.content.ComponentName componentName) throws android.os.RemoteException
+    /** @deprecated use {@link #replaceActivityStartingIntent} instead */
+    @Override public boolean checkActivity(android.content.ComponentName componentName, int userId, android.os.IBinder resultTo) throws android.os.RemoteException
     {
       return false;
     }
@@ -168,7 +169,11 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           else {
             _arg0 = null;
           }
-          boolean _result = this.checkActivity(_arg0);
+          int _arg1;
+          _arg1 = data.readInt();
+          android.os.IBinder _arg2;
+          _arg2 = data.readStrongBinder();
+          boolean _result = this.checkActivity(_arg0, _arg1, _arg2);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
           return true;
@@ -533,7 +538,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
       {
         return DESCRIPTOR;
       }
-      @Override public boolean checkActivity(android.content.ComponentName componentName) throws android.os.RemoteException
+      /** @deprecated use {@link #replaceActivityStartingIntent} instead */
+      @Override public boolean checkActivity(android.content.ComponentName componentName, int userId, android.os.IBinder resultTo) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -547,9 +553,11 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           else {
             _data.writeInt(0);
           }
+          _data.writeInt(userId);
+          _data.writeStrongBinder(resultTo);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkActivity, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkActivity(componentName);
+            return getDefaultImpl().checkActivity(componentName, userId, resultTo);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1263,7 +1271,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public boolean checkActivity(android.content.ComponentName componentName) throws android.os.RemoteException;
+  /** @deprecated use {@link #replaceActivityStartingIntent} instead */
+  public boolean checkActivity(android.content.ComponentName componentName, int userId, android.os.IBinder resultTo) throws android.os.RemoteException;
   public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId, android.os.IBinder resultTo) throws android.os.RemoteException;
   public boolean shouldVerifyActivityStarting(android.content.ComponentName componentName, java.lang.String pkg, java.lang.String source) throws android.os.RemoteException;
   public void verifyActivityStarting(android.os.Bundle options, java.lang.String pkg, android.content.ComponentName componentName, int uid, int pid, github.tornaco.android.thanos.core.app.activity.IVerifyCallback callback) throws android.os.RemoteException;

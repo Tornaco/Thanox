@@ -26,6 +26,6 @@ object XProcessRecordHelper {
         val applicationInfo = XposedHelpers
             .getObjectField(this, "info") as ApplicationInfo
         val uid = XposedHelpersExt.getIntFieldWithPotentialNames(this, "uid", "mUid")
-        return Pkg(applicationInfo.packageName, uid)
+        return Pkg.from(applicationInfo.packageName, uid)
     }
 }

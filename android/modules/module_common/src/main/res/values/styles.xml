@@ -145,6 +145,7 @@
 
     <style name="SwitchStyleMD.SwitchBar">
         <item name="trackTint">@color/switch_track_tint_color_switchbar</item>
+        <item name="thumbTint">@color/switch_thumb_tint_color_switchbar</item>
     </style>
 
     <style name="SwitchPrefTheme" parent="@style/Preference.SwitchPreferenceCompat.Material">

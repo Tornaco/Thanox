@@ -3,7 +3,8 @@
 
     <style name="AppThemeLight" parent="Theme.Material3.Light">
         <item name="colorAccent">@color/md_blue_a700</item>
-        <item name="colorPrimaryContainer">@color/md_light_blue_100</item>
+        <item name="colorPrimaryContainer">@color/md_blue_50</item>
+        <item name="switchBarBackground">?colorPrimaryContainer</item>
 
         <item name="colorPrimary">?colorAccent</item>
         <item name="colorPrimaryDark">?colorAccent</item>

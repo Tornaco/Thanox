@@ -6,6 +6,7 @@
     <attr name="collapsingToolbarTheme" format="reference" />
 
     <attr name="appCardBackground" format="color" />
+    <attr name="switchBarBackground" format="color" />
 
     <attr name="progressTrackColor" format="color" />
     <attr name="progressColor" format="color" />

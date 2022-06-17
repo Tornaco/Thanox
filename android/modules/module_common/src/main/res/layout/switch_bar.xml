@@ -15,7 +15,7 @@
     android:foreground="?selectableItemBackground"
     android:gravity="center"
     android:padding="@dimen/common_view_margin_default"
-    app:cardBackgroundColor="?colorPrimaryContainer"
+    app:cardBackgroundColor="?switchBarBackground"
     app:cardCornerRadius="28dp"
     app:cardElevation="0dp">
 

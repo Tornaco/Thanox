@@ -4,6 +4,7 @@
     <style name="AppThemeDark" parent="Theme.Material3.Dark">
         <item name="colorAccent">@color/md_blue_a700</item>
         <item name="colorPrimaryContainer">@color/md_grey_800</item>
+        <item name="switchBarBackground">?colorPrimaryContainer</item>
 
         <item name="colorPrimary">?colorAccent</item>
         <item name="colorPrimaryDark">?colorPrimary</item>

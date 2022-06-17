@@ -82,7 +82,7 @@
     <color name="md_indigo_a700">#304ffe</color>
 
     <!-- blue -->
-    <color name="md_blue_50">#e3f2fd</color>
+    <color name="md_blue_50">#e3f0fd</color>
     <color name="md_blue_100">#bbdefb</color>
     <color name="md_blue_200">#90caf9</color>
     <color name="md_blue_300">#64b5f6</color>

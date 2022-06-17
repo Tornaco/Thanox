@@ -126,7 +126,7 @@ fun ProcessManageScreen(
         searchBarState = searchBarState,
         floatingActionButton = {
             ExtendableFloatingActionButton(
-                extended = !listState.isScrollInProgress,
+                extended = true,
                 text = { Text(text = stringResource(id = R.string.feature_title_one_key_boost)) },
                 icon = {
                     Icon(

@@ -8,5 +8,9 @@ interface StartReason {
         const val PROVIDER = 0x4
         const val BROADCAST = 0x5
         const val OTHERS = 0x6
+
+        const val PRE_ACTIVITY = 0x7
+        const val PRE_TOP_ACTIVITY = 0x8
+        const val TOP_ACTIVITY = 0x9
     }
 }

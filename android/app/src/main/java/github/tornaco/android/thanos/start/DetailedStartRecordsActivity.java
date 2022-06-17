@@ -117,7 +117,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
                     .setMessage(appInfo.getStr())
                     .setPositiveButton(R.string.feature_title_apps_manager,
                             (dialog, which) -> AppDetailsActivity.start(thisActivity(), appInfo)).setNegativeButton(R.string.menu_title_start_restrict_charts_view_detailed_records_for_this_package,
-                    (dialog, which) -> DetailedStartRecordsActivity.start(thisActivity(), appInfo.getPkgName()))
+                            (dialog, which) -> DetailedStartRecordsActivity.start(thisActivity(), appInfo.getPkgName()))
                     .show();
 
         };
@@ -181,6 +181,15 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
         switch (method) {
             case StartReason.ACTIVITY:
                 methodStr = "Activity";
+                break;
+            case StartReason.TOP_ACTIVITY:
+                methodStr = "Top Activity";
+                break;
+            case StartReason.PRE_ACTIVITY:
+                methodStr = "Pre Activity";
+                break;
+            case StartReason.PRE_TOP_ACTIVITY:
+                methodStr = "Pre Top Activity";
                 break;
             case StartReason.BROADCAST:
                 methodStr = "Broadcast";

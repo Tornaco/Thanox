@@ -12,7 +12,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -86,6 +85,87 @@ public final class Fields implements Parcelable {
           return new Fields[size];
         }
       };
+
+
+  public String getLabel() {
+    return label;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public long getCreateAt() {
+    return createAt;
+  }
+
+  public String getDeviceId() {
+    return deviceId;
+  }
+
+  public String getAndroidId() {
+    return androidId;
+  }
+
+  public String getLine1Number() {
+    return line1Number;
+  }
+
+  public String getSimSerial() {
+    return simSerial;
+  }
+
+  public String getSimCountryIso() {
+    return simCountryIso;
+  }
+
+  public String getSimOperatorName() {
+    return simOperatorName;
+  }
+
+  public String getSimOperator() {
+    return simOperator;
+  }
+
+  public String getNetCountryIso() {
+    return netCountryIso;
+  }
+
+  public String getNetOperatorName() {
+    return netOperatorName;
+  }
+
+  public String getNetOperator() {
+    return netOperator;
+  }
+
+  public String getImeiForSlots0() {
+    return imeiForSlots0;
+  }
+
+  public String getImeiForSlots1() {
+    return imeiForSlots1;
+  }
+
+  public String getImeiForSlots2() {
+    return imeiForSlots2;
+  }
+
+  public String getMeidForSlots0() {
+    return meidForSlots0;
+  }
+
+  public String getMeidForSlots1() {
+    return meidForSlots1;
+  }
+
+  public String getMeidForSlots2() {
+    return meidForSlots2;
+  }
+
+  public boolean isShowN() {
+    return showN;
+  }
 
   @Override
   public int describeContents() {

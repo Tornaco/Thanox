@@ -21,6 +21,18 @@ interface IUI {
             @NonNull String msg,
             boolean important);
 
+    void showNotification(
+            @NonNull String notificationTag,
+            @NonNull String title,
+            @NonNull String msg,
+            @Nullable String notificationAppName,
+            @NonNull String pkgToLaunchOnClick,
+            @NonNull String largeIcon,
+            @NonNull String smallIcon,
+            boolean vibrate,
+            boolean sound,
+            boolean important);
+
     void cancelNotification(@NonNull String notificationTag);
 
     void findAndClickViewByText(@NonNull String text);

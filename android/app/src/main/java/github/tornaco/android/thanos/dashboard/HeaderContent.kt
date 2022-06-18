@@ -45,7 +45,7 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
+            .clip(RoundedCornerShape(24.dp))
             .background(color = Color(cardBgColor))
             .clickableWithRipple {
                 onHeaderClick()

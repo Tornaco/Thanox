@@ -33,7 +33,7 @@
     <dimen name="common_toolbar_elevation">1dp</dimen>
     <dimen name="common_view_elevation">0dp</dimen>
     <dimen name="common_view_elevation_1">1dp</dimen>
-    <dimen name="common_view_corner_radius">12dp</dimen>
+    <dimen name="common_view_corner_radius">24dp</dimen>
     <dimen name="common_view_corner_radius_0">0dp</dimen>
 
     <dimen name="list_item_footer_height">8dp</dimen>

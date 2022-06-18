@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.recyclerview.widget.RecyclerView
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.databinding.ItemFeatureDashboardFooterBinding
@@ -124,6 +125,11 @@ internal class HeaderHolder(
 
     init {
         XLog.d("init: HeaderHolder-${hashCode()}")
+
+        binding.compose.setViewCompositionStrategy(
+            ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+        )
+
         binding.compose.setContent {
             val state by _state.collectAsState()
             HeaderContent(state, onHeaderClick)

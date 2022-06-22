@@ -1,16 +1,12 @@
 package github.tornaco.android.thanos.settings;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.pref.AppPreference;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.thanos.android.noroot.ServiceBindings;
 
@@ -25,19 +21,6 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
     protected void onBindPreferences() {
         super.onBindPreferences();
         ThanosManager thanos = ThanosManager.from(getContext());
-        // Logging.
-        SwitchPreferenceCompat loggingPref = findPreference(getString(R.string.key_enable_logging));
-        if (thanos.isServiceInstalled()) {
-            loggingPref.setChecked(thanos.isLoggingEnabled());
-            loggingPref.setOnPreferenceChangeListener((preference, newValue) -> {
-                boolean checked = (boolean) newValue;
-                thanos.setLoggingEnabled(checked);
-                return true;
-            });
-
-        } else {
-            loggingPref.setEnabled(false);
-        }
 
         SwitchPreferenceCompat showCurrentActivityPref = findPreference(getString(R.string.key_show_current_activity));
         if (thanos.isServiceInstalled()) {

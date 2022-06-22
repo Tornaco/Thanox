@@ -67,7 +67,7 @@ class StartResult : Parcelable {
         @JvmField
         val BLOCKED_COMPONENT_IS_DISABLED = StartResult(false, "BLOCKED_COMPONENT_IS_DISABLED")
         @JvmField
-        val BLOCKED_IN_SMART_STAND_BY_LIST = StartResult(false, "BLOCKED_IN_SMART_STAND_BY_LIST")
+        val BLOCKED_MAYBE_PUSH_SDK_ACTIVITY = StartResult(false, "BLOCKED_MAYBE_PUSH_SDK_ACTIVITY")
 
         @JvmField
         val BLOCKED_USER_RULE = StartResult(false, "BLOCKED_USER_RULE")

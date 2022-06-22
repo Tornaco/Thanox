@@ -22,6 +22,7 @@ public final class StartRecord implements Parcelable {
     private String starterPackageName;
     private String checker;
     private int userId;
+    private int callerUid;
     private StartResult result;
 
     private StartRecord(Parcel in) {
@@ -33,6 +34,7 @@ public final class StartRecord implements Parcelable {
         starterPackageName = in.readString();
         checker = in.readString();
         userId = in.readInt();
+        callerUid = in.readInt();
         result = in.readParcelable(StartResult.class.getClassLoader());
     }
 
@@ -63,6 +65,7 @@ public final class StartRecord implements Parcelable {
         parcel.writeString(starterPackageName);
         parcel.writeString(checker);
         parcel.writeInt(userId);
+        parcel.writeInt(callerUid);
         parcel.writeParcelable(result, i);
     }
 }

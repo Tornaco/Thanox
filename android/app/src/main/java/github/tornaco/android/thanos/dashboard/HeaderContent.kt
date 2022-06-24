@@ -17,11 +17,15 @@
 
 package github.tornaco.android.thanos.dashboard
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.*
 import github.tornaco.android.thanos.module.compose.common.widget.CircularProgressBar
+import kotlinx.coroutines.delay
 
 @Composable
 fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
@@ -56,7 +61,7 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
     ) {
         Column {
             Row {
-                FilledTonalButton(
+                FilledTonalButton(modifier = Modifier.animateContentSize(),
                     colors = ButtonDefaults.filledTonalButtonColors(
                         containerColor = Color(
                             primaryContainerColor
@@ -66,13 +71,12 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                         onHeaderClick()
                     }) {
                     Text(
-                        modifier = Modifier.alignByBaseline(),
                         text = "${headerInfo.runningAppsCount}",
                         style = MaterialTheme.typography.titleLarge,
-                        color = Color(onSurfaceColor)
+                        color = Color(onSurfaceColor),
+                        fontWeight = W500
                     )
                     Text(
-                        modifier = Modifier.alignByBaseline(),
                         text = stringResource(id = R.string.boost_status_running_apps),
                         style = MaterialTheme.typography.titleMedium,
                         color = Color(onSurfaceColor)
@@ -100,7 +104,7 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                     backgroundProgressBarColor = Color(progressTrackColor),
                     backgroundProgressBarWidth = 16.dp,
                     roundBorder = true,
-                    startAngle = 90f,
+                    startAngle = 0f,
                     centerContent = {
                         Text(
                             text = stringResource(id = R.string.boost_status_system_memory),
@@ -160,6 +164,28 @@ private fun MemStats(
         )
     }
     TinySpacer()
+
+    AnimatedLinearProgressIndicator(memUsage, progressColor, progressTrackColor)
+}
+
+@Composable
+private fun AnimatedLinearProgressIndicator(
+    memUsage: MemUsage,
+    progressColor: Int,
+    progressTrackColor: Int
+) {
+    var startAnim by remember {
+        mutableStateOf(false)
+    }
+    val animatePercent by animateFloatAsState(
+        targetValue = if (startAnim) 1f else 0f,
+        animationSpec = spring(stiffness = Spring.StiffnessLow)
+    )
+
+    LaunchedEffect(memUsage) {
+        delay(240)
+        startAnim = true
+    }
     LinearProgressIndicator(
         modifier = Modifier
             .fillMaxWidth()
@@ -168,6 +194,6 @@ private fun MemStats(
             .clip(RoundedCornerShape(6.dp)),
         color = Color(progressColor),
         trackColor = Color(progressTrackColor),
-        progress = memUsage.memUsagePercent.toFloat() / 100f
+        progress = memUsage.memUsagePercent.toFloat() / 100f * animatePercent
     )
 }

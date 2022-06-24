@@ -1,11 +1,15 @@
 package github.tornaco.android.thanos.module.compose.common.widget
 
+import androidx.compose.animation.core.Spring.StiffnessLow
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.center
@@ -14,6 +18,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 
 /**
  * CircularProgressBar-Compose
@@ -33,6 +38,19 @@ fun CircularProgressBar(
     centerContent: @Composable (() -> Unit)? = null
 ) {
     Box(modifier = modifier.fillMaxSize()) {
+        var startAnim by remember {
+            mutableStateOf(false)
+        }
+        val animatePercent by animateFloatAsState(
+            targetValue = if (startAnim) 1f else 0f,
+            animationSpec = spring(stiffness = StiffnessLow)
+        )
+
+        LaunchedEffect(progress) {
+            delay(240)
+            startAnim = true
+        }
+
         Canvas(modifier = modifier.fillMaxSize()) {
             val canvasSize = size.minDimension
 
@@ -40,6 +58,7 @@ fun CircularProgressBar(
                 canvasSize / 2 - maxOf(backgroundProgressBarWidth, progressBarWidth).toPx() / 2
 
             drawCircle(
+                alpha = 1.0f,
                 color = backgroundProgressBarColor,
                 radius = radius,
                 center = size.center,
@@ -49,7 +68,7 @@ fun CircularProgressBar(
             drawArc(
                 color = progressBarColor,
                 startAngle = 270f + startAngle,
-                sweepAngle = (progress / progressMax) * 360f,
+                sweepAngle = (progress / progressMax) * 360f * animatePercent,
                 useCenter = false,
                 topLeft = size.center - Offset(radius, radius),
                 size = Size(radius * 2, radius * 2),
@@ -61,7 +80,9 @@ fun CircularProgressBar(
         }
 
         Box(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .alpha(1f),
         ) {
             centerContent?.invoke()
         }

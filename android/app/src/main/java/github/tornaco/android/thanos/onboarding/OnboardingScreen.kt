@@ -1,16 +1,15 @@
 package github.tornaco.android.thanos.onboarding
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Album
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -29,8 +28,12 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
     )
     val scope = rememberCoroutineScope()
 
-    Scaffold {
-        Box(modifier = Modifier.fillMaxSize()) {
+    Scaffold { padding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+        ) {
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier.fillMaxSize(),
@@ -46,12 +49,15 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
                 onboardingList.forEachIndexed { index, _ ->
                     OnboardingPagerSlide(
                         selected = index == pagerState.currentPage,
-                        MaterialTheme.colorScheme.secondary,
-                        Icons.Filled.Album
+                        MaterialTheme.colorScheme.secondary
                     )
                 }
             }
-            Button(
+            FilledTonalButton(
+                modifier = Modifier
+                    .animateContentSize()
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 32.dp),
                 onClick = {
                     if (pagerState.currentPage != onboardingList.size - 1) {
                         scope.launch {
@@ -60,13 +66,7 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
                     } else {
                         onComplete()
                     }
-                },
-                modifier = Modifier
-                    .animateContentSize()
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 32.dp)
-                    .height(50.dp)
-                    .clip(CircleShape)
+                }
             ) {
                 Text(
                     text = if (pagerState.currentPage == onboardingList.size - 1) {

@@ -149,6 +149,9 @@ object Libs {
 
         const val androidCommon = "com.github.Tornaco:AndroidCommon:v1.0"
 
+        const val chucker = "com.github.chuckerteam.chucker:library:3.5.2"
+        const val chuckerNoop = "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+
         const val rxJava2 = "io.reactivex.rxjava2:rxjava:2.1.3"
         const val rxAndroid = "io.reactivex.rxjava2:rxandroid:2.0.1"
 

@@ -20,16 +20,17 @@ nav_order: 2
 
 Thanox目前在酷安和Google play商店发布。
 
-* [酷安](https://www.coolapk.com/)发布的版本为国内稳定版，如果要体验测试版，请前往[Github-Release](https://github.com/Tornaco/Thanox/releases)页面下载
-* [Google play](https://play.google.com/store/apps/details?id=github.tornaco.android.thanos.pro&hl=en&gl=US)发布的版本为pro版本，功能与国内版本基本一致；得益于Google play的便利性，你可以选择加入Beta计划体验pro的测试版本
+* [酷安](https://www.coolapk.com/)发布的版本为国内稳定版。
+* [Github-Release](https://github.com/Tornaco/Thanox/releases) 国内稳定版，如果要体验最新测试版，可以进入[CI](国内稳定版)下载。
+* [Google play](https://play.google.com/store/apps/details?id=github.tornaco.android.thanos.pro&hl=en&gl=US)发布的版本为pro版本，功能与国内版本基本一致；得益于Google play的便利性，你可以选择加入Beta、Alpha计划体验pro的测试版本
 
 
 
 ## Android版本支持
 
-Android6.0 - Android11（**Thanox 2.x** 版本均支持）
-
-Android12（从**Thanox 3.x**开始支持）
+* Android 6.0 - Android 11（**Thanox 2.x** 版本均支持）
+* Android 12（从**Thanox 3.x**开始支持）
+* Android 13（从**Thanox 4.x**开始支持）
 
 &nbsp;
 
@@ -62,11 +63,3 @@ Android12（从**Thanox 3.x**开始支持）
 
 * **Framework**层的数据存储在`/data/system/thanos${16位随机字母}`下，Thanox各个功能的数据也存在此处。
 * **App**层仅仅存储一些简单的UI配置数据，使用系统设置清除数据并不会清除Thanox各个功能的数据。
-
-&nbsp;
-
-### 卸载
-
-如果想要卸载**Thanox**模块并清除其所有数据，可以前往**Thanox**的*设置-备份与还原-立即卸载*。
-
-如果依然无法删除，请在卸载Thanox应用后，手动删除`/data/system/thanos_${xxxxxx}`目录。

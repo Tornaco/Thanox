@@ -17,7 +17,7 @@
 
 package github.tornaco.android.thanos.dashboard
 
-import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.*
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -70,12 +70,14 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                     onClick = {
                         onHeaderClick()
                     }) {
-                    Text(
-                        text = "${headerInfo.runningAppsCount}",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = Color(onSurfaceColor),
-                        fontWeight = W500
-                    )
+                    AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.titleLarge,
+                            color = Color(onSurfaceColor),
+                            fontWeight = W500
+                        )
+                    }
                     Text(
                         text = stringResource(id = R.string.boost_status_running_apps),
                         style = MaterialTheme.typography.titleMedium,
@@ -196,4 +198,24 @@ private fun AnimatedLinearProgressIndicator(
         trackColor = Color(progressTrackColor),
         progress = memUsage.memUsagePercent.toFloat() / 100f * animatePercent
     )
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+private fun AnimatedTextContainer(text: String, content: @Composable (String) -> Unit) {
+    AnimatedContent(
+        targetState = text,
+        transitionSpec = {
+            // Compare the incoming number with the previous number.
+            (slideInVertically { height -> height } + fadeIn() with
+                    slideOutVertically { height -> -height } + fadeOut())
+                .using(
+                    // Disable clipping since the faded slide-in/out should
+                    // be displayed out of bounds.
+                    SizeTransform(clip = false)
+                )
+        }
+    ) { targetText ->
+        content(targetText)
+    }
 }

@@ -18,6 +18,7 @@ package github.tornaco.android.thanos.process.v2
 
 import android.text.format.DateUtils
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -75,7 +76,6 @@ fun ProcessManageScreen(
 
     LaunchedEffect(viewModel) {
         viewModel.init()
-        viewModel.startQueryCpuUsage()
     }
 
     val listState = rememberLazyListState()
@@ -126,7 +126,7 @@ fun ProcessManageScreen(
         searchBarState = searchBarState,
         floatingActionButton = {
             ExtendableFloatingActionButton(
-                extended = true,
+                extended = false,
                 text = { Text(text = stringResource(id = R.string.feature_title_one_key_boost)) },
                 icon = {
                     Icon(
@@ -215,14 +215,24 @@ fun RunningAppList(
         if (state.runningAppStates.isNotEmpty()) {
             stickyHeader { RunningGroupHeader(state.runningAppStates.size) }
             items(state.runningAppStates) {
-                RunningAppItem(it, state.cpuUsageRatioState[it.appInfo], onRunningItemClick)
+                RunningAppItem(
+                    it,
+                    state.cpuUsageRatioStates[it.appInfo],
+                    state.netSpeedStates[it.appInfo],
+                    onRunningItemClick
+                )
             }
         }
 
         if (state.runningAppStatesBg.isNotEmpty()) {
             stickyHeader { CachedGroupHeader(state.runningAppStatesBg.size) }
             items(state.runningAppStatesBg) {
-                RunningAppItem(it, state.cpuUsageRatioState[it.appInfo], onRunningItemClick)
+                RunningAppItem(
+                    it,
+                    state.cpuUsageRatioStates[it.appInfo],
+                    state.netSpeedStates[it.appInfo],
+                    onRunningItemClick
+                )
             }
         }
 
@@ -297,6 +307,7 @@ fun NotRunningGroupHeader(itemCount: Int) {
 fun RunningAppItem(
     appState: RunningAppState,
     cpuRatio: String?,
+    netSpeed: NetSpeedState?,
     onItemClick: (RunningAppState) -> Unit
 ) {
     Box(
@@ -322,7 +333,7 @@ fun RunningAppItem(
                 Spacer(modifier = Modifier.size(12.dp))
                 Column(verticalArrangement = Arrangement.Center) {
                     AppLabelText(
-                        Modifier.sizeIn(maxWidth = 180.dp),
+                        Modifier.sizeIn(maxWidth = 240.dp),
                         appState.appInfo.appLabel
                     )
                     if (appState.serviceCount == 0) {
@@ -333,15 +344,25 @@ fun RunningAppItem(
                     AppRunningTime(appState)
                 }
             }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.End
+
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.End
             ) {
                 MemSizeBadge(appState)
+
                 cpuRatio?.let {
                     SmallSpacer()
                     MD3Badge("CPU $it%")
                 }
+
+                SmallSpacer()
+                AnimatedVisibility(visible = netSpeed != null) {
+                    netSpeed?.let {
+                        NetSpeedBadge(it)
+                    }
+                }
+
             }
         }
     }
@@ -401,6 +422,11 @@ fun NotRunningAppItem(appInfo: AppInfo, onItemClick: (AppInfo) -> Unit) {
 @Composable
 fun MemSizeBadge(appState: RunningAppState) {
     MD3Badge(appState.sizeStr)
+}
+
+@Composable
+fun NetSpeedBadge(netSpeed: NetSpeedState) {
+    MD3Badge("↑ ${netSpeed.up}/s ↓ ${netSpeed.down}/s")
 }
 
 @Composable

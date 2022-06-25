@@ -9,5 +9,6 @@ data class ProcessManageState(
     val runningAppStatesBg: List<RunningAppState>,
     val appsNotRunning: List<AppInfo>,
     val appFilterItems: List<AppSetFilterItem>,
-    val cpuUsageRatioState: Map<AppInfo, String>
+    val cpuUsageRatioStates: Map<AppInfo, String>,
+    val netSpeedStates: Map<AppInfo, NetSpeedState>
 )

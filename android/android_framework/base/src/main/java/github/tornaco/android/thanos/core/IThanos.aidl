@@ -18,6 +18,7 @@ import github.tornaco.android.thanos.core.wm.IWindowManager;
 import github.tornaco.android.thanos.core.power.IPowerManager;
 import github.tornaco.android.thanos.core.input.IInputManager;
 import github.tornaco.android.thanos.core.plus.IRS;
+import github.tornaco.android.thanos.core.net.INetworkManager;
 import github.tornaco.android.thanos.core.IPluginLogger;
 import github.tornaco.android.thanos.core.app.infinite.InfiniteZ;
 import github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager;
@@ -67,4 +68,5 @@ interface IThanos {
 
     IUsageStatsManager getUsageStatsManager();
     IPushDelegateManager getPushDelegateManager();
+    INetworkManager getNetworkManager();
 }

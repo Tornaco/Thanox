@@ -7,7 +7,6 @@ import com.elvishew.xlog.XLog;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.core.IThanos;
@@ -19,6 +18,7 @@ import github.tornaco.android.thanos.core.audio.AudioManager;
 import github.tornaco.android.thanos.core.backup.BackupAgent;
 import github.tornaco.android.thanos.core.input.InputManager;
 import github.tornaco.android.thanos.core.n.NotificationManager;
+import github.tornaco.android.thanos.core.net.NetworkManager;
 import github.tornaco.android.thanos.core.os.ServiceManager;
 import github.tornaco.android.thanos.core.plus.RSManager;
 import github.tornaco.android.thanos.core.pm.PackageManager;
@@ -151,6 +151,11 @@ public class ThanosManager {
     @SneakyThrows
     public WindowManager getWindowManager() {
         return new WindowManager(service.getWindowManager());
+    }
+
+    @SneakyThrows
+    public NetworkManager getNetworkManager() {
+        return new NetworkManager(service.getNetworkManager());
     }
 
     @SneakyThrows

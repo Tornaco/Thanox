@@ -16,6 +16,7 @@ import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.AppLabelSearchFilter
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.net.TrafficStatsState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import kotlinx.coroutines.*
@@ -38,7 +39,8 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                 runningAppStatesBg = emptyList(),
                 appFilterItems = emptyList(),
                 appsNotRunning = emptyList(),
-                cpuUsageRatioState = emptyMap()
+                cpuUsageRatioStates = emptyMap(),
+                netSpeedStates = emptyMap(),
             )
         )
     val state = _state.asStateFlow()
@@ -51,10 +53,20 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
 
     private var searchJobs: MutableList<Job> = mutableListOf()
 
+    private val trafficStats by lazy { TrafficStatsState(context) }
+
     fun init() {
         viewModelScope.launch {
             loadDefaultAppFilterItems()
             loadProcessStates()
+        }
+
+        viewModelScope.launch {
+            startQueryCpuUsage()
+        }
+
+        viewModelScope.launch {
+            startQueryNetUsage()
         }
     }
 
@@ -202,7 +214,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         }
     }
 
-    suspend fun startQueryCpuUsage() {
+    private suspend fun startQueryCpuUsage() = withContext(Dispatchers.IO) {
         XLog.w("startQueryCpuUsage...")
         while (true) {
             val cpuUsageMap = mutableMapOf<AppInfo, String>()
@@ -214,7 +226,30 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                 val cpuRatio = thanox.activityManager.queryCpuUsageRatio(pidsForThisApp, false)
                 cpuUsageMap[appInfo] = "${(cpuRatio * 100).toInt()}"
             }
-            _state.value = _state.value.copy(cpuUsageRatioState = cpuUsageMap)
+            _state.value = _state.value.copy(cpuUsageRatioStates = cpuUsageMap)
+            delay(1000)
+        }
+    }
+
+    private suspend fun startQueryNetUsage() = withContext(Dispatchers.IO) {
+        XLog.w("startQueryNetUsage...")
+        while (true) {
+            val netUsageMap = mutableMapOf<AppInfo, NetSpeedState>()
+            (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
+                val appInfo = it.appInfo
+                trafficStats.update(appInfo.uid)
+                val uidStats = trafficStats.getUidStats(appInfo.uid)
+                XLog.d("uidStats: ${appInfo.appLabel} $uidStats")
+                uidStats?.let {
+                    if (uidStats.lastTxBytes > 0 && uidStats.lastRxBytes > 0) {
+                        val up = Formatter.formatFileSize(context, uidStats.lastTxBytes)
+                        val down = Formatter.formatFileSize(context, uidStats.lastRxBytes)
+                        val netSpeedState = NetSpeedState(up = up, down = down)
+                        netUsageMap[appInfo] = netSpeedState
+                    }
+                }
+            }
+            _state.value = _state.value.copy(netSpeedStates = netUsageMap)
             delay(1000)
         }
     }

@@ -126,6 +126,8 @@
     <string name="feature_title_recent_task_blur">Task blur</string>
     <string name="feature_summary_recent_task_blur">Add blur effect to recent tasks</string>
 
+    <string name="feature_title_wakelock_remover">Wakelock remover</string>
+
     <string name="feature_title_app_lock">App lock</string>
     <string name="feature_summary_app_lock">Show lock interface before app launch</string>
 

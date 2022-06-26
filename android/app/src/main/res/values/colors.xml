@@ -22,4 +22,5 @@
     <color name="nav_icon_wechat_push">#4caf50</color>
     <color name="nav_icon_feedback">#51b4cd</color>
     <color name="nav_icon_guide">#f36352</color>
+    <color name="nav_icon_wakelock_remover">#2c8aff</color>
 </resources>

@@ -22,6 +22,8 @@
     <string name="common_tips_qut">提示：</string>
     <string name="common_retry">重试</string>
 
+    <string name="common_badge_text_experiment">实验</string>
+
     <string name="common_toast_copied_to_clipboard">已经复制到剪贴板</string>
 
     <string name="app_state_disabled">冻结</string>

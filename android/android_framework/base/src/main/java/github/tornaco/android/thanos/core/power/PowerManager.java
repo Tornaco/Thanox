@@ -1,5 +1,7 @@
 package github.tornaco.android.thanos.core.power;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -31,5 +33,15 @@ public class PowerManager {
     @SneakyThrows
     public boolean isPowerSaveModeEnabled() {
         return server.isPowerSaveModeEnabled();
+    }
+
+    @SneakyThrows
+    public List<SeenWakeLock> getSeenWakeLocks() {
+        return server.getSeenWakeLocks();
+    }
+
+    @SneakyThrows
+    public List<SeenWakeLock> getSeenWakeLocksByPackageName(String packageName) {
+        return server.getSeenWakeLocksByPackageName(packageName);
     }
 }

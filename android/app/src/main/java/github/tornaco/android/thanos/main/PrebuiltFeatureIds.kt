@@ -40,6 +40,7 @@ object PrebuiltFeatureIds {
     const val ID_PLUGINS = 20
     const val ID_FEEDBACK = 21
     const val ID_GUIDE = 22
+    const val ID_WAKELOCK_REMOVER = 23
 
     fun Int.isValidId() = this >= ID_ONE_KEY_CLEAR
 }

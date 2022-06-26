@@ -215,6 +215,9 @@
         <activity
             android:name=".settings.ThemeAttrPreviewActivity"
             android:exported="false" />
+        <activity
+            android:name=".power.wakelock.WakeLockRemoverActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

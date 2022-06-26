@@ -37,6 +37,24 @@
             android:navTile="@{tile}"
             tools:src="@drawable/ic_nav_boost" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/badge"
+            style="@style/MaterialButtonBadged"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_toEndOf="@id/icon"
+            android:padding="3dp"
+            android:text="@{tile.badge1}"
+            android:textSize="6sp"
+            android:translationX="-8dp"
+            android:translationY="4dp"
+            android:visibility="@{(tile.badge1 == null) ? View.GONE : View.VISIBLE}"
+            tools:text="EXP" />
+
         <TextView
             android:id="@+id/item_title"
             android:layout_width="wrap_content"

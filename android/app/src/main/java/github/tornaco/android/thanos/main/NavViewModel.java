@@ -402,11 +402,20 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_wechat_push)
                                                 .build(),
                                         Tile.builder()
+                                                .id(PrebuiltFeatureIds.ID_WAKELOCK_REMOVER)
+                                                .iconRes(R.drawable.ic_nav_wakelock_remover)
+                                                .title(resources.getString(R.string.feature_title_wakelock_remover))
+                                                .requiredFeature(BuildProp.THANOX_FEATURE_WAKELOCK_REMOVER)
+                                                .themeColor(R.color.nav_icon_wakelock_remover)
+                                                .badge1(resources.getString(R.string.common_badge_text_experiment))
+                                                .build(),
+                                        Tile.builder()
                                                 .id(PrebuiltFeatureIds.ID_INFINITE_Z)
                                                 .iconRes(R.drawable.ic_nav_app_clone)
                                                 .title(resources.getString(R.string.feature_title_infinite_z))
-                                                .disabled(!BuildProp.THANOS_BUILD_DEBUG)
+                                                .requiredFeature(BuildProp.THANOX_FEATURE_IZ)
                                                 .themeColor(R.color.nav_icon_app_clone)
+                                                .badge1(resources.getString(R.string.common_badge_text_experiment))
                                                 .build())));
 
         TileGroup guide =
@@ -529,9 +538,9 @@ public class NavViewModel extends AndroidViewModel {
                                     @Override
                                     public void onPluginAdd() {
                                         Toast.makeText(
-                                                getApplication(),
-                                                R.string.title_plugin_reboot_take_effect,
-                                                Toast.LENGTH_LONG)
+                                                        getApplication(),
+                                                        R.string.title_plugin_reboot_take_effect,
+                                                        Toast.LENGTH_LONG)
                                                 .show();
                                     }
 

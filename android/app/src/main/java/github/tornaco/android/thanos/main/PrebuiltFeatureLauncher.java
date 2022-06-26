@@ -18,9 +18,7 @@
 package github.tornaco.android.thanos.main;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Handler;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -39,6 +37,7 @@ import github.tornaco.android.thanos.infinite.InfiniteZActivity;
 import github.tornaco.android.thanos.notification.ScreenOnNotificationActivity;
 import github.tornaco.android.thanos.power.SmartFreezeActivity;
 import github.tornaco.android.thanos.power.SmartStandbyV2Activity;
+import github.tornaco.android.thanos.power.wakelock.WakeLockRemoverActivity;
 import github.tornaco.android.thanos.privacy.DataCheatActivity;
 import github.tornaco.android.thanos.start.BackgroundRestrictActivity;
 import github.tornaco.android.thanos.start.StartRestrictActivity;
@@ -138,6 +137,12 @@ public class PrebuiltFeatureLauncher {
                 return;
             }
             WechatPushDeleteMainActivity.start(context);
+        } else if (featureId == PrebuiltFeatureIds.ID_WAKELOCK_REMOVER) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(context)) {
+                DonateIntroDialogKt.showDonateIntroDialog(context);
+                return;
+            }
+            WakeLockRemoverActivity.Starter.start(context);
         }
     }
 

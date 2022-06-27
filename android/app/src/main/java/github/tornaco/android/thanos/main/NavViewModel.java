@@ -400,11 +400,13 @@ public class NavViewModel extends AndroidViewModel {
                                                 .title(resources.getString(R.string.module_push_message_delegate_title_wechat_proxy))
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_PUSH_DELEGATE)
                                                 .themeColor(R.color.nav_icon_wechat_push)
+                                                .badge1(resources.getString(R.string.common_badge_text_experiment))
                                                 .build(),
                                         Tile.builder()
                                                 .id(PrebuiltFeatureIds.ID_WAKELOCK_REMOVER)
                                                 .iconRes(R.drawable.ic_nav_wakelock_remover)
                                                 .title(resources.getString(R.string.feature_title_wakelock_remover))
+                                                .disabled(!BuildProp.THANOS_BUILD_DEBUG)
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_WAKELOCK_REMOVER)
                                                 .themeColor(R.color.nav_icon_wakelock_remover)
                                                 .badge1(resources.getString(R.string.common_badge_text_experiment))
@@ -414,6 +416,7 @@ public class NavViewModel extends AndroidViewModel {
                                                 .iconRes(R.drawable.ic_nav_app_clone)
                                                 .title(resources.getString(R.string.feature_title_infinite_z))
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_IZ)
+                                                .disabled(!BuildProp.THANOS_BUILD_DEBUG)
                                                 .themeColor(R.color.nav_icon_app_clone)
                                                 .badge1(resources.getString(R.string.common_badge_text_experiment))
                                                 .build())));

@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -56,6 +57,8 @@ import kotlinx.coroutines.delay
 fun RunningAppStateDetailsPage() {
     val navHandle = navigationHandle<RunningAppStateDetails>()
     val viewModel: RunningAppDetailViewModel = hiltViewModel()
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    viewModel.bindLifecycle(lifecycle)
     val state = navHandle.key.state
     val cpuUsageStatsState by viewModel.state.collectAsState()
 

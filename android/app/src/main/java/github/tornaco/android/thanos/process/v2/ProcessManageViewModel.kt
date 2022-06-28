@@ -216,17 +216,20 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
 
     private suspend fun startQueryCpuUsage() = withContext(Dispatchers.IO) {
         XLog.w("startQueryCpuUsage...")
-        while (isResumed) {
-            val cpuUsageMap = mutableMapOf<AppInfo, String>()
-            thanox.activityManager.updateProcessCpuUsageStats()
-            (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
-                val appInfo = it.appInfo
-                val pidsForThisApp =
-                    it.processState.map { process -> process.process.pid.toLong() }.toLongArray()
-                val cpuRatio = thanox.activityManager.queryCpuUsageRatio(pidsForThisApp, false)
-                cpuUsageMap[appInfo] = "${(cpuRatio * 100).toInt()}"
+        while (true) {
+            if (isResumed) {
+                val cpuUsageMap = mutableMapOf<AppInfo, String>()
+                thanox.activityManager.updateProcessCpuUsageStats()
+                (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
+                    val appInfo = it.appInfo
+                    val pidsForThisApp =
+                        it.processState.map { process -> process.process.pid.toLong() }
+                            .toLongArray()
+                    val cpuRatio = thanox.activityManager.queryCpuUsageRatio(pidsForThisApp, false)
+                    cpuUsageMap[appInfo] = "${(cpuRatio * 100).toInt()}"
+                }
+                _state.value = _state.value.copy(cpuUsageRatioStates = cpuUsageMap)
             }
-            _state.value = _state.value.copy(cpuUsageRatioStates = cpuUsageMap)
             delay(1000)
         }
     }

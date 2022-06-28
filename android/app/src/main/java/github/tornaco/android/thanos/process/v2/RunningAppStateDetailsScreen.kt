@@ -25,6 +25,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Flag
+import androidx.compose.material.icons.outlined.LabelImportant
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -304,7 +307,15 @@ private fun ProcessSection(
     ) {
         Column {
             Spacer(modifier = Modifier.size(12.dp))
-            Row {
+            Row(verticalAlignment = CenterVertically) {
+                if (runningProcessState.isMain) {
+                    Icon(
+                        modifier = Modifier.size(18.dp),
+                        imageVector = Icons.Outlined.LabelImportant,
+                        contentDescription = "Main process"
+                    )
+                    SmallSpacer()
+                }
                 Text(
                     modifier = Modifier.alignByBaseline(),
                     text = stringResource(id = R.string.runningservicedetails_processes_title),

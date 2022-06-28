@@ -98,6 +98,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                 val processPss =
                     thanox.activityManager.getProcessPss(intArrayOf(process.pid)).sum()
                 RunningProcessState(
+                    pkgName = pkgName,
                     process = process,
                     runningServices = runningServices.filter { service ->
                         service.pid == process.pid
@@ -113,7 +114,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                     },
                     sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
                 )
-            }.sortedByDescending { it.runningServices.size }
+            }.sortedByDescending { it.runningServices.size }.sortedBy { !it.isMain }
             val isAllProcessCached =
                 entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }
             val totalPss =

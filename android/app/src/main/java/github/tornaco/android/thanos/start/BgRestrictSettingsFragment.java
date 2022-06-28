@@ -46,6 +46,15 @@ public class BgRestrictSettingsFragment extends BasePreferenceFragmentCompat {
             }
         });
 
+        SwitchPreferenceCompat skipFg = findPreference(getString(R.string.key_bg_screen_off_clean_up_skip_fg));
+        boolean skipFgEnabled = thanos.getActivityManager().isBgTaskCleanUpSkipForegroundEnabled();
+        Objects.requireNonNull(skipFg).setChecked(skipFgEnabled);
+        skipFg.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean checked = (boolean) newValue;
+            thanos.getActivityManager().setBgTaskCleanUpSkipForegroundEnabled(checked);
+            return true;
+        });
+
         SwitchPreferenceCompat skipAudio = findPreference(getString(R.string.key_bg_screen_off_clean_up_skip_audio));
         boolean enabledA = thanos.getActivityManager().isBgTaskCleanUpSkipAudioFocusedAppEnabled();
         Objects.requireNonNull(skipAudio).setChecked(enabledA);

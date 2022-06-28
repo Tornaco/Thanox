@@ -1,3 +1,3 @@
 package github.tornaco.android.thanos.core
 
-class ThanosFeature<T>(var key: String, var defaultValue: T)
+class ThanosFeature<T>(val key: String, val defaultValue: T)

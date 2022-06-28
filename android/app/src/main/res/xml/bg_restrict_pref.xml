@@ -4,8 +4,8 @@
 
     <PreferenceCategory>
         <Preference
-            app:summary="@string/feature_desc_bg_restrict"
-            app:persistent="false" />
+            app:persistent="false"
+            app:summary="@string/feature_desc_bg_restrict" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/pre_category_strategy">
@@ -30,6 +30,12 @@
             android:persistent="false"
             app:key="@string/key_bg_screen_off_clean_up_skip_recent_task"
             app:title="@string/pre_title_bg_screen_off_clean_up_skip_recent_task" />
+
+        <SwitchPreferenceCompat
+            android:persistent="false"
+            app:key="@string/key_bg_screen_off_clean_up_skip_fg"
+            app:summary="@string/pre_summary_bg_screen_off_clean_up_skip_fg"
+            app:title="@string/pre_title_bg_screen_off_clean_up_skip_fg" />
 
         <SwitchPreferenceCompat
             android:persistent="false"

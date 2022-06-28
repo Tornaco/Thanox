@@ -271,6 +271,16 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    public boolean isBgTaskCleanUpSkipForegroundEnabled() {
+        return server.isBgTaskCleanUpSkipForegroundEnabled();
+    }
+
+    @SneakyThrows
+    public void setBgTaskCleanUpSkipForegroundEnabled(boolean enable) {
+        server.setBgTaskCleanUpSkipForegroundEnabled(enable);
+    }
+
+    @SneakyThrows
     public boolean isBgTaskCleanUpSkipAudioFocusedAppEnabled() {
         return server.isBgTaskCleanUpSkipAudioFocusedAppEnabled();
     }

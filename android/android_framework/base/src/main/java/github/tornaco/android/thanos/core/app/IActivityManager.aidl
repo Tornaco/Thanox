@@ -215,4 +215,7 @@ interface IActivityManager {
     List<ActivityAssistInfo> getTopVisibleActivities();
 
     boolean checkStartActivity(in Intent intent, int callerUid);
+
+    boolean isBgTaskCleanUpSkipForegroundEnabled();
+    void setBgTaskCleanUpSkipForegroundEnabled(boolean enable);
 }

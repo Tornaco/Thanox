@@ -336,6 +336,9 @@
     <string name="pre_title_bg_screen_off_clean_up_skip_notification">不清理有通知应用</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">不清理最近任务里的应用</string>
 
+    <string name="pre_title_bg_screen_off_clean_up_skip_fg">不清理前台应用</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_fg">开启该选项后，正在前台使用的应用不会被清理</string>
+
     <string name="pre_title_bg_restrict_show_notification">显示通知</string>
     <string name="pre_summary_bg_restrict_show_notification">有待清理应用时显示一个通知</string>
 

@@ -475,6 +475,13 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
+    @Override public boolean isBgTaskCleanUpSkipForegroundEnabled() throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public void setBgTaskCleanUpSkipForegroundEnabled(boolean enable) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1799,6 +1806,23 @@ public interface IActivityManager extends android.os.IInterface
           boolean _result = this.checkStartActivity(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_isBgTaskCleanUpSkipForegroundEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _result = this.isBgTaskCleanUpSkipForegroundEnabled();
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_setBgTaskCleanUpSkipForegroundEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          this.setBgTaskCleanUpSkipForegroundEnabled(_arg0);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -4447,6 +4471,45 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public boolean isBgTaskCleanUpSkipForegroundEnabled() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isBgTaskCleanUpSkipForegroundEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isBgTaskCleanUpSkipForegroundEnabled();
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setBgTaskCleanUpSkipForegroundEnabled(boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setBgTaskCleanUpSkipForegroundEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setBgTaskCleanUpSkipForegroundEnabled(enable);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -4570,6 +4633,8 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_hasRunningForegroundService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 118);
     static final int TRANSACTION_getTopVisibleActivities = (android.os.IBinder.FIRST_CALL_TRANSACTION + 119);
     static final int TRANSACTION_checkStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 120);
+    static final int TRANSACTION_isBgTaskCleanUpSkipForegroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 121);
+    static final int TRANSACTION_setBgTaskCleanUpSkipForegroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 122);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -4738,4 +4803,6 @@ public interface IActivityManager extends android.os.IInterface
   public boolean hasRunningForegroundService(github.tornaco.android.thanos.core.pm.Pkg pkg, int foregroundServicetype) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.ActivityAssistInfo> getTopVisibleActivities() throws android.os.RemoteException;
   public boolean checkStartActivity(android.content.Intent intent, int callerUid) throws android.os.RemoteException;
+  public boolean isBgTaskCleanUpSkipForegroundEnabled() throws android.os.RemoteException;
+  public void setBgTaskCleanUpSkipForegroundEnabled(boolean enable) throws android.os.RemoteException;
 }

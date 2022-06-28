@@ -338,6 +338,9 @@
     <string name="pre_title_bg_screen_off_clean_up_skip_notification">Keep apps that has notifications</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">Keep apps in recent tasks</string>
 
+    <string name="pre_title_bg_screen_off_clean_up_skip_fg">Keep foreground app</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_fg">When enabled, apps in the foreground will not be cleaned up</string>
+
     <string name="pre_title_bg_restrict_show_notification">Show notification</string>
     <string name="pre_summary_bg_restrict_show_notification">Display notification when pending clean up process detected</string>
 

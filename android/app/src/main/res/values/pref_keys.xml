@@ -109,6 +109,9 @@
     <string name="key_bg_screen_off_clean_up_skip_recent_task" translatable="false">
         key_bg_screen_off_clean_up_skip_recent_task
     </string>
+    <string name="key_bg_screen_off_clean_up_skip_fg" translatable="false">
+        key_bg_screen_off_clean_up_skip_fg
+    </string>
     <string name="key_bg_restrict_show_notification" translatable="false">
         key_bg_restrict_show_notification
     </string>

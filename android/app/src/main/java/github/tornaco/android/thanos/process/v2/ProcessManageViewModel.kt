@@ -7,13 +7,13 @@ import android.content.Intent
 import android.content.res.Resources
 import android.os.SystemClock
 import android.text.format.Formatter
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.AppLabelSearchFilter
+import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.net.TrafficStatsState
@@ -29,7 +29,7 @@ import javax.inject.Inject
 @SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class ProcessManageViewModel @Inject constructor(@ApplicationContext private val context: Context) :
-    ViewModel() {
+    LifeCycleAwareViewModel() {
     private val _state =
         MutableStateFlow(
             ProcessManageState(
@@ -216,7 +216,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
 
     private suspend fun startQueryCpuUsage() = withContext(Dispatchers.IO) {
         XLog.w("startQueryCpuUsage...")
-        while (true) {
+        while (isResumed) {
             val cpuUsageMap = mutableMapOf<AppInfo, String>()
             thanox.activityManager.updateProcessCpuUsageStats()
             (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
@@ -234,22 +234,24 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
     private suspend fun startQueryNetUsage() = withContext(Dispatchers.IO) {
         XLog.w("startQueryNetUsage...")
         while (true) {
-            val netUsageMap = mutableMapOf<AppInfo, NetSpeedState>()
-            (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
-                val appInfo = it.appInfo
-                trafficStats.update(appInfo.uid)
-                val uidStats = trafficStats.getUidStats(appInfo.uid)
-                XLog.d("uidStats: ${appInfo.appLabel} $uidStats")
-                uidStats?.let {
-                    if (uidStats.lastTxBytes > 0 && uidStats.lastRxBytes > 0) {
-                        val up = Formatter.formatFileSize(context, uidStats.lastTxBytes)
-                        val down = Formatter.formatFileSize(context, uidStats.lastRxBytes)
-                        val netSpeedState = NetSpeedState(up = up, down = down)
-                        netUsageMap[appInfo] = netSpeedState
+            if (isResumed) {
+                val netUsageMap = mutableMapOf<AppInfo, NetSpeedState>()
+                (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
+                    val appInfo = it.appInfo
+                    trafficStats.update(appInfo.uid)
+                    val uidStats = trafficStats.getUidStats(appInfo.uid)
+                    XLog.d("uidStats: ${appInfo.appLabel} $uidStats")
+                    uidStats?.let {
+                        if (uidStats.lastTxBytes > 0 && uidStats.lastRxBytes > 0) {
+                            val up = Formatter.formatFileSize(context, uidStats.lastTxBytes)
+                            val down = Formatter.formatFileSize(context, uidStats.lastRxBytes)
+                            val netSpeedState = NetSpeedState(up = up, down = down)
+                            netUsageMap[appInfo] = netSpeedState
+                        }
                     }
                 }
+                _state.value = _state.value.copy(netSpeedStates = netUsageMap)
             }
-            _state.value = _state.value.copy(netSpeedStates = netUsageMap)
             delay(1000)
         }
     }

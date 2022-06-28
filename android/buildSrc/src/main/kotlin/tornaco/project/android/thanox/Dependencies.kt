@@ -94,10 +94,11 @@ object Libs {
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:2.3.5"
         const val navigationUI = "androidx.navigation:navigation-ui:2.3.5"
 
-        const val lifeCycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
-        const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime:2.3.1"
+        const val lifeCycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+        const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime:2.4.1"
+        const val lifeCycleCommon= "androidx.lifecycle:lifecycle-common:2.4.1"
         const val lifeCycleExt = "androidx.lifecycle:lifecycle-extensions:2.2.0"
-        const val lifeCycleCompiler = "androidx.lifecycle:lifecycle-compiler:2.3.1"
+        const val lifeCycleCompiler = "androidx.lifecycle:lifecycle-compiler:2.4.1"
 
         const val biometric = "androidx.biometric:biometric:1.2.0-alpha03"
         const val browser = "androidx.browser:browser:1.3.0"

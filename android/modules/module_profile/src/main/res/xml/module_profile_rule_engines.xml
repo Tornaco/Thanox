@@ -20,6 +20,12 @@
             app:title="@string/module_profile_pref_title_rule_engine_push" />
 
 
+        <SwitchPreferenceCompat
+            android:persistent="false"
+            app:key="@string/module_profile_pref_key_rule_engine_su"
+            app:summary="@string/module_profile_pref_summary_rule_engine_su"
+            app:title="@string/module_profile_pref_title_rule_engine_su" />
+
         <Preference
             android:persistent="false"
             app:key="@string/module_profile_pref_key_rule_engine_from_shortcut"

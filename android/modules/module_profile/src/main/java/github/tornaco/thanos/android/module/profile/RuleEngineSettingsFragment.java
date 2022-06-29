@@ -31,6 +31,14 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
             return;
         }
 
+        SwitchPreferenceCompat suPref = findPreference(getString(R.string.module_profile_pref_key_rule_engine_su));
+        Objects.requireNonNull(suPref).setChecked(thanos.getProfileManager().isShellSuSupportInstalled());
+        suPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean value = (boolean) newValue;
+            thanos.getProfileManager().setShellSuSupportInstalled(value);
+            return true;
+        });
+
         SwitchPreferenceCompat automationPref = findPreference(getString(R.string.module_profile_pref_key_rule_engine_automation));
         Objects.requireNonNull(automationPref).setChecked(thanos.getProfileManager().isProfileEngineUiAutomationEnabled());
         automationPref.setOnPreferenceChangeListener((preference, newValue) -> {

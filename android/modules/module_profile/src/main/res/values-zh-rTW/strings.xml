@@ -11,6 +11,10 @@
     <string name="module_profile_pref_title_rule_engine_push">推送消息</string>
     <string name="module_profile_pref_summary_rule_engine_push">發布推送消息事實，目前支持FCM，GCM</string>
 
+    <string name="module_profile_pref_summary_rule_engine_su">為Thanox情景模式啟用su API支持，請在彈出的超級權限授予請求中點擊允許，如果未收到請求，請手動打開超級用戶權限。
+        \nsu命令將會以Thanox應用的身份執行。\n要使用su，請允許Thanox應用自啟</string>
+    <string name="module_profile_pref_title_rule_engine_su">su API</string>
+
     <string name="module_profile_pref_title_rule_engine_shortcut">从快捷方式</string>
     <string name="module_profile_pref_summary_rule_engine_shortcut">创建一个桌面快捷方式，当这个快捷方式被点击启动时，thanox会发布该快捷方式表示的事实</string>
     <string name="module_profile_pref_title_rule_engine_date_time">時間與日期</string>

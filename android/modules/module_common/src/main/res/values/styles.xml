@@ -4,7 +4,7 @@
     <style name="TextAppearance.CategoryTitle" parent="TextAppearance.Small">
         <!--<item name="android:textColor">?colorAccent</item>-->
         <item name="android:textSize">14sp</item>
-        <item name="android:fontWeight">500</item>
+        <item name="android:fontWeight">700</item>
     </style>
 
     <style name="TextAppearance.Medium" parent="@style/TextAppearance.AppCompat.Medium" />

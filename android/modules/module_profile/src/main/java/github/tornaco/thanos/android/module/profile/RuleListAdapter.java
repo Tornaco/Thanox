@@ -20,11 +20,11 @@ import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 import util.Consumer;
 
 class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
-        implements Consumer<List<RuleInfo>>
+        implements Consumer<List<RuleUiItem>>
         , FastScrollRecyclerView.SectionedAdapter,
         FastScrollRecyclerView.MeasurableAdapter<RuleListAdapter.VH> {
 
-    private final List<RuleInfo> ruleInfoList = new ArrayList<>();
+    private final List<RuleUiItem> ruleInfoList = new ArrayList<>();
 
     private final RuleItemClickListener ruleItemClickListener;
     private final RuleItemSwitchChangeListener ruleItemSwitchChangeListener;
@@ -47,8 +47,9 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        RuleInfo model = ruleInfoList.get(position);
-        holder.itemBinding.setRule(model);
+        RuleUiItem item = ruleInfoList.get(position);
+        RuleInfo model = item.ruleInfo;
+        holder.itemBinding.setRule(item);
         holder.itemBinding.setRuleItemClickListener(ruleItemClickListener);
         holder.itemBinding.setSwitchListener(ruleItemSwitchChangeListener);
         holder.itemBinding.setIsLastOne(position == getItemCount() - 1);
@@ -64,7 +65,7 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
     }
 
     @Override
-    public void accept(List<RuleInfo> ruleInfoList) {
+    public void accept(List<RuleUiItem> ruleInfoList) {
         this.ruleInfoList.clear();
         this.ruleInfoList.addAll(ruleInfoList);
         notifyDataSetChanged();
@@ -73,7 +74,7 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
     @NonNull
     @Override
     public String getSectionName(int position) {
-        RuleInfo ruleInfo = ruleInfoList.get(position);
+        RuleInfo ruleInfo = ruleInfoList.get(position).ruleInfo;
         String name = ruleInfo.getName();
         if (TextUtils.isEmpty(name.trim())) {
             name = "*";

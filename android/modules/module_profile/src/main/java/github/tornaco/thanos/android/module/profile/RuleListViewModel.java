@@ -43,9 +43,9 @@ public class RuleListViewModel extends AndroidViewModel {
 
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final CompositeDisposable disposables = new CompositeDisposable();
-    private final ObservableArrayList<RuleInfo> ruleInfoList = new ObservableArrayList<>();
+    private final ObservableArrayList<RuleUiItem> ruleInfoList = new ObservableArrayList<>();
 
-    private ThanosManager thanosManager;
+    private final ThanosManager thanosManager;
 
     private final RuleLoader loader = () -> {
         List<RuleInfo> res = new ArrayList<>(Arrays.asList(
@@ -69,11 +69,12 @@ public class RuleListViewModel extends AndroidViewModel {
         protected void onRuleEnabledStateChanged(int ruleId, boolean enabled) {
             super.onRuleEnabledStateChanged(ruleId, enabled);
             for (int index = 0; index < ruleInfoList.size(); index++) {
-                RuleInfo info = ruleInfoList.get(index);
+                RuleUiItem item = ruleInfoList.get(index);
+                RuleInfo info = item.ruleInfo;
                 if (info.getId() == ruleId) {
                     XLog.i("RuleListViewModel onRuleEnabledStateChanged update enable state");
                     info.setEnabled(enabled);
-                    ruleInfoList.set(index, info);
+                    ruleInfoList.set(index, item);
                 }
             }
         }
@@ -82,12 +83,13 @@ public class RuleListViewModel extends AndroidViewModel {
         protected void onRuleUpdated(int ruleId) {
             super.onRuleUpdated(ruleId);
             for (int index = 0; index < ruleInfoList.size(); index++) {
-                RuleInfo info = ruleInfoList.get(index);
+                RuleUiItem item = ruleInfoList.get(index);
+                RuleInfo info = item.ruleInfo;
                 if (info.getId() == ruleId) {
                     RuleInfo updatedRule = thanosManager.getProfileManager().getRuleById(ruleId);
                     if (updatedRule != null) {
                         XLog.i("RuleListViewModel onRuleUpdated update rule");
-                        ruleInfoList.set(index, updatedRule);
+                        ruleInfoList.set(index, toRuleItem(updatedRule));
                     }
                 }
             }
@@ -98,7 +100,8 @@ public class RuleListViewModel extends AndroidViewModel {
             super.onRuleRemoved(ruleId);
             int index = -1;
             for (int i = 0; i < ruleInfoList.size(); i++) {
-                RuleInfo info = ruleInfoList.get(i);
+                RuleUiItem item = ruleInfoList.get(i);
+                RuleInfo info = item.ruleInfo;
                 if (info.getId() == ruleId) {
                     index = i;
                 }
@@ -114,7 +117,7 @@ public class RuleListViewModel extends AndroidViewModel {
             super.onRuleAdd(ruleId);
             RuleInfo updatedRule = thanosManager.getProfileManager().getRuleById(ruleId);
             XLog.i("RuleListViewModel onRuleAdd add rule");
-            ruleInfoList.add(0, updatedRule);
+            ruleInfoList.add(0, toRuleItem(updatedRule));
         }
     };
 
@@ -134,13 +137,13 @@ public class RuleListViewModel extends AndroidViewModel {
         if (isDataLoading.get()) return;
         isDataLoading.set(true);
         disposables.add(Single.create((SingleOnSubscribe<List<RuleInfo>>) emitter ->
-                emitter.onSuccess(Objects.requireNonNull(loader.load())))
+                        emitter.onSuccess(Objects.requireNonNull(loader.load())))
                 .flatMapObservable((Function<List<RuleInfo>,
                         ObservableSource<RuleInfo>>) Observable::fromIterable)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> ruleInfoList.clear())
-                .subscribe(ruleInfoList::add, Rxs.ON_ERROR_LOGGING, () -> isDataLoading.set(false)));
+                .subscribe(info -> ruleInfoList.add(toRuleItem(info)), Rxs.ON_ERROR_LOGGING, () -> isDataLoading.set(false)));
     }
 
     private void registerEventReceivers() {
@@ -172,8 +175,8 @@ public class RuleListViewModel extends AndroidViewModel {
                 protected void onRuleAddSuccess() {
                     super.onRuleAddSuccess();
                     Toast.makeText(getApplication(),
-                            R.string.module_profile_editor_save_success,
-                            Toast.LENGTH_LONG)
+                                    R.string.module_profile_editor_save_success,
+                                    Toast.LENGTH_LONG)
                             .show();
                 }
 
@@ -187,8 +190,8 @@ public class RuleListViewModel extends AndroidViewModel {
                                 protected void onRuleAddSuccess() {
                                     super.onRuleAddSuccess();
                                     Toast.makeText(getApplication(),
-                                            R.string.module_profile_editor_save_success,
-                                            Toast.LENGTH_LONG)
+                                                    R.string.module_profile_editor_save_success,
+                                                    Toast.LENGTH_LONG)
                                             .show();
                                 }
 
@@ -196,8 +199,8 @@ public class RuleListViewModel extends AndroidViewModel {
                                 protected void onRuleAddFail(int errorCode, String errorMessage) {
                                     super.onRuleAddFail(errorCode, errorMessage);
                                     Toast.makeText(getApplication(),
-                                            errorMessage,
-                                            Toast.LENGTH_LONG)
+                                                    errorMessage,
+                                                    Toast.LENGTH_LONG)
                                             .show();
                                 }
                             }, ProfileManager.RULE_FORMAT_YAML);
@@ -233,8 +236,8 @@ public class RuleListViewModel extends AndroidViewModel {
                             protected void onRuleAddFail(int errorCode, String errorMessage) {
                                 super.onRuleAddFail(errorCode, errorMessage);
                                 Toast.makeText(getApplication(),
-                                        R.string.module_profile_editor_save_check_error,
-                                        Toast.LENGTH_LONG)
+                                                R.string.module_profile_editor_save_check_error,
+                                                Toast.LENGTH_LONG)
                                         .show();
                             }
 
@@ -245,8 +248,8 @@ public class RuleListViewModel extends AndroidViewModel {
                         }, type);
             }
             Toast.makeText(getApplication(),
-                    R.string.module_profile_editor_save_success,
-                    Toast.LENGTH_LONG)
+                            R.string.module_profile_editor_save_success,
+                            Toast.LENGTH_LONG)
                     .show();
         } catch (IOException e) {
             XLog.e(e);
@@ -264,7 +267,7 @@ public class RuleListViewModel extends AndroidViewModel {
         return this.isDataLoading;
     }
 
-    public ObservableArrayList<RuleInfo> getRuleInfoList() {
+    public ObservableArrayList<RuleUiItem> getRuleInfoList() {
         return this.ruleInfoList;
     }
 
@@ -275,5 +278,16 @@ public class RuleListViewModel extends AndroidViewModel {
     public interface RuleLoader {
         @WorkerThread
         List<RuleInfo> load();
+    }
+
+    private RuleUiItem toRuleItem(RuleInfo info) {
+        // Check for su.
+        if (info.getRuleString().contains("su.exe(") && !thanosManager.getProfileManager().isShellSuSupportInstalled()) {
+            // Missing su support.
+            String warn = getApplication().getString(R.string.module_profile_should_enable_su);
+            return new RuleUiItem(info, warn);
+        }
+
+        return new RuleUiItem(info, null);
     }
 }

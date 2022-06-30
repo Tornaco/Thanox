@@ -16,8 +16,8 @@ public class DataBindingAdapters {
 
     @SuppressWarnings({"unchecked", "ConstantConditions"})
     @BindingAdapter("android:ruleInfoList")
-    public static void setRuleInfoList(RecyclerView view, List<RuleInfo> models) {
-        Consumer<List<RuleInfo>> consumer = (Consumer<List<RuleInfo>>) view.getAdapter();
+    public static void setRuleInfoList(RecyclerView view, List<RuleUiItem> models) {
+        Consumer<List<RuleUiItem>> consumer = (Consumer<List<RuleUiItem>>) view.getAdapter();
         consumer.accept(models);
     }
 

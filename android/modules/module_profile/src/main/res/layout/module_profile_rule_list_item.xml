@@ -9,7 +9,7 @@
 
         <variable
             name="rule"
-            type="github.tornaco.android.thanos.core.profile.RuleInfo" />
+            type="github.tornaco.thanos.android.module.profile.RuleUiItem" />
 
         <variable
             name="ruleItemClickListener"
@@ -56,7 +56,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:minHeight="@dimen/common_list_item_height"
-                android:onClick="@{() -> ruleItemClickListener.onItemClick(rule)}">
+                android:onClick="@{() -> ruleItemClickListener.onItemClick(rule.ruleInfo)}">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
                         android:ellipsize="middle"
                         android:fadingEdge="horizontal"
                         android:fontFamily="sans-serif-medium"
-                        android:text="@{rule.name}"
+                        android:text="@{rule.ruleInfo.name}"
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         tools:text="Profile name" />
 
@@ -98,10 +98,22 @@
                         android:layout_marginBottom="@dimen/common_view_margin_small"
                         android:ellipsize="middle"
                         android:fadingEdge="horizontal"
-                        android:text="@{rule.description}"
+                        android:text="@{rule.ruleInfo.description}"
                         android:textAppearance="@style/TextAppearance.TileSubTitle"
                         android:textSize="14sp"
                         tools:text="This is a long text example, This is a long text example, This is a long text example" />
+
+                    <TextView
+                        android:id="@+id/warning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="30"
+                        android:text="@{rule.warningMessage}"
+                        android:textAppearance="@style/TextAppearance.TileSubTitle"
+                        android:textColor="@color/md_amber_900"
+                        android:visibility="@{rule.warningMessage == null ? View.GONE : View.VISIBLE}"
+                        tools:text="Warning message" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -124,8 +136,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
                     android:layout_marginEnd="@dimen/common_view_margin_default"
-                    android:checked="@{rule.enabled}"
-                    android:ruleInfo="@{rule}"
+                    android:checked="@{rule.ruleInfo.enabled}"
+                    android:ruleInfo="@{rule.ruleInfo}"
                     android:ruleSwitchListener="@{switchListener}"
                     android:soundEffectsEnabled="false"
                     tools:checked="true" />

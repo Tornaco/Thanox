@@ -14,6 +14,7 @@
     <string name="module_profile_pref_summary_rule_engine_su">为Thanox情景模式启用su API支持，请在弹出的超级权限授予请求中点击允许，如果未收到请求，请手动打开超级用户权限。
         \nsu命令将会以Thanox应用的身份执行。\n要使用su，请允许Thanox应用自启</string>
     <string name="module_profile_pref_title_rule_engine_su">su API</string>
+    <string name="module_profile_should_enable_su">这条情景模式可能需要打开<b>su API</b>才能工作, 请进入引擎设置中开启</string>
 
     <string name="module_profile_pref_title_rule_engine_shortcut">从快捷方式</string>
     <string name="module_profile_pref_summary_rule_engine_shortcut">创建一个桌面快捷方式，当这个快捷方式被点击启动时，thanox会发布该快捷方式表示的事实</string>

@@ -92,7 +92,7 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
 
         pluginBinding.fabMarket.setOnClickListener(v -> {
             if (ThanosApp.isPrc() && !DonateSettings.isActivated(getContext())) {
-
+                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
                 return;
             }
             PluginMarketActivity.start(getActivity());

@@ -7,6 +7,7 @@ public class Tile {
     private final int id;
     private final String title;
     private final String summary;
+    private final String warning;
     private final String category;
     @DrawableRes
     private final int iconRes;
@@ -21,11 +22,13 @@ public class Tile {
 
     private final String requiredFeature;
 
-    public Tile(int id, String title, String summary, String category, int iconRes, int themeColor, boolean disabled,
+    public Tile(int id, String title, String summary, String warning,
+                String category, int iconRes, int themeColor, boolean disabled,
                 Object payload, boolean checkable, boolean checked, String badge1, String badge2, String requiredFeature) {
         this.id = id;
         this.title = title;
         this.summary = summary;
+        this.warning = warning;
         this.category = category;
         this.iconRes = iconRes;
         this.themeColor = themeColor;
@@ -52,6 +55,10 @@ public class Tile {
 
     public String getSummary() {
         return this.summary;
+    }
+
+    public String getWarning() {
+        return warning;
     }
 
     public String getCategory() {
@@ -102,6 +109,7 @@ public class Tile {
         private int id;
         private String title;
         private String summary;
+        private String warning;
         private String category;
         private int iconRes;
         private int themeColor;
@@ -128,6 +136,11 @@ public class Tile {
 
         public Tile.TileBuilder summary(String summary) {
             this.summary = summary;
+            return this;
+        }
+
+        public Tile.TileBuilder warning(String warning) {
+            this.warning = warning;
             return this;
         }
 
@@ -182,7 +195,9 @@ public class Tile {
         }
 
         public Tile build() {
-            return new Tile(id, title, summary, category, iconRes, themeColor, disabled, payload, checkable, checked, badge1, badge2, requiredFeature);
+            return new Tile(id, title, summary, warning, category, iconRes,
+                    themeColor, disabled, payload, checkable, checked,
+                    badge1, badge2, requiredFeature);
         }
     }
 }

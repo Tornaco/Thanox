@@ -59,4 +59,6 @@
 
     <string name="module_common_error_occur">Error occur</string>
     <string name="module_common_copy_error_message">Copy error</string>
+
+    <string name="module_common_no_data">No data</string>
 </resources>

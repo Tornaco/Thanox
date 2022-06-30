@@ -41,6 +41,8 @@
     <string name="tile_category_plugin_already_installed">该插件无法被覆盖安装，请卸载现有版本后重新安装</string>
     <string name="tile_category_plugin_update_available">可更新</string>
 
+    <string name="tile_su_plugin_deprecated">su Enabler 插件已经被废弃，现在你不需要安装su插件了。你可以在情景模式的引擎设置中直接开启su API支持</string>
+
     <string name="dialog_title_plugin_installing">正在安装插件</string>
     <string name="dialog_title_plugin_updating">正在更新插件</string>
     <string name="dialog_title_plugin_uninstalling">正在卸载插件</string>

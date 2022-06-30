@@ -48,6 +48,8 @@
     <string name="tile_category_plugin_already_installed">The current installation cannot be overrode, please uninstall then reinstall.</string>
     <string name="tile_category_plugin_update_available">New version available</string>
 
+    <string name="tile_su_plugin_deprecated">The su Enabler plugin has been deprecated, now you don\'t need to install the su plugin. You can directly enable su API support in the Engine Settings of the Profile</string>
+
     <string name="card_title_plugin_available">Install Thanox plugin</string>
     <string name="card_message_plugin_available">Plugin consist of some unstable or non-critical functions.</string>
 

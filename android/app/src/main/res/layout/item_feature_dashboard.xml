@@ -67,7 +67,8 @@
                 android:layout_marginEnd="@dimen/dashboard_category_title_margin_end"
                 android:layout_marginBottom="@dimen/dashboard_category_bot_margin"
                 android:layout_toStartOf="@id/badge1"
-                android:layout_toEndOf="@+id/icon">
+                android:layout_toEndOf="@+id/icon"
+                android:paddingVertical="8dp">
 
                 <TextView
                     android:id="@+id/item_title"
@@ -90,6 +91,20 @@
                     android:textAppearance="@style/TextAppearance.TileSubTitle"
                     android:visibility="@{tile.summary == null ? View.GONE : View.VISIBLE}"
                     tools:text="This is summary" />
+
+                <TextView
+                    android:id="@+id/warning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/summary"
+                    android:layout_alignStart="@android:id/title"
+                    android:ellipsize="end"
+                    android:maxLines="30"
+                    android:text="@{tile.warning}"
+                    android:textAppearance="@style/TextAppearance.TileSubTitle"
+                    android:textColor="@color/md_amber_900"
+                    android:visibility="@{tile.warning == null ? View.GONE : View.VISIBLE}"
+                    tools:text="Warning message" />
             </RelativeLayout>
 
 

@@ -66,7 +66,7 @@ public class PluginMarketActivity extends CommonAppListFilterActivity {
     @NonNull
     @Override
     protected AppItemClickListener onCreateAppItemViewClickListener() {
-        return appInfo -> showPluginInfo(appInfo);
+        return this::showPluginInfo;
     }
 
     private void showPluginInfo(AppInfo appInfo) {
@@ -126,16 +126,11 @@ public class PluginMarketActivity extends CommonAppListFilterActivity {
             String labelInstalled = getString(R.string.tile_category_plugin_installed);
             String labelUpdateAvailable = getString(R.string.tile_category_plugin_update_available);
 
-            for (PluginResponse response : PluginRepo.getPrebuiltPlugins(thisActivity(), new Consumer<Throwable>() {
-                @Override
-                public void accept(Throwable throwable) {
-                    runOnUiThread(() -> {
-                        if (BuildConfig.DEBUG) {
-                            Toast.makeText(thisActivity(), Log.getStackTraceString(throwable), Toast.LENGTH_LONG).show();
-                        }
-                    });
+            for (PluginResponse response : PluginRepo.getPrebuiltPlugins(thisActivity(), throwable -> runOnUiThread(() -> {
+                if (BuildConfig.DEBUG) {
+                    Toast.makeText(thisActivity(), Log.getStackTraceString(throwable), Toast.LENGTH_LONG).show();
                 }
-            })) {
+            }))) {
                 AppInfo appInfo = new AppInfo();
                 appInfo.setAppLabel(response.getName());
                 appInfo.setPkgName(BuildProp.THANOS_APP_PKG_NAME);

@@ -487,6 +487,7 @@ public class NavViewModel extends AndroidViewModel {
                         .map(plugin -> {
                             try {
                                 int pluginStatus = plugin.isWithHooks() ? Nitro.invokePluginStatus(getApplication(), plugin, -1) : -1;
+                                boolean isSuPlugin = "github.tornaco.android.plugin.su".equals(plugin.getPackageName());
                                 return Tile.builder()
                                         .id(plugin.getPackageName().hashCode())
                                         .category(first[0] ? resources.getString(R.string.tile_category_plugin_installed) : null)
@@ -494,6 +495,7 @@ public class NavViewModel extends AndroidViewModel {
                                         .themeColor(R.color.md_grey_400)
                                         .title(plugin.getLabel())
                                         .summary(plugin.getDescription())
+                                        .warning(isSuPlugin ? resources.getString(R.string.tile_su_plugin_deprecated) : null)
                                         .payload(plugin)
                                         .badge1(pluginStatus == 9 ? resources.getString(R.string.title_plugin_reboot_take_effect) : null)
                                         .checkable(plugin.isWithHooks())

@@ -112,19 +112,46 @@
                     android:id="@+id/swipe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.listModels.size() == 0 ? View.GONE : View.VISIBLE}"
                     app:refreshing="@{viewModel.isDataLoading}">
 
                     <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
                         android:id="@+id/apps"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
                         android:clipChildren="true"
                         android:clipToPadding="true"
                         android:listModels="@{viewModel.listModels}" />
 
+
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/no_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{(!viewModel.isDataLoading &amp;&amp; viewModel.listModels.size() == 0) ? View.VISIBLE : View.GONE}">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/no_content_emoji"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_centerInParent="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+                    android:tint="@color/md_grey_500"
+                    app:srcCompat="@drawable/module_common_ic_emotion_sad_line" />
+
+                <TextView
+                    android:id="@+id/no_content_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/no_content_emoji"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/module_common_no_data"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            </RelativeLayout>
 
 
             <RelativeLayout

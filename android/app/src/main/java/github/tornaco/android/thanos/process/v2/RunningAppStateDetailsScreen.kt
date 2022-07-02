@@ -48,9 +48,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.*
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
-import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.android.thanos.util.ToastUtils
 import kotlinx.coroutines.delay
 

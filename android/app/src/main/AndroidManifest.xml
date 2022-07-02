@@ -218,6 +218,9 @@
         <activity
             android:name=".power.wakelock.WakeLockRemoverActivity"
             android:exported="false" />
+        <activity
+            android:name=".settings.access.SettingsAccessRecordViewerActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

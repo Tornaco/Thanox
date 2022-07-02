@@ -7,6 +7,7 @@ import androidx.preference.SwitchPreferenceCompat;
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.settings.access.SettingsAccessRecordViewerActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.thanos.android.noroot.ServiceBindings;
 
@@ -67,6 +68,11 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
 
         findPreference(getString(R.string.key_theme_attr_preview)).setOnPreferenceClickListener(preference -> {
             ActivityUtils.startActivity(requireActivity(), ThemeAttrPreviewActivity.class);
+            return true;
+        });
+
+        findPreference(getString(R.string.key_settings_record_viewer)).setOnPreferenceClickListener(preference -> {
+            SettingsAccessRecordViewerActivity.Starter.INSTANCE.start(requireActivity());
             return true;
         });
     }

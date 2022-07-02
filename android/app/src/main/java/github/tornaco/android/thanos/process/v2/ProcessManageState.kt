@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.process.v2
 
 import github.tornaco.android.thanos.core.pm.AppInfo
+import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 
 data class ProcessManageState(
     val isLoading: Boolean,

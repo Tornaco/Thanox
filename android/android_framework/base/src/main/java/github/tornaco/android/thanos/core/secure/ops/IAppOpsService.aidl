@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.core.secure.ops;
 
 import android.os.Bundle;
 import github.tornaco.android.thanos.core.IPrinter;
+import github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord;
 
 interface IAppOpsService {
     void setMode(int code, int uid, String packageName, int mode);
@@ -25,4 +26,13 @@ interface IAppOpsService {
     int checkOperationNonCheck(int code, int uid, String packageName);
 
     void dump(in IPrinter p);
+
+    void onSettingsGetString(String name, String value, String callerPackageName);
+    void onSettingsPutString(String name, String value, String callerPackageName);
+
+    List<SettingsAccessRecord> getSettingsReadRecords(String filterCallerPackageName /** nullable */);
+    List<SettingsAccessRecord> getSettingsWriteRecords(String filterCallerPackageName /** nullable */);
+
+    void clearSettingsReadRecords();
+    void clearSettingsWriteRecords();
 }

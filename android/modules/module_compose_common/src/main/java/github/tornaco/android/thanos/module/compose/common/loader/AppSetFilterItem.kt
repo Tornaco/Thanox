@@ -15,7 +15,7 @@
  *
  */
 
-package github.tornaco.android.thanos.process.v2
+package github.tornaco.android.thanos.module.compose.common.loader
 
 import android.content.Context
 import github.tornaco.android.thanos.core.app.ThanosManager

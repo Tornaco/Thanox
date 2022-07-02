@@ -424,4 +424,7 @@
     <string name="privacy_agreement_title">隱私協議</string>
     <string name="privacy_agreement_accept">接受</string>
     <string name="privacy_agreement_discard">不接受</string>
+
+    <string name="feature_title_settings_access_record">设置访问记录</string>
+    <string name="feature_summary_settings_access_record">查看系統設置的讀寫記錄。如果你用的是xposed，通常你需要在作用域中勾選Settings，Settings Provider以及安全管家，因為這些app通常會讀寫系統設置</string>
 </resources>

@@ -425,4 +425,8 @@
     <string name="privacy_agreement_title">隐私协议</string>
     <string name="privacy_agreement_accept">接受</string>
     <string name="privacy_agreement_discard">不接受</string>
+
+
+    <string name="feature_title_settings_access_record">设置访问记录</string>
+    <string name="feature_summary_settings_access_record">查看系统设置的读写记录。如果你用的是xposed，通常你需要在作用域中勾选Settings，Settings Provider以及安全管家，因为这些app通常会读写系统设置</string>
 </resources>

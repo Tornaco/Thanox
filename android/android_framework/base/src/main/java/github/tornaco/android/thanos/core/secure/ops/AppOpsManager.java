@@ -1328,4 +1328,24 @@ public class AppOpsManager {
     public static boolean isCaredOp(int op) {
         return isControllableOp(op);
     }
+
+    @SneakyThrows
+    public List<SettingsAccessRecord> getSettingsReadRecords(String filterCallerPackageName) {
+        return service.getSettingsReadRecords(filterCallerPackageName);
+    }
+
+    @SneakyThrows
+    public List<SettingsAccessRecord> getSettingsWriteRecords(String filterCallerPackageName) {
+        return service.getSettingsWriteRecords(filterCallerPackageName);
+    }
+
+    @SneakyThrows
+    public void clearSettingsReadRecords() {
+        service.clearSettingsReadRecords();
+    }
+
+    @SneakyThrows
+    public void clearSettingsWriteRecords() {
+        service.clearSettingsWriteRecords();
+    }
 }

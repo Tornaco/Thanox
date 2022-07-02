@@ -51,6 +51,26 @@ public interface IAppOpsService extends android.os.IInterface
     @Override public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException
     {
     }
+    @Override public void onSettingsGetString(java.lang.String name, java.lang.String value, java.lang.String callerPackageName) throws android.os.RemoteException
+    {
+    }
+    @Override public void onSettingsPutString(java.lang.String name, java.lang.String value, java.lang.String callerPackageName) throws android.os.RemoteException
+    {
+    }
+    @Override public java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> getSettingsReadRecords(java.lang.String filterCallerPackageName) throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> getSettingsWriteRecords(java.lang.String filterCallerPackageName) throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public void clearSettingsReadRecords() throws android.os.RemoteException
+    {
+    }
+    @Override public void clearSettingsWriteRecords() throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -241,6 +261,66 @@ public interface IAppOpsService extends android.os.IInterface
           github.tornaco.android.thanos.core.IPrinter _arg0;
           _arg0 = github.tornaco.android.thanos.core.IPrinter.Stub.asInterface(data.readStrongBinder());
           this.dump(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_onSettingsGetString:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          java.lang.String _arg2;
+          _arg2 = data.readString();
+          this.onSettingsGetString(_arg0, _arg1, _arg2);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_onSettingsPutString:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          java.lang.String _arg2;
+          _arg2 = data.readString();
+          this.onSettingsPutString(_arg0, _arg1, _arg2);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getSettingsReadRecords:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> _result = this.getSettingsReadRecords(_arg0);
+          reply.writeNoException();
+          reply.writeTypedList(_result);
+          return true;
+        }
+        case TRANSACTION_getSettingsWriteRecords:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> _result = this.getSettingsWriteRecords(_arg0);
+          reply.writeNoException();
+          reply.writeTypedList(_result);
+          return true;
+        }
+        case TRANSACTION_clearSettingsReadRecords:
+        {
+          data.enforceInterface(descriptor);
+          this.clearSettingsReadRecords();
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_clearSettingsWriteRecords:
+        {
+          data.enforceInterface(descriptor);
+          this.clearSettingsWriteRecords();
           reply.writeNoException();
           return true;
         }
@@ -536,6 +616,126 @@ public interface IAppOpsService extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void onSettingsGetString(java.lang.String name, java.lang.String value, java.lang.String callerPackageName) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(name);
+          _data.writeString(value);
+          _data.writeString(callerPackageName);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_onSettingsGetString, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onSettingsGetString(name, value, callerPackageName);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void onSettingsPutString(java.lang.String name, java.lang.String value, java.lang.String callerPackageName) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(name);
+          _data.writeString(value);
+          _data.writeString(callerPackageName);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_onSettingsPutString, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onSettingsPutString(name, value, callerPackageName);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> getSettingsReadRecords(java.lang.String filterCallerPackageName) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(filterCallerPackageName);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getSettingsReadRecords, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSettingsReadRecords(filterCallerPackageName);
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> getSettingsWriteRecords(java.lang.String filterCallerPackageName) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(filterCallerPackageName);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getSettingsWriteRecords, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSettingsWriteRecords(filterCallerPackageName);
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void clearSettingsReadRecords() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_clearSettingsReadRecords, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().clearSettingsReadRecords();
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void clearSettingsWriteRecords() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_clearSettingsWriteRecords, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().clearSettingsWriteRecords();
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.secure.ops.IAppOpsService sDefaultImpl;
     }
     static final int TRANSACTION_setMode = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -551,6 +751,12 @@ public interface IAppOpsService extends android.os.IInterface
     static final int TRANSACTION_isPkgOpRemindEnable = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
     static final int TRANSACTION_checkOperationNonCheck = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
     static final int TRANSACTION_dump = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
+    static final int TRANSACTION_onSettingsGetString = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
+    static final int TRANSACTION_onSettingsPutString = (android.os.IBinder.FIRST_CALL_TRANSACTION + 14);
+    static final int TRANSACTION_getSettingsReadRecords = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
+    static final int TRANSACTION_getSettingsWriteRecords = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
+    static final int TRANSACTION_clearSettingsReadRecords = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
+    static final int TRANSACTION_clearSettingsWriteRecords = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.secure.ops.IAppOpsService impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -581,4 +787,10 @@ public interface IAppOpsService extends android.os.IInterface
   public boolean isPkgOpRemindEnable(java.lang.String pkg) throws android.os.RemoteException;
   public int checkOperationNonCheck(int code, int uid, java.lang.String packageName) throws android.os.RemoteException;
   public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException;
+  public void onSettingsGetString(java.lang.String name, java.lang.String value, java.lang.String callerPackageName) throws android.os.RemoteException;
+  public void onSettingsPutString(java.lang.String name, java.lang.String value, java.lang.String callerPackageName) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> getSettingsReadRecords(java.lang.String filterCallerPackageName) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> getSettingsWriteRecords(java.lang.String filterCallerPackageName) throws android.os.RemoteException;
+  public void clearSettingsReadRecords() throws android.os.RemoteException;
+  public void clearSettingsWriteRecords() throws android.os.RemoteException;
 }

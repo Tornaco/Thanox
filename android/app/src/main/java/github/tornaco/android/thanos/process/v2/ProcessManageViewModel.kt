@@ -19,6 +19,8 @@ import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.net.TrafficStatsState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
+import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
+import github.tornaco.android.thanos.module.compose.common.loader.Loader
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -157,6 +157,7 @@ dependencies {
     implementation(Libs.Accompanist.insets)
     implementation(Libs.Accompanist.swipeRefresh)
     implementation(Libs.Accompanist.insetsUi)
+    implementation(Libs.Accompanist.flowLayout)
 
     implementation(Compose.hiltNavigation)
     implementation(Libs.Hilt.library)

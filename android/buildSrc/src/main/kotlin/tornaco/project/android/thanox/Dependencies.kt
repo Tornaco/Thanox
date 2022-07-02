@@ -191,6 +191,8 @@ object Libs {
             "com.google.accompanist:accompanist-insets-ui:$version"
         const val swipeRefresh =
             "com.google.accompanist:accompanist-swiperefresh:$version"
+        const val flowLayout =
+            "com.google.accompanist:accompanist-flowlayout:$version"
     }
 
     object Lottie {

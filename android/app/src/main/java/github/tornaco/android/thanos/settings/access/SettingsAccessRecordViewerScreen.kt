@@ -41,12 +41,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
+import com.google.accompanist.flowlayout.FlowRow
+import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.SmallSpacer
+import github.tornaco.android.thanos.module.compose.common.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
@@ -139,7 +143,13 @@ private fun AppFilterDropDown(
     state: ViewerState,
     itemSelectStateChanged: (SelectableFilterItem, Boolean) -> Unit
 ) {
-    Row(modifier = Modifier.fillMaxWidth()) {
+
+    FlowRow(
+        mainAxisSpacing = 8.dp,
+        crossAxisSpacing = 8.dp,
+        mainAxisAlignment = MainAxisAlignment.Start,
+        crossAxisAlignment = FlowCrossAxisAlignment.Center
+    ) {
         state.appFilterItems.forEach { item ->
             FilledTonalButton(
                 onClick = { itemSelectStateChanged(item, !item.isSelected) },
@@ -149,8 +159,7 @@ private fun AppFilterDropDown(
                     } else {
                         Color.LightGray
                     }
-                ),
-                contentPadding = PaddingValues(2.dp)
+                )
             ) {
                 Text(
                     text = item.filterItem.label,
@@ -190,6 +199,7 @@ private fun RecordList(
         if (state.mergedRecords.isNotEmpty()) {
             items(state.mergedRecords) {
                 RecordItem(it, onRecordItemClick)
+                TinySpacer()
             }
         }
     }
@@ -203,9 +213,10 @@ private fun RecordItem(
     onRecordItemClick: (DetailedSettingsAccessRecord) -> Unit
 ) {
     Box(
-        modifier = Modifier.clickableWithRipple {
-            onRecordItemClick(record)
-        }
+        modifier = Modifier
+            .clickableWithRipple {
+                onRecordItemClick(record)
+            }
     ) {
         Row(
             modifier = Modifier

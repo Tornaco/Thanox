@@ -67,7 +67,7 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
                             PlatLogoActivity3.start(getActivity());
                             Toast.makeText(
                                     getActivity(),
-                                    "Thanox is build against Android S", Toast.LENGTH_LONG)
+                                    "Thanox is build against Android 13", Toast.LENGTH_LONG)
                                     .show();
                             return true;
                         });

@@ -7,7 +7,9 @@ import com.google.gson.JsonParser;
 
 public final class JsonFormatter {
 
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder()
+            .disableHtmlEscaping()
+            .setPrettyPrinting().create();
 
     private JsonFormatter() {
     }

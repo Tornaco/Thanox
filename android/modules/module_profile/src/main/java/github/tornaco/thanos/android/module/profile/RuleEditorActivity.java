@@ -19,6 +19,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.vic797.syntaxhighlight.SyntaxListener;
 
@@ -35,6 +36,7 @@ import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.TypefaceHelper;
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileWorkflowEditorBinding;
+import util.JsonFormatter;
 import util.ObjectsUtils;
 
 public class RuleEditorActivity extends ThemeActivity implements SyntaxListener {
@@ -159,8 +161,8 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
                     protected void onRuleAddSuccess() {
                         super.onRuleAddSuccess();
                         Toast.makeText(getApplicationContext(),
-                                R.string.module_profile_editor_save_success,
-                                Toast.LENGTH_LONG)
+                                        R.string.module_profile_editor_save_success,
+                                        Toast.LENGTH_LONG)
                                 .show();
                         // Disable rule since it has been changed.
                         if (ruleInfo != null) {
@@ -252,6 +254,16 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
         binding.lineLayout.attachEditText(binding.editText);
         binding.editText.startHighlight(true);
         binding.editText.updateVisibleRegion();
+
+        binding.badge1.setOnClickListener(v -> {
+            if (format == ProfileManager.RULE_FORMAT_JSON) {
+                Editable editable = binding.editText.getText();
+                if (editable != null) {
+                    binding.editText.setText(JsonFormatter.format(editable.toString()));
+                    binding.editText.updateVisibleRegion();
+                }
+            }
+        });
     }
 
     private String getCurrentEditingContent() {

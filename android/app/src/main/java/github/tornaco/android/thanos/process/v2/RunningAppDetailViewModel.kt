@@ -68,10 +68,14 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
         val pids = runningAppState.processState.map { it.process.pid.toLong() }.toLongArray()
         while (true) {
             if (isResumed) {
-                val queryProcessCpuUsageStats =
-                    thanox.activityManager.queryProcessCpuUsageStats(pids, true)
-                _state.value =
-                    _state.value.copy(statsMap = queryProcessCpuUsageStats.associateBy { it.pid })
+                kotlin.runCatching {
+                    val queryProcessCpuUsageStats =
+                        thanox.activityManager.queryProcessCpuUsageStats(pids, true)
+                    _state.value =
+                        _state.value.copy(statsMap = queryProcessCpuUsageStats.associateBy { it.pid })
+                }.onFailure {
+                    XLog.e("startQueryCpuUsage error", it)
+                }
             }
             delay(1000)
         }

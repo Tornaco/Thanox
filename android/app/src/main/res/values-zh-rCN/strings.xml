@@ -351,7 +351,7 @@
 
     <string name="title_remember">不再提醒</string>
     <string name="title_app_notice">小心!</string>
-    <string name="message_app_notice">在某种情况下，安装激活Thanox后，你的设备可能无法启动.\n\n如果你之前从未听说过变砖、死机 或者不清楚发生上述问题后改如何恢复你的设备, 千万 <b>不要</b> 安装 Thanox!\n\n无论如何，使用之前请做好数据备份！</string>
+    <string name="message_app_notice">在某种情况下，安装激活Thanox后，你的设备可能无法启动.\n\n如果你之前从未听说过变砖、死机 或者不清楚发生上述问题后该如何恢复你的设备, 千万 <b>不要</b> 安装 Thanox!\n\n无论如何，使用之前请做好数据备份！</string>
 
     <string name="menu_title_feature_desc">功能介绍</string>
     <string name="menu_title_start_restrict_charts_reset">重置</string>

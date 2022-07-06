@@ -47,6 +47,7 @@
     <string name="service_app_set_web_provider">WebView Provider</string>
     <string name="service_app_set_shortcut_proxy">Shortcut Proxy</string>
     <string name="service_app_set_white_listed">Allow Listed</string>
+    <string name="service_app_set_disabled">Disabled</string>
 
     <string name="service_dialog_title_thanox_removed">Thanox Uninstalled</string>
     <string name="service_dialog_message_thanox_removed">Do you want to keep it\'s core data? the whole data will be removed if you don\'t want to keep it.</string>

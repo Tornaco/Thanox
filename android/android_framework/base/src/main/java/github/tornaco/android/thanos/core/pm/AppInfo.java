@@ -1,8 +1,10 @@
 package github.tornaco.android.thanos.core.pm;
 
 import android.content.pm.PackageManager;
+import android.os.Binder;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.UserHandle;
 
 import java.util.Objects;
 
@@ -25,6 +27,8 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
     public static final int FLAGS_WHITE_LISTED = 1 << 5;
     public static final int FLAGS_WEB_VIEW_PROVIDER = 1 << 6;
     public static final int FLAGS_SHORTCUT_PROXY = 1 << 7;
+    // Standalone flag
+    public static final int FLAGS_DISABLED = 1 << 8;
 
     public static final int FLAGS_ALL =
             FLAGS_USER
@@ -479,6 +483,10 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
 
     public void setIconDrawable(int iconDrawable) {
         this.iconDrawable = iconDrawable;
+    }
+
+    public boolean isCurrentUser() {
+        return userId == UserHandle.getUserId(Binder.getCallingUid());
     }
 
     public String toString() {

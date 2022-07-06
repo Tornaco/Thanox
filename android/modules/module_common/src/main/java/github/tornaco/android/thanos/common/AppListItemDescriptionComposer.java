@@ -17,7 +17,8 @@ public class AppListItemDescriptionComposer {
     public String getAppItemDescription(AppInfo appInfo) {
         boolean showPkg = CommonPreferences.getInstance().isAppListShowPkgNameEnabled(context);
         boolean showVersion = CommonPreferences.getInstance().isAppListShowVersionEnabled(context);
-        if (!showPkg && !showVersion) {
+        boolean showUserId = !appInfo.isCurrentUser();
+        if (!showPkg && !showVersion && !showUserId) {
             return null;
         }
         String description = "";
@@ -27,6 +28,11 @@ public class AppListItemDescriptionComposer {
         if (showVersion) {
             description += "\n";
             description += appInfo.getVersionName();
+        }
+        if (showUserId) {
+            description += "\n";
+            description += "user ";
+            description += appInfo.getUserId();
         }
         return description.trim();
     }

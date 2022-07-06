@@ -17,6 +17,7 @@ import java.util.Set;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.core.PatchSources;
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
+import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.services.BootStrap;
 
 public class ThanoxHookImpl implements IThanoxHook {
@@ -49,6 +50,10 @@ public class ThanoxHookImpl implements IThanoxHook {
             FEATURES.add(BuildProp.THANOX_FEATURE_PROFILE_A11Y);
             FEATURES.add(BuildProp.THANOX_FEATURE_PRIVACY_FIELD_MEID);
             FEATURES.add(BuildProp.THANOX_FEATURE_PRIVACY_FIELD_IMEI);
+        }
+
+        if (OsUtils.isROrAbove()) {
+            FEATURES.add(BuildProp.THANOX_FEATURE_IZ);
         }
     }
 

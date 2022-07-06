@@ -7,6 +7,8 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.elvishew.xlog.XLog;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,6 +65,7 @@ public class InfiniteZAppsViewModel extends AndroidViewModel {
         }
         List<AppListModel> res = new ArrayList<>();
         for (AppInfo appInfo : thanosManager.getInfiniteZ().getInstalledPackages()) {
+            XLog.w("getInfiniteZApps, pkg: " + appInfo.getPkgName());
             AppListModel model = new AppListModel(appInfo);
             res.add(model);
         }

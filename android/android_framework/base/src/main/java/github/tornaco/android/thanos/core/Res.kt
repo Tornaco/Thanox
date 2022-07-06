@@ -11,6 +11,7 @@ abstract class Res {
         const val STRING_OP_REMIND_WHITELIST = "op_remind_whitelist"
         const val STRING_TASK_REMOVAL_MULTIPLE_TASK_CHECK_LIST =
             "task_removal_multiple_task_check_list"
+        const val STRING_IZ_DISALLOW_AUTO_INSTALL_PKGS = "iz_disallow_auto_install_pkgs"
 
         const val STRING_SERVICE_SILENCE_NOTIFICATION_CHANNEL =
             "service_silence_notification_channel"

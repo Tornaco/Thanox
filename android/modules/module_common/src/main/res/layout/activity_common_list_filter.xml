@@ -112,7 +112,7 @@
                     android:id="@+id/swipe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="@{viewModel.listModels.size() == 0 ? View.GONE : View.VISIBLE}"
+
                     app:refreshing="@{viewModel.isDataLoading}">
 
                     <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
@@ -127,10 +127,13 @@
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/no_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:visibility="@{(!viewModel.isDataLoading &amp;&amp; viewModel.listModels.size() == 0) ? View.VISIBLE : View.GONE}">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -151,7 +154,7 @@
                     android:gravity="center"
                     android:text="@string/module_common_no_data"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-            </RelativeLayout>
+            </LinearLayout>
 
 
             <RelativeLayout

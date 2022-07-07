@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -121,26 +122,77 @@ public class InfiniteZActivity extends ThemeActivity {
     protected void onSetupSwitchBar(SwitchBar switchBar) {
         switchBar.setChecked(ThanosManager.from(thisActivity()).getInfiniteZ().isEnabled());
         switchBar.addOnSwitchChangeListener((switchView, isChecked) -> {
-            ModernProgressDialog p = new ModernProgressDialog(thisActivity());
-            p.setMessage(getString(R.string.common_text_wait_a_moment));
-            p.show();
-            ThanosManager.from(getApplicationContext()).getInfiniteZ()
-                    .setEnabled(isChecked, new EnableCallback() {
-                        @Override
-                        public void onSuccessMain(int userId) {
-                            p.dismiss();
-                            refreshState();
-                        }
-
-                        @Override
-                        public void onErrorMain(String errorMessage, int errorCode) {
-                            XLog.e("Disable infiniteZ fail: %s %s", errorCode, errorMessage);
-                            DialogUtils.showMessage(thisActivity(), null, getString(R.string.common_generic_error));
-                            p.dismiss();
-                            refreshState();
-                        }
-                    });
+            boolean isEnable = ThanosManager.from(thisActivity()).getInfiniteZ().isEnabled();
+            if (isChecked && !isEnable) {
+                requestEnableIZDialog(this::enableIZ, () -> switchBar.setChecked(false));
+            } else if (!isChecked && isEnable) {
+                requestDisableIZDialog(this::disableIZ, () -> switchBar.setChecked(true));
+            }
         });
+    }
+
+    private void requestEnableIZDialog(Runnable onYes, Runnable onNo) {
+        new MaterialAlertDialogBuilder(thisActivity())
+                .setTitle(R.string.feature_title_infinite_z)
+                .setMessage(R.string.feature_message_infinite_z_enable)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> onYes.run())
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> onNo.run())
+                .setCancelable(false)
+                .show();
+    }
+
+    private void requestDisableIZDialog(Runnable onYes, Runnable onNo) {
+        new MaterialAlertDialogBuilder(thisActivity())
+                .setTitle(R.string.feature_title_infinite_z)
+                .setMessage(R.string.feature_message_infinite_z_disable)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> onYes.run())
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> onNo.run())
+                .setCancelable(false)
+                .show();
+    }
+
+    private void enableIZ() {
+        ModernProgressDialog p = new ModernProgressDialog(thisActivity());
+        p.setMessage(getString(R.string.common_text_wait_a_moment));
+        p.show();
+        ThanosManager.from(getApplicationContext()).getInfiniteZ()
+                .setEnabled(true, new EnableCallback() {
+                    @Override
+                    public void onSuccessMain(int userId) {
+                        p.dismiss();
+                        refreshState();
+                    }
+
+                    @Override
+                    public void onErrorMain(String errorMessage, int errorCode) {
+                        XLog.e("Enable infiniteZ fail: %s %s", errorCode, errorMessage);
+                        DialogUtils.showMessage(thisActivity(), null, getString(R.string.common_generic_error));
+                        p.dismiss();
+                        refreshState();
+                    }
+                });
+    }
+
+    private void disableIZ() {
+        ModernProgressDialog p = new ModernProgressDialog(thisActivity());
+        p.setMessage(getString(R.string.common_text_wait_a_moment));
+        p.show();
+        ThanosManager.from(getApplicationContext()).getInfiniteZ()
+                .setEnabled(false, new EnableCallback() {
+                    @Override
+                    public void onSuccessMain(int userId) {
+                        p.dismiss();
+                        refreshState();
+                    }
+
+                    @Override
+                    public void onErrorMain(String errorMessage, int errorCode) {
+                        XLog.e("Disable infiniteZ fail: %s %s", errorCode, errorMessage);
+                        DialogUtils.showMessage(thisActivity(), null, getString(R.string.common_generic_error));
+                        p.dismiss();
+                        refreshState();
+                    }
+                });
     }
 
     @Verify

@@ -177,6 +177,8 @@
     <string name="message_do_you_want_to_add_apps_to_pkg_set">还要将这些应用程序添加到当前的应用集中吗？</string>
 
     <string name="feature_title_infinite_z">双开</string>
+    <string name="feature_message_infinite_z_enable">多开基于Android多用户机制实现，开启多开功能需要创建一个用户的Profile，通常桌面会显示一个“工作”页签。\n该功能目前处于实验阶段，尚不稳定。\n\n你是否要开启？</string>
+    <string name="feature_message_infinite_z_disable">关闭分身功能会删除分身用户的所有数据，不可恢复，你确定要关闭分身功能吗？</string>
 
     <string name="menu_title_copy">复制</string>
 

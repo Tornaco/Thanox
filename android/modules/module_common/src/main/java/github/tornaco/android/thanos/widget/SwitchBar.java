@@ -64,7 +64,6 @@ public class SwitchBar extends FrameLayout
     private String onLabel, offLabel;
 
     @SuppressWarnings("ResourceType")
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public SwitchBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 

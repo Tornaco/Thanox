@@ -18,6 +18,7 @@
 package github.tornaco.android.thanos.power.wakelock
 
 import android.content.Context
+import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivity
 import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener
@@ -40,5 +41,9 @@ class WakeLockRemoverActivity : CommonFuncToggleAppListFilterActivity() {
         return OnAppItemSelectStateChangeListener { appInfo, selected ->
 
         }
+    }
+
+    override fun getTitleRes(): Int {
+        return R.string.feature_title_wakelock_remover
     }
 }

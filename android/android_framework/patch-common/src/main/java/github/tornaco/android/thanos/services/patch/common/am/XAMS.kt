@@ -28,9 +28,23 @@ object XAMS {
     }
 
     @JvmStatic
+    fun getLruMainProcessList(processList: Any): List<ProcessRecord> {
+        return getLruProcessListOrEmpty(processList) {
+            it.toXProcessRecord()
+        }.filter { it.isMainProcess }
+    }
+
+    @JvmStatic
     fun getLruProcessPackages(processList: Any): List<Pkg> {
         return getLruProcessListOrEmpty(processList) {
             it.toPkg()
+        }
+    }
+
+    @JvmStatic
+    fun getLruMainProcessPackages(processList: Any): List<Pkg> {
+        return getLruMainProcessList(processList).map {
+            Pkg.from(it.packageName, it.uid)
         }
     }
 

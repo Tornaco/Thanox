@@ -39,7 +39,11 @@ class StartResult : Parcelable {
         @JvmField
         val BY_PASS_CALLER_WHITE_LISTED = StartResult(true, "BY_PASS_CALLER_WHITE_LISTED")
         @JvmField
+        val BY_PASS_HOST_TYPE_WHITE_LISTED = StartResult(true, "BY_PASS_HOST_TYPE_WHITE_LISTED")
+        @JvmField
         val BY_PASS_DEFAULT = StartResult(true, "BY_PASS_DEFAULT")
+        @JvmField
+        val BY_PASS_START_PROCESS_TYPE_NO_CHECK = StartResult(true, "BY_PASS_START_PROCESS_TYPE_NO_CHECK")
         @JvmField
         val BY_PASS_ACCESSIBILITY_SERVICE = StartResult(true, "BY_PASS_ACCESSIBILITY_SERVICE")
         @JvmField

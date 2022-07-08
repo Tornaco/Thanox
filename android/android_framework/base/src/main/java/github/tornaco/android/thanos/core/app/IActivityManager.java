@@ -37,7 +37,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public boolean checkStartProcess(android.content.pm.ApplicationInfo applicationInfo, java.lang.String hostType, java.lang.String hostName) throws android.os.RemoteException
+    @Override public boolean checkStartProcess(java.lang.String processName, android.content.pm.ApplicationInfo applicationInfo, java.lang.String hostType, java.lang.String hostName) throws android.os.RemoteException
     {
       return false;
     }
@@ -64,7 +64,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return 0;
     }
-    @Override public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.process.ProcessRecord> getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return null;
     }
@@ -639,18 +639,20 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_checkStartProcess:
         {
           data.enforceInterface(descriptor);
-          android.content.pm.ApplicationInfo _arg0;
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          android.content.pm.ApplicationInfo _arg1;
           if ((0!=data.readInt())) {
-            _arg0 = android.content.pm.ApplicationInfo.CREATOR.createFromParcel(data);
+            _arg1 = android.content.pm.ApplicationInfo.CREATOR.createFromParcel(data);
           }
           else {
-            _arg0 = null;
+            _arg1 = null;
           }
-          java.lang.String _arg1;
-          _arg1 = data.readString();
           java.lang.String _arg2;
           _arg2 = data.readString();
-          boolean _result = this.checkStartProcess(_arg0, _arg1, _arg2);
+          java.lang.String _arg3;
+          _arg3 = data.readString();
+          boolean _result = this.checkStartProcess(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
           return true;
@@ -721,9 +723,9 @@ public interface IActivityManager extends android.os.IInterface
           else {
             _arg0 = null;
           }
-          github.tornaco.android.thanos.core.process.ProcessRecord[] _result = this.getRunningAppProcessForPackage(_arg0);
+          java.util.List<github.tornaco.android.thanos.core.process.ProcessRecord> _result = this.getRunningAppProcessForPackage(_arg0);
           reply.writeNoException();
-          reply.writeTypedArray(_result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          reply.writeTypedList(_result);
           return true;
         }
         case TRANSACTION_isPackageRunning:
@@ -2044,13 +2046,14 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public boolean checkStartProcess(android.content.pm.ApplicationInfo applicationInfo, java.lang.String hostType, java.lang.String hostName) throws android.os.RemoteException
+      @Override public boolean checkStartProcess(java.lang.String processName, android.content.pm.ApplicationInfo applicationInfo, java.lang.String hostType, java.lang.String hostName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(processName);
           if ((applicationInfo!=null)) {
             _data.writeInt(1);
             applicationInfo.writeToParcel(_data, 0);
@@ -2062,7 +2065,7 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeString(hostName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkStartProcess, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkStartProcess(applicationInfo, hostType, hostName);
+            return getDefaultImpl().checkStartProcess(processName, applicationInfo, hostType, hostName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2199,11 +2202,11 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.process.ProcessRecord> getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
-        github.tornaco.android.thanos.core.process.ProcessRecord[] _result;
+        java.util.List<github.tornaco.android.thanos.core.process.ProcessRecord> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           if ((pkg!=null)) {
@@ -2218,7 +2221,7 @@ public interface IActivityManager extends android.os.IInterface
             return getDefaultImpl().getRunningAppProcessForPackage(pkg);
           }
           _reply.readException();
-          _result = _reply.createTypedArray(github.tornaco.android.thanos.core.process.ProcessRecord.CREATOR);
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.process.ProcessRecord.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -4660,14 +4663,14 @@ public interface IActivityManager extends android.os.IInterface
   public boolean checkService(android.content.Intent intent, android.content.ComponentName service, int callerUid) throws android.os.RemoteException;
   public boolean checkRestartService(java.lang.String packageName, android.content.ComponentName componentName) throws android.os.RemoteException;
   public boolean checkBroadcast(android.content.Intent intent, int receiverUid, int callerUid) throws android.os.RemoteException;
-  public boolean checkStartProcess(android.content.pm.ApplicationInfo applicationInfo, java.lang.String hostType, java.lang.String hostName) throws android.os.RemoteException;
+  public boolean checkStartProcess(java.lang.String processName, android.content.pm.ApplicationInfo applicationInfo, java.lang.String hostType, java.lang.String hostName) throws android.os.RemoteException;
   public void onStartProcessLocked(android.content.pm.ApplicationInfo appInfo) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcess() throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getRunningAppPackages() throws android.os.RemoteException;
   public java.util.List<android.app.ActivityManager.RunningServiceInfo> getRunningServiceLegacy(int max) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat> getRunningAppProcessLegacy() throws android.os.RemoteException;
   public int getRunningAppsCount() throws android.os.RemoteException;
-  public github.tornaco.android.thanos.core.process.ProcessRecord[] getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.process.ProcessRecord> getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean isPackageRunning(java.lang.String pkgName) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> getStartRecordsByPackageName(java.lang.String pkgName) throws android.os.RemoteException;
   public java.util.List<java.lang.String> getStartRecordBlockedPackages() throws android.os.RemoteException;

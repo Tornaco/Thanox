@@ -163,7 +163,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
                     String startMethodDesc = getStartMethodDesc(startRecord, packageManager);
                     String whyDesc = startRecord.getResult().why;
                     int badge1Color = startRecord.getResult().res ? colorGreen : colorRed;
-                    String fullDesc = String.format("Method: %s\nReason: %s\nChecker: %s", startMethodDesc, whyDesc, startRecord.getChecker());
+                    String fullDesc = String.format("Method: %s\nReason: %s\nChecker: %s\nRequest: %s", startMethodDesc, whyDesc, startRecord.getChecker(), startRecord.getRequestPayload());
                     AppListModel model = new AppListModel(appInfo, badge1, timeDesc, badge1Color, 0, fullDesc, false);
                     // Set start str.
                     appInfo.setStr(startRecord.getRequestPayload());

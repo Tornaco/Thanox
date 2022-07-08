@@ -124,6 +124,7 @@
     <string-array name="start_blocker_caller_whitelist">
         <item>com.xiaomi.xmsf</item>
         <item>com.miui.notification</item>
+        <item>service:com.xiaomi.mipush.sdk.PushMessageHandler</item>
     </string-array>
 
     <string-array name="op_remind_whitelist">

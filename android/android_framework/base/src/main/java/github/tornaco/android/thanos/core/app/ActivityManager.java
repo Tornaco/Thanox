@@ -69,12 +69,6 @@ public class ActivityManager {
     }
 
     @SneakyThrows
-    public boolean checkStartProcess(
-            ApplicationInfo applicationInfo, String hostType, String hostName) {
-        return server.checkStartProcess(applicationInfo, hostType, hostName);
-    }
-
-    @SneakyThrows
     public void onStartProcessLocked(ApplicationInfo applicationInfo) {
         server.onStartProcessLocked(applicationInfo);
     }
@@ -105,7 +99,7 @@ public class ActivityManager {
     }
 
     @SneakyThrows
-    public ProcessRecord[] getRunningAppProcessForPackage(Pkg pkg) {
+    public List<ProcessRecord> getRunningAppProcessForPackage(Pkg pkg) {
         return server.getRunningAppProcessForPackage(pkg);
     }
 

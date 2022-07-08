@@ -24,7 +24,7 @@ interface IActivityManager {
 
     boolean checkBroadcast(in Intent intent, int receiverUid, int callerUid);
 
-    boolean checkStartProcess(in ApplicationInfo applicationInfo, String hostType, String hostName);
+    boolean checkStartProcess(String processName, in ApplicationInfo applicationInfo, String hostType, String hostName);
 
     void onStartProcessLocked(in ApplicationInfo appInfo);
 
@@ -36,7 +36,7 @@ interface IActivityManager {
 
     int getRunningAppsCount();
 
-    ProcessRecord[] getRunningAppProcessForPackage(in Pkg pkg);
+    List<ProcessRecord> getRunningAppProcessForPackage(in Pkg pkg);
     boolean isPackageRunning(String pkgName);
 
     List<StartRecord> getStartRecordsByPackageName(String pkgName);

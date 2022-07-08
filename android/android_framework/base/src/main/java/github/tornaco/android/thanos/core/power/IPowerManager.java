@@ -23,13 +23,17 @@ public interface IPowerManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocks() throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocks(boolean includeHistory) throws android.os.RemoteException
     {
       return null;
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocksByPackageName(java.lang.String packageName) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocksByPackageName(java.lang.String packageName, boolean includeHistory) throws android.os.RemoteException
     {
       return null;
+    }
+    @Override public boolean isWakeLockHeld(github.tornaco.android.thanos.core.power.SeenWakeLock wakelock) throws android.os.RemoteException
+    {
+      return false;
     }
     @Override public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException
     {
@@ -137,7 +141,9 @@ public interface IPowerManager extends android.os.IInterface
         case TRANSACTION_getSeenWakeLocks:
         {
           data.enforceInterface(descriptor);
-          java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> _result = this.getSeenWakeLocks();
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> _result = this.getSeenWakeLocks(_arg0);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -147,9 +153,26 @@ public interface IPowerManager extends android.os.IInterface
           data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
-          java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> _result = this.getSeenWakeLocksByPackageName(_arg0);
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> _result = this.getSeenWakeLocksByPackageName(_arg0, _arg1);
           reply.writeNoException();
           reply.writeTypedList(_result);
+          return true;
+        }
+        case TRANSACTION_isWakeLockHeld:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.power.SeenWakeLock _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _result = this.isWakeLockHeld(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         case TRANSACTION_dump:
@@ -319,16 +342,17 @@ public interface IPowerManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocks() throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocks(boolean includeHistory) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((includeHistory)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSeenWakeLocks, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getSeenWakeLocks();
+            return getDefaultImpl().getSeenWakeLocks(includeHistory);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR);
@@ -339,7 +363,7 @@ public interface IPowerManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocksByPackageName(java.lang.String packageName) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocksByPackageName(java.lang.String packageName, boolean includeHistory) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -347,12 +371,40 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
+          _data.writeInt(((includeHistory)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSeenWakeLocksByPackageName, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getSeenWakeLocksByPackageName(packageName);
+            return getDefaultImpl().getSeenWakeLocksByPackageName(packageName, includeHistory);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public boolean isWakeLockHeld(github.tornaco.android.thanos.core.power.SeenWakeLock wakelock) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((wakelock!=null)) {
+            _data.writeInt(1);
+            wakelock.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isWakeLockHeld, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isWakeLockHeld(wakelock);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
         }
         finally {
           _reply.recycle();
@@ -485,12 +537,13 @@ public interface IPowerManager extends android.os.IInterface
     static final int TRANSACTION_isPowerSaveModeEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
     static final int TRANSACTION_getSeenWakeLocks = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
     static final int TRANSACTION_getSeenWakeLocksByPackageName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
-    static final int TRANSACTION_dump = (android.os.IBinder.FIRST_CALL_TRANSACTION + 7);
-    static final int TRANSACTION_wakeUp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 8);
-    static final int TRANSACTION_setBrightness = (android.os.IBinder.FIRST_CALL_TRANSACTION + 9);
-    static final int TRANSACTION_getBrightness = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
-    static final int TRANSACTION_setAutoBrightnessEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
-    static final int TRANSACTION_isAutoBrightnessEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
+    static final int TRANSACTION_isWakeLockHeld = (android.os.IBinder.FIRST_CALL_TRANSACTION + 7);
+    static final int TRANSACTION_dump = (android.os.IBinder.FIRST_CALL_TRANSACTION + 8);
+    static final int TRANSACTION_wakeUp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 9);
+    static final int TRANSACTION_setBrightness = (android.os.IBinder.FIRST_CALL_TRANSACTION + 10);
+    static final int TRANSACTION_getBrightness = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
+    static final int TRANSACTION_setAutoBrightnessEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
+    static final int TRANSACTION_isAutoBrightnessEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.power.IPowerManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -513,8 +566,9 @@ public interface IPowerManager extends android.os.IInterface
   public void goToSleep(long delay) throws android.os.RemoteException;
   public void setPowerSaveModeEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isPowerSaveModeEnabled() throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocks() throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocksByPackageName(java.lang.String packageName) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocks(boolean includeHistory) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> getSeenWakeLocksByPackageName(java.lang.String packageName, boolean includeHistory) throws android.os.RemoteException;
+  public boolean isWakeLockHeld(github.tornaco.android.thanos.core.power.SeenWakeLock wakelock) throws android.os.RemoteException;
   public void dump(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException;
   public void wakeUp(long delay) throws android.os.RemoteException;
   public void setBrightness(int level) throws android.os.RemoteException;

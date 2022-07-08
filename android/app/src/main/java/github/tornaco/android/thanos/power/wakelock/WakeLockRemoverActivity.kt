@@ -18,13 +18,13 @@
 package github.tornaco.android.thanos.power.wakelock
 
 import android.content.Context
-import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.common.CommonAppListFilterViewModel
-import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivity
-import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener
+import androidx.compose.runtime.Composable
+import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 
-class WakeLockRemoverActivity : CommonFuncToggleAppListFilterActivity() {
+@AndroidEntryPoint
+class WakeLockRemoverActivity : ComposeThemeActivity() {
 
     object Starter {
         @JvmStatic
@@ -33,17 +33,14 @@ class WakeLockRemoverActivity : CommonFuncToggleAppListFilterActivity() {
         }
     }
 
-    override fun onCreateListModelLoader(): CommonAppListFilterViewModel.ListModelLoader {
-        return CommonAppListFilterViewModel.ListModelLoader { emptyList() }
+    override fun isF(): Boolean {
+        return true
     }
 
-    override fun onCreateAppItemSelectStateChangeListener(): OnAppItemSelectStateChangeListener {
-        return OnAppItemSelectStateChangeListener { appInfo, selected ->
-
+    @Composable
+    override fun Content() {
+        WakeLockRemoverScreen {
+            finish()
         }
-    }
-
-    override fun getTitleRes(): Int {
-        return R.string.feature_title_wakelock_remover
     }
 }

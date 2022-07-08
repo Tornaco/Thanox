@@ -16,18 +16,40 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public final class SeenWakeLock implements Parcelable {
+public class SeenWakeLock implements Parcelable {
 
     private String tag;
     private int flags;
-    private String ownerPackageName;
-    private long acquireTimeMills;
 
-    private SeenWakeLock(Parcel in) {
+    private String ownerPackageName;
+    private int ownerUserId;
+
+    private long acquireTimeMills;
+    private boolean isHeld;
+
+
+    protected SeenWakeLock(Parcel in) {
         tag = in.readString();
         flags = in.readInt();
         ownerPackageName = in.readString();
+        ownerUserId = in.readInt();
         acquireTimeMills = in.readLong();
+        isHeld = in.readByte() != 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(tag);
+        dest.writeInt(flags);
+        dest.writeString(ownerPackageName);
+        dest.writeInt(ownerUserId);
+        dest.writeLong(acquireTimeMills);
+        dest.writeByte((byte) (isHeld ? 1 : 0));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<SeenWakeLock> CREATOR = new Creator<SeenWakeLock>() {
@@ -43,19 +65,6 @@ public final class SeenWakeLock implements Parcelable {
     };
 
     @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(tag);
-        parcel.writeInt(flags);
-        parcel.writeString(ownerPackageName);
-        parcel.writeLong(acquireTimeMills);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -66,6 +75,7 @@ public final class SeenWakeLock implements Parcelable {
         SeenWakeLock that = (SeenWakeLock) o;
         return tag.equals(that.tag)
                 && ownerPackageName.equals(that.ownerPackageName)
+                && ownerUserId == that.ownerUserId
                 && flags == that.flags;
     }
 

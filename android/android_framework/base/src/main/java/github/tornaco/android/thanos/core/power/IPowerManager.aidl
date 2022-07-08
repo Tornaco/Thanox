@@ -11,8 +11,9 @@ interface IPowerManager {
     void setPowerSaveModeEnabled(boolean enable);
     boolean isPowerSaveModeEnabled();
 
-    List<SeenWakeLock> getSeenWakeLocks();
-    List<SeenWakeLock> getSeenWakeLocksByPackageName(String packageName);
+    List<SeenWakeLock> getSeenWakeLocks(boolean includeHistory);
+    List<SeenWakeLock> getSeenWakeLocksByPackageName(String packageName, boolean includeHistory);
+    boolean isWakeLockHeld(in SeenWakeLock wakelock);
 
     void dump(in IPrinter p);
 

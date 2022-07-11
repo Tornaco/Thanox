@@ -470,6 +470,21 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    public int getPid(String processName) {
+        return server.getPid(processName);
+    }
+
+    @SneakyThrows
+    public int killProcessByName(String processName) {
+        return server.killProcessByName(processName);
+    }
+
+    @SneakyThrows
+    public void killProcessByNames(List<String> processNames) {
+        server.killProcessByNames(processNames);
+    }
+
+    @SneakyThrows
     public String getPackageNameForTaskId(int taskId) {
         return server.getPackageNameForTaskId(taskId);
     }

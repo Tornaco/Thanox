@@ -22,6 +22,8 @@ import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Arrays;
+
 public class RunningAppProcessInfoCompat implements Parcelable {
     public String processName;
     public int pid;
@@ -82,6 +84,16 @@ public class RunningAppProcessInfoCompat implements Parcelable {
         parcel.writeInt(importanceReasonPid);
         parcel.writeInt(importanceReasonCode);
         ComponentName.writeToParcel(this.importanceReasonComponent, parcel);
+    }
+
+    @Override
+    public String toString() {
+        return "RunningAppProcessInfoCompat{" +
+                "processName='" + processName + '\'' +
+                ", pid=" + pid +
+                ", uid=" + uid +
+                ", pkgList=" + Arrays.toString(pkgList) +
+                '}';
     }
 
     public static RunningAppProcessInfoCompat from(ActivityManager.RunningAppProcessInfo legacy) {

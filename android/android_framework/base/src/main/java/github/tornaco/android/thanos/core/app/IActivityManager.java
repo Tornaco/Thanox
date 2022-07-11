@@ -482,6 +482,19 @@ public interface IActivityManager extends android.os.IInterface
     @Override public void setBgTaskCleanUpSkipForegroundEnabled(boolean enable) throws android.os.RemoteException
     {
     }
+    /* return the pid of process. or -1 if no process found */
+    @Override public int getPid(java.lang.String processName) throws android.os.RemoteException
+    {
+      return 0;
+    }
+    /* return the pid of killed process. or -1 if no process found */
+    @Override public int killProcessByName(java.lang.String processName) throws android.os.RemoteException
+    {
+      return 0;
+    }
+    @Override public void killProcessByNames(java.util.List<java.lang.String> processNames) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1824,6 +1837,35 @@ public interface IActivityManager extends android.os.IInterface
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setBgTaskCleanUpSkipForegroundEnabled(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getPid:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          int _result = this.getPid(_arg0);
+          reply.writeNoException();
+          reply.writeInt(_result);
+          return true;
+        }
+        case TRANSACTION_killProcessByName:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          int _result = this.killProcessByName(_arg0);
+          reply.writeNoException();
+          reply.writeInt(_result);
+          return true;
+        }
+        case TRANSACTION_killProcessByNames:
+        {
+          data.enforceInterface(descriptor);
+          java.util.List<java.lang.String> _arg0;
+          _arg0 = data.createStringArrayList();
+          this.killProcessByNames(_arg0);
           reply.writeNoException();
           return true;
         }
@@ -4513,6 +4555,69 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      /* return the pid of process. or -1 if no process found */
+      @Override public int getPid(java.lang.String processName) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        int _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(processName);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getPid, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPid(processName);
+          }
+          _reply.readException();
+          _result = _reply.readInt();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      /* return the pid of killed process. or -1 if no process found */
+      @Override public int killProcessByName(java.lang.String processName) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        int _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(processName);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_killProcessByName, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().killProcessByName(processName);
+          }
+          _reply.readException();
+          _result = _reply.readInt();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void killProcessByNames(java.util.List<java.lang.String> processNames) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeStringList(processNames);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_killProcessByNames, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().killProcessByNames(processNames);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -4638,6 +4743,9 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_checkStartActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 120);
     static final int TRANSACTION_isBgTaskCleanUpSkipForegroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 121);
     static final int TRANSACTION_setBgTaskCleanUpSkipForegroundEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 122);
+    static final int TRANSACTION_getPid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 123);
+    static final int TRANSACTION_killProcessByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 124);
+    static final int TRANSACTION_killProcessByNames = (android.os.IBinder.FIRST_CALL_TRANSACTION + 125);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -4808,4 +4916,9 @@ public interface IActivityManager extends android.os.IInterface
   public boolean checkStartActivity(android.content.Intent intent, int callerUid) throws android.os.RemoteException;
   public boolean isBgTaskCleanUpSkipForegroundEnabled() throws android.os.RemoteException;
   public void setBgTaskCleanUpSkipForegroundEnabled(boolean enable) throws android.os.RemoteException;
+  /* return the pid of process. or -1 if no process found */
+  public int getPid(java.lang.String processName) throws android.os.RemoteException;
+  /* return the pid of killed process. or -1 if no process found */
+  public int killProcessByName(java.lang.String processName) throws android.os.RemoteException;
+  public void killProcessByNames(java.util.List<java.lang.String> processNames) throws android.os.RemoteException;
 }

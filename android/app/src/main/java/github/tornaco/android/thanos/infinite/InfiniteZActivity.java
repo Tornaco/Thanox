@@ -11,6 +11,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -39,6 +40,7 @@ import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.DialogUtils;
+import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import util.CollectionUtils;
@@ -48,6 +50,16 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private InfiniteZAppsViewModel viewModel;
     private ActivityIniniteZAppsBinding binding;
+
+    @Override
+    public boolean isADVF() {
+        return true;
+    }
+
+    @Override
+    public boolean isF() {
+        return true;
+    }
 
     @Verify
     public static void start(Context context) {
@@ -116,7 +128,36 @@ public class InfiniteZActivity extends ThemeActivity {
 
     @Verify
     private void showItemPopMenu(@NonNull View anchor, @NonNull AppListModel model) {
+        AppInfo appInfo = model.appInfo;
+        PopupMenu popupMenu = new PopupMenu(thisActivity(), anchor);
+        popupMenu.inflate(R.menu.infinite_z_item_menu);
+        popupMenu.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_uninstall) {
+                onRequestUninstall(appInfo);
+                return true;
+            }
+            return false;
+        });
+        popupMenu.show();
+    }
 
+    private void onRequestUninstall(AppInfo appInfo) {
+        new MaterialAlertDialogBuilder(thisActivity())
+                .setTitle(getString(R.string.common_menu_title_uninstall) + "\t" + appInfo.getAppLabel())
+                .setMessage(getString(R.string.feature_message_infinite_z_uninstall, appInfo.getAppLabel()))
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> viewModel.uninstall(appInfo, this::onUninstallSuccess, this::onUninstallFail))
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    private void onUninstallSuccess() {
+        ToastUtils.ok(thisActivity());
+    }
+
+    private void onUninstallFail(String errorMessage) {
+        DialogUtils.showError(thisActivity(), errorMessage);
     }
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {

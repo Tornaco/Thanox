@@ -179,6 +179,7 @@
     <string name="feature_title_infinite_z">双开</string>
     <string name="feature_message_infinite_z_enable">多開基於Android多用戶機制實現，開啟多開功能需要創建一個用戶的Profile，通常桌面會顯示一個“工作”頁簽。 \n該功能目前處於實驗階段，尚不穩定。 \n\n你是否要開啟？</string>
     <string name="feature_message_infinite_z_disable">關閉分身功能會刪除分身用戶的所有數據，不可恢復，你確定要關閉分身功能嗎？</string>
+    <string name="feature_message_infinite_z_uninstall">你確定要卸載<b>%s</b>嗎？該雙開應用的數據將會被刪除且無法恢復</string>
 
     <string name="menu_title_copy">複製</string>
 

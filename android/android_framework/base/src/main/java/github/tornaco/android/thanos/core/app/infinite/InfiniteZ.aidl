@@ -10,11 +10,11 @@ interface InfiniteZ {
 
     boolean isEnabled();
 
-    void addPackage(String pkg, in IAddPackageCallback callback);
+    void addPackage(String pkgName, in IAddPackageCallback callback);
 
-    void removePackage(String pkg, in IRemovePackageCallback callback);
+    void removePackage(String pkgName, in IRemovePackageCallback callback);
 
-    void launchPackage(String pkg, in ILaunchPackageCallback callback);
+    void launchPackage(String pkgName, in ILaunchPackageCallback callback);
 
     List<AppInfo> getInstalledPackages();
 }

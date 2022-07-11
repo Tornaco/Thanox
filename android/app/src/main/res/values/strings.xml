@@ -181,6 +181,7 @@
     <string name="feature_title_infinite_z">App clone</string>
     <string name="feature_message_infinite_z_enable">App clone is implemented based on the Android multi-user mechanism. To enable the App clone, thanox will create a user Profile. Usually, a "Work" tab will be displayed on the Launcher. \nThis feature is currently experimental and not yet stable. \n\nDo you want to enable it?</string>
     <string name="feature_message_infinite_z_disable">Will delete all the data of the app clone user and cannot be recovered. Are you sure you want to disable app clone?</string>
+    <string name="feature_message_infinite_z_uninstall">Are you sure you want to uninstall <b>%s</b>? The data of cloned app will be deleted and cannot be recovered</string>
 
     <string name="menu_title_copy">Copy</string>
 

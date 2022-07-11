@@ -124,6 +124,10 @@ public class PrebuiltFeatureLauncher {
             }
             LockerStartActivity.start(context);
         } else if (featureId == PrebuiltFeatureIds.ID_INFINITE_Z) {
+            if (ThanosApp.isPrc() && !DonateSettings.isActivated(context)) {
+                DonateIntroDialogKt.showDonateIntroDialog(context);
+                return;
+            }
             InfiniteZActivity.start(context);
         } else if (featureId == PrebuiltFeatureIds.ID_PLUGINS) {
             PluginListActivity.start(context);

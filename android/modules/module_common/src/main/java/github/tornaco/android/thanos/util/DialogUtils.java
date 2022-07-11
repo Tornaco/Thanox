@@ -40,4 +40,15 @@ public class DialogUtils {
                         (dialog, which) -> ClipboardUtils.copyToClipboard(context, "error", Log.getStackTraceString(error)))
                 .show();
     }
+
+    public static void showError(Context context, String error) {
+        new MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.module_common_error_occur)
+                .setMessage(error)
+                .setCancelable(false)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.module_common_copy_error_message,
+                        (dialog, which) -> ClipboardUtils.copyToClipboard(context, "error", error))
+                .show();
+    }
 }

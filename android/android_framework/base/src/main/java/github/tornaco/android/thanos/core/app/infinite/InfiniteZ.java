@@ -14,13 +14,13 @@ public interface InfiniteZ extends android.os.IInterface
     {
       return false;
     }
-    @Override public void addPackage(java.lang.String pkg, github.tornaco.android.thanos.core.app.infinite.IAddPackageCallback callback) throws android.os.RemoteException
+    @Override public void addPackage(java.lang.String pkgName, github.tornaco.android.thanos.core.app.infinite.IAddPackageCallback callback) throws android.os.RemoteException
     {
     }
-    @Override public void removePackage(java.lang.String pkg, github.tornaco.android.thanos.core.app.infinite.IRemovePackageCallback callback) throws android.os.RemoteException
+    @Override public void removePackage(java.lang.String pkgName, github.tornaco.android.thanos.core.app.infinite.IRemovePackageCallback callback) throws android.os.RemoteException
     {
     }
-    @Override public void launchPackage(java.lang.String pkg, github.tornaco.android.thanos.core.app.infinite.ILaunchPackageCallback callback) throws android.os.RemoteException
+    @Override public void launchPackage(java.lang.String pkgName, github.tornaco.android.thanos.core.app.infinite.ILaunchPackageCallback callback) throws android.os.RemoteException
     {
     }
     @Override public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPackages() throws android.os.RemoteException
@@ -191,17 +191,17 @@ public interface InfiniteZ extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void addPackage(java.lang.String pkg, github.tornaco.android.thanos.core.app.infinite.IAddPackageCallback callback) throws android.os.RemoteException
+      @Override public void addPackage(java.lang.String pkgName, github.tornaco.android.thanos.core.app.infinite.IAddPackageCallback callback) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkg);
+          _data.writeString(pkgName);
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_addPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addPackage(pkg, callback);
+            getDefaultImpl().addPackage(pkgName, callback);
             return;
           }
           _reply.readException();
@@ -211,17 +211,17 @@ public interface InfiniteZ extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void removePackage(java.lang.String pkg, github.tornaco.android.thanos.core.app.infinite.IRemovePackageCallback callback) throws android.os.RemoteException
+      @Override public void removePackage(java.lang.String pkgName, github.tornaco.android.thanos.core.app.infinite.IRemovePackageCallback callback) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkg);
+          _data.writeString(pkgName);
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_removePackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().removePackage(pkg, callback);
+            getDefaultImpl().removePackage(pkgName, callback);
             return;
           }
           _reply.readException();
@@ -231,17 +231,17 @@ public interface InfiniteZ extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void launchPackage(java.lang.String pkg, github.tornaco.android.thanos.core.app.infinite.ILaunchPackageCallback callback) throws android.os.RemoteException
+      @Override public void launchPackage(java.lang.String pkgName, github.tornaco.android.thanos.core.app.infinite.ILaunchPackageCallback callback) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkg);
+          _data.writeString(pkgName);
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_launchPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().launchPackage(pkg, callback);
+            getDefaultImpl().launchPackage(pkgName, callback);
             return;
           }
           _reply.readException();
@@ -298,8 +298,8 @@ public interface InfiniteZ extends android.os.IInterface
   }
   public void setEnabled(boolean enable, github.tornaco.android.thanos.core.app.infinite.IEnableCallback callback) throws android.os.RemoteException;
   public boolean isEnabled() throws android.os.RemoteException;
-  public void addPackage(java.lang.String pkg, github.tornaco.android.thanos.core.app.infinite.IAddPackageCallback callback) throws android.os.RemoteException;
-  public void removePackage(java.lang.String pkg, github.tornaco.android.thanos.core.app.infinite.IRemovePackageCallback callback) throws android.os.RemoteException;
-  public void launchPackage(java.lang.String pkg, github.tornaco.android.thanos.core.app.infinite.ILaunchPackageCallback callback) throws android.os.RemoteException;
+  public void addPackage(java.lang.String pkgName, github.tornaco.android.thanos.core.app.infinite.IAddPackageCallback callback) throws android.os.RemoteException;
+  public void removePackage(java.lang.String pkgName, github.tornaco.android.thanos.core.app.infinite.IRemovePackageCallback callback) throws android.os.RemoteException;
+  public void launchPackage(java.lang.String pkgName, github.tornaco.android.thanos.core.app.infinite.ILaunchPackageCallback callback) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPackages() throws android.os.RemoteException;
 }

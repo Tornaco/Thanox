@@ -60,7 +60,6 @@ public interface IRemovePackageCallback extends android.os.IInterface
         {
           data.enforceInterface(descriptor);
           this.onSuccess();
-          reply.writeNoException();
           return true;
         }
         case TRANSACTION_onError:
@@ -71,7 +70,6 @@ public interface IRemovePackageCallback extends android.os.IInterface
           int _arg1;
           _arg1 = data.readInt();
           this.onError(_arg0, _arg1);
-          reply.writeNoException();
           return true;
         }
         default:
@@ -98,38 +96,32 @@ public interface IRemovePackageCallback extends android.os.IInterface
       @Override public void onSuccess() throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_onSuccess, _data, _reply, 0);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_onSuccess, _data, null, android.os.IBinder.FLAG_ONEWAY);
           if (!_status && getDefaultImpl() != null) {
             getDefaultImpl().onSuccess();
             return;
           }
-          _reply.readException();
         }
         finally {
-          _reply.recycle();
           _data.recycle();
         }
       }
       @Override public void onError(java.lang.String errorMessage, int errorCode) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(errorMessage);
           _data.writeInt(errorCode);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_onError, _data, _reply, 0);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_onError, _data, null, android.os.IBinder.FLAG_ONEWAY);
           if (!_status && getDefaultImpl() != null) {
             getDefaultImpl().onError(errorMessage, errorCode);
             return;
           }
-          _reply.readException();
         }
         finally {
-          _reply.recycle();
           _data.recycle();
         }
       }

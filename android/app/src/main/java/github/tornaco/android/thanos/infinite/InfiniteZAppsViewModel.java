@@ -16,6 +16,7 @@ import java.util.List;
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.app.infinite.RemovePackageCallback;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.util.Rxs;
 import io.reactivex.Observable;
@@ -26,6 +27,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import rx2.android.schedulers.AndroidSchedulers;
+import util.Consumer;
 
 public class InfiniteZAppsViewModel extends AndroidViewModel {
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
@@ -84,5 +86,22 @@ public class InfiniteZAppsViewModel extends AndroidViewModel {
 
     public ObservableArrayList<AppListModel> getListModels() {
         return this.listModels;
+    }
+
+    public void uninstall(AppInfo appInfo, Runnable onSuccess, Consumer<String> onError) {
+        ThanosManager thanosManager = ThanosManager.from(getApplication());
+        thanosManager.getInfiniteZ().removePackage(appInfo.getPkgName(), new RemovePackageCallback() {
+            @Override
+            public void onSuccessMain() {
+                onSuccess.run();
+                loadModels();
+            }
+
+            @Override
+            public void onErrorMain(String errorMessage, int errorCode) {
+                onError.accept(errorMessage);
+                loadModels();
+            }
+        });
     }
 }

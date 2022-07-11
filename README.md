@@ -11,13 +11,13 @@ _____ _   _    _    _   _  _____  __
 [![Download](https://img.shields.io/github/downloads/tornaco/thanox/total)](https://github.com/Tornaco/Thanox/releases)
 [![Size](https://img.shields.io/github/languages/code-size/tornaco/thanox)](https://github.com/Tornaco/Thanox)
 
-## 文档
+## Dökümanlar 
 
-[介绍与教程](https://tornaco.github.io/Thanox/)
+[Giriş ve Eğitim](https://tornaco.github.io/Thanox/)
 
 ## 贡献
 
 ### 国际化
 
-[帮我们翻译](https://tornaco.github.io/Thanox/Translate.html)
+[Çeviriye Katkıda Bulun](https://tornaco.github.io/Thanox/Translate.html)
 

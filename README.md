@@ -15,9 +15,9 @@ _____ _   _    _    _   _  _____  __
 
 [Giriş ve Eğitim](https://tornaco.github.io/Thanox/)
 
-## 贡献
+## Katkıda Bulun 
 
-### 国际化
+### Yerelleştirme 
 
 [Çeviriye Katkıda Bulun](https://tornaco.github.io/Thanox/Translate.html)
 

@@ -1,0 +1,21 @@
+<resources>
+    <string name="module_activity_trampoline_app_name">Activity trampoline</string>
+
+    <string name="module_activity_trampoline_app_not_installed">Yüklü değil</string>
+
+    <string name="module_activity_trampoline_edit_dialog_title">Düzenle</string>
+    <string name="module_activity_trampoline_add_dialog_title">Yeni</string>
+    <string name="module_activity_trampoline_add_dialog_hint_from">Orijinal Etkinlik</string>
+    <string name="module_activity_trampoline_add_dialog_hint_to">Aktiviteye Değiştir</string>
+    <string name="module_activity_trampoline_add_dialog_delete">Sil</string>
+
+    <string name="module_activity_trampoline_add_empty_component">Boş içerik</string>
+    <string name="module_activity_trampoline_add_invalid_from_component">Orijinal etkinlik adı hatası</string>
+    <string name="module_activity_trampoline_add_invalid_to_component">Değiştirme etkinliği adı hatası</string>
+
+    <string name="module_activity_trampoline_title_pull_from_server">Biraz kural formu hizmeti alın</string>
+    <string name="module_activity_trampoline_title_export_comp_replacements">Kurallarımı dışa aktar</string>
+    <string name="module_activity_trampoline_title_export_comp_replacement_item">Bu kuralı dışa aktarın</string>
+    <string name="module_activity_trampoline_title_import_comp_replacements">Kuralları içe aktar</string>
+
+</resources>

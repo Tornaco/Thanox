@@ -104,6 +104,16 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    public List<ProcessRecord> getRunningAppProcessForPackage(String pkgName) {
+        return server.getRunningAppProcessForPackage(Pkg.systemUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public List<ProcessRecord> getRunningAppProcessForPackage(String pkgName, int userId) {
+        return server.getRunningAppProcessForPackage(new Pkg(pkgName, userId));
+    }
+
+    @SneakyThrows
     public boolean isPackageRunning(String pkgName) {
         return server.isPackageRunning(pkgName);
     }

@@ -67,6 +67,8 @@ class StartResult : Parcelable {
         @JvmField
         val BLOCKED_STRUGGLE = StartResult(false, "BLOCKED_STRUGGLE")
         @JvmField
+        val BLOCKED_PROCESS_IS_KILLED = StartResult(false, "BLOCKED_PROCESS_IS_KILLED")
+        @JvmField
         val BLOCKED_IN_BLOCK_LIST = StartResult(false, "BLOCKED_IN_BLOCK_LIST")
         @JvmField
         val BLOCKED_COMPONENT_IS_DISABLED = StartResult(false, "BLOCKED_COMPONENT_IS_DISABLED")

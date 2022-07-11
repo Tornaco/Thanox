@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Process trim",
+    "description": "应用回到后台时，对该应用的非必要进程进行裁剪，停止来自[process_trim_list]的进程。\nTrim app process while app become background, you need to create a global val with name [process_trim_list]",
+    "priority": 1,
+    "condition": "frontPkgChanged",
+    "actions": [
+      "foreach(process : thanos.activityManager.getRunningAppProcessForPackage(from)) { log.log(process.processName); if (globalVarOf$process_trim_list.contains(process.processName)) { thanos.activityManager.killProcessByName(process.processName); }}"
+    ]
+  }
+]

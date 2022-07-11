@@ -36,7 +36,7 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
     }
 
     fun stopProcess(state: RunningProcessState): Boolean {
-        return thanox.activityManager.killProcess(state.process.pid.toLong()).also {
+        return (thanox.activityManager.killProcessByName(state.process.processName) > 0).also {
             if (it) _appStateChanged = true
         }
     }

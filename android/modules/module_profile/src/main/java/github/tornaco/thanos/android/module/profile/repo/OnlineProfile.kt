@@ -21,19 +21,21 @@ import androidx.annotation.Keep
 
 
 /*
-*
 * {
-  "author": "Tornaco",
-  "version": 1,
-  "profile": {
-    "name": "The first profile",
-    "description": "Contribute online profile via github.",
-    "priority": 1,
-    "condition": "frontPkgChanged",
-    "actions": [
-      ""
-    ]
-  }
+    "author": "Tornaco",
+    "version": 1,
+    "tags": [
+        "app_opt"
+    ],
+    "profile": {
+        "name": "The first profile",
+        "description": "Contribute online profile via github.",
+        "priority": 1,
+        "condition": "frontPkgChanged",
+        "actions": [
+            "ui.showShortToast(\"frontPkgChanged\");"
+        ]
+    }
 }
 * */
 
@@ -41,6 +43,7 @@ import androidx.annotation.Keep
 data class OnlineProfile(
     val author: String,
     val version: Int,
+    val tags: List<String>,
     val profile: Profile
 )
 

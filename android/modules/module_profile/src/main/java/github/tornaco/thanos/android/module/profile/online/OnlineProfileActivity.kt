@@ -25,7 +25,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Download
-import androidx.compose.material.icons.filled.People
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -146,13 +146,13 @@ private fun ProfileList(
     ) {
 
         items(state.files) {
-            ExampleItem(it, import)
+            ProfileItem(it, import)
         }
     }
 }
 
 @Composable
-private fun ExampleItem(profile: OnlineProfile, import: (OnlineProfile) -> Unit) {
+private fun ProfileItem(profile: OnlineProfile, import: (OnlineProfile) -> Unit) {
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
     val activity = LocalContext.current.requireActivity()
     Box(
@@ -185,7 +185,7 @@ private fun ExampleItem(profile: OnlineProfile, import: (OnlineProfile) -> Unit)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         modifier = Modifier.size(16.dp),
-                        imageVector = Icons.Filled.People,
+                        imageVector = Icons.Filled.Person,
                         contentDescription = "Author"
                     )
                     TinySpacer()
@@ -213,6 +213,7 @@ private fun ExampleItem(profile: OnlineProfile, import: (OnlineProfile) -> Unit)
                 OutlinedButton(
                     modifier = Modifier.align(Alignment.CenterEnd),
                     onClick = {
+                        import(profile)
                     }) {
                     Icon(
                         imageVector = Icons.Filled.Download,

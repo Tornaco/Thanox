@@ -22,9 +22,12 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elvishew.xlog.XLog
+import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.profile.ProfileManager
+import github.tornaco.android.thanos.core.profile.RuleAddCallback
 import github.tornaco.thanos.android.module.profile.repo.OnlineProfile
 import github.tornaco.thanos.android.module.profile.repo.OnlineProfileRepoImpl
 import kotlinx.coroutines.Dispatchers
@@ -60,6 +63,7 @@ class OnlineProfileViewModel @Inject constructor(
     val events = MutableSharedFlow<Event>()
 
     private val thanox by lazy { ThanosManager.from(context) }
+    private val gson by lazy { Gson() }
 
     fun loadOnlineProfiles() {
         _state.value = _state.value.copy(isLoading = true)
@@ -75,8 +79,35 @@ class OnlineProfileViewModel @Inject constructor(
         }
     }
 
-    fun import(example: OnlineProfile) {
+    fun import(profile: OnlineProfile) {
+        val scope = viewModelScope
+        viewModelScope.launch {
+            val ruleByName = thanox.profileManager.getRuleByName(profile.profile.name)
+            if (ruleByName != null) {
+                events.emit(Event.ImportFailRuleWithSameNameAlreadyExists(profile.profile.name))
+            } else {
+                val ruleJsonString = gson.toJson(listOf(profile.profile))
+                thanox.profileManager.addRuleIfNotExists(
+                    ruleJsonString,
+                    object : RuleAddCallback() {
+                        override fun onRuleAddFail(errorCode: Int, errorMessage: String?) {
+                            super.onRuleAddFail(errorCode, errorMessage)
+                            scope.launch {
+                                events.emit(Event.ImportFail(errorMessage ?: "$errorCode"))
+                            }
+                        }
 
+                        override fun onRuleAddSuccess() {
+                            super.onRuleAddSuccess()
+                            scope.launch {
+                                events.emit(Event.ImportSuccess(profile.profile.name))
+                            }
+                        }
+                    },
+                    ProfileManager.RULE_FORMAT_JSON
+                )
+            }
+        }
     }
 
     fun refresh() {

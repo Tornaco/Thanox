@@ -90,7 +90,7 @@ class ProfileExampleViewModel @Inject constructor(@ApplicationContext private va
 
     fun import(example: Example) {
         val scope = viewModelScope
-        scope.launch {
+        viewModelScope.launch {
             val ruleByName = thanox.profileManager.getRuleByName(example.ruleInfo.name)
             if (ruleByName != null) {
                 events.emit(Event.ImportFailRuleWithSameNameAlreadyExists(example.ruleInfo.name))

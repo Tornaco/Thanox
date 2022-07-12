@@ -15,7 +15,7 @@
  *
  */
 
-package github.tornaco.android.thanos.module.compose.common
+package github.tornaco.android.thanos.module.compose.common.theme
 
 import android.content.res.Resources
 import android.content.res.TypedArray

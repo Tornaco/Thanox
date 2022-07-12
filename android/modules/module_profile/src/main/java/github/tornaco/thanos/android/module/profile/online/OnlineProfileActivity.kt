@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Tag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -44,15 +45,16 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
-import github.tornaco.android.thanos.module.compose.common.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
+import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.android.module.profile.R
-import github.tornaco.thanos.android.module.profile.repo.OnlineProfile
+import github.tornaco.thanos.android.module.profile.RuleEditorActivity
 
 @AndroidEntryPoint
 class OnlineProfileActivity : ComposeThemeActivity() {
@@ -137,7 +139,7 @@ class OnlineProfileActivity : ComposeThemeActivity() {
 private fun ProfileList(
     contentPadding: PaddingValues,
     state: OnlineProfileState,
-    import: (OnlineProfile) -> Unit
+    import: (OnlineProfileItem) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -152,9 +154,10 @@ private fun ProfileList(
 }
 
 @Composable
-private fun ProfileItem(profile: OnlineProfile, import: (OnlineProfile) -> Unit) {
-    val cardBgColor = getColorAttribute(R.attr.appCardBackground)
+private fun ProfileItem(profile: OnlineProfileItem, import: (OnlineProfileItem) -> Unit) {
     val activity = LocalContext.current.requireActivity()
+    val cardBgColor = getColorAttribute(R.attr.appCardBackground)
+    val secondaryTextColor = Color(0xFF757575)
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -162,6 +165,12 @@ private fun ProfileItem(profile: OnlineProfile, import: (OnlineProfile) -> Unit)
             .clip(RoundedCornerShape(12.dp))
             .background(color = Color(cardBgColor))
             .clickableWithRipple {
+                RuleEditorActivity.start(
+                    activity,
+                    profile.ruleInfo,
+                    ProfileManager.RULE_FORMAT_JSON,
+                    true
+                )
             }
             .padding(16.dp)
     ) {
@@ -170,38 +179,46 @@ private fun ProfileItem(profile: OnlineProfile, import: (OnlineProfile) -> Unit)
                 .fillMaxWidth()
         ) {
             Text(
-                text = profile.profile.name, style = MaterialTheme.typography.titleLarge.copy(
+                text = profile.ruleInfo.name, style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = W700
                 )
             )
             SmallSpacer()
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        modifier = Modifier.size(16.dp),
-                        imageVector = Icons.Filled.Person,
-                        contentDescription = "Author"
-                    )
-                    TinySpacer()
-                    Text(
-                        text = profile.author,
-                        style = MaterialTheme.typography.labelLarge
-                    )
-                }
-
-
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    modifier = Modifier.size(16.dp),
+                    imageVector = Icons.Filled.Person,
+                    contentDescription = "Author",
+                    tint = secondaryTextColor
+                )
+                TinySpacer()
+                Text(
+                    text = profile.onlineProfile.author,
+                    color = secondaryTextColor,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+            SmallSpacer()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    modifier = Modifier.size(16.dp),
+                    imageVector = Icons.Filled.Tag,
+                    contentDescription = "Version",
+                    tint = secondaryTextColor
+                )
+                TinySpacer()
+                Text(
+                    text = "v${profile.onlineProfile.version}",
+                    color = secondaryTextColor,
+                    style = MaterialTheme.typography.labelLarge,
+                )
             }
 
             StandardSpacer()
             Text(
-                text = profile.profile.description,
-                style = MaterialTheme.typography.labelMedium
+                text = profile.ruleInfo.description,
+                style = MaterialTheme.typography.labelMedium,
             )
 
             StandardSpacer()

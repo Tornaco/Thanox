@@ -22,25 +22,34 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elvishew.xlog.XLog
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.core.profile.RuleAddCallback
+import github.tornaco.android.thanos.core.profile.RuleInfo
 import github.tornaco.thanos.android.module.profile.repo.OnlineProfile
 import github.tornaco.thanos.android.module.profile.repo.OnlineProfileRepoImpl
+import github.tornaco.thanos.android.module.profile.repo.Profile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import util.JsonFormatter
 import javax.inject.Inject
 
 data class OnlineProfileState(
     val isLoading: Boolean = true,
-    val files: List<OnlineProfile> = emptyList()
+    val files: List<OnlineProfileItem> = emptyList()
+)
+
+data class OnlineProfileItem(
+    val onlineProfile: OnlineProfile,
+    val ruleInfo: RuleInfo,
+    val rawProfileJson: String
 )
 
 sealed interface Event {
@@ -63,7 +72,9 @@ class OnlineProfileViewModel @Inject constructor(
     val events = MutableSharedFlow<Event>()
 
     private val thanox by lazy { ThanosManager.from(context) }
-    private val gson by lazy { Gson() }
+    private val gson by lazy {
+        GsonBuilder().registerTypeAdapter(Profile::class.java, ProfileJsonSerializer()).create()
+    }
 
     fun loadOnlineProfiles() {
         _state.value = _state.value.copy(isLoading = true)
@@ -71,7 +82,22 @@ class OnlineProfileViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 kotlin.runCatching {
                     val files = repo.getProfiles()
-                    _state.value = _state.value.copy(files = files, isLoading = false)
+                    val rules = files.mapNotNull { op ->
+                        kotlin.runCatching {
+                            val jsonString =
+                                JsonFormatter.format(gson.toJson(listOf(op.profile)))
+                            thanox.profileManager.parseRuleOrNull(
+                                jsonString,
+                                ProfileManager.RULE_FORMAT_JSON
+                            )?.let { ruleInfo ->
+                                OnlineProfileItem(op, ruleInfo, jsonString)
+                            }
+                        }.getOrElse {
+                            XLog.e("Parse one profile error", it)
+                            null
+                        }
+                    }
+                    _state.value = _state.value.copy(files = rules, isLoading = false)
                 }.onFailure {
                     XLog.e("loadOnlineProfiles error", it)
                 }
@@ -79,16 +105,15 @@ class OnlineProfileViewModel @Inject constructor(
         }
     }
 
-    fun import(profile: OnlineProfile) {
+    fun import(profile: OnlineProfileItem) {
         val scope = viewModelScope
         viewModelScope.launch {
-            val ruleByName = thanox.profileManager.getRuleByName(profile.profile.name)
+            val ruleByName = thanox.profileManager.getRuleByName(profile.ruleInfo.name)
             if (ruleByName != null) {
-                events.emit(Event.ImportFailRuleWithSameNameAlreadyExists(profile.profile.name))
+                events.emit(Event.ImportFailRuleWithSameNameAlreadyExists(profile.ruleInfo.name))
             } else {
-                val ruleJsonString = gson.toJson(listOf(profile.profile))
                 thanox.profileManager.addRuleIfNotExists(
-                    ruleJsonString,
+                    profile.rawProfileJson,
                     object : RuleAddCallback() {
                         override fun onRuleAddFail(errorCode: Int, errorMessage: String?) {
                             super.onRuleAddFail(errorCode, errorMessage)
@@ -100,7 +125,7 @@ class OnlineProfileViewModel @Inject constructor(
                         override fun onRuleAddSuccess() {
                             super.onRuleAddSuccess()
                             scope.launch {
-                                events.emit(Event.ImportSuccess(profile.profile.name))
+                                events.emit(Event.ImportSuccess(profile.ruleInfo.name))
                             }
                         }
                     },

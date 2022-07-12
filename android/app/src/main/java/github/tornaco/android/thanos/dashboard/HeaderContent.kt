@@ -35,7 +35,7 @@ import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.module.compose.common.*
+import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import kotlinx.coroutines.delay
 

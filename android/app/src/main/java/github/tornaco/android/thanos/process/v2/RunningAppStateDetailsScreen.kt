@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material.icons.outlined.LabelImportant
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -45,7 +44,6 @@ import dev.enro.core.result.closeWithResult
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.apps.AppDetailsActivity
 import github.tornaco.android.thanos.core.pm.AppInfo
-import github.tornaco.android.thanos.module.compose.common.*
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.*

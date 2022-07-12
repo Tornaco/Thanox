@@ -33,6 +33,7 @@
     <string name="module_profile_rule_wiki">指南</string>
     <string name="module_profile_rule_impor_from_file">选择文件导入</string>
     <string name="module_profile_rule_impor_example">导入示例</string>
+    <string name="module_profile_rule_online">查看在线情景</string>
 
     <string name="module_profile_rule_edit">编辑</string>
     <string name="module_profile_rule_new">新建</string>

@@ -40,9 +40,9 @@ import dev.enro.core.close
 import dev.enro.core.compose.navigationHandle
 import dev.enro.core.result.closeWithResult
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
-import github.tornaco.android.thanos.module.compose.common.LargeSpacer
-import github.tornaco.android.thanos.module.compose.common.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.TinySpacer
+import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloatingActionButton
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold

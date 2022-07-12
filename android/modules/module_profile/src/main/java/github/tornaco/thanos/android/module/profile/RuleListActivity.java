@@ -39,6 +39,7 @@ import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileRuleListActivityBinding;
 import github.tornaco.thanos.android.module.profile.example.ProfileExampleActivity;
+import github.tornaco.thanos.android.module.profile.online.OnlineProfileActivity;
 
 @RuntimePermissions
 public class RuleListActivity extends ThemeActivity implements RuleItemClickListener {
@@ -163,6 +164,11 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
         if (R.id.action_import_examples == item.getItemId()) {
             ProfileExampleActivity.Starter.INSTANCE.start(thisActivity());
+            return true;
+        }
+
+        if (R.id.action_online == item.getItemId()) {
+            OnlineProfileActivity.Starter.INSTANCE.start(thisActivity());
             return true;
         }
 

@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import github.tornaco.android.thanos.module.compose.common.LottieLoadingView
+import github.tornaco.android.thanos.module.compose.common.widget.LottieLoadingView
 
 @Composable
 fun OnboardingPagerItem(item: Onboard) {

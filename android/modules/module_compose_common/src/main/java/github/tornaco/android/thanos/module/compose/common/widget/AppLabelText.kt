@@ -15,7 +15,7 @@
  *
  */
 
-package github.tornaco.android.thanos.module.compose.common
+package github.tornaco.android.thanos.module.compose.common.widget
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

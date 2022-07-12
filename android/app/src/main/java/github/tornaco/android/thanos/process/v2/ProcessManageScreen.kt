@@ -51,9 +51,9 @@ import dev.enro.core.compose.registerForNavigationResult
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.apps.AppDetailsActivity
 import github.tornaco.android.thanos.core.pm.AppInfo
-import github.tornaco.android.thanos.module.compose.common.AppLabelText
-import github.tornaco.android.thanos.module.compose.common.SmallSpacer
-import github.tornaco.android.thanos.module.compose.common.clickableWithRipple
+import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
+import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults

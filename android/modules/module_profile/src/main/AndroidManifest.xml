@@ -40,5 +40,8 @@
         <activity
             android:name=".example.ProfileExampleActivity"
             android:exported="false" />
+        <activity
+            android:name=".online.OnlineProfileActivity"
+            android:exported="false" />
     </application>
 </manifest>

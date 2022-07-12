@@ -15,7 +15,7 @@
  *
  */
 
-package github.tornaco.thanos.android.module.profile.example
+package github.tornaco.thanos.android.module.profile.online
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -25,6 +25,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.People
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -36,37 +37,48 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.module.compose.common.*
+import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.getColorAttribute
+import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
-import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
+import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.android.module.profile.R
-import github.tornaco.thanos.android.module.profile.RuleEditorActivity
+import github.tornaco.thanos.android.module.profile.repo.OnlineProfile
 
 @AndroidEntryPoint
-class ProfileExampleActivity : ComposeThemeActivity() {
+class OnlineProfileActivity : ComposeThemeActivity() {
 
     object Starter {
         fun start(context: Context?) {
-            ActivityUtils.startActivity(context, ProfileExampleActivity::class.java)
+            ActivityUtils.startActivity(context, OnlineProfileActivity::class.java)
         }
+    }
+
+    override fun isADVF(): Boolean {
+        return true
+    }
+
+    override fun isF(): Boolean {
+        return true
     }
 
     @Composable
     override fun Content() {
-        val viewModel = hiltViewModel<ProfileExampleViewModel>()
+        val viewModel = hiltViewModel<OnlineProfileViewModel>()
         val state by viewModel.state.collectAsState()
         val context = LocalContext.current
 
         SideEffect {
-            viewModel.loadAssetExamples()
+            viewModel.loadOnlineProfiles()
         }
 
         LaunchedEffect(viewModel) {
@@ -87,7 +99,7 @@ class ProfileExampleActivity : ComposeThemeActivity() {
 
         ThanoxSmallAppBarScaffold(title = {
             Text(
-                text = stringResource(id = R.string.module_profile_rule_impor_example),
+                text = stringResource(id = R.string.module_profile_rule_online),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
@@ -95,29 +107,52 @@ class ProfileExampleActivity : ComposeThemeActivity() {
             actions = {
 
             }) { contentPadding ->
-            ExampleList(contentPadding, state) {
-                viewModel.import(it)
+
+            SwipeRefresh(
+                modifier = Modifier
+                    .fillMaxSize(),
+                state = rememberSwipeRefreshState(state.isLoading),
+                onRefresh = { viewModel.refresh() },
+                indicatorPadding = contentPadding,
+                clipIndicatorToPadding = false,
+                indicator = { state, refreshTriggerDistance ->
+                    SwipeRefreshIndicator(
+                        state = state,
+                        refreshTriggerDistance = refreshTriggerDistance,
+                        scale = true,
+                        arrowEnabled = false,
+                        contentColor = MaterialTheme.colorScheme.primary
+                    )
+                }
+            ) {
+                ProfileList(contentPadding, state) {
+                    viewModel.import(it)
+                }
             }
         }
     }
 }
 
 @Composable
-fun ExampleList(contentPadding: PaddingValues, state: ExampleState, import: (Example) -> Unit) {
+private fun ProfileList(
+    contentPadding: PaddingValues,
+    state: OnlineProfileState,
+    import: (OnlineProfile) -> Unit
+) {
     LazyColumn(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .padding(contentPadding)
     ) {
 
-        items(state.examples) {
+        items(state.files) {
             ExampleItem(it, import)
         }
     }
 }
 
 @Composable
-private fun ExampleItem(example: Example, import: (Example) -> Unit) {
+private fun ExampleItem(profile: OnlineProfile, import: (OnlineProfile) -> Unit) {
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
     val activity = LocalContext.current.requireActivity()
     Box(
@@ -127,7 +162,6 @@ private fun ExampleItem(example: Example, import: (Example) -> Unit) {
             .clip(RoundedCornerShape(12.dp))
             .background(color = Color(cardBgColor))
             .clickableWithRipple {
-                RuleEditorActivity.start(activity, example.ruleInfo, example.ruleInfo.format, true)
             }
             .padding(16.dp)
     ) {
@@ -135,10 +169,38 @@ private fun ExampleItem(example: Example, import: (Example) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Text(text = example.ruleInfo.name, style = MaterialTheme.typography.titleMedium)
-            SmallSpacer()
             Text(
-                text = example.ruleInfo.description,
+                text = profile.profile.name, style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = W700
+                )
+            )
+            SmallSpacer()
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        modifier = Modifier.size(16.dp),
+                        imageVector = Icons.Filled.People,
+                        contentDescription = "Author"
+                    )
+                    TinySpacer()
+                    Text(
+                        text = profile.author,
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
+
+
+            }
+
+            StandardSpacer()
+            Text(
+                text = profile.profile.description,
                 style = MaterialTheme.typography.labelMedium
             )
 
@@ -151,7 +213,6 @@ private fun ExampleItem(example: Example, import: (Example) -> Unit) {
                 OutlinedButton(
                     modifier = Modifier.align(Alignment.CenterEnd),
                     onClick = {
-                        import(example)
                     }) {
                     Icon(
                         imageVector = Icons.Filled.Download,

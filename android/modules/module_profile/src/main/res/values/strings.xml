@@ -33,6 +33,7 @@
     <string name="module_profile_rule_wiki">Wiki</string>
     <string name="module_profile_rule_impor_from_file">Import from file</string>
     <string name="module_profile_rule_impor_example">Import examples</string>
+    <string name="module_profile_rule_online">View Online Profiles</string>
 
     <string name="module_profile_rule_edit">Edit</string>
     <string name="module_profile_rule_new">New</string>

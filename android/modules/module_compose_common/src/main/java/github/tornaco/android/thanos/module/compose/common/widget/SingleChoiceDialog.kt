@@ -29,8 +29,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import github.tornaco.android.thanos.module.compose.common.TinySpacer
-import github.tornaco.android.thanos.module.compose.common.clickableWithRipple
 
 
 data class SingleChoiceItem(val id: String, val icon: ImageVector? = null, val label: String)

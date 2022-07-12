@@ -15,7 +15,7 @@
  *
  */
 
-package github.tornaco.android.thanos.module.compose.common
+package github.tornaco.android.thanos.module.compose.common.widget
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size

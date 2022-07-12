@@ -49,9 +49,9 @@ import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.util.ClipboardUtils
-import github.tornaco.android.thanos.module.compose.common.SmallSpacer
-import github.tornaco.android.thanos.module.compose.common.TinySpacer
-import github.tornaco.android.thanos.module.compose.common.clickableWithRipple
+import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon

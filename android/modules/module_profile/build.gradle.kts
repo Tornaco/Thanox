@@ -89,6 +89,13 @@ dependencies {
     compileOnly(Libs.Others.lombok)
     annotationProcessor(Libs.Others.lombok)
 
+    implementation(Libs.Others.retrofit)
+    implementation(Libs.Others.retrofitConverterGson)
+    implementation(Libs.Others.retrofitAdapterRxJava2)
+
+    releaseImplementation(Libs.Others.chuckerNoop)
+    debugImplementation(Libs.Others.chucker)
+
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_compose_common"))
     implementation(project(":android_framework:base"))

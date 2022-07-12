@@ -29,7 +29,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import github.tornaco.android.thanos.module.compose.common.SmallSpacer
 
 data class MenuItem(val id: String, val title: String, @DrawableRes val iconRes: Int = 0)
 

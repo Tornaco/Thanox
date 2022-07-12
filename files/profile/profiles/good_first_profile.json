@@ -1,0 +1,13 @@
+{
+  "author": "Tornaco",
+  "version": 1,
+  "profile": {
+    "name": "The first profile",
+    "description": "Contribute online profile via github.",
+    "priority": 1,
+    "condition": "frontPkgChanged",
+    "actions": [
+      ""
+    ]
+  }
+}

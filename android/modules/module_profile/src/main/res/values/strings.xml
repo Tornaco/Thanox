@@ -14,6 +14,7 @@
     <string name="module_profile_pref_title_rule_engine_su">su API</string>
     <string name="module_profile_pref_summary_rule_engine_su">Enable su API support for Thanox profile. please click Allow in the pop-up super permission grant request. If no request is received, please manually turn on the super user permission. \nsu command will be executed as Thanox application. \nPlease allow Thanox app to start in background</string>
     <string name="module_profile_should_enable_su">This profile may not work since <b>su API</b> support not enabled, please go to Engine Settings to enable it</string>
+    <string name="module_profile_should_enable_push">This profile may not work since <b>Push Message Engine</b> not enabled, please go to Engine Settings to enable it</string>
 
     <string name="module_profile_pref_title_rule_engine_shortcut">Create shortcut</string>
     <string name="module_profile_pref_summary_rule_engine_shortcut">Create a launcher shortcut, when this shortcut launched, thanox will publish a fact with the shortcut fact value</string>

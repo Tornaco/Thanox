@@ -288,6 +288,11 @@ public class RuleListViewModel extends AndroidViewModel {
             return new RuleUiItem(info, warn);
         }
 
+        if (info.getRuleString().contains("fcmPushMessageArrived") && !thanosManager.getProfileManager().isProfileEnginePushEnabled()) {
+            String warn = getApplication().getString(R.string.module_profile_should_enable_push);
+            return new RuleUiItem(info, warn);
+        }
+
         return new RuleUiItem(info, null);
     }
 }

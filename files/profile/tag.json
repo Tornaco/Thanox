@@ -1,0 +1,21 @@
+{
+    "colors": {
+        "green": "#43A047",
+        "yellow": "#F57C00",
+        "red": "#FF5252"
+    },
+    "tags": {
+        "system_opt": {
+            "color": "yellow",
+            "zh_CN": "系统优化",
+            "zh": "系统优化",
+            "en": "System opt"
+        },
+        "app_opt": {
+            "color": "green",
+            "zh_CN": "App优化",
+            "zh": "App优化",
+            "en": "App opt"
+        },
+    }
+}

@@ -19,6 +19,7 @@
     <string name="service_op_label_location">獲取位置信息</string>
     <string name="service_op_label_read_clipboard">读取剪贴板</string>
     <string name="service_op_label_write_clipboard">修改剪贴板</string>
+    <string name="service_op_remind_prefix">隐私提醒：</string>
 
     <string name="service_toast_current_component_copied_to_clipboard">內容已復製到剪貼板</string>
 

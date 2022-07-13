@@ -41,6 +41,7 @@ abstract class Res {
         const val STRING_SERVICE_OP_LABEL_LOCATION = "service_op_label_location"
         const val STRING_SERVICE_OP_LABEL_READ_CLIPBOARD = "service_op_label_read_clipboard"
         const val STRING_SERVICE_OP_LABEL_WRITE_CLIPBOARD = "service_op_label_write_clipboard"
+        const val STRING_SERVICE_OP_REMIND_PREFIX = "service_op_remind_prefix"
 
         const val STRING_BG_TASKS_CLEAN_COMPLETE = "service_notification_bg_tasks_clean_complete"
 

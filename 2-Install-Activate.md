@@ -39,7 +39,7 @@ Thanox中大部分的功能都是在系统进程中完成的，因此Thanox会�
 ### Magisk模式(实验)
 
 1. 你的设备必须已经正确安装了**Magisk框架**
-2. 你的设备必须已经正确安装了**riru**框架
+2. 你的设备必须已经正确安装了**Riru框架**（Magisk v23+）或者启用了**Zygisk模式**（Magisk v24+）
 3. 安装最新Thanox 应用
 4. 点击Thaox设置--关于--补丁状态，导出magisk补丁；或者直接将thanox apk重命名为.zip格式即为magisk补丁
 5. 刷入上个步骤获取到的magisk补丁

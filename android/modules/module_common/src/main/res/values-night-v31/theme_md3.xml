@@ -4,8 +4,8 @@
     <style name="ThemeMD3.App">
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
-        <item name="android:windowBackground">@color/md_black</item>
-        <item name="appCardBackground">@color/md_dark</item>
+        <item name="android:windowBackground">?colorSurface</item>
+        <item name="appCardBackground">#72101010</item>
         <item name="switchBarBackground">@color/md_grey_800</item>
         <item name="progressTrackColor">@color/md_grey_800</item>
     </style>

@@ -16,7 +16,7 @@
         <item name="switchPreferenceCompatStyle">@style/SwitchPrefTheme</item>
         <item name="preferenceFragmentCompatStyle">@style/PrefFragmentCompatThemeCommon</item>
 
-        <item name="appCardBackground">@color/md_grey_100</item>
+        <item name="appCardBackground">#72eeeeee</item>
         <item name="progressTrackColor">@color/md_grey_300</item>
         <item name="progressColor">?colorPrimary</item>
         <item name="switchBarBackground">?colorPrimaryContainer</item>
@@ -24,7 +24,7 @@
     </style>
 
     <style name="ThemeMD3.App">
-        <item name="android:windowBackground">@color/md_white</item>
+        <item name="android:windowBackground">?colorSurface</item>
     </style>
 
     <style name="ThemeMD3.App.NoActionBar">

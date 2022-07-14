@@ -24,12 +24,12 @@ import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 
 @AndroidEntryPoint
-class WakeLockRemoverActivity : ComposeThemeActivity() {
+class WakeLockBlockerActivity : ComposeThemeActivity() {
 
     object Starter {
         @JvmStatic
         fun start(context: Context?) {
-            ActivityUtils.startActivity(context, WakeLockRemoverActivity::class.java)
+            ActivityUtils.startActivity(context, WakeLockBlockerActivity::class.java)
         }
     }
 
@@ -39,7 +39,7 @@ class WakeLockRemoverActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
-        WakeLockRemoverScreen {
+        WakeLockBlockerScreen {
             finish()
         }
     }

@@ -404,7 +404,7 @@ public class NavViewModel extends AndroidViewModel {
                                         Tile.builder()
                                                 .id(PrebuiltFeatureIds.ID_WAKELOCK_REMOVER)
                                                 .iconRes(R.drawable.ic_nav_wakelock_remover)
-                                                .title(resources.getString(R.string.feature_title_wakelock_remover))
+                                                .title(resources.getString(R.string.feature_title_wakelock_blocker))
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_WAKELOCK_REMOVER)
                                                 .themeColor(R.color.nav_icon_wakelock_remover)
                                                 .disabled(!BuildProp.THANOS_BUILD_DEBUG)

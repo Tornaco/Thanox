@@ -128,7 +128,7 @@
     <string name="feature_title_recent_task_blur">卡片模糊</string>
     <string name="feature_summary_recent_task_blur">給最近任務卡片加上模糊效果</string>
 
-    <string name="feature_title_wakelock_remover">喚醒鎖攔截</string>
+    <string name="feature_title_wakelock_blocker">喚醒鎖攔截</string>
     <string name="wakelock_state_holding">持有中</string>
 
     <string name="feature_title_app_lock">應用鎖</string>

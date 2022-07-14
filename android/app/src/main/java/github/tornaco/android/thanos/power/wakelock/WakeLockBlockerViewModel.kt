@@ -23,7 +23,7 @@ import java.text.Collator
 import java.util.*
 import javax.inject.Inject
 
-data class RemoverState(
+data class BlockerState(
     val isLoading: Boolean,
     val packageStates: List<PackageState>,
     val appFilterItems: List<AppSetFilterItem>,
@@ -34,11 +34,11 @@ data class PackageState(val appInfo: AppInfo, val wakeLocks: List<SeenWakeLock>)
 
 @SuppressLint("StaticFieldLeak")
 @HiltViewModel
-class WakeLockRemoverViewModel @Inject constructor(@ApplicationContext private val context: Context) :
+class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private val context: Context) :
     LifeCycleAwareViewModel() {
     private val _state =
         MutableStateFlow(
-            RemoverState(
+            BlockerState(
                 isLoading = true, packageStates = emptyList(),
                 appFilterItems = emptyList(),
                 selectedAppSetFilterItem = null

@@ -50,10 +50,10 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.*
 
 @Composable
-fun WakeLockRemoverScreen(onBackPressed: () -> Unit) {
+fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
     val context = LocalContext.current
     val viewModel =
-        hiltViewModel<WakeLockRemoverViewModel>(LocalContext.current.requireActivity())
+        hiltViewModel<WakeLockBlockerViewModel>(LocalContext.current.requireActivity())
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     viewModel.bindLifecycle(lifecycle)
     val state by viewModel.state.collectAsState()
@@ -65,7 +65,7 @@ fun WakeLockRemoverScreen(onBackPressed: () -> Unit) {
     ThanoxSmallAppBarScaffold(
         title = {
             Text(
-                stringResource(id = R.string.feature_title_wakelock_remover),
+                stringResource(id = R.string.feature_title_wakelock_blocker),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
@@ -104,7 +104,7 @@ fun WakeLockRemoverScreen(onBackPressed: () -> Unit) {
 @Composable
 private fun WakeLockList(
     contentPadding: PaddingValues,
-    state: RemoverState,
+    state: BlockerState,
     onFilterItemSelected: (AppSetFilterItem) -> Unit
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
@@ -227,7 +227,7 @@ fun WakeLockListItem(packageState: PackageState) {
 
 @Composable
 private fun AppFilterDropDown(
-    state: RemoverState,
+    state: BlockerState,
     onFilterItemSelected: (AppSetFilterItem) -> Unit
 ) {
     FilterDropDown(

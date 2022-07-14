@@ -37,7 +37,7 @@ import github.tornaco.android.thanos.infinite.InfiniteZActivity;
 import github.tornaco.android.thanos.notification.ScreenOnNotificationActivity;
 import github.tornaco.android.thanos.power.SmartFreezeActivity;
 import github.tornaco.android.thanos.power.SmartStandbyV2Activity;
-import github.tornaco.android.thanos.power.wakelock.WakeLockRemoverActivity;
+import github.tornaco.android.thanos.power.wakelock.WakeLockBlockerActivity;
 import github.tornaco.android.thanos.privacy.DataCheatActivity;
 import github.tornaco.android.thanos.start.BackgroundRestrictActivity;
 import github.tornaco.android.thanos.start.StartRestrictActivity;
@@ -146,7 +146,7 @@ public class PrebuiltFeatureLauncher {
                 DonateIntroDialogKt.showDonateIntroDialog(context);
                 return;
             }
-            WakeLockRemoverActivity.Starter.start(context);
+            WakeLockBlockerActivity.Starter.start(context);
         }
     }
 

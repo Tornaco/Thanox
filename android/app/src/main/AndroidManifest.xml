@@ -216,7 +216,7 @@
             android:name=".settings.ThemeAttrPreviewActivity"
             android:exported="false" />
         <activity
-            android:name=".power.wakelock.WakeLockRemoverActivity"
+            android:name=".power.wakelock.WakeLockBlockerActivity"
             android:exported="false" />
         <activity
             android:name=".settings.access.SettingsAccessRecordViewerActivity"

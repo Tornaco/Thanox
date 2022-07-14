@@ -15,6 +15,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
+data class RunningAppDetailState(
+    val cpuState: CpuUsageStatsState
+)
+
 @SuppressLint("StaticFieldLeak")
 @HiltViewModel
 class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private val context: Context) :
@@ -23,7 +27,7 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
 
     private val _state =
         MutableStateFlow(
-            CpuUsageStatsState(emptyMap())
+            RunningAppDetailState(CpuUsageStatsState(emptyMap()))
         )
     val state = _state.asStateFlow()
 
@@ -72,7 +76,7 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
                     val queryProcessCpuUsageStats =
                         thanox.activityManager.queryProcessCpuUsageStats(pids, true)
                     _state.value =
-                        _state.value.copy(statsMap = queryProcessCpuUsageStats.associateBy { it.pid })
+                        _state.value.copy(cpuState = CpuUsageStatsState(statsMap = queryProcessCpuUsageStats.associateBy { it.pid }))
                 }.onFailure {
                     XLog.e("startQueryCpuUsage error", it)
                 }

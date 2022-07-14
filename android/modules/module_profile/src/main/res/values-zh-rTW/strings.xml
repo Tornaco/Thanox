@@ -59,4 +59,6 @@
 
     <string name="module_profile_rule_format_tips_title">格式要求</string>
     <string name="module_profile_rule_format_tips_message"><b>name</b>字段盡量使用字母數字組合，不要出現特殊字符；\n\n<b>description</b>字段可以使用任意字符，簡要介紹下這個情景的用途即可</string>
+
+    <string name="module_profile_add_to_global_var">添加到全局變量</string>
 </resources>

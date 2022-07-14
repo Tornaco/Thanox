@@ -44,11 +44,14 @@ import dev.enro.core.result.closeWithResult
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.apps.AppDetailsActivity
 import github.tornaco.android.thanos.core.pm.AppInfo
+import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.android.thanos.util.ToastUtils
+import github.tornaco.thanos.android.module.profile.AddToGlobalVarDialog
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,13 +62,14 @@ fun RunningAppStateDetailsPage() {
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     viewModel.bindLifecycle(lifecycle)
     val state = navHandle.key.state
-    val cpuUsageStatsState by viewModel.state.collectAsState()
+
+    val detailState by viewModel.state.collectAsState()
 
     LaunchedEffect(viewModel) {
         viewModel.startQueryCpuUsage(state)
     }
 
-    RunningAppStateDetailsScreen(state, cpuUsageStatsState, viewModel) {
+    RunningAppStateDetailsScreen(state, detailState.cpuState, viewModel) {
         navHandle.closeWithResult(it)
     }
 }
@@ -186,6 +190,9 @@ private fun ServiceTile(
     service: RunningService,
     viewModel: RunningAppDetailViewModel
 ) {
+    val context = LocalContext.current.requireActivity()
+    val scope = rememberCoroutineScope()
+
     val popMenuExpend = remember { mutableStateOf(false) }
     Column(
         horizontalAlignment = Alignment.Start,
@@ -212,7 +219,15 @@ private fun ServiceTile(
             style = MaterialTheme.typography.labelMedium
         )
         Spacer(modifier = Modifier.size(12.dp))
-        ServicePopupMenu(popMenuExpend, service, viewModel)
+        ServicePopupMenu(popMenuExpend, service, viewModel, addToGlobalVar = {
+            scope.launch {
+                delay(120)
+                AddToGlobalVarDialog(
+                    context = context,
+                    service.running.service.flattenToShortString()
+                ).show()
+            }
+        })
     }
 }
 
@@ -244,7 +259,8 @@ private fun ServiceRunningTime(service: RunningService) {
 private fun ServicePopupMenu(
     popMenuExpend: MutableState<Boolean>,
     service: RunningService,
-    viewModel: RunningAppDetailViewModel
+    viewModel: RunningAppDetailViewModel,
+    addToGlobalVar: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -260,6 +276,11 @@ private fun ServicePopupMenu(
                 "stop",
                 stringResource(id = R.string.service_stop),
                 R.drawable.ic_close_fill
+            ),
+            MenuItem(
+                "addToGlobalVar",
+                stringResource(id = R.string.module_profile_add_to_global_var),
+                R.drawable.ic_baseline_code_24
             )
         )
     ) {
@@ -275,6 +296,9 @@ private fun ServicePopupMenu(
                     ToastUtils.nook(context)
                 }
             }
+            "addToGlobalVar" -> {
+                addToGlobalVar()
+            }
             else -> {
 
             }
@@ -289,7 +313,11 @@ private fun ProcessSection(
     cpuUsageStatsState: CpuUsageStatsState,
     viewModel: RunningAppDetailViewModel
 ) {
-    val popMenuExpend = remember { mutableStateOf(false) }
+    val popMenuExpand = remember { mutableStateOf(false) }
+
+    val context = LocalContext.current.requireActivity()
+    val scope = rememberCoroutineScope()
+
     val isCached =
         runningProcessState.process.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED
     Column(
@@ -297,7 +325,7 @@ private fun ProcessSection(
             .fillMaxWidth()
             .heightIn(72.dp)
             .clickableWithRipple {
-                popMenuExpend.value = true
+                popMenuExpand.value = true
             }
             .padding(horizontal = 16.dp)
     ) {
@@ -348,20 +376,33 @@ private fun ProcessSection(
                 }
             }
             Spacer(modifier = Modifier.size(12.dp))
-            ProcessPopupMenu(popMenuExpend, viewModel, runningProcessState)
+            ProcessPopupMenu(
+                popMenuExpand = popMenuExpand,
+                viewModel = viewModel,
+                runningProcessState = runningProcessState,
+                addToGlobalVar = {
+                    scope.launch {
+                        delay(120)
+                        AddToGlobalVarDialog(
+                            context = context,
+                            runningProcessState.process.processName
+                        ).show()
+                    }
+                })
         }
     }
 }
 
 @Composable
 private fun ProcessPopupMenu(
-    popMenuExpend: MutableState<Boolean>,
+    popMenuExpand: MutableState<Boolean>,
     viewModel: RunningAppDetailViewModel,
-    runningProcessState: RunningProcessState
+    runningProcessState: RunningProcessState,
+    addToGlobalVar: () -> Unit
 ) {
     val context = LocalContext.current
     DropdownPopUpMenu(
-        popMenuExpend,
+        popMenuExpand,
         items = listOf(
             MenuItem(
                 "copy",
@@ -372,6 +413,11 @@ private fun ProcessPopupMenu(
                 "stop",
                 stringResource(id = R.string.service_stop),
                 R.drawable.ic_close_fill
+            ),
+            MenuItem(
+                "addToGlobalVar",
+                stringResource(id = R.string.module_profile_add_to_global_var),
+                R.drawable.ic_baseline_code_24
             )
         )
     ) {
@@ -386,6 +432,9 @@ private fun ProcessPopupMenu(
                 } else {
                     ToastUtils.nook(context)
                 }
+            }
+            "addToGlobalVar" -> {
+                addToGlobalVar()
             }
             else -> {
 

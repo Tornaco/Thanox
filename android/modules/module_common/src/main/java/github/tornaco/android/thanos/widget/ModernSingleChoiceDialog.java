@@ -3,9 +3,11 @@ package github.tornaco.android.thanos.widget;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -22,6 +24,7 @@ import util.Consumer;
 public class ModernSingleChoiceDialog {
     private final Context context;
     private String title;
+    private String tips;
     private List<Item> items;
     private Dialog dialog;
     private String checkedId;
@@ -34,6 +37,10 @@ public class ModernSingleChoiceDialog {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
     }
 
     public void setTitle(@StringRes int titleRes) {
@@ -55,6 +62,10 @@ public class ModernSingleChoiceDialog {
     public void show() {
         View rootLayout = LayoutInflater.from(context)
                 .inflate(R.layout.common_single_choice_dialog, null, false);
+
+        TextView tipView = rootLayout.findViewById(R.id.tip_text);
+        tipView.setText(tips);
+        tipView.setVisibility(TextUtils.isEmpty(tips) ? View.GONE : View.VISIBLE);
 
         RecyclerView recyclerView = rootLayout.findViewById(R.id.recycler_view);
         ItemAdapter adapter = new ItemAdapter(items);

@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/common_view_margin_default">
+
+    <TextView
+        android:id="@+id/tip_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/dashboard_tile_image_margin_end"
+        android:layout_marginEnd="@dimen/dashboard_tile_image_margin_end"
+        android:fadingEdge="horizontal"
+        android:textAppearance="@style/TextAppearance.TileTitle"
+        tools:text="Find the latest and greatest on the world's most powerful mobile platform. Browse devices, explore resources and learn about the latest updates." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tip_text"
+        android:layout_marginTop="@dimen/common_view_margin_default"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </RelativeLayout>

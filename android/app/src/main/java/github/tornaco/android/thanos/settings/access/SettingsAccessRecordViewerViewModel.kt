@@ -41,6 +41,8 @@ class SettingsAccessRecordViewerViewModel @Inject constructor(@ApplicationContex
     private suspend fun loadAccessRecords() = withContext(Dispatchers.IO) {
         updateLoadingState(true)
 
+        val isRecordEnabled = thanox.appOpsManager.isSettingsRecordEnabled
+
         val readRecords =
             thanox.appOpsManager.getSettingsReadRecords(null)
         val writeRecords =
@@ -61,6 +63,7 @@ class SettingsAccessRecordViewerViewModel @Inject constructor(@ApplicationContex
         }
 
         _state.value = _state.value.copy(
+            isRecordEnabled = isRecordEnabled,
             rawReadRecords = readRecords,
             rawWriteRecords = writeRecords,
             appFilterItems = selectableFilterItems
@@ -149,5 +152,12 @@ class SettingsAccessRecordViewerViewModel @Inject constructor(@ApplicationContex
         thanox.appOpsManager.clearSettingsReadRecords()
         thanox.appOpsManager.clearSettingsWriteRecords()
         refresh(delay = 300)
+    }
+
+    fun setRecordEnabled(enabled: Boolean) {
+        thanox.appOpsManager.isSettingsRecordEnabled = enabled
+        _state.value = _state.value.copy(
+            isRecordEnabled = thanox.appOpsManager.isSettingsRecordEnabled
+        )
     }
 }

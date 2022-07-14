@@ -35,4 +35,7 @@ interface IAppOpsService {
 
     void clearSettingsReadRecords();
     void clearSettingsWriteRecords();
+
+    void setSettingsRecordEnabled(boolean enable);
+    boolean isSettingsRecordEnabled();
 }

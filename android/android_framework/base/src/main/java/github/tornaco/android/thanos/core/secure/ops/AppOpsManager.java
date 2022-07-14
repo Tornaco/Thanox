@@ -1348,4 +1348,14 @@ public class AppOpsManager {
     public void clearSettingsWriteRecords() {
         service.clearSettingsWriteRecords();
     }
+
+    @SneakyThrows
+    public void setSettingsRecordEnabled(boolean enable) {
+        service.setSettingsRecordEnabled(enable);
+    }
+
+    @SneakyThrows
+    public boolean isSettingsRecordEnabled() {
+        return service.isSettingsRecordEnabled();
+    }
 }

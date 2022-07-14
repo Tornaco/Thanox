@@ -71,6 +71,13 @@ public interface IAppOpsService extends android.os.IInterface
     @Override public void clearSettingsWriteRecords() throws android.os.RemoteException
     {
     }
+    @Override public void setSettingsRecordEnabled(boolean enable) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isSettingsRecordEnabled() throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -322,6 +329,23 @@ public interface IAppOpsService extends android.os.IInterface
           data.enforceInterface(descriptor);
           this.clearSettingsWriteRecords();
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_setSettingsRecordEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          this.setSettingsRecordEnabled(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isSettingsRecordEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _result = this.isSettingsRecordEnabled();
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         default:
@@ -736,6 +760,45 @@ public interface IAppOpsService extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void setSettingsRecordEnabled(boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setSettingsRecordEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSettingsRecordEnabled(enable);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isSettingsRecordEnabled() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isSettingsRecordEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSettingsRecordEnabled();
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.secure.ops.IAppOpsService sDefaultImpl;
     }
     static final int TRANSACTION_setMode = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -757,6 +820,8 @@ public interface IAppOpsService extends android.os.IInterface
     static final int TRANSACTION_getSettingsWriteRecords = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
     static final int TRANSACTION_clearSettingsReadRecords = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
     static final int TRANSACTION_clearSettingsWriteRecords = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
+    static final int TRANSACTION_setSettingsRecordEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
+    static final int TRANSACTION_isSettingsRecordEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.secure.ops.IAppOpsService impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -793,4 +858,6 @@ public interface IAppOpsService extends android.os.IInterface
   public java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> getSettingsWriteRecords(java.lang.String filterCallerPackageName) throws android.os.RemoteException;
   public void clearSettingsReadRecords() throws android.os.RemoteException;
   public void clearSettingsWriteRecords() throws android.os.RemoteException;
+  public void setSettingsRecordEnabled(boolean enable) throws android.os.RemoteException;
+  public boolean isSettingsRecordEnabled() throws android.os.RemoteException;
 }

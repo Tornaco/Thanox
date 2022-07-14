@@ -49,14 +49,9 @@ import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.util.ClipboardUtils
-import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
-import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
-import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
-import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.*
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
@@ -115,25 +110,41 @@ fun SettingsAccessRecordViewerScreen(
                 )
             }
         ) {
-            RecordList(
-                modifier = Modifier.padding(contentPadding),
-                lazyListState = listState,
-                state = state,
-                itemSelectStateChanged = { item, selected ->
-                    viewModel.onFilterItemSelected(item, selected)
-                },
-                onRecordItemClick = {
-                    ClipboardUtils.copyToClipboard(
-                        context,
-                        "settings",
-                        "${it.record.name} ${it.record.value}"
-                    )
-                    Toast.makeText(
-                        context,
-                        R.string.common_toast_copied_to_clipboard,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                })
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(contentPadding)
+            ) {
+                SwitchBar(
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .padding(top = 16.dp),
+                    isChecked = state.isRecordEnabled
+                ) {
+                    viewModel.setRecordEnabled(it)
+                }
+
+                RecordList(
+                    modifier = Modifier,
+                    contentPadding = PaddingValues(top = 16.dp),
+                    lazyListState = listState,
+                    state = state,
+                    itemSelectStateChanged = { item, selected ->
+                        viewModel.onFilterItemSelected(item, selected)
+                    },
+                    onRecordItemClick = {
+                        ClipboardUtils.copyToClipboard(
+                            context,
+                            "settings",
+                            "${it.record.name} ${it.record.value}"
+                        )
+                        Toast.makeText(
+                            context,
+                            R.string.common_toast_copied_to_clipboard,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    })
+            }
         }
     }
 }
@@ -174,12 +185,14 @@ private fun AppFilterDropDown(
 @Composable
 private fun RecordList(
     modifier: Modifier,
+    contentPadding: PaddingValues,
     lazyListState: LazyListState = rememberLazyListState(),
     state: ViewerState,
     itemSelectStateChanged: (SelectableFilterItem, Boolean) -> Unit,
     onRecordItemClick: (DetailedSettingsAccessRecord) -> Unit
 ) {
     LazyColumn(
+        contentPadding = contentPadding,
         state = lazyListState,
         modifier = modifier
             .background(color = MaterialTheme.colorScheme.surface)

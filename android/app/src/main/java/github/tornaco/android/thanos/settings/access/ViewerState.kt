@@ -24,6 +24,8 @@ import github.tornaco.android.thanos.module.compose.common.widget.FilterItem
 data class ViewerState(
     val isLoading: Boolean = false,
 
+    val isRecordEnabled: Boolean = false,
+
     val rawReadRecords: List<SettingsAccessRecord> = emptyList(),
     val rawWriteRecords: List<SettingsAccessRecord> = emptyList(),
 

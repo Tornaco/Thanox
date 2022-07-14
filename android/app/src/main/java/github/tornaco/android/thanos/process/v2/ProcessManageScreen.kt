@@ -180,7 +180,7 @@ fun ProcessManageScreen(
 }
 
 @Composable
-fun AppFilterDropDown(state: ProcessManageState, onFilterItemSelected: (AppSetFilterItem) -> Unit) {
+private fun AppFilterDropDown(state: ProcessManageState, onFilterItemSelected: (AppSetFilterItem) -> Unit) {
     FilterDropDown(
         icon = Icons.Filled.FilterAlt,
         selectedItem = state.selectedAppSetFilterItem,

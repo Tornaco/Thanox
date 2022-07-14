@@ -24,6 +24,7 @@ import androidx.compose.material.Checkbox
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.outlined.FileCopy
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -43,8 +44,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
+import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.*
@@ -94,18 +94,44 @@ fun WakeLockRemoverScreen(onBackPressed: () -> Unit) {
                 )
             }
         ) {
-            LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
-                items(state.packageStates) { item ->
-                    ExpandableContainer(
-                        defaultState = ExpandableState.Collapsed,
-                        mainContent = {
-                            AppInfoItem(item)
-                        },
-                        expandContent = {
-                            WakeLockListItem(item)
-                        })
-                }
+            WakeLockList(contentPadding, state) {
+                viewModel.onFilterItemSelected(it)
             }
+        }
+    }
+}
+
+@Composable
+private fun WakeLockList(
+    contentPadding: PaddingValues,
+    state: RemoverState,
+    onFilterItemSelected: (AppSetFilterItem) -> Unit
+) {
+    LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
+
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                AppFilterDropDown(
+                    state,
+                    onFilterItemSelected
+                )
+                Spacer(modifier = Modifier.size(16.dp))
+            }
+        }
+
+        items(state.packageStates) { item ->
+            ExpandableContainer(
+                defaultState = ExpandableState.Collapsed,
+                mainContent = {
+                    AppInfoItem(item)
+                },
+                expandContent = {
+                    WakeLockListItem(item)
+                })
         }
     }
 }
@@ -197,4 +223,17 @@ fun WakeLockListItem(packageState: PackageState) {
             }
         }
     }
+}
+
+@Composable
+private fun AppFilterDropDown(
+    state: RemoverState,
+    onFilterItemSelected: (AppSetFilterItem) -> Unit
+) {
+    FilterDropDown(
+        icon = Icons.Filled.FilterAlt,
+        selectedItem = state.selectedAppSetFilterItem,
+        allItems = state.appFilterItems,
+        onItemSelected = onFilterItemSelected
+    )
 }

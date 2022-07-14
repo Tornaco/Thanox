@@ -28,10 +28,7 @@ import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.outlined.FileCopy
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -44,6 +41,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.core.power.SeenWakeLock
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
@@ -51,7 +49,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.*
 
 @Composable
 fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
-    val context = LocalContext.current
     val viewModel =
         hiltViewModel<WakeLockBlockerViewModel>(LocalContext.current.requireActivity())
     val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -94,9 +91,29 @@ fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
                 )
             }
         ) {
-            WakeLockList(contentPadding, state) {
-                viewModel.onFilterItemSelected(it)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(contentPadding)
+            ) {
+                SwitchBar(
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .padding(top = 16.dp),
+                    isChecked = state.isWakeLockBlockerEnabled
+                ) {
+                    viewModel.setWakeLockBlockerEnabled(it)
+                }
+
+                WakeLockList(
+                    contentPadding = PaddingValues(top = 16.dp),
+                    state = state,
+                    onFilterItemSelected = { viewModel.onFilterItemSelected(it) },
+                    blockWakeLock = { wakelock, block ->
+                        viewModel.setBlockWakeLock(wakelock, block)
+                    })
             }
+
         }
     }
 }
@@ -105,10 +122,10 @@ fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
 private fun WakeLockList(
     contentPadding: PaddingValues,
     state: BlockerState,
-    onFilterItemSelected: (AppSetFilterItem) -> Unit
+    onFilterItemSelected: (AppSetFilterItem) -> Unit,
+    blockWakeLock: (SeenWakeLock, Boolean) -> Unit
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
-
         item {
             Row(
                 modifier = Modifier
@@ -130,7 +147,7 @@ private fun WakeLockList(
                     AppInfoItem(item)
                 },
                 expandContent = {
-                    WakeLockListItem(item)
+                    WakeLockListItem(item, blockWakeLock)
                 })
         }
     }
@@ -142,7 +159,6 @@ private fun WakeLockList(
 private fun AppInfoItem(
     packageState: PackageState,
 ) {
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -168,16 +184,26 @@ private fun AppInfoItem(
                 )
                 SmallSpacer()
                 Text(
-                    text = "${packageState.wakeLocks.size}",
+                    text = stringResource(
+                        id = R.string.wakelock_count,
+                        packageState.wakeLocks.size
+                    ),
                     fontSize = 14.sp
                 )
+                if (packageState.appInfo.isCurrentUser.not()) {
+                    SmallSpacer()
+                    Text(
+                        text = "User ${packageState.appInfo.userId}",
+                        fontSize = 10.sp
+                    )
+                }
             }
         }
     }
 }
 
 @Composable
-fun WakeLockListItem(packageState: PackageState) {
+fun WakeLockListItem(packageState: PackageState, blockWakeLock: (SeenWakeLock, Boolean) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth()) {
         packageState.wakeLocks.forEach { wakeLock ->
             Row(
@@ -219,10 +245,24 @@ fun WakeLockListItem(packageState: PackageState) {
                     }
                 }
 
-                Checkbox(checked = false, onCheckedChange = {})
+                WakeLockCheckBox(wakeLock, blockWakeLock)
             }
         }
     }
+}
+
+@Composable
+private fun WakeLockCheckBox(
+    wakeLock: SeenWakeLock,
+    blockWakeLock: (SeenWakeLock, Boolean) -> Unit
+) {
+    var isChecked by remember(wakeLock) {
+        mutableStateOf(wakeLock.isBlock)
+    }
+    Checkbox(checked = isChecked, onCheckedChange = {
+        blockWakeLock(wakeLock, it)
+        isChecked = it
+    })
 }
 
 @Composable

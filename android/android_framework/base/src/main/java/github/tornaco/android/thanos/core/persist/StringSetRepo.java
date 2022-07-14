@@ -109,7 +109,7 @@ public class StringSetRepo implements SetRepo<String> {
 
   @Override
   public void flush() {
-    XLog.i("flush");
+    XLog.i("flush to " + mFile.getBaseFile());
     synchronized (sync) {
       try {
         Set<String> out = new HashSet<>(mStorage);

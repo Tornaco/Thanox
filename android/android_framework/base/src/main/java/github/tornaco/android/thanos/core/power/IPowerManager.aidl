@@ -25,4 +25,9 @@ interface IPowerManager {
 
     void setAutoBrightnessEnabled(boolean enable);
     boolean isAutoBrightnessEnabled();
+
+    boolean isWakeLockBlockerEnabled();
+    void setWakeLockBlockerEnabled(boolean enable);
+
+    void setBlockWakeLock(in SeenWakeLock wl, boolean block);
 }

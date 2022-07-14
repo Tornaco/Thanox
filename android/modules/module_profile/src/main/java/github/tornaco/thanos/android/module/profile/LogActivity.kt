@@ -18,7 +18,6 @@
 package github.tornaco.thanos.android.module.profile
 
 import android.content.Context
-import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,18 +25,18 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowCircleDown
 import androidx.compose.material.icons.filled.ArrowCircleUp
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.WrapText
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -45,9 +44,8 @@ import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
-import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
+import github.tornaco.android.thanos.module.compose.common.widget.SwitchBar
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.util.ActivityUtils
 import kotlinx.coroutines.launch
@@ -116,38 +114,14 @@ class LogActivity : ComposeThemeActivity() {
                         .fillMaxSize()
                         .padding(contentPadding)
                 ) {
-                    Box(
+                    SwitchBar(
                         modifier = Modifier
-                            .padding(16.dp)
-                            .fillMaxWidth()
-                            .clip(
-                                RoundedCornerShape(32.dp)
-                            )
-                            .background(color = MaterialTheme.colorScheme.surface)
-                            .padding(horizontal = 16.dp, vertical = 16.dp)
-                            .clickableWithRipple {
-                                viewModel.enableLog(!state.isLogEnabled)
-                            }
+                            .padding(horizontal = 16.dp)
+                            .padding(top = 16.dp),
+                        isChecked = state.isLogEnabled
                     ) {
-                        Text(
-                            modifier = Modifier
-                                .padding(start = 16.dp)
-                                .align(Alignment.CenterStart),
-                            text = if (state.isLogEnabled) stringResource(id = R.string.switch_on_text) else stringResource(
-                                id = R.string.switch_off_text
-                            )
-                        )
-                        Switch(
-                            modifier = Modifier
-                                .padding(end = 16.dp)
-                                .align(Alignment.CenterEnd),
-                            checked = state.isLogEnabled,
-                            onCheckedChange = {
-                                viewModel.enableLog(it)
-                            })
+                        viewModel.enableLog(it)
                     }
-
-                    StandardSpacer()
 
                     LogList(
                         horizontalScrollEnabled = state.horizontalScrollEnabled,

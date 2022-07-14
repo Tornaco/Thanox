@@ -9,13 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class SeenWakeLock implements Parcelable {
 
     private String tag;
@@ -25,8 +23,9 @@ public class SeenWakeLock implements Parcelable {
     private int ownerUserId;
 
     private long acquireTimeMills;
-    private boolean isHeld;
 
+    private boolean isHeld;
+    private boolean isBlock;
 
     protected SeenWakeLock(Parcel in) {
         tag = in.readString();
@@ -35,6 +34,7 @@ public class SeenWakeLock implements Parcelable {
         ownerUserId = in.readInt();
         acquireTimeMills = in.readLong();
         isHeld = in.readByte() != 0;
+        isBlock = in.readByte() != 0;
     }
 
     @Override
@@ -45,6 +45,7 @@ public class SeenWakeLock implements Parcelable {
         dest.writeInt(ownerUserId);
         dest.writeLong(acquireTimeMills);
         dest.writeByte((byte) (isHeld ? 1 : 0));
+        dest.writeByte((byte) (isBlock ? 1 : 0));
     }
 
     @Override
@@ -82,5 +83,15 @@ public class SeenWakeLock implements Parcelable {
     @Override
     public int hashCode() {
         return Objects.hash(tag, ownerPackageName);
+    }
+
+    @Override
+    public String toString() {
+        return "SeenWakeLock{" +
+                "tag='" + tag + '\'' +
+                ", flags=" + flags +
+                ", ownerPackageName='" + ownerPackageName + '\'' +
+                ", ownerUserId=" + ownerUserId +
+                '}';
     }
 }

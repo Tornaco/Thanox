@@ -25,6 +25,7 @@ import javax.inject.Inject
 
 data class BlockerState(
     val isLoading: Boolean,
+    val isWakeLockBlockerEnabled: Boolean,
     val packageStates: List<PackageState>,
     val appFilterItems: List<AppSetFilterItem>,
     val selectedAppSetFilterItem: AppSetFilterItem? = null
@@ -39,7 +40,9 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
     private val _state =
         MutableStateFlow(
             BlockerState(
-                isLoading = true, packageStates = emptyList(),
+                isLoading = true,
+                isWakeLockBlockerEnabled = false,
+                packageStates = emptyList(),
                 appFilterItems = emptyList(),
                 selectedAppSetFilterItem = null
             )
@@ -50,6 +53,7 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
 
     fun init() {
         viewModelScope.launch {
+            loadBlockerState()
             loadDefaultAppFilterItems()
             loadPackageStates()
         }
@@ -57,6 +61,7 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
 
     fun refresh() {
         viewModelScope.launch {
+            loadBlockerState()
             loadPackageStates()
         }
     }
@@ -91,12 +96,13 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
 
         val whiteListPackages = thanox.pkgManager.whiteListPkgs
         val packageStates = thanox.powerManager.getSeenWakeLocks(true)
+            .filterNotNull()
             .asSequence()
             .filterNot { whiteListPackages.contains(it.ownerPackageName) }
             .filter { filterPackages.contains(it.ownerPackageName) }
             .groupBy { Pkg(it.ownerPackageName, it.ownerUserId) }
             .mapNotNull { entry ->
-                val appInfo = thanox.pkgManager.getAppInfo(entry.key.pkgName)
+                val appInfo = thanox.pkgManager.getAppInfoForUser(entry.key.pkgName, entry.key.userId)
                 appInfo?.let {
                     PackageState(appInfo, entry.value)
                 }
@@ -108,5 +114,20 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
             .toList()
 
         _state.value = _state.value.copy(isLoading = false, packageStates = packageStates)
+    }
+
+    private fun loadBlockerState() {
+        _state.value =
+            _state.value.copy(isWakeLockBlockerEnabled = thanox.powerManager.isWakeLockBlockerEnabled)
+    }
+
+    fun setWakeLockBlockerEnabled(enable: Boolean) {
+        thanox.powerManager.isWakeLockBlockerEnabled = enable
+        loadBlockerState()
+    }
+
+    fun setBlockWakeLock(wakelock: SeenWakeLock, block: Boolean) {
+        wakelock.isBlock = block
+        thanox.powerManager.setBlockWakeLock(wakelock, block)
     }
 }

@@ -130,6 +130,7 @@
 
     <string name="feature_title_wakelock_blocker">Wakelock Blocker</string>
     <string name="wakelock_state_holding">Holding</string>
+    <string name="wakelock_count">%s wakelocks</string>
 
     <string name="feature_title_app_lock">App lock</string>
     <string name="feature_summary_app_lock">Show lock interface before app launch</string>

@@ -1,7 +1,5 @@
 package github.tornaco.android.thanos.core.power;
 
-import android.os.RemoteException;
-
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -50,5 +48,20 @@ public class PowerManager {
     @SneakyThrows
     public boolean isWakeLockHeld(SeenWakeLock wakelock) {
         return server.isWakeLockHeld(wakelock);
+    }
+
+    @SneakyThrows
+    public boolean isWakeLockBlockerEnabled() {
+        return server.isWakeLockBlockerEnabled();
+    }
+
+    @SneakyThrows
+    public void setWakeLockBlockerEnabled(boolean enable) {
+        server.setWakeLockBlockerEnabled(enable);
+    }
+
+    @SneakyThrows
+    public void setBlockWakeLock(SeenWakeLock wl, boolean block) {
+        server.setBlockWakeLock(wl, block);
     }
 }

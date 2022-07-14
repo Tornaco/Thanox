@@ -55,6 +55,16 @@ public interface IPowerManager extends android.os.IInterface
     {
       return false;
     }
+    @Override public boolean isWakeLockBlockerEnabled() throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public void setWakeLockBlockerEnabled(boolean enable) throws android.os.RemoteException
+    {
+    }
+    @Override public void setBlockWakeLock(github.tornaco.android.thanos.core.power.SeenWakeLock wl, boolean block) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -225,6 +235,39 @@ public interface IPowerManager extends android.os.IInterface
           boolean _result = this.isAutoBrightnessEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_isWakeLockBlockerEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _result = this.isWakeLockBlockerEnabled();
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_setWakeLockBlockerEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          this.setWakeLockBlockerEnabled(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_setBlockWakeLock:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.power.SeenWakeLock _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          this.setBlockWakeLock(_arg0, _arg1);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -528,6 +571,71 @@ public interface IPowerManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public boolean isWakeLockBlockerEnabled() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isWakeLockBlockerEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isWakeLockBlockerEnabled();
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setWakeLockBlockerEnabled(boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setWakeLockBlockerEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setWakeLockBlockerEnabled(enable);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void setBlockWakeLock(github.tornaco.android.thanos.core.power.SeenWakeLock wl, boolean block) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((wl!=null)) {
+            _data.writeInt(1);
+            wl.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(((block)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setBlockWakeLock, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setBlockWakeLock(wl, block);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.power.IPowerManager sDefaultImpl;
     }
     static final int TRANSACTION_reboot = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -544,6 +652,9 @@ public interface IPowerManager extends android.os.IInterface
     static final int TRANSACTION_getBrightness = (android.os.IBinder.FIRST_CALL_TRANSACTION + 11);
     static final int TRANSACTION_setAutoBrightnessEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 12);
     static final int TRANSACTION_isAutoBrightnessEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 13);
+    static final int TRANSACTION_isWakeLockBlockerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 14);
+    static final int TRANSACTION_setWakeLockBlockerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
+    static final int TRANSACTION_setBlockWakeLock = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.power.IPowerManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -575,4 +686,7 @@ public interface IPowerManager extends android.os.IInterface
   public int getBrightness() throws android.os.RemoteException;
   public void setAutoBrightnessEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isAutoBrightnessEnabled() throws android.os.RemoteException;
+  public boolean isWakeLockBlockerEnabled() throws android.os.RemoteException;
+  public void setWakeLockBlockerEnabled(boolean enable) throws android.os.RemoteException;
+  public void setBlockWakeLock(github.tornaco.android.thanos.core.power.SeenWakeLock wl, boolean block) throws android.os.RemoteException;
 }

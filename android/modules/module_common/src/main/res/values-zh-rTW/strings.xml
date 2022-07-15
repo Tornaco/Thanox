@@ -24,6 +24,7 @@
     <string name="common_retry">重試</string>
 
     <string name="common_badge_text_experiment">實驗</string>
+    <string name="common_experiment_feature_warning_message">該功能為實驗性功能，尚不穩定，建議你開啟該功能之前，做好數據備份，防止出現意外缺陷而導致數據損失</string>
 
     <string name="common_toast_copied_to_clipboard">已經復製到剪貼板</string>
 

@@ -2,25 +2,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingDefaultResource">
 
     <color name="nav_icon_boost">#4caf50</color>
-    <color name="nav_icon_bg_start">#f36352</color>
-    <color name="nav_icon_bg_restrict">#ffa800</color>
-    <color name="nav_icon_task_removal">#be5ee7</color>
-    <color name="nav_icon_smart_freeze">#2c8aff</color>
-    <color name="nav_icon_apps_manager">#ffa800</color>
-    <color name="nav_icon_priv_cheat">#8262ff</color>
-    <color name="nav_icon_ops">#f36352</color>
-    <color name="nav_icon_app_lock">#90ce02</color>
-    <color name="nav_icon_task_blur">#e9244a</color>
-    <color name="nav_icon_op_remind">#939393</color>
-    <color name="nav_icon_screen_on_notification">#51b4cd</color>
-    <color name="nav_icon_nr">#8262ff</color>
-    <color name="nav_icon_activity_replacement">#f36352</color>
-    <color name="nav_icon_profile">#e91e63</color>
-    <color name="nav_icon_smart_standby">#ffa800</color>
-    <color name="nav_icon_plugin">#939393</color>
-    <color name="nav_icon_app_clone">#f36352</color>
-    <color name="nav_icon_wechat_push">#4caf50</color>
-    <color name="nav_icon_feedback">#51b4cd</color>
-    <color name="nav_icon_guide">#f36352</color>
-    <color name="nav_icon_wakelock_remover">#2c8aff</color>
+    <color name="nav_icon_bg_start">#e57373</color>
+    <color name="nav_icon_bg_restrict">#4db6ac</color>
+    <color name="nav_icon_task_removal">#ba68c8</color>
+    <color name="nav_icon_smart_freeze">#64b5f6</color>
+    <color name="nav_icon_apps_manager">#ffb74d</color>
+    <color name="nav_icon_priv_cheat">#9575cd</color>
+    <color name="nav_icon_ops">#90a4ae</color>
+    <color name="nav_icon_app_lock">#81c784</color>
+    <color name="nav_icon_task_blur">#f06292</color>
+    <color name="nav_icon_op_remind">#a1887f</color>
+    <color name="nav_icon_screen_on_notification">#4dd0e1</color>
+    <color name="nav_icon_nr">#ba68c8</color>
+    <color name="nav_icon_activity_replacement">#ff8a65</color>
+    <color name="nav_icon_profile">#7986cb</color>
+    <color name="nav_icon_smart_standby">#90a4ae</color>
+    <color name="nav_icon_plugin">#64b5f6</color>
+    <color name="nav_icon_app_clone">#4db6ac</color>
+    <color name="nav_icon_wechat_push">#81c784</color>
+    <color name="nav_icon_feedback">#9575cd</color>
+    <color name="nav_icon_guide">#ffb74d</color>
+    <color name="nav_icon_wakelock_remover">#f06292</color>
 </resources>

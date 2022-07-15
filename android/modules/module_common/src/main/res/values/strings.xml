@@ -24,6 +24,7 @@
     <string name="common_tips_qut">Tips:</string>
 
     <string name="common_badge_text_experiment">EXP</string>
+    <string name="common_experiment_feature_warning_message">This feature is an experimental feature and is not yet stable. It is recommended that you back up your data before enabling this feature to prevent data loss due to unexpected bugs.</string>
 
     <string name="common_toast_copied_to_clipboard">Copied to clipboard</string>
 

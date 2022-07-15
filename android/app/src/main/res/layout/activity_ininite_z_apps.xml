@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -50,6 +49,12 @@
                 android:id="@+id/switch_bar_container"
                 layout="@layout/module_common_switchbar_container" />
 
+            <github.tornaco.android.thanos.module.compose.common.widget.ExperimentalFeatureWarningMessageAndroidView
+                android:id="@+id/warning_message_compose_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_view_margin_default" />
+
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe"
                 android:layout_width="wrap_content"
@@ -60,7 +65,6 @@
                     android:id="@+id/apps"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:listModels="@{viewmodel.listModels}"
                     android:paddingStart="@dimen/common_view_margin_small"
                     android:paddingTop="@dimen/common_view_margin_small"

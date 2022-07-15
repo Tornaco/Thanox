@@ -110,8 +110,13 @@ fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
                     viewModel.setWakeLockBlockerEnabled(it)
                 }
 
+                ExperimentalFeatureWarningMessage(
+                    modifier = Modifier
+                        .padding(16.dp)
+                )
+
                 WakeLockList(
-                    contentPadding = PaddingValues(top = 16.dp),
+                    contentPadding = PaddingValues(bottom = 16.dp),
                     state = state,
                     onFilterItemSelected = { viewModel.onFilterItemSelected(it) },
                     blockWakeLock = { wakelock, block ->

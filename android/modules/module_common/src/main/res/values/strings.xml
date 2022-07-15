@@ -62,4 +62,6 @@
     <string name="module_common_copy_error_message">Copy error</string>
 
     <string name="module_common_no_data">No data</string>
+
+    <string name="module_common_user">User %s</string>
 </resources>

@@ -62,4 +62,6 @@
     <string name="module_common_copy_error_message">复制错误信息</string>
 
     <string name="module_common_no_data">暂无数据</string>
+
+    <string name="module_common_user">用户%s</string>
 </resources>

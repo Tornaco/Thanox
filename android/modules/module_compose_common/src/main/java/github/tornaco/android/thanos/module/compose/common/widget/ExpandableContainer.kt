@@ -25,7 +25,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
@@ -35,12 +36,10 @@ enum class ExpandableState { Expand, Collapsed }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExpandableContainer(
-    defaultState: ExpandableState = ExpandableState.Expand,
+    expandState: MutableState<ExpandableState>,
     mainContent: @Composable () -> Unit,
     expandContent: @Composable () -> Unit,
 ) {
-    var expandState by remember { mutableStateOf(defaultState) }
-
     Card(
         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
         colors = CardDefaults.cardColors(
@@ -51,8 +50,8 @@ fun ExpandableContainer(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickableWithRipple {
-                    expandState =
-                        if (expandState == ExpandableState.Expand) {
+                    expandState.value =
+                        if (expandState.value == ExpandableState.Expand) {
                             ExpandableState.Collapsed
                         } else {
                             ExpandableState.Expand
@@ -62,7 +61,7 @@ fun ExpandableContainer(
         ) {
             mainContent()
 
-            AnimatedVisibility(visible = expandState == ExpandableState.Expand) {
+            AnimatedVisibility(visible = expandState.value == ExpandableState.Expand) {
                 expandContent()
             }
         }

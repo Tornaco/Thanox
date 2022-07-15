@@ -15,25 +15,30 @@
  *
  */
 
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+
 package github.tornaco.android.thanos.power.wakelock
 
+import androidx.compose.animation.*
+import androidx.compose.animation.core.keyframes
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Checkbox
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
+import androidx.compose.material.icons.outlined.Block
 import androidx.compose.material.icons.outlined.FileCopy
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,7 +46,6 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.core.power.SeenWakeLock
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
@@ -111,6 +115,9 @@ fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
                     onFilterItemSelected = { viewModel.onFilterItemSelected(it) },
                     blockWakeLock = { wakelock, block ->
                         viewModel.setBlockWakeLock(wakelock, block)
+                    },
+                    batchSelect = {
+                        viewModel.batchSelect(it)
                     })
             }
 
@@ -123,7 +130,8 @@ private fun WakeLockList(
     contentPadding: PaddingValues,
     state: BlockerState,
     onFilterItemSelected: (AppSetFilterItem) -> Unit,
-    blockWakeLock: (SeenWakeLock, Boolean) -> Unit
+    blockWakeLock: (WakeLockUiModel, Boolean) -> Unit,
+    batchSelect: (PackageState) -> Unit
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
         item {
@@ -141,10 +149,11 @@ private fun WakeLockList(
         }
 
         items(state.packageStates) { item ->
+            val expandState = remember { mutableStateOf(ExpandableState.Collapsed) }
             ExpandableContainer(
-                defaultState = ExpandableState.Collapsed,
+                expandState = expandState,
                 mainContent = {
-                    AppInfoItem(item)
+                    AppInfoItem(item, expandState.value == ExpandableState.Expand, batchSelect)
                 },
                 expandContent = {
                     WakeLockListItem(item, blockWakeLock)
@@ -154,10 +163,11 @@ private fun WakeLockList(
 }
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun AppInfoItem(
     packageState: PackageState,
+    isExpand: Boolean,
+    batchSelect: (PackageState) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -178,10 +188,25 @@ private fun AppInfoItem(
             Spacer(modifier = Modifier.size(12.dp))
 
             Column(verticalArrangement = Arrangement.Center) {
-                Text(
-                    text = packageState.appInfo.appLabel,
-                    fontSize = 16.sp
-                )
+                Row {
+                    Text(
+                        modifier = Modifier.alignByBaseline(),
+                        text = packageState.appInfo.appLabel,
+                        fontSize = 16.sp
+                    )
+                    if (!packageState.appInfo.isCurrentUser) {
+                        SmallSpacer()
+                        Text(
+                            modifier = Modifier.alignByBaseline(),
+                            text = stringResource(
+                                id = R.string.module_common_user,
+                                packageState.appInfo.userId
+                            ),
+                            fontSize = 10.sp
+                        )
+                    }
+                }
+
                 SmallSpacer()
                 Text(
                     text = stringResource(
@@ -190,20 +215,71 @@ private fun AppInfoItem(
                     ),
                     fontSize = 14.sp
                 )
-                if (packageState.appInfo.isCurrentUser.not()) {
-                    SmallSpacer()
-                    Text(
-                        text = "User ${packageState.appInfo.userId}",
-                        fontSize = 10.sp
-                    )
+            }
+        }
+
+        val appInfoItemAction =
+            when {
+                isExpand -> AppInfoItemAction.BatchSelectButton
+                !isExpand && packageState.hasBlock -> AppInfoItemAction.BlockIcon(isAllBlocked = packageState.isAllBlock)
+                else -> AppInfoItemAction.Noop
+            }
+        AnimatedContent(targetState = appInfoItemAction,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(150, 150)) with
+                        fadeOut(animationSpec = tween(150)) using
+                        SizeTransform { initialSize, targetSize ->
+                            if (targetState != AppInfoItemAction.Noop) {
+                                keyframes {
+                                    // Expand horizontally first.
+                                    IntSize(targetSize.width, initialSize.height) at 150
+                                    durationMillis = 300
+                                }
+                            } else {
+                                keyframes {
+                                    // Shrink vertically first.
+                                    IntSize(initialSize.width, targetSize.height) at 150
+                                    durationMillis = 300
+                                }
+                            }
+                        }
+            }) { action ->
+            when (action) {
+                AppInfoItemAction.BatchSelectButton -> {
+                    FilledTonalButton(onClick = {
+                        batchSelect(packageState)
+                    }) {
+                        Text(text = stringResource(id = R.string.common_menu_title_batch_select))
+                    }
                 }
+                is AppInfoItemAction.BlockIcon -> {
+                    if (action.isAllBlocked) {
+                        Icon(
+                            imageVector = Icons.Outlined.Block,
+                            tint = Color.Red,
+                            contentDescription = "Blocked"
+                        )
+                    } else {
+                        Icon(imageVector = Icons.Outlined.Block, contentDescription = "Blocked")
+                    }
+                }
+                AppInfoItemAction.Noop -> {}
             }
         }
     }
 }
 
+sealed interface AppInfoItemAction {
+    object BatchSelectButton : AppInfoItemAction
+    data class BlockIcon(val isAllBlocked: Boolean) : AppInfoItemAction
+    object Noop : AppInfoItemAction
+}
+
 @Composable
-fun WakeLockListItem(packageState: PackageState, blockWakeLock: (SeenWakeLock, Boolean) -> Unit) {
+fun WakeLockListItem(
+    packageState: PackageState,
+    blockWakeLock: (WakeLockUiModel, Boolean) -> Unit
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
         packageState.wakeLocks.forEach { wakeLock ->
             Row(
@@ -213,7 +289,7 @@ fun WakeLockListItem(packageState: PackageState, blockWakeLock: (SeenWakeLock, B
 
                     }
                     .padding(horizontal = 16.dp, vertical = 4.dp)
-                    .heightIn(min = 72.dp),
+                    .heightIn(min = 64.dp),
                 verticalAlignment = CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
@@ -253,8 +329,8 @@ fun WakeLockListItem(packageState: PackageState, blockWakeLock: (SeenWakeLock, B
 
 @Composable
 private fun WakeLockCheckBox(
-    wakeLock: SeenWakeLock,
-    blockWakeLock: (SeenWakeLock, Boolean) -> Unit
+    wakeLock: WakeLockUiModel,
+    blockWakeLock: (WakeLockUiModel, Boolean) -> Unit
 ) {
     var isChecked by remember(wakeLock) {
         mutableStateOf(wakeLock.isBlock)

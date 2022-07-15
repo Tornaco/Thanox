@@ -64,10 +64,12 @@ public abstract class OsUtils {
         return Build.VERSION.SDK_INT == 29;
     }
 
+    // android 11
     public static boolean isROrAbove() {
         return Build.VERSION.SDK_INT >= 30;
     }
 
+    // android 12
     public static boolean isSOrAbove() {
         return Build.VERSION.SDK_INT >= 31;
     }

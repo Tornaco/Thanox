@@ -28,7 +28,8 @@ data class BlockerState(
     val isWakeLockBlockerEnabled: Boolean,
     val packageStates: List<PackageState>,
     val appFilterItems: List<AppSetFilterItem>,
-    val selectedAppSetFilterItem: AppSetFilterItem? = null
+    val selectedAppSetFilterItem: AppSetFilterItem? = null,
+    val isShowHeldOnly: Boolean
 )
 
 data class PackageState(val appInfo: AppInfo, val wakeLocks: List<WakeLockUiModel>) {
@@ -48,7 +49,8 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
                 isWakeLockBlockerEnabled = false,
                 packageStates = emptyList(),
                 appFilterItems = emptyList(),
-                selectedAppSetFilterItem = null
+                selectedAppSetFilterItem = null,
+                isShowHeldOnly = false
             )
         )
     val state = _state.asStateFlow()
@@ -99,11 +101,10 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
             ).pkgNames.filterNot { pkgName -> pkgName == BuildProp.THANOS_APP_PKG_NAME }
         } ?: emptyList()
 
-        val whiteListPackages = thanox.pkgManager.whiteListPkgs
         val packageStates = thanox.powerManager.getSeenWakeLocks(true)
             .filterNotNull()
             .asSequence()
-            .filterNot { whiteListPackages.contains(it.ownerPackageName) }
+            .filter { !state.value.isShowHeldOnly || it.isHeld }
             .filter { filterPackages.contains(it.ownerPackageName) }
             .groupBy { Pkg(it.ownerPackageName, it.ownerUserId) }
             .mapNotNull { entry ->
@@ -145,6 +146,12 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
             setBlockWakeLock(it, desiredBlockValue)
         }
 
+        refresh()
+    }
+
+    fun toggleShowHeldOnly() {
+        _state.value =
+            _state.value.copy(isShowHeldOnly = !_state.value.isShowHeldOnly)
         refresh()
     }
 }

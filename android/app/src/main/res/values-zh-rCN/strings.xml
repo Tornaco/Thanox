@@ -130,6 +130,7 @@
 
     <string name="feature_title_wakelock_blocker">唤醒锁拦截</string>
     <string name="wakelock_state_holding">持有中</string>
+    <string name="wakelock_view_held_only">只看持有中</string>
     <string name="wakelock_count">%s个唤醒锁</string>
 
     <string name="feature_title_app_lock">应用锁</string>

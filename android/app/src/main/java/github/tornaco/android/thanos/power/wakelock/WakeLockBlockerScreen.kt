@@ -29,6 +29,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.outlined.Block
+import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.FileCopy
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -118,6 +119,9 @@ fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
                     },
                     batchSelect = {
                         viewModel.batchSelect(it)
+                    },
+                    toggleShowHeldOnly = {
+                        viewModel.toggleShowHeldOnly()
                     })
             }
 
@@ -131,7 +135,8 @@ private fun WakeLockList(
     state: BlockerState,
     onFilterItemSelected: (AppSetFilterItem) -> Unit,
     blockWakeLock: (WakeLockUiModel, Boolean) -> Unit,
-    batchSelect: (PackageState) -> Unit
+    batchSelect: (PackageState) -> Unit,
+    toggleShowHeldOnly: () -> Unit
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
         item {
@@ -145,6 +150,29 @@ private fun WakeLockList(
                     onFilterItemSelected
                 )
                 Spacer(modifier = Modifier.size(16.dp))
+
+                FilledTonalButton(
+                    onClick = {
+                        toggleShowHeldOnly()
+                    },
+                    colors = ButtonDefaults.filledTonalButtonColors(
+                        containerColor = if (state.isShowHeldOnly) {
+                            MaterialTheme.colorScheme.secondaryContainer
+                        } else {
+                            Color.LightGray
+                        }
+                    )
+                ) {
+                    AnimatedVisibility(visible = state.isShowHeldOnly) {
+                        TinySpacer()
+                        Icon(
+                            modifier = Modifier.size(16.dp),
+                            imageVector = Icons.Outlined.Check,
+                            contentDescription = "ShowHeldOnly"
+                        )
+                    }
+                    Text(text = stringResource(id = R.string.wakelock_view_held_only))
+                }
             }
         }
 

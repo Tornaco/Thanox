@@ -22,7 +22,7 @@
     <string name="module_ops_feature_title_p_manage">Sağlayıcıları yönetin</string>
 
     <string name="module_ops_feature_title_block_uninstall">Kaldırmayı önle</string>
-    <string name="module_ops_feature_title_block_clear_data">Net verileri önleyin/string>
+    <string name="module_ops_feature_title_block_clear_data">Net verileri önleyin</string>
 
     <string name="module_ops_feature_title_ops_app_list">Uygulama operasyonları</string>
     <string name="module_ops_feature_summary_ops_app_list">Ops tarafından</string>

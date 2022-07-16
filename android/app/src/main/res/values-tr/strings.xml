@@ -7,13 +7,13 @@
 
     <string name="status_active">Aktf</string>
     <string name="status_not_active">Aktif Değil</string>
-    <string name="message_active_needed">Thanox hem Xposed hem de Magisk'i destekler.\n\n Xposed kullanıcıları için (Xposed modülü ve Magisk zip aynı anda kullanılamaz), Xposed uygulama modülü yapılandırma sayfasında Thanox'u seçip işaretleyebilirsiniz. \n\nFor Magisk kullanıcıları, indirilen Thanox apk'sını .apk'dan .zip'e yeniden adlandırabilir ve ardından Magisk yöneticisine yükleyebilirsiniz veya indirilen apk'yı bulamazsanız, yamayı dışa aktarmak için Ayarlar, Hakkında, Yama durumu'na gidebilirsiniz</string>
+    <string name="message_active_needed">Thanox support both Xposed and Magisk.\n\n For Xposed user (Xposed module and Magisk zip can not be used at the same time), you can just select and check Thanox in Xposed app module config page. \n\nFor Magisk user, you can rename downloaded Thanox apk from .apk to .zip and then install in Magisk manager, or if you can not find the downloaded apk, you can go to Settings, About, Patch status to export the patch</string>
     <string name="status_need_reboot">Yeniden Başlat</string>
     <string name="title_framework_error">Framework hatası</string>
-    <string name="message_framework_error">Thanox Framework'ta bir hata var.  Lütfen /data/system/thanos_xxx/log altındaki günlükleri geliştiriciye bildirin.</string>
+    <string name="message_framework_error">Thanox Framework\'ta bir hata var.  Lütfen /data/system/thanos_xxx/log altındaki günlükleri geliştiriciye bildirin.</string>
 
     <string name="title_multiple_patch_applied_error">Birden fazla yama uygulandı</string>
-    <string name="message_multiple_patch_applied_error">Aktif Thanox'a yalnızca bir yama uygulamanız gerekir, ancak aynı anda birden fazla yama uygulayabilirsiniz: %s, Lütfen kullanım kılavuzunu okuduğunuzdan emin olun</string>
+    <string name="message_multiple_patch_applied_error">Aktif Thanox\'a yalnızca bir yama uygulamanız gerekir, ancak aynı anda birden fazla yama uygulayabilirsiniz: %s, Lütfen kullanım kılavuzunu okuduğunuzdan emin olun</string>
 
     <string name="nav_title_boost">Boost</string>
     <string name="nav_title_secure">Gizlilik</string>
@@ -53,7 +53,7 @@
     <string name="card_title_plugin_available">Thanox eklentisini yükleyin</string>
     <string name="card_message_plugin_available">Eklenti bazı kararsız veya kritik olmayan işlevlerden oluşur.</string>
 
-    <string name="dialog_message_feedback">Lütfen uygulamanın sohbet grubuna veya github/tornaco/Thanox'a gidin ve bir sorun oluşturun.\n\n<b>Bir sorunu bildirirken lütfen aşağıdaki bilgileri ekleyin：</b>\n\n1. Sorun Açıklaması：xxxx  \n2. Sorunu çözmek için ne yapmaya çalıştım，örneğin（akıllı uygulama bekleme çalışmıyor） Kullanım kılavuzunu okumaya çalıştım ve sistem ayarlarında xxx'i açtım. \n3. Sorunun meydana geldiği Thanox uygulaması sürümü ve Android sürümü. \n4. Günlükleri /data/system/thanos/logging altında bulun. </string>
+    <string name="dialog_message_feedback">Please go to the app\'s chat group or github/tornaco/Thanox and create an issue.\n\n<b>Please include the following info when reporting an issue：</b>\n\n1. Issue description：xxxx  \n2. What did I try to do to resolve the issue，for example（the smart app standby is not working）I attempted to read the usage guide, and opened xxx in the system settings. \n3. The Thanox app version where the issue occured, and the Android version. \n4. Find：logs under /data/system/thanos/logging. </string>
 
     <string name="title_no_plugins_installed">No plugin available</string>
     <string name="title_plugin_reboot_take_effect">Please reboot for changes to take effect.</string>
@@ -128,8 +128,10 @@
     <string name="feature_title_recent_task_blur">Task blur</string>
     <string name="feature_summary_recent_task_blur">Add blur effect to recent tasks</string>
 
-    <string name="feature_title_wakelock_remover">Wakelock remover</string>
+    <string name="feature_title_wakelock_blocker">Wakelock blocker</string>
     <string name="wakelock_state_holding">Holding</string>
+    <string name="wakelock_view_held_only">Held only</string>
+    <string name="wakelock_count">%s wakelocks</string>
 
     <string name="feature_title_app_lock">App lock</string>
     <string name="feature_summary_app_lock">Show lock interface before app launch</string>

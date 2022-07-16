@@ -10,9 +10,9 @@
     <string name="module_locker_title_re_verify_on_app_switch">Uygulama anahtarı yeniden kimlik doğrulaması</string>
     <string name="module_locker_title_verify_workaround_enabled">Kararlı kilit açma yöntemi</string>
     <string name="module_locker_summary_re_verify_on_screen_off">Ekran kilitlendiğinde, kilidi açılmış uygulamalar yeniden kilitlenir</string>
-    <string name="module_locker_summary_re_verify_on_task_removed">Bir uygulama görevi kaldırıldığında, örneğin, son görevler sayfasında uygulama temizlendiğinde, uygulama yeniden kilitlenecektir./string>
+    <string name="module_locker_summary_re_verify_on_task_removed">Bir uygulama görevi kaldırıldığında, örneğin, son görevler sayfasında uygulama temizlendiğinde, uygulama yeniden kilitlenecektir.</string>
     <string name="module_locker_summary_re_verify_on_app_switch">Kilidi açılmış bir uygulama arka plana sonlandırıldığında, uygulama yeniden kilitlenir</string>
 
     <string name="module_locker_biometric_not_set_dialog_title">Şifreyi Belirle</string>
-    <string name="module_locker_biometric_not_set_dialog_message">Uygulama Kilidi'ni etkinleştirmeden önce, yüz, parmak izi, PIN veya desen şifre ayarlarını tamamlamak için lütfen sistem güvenlik ayarlarına gidin.</string>
+    <string name="module_locker_biometric_not_set_dialog_message">Uygulama Kilidi\'ni etkinleştirmeden önce, yüz, parmak izi, PIN veya desen şifre ayarlarını tamamlamak için lütfen sistem güvenlik ayarlarına gidin.</string>
 </resources>

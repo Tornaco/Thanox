@@ -1,0 +1,439 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">Thanox</string>
+
+    <!-- Switch On/Off  -->
+    <string name="switch_on_text">Aç</string>
+    <string name="switch_off_text">Kapat</string>
+
+    <string name="status_active">Aktf</string>
+    <string name="status_not_active">Aktif Değil</string>
+    <string name="message_active_needed">Thanox hem Xposed hem de Magisk'i destekler.\n\n Xposed kullanıcıları için (Xposed modülü ve Magisk zip aynı anda kullanılamaz), Xposed uygulama modülü yapılandırma sayfasında Thanox'u seçip işaretleyebilirsiniz. \n\nFor Magisk kullanıcıları, indirilen Thanox apk'sını .apk'dan .zip'e yeniden adlandırabilir ve ardından Magisk yöneticisine yükleyebilirsiniz veya indirilen apk'yı bulamazsanız, yamayı dışa aktarmak için Ayarlar, Hakkında, Yama durumu'na gidebilirsiniz</string>
+    <string name="status_need_reboot">Yeniden Başlat</string>
+    <string name="title_framework_error">Framework hatası</string>
+    <string name="message_framework_error">Thanox Framework'ta bir hata var.  Lütfen /data/system/thanos_xxx/log altındaki günlükleri geliştiriciye bildirin.</string>
+
+    <string name="title_multiple_patch_applied_error">Birden fazla yama uygulandı</string>
+    <string name="message_multiple_patch_applied_error">Aktif Thanox'a yalnızca bir yama uygulamanız gerekir, ancak aynı anda birden fazla yama uygulayabilirsiniz: %s, Lütfen kullanım kılavuzunu okuduğunuzdan emin olun</string>
+
+    <string name="nav_title_boost">Boost</string>
+    <string name="nav_title_secure">Gizlilik</string>
+    <string name="nav_title_settings">Ayarlar</string>
+    <string name="nav_title_feedback">Geri Bildirim</string>
+    <string name="nav_title_exp">Uzantı</string>
+    <string name="nav_title_plugin">Eklenti</string>
+    <string name="nav_title_plugin_repo">Eklenti deposu</string>
+    <string name="nav_title_thanox">Thanox</string>
+
+    <string name="priv_title_fields_template">Şablonlar</string>
+    <string name="priv_title_fields_usage_count">Uygulama için %s seçildi</string>
+    <string name="priv_title_fields_usage_count_noop">Kullanılmıyor</string>
+
+    <string name="title_package_sets">Paket setleri</string>
+    <string name="title_package_add_set">Paket seti ekle</string>
+    <string name="title_package_edit_set">Görüntüle &amp; Düzenle</string>
+    <string name="title_package_delete_set">Sil</string>
+    <string name="title_package_count_set">%s Uygulamalar</string>
+
+    <string name="dialog_title_plugin_installing">Eklenti yükleniyor</string>
+    <string name="dialog_title_plugin_updating">Eklenti güncelleniyor</string>
+    <string name="dialog_title_plugin_uninstalling">Eklenti kaldırılıyor</string>
+    <string name="dialog_title_plugin_uninstall_confirm">Bu eklentiyi kaldırdığınızdan emin misiniz?</string>
+    <string name="menu_title_uninstall_plugin">Kaldır</string>
+    <string name="menu_title_view_plugin_info">Detaylar</string>
+
+    <string name="title_download">İndir</string>
+    <string name="title_install">Yükle</string>
+
+    <string name="tile_category_plugin_installed">Yüklendi</string>
+    <string name="tile_category_plugin_already_installed">Mevcut kurulum iptal edilemez, lütfen kaldırın ve yeniden yükleyin.</string>
+    <string name="tile_category_plugin_update_available">Yeni sürüm mevcut</string>
+
+    <string name="tile_su_plugin_deprecated">su Enabler eklentisi kullanımdan kaldırıldı, artık su eklentisini yüklemenize gerek yok. Profilin Motor Ayarlarında su API desteğini doğrudan etkinleştirebilirsiniz</string>
+
+    <string name="card_title_plugin_available">Thanox eklentisini yükleyin</string>
+    <string name="card_message_plugin_available">Eklenti bazı kararsız veya kritik olmayan işlevlerden oluşur.</string>
+
+    <string name="dialog_message_feedback">Lütfen uygulamanın sohbet grubuna veya github/tornaco/Thanox'a gidin ve bir sorun oluşturun.\n\n<b>Bir sorunu bildirirken lütfen aşağıdaki bilgileri ekleyin：</b>\n\n1. Sorun Açıklaması：xxxx  \n2. Sorunu çözmek için ne yapmaya çalıştım，örneğin（akıllı uygulama bekleme çalışmıyor） Kullanım kılavuzunu okumaya çalıştım ve sistem ayarlarında xxx'i açtım. \n3. Sorunun meydana geldiği Thanox uygulaması sürümü ve Android sürümü. \n4. Günlükleri /data/system/thanos/logging altında bulun. </string>
+
+    <string name="title_no_plugins_installed">No plugin available</string>
+    <string name="title_plugin_reboot_take_effect">Please reboot for changes to take effect.</string>
+
+    <string name="title_show_current_activity">Current activity</string>
+    <string name="title_net_stats">Net stats</string>
+    <string name="message_reboot_needed">Reboot your device to update thanox-core</string>
+    <string name="reboot_now">Reboot now</string>
+    <string name="reboot_later">Not now</string>
+
+    <string name="badge_app_running">Running</string>
+    <string name="badge_app_idle">Idle</string>
+
+    <string name="boost_status_running_apps">&#160;apps is running</string>
+    <string name="boost_status_blocked_start_count">Blocked %s app startup requests</string>
+    <string name="boost_status_mem_usage_percent">Memory  %s</string>
+    <string name="boost_status_swap_usage_percent">Swap  %s</string>
+    <string name="boost_status_available">Available %s</string>
+    <string name="boost_status_not_enabled">Not enabled</string>
+
+    <string name="secure_privacy_enabled_apps">apps has been restricted</string>
+    <string name="secure_privacy_request_count">Handled %s app privacy data requests</string>
+
+    <string name="boost_status_system_memory">Memory</string>
+    <string name="boost_status_system_storage">Storage</string>
+
+    <string name="feature_category_start_manage">Start</string>
+    <string name="feature_title_one_key_boost">One key boost</string>
+    <string name="feature_title_start_restrict">Background start</string>
+    <string name="feature_desc_start_restrict">Allow apps to start from background</string>
+    <string name="feature_title_bg_restrict">Background task</string>
+    <string name="feature_desc_bg_restrict_brief">Allow apps running in background</string>
+    <string name="feature_desc_bg_restrict">When the \"Background task\" feature is enabled, Thanox will perform a process cleanup after the screen is turned off. Allow selected apps to continue running even if the screen is locked, and exclude these apps from one-key boost</string>
+
+    <string name="menu_title_start_restrict_charts">Start record</string>
+    <string name="menu_title_rules">Rules</string>
+
+    <string name="feature_summary_start_restrict_rules">You can refine the association start control by making rules. For details, please refer to the novice manual. \n\nNote: The priority of the rule is greater than all other settings (for example, greening, associated startup list). \n\n Tip: Turning off rule checking may save device power.</string>
+    <string name="feature_summary_standby_restrict_rules">You can control to retain certain services, usage: KEEP $COMPONENT-NAME  \ne.g. KEEP xxx/.XService</string>
+
+    <string name="feature_category_app_clean_up">Clean</string>
+    <string name="feature_title_clean_when_task_removed">Clean tasks</string>
+    <string name="feature_desc_clean_when_task_removed">Clean the background processes of selected apps when they are cleared from recent tasks</string>
+    <string name="feature_desc_clean_when_task_removed_brief">Clean background process on task removed</string>
+
+    <string name="activity_title_start_restrict">Background start</string>
+    <string name="activity_title_bg_restrict">Background task</string>
+    <string name="activity_title_clean_when_task_removed">Clean tasks</string>
+
+    <string name="feature_title_process_manage">Process manager</string>
+    <string name="activity_title_process_manage">Running（%s）</string>
+    <string name="item_summary_process_count">%s processes</string>
+    <string name="item_summary_mem_size">%s</string>
+    <string name="item_summary_running_process_and_service">%1$s process(es) %2$s service(s) %3$s</string>
+    <string name="snack_process_update_message">Process list changed, please update</string>
+    <string name="snack_process_update_refresh">Update</string>
+    <string name="title_cached_background_process">Cached background processes</string>
+
+    <string name="feature_category_app_manage">Apps</string>
+    <string name="feature_title_apps_manager">App manager</string>
+    <string name="activity_title_apps_manager">App manager</string>
+    <string name="feature_summary_apps_manager">Per-app management and configuration</string>
+    <string name="titile_suggested_apps_recent_used">Recently used apps</string>
+    <string name="title_suggested_apps_view_all">Show all %s apps</string>
+
+    <string name="feature_category_privacy">Privacy</string>
+    <string name="feature_category_manage">Manage</string>
+    <string name="feature_category_protect">Protect</string>
+    <string name="feature_category_remind">Reminder</string>
+    <string name="feature_category_misc">Misc</string>
+
+    <string name="feature_title_recent_task_blur">Task blur</string>
+    <string name="feature_summary_recent_task_blur">Add blur effect to recent tasks</string>
+
+    <string name="feature_title_wakelock_remover">Wakelock remover</string>
+    <string name="wakelock_state_holding">Holding</string>
+
+    <string name="feature_title_app_lock">App lock</string>
+    <string name="feature_summary_app_lock">Show lock interface before app launch</string>
+
+    <string name="feature_category_notification">Notification</string>
+    <string name="feature_title_light_on_notification">Light up</string>
+    <string name="feature_summary_light_on_notification">Light up screen on new notification</string>
+    <string name="feature_title_push_delegate">Push delegate</string>
+
+    <string name="feature_category_plugins">Available features</string>
+
+    <string name="feature_category_ext">Extension</string>
+    <string name="feature_category_power_save">Power</string>
+    <string name="feature_title_smart_app_standby">X mode</string>
+    <string name="feature_summary_smart_app_standby">Affects selected app. When the app returns to the background, it will automatically stop all services or sets them into idle mode; if any service needs to be excluded, please use custom rules.</string>
+
+    <string name="feature_summary_smart_app_standby_brief">Stop service or inactive for bg apps</string>
+
+    <string name="feature_category_apps">Apps</string>
+    <string name="menu_title_smart_app_freeze_enable_all_smart_freeze_apps">Remove and de-freeze all listed</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">De-freeze all Smart Freeze apps and remove them from the Smart Freeze list. Are you sure you want to do this?</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp">De-freeze all listed temporary</string>
+    <string name="menu_title_smart_app_freeze_export_package_list">Export app list</string>
+    <string name="menu_title_smart_app_freeze_import_package_list">Import app list</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">Temporarily de-freeze all apps in the Smart Freeze list, are you sure you want to do this?</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps">De-freeze all apps</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps">Will de-freeze all disabled or suspended apps on your device, including all installed or system apps, are you sure you want to do this?</string>
+    <string name="feature_title_smart_app_freeze">Smart freeze</string>
+    <string name="feature_title_enable_package_on_launch">DOL</string>
+    <string name="feature_summary_enable_package_on_launch">De-Freeze app on Activity Launch request</string>
+    <string name="pref_title_enable_package_on_launch_by_default">Enable DOL</string>
+    <string name="pref_title_dol_tips">Show DOL tips</string>
+    <string name="pref_summary_enable_package_on_launch_by_default">Enable \"DOL\" while app has been added to Smart Freeze list</string>
+    <string name="feature_summary_smart_app_freeze">Auto disable apps according to the profile</string>
+    <string name="feature_desc_smart_app_freeze">Note: app freeze makes use of built-in feature of Android. This means that even if Thanox is uninstalled, these effects will still remain.</string>
+    <string name="menu_title_create_shortcut">Create shortcut</string>
+    <string name="menu_title_create_shortcut_apk">Create proxy apk</string>
+    <string name="menu_title_broadcast_intent_shortcut">Broadcast intent shortcut</string>
+    <string name="menu_title_activity_intent_shortcut">Activity intent shortcut</string>
+    <string name="dialog_message_create_shortcut_apk">Create a shortcut stub apk, you can install this app to as a workaround of the launcher icon for disabling apps</string>
+
+    <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">Enabled Adaptive Battery</string>
+    <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">
+        This feature works only if Adaptive battery is enabled @Android Pie+.
+    </string>
+
+    <string name="message_do_you_want_to_add_apps_to_pkg_set">Also add these Apps to current Package Set?</string>
+
+    <string name="feature_title_infinite_z">App clone</string>
+    <string name="feature_message_infinite_z_enable">App clone is implemented based on the Android multi-user mechanism. To enable the App clone, thanox will create a user Profile. Usually, a "Work" tab will be displayed on the Launcher. \nThis feature is currently experimental and not yet stable. \n\nDo you want to enable it?</string>
+    <string name="feature_message_infinite_z_disable">Will delete all the data of the app clone user and cannot be recovered. Are you sure you want to disable app clone?</string>
+    <string name="feature_message_infinite_z_uninstall">Are you sure you want to uninstall <b>%s</b>? The data of cloned app will be deleted and cannot be recovered</string>
+
+    <string name="menu_title_copy">Copy</string>
+
+    <string name="menu_title_copy_pkg_name">Copy package name</string>
+    <string name="menu_title_launch_app">Launch</string>
+    <string name="menu_title_launch_system_settings">System settings</string>
+
+    <string name="feature_title_data_cheat">Incognito</string>
+    <string name="feature_desc_data_cheat">Hide SIM info, serial id etc. please enable Xposed installer scope for selected app</string>
+    <string name="activity_title_data_cheat">Incognito</string>
+    <string name="feature_summary_pkg_data_cheat">Incognito</string>
+
+    <string name="title_allow">Allow</string>
+    <string name="title_block">Deny</string>
+
+    <string name="menu_start_manage_info">Help</string>
+    <string name="info_title_start_restrict">Tips</string>
+    <string name="info_message_start_restrict">Prevent apps start from background</string>
+    <string name="info_title_bg_restrict">Tips</string>
+    <string name="info_message_bg_restrict">Background process will be cleared if screen is locked</string>
+
+    <string name="pre_category_ui">Looks</string>
+    <string name="pre_title_ui">Themes and Icons</string>
+    <string name="pre_title_app_theme">Theme</string>
+    <string name="pre_title_app_icon_pack">Icon pack</string>
+    <string name="pre_title_app_icon_crop_to_circle">Circle icon</string>
+    <string name="pre_category_strategy">Strategy</string>
+    <string name="pre_title_strategy">Profiles and templates</string>
+    <string name="pre_category_profile">Profile</string>
+    <string name="pre_category_data">Data</string>
+    <string name="pre_title_data">Backup restore</string>
+    <string name="pre_category_about">About</string>
+    <string name="pre_title_about">About Thanox</string>
+    <string name="pre_category_dev_tools">Developers</string>
+    <string name="pre_title_developer">Developer tools</string>
+    <string name="pre_title_power">Power save settings</string>
+    <string name="pre_category_power">Power</string>
+    <string name="pre_category_app_feature_info">App info</string>
+    <string name="pre_category_app_feature_config">Configs</string>
+    <string name="pre_category_app_disable_enable">Disable</string>
+
+    <string name="pref_title_enable_logging">Enable logging</string>
+    <string name="pref_summary_enable_logging">Show logging info in console</string>
+    <string name="pref_title_show_current_activity">Show current activity</string>
+    <string name="pref_title_enable_global_white_list">Global whitelist</string>
+    <string name="pref_summary_enable_global_white_list">Warning: this setting is a dangerous setting. Inexperienced users should not experiment with this option. \nTo prevent fatal system errors due to misuse, Thanox maintains a global whitelist by default, containing some of the system\'s core applications such as components, phones, media, etc.\n If you strongly prefer not to enable this list, please turn off this option</string>
+    <string name="pref_title_build_info_app">App info</string>
+    <string name="pref_title_build_info_server">Core info</string>
+    <string name="pref_title_patch_info">Patch info</string>
+    <string name="pre_title_ignore_system_app">Exclude system apps</string>
+    <string name="pre_summary_ignore_system_app">Put system apps into white lists</string>
+    <string name="pref_title_enable_power_save">Power save</string>
+    <string name="dialog_title_battery_drain_fast_by_thanox">Battery drain</string>
+    <string name="dialog_message_battery_drain_fast_by_thanox">Thanox is starting boot logs, permission access logs and hidden logs. This data will be saved into files in real-time, which may speed up power consumption. It is recommended to enable power-saving mode on demand.</string>
+    <string name="pref_title_enable_high_battery_drain_app_reminding">High power consumption alert</string>
+    <string name="pref_summary_enable_high_battery_drain_app_reminding">Alert when highly power-consuming apps are detected</string>
+
+    <string name="pref_summary_enable_power_save">Stop recording app start, ops accessing, privacy data access to save battery as much as possible</string>
+
+    <string name="pref_title_open_source_license">Open source licenses</string>
+
+    <string name="pref_title_icon_maker_remix_icon">Icon provider</string>
+    <string name="pref_summary_icon_maker_remix_icon">Remix Design © 2018 https://remixicon.com</string>
+
+    <string name="pref_title_rss_e">Groups</string>
+    <string name="pref_summary_rss_e">Join TG or QQ group</string>
+
+    <string name="pref_title_app_state_enabled">App is enabled</string>
+    <string name="pref_title_app_to_disable">Disable</string>
+    <string name="pref_title_app_state_disabled">App is disabled</string>
+    <string name="pref_title_app_to_enable">Enable</string>
+
+    <string name="pre_title_backup">Backup</string>
+    <string name="pre_summary_backup">Backup thanox settings to external storage</string>
+    <string name="pre_title_restore">Restore</string>
+    <string name="pre_sumary_restore">Restore thanox settings from external file. If it fails, you can try to delete dir /data/system/thanos/ manually, or you can try to set the dir owner to 1000</string>
+    <string name="pre_title_restore_default">Restore default</string>
+    <string name="pre_summary_restore_default">Restore thanox default settings</string>
+
+    <string name="pref_title_new_installed_apps_config_enabled">Auto config</string>
+    <string name="pref_summary_new_installed_apps_config_enabled">Auto config new installed apps</string>
+    <string name="pref_title_new_installed_apps_config">Config template</string>
+    <string name="pref_summary_new_installed_apps_config">Edit template for auto configuration</string>
+
+    <string name="pref_title_config_template_category">Templates</string>
+    <string name="pref_action_create_new_config_template">Create templates</string>
+    <string name="pref_action_edit_or_view_config_template">View &amp; Edit</string>
+    <string name="pref_action_delete_config_template">Delete</string>
+    <string name="pref_action_apply_config_template">Apply from template</string>
+
+    <string name="pre_message_restore_success">Restore success, please reboot for changes to take effect</string>
+    <string name="pre_message_backup_success">Backup success</string>
+
+    <string name="pre_cheat_field_category_original">Original field</string>
+    <string name="pre_cheat_field_category_cheated">Incognito field</string>
+    <string name="pre_cheat_field_category_others">Others</string>
+    <string name="pre_title_cheat_sim_serial">SIM serial</string>
+
+    <string name="pre_title_cheat_sim_country_iso">SIM Country ISO</string>
+    <string name="pre_title_cheat_net_country_iso">Network Country ISO</string>
+
+    <string name="pre_title_cheat_net_op_1">Network Operator(Slot 1)</string>
+    <string name="pre_title_cheat_net_op_2">Network Operator(Slot 2)</string>
+    <string name="pre_title_cheat_net_op_3">Network Operator(Slot 3)</string>
+    <string name="pre_title_cheat_net_op_name_1">Network Operator name(Slot 1)</string>
+    <string name="pre_title_cheat_net_op_name_2">Network Operator name(Slot 2)</string>
+    <string name="pre_title_cheat_net_op_name_3">Network Operator name(Slot 3)</string>
+
+    <string name="pre_title_cheat_sim_op_1">Sim Operator(Slot 1)</string>
+    <string name="pre_title_cheat_sim_op_2">Sim Operator(Slot 2)</string>
+    <string name="pre_title_cheat_sim_op_3">Sim Operator(Slot 3)</string>
+    <string name="pre_title_cheat_sim_op_name_1">Sim Operator name(Slot 1)</string>
+    <string name="pre_title_cheat_sim_op_name_2">Sim Operator name(Slot 2)</string>
+    <string name="pre_title_cheat_sim_op_name_3">Sim Operator name(Slot 3)</string>
+
+    <string name="pre_title_cheat_net_op_name">Network Operator name(Any Slots)</string>
+    <string name="pre_title_cheat_net_op">Network Operator(Any Slots)</string>
+
+    <string name="pre_title_cheat_sim_op_name">SIM Operator name(Any Slots)</string>
+    <string name="pre_title_cheat_sim_op">SIM Operator(Any Slots)</string>
+
+
+    <string name="pre_title_cheat_line_one_num">Phone number</string>
+    <string name="pre_title_cheat_device_id">Device ID(Deprecated API)</string>
+    <string name="pre_title_cheat_android_id">Android ID</string>
+
+    <string name="pre_title_cheat_imei_slot1">IMEI(Slot 1)</string>
+    <string name="pre_title_cheat_imei_slot2">IMEI(Slot 2)</string>
+    <string name="pre_title_cheat_imei_slot3">IMEI(Slot 3)</string>
+
+    <string name="pre_title_cheat_meid_slot1">MEID(Slot 1)</string>
+    <string name="pre_title_cheat_meid_slot2">MEID(Slot 2)</string>
+    <string name="pre_title_cheat_meid_slot3">MEID(Slot 3)</string>
+
+    <string name="pre_title_cheat_not_set">Not set, won\'t mock this field</string>
+    <string name="pre_title_cheat_installed_apps">Hide installed aps</string>
+    <string name="pre_title_cheat_show_cheated_apps_notifications">Show notification</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_delay">Delay clean up after screen is locked</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_audio">Do not clean up audio streams</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_audio">Keep audio playing apps</string>
+
+    <string name="pre_title_exclude_recent_task">Exclude recent task</string>
+    <string name="pre_summary_exclude_recent_task">Set force exclude or include recent task for this app</string>
+    <string name="pre_entry_exclude_recent_task_default">Default</string>
+    <string name="pre_entry_exclude_recent_task_include">Include</string>
+    <string name="pre_entry_exclude_recent_task_exclude">Exclude</string>
+
+    <string name="pre_title_force_dialog_cancelable">Dialog cancelable</string>
+    <string name="pre_summary_force_dialog_cancelable">Force app dialog to be cancelable for, please enable Xposed installer scope for this app</string>
+
+    <string name="cheat_field_auto_gen">Fill with random fields</string>
+
+    <string name="start_record_allowed">Allowed</string>
+    <string name="start_record_blocked">Blocked</string>
+    <string name="start_record_merged">Merged</string>
+
+    <string name="privacy_record">Cheat Records</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_skip_notification">Keep apps that has notifications</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">Keep apps in recent tasks</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_skip_fg">Keep foreground app</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_fg">When enabled, apps in the foreground will not be cleaned up</string>
+
+    <string name="pre_title_bg_restrict_show_notification">Show notification</string>
+    <string name="pre_summary_bg_restrict_show_notification">Display notification when pending clean up process detected</string>
+
+    <string name="badge_trying_app">Trial</string>
+    <string name="badge_paid_app">Paid</string>
+    <string name="badge_framework_err">Error</string>
+    <string name="badge_power_save_off">Battery</string>
+
+    <string name="title_remember">Remember</string>
+    <string name="title_app_notice">Be careful!</string>
+    <string name="message_app_notice">In some cases, your device might no longer boot after installing Thanox.\n\nIf you never heard about \"soft brick\" and \"bootloop\" before or if you don\'t know how to recover from such a situation, do <b>NOT</b> install Thanox!\n\nIn any case, having a recent backup is highly recommended.</string>
+
+    <string name="menu_title_feature_desc">Feature wiki</string>
+    <string name="menu_title_start_restrict_charts_reset">Reset</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records">View detailed records</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">Only show those of current app</string>
+    <string name="pre_category_general">General</string>
+
+    <string name="pre_title_smart_freeze_screen_off_clean_up_delay">Freeze on screen off</string>
+    <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">Freeze all apps on screen off</string>
+    <string name="pre_title_smart_freeze_screen_off_clean_up">Screen off freeze delay</string>
+
+    <string name="pre_title_smart_freeze_hide_package_change_event">Hide in Launcher</string>
+    <string name="pre_summary_smart_freeze_hide_package_change_event">If this switch is enabled, Thanox will block PACKAGE CHANGED event for this package, so Launch apps will not be able to detect the package enable event.</string>
+
+    <string name="pre_title_smart_freeze_with_suspend">Suspend package</string>
+    <string name="pre_summary_smart_freeze_with_suspend">By default we freeze package by disabling package. If this switch is on we will use suspend instead of disable to package freeze it</string>
+
+    <string name="pre_category_summary_smart_freeze">By default, Thanox will freeze apps when it stopped running, task removed. \nThanox will freeze all apps during device booting up, process clean up. \nYou can also choose additional settings below.</string>
+
+    <string name="pre_category_summary_smart_standby">Applications in the background usually have services or processes that remain active, and these services or processes have their own purpose. Unfortunately, our users may not know exactly what these services and processes do.\n\nYou can pick an interference method for the applications that return to the background. It is worth mentioning that some apps may not work correctly after interfering with them.</string>
+    <string name="pre_title_smart_standby_stop_service">Stop service</string>
+    <string name="pre_summary_smart_standby_stop_service">This will attempt to stop all services that is not in the KEEP rule list</string>
+    <string name="pre_title_smart_standby_bypass_if_has_n">Skip apps with notifications</string>
+    <string name="pre_summary_smart_standby_bypass_if_has_n">Would not interfere applications with notifications</string>
+    <string name="pre_title_smart_standby_set_inactive">Standby apps</string>
+    <string name="pre_summary_smart_standby_set_inactive">Attempts to set the app to idle state. This is based on Android\'s default standby mechanism.</string>
+    <string name="pre_title_smart_standby_block_bg_service_start">Stop background processes from restarting.</string>
+    <string name="pre_summary_smart_standby_block_bg_service_start">Turning on this switch will prevent services that have been stopped from restarting in the background. Note that these blocking events will also appear in the blocking log in the background startup interface</string>
+
+
+    <string name="title_stub_apk_app_name">App label</string>
+    <string name="title_stub_apk_app_version_code">Version code</string>
+    <string name="title_stub_apk_app_version_name">Version name</string>
+
+
+    <string name="export_patch_title">Export patch</string>
+    <string name="export_patch_message">Thanox support both Xposed and Magisk.\n\n For Xposed user, you can just select and check Thanox in Xposed app module config page. \n\nFor Magisk user, you can rename downloaded Thanox apk from .apk to .zip and then install in Magisk manager, or if you can not find the downloaded apk, we also have option to export the patch zip to local external storage.</string>
+    <string name="export_patch_export_magisk">Export</string>
+
+    <string name="onboarding_text_complete">Let\'s Begin</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_xposed_tips_title">Xposed supported</string>
+    <string name="onboarding_xposed_tips_desc">1. Select and check Thanox in Xposed Manager \n2. Reboot and enjoy \n3. Remember, after every update, re-check thanox in Xposed manager and reboot!</string>
+
+    <string name="onboarding_magisk_tips_title">Magisk supported(experimental)</string>
+    <string name="onboarding_magisk_tips_desc">1. Thanox apk is also the magisk module, just rename it to zip \n2. You can also export magisk module from Settings-About-Patch info \n3. Remember, after every update, also update magisk module in Magisk manager and reboot!</string>
+
+    <string name="onboarding_github_tips_title">Update tracking</string>
+    <string name="onboarding_github_tips_desc">You can track our pre-release on \nGithub/Thanox</string>
+
+    <string name="onboarding_mode_tips_title">Activation methods</string>
+    <string name="onboarding_mode_tips_desc">Thanox currently supports two activation methods: Xposed patch or Magisk patch (experimental, supports Android11+); you can choose one of them to explore.</string>
+
+    <string name="onboarding_guide_tips_title">Wiki available</string>
+    <string name="onboarding_guide_tips_desc">You can find the instructions on the homepage of the settings. It is strongly recommended that you spend more time looking at these instructions. Maybe it will help you.</string>
+    <string name="title_package_prebuilt_set">Prebuilt</string>
+    <string name="pre_title_app_list_item_show_pkg">Show package name</string>
+    <string name="pre_title_app_list_item_show_version">Show version</string>
+    <string name="pre_title_app_list_item">App list item</string>
+    <string name="menu_title_app_info_detailed">Details</string>
+
+    <string name="device_admin_description" translatable="false">Device admin of Thanox Infinite Z profile.</string>
+
+    <string name="nav_title_guide">Guide</string>
+
+    <string name="pre_title_smart_freeze_freeze_method">Freeze method</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable">PM disable</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable is a function provided by the Android system that can \"disable\" an application; when using this method to \"freeze\" an application, the desktop icon of the frozen application will disappear. You may create a shortcut or proxy app to launch it directly from Launcher.</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend">PM suspend</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend is a function provided by Android for DPC management; the suspended application usually retains a gray icon at Launcher, but the activities of the application cannot be started directly, and a dialog usually pops up indicating that the application has been restricted from use by the Administrator. You can turn on the \"DOL\" switch for the app, which will cause Thanox to unfreeze the app when it detects a request to launch the activity.</string>
+
+    <string name="privacy_agreement_title">Privacy agreement</string>
+    <string name="privacy_agreement_accept">Accept</string>
+    <string name="privacy_agreement_discard">Discard</string>
+
+    <string name="feature_title_settings_access_record">Settings Access Record</string>
+    <string name="feature_summary_settings_access_record">View System Settings write and read records. Usually you should select the Settings, Settings Provider, and the Secure Manager app in Xposed scope.</string>
+</resources>

@@ -32,7 +32,7 @@ plugins {
 androidGitVersion {
     prefix = "v"
     codeFormat = "MMNNPP"
-    baseCode = 3030162
+    baseCode = 3030163
 }
 
 thanoxVersionCode = androidGitVersion.code()

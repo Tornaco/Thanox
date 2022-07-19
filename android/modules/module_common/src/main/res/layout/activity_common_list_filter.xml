@@ -138,12 +138,13 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/no_content_emoji"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:scaleType="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-                    android:tint="@color/md_grey_500"
-                    app:srcCompat="@drawable/module_common_ic_emotion_sad_line" />
+                    android:translationY="64dp"
+                    app:srcCompat="@drawable/module_common_no_content_1" />
 
                 <TextView
                     android:id="@+id/no_content_text"
@@ -153,7 +154,8 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:text="@string/module_common_no_data"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:visibility="gone" />
             </LinearLayout>
 
 

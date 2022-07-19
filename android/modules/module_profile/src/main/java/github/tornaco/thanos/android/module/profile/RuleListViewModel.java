@@ -28,6 +28,7 @@ import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleAddCallback;
 import github.tornaco.android.thanos.core.profile.RuleChangeListener;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
+import github.tornaco.android.thanos.core.profile.RuleInfoKt;
 import github.tornaco.android.thanos.core.util.Rxs;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -185,7 +186,7 @@ public class RuleListViewModel extends AndroidViewModel {
                     super.onRuleAddFail(errorCode, errorMessage);
                     ThanosManager.from(getApplication())
                             .getProfileManager()
-                            .addRule(ruleString, new RuleAddCallback() {
+                            .addRule("Thanox", RuleInfoKt.DEFAULT_RULE_VERSION, ruleString, new RuleAddCallback() {
                                 @Override
                                 protected void onRuleAddSuccess() {
                                     super.onRuleAddSuccess();
@@ -209,7 +210,7 @@ public class RuleListViewModel extends AndroidViewModel {
             // Try json first.
             ThanosManager.from(getApplication())
                     .getProfileManager()
-                    .addRule(ruleString, callback, ProfileManager.RULE_FORMAT_JSON);
+                    .addRule("Thanox", RuleInfoKt.DEFAULT_RULE_VERSION, ruleString, callback, ProfileManager.RULE_FORMAT_JSON);
         } catch (Exception e) {
             XLog.e(e);
         }
@@ -231,21 +232,24 @@ public class RuleListViewModel extends AndroidViewModel {
                 String ruleString = CharStreams.toString(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                 ThanosManager.from(getApplication())
                         .getProfileManager()
-                        .addRuleIfNotExists(ruleString, new RuleAddCallback() {
-                            @Override
-                            protected void onRuleAddFail(int errorCode, String errorMessage) {
-                                super.onRuleAddFail(errorCode, errorMessage);
-                                Toast.makeText(getApplication(),
-                                                R.string.module_profile_editor_save_check_error,
-                                                Toast.LENGTH_LONG)
-                                        .show();
-                            }
+                        .addRuleIfNotExists(
+                                "Thanox",
+                                1,
+                                ruleString, new RuleAddCallback() {
+                                    @Override
+                                    protected void onRuleAddFail(int errorCode, String errorMessage) {
+                                        super.onRuleAddFail(errorCode, errorMessage);
+                                        Toast.makeText(getApplication(),
+                                                        R.string.module_profile_editor_save_check_error,
+                                                        Toast.LENGTH_LONG)
+                                                .show();
+                                    }
 
-                            @Override
-                            protected void onRuleAddSuccess() {
-                                super.onRuleAddSuccess();
-                            }
-                        }, type);
+                                    @Override
+                                    protected void onRuleAddSuccess() {
+                                        super.onRuleAddSuccess();
+                                    }
+                                }, type);
             }
             Toast.makeText(getApplication(),
                             R.string.module_profile_editor_save_success,

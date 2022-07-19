@@ -113,6 +113,8 @@ class OnlineProfileViewModel @Inject constructor(
                 events.emit(Event.ImportFailRuleWithSameNameAlreadyExists(profile.ruleInfo.name))
             } else {
                 thanox.profileManager.addRuleIfNotExists(
+                    profile.ruleInfo.author,
+                    profile.ruleInfo.versionCode,
                     profile.rawProfileJson,
                     object : RuleAddCallback() {
                         override fun onRuleAddFail(errorCode: Int, errorMessage: String?) {

@@ -14,7 +14,7 @@ public interface IProfileManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public void addRule(java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
+    @Override public void addRule(java.lang.String author, int versionCode, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
     {
     }
     @Override public void deleteRule(int ruleId) throws android.os.RemoteException
@@ -130,7 +130,7 @@ public interface IProfileManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public void addRuleIfNotExists(java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
+    @Override public void addRuleIfNotExists(java.lang.String author, int versionCode, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
     {
     }
     @Override public void publishStringFact(int source, java.lang.String factValue, long delayMills) throws android.os.RemoteException
@@ -260,11 +260,15 @@ public interface IProfileManager extends android.os.IInterface
           data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
-          github.tornaco.android.thanos.core.profile.IRuleAddCallback _arg1;
-          _arg1 = github.tornaco.android.thanos.core.profile.IRuleAddCallback.Stub.asInterface(data.readStrongBinder());
-          int _arg2;
-          _arg2 = data.readInt();
-          this.addRule(_arg0, _arg1, _arg2);
+          int _arg1;
+          _arg1 = data.readInt();
+          java.lang.String _arg2;
+          _arg2 = data.readString();
+          github.tornaco.android.thanos.core.profile.IRuleAddCallback _arg3;
+          _arg3 = github.tornaco.android.thanos.core.profile.IRuleAddCallback.Stub.asInterface(data.readStrongBinder());
+          int _arg4;
+          _arg4 = data.readInt();
+          this.addRule(_arg0, _arg1, _arg2, _arg3, _arg4);
           reply.writeNoException();
           return true;
         }
@@ -577,11 +581,15 @@ public interface IProfileManager extends android.os.IInterface
           data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
-          github.tornaco.android.thanos.core.profile.IRuleAddCallback _arg1;
-          _arg1 = github.tornaco.android.thanos.core.profile.IRuleAddCallback.Stub.asInterface(data.readStrongBinder());
-          int _arg2;
-          _arg2 = data.readInt();
-          this.addRuleIfNotExists(_arg0, _arg1, _arg2);
+          int _arg1;
+          _arg1 = data.readInt();
+          java.lang.String _arg2;
+          _arg2 = data.readString();
+          github.tornaco.android.thanos.core.profile.IRuleAddCallback _arg3;
+          _arg3 = github.tornaco.android.thanos.core.profile.IRuleAddCallback.Stub.asInterface(data.readStrongBinder());
+          int _arg4;
+          _arg4 = data.readInt();
+          this.addRuleIfNotExists(_arg0, _arg1, _arg2, _arg3, _arg4);
           reply.writeNoException();
           return true;
         }
@@ -843,18 +851,20 @@ public interface IProfileManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void addRule(java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
+      @Override public void addRule(java.lang.String author, int versionCode, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(author);
+          _data.writeInt(versionCode);
           _data.writeString(ruleJson);
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           _data.writeInt(format);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addRule, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addRule(ruleJson, callback, format);
+            getDefaultImpl().addRule(author, versionCode, ruleJson, callback, format);
             return;
           }
           _reply.readException();
@@ -1498,18 +1508,20 @@ public interface IProfileManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void addRuleIfNotExists(java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
+      @Override public void addRuleIfNotExists(java.lang.String author, int versionCode, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(author);
+          _data.writeInt(versionCode);
           _data.writeString(ruleJson);
           _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           _data.writeInt(format);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addRuleIfNotExists, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addRuleIfNotExists(ruleJson, callback, format);
+            getDefaultImpl().addRuleIfNotExists(author, versionCode, ruleJson, callback, format);
             return;
           }
           _reply.readException();
@@ -1972,7 +1984,7 @@ public interface IProfileManager extends android.os.IInterface
   }
   public void setAutoApplyForNewInstalledAppsEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isAutoApplyForNewInstalledAppsEnabled() throws android.os.RemoteException;
-  public void addRule(java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
+  public void addRule(java.lang.String author, int versionCode, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
   public void deleteRule(int ruleId) throws android.os.RemoteException;
   public boolean enableRule(int ruleId) throws android.os.RemoteException;
   public boolean disableRule(int ruleId) throws android.os.RemoteException;
@@ -2003,7 +2015,7 @@ public interface IProfileManager extends android.os.IInterface
   public void setAutoConfigTemplateSelection(java.lang.String id) throws android.os.RemoteException;
   public java.lang.String getAutoConfigTemplateSelectionId() throws android.os.RemoteException;
   public boolean applyConfigTemplateForPackage(java.lang.String packageName, github.tornaco.android.thanos.core.profile.ConfigTemplate template) throws android.os.RemoteException;
-  public void addRuleIfNotExists(java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
+  public void addRuleIfNotExists(java.lang.String author, int versionCode, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
   public void publishStringFact(int source, java.lang.String factValue, long delayMills) throws android.os.RemoteException;
   public void updateRule(int ruleId, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
   public void registerRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException;

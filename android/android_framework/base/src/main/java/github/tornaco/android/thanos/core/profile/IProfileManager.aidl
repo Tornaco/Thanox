@@ -12,7 +12,7 @@ interface IProfileManager {
     void setAutoApplyForNewInstalledAppsEnabled(boolean enable);
     boolean isAutoApplyForNewInstalledAppsEnabled();
 
-    void addRule(String ruleJson, in IRuleAddCallback callback, int format);
+    void addRule(String author, int versionCode, String ruleJson, in IRuleAddCallback callback, int format);
     void deleteRule(int ruleId);
 
     boolean enableRule(int ruleId);
@@ -57,7 +57,7 @@ interface IProfileManager {
 
     boolean applyConfigTemplateForPackage(String packageName, in ConfigTemplate template);
 
-    void addRuleIfNotExists(String ruleJson, in IRuleAddCallback callback, int format);
+    void addRuleIfNotExists(String author, int versionCode, String ruleJson, in IRuleAddCallback callback, int format);
 
     void publishStringFact(int source, String factValue, long delayMills);
 

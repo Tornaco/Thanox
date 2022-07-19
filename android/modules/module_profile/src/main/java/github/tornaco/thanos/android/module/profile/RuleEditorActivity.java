@@ -19,7 +19,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.elvishew.xlog.XLog;
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.vic797.syntaxhighlight.SyntaxListener;
 
@@ -31,6 +30,7 @@ import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleAddCallback;
 import github.tornaco.android.thanos.core.profile.RuleCheckCallback;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
+import github.tornaco.android.thanos.core.profile.RuleInfoKt;
 import github.tornaco.android.thanos.core.util.TextWatcherAdapter;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
@@ -192,7 +192,7 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
                 } else {
                     ThanosManager.from(getApplicationContext())
                             .getProfileManager()
-                            .addRule(getCurrentEditingContent(), callback, format);
+                            .addRule("Thanox", RuleInfoKt.DEFAULT_RULE_VERSION, getCurrentEditingContent(), callback, format);
                 }
 
                 return true;

@@ -33,8 +33,8 @@ public class ProfileManager {
     }
 
     @SneakyThrows
-    public void addRule(String ruleString, RuleAddCallback callback, int format) {
-        server.addRule(ruleString, callback.getStub(), format);
+    public void addRule(String author, int versionCode, String ruleString, RuleAddCallback callback, int format) {
+        server.addRule(author, versionCode, ruleString, callback.getStub(), format);
     }
 
     @SneakyThrows
@@ -43,8 +43,8 @@ public class ProfileManager {
     }
 
     @SneakyThrows
-    public void addRuleIfNotExists(String ruleString, RuleAddCallback callback, int format) {
-        server.addRuleIfNotExists(ruleString, callback.getStub(), format);
+    public void addRuleIfNotExists(String author, int versionCode, String ruleString, RuleAddCallback callback, int format) {
+        server.addRuleIfNotExists(author, versionCode, ruleString, callback.getStub(), format);
     }
 
     @SneakyThrows

@@ -55,6 +55,7 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
         holder.itemBinding.setIsLastOne(position == getItemCount() - 1);
         holder.itemBinding.switchContainer.setOnClickListener(v -> holder.itemBinding.itemSwitch.performClick());
         holder.itemBinding.setUpdateTimeString(FuzzyDateTimeFormatter.getTimeAgo(holder.itemView.getContext(), new Date(model.getUpdateTimeMills())));
+        holder.itemBinding.setFormattedVersionName("v" + model.getVersionCode());
         holder.itemBinding.delete.setOnClickListener(v -> ruleItemDeleteClickListener.onDeleteItemClick(model));
         holder.itemBinding.executePendingBindings();
     }

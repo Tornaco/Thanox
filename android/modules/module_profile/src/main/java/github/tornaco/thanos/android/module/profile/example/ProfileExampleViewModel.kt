@@ -25,6 +25,7 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.profile.DEFAULT_RULE_VERSION
 import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.core.profile.RuleAddCallback
 import github.tornaco.android.thanos.core.profile.RuleInfo
@@ -96,6 +97,8 @@ class ProfileExampleViewModel @Inject constructor(@ApplicationContext private va
                 events.emit(Event.ImportFailRuleWithSameNameAlreadyExists(example.ruleInfo.name))
             } else {
                 thanox.profileManager.addRuleIfNotExists(
+                    "Thanox",
+                    DEFAULT_RULE_VERSION,
                     example.ruleInfo.ruleString,
                     object : RuleAddCallback() {
                         override fun onRuleAddFail(errorCode: Int, errorMessage: String?) {

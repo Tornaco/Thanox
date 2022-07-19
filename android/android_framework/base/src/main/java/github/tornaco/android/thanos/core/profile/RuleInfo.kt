@@ -3,6 +3,8 @@ package github.tornaco.android.thanos.core.profile
 import android.os.Parcel
 import android.os.Parcelable
 
+const val DEFAULT_RULE_VERSION = 1
+
 data class RuleInfo(
     val id: Int,
     var name: String,
@@ -11,7 +13,8 @@ data class RuleInfo(
     var author: String,
     var updateTimeMills: Long,
     var enabled: Boolean,
-    var format: Int
+    var format: Int,
+    var versionCode: Int
 ) : Parcelable {
 
     private constructor(parcel: Parcel) : this(
@@ -22,6 +25,7 @@ data class RuleInfo(
         parcel.readString(),
         parcel.readLong(),
         parcel.readByte() != 0.toByte(),
+        parcel.readInt(),
         parcel.readInt()
     )
 
@@ -34,6 +38,7 @@ data class RuleInfo(
         parcel.writeLong(updateTimeMills)
         parcel.writeByte(if (enabled) 1 else 0)
         parcel.writeInt(format)
+        parcel.writeInt(versionCode)
     }
 
     override fun describeContents(): Int {
@@ -52,6 +57,7 @@ data class RuleInfo(
         if (ruleString != other.ruleString) return false
         if (author != other.author) return false
         if (format != other.format) return false
+        if (versionCode != other.versionCode) return false
 
         return true
     }
@@ -60,6 +66,7 @@ data class RuleInfo(
         var result = name.hashCode()
         result = 31 * result + ruleString.hashCode()
         result = 31 * result + format
+        result = 31 * result + versionCode
         return result
     }
 

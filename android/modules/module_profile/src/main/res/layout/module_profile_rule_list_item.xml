@@ -26,6 +26,10 @@
         <variable
             name="updateTimeString"
             type="String" />
+
+        <variable
+            name="formattedVersionName"
+            type="String" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -79,15 +83,56 @@
                         android:textAppearance="@style/TextAppearance.TileTitle"
                         tools:text="Profile name" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/common_view_margin_mini"
                         android:layout_marginEnd="@dimen/common_view_margin_default"
                         android:layout_marginBottom="@dimen/common_view_margin_small"
-                        android:text="@{updateTimeString}"
-                        android:textAppearance="@style/TextAppearance.TileSubTitle"
-                        tools:text="2022-01-02:11:36:18" />
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:contentDescription="Author"
+                            android:src="@drawable/module_common_ic_baseline_person_24"
+                            app:tint="?android:textColorSecondary"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{rule.ruleInfo.author}"
+                            android:textAppearance="@style/TextAppearance.TileSubTitle"
+                            tools:text="Tornaco" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_view_margin_mini"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:layout_marginBottom="@dimen/common_view_margin_small"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:contentDescription="Author"
+                            android:src="@drawable/module_common_ic_hashtag"
+                            app:tint="?android:textColorSecondary"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{formattedVersionName}"
+                            android:textAppearance="@style/TextAppearance.TileSubTitle"
+                            tools:text="v18" />
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/description"

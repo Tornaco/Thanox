@@ -1,0 +1,21 @@
+{
+    "author": "myflavor",
+    "version": 1,
+    "tags": [
+        "app_opt"
+    ],
+    "profile": {
+        "name": "NoActive",
+        "description": "应用进入后台冻结进程（搭配NoANR，下载地址https://github.com/myflavor/NoANR/releases/tag/V2.3）",
+        "priority": -1,
+        "condition": "frontPkgChanged",
+        "actions": [
+            "if(thanos.getActivityManager().isPkgSmartStandByEnabled(to)){foreach (proc:thanos.getActivityManager().getRunningAppProcess()){if (proc.packageName==to){android.os.Process.sendSignal(proc.pid,18);}};context.getSystemService(context.APP_OPS_SERVICE).setMode(android.app.AppOpsManager.OP_WAKE_LOCK, thanos.getPkgManager().getUidForPkgName(to), to, android.app.AppOpsManager.MODE_DEFAULT);}",
+            "if(!thanos.getActivityManager().isPkgSmartStandByEnabled(from)){break}",
+            "foreach (rule : thanos.getActivityManager().getAllStandbyRules()){if(rule.startsWith(\"KEEP\") && rule.contains(from + \"/\")){break}}",
+            "context.getSystemService(context.APP_OPS_SERVICE).setMode(android.app.AppOpsManager.OP_WAKE_LOCK, thanos.getPkgManager().getUidForPkgName(from), from, android.app.AppOpsManager.MODE_IGNORED);",
+            "Thread.sleep(2000);",
+            "if(activity.getFrontAppPackage()!=from && !thanos.windowManager.hasVisibleWindows(from) && !thanos.getActivityManager().hasTopVisibleActivities(from)){foreach (proc:thanos.getActivityManager().getRunningAppProcess()){if (proc.packageName==from){android.os.Process.sendSignal(proc.pid,19);}}};"
+        ]
+    }
+}

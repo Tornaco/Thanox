@@ -24,9 +24,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Download
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Tag
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -127,8 +125,21 @@ class OnlineProfileActivity : ComposeThemeActivity() {
                     )
                 }
             ) {
-                ProfileList(contentPadding, state) {
-                    viewModel.import(it)
+                if (state.files.isEmpty() && !state.isLoading) {
+                    NoContent(modifier = Modifier
+                        .padding(contentPadding)
+                        .fillMaxSize())
+                } else {
+                    ProfileList(contentPadding, state,
+                        import = {
+                            viewModel.import(it)
+                        },
+                        reImport = {
+                            viewModel.reImport(it)
+                        },
+                        update = {
+                            viewModel.update(it)
+                        })
                 }
             }
         }
@@ -139,7 +150,9 @@ class OnlineProfileActivity : ComposeThemeActivity() {
 private fun ProfileList(
     contentPadding: PaddingValues,
     state: OnlineProfileState,
-    import: (OnlineProfileItem) -> Unit
+    import: (OnlineProfileItem) -> Unit,
+    reImport: (OnlineProfileItem) -> Unit,
+    update: (OnlineProfileItem) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -148,13 +161,18 @@ private fun ProfileList(
     ) {
 
         items(state.files) {
-            ProfileItem(it, import)
+            ProfileItem(profile = it, import = import, reImport = reImport, update = update)
         }
     }
 }
 
 @Composable
-private fun ProfileItem(profile: OnlineProfileItem, import: (OnlineProfileItem) -> Unit) {
+private fun ProfileItem(
+    profile: OnlineProfileItem,
+    import: (OnlineProfileItem) -> Unit,
+    reImport: (OnlineProfileItem) -> Unit,
+    update: (OnlineProfileItem) -> Unit
+) {
     val activity = LocalContext.current.requireActivity()
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
     val secondaryTextColor = Color(0xFF757575)
@@ -227,17 +245,47 @@ private fun ProfileItem(profile: OnlineProfileItem, import: (OnlineProfileItem) 
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                OutlinedButton(
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    onClick = {
-                        import(profile)
-                    }) {
-                    Icon(
-                        imageVector = Icons.Filled.Download,
-                        contentDescription = "Import",
-                        modifier = Modifier.padding(end = 8.dp)
-                    )
-                    Text(text = stringResource(id = R.string.common_menu_title_import))
+                if (!profile.isInstalled) {
+                    OutlinedButton(
+                        modifier = Modifier.align(Alignment.CenterEnd),
+                        onClick = {
+                            import(profile)
+                        }) {
+                        Icon(
+                            imageVector = Icons.Filled.Download,
+                            contentDescription = "Import",
+                            modifier = Modifier.padding(end = 8.dp)
+                        )
+                        Text(text = stringResource(id = R.string.common_menu_title_import))
+                    }
+                } else {
+                    if (profile.hasUpdate) {
+                        OutlinedButton(
+                            modifier = Modifier.align(Alignment.CenterEnd),
+                            onClick = {
+                                update(profile)
+                            }) {
+                            Icon(
+                                imageVector = Icons.Filled.Update,
+                                contentDescription = "Update",
+                                modifier = Modifier.padding(end = 8.dp)
+                            )
+                            Text(text = stringResource(id = R.string.common_menu_title_update))
+                        }
+                    } else {
+                        OutlinedButton(
+                            modifier = Modifier.align(Alignment.CenterEnd),
+                            onClick = {
+                                reImport(profile)
+                            }) {
+                            Icon(
+                                imageVector = Icons.Filled.Refresh,
+                                contentDescription = "Re-Import",
+                                modifier = Modifier.padding(end = 8.dp)
+                            )
+                            Text(text = stringResource(id = R.string.common_menu_title_re_import))
+                        }
+                    }
                 }
             }
         }

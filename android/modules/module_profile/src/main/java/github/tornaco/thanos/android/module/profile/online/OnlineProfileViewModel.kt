@@ -19,6 +19,7 @@ package github.tornaco.thanos.android.module.profile.online
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elvishew.xlog.XLog
@@ -49,7 +50,9 @@ data class OnlineProfileState(
 data class OnlineProfileItem(
     val onlineProfile: OnlineProfile,
     val ruleInfo: RuleInfo,
-    val rawProfileJson: String
+    val rawProfileJson: String,
+    val isInstalled: Boolean,
+    val hasUpdate: Boolean
 )
 
 sealed interface Event {
@@ -81,25 +84,33 @@ class OnlineProfileViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 kotlin.runCatching {
+                    val profileManager = thanox.profileManager
                     val files = repo.getProfiles()
                     val rules = files.mapNotNull { op ->
                         kotlin.runCatching {
                             val jsonString =
                                 JsonFormatter.format(gson.toJson(listOf(op.profile)))
-                            thanox.profileManager.parseRuleOrNull(
+                            profileManager.parseRuleOrNull(
                                 jsonString,
                                 ProfileManager.RULE_FORMAT_JSON
                             )?.let { ruleInfo ->
-                                OnlineProfileItem(op, ruleInfo, jsonString)
+                                val installedRuleOrNull =
+                                    profileManager.getRuleByName(ruleInfo.name)
+                                val isInstalled = installedRuleOrNull != null
+                                val hasUpdate =
+                                    installedRuleOrNull?.let { it.versionCode < ruleInfo.versionCode }
+                                        ?: false
+                                OnlineProfileItem(op, ruleInfo, jsonString, isInstalled, hasUpdate)
                             }
                         }.getOrElse {
-                            XLog.e("Parse one profile error", it)
+                            XLog.e("Parse one profile error: ${Log.getStackTraceString(it)}")
                             null
                         }
                     }
                     _state.value = _state.value.copy(files = rules, isLoading = false)
                 }.onFailure {
-                    XLog.e("loadOnlineProfiles error", it)
+                    XLog.e("loadOnlineProfiles error: ${Log.getStackTraceString(it)}")
+                    _state.value = _state.value.copy(files = emptyList(), isLoading = false)
                 }
             }
         }
@@ -139,5 +150,19 @@ class OnlineProfileViewModel @Inject constructor(
 
     fun refresh() {
         loadOnlineProfiles()
+    }
+
+    fun reImport(profile: OnlineProfileItem) {
+        with(thanox.profileManager) {
+            getRuleByName(profile.ruleInfo.name)?.let {
+                deleteRule(it.id)
+            }
+
+            import(profile)
+        }
+    }
+
+    fun update(profile: OnlineProfileItem) {
+        reImport(profile)
     }
 }

@@ -275,7 +275,7 @@ private fun ServicePopupMenu(
             MenuItem(
                 "stop",
                 stringResource(id = R.string.service_stop),
-                R.drawable.ic_close_fill
+                R.drawable.module_profile_ic_close_fill
             ),
             MenuItem(
                 "addToGlobalVar",
@@ -412,7 +412,7 @@ private fun ProcessPopupMenu(
             MenuItem(
                 "stop",
                 stringResource(id = R.string.service_stop),
-                R.drawable.ic_close_fill
+                R.drawable.module_profile_ic_close_fill
             ),
             MenuItem(
                 "addToGlobalVar",

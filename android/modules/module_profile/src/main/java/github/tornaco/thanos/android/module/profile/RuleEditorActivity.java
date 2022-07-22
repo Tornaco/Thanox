@@ -3,6 +3,7 @@ package github.tornaco.thanos.android.module.profile;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,10 +20,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
+import com.amrdeveloper.codeview.CodeView;
 import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.vic797.syntaxhighlight.SyntaxListener;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import github.tornaco.android.rhino.plugin.Verify;
@@ -35,17 +39,24 @@ import github.tornaco.android.thanos.core.util.TextWatcherAdapter;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.TypefaceHelper;
+import github.tornaco.thanos.android.module.profile.codeditor.plugin.UndoRedoManager;
+import github.tornaco.thanos.android.module.profile.codeditor.syntax.LanguageManager;
+import github.tornaco.thanos.android.module.profile.codeditor.syntax.LanguageName;
+import github.tornaco.thanos.android.module.profile.codeditor.syntax.ThemeName;
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileWorkflowEditorBinding;
 import util.JsonFormatter;
 import util.ObjectsUtils;
 
-public class RuleEditorActivity extends ThemeActivity implements SyntaxListener {
+public class RuleEditorActivity extends ThemeActivity {
     private ModuleProfileWorkflowEditorBinding binding;
     @Nullable
     private RuleInfo ruleInfo;
     private String originalContent = "";
     private int format;
     private boolean readOnly;
+
+    private UndoRedoManager undoRedoManager;
+    private LanguageManager languageManager;
 
     @Verify
     public static void start(Context context, RuleInfo ruleInfo, int format, boolean readOnly) {
@@ -80,10 +91,7 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
 
     private void initView() {
         setSupportActionBar(binding.toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        showHomeAsUpNavigator();
 
         setTitle(ruleInfo == null ? R.string.module_profile_rule_new : R.string.module_profile_rule_edit);
         if (readOnly) {
@@ -94,14 +102,14 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
             checkRuleAndUpdateTips(ruleInfo.getRuleString());
         }
 
-        binding.editText.setEnabled(!readOnly);
+        binding.codeView.setEnabled(!readOnly);
         int toolbarVisible = !readOnly ? View.VISIBLE : View.GONE;
         binding.editorActionsToolbarSymbols1.setVisibility(toolbarVisible);
         binding.editorActionsToolbarSymbols2.setVisibility(toolbarVisible);
         binding.editorActionsToolbarSymbols3.setVisibility(toolbarVisible);
         binding.editorActionsToolbar.setVisibility(toolbarVisible);
 
-        binding.editText.addTextChangedListener(new TextWatcherAdapter() {
+        binding.codeView.addTextChangedListener(new TextWatcherAdapter() {
             @Override
             public void afterTextChanged(Editable s) {
                 String current = getCurrentEditingContent();
@@ -140,10 +148,10 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
             // This is symbols.
             String s = String.valueOf(item.getTitle());
             XLog.i("Input: %s", s);
-            int start = Math.max(binding.editText.getSelectionStart(), 0);
-            int end = Math.max(binding.editText.getSelectionEnd(), 0);
-            if (binding.editText.getText() == null) return false;
-            binding.editText.getText().replace(Math.min(start, end), Math.max(start, end), s, 0, s.length());
+            int start = Math.max(binding.codeView.getSelectionStart(), 0);
+            int end = Math.max(binding.codeView.getSelectionEnd(), 0);
+            if (binding.codeView.getText() == null) return false;
+            binding.codeView.getText().replace(Math.min(start, end), Math.max(start, end), s, 0, s.length());
             return true;
         };
         binding.editorActionsToolbarSymbols1.setOnMenuItemClickListener(symbolClickListener);
@@ -198,11 +206,11 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
                 return true;
             }
             if (item.getItemId() == R.id.action_text_size_inc) {
-                binding.editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.editText.getTextSize() + 5f);
+                binding.codeView.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.codeView.getTextSize() + 5f);
                 return true;
             }
             if (item.getItemId() == R.id.action_text_size_dec) {
-                binding.editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.editText.getTextSize() - 5f);
+                binding.codeView.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.codeView.getTextSize() - 5f);
                 return true;
             }
             if (R.id.action_delete == item.getItemId()) {
@@ -218,10 +226,10 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
                 if (dataItem == null) return false;
                 String content = dataItem.getText().toString();
                 XLog.i("Input: %s", content);
-                int start = Math.max(binding.editText.getSelectionStart(), 0);
-                int end = Math.max(binding.editText.getSelectionEnd(), 0);
-                if (binding.editText.getText() == null) return false;
-                binding.editText.getText().replace(Math.min(start, end), Math.max(start, end), content, 0, content.length());
+                int start = Math.max(binding.codeView.getSelectionStart(), 0);
+                int end = Math.max(binding.codeView.getSelectionEnd(), 0);
+                if (binding.codeView.getText() == null) return false;
+                binding.codeView.getText().replace(Math.min(start, end), Math.max(start, end), content, 0, content.length());
                 return true;
             }
 
@@ -247,28 +255,74 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
 
-        binding.editText.setTypeface(TypefaceHelper.jetbrainsMono(thisActivity()));
-        binding.lineLayout.setTypeface(TypefaceHelper.jetbrainsMono(thisActivity()));
-        binding.editText.setListener(this);
-        binding.editText.addSyntax(getAssets(), "json.json");
-        binding.lineLayout.attachEditText(binding.editText);
-        binding.editText.startHighlight(true);
-        binding.editText.updateVisibleRegion();
+        setupCodeView(binding.codeView);
+        setupCodeViewPlugins(binding.codeView);
+        setupLanguageAutoComplete(binding.codeView);
 
         binding.badge1.setOnClickListener(v -> {
             if (format == ProfileManager.RULE_FORMAT_JSON) {
-                Editable editable = binding.editText.getText();
+                Editable editable = binding.codeView.getText();
                 if (editable != null) {
-                    binding.editText.setText(JsonFormatter.format(editable.toString()));
-                    binding.editText.updateVisibleRegion();
+                    binding.codeView.setText(JsonFormatter.format(editable.toString()));
                 }
             }
         });
     }
 
+    private void setupCodeView(CodeView codeView) {
+        binding.codeView.setTypeface(TypefaceHelper.jetbrainsMonoMedium(thisActivity()));
+
+        // Setup Line number feature
+        codeView.setEnableLineNumber(true);
+        codeView.setLineNumberTextColor(Color.GRAY);
+        codeView.setLineNumberTextSize(25f);
+
+        // Setup Auto indenting feature
+        codeView.setTabLength(4);
+        codeView.setEnableAutoIndentation(true);
+
+        // Setup the language and theme with SyntaxManager helper class
+        languageManager = new LanguageManager(this, codeView);
+        languageManager.applyTheme(LanguageName.JSON, ThemeName.DYNAMIC);
+
+        // Setup auto pair complete
+        final Map<Character, Character> pairCompleteMap = new HashMap<>();
+        pairCompleteMap.put('{', '}');
+        pairCompleteMap.put('[', ']');
+        pairCompleteMap.put('(', ')');
+        pairCompleteMap.put('<', '>');
+        pairCompleteMap.put('"', '"');
+        pairCompleteMap.put('\'', '\'');
+
+        codeView.setPairCompleteMap(pairCompleteMap);
+        codeView.enablePairComplete(true);
+        codeView.enablePairCompleteCenterCursor(true);
+
+        codeView.setHorizontallyScrolling(false);
+    }
+
+    private void setupLanguageAutoComplete(CodeView codeView) {
+        String[] languageKeywords = languageManager.getLanguageKeywords(LanguageName.JSON);
+
+        // Custom list item xml layout
+        final int layoutId = R.layout.module_profile_list_item_suggestion;
+
+        // TextView id to put suggestion on it
+        final int viewId = R.id.suggestItemTextView;
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, layoutId, viewId, languageKeywords);
+
+        // Add the ArrayAdapter to the CodeView
+        codeView.setAdapter(adapter);
+    }
+
+    private void setupCodeViewPlugins(CodeView codeView) {
+        undoRedoManager = new UndoRedoManager(codeView);
+        undoRedoManager.connect();
+    }
+
     private String getCurrentEditingContent() {
-        if (binding.editText.getText() == null) return "";
-        return binding.editText.getText().toString().trim();
+        if (binding.codeView.getText() == null) return "";
+        return binding.codeView.getText().toString().trim();
     }
 
     @Override
@@ -280,6 +334,10 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.module_profile_rule_editor, menu);
+        if (readOnly) {
+            menu.findItem(R.id.action_undo).setVisible(false);
+            menu.findItem(R.id.action_redo).setVisible(false);
+        }
         return true;
     }
 
@@ -287,6 +345,12 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_info == item.getItemId()) {
             showTipsInfo();
+        }
+        if (R.id.action_undo == item.getItemId()) {
+            undoRedoManager.undo();
+        }
+        if (R.id.action_redo == item.getItemId()) {
+            undoRedoManager.redo();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -360,25 +424,5 @@ public class RuleEditorActivity extends ThemeActivity implements SyntaxListener 
                             }
                         },
                         format);
-    }
-
-    @Override
-    public void onLineClick(Editable editable, String text, int line) {
-        // XLog.v("onLineClick");
-    }
-
-    @Override
-    public void onHighlightStart(Editable editable) {
-        // XLog.v("onHighlightStart");
-    }
-
-    @Override
-    public void onHighlightEnd(Editable editable) {
-        // XLog.v("onHighlightEnd");
-    }
-
-    @Override
-    public void onError(Exception e) {
-        XLog.e(e, "onError");
     }
 }

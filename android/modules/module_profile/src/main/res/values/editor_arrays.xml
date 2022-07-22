@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ (C) Copyright 2022 Thanox
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--Java Keywords List-->
+    <string-array name="java_keywords" tools:ignore="ResourceName">
+        <item>public</item>
+        <item>private</item>
+        <item>protected</item>
+        <item>package</item>
+        <item>abstract</item>
+        <item>boolean</item>
+        <item>break</item>
+        <item>byte</item>
+        <item>case</item>
+        <item>catch</item>
+        <item>char</item>
+        <item>class</item>
+        <item>continue</item>
+        <item>default</item>
+        <item>do</item>
+        <item>double</item>
+        <item>else</item>
+        <item>enum</item>
+        <item>extends</item>
+        <item>final</item>
+        <item>finally</item>
+        <item>float</item>
+        <item>for</item>
+        <item>if</item>
+        <item>implements</item>
+        <item>import</item>
+        <item>instanceof</item>
+        <item>int</item>
+        <item>interface</item>
+        <item>long</item>
+        <item>native</item>
+        <item>new</item>
+        <item>return</item>
+        <item>short</item>
+        <item>static</item>
+        <item>strictfp</item>
+        <item>super</item>
+        <item>switch</item>
+        <item>synchronized</item>
+        <item>this</item>
+        <item>throw</item>
+        <item>transient</item>
+        <item>try</item>
+        <item>void</item>
+        <item>volatile</item>
+        <item>while</item>
+
+        <item>ui</item>
+        <item>thanox</item>
+        <item>thanos</item>
+        <item>context</item>
+        <item>log</item>
+        <item>audio</item>
+        <item>killer</item>
+        <item>activity</item>
+        <item>power</item>
+        <item>task</item>
+        <item>data</item>
+        <item>input</item>
+        <item>hw</item>
+        <item>io</item>
+        <item>ringtone</item>
+        <item>sh</item>
+        <item>su</item>
+        <item>pkg</item>
+        <item>battery</item>
+        <item>actor</item>
+    </string-array>
+</resources>

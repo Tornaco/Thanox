@@ -5,28 +5,28 @@
 
     <item
             android:id="@+id/action_delete"
-            android:icon="@drawable/ic_delete_bin_fill"
+            android:icon="@drawable/module_profile_ic_delete_bin_fill"
             android:title="@string/module_profile_edit_delete"
             app:showAsAction="always"
             tools:ignore="AlwaysShowAction" />
 
     <item
             android:id="@+id/action_text_size_inc"
-            android:icon="@drawable/ic_zoom_in_fill"
+            android:icon="@drawable/module_profile_ic_zoom_in_fill"
             android:title="@string/module_profile_rule_edit_action_text_size_inc"
             app:showAsAction="always"
             tools:ignore="AlwaysShowAction" />
 
     <item
             android:id="@+id/action_text_size_dec"
-            android:icon="@drawable/ic_zoom_out_fill"
+            android:icon="@drawable/module_profile_ic_zoom_out_fill"
             android:title="@string/module_profile_rule_edit_action_text_size_dec"
             app:showAsAction="always"
             tools:ignore="AlwaysShowAction" />
 
     <item
             android:id="@+id/action_save_apply"
-            android:icon="@drawable/ic_save_fill"
+            android:icon="@drawable/module_profile_ic_save_fill"
             android:title="@string/module_profile_rule_edit_action_save"
             app:showAsAction="always"
             tools:ignore="AlwaysShowAction" />

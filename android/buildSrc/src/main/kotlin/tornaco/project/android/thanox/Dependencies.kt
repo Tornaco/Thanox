@@ -165,6 +165,9 @@ object Libs {
         const val listenablefutureEmpty =
             "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"
 
+        // https://github.com/AmrDeveloper/CodeView
+        const val codeView = "io.github.amrdeveloper:codeview:1.3.5"
+
     }
 
     object Rules {

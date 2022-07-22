@@ -75,24 +75,10 @@ public class LicenseHelper {
 
         notices.addNotice(
                 new Notice(
-                        "MPAndroidChart",
-                        "https://github.com/PhilJay/MPAndroidChart",
-                        "Copyright 2019 Philipp Jahoda",
-                        new ApacheSoftwareLicense20()));
-
-        notices.addNotice(
-                new Notice(
                         "easy-rules",
                         "https://github.com/j-easy/easy-rules",
                         "Copyright (c) 2019 Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)",
                         new MITLicense()));
-
-        notices.addNotice(
-                new Notice(
-                        "Timber",
-                        "https://github.com/JakeWharton/timber",
-                        "Copyright 2013 Jake Wharton",
-                        new ApacheSoftwareLicense20()));
 
         notices.addNotice(
                 new Notice(
@@ -138,13 +124,6 @@ public class LicenseHelper {
 
         notices.addNotice(
                 new Notice(
-                        "android_native_code_view",
-                        "https://github.com/vic797/android_native_code_view",
-                        "Copyright 2017 Victor Campos",
-                        new ApacheSoftwareLicense20()));
-
-        notices.addNotice(
-                new Notice(
                         "ApkBuilder",
                         "https://github.com/hyb1996/Auto.js-ApkBuilder",
                         null,
@@ -183,6 +162,13 @@ public class LicenseHelper {
                         "time-duration-picker",
                         "https://github.com/svenwiegand/time-duration-picker",
                         null,
+                        new MITLicense()));
+
+        notices.addNotice(
+                new Notice(
+                        "CodeView",
+                        "https://github.com/AmrDeveloper/CodeView",
+                        "Copyright (c) 2020 - Present Amr Hesham",
                         new MITLicense()));
 
         new LicensesDialog.Builder(Objects.requireNonNull(activity))

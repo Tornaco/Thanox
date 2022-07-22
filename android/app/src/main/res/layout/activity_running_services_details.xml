@@ -53,6 +53,6 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/common_view_margin_default"
             android:text="@string/service_stop"
-            app:icon="@drawable/ic_close_fill" />
+            app:icon="@drawable/module_profile_ic_close_fill" />
     </RelativeLayout>
 </layout>

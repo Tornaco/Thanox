@@ -203,7 +203,7 @@
                     android:layout_marginEnd="@dimen/common_view_margin_default"
                     android:layout_marginBottom="@dimen/common_view_margin_tiny"
                     android:text="@string/common_menu_title_remove"
-                    app:icon="@drawable/ic_delete_bin_fill" />
+                    app:icon="@drawable/module_profile_ic_delete_bin_fill" />
             </RelativeLayout>
         </RelativeLayout>
 

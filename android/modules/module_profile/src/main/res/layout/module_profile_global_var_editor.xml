@@ -52,27 +52,19 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.vic797.syntaxhighlight.LineCountLayout
-            android:id="@+id/line_layout"
+        <com.amrdeveloper.codeview.CodeView
+            android:id="@+id/codeView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/editor_actions_toolbar"
             android:layout_below="@id/app_bar"
-            app:numberColor="?colorAccent"
-            app:numberSize="12sp"
-            app:stripColor="?colorSurface">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:padding="5dp"
-                android:text="@{content}"
-                android:textSize="@dimen/module_profile_editor_text_size"
-                app:stripLineColor="?colorSurface" />
-
-        </com.vic797.syntaxhighlight.LineCountLayout>
+            android:background="@null"
+            android:dropDownWidth="150dp"
+            android:dropDownHorizontalOffset="0dp"
+            android:gravity="top|start"
+            android:padding="@dimen/common_view_margin_default"
+            android:text="@{content}"
+            android:textSize="@dimen/module_profile_editor_text_size" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/editor_actions_toolbar"

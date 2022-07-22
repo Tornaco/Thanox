@@ -16,7 +16,6 @@ import androidx.appcompat.app.ActionBar;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
-import com.vic797.syntaxhighlight.SyntaxListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileGlo
 import util.CollectionUtils;
 import util.ObjectsUtils;
 
-public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxListener {
+public class GlobalVarEditorActivity extends ThemeActivity {
 
     private static final int REQ_PICK_APPS = 0x100;
 
@@ -91,7 +90,7 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
             checkRuleAndUpdateTips(globalVar.listToJson());
         }
 
-        binding.editText.addTextChangedListener(new TextWatcherAdapter() {
+        binding.codeView.addTextChangedListener(new TextWatcherAdapter() {
             @Override
             public void afterTextChanged(Editable s) {
                 String current = getCurrentEditingContent();
@@ -137,11 +136,11 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
                 return true;
             }
             if (item.getItemId() == R.id.action_text_size_inc) {
-                binding.editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.editText.getTextSize() + 5f);
+                binding.codeView.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.codeView.getTextSize() + 5f);
                 return true;
             }
             if (item.getItemId() == R.id.action_text_size_dec) {
-                binding.editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.editText.getTextSize() - 5f);
+                binding.codeView.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.codeView.getTextSize() - 5f);
                 return true;
             }
             if (R.id.action_delete == item.getItemId()) {
@@ -156,16 +155,14 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
 
-        binding.editText.setTypeface(TypefaceHelper.jetbrainsMono(thisActivity()));
-        binding.lineLayout.setTypeface(TypefaceHelper.jetbrainsMono(thisActivity()));
-        binding.lineLayout.attachEditText(binding.editText);
+        binding.codeView.setTypeface(TypefaceHelper.jetbrainsMonoRegular(thisActivity()));
 
         setTitle(globalVar.getName());
     }
 
     private String getCurrentEditingContent() {
-        if (binding.editText.getText() == null) return "";
-        return binding.editText.getText().toString().trim();
+        if (binding.codeView.getText() == null) return "";
+        return binding.codeView.getText().toString().trim();
     }
 
     private String getCurrentEditingTitle() {
@@ -281,25 +278,5 @@ public class GlobalVarEditorActivity extends ThemeActivity implements SyntaxList
             Objects.requireNonNull(globalVar).setStringList(stringList);
             binding.setContent(globalVar.listToJson());
         }
-    }
-
-    @Override
-    public void onLineClick(Editable editable, String text, int line) {
-        // Noop.
-    }
-
-    @Override
-    public void onHighlightStart(Editable editable) {
-        // Noop.
-    }
-
-    @Override
-    public void onHighlightEnd(Editable editable) {
-        // Noop.
-    }
-
-    @Override
-    public void onError(Exception e) {
-        // Noop.
     }
 }

@@ -12,35 +12,35 @@
 
     <item
         android:id="@+id/action_view_wiki"
-        android:icon="@drawable/ic_book_open_fill"
+        android:icon="@drawable/module_profile_ic_book_open_fill"
         android:title="@string/module_profile_rule_wiki"
         app:showAsAction="never"
         tools:ignore="AlwaysShowAction" />
 
     <item
         android:id="@+id/action_import_from_file"
-        android:icon="@drawable/ic_download_cloud_fill"
+        android:icon="@drawable/module_profile_ic_download_cloud_fill"
         android:title="@string/module_profile_rule_impor_from_file"
         app:showAsAction="never"
         tools:ignore="AlwaysShowAction" />
 
     <item
         android:id="@+id/action_import_examples"
-        android:icon="@drawable/ic_download_cloud_fill"
+        android:icon="@drawable/module_profile_ic_download_cloud_fill"
         android:title="@string/module_profile_rule_impor_example"
         app:showAsAction="never"
         tools:ignore="AlwaysShowAction" />
 
     <item
         android:id="@+id/action_online"
-        android:icon="@drawable/ic_download_cloud_fill"
+        android:icon="@drawable/module_profile_ic_download_cloud_fill"
         android:title="@string/module_profile_rule_online"
         app:showAsAction="never"
         tools:ignore="AlwaysShowAction" />
 
     <item
         android:id="@+id/action_global_var"
-        android:icon="@drawable/ic_download_cloud_fill"
+        android:icon="@drawable/module_profile_ic_download_cloud_fill"
         android:title="@string/module_profile_title_global_var"
         app:showAsAction="never"
         tools:ignore="AlwaysShowAction" />

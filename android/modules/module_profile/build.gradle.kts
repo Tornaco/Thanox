@@ -96,6 +96,8 @@ dependencies {
     releaseImplementation(Libs.Others.chuckerNoop)
     debugImplementation(Libs.Others.chucker)
 
+    debugImplementation(Libs.Others.codeView)
+
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_compose_common"))
     implementation(project(":android_framework:base"))
@@ -109,6 +111,4 @@ dependencies {
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
     implementation(project(":third_party:dateformatter"))
-
-    implementation(project(":third_party:nativesyntax"))
 }

@@ -12,7 +12,6 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -67,10 +66,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
     private void setupView() {
         setSupportActionBar(binding.toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        showHomeAsUpNavigator();
 
         // List.
         binding.ruleListView.setLayoutManager(new LinearLayoutManager(this));
@@ -148,7 +144,10 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return new RuleListActivityMenuHandler().handleOptionsItemSelected(this, item);
+        if (new RuleListActivityMenuHandler().handleOptionsItemSelected(this, item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

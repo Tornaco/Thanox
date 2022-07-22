@@ -187,7 +187,7 @@ private fun WorkList(
                     delete(it.id)
                 }) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_delete_bin_fill),
+                        painter = painterResource(id = R.drawable.module_profile_ic_delete_bin_fill),
                         contentDescription = "Remove"
                     )
                 }

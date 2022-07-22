@@ -5,7 +5,7 @@
 
     <item
             android:id="@+id/action_pick_app"
-            android:icon="@drawable/ic_check_fill"
+            android:icon="@drawable/module_profile_ic_check_fill"
             android:title="@string/app_picker_title"
             app:showAsAction="never"
             tools:ignore="AlwaysShowAction" />

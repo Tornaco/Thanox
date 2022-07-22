@@ -2,11 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/action_undo"
+        android:icon="@drawable/module_profile_ic_baseline_undo_24"
+        android:title=""
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction,HardcodedText" />
+
+    <item
+        android:id="@+id/action_redo"
+        android:icon="@drawable/module_profile_ic_baseline_redo_24"
+        android:title=""
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction,HardcodedText" />
+
     <item
         android:id="@+id/action_info"
         android:icon="@drawable/module_common_ic_outline_info_24"
-        android:title="@string/module_profile_rule_new"
+        android:title="Tips"
         app:showAsAction="ifRoom"
-        tools:ignore="AlwaysShowAction" />
-
+        tools:ignore="AlwaysShowAction,HardcodedText" />
 </menu>

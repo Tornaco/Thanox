@@ -1,13 +1,10 @@
 package github.tornaco.android.thanos.settings;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.ThanosApp;
-import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
-import github.tornaco.android.thanos.app.donate.DonateSettings;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 
 public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     @Override
@@ -24,11 +21,14 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
             return true;
         });
         findPreference(getString(R.string.key_data)).setOnPreferenceClickListener(preference -> {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return false;
-            }
-            DataSettingsActivity.start(getActivity());
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    DataSettingsActivity.start(getActivity());
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
             return true;
         });
         findPreference(getString(R.string.key_strategy)).setOnPreferenceClickListener(preference -> {

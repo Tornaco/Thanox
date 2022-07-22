@@ -1,7 +1,6 @@
 package github.tornaco.android.thanos.power;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
@@ -13,10 +12,8 @@ import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.ThanosApp;
-import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
-import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.widget.ModernSingleChoiceDialog;
 import util.Consumer;
 
@@ -59,12 +56,15 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
         Objects.requireNonNull(hidePackagePref).setChecked(thanos.getPkgManager().isSmartFreezeHidePackageEventEnabled());
         hidePackagePref.setEnabled(!thanos.getPkgManager().isFreezePkgWithSuspendEnabled());
         hidePackagePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return false;
-            }
-            boolean checked = (boolean) newValue;
-            thanos.getPkgManager().setSmartFreezeHidePackageEventEnabled(checked);
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    boolean checked = (boolean) newValue;
+                    thanos.getPkgManager().setSmartFreezeHidePackageEventEnabled(checked);
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
             return true;
         });
 

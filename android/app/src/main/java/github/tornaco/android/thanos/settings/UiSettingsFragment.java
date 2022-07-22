@@ -5,18 +5,15 @@ import android.os.Bundle;
 import androidx.preference.DropDownPreference;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.ThanosApp;
-import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.common.CommonPreferences;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.theme.Theme;
 import github.tornaco.android.thanos.util.GlideApp;
@@ -87,10 +84,11 @@ public class UiSettingsFragment extends BasePreferenceFragmentCompat {
         });
 
         SwitchPreferenceCompat usedCircleIconPref = findPreference(getString(R.string.key_use_round_icon));
-        if (ThanosApp.isPrc() && !DonateSettings.isActivated(getContext())) {
-            usedCircleIconPref.setVisible(false);
-            return;
-        }
+        AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+            usedCircleIconPref.setVisible(isSubscribed);
+            return null;
+        });
+
         usedCircleIconPref.setChecked(AppThemePreferences.getInstance().useRoundIcon(getContext()));
         usedCircleIconPref.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean use = (boolean) newValue;

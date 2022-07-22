@@ -25,21 +25,17 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import github.tornaco.android.rhino.plugin.Verify;
-import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
-import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileRuleListActivityBinding;
-import github.tornaco.thanos.android.module.profile.example.ProfileExampleActivity;
-import github.tornaco.thanos.android.module.profile.online.OnlineProfileActivity;
 
 @RuntimePermissions
 public class RuleListActivity extends ThemeActivity implements RuleItemClickListener {
@@ -47,7 +43,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
     private static final int REQUEST_CODE_PICK_FILE_TO_IMPORT = 6;
 
     private ModuleProfileRuleListActivityBinding binding;
-    private RuleListViewModel viewModel;
+    RuleListViewModel viewModel;
 
     public static void start(Context context) {
         ActivityUtils.startActivity(context, RuleListActivity.class);
@@ -152,50 +148,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (R.id.action_view_wiki == item.getItemId()) {
-            BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_PROFILE);
-            return true;
-        }
-
-        if (R.id.action_import_from_file == item.getItemId()) {
-            RuleListActivityPermissionRequester.importFromFileChecked(this);
-            return true;
-        }
-
-        if (R.id.action_import_examples == item.getItemId()) {
-            ProfileExampleActivity.Starter.INSTANCE.start(thisActivity());
-            return true;
-        }
-
-        if (R.id.action_online == item.getItemId()) {
-            OnlineProfileActivity.Starter.INSTANCE.start(thisActivity());
-            return true;
-        }
-
-        if (R.id.action_global_var == item.getItemId()) {
-            GlobalVarListActivity.start(this);
-            return true;
-        }
-
-        if (R.id.action_add == item.getItemId()) {
-            onRequestAddNewRule();
-            return true;
-        }
-
-        if (R.id.action_rule_engine == item.getItemId()) {
-            RuleEngineSettingsActivity.start(thisActivity());
-            return true;
-        }
-        if (R.id.action_rule_console == item.getItemId()) {
-            ConsoleActivity.Starter.INSTANCE.start(thisActivity());
-            return true;
-        }
-        if (R.id.action_rule_log == item.getItemId()) {
-            LogActivity.Starter.INSTANCE.start(thisActivity());
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return new RuleListActivityMenuHandler().handleOptionsItemSelected(this, item);
     }
 
     @Override
@@ -228,7 +181,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
         RuleListActivityPermissionRequester.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    private void onRequestAddNewRule() {
+    void onRequestAddNewRule() {
         AtomicInteger format = new AtomicInteger(ProfileManager.RULE_FORMAT_JSON);
         new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.module_profile_editor_select_format)

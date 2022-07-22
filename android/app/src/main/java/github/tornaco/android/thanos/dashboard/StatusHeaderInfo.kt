@@ -37,3 +37,9 @@ enum class MemType {
     MEMORY,
     SWAP
 }
+
+val defaultStatusHeaderInfo = StatusHeaderInfo(
+    0,
+    MemUsage(MemType.MEMORY),
+    MemUsage(MemType.SWAP)
+)

@@ -27,9 +27,6 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import github.tornaco.android.nitro.framework.Nitro;
 import github.tornaco.android.nitro.framework.host.manager.data.model.InstalledPlugin;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.ThanosApp;
-import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
-import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.Optional;
 import github.tornaco.android.thanos.dashboard.DashboardAdapter;
@@ -37,6 +34,7 @@ import github.tornaco.android.thanos.dashboard.OnTileClickListener;
 import github.tornaco.android.thanos.dashboard.OnTileLongClickListener;
 import github.tornaco.android.thanos.dashboard.Tile;
 import github.tornaco.android.thanos.databinding.FragmentPluginBinding;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.util.DialogUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
@@ -75,27 +73,36 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
         pluginBinding.features.setAdapter(new DashboardAdapter(this, this, this));
 
         pluginBinding.fab.setOnClickListener(v -> {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getContext())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return;
-            }
-            toggleFabMenu();
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    toggleFabMenu();
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
         });
 
         pluginBinding.fabFile.setOnClickListener(v -> {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getContext())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return;
-            }
-            PluginFragmentPermissionRequester.installPluginRequestedChecked(PluginFragment.this);
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    PluginFragmentPermissionRequester.installPluginRequestedChecked(PluginFragment.this);
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
         });
 
         pluginBinding.fabMarket.setOnClickListener(v -> {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getContext())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return;
-            }
-            PluginMarketActivity.start(getActivity());
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    PluginMarketActivity.start(getActivity());
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
         });
 
         closeFABMenu();

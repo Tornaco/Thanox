@@ -148,11 +148,15 @@ public class RuleListViewModel extends AndroidViewModel {
     }
 
     private void registerEventReceivers() {
-        thanosManager.getProfileManager().registerRuleChangeListener(ruleChangeListener);
+        if (thanosManager.isServiceInstalled()) {
+            thanosManager.getProfileManager().registerRuleChangeListener(ruleChangeListener);
+        }
     }
 
     private void unRegisterEventReceivers() {
-        thanosManager.getProfileManager().unRegisterRuleChangeListener(ruleChangeListener);
+        if (thanosManager.isServiceInstalled()) {
+            thanosManager.getProfileManager().unRegisterRuleChangeListener(ruleChangeListener);
+        }
     }
 
     @SuppressWarnings("UnstableApiUsage")

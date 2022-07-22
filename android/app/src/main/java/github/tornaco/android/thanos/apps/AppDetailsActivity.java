@@ -21,16 +21,14 @@ import java.util.Objects;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
-import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
-import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.databinding.ActivityAppDetailsBinding;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.settings.StrategySettingsActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
@@ -116,7 +114,14 @@ public class AppDetailsActivity extends BaseTrustedActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_apply_template == item.getItemId()) {
-            requestApplyTemplateSelection();
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(thisActivity(), isSubscribed -> {
+                if (isSubscribed) {
+                    requestApplyTemplateSelection();
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(thisActivity());
+                }
+                return null;
+            });
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -124,11 +129,6 @@ public class AppDetailsActivity extends BaseTrustedActivity {
 
     @Verify
     private void requestApplyTemplateSelection() {
-        if (ThanosApp.isPrc() && !DonateSettings.isActivated(thisActivity())) {
-            DonateIntroDialogKt.showDonateIntroDialog(thisActivity());
-            return;
-        }
-
         ThanosManager thanos = ThanosManager.from(thisActivity());
         ProfileManager profileManager = thanos.getProfileManager();
         List<String> entries = new ArrayList<>();

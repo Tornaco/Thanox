@@ -38,7 +38,6 @@ import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.BuildConfig;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.T;
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -48,8 +47,10 @@ import github.tornaco.android.thanos.dashboard.MemType;
 import github.tornaco.android.thanos.dashboard.MemUsage;
 import github.tornaco.android.thanos.dashboard.StatusFooterInfo;
 import github.tornaco.android.thanos.dashboard.StatusHeaderInfo;
+import github.tornaco.android.thanos.dashboard.StatusHeaderInfoKt;
 import github.tornaco.android.thanos.dashboard.Tile;
 import github.tornaco.android.thanos.dashboard.TileGroup;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.pref.AppPreference;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
@@ -153,9 +154,12 @@ public class NavViewModel extends AndroidViewModel {
                 thanos.isServiceInstalled() && thanos.getPowerManager().isPowerSaveModeEnabled());
         hasFrameworkError.set(thanos.isServiceInstalled() && thanos.hasFrameworkInitializeError());
         channel.set(getChannelString());
-        isPaid.set(
-                !ThanosApp.isPrc() || DonateSettings.isActivated(getApplication().getApplicationContext()));
-        XLog.v("isPaid? %s", isPaid.get());
+
+
+        AppFeatureManager.INSTANCE.withSubscriptionStatus(getApplication(), isSubscribed -> {
+            isPaid.set(isSubscribed);
+            return null;
+        });
     }
 
     private StatusHeaderInfo loadStatusHeaderInfo() {
@@ -174,31 +178,29 @@ public class NavViewModel extends AndroidViewModel {
         final int[] runningAppsCount = {0};
 
         // Only load for pro.
-        if (DonateSettings.isActivated(getApplication()) || !ThanosApp.isPrc()) {
-            ThanosManager.from(getApplication()).ifServiceInstalled(
-                    thanosManager -> {
-                        runningAppsCount[0] = thanosManager.getActivityManager().getRunningAppsCount();
-                        ActivityManager.MemoryInfo memoryInfo =
-                                thanosManager.getActivityManager().getMemoryInfo();
-                        if (memoryInfo != null) {
-                            memTotalSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem);
-                            memUsageSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem - memoryInfo.availMem);
-                            memAvailableSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.availMem);
-                            memUsedPercent[0] = (int) (100 * (((float) (memoryInfo.totalMem - memoryInfo.availMem) / Math.max((float) memoryInfo.totalMem, 1f))));
-                        }
+        ThanosManager.from(getApplication()).ifServiceInstalled(
+                thanosManager -> {
+                    runningAppsCount[0] = thanosManager.getActivityManager().getRunningAppsCount();
+                    ActivityManager.MemoryInfo memoryInfo =
+                            thanosManager.getActivityManager().getMemoryInfo();
+                    if (memoryInfo != null) {
+                        memTotalSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem);
+                        memUsageSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.totalMem - memoryInfo.availMem);
+                        memAvailableSizeString[0] = Formatter.formatFileSize(getApplication(), memoryInfo.availMem);
+                        memUsedPercent[0] = (int) (100 * (((float) (memoryInfo.totalMem - memoryInfo.availMem) / Math.max((float) memoryInfo.totalMem, 1f))));
+                    }
 
-                        SwapInfo swapInfo = thanosManager.getActivityManager().getSwapInfo();
-                        if (swapInfo != null) {
-                            swapEnabled[0] = swapInfo.totalSwap > 0;
-                            if (swapEnabled[0]) {
-                                swapTotalSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap);
-                                swapUsageSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap - swapInfo.freeSwap);
-                                swapAvailableSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.freeSwap);
-                                swapUsedPercent[0] = (int) (100 * (((float) (swapInfo.totalSwap - swapInfo.freeSwap) / Math.max((float) swapInfo.totalSwap, 1f))));
-                            }
+                    SwapInfo swapInfo = thanosManager.getActivityManager().getSwapInfo();
+                    if (swapInfo != null) {
+                        swapEnabled[0] = swapInfo.totalSwap > 0;
+                        if (swapEnabled[0]) {
+                            swapTotalSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap);
+                            swapUsageSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.totalSwap - swapInfo.freeSwap);
+                            swapAvailableSizeString[0] = Formatter.formatFileSize(getApplication(), swapInfo.freeSwap);
+                            swapUsedPercent[0] = (int) (100 * (((float) (swapInfo.totalSwap - swapInfo.freeSwap) / Math.max((float) swapInfo.totalSwap, 1f))));
                         }
-                    });
-        }
+                    }
+                });
 
         return new StatusHeaderInfo(
                 runningAppsCount[0],
@@ -434,7 +436,14 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_guide)
                                                 .build())));
 
-        tileGroups.add(new TileGroup(loadStatusHeaderInfo()));
+        AppFeatureManager.INSTANCE.withSubscriptionStatus(getApplication(), isSubscribed -> {
+            if (isSubscribed) {
+                tileGroups.add(new TileGroup(loadStatusHeaderInfo()));
+            } else {
+                tileGroups.add(new TileGroup(StatusHeaderInfoKt.getDefaultStatusHeaderInfo()));
+            }
+            return null;
+        });
 
         if (boost.hasAtLeastOneTile()) tileGroups.add(boost);
         if (secure.hasAtLeastOneTile()) tileGroups.add(secure);

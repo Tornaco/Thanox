@@ -27,7 +27,7 @@ public class BaseDefaultMenuItemHandlingAppCompatActivity extends BaseAppCompatA
         return super.onOptionsItemSelected(item);
     }
 
-    protected Activity thisActivity() {
+    public Activity thisActivity() {
         return this;
     }
 }

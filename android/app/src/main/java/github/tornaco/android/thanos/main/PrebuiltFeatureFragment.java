@@ -22,9 +22,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.ThanosApp;
-import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
-import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.T;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.dashboard.DashboardCardAdapter;
@@ -34,6 +31,7 @@ import github.tornaco.android.thanos.dashboard.OnTileLongClickListener;
 import github.tornaco.android.thanos.dashboard.Tile;
 import github.tornaco.android.thanos.dashboard.ViewType;
 import github.tornaco.android.thanos.databinding.FragmentPrebuiltFeaturesBinding;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.onboarding.OnBoardingActivity;
 import github.tornaco.android.thanos.process.v2.ProcessManageActivityV2;
 
@@ -80,7 +78,7 @@ public class PrebuiltFeatureFragment extends NavFragment
         prebuiltFeaturesBinding.setViewmodel(navViewModel);
         prebuiltFeaturesBinding.executePendingBindings();
 
-        this.featureLauncher = new PrebuiltFeatureLauncher(requireActivity(), navViewModel, uiHandler);
+        this.featureLauncher = new PrebuiltFeatureLauncher(requireActivity(), uiHandler, navViewModel);
     }
 
     private static NavViewModel obtainViewModel(FragmentActivity activity) {
@@ -126,9 +124,9 @@ public class PrebuiltFeatureFragment extends NavFragment
                                                     "one-ley-boost-intent",
                                                     T.Actions.ACTION_RUNNING_PROCESS_CLEAR);
                                             Toast.makeText(
-                                                    requireActivity(),
-                                                    R.string.common_toast_copied_to_clipboard,
-                                                    Toast.LENGTH_SHORT)
+                                                            requireActivity(),
+                                                            R.string.common_toast_copied_to_clipboard,
+                                                            Toast.LENGTH_SHORT)
                                                     .show();
                                         })
                                 .setCancelable(true)
@@ -156,10 +154,13 @@ public class PrebuiltFeatureFragment extends NavFragment
 
     @Override
     public void onHeaderClick() {
-        if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
-            DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-            return;
-        }
-        ProcessManageActivityV2.Starter.INSTANCE.start(requireActivity());
+        AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+            if (isSubscribed) {
+                ProcessManageActivityV2.Starter.INSTANCE.start(requireActivity());
+            } else {
+                AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+            }
+            return null;
+        });
     }
 }

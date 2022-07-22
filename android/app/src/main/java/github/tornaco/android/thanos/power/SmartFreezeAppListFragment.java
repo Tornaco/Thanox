@@ -43,9 +43,6 @@ import java.util.Objects;
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.BaseFragment;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.ThanosApp;
-import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
-import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.apps.AppDetailsActivity;
 import github.tornaco.android.thanos.apps.PackageSetChooserDialog;
 import github.tornaco.android.thanos.common.AppItemActionListener;
@@ -58,6 +55,7 @@ import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivitySmartFreezeAppsBinding;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
@@ -167,32 +165,41 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                 return true;
             }
             if (item.getItemId() == R.id.action_create_shortcut_apk) {
-                if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                    DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                    return false;
-                }
-                onRequestShortcutStubApk(appInfo);
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                    if (isSubscribed) {
+                        onRequestShortcutStubApk(appInfo);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
                 return true;
             }
             if (item.getItemId() == R.id.action_apps_manager) {
-                if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                    DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                    return false;
-                }
-                AppDetailsActivity.start(requireContext(), appInfo);
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                    if (isSubscribed) {
+                        AppDetailsActivity.start(requireContext(), appInfo);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
                 return true;
             }
             if (item.getItemId() == R.id.action_package_set) {
-                if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                    DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                    return false;
-                }
-                new PackageSetChooserDialog(requireActivity(), appInfo.getPkgName(), changed -> {
-                    if (changed) {
-                        viewModel.start();
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                    if (isSubscribed) {
+                        new PackageSetChooserDialog(requireActivity(), appInfo.getPkgName(), changed -> {
+                            if (changed) {
+                                viewModel.start();
+                            }
+                            return null;
+                        }).show();
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                     }
                     return null;
-                }).show();
+                });
                 return true;
             }
             return false;
@@ -295,66 +302,81 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             return true;
         }
         if (R.id.action_enable_all_smart_freeze == item.getItemId()) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return false;
-            }
-            new MaterialAlertDialogBuilder(requireActivity())
-                    .setTitle(R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps)
-                    .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_smart_freeze_apps)
-                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                        onRequestEnableAllSmartFreezeApps();
-                    })
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .show();
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    new MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps)
+                            .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_smart_freeze_apps)
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                onRequestEnableAllSmartFreezeApps();
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .show();
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
             return true;
         }
         if (R.id.action_enable_all_smart_freeze_temp == item.getItemId()) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return false;
-            }
-            new MaterialAlertDialogBuilder(requireActivity())
-                    .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp)
-                    .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp)
-                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                        onRequestEnableAllSmartFreezeAppsTemp();
-                    })
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .show();
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    new MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp)
+                            .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp)
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                onRequestEnableAllSmartFreezeAppsTemp();
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .show();
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
             return true;
         }
         if (R.id.action_enable_all_apps == item.getItemId()) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return false;
-            }
-            new MaterialAlertDialogBuilder(requireActivity())
-                    .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps)
-                    .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps)
-                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                        onRequestEnableAllApps();
-                    })
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .show();
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    new MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps)
+                            .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps)
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                onRequestEnableAllApps();
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .show();
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
             return true;
         }
 
         if (R.id.action_export_package_list == item.getItemId()) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return false;
-            }
-            onRequestExportPackageList();
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    onRequestExportPackageList();
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
             return true;
         }
 
         if (R.id.action_import_package_list == item.getItemId()) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireContext())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return false;
-            }
-            onRequestImportPackageList();
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    onRequestImportPackageList();
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
             return true;
         }
 
@@ -568,10 +590,13 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         int size = viewModel.listModels.size();
         // Limit free to add at most 9 apps.
         if (size > 3) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(requireActivity())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return;
-            }
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
         }
 
         ThanosManager.from(requireContext()).ifServiceInstalled(thanosManager -> {

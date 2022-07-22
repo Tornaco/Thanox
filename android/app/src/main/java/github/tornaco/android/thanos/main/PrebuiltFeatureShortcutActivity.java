@@ -40,7 +40,7 @@ public class PrebuiltFeatureShortcutActivity extends Activity {
         XLog.d("PrebuiltFeatureShortcutActivity, featId: " + featId);
         if (PrebuiltFeatureIds.INSTANCE.isValidId(featId)) {
             final Handler uiHandler = new Handler(Looper.getMainLooper());
-            new PrebuiltFeatureLauncher(this, null, uiHandler).launch(featId);
+            new PrebuiltFeatureLauncher(this, uiHandler, null).launch(featId);
         }
         finish();
     }

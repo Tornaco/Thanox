@@ -99,6 +99,7 @@ dependencies {
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_compose_common"))
     implementation(project(":android_framework:base"))
+    implementation(project(":modules:module_feature_access"))
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))

@@ -27,9 +27,6 @@ import java.util.Objects;
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.ThanosApp;
-import github.tornaco.android.thanos.app.donate.DonateIntroDialogKt;
-import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -38,6 +35,7 @@ import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.util.AppIconLoaderUtil;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
@@ -111,17 +109,17 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                         ClipboardUtils.copyToClipboard(
                                 requireContext(), appInfo.getAppLabel(), appInfo.getPkgName());
                         Toast.makeText(
-                                getContext(),
-                                github
-                                        .tornaco
-                                        .android
-                                        .thanos
-                                        .module
-                                        .common
-                                        .R
-                                        .string
-                                        .common_toast_copied_to_clipboard,
-                                Toast.LENGTH_SHORT)
+                                        getContext(),
+                                        github
+                                                .tornaco
+                                                .android
+                                                .thanos
+                                                .module
+                                                .common
+                                                .R
+                                                .string
+                                                .common_toast_copied_to_clipboard,
+                                        Toast.LENGTH_SHORT)
                                 .show();
                         return true;
                     }
@@ -176,13 +174,14 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         preference.setChecked(thanos.getPkgManager().isPackageBlockUninstallEnabled(appInfo.getPkgName()));
         preference.setOnPreferenceChangeListener(
                 (preference12, newValue) -> {
-                    if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                        DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                        return false;
-                    }
-                    thanos
-                            .getPkgManager()
-                            .setPackageBlockUninstallEnabled(appInfo.getPkgName(), (Boolean) newValue);
+                    AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                        if (isSubscribed) {
+                            thanos.getPkgManager().setPackageBlockUninstallEnabled(appInfo.getPkgName(), (Boolean) newValue);
+                        } else {
+                            AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        }
+                        return null;
+                    });
                     return true;
                 });
 
@@ -192,13 +191,15 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         preference.setChecked(thanos.getPkgManager().isPackageBlockClearDataEnabled(appInfo.getPkgName()));
         preference.setOnPreferenceChangeListener(
                 (preference1, newValue) -> {
-                    if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                        DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                        return false;
-                    }
-                    thanos
-                            .getPkgManager()
-                            .setPackageBlockClearDataEnabled(appInfo.getPkgName(), (Boolean) newValue);
+                    AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                        if (isSubscribed) {
+                            thanos.getPkgManager()
+                                    .setPackageBlockClearDataEnabled(appInfo.getPkgName(), (Boolean) newValue);
+                        } else {
+                            AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        }
+                        return null;
+                    });
                     return true;
                 });
     }
@@ -209,11 +210,15 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         Objects.requireNonNull(preference)
                 .setOnPreferenceClickListener(
                         preference1 -> {
-                            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                                return false;
-                            }
-                            ActivityListActivity.start(requireActivity(), appInfo);
+                            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                                if (isSubscribed) {
+                                    ActivityListActivity.start(requireActivity(), appInfo);
+                                } else {
+                                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                                }
+                                return null;
+                            });
+
                             return true;
                         });
         int ac = thanos.getPkgManager().getActivitiesCount(appInfo.getPkgName());
@@ -223,11 +228,15 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         Objects.requireNonNull(preference)
                 .setOnPreferenceClickListener(
                         preference1 -> {
-                            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                                return false;
-                            }
-                            ReceiverListActivity.start(requireActivity(), appInfo);
+                            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                                if (isSubscribed) {
+                                    ReceiverListActivity.start(requireActivity(), appInfo);
+                                } else {
+                                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                                }
+                                return null;
+                            });
+
                             return true;
                         });
 
@@ -235,11 +244,14 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         Objects.requireNonNull(preference)
                 .setOnPreferenceClickListener(
                         preference1 -> {
-                            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                                return false;
-                            }
-                            ProviderListActivity.start(requireActivity(), appInfo);
+                            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                                if (isSubscribed) {
+                                    ProviderListActivity.start(requireActivity(), appInfo);
+                                } else {
+                                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                                }
+                                return null;
+                            });
                             return true;
                         });
 
@@ -250,11 +262,14 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         Objects.requireNonNull(preference)
                 .setOnPreferenceClickListener(
                         preference1 -> {
-                            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                                return false;
-                            }
-                            ServiceListActivity.start(requireActivity(), appInfo);
+                            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                                if (isSubscribed) {
+                                    ServiceListActivity.start(requireActivity(), appInfo);
+                                } else {
+                                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                                }
+                                return null;
+                            });
                             return true;
                         });
         int sc = thanos.getPkgManager().getServiceCount(appInfo.getPkgName());
@@ -331,14 +346,17 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         pref.setValue(String.valueOf(currentMode));
         pref.setOnPreferenceChangeListener(
                 (preference, newValue) -> {
-                    if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                        DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                        return false;
-                    }
-                    int mode = Integer.parseInt(String.valueOf(newValue));
-                    thanos
-                            .getActivityManager()
-                            .setRecentTaskExcludeSettingForPackage(appInfo.getPkgName(), mode);
+                    AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                        if (isSubscribed) {
+                            int mode = Integer.parseInt(String.valueOf(newValue));
+                            thanos
+                                    .getActivityManager()
+                                    .setRecentTaskExcludeSettingForPackage(appInfo.getPkgName(), mode);
+                        } else {
+                            AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        }
+                        return null;
+                    });
                     return true;
                 });
         if (appInfo.isDummy()) {
@@ -646,13 +664,16 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
         @Override
         void setTo(boolean value) {
-            if (ThanosApp.isPrc() && !DonateSettings.isActivated(getActivity())) {
-                DonateIntroDialogKt.showDonateIntroDialog(requireActivity());
-                return;
-            }
-            ThanosManager.from(getContext())
-                    .getActivityStackSupervisor()
-                    .setPackageLocked(appInfo.getPkgName(), value);
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                if (isSubscribed) {
+                    ThanosManager.from(getContext())
+                            .getActivityStackSupervisor()
+                            .setPackageLocked(appInfo.getPkgName(), value);
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
         }
 
         @Override

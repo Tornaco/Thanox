@@ -20,20 +20,19 @@ package github.tornaco.android.thanos.process.v2
 
 import android.app.Activity
 import android.os.Bundle
-import github.tornaco.android.thanos.ThanosApp.Companion.isPrc
-import github.tornaco.android.thanos.app.donate.DonateSettings
-import github.tornaco.android.thanos.app.donate.showDonateIntroDialog
+import github.tornaco.android.thanos.feature.access.AppFeatureManager
+import github.tornaco.android.thanos.feature.access.AppFeatureManager.withSubscriptionStatus
 
 class ProcessManageActivityV2Delegate : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if (isPrc() && !DonateSettings.isActivated(this)) {
-            showDonateIntroDialog(this)
-            return
+        withSubscriptionStatus(this) { isSubscribed ->
+            if (isSubscribed) {
+                ProcessManageActivityV2.Starter.start(this)
+                finish()
+            } else {
+                AppFeatureManager.showDonateIntroDialog(this)
+            }
         }
-
-        ProcessManageActivityV2.Starter.start(this)
-        finish()
     }
 }

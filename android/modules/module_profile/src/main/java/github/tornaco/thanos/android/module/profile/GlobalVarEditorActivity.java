@@ -150,8 +150,7 @@ public class GlobalVarEditorActivity extends ThemeActivity {
             return false;
         });
 
-        binding.setContent(originalContent);
-        binding.setPlaceholder(null);
+        binding.codeView.setText(originalContent);
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
 
@@ -276,7 +275,7 @@ public class GlobalVarEditorActivity extends ThemeActivity {
             }
 
             Objects.requireNonNull(globalVar).setStringList(stringList);
-            binding.setContent(globalVar.listToJson());
+            binding.codeView.setText(globalVar.listToJson());
         }
     }
 }

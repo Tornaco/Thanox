@@ -5,14 +5,6 @@
 
     <data>
 
-        <variable
-            name="content"
-            type="String" />
-
-        <variable
-            name="placeholder"
-            type="String" />
-
         <import type="android.view.View" />
     </data>
 
@@ -63,7 +55,6 @@
             android:dropDownHorizontalOffset="0dp"
             android:gravity="top|start"
             android:padding="@dimen/common_view_margin_default"
-            android:text="@{content}"
             android:textSize="@dimen/module_profile_editor_text_size" />
 
         <androidx.appcompat.widget.Toolbar

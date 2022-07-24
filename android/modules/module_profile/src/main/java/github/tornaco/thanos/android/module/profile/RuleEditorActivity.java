@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.amrdeveloper.codeview.CodeView;
@@ -250,8 +249,7 @@ public class RuleEditorActivity extends ThemeActivity {
             binding.setFormat("YAML");
         }
 
-        binding.setRuleInfo(ruleInfo);
-        binding.setPlaceholder(null);
+        binding.codeView.setText(ruleInfo == null ? ProfileTemplateKt.getDefaultTemplate() : ruleInfo.getRuleString());
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();
 
@@ -270,7 +268,7 @@ public class RuleEditorActivity extends ThemeActivity {
     }
 
     private void setupCodeView(CodeView codeView) {
-        binding.codeView.setTypeface(TypefaceHelper.jetbrainsMonoMedium(thisActivity()));
+        codeView.setTypeface(TypefaceHelper.jetbrainsMonoMedium(thisActivity()));
 
         // Setup Line number feature
         codeView.setEnableLineNumber(true);

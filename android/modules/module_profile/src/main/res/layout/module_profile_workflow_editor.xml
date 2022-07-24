@@ -6,14 +6,6 @@
     <data>
 
         <variable
-            name="ruleInfo"
-            type="github.tornaco.android.thanos.core.profile.RuleInfo" />
-
-        <variable
-            name="placeholder"
-            type="String" />
-
-        <variable
             name="format"
             type="String" />
 
@@ -59,7 +51,6 @@
             android:dropDownHorizontalOffset="0dp"
             android:gravity="top|start"
             android:padding="@dimen/common_view_margin_default"
-            android:text="@{ruleInfo== null? placeholder : ruleInfo.ruleString}"
             android:textSize="@dimen/module_profile_editor_text_size" />
 
         <androidx.appcompat.widget.Toolbar

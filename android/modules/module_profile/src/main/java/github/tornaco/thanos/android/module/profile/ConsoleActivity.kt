@@ -17,37 +17,43 @@
 
 package github.tornaco.thanos.android.module.profile
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.widget.doAfterTextChanged
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.amrdeveloper.codeview.CodeView
+import com.elvishew.xlog.XLog
 import com.google.accompanist.insets.navigationBarsWithImePadding
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
-import github.tornaco.android.thanos.module.compose.common.widget.jetbrainMonoTypography
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.util.ActivityUtils
+import github.tornaco.android.thanos.util.TypefaceHelper
+import github.tornaco.thanos.android.module.profile.codeditor.syntax.LanguageManager
+import github.tornaco.thanos.android.module.profile.codeditor.syntax.LanguageName
+import github.tornaco.thanos.android.module.profile.codeditor.syntax.ThemeName
 import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileConsoleEditorBinding
+import kotlin.math.max
+import kotlin.math.min
 
 @AndroidEntryPoint
 class ConsoleActivity : ComposeThemeActivity() {
@@ -85,20 +91,17 @@ class ConsoleActivity : ComposeThemeActivity() {
                 state = state,
                 onInput = {
                     viewModel.input(it)
-                },
-                insertSymbol = {
-                    viewModel.insertSymbol(it)
                 })
         }
     }
 }
 
+@SuppressLint("SetTextI18n")
 @Composable
 private fun Console(
     contentPadding: PaddingValues,
     state: ConsoleState,
-    onInput: (TextFieldValue) -> Unit,
-    insertSymbol: (String) -> Unit
+    onInput: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -106,8 +109,6 @@ private fun Console(
             .padding(contentPadding),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        CodeContent(state, onInput)
-        ConsoleLog(state)
         AndroidView(
             modifier = Modifier
                 .fillMaxWidth()
@@ -115,68 +116,36 @@ private fun Console(
             factory = { context ->
                 val binding =
                     ModuleProfileConsoleEditorBinding.inflate(LayoutInflater.from(context))
-                initView(context, binding, insertSymbol)
+                initView(context, binding)
+
+                binding.codeView.setText(
+                   state.codeText
+                )
+                binding.codeView.doAfterTextChanged {
+                    it?.toString()?.let { text ->
+                        onInput(text)
+                    }
+                }
                 return@AndroidView binding.root
+            },
+            update = { view ->
+                view.findViewById<TextView>(R.id.outputTextView).text = state.consoleLogOutput
             })
     }
 }
 
-@Composable
-private fun ConsoleLog(state: ConsoleState) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(max = 160.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
-            .navigationBarsWithImePadding()
-    ) {
-        Text(
-            modifier = Modifier
-                .padding(16.dp),
-            text = state.consoleLogOutput,
-            style = jetbrainMonoTypography().body2
-        )
-    }
-
-}
-
-// https://github.com/codeckle/compose-code-editor
-@Composable
-private fun CodeContent(
-    state: ConsoleState,
-    onInput: (TextFieldValue) -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(max = 160.dp)
-            .verticalScroll(rememberScrollState())
-    ) {
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth(),
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            ),
-            textStyle = jetbrainMonoTypography().body2,
-            value = state.textFieldValue,
-            onValueChange = {
-                onInput(it)
-            }
-        )
-    }
-}
-
-
 private fun initView(
     context: Context,
+    binding: ModuleProfileConsoleEditorBinding
+) {
+    setupCodeView(binding.codeView)
+    setupLanguageAutoComplete(binding.codeView)
+    setupSymbols(context, binding)
+}
+
+private fun setupSymbols(
+    context: Context,
     binding: ModuleProfileConsoleEditorBinding,
-    insertSymbol: (String) -> Unit = {}
 ) {
     var symbols: Array<String?> =
         context.resources.getStringArray(R.array.module_profile_symbols_1)
@@ -213,10 +182,60 @@ private fun initView(
     }
 
     val symbolClickListener = Toolbar.OnMenuItemClickListener { item: MenuItem ->
-        insertSymbol(item.title.toString())
+        // This is symbols.
+        val s = item.title.toString()
+        XLog.d("Input: %s", s)
+        val start = max(binding.codeView.selectionStart, 0)
+        val end = max(binding.codeView.selectionEnd, 0)
+        if (binding.codeView.text != null) {
+            binding.codeView.text
+                .replace(min(start, end), max(start, end), s, 0, s.length)
+        }
         true
     }
     binding.editorActionsToolbarSymbols1.setOnMenuItemClickListener(symbolClickListener)
     binding.editorActionsToolbarSymbols2.setOnMenuItemClickListener(symbolClickListener)
     binding.editorActionsToolbarSymbols3.setOnMenuItemClickListener(symbolClickListener)
+}
+
+private fun setupCodeView(codeView: CodeView) {
+    codeView.setTypeface(TypefaceHelper.jetbrainsMonoMedium(codeView.context))
+
+    // Setup Line number feature
+    codeView.setEnableLineNumber(true)
+    codeView.setLineNumberTextColor(Color.GRAY)
+    codeView.setLineNumberTextSize(25f)
+
+    // Setup Auto indenting feature
+    codeView.setTabLength(4)
+    codeView.setEnableAutoIndentation(true)
+
+    // Setup the language and theme with SyntaxManager helper class
+    val languageManager = LanguageManager(codeView.context, codeView)
+    languageManager.applyTheme(LanguageName.JSON, ThemeName.DYNAMIC)
+
+    // Setup auto pair complete
+    val pairCompleteMap: MutableMap<Char, Char> = HashMap()
+    pairCompleteMap['{'] = '}'
+    pairCompleteMap['['] = ']'
+    pairCompleteMap['('] = ')'
+    pairCompleteMap['<'] = '>'
+    pairCompleteMap['"'] = '"'
+    pairCompleteMap['\''] = '\''
+    codeView.setPairCompleteMap(pairCompleteMap)
+    codeView.enablePairComplete(true)
+    codeView.enablePairCompleteCenterCursor(true)
+    codeView.setHorizontallyScrolling(false)
+}
+
+private fun setupLanguageAutoComplete(codeView: CodeView) {
+    val languageManager = LanguageManager(codeView.context, codeView)
+    val languageKeywords: Array<String> = languageManager.getLanguageKeywords(LanguageName.JSON)
+
+    val layoutId = R.layout.module_profile_list_item_suggestion
+
+    val viewId = R.id.suggestItemTextView
+    val adapter = ArrayAdapter(codeView.context, layoutId, viewId, languageKeywords)
+
+    codeView.setAdapter(adapter)
 }

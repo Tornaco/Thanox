@@ -86,7 +86,6 @@ dependencies {
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)
 
-    implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))
 }
 

@@ -15,18 +15,15 @@
  *
  */
 
-package github.tornaco.thanos.android.module.profile
+package github.tornaco.android.thanos.module.compose.common.theme
 
-val defaultTemplate = """
-    [
-        {
-            "name": "",
-            "description": "",
-            "priority": 1,
-            "condition": "",
-            "actions": [
-                ""
-            ]
-        }
-    ]
-""".trimIndent()
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.sp
+
+object TypographyDefaults {
+    @Composable
+    fun appBarTitleTextStyle() = MaterialTheme.typography.titleMedium.copy(
+        fontSize = 18.sp
+    )
+}

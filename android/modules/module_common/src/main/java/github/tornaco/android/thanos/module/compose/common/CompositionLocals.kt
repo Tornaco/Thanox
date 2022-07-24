@@ -15,18 +15,15 @@
  *
  */
 
-package github.tornaco.thanos.android.module.profile
+package github.tornaco.android.thanos.module.compose.common
 
-val defaultTemplate = """
-    [
-        {
-            "name": "",
-            "description": "",
-            "priority": 1,
-            "condition": "",
-            "actions": [
-                ""
-            ]
-        }
-    ]
-""".trimIndent()
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.staticCompositionLocalOf
+
+val LocalActivity = staticCompositionLocalOf<AppCompatActivity> {
+    noLocalProvidedFor("AppCompatActivity")
+}
+
+private fun noLocalProvidedFor(name: String): Nothing {
+    error("CompositionLocal $name not present")
+}

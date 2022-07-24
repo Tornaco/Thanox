@@ -291,13 +291,13 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
             return;
         }
 
-        featureDescContainer.featureDescText.setText(text);
-        featureDescContainer.featureDescButton.setOnClickListener(
-                v -> {
-                    CommonPreferences.getInstance()
-                            .setFeatureDescRead(getApplicationContext(), provideFeatureDescKey(), true);
-                    featureDescContainer.getRoot().setVisibility(View.GONE);
-                });
+        featureDescContainer.featureDescView.setDescription(text);
+        featureDescContainer.featureDescView.setOnCloseClickListener(() -> {
+            CommonPreferences.getInstance()
+                    .setFeatureDescRead(getApplicationContext(), provideFeatureDescKey(), true);
+            featureDescContainer.getRoot().setVisibility(View.GONE);
+            return null;
+        });
     }
 
     @Nullable

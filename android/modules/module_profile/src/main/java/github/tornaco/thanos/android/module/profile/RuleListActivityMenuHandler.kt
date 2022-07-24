@@ -32,7 +32,13 @@ class RuleListActivityMenuHandler {
             return true
         }
         if (R.id.action_import_from_file == item.itemId) {
-            RuleListActivityPermissionRequester.importFromFileChecked(this)
+            AppFeatureManager.withSubscriptionStatus(thisActivity()) {
+                if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
+                    RuleListActivityPermissionRequester.importFromFileChecked(this)
+                } else {
+                    AppFeatureManager.showDonateIntroDialog(this)
+                }
+            }
             return true
         }
         if (R.id.action_import_examples == item.itemId) {
@@ -55,7 +61,7 @@ class RuleListActivityMenuHandler {
         }
         if (R.id.action_add == item.itemId) {
             AppFeatureManager.withSubscriptionStatus(thisActivity()) {
-                if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size >= 3) {
+                if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
                     onRequestAddNewRule()
                 } else {
                     AppFeatureManager.showDonateIntroDialog(this)

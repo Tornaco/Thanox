@@ -15,18 +15,14 @@
  *
  */
 
-package github.tornaco.thanos.android.module.profile
+package github.tornaco.android.thanos.module.compose.common
 
-val defaultTemplate = """
-    [
-        {
-            "name": "",
-            "description": "",
-            "priority": 1,
-            "condition": "",
-            "actions": [
-                ""
-            ]
-        }
-    ]
-""".trimIndent()
+import android.content.Context
+import android.content.ContextWrapper
+import androidx.appcompat.app.AppCompatActivity
+
+tailrec fun Context.requireActivity(): AppCompatActivity = when (this) {
+    is AppCompatActivity -> this
+    is ContextWrapper -> baseContext.requireActivity()
+    else -> error("requireActivity error")
+}

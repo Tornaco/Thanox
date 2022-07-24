@@ -27,7 +27,7 @@ android {
     }
 
     buildFeatures {
-        compose = false
+        compose = true
         buildConfig = true
         aidl = true
         renderScript = false
@@ -68,6 +68,38 @@ dependencies {
     api(Libs.AndroidX.lifeCycleExt)
     annotationProcessor(Libs.AndroidX.lifeCycleCompiler)
     kapt(Libs.AndroidX.lifeCycleCompiler)
+
+    implementation(tornaco.project.android.thanox.Compose.runtimeSaveAble)
+    implementation(tornaco.project.android.thanox.Compose.ui)
+    implementation(tornaco.project.android.thanox.Compose.runtime)
+    implementation(tornaco.project.android.thanox.Compose.material)
+    implementation(tornaco.project.android.thanox.Compose.material3)
+    implementation(tornaco.project.android.thanox.Compose.material3Adapter)
+    implementation(tornaco.project.android.thanox.Compose.activityCompose)
+    implementation(tornaco.project.android.thanox.Compose.viewmodel)
+    implementation(tornaco.project.android.thanox.Compose.navigationCompose)
+    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
+    implementation(tornaco.project.android.thanox.Compose.tooling)
+    implementation(tornaco.project.android.thanox.Compose.toolingPreview)
+    implementation(tornaco.project.android.thanox.Compose.composeMaterialIconsExtended)
+    implementation(tornaco.project.android.thanox.Compose.landscapistGlide)
+
+    implementation(Libs.Accompanist.appcompatTheme)
+    implementation(Libs.Accompanist.systemUiController)
+    implementation(Libs.Accompanist.pager)
+    implementation(Libs.Accompanist.insets)
+    implementation(Libs.Accompanist.swipeRefresh)
+    implementation(Libs.Accompanist.insetsUi)
+
+    implementation(Libs.Lottie.composeLottie)
+    implementation(Libs.Lottie.lottie)
+    implementation(Libs.Accompanist.pager)
+    implementation(Libs.Accompanist.insets)
+
+    implementation(Libs.Others.coil)
+
+    implementation(Libs.Kotlin.stdlib)
+    implementation(Libs.Coroutines.android)
 
     compileOnly(Libs.Others.xposedApi)
 

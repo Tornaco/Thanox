@@ -7,10 +7,8 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import androidx.lifecycle.ViewModelProviders
-import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.util.ActivityUtils
-import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 
 class ServiceListActivity : ComponentListActivity() {
@@ -42,13 +40,9 @@ class ServiceListActivity : ComponentListActivity() {
         val def = super.onCreateItemOnMenuItemClickListener(componentModel)
         return PopupMenu.OnMenuItemClickListener { item ->
             if (item!!.itemId == R.id.action_standby_keep) {
-                val rule = "KEEP ${componentModel.componentName.flattenToString()}"
-                ThanosManager.from(thisActivity())
-                    .activityManager
-                    .addStandbyRule(rule)
-                ToastUtils.ok(thisActivity())
-            }
-            def.onMenuItemClick(item)
+                AddToSmartStandByKeepsVarDialog(thisActivity(), componentModel.componentName).show()
+                true
+            } else def.onMenuItemClick(item)
         }
     }
 }

@@ -50,6 +50,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.android.module.profile.AddToGlobalVarDialog
+import github.tornaco.thanos.module.component.manager.AddToSmartStandByKeepsVarDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -80,7 +81,7 @@ private fun RunningAppStateDetailsScreen(
     runningAppState: RunningAppState,
     cpuUsageStatsState: CpuUsageStatsState,
     viewModel: RunningAppDetailViewModel,
-    closeScreen: (Boolean) -> Unit
+    closeScreen: (Boolean) -> Unit,
 ) {
     val context = LocalContext.current
     ThanoxSmallAppBarScaffold(
@@ -188,7 +189,7 @@ private fun ServiceSection(
 private fun ServiceTile(
     runningAppState: RunningAppState,
     service: RunningService,
-    viewModel: RunningAppDetailViewModel
+    viewModel: RunningAppDetailViewModel,
 ) {
     val context = LocalContext.current.requireActivity()
     val scope = rememberCoroutineScope()
@@ -219,15 +220,27 @@ private fun ServiceTile(
             style = MaterialTheme.typography.labelMedium
         )
         Spacer(modifier = Modifier.size(12.dp))
-        ServicePopupMenu(popMenuExpend, service, viewModel, addToGlobalVar = {
-            scope.launch {
-                delay(120)
-                AddToGlobalVarDialog(
-                    context = context,
-                    service.running.service.flattenToShortString()
-                ).show()
-            }
-        })
+        ServicePopupMenu(
+            popMenuExpend = popMenuExpend,
+            service = service,
+            viewModel = viewModel,
+            addToGlobalVar = {
+                scope.launch {
+                    delay(120)
+                    AddToGlobalVarDialog(
+                        context = context,
+                        service.running.service.flattenToShortString()
+                    ).show()
+                }
+            }, addToSmartStandByKeeps = {
+                scope.launch {
+                    delay(120)
+                    AddToSmartStandByKeepsVarDialog(
+                        context = context,
+                        service.running.service
+                    ).show()
+                }
+            })
     }
 }
 
@@ -260,7 +273,8 @@ private fun ServicePopupMenu(
     popMenuExpend: MutableState<Boolean>,
     service: RunningService,
     viewModel: RunningAppDetailViewModel,
-    addToGlobalVar: () -> Unit
+    addToGlobalVar: () -> Unit,
+    addToSmartStandByKeeps: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -281,6 +295,11 @@ private fun ServicePopupMenu(
                 "addToGlobalVar",
                 stringResource(id = R.string.module_profile_add_to_global_var),
                 R.drawable.ic_baseline_code_24
+            ),
+            MenuItem(
+                "addToSmartStandByKeeps",
+                stringResource(id = R.string.module_component_manager_keep_service_smart_standby),
+                R.drawable.ic_mickey_line
             )
         )
     ) {
@@ -299,6 +318,9 @@ private fun ServicePopupMenu(
             "addToGlobalVar" -> {
                 addToGlobalVar()
             }
+            "addToSmartStandByKeeps" -> {
+                addToSmartStandByKeeps()
+            }
             else -> {
 
             }
@@ -311,7 +333,7 @@ private fun ProcessSection(
     appInfo: AppInfo,
     runningProcessState: RunningProcessState,
     cpuUsageStatsState: CpuUsageStatsState,
-    viewModel: RunningAppDetailViewModel
+    viewModel: RunningAppDetailViewModel,
 ) {
     val popMenuExpand = remember { mutableStateOf(false) }
 
@@ -398,7 +420,7 @@ private fun ProcessPopupMenu(
     popMenuExpand: MutableState<Boolean>,
     viewModel: RunningAppDetailViewModel,
     runningProcessState: RunningProcessState,
-    addToGlobalVar: () -> Unit
+    addToGlobalVar: () -> Unit,
 ) {
     val context = LocalContext.current
     DropdownPopUpMenu(

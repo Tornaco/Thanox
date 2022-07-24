@@ -61,12 +61,12 @@ abstract class ComponentListActivity : ThemeActivity() {
         binding.componentListView.layoutManager = LinearLayoutManager(this)
         binding.componentListView.adapter =
             ComponentListAdapter(appInfo!!,
-                OnComponentItemSwitchChangeListener { componentModel, checked ->
+                { componentModel, checked ->
                     viewModel.toggleComponentState(
                         componentModel,
                         checked
                     )
-                }, OnComponentItemClickListener { v, componentModel ->
+                }, { v, componentModel ->
                     showItemPopMenu(v, componentModel)
                 })
         binding.swipe.setOnRefreshListener { viewModel.start() }

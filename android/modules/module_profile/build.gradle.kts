@@ -96,7 +96,7 @@ dependencies {
     releaseImplementation(Libs.Others.chuckerNoop)
     debugImplementation(Libs.Others.chucker)
 
-    debugImplementation(Libs.Others.codeView)
+    implementation(Libs.Others.codeView)
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))

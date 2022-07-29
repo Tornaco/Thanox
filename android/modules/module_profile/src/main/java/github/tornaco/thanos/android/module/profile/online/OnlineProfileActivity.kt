@@ -197,7 +197,7 @@ private fun ProfileItem(
                 .fillMaxWidth()
         ) {
             Text(
-                text = profile.ruleInfo.name, style = MaterialTheme.typography.titleLarge.copy(
+                text = profile.ruleInfo.name, style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = W700
                 )
             )

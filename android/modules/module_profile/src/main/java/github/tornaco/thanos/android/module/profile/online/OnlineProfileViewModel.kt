@@ -44,7 +44,7 @@ import javax.inject.Inject
 
 data class OnlineProfileState(
     val isLoading: Boolean = true,
-    val files: List<OnlineProfileItem> = emptyList()
+    val files: List<OnlineProfileItem> = emptyList(),
 )
 
 data class OnlineProfileItem(
@@ -52,7 +52,7 @@ data class OnlineProfileItem(
     val ruleInfo: RuleInfo,
     val rawProfileJson: String,
     val isInstalled: Boolean,
-    val hasUpdate: Boolean
+    val hasUpdate: Boolean,
 )
 
 sealed interface Event {
@@ -65,7 +65,7 @@ sealed interface Event {
 @HiltViewModel
 class OnlineProfileViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val repo: OnlineProfileRepoImpl
+    private val repo: OnlineProfileRepoImpl,
 ) :
     ViewModel() {
     private val _state =
@@ -98,7 +98,7 @@ class OnlineProfileViewModel @Inject constructor(
                                     profileManager.getRuleByName(ruleInfo.name)
                                 val isInstalled = installedRuleOrNull != null
                                 val hasUpdate =
-                                    installedRuleOrNull?.let { it.versionCode < ruleInfo.versionCode }
+                                    installedRuleOrNull?.let { it.versionCode < op.version }
                                         ?: false
                                 OnlineProfileItem(op, ruleInfo, jsonString, isInstalled, hasUpdate)
                             }
@@ -125,7 +125,7 @@ class OnlineProfileViewModel @Inject constructor(
             } else {
                 thanox.profileManager.addRuleIfNotExists(
                     profile.onlineProfile.author,
-                    profile.ruleInfo.versionCode,
+                    profile.onlineProfile.version,
                     profile.rawProfileJson,
                     object : RuleAddCallback() {
                         override fun onRuleAddFail(errorCode: Int, errorMessage: String?) {

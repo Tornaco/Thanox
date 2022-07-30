@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dashboard_tile_text_size_large">18sp</dimen>
     <dimen name="dashboard_tile_text_size">16sp</dimen>
     <dimen name="dashboard_tile_text_size_small">14sp</dimen>
 
@@ -53,6 +54,11 @@
     <dimen name="dashboard_tile_divider_height">1dp</dimen>
 
     <dimen name="dashboard_tile_action_margin">24dp</dimen>
+
+    <style name="TextAppearance.TileTitleLarge" parent="TextAppearance.Medium">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">@dimen/dashboard_tile_text_size_large</item>
+    </style>
 
     <style name="TextAppearance.TileTitle" parent="TextAppearance.Medium">
         <item name="android:textColor">?android:attr/textColorPrimary</item>

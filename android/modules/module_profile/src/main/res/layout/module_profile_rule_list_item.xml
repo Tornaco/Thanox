@@ -80,7 +80,7 @@
                         android:fadingEdge="horizontal"
                         android:fontFamily="sans-serif-medium"
                         android:text="@{rule.ruleInfo.name}"
-                        android:textAppearance="@style/TextAppearance.TileTitle"
+                        android:textAppearance="@style/TextAppearance.TileTitleLarge"
                         tools:text="Profile name" />
 
                     <LinearLayout
@@ -195,7 +195,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/delete"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

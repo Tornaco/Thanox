@@ -15,6 +15,8 @@
  *
  */
 
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package github.tornaco.thanos.android.module.profile.engine
 
 import android.os.Parcelable

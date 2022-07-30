@@ -15,6 +15,8 @@
  *
  */
 
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package github.tornaco.android.thanos.module.compose.common.widget
 
 import androidx.compose.animation.AnimatedVisibility
@@ -57,7 +59,8 @@ fun ThanoxBottomSheetScaffold(
     val containerColor = MaterialTheme.colorScheme.surfaceVariant
     val contentColor = contentColorFor(containerColor)
     CompositionLocalProvider(LocalContentColor provides contentColor) {
-        val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
+        val appbarState = rememberTopAppBarState()
+        val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior(appbarState) }
         BottomSheetScaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             scaffoldState = scaffoldState,
@@ -90,12 +93,13 @@ fun ThanoxSmallAppBarScaffold(
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     isFloatingActionButtonDocked: Boolean = false,
     searchBarState: SearchBarState = rememberSearchBarState(),
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable (PaddingValues) -> Unit,
 ) {
     val containerColor = MaterialTheme.colorScheme.surfaceVariant
     val contentColor = contentColorFor(containerColor)
     CompositionLocalProvider(LocalContentColor provides contentColor) {
-        val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
+        val appbarState = rememberTopAppBarState()
+        val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior(appbarState) }
         com.google.accompanist.insets.ui.Scaffold(
             modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
@@ -131,11 +135,11 @@ private fun ThanoxSmallTopAppBarContainer(
     scrollBehavior: TopAppBarScrollBehavior,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
 ) {
     val backgroundColors = TopAppBarDefaults.smallTopAppBarColors()
     val backgroundColor = backgroundColors.containerColor(
-        scrollFraction = scrollBehavior.scrollFraction
+        colorTransitionFraction = scrollBehavior.state.overlappedFraction
     ).value
     val foregroundColors = TopAppBarDefaults.smallTopAppBarColors(
         containerColor = Color.Transparent,
@@ -164,7 +168,7 @@ private fun ThanoxSmallTopAppBar(
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
     onBackPressed: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior
+    scrollBehavior: TopAppBarScrollBehavior,
 ) {
     SmallTopAppBar(
         colors = foregroundColors,
@@ -197,7 +201,7 @@ private fun SearchBar(scrollBehavior: TopAppBarScrollBehavior, searchBarState: S
         containerColor = Color.Transparent,
         scrolledContainerColor = Color.Transparent
     )
-    val scrollFraction = scrollBehavior.scrollFraction
+    val scrollFraction = scrollBehavior.state.overlappedFraction
     val appBarContainerColor by foregroundColors.containerColor(scrollFraction)
     Surface(
         modifier = Modifier

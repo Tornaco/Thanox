@@ -28,6 +28,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -146,7 +147,7 @@ fun Switch(
             colors = colors,
             thumbValue = offset.asState(),
             interactionSource = interactionSource,
-            thumbShape = Shapes.Full,
+            thumbShape = CircleShape,
             uncheckedThumbDiameter = uncheckedThumbDiameter,
             minBound = thumbPaddingStart,
             maxBound = ThumbPathLength,
@@ -238,7 +239,7 @@ private fun BoxScope.SwitchImpl(
         thumbValue.value
     }
 
-    val trackShape = Shapes.Full
+    val trackShape = CircleShape
     val modifier = Modifier
         .align(Alignment.Center)
         .width(SwitchWidth)
@@ -387,7 +388,7 @@ private class DefaultSwitchColors(
     private val disabledUncheckedThumbColor: Color,
     private val disabledUncheckedTrackColor: Color,
     private val disabledUncheckedBorderColor: Color,
-    private val disabledUncheckedIconColor: Color
+    private val disabledUncheckedIconColor: Color,
 ) : SwitchColors {
     @Composable
     override fun thumbColor(enabled: Boolean, checked: Boolean): State<Color> {

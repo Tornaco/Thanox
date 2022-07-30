@@ -1,3 +1,11 @@
+---
+layout: default
+title: 隐私声明 Privacy statement
+nav_order: 10
+---
+
+
+
 # 基本声明
 
 本应用不会收集您任何隐私信息，它仅会在必要时查询以下与您个人信息无关的内容：

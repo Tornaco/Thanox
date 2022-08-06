@@ -121,30 +121,35 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                 entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }
             val totalPss =
                 thanox.activityManager.getProcessPss(entry.value.map { it.pid }.toIntArray()).sum()
+
             val runningTimeMillis = runningProcessStates.map {
                 thanox.activityManager.getProcessStartTime(it.process.pid)
             }.filter { it > 0L }.minOrNull()?.let {
                 SystemClock.elapsedRealtime() - it
             }
 
-            RunningAppState(
-                appInfo = thanox.pkgManager.getAppInfo(pkgName),
-                processState = runningProcessStates,
-                allProcessIsCached = isAllProcessCached,
-                totalPss = totalPss,
-                sizeStr = Formatter.formatShortFileSize(context, totalPss * 1024),
-                runningTimeMillis = runningTimeMillis
-            )
-        }.filter {
+            val appInfo = thanox.pkgManager.getAppInfo(pkgName)
+            appInfo?.let { app ->
+                RunningAppState(
+                    appInfo = app,
+                    processState = runningProcessStates,
+                    allProcessIsCached = isAllProcessCached,
+                    totalPss = totalPss,
+                    sizeStr = Formatter.formatShortFileSize(context, totalPss * 1024),
+                    runningTimeMillis = runningTimeMillis
+                )
+            }
+
+        }.filterNotNull().filter {
             filterPackages.contains(it.appInfo.pkgName)
         }.sortedByDescending { it.totalPss }
 
         val runningAppStatesGroupByCached = runningAppStates.groupBy { it.allProcessIsCached }
         XLog.d("startLoading: %s", runningAppStatesGroupByCached)
 
-        val notRunningApps = filterPackages.filterNot { runningPackages.contains(it) }.map {
+        val notRunningApps = filterPackages.filterNot { runningPackages.contains(it) }.mapNotNull {
             thanox.pkgManager.getAppInfo(it)
-        }.filterNotNull().sortedWith { o1, o2 ->
+        }.sortedWith { o1, o2 ->
             Collator.getInstance(Locale.CHINESE).compare(o1.appLabel, o2.appLabel)
         }
 

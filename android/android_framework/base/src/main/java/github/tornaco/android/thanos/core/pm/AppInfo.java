@@ -500,4 +500,11 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
                 + this.getObj() + ", arg1=" + this.getArg1() + ", arg2=" + this.getArg2() + ", arg3="
                 + this.getArg3() + ", arg4=" + this.getArg4() + ", iconDrawable=" + this.getIconDrawable() + ")";
     }
+
+    public static AppInfo unknown(String pkgName) {
+        AppInfo appInfo = new AppInfo();
+        appInfo.setAppLabel(pkgName);
+        appInfo.setPkgName(pkgName);
+        return appInfo;
+    }
 }

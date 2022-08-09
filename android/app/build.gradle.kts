@@ -283,7 +283,7 @@ afterEvaluate {
         // Package magisk mods.
         val variantCapped = variant.name.capitalize()
         log("variantCapped=${variantCapped}")
-        val processResTaskName = "process${variantCapped}Resources"
+        val processResTaskName = "shrink${variantCapped}Res"
         log("processResTaskName=${processResTaskName}")
         tasks.getByPath(processResTaskName).doLast {
             tasks.getByPath(processResTaskName).outputs.files.forEach { output ->

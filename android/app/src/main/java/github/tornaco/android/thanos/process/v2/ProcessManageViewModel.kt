@@ -104,15 +104,21 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                     process = process,
                     runningServices = runningServices.filter { service ->
                         service.pid == process.pid
-                    }.map {
-                        val label = getServiceLabel(it)
-                        val clientLabel = if (it.clientPackage != null && it.clientLabel > 0) {
-                            val clientR: Resources = pm.getResourcesForApplication(it.clientPackage)
-                            clientR.getString(it.clientLabel)
+                    }.map { runningServiceInfo ->
+                        val label = getServiceLabel(runningServiceInfo)
+                        val clientLabel = if (runningServiceInfo.clientPackage != null && runningServiceInfo.clientLabel > 0) {
+                            kotlin.runCatching {
+                                val clientR: Resources =
+                                    pm.getResourcesForApplication(runningServiceInfo.clientPackage)
+                                clientR.getString(runningServiceInfo.clientLabel)
+                            }.getOrElse {
+                                XLog.e("getResourcesForApplication error", it)
+                                null
+                            }
                         } else {
                             null
                         }
-                        RunningService(it, label, clientLabel)
+                        RunningService(runningServiceInfo, label, clientLabel)
                     },
                     sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
                 )

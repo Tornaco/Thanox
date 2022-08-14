@@ -88,7 +88,7 @@ public abstract class BitmapUtil {
             return getBitmap(ad);
 
         } else {
-            XLog.w("getBitmap", "Got drawable type:" + drawable);
+            XLog.w("getBitmap Got drawable type:" + drawable);
             // https://cs.android.com/android/platform/superproject/+/master:packages/apps/Dialer/java/com/android/dialer/util/DrawableConverter.java?q=drawableToBitmap
             Bitmap bitmap;
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {

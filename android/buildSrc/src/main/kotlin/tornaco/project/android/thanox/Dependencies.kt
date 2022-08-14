@@ -149,8 +149,6 @@ object Libs {
 
         const val gson = "com.google.code.gson:gson:2.8.5@jar"
 
-        const val androidCommon = "com.github.Tornaco:AndroidCommon:v1.0"
-
         const val chucker = "com.github.chuckerteam.chucker:library:3.5.2"
         const val chuckerNoop = "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 

@@ -21,6 +21,7 @@ public class AppIconLoaderUtil {
     public static Bitmap loadAppIconBitmapWithIconPack(Context context, String pkgName, int pkgUid) {
         try {
             Drawable icon = loadAppIconDrawableWithIconPack(context, pkgName);
+            XLog.d("loadAppIconBitmapWithIconPack, icon: " + icon);
             Drawable badged = context.getPackageManager().getUserBadgedIcon(icon, UserHandle.getUserHandleForUid(pkgUid));
             return BitmapUtil.getBitmap(context, badged);
         } catch (Throwable e) {
@@ -48,7 +49,9 @@ public class AppIconLoaderUtil {
                     }
                 }
             }
-            return ApkUtil.loadIconByPkgName(context, pkgName);
+            Drawable d = ApkUtil.loadIconByPkgName(context, pkgName);
+            XLog.d("loadIconByPkgName, res: " + d);
+            return d;
         } catch (Throwable e) {
             XLog.e("loadAppIconDrawableWithIconPack error: " + Log.getStackTraceString(e));
             return null;

@@ -103,7 +103,6 @@ dependencies {
 
     compileOnly(Libs.Others.xposedApi)
 
-    api(Libs.Others.androidCommon)
     api(project(":rhino:rhino_annotations"))
 
     implementation(project(":android_framework:base"))

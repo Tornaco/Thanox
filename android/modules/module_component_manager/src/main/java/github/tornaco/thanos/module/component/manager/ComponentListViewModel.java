@@ -40,7 +40,7 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
 
     private AppInfo appInfo;
 
-    private final ObservableField<String> queryText = new ObservableField<>(null);
+    private final ObservableField<String> queryText = new ObservableField<>("");
 
     ComponentListViewModel(@NonNull Application application) {
         super(application);

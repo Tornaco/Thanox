@@ -1,0 +1,58 @@
+I"�<h2 id="安装">安装</h2>
+
+<ol>
+  <li>Thanox是一个独立的apk，只需要下载apk安装到设备上即可。</li>
+  <li>目前仅支持<strong>Android 6.0及其以上</strong>版本的ROM。</li>
+  <li>开发基于<strong>AOSP</strong>开发，理论上兼容所有类原生以及其他大部分国产ROM。</li>
+</ol>
+
+<p> </p>
+
+<h2 id="激活">激活</h2>
+
+<p>Thanox中大部分的功能都是在系统进程中完成的，因此Thanox会对Android系统打补丁。</p>
+
+<p>目前支持两种模式激活（二选一）：</p>
+
+<ul>
+  <li>Xposed模式， Android6+</li>
+  <li>Magisk模式，Android11+，实验性，目前功能相对较少</li>
+</ul>
+
+<p> </p>
+
+<h3 id="xposed模式">Xposed模式</h3>
+
+<ol>
+  <li>你的设备必须已经正确安装了<strong>Xposed框架</strong>（或者其他类似支持Xposed API的框架）</li>
+  <li>安装Thanox apk后，进入<strong>Xposed installer</strong>应用，勾选Thanox</li>
+  <li>勾选完成，重启设备</li>
+  <li>对于支持作用域的Xposed框架，请至少勾选Android系统，如要对某个app启用隐匿功能，则还需要勾选目标app</li>
+</ol>
+
+<p><strong>注意，每次更新Thanox后，建议都重新勾选Thanox后重启</strong></p>
+
+<p> </p>
+
+<h3 id="magisk模式实验">Magisk模式(实验)</h3>
+
+<ol>
+  <li>你的设备必须已经正确安装了<strong>Magisk框架</strong></li>
+  <li>你的设备必须已经正确安装了<strong>Riru框架</strong>（Magisk v23+）或者启用了<strong>Zygisk模式</strong>（Magisk v24+）</li>
+  <li>安装最新Thanox 应用</li>
+  <li>点击Thaox设置–关于–补丁状态，导出magisk补丁；或者直接将thanox apk重命名为.zip格式即为magisk补丁</li>
+  <li>刷入上个步骤获取到的magisk补丁</li>
+</ol>
+
+<p><strong>注意，每次更新Thanox，都需要更新magisk补丁。</strong></p>
+
+<p> </p>
+
+<p> </p>
+
+<hr />
+
+<p><strong>导出页面如图所示：</strong></p>
+
+<p><img src="assets/images/export-patch.png" alt="export-patch" /></p>
+:ET

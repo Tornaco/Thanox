@@ -1,0 +1,36 @@
+I"~<!-- more -->
+
+<h2 id="功能建议">功能建议</h2>
+<p>功能建议请在github页面，通过<a href="https://github.com/Tornaco/Thanox/issues/new/choose">新建Feature request</a>的方式提交。</p>
+
+<p>注意，功能描述越详细越好，最好能图文并茂。</p>
+
+<h2 id="问题反馈">问题反馈</h2>
+
+<p>问题反馈请在github页面，通过<a href="https://github.com/Tornaco/Thanox/issues/new/choose">新建issue</a>的方式提交。</p>
+
+<p><strong>Thanox本身提供的配置很多都是会对系统或app造成影响，所以很多时候如果你只是描述问题现象，我是无法分析定位的。</strong></p>
+
+<p><strong>所以问题反馈请务必提供更详细的信息。</strong></p>
+
+<ol>
+  <li>
+    <p>系统版本</p>
+  </li>
+  <li>
+    <p>Thanox版本，补丁方式（xposed还是magisk？）</p>
+  </li>
+  <li>
+    <p>问题现象的详细描述，有图或者视频更好</p>
+  </li>
+  <li>
+    <p>不激活thanox有问题吗？</p>
+  </li>
+  <li>
+    <p>Thanox激活后不做任何配置有问题吗？</p>
+  </li>
+  <li>
+    <p>按照app内的提示抓取日志并上传到issue里</p>
+  </li>
+</ol>
+:ET

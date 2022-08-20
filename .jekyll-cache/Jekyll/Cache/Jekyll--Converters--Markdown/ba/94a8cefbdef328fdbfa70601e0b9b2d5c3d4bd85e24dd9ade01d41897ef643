@@ -1,0 +1,134 @@
+I"d<!-- more -->
+
+<h2 id="功能介绍">功能介绍</h2>
+<p>Thanox的后台启动功能可以有效的拦截app在后台被偷偷启动（通常称为：关联启动）的问题。</p>
+
+<h2 id="允许与阻止的原则">允许与阻止的原则</h2>
+<p>Thanox会根据用户配置、App运行状态、规则等综合因素来决定是否要拦截某个app的关联启动。如果要查看一个app为什么被阻止或允许了启动，可以进入后台启动功能，右上角菜单查看启动记录，点击chart中间的大数字，可以进入启动记录详情页面。</p>
+
+<p>图。</p>
+
+<p>图中可以看到每条启动记录的处理结果（允许或阻止）和原因，其中<code class="language-plaintext highlighter-rouge">BYPASS_XXX</code>代表允许的原因，<code class="language-plaintext highlighter-rouge">BLOCKED_XXX</code>代表阻止原因。</p>
+
+<p>下面是<code class="language-plaintext highlighter-rouge">BYPASS</code>和<code class="language-plaintext highlighter-rouge">BLOCK</code>的对照表：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">允许原因</th>
+      <th style="text-align: right">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">BY PASS WHITE LISTED</td>
+      <td style="text-align: right">目标应用为白名单应用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS CALLER WHITE LISTED</td>
+      <td style="text-align: right">调用方应用为白名单应用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS ACCESSIBILITY SERVICE</td>
+      <td style="text-align: right">目标应用开启了辅助功能</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS BAD ARGS</td>
+      <td style="text-align: right">Thanox内部出问题了，那就允许吧</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS START BLOCKED DISABLED</td>
+      <td style="text-align: right">没打开后台启动功能，当然允许</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS UI PRESENT</td>
+      <td style="text-align: right">目标应用在前台展示，也要允许</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS DEFAULT IME SERVICE</td>
+      <td style="text-align: right">目标应用是默认输入法，要允许</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS PROCESS RUNNING</td>
+      <td style="text-align: right">目标应用已经在运行中了，要允许</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS SAME CALLING UID</td>
+      <td style="text-align: right">应用自己调用了自己的组件进行启动，要允许，也说明该应用已经在运行中</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS SMS APP</td>
+      <td style="text-align: right">短信应用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BYPASS USER RULE</td>
+      <td style="text-align: right">由于后台启动规则而允许</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BY PASS DEFAULT</td>
+      <td style="text-align: right">未命中任何分支，默认为允许</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">阻止原因</th>
+      <th style="text-align: right">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">BLOCKED STRUGGLE</td>
+      <td style="text-align: right">目标应用刚被杀死，短时间阻止其再次启动，主要用来对抗一些黑科技</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BLOCKED IN BLOCK LIST</td>
+      <td style="text-align: right">目标应用被用户关闭了后台启动</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BLOCKED COMPONENT IS DISABLED</td>
+      <td style="text-align: right">要启动的组件已经被禁用了，例如某个服务</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BLOCKED STANDBY</td>
+      <td style="text-align: right">目标应用被开启了乖巧模式</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BLOCKED USER RULE</td>
+      <td style="text-align: right">由于后台启动规则而阻止</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BLOCKED BLOCK API</td>
+      <td style="text-align: right">通过block API阻止</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="规则">规则</h3>
+<p>后台启动规则可以更精确的控制app的后台启动行为，例如；通过规则，可以只允许微信在后台被QQ启动而禁止被其他app启动。</p>
+
+<h3 id="规则语法">规则语法</h3>
+<p>规则语法为两个部分：</p>
+
+<ul>
+  <li>
+    <p><strong>行动</strong>；行动包括两种，分别是：<code class="language-plaintext highlighter-rouge">ALLOW（允许）</code>、<code class="language-plaintext highlighter-rouge">DENY（拒绝）</code></p>
+  </li>
+  <li>
+    <p>角色；包括<strong>启动者app</strong>和<strong>目标app</strong>，分别为对用两个app的包名，也可以用<code class="language-plaintext highlighter-rouge">THIS</code>表示某个应用自己。</p>
+  </li>
+</ul>
+
+<p>举例说明：</p>
+
+<p>如果想允许微信启动QQ，可以添加规则：<code class="language-plaintext highlighter-rouge">ALLOW com.tencent.mm com.tencent.qq</code>；<br />
+如果想允许Android系统启动所有应用，可以添加规则：<code class="language-plaintext highlighter-rouge">ALLOW android *</code>；<br />
+如果想要拒绝任何应用启动微信：<code class="language-plaintext highlighter-rouge">DENY * com.tencent.mm</code>。</p>
+
+<p>便利：</p>
+
+<p>支持一些常用的名称代替角色，目前可用代号包括：<code class="language-plaintext highlighter-rouge">SHELL</code>，<code class="language-plaintext highlighter-rouge">ROOT</code>。  <br />
+例如，如果想允许Shell启动任何QQ：<code class="language-plaintext highlighter-rouge">ALLOW SHELL com.tencent.qq</code></p>
+:ET

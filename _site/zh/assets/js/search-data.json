@@ -1,0 +1,224 @@
+{"0": {
+    "doc": "欢迎使用Thanox",
+    "title": "欢迎使用Thanox",
+    "content": "Thanox是一个Android系统管理工具，在系统隐私和系统优化方便提供了便利的功能。包含应用的权限管理，后台启动管理，后台运行管理，以及强大的情景模式和独特新奇的移花接木功能。 . 查看教程 查看GitHub . ",
+    "url": "http://localhost:4000/",
+    "relUrl": "/"
+  },"1": {
+    "doc": "应用介绍",
+    "title": "开源计划",
+    "content": "目前Thanox代码约80%已经公开在Github上。 .   . ",
+    "url": "http://localhost:4000/docs/intro#%E5%BC%80%E6%BA%90%E8%AE%A1%E5%88%92",
+    "relUrl": "/docs/intro#开源计划"
+  },"2": {
+    "doc": "应用介绍",
+    "title": "版本发布",
+    "content": "Thanox目前在酷安和Google play商店发布。 . | 酷安 发布的版本为国内稳定版。 | Github-Release 国内稳定版，如果要体验最新测试版，可以进入CI下载。 | Google play 发布的版本为pro版本，功能与国内版本基本一致；得益于Google play的便利性，你可以选择加入Beta、Alpha计划体验pro的测试版本 | . ",
+    "url": "http://localhost:4000/docs/intro#%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83",
+    "relUrl": "/docs/intro#版本发布"
+  },"3": {
+    "doc": "应用介绍",
+    "title": "Android版本支持",
+    "content": ". | Android 6.0 - Android 11（Thanox 2.x 版本均支持） | Android 12（从Thanox 3.x开始支持） | Android 13（从Thanox 4.x开始支持） | .   后续将主力维护Android最新三个大版本。 .   . ",
+    "url": "http://localhost:4000/docs/intro#android%E7%89%88%E6%9C%AC%E6%94%AF%E6%8C%81",
+    "relUrl": "/docs/intro#android版本支持"
+  },"4": {
+    "doc": "应用介绍",
+    "title": "工作原理",
+    "content": "Thanox整体架构分两层，分别是App层，Framework层。 . | Framework层运行于system_server进程，负责核心管理逻辑，拥有system级别的权限。 | App层仅是一个普通的应用，负责为用户提供UI交互。 | .   . 架构图 .   . ",
+    "url": "http://localhost:4000/docs/intro#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86",
+    "relUrl": "/docs/intro#工作原理"
+  },"5": {
+    "doc": "应用介绍",
+    "title": "数据存储",
+    "content": "由于Thanox整体架构分两层，其数据也分两部分存储。 . | Framework层的数据存储在/data/system/thanos${16位随机字母}下，Thanox各个功能的数据也存在此处。 | App层仅仅存储一些简单的UI配置数据，使用系统设置清除数据并不会清除Thanox各个功能的数据。 | . ",
+    "url": "http://localhost:4000/docs/intro#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8",
+    "relUrl": "/docs/intro#数据存储"
+  },"6": {
+    "doc": "应用介绍",
+    "title": "应用介绍",
+    "content": " ",
+    "url": "http://localhost:4000/docs/intro",
+    "relUrl": "/docs/intro"
+  },"7": {
+    "doc": "隐私声明",
+    "title": "基本声明",
+    "content": "本应用不会收集您任何隐私信息，它仅会在必要时查询以下与您个人信息无关的内容： . | 读取安装的应用列表；仅在您配置应用时使用，这些信息完全是在本地检查，它的结果不会上传到任何地方。 | 读取本机多用户列表；为了某些功能支持多用户配置，仅在初始化多用户数据使用，仅读取了用户id，通常是个阿拉伯数字。这些信息完全是在本地检查，它的结果不会上传到任何地方。 | 读取本机的设备型号，系统版本号，AndroidId（系统会为每个app自动分配，与设备无关）；仅在国内版本（prc）进行高级版本资格验证时使用，不含任何个人或隐私信息。 | . ",
+    "url": "http://localhost:4000/docs/privacy_statement#%E5%9F%BA%E6%9C%AC%E5%A3%B0%E6%98%8E",
+    "relUrl": "/docs/privacy_statement#基本声明"
+  },"8": {
+    "doc": "隐私声明",
+    "title": "申请的权限",
+    "content": ". | 读写外部存储；用于数据的缓存，数据备份，部分功能的导入导出。 | 网络；用于联网进行高级版本资格验证。 | 安装应用：用于在用户同意的前提下，引导用户手动安装智能冻结的代理应用。 | 卸载应用：用于在用户同意的前提下，引导用户手动卸载智能冻结的代理应用。 | 读取安装的应用列表；仅在您配置应用时使用。 | . ",
+    "url": "http://localhost:4000/docs/privacy_statement#%E7%94%B3%E8%AF%B7%E7%9A%84%E6%9D%83%E9%99%90",
+    "relUrl": "/docs/privacy_statement#申请的权限"
+  },"9": {
+    "doc": "隐私声明",
+    "title": "本声明的更新",
+    "content": "我们可能会不定期更新隐私声明，您可以随时打开此页面查询最新版本的隐私声明。 . 更新日期：2022.05.29 . ",
+    "url": "http://localhost:4000/docs/privacy_statement#%E6%9C%AC%E5%A3%B0%E6%98%8E%E7%9A%84%E6%9B%B4%E6%96%B0",
+    "relUrl": "/docs/privacy_statement#本声明的更新"
+  },"10": {
+    "doc": "隐私声明",
+    "title": "隐私声明",
+    "content": " ",
+    "url": "http://localhost:4000/docs/privacy_statement",
+    "relUrl": "/docs/privacy_statement"
+  },"11": {
+    "doc": "安装与激活",
+    "title": "安装",
+    "content": ". | Thanox是一个独立的apk，只需要下载apk安装到设备上即可。 | 目前仅支持Android 6.0及其以上版本的ROM。 | 开发基于AOSP开发，理论上兼容所有类原生以及其他大部分国产ROM。 | .   . ",
+    "url": "http://localhost:4000/docs/install_active#%E5%AE%89%E8%A3%85",
+    "relUrl": "/docs/install_active#安装"
+  },"12": {
+    "doc": "安装与激活",
+    "title": "激活",
+    "content": "Thanox中大部分的功能都是在系统进程中完成的，因此Thanox会对Android系统打补丁。 . 目前支持两种模式激活（二选一）： . | Xposed模式， Android6+ | Magisk模式，Android11+，实验性，目前功能相对较少 | .   . Xposed模式 . | 你的设备必须已经正确安装了Xposed框架（或者其他类似支持Xposed API的框架） | 安装Thanox apk后，进入Xposed installer应用，勾选Thanox | 勾选完成，重启设备 | 对于支持作用域的Xposed框架，请至少勾选Android系统，如要对某个app启用隐匿功能，则还需要勾选目标app | . 注意，每次更新Thanox后，建议都重新勾选Thanox后重启 .   . Magisk模式(实验) . | 你的设备必须已经正确安装了Magisk框架 | 你的设备必须已经正确安装了Riru框架（Magisk v23+）或者启用了Zygisk模式（Magisk v24+） | 安装最新Thanox 应用 | 点击Thaox设置–关于–补丁状态，导出magisk补丁；或者直接将thanox apk重命名为.zip格式即为magisk补丁 | 刷入上个步骤获取到的magisk补丁 | . 注意，每次更新Thanox，都需要更新magisk补丁。 .   .   . 导出页面如图所示： . ",
+    "url": "http://localhost:4000/docs/install_active#%E6%BF%80%E6%B4%BB",
+    "relUrl": "/docs/install_active#激活"
+  },"13": {
+    "doc": "安装与激活",
+    "title": "安装与激活",
+    "content": " ",
+    "url": "http://localhost:4000/docs/install_active",
+    "relUrl": "/docs/install_active"
+  },"14": {
+    "doc": "乖巧模式",
+    "title": "功能介绍",
+    "content": "有些应用在启动或者运行时，会启动一些后台服务，当应用回到后台时，这些后台服务很有可能继续在后台运行，可能会造成一些资源和电池的消耗。 . 乖巧模式的机制是检测到应用回到后台时，主动停止这些服务。 . 提示：这个模式适合于一些不常用的，不依赖于后台服务的应用，有可能会导致app无法按照预期工作，因此尽量不要用于依赖性很强的社交类应用。 . ",
+    "url": "http://localhost:4000/docs/xmode#%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D",
+    "relUrl": "/docs/xmode#功能介绍"
+  },"15": {
+    "doc": "乖巧模式",
+    "title": "乖巧模式",
+    "content": " ",
+    "url": "http://localhost:4000/docs/xmode",
+    "relUrl": "/docs/xmode"
+  },"16": {
+    "doc": "移花接木",
+    "title": "功能介绍",
+    "content": "移花接木可以配置应用活动之间的跳转。在使用之前需要了解Android里常见的几个概念。 .   .   . 活动 - Activity . Android世界里，页面通常都是一个叫Activity（中文暂且翻译为活动）的东西；因此页面跳转我们现在可以统一语言：活动跳转。 .   .   . 活动怎么标识？ . 每个活动都有个标识，就好比每个网站页面有个路径一样。 . Android里活动的标识格式通常为： . \"${包名}/${活动名}\" . 例如微信的首页活动页标识为： . \"com.tencent.mm/com.tencent.mm.LauncherUI\" .   .   . ",
+    "url": "http://localhost:4000/docs/activity_trampoline#%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D",
+    "relUrl": "/docs/activity_trampoline#功能介绍"
+  },"17": {
+    "doc": "移花接木",
+    "title": "有什么用?",
+    "content": "先看一个需求：一个App有三个活动页，A、B、C； . 常规下该App的启动顺序为A—&gt;B—&gt;C . 现在小明有个需求，他不想看到 B 这个页面，他希望直接从 A 可以跳转到 C，可以吗？ . 可以！ .   .   . ",
+    "url": "http://localhost:4000/docs/activity_trampoline#%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8",
+    "relUrl": "/docs/activity_trampoline#有什么用"
+  },"18": {
+    "doc": "移花接木",
+    "title": "怎么用?",
+    "content": "按照上面的例子，在活动启动的时候，只要想办法把 B 换成 C 不就行了；也就是偷梁换柱，移花接木。 . 因此移花接木功能里，你只要知道 B 和 C 的活动页，就可以新增一条配置，把 B 换成 C。 .   . 举例如图： . 那么怎么知道这些App的活动页都是什么呢？ . 贴心的开发者为你准备了这个功能，打开Thanox设置—开发者—显示当前活动；此后应用的每个活动都会以浮窗展示，点击浮窗可以复制活动标识。 . ",
+    "url": "http://localhost:4000/docs/activity_trampoline#%E6%80%8E%E4%B9%88%E7%94%A8",
+    "relUrl": "/docs/activity_trampoline#怎么用"
+  },"19": {
+    "doc": "移花接木",
+    "title": "移花接木",
+    "content": " ",
+    "url": "http://localhost:4000/docs/activity_trampoline",
+    "relUrl": "/docs/activity_trampoline"
+  },"20": {
+    "doc": "后台启动",
+    "title": "功能介绍",
+    "content": "Thanox的后台启动功能可以有效的拦截app在后台被偷偷启动（通常称为：关联启动）的问题。 . ",
+    "url": "http://localhost:4000/docs/bg_start#%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D",
+    "relUrl": "/docs/bg_start#功能介绍"
+  },"21": {
+    "doc": "后台启动",
+    "title": "允许与阻止的原则",
+    "content": "Thanox会根据用户配置、App运行状态、规则等综合因素来决定是否要拦截某个app的关联启动。如果要查看一个app为什么被阻止或允许了启动，可以进入后台启动功能，右上角菜单查看启动记录，点击chart中间的大数字，可以进入启动记录详情页面。 . 图。 . 图中可以看到每条启动记录的处理结果（允许或阻止）和原因，其中BYPASS_XXX代表允许的原因，BLOCKED_XXX代表阻止原因。 . 下面是BYPASS和BLOCK的对照表： . | 允许原因 | 含义 | . | BY PASS WHITE LISTED | 目标应用为白名单应用 | . | BY PASS CALLER WHITE LISTED | 调用方应用为白名单应用 | . | BY PASS ACCESSIBILITY SERVICE | 目标应用开启了辅助功能 | . | BY PASS BAD ARGS | Thanox内部出问题了，那就允许吧 | . | BY PASS START BLOCKED DISABLED | 没打开后台启动功能，当然允许 | . | BY PASS UI PRESENT | 目标应用在前台展示，也要允许 | . | BY PASS DEFAULT IME SERVICE | 目标应用是默认输入法，要允许 | . | BY PASS PROCESS RUNNING | 目标应用已经在运行中了，要允许 | . | BY PASS SAME CALLING UID | 应用自己调用了自己的组件进行启动，要允许，也说明该应用已经在运行中 | . | BY PASS SMS APP | 短信应用 | . | BYPASS USER RULE | 由于后台启动规则而允许 | . | BY PASS DEFAULT | 未命中任何分支，默认为允许 | . | 阻止原因 | 含义 | . | BLOCKED STRUGGLE | 目标应用刚被杀死，短时间阻止其再次启动，主要用来对抗一些黑科技 | . | BLOCKED IN BLOCK LIST | 目标应用被用户关闭了后台启动 | . | BLOCKED COMPONENT IS DISABLED | 要启动的组件已经被禁用了，例如某个服务 | . | BLOCKED STANDBY | 目标应用被开启了乖巧模式 | . | BLOCKED USER RULE | 由于后台启动规则而阻止 | . | BLOCKED BLOCK API | 通过block API阻止 | . 规则 . 后台启动规则可以更精确的控制app的后台启动行为，例如；通过规则，可以只允许微信在后台被QQ启动而禁止被其他app启动。 . 规则语法 . 规则语法为两个部分： . | 行动；行动包括两种，分别是：ALLOW（允许）、DENY（拒绝） . | 角色；包括启动者app和目标app，分别为对用两个app的包名，也可以用THIS表示某个应用自己。 . | . 举例说明： . 如果想允许微信启动QQ，可以添加规则：ALLOW com.tencent.mm com.tencent.qq； 如果想允许Android系统启动所有应用，可以添加规则：ALLOW android *； 如果想要拒绝任何应用启动微信：DENY * com.tencent.mm。 . 便利： . 支持一些常用的名称代替角色，目前可用代号包括：SHELL，ROOT。 例如，如果想允许Shell启动任何QQ：ALLOW SHELL com.tencent.qq . ",
+    "url": "http://localhost:4000/docs/bg_start#%E5%85%81%E8%AE%B8%E4%B8%8E%E9%98%BB%E6%AD%A2%E7%9A%84%E5%8E%9F%E5%88%99",
+    "relUrl": "/docs/bg_start#允许与阻止的原则"
+  },"22": {
+    "doc": "后台启动",
+    "title": "后台启动",
+    "content": " ",
+    "url": "http://localhost:4000/docs/bg_start",
+    "relUrl": "/docs/bg_start"
+  },"23": {
+    "doc": "情景模式",
+    "title": "情景模式",
+    "content": " ",
+    "url": "http://localhost:4000/docs/profile",
+    "relUrl": "/docs/profile"
+  },"24": {
+    "doc": "情景模式",
+    "title": "Table of contents",
+    "content": ". | 0.1. 前言 | 0.2. 介绍 | 0.3. 新建 | 0.4. Fatcs-params . | 0.4.1. 应用安装、卸载、更新 | 0.4.2. 应用切换 | 0.4.3. 任务清理 | 0.4.4. Activity Created | 0.4.5. Activity Resumed | 0.4.6. Activity Changed | 0.4.7. 应用停止运行 | 0.4.8. 屏幕开关 | 0.4.9. 电量变化 | 0.4.10. 蓝牙事件 | 0.4.11. Wifi状态变化 | 0.4.12. 系统启动 | 0.4.13. 推送消息 | 0.4.14. 通知 | 0.5.15 快捷方式 | . | 0.5. Handle . | 0.5.1. killer | 0.5.2. activity | 0.5.3. power | 0.5.4. task | 0.5.5. ui | 0.5.6. hw | 0.5.7. io | 0.5.8. data | 0.5.9. ringtone | 0.5.10. sh | 0.5.11. input | 0.5.12. pkg | 0.5.13. Log | 0.5.14. Audio | 0.5.15. Context | 0.5.16. Thanos | 0.5.15. Actor(废弃) | . | 0.6. 全局变量 | . ",
+    "url": "http://localhost:4000/docs/profile#table-of-contents",
+    "relUrl": "/docs/profile#table-of-contents"
+  },"25": {
+    "doc": "情景模式",
+    "title": "0.1. 前言",
+    "content": "You can build a simple rules engine yourself. All you need is to create a bunch of objects with conditions and actions, store them in a collection, and run through them to evaluate the conditions and execute the actions. Martin Fowler   . ",
+    "url": "http://localhost:4000/docs/profile#01-%E5%89%8D%E8%A8%80",
+    "relUrl": "/docs/profile#01-前言"
+  },"26": {
+    "doc": "情景模式",
+    "title": "0.2. 介绍",
+    "content": "情景模式简单理解： . “什么时候，干什么。” . 什么时候就是触发条件（condition） . 干什么就是动作（actions） .   .   . ",
+    "url": "http://localhost:4000/docs/profile#02-%E4%BB%8B%E7%BB%8D",
+    "relUrl": "/docs/profile#02-介绍"
+  },"27": {
+    "doc": "情景模式",
+    "title": "0.3. 新建",
+    "content": "新建一条入门实例如下，以JSON格式为例： . [ { \"name\": \"Current pkg\", \"description\": \"应用切换时，使用Toast显示当前应用的当前应用包名\", \"priority\": 2, \"delay\": 2000, \"condition\": \"frontPkgChanged == true\", \"actions\": [ \"ui.showShortToast(activity.getFrontAppPackage());\" ] } ] . 参数解释： . | 参数名 | 含义 | . | name | 请使用英文，情景模式名字，多个模式不能重复，否则会被覆盖 | . | description | 任意的描述 | . | priority | 优先级，决定执行顺序 | . | delay | action 动作执行的延迟，时间单位为毫秒 | . | condition | 触发条件，支持mvel表达式，条件可选的基于事实的facts-param请参考下面的章节语法注意：双引号需要使用\\转移字符转义 | . | actions | 要执行的动作，支持mvel表达式 ，可以设置多个，动作可选的handle请参考下面的章节语法注意：双引号需要使用\\转移字符转义 | .   .   . ",
+    "url": "http://localhost:4000/docs/profile#03-%E6%96%B0%E5%BB%BA",
+    "relUrl": "/docs/profile#03-新建"
+  },"28": {
+    "doc": "情景模式",
+    "title": "0.4. Fatcs-params",
+    "content": "除了提供规则引擎之外，Thanox也会提供常用的事实与参数，用于condition条件判断。 .   . 0.4.1. 应用安装、卸载、更新 . 应用安装、卸载、更新之后，thanox会发布这个事实，并注入一些参数，你可以使用这些参数做条件判断，或者执行动作时作为参数使用。 . | 参数名 | 类型 | 含义 | 示例 | . | pkgAdded | Boolean | 新应用已经安装 | 如下 | . | pkgRemoved | Boolean | 应用被卸载 | 如下 | . | pkgUpdated | Boolean | 应用已更新 | 如下 | . | pkgName | String | 安装的应用包名 | 如下 | . pkgAdded 示例 . | 作为条件判断： . \"condition\": \"pkgAdded == true\" . | . pkgName示例 . | 作为条件判断： . \"condition\": \"pkgAdded == true &amp;&amp; pkgName == \\\"com.tencent.mm\\\"\" . | 作为动作参数： . \"ui.showShortToast(pkgName);\" .   . | . 0.4.2. 应用切换 . 前台应用切换时，thanox也会发布这个事实，参数如下。 . | 参数名 | 类型 | 含义 | 示例 | . | frontPkgChanged | Boolean（true/false） | 前台应用已切换 | 如下 | . | from | String（字符串） | 从哪个应用切换的，包名 | 如下 | . | to | String（字符串） | 切换到哪个应用，包名 | 略 | . frontPkgChanged示例 . | 作为条件判断： . \"condition\": \"frontPkgChanged == true\" . | . from示例 . | 作为条件判断，微信是否回到了后台： . \"condition\": \"frontPkgChanged == true &amp;&amp; from == \\\"com.tencent.mm\\\"\" .   . | . 0.4.3. 任务清理 . 当某个应用的任务被移除时，一般场景为最近任务中，该任务被用户划掉。此时thanox也会发布这个事实，参数如下。 . | 参数名 | 类型 | 含义 | 示例 | . | taskRemoved | Boolean（true/false） | 任务已移除 | 如下 | . | pkgName | String（字符串） | 从哪个应用切换的，包名 | 如下 | . taskRemoved示例 . | 作为条件判断： . \"condition\": \"taskRemoved == true\" . | . pkgName示例： . | 作为条件判断，微信任务移除时杀死应用： . \"condition\": \"taskRemoved == true &amp;&amp; pkgName == \\\"com.tencent.mm\\\"\"， \"actions\": [ \"ui.showShortToast(\\\"正在杀死微信\\\");\", \"killer.killPackage(pkgName);\" ] . | .   . 0.4.4. Activity Created . 通常一个应用的活动页已经创建好，可以称为Activity Created。此时thanox也会发布这个事实，参数如下。 通常一个活动的生命周期为Created（创建好）–&gt;Resumed（显示好，可以交互了）–&gt; Paused（暂停）–&gt; Destroyed（销毁了），需要注意的是， . 如果一个活动走到Resumed状态时，被其他活动覆盖，例如被支付宝支付页面覆盖，那么它会走如下生命周期： Resumed–&gt; Paused（被其他活动覆盖）–&gt;Resumed（如果其他活动销毁了，回到了该活动，那么又会恢复到Resumed，而不会再次Create）。 . 详细的Android活动的生命周期可以参考：https://developer.android.com/guide/components/activities/activity-lifecycle . | 参数名 | 类型 | 含义 | 示例 | . | activityCreated | Boolean（true/false） | 活动页已经创建好 | 如下 | . | componentNameAsString | String（字符串） | 活动的组件全名，Thanox的显示当前活动复制来的名字就是这个 | 如下 | . | componentNameAsShortString | String（字符串） | 活动的组件缩名 | 如下 | . | componentName | ComponentName | 活动的组件 | 如下 | . | pkgName | String（字符串） | 应用的包名 | 如下 | .   . 0.4.5. Activity Resumed . 通常一个应用的活动页已经显示，可以称为Activity Resumed。此时thanox也会发布这个事实，参数如下。 . | 参数名 | 类型 | 含义 | 示例 | . | activityResumed | Boolean（true/false） | 活动已经显示 | 如下 | . | componentNameAsString | String（字符串） | 活动的组件全名，Thanox的显示当前活动复制来的名字就是这个 | 如下 | . | componentNameAsShortString | String（字符串） | 活动的组件缩名 | 如下 | . | componentName | ComponentName | 活动的组件 | 如下 | . | pkgName | String（字符串） | 应用的包名 | 如下 | . 通常很多应用启动首页会有一个首页显示广告，有个跳过按钮可以点击，下面是使用该事实实现的广告跳过示例： . [ { \"name\": \"AD Skip\", \"description\": \"彩云天气广告页面点击跳过\", \"priority\": 1, \"condition\": \"activityResumed == true &amp;&amp; componentNameAsShortString == \\\"com.nowcasting.activity/.SplashActivity\\\"\", \"actions\": [ \"ui.showShortToast(\\\"尝试点击跳过...\\\");\", \"ui.findAndClickViewByText(\\\"跳过\\\", \\\"com.nowcasting.activity/com.nowcasting.activity.SplashActivity\\\");\" ] } ] . | 提示：此处条件只判断了彩云天气，可以使用 |   | 操作符做多条件判断。此处的ui操作后续会介绍。 | .   . 0.4.6. Activity Changed . 当前前台活动(Activity)发生改变时thanox会发布该事件。(Since Thanox(or Pro)-2.5) . | 参数名 | 类型 | 含义 | 示例 | . | frontActivityChanged | Boolean（true/false） | 前台Activity改变 | 无 | . | fromActivity | ComponentName | 活动的组件 | 无 | . | toActivity | ComponentName | 活动的组件 | 无 | . ComponentName 是活动组件名称。 . 例如：com.android.messaging/com.android.messaging.ui.conversationlist.ConversationListActivity . Thanox的开发者设置中，”显示当前Activity”功能也可以显示当前activity的ComponentName。 .   . 0.4.7. 应用停止运行 . 应用被杀死或者其他原因停止运行，Thanox会发布该事实。 . | 参数名 | 类型 | 含义 | 示例 | . | pkgKilled | Boolean（true/false） | 任务已移除 | 如下 | . | pkgName | String（字符串） | 应用包名 | 如下 | .   . 0.4.8. 屏幕开关 . | 参数名 | 类型 | 含义 | 示例 | . | screenOn | Boolean（true/false） | 亮屏事件 | 无 | . | screenOff | Boolean（true/false） | 灭屏事件 | 无 | . | userPresent | Boolean（true/false） | 解锁事件 | 无 | .   . 0.4.9. 电量变化 . | 参数名 | 类型 | 含义 | 示例 | . | batteryChanged | Boolean（true/false） | 电量发生变化 | 无 | . | batteryLevel | int | 电量 | 无 | . | isCharging | Boolean（true/false） | 是否在充电 | 无 | . | isAcCharge | Boolean（true/false） | 是否为AC | 无 | . | isUsbCharge | Boolean（true/false） | 是否为USB | 无 | .   . 0.4.10. 蓝牙事件 . | 参数名 | 类型 | 含义 | 示例 | . | btStateChanged | Boolean（true/false） | 蓝牙开关状态发生变化 | 无 | . | btStateOff | Boolean（true/false） | 蓝牙为关闭状态 | 无 | . | btStateTurningOff | Boolean（true/false） | 蓝牙为正在关闭状态 | 无 | . | btStateOn | Boolean（true/false） | 蓝牙为开启状态 | 无 | . | btStateTurningOn | Boolean（true/false） | 蓝牙为正在开启状态 | 无 | . |   |   |   |   | . | btConnectionStateChanged | Boolean（true/false） | 蓝牙连接状态发生变化 | 无 | . | btConnectionStateConnected | Boolean（true/false） | 蓝牙为已连接状态 | 无 | . | btConnectionStateConnecting | Boolean（true/false） | 蓝牙为正在连接状态 | 无 | . | btConnectionStateDisconnected | Boolean（true/false） | 蓝牙为断开连接状态 | 无 | . | btConnectionStateDisconnecting | Boolean（true/false） | 蓝牙为正在断开连接状态 | 无 | . |   |   |   |   | . | btBoundedDevices | List of BluetoothDevice | 绑定的蓝牙设备模型列表 | 无 | . | btBoundedDeviceAddresses | List of String | 绑定的蓝牙设备地址列表 | 无 | . | btBoundedDeviceAliasNames | List of String | 绑定的蓝牙设备Alias列表 | 无 | . | btBoundedDeviceBatteryLevel | List of Int | 绑定的蓝牙设备电量信息列表 | 无 | . 提示： Battery level in percents from 0 to 100, or -1 if Bluetooth is disabled, or device is disconnected, or does not have any battery reportingservice, or return value is invalid . 示例1： . [ { \"name\": \"BT Connection State\", \"description\": \"蓝牙连接状态监听，此处监听连接事件，Toast显示所有连接设备，并判断是不是连接的MDR-XB650BT\", \"priority\": 2, \"condition\": \"btConnectionStateChanged == true &amp;&amp; btConnectionStateConnected == true\", \"actions\": [ \"ui.showShortToast(\\\"蓝牙连接连接到新设备了，所有设备名称为：\\\" + btBoundedDeviceAliasNames);\", \"ui.showShortToast(\\\"蓝牙连接连接到新设备了，包含MDR-XB650BT设备吗？\\\" + btBoundedDeviceAliasNames.contains(\\\"MDR-XB650BT\\\"));\" ] } ] . 示例2： . [ { \"name\": \"BT Connection State Advanced\", \"description\": \"同蓝牙连接状态监听，只是使用了btBoundedDevices:BluetoothDevice参数\", \"priority\": 2, \"condition\": \"btConnectionStateChanged == true &amp;&amp; btConnectionStateConnected == true\", \"actions\": [ \"ui.showShortToast(\\\"蓝牙连接连接到新设备了，第一个设备名称为：\\\" + btBoundedDevices.get(0).getAddress());\" ] } ] .   . 0.4.11. Wifi状态变化 . Wifi状态变化时发出的事件。（Since Thanox 2.5-2） . | 参数名 | 类型 | 含义 | 示例 | . | wifiStateChanged | Boolean（true/false） | Wifi状态是否改变 | 无 | . | wifiState | WifiState | 状态 | 无 | . WifiState: . data class WifiState( // 是否是开启状态 val enabled: Boolean, // 状态信息（例如：No network） val statusLabel: String?, // SSID（例如：ChinaNet-d2Xq-5G） val ssid: String? ) .   . 0.4.12. 系统启动 . | 参数名 | 类型 | 含义 | 示例 | . | systemReady | Boolean（true/false） | 系统启动完成 | 无 | .   . 0.4.13. 推送消息 . | 参数名 | 类型 | 含义 | 示例 | . | fcmPushMessageArrived | Boolean（true/false） | 收到GCM/FCM消息推送 | 无 | . | pkgName | String（字符串） | 应用包名 | 无 | .   . 0.4.14. 通知 . | 参数名 | 类型 | 含义 | 示例 | . | notificationAdded | Boolean（true/false） | 新通知到达 | 无 | . | notificationRemoved | Boolean（true/false） | 通知移除 | 无 | . | pkgName | String（字符串） | 通知所属应用包名 | 无 | . | notificationTitle | String（字符串） | 通知标题 | 无 | . | notificationContent | String（字符串） | 通知内容 | 无 | .   . 0.5.15 快捷方式 . 你可以创建一个有”意义的“桌面快捷方式，当你点击这个桌面快捷方式的时候，Thanox会发布这个快捷方式代表的事实。 . 例如；实现一个一键锁屏快捷方式，即：点击桌面一键锁屏快捷方式时锁屏。 .   . 首先创建一个快捷方式引擎： .   .   .   . 接下来，添加一个情景模式，监听这个快捷方式的启动事件，并指定锁屏命令： .   . [ { \"name\": \"Profile shortcut\", \"description\": \"监听一个快捷方式启动事件，以一键锁屏为例\", \"priority\": 2, \"condition\": \"shortcutLaunched == true &amp;&amp; shortcutValue == \\\"turn screen off\\\"\", \"actions\": [ \"power.sleep(0);\" ] } ] .   . 保存之后，点击桌面上的一键锁屏快捷方式即可实现一键锁屏功能了。 .   .   . ",
+    "url": "http://localhost:4000/docs/profile#04-fatcs-params",
+    "relUrl": "/docs/profile#04-fatcs-params"
+  },"29": {
+    "doc": "情景模式",
+    "title": "0.5. Handle",
+    "content": "Thanox会提供一部分执行动作所需要的handle能力。例如ui，专门用于做界面显示相关的动作。 . 你可以使用handle.action(params)来执行自定义的动作。 . 下面是目前支持的Handle能力。 .   . 0.5.1. killer . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | killPackage | 杀死应用 | 包名 | killer.killPackage(“com.tencent.mm”) | Boolean（true/false） | . 接口定义： . @HandlerName(\"killer\") interface IKiller { boolean killPackage(String pkgName); } . 举例： . \"actions\": [ // 杀死微信 \"killer.killPackage(\\\"com.tencent.mm\\\")\" ] .   . 0.5.2. activity . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | launchProcessForPackage | 启动应用进程 | 包名 | 如下 | Boolean（true/false） | . | launchMainActivityForPackage | 打开应用主界面 | 包名 | 如下 | Boolean（true/false） | . | getLaunchIntentForPackage | 获取应用的启动Intent | 包名 | 如下 | Intent | . | getFrontAppPackage | 获取当前前台应用包名 | 无 | 如下 | String（字符串） | . | getFrontAppPackageComponent | 获取当前前台应用组件 | 无 | 如下 | ComponentName | . 接口定义： . @HandlerName(\"activity\") interface IActivity { boolean launchProcessForPackage(String pkgName); boolean launchActivity(Intent intent); boolean launchMainActivityForPackage(String pkgName); Intent getLaunchIntentForPackage(String pkgName); String getFrontAppPackage(); ComponentName getFrontAppPackageComponent(); } . 举例： . \"actions\": [ // 启动微信进程 \"activity.launchProcessForPackage(\\\"com.tencent.mm\\\")\", // 打开微信主界面 \"activity.launchMainActivityForPackage(\\\"com.tencent.mm\\\")\", // 吐司显示目前前台应用包名 \"toast.showShortToast(activity.getFrontAppPackage())\" ] .   . 0.5.3. power . 电源相关能力 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | sleep | 休眠（锁屏） | 延迟的毫秒数 | 如下 | 无 | . | wakeup | 唤醒 | 延迟的毫秒数 | 如下 | 无 | . | setBrightness | 设置屏幕亮度 | 亮度Level值(0~255) | 如下 | 无 | . | getBrightness | 获取当前屏幕亮度 | 无 | 如下 | 度Level值(0~255) | . | setAutoBrightnessEnabled | 设置自动亮度开关 | true/false | 如下 | 无 | . | isAutoBrightnessEnabled | 是否开启自动亮度 | 无 | 如下 | true/false | . 接口定义： . @HandlerName(\"power\") interface IPower { void sleep(long delay); void wakeup(long delay); void setBrightness(int level); int getBrightness(); void setAutoBrightnessEnabled(boolean enable); boolean isAutoBrightnessEnabled(); } . 举例： . { \"actions\": [ // 立即锁屏 \"power.sleep(0)\", // 1秒后亮屏 \"power.wakeup(1000)\", \"power.setAutoBrightnessEnabled(false)\", \"power.setBrightness(power.getBrightness() + 1)\", ] } .   . 0.5.4. task . 任务相关能力 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | removeTasksForPackage | 移除应用的最近任务 | 包名 | 如下 | 无 | . | hasTaskFromPackage | 应用是否有最近任务 | 包名 | 如下 | Boolean（true/false） | . | clearBackgroundTasks | 调用thanox的任务清理功能，清理所有最近任务 | 无 | 如下 | 无 | . 接口定义： . @HandlerName(\"task\") interface ITask { void removeTasksForPackage(String pkgName); boolean hasTaskFromPackage(String pkgName); void clearBackgroundTasks(); } . 举例： . { // 判断微信是否有任务 \"condition\": \"true &amp;&amp; task.hasTaskFromPackage(\\\"com.tencent.mm\\\")\", \"actions\": [ // 移除微信的最近任务 \"task.removeTasksForPackage(\\\"com.tencent.mm\\\")\" ] } .   . 0.5.5. ui . 界面相关 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | showShortToast | 显示提示 | 无 | 如下 | 无 | . | showLongToast | 显示时间较短的提示 | 无 | 如下 | 无 | . | showDialog | 显示对话框 | 标题文本，信息文本，确认按钮文本 | 如下 | 无 | . | showNotification | 显示通知 | 标签（可用于取消通知）标题文本，信息文本，是否重要 | 如下 | 无 | . | cancelNotification | 取消通知 | 标签 | 如下 | 无 | . 接口定义： . @HandlerName(\"ui\") interface IUI { void showShortToast(@NonNull String msg); void showLongToast(@NonNull String msg); void showDialog(@Nullable String title, @NonNull String msg, @Nullable String yes); void showNotification( @NonNull String notificationTag, @NonNull String title, @NonNull String msg, boolean important); void cancelNotification(@NonNull String notificationTag); } .   . 0.5.6. hw . 硬件操作能力 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | enableWifi | 看名字 | 包名 | 如下 | Boolean（true/false） | . | disableWifi | 看名字 | 无 | 如下 | Boolean（true/false） | . | isWifiEnabled | 看名字 | 无 | 如下 | Boolean（true/false） | . | enableLocation | 看名字 | 无 | 如下 | Boolean（true/false） | . | disableLocation | 看名字 | 无 | 如下 | Boolean（true/false） | . | isLocationEnabled | 看名字 | 无 | 如下 | Boolean（true/false） | . | enableBT | 看名字 | 无 | 如下 | Boolean（true/false） | . | disableBT | 看名字 | 无 | 如下 | Boolean（true/false） | . | isBTEnabled | 看名字 | 无 | 如下 | Boolean（true/false） | . | enableNfc | 看名字 | 无 | 如下 | Boolean（true/false） | . | disableNfc | 看名字 | 无 | 如下 | Boolean（true/false） | . | isNfcEnabled | 看名字 | 无 | 如下 | Boolean（true/false） | . | enabledFlashlight | 看名字 | 无 | 如下 | Boolean（true/false） | . | disableFlashlight | 看名字 | 无 | 如下 | Boolean（true/false） | . | isFlashlightEnabled | 看名字 | 无 | 如下 | Boolean（true/false） | . | isFlashlightAvailable | 手电筒是否可用（被占用？无硬件？） | 无 | 如下 | Boolean（true/false） | . |   |   |   |   |   | . 接口定义： . @HandlerName(\"hw\") interface IHW { boolean enableWifi(); boolean disableWifi(); boolean isWifiEnabled(); boolean enableLocation(); boolean disableLocation(); boolean isLocationEnabled(); boolean enableBT(); boolean disableBT(); boolean isBTEnabled(); boolean enableNfc(); boolean disableNfc(); boolean isNfcEnabled(); boolean enabledFlashlight(); boolean disableFlashlight(); boolean isFlashlightEnabled(); boolean isFlashlightAvailable(); } . 举例： . [ { \"name\": \"Enable BT\", \"description\": \"打开微信时，打开蓝牙\", \"priority\": 2, \"condition\": \"frontPkgChanged == true &amp;&amp; to == \\\"com.tencent.mm\\\"\", \"actions\": [ \"ui.showShortToast(\\\"蓝牙状态\\\" + (hw.isBTEnabled() ? \\\"开启\\\" : \\\"关闭\\\"));\", \"ui.showShortToast(\\\"正在打开蓝牙...\\\");\", \"ui.showShortToast(\\\"蓝牙打开\\\" + (hw.enableBT() ? \\\"成功\\\" : \\\"失败\\\"));\", // 打开GPS \"hw.enableLocation()\", \"hw.enableWifi()\" ] } ] .   . 0.5.7. io . 文件读写能力。 . 注意：受限于文件权限，所有文件的根目录为/data/system/thanos_xxx/profile_user_io . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | read | 读取文件 | 文件相对路径 | 略 | String | . | write | 写内容到文件 | 文件相对路径 | 略 | Boolean | . | writeAppend | 写内容到文件，追加 | 文件相对路径 | 略 | Boolean | . 接口定义： . @HandlerName(\"io\") interface IIO { String read(String path); boolean write(String path, String content); boolean writeAppend(String path, String content); } .   . 0.5.8. data . 移动数据相关能力。 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | setDataEnabled | 设置移动数据开启状态 | true打开，false关闭 | 如下 | Boolean（true/false） | . | setDataEnabled | 设置移动数据开启状态（可以指定卡序号） | 卡序号，true打开，false关闭 | 如下 | 无 | . | setDataEnabledForSlot | 设置移动数据开启状态（可以指定卡槽号） | 卡序号，true打开，false关闭 | 如下 | 无 | . | isDataEnabled | 获取移动数据开启状态 | true打开，false关闭 | 如下 | Boolean（true/false） | . | isDataEnabledForSlot | 获取移动数据开启状态（可以指定卡槽号） | true打开，false关闭 | 如下 | Boolean（true/false） | . | setDataNetworkType | 设置网络模式 | type | 如下 | 无 | . | setDataNetworkTypeForPhone | 设置网络模式（指定某个卡） | phoneId，type | 如下 | 无 | . | setDataNetworkTypeForSlot | 设置网络模式（指定某个卡槽号） | slotId，type | 如下 | 无 | . | getCurrentPreferredNetworkMode | 获取当前默认卡的网络模式 | 无 | 如下 | int | . | getCurrentPreferredNetworkMode | 获取某subId的网络模式 | subId | 如下 | int | . | getCurrentPreferredNetworkModeForSlot | 获取某卡槽的网络模式 | slotId | 如下 | int | . | isAirplaneModeEnabled | 是否开启了飞行模式 | 无 | 无 | Boolean | . 接口定义： . @HandlerName(\"data\") interface IData { void setDataEnabled(boolean enable); void setDataEnabled(int subId, boolean enable); void setDataEnabledForSlot(int slotId, boolean enable); boolean isDataEnabled(); boolean isDataEnabledForSlot(int slotId); void setDataNetworkType(int type); void setDataNetworkTypeForPhone(int phoneId, int type); void setDataNetworkTypeForSlot(int slotId, int type); int getCurrentPreferredNetworkMode(); int getCurrentPreferredNetworkMode(int subId); int getCurrentPreferredNetworkModeForSlot(int slotId); } . 数据网络模式类型： . // Network type enums, primarily used by android/telephony/TelephonyManager.java. // Do not add negative types. enum NetworkTypeEnum { NETWORK_TYPE_UNKNOWN = 0; NETWORK_TYPE_GPRS = 1; NETWORK_TYPE_EDGE = 2; NETWORK_TYPE_UMTS = 3; NETWORK_TYPE_CDMA = 4; NETWORK_TYPE_EVDO_0 = 5; NETWORK_TYPE_EVDO_A = 6; NETWORK_TYPE_1XRTT = 7; NETWORK_TYPE_HSDPA = 8; NETWORK_TYPE_HSUPA = 9; NETWORK_TYPE_HSPA = 10; NETWORK_TYPE_IDEN = 11; NETWORK_TYPE_EVDO_B = 12; NETWORK_TYPE_LTE = 13; NETWORK_TYPE_EHRPD = 14; NETWORK_TYPE_HSPAP = 15; NETWORK_TYPE_GSM = 16; NETWORK_TYPE_TD_SCDMA = 17; NETWORK_TYPE_IWLAN = 18; NETWORK_TYPE_LTE_CA = 19; NETWORK_TYPE_NR = 20; } . 举例： . [ { \"name\": \"Enable Data\", \"description\": \"打开微信时，打开移动数据\", \"priority\": 2, \"condition\": \"frontPkgChanged == true &amp;&amp; to == \\\"com.tencent.mm\\\"\", \"actions\": [ \"ui.showShortToast(\\\"移动数据当前\\\" + (data.isDataEnabled() ? \\\"开启\\\" : \\\"关闭\\\"));\", \"ui.showShortToast(\\\"正在打开移动数据...\\\");\", \"data.setDataEnabled(true)\" ] } ] .   . 0.5.9. ringtone . 铃音振动能力。 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | dingdingding | 看名字 | 无或者重复次数 | 如下 | 无 | . | wengwengweng | 看名字 | 无或者重复次数 | 如下 | 无 | . 接口定义： . @HandlerName(\"ringtone\") interface IRingtone { void dingdingding(); void wengwengweng(); void dingdingding(int repeat); void wengwengweng(int repeat); } .   . 0.5.10. sh . Shell sh能力。 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | exe | 执行sh命令 | 命令字符串 | 无 | 结果 | . 接口定义： . @HandlerName(\"sh\") interface ISh { CommandResult exe(String command); } .   . 0.5.11. input . 按键输入能力。 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | injectKey | 执行sh命令 | 命令字符串 | 无 | 结果 | . | getLastKey | 返回上次按键码 | 无 | 无 | 按键码 | . | getLastKeyTime | 返回上次按键的系统时间 | 无 | 无 | 系统时间mills | . 接口定义： . @HandlerName(\"input\") interface IInput { boolean injectKey(int code); int getLastKey(); long getLastKeyTime(); } .   . 0.5.12. pkg . 包管理能力。 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | disableApplication | 冻结应用 | 包名 | 无 | 无 | . | enableApplication | 解冻应用 | 包名 | 无 | 无 | . | isApplicationEnabled | 应用是否为非冻结状态 | 包名 | 无 | Boolean(true/false) | . 接口定义： . @HandlerName(\"pkg\") interface IPkg { void disableApplication(String pkg); void enableApplication(String pkg); boolean isApplicationEnabled(String pkg); } .   . 0.5.13. Log . 日志打印工具。 . 使用示例: . log.log(\"Log message\"); . 接口定义： . @HandlerName(\"log\") public interface ILog { void log(String content); } .   . 0.5.14. Audio . 声音管理相关。 . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | getRingerMode | 获取铃音模式 | 无 | 无 | 模式的int值 | . | setRingerMode | 设置铃音模式 | 模式的int值 | 无 | 无 | . 铃音模式的int值标识：https://developer.android.com/reference/android/media/AudioManager#RINGER_MODE_SILENT . int RINGER_MODE_SILENT = 0; int RINGER_MODE_VIBRATE = 1; int RINGER_MODE_NORMAL = 2; . 接口定义： . @HandlerName(\"audio\") interface IAudio { int getRingerMode(); // https://developer.android.com/reference/android/media/AudioManager#setRingerMode(int) void setRingerMode(int ringerMode); } .   . 0.5.15. Context . Android System Context，Android系统上下文。 基于Context可以实现更丰富的功能调用。举例： . [ { \"name\": \"Use System Context\", \"description\": \"调用Context，获取当前User信息\", \"priority\": 1, \"condition\": \"screenOn == true\", \"actions\": [ \"ui.showShortToast(\\\"User info: \\\" + context.getSystemService(context.USER_SERVICE).getUserInfo(android.os.UserHandle.getCallingUserId()).name);\" ] } ] .   . 0.5.16. Thanos . 你可以使用thanox或thanos来调用Thanos API，举例： . [ { \"name\": \"Thanos API\", \"description\": \"Example actions with thanos API\", \"priority\": 2, \"condition\": \"frontPkgChanged == true &amp;&amp; to == \\\"com.tencent.mm\\\"\", \"actions\": [ \"thanos.getProfileManager().enableRuleByName(\\\"my_we_chat_rule\\\");\" ] } ] .   . 0.5.15. Actor(废弃) . 情景模式Action相关，目前支持Action的延迟执行。 . Actor已被废弃：请使用delay属性实现延迟效果。例如： . [ { \"name\": \"Delayed action example\", \"description\": \"...\", \"priority\": 1, \"delay\": 2000, \"condition\": \"...\", \"actions\": [...] } ] . | 能力 | 含义 | 参数 | 举例 | 返回值 | . | delayed | 延迟执行一个Action | 延迟毫秒数，Action表达式 | 无 | 无 | . 接口定义： . @HandlerName(\"actor\") public interface IActor { void delayed(long delayMillis, String action); } . 举例： . [ { \"name\": \"Delayed action example\", \"description\": \"Execute the action delay 2s: show a short toast and log the event 2s after app switched.\", \"priority\": 1, \"condition\": \"frontPkgChanged == true\", \"actions\": [ \"actor.delayed(2000, \\\"ui.showShortToast(\\\\\\\"App switched 2s ago\\\\\\\")\\\")\", \"actor.delayed(2000, \\\"log.log(to)\\\")\" ] } ] .   .   . ",
+    "url": "http://localhost:4000/docs/profile#05-handle",
+    "relUrl": "/docs/profile#05-handle"
+  },"30": {
+    "doc": "情景模式",
+    "title": "0.6. 全局变量",
+    "content": "全局变量：name-List，名字---字符串列表 . 可用于条件判断，事件处理等。 . Thanox支持创建，导入全局变量。发布事实时，你可以用过globalVarOf$拼接变量名来访问。以变量apps为例： . [ { \"name\": \"Use var example\", \"description\": \"应用切换时，如果当前前台应用在定义的变量列表apps中，Toast使用输出包名\", \"priority\": 1, \"condition\": \"frontPkgChanged == true &amp;&amp; globalVarOf$apps.contains(to)\", \"actions\": [ \"ui.showShortToast(to);\" ] } ] . ",
+    "url": "http://localhost:4000/docs/profile#06-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F",
+    "relUrl": "/docs/profile#06-全局变量"
+  },"31": {
+    "doc": "其他文章参考",
+    "title": "其他文章参考",
+    "content": " ",
+    "url": "http://localhost:4000/docs/reference",
+    "relUrl": "/docs/reference"
+  },"32": {
+    "doc": "常见问题",
+    "title": "常见问题",
+    "content": "大家经常遇到的一些问题。 . Play商店相关 . Q: 我已购买，但是今天刷机完了发现下载还需要付费怎么办？你是不是远程施法了？ . A: 只要你购买过或者兑换过，那么你的账号就可以下载；如果不能下载请检查GMS框架是否正确安装，或者登录的账号是否正常。 . Q: Play版本有设备数量限制吗？ . A: 没有 .   . 激活码相关 . Q: 我的激活码忘了 . A: 用当初申请的邮箱，发邮件给thanox@163.com；如果原邮箱不可用，请另外添加订单截图附件，否则无法找回。 .   . 功能相关 . Q: Thanox需要保活吗？ . A: 如果使用了情景模式中的su命令，需要允许thanox后台启动（MIUI等三方rom请进入系统安全管家允许thanox自启动）。除此之外，不需要保活，不需要自启动。 .   . Q: 你这个软件儿怎么不支持Android12 . A: Android12支持还在测试中。请更新至最新测试版：Play版本请加入beta计划；国内版本请前往github release页面下载。 .   . Q: 能和应用管理（X-APM）同时使用吗？ . A: 不能 . ",
+    "url": "http://localhost:4000/docs/qa#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98",
+    "relUrl": "/docs/qa#常见问题"
+  },"33": {
+    "doc": "常见问题",
+    "title": "常见问题",
+    "content": " ",
+    "url": "http://localhost:4000/docs/qa",
+    "relUrl": "/docs/qa"
+  },"34": {
+    "doc": "反馈与建议",
+    "title": "功能建议",
+    "content": "功能建议请在github页面，通过新建Feature request的方式提交。 . 注意，功能描述越详细越好，最好能图文并茂。 . ",
+    "url": "http://localhost:4000/docs/feedback#%E5%8A%9F%E8%83%BD%E5%BB%BA%E8%AE%AE",
+    "relUrl": "/docs/feedback#功能建议"
+  },"35": {
+    "doc": "反馈与建议",
+    "title": "问题反馈",
+    "content": "问题反馈请在github页面，通过新建issue的方式提交。 . Thanox本身提供的配置很多都是会对系统或app造成影响，所以很多时候如果你只是描述问题现象，我是无法分析定位的。 . 所以问题反馈请务必提供更详细的信息。 . | 系统版本 . | Thanox版本，补丁方式（xposed还是magisk？） . | 问题现象的详细描述，有图或者视频更好 . | 不激活thanox有问题吗？ . | Thanox激活后不做任何配置有问题吗？ . | 按照app内的提示抓取日志并上传到issue里 . | . ",
+    "url": "http://localhost:4000/docs/feedback#%E9%97%AE%E9%A2%98%E5%8F%8D%E9%A6%88",
+    "relUrl": "/docs/feedback#问题反馈"
+  },"36": {
+    "doc": "反馈与建议",
+    "title": "反馈与建议",
+    "content": " ",
+    "url": "http://localhost:4000/docs/feedback",
+    "relUrl": "/docs/feedback"
+  }
+}

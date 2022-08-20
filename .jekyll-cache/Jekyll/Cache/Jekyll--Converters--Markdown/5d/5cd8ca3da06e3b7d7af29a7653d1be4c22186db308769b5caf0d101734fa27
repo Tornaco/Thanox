@@ -1,0 +1,68 @@
+I"�<!-- more -->
+
+<h2 id="功能介绍">功能介绍</h2>
+
+<p>移花接木可以配置应用活动之间的跳转。在使用之前需要了解Android里常见的几个概念。</p>
+
+<p> </p>
+
+<p> </p>
+
+<p><strong>活动 - Activity</strong></p>
+
+<p>Android世界里，页面通常都是一个叫Activity（中文暂且翻译为活动）的东西；因此页面跳转我们现在可以统一语言：活动跳转。</p>
+
+<p> </p>
+
+<p> </p>
+
+<p><strong>活动怎么标识？</strong></p>
+
+<p>每个活动都有个标识，就好比每个网站页面有个路径一样。</p>
+
+<p>Android里活动的标识格式通常为：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"${包名}/${活动名}"</span>
+</code></pre></div></div>
+
+<p>例如微信的首页活动页标识为：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"com.tencent.mm/com.tencent.mm.LauncherUI"</span>
+</code></pre></div></div>
+
+<p> </p>
+
+<p> </p>
+
+<h2 id="有什么用">有什么用?</h2>
+
+<p>先看一个需求：一个App有三个活动页，A、B、C；</p>
+
+<p>常规下该App的启动顺序为A—&gt;B—&gt;C</p>
+
+<p>现在小明有个需求，他不想看到 B 这个页面，他希望直接从 A 可以跳转到 C，可以吗？</p>
+
+<p>可以！</p>
+
+<p> </p>
+
+<p> </p>
+
+<h2 id="怎么用">怎么用?</h2>
+
+<p>按照上面的例子，在活动启动的时候，只要想办法把 B 换成 C 不就行了；也就是偷梁换柱，移花接木。</p>
+
+<p>因此移花接木功能里，你只要知道 B 和 C 的活动页，就可以新增一条配置，把 B 换成 C。</p>
+
+<p> </p>
+
+<p><strong>举例如图：</strong></p>
+
+<p><img src="assets/images/activity-replace.png" alt="activity-replace" /></p>
+
+<p><strong>那么怎么知道这些App的活动页都是什么呢？</strong></p>
+
+<p>贴心的开发者为你准备了这个功能，打开Thanox设置—开发者—显示当前活动；此后应用的每个活动都会以浮窗展示，点击浮窗可以复制活动标识。</p>
+
+<p><img src="assets/images/show-current-activity.png" alt="show-current-activity" /></p>
+:ET

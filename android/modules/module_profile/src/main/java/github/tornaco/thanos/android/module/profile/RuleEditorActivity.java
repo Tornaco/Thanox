@@ -193,6 +193,10 @@ public class RuleEditorActivity extends ThemeActivity {
                 };
 
                 if (ruleInfo != null) {
+                    // Disable first.
+                    ThanosManager.from(getApplicationContext())
+                            .getProfileManager()
+                            .disableRule(ruleInfo.getId());
                     ThanosManager.from(getApplicationContext())
                             .getProfileManager()
                             .updateRule(ruleInfo.getId(), getCurrentEditingContent(), callback, format);

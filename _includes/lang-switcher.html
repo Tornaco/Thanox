@@ -1,16 +1,16 @@
-<ul>
+<div align="right">
     {%- for lang in site.languages -%}
     {%- assign lang_name = site.data[lang].l10n.lang_name -%}
     {% if lang == site.active_lang %}
-    <li class="fs-3">{{ lang_name }}</li>
+    <div class="fs-3">{{ lang_name }}</div>
     {% else %}
     {% capture url %}{% if lang != site.default_lang %}{{ lang | prepend: "/" }}{% endif %}{{
     page.url }}{%- endcapture -%}
-    <li class="fs-3">
+    <div class="fs-3">
         <a href="{{ url | relative_url }}">
             {{ lang_name }}
         </a>
-    </li>
+    </div>
     {% endif %}
     {%- endfor -%}
-</ul>
+</div>

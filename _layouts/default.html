@@ -112,7 +112,6 @@ layout: table_wrappers
           <div id="search-results" class="search-results"></div>
         </div>
       {% endif %}
-      {% include header_custom.html %}
       {% if site.aux_links %}
         <nav aria-label="Auxiliary" class="aux-nav">
           <ul class="aux-nav-list">
@@ -132,6 +131,7 @@ layout: table_wrappers
       {% endif %}
     </div>
     <div id="main-content-wrap" class="main-content-wrap">
+      {% include header_custom.html %}
       {% unless page.url == "/" %}
         {% if page.parent %}
           <nav aria-label="Breadcrumb" class="breadcrumb-nav">

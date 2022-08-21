@@ -1,16 +1,11 @@
 <div align="right">
-    {%- for lang in site.languages -%}
-    {%- assign lang_name = site.data[lang].l10n.lang_name -%}
-    {% if lang == site.active_lang %}
-    <div class="fs-3">{{ lang_name }}</div>
-    {% else %}
-    {% capture url %}{% if lang != site.default_lang %}{{ lang | prepend: "/" }}{% endif %}{{
-    page.url }}{%- endcapture -%}
-    <div class="fs-3">
-        <a href="{{ url | relative_url }}">
-            {{ lang_name }}
-        </a>
-    </div>
-    {% endif %}
-    {%- endfor -%}
+    <p>
+    <!-- jekyll-polyglot will process ferh= into href= through the static_href liquid block tag without relativizing the url; useful for making language navigation switchers  -->
+    {% for tongue in site.languages %}
+    {%- assign lang_name = site.data[tongue].l10n.lang_name -%}
+    <a {% if tongue== site.active_lang %}style="font-weight: bold;" {% endif %} {% static_href
+       %}href="{% if tongue == site.default_lang %}{{site.baseurl}}{{page.url}}{% else %}{{site.baseurl}}/{{ tongue }}{{page.url}}{% endif %}"
+       {% endstatic_href %}>{{ lang_name }}</a> |
+    {% endfor %}
+</p>
 </div>

@@ -1,0 +1,64 @@
+// Typography
+
+// stylelint-disable selector-no-type, selector-max-type, selector-max-specificity, selector-max-id
+
+h1,
+.text-alpha {
+  @include fs-8;
+
+  font-weight: 300;
+}
+
+h2,
+.text-beta,
+#toctitle {
+  @include fs-6;
+}
+
+h3,
+.text-gamma {
+  @include fs-5;
+}
+
+h4,
+.text-delta {
+  @include fs-2;
+
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+h4 code {
+  text-transform: none;
+}
+
+h5,
+.text-epsilon {
+  @include fs-3;
+}
+
+h6,
+.text-zeta {
+  @include fs-2;
+}
+
+.text-small {
+  @include fs-2;
+}
+
+.text-mono {
+  font-family: $mono-font-family !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}

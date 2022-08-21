@@ -1,2 +1,16 @@
 title: "Thanox"
-remote_theme: just-the-docs/just-the-docs
+baseurl: "Thanox"
+
+theme: "just-the-docs"
+
+plugins:
+  - jekyll-polyglot
+
+  # jekyll-polyglot
+languages: ["en", "zh"]
+default_lang: "en"
+exclude_from_localization:
+  - "assets/images"
+parallel_localization: true
+sass: # https://github.com/untra/polyglot/issues/107#issuecomment-598274075
+  sourcemap: never

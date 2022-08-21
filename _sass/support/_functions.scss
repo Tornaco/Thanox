@@ -1,0 +1,9 @@
+@function rem($size, $unit: "") {
+  $rem-size: $size / $root-font-size;
+
+  @if $unit == false {
+    @return #{$rem-size};
+  } @else {
+    @return #{$rem-size}rem;
+  }
+}

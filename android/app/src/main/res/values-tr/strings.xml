@@ -107,7 +107,6 @@
     <string name="activity_title_process_manage">Running（%s）</string>
     <string name="item_summary_process_count">%s processes</string>
     <string name="item_summary_mem_size">%s</string>
-    <string name="item_summary_running_process_and_service">%1$s process(es) %2$s service(s) %3$s</string>
     <string name="snack_process_update_message">Process list changed, please update</string>
     <string name="snack_process_update_refresh">Update</string>
     <string name="title_cached_background_process">Cached background processes</string>

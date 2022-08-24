@@ -107,7 +107,6 @@
     <string name="activity_title_process_manage">运行中（%s）</string>
     <string name="item_summary_process_count">%s个进程</string>
     <string name="item_summary_mem_size">%s</string>
-    <string name="item_summary_running_process_and_service"><b>%1$s</b>个进程 <b>%2$s</b>个服务 内存<b>%3$s</b></string>
     <string name="snack_process_update_message">正在运行的应用信息可更新</string>
     <string name="snack_process_update_refresh">刷新</string>
     <string name="title_cached_background_process">缓存的后台进程</string>

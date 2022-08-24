@@ -74,6 +74,11 @@ public abstract class OsUtils {
         return Build.VERSION.SDK_INT >= 31;
     }
 
+    // android 13
+    public static boolean isTOrAbove() {
+        return Build.VERSION.SDK_INT >= 33;
+    }
+
     public static boolean hasTvFeature(Context context) {
         PackageManager pm = context.getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_LIVE_TV);

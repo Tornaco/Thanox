@@ -59,11 +59,19 @@ public class DataSettingsFragment extends BasePreferenceFragmentCompat {
         super.onBindPreferences();
         // Backup
         findPreference(getString(R.string.key_data_backup)).setOnPreferenceClickListener(preference -> {
-            DataSettingsFragmentPermissionRequester.backupRequestedChecked(DataSettingsFragment.this);
+            if (OsUtils.isTOrAbove()) {
+                DataSettingsFragmentPermissionRequester.backupRequestedTOrAboveChecked(DataSettingsFragment.this);
+            } else {
+                DataSettingsFragmentPermissionRequester.backupRequestedTBelowChecked(DataSettingsFragment.this);
+            }
             return true;
         });
         findPreference(getString(R.string.key_data_restore)).setOnPreferenceClickListener(preference -> {
-            DataSettingsFragmentPermissionRequester.restoreRequestedChecked(DataSettingsFragment.this);
+            if (OsUtils.isTOrAbove()) {
+                DataSettingsFragmentPermissionRequester.restoreRequestedTOrAboveChecked(DataSettingsFragment.this);
+            } else {
+                DataSettingsFragmentPermissionRequester.restoreRequestedTBelowChecked(DataSettingsFragment.this);
+            }
             return true;
         });
         findPreference(getString(R.string.key_restore_default)).setOnPreferenceClickListener(preference -> {
@@ -131,11 +139,11 @@ public class DataSettingsFragment extends BasePreferenceFragmentCompat {
                             public void onSuccess() {
                                 if (getActivity() == null) return;
                                 Completable.fromAction(() ->
-                                        new MaterialAlertDialogBuilder(getActivity())
-                                                .setMessage(getString(R.string.pre_message_restore_success))
-                                                .setCancelable(false)
-                                                .setPositiveButton(android.R.string.ok, null)
-                                                .show())
+                                                new MaterialAlertDialogBuilder(getActivity())
+                                                        .setMessage(getString(R.string.pre_message_restore_success))
+                                                        .setCancelable(false)
+                                                        .setPositiveButton(android.R.string.ok, null)
+                                                        .show())
                                         .subscribeOn(AndroidSchedulers.mainThread())
                                         .subscribe();
                             }
@@ -143,9 +151,9 @@ public class DataSettingsFragment extends BasePreferenceFragmentCompat {
                             @Override
                             public void onFail(String errMsg) {
                                 Completable.fromAction(() ->
-                                        Toast.makeText(
-                                                fragmentActivity.getApplicationContext(),
-                                                errMsg, Toast.LENGTH_LONG).show())
+                                                Toast.makeText(
+                                                        fragmentActivity.getApplicationContext(),
+                                                        errMsg, Toast.LENGTH_LONG).show())
                                         .subscribeOn(AndroidSchedulers.mainThread())
                                         .subscribe();
                             }
@@ -240,14 +248,28 @@ public class DataSettingsFragment extends BasePreferenceFragmentCompat {
                         }, os));
     }
 
-    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void backupRequested() {
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void backupRequestedTOrAbove() {
         if (OsUtils.isQOrAbove()) {
             backupRequestedQAndAbove();
         } else {
             backupRequestedQBelow();
         }
     }
+
+    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void backupRequestedTBelow() {
+        if (OsUtils.isQOrAbove()) {
+            backupRequestedQAndAbove();
+        } else {
+            backupRequestedQBelow();
+        }
+    }
+
 
     private void backupRequestedQAndAbove() {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
@@ -283,7 +305,16 @@ public class DataSettingsFragment extends BasePreferenceFragmentCompat {
     }
 
     @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void restoreRequested() {
+    void restoreRequestedTBelow() {
+        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_RESTORE_FILE_PICK);
+    }
+
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void restoreRequestedTOrAbove() {
         IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_RESTORE_FILE_PICK);
     }
 

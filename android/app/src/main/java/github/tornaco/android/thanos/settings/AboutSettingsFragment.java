@@ -66,8 +66,8 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
                         preference -> {
                             PlatLogoActivity3.start(getActivity());
                             Toast.makeText(
-                                    getActivity(),
-                                    "Thanox is build against Android 13", Toast.LENGTH_LONG)
+                                            getActivity(),
+                                            "Thanox is build against Android 13", Toast.LENGTH_LONG)
                                     .show();
                             return true;
                         });
@@ -83,7 +83,13 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
 
         findPreference(getString(R.string.key_patch_info)).setOnPreferenceClickListener(preference -> {
             if (OsUtils.isROrAbove()) {
-                exportPatchUi.show(() -> AboutSettingsFragmentPermissionRequester.exportMagiskZipRequestedChecked(AboutSettingsFragment.this));
+                exportPatchUi.show(() -> {
+                    if (OsUtils.isTOrAbove()) {
+                        AboutSettingsFragmentPermissionRequester.exportMagiskZipRequestedTOrAboveChecked(AboutSettingsFragment.this);
+                    } else {
+                        AboutSettingsFragmentPermissionRequester.exportMagiskZipRequestedTBelowChecked(AboutSettingsFragment.this);
+                    }
+                });
             }
             return true;
         });
@@ -142,8 +148,17 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
     }
 
 
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void exportMagiskZipRequestedTOrAbove() {
+        // Noop, just request perm.
+    }
+
     @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void exportMagiskZipRequested() {
+    void exportMagiskZipRequestedTBelow() {
         // Noop, just request perm.
     }
 

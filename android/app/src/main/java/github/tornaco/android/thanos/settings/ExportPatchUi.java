@@ -24,6 +24,7 @@ import java.util.Objects;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
+import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
@@ -64,14 +65,27 @@ public class ExportPatchUi {
         dialog.setPositive(context.getString(R.string.export_patch_export_magisk));
         dialog.setNegative(context.getString(android.R.string.cancel));
         dialog.setOnPositive(() -> {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
+            if (hasPermission(context)) {
                 permissionRequester.run();
             } else {
                 exportMagiskZipQAndAbove();
             }
         });
         dialog.show();
+    }
+
+    private boolean hasPermission(Context context) {
+        if (OsUtils.isTOrAbove()) return hasPermissionTOrAbove(context);
+        else return hasPermissionTBelow(context);
+    }
+
+    private boolean hasPermissionTBelow(Context context) {
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED;
+    }
+
+    private boolean hasPermissionTOrAbove(Context context) {
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_MEDIA_VIDEO) != PackageManager.PERMISSION_GRANTED;
     }
 
     public void handleActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -137,7 +151,7 @@ public class ExportPatchUi {
             os = requireContext().getContentResolver().openOutputStream(fileUri);
             //noinspection UnstableApiUsage
             Files.asByteSource(
-                    new File(Objects.requireNonNull(PkgUtils.getApkPath(requireContext(), requireContext().getPackageName()))))
+                            new File(Objects.requireNonNull(PkgUtils.getApkPath(requireContext(), requireContext().getPackageName()))))
                     .copyTo(os);
             return true;
         } catch (IOException e) {

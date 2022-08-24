@@ -169,8 +169,17 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
         }
     }
 
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void importFromFileTOrAbove() {
+        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PICK_FILE_TO_IMPORT);
+    }
+
     @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void importFromFile() {
+    void importFromFileTBelow() {
         IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PICK_FILE_TO_IMPORT);
     }
 

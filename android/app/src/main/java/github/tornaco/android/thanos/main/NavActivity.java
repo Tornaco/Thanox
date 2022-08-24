@@ -281,8 +281,17 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
         exportPatchUi.handleActivityResult(requestCode, resultCode, data);
     }
 
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void exportMagiskZipRequestedTOrAbove() {
+        // Noop, just request perm.
+    }
+
     @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void exportMagiskZipRequested() {
+    void exportMagiskZipRequestedTBelow() {
         // Noop, just request perm.
     }
 }

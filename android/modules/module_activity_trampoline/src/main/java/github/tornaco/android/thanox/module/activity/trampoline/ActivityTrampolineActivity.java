@@ -312,7 +312,11 @@ public class ActivityTrampolineActivity extends ThemeActivity
                             if (which == 0) {
                                 exportToClipboard(componentReplacementKey);
                             } else {
-                                ActivityTrampolineActivityPermissionRequester.exportToFileChecked(componentReplacementKey, this);
+                                if (OsUtils.isTOrAbove()) {
+                                    ActivityTrampolineActivityPermissionRequester.exportToFileTOrAboveChecked(componentReplacementKey, this);
+                                } else {
+                                    ActivityTrampolineActivityPermissionRequester.exportToFileTBelowChecked(componentReplacementKey, this);
+                                }
                             }
                         }).create();
         dialog.show();
@@ -322,8 +326,21 @@ public class ActivityTrampolineActivity extends ThemeActivity
         viewModel.exportToClipboard(componentReplacementKey);
     }
 
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void exportToFileTOrAbove(@Nullable String componentReplacementKey) {
+        if (OsUtils.isQOrAbove()) {
+            exportToFileQAndAbove(componentReplacementKey);
+        } else {
+            exportToFileQBelow(componentReplacementKey);
+        }
+    }
+
     @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    void exportToFile(@Nullable String componentReplacementKey) {
+    void exportToFileTBelow(@Nullable String componentReplacementKey) {
         if (OsUtils.isQOrAbove()) {
             exportToFileQAndAbove(componentReplacementKey);
         } else {
@@ -363,7 +380,11 @@ public class ActivityTrampolineActivity extends ThemeActivity
                             if (which == 0) {
                                 importFromClipboard();
                             } else {
-                                ActivityTrampolineActivityPermissionRequester.importFromFileChecked(this);
+                                if (OsUtils.isTOrAbove()) {
+                                    ActivityTrampolineActivityPermissionRequester.importFromFileTOrAboveChecked(this);
+                                } else {
+                                    ActivityTrampolineActivityPermissionRequester.importFromFileTBelowChecked(this);
+                                }
                             }
                         }).create();
         dialog.show();
@@ -373,8 +394,21 @@ public class ActivityTrampolineActivity extends ThemeActivity
         viewModel.importFromClipboard();
     }
 
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void importFromFileTOrAbove() {
+        if (OsUtils.isQOrAbove()) {
+            importToFileQAndAbove();
+        } else {
+            importToFileQBelow();
+        }
+    }
+
     @RequiresPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-    void importFromFile() {
+    void importFromFileTBelow() {
         if (OsUtils.isQOrAbove()) {
             importToFileQAndAbove();
         } else {

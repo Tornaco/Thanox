@@ -29,6 +29,7 @@ import github.tornaco.android.nitro.framework.host.manager.data.model.InstalledP
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.Optional;
+import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.dashboard.DashboardAdapter;
 import github.tornaco.android.thanos.dashboard.OnTileClickListener;
 import github.tornaco.android.thanos.dashboard.OnTileLongClickListener;
@@ -86,7 +87,11 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
         pluginBinding.fabFile.setOnClickListener(v -> {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                 if (isSubscribed) {
-                    PluginFragmentPermissionRequester.installPluginRequestedChecked(PluginFragment.this);
+                    if (OsUtils.isTOrAbove()) {
+                        PluginFragmentPermissionRequester.installPluginRequestedTOrAboveChecked(PluginFragment.this);
+                    } else {
+                        PluginFragmentPermissionRequester.installPluginRequestedTBelowChecked(PluginFragment.this);
+                    }
                 } else {
                     AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                 }
@@ -156,8 +161,17 @@ public class PluginFragment extends NavFragment implements NavViewModel.PluginIn
         navViewModel.loadPluginFeatures();
     }
 
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void installPluginRequestedTOrAbove() {
+        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PLUGIN_FILE_PICK);
+    }
+
     @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void installPluginRequested() {
+    void installPluginRequestedTBelow() {
         IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PLUGIN_FILE_PICK);
     }
 

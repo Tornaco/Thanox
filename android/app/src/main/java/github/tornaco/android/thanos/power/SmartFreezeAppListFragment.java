@@ -394,14 +394,27 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                             if (which == 0) {
                                 onRequestImportPackageListFromClipBoard();
                             } else {
-                                SmartFreezeAppListFragmentPermissionRequester.onRequestImportPackageListFromFileChecked(this);
+                                if (OsUtils.isTOrAbove()) {
+                                    SmartFreezeAppListFragmentPermissionRequester.onRequestImportPackageListFromFileTOrAboveChecked(this);
+                                } else {
+                                    SmartFreezeAppListFragmentPermissionRequester.onRequestImportPackageListFromFileTBelowChecked(this);
+                                }
                             }
                         }).create();
         dialog.show();
     }
 
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void onRequestImportPackageListFromFileTOrAbove() {
+        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PICK_IMPORT_PATH);
+    }
+
     @RequiresPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-    void onRequestImportPackageListFromFile() {
+    void onRequestImportPackageListFromFileTBelow() {
         IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PICK_IMPORT_PATH);
     }
 
@@ -439,7 +452,11 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                             if (which == 0) {
                                 onRequestExportPackageListToClipBoard();
                             } else {
-                                SmartFreezeAppListFragmentPermissionRequester.onRequestExportPackageListChooseFileChecked(this);
+                                if (OsUtils.isTOrAbove()) {
+                                    SmartFreezeAppListFragmentPermissionRequester.onRequestExportPackageListChooseFileTOrAboveChecked(this);
+                                } else {
+                                    SmartFreezeAppListFragmentPermissionRequester.onRequestExportPackageListChooseFileTBelowChecked(this);
+                                }
                             }
                         }).create();
         dialog.show();
@@ -452,8 +469,17 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         });
     }
 
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void onRequestExportPackageListChooseFileTOrAbove() {
+        onRequestExportPackageListChooseFileQAndAbove();
+    }
+
     @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    void onRequestExportPackageListChooseFile() {
+    void onRequestExportPackageListChooseFileTBelow() {
         if (OsUtils.isQOrAbove()) {
             onRequestExportPackageListChooseFileQAndAbove();
         } else {

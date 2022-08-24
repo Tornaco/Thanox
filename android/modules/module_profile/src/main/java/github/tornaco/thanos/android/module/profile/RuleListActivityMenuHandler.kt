@@ -19,6 +19,7 @@ package github.tornaco.thanos.android.module.profile
 
 import android.view.MenuItem
 import github.tornaco.android.thanos.BuildProp
+import github.tornaco.android.thanos.core.util.OsUtils
 import github.tornaco.android.thanos.feature.access.AppFeatureManager
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.thanos.android.module.profile.example.ProfileExampleActivity
@@ -34,7 +35,11 @@ class RuleListActivityMenuHandler {
         if (R.id.action_import_from_file == item.itemId) {
             AppFeatureManager.withSubscriptionStatus(thisActivity()) {
                 if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
-                    RuleListActivityPermissionRequester.importFromFileChecked(this)
+                    if (OsUtils.isTOrAbove()) {
+                        RuleListActivityPermissionRequester.importFromFileTOrAboveChecked(this)
+                    } else {
+                        RuleListActivityPermissionRequester.importFromFileTBelowChecked(this)
+                    }
                 } else {
                     AppFeatureManager.showDonateIntroDialog(this)
                 }

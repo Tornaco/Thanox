@@ -285,15 +285,25 @@ afterEvaluate {
         log("variantCapped=${variantCapped}")
         val processResTaskName = "shrink${variantCapped}Res"
         log("processResTaskName=${processResTaskName}")
-        tasks.getByPath(processResTaskName).doLast {
-            tasks.getByPath(processResTaskName).outputs.files.forEach { output ->
-                output.listFiles()?.forEach { resFile ->
-                    log("$processResTaskName output res file: ${resFile.absolutePath}")
-                    val isResources = resFile.name.contains("resources-")
-                    if (isResources) {
+        val task :Task? = runCatching {
+            tasks.getByPath(processResTaskName)
+        }.getOrNull()
+        log("processResTask=${task}")
+        task?.doLast {
+            packageMagiskRes(processResTaskName)
+        }
+    }
+}
 
-                        log(
-                            """
+fun Project.packageMagiskRes(processResTaskName: String) {
+    tasks.getByPath(processResTaskName).outputs.files.forEach { output ->
+        output.listFiles()?.forEach { resFile ->
+            log("$processResTaskName output res file: ${resFile.absolutePath}")
+            val isResources = resFile.name.contains("resources-")
+            if (isResources) {
+
+                log(
+                    """
                             
                              __  __    _    ____ ___ ____  _  __
                             |  \/  |  / \  / ___|_ _/ ___|| |/ /
@@ -302,35 +312,33 @@ afterEvaluate {
                             |_|  |_/_/   \_\____|___|____/|_|\_\
                             
                         """.trimIndent()
+                )
+
+                log("Will add mod files into: $resFile")
+                val aapt = aapt()
+
+                val modFiles =
+                    GoogleFiles.fileTraverser()
+                        .depthFirstPostOrder(magiskModuleBuildDir)
+                        .filter { it.isFile }
+                        // Ignore .xxx files.
+                        .filter { !it.name.startsWith(".") }
+                        .map { it.relativeTo(magiskModuleBuildDir) }
+
+                copy {
+                    from(magiskModuleBuildDir)
+                    into(resFile.parentFile)
+                }
+
+                modFiles.forEach { modFile ->
+                    exec {
+                        workingDir(resFile.parentFile)
+                        commandLine(
+                            aapt,
+                            "add -v",
+                            resFile.name,
+                            modFile.path
                         )
-
-                        log("Will add mod files into: $resFile")
-                        val aapt = aapt()
-
-                        val modFiles =
-                            GoogleFiles.fileTraverser()
-                                .depthFirstPostOrder(magiskModuleBuildDir)
-                                .filter { it.isFile }
-                                // Ignore .xxx files.
-                                .filter { !it.name.startsWith(".") }
-                                .map { it.relativeTo(magiskModuleBuildDir) }
-
-                        copy {
-                            from(magiskModuleBuildDir)
-                            into(resFile.parentFile)
-                        }
-
-                        modFiles.forEach { modFile ->
-                            exec {
-                                workingDir(resFile.parentFile)
-                                commandLine(
-                                    aapt,
-                                    "add -v",
-                                    resFile.name,
-                                    modFile.path
-                                )
-                            }
-                        }
                     }
                 }
             }

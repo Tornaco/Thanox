@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.power;
 
 import android.app.Application;
+import android.app.usage.UsageStats;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -30,7 +31,9 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,6 +41,7 @@ import java.util.stream.Collectors;
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.common.AppLabelSearchFilter;
 import github.tornaco.android.thanos.common.AppListModel;
+import github.tornaco.android.thanos.common.sort.AppSort;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.PackageSet;
@@ -58,7 +62,6 @@ import util.CollectionUtils;
 import util.Consumer;
 import util.IoUtils;
 import util.JsonFormatter;
-import util.PinyinComparatorUtils;
 
 @SuppressWarnings("UnstableApiUsage")
 public class SmartFreezeAppsViewModel extends AndroidViewModel {
@@ -71,6 +74,9 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
 
     private final ObservableField<String> queryText = new ObservableField<>("");
     private final AppLabelSearchFilter appLabelSearchFilter = new AppLabelSearchFilter();
+
+    private final ObservableBoolean sortReverse = new ObservableBoolean(false);
+    private final ObservableField<AppSort> currentSort = new ObservableField<>(AppSort.Default);
 
     public SmartFreezeAppsViewModel(@NonNull Application application) {
         super(application);
@@ -99,10 +105,6 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         disposables.add(Single
                 .create((SingleOnSubscribe<List<AppListModel>>) emitter ->
                         emitter.onSuccess(getSmartFreezeApps()))
-                .map(listModels -> {
-                    listModels.sort((o1, o2) -> PinyinComparatorUtils.compare(o1.appInfo.getAppLabel(), o2.appInfo.getAppLabel()));
-                    return listModels;
-                })
                 .flatMapObservable((Function<List<AppListModel>, ObservableSource<AppListModel>>) Observable::fromIterable)
                 .filter(listModel -> {
                     String query = queryText.get();
@@ -130,7 +132,41 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                 res.add(model);
             }
         }
+
+        AppSort sort = currentSort.get();
+        if (sort != null) {
+            // inflate usage stats if necessary.
+            if (sort.relyOnUsageStats()) {
+                inflateAppUsageStats(res);
+            }
+
+            AppSort.AppSorterProvider appSorterProvider = sort.provider;
+            if (appSorterProvider != null) {
+                res.sort(appSorterProvider.comparator(getApplication()));
+                if (sortReverse.get()) {
+                    Collections.reverse(res);
+                }
+            }
+        }
+
         return res;
+    }
+
+    private void inflateAppUsageStats(List<AppListModel> res) {
+        XLog.d("inflateAppUsageStats");
+        ThanosManager thanox = ThanosManager.from(getApplication());
+        if (thanox.isServiceInstalled()) {
+            Map<String, UsageStats> statsMap = thanox.getUsageStatsManager().queryAndAggregateUsageStats(0, System.currentTimeMillis());
+            for (AppListModel app : res) {
+                if (statsMap.containsKey(app.appInfo.getPkgName())) {
+                    UsageStats stats = statsMap.get(app.appInfo.getPkgName());
+                    if (stats != null) {
+                        app.lastUsedTimeMills = stats.getLastTimeUsed();
+                        app.totalUsedTimeMills = stats.getTotalTimeInForeground();
+                    }
+                }
+            }
+        }
     }
 
     void createShortcutStubApkForAsync(AppInfo appInfo,
@@ -365,5 +401,23 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                 emitter.onSuccess(false);
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(onRes::accept));
+    }
+
+    public boolean isSortReverse() {
+        return sortReverse.get();
+    }
+
+    public void setSortReverse(boolean reverse) {
+        sortReverse.set(reverse);
+        start();
+    }
+
+    public AppSort getCurrentAppSort() {
+        return currentSort.get();
+    }
+
+    public void setAppSort(AppSort sort) {
+        currentSort.set(sort);
+        start();
     }
 }

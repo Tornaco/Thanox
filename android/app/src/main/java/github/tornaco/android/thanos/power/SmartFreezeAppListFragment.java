@@ -3,12 +3,14 @@ package github.tornaco.android.thanos.power;
 import static com.nononsenseapps.filepicker.FilePickerActivityUtils.pickSingleDirIntent;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,6 +31,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.elvishew.xlog.XLog;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
@@ -47,6 +52,7 @@ import github.tornaco.android.thanos.apps.AppDetailsActivity;
 import github.tornaco.android.thanos.apps.PackageSetChooserDialog;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.common.AppListModel;
+import github.tornaco.android.thanos.common.sort.AppSort;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.PackageManager;
@@ -91,6 +97,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         Bundle data = getArguments();
         String pkgSetId = Objects.requireNonNull(data, "Missing arg: " + ARG_PKG_SET).getString(ARG_PKG_SET, null);
         setupViewModel(pkgSetId);
+        onSetupSorter(binding.sortChipContainer.sortChip);
         return binding.getRoot();
     }
 
@@ -147,7 +154,60 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
+    }
 
+    @SuppressLint("RestrictedApi")
+    protected void onSetupSorter(Chip sorterAnchor) {
+        AppSort[] appSortArray = AppSort.values();
+        AppSort currentSort = viewModel.getCurrentAppSort();
+        sorterAnchor.setText(currentSort.labelRes);
+
+        sorterAnchor.setOnClickListener(view -> {
+            MenuBuilder menuBuilder = new MenuBuilder(requireActivity());
+            MenuPopupHelper menuPopupHelper = new MenuPopupHelper(requireActivity(), menuBuilder, view);
+            menuPopupHelper.setForceShowIcon(true);
+
+            int reverseItemId = 10086;
+            MenuItem reverseItem = menuBuilder.add(1000,
+                    reverseItemId,
+                    Menu.NONE,
+                    github.tornaco.android.thanos.module.common.R.string.common_sort_reverse);
+            reverseItem.setCheckable(true);
+            reverseItem.setChecked(viewModel.isSortReverse());
+            reverseItem.setIcon(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_arrow_up_down_line);
+
+            for (int i = 0; i < appSortArray.length; i++) {
+                AppSort sort = appSortArray[i];
+                MenuItem sortItem = menuBuilder.add(1000,
+                        i,
+                        Menu.NONE,
+                        sort.labelRes);
+                boolean isSelected = viewModel.getCurrentAppSort() == sort;
+                if (isSelected) {
+                    sortItem.setTitle(getString(sort.labelRes) + " \uD83C\uDFAF");
+                }
+            }
+            menuBuilder.setCallback(new MenuBuilder.Callback() {
+                @Override
+                public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
+                    int index = item.getItemId();
+                    if (index == reverseItemId) {
+                        viewModel.setSortReverse(!viewModel.isSortReverse());
+                        item.setChecked(viewModel.isSortReverse());
+                    } else {
+                        viewModel.setAppSort(appSortArray[index]);
+                        sorterAnchor.setText(appSortArray[index].labelRes);
+                    }
+                    return true;
+                }
+
+                @Override
+                public void onMenuModeChange(@NonNull MenuBuilder menu) {
+                    // Noop
+                }
+            });
+            menuPopupHelper.show();
+        });
     }
 
     @Verify

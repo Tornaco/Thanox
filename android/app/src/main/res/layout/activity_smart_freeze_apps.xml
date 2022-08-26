@@ -73,6 +73,20 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/common_view_margin_default"
+                android:paddingEnd="@dimen/common_view_margin_default">
+                <include
+                    android:id="@+id/sort_chip_container"
+                    layout="@layout/module_common_sort_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe"
                 android:layout_width="wrap_content"

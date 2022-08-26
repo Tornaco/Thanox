@@ -54,8 +54,8 @@
 
     <string name="module_profile_edit_var_title_hint">请输入名称</string>
     <string name="module_profile_var_list_item_size">%s个变量</string>
-    <string name="title_shortcut_fact_value">Fact value</string>
-    <string name="title_shortcut_label">快捷方式名称</string>
+    <string name="module_profile_title_shortcut_fact_value">Fact value</string>
+    <string name="module_profile_title_shortcut_label">快捷方式名称</string>
 
     <string name="module_profile_rule_format_tips_title">格式要求</string>
     <string name="module_profile_rule_format_tips_message"><b>name</b>字段尽量使用字母数字组合，不要出现特殊字符；\n\n<b>description</b>字段可以使用任意字符，简要介绍下这个情景的用途即可</string>

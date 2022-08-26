@@ -54,8 +54,8 @@
 
     <string name="module_profile_edit_var_title_hint">Please input name</string>
     <string name="module_profile_var_list_item_size">%s variants</string>
-    <string name="title_shortcut_fact_value">Fact value</string>
-    <string name="title_shortcut_label">Shortcut label</string>
+    <string name="module_profile_title_shortcut_fact_value">Fact value</string>
+    <string name="module_profile_title_shortcut_label">Shortcut label</string>
 
     <string name="module_profile_rule_format_tips_title">Format tips</string>
     <string name="module_profile_rule_format_tips_message">The <b>name</b> field should use alphanumeric combinations as much as possible, and no special characters should appear; \n\nany characters can be used in the <b>description</b> field, just briefly introduce the purpose of this scenario</string>

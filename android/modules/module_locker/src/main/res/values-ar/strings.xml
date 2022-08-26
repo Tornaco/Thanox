@@ -1,0 +1,17 @@
+<resources>
+    <string name="module_locker_app_name">قفل التطبيق</string>
+    <string name="module_locker_verify_input_password">فتح %s</string>
+    <string name="module_locker_menu_search">بحث</string>
+    <string name="module_locker_title_settings">اقامة</string>
+    <string name="module_locker_title_security">أمان</string>
+    <string name="module_locker_title_re_verify_on_screen_off">أعد المصادقة بعد قفل الشاشة</string>
+    <string name="module_locker_title_re_verify_on_task_removed">إعادة التحقق من إزالة المهمة</string>
+    <string name="module_locker_title_re_verify_on_app_switch">إعادة مصادقة مفتاح تبديل التطبيق</string>
+    <string name="module_locker_title_verify_workaround_enabled">طريقة فتح مستقرة</string>
+    <string name="module_locker_summary_re_verify_on_screen_off">عندما يتم قفل الشاشة ، سيتم إعادة قفل التطبيقات غير المؤمنة</string>
+    <string name="module_locker_summary_re_verify_on_task_removed">عند إزالة مهمة التطبيق ، على سبيل المثال ، يتم تنظيف التطبيق في صفحة المهام الأخيرة ، سيتم إعادة قفل التطبيق</string>
+    <string name="module_locker_summary_re_verify_on_app_switch">عند إعادة تطبيق غير مؤمن إلى الخلفية ، سيتم إعادة قفل التطبيق</string>
+
+    <string name="module_locker_biometric_not_set_dialog_title">ضبط كلمة السر</string>
+    <string name="module_locker_biometric_not_set_dialog_message">قبل تمكين قفل التطبيقات ، يرجى الانتقال إلى إعدادات أمان النظام لإكمال إعدادات الوجه أو بصمة الإصبع أو رمز PIN أو نمط كلمة المرور</string>
+</resources>

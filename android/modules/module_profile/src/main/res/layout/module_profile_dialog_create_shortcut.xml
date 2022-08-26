@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/title_shortcut_label"
+            android:text="@string/module_profile_title_shortcut_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/title_shortcut_fact_value"
+            android:text="@string/module_profile_title_shortcut_fact_value"
             android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         <androidx.appcompat.widget.AppCompatEditText

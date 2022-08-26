@@ -1,6 +1,5 @@
 <resources>
     <string name="module_notification_recorder_feature_title_notification_recorder">Recorder</string>
-    <string name="module_notification_recorder_item_app_label_and_when">%1$s %2$s</string>
     <string name="module_notification_recorder_item_no_title">No title</string>
     <string name="module_notification_recorder_item_type_toast">Toast</string>
     <string name="module_notification_recorder_item_type_n">Notification</string>

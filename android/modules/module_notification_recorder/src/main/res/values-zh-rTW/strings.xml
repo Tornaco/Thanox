@@ -1,6 +1,5 @@
 <resources>
     <string name="module_notification_recorder_feature_title_notification_recorder">記錄器</string>
-    <string name="module_notification_recorder_item_app_label_and_when">%1$s %2$s</string>
     <string name="module_notification_recorder_item_no_title">無標題</string>
     <string name="module_notification_recorder_item_type_toast">吐司</string>
     <string name="module_notification_recorder_item_type_n">通知</string>

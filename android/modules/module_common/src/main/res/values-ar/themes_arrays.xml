@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="themes_entry">
+        <item>浅色 蓝</item>
+        <item>浅色 靛青</item>
+        <item>浅色 红</item>
+        <item>浅色 绿</item>
+        <item>浅色 黄</item>
+        <item>浅色 黑</item>
+        <item>浅色 鸭绿</item>
+        <item>浅色 粉</item>
+        <item>深色 蓝</item>
+        <item>深色 靛青</item>
+        <item>深色 红</item>
+        <item>深色 黄</item>
+        <item>深色 灰</item>
+        <item>自动切换</item>
+        <item>材料设计 3</item>
+    </string-array>
+</resources>

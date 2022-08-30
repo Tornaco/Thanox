@@ -1,0 +1,16 @@
+{
+    "author": "PPKun",
+    "version": 1,
+    "tags": [
+        "app_opt"
+    ],
+    "profile": {
+      "name": "当息屏时杀死进程",
+      "description": "息屏时立即杀死全局变量中的进程名(需要创建叫screenOffKill的全局变量)",
+      "priority": 1,
+      "condition": "screenOff",
+      "actions": [
+        "foreach(needKill : globalVarOf$screenOffKill){ thanos.activityManager.killProcessByName(needKill); }"
+      ]
+    }
+}

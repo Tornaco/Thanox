@@ -11,7 +11,6 @@ abstract class Res {
         const val STRING_OP_REMIND_WHITELIST = "op_remind_whitelist"
         const val STRING_TASK_REMOVAL_MULTIPLE_TASK_CHECK_LIST =
             "task_removal_multiple_task_check_list"
-        const val STRING_IZ_DISALLOW_AUTO_INSTALL_PKGS = "iz_disallow_auto_install_pkgs"
 
         const val STRING_SERVICE_SILENCE_NOTIFICATION_CHANNEL =
             "service_silence_notification_channel"
@@ -79,8 +78,10 @@ abstract class Res {
 
         const val STRING_THANOX_REMOVED_DIALOG_TITLE = "service_dialog_title_thanox_removed"
         const val STRING_THANOX_REMOVED_DIALOG_MESSAGE = "service_dialog_message_thanox_removed"
-        const val STRING_THANOX_REMOVED_DIALOG_KEEP_DATA = "service_dialog_button_thanox_removed_keep_data"
-        const val STRING_THANOX_REMOVED_DIALOG_DELETE_DATA = "service_dialog_button_thanox_removed_remove_data"
+        const val STRING_THANOX_REMOVED_DIALOG_KEEP_DATA =
+            "service_dialog_button_thanox_removed_keep_data"
+        const val STRING_THANOX_REMOVED_DIALOG_DELETE_DATA =
+            "service_dialog_button_thanox_removed_remove_data"
 
         const val STRING_UNTRUSTED_PACKAGE_TITLE = "billing_state_row_not_trust_title"
         const val STRING_UNTRUSTED_PACKAGE_MSG = "billing_state_row_not_trust_message"

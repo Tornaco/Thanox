@@ -9,11 +9,14 @@ import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import github.tornaco.android.thanos.core.annotation.RequiresApi;
 
 public class XposedHelpersExt {
+  private static final Map<String, Integer> METHOD_PARAM_INDEX_CACHE = new HashMap<>();
 
   public static Object getObjectFieldOrNull(Object obj, String fieldName) {
     try {
@@ -149,5 +152,32 @@ public class XposedHelpersExt {
       }
     }
     return null;
+  }
+
+  /**
+   * This may not work on Android class, param name may not present.
+   * */
+  public static int getParamIndex(Class<?> clazz, Method method, String paramName, int defaultValue) {
+    try {
+      String cacheKey = clazz.getName() + method.toString();
+      Integer cachedIndex = METHOD_PARAM_INDEX_CACHE.get(cacheKey);
+      if (cachedIndex != null) return cachedIndex;
+
+      Parameter[] parameters = method.getParameters();
+      for (int i = 0; i < parameters.length; i++) {
+        Parameter p = parameters[i];
+        XLog.i("getParamIndex, name = "+ p.getName());
+        if (p.isNamePresent() && paramName.equals(p.getName())) {
+          METHOD_PARAM_INDEX_CACHE.put(cacheKey, i);
+          return i;
+        }
+      }
+
+      METHOD_PARAM_INDEX_CACHE.put(cacheKey, defaultValue);
+      return defaultValue;
+    } catch (Throwable e) {
+      XLog.e("getParamIndexOr error", e);
+      return defaultValue;
+    }
   }
 }

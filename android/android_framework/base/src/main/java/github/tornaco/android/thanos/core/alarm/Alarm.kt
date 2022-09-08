@@ -26,19 +26,18 @@ import java.util.*
  * @param label Unique label for this alarm.
  * */
 data class Alarm(
-    val triggerAtTimeMillis: Long,
     val label: String,
+    val triggerAt: TimeOfADay,
     val repeat: Repeat,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readLong(),
         parcel.readString(),
-        parcel.readParcelable(Repeat::class.java.classLoader)) {
-    }
+        parcel.readParcelable(TimeOfADay::class.java.classLoader),
+        parcel.readParcelable(Repeat::class.java.classLoader))
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeLong(triggerAtTimeMillis)
         parcel.writeString(label)
+        parcel.writeParcelable(triggerAt, flags)
         parcel.writeParcelable(repeat, flags)
     }
 
@@ -63,11 +62,9 @@ data class Repeat(
     val isNo = days.isEmpty()
     val isEveryDay = days.containsAll(WeekDay.values().toList())
 
-    constructor(parcel: Parcel) : this(
-        parcel.readStringArray().map {
-            WeekDay.valueOf(it)
-        }
-    )
+    constructor(parcel: Parcel) : this(parcel.readStringArray().map {
+        WeekDay.valueOf(it)
+    })
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeStringArray(days.map { it.name }.toTypedArray())
@@ -89,13 +86,7 @@ data class Repeat(
 }
 
 enum class WeekDay {
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY,
-    SUNDAY;
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
 
     fun toCalendarInt() = when (this) {
         SUNDAY -> Calendar.SUNDAY
@@ -105,5 +96,34 @@ enum class WeekDay {
         WEDNESDAY -> Calendar.WEDNESDAY
         TUESDAY -> Calendar.TUESDAY
         MONDAY -> Calendar.MONDAY
+    }
+}
+
+
+data class TimeOfADay(
+    val hour: Int,
+    val minutes: Int,
+    val seconds: Int,
+) : Parcelable {
+    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readInt(), parcel.readInt())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(hour)
+        parcel.writeInt(minutes)
+        parcel.writeInt(seconds)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<TimeOfADay> {
+        override fun createFromParcel(parcel: Parcel): TimeOfADay {
+            return TimeOfADay(parcel)
+        }
+
+        override fun newArray(size: Int): Array<TimeOfADay?> {
+            return arrayOfNulls(size)
+        }
     }
 }

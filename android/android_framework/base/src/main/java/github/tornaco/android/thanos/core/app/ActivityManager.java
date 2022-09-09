@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.UserHandle;
 
 import com.elvishew.xlog.XLog;
@@ -743,6 +744,11 @@ public class ActivityManager {
                 .stream()
                 .anyMatch(activityAssistInfo -> activityAssistInfo.name.getPackageName().equals(pkg.getPkgName())
                         && UserHandle.getUserId(activityAssistInfo.uid) == pkg.getUserId());
+    }
+
+    @SneakyThrows
+    public boolean dumpHeap(String process) {
+        return server.dumpHeap(process);
     }
 
     public IBinder asBinder() {

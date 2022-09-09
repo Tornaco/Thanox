@@ -224,4 +224,6 @@ interface IActivityManager {
     /* return the pid of killed process. or -1 if no process found */
     int killProcessByName(String processName);
     void killProcessByNames(in List<String> processNames);
+
+    boolean dumpHeap(String process);
 }

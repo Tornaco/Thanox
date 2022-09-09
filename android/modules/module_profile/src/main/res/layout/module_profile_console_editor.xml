@@ -21,14 +21,20 @@
             android:padding="@dimen/common_view_margin_default"
             android:textSize="@dimen/module_profile_editor_text_size" />
 
-        <github.tornaco.android.thanos.widget.JetBrainsMonoMediumTextView
-            android:id="@+id/outputTextView"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_above="@+id/editor_actions_toolbar_symbols1"
-            android:padding="16dp"
-            android:textSize="14sp"
-            tools:text="Output text here" />
+            android:scrollbars="vertical"
+            android:layout_above="@+id/editor_actions_toolbar_symbols1">
+
+            <github.tornaco.android.thanos.widget.JetBrainsMonoMediumTextView
+                android:id="@+id/outputTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textSize="14sp"
+                tools:text="Output text here" />
+        </ScrollView>
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/editor_actions_toolbar_symbols1"

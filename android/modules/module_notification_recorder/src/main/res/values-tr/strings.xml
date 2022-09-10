@@ -1,4 +1,5 @@
 <resources>
+    <string name="module_notification_recorder_feature_title_notification_center">Bildirim Merkezi</string>
     <string name="module_notification_recorder_feature_title_notification_recorder">Kayıt</string>
     <string name="module_notification_recorder_item_no_title">Başlık yok</string>
     <string name="module_notification_recorder_item_type_toast">Toast</string>
@@ -11,15 +12,13 @@
     <string name="module_notification_recorder_toady">Bugün</string>
     <string name="module_notification_recorder_before_today">Daha önce</string>
     <string name="module_notification_recorder_settings">Ayarlar</string>
-    <string name="key_enable_toast_info" translatable="false">key_enable_toast_info</string>
-    <string name="key_enable_nr_n" translatable="false">key_enable_nr_n</string>
-    <string name="key_enable_nr_t" translatable="false">key_enable_nr_t</string>
-    <string name="key_enable_nr_clip" translatable="false">key_enable_nr_clip</string>
-    <string name="pref_summary_enable_toast_info">Toast görünümünde uygulama bilgilerini göster</string>
-    <string name="pref_title_enable_toast_info">Toast bilgi</string>
-    <string name="pref_title_enable_nr_n">Bildirimleri kaydet</string>
-    <string name="pref_title_enable_nr_t">Tosts Kaydet</string>
-    <string name="pref_title_enable_nr_clip">Kayıt Panosu</string>
+
+    <string name="module_notification_recorder_pref_summary_enable_toast_info">Toast görünümünde uygulama bilgilerini göster</string>
+    <string name="module_notification_recorder_pref_title_enable_toast_info">Toast bilgi</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_n">Bildirimleri kaydet</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_t">Tosts Kaydet</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_clip">Kayıt Panosu</string>
+
     <string name="module_notification_recorder_reproduce">Reproduce</string>
     <string name="module_notification_recorder_zoom">Yakınlaştır</string>
     <string name="module_notification_recorder_yesterday">Dün</string>

@@ -1,4 +1,5 @@
 <resources>
+    <string name="module_notification_recorder_feature_title_notification_center">通知中心</string>
     <string name="module_notification_recorder_feature_title_notification_recorder">记录器</string>
     <string name="module_notification_recorder_item_no_title">无标题</string>
     <string name="module_notification_recorder_item_type_toast">吐司</string>
@@ -11,11 +12,13 @@
     <string name="module_notification_recorder_toady">今天</string>
     <string name="module_notification_recorder_before_today">更早些</string>
     <string name="module_notification_recorder_settings">设置</string>
-    <string name="pref_summary_enable_toast_info">在系统吐司中添加一个应用图标</string>
-    <string name="pref_title_enable_toast_info">显示吐司信息</string>
-    <string name="pref_title_enable_nr_n">记录状态栏通知</string>
-    <string name="pref_title_enable_nr_t">记录应用吐司</string>
-    <string name="pref_title_enable_nr_clip">记录剪贴板</string>
+
+    <string name="module_notification_recorder_pref_summary_enable_toast_info">在系统吐司中添加一个应用图标</string>
+    <string name="module_notification_recorder_pref_title_enable_toast_info">显示吐司信息</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_n">记录状态栏通知</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_t">记录应用吐司</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_clip">记录剪贴板</string>
+
     <string name="module_notification_recorder_reproduce">重现</string>
     <string name="module_notification_recorder_zoom">Zoom</string>
     <string name="module_notification_recorder_yesterday">昨天</string>

@@ -4,21 +4,21 @@
         <SwitchPreferenceCompat
             app:key="@string/key_enable_nr_n"
             app:persistent="false"
-            app:title="@string/pref_title_enable_nr_n" />
+            app:title="@string/module_notification_recorder_pref_title_enable_nr_n" />
 
         <SwitchPreferenceCompat
             app:key="@string/key_enable_nr_t"
             app:persistent="false"
-            app:title="@string/pref_title_enable_nr_t" />
+            app:title="@string/module_notification_recorder_pref_title_enable_nr_t" />
         <SwitchPreferenceCompat
             app:key="@string/key_enable_nr_clip"
             app:persistent="false"
             app:isPreferenceVisible="false"
-            app:title="@string/pref_title_enable_nr_clip" />
+            app:title="@string/module_notification_recorder_pref_title_enable_nr_clip" />
         <SwitchPreferenceCompat
             app:key="@string/key_enable_toast_info"
             app:persistent="false"
-            app:summary="@string/pref_summary_enable_toast_info"
-            app:title="@string/pref_title_enable_toast_info" />
+            app:summary="@string/module_notification_recorder_pref_summary_enable_toast_info"
+            app:title="@string/module_notification_recorder_pref_title_enable_toast_info" />
     </PreferenceCategory>
 </PreferenceScreen>

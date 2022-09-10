@@ -342,26 +342,6 @@ public class NavViewModel extends AndroidViewModel {
                         onlyEnabled(
                                 Arrays.asList(
                                         Tile.builder()
-                                                .id(PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION)
-                                                .iconRes(R.drawable.ic_nav_screen_on_notification)
-                                                .title(resources.getString(R.string.feature_title_light_on_notification))
-                                                .summary(
-                                                        resources.getString(R.string.feature_summary_light_on_notification))
-                                                .category(resources.getString(R.string.feature_category_notification))
-                                                .requiredFeature(BuildProp.THANOX_FEATURE_EXT_N_UP)
-                                                .themeColor(R.color.nav_icon_screen_on_notification)
-                                                .build(),
-                                        Tile.builder()
-                                                .id(PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER)
-                                                .iconRes(R.drawable.ic_nav_nr)
-                                                .title(
-                                                        resources.getString(
-                                                                R.string
-                                                                        .module_notification_recorder_feature_title_notification_recorder))
-                                                .requiredFeature(BuildProp.THANOX_FEATURE_EXT_N_RECORDER)
-                                                .themeColor(R.color.nav_icon_nr)
-                                                .build(),
-                                        Tile.builder()
                                                 .id(PrebuiltFeatureIds.ID_TRAMPOLINE)
                                                 .iconRes(R.drawable.ic_nav_activity_replacement)
                                                 .category(resources.getString(R.string.feature_category_ext))
@@ -389,21 +369,6 @@ public class NavViewModel extends AndroidViewModel {
                                                 .themeColor(R.color.nav_icon_smart_standby)
                                                 .build(),
                                         Tile.builder()
-                                                .id(PrebuiltFeatureIds.ID_PLUGINS)
-                                                .iconRes(R.drawable.ic_nav_plugins)
-                                                .title(resources.getString(R.string.nav_title_plugin))
-                                                .requiredFeature(BuildProp.THANOX_FEATURE_PLUGIN_SUPPORT)
-                                                .summary(resources.getString(R.string.card_message_plugin_available))
-                                                .themeColor(R.color.nav_icon_plugin)
-                                                .build(),
-                                        Tile.builder()
-                                                .id(PrebuiltFeatureIds.ID_WECHAT_PUSH)
-                                                .iconRes(R.drawable.ic_nav_wechat_push)
-                                                .title(resources.getString(R.string.module_push_message_delegate_title_wechat_proxy))
-                                                .requiredFeature(BuildProp.THANOX_FEATURE_PUSH_DELEGATE)
-                                                .themeColor(R.color.nav_icon_wechat_push)
-                                                .build(),
-                                        Tile.builder()
                                                 .id(PrebuiltFeatureIds.ID_WAKELOCK_REMOVER)
                                                 .iconRes(R.drawable.ic_nav_wakelock_remover)
                                                 .title(resources.getString(R.string.feature_title_wakelock_blocker))
@@ -416,7 +381,52 @@ public class NavViewModel extends AndroidViewModel {
                                                 .title(resources.getString(R.string.feature_title_infinite_z))
                                                 .requiredFeature(BuildProp.THANOX_FEATURE_IZ)
                                                 .themeColor(R.color.nav_icon_app_clone)
-                                                .build())));
+                                                .build(),
+                                        Tile.builder()
+                                                .id(PrebuiltFeatureIds.ID_PLUGINS)
+                                                .iconRes(R.drawable.ic_nav_plugins)
+                                                .title(resources.getString(R.string.nav_title_plugin))
+                                                .requiredFeature(BuildProp.THANOX_FEATURE_PLUGIN_SUPPORT)
+                                                .summary(resources.getString(R.string.card_message_plugin_available))
+                                                .themeColor(R.color.nav_icon_plugin)
+                                                .build()
+                                )));
+
+
+        TileGroup notification =
+                new TileGroup(
+                        resources.getString(R.string.module_notification_recorder_feature_title_notification_center),
+                        onlyEnabled(
+                                Arrays.asList(
+                                        Tile.builder()
+                                                .id(PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION)
+                                                .iconRes(R.drawable.ic_nav_screen_on_notification)
+                                                .title(resources.getString(R.string.feature_title_light_on_notification))
+                                                .summary(
+                                                        resources.getString(R.string.feature_summary_light_on_notification))
+                                                .category(resources.getString(R.string.feature_category_notification))
+                                                .requiredFeature(BuildProp.THANOX_FEATURE_EXT_N_UP)
+                                                .themeColor(R.color.nav_icon_screen_on_notification)
+                                                .build(),
+                                        Tile.builder()
+                                                .id(PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER)
+                                                .iconRes(R.drawable.ic_nav_nr)
+                                                .title(
+                                                        resources.getString(
+                                                                R.string
+                                                                        .module_notification_recorder_feature_title_notification_recorder))
+                                                .requiredFeature(BuildProp.THANOX_FEATURE_EXT_N_RECORDER)
+                                                .themeColor(R.color.nav_icon_nr)
+                                                .build(),
+
+                                        Tile.builder()
+                                                .id(PrebuiltFeatureIds.ID_WECHAT_PUSH)
+                                                .iconRes(R.drawable.ic_nav_wechat_push)
+                                                .title(resources.getString(R.string.module_push_message_delegate_title_wechat_proxy))
+                                                .requiredFeature(BuildProp.THANOX_FEATURE_PUSH_DELEGATE)
+                                                .themeColor(R.color.nav_icon_wechat_push)
+                                                .build()
+                                )));
 
         TileGroup guide =
                 new TileGroup(
@@ -448,6 +458,7 @@ public class NavViewModel extends AndroidViewModel {
         if (boost.hasAtLeastOneTile()) tileGroups.add(boost);
         if (secure.hasAtLeastOneTile()) tileGroups.add(secure);
         if (ext.hasAtLeastOneTile()) tileGroups.add(ext);
+        if (notification.hasAtLeastOneTile()) tileGroups.add(notification);
         if (guide.hasAtLeastOneTile()) tileGroups.add(guide);
         tileGroups.add(new TileGroup(new StatusFooterInfo(getFooterTips(), AppPreference.getCurrentTipIndex(getApplication()),
                 integer -> AppPreference.setCurrentTipIndex(getApplication(), integer))));

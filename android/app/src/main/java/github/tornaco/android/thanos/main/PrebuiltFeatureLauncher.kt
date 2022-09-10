@@ -28,6 +28,7 @@ import github.tornaco.android.thanos.apps.SuggestedAppsActivity
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.feature.access.AppFeatureManager
 import github.tornaco.android.thanos.infinite.InfiniteZActivity
+import github.tornaco.android.thanos.notification.NotificationCenterActivity
 import github.tornaco.android.thanos.notification.ScreenOnNotificationActivity
 import github.tornaco.android.thanos.power.SmartFreezeActivity
 import github.tornaco.android.thanos.power.SmartStandbyV2Activity
@@ -48,7 +49,7 @@ import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
 class PrebuiltFeatureLauncher(
     private val context: Activity,
     private val uiHandler: Handler,
-    private val navViewModel: NavViewModel? = null
+    private val navViewModel: NavViewModel? = null,
 ) {
     fun launch(featureId: Int) {
         XLog.d("PrebuiltFeatureLauncher, launch: %s", featureId)
@@ -82,6 +83,9 @@ class PrebuiltFeatureLauncher(
             }
             featureId == PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER -> {
                 NotificationRecordActivity.start(context)
+            }
+            featureId == PrebuiltFeatureIds.ID_NOTIFICATION_CENTER -> {
+                NotificationCenterActivity.Starter.start(context)
             }
             featureId == PrebuiltFeatureIds.ID_TRAMPOLINE -> {
                 AppFeatureManager.withSubscriptionStatus(context) {

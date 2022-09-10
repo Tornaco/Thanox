@@ -29,11 +29,17 @@ object PrebuiltFeatureIds {
     const val ID_APP_LOCK = 9
     const val ID_TASK_BLUR = 10
     const val ID_OP_REMIND = 11
+
+    @Deprecated("Moved to Notification Center")
     const val ID_SCREEN_ON_NOTIFICATION = 12
+
+    @Deprecated("Moved to Notification Center")
     const val ID_NOTIFICATION_RECORDER = 13
     const val ID_TRAMPOLINE = 14
     const val ID_PROFILE = 15
     const val ID_SMART_STANDBY = 16
+
+    @Deprecated("Moved to Notification Center")
     const val ID_WECHAT_PUSH = 17
     const val ID_SMART_FREEZE = 18
     const val ID_INFINITE_Z = 19
@@ -41,6 +47,7 @@ object PrebuiltFeatureIds {
     const val ID_FEEDBACK = 21
     const val ID_GUIDE = 22
     const val ID_WAKELOCK_REMOVER = 23
+    const val ID_NOTIFICATION_CENTER = 24
 
     fun Int.isValidId() = this >= ID_ONE_KEY_CLEAR
 }

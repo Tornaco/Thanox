@@ -12,6 +12,6 @@
         <activity
             android:name=".ui.stats.StatsActivity"
             android:exported="false"
-            android:label="@string/module_notification_recorder_stats"/>
+            android:label="@string/module_notification_recorder_stats" />
     </application>
 </manifest>

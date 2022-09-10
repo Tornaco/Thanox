@@ -222,6 +222,10 @@
         <activity
             android:name=".settings.access.SettingsAccessRecordViewerActivity"
             android:exported="false" />
+        <activity
+            android:name=".notification.NotificationCenterActivity"
+            android:exported="false"
+            android:label="@string/module_notification_recorder_feature_title_notification_center" />
 
         <meta-data
             android:name="xposedmodule"

@@ -32,14 +32,22 @@ plugins {
 androidGitVersion {
     prefix = "v"
     codeFormat = "MMNNPP"
-    baseCode = 3030164
+    baseCode = 3030167
 }
 
 thanoxVersionCode = androidGitVersion.code()
 thanoxVersionName = androidGitVersion.name()
 
-log("thanoxVersionCode: $thanoxVersionCode")
-log("thanoxVersionName: $thanoxVersionName")
+printVersions()
+
+task("printVersions") {
+    printVersions()
+}
+
+fun printVersions() {
+    log("thanoxVersionCode: $thanoxVersionCode")
+    log("thanoxVersionName: $thanoxVersionName")
+}
 
 subprojects {
     log("subprojects: ${this.name}")

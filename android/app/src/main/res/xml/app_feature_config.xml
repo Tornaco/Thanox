@@ -82,8 +82,8 @@
         <SwitchPreferenceCompat
             android:persistent="false"
             app:key="@string/key_app_feature_config_enable_package_on_launch"
-            app:title="@string/feature_title_enable_package_on_launch"
-            app:summary="@string/feature_summary_enable_package_on_launch"/>
+            app:summary="@string/feature_summary_enable_package_on_launch"
+            app:title="@string/feature_title_enable_package_on_launch" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/feature_category_privacy">
@@ -141,6 +141,26 @@
             android:persistent="false"
             app:key="@string/key_app_feature_config_block_clear_data"
             app:title="@string/module_ops_feature_title_block_clear_data" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/module_notification_recorder_feature_title_notification_center">
+
+        <SwitchPreferenceCompat
+            android:persistent="false"
+            app:key="@string/key_app_feature_config_redaction_notification"
+            app:summary="@string/pre_summary_redaction_notification"
+            app:title="@string/pre_title_redaction_notification" />
+
+        <Preference
+            android:persistent="false"
+            app:key="@string/key_app_feature_config_redaction_notification_title"
+            app:title="@string/pre_title_redaction_notification_title" />
+
+        <Preference
+            android:persistent="false"
+            app:key="@string/key_app_feature_config_redaction_notification_text"
+            app:title="@string/pre_title_redaction_notification_text" />
 
     </PreferenceCategory>
 

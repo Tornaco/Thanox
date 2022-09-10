@@ -334,6 +334,11 @@
     <string name="pre_title_force_dialog_cancelable">Dialog cancelable</string>
     <string name="pre_summary_force_dialog_cancelable">Force app dialog to be cancelable for, please enable Xposed installer scope for this app</string>
 
+    <string name="pre_title_redaction_notification">Redaksiyon Bildirimi</string>
+    <string name="pre_summary_redaction_notification">Hem kilit ekranı hem de kilit açma sırasında uygulama bildirim içeriğini gizlemeye zorlar</string>
+    <string name="pre_title_redaction_notification_title">Başlık</string>
+    <string name="pre_title_redaction_notification_text">Metin</string>
+
     <string name="cheat_field_auto_gen">Fill with random fields</string>
 
     <string name="start_record_allowed">Allowed</string>

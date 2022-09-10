@@ -339,6 +339,11 @@
     <string name="pre_title_force_dialog_cancelable">取消對話框</string>
     <string name="pre_summary_force_dialog_cancelable">強制讓該應用的原生彈出對話框可以取消，需要為該應用開啟Xposed作用域才能生效</string>
 
+    <string name="pre_title_redaction_notification">通知編輯</string>
+    <string name="pre_summary_redaction_notification">使用自定義標題和文本覆蓋應用程序通知</string>
+    <string name="pre_title_redaction_notification_title">標題</string>
+    <string name="pre_title_redaction_notification_text">文本</string>
+
     <string name="pre_title_bg_screen_off_clean_up_skip_notification">不清理有通知應用</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">不清理最近任務裡的應用</string>
 

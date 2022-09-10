@@ -87,6 +87,27 @@ public interface INotificationManager extends android.os.IInterface
     @Override public void onSetPrimaryClip(android.content.ClipData clip, github.tornaco.android.thanos.core.pm.Pkg caller) throws android.os.RemoteException
     {
     }
+    @Override public void setPackageRedactionNotificationEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isPackageRedactionNotificationEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public void setPackageRedactionNotificationTitle(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String title) throws android.os.RemoteException
+    {
+    }
+    @Override public java.lang.String getPackageRedactionNotificationTitle(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public void setPackageRedactionNotificationText(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String text) throws android.os.RemoteException
+    {
+    }
+    @Override public java.lang.String getPackageRedactionNotificationText(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -363,6 +384,99 @@ public interface INotificationManager extends android.os.IInterface
           }
           this.onSetPrimaryClip(_arg0, _arg1);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_setPackageRedactionNotificationEnabled:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          this.setPackageRedactionNotificationEnabled(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isPackageRedactionNotificationEnabled:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _result = this.isPackageRedactionNotificationEnabled(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_setPackageRedactionNotificationTitle:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          this.setPackageRedactionNotificationTitle(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getPackageRedactionNotificationTitle:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          java.lang.String _result = this.getPackageRedactionNotificationTitle(_arg0);
+          reply.writeNoException();
+          reply.writeString(_result);
+          return true;
+        }
+        case TRANSACTION_setPackageRedactionNotificationText:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          this.setPackageRedactionNotificationText(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getPackageRedactionNotificationText:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          java.lang.String _result = this.getPackageRedactionNotificationText(_arg0);
+          reply.writeNoException();
+          reply.writeString(_result);
           return true;
         }
         default:
@@ -853,6 +967,165 @@ public interface INotificationManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void setPackageRedactionNotificationEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setPackageRedactionNotificationEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPackageRedactionNotificationEnabled(pkg, enable);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isPackageRedactionNotificationEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageRedactionNotificationEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPackageRedactionNotificationEnabled(pkg);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setPackageRedactionNotificationTitle(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String title) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeString(title);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setPackageRedactionNotificationTitle, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPackageRedactionNotificationTitle(pkg, title);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.lang.String getPackageRedactionNotificationTitle(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageRedactionNotificationTitle, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPackageRedactionNotificationTitle(pkg);
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setPackageRedactionNotificationText(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String text) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeString(text);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setPackageRedactionNotificationText, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPackageRedactionNotificationText(pkg, text);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.lang.String getPackageRedactionNotificationText(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageRedactionNotificationText, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPackageRedactionNotificationText(pkg);
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.n.INotificationManager sDefaultImpl;
     }
     static final int TRANSACTION_getShowingNotificationRecordsForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -877,6 +1150,12 @@ public interface INotificationManager extends android.os.IInterface
     static final int TRANSACTION_getAllNotificationRecordsByPageAndKeyword = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
     static final int TRANSACTION_getAllNotificationRecordsByPageAndKeywordInDateRange = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
     static final int TRANSACTION_onSetPrimaryClip = (android.os.IBinder.FIRST_CALL_TRANSACTION + 21);
+    static final int TRANSACTION_setPackageRedactionNotificationEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 22);
+    static final int TRANSACTION_isPackageRedactionNotificationEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 23);
+    static final int TRANSACTION_setPackageRedactionNotificationTitle = (android.os.IBinder.FIRST_CALL_TRANSACTION + 24);
+    static final int TRANSACTION_getPackageRedactionNotificationTitle = (android.os.IBinder.FIRST_CALL_TRANSACTION + 25);
+    static final int TRANSACTION_setPackageRedactionNotificationText = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
+    static final int TRANSACTION_getPackageRedactionNotificationText = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.n.INotificationManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -918,4 +1197,10 @@ public interface INotificationManager extends android.os.IInterface
   public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeyword(int start, int limit, java.lang.String keyword) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getAllNotificationRecordsByPageAndKeywordInDateRange(int start, int limit, long startTimeMills, long endTimeMills, java.lang.String keyword) throws android.os.RemoteException;
   public void onSetPrimaryClip(android.content.ClipData clip, github.tornaco.android.thanos.core.pm.Pkg caller) throws android.os.RemoteException;
+  public void setPackageRedactionNotificationEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException;
+  public boolean isPackageRedactionNotificationEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void setPackageRedactionNotificationTitle(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String title) throws android.os.RemoteException;
+  public java.lang.String getPackageRedactionNotificationTitle(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void setPackageRedactionNotificationText(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String text) throws android.os.RemoteException;
+  public java.lang.String getPackageRedactionNotificationText(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
 }

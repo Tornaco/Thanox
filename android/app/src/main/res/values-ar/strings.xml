@@ -340,6 +340,11 @@
     <string name="pre_title_force_dialog_cancelable">إلغاء الحوار</string>
     <string name="pre_summary_force_dialog_cancelable">بفرض إلغاء مربع الحوار المنبثق الأصلي للتطبيق ، يجب تمكين نطاق Xposed حتى يدخل التطبيق حيز التنفيذ</string>
 
+    <string name="pre_title_redaction_notification">إخطار المحرر</string>
+    <string name="pre_summary_redaction_notification">تجاوز إشعارات التطبيق باستخدام عنوان ونص مخصصين</string>
+    <string name="pre_title_redaction_notification_title">لقب</string>
+    <string name="pre_title_redaction_notification_text">نص</string>
+
     <string name="pre_title_bg_screen_off_clean_up_skip_notification">عدم تنظيف التطبيقات بالإشعارات</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">لا تقم بتنظيف التطبيقات في المهام الأخيرة</string>
 

@@ -112,4 +112,34 @@ public class NotificationManager {
     public void onSetPrimaryClip(ClipData clip, Pkg caller) {
         service.onSetPrimaryClip(clip, caller);
     }
+
+    @SneakyThrows
+    public void setPackageRedactionNotificationEnabled(Pkg pkg, boolean enable) {
+        service.setPackageRedactionNotificationEnabled(pkg, enable);
+    }
+
+    @SneakyThrows
+    public boolean isPackageRedactionNotificationEnabled(Pkg pkg) {
+        return service.isPackageRedactionNotificationEnabled(pkg);
+    }
+
+    @SneakyThrows
+    public void setPackageRedactionNotificationTitle(Pkg pkg, String title) {
+        service.setPackageRedactionNotificationTitle(pkg, title);
+    }
+
+    @SneakyThrows
+    public String getPackageRedactionNotificationTitle(Pkg pkg) {
+        return service.getPackageRedactionNotificationTitle(pkg);
+    }
+
+    @SneakyThrows
+    public void setPackageRedactionNotificationText(Pkg pkg, String text) {
+        service.setPackageRedactionNotificationText(pkg, text);
+    }
+
+    @SneakyThrows
+    public String getPackageRedactionNotificationText(Pkg pkg) {
+        return service.getPackageRedactionNotificationText(pkg);
+    }
 }

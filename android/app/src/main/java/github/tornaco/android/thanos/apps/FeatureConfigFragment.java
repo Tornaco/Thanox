@@ -37,6 +37,7 @@ import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.util.AppIconLoaderUtil;
+import github.tornaco.android.thanos.widget.EditTextDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.pref.ViewAwarePreference;
@@ -78,6 +79,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         bindPrivDataFieldsPref();
         bindManagePref();
         bindProtectPrefs();
+        bindNotificationPrefs();
         bindMiscPrefs();
     }
 
@@ -373,6 +375,56 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                             AppOpsListActivity.start(requireContext(), appInfo);
                             return true;
                         });
+    }
+
+    private void bindNotificationPrefs() {
+        ThanosManager thanos = ThanosManager.from(getContext());
+
+        SwitchPreferenceCompat enablePref = findPreference(getString(R.string.key_app_feature_config_redaction_notification));
+        Preference textPref = findPreference(getString(R.string.key_app_feature_config_redaction_notification_text));
+        Preference titlePref = findPreference(getString(R.string.key_app_feature_config_redaction_notification_title));
+
+        boolean isEnabled = thanos.getNotificationManager().isPackageRedactionNotificationEnabled(Pkg.fromAppInfo(appInfo));
+        Objects.requireNonNull(enablePref).setChecked(isEnabled);
+        enablePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                boolean enable = (boolean) newValue;
+                thanos.getNotificationManager().setPackageRedactionNotificationEnabled(Pkg.fromAppInfo(appInfo), enable);
+                Objects.requireNonNull(titlePref).setEnabled(enable);
+                Objects.requireNonNull(textPref).setEnabled(enable);
+                return true;
+            }
+        });
+
+
+        Objects.requireNonNull(textPref).setEnabled(isEnabled);
+        textPref.setSummary(thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo)));
+        textPref.setOnPreferenceClickListener(preference -> {
+            EditTextDialog.show(requireActivity(),
+                    getString(R.string.pre_title_redaction_notification_text),
+                    thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo)),
+                    newValue -> {
+                        thanos.getNotificationManager().setPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo), newValue);
+                        String newCurrentValue = thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo));
+                        textPref.setSummary(newCurrentValue);
+                    });
+            return true;
+        });
+
+        Objects.requireNonNull(titlePref).setEnabled(isEnabled);
+        titlePref.setSummary(thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo)));
+        titlePref.setOnPreferenceClickListener(preference -> {
+            EditTextDialog.show(requireActivity(),
+                    getString(R.string.pre_title_redaction_notification_title),
+                    thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo)),
+                    newValue -> {
+                        thanos.getNotificationManager().setPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo), newValue);
+                        String newCurrentValue = thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo));
+                        titlePref.setSummary(newCurrentValue);
+                    });
+            return true;
+        });
     }
 
     private void bindMiscPrefs() {

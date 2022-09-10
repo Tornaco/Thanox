@@ -38,4 +38,11 @@ interface INotificationManager {
     List<NotificationRecord> getAllNotificationRecordsByPageAndKeywordInDateRange(int start, int limit, long startTimeMills, long endTimeMills, String keyword);
 
     void onSetPrimaryClip(in ClipData clip, in Pkg caller);
+
+    void setPackageRedactionNotificationEnabled(in Pkg pkg, boolean enable);
+    boolean isPackageRedactionNotificationEnabled(in Pkg pkg);
+    void setPackageRedactionNotificationTitle(in Pkg pkg, String title);
+    String getPackageRedactionNotificationTitle(in Pkg pkg);
+    void setPackageRedactionNotificationText(in Pkg pkg, String text);
+    String getPackageRedactionNotificationText(in Pkg pkg);
 }

@@ -33,6 +33,18 @@ public enum AppSort {
             return null;
         }
     }),
+    Running(R.string.chip_title_app_only_running, new AppSorterProvider() {
+        @NonNull
+        @Override
+        public Comparator<AppListModel> comparator(@NonNull Context context) {
+            return new AppRunningStateComparator(context);
+        }
+
+        @Override
+        public String getAppSortDescription(@NonNull Context context, @NonNull AppListModel model) {
+            return null;
+        }
+    }),
     AppLabel(R.string.common_sort_by_install_app_label, new AppSorterProvider() {
         @NonNull
         @Override

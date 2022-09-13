@@ -21,6 +21,7 @@
     <string name="module_profile_pref_title_rule_engine_date_time">الوقت و التاريخ</string>
     <string name="module_profile_pref_summary_rule_engine_date_time">جدولة بعض المهام المتكررة أو المحددة بوقت</string>
     <string name="module_profile_date_time_regular_interval">الفاصل الزمني الثابت</string>
+    <string name="module_profile_date_time_alarm">الوقت من اليوم</string>
     <string name="module_profile_date_time_tag">يتم استخدام العلامة للحكم الشرطي على وضع المشهد. مثال على الاستخدام %s</string>
     <string name="module_profile_date_time_min_interval">الحد الأدنى للفاصل الزمني المدعوم حاليًا هو 15 دقيقة</string>
 

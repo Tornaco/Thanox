@@ -195,6 +195,21 @@ public interface IProfileManager extends android.os.IInterface
     {
       return null;
     }
+    // Engines.
+
+    @Override public void addAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException
+    {
+    }
+    @Override public void removeAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException
+    {
+    }
+    @Override public java.util.List<github.tornaco.android.thanos.core.alarm.AlarmRecord> getAllAlarms() throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public void setAlarmEnabled(github.tornaco.android.thanos.core.alarm.Alarm alarm, boolean enabled) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -789,6 +804,58 @@ public interface IProfileManager extends android.os.IInterface
           else {
             reply.writeInt(0);
           }
+          return true;
+        }
+        case TRANSACTION_addAlarmEngine:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.alarm.Alarm _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.alarm.Alarm.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          this.addAlarmEngine(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_removeAlarmEngine:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.alarm.Alarm _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.alarm.Alarm.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          this.removeAlarmEngine(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getAllAlarms:
+        {
+          data.enforceInterface(descriptor);
+          java.util.List<github.tornaco.android.thanos.core.alarm.AlarmRecord> _result = this.getAllAlarms();
+          reply.writeNoException();
+          reply.writeTypedList(_result);
+          return true;
+        }
+        case TRANSACTION_setAlarmEnabled:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.alarm.Alarm _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.alarm.Alarm.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          this.setAlarmEnabled(_arg0, _arg1);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -1911,6 +1978,104 @@ public interface IProfileManager extends android.os.IInterface
         }
         return _result;
       }
+      // Engines.
+
+      @Override public void addAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((alarm!=null)) {
+            _data.writeInt(1);
+            alarm.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_addAlarmEngine, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().addAlarmEngine(alarm);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void removeAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((alarm!=null)) {
+            _data.writeInt(1);
+            alarm.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_removeAlarmEngine, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().removeAlarmEngine(alarm);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.util.List<github.tornaco.android.thanos.core.alarm.AlarmRecord> getAllAlarms() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.alarm.AlarmRecord> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getAllAlarms, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllAlarms();
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.alarm.AlarmRecord.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setAlarmEnabled(github.tornaco.android.thanos.core.alarm.Alarm alarm, boolean enabled) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((alarm!=null)) {
+            _data.writeInt(1);
+            alarm.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(((enabled)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setAlarmEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setAlarmEnabled(alarm, enabled);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.profile.IProfileManager sDefaultImpl;
     }
     static final int TRANSACTION_setAutoApplyForNewInstalledAppsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1965,6 +2130,10 @@ public interface IProfileManager extends android.os.IInterface
     static final int TRANSACTION_removeConsoleLogSink = (android.os.IBinder.FIRST_CALL_TRANSACTION + 49);
     static final int TRANSACTION_parseRuleOrNull = (android.os.IBinder.FIRST_CALL_TRANSACTION + 50);
     static final int TRANSACTION_getRuleByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 51);
+    static final int TRANSACTION_addAlarmEngine = (android.os.IBinder.FIRST_CALL_TRANSACTION + 52);
+    static final int TRANSACTION_removeAlarmEngine = (android.os.IBinder.FIRST_CALL_TRANSACTION + 53);
+    static final int TRANSACTION_getAllAlarms = (android.os.IBinder.FIRST_CALL_TRANSACTION + 54);
+    static final int TRANSACTION_setAlarmEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 55);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IProfileManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -2034,4 +2203,10 @@ public interface IProfileManager extends android.os.IInterface
   public void removeConsoleLogSink(github.tornaco.android.thanos.core.profile.ILogSink sink) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.profile.RuleInfo parseRuleOrNull(java.lang.String ruleString, int format) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.profile.RuleInfo getRuleByName(java.lang.String ruleName) throws android.os.RemoteException;
+  // Engines.
+
+  public void addAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException;
+  public void removeAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.alarm.AlarmRecord> getAllAlarms() throws android.os.RemoteException;
+  public void setAlarmEnabled(github.tornaco.android.thanos.core.alarm.Alarm alarm, boolean enabled) throws android.os.RemoteException;
 }

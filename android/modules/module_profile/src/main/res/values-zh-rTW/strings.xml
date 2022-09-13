@@ -22,6 +22,7 @@
     <string name="module_profile_pref_title_rule_engine_date_time">時間與日期</string>
     <string name="module_profile_pref_summary_rule_engine_date_time">安排一些重複或定時任務</string>
     <string name="module_profile_date_time_regular_interval">固定時間間隔</string>
+    <string name="module_profile_date_time_alarm">一天中的時間</string>
     <string name="module_profile_date_time_tag">Tag用於情景模式的條件判斷。使用舉例：%s</string>
     <string name="module_profile_date_time_min_interval">當前支持的最短時間間隔為15分鐘</string>
 

@@ -25,6 +25,9 @@ import androidx.work.*
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import github.tornaco.android.thanos.core.alarm.Alarm
+import github.tornaco.android.thanos.core.alarm.AlarmRecord
+import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.thanos.android.module.profile.engine.work.PeriodicWork
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,14 +46,15 @@ enum class Type {
 }
 
 data class DateTimeState(
-    val workStates: List<WorkState> = listOf()
+    val workStates: List<WorkState> = listOf(),
+    val alarms: List<AlarmRecord> = listOf(),
 )
 
 data class WorkState(
     val id: UUID,
     val tag: String,
     val type: Type,
-    val value: Long
+    val value: Long,
 )
 
 @SuppressLint("StaticFieldLeak")
@@ -58,6 +62,9 @@ data class WorkState(
 class DateTimeEngineViewModel @Inject constructor(@ApplicationContext private val context: Context) :
     ViewModel() {
     private val workManager get() = WorkManager.getInstance(context)
+    private val thanox by lazy {
+        ThanosManager.from(context)
+    }
 
     private val _state =
         MutableStateFlow(
@@ -84,42 +91,7 @@ class DateTimeEngineViewModel @Inject constructor(@ApplicationContext private va
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 kotlin.runCatching {
-                    val workStates = workManager.getWorkInfos(
-                        WorkQuery.Builder.fromStates(
-                            listOf(
-                                WorkInfo.State.ENQUEUED,
-                                WorkInfo.State.RUNNING
-                            )
-                        ).build()
-                    ).get().map { workInfo ->
-                        val payload = workInfo.tags.first()
-                        val stateSplit = payload.split("-")
-                        if (stateSplit.size == 3) {
-                            kotlin.runCatching {
-                                WorkState(
-                                    id = workInfo.id,
-                                    tag = stateSplit[1],
-                                    type = Type.valueOf(stateSplit[0]),
-                                    value = stateSplit[2].toLong()
-                                )
-                            }.getOrElse {
-                                XLog.e("map to WorkState error", it)
-                                WorkState(
-                                    id = workInfo.id,
-                                    tag = stateSplit[1],
-                                    type = Type.Unknown,
-                                    value = 0L
-                                )
-                            }
-                        } else {
-                            WorkState(
-                                id = workInfo.id,
-                                tag = payload,
-                                type = Type.Unknown,
-                                value = 0L
-                            )
-                        }
-                    }
+                    val workStates = getWorkStates()
                     _state.value = _state.value.copy(workStates = workStates)
                 }.onFailure {
                     XLog.e("loadPendingWorks error", it)
@@ -128,9 +100,69 @@ class DateTimeEngineViewModel @Inject constructor(@ApplicationContext private va
         }
     }
 
-    fun deleteById(id: UUID) {
+    fun loadAlarms() {
+        val alarms = thanox.profileManager.allAlarms
+        _state.value = _state.value.copy(alarms = alarms)
+    }
+
+    private fun getWorkStates(): List<WorkState> {
+        val workStates = workManager.getWorkInfos(
+            WorkQuery.Builder.fromStates(
+                listOf(
+                    WorkInfo.State.ENQUEUED,
+                    WorkInfo.State.RUNNING
+                )
+            ).build()
+        ).get().map { workInfo ->
+            val payload = workInfo.tags.first()
+            val stateSplit = payload.split("-")
+            if (stateSplit.size == 3) {
+                kotlin.runCatching {
+                    WorkState(
+                        id = workInfo.id,
+                        tag = stateSplit[1],
+                        type = Type.valueOf(stateSplit[0]),
+                        value = stateSplit[2].toLong()
+                    )
+                }.getOrElse {
+                    XLog.e("map to WorkState error", it)
+                    WorkState(
+                        id = workInfo.id,
+                        tag = stateSplit[1],
+                        type = Type.Unknown,
+                        value = 0L
+                    )
+                }
+            } else {
+                WorkState(
+                    id = workInfo.id,
+                    tag = payload,
+                    type = Type.Unknown,
+                    value = 0L
+                )
+            }
+        }
+        return workStates
+    }
+
+    fun deleteWorkById(id: UUID) {
         XLog.w("deleteById: $id")
         workManager.cancelWorkById(id)
         loadPendingWorks()
+    }
+
+    fun addAlarm(alarm: Alarm) {
+        thanox.profileManager.addAlarmEngine(alarm)
+        loadAlarms()
+    }
+
+    fun deleteAlarm(record: AlarmRecord) {
+        thanox.profileManager.removeAlarmEngine(record.alarm)
+        loadAlarms()
+    }
+
+    fun setAlarmEnabled(alarm: Alarm, checked: Boolean) {
+        thanox.profileManager.setAlarmEnabled(alarm, checked)
+        loadAlarms()
     }
 }

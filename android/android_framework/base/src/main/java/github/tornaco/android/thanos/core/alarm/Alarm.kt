@@ -21,6 +21,39 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.util.*
 
+
+data class AlarmRecord(
+    val alarm: Alarm,
+    val isEnabled: Boolean = false,
+    val createTimeMillis: Long,
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readParcelable(Alarm::class.java.classLoader),
+        parcel.readByte() != 0.toByte(),
+        parcel.readLong()) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeParcelable(alarm, flags)
+        parcel.writeByte(if (isEnabled) 1 else 0)
+        parcel.writeLong(createTimeMillis)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<AlarmRecord> {
+        override fun createFromParcel(parcel: Parcel): AlarmRecord {
+            return AlarmRecord(parcel)
+        }
+
+        override fun newArray(size: Int): Array<AlarmRecord?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
+
 /**
  * Represent an Alarm that alert at a time, that can repeat on week days.
  * @param label Unique label for this alarm.
@@ -28,7 +61,7 @@ import java.util.*
 data class Alarm(
     val label: String,
     val triggerAt: TimeOfADay,
-    val repeat: Repeat,
+    val repeat: Repeat = Repeat(),
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),

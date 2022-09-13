@@ -4,11 +4,11 @@ import android.os.Handler;
 import android.util.AtomicFile;
 import android.util.Log;
 
+import com.elvishew.xlog.XLog;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import github.tornaco.android.thanos.core.util.function.Predicate;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,8 +21,8 @@ import java.util.concurrent.Executors;
 
 import github.tornaco.android.thanos.core.persist.i.SetRepo;
 import github.tornaco.android.thanos.core.util.FileUtils;
-import com.elvishew.xlog.XLog;
 import github.tornaco.android.thanos.core.util.XmlUtils;
+import github.tornaco.android.thanos.core.util.function.Predicate;
 import lombok.Cleanup;
 import util.CollectionUtils;
 
@@ -92,7 +92,11 @@ public abstract class JsonObjectSetRepo<T> implements SetRepo<T> {
         Set<T> t = new HashSet<>();
         CollectionUtils.consumeRemaining(h, s -> {
           T box = gson.fromJson(s, onCreateTypeToken().getType());
-          t.add(box);
+          if (box != null) {
+            t.add(box);
+          } else {
+            XLog.w("JsonObjectSetRepo, T is null fromJson: " + s);
+          }
         });
         mStorage.addAll(t);
 

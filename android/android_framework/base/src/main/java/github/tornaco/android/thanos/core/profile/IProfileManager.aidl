@@ -6,6 +6,8 @@ import github.tornaco.android.thanos.core.profile.IRuleChangeListener;
 import github.tornaco.android.thanos.core.profile.ILogSink;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 import github.tornaco.android.thanos.core.IPrinter;
+import github.tornaco.android.thanos.core.alarm.Alarm;
+import github.tornaco.android.thanos.core.alarm.AlarmRecord;
 
 interface IProfileManager {
 
@@ -86,4 +88,10 @@ interface IProfileManager {
 
     RuleInfo parseRuleOrNull(String ruleString, int format);
     RuleInfo getRuleByName(String ruleName);
+
+    // Engines.
+    void addAlarmEngine(in Alarm alarm);
+    void removeAlarmEngine(in Alarm alarm);
+    List<AlarmRecord> getAllAlarms();
+    void setAlarmEnabled(in Alarm alarm, boolean enabled);
 }

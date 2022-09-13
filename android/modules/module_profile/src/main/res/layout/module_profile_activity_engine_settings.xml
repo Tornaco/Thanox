@@ -21,6 +21,7 @@
                 app:popupTheme="?appbarPopupTheme"
                 app:theme="?toolbarTheme"
                 app:title="@string/module_profile_title_rule_engine"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
                 app:titleTextColor="?attr/colorControlNormal">
 
             </androidx.appcompat.widget.Toolbar>
@@ -31,7 +32,6 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/appbar"
-             />
+            android:layout_below="@+id/appbar" />
     </RelativeLayout>
 </layout>

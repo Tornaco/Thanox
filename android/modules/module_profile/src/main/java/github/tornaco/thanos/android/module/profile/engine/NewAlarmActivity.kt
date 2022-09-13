@@ -41,6 +41,9 @@ import dev.enro.core.NavigationKey
 import dev.enro.core.close
 import dev.enro.core.compose.navigationHandle
 import dev.enro.core.result.closeWithResult
+import github.tornaco.android.thanos.core.alarm.Alarm
+import github.tornaco.android.thanos.core.alarm.Repeat
+import github.tornaco.android.thanos.core.alarm.TimeOfADay
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.*
@@ -49,17 +52,16 @@ import kotlinx.parcelize.Parcelize
 import kotlin.math.min
 
 @Parcelize
-object NewRegularInterval : NavigationKey.WithResult<NewRegularIntervalResult>
+object NewAlarm : NavigationKey.WithResult<NewAlarmResult>
 
 @Parcelize
-data class NewRegularIntervalResult(
-    val durationMillis: Long,
-    val tag: String,
+data class NewAlarmResult(
+    val alarm: Alarm,
 ) : Parcelable
 
 @AndroidEntryPoint
-@NavigationDestination(NewRegularInterval::class)
-class NewRegularIntervalActivity : ComposeThemeActivity() {
+@NavigationDestination(NewAlarm::class)
+class NewAlarmActivity : ComposeThemeActivity() {
     override fun isF(): Boolean {
         return true
     }
@@ -70,18 +72,18 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
-        NewRegularIntervalContent()
+        NewAlarmContent()
     }
 
 
     @Composable
-    private fun NewRegularIntervalContent() {
-        val state = DurationState()
-        val navHandle = navigationHandle<NewRegularInterval>()
+    private fun NewAlarmContent() {
+        val state = AlarmState()
+        val navHandle = navigationHandle<NewAlarm>()
 
         ThanoxSmallAppBarScaffold(title = {
             Text(
-                text = stringResource(id = R.string.module_profile_date_time_regular_interval),
+                text = stringResource(id = R.string.module_profile_date_time_alarm),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
@@ -97,13 +99,18 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
                             contentDescription = stringResource(id = R.string.module_profile_rule_edit_action_save)
                         )
                     }) {
-                    val timeMillis = (state.h.value * 60 * 60 * 1000L
-                            + state.m.value * 60 * 1000L
-                            + state.s.value * 1000L)
+                    val alarm = Alarm(
+                        label = state.tag,
+                        triggerAt = TimeOfADay(
+                            state.h.value,
+                            state.m.value,
+                            state.s.value
+                        ),
+                        repeat = Repeat()
+                    )
                     navHandle.closeWithResult(
-                        NewRegularIntervalResult(
-                            durationMillis = timeMillis,
-                            tag = state.tag
+                        NewAlarmResult(
+                            alarm = alarm
                         )
                     )
                 }
@@ -155,17 +162,17 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
 
 
     @Composable
-    private fun Hour(durationState: DurationState) {
+    private fun Hour(durationState: AlarmState) {
         Field(
             durationState.h,
             "Hour",
             0,
-            999
+            24
         )
     }
 
     @Composable
-    private fun Minute(durationState: DurationState) {
+    private fun Minute(durationState: AlarmState) {
         Field(
             durationState.m,
             "Minute",
@@ -175,7 +182,7 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
     }
 
     @Composable
-    private fun Second(durationState: DurationState) {
+    private fun Second(durationState: AlarmState) {
         Field(
             durationState.s,
             "Second",
@@ -228,12 +235,12 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
         }
     }
 
-    private class DurationState {
+    private class AlarmState {
         var h = mutableStateOf(0)
-        var m = mutableStateOf(15)
+        var m = mutableStateOf(0)
         var s = mutableStateOf(0)
 
         var tag by mutableStateOf("")
     }
-}
 
+}

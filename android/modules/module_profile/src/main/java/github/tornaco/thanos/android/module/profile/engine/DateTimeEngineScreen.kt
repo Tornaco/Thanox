@@ -41,7 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.enro.core.compose.registerForNavigationResult
-import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import github.tornaco.android.thanos.core.alarm.AlarmRecord
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.thanos.android.module.profile.R
@@ -60,13 +60,19 @@ fun Activity.DateTimeEngineScreen() {
 
     SideEffect {
         viewModel.loadPendingWorks()
+        viewModel.loadAlarms()
     }
 
-    val navHandle = registerForNavigationResult<NewRegularIntervalResult> { regularInterval ->
-        viewModel.schedulePeriodicWork(
-            regularInterval.tag,
-            regularInterval.durationMillis.toDuration(DurationUnit.MILLISECONDS)
-        )
+    val newRegularIntervalHandle =
+        registerForNavigationResult<NewRegularIntervalResult> { regularInterval ->
+            viewModel.schedulePeriodicWork(
+                regularInterval.tag,
+                regularInterval.durationMillis.toDuration(DurationUnit.MILLISECONDS)
+            )
+        }
+
+    val newAlarmHandle = registerForNavigationResult<NewAlarmResult> { alarm ->
+        viewModel.addAlarm(alarm.alarm)
     }
 
     val typeSelectDialogState =
@@ -75,7 +81,7 @@ fun Activity.DateTimeEngineScreen() {
                 SingleChoiceItem(
                     id = ID_TIME_OF_A_DAY,
                     icon = Icons.Filled.Schedule,
-                    label = "Time of a day (coming soon)"
+                    label = stringResource(id = R.string.module_profile_date_time_alarm)
                 ),
                 SingleChoiceItem(
                     id = ID_REGULAR_INTERVAL,
@@ -86,9 +92,11 @@ fun Activity.DateTimeEngineScreen() {
             onItemClick = {
                 when (it) {
                     ID_REGULAR_INTERVAL -> {
-                        navHandle.open(NewRegularInterval)
+                        newRegularIntervalHandle.open(NewRegularInterval)
                     }
-                    ID_TIME_OF_A_DAY -> {}
+                    ID_TIME_OF_A_DAY -> {
+                        newAlarmHandle.open(NewAlarm)
+                    }
                 }
             })
 
@@ -117,8 +125,15 @@ fun Activity.DateTimeEngineScreen() {
         SingleChoiceDialog(state = typeSelectDialogState)
 
         WorkList(contentPadding = contentPadding, state = state.workStates) {
-            viewModel.deleteById(it)
+            viewModel.deleteWorkById(it)
         }
+
+        AlarmList(contentPadding = contentPadding,
+            state = state.alarms,
+            delete = { viewModel.deleteAlarm(it) },
+            onCheckChange = { record, checked ->
+                viewModel.setAlarmEnabled(record.alarm, checked)
+            })
     }
 }
 
@@ -126,7 +141,7 @@ fun Activity.DateTimeEngineScreen() {
 private fun WorkList(
     state: List<WorkState>,
     contentPadding: PaddingValues,
-    delete: (id: UUID) -> Unit
+    delete: (id: UUID) -> Unit,
 ) {
     LazyColumn(modifier = Modifier.fillMaxWidth(), contentPadding = contentPadding) {
         items(state) {
@@ -193,6 +208,93 @@ private fun WorkList(
                 }
             }
 
+        }
+    }
+}
+
+
+@Composable
+private fun AlarmList(
+    state: List<AlarmRecord>,
+    contentPadding: PaddingValues,
+    delete: (alarm: AlarmRecord) -> Unit,
+    onCheckChange: (alarm: AlarmRecord, checked: Boolean) -> Unit,
+) {
+    LazyColumn(modifier = Modifier.fillMaxWidth(), contentPadding = contentPadding) {
+        items(state) { record ->
+            Column(modifier = Modifier
+                .fillMaxWidth()) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .heightIn(min = 64.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(
+                        modifier = Modifier.weight(1f, fill = false)
+                    ) {
+                        val typeText = stringResource(id = R.string.module_profile_date_time_alarm)
+                        val valueText = record.alarm.triggerAt.toString()
+
+                        Text(
+                            text = typeText, style = MaterialTheme.typography.titleMedium,
+                            maxLines = 1
+                        )
+                        TinySpacer()
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Filled.Tag,
+                                contentDescription = "tag"
+                            )
+                            TinySpacer()
+                            Text(
+                                text = record.alarm.label.substring(0,
+                                    min(18, record.alarm.label.length)),
+                                style = MaterialTheme.typography.labelMedium,
+                                maxLines = 1
+                            )
+                        }
+
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Filled.Timer,
+                                contentDescription = "interval"
+                            )
+                            TinySpacer()
+                            Text(
+                                text = valueText, style = MaterialTheme.typography.labelMedium,
+                                maxLines = 1
+                            )
+                        }
+                    }
+
+                    Switch(
+                        modifier = Modifier,
+                        checked = record.isEnabled,
+                        onCheckedChange = { checked ->
+                            onCheckChange(record, checked)
+                        })
+                }
+
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 6.dp)) {
+                    IconButton(
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .padding(end = 16.dp),
+                        onClick = {
+                            delete(record)
+                        }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.module_profile_ic_delete_bin_fill),
+                            contentDescription = "Remove"
+                        )
+                    }
+                }
+            }
         }
     }
 }

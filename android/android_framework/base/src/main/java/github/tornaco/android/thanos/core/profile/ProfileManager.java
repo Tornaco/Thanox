@@ -4,6 +4,8 @@ import android.os.ParcelFileDescriptor;
 
 import java.util.List;
 
+import github.tornaco.android.thanos.core.alarm.Alarm;
+import github.tornaco.android.thanos.core.alarm.AlarmRecord;
 import lombok.SneakyThrows;
 
 public class ProfileManager {
@@ -270,5 +272,25 @@ public class ProfileManager {
     @SneakyThrows
     public boolean isLogEnabled() {
         return server.isLogEnabled();
+    }
+
+    @SneakyThrows
+    public void addAlarmEngine(Alarm alarm) {
+        server.addAlarmEngine(alarm);
+    }
+
+    @SneakyThrows
+    public List<AlarmRecord> getAllAlarms() {
+        return server.getAllAlarms();
+    }
+
+    @SneakyThrows
+    public void setAlarmEnabled(Alarm alarm, boolean enabled) {
+        server.setAlarmEnabled(alarm, enabled);
+    }
+
+    @SneakyThrows
+    public void removeAlarmEngine(Alarm alarm) {
+        server.removeAlarmEngine(alarm);
     }
 }

@@ -26,5 +26,7 @@ parcelable github.tornaco.android.thanos.core.os.SwapInfo;
 parcelable github.tornaco.android.thanos.core.wm.WindowState;
 parcelable github.tornaco.android.thanos.core.net.TrafficStats;
 parcelable github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord;
+parcelable github.tornaco.android.thanos.core.alarm.Alarm;
+parcelable github.tornaco.android.thanos.core.alarm.AlarmRecord;
 
 parcelable android.content.pm.UserInfo;

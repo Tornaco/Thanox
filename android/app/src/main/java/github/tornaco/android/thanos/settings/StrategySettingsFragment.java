@@ -174,6 +174,7 @@ public class StrategySettingsFragment extends BasePreferenceFragmentCompat {
                             appInfo.setVersionCode(-1);
                             appInfo.setVersionCode(-1);
                             appInfo.setUid(-1);
+                            appInfo.setUserId(0);
                             AppDetailsActivity.start(getActivity(), appInfo);
                             break;
                         case 1:

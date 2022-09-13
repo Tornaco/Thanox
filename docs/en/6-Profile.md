@@ -1010,7 +1010,49 @@ interface IAudio {
 
 &nbsp;
 
-### 0.5.15. Context
+
+### 0.5.15. Battery
+
+Battery相关。
+
+
+| 能力           | 含义                   | 参数       | 举例 | 返回值        |
+| -------------- | ---------------------- | ---------- | ---- | ------------- |
+| getBatteryState | 获取电池状态      | 无 |参考下方例子   | BatteryState   |
+
+
+
+BatteryState类型定义：
+
+```kotlin
+data class BatteryState(
+    // 电量
+    val batteryLevel: Int = 0,
+    // 是否在充电
+    val isCharging: Boolean = false,
+    // 是否在AC充电
+    val isAcCharge: Boolean = false,
+    // 是否在USB充电
+    val isUsbCharge: Boolean = false,
+)
+```
+
+
+接口定义：
+
+```java
+@HandlerName("battery")
+public interface IBattery {
+    BatteryState getBatteryState();
+}
+```
+
+使用举例，获取电池电量：`battery.getBatteryState().batteryLevel `
+
+&nbsp;
+
+
+### 0.5.16. Context
 
 Android System [Context](https://developer.android.com/reference/android/content/Context)，Android系统上下文。
 基于Context可以实现更丰富的功能调用。举例：
@@ -1030,7 +1072,7 @@ Android System [Context](https://developer.android.com/reference/android/content
 ```
 &nbsp;
 
-### 0.5.16. Thanos
+### 0.5.17. Thanos
 
 你可以使用thanox或thanos来调用[Thanos API](https://github.com/Tornaco/Thanox/blob/master/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/app/ThanosManager.java)，举例：
 
@@ -1049,7 +1091,7 @@ Android System [Context](https://developer.android.com/reference/android/content
 ```
 &nbsp;
 
-### 0.5.15. Actor(废弃)
+### 0.5.18. Actor(废弃)
 
 ~~情景模式Action相关，目前支持Action的延迟执行。~~
 

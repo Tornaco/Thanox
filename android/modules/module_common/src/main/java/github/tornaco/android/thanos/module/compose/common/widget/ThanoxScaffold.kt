@@ -93,6 +93,7 @@ fun ThanoxSmallAppBarScaffold(
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     isFloatingActionButtonDocked: Boolean = false,
     searchBarState: SearchBarState = rememberSearchBarState(),
+    bottomBar: @Composable () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val containerColor = MaterialTheme.colorScheme.surfaceVariant
@@ -115,13 +116,16 @@ fun ThanoxSmallAppBarScaffold(
             floatingActionButtonPosition = floatingActionButtonPosition,
             isFloatingActionButtonDocked = isFloatingActionButtonDocked,
             bottomBar = {
-                // We add a spacer as a bottom bar, which is the same height as
-                // the navigation bar
-                Spacer(
-                    Modifier
-                        .navigationBarsHeight()
-                        .fillMaxWidth()
-                )
+                Column {
+                    bottomBar()
+                    // We add a spacer as a bottom bar, which is the same height as
+                    // the navigation bar
+                    Spacer(
+                        Modifier
+                            .navigationBarsHeight()
+                            .fillMaxWidth()
+                    )
+                }
             }, content = {
                 content(it)
             }

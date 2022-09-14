@@ -63,6 +63,15 @@ data class Alarm(
     val triggerAt: TimeOfADay,
     val repeat: Repeat = Repeat(),
 ) : Parcelable {
+
+    val triggerDateToday: Date
+        get() = android.icu.util.Calendar.getInstance().apply {
+            time = Date()
+            set(android.icu.util.Calendar.HOUR_OF_DAY, triggerAt.hour)
+            set(android.icu.util.Calendar.MINUTE, triggerAt.minutes)
+            set(android.icu.util.Calendar.SECOND, triggerAt.seconds)
+        }.time
+
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readParcelable(TimeOfADay::class.java.classLoader),
@@ -116,6 +125,16 @@ data class Repeat(
             return arrayOfNulls(size)
         }
     }
+
+    fun isRepeatToday(): Boolean {
+        val today = Calendar.getInstance().apply {
+            time = Date()
+        }.get(Calendar.DAY_OF_WEEK)
+
+        return days.firstOrNull {
+            it.toCalendarInt() == today
+        } != null
+    }
 }
 
 enum class WeekDay {
@@ -158,5 +177,44 @@ data class TimeOfADay(
         override fun newArray(size: Int): Array<TimeOfADay?> {
             return arrayOfNulls(size)
         }
+    }
+}
+
+fun Alarm.getTriggerTimeOffset(): Long {
+    val timeMillisOffset = (triggerDateToday.time - System.currentTimeMillis())
+    val nextTriggerDayOfWeekOffset = getNextTriggerDayOfWeekOffset()
+    return timeMillisOffset + (nextTriggerDayOfWeekOffset * 24 * 60 * 60 * 1000)
+}
+
+fun Alarm.getNextTriggerDayOfWeekOffset(): Int {
+    // No repeat
+    if (repeat.isNo) {
+        return 0
+    }
+
+    val todayWeekToday =
+        Calendar.getInstance().apply { time = Date() }.get(Calendar.DAY_OF_WEEK)
+
+    // Today will trigger
+    val hasRepeatToday =
+        repeat.days.firstOrNull { it.toCalendarInt() == todayWeekToday } != null
+    val isCurrentBeforeTodayTriggerTime = System.currentTimeMillis() < triggerDateToday.time
+    if (hasRepeatToday && isCurrentBeforeTodayTriggerTime) {
+        return 0
+    }
+
+    // Today will not, find next day
+    val nextRepeatDay = repeat.days.firstOrNull { it.toCalendarInt() > todayWeekToday }
+    return if (nextRepeatDay != null) {
+        // nextDayOffsetFromToday
+        nextRepeatDay.toCalendarInt() - todayWeekToday
+    } else {
+        // This is last day of repeat, just find the min one.
+        // 1 2 3 4 5 6 7
+        // 5 -> 1 = 3 = 7 - 5 + 1
+        // 3 -> 2 = 6 = 7 - 3 + 2
+        val minRepeatDay = repeat.days.minBy { it.toCalendarInt() }.toCalendarInt()
+        // nextWeekDayOffset
+        7 - todayWeekToday + minRepeatDay
     }
 }

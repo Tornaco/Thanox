@@ -7,19 +7,19 @@
 
     <string name="status_active">已激活</string>
     <string name="status_not_active">未激活</string>
-    <string name="message_active_needed">Thanox支持Xposed和Magisk兩種激活方式（二选一，不可同时使用）。\n\n對於Xposed用戶，在Xposed模塊頁面勾選Thanox即可。\n\n對於Magisk用戶，你可以將下載的Thanox安裝包文件拓展名，由.apk修改為.zip後通過MagiskManager刷入。\n如果你找不到Thanox安裝包，你可以点击设置，关于，补丁状态按钮，導出Magisk模塊的zip包</string>
+    <string name="message_active_needed">Thanox支持Xposed和Magisk兩種激活方式（二選一，不可同時使用）。\n\n對於Xposed用戶，在Xposed模組頁面勾選Thanox即可。\n\n對於Magisk用戶，你可以將下載的Thanox安裝包副檔名，由.apk修改為.zip後通過MagiskManager刷入。\n如果你找不到Thanox安裝包，你可以點擊設置，關於，補丁狀態按鈕，匯出Magisk模組的zip包</string>
     <string name="status_need_reboot">請重啟</string>
     <string name="title_framework_error">核心初始化錯誤</string>
-    <string name="message_framework_error">Thanox遇到兼容性錯誤，可能會影響某些功能，請把/data/system/thanos_xxx/log下面的日誌反饋給開發者</string>
+    <string name="message_framework_error">Thanox遇到相容性錯誤，可能會影響某些功能，請把/data/system/thanos_xxx/log下面的日誌反饋給開發者</string>
 
-    <string name="title_multiple_patch_applied_error">應用了多個補丁</string>
+    <string name="title_multiple_patch_applied_error">套用了多個補丁</string>
     <string name="message_multiple_patch_applied_error">Thanox激活只需要採用一種補丁，而你同時採用了多個補丁: %s，這會導致一些額外的使用故障，請務必參閱使用指南</string>
 
     <string name="nav_title_boost">加速</string>
     <string name="nav_title_secure">隱私</string>
     <string name="nav_title_settings">設置</string>
     <string name="nav_title_feedback">反饋</string>
-    <string name="nav_title_exp">拓展</string>
+    <string name="nav_title_exp">擴展</string>
     <string name="nav_title_plugin">插件</string>
     <string name="nav_title_plugin_repo">插件倉庫</string>
     <string name="nav_title_thanox">Thanox</string>
@@ -28,65 +28,65 @@
     <string name="priv_title_fields_usage_count">%s個應用使用該模板</string>
     <string name="priv_title_fields_usage_count_noop">未使用</string>
 
-    <string name="title_package_sets">应用集</string>
-    <string name="title_package_add_set">创建应用集</string>
-    <string name="title_package_edit_set">查看或编辑</string>
-    <string name="title_package_delete_set">删除</string>
-    <string name="title_package_count_set">包含%s个应用</string>
+    <string name="title_package_sets">應用集</string>
+    <string name="title_package_add_set">建立應用集</string>
+    <string name="title_package_edit_set">檢視或編輯</string>
+    <string name="title_package_delete_set">刪除</string>
+    <string name="title_package_count_set">包含%s個應用</string>
 
     <string name="card_title_plugin_available">安裝Thanox插件</string>
     <string name="card_message_plugin_available">插件主要承載一些不穩定或非關鍵功能。</string>
 
     <string name="tile_category_plugin_installed">已安裝</string>
-    <string name="tile_category_plugin_already_installed">该插件无法被覆盖安装，请卸载现有版本后重新安装</string>
+    <string name="tile_category_plugin_already_installed">該插件無法被覆蓋安裝，請移除現有版本後重新安裝</string>
     <string name="tile_category_plugin_update_available">可更新</string>
 
     <string name="tile_su_plugin_deprecated">su Enabler 插件已經被廢棄，現在你不需要安裝su插件了。你可以在情景模式的引擎設置中直接開啟su API支持</string>
 
     <string name="dialog_title_plugin_installing">正在安裝插件</string>
     <string name="dialog_title_plugin_updating">正在更新插件</string>
-    <string name="dialog_title_plugin_uninstalling">正在卸載插件</string>
-    <string name="dialog_title_plugin_uninstall_confirm">確定卸載該插件？</string>
-    <string name="menu_title_uninstall_plugin">卸載插件</string>
-    <string name="menu_title_view_plugin_info">詳細信息</string>
+    <string name="dialog_title_plugin_uninstalling">正在移除插件</string>
+    <string name="dialog_title_plugin_uninstall_confirm">確定移除該插件？</string>
+    <string name="menu_title_uninstall_plugin">移除插件</string>
+    <string name="menu_title_view_plugin_info">詳細訊息</string>
 
     <string name="title_download">下載</string>
     <string name="title_install">安裝</string>
 
-    <string name="dialog_message_feedback">請在聊天軟件群組或者前往github/tornaco/Thanox新建issue進行反饋。\n\n<b>反饋問題請務必提供下列信息：</b>\n\n1. 問題描述：xxxx  \n2. 對於這個問題我做了什麼嘗試，例如（如果反饋的是智能休眠不work）我嘗試看了使用說明，打開了系統設置中的xxx。 \n3. 發生問題的Thanox app版本，系統的Android版本。\n4. 查找：/data/system/thanos/logging下的日誌。</string>
+    <string name="dialog_message_feedback">請在聊天軟體群組或者前往github/tornaco/Thanox新增issue進行反饋。\n\n<b>反饋問題請務必提供下列訊息：</b>\n\n1. 問題描述：xxxx  \n2. 對於這個問題我做了什麼嘗試，例如（如果反饋的是智能休眠不work）我嘗試看了使用說明，開啟了系統設置中的xxx。 \n3. 發生問題的Thanox app版本，系統的Android版本。\n4. 尋找：/data/system/thanos/logging下的日誌。</string>
 
     <string name="title_no_plugins_installed">暫無插件可用</string>
     <string name="title_plugin_reboot_take_effect">重啟生效</string>
 
-    <string name="title_show_current_activity">當前活動</string>
-    <string name="title_net_stats">流量详情</string>
+    <string name="title_show_current_activity">目前活動</string>
+    <string name="title_net_stats">流量詳情</string>
     <string name="message_reboot_needed">核心已更新，需重啟系統</string>
     <string name="reboot_now">立即重啟</string>
     <string name="reboot_later">稍後重啟</string>
 
-    <string name="badge_app_running">運行</string>
+    <string name="badge_app_running">執行</string>
     <string name="badge_app_idle">休眠</string>
 
-    <string name="boost_status_running_apps">個應用正在運行</string>
+    <string name="boost_status_running_apps">個應用正在執行</string>
     <string name="boost_status_blocked_start_count">已阻止%s次應用啟動請求</string>
-    <string name="boost_status_mem_usage_percent">物理內存  %s</string>
-    <string name="boost_status_swap_usage_percent">虛擬內存  %s</string>
+    <string name="boost_status_mem_usage_percent">物理記憶體  %s</string>
+    <string name="boost_status_swap_usage_percent">虛擬記憶體  %s</string>
     <string name="boost_status_available">可用 %s</string>
     <string name="boost_status_not_enabled">未開啟</string>
 
     <string name="secure_privacy_enabled_apps">個應用受限</string>
-    <string name="secure_privacy_request_count">已處理%s次身份信息請求</string>
+    <string name="secure_privacy_request_count">已處理%s次身份訊息請求</string>
 
-    <string name="boost_status_system_memory">內存</string>
-    <string name="boost_status_system_storage">存儲空間</string>
+    <string name="boost_status_system_memory">記憶體</string>
+    <string name="boost_status_system_storage">儲存空間</string>
 
     <string name="feature_category_start_manage">啟動</string>
     <string name="feature_title_one_key_boost">一鍵加速</string>
     <string name="feature_title_start_restrict">後台啟動</string>
-    <string name="feature_desc_start_restrict">允許選中的應用自啟動、關聯啟動</string>
-    <string name="feature_title_bg_restrict">後台運行</string>
-    <string name="feature_desc_bg_restrict">\"後台運行\"開關打開後，Thanox會在屏幕熄滅後進行一次進程清理；勾選的應用鎖屏後會繼續運行，也就是說鎖屏清理時不清理這些應用，另外在執行一鍵加速（一鍵加速就是清理下面這些沒勾選的應用的後台）時，保留這些應用</string>
-    <string name="feature_desc_bg_restrict_brief">允許應用後台運行</string>
+    <string name="feature_desc_start_restrict">允許選取的應用自啟動、關聯啟動</string>
+    <string name="feature_title_bg_restrict">後台執行</string>
+    <string name="feature_desc_bg_restrict">\"後台執行\"開關開啟後，Thanox會在螢幕熄滅後進行一次處理程序清理；勾選的應用螢幕鎖定後會繼續執行，也就是說螢幕鎖定清理時不清理這些應用，另外在執行一鍵加速（一鍵加速就是清理下面這些沒勾選的應用的後台）時，保留這些應用</string>
+    <string name="feature_desc_bg_restrict_brief">允許應用後台執行</string>
 
     <string name="menu_title_start_restrict_charts">啟動記錄</string>
     <string name="menu_title_rules">規則</string>
@@ -96,33 +96,33 @@
 
     <string name="feature_category_app_clean_up">清理</string>
     <string name="feature_title_clean_when_task_removed">任務清理</string>
-    <string name="feature_desc_clean_when_task_removed">對選中的應用生效，清除最近任務後同時清理應用後台</string>
+    <string name="feature_desc_clean_when_task_removed">對選取的應用生效，清除最近任務後同時清理應用後台</string>
     <string name="feature_desc_clean_when_task_removed_brief">清除最近任務後同時清理應用後台</string>
 
     <string name="activity_title_start_restrict">後台啟動</string>
-    <string name="activity_title_bg_restrict">後台運行</string>
+    <string name="activity_title_bg_restrict">後台執行</string>
     <string name="activity_title_clean_when_task_removed">任務清理</string>
 
-    <string name="feature_title_process_manage">進程管理</string>
-    <string name="activity_title_process_manage">運行中（%s）</string>
-    <string name="item_summary_process_count">%s個進程</string>
+    <string name="feature_title_process_manage">處理程序管理</string>
+    <string name="activity_title_process_manage">執行中（%s）</string>
+    <string name="item_summary_process_count">%s個處理程序</string>
     <string name="item_summary_mem_size">%s</string>
-    <string name="snack_process_update_message">正在運行的應用信息可更新</string>
-    <string name="snack_process_update_refresh">刷新</string>
-    <string name="title_cached_background_process">緩存的後台進程</string>
+    <string name="snack_process_update_message">正在執行的應用訊息可更新</string>
+    <string name="snack_process_update_refresh">重新整理</string>
+    <string name="title_cached_background_process">緩衝的後台處理程序</string>
 
     <string name="feature_category_app_manage">應用</string>
     <string name="feature_title_apps_manager">應用管理</string>
     <string name="activity_title_apps_manager">應用管理</string>
     <string name="feature_summary_apps_manager">應用的單獨配置與管理</string>
-    <string name="titile_suggested_apps_recent_used">最近打開的應用</string>
-    <string name="title_suggested_apps_view_all">查看全部%s个應用</string>
+    <string name="titile_suggested_apps_recent_used">最近開啟的應用</string>
+    <string name="title_suggested_apps_view_all">檢視全部%s個應用</string>
 
     <string name="feature_category_privacy">隱私</string>
     <string name="feature_category_manage">管理</string>
-    <string name="feature_category_protect">保护</string>
+    <string name="feature_category_protect">保護</string>
     <string name="feature_category_remind">提醒</string>
-    <string name="feature_category_misc">杂项</string>
+    <string name="feature_category_misc">雜項</string>
 
     <string name="feature_title_recent_task_blur">卡片模糊</string>
     <string name="feature_summary_recent_task_blur">給最近任務卡片加上模糊效果</string>
@@ -130,19 +130,19 @@
     <string name="feature_title_wakelock_blocker">喚醒鎖攔截</string>
     <string name="wakelock_state_holding">持有中</string>
     <string name="wakelock_view_held_only">只看持有中</string>
-    <string name="wakelock_count">%s个喚醒鎖</string>
+    <string name="wakelock_count">%s個喚醒鎖</string>
 
     <string name="feature_title_app_lock">應用鎖</string>
     <string name="feature_summary_app_lock">使用密碼鎖定應用界面</string>
 
     <string name="feature_category_notification">通知</string>
     <string name="feature_title_light_on_notification">通知亮屏</string>
-    <string name="feature_summary_light_on_notification">收到通知點亮屏幕</string>
+    <string name="feature_summary_light_on_notification">收到通知點亮螢幕</string>
     <string name="feature_title_push_delegate">消息代收</string>
 
     <string name="feature_category_plugins">可用功能</string>
 
-    <string name="feature_category_ext">拓展</string>
+    <string name="feature_category_ext">擴展</string>
     <string name="feature_category_power_save">電源</string>
     <string name="feature_title_smart_app_standby">乖巧模式</string>
     <string name="feature_summary_smart_app_standby">對勾選的應用生效，應用回到後台自動停止所有服務或者使其處於待機狀態；如需設置例外服務，請使用規則</string>
@@ -154,33 +154,33 @@
     <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">將智能凍結的應用全部解凍，並從智能凍結列表中移除，你確定要這樣做嗎？</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp">全部臨時解凍列表中的應用</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">將智能凍結列表中的應用全部臨時解凍，你確定要這樣做嗎？</string>
-    <string name="menu_title_smart_app_freeze_enable_all_apps">解凍所有应用</string>
-    <string name="menu_title_smart_app_freeze_export_package_list">导出应用列表</string>
-    <string name="menu_title_smart_app_freeze_import_package_list">导入应用列表</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps">解凍所有應用</string>
+    <string name="menu_title_smart_app_freeze_export_package_list">匯出應用列表</string>
+    <string name="menu_title_smart_app_freeze_import_package_list">匯入應用列表</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps">將會解凍你的系統中所有被凍結或掛起的應用，包含所有已安裝或系統應用，你確定要這樣做嗎？</string>
     <string name="feature_summary_smart_app_freeze">把不常用的應用凍結起來</string>
     <string name="feature_title_enable_package_on_launch">活檢解凍（DOL）</string>
     <string name="feature_summary_enable_package_on_launch">應用被智能凍結後，當檢測到該應用的活動啟動請求，Thanox會自動解凍該應用</string>
-    <string name="pref_title_enable_package_on_launch_by_default">自動打開\"活檢解凍\"</string>
+    <string name="pref_title_enable_package_on_launch_by_default">自動開啟\"活檢解凍\"</string>
     <string name="pref_title_dol_tips">DOL提示</string>
     <string name="pref_summary_enable_package_on_launch_by_default">當某個應用被加入智能凍結列表時，自動為這個應用開啟\"活檢解凍\"開關</string>
-    <string name="feature_desc_smart_app_freeze">注意，凍結應用使用了Android系統的能力，意味著這些狀態會跟隨系統持久化，即使你卸載了Thanox，這些狀態將依然會保留</string>
-    <string name="menu_title_create_shortcut">創建啟動快捷方式</string>
-    <string name="menu_title_create_shortcut_apk">生成代理應用</string>
+    <string name="feature_desc_smart_app_freeze">注意，凍結應用使用了Android系統的能力，意味著這些狀態會跟隨系統持久化，即使你移除了Thanox，這些狀態將依然會保留</string>
+    <string name="menu_title_create_shortcut">建立啟動快捷方式</string>
+    <string name="menu_title_create_shortcut_apk">產生代理應用</string>
     <string name="menu_title_broadcast_intent_shortcut">廣播意圖</string>
     <string name="menu_title_activity_intent_shortcut">活動意圖</string>
-    <string name="dialog_message_create_shortcut_apk">生成一個專門用於啟動該凍結應用的綠色Android app，生成的應用將只包含一個Activity，大約30K。你可以安裝代理應用來解決桌面沒有凍結應用圖標問題。</string>
+    <string name="dialog_message_create_shortcut_apk">產生一個專門用於啟動該凍結應用的綠色Android app，產生的應用將只包含一個Activity，大約30K。你可以安裝代理應用來解決桌面沒有凍結應用圖示問題。</string>
 
     <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">開啟自適應電池</string>
     <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">
-        Android 9+設備使用智能休眠需要開啟系統設置中的電池-自適應電池選項才能正常工作。\n\nThanox當前無法準確判斷你的系統是否支持並開啟了該選項。
+        Android 9+設備使用智能休眠需要開啟系統設置中的電池-自適應電池選項才能正常工作。\n\nThanox目前無法準確判斷你的系統是否支持並開啟了該選項。
     </string>
-    <string name="message_do_you_want_to_add_apps_to_pkg_set">還要將這些應用程序添加到當前的應用集中嗎？</string>
+    <string name="message_do_you_want_to_add_apps_to_pkg_set">還要將這些應用程式添加到目前的應用集中嗎？</string>
 
-    <string name="feature_title_infinite_z">双开</string>
-    <string name="feature_message_infinite_z_enable">多開基於Android多用戶機制實現，開啟多開功能需要創建一個用戶的Profile，通常桌面會顯示一個“工作”頁簽。 \n該功能目前處於實驗階段，尚不穩定。 \n\n你是否要開啟？</string>
+    <string name="feature_title_infinite_z">雙開</string>
+    <string name="feature_message_infinite_z_enable">多開基於Android多用戶機制實現，開啟多開功能需要建立一個用戶的Profile，通常桌面會顯示一個「工作」頁簽。 \n該功能目前處於實驗階段，尚不穩定。 \n\n你是否要開啟？</string>
     <string name="feature_message_infinite_z_disable">關閉分身功能會刪除分身用戶的所有數據，不可恢復，你確定要關閉分身功能嗎？</string>
-    <string name="feature_message_infinite_z_uninstall">你確定要卸載<b>%s</b>嗎？該雙開應用的數據將會被刪除且無法恢復</string>
+    <string name="feature_message_infinite_z_uninstall">你確定要移除<b>%s</b>嗎？該雙開應用的數據將會被刪除且無法恢復</string>
 
     <string name="menu_title_copy">複製</string>
 
@@ -189,37 +189,37 @@
     <string name="menu_title_launch_system_settings">系統設置</string>
 
     <string name="feature_title_data_cheat">隱匿</string>
-    <string name="feature_desc_data_cheat">對勾選的應用生效，隱藏手機號，SIM序列等敏感信息。需要為應用開啟Xposed作用域才能生效</string>
+    <string name="feature_desc_data_cheat">對勾選的應用生效，隱藏手機號，SIM序列等敏感訊息。需要為應用開啟Xposed作用域才能生效</string>
     <string name="activity_title_data_cheat">隱匿</string>
     <string name="feature_summary_pkg_data_cheat">身份隱藏</string>
 
     <string name="title_allow">允許</string>
     <string name="title_block">禁止</string>
 
-    <string name="menu_start_manage_info">幫助信息</string>
+    <string name="menu_start_manage_info">幫助訊息</string>
     <string name="info_title_start_restrict">提示</string>
     <string name="info_message_start_restrict">阻止應用自啟動，關聯啟動</string>
     <string name="info_title_bg_restrict">提示</string>
-    <string name="info_message_bg_restrict">屏幕鎖定後，禁止的應用會被清理</string>
+    <string name="info_message_bg_restrict">螢幕鎖定後，禁止的應用會被清理</string>
 
     <string name="pre_category_ui">外觀</string>
-    <string name="pre_title_ui">主題與圖標</string>
+    <string name="pre_title_ui">主題與圖示</string>
     <string name="pre_title_app_theme">主題</string>
-    <string name="pre_title_app_icon_pack">圖標包</string>
-    <string name="pre_title_app_icon_crop_to_circle">圓形圖標</string>
+    <string name="pre_title_app_icon_pack">圖示包</string>
+    <string name="pre_title_app_icon_crop_to_circle">圓形圖示</string>
     <string name="pre_category_strategy">策略</string>
     <string name="pre_title_strategy">配置與模板</string>
     <string name="pre_category_profile">情景</string>
     <string name="pre_category_data">數據</string>
     <string name="pre_title_data">備份與恢復</string>
     <string name="pre_category_about">關於</string>
-    <string name="pre_title_about">Thanox信息</string>
+    <string name="pre_title_about">Thanox訊息</string>
     <string name="pre_title_developer">開發者與極客選項</string>
     <string name="pre_title_power">省電相關</string>
     <string name="pre_category_power">電池</string>
     <string name="pre_category_dev_tools">開發者</string>
 
-    <string name="pre_category_app_feature_info">應用信息</string>
+    <string name="pre_category_app_feature_info">應用訊息</string>
     <string name="pre_category_app_feature_config">配置項</string>
     <string name="pre_category_app_disable_enable">凍結</string>
 
@@ -231,12 +231,12 @@
 
     <string name="pref_title_enable_logging">開啟日誌</string>
     <string name="pref_summary_enable_logging">你可以從控制台或者劫持框架中獲取到輸出的日誌內容</string>
-    <string name="pref_title_show_current_activity">顯示當前活動</string>
+    <string name="pref_title_show_current_activity">顯示目前活動</string>
     <string name="pref_title_enable_global_white_list">全局白名單</string>
-    <string name="pref_summary_enable_global_white_list">注意，該設置為危險設置項，經驗不夠豐富的同學請不要輕易嘗試關閉此開關。\n為防止誤操作導致系統發生致命錯誤，Thanox默認維護一個全局白名單，包含系統的一部分組件、電話、媒體等核心應用。\n如果你強烈希望不啟用這個名單，請關閉這個開關。</string>
-    <string name="pref_title_build_info_app">應用信息</string>
-    <string name="pref_title_build_info_server">核心信息</string>
-    <string name="pref_title_patch_info">补丁状态</string>
+    <string name="pref_summary_enable_global_white_list">注意，該設置為危險設置項，經驗不夠豐富的同學請不要輕易嘗試關閉此開關。\n為防止誤操作導致系統發生致命錯誤，Thanox預設維護一個全局白名單，包含系統的一部分組件、電話、媒體等核心應用。\n如果你強烈希望不啟用這個名單，請關閉這個開關。</string>
+    <string name="pref_title_build_info_app">應用訊息</string>
+    <string name="pref_title_build_info_server">核心訊息</string>
+    <string name="pref_title_patch_info">補丁狀態</string>
     <string name="pre_title_ignore_system_app">排除系統應用</string>
     <string name="pre_summary_ignore_system_app">在功能列表中不展示系統應用，這些系統應用也不會被干涉</string>
     <string name="pref_title_enable_power_save">盡力省電</string>
@@ -248,11 +248,11 @@
 
     <string name="pref_title_open_source_license">開放源代碼許可</string>
 
-    <string name="pref_title_icon_maker_remix_icon">圖標提供者</string>
-    <string name="pref_summary_icon_maker_remix_icon">Remix Design © 2018 https://remixicon.com</string>
+    <string name="pref_title_icon_maker_remix_icon">圖示提供者</string>
+    <string name="pref_summary_icon_maker_remix_icon">Remix Design c 2018 https://remixicon.com</string>
 
     <string name="pref_title_rss_e">群組</string>
-    <string name="pref_summary_rss_e">加入TG或QQ群组</string>
+    <string name="pref_summary_rss_e">加入Telegram或QQ群組</string>
 
     <string name="pref_title_app_state_enabled">應用已啟用</string>
     <string name="pref_title_app_to_disable">凍結</string>
@@ -260,11 +260,11 @@
     <string name="pref_title_app_to_enable">解凍</string>
 
     <string name="pre_title_backup">備份</string>
-    <string name="pre_summary_backup">備份Thanox設置到外置存儲中</string>
+    <string name="pre_summary_backup">備份Thanox設置到外部儲存中</string>
     <string name="pre_title_restore">恢復</string>
     <string name="pre_sumary_restore">選擇一個備份包以恢復Thanox設置。如果恢復失敗，請嘗試手動把/data/system/thanos刪除後重試，或者嘗試將/data/system/thanos目錄的owner改成1000</string>
-    <string name="pre_title_restore_default">恢復默認</string>
-    <string name="pre_summary_restore_default">恢復Thanox默認配置</string>
+    <string name="pre_title_restore_default">恢復預設</string>
+    <string name="pre_summary_restore_default">恢復Thanox預設配置</string>
 
     <string name="pref_title_new_installed_apps_config_enabled">啟用自動配置</string>
     <string name="pref_summary_new_installed_apps_config_enabled">為新安裝的App自動使用模板配置</string>
@@ -272,10 +272,10 @@
     <string name="pref_summary_new_installed_apps_config">設置自動應用的模板</string>
 
     <string name="pref_title_config_template_category">配置模板</string>
-    <string name="pref_action_create_new_config_template">創建模板</string>
-    <string name="pref_action_edit_or_view_config_template">查看&amp;編輯</string>
+    <string name="pref_action_create_new_config_template">建立模板</string>
+    <string name="pref_action_edit_or_view_config_template">檢視&amp;編輯</string>
     <string name="pref_action_delete_config_template">刪除</string>
-    <string name="pref_action_apply_config_template">应用模板配置</string>
+    <string name="pref_action_apply_config_template">套用模板配置</string>
 
     <string name="pre_message_restore_success">恢復成功，請盡快重啟設備以生效</string>
     <string name="pre_message_backup_success">備份成功</string>
@@ -285,28 +285,28 @@
     <string name="pre_cheat_field_category_others">其他</string>
     <string name="pre_title_cheat_sim_serial">SIM系列號</string>
 
-    <string name="pre_title_cheat_sim_country_iso">SIM国家码</string>
-    <string name="pre_title_cheat_net_country_iso">网络国家码</string>
+    <string name="pre_title_cheat_sim_country_iso">SIM國家碼</string>
+    <string name="pre_title_cheat_net_country_iso">網路國家碼</string>
 
-    <string name="pre_title_cheat_net_op_1">网络运营商（卡一）</string>
-    <string name="pre_title_cheat_net_op_2">网络运营商（卡二）</string>
-    <string name="pre_title_cheat_net_op_3">网络运营商（卡三）</string>
-    <string name="pre_title_cheat_net_op_name_1">网络运营商名称（卡一）</string>
-    <string name="pre_title_cheat_net_op_name_2">网络运营商名称（卡二）</string>
-    <string name="pre_title_cheat_net_op_name_3">网络运营商名称（卡三）</string>
+    <string name="pre_title_cheat_net_op_1">網路運營商（卡一）</string>
+    <string name="pre_title_cheat_net_op_2">網路運營商（卡二）</string>
+    <string name="pre_title_cheat_net_op_3">網路運營商（卡三）</string>
+    <string name="pre_title_cheat_net_op_name_1">網路運營商名稱（卡一）</string>
+    <string name="pre_title_cheat_net_op_name_2">網路運營商名稱（卡二）</string>
+    <string name="pre_title_cheat_net_op_name_3">網路運營商名稱（卡三）</string>
 
-    <string name="pre_title_cheat_sim_op_1">SIM运营商（卡一）</string>
-    <string name="pre_title_cheat_sim_op_2">SIM运营商（卡二）</string>
-    <string name="pre_title_cheat_sim_op_3">SIM运营商（卡三）</string>
-    <string name="pre_title_cheat_sim_op_name_1">SIM运营商名称（卡一）</string>
-    <string name="pre_title_cheat_sim_op_name_2">SIM运营商名称（卡二）</string>
-    <string name="pre_title_cheat_sim_op_name_3">SIM运营商名称（卡三）</string>
+    <string name="pre_title_cheat_sim_op_1">SIM運營商（卡一）</string>
+    <string name="pre_title_cheat_sim_op_2">SIM運營商（卡二）</string>
+    <string name="pre_title_cheat_sim_op_3">SIM運營商（卡三）</string>
+    <string name="pre_title_cheat_sim_op_name_1">SIM運營商名稱（卡一）</string>
+    <string name="pre_title_cheat_sim_op_name_2">SIM運營商名稱（卡二）</string>
+    <string name="pre_title_cheat_sim_op_name_3">SIM運營商名稱（卡三）</string>
 
-    <string name="pre_title_cheat_net_op_name">网络运营商名称（所有卡）</string>
-    <string name="pre_title_cheat_net_op">网络运营商（所有卡）</string>
+    <string name="pre_title_cheat_net_op_name">網路運營商名稱（所有卡）</string>
+    <string name="pre_title_cheat_net_op">網路運營商（所有卡）</string>
 
-    <string name="pre_title_cheat_sim_op_name">SIM运营商名称（所有卡）</string>
-    <string name="pre_title_cheat_sim_op">SIM运营商（所有卡）</string>
+    <string name="pre_title_cheat_sim_op_name">SIM運營商名稱（所有卡）</string>
+    <string name="pre_title_cheat_sim_op">SIM運營商（所有卡）</string>
 
     <string name="pre_title_cheat_line_one_num">電話號碼</string>
     <string name="pre_title_cheat_device_id">設備ID（舊版接口）</string>
@@ -320,19 +320,19 @@
     <string name="pre_title_cheat_meid_slot2">MEID（卡二）</string>
     <string name="pre_title_cheat_meid_slot3">MEID（卡三）</string>
 
-    <string name="pre_title_cheat_not_set">未指定，該變量不會被欺騙</string>
+    <string name="pre_title_cheat_not_set">未指定，該變數不會被欺騙</string>
     <string name="pre_title_cheat_installed_apps">隱藏已安裝應用</string>
     <string name="pre_title_cheat_show_cheated_apps_notifications">顯示隱匿通知</string>
 
-    <string name="pre_title_bg_screen_off_clean_up_delay">鎖屏清理延時</string>
+    <string name="pre_title_bg_screen_off_clean_up_delay">螢幕鎖定清理延時</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_audio">不清理音頻</string>
     <string name="pre_summary_bg_screen_off_clean_up_skip_audio">正在播放音頻的App不會被清理</string>
 
-    <string name="cheat_field_auto_gen">全部随机填充</string>
+    <string name="cheat_field_auto_gen">全部隨機補充</string>
 
     <string name="pre_title_exclude_recent_task">最近任務</string>
     <string name="pre_summary_exclude_recent_task">設置強制顯示到最近任務或者強制從最近任務中隱藏</string>
-    <string name="pre_entry_exclude_recent_task_default">默認</string>
+    <string name="pre_entry_exclude_recent_task_default">預設</string>
     <string name="pre_entry_exclude_recent_task_include">強制顯示</string>
     <string name="pre_entry_exclude_recent_task_exclude">強制隱藏</string>
 
@@ -340,9 +340,9 @@
     <string name="pre_summary_force_dialog_cancelable">強制讓該應用的原生彈出對話框可以取消，需要為該應用開啟Xposed作用域才能生效</string>
 
     <string name="pre_title_redaction_notification">通知編輯</string>
-    <string name="pre_summary_redaction_notification">使用自定義標題和文本覆蓋應用程序通知</string>
+    <string name="pre_summary_redaction_notification">使用自定義標題和文字覆蓋應用程式通知</string>
     <string name="pre_title_redaction_notification_title">標題</string>
-    <string name="pre_title_redaction_notification_text">文本</string>
+    <string name="pre_title_redaction_notification_text">文字</string>
 
     <string name="pre_title_bg_screen_off_clean_up_skip_notification">不清理有通知應用</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">不清理最近任務裡的應用</string>
@@ -355,7 +355,7 @@
 
     <string name="badge_trying_app">免費試用</string>
     <string name="badge_paid_app">已購買</string>
-    <string name="badge_framework_err">不兼容</string>
+    <string name="badge_framework_err">不相容</string>
     <string name="badge_power_save_off">耗電</string>
 
     <string name="title_remember">不再提醒</string>
@@ -364,77 +364,77 @@
 
     <string name="menu_title_feature_desc">功能介紹</string>
     <string name="menu_title_start_restrict_charts_reset">重置</string>
-    <string name="menu_title_start_restrict_charts_view_detailed_records">查看詳細記錄</string>
-    <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">只看當前應用</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records">檢視詳細記錄</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">只看目前應用</string>
     <string name="pre_category_general">通用</string>
 
     <string name="pre_category_summary_smart_freeze">針對智能凍結app，Thanox會在其結束進行或者任務被移除時將其凍結\n每次設備重新啟動或者執行一鍵清理時，Thanox會做一次整理，將應用全部凍結\n你也可以選擇啟用下面的附加策略，或者使用情景模式的 <b>pkg</b> API來觸發凍結操作！</string>
 
-    <string name="pre_category_summary_smart_standby">應用回到後台通常可能會有一些服務，進程保持活躍，這些服務或進程都有自己的使命，但遺憾的是我們用戶可能無法準確的知道這些服務和進程的具體作用。\n\n你可以選擇下面的干涉方式，對回到後台的應用做相應的操作，值得一提的是如果我們干涉了某個應用，它可能無法正確工作。</string>
+    <string name="pre_category_summary_smart_standby">應用回到後台通常可能會有一些服務，處理程序保持活躍，這些服務或處理程序都有自己的使命，但遺憾的是我們用戶可能無法準確的知道這些服務和處理程序的具體作用。\n\n你可以選擇下面的干涉方式，對回到後台的應用做相應的操作，值得一提的是如果我們干涉了某個應用，它可能無法正確工作。</string>
     <string name="pre_title_smart_standby_stop_service">停止服務</string>
     <string name="pre_summary_smart_standby_stop_service">這會嘗試停止它不在KEEP規則清單裡的所有服務</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">跳過有通知的</string>
     <string name="pre_summary_smart_standby_bypass_if_has_n">不干涉有通知的應用</string>
     <string name="pre_title_smart_standby_set_inactive">休眠應用</string>
-    <string name="pre_summary_smart_standby_set_inactive">嘗試設置應用為idle狀態，基於Android默認的app standby機制實現</string>
+    <string name="pre_summary_smart_standby_set_inactive">嘗試設置應用為idle狀態，基於Android預設的app standby機制實現</string>
     <string name="pre_title_smart_standby_block_bg_service_start">阻止後台服務重啟</string>
-    <string name="pre_summary_smart_standby_block_bg_service_start">應用的服務被停止以後，很有可能還會觸發再次啟動，打開這個開關可以阻止回到後台被停止的服務重啟。需要注意，這些阻止事件也會出現在後台啟動界面的阻止記錄中</string>
+    <string name="pre_summary_smart_standby_block_bg_service_start">應用的服務被停止以後，很有可能還會觸發再次啟動，開啟這個開關可以阻止回到後台被停止的服務重啟。需要注意，這些阻止事件也會出現在後台啟動界面的阻止記錄中</string>
 
-    <string name="pre_title_smart_freeze_screen_off_clean_up_delay">鎖屏後整理</string>
-    <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">鎖屏後凍結列表中的全部應用</string>
-    <string name="pre_title_smart_freeze_screen_off_clean_up">鎖屏後整理延時</string>
+    <string name="pre_title_smart_freeze_screen_off_clean_up_delay">螢幕鎖定後整理</string>
+    <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">螢幕鎖定後凍結列表中的全部應用</string>
+    <string name="pre_title_smart_freeze_screen_off_clean_up">螢幕鎖定後整理延時</string>
 
     <string name="pre_title_smart_freeze_hide_package_change_event">不在桌面顯示</string>
-    <string name="pre_summary_smart_freeze_hide_package_change_event">打開這個開關後，Thanox會攔截該應用的包啟用事件，這樣一來，桌面應用就不會感知到應用的啟用，達到隱藏應用的效果</string>
+    <string name="pre_summary_smart_freeze_hide_package_change_event">開啟這個開關後，Thanox會攔截該應用的包啟用事件，這樣一來，桌面應用就不會感知到應用的啟用，達到隱藏應用的效果</string>
 
 
     <string name="pre_title_smart_freeze_with_suspend">掛起應用</string>
-    <string name="pre_summary_smart_freeze_with_suspend">默認情況下我們使用禁用應用來凍結app，如果你打開這個開關，我們將會使用掛起app來達到凍結app的目的；稍微有些區別，掛起的應用桌面上仍然會保留一個圖標</string>
+    <string name="pre_summary_smart_freeze_with_suspend">預設情況下我們使用禁用應用來凍結app，如果你開啟這個開關，我們將會使用掛起app來達到凍結app的目的；稍微有些區別，掛起的應用桌面上仍然會保留一個圖示</string>
 
     <string name="title_stub_apk_app_name">應用名稱</string>
     <string name="title_stub_apk_app_version_code">版本號</string>
     <string name="title_stub_apk_app_version_name">版本名稱</string>
 
-    <string name="export_patch_title">導出補丁</string>
-    <string name="export_patch_message">Thanox支持Xposed和Magisk兩種激活方式。\n\n對於Xposed用戶，在Xposed模塊頁面勾選Thanox即可。\n\n對於Magisk用戶，你可以將下載的Thanox安裝包文件拓展名，由.apk修改為.zip後通過MagiskManager刷入。\n如果你找不到Thanox安裝包，你可以點擊下面導出按鈕，導出Magisk模塊的zip包</string>
-    <string name="export_patch_export_magisk">導出</string>
+    <string name="export_patch_title">匯出補丁</string>
+    <string name="export_patch_message">Thanox支持Xposed和Magisk兩種激活方式。\n\n對於Xposed用戶，在Xposed模組頁面勾選Thanox即可。\n\n對於Magisk用戶，你可以將下載的Thanox安裝包副檔名，由.apk修改為.zip後通過MagiskManager刷入。\n如果你找不到Thanox安裝包，你可以點擊下面匯出按鈕，匯出Magisk模組的zip包</string>
+    <string name="export_patch_export_magisk">匯出</string>
 
-    <string name="onboarding_text_complete">那就开始吧</string>
-    <string name="onboarding_next">继续</string>
-    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_text_complete">那就開始吧</string>
+    <string name="onboarding_next">繼續</string>
+    <string name="onboarding_skip">跳過</string>
     <string name="onboarding_xposed_tips_title">Xposed模式</string>
-    <string name="onboarding_xposed_tips_desc">1. 在Xposed管理器中勾选Thanox \n2. 重启设备 \n3. 记住一件事，每次更新Thanox之后都要在Xposed管理器中重新勾选之后再重启</string>
+    <string name="onboarding_xposed_tips_desc">1. 在Xposed管理器中勾選Thanox \n2. 重啟設備 \n3. 記住一件事，每次更新Thanox之後都要在Xposed管理器中重新勾選之後再重啟</string>
 
-    <string name="onboarding_magisk_tips_title">Magisk模式（实验性）</string>
-    <string name="onboarding_magisk_tips_desc">1. Thanox apk同时也是Magisk模块，只需要重命名为zip即可 \n2. 另外你也可以在设置-关于-补丁状态中导出Magisk模块 \n3. 记住一件事，每次更新Thanox后，请同时更新magisk模块并重启</string>
+    <string name="onboarding_magisk_tips_title">Magisk模式（實驗性）</string>
+    <string name="onboarding_magisk_tips_desc">1. Thanox apk同時也是Magisk模組，只需要重新命名為zip即可 \n2. 另外你也可以在設置-關於-補丁狀態中匯出Magisk模組 \n3. 記住一件事，每次更新Thanox後，請同時更新magisk模組並重啟</string>
 
     <string name="onboarding_github_tips_title">保持更新</string>
-    <string name="onboarding_github_tips_desc">你可以在Github/Thanox上追踪我们发布的预测试版本</string>
+    <string name="onboarding_github_tips_desc">你可以在Github/Thanox上追蹤我們發佈的預測試版本</string>
 
-    <string name="onboarding_mode_tips_title">两种激活模式</string>
-    <string name="onboarding_mode_tips_desc">Thanox目前支持Xposed补丁或Magisk补丁（实验性，支持Android11+）两种激活方式；你可以任选其中一种进行探索。</string>
+    <string name="onboarding_mode_tips_title">兩種激活模式</string>
+    <string name="onboarding_mode_tips_desc">Thanox目前支持Xposed補丁或Magisk補丁（實驗性，支持Android11+）兩種激活方式；你可以任選其中一種進行探索。</string>
 
-    <string name="onboarding_guide_tips_title">使用指导</string>
-    <string name="onboarding_guide_tips_desc">你可以在设置主页中找到使用指导，强烈建议你多花一些时间看看这些指导，说不定会帮到你。</string>
-    <string name="title_package_prebuilt_set">预设</string>
+    <string name="onboarding_guide_tips_title">使用指南</string>
+    <string name="onboarding_guide_tips_desc">你可以在設置首頁中找到使用指南，強烈建議你多花一些時間看看這些指南，說不定會幫到你。</string>
+    <string name="title_package_prebuilt_set">預設</string>
 
-    <string name="pre_title_app_list_item_show_pkg">显示包名</string>
-    <string name="pre_title_app_list_item_show_version">显示版本信息</string>
-    <string name="pre_title_app_list_item">应用列表项</string>
+    <string name="pre_title_app_list_item_show_pkg">顯示包名</string>
+    <string name="pre_title_app_list_item_show_version">顯示版本訊息</string>
+    <string name="pre_title_app_list_item">應用列表項</string>
 
-    <string name="menu_title_app_info_detailed">详细信息</string>
-    <string name="nav_title_guide">入门</string>
+    <string name="menu_title_app_info_detailed">詳細訊息</string>
+    <string name="nav_title_guide">入門</string>
 
     <string name="pre_title_smart_freeze_freeze_method">凍結方式</string>
     <string name="pre_title_smart_freeze_freeze_method_disable">PM disable</string>
-    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable 是Android系統提供的可以\"停用\"某個應用的功能；使用這種方式\"凍結\"應用的時候，被凍結應用的桌面圖標會消失，只能通過智能凍結頁面或創建的快捷方式、代理應用啟動。</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable 是Android系統提供的可以\"停用\"某個應用的功能；使用這種方式\"凍結\"應用的時候，被凍結應用的桌面圖示會消失，只能通過智能凍結頁面或建立的快捷方式、代理應用啟動。</string>
     <string name="pre_title_smart_freeze_freeze_method_suspend">PM suspend</string>
-    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend，是Android提供用於DPC管理的功能；被掛起的應用桌面通常會保留一個灰色的圖標，但是無法直接啟動該應用的活動，一般會彈出一個對話框提示這個應用已被管理員限制使用。你可以為該應用打開\"活檢解冻\"開關，這樣一來，Thanox檢測到啟動該應用活動頁的請求會解凍該應用。</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend，是Android提供用於DPC管理的功能；被掛起的應用桌面通常會保留一個灰色的圖示，但是無法直接啟動該應用的活動，一般會彈出一個對話框提示這個應用已被管理員限制使用。你可以為該應用開啟\"活檢解凍\"開關，這樣一來，Thanox檢測到啟動該應用活動頁的請求會解凍該應用。</string>
 
     <string name="privacy_agreement_title">隱私協議</string>
     <string name="privacy_agreement_accept">接受</string>
     <string name="privacy_agreement_discard">不接受</string>
 
-    <string name="feature_title_settings_access_record">设置访问记录</string>
-    <string name="feature_summary_settings_access_record">查看系統設置的讀寫記錄。如果你用的是xposed，通常你需要在作用域中勾選Settings，Settings Provider以及安全管家，因為這些app通常會讀寫系統設置</string>
+    <string name="feature_title_settings_access_record">設置訪問記錄</string>
+    <string name="feature_summary_settings_access_record">檢視系統設置的讀寫記錄。如果你用的是Xposed，通常你需要在作用域中勾選Settings，Settings Provider以及安全管家，因為這些app通常會讀寫系統設置</string>
 </resources>

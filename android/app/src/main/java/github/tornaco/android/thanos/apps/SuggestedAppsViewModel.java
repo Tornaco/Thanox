@@ -15,6 +15,7 @@ import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.Rxs;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -63,8 +64,8 @@ public class SuggestedAppsViewModel extends AndroidViewModel {
             return new ArrayList<>(0);
         }
         List<AppListModel> res = new ArrayList<>();
-        for (String pkg : thanosManager.getActivityManager().getLastRecentUsedPackages(20)) {
-            AppInfo appInfo = thanosManager.getPkgManager().getAppInfo(pkg);
+        for (Pkg pkg : thanosManager.getActivityManager().getLastRecentUsedPackages(24)) {
+            AppInfo appInfo = thanosManager.getPkgManager().getAppInfoForUser(pkg.getPkgName(), pkg.getUserId());
             if (appInfo != null) {
                 AppListModel model = new AppListModel(appInfo);
                 res.add(model);

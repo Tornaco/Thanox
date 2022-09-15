@@ -100,7 +100,7 @@ interface IActivityManager {
     void setPkgSmartStandByEnabled(String pkgName, boolean enable);
     boolean isPkgSmartStandByEnabled(String pkgName);
 
-    String[] getLastRecentUsedPackages(int count);
+    List<Pkg> getLastRecentUsedPackages(int count);
 
     int getRecentTaskExcludeSettingForPackage(String pkgName);
     void setRecentTaskExcludeSettingForPackage(String pkgName, int setting);

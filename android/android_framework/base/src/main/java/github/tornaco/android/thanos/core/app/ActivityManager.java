@@ -356,7 +356,7 @@ public class ActivityManager {
     }
 
     @SneakyThrows
-    public String[] getLastRecentUsedPackages(int count) {
+    public List<Pkg> getLastRecentUsedPackages(int count) {
         return server.getLastRecentUsedPackages(count);
     }
 

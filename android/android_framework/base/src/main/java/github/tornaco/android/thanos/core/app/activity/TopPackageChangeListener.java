@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 
+import github.tornaco.android.thanos.core.pm.Pkg;
 import lombok.Getter;
 
 public class TopPackageChangeListener implements ITopPackageChangeListener {
@@ -11,13 +12,13 @@ public class TopPackageChangeListener implements ITopPackageChangeListener {
     @Getter
     private final ITopPackageChangeListener listener = new ITopPackageChangeListener.Stub() {
         @Override
-        public void onChange(String from, String to) {
+        public void onChange(Pkg from, Pkg to) {
             h.post(() -> TopPackageChangeListener.this.onChange(from, to));
         }
     };
 
     @Override
-    public void onChange(String from, String to) {
+    public void onChange(Pkg from, Pkg to) {
         // Noop.
     }
 

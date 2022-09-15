@@ -7,7 +7,7 @@ public interface ITopPackageChangeListener extends android.os.IInterface
   /** Default implementation for ITopPackageChangeListener. */
   public static class Default implements github.tornaco.android.thanos.core.app.activity.ITopPackageChangeListener
   {
-    @Override public void onChange(java.lang.String from, java.lang.String to) throws android.os.RemoteException
+    @Override public void onChange(github.tornaco.android.thanos.core.pm.Pkg from, github.tornaco.android.thanos.core.pm.Pkg to) throws android.os.RemoteException
     {
     }
     @Override
@@ -56,10 +56,20 @@ public interface ITopPackageChangeListener extends android.os.IInterface
         case TRANSACTION_onChange:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          java.lang.String _arg1;
-          _arg1 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          github.tornaco.android.thanos.core.pm.Pkg _arg1;
+          if ((0!=data.readInt())) {
+            _arg1 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg1 = null;
+          }
           this.onChange(_arg0, _arg1);
           reply.writeNoException();
           return true;
@@ -85,14 +95,26 @@ public interface ITopPackageChangeListener extends android.os.IInterface
       {
         return DESCRIPTOR;
       }
-      @Override public void onChange(java.lang.String from, java.lang.String to) throws android.os.RemoteException
+      @Override public void onChange(github.tornaco.android.thanos.core.pm.Pkg from, github.tornaco.android.thanos.core.pm.Pkg to) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(from);
-          _data.writeString(to);
+          if ((from!=null)) {
+            _data.writeInt(1);
+            from.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          if ((to!=null)) {
+            _data.writeInt(1);
+            to.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onChange, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
             getDefaultImpl().onChange(from, to);
@@ -125,5 +147,5 @@ public interface ITopPackageChangeListener extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public void onChange(java.lang.String from, java.lang.String to) throws android.os.RemoteException;
+  public void onChange(github.tornaco.android.thanos.core.pm.Pkg from, github.tornaco.android.thanos.core.pm.Pkg to) throws android.os.RemoteException;
 }

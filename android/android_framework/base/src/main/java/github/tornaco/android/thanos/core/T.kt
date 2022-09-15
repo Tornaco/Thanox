@@ -16,16 +16,23 @@ object T {
 
     object Actions {
         const val ACTION_FRONT_PKG_CHANGED = "thanox.a.front_pkg.changed"
+
         const val ACTION_FRONT_ACTIVITY_CHANGED = "thanox.a.front_activity.changed"
+
         const val ACTION_FRONT_PKG_CHANGED_EXTRA_PACKAGE_FROM =
             "thanox.a.extra.front_activity.changed.pkg.from"
         const val ACTION_FRONT_PKG_CHANGED_EXTRA_PACKAGE_TO =
             "thanox.a.extra.front_activity.changed.pkg.to"
+        const val ACTION_FRONT_PKG_CHANGED_EXTRA_PACKAGE_FROM_USER_ID =
+            "thanox.a.extra.front_activity.changed.pkg.from.userId"
+        const val ACTION_FRONT_PKG_CHANGED_EXTRA_PACKAGE_TO_USER_ID =
+            "thanox.a.extra.front_activity.changed.pkg.to.userId"
 
         const val ACTION_ACTIVITY_RESUMED = "thanox.a.activity.resumed"
         const val ACTION_ACTIVITY_RESUMED_EXTRA_COMPONENT_NAME =
             "thanox.a.activity.resumed.extra.name"
         const val ACTION_ACTIVITY_RESUMED_EXTRA_PACKAGE_NAME = "thanox.a.activity.resumed.extra.pkg"
+        const val ACTION_ACTIVITY_RESUMED_EXTRA_USER_ID = "thanox.a.activity.resumed.extra.userId"
 
         const val ACTION_ACTIVITY_CREATED = "thanox.a.activity.created"
         const val ACTION_ACTIVITY_CREATED_EXTRA_COMPONENT_NAME =

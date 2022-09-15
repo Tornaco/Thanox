@@ -89,6 +89,7 @@ public class UsageStatsManagerInternalHooks {
         private void handleReportEvent(Object[] args) {
             XLog.d("UsageStatsManagerInternalHooks handleReportEvent %s", Arrays.toString(args));
             try {
+                int userId = (int) args[1];
                 int type = (int) args[2];
                 ComponentName component = (ComponentName) args[0];
                 if (type == UsageEvents.Event.MOVE_TO_BACKGROUND) {
@@ -96,7 +97,7 @@ public class UsageStatsManagerInternalHooks {
                     BootStrap.THANOS_X.getActivityStackSupervisor().reportOnActivityStopped(new Intent().setComponent(component));
                 } else if (type == UsageEvents.Event.MOVE_TO_FOREGROUND) {
                     XLog.d("UsageStatsManagerInternalHooks, MOVE_TO_FOREGROUND: %s", component);
-                    BootStrap.THANOS_X.getActivityStackSupervisor().reportOnActivityResumed(new Intent().setComponent(component));
+                    BootStrap.THANOS_X.getActivityStackSupervisor().reportOnActivityResumed(new Intent().setComponent(component), userId);
                 }
             } catch (Throwable e) {
                 XLog.e("UsageStatsManagerInternalHooks reportEvent error", e);

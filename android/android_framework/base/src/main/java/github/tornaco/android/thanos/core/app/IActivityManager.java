@@ -222,7 +222,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public java.lang.String[] getLastRecentUsedPackages(int count) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getLastRecentUsedPackages(int count) throws android.os.RemoteException
     {
       return null;
     }
@@ -1132,9 +1132,9 @@ public interface IActivityManager extends android.os.IInterface
           data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
-          java.lang.String[] _result = this.getLastRecentUsedPackages(_arg0);
+          java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _result = this.getLastRecentUsedPackages(_arg0);
           reply.writeNoException();
-          reply.writeStringArray(_result);
+          reply.writeTypedList(_result);
           return true;
         }
         case TRANSACTION_getRecentTaskExcludeSettingForPackage:
@@ -3099,11 +3099,11 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.lang.String[] getLastRecentUsedPackages(int count) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getLastRecentUsedPackages(int count) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
-        java.lang.String[] _result;
+        java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(count);
@@ -3112,7 +3112,7 @@ public interface IActivityManager extends android.os.IInterface
             return getDefaultImpl().getLastRecentUsedPackages(count);
           }
           _reply.readException();
-          _result = _reply.createStringArray();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -4868,7 +4868,7 @@ public interface IActivityManager extends android.os.IInterface
   public void setSmartStandByEnabled(boolean enable) throws android.os.RemoteException;
   public void setPkgSmartStandByEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException;
   public boolean isPkgSmartStandByEnabled(java.lang.String pkgName) throws android.os.RemoteException;
-  public java.lang.String[] getLastRecentUsedPackages(int count) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getLastRecentUsedPackages(int count) throws android.os.RemoteException;
   public int getRecentTaskExcludeSettingForPackage(java.lang.String pkgName) throws android.os.RemoteException;
   public void setRecentTaskExcludeSettingForPackage(java.lang.String pkgName, int setting) throws android.os.RemoteException;
   // Keep when has recent task.

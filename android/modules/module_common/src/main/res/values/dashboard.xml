@@ -40,7 +40,7 @@
 
     <!-- Dashboard image tile size -->
     <dimen name="dashboard_tile_image_size">24dp</dimen>
-    <dimen name="dashboard_tile_image_size_large">48dp</dimen>
+    <dimen name="dashboard_tile_image_size_large">50dp</dimen>
 
     <dimen name="dashboard_card_start_margin">12dp</dimen>
     <dimen name="dashboard_card_top_margin">12dp</dimen>

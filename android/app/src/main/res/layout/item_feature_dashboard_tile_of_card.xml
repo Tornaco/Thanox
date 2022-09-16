@@ -35,7 +35,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dashboard_tile_image_margin_end"
             android:navTile="@{tile}"
-            tools:src="@drawable/ic_nav_boost" />
+            tools:src="@drawable/ic_nav_app_manager" />
 
         <TextView
             android:id="@+id/item_title"

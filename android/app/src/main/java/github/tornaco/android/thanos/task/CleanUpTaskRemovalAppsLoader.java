@@ -19,6 +19,7 @@ import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewMod
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import util.CollectionUtils;
 
 public class CleanUpTaskRemovalAppsLoader implements CommonFuncToggleAppListFilterViewModel.ListModelLoader {
@@ -44,7 +45,7 @@ public class CleanUpTaskRemovalAppsLoader implements CommonFuncToggleAppListFilt
         CollectionUtils.consumeRemaining(installed, appInfo -> {
             appInfo.setSelected(am.isPkgCleanUpOnTaskRemovalEnabled(appInfo.getPkgName()));
             res.add(new AppListModel(appInfo,
-                    thanos.getActivityManager().isPackageRunning(appInfo.getPkgName()) ? runningBadge : null,
+                    thanos.getActivityManager().isPackageRunning(Pkg.fromAppInfo(appInfo)) ? runningBadge : null,
                     null,
                     composer.getAppItemDescription(appInfo)));
         });

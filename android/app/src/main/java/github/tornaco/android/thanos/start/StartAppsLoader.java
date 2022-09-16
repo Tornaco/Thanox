@@ -18,6 +18,7 @@ import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewMod
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import util.CollectionUtils;
 
 public class StartAppsLoader implements CommonFuncToggleAppListFilterViewModel.ListModelLoader {
@@ -43,7 +44,7 @@ public class StartAppsLoader implements CommonFuncToggleAppListFilterViewModel.L
             appInfo.setSelected(!am.isPkgStartBlocking(appInfo.getPkgName()));
             res.add(new AppListModel(
                     appInfo,
-                    thanos.getActivityManager().isPackageRunning(appInfo.getPkgName()) ? runningBadge : null,
+                    thanos.getActivityManager().isPackageRunning(Pkg.fromAppInfo(appInfo)) ? runningBadge : null,
                     null,
                     composer.getAppItemDescription(appInfo)));
         });

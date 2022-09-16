@@ -13,9 +13,18 @@ public class NotificationManager {
 
     private final INotificationManager service;
 
+    /**
+     * @deprecated Use {{@link #getShowingNotificationRecordsForPackage(Pkg)}} instead
+     */
     @SneakyThrows
+    @Deprecated
     public List<NotificationRecord> getShowingNotificationRecordsForPackage(String packageName) {
-        return service.getShowingNotificationRecordsForPackage(packageName);
+        return service.getShowingNotificationRecordsForPackage(Pkg.systemUserPkg(packageName));
+    }
+
+    @SneakyThrows
+    public List<NotificationRecord> getShowingNotificationRecordsForPackage(Pkg pkg) {
+        return service.getShowingNotificationRecordsForPackage(pkg);
     }
 
     @SneakyThrows
@@ -23,9 +32,18 @@ public class NotificationManager {
         return service.getAllNotificationRecordsByPageAndKeyword(start, limit, keyword);
     }
 
+    /**
+     * @deprecated Use {{@link #hasShowingNotificationRecordsForPackage(Pkg)}} instead
+     */
     @SneakyThrows
-    public boolean hasShowingNotificationRecordsForPackage(String packageName) {
-        return service.hasShowingNotificationRecordsForPackage(packageName);
+    @Deprecated
+    public boolean hasShowingNotificationRecordsForPackage(String pkgName) {
+        return service.hasShowingNotificationRecordsForPackage(Pkg.systemUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public boolean hasShowingNotificationRecordsForPackage(Pkg pkg) {
+        return service.hasShowingNotificationRecordsForPackage(pkg);
     }
 
     @SneakyThrows

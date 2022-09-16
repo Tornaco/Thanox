@@ -11,13 +11,13 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public void forceStopPackage(java.lang.String packageName) throws android.os.RemoteException
+    @Override public void forceStopPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
     }
-    @Override public void idlePackage(java.lang.String packageName) throws android.os.RemoteException
+    @Override public void idlePackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
     }
-    @Override public boolean isPackageIdle(java.lang.String packageName) throws android.os.RemoteException
+    @Override public boolean isPackageIdle(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return false;
     }
@@ -68,7 +68,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public boolean isPackageRunning(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public boolean isPackageRunning(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return false;
     }
@@ -215,10 +215,10 @@ public interface IActivityManager extends android.os.IInterface
     @Override public void setSmartStandByEnabled(boolean enable) throws android.os.RemoteException
     {
     }
-    @Override public void setPkgSmartStandByEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException
+    @Override public void setPkgSmartStandByEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
     {
     }
-    @Override public boolean isPkgSmartStandByEnabled(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public boolean isPkgSmartStandByEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return false;
     }
@@ -248,7 +248,7 @@ public interface IActivityManager extends android.os.IInterface
     @Override public void resetStartRecordsBlocked() throws android.os.RemoteException
     {
     }
-    @Override public void addApp(java.lang.String targetPkg) throws android.os.RemoteException
+    @Override public void addApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
     }
     @Override public boolean isStartRuleEnabled() throws android.os.RemoteException
@@ -483,16 +483,16 @@ public interface IActivityManager extends android.os.IInterface
     {
     }
     /* return the pid of process. or -1 if no process found */
-    @Override public int getPid(java.lang.String processName) throws android.os.RemoteException
+    @Override public int getPid(github.tornaco.android.thanos.core.os.ProcessName processName) throws android.os.RemoteException
     {
       return 0;
     }
     /* return the pid of killed process. or -1 if no process found */
-    @Override public int killProcessByName(java.lang.String processName) throws android.os.RemoteException
+    @Override public int killProcessByName(github.tornaco.android.thanos.core.os.ProcessName processName) throws android.os.RemoteException
     {
       return 0;
     }
-    @Override public void killProcessByNames(java.util.List<java.lang.String> processNames) throws android.os.RemoteException
+    @Override public void killProcessByNames(java.util.List<github.tornaco.android.thanos.core.os.ProcessName> processNames) throws android.os.RemoteException
     {
     }
     @Override public boolean dumpHeap(java.lang.String process) throws android.os.RemoteException
@@ -553,8 +553,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_forceStopPackage:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           this.forceStopPackage(_arg0);
           reply.writeNoException();
           return true;
@@ -562,8 +567,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_idlePackage:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           this.idlePackage(_arg0);
           reply.writeNoException();
           return true;
@@ -571,8 +581,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_isPackageIdle:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.isPackageIdle(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
@@ -748,8 +763,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_isPackageRunning:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.isPackageRunning(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
@@ -1109,8 +1129,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_setPkgSmartStandByEnabled:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setPkgSmartStandByEnabled(_arg0, _arg1);
@@ -1120,8 +1145,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_isPkgSmartStandByEnabled:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.isPkgSmartStandByEnabled(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
@@ -1194,8 +1224,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_addApp:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           this.addApp(_arg0);
           reply.writeNoException();
           return true;
@@ -1847,8 +1882,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_getPid:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.os.ProcessName _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.os.ProcessName.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           int _result = this.getPid(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
@@ -1857,8 +1897,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_killProcessByName:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.os.ProcessName _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.os.ProcessName.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           int _result = this.killProcessByName(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
@@ -1867,8 +1912,8 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_killProcessByNames:
         {
           data.enforceInterface(descriptor);
-          java.util.List<java.lang.String> _arg0;
-          _arg0 = data.createStringArrayList();
+          java.util.List<github.tornaco.android.thanos.core.os.ProcessName> _arg0;
+          _arg0 = data.createTypedArrayList(github.tornaco.android.thanos.core.os.ProcessName.CREATOR);
           this.killProcessByNames(_arg0);
           reply.writeNoException();
           return true;
@@ -1924,16 +1969,22 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void forceStopPackage(java.lang.String packageName) throws android.os.RemoteException
+      @Override public void forceStopPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(packageName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_forceStopPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().forceStopPackage(packageName);
+            getDefaultImpl().forceStopPackage(pkg);
             return;
           }
           _reply.readException();
@@ -1943,16 +1994,22 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void idlePackage(java.lang.String packageName) throws android.os.RemoteException
+      @Override public void idlePackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(packageName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_idlePackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().idlePackage(packageName);
+            getDefaultImpl().idlePackage(pkg);
             return;
           }
           _reply.readException();
@@ -1962,17 +2019,23 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public boolean isPackageIdle(java.lang.String packageName) throws android.os.RemoteException
+      @Override public boolean isPackageIdle(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(packageName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageIdle, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPackageIdle(packageName);
+            return getDefaultImpl().isPackageIdle(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2285,17 +2348,23 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public boolean isPackageRunning(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public boolean isPackageRunning(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageRunning, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPackageRunning(pkgName);
+            return getDefaultImpl().isPackageRunning(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -3058,17 +3127,23 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void setPkgSmartStandByEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException
+      @Override public void setPkgSmartStandByEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgSmartStandByEnabled, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPkgSmartStandByEnabled(pkgName, enable);
+            getDefaultImpl().setPkgSmartStandByEnabled(pkg, enable);
             return;
           }
           _reply.readException();
@@ -3078,17 +3153,23 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public boolean isPkgSmartStandByEnabled(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public boolean isPkgSmartStandByEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgSmartStandByEnabled, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPkgSmartStandByEnabled(pkgName);
+            return getDefaultImpl().isPkgSmartStandByEnabled(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -3239,16 +3320,22 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void addApp(java.lang.String targetPkg) throws android.os.RemoteException
+      @Override public void addApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(targetPkg);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_addApp, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addApp(targetPkg);
+            getDefaultImpl().addApp(pkg);
             return;
           }
           _reply.readException();
@@ -4570,14 +4657,20 @@ public interface IActivityManager extends android.os.IInterface
         }
       }
       /* return the pid of process. or -1 if no process found */
-      @Override public int getPid(java.lang.String processName) throws android.os.RemoteException
+      @Override public int getPid(github.tornaco.android.thanos.core.os.ProcessName processName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         int _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(processName);
+          if ((processName!=null)) {
+            _data.writeInt(1);
+            processName.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPid, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
             return getDefaultImpl().getPid(processName);
@@ -4592,14 +4685,20 @@ public interface IActivityManager extends android.os.IInterface
         return _result;
       }
       /* return the pid of killed process. or -1 if no process found */
-      @Override public int killProcessByName(java.lang.String processName) throws android.os.RemoteException
+      @Override public int killProcessByName(github.tornaco.android.thanos.core.os.ProcessName processName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         int _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(processName);
+          if ((processName!=null)) {
+            _data.writeInt(1);
+            processName.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_killProcessByName, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
             return getDefaultImpl().killProcessByName(processName);
@@ -4613,13 +4712,13 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void killProcessByNames(java.util.List<java.lang.String> processNames) throws android.os.RemoteException
+      @Override public void killProcessByNames(java.util.List<github.tornaco.android.thanos.core.os.ProcessName> processNames) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStringList(processNames);
+          _data.writeTypedList(processNames);
           boolean _status = mRemote.transact(Stub.TRANSACTION_killProcessByNames, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
             getDefaultImpl().killProcessByNames(processNames);
@@ -4800,9 +4899,9 @@ public interface IActivityManager extends android.os.IInterface
     }
   }
   public java.lang.String getCurrentFrontApp() throws android.os.RemoteException;
-  public void forceStopPackage(java.lang.String packageName) throws android.os.RemoteException;
-  public void idlePackage(java.lang.String packageName) throws android.os.RemoteException;
-  public boolean isPackageIdle(java.lang.String packageName) throws android.os.RemoteException;
+  public void forceStopPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void idlePackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public boolean isPackageIdle(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean checkBroadcastingIntent(android.content.Intent intent) throws android.os.RemoteException;
   public boolean checkService(android.content.Intent intent, android.content.ComponentName service, int callerUid) throws android.os.RemoteException;
   public boolean checkRestartService(java.lang.String packageName, android.content.ComponentName componentName) throws android.os.RemoteException;
@@ -4815,7 +4914,7 @@ public interface IActivityManager extends android.os.IInterface
   public java.util.List<github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat> getRunningAppProcessLegacy() throws android.os.RemoteException;
   public int getRunningAppsCount() throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.process.ProcessRecord> getRunningAppProcessForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
-  public boolean isPackageRunning(java.lang.String pkgName) throws android.os.RemoteException;
+  public boolean isPackageRunning(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> getStartRecordsByPackageName(java.lang.String pkgName) throws android.os.RemoteException;
   public java.util.List<java.lang.String> getStartRecordBlockedPackages() throws android.os.RemoteException;
   public long getStartRecordsBlockedCount() throws android.os.RemoteException;
@@ -4866,8 +4965,8 @@ public interface IActivityManager extends android.os.IInterface
   public int isPlatformAppIdleEnabled() throws android.os.RemoteException;
   public boolean isSmartStandByEnabled() throws android.os.RemoteException;
   public void setSmartStandByEnabled(boolean enable) throws android.os.RemoteException;
-  public void setPkgSmartStandByEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException;
-  public boolean isPkgSmartStandByEnabled(java.lang.String pkgName) throws android.os.RemoteException;
+  public void setPkgSmartStandByEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException;
+  public boolean isPkgSmartStandByEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getLastRecentUsedPackages(int count) throws android.os.RemoteException;
   public int getRecentTaskExcludeSettingForPackage(java.lang.String pkgName) throws android.os.RemoteException;
   public void setRecentTaskExcludeSettingForPackage(java.lang.String pkgName, int setting) throws android.os.RemoteException;
@@ -4877,7 +4976,7 @@ public interface IActivityManager extends android.os.IInterface
   public void setBgTaskCleanUpSkipWhenHasRecentTaskEnabled(boolean enable) throws android.os.RemoteException;
   public void launchAppDetailsActivity(java.lang.String pkgName) throws android.os.RemoteException;
   public void resetStartRecordsBlocked() throws android.os.RemoteException;
-  public void addApp(java.lang.String targetPkg) throws android.os.RemoteException;
+  public void addApp(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean isStartRuleEnabled() throws android.os.RemoteException;
   public void setStartRuleEnabled(boolean enable) throws android.os.RemoteException;
   public void addStartRule(java.lang.String rule) throws android.os.RemoteException;
@@ -4953,9 +5052,9 @@ public interface IActivityManager extends android.os.IInterface
   public boolean isBgTaskCleanUpSkipForegroundEnabled() throws android.os.RemoteException;
   public void setBgTaskCleanUpSkipForegroundEnabled(boolean enable) throws android.os.RemoteException;
   /* return the pid of process. or -1 if no process found */
-  public int getPid(java.lang.String processName) throws android.os.RemoteException;
+  public int getPid(github.tornaco.android.thanos.core.os.ProcessName processName) throws android.os.RemoteException;
   /* return the pid of killed process. or -1 if no process found */
-  public int killProcessByName(java.lang.String processName) throws android.os.RemoteException;
-  public void killProcessByNames(java.util.List<java.lang.String> processNames) throws android.os.RemoteException;
+  public int killProcessByName(github.tornaco.android.thanos.core.os.ProcessName processName) throws android.os.RemoteException;
+  public void killProcessByNames(java.util.List<github.tornaco.android.thanos.core.os.ProcessName> processNames) throws android.os.RemoteException;
   public boolean dumpHeap(java.lang.String process) throws android.os.RemoteException;
 }

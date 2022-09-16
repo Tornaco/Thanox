@@ -11,7 +11,7 @@ public interface IPkgManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public int getUidForPkgName(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public int getUidForPkgName(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return 0;
     }
@@ -344,8 +344,13 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getUidForPkgName:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           int _result = this.getUidForPkgName(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
@@ -1213,17 +1218,23 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public int getUidForPkgName(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public int getUidForPkgName(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         int _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getUidForPkgName, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getUidForPkgName(pkgName);
+            return getDefaultImpl().getUidForPkgName(pkg);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -2928,7 +2939,7 @@ public interface IPkgManager extends android.os.IInterface
     }
   }
   public java.lang.String[] getPkgNameForUid(int uid) throws android.os.RemoteException;
-  public int getUidForPkgName(java.lang.String pkgName) throws android.os.RemoteException;
+  public int getUidForPkgName(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   // ApplicationInfo
 
   public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgs(int flags) throws android.os.RemoteException;

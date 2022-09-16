@@ -6,6 +6,7 @@ import java.util.List;
 
 import github.tornaco.android.thanos.core.alarm.Alarm;
 import github.tornaco.android.thanos.core.alarm.AlarmRecord;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import lombok.SneakyThrows;
 
 public class ProfileManager {
@@ -204,9 +205,18 @@ public class ProfileManager {
         return server.getAutoConfigTemplateSelectionId();
     }
 
+    /**
+     * @deprecated User {{@link #applyConfigTemplateForPackage(Pkg, ConfigTemplate)} instead}
+     */
     @SneakyThrows
+    @Deprecated
     public boolean applyConfigTemplateForPackage(String packageName, ConfigTemplate template) {
-        return server.applyConfigTemplateForPackage(packageName, template);
+        return server.applyConfigTemplateForPackage(Pkg.systemUserPkg(packageName), template);
+    }
+
+    @SneakyThrows
+    public boolean applyConfigTemplateForPackage(Pkg pkg, ConfigTemplate template) {
+        return server.applyConfigTemplateForPackage(pkg, template);
     }
 
     @SneakyThrows

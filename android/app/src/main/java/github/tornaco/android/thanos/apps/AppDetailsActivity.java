@@ -24,6 +24,7 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.util.PkgUtils;
@@ -163,7 +164,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
 
                             Toast.makeText(thisActivity(), selectedTemplate.getTitle(), Toast.LENGTH_SHORT).show();
 
-                            if (profileManager.applyConfigTemplateForPackage(appInfo.getPkgName(), selectedTemplate)) {
+                            if (profileManager.applyConfigTemplateForPackage(Pkg.fromAppInfo(appInfo), selectedTemplate)) {
                                 ToastUtils.ok(getApplicationContext());
                                 reAddFragment();
                             } else {

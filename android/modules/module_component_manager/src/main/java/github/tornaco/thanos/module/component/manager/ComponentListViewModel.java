@@ -19,6 +19,7 @@ import java.util.Objects;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.Rxs;
 import github.tornaco.thanos.module.component.manager.model.ComponentModel;
 import io.reactivex.Completable;
@@ -121,7 +122,7 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
 
     public void selectAll(boolean enabled, Consumer<String> onUpdate, Runnable onComplete) {
         int totalCount = componentModels.size();
-        ThanosManager.from(getApplication()).getActivityManager().forceStopPackage(appInfo.getPkgName());
+        ThanosManager.from(getApplication()).getActivityManager().forceStopPackage(Pkg.fromAppInfo(appInfo));
 
         // Wait 1s.
         disposables.add(Completable.fromAction(() -> {

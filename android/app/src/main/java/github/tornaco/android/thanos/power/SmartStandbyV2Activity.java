@@ -23,6 +23,7 @@ import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener;
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import util.CollectionUtils;
 
@@ -68,7 +69,7 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
     protected OnAppItemSelectStateChangeListener onCreateAppItemSelectStateChangeListener() {
         return (appInfo, selected) -> ThanosManager.from(getApplicationContext())
                 .ifServiceInstalled(thanosManager ->
-                        thanosManager.getActivityManager().setPkgSmartStandByEnabled(appInfo.getPkgName(), selected));
+                        thanosManager.getActivityManager().setPkgSmartStandByEnabled(Pkg.fromAppInfo(appInfo), selected));
     }
 
     @NonNull
@@ -86,11 +87,11 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
             List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
-                appInfo.setSelected(am.isPkgSmartStandByEnabled(appInfo.getPkgName()));
+                appInfo.setSelected(am.isPkgSmartStandByEnabled(Pkg.fromAppInfo(appInfo)));
                 res.add(new AppListModel(
                         appInfo,
-                        thanos.getActivityManager().isPackageRunning(appInfo.getPkgName()) ? runningBadge : null,
-                        thanos.getActivityManager().isPackageIdle(appInfo.getPkgName()) ? idleBadge : null,
+                        thanos.getActivityManager().isPackageRunning(Pkg.fromAppInfo(appInfo)) ? runningBadge : null,
+                        thanos.getActivityManager().isPackageIdle(Pkg.fromAppInfo(appInfo)) ? idleBadge : null,
                         composer.getAppItemDescription(appInfo)));
             });
             Collections.sort(res);

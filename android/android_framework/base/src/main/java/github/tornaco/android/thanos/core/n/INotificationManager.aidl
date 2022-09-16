@@ -5,8 +5,8 @@ import github.tornaco.android.thanos.core.n.NotificationRecord;
 
 interface INotificationManager {
 
-    List<NotificationRecord> getShowingNotificationRecordsForPackage(in String packageName);
-    boolean hasShowingNotificationRecordsForPackage(in String packageName);
+    List<NotificationRecord> getShowingNotificationRecordsForPackage(in Pkg pkg);
+    boolean hasShowingNotificationRecordsForPackage(in Pkg pkg);
 
     void registerObserver(in INotificationObserver obs);
     void unRegisterObserver(in INotificationObserver obs);

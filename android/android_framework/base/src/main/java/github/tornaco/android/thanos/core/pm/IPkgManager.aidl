@@ -8,7 +8,7 @@ import github.tornaco.android.thanos.core.IPrinter;
 
 interface IPkgManager {
     String[] getPkgNameForUid(int uid);
-    int getUidForPkgName(String pkgName);
+    int getUidForPkgName(in Pkg pkg);
 
     // ApplicationInfo
     List<AppInfo> getInstalledPkgs(int flags);

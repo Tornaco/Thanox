@@ -26,6 +26,7 @@ public final class NotificationRecord implements Parcelable {
 
     private final int id;
     private final String pkgName;
+    private final int userId;
     private final long when;
     private final long creationTime;
     private final String title;
@@ -39,6 +40,7 @@ public final class NotificationRecord implements Parcelable {
     private NotificationRecord(Parcel in) {
         id = in.readInt();
         pkgName = in.readString();
+        userId = in.readInt();
         when = in.readLong();
         creationTime = in.readLong();
         title = in.readString();
@@ -71,6 +73,7 @@ public final class NotificationRecord implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
         parcel.writeString(pkgName);
+        parcel.writeInt(userId);
         parcel.writeLong(when);
         parcel.writeLong(creationTime);
         parcel.writeString(title);

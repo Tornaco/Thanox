@@ -42,6 +42,7 @@ public final class ObjectsUtils {
      * and {@code false} otherwise
      * @see Object#equals(Object)
      */
+    @Deprecated
     public static boolean equals(Object a, Object b) {
         return (a == b) || (a != null && a.equals(b));
     }

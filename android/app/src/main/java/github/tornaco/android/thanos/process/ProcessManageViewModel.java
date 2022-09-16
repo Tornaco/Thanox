@@ -20,6 +20,7 @@ import java.util.List;
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.process.ProcessRecord;
 import github.tornaco.android.thanos.core.process.RunningState;
 import github.tornaco.android.thanos.core.util.Rxs;
@@ -161,7 +162,7 @@ public class ProcessManageViewModel extends AndroidViewModel {
         ThanosManager.from(getApplication())
                 .ifServiceInstalled(thanosManager -> {
                     thanosManager.getActivityManager()
-                            .forceStopPackage(appInfo.getPkgName());
+                            .forceStopPackage(Pkg.fromAppInfo(appInfo));
 
                     loadProcess();
                 });

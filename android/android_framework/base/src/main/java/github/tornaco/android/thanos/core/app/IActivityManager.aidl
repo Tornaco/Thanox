@@ -11,10 +11,10 @@ import github.tornaco.android.thanos.core.os.SwapInfo;
 interface IActivityManager {
     String getCurrentFrontApp();
 
-    void forceStopPackage(String packageName);
+    void forceStopPackage(in Pkg pkg);
 
-    void idlePackage(String packageName);
-    boolean isPackageIdle(String packageName);
+    void idlePackage(in Pkg pkg);
+    boolean isPackageIdle(in Pkg pkg);
 
     boolean checkBroadcastingIntent(in Intent intent);
 
@@ -37,7 +37,7 @@ interface IActivityManager {
     int getRunningAppsCount();
 
     List<ProcessRecord> getRunningAppProcessForPackage(in Pkg pkg);
-    boolean isPackageRunning(String pkgName);
+    boolean isPackageRunning(in Pkg pkg);
 
     List<StartRecord> getStartRecordsByPackageName(String pkgName);
 
@@ -97,8 +97,8 @@ interface IActivityManager {
 
     boolean isSmartStandByEnabled();
     void setSmartStandByEnabled(boolean enable);
-    void setPkgSmartStandByEnabled(String pkgName, boolean enable);
-    boolean isPkgSmartStandByEnabled(String pkgName);
+    void setPkgSmartStandByEnabled(in Pkg pkg, boolean enable);
+    boolean isPkgSmartStandByEnabled(in Pkg pkg);
 
     List<Pkg> getLastRecentUsedPackages(int count);
 
@@ -113,7 +113,7 @@ interface IActivityManager {
 
     void resetStartRecordsBlocked();
 
-    void addApp(String targetPkg);
+    void addApp(in Pkg pkg);
 
     boolean isStartRuleEnabled();
     void setStartRuleEnabled(boolean enable);
@@ -220,10 +220,10 @@ interface IActivityManager {
     void setBgTaskCleanUpSkipForegroundEnabled(boolean enable);
 
     /* return the pid of process. or -1 if no process found */
-    int getPid(String processName);
+    int getPid(in ProcessName processName);
     /* return the pid of killed process. or -1 if no process found */
-    int killProcessByName(String processName);
-    void killProcessByNames(in List<String> processNames);
+    int killProcessByName(in ProcessName processName);
+    void killProcessByNames(in List<ProcessName> processNames);
 
     boolean dumpHeap(String process);
 }

@@ -7,6 +7,7 @@ parcelable github.tornaco.android.thanos.core.pm.ParceledListSlice;
 parcelable github.tornaco.android.thanos.core.process.ProcessRecord;
 parcelable github.tornaco.android.thanos.core.pm.AppInfo;
 parcelable github.tornaco.android.thanos.core.pm.Pkg;
+parcelable github.tornaco.android.thanos.core.os.ProcessName;
 parcelable github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 parcelable github.tornaco.android.thanos.core.pm.PackageSet;
 parcelable github.tornaco.android.thanos.core.pm.ComponentInfo;

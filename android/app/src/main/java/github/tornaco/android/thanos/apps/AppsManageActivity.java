@@ -19,6 +19,7 @@ import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import io.reactivex.Observable;
@@ -60,8 +61,8 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
                     .doOnComplete(disposable::dispose)
                     .subscribe(appInfo -> res.add(new AppListModel(
                             appInfo,
-                            thanos.getActivityManager().isPackageRunning(appInfo.getPkgName()) ? runningBadge : null,
-                            thanos.getActivityManager().isPackageIdle(appInfo.getPkgName()) ? idleBadge : null,
+                            thanos.getActivityManager().isPackageRunning(Pkg.fromAppInfo(appInfo)) ? runningBadge : null,
+                            thanos.getActivityManager().isPackageIdle(Pkg.fromAppInfo(appInfo)) ? idleBadge : null,
                             composer.getAppItemDescription(appInfo)))));
             Collections.sort(res);
             return res;

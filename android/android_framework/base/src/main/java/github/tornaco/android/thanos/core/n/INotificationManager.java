@@ -7,11 +7,11 @@ public interface INotificationManager extends android.os.IInterface
   /** Default implementation for INotificationManager. */
   public static class Default implements github.tornaco.android.thanos.core.n.INotificationManager
   {
-    @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getShowingNotificationRecordsForPackage(java.lang.String packageName) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getShowingNotificationRecordsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return null;
     }
-    @Override public boolean hasShowingNotificationRecordsForPackage(java.lang.String packageName) throws android.os.RemoteException
+    @Override public boolean hasShowingNotificationRecordsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return false;
     }
@@ -154,8 +154,13 @@ public interface INotificationManager extends android.os.IInterface
         case TRANSACTION_getShowingNotificationRecordsForPackage:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> _result = this.getShowingNotificationRecordsForPackage(_arg0);
           reply.writeNoException();
           reply.writeTypedList(_result);
@@ -164,8 +169,13 @@ public interface INotificationManager extends android.os.IInterface
         case TRANSACTION_hasShowingNotificationRecordsForPackage:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.hasShowingNotificationRecordsForPackage(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
@@ -500,17 +510,23 @@ public interface INotificationManager extends android.os.IInterface
       {
         return DESCRIPTOR;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getShowingNotificationRecordsForPackage(java.lang.String packageName) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getShowingNotificationRecordsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(packageName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getShowingNotificationRecordsForPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getShowingNotificationRecordsForPackage(packageName);
+            return getDefaultImpl().getShowingNotificationRecordsForPackage(pkg);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.n.NotificationRecord.CREATOR);
@@ -521,17 +537,23 @@ public interface INotificationManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public boolean hasShowingNotificationRecordsForPackage(java.lang.String packageName) throws android.os.RemoteException
+      @Override public boolean hasShowingNotificationRecordsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(packageName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasShowingNotificationRecordsForPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasShowingNotificationRecordsForPackage(packageName);
+            return getDefaultImpl().hasShowingNotificationRecordsForPackage(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1173,8 +1195,8 @@ public interface INotificationManager extends android.os.IInterface
       return Stub.Proxy.sDefaultImpl;
     }
   }
-  public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getShowingNotificationRecordsForPackage(java.lang.String packageName) throws android.os.RemoteException;
-  public boolean hasShowingNotificationRecordsForPackage(java.lang.String packageName) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.n.NotificationRecord> getShowingNotificationRecordsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public boolean hasShowingNotificationRecordsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public void registerObserver(github.tornaco.android.thanos.core.n.INotificationObserver obs) throws android.os.RemoteException;
   public void unRegisterObserver(github.tornaco.android.thanos.core.n.INotificationObserver obs) throws android.os.RemoteException;
   public void setScreenOnNotificationEnabled(boolean enable) throws android.os.RemoteException;

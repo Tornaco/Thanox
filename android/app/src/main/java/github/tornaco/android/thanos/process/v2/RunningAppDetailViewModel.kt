@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.util.ToastUtils
 import kotlinx.coroutines.delay
@@ -64,7 +65,7 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
     }
 
     fun forceStop(runningAppState: RunningAppState) {
-        thanox.activityManager.forceStopPackage(runningAppState.appInfo.pkgName)
+        thanox.activityManager.forceStopPackage(Pkg.fromAppInfo(runningAppState.appInfo))
     }
 
     suspend fun startQueryCpuUsage(runningAppState: RunningAppState) {

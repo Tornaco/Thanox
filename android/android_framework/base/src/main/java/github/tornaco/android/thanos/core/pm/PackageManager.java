@@ -3,7 +3,6 @@ package github.tornaco.android.thanos.core.pm;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.ParcelFileDescriptor;
-import android.os.RemoteException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +54,18 @@ public class PackageManager {
         return pm.getPackagesForUid(uid);
     }
 
+    /**
+     * @deprecated User {{@link #getUidForPkgName(Pkg)} instead}
+     */
     @SneakyThrows
+    @Deprecated
     public int getUidForPkgName(String pkgName) {
-        return pm.getUidForPkgName(pkgName);
+        return pm.getUidForPkgName(Pkg.systemUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public int getUidForPkgName(Pkg pkg) {
+        return pm.getUidForPkgName(pkg);
     }
 
     @SneakyThrows
@@ -241,7 +249,11 @@ public class PackageManager {
         return pm.queryLaunchIntentForPackage(pkgName);
     }
 
+    /**
+     * @deprecated User {{@link #launchSmartFreezePkgThenKillOriginForUser(Pkg, String)} instead}
+     */
     @SneakyThrows
+    @Deprecated
     public void launchSmartFreezePkgThenKillOrigin(String pkgName, String origin) {
         pm.launchSmartFreezePkgThenKillOrigin(pkgName, origin);
     }

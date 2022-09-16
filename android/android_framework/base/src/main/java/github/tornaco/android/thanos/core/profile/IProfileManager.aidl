@@ -57,7 +57,7 @@ interface IProfileManager {
     void setAutoConfigTemplateSelection(String id);
     String getAutoConfigTemplateSelectionId();
 
-    boolean applyConfigTemplateForPackage(String packageName, in ConfigTemplate template);
+    boolean applyConfigTemplateForPackage(in Pkg pkg, in ConfigTemplate template);
 
     void addRuleIfNotExists(String author, int versionCode, String ruleJson, in IRuleAddCallback callback, int format);
 

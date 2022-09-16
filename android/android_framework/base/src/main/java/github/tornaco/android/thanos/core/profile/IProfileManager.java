@@ -126,7 +126,7 @@ public interface IProfileManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public boolean applyConfigTemplateForPackage(java.lang.String packageName, github.tornaco.android.thanos.core.profile.ConfigTemplate template) throws android.os.RemoteException
+    @Override public boolean applyConfigTemplateForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.profile.ConfigTemplate template) throws android.os.RemoteException
     {
       return false;
     }
@@ -577,8 +577,13 @@ public interface IProfileManager extends android.os.IInterface
         case TRANSACTION_applyConfigTemplateForPackage:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           github.tornaco.android.thanos.core.profile.ConfigTemplate _arg1;
           if ((0!=data.readInt())) {
             _arg1 = github.tornaco.android.thanos.core.profile.ConfigTemplate.CREATOR.createFromParcel(data);
@@ -1547,14 +1552,20 @@ public interface IProfileManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public boolean applyConfigTemplateForPackage(java.lang.String packageName, github.tornaco.android.thanos.core.profile.ConfigTemplate template) throws android.os.RemoteException
+      @Override public boolean applyConfigTemplateForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.profile.ConfigTemplate template) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(packageName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           if ((template!=null)) {
             _data.writeInt(1);
             template.writeToParcel(_data, 0);
@@ -1564,7 +1575,7 @@ public interface IProfileManager extends android.os.IInterface
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_applyConfigTemplateForPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().applyConfigTemplateForPackage(packageName, template);
+            return getDefaultImpl().applyConfigTemplateForPackage(pkg, template);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2183,7 +2194,7 @@ public interface IProfileManager extends android.os.IInterface
   public github.tornaco.android.thanos.core.profile.ConfigTemplate getConfigTemplateById(java.lang.String id) throws android.os.RemoteException;
   public void setAutoConfigTemplateSelection(java.lang.String id) throws android.os.RemoteException;
   public java.lang.String getAutoConfigTemplateSelectionId() throws android.os.RemoteException;
-  public boolean applyConfigTemplateForPackage(java.lang.String packageName, github.tornaco.android.thanos.core.profile.ConfigTemplate template) throws android.os.RemoteException;
+  public boolean applyConfigTemplateForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.profile.ConfigTemplate template) throws android.os.RemoteException;
   public void addRuleIfNotExists(java.lang.String author, int versionCode, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
   public void publishStringFact(int source, java.lang.String factValue, long delayMills) throws android.os.RemoteException;
   public void updateRule(int ruleId, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;

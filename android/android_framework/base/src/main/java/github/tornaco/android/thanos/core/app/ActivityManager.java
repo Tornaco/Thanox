@@ -5,16 +5,17 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.os.UserHandle;
 
 import com.elvishew.xlog.XLog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.core.app.start.StartRecord;
 import github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats;
+import github.tornaco.android.thanos.core.os.ProcessName;
 import github.tornaco.android.thanos.core.os.SwapInfo;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.IPkgManager;
@@ -39,14 +40,32 @@ public class ActivityManager {
         return server.getCurrentFrontApp();
     }
 
+    /**
+     * @deprecated User {{@link #forceStopPackage(Pkg)} instead}
+     */
     @SneakyThrows
+    @Deprecated
     public void forceStopPackage(String packageName) {
-        server.forceStopPackage(packageName);
+        server.forceStopPackage(Pkg.systemUserPkg(packageName));
     }
 
     @SneakyThrows
+    public void forceStopPackage(Pkg pkg) {
+        server.forceStopPackage(pkg);
+    }
+
+    /**
+     * @deprecated User {{@link #idlePackage(Pkg)} instead}
+     */
+    @SneakyThrows
+    @Deprecated
     public void idlePackage(String packageName) {
-        server.idlePackage(packageName);
+        server.idlePackage(Pkg.systemUserPkg(packageName));
+    }
+
+    @SneakyThrows
+    public void idlePackage(Pkg pkg) {
+        server.idlePackage(pkg);
     }
 
     @SneakyThrows
@@ -114,9 +133,18 @@ public class ActivityManager {
         return server.getRunningAppProcessForPackage(new Pkg(pkgName, userId));
     }
 
+    /**
+     * @deprecated Use {@link #isPackageRunning(Pkg)} instead
+     */
     @SneakyThrows
+    @Deprecated
     public boolean isPackageRunning(String pkgName) {
-        return server.isPackageRunning(pkgName);
+        return server.isPackageRunning(Pkg.systemUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public boolean isPackageRunning(Pkg pkg) {
+        return server.isPackageRunning(pkg);
     }
 
     @SneakyThrows
@@ -326,8 +354,17 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    @Deprecated
+    /**
+     * @deprecated User {{@link #isPackageIdle(Pkg)} instead}
+     */
     public boolean isPackageIdle(String packageName) {
-        return server.isPackageIdle(packageName);
+        return server.isPackageIdle(Pkg.systemUserPkg(packageName));
+    }
+
+    @SneakyThrows
+    public boolean isPackageIdle(Pkg pkg) {
+        return server.isPackageIdle(pkg);
     }
 
     @SneakyThrows
@@ -346,13 +383,30 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    @Deprecated
+    /**
+     * @deprecated Use {{@link #setPkgSmartStandByEnabled(Pkg, boolean)} instead}
+     */
     public void setPkgSmartStandByEnabled(String pkgName, boolean enable) {
-        server.setPkgSmartStandByEnabled(pkgName, enable);
+        server.setPkgSmartStandByEnabled(Pkg.systemUserPkg(pkgName), enable);
     }
 
     @SneakyThrows
+    public void setPkgSmartStandByEnabled(Pkg pkg, boolean enable) {
+        server.setPkgSmartStandByEnabled(pkg, enable);
+    }
+
+    /**
+     * @deprecated Use {{@link #isPkgSmartStandByEnabled(Pkg)} instead}
+     */
+    @SneakyThrows
     public boolean isPkgSmartStandByEnabled(String pkgName) {
-        return server.isPkgSmartStandByEnabled(pkgName);
+        return server.isPkgSmartStandByEnabled(Pkg.systemUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public boolean isPkgSmartStandByEnabled(Pkg pkg) {
+        return server.isPkgSmartStandByEnabled(pkg);
     }
 
     @SneakyThrows
@@ -395,9 +449,18 @@ public class ActivityManager {
         return server.isBgRestrictNotificationEnabled();
     }
 
+    /**
+     * @deprecated User {{@link #addApp(Pkg)} instead}
+     */
     @SneakyThrows
+    @Deprecated
     public void addApp(String targetPkg) {
-        server.addApp(targetPkg);
+        server.addApp(Pkg.systemUserPkg(targetPkg));
+    }
+
+    @SneakyThrows
+    public void addApp(Pkg pkg) {
+        server.addApp(pkg);
     }
 
     @SneakyThrows
@@ -480,18 +543,45 @@ public class ActivityManager {
         return server.killProcess(pid);
     }
 
+    /**
+     * @deprecated User {{@link #getPid(ProcessName)} instead}
+     */
     @SneakyThrows
+    @Deprecated
     public int getPid(String processName) {
+        return server.getPid(ProcessName.systemUserProcess(processName));
+    }
+
+    @SneakyThrows
+    public int getPid(ProcessName processName) {
         return server.getPid(processName);
     }
 
+    /**
+     * @deprecated User {{@link #killProcessByName(ProcessName)} instead}
+     */
     @SneakyThrows
+    @Deprecated
     public int killProcessByName(String processName) {
-        return server.killProcessByName(processName);
+        return server.killProcessByName(ProcessName.systemUserProcess(processName));
     }
 
     @SneakyThrows
+    public int killProcessByName(ProcessName processName) {
+        return server.killProcessByName(processName);
+    }
+
+    /**
+     * @deprecated User {{@link #killProcessByNames2(List<ProcessName>)} instead}
+     */
+    @SneakyThrows
+    @Deprecated
     public void killProcessByNames(List<String> processNames) {
+        server.killProcessByNames(processNames.stream().map(ProcessName::systemUserProcess).collect(Collectors.toList()));
+    }
+
+    @SneakyThrows
+    public void killProcessByNames2(List<ProcessName> processNames) {
         server.killProcessByNames(processNames);
     }
 

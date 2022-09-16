@@ -568,12 +568,12 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
         @Override
         boolean current() {
-            return ThanosManager.from(getContext()).getActivityManager().isPkgSmartStandByEnabled(appInfo.getPkgName());
+            return ThanosManager.from(getContext()).getActivityManager().isPkgSmartStandByEnabled(Pkg.fromAppInfo(appInfo));
         }
 
         @Override
         void setTo(boolean value) {
-            ThanosManager.from(getContext()).getActivityManager().setPkgSmartStandByEnabled(appInfo.getPkgName(), value);
+            ThanosManager.from(getContext()).getActivityManager().setPkgSmartStandByEnabled(Pkg.fromAppInfo(appInfo), value);
         }
 
         @Override

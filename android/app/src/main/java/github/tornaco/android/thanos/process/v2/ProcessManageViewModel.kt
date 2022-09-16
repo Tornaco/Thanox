@@ -19,6 +19,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.net.TrafficStatsState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
+import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.loader.Loader
 import kotlinx.coroutines.*
@@ -94,13 +95,13 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
             thanox.activityManager.runningAppProcessLegacy.filter { it.pkgList != null && it.pkgList.isNotEmpty() }
         val runningPackages = runningAppProcess.map { it.pkgList[0] }.distinct()
 
-        val runningAppStates = runningAppProcess.groupBy { it.pkgList[0] }.map { entry ->
-            val pkgName = entry.key
+        val runningAppStates = runningAppProcess.groupBy { Pkg.from(it.pkgList[0], it.uid) }.map { entry ->
+            val pkg: Pkg = entry.key
             val runningProcessStates = entry.value.map { process ->
                 val processPss =
                     thanox.activityManager.getProcessPss(intArrayOf(process.pid)).sum()
                 RunningProcessState(
-                    pkgName = pkgName,
+                    pkg = pkg,
                     process = process,
                     runningServices = runningServices.filter { service ->
                         service.pid == process.pid
@@ -123,6 +124,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                     sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
                 )
             }.sortedByDescending { it.runningServices.size }.sortedBy { !it.isMain }
+
             val isAllProcessCached =
                 entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }
             val totalPss =
@@ -134,7 +136,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                 SystemClock.elapsedRealtime() - it
             }
 
-            val appInfo = thanox.pkgManager.getAppInfo(pkgName)
+            val appInfo = thanox.pkgManager.getAppInfo(pkg)
             appInfo?.let { app ->
                 RunningAppState(
                     appInfo = app,

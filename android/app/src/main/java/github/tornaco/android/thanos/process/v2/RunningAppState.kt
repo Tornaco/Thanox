@@ -24,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat
 import github.tornaco.android.thanos.core.pm.AppInfo
+import github.tornaco.android.thanos.core.pm.Pkg
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
@@ -41,7 +42,7 @@ data class RunningAppState(
 
 @Parcelize
 data class RunningProcessState(
-    val pkgName: String,
+    val pkg: Pkg,
     val process: RunningAppProcessInfoCompat,
     val runningServices: List<RunningService>,
     val sizeStr: String,
@@ -49,7 +50,7 @@ data class RunningProcessState(
     @IgnoredOnParcel
     var isStopped by mutableStateOf(false)
 
-    val isMain get() = process.processName == pkgName
+    val isMain get() = process.processName == pkg.pkgName
 }
 
 @Parcelize

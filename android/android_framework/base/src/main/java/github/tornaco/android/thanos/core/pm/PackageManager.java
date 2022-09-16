@@ -74,8 +74,14 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public AppInfo getAppInfo(String pkgName) {
         return pm.getAppInfo(pkgName);
+    }
+
+    @SneakyThrows
+    public AppInfo getAppInfo(Pkg pkg) {
+        return pm.getAppInfoForUser(pkg.getPkgName(), pkg.getUserId());
     }
 
     @SneakyThrows

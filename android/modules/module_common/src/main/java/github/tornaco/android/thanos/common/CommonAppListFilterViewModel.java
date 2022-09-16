@@ -31,6 +31,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -47,7 +48,7 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
     public static final CategoryIndex DEFAULT_CATEGORY_INDEX = CategoryIndex.from(PrebuiltPkgSetsKt.PREBUILT_PACKAGE_SET_ID_3RD);
 
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
-    protected final List<Disposable> disposables = new ArrayList<>();
+    protected final CompositeDisposable disposables = new CompositeDisposable();
 
     protected final ObservableArrayList<AppListModel> listModels = new ObservableArrayList<>();
 
@@ -213,7 +214,7 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        CollectionUtils.consumeRemaining(disposables, Disposable::dispose);
+        disposables.clear();
         unRegisterEventReceivers();
     }
 

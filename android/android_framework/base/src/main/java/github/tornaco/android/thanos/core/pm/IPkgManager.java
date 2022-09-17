@@ -34,14 +34,14 @@ public interface IPkgManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public void setComponentEnabledSetting(android.content.ComponentName componentName, int newState, int flags) throws android.os.RemoteException
+    @Override public void setComponentEnabledSetting(int userId, android.content.ComponentName componentName, int newState, int flags) throws android.os.RemoteException
     {
     }
-    @Override public int getComponentEnabledSetting(android.content.ComponentName componentName) throws android.os.RemoteException
+    @Override public int getComponentEnabledSetting(int userId, android.content.ComponentName componentName) throws android.os.RemoteException
     {
       return 0;
     }
-    @Override public boolean isComponentDisabledByThanox(android.content.ComponentName componentName) throws android.os.RemoteException
+    @Override public boolean isComponentDisabledByThanox(int userId, android.content.ComponentName componentName) throws android.os.RemoteException
     {
       return false;
     }
@@ -52,7 +52,7 @@ public interface IPkgManager extends android.os.IInterface
     @Override public void setApplicationEnableState(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable, boolean tmp) throws android.os.RemoteException
     {
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivities(java.lang.String packageName) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivities(int userId, java.lang.String packageName) throws android.os.RemoteException
     {
       return null;
     }
@@ -60,11 +60,11 @@ public interface IPkgManager extends android.os.IInterface
     {
       return 0;
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivitiesInBatch(java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivitiesInBatch(int userId, java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
     {
       return null;
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceivers(java.lang.String packageName) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceivers(int userId, java.lang.String packageName) throws android.os.RemoteException
     {
       return null;
     }
@@ -72,11 +72,11 @@ public interface IPkgManager extends android.os.IInterface
     {
       return 0;
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceiversInBatch(java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceiversInBatch(int userId, java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
     {
       return null;
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServices(java.lang.String packageName) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServices(int userId, java.lang.String packageName) throws android.os.RemoteException
     {
       return null;
     }
@@ -84,7 +84,7 @@ public interface IPkgManager extends android.os.IInterface
     {
       return 0;
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServicesInBatch(java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServicesInBatch(int userId, java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
     {
       return null;
     }
@@ -247,7 +247,7 @@ public interface IPkgManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getProviders(java.lang.String packageName) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getProviders(int userId, java.lang.String packageName) throws android.os.RemoteException
     {
       return null;
     }
@@ -403,32 +403,36 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_setComponentEnabledSetting:
         {
           data.enforceInterface(descriptor);
-          android.content.ComponentName _arg0;
+          int _arg0;
+          _arg0 = data.readInt();
+          android.content.ComponentName _arg1;
           if ((0!=data.readInt())) {
-            _arg0 = android.content.ComponentName.CREATOR.createFromParcel(data);
+            _arg1 = android.content.ComponentName.CREATOR.createFromParcel(data);
           }
           else {
-            _arg0 = null;
+            _arg1 = null;
           }
-          int _arg1;
-          _arg1 = data.readInt();
           int _arg2;
           _arg2 = data.readInt();
-          this.setComponentEnabledSetting(_arg0, _arg1, _arg2);
+          int _arg3;
+          _arg3 = data.readInt();
+          this.setComponentEnabledSetting(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
           return true;
         }
         case TRANSACTION_getComponentEnabledSetting:
         {
           data.enforceInterface(descriptor);
-          android.content.ComponentName _arg0;
+          int _arg0;
+          _arg0 = data.readInt();
+          android.content.ComponentName _arg1;
           if ((0!=data.readInt())) {
-            _arg0 = android.content.ComponentName.CREATOR.createFromParcel(data);
+            _arg1 = android.content.ComponentName.CREATOR.createFromParcel(data);
           }
           else {
-            _arg0 = null;
+            _arg1 = null;
           }
-          int _result = this.getComponentEnabledSetting(_arg0);
+          int _result = this.getComponentEnabledSetting(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(_result);
           return true;
@@ -436,14 +440,16 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_isComponentDisabledByThanox:
         {
           data.enforceInterface(descriptor);
-          android.content.ComponentName _arg0;
+          int _arg0;
+          _arg0 = data.readInt();
+          android.content.ComponentName _arg1;
           if ((0!=data.readInt())) {
-            _arg0 = android.content.ComponentName.CREATOR.createFromParcel(data);
+            _arg1 = android.content.ComponentName.CREATOR.createFromParcel(data);
           }
           else {
-            _arg0 = null;
+            _arg1 = null;
           }
-          boolean _result = this.isComponentDisabledByThanox(_arg0);
+          boolean _result = this.isComponentDisabledByThanox(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
           return true;
@@ -484,9 +490,11 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getActivities:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getActivities(_arg0);
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getActivities(_arg0, _arg1);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -504,13 +512,15 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getActivitiesInBatch:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          int _arg1;
-          _arg1 = data.readInt();
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
           int _arg2;
           _arg2 = data.readInt();
-          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getActivitiesInBatch(_arg0, _arg1, _arg2);
+          int _arg3;
+          _arg3 = data.readInt();
+          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getActivitiesInBatch(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -518,9 +528,11 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getReceivers:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getReceivers(_arg0);
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getReceivers(_arg0, _arg1);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -538,13 +550,15 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getReceiversInBatch:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          int _arg1;
-          _arg1 = data.readInt();
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
           int _arg2;
           _arg2 = data.readInt();
-          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getReceiversInBatch(_arg0, _arg1, _arg2);
+          int _arg3;
+          _arg3 = data.readInt();
+          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getReceiversInBatch(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -552,9 +566,11 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getServices:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getServices(_arg0);
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getServices(_arg0, _arg1);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -572,13 +588,15 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getServicesInBatch:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          int _arg1;
-          _arg1 = data.readInt();
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
           int _arg2;
           _arg2 = data.readInt();
-          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getServicesInBatch(_arg0, _arg1, _arg2);
+          int _arg3;
+          _arg3 = data.readInt();
+          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getServicesInBatch(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -1049,9 +1067,11 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getProviders:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getProviders(_arg0);
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getProviders(_arg0, _arg1);
           reply.writeNoException();
           reply.writeTypedList(_result);
           return true;
@@ -1336,12 +1356,13 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void setComponentEnabledSetting(android.content.ComponentName componentName, int newState, int flags) throws android.os.RemoteException
+      @Override public void setComponentEnabledSetting(int userId, android.content.ComponentName componentName, int newState, int flags) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           if ((componentName!=null)) {
             _data.writeInt(1);
             componentName.writeToParcel(_data, 0);
@@ -1353,7 +1374,7 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(flags);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setComponentEnabledSetting, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setComponentEnabledSetting(componentName, newState, flags);
+            getDefaultImpl().setComponentEnabledSetting(userId, componentName, newState, flags);
             return;
           }
           _reply.readException();
@@ -1363,13 +1384,14 @@ public interface IPkgManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public int getComponentEnabledSetting(android.content.ComponentName componentName) throws android.os.RemoteException
+      @Override public int getComponentEnabledSetting(int userId, android.content.ComponentName componentName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         int _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           if ((componentName!=null)) {
             _data.writeInt(1);
             componentName.writeToParcel(_data, 0);
@@ -1379,7 +1401,7 @@ public interface IPkgManager extends android.os.IInterface
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getComponentEnabledSetting, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getComponentEnabledSetting(componentName);
+            return getDefaultImpl().getComponentEnabledSetting(userId, componentName);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -1390,13 +1412,14 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public boolean isComponentDisabledByThanox(android.content.ComponentName componentName) throws android.os.RemoteException
+      @Override public boolean isComponentDisabledByThanox(int userId, android.content.ComponentName componentName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           if ((componentName!=null)) {
             _data.writeInt(1);
             componentName.writeToParcel(_data, 0);
@@ -1406,7 +1429,7 @@ public interface IPkgManager extends android.os.IInterface
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isComponentDisabledByThanox, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isComponentDisabledByThanox(componentName);
+            return getDefaultImpl().isComponentDisabledByThanox(userId, componentName);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -1471,17 +1494,18 @@ public interface IPkgManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivities(java.lang.String packageName) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivities(int userId, java.lang.String packageName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivities, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getActivities(packageName);
+            return getDefaultImpl().getActivities(userId, packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
@@ -1513,19 +1537,20 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivitiesInBatch(java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivitiesInBatch(int userId, java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           _data.writeString(packageName);
           _data.writeInt(itemCountInEachBatch);
           _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivitiesInBatch, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getActivitiesInBatch(packageName, itemCountInEachBatch, batchIndex);
+            return getDefaultImpl().getActivitiesInBatch(userId, packageName, itemCountInEachBatch, batchIndex);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
@@ -1536,17 +1561,18 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceivers(java.lang.String packageName) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceivers(int userId, java.lang.String packageName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getReceivers, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getReceivers(packageName);
+            return getDefaultImpl().getReceivers(userId, packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
@@ -1578,19 +1604,20 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceiversInBatch(java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceiversInBatch(int userId, java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           _data.writeString(packageName);
           _data.writeInt(itemCountInEachBatch);
           _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getReceiversInBatch, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getReceiversInBatch(packageName, itemCountInEachBatch, batchIndex);
+            return getDefaultImpl().getReceiversInBatch(userId, packageName, itemCountInEachBatch, batchIndex);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
@@ -1601,17 +1628,18 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServices(java.lang.String packageName) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServices(int userId, java.lang.String packageName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServices, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getServices(packageName);
+            return getDefaultImpl().getServices(userId, packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
@@ -1643,19 +1671,20 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServicesInBatch(java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServicesInBatch(int userId, java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           _data.writeString(packageName);
           _data.writeInt(itemCountInEachBatch);
           _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServicesInBatch, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getServicesInBatch(packageName, itemCountInEachBatch, batchIndex);
+            return getDefaultImpl().getServicesInBatch(userId, packageName, itemCountInEachBatch, batchIndex);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
@@ -2596,17 +2625,18 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getProviders(java.lang.String packageName) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getProviders(int userId, java.lang.String packageName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(userId);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getProviders, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getProviders(packageName);
+            return getDefaultImpl().getProviders(userId, packageName);
           }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
@@ -2947,20 +2977,20 @@ public interface IPkgManager extends android.os.IInterface
   public github.tornaco.android.thanos.core.pm.AppInfo getAppInfo(java.lang.String pkgName) throws android.os.RemoteException;
   public java.lang.String[] getWhiteListPkgs() throws android.os.RemoteException;
   public boolean isPkgInWhiteList(java.lang.String pkg) throws android.os.RemoteException;
-  public void setComponentEnabledSetting(android.content.ComponentName componentName, int newState, int flags) throws android.os.RemoteException;
-  public int getComponentEnabledSetting(android.content.ComponentName componentName) throws android.os.RemoteException;
-  public boolean isComponentDisabledByThanox(android.content.ComponentName componentName) throws android.os.RemoteException;
+  public void setComponentEnabledSetting(int userId, android.content.ComponentName componentName, int newState, int flags) throws android.os.RemoteException;
+  public int getComponentEnabledSetting(int userId, android.content.ComponentName componentName) throws android.os.RemoteException;
+  public boolean isComponentDisabledByThanox(int userId, android.content.ComponentName componentName) throws android.os.RemoteException;
   public boolean getApplicationEnableState(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public void setApplicationEnableState(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable, boolean tmp) throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivities(java.lang.String packageName) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivities(int userId, java.lang.String packageName) throws android.os.RemoteException;
   public int getActivitiesCount(java.lang.String packageName) throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivitiesInBatch(java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceivers(java.lang.String packageName) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getActivitiesInBatch(int userId, java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceivers(int userId, java.lang.String packageName) throws android.os.RemoteException;
   public int getReceiverCount(java.lang.String packageName) throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceiversInBatch(java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServices(java.lang.String packageName) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getReceiversInBatch(int userId, java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServices(int userId, java.lang.String packageName) throws android.os.RemoteException;
   public int getServiceCount(java.lang.String packageName) throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServicesInBatch(java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getServicesInBatch(int userId, java.lang.String packageName, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException;
   public void setSmartFreezeEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isSmartFreezeEnabled() throws android.os.RemoteException;
   public void setPkgSmartFreezeEnabled(github.tornaco.android.thanos.core.pm.Pkg pkgName, boolean enable) throws android.os.RemoteException;
@@ -3007,7 +3037,7 @@ public interface IPkgManager extends android.os.IInterface
   public void unRegisterPackageSetChangeListener(github.tornaco.android.thanos.core.pm.IPackageSetChangeListener listener) throws android.os.RemoteException;
   public void setEnablePackageOnLaunchRequestEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException;
   public boolean isEnablePackageOnLaunchRequestEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getProviders(java.lang.String packageName) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getProviders(int userId, java.lang.String packageName) throws android.os.RemoteException;
   // Wrap api to skip permission check
 
   public java.lang.String[] getPackagesForUid(int uid) throws android.os.RemoteException;

@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.pm;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.ParcelFileDescriptor;
+import android.os.UserHandle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,13 +101,25 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public void setComponentEnabledSetting(ComponentName componentName, int newState, int flags) {
-        pm.setComponentEnabledSetting(componentName, newState, flags);
+        pm.setComponentEnabledSetting(UserHandle.USER_SYSTEM, componentName, newState, flags);
     }
 
     @SneakyThrows
+    public void setComponentEnabledSetting(int userId, ComponentName componentName, int newState, int flags) {
+        pm.setComponentEnabledSetting(userId, componentName, newState, flags);
+    }
+
+    @SneakyThrows
+    @Deprecated
     public int getComponentEnabledSetting(ComponentName componentName) {
-        return pm.getComponentEnabledSetting(componentName);
+        return pm.getComponentEnabledSetting(UserHandle.USER_SYSTEM, componentName);
+    }
+
+    @SneakyThrows
+    public int getComponentEnabledSetting(int userId, ComponentName componentName) {
+        return pm.getComponentEnabledSetting(userId, componentName);
     }
 
     @SneakyThrows
@@ -120,45 +133,45 @@ public class PackageManager {
     }
 
     @SneakyThrows
-    public List<ComponentInfo> getActivities(String packageName) {
-        return pm.getActivities(packageName);
+    public List<ComponentInfo> getActivities(int userId, String packageName) {
+        return pm.getActivities(userId, packageName);
     }
 
     @SneakyThrows
-    public List<ComponentInfo> getReceivers(String packageName) {
-        return pm.getReceivers(packageName);
+    public List<ComponentInfo> getReceivers(int userId, String packageName) {
+        return pm.getReceivers(userId, packageName);
     }
 
 
     @SneakyThrows
-    public List<ComponentInfo> getServices(String packageName) {
-        return pm.getServices(packageName);
+    public List<ComponentInfo> getServices(int userId, String packageName) {
+        return pm.getServices(userId, packageName);
     }
 
     @SneakyThrows
-    public List<ComponentInfo> getProviders(String packageName) {
-        return pm.getProviders(packageName);
+    public List<ComponentInfo> getProviders(int userId, String packageName) {
+        return pm.getProviders(userId, packageName);
     }
 
     @SneakyThrows
     @Nullable
-    public List<ComponentInfo> getActivitiesInBatch(String packageName, int itemCountInEachBatch,
+    public List<ComponentInfo> getActivitiesInBatch(int userId, String packageName, int itemCountInEachBatch,
                                                     int batchIndex) {
-        return pm.getActivitiesInBatch(packageName, itemCountInEachBatch, batchIndex);
+        return pm.getActivitiesInBatch(userId, packageName, itemCountInEachBatch, batchIndex);
     }
 
     @SneakyThrows
     @Nullable
-    public List<ComponentInfo> getReceiversInBatch(String packageName, int itemCountInEachBatch,
+    public List<ComponentInfo> getReceiversInBatch(int userId, String packageName, int itemCountInEachBatch,
                                                    int batchIndex) {
-        return pm.getReceiversInBatch(packageName, itemCountInEachBatch, batchIndex);
+        return pm.getReceiversInBatch(userId, packageName, itemCountInEachBatch, batchIndex);
     }
 
     @SneakyThrows
     @Nullable
-    public List<ComponentInfo> getServicesInBatch(String packageName, int itemCountInEachBatch,
+    public List<ComponentInfo> getServicesInBatch(int userId, String packageName, int itemCountInEachBatch,
                                                   int batchIndex) {
-        return pm.getServicesInBatch(packageName, itemCountInEachBatch, batchIndex);
+        return pm.getServicesInBatch(userId, packageName, itemCountInEachBatch, batchIndex);
     }
 
     @SneakyThrows
@@ -177,8 +190,14 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public boolean isComponentDisabledByThanox(ComponentName componentName) {
-        return pm.isComponentDisabledByThanox(componentName);
+        return pm.isComponentDisabledByThanox(UserHandle.USER_SYSTEM, componentName);
+    }
+
+    @SneakyThrows
+    public boolean isComponentDisabledByThanox(int userId, ComponentName componentName) {
+        return pm.isComponentDisabledByThanox(userId, componentName);
     }
 
     @SneakyThrows

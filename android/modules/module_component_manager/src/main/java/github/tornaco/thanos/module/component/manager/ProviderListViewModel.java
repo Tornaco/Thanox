@@ -25,7 +25,7 @@ public class ProviderListViewModel extends ComponentListViewModel {
             ThanosManager thanox = ThanosManager.from(getApplication());
             CollectionUtils.consumeRemaining(thanox
                     .getPkgManager()
-                    .getProviders(appInfo.getPkgName()), providerInfo -> res.add(ComponentModel.builder()
+                    .getProviders(appInfo.getUserId(), appInfo.getPkgName()), providerInfo -> res.add(ComponentModel.builder()
                     .isDisabledByThanox(providerInfo.isDisabledByThanox())
                     .name(providerInfo.getName())
                     .componentName(providerInfo.getComponentName())

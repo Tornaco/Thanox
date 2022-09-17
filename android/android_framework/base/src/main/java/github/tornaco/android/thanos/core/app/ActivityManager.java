@@ -2,7 +2,6 @@ package github.tornaco.android.thanos.core.app;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
 import android.os.UserHandle;
@@ -66,31 +65,6 @@ public class ActivityManager {
     @SneakyThrows
     public void idlePackage(Pkg pkg) {
         server.idlePackage(pkg);
-    }
-
-    @SneakyThrows
-    public boolean checkBroadcastingIntent(Intent intent) {
-        return server.checkBroadcastingIntent(intent);
-    }
-
-    @SneakyThrows
-    public boolean checkService(Intent intent, ComponentName service, int callerUid) {
-        return server.checkService(intent, service, callerUid);
-    }
-
-    @SneakyThrows
-    public boolean checkRestartService(String packageName, ComponentName componentName) {
-        return server.checkRestartService(packageName, componentName);
-    }
-
-    @SneakyThrows
-    public boolean checkBroadcast(Intent intent, int receiverUid, int callerUid) {
-        return server.checkBroadcast(intent, receiverUid, callerUid);
-    }
-
-    @SneakyThrows
-    public void onStartProcessLocked(ApplicationInfo applicationInfo) {
-        server.onStartProcessLocked(applicationInfo);
     }
 
     @SneakyThrows
@@ -218,14 +192,32 @@ public class ActivityManager {
         return server.getAllStartRecordsForPackageSetWithRes(pkgSetId, allowed, blocked);
     }
 
+    /**
+     * @deprecated Use {{@link #setPkgStartBlockEnabled(Pkg, boolean)}} instead
+     */
     @SneakyThrows
+    @Deprecated
     public void setPkgStartBlockEnabled(String pkgName, boolean enable) {
-        server.setPkgStartBlockEnabled(pkgName, enable);
+        server.setPkgStartBlockEnabled(Pkg.systemUserPkg(pkgName), enable);
     }
 
     @SneakyThrows
+    public void setPkgStartBlockEnabled(Pkg pkg, boolean enable) {
+        server.setPkgStartBlockEnabled(pkg, enable);
+    }
+
+    /**
+     * @deprecated Use {{@link #isPkgStartBlocking(Pkg)}} instead
+     */
+    @SneakyThrows
+    @Deprecated
     public boolean isPkgStartBlocking(String pkgName) {
-        return server.isPkgStartBlocking(pkgName);
+        return server.isPkgStartBlocking(Pkg.systemUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public boolean isPkgStartBlocking(Pkg pkg) {
+        return server.isPkgStartBlocking(pkg);
     }
 
     @SneakyThrows
@@ -640,10 +632,6 @@ public class ActivityManager {
         return server.isNetStatTrackerEnabled();
     }
 
-    @SneakyThrows
-    public boolean checkGetContentProvider(String callerPkg, String name) {
-        return server.checkGetContentProvider(callerPkg, name);
-    }
 
     // ******************************************************************
     // CAF API

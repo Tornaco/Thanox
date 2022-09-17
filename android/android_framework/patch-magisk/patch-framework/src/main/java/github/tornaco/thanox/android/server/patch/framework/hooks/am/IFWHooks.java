@@ -3,7 +3,9 @@ package github.tornaco.thanox.android.server.patch.framework.hooks.am;
 import android.annotation.Nullable;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.os.Handler;
+import android.os.UserHandle;
 
 import com.android.dx.stock.BaseProxyFactory;
 import com.android.dx.stock.ProxyBuilder;
@@ -138,11 +140,12 @@ class IFWHooks {
                 if (componentName == null) {
                     return null;
                 }
+                ApplicationInfo resolvedApp = (ApplicationInfo) args[args.length - 1];
                 int callerID = (int) args[2];
                 boolean res =
                         BootStrap.THANOS_X
                                 .getActivityManagerService()
-                                .checkService(intent, componentName, callerID);
+                                .checkService(intent, componentName, callerID, UserHandle.getUserId(resolvedApp.uid));
                 if (!res) {
                     return false;
                 }

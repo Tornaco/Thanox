@@ -111,11 +111,13 @@ public class AMSPackageInternalHooks {
 
             Intent intent = (Intent) args[0];
             int callingUid = (int) args[args.length - 1];
-            XLog.v("AMSPackageInternalHooks handleCheckService, resolvedName: %s, callingUid: %s, intent: %s", resolvedName, callingUid, intent);
+            int userId = (int) args[args.length - 2];
+            XLog.v("AMSPackageInternalHooks handleCheckService, resolvedName: %s, callingUid: %s, userId: %s, intent: %s",
+                    resolvedName, callingUid, userId, intent);
 
             boolean res = BootStrap.THANOS_X
                     .getActivityManagerService()
-                    .checkService(intent, resolvedName, callingUid);
+                    .checkService(intent, resolvedName, callingUid, userId);
             if (!res) {
                 return null;
             }

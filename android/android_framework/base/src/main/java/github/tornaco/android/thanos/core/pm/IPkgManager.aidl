@@ -18,24 +18,24 @@ interface IPkgManager {
     String[] getWhiteListPkgs();
     boolean isPkgInWhiteList(String pkg);
 
-    void setComponentEnabledSetting(in ComponentName componentName, int newState, int flags);
-    int getComponentEnabledSetting(in ComponentName componentName);
-    boolean isComponentDisabledByThanox(in ComponentName componentName);
+    void setComponentEnabledSetting(int userId, in ComponentName componentName, int newState, int flags);
+    int getComponentEnabledSetting(int userId, in ComponentName componentName);
+    boolean isComponentDisabledByThanox(int userId, in ComponentName componentName);
 
     boolean getApplicationEnableState(in Pkg pkg);
     void setApplicationEnableState(in Pkg pkg, boolean enable, boolean tmp);
 
-    List<ComponentInfo> getActivities(String packageName);
+    List<ComponentInfo> getActivities(int userId, String packageName);
     int getActivitiesCount(String packageName);
-    List<ComponentInfo> getActivitiesInBatch(String packageName, int itemCountInEachBatch, int batchIndex);
+    List<ComponentInfo> getActivitiesInBatch(int userId, String packageName, int itemCountInEachBatch, int batchIndex);
 
-    List<ComponentInfo> getReceivers(String packageName);
+    List<ComponentInfo> getReceivers(int userId, String packageName);
     int getReceiverCount(String packageName);
-    List<ComponentInfo> getReceiversInBatch(String packageName, int itemCountInEachBatch, int batchIndex);
+    List<ComponentInfo> getReceiversInBatch(int userId, String packageName, int itemCountInEachBatch, int batchIndex);
 
-    List<ComponentInfo> getServices(String packageName);
+    List<ComponentInfo> getServices(int userId, String packageName);
     int getServiceCount(String packageName);
-    List<ComponentInfo> getServicesInBatch(String packageName, int itemCountInEachBatch, int batchIndex);
+    List<ComponentInfo> getServicesInBatch(int userId, String packageName, int itemCountInEachBatch, int batchIndex);
 
     void setSmartFreezeEnabled(boolean enable);
     boolean isSmartFreezeEnabled();
@@ -102,7 +102,7 @@ interface IPkgManager {
     void setEnablePackageOnLaunchRequestEnabled(in Pkg pkg, boolean enable);
     boolean isEnablePackageOnLaunchRequestEnabled(in Pkg pkg);
 
-    List<ComponentInfo> getProviders(String packageName);
+    List<ComponentInfo> getProviders(int userId, String packageName);
 
     // Wrap api to skip permission check
     String[] getPackagesForUid(int uid);

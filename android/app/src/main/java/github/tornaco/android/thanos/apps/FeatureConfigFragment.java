@@ -446,12 +446,12 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
         @Override
         boolean current() {
-            return !ThanosManager.from(getContext()).getActivityManager().isPkgStartBlocking(appInfo.getPkgName());
+            return !ThanosManager.from(getContext()).getActivityManager().isPkgStartBlocking(Pkg.fromAppInfo(appInfo));
         }
 
         @Override
         void setTo(boolean value) {
-            ThanosManager.from(getContext()).getActivityManager().setPkgStartBlockEnabled(appInfo.getPkgName(), !value);
+            ThanosManager.from(getContext()).getActivityManager().setPkgStartBlockEnabled(Pkg.fromAppInfo(appInfo), !value);
         }
     }
 

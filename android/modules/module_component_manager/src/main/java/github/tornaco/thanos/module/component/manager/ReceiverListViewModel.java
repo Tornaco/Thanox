@@ -25,7 +25,7 @@ public class ReceiverListViewModel extends ComponentListViewModel {
             ThanosManager thanox = ThanosManager.from(getApplication());
             CollectionUtils.consumeRemaining(thanox
                     .getPkgManager()
-                    .getReceivers(appInfo.getPkgName()), activityInfo -> res.add(ComponentModel.builder()
+                    .getReceivers(appInfo.getUserId(), appInfo.getPkgName()), activityInfo -> res.add(ComponentModel.builder()
                     .isDisabledByThanox(activityInfo.isDisabledByThanox())
                     .name(activityInfo.getName())
                     .componentName(activityInfo.getComponentName())

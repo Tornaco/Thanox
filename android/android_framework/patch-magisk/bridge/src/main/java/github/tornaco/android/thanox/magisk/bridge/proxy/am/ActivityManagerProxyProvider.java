@@ -73,7 +73,8 @@ public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTra
                                     // BREAK!!!
                                 }
 
-                                // ContentProviderHolder getContentProvider(IApplicationThread caller, String callingPackage, String name, int userId, boolean stable);
+                                // ContentProviderHolder getContentProvider(IApplicationThread caller, String callingPackage,
+                                // String name, int userId, boolean stable);
                                 if ("getContentProvider".equals(method.getName())) {
                                     return handleGetProvider(am, method, args);
                                 }
@@ -93,11 +94,12 @@ public class ActivityManagerProxyProvider implements ProxyProvider, ExceptionTra
         }
         String callingPackage = (String) args[1];
         String name = (String) args[2];
-        XLog.d("IActivityManager getContentProvider: %s %s", callingPackage, name);
+        int userId = (int) args[args.length - 2];
+        XLog.d("IActivityManager getContentProvider: %s %s %s", callingPackage, name, userId);
         boolean res =
                 ThanosManagerNative.getDefault()
                         .getActivityManager()
-                        .checkGetContentProvider(callingPackage, name);
+                        .checkGetContentProvider(callingPackage, name, userId);
         if (!res) {
             return null;
         }

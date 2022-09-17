@@ -83,13 +83,14 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
 
     protected abstract ComponentsLoader onCreateLoader();
 
-    public void toggleComponentState(@Nullable ComponentModel componentModel, boolean checked) {
+    public void toggleComponentState(AppInfo appInfo, @Nullable ComponentModel componentModel, boolean checked) {
         if (componentModel == null) return;
         ThanosManager thanox = ThanosManager.from(getApplication());
         int newState = checked ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
         if (thanox.isServiceInstalled()) {
             componentModel.setEnableSetting(newState);
             thanox.getPkgManager().setComponentEnabledSetting(
+                    appInfo.getUserId(),
                     componentModel.getComponentName(),
                     newState
                     , 0 /* Kill it */);
@@ -120,24 +121,24 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
         loadComponents();
     }
 
-    public void selectAll(boolean enabled, Consumer<String> onUpdate, Runnable onComplete) {
+    public void selectAll(AppInfo appInfo, boolean enabled, Consumer<String> onUpdate, Runnable onComplete) {
         int totalCount = componentModels.size();
         ThanosManager.from(getApplication()).getActivityManager().forceStopPackage(Pkg.fromAppInfo(appInfo));
 
         // Wait 1s.
         disposables.add(Completable.fromAction(() -> {
-            for (int i = 0; i < componentModels.size(); i++) {
-                ComponentModel componentModel = componentModels.get(i);
-                onUpdate.accept((i + 1) + "/" + totalCount);
-                toggleComponentState(componentModel, enabled);
-                try {
-                    // Maybe a short delay will make it safer.
-                    Thread.sleep(100);
-                } catch (InterruptedException ignored) {
+                    for (int i = 0; i < componentModels.size(); i++) {
+                        ComponentModel componentModel = componentModels.get(i);
+                        onUpdate.accept((i + 1) + "/" + totalCount);
+                        toggleComponentState(appInfo, componentModel, enabled);
+                        try {
+                            // Maybe a short delay will make it safer.
+                            Thread.sleep(100);
+                        } catch (InterruptedException ignored) {
 
-                }
-            }
-        }).subscribeOn(Schedulers.io())
+                        }
+                    }
+                }).subscribeOn(Schedulers.io())
                 .subscribe(onComplete::run));
     }
 

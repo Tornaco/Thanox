@@ -63,6 +63,7 @@ abstract class ComponentListActivity : ThemeActivity() {
             ComponentListAdapter(appInfo!!,
                 { componentModel, checked ->
                     viewModel.toggleComponentState(
+                        appInfo,
                         componentModel,
                         checked
                     )
@@ -189,18 +190,21 @@ abstract class ComponentListActivity : ThemeActivity() {
         val progressDialog = ModernProgressDialog(thisActivity())
         progressDialog.setTitle(getString(R.string.common_text_wait_a_moment))
         progressDialog.show()
-        viewModel.selectAll(isSelectAll, {
-            runOnUiThread {
-                XLog.d("onRequestSelectAll, onUpdate: $it")
-                progressDialog.setMessage(it)
-            }
-        }, {
-            runOnUiThread {
-                XLog.d("onRequestSelectAll, onComplete")
-                progressDialog.dismiss()
-                viewModel.start()
-            }
-        })
+        viewModel.selectAll(
+            appInfo,
+            isSelectAll,
+            {
+                runOnUiThread {
+                    XLog.d("onRequestSelectAll, onUpdate: $it")
+                    progressDialog.setMessage(it)
+                }
+            }, {
+                runOnUiThread {
+                    XLog.d("onRequestSelectAll, onComplete")
+                    progressDialog.dismiss()
+                    viewModel.start()
+                }
+            })
     }
 
     private fun showFeatureDesc() {

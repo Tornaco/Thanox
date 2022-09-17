@@ -41,7 +41,7 @@ public class StartAppsLoader implements CommonFuncToggleAppListFilterViewModel.L
         List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
         List<AppListModel> res = new ArrayList<>();
         CollectionUtils.consumeRemaining(installed, appInfo -> {
-            appInfo.setSelected(!am.isPkgStartBlocking(appInfo.getPkgName()));
+            appInfo.setSelected(!am.isPkgStartBlocking(Pkg.fromAppInfo(appInfo)));
             res.add(new AppListModel(
                     appInfo,
                     thanos.getActivityManager().isPackageRunning(Pkg.fromAppInfo(appInfo)) ? runningBadge : null,

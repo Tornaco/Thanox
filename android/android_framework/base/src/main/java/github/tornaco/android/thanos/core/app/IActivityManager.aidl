@@ -18,7 +18,7 @@ interface IActivityManager {
 
     boolean checkBroadcastingIntent(in Intent intent);
 
-    boolean checkService(in Intent intent, in ComponentName service, int callerUid);
+    boolean checkService(in Intent intent, in ComponentName service, int callerUid, int userId);
 
     boolean checkRestartService(String packageName, in ComponentName componentName);
 
@@ -48,8 +48,8 @@ interface IActivityManager {
     // 启动管理设置
     boolean isStartBlockEnabled();
     void setStartBlockEnabled(boolean enable);
-    void setPkgStartBlockEnabled(String pkgName, boolean enable);
-    boolean isPkgStartBlocking(String pkgName);
+    void setPkgStartBlockEnabled(in Pkg pkg, boolean enable);
+    boolean isPkgStartBlocking(in Pkg pkg);
 
     // Task removal
     boolean isCleanUpOnTaskRemovalEnabled();
@@ -168,7 +168,7 @@ interface IActivityManager {
     void setNetStatTrackerEnabled(boolean enabled);
     boolean isNetStatTrackerEnabled();
 
-    boolean checkGetContentProvider(String callerPkg, String name);
+    boolean checkGetContentProvider(String callerPkg, String name, int userId);
 
     List<StartRecord> getAllStartRecordsForPackageSetWithRes(String pkgSetId, boolean allowed, boolean blocked);
 

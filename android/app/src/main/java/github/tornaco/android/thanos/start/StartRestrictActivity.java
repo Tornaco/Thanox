@@ -13,6 +13,7 @@ import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivit
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
 import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.start.chart.ComposeStartChartActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
@@ -42,7 +43,7 @@ public class StartRestrictActivity extends CommonFuncToggleAppListFilterActivity
     @Override
     protected OnAppItemSelectStateChangeListener onCreateAppItemSelectStateChangeListener() {
         return (appInfo, selected) -> ThanosManager.from(getApplicationContext())
-                .getActivityManager().setPkgStartBlockEnabled(appInfo.getPkgName(), !selected);
+                .getActivityManager().setPkgStartBlockEnabled(Pkg.fromAppInfo(appInfo), !selected);
     }
 
     @NonNull

@@ -26,7 +26,7 @@ public class ActivityListViewModel extends ComponentListViewModel {
             ThanosManager thanox = ThanosManager.from(getApplication());
 
             for (int i = 0; i < Integer.MAX_VALUE; i++) {
-                List<ComponentInfo> batch = thanox.getPkgManager().getActivitiesInBatch(appInfo.getPkgName(), 20, i);
+                List<ComponentInfo> batch = thanox.getPkgManager().getActivitiesInBatch(appInfo.getUserId(), appInfo.getPkgName(), 20, i);
                 if (batch == null) {
                     break;
                 }

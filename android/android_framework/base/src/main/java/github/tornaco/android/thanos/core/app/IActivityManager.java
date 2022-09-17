@@ -25,7 +25,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public boolean checkService(android.content.Intent intent, android.content.ComponentName service, int callerUid) throws android.os.RemoteException
+    @Override public boolean checkService(android.content.Intent intent, android.content.ComponentName service, int callerUid, int userId) throws android.os.RemoteException
     {
       return false;
     }
@@ -97,10 +97,10 @@ public interface IActivityManager extends android.os.IInterface
     @Override public void setStartBlockEnabled(boolean enable) throws android.os.RemoteException
     {
     }
-    @Override public void setPkgStartBlockEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException
+    @Override public void setPkgStartBlockEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
     {
     }
-    @Override public boolean isPkgStartBlocking(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public boolean isPkgStartBlocking(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return false;
     }
@@ -377,7 +377,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name) throws android.os.RemoteException
+    @Override public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name, int userId) throws android.os.RemoteException
     {
       return false;
     }
@@ -627,7 +627,9 @@ public interface IActivityManager extends android.os.IInterface
           }
           int _arg2;
           _arg2 = data.readInt();
-          boolean _result = this.checkService(_arg0, _arg1, _arg2);
+          int _arg3;
+          _arg3 = data.readInt();
+          boolean _result = this.checkService(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
           return true;
@@ -831,8 +833,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_setPkgStartBlockEnabled:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setPkgStartBlockEnabled(_arg0, _arg1);
@@ -842,8 +849,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_isPkgStartBlocking:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.isPkgStartBlocking(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
@@ -1574,7 +1586,9 @@ public interface IActivityManager extends android.os.IInterface
           _arg0 = data.readString();
           java.lang.String _arg1;
           _arg1 = data.readString();
-          boolean _result = this.checkGetContentProvider(_arg0, _arg1);
+          int _arg2;
+          _arg2 = data.readInt();
+          boolean _result = this.checkGetContentProvider(_arg0, _arg1, _arg2);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
           return true;
@@ -2073,7 +2087,7 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public boolean checkService(android.content.Intent intent, android.content.ComponentName service, int callerUid) throws android.os.RemoteException
+      @Override public boolean checkService(android.content.Intent intent, android.content.ComponentName service, int callerUid, int userId) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -2095,9 +2109,10 @@ public interface IActivityManager extends android.os.IInterface
             _data.writeInt(0);
           }
           _data.writeInt(callerUid);
+          _data.writeInt(userId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkService, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkService(intent, service, callerUid);
+            return getDefaultImpl().checkService(intent, service, callerUid, userId);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -2498,17 +2513,23 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void setPkgStartBlockEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException
+      @Override public void setPkgStartBlockEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgStartBlockEnabled, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPkgStartBlockEnabled(pkgName, enable);
+            getDefaultImpl().setPkgStartBlockEnabled(pkg, enable);
             return;
           }
           _reply.readException();
@@ -2518,17 +2539,23 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public boolean isPkgStartBlocking(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public boolean isPkgStartBlocking(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgStartBlocking, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPkgStartBlocking(pkgName);
+            return getDefaultImpl().isPkgStartBlocking(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -4059,7 +4086,7 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name) throws android.os.RemoteException
+      @Override public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name, int userId) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -4068,9 +4095,10 @@ public interface IActivityManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(callerPkg);
           _data.writeString(name);
+          _data.writeInt(userId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkGetContentProvider, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().checkGetContentProvider(callerPkg, name);
+            return getDefaultImpl().checkGetContentProvider(callerPkg, name, userId);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -4903,7 +4931,7 @@ public interface IActivityManager extends android.os.IInterface
   public void idlePackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean isPackageIdle(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean checkBroadcastingIntent(android.content.Intent intent) throws android.os.RemoteException;
-  public boolean checkService(android.content.Intent intent, android.content.ComponentName service, int callerUid) throws android.os.RemoteException;
+  public boolean checkService(android.content.Intent intent, android.content.ComponentName service, int callerUid, int userId) throws android.os.RemoteException;
   public boolean checkRestartService(java.lang.String packageName, android.content.ComponentName componentName) throws android.os.RemoteException;
   public boolean checkBroadcast(android.content.Intent intent, int receiverUid, int callerUid) throws android.os.RemoteException;
   public boolean checkStartProcess(java.lang.String processName, android.content.pm.ApplicationInfo applicationInfo, java.lang.String hostType, java.lang.String hostName) throws android.os.RemoteException;
@@ -4923,8 +4951,8 @@ public interface IActivityManager extends android.os.IInterface
 
   public boolean isStartBlockEnabled() throws android.os.RemoteException;
   public void setStartBlockEnabled(boolean enable) throws android.os.RemoteException;
-  public void setPkgStartBlockEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException;
-  public boolean isPkgStartBlocking(java.lang.String pkgName) throws android.os.RemoteException;
+  public void setPkgStartBlockEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException;
+  public boolean isPkgStartBlocking(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   // Task removal
 
   public boolean isCleanUpOnTaskRemovalEnabled() throws android.os.RemoteException;
@@ -5012,7 +5040,7 @@ public interface IActivityManager extends android.os.IInterface
   public void dumpCpu(github.tornaco.android.thanos.core.IPrinter p) throws android.os.RemoteException;
   public void setNetStatTrackerEnabled(boolean enabled) throws android.os.RemoteException;
   public boolean isNetStatTrackerEnabled() throws android.os.RemoteException;
-  public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name) throws android.os.RemoteException;
+  public boolean checkGetContentProvider(java.lang.String callerPkg, java.lang.String name, int userId) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.app.start.StartRecord> getAllStartRecordsForPackageSetWithRes(java.lang.String pkgSetId, boolean allowed, boolean blocked) throws android.os.RemoteException;
   // ******************************************************************
   // CAF API

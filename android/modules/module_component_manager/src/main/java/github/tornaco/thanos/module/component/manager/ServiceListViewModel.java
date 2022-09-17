@@ -28,7 +28,7 @@ public class ServiceListViewModel extends ComponentListViewModel {
                     = thanox.getActivityManager().getRunningServiceLegacy(1000);
             List<ComponentName> runningComponents = new ArrayList<>();
             CollectionUtils.consumeRemaining(runningServiceInfos, runningServiceInfo -> runningComponents.add(runningServiceInfo.service));
-            CollectionUtils.consumeRemaining(thanox.getPkgManager().getServices(appInfo.getPkgName()),
+            CollectionUtils.consumeRemaining(thanox.getPkgManager().getServices(appInfo.getUserId(), appInfo.getPkgName()),
                     serviceInfo -> res.add(ComponentModel.builder()
                             .name(serviceInfo.getName())
                             .componentName(serviceInfo.getComponentName())

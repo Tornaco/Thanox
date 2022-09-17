@@ -40,7 +40,7 @@ public class BackgroundRestrictActivity extends CommonFuncToggleAppListFilterAct
     @Override
     protected OnAppItemSelectStateChangeListener onCreateAppItemSelectStateChangeListener() {
         return (appInfo, selected) -> ThanosManager.from(getApplicationContext())
-                .getActivityManager().setPkgBgRestrictEnabled(appInfo.getPkgName(), !selected);
+                .getActivityManager().setPkgBgRestrictEnabled(appInfo, !selected);
     }
 
     @NonNull

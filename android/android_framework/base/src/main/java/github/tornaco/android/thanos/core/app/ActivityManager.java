@@ -221,13 +221,35 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public void setPkgBgRestrictEnabled(String pkgName, boolean enable) {
-        server.setPkgBgRestrictEnabled(pkgName, enable);
+        server.setPkgBgRestrictEnabled(Pkg.systemUserPkg(pkgName), enable);
     }
 
     @SneakyThrows
+    public void setPkgBgRestrictEnabled(Pkg pkg, boolean enable) {
+        server.setPkgBgRestrictEnabled(pkg, enable);
+    }
+
+    @SneakyThrows
+    public void setPkgBgRestrictEnabled(AppInfo appInfo, boolean enable) {
+        server.setPkgBgRestrictEnabled(Pkg.fromAppInfo(appInfo), enable);
+    }
+
+    @SneakyThrows
+    @Deprecated
     public boolean isPkgBgRestricted(String pkgName) {
-        return server.isPkgBgRestricted(pkgName);
+        return server.isPkgBgRestricted(Pkg.systemUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public boolean isPkgBgRestricted(Pkg pkg) {
+        return server.isPkgBgRestricted(pkg);
+    }
+
+    @SneakyThrows
+    public boolean isPkgBgRestricted(AppInfo appInfo) {
+        return server.isPkgBgRestricted(Pkg.fromAppInfo(appInfo));
     }
 
     @SneakyThrows

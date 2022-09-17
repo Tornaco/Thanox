@@ -60,8 +60,8 @@ interface IActivityManager {
     // 后台运行设置
     boolean isBgRestrictEnabled();
     void setBgRestrictEnabled(boolean enable);
-    void setPkgBgRestrictEnabled(String pkgName, boolean enable);
-    boolean isPkgBgRestricted(String pkgName);
+    void setPkgBgRestrictEnabled(in Pkg pkg, boolean enable);
+    boolean isPkgBgRestricted(in Pkg pkg);
 
     void setBgRestrictNotificationEnabled(boolean enabled);
     boolean isBgRestrictNotificationEnabled();

@@ -463,12 +463,12 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
         @Override
         boolean current() {
-            return !ThanosManager.from(getContext()).getActivityManager().isPkgBgRestricted(appInfo.getPkgName());
+            return !ThanosManager.from(getContext()).getActivityManager().isPkgBgRestricted(appInfo);
         }
 
         @Override
         void setTo(boolean value) {
-            ThanosManager.from(getContext()).getActivityManager().setPkgBgRestrictEnabled(appInfo.getPkgName(), !value);
+            ThanosManager.from(getContext()).getActivityManager().setPkgBgRestrictEnabled(appInfo, !value);
         }
     }
 

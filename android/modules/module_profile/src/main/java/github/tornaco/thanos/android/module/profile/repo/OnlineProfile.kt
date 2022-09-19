@@ -53,5 +53,6 @@ data class Profile(
     val description: String,
     val priority: Int,
     val condition: String,
+    val delay: Int,
     val actions: List<String>
 )

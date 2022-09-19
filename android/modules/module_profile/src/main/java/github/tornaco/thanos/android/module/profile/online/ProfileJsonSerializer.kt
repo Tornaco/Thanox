@@ -34,6 +34,7 @@ class ProfileJsonSerializer : JsonSerializer<Profile> {
             add("name", context.serialize(src.name))
             add("description", context.serialize(src.description))
             add("priority", context.serialize(src.priority))
+            add("delay", context.serialize(src.delay))
             add("condition", context.serialize(src.condition))
             add("actions", context.serialize(src.actions))
         }

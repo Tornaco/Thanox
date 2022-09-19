@@ -1,0 +1,17 @@
+{
+    "author": "Tornaco",
+    "version": 1,
+    "tags": [
+        "app_opt"
+    ],
+    "profile": {
+        "name": "回到后台就停止 Kill app on background",
+        "description": "如果这个应用在【后台运行】的禁止列表中，那么当该应用回到后台6s后，强行停止该应用。Kill app in background task block list when it become background with 6s delay",
+        "priority": 1,
+        "delay": 6000,
+        "condition": "frontPkgChanged && thanos.activityManager.isPkgBgRestricted(from)",
+        "actions": [
+            "if (thanos.activityManager.currentFrontApp != from) { ui.showShortToast(\"Kill \" + thanos.pkgManager.getAppInfo(from).appLabel); thanos.activityManager.forceStopPackage(from);}"
+        ]
+    }
+}

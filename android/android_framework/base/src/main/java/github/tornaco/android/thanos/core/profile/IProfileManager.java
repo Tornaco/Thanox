@@ -195,6 +195,13 @@ public interface IProfileManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public void setCustomSuCommand(java.lang.String command) throws android.os.RemoteException
+    {
+    }
+    @Override public java.lang.String getCustomSuCommand() throws android.os.RemoteException
+    {
+      return null;
+    }
     // Engines.
 
     @Override public void addAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException
@@ -809,6 +816,23 @@ public interface IProfileManager extends android.os.IInterface
           else {
             reply.writeInt(0);
           }
+          return true;
+        }
+        case TRANSACTION_setCustomSuCommand:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          this.setCustomSuCommand(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getCustomSuCommand:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _result = this.getCustomSuCommand();
+          reply.writeNoException();
+          reply.writeString(_result);
           return true;
         }
         case TRANSACTION_addAlarmEngine:
@@ -1989,6 +2013,45 @@ public interface IProfileManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public void setCustomSuCommand(java.lang.String command) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(command);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setCustomSuCommand, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setCustomSuCommand(command);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.lang.String getCustomSuCommand() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getCustomSuCommand, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getCustomSuCommand();
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       // Engines.
 
       @Override public void addAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException
@@ -2141,10 +2204,12 @@ public interface IProfileManager extends android.os.IInterface
     static final int TRANSACTION_removeConsoleLogSink = (android.os.IBinder.FIRST_CALL_TRANSACTION + 49);
     static final int TRANSACTION_parseRuleOrNull = (android.os.IBinder.FIRST_CALL_TRANSACTION + 50);
     static final int TRANSACTION_getRuleByName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 51);
-    static final int TRANSACTION_addAlarmEngine = (android.os.IBinder.FIRST_CALL_TRANSACTION + 52);
-    static final int TRANSACTION_removeAlarmEngine = (android.os.IBinder.FIRST_CALL_TRANSACTION + 53);
-    static final int TRANSACTION_getAllAlarms = (android.os.IBinder.FIRST_CALL_TRANSACTION + 54);
-    static final int TRANSACTION_setAlarmEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 55);
+    static final int TRANSACTION_setCustomSuCommand = (android.os.IBinder.FIRST_CALL_TRANSACTION + 52);
+    static final int TRANSACTION_getCustomSuCommand = (android.os.IBinder.FIRST_CALL_TRANSACTION + 53);
+    static final int TRANSACTION_addAlarmEngine = (android.os.IBinder.FIRST_CALL_TRANSACTION + 54);
+    static final int TRANSACTION_removeAlarmEngine = (android.os.IBinder.FIRST_CALL_TRANSACTION + 55);
+    static final int TRANSACTION_getAllAlarms = (android.os.IBinder.FIRST_CALL_TRANSACTION + 56);
+    static final int TRANSACTION_setAlarmEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 57);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IProfileManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -2214,6 +2279,8 @@ public interface IProfileManager extends android.os.IInterface
   public void removeConsoleLogSink(github.tornaco.android.thanos.core.profile.ILogSink sink) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.profile.RuleInfo parseRuleOrNull(java.lang.String ruleString, int format) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.profile.RuleInfo getRuleByName(java.lang.String ruleName) throws android.os.RemoteException;
+  public void setCustomSuCommand(java.lang.String command) throws android.os.RemoteException;
+  public java.lang.String getCustomSuCommand() throws android.os.RemoteException;
   // Engines.
 
   public void addAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException;

@@ -303,4 +303,14 @@ public class ProfileManager {
     public void removeAlarmEngine(Alarm alarm) {
         server.removeAlarmEngine(alarm);
     }
+
+    @SneakyThrows
+    public void setCustomSuCommand(String command) {
+        server.setCustomSuCommand(command);
+    }
+
+    @SneakyThrows
+    public String getCustomSuCommand() {
+        return server.getCustomSuCommand();
+    }
 }

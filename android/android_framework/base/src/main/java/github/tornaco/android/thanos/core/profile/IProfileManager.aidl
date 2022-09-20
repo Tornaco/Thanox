@@ -89,6 +89,9 @@ interface IProfileManager {
     RuleInfo parseRuleOrNull(String ruleString, int format);
     RuleInfo getRuleByName(String ruleName);
 
+    void setCustomSuCommand(String command);
+    String getCustomSuCommand();
+
     // Engines.
     void addAlarmEngine(in Alarm alarm);
     void removeAlarmEngine(in Alarm alarm);

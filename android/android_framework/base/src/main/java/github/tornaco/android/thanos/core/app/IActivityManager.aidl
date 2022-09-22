@@ -11,7 +11,7 @@ import github.tornaco.android.thanos.core.os.SwapInfo;
 interface IActivityManager {
     String getCurrentFrontApp();
 
-    void forceStopPackage(in Pkg pkg);
+    void forceStopPackage(in Pkg pkg, String reason);
 
     void idlePackage(in Pkg pkg);
     boolean isPackageIdle(in Pkg pkg);

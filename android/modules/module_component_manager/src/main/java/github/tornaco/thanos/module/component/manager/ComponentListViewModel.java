@@ -123,7 +123,7 @@ public abstract class ComponentListViewModel extends AndroidViewModel {
 
     public void selectAll(AppInfo appInfo, boolean enabled, Consumer<String> onUpdate, Runnable onComplete) {
         int totalCount = componentModels.size();
-        ThanosManager.from(getApplication()).getActivityManager().forceStopPackage(Pkg.fromAppInfo(appInfo));
+        ThanosManager.from(getApplication()).getActivityManager().forceStopPackage(Pkg.fromAppInfo(appInfo), "ComponentList UI selectAll");
 
         // Wait 1s.
         disposables.add(Completable.fromAction(() -> {

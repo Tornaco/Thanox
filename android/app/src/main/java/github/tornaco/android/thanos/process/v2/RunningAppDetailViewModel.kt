@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 data class RunningAppDetailState(
-    val cpuState: CpuUsageStatsState
+    val cpuState: CpuUsageStatsState,
 )
 
 @SuppressLint("StaticFieldLeak")
@@ -65,7 +65,8 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
     }
 
     fun forceStop(runningAppState: RunningAppState) {
-        thanox.activityManager.forceStopPackage(Pkg.fromAppInfo(runningAppState.appInfo))
+        thanox.activityManager.forceStopPackage(Pkg.fromAppInfo(runningAppState.appInfo),
+            "RunningApp detail UI forceStop")
     }
 
     suspend fun startQueryCpuUsage(runningAppState: RunningAppState) {

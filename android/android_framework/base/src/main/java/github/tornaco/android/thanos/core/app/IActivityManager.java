@@ -11,7 +11,7 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public void forceStopPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    @Override public void forceStopPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String reason) throws android.os.RemoteException
     {
     }
     @Override public void idlePackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
@@ -560,7 +560,9 @@ public interface IActivityManager extends android.os.IInterface
           else {
             _arg0 = null;
           }
-          this.forceStopPackage(_arg0);
+          java.lang.String _arg1;
+          _arg1 = data.readString();
+          this.forceStopPackage(_arg0, _arg1);
           reply.writeNoException();
           return true;
         }
@@ -1993,7 +1995,7 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void forceStopPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      @Override public void forceStopPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String reason) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -2006,9 +2008,10 @@ public interface IActivityManager extends android.os.IInterface
           else {
             _data.writeInt(0);
           }
+          _data.writeString(reason);
           boolean _status = mRemote.transact(Stub.TRANSACTION_forceStopPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().forceStopPackage(pkg);
+            getDefaultImpl().forceStopPackage(pkg, reason);
             return;
           }
           _reply.readException();
@@ -4949,7 +4952,7 @@ public interface IActivityManager extends android.os.IInterface
     }
   }
   public java.lang.String getCurrentFrontApp() throws android.os.RemoteException;
-  public void forceStopPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void forceStopPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String reason) throws android.os.RemoteException;
   public void idlePackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean isPackageIdle(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public boolean checkBroadcastingIntent(android.content.Intent intent) throws android.os.RemoteException;

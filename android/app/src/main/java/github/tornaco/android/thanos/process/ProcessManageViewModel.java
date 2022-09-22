@@ -162,7 +162,7 @@ public class ProcessManageViewModel extends AndroidViewModel {
         ThanosManager.from(getApplication())
                 .ifServiceInstalled(thanosManager -> {
                     thanosManager.getActivityManager()
-                            .forceStopPackage(Pkg.fromAppInfo(appInfo));
+                            .forceStopPackage(Pkg.fromAppInfo(appInfo), "Process Manage UI killApp");
 
                     loadProcess();
                 });

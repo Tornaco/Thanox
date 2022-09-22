@@ -40,17 +40,26 @@ public class ActivityManager {
     }
 
     /**
-     * @deprecated User {{@link #forceStopPackage(Pkg)} instead}
+     * @deprecated User {{@link #forceStopPackage(Pkg, String)} instead}
      */
     @SneakyThrows
     @Deprecated
     public void forceStopPackage(String packageName) {
-        server.forceStopPackage(Pkg.systemUserPkg(packageName));
+        server.forceStopPackage(Pkg.systemUserPkg(packageName), "Not defined.");
+    }
+
+    /**
+     * @deprecated User {{@link #forceStopPackage(Pkg, String)} instead}
+     */
+    @SneakyThrows
+    @Deprecated
+    public void forceStopPackage(Pkg pkg) {
+        server.forceStopPackage(pkg, "Not defined.");
     }
 
     @SneakyThrows
-    public void forceStopPackage(Pkg pkg) {
-        server.forceStopPackage(pkg);
+    public void forceStopPackage(Pkg pkg, String reason) {
+        server.forceStopPackage(pkg, reason);
     }
 
     /**

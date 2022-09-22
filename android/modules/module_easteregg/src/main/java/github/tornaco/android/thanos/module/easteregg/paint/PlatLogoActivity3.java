@@ -40,6 +40,7 @@ import android.widget.ImageView;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.module.easteregg.R;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import lang3.ArrayUtils;
 
 
 public class PlatLogoActivity3 extends Activity {
@@ -64,7 +65,6 @@ public class PlatLogoActivity3 extends Activity {
             {"🐙", "🪸", "🦑", "🦀", "🦐", "🐡", "🦞", "🐠", "🐟", "🐳", "🐋", "🐬", "🫧", "🌊",
                     "🦈"},
             {"🙈", "🙉", "🙊", "🐵", "🐒"},
-            {"♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"},
             {"🕛", "🕧", "🕐", "🕜", "🕑", "🕝", "🕒", "🕞", "🕓", "🕟", "🕔", "🕠", "🕕", "🕡",
                     "🕖", "🕢", "🕗", "🕣", "🕘", "🕤", "🕙", "🕥", "🕚", "🕦"},
             {"🌺", "🌸", "💮", "🏵️", "🌼", "🌿"},
@@ -116,8 +116,11 @@ public class PlatLogoActivity3 extends Activity {
 
         setContentView(layout);
         launchNextStage();
-    }
 
+        for (String[] emojiSets : EMOJI_SETS) {
+            ThanosManager.from(this).getProfileManager().executeAction(String.format("ui.showDanmu(\"%s\")", ArrayUtils.toString(emojiSets, "")));
+        }
+    }
 
     private void launchNextStage() {
         mLogo.setAlpha(0f);

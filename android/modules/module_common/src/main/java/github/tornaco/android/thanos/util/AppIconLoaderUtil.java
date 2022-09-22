@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.elvishew.xlog.XLog;
 
-import github.tornaco.android.common.util.ApkUtil;
+import github.tornaco.android.thanos.core.util.ApkUtil;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.util.iconpack.IconPack;
 import github.tornaco.android.thanos.util.iconpack.IconPackManager;

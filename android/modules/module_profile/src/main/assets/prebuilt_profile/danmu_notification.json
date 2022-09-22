@@ -5,7 +5,7 @@
     "priority": 1,
     "condition": "notificationAdded && pkgName != \"android\"",
     "actions": [
-      "ui.showDanmu(thanos.pkgManager.getAppInfo(pkgName).appLabel + \" \" + notificationTitle + \" \" + notificationContent);"
+      "ui.showDanmu(\"app://\" + pkgName ,thanos.pkgManager.getAppInfo(pkgName).appLabel + \" \" + notificationTitle + \" \" + notificationContent);"
     ]
   }
 ]

@@ -9,6 +9,15 @@ interface IUI {
 
     void showDanmu(@NonNull Object msg);
 
+    /**
+     * Show a danmu on your screen.
+     *
+     * @param icon Icon for danmu, supported format:
+     *             app icon: app://com.app.package.name
+     * @param msg  The text to show
+     */
+    void showDanmu(@Nullable String icon, @NonNull Object msg);
+
     void showShortToast(@NonNull Object msg);
 
     void showLongToast(@NonNull Object msg);

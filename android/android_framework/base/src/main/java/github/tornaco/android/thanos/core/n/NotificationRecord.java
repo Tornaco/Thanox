@@ -15,7 +15,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"pkgName", "when", "title", "content"})
+@EqualsAndHashCode(of = {"pkgName", "when", "title", "content", "userId"})
 public final class NotificationRecord implements Parcelable {
 
     public static class Types {

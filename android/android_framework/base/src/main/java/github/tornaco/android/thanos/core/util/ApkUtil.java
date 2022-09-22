@@ -1,4 +1,4 @@
-package github.tornaco.android.common.util;
+package github.tornaco.android.thanos.core.util;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -22,7 +22,7 @@ public abstract class ApkUtil {
             ApplicationInfo info = pm.getApplicationInfo(pkg, PackageManager.GET_UNINSTALLED_PACKAGES);
             if (info == null) return null;
             return info.loadLabel(pm);
-        } catch (PackageManager.NameNotFoundException e) {
+        } catch (Throwable e) {
             XLog.e("loadNameByPkgName error", e);
             return null;
         }
@@ -34,7 +34,7 @@ public abstract class ApkUtil {
             ApplicationInfo info = pm.getApplicationInfo(pkg, PackageManager.GET_UNINSTALLED_PACKAGES);
             if (info == null) return null;
             return info.loadIcon(pm);
-        } catch (PackageManager.NameNotFoundException e) {
+        } catch (Throwable e) {
             XLog.e("loadIconByPkgName error", e);
             return null;
         }

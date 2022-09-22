@@ -37,12 +37,39 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.module.easteregg.R;
 import github.tornaco.android.thanos.util.ActivityUtils;
 
 
 public class PlatLogoActivity3 extends Activity {
     private static final String TAG = "PlatLogoActivity";
+
+    private static final String[][] EMOJI_SETS = {
+            {"🍇", "🍈", "🍉", "🍊", "🍋", "🍌", "🍍", "🥭", "🍎", "🍏", "🍐", "🍑",
+                    "🍒", "🍓", "🫐", "🥝"},
+            {"😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾"},
+            {"😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃", "🫠", "😉", "😊",
+                    "😇", "🥰", "😍", "🤩", "😘", "😗", "☺️", "😚", "😙", "🥲", "😋", "😛", "😜",
+                    "🤪", "😝", "🤑", "🤗", "🤭", "🫢", "🫣", "🤫", "🤔", "🫡", "🤐", "🤨", "😐",
+                    "😑", "😶", "🫥", "😏", "😒", "🙄", "😬", "🤥", "😌", "😔", "😪", "🤤", "😴",
+                    "😷"},
+            {"🤩", "😍", "🥰", "😘", "🥳", "🥲", "🥹"},
+            {"🫠"},
+            {"💘", "💝", "💖", "💗", "💓", "💞", "💕", "❣", "💔", "❤", "🧡", "💛",
+                    "💚", "💙", "💜", "🤎", "🖤", "🤍"},
+            // {"👁", "️🫦", "👁️"}, // this one is too much
+            {"👽", "🛸", "✨", "🌟", "💫", "🚀", "🪐", "🌙", "⭐", "🌍"},
+            {"🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"},
+            {"🐙", "🪸", "🦑", "🦀", "🦐", "🐡", "🦞", "🐠", "🐟", "🐳", "🐋", "🐬", "🫧", "🌊",
+                    "🦈"},
+            {"🙈", "🙉", "🙊", "🐵", "🐒"},
+            {"♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"},
+            {"🕛", "🕧", "🕐", "🕜", "🕑", "🕝", "🕒", "🕞", "🕓", "🕟", "🕔", "🕠", "🕕", "🕡",
+                    "🕖", "🕢", "🕗", "🕣", "🕘", "🕤", "🕙", "🕥", "🕚", "🕦"},
+            {"🌺", "🌸", "💮", "🏵️", "🌼", "🌿"},
+            {"🐢", "✨", "🌟", "👑"}
+    };
 
     private ImageView mLogo;
     private BubblesDrawable mBg;
@@ -77,7 +104,7 @@ public class PlatLogoActivity3 extends Activity {
 
         mLogo = new ImageView(this);
         mLogo.setVisibility(View.GONE);
-        mLogo.setImageResource(R.drawable.module_easteregg_platlogo3);
+        mLogo.setImageResource(R.drawable.module_easteregg_platlogo33);
         layout.addView(mLogo, lp);
 
         mBg = new BubblesDrawable();

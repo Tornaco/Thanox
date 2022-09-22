@@ -7,7 +7,7 @@ import github.tornaco.android.thanos.core.annotation.Nullable;
 public
 interface IUI {
 
-    void showLiveDanmu(@NonNull Object msg);
+    void showDanmu(@NonNull Object msg);
 
     void showShortToast(@NonNull Object msg);
 

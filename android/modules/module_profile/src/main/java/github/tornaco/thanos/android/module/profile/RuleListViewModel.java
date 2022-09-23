@@ -301,6 +301,13 @@ public class RuleListViewModel extends AndroidViewModel {
             return new RuleUiItem(info, warn);
         }
 
+        // facts.put("globalVarOf$$it", list)
+        List<String> missingGlobalVarNames = RuleAnalyserKt.getMissingGlobalVarNames(getApplication(), info.getRuleString());
+        if (!missingGlobalVarNames.isEmpty()) {
+            String warn = getApplication().getString(R.string.module_profile_miss_global_var, RuleAnalyserKt.formatGlobalVarNames(missingGlobalVarNames, System.lineSeparator()));
+            return new RuleUiItem(info, warn);
+        }
+
         return new RuleUiItem(info, null);
     }
 }

@@ -16,7 +16,7 @@
     <string name="module_profile_pref_title_rule_engine_su">su API</string>
     <string name="module_profile_should_enable_su">這條情景模式可能需要打開<b>su API</b>才能工作, 請進入引擎設置中開啟</string>
     <string name="module_profile_should_enable_push">這條情景模式可能需要打開<b>推送消息引擎</b>才能工作, 請進入引擎設置中開啟</string>
-    <string name="module_profile_miss_global_var">這條情景模式需要創建如下快捷方式才能工作。\n%s</string>
+    <string name="module_profile_miss_global_var">這條情景模式需要創建如下全局变量才能工作。\n%s</string>
 
     <string name="module_profile_pref_title_rule_engine_shortcut">从快捷方式</string>
     <string name="module_profile_pref_summary_rule_engine_shortcut">创建一个桌面快捷方式，当这个快捷方式被点击启动时，thanox会发布该快捷方式表示的事实</string>

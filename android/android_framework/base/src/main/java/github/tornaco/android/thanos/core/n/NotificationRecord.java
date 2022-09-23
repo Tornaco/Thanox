@@ -36,6 +36,7 @@ public final class NotificationRecord implements Parcelable {
     private final String notificationId;
     private final int visibility;
     private final int type;
+    private final boolean isForegroundService;
 
     private NotificationRecord(Parcel in) {
         id = in.readInt();
@@ -50,6 +51,7 @@ public final class NotificationRecord implements Parcelable {
         notificationId = in.readString();
         visibility = in.readInt();
         type = in.readInt();
+        isForegroundService = in.readByte() != 0;
     }
 
     public static final Creator<NotificationRecord> CREATOR = new Creator<NotificationRecord>() {
@@ -83,6 +85,7 @@ public final class NotificationRecord implements Parcelable {
         parcel.writeString(notificationId);
         parcel.writeInt(visibility);
         parcel.writeInt(type);
+        parcel.writeByte((byte) (isForegroundService ? 1 : 0));
     }
 
     public boolean isToast() {

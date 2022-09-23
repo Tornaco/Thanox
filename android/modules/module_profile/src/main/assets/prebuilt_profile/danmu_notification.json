@@ -3,9 +3,9 @@
     "name": "弹幕通知 Danmu notification",
     "description": "收到通知时用弹幕展示 Show Danmu on notification posted",
     "priority": 1,
-    "condition": "notificationAdded && pkgName != \"android\"",
+    "condition": "notificationAdded && !notification.isForegroundService && pkgName != \"android\"",
     "actions": [
-      "ui.showDanmu(\"app://\" + pkgName ,thanos.pkgManager.getAppInfo(pkgName).appLabel + \" \" + notificationTitle + \" \" + notificationContent);"
+      "ui.showDanmu(\"app://\" + pkgName, thanos.pkgManager.getAppInfo(pkgName).appLabel + \" \" + notificationTitle + \"\n\" + notificationContent);"
     ]
   }
 ]

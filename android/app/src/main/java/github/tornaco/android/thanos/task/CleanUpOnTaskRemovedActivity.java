@@ -1,7 +1,6 @@
 package github.tornaco.android.thanos.task;
 
 import android.content.Context;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +10,7 @@ import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivit
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
 import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.util.ActivityUtils;
 
 public class CleanUpOnTaskRemovedActivity extends CommonFuncToggleAppListFilterActivity {
@@ -35,7 +35,7 @@ public class CleanUpOnTaskRemovedActivity extends CommonFuncToggleAppListFilterA
     @Override
     protected OnAppItemSelectStateChangeListener onCreateAppItemSelectStateChangeListener() {
         return (appInfo, selected) -> ThanosManager.from(getApplicationContext())
-                .getActivityManager().setPkgCleanUpOnTaskRemovalEnabled(appInfo.getPkgName(), selected);
+                .getActivityManager().setPkgCleanUpOnTaskRemovalEnabled(Pkg.fromAppInfo(appInfo), selected);
     }
 
     @NonNull

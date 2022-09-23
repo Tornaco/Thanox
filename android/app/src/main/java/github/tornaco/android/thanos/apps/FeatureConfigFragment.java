@@ -502,12 +502,12 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
         @Override
         boolean current() {
-            return ThanosManager.from(getContext()).getActivityManager().isPkgCleanUpOnTaskRemovalEnabled(appInfo.getPkgName());
+            return ThanosManager.from(getContext()).getActivityManager().isPkgCleanUpOnTaskRemovalEnabled(Pkg.fromAppInfo(appInfo));
         }
 
         @Override
         void setTo(boolean value) {
-            ThanosManager.from(getContext()).getActivityManager().setPkgCleanUpOnTaskRemovalEnabled(appInfo.getPkgName(), value);
+            ThanosManager.from(getContext()).getActivityManager().setPkgCleanUpOnTaskRemovalEnabled(Pkg.fromAppInfo(appInfo), value);
         }
 
         @Override

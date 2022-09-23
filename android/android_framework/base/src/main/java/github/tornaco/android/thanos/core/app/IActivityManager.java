@@ -113,10 +113,10 @@ public interface IActivityManager extends android.os.IInterface
     @Override public void setCleanUpOnTaskRemovalEnabled(boolean enable) throws android.os.RemoteException
     {
     }
-    @Override public void setPkgCleanUpOnTaskRemovalEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException
+    @Override public void setPkgCleanUpOnTaskRemovalEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
     {
     }
-    @Override public boolean isPkgCleanUpOnTaskRemovalEnabled(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public boolean isPkgCleanUpOnTaskRemovalEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return false;
     }
@@ -883,8 +883,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_setPkgCleanUpOnTaskRemovalEnabled:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setPkgCleanUpOnTaskRemovalEnabled(_arg0, _arg1);
@@ -894,8 +899,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_isPkgCleanUpOnTaskRemovalEnabled:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.isPkgCleanUpOnTaskRemovalEnabled(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
@@ -2620,17 +2630,23 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void setPkgCleanUpOnTaskRemovalEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException
+      @Override public void setPkgCleanUpOnTaskRemovalEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgCleanUpOnTaskRemovalEnabled, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPkgCleanUpOnTaskRemovalEnabled(pkgName, enable);
+            getDefaultImpl().setPkgCleanUpOnTaskRemovalEnabled(pkg, enable);
             return;
           }
           _reply.readException();
@@ -2640,17 +2656,23 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public boolean isPkgCleanUpOnTaskRemovalEnabled(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public boolean isPkgCleanUpOnTaskRemovalEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgCleanUpOnTaskRemovalEnabled, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPkgCleanUpOnTaskRemovalEnabled(pkgName);
+            return getDefaultImpl().isPkgCleanUpOnTaskRemovalEnabled(pkg);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -4982,8 +5004,8 @@ public interface IActivityManager extends android.os.IInterface
 
   public boolean isCleanUpOnTaskRemovalEnabled() throws android.os.RemoteException;
   public void setCleanUpOnTaskRemovalEnabled(boolean enable) throws android.os.RemoteException;
-  public void setPkgCleanUpOnTaskRemovalEnabled(java.lang.String pkgName, boolean enable) throws android.os.RemoteException;
-  public boolean isPkgCleanUpOnTaskRemovalEnabled(java.lang.String pkgName) throws android.os.RemoteException;
+  public void setPkgCleanUpOnTaskRemovalEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException;
+  public boolean isPkgCleanUpOnTaskRemovalEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   // 后台运行设置
 
   public boolean isBgRestrictEnabled() throws android.os.RemoteException;

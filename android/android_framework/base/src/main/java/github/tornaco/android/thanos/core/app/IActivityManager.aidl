@@ -54,8 +54,8 @@ interface IActivityManager {
     // Task removal
     boolean isCleanUpOnTaskRemovalEnabled();
     void setCleanUpOnTaskRemovalEnabled(boolean enable);
-    void setPkgCleanUpOnTaskRemovalEnabled(String pkgName, boolean enable);
-    boolean isPkgCleanUpOnTaskRemovalEnabled(String pkgName);
+    void setPkgCleanUpOnTaskRemovalEnabled(in Pkg pkg, boolean enable);
+    boolean isPkgCleanUpOnTaskRemovalEnabled(in Pkg pkg);
 
     // 后台运行设置
     boolean isBgRestrictEnabled();

@@ -317,13 +317,25 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public void setPkgCleanUpOnTaskRemovalEnabled(String pkgName, boolean enable) {
-        server.setPkgCleanUpOnTaskRemovalEnabled(pkgName, enable);
+        server.setPkgCleanUpOnTaskRemovalEnabled(Pkg.systemUserPkg(pkgName), enable);
     }
 
     @SneakyThrows
+    public void setPkgCleanUpOnTaskRemovalEnabled(Pkg pkg, boolean enable) {
+        server.setPkgCleanUpOnTaskRemovalEnabled(pkg, enable);
+    }
+
+    @SneakyThrows
+    @Deprecated
     public boolean isPkgCleanUpOnTaskRemovalEnabled(String pkgName) {
-        return server.isPkgCleanUpOnTaskRemovalEnabled(pkgName);
+        return server.isPkgCleanUpOnTaskRemovalEnabled(Pkg.systemUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public boolean isPkgCleanUpOnTaskRemovalEnabled(Pkg pkg) {
+        return server.isPkgCleanUpOnTaskRemovalEnabled(pkg);
     }
 
     @SneakyThrows

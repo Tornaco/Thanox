@@ -379,13 +379,25 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public void setPkgRecentTaskBlurEnabled(String pkgName, boolean enable) {
-        server.setPkgRecentTaskBlurEnabled(pkgName, enable);
+        server.setPkgRecentTaskBlurEnabled(Pkg.systemUserPkg(pkgName), enable);
     }
 
     @SneakyThrows
+    public void setPkgRecentTaskBlurEnabled(Pkg pkg, boolean enable) {
+        server.setPkgRecentTaskBlurEnabled(pkg, enable);
+    }
+
+    @SneakyThrows
+    @Deprecated
     public boolean isPkgRecentTaskBlurEnabled(String pkgName) {
-        return server.isPkgRecentTaskBlurEnabled(pkgName);
+        return server.isPkgRecentTaskBlurEnabled(Pkg.systemUserPkg(pkgName));
+    }
+
+    @SneakyThrows
+    public boolean isPkgRecentTaskBlurEnabled(Pkg pkg) {
+        return server.isPkgRecentTaskBlurEnabled(pkg);
     }
 
     @SneakyThrows

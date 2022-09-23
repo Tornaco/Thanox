@@ -19,6 +19,7 @@ import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener;
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import util.CollectionUtils;
 
@@ -50,7 +51,8 @@ public class RecentTaskBlurListActivity extends CommonFuncToggleAppListFilterAct
     @Override
     protected OnAppItemSelectStateChangeListener onCreateAppItemSelectStateChangeListener() {
         return (appInfo, selected)
-                -> ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> thanosManager.getActivityManager().setPkgRecentTaskBlurEnabled(appInfo.getPkgName(), selected));
+                -> ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager ->
+                thanosManager.getActivityManager().setPkgRecentTaskBlurEnabled(Pkg.fromAppInfo(appInfo), selected));
     }
 
     @NonNull
@@ -65,7 +67,7 @@ public class RecentTaskBlurListActivity extends CommonFuncToggleAppListFilterAct
             List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
-                appInfo.setSelected(am.isPkgRecentTaskBlurEnabled(appInfo.getPkgName()));
+                appInfo.setSelected(am.isPkgRecentTaskBlurEnabled(Pkg.fromAppInfo(appInfo)));
                 res.add(new AppListModel(appInfo, null, null, composer.getAppItemDescription(appInfo)));
             });
             Collections.sort(res);

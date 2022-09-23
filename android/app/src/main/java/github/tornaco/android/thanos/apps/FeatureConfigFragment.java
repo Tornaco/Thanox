@@ -480,12 +480,12 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
         @Override
         boolean current() {
-            return ThanosManager.from(getContext()).getActivityManager().isPkgRecentTaskBlurEnabled(appInfo.getPkgName());
+            return ThanosManager.from(getContext()).getActivityManager().isPkgRecentTaskBlurEnabled(Pkg.fromAppInfo(appInfo));
         }
 
         @Override
         void setTo(boolean value) {
-            ThanosManager.from(getContext()).getActivityManager().setPkgRecentTaskBlurEnabled(appInfo.getPkgName(), value);
+            ThanosManager.from(getContext()).getActivityManager().setPkgRecentTaskBlurEnabled(Pkg.fromAppInfo(appInfo), value);
         }
 
         @Override

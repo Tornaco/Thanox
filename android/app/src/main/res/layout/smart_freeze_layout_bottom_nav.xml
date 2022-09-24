@@ -14,20 +14,34 @@
             android:layout_above="@id/bottom_navigation"
             tools:background="@color/md_amber_300" />
 
-        <com.google.android.material.tabs.TabLayout
+        <RelativeLayout
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:paddingStart="@dimen/common_view_margin_default"
-            android:paddingEnd="@dimen/common_view_margin_default"
-            android:paddingBottom="@dimen/common_view_margin_tiny"
-            android:paddingTop="@dimen/common_view_margin_tiny"
-            app:tabGravity="start"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabMode="scrollable"
-            app:tabPadding="@dimen/common_view_margin_default"
-            tools:layout_height="80dp" />
+            android:layout_alignParentBottom="true">
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/bottom_navigation_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/freeze_all"
+                android:paddingStart="@dimen/common_view_margin_default"
+                android:paddingTop="@dimen/common_view_margin_tiny"
+                android:paddingEnd="@dimen/common_view_margin_default"
+                app:tabGravity="start"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabMode="scrollable"
+                tools:layout_height="80dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/freeze_all"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                app:icon="@drawable/ic_ac_unit_black_24dp"
+                app:iconGravity="textStart" />
+        </RelativeLayout>
     </RelativeLayout>
 </layout>

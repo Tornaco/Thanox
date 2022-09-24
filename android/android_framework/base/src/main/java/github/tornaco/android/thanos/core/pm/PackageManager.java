@@ -481,4 +481,9 @@ public class PackageManager {
     public boolean isDOLTipsEnabled() {
         return pm.isDOLTipsEnabled();
     }
+
+    @SneakyThrows
+    public void freezeAllSmartFreezePackages(PackageEnableStateChangeListener listener) {
+        pm.freezeAllSmartFreezePackages(listener.stub);
+    }
 }

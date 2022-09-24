@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.core.pm;
 
 import github.tornaco.android.thanos.core.pm.IAddPluginCallback;
 import github.tornaco.android.thanos.core.pm.IPackageSetChangeListener;
+import github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener;
 import github.tornaco.android.thanos.core.pm.ComponentInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.IPrinter;
@@ -121,4 +122,6 @@ interface IPkgManager {
     boolean isDOLTipsEnabled();
 
     void updatePackageSetLabel(String newLabel, String id);
+
+    void freezeAllSmartFreezePackages(in IPackageEnableStateChangeListener listener);
 }

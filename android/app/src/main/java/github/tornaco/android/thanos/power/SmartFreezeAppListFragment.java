@@ -710,4 +710,8 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                 .getInstance(activity.getApplication());
         return ViewModelProviders.of(activity, factory).get(SmartFreezeAppsViewModel.class);
     }
+
+    public void freezeAll() {
+        viewModel.freezeAll();
+    }
 }

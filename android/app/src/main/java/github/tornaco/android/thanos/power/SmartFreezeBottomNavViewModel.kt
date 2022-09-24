@@ -42,5 +42,4 @@ class SmartFreezeBottomNavViewModel : ViewModel() {
 
             return@Comparator -scoreO1.compareTo(scoreO2)
         }
-
 }

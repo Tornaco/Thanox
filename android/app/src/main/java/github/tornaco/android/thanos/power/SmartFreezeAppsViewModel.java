@@ -44,6 +44,7 @@ import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.sort.AppSort;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.PackageEnableStateChangeListener;
 import github.tornaco.android.thanos.core.pm.PackageSet;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.PkgUtils;
@@ -102,19 +103,10 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     private void loadModels() {
         if (isDataLoading.get()) return;
         isDataLoading.set(true);
-        disposables.add(Single
-                .create((SingleOnSubscribe<List<AppListModel>>) emitter ->
-                        emitter.onSuccess(getSmartFreezeApps()))
-                .flatMapObservable((Function<List<AppListModel>, ObservableSource<AppListModel>>) Observable::fromIterable)
-                .filter(listModel -> {
-                    String query = queryText.get();
-                    return TextUtils.isEmpty(query)
-                            || appLabelSearchFilter.matches(query, listModel.appInfo.getAppLabel());
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> listModels.clear())
-                .subscribe(listModels::add, Rxs.ON_ERROR_LOGGING, () -> isDataLoading.set(false)));
+        disposables.add(Single.create((SingleOnSubscribe<List<AppListModel>>) emitter -> emitter.onSuccess(getSmartFreezeApps())).flatMapObservable((Function<List<AppListModel>, ObservableSource<AppListModel>>) Observable::fromIterable).filter(listModel -> {
+            String query = queryText.get();
+            return TextUtils.isEmpty(query) || appLabelSearchFilter.matches(query, listModel.appInfo.getAppLabel());
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).doOnSubscribe(disposable -> listModels.clear()).subscribe(listModels::add, Rxs.ON_ERROR_LOGGING, () -> isDataLoading.set(false)));
     }
 
     private List<AppListModel> getSmartFreezeApps() {
@@ -169,19 +161,11 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         }
     }
 
-    void createShortcutStubApkForAsync(AppInfo appInfo,
-                                       String appLabel,
-                                       String versionName,
-                                       int versionCode) {
-        disposables.add(Single.create((SingleOnSubscribe<File>) emitter ->
-                        emitter.onSuccess(ShortcutHelper.createShortcutStubApkFor(getApplication(), appInfo, appLabel, versionName, versionCode)))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(file -> requestInstallStubApk(getApplication(), file),
-                        throwable -> {
-                            XLog.e("createShortcutStubApkForAsync error", throwable);
-                            Toast.makeText(getApplication(), throwable.getMessage(), Toast.LENGTH_LONG).show();
-                        }));
+    void createShortcutStubApkForAsync(AppInfo appInfo, String appLabel, String versionName, int versionCode) {
+        disposables.add(Single.create((SingleOnSubscribe<File>) emitter -> emitter.onSuccess(ShortcutHelper.createShortcutStubApkFor(getApplication(), appInfo, appLabel, versionName, versionCode))).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(file -> requestInstallStubApk(getApplication(), file), throwable -> {
+            XLog.e("createShortcutStubApkForAsync error", throwable);
+            Toast.makeText(getApplication(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+        }));
     }
 
     private void requestInstallStubApk(Context context, File apk) {
@@ -293,9 +277,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
 
     public void disableSmartFreeze(AppListModel model) {
         AppInfo appInfo = model.appInfo;
-        ThanosManager.from(getApplication())
-                .getPkgManager()
-                .setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), false);
+        ThanosManager.from(getApplication()).getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), false);
         listModels.remove(model);
         requestUnInstallStubApkIfInstalled(getApplication(), appInfo);
     }
@@ -317,14 +299,12 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     public void exportPackageListToFile(OutputStream os, Runnable onSuccess, Consumer<Throwable> onError) {
         XLog.d("exportPackageListToFile");
         disposables.add(Single.create((SingleOnSubscribe<Boolean>) emitter -> {
-                    InputStream in = CharSource.wrap(getExportPackageListContent()).asByteSource(Charset.defaultCharset()).openStream();
-                    ByteStreams.copy(in, os);
-                    emitter.onSuccess(true);
-                    IoUtils.closeQuietly(in);
-                    IoUtils.closeQuietly(os);
-                }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(res -> onSuccess.run(), onError::accept));
+            InputStream in = CharSource.wrap(getExportPackageListContent()).asByteSource(Charset.defaultCharset()).openStream();
+            ByteStreams.copy(in, os);
+            emitter.onSuccess(true);
+            IoUtils.closeQuietly(in);
+            IoUtils.closeQuietly(os);
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(res -> onSuccess.run(), onError::accept));
     }
 
     public void importPackageListFromClipboard(Consumer<Boolean> onRes) {
@@ -338,12 +318,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                     XLog.w("importPackageListFromClipboard, content: " + content);
                     Set<String> packageSet = parseJsonToPackages(content);
                     if (!CollectionUtils.isNullOrEmpty(packageSet)) {
-                        ThanosManager.from(getApplication())
-                                .ifServiceInstalled(thanosManager ->
-                                        CollectionUtils.consumeRemaining(packageSet, pkg ->
-                                                thanosManager
-                                                        .getPkgManager()
-                                                        .setPkgSmartFreezeEnabled(Pkg.systemUserPkg(pkg), true)));
+                        ThanosManager.from(getApplication()).ifServiceInstalled(thanosManager -> CollectionUtils.consumeRemaining(packageSet, pkg -> thanosManager.getPkgManager().setPkgSmartFreezeEnabled(Pkg.systemUserPkg(pkg), true)));
                         emitter.onSuccess(true);
                         start();
                     } else {
@@ -359,9 +334,8 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
 
     private Set<String> parseJsonToPackages(String content) {
         try {
-            Set<String> res = new Gson()
-                    .fromJson(content, new TypeToken<Set<String>>() {
-                    }.getType());
+            Set<String> res = new Gson().fromJson(content, new TypeToken<Set<String>>() {
+            }.getType());
             if (!CollectionUtils.isNullOrEmpty(res)) {
                 return res;
             }
@@ -374,23 +348,15 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     public void importPackageListFromFile(Uri uri, Consumer<Boolean> onRes) {
         disposables.add(Single.create((SingleOnSubscribe<Boolean>) emitter -> {
             try {
-                InputStream inputStream = getApplication()
-                        .getContentResolver()
-                        .openInputStream(uri);
+                InputStream inputStream = getApplication().getContentResolver().openInputStream(uri);
                 if (inputStream == null) {
                     return;
                 }
-                @SuppressWarnings("UnstableApiUsage")
-                String content = CharStreams.toString(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+                @SuppressWarnings("UnstableApiUsage") String content = CharStreams.toString(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                 XLog.w("importPackageListFromFile, content: " + content);
                 Set<String> packageSet = parseJsonToPackages(content);
                 if (!CollectionUtils.isNullOrEmpty(packageSet)) {
-                    ThanosManager.from(getApplication())
-                            .ifServiceInstalled(thanosManager ->
-                                    CollectionUtils.consumeRemaining(packageSet, pkg ->
-                                            thanosManager
-                                                    .getPkgManager()
-                                                    .setPkgSmartFreezeEnabled(Pkg.systemUserPkg(pkg), true)));
+                    ThanosManager.from(getApplication()).ifServiceInstalled(thanosManager -> CollectionUtils.consumeRemaining(packageSet, pkg -> thanosManager.getPkgManager().setPkgSmartFreezeEnabled(Pkg.systemUserPkg(pkg), true)));
                     emitter.onSuccess(true);
                     start();
                 } else {
@@ -419,5 +385,16 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     public void setAppSort(AppSort sort) {
         currentSort.set(sort);
         start();
+    }
+
+    public void freezeAll() {
+        ThanosManager.from(getApplication()).getPkgManager().freezeAllSmartFreezePackages(
+                new PackageEnableStateChangeListener() {
+                    @Override
+                    public void onPackageEnableStateChanged(List<Pkg> pkgs) {
+                        super.onPackageEnableStateChanged(pkgs);
+                        loadModels();
+                    }
+                });
     }
 }

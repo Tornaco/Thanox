@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
+            android:background="?android:attr/windowBackground"
             android:fitsSystemWindows="false"
             android:theme="?appbarTheme"
             app:elevation="@dimen/common_toolbar_elevation">
@@ -32,9 +33,9 @@
                 style="?collapsingToolbarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?android:attr/windowBackground"
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                app:contentScrim="?attr/colorSurface"
                 app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleCollapseMode="scale"

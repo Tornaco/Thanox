@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:theme="?appbarTheme"
+            android:background="?android:attr/windowBackground"
             app:elevation="@dimen/common_toolbar_elevation">
 
             <androidx.appcompat.widget.Toolbar

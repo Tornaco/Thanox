@@ -20,6 +20,7 @@
             android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
             android:theme="?appbarTheme"
+            android:background="?android:attr/windowBackground"
             app:elevation="@dimen/common_toolbar_elevation">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -29,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                app:contentScrim="?attr/colorSurface"
+                android:background="?android:attr/windowBackground"
                 app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleCollapseMode="scale"

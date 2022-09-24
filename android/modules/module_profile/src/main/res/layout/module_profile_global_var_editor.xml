@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="?appbarTheme"
+            android:background="?android:attr/windowBackground"
             app:elevation="@dimen/common_toolbar_elevation"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

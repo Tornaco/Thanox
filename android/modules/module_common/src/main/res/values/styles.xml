@@ -26,7 +26,7 @@
         <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
     </style>
 
-    <style name="AppBarOverlayLight" parent="ThemeOverlay.AppCompat.ActionBar">
+    <style name="AppBarOverlayLight" parent="ThemeOverlay.MaterialComponents.ActionBar">
         <item name="android:homeAsUpIndicator">@drawable/module_common_ic_home_as_up</item>
     </style>
 

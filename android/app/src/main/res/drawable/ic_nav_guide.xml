@@ -10,6 +10,6 @@
     </item>
     <item
         android:id="@+id/settings_ic_foreground"
-        android:drawable="@drawable/ic_book_3_fill"
+        android:drawable="@drawable/ic_remix_book_2_fill"
         android:gravity="center" />
 </layer-list>

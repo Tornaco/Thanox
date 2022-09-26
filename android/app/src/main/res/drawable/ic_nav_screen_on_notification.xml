@@ -10,6 +10,6 @@
     </item>
     <item
         android:id="@+id/settings_ic_foreground"
-        android:drawable="@drawable/ic_notification_badge_line"
+        android:drawable="@drawable/ic_remix_notification_badge_fill"
         android:gravity="center" />
 </layer-list>

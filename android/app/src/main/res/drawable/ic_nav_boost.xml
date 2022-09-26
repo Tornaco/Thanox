@@ -5,7 +5,7 @@
             <size
                 android:width="52dp"
                 android:height="52dp" />
-            <solid android:color="#6ec8e6c9" />
+            <solid android:color="#4dc8e6c9" />
         </shape>
     </item>
     <item

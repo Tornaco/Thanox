@@ -80,7 +80,7 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
                     }
                     Text(
                         text = stringResource(id = R.string.boost_status_running_apps),
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
                         color = Color(onSurfaceColor)
                     )
                 }
@@ -131,7 +131,7 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
 
 @Composable
 private fun MemStats(
-    memUsage: MemUsage
+    memUsage: MemUsage,
 ) {
     val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
 
@@ -174,7 +174,7 @@ private fun MemStats(
 private fun AnimatedLinearProgressIndicator(
     memUsage: MemUsage,
     progressColor: Int,
-    progressTrackColor: Int
+    progressTrackColor: Int,
 ) {
     var startAnim by remember {
         mutableStateOf(false)

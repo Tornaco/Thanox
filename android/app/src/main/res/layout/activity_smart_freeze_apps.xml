@@ -23,9 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
+            android:background="?android:attr/windowBackground"
             android:fitsSystemWindows="false"
             android:theme="?appbarTheme"
-            android:background="?android:attr/windowBackground"
             app:elevation="@dimen/common_toolbar_elevation">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -33,9 +33,9 @@
                 style="?collapsingToolbarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?android:attr/windowBackground"
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                android:background="?android:attr/windowBackground"
                 app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleCollapseMode="scale"
@@ -81,6 +81,7 @@
                 android:orientation="horizontal"
                 android:paddingStart="@dimen/common_view_margin_default"
                 android:paddingEnd="@dimen/common_view_margin_default">
+
                 <include
                     android:id="@+id/sort_chip_container"
                     layout="@layout/module_common_sort_chip"
@@ -98,12 +99,23 @@
                     android:id="@+id/apps"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:clipToPadding="false"
                     android:listModels="@{viewmodel.listModels}"
                     android:paddingStart="@dimen/common_view_margin_small"
                     android:paddingTop="@dimen/common_view_margin_small"
-                    android:paddingEnd="@dimen/common_view_margin_small" />
+                    android:paddingEnd="@dimen/common_view_margin_small"
+                    android:paddingBottom="120dp" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab"
+            style="@style/FloatingActionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/common_view_margin_default"
+            app:icon="@drawable/ic_ac_unit_black_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

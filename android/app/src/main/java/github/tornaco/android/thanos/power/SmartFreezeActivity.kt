@@ -44,18 +44,13 @@ class SmartFreezeActivity : ThemeActivity() {
 
     private fun inflateTabs() {
         viewModel.getTabs(this)
-        binding.freezeAll.setOnClickListener {
-            supportFragmentManager.findFragmentByTag("SMART_FREEZE_FRAGMENT")?.let {
-                (it as? SmartFreezeAppListFragment)?.freezeAll()
-            }
-        }
-        binding.bottomNavigationTab.removeAllTabs()
+        binding.bottomNavigation.removeAllTabs()
         viewModel.tabItems.forEach {
-            binding.bottomNavigationTab.addTab(
-                binding.bottomNavigationTab.newTab().setId(it.id).setText(it.pkgSet.label)
+            binding.bottomNavigation.addTab(
+                binding.bottomNavigation.newTab().setId(it.id).setText(it.pkgSet.label)
             )
         }
-        binding.bottomNavigationTab.addOnTabSelectedListener(object :
+        binding.bottomNavigation.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 handleTabSelect(tab)
@@ -70,7 +65,7 @@ class SmartFreezeActivity : ThemeActivity() {
             }
         })
 
-        binding.bottomNavigationTab.selectTab(binding.bottomNavigationTab.getTabAt(0))
+        binding.bottomNavigation.selectTab(binding.bottomNavigation.getTabAt(0))
     }
 
     private fun handleTabSelect(tab: TabLayout.Tab?) {

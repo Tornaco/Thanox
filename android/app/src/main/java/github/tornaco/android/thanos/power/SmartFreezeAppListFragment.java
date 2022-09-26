@@ -154,6 +154,8 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
+
+        binding.fab.setOnClickListener(v -> viewModel.freezeAll());
     }
 
     @SuppressLint("RestrictedApi")
@@ -709,9 +711,5 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory
                 .getInstance(activity.getApplication());
         return ViewModelProviders.of(activity, factory).get(SmartFreezeAppsViewModel.class);
-    }
-
-    public void freezeAll() {
-        viewModel.freezeAll();
     }
 }

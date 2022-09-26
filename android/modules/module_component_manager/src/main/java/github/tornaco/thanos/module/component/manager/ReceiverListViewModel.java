@@ -31,6 +31,7 @@ public class ReceiverListViewModel extends ComponentListViewModel {
                     .componentName(activityInfo.getComponentName())
                     .label(activityInfo.getLabel())
                     .componentObject(activityInfo)
+                    .componentRule(LCRulesAdapterKt.getReceiverRule(activityInfo.getComponentName()))
                     .enableSetting(activityInfo.getEnableSetting())
                     .build()));
             Collections.sort(res);

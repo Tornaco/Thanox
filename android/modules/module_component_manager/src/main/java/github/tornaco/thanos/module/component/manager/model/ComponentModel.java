@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
 
+import github.tornaco.thanos.module.component.manager.ComponentRule;
 import util.PinyinComparatorUtils;
 
 public class ComponentModel implements Comparable<ComponentModel> {
@@ -15,8 +16,12 @@ public class ComponentModel implements Comparable<ComponentModel> {
     private Object componentObject;
     private boolean isDisabledByThanox;
     private boolean isRunning;
+    private ComponentRule componentRule;
 
-    public ComponentModel(String name, ComponentName componentName, String label, int enableSetting, Object componentObject, boolean isDisabledByThanox, boolean isRunning) {
+    public ComponentModel(String name, ComponentName componentName, String label,
+                          int enableSetting, Object componentObject,
+                          boolean isDisabledByThanox, boolean isRunning,
+                          ComponentRule componentRule) {
         this.name = name;
         this.componentName = componentName;
         this.label = label;
@@ -24,6 +29,7 @@ public class ComponentModel implements Comparable<ComponentModel> {
         this.componentObject = componentObject;
         this.isDisabledByThanox = isDisabledByThanox;
         this.isRunning = isRunning;
+        this.componentRule = componentRule;
     }
 
     public ComponentModel() {
@@ -44,6 +50,10 @@ public class ComponentModel implements Comparable<ComponentModel> {
 
     public ComponentName getComponentName() {
         return componentName;
+    }
+
+    public ComponentRule getComponentRule() {
+        return componentRule;
     }
 
     public String getLabel() {
@@ -96,6 +106,7 @@ public class ComponentModel implements Comparable<ComponentModel> {
         private Object componentObject;
         private boolean isDisabledByThanox;
         private boolean isRunning;
+        private ComponentRule componentRule;
 
         ComponentModelBuilder() {
         }
@@ -107,6 +118,11 @@ public class ComponentModel implements Comparable<ComponentModel> {
 
         public ComponentModel.ComponentModelBuilder componentName(ComponentName componentName) {
             this.componentName = componentName;
+            return this;
+        }
+
+        public ComponentModel.ComponentModelBuilder componentRule(ComponentRule componentRule) {
+            this.componentRule = componentRule;
             return this;
         }
 
@@ -136,11 +152,7 @@ public class ComponentModel implements Comparable<ComponentModel> {
         }
 
         public ComponentModel build() {
-            return new ComponentModel(name, componentName, label, enableSetting, componentObject, isDisabledByThanox, isRunning);
-        }
-
-        public String toString() {
-            return "ComponentModel.ComponentModelBuilder(name=" + this.name + ", componentName=" + this.componentName + ", label=" + this.label + ", enableSetting=" + this.enableSetting + ", componentObject=" + this.componentObject + ", isDisabledByThanox=" + this.isDisabledByThanox + ", isRunning=" + this.isRunning + ")";
+            return new ComponentModel(name, componentName, label, enableSetting, componentObject, isDisabledByThanox, isRunning, componentRule);
         }
     }
 }

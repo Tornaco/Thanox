@@ -47,6 +47,9 @@ dependencies {
     implementation(Libs.AndroidX.swipeRefreshLayout)
 
     implementation(Libs.Others.guavaAndroid)
+    implementation(Libs.Others.libChecker) {
+        exclude(group = "javax.annotation", module = "javax.annotation-api")
+    }
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))

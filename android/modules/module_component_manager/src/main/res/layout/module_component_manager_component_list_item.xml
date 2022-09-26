@@ -26,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
+        android:gravity="center"
         android:minHeight="@dimen/list_item_height"
         android:soundEffectsEnabled="false">
 
@@ -53,15 +54,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:layout_marginTop="@dimen/common_view_margin_small"
                 android:layout_marginEnd="@dimen/common_view_margin_default"
-                android:layout_toStartOf="@id/badge1"
+                android:layout_toStartOf="@id/state_container"
                 android:ellipsize="middle"
                 android:fadingEdge="horizontal"
                 android:text="@{component.label}"
                 android:textAppearance="@style/TextAppearance.TileTitle"
-                tools:text="@string/app_name" />
+                tools:text="Service Name" />
+
 
             <TextView
                 android:id="@+id/name"
@@ -69,51 +70,95 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/label"
                 android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/common_view_margin_small"
                 android:layout_marginEnd="@dimen/common_view_margin_default"
-                android:layout_toStartOf="@id/item_switch"
+                android:layout_toStartOf="@id/state_container"
                 android:ellipsize="middle"
                 android:fadingEdge="horizontal"
                 android:text="@{component.name}"
                 android:textAppearance="@style/TextAppearance.TileSubTitle"
-                android:textStyle="italic"
+                android:textColor="?android:attr/textColorSecondary"
                 tools:text="Long text, it can be very very very very very very very very very very very very long" />
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/badge1"
-                style="@style/MaterialButtonBadged"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/name"
                 android:layout_marginTop="@dimen/common_view_margin_small"
                 android:layout_marginEnd="@dimen/common_view_margin_default"
-                android:layout_toStartOf="@id/item_switch"
-                android:text="@string/module_component_manager_disabled_by_thanox"
-                android:textSize="@dimen/list_item_main_text_size_ext_small"
-                android:visibility="@{component.disabledByThanox ? View.VISIBLE : View.GONE}" />
+                android:layout_toStartOf="@id/state_container"
+                android:gravity="center|start"
+                android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/badge2"
-                style="@style/MaterialButtonBadged"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/badge1"
-                android:layout_marginTop="@dimen/common_view_margin_small"
-                android:layout_marginEnd="@dimen/common_view_margin_default"
-                android:layout_toStartOf="@id/item_switch"
-                android:text="@string/module_component_manager_component_running"
-                android:textSize="@dimen/list_item_main_text_size_ext_small"
-                android:visibility="@{component.running ? View.VISIBLE : View.GONE}" />
+                <ImageView
+                    android:id="@+id/rule_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    tools:src="@drawable/module_common_ic_hashtag" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/item_switch"
-                style="@style/SwitchStyleMD"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/rule_label"
+                    style="@style/MaterialButtonBadged"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_view_margin_small"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:ellipsize="end"
+                    android:fadingEdge="horizontal"
+                    android:textAppearance="@style/TextAppearance.TileSubTitle"
+                    tools:text="Rule label, it can be very very very very very very very very very very very very long" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/state_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:checked="@{!component.disabled}"
-                android:soundEffectsEnabled="false"
-                tools:checked="true" />
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/badge1"
+                        style="@style/MaterialButtonBadged"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_view_margin_small"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:text="@string/module_component_manager_disabled_by_thanox"
+                        android:textSize="@dimen/list_item_main_text_size_ext_small"
+                        android:visibility="@{component.disabledByThanox ? View.VISIBLE : View.GONE}" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/badge2"
+                        style="@style/MaterialButtonBadged"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_view_margin_small"
+                        android:layout_marginEnd="@dimen/common_view_margin_default"
+                        android:text="@string/module_component_manager_component_running"
+                        android:textSize="@dimen/list_item_main_text_size_ext_small"
+                        android:visibility="@{component.running ? View.VISIBLE : View.GONE}" />
+
+                </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/item_switch"
+                    style="@style/SwitchStyleMD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{!component.disabled}"
+                    android:soundEffectsEnabled="false"
+                    tools:checked="true" />
+            </LinearLayout>
         </RelativeLayout>
 
         <View

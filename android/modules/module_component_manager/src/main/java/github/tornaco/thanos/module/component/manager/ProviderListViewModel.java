@@ -32,6 +32,7 @@ public class ProviderListViewModel extends ComponentListViewModel {
                     .label(providerInfo.getLabel())
                     .componentObject(providerInfo)
                     .enableSetting(providerInfo.getEnableSetting())
+                    .componentRule(LCRulesAdapterKt.getProviderRule(providerInfo.getComponentName()))
                     .build()));
             Collections.sort(res);
             return res;

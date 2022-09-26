@@ -28,6 +28,7 @@ import github.tornaco.android.thanos.app.FeatureAccessStats
 import github.tornaco.android.thanos.app.Init
 import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.thanos.android.noroot.NoRootSupport.install
+import github.tornaco.thanos.module.component.manager.initRules
 import io.reactivex.plugins.RxJavaPlugins
 
 @HiltAndroidApp
@@ -60,6 +61,7 @@ class ThanosApp : MultipleModulesApp(), NavigationApplication {
         }
         Init.init(this)
         FeatureAccessStats.init(this)
+        initRules(this.applicationContext)
         install()
     }
 

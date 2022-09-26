@@ -38,6 +38,7 @@ public class ActivityListViewModel extends ComponentListViewModel {
                                 .label(activityInfo.getLabel())
                                 .componentObject(activityInfo)
                                 .enableSetting(activityInfo.getEnableSetting())
+                                .componentRule(LCRulesAdapterKt.getActivityRule(activityInfo.getComponentName()))
                                 .build()));
             }
             Collections.sort(res);

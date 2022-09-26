@@ -1,6 +1,7 @@
 package github.tornaco.thanos.module.component.manager;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,18 @@ public class ComponentListAdapter extends RecyclerView.Adapter<ComponentListAdap
         holder.binding.appItemRoot.setOnClickListener(v -> onComponentItemClickListener.onComponentItemClick(v, componentModel));
         holder.binding.itemSwitch.setOnClickListener(v ->
                 onComponentItemSwitchChangeListener.onComponentItemSwitchChange(componentModel, holder.binding.itemSwitch.isChecked()));
+
+        holder.binding.ruleIcon.setVisibility(View.GONE);
+        holder.binding.ruleLabel.setVisibility(View.GONE);
+        if (componentModel.getComponentRule() != null) {
+            if (componentModel.getComponentRule().getIconRes() > 0) {
+                holder.binding.ruleIcon.setImageResource(componentModel.getComponentRule().getIconRes());
+                holder.binding.ruleIcon.setVisibility(View.VISIBLE);
+            }
+
+            holder.binding.ruleLabel.setVisibility(View.VISIBLE);
+            holder.binding.ruleLabel.setText(componentModel.getComponentRule().getLabel());
+        }
         holder.binding.executePendingBindings();
     }
 

@@ -35,6 +35,7 @@ public class ServiceListViewModel extends ComponentListViewModel {
                             .isDisabledByThanox(serviceInfo.isDisabledByThanox())
                             .label(serviceInfo.getLabel())
                             .componentObject(serviceInfo)
+                            .componentRule(LCRulesAdapterKt.getServiceRule(serviceInfo.getComponentName()))
                             .isRunning(runningComponents.contains(serviceInfo.getComponentName()))
                             .enableSetting(serviceInfo.getEnableSetting())
                             .build()));

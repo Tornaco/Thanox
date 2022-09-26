@@ -168,6 +168,8 @@ object Libs {
         // https://github.com/AmrDeveloper/CodeView
         const val codeView = "io.github.amrdeveloper:codeview:1.3.5"
 
+        // https://github.com/zhaobozhen/LibChecker-Rules-Bundle
+        const val libChecker = "com.github.zhaobozhen:LibChecker-Rules-Bundle:28"
     }
 
     object Rules {

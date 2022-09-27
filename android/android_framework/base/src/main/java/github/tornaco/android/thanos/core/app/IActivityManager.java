@@ -226,11 +226,11 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public int getRecentTaskExcludeSettingForPackage(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public int getRecentTaskExcludeSettingForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return 0;
     }
-    @Override public void setRecentTaskExcludeSettingForPackage(java.lang.String pkgName, int setting) throws android.os.RemoteException
+    @Override public void setRecentTaskExcludeSettingForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, int setting) throws android.os.RemoteException
     {
     }
     // Keep when has recent task.
@@ -1214,8 +1214,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_getRecentTaskExcludeSettingForPackage:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           int _result = this.getRecentTaskExcludeSettingForPackage(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
@@ -1224,8 +1229,13 @@ public interface IActivityManager extends android.os.IInterface
         case TRANSACTION_setRecentTaskExcludeSettingForPackage:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           int _arg1;
           _arg1 = data.readInt();
           this.setRecentTaskExcludeSettingForPackage(_arg0, _arg1);
@@ -3297,17 +3307,23 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public int getRecentTaskExcludeSettingForPackage(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public int getRecentTaskExcludeSettingForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         int _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRecentTaskExcludeSettingForPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRecentTaskExcludeSettingForPackage(pkgName);
+            return getDefaultImpl().getRecentTaskExcludeSettingForPackage(pkg);
           }
           _reply.readException();
           _result = _reply.readInt();
@@ -3318,17 +3334,23 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void setRecentTaskExcludeSettingForPackage(java.lang.String pkgName, int setting) throws android.os.RemoteException
+      @Override public void setRecentTaskExcludeSettingForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, int setting) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkgName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeInt(setting);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setRecentTaskExcludeSettingForPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setRecentTaskExcludeSettingForPackage(pkgName, setting);
+            getDefaultImpl().setRecentTaskExcludeSettingForPackage(pkg, setting);
             return;
           }
           _reply.readException();
@@ -5065,8 +5087,8 @@ public interface IActivityManager extends android.os.IInterface
   public void setPkgSmartStandByEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException;
   public boolean isPkgSmartStandByEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getLastRecentUsedPackages(int count) throws android.os.RemoteException;
-  public int getRecentTaskExcludeSettingForPackage(java.lang.String pkgName) throws android.os.RemoteException;
-  public void setRecentTaskExcludeSettingForPackage(java.lang.String pkgName, int setting) throws android.os.RemoteException;
+  public int getRecentTaskExcludeSettingForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void setRecentTaskExcludeSettingForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, int setting) throws android.os.RemoteException;
   // Keep when has recent task.
 
   public boolean isBgTaskCleanUpSkipWhenHasRecentTaskEnabled() throws android.os.RemoteException;

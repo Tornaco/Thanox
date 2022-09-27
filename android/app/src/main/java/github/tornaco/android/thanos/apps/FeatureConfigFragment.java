@@ -274,12 +274,12 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         Objects.requireNonNull(pref).setEntries(supportForceInclude ? R.array.recent_task_exclude_entry_default_include_exclude : R.array.recent_task_exclude_entry_default_exclude);
         Objects.requireNonNull(pref).setEntryValues(supportForceInclude ? R.array.recent_task_exclude_value_default_include_exclude : R.array.recent_task_exclude_value_default_exclude);
 
-        int currentMode = thanos.getActivityManager().getRecentTaskExcludeSettingForPackage(appInfo.getPkgName());
+        int currentMode = thanos.getActivityManager().getRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo));
 
         if (!supportForceInclude && currentMode == ActivityManager.ExcludeRecentSetting.INCLUDE) {
             // Force change to default mode since we can not support this mode.
             currentMode = ActivityManager.ExcludeRecentSetting.NONE;
-            thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(appInfo.getPkgName(), currentMode);
+            thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo), currentMode);
         }
 
         pref.setValue(String.valueOf(currentMode));
@@ -287,7 +287,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
                 if (isSubscribed) {
                     int mode = Integer.parseInt(String.valueOf(newValue));
-                    thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(appInfo.getPkgName(), mode);
+                    thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo), mode);
                 } else {
                     AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                 }

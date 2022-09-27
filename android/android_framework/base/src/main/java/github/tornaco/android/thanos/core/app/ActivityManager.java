@@ -462,13 +462,25 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public int getRecentTaskExcludeSettingForPackage(String pkgName) {
-        return server.getRecentTaskExcludeSettingForPackage(pkgName);
+        return server.getRecentTaskExcludeSettingForPackage(Pkg.systemUserPkg(pkgName));
     }
 
     @SneakyThrows
+    public int getRecentTaskExcludeSettingForPackage(Pkg pkg) {
+        return server.getRecentTaskExcludeSettingForPackage(pkg);
+    }
+
+    @SneakyThrows
+    @Deprecated
     public void setRecentTaskExcludeSettingForPackage(String pkgName, int setting) {
-        server.setRecentTaskExcludeSettingForPackage(pkgName, setting);
+        server.setRecentTaskExcludeSettingForPackage(Pkg.systemUserPkg(pkgName), setting);
+    }
+
+    @SneakyThrows
+    public void setRecentTaskExcludeSettingForPackage(Pkg pkg, int setting) {
+        server.setRecentTaskExcludeSettingForPackage(pkg, setting);
     }
 
     @SneakyThrows

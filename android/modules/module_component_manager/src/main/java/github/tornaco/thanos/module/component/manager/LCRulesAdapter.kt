@@ -51,6 +51,9 @@ private fun getRule(name: ComponentName, type: Int): ComponentRule? =
                 it.regexName,
                 it.isSimpleColorIcon)
         }
+        if (BuildConfig.DEBUG) {
+            XLog.v("getRule: $wrap")
+        }
         wrap
     }
 

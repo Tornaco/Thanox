@@ -31,13 +31,17 @@ public class ComponentListAdapter extends RecyclerView.Adapter<ComponentListAdap
     private OnComponentItemSwitchChangeListener onComponentItemSwitchChangeListener;
     @NonNull
     private OnComponentItemClickListener onComponentItemClickListener;
+    @NonNull
+    private OnComponentRuleClickListener onComponentRuleClickListener;
 
     public ComponentListAdapter(@NonNull AppInfo appInfo,
                                 @NonNull OnComponentItemSwitchChangeListener onComponentItemSwitchChangeListener,
-                                @NonNull OnComponentItemClickListener onComponentItemClickListener) {
+                                @NonNull OnComponentItemClickListener onComponentItemClickListener,
+                                @NonNull OnComponentRuleClickListener onComponentRuleClickListener) {
         this.appInfo = appInfo;
         this.onComponentItemSwitchChangeListener = onComponentItemSwitchChangeListener;
         this.onComponentItemClickListener = onComponentItemClickListener;
+        this.onComponentRuleClickListener = onComponentRuleClickListener;
     }
 
     @NonNull
@@ -65,6 +69,7 @@ public class ComponentListAdapter extends RecyclerView.Adapter<ComponentListAdap
 
             holder.binding.ruleLabel.setVisibility(View.VISIBLE);
             holder.binding.ruleLabel.setText(componentModel.getComponentRule().getLabel());
+            holder.binding.ruleLabel.setOnClickListener(v -> onComponentRuleClickListener.onComponentRuleClick(v, componentModel.getComponentRule()));
         }
         holder.binding.executePendingBindings();
     }

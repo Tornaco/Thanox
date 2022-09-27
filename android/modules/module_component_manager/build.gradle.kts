@@ -23,7 +23,7 @@ android {
     }
 
     buildFeatures {
-        compose = false
+        compose = true
         buildConfig = true
         aidl = true
         renderScript = false
@@ -34,6 +34,10 @@ android {
     }
 
     resourcePrefix = resPrefix
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = tornaco.project.android.thanox.Compose.composeVersion
+    }
 }
 dependencies {
     implementation(Libs.Kotlin.stdlib)
@@ -61,4 +65,18 @@ dependencies {
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
 
+    implementation(tornaco.project.android.thanox.Compose.runtimeSaveAble)
+    implementation(tornaco.project.android.thanox.Compose.ui)
+    implementation(tornaco.project.android.thanox.Compose.runtime)
+    implementation(tornaco.project.android.thanox.Compose.material)
+    implementation(tornaco.project.android.thanox.Compose.material3)
+    implementation(tornaco.project.android.thanox.Compose.material3Adapter)
+    implementation(tornaco.project.android.thanox.Compose.activityCompose)
+    implementation(tornaco.project.android.thanox.Compose.viewmodel)
+    implementation(tornaco.project.android.thanox.Compose.navigationCompose)
+    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
+    implementation(tornaco.project.android.thanox.Compose.tooling)
+    implementation(tornaco.project.android.thanox.Compose.toolingPreview)
+    implementation(tornaco.project.android.thanox.Compose.composeMaterialIconsExtended)
+    implementation(tornaco.project.android.thanox.Compose.landscapistGlide)
 }

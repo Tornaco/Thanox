@@ -7,6 +7,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elvishew.xlog.XLog
@@ -60,15 +63,17 @@ abstract class ComponentListActivity : ThemeActivity() {
         // List.
         binding.componentListView.layoutManager = LinearLayoutManager(this)
         binding.componentListView.adapter =
-            ComponentListAdapter(appInfo!!,
-                { componentModel, checked ->
+            ComponentListAdapter(/* appInfo = */ appInfo!!,
+                /* onComponentItemSwitchChangeListener = */ { componentModel, checked ->
                     viewModel.toggleComponentState(
                         appInfo,
                         componentModel,
                         checked
                     )
-                }, { v, componentModel ->
+                }, /* onComponentItemClickListener = */ { v, componentModel ->
                     showItemPopMenu(v, componentModel)
+                }, { v, rule ->
+                    showComponentRuleInfoBottomSheet()
                 })
         binding.swipe.setOnRefreshListener { viewModel.start() }
         binding.swipe.setColorSchemeColors(
@@ -224,5 +229,15 @@ abstract class ComponentListActivity : ThemeActivity() {
             return
         }
         super.onBackPressed()
+    }
+
+    private fun showComponentRuleInfoBottomSheet() {
+    }
+
+    @Composable
+    private fun RuleInfoScreen() {
+        Column {
+            Text("Hello")
+        }
     }
 }

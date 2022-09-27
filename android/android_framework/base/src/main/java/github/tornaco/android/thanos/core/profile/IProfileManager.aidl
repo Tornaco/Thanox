@@ -97,4 +97,9 @@ interface IProfileManager {
     void removeAlarmEngine(in Alarm alarm);
     List<AlarmRecord> getAllAlarms();
     void setAlarmEnabled(in Alarm alarm, boolean enabled);
+
+    // Danmu API
+    void setDanmuUISettings(in DanmuUISettings settings);
+    DanmuUISettings getDanmuUISettings();
+
 }

@@ -110,4 +110,6 @@ dependencies {
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
     implementation(project(":third_party:dateformatter"))
+    implementation(project(":third_party:remix"))
+    implementation(project(":third_party:compose-color-picker"))
 }

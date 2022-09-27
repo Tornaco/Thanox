@@ -118,7 +118,12 @@ public class PlatLogoActivity3 extends Activity {
         launchNextStage();
 
         for (String[] emojiSets : EMOJI_SETS) {
-            ThanosManager.from(this).getProfileManager().executeAction(String.format("ui.showDanmu(\"%s\")", ArrayUtils.toString(emojiSets, "")));
+            layout.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ThanosManager.from(getApplicationContext()).getProfileManager().executeAction(String.format("ui.showDanmu(\"%s\")", ArrayUtils.toString(emojiSets, "")));
+                }
+            }, 300);
         }
     }
 

@@ -217,6 +217,15 @@ public interface IProfileManager extends android.os.IInterface
     @Override public void setAlarmEnabled(github.tornaco.android.thanos.core.alarm.Alarm alarm, boolean enabled) throws android.os.RemoteException
     {
     }
+    // Danmu API
+
+    @Override public void setDanmuUISettings(github.tornaco.android.thanos.core.profile.DanmuUISettings settings) throws android.os.RemoteException
+    {
+    }
+    @Override public github.tornaco.android.thanos.core.profile.DanmuUISettings getDanmuUISettings() throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -885,6 +894,34 @@ public interface IProfileManager extends android.os.IInterface
           _arg1 = (0!=data.readInt());
           this.setAlarmEnabled(_arg0, _arg1);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_setDanmuUISettings:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.profile.DanmuUISettings _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.profile.DanmuUISettings.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          this.setDanmuUISettings(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getDanmuUISettings:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.profile.DanmuUISettings _result = this.getDanmuUISettings();
+          reply.writeNoException();
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
           return true;
         }
         default:
@@ -2150,6 +2187,58 @@ public interface IProfileManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      // Danmu API
+
+      @Override public void setDanmuUISettings(github.tornaco.android.thanos.core.profile.DanmuUISettings settings) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((settings!=null)) {
+            _data.writeInt(1);
+            settings.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setDanmuUISettings, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setDanmuUISettings(settings);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public github.tornaco.android.thanos.core.profile.DanmuUISettings getDanmuUISettings() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        github.tornaco.android.thanos.core.profile.DanmuUISettings _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getDanmuUISettings, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getDanmuUISettings();
+          }
+          _reply.readException();
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.profile.DanmuUISettings.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.profile.IProfileManager sDefaultImpl;
     }
     static final int TRANSACTION_setAutoApplyForNewInstalledAppsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -2210,6 +2299,8 @@ public interface IProfileManager extends android.os.IInterface
     static final int TRANSACTION_removeAlarmEngine = (android.os.IBinder.FIRST_CALL_TRANSACTION + 55);
     static final int TRANSACTION_getAllAlarms = (android.os.IBinder.FIRST_CALL_TRANSACTION + 56);
     static final int TRANSACTION_setAlarmEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 57);
+    static final int TRANSACTION_setDanmuUISettings = (android.os.IBinder.FIRST_CALL_TRANSACTION + 58);
+    static final int TRANSACTION_getDanmuUISettings = (android.os.IBinder.FIRST_CALL_TRANSACTION + 59);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IProfileManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -2287,4 +2378,8 @@ public interface IProfileManager extends android.os.IInterface
   public void removeAlarmEngine(github.tornaco.android.thanos.core.alarm.Alarm alarm) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.alarm.AlarmRecord> getAllAlarms() throws android.os.RemoteException;
   public void setAlarmEnabled(github.tornaco.android.thanos.core.alarm.Alarm alarm, boolean enabled) throws android.os.RemoteException;
+  // Danmu API
+
+  public void setDanmuUISettings(github.tornaco.android.thanos.core.profile.DanmuUISettings settings) throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.profile.DanmuUISettings getDanmuUISettings() throws android.os.RemoteException;
 }

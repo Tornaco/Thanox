@@ -18,6 +18,11 @@ interface IUI {
      */
     void showDanmu(@Nullable String icon, @NonNull Object msg);
 
+    /*
+     * @hide For internal usage.
+     */
+    void showDanmu(@Nullable String icon, @NonNull Object msg, boolean clearCachedView);
+
     void showShortToast(@NonNull Object msg);
 
     void showLongToast(@NonNull Object msg);

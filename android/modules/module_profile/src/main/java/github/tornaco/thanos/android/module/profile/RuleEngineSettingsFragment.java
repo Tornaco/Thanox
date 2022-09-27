@@ -14,6 +14,7 @@ import java.util.Objects;
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.thanos.android.module.profile.engine.DateTimeEngineActivity;
+import github.tornaco.thanos.android.module.profile.engine.danmu.DanmuUISettingsActivity;
 
 public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
 
@@ -65,6 +66,13 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
         findPreference(R.string.module_profile_pref_key_rule_engine_date_time).setOnPreferenceClickListener(
                 preference -> {
                     DateTimeEngineActivity.Starter.INSTANCE.start(requireActivity());
+                    return true;
+                }
+        );
+
+        findPreference(R.string.module_profile_pref_key_rule_engine_danmu).setOnPreferenceClickListener(
+                preference -> {
+                    DanmuUISettingsActivity.Starter.INSTANCE.start(requireActivity());
                     return true;
                 }
         );

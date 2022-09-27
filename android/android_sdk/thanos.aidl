@@ -17,6 +17,7 @@ parcelable github.tornaco.android.thanos.core.app.component.ComponentReplacement
 parcelable github.tornaco.android.thanos.core.profile.RuleInfo;
 parcelable github.tornaco.android.thanos.core.profile.GlobalVar;
 parcelable github.tornaco.android.thanos.core.profile.ConfigTemplate;
+parcelable github.tornaco.android.thanos.core.profile.DanmuUISettings;
 parcelable github.tornaco.android.thanos.core.app.RunningServiceInfoCompat;
 parcelable github.tornaco.android.thanos.core.secure.PrivacyCheatRecord;
 parcelable github.tornaco.android.thanos.core.secure.field.Fields;

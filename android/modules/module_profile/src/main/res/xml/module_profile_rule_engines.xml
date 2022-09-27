@@ -8,6 +8,7 @@
 
         <SwitchPreferenceCompat
             android:persistent="false"
+            app:icon="@drawable/ic_remix_file_search_fill"
             app:key="@string/module_profile_pref_key_rule_engine_automation"
             app:summary="@string/module_profile_pref_summary_rule_engine_automation"
             app:title="@string/module_profile_pref_title_rule_engine_automation" />
@@ -15,6 +16,7 @@
 
         <SwitchPreferenceCompat
             android:persistent="false"
+            app:icon="@drawable/ic_remix_message_3_fill"
             app:key="@string/module_profile_pref_key_rule_engine_push"
             app:summary="@string/module_profile_pref_summary_rule_engine_push"
             app:title="@string/module_profile_pref_title_rule_engine_push" />
@@ -22,22 +24,35 @@
 
         <SwitchPreferenceCompat
             android:persistent="false"
+            app:icon="@drawable/ic_remix_hashtag"
             app:key="@string/module_profile_pref_key_rule_engine_su"
             app:summary="@string/module_profile_pref_summary_rule_engine_su"
             app:title="@string/module_profile_pref_title_rule_engine_su" />
 
         <Preference
             android:persistent="false"
+            app:icon="@drawable/ic_remix_external_link_fill"
             app:key="@string/module_profile_pref_key_rule_engine_from_shortcut"
             app:summary="@string/module_profile_pref_summary_rule_engine_shortcut"
             app:title="@string/module_profile_pref_title_rule_engine_shortcut" />
 
         <Preference
             android:persistent="false"
+            app:icon="@drawable/ic_remix_timer_2_fill"
             app:key="@string/module_profile_pref_key_rule_engine_date_time"
             app:summary="@string/module_profile_pref_summary_rule_engine_date_time"
             app:title="@string/module_profile_pref_title_rule_engine_date_time" />
 
+        <Preference
+            android:persistent="false"
+            app:icon="@drawable/ic_remix_chat_smile_3_fill"
+            app:key="@string/module_profile_pref_key_rule_engine_danmu"
+            app:title="Danmu" />
+
+        <Preference
+            android:persistent="false"
+            app:key="spacer"
+            app:title="" />
     </PreferenceCategory>
 
 </PreferenceScreen>

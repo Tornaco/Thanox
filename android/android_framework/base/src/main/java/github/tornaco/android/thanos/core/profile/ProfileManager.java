@@ -313,4 +313,14 @@ public class ProfileManager {
     public String getCustomSuCommand() {
         return server.getCustomSuCommand();
     }
+
+    @SneakyThrows
+    public void setDanmuUISettings(DanmuUISettings settings) {
+        server.setDanmuUISettings(settings);
+    }
+
+    @SneakyThrows
+    public DanmuUISettings getDanmuUISettings() {
+        return server.getDanmuUISettings();
+    }
 }

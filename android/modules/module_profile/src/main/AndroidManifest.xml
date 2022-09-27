@@ -46,5 +46,8 @@
         <activity
             android:name=".online.OnlineProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".engine.danmu.DanmuUISettingsActivity"
+            android:exported="false" />
     </application>
 </manifest>

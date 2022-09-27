@@ -170,6 +170,8 @@ object Libs {
 
         // https://github.com/zhaobozhen/LibChecker-Rules-Bundle
         const val libChecker = "com.github.zhaobozhen:LibChecker-Rules-Bundle:28"
+
+        const val colorMath = "com.github.ajalt.colormath:colormath:3.2.1"
     }
 
     object Rules {

@@ -13,6 +13,7 @@ import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.thanos.android.module.profile.engine.DateTimeEngineActivity;
 import github.tornaco.thanos.android.module.profile.engine.danmu.DanmuUISettingsActivity;
 
@@ -72,7 +73,15 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
 
         findPreference(R.string.module_profile_pref_key_rule_engine_danmu).setOnPreferenceClickListener(
                 preference -> {
-                    DanmuUISettingsActivity.Starter.INSTANCE.start(requireActivity());
+                    AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                        if (isSubscribed) {
+                            DanmuUISettingsActivity.Starter.INSTANCE.start(requireActivity());
+                        } else {
+                            AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        }
+                        return null;
+                    });
+
                     return true;
                 }
         );

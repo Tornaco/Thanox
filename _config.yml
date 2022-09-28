@@ -8,7 +8,7 @@ plugins:
 
   # jekyll-polyglot
 languages: ["en", "zh"]
-default_lang: "en"
+default_lang: "zh"
 exclude_from_localization:
   - "assets/images"
 parallel_localization: true

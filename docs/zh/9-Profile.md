@@ -3,7 +3,7 @@ layout: default
 title: Profile
 permalink: /docs/profile
 lang: en
-nav_order: 7
+nav_order: 10
 ---
 
 # 情景模式
@@ -385,8 +385,11 @@ data class WifiState(
 | notificationAdded | Boolean（true/false） | 新通知到达 | 无 |
 | notificationRemoved | Boolean（true/false） | 通知移除 | 无 |
 | pkgName | String（字符串） | 通知所属应用包名 | 无 |
+| userId | Int | 通知app的用户id | 无 |
 | notificationTitle | String（字符串） | 通知标题 | 无 |
 | notificationContent | String（字符串） | 通知内容 | 无 |
+| notification | NotificationRecord | 通知记录，该模型包含更详细的信息，[查看模型定义](https://github.com/Tornaco/Thanox/blob/master/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/n/NotificationRecord.java) | 无 |
+
 
 &nbsp;
 
@@ -577,7 +580,7 @@ interface IPower {
 ```java
 @HandlerName("task")
 interface ITask {
-		void removeTasksForPackage(String pkgName);
+    void removeTasksForPackage(String pkgName);
 
     boolean hasTaskFromPackage(String pkgName);
 
@@ -605,13 +608,15 @@ interface ITask {
 
 界面相关
 
-| 能力                   | 含义             | 参数                                               | 举例 | 返回值 |
-| ---------------------- | ---------------- | -------------------------------------------------- | ---- | ------ |
-| showShortToast         | 显示提示     | 无                                      | 如下 | 无     |
-| showLongToast          | 显示时间较短的提示          | 无                                       | 如下 | 无     |
-| showDialog             | 显示对话框       | 标题文本，信息文本，确认按钮文本                   | 如下 | 无     |
-| showNotification       | 显示通知         | 标签（可用于取消通知）标题文本，信息文本，是否重要 | 如下 | 无     |
-| cancelNotification     | 取消通知         | 标签                                               | 如下 | 无 |
+| 能力                   | 含义                         | 参数                                               | 举例 | 返回值 |
+| ---------------------- |----------------------------| -------------------------------------------------- | ---- | ------ |
+| showShortToast         | 显示提示                       | 无                                      | 如下 | 无     |
+| showLongToast          | 显示时间较短的提示                  | 无                                       | 如下 | 无     |
+| showDialog             | 显示对话框                      | 标题文本，信息文本，确认按钮文本                   | 如下 | 无     |
+| showNotification       | 显示通知                       | 标签（可用于取消通知）标题文本，信息文本，是否重要 | 如下 | 无     |
+| cancelNotification     | 取消通知                       | 标签                                               | 如下 | 无 |
+| showDanmu     | 显示一条弹幕 [since Thanox4.0.9] | 弹幕文本                                               | 如下 | 无 |
+| showDanmu     | 显示一条带图标的弹幕 [since Thanox4.0.9]              | 图标，弹幕文本                                              | 如下 | 无 |
 
 接口定义：
 
@@ -634,7 +639,33 @@ interface IUI {
             boolean important);
 
     void cancelNotification(@NonNull String notificationTag);
+    
+    void showDanmu(@NonNull Object msg);
+
+    /**
+     * Show a danmu on your screen.
+     *
+     * @param icon Icon for danmu, supported format:
+     *             app icon: app://app.package.name
+     * @param msg  The text to show
+     */
+    void showDanmu(@Nullable String icon, @NonNull Object msg);
 }
+```
+
+使用弹幕API的例子：
+```json
+[
+  {
+    "name": "弹幕通知 Danmu notification",
+    "description": "收到通知时用弹幕展示 Show Danmu on notification posted",
+    "priority": 1,
+    "condition": "notificationAdded && !notification.isForegroundService && pkgName != \"android\"",
+    "actions": [
+      "ui.showDanmu(\"app://\" + pkgName, thanos.pkgManager.getAppInfo(pkgName).appLabel + \" \" + notificationTitle + \"\n\" + notificationContent);"
+    ]
+  }
+]
 ```
 
 &nbsp;

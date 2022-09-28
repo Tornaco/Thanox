@@ -1,10 +1,10 @@
 ---
 layout: default
-title:  "About Thanox"
+title:  "应用介绍"
 permalink: /docs/intro
 summary: "Thanox工作原理"
 date:   2018-07-20 15:50:00
-lang: en
+lang: zh
 nav_order: 2
 ---
 
@@ -12,13 +12,13 @@ nav_order: 2
 
 
 
-## Open source
+## 开源计划
 
 目前Thanox代码约80%已经公开在[Github](https://github.com/Tornaco/Thanox/tree/master/android)上。
 
 &nbsp;
 
-## versions
+## 版本发布
 
 Thanox目前在酷安和Google play商店发布。
 
@@ -28,7 +28,7 @@ Thanox目前在酷安和Google play商店发布。
 
 
 
-## Android support
+## Android版本支持
 
 * Android 6.0 - Android 11（**Thanox 2.x** 版本均支持）
 * Android 12（从**Thanox 3.x**开始支持）
@@ -52,7 +52,7 @@ Thanox目前在酷安和Google play商店发布。
 
 
 
-![thanox-arch](../assets/images/thanox-arch.png)
+![thanox-arch](../../assets/images/thanox-arch.png)
 
 
 

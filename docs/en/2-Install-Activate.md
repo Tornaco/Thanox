@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Install and Active
+title: 安装与激活
 permalink: /docs/install_active
-lang: en
+lang: zh
 nav_order: 3
 ---
 
@@ -56,4 +56,4 @@ Thanox中大部分的功能都是在系统进程中完成的，因此Thanox会�
 
 **导出页面如图所示：**
 
-![export-patch](../assets/images/export-patch.png)
+![export-patch](../../assets/images/export-patch.png)

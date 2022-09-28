@@ -3,7 +3,7 @@ layout: default
 title: Profile
 permalink: /docs/profile
 lang: en
-nav_order: 7
+nav_order: 10
 ---
 
 # 情景模式

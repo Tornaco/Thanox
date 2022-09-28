@@ -1,10 +1,11 @@
 ---
 layout: default
-title:  "X Mode"
+title:  "乖巧模式"
+summary: "实验功能"
 permalink: /docs/xmode
-lang: en
+lang: zh
 date:   2018-07-13 15:58:00
-nav_order: 4
+nav_order: 11
 ---
 <!-- more -->
 

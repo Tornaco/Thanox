@@ -4,7 +4,7 @@ title:  "移花接木"
 permalink: /docs/activity_trampoline
 lang: zh
 date:   2020-07-14 15:58:00
-nav_order: 5
+nav_order: 9
 
 ---
 
@@ -16,14 +16,9 @@ nav_order: 5
 
 &nbsp;
 
-&nbsp;
-
-
 **活动 - Activity**
 
 Android世界里，页面通常都是一个叫Activity（中文暂且翻译为活动）的东西；因此页面跳转我们现在可以统一语言：活动跳转。
-
-&nbsp;
 
 &nbsp;
 

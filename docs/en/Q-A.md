@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  "Q&A"
-summary: "Questions and Answers"
+title:  "常见问题"
+summary: "经常问的一些问题"
+lang: zh
 permalink: /docs/qa
-lang: en
 date:   20121-11-01 19:58:00
-nav_order: 9
+nav_order: 114
 ---
 <!-- more -->
 

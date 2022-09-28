@@ -3,7 +3,7 @@ layout: default
 title: 隐私声明
 permalink: /docs/privacy_statement
 lang: zh
-nav_order: 10
+nav_order: 113
 ---
 
 

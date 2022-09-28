@@ -1,11 +1,11 @@
 ---
 layout: default
-title:  "Feedback"
-summary: "How to feedback or raise feature request"
+title:  "反馈与建议"
+summary: "问题反馈与功能建议"
 permalink: /docs/feedback
 date:   20121-11-01 19:58:00
-lang: en
-nav_order: 10
+lang: zh
+nav_order: 112
 ---
 <!-- more -->
 

@@ -17,7 +17,7 @@ nav_order: 8
 ## 使用说明
 首先点击右上角的模板菜单，创建一个模板，一个模板就类似于你的一套身份。
 
-![Main](../../assets/images/privacy-cheat-1.png)
+![Main](../assets/images/privacy-cheat-1.png)
 
 模板创建完后，如果你想对某个应用应用隐匿，那么需要做两件事：
 
@@ -25,4 +25,4 @@ nav_order: 8
 2. 隐匿应用列表中对该应用选择一个模板
 
 
-![Scope](../../assets/images/privacy-cheat-scope.png)
+![Scope](../assets/images/privacy-cheat-scope.png)

@@ -20,7 +20,7 @@ nav_order: 5
 默认情况下Thanox允许所有应用后台运行，因此app列表中的开关默认都是开启状态。关闭某个应用的开关即可开启该应用的锁屏清理与一键加速。
 
 
-![Main](../../assets/images/bg-restrict-1.png)
+![Main](../assets/images/bg-restrict-1.png)
 
 
 ## 设置项
@@ -29,5 +29,5 @@ nav_order: 5
 如果延时期间，你重新点亮了屏幕，那么此次延时清理会被取消，直到下次屏幕重新熄灭后，会再次安排一次延迟清理计划。
 
 
-![Settings](../../assets/images/bg-restrict-settings.png)
+![Settings](../assets/images/bg-restrict-settings.png)
 

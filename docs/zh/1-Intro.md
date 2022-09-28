@@ -52,7 +52,7 @@ Thanox目前在酷安和Google play商店发布。
 
 
 
-![thanox-arch](../../assets/images/thanox-arch.png)
+![thanox-arch](../assets/images/thanox-arch.png)
 
 
 

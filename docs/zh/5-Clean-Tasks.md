@@ -14,7 +14,7 @@ nav_order: 6
 
 国内有些ROM自带这个功能。
 
-![Recent](../../assets/images/clean-tasks-recent.png)
+![Recent](../assets/images/clean-tasks-recent.png)
 
 
 ## 使用说明
@@ -23,6 +23,6 @@ nav_order: 6
 默认情况下Thanox不会对应用进行划卡清理，所以默认的开关状态都是关闭的，按需打开应用开关即可。
 
 
-![Main](../../assets/images/clean-tasks-1.png)
+![Main](../assets/images/clean-tasks-1.png)
 
 

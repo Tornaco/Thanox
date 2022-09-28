@@ -18,7 +18,7 @@ nav_order: 7
 首先点击右上角的+，把你想要冻结的app，加入下面的列表中，此时该应用会被立刻冻结。
 
 
-![Main](../../assets/images/smart-freeze-1.png)
+![Main](../assets/images/smart-freeze-1.png)
 
 列表展示了所有智能冻结的app，其中当前处于冻结状态的应用将会用黑白两色的图标，当前解冻状态app为彩色图标。
 
@@ -27,7 +27,7 @@ nav_order: 7
 
 ## 设置项
 
-![Settings](../../assets/images/smart-freeze-settings.png)
+![Settings](../assets/images/smart-freeze-settings.png)
 
 ### 冻结方式
 * PM Disable
@@ -38,7 +38,7 @@ nav_order: 7
 
  Suspend是Android提供用于DPC管理的功能；被挂起的应用桌面通常会保留一个灰色的图标，但是无法直接启动该应用的活动，一般会弹出一个对话框提示这个**应用已被管理员限制使用**（Android系统行为）。你可以为该应用打开\"活检解冻\"开关，这样一来，Thanox检测到启动该应用活动页的请求会解冻该应用。
  
- ![Method](../../assets/images/smart-freeze-method.png)
+ ![Method](../assets/images/smart-freeze-method.png)
  
  
  

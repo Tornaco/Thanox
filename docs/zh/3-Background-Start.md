@@ -19,13 +19,13 @@ Thanox的后台启动功能可以有效的拦截app在后台被偷偷启动（�
 
 > 注意：阻止某些应用的后台启动，可能会导致某些App无法正常使用，例如华为运动健康需要启动HMS Core，如果你阻止了HMS Core的后台自启，那么运动健康可能无法正常登录。
 
-![Main](../../assets/images/bg-start-1.png)
+![Main](../assets/images/bg-start-1.png)
 
 
 ## 允许与阻止的原则
 Thanox会根据用户配置、App运行状态、规则等综合因素来决定是否要拦截某个app的关联启动。如果要查看一个app为什么被阻止或允许了启动，可以进入后台启动功能，右上角菜单查看启动记录，点击chart中间的大数字，可以进入启动记录详情页面。
 
-![Record](../../assets/images/bg-start-record.png)
+![Record](../assets/images/bg-start-record.png)
 
 
 图中可以看到每条启动记录的处理结果（允许或阻止）和原因，其中`BYPASS_XXX`代表允许的原因，`BLOCKED_XXX`代表阻止原因。
@@ -90,4 +90,4 @@ Thanox会根据用户配置、App运行状态、规则等综合因素来决定�
 支持一些常用的名称代替角色，目前可用代号包括：`SHELL`，`ROOT`。    
 例如，如果想允许Shell启动任何QQ：```ALLOW SHELL com.tencent.qq```
 
-![Rule](../../assets/images/bg-start-rule.png)
+![Rule](../assets/images/bg-start-rule.png)

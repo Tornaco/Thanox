@@ -70,7 +70,7 @@ Android里活动的标识格式通常为：
 
 
 
-![activity-replace](../../assets/images/activity-replace.png)
+![activity-replace](../assets/images/activity-replace.png)
 
 
 
@@ -82,4 +82,4 @@ Android里活动的标识格式通常为：
 
 
 
-![show-current-activity](../../assets/images/show-current-activity.png)
+![show-current-activity](../assets/images/show-current-activity.png)

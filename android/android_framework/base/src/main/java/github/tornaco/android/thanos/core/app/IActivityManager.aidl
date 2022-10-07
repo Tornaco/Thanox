@@ -226,4 +226,6 @@ interface IActivityManager {
     void killProcessByNames(in List<ProcessName> processNames);
 
     boolean dumpHeap(String process);
+
+    Pkg getCurrentFrontPkg();
 }

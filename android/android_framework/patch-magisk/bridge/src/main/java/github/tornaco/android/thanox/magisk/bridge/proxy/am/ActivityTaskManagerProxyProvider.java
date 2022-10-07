@@ -22,11 +22,11 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanox.magisk.bridge.proxy.Args;
 import github.tornaco.android.thanox.magisk.bridge.proxy.ProxyProvider;
 import util.ExceptionTransformedInvocationHandler;
-import util.ObjectsUtils;
 import util.os.BinderProxy;
 
 public class ActivityTaskManagerProxyProvider implements ProxyProvider, ExceptionTransformedInvocationHandler {
@@ -147,22 +147,21 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
         if (pkgName == null) {
             return false;
         }
+        int userId = taskInfo.userId;
+        Pkg targetPkg = new Pkg(pkgName, userId);
 
-        if (ObjectsUtils.equals(
-                ThanosManagerNative.getDefault().getActivityStackSupervisor().getCurrentFrontApp(),
-                pkgName)) {
+        if (targetPkg.equals(ThanosManagerNative.getDefault().getActivityManager().getCurrentFrontPkg())) {
             XLog.d("isVisibleRecentTask, %s is current top, won't check.", pkgName);
             return false;
         }
 
-        int setting =
-                ThanosManagerNative.getDefault()
-                        .getActivityManager()
-                        .getRecentTaskExcludeSettingForPackage(pkgName);
+        int setting = ThanosManagerNative.getDefault()
+                .getActivityManager()
+                .getRecentTaskExcludeSettingForPackage(targetPkg);
         boolean res = setting
                 == github.tornaco.android.thanos.core.app.ActivityManager.ExcludeRecentSetting
                 .EXCLUDE;
-        XLog.d("isVisibleRecentTask hidden? %s %s", pkgName, res);
+        XLog.d("isVisibleRecentTask hidden? %s %s", targetPkg, res);
         return res;
     }
 }

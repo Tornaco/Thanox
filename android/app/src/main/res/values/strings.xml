@@ -387,6 +387,7 @@
     <string name="pre_title_smart_standby_stop_service">Stop service</string>
     <string name="pre_summary_smart_standby_stop_service">This will attempt to stop all services that is not in the KEEP rule list</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">Skip apps with notifications</string>
+    <string name="pre_title_smart_standby_bypass_if_has_visible_windows">Skip apps has visible window</string>
     <string name="pre_summary_smart_standby_bypass_if_has_n">Would not interfere applications with notifications</string>
     <string name="pre_title_smart_standby_set_inactive">Standby apps</string>
     <string name="pre_summary_smart_standby_set_inactive">Attempts to set the app to idle state. This is based on Android\'s default standby mechanism.</string>

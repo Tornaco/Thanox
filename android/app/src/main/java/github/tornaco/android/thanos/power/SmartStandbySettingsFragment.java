@@ -30,6 +30,7 @@ public class SmartStandbySettingsFragment extends BasePreferenceFragmentCompat {
         bindStopService(thanos);
         bindIdle(thanos);
         bindByPassN(thanos);
+        bindByPassVisibleWindow(thanos);
         bindBlockBgService(thanos);
     }
 
@@ -67,6 +68,19 @@ public class SmartStandbySettingsFragment extends BasePreferenceFragmentCompat {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 boolean value = (boolean) newValue;
                 thanos.getActivityManager().setSmartStandByByPassIfHasNotificationEnabled(value);
+                return true;
+            }
+        });
+    }
+
+    private void bindByPassVisibleWindow(ThanosManager thanos) {
+        SwitchPreferenceCompat bypassPref = findPreference(getString(R.string.key_smart_standby_bypass_if_has_visible_windows));
+        Objects.requireNonNull(bypassPref).setChecked(thanos.getActivityManager().isSmartStandByByPassIfHasVisibleWindows());
+        bypassPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                boolean value = (boolean) newValue;
+                thanos.getActivityManager().setSmartStandByByPassIfHasVisibleWindowsEnabled(value);
                 return true;
             }
         });

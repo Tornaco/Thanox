@@ -503,6 +503,13 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public boolean isSmartStandByByPassIfHasVisibleWindows() throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public void setSmartStandByByPassIfHasVisibleWindowsEnabled(boolean enable) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -2000,6 +2007,23 @@ public interface IActivityManager extends android.os.IInterface
           else {
             reply.writeInt(0);
           }
+          return true;
+        }
+        case TRANSACTION_isSmartStandByByPassIfHasVisibleWindows:
+        {
+          data.enforceInterface(descriptor);
+          boolean _result = this.isSmartStandByByPassIfHasVisibleWindows();
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_setSmartStandByByPassIfHasVisibleWindowsEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          this.setSmartStandByByPassIfHasVisibleWindowsEnabled(_arg0);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -4914,6 +4938,45 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public boolean isSmartStandByByPassIfHasVisibleWindows() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartStandByByPassIfHasVisibleWindows, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSmartStandByByPassIfHasVisibleWindows();
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setSmartStandByByPassIfHasVisibleWindowsEnabled(boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartStandByByPassIfHasVisibleWindowsEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartStandByByPassIfHasVisibleWindowsEnabled(enable);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -5044,6 +5107,8 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_killProcessByNames = (android.os.IBinder.FIRST_CALL_TRANSACTION + 125);
     static final int TRANSACTION_dumpHeap = (android.os.IBinder.FIRST_CALL_TRANSACTION + 126);
     static final int TRANSACTION_getCurrentFrontPkg = (android.os.IBinder.FIRST_CALL_TRANSACTION + 127);
+    static final int TRANSACTION_isSmartStandByByPassIfHasVisibleWindows = (android.os.IBinder.FIRST_CALL_TRANSACTION + 128);
+    static final int TRANSACTION_setSmartStandByByPassIfHasVisibleWindowsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 129);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -5221,4 +5286,6 @@ public interface IActivityManager extends android.os.IInterface
   public void killProcessByNames(java.util.List<github.tornaco.android.thanos.core.os.ProcessName> processNames) throws android.os.RemoteException;
   public boolean dumpHeap(java.lang.String process) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.pm.Pkg getCurrentFrontPkg() throws android.os.RemoteException;
+  public boolean isSmartStandByByPassIfHasVisibleWindows() throws android.os.RemoteException;
+  public void setSmartStandByByPassIfHasVisibleWindowsEnabled(boolean enable) throws android.os.RemoteException;
 }

@@ -189,5 +189,6 @@
     <string name="key_smart_standby_stop_service" translatable="false">key_smart_standby_stop_service</string>
     <string name="key_smart_standby_set_inactive" translatable="false">key_smart_standby_set_inactive</string>
     <string name="key_smart_standby_bypass_if_has_n" translatable="false">key_smart_standby_bypass_if_has_n</string>
+    <string name="key_smart_standby_bypass_if_has_visible_windows" translatable="false">key_smart_standby_bypass_if_has_visible_windows</string>
     <string name="key_smart_standby_block_bg_service_start" translatable="false">key_smart_standby_block_bg_service_start</string>
 </resources>

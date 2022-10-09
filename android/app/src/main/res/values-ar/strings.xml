@@ -375,6 +375,7 @@
     <string name="pre_title_smart_standby_stop_service">خارج الخدمة</string>
     <string name="pre_summary_smart_standby_stop_service">سيحاول هذا إيقاف جميع الخدمات غير المدرجة في قائمة قواعد KEEP</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">تخطي إخطار</string>
+    <string name="pre_title_smart_standby_bypass_if_has_visible_windows">تخطي التطبيقات لديه نافذة مرئية</string>
     <string name="pre_summary_smart_standby_bypass_if_has_n">لا تتدخل في التطبيقات مع الإخطارات</string>
     <string name="pre_title_smart_standby_set_inactive">تطبيق السبات</string>
     <string name="pre_summary_smart_standby_set_inactive">حاول ضبط التطبيق على حالة الخمول ، بناءً على آلية الاستعداد الافتراضية للتطبيق في Android</string>

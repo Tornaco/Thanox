@@ -374,6 +374,7 @@
     <string name="pre_title_smart_standby_stop_service">停止服務</string>
     <string name="pre_summary_smart_standby_stop_service">這會嘗試停止它不在KEEP規則清單裡的所有服務</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">跳過有通知的</string>
+    <string name="pre_title_smart_standby_bypass_if_has_visible_windows">跳過有可見窗口的</string>
     <string name="pre_summary_smart_standby_bypass_if_has_n">不干涉有通知的應用</string>
     <string name="pre_title_smart_standby_set_inactive">休眠應用</string>
     <string name="pre_summary_smart_standby_set_inactive">嘗試設置應用為idle狀態，基於Android預設的app standby機制實現</string>

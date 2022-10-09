@@ -680,6 +680,16 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    public boolean isSmartStandByByPassIfHasVisibleWindows() {
+        return server.isSmartStandByByPassIfHasVisibleWindows();
+    }
+
+    @SneakyThrows
+    public void setSmartStandByByPassIfHasVisibleWindowsEnabled(boolean enable) {
+        server.setSmartStandByByPassIfHasVisibleWindowsEnabled(enable);
+    }
+
+    @SneakyThrows
     public boolean isSmartStandByBlockBgServiceStartEnabled() {
         return server.isSmartStandByBlockBgServiceStartEnabled();
     }

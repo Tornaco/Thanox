@@ -228,4 +228,7 @@ interface IActivityManager {
     boolean dumpHeap(String process);
 
     Pkg getCurrentFrontPkg();
+
+    boolean isSmartStandByByPassIfHasVisibleWindows();
+    void setSmartStandByByPassIfHasVisibleWindowsEnabled(boolean enable);
 }

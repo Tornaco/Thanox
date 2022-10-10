@@ -43,7 +43,7 @@ android {
 
         getByName("release") {
             isMinifyEnabled = !noMinify
-            isShrinkResources = !noMinify
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -53,7 +53,7 @@ android {
 
         getByName("debug") {
             isMinifyEnabled = !noMinify
-            isShrinkResources = !noMinify
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

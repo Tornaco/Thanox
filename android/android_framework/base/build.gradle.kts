@@ -9,8 +9,7 @@ plugins {
 
 dependencies {
     // Framework
-    compileOnly(files("../../android_sdk/27/android-27.jar"))
-    compileOnly(files("../../android_sdk/27/services-27.jar"))
+    compileOnly(files("../../android_sdk/30/android-30.jar"))
 
     compileOnly(Libs.Others.lombok)
     annotationProcessor(Libs.Others.lombok)

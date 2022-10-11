@@ -193,10 +193,6 @@ public class Package {
         return false;
     }
 
-    public boolean isForwardLocked() {
-        return applicationInfo.isForwardLocked();
-    }
-
     public boolean isSystemApp() {
         return applicationInfo.isSystemApp();
     }

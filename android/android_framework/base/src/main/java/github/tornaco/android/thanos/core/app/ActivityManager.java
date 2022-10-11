@@ -1,9 +1,11 @@
 package github.tornaco.android.thanos.core.app;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 
 import com.elvishew.xlog.XLog;
@@ -22,9 +24,20 @@ import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.process.ProcessRecord;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import util.Singleton;
 
 @AllArgsConstructor
 public class ActivityManager {
+    private static final Singleton<android.app.IActivityManager> IActivityManagerSingleton =
+            new Singleton<android.app.IActivityManager>() {
+                @Override
+                protected android.app.IActivityManager create() {
+                    final IBinder b = ServiceManager.getService(Context.ACTIVITY_SERVICE);
+                    final android.app.IActivityManager am = android.app.IActivityManager.Stub.asInterface(b);
+                    return am;
+                }
+            };
+
     public static final class ExcludeRecentSetting {
         public static final int NONE = 0;
         public static final int INCLUDE = 1;
@@ -33,6 +46,10 @@ public class ActivityManager {
 
     private IActivityManager server;
     private IPkgManager pkg;
+
+    public static android.app.IActivityManager getAndroidService() {
+        return IActivityManagerSingleton.get();
+    }
 
     @SneakyThrows
     public String getCurrentFrontApp() {

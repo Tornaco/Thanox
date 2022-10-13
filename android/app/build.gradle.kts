@@ -284,7 +284,7 @@ afterEvaluate {
         // Package magisk mods.
         val variantCapped = variant.name.capitalize()
         log("variantCapped=${variantCapped}")
-        val processResTaskName = "shrink${variantCapped}Res"
+        val processResTaskName = "process${variantCapped}Resources"
         log("processResTaskName=${processResTaskName}")
         val task :Task? = runCatching {
             tasks.getByPath(processResTaskName)

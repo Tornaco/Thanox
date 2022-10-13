@@ -48,6 +48,8 @@ android {
             path = file("src/main/cpp/CMakeLists.txt")
             version = Configs.cmakeVersion
         }
+
+        log("Using cmake: ${Configs.cmakeVersion}")
     }
 
 

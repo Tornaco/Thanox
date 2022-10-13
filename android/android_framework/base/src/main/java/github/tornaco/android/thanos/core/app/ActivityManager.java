@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 
@@ -781,6 +782,11 @@ public class ActivityManager {
     @SneakyThrows
     public List<ProcessCpuUsageStats> queryProcessCpuUsageStats(long[] pids, boolean update) {
         return server.queryProcessCpuUsageStats(pids, update);
+    }
+
+    @SneakyThrows
+    public float getTotalCpuPercent(boolean update) {
+        return server.getTotalCpuPercent(update);
     }
 
     @SneakyThrows

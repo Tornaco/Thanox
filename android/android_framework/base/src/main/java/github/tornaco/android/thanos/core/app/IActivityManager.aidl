@@ -231,4 +231,6 @@ interface IActivityManager {
 
     boolean isSmartStandByByPassIfHasVisibleWindows();
     void setSmartStandByByPassIfHasVisibleWindowsEnabled(boolean enable);
+
+    float getTotalCpuPercent(boolean update);
 }

@@ -31,7 +31,7 @@ object Compose {
     const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0"
     const val landscapistGlide = "com.github.skydoves:landscapist-glide:1.5.0"
 
-    const val coil = "io.coil-kt:coil-compose:1.3.2"
+    const val coil = "io.coil-kt:coil-compose:2.2.2"
 
     const val enro = "dev.enro:enro:1.15.1"
     const val enroApt = "dev.enro:enro-processor:1.15.1"
@@ -122,7 +122,6 @@ object Libs {
 
     object Others {
         const val timber = "com.jakewharton.timber:timber:4.7.1"
-        const val coil = "io.coil-kt:coil-compose:1.3.2"
         const val retrofit = "com.squareup.retrofit2:retrofit:2.7.1"
         const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:2.7.1"
         const val retrofitAdapterRxJava2 = "com.squareup.retrofit2:adapter-rxjava2:2.7.1"

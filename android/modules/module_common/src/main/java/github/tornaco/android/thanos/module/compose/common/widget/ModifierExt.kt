@@ -32,3 +32,12 @@ fun Modifier.clickableWithRipple(onClick: () -> Unit) = composed {
         onClick = onClick
     )
 }
+
+fun Modifier.clickableWithRippleBorderless(onClick: () -> Unit) = composed {
+    clickable(
+        interactionSource = remember { MutableInteractionSource() },
+        // You can also change the color and radius of the ripple
+        indication = rememberRipple(bounded = false),
+        onClick = onClick
+    )
+}

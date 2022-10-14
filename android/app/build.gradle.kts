@@ -168,7 +168,7 @@ dependencies {
     implementation(Libs.Coroutines.core)
 
     implementation(Libs.Others.timber)
-    implementation(Libs.Others.coil)
+    implementation(Compose.coil)
     implementation(Libs.Others.chart)
     implementation(Libs.Others.licensesDialog)
 

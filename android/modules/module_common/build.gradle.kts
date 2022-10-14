@@ -96,7 +96,7 @@ dependencies {
     implementation(Libs.Accompanist.pager)
     implementation(Libs.Accompanist.insets)
 
-    implementation(Libs.Others.coil)
+    implementation(tornaco.project.android.thanox.Compose.coil)
 
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)

@@ -28,6 +28,11 @@
             app:summary="@string/feature_summary_settings_access_record"
             app:title="@string/feature_title_settings_access_record" />
 
+        <Preference
+            app:key="@string/key_nav2"
+            app:persistent="false"
+            app:title="New Portal" />
+
         <SwitchPreferenceCompat
             app:key="@string/key_enable_global_white_list"
             app:persistent="false"

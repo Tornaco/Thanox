@@ -21,6 +21,7 @@
     <string name="key_rootless_support" translatable="false">key_rootless_support</string>
     <string name="key_theme_attr_preview" translatable="false">key_theme_attr_preview</string>
     <string name="key_settings_record_viewer" translatable="false">key_settings_record_viewer</string>
+    <string name="key_nav2" translatable="false">key_nav2</string>
 
     <string name="key_about" translatable="false">key_about</string>
     <string name="key_build_info_server" translatable="false">key_build_info_server</string>

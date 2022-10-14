@@ -50,7 +50,7 @@ import com.google.accompanist.insets.rememberInsetsPaddingValues
 fun ThanoxBottomSheetScaffold(
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit) = {},
-    onBackPressed: () -> Unit,
+    onBackPressed: (() -> Unit)?,
     scaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState(),
     searchBarState: SearchBarState = rememberSearchBarState(),
     sheetContent: @Composable ColumnScope.() -> Unit = {},
@@ -88,7 +88,7 @@ fun ThanoxSmallAppBarScaffold(
     modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit) = {},
-    onBackPressed: () -> Unit,
+    onBackPressed: (() -> Unit)?,
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     isFloatingActionButtonDocked: Boolean = false,
@@ -139,7 +139,7 @@ private fun ThanoxSmallTopAppBarContainer(
     scrollBehavior: TopAppBarScrollBehavior,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
-    onBackPressed: () -> Unit,
+    onBackPressed: (() -> Unit)? = null,
 ) {
     val backgroundColors = TopAppBarDefaults.smallTopAppBarColors()
     val backgroundColor = backgroundColors.containerColor(
@@ -171,7 +171,7 @@ private fun ThanoxSmallTopAppBar(
     foregroundColors: TopAppBarColors,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
-    onBackPressed: () -> Unit,
+    onBackPressed: (() -> Unit)? = null,
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
     SmallTopAppBar(
@@ -186,13 +186,15 @@ private fun ThanoxSmallTopAppBar(
         title = title,
         actions = actions,
         navigationIcon = {
-            IconButton(onClick = {
-                onBackPressed()
-            }) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Back"
-                )
+            onBackPressed?.let {
+                IconButton(onClick = {
+                    it()
+                }) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
             }
         },
         scrollBehavior = scrollBehavior

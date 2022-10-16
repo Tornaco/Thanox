@@ -121,7 +121,7 @@ internal class HeaderHolder(
 ) :
     Holder(binding.root) {
 
-    private val _state = MutableStateFlow(HeaderState(StatusHeaderInfo(0, MemUsage(), MemUsage())))
+    private val _state = MutableStateFlow(HeaderState(StatusHeaderInfo(0, MemUsage(), MemUsage(), CpuUsage(0))))
 
     init {
         XLog.d("init: HeaderHolder-${hashCode()}")
@@ -132,7 +132,10 @@ internal class HeaderHolder(
 
         binding.compose.setContent {
             val state by _state.collectAsState()
-            HeaderContent(state, onHeaderClick)
+            HeaderContent(
+                headerInfo = state.headerInfo,
+                onHeaderClick = onHeaderClick
+            )
         }
     }
 

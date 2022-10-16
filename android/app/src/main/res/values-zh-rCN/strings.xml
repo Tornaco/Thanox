@@ -69,8 +69,8 @@
 
     <string name="boost_status_running_apps">个应用正在运行</string>
     <string name="boost_status_blocked_start_count">已阻止%s次应用启动请求</string>
-    <string name="boost_status_mem_usage_percent">物理内存  %s</string>
-    <string name="boost_status_swap_usage_percent">虚拟内存  %s</string>
+    <string name="boost_status_mem_usage_percent">物理 %s</string>
+    <string name="boost_status_swap_usage_percent">虚拟 %s</string>
     <string name="boost_status_available">可用 %s</string>
     <string name="boost_status_not_enabled">未开启</string>
 

@@ -35,13 +35,17 @@ import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import kotlinx.coroutines.delay
 
 @Composable
-fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
-    val headerInfo = state.headerInfo
+fun HeaderContent(
+    modifier: Modifier = Modifier,
+    headerInfo: StatusHeaderInfo,
+    onHeaderClick: () -> Unit
+) {
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
     val primaryContainerColor = getColorAttribute(R.attr.colorPrimaryContainer)
     val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
@@ -49,9 +53,9 @@ fun HeaderContent(state: HeaderState, onHeaderClick: () -> Unit) {
     val progressColor = getColorAttribute(R.attr.progressColor)
     val progressTrackColor = getColorAttribute(R.attr.progressTrackColor)
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(24.dp))
+            .clip(RoundedCornerShape(cardCornerSize))
             .background(color = Color(cardBgColor))
             .clickableWithRipple {
                 onHeaderClick()

@@ -18,9 +18,10 @@
 package github.tornaco.android.thanos.dashboard
 
 data class StatusHeaderInfo(
-    var runningAppsCount: Int,
+    val runningAppsCount: Int,
     val memory: MemUsage,
     val swap: MemUsage,
+    val cpu: CpuUsage
 )
 
 data class MemUsage(
@@ -33,6 +34,11 @@ data class MemUsage(
     val isEnabled: Boolean = true
 )
 
+data class CpuUsage(
+    // 0-100
+    val totalPercent: Int = 1,
+)
+
 enum class MemType {
     MEMORY,
     SWAP
@@ -41,5 +47,6 @@ enum class MemType {
 val defaultStatusHeaderInfo = StatusHeaderInfo(
     0,
     MemUsage(MemType.MEMORY),
-    MemUsage(MemType.SWAP)
+    MemUsage(MemType.SWAP),
+    CpuUsage(0)
 )

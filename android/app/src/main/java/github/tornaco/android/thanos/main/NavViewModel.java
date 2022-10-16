@@ -43,6 +43,7 @@ import github.tornaco.android.thanos.core.T;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.os.SwapInfo;
 import github.tornaco.android.thanos.core.pm.AddPluginCallback;
+import github.tornaco.android.thanos.dashboard.CpuUsage;
 import github.tornaco.android.thanos.dashboard.MemType;
 import github.tornaco.android.thanos.dashboard.MemUsage;
 import github.tornaco.android.thanos.dashboard.StatusFooterInfo;
@@ -219,7 +220,8 @@ public class NavViewModel extends AndroidViewModel {
                         swapUsageSizeString[0],
                         swapAvailableSizeString[0],
                         swapEnabled[0]
-                )
+                ),
+                new CpuUsage(0)
         );
     }
 

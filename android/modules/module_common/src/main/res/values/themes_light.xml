@@ -23,6 +23,7 @@
         <item name="colorOnSurface">@color/md_grey_800</item>
         <item name="progressTrackColor">@color/md_grey_300</item>
         <item name="progressColor">?colorAccent</item>
+        <item name="secondaryProgressColor">@color/md_red_500</item>
 
         <item name="appbarPopupTheme">@style/PopupOverlayLight</item>
         <item name="appbarTheme">@style/AppBarOverlayLight</item>

@@ -46,6 +46,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.app.donate.DonateActivity
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
@@ -66,16 +67,16 @@ fun NavScreen() {
     var isShowRebootConfirmationDialog by remember {
         mutableStateOf(false)
     }
-
-    val goToSettings = {
-        SettingsDashboardActivity.start(activity)
+    var isShowActiveDialog by remember {
+        mutableStateOf(false)
     }
-
-    val restartDevice = {
-        isShowRebootConfirmationDialog = true
+    var isShowFrameworkErrorDialog by remember {
+        mutableStateOf(false)
     }
 
     LaunchedEffect(viewModel) {
+        viewModel.loadCoreStatus()
+        viewModel.loadPurchaseStatus()
         viewModel.loadFeatures()
         viewModel.loadStatusHeaderState()
         viewModel.autoRefresh()
@@ -83,10 +84,26 @@ fun NavScreen() {
 
     ThanoxBottomSheetScaffold(
         title = {
-            Text(
-                stringResource(id = R.string.app_name),
-                style = TypographyDefaults.appBarTitleTextStyle()
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    stringResource(id = R.string.app_name),
+                    style = TypographyDefaults.appBarTitleTextStyle()
+                )
+                TinySpacer()
+                AppBarBadges(state = state,
+                    onInactiveClick = {
+                        isShowActiveDialog = true
+                    },
+                    onNeedRestartClick = {
+                        NeedToRestartActivity.Starter.start(activity)
+                    },
+                    onTryingAppClick = {
+                        DonateActivity.start(activity)
+                    },
+                    onFrameworkErrorClick = {
+                        isShowFrameworkErrorDialog = true
+                    })
+            }
         },
         actions = {
             Row(
@@ -94,7 +111,7 @@ fun NavScreen() {
                 verticalAlignment = CenterVertically
             ) {
                 IconButton(onClick = {
-                    restartDevice()
+                    isShowRebootConfirmationDialog = true
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_remix_restart_line),
@@ -102,7 +119,7 @@ fun NavScreen() {
                     )
                 }
                 IconButton(onClick = {
-                    goToSettings()
+                    SettingsDashboardActivity.start(activity)
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_remix_settings_line),
@@ -148,7 +165,70 @@ fun NavScreen() {
                     }
                 )
             }
+            if (isShowActiveDialog) {
+                ActiveDialog(
+                    onDismissRequest = {
+                        isShowActiveDialog = false
+                    }
+                )
+            }
+            if (isShowFrameworkErrorDialog) {
+                FrameworkErrorDialog(
+                    onDismissRequest = {
+                        isShowFrameworkErrorDialog = false
+                    }
+                )
+            }
         }
+    }
+}
+
+@Composable
+private fun AppBarBadges(
+    state: NavState,
+    onInactiveClick: () -> Unit,
+    onNeedRestartClick: () -> Unit,
+    onTryingAppClick: () -> Unit,
+    onFrameworkErrorClick: () -> Unit,
+) {
+    when (state.activeStatus) {
+        ActiveStatus.Active -> {
+            // Noop.
+        }
+        ActiveStatus.InActive -> {
+            ClickableBadge(text = stringResource(id = R.string.status_not_active)) {
+                onInactiveClick()
+            }
+        }
+        ActiveStatus.RebootNeeded -> {
+            ClickableBadge(text = stringResource(id = R.string.status_need_reboot)) {
+                onNeedRestartClick()
+            }
+        }
+    }
+
+    if (state.hasFrameworkError) {
+        ClickableBadge(text = stringResource(id = R.string.badge_framework_err)) {
+            onFrameworkErrorClick()
+        }
+    }
+
+    if (!state.isPurchased) {
+        ClickableBadge(text = stringResource(id = R.string.badge_trying_app)) {
+            onTryingAppClick()
+        }
+    }
+}
+
+@Composable
+private fun ClickableBadge(text: String, onClick: () -> Unit) {
+    TextButton(contentPadding = PaddingValues(4.dp), onClick = { onClick() }) {
+        MD3Badge(
+            text = text,
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+            textSize = 12.sp,
+            padding = 6.dp
+        )
     }
 }
 
@@ -275,6 +355,50 @@ private fun RestartDeviceConfirmationDialog(
         dismissButton = {
             TextButton(onClick = { onDismissRequest() }) {
                 Text(text = stringResource(android.R.string.cancel))
+            }
+        })
+}
+
+
+@Composable
+private fun ActiveDialog(
+    onDismissRequest: () -> Unit
+) {
+    AlertDialog(
+        title = {
+            Text(text = stringResource(id = R.string.status_not_active))
+        },
+        text = {
+            Text(text = stringResource(id = R.string.message_active_needed))
+        },
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(onClick = {
+                onDismissRequest()
+            }) {
+                Text(text = stringResource(android.R.string.ok))
+            }
+        })
+}
+
+
+@Composable
+private fun FrameworkErrorDialog(
+    onDismissRequest: () -> Unit
+) {
+    AlertDialog(
+        title = {
+            Text(text = stringResource(id = R.string.title_framework_error))
+        },
+        text = {
+            Text(text = stringResource(id = R.string.message_framework_error))
+        },
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(onClick = {
+                onDismissRequest()
+            }) {
+                Text(text = stringResource(android.R.string.ok))
             }
         })
 }

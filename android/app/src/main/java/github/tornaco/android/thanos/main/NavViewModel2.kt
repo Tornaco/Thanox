@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.dashboard.*
@@ -23,6 +24,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+
+enum class ActiveStatus {
+    Active,
+    InActive,
+    RebootNeeded
+}
 
 data class FeatureItem(
     val id: Int = 0,
@@ -41,7 +48,10 @@ data class FeatureItemGroup(
 
 data class NavState(
     val isLoading: Boolean, val features: List<FeatureItemGroup>,
-    val statusHeaderInfo: StatusHeaderInfo
+    val statusHeaderInfo: StatusHeaderInfo,
+    val activeStatus: ActiveStatus,
+    val hasFrameworkError: Boolean,
+    val isPurchased: Boolean
 )
 
 @SuppressLint("StaticFieldLeak")
@@ -54,7 +64,10 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
             NavState(
                 isLoading = false,
                 features = emptyList(),
-                statusHeaderInfo = defaultStatusHeaderInfo
+                statusHeaderInfo = defaultStatusHeaderInfo,
+                activeStatus = ActiveStatus.InActive,
+                hasFrameworkError = false,
+                isPurchased = false
             )
         )
     val state = _state.asStateFlow()
@@ -69,6 +82,37 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                 _state.value = _state.value.copy(features = all)
             }
             _state.value = _state.value.copy(isLoading = false)
+        }
+    }
+
+    fun loadCoreStatus() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val status = if (!thanox.isServiceInstalled) {
+                    ActiveStatus.InActive
+                } else if (BuildProp.THANOS_BUILD_FINGERPRINT != thanox.fingerPrint()) {
+                    ActiveStatus.RebootNeeded
+                } else {
+                    ActiveStatus.Active
+                }
+                val hasFrameworkError =
+                    thanox.isServiceInstalled && thanox.hasFrameworkInitializeError()
+                _state.value =
+                    _state.value.copy(activeStatus = status, hasFrameworkError = hasFrameworkError)
+            }
+        }
+    }
+
+    fun loadPurchaseStatus() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                withSubscriptionStatus(context) { isSubscribed: Boolean? ->
+                    isSubscribed?.let {
+                        _state.value =
+                            _state.value.copy(isPurchased = it)
+                    }
+                }
+            }
         }
     }
 

@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,13 +41,14 @@ fun MD3Badge(text: String) {
 fun MD3Badge(
     text: String,
     containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
-    textSize: TextUnit = 10.sp
+    textSize: TextUnit = 10.sp,
+    padding: Dp = 2.dp
 ) {
     androidx.compose.material3.Badge(
         containerColor = containerColor
     ) {
         Text(
-            modifier = Modifier.padding(2.dp),
+            modifier = Modifier.padding(padding),
             text = text,
             fontSize = textSize
         )

@@ -78,7 +78,10 @@ public class PrebuiltFeatureFragment extends NavFragment
         prebuiltFeaturesBinding.setViewmodel(navViewModel);
         prebuiltFeaturesBinding.executePendingBindings();
 
-        this.featureLauncher = new PrebuiltFeatureLauncher(requireActivity(), uiHandler, navViewModel);
+        this.featureLauncher = new PrebuiltFeatureLauncher(requireActivity(), () -> {
+            uiHandler.postDelayed(() -> navViewModel.start(), 1500);
+            return null;
+        });
     }
 
     private static NavViewModel obtainViewModel(FragmentActivity activity) {

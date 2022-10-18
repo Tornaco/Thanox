@@ -48,9 +48,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.dashboard.HeaderContent
 import github.tornaco.android.thanos.module.compose.common.requireActivity
-import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
@@ -112,32 +110,41 @@ fun NavScreen() {
                     .background(color = Color(windowBgColor))
                     .verticalScroll(rememberScrollState())
             ) {
+                val activity = LocalContext.current.requireActivity()
                 NavHeaderContent(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .padding(top = 16.dp),
                     headerInfo = state.statusHeaderInfo
                 ) {
-
+                    viewModel.headerClick(activity)
                 }
-                Features(state)
+                Features(state) {
+                    viewModel.featureItemClick(activity, it.id)
+                }
+
+                LargeSpacer()
+                LargeSpacer()
             }
         }
     }
 }
 
 @Composable
-private fun Features(state: NavState) {
+private fun Features(state: NavState, onItemClick: (FeatureItem) -> Unit) {
     state.features.forEach { group ->
-        FeatureGroup(group)
+        FeatureGroup(group, onItemClick)
     }
 }
 
 @Composable
-private fun FeatureGroup(group: FeatureItemGroup) {
+private fun FeatureGroup(group: FeatureItemGroup, onItemClick: (FeatureItem) -> Unit) {
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(horizontal = 16.dp)
+            .padding(top = 16.dp),
         shape = RoundedCornerShape(cardCornerSize),
         colors = CardDefaults.cardColors(
             containerColor = Color(cardBgColor)
@@ -151,7 +158,7 @@ private fun FeatureGroup(group: FeatureItemGroup) {
                 lineSpacing = 16.dp
             ) {
                 group.items.forEach { item ->
-                    FeatureItem(item)
+                    FeatureItem(item, onItemClick)
                 }
             }
         }
@@ -159,12 +166,12 @@ private fun FeatureGroup(group: FeatureItemGroup) {
 }
 
 @Composable
-private fun FeatureItem(item: FeatureItem) {
+private fun FeatureItem(item: FeatureItem, onItemClick: (FeatureItem) -> Unit) {
     Column(
         modifier = Modifier
             .width(64.dp)
             .clickableWithRippleBorderless {
-
+                onItemClick(item)
             },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top

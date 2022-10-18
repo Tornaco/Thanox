@@ -18,13 +18,14 @@
 package github.tornaco.android.thanos.main
 
 import android.app.Activity
-import android.os.Handler
+import android.content.Intent
 import com.elvishew.xlog.XLog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import github.tornaco.android.plugin.push.message.delegate.WechatPushDeleteMainActivity
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.apps.SuggestedAppsActivity
+import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.feature.access.AppFeatureManager
 import github.tornaco.android.thanos.infinite.InfiniteZActivity
@@ -48,46 +49,44 @@ import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
 
 class PrebuiltFeatureLauncher(
     private val context: Activity,
-    private val uiHandler: Handler,
-    private val navViewModel: NavViewModel? = null,
+    private val onProcessCleared: ()->Unit
 ) {
     fun launch(featureId: Int) {
         XLog.d("PrebuiltFeatureLauncher, launch: %s", featureId)
         val thanosManager = ThanosManager.from(context)
-        when {
-            featureId == PrebuiltFeatureIds.ID_ONE_KEY_CLEAR && navViewModel != null -> {
+        when (featureId) {
+            PrebuiltFeatureIds.ID_ONE_KEY_CLEAR -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
-                        navViewModel.cleanUpBackgroundTasks()
-                        // Delay 1.5s to refresh
-                        uiHandler.postDelayed({ navViewModel.start() }, 1500)
+                        context.sendBroadcast(Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR))
+                        onProcessCleared()
                     } else {
                         AppFeatureManager.showDonateIntroDialog(this.context)
                     }
                 }
             }
-            featureId == PrebuiltFeatureIds.ID_BACKGROUND_START -> {
+            PrebuiltFeatureIds.ID_BACKGROUND_START -> {
                 StartRestrictActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> {
+            PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> {
                 BackgroundRestrictActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {
+            PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {
                 CleanUpOnTaskRemovedActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_APPS_MANAGER -> {
+            PrebuiltFeatureIds.ID_APPS_MANAGER -> {
                 SuggestedAppsActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {
+            PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {
                 ScreenOnNotificationActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER -> {
+            PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER -> {
                 NotificationRecordActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_NOTIFICATION_CENTER -> {
+            PrebuiltFeatureIds.ID_NOTIFICATION_CENTER -> {
                 NotificationCenterActivity.Starter.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_TRAMPOLINE -> {
+            PrebuiltFeatureIds.ID_TRAMPOLINE -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         ActivityTrampolineActivity.start(context)
@@ -101,10 +100,10 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
-            featureId == PrebuiltFeatureIds.ID_PROFILE -> {
+            PrebuiltFeatureIds.ID_PROFILE -> {
                 RuleListActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_SMART_STANDBY -> {
+            PrebuiltFeatureIds.ID_SMART_STANDBY -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         SmartStandbyV2Activity.start(context)
@@ -113,22 +112,22 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
-            featureId == PrebuiltFeatureIds.ID_SMART_FREEZE -> {
+            PrebuiltFeatureIds.ID_SMART_FREEZE -> {
                 SmartFreezeActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
+            PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
                 DataCheatActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_OPS_BY_OPS -> {
+            PrebuiltFeatureIds.ID_OPS_BY_OPS -> {
                 OpsBottomNavActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_TASK_BLUR -> {
+            PrebuiltFeatureIds.ID_TASK_BLUR -> {
                 RecentTaskBlurListActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_OP_REMIND -> {
+            PrebuiltFeatureIds.ID_OP_REMIND -> {
                 RemindOpsActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_APP_LOCK -> {
+            PrebuiltFeatureIds.ID_APP_LOCK -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         LockerStartActivity.start(context)
@@ -137,7 +136,7 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
-            featureId == PrebuiltFeatureIds.ID_INFINITE_Z -> {
+            PrebuiltFeatureIds.ID_INFINITE_Z -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         InfiniteZActivity.start(context)
@@ -146,16 +145,16 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
-            featureId == PrebuiltFeatureIds.ID_PLUGINS -> {
+            PrebuiltFeatureIds.ID_PLUGINS -> {
                 PluginListActivity.start(context)
             }
-            featureId == PrebuiltFeatureIds.ID_FEEDBACK -> {
+            PrebuiltFeatureIds.ID_FEEDBACK -> {
                 showFeedbackDialog()
             }
-            featureId == PrebuiltFeatureIds.ID_GUIDE -> {
+            PrebuiltFeatureIds.ID_GUIDE -> {
                 BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME)
             }
-            featureId == PrebuiltFeatureIds.ID_WECHAT_PUSH -> {
+            PrebuiltFeatureIds.ID_WECHAT_PUSH -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         WechatPushDeleteMainActivity.start(context)
@@ -164,7 +163,7 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
-            featureId == PrebuiltFeatureIds.ID_WAKELOCK_REMOVER -> {
+            PrebuiltFeatureIds.ID_WAKELOCK_REMOVER -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         WakeLockBlockerActivity.Starter.start(context)

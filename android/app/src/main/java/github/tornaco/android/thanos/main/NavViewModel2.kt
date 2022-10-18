@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.main
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.text.format.Formatter
 import androidx.annotation.DrawableRes
@@ -11,6 +12,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.dashboard.*
+import github.tornaco.android.thanos.feature.access.AppFeatureManager.showDonateIntroDialog
+import github.tornaco.android.thanos.feature.access.AppFeatureManager.withSubscriptionStatus
+import github.tornaco.android.thanos.process.v2.ProcessManageActivityV2
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -162,7 +166,7 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
 
     suspend fun autoRefresh() {
         while (true) {
-            delay(1000)
+            delay(2000)
             if (isResumed) {
                 loadStatusHeaderState(showLoading = false)
             }
@@ -171,5 +175,19 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
 
     fun refresh() {
         loadStatusHeaderState()
+    }
+
+    fun headerClick(activity: Activity) {
+        withSubscriptionStatus(activity) { isSubscribed: Boolean ->
+            if (isSubscribed) {
+                ProcessManageActivityV2.Starter.start(activity)
+            } else {
+                showDonateIntroDialog(activity)
+            }
+        }
+    }
+
+    fun featureItemClick(activity: Activity, featureId: Int) {
+        PrebuiltFeatureLauncher(activity) {}.launch(featureId)
     }
 }

@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.pm.ShortcutInfoCompat;
@@ -39,8 +37,7 @@ public class PrebuiltFeatureShortcutActivity extends Activity {
         int featId = getIntent().getIntExtra(KEY_FEATURE_ID, Integer.MIN_VALUE);
         XLog.d("PrebuiltFeatureShortcutActivity, featId: " + featId);
         if (PrebuiltFeatureIds.INSTANCE.isValidId(featId)) {
-            final Handler uiHandler = new Handler(Looper.getMainLooper());
-            new PrebuiltFeatureLauncher(this, uiHandler, null).launch(featId);
+            new PrebuiltFeatureLauncher(this, () -> null).launch(featId);
         }
         finish();
     }

@@ -26,16 +26,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -53,6 +51,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.*
+import github.tornaco.android.thanos.settings.SettingsDashboardActivity
 
 @Composable
 @OptIn(androidx.compose.material.ExperimentalMaterialApi::class)
@@ -62,6 +61,19 @@ fun NavScreen() {
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     viewModel.bindLifecycle(lifecycle)
     val state by viewModel.state.collectAsState()
+    val activity = LocalContext.current.requireActivity()
+
+    var isShowRebootConfirmationDialog by remember {
+        mutableStateOf(false)
+    }
+
+    val goToSettings = {
+        SettingsDashboardActivity.start(activity)
+    }
+
+    val restartDevice = {
+        isShowRebootConfirmationDialog = true
+    }
 
     LaunchedEffect(viewModel) {
         viewModel.loadFeatures()
@@ -81,7 +93,22 @@ fun NavScreen() {
                 modifier = Modifier,
                 verticalAlignment = CenterVertically
             ) {
-
+                IconButton(onClick = {
+                    restartDevice()
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_remix_restart_line),
+                        contentDescription = "Reboot"
+                    )
+                }
+                IconButton(onClick = {
+                    goToSettings()
+                }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_remix_settings_line),
+                        contentDescription = "Settings"
+                    )
+                }
             }
         },
         onBackPressed = null
@@ -101,32 +128,61 @@ fun NavScreen() {
                 )
             }
         ) {
-            val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
-            Column(
-                modifier = Modifier
-                    .padding(contentPadding)
-                    .navigationBarsPadding()
-                    .fillMaxSize()
-                    .background(color = Color(windowBgColor))
-                    .verticalScroll(rememberScrollState())
-            ) {
-                val activity = LocalContext.current.requireActivity()
-                NavHeaderContent(
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .padding(top = 16.dp),
-                    headerInfo = state.statusHeaderInfo
-                ) {
-                    viewModel.headerClick(activity)
-                }
-                Features(state) {
+            NavContent(
+                contentPadding = contentPadding,
+                state = state,
+                onFeatureItemClick = {
                     viewModel.featureItemClick(activity, it.id)
-                }
+                },
+                onHeaderClick = {
+                    viewModel.headerClick(activity)
+                })
 
-                LargeSpacer()
-                LargeSpacer()
+            if (isShowRebootConfirmationDialog) {
+                RestartDeviceConfirmationDialog(
+                    onRebootConfirmed = {
+                        isShowRebootConfirmationDialog = false
+                    },
+                    onDismissRequest = {
+                        isShowRebootConfirmationDialog = false
+                    }
+                )
             }
         }
+    }
+}
+
+@Composable
+private fun NavContent(
+    contentPadding: PaddingValues,
+    state: NavState,
+    onHeaderClick: () -> Unit,
+    onFeatureItemClick: (FeatureItem) -> Unit
+
+) {
+    val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
+    Column(
+        modifier = Modifier
+            .padding(contentPadding)
+            .navigationBarsPadding()
+            .fillMaxSize()
+            .background(color = Color(windowBgColor))
+            .verticalScroll(rememberScrollState())
+    ) {
+        NavHeaderContent(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp),
+            headerInfo = state.statusHeaderInfo
+        ) {
+            onHeaderClick()
+        }
+        Features(state) {
+            onFeatureItemClick(it)
+        }
+
+        LargeSpacer()
+        LargeSpacer()
     }
 }
 
@@ -194,4 +250,31 @@ private fun FeatureItem(item: FeatureItem, onItemClick: (FeatureItem) -> Unit) {
             style = MaterialTheme.typography.titleMedium,
         )
     }
+}
+
+@Composable
+private fun RestartDeviceConfirmationDialog(
+    onRebootConfirmed: () -> Unit,
+    onDismissRequest: () -> Unit
+) {
+    AlertDialog(
+        title = {
+            Text(text = stringResource(id = R.string.reboot_now))
+        },
+        text = {
+            Text(text = stringResource(id = R.string.common_dialog_message_are_you_sure))
+        },
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(onClick = {
+                onRebootConfirmed()
+            }) {
+                Text(text = stringResource(android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = { onDismissRequest() }) {
+                Text(text = stringResource(android.R.string.cancel))
+            }
+        })
 }

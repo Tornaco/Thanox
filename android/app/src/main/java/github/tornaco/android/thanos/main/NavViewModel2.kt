@@ -7,6 +7,7 @@ import android.text.format.Formatter
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
+import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
@@ -72,17 +73,19 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     }
 
     fun loadStatusHeaderState(showLoading: Boolean = true) {
-        viewModelScope.launch {
-            if (showLoading) _state.value = _state.value.copy(isLoading = true)
-            withContext(Dispatchers.IO) {
-                val state = getStatusHeaderInfo()
-                _state.value = _state.value.copy(statusHeaderInfo = state)
+        if (thanox.isServiceInstalled) {
+            viewModelScope.launch {
+                if (showLoading) _state.value = _state.value.copy(isLoading = true)
+                withContext(Dispatchers.IO) {
+                    val state = getStatusHeaderInfo()
+                    _state.value = _state.value.copy(statusHeaderInfo = state)
+                }
+                _state.value = _state.value.copy(isLoading = false)
             }
-            _state.value = _state.value.copy(isLoading = false)
         }
     }
 
-    private fun getStatusHeaderInfo(): StatusHeaderInfo {
+    private fun getStatusHeaderInfo(): StatusHeaderInfo = kotlin.runCatching {
         var memTotalSizeString = ""
         var memUsageSizeString = ""
         var memAvailableSizeString = ""
@@ -162,6 +165,9 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
             ),
             CpuUsage(cpuPercent)
         )
+    }.getOrElse {
+        XLog.e("getStatusHeaderInfo error", it)
+        defaultStatusHeaderInfo
     }
 
     suspend fun autoRefresh() {

@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalContext
-import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.android.material.composethemeadapter3.Mdc3Theme
 import github.tornaco.android.thanos.main.NavActivity
@@ -41,7 +40,7 @@ class OnBoardingActivity : ThemeActivity() {
 
                 OnBoardingScreen {
                     AppPreference.setHasOnBoarding(context, true)
-                    NavActivity.start(thisActivity())
+                    NavActivity.Starter.start(thisActivity())
                     finish()
                 }
             }

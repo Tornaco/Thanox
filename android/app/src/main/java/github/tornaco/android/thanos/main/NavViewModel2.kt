@@ -12,6 +12,7 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.BuildProp
+import github.tornaco.android.thanos.app.donate.DonateSettings
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.dashboard.*
@@ -25,6 +26,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 import javax.inject.Inject
 
 enum class ActiveStatus {
@@ -83,6 +85,12 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     val state = _state.asStateFlow()
 
     private val thanox by lazy { ThanosManager.from(context) }
+
+    private val donateObs = { _: Observable?, _: Any? -> loadPurchaseStatus() }
+
+    init {
+        registerReceivers()
+    }
 
     fun loadFeatures() {
         viewModelScope.launch {
@@ -281,5 +289,14 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(
             privacyAgreementKey, false
         )
+    }
+
+    private fun registerReceivers() {
+        DonateSettings.getRegistry().addObserver(donateObs)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        DonateSettings.getRegistry().deleteObserver(donateObs)
     }
 }

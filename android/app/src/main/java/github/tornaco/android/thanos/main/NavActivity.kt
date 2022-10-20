@@ -9,12 +9,12 @@ import github.tornaco.android.thanos.pref.AppPreference
 import github.tornaco.android.thanos.util.ActivityUtils
 
 @AndroidEntryPoint
-class NavActivity2 : ComposeThemeActivity() {
+class NavActivity : ComposeThemeActivity() {
 
     object Starter {
         @JvmStatic
         fun start(context: Context?) {
-            ActivityUtils.startActivity(context, NavActivity2::class.java)
+            ActivityUtils.startActivity(context, NavActivity::class.java)
         }
     }
 

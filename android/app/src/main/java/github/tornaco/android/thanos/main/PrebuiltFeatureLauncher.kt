@@ -49,7 +49,7 @@ import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
 
 class PrebuiltFeatureLauncher(
     private val context: Activity,
-    private val onProcessCleared: ()->Unit
+    private val onProcessCleared: () -> Unit,
 ) {
     fun launch(featureId: Int) {
         XLog.d("PrebuiltFeatureLauncher, launch: %s", featureId)
@@ -146,7 +146,6 @@ class PrebuiltFeatureLauncher(
                 }
             }
             PrebuiltFeatureIds.ID_PLUGINS -> {
-                PluginListActivity.start(context)
             }
             PrebuiltFeatureIds.ID_FEEDBACK -> {
                 showFeedbackDialog()

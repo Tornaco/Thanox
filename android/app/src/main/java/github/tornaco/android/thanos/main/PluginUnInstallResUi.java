@@ -15,18 +15,16 @@
  *
  */
 
-package github.tornaco.android.thanos.main
+package github.tornaco.android.thanos.main;
 
-import android.app.Activity
-import github.tornaco.android.thanos.app.PLayLvlCheckActivity
+import androidx.annotation.NonNull;
 
-object NavActivityPlugin {
-    fun blockOnCreate(activity: Activity): Boolean {
-        return if (!github.tornaco.android.thanos.app.Init.isLVLChecked(activity)
-            && github.tornaco.android.thanos.app.Init.s == 0
-        ) {
-            PLayLvlCheckActivity.Starter.start(activity)
-            true
-        } else false
-    }
+import github.tornaco.android.nitro.framework.host.manager.data.model.InstalledPlugin;
+
+public interface PluginUnInstallResUi {
+    void showUnInstallBegin();
+
+    void showUnInstallSuccess(@NonNull InstalledPlugin plugin);
+
+    void showUnInstallFail(String message);
 }

@@ -24,10 +24,6 @@ import java.util.Objects;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.process.RunningState;
-import github.tornaco.android.thanos.dashboard.DashboardAdapter;
-import github.tornaco.android.thanos.dashboard.DashboardCardAdapter;
-import github.tornaco.android.thanos.dashboard.Tile;
-import github.tornaco.android.thanos.dashboard.TileGroup;
 import github.tornaco.android.thanos.main.State;
 import github.tornaco.android.thanos.power.StandbyRule;
 import github.tornaco.android.thanos.start.StartRule;
@@ -58,22 +54,6 @@ public class DataBindingAdapters {
     @BindingAdapter("android:boostStatusStoragePercent")
     public static void setBoostStatusStoragePercent(TextView textView, ObservableInt percent) {
         textView.setText(percent.get() + "%");
-    }
-
-    @BindingAdapter("android:features")
-    public static void setFeatures(RecyclerView recyclerView, ObservableList<Tile> features) {
-        DashboardAdapter adapter = (DashboardAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
-            adapter.replaceData(features);
-        }
-    }
-
-    @BindingAdapter("android:tileGroups")
-    public static void setTileGroups(RecyclerView recyclerView, ObservableList<TileGroup> features) {
-        DashboardCardAdapter adapter = (DashboardCardAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
-            adapter.replaceData(features);
-        }
     }
 
     @BindingAdapter("android:startRules")

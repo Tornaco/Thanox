@@ -43,6 +43,8 @@ object PrebuiltFeatureIds {
     const val ID_WECHAT_PUSH = 17
     const val ID_SMART_FREEZE = 18
     const val ID_INFINITE_Z = 19
+
+    @Deprecated("Not supported")
     const val ID_PLUGINS = 20
     const val ID_FEEDBACK = 21
     const val ID_GUIDE = 22

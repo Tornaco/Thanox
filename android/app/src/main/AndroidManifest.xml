@@ -39,10 +39,6 @@
         </activity>
 
         <activity
-            android:name=".main.NavActivity2"
-            android:exported="true" />
-
-        <activity
             android:name=".process.v2.ProcessManageActivityV2"
             android:exported="true"
             android:label="@string/activity_title_process_manage">

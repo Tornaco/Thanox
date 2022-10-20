@@ -8,7 +8,7 @@ import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.main.NavActivity2;
+import github.tornaco.android.thanos.main.NavActivity;
 import github.tornaco.android.thanos.settings.access.SettingsAccessRecordViewerActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.thanos.android.noroot.ServiceBindings;
@@ -76,11 +76,6 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
 
         findPreference(getString(R.string.key_settings_record_viewer)).setOnPreferenceClickListener(preference -> {
             SettingsAccessRecordViewerActivity.Starter.INSTANCE.start(requireActivity());
-            return true;
-        });
-
-        findPreference(getString(R.string.key_nav2)).setOnPreferenceClickListener(preference -> {
-            NavActivity2.Starter.start(requireActivity());
             return true;
         });
     }

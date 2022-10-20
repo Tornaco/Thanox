@@ -114,12 +114,6 @@ object PrebuiltFeatures {
                 iconRes = R.drawable.ic_nav_app_clone,
                 titleRes = R.string.feature_title_infinite_z,
                 requiredFeature = BuildProp.THANOX_FEATURE_IZ
-            ),
-            FeatureItem(
-                id = PrebuiltFeatureIds.ID_PLUGINS,
-                iconRes = R.drawable.ic_nav_plugins,
-                titleRes = R.string.nav_title_plugin,
-                requiredFeature = BuildProp.THANOX_FEATURE_PLUGIN_SUPPORT
             )
         )
     )

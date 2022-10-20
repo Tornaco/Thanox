@@ -15,7 +15,7 @@
  *
  */
 
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@file:OptIn(ExperimentalAnimationApi::class)
 
 package github.tornaco.android.thanos.main
 

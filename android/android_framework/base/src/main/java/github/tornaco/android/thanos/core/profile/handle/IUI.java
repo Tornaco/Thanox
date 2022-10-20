@@ -1,5 +1,7 @@
 package github.tornaco.android.thanos.core.profile.handle;
 
+import android.content.pm.ActivityInfo;
+
 import github.tornaco.android.thanos.core.annotation.NonNull;
 import github.tornaco.android.thanos.core.annotation.Nullable;
 
@@ -60,4 +62,11 @@ interface IUI {
     void findAndClickViewById(@NonNull String id, @Nullable String componentNameShortString);
 
     void clickDelay(int x, int y, long delayMills);
+
+    /**
+     * @see ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+     * @see ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+     * @see ActivityInfo.SCREEN_ORIENTATION_USER
+     */
+    void requestScreenOrientation(int orientation);
 }

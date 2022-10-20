@@ -8,8 +8,8 @@ import static github.tornaco.thanox.android.server.patch.framework.hooks.app.usa
 
 import com.elvishew.xlog.XLog;
 
+import github.tornaco.android.thanos.services.patch.common.LocalServices;
 import github.tornaco.android.thanos.services.patch.common.am.AMSLifeCycleHelper;
-import github.tornaco.thanox.android.server.patch.framework.LocalServices;
 
 public class AMSHooks {
 

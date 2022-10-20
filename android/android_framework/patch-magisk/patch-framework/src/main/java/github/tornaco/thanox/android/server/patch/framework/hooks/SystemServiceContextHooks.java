@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.elvishew.xlog.XLog;
 
-import github.tornaco.thanox.android.server.patch.framework.LocalServices;
+import github.tornaco.android.thanos.services.patch.common.LocalServices;
 import util.XposedHelpers;
 
 public class SystemServiceContextHooks {

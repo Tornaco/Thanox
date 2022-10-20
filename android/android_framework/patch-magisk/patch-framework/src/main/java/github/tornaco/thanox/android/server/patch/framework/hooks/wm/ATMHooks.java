@@ -4,8 +4,8 @@ import static github.tornaco.thanox.android.server.patch.framework.hooks.wm.Rece
 
 import com.elvishew.xlog.XLog;
 
+import github.tornaco.android.thanos.services.patch.common.LocalServices;
 import github.tornaco.android.thanos.services.patch.common.wm.ATMLifeCycleHelper;
-import github.tornaco.thanox.android.server.patch.framework.LocalServices;
 
 public class ATMHooks {
 

@@ -1,4 +1,4 @@
-package github.tornaco.thanox.android.server.patch.framework;
+package github.tornaco.android.thanos.services.patch.common;
 
 import com.elvishew.xlog.XLog;
 
@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.util.Optional;
-import github.tornaco.android.thanos.services.patch.common.LocalServicesHelper;
-import github.tornaco.android.thanos.services.patch.common.SystemServiceManagerHelper;
 import util.CollectionUtils;
 import util.Consumer;
 import util.XposedHelpers;
@@ -44,7 +42,7 @@ public class LocalServices {
     private List<Object> getServices() {
         Object systemServiceManager = getSystemServiceManager();
         if (systemServiceManager == null) {
-            XLog.d("LocalServices.getService, systemServiceManager is null.");
+            XLog.w("LocalServices.getService, systemServiceManager is null.");
             return null;
         }
         // private final ArrayList<SystemService> mServices = new ArrayList();

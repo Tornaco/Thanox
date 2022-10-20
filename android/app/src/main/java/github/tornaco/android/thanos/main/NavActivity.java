@@ -63,7 +63,7 @@ public class NavActivity extends BaseTrustedActivity implements NavFragment.Frag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (NavActivityPlugin.INSTANCE.onCreate(this)) {
+        if (NavActivityPlugin.INSTANCE.blockOnCreate(this)) {
             finish();
             return;
         }

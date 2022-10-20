@@ -7,6 +7,7 @@ import android.text.format.Formatter
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
+import androidx.preference.PreferenceManager
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -16,6 +17,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.dashboard.*
 import github.tornaco.android.thanos.feature.access.AppFeatureManager.showDonateIntroDialog
 import github.tornaco.android.thanos.feature.access.AppFeatureManager.withSubscriptionStatus
+import github.tornaco.android.thanos.pref.AppPreference
 import github.tornaco.android.thanos.process.v2.ProcessManageActivityV2
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -37,13 +39,13 @@ data class FeatureItem(
     val titleRes: Int,
     @DrawableRes
     val iconRes: Int,
-    val requiredFeature: String? = null
+    val requiredFeature: String? = null,
 )
 
 data class FeatureItemGroup(
     @StringRes
     val titleRes: Int,
-    val items: List<FeatureItem>
+    val items: List<FeatureItem>,
 )
 
 data class NavState(
@@ -51,8 +53,13 @@ data class NavState(
     val statusHeaderInfo: StatusHeaderInfo,
     val activeStatus: ActiveStatus,
     val hasFrameworkError: Boolean,
-    val isPurchased: Boolean
+    val isPurchased: Boolean,
+    val showPrivacyStatement: Boolean,
+    val showFirstRunTips: Boolean,
+    val patchSources: List<String>,
 )
+
+val privacyAgreementKey get() = "PREF_PRIVACY_STATEMENT_ACCEPTED2_V_" + BuildProp.THANOS_VERSION_CODE
 
 @SuppressLint("StaticFieldLeak")
 @HiltViewModel
@@ -67,7 +74,10 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                 statusHeaderInfo = defaultStatusHeaderInfo,
                 activeStatus = ActiveStatus.InActive,
                 hasFrameworkError = false,
-                isPurchased = false
+                isPurchased = false,
+                showPrivacyStatement = false,
+                showFirstRunTips = false,
+                patchSources = emptyList()
             )
         )
     val state = _state.asStateFlow()
@@ -116,7 +126,7 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         }
     }
 
-    fun loadStatusHeaderState(showLoading: Boolean = true) {
+    fun loadHeaderStatus(showLoading: Boolean = true) {
         if (thanox.isServiceInstalled) {
             viewModelScope.launch {
                 if (showLoading) _state.value = _state.value.copy(isLoading = true)
@@ -125,6 +135,21 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                     _state.value = _state.value.copy(statusHeaderInfo = state)
                 }
                 _state.value = _state.value.copy(isLoading = false)
+            }
+        }
+    }
+
+    fun loadAppStatus() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val isPrivacyStatementAccepted = isPrivacyStatementAccepted()
+                _state.value =
+                    _state.value.copy(
+                        showPrivacyStatement = !isPrivacyStatementAccepted,
+                        showFirstRunTips = !thanox.isServiceInstalled
+                                && isPrivacyStatementAccepted
+                                && AppPreference.isFirstRun(context),
+                        patchSources = if (thanox.isServiceInstalled) thanox.patchingSource else emptyList())
             }
         }
     }
@@ -218,13 +243,13 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         while (true) {
             delay(2000)
             if (isResumed) {
-                loadStatusHeaderState(showLoading = false)
+                loadHeaderStatus(showLoading = false)
             }
         }
     }
 
     fun refresh() {
-        loadStatusHeaderState()
+        loadHeaderStatus()
     }
 
     fun headerClick(activity: Activity) {
@@ -239,5 +264,22 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
 
     fun featureItemClick(activity: Activity, featureId: Int) {
         PrebuiltFeatureLauncher(activity) {}.launch(featureId)
+    }
+
+    fun privacyStatementAccepted() {
+        PreferenceManager.getDefaultSharedPreferences(context).edit()
+            .putBoolean(privacyAgreementKey, true).commit()
+        loadAppStatus()
+    }
+
+    fun firstRunTipNoticed() {
+        AppPreference.setFirstRun(context, false)
+        loadAppStatus()
+    }
+
+    private fun isPrivacyStatementAccepted(): Boolean {
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(
+            privacyAgreementKey, false
+        )
     }
 }

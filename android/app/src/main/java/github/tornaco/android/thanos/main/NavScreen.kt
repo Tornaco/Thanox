@@ -19,7 +19,9 @@
 
 package github.tornaco.android.thanos.main
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -39,6 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.google.accompanist.insets.navigationBarsPadding
@@ -53,6 +56,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.android.thanos.settings.SettingsDashboardActivity
+import util.AssetUtils
 
 @Composable
 @OptIn(androidx.compose.material.ExperimentalMaterialApi::class)
@@ -78,7 +82,8 @@ fun NavScreen() {
         viewModel.loadCoreStatus()
         viewModel.loadPurchaseStatus()
         viewModel.loadFeatures()
-        viewModel.loadStatusHeaderState()
+        viewModel.loadAppStatus()
+        viewModel.loadHeaderStatus()
         viewModel.autoRefresh()
     }
 
@@ -179,6 +184,28 @@ fun NavScreen() {
                     }
                 )
             }
+            if (state.showPrivacyStatement) {
+                PrivacyStatementDialog(
+                    onDismissRequest = {
+                        viewModel.privacyStatementAccepted()
+                    }
+                )
+            }
+            if (state.showFirstRunTips) {
+                FirstRunDialog(
+                    onDismissRequest = {
+                        viewModel.firstRunTipNoticed()
+                    }
+                )
+            }
+            if (state.patchSources.size > 1) {
+                MultiplePatchDialog(
+                    patchSources = state.patchSources,
+                    onDismissRequest = {
+                        activity.finish()
+                    }
+                )
+            }
         }
     }
 }
@@ -191,29 +218,22 @@ private fun AppBarBadges(
     onTryingAppClick: () -> Unit,
     onFrameworkErrorClick: () -> Unit,
 ) {
-    when (state.activeStatus) {
-        ActiveStatus.Active -> {
-            // Noop.
-        }
-        ActiveStatus.InActive -> {
-            ClickableBadge(text = stringResource(id = R.string.status_not_active)) {
-                onInactiveClick()
-            }
-        }
-        ActiveStatus.RebootNeeded -> {
-            ClickableBadge(text = stringResource(id = R.string.status_need_reboot)) {
-                onNeedRestartClick()
-            }
+    AnimatedVisibility(visible = state.activeStatus == ActiveStatus.InActive) {
+        ClickableBadge(text = stringResource(id = R.string.status_not_active)) {
+            onInactiveClick()
         }
     }
-
-    if (state.hasFrameworkError) {
+    AnimatedVisibility(visible = state.activeStatus == ActiveStatus.RebootNeeded) {
+        ClickableBadge(text = stringResource(id = R.string.status_need_reboot)) {
+            onNeedRestartClick()
+        }
+    }
+    AnimatedVisibility(visible = state.hasFrameworkError) {
         ClickableBadge(text = stringResource(id = R.string.badge_framework_err)) {
             onFrameworkErrorClick()
         }
     }
-
-    if (!state.isPurchased) {
+    AnimatedVisibility(visible = !state.isPurchased) {
         ClickableBadge(text = stringResource(id = R.string.badge_trying_app)) {
             onTryingAppClick()
         }
@@ -237,8 +257,7 @@ private fun NavContent(
     contentPadding: PaddingValues,
     state: NavState,
     onHeaderClick: () -> Unit,
-    onFeatureItemClick: (FeatureItem) -> Unit
-
+    onFeatureItemClick: (FeatureItem) -> Unit,
 ) {
     val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
     Column(
@@ -248,6 +267,7 @@ private fun NavContent(
             .fillMaxSize()
             .background(color = Color(windowBgColor))
             .verticalScroll(rememberScrollState())
+            .animateContentSize()
     ) {
         NavHeaderContent(
             modifier = Modifier
@@ -335,7 +355,7 @@ private fun FeatureItem(item: FeatureItem, onItemClick: (FeatureItem) -> Unit) {
 @Composable
 private fun RestartDeviceConfirmationDialog(
     onRebootConfirmed: () -> Unit,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
     AlertDialog(
         title = {
@@ -362,7 +382,7 @@ private fun RestartDeviceConfirmationDialog(
 
 @Composable
 private fun ActiveDialog(
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
     AlertDialog(
         title = {
@@ -384,7 +404,7 @@ private fun ActiveDialog(
 
 @Composable
 private fun FrameworkErrorDialog(
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
 ) {
     AlertDialog(
         title = {
@@ -402,3 +422,83 @@ private fun FrameworkErrorDialog(
             }
         })
 }
+
+@Composable
+private fun PrivacyStatementDialog(
+    onDismissRequest: () -> Unit,
+) {
+    val context = LocalContext.current
+    val privacyAgreement =
+        remember {
+            AssetUtils.readFileToStringOrThrow(context, "privacy/privacy_agreement.html")
+        }
+    AlertDialog(
+        title = {
+            Text(text = stringResource(id = R.string.privacy_agreement_title))
+        },
+        text = {
+            Text(text = HtmlCompat.fromHtml(privacyAgreement, HtmlCompat.FROM_HTML_MODE_COMPACT)
+                .toAnnotatedString())
+        },
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(onClick = {
+                onDismissRequest()
+            }) {
+                Text(text = stringResource(android.R.string.ok))
+            }
+        })
+}
+
+
+@Composable
+private fun FirstRunDialog(
+    onDismissRequest: () -> Unit,
+) {
+    val context = LocalContext.current
+    val privacyAgreement =
+        remember {
+            AssetUtils.readFileToStringOrThrow(context, "privacy/privacy_agreement.html")
+        }
+    AlertDialog(
+        title = {
+            Text(text = stringResource(id = R.string.privacy_agreement_title))
+        },
+        text = {
+            Text(text = HtmlCompat.fromHtml(privacyAgreement, HtmlCompat.FROM_HTML_MODE_COMPACT)
+                .toAnnotatedString())
+        },
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(onClick = {
+                onDismissRequest()
+            }) {
+                Text(text = stringResource(android.R.string.ok))
+            }
+        })
+}
+
+
+@Composable
+private fun MultiplePatchDialog(
+    patchSources: List<String>,
+    onDismissRequest: () -> Unit,
+) {
+    AlertDialog(
+        title = {
+            Text(text = stringResource(id = R.string.title_multiple_patch_applied_error))
+        },
+        text = {
+            Text(text = stringResource(id = R.string.message_multiple_patch_applied_error,
+                patchSources.joinToString(" ")))
+        },
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(onClick = {
+                onDismissRequest()
+            }) {
+                Text(text = stringResource(android.R.string.ok))
+            }
+        })
+}
+

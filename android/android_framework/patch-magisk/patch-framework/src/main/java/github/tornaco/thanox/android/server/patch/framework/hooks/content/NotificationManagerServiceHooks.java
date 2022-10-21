@@ -6,6 +6,7 @@ import java.util.List;
 
 import github.tornaco.android.thanos.core.n.NotificationRecord;
 import github.tornaco.android.thanos.core.util.obs.ListProxy;
+import github.tornaco.android.thanos.services.os.AndroidSystemServices;
 import github.tornaco.android.thanos.services.BootStrap;
 import github.tornaco.android.thanos.services.patch.common.LocalServices;
 import github.tornaco.android.thanos.services.patch.common.notification.NMSHelper;
@@ -37,6 +38,9 @@ public class NotificationManagerServiceHooks {
                             @SuppressWarnings("unchecked")
                             List proxyList = NotificationRecordListProxy.newProxy(mNotificationList);
                             XposedHelpers.setObjectField(service, "mNotificationList", proxyList);
+
+                            // Attach
+                            BootStrap.THANOS_X.getAndroidSystemServices().attachService(service);
                         }
                     });
         } catch (Throwable e) {
@@ -60,7 +64,7 @@ public class NotificationManagerServiceHooks {
             super.add(i, e);
             Completable.fromRunnable(
                     () -> {
-                        NotificationRecord record = NotificationRecordUtils.fromLegacy(e);
+                        NotificationRecord record = NotificationRecordUtils.fromNotificationRecord(e);
                         if (record != null) {
                             BootStrap.THANOS_X
                                     .getNotificationManagerService()
@@ -77,7 +81,7 @@ public class NotificationManagerServiceHooks {
             if (added) {
                 Completable.fromRunnable(
                         () -> {
-                            NotificationRecord record = NotificationRecordUtils.fromLegacy(e);
+                            NotificationRecord record = NotificationRecordUtils.fromNotificationRecord(e);
                             if (record != null) {
                                 BootStrap.THANOS_X
                                         .getNotificationManagerService()
@@ -96,7 +100,7 @@ public class NotificationManagerServiceHooks {
             if (removed != null) {
                 Completable.fromRunnable(
                         () -> {
-                            NotificationRecord record = NotificationRecordUtils.fromLegacy(removed);
+                            NotificationRecord record = NotificationRecordUtils.fromNotificationRecord(removed);
                             if (record != null) {
                                 BootStrap.THANOS_X
                                         .getNotificationManagerService()
@@ -115,7 +119,7 @@ public class NotificationManagerServiceHooks {
             if (removed) {
                 Completable.fromRunnable(
                         () -> {
-                            NotificationRecord record = NotificationRecordUtils.fromLegacy(object);
+                            NotificationRecord record = NotificationRecordUtils.fromNotificationRecord(object);
                             if (record != null) {
                                 BootStrap.THANOS_X
                                         .getNotificationManagerService()

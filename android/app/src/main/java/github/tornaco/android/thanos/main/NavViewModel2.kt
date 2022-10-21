@@ -299,4 +299,8 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         super.onCleared()
         DonateSettings.getRegistry().deleteObserver(donateObs)
     }
+
+    fun rebootDevice() {
+        thanox.powerManager.reboot()
+    }
 }

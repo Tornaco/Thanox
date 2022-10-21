@@ -164,6 +164,7 @@ fun NavScreen() {
                 RestartDeviceConfirmationDialog(
                     onRebootConfirmed = {
                         isShowRebootConfirmationDialog = false
+                        viewModel.rebootDevice()
                     },
                     onDismissRequest = {
                         isShowRebootConfirmationDialog = false

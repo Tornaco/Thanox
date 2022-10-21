@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.text.format.Formatter
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
@@ -32,7 +33,8 @@ import javax.inject.Inject
 enum class ActiveStatus {
     Active,
     InActive,
-    RebootNeeded
+    RebootNeeded,
+    Unknown
 }
 
 data class FeatureItem(
@@ -42,6 +44,8 @@ data class FeatureItem(
     @DrawableRes
     val iconRes: Int,
     val requiredFeature: String? = null,
+    @ColorRes
+    val themeColor: Int,
 )
 
 data class FeatureItemGroup(
@@ -72,11 +76,11 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         MutableStateFlow(
             NavState(
                 isLoading = false,
-                features = emptyList(),
+                features = PrebuiltFeatures.all(),
                 statusHeaderInfo = defaultStatusHeaderInfo,
-                activeStatus = ActiveStatus.InActive,
+                activeStatus = ActiveStatus.Unknown,
                 hasFrameworkError = false,
-                isPurchased = false,
+                isPurchased = true,
                 showPrivacyStatement = false,
                 showFirstRunTips = false,
                 patchSources = emptyList()
@@ -93,31 +97,22 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     }
 
     fun loadFeatures() {
-        viewModelScope.launch {
-            _state.value = _state.value.copy(isLoading = true)
-            withContext(Dispatchers.IO) {
-                val all = PrebuiltFeatures.all()
-                _state.value = _state.value.copy(features = all)
-            }
-            _state.value = _state.value.copy(isLoading = false)
-        }
+
     }
 
     fun loadCoreStatus() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                val status = if (!thanox.isServiceInstalled) {
-                    ActiveStatus.InActive
-                } else if (BuildProp.THANOS_BUILD_FINGERPRINT != thanox.fingerPrint()) {
-                    ActiveStatus.RebootNeeded
-                } else {
-                    ActiveStatus.Active
-                }
-                val hasFrameworkError =
-                    thanox.isServiceInstalled && thanox.hasFrameworkInitializeError()
-                _state.value =
-                    _state.value.copy(activeStatus = status, hasFrameworkError = hasFrameworkError)
+            val status = if (!thanox.isServiceInstalled) {
+                ActiveStatus.InActive
+            } else if (BuildProp.THANOS_BUILD_FINGERPRINT != thanox.fingerPrint()) {
+                ActiveStatus.RebootNeeded
+            } else {
+                ActiveStatus.Active
             }
+            val hasFrameworkError =
+                thanox.isServiceInstalled && thanox.hasFrameworkInitializeError()
+            _state.value =
+                _state.value.copy(activeStatus = status, hasFrameworkError = hasFrameworkError)
         }
     }
 
@@ -277,6 +272,8 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     fun privacyStatementAccepted() {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
             .putBoolean(privacyAgreementKey, true).commit()
+        // Dismiss right now.
+        _state.value = _state.value.copy(showPrivacyStatement = false)
         loadAppStatus()
     }
 

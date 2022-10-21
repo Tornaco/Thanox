@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
+import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -88,7 +89,7 @@ fun NavHeaderContent(
                     }
                     Text(
                         text = stringResource(id = R.string.boost_status_running_apps),
-                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
+                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp, fontWeight = W700),
                         color = Color(onSurfaceColor)
                     )
                 }
@@ -123,7 +124,7 @@ private fun CpuProgressBar(
             contentAlignment = Alignment.Center
         ) {
             val progressBarWidth = 16.dp
-            val mainProgressSize = 86.dp
+            val mainProgressSize = 90.dp
             CircularProgressBar(
                 modifier = Modifier
                     .size(mainProgressSize),
@@ -174,8 +175,8 @@ private fun MemProgressBar(
             modifier = Modifier.Companion.align(Alignment.CenterVertically),
             contentAlignment = Alignment.Center
         ) {
-            val progressBarWidth = 10.dp
-            val mainProgressSize = 86.dp
+            val progressBarWidth = 12.dp
+            val mainProgressSize = 90.dp
             val progressBarPadding = 4.dp
             val secondProgressSize = mainProgressSize - (2 * progressBarWidth) - progressBarPadding
             CircularProgressBar(

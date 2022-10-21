@@ -117,13 +117,16 @@ public class PlatLogoActivity3 extends Activity {
         setContentView(layout);
         launchNextStage();
 
-        for (String[] emojiSets : EMOJI_SETS) {
+        for (int i = 0; i < EMOJI_SETS.length; i++) {
+            String[] emojiSets = EMOJI_SETS[i];
             layout.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    ThanosManager.from(getApplicationContext()).getProfileManager().executeAction(String.format("ui.showDanmu(\"%s\")", ArrayUtils.toString(emojiSets, "")));
+                    ThanosManager.from(getApplicationContext())
+                            .getProfileManager()
+                            .executeAction(String.format("ui.showDanmu(\"%s\")", ArrayUtils.toString(emojiSets, "")));
                 }
-            }, 300);
+            }, i * 500);
         }
     }
 

@@ -15,12 +15,10 @@
  *
  */
 
-@file:OptIn(ExperimentalAnimationApi::class)
 
 package github.tornaco.android.thanos.main
 
 import android.graphics.drawable.LayerDrawable
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -41,6 +39,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -276,7 +275,9 @@ private fun FeatureGroup(
         shape = RoundedCornerShape(cardCornerSize),
         colors = CardDefaults.cardColors(containerColor = Color(cardBgColor))) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = stringResource(id = group.titleRes))
+            Text(text = stringResource(id = group.titleRes),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.W600)
             StandardSpacer()
 
             FlowLayout(lineSpacing = 16.dp) {

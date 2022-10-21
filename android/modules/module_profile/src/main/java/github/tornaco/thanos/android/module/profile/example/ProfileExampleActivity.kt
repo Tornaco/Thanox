@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.*
+import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
@@ -105,9 +106,11 @@ class ProfileExampleActivity : ComposeThemeActivity() {
 
 @Composable
 fun ExampleList(contentPadding: PaddingValues, state: ExampleState, import: (Example) -> Unit) {
+    val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
+            .background(Color(windowBgColor))
             .padding(contentPadding)
     ) {
 

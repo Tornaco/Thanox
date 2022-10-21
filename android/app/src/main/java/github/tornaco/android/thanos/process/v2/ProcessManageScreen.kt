@@ -306,7 +306,6 @@ fun NotRunningGroupHeader(itemCount: Int) {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RunningAppItem(
     appState: RunningAppState,

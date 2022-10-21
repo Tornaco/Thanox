@@ -15,29 +15,36 @@
  *
  */
 
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package github.tornaco.android.thanos.module.compose.common.widget
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 
-fun Modifier.clickableWithRipple(onClick: () -> Unit) = composed {
-    clickable(
-        interactionSource = remember { MutableInteractionSource() },
-        // You can also change the color and radius of the ripple
-        indication = rememberRipple(bounded = true),
-        onClick = onClick
-    )
-}
+fun Modifier.clickableWithRipple(onLongClick: (() -> Unit)? = null, onClick: () -> Unit) =
+    composed {
+        combinedClickable(
+            interactionSource = remember { MutableInteractionSource() },
+            // You can also change the color and radius of the ripple
+            indication = rememberRipple(bounded = true),
+            onClick = onClick,
+            onLongClick = onLongClick,
+        )
+    }
 
-fun Modifier.clickableWithRippleBorderless(onClick: () -> Unit) = composed {
-    clickable(
-        interactionSource = remember { MutableInteractionSource() },
-        // You can also change the color and radius of the ripple
-        indication = rememberRipple(bounded = false),
-        onClick = onClick
-    )
-}
+fun Modifier.clickableWithRippleBorderless(onLongClick: (() -> Unit)? = null, onClick: () -> Unit) =
+    composed {
+        combinedClickable(
+            interactionSource = remember { MutableInteractionSource() },
+            // You can also change the color and radius of the ripple
+            indication = rememberRipple(bounded = false),
+            onClick = onClick,
+            onLongClick = onLongClick,
+        )
+    }

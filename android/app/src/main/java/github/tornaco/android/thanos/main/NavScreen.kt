@@ -133,11 +133,18 @@ fun NavScreen() {
                     arrowEnabled = false,
                     contentColor = MaterialTheme.colorScheme.primary)
             }) {
-            NavContent(contentPadding = contentPadding, state = state, onFeatureItemClick = {
-                viewModel.featureItemClick(activity, it.id)
-            }, onHeaderClick = {
-                viewModel.headerClick(activity)
-            })
+            NavContent(
+                contentPadding = contentPadding,
+                state = state,
+                onFeatureItemClick = {
+                    viewModel.featureItemClick(activity, it.id)
+                },
+                onHeaderClick = {
+                    viewModel.headerClick(activity)
+                },
+                createShortcut = {
+                    PrebuiltFeatureShortcutActivity.ShortcutHelper.addShortcut(activity, it)
+                })
 
             if (isShowRebootConfirmationDialog) {
                 RestartDeviceConfirmationDialog(onRebootConfirmed = {
@@ -222,6 +229,7 @@ private fun NavContent(
     state: NavState,
     onHeaderClick: () -> Unit,
     onFeatureItemClick: (FeatureItem) -> Unit,
+    createShortcut: (FeatureItem) -> Unit,
 ) {
     val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
     Column(modifier = Modifier
@@ -236,9 +244,7 @@ private fun NavContent(
             headerInfo = state.statusHeaderInfo) {
             onHeaderClick()
         }
-        Features(state) {
-            onFeatureItemClick(it)
-        }
+        Features(state = state, onItemClick = onFeatureItemClick, createShortcut = createShortcut)
 
         LargeSpacer()
         LargeSpacer()
@@ -246,14 +252,22 @@ private fun NavContent(
 }
 
 @Composable
-private fun Features(state: NavState, onItemClick: (FeatureItem) -> Unit) {
+private fun Features(
+    state: NavState,
+    onItemClick: (FeatureItem) -> Unit,
+    createShortcut: (FeatureItem) -> Unit,
+) {
     state.features.forEach { group ->
-        FeatureGroup(group, onItemClick)
+        FeatureGroup(group, onItemClick, createShortcut)
     }
 }
 
 @Composable
-private fun FeatureGroup(group: FeatureItemGroup, onItemClick: (FeatureItem) -> Unit) {
+private fun FeatureGroup(
+    group: FeatureItemGroup,
+    onItemClick: (FeatureItem) -> Unit,
+    createShortcut: (FeatureItem) -> Unit,
+) {
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
     Card(modifier = Modifier
         .fillMaxWidth()
@@ -267,7 +281,29 @@ private fun FeatureGroup(group: FeatureItemGroup, onItemClick: (FeatureItem) -> 
 
             FlowLayout(lineSpacing = 16.dp) {
                 group.items.forEach { item ->
-                    FeatureItem(item, onItemClick)
+                    Box {
+                        var isMenuOpen by remember(item) { mutableStateOf(false) }
+                        FeatureItem(item = item, onItemClick = onItemClick, onItemLongClick = {
+                            isMenuOpen = true
+                        })
+                        DropdownMenu(
+                            modifier = Modifier.fillMaxWidth(.68f),
+                            expanded = isMenuOpen,
+                            onDismissRequest = {
+                                isMenuOpen = false
+                            },
+                        ) {
+                            DropdownMenuItem(
+                                text = {
+                                    Text(stringResource(id = R.string.menu_title_create_shortcut))
+                                },
+                                onClick = {
+                                    isMenuOpen = false
+                                    createShortcut(item)
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -275,12 +311,19 @@ private fun FeatureGroup(group: FeatureItemGroup, onItemClick: (FeatureItem) -> 
 }
 
 @Composable
-private fun FeatureItem(item: FeatureItem, onItemClick: (FeatureItem) -> Unit) {
+private fun FeatureItem(
+    item: FeatureItem,
+    onItemClick: (FeatureItem) -> Unit,
+    onItemLongClick: (FeatureItem) -> Unit,
+) {
     Column(modifier = Modifier
         .width(64.dp)
-        .clickableWithRippleBorderless {
-            onItemClick(item)
-        },
+        .clickableWithRippleBorderless(
+            onLongClick = {
+                onItemLongClick(item)
+            }, onClick = {
+                onItemClick(item)
+            }),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top) {
         val density = LocalDensity.current

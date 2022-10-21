@@ -1,1 +1,17 @@
 
+{
+    "author": "Tornaco",
+    "version": 1,
+    "tags": [
+        "app_opt"
+    ],
+    "profile": {
+      "name": "Rotate screen",
+      "description": "Rotate screen when enter app 进入某app时，强制设置屏幕方向 0: Port 1: Land",
+      "priority": 1,
+      "condition": "frontPkgChanged && to == \"com.tencent.app\"",
+      "actions": [
+        "su.exe(\"settings put system user_rotation 1\")"
+      ]
+    }
+}

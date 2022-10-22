@@ -17,7 +17,7 @@
 
 package github.tornaco.android.thanos.main
 
-import androidx.compose.animation.*
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -51,7 +51,7 @@ import kotlinx.coroutines.delay
 fun NavHeaderContent(
     modifier: Modifier = Modifier,
     headerInfo: StatusHeaderInfo,
-    onHeaderClick: () -> Unit
+    onHeaderClick: () -> Unit,
 ) {
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
     val primaryContainerColor = getColorAttribute(R.attr.colorPrimaryContainer)
@@ -89,7 +89,8 @@ fun NavHeaderContent(
                     }
                     Text(
                         text = stringResource(id = R.string.boost_status_running_apps),
-                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp, fontWeight = W700),
+                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp,
+                            fontWeight = W700),
                         color = Color(onSurfaceColor)
                     )
                 }
@@ -113,7 +114,7 @@ fun NavHeaderContent(
 @Composable
 private fun CpuProgressBar(
     headerInfo: StatusHeaderInfo,
-    onSurfaceColor: Int
+    onSurfaceColor: Int,
 ) {
     val progressColor = getColorAttribute(R.attr.progressColor)
     val progressTrackColor = getColorAttribute(R.attr.progressTrackColor)
@@ -164,7 +165,7 @@ private fun CpuProgressBar(
 @Composable
 private fun MemProgressBar(
     headerInfo: StatusHeaderInfo,
-    onSurfaceColor: Int
+    onSurfaceColor: Int,
 ) {
     val progressColor = getColorAttribute(R.attr.progressColor)
     val secondaryProgressColor = getColorAttribute(R.attr.secondaryProgressColor)
@@ -224,7 +225,7 @@ private fun MemProgressBar(
 @Composable
 private fun MemStats(
     memUsage: MemUsage,
-    color: Color
+    color: Color,
 ) {
     Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.Start) {
         Box(
@@ -294,24 +295,4 @@ private fun AnimatedLinearProgressIndicator(
         trackColor = Color(progressTrackColor),
         progress = memUsage.memUsagePercent.toFloat() / 100f * animatePercent
     )
-}
-
-@OptIn(ExperimentalAnimationApi::class)
-@Composable
-private fun AnimatedTextContainer(text: String, content: @Composable (String) -> Unit) {
-    AnimatedContent(
-        targetState = text,
-        transitionSpec = {
-            // Compare the incoming number with the previous number.
-            (slideInVertically { height -> height } + fadeIn() with
-                    slideOutVertically { height -> -height } + fadeOut())
-                .using(
-                    // Disable clipping since the faded slide-in/out should
-                    // be displayed out of bounds.
-                    SizeTransform(clip = false)
-                )
-        }
-    ) { targetText ->
-        content(targetText)
-    }
 }

@@ -44,6 +44,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.DialogProperties
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -60,6 +61,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.android.thanos.settings.SettingsDashboardActivity
+import kotlinx.coroutines.delay
 import util.AssetUtils
 
 @Composable
@@ -169,9 +171,12 @@ fun NavScreen() {
                 })
             }
             if (state.showFirstRunTips) {
-                FirstRunDialog(onDismissRequest = {
-                    viewModel.firstRunTipNoticed()
-                })
+                FirstRunDialog(
+                    onAccept = {
+                        viewModel.firstRunTipNoticed()
+                    }, onDeny = {
+                        activity.finish()
+                    })
             }
             if (state.patchSources.size > 1) {
                 MultiplePatchDialog(patchSources = state.patchSources, onDismissRequest = {
@@ -456,24 +461,50 @@ private fun PrivacyStatementDialog(
 
 @Composable
 private fun FirstRunDialog(
-    onDismissRequest: () -> Unit,
+    onAccept: () -> Unit,
+    onDeny: () -> Unit,
 ) {
-    val context = LocalContext.current
-    val privacyAgreement = remember {
-        AssetUtils.readFileToStringOrThrow(context, "privacy/privacy_agreement.html")
+    var remainingTimeSec by remember {
+        mutableStateOf(6)
     }
-    AlertDialog(title = {
-        Text(text = stringResource(id = R.string.privacy_agreement_title))
-    }, text = {
-        Text(text = HtmlCompat.fromHtml(privacyAgreement, HtmlCompat.FROM_HTML_MODE_COMPACT)
-            .toAnnotatedString())
-    }, onDismissRequest = onDismissRequest, confirmButton = {
-        TextButton(onClick = {
-            onDismissRequest()
-        }) {
-            Text(text = stringResource(android.R.string.ok))
+    LaunchedEffect(true) {
+        while (remainingTimeSec > 0) {
+            delay(1000L)
+            remainingTimeSec -= 1
         }
-    })
+    }
+    AlertDialog(
+        title = {
+            Text(text = stringResource(id = R.string.title_app_notice))
+        },
+        text = {
+            Text(text = stringResource(id = R.string.message_app_notice))
+        },
+        onDismissRequest = onDeny,
+        confirmButton = {
+            TextButton(
+                modifier = Modifier.widthIn(min = 64.dp),
+                enabled = remainingTimeSec <= 0,
+                onClick = {
+                    onAccept()
+                }) {
+                if (remainingTimeSec > 0) {
+                    AnimatedTextContainer(text = "${stringResource(android.R.string.ok)} ${remainingTimeSec}s") {
+                        Text(text = it)
+                    }
+                } else {
+                    Text(text = stringResource(android.R.string.ok))
+                }
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = {
+                onDeny()
+            }) {
+                Text(text = stringResource(android.R.string.cancel))
+            }
+        },
+        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false))
 }
 
 

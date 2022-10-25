@@ -8,6 +8,19 @@ import github.tornaco.android.thanos.services.patch.common.am.XProcessRecordHelp
 import util.XposedHelpers
 
 object XAMS {
+    fun amsClass(classLoader: ClassLoader): Class<*> {
+        return XposedHelpers.findClass(
+            "com.android.server.am.ActivityManagerService",
+            classLoader
+        )
+    }
+
+    fun activeServicesClass(classLoader: ClassLoader): Class<*> {
+        return XposedHelpers.findClass(
+            "com.android.server.am.ActiveServices",
+            classLoader
+        )
+    }
 
     @JvmStatic
     fun getProcessListAsObject(ams: Any): Any? {

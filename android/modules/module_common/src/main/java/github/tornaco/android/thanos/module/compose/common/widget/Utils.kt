@@ -19,6 +19,7 @@ package github.tornaco.android.thanos.module.compose.common.widget
 
 import android.graphics.Typeface
 import android.text.Spanned
+import android.text.style.BulletSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
@@ -29,6 +30,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.sp
 
 fun Spanned.toAnnotatedString(): AnnotatedString = buildAnnotatedString {
     val spanned = this@toAnnotatedString
@@ -49,6 +51,11 @@ fun Spanned.toAnnotatedString(): AnnotatedString = buildAnnotatedString {
             is ForegroundColorSpan -> addStyle(SpanStyle(color = Color(span.foregroundColor)),
                 start,
                 end)
+            is BulletSpan -> {
+                addStyle(SpanStyle(fontSize = 12.sp),
+                    start,
+                    end)
+            }
         }
     }
 }

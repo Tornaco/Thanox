@@ -383,7 +383,7 @@ private fun RestartDeviceConfirmationDialog(
     onRebootConfirmed: () -> Unit,
     onDismissRequest: () -> Unit,
 ) {
-    AlertDialog(title = {
+    ThanoxAlertDialog(title = {
         Text(text = stringResource(id = R.string.reboot_now))
     }, text = {
         Text(text = stringResource(id = R.string.common_dialog_message_are_you_sure))
@@ -405,7 +405,7 @@ private fun RestartDeviceConfirmationDialog(
 private fun ActiveDialog(
     onDismissRequest: () -> Unit,
 ) {
-    AlertDialog(title = {
+    ThanoxAlertDialog(title = {
         Text(text = stringResource(id = R.string.status_not_active))
     }, text = {
         Text(text = stringResource(id = R.string.message_active_needed))
@@ -423,7 +423,7 @@ private fun ActiveDialog(
 private fun FrameworkErrorDialog(
     onDismissRequest: () -> Unit,
 ) {
-    AlertDialog(title = {
+    ThanoxAlertDialog(title = {
         Text(text = stringResource(id = R.string.title_framework_error))
     }, text = {
         Text(text = stringResource(id = R.string.message_framework_error))
@@ -444,11 +444,15 @@ private fun PrivacyStatementDialog(
     val privacyAgreement = remember {
         AssetUtils.readFileToStringOrThrow(context, "privacy/privacy_agreement.html")
     }
-    AlertDialog(title = {
+    ThanoxAlertDialog(title = {
         Text(text = stringResource(id = R.string.privacy_agreement_title))
     }, text = {
-        Text(text = HtmlCompat.fromHtml(privacyAgreement, HtmlCompat.FROM_HTML_MODE_COMPACT)
-            .toAnnotatedString())
+        Column(modifier = Modifier
+            .fillMaxHeight(fraction = 0.64f)
+            .verticalScroll(rememberScrollState())) {
+            Text(text = HtmlCompat.fromHtml(privacyAgreement, HtmlCompat.FROM_HTML_MODE_COMPACT)
+                .toAnnotatedString())
+        }
     }, onDismissRequest = onDismissRequest, confirmButton = {
         TextButton(onClick = {
             onDismissRequest()
@@ -473,7 +477,7 @@ private fun FirstRunDialog(
             remainingTimeSec -= 1
         }
     }
-    AlertDialog(
+    ThanoxAlertDialog(
         title = {
             Text(text = stringResource(id = R.string.title_app_notice))
         },
@@ -513,7 +517,7 @@ private fun MultiplePatchDialog(
     patchSources: List<String>,
     onDismissRequest: () -> Unit,
 ) {
-    AlertDialog(title = {
+    ThanoxAlertDialog(title = {
         Text(text = stringResource(id = R.string.title_multiple_patch_applied_error))
     }, text = {
         Text(text = stringResource(id = R.string.message_multiple_patch_applied_error,

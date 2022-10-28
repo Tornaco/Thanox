@@ -233,4 +233,6 @@ interface IActivityManager {
     void setSmartStandByByPassIfHasVisibleWindowsEnabled(boolean enable);
 
     float getTotalCpuPercent(boolean update);
+
+    List<PkgCpuUsageStats> getTopNCpuUsagePackages(int n, boolean update);
 }

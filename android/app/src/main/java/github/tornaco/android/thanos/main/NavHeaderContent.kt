@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
 import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.dashboard.AppCpuUsage
 import github.tornaco.android.thanos.dashboard.MemType
 import github.tornaco.android.thanos.dashboard.MemUsage
 import github.tornaco.android.thanos.dashboard.StatusHeaderInfo
@@ -158,9 +159,30 @@ private fun CpuProgressBar(
                 }
             )
         }
+        MediumSpacer()
+        Column(verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            headerInfo.cpu.topNPkgs.forEach {
+                AppCpuUsage(it)
+            }
+        }
     }
 }
 
+@Composable
+private fun AppCpuUsage(usage: AppCpuUsage) {
+    val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
+    Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
+        AppIcon(modifier = Modifier.size(16.dp), usage.appInfo)
+        Text(
+            modifier = Modifier,
+            textAlign = TextAlign.Center,
+            text = "${usage.percent}%",
+            style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
+            color = Color(onSurfaceColor)
+        )
+    }
+}
 
 @Composable
 private fun MemProgressBar(

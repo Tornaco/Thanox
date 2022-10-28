@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 
@@ -16,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.core.app.start.StartRecord;
+import github.tornaco.android.thanos.core.app.usage.PkgCpuUsageStats;
 import github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats;
 import github.tornaco.android.thanos.core.os.ProcessName;
 import github.tornaco.android.thanos.core.os.SwapInfo;
@@ -787,6 +787,11 @@ public class ActivityManager {
     @SneakyThrows
     public float getTotalCpuPercent(boolean update) {
         return server.getTotalCpuPercent(update);
+    }
+
+    @SneakyThrows
+    public List<PkgCpuUsageStats> getTopNCpuUsagePackages(int n, boolean update) {
+        return server.getTopNCpuUsagePackages(n, update);
     }
 
     @SneakyThrows

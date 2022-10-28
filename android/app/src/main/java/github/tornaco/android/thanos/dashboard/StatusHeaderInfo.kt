@@ -17,6 +17,9 @@
 
 package github.tornaco.android.thanos.dashboard
 
+import github.tornaco.android.thanos.core.app.usage.PkgCpuUsageStats
+import github.tornaco.android.thanos.core.pm.AppInfo
+
 data class StatusHeaderInfo(
     val runningAppsCount: Int,
     val memory: MemUsage,
@@ -37,6 +40,12 @@ data class MemUsage(
 data class CpuUsage(
     // 0-100
     val totalPercent: Int = 1,
+    val topNPkgs: List<AppCpuUsage> = emptyList()
+)
+
+data class AppCpuUsage(
+    val appInfo: AppInfo,
+    val percent: String,
 )
 
 enum class MemType {

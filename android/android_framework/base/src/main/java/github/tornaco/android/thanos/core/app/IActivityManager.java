@@ -514,6 +514,10 @@ public interface IActivityManager extends android.os.IInterface
     {
       return 0.0f;
     }
+    @Override public java.util.List<github.tornaco.android.thanos.core.app.usage.PkgCpuUsageStats> getTopNCpuUsagePackages(int n, boolean update) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -2038,6 +2042,18 @@ public interface IActivityManager extends android.os.IInterface
           float _result = this.getTotalCpuPercent(_arg0);
           reply.writeNoException();
           reply.writeFloat(_result);
+          return true;
+        }
+        case TRANSACTION_getTopNCpuUsagePackages:
+        {
+          data.enforceInterface(descriptor);
+          int _arg0;
+          _arg0 = data.readInt();
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          java.util.List<github.tornaco.android.thanos.core.app.usage.PkgCpuUsageStats> _result = this.getTopNCpuUsagePackages(_arg0, _arg1);
+          reply.writeNoException();
+          reply.writeTypedList(_result);
           return true;
         }
         default:
@@ -5012,6 +5028,28 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public java.util.List<github.tornaco.android.thanos.core.app.usage.PkgCpuUsageStats> getTopNCpuUsagePackages(int n, boolean update) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.app.usage.PkgCpuUsageStats> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(n);
+          _data.writeInt(((update)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getTopNCpuUsagePackages, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getTopNCpuUsagePackages(n, update);
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.app.usage.PkgCpuUsageStats.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -5145,6 +5183,7 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_isSmartStandByByPassIfHasVisibleWindows = (android.os.IBinder.FIRST_CALL_TRANSACTION + 128);
     static final int TRANSACTION_setSmartStandByByPassIfHasVisibleWindowsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 129);
     static final int TRANSACTION_getTotalCpuPercent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 130);
+    static final int TRANSACTION_getTopNCpuUsagePackages = (android.os.IBinder.FIRST_CALL_TRANSACTION + 131);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -5325,4 +5364,5 @@ public interface IActivityManager extends android.os.IInterface
   public boolean isSmartStandByByPassIfHasVisibleWindows() throws android.os.RemoteException;
   public void setSmartStandByByPassIfHasVisibleWindowsEnabled(boolean enable) throws android.os.RemoteException;
   public float getTotalCpuPercent(boolean update) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.app.usage.PkgCpuUsageStats> getTopNCpuUsagePackages(int n, boolean update) throws android.os.RemoteException;
 }

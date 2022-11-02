@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingDefaultResource">
+    <array name="module_common_export_selections">
+        <item>الحافظة</item>
+        <item>تصدير إلى ملف</item>
+    </array>
+    <array name="module_common_import_selections">
+        <item>الحافظة</item>
+        <item>استيراد من ملف</item>
+    </array>
+    <array name="themes_entry">
+        <item>أزرق فاتح</item>
+        <item>الضوء الأخضر</item>
+        <item>أحمر فاتح</item>
+        <item>اخضر فاتح</item>
+        <item>الضوء الأصفر</item>
+        <item>الضوء الأسود</item>
+        <item>خضراء بطة خضراء خفيفة</item>
+        <item>مسحوق الضوء المسحوق</item>
+        <item>أزرق غامق</item>
+        <item>أخضر غامق</item>
+        <item>احمر غامق</item>
+        <item>اصفر غامق</item>
+        <item>الرمادي الداكن</item>
+        <item>التبديل التلقائي</item>
+        <item>تصميم المواد 3</item>
+    </array>
+</resources>

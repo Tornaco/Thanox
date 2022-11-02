@@ -85,7 +85,16 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     }
 
     fun loadFeatures() {
-
+        viewModelScope.launch {
+            thanox.ifServiceInstalled { thanox ->
+                val feats = PrebuiltFeatures.all {
+                    it.requiredFeature == null || thanox.hasFeature(it.requiredFeature)
+                }
+                _state.value = _state.value.copy(
+                    features = feats
+                )
+            }
+        }
     }
 
     fun loadCoreStatus() {

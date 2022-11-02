@@ -180,9 +180,11 @@ object PrebuiltFeatures {
     )
 
 
-    fun all(): List<FeatureItemGroup> {
+    fun all(filter: (FeatureItem) -> Boolean = { true }): List<FeatureItemGroup> {
         return listOf(
             boost, secure, ext, notification, guide
-        )
+        ).map {
+            it.copy(items = it.items.filter(filter))
+        }
     }
 }

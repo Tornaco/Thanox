@@ -161,14 +161,20 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         }
     }
 
-    void createShortcutStubApkForAsync(AppInfo appInfo, String appLabel, String versionName, int versionCode) {
-        disposables.add(Single.create((SingleOnSubscribe<File>) emitter -> emitter.onSuccess(ShortcutHelper.createShortcutStubApkFor(getApplication(), appInfo, appLabel, versionName, versionCode))).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(file -> requestInstallStubApk(getApplication(), file), throwable -> {
-            XLog.e("createShortcutStubApkForAsync error", throwable);
-            Toast.makeText(getApplication(), throwable.getMessage(), Toast.LENGTH_LONG).show();
-        }));
+    void createShortcutStubApkForAsync(AppInfo appInfo, String appLabel, String versionName, int versionCode, Consumer<File> onApkFileReady) {
+        disposables.add(Single.create((SingleOnSubscribe<File>) emitter ->
+                        emitter.onSuccess(ShortcutHelper.createShortcutStubApkFor(getApplication(), appInfo, appLabel, versionName, versionCode)))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(file -> {
+                    onApkFileReady.accept(file);
+                }, throwable -> {
+                    XLog.e("createShortcutStubApkForAsync error", throwable);
+                    Toast.makeText(getApplication(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+                }));
     }
 
-    private void requestInstallStubApk(Context context, File apk) {
+    public void requestInstallStubApk(Context context, File apk) {
         InstallerUtils.installUserAppWithIntent(context, apk);
     }
 

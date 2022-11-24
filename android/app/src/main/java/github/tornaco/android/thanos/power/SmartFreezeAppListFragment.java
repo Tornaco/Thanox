@@ -5,6 +5,7 @@ import static com.nononsenseapps.filepicker.FilePickerActivityUtils.pickSingleDi
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.nononsenseapps.filepicker.Utils;
+import com.topjohnwu.superuser.Shell;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,12 +65,19 @@ import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivitySmartFreezeAppsBinding;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
+import github.tornaco.android.thanos.util.DialogUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
+import io.reactivex.Completable;
+import io.reactivex.Scheduler;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import rx2.android.schedulers.AndroidSchedulers;
 
 @SuppressWarnings("UnstableApiUsage")
 @RuntimePermissions
@@ -105,43 +114,40 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         binding.toolbar.setNavigationIcon(R.drawable.module_common_ic_arrow_back_24dp);
         binding.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
         // Search.
-        binding.searchView.setOnQueryTextListener(
-                new MaterialSearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        viewModel.setSearchText(query);
-                        return true;
-                    }
+        binding.searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                viewModel.setSearchText(query);
+                return true;
+            }
 
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        viewModel.setSearchText(newText);
-                        return true;
-                    }
-                });
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                viewModel.setSearchText(newText);
+                return true;
+            }
+        });
 
-        binding.searchView.setOnSearchViewListener(
-                new MaterialSearchView.SearchViewListener() {
-                    @Override
-                    public void onSearchViewShown() {
-                        binding.toolbarLayout.setTitleEnabled(false);
-                        binding.appbar.setExpanded(false, true);
-                    }
+        binding.searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                binding.toolbarLayout.setTitleEnabled(false);
+                binding.appbar.setExpanded(false, true);
+            }
 
-                    @Override
-                    public void onSearchViewClosed() {
-                        viewModel.clearSearchText();
-                        binding.toolbarLayout.setTitleEnabled(true);
-                    }
-                });
+            @Override
+            public void onSearchViewClosed() {
+                viewModel.clearSearchText();
+                binding.toolbarLayout.setTitleEnabled(true);
+            }
+        });
 
         // List.
         binding.apps.setLayoutManager(new GridLayoutManager(requireContext(), 5));
         binding.apps.setAdapter(new SmartFreezeAppsAdapter(new AppItemActionListener() {
             @Override
             public void onAppItemClick(AppInfo appInfo) {
-                PackageManager pm = ThanosManager.from(requireContext())
-                        .getPkgManager();
+                PackageManager pm = ThanosManager.from(requireContext()).getPkgManager();
                 pm.launchSmartFreezePkg(Pkg.fromAppInfo(appInfo));
                 appInfo.setState(AppInfo.STATE_ENABLED);
             }
@@ -170,20 +176,14 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             menuPopupHelper.setForceShowIcon(true);
 
             int reverseItemId = 10086;
-            MenuItem reverseItem = menuBuilder.add(1000,
-                    reverseItemId,
-                    Menu.NONE,
-                    github.tornaco.android.thanos.module.common.R.string.common_sort_reverse);
+            MenuItem reverseItem = menuBuilder.add(1000, reverseItemId, Menu.NONE, github.tornaco.android.thanos.module.common.R.string.common_sort_reverse);
             reverseItem.setCheckable(true);
             reverseItem.setChecked(viewModel.isSortReverse());
             reverseItem.setIcon(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_arrow_up_down_line);
 
             for (int i = 0; i < appSortArray.length; i++) {
                 AppSort sort = appSortArray[i];
-                MenuItem sortItem = menuBuilder.add(1000,
-                        i,
-                        Menu.NONE,
-                        sort.labelRes);
+                MenuItem sortItem = menuBuilder.add(1000, i, Menu.NONE, sort.labelRes);
                 boolean isSelected = viewModel.getCurrentAppSort() == sort;
                 if (isSelected) {
                     sortItem.setTitle(getString(sort.labelRes) + " \uD83C\uDFAF");
@@ -287,50 +287,41 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         postOnUiDelayed(() -> viewModel.start(), 100);
     }
 
-    private final ActivityResultLauncher<Intent> pickApps
-            = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null && result.getData().hasExtra("apps")) {
-                    List<AppInfo> appInfos = result.getData().getParcelableArrayListExtra("apps");
-                    PackageSet packageSet = viewModel.getPackageSet();
-                    if (packageSet == null) return;
-                    if (packageSet.isPrebuilt()) {
-                        onRequestAddToSmartFreezeList(appInfos, false);
-                    } else {
-                        onRequestAddToSmartFreezeListAskIfAddToPkgSet(appInfos);
-                    }
-                }
-            });
+    private final ActivityResultLauncher<Intent> pickApps = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null && result.getData().hasExtra("apps")) {
+            List<AppInfo> appInfos = result.getData().getParcelableArrayListExtra("apps");
+            PackageSet packageSet = viewModel.getPackageSet();
+            if (packageSet == null) return;
+            if (packageSet.isPrebuilt()) {
+                onRequestAddToSmartFreezeList(appInfos, false);
+            } else {
+                onRequestAddToSmartFreezeListAskIfAddToPkgSet(appInfos);
+            }
+        }
+    });
 
-    private final ActivityResultLauncher<Intent> chooseFileExportPackageListQBelow
-            = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                    // Use the provided utility method to parse the result
-                    List<Uri> files = Utils.getSelectedFilesFromResult(result.getData());
-                    File file = Utils.getFileForUri(files.get(0));
-                    doExportPackageListChooseFileQBelow(file);
-                }
-            });
+    private final ActivityResultLauncher<Intent> chooseFileExportPackageListQBelow = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+            // Use the provided utility method to parse the result
+            List<Uri> files = Utils.getSelectedFilesFromResult(result.getData());
+            File file = Utils.getFileForUri(files.get(0));
+            doExportPackageListChooseFileQBelow(file);
+        }
+    });
 
-    private final ActivityResultLauncher<Intent> chooseFileExportPackageListQAndAbove
-            = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                    doExportPackageListChooseFileQAndAbove(result.getData());
-                }
-            });
+    private final ActivityResultLauncher<Intent> chooseFileExportPackageListQAndAbove = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+            doExportPackageListChooseFileQAndAbove(result.getData());
+        }
+    });
 
     private void onRequestAddToSmartFreezeList(List<AppInfo> appInfos, boolean alsoAddToPkgSet) {
         ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
         progress.setTitle(R.string.common_text_wait_a_moment);
-        viewModel.addToSmartFreezeList(appInfos,
-                alsoAddToPkgSet,
-                appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())),
-                success -> {
-                    progress.dismiss();
-                    viewModel.start();
-                });
+        viewModel.addToSmartFreezeList(appInfos, alsoAddToPkgSet, appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
+            progress.dismiss();
+            viewModel.start();
+        });
         progress.show();
     }
 
@@ -366,14 +357,9 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         if (R.id.action_enable_all_smart_freeze == item.getItemId()) {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                 if (isSubscribed) {
-                    new MaterialAlertDialogBuilder(requireActivity())
-                            .setTitle(R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps)
-                            .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_smart_freeze_apps)
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                onRequestEnableAllSmartFreezeApps();
-                            })
-                            .setNegativeButton(android.R.string.cancel, null)
-                            .show();
+                    new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps).setMessage(R.string.menu_desc_smart_app_freeze_enable_all_smart_freeze_apps).setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        onRequestEnableAllSmartFreezeApps();
+                    }).setNegativeButton(android.R.string.cancel, null).show();
                 } else {
                     AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                 }
@@ -384,14 +370,9 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         if (R.id.action_enable_all_smart_freeze_temp == item.getItemId()) {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                 if (isSubscribed) {
-                    new MaterialAlertDialogBuilder(requireActivity())
-                            .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp)
-                            .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp)
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                onRequestEnableAllSmartFreezeAppsTemp();
-                            })
-                            .setNegativeButton(android.R.string.cancel, null)
-                            .show();
+                    new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp).setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp).setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        onRequestEnableAllSmartFreezeAppsTemp();
+                    }).setNegativeButton(android.R.string.cancel, null).show();
                 } else {
                     AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                 }
@@ -402,14 +383,9 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         if (R.id.action_enable_all_apps == item.getItemId()) {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                 if (isSubscribed) {
-                    new MaterialAlertDialogBuilder(requireActivity())
-                            .setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps)
-                            .setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps)
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                onRequestEnableAllApps();
-                            })
-                            .setNegativeButton(android.R.string.cancel, null)
-                            .show();
+                    new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps).setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps).setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        onRequestEnableAllApps();
+                    }).setNegativeButton(android.R.string.cancel, null).show();
                 } else {
                     AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                 }
@@ -448,29 +424,22 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     private void onRequestImportPackageList() {
         String[] items = getResources().getStringArray(R.array.module_common_import_selections);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity())
-                .setTitle(R.string.menu_title_smart_app_freeze_import_package_list)
-                .setSingleChoiceItems(items, -1,
-                        (d, which) -> {
-                            d.dismiss();
-                            if (which == 0) {
-                                onRequestImportPackageListFromClipBoard();
-                            } else {
-                                if (OsUtils.isTOrAbove()) {
-                                    SmartFreezeAppListFragmentPermissionRequester.onRequestImportPackageListFromFileTOrAboveChecked(this);
-                                } else {
-                                    SmartFreezeAppListFragmentPermissionRequester.onRequestImportPackageListFromFileTBelowChecked(this);
-                                }
-                            }
-                        }).create();
+        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_import_package_list).setSingleChoiceItems(items, -1, (d, which) -> {
+            d.dismiss();
+            if (which == 0) {
+                onRequestImportPackageListFromClipBoard();
+            } else {
+                if (OsUtils.isTOrAbove()) {
+                    SmartFreezeAppListFragmentPermissionRequester.onRequestImportPackageListFromFileTOrAboveChecked(this);
+                } else {
+                    SmartFreezeAppListFragmentPermissionRequester.onRequestImportPackageListFromFileTBelowChecked(this);
+                }
+            }
+        }).create();
         dialog.show();
     }
 
-    @RequiresPermission({
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.READ_MEDIA_VIDEO,
-    })
+    @RequiresPermission({Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_AUDIO, Manifest.permission.READ_MEDIA_VIDEO,})
     void onRequestImportPackageListFromFileTOrAbove() {
         IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PICK_IMPORT_PATH);
     }
@@ -506,21 +475,18 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     private void onRequestExportPackageList() {
         String[] items = getResources().getStringArray(R.array.module_common_export_selections);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity())
-                .setTitle(R.string.menu_title_smart_app_freeze_export_package_list)
-                .setSingleChoiceItems(items, -1,
-                        (d, which) -> {
-                            d.dismiss();
-                            if (which == 0) {
-                                onRequestExportPackageListToClipBoard();
-                            } else {
-                                if (OsUtils.isTOrAbove()) {
-                                    SmartFreezeAppListFragmentPermissionRequester.onRequestExportPackageListChooseFileTOrAboveChecked(this);
-                                } else {
-                                    SmartFreezeAppListFragmentPermissionRequester.onRequestExportPackageListChooseFileTBelowChecked(this);
-                                }
-                            }
-                        }).create();
+        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_export_package_list).setSingleChoiceItems(items, -1, (d, which) -> {
+            d.dismiss();
+            if (which == 0) {
+                onRequestExportPackageListToClipBoard();
+            } else {
+                if (OsUtils.isTOrAbove()) {
+                    SmartFreezeAppListFragmentPermissionRequester.onRequestExportPackageListChooseFileTOrAboveChecked(this);
+                } else {
+                    SmartFreezeAppListFragmentPermissionRequester.onRequestExportPackageListChooseFileTBelowChecked(this);
+                }
+            }
+        }).create();
         dialog.show();
     }
 
@@ -531,11 +497,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         });
     }
 
-    @RequiresPermission({
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.READ_MEDIA_VIDEO,
-    })
+    @RequiresPermission({Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_AUDIO, Manifest.permission.READ_MEDIA_VIDEO,})
     void onRequestExportPackageListChooseFileTOrAbove() {
         onRequestExportPackageListChooseFileQAndAbove();
     }
@@ -571,9 +533,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             File expFile = new File(file, expFileNameWithExt);
             Files.createParentDirs(expFile);
             OutputStream os = Files.asByteSink(expFile).openStream();
-            viewModel.exportPackageListToFile(os,
-                    () -> ToastUtils.ok(requireActivity()),
-                    throwable -> Toast.makeText(requireActivity(), Log.getStackTraceString(throwable), Toast.LENGTH_LONG).show());
+            viewModel.exportPackageListToFile(os, () -> ToastUtils.ok(requireActivity()), throwable -> Toast.makeText(requireActivity(), Log.getStackTraceString(throwable), Toast.LENGTH_LONG).show());
         } catch (Throwable e) {
             XLog.e("doExportPackageListChooseFileQBelow error", e);
             Toast.makeText(requireActivity(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
@@ -597,9 +557,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         XLog.d("doExportPackageListChooseFileQAndAbove, fileUri == %s", fileUri);
         try {
             OutputStream os = Objects.requireNonNull(requireContext()).getContentResolver().openOutputStream(fileUri);
-            viewModel.exportPackageListToFile(os,
-                    () -> ToastUtils.ok(requireActivity()),
-                    throwable -> Toast.makeText(requireActivity(), Log.getStackTraceString(throwable), Toast.LENGTH_LONG).show());
+            viewModel.exportPackageListToFile(os, () -> ToastUtils.ok(requireActivity()), throwable -> Toast.makeText(requireActivity(), Log.getStackTraceString(throwable), Toast.LENGTH_LONG).show());
         } catch (IOException e) {
             XLog.e(e);
             Toast.makeText(requireContext(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
@@ -646,8 +604,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         Objects.requireNonNull(appVersionNameView).setText(appInfo.getVersionName());
 
         new MaterialAlertDialogBuilder(requireActivity())
-                .setView(dialogView)
-                .setTitle(R.string.menu_title_create_shortcut_apk)
+                .setView(dialogView).setTitle(R.string.menu_title_create_shortcut_apk)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     String appName = appNameView.getText().toString();
@@ -657,8 +614,44 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                         appVersionCode = Integer.parseInt(appVersionCodeView.getText().toString());
                     } catch (NumberFormatException ignored) {
                     }
-                    viewModel.createShortcutStubApkForAsync(appInfo, appName, appVersionName, appVersionCode);
+                    viewModel.createShortcutStubApkForAsync(appInfo, appName, appVersionName, appVersionCode, file -> onShortcutApkReady(appInfo, file));
                 }).show();
+    }
+
+    @SuppressLint("CheckResult")
+    private void onShortcutApkReady(AppInfo appInfo, File apkFile) {
+        new MaterialAlertDialogBuilder(requireActivity())
+                .setTitle(R.string.menu_title_create_shortcut_apk)
+                .setMessage(appInfo.getAppLabel() + "\n" + apkFile.getAbsolutePath())
+                .setNegativeButton(android.R.string.cancel, null)
+                .setNeutralButton("SILENT INSTALL", (dialog, which) -> {
+                    ModernProgressDialog progressDialog = new ModernProgressDialog(requireActivity());
+                    progressDialog.setMessage(getString(R.string.common_text_wait_a_moment));
+                    progressDialog.show();
+                    Completable.fromRunnable(() -> {
+                        File tmpFile = new File("/data/local/tmp/" + appInfo.getPkgName() + "_proxy.apk");
+                        Shell.su("cp " + apkFile.getAbsolutePath() + " " + tmpFile.getAbsolutePath()).exec();
+                        XLog.w("apk path: " + tmpFile.getAbsolutePath());
+                        Shell.su("pm install " + tmpFile.getAbsolutePath()).exec();
+                        Shell.su("rm " + tmpFile.getAbsolutePath()).exec();
+                    }).subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Action() {
+                                @Override
+                                public void run() throws Exception {
+                                    progressDialog.dismiss();
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable e) throws Exception {
+                                    DialogUtils.showError(requireActivity(), e);
+                                    XLog.e("onShortcutApkReady error", e);
+                                    progressDialog.dismiss();
+                                }
+                            });
+                })
+                .setPositiveButton(R.string.title_install, (dialog, which) ->
+                        viewModel.requestInstallStubApk(requireContext(), apkFile)).show();
     }
 
     @Override
@@ -708,8 +701,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     }
 
     public static SmartFreezeAppsViewModel obtainViewModel(FragmentActivity activity) {
-        ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory
-                .getInstance(activity.getApplication());
+        ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(activity.getApplication());
         return ViewModelProviders.of(activity, factory).get(SmartFreezeAppsViewModel.class);
     }
 }

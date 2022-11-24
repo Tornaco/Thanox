@@ -235,4 +235,7 @@ interface IActivityManager {
     float getTotalCpuPercent(boolean update);
 
     List<PkgCpuUsageStats> getTopNCpuUsagePackages(int n, boolean update);
+
+    boolean isPkgResident(in Pkg pkg);
+    void setPkgResident(in Pkg pkg, boolean resident);
 }

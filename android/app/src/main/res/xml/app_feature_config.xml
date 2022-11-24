@@ -171,6 +171,12 @@
             app:key="@string/key_app_feature_config_dialog_force_cancelable"
             app:summary="@string/pre_summary_force_dialog_cancelable"
             app:title="@string/pre_title_force_dialog_cancelable" />
+
+        <SwitchPreferenceCompat
+            android:persistent="false"
+            app:key="@string/key_app_feature_config_resident"
+            app:summary="@string/pre_summary_resident"
+            app:title="@string/pre_title_resident" />
     </PreferenceCategory>
 
 </PreferenceScreen>

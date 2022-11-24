@@ -340,6 +340,9 @@
     <string name="pre_title_force_dialog_cancelable">取消对话框</string>
     <string name="pre_summary_force_dialog_cancelable">强制让该应用的原生弹出对话框可以取消，需要为该应用开启Xposed作用域才能生效</string>
 
+    <string name="pre_title_resident">后台保护</string>
+    <string name="pre_summary_resident">尽量阻止该app被LMK清理</string>
+
     <string name="pre_title_redaction_notification">通知编辑</string>
     <string name="pre_summary_redaction_notification">使用自定义标题和文本覆盖应用程序通知</string>
     <string name="pre_title_redaction_notification_title">标题</string>

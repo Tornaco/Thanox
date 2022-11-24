@@ -365,6 +365,18 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 return true;
             });
         }
+
+        SwitchPreferenceCompat residentPref = findPreference(getString(R.string.key_app_feature_config_resident));
+        boolean hasResidentFeat = ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_RESIDENT);
+        Objects.requireNonNull(residentPref).setVisible(hasResidentFeat);
+        if (hasResidentFeat) {
+            residentPref.setChecked(ThanosManager.from(getContext()).getActivityManager().isPkgResident(Pkg.fromAppInfo(appInfo)));
+            residentPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean isChecked = (boolean) newValue;
+                ThanosManager.from(getContext()).getActivityManager().setPkgResident(Pkg.fromAppInfo(appInfo), isChecked);
+                return true;
+            });
+        }
     }
 
     private void bindFeatureConfigPref() {

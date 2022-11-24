@@ -334,6 +334,9 @@
     <string name="pre_title_force_dialog_cancelable">Dialog cancelable</string>
     <string name="pre_summary_force_dialog_cancelable">Force app dialog to be cancelable for, please enable Xposed installer scope for this app</string>
 
+    <string name="pre_title_resident">Resident app</string>
+    <string name="pre_summary_resident">Prevent this app to be kill by LMK</string>
+
     <string name="pre_title_redaction_notification">Notification Redaction</string>
     <string name="pre_summary_redaction_notification">Override app notification with custom Title and Text</string>
     <string name="pre_title_redaction_notification_title">Title</string>

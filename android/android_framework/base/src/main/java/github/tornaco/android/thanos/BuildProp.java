@@ -106,6 +106,7 @@ public class BuildProp {
     public static final String THANOX_FEATURE_DIALOG_FORCE_CANCELABLE = "thanox.feature.dialog.force.cancelable";
     public static final String THANOX_FEATURE_WAKELOCK_REMOVER = "thanox.feature.dialog.wakelock.remover";
     public static final String THANOX_FEATURE_IZ = "thanox.feature.iz";
+    public static final String THANOX_FEATURE_RESIDENT = "thanox.feature.resident";
 
     public static final String THANOX_CONTRIBUTORS = getString("thanox.dev.contributors");
     public static final String THANOX_CONTACT_EMAIL = getString("thanox.contact.email");

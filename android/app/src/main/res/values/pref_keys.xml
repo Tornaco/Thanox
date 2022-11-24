@@ -166,6 +166,8 @@
 
     <string name="key_app_feature_config_dialog_force_cancelable" translatable="false">key_app_feature_config_dialog_force_cancelable</string>
 
+    <string name="key_app_feature_config_resident" translatable="false">key_app_feature_config_resident</string>
+
     <string name="key_app_feature_config_redaction_notification" translatable="false">key_app_feature_config_redaction_notification</string>
     <string name="key_app_feature_config_redaction_notification_title" translatable="false">key_app_feature_config_redaction_notification_title</string>
     <string name="key_app_feature_config_redaction_notification_text" translatable="false">key_app_feature_config_redaction_notification_text</string>

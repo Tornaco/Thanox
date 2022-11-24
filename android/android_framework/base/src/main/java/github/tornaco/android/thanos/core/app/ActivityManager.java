@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 
@@ -927,6 +928,16 @@ public class ActivityManager {
                 .stream()
                 .anyMatch(activityAssistInfo -> activityAssistInfo.name.getPackageName().equals(pkg.getPkgName())
                         && UserHandle.getUserId(activityAssistInfo.uid) == pkg.getUserId());
+    }
+
+    @SneakyThrows
+    public boolean isPkgResident(Pkg pkg) {
+        return server.isPkgResident(pkg);
+    }
+
+    @SneakyThrows
+    public void setPkgResident(Pkg pkg, boolean resident) {
+        server.setPkgResident(pkg, resident);
     }
 
     @SneakyThrows

@@ -1,0 +1,16 @@
+{
+  "author": "诗里沧海怨怼",
+  "version": 1,
+  "tags": [
+    "app_opt"
+  ],
+  "profile": {
+    "name": "日志清理",
+    "description": "by诗里沧海怨怼 | 搭配后台管家使用,负责清理产生的日志",
+    "priority": 2,
+    "condition": "screenOff",
+    "actions": [
+      "_10MB=10000000;_5MB=_10MB>>1;_1MB=_5MB/5;import java.nio.file.Path;import java.nio.file.Paths;import java.nio.file.Files;if(thanos.profileManager.isGlobalRuleVarByNameExists('logList')){if(globalVarOf$logList.size()==0){ui.showShortToast('请为变量logList添加内容');}else{int cntLog=0;foreach(pathStr:globalVarOf$logList){if(++cntLog==50){Thread.sleep(150);cntLog=0;}if(pathStr!=null){path=Paths.get(pathStr);if(Files.exists(path)&&Files.size(path)>=_5MB){Files.write(path,new byte[0],java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);}}}}}else{thanos.profileManager.disableRuleByName('日志清理');thanos.profileManager.addGlobalRuleVar('logList',new String[0]);ui.showShortToast('变量logList不存在!');}"
+    ]
+  }
+}

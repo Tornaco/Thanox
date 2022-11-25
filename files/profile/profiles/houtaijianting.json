@@ -1,0 +1,16 @@
+{
+  "author": "诗里沧海怨怼",
+  "version": 1,
+  "tags": [
+    "app_opt"
+  ],
+  "profile": {
+    "name": "后台监听",
+    "description": "by诗里沧海怨怼 | 搭配后台管家使用",
+    "priority": 1,
+    "condition": "frontPkgChanged",
+    "actions": [
+      "int cntLsn=0;foreach(str:globalVarOf$pkgNameForTrim){if(++cntLsn==50){Thread.sleep(100);cntLsn=0;}if(str!=null&&str.startsWith(from)){io.write('starlee/'+from,'0');return;}}foreach(str:globalVarOf$pkgNameForKill){if(++cntLsn==50){Thread.sleep(100);cntLsn=0;}if(str!=null&&str.startsWith(from)){io.write('starlee/'+from,'0');return;}}"
+    ]
+  }
+}

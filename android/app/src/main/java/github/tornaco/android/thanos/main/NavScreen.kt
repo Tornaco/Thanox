@@ -183,6 +183,12 @@ fun NavScreen() {
                     activity.finish()
                 })
             }
+
+            if (state.isAndroidVersionTooLow) {
+                AndroidVersionNotSupportedDialog {
+                    viewModel.androidVersionTooLowAccepted()
+                }
+            }
         }
     }
 }
@@ -522,6 +528,24 @@ private fun MultiplePatchDialog(
     }, text = {
         Text(text = stringResource(id = R.string.message_multiple_patch_applied_error,
             patchSources.joinToString(" ")))
+    }, onDismissRequest = onDismissRequest, confirmButton = {
+        TextButton(onClick = {
+            onDismissRequest()
+        }) {
+            Text(text = stringResource(android.R.string.ok))
+        }
+    })
+}
+
+
+@Composable
+private fun AndroidVersionNotSupportedDialog(
+    onDismissRequest: () -> Unit
+) {
+    ThanoxAlertDialog(title = {
+        Text(text = "Not Supported")
+    }, text = {
+        Text(text = "Android version of you device is too low, some features may not work properly.")
     }, onDismissRequest = onDismissRequest, confirmButton = {
         TextButton(onClick = {
             onDismissRequest()

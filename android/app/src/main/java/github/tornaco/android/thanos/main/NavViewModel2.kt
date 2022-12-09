@@ -16,6 +16,7 @@ import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.app.donate.DonateSettings
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.util.OsUtils
 import github.tornaco.android.thanos.dashboard.*
 import github.tornaco.android.thanos.feature.access.AppFeatureManager.showDonateIntroDialog
 import github.tornaco.android.thanos.feature.access.AppFeatureManager.withSubscriptionStatus
@@ -56,9 +57,11 @@ data class NavState(
     val showPrivacyStatement: Boolean,
     val showFirstRunTips: Boolean,
     val patchSources: List<String>,
+    val isAndroidVersionTooLow: Boolean,
 )
 
 val privacyAgreementKey get() = "PREF_PRIVACY_STATEMENT_ACCEPTED2_V_" + BuildProp.THANOS_VERSION_CODE
+val androidVersionTooLowKey get() = "PREF_ANDROID_VERSION_TOO_LOW_V_" + BuildProp.THANOS_VERSION_CODE
 
 @SuppressLint("StaticFieldLeak")
 @HiltViewModel
@@ -73,6 +76,7 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         isPurchased = true,
         showPrivacyStatement = false,
         showFirstRunTips = false,
+        isAndroidVersionTooLow = false,
         patchSources = emptyList()))
     val state = _state.asStateFlow()
 
@@ -145,10 +149,13 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     fun loadAppStatus() {
         viewModelScope.launch {
             val isPrivacyStatementAccepted = isPrivacyStatementAccepted()
-            _state.value = _state.value.copy(showPrivacyStatement = !isPrivacyStatementAccepted,
-                showFirstRunTips = isPrivacyStatementAccepted && !thanox.isServiceInstalled && AppPreference.isFirstRun(
-                    context),
-                patchSources = if (thanox.isServiceInstalled) thanox.patchingSource else emptyList())
+            val isAndroidTooLowAccepted = isAndroidVersionTooLowAccepted()
+            _state.value = _state.value.copy(
+                showPrivacyStatement = !isPrivacyStatementAccepted,
+                showFirstRunTips = isPrivacyStatementAccepted && !thanox.isServiceInstalled && AppPreference.isFirstRun(context),
+                patchSources = if (thanox.isServiceInstalled) thanox.patchingSource else emptyList(),
+                isAndroidVersionTooLow = !isAndroidTooLowAccepted && !OsUtils.isOOrAbove()
+            )
         }
     }
 
@@ -251,6 +258,14 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         loadAppStatus()
     }
 
+    fun androidVersionTooLowAccepted() {
+        PreferenceManager.getDefaultSharedPreferences(context).edit()
+            .putBoolean(androidVersionTooLowKey, true).commit()
+        // Dismiss right now.
+        _state.value = _state.value.copy(isAndroidVersionTooLow = false)
+        loadAppStatus()
+    }
+
     fun firstRunTipNoticed() {
         AppPreference.setFirstRun(context, false)
         loadAppStatus()
@@ -259,6 +274,11 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     private suspend fun isPrivacyStatementAccepted(): Boolean = withContext(Dispatchers.IO) {
         PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean(privacyAgreementKey, false)
+    }
+
+    private suspend fun isAndroidVersionTooLowAccepted(): Boolean = withContext(Dispatchers.IO) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean(androidVersionTooLowKey, false)
     }
 
     private fun registerReceivers() {

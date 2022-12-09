@@ -1,7 +1,5 @@
 package util;
 
-import android.os.Build;
-
 import com.elvishew.xlog.XLog;
 
 import java.lang.reflect.Method;
@@ -12,8 +10,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import github.tornaco.android.thanos.core.annotation.RequiresApi;
 
 public class XposedHelpersExt {
   private static final Map<String, Integer> METHOD_PARAM_INDEX_CACHE = new HashMap<>();
@@ -27,7 +23,6 @@ public class XposedHelpersExt {
     }
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.N)
   public static Method findMethodWithMostArgs(Class<?> clazz, String methodName) {
     List<Method> methodList = new ArrayList<>();
     for (Method m : clazz.getDeclaredMethods()) {
@@ -47,16 +42,15 @@ public class XposedHelpersExt {
     return methodList.get(0);
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.O)
   public static int getFirstArgIndexWithTypeForMethod(Method method, String className) {
     try {
-      Parameter[] parameters = method.getParameters();
+      Class<?>[] parameters = method.getParameterTypes();
       if (parameters.length == 0) {
         return -1;
       }
       for (int i = 0; i < parameters.length; i++) {
-        Parameter p = parameters[i];
-        if (ObjectsUtils.equals(p.getType().getName(), className)) {
+        Class<?> p = parameters[i];
+        if (ObjectsUtils.equals(p.getName(), className)) {
           return i;
         }
       }
@@ -66,17 +60,16 @@ public class XposedHelpersExt {
     return -1;
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.O)
   public static int getFirstArgIndexLikeTypeForMethod(Method method, String classNameOrSimpleName) {
     try {
-      Parameter[] parameters = method.getParameters();
+      Class<?>[] parameters = method.getParameterTypes();
       if (parameters.length == 0) {
         return -1;
       }
       for (int i = 0; i < parameters.length; i++) {
-        Parameter p = parameters[i];
-        if (ObjectsUtils.equals(p.getType().getName(), classNameOrSimpleName)
-            || ObjectsUtils.equals(p.getType().getSimpleName(), classNameOrSimpleName)) {
+        Class<?> p = parameters[i];
+        if (ObjectsUtils.equals(p.getName(), classNameOrSimpleName)
+            || ObjectsUtils.equals(p.getSimpleName(), classNameOrSimpleName)) {
           return i;
         }
       }
@@ -163,11 +156,11 @@ public class XposedHelpersExt {
       Integer cachedIndex = METHOD_PARAM_INDEX_CACHE.get(cacheKey);
       if (cachedIndex != null) return cachedIndex;
 
-      Parameter[] parameters = method.getParameters();
+      Class<?>[] parameters = method.getParameterTypes();
       for (int i = 0; i < parameters.length; i++) {
-        Parameter p = parameters[i];
+        Class<?> p = parameters[i];
         XLog.i("getParamIndex, name = "+ p.getName());
-        if (p.isNamePresent() && paramName.equals(p.getName())) {
+        if (paramName.equals(p.getName())) {
           METHOD_PARAM_INDEX_CACHE.put(cacheKey, i);
           return i;
         }

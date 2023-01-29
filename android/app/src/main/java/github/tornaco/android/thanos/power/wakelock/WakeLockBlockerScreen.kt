@@ -330,10 +330,19 @@ fun WakeLockListItem(
                     modifier = Modifier.weight(1f, fill = false),
                     verticalAlignment = CenterVertically
                 ) {
-                    Icon(
-                        modifier = Modifier,
-                        imageVector = Icons.Outlined.FileCopy, contentDescription = null
-                    )
+                    if (wakeLock.isBlock) {
+                        Icon(
+                            modifier = Modifier,
+                            imageVector = Icons.Outlined.Block, contentDescription = null,
+                            tint = Color.Red
+                        )
+                    } else {
+                        Icon(
+                            modifier = Modifier,
+                            imageVector = Icons.Outlined.FileCopy, contentDescription = null
+                        )
+                    }
+
                     Spacer(modifier = Modifier.size(12.dp))
 
                     Column(

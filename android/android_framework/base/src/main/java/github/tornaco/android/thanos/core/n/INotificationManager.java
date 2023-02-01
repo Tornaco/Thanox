@@ -108,6 +108,13 @@ public interface INotificationManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public void setPkgNREnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isPkgNREnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return false;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -487,6 +494,37 @@ public interface INotificationManager extends android.os.IInterface
           java.lang.String _result = this.getPackageRedactionNotificationText(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
+          return true;
+        }
+        case TRANSACTION_setPkgNREnabled:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _arg1;
+          _arg1 = (0!=data.readInt());
+          this.setPkgNREnabled(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isPkgNREnabled:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          boolean _result = this.isPkgNREnabled(_arg0);
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
           return true;
         }
         default:
@@ -1148,6 +1186,59 @@ public interface INotificationManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public void setPkgNREnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgNREnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPkgNREnabled(pkg, enable);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isPkgNREnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgNREnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPkgNREnabled(pkg);
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.n.INotificationManager sDefaultImpl;
     }
     static final int TRANSACTION_getShowingNotificationRecordsForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1178,6 +1269,8 @@ public interface INotificationManager extends android.os.IInterface
     static final int TRANSACTION_getPackageRedactionNotificationTitle = (android.os.IBinder.FIRST_CALL_TRANSACTION + 25);
     static final int TRANSACTION_setPackageRedactionNotificationText = (android.os.IBinder.FIRST_CALL_TRANSACTION + 26);
     static final int TRANSACTION_getPackageRedactionNotificationText = (android.os.IBinder.FIRST_CALL_TRANSACTION + 27);
+    static final int TRANSACTION_setPkgNREnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 28);
+    static final int TRANSACTION_isPkgNREnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.n.INotificationManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1225,4 +1318,6 @@ public interface INotificationManager extends android.os.IInterface
   public java.lang.String getPackageRedactionNotificationTitle(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public void setPackageRedactionNotificationText(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String text) throws android.os.RemoteException;
   public java.lang.String getPackageRedactionNotificationText(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void setPkgNREnabled(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean enable) throws android.os.RemoteException;
+  public boolean isPkgNREnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
 }

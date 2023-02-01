@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory>
+    <PreferenceCategory app:title="@string/module_notification_recorder_feature_title_notification_recorder">
         <SwitchPreferenceCompat
             app:key="@string/key_enable_nr_n"
             app:persistent="false"
@@ -11,14 +11,20 @@
             app:persistent="false"
             app:title="@string/module_notification_recorder_pref_title_enable_nr_t" />
         <SwitchPreferenceCompat
+            app:isPreferenceVisible="false"
             app:key="@string/key_enable_nr_clip"
             app:persistent="false"
-            app:isPreferenceVisible="false"
             app:title="@string/module_notification_recorder_pref_title_enable_nr_clip" />
         <SwitchPreferenceCompat
             app:key="@string/key_enable_toast_info"
             app:persistent="false"
             app:summary="@string/module_notification_recorder_pref_summary_enable_toast_info"
             app:title="@string/module_notification_recorder_pref_title_enable_toast_info" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/app_picker_title">
+        <Preference
+            app:key="@string/key_nr_apps"
+            app:title="@string/app_picker_title" />
     </PreferenceCategory>
 </PreferenceScreen>

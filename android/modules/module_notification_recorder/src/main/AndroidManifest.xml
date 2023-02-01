@@ -13,5 +13,9 @@
             android:name=".ui.stats.StatsActivity"
             android:exported="false"
             android:label="@string/module_notification_recorder_stats" />
+        <activity
+            android:name=".AppListActivity"
+            android:exported="false"
+            android:label="@string/app_picker_title" />
     </application>
 </manifest>

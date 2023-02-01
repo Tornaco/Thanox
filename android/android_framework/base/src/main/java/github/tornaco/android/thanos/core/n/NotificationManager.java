@@ -160,4 +160,14 @@ public class NotificationManager {
     public String getPackageRedactionNotificationText(Pkg pkg) {
         return service.getPackageRedactionNotificationText(pkg);
     }
+
+    @SneakyThrows
+    public void setPkgNREnabled(Pkg pkg, boolean enable) {
+        service.setPkgNREnabled(pkg, enable);
+    }
+
+    @SneakyThrows
+    public boolean isPkgNREnabled(Pkg pkg) {
+        return service.isPkgNREnabled(pkg);
+    }
 }

@@ -2,6 +2,8 @@ package github.tornaco.android.thanox.module.notification.recorder;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
@@ -67,5 +69,14 @@ public class NotificationSettingsFragment extends BasePreferenceFragmentCompat {
                 return true;
             });
         }
+
+        Preference nrAppsPref = findPreference(getString(R.string.key_nr_apps));
+        nrAppsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(@NonNull Preference preference) {
+                AppListActivity.start(requireContext());
+                return true;
+            }
+        });
     }
 }

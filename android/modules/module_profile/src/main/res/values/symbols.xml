@@ -32,5 +32,6 @@
         <item>&#60;</item>
         <item>&#62;</item>
         <item>:</item>
+        <item>\'</item>
     </string-array>
 </resources>

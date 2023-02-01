@@ -67,7 +67,7 @@
     <string name="badge_app_running">Running</string>
     <string name="badge_app_idle">Idle</string>
 
-    <string name="boost_status_running_apps">&#160;apps is running</string>
+    <string name="boost_status_running_apps">&#160;apps running</string>
     <string name="boost_status_blocked_start_count">Blocked %s app startup requests</string>
     <string name="boost_status_mem_usage_percent">Memory  %s</string>
     <string name="boost_status_swap_usage_percent">Swap  %s</string>

@@ -22,8 +22,6 @@
         <item name="colorOnSurface">@color/md_grey_350</item>
         <item name="appCardBackground">@color/md_dark</item>
         <item name="progressTrackColor">@color/md_grey_800</item>
-        <item name="progressColor">?colorAccent</item>
-        <item name="secondaryProgressColor">@color/md_amber_800</item>
 
         <item name="appbarPopupTheme">@style/PopupOverlay</item>
         <item name="appbarTheme">@style/AppBarOverlay</item>

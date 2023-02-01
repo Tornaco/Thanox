@@ -9,6 +9,4 @@
     <attr name="switchBarBackground" format="color" />
 
     <attr name="progressTrackColor" format="color" />
-    <attr name="progressColor" format="color" />
-    <attr name="secondaryProgressColor" format="color" />
 </resources>

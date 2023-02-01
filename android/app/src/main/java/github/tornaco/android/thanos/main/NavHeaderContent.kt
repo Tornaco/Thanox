@@ -117,7 +117,7 @@ private fun CpuProgressBar(
     headerInfo: StatusHeaderInfo,
     onSurfaceColor: Int,
 ) {
-    val progressColor = getColorAttribute(R.attr.progressColor)
+    val progressColor = getColorAttribute(R.attr.colorPrimary)
     val progressTrackColor = getColorAttribute(R.attr.progressTrackColor)
 
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
@@ -189,8 +189,8 @@ private fun MemProgressBar(
     headerInfo: StatusHeaderInfo,
     onSurfaceColor: Int,
 ) {
-    val progressColor = getColorAttribute(R.attr.progressColor)
-    val secondaryProgressColor = getColorAttribute(R.attr.secondaryProgressColor)
+    val progressColor = getColorAttribute(R.attr.colorPrimary)
+    val secondaryProgressColor = getColorAttribute(R.attr.colorTertiary)
     val progressTrackColor = getColorAttribute(R.attr.progressTrackColor)
 
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
@@ -229,7 +229,7 @@ private fun MemProgressBar(
                 centerContent = {
                     Text(
                         text = "Mem",
-                        style = productSansBoldTypography().caption.copy(fontSize = 10.sp),
+                        style = productSansBoldTypography().caption.copy(fontSize = 8.sp),
                         color = Color(onSurfaceColor)
                     )
                 }

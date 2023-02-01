@@ -81,10 +81,13 @@
     <string name="boost_status_system_storage">Storage</string>
 
     <string name="feature_category_start_manage">Start</string>
-    <string name="feature_title_one_key_boost">One key boost</string>
-    <string name="feature_title_start_restrict">Background start</string>
+    <string name="feature_title_one_key_boost">One Key Boost</string>
+    <string name="feature_title_one_key_boost_abbr">Boost</string>
+    <string name="feature_title_start_restrict">Background Start</string>
+    <string name="feature_title_start_restrict_abbr">BG Start</string>
     <string name="feature_desc_start_restrict">Allow apps to start from background</string>
-    <string name="feature_title_bg_restrict">Background task</string>
+    <string name="feature_title_bg_restrict">Background Task</string>
+    <string name="feature_title_bg_restrict_abbr">BG Task</string>
     <string name="feature_desc_bg_restrict_brief">Allow apps running in background</string>
     <string name="feature_desc_bg_restrict">When the \"Background task\" feature is enabled, Thanox will perform a process cleanup after the screen is turned off. Allow selected apps to continue running even if the screen is locked, and exclude these apps from one-key boost</string>
 
@@ -95,7 +98,7 @@
     <string name="feature_summary_standby_restrict_rules">You can control to retain certain services, usage: KEEP $COMPONENT-NAME  \ne.g. KEEP xxx/.XService</string>
 
     <string name="feature_category_app_clean_up">Clean</string>
-    <string name="feature_title_clean_when_task_removed">Clean tasks</string>
+    <string name="feature_title_clean_when_task_removed">Clean Tasks</string>
     <string name="feature_desc_clean_when_task_removed">Clean the background processes of selected apps when they are cleared from recent tasks</string>
     <string name="feature_desc_clean_when_task_removed_brief">Clean background process on task removed</string>
 
@@ -103,7 +106,7 @@
     <string name="activity_title_bg_restrict">Background task</string>
     <string name="activity_title_clean_when_task_removed">Clean tasks</string>
 
-    <string name="feature_title_process_manage">Process manager</string>
+    <string name="feature_title_process_manage">Process Manager</string>
     <string name="activity_title_process_manage">Running（%s）</string>
     <string name="item_summary_process_count">%s processes</string>
     <string name="item_summary_mem_size">%s</string>
@@ -112,7 +115,7 @@
     <string name="title_cached_background_process">Cached background processes</string>
 
     <string name="feature_category_app_manage">Apps</string>
-    <string name="feature_title_apps_manager">App manager</string>
+    <string name="feature_title_apps_manager">App Manager</string>
     <string name="activity_title_apps_manager">App manager</string>
     <string name="feature_summary_apps_manager">Per-app management and configuration</string>
     <string name="titile_suggested_apps_recent_used">Recently used apps</string>
@@ -124,7 +127,7 @@
     <string name="feature_category_remind">Reminder</string>
     <string name="feature_category_misc">Misc</string>
 
-    <string name="feature_title_recent_task_blur">Task blur</string>
+    <string name="feature_title_recent_task_blur">Task Blur</string>
     <string name="feature_summary_recent_task_blur">Add blur effect to recent tasks</string>
 
     <string name="feature_title_wakelock_blocker">Wakelock Blocker</string>
@@ -132,19 +135,19 @@
     <string name="wakelock_view_held_only">Held only</string>
     <string name="wakelock_count">%s wakelocks</string>
 
-    <string name="feature_title_app_lock">App lock</string>
+    <string name="feature_title_app_lock">App Lock</string>
     <string name="feature_summary_app_lock">Show lock interface before app launch</string>
 
     <string name="feature_category_notification">Notification</string>
-    <string name="feature_title_light_on_notification">Light up</string>
+    <string name="feature_title_light_on_notification">Light Up</string>
     <string name="feature_summary_light_on_notification">Light up screen on new notification</string>
-    <string name="feature_title_push_delegate">Push delegate</string>
+    <string name="feature_title_push_delegate">Push Delegate</string>
 
     <string name="feature_category_plugins">Available features</string>
 
     <string name="feature_category_ext">Extension</string>
     <string name="feature_category_power_save">Power</string>
-    <string name="feature_title_smart_app_standby">X mode</string>
+    <string name="feature_title_smart_app_standby">X Mode</string>
     <string name="feature_summary_smart_app_standby">Affects selected app. When the app returns to the background, it will automatically stop all services or sets them into idle mode; if any service needs to be excluded, please use custom rules.</string>
 
     <string name="feature_summary_smart_app_standby_brief">Stop service or inactive for bg apps</string>
@@ -158,7 +161,7 @@
     <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">Temporarily de-freeze all apps in the Smart Freeze list, are you sure you want to do this?</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps">De-freeze all apps</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps">Will de-freeze all disabled or suspended apps on your device, including all installed or system apps, are you sure you want to do this?</string>
-    <string name="feature_title_smart_app_freeze">Smart freeze</string>
+    <string name="feature_title_smart_app_freeze">Smart Freeze</string>
     <string name="feature_title_enable_package_on_launch">DOL</string>
     <string name="feature_summary_enable_package_on_launch">De-Freeze app on Activity Launch request</string>
     <string name="pref_title_enable_package_on_launch_by_default">Enable DOL</string>
@@ -179,7 +182,7 @@
 
     <string name="message_do_you_want_to_add_apps_to_pkg_set">Also add these Apps to current Package Set?</string>
 
-    <string name="feature_title_infinite_z">App clone</string>
+    <string name="feature_title_infinite_z">App Clone</string>
     <string name="feature_message_infinite_z_enable">App clone is implemented based on the Android multi-user mechanism. To enable the App clone, thanox will create a user Profile. Usually, a "Work" tab will be displayed on the Launcher. \nThis feature is currently experimental and not yet stable. \n\nDo you want to enable it?</string>
     <string name="feature_message_infinite_z_disable">Will delete all the data of the app clone user and cannot be recovered. Are you sure you want to disable app clone?</string>
     <string name="feature_message_infinite_z_uninstall">Are you sure you want to uninstall <b>%s</b>? The data of cloned app will be deleted and cannot be recovered</string>

@@ -82,9 +82,12 @@
 
     <string name="feature_category_start_manage">啟動</string>
     <string name="feature_title_one_key_boost">一鍵加速</string>
+    <string name="feature_title_one_key_boost_abbr">一鍵加速</string>
     <string name="feature_title_start_restrict">後台啟動</string>
+    <string name="feature_title_start_restrict_abbr">後台啟動</string>
     <string name="feature_desc_start_restrict">允許選取的應用自啟動、關聯啟動</string>
     <string name="feature_title_bg_restrict">後台執行</string>
+    <string name="feature_title_bg_restrict_abbr">後台執行</string>
     <string name="feature_desc_bg_restrict">\"後台執行\"開關開啟後，Thanox會在螢幕熄滅後進行一次處理程序清理；勾選的應用螢幕鎖定後會繼續執行，也就是說螢幕鎖定清理時不清理這些應用，另外在執行一鍵加速（一鍵加速就是清理下面這些沒勾選的應用的後台）時，保留這些應用</string>
     <string name="feature_desc_bg_restrict_brief">允許應用後台執行</string>
 

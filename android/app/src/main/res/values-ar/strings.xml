@@ -132,12 +132,14 @@
     <string name="feature_title_app_lock">قفل التطبيقات</string>
     <string name="feature_title_apps_manager">مدير التطبيق</string>
     <string name="feature_title_bg_restrict">العمل في الخلفية</string>
+    <string name="feature_title_bg_restrict_abbr">العمل في الخلفية</string>
     <string name="feature_title_clean_when_task_removed">مهام التنظيف</string>
     <string name="feature_title_data_cheat">التخفي</string>
     <string name="feature_title_enable_package_on_launch">تمكين الحزمة عند الإطلاق</string>
     <string name="feature_title_infinite_z">استنساخ التطبيق</string>
     <string name="feature_title_light_on_notification">الاشعارات إضاءة</string>
     <string name="feature_title_one_key_boost">تنظيف دفعة واحدة</string>
+    <string name="feature_title_one_key_boost_abbr">تنظيف دفعة واحدة</string>
     <string name="feature_title_process_manage">مدير العملية</string>
     <string name="feature_title_push_delegate">دفع مندوب</string>
     <string name="feature_title_recent_task_blur">مهام طمس</string>
@@ -145,6 +147,7 @@
     <string name="feature_title_smart_app_freeze">تجميد ذكي</string>
     <string name="feature_title_smart_app_standby">وضع تعليق</string>
     <string name="feature_title_start_restrict">بدء التشغيل</string>
+    <string name="feature_title_start_restrict_abbr">بدء التشغيل</string>
     <string name="feature_title_wakelock_blocker">قفل مانع استيقظ</string>
 
     <string name="fuzzydatetime__now">الآن</string>

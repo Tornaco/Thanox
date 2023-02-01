@@ -19,7 +19,7 @@
     <string name="service_op_label_location">Location</string>
     <string name="service_op_label_read_clipboard">Read clipboard</string>
     <string name="service_op_label_write_clipboard">Write clipboard</string>
-    <string name="service_op_remind_prefix">Privacy watcher: </string>
+    <string name="service_op_remind_prefix">Privacy Watcher: </string>
 
     <string name="service_toast_current_component_copied_to_clipboard">Content has been copied to clipboard</string>
 

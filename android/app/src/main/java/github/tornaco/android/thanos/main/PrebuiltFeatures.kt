@@ -10,21 +10,21 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_ONE_KEY_CLEAR,
                 iconRes = R.drawable.ic_nav_boost,
-                titleRes = R.string.feature_title_one_key_boost,
+                titleRes = R.string.feature_title_one_key_boost_abbr,
                 requiredFeature = BuildProp.THANOX_FEATURE_BG_TASK_CLEAN,
                 themeColor = R.color.nav_icon_boost
             ),
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_BACKGROUND_START,
                 iconRes = R.drawable.ic_nav_bg_start,
-                titleRes = R.string.feature_title_start_restrict,
+                titleRes = R.string.feature_title_start_restrict_abbr,
                 requiredFeature = BuildProp.THANOX_FEATURE_START_BLOCKER,
                 themeColor = R.color.nav_icon_bg_start
             ),
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT,
                 iconRes = R.drawable.ic_nav_bg_restrict,
-                titleRes = R.string.feature_title_bg_restrict,
+                titleRes = R.string.feature_title_bg_restrict_abbr,
                 requiredFeature = BuildProp.THANOX_FEATURE_BG_TASK_CLEAN,
                 themeColor = R.color.nav_icon_bg_restrict
             ),
@@ -99,7 +99,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_TRAMPOLINE,
                 iconRes = R.drawable.ic_nav_activity_replacement,
-                titleRes = R.string.module_activity_trampoline_app_name,
+                titleRes = R.string.module_activity_trampoline_app_name_abbr,
                 requiredFeature = BuildProp.THANOX_FEATURE_APP_TRAMPOLINE,
                 themeColor = R.color.nav_icon_activity_replacement
             ),

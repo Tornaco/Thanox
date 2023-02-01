@@ -58,8 +58,10 @@
             android:id="@+id/editor_actions_toolbar_symbols1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/module_profile_editor_symbol_bar_height"
+            android:paddingTop="@dimen/common_view_margin_small"
             android:layout_above="@id/editor_actions_toolbar_symbols2"
             android:gravity="center"
+            android:background="?colorSurface"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="?appbarPopupTheme"
             app:theme="?toolbarTheme" />
@@ -70,6 +72,7 @@
             android:layout_height="@dimen/module_profile_editor_symbol_bar_height"
             android:layout_above="@id/editor_actions_toolbar_symbols3"
             android:gravity="center"
+            android:background="?colorSurface"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="?appbarPopupTheme"
             app:theme="?toolbarTheme" />
@@ -80,6 +83,7 @@
             android:layout_height="@dimen/module_profile_editor_symbol_bar_height"
             android:layout_above="@id/editor_actions_toolbar"
             android:gravity="center"
+            android:background="?colorSurface"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="?appbarPopupTheme"
             app:theme="?toolbarTheme" />
@@ -90,6 +94,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentBottom="true"
             android:gravity="center"
+            android:background="?colorSurface"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="?appbarPopupTheme"
             app:theme="?toolbarTheme">

@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Power connect state",
+    "description": "Show toast when powerConnected or powerDisconnected.",
+    "priority": 1,
+    "condition": "powerConnected || powerDisconnected",
+    "actions": [
+      "ui.showShortToast(\"Power connected? \" + powerConnected);"
+    ]
+  }
+]

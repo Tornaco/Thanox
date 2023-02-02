@@ -23,6 +23,11 @@
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/app_picker_title">
+        <SwitchPreferenceCompat
+            app:key="@string/key_persist_all_apps"
+            app:persistent="false"
+            app:title="@string/module_notification_recorder_pref_title_enable_nr_for_all_apps" />
+
         <Preference
             app:key="@string/key_nr_apps"
             app:title="@string/app_picker_title" />

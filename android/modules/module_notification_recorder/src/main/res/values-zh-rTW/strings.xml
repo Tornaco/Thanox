@@ -16,6 +16,7 @@
     <string name="module_notification_recorder_pref_summary_enable_toast_info">在系统吐司中添加一个应用图标</string>
     <string name="module_notification_recorder_pref_title_enable_toast_info">顯示吐司信息</string>
     <string name="module_notification_recorder_pref_title_enable_nr_n">記錄狀態欄通知</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_for_all_apps">記錄所有應用</string>
     <string name="module_notification_recorder_pref_title_enable_nr_t">記錄應用吐司</string>
     <string name="module_notification_recorder_pref_title_enable_nr_clip">記錄剪貼板</string>
 

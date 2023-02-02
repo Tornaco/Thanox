@@ -46,6 +46,8 @@ interface INotificationManager {
     void setPackageRedactionNotificationText(in Pkg pkg, String text);
     String getPackageRedactionNotificationText(in Pkg pkg);
 
+    void setPersistAllPkgEnabled(boolean enable);
+    boolean isPersistAllPkgEnabled();
     void setPkgNREnabled(in Pkg pkg, boolean enable);
     boolean isPkgNREnabled(in Pkg pkg);
 }

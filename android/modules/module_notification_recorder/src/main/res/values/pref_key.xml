@@ -21,4 +21,5 @@
     <string name="key_enable_nr_t" translatable="false">key_enable_nr_t</string>
     <string name="key_enable_nr_clip" translatable="false">key_enable_nr_clip</string>
     <string name="key_nr_apps" translatable="false">key_nr_apps</string>
+    <string name="key_persist_all_apps" translatable="false">key_persist_all_apps</string>
 </resources>

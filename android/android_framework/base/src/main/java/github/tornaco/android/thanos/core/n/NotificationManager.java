@@ -162,6 +162,16 @@ public class NotificationManager {
     }
 
     @SneakyThrows
+    public void setPersistAllPkgEnabled(boolean enable) {
+        service.setPersistAllPkgEnabled(enable);
+    }
+
+    @SneakyThrows
+    public boolean isPersistAllPkgEnabled() {
+        return service.isPersistAllPkgEnabled();
+    }
+
+    @SneakyThrows
     public void setPkgNREnabled(Pkg pkg, boolean enable) {
         service.setPkgNREnabled(pkg, enable);
     }

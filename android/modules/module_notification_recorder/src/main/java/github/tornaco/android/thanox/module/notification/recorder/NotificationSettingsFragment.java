@@ -71,12 +71,21 @@ public class NotificationSettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         Preference nrAppsPref = findPreference(getString(R.string.key_nr_apps));
-        nrAppsPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(@NonNull Preference preference) {
-                AppListActivity.start(requireContext());
-                return true;
-            }
+        nrAppsPref.setEnabled(!thanos.getNotificationManager().isPersistAllPkgEnabled());
+        nrAppsPref.setOnPreferenceClickListener(preference -> {
+            AppListActivity.start(requireContext());
+            return true;
         });
+
+        SwitchPreferenceCompat persistAllApps = findPreference(getString(R.string.key_persist_all_apps));
+        if (thanos.isServiceInstalled()) {
+            Objects.requireNonNull(persistAllApps).setChecked(thanos.getNotificationManager().isPersistAllPkgEnabled());
+            persistAllApps.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean checked = (boolean) newValue;
+                thanos.getNotificationManager().setPersistAllPkgEnabled(checked);
+                nrAppsPref.setEnabled(!thanos.getNotificationManager().isPersistAllPkgEnabled());
+                return true;
+            });
+        }
     }
 }

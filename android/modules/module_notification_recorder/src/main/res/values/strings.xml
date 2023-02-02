@@ -17,6 +17,7 @@
     <string name="module_notification_recorder_pref_title_enable_nr_n">Record notifications</string>
     <string name="module_notification_recorder_pref_title_enable_nr_t">Record Toasts</string>
     <string name="module_notification_recorder_pref_title_enable_nr_clip">Record Clipboard</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_for_all_apps">Record all apps</string>
     <string name="module_notification_recorder_reproduce">Reproduce</string>
     <string name="module_notification_recorder_zoom">Zoom</string>
     <string name="module_notification_recorder_yesterday">Yesterday</string>

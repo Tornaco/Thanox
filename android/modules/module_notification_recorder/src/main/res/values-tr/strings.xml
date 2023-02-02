@@ -16,6 +16,7 @@
     <string name="module_notification_recorder_pref_summary_enable_toast_info">Toast görünümünde uygulama bilgilerini göster</string>
     <string name="module_notification_recorder_pref_title_enable_toast_info">Toast bilgi</string>
     <string name="module_notification_recorder_pref_title_enable_nr_n">Bildirimleri kaydet</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_for_all_apps">Record all apps</string>
     <string name="module_notification_recorder_pref_title_enable_nr_t">Tosts Kaydet</string>
     <string name="module_notification_recorder_pref_title_enable_nr_clip">Kayıt Panosu</string>
 

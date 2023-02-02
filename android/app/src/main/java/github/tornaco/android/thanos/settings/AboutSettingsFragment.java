@@ -20,7 +20,6 @@ import github.tornaco.android.thanos.ThanosApp;
 import github.tornaco.android.thanos.app.donate.DonateActivity;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity3;
 import github.tornaco.android.thanos.util.BrowserUtils;
@@ -137,16 +136,12 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
         new MaterialAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.pref_title_rss_e)
                 .setMessage(R.string.pref_summary_rss_e)
-                .setPositiveButton("QQ", (dialog, which) -> {
-                    ClipboardUtils.copyToClipboard(requireActivity(), "thanox QQ", BuildProp.THANOX_QQ_PRIMARY);
-                    Toast.makeText(requireContext(), R.string.common_toast_copied_to_clipboard, Toast.LENGTH_LONG).show();
-                }).setNegativeButton("TG", (dialog, which) -> BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL)).show();
+                .setPositiveButton("TG", (dialog, which) -> BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL)).show();
     }
 
     private void showBuildProp() {
         BuildPropActivity.Starter.INSTANCE.start(getActivity());
     }
-
 
     @RequiresPermission({
             Manifest.permission.READ_MEDIA_IMAGES,

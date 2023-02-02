@@ -255,7 +255,7 @@
     <string name="pref_summary_icon_maker_remix_icon">Remix Design c 2018 https://remixicon.com</string>
 
     <string name="pref_title_rss_e">群組</string>
-    <string name="pref_summary_rss_e">加入Telegram或QQ群組</string>
+    <string name="pref_summary_rss_e">加入群組</string>
 
     <string name="pref_title_app_state_enabled">應用已啟用</string>
     <string name="pref_title_app_to_disable">凍結</string>

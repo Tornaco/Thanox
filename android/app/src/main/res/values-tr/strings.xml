@@ -251,7 +251,7 @@
     <string name="pref_summary_icon_maker_remix_icon">Remix Design © 2018 https://remixicon.com</string>
 
     <string name="pref_title_rss_e">Groups</string>
-    <string name="pref_summary_rss_e">Join TG or QQ group</string>
+    <string name="pref_summary_rss_e">Join TG group</string>
 
     <string name="pref_title_app_state_enabled">App is enabled</string>
     <string name="pref_title_app_to_disable">Disable</string>

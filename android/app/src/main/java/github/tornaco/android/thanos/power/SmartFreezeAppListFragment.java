@@ -632,7 +632,8 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                         File tmpFile = new File("/data/local/tmp/" + appInfo.getPkgName() + "_proxy.apk");
                         Shell.su("cp " + apkFile.getAbsolutePath() + " " + tmpFile.getAbsolutePath()).exec();
                         XLog.w("apk path: " + tmpFile.getAbsolutePath());
-                        Shell.su("pm install " + tmpFile.getAbsolutePath()).exec();
+                        Shell.Result installRes = Shell.su("pm install " + tmpFile.getAbsolutePath()).exec();
+                        XLog.w("Install res: " + installRes);
                         Shell.su("rm " + tmpFile.getAbsolutePath()).exec();
                     }).subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())

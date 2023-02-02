@@ -23,7 +23,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Tag
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.*
@@ -45,6 +44,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dev.enro.core.compose.registerForNavigationResult
 import github.tornaco.android.thanos.core.alarm.AlarmRecord
+import github.tornaco.android.thanos.core.alarm.TimeOfADay
+import github.tornaco.android.thanos.core.alarm.WeekDay
+import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import github.tornaco.android.thanos.module.compose.common.widget.Switch
@@ -59,10 +61,10 @@ private const val ID_REGULAR_INTERVAL = "ri"
 
 sealed class BottomNavItem(var title: String, var icon: Int, var screenRoute: String) {
     object TimeOfADay :
-        BottomNavItem("TimeOfADay", R.drawable.ic_account_circle_fill, "TimeOfADay")
+        BottomNavItem("TimeOfADay", R.drawable.ic_remix_time_fill, "TimeOfADay")
 
     object RegularInterval :
-        BottomNavItem("RegularInterval", R.drawable.ic_alipay_fill, "RegularInterval")
+        BottomNavItem("RegularInterval", R.drawable.ic_remix_24_hours_fill, "RegularInterval")
 }
 
 @Composable
@@ -83,34 +85,9 @@ fun Activity.DateTimeEngineScreen() {
             )
         }
 
-    val newAlarmHandle = registerForNavigationResult<NewAlarmResult> { alarm ->
-        viewModel.addAlarm(alarm.alarm)
-    }
-
-    val typeSelectDialogState =
-        rememberSingleChoiceDialogState(title = stringResource(id = R.string.module_profile_rule_new),
-            items = listOf(
-                SingleChoiceItem(
-                    id = ID_TIME_OF_A_DAY,
-                    icon = Icons.Filled.Schedule,
-                    label = stringResource(id = R.string.module_profile_date_time_alarm)
-                ),
-                SingleChoiceItem(
-                    id = ID_REGULAR_INTERVAL,
-                    icon = Icons.Filled.Timer,
-                    label = stringResource(id = R.string.module_profile_date_time_regular_interval)
-                ),
-            ),
-            onItemClick = {
-                when (it) {
-                    ID_REGULAR_INTERVAL -> {
-                        newRegularIntervalHandle.open(NewRegularInterval)
-                    }
-                    ID_TIME_OF_A_DAY -> {
-                        newAlarmHandle.open(NewAlarm)
-                    }
-                }
-            })
+    val alarmDialogState = rememberAlarmSelectorState(selected = {
+        viewModel.addAlarm(it)
+    })
 
     val navController = rememberNavController()
 
@@ -137,16 +114,28 @@ fun Activity.DateTimeEngineScreen() {
                         contentDescription = stringResource(id = R.string.module_profile_rule_new)
                     )
                 }) {
-                typeSelectDialogState.show()
+
+                when (navController.currentBackStackEntry?.destination?.route) {
+                    BottomNavItem.TimeOfADay.screenRoute -> {
+                        alarmDialogState.show()
+                    }
+                    BottomNavItem.RegularInterval.screenRoute -> {
+                        newRegularIntervalHandle.open(NewRegularInterval)
+                    }
+                    else -> {}
+                }
             }
         }) { contentPadding ->
 
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .padding(contentPadding)) {
-            SingleChoiceDialog(state = typeSelectDialogState)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+        ) {
             NavigationGraph(navController = navController, viewModel = viewModel, state = state)
         }
+
+        AlarmSelector(state = alarmDialogState)
     }
 }
 
@@ -164,8 +153,10 @@ private fun NavigationContent(
         items.forEach { item ->
             NavigationBarItem(
                 icon = {
-                    Icon(painterResource(id = item.icon),
-                        contentDescription = item.title)
+                    Icon(
+                        painterResource(id = item.icon),
+                        contentDescription = item.title
+                    )
                 },
                 label = {
                     Text(text = item.title, fontSize = 9.sp)
@@ -196,17 +187,17 @@ fun NavigationGraph(
 ) {
     NavHost(navController, startDestination = BottomNavItem.TimeOfADay.screenRoute) {
         composable(BottomNavItem.TimeOfADay.screenRoute) {
-            WorkList(state = state.workStates) {
-                viewModel.deleteWorkById(it)
-            }
-        }
-
-        composable(BottomNavItem.RegularInterval.screenRoute) {
             AlarmList(state = state.alarms,
                 delete = { viewModel.deleteAlarm(it) },
                 onCheckChange = { record, checked ->
                     viewModel.setAlarmEnabled(record.alarm, checked)
                 })
+        }
+
+        composable(BottomNavItem.RegularInterval.screenRoute) {
+            WorkList(state = state.workStates) {
+                viewModel.deleteWorkById(it)
+            }
         }
     }
 }
@@ -219,66 +210,70 @@ private fun WorkList(
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(state) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-                    .heightIn(min = 64.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column(
+            CardContainer {
+                Row(
                     modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .heightIn(min = 64.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    val typeText = if (it.type == Type.Periodic) {
-                        stringResource(id = R.string.module_profile_date_time_regular_interval)
-                    } else {
-                        "Unknown"
-                    }
-                    val valueText = if (it.type == Type.Periodic) {
-                        it.value.toDuration(DurationUnit.MILLISECONDS).toString()
-                    } else {
-                        ""
-                    }
+                    Column(
+                        modifier = Modifier
+                    ) {
+                        val typeText = if (it.type == Type.Periodic) {
+                            stringResource(id = R.string.module_profile_date_time_regular_interval)
+                        } else {
+                            "Unknown"
+                        }
+                        val valueText = if (it.type == Type.Periodic) {
+                            it.value.toDuration(DurationUnit.MILLISECONDS).toString()
+                        } else {
+                            ""
+                        }
 
-                    Text(
-                        text = typeText, style = MaterialTheme.typography.titleMedium,
-                        maxLines = 1
-                    )
-                    TinySpacer()
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Filled.Tag,
-                            contentDescription = "tag"
-                        )
-                        TinySpacer()
                         Text(
-                            text = it.tag.substring(0, min(18, it.tag.length)),
-                            style = MaterialTheme.typography.labelMedium,
+                            text = typeText, style = MaterialTheme.typography.titleMedium,
                             maxLines = 1
                         )
-                    }
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Filled.Timer,
-                            contentDescription = "interval"
-                        )
                         TinySpacer()
-                        Text(
-                            text = valueText, style = MaterialTheme.typography.labelMedium,
-                            maxLines = 1
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Filled.Tag,
+                                contentDescription = "tag"
+                            )
+                            TinySpacer()
+                            Text(
+                                text = it.tag.substring(0, min(18, it.tag.length)),
+                                style = MaterialTheme.typography.labelMedium,
+                                maxLines = 1
+                            )
+                        }
+
+                        StandardSpacer()
+
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Filled.Timer,
+                                contentDescription = "interval"
+                            )
+                            TinySpacer()
+                            Text(
+                                text = valueText, style = MaterialTheme.typography.labelMedium,
+                                maxLines = 1
+                            )
+                        }
+                    }
+
+                    IconButton(onClick = {
+                        delete(it.id)
+                    }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.module_profile_ic_delete_bin_fill),
+                            contentDescription = "Remove"
                         )
                     }
-                }
-
-                IconButton(onClick = {
-                    delete(it.id)
-                }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.module_profile_ic_delete_bin_fill),
-                        contentDescription = "Remove"
-                    )
                 }
             }
 
@@ -295,79 +290,129 @@ private fun AlarmList(
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(state) { record ->
-            Column(modifier = Modifier
-                .fillMaxWidth()) {
-                Row(
+            CardContainer {
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
-                        .heightIn(min = 64.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Column(
-                        modifier = Modifier.weight(1f, fill = false)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                            .heightIn(min = 64.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        val typeText = stringResource(id = R.string.module_profile_date_time_alarm)
-                        val valueText = record.alarm.triggerAt.toString()
+                        Column(
+                            modifier = Modifier.weight(1f, fill = false)
+                        ) {
+                            val typeText =
+                                stringResource(id = R.string.module_profile_date_time_alarm)
 
-                        Text(
-                            text = typeText, style = MaterialTheme.typography.titleMedium,
-                            maxLines = 1
-                        )
-                        TinySpacer()
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = Icons.Filled.Tag,
-                                contentDescription = "tag"
-                            )
-                            TinySpacer()
+                            val repeatText = if (record.alarm.repeat.isNo) {
+                                "No repeat"
+                            } else if (record.alarm.repeat.isEveryDay) {
+                                "Repeat every day"
+                            } else {
+                                "Repeat at ${
+                                    record.alarm.repeat.days.joinToString(
+                                        " "
+                                    ) {
+                                        getLongLabelForWeekDay(weekDay = it)
+                                    }
+                                }"
+                            }
+
+                            val valueText =
+                                "${record.alarm.triggerAt.toDisplayTime()}\n${repeatText}"
+
                             Text(
-                                text = record.alarm.label.substring(0,
-                                    min(18, record.alarm.label.length)),
-                                style = MaterialTheme.typography.labelMedium,
+                                text = typeText, style = MaterialTheme.typography.titleMedium,
                                 maxLines = 1
                             )
+                            TinySpacer()
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(
+                                    imageVector = Icons.Filled.Tag,
+                                    contentDescription = "tag"
+                                )
+                                TinySpacer()
+                                Text(
+                                    text = record.alarm.label.substring(
+                                        0,
+                                        min(18, record.alarm.label.length)
+                                    ),
+                                    style = MaterialTheme.typography.labelMedium,
+                                    maxLines = 1
+                                )
+                            }
+                            StandardSpacer()
+
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(
+                                    imageVector = Icons.Filled.Timer,
+                                    contentDescription = "Time"
+                                )
+                                TinySpacer()
+                                Text(
+                                    text = valueText, style = MaterialTheme.typography.labelMedium,
+                                )
+                            }
                         }
 
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = Icons.Filled.Timer,
-                                contentDescription = "interval"
-                            )
-                            TinySpacer()
-                            Text(
-                                text = valueText, style = MaterialTheme.typography.labelMedium,
-                                maxLines = 1
-                            )
-                        }
+                        Switch(
+                            modifier = Modifier,
+                            checked = record.isEnabled,
+                            onCheckedChange = { checked ->
+                                onCheckChange(record, checked)
+                            })
                     }
 
-                    Switch(
-                        modifier = Modifier,
-                        checked = record.isEnabled,
-                        onCheckedChange = { checked ->
-                            onCheckChange(record, checked)
-                        })
-                }
-
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 6.dp)) {
-                    IconButton(
+                    Box(
                         modifier = Modifier
-                            .align(Alignment.CenterEnd)
-                            .padding(end = 16.dp),
-                        onClick = {
-                            delete(record)
-                        }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.module_profile_ic_delete_bin_fill),
-                            contentDescription = "Remove"
-                        )
+                            .fillMaxWidth()
+                            .padding(top = 6.dp)
+                    ) {
+                        IconButton(
+                            modifier = Modifier
+                                .align(Alignment.CenterEnd)
+                                .padding(end = 16.dp),
+                            onClick = {
+                                delete(record)
+                            }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.module_profile_ic_delete_bin_fill),
+                                contentDescription = "Remove"
+                            )
+                        }
                     }
                 }
             }
+        }
+    }
+}
+
+private fun TimeOfADay.toDisplayTime(): String {
+    val date = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, hour)
+        set(Calendar.MINUTE, minutes)
+        set(Calendar.SECOND, 0)
+    }.time
+    return DateUtils.formatShortForMessageTime(date.time)
+}
+
+
+private fun getLongLabelForWeekDay(weekDay: WeekDay): String {
+    return when (weekDay) {
+        WeekDay.MONDAY -> "Mon"
+        WeekDay.TUESDAY -> "Tue"
+        WeekDay.WEDNESDAY -> "Wed"
+        WeekDay.THURSDAY -> "Thu"
+        WeekDay.FRIDAY -> "Fri"
+        WeekDay.SATURDAY -> "Sat"
+        WeekDay.SUNDAY -> "Sun"
+        else -> {
+            "N/A"
         }
     }
 }

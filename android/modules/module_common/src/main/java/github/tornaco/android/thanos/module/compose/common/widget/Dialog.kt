@@ -17,15 +17,19 @@
 
 package github.tornaco.android.thanos.module.compose.common.widget
 
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -66,4 +70,43 @@ fun ThanoxAlertDialog(
             usePlatformDefaultWidth = false
         )
     )
+}
+
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun ThanoxDialog(
+    onDismissRequest: () -> Unit,
+    properties: DialogProperties = DialogProperties(),
+    title: @Composable () -> Unit = {},
+    buttons: @Composable RowScope.() -> Unit = {},
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Dialog(onDismissRequest = onDismissRequest,
+        properties = DialogProperties(
+            dismissOnBackPress = properties.dismissOnBackPress,
+            dismissOnClickOutside = properties.dismissOnClickOutside,
+            securePolicy = properties.securePolicy,
+            usePlatformDefaultWidth = false
+        )) {
+        Surface(modifier = Modifier.fillMaxWidth(fraction = 0.82f),
+            shape = AlertDialogDefaults.shape,
+            color = AlertDialogDefaults.containerColor,
+            tonalElevation = AlertDialogDefaults.TonalElevation) {
+
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)) {
+                title()
+                Spacer(modifier = Modifier.size(16.dp))
+                content()
+                Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically) {
+                    buttons()
+                }
+            }
+
+        }
+    }
 }

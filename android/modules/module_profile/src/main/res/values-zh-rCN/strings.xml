@@ -24,7 +24,7 @@
     <string name="module_profile_pref_summary_rule_engine_date_time">安排一些重复或定时任务</string>
     <string name="module_profile_date_time_regular_interval">固定时间间隔</string>
     <string name="module_profile_date_time_alarm">一天中的时间</string>
-    <string name="module_profile_date_time_tag">Tag用于情景模式的条件判断。使用举例：%s</string>
+    <string name="module_profile_date_time_tag">Tag用于情景模式的条件判断。\n使用举例：%s</string>
     <string name="module_profile_date_time_min_interval">当前支持的最短时间间隔为15分钟</string>
 
     <string name="module_profile_rule_edit_action_save">保存</string>

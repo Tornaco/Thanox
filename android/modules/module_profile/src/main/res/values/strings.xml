@@ -24,7 +24,7 @@
     <string name="module_profile_pref_summary_rule_engine_date_time">Schedule some repeating or timed tasks</string>
     <string name="module_profile_date_time_regular_interval">Regular interval</string>
     <string name="module_profile_date_time_alarm">Time of a day</string>
-    <string name="module_profile_date_time_tag">Tag is for condition check. Example of use: %s</string>
+    <string name="module_profile_date_time_tag">Tag is for condition check. \nExample of use: %s</string>
     <string name="module_profile_date_time_min_interval">Min interval is 15m</string>
 
     <string name="module_profile_rule_edit_action_save">Save</string>

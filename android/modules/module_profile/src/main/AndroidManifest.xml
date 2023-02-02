@@ -38,9 +38,6 @@
             android:name=".engine.NewRegularIntervalActivity"
             android:exported="false" />
         <activity
-            android:name=".engine.NewAlarmActivity"
-            android:exported="false" />
-        <activity
             android:name=".example.ProfileExampleActivity"
             android:exported="false" />
         <activity

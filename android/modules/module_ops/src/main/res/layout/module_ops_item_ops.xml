@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -38,14 +39,16 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?selectableItemBackground"
-        android:minHeight="@dimen/common_list_item_height"
-        android:soundEffectsEnabled="false">
+        android:soundEffectsEnabled="false"
+        app:contentPaddingBottom="4dp"
+        app:contentPaddingTop="4dp"
+        tools:cardBackgroundColor="@android:color/holo_blue_bright">
 
         <RelativeLayout
             android:id="@+id/app_item_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/list_item_height">
+            android:minHeight="@dimen/list_item_height_small">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icon"
@@ -89,7 +92,7 @@
                     android:maxLines="30"
                     android:text="@{op.summary}"
                     android:textAppearance="@style/TextAppearance.TileSubTitle"
-                    tools:text="This is summary" />
+                    tools:text="This is summary This is summary This is summary This is summary This is summary This is summary This is summary" />
 
             </RelativeLayout>
         </RelativeLayout>

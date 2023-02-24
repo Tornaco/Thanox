@@ -555,9 +555,10 @@ public class AppOpsManager {
     public static final int OP_GET_INSTALLED_PACKAGES = _OP_THANOX_BASE + 2;
     public static final int OP_QUERY_INTENT_ACTIVITIES = _OP_THANOX_BASE + 3;
     public static final int OP_ANY_LOCATION = _OP_THANOX_BASE + 4;
+    public static final int OP_SENSOR = _OP_THANOX_BASE + 5;
 
     public static final int _OP_ANDROID_LAST = OP_NO_ISOLATED_STORAGE;
-    public static final int _OP_THANOX_LAST = OP_ANY_LOCATION;
+    public static final int _OP_THANOX_LAST = OP_SENSOR;
 
     /**
      * Access to coarse location information.
@@ -959,7 +960,7 @@ public class AppOpsManager {
     /**
      * @hide
      */
-    public static final int _NUM_OP = 105;
+    public static final int _NUM_OP = 106;
 
     /**
      * This optionally maps a permission to an operation.  If there is no permission associated with
@@ -1075,6 +1076,7 @@ public class AppOpsManager {
             null,
             null,
             null,
+            null,
     };
 
     private static final String[] S_OP_TO_STRING = new String[]{
@@ -1180,6 +1182,7 @@ public class AppOpsManager {
             OPSTR_NO_ISOLATED_STORAGE,
 
             "", // Thanox start
+            "",
             "",
             "",
             "",

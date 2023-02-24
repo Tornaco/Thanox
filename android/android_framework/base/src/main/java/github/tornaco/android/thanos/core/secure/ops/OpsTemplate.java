@@ -110,7 +110,9 @@ public class OpsTemplate {
                     AppOpsManager.OP_CHANGE_BRIGHTNESS,
                     AppOpsManager.OP_GET_INSTALLED_PACKAGES,
                     AppOpsManager.OP_GET_PACKAGE_INFO,
-                    AppOpsManager.OP_QUERY_INTENT_ACTIVITIES}
+                    AppOpsManager.OP_QUERY_INTENT_ACTIVITIES,
+                    AppOpsManager.OP_SENSOR,
+            }
     );
 
     // this template should contain all ops which are not part of any other template in

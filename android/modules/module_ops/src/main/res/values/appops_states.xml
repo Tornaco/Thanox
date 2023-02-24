@@ -128,6 +128,7 @@
         <item>Get installed apps</item>
         <item>Query intent(LAUNCHER, usually used to query installed apps) activities</item>
         <item>Access device location</item>
+        <item>Receive sensor event, remember select target app in scoped Xposed framework</item>
     </string-array>
 
     <string-array name="module_ops_app_ops_labels">
@@ -239,6 +240,7 @@
         <item>Get installed apps</item>
         <item>Query intent activities</item>
         <item>Location</item>
+        <item>Receive sensor event</item>
     </string-array>
 
     <integer-array name="module_ops_op_icon">
@@ -349,6 +351,7 @@
         <item>@drawable/module_ops_ic_apps_fill</item>
         <item>@drawable/module_ops_ic_apps_fill</item>
         <item>@drawable/module_ops_ic_map_pin_fill</item>
+        <item>@drawable/module_ops_ic_sensor</item>
 
     </integer-array>
 

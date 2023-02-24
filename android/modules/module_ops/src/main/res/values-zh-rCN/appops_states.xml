@@ -129,6 +129,7 @@
         <item>获取已安装应用</item>
         <item>Query intent(LAUNCHER, 经常用于查询应用列表) activities</item>
         <item>获取您的位置信息</item>
+        <item>接收传感器数据，禁止后应用的摇一摇等依赖传感器的功能将会失效；拒绝该权限需要xposed中勾选该目标应用的作用域</item>
     </string-array>
 
     <string-array name="module_ops_app_ops_labels" tools:ignore="InconsistentArrays">
@@ -240,5 +241,6 @@
         <item>获取已安装应用列表</item>
         <item>查询意图活动</item>
         <item>定位</item>
+        <item>接收传感器数据</item>
     </string-array>
 </resources>

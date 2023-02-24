@@ -129,6 +129,7 @@
         <item>獲取已安裝應用</item>
         <item>Query intent(LAUNCHER, 經常用於查詢應用列表) activities</item>
         <item>获取您的位置信息</item>
+        <item>接收傳感器數據，禁止後應用的搖一搖等依賴傳感器的功能將會失效；拒絕該權限需要xposed中勾選該目標應用的作用域</item>
     </string-array>
 
     <string-array name="module_ops_app_ops_labels" tools:ignore="InconsistentArrays">
@@ -240,5 +241,6 @@
         <item>獲取已安裝應用列表</item>
         <item>查詢意圖活動</item>
         <item>定位</item>
+        <item>接收傳感器數據</item>
     </string-array>
 </resources>

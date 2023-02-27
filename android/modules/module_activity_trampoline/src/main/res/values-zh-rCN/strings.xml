@@ -1,5 +1,6 @@
 <resources>
     <string name="module_activity_trampoline_app_name">移花接木</string>
+    <string name="module_activity_trampoline_app_name_abbr">移花接木</string>
 
     <string name="module_activity_trampoline_app_not_installed">未安装应用</string>
 

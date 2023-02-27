@@ -6,6 +6,7 @@ import java.util.List;
 
 import github.tornaco.android.thanos.core.alarm.Alarm;
 import github.tornaco.android.thanos.core.alarm.AlarmRecord;
+import github.tornaco.android.thanos.core.annotation.Nullable;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import lombok.SneakyThrows;
 
@@ -36,18 +37,45 @@ public class ProfileManager {
     }
 
     @SneakyThrows
-    public void addRule(String author, int versionCode, String ruleString, RuleAddCallback callback, int format) {
-        server.addRule(author, versionCode, ruleString, callback.getStub(), format);
+    public void addRule(String author, int versionCode, String ruleString, @Nullable RuleAddCallback callback, int format) {
+        RuleAddCallback fallbackCallback = callback;
+        if (fallbackCallback == null) {
+            fallbackCallback = new RuleAddCallback();
+        }
+        server.addRule(author, versionCode, ruleString, fallbackCallback.getStub(), format);
     }
 
     @SneakyThrows
-    public void updateRule(int ruleId, String ruleJson, RuleAddCallback callback, int format) {
-        server.updateRule(ruleId, ruleJson, callback.getStub(), format);
+    public void addRule(String author, int versionCode, String ruleString, int format) {
+        addRule(author, versionCode, ruleString, null, format);
     }
 
     @SneakyThrows
-    public void addRuleIfNotExists(String author, int versionCode, String ruleString, RuleAddCallback callback, int format) {
-        server.addRuleIfNotExists(author, versionCode, ruleString, callback.getStub(), format);
+    public void updateRule(int ruleId, String ruleJson, int format) {
+        updateRule(ruleId, ruleJson, null, format);
+    }
+
+    @SneakyThrows
+    public void updateRule(int ruleId, String ruleJson, @Nullable RuleAddCallback callback, int format) {
+        RuleAddCallback fallbackCallback = callback;
+        if (fallbackCallback == null) {
+            fallbackCallback = new RuleAddCallback();
+        }
+        server.updateRule(ruleId, ruleJson, fallbackCallback.getStub(), format);
+    }
+
+    @SneakyThrows
+    public void addRuleIfNotExists(String author, int versionCode, String ruleString, @Nullable RuleAddCallback callback, int format) {
+        RuleAddCallback fallbackCallback = callback;
+        if (fallbackCallback == null) {
+            fallbackCallback = new RuleAddCallback();
+        }
+        server.addRuleIfNotExists(author, versionCode, ruleString, fallbackCallback.getStub(), format);
+    }
+
+    @SneakyThrows
+    public void addRuleIfNotExists(String author, int versionCode, String ruleString, int format) {
+        addRuleIfNotExists(author, versionCode, ruleString, null, format);
     }
 
     @SneakyThrows

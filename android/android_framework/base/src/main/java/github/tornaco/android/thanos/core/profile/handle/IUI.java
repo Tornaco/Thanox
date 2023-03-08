@@ -33,6 +33,11 @@ interface IUI {
                     @NonNull String msg,
                     @Nullable String yes);
 
+    void showDialog(@Nullable String title,
+                    @NonNull String msg,
+                    @Nullable String yes,
+                    @Nullable String no);
+
     void showNotification(
             @NonNull String notificationTag,
             @NonNull String title,

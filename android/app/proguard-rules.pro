@@ -213,3 +213,4 @@
 -keep class * extends androidx.databinding.DataBinderMapper {*;}
 
 -keep class org.jeasy.rules.core.** {*;}
+-keep class org.mvel2.** {*;}

@@ -99,6 +99,13 @@
                         android:layout_marginEnd="@dimen/common_view_margin_small" />
 
                     <include
+                        android:id="@+id/custom_filter_chip_container"
+                        layout="@layout/module_common_filter_chip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/common_view_margin_small" />
+
+                    <include
                         android:id="@+id/sort_chip_container"
                         layout="@layout/module_common_sort_chip"
                         android:layout_width="wrap_content"

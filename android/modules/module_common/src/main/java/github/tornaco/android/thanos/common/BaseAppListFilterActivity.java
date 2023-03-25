@@ -66,6 +66,7 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
         setTitle(getTitleString());
 
         onSetupFilter(binding.filterChipContainer.filterChip);
+        onSetupCustomFilter(binding.customFilterChipContainer.filterChip);
         onSetupSorter(binding.sortChipContainer.sortChip);
 
         onSetupChip(
@@ -259,6 +260,10 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
             });
             menuPopupHelper.show();
         });
+    }
+
+    protected void onSetupCustomFilter(Chip filterAnchor) {
+        filterAnchor.setVisibility(View.GONE);
     }
 
     protected void onSetupChip(

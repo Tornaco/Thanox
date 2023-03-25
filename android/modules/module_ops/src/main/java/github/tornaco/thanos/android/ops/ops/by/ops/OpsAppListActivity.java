@@ -1,7 +1,7 @@
 package github.tornaco.thanos.android.ops.ops.by.ops;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,12 +9,20 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppListModel;
+import github.tornaco.android.thanos.common.CategoryIndex;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
@@ -28,11 +36,12 @@ import github.tornaco.thanos.android.ops.R;
 import github.tornaco.thanos.android.ops.model.Op;
 import github.tornaco.thanos.android.ops.ops.repo.OpsPackageLoader;
 import util.CollectionUtils;
-import util.Consumer;
 
 public class OpsAppListActivity extends CommonAppListFilterActivity {
     private Op op;
     private CommonAppListFilterAdapter appListFilterAdapter;
+
+    private String currentOpsModeFilter = null;
 
     public static void start(Context context, Op op) {
         Bundle data = new Bundle();
@@ -63,9 +72,9 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
 
     private void showModeSelectionDialog(AppInfo appInfo) {
         String[] items = Lists.newArrayList(
-                getString(R.string.module_ops_mode_allow),
-                getString(R.string.module_ops_mode_foreground),
-                getString(R.string.module_ops_mode_ignore))
+                        getString(R.string.module_ops_mode_allow),
+                        getString(R.string.module_ops_mode_foreground),
+                        getString(R.string.module_ops_mode_ignore))
                 .toArray(new String[0]);
         int currentMode = Integer.parseInt(appInfo.getStr());
         int currentSelection = 0;
@@ -128,6 +137,50 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
         return appListFilterAdapter;
     }
 
+    @Override
+    @SuppressLint("RestrictedApi")
+    protected void onSetupCustomFilter(Chip filterAnchor) {
+        List<String> menuItemList = new ArrayList<>();
+        menuItemList.add(getString(R.string.module_ops_mode_allow));
+        menuItemList.add(getString(R.string.module_ops_mode_ignore));
+        menuItemList.add(getString(R.string.module_ops_mode_foreground));
+        menuItemList.add(getString(R.string.module_ops_mode_all));
+
+        currentOpsModeFilter = getString(R.string.module_ops_mode_all);
+        filterAnchor.setText(currentOpsModeFilter);
+
+        filterAnchor.setOnClickListener(view -> {
+            MenuBuilder menuBuilder = new MenuBuilder(this);
+            MenuPopupHelper menuPopupHelper = new MenuPopupHelper(this, menuBuilder, view);
+            menuPopupHelper.setForceShowIcon(true);
+            for (int i = 0; i < menuItemList.size(); i++) {
+                String modeFilter = menuItemList.get(i);
+                MenuItem menuItem = menuBuilder.add(
+                        1000,
+                        i,
+                        Menu.NONE,
+                        modeFilter);
+            }
+            menuBuilder.setCallback(new MenuBuilder.Callback() {
+                @Override
+                public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
+                    int index = item.getItemId();
+                    currentOpsModeFilter = menuItemList.get(index);
+                    filterAnchor.setText(currentOpsModeFilter);
+
+                    viewModel.start();
+                    return true;
+                }
+
+                @Override
+                public void onMenuModeChange(@NonNull MenuBuilder menu) {
+                    // Noop
+                }
+            });
+            menuPopupHelper.show();
+        });
+    }
+
     private void quickSwitch(AppInfo appInfo, int itemIndex) {
         String payload = appInfo.getStr();
         int mode = Integer.parseInt(payload);
@@ -152,7 +205,35 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
     @NonNull
     @Override
     protected CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
-        return new OpsPackageLoader(getApplicationContext(), op);
+        return new OpsPackageLoader(getApplicationContext(), op) {
+            @Override
+            public List<AppListModel> load(@NonNull CategoryIndex index) {
+                List<AppListModel> res = super.load(index);
+                if (currentOpsModeFilter == null || currentOpsModeFilter.equals(getString(R.string.module_ops_mode_all))) {
+                    return res;
+                } else if (currentOpsModeFilter.equals(getString(R.string.module_ops_mode_allow))) {
+                    return res.stream().filter(model -> {
+                        String payload = model.appInfo.getStr();
+                        int mode = Integer.parseInt(payload);
+                        return mode == AppOpsManager.MODE_ALLOWED;
+                    }).collect(Collectors.toList());
+                } else if (currentOpsModeFilter.equals(getString(R.string.module_ops_mode_ignore))) {
+                    return res.stream().filter(model -> {
+                        String payload = model.appInfo.getStr();
+                        int mode = Integer.parseInt(payload);
+                        return mode == AppOpsManager.MODE_IGNORED;
+                    }).collect(Collectors.toList());
+                } else if (currentOpsModeFilter.equals(getString(R.string.module_ops_mode_foreground))) {
+                    return res.stream().filter(model -> {
+                        String payload = model.appInfo.getStr();
+                        int mode = Integer.parseInt(payload);
+                        return mode == AppOpsManager.MODE_FOREGROUND;
+                    }).collect(Collectors.toList());
+                } else {
+                    return res;
+                }
+            }
+        };
     }
 
     @Override

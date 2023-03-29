@@ -5,7 +5,7 @@
     "priority": 2,
     "condition": "fcmPushMessageArrived == true && pkgName == \"org.telegram.plus\"",
     "actions": [
-      "ui.showShortToast(\"Plus messenger 收到了推送，该干啥干啥\"));"
+      "ui.showShortToast(\"Plus messenger 收到了推送\"));"
     ]
   }
 ]

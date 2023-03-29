@@ -13,6 +13,9 @@ public interface INotificationObserver extends android.os.IInterface
     @Override public void onNotificationRemoved(github.tornaco.android.thanos.core.n.NotificationRecord record) throws android.os.RemoteException
     {
     }
+    @Override public void onNotificationUpdated(github.tornaco.android.thanos.core.n.NotificationRecord record) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -82,6 +85,19 @@ public interface INotificationObserver extends android.os.IInterface
           this.onNotificationRemoved(_arg0);
           return true;
         }
+        case TRANSACTION_onNotificationUpdated:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.n.NotificationRecord _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.n.NotificationRecord.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          this.onNotificationUpdated(_arg0);
+          return true;
+        }
         default:
         {
           return super.onTransact(code, data, reply, flags);
@@ -147,10 +163,33 @@ public interface INotificationObserver extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void onNotificationUpdated(github.tornaco.android.thanos.core.n.NotificationRecord record) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((record!=null)) {
+            _data.writeInt(1);
+            record.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_onNotificationUpdated, _data, null, android.os.IBinder.FLAG_ONEWAY);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onNotificationUpdated(record);
+            return;
+          }
+        }
+        finally {
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.n.INotificationObserver sDefaultImpl;
     }
     static final int TRANSACTION_onNewNotification = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_onNotificationRemoved = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+    static final int TRANSACTION_onNotificationUpdated = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.n.INotificationObserver impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -170,4 +209,5 @@ public interface INotificationObserver extends android.os.IInterface
   }
   public void onNewNotification(github.tornaco.android.thanos.core.n.NotificationRecord record) throws android.os.RemoteException;
   public void onNotificationRemoved(github.tornaco.android.thanos.core.n.NotificationRecord record) throws android.os.RemoteException;
+  public void onNotificationUpdated(github.tornaco.android.thanos.core.n.NotificationRecord record) throws android.os.RemoteException;
 }

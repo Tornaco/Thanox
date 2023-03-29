@@ -1,9 +1,9 @@
 [
   {
     "name": "弹幕通知 Danmu notification",
-    "description": "收到通知时用弹幕展示 Show Danmu on notification posted",
+    "description": "收到通知或通知更新时时用弹幕展示 Show Danmu on notification posted or updated",
     "priority": 1,
-    "condition": "notificationAdded && !notification.isForegroundService && pkgName != \"android\"",
+    "condition": "(notificationAdded || notificationUpdated) && !notification.isForegroundService && pkgName != \"android\"",
     "actions": [
       "ui.showDanmu(\"app://\" + pkgName, thanos.pkgManager.getAppInfo(pkgName).appLabel + \" \" + notificationTitle + \"\n\" + notificationContent);"
     ]

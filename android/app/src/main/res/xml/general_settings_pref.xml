@@ -15,6 +15,12 @@
                 app:summary="@string/pref_summary_enable_high_battery_drain_app_reminding"
                 app:title="@string/pref_title_enable_high_battery_drain_app_reminding" />
 
+        <SwitchPreferenceCompat
+            app:key="@string/key_enable_global_white_list"
+            app:persistent="false"
+            app:summary="@string/pref_summary_enable_global_white_list"
+            app:title="@string/pref_title_enable_global_white_list" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

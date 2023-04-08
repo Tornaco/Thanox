@@ -51,16 +51,6 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
             showNetStatPref.setEnabled(false);
         }
 
-        SwitchPreferenceCompat globalWhitelistPref = findPreference(getString(R.string.key_enable_global_white_list));
-        if (thanos.isServiceInstalled()) {
-            globalWhitelistPref.setChecked(thanos.getPkgManager().isProtectedWhitelistEnabled());
-            globalWhitelistPref.setOnPreferenceChangeListener((preference, newValue) -> {
-                boolean checked = (boolean) newValue;
-                thanos.getPkgManager().setProtectedWhitelistEnabled(checked);
-                return true;
-            });
-        }
-
         findPreference(getString(R.string.key_rootless_support)).setVisible(BuildProp.THANOS_BUILD_DEBUG);
         findPreference(getString(R.string.key_rootless_support)).setOnPreferenceClickListener(preference -> {
             if (ServiceBindings.INSTANCE.checkPermission(1)) {

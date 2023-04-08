@@ -13,10 +13,10 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 
-public class PowerSettingsActivity extends BaseTrustedActivity {
+public class GeneralSettingsActivity extends BaseTrustedActivity {
 
     public static void start(Context context) {
-        ActivityUtils.startActivity(context, PowerSettingsActivity.class);
+        ActivityUtils.startActivity(context, GeneralSettingsActivity.class);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class PowerSettingsActivity extends BaseTrustedActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container, new PowerSettingsFragment())
+                    .replace(R.id.container, new GeneralSettingsFragment())
                     .commit();
         }
     }

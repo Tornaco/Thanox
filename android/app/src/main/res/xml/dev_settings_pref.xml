@@ -28,12 +28,6 @@
             app:summary="@string/feature_summary_settings_access_record"
             app:title="@string/feature_title_settings_access_record" />
 
-        <SwitchPreferenceCompat
-            app:key="@string/key_enable_global_white_list"
-            app:persistent="false"
-            app:summary="@string/pref_summary_enable_global_white_list"
-            app:title="@string/pref_title_enable_global_white_list" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/pre_category_general">
+    <PreferenceCategory app:title="@string/nav_title_settings">
         <Preference
             android:key="@string/key_app_ui"
             app:summary="@string/pre_title_ui"
@@ -12,9 +12,9 @@
             app:summary="@string/pre_title_strategy"
             app:title="@string/pre_category_strategy" />
         <Preference
-            android:key="@string/key_power"
-            app:summary="@string/pre_title_power"
-            app:title="@string/pre_category_power" />
+            android:key="@string/key_general"
+            app:summary="@string/key_general"
+            app:title="@string/pre_category_general" />
         <Preference
             android:key="@string/key_data"
             app:summary="@string/pre_title_data"

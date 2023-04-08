@@ -10,6 +10,7 @@
     <string name="key_app_list_item_show_version" translatable="false">key_app_list_item_show_version</string>
 
     <string name="key_developer" translatable="false">key_developer</string>
+    <string name="key_general" translatable="false">key_general</string>
     <string name="key_power" translatable="false">key_power</string>
     <string name="key_enable_logging" translatable="false">key_enable_logging</string>
     <string name="key_show_current_activity" translatable="false">key_show_current_activity</string>

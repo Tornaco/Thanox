@@ -95,7 +95,7 @@
             android:exported="false"
             android:label="@string/pre_title_strategy" />
         <activity
-            android:name=".settings.PowerSettingsActivity"
+            android:name=".settings.GeneralSettingsActivity"
             android:exported="false"
             android:label="@string/pre_title_power" />
         <activity

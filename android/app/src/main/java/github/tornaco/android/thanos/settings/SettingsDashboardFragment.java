@@ -39,8 +39,8 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
             DevSettingsActivity.start(getActivity());
             return true;
         });
-        findPreference(getString(R.string.key_power)).setOnPreferenceClickListener(preference -> {
-            PowerSettingsActivity.start(getActivity());
+        findPreference(getString(R.string.key_general)).setOnPreferenceClickListener(preference -> {
+            GeneralSettingsActivity.start(getActivity());
             return true;
         });
         findPreference(getString(R.string.key_about)).setOnPreferenceClickListener(preference -> {

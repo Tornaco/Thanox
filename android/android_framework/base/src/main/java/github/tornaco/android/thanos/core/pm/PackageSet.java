@@ -1,5 +1,7 @@
 package github.tornaco.android.thanos.core.pm;
 
+import static github.tornaco.android.thanos.core.pm.PrebuiltPkgSetsKt.USER_PACKAGE_SET_ID_USER_WHITELISTED;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -15,6 +17,7 @@ public class PackageSet implements Parcelable {
     private long createAt;
     private List<String> pkgNames;
     private boolean isPrebuilt;
+    private String description;
 
     protected PackageSet(Parcel in) {
         label = in.readString();
@@ -25,14 +28,16 @@ public class PackageSet implements Parcelable {
             pkgNames = new ArrayList<>();
         }
         isPrebuilt = in.readInt() == 1;
+        description = in.readString();
     }
 
-    public PackageSet(String label, String id, long createAt, List<String> pkgNames, boolean isPrebuilt) {
+    public PackageSet(String label, String id, long createAt, List<String> pkgNames, boolean isPrebuilt, String description) {
         this.label = label;
         this.id = id;
         this.createAt = createAt;
         this.pkgNames = pkgNames;
         this.isPrebuilt = isPrebuilt;
+        this.description = description;
     }
 
     public PackageSet() {
@@ -71,6 +76,10 @@ public class PackageSet implements Parcelable {
         return isPrebuilt;
     }
 
+    public boolean isUserWhiteListed() {
+        return USER_PACKAGE_SET_ID_USER_WHITELISTED.equals(id);
+    }
+
     public static final Creator<PackageSet> CREATOR = new Creator<PackageSet>() {
         @Override
         public PackageSet createFromParcel(Parcel in) {
@@ -95,6 +104,7 @@ public class PackageSet implements Parcelable {
         parcel.writeLong(createAt);
         parcel.writeStringList(pkgNames);
         parcel.writeInt(isPrebuilt ? 1 : 0);
+        parcel.writeString(description);
     }
 
     @Override
@@ -127,6 +137,14 @@ public class PackageSet implements Parcelable {
         this.label = label;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getId() {
         return this.id;
     }
@@ -141,12 +159,18 @@ public class PackageSet implements Parcelable {
         private long createAt;
         private List<String> pkgNames;
         private boolean isPrebuilt;
+        private String description;
 
         PackageSetBuilder() {
         }
 
         public PackageSet.PackageSetBuilder label(String label) {
             this.label = label;
+            return this;
+        }
+
+        public PackageSet.PackageSetBuilder description(String description) {
+            this.description = description;
             return this;
         }
 
@@ -171,7 +195,7 @@ public class PackageSet implements Parcelable {
         }
 
         public PackageSet build() {
-            return new PackageSet(label, id, createAt, pkgNames, isPrebuilt);
+            return new PackageSet(label, id, createAt, pkgNames, isPrebuilt, description);
         }
     }
 }

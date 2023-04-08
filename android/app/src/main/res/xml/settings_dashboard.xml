@@ -13,7 +13,7 @@
             app:title="@string/pre_category_strategy" />
         <Preference
             android:key="@string/key_general"
-            app:summary="@string/key_general"
+            app:summary="@string/pre_category_general"
             app:title="@string/pre_category_general" />
         <Preference
             android:key="@string/key_data"

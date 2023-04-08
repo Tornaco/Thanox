@@ -48,6 +48,8 @@
     <string name="service_app_set_web_provider">مزود WebView</string>
     <string name="service_app_set_shortcut_proxy">وكيل صريح</string>
     <string name="service_app_set_white_listed">القائمة البيضاء</string>
+    <string name="service_app_set_white_listed_user">القائمة البيضاء المخصصة</string>
+    <string name="service_app_set_white_listed_user_description">يمكنك تخصيص قائمة بيضاء ، ولن تظهر التطبيقات الموجودة فيها في قائمة التطبيقات في صفحة الميزات</string>
     <string name="service_app_set_disabled">مجمدة</string>
 
     <string name="service_dialog_title_thanox_removed">تم إلغاء تثبيت Thanox</string>

@@ -48,6 +48,8 @@
     <string name="service_app_set_web_provider">WebView提供者</string>
     <string name="service_app_set_shortcut_proxy">快捷代理</string>
     <string name="service_app_set_white_listed">白名单</string>
+    <string name="service_app_set_white_listed_user">自定义白名单</string>
+    <string name="service_app_set_white_listed_user_description">你可以自定义一个白名单，里面的应用不会出现在功能页应用列表中</string>
     <string name="service_app_set_disabled">已冻结</string>
 
     <string name="service_dialog_title_thanox_removed">Thanox已被卸载</string>

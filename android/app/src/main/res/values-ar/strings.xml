@@ -634,6 +634,8 @@
     <string name="service_app_set_system_uid">النظام الأساسي</string>
     <string name="service_app_set_web_provider">WebView مزود</string>
     <string name="service_app_set_white_listed">القائمه المتاحه</string>
+    <string name="service_app_set_white_listed_user">القائمة البيضاء المخصصة</string>
+    <string name="service_app_set_white_listed_user_description">يمكنك تخصيص قائمة بيضاء ، ولن تظهر التطبيقات الموجودة فيها في قائمة التطبيقات في صفحة الميزات</string>
     <string name="service_client_name">العميل %1$s</string>
     <string name="service_default_notification_channel">تقصير</string>
     <string name="service_dialog_button_thanox_removed_keep_data">يحفظ</string>

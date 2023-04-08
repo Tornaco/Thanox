@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import github.tornaco.android.thanos.R;
@@ -131,26 +132,27 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
     @Override
     protected CommonAppListFilterAdapter onCreateCommonAppListFilterAdapter() {
         return new CommonAppListFilterAdapter(
+                // itemViewClickListener
                 (appInfo, itemView) -> PackageSetEditorActivity.start(PackageSetListActivity.this, (String) appInfo.getObj(), REQ_CODE_EDIT),
                 (view, model) -> {
                     AppInfo appInfo = model.appInfo;
-                    boolean isPrebuilt = appInfo.isSelected();
-                    if (!isPrebuilt) {
-                        QuickDropdown.show(thisActivity(), view, index -> {
-                                    switch (index) {
-                                        case 0:
-                                            return getString(R.string.title_package_delete_set);
+                    boolean isEditable = appInfo.isSelected();
+                    if (!isEditable) {
+                        QuickDropdown.show(thisActivity(),
+                                view,
+                                // titleProvider
+                                index -> {
+                                    if (index == 0) {
+                                        return getString(R.string.title_package_delete_set);
                                     }
                                     return null;
                                 },
                                 id -> {
-                                    switch (id) {
-                                        case 0:
-                                            ThanosManager.from(thisActivity())
-                                                    .getPkgManager()
-                                                    .removePackageSet((String) appInfo.getObj());
-                                            viewModel.start();
-                                            break;
+                                    if (id == 0) {
+                                        ThanosManager.from(thisActivity())
+                                                .getPkgManager()
+                                                .removePackageSet((String) appInfo.getObj());
+                                        viewModel.start();
                                     }
                                 });
                     }
@@ -182,11 +184,17 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
                         appInfo.setSelected(packageSet.isPrebuilt());
                         int count = packageSet.getPackageCount();
                         appInfo.setArg1(count);
+
+                        String description = getString(R.string.title_package_count_set, String.valueOf(count));
+                        if (packageSet.getDescription() != null) {
+                            description = description + "\n" + packageSet.getDescription();
+                        }
+
                         res.add(new AppListModel(
                                 appInfo,
                                 packageSet.isPrebuilt() ? prebuiltBadgeStr : null,
                                 null,
-                                getString(R.string.title_package_count_set, String.valueOf(count))));
+                                description));
                     });
             // Sort by time.
             res.sort((o1, o2) -> -Long.compare(o1.appInfo.getArg3(), o2.appInfo.getArg3()));

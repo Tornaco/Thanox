@@ -10,6 +10,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.savedstate.SavedStateRegistryOwner
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.miguelcatalan.materialsearchview.MaterialSearchView
@@ -24,18 +25,19 @@ import github.tornaco.android.thanox.module.notification.recorder.databinding.Mo
 import github.tornaco.android.thanox.module.notification.recorder.source.NotificationRecordRepository
 import github.tornaco.android.thanox.module.notification.recorder.ui.stats.StatsActivity
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 
 class NotificationRecordActivity : ThemeActivity() {
     private lateinit var binding: ModuleNotificationRecorderNrdListLayoutBinding
+
+    val owner: SavedStateRegistryOwner get() = this
 
     override fun isF(): Boolean {
         return true
     }
 
     private val model: NotificationRecordViewModel by viewModels {
-        object : AbstractSavedStateViewModelFactory(this, null) {
+        object : AbstractSavedStateViewModelFactory(owner, null) {
             override fun <T : ViewModel> create(
                 key: String,
                 modelClass: Class<T>,

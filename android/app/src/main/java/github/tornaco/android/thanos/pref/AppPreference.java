@@ -4,8 +4,11 @@ import android.content.Context;
 
 import androidx.preference.PreferenceManager;
 
+import java.util.List;
+
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.BuildProp;
+import github.tornaco.android.thanos.core.pm.PackageSet;
 
 public class AppPreference {
 
@@ -13,6 +16,7 @@ public class AppPreference {
     private static final String PREF_KEY_ON_BOARDING = "PREF_KEY_ON_BOARDING_" + BuildProp.THANOS_BUILD_FINGERPRINT;
     private static final String PREF_KEY_PROCESS_MANAGE_UI_V2 = "PREF_KEY_PROCESS_MANAGE_UI_V2";
     private static final String PREF_KEY_CURRENT_TIP_INDEX = "PREF_KEY_CURRENT_TIP_INDEX";
+    private static final String PREF_KEY_PKG_SET_SORT_PREFIX = "PREF_KEY_PKG_SORT_";
 
     @Verify
     public static boolean isFirstRun(Context context) {
@@ -82,5 +86,20 @@ public class AppPreference {
                 .edit()
                 .putInt(PREF_KEY_CURRENT_TIP_INDEX, index)
                 .apply();
+    }
+
+    public static int getPkgSetSort(Context context, PackageSet packageSet) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt(PREF_KEY_PKG_SET_SORT_PREFIX + packageSet.getId(), Integer.MAX_VALUE);
+    }
+
+    public static void setPkgSetSort(Context context, List<PackageSet> packageSets) {
+        for (int i = 0; i < packageSets.size(); i++) {
+            PackageSet p = packageSets.get(i);
+            PreferenceManager.getDefaultSharedPreferences(context)
+                    .edit()
+                    .putInt(PREF_KEY_PKG_SET_SORT_PREFIX + p.getId(), i * 100)
+                    .apply();
+        }
     }
 }

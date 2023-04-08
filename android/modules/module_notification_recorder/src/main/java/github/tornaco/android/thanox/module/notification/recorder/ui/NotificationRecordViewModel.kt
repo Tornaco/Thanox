@@ -25,7 +25,7 @@ class NotificationRecordViewModel(
 
     init {
         if (!savedStateHandle.contains(KEY_KEYWORD)) {
-            savedStateHandle.set(KEY_KEYWORD, DEFAULT_KEYWORD)
+            savedStateHandle[KEY_KEYWORD] = DEFAULT_KEYWORD
         }
     }
 
@@ -39,7 +39,7 @@ class NotificationRecordViewModel(
 
     fun load(keyword: String) {
         if (!showLoad(keyword)) return
-        savedStateHandle.set(KEY_KEYWORD, keyword)
+        savedStateHandle[KEY_KEYWORD] = keyword
     }
 
     private fun showLoad(keyword: String): Boolean {

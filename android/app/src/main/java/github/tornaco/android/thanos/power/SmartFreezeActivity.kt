@@ -5,18 +5,28 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.Parcelable
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.Fragment
+import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import github.tornaco.android.thanos.BaseFragment
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.databinding.SmartFreezeLayoutBottomNavBinding
+import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
 import github.tornaco.android.thanos.pref.AppPreference
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.android.thanos.util.pleaseReadCarefully
+import kotlinx.parcelize.Parcelize
 
 class SmartFreezeActivity : ThemeActivity() {
     private val viewModel: SmartFreezeBottomNavViewModel by viewModels()
@@ -65,6 +75,45 @@ class SmartFreezeActivity : ThemeActivity() {
             }
         })
 
+        binding.bottomNavigation.selectTab(binding.bottomNavigation.getTabAt(0))
+        binding.composeSort.setContent {
+
+            val darkTheme =
+                if (appTheme.shouldApplyDynamic) isSystemInDarkTheme() else !appTheme.isLight
+            ThanoxTheme(darkTheme) {
+                ProvideWindowInsets {
+                    val context = LocalContext.current
+
+                    val tabSortDialogState =
+                        rememberTabItemSortState(apply = {
+                            viewModel.applySort(context, it)
+                            refreshTabs()
+                        })
+                    TabItemSortDialog(tabSortDialogState)
+
+                    Column {
+                        IconButton(onClick = {
+                            tabSortDialogState.show(viewModel.tabItems)
+                        }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.module_common_ic_outline_sort_24),
+                                contentDescription = "Sort"
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun refreshTabs() {
+        viewModel.getTabs(this)
+        binding.bottomNavigation.removeAllTabs()
+        viewModel.tabItems.forEach {
+            binding.bottomNavigation.addTab(
+                binding.bottomNavigation.newTab().setId(it.id).setText(it.pkgSet.label)
+            )
+        }
         binding.bottomNavigation.selectTab(binding.bottomNavigation.getTabAt(0))
     }
 
@@ -121,7 +170,8 @@ class SmartFreezeActivity : ThemeActivity() {
     }
 }
 
+@Parcelize
 data class TabItem(
     val id: Int,
     val pkgSet: PackageSet,
-)
+) : Parcelable

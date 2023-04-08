@@ -61,6 +61,7 @@
     <string name="common_remember">حصلت</string>
     <string name="common_retry">إعادة المحاولة</string>
     <string name="common_server_error">خطأ الخادم, يرجى المحاولة مرة أخرى لاحقًا.</string>
+    <string name="common_darg_sort">اسحب للترتيب</string>
     <string name="common_sort_by_default">إفتراضي</string>
     <string name="common_sort_by_install_apk_size">حجم التطبيق</string>
     <string name="common_sort_by_install_app_label">أسم التطبيق</string>

@@ -13,13 +13,16 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalTextApi::class)
 @Composable
 fun fontFamilyProductSans() = FontFamily(
-    Font(LocalContext.current.assets, "fonts/google/ProductSansBold.ttf")
+    Font(assetManager = LocalContext.current.assets, path = "fonts/google/ProductSansBold.ttf")
 )
 
 @OptIn(ExperimentalTextApi::class)
 @Composable
 fun fontFamilyJetBrainsMono() = FontFamily(
-    Font(LocalContext.current.assets, "fonts/google/jetbrains/JetBrainsMonoRegular.ttf")
+    Font(
+        assetManager = LocalContext.current.assets,
+        path = "fonts/google/jetbrains/JetBrainsMonoRegular.ttf"
+    )
 )
 
 @Composable

@@ -59,6 +59,7 @@ include(":third_party:apkbuilder")
 include(":third_party:time-duration-picker")
 include(":third_party:remix")
 include(":third_party:compose-color-picker")
+include(":third_party:reorderable")
 
 
 include(":android_framework:base")

@@ -47,6 +47,7 @@
 
     <string name="common_text_wait_a_moment">Wait a moment</string>
 
+    <string name="common_darg_sort">Drag to sort</string>
     <string name="common_sort_reverse">Reverse</string>
     <string name="common_sort_by_default">Default</string>
     <string name="common_sort_by_install_time">Install time</string>

@@ -47,6 +47,7 @@
 
     <string name="common_text_wait_a_moment">稍等一下</string>
 
+    <string name="common_darg_sort">按住拖动排序</string>
     <string name="common_sort_reverse">逆转</string>
     <string name="common_sort_by_default">默认</string>
     <string name="common_sort_by_install_time">安装时间</string>

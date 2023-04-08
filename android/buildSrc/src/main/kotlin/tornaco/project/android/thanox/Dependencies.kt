@@ -8,11 +8,11 @@ object ClassPaths {
     const val gradleBuilderModel = "com.android.tools.build:builder-model:$gradleVersion"
     const val androidToolsCommon = "com.android.tools:common:30.0.1"
 
-    const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0"
+    const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
 }
 
 object Compose {
-    const val composeVersion = "1.2.0"
+    const val composeVersion = "1.4.0"
 
     const val animation = "androidx.compose.animation:animation:$composeVersion"
     const val material = "androidx.compose.material:material:$composeVersion"
@@ -73,7 +73,7 @@ object Libs {
     }
 
     object Hilt {
-        private const val version = "2.42"
+        private const val version = "2.45"
         const val googleAndroidCompiler = "com.google.dagger:hilt-android-compiler:$version"
         const val googleCompiler = "com.google.dagger:hilt-compiler:$version"
         const val testing = "com.google.dagger:hilt-android-testing:$version"

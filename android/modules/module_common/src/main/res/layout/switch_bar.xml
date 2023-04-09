@@ -42,7 +42,6 @@
 
         <github.tornaco.android.thanos.widget.ToggleSwitch
             android:id="@+id/switch_widget"
-            style="@style/SwitchStyleMD.SwitchBar"
             tools:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

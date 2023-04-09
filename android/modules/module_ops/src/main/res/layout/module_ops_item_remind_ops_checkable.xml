@@ -71,7 +71,7 @@
                 android:textAppearance="@style/TextAppearance.TileSubTitle"
                 tools:text="This is summary" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/item_switch"
                 style="@style/SwitchStyleMD"
                 android:layout_width="wrap_content"

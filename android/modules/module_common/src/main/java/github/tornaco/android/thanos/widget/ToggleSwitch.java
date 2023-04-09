@@ -18,11 +18,10 @@ package github.tornaco.android.thanos.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.Switch;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
-public class ToggleSwitch extends SwitchMaterial {
+public class ToggleSwitch extends MaterialSwitch {
 
     private OnBeforeCheckedChangeListener mOnBeforeListener;
 

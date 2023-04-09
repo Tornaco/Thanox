@@ -15,7 +15,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.widget.SwitchBar;
@@ -106,7 +107,7 @@ public class AllOpsListFragment extends Fragment {
                 .getAppOpsManager().isOpsEnabled();
     }
 
-    protected void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(MaterialSwitch switchBar, boolean isChecked) {
         ThanosManager.from(requireContext())
                 .ifServiceInstalled(thanosManager -> thanosManager.getAppOpsManager()
                         .setOpsEnabled(isChecked));

@@ -31,7 +31,8 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.ArrayList;
 
@@ -225,7 +226,7 @@ public class SwitchBar extends FrameLayout
          * @param switchView The Switch view whose state has changed.
          * @param isChecked  The new checked state of switchView.
          */
-        void onSwitchChanged(SwitchMaterial switchView, boolean isChecked);
+        void onSwitchChanged(MaterialSwitch switchView, boolean isChecked);
     }
 
     static class SavedState extends BaseSavedState {

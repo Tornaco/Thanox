@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.savedstate.SavedStateRegistryOwner
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.miguelcatalan.materialsearchview.MaterialSearchView.SearchViewListener
 import github.tornaco.android.thanos.core.app.ThanosManager
@@ -109,7 +109,7 @@ class NotificationRecordActivity : ThemeActivity() {
             )
         )
         switchBar.isChecked = getSwitchBarCheckState()
-        switchBar.addOnSwitchChangeListener { _: SwitchMaterial?, isChecked: Boolean ->
+        switchBar.addOnSwitchChangeListener { _: MaterialSwitch?, isChecked: Boolean ->
             onSwitchBarCheckChanged(
                 isChecked
             )

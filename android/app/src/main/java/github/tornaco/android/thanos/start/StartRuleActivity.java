@@ -19,7 +19,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.BuildProp;
@@ -96,7 +97,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
                 && ThanosManager.from(getApplicationContext()).getActivityManager().isStartRuleEnabled();
     }
 
-    protected void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(MaterialSwitch switchBar, boolean isChecked) {
         ThanosManager.from(getApplicationContext()).getActivityManager().setStartRuleEnabled(isChecked);
     }
 

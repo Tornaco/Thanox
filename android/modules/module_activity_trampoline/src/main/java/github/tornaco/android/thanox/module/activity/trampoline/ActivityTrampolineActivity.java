@@ -34,7 +34,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.common.io.Files;
 import com.nononsenseapps.filepicker.Utils;
 
@@ -128,7 +128,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
                 .isActivityTrampolineEnabled();
     }
 
-    private void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
+    private void onSwitchBarCheckChanged(MaterialSwitch switchBar, boolean isChecked) {
         ThanosManager.from(getApplicationContext())
                 .ifServiceInstalled(thanosManager -> thanosManager.getActivityStackSupervisor()
                         .setActivityTrampolineEnabled(isChecked));
@@ -237,25 +237,25 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
     private void showComponentFromInvalidTips() {
         Toast.makeText(
-                ActivityTrampolineActivity.this,
-                R.string.module_activity_trampoline_add_invalid_from_component
-                , Toast.LENGTH_LONG)
+                        ActivityTrampolineActivity.this,
+                        R.string.module_activity_trampoline_add_invalid_from_component
+                        , Toast.LENGTH_LONG)
                 .show();
     }
 
     private void showComponentToInvalidTips() {
         Toast.makeText(
-                ActivityTrampolineActivity.this,
-                R.string.module_activity_trampoline_add_invalid_to_component
-                , Toast.LENGTH_LONG)
+                        ActivityTrampolineActivity.this,
+                        R.string.module_activity_trampoline_add_invalid_to_component
+                        , Toast.LENGTH_LONG)
                 .show();
     }
 
     private void showComponentEmptyTips() {
         Toast.makeText(
-                ActivityTrampolineActivity.this,
-                R.string.module_activity_trampoline_add_empty_component
-                , Toast.LENGTH_LONG)
+                        ActivityTrampolineActivity.this,
+                        R.string.module_activity_trampoline_add_empty_component
+                        , Toast.LENGTH_LONG)
                 .show();
     }
 

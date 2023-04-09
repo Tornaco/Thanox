@@ -23,7 +23,7 @@ public class DemoWithSwitchActivity extends CommonFuncToggleAppListFilterActivit
     }
 
     @Override
-    protected void onSwitchBarCheckChanged(com.google.android.material.switchmaterial.SwitchMaterial switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(com.google.android.material.materialswitch.MaterialSwitch switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
     }
 

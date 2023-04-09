@@ -173,7 +173,7 @@
                 android:focusable="true"
                 android:minHeight="@dimen/list_item_height">
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
+                <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/item_switch"
                     style="@style/SwitchStyleMD"
                     android:layout_width="wrap_content"

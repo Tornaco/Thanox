@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.List;
@@ -109,6 +110,13 @@ public class CommonDataBindingAdapters {
     @BindingAdapter({"android:switchApp", "android:switchListener"})
     public static void setSwitchAppAndListener(
             SwitchMaterial view, AppInfo appInfo, final AppItemActionListener listener) {
+        view.setOnClickListener(
+                (b) -> listener.onAppItemSwitchStateChange(appInfo, ((Checkable) b).isChecked()));
+    }
+
+    @BindingAdapter({"android:switchApp", "android:switchListener"})
+    public static void setSwitchAppAndListener(
+            MaterialSwitch view, AppInfo appInfo, final AppItemActionListener listener) {
         view.setOnClickListener(
                 (b) -> listener.onAppItemSwitchStateChange(appInfo, ((Checkable) b).isChecked()));
     }

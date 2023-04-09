@@ -19,7 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -116,7 +117,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
                 .isProfileEnabled();
     }
 
-    private void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
+    private void onSwitchBarCheckChanged(MaterialSwitch switchBar, boolean isChecked) {
         ThanosManager.from(getApplicationContext())
                 .ifServiceInstalled(thanosManager -> thanosManager.getProfileManager()
                         .setProfileEnabled(isChecked));

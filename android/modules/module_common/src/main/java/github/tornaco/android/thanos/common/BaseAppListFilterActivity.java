@@ -20,7 +20,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.Comparator;
@@ -152,7 +153,7 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
         return false;
     }
 
-    protected void onSwitchBarCheckChanged(SwitchMaterial switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(MaterialSwitch switchBar, boolean isChecked) {
         // Noop.
     }
 

@@ -9,6 +9,7 @@ import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
     }
 
     @Override
-    protected void onSwitchBarCheckChanged(com.google.android.material.switchmaterial.SwitchMaterial switchBar, boolean isChecked) {
+    protected void onSwitchBarCheckChanged(MaterialSwitch switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
 
         if (isChecked && !BiometricsKt.isBiometricReady(thisActivity())) {

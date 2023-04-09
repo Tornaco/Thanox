@@ -52,6 +52,7 @@ import github.tornaco.android.thanos.BaseFragment;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.apps.AppDetailsActivity;
 import github.tornaco.android.thanos.apps.PackageSetChooserDialog;
+import github.tornaco.android.thanos.apps.PackageSetListActivity;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.sort.AppSort;
@@ -348,6 +349,10 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     private boolean handleOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_settings == item.getItemId()) {
             SmartFreezeSettingsActivity.start(requireActivity());
+            return true;
+        }
+        if (R.id.action_package_set == item.getItemId()) {
+            PackageSetListActivity.start(requireActivity());
             return true;
         }
         if (R.id.action_add == item.getItemId()) {

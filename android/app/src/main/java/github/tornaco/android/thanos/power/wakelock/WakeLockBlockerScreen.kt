@@ -184,6 +184,7 @@ private fun WakeLockList(
         items(state.packageStates) { item ->
             val expandState = remember { mutableStateOf(ExpandableState.Collapsed) }
             ExpandableContainer(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 expandState = expandState,
                 mainContent = {
                     AppInfoItem(item, expandState.value == ExpandableState.Expand, batchSelect)

@@ -17,6 +17,7 @@
 
 package github.tornaco.android.thanos.main
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
@@ -48,8 +49,49 @@ import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribu
 import github.tornaco.android.thanos.module.compose.common.widget.*
 import kotlinx.coroutines.delay
 
+
+@Composable
+private fun NavHeaderContainer(
+    modifier: Modifier = Modifier,
+    expandState: MutableState<ExpandableState>,
+    mainContent: @Composable () -> Unit,
+    expandContent: @Composable () -> Unit,
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center
+    ) {
+        mainContent()
+
+        AnimatedVisibility(visible = expandState.value == ExpandableState.Expand) {
+            expandContent()
+        }
+    }
+
+}
+
 @Composable
 fun NavHeaderContent(
+    modifier: Modifier = Modifier,
+    headerInfo: StatusHeaderInfo,
+    onHeaderClick: () -> Unit
+) {
+    val expandState = remember { mutableStateOf(ExpandableState.Collapsed) }
+    NavHeaderContainer(expandState = expandState,
+        mainContent = {
+            MainNavHeaderContent(
+                modifier = modifier,
+                headerInfo = headerInfo,
+                onHeaderClick = onHeaderClick
+            )
+        },
+        expandContent = {
+            Text(text = "Coming soon~")
+        })
+}
+
+@Composable
+private fun MainNavHeaderContent(
     modifier: Modifier = Modifier,
     headerInfo: StatusHeaderInfo,
     onHeaderClick: () -> Unit,
@@ -90,8 +132,10 @@ fun NavHeaderContent(
                     }
                     Text(
                         text = stringResource(id = R.string.boost_status_running_apps),
-                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp,
-                            fontWeight = W700),
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontSize = 18.sp,
+                            fontWeight = W700
+                        ),
                         color = Color(onSurfaceColor)
                     )
                 }
@@ -160,8 +204,10 @@ private fun CpuProgressBar(
             )
         }
         MediumSpacer()
-        Column(verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             headerInfo.cpu.topNPkgs.forEach {
                 AppCpuUsage(it)
             }

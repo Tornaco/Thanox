@@ -14,9 +14,6 @@ interface IActivityStackSupervisor {
 
     boolean shouldVerifyActivityStarting(in ComponentName componentName, String pkg, String source);
 
-    void verifyActivityStarting(in Bundle options, String pkg, in ComponentName componentName,
-                    int uid, int pid, in IVerifyCallback callback);
-
     String getCurrentFrontApp();
 
     void setAppLockEnabled(boolean enabled);

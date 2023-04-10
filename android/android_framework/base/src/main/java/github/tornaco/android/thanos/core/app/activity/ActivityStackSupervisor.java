@@ -1,9 +1,6 @@
 package github.tornaco.android.thanos.core.app.activity;
 
 import android.content.ComponentName;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.RemoteException;
 
 import java.util.List;
 
@@ -20,10 +17,6 @@ public class ActivityStackSupervisor {
         return supervisor.shouldVerifyActivityStarting(componentName, pkg, source);
     }
 
-    @SneakyThrows
-    public void verifyActivityStarting(Bundle options, String pkg, ComponentName componentName, int uid, int pid, IVerifyCallback callback) {
-        supervisor.verifyActivityStarting(options, pkg, componentName, uid, pid, callback);
-    }
 
     @SneakyThrows
     public String getCurrentFrontApp() {

@@ -171,6 +171,20 @@ public class LicenseHelper {
                         "Copyright (c) 2020 - Present Amr Hesham",
                         new MITLicense()));
 
+        notices.addNotice(
+                new Notice(
+                        "PatternLockView",
+                        "https://github.com/aritraroy/PatternLockView",
+                        null,
+                        new ApacheSoftwareLicense20()));
+
+        notices.addNotice(
+                new Notice(
+                        "PinLockView",
+                        "https://github.com/aritraroy/PinLockView",
+                        null,
+                        new ApacheSoftwareLicense20()));
+
         new LicensesDialog.Builder(Objects.requireNonNull(activity))
                 .setNotices(notices)
                 .setIncludeOwnLicense(true)

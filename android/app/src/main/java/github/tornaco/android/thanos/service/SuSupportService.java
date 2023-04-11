@@ -31,6 +31,7 @@ public class SuSupportService extends Service {
                         .getProfileManager()
                         .getCustomSuCommand();
                 if (!TextUtils.isEmpty(customCommand)) {
+                    XLog.i("Custom SuSupportService, su " + customCommand);
                     Shell shell = Shell.newInstance(customCommand);
                     Shell.Result result = shell.newJob().add(command).exec();
                     XLog.w("Custom SuSupportService, su: %s, exe: %s, result: %s", customCommand, Arrays.toString(command), result);

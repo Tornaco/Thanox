@@ -14,6 +14,9 @@
     <string name="module_profile_pref_summary_rule_engine_su">为Thanox情景模式启用su API支持，请在弹出的超级权限授予请求中点击允许，如果未收到请求，请手动打开超级用户权限。
         \nsu命令将会以Thanox应用的身份执行。\n要使用su，请允许Thanox应用自启</string>
     <string name="module_profile_pref_title_rule_engine_su">su API</string>
+    <string name="module_profile_pref_title_rule_engine_custom_su">自定义su</string>
+    <string name="module_profile_pref_summary_rule_engine_custom_su">输入自定义的su路径以设置情景模式执行su命令时使用的命令</string>
+
     <string name="module_profile_should_enable_su">这条情景模式可能需要打开<b>su API</b>才能工作, 请进入引擎设置中开启</string>
     <string name="module_profile_should_enable_push">这条情景模式可能需要打开<b>推送消息引擎</b>才能工作, 请进入引擎设置中开启</string>
     <string name="module_profile_miss_global_var">这条情景模式需要创建如下全局变量才能工作。\n%s</string>

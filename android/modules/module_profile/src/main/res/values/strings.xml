@@ -13,6 +13,9 @@
 
     <string name="module_profile_pref_title_rule_engine_su">su API</string>
     <string name="module_profile_pref_summary_rule_engine_su">Enable su API support for Thanox profile. please click Allow in the pop-up super permission grant request. If no request is received, please manually turn on the super user permission. \nsu command will be executed as Thanox application. \nPlease allow Thanox app to start in background</string>
+    <string name="module_profile_pref_title_rule_engine_custom_su">Custom su</string>
+    <string name="module_profile_pref_summary_rule_engine_custom_su">You can change default su path by input the custom su path</string>
+
     <string name="module_profile_should_enable_su">This profile may not work since <b>su API</b> support not enabled, please go to Engine Settings to enable it</string>
     <string name="module_profile_should_enable_push">This profile may not work since <b>Push Message Engine</b> not enabled, please go to Engine Settings to enable it</string>
     <string name="module_profile_miss_global_var">This profile may not work since below global var is missing, you need to create these vars.\n%s</string>

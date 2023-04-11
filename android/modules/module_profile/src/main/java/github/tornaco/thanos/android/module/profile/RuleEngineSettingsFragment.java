@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -14,6 +15,7 @@ import java.util.Objects;
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.widget.EditTextDialog;
 import github.tornaco.thanos.android.module.profile.engine.DateTimeEngineActivity;
 import github.tornaco.thanos.android.module.profile.engine.danmu.DanmuUISettingsActivity;
 
@@ -38,6 +40,30 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
         suPref.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean value = (boolean) newValue;
             thanos.getProfileManager().setShellSuSupportInstalled(value);
+            return true;
+        });
+
+        Preference customSuPref = findPreference(getString(R.string.module_profile_pref_key_rule_engine_custom_su));
+
+        Runnable updateSummary = () -> {
+            String customSu = thanos.getProfileManager().getCustomSuCommand();
+            if (customSu != null) {
+                customSuPref.setSummary(thanos.getProfileManager().getCustomSuCommand()
+                        + "\n"
+                        + getString(R.string.module_profile_pref_summary_rule_engine_custom_su));
+            }
+        };
+        updateSummary.run();
+
+        customSuPref.setOnPreferenceClickListener(preference -> {
+            EditTextDialog.show(requireActivity(),
+                    getString(R.string.module_profile_pref_title_rule_engine_custom_su),
+                    thanos.getProfileManager().getCustomSuCommand(),
+                    newValue -> {
+                        thanos.getProfileManager().setCustomSuCommand(newValue);
+                        updateSummary.run();
+                    });
+
             return true;
         });
 

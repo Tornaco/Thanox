@@ -89,9 +89,4 @@ dependencies {
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
 
-
-    implementation(files("libs/flyme_fingerprint.jar"))
-
-    implementation(project(":third_party:pinlockview"))
-    implementation(project(":third_party:patternlockview"))
 }

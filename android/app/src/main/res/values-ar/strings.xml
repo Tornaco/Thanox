@@ -5,21 +5,23 @@
     <string name="activity_title_bg_restrict">تشغيل التطبيق في الخلفية</string>
     <string name="activity_title_clean_when_task_removed">تنظيف المهام</string>
     <string name="activity_title_data_cheat">التخفي</string>
-    <string name="activity_title_process_manage">تشغيل（%s）</string>
+    <string name="activity_title_process_manage">تشغيل（%s)</string>
     <string name="activity_title_start_restrict">تبدأ الخلفية</string>
     <string name="app_name">Thanox</string>
     <string name="app_picker_title">اختر التطبيق</string>
     <string name="app_state_disabled">معطلة</string>
     <string name="background_process_stop_description">هذه هي عملية التطبيق القديمة, التي لا تزال تعمل, فقط في حالة.لا ينصح بالتوقف عادة.</string>
-    <string name="badge_app_idle">عطل عن العمل</string>
+    <string name="badge_app_idle">تعطل عن العمل</string>
     <string name="badge_app_running">ادارة</string>
     <string name="badge_framework_err">خطأ</string>
     <string name="badge_paid_app">مدفوع</string>
     <string name="badge_power_save_off">بطارية</string>
     <string name="badge_trying_app">شراء</string>
-    <string name="billing_state_row_not_trust_message">قد تأتي Thanox من عمليات تثبيت غير موثوق بها, ولا تتوفر إصدارات Pro إلا في متجر Google Play, ويجب عدم تثبيتها من أي مصدر آخر.\n\nملاحظة: يمكن أن تتسبب التركيبات غير الموثوقة في أن تصبح الأجهزة عالقة بشكل غير طبيعي, وفقدان بيانات التكوين !!!</string>
+    <string name="billing_state_row_not_trust_message">قد تأتي Thanox من عمليات تثبيت غير موثوق بها, ولا تتوفر إصدارات Pro إلا في متجر Google Play, ويجب عدم تثبيتها من أي مصدر آخر.
+
+ملاحظة: يمكن أن تتسبب التركيبات غير الموثوقة في أن تصبح الأجهزة عالقة بشكل غير طبيعي, وفقدان بيانات التكوين !!!</string>
     <string name="billing_state_row_not_trust_title">غير متكرر</string>
-    <string name="boost_status_available">متاح %s</string>
+    <string name="boost_status_available">متوفر %s</string>
     <string name="boost_status_blocked_start_count">طلبات بدء تشغيل تطبيق %s.</string>
     <string name="boost_status_mem_usage_percent">استخدام ذاكرة %s</string>
     <string name="boost_status_not_enabled">غير مفعل</string>
@@ -28,16 +30,14 @@
     <string name="boost_status_system_memory">ذاكرة</string>
     <string name="boost_status_system_storage">تخزين</string>
 
-    <string name="cached">مخبأ</string>
+    <string name="cached">المخزنة مؤقتًا</string>
     <string name="card_message_plugin_available">يتكون البرنامج المساعد من بعض الوظائف غير المستقرة أو غير الحرجة.</string>
     <string name="card_title_plugin_available">تثبيت البرنامج المساعد Thanox</string>
-
     <string name="cheat_field_auto_gen">املأ بحقول عشوائية</string>
     <string name="chip_title_app_only_cloned_app">استنساخ</string>
     <string name="chip_title_app_only_disabled">عاجز</string>
     <string name="chip_title_app_only_enable">تمكين</string>
     <string name="chip_title_app_only_running">ادارة</string>
-
     <string name="common_badge_text_experiment">إكسب</string>
     <string name="common_dialog_message_are_you_sure">هل أنت واثق؟يعتني!</string>
     <string name="common_experiment_feature_warning_message">هذه الميزة هي ميزة تجريبية وليست مستقرة بعد.يوصى باستخدام بياناتك احتياطيًا قبل تمكين هذه الميزة لمنع فقدان البيانات بسبب الأخطاء غير المتوقعة.</string>
@@ -61,7 +61,6 @@
     <string name="common_remember">حصلت</string>
     <string name="common_retry">إعادة المحاولة</string>
     <string name="common_server_error">خطأ الخادم, يرجى المحاولة مرة أخرى لاحقًا.</string>
-    <string name="common_darg_sort">اسحب للترتيب</string>
     <string name="common_sort_by_default">إفتراضي</string>
     <string name="common_sort_by_install_apk_size">حجم التطبيق</string>
     <string name="common_sort_by_install_app_label">أسم التطبيق</string>
@@ -78,11 +77,23 @@
     <string name="common_tips">نصائح</string>
     <string name="common_tips_qut">نصائح:</string>
     <string name="common_toast_copied_to_clipboard">نسخ إلى الحافظة</string>
-
+    <string name="confirm_device_credential_password">استخدام كلمة المرور</string>
+    <string name="copy">نسخ</string>
+    <string name="copy_toast_msg">تم نسخ الرابط إلى الحافظة.</string>
+    <string name="default_error_message">إدخال غير صالح</string>
+    <string name="default_error_msg">خطأ غير معروف</string>
+    <string name="default_popup_window_title">نافذة منبثقة</string>
     <string name="device_admin_description">مسؤول الجهاز من thanox لانهائي الملف الشخصي.</string>
     <string name="dialog_message_battery_drain_fast_by_thanox">تقوم Thanox بتشغيل سجلات التمهيد وسجلات الوصول إلى الإذن والسجلات المخفية.سيتم حفظ هذه البيانات في الملفات في الوقت الفعلي, مما قد يسرع استهلاك الطاقة.يوصى بتمكين وضع توفير الطاقة عند الطلب.</string>
     <string name="dialog_message_create_shortcut_apk">قم بإنشاء stub stub APK, يمكنك تثبيت هذا التطبيق كحل بديل من أيقونة قاذفة لتطبيقات تعطيل</string>
-    <string name="dialog_message_feedback">يرجى الانتقال إلى مجموعة دردشة التطبيق أو github/tornaco/Thanox وإنشاء مشكلة.\n\nيرجى تضمين المعلومات التالية عند الإبلاغ عن مشكلة：\n\n1. وصف المشكلة：xxxx \n2. ما الذي حاولت فعله لحل المشكلة ， على سبيل المثال （لا يعمل تطبيق التطبيق الذكي - حاولت قراءة دليل الاستخدام ، وفتح xxx في إعدادات النظام. \n3. إصدار تطبيق Thanox حيث حدثت المشكلة ، وإصدار Android. \n4. البحث ： سجلات تحت /data/system/thanos/logging. </string>
+    <string name="dialog_message_feedback">يرجى الانتقال إلى مجموعة دردشة التطبيق أو github/tornaco/Thanox وإنشاء مشكلة.
+
+يرجى تضمين المعلومات التالية عند الإبلاغ عن مشكلة：
+
+1. وصف المشكلة：xxxx
+2. ما الذي حاولت فعله لحل المشكلة ， على سبيل المثال （لا يعمل تطبيق التطبيق الذكي - حاولت قراءة دليل الاستخدام ، وفتح xxx في إعدادات النظام.
+3. إصدار تطبيق Thanox حيث حدثت المشكلة ، وإصدار Android.
+4. البحث ： سجلات تحت /data/system/thanos/logging.</string>
     <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">تعمل هذه الميزة فقط إذا تم تمكين البطارية التكيفية @Aandroid PIE+.</string>
     <string name="dialog_title_battery_drain_fast_by_thanox">استنزاف البطارية</string>
     <string name="dialog_title_plugin_installing">تثبيت الاضافات</string>
@@ -90,11 +101,21 @@
     <string name="dialog_title_plugin_uninstalling">إلغاء تثبيت البرنامج المساعد</string>
     <string name="dialog_title_plugin_updating">تحديث البرنامج المساعد</string>
     <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">تمكين البطارية التكيفية</string>
-
+    <string name="dropdown_menu">قائمة منسدلة</string>
+    <string name="error_a11y_label">Error: invalid</string>
+    <string name="error_icon_content_description">خطأ</string>
+    <string name="expand_button_title">إعدادات متقدمة</string>
     <string name="export_patch_export_magisk">يصدّر</string>
-    <string name="export_patch_message">Thanox دعم كل من Xposed و Magisk.\n\n بالنسبة للمستخدم Xposed, يمكنك فقط تحديد Thanox والتحقق منه في صفحة تكوين وحدة App App Xposed.\n\nبالنسبة لمستخدم Magisk, يمكنك إعادة تسمية Thanox APK من .APK إلى .zip ثم التثبيت في Magisk Manager, أو إذا لم تتمكن من العثور على APK الذي تم تنزيله, فلدينا أيضًا خيار لتصدير الرمز البريدي للتصحيح إلى التخزين الخارجي المحلي.</string>
-    <string name="export_patch_title">تصحيح التصحيح</string>
+    <string name="export_patch_message">Thanox دعم كل من Xposed و Magisk.
 
+ بالنسبة للمستخدم Xposed, يمكنك فقط تحديد Thanox والتحقق منه في صفحة تكوين وحدة App App Xposed.
+
+بالنسبة لمستخدم Magisk, يمكنك إعادة تسمية Thanox APK من .APK إلى .zip ثم التثبيت في Magisk Manager, أو إذا لم تتمكن من العثور على APK الذي تم تنزيله, فلدينا أيضًا خيار لتصدير الرمز البريدي للتصحيح إلى التخزين الخارجي المحلي.</string>
+    <string name="export_patch_title">تصحيح التصحيح</string>
+    <string name="exposed_dropdown_menu_content_description">عرض القائمة المنسدلة</string>
+    <string name="fallback_menu_item_copy_link">نسخ الرابط</string>
+    <string name="fallback_menu_item_open_in_browser">فتح في المتصفح</string>
+    <string name="fallback_menu_item_share_link">مشاركة الرابط</string>
     <string name="feature_category_app_clean_up">ينظف</string>
     <string name="feature_category_app_manage">تطبيقات</string>
     <string name="feature_category_apps">تطبيقات</string>
@@ -102,7 +123,7 @@
     <string name="feature_category_manage">إدارة</string>
     <string name="feature_category_misc">متفرقات</string>
     <string name="feature_category_notification">تنبيه</string>
-    <string name="feature_category_plugins">الميزات المتاحة</string>
+    <string name="feature_category_plugins">الميزات المتوفر</string>
     <string name="feature_category_power_save">توفير الطاقة</string>
     <string name="feature_category_privacy">خصوصية</string>
     <string name="feature_category_protect">الحماية</string>
@@ -115,64 +136,95 @@
     <string name="feature_desc_data_cheat">إخفاء معلومات SIM, معرف التسلسلي وما إلى ذلك, يرجى تمكين نطاق التثبيت xposed للتطبيق المحدد</string>
     <string name="feature_desc_smart_app_freeze">ملاحظة: يستخدم تجميد التطبيق ميزة Android المدمجة.هذا يعني أنه حتى لو تم إلغاء تثبيت Thanox, فستظل هذه الآثار.</string>
     <string name="feature_desc_start_restrict">السماح للتطبيقات بالبدء من الخلفية</string>
-    <string name="feature_message_infinite_z_disable">سوف يحذف جميع بيانات مستخدم استنساخ التطبيق ولا يمكن استرداده.هل أنت متأكد من أنك تريد تعطيل استنساخ التطبيق؟</string>
-    <string name="feature_message_infinite_z_enable">يتم تنفيذ استنساخ التطبيق بناءً على آلية Android Multi-User.لتمكين استنساخ التطبيق, سيقوم Thanox بإنشاء ملف تعريف المستخدم.عادة, سيتم عرض علامة تبويب العمل على المشغل.\nهذه الميزة تجريبية حاليًا وليست مستقرة بعد.\n\nهل تريد تمكين هذا؟</string>
-    <string name="feature_message_infinite_z_uninstall">هل أنت متأكد أنك تريد إلغاء التثبيت %s? سيتم حذف بيانات التطبيق المستنسخ ولا يمكن استرداده</string>
+    <string name="feature_message_infinite_z_disable">سوف يحذف جميع بيانات مستخدم استنساخ التطبيق ولا يمكن إسترجاع.هل أنت متأكد من أنك تريد تعطيل استنساخ التطبيق؟</string>
+    <string name="feature_message_infinite_z_enable">يتم تنفيذ استنساخ التطبيق بناءً على آلية Android Multi-User.لتمكين استنساخ التطبيق, سيقوم Thanox بإنشاء ملف تعريف المستخدم.عادة, سيتم عرض علامة تبويب العمل على المشغل.
+هذه الميزة تجريبية حاليًا وليست مستقرة بعد.
+
+هل تريد تمكين هذا؟</string>
+    <string name="feature_message_infinite_z_uninstall">هل أنت متأكد أنك تريد إلغاء التثبيت %s? سيتم حذف بيانات التطبيق المستنسخ ولا يمكن إسترجاع</string>
     <string name="feature_summary_app_lock">إظهار واجهة القفل قبل إطلاق التطبيق</string>
     <string name="feature_summary_apps_manager">لكل تطبيق إدارة وتكوين</string>
     <string name="feature_summary_enable_package_on_launch">تطبيق التجربة على طلب إطلاق النشاط</string>
     <string name="feature_summary_light_on_notification">تضيء الشاشة على إشعار جديد</string>
-    <string name="feature_summary_pkg_data_cheat">التخفي</string>
+    <string name="feature_summary_pkg_data_cheat">إخفاء حزم البيانات</string>
     <string name="feature_summary_recent_task_blur">أضف تأثير ضبابية إلى المهام الأخيرة</string>
     <string name="feature_summary_settings_access_record">عرض إعدادات النظام اكتب وقراءة السجلات.عادةً ما يجب عليك تحديد الإعدادات ومزود الإعدادات وتطبيق مدير آمن في نطاق XPosed.</string>
     <string name="feature_summary_smart_app_freeze">تعطيل التطبيقات التلقائية حسب الملف الشخصي</string>
     <string name="feature_summary_smart_app_standby">يؤثر على التطبيق المحدد.عندما يعود التطبيق إلى الخلفية, فإنه سيوقف جميع الخدمات تلقائيًا أو يضعها في وضع الخمول ؛إذا كانت هناك حاجة إلى استبعاد أي خدمة, فيرجى استخدام القواعد المخصصة.</string>
-    <string name="feature_summary_smart_app_standby_brief">توقف الخدمة أو غير نشطة لتطبيقات BG</string>
-    <string name="feature_summary_standby_restrict_rules">يمكنك التحكم في الاحتفاظ بخدمات معينة, والاستخدام: احتفظ باسم مكون $\nعلى سبيل المثال الحفاظ على xxx/.xservice</string>
-    <string name="feature_summary_start_restrict_rules">يمكنك تحسين الجمعية بدء السيطرة من خلال وضع القواعد.للحصول على التفاصيل, يرجى الرجوع إلى دليل المبتدئ.\n\nملاحظة: أولوية القاعدة أكبر من جميع الإعدادات الأخرى (على سبيل المثال, Greening, قائمة بدء التشغيل المرتبطة).\n\n نصيحة: قد يؤدي إيقاف تشغيل فحص القاعدة إلى توفير طاقة الجهاز.</string>
+    <string name="feature_summary_smart_app_standby_brief">إيقاف الخدمة أو غير نشط لتطبيقات BG</string>
+    <string name="feature_summary_standby_restrict_rules">يمكنك التحكم في الاحتفاظ بخدمات معينة, والاستخدام: احتفظ باسم مكون $
+على سبيل المثال الحفاظ على xxx/.xservice</string>
+    <string name="feature_summary_start_restrict_rules">يمكنك تحسين الجمعية بدء السيطرة من خلال وضع القواعد.للحصول على التفاصيل, يرجى الرجوع إلى دليل المبتدئ.
+
+ملاحظة: أولوية القاعدة أكبر من جميع الإعدادات الأخرى (على سبيل المثال, Greening, قائمة بدء التشغيل المرتبطة).
+
+ نصيحة: قد يؤدي إيقاف تشغيل فحص القاعدة إلى توفير طاقة الجهاز.</string>
     <string name="feature_title_app_lock">قفل التطبيقات</string>
     <string name="feature_title_apps_manager">مدير التطبيق</string>
     <string name="feature_title_bg_restrict">العمل في الخلفية</string>
     <string name="feature_title_bg_restrict_abbr">العمل في الخلفية</string>
     <string name="feature_title_clean_when_task_removed">مهام التنظيف</string>
-    <string name="feature_title_data_cheat">التخفي</string>
+    <string name="feature_title_data_cheat">إخفاء البيانات</string>
     <string name="feature_title_enable_package_on_launch">تمكين الحزمة عند الإطلاق</string>
-    <string name="feature_title_infinite_z">استنساخ التطبيق</string>
-    <string name="feature_title_light_on_notification">الاشعارات إضاءة</string>
+    <string name="feature_title_infinite_z">استنساخ التطبيقات</string>
+    <string name="feature_title_light_on_notification">إضاءة عند الاشعارات</string>
     <string name="feature_title_one_key_boost">تنظيف دفعة واحدة</string>
     <string name="feature_title_one_key_boost_abbr">تنظيف دفعة واحدة</string>
     <string name="feature_title_process_manage">مدير العملية</string>
     <string name="feature_title_push_delegate">دفع مندوب</string>
-    <string name="feature_title_recent_task_blur">مهام طمس</string>
+    <string name="feature_title_recent_task_blur">تمويه المهمة</string>
     <string name="feature_title_settings_access_record">سجلات الوصول إلى الإعدادات</string>
     <string name="feature_title_smart_app_freeze">تجميد ذكي</string>
-    <string name="feature_title_smart_app_standby">وضع تعليق</string>
+    <string name="feature_title_smart_app_standby">تعليق الوضع</string>
     <string name="feature_title_start_restrict">بدء التشغيل</string>
-    <string name="feature_title_start_restrict_abbr">بدء التشغيل</string>
+    <string name="feature_title_start_restrict_abbr">أختصار بدء تشغيل</string>
     <string name="feature_title_wakelock_blocker">قفل مانع استيقظ</string>
-
+    <string name="fingerprint_dialog_icon_description">رمز بصمة الإصبع</string>
+    <string name="fingerprint_dialog_touch_sensor">المس زر استشعار بصمة الإصبع</string>
+    <string name="fingerprint_error_hw_not_available">جهاز بصمة الإصبع غير متوفرة.</string>
+    <string name="fingerprint_error_hw_not_present">لا يحتوي هذا الجهاز على جهاز استشعار بصمات الأصابع.</string>
+    <string name="fingerprint_error_lockout">تم إجراء محاولات كثيرة جدًا. يُرجى المحاولة مرة أخرى لاحقًا.</string>
+    <string name="fingerprint_error_no_fingerprints">ليست هناك بصمات إصبع مسجَّلة.</string>
+    <string name="fingerprint_error_user_canceled">تم إلغاء تشغيل بصمة الإصبع بواسطة المستخدم.</string>
+    <string name="fingerprint_not_recognized">لم يتم التعرف عليها.</string>
     <string name="fuzzydatetime__now">الآن</string>
-
+    <string name="generic_error_no_device_credential">لم يتم ضبط رقم تعريف شخصي أو نقش أو كلمة مرور.</string>
+    <string name="generic_error_no_keyguard">هذا الجهاز لا يتيح استخدام رقم تعريف شخصي أو نقش أو كلمة مرور.</string>
+    <string name="generic_error_user_canceled">ألغى المستخدم المصادقة.</string>
     <string name="heavy_weight_stop_description">لا يمكن إيقاف التطبيق بأمان.إذا توقفت بالقوة, فقد تضيع بعض عملك الحالي.</string>
-
+    <string name="icon_content_description">رمز مربع الحوار</string>
+    <string name="in_progress">في تَقَدم</string>
+    <string name="indeterminate">لم يتم وضع علامة أو إزالتها</string>
     <string name="info_message_bg_restrict">سيتم مسح عملية الخلفية إذا تم قفل الشاشة</string>
     <string name="info_message_start_restrict">منع التطبيقات من الخلفية</string>
     <string name="info_title_bg_restrict">نصائح</string>
-    <string name="info_title_start_restrict">نصائح</string>
+    <string name="info_title_start_restrict">إقراء نصائح</string>
     <string name="item_summary_mem_size">%s</string>
     <string name="item_summary_process_count">%s العمليات</string>
-
-
+    <string name="item_view_role_description">علامة تبويب</string>
     <string name="lvl_check_not_ok">باءت بالفشل.</string>
     <string name="lvl_check_ok">انت جيد.</string>
     <string name="lvl_check_skip_for_now">حاول لاحقا</string>
     <string name="lvl_checking">التحقق من الترخيص من متجر Play</string>
     <string name="lvl_unlicensed_dialog_body">هذا التطبيق غير مرخص.</string>
-    <string name="lvl_unlicensed_dialog_error_tips">1. يرجى التحقق من حالة الشبكة لجهازك للتأكد من أنه يمكنك الوصول إلى متجر Google Play\n 2. يرجى التحقق من إطار خدمة Google الخاص بك للتأكد من تمكينه\n 3. يرجى التحقق مما إذا كان حساب Google الخاص بك قد تم تسجيل الدخول بشكل صحيح</string>
-    <string name="lvl_unlicensed_dialog_retry_body">غير قادر على التحقق من صحة الترخيص.تحقق لمعرفة ما إذا كان اتصال الشبكة متاحًا.</string>
-
+    <string name="lvl_unlicensed_dialog_error_tips">1. يرجى التحقق من حالة الشبكة لجهازك للتأكد من أنه يمكنك الوصول إلى متجر Google Play
+ 2. يرجى التحقق من إطار خدمة Google الخاص بك للتأكد من تمكينه
+ 3. يرجى التحقق مما إذا كان حساب Google الخاص بك قد تم تسجيل الدخول بشكل صحيح</string>
+    <string name="lvl_unlicensed_dialog_retry_body">غير قادر على التحقق من صحة الترخيص.تحقق لمعرفة ما إذا كان اتصال الشبكة متوفرة.</string>
     <string name="main_running_process_description">باستخدام العملية الرئيسية.</string>
-
+    <string name="material_clock_display_divider">:</string>
+    <string name="material_clock_toggle_content_description">يُرجى اختيار صباحًا أو مساءً.</string>
+    <string name="material_hour_selection">تحديد الساعة</string>
+    <string name="material_hour_suffix">الساعة %1$s</string>
+    <string name="material_minute_selection">تحديد الدقائق</string>
+    <string name="material_minute_suffix">%1$s دقيقة</string>
+    <string name="material_timepicker_am">صباحًا</string>
+    <string name="material_timepicker_clock_mode_description">يُرجى التبديل إلى وضع الساعة لإدخال الوقت.</string>
+    <string name="material_timepicker_hour">الساعة</string>
+    <string name="material_timepicker_minute">دقيقة</string>
+    <string name="material_timepicker_pm">مساءً</string>
+    <string name="material_timepicker_select_time">اختيار الوقت</string>
+    <string name="material_timepicker_text_input_mode_description">يُرجى التبديل إلى وضع إدخال النص لإدخال الوقت.</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps">هل سيتخلص من جميع التطبيقات المعطلة أو المعلقة على جهازك, بما في ذلك جميع تطبيقات النظام المثبت أو النظام, هل أنت متأكد من أنك تريد القيام بذلك؟</string>
     <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">إزالة تجميد جميع التطبيقات مؤقتًا في قائمة التجميد الذكي, هل أنت متأكد من أنك تريد القيام بذلك؟</string>
     <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">إزالة تجميد جميع تطبيقات التجميد الذكي وإزالتها من قائمة التجميد الذكي.هل انت متأكد من أنك تريد أن تفعل هذا؟</string>
@@ -199,8 +251,16 @@
     <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">إظهار فقط تلك الخاصة بالتطبيق الحالي</string>
     <string name="menu_title_uninstall_plugin">الغاء التثبيت</string>
     <string name="menu_title_view_plugin_info">تفاصيل</string>
-    <string name="message_active_needed">Thanox دعم كل من Xposed و Magisk.\n\n بالنسبة للمستخدم Xposed (لا يمكن استخدام وحدة Xposed و Magisk Zip في نفس الوقت), يمكنك فقط تحديد Thanox والتحقق منه في صفحة تكوين وحدة التطبيق Xposed.\n\nبالنسبة لمستخدم Magisk, يمكنك إعادة تسمية Thanox APK من .APK إلى .zip ثم التثبيت في Magisk Manager, أو إذا لم تتمكن</string>
-    <string name="message_app_notice">في بعض الحالات ، قد لا يعد جهازك التمهيد بعد تثبيت Thanox.\n\nإذا لم تسمع أبدًا عن \"Soft Brick\" و \"Bootloop\" قبل أو إذا كنت لا تعرف كيفية التعافي من مثل هذا الموقف ، فقم بذلك NOT تثبيت Thanox!\n\nفي أي حال ، يوصى بشدة بوجود نسخة احتياطية حديثة.</string>
+    <string name="message_active_needed">Thanox دعم كل من Xposed و Magisk.
+
+ بالنسبة للمستخدم Xposed (لا يمكن استخدام وحدة Xposed و Magisk Zip في نفس الوقت), يمكنك فقط تحديد Thanox والتحقق منه في صفحة تكوين وحدة التطبيق Xposed.
+
+بالنسبة لمستخدم Magisk, يمكنك إعادة تسمية Thanox APK من .APK إلى .zip ثم التثبيت في Magisk Manager, أو إذا لم تتمكن</string>
+    <string name="message_app_notice">في بعض الحالات ، قد لا يعد جهازك التمهيد بعد تثبيت Thanox.
+
+إذا لم تسمع أبدًا عن "Soft Brick" و "Bootloop" قبل أو إذا كنت لا تعرف كيفية التعافي من مثل هذا الموقف ، فقم بذلك NOT تثبيت Thanox!
+
+في أي حال ، يوصى بشدة بوجود نسخة احتياطية حديثة.</string>
     <string name="message_do_you_want_to_add_apps_to_pkg_set">إضافة أيضا هذه التطبيقات إلى مجموعة الحزمة الحالية؟</string>
     <string name="message_framework_error">هناك خطأ في إطار Thanox.يرجى الإبلاغ عن السجلات ضمن /data/system/thanos_xxx/log إلى المطور.</string>
     <string name="message_multiple_patch_applied_error">تحتاج فقط إلى تطبيق تصحيح واحد على Active Thanox, ولكن يمكنك تطبيق تصحيحات متعددة في نفس الوقت: %s, تأكد من قراءة دليل الاستخدام</string>
@@ -213,6 +273,7 @@
     <string name="module_activity_trampoline_add_invalid_from_component">خطأ اسم النشاط الأصلي</string>
     <string name="module_activity_trampoline_add_invalid_to_component">خطأ الاستبدال في اسم النشاط</string>
     <string name="module_activity_trampoline_app_name">النشاط النطاطية</string>
+    <string name="module_activity_trampoline_app_name_abbr">نشاط الصعلوك</string>
     <string name="module_activity_trampoline_app_not_installed">غير مثبت</string>
     <string name="module_activity_trampoline_edit_dialog_title">يحرر</string>
     <string name="module_activity_trampoline_title_export_comp_replacement_item">تصدير هذه القاعدة</string>
@@ -226,11 +287,13 @@
     <string name="module_common_user">المستخدم %s</string>
     <string name="module_component_manager_component_running">ادارة</string>
     <string name="module_component_manager_disabled_by_thanox">معاق عبر Thanox</string>
-    <string name="module_component_manager_feature_desc">Thanox استخدم Android API لتعطيل المكونات, مما يعني أن المكونات المعوقة ستحتفظ بحالتها حتى لو تم إلغاء تثبيت Thanox.\n\nستمنع Thanox المعوقين المكونين من التمكين من خلال التطبيق المضيف الخاص بهم, وسوف ترى شارة [معاقًا على نحو ثانوكس] على هذه المكونات.</string>
+    <string name="module_component_manager_feature_desc">Thanox استخدم Android API لتعطيل المكونات, مما يعني أن المكونات المعوقة ستحتفظ بحالتها حتى لو تم إلغاء تثبيت Thanox.
+
+ستمنع Thanox المعوقين المكونين من التمكين من خلال التطبيق المضيف الخاص بهم, وسوف ترى شارة [معاقًا على نحو ثانوكس] على هذه المكونات.</string>
     <string name="module_component_manager_keep_service_smart_standby">استيراد إلى قائمة الاحتفاظ بوضع بئر</string>
     <string name="module_donate_activation_code_expire_date">تأثير دائم</string>
     <string name="module_donate_activation_code_my_code">رمز بلدي</string>
-    <string name="module_donate_activation_code_start_verify">ابدأ التحقق</string>
+    <string name="module_donate_activation_code_start_verify">أدخل كود للتحقق</string>
     <string name="module_donate_activation_code_verify_fail">تحقق من الفشل.</string>
     <string name="module_donate_activation_code_verify_fail_server_timeout">خطأ الخادم ~~~</string>
     <string name="module_donate_activation_code_verify_success">نجح التحقق, فيرجى الحفاظ على رمز التنشيط الخاص بك بشكل صحيح. لا تنتشر إلى العالم الخارجي, وإلا فقد يتم تعطيله. يمكنك الاستمرار في الاستخدام</string>
@@ -239,7 +302,9 @@
     <string name="module_donate_copy_email">نسخ البريد الإلكتروني</string>
     <string name="module_donate_donated">تم التحقق, شكرا</string>
     <string name="module_donate_donated_available">أنت غير مشترك</string>
-    <string name="module_donate_donated_available_message">تبرع للحصول على مميزات التطبيق.\n\nنصائح: جربها أولاً, وشعر أنها متوفرة ورضا, ثم شراء الميزات المتقدمة ~</string>
+    <string name="module_donate_donated_available_message">تبرع للحصول على مميزات التطبيق.
+
+نصائح: جربها أولاً, أذا شعرت أن مميزات تناسبك , قم بشراء الميزات المتقدمة~</string>
     <string name="module_donate_get_play">احصل على إصدار تشغيل</string>
     <string name="module_donate_input_activation_code">أدخل كود الاشتراك</string>
     <string name="module_donate_pay_alipay">alipay</string>
@@ -252,9 +317,6 @@
     <string name="module_locker_app_name">خزانة</string>
     <string name="module_locker_biometric_not_set_dialog_message">قبل تمكين قفل التطبيق, انتقل إلى إعدادات أمان النظام لإكمال إعدادات كلمة مرور الوجه أو البصمات أو الدبوس أو النمط</string>
     <string name="module_locker_biometric_not_set_dialog_title">ضبط كلمة السر</string>
-    <string name="module_locker_key_re_verify_on_app_switch">key_re_verify_on_app_switch</string>
-    <string name="module_locker_key_re_verify_on_screen_off">key_re_verify_on_screen_off</string>
-    <string name="module_locker_key_re_verify_on_task_removed">key_re_verify_on_task_removed</string>
     <string name="module_locker_menu_search">يبحث</string>
     <string name="module_locker_summary_re_verify_on_app_switch">عندما تم إلغاء التطبيق إلى الخلفية, سيتم إعادة تطبيق التطبيق</string>
     <string name="module_locker_summary_re_verify_on_screen_off">عند قفل الشاشة, سيتم إعادة تشغيل التطبيق الذي تم فتحه</string>
@@ -268,16 +330,17 @@
     <string name="module_locker_verify_input_password">فتح %1$s</string>
     <string name="module_notification_recorder_before_today">قبل يوم</string>
     <string name="module_notification_recorder_clear_all">امسح الكل</string>
-    <string name="module_notification_recorder_feature_title_notification_center">مركز إعلام</string>
-    <string name="module_notification_recorder_feature_title_notification_recorder">مسجل</string>
+    <string name="module_notification_recorder_feature_title_notification_center">مركز الإشعارات</string>
+    <string name="module_notification_recorder_feature_title_notification_recorder">الإرشيف</string>
     <string name="module_notification_recorder_item_no_content">هذا الإخطار ليس له محتوى</string>
     <string name="module_notification_recorder_item_no_title">بلا عنوان</string>
     <string name="module_notification_recorder_item_type_clip">الحافظة</string>
     <string name="module_notification_recorder_item_type_n">تنبيه</string>
-    <string name="module_notification_recorder_item_type_toast">خبز محمص</string>
+    <string name="module_notification_recorder_item_type_toast">رسائل التوست</string>
     <string name="module_notification_recorder_item_uninstalled_app">تطبيق إلغاء تثبيت</string>
     <string name="module_notification_recorder_pref_summary_enable_toast_info">عرض معلومات التطبيق على عرض الخبز المحمص</string>
     <string name="module_notification_recorder_pref_title_enable_nr_clip">سجل الحافظة</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_for_all_apps">Record all apps</string>
     <string name="module_notification_recorder_pref_title_enable_nr_n">تسجيلات تسجيل</string>
     <string name="module_notification_recorder_pref_title_enable_nr_t">سجل الخبز المحمص</string>
     <string name="module_notification_recorder_pref_title_enable_toast_info">معلومات الخبز المحمص</string>
@@ -337,21 +400,20 @@
     <string name="module_profile_editor_select_format">اختر التنسيق</string>
     <string name="module_profile_feature_name">الملف الشخصي</string>
     <string name="module_profile_feature_summary">إجراء إجراءات مخصصة إذا كانت هناك حالة مطابقة</string>
-    <string name="module_profile_miss_global_var">قد لا يعمل هذا الملف الشخصي نظرًا لأن Global Var مفقود, فأنت بحاجة إلى إنشاء هذه Vars.\n%s</string>
-    <string name="module_profile_pref_key_rule_engine_automation">module_profile_pref_key_rule_engine_automation</string>
-    <string name="module_profile_pref_key_rule_engine_danmu">module_profile_pref_key_rule_engine_danmu</string>
-    <string name="module_profile_pref_key_rule_engine_date_time">module_profile_pref_key_rule_engine_date_time</string>
-    <string name="module_profile_pref_key_rule_engine_from_shortcut">module_profile_pref_key_rule_engine_from_shortcut</string>
-    <string name="module_profile_pref_key_rule_engine_push">module_profile_pref_key_rule_engine_push</string>
-    <string name="module_profile_pref_key_rule_engine_su">module_profile_pref_key_rule_engine_su</string>
-    <string name="module_profile_pref_summary_rule_engine_automation">يدعم تنفيذ نقرات تلقائية والعثور على طرق العرض.\n\nملاحظة: قد يتسبب هذا المحرك في عدم عمل خدمة إمكانية الوصول إلى التطبيق</string>
+    <string name="module_profile_miss_global_var">قد لا يعمل هذا الملف الشخصي نظرًا لأن Global Var مفقود, فأنت بحاجة إلى إنشاء هذه Vars.
+%s</string>
+    <string name="module_profile_pref_summary_rule_engine_automation">يدعم تنفيذ نقرات تلقائية والعثور على طرق العرض.
+
+ملاحظة: قد يتسبب هذا المحرك في عدم عمل خدمة إمكانية الوصول إلى التطبيق</string>
     <string name="module_profile_pref_summary_rule_engine_date_time">جدولة بعض المهام المتكررة أو المحددة</string>
     <string name="module_profile_pref_summary_rule_engine_push">نشر حقائق وصول رسالة الدفع</string>
     <string name="module_profile_pref_summary_rule_engine_shortcut">إنشاء اختصار قاذفة, عندما تم إطلاق هذا الاختصار, سوف ينشر Thanox حقيقة مع قيمة الحقيقة المختصرة</string>
-    <string name="module_profile_pref_summary_rule_engine_su">تمكين دعم SU API لملف Thanox.يرجى النقر فوق السماح في طلب منح الإذن من المنبثقة.إذا لم يتم استلام أي طلب, فيرجى تشغيل إذن المستخدم السوبر يدويًا.\nسيتم تنفيذ أمر sU كتطبيق Thanox.\nيرجى السماح لتطبيق Thanox للبدء في الخلفية</string>
+    <string name="module_profile_pref_summary_rule_engine_su">تمكين دعم SU API لملف Thanox.يرجى النقر فوق السماح في طلب منح الإذن من المنبثقة.إذا لم يتم استلام أي طلب, فيرجى تشغيل إذن المستخدم السوبر يدويًا.
+سيتم تنفيذ أمر sU كتطبيق Thanox.
+يرجى السماح لتطبيق Thanox للبدء في الخلفية</string>
     <string name="module_profile_pref_title_rule_engine_automation">أتمتة</string>
     <string name="module_profile_pref_title_rule_engine_date_time">التاريخ والوقت</string>
-    <string name="module_profile_pref_title_rule_engine_push">يدفع</string>
+    <string name="module_profile_pref_title_rule_engine_push">أدفع</string>
     <string name="module_profile_pref_title_rule_engine_shortcut">انشاء اختصار</string>
     <string name="module_profile_pref_title_rule_engine_su">واجهة برمجة التطبيقات الخاصة بك</string>
     <string name="module_profile_rule_edit">تعديل</string>
@@ -359,14 +421,16 @@
     <string name="module_profile_rule_edit_action_save">يحفظ</string>
     <string name="module_profile_rule_edit_action_text_size_dec">تخفيض</string>
     <string name="module_profile_rule_edit_action_text_size_inc">زيادة</string>
-    <string name="module_profile_rule_example" />
-    <string name="module_profile_rule_format_tips_message">الـ name يجب أن يستخدم الحقل مجموعات أبجدية رقمية قدر الإمكان ، ولا ينبغي أن تظهر أي شخصيات خاصة; \n\nيمكن استخدام أي أحرف في description الحقل ، فقط قدم الغرض من هذا السيناريو بإيجاز</string>
+    <string name="module_profile_rule_example"></string>
+    <string name="module_profile_rule_format_tips_message">الـ name يجب أن يستخدم الحقل مجموعات أبجدية رقمية قدر الإمكان ، ولا ينبغي أن تظهر أي شخصيات خاصة;
+
+يمكن استخدام أي أحرف في description الحقل ، فقط قدم الغرض من هذا السيناريو بإيجاز</string>
     <string name="module_profile_rule_format_tips_title">نصائح تنسيق</string>
     <string name="module_profile_rule_impor_example">أمثلة استيراد</string>
     <string name="module_profile_rule_impor_from_file">استيراد من الملف</string>
     <string name="module_profile_rule_new">جديد</string>
     <string name="module_profile_rule_online">عرض ملفات التعريف عبر الإنترنت</string>
-    <string name="module_profile_rule_wiki">Wiki</string>
+    <string name="module_profile_rule_wiki">موقع Wiki</string>
     <string name="module_profile_should_enable_push">قد لا يعمل هذا الملف الشخصي منذ ذلك الحين ادفع رسالة محركe لم يتم تمكينه ، يرجى الانتقال إلى إعدادات المحرك لتمكينها</string>
     <string name="module_profile_should_enable_su">قد لا يعمل هذا الملف الشخصي منذ ذلك الحين su API دعم لم يتم تمكينه ,يرجى الانتقال إلى إعدادات المحرك لتمكينه</string>
     <string name="module_profile_summary_rule_engine">المحرك هو أداة لنشر الحقائق.Thanox لديه العديد من الناشرين ممكّن افتراضيًا.تدعم المحركات التالية تشغيل أو إيقاف تشغيلها.يرجى الانتباه إلى وصف المحرك, وإغلاق المحرك قد يتسبب في عدم تشغيل بعض الملفات الشخصية أو تنفيذها بشكل طبيعي</string>
@@ -376,45 +440,73 @@
     <string name="module_profile_title_shortcut_label">علامة الاختصار</string>
     <string name="module_profile_var_list_item_size">%s المتغيرات</string>
     <string name="module_push_message_delegate_notice_wechat_proxy">يرجى ملاحظة أن وظيفة التجميع موجودة حاليًا في المرحلة التجريبية وهي للتعلم والبحث فقط.لا يمكن لأحد أن يضمن أن 100%سيحصلون على الدفع</string>
-    <string name="module_push_message_delegate_pref_category_wechat">pref_category_wechat</string>
-    <string name="module_push_message_delegate_pref_key_wechat">pref_key_wechat</string>
-    <string name="module_push_message_delegate_pref_key_wechat_content">pref_key_wechat_content</string>
-    <string name="module_push_message_delegate_pref_key_wechat_mock">pref_key_wechat_mock</string>
-    <string name="module_push_message_delegate_pref_key_wechat_skip_if_running">pref_key_wechat_skip_if_running</string>
-    <string name="module_push_message_delegate_pref_key_wechat_sound">pref_key_wechat_sound</string>
-    <string name="module_push_message_delegate_pref_key_wechat_start_app">pref_key_wechat_start_app</string>
-    <string name="module_push_message_delegate_pref_key_wechat_vibrate">pref_key_wechat_vibrate</string>
     <string name="module_push_message_delegate_summary_skip_if_running">لا لا ترسل إشعار الضغط إذا كان التطبيق المستهدف قيد التشغيل</string>
     <string name="module_push_message_delegate_summary_start_app">ابدأ عملية التطبيق إذا كان التطبيق المستهدف لا يعمل</string>
     <string name="module_push_message_delegate_title_content">إظهار محتوى الرسالة</string>
     <string name="module_push_message_delegate_title_gcm_diag">نموذج الدوران العام</string>
     <string name="module_push_message_delegate_title_mock">وهمية</string>
-    <string name="module_push_message_delegate_title_skip_if_running">تخطي الإخطار</string>
+    <string name="module_push_message_delegate_title_skip_if_running">تخطي التنبيهات</string>
     <string name="module_push_message_delegate_title_sound">الصوت</string>
     <string name="module_push_message_delegate_title_start_app">بدء عملية التطبيق</string>
     <string name="module_push_message_delegate_title_summary_proxy">يمكنك تثبيت تطبيق WeChat من متجر Google Play</string>
     <string name="module_push_message_delegate_title_vibrate">إهتزاز</string>
     <string name="module_push_message_delegate_title_wechat">WeChat</string>
-    <string name="module_push_message_delegate_title_wechat_proxy">مدفع WeChat</string>
-
+    <string name="module_push_message_delegate_title_wechat_proxy">الدفع الفوري WeChat</string>
+    <string name="mtrl_badge_numberless_content_description">إشعار جديد</string>
+    <string name="mtrl_chip_close_icon_content_description">إزالة %1$s</string>
+    <string name="mtrl_exceed_max_badge_number_content_description">يبلغ عدد الإشعارات الجديدة أكثر من %1$d.</string>
+    <string name="mtrl_exceed_max_badge_number_suffix">%1$d%2$s</string>
+    <string name="mtrl_picker_a11y_next_month">التغيير إلى الشهر التالي</string>
+    <string name="mtrl_picker_a11y_prev_month">التغيير إلى الشهر السابق</string>
+    <string name="mtrl_picker_announce_current_selection">الاختيار الحالي: %1$s</string>
+    <string name="mtrl_picker_cancel">إلغاء</string>
+    <string name="mtrl_picker_confirm">حسنًا</string>
+    <string name="mtrl_picker_date_header_selected">%1$s</string>
+    <string name="mtrl_picker_date_header_title">يُرجى اختيار تاريخ.</string>
+    <string name="mtrl_picker_date_header_unselected">التاريخ المحدَّد</string>
+    <string name="mtrl_picker_day_of_week_column_header">عمود الأيام: %1$s</string>
+    <string name="mtrl_picker_invalid_format">التنسيق غير صالح</string>
+    <string name="mtrl_picker_invalid_format_example">مثال: %1$s</string>
+    <string name="mtrl_picker_invalid_format_use">استخدام: %1$s</string>
+    <string name="mtrl_picker_invalid_range">النطاق غير صالح</string>
+    <string name="mtrl_picker_navigate_to_year_description">التنقل إلى العام %1$s</string>
+    <string name="mtrl_picker_out_of_range">خارج النطاق: %1$s</string>
+    <string name="mtrl_picker_range_header_only_end_selected">تاريخ البدء – %1$s</string>
+    <string name="mtrl_picker_range_header_only_start_selected">%1$s – تاريخ الانتهاء</string>
+    <string name="mtrl_picker_range_header_selected">%1$s – %2$s</string>
+    <string name="mtrl_picker_range_header_title">يُرجى اختيار نطاق زمني.</string>
+    <string name="mtrl_picker_range_header_unselected">تاريخ البدء - تاريخ الانتهاء</string>
+    <string name="mtrl_picker_save">حفظ</string>
+    <string name="mtrl_picker_text_input_date_hint">التاريخ</string>
+    <string name="mtrl_picker_text_input_date_range_end_hint">تاريخ الانتهاء</string>
+    <string name="mtrl_picker_text_input_date_range_start_hint">تاريخ البدء</string>
+    <string name="mtrl_picker_text_input_day_abbr">ي</string>
+    <string name="mtrl_picker_text_input_month_abbr">ش</string>
+    <string name="mtrl_picker_text_input_year_abbr">س</string>
+    <string name="mtrl_picker_toggle_to_calendar_input_mode">التبديل إلى وضع "الإدخال في التقويم"</string>
+    <string name="mtrl_picker_toggle_to_day_selection">انقر للتبديل إلى اختيار يوم</string>
+    <string name="mtrl_picker_toggle_to_text_input_mode">التبديل إلى وضع "إدخال النص"</string>
+    <string name="mtrl_picker_toggle_to_year_selection">انقر للتبديل إلى اختيار عام</string>
+    <string name="mtrl_switch_thumb_path_name">دائرة</string>
+    <string name="mtrl_timepicker_cancel">إلغاء</string>
+    <string name="mtrl_timepicker_confirm">حسنًا</string>
+    <string name="nav_app_bar_navigate_up_description">التنقل إلى أعلى</string>
+    <string name="nav_app_bar_open_drawer_description">فتح لائحة التنقل</string>
     <string name="nav_title_boost">تعزيز</string>
     <string name="nav_title_exp">تجريبية</string>
     <string name="nav_title_feedback">اقتراحات</string>
-    <string name="nav_title_guide">مرشد</string>
+    <string name="nav_title_guide">الدليل الرئيسي</string>
     <string name="nav_title_plugin">توصيل في</string>
     <string name="nav_title_plugin_repo">البرنامج المساعد</string>
     <string name="nav_title_secure">خصوصية</string>
     <string name="nav_title_settings">إعدادات</string>
     <string name="nav_title_thanox">Thanox</string>
+    <string name="navigation_menu">قائمة تنقل</string>
     <string name="nnf_create_folder_error">فشل في إنشاء مجلد</string>
     <string name="nnf_filename">اسم الملف</string>
-    <string name="nnf_list_cancel">@android:string/cancel</string>
-    <string name="nnf_list_ok">@android:string/ok</string>
     <string name="nnf_name">اسم</string>
     <string name="nnf_need_valid_filename">الرجاء إدخال أو تحديد اسم ملف صالح</string>
     <string name="nnf_new_folder">ملف جديد</string>
-    <string name="nnf_new_folder_cancel">@android:string/cancel</string>
-    <string name="nnf_new_folder_ok">@android:string/ok</string>
     <string name="nnf_permission_external_write_denied">تم رفض الإذن للوصول إلى نظام الملفات</string>
     <string name="nnf_select_something_first">الرجاء تحديد شيء أولا</string>
     <string name="no_default_apps">لا يوجد تطبيق افتراضي.</string>
@@ -425,34 +517,46 @@
     <string name="notices_close">قريب</string>
     <string name="notices_default_style">p.license { background:grey; } body { font-family: sans-serif; overflow-wrap: break-word; } pre { background-color: #eeeeee; padding: 1em; white-space: pre-wrap; }</string>
     <string name="notices_title">إشعارات</string>
-    <string name="off">عن</string>
-    <string name="on">على</string>
-    <string name="onboarding_github_tips_desc">يمكنك تتبع ما قبل الإصدار\nGithub/Thanox</string>
-    <string name="onboarding_github_tips_title">تحديث تتبع</string>
+    <string name="off">إيقِاف</string>
+    <string name="on">تشغِيل</string>
+    <string name="onboarding_github_tips_desc">يمكنك متابعة التحديث قبل الإصدار
+Github/Thanox</string>
+    <string name="onboarding_github_tips_title">متابعة التحديثات</string>
     <string name="onboarding_guide_tips_desc">يمكنك العثور على التعليمات على الصفحة الرئيسية للإعدادات.يوصى بشدة أن تقضي المزيد من الوقت في النظر في هذه التعليمات.ربما أنها سوف تساعدك.</string>
-    <string name="onboarding_guide_tips_title">Wiki المتاحة</string>
-    <string name="onboarding_magisk_tips_desc">1. أيضًا Thanox APK هي وحدة Magisk, فقط أعد تسميتها إلى Zip\n2. يمكنك أيضًا تصدير وحدة Magisk من الإعدادات-حول-patch معلومات\n3. تذكر, بعد كل تحديث, أيضًا تحديث وحدة Magisk في Magisk Manager وإعادة التشغيل!</string>
-    <string name="onboarding_magisk_tips_title">Magisk المدعوم (التجريبي)</string>
-    <string name="onboarding_mode_tips_desc">يدعم Thanox حاليًا طريقتين للتنشيط: تصحيح Xposed أو Magisk Patch (التجريبي, يدعم Android11+) ؛يمكنك اختيار واحد منهم لاستكشاف.</string>
+    <string name="onboarding_guide_tips_title">Wiki المتوفر</string>
+    <string name="onboarding_magisk_tips_desc">1.تسطيع تحويل Thanox.APK الى وحدة Magisk, فقط أعد تسميتها إلى Thanox.Zip
+2. ثم قم بتفليش ملف من وحدة Magisk
+3. تذكر, بعد كل تحديث, أيضًا تحديث وحدة Magisk في Magisk Manager وإعادة التشغيل!</string>
+    <string name="onboarding_magisk_tips_title">دعم Magisk (تجريبي)</string>
+    <string name="onboarding_mode_tips_desc">يدعم Thanox حاليًا طريقتين للتنشيط:
+Xposed patch أو Magisk patch
+(يدعم تجريبي Android11+)</string>
     <string name="onboarding_mode_tips_title">طرق التنشيط</string>
     <string name="onboarding_next">التالي</string>
     <string name="onboarding_skip">يتخطى</string>
     <string name="onboarding_text_complete">هيا نبدأ</string>
-    <string name="onboarding_xposed_tips_desc">1. حدد وتحقق من Thanox في Xposed Manager\n2. إعادة التشغيل والتمتع\n3. تذكر, بعد كل تحديث, إعادة التحقق من Thanox في Xposed Manager وإعادة التشغيل!</string>
+    <string name="onboarding_xposed_tips_desc">1. حدد وتحقق من Thanox في Xposed Manager
+2. إعادة التشغيل والتمتع
+3. تذكر ، بعد كل تحديث ، إعادة التحقق من
+Thanox في Xposed Manager وإعادة التشغيل!</string>
     <string name="onboarding_xposed_tips_title">xposed مدعومة</string>
-
-    <string name="pre_category_about">حول</string>
+    <string name="password_toggle_content_description">عرض كلمة المرور</string>
+    <string name="pre_category_about">حول التطبيق</string>
     <string name="pre_category_app_disable_enable">تعطيل</string>
     <string name="pre_category_app_feature_config">التكوينات</string>
     <string name="pre_category_app_feature_info">معلومات التطبيق</string>
     <string name="pre_category_data">البيانات</string>
     <string name="pre_category_dev_tools">المطورين</string>
-    <string name="pre_category_general">عام</string>
+    <string name="pre_category_general">عـام</string>
     <string name="pre_category_power">الطـاقة</string>
     <string name="pre_category_profile">الملف الشخصي</string>
     <string name="pre_category_strategy">إستراتيجية</string>
-    <string name="pre_category_summary_smart_freeze">بشكل افتراضي, ستقوم Thanox بتجميد التطبيقات عند توقف تشغيلها, تمت إزالة المهمة.\nسوف تجمد Thanox جميع التطبيقات أثناء تشغيل الجهاز, وتنظيف العملية.\nيمكنك أيضًا اختيار إعدادات إضافية أدناه.</string>
-    <string name="pre_category_summary_smart_standby">عادةً ما تحتوي التطبيقات في الخلفية على خدمات أو عمليات تظل نشطة, وهذه الخدمات أو العمليات لها هدفها الخاص.لسوء الحظ, قد لا يعرف مستخدمونا بالضبط ما تفعله هذه الخدمات والعمليات.\n\nيمكنك اختيار طريقة التداخل للتطبيقات التي تعود إلى الخلفية.تجدر الإشارة إلى أن بعض التطبيقات قد لا تعمل بشكل صحيح بعد التدخل معها.</string>
+    <string name="pre_category_summary_smart_freeze">بشكل افتراضي, ستقوم Thanox بتجميد التطبيقات عند توقف تشغيلها, تمت إزالة المهمة.
+سوف تجمد Thanox جميع التطبيقات أثناء تشغيل الجهاز, وتنظيف العملية.
+يمكنك أيضًا اختيار إعدادات إضافية أدناه.</string>
+    <string name="pre_category_summary_smart_standby">عادةً ما تحتوي التطبيقات في الخلفية على خدمات أو عمليات تظل نشطة, وهذه الخدمات أو العمليات لها هدفها الخاص.لسوء الحظ, قد لا يعرف مستخدمونا بالضبط ما تفعله هذه الخدمات والعمليات.
+
+يمكنك اختيار طريقة التداخل للتطبيقات التي تعود إلى الخلفية.تجدر الإشارة إلى أن بعض التطبيقات قد لا تعمل بشكل صحيح بعد التدخل معها.</string>
     <string name="pre_category_ui">واجهة المستخدم</string>
     <string name="pre_cheat_field_category_cheated">مجال التخفي</string>
     <string name="pre_cheat_field_category_original">الحقل الأصلي</string>
@@ -471,6 +575,7 @@
     <string name="pre_summary_force_dialog_cancelable">مربع حوار تطبيق القوة ليكون قابلاً للإلغاء, يرجى تمكين نطاق التثبيت XPosed لهذا التطبيق</string>
     <string name="pre_summary_ignore_system_app">ضع تطبيقات النظام في قوائم بيضاء</string>
     <string name="pre_summary_redaction_notification">تجاوز إخطار التطبيق مع العنوان المخصص والنص</string>
+    <string name="pre_summary_resident">منع هذا التطبيق من القتل بواسطة LMK</string>
     <string name="pre_summary_restore_default">استعادة الإعدادات الافتراضية Thanox</string>
     <string name="pre_summary_smart_freeze_hide_package_change_event">إذا تم تمكين هذا التبديل, فسيقوم Thanox بمنع الحزمة التي تم تغييرها لهذه الحزمة, لذلك لن تتمكن تطبيقات التشغيل من اكتشاف الحزمة تمكين الحزمة.</string>
     <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">قم بتجميد جميع التطبيقات على الشاشة</string>
@@ -525,7 +630,7 @@
     <string name="pre_title_cheat_sim_op_name_3">اسم مشغل SIM (الفتحة 3)</string>
     <string name="pre_title_cheat_sim_serial">SIM المسلسل</string>
     <string name="pre_title_data">إعادة البيانات</string>
-    <string name="pre_title_developer">ادوات المطورين</string>
+    <string name="pre_title_developer">أدوات المطورين</string>
     <string name="pre_title_exclude_recent_task">استبعاد المهمة الأخيرة</string>
     <string name="pre_title_force_dialog_cancelable">مربع الحوار يمكن إلغاؤه</string>
     <string name="pre_title_ignore_system_app">استبعاد تطبيقات النظام</string>
@@ -533,37 +638,40 @@
     <string name="pre_title_redaction_notification">تنقيح الإخطار</string>
     <string name="pre_title_redaction_notification_text">نص</string>
     <string name="pre_title_redaction_notification_title">عنوان</string>
-    <string name="pre_title_restore">استرداد نسخة احتياطية</string>
-    <string name="pre_title_restore_default">استرداد الافتراضي</string>
+    <string name="pre_title_resident">التطبيق المقيم</string>
+    <string name="pre_title_restore">إسترجاع نسخة احتياطية</string>
+    <string name="pre_title_restore_default">إسترجاع الافتراضي</string>
     <string name="pre_title_smart_freeze_freeze_method">طريقة تجميد</string>
     <string name="pre_title_smart_freeze_freeze_method_disable">PM تعطيل</string>
-    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM تعطيل هي وظيفة توفرها نظام Android الذي يمكنه \"تعطيل\" التطبيق ؛عند استخدام هذه الطريقة \"لتجميد\" التطبيق, سوف تختفي أيقونة سطح المكتب للتطبيق المجمد.يمكنك إنشاء تطبيق اختصار أو وكيل لبدء تشغيله مباشرة من Launcher.</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM تعطيل هي وظيفة توفرها نظام Android الذي يمكنه "تعطيل" التطبيق ؛عند استخدام هذه الطريقة "لتجميد" التطبيق, سوف تختفي أيقونة سطح المكتب للتطبيق المجمد.يمكنك إنشاء تطبيق اختصار أو وكيل لبدء تشغيله مباشرة من Launcher.</string>
     <string name="pre_title_smart_freeze_freeze_method_suspend">PM تعليق</string>
-    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">تعليق وظيفة توفرها Android لإدارة DPC ؛عادةً ما يحتفظ التطبيق المعلق برمز رمادي في Launcher, ولكن لا يمكن بدء أنشطة التطبيق مباشرة, وعادة ما يظهر مربع حوار يشير إلى أن التطبيق قد تم تقييده من الاستخدام من قبل المسؤول.يمكنك تشغيل مفتاح \"DOL\" للتطبيق, مما سيؤدي إلى إلغاء تجميد التطبيق من Thanox عند اكتشاف طلب تشغيل النشاط.</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">تعليق وظيفة توفرها Android لإدارة DPC ؛عادةً ما يحتفظ التطبيق المعلق برمز رمادي في Launcher, ولكن لا يمكن بدء أنشطة التطبيق مباشرة, وعادة ما يظهر مربع حوار يشير إلى أن التطبيق قد تم تقييده من الاستخدام من قبل المسؤول.يمكنك تشغيل مفتاح "DOL" للتطبيق, مما سيؤدي إلى إلغاء تجميد التطبيق من Thanox عند اكتشاف طلب تشغيل النشاط.</string>
     <string name="pre_title_smart_freeze_hide_package_change_event">الاختباء في قاذفة</string>
     <string name="pre_title_smart_freeze_screen_off_clean_up">شاشة خارج التجمد تأخير</string>
     <string name="pre_title_smart_freeze_screen_off_clean_up_delay">تجميد على الشاشة</string>
-    <string name="pre_title_smart_freeze_with_suspend">حزمة تعليق</string>
+    <string name="pre_title_smart_freeze_with_suspend">تجميد ذكي تعليق حزمة</string>
     <string name="pre_title_smart_standby_block_bg_service_start">توقف عن عمليات الخلفية من إعادة التشغيل.</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">تخطي التطبيقات مع الإخطارات</string>
     <string name="pre_title_smart_standby_bypass_if_has_visible_windows">تخطي التطبيقات لها نافذة مرئية</string>
     <string name="pre_title_smart_standby_set_inactive">تطبيقات الاستعداد</string>
-    <string name="pre_title_smart_standby_stop_service">خدمة محطة</string>
+    <string name="pre_title_smart_standby_stop_service">خدمة توقف  الذكي</string>
     <string name="pre_title_strategy">الملامح والقوالب</string>
     <string name="pre_title_ui">الموضوعات والرموز</string>
     <string name="pref_action_apply_config_template">تنطبق من القالب</string>
     <string name="pref_action_create_new_config_template">إنشاء قوالب</string>
     <string name="pref_action_delete_config_template">حذف</string>
     <string name="pref_action_edit_or_view_config_template">معاينة ما تم تحريره</string>
-    <string name="pref_summary_enable_global_white_list">تحذير: هذا الإعداد هو إعداد خطير.يجب ألا يجرب المستخدمون عديمي الخبرة هذا الخيار.\nلمنع أخطاء النظام المميت بسبب سوء الاستخدام, يحافظ Thanox على القائمة البيضاء العالمية بشكل افتراضي, يحتوي على بعض التطبيقات الأساسية للنظام مثل المكونات والهواتف والوسائط وما إلى ذلك.\n إذا كنت تفضل بشدة عدم تمكين هذه القائمة, فيرجى إيقاف تشغيل هذا الخيار</string>
+    <string name="pref_summary_enable_global_white_list">تحذير: هذا الإعداد هو إعداد خطير.يجب ألا يجرب المستخدمون عديمي الخبرة هذا الخيار.
+لمنع أخطاء النظام المميت بسبب سوء الاستخدام, يحافظ Thanox على القائمة البيضاء العالمية بشكل افتراضي, يحتوي على بعض التطبيقات الأساسية للنظام مثل المكونات والهواتف والوسائط وما إلى ذلك.
+ إذا كنت تفضل بشدة عدم تمكين هذه القائمة, فيرجى إيقاف تشغيل هذا الخيار</string>
     <string name="pref_summary_enable_high_battery_drain_app_reminding">تنبيه عند اكتشاف تطبيقات عالية الطاقة</string>
     <string name="pref_summary_enable_logging">عرض معلومات التسجيل في وحدة التحكم</string>
-    <string name="pref_summary_enable_package_on_launch_by_default">تمكين \"DOL\" أثناء إضافة التطبيق إلى قائمة smart Freeze</string>
+    <string name="pref_summary_enable_package_on_launch_by_default">تمكين "DOL" أثناء إضافة التطبيق إلى قائمة smart Freeze</string>
     <string name="pref_summary_enable_power_save">توقف عن تسجيل بدء التطبيق والوصول إلى العمليات والوصول إلى بيانات الخصوصية لتوفير البطارية قدر الإمكان</string>
     <string name="pref_summary_icon_maker_remix_icon">تصميم ريمكس © 2018 https://remixicon.com</string>
     <string name="pref_summary_new_installed_apps_config">تحرير قالب لتكوين السيارات</string>
     <string name="pref_summary_new_installed_apps_config_enabled">تلقائي تكوين تطبيقات مثبتة جديدة</string>
-    <string name="pref_summary_rss_e">انضم إلى TG أو QQ مجموعة</string>
+    <string name="pref_summary_rss_e">انضم إلى مجموعة تلجرام أو QQ</string>
     <string name="pref_title_app_state_disabled">تم تعطيل التطبيق</string>
     <string name="pref_title_app_state_enabled">تم تمكين التطبيق</string>
     <string name="pref_title_app_to_disable">تعطيل</string>
@@ -584,7 +692,7 @@
     <string name="pref_title_patch_info">معلومات التصحيح</string>
     <string name="pref_title_rss_e">مجموعات</string>
     <string name="pref_title_show_current_activity">إظهار النشاط الحالي</string>
-    <string name="preference_copied">\"%1$s\" نسخ إلى الحافظة.</string>
+    <string name="preference_copied">"%1$s" نسخ إلى الحافظة.</string>
     <string name="priv_title_fields_template">قوالب</string>
     <string name="priv_title_fields_usage_count">تم اختيارها لتطبيقات %s</string>
     <string name="priv_title_fields_usage_count_noop">غير مستعمل</string>
@@ -594,6 +702,8 @@
     <string name="privacy_record">سجل الخصوصية</string>
     <string name="process_provider_in_use_description">باستخدام موفر %1$s.</string>
     <string name="process_service_in_use_description">باستخدام الخدمة %1$s.</string>
+    <string name="range_end">نهاية النطاق</string>
+    <string name="range_start">بداية النطاق</string>
     <string name="reboot_later">ليس الان</string>
     <string name="reboot_now">اعادة التشغيل الان</string>
     <string name="running_process_all">الكل</string>
@@ -625,19 +735,17 @@
     <string name="secure_privacy_request_count">طلبات بيانات خصوصية تطبيق %s.</string>
     <string name="selected">المحدد</string>
     <string name="service_app_set_3rd">تطبيقات طرف ثالث</string>
-    <string name="service_app_set_all">الكل</string>
-    <string name="service_app_set_disabled">معطل</string>
-    <string name="service_app_set_media">وسائط</string>
-    <string name="service_app_set_phone">هاتف</string>
-    <string name="service_app_set_shortcut_proxy">وكيل اختصار</string>
-    <string name="service_app_set_system">النظام</string>
-    <string name="service_app_set_system_uid">النظام الأساسي</string>
-    <string name="service_app_set_web_provider">WebView مزود</string>
-    <string name="service_app_set_white_listed">القائمه المتاحه</string>
-    <string name="service_app_set_white_listed_user">القائمة البيضاء المخصصة</string>
-    <string name="service_app_set_white_listed_user_description">يمكنك تخصيص قائمة بيضاء ، ولن تظهر التطبيقات الموجودة فيها في قائمة التطبيقات في صفحة الميزات</string>
+    <string name="service_app_set_all">جميع التطبيقات</string>
+    <string name="service_app_set_disabled">التطبيقات المعطلة</string>
+    <string name="service_app_set_media">تطبيقات وسائط</string>
+    <string name="service_app_set_phone">تطبيقات هاتف</string>
+    <string name="service_app_set_shortcut_proxy">تطبيقات اختصار الوكيل</string>
+    <string name="service_app_set_system">تطبيقات النظام</string>
+    <string name="service_app_set_system_uid">تطبيقات النظام الأساسي</string>
+    <string name="service_app_set_web_provider">مزود WebView للتطبيقات</string>
+    <string name="service_app_set_white_listed">تطبيقات القائمة البيضاء</string>
     <string name="service_client_name">العميل %1$s</string>
-    <string name="service_default_notification_channel">تقصير</string>
+    <string name="service_default_notification_channel">افتراضي</string>
     <string name="service_dialog_button_thanox_removed_keep_data">يحفظ</string>
     <string name="service_dialog_button_thanox_removed_remove_data">إزالة</string>
     <string name="service_dialog_message_thanox_removed">هل تريد الاحتفاظ بالبيانات الأساسية؟ستتم إزالة البيانات بأكملها إذا كنت لا تريد الاحتفاظ بها.</string>
@@ -674,7 +782,7 @@
     <string name="service_report">تقرير</string>
     <string name="service_restarting">إعادة التشغيل</string>
     <string name="service_running_time">اسْتيقَظ من خُموله</string>
-    <string name="service_silence_notification_channel">صامت</string>
+    <string name="service_silence_notification_channel">تنبيهات صامتة</string>
     <string name="service_started_by_app">ابدأ بالتطبيق</string>
     <string name="service_stop">إيقاف</string>
     <string name="service_stop_description">بدأت هذه الخدمة من خلال تطبيقها.قد يؤدي إيقاف الخدمة إلى جعل التطبيق غير صالح للعمل.</string>
@@ -686,47 +794,46 @@
     <string name="start_record_blocked">محظور</string>
     <string name="start_record_merged">اندمج</string>
     <string name="status_active">نشيط</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
     <string name="status_need_reboot">اعادة التشغيل</string>
-    <string name="status_not_active">غير نشيط</string>
+    <string name="status_not_active">الأوامر غير نشطة</string>
     <string name="storageuse_settings_summary">تعرف على مقدار التخزين الذي يستخدمه التطبيق</string>
     <string name="storageuse_settings_title">استخدام التخزين</string>
     <string name="summary_collapsed_preference_list">%1$s, %2$s</string>
-    <string name="switch_off_text">عن</string>
-    <string name="switch_on_text">على</string>
+    <string name="switch_off_text">إيقاف نص</string>
+    <string name="switch_on_text">تشغيل نص</string>
+    <string name="tab">علامة تبويب</string>
     <string name="template_percent">%1$d في المئة.</string>
     <string name="tile_category_plugin_already_installed">لا يمكن تجاوز التثبيت الحالي, يرجى إلغاء التثبيت ثم إعادة التثبيت.</string>
     <string name="tile_category_plugin_installed">المثبتة</string>
-    <string name="tile_category_plugin_update_available">نسخة جديدة متاحة</string>
+    <string name="tile_category_plugin_update_available">نسخة جديدة متوفرة</string>
     <string name="tile_su_plugin_deprecated">تم إهمال المكون الإضافي لـ SU Enlabler, والآن لا تحتاج إلى تثبيت المكون الإضافي SU.يمكنك تمكين دعم واجهة برمجة تطبيقات SU مباشرة في إعدادات المحرك من الملف الشخصي</string>
     <string name="titile_suggested_apps_recent_used">التطبيقات المستخدمة مؤخرا</string>
     <string name="title_allow">السماح</string>
     <string name="title_app_notice">كن حذرا!</string>
-    <string name="title_block">منع</string>
+    <string name="title_block">حظر</string>
     <string name="title_cached_background_process">عمليات الخلفية المخزنة مؤقتًا</string>
     <string name="title_download">تحميل</string>
     <string name="title_framework_error">خطأ إطار</string>
     <string name="title_install">تثبيت</string>
     <string name="title_multiple_patch_applied_error">تصحيح متعدد</string>
-    <string name="title_net_stats">الإحصائيات الصافية</string>
-    <string name="title_no_plugins_installed">لا مكون إضافي متاح</string>
+    <string name="title_net_stats">الإحصائيات الحالة</string>
+    <string name="title_no_plugins_installed">لا يوجد مكون إضافي متاح</string>
     <string name="title_package_add_set">أضف مجموعة الحزمة</string>
     <string name="title_package_count_set">تطبيقات %s</string>
     <string name="title_package_delete_set">حذف</string>
     <string name="title_package_edit_set">معاينة ما تم تحريره</string>
-    <string name="title_package_prebuilt_set">بنيت</string>
+    <string name="title_package_prebuilt_set">التطبيقات سابقة</string>
     <string name="title_package_sets">مجموعات الحزمة</string>
     <string name="title_plugin_reboot_take_effect">يرجى إعادة التشغيل للتغييرات التي تثير سريانها.</string>
-    <string name="title_remember">تذكر</string>
+    <string name="title_remember">تذكير</string>
     <string name="title_show_current_activity">النشاط الحالي</string>
     <string name="title_stub_apk_app_name">تسمية التطبيق</string>
     <string name="title_stub_apk_app_version_code">رمز الإصدار</string>
     <string name="title_stub_apk_app_version_name">اسم الإصدار</string>
-    <string name="title_suggested_apps_view_all">عرض جميع تطبيقات %s</string>
+    <string name="title_suggested_apps_view_all">إظهار كافة تطبيقات %s</string>
     <string name="wakelock_count">%s أقفال التنبيه</string>
-    <string name="wakelock_state_holding">تحتجز</string>
-    <string name="wakelock_view_held_only">عقدت فقط</string>
-    <string name="xposed_description">\"عالم يختلف عن هذا العالم\"</string>
-
-    <string name="pre_title_resident">Resident app</string>
-    <string name="pre_summary_resident">Prevent this app to be kill by LMK</string>
+    <string name="wakelock_state_holding">حالة المحتجز</string>
+    <string name="wakelock_view_held_only">عرض المحتجز</string>
+    <string name="xposed_description">"عالم يختلف عن هذا العالم"</string>
 </resources>

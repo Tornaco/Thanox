@@ -383,12 +383,30 @@ data class WifiState(
 | 参数名    | 类型                  | 含义       | 示例 |
 | --------- | --------------------- | ---------- | ---- |
 | notificationAdded | Boolean（true/false） | 新通知到达 | 无 |
+| notificationUpdated | Boolean（true/false） | 通知更新 | 无 |
 | notificationRemoved | Boolean（true/false） | 通知移除 | 无 |
 | pkgName | String（字符串） | 通知所属应用包名 | 无 |
 | userId | Int | 通知app的用户id | 无 |
 | notificationTitle | String（字符串） | 通知标题 | 无 |
 | notificationContent | String（字符串） | 通知内容 | 无 |
 | notification | NotificationRecord | 通知记录，该模型包含更详细的信息，[查看模型定义](https://github.com/Tornaco/Thanox/blob/master/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/n/NotificationRecord.java) | 无 |
+
+
+示例：
+
+```json
+[
+  {
+    "name": "Notification events",
+    "description": "通知事件",
+    "priority": 1,
+    "condition": "notificationAdded || notificationRemoved || notificationUpdated",
+    "actions": [
+      "ui.showShortToast(\"通知事件 \" + pkgName + notificationContent);"
+    ]
+  }
+]
+```
 
 
 &nbsp;

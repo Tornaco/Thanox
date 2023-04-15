@@ -12,12 +12,11 @@ jobs:
         run: |
           docker run \
           -v ${{ github.workspace }}:/srv/jekyll \
-          jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future && ls -l"
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1.0.8
-        with:
-            path: "."
-        
+          jekyll/builder:latest /bin/bash -c \
+          "chown jekyll:jekyll /srv/jekyll && \
+           JEKYLL_ENV=production jekyll build --future"
+      - name: Upload the site as an artifact
+        uses: actions/upload-pages-artifact@v1
 
   deploy:
     if: ${{ github.ref == 'refs/heads/docs' }}

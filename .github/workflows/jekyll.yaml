@@ -16,7 +16,7 @@ jobs:
           "chown jekyll:jekyll /srv/jekyll && \
            JEKYLL_ENV=production jekyll build --future"
       - name: Upload the site as an artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v1.0.8
 
   deploy:
     if: ${{ github.ref == 'refs/heads/docs' }}

@@ -18,7 +18,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1.0.8
         with:
-          path: "/srv/jekyll/_site"
+          path: "."
         
 
   deploy:

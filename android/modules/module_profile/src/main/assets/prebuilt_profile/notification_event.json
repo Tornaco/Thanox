@@ -1,11 +1,11 @@
 [
   {
     "name": "Notification events",
-    "description": "通知增加，移除事件",
+    "description": "通知事件",
     "priority": 1,
-    "condition": "notificationAdded == true || notificationRemoved == true",
+    "condition": "notificationAdded || notificationRemoved || notificationUpdated",
     "actions": [
-      "ui.showShortToast(\"通知增加，移除事件，通知所属包名为 \" + pkgName);"
+      "ui.showShortToast(\"通知事件 \" + pkgName + notificationContent);"
     ]
   }
 ]

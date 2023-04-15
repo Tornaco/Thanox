@@ -12,9 +12,11 @@ jobs:
         run: |
           docker run \
           -v ${{ github.workspace }}:/srv/jekyll \
-          jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future && ls -l . && cp -rf ./ _site && ls -l _site"
+          jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future && ls -l && ls -l _site"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1.0.8
+        with:
+            path: "."
         
 
   deploy:

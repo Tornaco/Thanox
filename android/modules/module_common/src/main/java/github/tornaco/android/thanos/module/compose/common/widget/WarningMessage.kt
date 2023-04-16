@@ -70,6 +70,6 @@ fun WarningMessage(modifier: Modifier = Modifier, text: String) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = text, fontSize = 10.sp)
+        Text(text = text, fontSize = 10.sp, color = Color.Black)
     }
 }

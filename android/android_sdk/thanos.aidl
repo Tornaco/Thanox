@@ -23,6 +23,7 @@ parcelable github.tornaco.android.thanos.core.app.RunningServiceInfoCompat;
 parcelable github.tornaco.android.thanos.core.secure.PrivacyCheatRecord;
 parcelable github.tornaco.android.thanos.core.secure.field.Fields;
 parcelable github.tornaco.android.thanos.core.power.SeenWakeLock;
+parcelable github.tornaco.android.thanos.core.power.WakeLockStats;
 parcelable github.tornaco.android.thanos.core.su.SuRes;
 parcelable github.tornaco.android.thanos.core.plus.RR;
 parcelable github.tornaco.android.thanos.core.os.SwapInfo;

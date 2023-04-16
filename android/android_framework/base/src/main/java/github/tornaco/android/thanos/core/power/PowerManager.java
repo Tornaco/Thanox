@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.core.power;
 
 import java.util.List;
 
+import github.tornaco.android.thanos.core.pm.Pkg;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -41,8 +42,13 @@ public class PowerManager {
     }
 
     @SneakyThrows
-    public List<SeenWakeLock> getSeenWakeLocksByPackageName(String packageName, boolean includeHistory) {
-        return server.getSeenWakeLocksByPackageName(packageName, includeHistory);
+    public List<SeenWakeLock> getSeenWakeLocksForPkg(Pkg pkg, boolean includeHistory) {
+        return server.getSeenWakeLocksForPkg(pkg, includeHistory);
+    }
+
+    @SneakyThrows
+    public List<WakeLockStats> getSeenWakeLocksStats(boolean includeHistory, boolean heldOnly) {
+        return server.getSeenWakeLocksStats(includeHistory, heldOnly);
     }
 
     @SneakyThrows

@@ -11,7 +11,6 @@ import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
-import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.loader.Loader
 import kotlinx.coroutines.Dispatchers
@@ -101,17 +100,18 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
             ).pkgNames.filterNot { pkgName -> pkgName == BuildProp.THANOS_APP_PKG_NAME }
         } ?: emptyList()
 
-        val packageStates = thanox.powerManager.getSeenWakeLocks(true)
+        val powerManager = thanox.powerManager
+        val packageStates = powerManager.getSeenWakeLocksStats(true, state.value.isShowHeldOnly)
             .filterNotNull()
             .asSequence()
-            .filter { !state.value.isShowHeldOnly || it.isHeld }
-            .filter { filterPackages.contains(it.ownerPackageName) }
-            .groupBy { Pkg(it.ownerPackageName, it.ownerUserId) }
-            .mapNotNull { entry ->
+            .filter { filterPackages.contains(it.pkg.pkgName) }
+            .mapNotNull { stats ->
                 val appInfo =
-                    thanox.pkgManager.getAppInfoForUser(entry.key.pkgName, entry.key.userId)
+                    thanox.pkgManager.getAppInfoForUser(stats.pkg.pkgName, stats.pkg.userId)
                 appInfo?.let {
-                    PackageState(appInfo, entry.value.map { it.toUiModel() })
+                    PackageState(
+                        appInfo,
+                        powerManager.getSeenWakeLocksForPkg(stats.pkg, true).map { it.toUiModel() })
                 }
             }
             .sortedWith { o1, o2 ->
@@ -133,9 +133,9 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
         loadBlockerState()
     }
 
-    fun setBlockWakeLock(model: WakeLockUiModel, block: Boolean) {
+    fun setBlockWakeLock(model: WakeLockUiModel, block: Boolean, refresh: Boolean = true) {
         thanox.powerManager.setBlockWakeLock(model.toWakeLock(), block)
-        refresh()
+        if (refresh) refresh()
     }
 
     fun batchSelect(packageState: PackageState) {
@@ -143,7 +143,7 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
         XLog.d("batchSelect, desiredBlockValue: $desiredBlockValue")
 
         packageState.wakeLocks.onEach {
-            setBlockWakeLock(it, desiredBlockValue)
+            setBlockWakeLock(model = it, block = desiredBlockValue, refresh = false)
         }
 
         refresh()

@@ -5,15 +5,6 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class SeenWakeLock implements Parcelable {
 
     private String tag;
@@ -93,5 +84,74 @@ public class SeenWakeLock implements Parcelable {
                 ", ownerPackageName='" + ownerPackageName + '\'' +
                 ", ownerUserId=" + ownerUserId +
                 '}';
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public int getFlags() {
+        return flags;
+    }
+
+    public void setFlags(int flags) {
+        this.flags = flags;
+    }
+
+    public String getOwnerPackageName() {
+        return ownerPackageName;
+    }
+
+    public void setOwnerPackageName(String ownerPackageName) {
+        this.ownerPackageName = ownerPackageName;
+    }
+
+    public int getOwnerUserId() {
+        return ownerUserId;
+    }
+
+    public void setOwnerUserId(int ownerUserId) {
+        this.ownerUserId = ownerUserId;
+    }
+
+    public long getAcquireTimeMills() {
+        return acquireTimeMills;
+    }
+
+    public void setAcquireTimeMills(long acquireTimeMills) {
+        this.acquireTimeMills = acquireTimeMills;
+    }
+
+    public boolean isHeld() {
+        return isHeld;
+    }
+
+    public void setHeld(boolean held) {
+        isHeld = held;
+    }
+
+    public boolean isBlock() {
+        return isBlock;
+    }
+
+    public void setBlock(boolean block) {
+        isBlock = block;
+    }
+
+    public SeenWakeLock(String tag, int flags, String ownerPackageName, int ownerUserId, long acquireTimeMills, boolean isHeld, boolean isBlock) {
+        this.tag = tag;
+        this.flags = flags;
+        this.ownerPackageName = ownerPackageName;
+        this.ownerUserId = ownerUserId;
+        this.acquireTimeMills = acquireTimeMills;
+        this.isHeld = isHeld;
+        this.isBlock = isBlock;
+    }
+
+    public SeenWakeLock() {
     }
 }

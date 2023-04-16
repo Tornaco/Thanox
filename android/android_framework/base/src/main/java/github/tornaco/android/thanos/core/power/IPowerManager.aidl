@@ -1,6 +1,8 @@
 package github.tornaco.android.thanos.core.power;
 
 import github.tornaco.android.thanos.core.IPrinter;
+import github.tornaco.android.thanos.core.pm.Pkg;
+import github.tornaco.android.thanos.core.power.WakeLockStats;
 
 interface IPowerManager {
     void reboot();
@@ -12,7 +14,8 @@ interface IPowerManager {
     boolean isPowerSaveModeEnabled();
 
     List<SeenWakeLock> getSeenWakeLocks(boolean includeHistory);
-    List<SeenWakeLock> getSeenWakeLocksByPackageName(String packageName, boolean includeHistory);
+    List<SeenWakeLock> getSeenWakeLocksForPkg(in Pkg pkg, boolean includeHistory);
+    List<WakeLockStats> getSeenWakeLocksStats(boolean includeHistory, boolean heldOnly);
     boolean isWakeLockHeld(in SeenWakeLock wakelock);
 
     void dump(in IPrinter p);

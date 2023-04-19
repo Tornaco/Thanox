@@ -32,8 +32,12 @@ class BuildPropActivity : ComponentActivity() {
     @Composable
     private fun BuildPropScreen() {
         Surface(modifier = Modifier.fillMaxSize()) {
-            Scaffold(modifier = Modifier.fillMaxSize(), topBar = { AppBar() }) {
-                LazyColumn {
+            Scaffold(modifier = Modifier.fillMaxSize(), topBar = { AppBar() }) { paddingValues ->
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                ) {
                     items(props()) {
                         PropItem(it)
                     }
@@ -59,9 +63,11 @@ class BuildPropActivity : ComponentActivity() {
             horizontalAlignment = Alignment.Start,
         ) {
             Text(prop.first, style = MaterialTheme.typography.subtitle1)
-            Spacer(modifier = Modifier
-                .height(1.dp)
-                .fillMaxWidth())
+            Spacer(
+                modifier = Modifier
+                    .height(1.dp)
+                    .fillMaxWidth()
+            )
             Text(prop.second, style = MaterialTheme.typography.body2)
         }
     }

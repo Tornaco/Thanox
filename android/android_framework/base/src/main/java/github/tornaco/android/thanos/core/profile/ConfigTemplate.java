@@ -8,15 +8,36 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-@Getter
 @Builder
-@AllArgsConstructor
 public final class ConfigTemplate implements Parcelable {
 
     private String title;
     private String id;
     private String dummyPackageName;
     private long createAt;
+
+    public ConfigTemplate(String title, String id, String dummyPackageName, long createAt) {
+        this.title = title;
+        this.id = id;
+        this.dummyPackageName = dummyPackageName;
+        this.createAt = createAt;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getDummyPackageName() {
+        return dummyPackageName;
+    }
+
+    public long getCreateAt() {
+        return createAt;
+    }
 
     private ConfigTemplate(Parcel in) {
         title = in.readString();

@@ -94,8 +94,10 @@ fun NavScreen() {
 
     ThanoxBottomSheetScaffold(title = {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(stringResource(id = R.string.app_name),
-                style = TypographyDefaults.appBarTitleTextStyle())
+            Text(
+                stringResource(id = R.string.app_name),
+                style = TypographyDefaults.appBarTitleTextStyle()
+            )
             TinySpacer()
             AppBarBadges(state = state, onInactiveClick = {
                 isShowActiveDialog = true
@@ -112,14 +114,18 @@ fun NavScreen() {
             IconButton(onClick = {
                 isShowRebootConfirmationDialog = true
             }) {
-                Icon(painter = painterResource(id = R.drawable.ic_remix_restart_line),
-                    contentDescription = "Reboot")
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_remix_restart_line),
+                    contentDescription = "Reboot"
+                )
             }
             IconButton(onClick = {
                 SettingsDashboardActivity.start(activity)
             }) {
-                Icon(painter = painterResource(id = R.drawable.ic_remix_settings_line),
-                    contentDescription = "Settings")
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_remix_settings_line),
+                    contentDescription = "Settings"
+                )
             }
         }
     }, onBackPressed = null) { contentPadding ->
@@ -128,11 +134,13 @@ fun NavScreen() {
             indicatorPadding = contentPadding,
             clipIndicatorToPadding = false,
             indicator = { state, refreshTriggerDistance ->
-                SwipeRefreshIndicator(state = state,
+                SwipeRefreshIndicator(
+                    state = state,
                     refreshTriggerDistance = refreshTriggerDistance,
                     scale = true,
                     arrowEnabled = false,
-                    contentColor = MaterialTheme.colorScheme.primary)
+                    contentColor = MaterialTheme.colorScheme.primary
+                )
             }) {
             NavContent(
                 contentPadding = contentPadding,
@@ -226,10 +234,12 @@ private fun AppBarBadges(
 @Composable
 private fun ClickableBadge(text: String, onClick: () -> Unit) {
     TextButton(contentPadding = PaddingValues(4.dp), onClick = { onClick() }) {
-        MD3Badge(text = text,
+        MD3Badge(
+            text = text,
             containerColor = MaterialTheme.colorScheme.errorContainer,
             textSize = 12.sp,
-            padding = 6.dp)
+            padding = 6.dp
+        )
     }
 }
 
@@ -242,16 +252,20 @@ private fun NavContent(
     createShortcut: (FeatureItem) -> Unit,
 ) {
     val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
-    Column(modifier = Modifier
-        .padding(contentPadding)
-        .navigationBarsPadding()
-        .fillMaxSize()
-        .background(color = Color(windowBgColor))
-        .verticalScroll(rememberScrollState())) {
-        NavHeaderContent(modifier = Modifier
-            .padding(horizontal = 16.dp)
-            .padding(top = 16.dp),
-            headerInfo = state.statusHeaderInfo) {
+    Column(
+        modifier = Modifier
+            .padding(contentPadding)
+            .navigationBarsPadding()
+            .fillMaxSize()
+            .background(color = Color(windowBgColor))
+            .verticalScroll(rememberScrollState())
+    ) {
+        NavHeaderContent(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp),
+            headerInfo = state.statusHeaderInfo
+        ) {
             onHeaderClick()
         }
         Features(state = state, onItemClick = onFeatureItemClick, createShortcut = createShortcut)
@@ -279,22 +293,29 @@ private fun FeatureGroup(
     createShortcut: (FeatureItem) -> Unit,
 ) {
     val cardBgColor = getColorAttribute(R.attr.appCardBackground)
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 16.dp)
-        .padding(top = 16.dp),
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+            .padding(top = 16.dp),
         shape = RoundedCornerShape(cardCornerSize),
-        colors = CardDefaults.cardColors(containerColor = Color(cardBgColor))) {
+        colors = CardDefaults.cardColors(containerColor = Color(cardBgColor))
+    ) {
+        val activity = LocalContext.current.requireActivity()
+
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = stringResource(id = group.titleRes),
+            Text(
+                text = stringResource(id = group.titleRes),
                 fontSize = 14.sp,
-                fontWeight = FontWeight.W600)
+                fontWeight = FontWeight.W600
+            )
             StandardSpacer()
 
             FlowLayout(lineSpacing = 16.dp) {
                 group.items.forEach { item ->
                     Box {
                         var isMenuOpen by remember(item) { mutableStateOf(false) }
+                        val menuItems = remember(item) { item.menuItems }
                         FeatureItem(item = item, onItemClick = onItemClick, onItemLongClick = {
                             isMenuOpen = true
                         })
@@ -305,6 +326,18 @@ private fun FeatureGroup(
                                 isMenuOpen = false
                             },
                         ) {
+                            menuItems.forEach {
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(stringResource(id = it.first))
+                                    },
+                                    onClick = {
+                                        isMenuOpen = false
+                                        it.second(activity)
+                                    }
+                                )
+                            }
+
                             DropdownMenuItem(
                                 text = {
                                     Text(stringResource(id = R.string.menu_title_create_shortcut))
@@ -337,7 +370,8 @@ private fun FeatureItem(
                 onItemClick(item)
             }),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top) {
+        verticalArrangement = Arrangement.Top
+    ) {
         val density = LocalDensity.current
         val iconSize: Float = remember {
             with(density) {
@@ -453,11 +487,15 @@ private fun PrivacyStatementDialog(
     ThanoxAlertDialog(title = {
         Text(text = stringResource(id = R.string.privacy_agreement_title))
     }, text = {
-        Column(modifier = Modifier
-            .fillMaxHeight(fraction = 0.64f)
-            .verticalScroll(rememberScrollState())) {
-            Text(text = HtmlCompat.fromHtml(privacyAgreement, HtmlCompat.FROM_HTML_MODE_COMPACT)
-                .toAnnotatedString())
+        Column(
+            modifier = Modifier
+                .fillMaxHeight(fraction = 0.64f)
+                .verticalScroll(rememberScrollState())
+        ) {
+            Text(
+                text = HtmlCompat.fromHtml(privacyAgreement, HtmlCompat.FROM_HTML_MODE_COMPACT)
+                    .toAnnotatedString()
+            )
         }
     }, onDismissRequest = onDismissRequest, confirmButton = {
         TextButton(onClick = {
@@ -514,7 +552,8 @@ private fun FirstRunDialog(
                 Text(text = stringResource(android.R.string.cancel))
             }
         },
-        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false))
+        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
+    )
 }
 
 
@@ -526,8 +565,12 @@ private fun MultiplePatchDialog(
     ThanoxAlertDialog(title = {
         Text(text = stringResource(id = R.string.title_multiple_patch_applied_error))
     }, text = {
-        Text(text = stringResource(id = R.string.message_multiple_patch_applied_error,
-            patchSources.joinToString(" ")))
+        Text(
+            text = stringResource(
+                id = R.string.message_multiple_patch_applied_error,
+                patchSources.joinToString(" ")
+            )
+        )
     }, onDismissRequest = onDismissRequest, confirmButton = {
         TextButton(onClick = {
             onDismissRequest()

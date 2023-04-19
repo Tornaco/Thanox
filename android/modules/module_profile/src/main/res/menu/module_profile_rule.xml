@@ -55,14 +55,14 @@
     <item
         android:id="@+id/action_rule_console"
         android:icon="@drawable/module_common_ic_settings_fill"
-        android:title="Action Console"
+        android:title="@string/module_profile_title_action_console"
         app:showAsAction="never"
         tools:ignore="AlwaysShowAction" />
 
     <item
         android:id="@+id/action_rule_log"
         android:icon="@drawable/module_common_ic_settings_fill"
-        android:title="Log"
+        android:title="@string/module_profile_title_log"
         app:showAsAction="never"
         tools:ignore="AlwaysShowAction" />
 </menu>

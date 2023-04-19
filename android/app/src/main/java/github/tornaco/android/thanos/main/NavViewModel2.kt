@@ -41,6 +41,8 @@ data class FeatureItem(
     @DrawableRes val iconRes: Int,
     val requiredFeature: String? = null,
     @ColorRes val themeColor: Int,
+
+    val menuItems: List<Pair<Int, (Activity) -> Unit>> = emptyList()
 )
 
 data class FeatureItemGroup(
@@ -68,16 +70,20 @@ val androidVersionTooLowKey get() = "PREF_ANDROID_VERSION_TOO_LOW_V_" + BuildPro
 class NavViewModel2 @Inject constructor(@ApplicationContext private val context: Context) :
     LifeCycleAwareViewModel() {
 
-    private val _state = MutableStateFlow(NavState(isLoading = false,
-        features = PrebuiltFeatures.all(),
-        statusHeaderInfo = defaultStatusHeaderInfo,
-        activeStatus = ActiveStatus.Unknown,
-        hasFrameworkError = false,
-        isPurchased = true,
-        showPrivacyStatement = false,
-        showFirstRunTips = false,
-        isAndroidVersionTooLow = false,
-        patchSources = emptyList()))
+    private val _state = MutableStateFlow(
+        NavState(
+            isLoading = false,
+            features = PrebuiltFeatures.all(),
+            statusHeaderInfo = defaultStatusHeaderInfo,
+            activeStatus = ActiveStatus.Unknown,
+            hasFrameworkError = false,
+            isPurchased = true,
+            showPrivacyStatement = false,
+            showFirstRunTips = false,
+            isAndroidVersionTooLow = false,
+            patchSources = emptyList()
+        )
+    )
     val state = _state.asStateFlow()
 
     private val thanox by lazy { ThanosManager.from(context) }
@@ -152,7 +158,9 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
             val isAndroidTooLowAccepted = isAndroidVersionTooLowAccepted()
             _state.value = _state.value.copy(
                 showPrivacyStatement = !isPrivacyStatementAccepted,
-                showFirstRunTips = isPrivacyStatementAccepted && !thanox.isServiceInstalled && AppPreference.isFirstRun(context),
+                showFirstRunTips = isPrivacyStatementAccepted && !thanox.isServiceInstalled && AppPreference.isFirstRun(
+                    context
+                ),
                 patchSources = if (thanox.isServiceInstalled) thanox.patchingSource else emptyList(),
                 isAndroidVersionTooLow = !isAndroidTooLowAccepted && !OsUtils.isOOrAbove()
             )
@@ -188,8 +196,10 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                     swapEnabled = swapInfo.totalSwap > 0
                     if (swapEnabled) {
                         swapTotalSizeString = Formatter.formatFileSize(context, swapInfo.totalSwap)
-                        swapUsageSizeString = Formatter.formatFileSize(context,
-                            swapInfo.totalSwap - swapInfo.freeSwap)
+                        swapUsageSizeString = Formatter.formatFileSize(
+                            context,
+                            swapInfo.totalSwap - swapInfo.freeSwap
+                        )
                         swapAvailableSizeString =
                             Formatter.formatFileSize(context, swapInfo.freeSwap)
                         swapUsedPercent =
@@ -201,20 +211,26 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                 val cpuPercent =
                     (thanox.activityManager.getTotalCpuPercent(true)).coerceAtLeast(1f).toInt()
 
-                StatusHeaderInfo(runningAppsCount = runningAppsCount,
-                    memory = MemUsage(memType = MemType.MEMORY,
+                StatusHeaderInfo(
+                    runningAppsCount = runningAppsCount,
+                    memory = MemUsage(
+                        memType = MemType.MEMORY,
                         memTotalSizeString = memTotalSizeString,
                         memUsagePercent = memUsedPercent,
                         memUsageSizeString = memUsageSizeString,
                         memAvailableSizeString = memAvailableSizeString,
-                        isEnabled = true),
-                    swap = MemUsage(memType = MemType.SWAP,
+                        isEnabled = true
+                    ),
+                    swap = MemUsage(
+                        memType = MemType.SWAP,
                         memTotalSizeString = swapTotalSizeString,
                         memUsagePercent = swapUsedPercent,
                         memUsageSizeString = swapUsageSizeString,
                         memAvailableSizeString = swapAvailableSizeString,
-                        isEnabled = swapEnabled),
-                    cpu = CpuUsage(totalPercent = cpuPercent))
+                        isEnabled = swapEnabled
+                    ),
+                    cpu = CpuUsage(totalPercent = cpuPercent)
+                )
 
             }.getOrElse {
                 XLog.e("getStatusHeaderInfo error", it)

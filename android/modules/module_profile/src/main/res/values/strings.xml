@@ -4,6 +4,9 @@
 
     <string name="module_profile_title_global_var">Global variant</string>
     <string name="module_profile_title_rule_engine">Engine</string>
+    <string name="module_profile_title_action_console">Action Console</string>
+    <string name="module_profile_title_log">Log</string>
+
     <string name="module_profile_summary_rule_engine">The engine is a tool for publishing facts. Thanox has multiple publishers enabled by default. The following engines support turning on or off. Please pay attention to the engine description, shutting down the engine may cause some profiles to not be triggered or executed normally</string>
     <string name="module_profile_pref_title_rule_engine_automation">Automation</string>
     <string name="module_profile_pref_summary_rule_engine_automation">Supports performing automatic clicks and find views. \n\n📢

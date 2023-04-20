@@ -16,6 +16,7 @@
     <string name="module_profile_should_enable_su">قد يحتاج ملف التعريف هذا إلى فتح su API للعمل ، يرجى إدخال إعدادات المحرك للتمكين</string>
     <string name="module_profile_should_enable_push">قد يحتاج ملف التعريف هذا إلى فتح محرك رسائل الدفع ليعمل ، يرجى إدخال إعدادات المحرك لفتحه</string>
     <string name="module_profile_miss_global_var">قد لا يعمل ملف التعريف هذا نظرًا لعدم وجود var العام أدناه ، فأنت بحاجة إلى إنشاء هذه المتغيرات.  %s</string>
+    <string name="module_profile_block_thread">This profile may call Thread.sleep, which may block the execution of other profiles; please adjust the priority of this profile to a negative number so that it will be executed in a new thread.</string>
 
     <string name="module_profile_pref_title_rule_engine_shortcut">من الاختصار</string>
     <string name="module_profile_pref_summary_rule_engine_shortcut">قم بإنشاء اختصار على سطح المكتب ، عندما يتم النقر فوق هذا الاختصار للبدء ، سينشر thanox حقيقة أن الاختصار يمثل</string>

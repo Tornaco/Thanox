@@ -308,6 +308,12 @@ public class RuleListViewModel extends AndroidViewModel {
             return new RuleUiItem(info, warn);
         }
 
+        if (info.getRuleString().contains("Thread.sleep") && info.getPriority() >= 0) {
+            String warn = getApplication().getString(R.string.module_profile_block_thread);
+            return new RuleUiItem(info, warn);
+        }
+
+
         return new RuleUiItem(info, null);
     }
 }

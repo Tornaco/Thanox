@@ -14,7 +14,8 @@ data class RuleInfo(
     var updateTimeMills: Long,
     var enabled: Boolean,
     var format: Int,
-    var versionCode: Int
+    var versionCode: Int,
+    var priority: Int,
 ) : Parcelable {
 
     private constructor(parcel: Parcel) : this(
@@ -25,6 +26,7 @@ data class RuleInfo(
         parcel.readString(),
         parcel.readLong(),
         parcel.readByte() != 0.toByte(),
+        parcel.readInt(),
         parcel.readInt(),
         parcel.readInt()
     )
@@ -39,6 +41,7 @@ data class RuleInfo(
         parcel.writeByte(if (enabled) 1 else 0)
         parcel.writeInt(format)
         parcel.writeInt(versionCode)
+        parcel.writeInt(priority)
     }
 
     override fun describeContents(): Int {
@@ -58,6 +61,7 @@ data class RuleInfo(
         if (author != other.author) return false
         if (format != other.format) return false
         if (versionCode != other.versionCode) return false
+        if (priority != other.priority) return false
 
         return true
     }
@@ -67,6 +71,7 @@ data class RuleInfo(
         result = 31 * result + ruleString.hashCode()
         result = 31 * result + format
         result = 31 * result + versionCode
+        result = 31 * result + priority
         return result
     }
 

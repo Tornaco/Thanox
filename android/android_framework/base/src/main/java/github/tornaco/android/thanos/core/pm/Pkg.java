@@ -73,6 +73,10 @@ public class Pkg implements Parcelable {
         return Objects.hash(pkgName, userId);
     }
 
+    public static Pkg newPkg(String pkgName, int userId) {
+        return new Pkg(pkgName, userId);
+    }
+
     public static Pkg from(String pkgName, int uid) {
         return new Pkg(pkgName, UserHandle.getUserId(uid));
     }

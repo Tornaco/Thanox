@@ -8,6 +8,8 @@ public interface IActivity {
 
     boolean launchProcessForPackage(String pkgName);
 
+    boolean launchProcessForPackage(String pkgName, int userId);
+
     boolean launchActivity(Intent intent);
 
     boolean launchMainActivityForPackage(String pkgName);

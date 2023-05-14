@@ -35,7 +35,7 @@ import rx2.android.schedulers.AndroidSchedulers;
 import util.IoUtils;
 
 public class ExportPatchUi {
-    private final static int REQUEST_CODE_EXPORT_MAGISK_FILE_PICKED = 0x100;
+    public final static int REQUEST_CODE_EXPORT_MAGISK_FILE_PICKED = 0x400;
 
     private Activity activity;
     private Fragment fragment;

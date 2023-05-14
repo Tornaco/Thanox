@@ -1,5 +1,7 @@
 package github.tornaco.android.thanos.settings;
 
+import static github.tornaco.android.thanos.settings.ExportPatchUi.REQUEST_CODE_EXPORT_MAGISK_FILE_PICKED;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -82,8 +84,6 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     private final static int REQUEST_CODE_BACKUP_FILE_PICK = 0x100;
     private final static int REQUEST_CODE_RESTORE_FILE_PICK = 0x200;
     private final static int REQUEST_CODE_BACKUP_FILE_PICK_Q = 0x300;
-
-    private final static int REQUEST_CODE_EXPORT_PATCH = 0x400;
 
     private int buildInfoClickTimes = 0;
     private ExportPatchUi exportPatchUi;
@@ -438,7 +438,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
             onBackupFilePickRequestResult(data);
         } else if (requestCode == REQUEST_CODE_BACKUP_FILE_PICK_Q && resultCode == Activity.RESULT_OK) {
             onBackupFilePickRequestResultQ(data);
-        } else if (requestCode == REQUEST_CODE_EXPORT_PATCH) {
+        } else if (requestCode == REQUEST_CODE_EXPORT_MAGISK_FILE_PICKED && resultCode == Activity.RESULT_OK) {
             exportPatchUi.handleActivityResult(requestCode, resultCode, data);
         }
     }

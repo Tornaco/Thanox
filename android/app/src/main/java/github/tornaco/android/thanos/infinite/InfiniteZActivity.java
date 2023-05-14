@@ -290,10 +290,7 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void onRequestAddApp() {
         ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager -> {
-            ArrayList<Pkg> exclude = thanosManager.getInfiniteZ().getInstalledPackages()
-                    .stream()
-                    .map(appInfo -> Pkg.systemUserPkg(appInfo.getPkgName()))
-                    .collect(Collectors.toCollection(Lists::newArrayList));
+            ArrayList<Pkg> exclude = new ArrayList<>(0);
             AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
         });
     }

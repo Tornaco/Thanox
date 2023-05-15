@@ -29,8 +29,14 @@ public class WindowManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public boolean hasVisibleWindows(String pkgName) {
         return getVisibleWindows().stream().anyMatch(windowState -> windowState.packageName.equals(pkgName));
+    }
+
+    @SneakyThrows
+    public boolean hasVisibleWindows(String pkgName, int userId) {
+        return hasVisibleWindows(new Pkg(pkgName, userId));
     }
 
     @SneakyThrows

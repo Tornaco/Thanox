@@ -14,19 +14,6 @@ object XWindowManagerService {
     }
 
     @JvmStatic
-    fun getInstance(classLoader: ClassLoader): Any? {
-        return kotlin.runCatching {
-            XposedHelpers.callStaticMethod(
-                wmsClass(classLoader),
-                "getInstance"
-            )
-        }.getOrElse {
-            XLog.e("XWindowManagerService#getInstance error", it)
-            null
-        }
-    }
-
-    @JvmStatic
     fun getRoot(wms: Any): Any? {
         return kotlin.runCatching {
             XposedHelpers.getObjectField(

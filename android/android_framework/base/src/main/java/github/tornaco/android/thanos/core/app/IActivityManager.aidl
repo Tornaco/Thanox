@@ -129,8 +129,8 @@ interface IActivityManager {
     void deleteStandbyRule(String rule);
     String[] getAllStandbyRules();
 
-    RunningServiceInfoCompat[] getRunningAppServiceForPackage(String pkgName);
-    boolean hasRunningServiceForPackage(String pkgName);
+    RunningServiceInfoCompat[] getRunningAppServiceForPackage(String pkgName, int userId);
+    boolean hasRunningServiceForPackage(String pkgName, int userId);
 
     UserInfo getUserInfo(int userHandle);
 

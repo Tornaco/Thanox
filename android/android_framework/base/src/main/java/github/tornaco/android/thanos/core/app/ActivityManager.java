@@ -592,13 +592,25 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public RunningServiceInfoCompat[] getRunningAppServiceForPackage(String pkgName) {
-        return server.getRunningAppServiceForPackage(pkgName);
+        return server.getRunningAppServiceForPackage(pkgName,  UserHandle.getCallingUserId());
     }
 
     @SneakyThrows
+    public RunningServiceInfoCompat[] getRunningAppServiceForPackage(String pkgName, int userId) {
+        return server.getRunningAppServiceForPackage(pkgName, userId);
+    }
+
+    @SneakyThrows
+    @Deprecated
     public boolean hasRunningServiceForPackage(String pkgName) {
-        return server.hasRunningServiceForPackage(pkgName);
+        return server.hasRunningServiceForPackage(pkgName, UserHandle.getCallingUserId());
+    }
+
+    @SneakyThrows
+    public boolean hasRunningServiceForPackage(String pkgName, int userId) {
+        return server.hasRunningServiceForPackage(pkgName, userId);
     }
 
     @SneakyThrows

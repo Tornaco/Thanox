@@ -285,11 +285,11 @@ public interface IActivityManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public github.tornaco.android.thanos.core.app.RunningServiceInfoCompat[] getRunningAppServiceForPackage(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public github.tornaco.android.thanos.core.app.RunningServiceInfoCompat[] getRunningAppServiceForPackage(java.lang.String pkgName, int userId) throws android.os.RemoteException
     {
       return null;
     }
-    @Override public boolean hasRunningServiceForPackage(java.lang.String pkgName) throws android.os.RemoteException
+    @Override public boolean hasRunningServiceForPackage(java.lang.String pkgName, int userId) throws android.os.RemoteException
     {
       return false;
     }
@@ -1406,7 +1406,9 @@ public interface IActivityManager extends android.os.IInterface
           data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
-          github.tornaco.android.thanos.core.app.RunningServiceInfoCompat[] _result = this.getRunningAppServiceForPackage(_arg0);
+          int _arg1;
+          _arg1 = data.readInt();
+          github.tornaco.android.thanos.core.app.RunningServiceInfoCompat[] _result = this.getRunningAppServiceForPackage(_arg0, _arg1);
           reply.writeNoException();
           reply.writeTypedArray(_result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
           return true;
@@ -1416,7 +1418,9 @@ public interface IActivityManager extends android.os.IInterface
           data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
-          boolean _result = this.hasRunningServiceForPackage(_arg0);
+          int _arg1;
+          _arg1 = data.readInt();
+          boolean _result = this.hasRunningServiceForPackage(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
           return true;
@@ -3767,7 +3771,7 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public github.tornaco.android.thanos.core.app.RunningServiceInfoCompat[] getRunningAppServiceForPackage(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public github.tornaco.android.thanos.core.app.RunningServiceInfoCompat[] getRunningAppServiceForPackage(java.lang.String pkgName, int userId) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -3775,9 +3779,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
+          _data.writeInt(userId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRunningAppServiceForPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRunningAppServiceForPackage(pkgName);
+            return getDefaultImpl().getRunningAppServiceForPackage(pkgName, userId);
           }
           _reply.readException();
           _result = _reply.createTypedArray(github.tornaco.android.thanos.core.app.RunningServiceInfoCompat.CREATOR);
@@ -3788,7 +3793,7 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public boolean hasRunningServiceForPackage(java.lang.String pkgName) throws android.os.RemoteException
+      @Override public boolean hasRunningServiceForPackage(java.lang.String pkgName, int userId) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -3796,9 +3801,10 @@ public interface IActivityManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
+          _data.writeInt(userId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasRunningServiceForPackage, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasRunningServiceForPackage(pkgName);
+            return getDefaultImpl().hasRunningServiceForPackage(pkgName, userId);
           }
           _reply.readException();
           _result = (0!=_reply.readInt());
@@ -5383,8 +5389,8 @@ public interface IActivityManager extends android.os.IInterface
   public void addStandbyRule(java.lang.String rule) throws android.os.RemoteException;
   public void deleteStandbyRule(java.lang.String rule) throws android.os.RemoteException;
   public java.lang.String[] getAllStandbyRules() throws android.os.RemoteException;
-  public github.tornaco.android.thanos.core.app.RunningServiceInfoCompat[] getRunningAppServiceForPackage(java.lang.String pkgName) throws android.os.RemoteException;
-  public boolean hasRunningServiceForPackage(java.lang.String pkgName) throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.app.RunningServiceInfoCompat[] getRunningAppServiceForPackage(java.lang.String pkgName, int userId) throws android.os.RemoteException;
+  public boolean hasRunningServiceForPackage(java.lang.String pkgName, int userId) throws android.os.RemoteException;
   public android.content.pm.UserInfo getUserInfo(int userHandle) throws android.os.RemoteException;
   public boolean stopService(android.content.Intent intent) throws android.os.RemoteException;
   public boolean killBackgroundProcesses(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;

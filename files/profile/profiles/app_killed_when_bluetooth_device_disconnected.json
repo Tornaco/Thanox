@@ -1,0 +1,18 @@
+{
+    "author": "Miseryset",
+    "version": 1,
+    "tags": [
+        "app_opt"
+    ],
+    "profile": {
+        "name": "自动关闭'Edifier Connect'",
+        "description": "蓝牙断开漫步者耳机自动关闭漫步者软件",
+        "priority": 2,
+        "condition": "btConnectionStateChanged == true && btConnectionStateDisconnected == true && task.hasTaskFromPackage(\"com.edifier.edifierconnect\")",
+        "actions": [
+          "ui.showShortToast(\"关闭 Edifier\");",
+          "killer.killPackage(\"com.edifier.edifierconnect\")",
+          "task.removeTasksForPackage(\"com.edifier.edifierconnect\")"
+    ]
+    }
+}

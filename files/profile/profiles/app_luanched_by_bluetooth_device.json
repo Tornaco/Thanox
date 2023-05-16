@@ -1,0 +1,17 @@
+{
+    "author": "Miseryset",
+    "version": 1,
+    "tags": [
+        "app_opt"
+    ],
+    "profile": {
+        "name": "自动打开'Edifier Connect'",
+        "description": "蓝牙连接到漫步者耳机自动打开漫步者软件，自己修改蓝牙地址",
+        "priority": 2,
+        "condition": "btConnectionStateChanged == true && btConnectionStateConnected == true && btBoundedDeviceAddresses.contains(\"64:68:76:78:E1:68\")",
+        "actions": [
+          "ui.showShortToast(\"启动 Edifier\");",
+          "activity.launchMainActivityForPackage(\"com.edifier.edifierconnect\")"
+    ]
+    }
+}

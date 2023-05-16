@@ -29,6 +29,9 @@ import github.tornaco.android.thanos.app.Init
 import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.thanos.android.noroot.NoRootSupport.install
 import github.tornaco.thanos.module.component.manager.initRules
+import io.github.libxposed.service.XposedService
+import io.github.libxposed.service.XposedServiceHelper
+import io.github.libxposed.service.XposedServiceHelper.OnServiceListener
 import io.reactivex.plugins.RxJavaPlugins
 
 @HiltAndroidApp
@@ -63,6 +66,16 @@ class ThanosApp : MultipleModulesApp(), NavigationApplication {
         FeatureAccessStats.init(this)
         initRules(this.applicationContext)
         install()
+
+        XposedServiceHelper.registerListener(object : OnServiceListener {
+            override fun onServiceBind(service: XposedService) {
+                XLog.w("XposedServiceHelper onServiceBind: $service")
+            }
+
+            override fun onServiceDied(service: XposedService) {
+                XLog.w("XposedServiceHelper onServiceDied: $service")
+            }
+        })
     }
 
     companion object {

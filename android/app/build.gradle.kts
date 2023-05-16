@@ -219,6 +219,7 @@ dependencies {
     implementation(project(":third_party:search"))
     implementation(project(":third_party:remix"))
     implementation(project(":third_party:reorderable"))
+    implementation(project("::third_party:libxposed:service"))
 }
 
 typealias Properties = java.util.Properties

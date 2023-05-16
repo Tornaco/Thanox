@@ -215,3 +215,7 @@
 -keep class org.jeasy.rules.core.** {*;}
 -keep class org.mvel2.** {*;}
 -dontwarn org.mvel2.**
+
+
+
+-keep class io.github.libxposed.** { *; }

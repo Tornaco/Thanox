@@ -113,8 +113,8 @@ public class XposedHookCompiler extends AbstractProcessor {
                         .classBuilder(className)
                         .addModifiers(FINAL, PUBLIC);
 
-        ClassName IXposedHookZygoteInit = ClassName.get("de.robv.android.xposed", "IXposedHookZygoteInit");
-        ClassName IXposedHookLoadPackage = ClassName.get("de.robv.android.xposed", "IXposedHookLoadPackage");
+        ClassName IXposedHookZygoteInit = ClassName.get("github.tornaco.android.thanos.services.xposed", "IPackageLoaded");
+        ClassName IXposedHookLoadPackage = ClassName.get("github.tornaco.android.thanos.services.xposed", "ISystemServerLoaded");
         // Lists.
         ClassName listClazz = ClassName.get("java.util", "List");
         TypeName listOfIXposedHookZygoteInit = ParameterizedTypeName.get(listClazz, IXposedHookZygoteInit);

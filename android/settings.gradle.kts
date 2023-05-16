@@ -60,6 +60,9 @@ include(":third_party:time-duration-picker")
 include(":third_party:remix")
 include(":third_party:compose-color-picker")
 include(":third_party:reorderable")
+include(":third_party:libxposed:interface")
+include(":third_party:libxposed:service")
+include(":third_party:libxposed:api")
 
 
 include(":android_framework:base")

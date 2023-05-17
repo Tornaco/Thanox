@@ -59,6 +59,7 @@ import github.tornaco.android.thanos.core.util.Optional;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity3;
+import github.tornaco.android.thanos.pref.AppPreference;
 import github.tornaco.android.thanos.settings.access.SettingsAccessRecordViewerActivity;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.theme.Theme;
@@ -202,6 +203,12 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     }
 
     protected void onBindStrategyPreferences() {
+        SwitchPreferenceCompat autoXposedScope = findPreference(getString(R.string.key_new_auto_request_xposed_scope));
+        autoXposedScope.setChecked(AppPreference.isAutoRequestXposedScopeEnabled(requireContext()));
+        autoXposedScope.setOnPreferenceChangeListener((preference, newValue) -> {
+            AppPreference.setAutoRequestXposedScopeEnabled(requireContext(), (Boolean) newValue);
+            return true;
+        });
 
         ThanosManager thanos = ThanosManager.from(getContext());
         if (!thanos.isServiceInstalled()) {

@@ -270,6 +270,10 @@
     <string name="pref_title_new_installed_apps_config">Config template</string>
     <string name="pref_summary_new_installed_apps_config">Edit template for auto configuration</string>
 
+    <string name="pref_title_auto_request_xposed_scope">Request Xposed scope</string>
+    <string name="pref_summary_auto_request_xposed_scope">When you enable the feature that relies on the Xposed scope for the app, Thanox will automatically request the Scope. Please pay attention to the system notification \nAttention, this feature depends on the latest version of the LSPosed framework \nPlease also check the system settings and the Thanox settings, allowing Thanox bg start</string>
+
+
     <string name="pref_title_config_template_category">Templates</string>
     <string name="pref_action_create_new_config_template">Create templates</string>
     <string name="pref_action_edit_or_view_config_template">View &amp; Edit</string>

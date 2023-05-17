@@ -25,11 +25,13 @@ import rikka.sui.Sui
 object NoRootSupport {
 
     fun install() {
-        kotlin.runCatching {
-            val isSui = Sui.init(BuildProp.THANOS_APP_PKG_NAME)
-            XLog.d("NoRootSupport install, isSui? $isSui")
-        }.onFailure {
-            XLog.e("NoRootSupport install error", it)
+        if (BuildProp.THANOS_BUILD_DEBUG) {
+            kotlin.runCatching {
+                val isSui = Sui.init(BuildProp.THANOS_APP_PKG_NAME)
+                XLog.d("NoRootSupport install, isSui? $isSui")
+            }.onFailure {
+                XLog.e("NoRootSupport install error", it)
+            }
         }
     }
 }

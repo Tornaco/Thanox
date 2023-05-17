@@ -274,6 +274,9 @@
     <string name="pref_title_new_installed_apps_config">模板設置</string>
     <string name="pref_summary_new_installed_apps_config">設置自動應用的模板</string>
 
+    <string name="pref_title_auto_request_xposed_scope">申請Xposed作用域</string>
+    <string name="pref_summary_auto_request_xposed_scope">【實驗性功能】當你對應用啟用了依賴Xposed scope的功能時，Thanox將會自動申請Scope，屆時請留意系統通知 \n注意，此功能依賴最新版本的LSPosed框架 \n另外請允許Thanox的自啟動與關聯啟動</string>
+
     <string name="pref_title_config_template_category">配置模板</string>
     <string name="pref_action_create_new_config_template">建立模板</string>
     <string name="pref_action_edit_or_view_config_template">檢視&amp;編輯</string>

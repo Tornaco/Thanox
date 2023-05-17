@@ -174,6 +174,7 @@
     <string name="key_app_feature_config_redaction_notification_text" translatable="false">key_app_feature_config_redaction_notification_text</string>
 
     <string name="key_strategy" translatable="false">key_strategy</string>
+    <string name="key_new_auto_request_xposed_scope" translatable="false">key_new_auto_request_xposed_scope</string>
     <string name="key_new_installed_apps_config" translatable="false">key_new_installed_apps_config</string>
     <string name="key_new_installed_apps_config_enabled" translatable="false">key_new_installed_apps_config_enabled</string>
     <string name="key_config_template_category" translatable="false">key_config_template_category</string>

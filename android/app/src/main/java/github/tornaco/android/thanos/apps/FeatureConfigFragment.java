@@ -27,6 +27,7 @@ import java.util.Objects;
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.XposedScope;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -260,6 +261,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 boolean isDummyNoop = f.getId() == null;
                 ThanosManager.from(requireContext()).getPrivacyManager().selectFieldsProfileForPackage(appInfo.getPkgName(), isDummyNoop ? null : f.getId());
                 vp.setSummary(isDummyNoop ? noSet : f.getLabel());
+                XposedScope.INSTANCE.requestOrRemoveScope(requireContext(), Pkg.fromAppInfo(appInfo));
             });
 
             return true;
@@ -362,6 +364,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             dialogForceCancelablePref.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean isChecked = (boolean) newValue;
                 ThanosManager.from(getContext()).getWindowManager().setDialogForceCancelable(appInfo.getPkgName(), isChecked);
+                XposedScope.INSTANCE.requestOrRemoveScope(requireContext(), Pkg.fromAppInfo(appInfo));
                 return true;
             });
         }

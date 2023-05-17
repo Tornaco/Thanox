@@ -14,10 +14,12 @@ import java.util.List;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.XposedScope;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.secure.PrivacyManager;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
@@ -76,6 +78,7 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
                                                 .getPrivacyManager()
                                                 .selectFieldsProfileForPackage(
                                                         appInfo.getPkgName(), isDummyNoop ? null : f.getId());
+                                        XposedScope.INSTANCE.requestOrRemoveScope(getApplicationContext(), Pkg.fromAppInfo(appInfo));
 
                                         appListFilterAdapter.updateSingleItem(
                                                 input -> {

@@ -58,33 +58,6 @@
 
         </PreferenceCategory>
 
-
-        <PreferenceCategory
-            android:key="@string/key_general"
-            app:title="@string/pre_category_general">
-
-            <SwitchPreferenceCompat
-                app:key="@string/key_enable_power_save"
-                app:persistent="false"
-                app:summary="@string/pref_summary_enable_power_save"
-                app:title="@string/pref_title_enable_power_save" />
-
-            <SwitchPreferenceCompat
-                app:isPreferenceVisible="false"
-                app:key="@string/key_enable_battery_drain_app_reminging"
-                app:persistent="false"
-                app:summary="@string/pref_summary_enable_high_battery_drain_app_reminding"
-                app:title="@string/pref_title_enable_high_battery_drain_app_reminding" />
-
-            <SwitchPreferenceCompat
-                app:key="@string/key_enable_global_white_list"
-                app:persistent="false"
-                app:summary="@string/pref_summary_enable_global_white_list"
-                app:title="@string/pref_title_enable_global_white_list" />
-
-        </PreferenceCategory>
-
-
         <PreferenceCategory
             android:key="@string/key_data"
             app:title="@string/pre_category_data">
@@ -107,6 +80,36 @@
                 app:title="@string/pre_title_restore_default" />
         </PreferenceCategory>
 
+        <PreferenceCategory
+            android:key="@string/key_general"
+            app:title="@string/pre_category_general">
+
+            <SwitchPreferenceCompat
+                app:key="@string/key_enable_power_save"
+                app:persistent="false"
+                app:summary="@string/pref_summary_enable_power_save"
+                app:title="@string/pref_title_enable_power_save" />
+
+            <SwitchPreferenceCompat
+                app:key="@string/key_new_auto_request_xposed_scope"
+                app:persistent="false"
+                app:summary="@string/pref_summary_auto_request_xposed_scope"
+                app:title="@string/pref_title_auto_request_xposed_scope" />
+
+            <SwitchPreferenceCompat
+                app:isPreferenceVisible="false"
+                app:key="@string/key_enable_battery_drain_app_reminging"
+                app:persistent="false"
+                app:summary="@string/pref_summary_enable_high_battery_drain_app_reminding"
+                app:title="@string/pref_title_enable_high_battery_drain_app_reminding" />
+
+            <SwitchPreferenceCompat
+                app:key="@string/key_enable_global_white_list"
+                app:persistent="false"
+                app:summary="@string/pref_summary_enable_global_white_list"
+                app:title="@string/pref_title_enable_global_white_list" />
+
+        </PreferenceCategory>
 
         <PreferenceCategory
             android:key="@string/key_developer"

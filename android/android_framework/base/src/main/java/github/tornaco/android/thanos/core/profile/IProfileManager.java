@@ -133,7 +133,7 @@ public interface IProfileManager extends android.os.IInterface
     @Override public void addRuleIfNotExists(java.lang.String author, int versionCode, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
     {
     }
-    @Override public void publishStringFact(int source, java.lang.String factValue, long delayMills) throws android.os.RemoteException
+    @Override public void publishStringFact(int source, java.lang.String factValue, long delayMills, java.lang.String[] args) throws android.os.RemoteException
     {
     }
     @Override public void updateRule(int ruleId, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException
@@ -638,7 +638,9 @@ public interface IProfileManager extends android.os.IInterface
           _arg1 = data.readString();
           long _arg2;
           _arg2 = data.readLong();
-          this.publishStringFact(_arg0, _arg1, _arg2);
+          java.lang.String[] _arg3;
+          _arg3 = data.createStringArray();
+          this.publishStringFact(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
           return true;
         }
@@ -1670,7 +1672,7 @@ public interface IProfileManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void publishStringFact(int source, java.lang.String factValue, long delayMills) throws android.os.RemoteException
+      @Override public void publishStringFact(int source, java.lang.String factValue, long delayMills, java.lang.String[] args) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -1679,9 +1681,10 @@ public interface IProfileManager extends android.os.IInterface
           _data.writeInt(source);
           _data.writeString(factValue);
           _data.writeLong(delayMills);
+          _data.writeStringArray(args);
           boolean _status = mRemote.transact(Stub.TRANSACTION_publishStringFact, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().publishStringFact(source, factValue, delayMills);
+            getDefaultImpl().publishStringFact(source, factValue, delayMills, args);
             return;
           }
           _reply.readException();
@@ -2352,7 +2355,7 @@ public interface IProfileManager extends android.os.IInterface
   public java.lang.String getAutoConfigTemplateSelectionId() throws android.os.RemoteException;
   public boolean applyConfigTemplateForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.profile.ConfigTemplate template) throws android.os.RemoteException;
   public void addRuleIfNotExists(java.lang.String author, int versionCode, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
-  public void publishStringFact(int source, java.lang.String factValue, long delayMills) throws android.os.RemoteException;
+  public void publishStringFact(int source, java.lang.String factValue, long delayMills, java.lang.String[] args) throws android.os.RemoteException;
   public void updateRule(int ruleId, java.lang.String ruleJson, github.tornaco.android.thanos.core.profile.IRuleAddCallback callback, int format) throws android.os.RemoteException;
   public void registerRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException;
   public void unRegisterRuleChangeListener(github.tornaco.android.thanos.core.profile.IRuleChangeListener listener) throws android.os.RemoteException;

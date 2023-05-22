@@ -249,7 +249,12 @@ public class ProfileManager {
 
     @SneakyThrows
     public void publishStringFact(int source, String factValue, long delayMills) {
-        server.publishStringFact(source, factValue, delayMills);
+        server.publishStringFact(source, factValue, delayMills, new String[0]);
+    }
+
+    @SneakyThrows
+    public void publishStringFact(int source, String factValue, long delayMills, String[] args) {
+        server.publishStringFact(source, factValue, delayMills, args);
     }
 
     @SneakyThrows

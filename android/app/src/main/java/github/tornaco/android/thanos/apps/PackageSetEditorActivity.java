@@ -9,8 +9,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
 import com.elvishew.xlog.XLog;
 import com.google.android.material.chip.Chip;
@@ -23,7 +21,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.common.AppItemViewLongClickListener;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
@@ -221,10 +218,5 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
                     });
         });
         return adapter;
-    }
-
-    @Override
-    protected LayoutManager onCreateLayoutManager() {
-        return new GridLayoutManager(thisActivity(), 2);
     }
 }

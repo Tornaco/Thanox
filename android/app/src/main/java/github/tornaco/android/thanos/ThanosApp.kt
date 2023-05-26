@@ -26,6 +26,9 @@ import dev.enro.core.controller.navigationController
 import dev.enro.core.plugins.EnroLogger
 import github.tornaco.android.thanos.app.FeatureAccessStats
 import github.tornaco.android.thanos.app.Init
+import github.tornaco.android.thanos.apps.AppDetailsActivity
+import github.tornaco.android.thanos.common.AppItemViewLongClickListener
+import github.tornaco.android.thanos.common.CommonAppListFilterAdapter
 import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.thanos.android.noroot.NoRootSupport
 import github.tornaco.thanos.module.component.manager.initRules
@@ -59,11 +62,19 @@ class ThanosApp : MultipleModulesApp(), NavigationApplication {
         if (BuildProp.THANOS_BUILD_DEBUG) {
             DeveloperDiag.diag(this)
         }
+
         Init.init(this)
         FeatureAccessStats.init(this)
         initRules(this.applicationContext)
         NoRootSupport.install()
         XposedScope.init()
+
+        CommonAppListFilterAdapter.fallbackAppItemLongClickListener =
+            AppItemViewLongClickListener { _, model ->
+                model?.appInfo?.let {
+                    AppDetailsActivity.start(this@ThanosApp, it)
+                }
+            }
     }
 
     companion object {

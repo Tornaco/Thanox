@@ -1,5 +1,7 @@
 package github.tornaco.android.thanos.common;
 
+import static github.tornaco.android.thanos.common.CommonAppListFilterAdapter.fallbackAppItemLongClickListener;
+
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -67,6 +69,13 @@ class CommonFuncToggleAppListFilterAdapter extends RecyclerView.Adapter<CommonFu
                     appItemViewActionListener.onAppItemSwitchStateChange(appInfo, checked);
                 }
             }
+        });
+        holder.binding.setLongClickListener(appInfo -> {
+            // Fallback go to app details.
+            if (fallbackAppItemLongClickListener != null) {
+                fallbackAppItemLongClickListener.onAppItemLongClick(holder.itemView, model);
+            }
+            return true;
         });
         holder.binding.setBadge1(model.badge);
         holder.binding.setBadge2(model.badge2);

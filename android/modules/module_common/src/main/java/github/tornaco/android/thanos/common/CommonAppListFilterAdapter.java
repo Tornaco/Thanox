@@ -19,10 +19,13 @@ import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.module.common.databinding.ItemCommonAppBinding;
 import util.Consumer;
 
+
 public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppListFilterAdapter.VH>
     implements Consumer<List<AppListModel>>,
     FastScrollRecyclerView.SectionedAdapter,
     FastScrollRecyclerView.MeasurableAdapter<CommonAppListFilterAdapter.VH> {
+
+  public static AppItemViewLongClickListener fallbackAppItemLongClickListener;
 
   private final List<AppListModel> listModels = new ArrayList<>();
 
@@ -104,6 +107,11 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
     holder.binding.setLongClickListener(appInfo -> {
       if (itemViewLongClickListener != null) {
         itemViewLongClickListener.onAppItemLongClick(holder.itemView, model);
+      } else {
+        // Fallback go to app details.
+        if (fallbackAppItemLongClickListener != null) {
+          fallbackAppItemLongClickListener.onAppItemLongClick(holder.itemView, model);
+        }
       }
       return true;
     });

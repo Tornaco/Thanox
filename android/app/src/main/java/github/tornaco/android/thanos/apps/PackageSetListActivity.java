@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -15,7 +17,6 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import github.tornaco.android.thanos.R;
@@ -91,10 +92,21 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
 
     @Override
     protected void onSetupFab(ExtendedFloatingActionButton fab) {
-        fab.setText(R.string.common_fab_title_add);
-        fab.setIconResource(R.drawable.module_common_ic_add_fill);
-        fab.show();
-        fab.setOnClickListener(v -> onRequestAddPackageSet());
+        fab.hide();
+    }
+
+    @Override
+    protected void onInflateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.pkg_set_list_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (R.id.action_add == item.getItemId()) {
+            onRequestAddPackageSet();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void onRequestAddPackageSet() {

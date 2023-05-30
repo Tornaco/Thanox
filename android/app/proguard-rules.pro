@@ -184,6 +184,7 @@
 
 # XposedEntry
 -keep class github.tornaco.android.thanos.services.xposed.XposedHookEntry
+-keep class github.tornaco.android.thanos.services.xposed.LSPosedHookEntry
 -keep class github.tornaco.android.thanos.core** {*;}
 -keep class github.tornaco.android.thanos.services** {*;}
 -keep class github.tornaco.android.thanos.db** {*;}

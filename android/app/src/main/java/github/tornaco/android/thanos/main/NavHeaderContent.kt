@@ -174,7 +174,7 @@ private fun CpuProgressBar(
             CircularProgressBar(
                 modifier = Modifier
                     .size(mainProgressSize),
-                progress = headerInfo.memory.memUsagePercent.toFloat(),
+                progress = headerInfo.cpu.totalPercent.toFloat(),
                 progressMax = 100f,
                 progressBarColor = Color(progressColor),
                 progressBarWidth = progressBarWidth,

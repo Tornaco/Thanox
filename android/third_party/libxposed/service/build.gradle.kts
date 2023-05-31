@@ -31,6 +31,6 @@ android {
 
 dependencies {
     implementation(project(":third_party:libxposed:interface"))
-    compileOnly("androidx.annotation:annotation:1.5.0")
+    compileOnly("androidx.annotation:annotation:1.6.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.0")
 }

@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: "android"
+    schedule:
+      interval: daily
+      time: "21:30"
+    open-pull-requests-limit: 30
+    target-branch: master
+    registries:
+      - maven-google
+      - gradle-plugin
+
+registries:
+  maven-google:
+    type: maven-repository
+    url: "https://dl.google.com/dl/android/maven2/"
+  gradle-plugin:
+    type: maven-repository
+    url: "https://plugins.gradle.org/m2/"

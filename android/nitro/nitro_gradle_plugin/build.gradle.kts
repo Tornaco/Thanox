@@ -18,7 +18,7 @@ dependencies {
     implementation(androidToolsCommon)
 
     implementation("commons-io:commons-io:2.12.0")
-    implementation("commons-codec:commons-codec:1.10")
+    implementation("commons-codec:commons-codec:1.15")
 
     implementation(Libs.Others.guavaJre)
     implementation(Libs.Others.javassist)

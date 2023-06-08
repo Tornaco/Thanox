@@ -51,9 +51,6 @@ import dev.enro.core.compose.registerForNavigationResult
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.apps.AppDetailsActivity
 import github.tornaco.android.thanos.core.pm.AppInfo
-import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
-import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
@@ -180,7 +177,10 @@ fun ProcessManageScreen(
 }
 
 @Composable
-private fun AppFilterDropDown(state: ProcessManageState, onFilterItemSelected: (AppSetFilterItem) -> Unit) {
+private fun AppFilterDropDown(
+    state: ProcessManageState,
+    onFilterItemSelected: (AppSetFilterItem) -> Unit
+) {
     FilterDropDown(
         icon = Icons.Filled.FilterAlt,
         selectedItem = state.selectedAppSetFilterItem,
@@ -335,10 +335,21 @@ fun RunningAppItem(
                 AppIcon(modifier = Modifier.size(38.dp), appState.appInfo)
                 Spacer(modifier = Modifier.size(12.dp))
                 Column(verticalArrangement = Arrangement.Center) {
-                    AppLabelText(
-                        Modifier.sizeIn(maxWidth = 240.dp),
-                        appState.appInfo.appLabel
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        AppLabelText(
+                            Modifier.sizeIn(maxWidth = 240.dp),
+                            appState.appInfo.appLabel
+                        )
+                        if (appState.isPlayingBack) {
+                            TinySpacer()
+                            Icon(
+                                modifier = Modifier.size(16.dp),
+                                painter = painterResource(id = R.drawable.ic_remix_music_2_fill),
+                                contentDescription = "Playing",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
                     if (appState.serviceCount == 0) {
                         PText(appState)
                     } else {

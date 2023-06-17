@@ -17,7 +17,7 @@ object Configs {
     // currently we set to 30.0.3 to test circle ci.
     const val buildToolsVersion = "30.0.3"
     const val ndkVersion = "21.1.6352462"
-    val cmakeVersion get() = "3.22.1"
+    val cmakeVersion get() = "3.16.3"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     var thanoxVersionCode: Int? = 0

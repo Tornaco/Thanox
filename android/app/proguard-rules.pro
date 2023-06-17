@@ -220,3 +220,4 @@
 
 
 -keep class io.github.libxposed.** { *; }
+-keep class com.topjohnwu.superuser.** { *; }

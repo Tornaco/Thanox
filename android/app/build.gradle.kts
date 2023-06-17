@@ -190,6 +190,11 @@ dependencies {
     kapt(project(":annotation_processors:permission-requester-compiler"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
 
+    // The core module that provides APIs to a shell
+    implementation("com.github.topjohnwu.libsu:core:5.1.0")
+    // Optional: APIs for creating root services. Depends on ":core"
+    implementation("com.github.topjohnwu.libsu:service:5.1.0")
+
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_ops"))
     implementation(project(":modules:module_easteregg"))
@@ -288,7 +293,7 @@ afterEvaluate {
         log("variantCapped=${variantCapped}")
         val processResTaskName = "process${variantCapped}Resources"
         log("processResTaskName=${processResTaskName}")
-        val task :Task? = runCatching {
+        val task: Task? = runCatching {
             tasks.getByPath(processResTaskName)
         }.getOrNull()
         log("processResTask=${task}")

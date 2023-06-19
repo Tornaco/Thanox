@@ -4,7 +4,6 @@ import tornaco.project.android.thanox.addAidlTask
 plugins {
     id("java")
     id("kotlin")
-    id("checkstyle")
 }
 
 dependencies {
@@ -26,12 +25,6 @@ dependencies {
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-checkstyle {
-    toolVersion = "8.5"
-    configFile = rootProject.file("checkstyle/checkstyle.xml")
-    configProperties["checkStyleConfigDir"] = rootProject.rootDir.path + "/checkstyle"
 }
 
 tasks.withType<Checkstyle> {

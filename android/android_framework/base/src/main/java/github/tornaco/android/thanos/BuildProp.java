@@ -43,6 +43,7 @@ public class BuildProp {
 
     public static final String THANOS_APP_PKG_NAME_PREFIX = "github.tornaco.android.thanos";
     public static final String THANOS_SHORTCUT_PKG_NAME_PREFIX = "github.tornaco.android.thanos.shortcut";
+    public static final String SHORTX_APP_PKG_NAME = "tornaco.apps.shortx";
 
     // Components
     @Dynamic

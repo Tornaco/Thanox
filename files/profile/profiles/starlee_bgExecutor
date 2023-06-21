@@ -1,0 +1,14 @@
+{
+  "author": "诗里沧海怨怼",
+  "version": 1,
+  "tags": [
+    "app_opt"
+  ],
+  "profile": {
+    "name": "管家执行者",
+    "description": "by诗里沧海怨怼 | 搭配多开后台管家使用,内含管家的核心瘦身功能",
+    "priority": -1,
+    "condition": "if(shortcutValue=='backAppTrim'){id=Integer.parseInt(args[0]);if(id==0){for(int i=1;i<args.length;i++){thanos.activityManager.killProcessByName(args[i]);}Thread.sleep(50);for(int i=args.length-1;i>0;i--){thanos.activityManager.killProcessByName(args[i]);}}else{procMaker=thanos.class.getClassLoader().loadClass('github.tornaco.android.thanos.core.os.ProcessName').getConstructor(String,int);procMaker.setAccessible(true);objList=new java.util.ArrayList(args.length);for(int i=1;i<args.length;i++){objList.add(procMaker.newInstance(args[i],id));}for(obj:objList){thanos.activityManager.killProcessByName(obj);}Thread.sleep(50);for(int i=objList.size()-1;i>=0;i--){thanos.activityManager.killProcessByName(objList.get(i));}}}else if(shortcutValue=='musicKill'){if(activity.frontAppPackage.equals(args[0])||thanos.audioManager.hasAudioFocus(args[0])||args[1]=='t'&&thanos.activityManager.hasTopVisibleActivities(args[0])||args[2]=='t'&&thanos.notificationManager.hasShowingNotificationRecordsForPackage(args[0])){return;}thanos.activityManager.forceStopPackage(args[0]);log.log('杀死=====>' + args[0]);}",
+    "actions": []
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "author": "诗里沧海怨怼",
+  "version": 1,
+  "tags": [
+    "app_opt"
+  ],
+  "profile": {
+    "name": "Auto GPS",
+    "description": "by诗里沧海怨怼 | 指定页面,指定App,正在使用某个App时, 自动开关GPS",
+    "priority": 1,
+    "condition": "if(pkgKilled){curs=su.exe(\"dumpsys activity activities|grep ResumedActivity|awk '{print $3}'\").out[0].split('/');if(curs[1].charAt(curs[1].length()-1)=='}'){curs[1]=curs[1].substring(0,curs[1].length()-1);}for(acti:globalVarOf$GPSUI){if(acti!=null&&acti.startsWith(curs[0])&&acti.endsWith(curs[1])){return;}}for(app:globalVarOf$GPSApp){if(app!=null&&!app.startsWith(pkgName)){if(app.startsWith(curs[0])||app.charAt(app.length()-1)=='#'&&thanos.activityManager.isPackageRunning(app.split(' ')[0])){return;}}}if(hw.isLocationEnabled()){su.exe('settings put secure location_mode 0');}}else if(activityResumed){pName=componentNameAsString.split('/')[0];gapps=globalVarOf$GPSApp ;if(gapps.contains(pName)){if(!hw.isLocationEnabled()){su.exe('settings put secure location_mode 3');}}else if(globalVarOf$GPSUI.contains(componentNameAsString)){if(!hw.isLocationEnabled()){su.exe('settings put secure location_mode 3');}}else{for(app:gapps){if(app!=null){if(app.charAt(app.length()-1)=='#'&&thanos.activityManager.isPackageRunning(app.split(' ')[0])){if(!hw.isLocationEnabled()){su.exe('settings put secure location_mode 3');}return;}}}if(hw.isLocationEnabled()){su.exe('settings put secure location_mode 0');}}}",
+    "actions": []
+  }
+}

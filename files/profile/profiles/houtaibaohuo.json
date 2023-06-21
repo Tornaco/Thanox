@@ -1,0 +1,16 @@
+{
+  "author": "诗里沧海怨怼",
+  "version": 1,
+  "tags": [
+    "app_opt"
+  ],
+  "profile": {
+    "name": "后台保活",
+    "description": "by诗里沧海怨怼 | 应用被杀后台后,自动重启",
+    "priority": 1,
+    "condition": "pkgKilled",
+    "actions": [
+      "if(thanos.profileManager.isGlobalRuleVarByNameExists('keepAlive')){if(globalVarOf$keepAlive.size()==0){ui.showShortToast('请为keepAlive添加内容');}else{int cntKeep=0;foreach(proc:globalVarOf$keepAlive){if(++cntKeep==50){Thread.sleep(150);cntKeep=0;}if(proc!=null&&!thanos.activityManager.isPackageRunning(proc)){Thread.sleep(4000);activity.launchProcessForPackage(proc);Thread.sleep(4000);if(thanos.activityManager.hasRunningServiceForPackage(proc)){ui.showShortToast('拉起'+proc);}else{ui.showLongToast('请手动打开:'+proc);}}}}}else{thanos.profileManager.disableRuleByName('应用保活');thanos.profileManager.addGlobalRuleVar('keepAlive',new String[0]);ui.showLongToast('变量keepAlive不存在!');}"
+    ]
+  }
+}

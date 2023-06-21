@@ -1,0 +1,14 @@
+{
+  "author": "诗里沧海怨怼",
+  "version": 1,
+  "tags": [
+    "app_opt"
+  ],
+  "profile": {
+    "name": "多开后台监听",
+    "description": "by诗里沧海怨怼 | 搭配多开后台管家使用 | 已融合清理日志和关闭管家",
+    "priority": 1,
+    "condition": "if(frontPkgChanged){int cntLsn=0;bgApps=thanos.activityManager.getLastRecentUsedPackages(10);foreach(str:globalVarOf$trimApp){if(++cntLsn==50){Thread.sleep(150);cntLsn=0;}if(str!=null&&str.startsWith(from)){foreach(bgApp:bgApps){if(bgApp.pkgName==from){io.write('starlee/'+bgApp.userId+'/'+from,'0');return;}}}}foreach(str:globalVarOf$killApp){if(++cntLsn==50){Thread.sleep(150);cntLsn=0;}if(str!=null&&str.startsWith(from)){foreach(bgApp:bgApps){if(bgApp.pkgName==from){io.write('starlee/'+bgApp.userId+'/'+from,'0');return;}}}}foreach(str:globalVarOf$musicApp){if(++cntLsn==50){Thread.sleep(150);cntLsn=0;}if(str!=null&&str.startsWith(from)){foreach(bgApp:bgApps){if(bgApp.pkgName==from){io.write('starlee/'+bgApp.userId+'/'+from,'0');return;}}}}}else if(screenOff){_10MB=10000000;_5MB=_10MB>>1;_1MB=_5MB/5;logMaxSize=_5MB;rootDir=thanos.profileManager.getLogPath();rootDir=rootDir.substring(0,rootDir.length()-38);paths=new String[]{'logging/server_logging/log/profile.log','logging/server_logging/log/thanox-core.log','profile_user_io/多开后台管家.log'};foreach(pathStr:paths){path=java.nio.file.Paths.get(rootDir,pathStr);if(java.nio.file.Files.size(path)>=logMaxSize){java.nio.file.Files.write(path,new byte[0],java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);}}}else if(shortcutLaunched&&shortcutValue=='trimOff'){fp=thanos.profileManager.getLogPath();fp=fp.substring(0,fp.length()-38);fc=java.nio.channels.FileChannel.open(java.nio.file.Paths.get(fp,'profile_user_io/starlee/threadID'),java.nio.file.StandardOpenOption.READ,java.nio.file.StandardOpenOption.WRITE);mylock=fc.lock();mbuff=java.nio.ByteBuffer.allocate(10);fc.read(mbuff);rstr=new String(mbuff.array(),0,mbuff.position(),java.nio.charset.StandardCharsets.UTF_8);if(rstr==''){ui.showShortToast('后台管家已关闭');mylock.release();fc.close();return;}fc.truncate(0);cntClose=0;id=Long.valueOf(rstr);iter=Thread.getAllStackTraces().keySet().iterator();t=iter.next();while(iter.hasNext()&&(id!=t.id)){if(++cntClose==50){Thread.sleep(200);cntClose=0;}t=iter.next();}if(t.id==id&&t.name.contains('后台管家')){t.interrupt();}mylock.release();fc.close();ui.showShortToast('后台管家已关闭');}",
+    "actions": []
+  }
+}

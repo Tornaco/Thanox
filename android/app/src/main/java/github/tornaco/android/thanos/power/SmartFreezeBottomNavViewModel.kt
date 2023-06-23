@@ -23,6 +23,8 @@ class SmartFreezeBottomNavViewModel : ViewModel() {
                         || it.id == PREBUILT_PACKAGE_SET_ID_3RD
                         || it.id == PREBUILT_PACKAGE_SET_ID_SYSTEM
                         || !it.isPrebuilt
+            }.filter {
+                !it.isUserWhiteListed
             }.sortedBy { AppPreference.getPkgSetSort(context, it) }
                 .mapIndexed { index, pkgSet ->
                     return@mapIndexed TabItem(index, pkgSet)

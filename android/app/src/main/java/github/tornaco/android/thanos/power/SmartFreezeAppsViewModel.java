@@ -405,4 +405,15 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                     }
                 });
     }
+
+    public void freezeAll() {
+        ThanosManager.from(getApplication()).getPkgManager().freezeAllSmartFreezePackages(
+                new PackageEnableStateChangeListener() {
+                    @Override
+                    public void onPackageEnableStateChanged(List<Pkg> pkgs) {
+                        super.onPackageEnableStateChanged(pkgs);
+                        loadModels();
+                    }
+                });
+    }
 }

@@ -161,6 +161,10 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
         binding.fab.setOnClickListener(v -> viewModel.freezeAllOnCurrentPage());
+        binding.fab.setOnLongClickListener(v -> {
+            viewModel.freezeAll();
+            return true;
+        });
     }
 
     @SuppressLint("RestrictedApi")

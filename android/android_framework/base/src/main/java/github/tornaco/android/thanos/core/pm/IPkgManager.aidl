@@ -124,4 +124,5 @@ interface IPkgManager {
     void updatePackageSetLabel(String newLabel, String id);
 
     void freezeAllSmartFreezePackages(in IPackageEnableStateChangeListener listener);
+    void freezeSmartFreezePackages(in List<Pkg> packages, in IPackageEnableStateChangeListener listener);
 }

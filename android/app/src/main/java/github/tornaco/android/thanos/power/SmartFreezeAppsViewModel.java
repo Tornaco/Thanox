@@ -87,6 +87,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
      * Null means we load all pkgs
      */
     public void setPkgSetId(@Nullable String pkgSetId) {
+        XLog.i("setPkgSetId: " + pkgSetId);
         this.pkgSetId = pkgSetId;
     }
 
@@ -393,8 +394,9 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         start();
     }
 
-    public void freezeAll() {
-        ThanosManager.from(getApplication()).getPkgManager().freezeAllSmartFreezePackages(
+    public void freezeAllOnCurrentPage() {
+        ThanosManager.from(getApplication()).getPkgManager().freezeSmartFreezePackages(
+                listModels.stream().map(appListModel -> Pkg.fromAppInfo(appListModel.appInfo)).collect(Collectors.toList()),
                 new PackageEnableStateChangeListener() {
                     @Override
                     public void onPackageEnableStateChanged(List<Pkg> pkgs) {

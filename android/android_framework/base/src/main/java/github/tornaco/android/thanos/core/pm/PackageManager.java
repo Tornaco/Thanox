@@ -486,4 +486,9 @@ public class PackageManager {
     public void freezeAllSmartFreezePackages(PackageEnableStateChangeListener listener) {
         pm.freezeAllSmartFreezePackages(listener.stub);
     }
+
+    @SneakyThrows
+    public void freezeSmartFreezePackages(List<Pkg> pkgs, PackageEnableStateChangeListener listener) {
+        pm.freezeSmartFreezePackages(pkgs, listener.stub);
+    }
 }

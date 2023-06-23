@@ -291,6 +291,9 @@ public interface IPkgManager extends android.os.IInterface
     @Override public void freezeAllSmartFreezePackages(github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener listener) throws android.os.RemoteException
     {
     }
+    @Override public void freezeSmartFreezePackages(java.util.List<github.tornaco.android.thanos.core.pm.Pkg> packages, github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener listener) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1205,6 +1208,17 @@ public interface IPkgManager extends android.os.IInterface
           github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener _arg0;
           _arg0 = github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener.Stub.asInterface(data.readStrongBinder());
           this.freezeAllSmartFreezePackages(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_freezeSmartFreezePackages:
+        {
+          data.enforceInterface(descriptor);
+          java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _arg0;
+          _arg0 = data.createTypedArrayList(github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener _arg1;
+          _arg1 = github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener.Stub.asInterface(data.readStrongBinder());
+          this.freezeSmartFreezePackages(_arg0, _arg1);
           reply.writeNoException();
           return true;
         }
@@ -2905,6 +2919,26 @@ public interface IPkgManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void freezeSmartFreezePackages(java.util.List<github.tornaco.android.thanos.core.pm.Pkg> packages, github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener listener) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeTypedList(packages);
+          _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_freezeSmartFreezePackages, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().freezeSmartFreezePackages(packages, listener);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.pm.IPkgManager sDefaultImpl;
     }
     static final int TRANSACTION_getPkgNameForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -2983,6 +3017,7 @@ public interface IPkgManager extends android.os.IInterface
     static final int TRANSACTION_isDOLTipsEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 73);
     static final int TRANSACTION_updatePackageSetLabel = (android.os.IBinder.FIRST_CALL_TRANSACTION + 74);
     static final int TRANSACTION_freezeAllSmartFreezePackages = (android.os.IBinder.FIRST_CALL_TRANSACTION + 75);
+    static final int TRANSACTION_freezeSmartFreezePackages = (android.os.IBinder.FIRST_CALL_TRANSACTION + 76);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pm.IPkgManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -3083,4 +3118,5 @@ public interface IPkgManager extends android.os.IInterface
   public boolean isDOLTipsEnabled() throws android.os.RemoteException;
   public void updatePackageSetLabel(java.lang.String newLabel, java.lang.String id) throws android.os.RemoteException;
   public void freezeAllSmartFreezePackages(github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener listener) throws android.os.RemoteException;
+  public void freezeSmartFreezePackages(java.util.List<github.tornaco.android.thanos.core.pm.Pkg> packages, github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener listener) throws android.os.RemoteException;
 }

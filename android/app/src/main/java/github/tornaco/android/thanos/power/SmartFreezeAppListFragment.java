@@ -5,7 +5,6 @@ import static com.nononsenseapps.filepicker.FilePickerActivityUtils.pickSingleDi
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -74,7 +73,6 @@ import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 import io.reactivex.Completable;
-import io.reactivex.Scheduler;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -162,7 +160,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
 
-        binding.fab.setOnClickListener(v -> viewModel.freezeAll());
+        binding.fab.setOnClickListener(v -> viewModel.freezeAllOnCurrentPage());
     }
 
     @SuppressLint("RestrictedApi")
@@ -634,13 +632,13 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                     progressDialog.setMessage(getString(R.string.common_text_wait_a_moment));
                     progressDialog.show();
                     Completable.fromRunnable(() -> {
-                        File tmpFile = new File("/data/local/tmp/" + appInfo.getPkgName() + "_proxy.apk");
-                        Shell.su("cp " + apkFile.getAbsolutePath() + " " + tmpFile.getAbsolutePath()).exec();
-                        XLog.w("apk path: " + tmpFile.getAbsolutePath());
-                        Shell.Result installRes = Shell.su("pm install " + tmpFile.getAbsolutePath()).exec();
-                        XLog.w("Install res: " + installRes);
-                        Shell.su("rm " + tmpFile.getAbsolutePath()).exec();
-                    }).subscribeOn(Schedulers.io())
+                                File tmpFile = new File("/data/local/tmp/" + appInfo.getPkgName() + "_proxy.apk");
+                                Shell.su("cp " + apkFile.getAbsolutePath() + " " + tmpFile.getAbsolutePath()).exec();
+                                XLog.w("apk path: " + tmpFile.getAbsolutePath());
+                                Shell.Result installRes = Shell.su("pm install " + tmpFile.getAbsolutePath()).exec();
+                                XLog.w("Install res: " + installRes);
+                                Shell.su("rm " + tmpFile.getAbsolutePath()).exec();
+                            }).subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Action() {
                                 @Override

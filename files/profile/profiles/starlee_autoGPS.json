@@ -1,0 +1,16 @@
+{
+    "author": "诗里沧海怨怼",
+    "version": 2,
+    "tags": [
+        "app_opt"
+    ],
+    "profile": {
+        "name": "Auto GPS",
+        "description": "by诗里沧海怨怼 | 自动开关GPS | 指定App,指定具体界面多合一版本 | 采用suAPI,失效可自行替换sh",
+        "priority": 1,
+        "condition": "if(activityResumed){for(app:globalVarOf$GPSApp){if(app!=null&&app.startsWith(pkgName)){if(!hw.isLocationEnabled()){su.exe('settings put secure location_mode 3');}return;}}if(globalVarOf$GPSUI.contains(componentNameAsString)){if(!hw.isLocationEnabled()){su.exe('settings put secure location_mode 3');}}else{for(app:globalVarOf$GPSApp){if(app!=null&&app.charAt(app.length()-1)=='#'&&thanos.activityManager.isPackageRunning(app.split(' ')[0])){if(!hw.isLocationEnabled()){su.exe('settings put secure location_mode 3');}return;}}if(hw.isLocationEnabled()){su.exe('settings put secure location_mode 0');}}}else if(pkgKilled){if(hw.isLocationEnabled()){curs=su.exe(\"dumpsys activity activities|grep ResumedActivity|awk '{print $3}'\").out[0].split('/');if(curs[1].charAt(curs[1].length()-1)=='}'){curs[1]=curs[1].substring(0,curs[1].length()-1);}for(acti:globalVarOf$GPSUI){if(acti!=null&&acti.startsWith(curs[0])&&acti.endsWith(curs[1])){return;}}for(app:globalVarOf$GPSApp){if(app!=null){if(app.startsWith(curs[0])||app.charAt(app.length()-1)=='#'&&thanos.activityManager.isPackageRunning(app.split(' ')[0])){return;}}}su.exe('settings put secure location_mode 0');}}",
+        "actions": [
+            ""
+        ]
+    }
+}

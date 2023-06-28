@@ -1,0 +1,17 @@
+{
+  "author": "诗里沧海怨怼",
+  "version": 1,
+  "tags": [
+    "app_opt"
+  ],
+  "profile": {
+    "name": "多开后台保活",
+    "description": "by诗里沧海怨怼 | 应用被杀后台后,自动重启 | 要求thanox版本4.2.0+",
+    "priority": 1,
+    "condition": "pkgKilled",
+    "delay": 4500,
+    "actions": [
+      "int cntKeep=0;keepAman=thanos.activityManager;foreach(proc:globalVarOf$keepAlive){if(++cntKeep==50){Thread.sleep(150);cntKeep=0;}if(proc!=null&&proc.startsWith(pkgName)){strs=proc.split(' ');if(strs.length==1){if(!keepAman.isPackageRunning(pkgName)){activity.launchProcessForPackage(pkgName);}}else{idStrs=strs[1].split(',');for(idStr:idStrs){id=Integer.valueOf(idStr);if(!keepAman.isPackageRunning(Pkg.newPkg(pkgName,id))){activity.launchProcessForPackage(pkgName,id);}}}return;}}"
+    ]
+  }
+}

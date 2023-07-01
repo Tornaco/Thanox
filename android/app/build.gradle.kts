@@ -193,7 +193,7 @@ dependencies {
     // The core module that provides APIs to a shell
     implementation("com.github.topjohnwu.libsu:core:5.1.0")
     // Optional: APIs for creating root services. Depends on ":core"
-    implementation("com.github.topjohnwu.libsu:service:5.1.0")
+    // implementation("com.github.topjohnwu.libsu:service:5.1.0")
 
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_ops"))

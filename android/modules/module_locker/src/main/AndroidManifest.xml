@@ -25,6 +25,9 @@
         <activity
             android:name=".ui.setup.LockSettingsActivity"
             android:label="@string/module_locker_title_settings" />
+        <activity
+            android:name=".ui.setup.WhiteListComponentViewerActivity"
+            android:excludeFromRecents="false" />
     </application>
 
 </manifest>

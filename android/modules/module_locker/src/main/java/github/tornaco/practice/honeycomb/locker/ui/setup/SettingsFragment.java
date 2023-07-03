@@ -2,6 +2,7 @@ package github.tornaco.practice.honeycomb.locker.ui.setup;
 
 import android.os.Bundle;
 
+import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.Objects;
@@ -50,6 +51,12 @@ public class SettingsFragment extends BasePreferenceFragmentCompat {
         });
         reVerifyTaskRemoved.setOnPreferenceClickListener(preference -> {
             supervisor.setVerifyOnTaskRemovedEnabled(reVerifyTaskRemoved.isChecked());
+            return true;
+        });
+
+        Preference whiteListPref = findPreference(getString(R.string.module_locker_key_white_list_components));
+        Objects.requireNonNull(whiteListPref).setOnPreferenceClickListener(preference -> {
+            WhiteListComponentViewerActivity.Starter.INSTANCE.start(requireActivity());
             return true;
         });
     }

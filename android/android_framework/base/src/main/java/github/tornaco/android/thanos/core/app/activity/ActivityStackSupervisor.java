@@ -132,4 +132,19 @@ public class ActivityStackSupervisor {
     public void unRegisterActivityLifecycleListener(IActivityLifecycleListener listener) {
         supervisor.unRegisterActivityLifecycleListener(listener);
     }
+
+    @SneakyThrows
+    public void addAppLockWhiteListComponents(List<ComponentName> componentName) {
+        supervisor.addAppLockWhiteListComponents(componentName);
+    }
+
+    @SneakyThrows
+    public void removeAppLockWhiteListComponents(List<ComponentName> componentName) {
+        supervisor.removeAppLockWhiteListComponents(componentName);
+    }
+
+    @SneakyThrows
+    public List<ComponentName> getAppLockWhiteListComponents() {
+        return supervisor.getAppLockWhiteListComponents();
+    }
 }

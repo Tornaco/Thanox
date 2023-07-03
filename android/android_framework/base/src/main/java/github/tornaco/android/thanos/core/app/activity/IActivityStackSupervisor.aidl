@@ -56,4 +56,9 @@ interface IActivityStackSupervisor {
 
     void registerActivityLifecycleListener(in IActivityLifecycleListener listener);
     void unRegisterActivityLifecycleListener(in IActivityLifecycleListener listener);
+
+    void addAppLockWhiteListComponents(in List<ComponentName> componentName);
+    void removeAppLockWhiteListComponents(in List<ComponentName> componentName);
+    List<ComponentName> getAppLockWhiteListComponents();
+
 }

@@ -11,6 +11,8 @@
     <string name="module_locker_summary_re_verify_on_screen_off">當屏幕鎖定後，已經解鎖的應用將被重新加鎖</string>
     <string name="module_locker_summary_re_verify_on_task_removed">當某個應用任務被移除，例如該應用在最近任務頁面被清理，該應用將被重新加鎖</string>
     <string name="module_locker_summary_re_verify_on_app_switch">當已經解鎖的應用回到後台後，該應用將被重新加鎖</string>
+    <string name="module_locker_summary_white_list_components">白名单中的组件不会被锁定</string>
+    <string name="module_locker_title_white_list_components">组件白名单</string>
 
     <string name="module_locker_biometric_not_set_dialog_title">设置密码</string>
     <string name="module_locker_biometric_not_set_dialog_message">启用应用锁之前，请前往系统安全设置，完成人脸、指纹、PIN或者图案密码设置</string>

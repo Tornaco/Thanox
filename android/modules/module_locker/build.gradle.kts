@@ -7,6 +7,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -77,6 +78,10 @@ dependencies {
     implementation(Libs.Others.glide)
     annotationProcessor(Libs.Others.glideCompiler)
     kapt(Libs.Others.glideCompiler)
+
+    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
+    implementation(Libs.Hilt.library)
+    kapt(Libs.Hilt.googleAndroidCompiler)
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))

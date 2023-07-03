@@ -17,5 +17,12 @@
             app:persistent="false"
             app:summary="@string/module_locker_summary_re_verify_on_app_switch"
             app:title="@string/module_locker_title_re_verify_on_app_switch" />
+
+        <Preference
+            app:key="@string/module_locker_key_white_list_components"
+            app:persistent="false"
+            app:summary="@string/module_locker_summary_white_list_components"
+            app:title="@string/module_locker_title_white_list_components" />
+
     </PreferenceCategory>
 </PreferenceScreen>

@@ -46,6 +46,7 @@ import github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity
 import github.tornaco.thanos.android.module.profile.RuleListActivity
 import github.tornaco.thanos.android.ops.OpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
+import github.tornaco.thanos.android.ops2.Ops2Activity
 
 class PrebuiltFeatureLauncher(
     private val context: Activity,
@@ -119,7 +120,11 @@ class PrebuiltFeatureLauncher(
                 DataCheatActivity.start(context)
             }
             PrebuiltFeatureIds.ID_OPS_BY_OPS -> {
-                OpsBottomNavActivity.start(context)
+                if (BuildProp.THANOS_BUILD_DEBUG) {
+                    Ops2Activity.start(context)
+                } else {
+                    OpsBottomNavActivity.start(context)
+                }
             }
             PrebuiltFeatureIds.ID_TASK_BLUR -> {
                 RecentTaskBlurListActivity.start(context)

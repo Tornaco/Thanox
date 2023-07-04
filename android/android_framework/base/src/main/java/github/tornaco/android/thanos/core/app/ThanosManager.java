@@ -19,6 +19,7 @@ import github.tornaco.android.thanos.core.backup.BackupAgent;
 import github.tornaco.android.thanos.core.input.InputManager;
 import github.tornaco.android.thanos.core.n.NotificationManager;
 import github.tornaco.android.thanos.core.net.NetworkManager;
+import github.tornaco.android.thanos.core.ops.OpsManager;
 import github.tornaco.android.thanos.core.os.ServiceManager;
 import github.tornaco.android.thanos.core.plus.RSManager;
 import github.tornaco.android.thanos.core.pm.PackageManager;
@@ -171,6 +172,11 @@ public class ThanosManager {
     @SneakyThrows
     public PushDelegateManager getPushDelegateManager() {
         return new PushDelegateManager(service.getPushDelegateManager());
+    }
+
+    @SneakyThrows
+    public OpsManager getOpsManager() {
+        return new OpsManager(service.getOpsManager());
     }
 
     @SneakyThrows

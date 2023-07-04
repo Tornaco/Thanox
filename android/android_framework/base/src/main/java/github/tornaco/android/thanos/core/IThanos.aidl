@@ -22,6 +22,7 @@ import github.tornaco.android.thanos.core.net.INetworkManager;
 import github.tornaco.android.thanos.core.IPluginLogger;
 import github.tornaco.android.thanos.core.app.infinite.InfiniteZ;
 import github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager;
+import github.tornaco.android.thanos.core.ops.IOps;
 
 import android.content.IntentFilter;
 
@@ -69,4 +70,6 @@ interface IThanos {
     IUsageStatsManager getUsageStatsManager();
     IPushDelegateManager getPushDelegateManager();
     INetworkManager getNetworkManager();
+
+    IOps getOpsManager();
 }

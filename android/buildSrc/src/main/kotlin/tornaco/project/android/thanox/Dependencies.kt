@@ -62,7 +62,7 @@ object Tests {
 object Libs {
 
     object Kotlin {
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.0"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0"
     }
 
     object Coroutines {

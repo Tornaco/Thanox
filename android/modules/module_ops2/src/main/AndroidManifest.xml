@@ -6,6 +6,9 @@
         <activity
             android:name=".Ops2Activity"
             android:exported="false" />
+        <activity
+            android:name=".AppListActivity"
+            android:exported="false" />
 
     </application>
 </manifest>

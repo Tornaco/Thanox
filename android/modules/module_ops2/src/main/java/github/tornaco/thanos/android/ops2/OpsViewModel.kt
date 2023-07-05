@@ -18,7 +18,6 @@
 package github.tornaco.thanos.android.ops2
 
 import android.annotation.SuppressLint
-import android.app.AppOpsManager
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -34,7 +33,6 @@ import javax.inject.Inject
 
 data class OpItem(
     val code: Int,
-    val mode: Int,
     val label: String,
     val description: String,
     val iconRes: Int
@@ -44,8 +42,6 @@ data class OpsState(
     val isLoading: Boolean,
     val opsItems: List<OpItem>
 )
-
-fun Int.isAllowed() = this == AppOpsManager.MODE_ALLOWED
 
 @SuppressLint("StaticFieldLeak")
 @HiltViewModel
@@ -68,24 +64,13 @@ class OpsViewModel @Inject constructor(@ApplicationContext private val context: 
                 (0..opsManager.opNum).map { code ->
                     OpItem(
                         code = code,
-                        mode = 1,
-                        label = "code-$code",
-                        description = "desc",
+                        label = opsManager.opToName(code),
+                        description = "$code",
                         iconRes = R.drawable.module_common_ic_settings_fill
                     )
                 }
             }
             _state.value = _state.value.copy(opsItems = opItems)
         }
-    }
-
-
-    fun setMode(it: OpItem, checked: Boolean) {
-        val mode = if (checked) {
-            AppOpsManager.MODE_ALLOWED
-        } else {
-            AppOpsManager.MODE_IGNORED
-        }
-
     }
 }

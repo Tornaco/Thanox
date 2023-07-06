@@ -25,7 +25,9 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.ops.LightPermInfo
 import github.tornaco.android.thanos.core.ops.OpsManager
+import github.tornaco.android.thanos.core.ops.PermState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import github.tornaco.android.thanos.core.pm.Pkg
@@ -37,7 +39,7 @@ import javax.inject.Inject
 
 data class AppItem(
     val appInfo: AppInfo,
-    val mode: Int,
+    val permState: PermState,
 )
 
 data class AppListState(
@@ -74,19 +76,26 @@ class AppListViewModel @Inject constructor(@ApplicationContext private val conte
     }
 
     fun refresh() {
-        val needPermission = opsManager.opToPermission(state.value.code)
-        XLog.d("needPermission: $needPermission")
+        val needPermission: String? = opsManager.opToPermission(state.value.code)
+        XLog.d("AppListViewModel needPermission: $needPermission")
+        val permInfo = needPermission?.let { context.packageManager.getPermissionInfo(it, 0) }
+        val lightPermInfo = permInfo?.let { LightPermInfo(it) }
+        XLog.d("AppListViewModel lightPermInfo: $lightPermInfo")
         viewModelScope.launch {
             val all = thanos.pkgManager.getInstalledPkgsByPackageSetId(PREBUILT_PACKAGE_SET_ID_3RD)
-            val appItems = all.mapNotNull {
+            val appItems = all.mapNotNull { appInfo ->
                 if (needPermission == null || PkgUtils.getAllDeclaredPermissions(
                         context,
-                        it.pkgName
+                        appInfo.pkgName
                     ).contains(needPermission)
                 ) {
-                    val mode = opsManager.getMode(state.value.code, Pkg.fromAppInfo(it))
-                    XLog.d("Pkg: ${it.pkgName} mode: $mode")
-                    AppItem(it, mode)
+                    val permState = PermState.valueOf(
+                        opsManager.getPermState(
+                            state.value.code,
+                            Pkg.fromAppInfo(appInfo)
+                        )
+                    )
+                    AppItem(appInfo, permState)
                 } else null
             }
             _state.value = _state.value.copy(appList = appItems)

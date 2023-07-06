@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.core.ops.OpsManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
@@ -122,7 +121,7 @@ class AppListActivity : ComposeThemeActivity() {
                                 }
                             }
 
-                            Text(text = OpsManager.modeToName(it.mode))
+                            Text(text = it.permState.name)
                         }
                     }
                 }

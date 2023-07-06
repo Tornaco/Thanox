@@ -1,9 +1,12 @@
 package github.tornaco.android.thanos.core.ops
 
 import android.app.AppOpsManager
+import android.content.pm.PackageManager
 import github.tornaco.android.thanos.core.pm.Pkg
 
-fun Int.isAllowed() = this == AppOpsManager.MODE_ALLOWED || this == AppOpsManager.MODE_FOREGROUND
+fun Int.isAllowed() = this == AppOpsManager.MODE_ALLOWED || this == OpsManager.MODE_FOREGROUND
+fun Int.flagIsOneTime() = this and PackageManager.FLAG_PERMISSION_ONE_TIME != 0
+fun Int.flagIsUserSet() = this and PackageManager.FLAG_PERMISSION_USER_SET != 0
 
 
 class OpsManager(private val ops: IOps) {
@@ -35,12 +38,12 @@ class OpsManager(private val ops: IOps) {
         ops.setMode(code, pkg, mode)
     }
 
-    fun getMode(code: Int, pkg: Pkg): Int {
-        return ops.getMode(code, pkg)
+    fun getPermState(code: Int, pkg: Pkg): String {
+        return ops.getPermState(code, pkg)
     }
 
     fun opToName(code: Int): String = ops.opToName(code)
     fun opToPermission(code: Int): String? = ops.opToPermission(code)
-
-
+    fun getPermissionFlags(permName: String, pkg: Pkg): Int = ops.getPermissionFlags(permName, pkg)
+    fun permissionFlagToString(flag: Int): String = ops.permissionFlagToString(flag)
 }

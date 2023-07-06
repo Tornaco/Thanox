@@ -10,15 +10,23 @@ public interface IOps extends android.os.IInterface
     @Override public void setMode(int code, github.tornaco.android.thanos.core.pm.Pkg pkg, int mode) throws android.os.RemoteException
     {
     }
-    @Override public int getMode(int code, github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    @Override public java.lang.String getPermState(int code, github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
-      return 0;
+      return null;
     }
     @Override public java.lang.String opToName(int code) throws android.os.RemoteException
     {
       return null;
     }
     @Override public java.lang.String opToPermission(int code) throws android.os.RemoteException
+    {
+      return null;
+    }
+    @Override public int getPermissionFlags(java.lang.String permName, github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return 0;
+    }
+    @Override public java.lang.String permissionFlagToString(int flag) throws android.os.RemoteException
     {
       return null;
     }
@@ -83,7 +91,7 @@ public interface IOps extends android.os.IInterface
           reply.writeNoException();
           return true;
         }
-        case TRANSACTION_getMode:
+        case TRANSACTION_getPermState:
         {
           data.enforceInterface(descriptor);
           int _arg0;
@@ -95,9 +103,9 @@ public interface IOps extends android.os.IInterface
           else {
             _arg1 = null;
           }
-          int _result = this.getMode(_arg0, _arg1);
+          java.lang.String _result = this.getPermState(_arg0, _arg1);
           reply.writeNoException();
-          reply.writeInt(_result);
+          reply.writeString(_result);
           return true;
         }
         case TRANSACTION_opToName:
@@ -116,6 +124,33 @@ public interface IOps extends android.os.IInterface
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _result = this.opToPermission(_arg0);
+          reply.writeNoException();
+          reply.writeString(_result);
+          return true;
+        }
+        case TRANSACTION_getPermissionFlags:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg1;
+          if ((0!=data.readInt())) {
+            _arg1 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg1 = null;
+          }
+          int _result = this.getPermissionFlags(_arg0, _arg1);
+          reply.writeNoException();
+          reply.writeInt(_result);
+          return true;
+        }
+        case TRANSACTION_permissionFlagToString:
+        {
+          data.enforceInterface(descriptor);
+          int _arg0;
+          _arg0 = data.readInt();
+          java.lang.String _result = this.permissionFlagToString(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
           return true;
@@ -168,11 +203,11 @@ public interface IOps extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public int getMode(int code, github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      @Override public java.lang.String getPermState(int code, github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
-        int _result;
+        java.lang.String _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(code);
@@ -183,12 +218,12 @@ public interface IOps extends android.os.IInterface
           else {
             _data.writeInt(0);
           }
-          boolean _status = mRemote.transact(Stub.TRANSACTION_getMode, _data, _reply, 0);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getPermState, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getMode(code, pkg);
+            return getDefaultImpl().getPermState(code, pkg);
           }
           _reply.readException();
-          _result = _reply.readInt();
+          _result = _reply.readString();
         }
         finally {
           _reply.recycle();
@@ -238,12 +273,63 @@ public interface IOps extends android.os.IInterface
         }
         return _result;
       }
+      @Override public int getPermissionFlags(java.lang.String permName, github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        int _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(permName);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getPermissionFlags, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPermissionFlags(permName, pkg);
+          }
+          _reply.readException();
+          _result = _reply.readInt();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public java.lang.String permissionFlagToString(int flag) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(flag);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_permissionFlagToString, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().permissionFlagToString(flag);
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.ops.IOps sDefaultImpl;
     }
     static final int TRANSACTION_setMode = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
-    static final int TRANSACTION_getMode = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+    static final int TRANSACTION_getPermState = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_opToName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
     static final int TRANSACTION_opToPermission = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
+    static final int TRANSACTION_getPermissionFlags = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+    static final int TRANSACTION_permissionFlagToString = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.ops.IOps impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -262,7 +348,9 @@ public interface IOps extends android.os.IInterface
     }
   }
   public void setMode(int code, github.tornaco.android.thanos.core.pm.Pkg pkg, int mode) throws android.os.RemoteException;
-  public int getMode(int code, github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public java.lang.String getPermState(int code, github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public java.lang.String opToName(int code) throws android.os.RemoteException;
   public java.lang.String opToPermission(int code) throws android.os.RemoteException;
+  public int getPermissionFlags(java.lang.String permName, github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public java.lang.String permissionFlagToString(int flag) throws android.os.RemoteException;
 }

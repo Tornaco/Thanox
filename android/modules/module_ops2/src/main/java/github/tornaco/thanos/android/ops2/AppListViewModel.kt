@@ -21,17 +21,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
-import github.tornaco.android.thanos.core.ops.LightPermInfo
-import github.tornaco.android.thanos.core.ops.OpsManager
+import github.tornaco.android.thanos.core.ops.PermInfo
 import github.tornaco.android.thanos.core.ops.PermState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import github.tornaco.android.thanos.core.pm.Pkg
-import github.tornaco.android.thanos.core.util.PkgUtils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -39,7 +36,7 @@ import javax.inject.Inject
 
 data class AppItem(
     val appInfo: AppInfo,
-    val permState: PermState,
+    val permInfo: PermInfo,
 )
 
 data class AppListState(
@@ -47,13 +44,6 @@ data class AppListState(
     val appList: List<AppItem>,
     val code: Int = Int.MIN_VALUE
 )
-
-enum class OpsMode(val mode: Int) {
-    Allow(OpsManager.MODE_ALLOWED),
-    Ignore(OpsManager.MODE_IGNORED),
-    Foreground(OpsManager.MODE_FOREGROUND),
-    Ask(OpsManager.MODE_IGNORED)
-}
 
 @SuppressLint("StaticFieldLeak")
 @HiltViewModel
@@ -76,34 +66,21 @@ class AppListViewModel @Inject constructor(@ApplicationContext private val conte
     }
 
     fun refresh() {
-        val needPermission: String? = opsManager.opToPermission(state.value.code)
-        XLog.d("AppListViewModel needPermission: $needPermission")
-        val permInfo = needPermission?.let { context.packageManager.getPermissionInfo(it, 0) }
-        val lightPermInfo = permInfo?.let { LightPermInfo(it) }
-        XLog.d("AppListViewModel lightPermInfo: $lightPermInfo")
         viewModelScope.launch {
             val all = thanos.pkgManager.getInstalledPkgsByPackageSetId(PREBUILT_PACKAGE_SET_ID_3RD)
             val appItems = all.mapNotNull { appInfo ->
-                if (needPermission == null || PkgUtils.getAllDeclaredPermissions(
-                        context,
-                        appInfo.pkgName
-                    ).contains(needPermission)
-                ) {
-                    val permState = PermState.valueOf(
-                        opsManager.getPermState(
-                            state.value.code,
-                            Pkg.fromAppInfo(appInfo)
-                        )
-                    )
-                    AppItem(appInfo, permState)
-                } else null
+                val permInfo = opsManager.getPackagePermInfo(
+                    state.value.code,
+                    Pkg.fromAppInfo(appInfo)
+                )
+                permInfo?.let { AppItem(appInfo, it) }
             }
             _state.value = _state.value.copy(appList = appItems)
         }
     }
 
-    fun setMode(appInfo: AppInfo, mode: OpsMode) {
-        opsManager.setMode(state.value.code, Pkg.fromAppInfo(appInfo), mode.mode)
+    fun setMode(appInfo: AppInfo, mode: PermState) {
+        opsManager.setMode(state.value.code, Pkg.fromAppInfo(appInfo), mode.name)
         refresh()
     }
 }

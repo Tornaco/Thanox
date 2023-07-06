@@ -2,7 +2,6 @@ package github.tornaco.thanos.android.ops2
 
 import android.content.Context
 import android.content.Intent
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.core.ops.PermState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
@@ -70,17 +70,6 @@ class AppListActivity : ComposeThemeActivity() {
             val viewModel = hiltViewModel<AppListViewModel>()
             val state by viewModel.state.collectAsState()
 
-            val modeSelectDialogState = rememberMenuDialogState<AppInfo>(
-                title = "",
-                menuItems = OpsMode.values().map {
-                    MenuDialogItem(it.name, it.name)
-                },
-                onItemSelected = { appInfo, id ->
-                    appInfo?.let { viewModel.setMode(it, OpsMode.valueOf(id)) }
-                }
-            )
-            MenuDialog(state = modeSelectDialogState)
-
             LaunchedEffect(viewModel) {
                 viewModel.init(code)
                 viewModel.refresh()
@@ -90,39 +79,69 @@ class AppListActivity : ComposeThemeActivity() {
                     .fillMaxSize()
                     .padding(paddings)
             ) {
-                items(state.appList) {
+                items(state.appList) { appItem ->
+                    val modeSelectDialogState = rememberMenuDialogState<AppInfo>(
+                        title = appItem.appInfo.appLabel,
+                        menuItems = if (appItem.permInfo.isRuntimePermission) {
+                            if (appItem.permInfo.hasBackgroundPermission) {
+                                listOf(
+                                    PermState.ALLOW_ALWAYS,
+                                    PermState.ALLOW_FOREGROUND_ONLY,
+                                    PermState.IGNORE,
+                                    PermState.DENY,
+                                ).map {
+                                    MenuDialogItem(it.name, it.name)
+                                }
+                            } else {
+                                listOf(
+                                    PermState.ALLOW_ALWAYS,
+                                    PermState.IGNORE,
+                                    PermState.DENY
+                                ).map {
+                                    MenuDialogItem(it.name, it.name)
+                                }
+                            }
+                        } else {
+                            listOf(PermState.ALLOW_ALWAYS, PermState.IGNORE).map {
+                                MenuDialogItem(it.name, it.name)
+                            }
+                        },
+                        onItemSelected = { appInfo, id ->
+                            appInfo?.let { viewModel.setMode(it, PermState.valueOf(id)) }
+                        }
+                    )
+                    MenuDialog(state = modeSelectDialogState)
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .heightIn(min = 68.dp)
                             .clickableWithRipple {
-                                modeSelectDialogState.show(it.appInfo)
+                                modeSelectDialogState.show(appItem.appInfo)
                             }
                             .padding(horizontal = 16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Row(
-                            modifier = Modifier.weight(1f),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
+                            modifier = Modifier
+                                .weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                AppIcon(modifier = Modifier.size(42.dp), appInfo = it.appInfo)
-                                StandardSpacer()
-                                Column {
-                                    androidx.compose.material3.Text(
-                                        it.appInfo.appLabel,
-                                        style = MaterialTheme.typography.titleMedium
-                                    )
-                                    androidx.compose.material3.Text(
-                                        it.appInfo.pkgName,
-                                        style = MaterialTheme.typography.bodySmall
-                                    )
-                                }
+                            AppIcon(modifier = Modifier.size(42.dp), appInfo = appItem.appInfo)
+                            StandardSpacer()
+                            Column {
+                                androidx.compose.material3.Text(
+                                    appItem.appInfo.appLabel,
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                                androidx.compose.material3.Text(
+                                    appItem.appInfo.pkgName,
+                                    style = MaterialTheme.typography.bodySmall
+                                )
                             }
-
-                            Text(text = it.permState.name)
                         }
+
+                        Text(text = appItem.permInfo.permState.displayLabel())
                     }
                 }
             }

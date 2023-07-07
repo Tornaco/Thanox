@@ -226,6 +226,9 @@
             android:name=".notification.NotificationCenterActivity"
             android:exported="false"
             android:label="@string/module_notification_recorder_feature_title_notification_center" />
+        <activity
+            android:name=".main.OneKeyBoostSettingsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

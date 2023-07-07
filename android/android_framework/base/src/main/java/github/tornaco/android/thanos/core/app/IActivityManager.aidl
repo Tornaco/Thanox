@@ -238,4 +238,7 @@ interface IActivityManager {
 
     boolean isPkgResident(in Pkg pkg);
     void setPkgResident(in Pkg pkg, boolean resident);
+
+    void setOneKeyBoostSetting(String setting);
+    String getOneKeyBoostSetting();
 }

@@ -525,6 +525,13 @@ public interface IActivityManager extends android.os.IInterface
     @Override public void setPkgResident(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean resident) throws android.os.RemoteException
     {
     }
+    @Override public void setOneKeyBoostSetting(java.lang.String setting) throws android.os.RemoteException
+    {
+    }
+    @Override public java.lang.String getOneKeyBoostSetting() throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -2096,6 +2103,23 @@ public interface IActivityManager extends android.os.IInterface
           _arg1 = (0!=data.readInt());
           this.setPkgResident(_arg0, _arg1);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_setOneKeyBoostSetting:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          this.setOneKeyBoostSetting(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getOneKeyBoostSetting:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _result = this.getOneKeyBoostSetting();
+          reply.writeNoException();
+          reply.writeString(_result);
           return true;
         }
         default:
@@ -5147,6 +5171,45 @@ public interface IActivityManager extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void setOneKeyBoostSetting(java.lang.String setting) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(setting);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setOneKeyBoostSetting, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setOneKeyBoostSetting(setting);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.lang.String getOneKeyBoostSetting() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getOneKeyBoostSetting, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getOneKeyBoostSetting();
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -5283,6 +5346,8 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_getTopNCpuUsagePackages = (android.os.IBinder.FIRST_CALL_TRANSACTION + 131);
     static final int TRANSACTION_isPkgResident = (android.os.IBinder.FIRST_CALL_TRANSACTION + 132);
     static final int TRANSACTION_setPkgResident = (android.os.IBinder.FIRST_CALL_TRANSACTION + 133);
+    static final int TRANSACTION_setOneKeyBoostSetting = (android.os.IBinder.FIRST_CALL_TRANSACTION + 134);
+    static final int TRANSACTION_getOneKeyBoostSetting = (android.os.IBinder.FIRST_CALL_TRANSACTION + 135);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -5466,4 +5531,6 @@ public interface IActivityManager extends android.os.IInterface
   public java.util.List<github.tornaco.android.thanos.core.app.usage.PkgCpuUsageStats> getTopNCpuUsagePackages(int n, boolean update) throws android.os.RemoteException;
   public boolean isPkgResident(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public void setPkgResident(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean resident) throws android.os.RemoteException;
+  public void setOneKeyBoostSetting(java.lang.String setting) throws android.os.RemoteException;
+  public java.lang.String getOneKeyBoostSetting() throws android.os.RemoteException;
 }

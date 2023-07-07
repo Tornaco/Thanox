@@ -34,6 +34,7 @@ import github.tornaco.android.thanos.notification.ScreenOnNotificationActivity
 import github.tornaco.android.thanos.power.SmartFreezeActivity
 import github.tornaco.android.thanos.power.SmartStandbyV2Activity
 import github.tornaco.android.thanos.power.wakelock.WakeLockBlockerActivity
+import github.tornaco.android.thanos.pref.AppPreference
 import github.tornaco.android.thanos.privacy.DataCheatActivity
 import github.tornaco.android.thanos.start.BackgroundRestrictActivity
 import github.tornaco.android.thanos.start.StartRestrictActivity
@@ -120,7 +121,11 @@ class PrebuiltFeatureLauncher(
                 DataCheatActivity.start(context)
             }
             PrebuiltFeatureIds.ID_OPS_BY_OPS -> {
-                Ops2Activity.start(context)
+                if (AppPreference.isFeatureNoticeAccepted(context, "NEW_OPS")) {
+                    Ops2Activity.start(context)
+                } else {
+                    OpsBottomNavActivity.start(context)
+                }
             }
             PrebuiltFeatureIds.ID_TASK_BLUR -> {
                 RecentTaskBlurListActivity.start(context)

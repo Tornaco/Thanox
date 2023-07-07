@@ -24,22 +24,19 @@ enum class PermState {
     UNKNOWN
 }
 
-val PermState.isGrant get() = this == PermState.ASK || this == PermState.ALLOW_FOREGROUND_ONLY || this == PermState.ALLOW_ALWAYS
-val PermState.isOneTime get() = this == PermState.ASK
-val PermState.isUserFixed get() = this == PermState.DENY
-val PermState.isUserSet get() = this == PermState.DENY
-
 data class PermInfo(
     val permState: PermState,
     val hasBackgroundPermission: Boolean,
     val isRuntimePermission: Boolean,
-    val isSupportOneTimeGrant: Boolean
+    val isSupportOneTimeGrant: Boolean,
+    val opAccessSummary: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         permState = PermState.valueOf(parcel.readString()),
         hasBackgroundPermission = parcel.readByte() != 0.toByte(),
         isRuntimePermission = parcel.readByte() != 0.toByte(),
-        isSupportOneTimeGrant = parcel.readByte() != 0.toByte()
+        isSupportOneTimeGrant = parcel.readByte() != 0.toByte(),
+        opAccessSummary = parcel.readString()
     )
 
     override fun describeContents(): Int {
@@ -51,6 +48,7 @@ data class PermInfo(
         dest?.writeByte(if (hasBackgroundPermission) 1 else 0)
         dest?.writeByte(if (isRuntimePermission) 1 else 0)
         dest?.writeByte(if (isSupportOneTimeGrant) 1 else 0)
+        dest?.writeString(opAccessSummary)
     }
 
     companion object CREATOR : Parcelable.Creator<PermInfo> {

@@ -124,17 +124,26 @@
                 app:persistent="false"
                 app:title="@string/title_net_stats" />
 
+            <SwitchPreferenceCompat
+                android:summary="Test refactored OPS feature."
+                app:key="@string/key_test_new_ops"
+                app:persistent="false"
+                app:title="New OPS" />
+
             <Preference
+                app:isPreferenceVisible="false"
                 app:key="@string/key_rootless_support"
                 app:persistent="false"
                 app:title="Non-Root support" />
 
             <Preference
+                app:isPreferenceVisible="false"
                 app:key="@string/key_theme_attr_preview"
                 app:persistent="false"
                 app:title="Theme attrs" />
 
             <Preference
+                app:isPreferenceVisible="false"
                 app:key="@string/key_settings_record_viewer"
                 app:persistent="false"
                 app:summary="@string/feature_summary_settings_access_record"

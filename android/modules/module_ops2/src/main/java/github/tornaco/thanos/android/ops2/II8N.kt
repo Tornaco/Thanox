@@ -21,6 +21,17 @@ fun PermState.displayLabel(): String {
     return stringResource(resId)
 }
 
+@Composable
+fun PermState.displaySummary(): String? {
+    return when (this) {
+        PermState.DENY -> stringResource(id = R.string.module_ops2_perm_state_deny_summary)
+        PermState.IGNORE -> stringResource(id = R.string.module_ops2_perm_state_ignore_summary)
+        else -> {
+            null
+        }
+    }
+}
+
 val ByPassColor = Color(0xff1A9431)
 
 @Composable

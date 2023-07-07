@@ -694,6 +694,20 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
             showNetStatPref.setEnabled(false);
         }
 
+        SwitchPreferenceCompat testOpsPref = findPreference(getString(R.string.key_test_new_ops));
+        testOpsPref.setChecked(AppPreference.isFeatureNoticeAccepted(getContext(), "NEW_OPS"));
+        testOpsPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                boolean useNewOps = (boolean) newValue;
+                if (useNewOps) {
+                    thanos.getAppOpsManager().setOpsEnabled(false);
+                }
+                AppPreference.setFeatureNoticeAccepted(getContext(), "NEW_OPS", useNewOps);
+                return true;
+            }
+        });
+
         findPreference(getString(R.string.key_rootless_support)).setVisible(BuildProp.THANOS_BUILD_DEBUG);
         findPreference(getString(R.string.key_rootless_support)).setOnPreferenceClickListener(preference -> {
             if (ServiceBindings.INSTANCE.checkPermission(1)) {
@@ -702,11 +716,13 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
             return false;
         });
 
+        findPreference(getString(R.string.key_theme_attr_preview)).setVisible(BuildProp.THANOS_BUILD_DEBUG);
         findPreference(getString(R.string.key_theme_attr_preview)).setOnPreferenceClickListener(preference -> {
             ActivityUtils.startActivity(requireActivity(), ThemeAttrPreviewActivity.class);
             return true;
         });
 
+        findPreference(getString(R.string.key_settings_record_viewer)).setVisible(BuildProp.THANOS_BUILD_DEBUG);
         findPreference(getString(R.string.key_settings_record_viewer)).setOnPreferenceClickListener(preference -> {
             SettingsAccessRecordViewerActivity.Starter.INSTANCE.start(requireActivity());
             return true;

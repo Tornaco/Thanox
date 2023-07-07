@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -116,11 +115,19 @@ class AppListActivity : ComposeThemeActivity() {
                                     PermState.IGNORE,
                                     PermState.DENY,
                                 ).map {
-                                    MenuDialogItem(it.name, it.displayLabel())
+                                    MenuDialogItem(
+                                        id = it.name,
+                                        title = it.displayLabel(),
+                                        summary = it.displaySummary()
+                                    )
                                 }
                             } else {
                                 listOf(PermState.ALLOW_ALWAYS, PermState.IGNORE).map {
-                                    MenuDialogItem(it.name, it.displayLabel())
+                                    MenuDialogItem(
+                                        id = it.name,
+                                        title = it.displayLabel(),
+                                        summary = it.displaySummary()
+                                    )
                                 }
                             },
                             onItemSelected = { appInfo, id ->
@@ -151,10 +158,16 @@ class AppListActivity : ComposeThemeActivity() {
                                         appItem.appInfo.appLabel,
                                         style = MaterialTheme.typography.titleSmall
                                     )
+                                    if (appItem.permInfo.opAccessSummary.isNotBlank()) {
+                                        androidx.compose.material3.Text(
+                                            text = appItem.permInfo.opAccessSummary,
+                                            style = MaterialTheme.typography.bodySmall
+                                        )
+                                    }
                                 }
                             }
 
-                            Text(
+                            androidx.compose.material3.Text(
                                 text = appItem.permInfo.permState.displayLabel(),
                                 style = MaterialTheme.typography.titleSmall,
                                 color = appItem.permInfo.permState.displayColor()

@@ -186,11 +186,15 @@
 -keep class github.tornaco.android.thanos.services.xposed.XposedHookEntry
 -keep class github.tornaco.android.thanos.services.xposed.LSPosedHookEntry
 -keep class github.tornaco.android.thanos.core** {*;}
--keep class github.tornaco.android.thanos.services** {*;}
+# -keep class github.tornaco.android.thanos.services** {*;}
 -keep class github.tornaco.android.thanos.db** {*;}
 -keep class github.tornaco.android.thanox.magisk** {*;}
+# github.tornaco.thanox.android.server.patch.framework
 -keep class github.tornaco.thanox.android.server** {*;}
 -keep class github.tornaco.xposed.patchx** {*;}
+-keep class ** implements github.tornaco.android.thanos.core.persist.i.SetRepo { *; }
+-keep class ** implements github.tornaco.android.thanos.core.persist.i.MapRepo { *; }
+-keep class ** implements github.tornaco.android.thanos.core.persist.i.Repo { *; }
 
 # Slf
 -keep class org.slf4j.** {*;}

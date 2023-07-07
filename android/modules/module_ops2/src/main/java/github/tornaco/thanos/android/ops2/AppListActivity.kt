@@ -90,7 +90,7 @@ class AppListActivity : ComposeThemeActivity() {
                                     PermState.IGNORE,
                                     PermState.DENY,
                                 ).map {
-                                    MenuDialogItem(it.name, it.name)
+                                    MenuDialogItem(it.name, it.displayLabel())
                                 }
                             } else {
                                 listOf(
@@ -98,12 +98,12 @@ class AppListActivity : ComposeThemeActivity() {
                                     PermState.IGNORE,
                                     PermState.DENY
                                 ).map {
-                                    MenuDialogItem(it.name, it.name)
+                                    MenuDialogItem(it.name, it.displayLabel())
                                 }
                             }
                         } else {
                             listOf(PermState.ALLOW_ALWAYS, PermState.IGNORE).map {
-                                MenuDialogItem(it.name, it.name)
+                                MenuDialogItem(it.name, it.displayLabel())
                             }
                         },
                         onItemSelected = { appInfo, id ->

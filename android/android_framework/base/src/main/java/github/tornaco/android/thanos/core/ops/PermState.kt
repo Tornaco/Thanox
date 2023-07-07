@@ -24,6 +24,11 @@ enum class PermState {
     UNKNOWN
 }
 
+val PermState.isGrant get() = this == PermState.ASK || this == PermState.ALLOW_FOREGROUND_ONLY || this == PermState.ALLOW_ALWAYS
+val PermState.isOneTime get() = this == PermState.ASK
+val PermState.isUserFixed get() = this == PermState.DENY
+val PermState.isUserSet get() = this == PermState.DENY
+
 data class PermInfo(
     val permState: PermState,
     val hasBackgroundPermission: Boolean,

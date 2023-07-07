@@ -120,11 +120,7 @@ class PrebuiltFeatureLauncher(
                 DataCheatActivity.start(context)
             }
             PrebuiltFeatureIds.ID_OPS_BY_OPS -> {
-                if (BuildProp.THANOS_BUILD_DEBUG) {
-                    Ops2Activity.start(context)
-                } else {
-                    OpsBottomNavActivity.start(context)
-                }
+                Ops2Activity.start(context)
             }
             PrebuiltFeatureIds.ID_TASK_BLUR -> {
                 RecentTaskBlurListActivity.start(context)

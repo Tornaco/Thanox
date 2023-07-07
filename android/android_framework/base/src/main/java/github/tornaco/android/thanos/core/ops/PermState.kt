@@ -32,12 +32,14 @@ val PermState.isUserSet get() = this == PermState.DENY
 data class PermInfo(
     val permState: PermState,
     val hasBackgroundPermission: Boolean,
-    val isRuntimePermission: Boolean
+    val isRuntimePermission: Boolean,
+    val isSupportOneTimeGrant: Boolean
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         permState = PermState.valueOf(parcel.readString()),
         hasBackgroundPermission = parcel.readByte() != 0.toByte(),
-        isRuntimePermission = parcel.readByte() != 0.toByte()
+        isRuntimePermission = parcel.readByte() != 0.toByte(),
+        isSupportOneTimeGrant = parcel.readByte() != 0.toByte()
     )
 
     override fun describeContents(): Int {
@@ -48,6 +50,7 @@ data class PermInfo(
         dest?.writeString(permState.name)
         dest?.writeByte(if (hasBackgroundPermission) 1 else 0)
         dest?.writeByte(if (isRuntimePermission) 1 else 0)
+        dest?.writeByte(if (isSupportOneTimeGrant) 1 else 0)
     }
 
     companion object CREATOR : Parcelable.Creator<PermInfo> {

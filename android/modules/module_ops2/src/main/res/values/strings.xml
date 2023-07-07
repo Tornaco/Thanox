@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="module_ops2_ops_list_title">所有权限</string>
+
     <string name="module_ops2_perm_state_allow">允许</string>
     <string name="module_ops2_perm_state_deny">拒绝</string>
     <string name="module_ops2_perm_state_ignore">忽略</string>
     <string name="module_ops2_perm_state_ask">询问</string>
-    <string name="module_ops2_perm_state_foreground">前台时允许</string>
+    <string name="module_ops2_perm_state_foreground">使用期间允许</string>
     <string name="module_ops2_perm_state_default">默认</string>
     <string name="module_ops2_perm_state_not_set">未设置</string>
     <string name="module_ops2_perm_state_unknown">未知</string>
+
+
+
+
 </resources>

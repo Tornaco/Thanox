@@ -22,10 +22,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.core.ops.PermState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.DisposableEffectWithLifeCycle
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
@@ -51,6 +55,8 @@ class AppListActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
+        val viewModel = hiltViewModel<AppListViewModel>()
+        val state by viewModel.state.collectAsState()
         val code = remember {
             intent.getIntExtra(EXTRA_CODE, Int.MIN_VALUE)
         }
@@ -58,95 +64,107 @@ class AppListActivity : ComposeThemeActivity() {
         ThanoxSmallAppBarScaffold(
             title = {
                 androidx.compose.material3.Text(
-                    text = "App",
+                    text = state.opLabel,
                     style = TypographyDefaults.appBarTitleTextStyle()
                 )
             },
-            onBackPressed = {},
+            onBackPressed = {
+                thisActivity().finish()
+            },
             actions = {
 
             }
         ) { paddings ->
-            val viewModel = hiltViewModel<AppListViewModel>()
-            val state by viewModel.state.collectAsState()
+
+            DisposableEffectWithLifeCycle(onResume = {
+                viewModel.refresh()
+            })
 
             LaunchedEffect(viewModel) {
                 viewModel.init(code)
                 viewModel.refresh()
             }
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddings)
+
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(state.isLoading),
+                onRefresh = { viewModel.refresh() },
+                indicatorPadding = paddings,
+                clipIndicatorToPadding = false,
+                indicator = { state, refreshTriggerDistance ->
+                    SwipeRefreshIndicator(
+                        state = state,
+                        refreshTriggerDistance = refreshTriggerDistance,
+                        scale = true,
+                        arrowEnabled = false,
+                        contentColor = MaterialTheme.colorScheme.primary
+                    )
+                }
             ) {
-                items(state.appList) { appItem ->
-                    val modeSelectDialogState = rememberMenuDialogState<AppInfo>(
-                        title = appItem.appInfo.appLabel,
-                        menuItems = if (appItem.permInfo.isRuntimePermission) {
-                            if (appItem.permInfo.hasBackgroundPermission) {
-                                listOf(
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddings)
+                ) {
+                    items(state.appList) { appItem ->
+                        val modeSelectDialogState = rememberMenuDialogState<AppInfo>(
+                            title = appItem.appInfo.appLabel,
+                            menuItems = if (appItem.permInfo.isRuntimePermission) {
+                                listOfNotNull(
                                     PermState.ALLOW_ALWAYS,
-                                    PermState.ALLOW_FOREGROUND_ONLY,
+                                    if (appItem.permInfo.hasBackgroundPermission) PermState.ALLOW_FOREGROUND_ONLY else null,
+                                    if (appItem.permInfo.isSupportOneTimeGrant) PermState.ASK else null,
                                     PermState.IGNORE,
                                     PermState.DENY,
                                 ).map {
                                     MenuDialogItem(it.name, it.displayLabel())
                                 }
                             } else {
-                                listOf(
-                                    PermState.ALLOW_ALWAYS,
-                                    PermState.IGNORE,
-                                    PermState.DENY
-                                ).map {
+                                listOf(PermState.ALLOW_ALWAYS, PermState.IGNORE).map {
                                     MenuDialogItem(it.name, it.displayLabel())
                                 }
+                            },
+                            onItemSelected = { appInfo, id ->
+                                appInfo?.let { viewModel.setMode(it, PermState.valueOf(id)) }
                             }
-                        } else {
-                            listOf(PermState.ALLOW_ALWAYS, PermState.IGNORE).map {
-                                MenuDialogItem(it.name, it.displayLabel())
-                            }
-                        },
-                        onItemSelected = { appInfo, id ->
-                            appInfo?.let { viewModel.setMode(it, PermState.valueOf(id)) }
-                        }
-                    )
-                    MenuDialog(state = modeSelectDialogState)
+                        )
+                        MenuDialog(state = modeSelectDialogState)
 
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .heightIn(min = 68.dp)
-                            .clickableWithRipple {
-                                modeSelectDialogState.show(appItem.appInfo)
-                            }
-                            .padding(horizontal = 16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
                         Row(
                             modifier = Modifier
-                                .weight(1f),
+                                .fillMaxWidth()
+                                .heightIn(min = 68.dp)
+                                .clickableWithRipple {
+                                    modeSelectDialogState.show(appItem.appInfo)
+                                }
+                                .padding(horizontal = 16.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            AppIcon(modifier = Modifier.size(42.dp), appInfo = appItem.appInfo)
-                            StandardSpacer()
-                            Column {
-                                androidx.compose.material3.Text(
-                                    appItem.appInfo.appLabel,
-                                    style = MaterialTheme.typography.titleMedium
-                                )
-                                androidx.compose.material3.Text(
-                                    appItem.appInfo.pkgName,
-                                    style = MaterialTheme.typography.bodySmall
-                                )
+                            Row(
+                                modifier = Modifier
+                                    .weight(1f),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                AppIcon(modifier = Modifier.size(42.dp), appInfo = appItem.appInfo)
+                                StandardSpacer()
+                                Column {
+                                    androidx.compose.material3.Text(
+                                        appItem.appInfo.appLabel,
+                                        style = MaterialTheme.typography.titleSmall
+                                    )
+                                }
                             }
-                        }
 
-                        Text(text = appItem.permInfo.permState.displayLabel())
+                            Text(
+                                text = appItem.permInfo.permState.displayLabel(),
+                                style = MaterialTheme.typography.titleSmall,
+                                color = appItem.permInfo.permState.displayColor()
+                            )
+                        }
                     }
                 }
             }
+
+
         }
-
-
     }
 }

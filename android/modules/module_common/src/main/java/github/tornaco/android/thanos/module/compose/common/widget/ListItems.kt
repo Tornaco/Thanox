@@ -1,7 +1,15 @@
 package github.tornaco.android.thanos.module.compose.common.widget
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -158,15 +166,15 @@ fun ListItem(
                     Text(
                         text = title,
                         style = MaterialTheme.typography.titleMedium.copy(
-                            fontSize = 20.sp,
+                            fontSize = 18.sp,
                         )
                     )
                 }
-                TinySpacer()
                 text1?.let {
+                    TinySpacer()
                     Text(
                         text = text1,
-                        style = MaterialTheme.typography.bodyMedium.copy(fontSize = 16.sp),
+                        style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp),
                         maxLines = 12
                     )
                 }

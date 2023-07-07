@@ -21,9 +21,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.ops.OpsManager.Companion.APP_OP_DEPRECATED_1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,7 +37,8 @@ data class OpItem(
     val code: Int,
     val label: String,
     val description: String,
-    val iconRes: Int
+    val iconRes: Int,
+    val appsCount: Int
 )
 
 data class OpsState(
@@ -60,16 +63,34 @@ class OpsViewModel @Inject constructor(@ApplicationContext private val context: 
 
     fun refresh() {
         viewModelScope.launch {
+            val array = context.resources.obtainTypedArray(R.array.module_ops2_op_icon)
             val opItems = withContext(Dispatchers.IO) {
-                (0..opsManager.opNum).map { code ->
-                    OpItem(
-                        code = code,
-                        label = opsManager.opToName(code),
-                        description = "$code",
-                        iconRes = R.drawable.module_common_ic_settings_fill
-                    )
-                }
+                (0 until opsManager.opNum).filter { it != APP_OP_DEPRECATED_1 }
+                    .filter { opsManager.opToSwitch(it) == it }
+                    .map { code ->
+                        OpItem(
+                            code = code,
+                            appsCount = 2,
+                            label = opLabel(context, code, opsManager.opToName(code)),
+                            description = opSummary(
+                                context,
+                                code,
+                                opsManager.opToName(code)
+                            ),
+                            iconRes = kotlin.runCatching {
+                                array.getResourceId(
+                                    code,
+                                    R.drawable.ic_remix_settings_2_fill /* fallback */
+                                )
+                            }.getOrElse {
+                                R.drawable.ic_remix_settings_2_fill
+                            }.also {
+                                XLog.d("Res: $it")
+                            }
+                        )
+                    }
             }
+            array.recycle()
             _state.value = _state.value.copy(opsItems = opItems)
         }
     }

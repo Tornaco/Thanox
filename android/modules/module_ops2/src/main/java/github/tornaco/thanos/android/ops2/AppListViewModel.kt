@@ -29,9 +29,11 @@ import github.tornaco.android.thanos.core.ops.PermState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import github.tornaco.android.thanos.core.pm.Pkg
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class AppItem(
@@ -42,7 +44,8 @@ data class AppItem(
 data class AppListState(
     val isLoading: Boolean,
     val appList: List<AppItem>,
-    val code: Int = Int.MIN_VALUE
+    val code: Int = Int.MIN_VALUE,
+    val opLabel: String
 )
 
 @SuppressLint("StaticFieldLeak")
@@ -53,7 +56,8 @@ class AppListViewModel @Inject constructor(@ApplicationContext private val conte
         MutableStateFlow(
             AppListState(
                 isLoading = true,
-                appList = emptyList()
+                appList = emptyList(),
+                opLabel = ""
             )
         )
     val state = _state.asStateFlow()
@@ -62,20 +66,28 @@ class AppListViewModel @Inject constructor(@ApplicationContext private val conte
     private val opsManager by lazy { thanos.opsManager }
 
     fun init(code: Int) {
-        _state.value = _state.value.copy(code = code)
+        _state.value = _state.value.copy(
+            code = code,
+            opLabel = opLabel(context, code, opsManager.opToName(code))
+        )
     }
 
     fun refresh() {
+        if (_state.value.code < 0) return
         viewModelScope.launch {
-            val all = thanos.pkgManager.getInstalledPkgsByPackageSetId(PREBUILT_PACKAGE_SET_ID_3RD)
-            val appItems = all.mapNotNull { appInfo ->
-                val permInfo = opsManager.getPackagePermInfo(
-                    state.value.code,
-                    Pkg.fromAppInfo(appInfo)
-                )
-                permInfo?.let { AppItem(appInfo, it) }
+            _state.value = _state.value.copy(isLoading = true)
+            withContext(Dispatchers.IO) {
+                val all =
+                    thanos.pkgManager.getInstalledPkgsByPackageSetId(PREBUILT_PACKAGE_SET_ID_3RD)
+                val appItems = all.mapNotNull { appInfo ->
+                    val permInfo = opsManager.getPackagePermInfo(
+                        state.value.code,
+                        Pkg.fromAppInfo(appInfo)
+                    )
+                    permInfo?.let { AppItem(appInfo, it) }
+                }
+                _state.value = _state.value.copy(appList = appItems, isLoading = false)
             }
-            _state.value = _state.value.copy(appList = appItems)
         }
     }
 

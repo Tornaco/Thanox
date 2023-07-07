@@ -1,5 +1,6 @@
 package github.tornaco.android.thanos.core.ops
 
+import android.app.AppOpsManager
 import github.tornaco.android.thanos.core.pm.Pkg
 
 class OpsManager(private val ops: IOps) {
@@ -15,6 +16,8 @@ class OpsManager(private val ops: IOps) {
             "default",  // MODE_DEFAULT
             "foreground"
         )
+
+        const val APP_OP_DEPRECATED_1 = 96
 
         const val MODE_ALLOWED = 0
         const val MODE_IGNORED = 1
@@ -41,4 +44,5 @@ class OpsManager(private val ops: IOps) {
     fun opToPermission(code: Int): String? = ops.opToPermission(code)
     fun getPermissionFlags(permName: String, pkg: Pkg): Int = ops.getPermissionFlags(permName, pkg)
     fun permissionFlagToString(flag: Int): String = ops.permissionFlagToString(flag)
+    fun opToSwitch(code: Int): Int = AppOpsManager.opToSwitch(code)
 }

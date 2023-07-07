@@ -65,6 +65,7 @@ dependencies {
     implementation(Libs.Accompanist.appcompatTheme)
     implementation(Libs.Accompanist.systemUiController)
     implementation(Libs.Accompanist.pager)
+    implementation(Libs.Accompanist.swipeRefresh)
 
     implementation(Libs.Others.glide)
     annotationProcessor(Libs.Others.glideCompiler)
@@ -76,4 +77,5 @@ dependencies {
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))
+    implementation(project(":third_party:remix"))
 }

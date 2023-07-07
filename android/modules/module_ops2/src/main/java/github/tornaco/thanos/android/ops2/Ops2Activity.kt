@@ -2,6 +2,7 @@ package github.tornaco.thanos.android.ops2
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,15 +43,16 @@ class Ops2Activity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
-
         ThanoxSmallAppBarScaffold(
             title = {
                 androidx.compose.material3.Text(
-                    text = "Ops",
+                    text = stringResource(id = R.string.module_ops2_ops_list_title),
                     style = TypographyDefaults.appBarTitleTextStyle()
                 )
             },
-            onBackPressed = {},
+            onBackPressed = {
+                thisActivity().finish()
+            },
             actions = {
 
             }
@@ -74,7 +77,8 @@ class Ops2Activity : ComposeThemeActivity() {
                             .clickableWithRipple {
                                 AppListActivity.start(context, it.code)
                             }
-                            .padding(horizontal = 16.dp),
+                            .padding(horizontal = 16.dp)
+                            .padding(vertical = 12.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Row(
@@ -83,18 +87,21 @@ class Ops2Activity : ComposeThemeActivity() {
                         ) {
                             Icon(
                                 painter = painterResource(id = it.iconRes),
-                                contentDescription = it.label
+                                contentDescription = it.label,
+                                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.66f)
                             )
                             StandardSpacer()
-                            Column {
+                            Column(verticalArrangement = Arrangement.Center) {
                                 androidx.compose.material3.Text(
                                     it.label,
                                     style = MaterialTheme.typography.titleSmall
                                 )
-                                androidx.compose.material3.Text(
-                                    it.description,
-                                    style = MaterialTheme.typography.bodySmall
-                                )
+                                if (it.description.isNotBlank()) {
+                                    androidx.compose.material3.Text(
+                                        it.description,
+                                        style = MaterialTheme.typography.bodySmall
+                                    )
+                                }
                             }
                         }
                     }

@@ -37,6 +37,8 @@ class StartResult : Parcelable {
         @JvmField
         val BY_PASS_WHITE_LISTED = StartResult(true, "BY_PASS_WHITE_LISTED")
         @JvmField
+        val BY_PASS_RECEIVED_PUSH = StartResult(true, "BY_PASS_RECEIVED_PUSH")
+        @JvmField
         val BY_PASS_CALLER_WHITE_LISTED = StartResult(true, "BY_PASS_CALLER_WHITE_LISTED")
         @JvmField
         val BY_PASS_HOST_TYPE_WHITE_LISTED = StartResult(true, "BY_PASS_HOST_TYPE_WHITE_LISTED")

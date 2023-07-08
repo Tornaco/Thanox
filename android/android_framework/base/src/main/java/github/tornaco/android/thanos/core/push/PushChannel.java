@@ -13,9 +13,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
-@AllArgsConstructor
-@Getter
-@ToString
 public final class PushChannel implements Parcelable {
 
     public static final PushChannel FCM_GCM = new PushChannel(new String[]{
@@ -31,10 +28,6 @@ public final class PushChannel implements Parcelable {
             "com.google.firebase.MESSAGING_EVENT"
     }, "google:fcm", "74EC7A26-5597-4C37-BD3C-A827A074EC02");
 
-    public static final PushChannel MIPUSH = new PushChannel(new String[]{
-            "com.xiaomi.mipush.RECEIVE_MESSAGE"
-    }, "mi:mipush", "1A733BD6-9FB7-43CF-8CDA-513C0CF83DB7");
-
     @NonNull
     private final String[] actions;
     @NonNull
@@ -46,6 +39,24 @@ public final class PushChannel implements Parcelable {
         actions = in.readStringArray();
         channelName = in.readString();
         channelId = in.readString();
+    }
+
+    public PushChannel(String[] actions, String channelName, String channelId) {
+        this.actions = actions;
+        this.channelName = channelName;
+        this.channelId = channelId;
+    }
+
+    public String[] getActions() {
+        return actions;
+    }
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public String getChannelId() {
+        return channelId;
     }
 
     public static final Creator<PushChannel> CREATOR = new Creator<PushChannel>() {

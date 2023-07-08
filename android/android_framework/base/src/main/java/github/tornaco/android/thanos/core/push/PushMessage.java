@@ -26,11 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PushMessage implements Parcelable {
     public static final int IMPORTANCE_MAX = 0;
-
-
     public static final int TYPE_APP_UPDATE = 0x1;
-
-
     public static final String DATA_SCHEMA_FIREBASE_BODY = "body";
 
     private String title;

@@ -37,6 +37,7 @@ import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.pref.AppPreference;
 import github.tornaco.android.thanos.util.AppIconLoaderUtil;
 import github.tornaco.android.thanos.widget.EditTextDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
@@ -306,7 +307,11 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         Preference opsPref = findPreference(getString(R.string.key_app_feature_config_ops));
         Objects.requireNonNull(opsPref).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PRIVACY_OPS));
         Objects.requireNonNull(opsPref).setOnPreferenceClickListener(preference -> {
-            AppOpsListActivity.start(requireContext(), appInfo);
+            if (AppPreference.isFeatureNoticeAccepted(requireContext(), "NEW_OPS")) {
+                github.tornaco.thanos.android.ops2.byapp.AppOpsListActivity.start(requireContext(), appInfo);
+            } else {
+                AppOpsListActivity.start(requireContext(), appInfo);
+            }
             return true;
         });
     }

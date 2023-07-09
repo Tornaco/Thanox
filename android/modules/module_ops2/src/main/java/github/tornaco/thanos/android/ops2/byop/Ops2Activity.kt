@@ -1,4 +1,4 @@
-package github.tornaco.thanos.android.ops2
+package github.tornaco.thanos.android.ops2.byop
 
 import android.content.Context
 import android.content.Intent
@@ -30,6 +30,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
+import github.tornaco.thanos.android.ops2.R
 
 @AndroidEntryPoint
 class Ops2Activity : ComposeThemeActivity() {

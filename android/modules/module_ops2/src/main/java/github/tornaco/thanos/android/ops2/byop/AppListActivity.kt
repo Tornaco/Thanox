@@ -1,4 +1,4 @@
-package github.tornaco.thanos.android.ops2
+package github.tornaco.thanos.android.ops2.byop
 
 import android.content.Context
 import android.content.Intent
@@ -33,6 +33,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
+import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
@@ -105,36 +106,14 @@ class AppListActivity : ComposeThemeActivity() {
                         .padding(paddings)
                 ) {
                     items(state.appList) { appItem ->
-                        val modeSelectDialogState = rememberMenuDialogState<AppInfo>(
-                            title = appItem.appInfo.appLabel,
-                            menuItems = if (appItem.permInfo.isRuntimePermission) {
-                                listOfNotNull(
-                                    PermState.ALLOW_ALWAYS,
-                                    if (appItem.permInfo.hasBackgroundPermission) PermState.ALLOW_FOREGROUND_ONLY else null,
-                                    if (appItem.permInfo.isSupportOneTimeGrant) PermState.ASK else null,
-                                    PermState.IGNORE,
-                                    PermState.DENY,
-                                ).map {
-                                    MenuDialogItem(
-                                        id = it.name,
-                                        title = it.displayLabel(),
-                                        summary = it.displaySummary()
-                                    )
-                                }
-                            } else {
-                                listOf(PermState.ALLOW_ALWAYS, PermState.IGNORE).map {
-                                    MenuDialogItem(
-                                        id = it.name,
-                                        title = it.displayLabel(),
-                                        summary = it.displaySummary()
-                                    )
-                                }
-                            },
-                            onItemSelected = { appInfo, id ->
-                                appInfo?.let { viewModel.setMode(it, PermState.valueOf(id)) }
-                            }
-                        )
-                        MenuDialog(state = modeSelectDialogState)
+                        val modeSelectDialogState = opModeMenuDialog(
+                            appItem.appInfo,
+                            isRuntimePermission = appItem.permInfo.isRuntimePermission,
+                            hasBackgroundPermission = appItem.permInfo.hasBackgroundPermission,
+                            isSupportOneTimeGrant = appItem.permInfo.isSupportOneTimeGrant
+                        ) { app, state ->
+                            viewModel.setMode(app, state)
+                        }
 
                         Row(
                             modifier = Modifier
@@ -176,8 +155,48 @@ class AppListActivity : ComposeThemeActivity() {
                     }
                 }
             }
-
-
         }
     }
+}
+
+
+@Composable
+fun opModeMenuDialog(
+    appInfo: AppInfo,
+    isRuntimePermission: Boolean,
+    hasBackgroundPermission: Boolean,
+    isSupportOneTimeGrant: Boolean,
+    setMode: (AppInfo, PermState) -> Unit
+): MenuDialogState<AppInfo> {
+    val modeSelectDialogState = rememberMenuDialogState<AppInfo>(
+        title = appInfo.appLabel,
+        menuItems = if (isRuntimePermission) {
+            listOfNotNull(
+                PermState.ALLOW_ALWAYS,
+                if (hasBackgroundPermission) PermState.ALLOW_FOREGROUND_ONLY else null,
+                if (isSupportOneTimeGrant) PermState.ASK else null,
+                PermState.IGNORE,
+                PermState.DENY,
+            ).map {
+                MenuDialogItem(
+                    id = it.name,
+                    title = it.displayLabel(),
+                    summary = it.displaySummary()
+                )
+            }
+        } else {
+            listOf(PermState.ALLOW_ALWAYS, PermState.IGNORE).map {
+                MenuDialogItem(
+                    id = it.name,
+                    title = it.displayLabel(),
+                    summary = it.displaySummary()
+                )
+            }
+        },
+        onItemSelected = { app, id ->
+            app?.let { setMode(it, PermState.valueOf(id)) }
+        }
+    )
+    MenuDialog(state = modeSelectDialogState)
+    return modeSelectDialogState
 }

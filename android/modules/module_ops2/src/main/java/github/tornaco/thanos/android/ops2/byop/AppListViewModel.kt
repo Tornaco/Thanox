@@ -15,7 +15,7 @@
  *
  */
 
-package github.tornaco.thanos.android.ops2
+package github.tornaco.thanos.android.ops2.byop
 
 import android.annotation.SuppressLint
 import android.content.Context

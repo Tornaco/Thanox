@@ -15,7 +15,7 @@
  *
  */
 
-package github.tornaco.thanos.android.ops2
+package github.tornaco.thanos.android.ops2.byop
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -26,6 +26,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.ops.OpsManager.Companion.APP_OP_DEPRECATED_1
+import github.tornaco.thanos.android.ops2.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

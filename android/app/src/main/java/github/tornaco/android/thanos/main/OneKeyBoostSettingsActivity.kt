@@ -22,6 +22,8 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownItem
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownSelector
 import github.tornaco.android.thanos.module.compose.common.widget.ListItem
+import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.SmallTitle
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberDropdownSelectorState
 import github.tornaco.android.thanos.util.ActivityUtils
@@ -66,30 +68,45 @@ class OneKeyBoostSettingsActivity : ComposeThemeActivity() {
                 val allPkgSets = remember {
                     ThanosManager.from(context).pkgManager.getAllPackageSets(false)
                 }
+                val res = LocalContext.current.resources
                 val currentSettingLabel: () -> Pair<String, String> = {
                     val setting = ThanosManager.from(context).activityManager.oneKeyBoostSetting
                     if (setting == "default") {
-                        "Default" to ""
+                        res.getString(R.string.one_key_boost_setting_default) to
+                                res.getString(R.string.one_key_boost_setting_default_summary)
                     } else {
-                        "App set: ${allPkgSets.firstOrNull { it.id == setting }?.label}" to ""
+                        (allPkgSets.firstOrNull { it.id == setting }?.label
+                            ?: "") to res.getString(R.string.one_key_boost_setting_default_app_set)
                     }
                 }
                 var currentSettingsLabel: Pair<String, String> by remember {
                     mutableStateOf(currentSettingLabel())
                 }
 
+                SmallTitle(text = stringResource(id = R.string.one_key_boost_setting))
+                SmallSpacer()
                 val dropdownState = rememberDropdownSelectorState()
                 DropdownSelector(state = dropdownState, items = mutableListOf(
-                    DropdownItem(labelLines = listOf("Default"), "default")
+                    DropdownItem(
+                        labelLines = listOf(
+                            stringResource(id = R.string.one_key_boost_setting_default),
+                            stringResource(id = R.string.one_key_boost_setting_default_summary)
+                        ),
+                        "default"
+                    )
                 ).apply {
                     addAll(allPkgSets.map {
-                        DropdownItem(labelLines = listOf(it.label), it.id)
+                        DropdownItem(
+                            labelLines = listOf(
+                                it.label,
+                                stringResource(id = R.string.one_key_boost_setting_default_app_set)
+                            ), it.id
+                        )
                     })
                 }, onSelect = {
                     ThanosManager.from(context).activityManager.oneKeyBoostSetting = it.data
                     currentSettingsLabel = currentSettingLabel()
                 })
-
 
                 ListItem(
                     title = currentSettingsLabel.first,

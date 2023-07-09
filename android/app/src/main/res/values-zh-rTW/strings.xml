@@ -83,6 +83,10 @@
     <string name="feature_category_start_manage">啟動</string>
     <string name="feature_title_one_key_boost">一鍵加速</string>
     <string name="feature_title_one_key_boost_abbr">一鍵加速</string>
+    <string name="one_key_boost_setting">设置一键清理要清理的应用</string>
+    <string name="one_key_boost_setting_default">默認</string>
+    <string name="one_key_boost_setting_default_summary">清理不允許後台運行的應用程序</string>
+    <string name="one_key_boost_setting_default_app_set">應用集</string>
     <string name="feature_title_start_restrict">後台啟動</string>
     <string name="feature_title_start_restrict_abbr">後台啟動</string>
     <string name="feature_desc_start_restrict">允許選取的應用自啟動、關聯啟動</string>

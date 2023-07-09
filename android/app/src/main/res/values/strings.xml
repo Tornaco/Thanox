@@ -83,6 +83,10 @@
     <string name="feature_category_start_manage">Start</string>
     <string name="feature_title_one_key_boost">One Key Boost</string>
     <string name="feature_title_one_key_boost_abbr">Boost</string>
+    <string name="one_key_boost_setting">Set which apps process to clear</string>
+    <string name="one_key_boost_setting_default">Default</string>
+    <string name="one_key_boost_setting_default_summary">Clear process not allowed in Background Task feature</string>
+    <string name="one_key_boost_setting_default_app_set">Application Set</string>
     <string name="feature_title_start_restrict">Background Start</string>
     <string name="feature_title_start_restrict_abbr">BG Start</string>
     <string name="feature_desc_start_restrict">Allow apps to start from background</string>

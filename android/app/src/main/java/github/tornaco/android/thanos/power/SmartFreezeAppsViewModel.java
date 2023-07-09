@@ -271,7 +271,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                 onProgress.accept(appInfo);
                 thanosManager.getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), true);
                 if (alsoAddToPkgSet && packageSet != null && !packageSet.isPrebuilt()) {
-                    thanosManager.getPkgManager().addToPackageSet(appInfo.getPkgName(), pkgSetId);
+                    thanosManager.getPkgManager().addToPackageSet(Pkg.fromAppInfo(appInfo), pkgSetId);
                 }
                 // Give system a rest
                 try {

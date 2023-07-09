@@ -40,7 +40,7 @@
     <string name="service_notification_message_thanox_app_enabled_on_create">التجميد الذكي: تم تمكين %s بسبب الطلبات النشطة</string>
 
     <string name="service_app_set_all">الكل</string>
-    <string name="service_app_set_system">النظام العادي</string>
+    <string name="service_app_set_system">النظام</string>
     <string name="service_app_set_system_uid">جوهر النظام</string>
     <string name="service_app_set_3rd">ثلاثي</string>
     <string name="service_app_set_media">وسائط النظام</string>

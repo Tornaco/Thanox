@@ -97,7 +97,8 @@ abstract class Res {
             const val STRING_SERVICE_APP_SET_3RD = "service_app_set_3rd"
             const val STRING_SERVICE_APP_SET_WHITE_LISTED = "service_app_set_white_listed"
             const val STRING_SERVICE_APP_SET_WHITE_LISTED_USER = "service_app_set_white_listed_user"
-            const val STRING_SERVICE_APP_SET_WHITE_LISTED_USER_DESCRIPTION = "service_app_set_white_listed_user_description"
+            const val STRING_SERVICE_APP_SET_WHITE_LISTED_USER_DESCRIPTION =
+                "service_app_set_white_listed_user_description"
             const val STRING_SERVICE_APP_SET_DISABLED = "service_app_set_disabled"
         }
     }

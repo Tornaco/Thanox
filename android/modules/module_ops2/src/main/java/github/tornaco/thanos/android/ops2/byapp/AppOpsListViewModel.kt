@@ -60,7 +60,7 @@ class AppOpsListViewModel @Inject constructor(@ApplicationContext private val co
             val array = context.resources.obtainTypedArray(R.array.module_ops2_op_icon)
             val opItems = withContext(Dispatchers.IO) {
                 val permissions = PkgUtils.getAllDeclaredPermissions(context, appInfo.pkgName)
-                (0 until opsManager.opNum).filter { it != OpsManager.APP_OP_DEPRECATED_1 }
+                (0 until opsManager.opNum).filter { OpsManager.isOpSupported(it) }
                     .filter { opsManager.opToSwitch(it) == it }
                     .filter {
                         val perm = opsManager.opToPermission(it)

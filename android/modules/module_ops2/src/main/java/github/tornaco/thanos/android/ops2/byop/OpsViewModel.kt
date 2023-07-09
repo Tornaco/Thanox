@@ -25,7 +25,7 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.core.app.ThanosManager
-import github.tornaco.android.thanos.core.ops.OpsManager.Companion.APP_OP_DEPRECATED_1
+import github.tornaco.android.thanos.core.ops.OpsManager
 import github.tornaco.thanos.android.ops2.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -66,7 +66,7 @@ class OpsViewModel @Inject constructor(@ApplicationContext private val context: 
         viewModelScope.launch {
             val array = context.resources.obtainTypedArray(R.array.module_ops2_op_icon)
             val opItems = withContext(Dispatchers.IO) {
-                (0 until opsManager.opNum).filter { it != APP_OP_DEPRECATED_1 }
+                (0 until opsManager.opNum).filter { OpsManager.isOpSupported(it) }
                     .filter { opsManager.opToSwitch(it) == it }
                     .map { code ->
                         OpItem(

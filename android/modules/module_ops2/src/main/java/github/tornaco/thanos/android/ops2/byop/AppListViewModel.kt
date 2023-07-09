@@ -29,6 +29,8 @@ import github.tornaco.android.thanos.core.ops.PermState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
+import github.tornaco.android.thanos.module.compose.common.loader.Loader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -45,7 +47,10 @@ data class AppListState(
     val isLoading: Boolean,
     val appList: List<AppItem>,
     val code: Int = Int.MIN_VALUE,
-    val opLabel: String
+    val opLabel: String,
+
+    val selectedAppSetFilterItem: AppSetFilterItem? = null,
+    val appFilterItems: List<AppSetFilterItem> = emptyList(),
 )
 
 @SuppressLint("StaticFieldLeak")
@@ -65,6 +70,10 @@ class AppListViewModel @Inject constructor(@ApplicationContext private val conte
     private val thanos by lazy { ThanosManager.from(context) }
     private val opsManager by lazy { thanos.opsManager }
 
+    init {
+        viewModelScope.launch { loadDefaultAppFilterItems() }
+    }
+
     fun init(code: Int) {
         _state.value = _state.value.copy(
             code = code,
@@ -78,7 +87,9 @@ class AppListViewModel @Inject constructor(@ApplicationContext private val conte
             _state.value = _state.value.copy(isLoading = true)
             withContext(Dispatchers.IO) {
                 val all =
-                    thanos.pkgManager.getInstalledPkgsByPackageSetId(PREBUILT_PACKAGE_SET_ID_3RD)
+                    thanos.pkgManager.getInstalledPkgsByPackageSetId(
+                        state.value.selectedAppSetFilterItem?.id ?: PREBUILT_PACKAGE_SET_ID_3RD
+                    )
                 val appItems = all.mapNotNull { appInfo ->
                     val permInfo = opsManager.getPackagePermInfo(
                         state.value.code,
@@ -94,5 +105,21 @@ class AppListViewModel @Inject constructor(@ApplicationContext private val conte
     fun setMode(appInfo: AppInfo, mode: PermState) {
         opsManager.setMode(state.value.code, Pkg.fromAppInfo(appInfo), mode.name)
         refresh()
+    }
+
+    fun onFilterItemSelected(appSetFilterItem: AppSetFilterItem) {
+        _state.value = _state.value.copy(selectedAppSetFilterItem = appSetFilterItem)
+        refresh()
+    }
+
+    private suspend fun loadDefaultAppFilterItems() {
+        val appFilterListItems = Loader.loadAllFromAppSet(context)
+        _state.value = _state.value.copy(
+            // Default select 3-rd
+            selectedAppSetFilterItem = appFilterListItems.find {
+                it.id == PREBUILT_PACKAGE_SET_ID_3RD
+            },
+            appFilterItems = appFilterListItems
+        )
     }
 }

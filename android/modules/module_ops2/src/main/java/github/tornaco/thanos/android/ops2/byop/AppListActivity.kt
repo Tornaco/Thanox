@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -11,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,8 +32,10 @@ import github.tornaco.android.thanos.core.ops.PermState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.DisposableEffectWithLifeCycle
+import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
+import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogState
@@ -105,6 +110,17 @@ class AppListActivity : ComposeThemeActivity() {
                         .fillMaxSize()
                         .padding(paddings)
                 ) {
+                    item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        ) {
+                            AppFilterDropDown(state) { viewModel.onFilterItemSelected(it) }
+                            Spacer(modifier = Modifier.size(16.dp))
+                        }
+                    }
+
                     items(state.appList) { appItem ->
                         val modeSelectDialogState = opModeMenuDialog(
                             appItem.appInfo,
@@ -156,6 +172,19 @@ class AppListActivity : ComposeThemeActivity() {
                 }
             }
         }
+    }
+
+    @Composable
+    private fun AppFilterDropDown(
+        state: AppListState,
+        onFilterItemSelected: (AppSetFilterItem) -> Unit
+    ) {
+        FilterDropDown(
+            icon = Icons.Filled.FilterAlt,
+            selectedItem = state.selectedAppSetFilterItem,
+            allItems = state.appFilterItems,
+            onItemSelected = onFilterItemSelected
+        )
     }
 }
 

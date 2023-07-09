@@ -209,17 +209,17 @@ public interface IPkgManager extends android.os.IInterface
     {
       return null;
     }
-    @Override public void addToPackageSet(java.lang.String pkg, java.lang.String id) throws android.os.RemoteException
+    @Override public void addToPackageSet(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String id) throws android.os.RemoteException
     {
     }
-    @Override public void removeFromPackageSet(java.lang.String pkg, java.lang.String id) throws android.os.RemoteException
+    @Override public void removeFromPackageSet(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String id) throws android.os.RemoteException
     {
     }
-    @Override public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getPackageSetThatContainsPkg(java.lang.String pkg) throws android.os.RemoteException
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getPackageSetThatContainsPkg(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return null;
     }
-    @Override public java.util.List<java.lang.String> getPackageSetLabelsThatContainsPkg(java.lang.String pkg) throws android.os.RemoteException
+    @Override public java.util.List<java.lang.String> getPackageSetLabelsThatContainsPkg(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
     {
       return null;
     }
@@ -955,8 +955,13 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_addToPackageSet:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.addToPackageSet(_arg0, _arg1);
@@ -966,8 +971,13 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_removeFromPackageSet:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.removeFromPackageSet(_arg0, _arg1);
@@ -977,8 +987,13 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getPackageSetThatContainsPkg:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> _result = this.getPackageSetThatContainsPkg(_arg0);
           reply.writeNoException();
           reply.writeTypedList(_result);
@@ -987,8 +1002,13 @@ public interface IPkgManager extends android.os.IInterface
         case TRANSACTION_getPackageSetLabelsThatContainsPkg:
         {
           data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.util.List<java.lang.String> _result = this.getPackageSetLabelsThatContainsPkg(_arg0);
           reply.writeNoException();
           reply.writeStringList(_result);
@@ -2418,13 +2438,19 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public void addToPackageSet(java.lang.String pkg, java.lang.String id) throws android.os.RemoteException
+      @Override public void addToPackageSet(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String id) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkg);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addToPackageSet, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
@@ -2438,13 +2464,19 @@ public interface IPkgManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public void removeFromPackageSet(java.lang.String pkg, java.lang.String id) throws android.os.RemoteException
+      @Override public void removeFromPackageSet(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String id) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkg);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_removeFromPackageSet, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
@@ -2458,14 +2490,20 @@ public interface IPkgManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      @Override public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getPackageSetThatContainsPkg(java.lang.String pkg) throws android.os.RemoteException
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getPackageSetThatContainsPkg(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkg);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetThatContainsPkg, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
             return getDefaultImpl().getPackageSetThatContainsPkg(pkg);
@@ -2479,14 +2517,20 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<java.lang.String> getPackageSetLabelsThatContainsPkg(java.lang.String pkg) throws android.os.RemoteException
+      @Override public java.util.List<java.lang.String> getPackageSetLabelsThatContainsPkg(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<java.lang.String> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(pkg);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetLabelsThatContainsPkg, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
             return getDefaultImpl().getPackageSetLabelsThatContainsPkg(pkg);
@@ -3093,10 +3137,10 @@ public interface IPkgManager extends android.os.IInterface
   public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getAllPackageSets(boolean withPackages) throws android.os.RemoteException;
   public java.util.List<java.lang.String> getAllPackageSetIds() throws android.os.RemoteException;
-  public void addToPackageSet(java.lang.String pkg, java.lang.String id) throws android.os.RemoteException;
-  public void removeFromPackageSet(java.lang.String pkg, java.lang.String id) throws android.os.RemoteException;
-  public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getPackageSetThatContainsPkg(java.lang.String pkg) throws android.os.RemoteException;
-  public java.util.List<java.lang.String> getPackageSetLabelsThatContainsPkg(java.lang.String pkg) throws android.os.RemoteException;
+  public void addToPackageSet(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String id) throws android.os.RemoteException;
+  public void removeFromPackageSet(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String id) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getPackageSetThatContainsPkg(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public java.util.List<java.lang.String> getPackageSetLabelsThatContainsPkg(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public void setFreezePkgWithSuspendEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isFreezePkgWithSuspendEnabled() throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgsByPackageSetId(java.lang.String pkgSetId) throws android.os.RemoteException;

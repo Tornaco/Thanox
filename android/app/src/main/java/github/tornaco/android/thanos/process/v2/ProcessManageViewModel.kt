@@ -88,84 +88,88 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         withContext(Dispatchers.IO) {
             updateLoadingState(true)
 
-            val filterPackages = state.value.selectedAppSetFilterItem?.let {
+            val filterPackages: List<Pkg> = state.value.selectedAppSetFilterItem?.let {
                 pkgManager.getPackageSetById(
                     it.id,
                     true
-                ).pkgNames.filterNot { pkgName -> pkgName == BuildProp.THANOS_APP_PKG_NAME }
+                ).pkgList.filterNot { pkg -> pkg.pkgName == BuildProp.THANOS_APP_PKG_NAME }
             } ?: emptyList()
 
             val runningServices = activityManager.getRunningServiceLegacy(Int.MAX_VALUE)
             val runningAppProcess =
                 activityManager.runningAppProcessLegacy.filter { it.pkgList != null && it.pkgList.isNotEmpty() }
-            val runningPackages = runningAppProcess.map { it.pkgList[0] }.distinct()
+            val runningPackages =
+                runningAppProcess.map { Pkg.from(it.pkgList[0], it.uid) }.distinct()
 
-            val runningAppStates = runningAppProcess.groupBy { Pkg.from(it.pkgList[0], it.uid) }.map { entry ->
-                val pkg: Pkg = entry.key
-                val runningProcessStates = entry.value.map { process ->
-                    val processPss =
-                        activityManager.getProcessPss(intArrayOf(process.pid)).sum()
-                    RunningProcessState(
-                        pkg = pkg,
-                        process = process,
-                        runningServices = runningServices.filter { service ->
-                            service.pid == process.pid
-                        }.map { runningServiceInfo ->
-                            val label = getServiceLabel(runningServiceInfo)
-                            val clientLabel = if (runningServiceInfo.clientPackage != null && runningServiceInfo.clientLabel > 0) {
-                                kotlin.runCatching {
-                                    val clientR: Resources =
-                                        pm.getResourcesForApplication(runningServiceInfo.clientPackage)
-                                    clientR.getString(runningServiceInfo.clientLabel)
-                                }.getOrElse {
-                                    XLog.e("getResourcesForApplication error", it)
-                                    null
-                                }
-                            } else {
-                                null
-                            }
-                            RunningService(runningServiceInfo, label, clientLabel)
-                        },
-                        sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
-                    )
-                }.sortedByDescending { it.runningServices.size }.sortedBy { !it.isMain }
+            val runningAppStates =
+                runningAppProcess.groupBy { Pkg.from(it.pkgList[0], it.uid) }.map { entry ->
+                    val pkg: Pkg = entry.key
+                    val runningProcessStates = entry.value.map { process ->
+                        val processPss =
+                            activityManager.getProcessPss(intArrayOf(process.pid)).sum()
+                        RunningProcessState(
+                            pkg = pkg,
+                            process = process,
+                            runningServices = runningServices.filter { service ->
+                                service.pid == process.pid
+                            }.map { runningServiceInfo ->
+                                val label = getServiceLabel(runningServiceInfo)
+                                val clientLabel =
+                                    if (runningServiceInfo.clientPackage != null && runningServiceInfo.clientLabel > 0) {
+                                        kotlin.runCatching {
+                                            val clientR: Resources =
+                                                pm.getResourcesForApplication(runningServiceInfo.clientPackage)
+                                            clientR.getString(runningServiceInfo.clientLabel)
+                                        }.getOrElse {
+                                            XLog.e("getResourcesForApplication error", it)
+                                            null
+                                        }
+                                    } else {
+                                        null
+                                    }
+                                RunningService(runningServiceInfo, label, clientLabel)
+                            },
+                            sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
+                        )
+                    }.sortedByDescending { it.runningServices.size }.sortedBy { !it.isMain }
 
-                val isAllProcessCached =
-                    entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }
-                val totalPss =
-                    activityManager.getProcessPss(entry.value.map { it.pid }.toIntArray()).sum()
+                    val isAllProcessCached =
+                        entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }
+                    val totalPss =
+                        activityManager.getProcessPss(entry.value.map { it.pid }.toIntArray()).sum()
 
-                val runningTimeMillis = runningProcessStates.map {
-                    activityManager.getProcessStartTime(it.process.pid)
-                }.filter { it > 0L }.minOrNull()?.let {
-                    SystemClock.elapsedRealtime() - it
-                }
+                    val runningTimeMillis = runningProcessStates.map {
+                        activityManager.getProcessStartTime(it.process.pid)
+                    }.filter { it > 0L }.minOrNull()?.let {
+                        SystemClock.elapsedRealtime() - it
+                    }
 
-                val appInfo = pkgManager.getAppInfo(pkg)
-                appInfo?.let { app ->
-                    RunningAppState(
-                        appInfo = app,
-                        processState = runningProcessStates,
-                        allProcessIsCached = isAllProcessCached,
-                        totalPss = totalPss,
-                        sizeStr = Formatter.formatShortFileSize(context, totalPss * 1024),
-                        runningTimeMillis = runningTimeMillis,
-                        isPlayingBack = audio.hasAudioFocus(pkg)
-                    )
-                }
+                    val appInfo = pkgManager.getAppInfo(pkg)
+                    appInfo?.let { app ->
+                        RunningAppState(
+                            appInfo = app,
+                            processState = runningProcessStates,
+                            allProcessIsCached = isAllProcessCached,
+                            totalPss = totalPss,
+                            sizeStr = Formatter.formatShortFileSize(context, totalPss * 1024),
+                            runningTimeMillis = runningTimeMillis,
+                            isPlayingBack = audio.hasAudioFocus(pkg)
+                        )
+                    }
 
-            }.filterNotNull().filter {
-                filterPackages.contains(it.appInfo.pkgName)
-            }.sortedByDescending { it.totalPss }
+                }.filterNotNull().filter {
+                    filterPackages.contains(Pkg.fromAppInfo(it.appInfo))
+                }.sortedByDescending { it.totalPss }
 
             val runningAppStatesGroupByCached = runningAppStates.groupBy { it.allProcessIsCached }
             XLog.d("startLoading: %s", runningAppStatesGroupByCached)
 
-            val notRunningApps = filterPackages.filterNot { runningPackages.contains(it) }.mapNotNull {
-                pkgManager.getAppInfo(it)
-            }.sortedWith { o1, o2 ->
-                Collator.getInstance(Locale.CHINESE).compare(o1.appLabel, o2.appLabel)
-            }
+            val notRunningApps =
+                filterPackages.filterNot { runningPackages.contains(it) }.mapNotNull {
+                    pkgManager.getAppInfo(it)
+                }.sortedWith { o1, o2 ->
+                    Collator.getInstance(Locale.CHINESE).compare(o1.appLabel, o2.appLabel)
+                }
 
             _state.value = _state.value.copy(
                 isLoading = false,

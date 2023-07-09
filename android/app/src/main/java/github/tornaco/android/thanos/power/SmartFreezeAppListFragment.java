@@ -254,7 +254,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             if (item.getItemId() == R.id.action_package_set) {
                 AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                     if (isSubscribed) {
-                        new PackageSetChooserDialog(requireActivity(), appInfo.getPkgName(), changed -> {
+                        new PackageSetChooserDialog(requireActivity(), Pkg.fromAppInfo(appInfo), changed -> {
                             if (changed) {
                                 viewModel.start();
                             }

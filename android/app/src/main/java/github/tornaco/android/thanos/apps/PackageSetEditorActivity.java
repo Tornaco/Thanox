@@ -18,7 +18,6 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
@@ -38,7 +37,6 @@ import github.tornaco.android.thanos.widget.EditTextDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import util.CollectionUtils;
-import util.ObjectsUtils;
 
 public class PackageSetEditorActivity extends CommonAppListFilterActivity {
 
@@ -105,7 +103,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
         fab.show();
         fab.setOnClickListener(
                 v -> {
-                    ArrayList<Pkg> exclude = packageSet.getPkgNames().stream().map(Pkg::systemUserPkg).collect(Collectors.toCollection(Lists::newArrayList));
+                    List<Pkg> exclude = packageSet.getPkgList();
                     AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);
                 });
     }
@@ -129,8 +127,8 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
                 ThanosManager thanos = ThanosManager.from(getApplicationContext());
                 PackageManager pm = thanos.getPkgManager();
                 for (AppInfo appInfo : appInfos) {
-                    packageSet.addPackage(appInfo.getPkgName());
-                    pm.addToPackageSet(appInfo.getPkgName(), packageSet.getId());
+                    packageSet.addPackage(Pkg.fromAppInfo(appInfo));
+                    pm.addToPackageSet(Pkg.fromAppInfo(appInfo), packageSet.getId());
                 }
                 viewModel.start();
                 changed = true;
@@ -171,7 +169,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
             }
             List<AppListModel> res = new ArrayList<>();
             PackageManager pm = thanos.getPkgManager();
-            for (String pkg : packageSet.getPkgNames()) {
+            for (Pkg pkg : packageSet.getPkgList()) {
                 AppInfo appInfo = pm.getAppInfo(pkg);
                 if (appInfo == null) {
                     continue;
@@ -207,10 +205,9 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
                         if (id == 0) {
                             ThanosManager.from(thisActivity())
                                     .getPkgManager()
-                                    .removeFromPackageSet(appInfo.getPkgName(), packageSet.getId());
-                            packageSet.removePackage(appInfo.getPkgName());
-                            adapter.removeItem(
-                                    input -> ObjectsUtils.equals(input.appInfo.getPkgName(), appInfo.getPkgName()));
+                                    .removeFromPackageSet(Pkg.fromAppInfo(appInfo), packageSet.getId());
+                            packageSet.removePackage(Pkg.fromAppInfo(appInfo));
+                            adapter.removeItem(input -> Pkg.fromAppInfo(input.appInfo).equals(Pkg.fromAppInfo(appInfo)));
                             changed = true;
                         } else if (id == 1) {
                             AppDetailsActivity.start(thisActivity(), appInfo);

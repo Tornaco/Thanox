@@ -52,9 +52,9 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
         start(context, requestCode, new ArrayList<>(0));
     }
 
-    public static void start(Activity context, int requestCode, ArrayList<Pkg> excludePkgs) {
+    public static void start(Activity context, int requestCode, List<Pkg> excludePkgs) {
         Bundle data = new Bundle();
-        data.putParcelableArrayList(EXTRA_EXCLUDE_PKGS, excludePkgs);
+        data.putParcelableArrayList(EXTRA_EXCLUDE_PKGS, new ArrayList<>(excludePkgs));
         ActivityUtils.startActivityForResult(context, AppPickerActivity.class, requestCode, data);
     }
 

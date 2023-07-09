@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,69 +16,55 @@ public class PackageSet implements Parcelable {
     private String label;
     private String id;
     private long createAt;
+    private List<Pkg> pkgList;
+    @Deprecated
     private List<String> pkgNames;
     private boolean isPrebuilt;
     private String description;
 
-    protected PackageSet(Parcel in) {
-        label = in.readString();
-        id = in.readString();
-        createAt = in.readLong();
-        pkgNames = in.createStringArrayList();
-        if (pkgNames == null) {
-            pkgNames = new ArrayList<>();
-        }
-        isPrebuilt = in.readInt() == 1;
-        description = in.readString();
+    public PackageSet() {
     }
 
-    public PackageSet(String label, String id, long createAt, List<String> pkgNames, boolean isPrebuilt, String description) {
+    public PackageSet(String label, String id, long createAt, List<Pkg> pkgList, List<String> pkgNames, boolean isPrebuilt, String description) {
         this.label = label;
         this.id = id;
         this.createAt = createAt;
+        this.pkgList = pkgList;
         this.pkgNames = pkgNames;
         this.isPrebuilt = isPrebuilt;
         this.description = description;
     }
 
-    public PackageSet() {
-    }
-
-    public static PackageSetBuilder builder() {
-        return new PackageSetBuilder();
-    }
-
-    public List<String> getPkgNames() {
+    protected PackageSet(Parcel in) {
+        label = in.readString();
+        id = in.readString();
+        createAt = in.readLong();
+        pkgList = in.createTypedArrayList(Pkg.CREATOR);
+        if (pkgList == null) {
+            pkgList = new ArrayList<>();
+        }
+        pkgNames = in.createStringArrayList();
         if (pkgNames == null) {
             pkgNames = new ArrayList<>();
         }
-        return pkgNames;
+        isPrebuilt = in.readByte() != 0;
+        description = in.readString();
     }
 
-    public void addPackage(String pkg) {
-        if (pkgNames == null) {
-            pkgNames = new ArrayList<>();
-        }
-        pkgNames.add(pkg);
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(label);
+        dest.writeString(id);
+        dest.writeLong(createAt);
+        dest.writeTypedList(pkgList);
+        dest.writeStringList(pkgNames);
+        dest.writeByte((byte) (isPrebuilt ? 1 : 0));
+        dest.writeString(description);
     }
 
-    public void removePackage(String pkg) {
-        if (pkgNames == null) {
-            pkgNames = new ArrayList<>();
-        }
-        pkgNames.remove(pkg);
-    }
-
-    public int getPackageCount() {
-        return CollectionUtils.sizeOf(pkgNames);
-    }
-
-    public boolean isPrebuilt() {
-        return isPrebuilt;
-    }
-
-    public boolean isUserWhiteListed() {
-        return USER_PACKAGE_SET_ID_USER_WHITELISTED.equals(id);
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<PackageSet> CREATOR = new Creator<PackageSet>() {
@@ -92,19 +79,49 @@ public class PackageSet implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public static PackageSetBuilder builder() {
+        return new PackageSetBuilder();
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(label);
-        parcel.writeString(id);
-        parcel.writeLong(createAt);
-        parcel.writeStringList(pkgNames);
-        parcel.writeInt(isPrebuilt ? 1 : 0);
-        parcel.writeString(description);
+    public List<Pkg> getPkgList() {
+        if (pkgList == null) {
+            pkgList = new ArrayList<>();
+        }
+        return pkgList;
+    }
+
+    @Deprecated
+    public List<String> getPkgNames() {
+        if (pkgNames == null) {
+            pkgNames = new ArrayList<>();
+        }
+        return pkgNames;
+    }
+
+    public void addPackage(Pkg pkg) {
+        if (pkgList == null) {
+            pkgList = new ArrayList<>();
+        }
+        pkgList.add(pkg);
+    }
+
+    public void removePackage(Pkg pkg) {
+        if (pkgList == null) {
+            pkgList = new ArrayList<>();
+        }
+        pkgList.remove(pkg);
+    }
+
+    public int getPackageCount() {
+        return CollectionUtils.sizeOf(pkgList);
+    }
+
+    public boolean isPrebuilt() {
+        return isPrebuilt;
+    }
+
+    public boolean isUserWhiteListed() {
+        return USER_PACKAGE_SET_ID_USER_WHITELISTED.equals(id);
     }
 
     @Override
@@ -126,7 +143,7 @@ public class PackageSet implements Parcelable {
     }
 
     public String toString() {
-        return "PackageSet(label=" + this.label + ", id=" + this.id + ", createAt=" + this.createAt + ", pkgNames=" + this.getPkgNames() + ")";
+        return "PackageSet(label=" + this.label + ", id=" + this.id + ", createAt=" + this.createAt + ", pkgList=" + this.getPkgList() + ")";
     }
 
     public String getLabel() {
@@ -157,7 +174,7 @@ public class PackageSet implements Parcelable {
         private String label;
         private String id;
         private long createAt;
-        private List<String> pkgNames;
+        private List<Pkg> pkgList;
         private boolean isPrebuilt;
         private String description;
 
@@ -184,8 +201,8 @@ public class PackageSet implements Parcelable {
             return this;
         }
 
-        public PackageSet.PackageSetBuilder pkgNames(List<String> pkgNames) {
-            this.pkgNames = pkgNames;
+        public PackageSet.PackageSetBuilder pkgList(List<Pkg> pkgList) {
+            this.pkgList = pkgList;
             return this;
         }
 
@@ -195,7 +212,7 @@ public class PackageSet implements Parcelable {
         }
 
         public PackageSet build() {
-            return new PackageSet(label, id, createAt, pkgNames, isPrebuilt, description);
+            return new PackageSet(label, id, createAt, pkgList, Collections.emptyList(), isPrebuilt, description);
         }
     }
 }

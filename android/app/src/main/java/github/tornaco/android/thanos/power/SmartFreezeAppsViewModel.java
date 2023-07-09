@@ -119,7 +119,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         List<AppListModel> res = new ArrayList<>();
         for (Pkg pkg : thanosManager.getPkgManager().getSmartFreezePkgs()) {
             AppInfo appInfo = thanosManager.getPkgManager().getAppInfoForUser(pkg.getPkgName(), pkg.getUserId());
-            if (appInfo != null && (packageSet == null || packageSet.getPkgNames().contains(appInfo.getPkgName()))) {
+            if (appInfo != null && (packageSet == null || packageSet.getPkgList().contains(pkg))) {
                 XLog.v("getSmartFreezeApps app: %s, enabled: %s", appInfo.getPkgName(), !appInfo.disabled());
                 AppListModel model = new AppListModel(appInfo);
                 res.add(model);

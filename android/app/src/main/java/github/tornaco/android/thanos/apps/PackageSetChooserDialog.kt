@@ -23,17 +23,18 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.PackageSet
+import github.tornaco.android.thanos.core.pm.Pkg
 
 class PackageSetChooserDialog(
     private val context: Context,
-    private val targetPackage: String,
+    private val targetPackage: Pkg,
     private val onDismiss: (isChanged: Boolean) -> Unit
 ) {
 
     fun show() {
         val all = loadAll()
         val items = all.map { it.label }.toTypedArray()
-        val checked = all.map { it.pkgNames.contains(targetPackage) }.toBooleanArray()
+        val checked = all.map { it.pkgList.contains(targetPackage) }.toBooleanArray()
         val toCheckItemsId = mutableSetOf<String>()
         val toRemoveItemsId = mutableSetOf<String>()
 

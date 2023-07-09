@@ -86,11 +86,11 @@ interface IPkgManager {
     PackageSet getPackageSetById(String id, boolean withPackages);
     List<PackageSet> getAllPackageSets(boolean withPackages);
     List<String> getAllPackageSetIds();
-    void addToPackageSet(String pkg, String id);
-    void removeFromPackageSet(String pkg, String id);
+    void addToPackageSet(in Pkg pkg, String id);
+    void removeFromPackageSet(in Pkg pkg, String id);
 
-    List<PackageSet> getPackageSetThatContainsPkg(String pkg);
-    List<String> getPackageSetLabelsThatContainsPkg(String pkg);
+    List<PackageSet> getPackageSetThatContainsPkg(in Pkg pkg);
+    List<String> getPackageSetLabelsThatContainsPkg(in Pkg pkg);
 
     void setFreezePkgWithSuspendEnabled(boolean enable);
     boolean isFreezePkgWithSuspendEnabled();

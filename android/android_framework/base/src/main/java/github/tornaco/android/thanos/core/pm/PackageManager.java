@@ -403,12 +403,24 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public void addToPackageSet(String pkg, String id) {
+        pm.addToPackageSet(Pkg.systemUserPkg(pkg), id);
+    }
+
+    @SneakyThrows
+    public void addToPackageSet(Pkg pkg, String id) {
         pm.addToPackageSet(pkg, id);
     }
 
     @SneakyThrows
+    @Deprecated
     public void removeFromPackageSet(String pkg, String id) {
+        pm.removeFromPackageSet(Pkg.systemUserPkg(pkg), id);
+    }
+
+    @SneakyThrows
+    public void removeFromPackageSet(Pkg pkg, String id) {
         pm.removeFromPackageSet(pkg, id);
     }
 
@@ -418,12 +430,24 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    @Deprecated
     public List<PackageSet> getPackageSetThatContainsPkg(String pkg) {
+        return pm.getPackageSetThatContainsPkg(Pkg.systemUserPkg(pkg));
+    }
+
+    @SneakyThrows
+    public List<PackageSet> getPackageSetThatContainsPkg(Pkg pkg) {
         return pm.getPackageSetThatContainsPkg(pkg);
     }
 
     @SneakyThrows
+    @Deprecated
     public List<String> getPackageSetLabelsThatContainsPkg(String pkg) {
+        return pm.getPackageSetLabelsThatContainsPkg(Pkg.systemUserPkg(pkg));
+    }
+
+    @SneakyThrows
+    public List<String> getPackageSetLabelsThatContainsPkg(Pkg pkg) {
         return pm.getPackageSetLabelsThatContainsPkg(pkg);
     }
 

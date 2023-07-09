@@ -11,6 +11,7 @@ import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
+import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.loader.Loader
 import kotlinx.coroutines.Dispatchers
@@ -93,18 +94,18 @@ class WakeLockBlockerViewModel @Inject constructor(@ApplicationContext private v
     private suspend fun loadPackageStates() = withContext(Dispatchers.IO) {
         _state.value = _state.value.copy(isLoading = true)
 
-        val filterPackages = state.value.selectedAppSetFilterItem?.let {
+        val filterPackages: List<Pkg> = state.value.selectedAppSetFilterItem?.let {
             thanox.pkgManager.getPackageSetById(
                 it.id,
                 true
-            ).pkgNames.filterNot { pkgName -> pkgName == BuildProp.THANOS_APP_PKG_NAME }
+            ).pkgList.filterNot { pkg -> pkg.pkgName == BuildProp.THANOS_APP_PKG_NAME }
         } ?: emptyList()
 
         val powerManager = thanox.powerManager
         val packageStates = powerManager.getSeenWakeLocksStats(true, state.value.isShowHeldOnly)
             .filterNotNull()
             .asSequence()
-            .filter { filterPackages.contains(it.pkg.pkgName) }
+            .filter { filterPackages.contains(it.pkg) }
             .mapNotNull { stats ->
                 val appInfo =
                     thanox.pkgManager.getAppInfoForUser(stats.pkg.pkgName, stats.pkg.userId)

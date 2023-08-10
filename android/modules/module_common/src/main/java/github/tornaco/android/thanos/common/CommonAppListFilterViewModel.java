@@ -39,11 +39,11 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import rx2.android.schedulers.AndroidSchedulers;
-import util.CollectionUtils;
 import util.ObjectsUtils;
 
 public class CommonAppListFilterViewModel extends AndroidViewModel {
     private static final String PREF_KEY_DEF_CATEGORY_ID_PREFIX = "pref.default.app.category.id_";
+    private static final String PREF_KEY_SORT_PREFIX = "pref.default.app.sort.id_";
 
     public static final CategoryIndex DEFAULT_CATEGORY_INDEX = CategoryIndex.from(PrebuiltPkgSetsKt.PREBUILT_PACKAGE_SET_ID_3RD);
 
@@ -87,6 +87,15 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
         } else {
             categoryIndex.set(DEFAULT_CATEGORY_INDEX);
         }
+
+        String preferredSortName = PreferenceManager.getDefaultSharedPreferences(getApplication())
+                .getString(PREF_KEY_SORT_PREFIX + featureId, AppSort.Default.name());
+        AppSort preferredSort = AppSort.Default;
+        try {
+            preferredSort = AppSort.valueOf(preferredSortName);
+        } catch (Throwable ignored) {
+        }
+        currentSort.set(preferredSort);
     }
 
     private List<AppListModel> requestLoadOrCachedAppList(boolean preferCache) {
@@ -289,6 +298,14 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
 
     public void setAppSort(AppSort sort) {
         currentSort.set(sort);
+
+        if (sort != null) {
+            PreferenceManager.getDefaultSharedPreferences(getApplication())
+                    .edit()
+                    .putString(PREF_KEY_SORT_PREFIX + featureId, sort.name())
+                    .apply();
+        }
+
         start();
     }
 

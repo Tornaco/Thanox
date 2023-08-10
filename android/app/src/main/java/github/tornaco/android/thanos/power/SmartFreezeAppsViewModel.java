@@ -16,6 +16,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.preference.PreferenceManager;
 
 import com.elvishew.xlog.XLog;
 import com.google.common.io.ByteStreams;
@@ -67,6 +68,8 @@ import util.JsonFormatter;
 @SuppressWarnings("UnstableApiUsage")
 public class SmartFreezeAppsViewModel extends AndroidViewModel {
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
+    private static final String PREF_KEY_SORT_PREFIX = "pref.default.app.sort.id_";
+
     @Nullable
     private String pkgSetId;
 
@@ -89,6 +92,23 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     public void setPkgSetId(@Nullable String pkgSetId) {
         XLog.i("setPkgSetId: " + pkgSetId);
         this.pkgSetId = pkgSetId;
+
+        restoreSort();
+    }
+
+    private String getAppPrefFeatureId() {
+        return PREF_KEY_SORT_PREFIX + "smartFreeze_" + pkgSetId;
+    }
+
+    public void restoreSort() {
+        String preferredSortName = PreferenceManager.getDefaultSharedPreferences(getApplication())
+                .getString(getAppPrefFeatureId(), AppSort.Default.name());
+        AppSort preferredSort = AppSort.Default;
+        try {
+            preferredSort = AppSort.valueOf(preferredSortName);
+        } catch (Throwable ignored) {
+        }
+        currentSort.set(preferredSort);
     }
 
     @Nullable
@@ -391,6 +411,14 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
 
     public void setAppSort(AppSort sort) {
         currentSort.set(sort);
+
+        if (sort != null) {
+            PreferenceManager.getDefaultSharedPreferences(getApplication())
+                    .edit()
+                    .putString(getAppPrefFeatureId(), sort.name())
+                    .apply();
+        }
+
         start();
     }
 

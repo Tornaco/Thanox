@@ -11,6 +11,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.databinding.SmartFreezeLayoutBottomNavBinding
 import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
+import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.pref.AppPreference
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
@@ -91,13 +93,15 @@ class SmartFreezeActivity : ThemeActivity() {
                         })
                     TabItemSortDialog(tabSortDialogState)
 
+                    val tintColor = getColorAttribute(android.R.attr.colorControlNormal)
                     Column {
                         IconButton(onClick = {
                             tabSortDialogState.show(viewModel.tabItems)
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.module_common_ic_outline_sort_24),
-                                contentDescription = "Sort"
+                                contentDescription = "Sort",
+                                tint = Color(tintColor)
                             )
                         }
                     }

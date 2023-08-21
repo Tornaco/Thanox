@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 
@@ -593,7 +594,7 @@ public class ActivityManager {
     @SneakyThrows
     @Deprecated
     public RunningServiceInfoCompat[] getRunningAppServiceForPackage(String pkgName) {
-        return server.getRunningAppServiceForPackage(pkgName, UserHandle.getCallingUserId());
+        return server.getRunningAppServiceForPackage(pkgName,  UserHandle.getCallingUserId());
     }
 
     @SneakyThrows
@@ -949,16 +950,6 @@ public class ActivityManager {
     @SneakyThrows
     public void setPkgResident(Pkg pkg, boolean resident) {
         server.setPkgResident(pkg, resident);
-    }
-
-    @SneakyThrows
-    public void setOneKeyBoostSetting(String setting) {
-        server.setOneKeyBoostSetting(setting);
-    }
-
-    @SneakyThrows
-    public String getOneKeyBoostSetting() {
-        return server.getOneKeyBoostSetting();
     }
 
     @SneakyThrows

@@ -34,12 +34,7 @@ object PrebuiltFeatures {
                 iconRes = R.drawable.ic_nav_boost,
                 titleRes = R.string.feature_title_one_key_boost_abbr,
                 requiredFeature = BuildProp.THANOX_FEATURE_BG_TASK_CLEAN,
-                themeColor = R.color.nav_icon_boost,
-                menuItems = listOf(
-                    R.string.nav_title_settings to {
-                        OneKeyBoostSettingsActivity.Starter.start(it)
-                    }
-                )
+                themeColor = R.color.nav_icon_boost
             ),
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_BACKGROUND_START,

@@ -91,12 +91,6 @@
                 app:title="@string/pref_title_enable_power_save" />
 
             <SwitchPreferenceCompat
-                app:key="@string/key_new_auto_request_xposed_scope"
-                app:persistent="false"
-                app:summary="@string/pref_summary_auto_request_xposed_scope"
-                app:title="@string/pref_title_auto_request_xposed_scope" />
-
-            <SwitchPreferenceCompat
                 app:isPreferenceVisible="false"
                 app:key="@string/key_enable_battery_drain_app_reminging"
                 app:persistent="false"

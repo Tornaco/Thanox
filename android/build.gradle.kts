@@ -49,6 +49,10 @@ fun printVersions() {
     log("thanoxVersionName: $thanoxVersionName")
 }
 
+
+val androidSourceCompatibility by extra(JavaVersion.VERSION_11)
+val androidTargetCompatibility by extra(JavaVersion.VERSION_11)
+
 subprojects {
     log("subprojects: ${this.name}")
     repositories {
@@ -70,6 +74,13 @@ subprojects {
                 "-Xmaxerrs",
                 "1000"))
         options.encoding = "UTF-8"
+    }
+
+    plugins.withType(JavaPlugin::class.java) {
+        extensions.configure(JavaPluginExtension::class.java) {
+            sourceCompatibility = androidSourceCompatibility
+            targetCompatibility = androidTargetCompatibility
+        }
     }
 
     buildDir = file("${outDir}${path.replace(":", File.separator)}")

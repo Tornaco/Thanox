@@ -4,18 +4,19 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
-import android.content.res.Resources;
+import android.os.ParcelFileDescriptor;
 
-
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
-import java.util.ConcurrentModificationException;
 
+import io.github.libxposed.api.annotations.AfterInvocation;
+import io.github.libxposed.api.annotations.BeforeInvocation;
+import io.github.libxposed.api.annotations.XposedHooker;
 import io.github.libxposed.api.errors.HookFailedError;
 import io.github.libxposed.api.utils.DexParser;
 
@@ -43,7 +44,7 @@ public interface XposedInterface {
     int FRAMEWORK_PRIVILEGE_APP = 2;
     /**
      * Indicates that the framework is embedded in the hooked app,
-     * which means {@link #getSharedPreferences} will be null and remote file is unsupported.
+     * which means {@link #getRemotePreferences} will be null and remote file is unsupported.
      */
     int FRAMEWORK_PRIVILEGE_EMBEDDED = 3;
 
@@ -61,245 +62,183 @@ public interface XposedInterface {
     int PRIORITY_HIGHEST = 10000;
 
     /**
-     * The interface Before hook callback.
-     *
-     * @param <T> the type parameter
+     * Contextual interface for before invocation callbacks.
      */
-    interface BeforeHookCallback<T> {
+    interface BeforeHookCallback {
         /**
-         * Gets origin.
-         *
-         * @return the origin
+         * Gets the method / constructor to be hooked.
          */
         @NonNull
-        T getOrigin();
+        Member getMember();
 
         /**
-         * Gets this.
-         *
-         * @return the this
+         * Gets the {@code this} object, or {@code null} if the method is static.
          */
         @Nullable
-        Object getThis();
+        Object getThisObject();
 
         /**
-         * Get args object [ ].
-         *
-         * @return the object [ ]
+         * Gets the arguments passed to the method / constructor. You can modify the arguments.
          */
         @NonNull
         Object[] getArgs();
 
         /**
-         * Gets arg.
+         * Sets the return value of the method and skip the invocation. If the procedure is a constructor,
+         * the {@code result} param will be ignored.
+         * Note that the after invocation callback will still be called.
          *
-         * @param <U>   the type parameter
-         * @param index the index
-         * @return the arg
+         * @param result The return value
          */
-        @Nullable
-        <U> U getArg(int index);
+        void returnAndSkip(@Nullable Object result);
 
         /**
-         * Sets arg.
+         * Throw an exception from the method / constructor and skip the invocation.
+         * Note that the after invocation callback will still be called.
          *
-         * @param <U>   the type parameter
-         * @param index the index
-         * @param value the value
-         */
-        <U> void setArg(int index, U value);
-
-        /**
-         * Return and skip.
-         *
-         * @param returnValue the return value
-         */
-        void returnAndSkip(@Nullable Object returnValue);
-
-        /**
-         * Throw and skip.
-         *
-         * @param throwable the throwable
+         * @param throwable The exception to be thrown
          */
         void throwAndSkip(@Nullable Throwable throwable);
-
-        /**
-         * Invoke origin object.
-         *
-         * @return the object
-         * @throws InvocationTargetException the invocation target exception
-         * @throws IllegalArgumentException  the illegal argument exception
-         * @throws IllegalAccessException    the illegal access exception
-         */
-        @Nullable
-        Object invokeOrigin() throws InvocationTargetException, IllegalArgumentException, IllegalAccessException;
-
-        /**
-         * Sets extra.
-         *
-         * @param <U>   the type parameter
-         * @param key   the key
-         * @param value the value
-         * @throws ConcurrentModificationException the concurrent modification exception
-         */
-        <U> void setExtra(@NonNull String key, @Nullable U value) throws ConcurrentModificationException;
     }
 
     /**
-     * The interface After hook callback.
-     *
-     * @param <T> the type parameter
+     * Contextual interface for after invocation callbacks.
      */
-    interface AfterHookCallback<T> {
+    interface AfterHookCallback {
         /**
-         * Gets origin.
-         *
-         * @return the origin
+         * Gets the method / constructor to be hooked.
          */
         @NonNull
-        T getOrigin();
+        Member getMember();
 
         /**
-         * Gets this.
-         *
-         * @return the this
+         * Gets the {@code this} object, or {@code null} if the method is static.
          */
         @Nullable
-        Object getThis();
+        Object getThisObject();
 
         /**
-         * Get args object [ ].
-         *
-         * @return the object [ ]
+         * Gets all arguments passed to the method / constructor.
          */
         @NonNull
         Object[] getArgs();
 
         /**
-         * Gets result.
-         *
-         * @return the result
+         * Gets the return value of the method or the before invocation callback. If the procedure is a
+         * constructor, a void method or an exception was thrown, the return value will be {@code null}.
          */
         @Nullable
         Object getResult();
 
         /**
-         * Gets throwable.
-         *
-         * @return the throwable
+         * Gets the exception thrown by the method / constructor or the before invocation callback. If the
+         * procedure call was successful, the return value will be {@code null}.
          */
         @Nullable
         Throwable getThrowable();
 
         /**
-         * Is skipped boolean.
-         *
-         * @return the boolean
+         * Gets whether the invocation was skipped by the before invocation callback.
          */
         boolean isSkipped();
 
         /**
-         * Sets result.
+         * Sets the return value of the method and skip the invocation. If the procedure is a constructor,
+         * the {@code result} param will be ignored.
          *
-         * @param result the result
+         * @param result The return value
          */
         void setResult(@Nullable Object result);
 
         /**
-         * Sets throwable.
+         * Sets the exception thrown by the method / constructor.
          *
-         * @param throwable the throwable
+         * @param throwable The exception to be thrown.
          */
         void setThrowable(@Nullable Throwable throwable);
-
-        /**
-         * Invoke origin object.
-         *
-         * @return the object
-         * @throws InvocationTargetException the invocation target exception
-         * @throws IllegalAccessException    the illegal access exception
-         */
-        @Nullable
-        Object invokeOrigin() throws InvocationTargetException, IllegalAccessException;
-
-        /**
-         * Gets extra.
-         *
-         * @param <U> the type parameter
-         * @param key the key
-         * @return the extra
-         */
-        @Nullable
-        <U> U getExtra(@NonNull String key);
     }
 
     /**
-     * The interface Before hooker.
+     * Interface for method / constructor hooking. Xposed modules should define their own hooker class
+     * and implement this interface. Normally, a hooker class corresponds to a method / constructor, but
+     * there could also be a single hooker class for all of them. By this way you can implement an interface
+     * like the old API.
      *
-     * @param <T> the type parameter
+     * <p>
+     * Classes implementing this interface should be annotated with {@link XposedHooker} and should provide
+     * two public static methods that are annotated with {@link BeforeInvocation} and {@link AfterInvocation},
+     * respectively.
+     * </p>
+     *
+     * <p>
+     * The before invocation method should have the following signature:<br/>
+     * Param {@code callback}: The {@link BeforeHookCallback} of the procedure call.<br/>
+     * Return value: If you want to save contextual information of one procedure call between the before
+     * and after callback, it could be a self-defined class, otherwise it should be {@code void}.
+     * </p>
+     *
+     * <p>
+     * The after invocation method should have the following signature:<br/>
+     * Param {@code callback}: The {@link AfterHookCallback} of the procedure call.<br/>
+     * Param {@code context} (optional): The contextual object returned by the before invocation.
+     * </p>
+     *
+     * <p>Example usage:</p>
+     *
+     * <pre>{@code
+     *   @XposedHooker
+     *   public class ExampleHooker implements Hooker {
+     *
+     *       @BeforeInvocation
+     *       public static void before(@NonNull BeforeHookCallback callback) {
+     *           // Pre-hooking logic goes here
+     *       }
+     *
+     *       @AfterInvocation
+     *       public static void after(@NonNull AfterHookCallback callback) {
+     *           // Post-hooking logic goes here
+     *       }
+     *   }
+     *
+     *   @XposedHooker
+     *   public class ExampleHookerWithContext implements Hooker {
+     *
+     *       @BeforeInvocation
+     *       public static MyContext before(@NonNull BeforeHookCallback callback) {
+     *           // Pre-hooking logic goes here
+     *           return new MyContext();
+     *       }
+     *
+     *       @AfterInvocation
+     *       public static void after(@NonNull AfterHookCallback callback, MyContext context) {
+     *           // Post-hooking logic goes here
+     *       }
+     *   }
+     * }</pre>
      */
-    interface BeforeHooker<T> {
-        /**
-         * Before.
-         *
-         * @param callback the callback
-         */
-        void before(@NonNull BeforeHookCallback<T> callback);
+    interface Hooker {
     }
 
     /**
-     * The interface After hooker.
+     * Interface for canceling a hook.
      *
-     * @param <T> the type parameter
+     * @param <T> {@link Method} or {@link Constructor}
      */
-    interface AfterHooker<T> {
+    interface MethodUnhooker<T> {
         /**
-         * After.
-         *
-         * @param callback the callback
-         */
-        void after(@NonNull AfterHookCallback<T> callback);
-    }
-
-    /**
-     * The interface Hooker.
-     *
-     * @param <T> the type parameter
-     */
-    interface Hooker<T> extends BeforeHooker<T>, AfterHooker<T> {
-    }
-
-    /**
-     * The interface Method unhooker.
-     *
-     * @param <T> the type parameter
-     * @param <U> the type parameter
-     */
-    interface MethodUnhooker<T, U> {
-        /**
-         * Gets origin.
-         *
-         * @return the origin
+         * Gets the method or constructor being hooked.
          */
         @NonNull
-        U getOrigin();
+        T getOrigin();
 
         /**
-         * Gets hooker.
-         *
-         * @return the hooker
-         */
-        @NonNull
-        T getHooker();
-
-        /**
-         * Unhook.
+         * Cancels the hook. The behavior of calling this method multiple times is undefined.
          */
         void unhook();
     }
 
     /**
-     * Get the Xposed framework name of current implementation.
+     * Gets the Xposed framework name of current implementation.
      *
      * @return Framework name
      */
@@ -307,7 +246,7 @@ public interface XposedInterface {
     String getFrameworkName();
 
     /**
-     * Get the Xposed framework version of current implementation.
+     * Gets the Xposed framework version of current implementation.
      *
      * @return Framework version
      */
@@ -315,337 +254,223 @@ public interface XposedInterface {
     String getFrameworkVersion();
 
     /**
-     * Get the Xposed framework version code of current implementation.
+     * Gets the Xposed framework version code of current implementation.
      *
      * @return Framework version code
      */
     long getFrameworkVersionCode();
 
     /**
-     * Get the Xposed framework privilege of current implementation.
+     * Gets the Xposed framework privilege of current implementation.
      *
      * @return Framework privilege
      */
     int getFrameworkPrivilege();
 
     /**
-     * Additional methods provided by specific Xposed framework.
+     * Hook a method with default priority.
      *
-     * @param name Featured method name
-     * @param args Featured method arguments
-     * @return Featured method result
-     * @throws UnsupportedOperationException If the framework does not provide a method with given name
-     */
-    // @Discouraged(message = "Normally, modules should never rely on specific implementation of the Xposed framework. But if really necessary, this method can be used to acquire such information.")
-    @Nullable
-    Object featuredMethod(String name, Object... args);
-
-    /**
-     * Hook before method unhooker.
-     *
-     * @param origin the origin
-     * @param hooker the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
+     * @param origin The method to be hooked
+     * @param hooker The hooker class
+     * @return Unhooker for canceling the hook
+     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke},
+     *                                  or hooker is invalid
      * @throws HookFailedError          if hook fails due to framework internal error
      */
     @NonNull
-    MethodUnhooker<BeforeHooker<Method>, Method> hookBefore(@NonNull Method origin, @NonNull BeforeHooker<Method> hooker);
+    MethodUnhooker<Method> hook(@NonNull Method origin, @NonNull Class<? extends Hooker> hooker);
 
     /**
-     * Hook after method unhooker.
+     * Hook a method with specified priority.
      *
-     * @param origin the origin
-     * @param hooker the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
+     * @param origin   The method to be hooked
+     * @param priority The hook priority
+     * @param hooker   The hooker class
+     * @return Unhooker for canceling the hook
+     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke},
+     *                                  or hooker is invalid
      * @throws HookFailedError          if hook fails due to framework internal error
      */
     @NonNull
-    MethodUnhooker<AfterHooker<Method>, Method> hookAfter(@NonNull Method origin, @NonNull AfterHooker<Method> hooker);
+    MethodUnhooker<Method> hook(@NonNull Method origin, int priority, @NonNull Class<? extends Hooker> hooker);
 
     /**
-     * Hook method unhooker.
+     * Hook a constructor with default priority.
      *
-     * @param origin the origin
-     * @param hooker the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
+     * @param <T>    The type of the constructor
+     * @param origin The constructor to be hooked
+     * @param hooker The hooker class
+     * @return Unhooker for canceling the hook
+     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke},
+     *                                  or hooker is invalid
      * @throws HookFailedError          if hook fails due to framework internal error
      */
     @NonNull
-    MethodUnhooker<Hooker<Method>, Method> hook(@NonNull Method origin, @NonNull Hooker<Method> hooker);
+    <T> MethodUnhooker<Constructor<T>> hook(@NonNull Constructor<T> origin, @NonNull Class<? extends Hooker> hooker);
 
     /**
-     * Hook before method unhooker.
+     * Hook a constructor with specified priority.
      *
-     * @param origin   the origin
-     * @param priority the priority
-     * @param hooker   the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
+     * @param <T>      The type of the constructor
+     * @param origin   The constructor to be hooked
+     * @param priority The hook priority
+     * @param hooker   The hooker class
+     * @return Unhooker for canceling the hook
+     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke},
+     *                                  or hooker is invalid
      * @throws HookFailedError          if hook fails due to framework internal error
      */
     @NonNull
-    MethodUnhooker<BeforeHooker<Method>, Method> hookBefore(@NonNull Method origin, int priority, @NonNull BeforeHooker<Method> hooker);
+    <T> MethodUnhooker<Constructor<T>> hook(@NonNull Constructor<T> origin, int priority, @NonNull Class<? extends Hooker> hooker);
 
     /**
-     * Hook after method unhooker.
+     * Deoptimizes a method in case hooked callee is not called because of inline.
      *
-     * @param origin   the origin
-     * @param priority the priority
-     * @param hooker   the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
-     * @throws HookFailedError          if hook fails due to framework internal error
-     */
-    @NonNull
-    MethodUnhooker<AfterHooker<Method>, Method> hookAfter(@NonNull Method origin, int priority, @NonNull AfterHooker<Method> hooker);
-
-    /**
-     * Hook method unhooker.
+     * <p>By deoptimizing the method, the method will back all callee without inlining.
+     * For example, when a short hooked method B is invoked by method A, the callback to B is not invoked
+     * after hooking, which may mean A has inlined B inside its method body. To force A to call the hooked B,
+     * you can deoptimize A and then your hook can take effect.</p>
      *
-     * @param origin   the origin
-     * @param priority the priority
-     * @param hooker   the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
-     * @throws HookFailedError          if hook fails due to framework internal error
-     */
-    @NonNull
-    MethodUnhooker<Hooker<Method>, Method> hook(@NonNull Method origin, int priority, @NonNull Hooker<Method> hooker);
-
-    /**
-     * Hook before method unhooker.
+     * <p>Generally, you need to find all the callers of your hooked callee and that can be hardly achieve
+     * (but you can still search all callers by using {@link DexParser}). Use this method if you are sure
+     * the deoptimized callers are all you need. Otherwise, it would be better to change the hook point or
+     * to deoptimize the whole app manually (by simply reinstalling the app without uninstall).</p>
      *
-     * @param <T>    the type parameter
-     * @param origin the origin
-     * @param hooker the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
-     * @throws HookFailedError          if hook fails due to framework internal error
-     */
-    @NonNull
-    <T> MethodUnhooker<BeforeHooker<Constructor<T>>, Constructor<T>> hookBefore(@NonNull Constructor<T> origin, @NonNull BeforeHooker<Constructor<T>> hooker);
-
-    /**
-     * Hook after method unhooker.
-     *
-     * @param <T>    the type parameter
-     * @param origin the origin
-     * @param hooker the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
-     * @throws HookFailedError          if hook fails due to framework internal error
-     */
-    @NonNull
-    <T> MethodUnhooker<AfterHooker<Constructor<T>>, Constructor<T>> hookAfter(@NonNull Constructor<T> origin, @NonNull AfterHooker<Constructor<T>> hooker);
-
-    /**
-     * Hook method unhooker.
-     *
-     * @param <T>    the type parameter
-     * @param origin the origin
-     * @param hooker the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
-     * @throws HookFailedError          if hook fails due to framework internal error
-     */
-    @NonNull
-    <T> MethodUnhooker<Hooker<Constructor<T>>, Constructor<T>> hook(@NonNull Constructor<T> origin, @NonNull Hooker<Constructor<T>> hooker);
-
-    /**
-     * Hook before method unhooker.
-     *
-     * @param <T>      the type parameter
-     * @param origin   the origin
-     * @param priority the priority
-     * @param hooker   the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
-     * @throws HookFailedError          if hook fails due to framework internal error
-     */
-    @NonNull
-    <T> MethodUnhooker<BeforeHooker<Constructor<T>>, Constructor<T>> hookBefore(@NonNull Constructor<T> origin, int priority, @NonNull BeforeHooker<Constructor<T>> hooker);
-
-    /**
-     * Hook after method unhooker.
-     *
-     * @param <T>      the type parameter
-     * @param origin   the origin
-     * @param priority the priority
-     * @param hooker   the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
-     * @throws HookFailedError          if hook fails due to framework internal error
-     */
-    @NonNull
-    <T> MethodUnhooker<AfterHooker<Constructor<T>>, Constructor<T>> hookAfter(@NonNull Constructor<T> origin, int priority, @NonNull AfterHooker<Constructor<T>> hooker);
-
-    /**
-     * Hook method unhooker.
-     *
-     * @param <T>      the type parameter
-     * @param origin   the origin
-     * @param priority the priority
-     * @param hooker   the hooker
-     * @return the method unhooker
-     * @throws IllegalArgumentException if origin is abstract, framework internal or {@link Method#invoke}
-     * @throws HookFailedError          if hook fails due to framework internal error
-     */
-    @NonNull
-    <T> MethodUnhooker<Hooker<Constructor<T>>, Constructor<T>> hook(@NonNull Constructor<T> origin, int priority, @NonNull Hooker<Constructor<T>> hooker);
-
-    /**
-     * Deoptimize boolean.
-     *
-     * @param method the method
-     * @return the boolean
+     * @param method The method to deoptimize
+     * @return Indicate whether the deoptimizing succeed or not
      */
     boolean deoptimize(@NonNull Method method);
 
     /**
-     * Deoptimize boolean.
+     * Deoptimizes a constructor in case hooked callee is not called because of inline.
      *
-     * @param <T>         the type parameter
-     * @param constructor the constructor
-     * @return the boolean
+     * @param <T>         The type of the constructor
+     * @param constructor The constructor to deoptimize
+     * @return Indicate whether the deoptimizing succeed or not
+     * @see #deoptimize(Method)
      */
     <T> boolean deoptimize(@NonNull Constructor<T> constructor);
 
     /**
-     * Invoke origin object.
+     * Basically the same as {@link Method#invoke(Object, Object...)}, but calls the original method
+     * as it was before the interception by Xposed.
      *
-     * @param method     the method
-     * @param thisObject the this object
-     * @param args       the args
-     * @return the object
-     * @throws InvocationTargetException the invocation target exception
-     * @throws IllegalArgumentException  the illegal argument exception
-     * @throws IllegalAccessException    the illegal access exception
+     * @param method     The method to be called
+     * @param thisObject For non-static calls, the {@code this} pointer, otherwise {@code null}
+     * @param args       The arguments used for the method call
+     * @return The result returned from the invoked method
+     * @see Method#invoke(Object, Object...)
      */
     @Nullable
     Object invokeOrigin(@NonNull Method method, @Nullable Object thisObject, Object... args) throws InvocationTargetException, IllegalArgumentException, IllegalAccessException;
 
     /**
-     * Invoke special object.
+     * Invokes a special (non-virtual) method on a given object instance, similar to the functionality of
+     * {@code CallNonVirtual<type>Method} in JNI, which invokes an instance (nonstatic) method on a Java
+     * object. This method is useful when you need to call a specific method on an object, bypassing any
+     * overridden methods in subclasses and directly invoking the method defined in the specified class.
      *
-     * @param method     the method
-     * @param thisObject the this object
-     * @param args       the args
-     * @return the object
-     * @throws InvocationTargetException the invocation target exception
-     * @throws IllegalArgumentException  the illegal argument exception
-     * @throws IllegalAccessException    the illegal access exception
+     * <p>This method is useful when you need to call {@code super.xxx()} in a hooked constructor.</p>
+     *
+     * @param method     The method to be called
+     * @param thisObject For non-static calls, the {@code this} pointer, otherwise {@code null}
+     * @param args       The arguments used for the method call
+     * @return The result returned from the invoked method
+     * @see Method#invoke(Object, Object...)
      */
     @Nullable
     Object invokeSpecial(@NonNull Method method, @NonNull Object thisObject, Object... args) throws InvocationTargetException, IllegalArgumentException, IllegalAccessException;
 
     /**
-     * new origin object.
+     * Basically the same as {@link Constructor#newInstance(Object...)}, but calls the original constructor
+     * as it was before the interception by Xposed.
      *
-     * @param <T>         the type parameter
-     * @param constructor the constructor
-     * @param args        the args
-     * @return the object
-     * @throws InvocationTargetException the invocation target exception
-     * @throws IllegalArgumentException  the illegal argument exception
-     * @throws IllegalAccessException    the illegal access exception
-     * @throws InstantiationException    the instantiation exception
+     * @param <T>         The type of the constructor
+     * @param constructor The constructor to create and initialize a new instance
+     * @param args        The arguments used for the construction
+     * @return The instance created and initialized by the constructor
+     * @see Constructor#newInstance(Object...)
      */
     @NonNull
     <T> T newInstanceOrigin(@NonNull Constructor<T> constructor, Object... args) throws InvocationTargetException, IllegalArgumentException, IllegalAccessException, InstantiationException;
 
-
     /**
-     * New instance special u.
+     * Creates a new instance of the given subclass, but initialize it with a parent constructor. This could
+     * leave the object in an invalid state, where the subclass constructor are not called and the fields
+     * of the subclass are not initialized.
      *
-     * @param <T>         the type parameter
-     * @param <U>         the type parameter
-     * @param constructor the constructor
-     * @param subClass    the sub class
-     * @param args        the args
-     * @return the u
-     * @throws InvocationTargetException the invocation target exception
-     * @throws IllegalArgumentException  the illegal argument exception
-     * @throws IllegalAccessException    the illegal access exception
-     * @throws InstantiationException    the instantiation exception
+     * <p>This method is useful when you need to initialize some fields in the subclass by yourself.</p>
+     *
+     * @param <T>         The type of the parent constructor
+     * @param <U>         The type of the subclass
+     * @param constructor The parent constructor to initialize a new instance
+     * @param subClass    The subclass to create a new instance
+     * @param args        The arguments used for the construction
+     * @return The instance of subclass initialized by the constructor
+     * @see Constructor#newInstance(Object...)
      */
     @NonNull
     <T, U> U newInstanceSpecial(@NonNull Constructor<T> constructor, @NonNull Class<U> subClass, Object... args) throws InvocationTargetException, IllegalArgumentException, IllegalAccessException, InstantiationException;
 
     /**
-     * Log.
+     * Writes a message to the Xposed log.
      *
-     * @param message the message
+     * @param message The log message
      */
     void log(@NonNull String message);
 
     /**
-     * Log.
+     * Writes a message with a stack trace to the Xposed log.
      *
-     * @param message   the message
-     * @param throwable the throwable
+     * @param message   The log message
+     * @param throwable The Throwable object for the stack trace
      */
     void log(@NonNull String message, @NonNull Throwable throwable);
 
     /**
-     * Parse dex dex parser.
+     * Parse a dex file in memory.
      *
-     * @param dexData            the dex data
-     * @param includeAnnotations the include annotations
-     * @return the dex parser
-     * @throws IOException the io exception
+     * @param dexData            The content of the dex file
+     * @param includeAnnotations Whether to include annotations
+     * @return The {@link DexParser} of the dex file
+     * @throws IOException if the dex file is invalid
      */
     @Nullable
     DexParser parseDex(@NonNull ByteBuffer dexData, boolean includeAnnotations) throws IOException;
 
-
-    // Methods the same with Context
-
     /**
-     * Gets shared preferences.
-     *
-     * @param name the name
-     * @param mode the mode
-     * @return the shared preferences
+     * Gets the application info of the module.
      */
-    SharedPreferences getSharedPreferences(String name, int mode);
-
-    /**
-     * Open file input file input stream.
-     *
-     * @param name the name
-     * @return the file input stream
-     * @throws FileNotFoundException the file not found exception
-     */
-    FileInputStream openFileInput(String name) throws FileNotFoundException;
-
-    /**
-     * File list string [ ].
-     *
-     * @return the string [ ]
-     */
-    String[] fileList();
-
-    /**
-     * Gets resources.
-     *
-     * @return the resources
-     */
-    Resources getResources();
-
-    /**
-     * Gets class loader.
-     *
-     * @return the class loader
-     */
-    ClassLoader getClassLoader();
-
-    /**
-     * Gets application info.
-     *
-     * @return the application info
-     */
+    @NonNull
     ApplicationInfo getApplicationInfo();
+
+    /**
+     * Gets remote preferences stored in Xposed framework. Note that those are read-only in hooked apps.
+     *
+     * @param group Group name
+     * @return The preferences
+     * @throws UnsupportedOperationException If the framework is embedded
+     */
+    @NonNull
+    SharedPreferences getRemotePreferences(@NonNull String group);
+
+    /**
+     * List all files in the module's shared data directory.
+     *
+     * @return The file list
+     * @throws UnsupportedOperationException If the framework is embedded
+     */
+    @NonNull
+    String[] listRemoteFiles();
+
+    /**
+     * Open a file in the module's shared data directory. The file is opened in read-only mode.
+     *
+     * @param name File name, must not contain path separators and . or ..
+     * @return The file descriptor
+     * @throws FileNotFoundException         If the file does not exist or the path is forbidden
+     * @throws UnsupportedOperationException If the framework is embedded
+     */
+    @NonNull
+    ParcelFileDescriptor openRemoteFile(@NonNull String name) throws FileNotFoundException;
 }

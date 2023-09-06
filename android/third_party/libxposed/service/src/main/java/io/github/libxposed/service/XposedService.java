@@ -1,28 +1,27 @@
 package io.github.libxposed.service;
 
-import static android.os.ParcelFileDescriptor.MODE_READ_ONLY;
-
 import android.content.SharedPreferences;
-import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-@SuppressWarnings({"resource", "unused"})
+@SuppressWarnings("unused")
 public final class XposedService {
 
     public final static class ServiceException extends RuntimeException {
-        private ServiceException(RemoteException e) {
+        ServiceException(String message) {
+            super(message);
+        }
+
+        ServiceException(RemoteException e) {
             super("Xposed service error", e);
         }
     }
@@ -148,7 +147,7 @@ public final class XposedService {
      * Get the Xposed API version of current implementation.
      *
      * @return API version
-     * @throws ServiceException If the service is dead or error occurred
+     * @throws ServiceException If the service is dead or an error occurred
      */
     public int getAPIVersion() {
         try {
@@ -162,7 +161,7 @@ public final class XposedService {
      * Get the Xposed framework name of current implementation.
      *
      * @return Framework name
-     * @throws ServiceException If the service is dead or error occurred
+     * @throws ServiceException If the service is dead or an error occurred
      */
     @NonNull
     public String getFrameworkName() {
@@ -177,7 +176,7 @@ public final class XposedService {
      * Get the Xposed framework version of current implementation.
      *
      * @return Framework version
-     * @throws ServiceException If the service is dead or error occurred
+     * @throws ServiceException If the service is dead or an error occurred
      */
     @NonNull
     public String getFrameworkVersion() {
@@ -192,7 +191,7 @@ public final class XposedService {
      * Get the Xposed framework version code of current implementation.
      *
      * @return Framework version code
-     * @throws ServiceException If the service is dead or error occurred
+     * @throws ServiceException If the service is dead or an error occurred
      */
     public long getFrameworkVersionCode() {
         try {
@@ -206,7 +205,7 @@ public final class XposedService {
      * Get the Xposed framework privilege of current implementation.
      *
      * @return Framework privilege
-     * @throws ServiceException If the service is dead or error occurred
+     * @throws ServiceException If the service is dead or an error occurred
      */
     @NonNull
     public Privilege getFrameworkPrivilege() {
@@ -219,31 +218,10 @@ public final class XposedService {
     }
 
     /**
-     * Additional methods provided by specific Xposed framework.
-     *
-     * @param name Featured method name
-     * @param args Featured method arguments
-     * @return Featured method result
-     * @throws UnsupportedOperationException If the framework does not provide a method with given name
-     * @throws ServiceException              If the service is dead or error occurred
-     * @deprecated Normally, modules should never rely on implementation details about the Xposed framework,
-     * but if really necessary, this method can be used to acquire such information
-     */
-    @Deprecated
-    @Nullable
-    public Bundle featuredMethod(@NonNull String name, @Nullable Bundle args) {
-        try {
-            return mService.featuredMethod(name, args);
-        } catch (RemoteException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    /**
      * Get the application scope of current module.
      *
      * @return Module scope
-     * @throws ServiceException If the service is dead or error occurred
+     * @throws ServiceException If the service is dead or an error occurred
      */
     @NonNull
     public List<String> getScope() {
@@ -259,7 +237,7 @@ public final class XposedService {
      *
      * @param packageName Package name of the app to be added
      * @param callback    Callback to be invoked when the request is completed or error occurred
-     * @throws ServiceException If the service is dead or error occurred
+     * @throws ServiceException If the service is dead or an error occurred
      */
     public void requestScope(@NonNull String packageName, @NonNull OnScopeEventListener callback) {
         try {
@@ -274,7 +252,7 @@ public final class XposedService {
      *
      * @param packageName Package name of the app to be added
      * @return null if successful, or non-null with error message
-     * @throws ServiceException If the service is dead or error occurred
+     * @throws ServiceException If the service is dead or an error occurred
      */
     @Nullable
     public String removeScope(@NonNull String packageName) {
@@ -286,17 +264,22 @@ public final class XposedService {
     }
 
     /**
-     * Get remote preferences from Xposed framework.
+     * Get remote preferences from Xposed framework. If the group does not exist, it will be created.
      *
      * @param group Group name
-     * @return The preferences, null if the framework is embedded
-     * @throws ServiceException If the service is dead or error occurred
+     * @return The preferences
+     * @throws ServiceException              If the service is dead or an error occurred
+     * @throws UnsupportedOperationException If the framework is embedded
      */
-    @Nullable
+    @NonNull
     public SharedPreferences getRemotePreferences(@NonNull String group) {
         return mRemotePrefs.computeIfAbsent(group, k -> {
             try {
-                return RemotePreferences.newInstance(this, k);
+                var instance = RemotePreferences.newInstance(this, k);
+                if (instance == null) {
+                    throw new ServiceException("Framework returns null");
+                }
+                return instance;
             } catch (RemoteException e) {
                 throw new ServiceException(e);
             }
@@ -307,7 +290,8 @@ public final class XposedService {
      * Delete a group of remote preferences.
      *
      * @param group Group name
-     * @throws ServiceException If the service is dead or error occurred
+     * @throws ServiceException              If the service is dead or an error occurred
+     * @throws UnsupportedOperationException If the framework is embedded
      */
     public void deleteRemotePreferences(@NonNull String group) {
         deletionLock.writeLock().lock();
@@ -325,39 +309,39 @@ public final class XposedService {
     }
 
     /**
-     * Open an InputStream to read a file from the module's shared data directory.
+     * List all files in the module's shared data directory.
      *
-     * @param name File name, must not contain path separators and . or ..
-     * @return The InputStream
-     * @throws FileNotFoundException If the file does not exist, the path is forbidden or remote file is not supported by the framework
+     * @return The file list
+     * @throws ServiceException              If the service is dead or an error occurred
+     * @throws UnsupportedOperationException If the framework is embedded
      */
     @NonNull
-    public FileInputStream openRemoteFileInput(@NonNull String name) throws FileNotFoundException {
+    public String[] listRemoteFiles() {
         try {
-            var file = mService.openRemoteFile(name, MODE_READ_ONLY);
-            if (file == null) throw new FileNotFoundException();
-            return new FileInputStream(file.getFileDescriptor());
+            var files = mService.listRemoteFiles();
+            if (files == null) throw new ServiceException("Framework returns null");
+            return files;
         } catch (RemoteException e) {
-            throw new FileNotFoundException(e.getMessage());
+            throw new ServiceException(e);
         }
     }
 
     /**
-     * Open an OutputStream to write a file to the module's shared data directory.
+     * Open a file in the module's shared data directory. The file will be created if not exists.
      *
      * @param name File name, must not contain path separators and . or ..
-     * @param mode Operating mode
-     * @return The OutputStream
-     * @throws FileNotFoundException If the path is forbidden or remote file is not supported by the framework
+     * @return The file descriptor
+     * @throws ServiceException              If the service is dead or an error occurred
+     * @throws UnsupportedOperationException If the framework is embedded
      */
     @NonNull
-    public FileOutputStream openRemoteFileOutput(@NonNull String name, int mode) throws FileNotFoundException {
+    public ParcelFileDescriptor openRemoteFile(@NonNull String name) {
         try {
-            var file = mService.openRemoteFile(name, mode);
-            if (file == null) throw new FileNotFoundException();
-            return new FileOutputStream(file.getFileDescriptor());
+            var file = mService.openRemoteFile(name);
+            if (file == null) throw new ServiceException("Framework returns null");
+            return file;
         } catch (RemoteException e) {
-            throw new FileNotFoundException(e.getMessage());
+            throw new ServiceException(e);
         }
     }
 
@@ -366,30 +350,14 @@ public final class XposedService {
      *
      * @param name File name, must not contain path separators and . or ..
      * @return true if successful, false if the file does not exist
-     * @throws FileNotFoundException If the path is forbidden or remote file is not supported by the framework
+     * @throws ServiceException              If the service is dead or an error occurred
+     * @throws UnsupportedOperationException If the framework is embedded
      */
-    public boolean deleteRemoteFile(@NonNull String name) throws FileNotFoundException {
+    public boolean deleteRemoteFile(@NonNull String name) {
         try {
             return mService.deleteRemoteFile(name);
         } catch (RemoteException e) {
-            throw new FileNotFoundException(e.getMessage());
-        }
-    }
-
-    /**
-     * List all files in the module's shared data directory.
-     *
-     * @return The file list
-     * @throws FileNotFoundException If remote file is not supported by the framework
-     */
-    @NonNull
-    public String[] listRemoteFiles() throws FileNotFoundException {
-        try {
-            var files = mService.listRemoteFiles();
-            if (files == null) throw new FileNotFoundException();
-            return files;
-        } catch (RemoteException e) {
-            throw new FileNotFoundException(e.getMessage());
+            throw new ServiceException(e);
         }
     }
 }

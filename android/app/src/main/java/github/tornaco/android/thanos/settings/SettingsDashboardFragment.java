@@ -45,7 +45,6 @@ import github.tornaco.android.thanos.BuildConfig;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.ThanosApp;
-import github.tornaco.android.thanos.XposedScope;
 import github.tornaco.android.thanos.app.donate.DonateActivity;
 import github.tornaco.android.thanos.app.donate.DonateSettings;
 import github.tornaco.android.thanos.apps.AppDetailsActivity;
@@ -204,14 +203,6 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     }
 
     protected void onBindStrategyPreferences() {
-        SwitchPreferenceCompat autoXposedScope = findPreference(getString(R.string.key_new_auto_request_xposed_scope));
-        Objects.requireNonNull(autoXposedScope).setVisible(XposedScope.INSTANCE.getService() != null);
-        autoXposedScope.setChecked(AppPreference.isAutoRequestXposedScopeEnabled(requireContext()));
-        autoXposedScope.setOnPreferenceChangeListener((preference, newValue) -> {
-            AppPreference.setAutoRequestXposedScopeEnabled(requireContext(), (Boolean) newValue);
-            return true;
-        });
-
         ThanosManager thanos = ThanosManager.from(getContext());
         if (!thanos.isServiceInstalled()) {
             return;

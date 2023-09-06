@@ -17,7 +17,6 @@ public class AppPreference {
     private static final String PREF_KEY_PROCESS_MANAGE_UI_V2 = "PREF_KEY_PROCESS_MANAGE_UI_V2";
     private static final String PREF_KEY_CURRENT_TIP_INDEX = "PREF_KEY_CURRENT_TIP_INDEX";
     private static final String PREF_KEY_PKG_SET_SORT_PREFIX = "PREF_KEY_PKG_SORT_";
-    private static final String PREF_KEY_AUTO_REQUEST_XPOSED_SCOPE = "PREF_KEY_AUTO_REQUEST_XPOSED_SCOPE";
 
     @Verify
     public static boolean isFirstRun(Context context) {
@@ -102,17 +101,5 @@ public class AppPreference {
                     .putInt(PREF_KEY_PKG_SET_SORT_PREFIX + p.getId(), i * 100)
                     .apply();
         }
-    }
-
-    public static boolean isAutoRequestXposedScopeEnabled(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(PREF_KEY_AUTO_REQUEST_XPOSED_SCOPE, true);
-    }
-
-    public static void setAutoRequestXposedScopeEnabled(Context context, boolean value) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putBoolean(PREF_KEY_AUTO_REQUEST_XPOSED_SCOPE, value)
-                .apply();
     }
 }

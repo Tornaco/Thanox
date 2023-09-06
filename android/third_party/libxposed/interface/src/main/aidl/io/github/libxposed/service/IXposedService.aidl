@@ -18,7 +18,6 @@ interface IXposedService {
     String getFrameworkVersion() = 3;
     long getFrameworkVersionCode() = 4;
     int getFrameworkPrivilege() = 5;
-    Bundle featuredMethod(String name, in Bundle args) = 6;
 
     // scope utilities
     List<String> getScope() = 10;
@@ -31,7 +30,7 @@ interface IXposedService {
     void deleteRemotePreferences(String group) = 22;
 
     // remote file utilities
-    ParcelFileDescriptor openRemoteFile(String path, int mode) = 30;
-    boolean deleteRemoteFile(String path) = 31;
-    String[] listRemoteFiles() = 32;
+    String[] listRemoteFiles() = 30;
+    ParcelFileDescriptor openRemoteFile(String name) = 31;
+    boolean deleteRemoteFile(String name) = 32;
 }

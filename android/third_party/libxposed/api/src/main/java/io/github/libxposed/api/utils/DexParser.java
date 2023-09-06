@@ -1,13 +1,12 @@
 package io.github.libxposed.api.utils;
 
-
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 
 import java.io.Closeable;
 
 /**
- * The interface Dex parser.
+ * Xposed interface for parsing dex files.
  */
 @SuppressWarnings("unused")
 public interface DexParser extends Closeable {

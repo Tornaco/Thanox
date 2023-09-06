@@ -31,8 +31,8 @@
     <string name="service_notification_message_data_restore_restore_component_states">Restoring app component settings</string>
 
     <string name="service_notification_title_app_protect">App protect</string>
-    <string name="service_notification_message_app_uninstall_blocked">Uninstall %1$s has been prevented</string>
-    <string name="service_notification_message_app_clear_data_blocked">Clear %1$s app data has been prevented</string>
+    <string name="service_notification_message_app_uninstall_blocked">Uninstall/Clear %1$s has been prevented</string>
+    <string name="service_notification_message_app_clear_data_blocked">Uninstall/Clear %1$s app data has been prevented</string>
 
     <string name="service_notification_title_thanox_active">Thanox is active</string>
     <string name="service_notification_message_thanox_active">Thanox %1$s is up!</string>

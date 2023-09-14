@@ -15,13 +15,15 @@ class SmartFreezeBottomNavViewModel : ViewModel() {
 
     fun getTabs(context: Context) {
         val items = with(ThanosManager.from(context)) {
+            val hasFreezedWhiteListPkg = this.pkgManager.hasFreezedPackageInUserWhiteListPkgSet()
+
             pkgManager.getAllPackageSets(false).filter {
                 it.id == PREBUILT_PACKAGE_SET_ID_ALL
                         || it.id == PREBUILT_PACKAGE_SET_ID_3RD
                         || it.id == PREBUILT_PACKAGE_SET_ID_SYSTEM
                         || !it.isPrebuilt
             }.filter {
-                !it.isUserWhiteListed
+                hasFreezedWhiteListPkg || !it.isUserWhiteListed
             }.sortedBy { AppPreference.getPkgSetSort(context, it) }.mapIndexed { index, pkgSet ->
                 return@mapIndexed TabItem(index, pkgSet)
             }

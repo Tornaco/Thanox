@@ -393,6 +393,11 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    public boolean hasFreezedPackageInUserWhiteListPkgSet() {
+        return pm.hasFreezedPackageInUserWhiteListPkgSet();
+    }
+
+    @SneakyThrows
     public List<PackageSet> getAllPackageSets(boolean withPackages) {
         return pm.getAllPackageSets(withPackages);
     }

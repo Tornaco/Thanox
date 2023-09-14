@@ -125,4 +125,6 @@ interface IPkgManager {
 
     void freezeAllSmartFreezePackages(in IPackageEnableStateChangeListener listener);
     void freezeSmartFreezePackages(in List<Pkg> packages, in IPackageEnableStateChangeListener listener);
+
+    boolean hasFreezedPackageInUserWhiteListPkgSet();
 }

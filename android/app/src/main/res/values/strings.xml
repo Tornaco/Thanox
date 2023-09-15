@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">Thanox</string>
     <string name="app_description">I am Thanos! 😈👌</string>
+    <string name="privacy_agreement_file">privacy/privacy_agreement_en.html</string>
 
     <!-- Switch On/Off  -->
     <string name="switch_on_text">On</string>

@@ -79,6 +79,11 @@ public abstract class OsUtils {
         return Build.VERSION.SDK_INT >= 33;
     }
 
+    // android 14
+    public static boolean isUOrAbove() {
+        return Build.VERSION.SDK_INT >= 34;
+    }
+
     public static boolean hasTvFeature(Context context) {
         PackageManager pm = context.getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_LIVE_TV);

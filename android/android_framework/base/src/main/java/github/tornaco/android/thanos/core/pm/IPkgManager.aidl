@@ -83,7 +83,7 @@ interface IPkgManager {
 
     PackageSet createPackageSet(String label);
     boolean removePackageSet(String id);
-    PackageSet getPackageSetById(String id, boolean withPackages);
+    PackageSet getPackageSetById(String id, boolean withPackages, boolean shouldFilterUserWhiteList);
     List<PackageSet> getAllPackageSets(boolean withPackages);
     List<String> getAllPackageSetIds();
     void addToPackageSet(in Pkg pkg, String id);
@@ -125,4 +125,6 @@ interface IPkgManager {
 
     void freezeAllSmartFreezePackages(in IPackageEnableStateChangeListener listener);
     void freezeSmartFreezePackages(in List<Pkg> packages, in IPackageEnableStateChangeListener listener);
+
+    boolean hasFreezedPackageInUserWhiteListPkgSet();
 }

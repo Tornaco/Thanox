@@ -20,12 +20,36 @@ package github.tornaco.android.thanos.main
 
 import android.graphics.drawable.LayerDrawable
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -59,7 +83,18 @@ import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
-import github.tornaco.android.thanos.module.compose.common.widget.*
+import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextContainer
+import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
+import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
+import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
+import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxBottomSheetScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRippleBorderless
+import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedString
 import github.tornaco.android.thanos.settings.SettingsDashboardActivity
 import kotlinx.coroutines.delay
 import util.AssetUtils
@@ -481,8 +516,9 @@ private fun PrivacyStatementDialog(
     onDismissRequest: () -> Unit,
 ) {
     val context = LocalContext.current
+    val fileName = context.getString(R.string.privacy_agreement_file)
     val privacyAgreement = remember {
-        AssetUtils.readFileToStringOrThrow(context, "privacy/privacy_agreement.html")
+        AssetUtils.readFileToStringOrThrow(context, fileName)
     }
     ThanoxAlertDialog(title = {
         Text(text = stringResource(id = R.string.privacy_agreement_title))

@@ -5,7 +5,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -88,21 +92,6 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
 data class Onboard(val title: Int, val description: Int, val lottieFile: String)
 
 val onboardingList = listOf(
-    Onboard(
-        R.string.onboarding_mode_tips_title,
-        R.string.onboarding_mode_tips_desc,
-        "lottie/24616-two-blue-shapes.json"
-    ),
-    Onboard(
-        R.string.onboarding_xposed_tips_title,
-        R.string.onboarding_xposed_tips_desc,
-        "lottie/19527-select-option.json"
-    ),
-    Onboard(
-        R.string.onboarding_magisk_tips_title,
-        R.string.onboarding_magisk_tips_desc,
-        "lottie/11031-download.json"
-    ),
     Onboard(
         R.string.onboarding_github_tips_title,
         R.string.onboarding_github_tips_desc,

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Thanox</string>
+    <string name="privacy_agreement_file">privacy/privacy_agreement.html</string>
 
     <!-- Switch On/Off  -->
     <string name="switch_on_text">已启用</string>

@@ -113,7 +113,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
 
     @Nullable
     public PackageSet getPackageSet() {
-        return pkgSetId == null ? null : ThanosManager.from(getApplication()).getPkgManager().getPackageSetById(pkgSetId, true);
+        return pkgSetId == null ? null : ThanosManager.from(getApplication()).getPkgManager().getPackageSetById(pkgSetId, true, true);
     }
 
     void start() {
@@ -135,9 +135,10 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         if (!thanosManager.isServiceInstalled()) {
             return new ArrayList<>(0);
         }
-        PackageSet packageSet = pkgSetId == null ? null : thanosManager.getPkgManager().getPackageSetById(pkgSetId, true);
+        PackageSet packageSet = pkgSetId == null ? null : thanosManager.getPkgManager().getPackageSetById(pkgSetId, true, false);
         List<AppListModel> res = new ArrayList<>();
         for (Pkg pkg : thanosManager.getPkgManager().getSmartFreezePkgs()) {
+            XLog.v("getSmartFreezeApps pkg: " + pkg);
             AppInfo appInfo = thanosManager.getPkgManager().getAppInfoForUser(pkg.getPkgName(), pkg.getUserId());
             if (appInfo != null && (packageSet == null || packageSet.getPkgList().contains(pkg))) {
                 XLog.v("getSmartFreezeApps app: %s, enabled: %s", appInfo.getPkgName(), !appInfo.disabled());
@@ -286,7 +287,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
             return;
         }
         disposables.add(Completable.fromRunnable(() -> {
-            PackageSet packageSet = pkgSetId == null ? null : thanosManager.getPkgManager().getPackageSetById(pkgSetId, false);
+            PackageSet packageSet = pkgSetId == null ? null : thanosManager.getPkgManager().getPackageSetById(pkgSetId, false, true);
             CollectionUtils.consumeRemaining(appInfos, appInfo -> {
                 onProgress.accept(appInfo);
                 thanosManager.getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), true);

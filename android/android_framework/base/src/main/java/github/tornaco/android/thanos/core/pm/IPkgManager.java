@@ -197,7 +197,7 @@ public interface IPkgManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages) throws android.os.RemoteException
+    @Override public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages, boolean shouldFilterUserWhiteList) throws android.os.RemoteException
     {
       return null;
     }
@@ -927,7 +927,9 @@ public interface IPkgManager extends android.os.IInterface
           _arg0 = data.readString();
           boolean _arg1;
           _arg1 = (0!=data.readInt());
-          github.tornaco.android.thanos.core.pm.PackageSet _result = this.getPackageSetById(_arg0, _arg1);
+          boolean _arg2;
+          _arg2 = (0!=data.readInt());
+          github.tornaco.android.thanos.core.pm.PackageSet _result = this.getPackageSetById(_arg0, _arg1, _arg2);
           reply.writeNoException();
           if ((_result!=null)) {
             reply.writeInt(1);
@@ -2382,7 +2384,7 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages) throws android.os.RemoteException
+      @Override public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages, boolean shouldFilterUserWhiteList) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -2391,9 +2393,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
           _data.writeInt(((withPackages)?(1):(0)));
+          _data.writeInt(((shouldFilterUserWhiteList)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetById, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPackageSetById(id, withPackages);
+            return getDefaultImpl().getPackageSetById(id, withPackages, shouldFilterUserWhiteList);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -3167,7 +3170,7 @@ public interface IPkgManager extends android.os.IInterface
   public int getInstalledPackagesCount(int appFlags) throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.pm.PackageSet createPackageSet(java.lang.String label) throws android.os.RemoteException;
   public boolean removePackageSet(java.lang.String id) throws android.os.RemoteException;
-  public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages) throws android.os.RemoteException;
+  public github.tornaco.android.thanos.core.pm.PackageSet getPackageSetById(java.lang.String id, boolean withPackages, boolean shouldFilterUserWhiteList) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> getAllPackageSets(boolean withPackages) throws android.os.RemoteException;
   public java.util.List<java.lang.String> getAllPackageSetIds() throws android.os.RemoteException;
   public void addToPackageSet(github.tornaco.android.thanos.core.pm.Pkg pkg, java.lang.String id) throws android.os.RemoteException;

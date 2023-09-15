@@ -82,7 +82,7 @@ public class CommonAppListFilterViewModel extends AndroidViewModel {
         // Check if valid
         ThanosManager thanox = ThanosManager.from(getApplication());
         if (thanox.isServiceInstalled()
-                && thanox.getPkgManager().getPackageSetById(preferredPkgSetId, false) != null) {
+                && thanox.getPkgManager().getPackageSetById(preferredPkgSetId, false, true) != null) {
             categoryIndex.set(CategoryIndex.from(preferredPkgSetId));
         } else {
             categoryIndex.set(DEFAULT_CATEGORY_INDEX);

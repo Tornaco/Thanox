@@ -75,7 +75,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
         Optional.ofNullable(getIntent()).ifPresent(intent -> {
             ThanosManager thanos = ThanosManager.from(getApplicationContext());
             PackageManager pm = thanos.getPkgManager();
-            packageSet = pm.getPackageSetById(intent.getStringExtra(KEY_PACKAGE_SET_ID), true);
+            packageSet = pm.getPackageSetById(intent.getStringExtra(KEY_PACKAGE_SET_ID), true, true);
         });
     }
 

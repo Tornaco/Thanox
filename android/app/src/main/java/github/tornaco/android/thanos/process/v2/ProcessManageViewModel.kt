@@ -91,6 +91,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
             val filterPackages: List<Pkg> = state.value.selectedAppSetFilterItem?.let {
                 pkgManager.getPackageSetById(
                     it.id,
+                    true,
                     true
                 ).pkgList.filterNot { pkg -> pkg.pkgName == BuildProp.THANOS_APP_PKG_NAME }
             } ?: emptyList()

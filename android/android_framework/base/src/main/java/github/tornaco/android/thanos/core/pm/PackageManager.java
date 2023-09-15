@@ -388,8 +388,8 @@ public class PackageManager {
     }
 
     @SneakyThrows
-    public PackageSet getPackageSetById(String id, boolean withPackages) {
-        return pm.getPackageSetById(id, withPackages);
+    public PackageSet getPackageSetById(String id, boolean withPackages, boolean shouldFilterUserWhiteList) {
+        return pm.getPackageSetById(id, withPackages, shouldFilterUserWhiteList);
     }
 
     @SneakyThrows

@@ -8,5 +8,5 @@ java {
 }
 
 dependencies {
-    api(files("${rootProject.rootDir.path}/android_sdk/30/android-30.jar"))
+    api(files("${rootProject.rootDir.path}/android_sdk/33/android-33.jar"))
 }

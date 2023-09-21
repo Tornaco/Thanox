@@ -96,19 +96,24 @@ public class ThanoxHookImpl implements IThanoxHook {
     private void waitForSystemReady(Runnable runnable) {
         XLog.w("waitForSystemReady, current thread: %s", Thread.currentThread());
         new Thread(() -> {
-            ServiceManager.waitForService("package");
-            ServiceManager.waitForService("activity");
-            ServiceManager.waitForService(Context.USER_SERVICE);
-            ServiceManager.waitForService(Context.APP_OPS_SERVICE);
-            while (!ActivityThread.isSystem() || !isSystemReady()) {
-                try {
-                    XLog.d("waitForSystemReady, wait a moment.");
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    // Noop.
+            try {
+                ServiceManager.waitForService("package");
+                ServiceManager.waitForService("activity");
+                ServiceManager.waitForService(Context.USER_SERVICE);
+                ServiceManager.waitForService(Context.APP_OPS_SERVICE);
+                while (!ActivityThread.isSystem() || !isSystemReady()) {
+                    try {
+                        XLog.d("waitForSystemReady, wait a moment.");
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        // Noop.
+                    }
                 }
+                XLog.i("Call runnable");
+                runnable.run();
+            } catch (Throwable e) {
+                XLog.e(e, "waitForSystemReady");
             }
-            runnable.run();
         }).start();
     }
 

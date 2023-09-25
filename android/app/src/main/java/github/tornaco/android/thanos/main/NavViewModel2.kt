@@ -253,6 +253,10 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     }
 
     fun headerClick(activity: Activity) {
+        if (!thanox.isServiceInstalled) {
+            DialogUtils.showNotActivated(activity)
+            return
+        }
         withSubscriptionStatus(activity) { isSubscribed: Boolean ->
             if (isSubscribed) {
                 ProcessManageActivityV2.Starter.start(activity)

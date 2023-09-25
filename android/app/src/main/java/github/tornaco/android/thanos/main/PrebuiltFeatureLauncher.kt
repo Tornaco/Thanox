@@ -58,49 +58,81 @@ class PrebuiltFeatureLauncher(
         val thanosManager = ThanosManager.from(context)
         when (featureId) {
             PrebuiltFeatureIds.ID_ONE_KEY_CLEAR -> {
-                if (thanosManager.isServiceInstalled) {
-                    AppFeatureManager.withSubscriptionStatus(context) {
-                        if (it) {
-                            context.sendBroadcast(Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR))
-                            onProcessCleared()
-                        } else {
-                            AppFeatureManager.showDonateIntroDialog(this.context)
-                        }
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
+                AppFeatureManager.withSubscriptionStatus(context) {
+                    if (it) {
+                        context.sendBroadcast(Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR))
+                        onProcessCleared()
+                    } else {
+                        AppFeatureManager.showDonateIntroDialog(this.context)
                     }
-                } else {
-                    BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME)
                 }
             }
 
             PrebuiltFeatureIds.ID_BACKGROUND_START -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 StartRestrictActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 BackgroundRestrictActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 CleanUpOnTaskRemovedActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_APPS_MANAGER -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 SuggestedAppsActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 ScreenOnNotificationActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 NotificationRecordActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_NOTIFICATION_CENTER -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 NotificationCenterActivity.Starter.start(context)
             }
 
             PrebuiltFeatureIds.ID_TRAMPOLINE -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         ActivityTrampolineActivity.start(context)
@@ -116,10 +148,18 @@ class PrebuiltFeatureLauncher(
             }
 
             PrebuiltFeatureIds.ID_PROFILE -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 RuleListActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_SMART_STANDBY -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         SmartStandbyV2Activity.start(context)
@@ -130,14 +170,26 @@ class PrebuiltFeatureLauncher(
             }
 
             PrebuiltFeatureIds.ID_SMART_FREEZE -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 SmartFreezeActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 DataCheatActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_OPS_BY_OPS -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 if (AppPreference.isFeatureNoticeAccepted(context, "NEW_OPS")) {
                     Ops2Activity.start(context)
                 } else {
@@ -146,14 +198,26 @@ class PrebuiltFeatureLauncher(
             }
 
             PrebuiltFeatureIds.ID_TASK_BLUR -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 RecentTaskBlurListActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_OP_REMIND -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 RemindOpsActivity.start(context)
             }
 
             PrebuiltFeatureIds.ID_APP_LOCK -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         LockerStartActivity.start(context)
@@ -164,6 +228,10 @@ class PrebuiltFeatureLauncher(
             }
 
             PrebuiltFeatureIds.ID_INFINITE_Z -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         InfiniteZActivity.start(context)
@@ -174,6 +242,10 @@ class PrebuiltFeatureLauncher(
             }
 
             PrebuiltFeatureIds.ID_PLUGINS -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
             }
 
             PrebuiltFeatureIds.ID_FEEDBACK -> {
@@ -185,6 +257,10 @@ class PrebuiltFeatureLauncher(
             }
 
             PrebuiltFeatureIds.ID_WECHAT_PUSH -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         WechatPushDeleteMainActivity.start(context)
@@ -195,6 +271,10 @@ class PrebuiltFeatureLauncher(
             }
 
             PrebuiltFeatureIds.ID_WAKELOCK_REMOVER -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         WakeLockBlockerActivity.Starter.start(context)

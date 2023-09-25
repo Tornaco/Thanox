@@ -22,6 +22,11 @@ public class ContextProxy extends ContextWrapper {
     }
 
     @Override
+    public int getAssociatedDisplayId() {
+        return getBaseContext().getAssociatedDisplayId();
+    }
+
+    @Override
     public void enforceCallingPermission(String permission, String message) {
         XLog.i("SystemServiceContextHooks enforceCallingPermission@%s %s %s", tag, permission, message);
         long callingUid = Binder.getCallingUid();
@@ -53,4 +58,6 @@ public class ContextProxy extends ContextWrapper {
             return false;
         }
     }
+
+
 }

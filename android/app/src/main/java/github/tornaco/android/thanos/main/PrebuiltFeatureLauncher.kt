@@ -58,36 +58,48 @@ class PrebuiltFeatureLauncher(
         val thanosManager = ThanosManager.from(context)
         when (featureId) {
             PrebuiltFeatureIds.ID_ONE_KEY_CLEAR -> {
-                AppFeatureManager.withSubscriptionStatus(context) {
-                    if (it) {
-                        context.sendBroadcast(Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR))
-                        onProcessCleared()
-                    } else {
-                        AppFeatureManager.showDonateIntroDialog(this.context)
+                if (thanosManager.isServiceInstalled) {
+                    AppFeatureManager.withSubscriptionStatus(context) {
+                        if (it) {
+                            context.sendBroadcast(Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR))
+                            onProcessCleared()
+                        } else {
+                            AppFeatureManager.showDonateIntroDialog(this.context)
+                        }
                     }
+                } else {
+                    BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME)
                 }
             }
+
             PrebuiltFeatureIds.ID_BACKGROUND_START -> {
                 StartRestrictActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> {
                 BackgroundRestrictActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {
                 CleanUpOnTaskRemovedActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_APPS_MANAGER -> {
                 SuggestedAppsActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {
                 ScreenOnNotificationActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER -> {
                 NotificationRecordActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_NOTIFICATION_CENTER -> {
                 NotificationCenterActivity.Starter.start(context)
             }
+
             PrebuiltFeatureIds.ID_TRAMPOLINE -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
@@ -102,9 +114,11 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
+
             PrebuiltFeatureIds.ID_PROFILE -> {
                 RuleListActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_SMART_STANDBY -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
@@ -114,12 +128,15 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
+
             PrebuiltFeatureIds.ID_SMART_FREEZE -> {
                 SmartFreezeActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
                 DataCheatActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_OPS_BY_OPS -> {
                 if (AppPreference.isFeatureNoticeAccepted(context, "NEW_OPS")) {
                     Ops2Activity.start(context)
@@ -127,12 +144,15 @@ class PrebuiltFeatureLauncher(
                     OpsBottomNavActivity.start(context)
                 }
             }
+
             PrebuiltFeatureIds.ID_TASK_BLUR -> {
                 RecentTaskBlurListActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_OP_REMIND -> {
                 RemindOpsActivity.start(context)
             }
+
             PrebuiltFeatureIds.ID_APP_LOCK -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
@@ -142,6 +162,7 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
+
             PrebuiltFeatureIds.ID_INFINITE_Z -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
@@ -151,14 +172,18 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
+
             PrebuiltFeatureIds.ID_PLUGINS -> {
             }
+
             PrebuiltFeatureIds.ID_FEEDBACK -> {
                 showFeedbackDialog()
             }
+
             PrebuiltFeatureIds.ID_GUIDE -> {
                 BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME)
             }
+
             PrebuiltFeatureIds.ID_WECHAT_PUSH -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
@@ -168,6 +193,7 @@ class PrebuiltFeatureLauncher(
                     }
                 }
             }
+
             PrebuiltFeatureIds.ID_WAKELOCK_REMOVER -> {
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {

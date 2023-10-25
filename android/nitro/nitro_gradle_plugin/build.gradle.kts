@@ -17,7 +17,7 @@ dependencies {
     implementation(gradleBuilderModel)
     implementation(androidToolsCommon)
 
-    implementation("commons-io:commons-io:2.13.0")
+    implementation("commons-io:commons-io:2.15.0")
     implementation("commons-codec:commons-codec:1.16.0")
 
     implementation(Libs.Others.guavaJre)

@@ -180,6 +180,8 @@ dependencies {
 
     compileOnly(Libs.Others.xposedApi)
 
+    implementation(Libs.Others.hiddenApiByPass)
+
     implementation(Libs.Others.retrofit)
     implementation(Libs.Others.retrofitConverterGson)
     implementation(Libs.Others.retrofitAdapterRxJava2)

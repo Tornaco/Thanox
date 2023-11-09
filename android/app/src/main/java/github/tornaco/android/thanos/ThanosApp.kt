@@ -18,6 +18,7 @@
 package github.tornaco.android.thanos
 
 import android.content.Context
+import android.os.Build
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.HiltAndroidApp
 import dev.enro.annotations.NavigationComponent
@@ -33,6 +34,7 @@ import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.thanos.android.noroot.NoRootSupport
 import github.tornaco.thanos.module.component.manager.initRules
 import io.reactivex.plugins.RxJavaPlugins
+import org.lsposed.hiddenapibypass.HiddenApiBypass
 
 @HiltAndroidApp
 @NavigationComponent
@@ -61,6 +63,10 @@ class ThanosApp : MultipleModulesApp(), NavigationApplication {
         }
         if (BuildProp.THANOS_BUILD_DEBUG) {
             DeveloperDiag.diag(this)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            HiddenApiBypass.addHiddenApiExemptions("")
         }
 
         Init.init(this)

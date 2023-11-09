@@ -138,6 +138,7 @@ object Libs {
         const val glideCompiler = "com.github.bumptech.glide:compiler:4.13.0"
 
         const val xposedApi = "de.robv.android.xposed:api:82"
+        const val hiddenApiByPass = "org.lsposed.hiddenapibypass:hiddenapibypass:4.3"
 
         const val lombok = "org.projectlombok:lombok:1.18.20"
 

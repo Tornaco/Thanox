@@ -1,6 +1,14 @@
 package github.tornaco.android.thanos.core
 
+import android.content.Context
+
 object T {
+
+    @JvmStatic
+    fun serviceInstallName(): String {
+        return Context.TV_INPUT_SERVICE
+    }
+
     @JvmStatic
     fun serviceContextName(): String {
         return "thanos"

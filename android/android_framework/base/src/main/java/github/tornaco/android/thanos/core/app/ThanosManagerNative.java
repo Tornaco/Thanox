@@ -14,6 +14,7 @@ import com.android.internal.appwidget.IAppWidgetService;
 import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.thanos.core.IThanos;
+import github.tornaco.android.thanos.core.T;
 import util.Singleton;
 
 public class ThanosManagerNative {
@@ -24,11 +25,17 @@ public class ThanosManagerNative {
         ThanosManagerNative.localService = localService;
     }
 
-    private static final Singleton<IThanos> sIThanosSingleton = new Singleton<IThanos>() {
+    private static final Singleton<IThanos> sIThanosSingleton = new Singleton<>() {
         @Override
         protected IThanos create() {
             if (localService != null) {
                 return localService;
+            }
+
+            IThanos thanos = IThanos.Stub.asInterface(
+                    ServiceManager.getService(T.serviceInstallName()));
+            if (thanos != null) {
+                return thanos;
             }
 
             try {
@@ -38,7 +45,7 @@ public class ThanosManagerNative {
                 Bundle bundle = (Bundle) list.getList().get(0);
                 IBinder thanox = bundle.getBinder("thanox-binder");
                 XLog.d("IAppWidgetService thanox binder: " + thanox);
-                IThanos thanos = IThanos.Stub.asInterface(thanox);
+                thanos = IThanos.Stub.asInterface(thanox);
                 if (thanos != null) {
                     return thanos;
                 }

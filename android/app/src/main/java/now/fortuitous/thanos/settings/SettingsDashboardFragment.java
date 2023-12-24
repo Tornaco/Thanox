@@ -59,8 +59,6 @@ import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildConfig;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
-import now.fortuitous.app.donate.DonateActivity;
-import now.fortuitous.app.donate.DonateSettings;
 import github.tornaco.android.thanos.common.CommonPreferences;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
@@ -72,7 +70,6 @@ import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.Optional;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
-import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity3;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.theme.Theme;
 import github.tornaco.android.thanos.util.ActivityUtils;
@@ -89,7 +86,8 @@ import github.tornaco.permission.requester.RuntimePermissions;
 import github.tornaco.thanos.android.noroot.ServiceBindings;
 import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
-import now.fortuitous.thanos.ThanosApp;
+import now.fortuitous.app.donate.DonateActivity;
+import now.fortuitous.app.donate.DonateSettings;
 import now.fortuitous.thanos.apps.AppDetailsActivity;
 import now.fortuitous.thanos.pref.AppPreference;
 import now.fortuitous.thanos.settings.access.SettingsAccessRecordViewerActivity;
@@ -753,16 +751,6 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                                 + "\n"
                                 + BuildProp.THANOS_BUILD_HOST);
 
-        findPreference(getString(R.string.key_build_info_app))
-                .setOnPreferenceClickListener(
-                        preference -> {
-                            PlatLogoActivity3.start(getActivity());
-                            Toast.makeText(
-                                            getActivity(),
-                                            "Thanox is build against Android 13", Toast.LENGTH_LONG)
-                                    .show();
-                            return true;
-                        });
         if (thanos.isServiceInstalled()) {
             findPreference(getString(R.string.key_build_info_server))
                     .setSummary(thanos.getVersionName() + "\n" + thanos.fingerPrint());

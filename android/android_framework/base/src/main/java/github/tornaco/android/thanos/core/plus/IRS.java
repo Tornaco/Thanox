@@ -19,11 +19,6 @@ public interface IRS extends android.os.IInterface
     @Override public void vb(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException
     {
     }
-    // Set generated id.
-
-    @Override public void sid(java.lang.String deviceId) throws android.os.RemoteException
-    {
-    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -90,15 +85,6 @@ public interface IRS extends android.os.IInterface
           github.tornaco.android.thanos.core.plus.ICallback _arg2;
           _arg2 = github.tornaco.android.thanos.core.plus.ICallback.Stub.asInterface(data.readStrongBinder());
           this.vb(_arg0, _arg1, _arg2);
-          reply.writeNoException();
-          return true;
-        }
-        case TRANSACTION_sid:
-        {
-          data.enforceInterface(descriptor);
-          java.lang.String _arg0;
-          _arg0 = data.readString();
-          this.sid(_arg0);
           reply.writeNoException();
           return true;
         }
@@ -169,32 +155,10 @@ public interface IRS extends android.os.IInterface
           _data.recycle();
         }
       }
-      // Set generated id.
-
-      @Override public void sid(java.lang.String deviceId) throws android.os.RemoteException
-      {
-        android.os.Parcel _data = android.os.Parcel.obtain();
-        android.os.Parcel _reply = android.os.Parcel.obtain();
-        try {
-          _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeString(deviceId);
-          boolean _status = mRemote.transact(Stub.TRANSACTION_sid, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().sid(deviceId);
-            return;
-          }
-          _reply.readException();
-        }
-        finally {
-          _reply.recycle();
-          _data.recycle();
-        }
-      }
       public static github.tornaco.android.thanos.core.plus.IRS sDefaultImpl;
     }
     static final int TRANSACTION_bc = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_vb = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
-    static final int TRANSACTION_sid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.plus.IRS impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -218,7 +182,4 @@ public interface IRS extends android.os.IInterface
   // Verify binding.
 
   public void vb(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException;
-  // Set generated id.
-
-  public void sid(java.lang.String deviceId) throws android.os.RemoteException;
 }

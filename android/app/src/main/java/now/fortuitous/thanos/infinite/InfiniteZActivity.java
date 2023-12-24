@@ -40,7 +40,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.common.AppListModel;
@@ -76,13 +76,13 @@ public class InfiniteZActivity extends ThemeActivity {
         return true;
     }
 
-    @Verify
+
     public static void start(Context context) {
         ActivityUtils.startActivity(context, InfiniteZActivity.class);
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityIniniteZAppsBinding.inflate(
@@ -141,7 +141,7 @@ public class InfiniteZActivity extends ThemeActivity {
         viewModel.start();
     }
 
-    @Verify
+
     private void showItemPopMenu(@NonNull View anchor, @NonNull AppListModel model) {
         AppInfo appInfo = model.appInfo;
         PopupMenu popupMenu = new PopupMenu(thisActivity(), anchor);
@@ -251,7 +251,7 @@ public class InfiniteZActivity extends ThemeActivity {
                 });
     }
 
-    @Verify
+
     private void setupViewModel() {
         viewModel = obtainViewModel(this);
         viewModel.start();
@@ -294,7 +294,7 @@ public class InfiniteZActivity extends ThemeActivity {
     }
 
     @Override
-    @Verify
+
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_add == item.getItemId()) {
             onRequestAddApp();

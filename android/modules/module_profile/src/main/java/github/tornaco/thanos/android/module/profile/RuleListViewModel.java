@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleAddCallback;
@@ -128,7 +128,7 @@ public class RuleListViewModel extends AndroidViewModel {
         registerEventReceivers();
     }
 
-    @Verify
+
     public void start() {
         loadModels();
     }

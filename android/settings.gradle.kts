@@ -24,8 +24,6 @@ include(":nitro:nitro_plugin")
 include(":nitro:nitro_gradle_plugin")
 include(":nitro:nitro_android_stub")
 
-include(":rhino:rhino_annotations")
-
 include(":annotation_processors:xposed_hook_annotation")
 include(":annotation_processors:xposed_hook_compiler")
 include(":annotation_processors:permission-requester-annotation")

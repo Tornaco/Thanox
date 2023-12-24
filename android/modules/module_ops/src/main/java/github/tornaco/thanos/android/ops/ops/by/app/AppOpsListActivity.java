@@ -20,7 +20,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
@@ -53,7 +53,7 @@ public class AppOpsListActivity extends ThemeActivity {
         setupViewModel();
     }
 
-    @Verify
+
     private void resolveIntent() {
         this.appInfo = getIntent().getParcelableExtra("app");
         if (appInfo == null) {
@@ -126,7 +126,7 @@ public class AppOpsListActivity extends ThemeActivity {
     }
 
     @Override
-    @Verify
+
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_select_all_allow == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())

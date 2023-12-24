@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
@@ -68,7 +68,7 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
     }
 
     @Override
-    @Verify
+
     protected void onSwitchBarCheckChanged(com.google.android.material.materialswitch.MaterialSwitch switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
         ThanosManager.from(getApplicationContext()).ifServiceInstalled(thanosManager ->

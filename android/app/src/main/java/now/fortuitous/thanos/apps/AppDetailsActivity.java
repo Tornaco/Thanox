@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import now.fortuitous.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -56,7 +56,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
     private AppInfo appInfo;
     private FeatureConfigFragment featureConfigFragment;
 
-    @Verify
+
     public static void start(Context context, AppInfo appInfo) {
         Bundle data = new Bundle();
         data.putParcelable("app", appInfo);
@@ -64,7 +64,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!resolveIntent()) {
@@ -115,7 +115,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
         binding.setApp(appInfo);
     }
 
-    @Verify
+
     private void initViewModel() {
         AppDetailsViewModel viewModel = obtainViewModel(this);
         binding.setViewmodel(viewModel);
@@ -145,7 +145,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Verify
+
     private void requestApplyTemplateSelection() {
         ThanosManager thanos = ThanosManager.from(thisActivity());
         ProfileManager profileManager = thanos.getProfileManager();

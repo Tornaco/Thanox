@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleAddCallback;
@@ -57,7 +57,7 @@ public class RuleEditorActivity extends ThemeActivity {
     private UndoRedoManager undoRedoManager;
     private LanguageManager languageManager;
 
-    @Verify
+
     public static void start(Context context, RuleInfo ruleInfo, int format, boolean readOnly) {
         Bundle data = new Bundle();
         data.putParcelable("rule", ruleInfo);

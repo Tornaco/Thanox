@@ -59,11 +59,6 @@ subprojects {
         google()
         mavenCentral()
         mavenLocal()
-
-        // Local repos
-        val rhinoAnnotationRepo = file(rootProject.projectDir.path + "/internal/Thanox-Internal/rhino/rhino_annotations/prebuilt-repo")
-        println("rhinoPluginRepo= $rhinoAnnotationRepo")
-        maven(url = rhinoAnnotationRepo)
     }
 
     apply(plugin = "com.diffplug.spotless")

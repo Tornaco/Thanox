@@ -37,7 +37,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.databinding.ActivityStandbyRulesBinding;
@@ -58,7 +58,7 @@ public class StandByRuleActivity extends ThemeActivity implements StartRuleItemC
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStandbyRulesBinding.inflate(LayoutInflater.from(this));
@@ -88,7 +88,7 @@ public class StandByRuleActivity extends ThemeActivity implements StartRuleItemC
         onSetupSwitchBar(binding.switchBarContainer.switchBar);
     }
 
-    @Verify
+
     private void setupViewModel() {
         viewModel = obtainViewModel(this);
         viewModel.start();

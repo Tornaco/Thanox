@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.infinite.RemovePackageCallback;
@@ -59,7 +59,7 @@ public class InfiniteZAppsViewModel extends AndroidViewModel {
         loadModels();
     }
 
-    @Verify
+
     private void loadModels() {
         if (isDataLoading.get()) return;
         isDataLoading.set(true);

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
@@ -61,7 +61,7 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
 
     @NonNull
     @Override
-    @Verify
+
     protected CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
         AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
         String runningBadge = getString(R.string.badge_app_running);

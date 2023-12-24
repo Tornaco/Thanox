@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.Rxs;
 import io.reactivex.Observable;
@@ -64,7 +64,7 @@ public class StartRuleViewModel extends AndroidViewModel {
         registerEventReceivers();
     }
 
-    @Verify
+
     public void start() {
         loadModels();
     }

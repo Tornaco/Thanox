@@ -56,7 +56,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.common.AppLabelSearchFilter;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.sort.AppSort;
@@ -137,7 +137,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
         loadModels();
     }
 
-    @Verify
+
     private void loadModels() {
         if (isDataLoading.get()) return;
         isDataLoading.set(true);

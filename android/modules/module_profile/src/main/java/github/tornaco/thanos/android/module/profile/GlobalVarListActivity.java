@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.core.profile.GlobalVar;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
@@ -24,13 +24,13 @@ public class GlobalVarListActivity extends ThemeActivity implements VarItemClick
     private GlobalVarViewModel viewModel;
     private ModuleProfileGlobalVarListActivityBinding binding;
 
-    @Verify
+
     public static void start(Context context) {
         ActivityUtils.startActivity(context, GlobalVarListActivity.class);
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ModuleProfileGlobalVarListActivityBinding.inflate(LayoutInflater.from(this));
@@ -40,7 +40,7 @@ public class GlobalVarListActivity extends ThemeActivity implements VarItemClick
         setupViewModel();
     }
 
-    @Verify
+
     private void setupView() {
         setSupportActionBar(binding.toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -74,7 +74,7 @@ public class GlobalVarListActivity extends ThemeActivity implements VarItemClick
     }
 
     @Override
-    @Verify
+
     public void onItemClick(@NonNull GlobalVar var) {
         GlobalVarEditorActivity.start(thisActivity(), var);
     }

@@ -97,7 +97,7 @@ object Libs {
 
         const val lifeCycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
         const val lifeCycleRuntime = "androidx.lifecycle:lifecycle-runtime:2.4.1"
-        const val lifeCycleCommon= "androidx.lifecycle:lifecycle-common:2.4.1"
+        const val lifeCycleCommon = "androidx.lifecycle:lifecycle-common:2.4.1"
         const val lifeCycleExt = "androidx.lifecycle:lifecycle-extensions:2.2.0"
         const val lifeCycleCompiler = "androidx.lifecycle:lifecycle-compiler:2.4.1"
 
@@ -108,8 +108,8 @@ object Libs {
 
         const val paging3 = "androidx.paging:paging-runtime:3.1.0"
 
-        const val workRuntimeKtx  = "androidx.work:work-runtime-ktx:2.7.1"
-        const val workRuntime  = "androidx.work:work-runtime:2.7.1"
+        const val workRuntimeKtx = "androidx.work:work-runtime-ktx:2.7.1"
+        const val workRuntime = "androidx.work:work-runtime:2.7.1"
     }
 
     object Room {
@@ -205,20 +205,6 @@ object Libs {
         private const val version = "4.1.0"
         const val composeLottie = "com.airbnb.android:lottie-compose:${version}"
         const val lottie = "com.airbnb.android:lottie:${version}"
-    }
-
-    object ThanoxInternal {
-        const val version = "1.0.0-SNAPSHOT"
-
-        const val groupRhino = "github.tornaco.android.thanos.rhino-verify"
-        const val artifactRhinoAnnotations = "rhino_annotations"
-
-        const val groupNitro = "github.tornaco.android.thanos.nitro"
-        const val artifactNitro = "nitro_gradle_plugin"
-
-        const val rhinoGradlePlugin = "$groupRhino:rhino_plugin_stub_gen:$version"
-
-        const val nitroGradlePlugin = "$groupNitro:$artifactNitro:$version"
     }
 
     object RootLess {

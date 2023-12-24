@@ -29,7 +29,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter;
@@ -48,14 +48,14 @@ import util.CollectionUtils;
 public class DataCheatActivity extends CommonAppListFilterActivity {
     private CommonAppListFilterAdapter appListFilterAdapter;
 
-    @Verify
+
     public static void start(Context context) {
         ActivityUtils.startActivity(context, DataCheatActivity.class);
     }
 
     @NonNull
     @Override
-    @Verify
+
     protected String getTitleString() {
         return getString(R.string.activity_title_data_cheat);
     }
@@ -139,13 +139,13 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    @Verify
+
     protected void onInflateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.data_cheat_menu, menu);
     }
 
     @Override
-    @Verify
+
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_settings == item.getItemId()) {
             FieldsTemplateListActivity.start(thisActivity(), 10086);

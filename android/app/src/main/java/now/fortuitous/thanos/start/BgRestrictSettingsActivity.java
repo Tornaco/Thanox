@@ -26,7 +26,7 @@ import androidx.annotation.Nullable;
 
 import java.util.Objects;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
@@ -38,7 +38,7 @@ public class BgRestrictSettingsActivity extends ThemeActivity {
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -55,7 +55,7 @@ public class BgRestrictSettingsActivity extends ThemeActivity {
     }
 
     @Override
-    @Verify
+
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (android.R.id.home == item.getItemId()) {
             finish();

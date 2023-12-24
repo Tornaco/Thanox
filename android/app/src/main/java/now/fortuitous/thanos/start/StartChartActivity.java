@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -68,13 +68,13 @@ public class StartChartActivity extends ThemeActivity implements OnChartValueSel
 
     private Category category = Category.Blocked;
 
-    @Verify
+
     public static void start(Context context) {
         ActivityUtils.startActivity(context, StartChartActivity.class);
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStartChartBinding.inflate(LayoutInflater.from(this));
@@ -184,7 +184,7 @@ public class StartChartActivity extends ThemeActivity implements OnChartValueSel
         chart.setEntryLabelTypeface(TypefaceHelper.googleSansBold(this));
     }
 
-    @Verify
+
     private SpannableString generateCenterSpannableText() {
         ThanosManager thanosManager = ThanosManager.from(getApplicationContext());
         long count = 0L;
@@ -201,7 +201,7 @@ public class StartChartActivity extends ThemeActivity implements OnChartValueSel
         return new SpannableString(String.format("%s times", count));
     }
 
-    @Verify
+
     private void setData() {
         ThanosManager thanosManager = ThanosManager.from(getApplicationContext());
         if (!thanosManager.isServiceInstalled()) {
@@ -313,7 +313,7 @@ public class StartChartActivity extends ThemeActivity implements OnChartValueSel
     }
 
     @Override
-    @Verify
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.start_restrict_chart_menu, menu);
         return super.onCreateOptionsMenu(menu);

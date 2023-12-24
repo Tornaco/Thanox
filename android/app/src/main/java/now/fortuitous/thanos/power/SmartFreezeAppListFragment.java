@@ -63,7 +63,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.BaseFragment;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemActionListener;
@@ -114,7 +114,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     @Nullable
     @Override
-    @Verify
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivitySmartFreezeAppsBinding.inflate(inflater, container, false);
         createOptionsMenu();
@@ -232,7 +232,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         });
     }
 
-    @Verify
+
     private void showItemPopMenu(@NonNull View anchor, @NonNull AppListModel model) {
         AppInfo appInfo = model.appInfo;
         PopupMenu popupMenu = new PopupMenu(requireActivity(), anchor);
@@ -290,7 +290,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     }
 
 
-    @Verify
+
     private void setupViewModel(String pkgSetId) {
         viewModel = obtainViewModel(requireActivity());
         viewModel.setPkgSetId(pkgSetId);
@@ -364,7 +364,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         binding.toolbar.setOnMenuItemClickListener(this::handleOptionsItemSelected);
     }
 
-    @Verify
+
     private boolean handleOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_settings == item.getItemId()) {
             SmartFreezeSettingsActivity.start(requireActivity());

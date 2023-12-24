@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
@@ -65,7 +65,7 @@ public class ProcessManageViewModel extends AndroidViewModel {
         super(application);
     }
 
-    @Verify
+
     public void start() {
         loadProcess();
     }
@@ -174,7 +174,7 @@ public class ProcessManageViewModel extends AndroidViewModel {
         unRegisterEventReceivers();
     }
 
-    @Verify
+
     void killApp(AppInfo appInfo) {
         ThanosManager.from(getApplication())
                 .ifServiceInstalled(thanosManager -> {

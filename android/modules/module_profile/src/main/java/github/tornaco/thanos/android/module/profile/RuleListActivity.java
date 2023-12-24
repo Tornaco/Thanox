@@ -24,7 +24,7 @@ import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
@@ -55,7 +55,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ModuleProfileRuleListActivityBinding.inflate(LayoutInflater.from(this));

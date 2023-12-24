@@ -33,7 +33,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.chip.Chip;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import now.fortuitous.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.databinding.ActivityProcessManageBinding;
@@ -60,7 +60,7 @@ public class ProcessManageActivity extends BaseTrustedActivity {
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProcessManageBinding.inflate(
@@ -116,7 +116,7 @@ public class ProcessManageActivity extends BaseTrustedActivity {
     }
 
     @Override
-    @Verify
+
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (android.R.id.home == item.getItemId()) finish();
         return super.onOptionsItemSelected(item);

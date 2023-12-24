@@ -37,7 +37,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
@@ -52,7 +52,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
     private StartRuleViewModel viewModel;
     private ActivityStartRulesBinding binding;
 
-    @Verify
+
     public static void start(Context context) {
         ActivityUtils.startActivity(context, StartRuleActivity.class);
     }
@@ -63,7 +63,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStartRulesBinding.inflate(LayoutInflater.from(this));
@@ -117,7 +117,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
     }
 
     @Override
-    @Verify
+
     protected void onResume() {
         super.onResume();
         viewModel.resume();
@@ -170,14 +170,14 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
     }
 
     @Override
-    @Verify
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.start_rules_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    @Verify
+
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_info) {
             showInfoDialog();
@@ -186,7 +186,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
         return super.onOptionsItemSelected(item);
     }
 
-    @Verify
+
     private void showInfoDialog() {
         new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.menu_title_rules)

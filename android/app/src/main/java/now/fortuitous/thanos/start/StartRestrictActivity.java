@@ -24,7 +24,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewModel;
@@ -37,21 +37,21 @@ import now.fortuitous.thanos.start.chart.ComposeStartChartActivity;
 
 public class StartRestrictActivity extends CommonFuncToggleAppListFilterActivity {
 
-    @Verify
+
     public static void start(Context context) {
         ActivityUtils.startActivity(context, StartRestrictActivity.class);
     }
 
     @NonNull
     @Override
-    @Verify
+
     protected String getTitleString() {
         return getString(R.string.activity_title_start_restrict);
     }
 
     @Nullable
     @Override
-    @Verify
+
     protected String provideFeatureDescText() {
         return getString(R.string.feature_desc_start_restrict);
     }
@@ -75,13 +75,13 @@ public class StartRestrictActivity extends CommonFuncToggleAppListFilterActivity
     }
 
     @Override
-    @Verify
+
     protected void onInflateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.start_restrict_menu, menu);
     }
 
     @Override
-    @Verify
+
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_view_start_restrict_chart == item.getItemId()) {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(this, subscribed -> {
@@ -109,7 +109,7 @@ public class StartRestrictActivity extends CommonFuncToggleAppListFilterActivity
     }
 
     @Override
-    @Verify
+
     protected void onSwitchBarCheckChanged(com.google.android.material.materialswitch.MaterialSwitch switchBar, boolean isChecked) {
         super.onSwitchBarCheckChanged(switchBar, isChecked);
         ThanosManager.from(this).getActivityManager().setStartBlockEnabled(isChecked);

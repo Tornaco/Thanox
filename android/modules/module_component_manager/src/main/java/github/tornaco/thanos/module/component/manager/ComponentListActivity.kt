@@ -16,7 +16,7 @@ import com.elvishew.xlog.XLog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.miguelcatalan.materialsearchview.MaterialSearchView.SearchViewListener
-import github.tornaco.android.rhino.plugin.Verify
+
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.common.R
@@ -31,7 +31,7 @@ abstract class ComponentListActivity : ThemeActivity() {
     private lateinit var viewModel: ComponentListViewModel
     private lateinit var binding: ModuleComponentManagerComponentListActivityBinding
 
-    @Verify
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!internalResolveIntent()) {

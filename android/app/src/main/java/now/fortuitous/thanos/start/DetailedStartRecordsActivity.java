@@ -36,7 +36,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import github.tornaco.android.rhino.plugin.Verify;
+
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppListModel;
@@ -69,7 +69,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    @Verify
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         targetPackageName = getIntent().getStringExtra("pkg");

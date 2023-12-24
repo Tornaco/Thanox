@@ -815,7 +815,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                     return true;
                 });
 
-        donatePref.setVisible(ThanosApp.isPrc());
+        donatePref.setVisible(BuildProp.THANOS_BUILD_FLAVOR.equals("prc"));
 
         findPreference(getString(R.string.key_email)).setSummary(BuildProp.THANOX_CONTACT_EMAIL);
 

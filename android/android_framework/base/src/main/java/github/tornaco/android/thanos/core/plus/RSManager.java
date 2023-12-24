@@ -16,9 +16,4 @@ public class RSManager {
     public void vb(String code, String deviceId, ICallback cb) {
         rs.vb(code, deviceId, cb);
     }
-
-    @SneakyThrows
-    public void sid(String deviceId) {
-        rs.sid(deviceId);
-    }
 }

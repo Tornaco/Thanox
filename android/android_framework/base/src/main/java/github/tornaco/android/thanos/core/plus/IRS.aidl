@@ -9,7 +9,4 @@ interface IRS {
 
     // Verify binding.
     void vb(in String code, in String deviceId, in ICallback cb);
-
-    // Set generated id.
-    void sid(in String deviceId);
 }

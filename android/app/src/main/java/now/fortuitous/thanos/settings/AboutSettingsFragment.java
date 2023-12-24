@@ -33,8 +33,6 @@ import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.BuildConfig;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
-import now.fortuitous.app.donate.DonateActivity;
-import now.fortuitous.app.donate.DonateSettings;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
@@ -42,7 +40,8 @@ import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity3;
 import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
-import now.fortuitous.thanos.ThanosApp;
+import now.fortuitous.app.donate.DonateActivity;
+import now.fortuitous.app.donate.DonateSettings;
 
 @RuntimePermissions
 public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
@@ -140,7 +139,7 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
                     return true;
                 });
 
-        donatePref.setVisible(ThanosApp.isPrc());
+        donatePref.setVisible(BuildProp.THANOS_BUILD_FLAVOR.equals("prc"));
 
         findPreference(getString(R.string.key_email)).setSummary(BuildProp.THANOX_CONTACT_EMAIL);
 

@@ -27,14 +27,14 @@ import dev.enro.core.controller.navigationController
 import dev.enro.core.plugins.EnroLogger
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.MultipleModulesApp
-import now.fortuitous.app.FeatureAccessStats
-import now.fortuitous.app.Init
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter
 import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.thanos.android.noroot.NoRootSupport
 import github.tornaco.thanos.module.component.manager.initRules
 import io.reactivex.plugins.RxJavaPlugins
+import now.fortuitous.app.FeatureAccessStats
+import now.fortuitous.app.Init
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 
 @HiltAndroidApp
@@ -82,12 +82,5 @@ class ThanosApp : MultipleModulesApp(), NavigationApplication {
                     now.fortuitous.thanos.apps.AppDetailsActivity.start(this@ThanosApp, it)
                 }
             }
-    }
-
-    companion object {
-        @JvmStatic
-        fun isPrc(): Boolean {
-            return Init.isPrc()
-        }
     }
 }

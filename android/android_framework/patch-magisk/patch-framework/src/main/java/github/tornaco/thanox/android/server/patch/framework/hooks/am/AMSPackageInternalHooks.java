@@ -15,8 +15,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
-import github.tornaco.android.thanos.services.BootStrap;
-import github.tornaco.android.thanos.services.config.ServiceConfigs;
+import now.fortuitous.BootStrap;
+import now.fortuitous.config.ServiceConfigs;
 import github.tornaco.android.thanos.services.patch.common.content.pm.PackageManagerInternalHelper;
 import util.XposedHelpers;
 import util.XposedHelpersExt;

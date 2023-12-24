@@ -7,7 +7,7 @@ import com.elvishew.xlog.XLog;
 import java.lang.reflect.Proxy;
 
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
-import github.tornaco.android.thanos.services.BootStrap;
+import now.fortuitous.BootStrap;
 import github.tornaco.android.thanos.services.patch.common.wm.RecentTasksHelper;
 import github.tornaco.android.thanos.services.patch.common.wm.XTask;
 import github.tornaco.android.thanos.services.patch.common.wm.XTaskHelper;

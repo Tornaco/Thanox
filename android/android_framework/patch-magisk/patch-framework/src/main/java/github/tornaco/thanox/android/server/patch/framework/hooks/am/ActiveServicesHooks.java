@@ -1,7 +1,7 @@
 package github.tornaco.thanox.android.server.patch.framework.hooks.am;
 
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
-import github.tornaco.android.thanos.services.BootStrap;
+import now.fortuitous.BootStrap;
 import util.XposedHelpers;
 
 class ActiveServicesHooks {

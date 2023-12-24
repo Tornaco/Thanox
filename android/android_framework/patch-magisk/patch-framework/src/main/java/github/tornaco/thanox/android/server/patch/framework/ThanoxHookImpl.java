@@ -18,7 +18,7 @@ import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.core.PatchSources;
 import github.tornaco.android.thanos.core.util.AbstractSafeR;
 import github.tornaco.android.thanos.core.util.OsUtils;
-import github.tornaco.android.thanos.services.BootStrap;
+import now.fortuitous.BootStrap;
 
 public class ThanoxHookImpl implements IThanoxHook {
     private static final Set<String> FEATURES = new HashSet<>();

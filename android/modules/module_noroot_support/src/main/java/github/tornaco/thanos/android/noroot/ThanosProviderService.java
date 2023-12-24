@@ -37,7 +37,7 @@ import github.tornaco.android.thanos.core.IThanos;
 import github.tornaco.android.thanos.core.IThanosProvider;
 import github.tornaco.android.thanos.core.PatchSources;
 import github.tornaco.android.thanos.core.app.ThanosManagerNative;
-import github.tornaco.android.thanos.services.BootStrap;
+import now.fortuitous.BootStrap;
 
 public class ThanosProviderService extends IThanosProvider.Stub {
     public ThanosProviderService() {

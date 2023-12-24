@@ -36,7 +36,6 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
-import github.tornaco.android.thanos.module.easteregg.paint.PlatLogoActivity3;
 import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
@@ -77,16 +76,6 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
                                 + "\n"
                                 + BuildProp.THANOS_BUILD_HOST);
 
-        findPreference(getString(R.string.key_build_info_app))
-                .setOnPreferenceClickListener(
-                        preference -> {
-                            PlatLogoActivity3.start(getActivity());
-                            Toast.makeText(
-                                            getActivity(),
-                                            "Thanox is build against Android 13", Toast.LENGTH_LONG)
-                                    .show();
-                            return true;
-                        });
         if (thanos.isServiceInstalled()) {
             findPreference(getString(R.string.key_build_info_server))
                     .setSummary(thanos.getVersionName() + "\n" + thanos.fingerPrint());

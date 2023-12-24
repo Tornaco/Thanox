@@ -42,7 +42,6 @@ include(":annotation_processors:permission-requester-compiler")
 // Modules.
 include(":modules:module_ops")
 include(":modules:module_ops2")
-include(":modules:module_easteregg")
 include(":modules:module_activity_trampoline")
 include(":modules:module_profile")
 include(":modules:module_component_manager")

@@ -200,7 +200,6 @@ dependencies {
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_ops"))
     implementation(project(":modules:module_ops2"))
-    implementation(project(":modules:module_easteregg"))
     implementation(project(":modules:module_activity_trampoline"))
     implementation(project(":modules:module_component_manager"))
     implementation(project(":modules:module_notification_recorder"))

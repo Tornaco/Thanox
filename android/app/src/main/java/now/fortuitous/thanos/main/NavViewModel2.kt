@@ -30,7 +30,7 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.BuildProp
-import github.tornaco.android.thanos.app.donate.DonateSettings
+import now.fortuitous.app.donate.DonateSettings
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.util.OsUtils

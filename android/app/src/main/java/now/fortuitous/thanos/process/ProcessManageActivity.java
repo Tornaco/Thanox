@@ -35,7 +35,7 @@ import com.google.android.material.chip.Chip;
 
 import github.tornaco.android.rhino.plugin.Verify;
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.app.BaseTrustedActivity;
+import now.fortuitous.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.databinding.ActivityProcessManageBinding;
 import github.tornaco.android.thanos.util.ActivityUtils;
 

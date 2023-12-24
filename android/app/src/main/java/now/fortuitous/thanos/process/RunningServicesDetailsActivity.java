@@ -29,7 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.app.BaseTrustedActivity;
+import now.fortuitous.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.process.RunningState;

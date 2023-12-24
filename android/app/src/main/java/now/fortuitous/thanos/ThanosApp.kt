@@ -27,8 +27,8 @@ import dev.enro.core.controller.navigationController
 import dev.enro.core.plugins.EnroLogger
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.MultipleModulesApp
-import github.tornaco.android.thanos.app.FeatureAccessStats
-import github.tornaco.android.thanos.app.Init
+import now.fortuitous.app.FeatureAccessStats
+import now.fortuitous.app.Init
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter
 import github.tornaco.android.thanos.core.app.AppGlobals

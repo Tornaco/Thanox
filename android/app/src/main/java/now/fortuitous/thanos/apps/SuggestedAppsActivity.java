@@ -29,7 +29,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.app.BaseTrustedActivity;
+import now.fortuitous.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;

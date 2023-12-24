@@ -1,0 +1,208 @@
+/*
+ * (C) Copyright 2022 Thanox
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package now.fortuitous.thanos.settings;
+
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+
+import androidx.preference.DropDownPreference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.SwitchPreferenceCompat;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
+import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
+import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.profile.ConfigTemplate;
+import github.tornaco.android.thanos.core.profile.ProfileManager;
+import github.tornaco.android.thanos.widget.EditTextDialog;
+import github.tornaco.android.thanos.widget.QuickDropdown;
+import github.tornaco.android.thanos.widget.pref.ViewAwarePreference;
+import now.fortuitous.thanos.apps.AppDetailsActivity;
+import util.CollectionUtils;
+
+public class StrategySettingsFragment extends BasePreferenceFragmentCompat {
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.strategy_settings_pref, rootKey);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @Override
+    protected void onBindPreferences() {
+        super.onBindPreferences();
+
+        ThanosManager thanos = ThanosManager.from(getContext());
+        if (!thanos.isServiceInstalled()) {
+            return;
+        }
+
+        // Auto config.
+        SwitchPreferenceCompat autoConfigPref =
+                findPreference(getString(R.string.key_new_installed_apps_config_enabled));
+        autoConfigPref.setChecked(
+                thanos.isServiceInstalled()
+                        && thanos.getProfileManager().isAutoApplyForNewInstalledAppsEnabled());
+        autoConfigPref.setOnPreferenceChangeListener(
+                (preference, newValue) -> {
+                    if (thanos.isServiceInstalled()) {
+                        boolean checked = (boolean) newValue;
+                        thanos.getProfileManager().setAutoApplyForNewInstalledAppsEnabled(checked);
+                    }
+                    return true;
+                });
+        updateAutoConfigSelection();
+        updateConfigTemplatePrefs();
+    }
+
+    private void updateAutoConfigSelection() {
+        ThanosManager thanos = ThanosManager.from(getContext());
+        ProfileManager profileManager = thanos.getProfileManager();
+        List<String> entries = new ArrayList<>();
+        List<String> values = new ArrayList<>();
+        String selectedId = profileManager.getAutoConfigTemplateSelectionId();
+        ConfigTemplate selectedTemplate = profileManager.getConfigTemplateById(selectedId);
+        String valueNotSet = getString(R.string.common_text_value_not_set);
+
+        CollectionUtils.consumeRemaining(
+                profileManager.getAllConfigTemplates(),
+                template -> {
+                    entries.add(template.getTitle());
+                    values.add(template.getId());
+                });
+        DropDownPreference newInstalledAppsConfig =
+                findPreference(getString(R.string.key_new_installed_apps_config));
+        Objects.requireNonNull(newInstalledAppsConfig).setEntries(entries.toArray(new String[0]));
+        newInstalledAppsConfig.setEntryValues(values.toArray(new String[0]));
+        newInstalledAppsConfig.setValue(selectedId);
+        newInstalledAppsConfig.setSummary(
+                selectedTemplate == null ? valueNotSet : selectedTemplate.getTitle());
+        newInstalledAppsConfig.setOnPreferenceChangeListener(
+                (preference, newValue) -> {
+                    String newId = (String) newValue;
+                    profileManager.setAutoConfigTemplateSelection(newId);
+                    updateAutoConfigSelection();
+                    return true;
+                });
+    }
+
+    private void updateConfigTemplatePrefs() {
+        PreferenceCategory templatesCategory =
+                findPreference(getString(R.string.key_config_template_category));
+        Objects.requireNonNull(templatesCategory).removeAll();
+
+        ViewAwarePreference addPref = new ViewAwarePreference(requireContext());
+        addPref.setTitle(R.string.common_fab_title_add);
+        addPref.setIcon(R.drawable.module_common_ic_add_fill);
+        addPref.setOnPreferenceClickListener(preference -> {
+            requestAddTemplate();
+            return true;
+        });
+        templatesCategory.addPreference(addPref);
+
+        ThanosManager thanos = ThanosManager.from(getContext());
+        ProfileManager profileManager = thanos.getProfileManager();
+        for (ConfigTemplate template : profileManager.getAllConfigTemplates()) {
+            ViewAwarePreference tp = new ViewAwarePreference(requireContext());
+            tp.setTitle(template.getTitle());
+            tp.setKey(template.getId());
+            tp.setDefaultValue(template);
+            tp.setOnPreferenceClickListener(
+                    preference -> {
+                        ViewAwarePreference vp = (ViewAwarePreference) preference;
+                        showConfigTemplateOptionsDialog(template, vp.getView());
+                        return true;
+                    });
+            templatesCategory.addPreference(tp);
+        }
+    }
+
+    private void requestAddTemplate() {
+        EditTextDialog.show(
+                getActivity(),
+                getString(R.string.pref_action_create_new_config_template),
+                content -> {
+                    if (TextUtils.isEmpty(content)) {
+                        return;
+                    }
+                    String uuid = UUID.randomUUID().toString();
+                    ConfigTemplate template =
+                            ConfigTemplate.builder()
+                                    .title(content)
+                                    .id(uuid)
+                                    .dummyPackageName(
+                                            ProfileManager
+                                                    .PROFILE_AUTO_APPLY_NEW_INSTALLED_APPS_CONFIG_TEMPLATE_PACKAGE_PREFIX
+                                                    + uuid)
+                                    .createAt(System.currentTimeMillis())
+                                    .build();
+                    boolean added =
+                            ThanosManager.from(getContext()).getProfileManager().addConfigTemplate(template);
+                    if (added) {
+                        updateConfigTemplatePrefs();
+                        updateAutoConfigSelection();
+                    }
+                });
+    }
+
+    private void showConfigTemplateOptionsDialog(ConfigTemplate template, View anchor) {
+        QuickDropdown.show(
+                requireActivity(),
+                anchor,
+                input -> {
+                    switch (input) {
+                        case 0:
+                            return getString(R.string.pref_action_edit_or_view_config_template);
+                        case 1:
+                            return getString(R.string.pref_action_delete_config_template);
+                    }
+                    return null;
+                },
+                id -> {
+                    switch (id) {
+                        case 0:
+                            AppInfo appInfo = new AppInfo();
+                            appInfo.setSelected(false);
+                            appInfo.setPkgName(template.getDummyPackageName());
+                            appInfo.setAppLabel(template.getTitle());
+                            appInfo.setDummy(true);
+                            appInfo.setVersionCode(-1);
+                            appInfo.setVersionCode(-1);
+                            appInfo.setUid(-1);
+                            appInfo.setUserId(0);
+                            AppDetailsActivity.start(getActivity(), appInfo);
+                            break;
+                        case 1:
+                            if (ThanosManager.from(getContext())
+                                    .getProfileManager()
+                                    .deleteConfigTemplate(template)) {
+                                updateConfigTemplatePrefs();
+                                updateAutoConfigSelection();
+                            }
+                            break;
+                    }
+                });
+    }
+}

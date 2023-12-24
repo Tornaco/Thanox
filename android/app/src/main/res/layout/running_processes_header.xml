@@ -37,7 +37,7 @@
 
     <view
             android:id="@+id/color_bar"
-            class="github.tornaco.android.thanos.process.LinearColorBar"
+            class="now.fortuitous.thanos.process.LinearColorBar"
             android:layout_width="match_parent"
             android:layout_height="16sp"
             android:orientation="horizontal" />

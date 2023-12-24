@@ -4,7 +4,7 @@
     package="github.tornaco.android.thanos">
 
     <application
-        android:name=".ThanosApp"
+        android:name="now.fortuitous.thanos.ThanosApp"
         android:allowBackup="false"
         android:description="@string/app_description"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +17,7 @@
         tools:replace="android:allowBackup">
 
         <activity
-            android:name=".main.NavActivity"
+            android:name="now.fortuitous.thanos.main.NavActivity"
             android:exported="true"
             android:label="@string/nav_title_thanox"
             android:theme="@style/Theme.AppSplash">
@@ -39,7 +39,7 @@
         </activity>
 
         <activity
-            android:name=".process.v2.ProcessManageActivityV2"
+            android:name="now.fortuitous.thanos.process.v2.ProcessManageActivityV2"
             android:exported="true"
             android:label="@string/activity_title_process_manage">
             <intent-filter>
@@ -50,184 +50,184 @@
         </activity>
 
         <activity
-            android:name=".process.v2.ProcessManageActivityV2Delegate"
+            android:name="now.fortuitous.thanos.process.v2.ProcessManageActivityV2Delegate"
             android:excludeFromRecents="true"
             android:exported="false"
             android:theme="@style/AppThemeShortcut" />
 
         <activity
-            android:name=".process.v2.RunningAppStateDetailsActivity"
+            android:name="now.fortuitous.thanos.process.v2.RunningAppStateDetailsActivity"
             android:exported="false"
             android:label="@string/activity_title_process_manage" />
 
         <activity
-            android:name=".process.ProcessManageActivity"
+            android:name="now.fortuitous.thanos.process.ProcessManageActivity"
             android:exported="false"
             android:label="@string/activity_title_process_manage">
 
         </activity>
         <activity
-            android:name=".start.StartRestrictActivity"
+            android:name="now.fortuitous.thanos.start.StartRestrictActivity"
             android:exported="false" />
 
         <activity
-            android:name=".start.BackgroundRestrictActivity"
+            android:name="now.fortuitous.thanos.start.BackgroundRestrictActivity"
             android:exported="false" />
         <activity
-            android:name=".task.CleanUpOnTaskRemovedActivity"
+            android:name="now.fortuitous.thanos.task.CleanUpOnTaskRemovedActivity"
             android:exported="false" />
         <activity
-            android:name=".privacy.DataCheatActivity"
+            android:name="now.fortuitous.thanos.privacy.DataCheatActivity"
             android:exported="false" />
         <activity
-            android:name=".settings.SettingsDashboardActivity"
+            android:name="now.fortuitous.thanos.settings.SettingsDashboardActivity"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".settings.UiSettingsActivity"
+            android:name="now.fortuitous.thanos.settings.UiSettingsActivity"
             android:exported="false"
             android:label="@string/pre_title_ui" />
         <activity
-            android:name=".settings.StrategySettingsActivity"
+            android:name="now.fortuitous.thanos.settings.StrategySettingsActivity"
             android:exported="false"
             android:label="@string/pre_title_strategy" />
         <activity
-            android:name=".settings.GeneralSettingsActivity"
+            android:name="now.fortuitous.thanos.settings.GeneralSettingsActivity"
             android:exported="false"
             android:label="@string/pre_title_power" />
         <activity
-            android:name=".settings.DataSettingsActivity"
+            android:name="now.fortuitous.thanos.settings.DataSettingsActivity"
             android:exported="false"
             android:label="@string/pre_title_data" />
         <activity
-            android:name=".settings.DevSettingsActivity"
+            android:name="now.fortuitous.thanos.settings.DevSettingsActivity"
             android:exported="false"
             android:label="@string/pre_title_developer" />
         <activity
-            android:name=".settings.AboutSettingsActivity"
+            android:name="now.fortuitous.thanos.settings.AboutSettingsActivity"
             android:exported="false"
             android:label="@string/pre_title_about" />
         <activity
-            android:name=".apps.AppsManageActivity"
+            android:name="now.fortuitous.thanos.apps.AppsManageActivity"
             android:exported="false" />
         <activity
-            android:name=".privacy.CheatFieldSettingsActivity"
+            android:name="now.fortuitous.thanos.privacy.CheatFieldSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".start.BgRestrictSettingsActivity"
+            android:name="now.fortuitous.thanos.start.BgRestrictSettingsActivity"
             android:exported="false" />
 
         <activity
-            android:name=".apps.AppDetailsActivity"
+            android:name="now.fortuitous.thanos.apps.AppDetailsActivity"
             android:enabled="true"
             android:exported="true" />
         <activity
-            android:name=".notification.ScreenOnNotificationActivity"
+            android:name="now.fortuitous.thanos.notification.ScreenOnNotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".task.RecentTaskBlurListActivity"
+            android:name="now.fortuitous.thanos.task.RecentTaskBlurListActivity"
             android:exported="false" />
         <activity
-            android:name=".power.SmartStandbyV2Activity"
+            android:name="now.fortuitous.thanos.power.SmartStandbyV2Activity"
             android:exported="false" />
         <activity
-            android:name=".apps.SuggestedAppsActivity"
+            android:name="now.fortuitous.thanos.apps.SuggestedAppsActivity"
             android:exported="false"
             android:label="@string/feature_title_apps_manager" />
         <activity
-            android:name=".start.StartChartActivity"
+            android:name="now.fortuitous.thanos.start.StartChartActivity"
             android:exported="false" />
         <activity
-            android:name=".start.StartRuleActivity"
+            android:name="now.fortuitous.thanos.start.StartRuleActivity"
             android:exported="false" />
         <activity
-            android:name=".power.StandByRuleActivity"
+            android:name="now.fortuitous.thanos.power.StandByRuleActivity"
             android:exported="false" />
         <activity
-            android:name=".main.NeedToRestartActivity"
+            android:name="now.fortuitous.thanos.main.NeedToRestartActivity"
             android:exported="false"
             android:theme="@style/AppThemeNeedRestart" />
         <activity
-            android:name=".power.SmartFreezeActivity"
+            android:name="now.fortuitous.thanos.power.SmartFreezeActivity"
             android:exported="false" />
         <activity
-            android:name=".power.ShortcutStubActivity"
+            android:name="now.fortuitous.thanos.power.ShortcutStubActivity"
             android:excludeFromRecents="true"
             android:exported="false"
             android:theme="@style/AppThemeShortcut" />
 
         <activity
-            android:name=".power.SmartFreezeSettingsActivity"
+            android:name="now.fortuitous.thanos.power.SmartFreezeSettingsActivity"
             android:exported="false" />
 
         <activity
-            android:name=".process.RunningServicesDetailsActivity"
+            android:name="now.fortuitous.thanos.process.RunningServicesDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".power.SmartStandbySettingsActivity"
+            android:name="now.fortuitous.thanos.power.SmartStandbySettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".privacy.CheatRecordViewerActivity"
+            android:name="now.fortuitous.thanos.privacy.CheatRecordViewerActivity"
             android:exported="false" />
         <activity
-            android:name=".start.DetailedStartRecordsActivity"
+            android:name="now.fortuitous.thanos.start.DetailedStartRecordsActivity"
             android:exported="false" />
         <activity
-            android:name=".main.OneKeyBoostShortcutActivity"
+            android:name="now.fortuitous.thanos.main.OneKeyBoostShortcutActivity"
             android:excludeFromRecents="true"
             android:exported="false"
             android:theme="@style/AppThemeShortcut" />
         <activity
-            android:name=".main.PluginMarketActivity"
+            android:name="now.fortuitous.thanos.main.PluginMarketActivity"
             android:exported="false" />
         <activity
-            android:name=".infinite.InfiniteZActivity"
+            android:name="now.fortuitous.thanos.infinite.InfiniteZActivity"
             android:exported="false" />
         <activity
-            android:name=".main.PluginListActivity"
+            android:name="now.fortuitous.thanos.main.PluginListActivity"
             android:exported="false"
             android:label="@string/nav_title_plugin" />
         <activity
-            android:name=".privacy.FieldsTemplateListActivity"
+            android:name="now.fortuitous.thanos.privacy.FieldsTemplateListActivity"
             android:exported="false" />
         <activity
-            android:name=".apps.PackageSetListActivity"
+            android:name="now.fortuitous.thanos.apps.PackageSetListActivity"
             android:exported="false" />
         <activity
-            android:name=".apps.PackageSetEditorActivity"
+            android:name="now.fortuitous.thanos.apps.PackageSetEditorActivity"
             android:exported="false" />
         <activity
-            android:name=".settings.BuildPropActivity"
+            android:name="now.fortuitous.thanos.settings.BuildPropActivity"
             android:exported="false" />
         <activity
-            android:name=".onboarding.OnBoardingActivity"
+            android:name="now.fortuitous.thanos.onboarding.OnBoardingActivity"
             android:exported="false" />
         <activity
-            android:name=".start.chart.ComposeStartChartActivity"
+            android:name="now.fortuitous.thanos.start.chart.ComposeStartChartActivity"
             android:exported="false" />
         <activity
-            android:name=".main.PrebuiltFeatureShortcutActivity"
+            android:name="now.fortuitous.thanos.main.PrebuiltFeatureShortcutActivity"
             android:excludeFromRecents="true"
             android:exported="false"
             android:theme="@style/AppThemeShortcut" />
         <activity
-            android:name=".settings.ThemeAttrPreviewActivity"
+            android:name="now.fortuitous.thanos.settings.ThemeAttrPreviewActivity"
             android:exported="false" />
         <activity
-            android:name=".power.wakelock.WakeLockBlockerActivity"
+            android:name="now.fortuitous.thanos.power.wakelock.WakeLockBlockerActivity"
             android:exported="false" />
         <activity
-            android:name=".settings.access.SettingsAccessRecordViewerActivity"
+            android:name="now.fortuitous.thanos.settings.access.SettingsAccessRecordViewerActivity"
             android:exported="false" />
         <activity
-            android:name=".notification.NotificationCenterActivity"
+            android:name="now.fortuitous.thanos.notification.NotificationCenterActivity"
             android:exported="false"
             android:label="@string/module_notification_recorder_feature_title_notification_center" />
         <activity
-            android:name=".settings.FeatureToggleActivity"
+            android:name="now.fortuitous.thanos.settings.FeatureToggleActivity"
             android:exported="false" />
 
         <meta-data
@@ -254,7 +254,7 @@
         </provider>
 
         <service
-            android:name=".qs.QuickConfigAppTile"
+            android:name="now.fortuitous.thanos.qs.QuickConfigAppTile"
             android:exported="true"
             android:icon="@drawable/ic_settings_line_black"
             android:label="@string/feature_title_apps_manager"
@@ -264,7 +264,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".qs.ShowCurrentActivityTile"
+            android:name="now.fortuitous.thanos.qs.ShowCurrentActivityTile"
             android:exported="true"
             android:icon="@drawable/ic_radio_button_fill_black"
             android:label="@string/title_show_current_activity"
@@ -274,7 +274,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".qs.ShowNetStatsTile"
+            android:name="now.fortuitous.thanos.qs.ShowNetStatsTile"
             android:exported="true"
             android:icon="@drawable/ic_numbers_fill_black"
             android:label="@string/title_net_stats"
@@ -284,7 +284,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".qs.ProfileOnOffTile"
+            android:name="now.fortuitous.thanos.qs.ProfileOnOffTile"
             android:exported="true"
             android:icon="@drawable/module_profile_ic_thunderstorms_fill"
             android:label="@string/module_profile_feature_name"
@@ -295,7 +295,7 @@
         </service>
 
         <service
-            android:name=".qs.TrampolineOnOffTile"
+            android:name="now.fortuitous.thanos.qs.TrampolineOnOffTile"
             android:exported="true"
             android:icon="@drawable/ic_guide_fill"
             android:label="@string/module_activity_trampoline_app_name"
@@ -306,7 +306,7 @@
         </service>
 
         <service
-            android:name=".qs.OnyKeyClearTile"
+            android:name="now.fortuitous.thanos.qs.OnyKeyClearTile"
             android:exported="true"
             android:icon="@drawable/ic_rocket_line"
             android:label="@string/feature_title_one_key_boost"
@@ -317,12 +317,12 @@
         </service>
 
         <service
-            android:name=".service.SuSupportService"
+            android:name="now.fortuitous.thanos.service.SuSupportService"
             android:exported="true"
             tools:ignore="ExportedService" />
 
         <receiver
-            android:name=".infinite.InfiniteZDeviceAdminReceiver"
+            android:name="now.fortuitous.thanos.infinite.InfiniteZDeviceAdminReceiver"
             android:description="@string/device_admin_description"
             android:enabled="false"
             android:exported="true"

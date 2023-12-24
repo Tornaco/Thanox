@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="github.tornaco.android.thanos.power.SmartFreezeAppsViewModel" />
+            type="now.fortuitous.thanos.power.SmartFreezeAppsViewModel" />
 
     </data>
 

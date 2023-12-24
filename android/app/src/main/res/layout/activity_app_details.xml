@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="github.tornaco.android.thanos.apps.AppDetailsViewModel" />
+            type="now.fortuitous.thanos.apps.AppDetailsViewModel" />
 
         <variable
             name="app"

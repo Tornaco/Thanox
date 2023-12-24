@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="github.tornaco.android.thanos.start.StartRuleViewModel" />
+            type="now.fortuitous.thanos.start.StartRuleViewModel" />
     </data>
 
 

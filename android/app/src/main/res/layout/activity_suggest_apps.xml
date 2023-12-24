@@ -79,7 +79,7 @@
 
         <variable
             name="viewmodel"
-            type="github.tornaco.android.thanos.apps.SuggestedAppsViewModel" />
+            type="now.fortuitous.thanos.apps.SuggestedAppsViewModel" />
 
     </data>
 </layout>

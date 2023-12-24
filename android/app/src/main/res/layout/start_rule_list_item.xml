@@ -8,11 +8,11 @@
 
         <variable
                 name="rule"
-                type="github.tornaco.android.thanos.start.StartRule" />
+                type="now.fortuitous.thanos.start.StartRule" />
 
         <variable
                 name="ruleItemClickListener"
-                type="github.tornaco.android.thanos.start.StartRuleItemClickListener" />
+                type="now.fortuitous.thanos.start.StartRuleItemClickListener" />
 
         <variable
                 name="isLastOne"

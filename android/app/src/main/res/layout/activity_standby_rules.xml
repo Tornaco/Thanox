@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="github.tornaco.android.thanos.power.StandByRuleViewModel" />
+            type="now.fortuitous.thanos.power.StandByRuleViewModel" />
     </data>
 
 

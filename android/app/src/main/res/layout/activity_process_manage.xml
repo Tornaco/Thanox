@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="github.tornaco.android.thanos.process.ProcessManageViewModel" />
+            type="now.fortuitous.thanos.process.ProcessManageViewModel" />
 
     </data>
 

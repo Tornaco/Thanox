@@ -123,6 +123,7 @@
     <string name="key_data_backup" translatable="false">key_data_backup</string>
     <string name="key_data_restore" translatable="false">key_data_restore</string>
     <string name="key_restore_default" translatable="false">key_restore_default</string>
+    <string name="key_feature_toggle" translatable="false">key_feature_toggle</string>
 
     <string name="key_app_feature_config_start_restrict" translatable="false">key_app_feature_config_start_restrict
     </string>

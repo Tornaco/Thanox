@@ -26,6 +26,8 @@
     <string name="nav_title_plugin_repo">Plugin repo</string>
     <string name="nav_title_thanox">Thanox</string>
 
+    <string name="pref_title_feature_toggle">Feature toggle</string>
+
     <string name="priv_title_fields_template">Templates</string>
     <string name="priv_title_fields_usage_count">Selected for %s apps</string>
     <string name="priv_title_fields_usage_count_noop">Unused</string>

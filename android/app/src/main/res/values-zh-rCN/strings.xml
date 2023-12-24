@@ -25,6 +25,8 @@
     <string name="nav_title_plugin_repo">插件仓库</string>
     <string name="nav_title_thanox">Thanox</string>
 
+    <string name="pref_title_feature_toggle">功能开关</string>
+
     <string name="priv_title_fields_template">模板</string>
     <string name="priv_title_fields_usage_count">%s个应用使用该模板</string>
     <string name="priv_title_fields_usage_count_noop">未使用</string>

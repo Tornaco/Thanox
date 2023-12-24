@@ -17,7 +17,11 @@ import github.tornaco.android.thanos.app.donate.DonateSettings
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.util.OsUtils
-import github.tornaco.android.thanos.dashboard.*
+import github.tornaco.android.thanos.dashboard.CpuUsage
+import github.tornaco.android.thanos.dashboard.MemType
+import github.tornaco.android.thanos.dashboard.MemUsage
+import github.tornaco.android.thanos.dashboard.StatusHeaderInfo
+import github.tornaco.android.thanos.dashboard.defaultStatusHeaderInfo
 import github.tornaco.android.thanos.feature.access.AppFeatureManager.showDonateIntroDialog
 import github.tornaco.android.thanos.feature.access.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.pref.AppPreference
@@ -28,7 +32,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
+import java.util.Observable
 import javax.inject.Inject
 
 enum class ActiveStatus {
@@ -51,7 +55,8 @@ data class FeatureItemGroup(
 )
 
 data class NavState(
-    val isLoading: Boolean, val features: List<FeatureItemGroup>,
+    val isLoading: Boolean,
+    val features: List<FeatureItemGroup>,
     val statusHeaderInfo: StatusHeaderInfo,
     val activeStatus: ActiveStatus,
     val hasFrameworkError: Boolean,
@@ -98,8 +103,11 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         viewModelScope.launch {
             thanox.ifServiceInstalled { thanox ->
                 val feats = PrebuiltFeatures.all {
-                    it.requiredFeature == null || thanox.hasFeature(it.requiredFeature)
-                }
+                    AppPreference.isAppFeatureEnabled(
+                        context,
+                        it.id
+                    ) && (it.requiredFeature == null || thanox.hasFeature(it.requiredFeature))
+                }.filter { it.items.isNotEmpty() }
                 _state.value = _state.value.copy(
                     features = feats
                 )

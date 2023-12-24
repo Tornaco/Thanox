@@ -377,7 +377,10 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                 });
             }
 
-
+            findPreference(getString(R.string.key_feature_toggle)).setOnPreferenceClickListener(preference -> {
+                FeatureToggleActivity.start(getContext());
+                return true;
+            });
         }
     }
 

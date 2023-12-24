@@ -84,6 +84,11 @@
             android:key="@string/key_general"
             app:title="@string/pre_category_general">
 
+            <Preference
+                app:key="@string/key_feature_toggle"
+                app:persistent="false"
+                app:title="@string/pref_title_feature_toggle" />
+
             <SwitchPreferenceCompat
                 app:key="@string/key_enable_power_save"
                 app:persistent="false"

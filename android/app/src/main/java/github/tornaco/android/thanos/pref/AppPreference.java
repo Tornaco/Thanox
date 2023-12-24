@@ -17,6 +17,7 @@ public class AppPreference {
     private static final String PREF_KEY_PROCESS_MANAGE_UI_V2 = "PREF_KEY_PROCESS_MANAGE_UI_V2";
     private static final String PREF_KEY_CURRENT_TIP_INDEX = "PREF_KEY_CURRENT_TIP_INDEX";
     private static final String PREF_KEY_PKG_SET_SORT_PREFIX = "PREF_KEY_PKG_SORT_";
+    private static final String PREF_KEY_FEATURE_FLAG_ = "PREF_KEY_FEATURE_FLAG_";
 
     @Verify
     public static boolean isFirstRun(Context context) {
@@ -102,4 +103,19 @@ public class AppPreference {
                     .apply();
         }
     }
+
+    @Verify
+    public static boolean isAppFeatureEnabled(Context context, int featureId) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(PREF_KEY_FEATURE_FLAG_ + featureId, true);
+    }
+
+    @Verify
+    public static void setAppFeatureEnabled(Context context, int featureId, boolean value) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(PREF_KEY_FEATURE_FLAG_ + featureId, value)
+                .apply();
+    }
+
 }

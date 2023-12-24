@@ -181,15 +181,8 @@
             android:exported="false"
             android:theme="@style/AppThemeShortcut" />
         <activity
-            android:name="now.fortuitous.thanos.main.PluginMarketActivity"
-            android:exported="false" />
-        <activity
             android:name="now.fortuitous.thanos.infinite.InfiniteZActivity"
             android:exported="false" />
-        <activity
-            android:name="now.fortuitous.thanos.main.PluginListActivity"
-            android:exported="false"
-            android:label="@string/nav_title_plugin" />
         <activity
             android:name="now.fortuitous.thanos.privacy.FieldsTemplateListActivity"
             android:exported="false" />

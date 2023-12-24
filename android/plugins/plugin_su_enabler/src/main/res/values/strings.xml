@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Su Enabler</string>
-    <string name="app_desc">Enable su API support for Profile.</string>
-
-    <string name="dialog_desc_su_enabled">The su API support has been enabled for the Thanox profile. Next, please click Allow in the pop-up super permission grant request. If no request is received, please manually turn on the super user permission. \n\nsu command will be executed as Thanox application. \n\n\n! ! ! ! ! ! Please allow Thanox app to start in background! ! ! ! ! !</string>
-</resources>

@@ -8,18 +8,12 @@ buildscript {
         google()
         mavenCentral()
         mavenLocal()
-
-        // Local repos
-        val nitroPluginRepo = file(rootProject.projectDir.path + "/nitro/nitro_gradle_plugin/prebuilt-repo")
-        println("nitroPluginRepo= $nitroPluginRepo")
-        maven(url = nitroPluginRepo)
     }
 
     dependencies {
         classpath(tornaco.project.android.thanox.ClassPaths.gradlePlugin)
         classpath(tornaco.project.android.thanox.ClassPaths.kotlinPlugin)
         classpath(tornaco.project.android.thanox.Libs.Hilt.gradlePlugin)
-        classpath(tornaco.project.android.thanox.Libs.ThanoxInternal.nitroGradlePlugin)
     }
 }
 

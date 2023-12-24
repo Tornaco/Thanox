@@ -1,9 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="github.tornaco.android.nitro.framework">
-
-    <application>
-        <activity
-                android:name=".host.ContainerActivity"
-                android:theme="@android:style/Theme.DeviceDefault" />
-    </application>
-</manifest>

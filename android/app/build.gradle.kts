@@ -217,7 +217,6 @@ dependencies {
     implementation(project(":android_framework:services"))
     implementation(project(":android_framework:patchx-entry"))
 
-    implementation(project(":nitro:nitro_framework"))
     implementation(project(":third_party:apkbuilder"))
 
     implementation(project(":third_party:time-duration-picker"))

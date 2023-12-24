@@ -185,8 +185,6 @@
 # For debug purpose
 -keep class com.bumptech.glide.** {*;}
 
--keep class github.tornaco.android.nitro.** {*;}
-
 # Keep utils.
 -keep class util.** {*;}
 

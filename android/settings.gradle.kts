@@ -19,23 +19,10 @@ include(":app")
 include(":shortcut_stub")
 include(":sdk-demo")
 
-include(":nitro:nitro_framework")
-include(":nitro:nitro_plugin")
-include(":nitro:nitro_gradle_plugin")
-include(":nitro:nitro_android_stub")
-
 include(":annotation_processors:xposed_hook_annotation")
 include(":annotation_processors:xposed_hook_compiler")
 include(":annotation_processors:permission-requester-annotation")
 include(":annotation_processors:permission-requester-compiler")
-//
-//include(":plugins:plugin_push_message_delegate")
-//include(":plugins:plugin_push_message_delegate_server")
-//include(":plugins:plugin_su_enabler")
-//include(":plugins:plugin_example")
-//include(":plugins:plugin_auto_idle")
-//include(":plugins:plugin_auto_idle_server")
-//include(":plugins:plugin_toolbox")
 
 // Modules.
 include(":modules:module_ops")

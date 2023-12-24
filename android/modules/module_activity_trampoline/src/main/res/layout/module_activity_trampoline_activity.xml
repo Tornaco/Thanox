@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
-            android:theme="?appbarTheme"
             android:background="?android:attr/windowBackground"
+            android:theme="?appbarTheme"
             app:elevation="@dimen/common_toolbar_elevation">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -32,27 +32,37 @@
                 style="?collapsingToolbarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?android:attr/windowBackground"
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                android:background="?android:attr/windowBackground"
                 app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleCollapseMode="scale"
                 app:toolbarId="@+id/toolbar">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
+                <FrameLayout
+                    android:id="@+id/toolbar_container"
                     android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="?appbarPopupTheme"
-                    app:theme="?toolbarTheme"
-                    app:title="@string/module_activity_trampoline_app_name"
-                    app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    app:titleTextColor="?attr/colorControlNormal"
-                    tools:title="Title very long very very long!!!!">
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin">
 
-                </androidx.appcompat.widget.Toolbar>
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?actionBarSize"
+                        app:popupTheme="?appbarPopupTheme"
+                        app:theme="?toolbarTheme"
+                        app:title="@string/module_activity_trampoline_app_name"
+                        app:titleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
+                        app:titleTextColor="?attr/colorControlNormal"
+                        tools:title="Title of Toolbar" />
+
+                    <com.miguelcatalan.materialsearchview.MaterialSearchView
+                        android:id="@+id/search_view"
+                        style="@style/SearchViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </FrameLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 

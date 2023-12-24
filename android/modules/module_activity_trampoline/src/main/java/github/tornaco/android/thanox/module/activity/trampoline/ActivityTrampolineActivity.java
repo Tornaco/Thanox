@@ -36,6 +36,7 @@ import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.common.io.Files;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.nononsenseapps.filepicker.Utils;
 
 import java.io.File;
@@ -103,6 +104,38 @@ public class ActivityTrampolineActivity extends ThemeActivity
         binding.replacements.setAdapter(new ActivityTrampolineAdapter(this));
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
+
+
+        // Search.
+        binding.searchView.setOnQueryTextListener(
+                new MaterialSearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        viewModel.setSearchText(query);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        viewModel.setSearchText(newText);
+                        return true;
+                    }
+                });
+
+        binding.searchView.setOnSearchViewListener(
+                new MaterialSearchView.SearchViewListener() {
+                    @Override
+                    public void onSearchViewShown() {
+                        binding.toolbarLayout.setTitleEnabled(false);
+                        binding.appbar.setExpanded(false, true);
+                    }
+
+                    @Override
+                    public void onSearchViewClosed() {
+                        viewModel.clearSearchText();
+                        binding.toolbarLayout.setTitleEnabled(true);
+                    }
+                });
 
         // Switch.
         onSetupSwitchBar(binding.switchBarContainer.switchBar);
@@ -284,6 +317,8 @@ public class ActivityTrampolineActivity extends ThemeActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.module_activity_trampoline_menu_trampoline, menu);
+        MenuItem item = menu.findItem(github.tornaco.android.thanos.module.common.R.id.action_search);
+        binding.searchView.setMenuItem(item);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -299,6 +334,22 @@ public class ActivityTrampolineActivity extends ThemeActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (closeSearch()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    protected boolean closeSearch() {
+        if (binding.searchView.isSearchOpen()) {
+            binding.searchView.closeSearch();
+            return true;
+        }
+        return false;
     }
 
     // Null means all.

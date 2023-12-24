@@ -3,9 +3,9 @@ package github.tornaco.android.thanox.module.activity.trampoline;
 import android.app.Application;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.lifecycle.AndroidViewModel;
 
@@ -35,6 +36,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import github.tornaco.android.thanos.common.AppLabelSearchFilter;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
 import github.tornaco.android.thanos.core.pm.AppInfo;
@@ -63,6 +65,9 @@ public class TrampolineViewModel extends AndroidViewModel {
     private final ObservableInt exportFailSignal = new ObservableInt();
     private final ObservableInt importSuccessSignal = new ObservableInt();
     private final ObservableInt importFailSignal = new ObservableInt();
+
+    private final ObservableField<String> queryText = new ObservableField<>("");
+    private final AppLabelSearchFilter appLabelSearchFilter = new AppLabelSearchFilter();
 
     private final TrampolineLoader trampolineLoader = () -> {
         List<ActivityTrampolineModel> res = new ArrayList<>();
@@ -101,6 +106,15 @@ public class TrampolineViewModel extends AndroidViewModel {
                         emitter.onSuccess(Objects.requireNonNull(trampolineLoader.load())))
                 .flatMapObservable((Function<List<ActivityTrampolineModel>,
                         ObservableSource<ActivityTrampolineModel>>) Observable::fromIterable)
+                .filter(listModel -> {
+                    String query = queryText.get();
+                    // Match package or cpmponent.
+                    return TextUtils.isEmpty(query)
+                            || query.length() > 1 && listModel.getReplacement() != null && listModel.getReplacement().from.flattenToString().contains(query)
+                            || query.length() > 1 && listModel.getReplacement() != null && listModel.getReplacement().to.flattenToString().contains(query)
+                            || query.length() > 1 && listModel.getApp() != null && listModel.getApp().getPkgName().contains(query)
+                            || listModel.getApp() != null && appLabelSearchFilter.matches(query, listModel.getApp().getAppLabel());
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> replacements.clear())
@@ -144,16 +158,16 @@ public class TrampolineViewModel extends AndroidViewModel {
         XLog.d("exportToClipboard: %s", JsonFormatter.toPrettyJson(ComponentNameBrief.unflattenFromString("com.a.c/.xxx")));
         XLog.d("exportToClipboard: %s", componentReplacementKey);
         disposables.add(Single.create((SingleOnSubscribe<String>) emitter -> {
-            List<ComponentReplacement> componentReplacements = new ArrayList<>();
-            for (ActivityTrampolineModel model : replacements) {
-                if (componentReplacementKey == null
-                        || componentReplacementKey.equals(model.getReplacement().from.flattenToString())) {
-                    componentReplacements.add(model.getReplacement());
-                }
-            }
-            XLog.d("exportToClipboard: %s", Arrays.toString(componentReplacements.toArray()));
-            emitter.onSuccess(JsonFormatter.toPrettyJson(componentReplacements));
-        }).observeOn(AndroidSchedulers.mainThread())
+                    List<ComponentReplacement> componentReplacements = new ArrayList<>();
+                    for (ActivityTrampolineModel model : replacements) {
+                        if (componentReplacementKey == null
+                                || componentReplacementKey.equals(model.getReplacement().from.flattenToString())) {
+                            componentReplacements.add(model.getReplacement());
+                        }
+                    }
+                    XLog.d("exportToClipboard: %s", Arrays.toString(componentReplacements.toArray()));
+                    emitter.onSuccess(JsonFormatter.toPrettyJson(componentReplacements));
+                }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(content -> {
                     ClipboardManager cmb = (ClipboardManager) getApplication().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -168,22 +182,22 @@ public class TrampolineViewModel extends AndroidViewModel {
     void exportToFile(OutputStream os, @Nullable String componentReplacementKey) {
         XLog.d("exportToFile: %s", componentReplacementKey);
         disposables.add(Single.create((SingleOnSubscribe<Boolean>) emitter -> {
-            List<ComponentReplacement> componentReplacements = new ArrayList<>();
-            for (ActivityTrampolineModel model : replacements) {
-                if (componentReplacementKey == null
-                        || componentReplacementKey.equals(model.getReplacement().from.flattenToString())) {
-                    componentReplacements.add(model.getReplacement());
-                }
-            }
-            String contentToWrite = JsonFormatter.toPrettyJson(componentReplacements);
-            //noinspection UnstableApiUsage
-            InputStream in = CharSource.wrap(contentToWrite).asByteSource(Charset.defaultCharset()).openStream();
-            //noinspection UnstableApiUsage
-            emitter.onSuccess(ByteStreams.copy(in, os) > 0);
+                    List<ComponentReplacement> componentReplacements = new ArrayList<>();
+                    for (ActivityTrampolineModel model : replacements) {
+                        if (componentReplacementKey == null
+                                || componentReplacementKey.equals(model.getReplacement().from.flattenToString())) {
+                            componentReplacements.add(model.getReplacement());
+                        }
+                    }
+                    String contentToWrite = JsonFormatter.toPrettyJson(componentReplacements);
+                    //noinspection UnstableApiUsage
+                    InputStream in = CharSource.wrap(contentToWrite).asByteSource(Charset.defaultCharset()).openStream();
+                    //noinspection UnstableApiUsage
+                    emitter.onSuccess(ByteStreams.copy(in, os) > 0);
 
-            IoUtils.closeQuietly(in);
-            IoUtils.closeQuietly(os);
-        }).subscribeOn(Schedulers.io())
+                    IoUtils.closeQuietly(in);
+                    IoUtils.closeQuietly(os);
+                }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(res -> {
                     if (res) exportSuccessSignal.set(exportSuccessSignal.get() + 1);
@@ -295,6 +309,16 @@ public class TrampolineViewModel extends AndroidViewModel {
 
     public ObservableInt getImportFailSignal() {
         return this.importFailSignal;
+    }
+
+    void clearSearchText() {
+        setSearchText(null);
+    }
+
+    void setSearchText(String query) {
+        queryText.set(query);
+        disposables.clear();
+        loadModels();
     }
 
     public interface TrampolineLoader {

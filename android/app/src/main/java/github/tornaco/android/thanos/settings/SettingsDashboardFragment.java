@@ -53,6 +53,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
+import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.Optional;
@@ -810,7 +811,10 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
         new MaterialAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.pref_title_rss_e)
                 .setMessage(R.string.pref_summary_rss_e)
-                .setPositiveButton("TG", (dialog, which) -> BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL)).show();
+                .setPositiveButton("QQ", (dialog, which) -> {
+                    ClipboardUtils.copyToClipboard(requireActivity(), "thanox QQ", BuildProp.THANOX_QQ_PRIMARY);
+                    Toast.makeText(requireContext(), R.string.common_toast_copied_to_clipboard, Toast.LENGTH_LONG).show();
+                }).setNegativeButton("TG", (dialog, which) -> BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL)).show();
     }
 
     private void showBuildProp() {

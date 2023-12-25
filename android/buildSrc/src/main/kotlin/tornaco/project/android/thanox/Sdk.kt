@@ -47,7 +47,9 @@ fun cmake(): String {
             ?.maxByOrNull { it.name.subSequence(0, 6).toString().replace(".", "").toInt() }
             ?: throw FileNotFoundException("Can not find any cmake under: $cmakeDir")
 
-    return latestCmake.name
+    return latestCmake.name.also {
+        println("latestCmake: $latestCmake")
+    }
 }
 
 private fun sdkDir(): String {

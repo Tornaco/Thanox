@@ -20,7 +20,7 @@ package now.fortuitous.thanos.main
 import android.content.Context
 import androidx.compose.runtime.Composable
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.main.NavActivityPlugin
+import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.onboarding.OnBoardingActivity
@@ -42,7 +42,7 @@ class NavActivity : ComposeThemeActivity() {
     @Composable
     override fun Content() {
         // Block
-        if (NavActivityPlugin.blockOnCreate(thisActivity())) {
+        if (blockOnCreate(thisActivity())) {
             finish()
             return
         }

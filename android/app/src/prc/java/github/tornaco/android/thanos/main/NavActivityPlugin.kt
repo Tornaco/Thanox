@@ -18,13 +18,8 @@
 package github.tornaco.android.thanos.main
 
 import android.app.Activity
-import github.tornaco.android.thanos.BuildProp
 
-object NavActivityPlugin {
-    private val privacyAgreementKey get() = "PREF_PRIVACY_STATEMENT_ACCEPTED_V_" + BuildProp.THANOS_VERSION_CODE
-    private var isPrivacyDialogShowing = false
-
-    fun blockOnCreate(activity: Activity): Boolean {
-        return false
-    }
+inline fun blockOnCreate(activity: Activity, noop: () -> Unit = {}): Boolean {
+    noop()
+    return false
 }

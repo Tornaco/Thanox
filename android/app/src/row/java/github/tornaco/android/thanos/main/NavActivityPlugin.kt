@@ -18,15 +18,13 @@
 package github.tornaco.android.thanos.main
 
 import android.app.Activity
-import github.tornaco.android.thanos.app.PLayLvlCheckActivity
+import now.fortuitous.app.PLayLvlCheckActivity
+import now.fortuitous.app.donate.DonateSettings
 
-object NavActivityPlugin {
-    fun blockOnCreate(activity: Activity): Boolean {
-        return if (!github.tornaco.android.thanos.app.Init.isLVLChecked(activity)
-            && github.tornaco.android.thanos.app.Init.s == 0
-        ) {
-            PLayLvlCheckActivity.Starter.start(activity)
-            true
-        } else false
-    }
+inline fun blockOnCreate(activity: Activity, noop: () -> Unit = {}): Boolean {
+    noop()
+    return if (!DonateSettings.isActivated(activity)) {
+        PLayLvlCheckActivity.Starter.start(activity)
+        true
+    } else false
 }

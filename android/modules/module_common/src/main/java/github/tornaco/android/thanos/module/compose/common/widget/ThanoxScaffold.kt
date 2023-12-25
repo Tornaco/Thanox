@@ -22,17 +22,41 @@ package github.tornaco.android.thanos.module.compose.common.widget
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetScaffoldState
-import androidx.compose.material.FabPosition
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.rememberBottomSheetScaffoldState
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.contentColorFor
+import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -60,14 +84,13 @@ fun ThanoxBottomSheetScaffold(
     val contentColor = contentColorFor(containerColor)
     CompositionLocalProvider(LocalContentColor provides contentColor) {
         val appbarState = rememberTopAppBarState()
-        val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior(appbarState) }
+        val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(appbarState)
         BottomSheetScaffold(
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             scaffoldState = scaffoldState,
             topBar = {
                 ThanoxSmallTopAppBarContainer(
                     searchBarState,
-                    scrollBehavior,
                     title,
                     actions,
                     onBackPressed
@@ -82,7 +105,6 @@ fun ThanoxBottomSheetScaffold(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThanoxSmallAppBarScaffold(
     modifier: Modifier = Modifier,
@@ -90,99 +112,68 @@ fun ThanoxSmallAppBarScaffold(
     actions: @Composable (RowScope.() -> Unit) = {},
     onBackPressed: (() -> Unit)?,
     floatingActionButton: @Composable () -> Unit = {},
-    floatingActionButtonPosition: FabPosition = FabPosition.End,
-    isFloatingActionButtonDocked: Boolean = false,
     searchBarState: SearchBarState = rememberSearchBarState(),
     bottomBar: @Composable () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
-    val containerColor = MaterialTheme.colorScheme.surfaceVariant
-    val contentColor = contentColorFor(containerColor)
-    CompositionLocalProvider(LocalContentColor provides contentColor) {
-        val appbarState = rememberTopAppBarState()
-        val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior(appbarState) }
-        com.google.accompanist.insets.ui.Scaffold(
-            modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-            topBar = {
-                ThanoxSmallTopAppBarContainer(
-                    searchBarState,
-                    scrollBehavior,
-                    title,
-                    actions,
-                    onBackPressed
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            ThanoxSmallTopAppBarContainer(
+                searchBarState,
+                title,
+                actions,
+                onBackPressed
+            )
+        },
+        floatingActionButton = floatingActionButton,
+        bottomBar = {
+            Column {
+                bottomBar()
+                Spacer(
+                    Modifier
+                        .navigationBarsHeight()
+                        .fillMaxWidth()
                 )
-            },
-            floatingActionButton = floatingActionButton,
-            floatingActionButtonPosition = floatingActionButtonPosition,
-            isFloatingActionButtonDocked = isFloatingActionButtonDocked,
-            bottomBar = {
-                Column {
-                    bottomBar()
-                    // We add a spacer as a bottom bar, which is the same height as
-                    // the navigation bar
-                    Spacer(
-                        Modifier
-                            .navigationBarsHeight()
-                            .fillMaxWidth()
-                    )
-                }
-            }, content = {
-                content(it)
             }
-        )
-    }
+        }, content = {
+            content(it)
+        }
+    )
 }
 
 @Composable
 private fun ThanoxSmallTopAppBarContainer(
     searchBarState: SearchBarState = rememberSearchBarState(),
-    scrollBehavior: TopAppBarScrollBehavior,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
     onBackPressed: (() -> Unit)? = null,
 ) {
-    val backgroundColors = TopAppBarDefaults.smallTopAppBarColors()
-    val backgroundColor = backgroundColors.containerColor(
-        colorTransitionFraction = scrollBehavior.state.overlappedFraction
-    ).value
-    val foregroundColors = TopAppBarDefaults.smallTopAppBarColors(
-        containerColor = Color.Transparent,
-        scrolledContainerColor = Color.Transparent
-    )
-    Surface(color = backgroundColor) {
+    Surface {
         AnimatedVisibility(
             visible = searchBarState.showSearchBar,
             enter = fadeIn(), exit = fadeOut()
         ) {
-            SearchBar(scrollBehavior, searchBarState)
+            SearchBar(searchBarState)
         }
         AnimatedVisibility(
             visible = !searchBarState.showSearchBar,
             enter = fadeIn(),
             exit = fadeOut()
         ) {
-            ThanoxSmallTopAppBar(foregroundColors, title, actions, onBackPressed, scrollBehavior)
+            ThanoxSmallTopAppBar(title, actions, onBackPressed)
         }
     }
 }
 
 @Composable
 private fun ThanoxSmallTopAppBar(
-    foregroundColors: TopAppBarColors,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
     onBackPressed: (() -> Unit)? = null,
-    scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    SmallTopAppBar(
-        colors = foregroundColors,
-        modifier = Modifier
-            .padding(
-                rememberInsetsPaddingValues(
-                    LocalWindowInsets.current.statusBars,
-                    applyBottom = false,
-                )
-            ),
+    androidx.compose.material3.TopAppBar(
+        modifier = Modifier,
         title = title,
         actions = actions,
         navigationIcon = {
@@ -197,18 +188,11 @@ private fun ThanoxSmallTopAppBar(
                 }
             }
         },
-        scrollBehavior = scrollBehavior
     )
 }
 
 @Composable
-private fun SearchBar(scrollBehavior: TopAppBarScrollBehavior, searchBarState: SearchBarState) {
-    val foregroundColors = TopAppBarDefaults.smallTopAppBarColors(
-        containerColor = Color.Transparent,
-        scrolledContainerColor = Color.Transparent
-    )
-    val scrollFraction = scrollBehavior.state.overlappedFraction
-    val appBarContainerColor by foregroundColors.containerColor(scrollFraction)
+private fun SearchBar(searchBarState: SearchBarState) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -219,7 +203,6 @@ private fun SearchBar(scrollBehavior: TopAppBarScrollBehavior, searchBarState: S
                 )
             )
             .padding(horizontal = 4.dp, vertical = 4.dp),
-        color = appBarContainerColor,
     ) {
         val focusRequester = remember {
             FocusRequester()
@@ -254,8 +237,9 @@ private fun SearchTextField(searchBarState: SearchBarState, focusRequester: Focu
             .fillMaxWidth()
             .focusRequester(focusRequester),
         value = searchBarState.keyword,
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.Transparent,
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),

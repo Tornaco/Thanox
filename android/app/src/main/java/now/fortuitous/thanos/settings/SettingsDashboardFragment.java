@@ -70,6 +70,7 @@ import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.Optional;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.main.NavActivityPluginKt;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.theme.Theme;
 import github.tornaco.android.thanos.util.ActivityUtils;
@@ -86,7 +87,6 @@ import github.tornaco.permission.requester.RuntimePermissions;
 import github.tornaco.thanos.android.noroot.ServiceBindings;
 import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
-import now.fortuitous.app.donate.DonateActivity;
 import now.fortuitous.app.donate.DonateSettings;
 import now.fortuitous.thanos.apps.AppDetailsActivity;
 import now.fortuitous.thanos.pref.AppPreference;
@@ -788,7 +788,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
         Preference donatePref = findPreference(getString(R.string.key_donate));
         donatePref.setOnPreferenceClickListener(
                 preference -> {
-                    DonateActivity.start(getActivity());
+                    NavActivityPluginKt.launchSubscribeActivity(requireActivity(), () -> null);
                     return true;
                 });
 

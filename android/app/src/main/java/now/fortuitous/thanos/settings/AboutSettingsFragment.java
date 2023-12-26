@@ -36,10 +36,10 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
+import github.tornaco.android.thanos.main.NavActivityPluginKt;
 import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
-import now.fortuitous.app.donate.DonateActivity;
 import now.fortuitous.app.donate.DonateSettings;
 
 @RuntimePermissions
@@ -113,7 +113,7 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
         Preference donatePref = findPreference(getString(R.string.key_donate));
         donatePref.setOnPreferenceClickListener(
                 preference -> {
-                    DonateActivity.start(getActivity());
+                    NavActivityPluginKt.launchSubscribeActivity(requireActivity(), () -> null);
                     return true;
                 });
 

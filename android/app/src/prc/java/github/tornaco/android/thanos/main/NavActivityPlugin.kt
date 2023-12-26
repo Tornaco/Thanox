@@ -18,8 +18,14 @@
 package github.tornaco.android.thanos.main
 
 import android.app.Activity
+import now.fortuitous.app.donate.DonateActivity
 
 inline fun blockOnCreate(activity: Activity, noop: () -> Unit = {}): Boolean {
     noop()
     return false
+}
+
+inline fun launchSubscribeActivity(activity: Activity, noop: () -> Unit = {}) {
+    noop()
+    DonateActivity.start(activity)
 }

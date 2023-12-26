@@ -9,7 +9,7 @@
         tools:targetApi="n_mr1">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="github.tornaco.android.thanos.power.SmartFreezeActivity"
+            android:targetClass="now.fortuitous.thanos.power.SmartFreezeActivity"
             android:targetPackage="github.tornaco.android.thanos.pro" />
         <categories android:name="android.shortcut.thanox.pro.main" />
     </shortcut>
@@ -23,7 +23,7 @@
         tools:targetApi="n_mr1">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="github.tornaco.android.thanos.process.v2.ProcessManageActivityV2Delegate"
+            android:targetClass="now.fortuitous.thanos.process.v2.ProcessManageActivityV2Delegate"
             android:targetPackage="github.tornaco.android.thanos.pro" />
         <categories android:name="android.shortcut.thanox.pro.main" />
     </shortcut>

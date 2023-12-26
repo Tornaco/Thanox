@@ -19,17 +19,32 @@ package github.tornaco.thanos.android.module.profile.online
 
 import android.content.Context
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Tag
+import androidx.compose.material.icons.filled.Update
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,7 +63,12 @@ import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
-import github.tornaco.android.thanos.module.compose.common.widget.*
+import github.tornaco.android.thanos.module.compose.common.widget.NoContent
+import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.android.module.profile.R
@@ -87,9 +107,11 @@ class OnlineProfileActivity : ComposeThemeActivity() {
                     is Event.ImportSuccess -> {
                         ToastUtils.ok(context)
                     }
+
                     is Event.ImportFail -> {
                         ToastUtils.nook(context, event.error)
                     }
+
                     is Event.ImportFailRuleWithSameNameAlreadyExists -> {
                         ToastUtils.nook(context, "${event.name} already exists")
                     }
@@ -126,9 +148,11 @@ class OnlineProfileActivity : ComposeThemeActivity() {
                 }
             ) {
                 if (state.files.isEmpty() && !state.isLoading) {
-                    NoContent(modifier = Modifier
-                        .padding(contentPadding)
-                        .fillMaxSize())
+                    NoContent(
+                        modifier = Modifier
+                            .padding(contentPadding)
+                            .fillMaxSize()
+                    )
                 } else {
                     ProfileList(contentPadding, state,
                         import = {
@@ -174,7 +198,8 @@ private fun ProfileItem(
     update: (OnlineProfileItem) -> Unit
 ) {
     val activity = LocalContext.current.requireActivity()
-    val cardBgColor = getColorAttribute(R.attr.appCardBackground)
+    val cardBgColor =
+        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.appCardBackground)
     val secondaryTextColor = Color(0xFF757575)
     Box(
         modifier = Modifier
@@ -256,7 +281,7 @@ private fun ProfileItem(
                             contentDescription = "Import",
                             modifier = Modifier.padding(end = 8.dp)
                         )
-                        Text(text = stringResource(id = R.string.common_menu_title_import))
+                        Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_import))
                     }
                 } else {
                     if (profile.hasUpdate) {
@@ -270,7 +295,7 @@ private fun ProfileItem(
                                 contentDescription = "Update",
                                 modifier = Modifier.padding(end = 8.dp)
                             )
-                            Text(text = stringResource(id = R.string.common_menu_title_update))
+                            Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_update))
                         }
                     } else {
                         OutlinedButton(
@@ -283,7 +308,7 @@ private fun ProfileItem(
                                 contentDescription = "Re-Import",
                                 modifier = Modifier.padding(end = 8.dp)
                             )
-                            Text(text = stringResource(id = R.string.common_menu_title_re_import))
+                            Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_re_import))
                         }
                     }
                 }

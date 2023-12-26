@@ -86,10 +86,10 @@ class AppOpsListViewModel @Inject constructor(@ApplicationContext private val co
                                 iconRes = kotlin.runCatching {
                                     array.getResourceId(
                                         code,
-                                        R.drawable.ic_remix_settings_2_fill /* fallback */
+                                        github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill /* fallback */
                                     )
                                 }.getOrElse {
-                                    R.drawable.ic_remix_settings_2_fill
+                                    github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill
                                 }.also {
                                     XLog.d("Res: $it")
                                 }

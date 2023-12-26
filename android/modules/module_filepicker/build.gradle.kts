@@ -1,24 +1,13 @@
-import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.resPrefix
-import tornaco.project.android.thanox.Libs
 
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.agp.lib)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+    namespace = "com.nononsenseapps.filepicker"
 
     buildFeatures {
         compose = false
@@ -34,12 +23,18 @@ android {
     resourcePrefix = resPrefix
 }
 dependencies {
-    implementation(Libs.AndroidX.appCompat)
-    implementation(Libs.AndroidX.material)
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.AndroidX.swipeRefreshLayout)
-    implementation(Libs.Others.glide)
-    annotationProcessor(Libs.Others.glideCompiler)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.preference)
+    implementation(libs.constraint.layout)
+
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))

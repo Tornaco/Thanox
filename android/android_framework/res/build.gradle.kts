@@ -1,22 +1,9 @@
-import tornaco.project.android.thanox.Configs
-
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.agp.lib)
 }
 
 android {
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+    namespace = "github.tornaco.android.thanos.res"
 
     buildFeatures {
         compose = false

@@ -73,7 +73,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -149,7 +148,7 @@ fun NavScreen() {
                 isShowRebootConfirmationDialog = true
             }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_remix_restart_line),
+                    painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_restart_line),
                     contentDescription = "Reboot"
                 )
             }
@@ -157,7 +156,7 @@ fun NavScreen() {
                 now.fortuitous.thanos.settings.SettingsDashboardActivity.start(activity)
             }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_remix_settings_line),
+                    painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_line),
                     contentDescription = "Settings"
                 )
             }
@@ -292,7 +291,6 @@ private fun NavContent(
     Column(
         modifier = Modifier
             .padding(contentPadding)
-            .navigationBarsPadding()
             .fillMaxSize()
             .background(color = Color(windowBgColor))
             .verticalScroll(rememberScrollState())
@@ -329,7 +327,8 @@ private fun FeatureGroup(
     onItemClick: (FeatureItem) -> Unit,
     createShortcut: (FeatureItem) -> Unit,
 ) {
-    val cardBgColor = getColorAttribute(R.attr.appCardBackground)
+    val cardBgColor =
+        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.appCardBackground)
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -463,7 +462,7 @@ private fun RestartDeviceConfirmationDialog(
     ThanoxAlertDialog(title = {
         Text(text = stringResource(id = R.string.reboot_now))
     }, text = {
-        Text(text = stringResource(id = R.string.common_dialog_message_are_you_sure))
+        Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure))
     }, onDismissRequest = onDismissRequest, confirmButton = {
         TextButton(onClick = {
             onRebootConfirmed()

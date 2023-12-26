@@ -71,7 +71,7 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
         appListFilterAdapter =
                 new CommonAppListFilterAdapter(
                         (appInfo, itemView) -> {
-                            String noSelectionStr = getString(R.string.common_text_value_not_set);
+                            String noSelectionStr = getString(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
                             List<Fields> fields =
                                     ThanosManager.from(getApplicationContext())
                                             .getPrivacyManager()
@@ -166,13 +166,13 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
         if (R.id.action_batch_select == item.getItemId()) {
             List<Fields> allFs =
                     ThanosManager.from(thisActivity()).getPrivacyManager().getAllFieldsProfiles();
-            String noSelectionStr = getString(R.string.common_text_value_not_set);
+            String noSelectionStr = getString(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
             Fields dummyNoop = Fields.builder().label(noSelectionStr).id(null).build();
             allFs.add(dummyNoop);
             List<String> labels = CollectionUtils.mappingAsString(allFs, Fields::getLabel);
 
-            new MaterialAlertDialogBuilder(thisActivity(), R.style.DialogThemeCommon)
-                    .setTitle(R.string.common_menu_title_batch_select)
+            new MaterialAlertDialogBuilder(thisActivity(), github.tornaco.android.thanos.module.common.R.style.DialogThemeCommon)
+                    .setTitle(github.tornaco.android.thanos.module.common.R.string.common_menu_title_batch_select)
                     .setCancelable(true)
                     .setNegativeButton(
                             android.R.string.cancel,
@@ -196,7 +196,7 @@ public class DataCheatActivity extends CommonAppListFilterActivity {
     private void applyBatchSelection(String id) {
         PrivacyManager priv = ThanosManager.from(thisActivity()).getPrivacyManager();
         ModernProgressDialog p = new ModernProgressDialog(thisActivity());
-        p.setTitle(R.string.common_menu_title_batch_select);
+        p.setTitle(github.tornaco.android.thanos.module.common.R.string.common_menu_title_batch_select);
         p.show();
         CollectionUtils.consumeRemaining(
                 appListFilterAdapter.getListModels(),

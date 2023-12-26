@@ -123,9 +123,11 @@ private fun MainNavHeaderContent(
     headerInfo: StatusHeaderInfo,
     onHeaderClick: () -> Unit,
 ) {
-    val cardBgColor = getColorAttribute(R.attr.appCardBackground)
-    val primaryContainerColor = getColorAttribute(R.attr.colorPrimaryContainer)
-    val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
+    val cardBgColor =
+        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.appCardBackground)
+    val primaryContainerColor =
+        getColorAttribute(com.google.android.material.R.attr.colorPrimaryContainer)
+    val onSurfaceColor = getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
 
     Box(
         modifier = modifier
@@ -188,8 +190,9 @@ private fun CpuProgressBar(
     headerInfo: StatusHeaderInfo,
     onSurfaceColor: Int,
 ) {
-    val progressColor = getColorAttribute(R.attr.colorPrimary)
-    val progressTrackColor = getColorAttribute(R.attr.progressTrackColor)
+    val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
+    val progressTrackColor =
+        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
 
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
         Box(
@@ -244,7 +247,7 @@ private fun CpuProgressBar(
 
 @Composable
 private fun AppCpuUsage(usage: AppCpuUsage) {
-    val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
+    val onSurfaceColor = getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
     Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
         AppIcon(modifier = Modifier.size(16.dp), usage.appInfo)
         Text(
@@ -262,9 +265,10 @@ private fun MemProgressBar(
     headerInfo: StatusHeaderInfo,
     onSurfaceColor: Int,
 ) {
-    val progressColor = getColorAttribute(R.attr.colorPrimary)
-    val secondaryProgressColor = getColorAttribute(R.attr.colorTertiary)
-    val progressTrackColor = getColorAttribute(R.attr.progressTrackColor)
+    val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
+    val secondaryProgressColor = getColorAttribute(com.google.android.material.R.attr.colorTertiary)
+    val progressTrackColor =
+        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
 
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
         Box(
@@ -333,7 +337,8 @@ private fun MemStats(
         )
         TinySpacer()
         Column(modifier = Modifier) {
-            val onSurfaceColor = getColorAttribute(R.attr.colorOnSurface)
+            val onSurfaceColor =
+                getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
             Text(
                 modifier = Modifier,
                 textAlign = TextAlign.Center,

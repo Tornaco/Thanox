@@ -94,7 +94,7 @@ public class DataSettingsFragment extends BasePreferenceFragmentCompat {
         findPreference(getString(R.string.key_restore_default)).setOnPreferenceClickListener(preference -> {
             new MaterialAlertDialogBuilder(getActivity())
                     .setTitle(R.string.pre_title_restore_default)
-                    .setMessage(R.string.common_dialog_message_are_you_sure)
+                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) ->
                             ThanosManager.from(getActivity())
                                     .ifServiceInstalled(thanosManager -> {

@@ -1,23 +1,9 @@
-import tornaco.project.android.thanox.Configs
-import tornaco.project.android.thanox.Libs
-
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.agp.lib)
 }
 
 android {
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+    namespace = "com.stardust.autojs.apkbuilder"
 
     buildFeatures {
         compose = false
@@ -33,7 +19,7 @@ android {
 
 dependencies {
     implementation(files("libs/tiny-sign-0.9.jar"))
-    implementation(Libs.Others.apacheCommonIo)
-    implementation(Libs.Others.apacheCommonCodec)
+    implementation(libs.commons.io)
+    implementation(libs.commons.codec)
 }
 

@@ -354,7 +354,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
     // Null means all.
     private void onRequestExport(@Nullable String componentReplacementKey) {
-        String[] items = getResources().getStringArray(R.array.module_common_export_selections);
+        String[] items = getResources().getStringArray(github.tornaco.android.thanos.module.common.R.array.module_common_export_selections);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.module_activity_trampoline_title_export_comp_replacements)
                 .setSingleChoiceItems(items, -1,
@@ -422,7 +422,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
     }
 
     private void onRequestImport() {
-        String[] items = getResources().getStringArray(R.array.module_common_import_selections);
+        String[] items = getResources().getStringArray(github.tornaco.android.thanos.module.common.R.array.module_common_import_selections);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.module_activity_trampoline_title_import_comp_replacements)
                 .setSingleChoiceItems(items, -1,

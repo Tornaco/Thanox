@@ -97,7 +97,7 @@ class NeedToRestartActivity : ComponentActivity() {
                     )
                 ),
             ) {
-                Box(modifier = Modifier.background(color = colorResource(id = R.color.md_red_a700))) {
+                Box(modifier = Modifier.background(color = colorResource(id = github.tornaco.android.thanos.module.common.R.color.md_red_a700))) {
                     Column(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Center,

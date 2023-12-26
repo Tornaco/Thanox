@@ -160,7 +160,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         if (!TextUtils.isEmpty(ruleIfEdit)) {
-            builder.setNeutralButton(R.string.common_menu_title_remove, (dialog, which) -> {
+            builder.setNeutralButton(github.tornaco.android.thanos.module.common.R.string.common_menu_title_remove, (dialog, which) -> {
                 thanosManager.getActivityManager().deleteStartRule(ruleIfEdit);
                 viewModel.start();
             });
@@ -191,7 +191,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
         new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(R.string.menu_title_rules)
                 .setMessage(R.string.feature_summary_start_restrict_rules)
-                .setNeutralButton(R.string.common_menu_title_wiki,
+                .setNeutralButton(github.tornaco.android.thanos.module.common.R.string.common_menu_title_wiki,
                         (dialog, which) -> BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_START_RULES))
                 .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, null)

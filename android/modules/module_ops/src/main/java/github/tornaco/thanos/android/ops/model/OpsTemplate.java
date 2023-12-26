@@ -30,7 +30,7 @@ public class OpsTemplate {
             github.tornaco.android.thanos.core.secure.ops.OpsTemplate.LOCATION_TEMPLATE,
             R.string.module_ops_category_location,
             R.string.module_ops_category_location,
-            R.drawable.module_common_ic_settings_fill,
+            github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_settings_fill,
             0
     );
 
@@ -38,7 +38,7 @@ public class OpsTemplate {
             github.tornaco.android.thanos.core.secure.ops.OpsTemplate.PERSONAL_TEMPLATE,
             R.string.module_ops_category_personal,
             R.string.module_ops_category_personal,
-            R.drawable.module_common_ic_settings_fill,
+            github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_settings_fill,
             1
     );
 
@@ -46,7 +46,7 @@ public class OpsTemplate {
             github.tornaco.android.thanos.core.secure.ops.OpsTemplate.MESSAGING_TEMPLATE,
             R.string.module_ops_category_message,
             R.string.module_ops_category_message,
-            R.drawable.module_common_ic_settings_fill,
+            github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_settings_fill,
             2
     );
 
@@ -54,7 +54,7 @@ public class OpsTemplate {
             github.tornaco.android.thanos.core.secure.ops.OpsTemplate.MEDIA_TEMPLATE,
             R.string.module_ops_category_media,
             R.string.module_ops_category_media,
-            R.drawable.module_common_ic_settings_fill,
+            github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_settings_fill,
             3
     );
 
@@ -62,7 +62,7 @@ public class OpsTemplate {
             github.tornaco.android.thanos.core.secure.ops.OpsTemplate.DEVICE_TEMPLATE,
             R.string.module_ops_category_device,
             R.string.module_ops_category_device,
-            R.drawable.module_common_ic_settings_fill,
+            github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_settings_fill,
             4
     );
 
@@ -70,7 +70,7 @@ public class OpsTemplate {
             github.tornaco.android.thanos.core.secure.ops.OpsTemplate.RUN_IN_BACKGROUND_TEMPLATE,
             R.string.module_ops_category_bg,
             R.string.module_ops_category_bg,
-            R.drawable.module_common_ic_settings_fill,
+            github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_settings_fill,
             5
     );
 
@@ -80,7 +80,7 @@ public class OpsTemplate {
             github.tornaco.android.thanos.core.secure.ops.OpsTemplate.REMAINING_TEMPLATE,
             R.string.module_ops_category_remaining,
             R.string.module_ops_category_remaining,
-            R.drawable.module_common_ic_settings_fill,
+            github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_settings_fill,
             6
     );
 
@@ -93,7 +93,7 @@ public class OpsTemplate {
             MESSAGING_TEMPLATE,
             MEDIA_TEMPLATE,
             DEVICE_TEMPLATE,
-          //  RUN_IN_BACKGROUND_TEMPLATE,
+            //  RUN_IN_BACKGROUND_TEMPLATE,
             REMAINING_TEMPLATE
     };
 

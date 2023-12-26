@@ -207,7 +207,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
                         AppInfo appInfo = new AppInfo();
                         appInfo.setPkgName(packageSet.getId());
                         appInfo.setObj(packageSet.getId());
-                        appInfo.setIconDrawable(R.drawable.module_common_ic_nothing);
+                        appInfo.setIconDrawable(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_nothing);
                         appInfo.setAppLabel(packageSet.getLabel());
                         appInfo.setArg3(packageSet.getCreateAt());
                         appInfo.setSelected(packageSet.isPrebuilt());

@@ -133,7 +133,7 @@ public class ExportPatchUi {
 
     private void onExportMagiskFilePickRequestResultQAsync(Intent data) {
         ModernProgressDialog dialog = new ModernProgressDialog(requireContext());
-        dialog.setMessage(R.string.common_text_wait_a_moment);
+        dialog.setMessage(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment);
         dialog.show();
         Completable.fromAction(() -> {
             boolean success = onExportMagiskFilePickRequestResultQ(data);

@@ -49,17 +49,17 @@ public class JsonLanguage {
 
         Resources resources = context.getResources();
         // Syntax Colors
-        codeView.addSyntaxPattern(PATTERN_HEX, resources.getColor(R.color.md_teal_600, null));
-        codeView.addSyntaxPattern(PATTERN_NUMBERS, resources.getColor(R.color.md_teal_600, null));
-        codeView.addSyntaxPattern(PATTERN_KEYWORDS, resources.getColor(R.color.md_green_700, null));
-        codeView.addSyntaxPattern(PATTERN_HANDLE, resources.getColor(R.color.md_red_600, null));
-        codeView.addSyntaxPattern(PATTERN_BUILTINS, resources.getColor(R.color.md_indigo_300, null));
-        codeView.addSyntaxPattern(PATTERN_ATTRIBUTE, resources.getColor(R.color.md_indigo_300, null));
-        codeView.addSyntaxPattern(PATTERN_OPERATION, resources.getColor(R.color.md_cyan_800, null));
-        codeView.addSyntaxPattern(PATTERN_JSON_KEY, resources.getColor(R.color.md_amber_700, null));
+        codeView.addSyntaxPattern(PATTERN_HEX, resources.getColor(github.tornaco.android.thanos.module.common.R.color.md_teal_600, null));
+        codeView.addSyntaxPattern(PATTERN_NUMBERS, resources.getColor(github.tornaco.android.thanos.module.common.R.color.md_teal_600, null));
+        codeView.addSyntaxPattern(PATTERN_KEYWORDS, resources.getColor(github.tornaco.android.thanos.module.common.R.color.md_green_700, null));
+        codeView.addSyntaxPattern(PATTERN_HANDLE, resources.getColor(github.tornaco.android.thanos.module.common.R.color.md_red_600, null));
+        codeView.addSyntaxPattern(PATTERN_BUILTINS, resources.getColor(github.tornaco.android.thanos.module.common.R.color.md_indigo_300, null));
+        codeView.addSyntaxPattern(PATTERN_ATTRIBUTE, resources.getColor(github.tornaco.android.thanos.module.common.R.color.md_indigo_300, null));
+        codeView.addSyntaxPattern(PATTERN_OPERATION, resources.getColor(github.tornaco.android.thanos.module.common.R.color.md_cyan_800, null));
+        codeView.addSyntaxPattern(PATTERN_JSON_KEY, resources.getColor(github.tornaco.android.thanos.module.common.R.color.md_amber_700, null));
 
         // Default Color
-        codeView.setTextColor(resources.getColor(R.color.md_indigo_300));
+        codeView.setTextColor(resources.getColor(github.tornaco.android.thanos.module.common.R.color.md_indigo_300));
         codeView.reHighlightSyntax();
     }
 

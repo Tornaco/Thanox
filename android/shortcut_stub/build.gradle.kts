@@ -1,15 +1,15 @@
-import Build_gradle.*
-import tornaco.project.android.thanox.*
+import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.keyStoreAlias
 import tornaco.project.android.thanox.Configs.keyStorePassword
+import tornaco.project.android.thanox.log
 
 plugins {
-    id("com.android.application")
+    alias(libs.plugins.agp.app)
 }
 
 android {
     defaultConfig {
-        applicationId = "github.tornaco.android.thanox.shortcut.stub"
+        namespace = "github.tornaco.android.thanox.shortcut.stub"
         vectorDrawables.useSupportLibrary = true
         versionName = Configs.thanoxVersionName
         versionCode = Configs.thanoxVersionCode
@@ -85,5 +85,5 @@ android {
 }
 
 dependencies {
-    implementation(files ("libs/base.jar"))
+    implementation(files("libs/base.jar"))
 }

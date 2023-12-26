@@ -86,7 +86,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
         if (R.id.action_fill_all_random == item.getItemId()) {
             new MaterialAlertDialogBuilder(requireActivity())
                     .setTitle(R.string.cheat_field_auto_gen)
-                    .setMessage(R.string.common_dialog_message_are_you_sure)
+                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(
                             android.R.string.ok,
                             (dialog, which) -> {

@@ -1,25 +1,11 @@
-import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.resPrefix
-import tornaco.project.android.thanox.Libs
 
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.agp.lib)
 }
 
 android {
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
+    namespace = "github.tornaco.android.thanox.module.activity.trampoline"
     buildFeatures {
         compose = false
         buildConfig = true
@@ -34,19 +20,21 @@ android {
     resourcePrefix = resPrefix
 }
 dependencies {
-    implementation(Libs.AndroidX.androidXCore)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.androidx.lifecycle.common)
+    implementation(libs.androidx.lifecycle.extensions)
 
-    implementation(Libs.AndroidX.appCompat)
-    implementation(Libs.AndroidX.material)
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.AndroidX.preference)
-    implementation(Libs.AndroidX.constraint)
-    implementation(Libs.AndroidX.swipeRefreshLayout)
+    implementation(libs.guava.android)
+    implementation(libs.gson)
+    implementation(libs.rxjava)
 
-    implementation(Libs.Others.guavaAndroid)
-
-    compileOnly(Libs.Others.lombok)
-    annotationProcessor(Libs.Others.lombok)
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))

@@ -118,7 +118,7 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
                 });
 
         if (DonateSettings.isActivated(getContext())) {
-            donatePref.setSummary(R.string.module_donate_donated);
+            donatePref.setSummary(github.tornaco.android.thanos.app.donate.R.string.module_donate_donated);
         }
 
         Preference licensePref = findPreference(getString(R.string.key_open_source_license));
@@ -144,7 +144,7 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
                 .setMessage(R.string.pref_summary_rss_e)
                 .setPositiveButton("QQ", (dialog, which) -> {
                     ClipboardUtils.copyToClipboard(requireActivity(), "thanox QQ", BuildProp.THANOX_QQ_PRIMARY);
-                    Toast.makeText(requireContext(), R.string.common_toast_copied_to_clipboard, Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), github.tornaco.android.thanos.module.common.R.string.common_toast_copied_to_clipboard, Toast.LENGTH_LONG).show();
                 }).setNegativeButton("TG", (dialog, which) -> BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL)).show();
     }
 

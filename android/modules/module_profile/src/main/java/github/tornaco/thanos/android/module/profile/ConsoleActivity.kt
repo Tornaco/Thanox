@@ -26,7 +26,13 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
@@ -41,7 +47,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.amrdeveloper.codeview.CodeView
 import com.elvishew.xlog.XLog
-import com.google.accompanist.insets.navigationBarsWithImePadding
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
@@ -112,14 +117,14 @@ private fun Console(
         AndroidView(
             modifier = Modifier
                 .fillMaxWidth()
-                .navigationBarsWithImePadding(),
+                .imePadding(),
             factory = { context ->
                 val binding =
                     ModuleProfileConsoleEditorBinding.inflate(LayoutInflater.from(context))
                 initView(context, binding)
 
                 binding.codeView.setText(
-                   state.codeText
+                    state.codeText
                 )
                 binding.codeView.doAfterTextChanged {
                     it?.toString()?.let { text ->

@@ -35,7 +35,7 @@ public class DialogUtils {
                 .setMessage(R.string.message_active_needed)
                 .setCancelable(true)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.common_menu_title_wiki,
+                .setPositiveButton(github.tornaco.android.thanos.module.common.R.string.common_menu_title_wiki,
                         (dialog, which) -> {
                             BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME);
                         })

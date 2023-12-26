@@ -85,7 +85,7 @@ fun StartChartScreen(
                 viewModel.clearRecordsForCurrentCategory()
             }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.module_common_ic_outline_delete_24),
+                    painter = painterResource(id = github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_outline_delete_24),
                     contentDescription = "Clear"
                 )
             }

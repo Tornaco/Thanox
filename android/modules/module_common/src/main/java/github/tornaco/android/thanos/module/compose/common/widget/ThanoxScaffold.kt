@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
@@ -64,9 +65,6 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.navigationBarsHeight
-import com.google.accompanist.insets.rememberInsetsPaddingValues
 
 
 @OptIn(ExperimentalMaterial3Api::class, androidx.compose.material.ExperimentalMaterialApi::class)
@@ -132,8 +130,8 @@ fun ThanoxSmallAppBarScaffold(
                 bottomBar()
                 Spacer(
                     Modifier
-                        .navigationBarsHeight()
                         .fillMaxWidth()
+                        .navigationBarsPadding()
                 )
             }
         }, content = {
@@ -196,12 +194,6 @@ private fun SearchBar(searchBarState: SearchBarState) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(
-                rememberInsetsPaddingValues(
-                    LocalWindowInsets.current.statusBars,
-                    applyBottom = false,
-                )
-            )
             .padding(horizontal = 4.dp, vertical = 4.dp),
     ) {
         val focusRequester = remember {

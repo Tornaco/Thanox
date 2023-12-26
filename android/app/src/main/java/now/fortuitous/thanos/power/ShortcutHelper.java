@@ -97,7 +97,7 @@ class ShortcutHelper {
         Files.createParentDirs(iconPath);
         Bitmap iconBitmap = GlideUtils.loadInCurrentThread(context, appInfo);
         if (iconBitmap == null) {
-            iconBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_fallback_app_icon);
+            iconBitmap = BitmapFactory.decodeResource(context.getResources(), github.tornaco.android.thanos.module.common.R.mipmap.ic_fallback_app_icon);
         }
         boolean compressed = iconBitmap.compress(Bitmap.CompressFormat.PNG, 100, Files.asByteSink(iconPath).openStream());
         if (!compressed) {

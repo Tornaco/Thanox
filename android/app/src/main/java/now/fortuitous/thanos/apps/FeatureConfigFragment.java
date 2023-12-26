@@ -260,7 +260,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         ThanosManager thanos = ThanosManager.from(getContext());
         ViewAwarePreference pref = findPreference(getString(R.string.key_app_feature_config_privacy_cheat));
         Fields currentMode = thanos.getPrivacyManager().getSelectedFieldsProfileForPackage(appInfo.getPkgName(), PrivacyOp.OP_NO_OP);
-        String noSet = getString(R.string.common_text_value_not_set);
+        String noSet = getString(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
         Objects.requireNonNull(pref).setSummary(currentMode == null ? noSet : currentMode.getLabel());
 
         pref.setOnPreferenceClickListener(preference -> {

@@ -147,7 +147,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_OPS_BY_OPS,
                 iconRes = R.drawable.ic_nav_ops,
-                titleRes = R.string.module_ops_feature_title_ops_app_list,
+                titleRes = github.tornaco.thanos.android.ops.R.string.module_ops_feature_title_ops_app_list,
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_OPS,
                 themeColor = R.color.nav_icon_ops
             ),
@@ -158,7 +158,7 @@ object PrebuiltFeatures {
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_APPLOCK,
                 themeColor = R.color.nav_icon_app_lock,
                 menuItems = listOf(
-                    R.string.module_locker_title_settings to {
+                    github.tornaco.practice.honeycomb.locker.R.string.module_locker_title_settings to {
                         LockSettingsActivity.start(it)
                     }
                 )
@@ -173,7 +173,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_OP_REMIND,
                 iconRes = R.drawable.ic_nav_op_remind,
-                titleRes = R.string.module_ops_feature_title_ops_remind_list,
+                titleRes = github.tornaco.thanos.android.ops.R.string.module_ops_feature_title_ops_remind_list,
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_OPS_REMINDER,
                 themeColor = R.color.nav_icon_op_remind
             )
@@ -186,24 +186,24 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_TRAMPOLINE,
                 iconRes = R.drawable.ic_nav_activity_replacement,
-                titleRes = R.string.module_activity_trampoline_app_name_abbr,
+                titleRes = github.tornaco.android.thanox.module.activity.trampoline.R.string.module_activity_trampoline_app_name_abbr,
                 requiredFeature = BuildProp.THANOX_FEATURE_APP_TRAMPOLINE,
                 themeColor = R.color.nav_icon_activity_replacement
             ),
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_PROFILE,
                 iconRes = R.drawable.ic_nav_profile,
-                titleRes = R.string.module_profile_feature_name,
+                titleRes = github.tornaco.thanos.android.module.profile.R.string.module_profile_feature_name,
                 requiredFeature = BuildProp.THANOX_FEATURE_PROFILE,
                 themeColor = R.color.nav_icon_profile,
                 menuItems = listOf(
-                    R.string.module_profile_rule_wiki to {
+                    github.tornaco.thanos.android.module.profile.R.string.module_profile_rule_wiki to {
                         BrowserUtils.launch(it, BuildProp.THANOX_URL_DOCS_PROFILE)
                     },
-                    R.string.module_profile_rule_impor_example to {
+                    github.tornaco.thanos.android.module.profile.R.string.module_profile_rule_impor_example to {
                         ProfileExampleActivity.Starter.start(it)
                     },
-                    R.string.module_profile_rule_online to { activity ->
+                    github.tornaco.thanos.android.module.profile.R.string.module_profile_rule_online to { activity ->
                         withSubscriptionStatus(activity) {
                             if (it) {
                                 OnlineProfileActivity.Starter.start(activity)
@@ -212,13 +212,13 @@ object PrebuiltFeatures {
                             }
                         }
                     },
-                    R.string.module_profile_title_global_var to {
+                    github.tornaco.thanos.android.module.profile.R.string.module_profile_title_global_var to {
                         GlobalVarListActivity.start(it)
                     },
-                    R.string.module_profile_title_rule_engine to {
+                    github.tornaco.thanos.android.module.profile.R.string.module_profile_title_rule_engine to {
                         RuleEngineSettingsActivity.start(it)
                     },
-                    R.string.module_profile_title_action_console to { activity ->
+                    github.tornaco.thanos.android.module.profile.R.string.module_profile_title_action_console to { activity ->
                         withSubscriptionStatus(activity) {
                             if (it) {
                                 ConsoleActivity.Starter.start(activity)
@@ -227,7 +227,7 @@ object PrebuiltFeatures {
                             }
                         }
                     },
-                    R.string.module_profile_title_log to {
+                    github.tornaco.thanos.android.module.profile.R.string.module_profile_title_log to {
                         LogActivity.Starter.start(it)
                     },
                 )
@@ -265,7 +265,7 @@ object PrebuiltFeatures {
     )
 
     private val notification = FeatureItemGroup(
-        titleRes = R.string.module_notification_recorder_feature_title_notification_center,
+        titleRes = github.tornaco.android.thanox.module.notification.recorder.R.string.module_notification_recorder_feature_title_notification_center,
         items = listOf(
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION,
@@ -277,14 +277,14 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER,
                 iconRes = R.drawable.ic_nav_nr,
-                titleRes = R.string.module_notification_recorder_feature_title_notification_recorder,
+                titleRes = github.tornaco.android.thanox.module.notification.recorder.R.string.module_notification_recorder_feature_title_notification_recorder,
                 requiredFeature = BuildProp.THANOX_FEATURE_EXT_N_RECORDER,
                 themeColor = R.color.nav_icon_nr,
                 menuItems = listOf(
-                    R.string.module_notification_recorder_stats to {
+                    github.tornaco.android.thanox.module.notification.recorder.R.string.module_notification_recorder_stats to {
                         StatsActivity.Starter.start(it)
                     },
-                    R.string.module_notification_recorder_settings to {
+                    github.tornaco.android.thanox.module.notification.recorder.R.string.module_notification_recorder_settings to {
                         NotificationRecordSettingsActivity.start(it)
                     }
                 )
@@ -292,7 +292,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_WECHAT_PUSH,
                 iconRes = R.drawable.ic_nav_wechat_push,
-                titleRes = R.string.module_push_message_delegate_title_wechat_proxy,
+                titleRes = github.tornaco.android.plugin.push.message.delegate.R.string.module_push_message_delegate_title_wechat_proxy,
                 requiredFeature = BuildProp.THANOX_FEATURE_PUSH_DELEGATE,
                 themeColor = R.color.nav_icon_wechat_push
             )
@@ -311,7 +311,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_GUIDE,
                 iconRes = R.drawable.ic_nav_guide,
-                titleRes = R.string.common_menu_title_wiki,
+                titleRes = github.tornaco.android.thanos.module.common.R.string.common_menu_title_wiki,
                 themeColor = R.color.nav_icon_guide
             )
         )

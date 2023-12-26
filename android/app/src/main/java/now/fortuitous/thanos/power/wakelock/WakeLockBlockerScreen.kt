@@ -269,7 +269,7 @@ private fun AppInfoItem(
                         Text(
                             modifier = Modifier.alignByBaseline(),
                             text = stringResource(
-                                id = R.string.module_common_user,
+                                id = github.tornaco.android.thanos.module.common.R.string.module_common_user,
                                 packageState.appInfo.userId
                             ),
                             fontSize = 10.sp
@@ -319,7 +319,7 @@ private fun AppInfoItem(
                     FilledTonalButton(onClick = {
                         batchSelect(packageState)
                     }) {
-                        Text(text = stringResource(id = R.string.common_menu_title_batch_select))
+                        Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_batch_select))
                     }
                 }
 

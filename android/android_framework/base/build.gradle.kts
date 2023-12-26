@@ -1,30 +1,27 @@
-import tornaco.project.android.thanox.Libs
 import tornaco.project.android.thanox.addAidlTask
 
 plugins {
-    id("java")
-    id("kotlin")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
     // Framework
     compileOnly(files("../../android_sdk/30/android-30.jar"))
 
-    compileOnly(Libs.Others.lombok)
-    annotationProcessor(Libs.Others.lombok)
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 
-    api(Libs.Others.rxJava2)
-    api(Libs.Others.gson)
-    api(Libs.Others.guavaAndroid)
+    implementation(libs.rxjava)
+    implementation(libs.gson)
 
-    compileOnly(Libs.Others.xposedApi)
+    implementation(libs.guava.android)
 
-    implementation(Libs.Kotlin.stdlib)
-}
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlin.stdlib.jdk8)
+    implementation(libs.kotlin.reflect)
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    implementation(libs.xposed.api)
 }
 
 tasks.withType<Checkstyle> {

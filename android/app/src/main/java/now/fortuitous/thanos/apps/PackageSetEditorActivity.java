@@ -116,7 +116,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
             return;
         }
         fab.setText(null);
-        fab.setIconResource(R.drawable.module_common_ic_add_fill);
+        fab.setIconResource(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill);
         fab.show();
         fab.setOnClickListener(
                 v -> {
@@ -161,7 +161,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_rename == item.getItemId()) {
-            EditTextDialog.show(thisActivity(), getString(R.string.common_menu_title_rename), packageSet.getLabel(),
+            EditTextDialog.show(thisActivity(), getString(github.tornaco.android.thanos.module.common.R.string.common_menu_title_rename), packageSet.getLabel(),
                     s -> {
                         ThanosManager.from(thisActivity()).getPkgManager().updatePackageSetLabel(s, packageSet.getId());
                         packageSet.setLabel(s);

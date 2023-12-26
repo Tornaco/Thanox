@@ -86,7 +86,7 @@ class WhiteListComponentViewerActivity : ComposeThemeActivity() {
             actions = {
                 IconButton(onClick = { inputState.show() }) {
                     Icon(
-                        painter = painterResource(id = R.drawable.module_common_ic_add_fill),
+                        painter = painterResource(id = github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill),
                         contentDescription = "Add"
                     )
                 }
@@ -110,7 +110,7 @@ class WhiteListComponentViewerActivity : ComposeThemeActivity() {
 
                         IconButton(onClick = { viewModel.remove(it) }) {
                             Icon(
-                                painter = painterResource(id = R.drawable.module_common_ic_outline_delete_24),
+                                painter = painterResource(id = github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_outline_delete_24),
                                 contentDescription = "Delete"
                             )
                         }

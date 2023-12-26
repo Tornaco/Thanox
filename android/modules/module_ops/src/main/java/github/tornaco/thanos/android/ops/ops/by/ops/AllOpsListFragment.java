@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
-import com.google.android.material.materialswitch.MaterialSwitch;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.widget.SwitchBar;
@@ -78,7 +77,7 @@ public class AllOpsListFragment extends Fragment {
             if (R.id.action_reset_all_modes == item.getItemId()) {
                 new MaterialAlertDialogBuilder(requireActivity())
                         .setTitle(R.string.module_ops_title_reset_ops_mode_for_all)
-                        .setMessage(R.string.common_dialog_message_are_you_sure)
+                        .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
                         .setPositiveButton(android.R.string.ok, (dialog, which) ->
                                 ThanosManager.from(requireContext())
                                         .ifServiceInstalled(thanosManager ->

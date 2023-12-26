@@ -162,7 +162,7 @@ fun SettingsAccessRecordViewerScreen(
                         )
                         Toast.makeText(
                             context,
-                            R.string.common_toast_copied_to_clipboard,
+                            github.tornaco.android.thanos.module.common.R.string.common_toast_copied_to_clipboard,
                             Toast.LENGTH_SHORT
                         ).show()
                     })

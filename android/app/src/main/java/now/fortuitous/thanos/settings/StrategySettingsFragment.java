@@ -84,7 +84,7 @@ public class StrategySettingsFragment extends BasePreferenceFragmentCompat {
         List<String> values = new ArrayList<>();
         String selectedId = profileManager.getAutoConfigTemplateSelectionId();
         ConfigTemplate selectedTemplate = profileManager.getConfigTemplateById(selectedId);
-        String valueNotSet = getString(R.string.common_text_value_not_set);
+        String valueNotSet = getString(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
 
         CollectionUtils.consumeRemaining(
                 profileManager.getAllConfigTemplates(),
@@ -114,8 +114,8 @@ public class StrategySettingsFragment extends BasePreferenceFragmentCompat {
         Objects.requireNonNull(templatesCategory).removeAll();
 
         ViewAwarePreference addPref = new ViewAwarePreference(requireContext());
-        addPref.setTitle(R.string.common_fab_title_add);
-        addPref.setIcon(R.drawable.module_common_ic_add_fill);
+        addPref.setTitle(github.tornaco.android.thanos.module.common.R.string.common_fab_title_add);
+        addPref.setIcon(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill);
         addPref.setOnPreferenceClickListener(preference -> {
             requestAddTemplate();
             return true;

@@ -35,17 +35,17 @@ public class DataBindingAdapters {
         switch (op.getMode()) {
             case AppOpsManager.MODE_ALLOWED:
                 view.setImageResource(R.drawable.module_ops_ic_checkbox_circle_fill);
-                ColorStateList green = ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.md_green_500));
+                ColorStateList green = ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), github.tornaco.android.thanos.module.common.R.color.md_green_500));
                 view.setImageTintList(green);
                 break;
             case AppOpsManager.MODE_FOREGROUND:
                 view.setImageResource(R.drawable.module_ops_ic_checkbox_circle_fill);
-                ColorStateList amber = ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.md_amber_700));
+                ColorStateList amber = ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), github.tornaco.android.thanos.module.common.R.color.md_amber_700));
                 view.setImageTintList(amber);
                 break;
             case AppOpsManager.MODE_IGNORED:
                 view.setImageResource(R.drawable.module_ops_ic_forbid_2_fill);
-                ColorStateList red = ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.md_red_500));
+                ColorStateList red = ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), github.tornaco.android.thanos.module.common.R.color.md_red_500));
                 view.setImageTintList(red);
                 break;
         }

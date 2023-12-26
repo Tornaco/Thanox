@@ -19,7 +19,11 @@ package github.tornaco.thanos.android.module.profile.example
 
 import android.content.Context
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,7 +33,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,8 +47,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.module.compose.common.*
-import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
+import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
@@ -77,9 +85,11 @@ class ProfileExampleActivity : ComposeThemeActivity() {
                     is Event.ImportSuccess -> {
                         ToastUtils.ok(context)
                     }
+
                     is Event.ImportFail -> {
                         ToastUtils.nook(context, event.error)
                     }
+
                     is Event.ImportFailRuleWithSameNameAlreadyExists -> {
                         ToastUtils.nook(context, "${event.name} already exists")
                     }
@@ -122,7 +132,8 @@ fun ExampleList(contentPadding: PaddingValues, state: ExampleState, import: (Exa
 
 @Composable
 private fun ExampleItem(example: Example, import: (Example) -> Unit) {
-    val cardBgColor = getColorAttribute(R.attr.appCardBackground)
+    val cardBgColor =
+        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.appCardBackground)
     val activity = LocalContext.current.requireActivity()
     Box(
         modifier = Modifier
@@ -162,7 +173,7 @@ private fun ExampleItem(example: Example, import: (Example) -> Unit) {
                         contentDescription = "Import",
                         modifier = Modifier.padding(end = 8.dp)
                     )
-                    Text(text = stringResource(id = R.string.common_menu_title_import))
+                    Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_import))
                 }
             }
         }

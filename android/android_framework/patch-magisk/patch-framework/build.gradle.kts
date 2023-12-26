@@ -1,22 +1,16 @@
-import tornaco.project.android.thanox.Libs
-
 plugins {
-    id("java")
-    id("kotlin")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
-    compileOnly(Libs.Others.lombok)
-    annotationProcessor(Libs.Others.lombok)
+    implementation(libs.rxjava)
+
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 
     implementation(project(":android_framework:base"))
     implementation(project(":android_framework:services"))
     implementation(project(":android_framework:patch-common"))
     compileOnly(project(":android_framework:hidden-api"))
     implementation(project(":android_framework:dex-maker"))
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
 }

@@ -61,10 +61,18 @@ private const val ID_REGULAR_INTERVAL = "ri"
 
 sealed class BottomNavItem(var title: String, var icon: Int, var screenRoute: String) {
     object TimeOfADay :
-        BottomNavItem("TimeOfADay", R.drawable.ic_remix_time_fill, "TimeOfADay")
+        BottomNavItem(
+            "TimeOfADay",
+            github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_time_fill,
+            "TimeOfADay"
+        )
 
     object RegularInterval :
-        BottomNavItem("RegularInterval", R.drawable.ic_remix_24_hours_fill, "RegularInterval")
+        BottomNavItem(
+            "RegularInterval",
+            github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_24_hours_fill,
+            "RegularInterval"
+        )
 }
 
 @Composable
@@ -119,9 +127,11 @@ fun Activity.DateTimeEngineScreen() {
                     BottomNavItem.TimeOfADay.screenRoute -> {
                         alarmDialogState.show()
                     }
+
                     BottomNavItem.RegularInterval.screenRoute -> {
                         newRegularIntervalHandle.open(NewRegularInterval)
                     }
+
                     else -> {}
                 }
             }

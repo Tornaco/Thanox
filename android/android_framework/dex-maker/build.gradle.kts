@@ -1,15 +1,10 @@
-import tornaco.project.android.thanox.Libs
-
 plugins {
-    id("java")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
+    implementation(libs.guava.android)
+
     implementation(project(":android_framework:base"))
     compileOnly(project(":android_framework:hidden-api"))
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
 }

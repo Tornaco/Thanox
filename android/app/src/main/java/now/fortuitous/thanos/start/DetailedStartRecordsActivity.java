@@ -169,8 +169,8 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
             String allowDesc = getString(R.string.title_allow);
             String blockDesc = getString(R.string.title_block);
 
-            int colorGreen = ContextCompat.getColor(thisActivity(), R.color.md_green_800);
-            int colorRed = ContextCompat.getColor(thisActivity(), R.color.md_red_500);
+            int colorGreen = ContextCompat.getColor(thisActivity(), github.tornaco.android.thanos.module.common.R.color.md_green_800);
+            int colorRed = ContextCompat.getColor(thisActivity(), github.tornaco.android.thanos.module.common.R.color.md_red_500);
 
             CollectionUtils.consumeRemaining(startRecordList, startRecord -> {
                 AppInfo appInfo = packageManager.getAppInfo(startRecord.getPackageName());

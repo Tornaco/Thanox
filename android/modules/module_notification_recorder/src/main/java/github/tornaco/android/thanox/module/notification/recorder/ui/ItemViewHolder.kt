@@ -44,9 +44,11 @@ class ItemViewHolder(private val binding: ModuleNotificationRecorderItemBinding)
                 R.id.action_copy_content -> {
                     copyNotificationToClipboard(model)
                 }
+
                 R.id.action_reproduce -> {
                     reproduce(model)
                 }
+
                 R.id.action_view_zoom -> {
                     zoom(rootView, model)
                 }
@@ -86,7 +88,7 @@ class ItemViewHolder(private val binding: ModuleNotificationRecorderItemBinding)
         )
         Toast.makeText(
             itemView.context,
-            R.string.common_toast_copied_to_clipboard,
+            github.tornaco.android.thanos.module.common.R.string.common_toast_copied_to_clipboard,
             Toast.LENGTH_SHORT
         ).show()
     }

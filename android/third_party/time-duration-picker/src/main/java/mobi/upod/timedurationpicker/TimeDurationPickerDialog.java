@@ -43,7 +43,7 @@ public class TimeDurationPickerDialog extends AlertDialog implements DialogInter
      * @param duration the initial duration to be shown in the dialog
      */
     public TimeDurationPickerDialog(Context context, OnDurationSetListener listener, long duration) {
-        super(context, R.style.Theme_MaterialComponents_Light_Dialog);
+        super(context, com.google.android.material.R.style.Theme_MaterialComponents_Light_Dialog);
         durationSetListener = listener;
 
         final LayoutInflater inflater = LayoutInflater.from(context);

@@ -25,11 +25,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
 fun OnBoardingScreen(onComplete: () -> Unit) {
-    val pagerState = rememberPagerState(
-        pageCount = onboardingList.size,
-        initialOffscreenLimit = 2,
-        infiniteLoop = true
-    )
+    val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
 
     Scaffold { padding ->
@@ -41,7 +37,8 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier.fillMaxSize(),
-                dragEnabled = false
+                count = onboardingList.size,
+                userScrollEnabled = false
             ) {
                 OnboardingPagerItem(onboardingList[pagerState.currentPage])
             }

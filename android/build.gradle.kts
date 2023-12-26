@@ -1,3 +1,4 @@
+import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.outDir
 import tornaco.project.android.thanox.Configs.thanoxVersionCode
 import tornaco.project.android.thanox.Configs.thanoxVersionName
@@ -9,17 +10,25 @@ buildscript {
         mavenCentral()
         mavenLocal()
     }
-
-    dependencies {
-        classpath(tornaco.project.android.thanox.ClassPaths.gradlePlugin)
-        classpath(tornaco.project.android.thanox.ClassPaths.kotlinPlugin)
-        classpath(tornaco.project.android.thanox.Libs.Hilt.gradlePlugin)
-    }
 }
 
 plugins {
-    id("com.diffplug.spotless").version("5.7.0")
-    id("com.gladed.androidgitversion").version("0.4.10")
+    alias(libs.plugins.agp.lib) apply false
+    alias(libs.plugins.agp.app) apply false
+
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.dagger.hilt.android) apply false
+
+    alias(libs.plugins.protobuf.gradle.plugin) apply false
+    alias(libs.plugins.gmazzo.buildconfig) apply false
+
+    alias(libs.plugins.gladed.androidgitversion) apply true
+    alias(libs.plugins.diffplug.spotless) apply true
+    alias(libs.plugins.kover) apply false
+
     id("thanox-proj")
 }
 
@@ -44,8 +53,8 @@ fun printVersions() {
 }
 
 
-val androidSourceCompatibility by extra(JavaVersion.VERSION_11)
-val androidTargetCompatibility by extra(JavaVersion.VERSION_11)
+val androidSourceCompatibility by extra(JavaVersion.VERSION_17)
+val androidTargetCompatibility by extra(JavaVersion.VERSION_17)
 
 subprojects {
     log("subprojects: ${this.name}")
@@ -61,8 +70,44 @@ subprojects {
         options.compilerArgs.addAll(
             arrayOf(
                 "-Xmaxerrs",
-                "1000"))
+                "1000"
+            )
+        )
         options.encoding = "UTF-8"
+    }
+
+    plugins.withType(com.android.build.gradle.api.AndroidBasePlugin::class.java) {
+        extensions.configure(com.android.build.api.dsl.CommonExtension::class.java) {
+            compileSdk = Configs.compileSdkVersion
+            ndkVersion = Configs.ndkVersion
+
+            externalNativeBuild {
+                cmake {
+                    version = "3.22.1+"
+                }
+            }
+
+            defaultConfig {
+                minSdk = Configs.minSdkVersion
+                if (this is com.android.build.api.dsl.ApplicationDefaultConfig) {
+                    targetSdk = Configs.targetSdkVersion
+                    versionCode = Configs.thanoxVersionCode
+                    versionName = Configs.thanoxVersionName
+                    testInstrumentationRunner = Configs.testRunner
+                }
+            }
+
+            lint {
+                abortOnError = true
+                checkReleaseBuilds = false
+            }
+
+            compileOptions {
+                sourceCompatibility = androidSourceCompatibility
+                targetCompatibility = androidTargetCompatibility
+            }
+
+        }
     }
 
     plugins.withType(JavaPlugin::class.java) {

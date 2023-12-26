@@ -31,7 +31,7 @@ public class AppListActivity extends CommonFuncToggleAppListFilterActivity {
     @NonNull
     @Override
     protected String getTitleString() {
-        return getString(R.string.app_picker_title);
+        return getString(github.tornaco.android.thanos.module.common.R.string.app_picker_title);
     }
 
     @Override

@@ -37,7 +37,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
-
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.databinding.ActivityStandbyRulesBinding;
@@ -155,7 +154,7 @@ public class StandByRuleActivity extends ThemeActivity implements StartRuleItemC
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         if (!TextUtils.isEmpty(ruleIfEdit)) {
-            builder.setNeutralButton(R.string.common_menu_title_remove, (dialog, which) -> {
+            builder.setNeutralButton(github.tornaco.android.thanos.module.common.R.string.common_menu_title_remove, (dialog, which) -> {
                 thanosManager.getActivityManager().deleteStandbyRule(ruleIfEdit);
                 viewModel.start();
             });

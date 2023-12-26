@@ -1,27 +1,14 @@
-import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.resPrefix
-import tornaco.project.android.thanox.Libs
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    alias(libs.plugins.agp.lib)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
+    namespace = "github.tornaco.thanos.module.component.manager"
     buildFeatures {
         compose = true
         buildConfig = true
@@ -36,24 +23,29 @@ android {
     resourcePrefix = resPrefix
 
     composeOptions {
-        kotlinCompilerExtensionVersion = tornaco.project.android.thanox.Compose.composeVersion
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 }
 dependencies {
-    implementation(Libs.Kotlin.stdlib)
-    implementation(Libs.AndroidX.androidXCore)
+    implementation(libs.rxjava)
 
-    implementation(Libs.AndroidX.appCompat)
-    implementation(Libs.AndroidX.material)
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.AndroidX.preference)
-    implementation(Libs.AndroidX.constraint)
-    implementation(Libs.AndroidX.swipeRefreshLayout)
+    implementation(libs.androidx.lifecycle.common)
+    implementation(libs.androidx.lifecycle.extensions)
 
-    implementation(Libs.Others.guavaAndroid)
-    implementation(Libs.Others.libChecker) {
-        exclude(group = "javax.annotation", module = "javax.annotation-api")
-    }
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.preference)
+    implementation(libs.constraint.layout)
+
+    implementation(libs.kotlin.stdlib.jdk8)
+    implementation(libs.guava.android)
+
+    implementation(libs.libchecker.rules.bundle)
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))
@@ -65,18 +57,16 @@ dependencies {
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
 
-    implementation(tornaco.project.android.thanox.Compose.runtimeSaveAble)
-    implementation(tornaco.project.android.thanox.Compose.ui)
-    implementation(tornaco.project.android.thanox.Compose.runtime)
-    implementation(tornaco.project.android.thanox.Compose.material)
-    implementation(tornaco.project.android.thanox.Compose.material3)
-    implementation(tornaco.project.android.thanox.Compose.material3Adapter)
-    implementation(tornaco.project.android.thanox.Compose.activityCompose)
-    implementation(tornaco.project.android.thanox.Compose.viewmodel)
-    implementation(tornaco.project.android.thanox.Compose.navigationCompose)
-    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
-    implementation(tornaco.project.android.thanox.Compose.tooling)
-    implementation(tornaco.project.android.thanox.Compose.toolingPreview)
-    implementation(tornaco.project.android.thanox.Compose.composeMaterialIconsExtended)
-    implementation(tornaco.project.android.thanox.Compose.landscapistGlide)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.viewbinding)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material)
+    implementation(libs.navigation.compose)
+
+    implementation(libs.glide.landscapist)
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 }

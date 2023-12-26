@@ -1,23 +1,10 @@
-import tornaco.project.android.thanox.Configs
-import tornaco.project.android.thanox.Configs.thanoxAppId
-import tornaco.project.android.thanox.Configs.thanoxVersionCode
-import tornaco.project.android.thanox.Configs.thanoxVersionName
-
 plugins {
-    id("com.android.application")
+    alias(libs.plugins.agp.app)
 }
 
 android {
     defaultConfig {
-        applicationId = thanoxAppId
-        vectorDrawables.useSupportLibrary = true
-        versionName = thanoxVersionName
-        versionCode = thanoxVersionCode
-
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
+        namespace = "github.tornaco.android.thanox.magisk.bridge"
         multiDexEnabled = false
     }
 
@@ -32,10 +19,7 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+
 
     buildFeatures {
         compose = false

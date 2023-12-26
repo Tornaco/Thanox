@@ -1,29 +1,21 @@
 import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.resPrefix
-import tornaco.project.android.thanox.Libs
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    alias(libs.plugins.agp.lib)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
+    namespace = "github.tornaco.android.plugin.push.message.delegate"
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
         minSdk = Configs.minSdkVersion
         compileSdk = Configs.compileSdkVersion
         targetSdk = Configs.targetSdkVersion
         testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 
     buildFeatures {
@@ -38,44 +30,37 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = tornaco.project.android.thanox.Compose.composeVersion
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     resourcePrefix = resPrefix
 }
 dependencies {
-    implementation(Libs.AndroidX.androidXCore)
-    implementation(Libs.Kotlin.stdlib)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.preference)
+    implementation(libs.constraint.layout)
 
-    implementation(Libs.AndroidX.appCompat)
-    implementation(Libs.AndroidX.material)
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.AndroidX.preference)
-    implementation(Libs.AndroidX.constraint)
-    implementation(Libs.AndroidX.swipeRefreshLayout)
-    implementation(Libs.AndroidX.navigationFragment)
-    implementation(Libs.AndroidX.navigationUI)
+    implementation(libs.kotlin.stdlib.jdk8)
+    implementation(libs.guava.android)
 
-    implementation(tornaco.project.android.thanox.Compose.runtimeSaveAble)
-    implementation(tornaco.project.android.thanox.Compose.ui)
-    implementation(tornaco.project.android.thanox.Compose.runtime)
-    implementation(tornaco.project.android.thanox.Compose.material)
-    implementation(tornaco.project.android.thanox.Compose.material3)
-    implementation(tornaco.project.android.thanox.Compose.material3Adapter)
-    implementation(tornaco.project.android.thanox.Compose.activityCompose)
-    implementation(tornaco.project.android.thanox.Compose.viewmodel)
-    implementation(tornaco.project.android.thanox.Compose.navigationCompose)
-    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
-    implementation(tornaco.project.android.thanox.Compose.tooling)
-    implementation(tornaco.project.android.thanox.Compose.toolingPreview)
-    implementation(tornaco.project.android.thanox.Compose.composeMaterialIconsExtended)
-    implementation(Libs.Accompanist.appcompatTheme)
-    implementation(Libs.Accompanist.systemUiController)
-    implementation(Libs.Accompanist.pager)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.viewbinding)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material)
+    implementation(libs.navigation.compose)
 
-    implementation(Libs.Others.guavaAndroid)
-    implementation(Libs.Others.glide)
-    annotationProcessor(Libs.Others.glideCompiler)
+    implementation(libs.glide.landscapist)
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))

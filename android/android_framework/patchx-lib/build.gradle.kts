@@ -1,16 +1,10 @@
-import tornaco.project.android.thanox.Libs
-
 plugins {
-    id("java")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
-    compileOnly(Libs.Others.lombok)
-    annotationProcessor(Libs.Others.lombok)
-    compileOnly(Libs.Others.xposedApi)
-}
+    compileOnly("org.projectlombok:lombok:1.18.20")
+    annotationProcessor("org.projectlombok:lombok:1.18.20")
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    compileOnly(libs.xposed.api)
 }

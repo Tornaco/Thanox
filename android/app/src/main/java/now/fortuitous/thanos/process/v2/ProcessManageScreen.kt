@@ -371,7 +371,7 @@ fun RunningAppItem(
                             TinySpacer()
                             Icon(
                                 modifier = Modifier.size(16.dp),
-                                painter = painterResource(id = R.drawable.ic_remix_music_2_fill),
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.  R.drawable.ic_remix_music_2_fill),
                                 contentDescription = "Playing",
                                 tint = MaterialTheme.colorScheme.primary
                             )

@@ -8,9 +8,9 @@ import java.util.*
 private val props = Properties()
 
 object Configs {
-    const val compileSdkVersion = 33
+    const val compileSdkVersion = 34
     const val minSdkVersion = 24
-    const val targetSdkVersion = 33
+    const val targetSdkVersion = 34
 
     // We use this value to find some build tools binaries.
     // consider to find the latest version more gracefully

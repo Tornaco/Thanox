@@ -1,17 +1,11 @@
-import tornaco.project.android.thanox.Libs
-
 plugins {
-    id("java")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
     implementation(project(":annotation_processors:permission-requester-annotation"))
 
-    implementation(Libs.Others.guavaJre)
-    implementation(Libs.Others.javapoet)
+    implementation("com.google.guava:guava:24.1-jre")
+    implementation("com.squareup:javapoet:1.8.0")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}

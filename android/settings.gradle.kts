@@ -1,5 +1,15 @@
 @file:Suppress("UnstableApiUsage")
 
+rootProject.name = "Thanox"
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
@@ -13,11 +23,9 @@ dependencyResolutionManagement {
 }
 
 
-rootProject.name = "Thanox"
 
 include(":app")
 include(":shortcut_stub")
-include(":sdk-demo")
 
 include(":annotation_processors:xposed_hook_annotation")
 include(":annotation_processors:xposed_hook_compiler")
@@ -45,10 +53,11 @@ include(":third_party:time-duration-picker")
 include(":third_party:remix")
 include(":third_party:compose-color-picker")
 include(":third_party:reorderable")
+
+// TODO Change to mvn local deps
 include(":third_party:libxposed:interface")
 include(":third_party:libxposed:service")
 include(":third_party:libxposed:api")
-
 
 include(":android_framework:base")
 include(":android_framework:res")

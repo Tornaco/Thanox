@@ -127,7 +127,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     }
 
     private void setupView() {
-        binding.toolbar.setNavigationIcon(R.drawable.module_common_ic_arrow_back_24dp);
+        binding.toolbar.setNavigationIcon(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_arrow_back_24dp);
         binding.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
         // Search.
         binding.searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
@@ -337,7 +337,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     private void onRequestAddToSmartFreezeList(List<AppInfo> appInfos, boolean alsoAddToPkgSet) {
         ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
-        progress.setTitle(R.string.common_text_wait_a_moment);
+        progress.setTitle(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment);
         viewModel.addToSmartFreezeList(appInfos, alsoAddToPkgSet, appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
             progress.dismiss();
             viewModel.start();
@@ -347,12 +347,12 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     private void onRequestAddToSmartFreezeListAskIfAddToPkgSet(List<AppInfo> appInfos) {
         ModernAlertDialog dialog = new ModernAlertDialog(requireActivity());
-        dialog.setDialogTitle(getString(R.string.common_fab_title_add));
+        dialog.setDialogTitle(getString(github.tornaco.android.thanos.module.common.R.string.common_fab_title_add));
         dialog.setDialogMessage(getString(R.string.message_do_you_want_to_add_apps_to_pkg_set));
         dialog.setCancelable(false);
         dialog.setNegative(getString(android.R.string.no));
         dialog.setOnNegative(() -> onRequestAddToSmartFreezeList(appInfos, false));
-        dialog.setPositive(getString(R.string.common_fab_title_add));
+        dialog.setPositive(getString(github.tornaco.android.thanos.module.common.R.string.common_fab_title_add));
         dialog.setOnPositive(() -> onRequestAddToSmartFreezeList(appInfos, true));
         dialog.show();
     }
@@ -447,7 +447,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     }
 
     private void onRequestImportPackageList() {
-        String[] items = getResources().getStringArray(R.array.module_common_import_selections);
+        String[] items = getResources().getStringArray(github.tornaco.android.thanos.module.common.R.array.module_common_import_selections);
         AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_import_package_list).setSingleChoiceItems(items, -1, (d, which) -> {
             d.dismiss();
             if (which == 0) {
@@ -498,7 +498,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     }
 
     private void onRequestExportPackageList() {
-        String[] items = getResources().getStringArray(R.array.module_common_export_selections);
+        String[] items = getResources().getStringArray(github.tornaco.android.thanos.module.common.R.array.module_common_export_selections);
         AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_export_package_list).setSingleChoiceItems(items, -1, (d, which) -> {
             d.dismiss();
             if (which == 0) {
@@ -650,7 +650,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                 .setNegativeButton(android.R.string.cancel, null)
                 .setNeutralButton("SILENT INSTALL", (dialog, which) -> {
                     ModernProgressDialog progressDialog = new ModernProgressDialog(requireActivity());
-                    progressDialog.setMessage(getString(R.string.common_text_wait_a_moment));
+                    progressDialog.setMessage(getString(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment));
                     progressDialog.show();
                     Completable.fromRunnable(() -> {
                                 File tmpFile = new File("/data/local/tmp/" + appInfo.getPkgName() + "_proxy.apk");

@@ -1,29 +1,15 @@
-import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.resPrefix
-import tornaco.project.android.thanox.Libs
-import tornaco.project.android.thanox.*
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.agp.lib)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
+    namespace = "github.tornaco.practice.honeycomb.locker"
     buildFeatures {
         compose = true
         buildConfig = true
@@ -35,53 +21,46 @@ android {
         dataBinding = true
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
     composeOptions {
-        kotlinCompilerExtensionVersion = Compose.composeVersion
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     resourcePrefix = resPrefix
 }
 
 dependencies {
-    implementation(Libs.AndroidX.androidXCore)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.preference)
+    implementation(libs.constraint.layout)
 
-    implementation(Libs.AndroidX.appCompat)
-    implementation(Libs.AndroidX.material)
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.AndroidX.preference)
-    implementation(Libs.AndroidX.constraint)
-    implementation(Libs.AndroidX.swipeRefreshLayout)
-    implementation(Libs.AndroidX.biometric)
+    implementation(libs.kotlin.stdlib.jdk8)
+    implementation(libs.guava.android)
 
-    implementation(Compose.runtimeSaveAble)
-    implementation(Compose.ui)
-    implementation(Compose.runtime)
-    implementation(Compose.material)
-    implementation(Compose.activityCompose)
-    implementation(Compose.viewmodel)
-    implementation(Compose.navigationCompose)
-    implementation(Compose.hiltNavigation)
-    implementation(Compose.tooling)
-    implementation(Compose.toolingPreview)
-    implementation(Compose.coil)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.viewbinding)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material)
+    implementation(libs.navigation.compose)
 
-    implementation(Libs.Kotlin.stdlib)
-    implementation(Libs.Coroutines.android)
+    implementation(libs.androidx.biometric)
 
-    implementation(Libs.Accompanist.appcompatTheme)
+    implementation(libs.glide.landscapist)
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 
-    implementation(Libs.Others.guavaAndroid)
-    implementation(Libs.Others.glide)
-    annotationProcessor(Libs.Others.glideCompiler)
-    kapt(Libs.Others.glideCompiler)
-
-    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
-    implementation(Libs.Hilt.library)
-    kapt(Libs.Hilt.googleAndroidCompiler)
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.dagger.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.android.compiler)
+    implementation(libs.dagger.hilt.android)
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))

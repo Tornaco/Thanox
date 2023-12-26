@@ -93,10 +93,10 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
     private void onRequestDeleteRule(RuleInfo ruleInfo) {
         ModernAlertDialog dialog = new ModernAlertDialog(thisActivity());
-        dialog.setDialogTitle(getString(R.string.common_menu_title_remove));
-        dialog.setDialogMessage(getString(R.string.common_menu_title_remove) + "\t" + ruleInfo.getName());
+        dialog.setDialogTitle(getString( github.tornaco.android.thanos.module.common.R.string.common_menu_title_remove));
+        dialog.setDialogMessage(getString( github.tornaco.android.thanos.module.common.R.string.common_menu_title_remove) + "\t" + ruleInfo.getName());
         dialog.setNegative(getString(android.R.string.cancel));
-        dialog.setPositive(getString(R.string.common_menu_title_remove));
+        dialog.setPositive(getString( github.tornaco.android.thanos.module.common.R.string.common_menu_title_remove));
         dialog.setOnPositive(() -> viewModel.deleteRule(ruleInfo));
         dialog.setCancelable(true);
         dialog.show();

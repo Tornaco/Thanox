@@ -130,7 +130,7 @@ private fun RunningAppStateDetailsScreen(
                 )
             }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.module_common_ic_md_outline_settings_24),
+                    painter = painterResource(id = github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_md_outline_settings_24),
                     contentDescription = "Settings"
                 )
             }
@@ -318,21 +318,21 @@ private fun ServicePopupMenu(
             MenuItem(
                 "copy",
                 stringResource(id = R.string.menu_title_copy),
-                R.drawable.ic_file_copy_fill
+                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_copy_fill
             ),
             MenuItem(
                 "stop",
                 stringResource(id = R.string.service_stop),
-                R.drawable.module_profile_ic_close_fill
+                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_close_fill
             ),
             MenuItem(
                 "addToGlobalVar",
-                stringResource(id = R.string.module_profile_add_to_global_var),
+                stringResource(id = github.tornaco.thanos.android.module.profile.R.string.module_profile_add_to_global_var),
                 R.drawable.ic_baseline_code_24
             ),
             MenuItem(
                 "addToSmartStandByKeeps",
-                stringResource(id = R.string.module_component_manager_keep_service_smart_standby),
+                stringResource(id = github.tornaco.thanos.module.component.manager.R.string.module_component_manager_keep_service_smart_standby),
                 R.drawable.ic_mickey_line
             )
         )
@@ -467,16 +467,16 @@ private fun ProcessPopupMenu(
             MenuItem(
                 "copy",
                 stringResource(id = R.string.menu_title_copy),
-                R.drawable.ic_file_copy_fill
+                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_copy_fill
             ),
             MenuItem(
                 "stop",
                 stringResource(id = R.string.service_stop),
-                R.drawable.module_profile_ic_close_fill
+                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_close_fill
             ),
             MenuItem(
                 "addToGlobalVar",
-                stringResource(id = R.string.module_profile_add_to_global_var),
+                stringResource(id = github.tornaco.thanos.android.module.profile.R.string.module_profile_add_to_global_var),
                 R.drawable.ic_baseline_code_24
             )
         )

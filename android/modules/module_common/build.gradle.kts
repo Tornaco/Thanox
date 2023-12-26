@@ -1,31 +1,12 @@
-import tornaco.project.android.thanox.Configs
-import tornaco.project.android.thanox.Libs
-import tornaco.project.android.thanox.Tests
-
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    alias(libs.plugins.agp.lib)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
+    namespace = "github.tornaco.android.thanos.module.common"
     buildFeatures {
         compose = true
         buildConfig = true
@@ -38,76 +19,70 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = tornaco.project.android.thanox.Compose.composeVersion
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 }
 
 dependencies {
-    implementation(Libs.AndroidX.androidXCore)
-    implementation(Libs.AndroidX.appCompat)
-    implementation(Libs.AndroidX.material)
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.AndroidX.preference)
-    implementation(Libs.AndroidX.constraint)
-    implementation(Libs.AndroidX.interpolator)
-    implementation(Libs.AndroidX.swipeRefreshLayout)
-    implementation(Libs.AndroidX.lifeCycleRuntimeKtx)
-    implementation(Libs.AndroidX.lifeCycleCommon)
+    implementation(libs.rxjava)
+    implementation(libs.guava.android)
+    
+    implementation(libs.androidx.lifecycle.common)
+    implementation(libs.androidx.lifecycle.extensions)
 
-    implementation(Libs.AndroidX.browser) {
-        exclude(group = "com.google.guava", module = "listenablefuture")
-    }
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.preference)
+    implementation(libs.constraint.layout)
+    implementation(libs.browser)
 
-    implementation(Libs.Others.tinypinyin)
+    implementation("com.github.promeg:tinypinyin:2.0.3")
 
-    implementation(Libs.Others.glide)
-    annotationProcessor(Libs.Others.glideCompiler)
-    kapt(Libs.Others.glideCompiler)
+    implementation(libs.glide)
+    implementation(libs.glide.landscapist)
+    kapt(libs.glide.compiler)
 
-    api(Libs.AndroidX.lifeCycleRuntime)
-    api(Libs.AndroidX.lifeCycleExt)
-    annotationProcessor(Libs.AndroidX.lifeCycleCompiler)
-    kapt(Libs.AndroidX.lifeCycleCompiler)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.viewbinding)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material)
+    implementation(libs.navigation.compose)
+    implementation(libs.compose.theme.adapter)
 
-    implementation(tornaco.project.android.thanox.Compose.runtimeSaveAble)
-    implementation(tornaco.project.android.thanox.Compose.ui)
-    implementation(tornaco.project.android.thanox.Compose.runtime)
-    implementation(tornaco.project.android.thanox.Compose.material)
-    implementation(tornaco.project.android.thanox.Compose.material3)
-    implementation(tornaco.project.android.thanox.Compose.material3Adapter)
-    implementation(tornaco.project.android.thanox.Compose.activityCompose)
-    implementation(tornaco.project.android.thanox.Compose.viewmodel)
-    implementation(tornaco.project.android.thanox.Compose.navigationCompose)
-    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
-    implementation(tornaco.project.android.thanox.Compose.tooling)
-    implementation(tornaco.project.android.thanox.Compose.toolingPreview)
-    implementation(tornaco.project.android.thanox.Compose.composeMaterialIconsExtended)
-    implementation(tornaco.project.android.thanox.Compose.landscapistGlide)
+    implementation(libs.accompanist.appcompat.theme)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.swiperefresh)
+    implementation(libs.accompanist.flowlayout)
+    implementation(libs.accompanist.navigation.animation)
 
-    implementation(Libs.Accompanist.appcompatTheme)
-    implementation(Libs.Accompanist.systemUiController)
-    implementation(Libs.Accompanist.pager)
-    implementation(Libs.Accompanist.insets)
-    implementation(Libs.Accompanist.swipeRefresh)
-    implementation(Libs.Accompanist.insetsUi)
+    implementation(libs.lottie.compose)
+    implementation(libs.lottie)
 
-    implementation(Libs.Lottie.composeLottie)
-    implementation(Libs.Lottie.lottie)
-    implementation(Libs.Accompanist.pager)
-    implementation(Libs.Accompanist.insets)
+    implementation(libs.coil.compose)
 
-    implementation(tornaco.project.android.thanox.Compose.coil)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
 
-    implementation(Libs.Kotlin.stdlib)
-    implementation(Libs.Coroutines.android)
-
-    compileOnly(Libs.Others.xposedApi)
+    compileOnly(libs.xposed.api)
 
     implementation(project(":android_framework:base"))
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
     implementation(project(":third_party:dateformatter"))
 
-    testImplementation(Tests.junit)
-    androidTestImplementation(Tests.androidXRunner)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.androidx.test.runner)
+    testImplementation(libs.kotest.assertions.core)
+    testImplementation(libs.kotest.property)
 }

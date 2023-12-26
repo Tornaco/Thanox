@@ -123,9 +123,9 @@ public class StartChartActivity extends ThemeActivity implements OnChartValueSel
                 android.R.attr.windowBackground,
                 android.R.attr.windowBackground};
         TypedArray ta = obtainStyledAttributes(attrs);
-        @SuppressLint("ResourceType") int textColorPrimaryRes = ta.getResourceId(0, R.color.md_red_700);
-        @SuppressLint("ResourceType") int windowBgColorRes = ta.getResourceId(1, R.color.md_white);
-        @SuppressLint("ResourceType") int cardBgColorRes = ta.getResourceId(2, R.color.md_white);
+        @SuppressLint("ResourceType") int textColorPrimaryRes = ta.getResourceId(0, github.tornaco.android.thanos.module.common.R.color.md_red_700);
+        @SuppressLint("ResourceType") int windowBgColorRes = ta.getResourceId(1, github.tornaco.android.thanos.module.common.R.color.md_white);
+        @SuppressLint("ResourceType") int cardBgColorRes = ta.getResourceId(2, github.tornaco.android.thanos.module.common.R.color.md_white);
         ta.recycle();
         int textColorPrimary = getColor(textColorPrimaryRes);
         int windowBgColor = getColor(windowBgColorRes);

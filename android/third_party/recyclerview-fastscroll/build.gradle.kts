@@ -1,23 +1,9 @@
-import tornaco.project.android.thanox.Configs
-import tornaco.project.android.thanox.Libs
-
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.agp.lib)
 }
 
 android {
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+    namespace = "com.simplecityapps.recyclerview_fastscroll"
 
     buildFeatures {
         compose = false
@@ -32,8 +18,8 @@ android {
 }
 
 dependencies {
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.AndroidX.interpolator)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.interpolator)
 }
 
 

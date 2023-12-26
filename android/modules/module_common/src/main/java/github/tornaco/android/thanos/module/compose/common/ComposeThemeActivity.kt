@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
 import github.tornaco.android.thanos.theme.ThemeActivity
@@ -32,9 +31,7 @@ abstract class ComposeThemeActivity : ThemeActivity() {
                         darkIcons = !darkTheme
                     )
                 }
-                ProvideWindowInsets {
-                    Content()
-                }
+                Content()
             }
         }
     }

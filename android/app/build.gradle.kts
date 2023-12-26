@@ -1,28 +1,25 @@
-import Build_gradle.*
-import tornaco.project.android.thanox.*
+import Build_gradle.Date
+import Build_gradle.GoogleFiles
+import Build_gradle.Properties
+import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.keyStoreAlias
 import tornaco.project.android.thanox.Configs.keyStorePassword
 import tornaco.project.android.thanox.Configs.magiskModuleBuildDir
+import tornaco.project.android.thanox.aapt
+import tornaco.project.android.thanox.log
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("kotlin-parcelize")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.agp.app)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
     defaultConfig {
+        namespace = "github.tornaco.android.thanos"
         applicationId = Configs.thanoxAppId
-        vectorDrawables.useSupportLibrary = true
-        versionName = Configs.thanoxVersionName
-        versionCode = Configs.thanoxVersionCode
-
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
         multiDexEnabled = true
     }
 
@@ -75,15 +72,6 @@ android {
 
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
     buildFeatures {
         compose = true
         buildConfig = true
@@ -96,7 +84,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Compose.composeVersion
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     applicationVariants.all {
@@ -124,78 +112,110 @@ android {
 }
 
 dependencies {
-    implementation(Libs.AndroidX.androidXCore)
-    implementation(Libs.AndroidX.appCompat)
-    implementation(Libs.AndroidX.material)
-    implementation(Libs.AndroidX.recyclerview)
-    implementation(Libs.AndroidX.preference)
-    implementation(Libs.AndroidX.constraint)
-    implementation(Libs.AndroidX.swipeRefreshLayout)
-    implementation(Libs.AndroidX.lifeCycleRuntimeKtx)
-    implementation(Libs.AndroidX.splash)
-    annotationProcessor(Libs.AndroidX.lifeCycleCompiler)
-    kapt(Libs.AndroidX.lifeCycleCompiler)
+    implementation(libs.compose.theme.adapter)
+    implementation(libs.accompanist.appcompat.theme)
 
-    implementation(Compose.runtimeSaveAble)
-    implementation(Compose.ui)
-    implementation(Compose.runtime)
-    implementation(Compose.material)
-    implementation(Compose.material3)
-    implementation(Compose.material3Adapter)
-    implementation(Compose.activityCompose)
-    implementation(Compose.viewmodel)
-    implementation(Compose.navigationCompose)
-    implementation(Compose.tooling)
-    implementation(Compose.toolingPreview)
-    implementation(Compose.composeMaterialIconsExtended)
-    implementation(Compose.landscapistGlide)
-    implementation(Compose.enro)
-    kapt(Compose.enroApt)
-    implementation(Libs.Accompanist.appcompatTheme)
-    implementation(Libs.Accompanist.systemUiController)
-    implementation(Libs.Accompanist.pager)
-    implementation(Libs.Accompanist.insets)
-    implementation(Libs.Accompanist.swipeRefresh)
-    implementation(Libs.Accompanist.insetsUi)
-    implementation(Libs.Accompanist.flowLayout)
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.dagger.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.android.compiler)
+    implementation(libs.dagger.hilt.android)
 
-    implementation(Compose.hiltNavigation)
-    implementation(Libs.Hilt.library)
-    kapt(Libs.Hilt.googleAndroidCompiler)
+    implementation(libs.glide.landscapist)
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 
-    implementation(Libs.Kotlin.stdlib)
-    implementation(Libs.Coroutines.android)
-    implementation(Libs.Coroutines.core)
+    implementation(libs.kotlinx.serialization.json.jvm)
+    implementation(libs.kotlin.reflect)
 
-    implementation(Libs.Others.timber)
-    implementation(Compose.coil)
-    implementation(Libs.Others.chart)
-    implementation(Libs.Others.licensesDialog)
+    implementation(libs.navigation.compose)
+    implementation(libs.accompanist.placeholder.material)
 
-    implementation(Libs.Others.glide)
-    annotationProcessor(Libs.Others.glideCompiler)
-    kapt(Libs.Others.glideCompiler)
+    implementation(libs.core.splashscreen)
 
-    implementation(Libs.Others.listenablefutureEmpty)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.core.ktx)
+    // Note: Do not upgrade this lib, ComposeOverlay.
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.activity.compose)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.datastore.preferences)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.interpolator)
+    implementation(libs.androidx.preference)
+    implementation(libs.constraint.layout)
+    implementation(libs.browser)
+    implementation(libs.androidx.biometric)
+    implementation(libs.androidx.lifecycle.common)
+    implementation(libs.androidx.lifecycle.extensions)
 
-    compileOnly(Libs.Others.xposedApi)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.viewbinding)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material)
+    implementation(libs.navigation.compose)
+    implementation(libs.compose.material.icons.core)
+    implementation(libs.compose.material.icons.extended)
 
-    implementation(Libs.Others.hiddenApiByPass)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.gson)
 
-    implementation(Libs.Others.retrofit)
-    implementation(Libs.Others.retrofitConverterGson)
-    implementation(Libs.Others.retrofitAdapterRxJava2)
+    releaseImplementation(libs.chucker.no.op)
+    debugImplementation(libs.chucker)
 
-    implementation(Libs.Accompanist.navigationAnim)
+    implementation(libs.codeview)
+
+    // https://github.com/LibChecker/LibChecker-Rules-Bundle
+    implementation(libs.libchecker.rules.bundle)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+
+    implementation(libs.lottie.compose)
+    implementation(libs.lottie)
+
+    implementation(libs.glide.landscapist)
+    implementation(libs.enro)
+    kapt(libs.enro.processor)
+
+    implementation(libs.accompanist.appcompat.theme)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.swiperefresh)
+    implementation(libs.accompanist.flowlayout)
+    implementation(libs.accompanist.navigation.animation)
+
+    implementation(libs.timber)
+    implementation(libs.coil.compose)
+
+    implementation(libs.mpandroidchart)
+    implementation(libs.licensesdialog)
+
+    implementation(libs.listenablefuture)
+
+    compileOnly(libs.xposed.api)
+
+    implementation(libs.hiddenapibypass)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.adapter.rxjava2)
+
+    implementation(libs.guava.android)
+
+    implementation(libs.libsu.core)
 
     compileOnly(project(":annotation_processors:permission-requester-annotation"))
     kapt(project(":annotation_processors:permission-requester-compiler"))
     annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
 
-    // The core module that provides APIs to a shell
-    implementation("com.github.topjohnwu.libsu:core:5.1.0")
-    // Optional: APIs for creating root services. Depends on ":core"
-    // implementation("com.github.topjohnwu.libsu:service:5.1.0")
+    implementation(libs.lottie.compose)
+    implementation(libs.lottie)
 
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_ops"))
@@ -225,6 +245,7 @@ dependencies {
     implementation(project(":third_party:search"))
     implementation(project(":third_party:remix"))
     implementation(project(":third_party:reorderable"))
+
     implementation(project("::third_party:libxposed:service"))
 }
 

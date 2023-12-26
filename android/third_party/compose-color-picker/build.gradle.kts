@@ -1,27 +1,15 @@
-import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.resPrefix
-import tornaco.project.android.thanox.Libs
+
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("kotlin-parcelize")
+    alias(libs.plugins.agp.lib)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        minSdk = Configs.minSdkVersion
-        compileSdk = Configs.compileSdkVersion
-        targetSdk = Configs.targetSdkVersion
-        testInstrumentationRunner = Configs.testRunner
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+    namespace = "github.tornaco.thanos.android.third.party.compose.color.picker"
 
     buildFeatures {
         compose = true
@@ -35,27 +23,23 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = tornaco.project.android.thanox.Compose.composeVersion
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     resourcePrefix = resPrefix
 }
 dependencies {
-    implementation(Libs.Kotlin.stdlib)
+    implementation(libs.kotlin.stdlib.jdk8)
 
-    implementation(tornaco.project.android.thanox.Compose.runtimeSaveAble)
-    implementation(tornaco.project.android.thanox.Compose.ui)
-    implementation(tornaco.project.android.thanox.Compose.runtime)
-    implementation(tornaco.project.android.thanox.Compose.material)
-    implementation(tornaco.project.android.thanox.Compose.material3)
-    implementation(tornaco.project.android.thanox.Compose.material3Adapter)
-    implementation(tornaco.project.android.thanox.Compose.activityCompose)
-    implementation(tornaco.project.android.thanox.Compose.viewmodel)
-    implementation(tornaco.project.android.thanox.Compose.navigationCompose)
-    implementation(tornaco.project.android.thanox.Compose.hiltNavigation)
-    implementation(tornaco.project.android.thanox.Compose.tooling)
-    implementation(tornaco.project.android.thanox.Compose.toolingPreview)
-    implementation(tornaco.project.android.thanox.Compose.composeMaterialIconsExtended)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.viewbinding)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.material)
+    implementation(libs.compose.material.icons.extended)
+    implementation(libs.navigation.compose)
 
-    implementation(tornaco.project.android.thanox.Libs.Others.colorMath)
+    implementation(libs.colormath)
 }

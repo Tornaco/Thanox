@@ -204,3 +204,81 @@
 
 -keep class io.github.libxposed.** { *; }
 -keep class com.topjohnwu.superuser.** { *; }
+
+
+
+
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn android.accessibilityservice.IAccessibilityServiceClient$Stub
+-dontwarn android.accessibilityservice.IAccessibilityServiceClient
+-dontwarn android.accessibilityservice.IAccessibilityServiceConnection
+-dontwarn android.app.ActivityManager$TaskSnapshot
+-dontwarn android.app.ActivityManagerInternal
+-dontwarn android.app.ActivityThread
+-dontwarn android.app.AppOpsManager$OpEntry
+-dontwarn android.app.AppOpsManager$PackageOps
+-dontwarn android.app.ContextImpl
+-dontwarn android.app.IActivityManager$Stub
+-dontwarn android.app.IActivityManager
+-dontwarn android.app.IApplicationThread
+-dontwarn android.app.INotificationManager
+-dontwarn android.app.LoadedApk
+-dontwarn android.app.PackageDeleteObserver
+-dontwarn android.app.UiAutomationConnection
+-dontwarn android.app.usage.IUsageStatsManager$Stub
+-dontwarn android.app.usage.IUsageStatsManager
+-dontwarn android.content.IIntentSender$Stub
+-dontwarn android.content.IIntentSender
+-dontwarn android.content.pm.IPackageInstaller
+-dontwarn android.content.pm.IPackageManager$Stub
+-dontwarn android.content.pm.IPackageManager
+-dontwarn android.content.pm.PackageParser$Activity
+-dontwarn android.content.pm.PackageParser$Instrumentation
+-dontwarn android.content.pm.PackageParser$Provider
+-dontwarn android.content.pm.PackageParser$Service
+-dontwarn android.content.pm.ParceledListSlice
+-dontwarn android.content.pm.SuspendDialogInfo
+-dontwarn android.content.pm.UserInfo
+-dontwarn android.graphics.GraphicBuffer
+-dontwarn android.net.INetworkScoreCache
+-dontwarn android.net.NetworkKey
+-dontwarn android.net.NetworkScoreManager
+-dontwarn android.net.ScoredNetwork
+-dontwarn android.net.wifi.WifiNetworkScoreCache$CacheListener
+-dontwarn android.net.wifi.WifiNetworkScoreCache
+-dontwarn android.os.IProgressListener$Stub
+-dontwarn android.os.IProgressListener
+-dontwarn android.os.RemoteCallback$OnResultListener
+-dontwarn android.os.RemoteCallback
+-dontwarn android.os.ServiceManager
+-dontwarn android.os.ShellCallback
+-dontwarn android.os.SystemProperties
+-dontwarn android.util.Slog
+-dontwarn android.view.accessibility.AccessibilityInteractionClient
+-dontwarn android.webkit.IWebViewUpdateService$Stub
+-dontwarn android.webkit.IWebViewUpdateService
+-dontwarn android.webkit.WebViewProviderInfo
+-dontwarn com.android.internal.annotations.GuardedBy
+-dontwarn com.android.internal.app.IAppOpsService$Stub
+-dontwarn com.android.internal.app.IAppOpsService
+-dontwarn com.android.internal.appwidget.IAppWidgetHost
+-dontwarn com.android.internal.appwidget.IAppWidgetService$Stub
+-dontwarn com.android.internal.appwidget.IAppWidgetService
+-dontwarn com.android.internal.os.ProcLocksReader
+-dontwarn com.android.internal.util.FastPrintWriter
+-dontwarn com.android.internal.util.FastXmlSerializer
+-dontwarn com.android.server.LocalServices
+-dontwarn com.android.server.SystemConfig
+-dontwarn github.tornaco.xposed.annotation.XposedHook
+-dontwarn io.github.libxposed.api.XposedInterface
+-dontwarn io.github.libxposed.api.XposedModule
+-dontwarn io.github.libxposed.api.XposedModuleInterface$ModuleLoadedParam
+-dontwarn io.github.libxposed.api.XposedModuleInterface$PackageLoadedParam
+-dontwarn io.github.libxposed.api.XposedModuleInterface$SystemServerLoadedParam
+-dontwarn java.beans.BeanInfo
+-dontwarn java.beans.FeatureDescriptor
+-dontwarn java.beans.IntrospectionException
+-dontwarn java.beans.Introspector
+-dontwarn java.beans.PropertyDescriptor
+-dontwarn lombok.NonNull

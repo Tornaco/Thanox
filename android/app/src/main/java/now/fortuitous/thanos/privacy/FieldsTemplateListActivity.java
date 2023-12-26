@@ -90,7 +90,7 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
     @Override
     protected void onSetupFab(ExtendedFloatingActionButton fab) {
         fab.setText(null);
-        fab.setIconResource(R.drawable.module_common_ic_add_fill);
+        fab.setIconResource(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill);
         fab.show();
         fab.setOnClickListener(
                 new View.OnClickListener() {
@@ -206,7 +206,7 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
                             AppInfo appInfo = new AppInfo();
                             appInfo.setPkgName(f.getId());
                             appInfo.setObj(f.getId());
-                            appInfo.setIconDrawable(R.drawable.module_common_ic_nothing);
+                            appInfo.setIconDrawable(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_nothing);
                             appInfo.setAppLabel(f.getLabel());
                             int usage = priv.getUsageForFieldsProfile(f.getId());
                             appInfo.setArg1(usage);

@@ -1,12 +1,8 @@
 plugins {
-    id("java")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
-    compileOnly(tornaco.project.android.thanox.Libs.Others.xposedApi)
+    compileOnly(libs.xposed.api)
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}

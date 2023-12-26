@@ -287,12 +287,11 @@ private fun NavContent(
     onFeatureItemClick: (FeatureItem) -> Unit,
     createShortcut: (FeatureItem) -> Unit,
 ) {
-    val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
     Column(
         modifier = Modifier
             .padding(contentPadding)
             .fillMaxSize()
-            .background(color = Color(windowBgColor))
+            .background(color = MaterialTheme.colorScheme.surface)
             .verticalScroll(rememberScrollState())
     ) {
         NavHeaderContent(

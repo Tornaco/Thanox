@@ -15,7 +15,7 @@ public class CommonPreferences extends Observable {
     private static final String PREF_KEY_APP_LIST_SHOW_PKG_NAME = "PREF_KEY_APP_LIST_SHOW_PKG_NAME";
     private static final String PREF_KEY_APP_LIST_SHOW_VERSION = "PREF_KEY_APP_LIST_SHOW_VERSION";
 
-    private static Singleton<CommonPreferences> sPref = new Singleton<CommonPreferences>() {
+    private static final Singleton<CommonPreferences> sPref = new Singleton<CommonPreferences>() {
         @Override
         protected CommonPreferences create() {
             return new CommonPreferences();

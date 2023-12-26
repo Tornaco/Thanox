@@ -116,7 +116,7 @@ class CommonFuncToggleAppListFilterAdapter extends RecyclerView.Adapter<CommonFu
     }
 
     static final class VH extends RecyclerView.ViewHolder {
-        private ItemCommonCheckableAppBinding binding;
+        private final ItemCommonCheckableAppBinding binding;
 
         VH(@NonNull ItemCommonCheckableAppBinding binding) {
             super(binding.getRoot());

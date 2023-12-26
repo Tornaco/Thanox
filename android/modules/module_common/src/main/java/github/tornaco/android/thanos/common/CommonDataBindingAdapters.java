@@ -1,7 +1,5 @@
 package github.tornaco.android.thanos.common;
 
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.Checkable;
@@ -9,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.Switch;
 
 import androidx.annotation.ColorRes;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +22,6 @@ import java.util.List;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
-import github.tornaco.android.thanos.util.ColorUtils;
 import github.tornaco.android.thanos.util.GlideApp;
 import github.tornaco.android.thanos.util.GlideRequest;
 import github.tornaco.android.thanos.widget.GrayscaleTransformation;

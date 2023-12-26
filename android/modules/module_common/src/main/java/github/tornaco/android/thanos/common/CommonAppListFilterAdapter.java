@@ -13,7 +13,6 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.util.function.Predicate;
 import github.tornaco.android.thanos.module.common.R;
 import github.tornaco.android.thanos.module.common.databinding.ItemCommonAppBinding;
@@ -21,165 +20,165 @@ import util.Consumer;
 
 
 public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppListFilterAdapter.VH>
-    implements Consumer<List<AppListModel>>,
-    FastScrollRecyclerView.SectionedAdapter,
-    FastScrollRecyclerView.MeasurableAdapter<CommonAppListFilterAdapter.VH> {
+        implements Consumer<List<AppListModel>>,
+        FastScrollRecyclerView.SectionedAdapter,
+        FastScrollRecyclerView.MeasurableAdapter<CommonAppListFilterAdapter.VH> {
 
-  public static AppItemViewLongClickListener fallbackAppItemLongClickListener;
+    public static AppItemViewLongClickListener fallbackAppItemLongClickListener;
 
-  private final List<AppListModel> listModels = new ArrayList<>();
+    private final List<AppListModel> listModels = new ArrayList<>();
 
-  @Nullable
-  private AppItemClickListener itemClickListener;
-  @Nullable
-  private AppItemViewClickListener itemViewClickListener;
-  @Nullable
-  private AppItemViewLongClickListener itemViewLongClickListener;
+    @Nullable
+    private AppItemClickListener itemClickListener;
+    @Nullable
+    private AppItemViewClickListener itemViewClickListener;
+    @Nullable
+    private AppItemViewLongClickListener itemViewLongClickListener;
 
-  private StateImageProvider stateImageProvider;
+    private StateImageProvider stateImageProvider;
 
-  private boolean iconCheckable = false;
+    private boolean iconCheckable = false;
 
-  public CommonAppListFilterAdapter(@Nullable AppItemClickListener itemClickListener) {
-    this.itemClickListener = itemClickListener;
-  }
-
-  public CommonAppListFilterAdapter(@Nullable AppItemViewClickListener itemViewClickListener) {
-    this.itemViewClickListener = itemViewClickListener;
-  }
-
-  public CommonAppListFilterAdapter(@Nullable AppItemViewClickListener itemViewClickListener,
-                                    @Nullable AppItemViewLongClickListener appItemViewLongClickListener) {
-    this.itemViewClickListener = itemViewClickListener;
-    this.itemViewLongClickListener = appItemViewLongClickListener;
-  }
-
-  public CommonAppListFilterAdapter(
-      @Nullable AppItemClickListener itemClickListener, boolean iconCheckable) {
-    this.itemClickListener = itemClickListener;
-    this.iconCheckable = iconCheckable;
-  }
-
-  public CommonAppListFilterAdapter(
-      @Nullable AppItemClickListener itemClickListener,
-      StateImageProvider stateImageProvider,
-      boolean iconCheckable) {
-    this.itemClickListener = itemClickListener;
-    this.stateImageProvider = stateImageProvider;
-    this.iconCheckable = iconCheckable;
-  }
-
-  public void removeItem(Predicate<AppListModel> predicate) {
-    List<AppListModel> modelsToRemove = new ArrayList<>();
-    for (AppListModel model : listModels) {
-      if (predicate.test(model)) {
-        modelsToRemove.add(model);
-      }
+    public CommonAppListFilterAdapter(@Nullable AppItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
-    listModels.removeAll(modelsToRemove);
-    notifyDataSetChanged();
-  }
 
-  @NonNull
-  @Override
-  public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    return new VH(
-        ItemCommonAppBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-  }
+    public CommonAppListFilterAdapter(@Nullable AppItemViewClickListener itemViewClickListener) {
+        this.itemViewClickListener = itemViewClickListener;
+    }
 
-  @Override
-  public void onBindViewHolder(@NonNull VH holder, int position) {
-    AppListModel model = listModels.get(position);
-    holder.binding.setApp(model.appInfo);
-    holder.binding.setIsLastOne(false);
-    holder.binding.setListener(
-        appInfo -> {
-          if (iconCheckable) {
-            appInfo.setSelected(!appInfo.isSelected());
-            holder.binding.icon.toggle();
-          }
-          if (itemViewClickListener != null) {
-            itemViewClickListener.onAppItemClick(appInfo, holder.itemView);
-          } else if (itemClickListener != null) {
-            itemClickListener.onAppItemClick(appInfo);
-          }
-        });
-    holder.binding.setLongClickListener(appInfo -> {
-      if (itemViewLongClickListener != null) {
-        itemViewLongClickListener.onAppItemLongClick(holder.itemView, model);
-      } else {
-        // Fallback go to app details.
-        if (fallbackAppItemLongClickListener != null) {
-          fallbackAppItemLongClickListener.onAppItemLongClick(holder.itemView, model);
+    public CommonAppListFilterAdapter(@Nullable AppItemViewClickListener itemViewClickListener,
+                                      @Nullable AppItemViewLongClickListener appItemViewLongClickListener) {
+        this.itemViewClickListener = itemViewClickListener;
+        this.itemViewLongClickListener = appItemViewLongClickListener;
+    }
+
+    public CommonAppListFilterAdapter(
+            @Nullable AppItemClickListener itemClickListener, boolean iconCheckable) {
+        this.itemClickListener = itemClickListener;
+        this.iconCheckable = iconCheckable;
+    }
+
+    public CommonAppListFilterAdapter(
+            @Nullable AppItemClickListener itemClickListener,
+            StateImageProvider stateImageProvider,
+            boolean iconCheckable) {
+        this.itemClickListener = itemClickListener;
+        this.stateImageProvider = stateImageProvider;
+        this.iconCheckable = iconCheckable;
+    }
+
+    public void removeItem(Predicate<AppListModel> predicate) {
+        List<AppListModel> modelsToRemove = new ArrayList<>();
+        for (AppListModel model : listModels) {
+            if (predicate.test(model)) {
+                modelsToRemove.add(model);
+            }
         }
-      }
-      return true;
-    });
-
-    // Badge
-    holder.binding.setBadge1(model.badge);
-    holder.binding.setBadge2(model.badge2);
-    if (model.badge1BgColor != 0) {
-      holder.binding.badge1View.setBackgroundColor(model.badge1BgColor);
-    }
-    if (model.badge2BgColor != 0) {
-      holder.binding.badge2View.setBackgroundColor(model.badge2BgColor);
+        listModels.removeAll(modelsToRemove);
+        notifyDataSetChanged();
     }
 
-    holder.binding.setDescription(model.description);
-    holder.binding.setShowStateBadge(model.showStateBadge);
-    if (iconCheckable) {
-      holder.binding.icon.setChecked(model.appInfo.isSelected(), false);
+    @NonNull
+    @Override
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new VH(
+                ItemCommonAppBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
-    // Image.
-    holder.binding.stateImage.setVisibility(stateImageProvider == null ? View.GONE : View.VISIBLE);
-    if (stateImageProvider != null) {
-      holder.binding.stateImage.setImageResource(stateImageProvider.provideImageRes(model));
-      holder.binding.stateImage.setOnClickListener(stateImageProvider.provideOnClickListener(model, position));
+    @Override
+    public void onBindViewHolder(@NonNull VH holder, int position) {
+        AppListModel model = listModels.get(position);
+        holder.binding.setApp(model.appInfo);
+        holder.binding.setIsLastOne(false);
+        holder.binding.setListener(
+                appInfo -> {
+                    if (iconCheckable) {
+                        appInfo.setSelected(!appInfo.isSelected());
+                        holder.binding.icon.toggle();
+                    }
+                    if (itemViewClickListener != null) {
+                        itemViewClickListener.onAppItemClick(appInfo, holder.itemView);
+                    } else if (itemClickListener != null) {
+                        itemClickListener.onAppItemClick(appInfo);
+                    }
+                });
+        holder.binding.setLongClickListener(appInfo -> {
+            if (itemViewLongClickListener != null) {
+                itemViewLongClickListener.onAppItemLongClick(holder.itemView, model);
+            } else {
+                // Fallback go to app details.
+                if (fallbackAppItemLongClickListener != null) {
+                    fallbackAppItemLongClickListener.onAppItemLongClick(holder.itemView, model);
+                }
+            }
+            return true;
+        });
+
+        // Badge
+        holder.binding.setBadge1(model.badge);
+        holder.binding.setBadge2(model.badge2);
+        if (model.badge1BgColor != 0) {
+            holder.binding.badge1View.setBackgroundColor(model.badge1BgColor);
+        }
+        if (model.badge2BgColor != 0) {
+            holder.binding.badge2View.setBackgroundColor(model.badge2BgColor);
+        }
+
+        holder.binding.setDescription(model.description);
+        holder.binding.setShowStateBadge(model.showStateBadge);
+        if (iconCheckable) {
+            holder.binding.icon.setChecked(model.appInfo.isSelected(), false);
+        }
+
+        // Image.
+        holder.binding.stateImage.setVisibility(stateImageProvider == null ? View.GONE : View.VISIBLE);
+        if (stateImageProvider != null) {
+            holder.binding.stateImage.setImageResource(stateImageProvider.provideImageRes(model));
+            holder.binding.stateImage.setOnClickListener(stateImageProvider.provideOnClickListener(model, position));
+        }
+
+        holder.binding.executePendingBindings();
     }
 
-    holder.binding.executePendingBindings();
-  }
-
-  @Override
-  public int getItemCount() {
-    return listModels.size();
-  }
-
-  public void updateSingleItem(Predicate<AppListModel> finder) {
-    for (int i = 0; i < listModels.size(); i++) {
-      if (finder.test(listModels.get(i))) {
-        notifyItemChanged(i);
-      }
+    @Override
+    public int getItemCount() {
+        return listModels.size();
     }
-  }
 
-  @Override
-  public void accept(List<AppListModel> processModels) {
-    this.listModels.clear();
-    this.listModels.addAll(processModels);
-    notifyDataSetChanged();
-  }
-
-  @Override
-  public int getViewTypeHeight(RecyclerView recyclerView, @Nullable VH viewHolder, int viewType) {
-    return recyclerView.getResources().getDimensionPixelSize(R.dimen.common_list_item_height);
-  }
-
-  @NonNull
-  @Override
-  public String getSectionName(int position) {
-    AppListModel model = listModels.get(position);
-    String appName = model.appInfo.getAppLabel();
-    if (appName == null || appName.length() < 1) {
-      appName = model.appInfo.getPkgName();
+    public void updateSingleItem(Predicate<AppListModel> finder) {
+        for (int i = 0; i < listModels.size(); i++) {
+            if (finder.test(listModels.get(i))) {
+                notifyItemChanged(i);
+            }
+        }
     }
-    if (appName == null) {
-      return "*";
+
+    @Override
+    public void accept(List<AppListModel> processModels) {
+        this.listModels.clear();
+        this.listModels.addAll(processModels);
+        notifyDataSetChanged();
     }
-    return String.valueOf(appName.charAt(0));
-  }
+
+    @Override
+    public int getViewTypeHeight(RecyclerView recyclerView, @Nullable VH viewHolder, int viewType) {
+        return recyclerView.getResources().getDimensionPixelSize(R.dimen.common_list_item_height);
+    }
+
+    @NonNull
+    @Override
+    public String getSectionName(int position) {
+        AppListModel model = listModels.get(position);
+        String appName = model.appInfo.getAppLabel();
+        if (appName == null || appName.length() < 1) {
+            appName = model.appInfo.getPkgName();
+        }
+        if (appName == null) {
+            return "*";
+        }
+        return String.valueOf(appName.charAt(0));
+    }
 
     public List<AppListModel> getListModels() {
         return this.listModels;
@@ -191,12 +190,12 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
 
     static final class VH extends RecyclerView.ViewHolder {
 
-    private ItemCommonAppBinding binding;
+        private final ItemCommonAppBinding binding;
 
-    VH(@NonNull ItemCommonAppBinding binding) {
-      super(binding.getRoot());
-      this.binding = binding;
-    }
+        VH(@NonNull ItemCommonAppBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
 
         public github.tornaco.android.thanos.module.common.databinding.ItemCommonAppBinding getBinding() {
             return this.binding;

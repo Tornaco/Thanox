@@ -43,17 +43,11 @@ import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.contentColorFor
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -64,11 +58,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 
 
-@OptIn(ExperimentalMaterial3Api::class, androidx.compose.material.ExperimentalMaterialApi::class)
+@OptIn(androidx.compose.material.ExperimentalMaterialApi::class)
 @Composable
 fun ThanoxBottomSheetScaffold(
     title: @Composable () -> Unit,
@@ -79,29 +72,22 @@ fun ThanoxBottomSheetScaffold(
     sheetContent: @Composable ColumnScope.() -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
-    val containerColor = MaterialTheme.colorScheme.surfaceVariant
-    val contentColor = contentColorFor(containerColor)
-    CompositionLocalProvider(LocalContentColor provides contentColor) {
-        val appbarState = rememberTopAppBarState()
-        val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(appbarState)
-        BottomSheetScaffold(
-            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-            scaffoldState = scaffoldState,
-            topBar = {
-                ThanoxSmallTopAppBarContainer(
-                    searchBarState,
-                    title,
-                    actions,
-                    onBackPressed
-                )
-            },
-            sheetContent = sheetContent,
-            sheetPeekHeight = 0.dp,
-            content = {
-                content(it)
-            }
-        )
-    }
+    BottomSheetScaffold(
+        scaffoldState = scaffoldState,
+        topBar = {
+            ThanoxSmallTopAppBarContainer(
+                searchBarState,
+                title,
+                actions,
+                onBackPressed
+            )
+        },
+        sheetContent = sheetContent,
+        sheetPeekHeight = 0.dp,
+        content = {
+            content(it)
+        }
+    )
 }
 
 @Composable

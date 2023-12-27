@@ -16,6 +16,8 @@
  */
 
 
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package now.fortuitous.thanos.main
 
 import android.graphics.drawable.LayerDrawable
@@ -38,11 +40,15 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -58,6 +64,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -79,7 +86,6 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.module.compose.common.requireActivity
-import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextContainer
@@ -90,7 +96,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxBottomSheetScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRippleBorderless
 import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedString
@@ -124,44 +129,54 @@ fun NavScreen() {
         viewModel.loadHeaderStatus()
         viewModel.autoRefresh()
     }
-
-    ThanoxBottomSheetScaffold(title = {
-        Row(verticalAlignment = CenterVertically) {
-            Text(
-                stringResource(id = R.string.app_name),
-                style = TypographyDefaults.appBarTitleTextStyle()
-            )
-            TinySpacer()
-            AppBarBadges(state = state, onInactiveClick = {
-                isShowActiveDialog = true
-            }, onNeedRestartClick = {
-                NeedToRestartActivity.Starter.start(activity)
-            }, onTryingAppClick = {
-                launchSubscribeActivity(activity) {}
-            }, onFrameworkErrorClick = {
-                isShowFrameworkErrorDialog = true
-            })
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
+    Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            MediumTopAppBar(
+                scrollBehavior = scrollBehavior,
+                colors = TopAppBarDefaults.mediumTopAppBarColors(
+                    containerColor = Color(
+                        windowBgColor
+                    )
+                ),
+                title = {
+                    Row(verticalAlignment = CenterVertically) {
+                        Text(stringResource(id = R.string.app_name))
+                        TinySpacer()
+                        AppBarBadges(state = state, onInactiveClick = {
+                            isShowActiveDialog = true
+                        }, onNeedRestartClick = {
+                            NeedToRestartActivity.Starter.start(activity)
+                        }, onTryingAppClick = {
+                            launchSubscribeActivity(activity) {}
+                        }, onFrameworkErrorClick = {
+                            isShowFrameworkErrorDialog = true
+                        })
+                    }
+                },
+                actions = {
+                    Row(modifier = Modifier, verticalAlignment = CenterVertically) {
+                        IconButton(onClick = {
+                            isShowRebootConfirmationDialog = true
+                        }) {
+                            Icon(
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_restart_line),
+                                contentDescription = "Reboot"
+                            )
+                        }
+                        IconButton(onClick = {
+                            now.fortuitous.thanos.settings.SettingsDashboardActivity.start(activity)
+                        }) {
+                            Icon(
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_line),
+                                contentDescription = "Settings"
+                            )
+                        }
+                    }
+                })
         }
-    }, actions = {
-        Row(modifier = Modifier, verticalAlignment = CenterVertically) {
-            IconButton(onClick = {
-                isShowRebootConfirmationDialog = true
-            }) {
-                Icon(
-                    painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_restart_line),
-                    contentDescription = "Reboot"
-                )
-            }
-            IconButton(onClick = {
-                now.fortuitous.thanos.settings.SettingsDashboardActivity.start(activity)
-            }) {
-                Icon(
-                    painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_line),
-                    contentDescription = "Settings"
-                )
-            }
-        }
-    }, onBackPressed = null) { contentPadding ->
+    ) { contentPadding ->
         SwipeRefresh(state = rememberSwipeRefreshState(state.isLoading),
             onRefresh = { viewModel.refresh() },
             indicatorPadding = contentPadding,

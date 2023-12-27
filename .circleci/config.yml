@@ -14,6 +14,8 @@ jobs:
     # See: https://circleci.com/docs/2.0/executor-types/
     executor:
       name: android/android-machine
+      resource-class: large
+      tag: 2023.11.1
 
     working_directory: ~/thanox_workspace
 

@@ -146,3 +146,31 @@
 -keep class org.apache.commons.** {*;}
 -keep class github.tornaco.android.thanos.BuildProp {*;}
 
+
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn android.app.ActivityTaskManager
+-dontwarn android.app.ActivityThread
+-dontwarn android.app.AppGlobals
+-dontwarn android.app.IActivityManager$Stub
+-dontwarn android.app.IActivityManager
+-dontwarn android.app.IActivityTaskManager$Stub
+-dontwarn android.app.IActivityTaskManager
+-dontwarn android.app.INotificationManager$Stub
+-dontwarn android.app.INotificationManager
+-dontwarn android.app.SystemServiceRegistry$ContextAwareServiceProducerWithoutBinder
+-dontwarn android.app.SystemServiceRegistry
+-dontwarn android.content.pm.PackageParser$PackageLite
+-dontwarn android.content.pm.PackageParser$PackageParserException
+-dontwarn android.content.pm.PackageParser
+-dontwarn android.content.pm.ParceledListSlice
+-dontwarn android.os.BinderProxy
+-dontwarn android.os.ServiceManager$ServiceNotFoundException
+-dontwarn android.os.ServiceManager
+-dontwarn android.util.Singleton
+-dontwarn com.android.internal.app.IAppOpsService$Stub
+-dontwarn com.android.internal.app.IAppOpsService
+-dontwarn com.android.internal.appwidget.IAppWidgetHost
+-dontwarn com.android.internal.appwidget.IAppWidgetService$Stub
+-dontwarn com.android.internal.appwidget.IAppWidgetService
+

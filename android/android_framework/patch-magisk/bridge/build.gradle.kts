@@ -8,4 +8,6 @@ dependencies {
 
     implementation(project(":android_framework:base"))
     compileOnly(project(":android_framework:hidden-api"))
+
+    implementation(libs.guava.android)
 }

@@ -42,6 +42,13 @@ fun cmake(): String {
     } else {
         "$sdkDir/cmake/"
     }
+
+    // Workaround for CI, prefer 3.16.3
+    val is_3163Exists = File(cmakeDir, "3.16.3").exists()
+    if (is_3163Exists) {
+        return "3.16.3"
+    }
+
     val latestCmake =
         File(cmakeDir).listFiles()
             ?.maxByOrNull { it.name.subSequence(0, 6).toString().replace(".", "").toInt() }

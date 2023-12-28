@@ -21,7 +21,7 @@ dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.kotlin.reflect)
 
-    implementation(libs.xposed.api)
+    compileOnly(libs.xposed.api)
 }
 
 tasks.withType<Checkstyle> {

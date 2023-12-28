@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.persist.i.MapRepo;
 import github.tornaco.android.thanos.core.util.FileUtils;
 import com.elvishew.xlog.XLog;
@@ -30,7 +31,7 @@ import util.IoUtils;
  * Created by guohao4 on 2017/12/28.
  * Email: Tornaco@163.com
  */
-
+@Keep
 public class StringMapRepo implements MapRepo<String, String> {
 
     private static final String NULL_INDICATOR = "NULL";

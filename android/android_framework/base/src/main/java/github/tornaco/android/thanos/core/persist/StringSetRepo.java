@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.util.AtomicFile;
 import android.util.Log;
 import com.google.common.io.Files;
+
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.persist.i.SetRepo;
 import github.tornaco.android.thanos.core.util.FileUtils;
 import com.elvishew.xlog.XLog;
@@ -24,7 +26,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by guohao4 on 2017/12/11. Email: Tornaco@163.com
  */
-
+@Keep
 public class StringSetRepo implements SetRepo<String> {
 
   private static final int FLUSH_DELAY = 5000;

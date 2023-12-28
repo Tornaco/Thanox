@@ -23,6 +23,9 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class UserStringMapRepo {
     private final StringMapRepo repo;
     private final int userId;

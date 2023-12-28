@@ -3,8 +3,10 @@ package github.tornaco.android.thanos.core.persist;
 import java.util.Collection;
 import java.util.Set;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.util.function.Predicate;
 
+@Keep
 public class UserStringSetRepo {
     private final StringSetRepo repo;
     private final int userId;

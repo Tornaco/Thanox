@@ -98,7 +98,7 @@ android {
         }
     }
 
-    packagingOptions {
+    packaging {
         resources.excludes.add("META-INF/rxjava.properties")
         resources.excludes.add("META-INF/androidx.room_room-runtime.version")
         resources.excludes.add("META-INF/LICENSE-LGPL-2.1.txt")
@@ -235,6 +235,7 @@ dependencies {
     implementation(project(":android_framework:res"))
     implementation(project(":android_framework:patch-magisk:patch-framework"))
     implementation(project(":android_framework:services"))
+    implementation(project(":android_framework:db"))
     implementation(project(":android_framework:patchx-entry"))
 
     implementation(project(":third_party:apkbuilder"))

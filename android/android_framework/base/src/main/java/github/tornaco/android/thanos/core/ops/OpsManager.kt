@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.core.ops
 
 import android.app.AppOpsManager
+import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.pm.Pkg
 
 class OpsManager(private val ops: IOps) {
@@ -67,5 +68,8 @@ class OpsManager(private val ops: IOps) {
     fun opToPermission(code: Int): String? = ops.opToPermission(code)
     fun getPermissionFlags(permName: String, pkg: Pkg): Int = ops.getPermissionFlags(permName, pkg)
     fun permissionFlagToString(flag: Int): String = ops.permissionFlagToString(flag)
-    fun opToSwitch(code: Int): Int = AppOpsManager.opToSwitch(code)
+    fun opToSwitch(code: Int): Int? = runCatching { AppOpsManager.opToSwitch(code) }.getOrElse {
+        XLog.w("opToSwitch error: ${it.stackTraceToString()}")
+        null
+    }
 }

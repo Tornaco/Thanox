@@ -25,6 +25,7 @@
     <string name="key_test_new_ops" translatable="false">key_test_new_ops</string>
 
     <string name="key_about" translatable="false">key_about</string>
+    <string name="key_feedback" translatable="false">key_feedback</string>
     <string name="key_build_info_server" translatable="false">key_build_info_server</string>
     <string name="key_build_info_app" translatable="false">key_build_info_app</string>
     <string name="key_patch_info" translatable="false">key_patch_info</string>

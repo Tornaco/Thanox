@@ -155,6 +155,11 @@
     <PreferenceCategory app:title="@string/pre_category_about">
 
         <Preference
+            app:key="@string/key_feedback"
+            app:persistent="false"
+            app:title="@string/nav_title_feedback" />
+
+        <Preference
             app:key="@string/key_build_info_app"
             app:persistent="false"
             app:title="@string/pref_title_build_info_app" />

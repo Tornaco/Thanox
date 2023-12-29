@@ -33,7 +33,8 @@ android {
     }
 
     buildTypes {
-        val noMinify = project.findProperty("no-minify")?.toString().toBoolean()
+        val noMinify = project.findProperty("no-minify")?.toString()
+            .toBoolean() || project.findProperty("noMinify")?.toString().toBoolean()
         log("noMinify: $noMinify")
 
         getByName("release") {

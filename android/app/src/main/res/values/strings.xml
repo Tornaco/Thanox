@@ -57,7 +57,10 @@
     <string name="card_title_plugin_available">Install Thanox plugin</string>
     <string name="card_message_plugin_available">Plugin consist of some unstable or non-critical functions.</string>
 
-    <string name="dialog_message_feedback">Please go to the app\'s chat group or github/tornaco/Thanox and create an issue.\n\n<b>Please include the following info when reporting an issue：</b>\n\n1. Issue description：xxxx  \n2. What did I try to do to resolve the issue，for example（the smart app standby is not working）I attempted to read the usage guide, and opened xxx in the system settings. \n3. The Thanox app version where the issue occured, and the Android version. \n4. Find：logs under /data/system/thanos/logging. </string>
+    <string name="dialog_message_feedback">You can submit issues for feedback either in the Chat Groups in the Settings-About section or on GitHub/Thanox. When providing feedback, please make sure to include the following essential information: \n\n1. Clear description of the issue with accompanying screenshots or screen recordings. \n2. Log files exported by clicking the button below. \n\nBoth pieces of information are necessary.</string>
+    <string name="feedback_export_log">Export log</string>
+    <string name="feedback_export_log_success">Log has been exported to %s</string>
+    <string name="feedback_export_log_fail">Fail to export log, pls grant Storage permission manually and try again</string>
 
     <string name="title_no_plugins_installed">No plugin available</string>
     <string name="title_plugin_reboot_take_effect">Please reboot for changes to take effect.</string>

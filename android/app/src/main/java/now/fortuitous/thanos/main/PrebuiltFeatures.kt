@@ -303,12 +303,6 @@ object PrebuiltFeatures {
         titleRes = R.string.nav_title_guide,
         items = listOf(
             FeatureItem(
-                id = PrebuiltFeatureIds.ID_FEEDBACK,
-                iconRes = R.drawable.ic_nav_feedback,
-                titleRes = R.string.nav_title_feedback,
-                themeColor = R.color.nav_icon_feedback
-            ),
-            FeatureItem(
                 id = PrebuiltFeatureIds.ID_GUIDE,
                 iconRes = R.drawable.ic_nav_guide,
                 titleRes = github.tornaco.android.thanos.module.common.R.string.common_menu_title_wiki,

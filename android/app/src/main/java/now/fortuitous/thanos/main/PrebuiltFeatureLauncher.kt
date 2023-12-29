@@ -20,10 +20,8 @@ package now.fortuitous.thanos.main
 import android.app.Activity
 import android.content.Intent
 import com.elvishew.xlog.XLog
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import github.tornaco.android.plugin.push.message.delegate.WechatPushDeleteMainActivity
 import github.tornaco.android.thanos.BuildProp
-import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.feature.access.AppFeatureManager
@@ -243,7 +241,6 @@ class PrebuiltFeatureLauncher(
             }
 
             PrebuiltFeatureIds.ID_FEEDBACK -> {
-                showFeedbackDialog()
             }
 
             PrebuiltFeatureIds.ID_GUIDE -> {
@@ -278,13 +275,5 @@ class PrebuiltFeatureLauncher(
                 }
             }
         }
-    }
-
-    private fun showFeedbackDialog() {
-        MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.nav_title_feedback)
-            .setMessage(R.string.dialog_message_feedback)
-            .setPositiveButton(android.R.string.ok, null)
-            .show()
     }
 }

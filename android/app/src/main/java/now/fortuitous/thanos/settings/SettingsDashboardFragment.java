@@ -102,11 +102,13 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
 
     private int buildInfoClickTimes = 0;
     private ExportPatchUi exportPatchUi;
+    private ExportLogUi exportLogUi;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         exportPatchUi = ExportPatchUi.from(this);
+        exportLogUi = ExportLogUi.from(this);
     }
 
     @Override
@@ -457,6 +459,8 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
             onBackupFilePickRequestResultQ(data);
         } else if (requestCode == ExportPatchUi.REQUEST_CODE_EXPORT_MAGISK_FILE_PICKED && resultCode == Activity.RESULT_OK) {
             exportPatchUi.handleActivityResult(requestCode, resultCode, data);
+        } else if (requestCode == ExportLogUi.REQUEST_CODE_EXPORT_LOG_FILE_PICKED && resultCode == Activity.RESULT_OK) {
+            exportLogUi.handleActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -740,6 +744,19 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     protected void onBindAboutPreferences() {
         ThanosManager thanos = ThanosManager.from(getContext());
 
+        findPreference(getString(R.string.key_feedback)).setOnPreferenceClickListener(preference -> {
+            if (OsUtils.isROrAbove()) {
+                exportLogUi.show(() -> {
+                    if (OsUtils.isTOrAbove()) {
+                        SettingsDashboardFragmentPermissionRequester.exportLogRequestedTOrAboveChecked(SettingsDashboardFragment.this);
+                    } else {
+                        SettingsDashboardFragmentPermissionRequester.exportLogRequestedTBelowChecked(SettingsDashboardFragment.this);
+                    }
+                });
+            }
+            return true;
+        });
+
         // Build.
         findPreference(getString(R.string.key_build_info_app))
                 .setSummary(
@@ -838,6 +855,20 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
 
     @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     void exportMagiskZipRequestedTBelow() {
+        // Noop, just request perm.
+    }
+
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void exportLogRequestedTOrAbove() {
+        // Noop, just request perm.
+    }
+
+    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void exportLogRequestedTBelow() {
         // Noop, just request perm.
     }
 }

@@ -56,7 +56,10 @@
     <string name="title_download">下载</string>
     <string name="title_install">安装</string>
 
-    <string name="dialog_message_feedback">请在聊天软件群组或者前往github/tornaco/Thanox新建issue进行反馈。\n\n<b>反馈问题请务必提供下列信息：</b>\n\n1. 问题描述：xxxx  \n2. 对于这个问题我做了什么尝试，例如（如果反馈的是智能休眠不work）我尝试看了使用说明，打开了系统设置中的xxx。 \n3. 发生问题的Thanox app版本，系统的Android版本。\n4. 查找：/data/system/thanos/logging下的日志。</string>
+    <string name="dialog_message_feedback">可在设置-关于中的聊天群组或者github/Thanox中提交Issue进行反馈。反馈问题务必提供以下必要信息：\n\n1. 清晰的问题描述，配合截图或录屏 \n2. 点击下方按钮导出的日志文件。\n\n以上信息缺一不可。</string>
+    <string name="feedback_export_log">导出日志</string>
+    <string name="feedback_export_log_success">日志已导出 %s</string>
+    <string name="feedback_export_log_fail">日志导出失败，请手动授予文件读写权限后重试</string>
 
     <string name="title_no_plugins_installed">暂无插件可用</string>
     <string name="title_plugin_reboot_take_effect">重启生效</string>

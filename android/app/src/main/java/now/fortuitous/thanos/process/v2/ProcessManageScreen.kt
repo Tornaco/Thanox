@@ -72,7 +72,6 @@ import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
-import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloatingActionButton
@@ -125,7 +124,6 @@ fun ProcessManageScreen(
         title = {
             Text(
                 stringResource(id = R.string.feature_title_process_manage),
-                style = appBarTitleTextStyle()
             )
         },
         actions = {
@@ -371,7 +369,7 @@ fun RunningAppItem(
                             TinySpacer()
                             Icon(
                                 modifier = Modifier.size(16.dp),
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.  R.drawable.ic_remix_music_2_fill),
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_music_2_fill),
                                 contentDescription = "Playing",
                                 tint = MaterialTheme.colorScheme.primary
                             )

@@ -189,6 +189,7 @@
         <Preference
             app:key="@string/key_icon_maker"
             app:persistent="false"
+            app:isPreferenceVisible="false"
             app:summary="@string/pref_summary_icon_maker_remix_icon"
             app:title="@string/pref_title_icon_maker_remix_icon" />
         <Preference

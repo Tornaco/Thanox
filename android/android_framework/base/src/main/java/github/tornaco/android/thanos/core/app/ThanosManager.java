@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.core.app;
 
 import android.content.Context;
 import android.content.IntentFilter;
+import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 
 import com.elvishew.xlog.XLog;
@@ -365,6 +366,11 @@ public class ThanosManager {
     @SneakyThrows
     public List<String> getPatchingSource() {
         return service.getPatchingSource().stream().filter(Objects::nonNull).collect(Collectors.toList());
+    }
+
+    @SneakyThrows
+    public void writeLogsTo(ParcelFileDescriptor fd) {
+        service.writeLogsTo(fd);
     }
 
     public static ThanosManager from(Context context) {

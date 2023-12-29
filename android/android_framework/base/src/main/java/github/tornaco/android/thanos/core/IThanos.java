@@ -134,6 +134,9 @@ public interface IThanos extends android.os.IInterface
     {
       return null;
     }
+    @Override public void writeLogsTo(android.os.ParcelFileDescriptor pfd) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -445,6 +448,20 @@ public interface IThanos extends android.os.IInterface
           github.tornaco.android.thanos.core.ops.IOps _result = this.getOpsManager();
           reply.writeNoException();
           reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
+          return true;
+        }
+        case TRANSACTION_writeLogsTo:
+        {
+          data.enforceInterface(descriptor);
+          android.os.ParcelFileDescriptor _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = android.os.ParcelFileDescriptor.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          this.writeLogsTo(_arg0);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -1114,6 +1131,31 @@ public interface IThanos extends android.os.IInterface
         }
         return _result;
       }
+      @Override public void writeLogsTo(android.os.ParcelFileDescriptor pfd) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pfd!=null)) {
+            _data.writeInt(1);
+            pfd.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_writeLogsTo, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().writeLogsTo(pfd);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.IThanos sDefaultImpl;
     }
     static final int TRANSACTION_getServiceManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1148,6 +1190,7 @@ public interface IThanos extends android.os.IInterface
     static final int TRANSACTION_getPushDelegateManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
     static final int TRANSACTION_getNetworkManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
     static final int TRANSACTION_getOpsManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
+    static final int TRANSACTION_writeLogsTo = (android.os.IBinder.FIRST_CALL_TRANSACTION + 32);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.IThanos impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1197,4 +1240,5 @@ public interface IThanos extends android.os.IInterface
   public github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager getPushDelegateManager() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.net.INetworkManager getNetworkManager() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.ops.IOps getOpsManager() throws android.os.RemoteException;
+  public void writeLogsTo(android.os.ParcelFileDescriptor pfd) throws android.os.RemoteException;
 }

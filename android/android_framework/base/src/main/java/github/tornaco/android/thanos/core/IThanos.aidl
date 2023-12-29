@@ -72,4 +72,6 @@ interface IThanos {
     INetworkManager getNetworkManager();
 
     IOps getOpsManager();
+
+    void writeLogsTo(in ParcelFileDescriptor pfd);
 }

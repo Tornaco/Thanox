@@ -39,10 +39,11 @@ import java.io.OutputStream;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.DateUtils;
+import github.tornaco.android.thanos.core.util.FileUtils;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
-import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
@@ -150,7 +151,7 @@ public class ExportLogUi {
 
     private boolean onExportLogFilePickRequestResultQ(Intent data) {
         if (data == null) {
-            XLog.e("No data.");
+            XLog.e("onExportLogFilePickRequestResultQ No data.");
             return false;
         }
 
@@ -158,7 +159,7 @@ public class ExportLogUi {
 
         if (fileUri == null) {
             Toast.makeText(requireContext(), "fileUri == null", Toast.LENGTH_LONG).show();
-            XLog.e("No fileUri.");
+            XLog.e("onExportLogFilePickRequestResultQ No fileUri.");
             return false;
         }
 
@@ -166,10 +167,17 @@ public class ExportLogUi {
         OutputStream os = null;
         try {
             os = requireContext().getContentResolver().openOutputStream(fileUri);
+            if (os == null) {
+                XLog.e("onExportLogFilePickRequestResultQ. os is null.");
+                return false;
+            }
+            File logZipFile = ExportLogsKt.exportLogs(requireContext(), ThanosManager.from(requireContext()));
+            if (logZipFile == null) {
+                return false;
+            }
             //noinspection UnstableApiUsage
-            Files.asByteSource(
-                            new File(Objects.requireNonNull(PkgUtils.getApkPath(requireContext(), requireContext().getPackageName()))))
-                    .copyTo(os);
+            Files.asByteSource(logZipFile).copyTo(os);
+            FileUtils.delete(logZipFile);
             return true;
         } catch (IOException e) {
             XLog.e(e);

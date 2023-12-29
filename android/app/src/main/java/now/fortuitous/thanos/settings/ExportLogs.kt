@@ -1,0 +1,44 @@
+package now.fortuitous.thanos.settings
+
+import android.content.Context
+import android.os.ParcelFileDescriptor
+import com.elvishew.xlog.XLog
+import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.util.DateUtils
+import github.tornaco.android.thanos.core.util.ZipUtils
+import java.io.File
+
+// Note: Should align with MultipleModulesApp.initLog
+val Context.logFolderPath get() = externalCacheDir.toString() + File.separator + "logs"
+
+fun exportLogs(context: Context, manager: ThanosManager): File? {
+    return runCatching {
+        val tempDir = File(context.cacheDir, "Thanox-Log-${System.currentTimeMillis()}")
+
+        val zipRootDir = requireNotNull(context.externalCacheDir ?: context.cacheDir) {
+            "context.cache is null"
+        }
+        val name = autoGenLogFileName()
+
+        // App log.
+        File(context.logFolderPath).copyRecursively(tempDir)
+
+        // Service log.
+        val serviceLogFile = File(tempDir, "service.zip").apply { createNewFile() }
+        val pfd =
+            ParcelFileDescriptor.open(serviceLogFile, ParcelFileDescriptor.MODE_READ_WRITE)
+        manager.writeLogsTo(pfd)
+
+        ZipUtils.zip(tempDir.absolutePath, zipRootDir.absolutePath, name)
+
+
+        tempDir.deleteRecursively()
+        File(zipRootDir, name)
+    }.getOrElse {
+        XLog.e(it, "Error exportLogs")
+        null
+    }
+}
+
+private fun autoGenLogFileName() =
+    "ShortX-Log-${DateUtils.formatForFileName(System.currentTimeMillis())}.zip"

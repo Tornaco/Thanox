@@ -1,6 +1,4 @@
-import Build_gradle.Date
 import Build_gradle.GoogleFiles
-import Build_gradle.Properties
 import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.keyStoreAlias
 import tornaco.project.android.thanox.Configs.keyStorePassword
@@ -254,63 +252,9 @@ typealias Properties = java.util.Properties
 typealias UUID = java.util.UUID
 typealias Date = java.util.Date
 
-tasks.register("updateProps") {
-    group = "prop"
-
-    log("*** updateProps ***")
-    val serviceProps = Properties()
-    // Src.
-    serviceProps.load(
-        project.rootProject.file("thanos.properties")
-            .inputStream()
-    )
-
-    // Write fields.
-    serviceProps.setProperty(
-        "thanox.build.version.code",
-        Configs.thanoxVersionCode.toString()
-    )
-    serviceProps.setProperty(
-        "thanox.build.version.name",
-        Configs.thanoxVersionName
-    )
-    serviceProps.setProperty("thanox.build.variant", Configs.thanoxBuildVariant)
-    serviceProps.setProperty(
-        "thanox.build.debuggable",
-        Configs.thanoxBuildIsDebug.toString()
-    )
-    serviceProps.setProperty("thanox.build.flavor", Configs.thanoxBuildFlavor)
-    serviceProps.setProperty("thanox.build.host", Configs.thanoxBuildHostName)
-    serviceProps.setProperty("thanox.build.fp", Configs.thanoxBuildFP)
-    serviceProps.setProperty("thanox.build.date", Date().toString())
-    serviceProps.setProperty(
-        "thanox.build.app.package.name",
-        Configs.thanoxAppId
-    )
-    serviceProps.setProperty(
-        "thanox.build.app.package.name.prefix",
-        Configs.thanoxAppIdPrefix
-    )
-    serviceProps.setProperty(
-        "thanox.build.shortcut.package.name.prefix",
-        Configs.thanoxShortcutAppIdPrefix
-    )
-
-
-    // Write to app resources.
-    serviceProps.store(
-        project.file("src/main/resources/META-INF/thanos.properties")
-            .outputStream(),
-        "Auto Generated, Do Not Modify."
-    )
-    log("*** updateProps done***")
-}
-
 typealias GoogleFiles = com.google.common.io.Files
 afterEvaluate {
     android.applicationVariants.forEach { variant ->
-        variant.assembleProvider.get().finalizedBy("updateProps")
-
         // Package magisk mods.
         val variantCapped = variant.name.capitalize()
         log("variantCapped=${variantCapped}")

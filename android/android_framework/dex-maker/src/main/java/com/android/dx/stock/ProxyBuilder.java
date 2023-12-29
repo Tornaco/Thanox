@@ -16,6 +16,11 @@
 
 package com.android.dx.stock;
 
+import static java.lang.reflect.Modifier.ABSTRACT;
+import static java.lang.reflect.Modifier.PRIVATE;
+import static java.lang.reflect.Modifier.PUBLIC;
+import static java.lang.reflect.Modifier.STATIC;
+
 import android.os.Build;
 
 import com.android.dx.Code;
@@ -47,11 +52,6 @@ import java.util.Map;
 import java.util.Set;
 
 import github.tornaco.android.thanos.BuildProp;
-
-import static java.lang.reflect.Modifier.ABSTRACT;
-import static java.lang.reflect.Modifier.PRIVATE;
-import static java.lang.reflect.Modifier.PUBLIC;
-import static java.lang.reflect.Modifier.STATIC;
 
 /**
  * Creates dynamic proxies of concrete classes.
@@ -134,7 +134,7 @@ public final class ProxyBuilder<T> {
   public static final long VERSION =
       // System update
       // Thanox update
-      Integer.parseInt(BuildProp.THANOS_VERSION_CODE) + Build.FINGERPRINT.hashCode();
+      BuildProp.THANOS_VERSION_CODE + Build.FINGERPRINT.hashCode();
 
   private static final String FIELD_NAME_HANDLER = "$__handler";
   private static final String FIELD_NAME_METHODS = "$__methodArray";

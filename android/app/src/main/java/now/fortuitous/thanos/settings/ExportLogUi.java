@@ -44,7 +44,6 @@ import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.FileUtils;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
-import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import io.reactivex.Completable;
@@ -141,9 +140,9 @@ public class ExportLogUi {
             Completable.fromRunnable(() -> {
                 dialog.dismiss();
                 if (success) {
-                    ToastUtils.ok(requireContext());
+                    Toast.makeText(requireContext(), R.string.feedback_export_log_success, Toast.LENGTH_SHORT).show();
                 } else {
-                    ToastUtils.nook(requireContext());
+                    Toast.makeText(requireContext(), R.string.feedback_export_log_fail, Toast.LENGTH_SHORT).show();
                 }
             }).subscribeOn(AndroidSchedulers.mainThread()).subscribe();
         }).subscribeOn(Schedulers.io()).subscribe();

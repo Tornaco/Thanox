@@ -58,7 +58,7 @@
 
     <string name="dialog_message_feedback">可在设置-关于中的聊天群组或者github/Thanox中提交Issue进行反馈。反馈问题务必提供以下必要信息：\n\n1. 清晰的问题描述，配合截图或录屏 \n2. 点击下方按钮导出的日志文件。\n\n以上信息缺一不可。</string>
     <string name="feedback_export_log">导出日志</string>
-    <string name="feedback_export_log_success">日志已导出 %s</string>
+    <string name="feedback_export_log_success">日志已导出</string>
     <string name="feedback_export_log_fail">日志导出失败，请手动授予文件读写权限后重试</string>
 
     <string name="title_no_plugins_installed">暂无插件可用</string>

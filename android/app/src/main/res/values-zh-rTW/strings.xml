@@ -58,7 +58,7 @@
 
     <string name="dialog_message_feedback">可在設置-關於中的聊天群組或者github/Thanox中提交Issue進行反饋。反饋問題務必提供以下必要信息：\n\n1. 清晰的問題描述，配合截圖或錄屏 \n2. 點擊下方按鈕導出的日誌文件。\n\n以上信息缺一不可。</string>
     <string name="feedback_export_log">導出日誌</string>
-    <string name="feedback_export_log_success">日誌已導出 %s</string>
+    <string name="feedback_export_log_success">日誌已導出</string>
     <string name="feedback_export_log_fail">日誌導出失敗，請手動授予文件讀寫權限後重試</string>
 
     <string name="title_no_plugins_installed">暫無插件可用</string>

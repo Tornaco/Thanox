@@ -124,7 +124,7 @@
                 app:title="@string/title_net_stats" />
 
             <SwitchPreferenceCompat
-                android:summary="Test refactored OPS feature."
+                android:summary="Test the new OPS feature, maybe unstable"
                 app:key="@string/key_test_new_ops"
                 app:persistent="false"
                 app:title="New OPS" />
@@ -157,7 +157,8 @@
         <Preference
             app:key="@string/key_feedback"
             app:persistent="false"
-            app:title="@string/nav_title_feedback" />
+            app:title="@string/nav_title_feedback"
+            app:summary="@string/feedback_export_log"/>
 
         <Preference
             app:key="@string/key_build_info_app"

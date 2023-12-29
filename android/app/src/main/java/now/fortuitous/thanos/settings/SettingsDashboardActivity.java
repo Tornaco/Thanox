@@ -17,6 +17,7 @@
 
 package now.fortuitous.thanos.settings;
 
+import android.Manifest;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -24,18 +25,21 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
 import java.util.Objects;
 
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.BrowserUtils;
+import github.tornaco.permission.requester.RequiresPermission;
+import github.tornaco.permission.requester.RuntimePermissions;
 import now.fortuitous.thanos.onboarding.OnBoardingActivity;
 
+@RuntimePermissions
 public class SettingsDashboardActivity extends ThemeActivity {
+    private ExportLogUi exportLogUi;
 
     public static void start(Context context) {
         ActivityUtils.startActivity(context, SettingsDashboardActivity.class);
@@ -48,6 +52,8 @@ public class SettingsDashboardActivity extends ThemeActivity {
         setContentView(R.layout.activity_settings_dashboard);
         setSupportActionBar(findViewById(R.id.toolbar));
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        exportLogUi = new ExportLogUi(thisActivity());
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()
@@ -74,10 +80,26 @@ public class SettingsDashboardActivity extends ThemeActivity {
     }
 
     private void showFeedbackDialog() {
-        new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.nav_title_feedback)
-                .setMessage(R.string.dialog_message_feedback)
-                .setPositiveButton(android.R.string.ok, null)
-                .show();
+        exportLogUi.show(() -> {
+            if (OsUtils.isTOrAbove()) {
+                SettingsDashboardActivityPermissionRequester.exportLogRequestedTOrAboveChecked(SettingsDashboardActivity.this);
+            } else {
+                SettingsDashboardActivityPermissionRequester.exportLogRequestedTBelowChecked(SettingsDashboardActivity.this);
+            }
+        });
+    }
+
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void exportLogRequestedTOrAbove() {
+        // Noop, just request perm.
+    }
+
+    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void exportLogRequestedTBelow() {
+        // Noop, just request perm.
     }
 }

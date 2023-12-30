@@ -58,14 +58,15 @@ import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
-import github.tornaco.android.thanos.core.util.Optional;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.databinding.ActivityAppDetailsBinding;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
+import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 import now.fortuitous.app.BaseTrustedActivity;
@@ -82,6 +83,8 @@ public class AppDetailsActivity extends BaseTrustedActivity {
     private AppInfo appInfo;
     private FeatureConfigFragment featureConfigFragment;
 
+    private ModernProgressDialog progressDialog;
+
     public static void start(Context context, AppInfo appInfo) {
         Bundle data = new Bundle();
         data.putParcelable("app", appInfo);
@@ -89,7 +92,6 @@ public class AppDetailsActivity extends BaseTrustedActivity {
     }
 
     @Override
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!resolveIntent()) {
@@ -138,6 +140,9 @@ public class AppDetailsActivity extends BaseTrustedActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setTitle(appInfo.getAppLabel());
         binding.setApp(appInfo);
+
+        progressDialog = new ModernProgressDialog(this);
+        progressDialog.setMessage("...");
     }
 
 
@@ -175,6 +180,11 @@ public class AppDetailsActivity extends BaseTrustedActivity {
         }
 
         if (R.id.action_restore_component_settings == item.getItemId()) {
+            if (OsUtils.isTOrAbove()) {
+                AppDetailsActivityPermissionRequester.restoreComponentsRequestedTOrAboveChecked(AppDetailsActivity.this);
+            } else {
+                AppDetailsActivityPermissionRequester.restoreComponentsRequestedTBelowChecked(AppDetailsActivity.this);
+            }
             return true;
         }
 
@@ -361,45 +371,106 @@ public class AppDetailsActivity extends BaseTrustedActivity {
     }
 
     private void invokeComponentsBackup(OutputStream os) {
-        Optional.ofNullable(AppDetailsActivity.this)
-                .ifPresent(fragmentActivity -> obtainViewModel(fragmentActivity)
-                        .performComponentsBackup(
-                                thisActivity(),
-                                new AppDetailsViewModel.BackupListener() {
-                                    @Override
-                                    public void onSuccess() {
-                                        if (thisActivity() == null) return;
-                                        new MaterialAlertDialogBuilder(thisActivity())
-                                                .setMessage(getString(R.string.pre_message_backup_success))
-                                                .setCancelable(true)
-                                                .setPositiveButton(android.R.string.ok, null)
-                                                .show();
-                                    }
+        progressDialog.show();
+        obtainViewModel(this)
+                .performComponentsBackup(
+                        thisActivity(),
+                        new AppDetailsViewModel.BackupListener() {
+                            @Override
+                            public void onSuccess() {
+                                new MaterialAlertDialogBuilder(thisActivity())
+                                        .setMessage(getString(R.string.pre_message_backup_success))
+                                        .setCancelable(true)
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .show();
+                                progressDialog.dismiss();
+                            }
 
-                                    @Override
-                                    public void onFail(String errMsg) {
-                                        new MaterialAlertDialogBuilder(thisActivity())
-                                                .setMessage(errMsg)
-                                                .setCancelable(true)
-                                                .setPositiveButton(android.R.string.ok, null)
-                                                .show();
-                                    }
-                                },
-                                os,
-                                appInfo));
+                            @Override
+                            public void onFail(String errMsg) {
+                                new MaterialAlertDialogBuilder(thisActivity())
+                                        .setMessage(errMsg)
+                                        .setCancelable(true)
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .show();
+                                progressDialog.dismiss();
+                            }
+                        },
+                        os,
+                        appInfo);
     }
 
     // ----------------------- BACK UP END ---------------------
+
+
+    // -----------------------  RESTORE START ---------------------
+    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void restoreComponentsRequestedTBelow() {
+        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_RESTORE_FILE_PICK);
+    }
+
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void restoreComponentsRequestedTOrAbove() {
+        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_RESTORE_FILE_PICK);
+    }
+
+    private void onRestoreComponentsFilePickRequestResult(@Nullable Intent data) {
+        if (data == null) {
+            XLog.e("No data.");
+            return;
+        }
+
+        Uri uri = data.getData();
+        if (uri == null) {
+            Toast.makeText(thisActivity(), "uri == null", Toast.LENGTH_LONG).show();
+            XLog.e("No uri.");
+            return;
+        }
+
+        progressDialog.show();
+        obtainViewModel(this).performComponentsRestore(thisActivity(),
+                new AppDetailsViewModel.RestoreListener() {
+                    @Override
+                    public void onSuccess() {
+                        ToastUtils.ok(thisActivity());
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFail(String errMsg) {
+                        new MaterialAlertDialogBuilder(thisActivity())
+                                .setMessage(errMsg)
+                                .setCancelable(true)
+                                .setPositiveButton(android.R.string.ok, null)
+                                .show();
+                        progressDialog.dismiss();
+                    }
+                }, uri, appInfo);
+    }
+// -----------------------  RESTORE END ---------------------
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         XLog.d("onActivityResult: %s %s %s", requestCode, resultCode, ObjectToStringUtils.intentToString(data));
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_BACKUP_FILE_PICK) {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_RESTORE_FILE_PICK) {
+            onRestoreComponentsFilePickRequestResult(data);
+        } else if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_BACKUP_FILE_PICK) {
             onBackupComponentsFilePickRequestResult(data);
         } else if (requestCode == REQUEST_CODE_BACKUP_FILE_PICK_Q && resultCode == Activity.RESULT_OK) {
             onBackupComponentsFilePickRequestResultQ(data);
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AppDetailsActivityPermissionRequester.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public static AppDetailsViewModel obtainViewModel(FragmentActivity activity) {

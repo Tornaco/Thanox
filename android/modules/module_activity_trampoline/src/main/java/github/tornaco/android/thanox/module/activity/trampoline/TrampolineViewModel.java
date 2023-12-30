@@ -41,6 +41,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
+import github.tornaco.android.thanos.core.util.GsonUtils;
 import github.tornaco.android.thanos.core.util.Rxs;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -275,7 +276,7 @@ public class TrampolineViewModel extends AndroidViewModel {
 
     private List<ComponentReplacement> parseJson(String content) {
         try {
-            List<ComponentReplacement> componentReplacements = new Gson()
+            List<ComponentReplacement> componentReplacements = GsonUtils.GSON
                     .fromJson(content, new TypeToken<List<ComponentReplacement>>() {
                     }.getType());
             if (!CollectionUtils.isNullOrEmpty(componentReplacements)) {

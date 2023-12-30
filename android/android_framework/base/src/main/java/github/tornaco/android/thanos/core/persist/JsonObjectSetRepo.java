@@ -21,6 +21,7 @@ import java.util.concurrent.Executors;
 
 import github.tornaco.android.thanos.core.persist.i.SetRepo;
 import github.tornaco.android.thanos.core.util.FileUtils;
+import github.tornaco.android.thanos.core.util.GsonUtils;
 import github.tornaco.android.thanos.core.util.XmlUtils;
 import github.tornaco.android.thanos.core.util.function.Predicate;
 import lombok.Cleanup;
@@ -35,7 +36,6 @@ public abstract class JsonObjectSetRepo<T> implements SetRepo<T> {
   private static final int FLUSH_DELAY = 5000;
   private static final int FLUSH_DELAY_FAST = 100;
 
-  private final Gson gson = new Gson();
   private static final ExecutorService IO = Executors.newSingleThreadExecutor();
   private Handler mHandler;
   private ExecutorService mExe;
@@ -91,7 +91,7 @@ public abstract class JsonObjectSetRepo<T> implements SetRepo<T> {
         Set<String> h = new HashSet(XmlUtils.readSetXml(inputStream));
         Set<T> t = new HashSet<>();
         CollectionUtils.consumeRemaining(h, s -> {
-          T box = gson.fromJson(s, onCreateTypeToken().getType());
+          T box = GsonUtils.GSON.fromJson(s, onCreateTypeToken().getType());
           if (box != null) {
             t.add(box);
           } else {
@@ -126,7 +126,7 @@ public abstract class JsonObjectSetRepo<T> implements SetRepo<T> {
         Set<String> out = new HashSet<>();
         Object[] arrLocal = mStorage.toArray();
         CollectionUtils.consumeRemaining(arrLocal, o -> {
-          String str = gson.toJson(o);
+          String str = GsonUtils.GSON.toJson(o);
           out.add(str);
         });
         @Cleanup

@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import java.util.UUID;
 
 import github.tornaco.android.thanos.core.annotation.Nullable;
+import github.tornaco.android.thanos.core.util.GsonUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -92,13 +93,13 @@ public class PushMessage implements Parcelable {
     }
 
     public String toJson() {
-        return new Gson().toJson(this);
+        return GsonUtils.GSON.toJson(this);
     }
 
     @Nullable
     public static PushMessage fromJson(String js) {
         try {
-            return new Gson().fromJson(js, PushMessage.class);
+            return GsonUtils.GSON.fromJson(js, PushMessage.class);
         } catch (Throwable e) {
             return null;
         }

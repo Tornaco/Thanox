@@ -21,6 +21,6 @@ public final class JsonFormatter {
     }
 
     public static String toPrettyJson(Object any) {
-        return new Gson().toJson(any);
+        return GSON.toJson(any);
     }
 }

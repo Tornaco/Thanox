@@ -23,6 +23,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.Log;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.lifecycle.AndroidViewModel;

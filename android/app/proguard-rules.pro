@@ -31,6 +31,24 @@
     @android.support.annotation.Keep *;
 }
 
+-keep,allowobfuscation @interface github.tornaco.android.thanos.core.annotation.DoNotStrip
+
+# Do not strip any method/class that is annotated with @DoNotStrip
+-keep,allowobfuscation @interface github.tornaco.android.thanos.core.annotation.DoNotStrip
+-keep @github.tornaco.android.thanos.core.annotation.DoNotStrip class * {*;}
+
+-keepclasseswithmembers class * {
+    @github.tornaco.android.thanos.core.annotation.DoNotStrip <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @github.tornaco.android.thanos.core.annotation.DoNotStrip <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @github.tornaco.android.thanos.core.annotation.DoNotStrip <init>(...);
+}
+
 # Supports
 -keep class android.support.** { *; }
 -keep interface android.support.** { *; }
@@ -175,6 +193,8 @@
 -keep class github.tornaco.xposed.patchx** {*;}
 -keep class ** implements github.tornaco.android.thanos.core.persist** { *; }
 
+-keep class io.github.libxposed.service** {*;}
+
 # Slf
 -keep class org.slf4j.** {*;}
 
@@ -187,6 +207,7 @@
 -keep class util.** {*;}
 
 -keep class github.tornaco.android.thanos.BuildProp {*;}
+-keep class now.fortuitous.wm.UiAutomationManager {*;}
 
 
 -keep class androidx.databinding.** {*;}

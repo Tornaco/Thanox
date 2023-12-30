@@ -174,3 +174,4 @@
 -dontwarn com.android.internal.appwidget.IAppWidgetService$Stub
 -dontwarn com.android.internal.appwidget.IAppWidgetService
 
+-dontwarn de.robv.android.xposed.XposedBridge

@@ -289,6 +289,10 @@
     <string name="pref_action_delete_config_template">刪除</string>
     <string name="pref_action_apply_config_template">套用模板配置</string>
 
+    <string name="pref_action_backup_component_settings">備份組件設置</string>
+    <string name="pref_action_backup_component_settings_summary">備份活動、廣播接收器、服務、内容提供者的啓用禁用設置</string>
+    <string name="pref_action_restore_component_settings">導入組件設置</string>
+
     <string name="pre_message_restore_success">恢復成功，請盡快重啟設備以生效</string>
     <string name="pre_message_backup_success">備份成功</string>
 

@@ -30,6 +30,7 @@ import com.elvishew.xlog.internal.DefaultsFactory;
 import com.elvishew.xlog.internal.util.StackTraceUtil;
 import com.elvishew.xlog.printer.Printer;
 import com.elvishew.xlog.printer.PrinterSet;
+import github.tornaco.android.thanos.BuildProp;
 
 /**
  * A log tool which can be used in android or java, the most important feature is it can print the

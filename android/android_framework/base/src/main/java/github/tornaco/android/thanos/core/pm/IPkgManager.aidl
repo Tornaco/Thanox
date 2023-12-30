@@ -127,4 +127,6 @@ interface IPkgManager {
     void freezeSmartFreezePackages(in List<Pkg> packages, in IPackageEnableStateChangeListener listener);
 
     boolean hasFreezedPackageInUserWhiteListPkgSet();
+
+    List<ComponentName> getAllDisabledComponentsForPackage(in Pkg pkg);
 }

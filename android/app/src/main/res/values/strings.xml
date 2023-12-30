@@ -287,6 +287,10 @@
     <string name="pref_action_delete_config_template">Delete</string>
     <string name="pref_action_apply_config_template">Apply from template</string>
 
+    <string name="pref_action_backup_component_settings">Backup component settings</string>
+    <string name="pref_action_backup_component_settings_summary">Backup component settings, include Activity, Service, Receiver, Content Provider enable disable settings</string>
+    <string name="pref_action_restore_component_settings">Import component settings</string>
+
     <string name="pre_message_restore_success">Restore success, please reboot for changes to take effect</string>
     <string name="pre_message_backup_success">Backup success</string>
 

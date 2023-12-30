@@ -520,4 +520,9 @@ public class PackageManager {
     public void freezeSmartFreezePackages(List<Pkg> pkgs, PackageEnableStateChangeListener listener) {
         pm.freezeSmartFreezePackages(pkgs, listener.stub);
     }
+
+    @SneakyThrows
+    public List<ComponentName> getAllDisabledComponentsForPackage(Pkg pkg) {
+        return pm.getAllDisabledComponentsForPackage(pkg);
+    }
 }

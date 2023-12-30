@@ -298,6 +298,10 @@ public interface IPkgManager extends android.os.IInterface
     {
       return false;
     }
+    @Override public java.util.List<android.content.ComponentName> getAllDisabledComponentsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -1254,6 +1258,21 @@ public interface IPkgManager extends android.os.IInterface
           boolean _result = this.hasFreezedPackageInUserWhiteListPkgSet();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_getAllDisabledComponentsForPackage:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          java.util.List<android.content.ComponentName> _result = this.getAllDisabledComponentsForPackage(_arg0);
+          reply.writeNoException();
+          reply.writeTypedList(_result);
           return true;
         }
         default:
@@ -3018,6 +3037,33 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public java.util.List<android.content.ComponentName> getAllDisabledComponentsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<android.content.ComponentName> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getAllDisabledComponentsForPackage, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllDisabledComponentsForPackage(pkg);
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(android.content.ComponentName.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.pm.IPkgManager sDefaultImpl;
     }
     static final int TRANSACTION_getPkgNameForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -3098,6 +3144,7 @@ public interface IPkgManager extends android.os.IInterface
     static final int TRANSACTION_freezeAllSmartFreezePackages = (android.os.IBinder.FIRST_CALL_TRANSACTION + 75);
     static final int TRANSACTION_freezeSmartFreezePackages = (android.os.IBinder.FIRST_CALL_TRANSACTION + 76);
     static final int TRANSACTION_hasFreezedPackageInUserWhiteListPkgSet = (android.os.IBinder.FIRST_CALL_TRANSACTION + 77);
+    static final int TRANSACTION_getAllDisabledComponentsForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 78);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pm.IPkgManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -3200,4 +3247,5 @@ public interface IPkgManager extends android.os.IInterface
   public void freezeAllSmartFreezePackages(github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener listener) throws android.os.RemoteException;
   public void freezeSmartFreezePackages(java.util.List<github.tornaco.android.thanos.core.pm.Pkg> packages, github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener listener) throws android.os.RemoteException;
   public boolean hasFreezedPackageInUserWhiteListPkgSet() throws android.os.RemoteException;
+  public java.util.List<android.content.ComponentName> getAllDisabledComponentsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
 }

@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/action_apply_template"
-            android:icon="@drawable/module_common_ic_settings_fill"
-            android:title="@string/pref_action_apply_config_template"
-            app:showAsAction="never" />
+        android:id="@+id/action_apply_template"
+        android:icon="@drawable/module_common_ic_settings_fill"
+        android:title="@string/pref_action_apply_config_template"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_backup_component_settings"
+        android:title="@string/pref_action_backup_component_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_restore_component_settings"
+        android:title="@string/pref_action_restore_component_settings"
+        app:showAsAction="never" />
 </menu>

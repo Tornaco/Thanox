@@ -17,8 +17,15 @@
 
 package now.fortuitous.thanos.apps;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,32 +37,50 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.common.io.Files;
+import com.nononsenseapps.filepicker.FilePickerActivity;
+import com.nononsenseapps.filepicker.Utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 import github.tornaco.android.thanos.R;
-import now.fortuitous.app.BaseTrustedActivity;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
+import github.tornaco.android.thanos.core.util.DateUtils;
+import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
+import github.tornaco.android.thanos.core.util.Optional;
+import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.databinding.ActivityAppDetailsBinding;
 import github.tornaco.android.thanos.feature.access.AppFeatureManager;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
+import github.tornaco.android.thanos.widget.ModernAlertDialog;
+import github.tornaco.permission.requester.RequiresPermission;
+import github.tornaco.permission.requester.RuntimePermissions;
+import now.fortuitous.app.BaseTrustedActivity;
 import now.fortuitous.thanos.settings.StrategySettingsActivity;
+import util.CollectionUtils;
 
+@RuntimePermissions
 public class AppDetailsActivity extends BaseTrustedActivity {
+    private final static int REQUEST_CODE_BACKUP_FILE_PICK = 0x100;
+    private final static int REQUEST_CODE_RESTORE_FILE_PICK = 0x200;
+    private final static int REQUEST_CODE_BACKUP_FILE_PICK_Q = 0x300;
+
     private ActivityAppDetailsBinding binding;
     private AppInfo appInfo;
     private FeatureConfigFragment featureConfigFragment;
-
 
     public static void start(Context context, AppInfo appInfo) {
         Bundle data = new Bundle();
@@ -142,9 +167,19 @@ public class AppDetailsActivity extends BaseTrustedActivity {
             });
             return true;
         }
+
+
+        if (R.id.action_backup_component_settings == item.getItemId()) {
+            backupComponentSettingsRequested();
+            return true;
+        }
+
+        if (R.id.action_restore_component_settings == item.getItemId()) {
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
-
 
     private void requestApplyTemplateSelection() {
         ThanosManager thanos = ThanosManager.from(thisActivity());
@@ -154,7 +189,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
 
         List<ConfigTemplate> allConfigTemplates = profileManager.getAllConfigTemplates();
 
-        if (allConfigTemplates.size() == 0) {
+        if (allConfigTemplates.isEmpty()) {
             Toast.makeText(thisActivity(), R.string.pref_action_create_new_config_template, Toast.LENGTH_LONG).show();
             StrategySettingsActivity.start(thisActivity());
             return;
@@ -188,6 +223,183 @@ public class AppDetailsActivity extends BaseTrustedActivity {
                                 ToastUtils.nook(getApplicationContext());
                             }
                         }).show();
+    }
+
+    // ----------------------- BACK UP START ---------------------
+
+    private void backupComponentSettingsRequested() {
+        ModernAlertDialog dialog = new ModernAlertDialog(thisActivity());
+        dialog.setDialogTitle(getString(R.string.pref_action_backup_component_settings));
+        dialog.setDialogMessage(getString(R.string.pref_action_backup_component_settings_summary));
+        dialog.setCancelable(true);
+        dialog.setPositive(getString(R.string.pre_title_backup));
+        dialog.setNegative(getString(android.R.string.cancel));
+        dialog.setOnPositive(() -> {
+            if (OsUtils.isTOrAbove()) {
+                AppDetailsActivityPermissionRequester.backupComponentsRequestedTOrAboveChecked(AppDetailsActivity.this);
+            } else {
+                AppDetailsActivityPermissionRequester.backupComponentsRequestedTBelowChecked(AppDetailsActivity.this);
+            }
+        });
+        dialog.show();
+    }
+
+    @RequiresPermission({
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+    })
+    void backupComponentsRequestedTOrAbove() {
+        if (OsUtils.isQOrAbove()) {
+            backupComponentsRequestedQAndAbove();
+        } else {
+            backupComponentsRequestedQBelow();
+        }
+    }
+
+    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void backupComponentsRequestedTBelow() {
+        if (OsUtils.isQOrAbove()) {
+            backupComponentsRequestedQAndAbove();
+        } else {
+            backupComponentsRequestedQBelow();
+        }
+    }
+
+
+    private void backupComponentsRequestedQAndAbove() {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        // you can set file mime-type
+        intent.setType("*/*");
+        // default file name
+        String backupFileNameWithExt = appInfo.getAppLabel() + "-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
+        intent.putExtra(Intent.EXTRA_TITLE, backupFileNameWithExt);
+        try {
+            startActivityForResult(intent, REQUEST_CODE_BACKUP_FILE_PICK_Q);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(thisActivity(), "Activity not found, please install Files app", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void backupComponentsRequestedQBelow() {
+        Intent i = new Intent(thisActivity(), FilePickerActivity.class);
+        i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
+        i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true);
+        i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
+        i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
+        try {
+            startActivityForResult(i, REQUEST_CODE_BACKUP_FILE_PICK);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(thisActivity(), "Activity not found, please install Files app", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    private void onBackupComponentsFilePickRequestResultQ(Intent data) {
+        if (data == null) {
+            XLog.e("No data.");
+            return;
+        }
+
+        Uri fileUri = data.getData();
+
+        if (fileUri == null) {
+            Toast.makeText(thisActivity(), "fileUri == null", Toast.LENGTH_LONG).show();
+            XLog.e("No fileUri.");
+            return;
+        }
+
+        XLog.d("fileUri == %s", fileUri);
+
+        try {
+            OutputStream os = thisActivity().getContentResolver().openOutputStream(fileUri);
+            invokeComponentsBackup(os);
+        } catch (IOException e) {
+            XLog.e(e);
+            Toast.makeText(thisActivity(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void onBackupComponentsFilePickRequestResult(Intent data) {
+        if (data == null) {
+            XLog.e("No data.");
+            return;
+        }
+
+        if (thisActivity() == null) return;
+
+        List<Uri> files = Utils.getSelectedFilesFromResult(data);
+        if (CollectionUtils.isNullOrEmpty(files)) {
+            Toast.makeText(thisActivity(), "No selection", Toast.LENGTH_LONG).show();
+            return;
+        }
+        File file = Utils.getFileForUriNoThrow(files.get(0));
+        XLog.w("onBackupFilePickRequestResult file is: %s", file);
+
+        if (file == null) {
+            Toast.makeText(thisActivity(), "file == null", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (!file.isDirectory()) {
+            Toast.makeText(thisActivity(), "file is not dir", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        try {
+            String backupFileNameWithExt = appInfo.getAppLabel() + "-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
+            File destFile = new File(file, backupFileNameWithExt);
+            Files.createParentDirs(destFile);
+            //noinspection UnstableApiUsage
+            invokeComponentsBackup(Files.asByteSink(destFile).openStream());
+        } catch (IOException e) {
+            XLog.e(e);
+            Toast.makeText(thisActivity(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void invokeComponentsBackup(OutputStream os) {
+        Optional.ofNullable(AppDetailsActivity.this)
+                .ifPresent(fragmentActivity -> obtainViewModel(fragmentActivity)
+                        .performComponentsBackup(
+                                thisActivity(),
+                                new AppDetailsViewModel.BackupListener() {
+                                    @Override
+                                    public void onSuccess() {
+                                        if (thisActivity() == null) return;
+                                        new MaterialAlertDialogBuilder(thisActivity())
+                                                .setMessage(getString(R.string.pre_message_backup_success))
+                                                .setCancelable(true)
+                                                .setPositiveButton(android.R.string.ok, null)
+                                                .show();
+                                    }
+
+                                    @Override
+                                    public void onFail(String errMsg) {
+                                        new MaterialAlertDialogBuilder(thisActivity())
+                                                .setMessage(errMsg)
+                                                .setCancelable(true)
+                                                .setPositiveButton(android.R.string.ok, null)
+                                                .show();
+                                    }
+                                },
+                                os,
+                                appInfo));
+    }
+
+    // ----------------------- BACK UP END ---------------------
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        XLog.d("onActivityResult: %s %s %s", requestCode, resultCode, ObjectToStringUtils.intentToString(data));
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_BACKUP_FILE_PICK) {
+            onBackupComponentsFilePickRequestResult(data);
+        } else if (requestCode == REQUEST_CODE_BACKUP_FILE_PICK_Q && resultCode == Activity.RESULT_OK) {
+            onBackupComponentsFilePickRequestResultQ(data);
+        }
     }
 
     public static AppDetailsViewModel obtainViewModel(FragmentActivity activity) {

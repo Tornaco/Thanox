@@ -292,6 +292,10 @@
     <string name="pref_action_delete_config_template">删除</string>
     <string name="pref_action_apply_config_template">应用模板配置</string>
 
+    <string name="pref_action_backup_component_settings">备份组件设置</string>
+    <string name="pref_action_backup_component_settings_summary">备份活动、广播接收器、服务、内容提供者的启用禁用设置</string>
+    <string name="pref_action_restore_component_settings">导入组件设置</string>
+
     <string name="pre_message_restore_success">恢复成功，请尽快重启设备以生效</string>
     <string name="pre_message_backup_success">备份成功</string>
 

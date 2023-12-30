@@ -30,6 +30,7 @@ import com.elvishew.xlog.internal.DefaultsFactory;
 import com.elvishew.xlog.internal.util.StackTraceUtil;
 import com.elvishew.xlog.printer.Printer;
 import com.elvishew.xlog.printer.PrinterSet;
+
 import github.tornaco.android.thanos.BuildProp;
 
 /**
@@ -475,6 +476,7 @@ public class XLog {
      * @since 1.1.0
      */
     public static void v(Object object) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.v(object);
     }
@@ -485,6 +487,7 @@ public class XLog {
      * @param array the array to log
      */
     public static void v(Object[] array) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.v(array);
     }
@@ -496,6 +499,7 @@ public class XLog {
      * @param args   the arguments of the message to log
      */
     public static void v(String format, Object... args) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.v(format, args);
     }
@@ -506,6 +510,7 @@ public class XLog {
      * @param msg the message to log
      */
     public static void v(String msg) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.v(msg);
     }
@@ -517,6 +522,7 @@ public class XLog {
      * @param tr  the throwable to be log
      */
     public static void v(String msg, Throwable tr) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.v(msg, tr);
     }
@@ -529,6 +535,7 @@ public class XLog {
      * @since 1.1.0
      */
     public static void d(Object object) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.d(object);
     }
@@ -539,6 +546,7 @@ public class XLog {
      * @param array the array to log
      */
     public static void d(Object[] array) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.d(array);
     }
@@ -550,6 +558,7 @@ public class XLog {
      * @param args   the arguments of the message to log
      */
     public static void d(String format, Object... args) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.d(format, args);
     }
@@ -560,6 +569,7 @@ public class XLog {
      * @param msg the message to log
      */
     public static void d(String msg) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.d(msg);
     }
@@ -571,6 +581,7 @@ public class XLog {
      * @param tr  the throwable to be log
      */
     public static void d(String msg, Throwable tr) {
+        if (!BuildProp.THANOS_BUILD_DEBUG) return;
         checkInitialization();
         sLogger.d(msg, tr);
     }

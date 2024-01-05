@@ -12,6 +12,17 @@
 # https://stackoverflow.com/questions/52252806/android-build-error-attribute-signature-requires-innerclasses-attribute-check
 -keepattributes InnerClasses
 
+# Gson uses generic type information stored in a class file when working with
+# fields. Proguard removes such information by default, keep it.
+-keepattributes Signature
+
+# This is also needed for R8 in compat mode since multiple
+# optimizations will remove the generic signature such as class
+# merging and argument removal. See:
+# https://r8.googlesource.com/r8/+/refs/heads/main/compatibility-faq.md#troubleshooting-gson-gson
+-keep class com.google.gson.reflect.TypeToken { *; }
+-keep class * extends com.google.gson.reflect.TypeToken
+
 -keep public class * extends android.app.Activity
 -keep public class * extends android.support.v4.app.Fragment
 -keep public class * extends android.app.Application

@@ -7,10 +7,10 @@
     <application>
 
         <activity
-            android:name=".ui.start.LockerStartActivity"
+            android:name="github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.verify.VerifyActivity"
+            android:name="github.tornaco.practice.honeycomb.locker.ui.verify.VerifyActivity"
             android:excludeFromRecents="true"
             android:exported="true"
             android:launchMode="singleTask"

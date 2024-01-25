@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -153,5 +154,15 @@ public class ActivityStackSupervisor {
     @SneakyThrows
     public List<ComponentName> getAppLockWhiteListComponents() {
         return supervisor.getAppLockWhiteListComponents();
+    }
+
+    @SneakyThrows
+    public int getLaunchOtherAppSetting(Pkg pkg) {
+        return supervisor.getLaunchOtherAppSetting(pkg);
+    }
+
+    @SneakyThrows
+    public void setLaunchOtherAppSetting(Pkg pkg, int setting) {
+        supervisor.setLaunchOtherAppSetting(pkg, setting);
     }
 }

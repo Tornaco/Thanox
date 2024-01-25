@@ -3,7 +3,7 @@
     <string-array name="scope">
         <item>android</item>
     </string-array>
-    
+
     <string-array name="process_manage_categories">
         <item>@string/running_process_running</item>
         <item>@string/running_process_background</item>
@@ -39,6 +39,19 @@
         <item>10</item>
         <item>20</item>
         <item>60</item>
+    </string-array>
+
+
+    <string-array name="launch_other_app_options">
+        <item>@string/launch_other_app_options_allow</item>
+        <item>@string/launch_other_app_options_ask</item>
+        <item>@string/launch_other_app_options_ignore</item>
+    </string-array>
+
+    <string-array name="launch_other_app_options_values">
+        <item>0</item>
+        <item>1</item>
+        <item>-1</item>
     </string-array>
 
     <string-array name="recent_task_exclude_entry_default_include_exclude">

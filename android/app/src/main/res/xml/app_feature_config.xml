@@ -177,6 +177,14 @@
             app:key="@string/key_app_feature_config_resident"
             app:summary="@string/pre_summary_resident"
             app:title="@string/pre_title_resident" />
+
+        <DropDownPreference
+            android:entries="@array/launch_other_app_options"
+            android:entryValues="@array/launch_other_app_options_values"
+            app:key="@string/key_launch_other_app"
+            app:persistent="false"
+            app:title="@string/launch_other_app"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
 </PreferenceScreen>

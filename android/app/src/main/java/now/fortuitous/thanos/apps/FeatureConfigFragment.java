@@ -100,6 +100,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         bindProtectPrefs();
         bindNotificationPrefs();
         bindMiscPrefs();
+        bindLaunchOtherAppPref();
     }
 
     private void bindAppInfoPref() {
@@ -308,6 +309,30 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 if (isSubscribed) {
                     int mode = Integer.parseInt(String.valueOf(newValue));
                     thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo), mode);
+                } else {
+                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                }
+                return null;
+            });
+            return true;
+        });
+        if (appInfo.isDummy()) {
+            pref.setVisible(false);
+        }
+    }
+
+    private void bindLaunchOtherAppPref() {
+        ThanosManager thanos = ThanosManager.from(getContext());
+        DropDownPreference pref = findPreference(getString(R.string.key_launch_other_app));
+
+        int currentMode = thanos.getActivityStackSupervisor().getLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo));
+
+        pref.setValue(String.valueOf(currentMode));
+        pref.setOnPreferenceChangeListener((preference, newValue) -> {
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                if (isSubscribed) {
+                    int mode = Integer.parseInt(String.valueOf(newValue));
+                    thanos.getActivityStackSupervisor().setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), mode);
                 } else {
                     AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                 }

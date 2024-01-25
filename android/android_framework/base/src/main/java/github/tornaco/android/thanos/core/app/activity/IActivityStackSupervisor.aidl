@@ -61,4 +61,6 @@ interface IActivityStackSupervisor {
     void removeAppLockWhiteListComponents(in List<ComponentName> componentName);
     List<ComponentName> getAppLockWhiteListComponents();
 
+    int getLaunchOtherAppSetting(in Pkg pkg);
+    void setLaunchOtherAppSetting(in Pkg pkg, int setting);
 }

@@ -12,7 +12,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     {
       return false;
     }
-    @Override public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId, android.os.IBinder resultTo) throws android.os.RemoteException
+    @Override public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId, android.os.IBinder resultTo, java.lang.String callingPkgName) throws android.os.RemoteException
     {
       return null;
     }
@@ -199,7 +199,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _arg1 = data.readInt();
           android.os.IBinder _arg2;
           _arg2 = data.readStrongBinder();
-          android.content.Intent _result = this.replaceActivityStartingIntent(_arg0, _arg1, _arg2);
+          java.lang.String _arg3;
+          _arg3 = data.readString();
+          android.content.Intent _result = this.replaceActivityStartingIntent(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
           if ((_result!=null)) {
             reply.writeInt(1);
@@ -572,7 +574,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         }
         return _result;
       }
-      @Override public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId, android.os.IBinder resultTo) throws android.os.RemoteException
+      @Override public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId, android.os.IBinder resultTo, java.lang.String callingPkgName) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
@@ -588,9 +590,10 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           }
           _data.writeInt(userId);
           _data.writeStrongBinder(resultTo);
+          _data.writeString(callingPkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_replaceActivityStartingIntent, _data, _reply, 0);
           if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().replaceActivityStartingIntent(intent, userId, resultTo);
+            return getDefaultImpl().replaceActivityStartingIntent(intent, userId, resultTo, callingPkgName);
           }
           _reply.readException();
           if ((0!=_reply.readInt())) {
@@ -1301,7 +1304,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   }
   /** @deprecated use {@link #replaceActivityStartingIntent} instead */
   public boolean checkActivity(android.content.ComponentName componentName, int userId, android.os.IBinder resultTo) throws android.os.RemoteException;
-  public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId, android.os.IBinder resultTo) throws android.os.RemoteException;
+  public android.content.Intent replaceActivityStartingIntent(android.content.Intent intent, int userId, android.os.IBinder resultTo, java.lang.String callingPkgName) throws android.os.RemoteException;
   public boolean shouldVerifyActivityStarting(android.content.ComponentName componentName, java.lang.String pkg, java.lang.String source) throws android.os.RemoteException;
   public java.lang.String getCurrentFrontApp() throws android.os.RemoteException;
   public void setAppLockEnabled(boolean enabled) throws android.os.RemoteException;

@@ -10,6 +10,13 @@ import lombok.SneakyThrows;
 
 @AllArgsConstructor
 public class ActivityStackSupervisor {
+    public static final class LaunchOtherAppPkgSetting {
+        public static final int ALLOW = 0;
+        public static final int ASK = 1;
+        public static final int IGNORE = -1;
+    }
+
+
     private final IActivityStackSupervisor supervisor;
 
     @SneakyThrows

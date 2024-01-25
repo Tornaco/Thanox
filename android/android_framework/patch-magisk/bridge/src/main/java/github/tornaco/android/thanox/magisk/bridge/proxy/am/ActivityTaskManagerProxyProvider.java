@@ -60,7 +60,9 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
 
                                 try {
                                     if ("startActivity".equals(method.getName())) {
-                                        handleStartActivity(args);
+                                        if (!handleStartActivity(args)) {
+                                            return ActivityManager.START_SUCCESS;
+                                        }
                                     } else if ("getRecentTasks".equals(method.getName())) {
                                         return handleGetRecentTask(am, method, args);
                                     }
@@ -82,7 +84,7 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
     //            in IBinder resultTo, in String resultWho, int requestCode,
     //            int flags, in ProfilerInfo profilerInfo, in Bundle options);
     //    int startActivities(in IApplicationThread caller, in String callingPackage,
-    private void handleStartActivity(Object[] args) throws android.os.RemoteException {
+    private boolean handleStartActivity(Object[] args) throws android.os.RemoteException {
         if (DEBUG) XLog.v("handleStartActivity, args = " + Arrays.toString(args));
         String callingPackage = (String) args[1];
         // We'd better dynamic look up.
@@ -105,14 +107,18 @@ public class ActivityTaskManagerProxyProvider implements ProxyProvider, Exceptio
             int userId = UserHandle.getCallingUserId();
             Intent realIntent = ThanosManagerNative.getDefault()
                     .getActivityStackSupervisor()
-                    .replaceActivityStartingIntent(intent, userId, resultTo);
+                    .replaceActivityStartingIntent(intent, userId, resultTo, callingPackage);
             if (realIntent != null) {
                 XLog.d("handleStartActivity, Replacing Intent component");
                 intent.setComponent(realIntent.getComponent());
             }
             XLog.d("handleStartActivity %s user: %s", realIntent, userId);
             ThanosManagerNative.getDefault().getPkgManager().mayEnableAppOnStartActivityIntent(realIntent, userId);
+
+            return realIntent != null;
         }
+
+        return true;
     }
 
     @SuppressWarnings("unchecked")

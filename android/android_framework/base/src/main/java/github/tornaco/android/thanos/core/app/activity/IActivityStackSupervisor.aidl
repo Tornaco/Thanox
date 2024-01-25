@@ -10,7 +10,7 @@ interface IActivityStackSupervisor {
     /** @deprecated use {@link #replaceActivityStartingIntent} instead */
     boolean checkActivity(in ComponentName componentName, int userId, in IBinder resultTo);
 
-    Intent replaceActivityStartingIntent(in Intent intent, int userId, in IBinder resultTo);
+    Intent replaceActivityStartingIntent(in Intent intent, int userId, in IBinder resultTo, String callingPkgName);
 
     boolean shouldVerifyActivityStarting(in ComponentName componentName, String pkg, String source);
 

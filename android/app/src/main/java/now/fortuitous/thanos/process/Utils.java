@@ -33,6 +33,16 @@ public final class Utils {
         return getColorAttr(context, android.R.attr.colorAccent);
     }
 
+    @ColorInt
+    public static int getTextColorPrimary(Context context) {
+        return getColorAttr(context, android.R.attr.textColorPrimary);
+    }
+
+    @ColorInt
+    public static int getTextColorSecondary(Context context) {
+        return getColorAttr(context, android.R.attr.textColorSecondary);
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @ColorInt
     public static int getDefaultColor(Context context, int resId) {

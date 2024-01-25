@@ -57,6 +57,12 @@
     <string name="service_dialog_button_thanox_removed_keep_data">保留</string>
     <string name="service_dialog_button_thanox_removed_remove_data">移除</string>
 
+    <string name="service_launch_other_pkg_title">启动应用</string>
+    <string name="service_launch_other_pkg_message">%s 想要打开 %s，是否允许？</string>
+    <string name="service_launch_other_pkg_remember">记住我的选择</string>
+    <string name="service_launch_other_pkg_allow">允许</string>
+    <string name="service_launch_other_pkg_ignore">拒绝</string>
+
 
     <string name="billing_state_row_not_trust_title">不受信任的安裝包</string>
     <string name="billing_state_row_not_trust_message">Thanox可能來自不受信任的安裝，Pro版本僅在Google play商店發佈，請不要從任何其他來源安裝。 \n\n注意：不受信任的安裝會導致設備異常卡頓、配置數據丟失!!!</string>

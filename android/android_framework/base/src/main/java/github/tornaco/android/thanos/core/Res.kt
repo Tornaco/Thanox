@@ -86,6 +86,13 @@ abstract class Res {
         const val STRING_UNTRUSTED_PACKAGE_TITLE = "billing_state_row_not_trust_title"
         const val STRING_UNTRUSTED_PACKAGE_MSG = "billing_state_row_not_trust_message"
 
+
+        const val SERVICE_LAUNCH_OTHER_PKG_TITLE = "service_launch_other_pkg_title"
+        const val SERVICE_LAUNCH_OTHER_PKG_MESSAGE = "service_launch_other_pkg_message"
+        const val SERVICE_LAUNCH_OTHER_PKG_REMEMBER = "service_launch_other_pkg_remember"
+        const val SERVICE_LAUNCH_OTHER_PKG_ALLOW = "service_launch_other_pkg_allow"
+        const val SERVICE_LAUNCH_OTHER_PKG_IGNORE = "service_launch_other_pkg_ignore"
+
         object AppSet {
             const val STRING_SERVICE_APP_SET_ALL = "service_app_set_all"
             const val STRING_SERVICE_APP_SET_SYSTEM = "service_app_set_system"

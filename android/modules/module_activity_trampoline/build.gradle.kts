@@ -33,8 +33,8 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.rxjava)
 
-    compileOnly("org.projectlombok:lombok:1.18.20")
-    annotationProcessor("org.projectlombok:lombok:1.18.20")
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
 
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))

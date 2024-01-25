@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-    compileOnly("org.projectlombok:lombok:1.18.20")
-    annotationProcessor("org.projectlombok:lombok:1.18.20")
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
 
     compileOnly(libs.xposed.api)
 }

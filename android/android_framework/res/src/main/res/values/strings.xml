@@ -58,7 +58,7 @@
     <string name="service_dialog_button_thanox_removed_remove_data">Remove</string>
 
     <string name="service_launch_other_pkg_title">Launch app</string>
-    <string name="service_launch_other_pkg_message">%s wants to launch %s, do you allow?</string>
+    <string name="service_launch_other_pkg_message"><b>%s</b> wants to launch <b>%s</b>, do you allow?</string>
     <string name="service_launch_other_pkg_remember">Remember choice</string>
     <string name="service_launch_other_pkg_allow">Allow</string>
     <string name="service_launch_other_pkg_ignore">Ignore</string>

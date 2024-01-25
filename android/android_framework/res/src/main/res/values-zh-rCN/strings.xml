@@ -58,7 +58,7 @@
     <string name="service_dialog_button_thanox_removed_remove_data">移除</string>
 
     <string name="service_launch_other_pkg_title">启动应用</string>
-    <string name="service_launch_other_pkg_message">%s 想要打开 %s，是否允许？</string>
+    <string name="service_launch_other_pkg_message"><b>%s</b> 想要打开 <b>%s</b>，是否允许？</string>
     <string name="service_launch_other_pkg_remember">记住我的选择</string>
     <string name="service_launch_other_pkg_allow">允许</string>
     <string name="service_launch_other_pkg_ignore">拒绝</string>

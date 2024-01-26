@@ -165,4 +165,14 @@ public class ActivityStackSupervisor {
     public void setLaunchOtherAppSetting(Pkg pkg, int setting) {
         supervisor.setLaunchOtherAppSetting(pkg, setting);
     }
+
+    @SneakyThrows
+    public boolean isLaunchOtherAppBlockerEnabled() {
+        return supervisor.isLaunchOtherAppBlockerEnabled();
+    }
+
+    @SneakyThrows
+    public void setLaunchOtherAppBlockerEnabled(boolean enable) {
+        supervisor.setLaunchOtherAppBlockerEnabled(enable);
+    }
 }

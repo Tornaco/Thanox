@@ -46,11 +46,14 @@ object PrebuiltFeatureIds {
 
     @Deprecated("Not supported")
     const val ID_PLUGINS = 20
+
     @Deprecated("Moved to Settings")
     const val ID_FEEDBACK = 21
     const val ID_GUIDE = 22
     const val ID_WAKELOCK_REMOVER = 23
     const val ID_NOTIFICATION_CENTER = 24
+
+    const val ID_LAUNCH_OTHER_APP_BLOCKER = 25
 
     fun Int.isValidId() = this >= ID_ONE_KEY_CLEAR
 }

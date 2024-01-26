@@ -98,6 +98,21 @@ class FeatureToggleActivity : ComposeThemeActivity() {
                         },
                         onClick = {})
                 }
+
+                item {
+                    var isEnabled by remember {
+                        mutableStateOf(
+                            thanox.activityStackSupervisor.isLaunchOtherAppBlockerEnabled
+                        )
+                    }
+                    ListItem(title = stringResource(id = R.string.launch_other_app),
+                        checked = isEnabled,
+                        onCheckedChange = {
+                            thanox.activityStackSupervisor.isLaunchOtherAppBlockerEnabled = it
+                            isEnabled = it
+                        },
+                        onClick = {})
+                }
             }
         }
     }

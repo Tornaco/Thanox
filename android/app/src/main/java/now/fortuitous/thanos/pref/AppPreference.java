@@ -23,9 +23,11 @@ import androidx.preference.PreferenceManager;
 
 import java.util.List;
 
-
 import github.tornaco.android.thanos.BuildProp;
+import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.n.NotificationRecord;
 import github.tornaco.android.thanos.core.pm.PackageSet;
+import now.fortuitous.thanos.main.PrebuiltFeatureIds;
 
 public class AppPreference {
 
@@ -63,7 +65,6 @@ public class AppPreference {
                 .putBoolean(feature, first)
                 .apply();
     }
-
 
 
     public static boolean hasOnBoarding(Context context) {
@@ -129,6 +130,46 @@ public class AppPreference {
 
 
     public static void setAppFeatureEnabled(Context context, int featureId, boolean value) {
+        ThanosManager thanos = ThanosManager.from(context);
+
+        if (featureId == PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER) {
+            thanos.getActivityStackSupervisor().setLaunchOtherAppBlockerEnabled(value);
+        }
+
+        if (!value) {
+            if (featureId == PrebuiltFeatureIds.ID_APP_LOCK) {
+                thanos.getActivityStackSupervisor().setAppLockEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT) {
+                thanos.getActivityManager().setBgRestrictEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_OPS_BY_APP || featureId == PrebuiltFeatureIds.ID_OPS_BY_OPS) {
+                thanos.getAppOpsManager().setOpsEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_BACKGROUND_START) {
+                thanos.getActivityManager().setStartBlockEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL) {
+                thanos.getActivityManager().setCleanUpOnTaskRemovalEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER) {
+                thanos.getNotificationManager().setNREnabled(NotificationRecord.Types.TYPE_CLIPBOARD, false);
+                thanos.getNotificationManager().setNREnabled(NotificationRecord.Types.TYPE_TOAST, false);
+                thanos.getNotificationManager().setNREnabled(NotificationRecord.Types.TYPE_GENERAL_NOTIFICATION, false);
+            } else if (featureId == PrebuiltFeatureIds.ID_PRIVACY_CHEAT) {
+                thanos.getPrivacyManager().setPrivacyEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_PROFILE) {
+                thanos.getProfileManager().setProfileEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION) {
+                thanos.getNotificationManager().setScreenOnNotificationEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_SMART_STANDBY) {
+                thanos.getActivityManager().setSmartStandByEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_TASK_BLUR) {
+                thanos.getActivityManager().setRecentTaskBlurEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_TRAMPOLINE) {
+                thanos.getActivityStackSupervisor().setActivityTrampolineEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_WAKELOCK_REMOVER) {
+                thanos.getPowerManager().setWakeLockBlockerEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_WECHAT_PUSH) {
+                thanos.getPushDelegateManager().setWeChatEnabled(false);
+            }
+        }
+
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(PREF_KEY_FEATURE_FLAG_ + featureId, value)

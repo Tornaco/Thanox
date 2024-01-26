@@ -327,6 +327,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
         int currentMode = thanos.getActivityStackSupervisor().getLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo));
 
+        pref.setEnabled(thanos.getActivityStackSupervisor().isLaunchOtherAppBlockerEnabled());
         pref.setValue(String.valueOf(currentMode));
         pref.setOnPreferenceChangeListener((preference, newValue) -> {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {

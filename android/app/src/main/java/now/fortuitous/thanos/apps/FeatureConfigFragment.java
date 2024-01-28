@@ -341,9 +341,6 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             });
             return true;
         });
-        if (appInfo.isDummy()) {
-            pref.setVisible(false);
-        }
     }
 
     private void bindOpsPref() {

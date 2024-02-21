@@ -41,7 +41,7 @@ orbit = "6.1.0"
 androidx-test-runner = "1.5.2"
 # DO NOT UPGRADE
 rhino-runtime = "1.7.14"
-uiautomator = "2.3.0-beta01"
+uiautomator = "2.3.0"
 espresso-core = "3.5.1"
 androidx-junit = "1.1.5"
 xposed-api = "82"

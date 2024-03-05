@@ -308,7 +308,7 @@ fun CachedGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> U
                 .clickableWithRipple {
                     setExpand(!expand)
                 }
-                .padding(horizontal = 20.dp, vertical = 8.dp),
+                .padding(horizontal = 20.dp, vertical = 12.dp),
             contentAlignment = Alignment.CenterStart
         ) {
             Row(
@@ -338,7 +338,7 @@ fun RunningGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> 
                 .clickableWithRipple {
                     setExpand(!expand)
                 }
-                .padding(horizontal = 20.dp, vertical = 8.dp),
+                .padding(horizontal = 20.dp, vertical = 12.dp),
             contentAlignment = Alignment.CenterStart
         ) {
             Row(
@@ -362,7 +362,7 @@ fun RunningGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> 
 @Composable
 private fun ExpandIndicator(expand: Boolean) {
     Icon(
-        modifier = Modifier.size(16.dp),
+        modifier = Modifier.size(24.dp),
         painter = painterResource(
             id = if (expand) {
                 github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_arrow_drop_down_fill
@@ -381,7 +381,7 @@ fun NotRunningGroupHeader(itemCount: Int) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(ColorDefaults.backgroundSurfaceColor())
-                .padding(horizontal = 20.dp, vertical = 8.dp),
+                .padding(horizontal = 20.dp, vertical = 12.dp),
             contentAlignment = Alignment.CenterStart
         ) {
             val text = stringResource(id = R.string.running_process_not_running)

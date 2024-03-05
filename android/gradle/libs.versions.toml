@@ -6,9 +6,9 @@ adapter-rxjava2 = "2.9.0"
 agp = "8.2.2"
 biometric = "1.2.0-alpha05"
 androidx-work = "2.9.0"
-coil-compose = "2.5.0"
+coil-compose = "2.6.0"
 colormath = "3.3.3"
-commons-codec = "1.16.0"
+commons-codec = "1.16.1"
 commons-io = "2.15.1"
 compose-theme-adapter-3 = "1.1.1"
 constraint-layout = "2.0.4"
@@ -35,13 +35,13 @@ dalvik-dx = "14.0.0_r21"
 jotp = "1.3.0"
 jsoup = "1.17.2"
 kotest-assertions = "5.8.0"
-libsu = "5.1.0"
+libsu = "5.2.2"
 mmkv = "1.3.3"
-orbit = "6.1.0"
+orbit = "6.1.1"
 androidx-test-runner = "1.5.2"
 # DO NOT UPGRADE
 rhino-runtime = "1.7.14"
-uiautomator = "2.3.0-beta01"
+uiautomator = "2.3.0"
 espresso-core = "3.5.1"
 androidx-junit = "1.1.5"
 xposed-api = "82"
@@ -50,35 +50,35 @@ libxposed-service = "100-1.0.0"
 appcompat = "1.6.1"
 browser = "1.7.0"
 codeview = "1.3.9"
-compose-animation = "1.6.0"
-compose-bom = "2024.01.00"
-compose-compiler = "1.5.8"
-compose-foundation = "1.6.0"
-compose-material = "1.6.0"
-compose-material3 = "1.1.2"
-compose-runtime = "1.6.0"
-compose-ui = "1.6.0"
+compose-animation = "1.6.2"
+compose-bom = "2024.02.01"
+compose-compiler = "1.5.10"
+compose-foundation = "1.6.2"
+compose-material = "1.6.2"
+compose-material3 = "1.2.0"
+compose-runtime = "1.6.2"
+compose-ui = "1.6.2"
 converter-gson = "2.9.0"
 junit = "4.13.2"
-libchecker-rules-bundle = "32.1"
+libchecker-rules-bundle = "34.9"
 lottie = "6.3.0"
 markwo = "4.6.2"
 core-ktx = "1.12.0"
 core-splashscreen = "1.0.1"
 datastore-preferences = "1.0.0"
 kotlin = "1.9.22"
-kotlinx-coroutines = "1.7.3"
+kotlinx-coroutines = "1.8.0"
 kotlin-reflect = "1.9.22"
 kotlinx-serialization-json-jvm = "1.6.2"
 chucker = "4.0.0"
 lifecycle-runtime-ktx = "2.7.0"
 material = "1.11.0"
 mockk = "1.13.9"
-mvel2 = "2.5.1.Final"
-navigation-compose = "2.7.6"
+mvel2 = "2.5.2.Final"
+navigation-compose = "2.7.7"
 glide = "4.16.0"
 okhttp = "4.12.0"
-dagger = "2.50"
+dagger = "2.51"
 protobuf-java = "3.25.2"
 retrofit = "2.9.0"
 room = "2.6.1"
@@ -208,7 +208,7 @@ compose-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", versio
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
-glide-landscapist = { module = "com.github.skydoves:landscapist-glide", version = "2.2.13" }
+glide-landscapist = { module = "com.github.skydoves:landscapist-glide", version = "2.3.2" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-reflect" }
@@ -244,7 +244,7 @@ dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compil
 dagger-hilt-android-gradlePlugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
 dagger-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
-dagger-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.1.0" }
+dagger-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.2.0" }
 protobuf-java = { module = "com.google.protobuf:protobuf-java", version.ref = "protobuf-java" }
 protobuf-java-util = { module = "com.google.protobuf:protobuf-java-util", version.ref = "protobuf-java" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }

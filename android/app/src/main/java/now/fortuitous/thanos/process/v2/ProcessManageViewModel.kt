@@ -320,4 +320,12 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         // Wait the user to be quiet
         searchJobs.add(refresh(delay = 200))
     }
+
+    fun expandRunning(expand: Boolean) {
+        _state.value = _state.value.copy(isRunningExpand = expand)
+    }
+
+    fun expandCached(expand: Boolean) {
+        _state.value = _state.value.copy(isCacheExpand = expand)
+    }
 }

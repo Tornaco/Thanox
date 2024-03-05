@@ -196,6 +196,12 @@ fun ProcessManageScreen(
                 },
                 onFilterItemSelected = {
                     viewModel.onFilterItemSelected(it)
+                },
+                setRunningExpand = {
+                    viewModel.expandRunning(it)
+                },
+                setCachedExpand = {
+                    viewModel.expandCached(it)
                 })
         }
     }
@@ -222,7 +228,9 @@ fun RunningAppList(
     state: ProcessManageState,
     onRunningItemClick: (RunningAppState) -> Unit,
     onNotRunningItemClick: (AppInfo) -> Unit,
-    onFilterItemSelected: (AppSetFilterItem) -> Unit
+    onFilterItemSelected: (AppSetFilterItem) -> Unit,
+    setRunningExpand: (Boolean) -> Unit,
+    setCachedExpand: (Boolean) -> Unit
 ) {
     LazyColumn(
         state = lazyListState,
@@ -242,26 +250,42 @@ fun RunningAppList(
         }
 
         if (state.runningAppStates.isNotEmpty()) {
-            stickyHeader { RunningGroupHeader(state.runningAppStates.size) }
-            items(state.runningAppStates) {
-                RunningAppItem(
-                    it,
-                    state.cpuUsageRatioStates[it.appInfo],
-                    state.netSpeedStates[it.appInfo],
-                    onRunningItemClick
+            stickyHeader {
+                RunningGroupHeader(
+                    state.runningAppStates.size,
+                    state.isRunningExpand,
+                    setRunningExpand
                 )
+            }
+            items(state.runningAppStates) {
+                AnimatedVisibility(visible = state.isRunningExpand) {
+                    RunningAppItem(
+                        it,
+                        state.cpuUsageRatioStates[it.appInfo],
+                        state.netSpeedStates[it.appInfo],
+                        onRunningItemClick
+                    )
+                }
             }
         }
 
         if (state.runningAppStatesBg.isNotEmpty()) {
-            stickyHeader { CachedGroupHeader(state.runningAppStatesBg.size) }
-            items(state.runningAppStatesBg) {
-                RunningAppItem(
-                    it,
-                    state.cpuUsageRatioStates[it.appInfo],
-                    state.netSpeedStates[it.appInfo],
-                    onRunningItemClick
+            stickyHeader {
+                CachedGroupHeader(
+                    state.runningAppStatesBg.size,
+                    state.isCacheExpand,
+                    setCachedExpand
                 )
+            }
+            items(state.runningAppStatesBg) {
+                AnimatedVisibility(visible = state.isCacheExpand) {
+                    RunningAppItem(
+                        it,
+                        state.cpuUsageRatioStates[it.appInfo],
+                        state.netSpeedStates[it.appInfo],
+                        onRunningItemClick
+                    )
+                }
             }
         }
 
@@ -275,41 +299,79 @@ fun RunningAppList(
 }
 
 @Composable
-fun CachedGroupHeader(itemCount: Int) {
+fun CachedGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> Unit) {
     Surface(tonalElevation = 2.dp) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(ColorDefaults.backgroundSurfaceColor())
+                .clickableWithRipple {
+                    setExpand(!expand)
+                }
                 .padding(horizontal = 20.dp, vertical = 8.dp),
             contentAlignment = Alignment.CenterStart
         ) {
-            val text = stringResource(id = R.string.running_process_background)
-            Text(
-                text = "$text - $itemCount",
-                style = MaterialTheme.typography.titleMedium
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val text = stringResource(id = R.string.running_process_background)
+                Text(
+                    text = "$text - $itemCount",
+                    style = MaterialTheme.typography.titleMedium
+                )
+                ExpandIndicator(expand = expand)
+            }
         }
     }
 }
 
 @Composable
-fun RunningGroupHeader(itemCount: Int) {
+fun RunningGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> Unit) {
     Surface(tonalElevation = 2.dp) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(ColorDefaults.backgroundSurfaceColor())
+                .clickableWithRipple {
+                    setExpand(!expand)
+                }
                 .padding(horizontal = 20.dp, vertical = 8.dp),
             contentAlignment = Alignment.CenterStart
         ) {
-            val text = stringResource(id = R.string.running_process_running)
-            Text(
-                text = "$text - $itemCount",
-                style = MaterialTheme.typography.titleMedium
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val text = stringResource(id = R.string.running_process_running)
+                Text(
+                    text = "$text - $itemCount",
+                    style = MaterialTheme.typography.titleMedium
+                )
+                ExpandIndicator(expand = expand)
+            }
+
         }
     }
+}
+
+@Composable
+private fun ExpandIndicator(expand: Boolean) {
+    Icon(
+        modifier = Modifier.size(16.dp),
+        painter = painterResource(
+            id = if (expand) {
+                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_arrow_drop_down_fill
+            } else {
+                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_arrow_drop_up_fill
+            }
+        ),
+        contentDescription = ""
+    )
 }
 
 @Composable

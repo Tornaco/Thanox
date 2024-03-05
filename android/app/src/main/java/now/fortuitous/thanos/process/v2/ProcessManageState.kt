@@ -11,5 +11,8 @@ data class ProcessManageState(
     val appsNotRunning: List<AppInfo>,
     val appFilterItems: List<AppSetFilterItem>,
     val cpuUsageRatioStates: Map<AppInfo, String>,
-    val netSpeedStates: Map<AppInfo, NetSpeedState>
+    val netSpeedStates: Map<AppInfo, NetSpeedState>,
+
+    val isRunningExpand: Boolean = true,
+    val isCacheExpand: Boolean = true
 )

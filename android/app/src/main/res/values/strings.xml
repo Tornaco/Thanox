@@ -469,4 +469,12 @@
 
     <string name="feature_title_settings_access_record">Settings Access Record</string>
     <string name="feature_summary_settings_access_record">View System Settings write and read records. Usually you should select the Settings, Settings Provider, and the Secure Manager app in Xposed scope.</string>
+
+    <string name="launch_other_pkg_title">Launch app</string>
+    <string name="launch_other_pkg_message"><b>%s</b> wants to launch <b>%s</b>, do you allow?</string>
+    <string name="launch_other_pkg_remember">Remember choice</string>
+    <string name="launch_other_pkg_allow">Allow</string>
+    <string name="launch_other_pkg_ignore">Ignore</string>
+    <string name="launch_other_pkg_allow_once">Allow this time</string>
+    <string name="launch_other_pkg_ignored_message">Deny %s to launch %s</string>
 </resources>

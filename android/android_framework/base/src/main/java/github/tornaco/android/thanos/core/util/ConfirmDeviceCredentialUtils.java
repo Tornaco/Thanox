@@ -27,6 +27,8 @@ import android.os.RemoteException;
 
 // https://cs.android.com/android/platform/superproject/+/master:packages/apps/Settings/src/com/android/settings/password/ConfirmDeviceCredentialUtils.java;l=36?q=ConfirmDeviceCredentialUtils&ss=android
 public class ConfirmDeviceCredentialUtils {
+    public static final int FLAG_THANOX_VERIFIED = 0x00200000;
+
     public static void checkForPendingIntent(Activity activity) {
         // See Change-Id I52c203735fa9b53fd2f7df971824747eeb930f36 for context
         int taskId = activity.getIntent().getIntExtra(Intent.EXTRA_TASK_ID, -1);
@@ -43,7 +45,7 @@ public class ConfirmDeviceCredentialUtils {
         IntentSender intentSender = activity.getIntent().getParcelableExtra(Intent.EXTRA_INTENT);
         if (intentSender != null) {
             try {
-                activity.startIntentSenderForResult(intentSender, -1, null, 0, 0, 0);
+                activity.startIntentSenderForResult(intentSender, -1, null, 0, FLAG_THANOX_VERIFIED, 0);
             } catch (IntentSender.SendIntentException e) {
                 /* ignore */
             }

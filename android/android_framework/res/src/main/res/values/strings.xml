@@ -57,12 +57,6 @@
     <string name="service_dialog_button_thanox_removed_keep_data">Keep</string>
     <string name="service_dialog_button_thanox_removed_remove_data">Remove</string>
 
-    <string name="service_launch_other_pkg_title">Launch app</string>
-    <string name="service_launch_other_pkg_message"><b>%s</b> wants to launch <b>%s</b>, do you allow?</string>
-    <string name="service_launch_other_pkg_remember">Remember choice</string>
-    <string name="service_launch_other_pkg_allow">Allow</string>
-    <string name="service_launch_other_pkg_ignore">Ignore</string>
-
     <string name="billing_state_row_not_trust_title">Un-Trusted</string>
     <string name="billing_state_row_not_trust_message">Thanox may come from untrusted installations, Pro versions are only available in the Google play store, and should not be installed from any other source. \n\nNote: Untrusted installations can cause devices to become abnormally stuck, configuration data loss!!!
 </string>

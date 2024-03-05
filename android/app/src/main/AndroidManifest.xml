@@ -222,6 +222,34 @@
             android:name="now.fortuitous.thanos.settings.FeatureToggleActivity"
             android:exported="false" />
 
+        <activity
+            android:name="now.fortuitous.thanos.launchother.LaunchOtherAppAskActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="ui.verify.LaunchOtherAppActivity"
+            android:theme="@style/UiTheme.ActivityDialog">
+            <intent-filter>
+                <action android:name="github.tornaco.action.launcher.other.app" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="now.fortuitous.thanos.launchother.LaunchOtherAppDenyActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="ui.verify.LaunchOtherAppActivity"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="github.tornaco.action.launcher.other.app.deny" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="xposedmodule"
             android:value="true" />

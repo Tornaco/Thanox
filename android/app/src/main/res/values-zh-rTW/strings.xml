@@ -462,4 +462,12 @@
 
     <string name="feature_title_settings_access_record">設置訪問記錄</string>
     <string name="feature_summary_settings_access_record">檢視系統設置的讀寫記錄。如果你用的是Xposed，通常你需要在作用域中勾選Settings，Settings Provider以及安全管家，因為這些app通常會讀寫系統設置</string>
+
+    <string name="launch_other_pkg_title">启动应用</string>
+    <string name="launch_other_pkg_message"><b>%s</b> 想要打开 <b>%s</b>，是否允许？</string>
+    <string name="launch_other_pkg_remember">记住我的选择</string>
+    <string name="launch_other_pkg_allow">允许</string>
+    <string name="launch_other_pkg_ignore">拒绝</string>
+    <string name="launch_other_pkg_allow_once">仅允许这次</string>
+    <string name="launch_other_pkg_ignored_message">拒绝 %s 启动 %s</string>
 </resources>

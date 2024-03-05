@@ -57,6 +57,16 @@ object T {
         const val ACTION_LOCKER_VERIFY_EXTRA_PACKAGE = "pkg"
         const val ACTION_LOCKER_VERIFY_EXTRA_REQUEST_CODE = "request_code"
 
+        const val ACTION_LAUNCH_OTHER_APP =
+            "github.tornaco.action.launcher.other.app"
+        const val ACTION_LAUNCH_OTHER_APP_DENY =
+            "github.tornaco.action.launcher.other.app.deny"
+        const val ACTION_LAUNCH_OTHER_APP_EXTRA_CALLER_PKG =
+            "github.tornaco.action.launcher.other.app.caller"
+        const val ACTION_LAUNCH_OTHER_APP_EXTRA_TARGET_PKG =
+            "github.tornaco.action.launcher.other.app.target"
+        const val ACTION_LAUNCH_OTHER_APP_EXTRA_IS_FROM_CHECK =
+            "github.tornaco.action.launcher.other.app.is.from.check"
 
         const val ACTION_GET_PATCH_SOURCES_PREFIX = "thanox.a.get.patch.sources."
     }

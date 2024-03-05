@@ -179,8 +179,6 @@ dependencies {
     implementation(libs.lottie)
 
     implementation(libs.glide.landscapist)
-    implementation(libs.enro)
-    kapt(libs.enro.processor)
 
     implementation(libs.accompanist.appcompat.theme)
     implementation(libs.accompanist.systemuicontroller)

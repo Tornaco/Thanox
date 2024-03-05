@@ -18,20 +18,35 @@
 package github.tornaco.thanos.android.module.profile.engine
 
 import android.app.Activity
-import androidx.compose.foundation.layout.*
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Tag
 import androidx.compose.material.icons.filled.Timer
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -42,16 +57,20 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import dev.enro.core.compose.registerForNavigationResult
 import github.tornaco.android.thanos.core.alarm.AlarmRecord
 import github.tornaco.android.thanos.core.alarm.TimeOfADay
 import github.tornaco.android.thanos.core.alarm.WeekDay
 import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.*
+import github.tornaco.android.thanos.module.compose.common.widget.CardContainer
+import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloatingActionButton
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.Switch
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.thanos.android.module.profile.R
-import java.util.*
+import java.util.Calendar
+import java.util.UUID
 import kotlin.math.min
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
@@ -85,19 +104,28 @@ fun Activity.DateTimeEngineScreen() {
         viewModel.loadAlarms()
     }
 
-    val newRegularIntervalHandle =
-        registerForNavigationResult<NewRegularIntervalResult> { regularInterval ->
-            viewModel.schedulePeriodicWork(
-                regularInterval.tag,
-                regularInterval.durationMillis.toDuration(DurationUnit.MILLISECONDS)
-            )
+    val newRegularIntervalLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val regularInterval =
+                    result.data?.getParcelableExtra(NewRegularIntervalActivity.EXTRA_RES) as NewRegularIntervalResult?
+                regularInterval?.let {
+                    viewModel.schedulePeriodicWork(
+                        regularInterval.tag,
+                        regularInterval.durationMillis.toDuration(DurationUnit.MILLISECONDS)
+                    )
+                }
+            }
         }
+    )
 
     val alarmDialogState = rememberAlarmSelectorState(selected = {
         viewModel.addAlarm(it)
     })
 
     val navController = rememberNavController()
+    val context = LocalContext.current
 
     ThanoxSmallAppBarScaffold(
         title = {
@@ -129,7 +157,7 @@ fun Activity.DateTimeEngineScreen() {
                     }
 
                     BottomNavItem.RegularInterval.screenRoute -> {
-                        newRegularIntervalHandle.open(NewRegularInterval)
+                        newRegularIntervalLauncher.launch(NewRegularIntervalActivity.intent(context))
                     }
 
                     else -> {}

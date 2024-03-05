@@ -19,6 +19,8 @@
 
 package github.tornaco.thanos.android.module.profile.engine
 
+import android.content.Context
+import android.content.Intent
 import android.os.Parcelable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,27 +31,32 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.Tag
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
-import dev.enro.annotations.NavigationDestination
-import dev.enro.core.NavigationKey
-import dev.enro.core.close
-import dev.enro.core.compose.navigationHandle
-import dev.enro.core.result.closeWithResult
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.*
+import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloatingActionButton
+import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.thanos.android.module.profile.R
 import kotlinx.parcelize.Parcelize
 import kotlin.math.min
-
-@Parcelize
-object NewRegularInterval : NavigationKey.WithResult<NewRegularIntervalResult>
 
 @Parcelize
 data class NewRegularIntervalResult(
@@ -58,8 +65,15 @@ data class NewRegularIntervalResult(
 ) : Parcelable
 
 @AndroidEntryPoint
-@NavigationDestination(NewRegularInterval::class)
 class NewRegularIntervalActivity : ComposeThemeActivity() {
+    companion object {
+        const val EXTRA_RES = "res"
+
+        fun intent(context: Context): Intent {
+            return Intent(context, NewRegularIntervalActivity::class.java)
+        }
+    }
+
     override fun isF(): Boolean {
         return true
     }
@@ -73,11 +87,9 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
         NewRegularIntervalContent()
     }
 
-
     @Composable
     private fun NewRegularIntervalContent() {
         val state = DurationState()
-        val navHandle = navigationHandle<NewRegularInterval>()
 
         ThanoxSmallAppBarScaffold(title = {
             Text(
@@ -85,7 +97,7 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
-            onBackPressed = { navHandle.close() },
+            onBackPressed = { finish() },
             actions = {
             }, floatingActionButton = {
                 ExtendableFloatingActionButton(
@@ -100,12 +112,16 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
                     val timeMillis = (state.h.value * 60 * 60 * 1000L
                             + state.m.value * 60 * 1000L
                             + state.s.value * 1000L)
-                    navHandle.closeWithResult(
-                        NewRegularIntervalResult(
-                            durationMillis = timeMillis,
-                            tag = state.tag
+
+                    setResult(
+                        RESULT_OK, Intent().putExtra(
+                            EXTRA_RES, NewRegularIntervalResult(
+                                durationMillis = timeMillis,
+                                tag = state.tag
+                            )
                         )
                     )
+                    finish()
                 }
             }) { contentPadding ->
             Column(

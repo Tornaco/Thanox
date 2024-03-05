@@ -17,20 +17,32 @@
 
 package now.fortuitous.thanos.process.v2
 
-import androidx.compose.material.Surface
+import android.content.Context
+import android.content.Intent
+import android.os.Parcelable
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import dagger.hilt.android.AndroidEntryPoint
-import dev.enro.annotations.NavigationDestination
-import dev.enro.core.NavigationKey
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class RunningAppStateDetails(val state: RunningAppState) : NavigationKey.WithResult<Boolean>
+data class RunningAppStateDetails(val state: RunningAppState) : Parcelable
 
 @AndroidEntryPoint
-@NavigationDestination(RunningAppStateDetails::class)
 class RunningAppStateDetailsActivity : ComposeThemeActivity() {
+    companion object {
+        const val EXTRA_DETAILS = "details"
+    }
+
+    object Starter {
+        fun intent(context: Context, details: RunningAppStateDetails): Intent {
+            return Intent(context, RunningAppStateDetailsActivity::class.java).apply {
+                putExtra(EXTRA_DETAILS, details)
+            }
+        }
+    }
+
     override fun isF(): Boolean {
         return true
     }
@@ -41,8 +53,14 @@ class RunningAppStateDetailsActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
+        val details = intent.getParcelableExtra(EXTRA_DETAILS) as RunningAppStateDetails?
         Surface {
-            RunningAppStateDetailsPage()
+            details?.let { stateDetails ->
+                RunningAppStateDetailsPage(stateDetails) {
+                    setResult(if (it) RESULT_OK else RESULT_CANCELED)
+                    finish()
+                }
+            }
         }
     }
 }

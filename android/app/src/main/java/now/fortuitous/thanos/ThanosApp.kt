@@ -21,10 +21,6 @@ import android.content.Context
 import android.os.Build
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.HiltAndroidApp
-import dev.enro.annotations.NavigationComponent
-import dev.enro.core.controller.NavigationApplication
-import dev.enro.core.controller.navigationController
-import dev.enro.core.plugins.EnroLogger
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.MultipleModulesApp
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener
@@ -40,12 +36,7 @@ import now.fortuitous.app.Init
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 
 @HiltAndroidApp
-@NavigationComponent
-class ThanosApp : MultipleModulesApp(), NavigationApplication {
-    override val navigationController = navigationController {
-        plugin(EnroLogger())
-    }
-
+class ThanosApp : MultipleModulesApp() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         AppGlobals.setContext(base)

@@ -16,8 +16,11 @@
  */
 package now.fortuitous.thanos.process.v2
 
+import android.app.Activity
 import android.text.format.DateUtils
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -66,7 +69,6 @@ import com.elvishew.xlog.XLog
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import dev.enro.core.compose.registerForNavigationResult
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
@@ -94,11 +96,15 @@ fun ProcessManageScreen(
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     viewModel.bindLifecycle(lifecycle)
     val state by viewModel.state.collectAsState()
-    val navHandle = registerForNavigationResult<Boolean> { shouldUpdate ->
-        if (shouldUpdate) {
-            viewModel.refresh(0)
+    val detailLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                viewModel.refresh(0)
+            }
         }
-    }
+    )
+
     XLog.d("viewModel= $viewModel by owner: ${LocalViewModelStoreOwner.current}")
 
     LaunchedEffect(viewModel) {
@@ -189,7 +195,12 @@ fun ProcessManageScreen(
                 lazyListState = listState,
                 state = state,
                 onRunningItemClick = {
-                    navHandle.open(RunningAppStateDetails(it))
+                    detailLauncher.launch(
+                        RunningAppStateDetailsActivity.Starter.intent(
+                            context,
+                            RunningAppStateDetails(it)
+                        )
+                    )
                 },
                 onNotRunningItemClick = {
                     now.fortuitous.thanos.apps.AppDetailsActivity.start(context, it)

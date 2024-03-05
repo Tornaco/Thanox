@@ -86,9 +86,6 @@ dependencies {
     kapt(libs.dagger.hilt.android.compiler)
     implementation(libs.dagger.hilt.android)
 
-    implementation(libs.enro)
-    kapt(libs.enro.processor)
-
     implementation(project(":modules:module_common"))
     implementation(project(":android_framework:base"))
     implementation(project(":modules:module_feature_access"))

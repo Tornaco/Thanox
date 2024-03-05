@@ -62,8 +62,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import dev.enro.core.compose.navigationHandle
-import dev.enro.core.result.closeWithResult
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.requireActivity
@@ -86,14 +84,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RunningAppStateDetailsPage() {
-    val navHandle = navigationHandle<RunningAppStateDetails>()
+fun RunningAppStateDetailsPage(details: RunningAppStateDetails, closeSetResult: (Boolean) -> Unit) {
     val viewModel: RunningAppDetailViewModel = hiltViewModel()
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     viewModel.bindLifecycle(lifecycle)
-    val state = navHandle.key.state
+    val state = details.state
 
     val detailState by viewModel.state.collectAsState()
 
@@ -102,7 +98,7 @@ fun RunningAppStateDetailsPage() {
     }
 
     RunningAppStateDetailsScreen(state, detailState.cpuState, viewModel) {
-        navHandle.closeWithResult(it)
+        closeSetResult(it)
     }
 }
 

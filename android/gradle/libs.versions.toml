@@ -15,8 +15,6 @@ constraint-layout = "2.0.4"
 easy-rules-support = "4.1.0"
 easy-rules-mvel = "4.1.0"
 easy-rules-core = "4.1.0"
-enro-processor = "2.2.0"
-enro = "2.2.0"
 guava-android = "23.0"
 interpolator = "1.0.0"
 paging-runtime = "3.2.1"
@@ -134,8 +132,6 @@ constraint-layout = { module = "com.android.support.constraint:constraint-layout
 easy-rules-support = { module = "org.jeasy:easy-rules-support", version.ref = "easy-rules-support" }
 easy-rules-mvel = { module = "org.jeasy:easy-rules-mvel", version.ref = "easy-rules-mvel" }
 easy-rules-core = { module = "org.jeasy:easy-rules-core", version.ref = "easy-rules-core" }
-enro-processor = { module = "dev.enro:enro-processor", version.ref = "enro-processor" }
-enro = { module = "dev.enro:enro", version.ref = "enro" }
 guava-android = { module = "com.google.guava:guava", version.ref = "guava-android" }
 licensesdialog = { module = "de.psdev.licensesdialog:licensesdialog", version.ref = "licensesdialog" }
 listenablefuture = { module = "com.google.guava:listenablefuture", version.ref = "listenablefuture" }

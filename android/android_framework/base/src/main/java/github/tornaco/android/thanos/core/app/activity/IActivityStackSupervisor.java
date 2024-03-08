@@ -137,6 +137,16 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     @Override public void setLaunchOtherAppBlockerEnabled(boolean enable) throws android.os.RemoteException
     {
     }
+    @Override public void addLaunchOtherAppRule(java.lang.String rule) throws android.os.RemoteException
+    {
+    }
+    @Override public void deleteLaunchOtherAppRule(java.lang.String rule) throws android.os.RemoteException
+    {
+    }
+    @Override public java.lang.String[] getAllLaunchOtherAppRules() throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -583,6 +593,32 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _arg0 = (0!=data.readInt());
           this.setLaunchOtherAppBlockerEnabled(_arg0);
           reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_addLaunchOtherAppRule:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          this.addLaunchOtherAppRule(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_deleteLaunchOtherAppRule:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          this.deleteLaunchOtherAppRule(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getAllLaunchOtherAppRules:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String[] _result = this.getAllLaunchOtherAppRules();
+          reply.writeNoException();
+          reply.writeStringArray(_result);
           return true;
         }
         default:
@@ -1404,6 +1440,64 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           _data.recycle();
         }
       }
+      @Override public void addLaunchOtherAppRule(java.lang.String rule) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(rule);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_addLaunchOtherAppRule, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().addLaunchOtherAppRule(rule);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void deleteLaunchOtherAppRule(java.lang.String rule) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(rule);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_deleteLaunchOtherAppRule, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().deleteLaunchOtherAppRule(rule);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.lang.String[] getAllLaunchOtherAppRules() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String[] _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getAllLaunchOtherAppRules, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllLaunchOtherAppRules();
+          }
+          _reply.readException();
+          _result = _reply.createStringArray();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor sDefaultImpl;
     }
     static final int TRANSACTION_checkActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1443,6 +1537,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     static final int TRANSACTION_setLaunchOtherAppSetting = (android.os.IBinder.FIRST_CALL_TRANSACTION + 34);
     static final int TRANSACTION_isLaunchOtherAppBlockerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 35);
     static final int TRANSACTION_setLaunchOtherAppBlockerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 36);
+    static final int TRANSACTION_addLaunchOtherAppRule = (android.os.IBinder.FIRST_CALL_TRANSACTION + 37);
+    static final int TRANSACTION_deleteLaunchOtherAppRule = (android.os.IBinder.FIRST_CALL_TRANSACTION + 38);
+    static final int TRANSACTION_getAllLaunchOtherAppRules = (android.os.IBinder.FIRST_CALL_TRANSACTION + 39);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1500,4 +1597,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public void setLaunchOtherAppSetting(github.tornaco.android.thanos.core.pm.Pkg pkg, int setting) throws android.os.RemoteException;
   public boolean isLaunchOtherAppBlockerEnabled() throws android.os.RemoteException;
   public void setLaunchOtherAppBlockerEnabled(boolean enable) throws android.os.RemoteException;
+  public void addLaunchOtherAppRule(java.lang.String rule) throws android.os.RemoteException;
+  public void deleteLaunchOtherAppRule(java.lang.String rule) throws android.os.RemoteException;
+  public java.lang.String[] getAllLaunchOtherAppRules() throws android.os.RemoteException;
 }

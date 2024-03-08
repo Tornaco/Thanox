@@ -65,4 +65,7 @@ interface IActivityStackSupervisor {
     void setLaunchOtherAppSetting(in Pkg pkg, int setting);
     boolean isLaunchOtherAppBlockerEnabled();
     void setLaunchOtherAppBlockerEnabled(boolean enable);
+    void addLaunchOtherAppRule(String rule);
+    void deleteLaunchOtherAppRule(String rule);
+    String[] getAllLaunchOtherAppRules();
 }

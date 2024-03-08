@@ -100,7 +100,7 @@ protobuf-gradle-plugin = { id = "com.google.protobuf", version = "0.9.4" }
 gmazzo-buildconfig = { id = "com.github.gmazzo.buildconfig", version = "5.3.5" }
 gladed-androidgitversion = { id = "com.gladed.androidgitversion", version = "0.4.14" }
 diffplug-spotless = { id = "com.diffplug.spotless", version = "6.25.0" }
-kover = { id = "org.jetbrains.kotlinx.kover", version = "0.7.5" }
+kover = { id = "org.jetbrains.kotlinx.kover", version = "0.7.6" }
 
 [libraries]
 accompanist-appcompat-theme = { module = "com.google.accompanist:accompanist-appcompat-theme", version.ref = "accompanist-appcompat-theme" }

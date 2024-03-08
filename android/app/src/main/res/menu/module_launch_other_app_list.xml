@@ -23,4 +23,9 @@
         android:title="@string/module_ops_mode_ignore_all"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_rule"
+        android:title="@string/menu_title_rules"
+        app:showAsAction="never" />
+
 </menu>

@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
@@ -261,6 +262,10 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
                     .setTitle(github.tornaco.thanos.android.ops.R.string.module_ops_mode_ignore)
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE)).show();
+            return true;
+        }
+        if (R.id.action_rule == item.getItemId()) {
+            LaunchOtherAppRuleActivity.start(thisActivity());
             return true;
         }
 

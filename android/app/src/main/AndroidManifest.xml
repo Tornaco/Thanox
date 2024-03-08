@@ -253,6 +253,9 @@
         <activity
             android:name="now.fortuitous.thanos.launchother.LaunchOtherAppListActivity"
             android:exported="false" />
+        <activity
+            android:name="now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

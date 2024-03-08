@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.core.app.activity;
 
 import android.content.ComponentName;
+import android.os.RemoteException;
 
 import java.util.List;
 
@@ -174,5 +175,20 @@ public class ActivityStackSupervisor {
     @SneakyThrows
     public void setLaunchOtherAppBlockerEnabled(boolean enable) {
         supervisor.setLaunchOtherAppBlockerEnabled(enable);
+    }
+
+    @SneakyThrows
+    public void addLaunchOtherAppRule(String rule) throws RemoteException {
+        supervisor.addLaunchOtherAppRule(rule);
+    }
+
+    @SneakyThrows
+    public void deleteLaunchOtherAppRule(String rule) throws RemoteException {
+        supervisor.deleteLaunchOtherAppRule(rule);
+    }
+
+    @SneakyThrows
+    public String[] getAllLaunchOtherAppRules() throws RemoteException {
+        return supervisor.getAllLaunchOtherAppRules();
     }
 }

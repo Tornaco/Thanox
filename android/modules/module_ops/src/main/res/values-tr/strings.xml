@@ -37,6 +37,7 @@
     <string name="module_ops_mode_all">Hepsi</string>
 
     <string name="module_ops_mode_allow_all">Tüm izinler</string>
+    <string name="module_ops_mode_ask_all">All ask</string>
     <string name="module_ops_mode_foreground_all">Ön plandaki tüm izinler</string>
     <string name="module_ops_mode_ignore_all">Tümünü görmezden gel</string>
 </resources>

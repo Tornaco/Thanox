@@ -23,4 +23,5 @@
     <color name="nav_icon_feedback">#9575cd</color>
     <color name="nav_icon_guide">#ffb74d</color>
     <color name="nav_icon_wakelock_remover">#f06292</color>
+    <color name="nav_icon_launch_other_app">#a1887f</color>
 </resources>

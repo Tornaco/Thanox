@@ -33,6 +33,7 @@ import github.tornaco.thanos.android.module.profile.RuleListActivity
 import github.tornaco.thanos.android.ops.OpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
 import github.tornaco.thanos.android.ops2.byop.Ops2Activity
+import now.fortuitous.thanos.launchother.LaunchOtherAppListActivity
 import now.fortuitous.thanos.notification.NotificationCenterActivity
 import now.fortuitous.thanos.power.SmartFreezeActivity
 import now.fortuitous.thanos.power.wakelock.WakeLockBlockerActivity
@@ -269,6 +270,20 @@ class PrebuiltFeatureLauncher(
                 AppFeatureManager.withSubscriptionStatus(context) {
                     if (it) {
                         WakeLockBlockerActivity.Starter.start(context)
+                    } else {
+                        AppFeatureManager.showDonateIntroDialog(context)
+                    }
+                }
+            }
+
+            PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER -> {
+                if (!thanosManager.isServiceInstalled) {
+                    DialogUtils.showNotActivated(context)
+                    return
+                }
+                AppFeatureManager.withSubscriptionStatus(context) {
+                    if (it) {
+                        LaunchOtherAppListActivity.start(context)
                     } else {
                         AppFeatureManager.showDonateIntroDialog(context)
                     }

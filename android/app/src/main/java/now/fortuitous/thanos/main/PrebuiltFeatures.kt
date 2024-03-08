@@ -260,6 +260,12 @@ object PrebuiltFeatures {
                 titleRes = R.string.feature_title_infinite_z,
                 requiredFeature = BuildProp.THANOX_FEATURE_IZ,
                 themeColor = R.color.nav_icon_app_clone
+            ),
+            FeatureItem(
+                id = PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER,
+                iconRes = R.drawable.ic_nav_launch_other_app,
+                titleRes = R.string.launch_other_app,
+                themeColor = R.color.nav_icon_launch_other_app
             )
         )
     )

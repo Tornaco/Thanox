@@ -37,6 +37,7 @@
     <string name="module_ops_mode_all">全部</string>
 
     <string name="module_ops_mode_allow_all">全部 始终允许</string>
+    <string name="module_ops_mode_ask_all">全部 询问</string>
     <string name="module_ops_mode_foreground_all">全部 前台允许</string>
     <string name="module_ops_mode_ignore_all">全部 拒绝</string>
 </resources>

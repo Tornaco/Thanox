@@ -39,4 +39,5 @@
     <string name="module_ops_mode_allow_all">All allow</string>
     <string name="module_ops_mode_foreground_all">All allow in foreground</string>
     <string name="module_ops_mode_ignore_all">All ignore</string>
+    <string name="module_ops_mode_ask_all">All ask</string>
 </resources>

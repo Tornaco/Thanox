@@ -145,6 +145,8 @@ public class AppPreference {
                 thanos.getAppOpsManager().setOpsEnabled(false);
             } else if (featureId == PrebuiltFeatureIds.ID_BACKGROUND_START) {
                 thanos.getActivityManager().setStartBlockEnabled(false);
+            } else if (featureId == PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER) {
+                thanos.getActivityStackSupervisor().setLaunchOtherAppBlockerEnabled(false);
             } else if (featureId == PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL) {
                 thanos.getActivityManager().setCleanUpOnTaskRemovalEnabled(false);
             } else if (featureId == PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER) {

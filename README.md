@@ -9,5 +9,5 @@
 
 ## 文档 (Documents)
 
-[介绍与教程 (Intro & Guide)](https://tornaco.github.io/Thanox/)
+[介绍与教程 (Intro & Guide)](https://tornaco.github.io/Thanox-Docs/)
 

@@ -53,10 +53,10 @@ buildConfig {
     buildConfigField("String", "ACTION_APP_LOCK", provider { "\"github.tornaco.practice.honeycomb.bee.action.START\"" })
     buildConfigField("String", "ACTIVITY_APP_DETAILS", provider { "\"now.fortuitous.thanos.apps.AppDetailsActivity\"" })
     buildConfigField("String", "SU_SERVICE_CLASS", provider { "\"now.fortuitous.thanos.service.SuSupportService\"" })
-    buildConfigField("String", "THANOX_URL_DOCS_PROFILE", provider { "\"https://tornaco.github.io/Thanox/docs/profile\"" })
-    buildConfigField("String", "THANOX_URL_DOCS_START_RULES", provider { "\"https://tornaco.github.io/Thanox/docs/bg_start\"" })
+    buildConfigField("String", "THANOX_URL_DOCS_PROFILE", provider { "\"https://tornaco.github.io/Thanox-Docs/zh/guide/profile.html\"" })
+    buildConfigField("String", "THANOX_URL_DOCS_START_RULES", provider { "\"https://tornaco.github.io/Thanox-Docs/zh/guide/bg_start.html\"" })
     buildConfigField("String", "THANOX_URL_PLAY_VERSION", provider { "\"https://play.google.com/store/apps/details?id=github.tornaco.android.thanos.pro\"" })
-    buildConfigField("String", "THANOX_URL_DOCS_HOME", provider { "\"https://tornaco.github.io/Thanox/\"" })
+    buildConfigField("String", "THANOX_URL_DOCS_HOME", provider { "\"https://tornaco.github.io/Thanox-Docs\"" })
 
 
     buildConfigField("String", "THANOX_FEATURE_PROFILE_A11Y", provider { "\"thanox.feature.profile.accessibility\"" });

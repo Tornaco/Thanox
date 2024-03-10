@@ -55,6 +55,7 @@ buildConfig {
     buildConfigField("String", "SU_SERVICE_CLASS", provider { "\"now.fortuitous.thanos.service.SuSupportService\"" })
     buildConfigField("String", "THANOX_URL_DOCS_PROFILE", provider { "\"https://tornaco.github.io/Thanox-Docs/zh/guide/profile.html\"" })
     buildConfigField("String", "THANOX_URL_DOCS_START_RULES", provider { "\"https://tornaco.github.io/Thanox-Docs/zh/guide/bg_start.html\"" })
+    buildConfigField("String", "THANOX_URL_DOCS_LAUNCH_OTHER_APP_RULES", provider { "\"https://tornaco.github.io/Thanox-Docs/zh/guide/launch_other_app.html\"" })
     buildConfigField("String", "THANOX_URL_PLAY_VERSION", provider { "\"https://play.google.com/store/apps/details?id=github.tornaco.android.thanos.pro\"" })
     buildConfigField("String", "THANOX_URL_DOCS_HOME", provider { "\"https://tornaco.github.io/Thanox-Docs\"" })
 

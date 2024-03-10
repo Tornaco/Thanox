@@ -10,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -22,6 +23,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.DisposableEffectWithLifeCycle
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
@@ -29,6 +31,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.ListItem
 import github.tornaco.android.thanos.module.compose.common.widget.TextInputDialog
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
+import github.tornaco.android.thanos.util.BrowserUtils
 
 @AndroidEntryPoint
 class LaunchOtherAppRuleActivity : ComposeThemeActivity() {
@@ -64,6 +67,11 @@ class LaunchOtherAppRuleActivity : ComposeThemeActivity() {
                 thisActivity().finish()
             },
             actions = {
+                TextButton(onClick = {
+                    BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_LAUNCH_OTHER_APP_RULES)
+                }) {
+                    Text(stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_wiki))
+                }
                 IconButton(onClick = {
                     inputDialog.show()
                 }) {

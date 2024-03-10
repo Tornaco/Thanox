@@ -104,6 +104,8 @@
     <string name="key_original_field_meid_slot_2" translatable="false">key_original_field_meid_slot_2</string>
     <string name="key_original_field_meid_slot_3" translatable="false">key_original_field_meid_slot_3</string>
 
+    <string name="key_recent_task_blur_mode" translatable="false">key_recent_task_blur_mode</string>
+
     <string name="key_bg_screen_off_clean_up_delay" translatable="false">key_bg_screen_off_clean_up_delay</string>
     <string name="key_bg_screen_off_clean_up_skip_audio" translatable="false">key_bg_screen_off_clean_up_skip_audio
     </string>

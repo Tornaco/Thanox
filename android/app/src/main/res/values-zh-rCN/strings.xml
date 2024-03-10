@@ -353,6 +353,9 @@
     <string name="pre_title_bg_screen_off_clean_up_skip_audio">不清理音频</string>
     <string name="pre_summary_bg_screen_off_clean_up_skip_audio">正在播放音频的App不会被清理</string>
 
+    <string name="pre_title_recent_task_blur_mask_mode">隐藏内容</string>
+    <string name="pre_summary_recent_task_blur_mask_mode">不用高斯模糊效果，而是完全隐藏页面内容</string>
+
     <string name="pre_title_exclude_recent_task">最近任务</string>
     <string name="pre_summary_exclude_recent_task">设置强制显示到最近任务或者强制从最近任务中隐藏</string>
     <string name="pre_entry_exclude_recent_task_default">默认</string>

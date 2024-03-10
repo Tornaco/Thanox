@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 
@@ -44,6 +43,12 @@ public class ActivityManager {
         public static final int NONE = 0;
         public static final int INCLUDE = 1;
         public static final int EXCLUDE = -1;
+    }
+
+    public static final class RecentTaskBlurMode {
+        public static final int NONE = 0;
+        public static final int BLUR = 1;
+        public static final int MASK = 2;
     }
 
     private IActivityManager server;
@@ -420,6 +425,16 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    public void setPkgRecentTaskBlurMode(Pkg pkg, int mode) {
+        server.setPkgRecentTaskBlurMode(pkg, mode);
+    }
+
+    @SneakyThrows
+    public int getPkgRecentTaskBlurMode(Pkg pkg) {
+        return server.getPkgRecentTaskBlurMode(pkg);
+    }
+
+    @SneakyThrows
     @Deprecated
     /**
      * @deprecated User {{@link #isPackageIdle(Pkg)} instead}
@@ -594,7 +609,7 @@ public class ActivityManager {
     @SneakyThrows
     @Deprecated
     public RunningServiceInfoCompat[] getRunningAppServiceForPackage(String pkgName) {
-        return server.getRunningAppServiceForPackage(pkgName,  UserHandle.getCallingUserId());
+        return server.getRunningAppServiceForPackage(pkgName, UserHandle.getCallingUserId());
     }
 
     @SneakyThrows

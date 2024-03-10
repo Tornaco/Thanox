@@ -343,6 +343,9 @@
     <string name="pre_title_bg_screen_off_clean_up_skip_audio">Do not clean up audio streams</string>
     <string name="pre_summary_bg_screen_off_clean_up_skip_audio">Keep audio playing apps</string>
 
+    <string name="pre_title_recent_task_blur_mask_mode">Hide content</string>
+    <string name="pre_summary_recent_task_blur_mask_mode">Totally hide content of the task, instead of blur</string>
+
     <string name="pre_title_exclude_recent_task">Exclude recent task</string>
     <string name="pre_summary_exclude_recent_task">Set force exclude or include recent task for this app</string>
     <string name="pre_entry_exclude_recent_task_default">Default</string>

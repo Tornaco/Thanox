@@ -349,6 +349,9 @@
     <string name="pre_title_bg_screen_off_clean_up_skip_audio">不清理音頻</string>
     <string name="pre_summary_bg_screen_off_clean_up_skip_audio">正在播放音頻的App不會被清理</string>
 
+    <string name="pre_title_recent_task_blur_mask_mode">隐藏内容</string>
+    <string name="pre_summary_recent_task_blur_mask_mode">不用高斯模糊效果，而是完全隐藏页面内容</string>
+
     <string name="cheat_field_auto_gen">全部隨機補充</string>
 
     <string name="pre_title_exclude_recent_task">最近任務</string>

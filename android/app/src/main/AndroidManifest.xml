@@ -120,6 +120,10 @@
             android:exported="false" />
 
         <activity
+            android:name="now.fortuitous.thanos.task.RecentTaskBlurSettingsActivity"
+            android:exported="false" />
+
+        <activity
             android:name="now.fortuitous.thanos.apps.AppDetailsActivity"
             android:enabled="true"
             android:exported="true" />

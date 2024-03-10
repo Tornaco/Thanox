@@ -599,6 +599,8 @@ Thanox في Xposed Manager وإعادة التشغيل!</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_fg">الحفاظ على تطبيق المقدمة</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_notification">الحفاظ التي لديها إشعارات</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">الحفاظ في المهام الحديثة</string>
+    <string name="pre_title_recent_task_blur_mask_mode">Hide content</string>
+    <string name="pre_summary_recent_task_blur_mask_mode">Totally hide content of the task, instead of blur</string>
     <string name="pre_title_cheat_android_id">معرف Android</string>
     <string name="pre_title_cheat_device_id">معرّف الجهاز (API المهم)</string>
     <string name="pre_title_cheat_imei_slot1">imei (الفتحة 1)</string>

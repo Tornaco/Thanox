@@ -238,4 +238,7 @@ interface IActivityManager {
 
     boolean isPkgResident(in Pkg pkg);
     void setPkgResident(in Pkg pkg, boolean resident);
+
+    void setPkgRecentTaskBlurMode(in Pkg pkg, int mode);
+    int getPkgRecentTaskBlurMode(in Pkg pkg);
 }

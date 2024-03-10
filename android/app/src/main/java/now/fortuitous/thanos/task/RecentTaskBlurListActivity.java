@@ -18,6 +18,8 @@
 package now.fortuitous.thanos.task;
 
 import android.content.Context;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
@@ -90,5 +92,19 @@ public class RecentTaskBlurListActivity extends CommonFuncToggleAppListFilterAct
             Collections.sort(res);
             return res;
         };
+    }
+
+    @Override
+    protected void onInflateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.recent_task_blur_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (R.id.action_settings == item.getItemId()) {
+            RecentTaskBlurSettingsActivity.start(thisActivity());
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -17,6 +17,7 @@
 
 package now.fortuitous.thanos.qs;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.service.quicksettings.Tile;
@@ -29,6 +30,7 @@ import com.elvishew.xlog.XLog;
 import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.util.OsUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class QuickConfigAppTile extends TileService {
@@ -65,7 +67,14 @@ public class QuickConfigAppTile extends TileService {
         AppInfo appInfo = ThanosManager.from(getApplicationContext()).getPkgManager().getAppInfo(pkgName);
         viewer.putExtra("app", appInfo);
         viewer.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivityAndCollapse(viewer);
+
+        PendingIntent pi = PendingIntent.getActivity(this, 2048, viewer,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE, null);
+        if (OsUtils.isUOrAbove()) {
+            startActivityAndCollapse(pi);
+        } else {
+            startActivityAndCollapse(viewer);
+        }
     }
 
     @Override

@@ -57,6 +57,8 @@
     <string name="service_dialog_button_thanox_removed_keep_data">保留</string>
     <string name="service_dialog_button_thanox_removed_remove_data">移除</string>
 
+    <string name="service_smart_freeze_app_freezed">智能冻结：冻结：%s</string>
+    <string name="service_smart_freeze_app_unfreezed">智能冻结：解冻：%s</string>
 
     <string name="billing_state_row_not_trust_title">不受信任的安裝包</string>
     <string name="billing_state_row_not_trust_message">Thanox可能來自不受信任的安裝，Pro版本僅在Google play商店發佈，請不要從任何其他來源安裝。 \n\n注意：不受信任的安裝會導致設備異常卡頓、配置數據丟失!!!</string>

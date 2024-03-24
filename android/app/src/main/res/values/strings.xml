@@ -404,6 +404,9 @@
     <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">Freeze all apps on screen off</string>
     <string name="pre_title_smart_freeze_screen_off_clean_up">Screen off freeze delay</string>
 
+    <string name="pre_title_smart_freeze_tip">Show tip</string>
+    <string name="pre_summary_smart_freeze_tip">Show toast tip when freeze or unfreeze app</string>
+
     <string name="pre_title_smart_freeze_hide_package_change_event">Hide in Launcher</string>
     <string name="pre_summary_smart_freeze_hide_package_change_event">If this switch is enabled, Thanox will block PACKAGE CHANGED event for this package, so Launch apps will not be able to detect the package enable event.</string>
 

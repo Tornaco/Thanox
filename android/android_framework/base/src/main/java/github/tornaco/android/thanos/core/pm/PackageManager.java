@@ -512,6 +512,16 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    public void setFreezeTipEnabled(boolean enable) {
+        pm.setFreezeTipEnabled(enable);
+    }
+
+    @SneakyThrows
+    public boolean isFreezeTipEnabled() {
+        return pm.isFreezeTipEnabled();
+    }
+
+    @SneakyThrows
     public void freezeAllSmartFreezePackages(PackageEnableStateChangeListener listener) {
         pm.freezeAllSmartFreezePackages(listener.stub);
     }

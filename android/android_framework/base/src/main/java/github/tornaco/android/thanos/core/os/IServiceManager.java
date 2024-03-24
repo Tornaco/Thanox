@@ -26,7 +26,6 @@ public interface IServiceManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.os.IServiceManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.os.IServiceManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -54,6 +53,9 @@ public interface IServiceManager extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -61,42 +63,43 @@ public interface IServiceManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_hasService:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.hasService(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_addService:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           android.os.IBinder _arg1;
           _arg1 = data.readStrongBinder();
           this.addService(_arg0, _arg1);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_getService:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           android.os.IBinder _result = this.getService(_arg0);
           reply.writeNoException();
           reply.writeStrongBinder(_result);
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.os.IServiceManager
     {
@@ -122,9 +125,6 @@ public interface IServiceManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(name);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasService(name);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -143,10 +143,6 @@ public interface IServiceManager extends android.os.IInterface
           _data.writeString(name);
           _data.writeStrongBinder(binder);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().addService(name, binder);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -163,9 +159,6 @@ public interface IServiceManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(name);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getService(name);
-          }
           _reply.readException();
           _result = _reply.readStrongBinder();
         }
@@ -175,28 +168,12 @@ public interface IServiceManager extends android.os.IInterface
         }
         return _result;
       }
-      public static github.tornaco.android.thanos.core.os.IServiceManager sDefaultImpl;
     }
     static final int TRANSACTION_hasService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_addService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_getService = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
-    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.os.IServiceManager impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static github.tornaco.android.thanos.core.os.IServiceManager getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.os.IServiceManager";
   public boolean hasService(java.lang.String name) throws android.os.RemoteException;
   public void addService(java.lang.String name, android.os.IBinder binder) throws android.os.RemoteException;
   public android.os.IBinder getService(java.lang.String name) throws android.os.RemoteException;

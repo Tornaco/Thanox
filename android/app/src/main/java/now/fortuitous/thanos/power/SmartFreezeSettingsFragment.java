@@ -115,6 +115,14 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
             thanos.getPkgManager().setDOLTipsEnabled(checked);
             return true;
         });
+
+        SwitchPreferenceCompat showTipPref = findPreference(getString(R.string.key_smart_freeze_tips));
+        Objects.requireNonNull(showTipPref).setChecked(thanos.getPkgManager().isFreezeTipEnabled());
+        dolTipsPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean checked = (boolean) newValue;
+            thanos.getPkgManager().setFreezeTipEnabled(checked);
+            return true;
+        });
     }
 
     private void showSuspendOrDisablePackageDialog(Consumer<Boolean> suspendConsumer) {

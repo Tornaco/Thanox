@@ -412,6 +412,9 @@
     <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">螢幕鎖定後凍結列表中的全部應用</string>
     <string name="pre_title_smart_freeze_screen_off_clean_up">螢幕鎖定後整理延時</string>
 
+    <string name="pre_title_smart_freeze_tip">显示提示</string>
+    <string name="pre_summary_smart_freeze_tip">当冻结或者解冻应用时显示土司提示</string>
+
     <string name="pre_title_smart_freeze_hide_package_change_event">不在桌面顯示</string>
     <string name="pre_summary_smart_freeze_hide_package_change_event">開啟這個開關後，Thanox會攔截該應用的包啟用事件，這樣一來，桌面應用就不會感知到應用的啟用，達到隱藏應用的效果</string>
 

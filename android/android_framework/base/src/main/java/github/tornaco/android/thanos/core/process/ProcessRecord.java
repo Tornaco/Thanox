@@ -5,8 +5,10 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import util.ObjectsUtils;
 
+@Keep
 public class ProcessRecord implements Parcelable {
 
     private final String packageName;

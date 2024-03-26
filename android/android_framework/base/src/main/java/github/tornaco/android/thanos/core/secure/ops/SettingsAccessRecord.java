@@ -20,6 +20,9 @@ package github.tornaco.android.thanos.core.secure.ops;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class SettingsAccessRecord implements Parcelable {
     public String name;
     public String value;

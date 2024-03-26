@@ -20,6 +20,9 @@ package github.tornaco.android.thanos.core.os;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class SwapInfo implements Parcelable {
     public long totalSwap;
     public long freeSwap;

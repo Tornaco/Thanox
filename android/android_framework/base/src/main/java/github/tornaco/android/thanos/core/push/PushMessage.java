@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 import java.util.UUID;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.annotation.Nullable;
 import github.tornaco.android.thanos.core.util.GsonUtils;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Keep
 public class PushMessage implements Parcelable {
     public static final int IMPORTANCE_MAX = 0;
     public static final int TYPE_APP_UPDATE = 0x1;

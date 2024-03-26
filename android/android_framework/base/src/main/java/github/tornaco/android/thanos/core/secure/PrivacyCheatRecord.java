@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.secure;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Keep
 public final class PrivacyCheatRecord implements Parcelable {
     private String packageName;
     private int op;

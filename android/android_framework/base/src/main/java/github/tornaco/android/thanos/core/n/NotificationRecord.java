@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.n;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -16,6 +17,7 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"pkgName", "when", "title", "content", "userId"})
+@Keep
 public final class NotificationRecord implements Parcelable {
 
     public static class Types {

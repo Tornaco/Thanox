@@ -20,6 +20,9 @@ package github.tornaco.android.thanos.core.wm;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class WindowState implements Parcelable {
     public String packageName;
     public int uid;

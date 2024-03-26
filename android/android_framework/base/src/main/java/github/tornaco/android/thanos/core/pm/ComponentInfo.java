@@ -4,6 +4,9 @@ import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class ComponentInfo implements Parcelable {
     private final String name;
     private final ComponentName componentName;

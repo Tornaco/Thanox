@@ -20,8 +20,10 @@ package github.tornaco.android.thanos.core.app;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 
+@Keep
 public class ActivityAssistInfo implements Parcelable {
     public ComponentNameBrief name;
     public int uid;

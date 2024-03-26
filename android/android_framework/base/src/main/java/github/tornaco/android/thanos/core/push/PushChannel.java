@@ -7,12 +7,14 @@ import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Objects;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.annotation.NonNull;
 import github.tornaco.android.thanos.core.util.ArrayUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
+@Keep
 public final class PushChannel implements Parcelable {
 
     public static final PushChannel FCM_GCM = new PushChannel(new String[]{

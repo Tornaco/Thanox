@@ -20,6 +20,9 @@ package github.tornaco.android.thanos.core.profile;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class DanmuUISettings implements Parcelable {
     public static final int COLOR_AUTO = -1;
 

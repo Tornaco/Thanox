@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.DrawableRes;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class Op implements Parcelable {
     private String title;
     private String summary;

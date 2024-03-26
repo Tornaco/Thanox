@@ -24,6 +24,9 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class RunningAppProcessInfoCompat implements Parcelable {
     public String processName;
     public int pid;

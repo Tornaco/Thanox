@@ -9,8 +9,10 @@ import android.os.UserHandle;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.core.annotation.DrawableRes;
+import github.tornaco.android.thanos.core.annotation.Keep;
 import util.PinyinComparatorUtils;
 
+@Keep
 public class AppInfo implements Parcelable, Comparable<AppInfo> {
     public static final int STATE_ENABLED = 100;
     public static final int STATE_DISABLED_OR_HIDDEN = 200;

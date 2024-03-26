@@ -7,6 +7,9 @@ import android.os.UserHandle;
 
 import java.util.Objects;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class Pkg implements Parcelable {
     private final String pkgName;
     private final int userId;

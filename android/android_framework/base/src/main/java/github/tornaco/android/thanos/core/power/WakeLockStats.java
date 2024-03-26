@@ -20,8 +20,10 @@ package github.tornaco.android.thanos.core.power;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.pm.Pkg;
 
+@Keep
 public class WakeLockStats implements Parcelable {
     public Pkg pkg;
     public int wakeLockCount;

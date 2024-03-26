@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Keep
 public final class RunningServiceInfoCompat implements Parcelable {
     private ComponentName componentName;
 

@@ -10,8 +10,10 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.annotation.Nullable;
 
+@Keep
 public final class GlobalVar implements Parcelable {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 

@@ -7,6 +7,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class ComponentNameBrief implements Parcelable {
     @SerializedName("mPackage")
     private final String pkg;

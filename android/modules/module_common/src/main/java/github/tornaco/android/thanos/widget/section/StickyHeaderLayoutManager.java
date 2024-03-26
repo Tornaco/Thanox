@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
+
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.module.common.R;
 
 import java.util.HashMap;
@@ -967,6 +969,7 @@ public class StickyHeaderLayoutManager extends RecyclerView.LayoutManager {
         }
     }
 
+    @Keep
     private static class SavedState implements Parcelable {
 
         int firstViewAdapterPosition = RecyclerView.NO_POSITION;

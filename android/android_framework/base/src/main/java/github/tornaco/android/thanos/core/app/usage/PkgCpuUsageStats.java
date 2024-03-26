@@ -20,8 +20,10 @@ package github.tornaco.android.thanos.core.app.usage;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.pm.Pkg;
 
+@Keep
 public class PkgCpuUsageStats implements Parcelable {
     public Pkg pkg;
     public String cpuRatioString;

@@ -10,8 +10,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import util.CollectionUtils;
 
+@Keep
 public class PackageSet implements Parcelable {
     private String label;
     private String id;

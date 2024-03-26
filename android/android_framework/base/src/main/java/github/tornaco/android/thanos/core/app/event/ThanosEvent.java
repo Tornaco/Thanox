@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public final class ThanosEvent implements Parcelable {
     private final Intent intent;
 

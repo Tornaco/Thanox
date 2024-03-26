@@ -3,9 +3,12 @@ package github.tornaco.android.thanos.core.plus;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
 /**
  * Remote res.
  */
+@Keep
 public final class RR implements Parcelable {
     public static final int SUCCESS = 0;
 

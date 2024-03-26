@@ -7,6 +7,9 @@ import android.os.UserHandle;
 
 import java.util.Objects;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class ProcessName implements Parcelable {
     private final String name;
     private final int userId;

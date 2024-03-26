@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.app.start;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
+@Keep
 public final class StartRecord implements Parcelable {
 
     private int method;

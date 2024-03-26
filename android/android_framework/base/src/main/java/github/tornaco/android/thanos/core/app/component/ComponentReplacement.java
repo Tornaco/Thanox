@@ -3,8 +3,10 @@ package github.tornaco.android.thanos.core.app.component;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
 import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 
+@Keep
 public final class ComponentReplacement implements Parcelable {
 
     public ComponentNameBrief from, to;

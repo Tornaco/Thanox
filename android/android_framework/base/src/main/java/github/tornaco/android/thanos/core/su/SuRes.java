@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import java.util.List;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public final class SuRes implements Parcelable {
     /**
      * Shell result output.

@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import java.util.Objects;
 
+import github.tornaco.android.thanos.core.annotation.Keep;
+
+@Keep
 public class SeenWakeLock implements Parcelable {
 
     private String tag;

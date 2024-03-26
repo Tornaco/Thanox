@@ -35,7 +35,7 @@ jsoup = "1.17.2"
 kotest-assertions = "5.8.0"
 libsu = "5.2.2"
 mmkv = "1.3.3"
-orbit = "6.1.1"
+orbit = "7.0.1"
 androidx-test-runner = "1.5.2"
 # DO NOT UPGRADE
 rhino-runtime = "1.7.14"

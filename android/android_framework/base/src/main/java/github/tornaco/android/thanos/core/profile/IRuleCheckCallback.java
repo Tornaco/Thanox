@@ -21,6 +21,7 @@ public interface IRuleCheckCallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.profile.IRuleCheckCallback
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IRuleCheckCallback";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -48,9 +49,6 @@ public interface IRuleCheckCallback extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
-      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
-        data.enforceInterface(descriptor);
-      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -58,31 +56,34 @@ public interface IRuleCheckCallback extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_onValid:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.profile.RuleInfo _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.profile.RuleInfo.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.profile.RuleInfo.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           this.onValid(_arg0);
-          break;
+          return true;
         }
         case TRANSACTION_onInvalid:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.onInvalid(_arg0, _arg1);
-          break;
+          return true;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
-      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.profile.IRuleCheckCallback
     {
@@ -104,8 +105,18 @@ public interface IRuleCheckCallback extends android.os.IInterface
         android.os.Parcel _data = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, rule, 0);
+          if ((rule!=null)) {
+            _data.writeInt(1);
+            rule.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onValid, _data, null, android.os.IBinder.FLAG_ONEWAY);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onValid(rule);
+            return;
+          }
         }
         finally {
           _data.recycle();
@@ -119,37 +130,36 @@ public interface IRuleCheckCallback extends android.os.IInterface
           _data.writeInt(errorCode);
           _data.writeString(errorMessage);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onInvalid, _data, null, android.os.IBinder.FLAG_ONEWAY);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onInvalid(errorCode, errorMessage);
+            return;
+          }
         }
         finally {
           _data.recycle();
         }
       }
+      public static github.tornaco.android.thanos.core.profile.IRuleCheckCallback sDefaultImpl;
     }
     static final int TRANSACTION_onValid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_onInvalid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IRuleCheckCallback impl) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
+        Stub.Proxy.sDefaultImpl = impl;
+        return true;
+      }
+      return false;
+    }
+    public static github.tornaco.android.thanos.core.profile.IRuleCheckCallback getDefaultImpl() {
+      return Stub.Proxy.sDefaultImpl;
+    }
   }
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IRuleCheckCallback";
   public void onValid(github.tornaco.android.thanos.core.profile.RuleInfo rule) throws android.os.RemoteException;
   public void onInvalid(int errorCode, java.lang.String errorMessage) throws android.os.RemoteException;
-  /** @hide */
-  static class _Parcel {
-    static private <T> T readTypedObject(
-        android.os.Parcel parcel,
-        android.os.Parcelable.Creator<T> c) {
-      if (parcel.readInt() != 0) {
-          return c.createFromParcel(parcel);
-      } else {
-          return null;
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedObject(
-        android.os.Parcel parcel, T value, int parcelableFlags) {
-      if (value != null) {
-        parcel.writeInt(1);
-        value.writeToParcel(parcel, parcelableFlags);
-      } else {
-        parcel.writeInt(0);
-      }
-    }
-  }
 }

@@ -26,7 +26,6 @@ public interface IInputManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.input.IInputManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.input.IInputManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -54,6 +53,9 @@ public interface IInputManager extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -61,45 +63,41 @@ public interface IInputManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_injectKey:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           boolean _result = this.injectKey(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_getLastKey:
         {
-          data.enforceInterface(descriptor);
           int _result = this.getLastKey();
           reply.writeNoException();
           reply.writeInt(_result);
-          return true;
+          break;
         }
         case TRANSACTION_onKeyEvent:
         {
-          data.enforceInterface(descriptor);
           android.view.KeyEvent _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = android.view.KeyEvent.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, android.view.KeyEvent.CREATOR);
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.onKeyEvent(_arg0, _arg1);
           reply.writeNoException();
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.input.IInputManager
     {
@@ -125,9 +123,6 @@ public interface IInputManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(keyCode);
           boolean _status = mRemote.transact(Stub.TRANSACTION_injectKey, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().injectKey(keyCode);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -145,9 +140,6 @@ public interface IInputManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getLastKey, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getLastKey();
-          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -163,19 +155,9 @@ public interface IInputManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((keyEvent!=null)) {
-            _data.writeInt(1);
-            keyEvent.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, keyEvent, 0);
           _data.writeString(source);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onKeyEvent, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onKeyEvent(keyEvent, source);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -183,29 +165,34 @@ public interface IInputManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      public static github.tornaco.android.thanos.core.input.IInputManager sDefaultImpl;
     }
     static final int TRANSACTION_injectKey = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_getLastKey = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_onKeyEvent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
-    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.input.IInputManager impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static github.tornaco.android.thanos.core.input.IInputManager getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.input.IInputManager";
   public boolean injectKey(int keyCode) throws android.os.RemoteException;
   public int getLastKey() throws android.os.RemoteException;
   public void onKeyEvent(android.view.KeyEvent keyEvent, java.lang.String source) throws android.os.RemoteException;
+  /** @hide */
+  static class _Parcel {
+    static private <T> T readTypedObject(
+        android.os.Parcel parcel,
+        android.os.Parcelable.Creator<T> c) {
+      if (parcel.readInt() != 0) {
+          return c.createFromParcel(parcel);
+      } else {
+          return null;
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedObject(
+        android.os.Parcel parcel, T value, int parcelableFlags) {
+      if (value != null) {
+        parcel.writeInt(1);
+        value.writeToParcel(parcel, parcelableFlags);
+      } else {
+        parcel.writeInt(0);
+      }
+    }
+  }
 }

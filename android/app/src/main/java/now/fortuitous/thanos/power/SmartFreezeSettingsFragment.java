@@ -118,7 +118,7 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
 
         SwitchPreferenceCompat showTipPref = findPreference(getString(R.string.key_smart_freeze_tips));
         Objects.requireNonNull(showTipPref).setChecked(thanos.getPkgManager().isFreezeTipEnabled());
-        dolTipsPref.setOnPreferenceChangeListener((preference, newValue) -> {
+        showTipPref.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean checked = (boolean) newValue;
             thanos.getPkgManager().setFreezeTipEnabled(checked);
             return true;

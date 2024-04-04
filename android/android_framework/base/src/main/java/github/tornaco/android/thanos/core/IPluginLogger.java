@@ -27,7 +27,6 @@ public interface IPluginLogger extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.IPluginLogger
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.IPluginLogger";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -55,6 +54,9 @@ public interface IPluginLogger extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -62,47 +64,47 @@ public interface IPluginLogger extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_logV:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.logV(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_logD:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.logD(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_logW:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.logW(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_logE:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.logE(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.IPluginLogger
     {
@@ -127,10 +129,6 @@ public interface IPluginLogger extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(content);
           boolean _status = mRemote.transact(Stub.TRANSACTION_logV, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().logV(content);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -146,10 +144,6 @@ public interface IPluginLogger extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(content);
           boolean _status = mRemote.transact(Stub.TRANSACTION_logD, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().logD(content);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -165,10 +159,6 @@ public interface IPluginLogger extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(content);
           boolean _status = mRemote.transact(Stub.TRANSACTION_logW, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().logW(content);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -184,10 +174,6 @@ public interface IPluginLogger extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(content);
           boolean _status = mRemote.transact(Stub.TRANSACTION_logE, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().logE(content);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -195,29 +181,13 @@ public interface IPluginLogger extends android.os.IInterface
           _data.recycle();
         }
       }
-      public static github.tornaco.android.thanos.core.IPluginLogger sDefaultImpl;
     }
     static final int TRANSACTION_logV = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_logD = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_logW = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
     static final int TRANSACTION_logE = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.IPluginLogger impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static github.tornaco.android.thanos.core.IPluginLogger getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.IPluginLogger";
   public void logV(java.lang.String content) throws android.os.RemoteException;
   public void logD(java.lang.String content) throws android.os.RemoteException;
   public void logW(java.lang.String content) throws android.os.RemoteException;

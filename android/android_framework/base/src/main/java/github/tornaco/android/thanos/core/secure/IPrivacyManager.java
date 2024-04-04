@@ -140,7 +140,6 @@ public interface IPrivacyManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.secure.IPrivacyManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.secure.IPrivacyManager";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -168,6 +167,9 @@ public interface IPrivacyManager extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -175,326 +177,276 @@ public interface IPrivacyManager extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
+      }
+      switch (code)
+      {
         case TRANSACTION_isPrivacyEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _result = this.isPrivacyEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_setPrivacyEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setPrivacyEnabled(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_getPrivacyDataCheatPkgCount:
         {
-          data.enforceInterface(descriptor);
           int _result = this.getPrivacyDataCheatPkgCount();
           reply.writeNoException();
           reply.writeInt(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getPrivacyDataCheatRequestCount:
         {
-          data.enforceInterface(descriptor);
           long _result = this.getPrivacyDataCheatRequestCount();
           reply.writeNoException();
           reply.writeLong(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalDeviceId:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _result = this.getOriginalDeviceId();
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalLine1Number:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _result = this.getOriginalLine1Number();
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalSimSerialNumber:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _result = this.getOriginalSimSerialNumber();
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalAndroidId:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _result = this.getOriginalAndroidId();
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalImei:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _result = this.getOriginalImei(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalMeid:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _result = this.getOriginalMeid(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getPhoneCount:
         {
-          data.enforceInterface(descriptor);
           int _result = this.getPhoneCount();
           reply.writeNoException();
           reply.writeInt(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getAccessibleSubscriptionInfoList:
         {
-          data.enforceInterface(descriptor);
           android.telephony.SubscriptionInfo[] _result = this.getAccessibleSubscriptionInfoList();
           reply.writeNoException();
           reply.writeTypedArray(_result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          return true;
+          break;
         }
         case TRANSACTION_getPrivacyCheatRecords:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.secure.PrivacyCheatRecord[] _result = this.getPrivacyCheatRecords();
           reply.writeNoException();
           reply.writeTypedArray(_result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          return true;
+          break;
         }
         case TRANSACTION_clearPrivacyCheatRecords:
         {
-          data.enforceInterface(descriptor);
           this.clearPrivacyCheatRecords();
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_addOrUpdateFieldsProfile:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.secure.field.Fields _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = github.tornaco.android.thanos.core.secure.field.Fields.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.secure.field.Fields.CREATOR);
           boolean _result = this.addOrUpdateFieldsProfile(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_deleteFieldsProfile:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.secure.field.Fields _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = github.tornaco.android.thanos.core.secure.field.Fields.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.secure.field.Fields.CREATOR);
           boolean _result = this.deleteFieldsProfile(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_deleteFieldsProfileById:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.deleteFieldsProfileById(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_getAllFieldsProfiles:
         {
-          data.enforceInterface(descriptor);
           java.util.List<github.tornaco.android.thanos.core.secure.field.Fields> _result = this.getAllFieldsProfiles();
           reply.writeNoException();
-          reply.writeTypedList(_result);
-          return true;
+          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_selectFieldsProfileForPackage:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.selectFieldsProfileForPackage(_arg0, _arg1);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_getSelectedFieldsProfileIdForPackage:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _result = this.getSelectedFieldsProfileIdForPackage(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getSelectedFieldsProfileForPackage:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           int _arg1;
           _arg1 = data.readInt();
           github.tornaco.android.thanos.core.secure.field.Fields _result = this.getSelectedFieldsProfileForPackage(_arg0, _arg1);
           reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
+          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_getFieldsProfileById:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           github.tornaco.android.thanos.core.secure.field.Fields _result = this.getFieldsProfileById(_arg0);
           reply.writeNoException();
-          if ((_result!=null)) {
-            reply.writeInt(1);
-            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          }
-          else {
-            reply.writeInt(0);
-          }
-          return true;
+          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_isUidFieldsProfileSelected:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           boolean _result = this.isUidFieldsProfileSelected(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_isPackageFieldsProfileSelected:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.isPackageFieldsProfileSelected(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_getUsageForFieldsProfile:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           int _result = this.getUsageForFieldsProfile(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getUsagePackagesForFieldsProfile:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.util.List<java.lang.String> _result = this.getUsagePackagesForFieldsProfile(_arg0);
           reply.writeNoException();
           reply.writeStringList(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalSimCountryIso:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _result = this.getOriginalSimCountryIso();
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalSimOp:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _result = this.getOriginalSimOp(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalSimOpName:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _result = this.getOriginalSimOpName(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalNetworkCountryIso:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _result = this.getOriginalNetworkCountryIso();
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalNetworkOp:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _result = this.getOriginalNetworkOp(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getOriginalNetworkOpName:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _result = this.getOriginalNetworkOpName(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.secure.IPrivacyManager
     {
@@ -519,9 +471,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPrivacyEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPrivacyEnabled();
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -539,10 +488,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPrivacyEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPrivacyEnabled(enabled);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -558,9 +503,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPrivacyDataCheatPkgCount, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPrivacyDataCheatPkgCount();
-          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -578,9 +520,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPrivacyDataCheatRequestCount, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPrivacyDataCheatRequestCount();
-          }
           _reply.readException();
           _result = _reply.readLong();
         }
@@ -598,9 +537,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalDeviceId, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalDeviceId();
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -618,9 +554,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalLine1Number, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalLine1Number();
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -638,9 +571,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalSimSerialNumber, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalSimSerialNumber();
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -658,9 +588,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalAndroidId, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalAndroidId();
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -679,9 +606,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(slotIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalImei, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalImei(slotIndex);
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -700,9 +624,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(slotIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalMeid, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalMeid(slotIndex);
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -720,9 +641,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPhoneCount, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPhoneCount();
-          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -740,9 +658,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAccessibleSubscriptionInfoList, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAccessibleSubscriptionInfoList();
-          }
           _reply.readException();
           _result = _reply.createTypedArray(android.telephony.SubscriptionInfo.CREATOR);
         }
@@ -760,9 +675,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPrivacyCheatRecords, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPrivacyCheatRecords();
-          }
           _reply.readException();
           _result = _reply.createTypedArray(github.tornaco.android.thanos.core.secure.PrivacyCheatRecord.CREATOR);
         }
@@ -779,10 +691,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_clearPrivacyCheatRecords, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().clearPrivacyCheatRecords();
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -797,17 +705,8 @@ public interface IPrivacyManager extends android.os.IInterface
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((f!=null)) {
-            _data.writeInt(1);
-            f.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, f, 0);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addOrUpdateFieldsProfile, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().addOrUpdateFieldsProfile(f);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -824,17 +723,8 @@ public interface IPrivacyManager extends android.os.IInterface
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((f!=null)) {
-            _data.writeInt(1);
-            f.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, f, 0);
           boolean _status = mRemote.transact(Stub.TRANSACTION_deleteFieldsProfile, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().deleteFieldsProfile(f);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -853,9 +743,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_deleteFieldsProfileById, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().deleteFieldsProfileById(id);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -873,9 +760,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllFieldsProfiles, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAllFieldsProfiles();
-          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.secure.field.Fields.CREATOR);
         }
@@ -894,10 +778,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeString(profileId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_selectFieldsProfileForPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().selectFieldsProfileForPackage(pkg, profileId);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -914,9 +794,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSelectedFieldsProfileIdForPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getSelectedFieldsProfileIdForPackage(pkg);
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -936,16 +813,8 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeInt(checkingOp);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSelectedFieldsProfileForPackage, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getSelectedFieldsProfileForPackage(pkg, checkingOp);
-          }
           _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = github.tornaco.android.thanos.core.secure.field.Fields.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
+          _result = _Parcel.readTypedObject(_reply, github.tornaco.android.thanos.core.secure.field.Fields.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -962,16 +831,8 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getFieldsProfileById, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getFieldsProfileById(id);
-          }
           _reply.readException();
-          if ((0!=_reply.readInt())) {
-            _result = github.tornaco.android.thanos.core.secure.field.Fields.CREATOR.createFromParcel(_reply);
-          }
-          else {
-            _result = null;
-          }
+          _result = _Parcel.readTypedObject(_reply, github.tornaco.android.thanos.core.secure.field.Fields.CREATOR);
         }
         finally {
           _reply.recycle();
@@ -988,9 +849,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(uid);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isUidFieldsProfileSelected, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isUidFieldsProfileSelected(uid);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1009,9 +867,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageFieldsProfileSelected, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPackageFieldsProfileSelected(pkg);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1030,9 +885,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getUsageForFieldsProfile, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getUsageForFieldsProfile(id);
-          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -1051,9 +903,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getUsagePackagesForFieldsProfile, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getUsagePackagesForFieldsProfile(id);
-          }
           _reply.readException();
           _result = _reply.createStringArrayList();
         }
@@ -1071,9 +920,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalSimCountryIso, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalSimCountryIso();
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -1092,9 +938,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(subId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalSimOp, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalSimOp(subId);
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -1113,9 +956,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(subId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalSimOpName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalSimOpName(subId);
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -1133,9 +973,6 @@ public interface IPrivacyManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalNetworkCountryIso, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalNetworkCountryIso();
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -1154,9 +991,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(subId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalNetworkOp, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalNetworkOp(subId);
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -1175,9 +1009,6 @@ public interface IPrivacyManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(subId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOriginalNetworkOpName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOriginalNetworkOpName(subId);
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -1187,7 +1018,6 @@ public interface IPrivacyManager extends android.os.IInterface
         }
         return _result;
       }
-      public static github.tornaco.android.thanos.core.secure.IPrivacyManager sDefaultImpl;
     }
     static final int TRANSACTION_isPrivacyEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_setPrivacyEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
@@ -1221,23 +1051,8 @@ public interface IPrivacyManager extends android.os.IInterface
     static final int TRANSACTION_getOriginalNetworkCountryIso = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
     static final int TRANSACTION_getOriginalNetworkOp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
     static final int TRANSACTION_getOriginalNetworkOpName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
-    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.secure.IPrivacyManager impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static github.tornaco.android.thanos.core.secure.IPrivacyManager getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.secure.IPrivacyManager";
   public boolean isPrivacyEnabled() throws android.os.RemoteException;
   public void setPrivacyEnabled(boolean enabled) throws android.os.RemoteException;
   public int getPrivacyDataCheatPkgCount() throws android.os.RemoteException;
@@ -1270,4 +1085,39 @@ public interface IPrivacyManager extends android.os.IInterface
   public java.lang.String getOriginalNetworkCountryIso() throws android.os.RemoteException;
   public java.lang.String getOriginalNetworkOp(int subId) throws android.os.RemoteException;
   public java.lang.String getOriginalNetworkOpName(int subId) throws android.os.RemoteException;
+  /** @hide */
+  static class _Parcel {
+    static private <T> T readTypedObject(
+        android.os.Parcel parcel,
+        android.os.Parcelable.Creator<T> c) {
+      if (parcel.readInt() != 0) {
+          return c.createFromParcel(parcel);
+      } else {
+          return null;
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedObject(
+        android.os.Parcel parcel, T value, int parcelableFlags) {
+      if (value != null) {
+        parcel.writeInt(1);
+        value.writeToParcel(parcel, parcelableFlags);
+      } else {
+        parcel.writeInt(0);
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedList(
+        android.os.Parcel parcel, java.util.List<T> value, int parcelableFlags) {
+      if (value == null) {
+        parcel.writeInt(-1);
+      } else {
+        int N = value.size();
+        int i = 0;
+        parcel.writeInt(N);
+        while (i < N) {
+    writeTypedObject(parcel, value.get(i), parcelableFlags);
+          i++;
+        }
+      }
+    }
+  }
 }

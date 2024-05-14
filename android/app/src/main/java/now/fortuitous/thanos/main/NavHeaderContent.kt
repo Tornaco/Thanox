@@ -292,7 +292,7 @@ private fun MemProgressBar(
                 startAngle = 0f,
                 centerContent = {}
             )
-            if (headerInfo.swap.isEnabled) CircularProgressBar(
+            CircularProgressBar(
                 modifier = Modifier
                     .size(secondProgressSize),
                 progress = headerInfo.swap.memUsagePercent.toFloat(),
@@ -313,12 +313,10 @@ private fun MemProgressBar(
             )
         }
         MediumSpacer()
-        Column(verticalArrangement = Arrangement.Center) {
+        Column {
             MemStats(headerInfo.memory, Color(progressColor))
-            if (headerInfo.swap.isEnabled) {
-                MediumSpacer()
-                MemStats(headerInfo.swap, Color(secondaryProgressColor))
-            }
+            MediumSpacer()
+            MemStats(headerInfo.swap, Color(secondaryProgressColor))
         }
     }
 }

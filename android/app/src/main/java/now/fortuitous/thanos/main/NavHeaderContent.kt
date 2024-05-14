@@ -174,12 +174,17 @@ private fun MainNavHeaderContent(
 
             Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .padding(horizontal = if (headerInfo.swap.isEnabled) 0.dp else 12.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 CpuProgressBar(headerInfo, onSurfaceColor)
-                MemProgressBar(headerInfo, onSurfaceColor)
+                if (headerInfo.swap.isEnabled) {
+                    FatMemProgressBar(headerInfo, onSurfaceColor)
+                } else {
+                    MemProgressBar(headerInfo, onSurfaceColor)
+                }
             }
         }
     }
@@ -246,6 +251,57 @@ private fun CpuProgressBar(
 }
 
 @Composable
+private fun MemProgressBar(
+    headerInfo: StatusHeaderInfo,
+    onSurfaceColor: Int,
+) {
+    val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
+    val progressTrackColor =
+        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
+
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
+        Box(
+            modifier = Modifier.Companion.align(Alignment.CenterVertically),
+            contentAlignment = Alignment.Center
+        ) {
+            val progressBarWidth = 16.dp
+            val mainProgressSize = 90.dp
+            CircularProgressBar(
+                modifier = Modifier
+                    .size(mainProgressSize),
+                progress = headerInfo.memory.memUsagePercent.toFloat(),
+                progressMax = 100f,
+                progressBarColor = Color(progressColor),
+                progressBarWidth = progressBarWidth,
+                backgroundProgressBarColor = Color(progressTrackColor),
+                backgroundProgressBarWidth = progressBarWidth,
+                roundBorder = true,
+                startAngle = 0f,
+                centerContent = {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Mem",
+                            style = productSansBoldTypography().caption,
+                            color = Color(onSurfaceColor)
+                        )
+                        Text(
+                            modifier = Modifier,
+                            textAlign = TextAlign.Center,
+                            text = "${headerInfo.memory.memUsagePercent}%",
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
+                            color = Color(onSurfaceColor)
+                        )
+                    }
+                }
+            )
+        }
+    }
+}
+
+@Composable
 private fun AppCpuUsage(usage: AppCpuUsage) {
     val onSurfaceColor = getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
     Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
@@ -261,7 +317,7 @@ private fun AppCpuUsage(usage: AppCpuUsage) {
 }
 
 @Composable
-private fun MemProgressBar(
+private fun FatMemProgressBar(
     headerInfo: StatusHeaderInfo,
     onSurfaceColor: Int,
 ) {

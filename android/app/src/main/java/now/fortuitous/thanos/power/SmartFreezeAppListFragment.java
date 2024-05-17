@@ -63,7 +63,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 import github.tornaco.android.thanos.BaseFragment;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemActionListener;
@@ -118,9 +117,9 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivitySmartFreezeAppsBinding.inflate(inflater, container, false);
         createOptionsMenu();
-        setupView();
         Bundle data = getArguments();
         String pkgSetId = Objects.requireNonNull(data, "Missing arg: " + ARG_PKG_SET).getString(ARG_PKG_SET, null);
+        setupView();
         setupViewModel(pkgSetId);
         onSetupSorter(binding.sortChipContainer.sortChip);
         return binding.getRoot();
@@ -182,6 +181,10 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             viewModel.freezeAll();
             return true;
         });
+    }
+
+    public void showSearch() {
+        binding.searchView.showSearch(true);
     }
 
     @SuppressLint("RestrictedApi")
@@ -288,7 +291,6 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         });
         popupMenu.show();
     }
-
 
 
     private void setupViewModel(String pkgSetId) {

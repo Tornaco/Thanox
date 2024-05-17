@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:description="@string/feature_title_smart_app_freeze"
+    android:initialLayout="@layout/smart_freeze_appwidget"
+    android:maxResizeWidth="250dp"
+    android:maxResizeHeight="80dp"
+    android:minWidth="40dp"
+    android:minHeight="40dp"
+    android:previewImage="@drawable/search_preview"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="1"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="86400000"
+    android:widgetCategory="home_screen"
+    android:widgetFeatures="reconfigurable|configuration_optional"
+    tools:ignore="UnusedAttribute" />

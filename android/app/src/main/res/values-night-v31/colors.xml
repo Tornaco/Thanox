@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_widget_search_bg_color">#ea000000</color>
+    <color name="app_widget_search_stroke_color">#ea000000</color>
+    <color name="app_widget_search_icon_tint_color">#eaffffff</color>
+</resources>

@@ -155,7 +155,7 @@
             android:theme="@style/AppThemeNeedRestart" />
         <activity
             android:name="now.fortuitous.thanos.power.SmartFreezeActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name="now.fortuitous.thanos.power.ShortcutStubActivity"
             android:excludeFromRecents="true"
@@ -372,6 +372,17 @@
             android:authorities="${applicationId}.XposedService"
             android:exported="true"
             tools:ignore="ExportedContentProvider" />
+
+        <receiver
+            android:name="now.fortuitous.thanos.widget.SmartFreezeAppWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/smart_freeze_widget_info" />
+        </receiver>
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

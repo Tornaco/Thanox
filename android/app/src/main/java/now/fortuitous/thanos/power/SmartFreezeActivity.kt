@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.Fragment
+import com.elvishew.xlog.XLog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import github.tornaco.android.thanos.BaseFragment
@@ -49,6 +50,8 @@ class SmartFreezeActivity : ThemeActivity() {
     private val viewModel: SmartFreezeBottomNavViewModel by viewModels()
 
     companion object Starter {
+        const val EXTRA_EXPAND_SEARCH = "expand.search"
+
         fun start(context: Context) {
             ActivityUtils.startActivity(context, SmartFreezeActivity::class.java)
         }
@@ -67,6 +70,16 @@ class SmartFreezeActivity : ThemeActivity() {
         setContentView(binding.root)
 
         inflateTabs()
+
+        binding.bottomNavigation.post {
+            val hasExpandSearchIntent = intent?.hasExtra(EXTRA_EXPAND_SEARCH) ?: false
+            XLog.i("SmartFreezeActivity hasExpandSearchIntent: $hasExpandSearchIntent")
+            if (hasExpandSearchIntent) {
+                val fragment = supportFragmentManager.findFragmentByTag("SMART_FREEZE_FRAGMENT")
+                XLog.i("SmartFreezeActivity fragment: $fragment")
+                (fragment as? SmartFreezeAppListFragment)?.showSearch()
+            }
+        }
     }
 
     private fun inflateTabs() {
@@ -94,7 +107,6 @@ class SmartFreezeActivity : ThemeActivity() {
 
         binding.bottomNavigation.selectTab(binding.bottomNavigation.getTabAt(0))
         binding.composeSort.setContent {
-
             val darkTheme =
                 if (appTheme.shouldApplyDynamic) isSystemInDarkTheme() else !appTheme.isLight
             ThanoxTheme(darkTheme) {

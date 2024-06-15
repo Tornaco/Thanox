@@ -18,6 +18,7 @@ public interface ILicenseResultListener extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements com.android.vending.licensing.ILicenseResultListener
   {
+    private static final java.lang.String DESCRIPTOR = "com.android.vending.licensing.ILicenseResultListener";
     /** Construct the stub at attach it to the interface. */
     public Stub()
     {
@@ -45,9 +46,6 @@ public interface ILicenseResultListener extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
-      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
-        data.enforceInterface(descriptor);
-      }
       switch (code)
       {
         case INTERFACE_TRANSACTION:
@@ -55,11 +53,9 @@ public interface ILicenseResultListener extends android.os.IInterface
           reply.writeString(descriptor);
           return true;
         }
-      }
-      switch (code)
-      {
         case TRANSACTION_verifyLicense:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
@@ -67,14 +63,13 @@ public interface ILicenseResultListener extends android.os.IInterface
           java.lang.String _arg2;
           _arg2 = data.readString();
           this.verifyLicense(_arg0, _arg1, _arg2);
-          break;
+          return true;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
-      return true;
     }
     private static class Proxy implements com.android.vending.licensing.ILicenseResultListener
     {
@@ -100,14 +95,34 @@ public interface ILicenseResultListener extends android.os.IInterface
           _data.writeString(signedData);
           _data.writeString(signature);
           boolean _status = mRemote.transact(Stub.TRANSACTION_verifyLicense, _data, null, android.os.IBinder.FLAG_ONEWAY);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().verifyLicense(responseCode, signedData, signature);
+            return;
+          }
         }
         finally {
           _data.recycle();
         }
       }
+      public static com.android.vending.licensing.ILicenseResultListener sDefaultImpl;
     }
     static final int TRANSACTION_verifyLicense = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
+    public static boolean setDefaultImpl(com.android.vending.licensing.ILicenseResultListener impl) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
+        Stub.Proxy.sDefaultImpl = impl;
+        return true;
+      }
+      return false;
+    }
+    public static com.android.vending.licensing.ILicenseResultListener getDefaultImpl() {
+      return Stub.Proxy.sDefaultImpl;
+    }
   }
-  public static final java.lang.String DESCRIPTOR = "com.android.vending.licensing.ILicenseResultListener";
   public void verifyLicense(int responseCode, java.lang.String signedData, java.lang.String signature) throws android.os.RemoteException;
 }

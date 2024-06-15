@@ -841,6 +841,7 @@ public class XLog {
      *
      * @deprecated please use {@link XLog} instead
      */
+    @SuppressWarnings("deprecation")
     public static class Log {
 
         /**

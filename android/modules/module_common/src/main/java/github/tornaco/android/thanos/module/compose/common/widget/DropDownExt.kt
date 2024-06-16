@@ -20,6 +20,8 @@ package github.tornaco.android.thanos.module.compose.common.widget
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -29,8 +31,9 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 
-data class MenuItem(val id: String, val title: String, @DrawableRes val iconRes: Int = 0)
+data class MenuItem(val id: String, val title: String, @DrawableRes val iconRes: Int)
 
 @Composable
 fun DropdownPopUpMenu(
@@ -38,22 +41,26 @@ fun DropdownPopUpMenu(
     items: List<MenuItem>,
     onItemClick: (MenuItem) -> Unit
 ) {
-    androidx.compose.material.DropdownMenu(
-        modifier = Modifier.background(MaterialTheme.colorScheme.surface),
-        expanded = popMenuExpend.value,
-        onDismissRequest = { popMenuExpend.value = false }
+    MaterialTheme(
+        shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(18.dp))
     ) {
-        items.forEach {
-            DropdownMenuItem(onClick = {
-                popMenuExpend.value = false
-                onItemClick(it)
-            }, text = {
-                Row(verticalAlignment = CenterVertically) {
-                    Icon(painterResource(id = it.iconRes), it.title)
-                    SmallSpacer()
-                    Text(text = it.title)
-                }
-            })
+        DropdownMenu(
+            modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+            expanded = popMenuExpend.value,
+            onDismissRequest = { popMenuExpend.value = false }
+        ) {
+            items.forEach {
+                DropdownMenuItem(onClick = {
+                    popMenuExpend.value = false
+                    onItemClick(it)
+                }, text = {
+                    Row(verticalAlignment = CenterVertically) {
+                        Icon(painterResource(id = it.iconRes), it.title)
+                        SmallSpacer()
+                        Text(text = it.title)
+                    }
+                })
+            }
         }
     }
 }

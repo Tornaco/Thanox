@@ -17,19 +17,20 @@
 
 package now.fortuitous.thanos.settings.access
 
+import android.content.Context
 import github.tornaco.android.thanos.module.compose.common.widget.FilterItem
 
 data class PackageFilterItem(
     override val id: String,
-    override val label: String
+    override val label: (Context) -> String
 ) : FilterItem
 
 data class ReadFilterItem(
     override val id: String = "read",
-    override val label: String = "Read"
+    override val label: (Context) -> String = { "Read" }
 ) : FilterItem
 
 data class WriteFilterItem(
     override val id: String = "write",
-    override val label: String = "Write"
+    override val label: (Context) -> String = { "Write" }
 ) : FilterItem

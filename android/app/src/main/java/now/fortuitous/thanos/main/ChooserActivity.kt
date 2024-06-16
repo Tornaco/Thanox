@@ -35,9 +35,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.pref.AppPreference
-import tornaco.apps.thanox.base.ui.LargeSpacer
 import tornaco.apps.thanox.base.ui.NiaGradientBackground
 import tornaco.apps.thanox.base.ui.theme.ThanosTheme
 

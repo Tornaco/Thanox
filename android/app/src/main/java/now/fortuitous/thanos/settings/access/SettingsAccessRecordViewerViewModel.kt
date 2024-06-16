@@ -76,7 +76,7 @@ class SettingsAccessRecordViewerViewModel @Inject constructor(@ApplicationContex
                 .mapNotNull { pkgName ->
                     val appInfo = thanox.pkgManager.getAppInfo(pkgName)
                     appInfo?.let { app ->
-                        PackageFilterItem(pkgName, app.appLabel)
+                        PackageFilterItem(pkgName) { app.appLabel }
                     }
                 }
         val selectableFilterItems = (rwFilterItems + packageFilterItems).map {

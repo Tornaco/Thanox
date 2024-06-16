@@ -31,10 +31,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
 
         <activity
@@ -259,6 +255,9 @@
             android:exported="false" />
         <activity
             android:name="now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity"
+            android:exported="false" />
+        <activity
+            android:name="now.fortuitous.thanos.main.ChooserActivity"
             android:exported="false" />
 
         <meta-data

@@ -528,7 +528,7 @@ private fun FrameworkErrorDialog(
 }
 
 @Composable
-private fun PrivacyStatementDialog(
+fun PrivacyStatementDialog(
     onDismissRequest: () -> Unit,
 ) {
     val context = LocalContext.current

@@ -226,7 +226,6 @@ dependencies {
     implementation(project(":modules:module_push_message_delegate"))
     implementation(project(":modules:module_donate"))
     implementation(project(":modules:module_feature_access"))
-    implementation(project(":modules:module_noroot_support"))
 
     implementation(project(":android_framework:base"))
     implementation(project(":android_framework:res"))
@@ -234,6 +233,8 @@ dependencies {
     implementation(project(":android_framework:services"))
     implementation(project(":android_framework:db"))
     implementation(project(":android_framework:patchx-entry"))
+
+    implementation(project(":shizuku:app"))
 
     implementation(project(":third_party:apkbuilder"))
 

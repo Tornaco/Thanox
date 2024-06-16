@@ -84,7 +84,6 @@ import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.pref.ViewAwarePreference;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
-import github.tornaco.thanos.android.noroot.ServiceBindings;
 import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
 import now.fortuitous.app.donate.DonateSettings;
@@ -718,14 +717,6 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                 AppPreference.setFeatureNoticeAccepted(getContext(), "NEW_OPS", useNewOps);
                 return true;
             }
-        });
-
-        findPreference(getString(R.string.key_rootless_support)).setVisible(BuildProp.THANOS_BUILD_DEBUG);
-        findPreference(getString(R.string.key_rootless_support)).setOnPreferenceClickListener(preference -> {
-            if (ServiceBindings.INSTANCE.checkPermission(1)) {
-                ServiceBindings.INSTANCE.bindUserService();
-            }
-            return false;
         });
 
         findPreference(getString(R.string.key_theme_attr_preview)).setVisible(BuildProp.THANOS_BUILD_DEBUG);

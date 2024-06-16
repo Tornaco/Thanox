@@ -1,0 +1,2 @@
+1. Move all strings.xml to a single module.
+2. Dup code under module-common and shizuku app

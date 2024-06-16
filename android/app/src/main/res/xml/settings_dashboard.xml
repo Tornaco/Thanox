@@ -131,12 +131,6 @@
 
             <Preference
                 app:isPreferenceVisible="false"
-                app:key="@string/key_rootless_support"
-                app:persistent="false"
-                app:title="Non-Root support" />
-
-            <Preference
-                app:isPreferenceVisible="false"
                 app:key="@string/key_theme_attr_preview"
                 app:persistent="false"
                 app:title="Theme attrs" />

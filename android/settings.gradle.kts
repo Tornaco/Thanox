@@ -43,7 +43,6 @@ include(":modules:module_locker")
 include(":modules:module_common")
 include(":modules:module_filepicker")
 include(":modules:module_push_message_delegate")
-include(":modules:module_noroot_support")
 
 include(":third_party:dateformatter")
 include(":third_party:recyclerview-fastscroll")

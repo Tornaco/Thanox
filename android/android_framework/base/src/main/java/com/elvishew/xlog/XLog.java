@@ -17,6 +17,7 @@
 package com.elvishew.xlog;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.elvishew.xlog.formatter.border.BorderFormatter;
 import com.elvishew.xlog.formatter.message.json.JsonFormatter;
@@ -27,7 +28,6 @@ import com.elvishew.xlog.formatter.stacktrace.StackTraceFormatter;
 import com.elvishew.xlog.formatter.thread.ThreadFormatter;
 import com.elvishew.xlog.interceptor.Interceptor;
 import com.elvishew.xlog.internal.DefaultsFactory;
-import com.elvishew.xlog.internal.util.StackTraceUtil;
 import com.elvishew.xlog.printer.Printer;
 import com.elvishew.xlog.printer.PrinterSet;
 
@@ -109,20 +109,6 @@ import github.tornaco.android.thanos.BuildProp;
  * {@link Logger.Builder}, it will automatically build a {@link Logger} and call the target
  * logging method.
  * <p>
- * <b>Compatibility:</b>
- * <p>
- * In order to be compatible with {@link android.util.Log}, all the methods of
- * {@link android.util.Log} are supported here.
- * See:
- * <br>{@link Log#v(String, String)}, {@link Log#v(String, String, Throwable)}
- * <br>{@link Log#d(String, String)}, {@link Log#d(String, String, Throwable)}
- * <br>{@link Log#i(String, String)}, {@link Log#i(String, String, Throwable)}
- * <br>{@link Log#w(String, String)}, {@link Log#w(String, String, Throwable)}
- * <br>{@link Log#wtf(String, String)}, {@link Log#wtf(String, String, Throwable)}
- * <br>{@link Log#e(String, String)}, {@link Log#e(String, String, Throwable)}
- * <br>{@link Log#println(int, String, String)}
- * <br>{@link Log#isLoggable(String, int)}
- * <br>{@link Log#getStackTraceString(Throwable)}
  * <p>
  */
 public class XLog {
@@ -834,133 +820,5 @@ public class XLog {
     public static void xml(String xml) {
         checkInitialization();
         sLogger.xml(xml);
-    }
-
-    /**
-     * Compatible class with {@link android.util.Log}.
-     *
-     * @deprecated please use {@link XLog} instead
-     */
-    @SuppressWarnings("deprecation")
-    public static class Log {
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#v(String, String)}
-         */
-        public static void v(String tag, String msg) {
-            tag(tag).build().v(msg);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#v(String, String, Throwable)}
-         */
-        public static void v(String tag, String msg, Throwable tr) {
-            tag(tag).build().v(msg, tr);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#d(String, String)}
-         */
-        public static void d(String tag, String msg) {
-            tag(tag).build().d(msg);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#d(String, String, Throwable)}
-         */
-        public static void d(String tag, String msg, Throwable tr) {
-            tag(tag).build().d(msg, tr);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#i(String, String)}
-         */
-        public static void i(String tag, String msg) {
-            tag(tag).build().i(msg);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#i(String, String, Throwable)}
-         */
-        public static void i(String tag, String msg, Throwable tr) {
-            tag(tag).build().i(msg, tr);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#w(String, String)}
-         */
-        public static void w(String tag, String msg) {
-            tag(tag).build().w(msg);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#w(String, String, Throwable)}
-         */
-        public static void w(String tag, String msg, Throwable tr) {
-            tag(tag).build().w(msg, tr);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#w(String, Throwable)}
-         */
-        public static void w(String tag, Throwable tr) {
-            tag(tag).build().w("", tr);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#e(String, String)}
-         */
-        public static void e(String tag, String msg) {
-            tag(tag).build().e(msg);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#e(String, String, Throwable)}
-         */
-        public static void e(String tag, String msg, Throwable tr) {
-            tag(tag).build().e(msg, tr);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#wtf(String, String)}
-         */
-        public static void wtf(String tag, String msg) {
-            e(tag, msg);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#wtf(String, Throwable)}
-         */
-        public static void wtf(String tag, Throwable tr) {
-            wtf(tag, "", tr);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#wtf(String, String, Throwable)}
-         */
-        public static void wtf(String tag, String msg, Throwable tr) {
-            e(tag, msg, tr);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#println(int, String, String)}
-         */
-        public static void println(int logLevel, String tag, String msg) {
-            tag(tag).build().println(logLevel, msg);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#isLoggable(String, int)}
-         */
-        public static boolean isLoggable(String tag, int level) {
-            return sLogConfiguration.isLoggable(level);
-        }
-
-        /**
-         * @deprecated compatible with {@link android.util.Log#getStackTraceString(Throwable)}
-         */
-        public static String getStackTraceString(Throwable tr) {
-            return StackTraceUtil.getStackTraceString(tr);
-        }
     }
 }

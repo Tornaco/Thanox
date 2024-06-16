@@ -234,7 +234,7 @@ dependencies {
     implementation(project(":android_framework:db"))
     implementation(project(":android_framework:patchx-entry"))
 
-    implementation(project(":shizuku:app"))
+    implementation(project(":shizuku:ui"))
 
     implementation(project(":third_party:apkbuilder"))
 

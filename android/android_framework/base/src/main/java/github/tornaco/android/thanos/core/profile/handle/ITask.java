@@ -18,6 +18,7 @@ interface ITask {
 
     boolean hasTaskFromPackage(Pkg pkg);
 
+    void removeAllRecentTasks();
 
     void clearBackgroundTasks();
 }

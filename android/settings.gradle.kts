@@ -25,6 +25,7 @@ dependencyResolutionManagement {
 
 
 include(":app")
+include(":app_shizuku")
 include(":shortcut_stub")
 
 include(":annotation_processors:xposed_hook_annotation")
@@ -43,7 +44,6 @@ include(":modules:module_locker")
 include(":modules:module_common")
 include(":modules:module_filepicker")
 include(":modules:module_push_message_delegate")
-include(":modules:module_noroot_support")
 
 include(":third_party:dateformatter")
 include(":third_party:recyclerview-fastscroll")
@@ -89,6 +89,10 @@ val internalProjects = listOf(
     ":android_framework:patchx-29",
     ":android_framework:patchx-30",
     ":android_framework:patchx-31",
+    // Shizuku
+    ":shizuku:core",
+    ":shizuku:services",
+    ":shizuku:ui",
 )
 
 internalProjects.forEach {

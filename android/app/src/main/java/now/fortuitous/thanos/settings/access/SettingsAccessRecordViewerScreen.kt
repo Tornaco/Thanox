@@ -194,8 +194,9 @@ private fun AppFilterDropDown(
                     }
                 )
             ) {
+                val context = LocalContext.current
                 Text(
-                    text = item.filterItem.label,
+                    text = item.filterItem.label(context),
                     style = MaterialTheme.typography.labelLarge
                 )
             }

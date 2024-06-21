@@ -25,7 +25,7 @@ import kotlinx.coroutines.withContext
 
 data class AppSetFilterItem(
     override val id: String,
-    override val label: String
+    override val label: (Context) -> String
 ) : FilterItem
 
 object Loader {
@@ -40,8 +40,7 @@ object Loader {
                 thanos.pkgManager.getAllPackageSets(false).mapIndexed { _, packageSet ->
                     AppSetFilterItem(
                         packageSet.id,
-                        packageSet.label,
-                    )
+                    ) { packageSet.label }
                 }
             }
         }

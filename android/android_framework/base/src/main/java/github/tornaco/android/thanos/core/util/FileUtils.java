@@ -19,7 +19,7 @@ import java.nio.charset.Charset;
 
 import github.tornaco.android.thanos.core.annotation.NonNull;
 import github.tornaco.android.thanos.core.annotation.Nullable;
-import util.CollectionUtils;
+import kotlin.Unit;
 import util.IoUtils;
 
 
@@ -93,11 +93,11 @@ public class FileUtils {
 
     public static boolean deleteDir(File dir) {
         final boolean[] res = {true};
-        CollectionUtils.consumeRemaining(Files.fileTreeTraverser()
-                .postOrderTraversal(dir), file -> {
+        FileWalk.INSTANCE.walk(dir, file -> {
             if (!file.delete()) {
                 res[0] = false;
             }
+            return Unit.INSTANCE;
         });
         return res[0];
     }

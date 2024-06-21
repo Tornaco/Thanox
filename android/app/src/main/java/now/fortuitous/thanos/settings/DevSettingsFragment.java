@@ -22,11 +22,9 @@ import android.os.Bundle;
 import androidx.preference.SwitchPreferenceCompat;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
-import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.util.ActivityUtils;
-import github.tornaco.thanos.android.noroot.ServiceBindings;
 import now.fortuitous.thanos.settings.access.SettingsAccessRecordViewerActivity;
 
 public class DevSettingsFragment extends BasePreferenceFragmentCompat {
@@ -66,14 +64,6 @@ public class DevSettingsFragment extends BasePreferenceFragmentCompat {
         } else {
             showNetStatPref.setEnabled(false);
         }
-
-        findPreference(getString(R.string.key_rootless_support)).setVisible(BuildProp.THANOS_BUILD_DEBUG);
-        findPreference(getString(R.string.key_rootless_support)).setOnPreferenceClickListener(preference -> {
-            if (ServiceBindings.INSTANCE.checkPermission(1)) {
-                ServiceBindings.INSTANCE.bindUserService();
-            }
-            return false;
-        });
 
         findPreference(getString(R.string.key_theme_attr_preview)).setOnPreferenceClickListener(preference -> {
             ActivityUtils.startActivity(requireActivity(), ThemeAttrPreviewActivity.class);

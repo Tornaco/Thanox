@@ -21,19 +21,18 @@ import android.content.Context
 import android.os.Build
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.HiltAndroidApp
-import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.MultipleModulesApp
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter
 import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.android.thanos.feature.access.AppFeatureManager
 import github.tornaco.android.thanos.main.launchSubscribeActivity
-import github.tornaco.thanos.android.noroot.NoRootSupport
 import github.tornaco.thanos.module.component.manager.initRules
 import io.reactivex.plugins.RxJavaPlugins
-import now.fortuitous.app.FeatureAccessStats
 import now.fortuitous.app.Init
+import now.fortuitous.app.Stats
 import org.lsposed.hiddenapibypass.HiddenApiBypass
+import tornaco.apps.thanox.ThanosLite
 
 @HiltAndroidApp
 class ThanosApp : MultipleModulesApp() {
@@ -55,21 +54,16 @@ class ThanosApp : MultipleModulesApp() {
             XLog.e(throwable)
             XLog.e("\n")
         }
-        if (BuildProp.THANOS_BUILD_DEBUG) {
-            DeveloperDiag.diag(this)
-        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             HiddenApiBypass.addHiddenApiExemptions("")
         }
 
         Init.init(this)
-        AppFeatureManager.launchSubscribeActivity = {
-            launchSubscribeActivity(it) {}
-        }
-        FeatureAccessStats.init(this)
+        AppFeatureManager.launchSubscribeActivity = { launchSubscribeActivity(it) {} }
+        Stats.init(this)
+        // TODO Async init.
         initRules(this.applicationContext)
-        NoRootSupport.install()
         XposedScope.init()
 
         CommonAppListFilterAdapter.fallbackAppItemLongClickListener =
@@ -78,5 +72,7 @@ class ThanosApp : MultipleModulesApp() {
                     now.fortuitous.thanos.apps.AppDetailsActivity.start(this@ThanosApp, it)
                 }
             }
+
+        ThanosLite.init(this)
     }
 }

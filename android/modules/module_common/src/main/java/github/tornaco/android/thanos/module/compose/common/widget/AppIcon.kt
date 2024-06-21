@@ -27,6 +27,9 @@ import com.skydoves.landscapist.glide.GlideImage
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.common.R
 import github.tornaco.android.thanos.util.GlideApp
+import github.tornaco.android.thanos.widget.GrayscaleTransformation
+
+private val grayscaleTransformation = GrayscaleTransformation()
 
 @Composable
 fun AppIcon(modifier: Modifier, appInfo: AppInfo) {
@@ -40,8 +43,9 @@ fun AppIcon(modifier: Modifier, appInfo: AppInfo) {
             )
         },
         requestBuilder = {
-            GlideApp.with(LocalContext.current.applicationContext).asDrawable()
+            val glide = GlideApp.with(LocalContext.current.applicationContext).asDrawable()
                 .transition(withCrossFade())
+            if (appInfo.disabled()) glide.transform(grayscaleTransformation) else glide
         },
     )
 }

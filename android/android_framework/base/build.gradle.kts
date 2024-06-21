@@ -101,7 +101,6 @@ buildConfig {
     buildConfigField("String", "THANOX_APP_PRC_SIGN_SEC", provider { "\"A92E8A9A743FE6648E2E4743FDAC89E9EB4A568F\"" })
     buildConfigField("String", "THANOX_APP_ROW_PLAY_SIGN_SEC", provider { "\"58BCDEF326ABAF65A98AF7B881FA9C059752002E\"" })
     buildConfigField("String", "THANOX_APP_ROW_PLAY_PUBLIC_KEY", provider { "\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmbQreguSE0X2zYOGeKzeNutbc7J5oYNFoOf3EKpYyli11M4/DhZ7+XJeYTMCKfskyF9va3cus2CrNNdgnoj074sVqE1MAPhPrH2t57eblJecb99xTwB071lQTkuj3HLteToCPjZbLN/PZMJ8LBCFraEyXZ8v/tH4yClf9XlTdAGPOU9xCsz9J1Jx/OMgcqBhvXDdKgtTjJ9Q5nvnQWX5Hcf+++LsZdC7xgnsKeEaa+TK39+2oA4659kSVcXptFfoCa/FOp7YF5cWDjazUTdA2LmO0bgnlUweOP0y10E23FcdkBvI+YsqsraxF1EZ+eu0BnnUkUp3a1TmfBDzAswFMQIDAQAB\"" })
-
 }
 
 tasks.withType<Checkstyle> {

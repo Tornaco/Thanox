@@ -18,12 +18,25 @@
 package now.fortuitous.thanos.main
 
 import android.content.Context
+import android.os.Build
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.shortcutManager
 import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.onboarding.OnBoardingActivity
+import now.fortuitous.thanos.pref.AppPreference
+import tornaco.apps.thanox.MainGraph
+import tornaco.apps.thanox.base.ui.theme.ThanosTheme
+import tornaco.apps.thanox.subscribe.ThanosApp
 
 @AndroidEntryPoint
 class NavActivity : ComposeThemeActivity() {
@@ -41,19 +54,97 @@ class NavActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
+        // OnBoarding
+        if (!AppPreference.hasOnBoarding(thisActivity())) {
+            OnBoardingActivity.Starter.start(thisActivity())
+            finish()
+            return
+        }
+
+        // Check if x is available
+        if (ThanosManager.from(thisActivity()).isServiceInstalled) {
+            AppPreference.setAppType(thisActivity(), "ask")
+            Thanox()
+            return
+        }
+
+        val sx = AppPreference.getAppType(thisActivity())
+        when (sx) {
+            "thanox" -> {
+                Thanox()
+            }
+
+            "thanos" -> {
+                Thanos()
+            }
+
+            else -> {
+                ChooserActivity.Starter.start(thisActivity())
+                finish()
+            }
+        }
+    }
+
+    @Composable
+    private fun Thanox() {
         // Block
         if (blockOnCreate(thisActivity())) {
             finish()
             return
         }
 
-        // OnBoarding
-        if (!now.fortuitous.thanos.pref.AppPreference.hasOnBoarding(thisActivity())) {
-            OnBoardingActivity.Starter.start(thisActivity())
-            finish()
-            return
+        LaunchedEffect(Unit) {
+            ShortcutInit(thisActivity()).initOnBootThanox()
+        }
+
+        LaunchedEffect(Unit) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+                thisActivity().shortcutManager.disableShortcuts(
+                    listOf(
+                        "thanos_shortcut_smart_freeze",
+                        "thanos_shortcut_process_manage"
+                    )
+                )
+                thisActivity().shortcutManager.enableShortcuts(
+                    listOf(
+                        "shortcut_smart_freeze",
+                        "shortcut_process_manage"
+                    )
+                )
+            }
         }
 
         NavScreen()
+    }
+
+    @Composable
+    private fun Thanos() {
+        LaunchedEffect(Unit) {
+            ShortcutInit(thisActivity()).initOnBootThanos()
+        }
+
+        ThanosApp {
+            ThanosTheme {
+                var privacyAgreementAccept by remember {
+                    mutableStateOf(false)
+                }
+                LaunchedEffect(Unit) {
+                    privacyAgreementAccept =
+                        PreferenceManager.getDefaultSharedPreferences(thisActivity())
+                            .getBoolean(privacyAgreementKey, false)
+                }
+
+                if (!privacyAgreementAccept) {
+                    PrivacyStatementDialog(onDismissRequest = {
+                        PreferenceManager.getDefaultSharedPreferences(thisActivity()).edit()
+                            .putBoolean(privacyAgreementKey, true).apply()
+                        privacyAgreementAccept = true
+                    })
+                }
+
+
+                MainGraph()
+            }
+        }
     }
 }

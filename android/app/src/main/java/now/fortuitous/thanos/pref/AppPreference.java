@@ -37,13 +37,12 @@ public class AppPreference {
     private static final String PREF_KEY_CURRENT_TIP_INDEX = "PREF_KEY_CURRENT_TIP_INDEX";
     private static final String PREF_KEY_PKG_SET_SORT_PREFIX = "PREF_KEY_PKG_SORT_";
     private static final String PREF_KEY_FEATURE_FLAG_ = "PREF_KEY_FEATURE_FLAG_";
-
+    private static final String PREF_KEY_APP_SX = "PREF_KEY_APP_SX";
 
     public static boolean isFirstRun(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(PREF_KEY_FIRST_RUN, true);
     }
-
 
     public static void setFirstRun(Context context, boolean first) {
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -52,12 +51,22 @@ public class AppPreference {
                 .apply();
     }
 
+    public static String getAppType(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(PREF_KEY_APP_SX, null);
+    }
+
+    public static void setAppType(Context context, String first) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString(PREF_KEY_APP_SX, first)
+                .apply();
+    }
 
     public static boolean isFeatureNoticeAccepted(Context context, String feature) {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(feature, false);
     }
-
 
     public static void setFeatureNoticeAccepted(Context context, String feature, boolean first) {
         PreferenceManager.getDefaultSharedPreferences(context)
@@ -65,7 +74,6 @@ public class AppPreference {
                 .putBoolean(feature, first)
                 .apply();
     }
-
 
     public static boolean hasOnBoarding(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)
@@ -86,7 +94,6 @@ public class AppPreference {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(PREF_KEY_PROCESS_MANAGE_UI_V2, false);
     }
-
 
     public static void setProcessManagerV2Enabled(Context context, boolean value) {
         PreferenceManager.getDefaultSharedPreferences(context)

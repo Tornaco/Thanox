@@ -25,6 +25,7 @@ dependencyResolutionManagement {
 
 
 include(":app")
+include(":app_shizuku")
 include(":shortcut_stub")
 
 include(":annotation_processors:xposed_hook_annotation")

@@ -18,7 +18,6 @@
 package now.fortuitous.thanos.main
 
 import android.content.Context
-import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,7 +27,6 @@ import androidx.compose.runtime.setValue
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.core.app.ThanosManager
-import github.tornaco.android.thanos.core.shortcutManager
 import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
@@ -95,23 +93,6 @@ class NavActivity : ComposeThemeActivity() {
 
         LaunchedEffect(Unit) {
             ShortcutInit(thisActivity()).initOnBootThanox()
-        }
-
-        LaunchedEffect(Unit) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-                thisActivity().shortcutManager.disableShortcuts(
-                    listOf(
-                        "thanos_shortcut_smart_freeze",
-                        "thanos_shortcut_process_manage"
-                    )
-                )
-                thisActivity().shortcutManager.enableShortcuts(
-                    listOf(
-                        "shortcut_smart_freeze",
-                        "shortcut_process_manage"
-                    )
-                )
-            }
         }
 
         NavScreen()

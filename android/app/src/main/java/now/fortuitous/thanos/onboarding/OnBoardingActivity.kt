@@ -20,16 +20,13 @@ package now.fortuitous.thanos.onboarding
 import android.content.Context
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalContext
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.google.android.material.composethemeadapter3.Mdc3Theme
-import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.main.NavActivity
+import tornaco.apps.thanox.base.BaseActivity
+import tornaco.apps.thanox.base.ui.theme.ThanosTheme
 
-class OnBoardingActivity : ThemeActivity() {
+class OnBoardingActivity : BaseActivity() {
 
     object Starter {
         fun start(context: Context?) {
@@ -40,23 +37,11 @@ class OnBoardingActivity : ThemeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Mdc3Theme {
-                val systemUiController = rememberSystemUiController()
-                val useDarkIcons = androidx.compose.material.MaterialTheme.colors.isLight
-                val colorSurface = MaterialTheme.colorScheme.surface
-
-                SideEffect {
-                    systemUiController.setSystemBarsColor(
-                        color = colorSurface,
-                        darkIcons = useDarkIcons
-                    )
-                }
-
+            ThanosTheme {
                 val context = LocalContext.current
-
                 OnBoardingScreen {
                     now.fortuitous.thanos.pref.AppPreference.setHasOnBoarding(context, true)
-                    NavActivity.Starter.start(thisActivity())
+                    NavActivity.Starter.start(context)
                     finish()
                 }
             }

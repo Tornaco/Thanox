@@ -46,8 +46,10 @@
 
         <activity
             android:name="now.fortuitous.thanos.process.v2.ProcessManageActivityV2Delegate"
-            android:excludeFromRecents="true"
             android:exported="false"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="ui.shortcut.pm"
             android:theme="@style/AppThemeShortcut" />
 
         <activity
@@ -156,6 +158,8 @@
             android:name="now.fortuitous.thanos.power.ShortcutStubActivity"
             android:excludeFromRecents="true"
             android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity="ui.shortcut.freeze"
             android:theme="@style/AppThemeShortcut" />
 
         <activity
@@ -178,6 +182,8 @@
             android:name="now.fortuitous.thanos.main.OneKeyBoostShortcutActivity"
             android:excludeFromRecents="true"
             android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity="ui.shortcut.boost"
             android:theme="@style/AppThemeShortcut" />
         <activity
             android:name="now.fortuitous.thanos.infinite.InfiniteZActivity"
@@ -204,6 +210,8 @@
             android:name="now.fortuitous.thanos.main.PrebuiltFeatureShortcutActivity"
             android:excludeFromRecents="true"
             android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity="ui.shortcut.feat"
             android:theme="@style/AppThemeShortcut" />
         <activity
             android:name="now.fortuitous.thanos.settings.ThemeAttrPreviewActivity"

@@ -34,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.util.ActivityUtils
@@ -87,7 +88,7 @@ class ChooserActivity : ComposeThemeActivity() {
                         NavActivity.Starter.start(context)
                         finish()
                     }) {
-                        Text(text = "Shizuku")
+                        Text(text = "Shizuku - " + stringResource(id = R.string.common_badge_text_experiment))
                     }
                     LargeSpacer()
                     Button(modifier = Modifier.fillMaxWidth(0.68f), onClick = {

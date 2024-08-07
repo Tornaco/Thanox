@@ -6,10 +6,8 @@ import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.core.util.ZipUtils
+import github.tornaco.android.thanos.logFolderPath
 import java.io.File
-
-// Note: Should align with MultipleModulesApp.initLog
-val Context.logFolderPath get() = externalCacheDir.toString() + File.separator + "logs"
 
 fun exportLogs(context: Context, manager: ThanosManager): File? {
     return runCatching {

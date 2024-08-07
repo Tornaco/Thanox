@@ -11,15 +11,13 @@ import com.elvishew.xlog.printer.Printer;
 import com.elvishew.xlog.printer.file.FilePrinter;
 import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator;
 
-import java.io.File;
-
 public class MultipleModulesApp extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         Printer androidPrinter = new AndroidPrinter();
         Printer filePrinter = new FilePrinter
-                .Builder(getExternalCacheDir() + File.separator + "logs")
+                .Builder(LogPathKt.getLogFolderPath(base))
                 .fileNameGenerator(new DateFileNameGenerator())
                 .build();
         XLog.init(new LogConfiguration.Builder()

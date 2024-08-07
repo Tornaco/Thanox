@@ -214,6 +214,8 @@ dependencies {
     implementation(libs.lottie.compose)
     implementation(libs.lottie)
 
+    implementation("com.iqiyi.xcrash:xcrash-android-lib:3.0.0")
+
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_ops"))
     implementation(project(":modules:module_ops2"))

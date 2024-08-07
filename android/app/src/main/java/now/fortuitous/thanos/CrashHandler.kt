@@ -19,22 +19,16 @@ package now.fortuitous.thanos
 
 import android.app.Application
 import com.elvishew.xlog.XLog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
-// Scoped type. Same instance is always returned
-private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+import github.tornaco.android.thanos.logFolderPath
+import xcrash.XCrash
 
 fun Application.installCrashHandler() {
-    applicationScope.launch {
-        install()
+    kotlin.runCatching {
+        XCrash.init(this, XCrash.InitParameters().apply {
+            setLogDir(logFolderPath)
+        })
+    }.onFailure {
+        XLog.e(it, "Failed to init xCrash")
     }
 }
 
-suspend fun install() =
-    withContext(Dispatchers.IO) {
-        XLog.w("No crash handler installed.")
-    }

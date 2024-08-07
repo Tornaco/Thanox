@@ -13,6 +13,7 @@
     <string name="key_general" translatable="false">key_general</string>
     <string name="key_power" translatable="false">key_power</string>
     <string name="key_enable_logging" translatable="false">key_enable_logging</string>
+    <string name="key_crash" translatable="false">key_crash</string>
     <string name="key_show_current_activity" translatable="false">key_show_current_activity</string>
     <string name="key_show_net_stat" translatable="false">key_show_net_stat</string>
     <string name="key_enable_global_white_list" translatable="false">key_enable_global_white_list</string>

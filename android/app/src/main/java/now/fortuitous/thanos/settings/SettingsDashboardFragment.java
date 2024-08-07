@@ -679,6 +679,12 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     protected void onBindDevPreferences() {
         ThanosManager thanos = ThanosManager.from(getContext());
 
+        Preference crashPref = findPreference(getString(R.string.key_crash));
+        crashPref.setOnPreferenceClickListener(preference -> {
+            throw new RuntimeException("Crash");
+        });
+        crashPref.setVisible(BuildProp.THANOS_BUILD_DEBUG);
+
         SwitchPreferenceCompat showCurrentActivityPref = findPreference(getString(R.string.key_show_current_activity));
         if (thanos.isServiceInstalled()) {
             showCurrentActivityPref.setChecked(thanos.getActivityStackSupervisor().isShowCurrentComponentViewEnabled());

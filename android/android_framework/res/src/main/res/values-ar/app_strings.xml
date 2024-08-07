@@ -1,4 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_select_activate_method">Which activation method do you prefer?</string>
+
+    <!--    Locker-->
     <string name="module_locker_app_name">قفل التطبيق</string>
     <string name="module_locker_verify_input_password">فتح %s</string>
     <string name="module_locker_menu_search">بحث</string>

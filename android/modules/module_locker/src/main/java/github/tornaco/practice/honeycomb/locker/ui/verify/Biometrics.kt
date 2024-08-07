@@ -6,7 +6,6 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import github.tornaco.android.thanos.core.pm.AppInfo
-import github.tornaco.practice.honeycomb.locker.R
 
 
 fun FragmentActivity.authenticateWithBiometric(
@@ -59,8 +58,8 @@ private fun FragmentActivity.getBiometricPrompt(onResult: (Boolean, String) -> U
 
 private fun FragmentActivity.getPromptInfo(appInfo: AppInfo): BiometricPrompt.PromptInfo {
     return BiometricPrompt.PromptInfo.Builder()
-        .setTitle(getString(R.string.module_locker_app_name))
-        .setSubtitle(getString(R.string.module_locker_verify_input_password, appInfo.appLabel))
+        .setTitle(getString(github.tornaco.android.thanos.res.R.string.module_locker_app_name))
+        .setSubtitle(getString(github.tornaco.android.thanos.res.R.string.module_locker_verify_input_password, appInfo.appLabel))
         .setAllowedAuthenticators(
             BiometricManager.Authenticators.BIOMETRIC_STRONG
                     or BiometricManager.Authenticators.BIOMETRIC_WEAK

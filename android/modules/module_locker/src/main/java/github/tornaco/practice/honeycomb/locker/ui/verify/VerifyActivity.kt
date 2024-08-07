@@ -2,8 +2,6 @@ package github.tornaco.practice.honeycomb.locker.ui.verify
 
 import android.os.Bundle
 import androidx.biometric.BiometricPrompt
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager

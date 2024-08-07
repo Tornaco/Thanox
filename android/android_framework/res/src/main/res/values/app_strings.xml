@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_select_activate_method">Which activation method do you prefer?</string>
+
+    <!--    Locker-->
+    <string name="module_locker_app_name">locker</string>
+    <string name="module_locker_verify_input_password">Unlock %1$s</string>
+    <string name="module_locker_menu_search">Search</string>
+
+    <string name="module_locker_title_settings">Settings</string>
+    <string name="module_locker_title_security">Secure</string>
+    <string name="module_locker_title_re_verify_on_screen_off">Verify on screen off</string>
+    <string name="module_locker_title_re_verify_on_task_removed">Verify on task removed</string>
+    <string name="module_locker_title_re_verify_on_app_switch">Verify on app switch</string>
+    <string name="module_locker_title_verify_workaround_enabled">Enable workaround</string>
+    <string name="module_locker_summary_re_verify_on_screen_off">When the screen is locked, the already unlocked apps will be re-locked.</string>
+    <string name="module_locker_summary_re_verify_on_task_removed">When a task of an app is removed, such as when the app is cleared from the recent tasks page, the app will be re-locked.</string>
+    <string name="module_locker_summary_re_verify_on_app_switch">When an already unlocked app goes to the background, the app will be re-locked.</string>
+    <string name="module_locker_summary_white_list_components">Activity in Allow list will not be locked</string>
+    <string name="module_locker_title_white_list_components">Allowed components</string>
+
+    <string name="module_locker_biometric_not_set_dialog_title">Set a password</string>
+    <string name="module_locker_biometric_not_set_dialog_message">Before enabling the app lock, please go to the system security settings and complete the setup of face recognition, fingerprint, PIN, or pattern password.</string>
 </resources>

@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_select_activate_method">你想用哪种激活方式使用Thanox？</string>
+
+    <!--    Locker-->
+    <string name="module_locker_app_name">应用锁</string>
+    <string name="module_locker_verify_input_password">解锁%1$s</string>
+    <string name="module_locker_menu_search">搜索</string>
+    <string name="module_locker_title_settings">设置</string>
+    <string name="module_locker_title_security">安全</string>
+    <string name="module_locker_title_re_verify_on_screen_off">锁屏后重新验证</string>
+    <string name="module_locker_title_re_verify_on_task_removed">任务移除重新验证</string>
+    <string name="module_locker_title_re_verify_on_app_switch">应用切换重新验证</string>
+    <string name="module_locker_title_verify_workaround_enabled">稳定解锁方式</string>
+    <string name="module_locker_summary_re_verify_on_screen_off">当屏幕锁定后，已经解锁的应用将被重新加锁</string>
+    <string name="module_locker_summary_re_verify_on_task_removed">当某个应用任务被移除，例如该应用在最近任务页面被清理，该应用将被重新加锁</string>
+    <string name="module_locker_summary_re_verify_on_app_switch">当已经解锁的应用回到后台后，该应用将被重新加锁</string>
+    <string name="module_locker_summary_white_list_components">白名单中的组件不会被锁定</string>
+    <string name="module_locker_title_white_list_components">组件白名单</string>
+
+    <string name="module_locker_biometric_not_set_dialog_title">设置密码</string>
+    <string name="module_locker_biometric_not_set_dialog_message">启用应用锁之前，请前往系统安全设置，完成人脸、指纹、PIN或者图案密码设置</string>
 </resources>

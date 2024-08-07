@@ -29,9 +29,10 @@ fun exportLogs(context: Context, manager: ThanosManager): File? {
 
         ZipUtils.zip(tempDir.absolutePath, zipRootDir.absolutePath, name)
 
-
         tempDir.deleteRecursively()
-        File(zipRootDir, name)
+        File(zipRootDir, name).also {
+            XLog.d("Done exportLogs: $it")
+        }
     }.getOrElse {
         XLog.e(it, "Error exportLogs")
         null

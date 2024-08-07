@@ -158,7 +158,7 @@ object PrebuiltFeatures {
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_APPLOCK,
                 themeColor = R.color.nav_icon_app_lock,
                 menuItems = listOf(
-                    github.tornaco.practice.honeycomb.locker.R.string.module_locker_title_settings to {
+                    github.tornaco.android.thanos.res.R.string.module_locker_title_settings to {
                         LockSettingsActivity.start(it)
                     }
                 )

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 
@@ -45,7 +44,7 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
     @NonNull
     @Override
     protected String getTitleString() {
-        return getString(R.string.module_locker_app_name);
+        return getString(github.tornaco.android.thanos.res.R.string.module_locker_app_name);
     }
 
     @NonNull
@@ -118,10 +117,10 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
 
     private void showBiometricNotReadyDialog() {
         ModernAlertDialog dialog = new ModernAlertDialog(thisActivity());
-        dialog.setDialogTitle(getString(R.string.module_locker_biometric_not_set_dialog_title));
-        dialog.setDialogMessage(getString(R.string.module_locker_biometric_not_set_dialog_message));
+        dialog.setDialogTitle(getString(github.tornaco.android.thanos.res.R.string.module_locker_biometric_not_set_dialog_title));
+        dialog.setDialogMessage(getString(github.tornaco.android.thanos.res.R.string.module_locker_biometric_not_set_dialog_message));
         dialog.setCancelable(true);
-        dialog.setPositive(getString(R.string.module_locker_title_settings));
+        dialog.setPositive(getString(github.tornaco.android.thanos.res.R.string.module_locker_title_settings));
         dialog.setNegative(getString(android.R.string.cancel));
         dialog.setOnPositive(() -> {
             Intent enrollIntent = new Intent(Settings.ACTION_SETTINGS);

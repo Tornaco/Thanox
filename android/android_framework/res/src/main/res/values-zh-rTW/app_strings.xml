@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    Locker-->
     <string name="module_locker_app_name">應用鎖</string>
     <string name="module_locker_verify_input_password">解鎖%1$s</string>
     <string name="module_locker_menu_search">搜索</string>

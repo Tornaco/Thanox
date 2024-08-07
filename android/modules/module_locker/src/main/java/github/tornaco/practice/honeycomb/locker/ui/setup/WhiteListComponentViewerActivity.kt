@@ -47,7 +47,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.TextInputDialo
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.util.ActivityUtils
-import github.tornaco.practice.honeycomb.locker.R
 
 @AndroidEntryPoint
 class WhiteListComponentViewerActivity : ComposeThemeActivity() {
@@ -66,7 +65,7 @@ class WhiteListComponentViewerActivity : ComposeThemeActivity() {
             viewModel.load()
         }
         val inputState = rememberTextInputState(
-            title = stringResource(id = R.string.module_locker_title_white_list_components),
+            title = stringResource(id = github.tornaco.android.thanos.res.R.string.module_locker_title_white_list_components),
             message = null,
             onSelected = { input ->
                 ComponentName.unflattenFromString(input)?.let {
@@ -78,7 +77,7 @@ class WhiteListComponentViewerActivity : ComposeThemeActivity() {
 
         ThanoxSmallAppBarScaffold(title = {
             Text(
-                text = stringResource(id = R.string.module_locker_title_white_list_components),
+                text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_locker_title_white_list_components),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },

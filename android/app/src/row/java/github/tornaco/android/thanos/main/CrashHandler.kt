@@ -15,20 +15,11 @@
  *
  */
 
-package now.fortuitous.thanos
+package github.tornaco.android.thanos.main
 
 import android.app.Application
-import com.elvishew.xlog.XLog
-import github.tornaco.android.thanos.logFolderPath
-import xcrash.XCrash
 
 fun Application.installCrashHandler() {
-    kotlin.runCatching {
-        XCrash.init(this, XCrash.InitParameters().apply {
-            setLogDir(logFolderPath)
-        })
-    }.onFailure {
-        XLog.e(it, "Failed to init xCrash")
-    }
+    // No op.
 }
 

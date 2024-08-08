@@ -26,6 +26,7 @@ import github.tornaco.android.thanos.common.AppItemViewLongClickListener
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter
 import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.android.thanos.feature.access.AppFeatureManager
+import github.tornaco.android.thanos.main.installCrashHandler
 import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.thanos.module.component.manager.initRules
 import io.reactivex.plugins.RxJavaPlugins
@@ -62,7 +63,6 @@ class ThanosApp : MultipleModulesApp() {
         Init.init(this)
         AppFeatureManager.launchSubscribeActivity = { launchSubscribeActivity(it) {} }
         Stats.init(this)
-        // TODO Async init.
         initRules(this.applicationContext)
         XposedScope.init()
 

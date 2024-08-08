@@ -14,6 +14,11 @@ plugins {
     alias(libs.plugins.dagger.hilt.android)
 }
 
+if (Configs.thanoxBuildIsRow == true) {
+    plugins.apply("com.google.gms.google-services")
+    plugins.apply("com.google.firebase.crashlytics")
+}
+
 android {
     defaultConfig {
         namespace = "github.tornaco.android.thanos"
@@ -214,7 +219,7 @@ dependencies {
     implementation(libs.lottie.compose)
     implementation(libs.lottie)
 
-    implementation("com.iqiyi.xcrash:xcrash-android-lib:3.0.0")
+    implementation(libs.xcrash.android.lib)
 
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_ops"))
@@ -248,6 +253,14 @@ dependencies {
     implementation(project(":third_party:reorderable"))
 
     implementation(project("::third_party:libxposed:service"))
+
+    val rowImplementation by configurations
+    // Import the BoM for the Firebase platform
+    rowImplementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    rowImplementation("com.google.firebase:firebase-crashlytics")
+    rowImplementation("com.google.firebase:firebase-analytics")
 }
 
 typealias Properties = java.util.Properties

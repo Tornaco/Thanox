@@ -34,9 +34,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.main.Analytics
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.util.ActivityUtils
+import now.fortuitous.thanos.analytics.SelectActiveMethodShizuku
+import now.fortuitous.thanos.analytics.SelectActiveMethodXposedOrMagisk
 import now.fortuitous.thanos.pref.AppPreference
 import tornaco.apps.thanox.base.ui.NiaGradientBackground
 import tornaco.apps.thanox.base.ui.theme.ThanosTheme
@@ -83,6 +86,7 @@ class ChooserActivity : ComposeThemeActivity() {
                     }
 
                     Button(modifier = Modifier.fillMaxWidth(0.68f), onClick = {
+                        Analytics.reportEvent(SelectActiveMethodShizuku)
                         AppPreference.setAppType(context, "thanos")
                         NavActivity.Starter.start(context)
                         finish()
@@ -91,6 +95,7 @@ class ChooserActivity : ComposeThemeActivity() {
                     }
                     LargeSpacer()
                     Button(modifier = Modifier.fillMaxWidth(0.68f), onClick = {
+                        Analytics.reportEvent(SelectActiveMethodXposedOrMagisk)
                         AppPreference.setAppType(context, "thanox")
                         NavActivity.Starter.start(context)
                         finish()

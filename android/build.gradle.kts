@@ -29,6 +29,9 @@ plugins {
     alias(libs.plugins.diffplug.spotless) apply true
     alias(libs.plugins.kover) apply false
 
+    id("com.google.gms.google-services") version "4.4.2" apply false
+    id("com.google.firebase.crashlytics") version "3.0.2" apply false
+
     id("thanox-proj")
 }
 

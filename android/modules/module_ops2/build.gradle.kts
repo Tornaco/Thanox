@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.dagger.hilt.android)
 
     implementation(project(":modules:module_common"))
+    implementation(project(":android_framework:res"))
     implementation(project(":android_framework:base"))
     implementation(project(":third_party:remix"))
 }

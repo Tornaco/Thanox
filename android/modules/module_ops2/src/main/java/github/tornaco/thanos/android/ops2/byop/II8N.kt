@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import github.tornaco.android.thanos.core.ops.PermState
-import github.tornaco.thanos.android.ops2.R
+import github.tornaco.android.thanos.res.R
 
 @Composable
 fun PermState.displayLabel(): String {
@@ -46,7 +46,6 @@ fun PermState.displayColor(): Color {
         else -> Color.Unspecified
     }
 }
-
 
 var opLabelArray: Array<String>? = null
 fun opLabel(context: Context, code: Int, fallback: String = "$code"): String {

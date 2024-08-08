@@ -18,4 +18,6 @@
 
     <string name="module_locker_biometric_not_set_dialog_title">ضبط كلمة السر</string>
     <string name="module_locker_biometric_not_set_dialog_message">قبل تمكين قفل التطبيقات ، يرجى الانتقال إلى إعدادات أمان النظام لإكمال إعدادات الوجه أو بصمة الإصبع أو رمز PIN أو نمط كلمة المرور</string>
+
+
 </resources>

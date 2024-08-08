@@ -47,7 +47,7 @@ class Ops2Activity : ComposeThemeActivity() {
         ThanoxSmallAppBarScaffold(
             title = {
                 androidx.compose.material3.Text(
-                    text = stringResource(id = R.string.module_ops2_ops_list_title),
+                    text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_ops2_ops_list_title),
                     style = TypographyDefaults.appBarTitleTextStyle()
                 )
             },

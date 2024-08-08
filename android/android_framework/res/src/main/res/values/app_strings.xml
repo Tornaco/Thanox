@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_select_activate_method">Which activation method do you prefer?</string>
 
     <!--    Locker-->
@@ -21,4 +21,223 @@
 
     <string name="module_locker_biometric_not_set_dialog_title">Set a password</string>
     <string name="module_locker_biometric_not_set_dialog_message">Before enabling the app lock, please go to the system security settings and complete the setup of face recognition, fingerprint, PIN, or pattern password.</string>
+
+    <string-array name="module_ops2_app_ops_summaries" tools:ignore="InconsistentArrays">
+        <item>""</item>
+        <item>""</item>
+        <item>""</item>
+        <item>"Vibration"</item>
+        <item>"Read Contacts"</item>
+        <item>"Modify Contacts"</item>
+        <item>"Read Call Logs"</item>
+        <item>"Modify Call Logs"</item>
+        <item>"Read Calendar"</item>
+        <item>"Modify Calendar"</item>
+        <item>"WLAN Scan"</item>
+        <item>"Notifications"</item>
+        <item>"Mobile Network Scan"</item>
+        <item>"Make Phone Calls"</item>
+        <item>"Read SMS"</item>
+        <item>"Write SMS"</item>
+        <item>"Receive SMS"</item>
+        <item>"Receive Emergency SMS"</item>
+        <item>"Receive MMS"</item>
+        <item>"Receive WAP PUSH Messages"</item>
+        <item>"Send SMS"</item>
+        <item>"Read ICC SMS"</item>
+        <item>"Write ICC SMS"</item>
+        <item>"Modify Settings"</item>
+        <item>"Display on Top"</item>
+        <item>"Access Notifications"</item>
+        <item>"Camera"</item>
+        <item>"Record Audio"</item>
+        <item>"Play Audio"</item>
+        <item>"Read Clipboard Content"</item>
+        <item>"Modify Clipboard Content"</item>
+        <item>"Media Buttons"</item>
+        <item>"Audio Focus"</item>
+        <item>"Master Volume"</item>
+        <item>"Voice Volume"</item>
+        <item>"Ringtone Volume"</item>
+        <item>"Media Volume"</item>
+        <item>"Alarm Volume"</item>
+        <item>"Notification Volume"</item>
+        <item>"Bluetooth Volume"</item>
+        <item>"Keep Awake"</item>
+        <item>"Monitor Location"</item>
+        <item>"Monitor High-Power Location Services"</item>
+        <item>"Get Usage Stats"</item>
+        <item>"Mute or Unmute Microphone"</item>
+        <item>"Display Greeting"</item>
+        <item>"Project Media"</item>
+        <item>"Activate VPN"</item>
+        <item>"Write Wallpaper"</item>
+        <item>"Assist Structure"</item>
+        <item>"Assist Screenshot"</item>
+        <item>"Read Phone State"</item>
+        <item>"Add Voicemail"</item>
+        <item>"Use SIP"</item>
+        <item>"Handle Outgoing Calls"</item>
+        <item>"Fingerprint"</item>
+        <item>"Body Sensors"</item>
+        <item>"Read Cell Broadcasts"</item>
+        <item>"Mock Location"</item>
+        <item>"Read Storage"</item>
+        <item>"Write Storage"</item>
+        <item>"Turn On Screen"</item>
+        <item>"Get Accounts"</item>
+        <item>"Run in Background"</item>
+        <item>"Accessibility Volume"</item>
+
+        <item>Read phone number</item>
+        <item>Request to install applications</item>
+        <item>Picture in picture</item>
+        <item>Instant app start foreground</item>
+        <item>Answer incoming phone calls</item>
+        <item>Run tasks in the background</item>
+        <item>Change Wifi connection state</item>
+        <item>Request package deletion through package installer</item>
+        <item>Bind an accessibility service</item>
+        <item>Continue handover of a call from another app</item>
+        <item>Create and manage IPsec tunnels</item>
+        <item>Any app start foreground service</item>
+        <item>Bluetooth scan</item>
+        <item>Use the BiometricPrompt/BiometricManager APIs</item>
+        <item>Physical activity recognition</item>
+        <item>Financial app SMS read</item>
+        <item>Read media of audio type</item>
+        <item>Write media of audio type</item>
+        <item>Read media of video type</item>
+        <item>Write media of video type</item>
+        <item>Read media of image type</item>
+        <item>Write media of image type</item>
+        <item>Has a legacy (non-isolated) view of storage</item>
+        <item>Use accessibility features</item>
+        <item>Read device information (IMEI/MEID, IMSI, SIM/Build serial)</item>
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Activate platform VPN</item>
+        <item>Loader usage stats</item>
+        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
+    </string-array>
+
+    <string-array name="module_ops2_app_ops_labels" tools:ignore="InconsistentArrays">
+        <item>"Coarse Location"</item>
+        <item>"Precise Location"</item>
+        <item>"GPS"</item>
+        <item>"Vibration"</item>
+        <item>"Read Contacts"</item>
+        <item>"Modify Contacts"</item>
+        <item>"Read Call Logs"</item>
+        <item>"Modify Call Logs"</item>
+        <item>"Read Calendar"</item>
+        <item>"Modify Calendar"</item>
+        <item>"Location"</item>
+        <item>"Post Notifications"</item>
+        <item>"Location"</item>
+        <item>"Make Phone Calls"</item>
+        <item>"Read SMS/MMS"</item>
+        <item>"Write SMS/MMS"</item>
+        <item>"Receive SMS/MMS"</item>
+        <item>"Receive SMS/MMS"</item>
+        <item>"Receive SMS/MMS"</item>
+        <item>"Receive SMS/MMS"</item>
+        <item>"Send SMS/MMS"</item>
+        <item>"Read SMS/MMS"</item>
+        <item>"Write SMS/MMS"</item>
+        <item>"Modify Settings"</item>
+        <item>"Display on Top"</item>
+        <item>"Access Notifications"</item>
+        <item>"Camera"</item>
+        <item>"Record Audio"</item>
+        <item>"Play Audio"</item>
+        <item>"Read Clipboard Content"</item>
+        <item>"Modify Clipboard Content"</item>
+        <item>"Media Buttons"</item>
+        <item>"Audio Focus"</item>
+        <item>"Master Volume"</item>
+        <item>"Voice Volume"</item>
+        <item>"Ringtone Volume"</item>
+        <item>"Media Volume"</item>
+        <item>"Alarm Volume"</item>
+        <item>"Notification Volume"</item>
+        <item>"Bluetooth Volume"</item>
+        <item>"Keep Awake"</item>
+        <item>"Location"</item>
+        <item>"Location Information"</item>
+        <item>"Get Usage Stats"</item>
+        <item>"Mute or Unmute Microphone"</item>
+        <item>"Display Greeting"</item>
+        <item>"Project Media"</item>
+        <item>"Activate VPN"</item>
+        <item>"Write Wallpaper"</item>
+        <item>"Assist Structure"</item>
+        <item>"Assist Screenshot"</item>
+        <item>"Read Phone State"</item>
+        <item>"Add Voicemail"</item>
+        <item>"Use SIP"</item>
+        <item>"Handle Outgoing Calls"</item>
+        <item>"Fingerprint"</item>
+        <item>"Body Sensors"</item>
+        <item>"Read Cell Broadcasts"</item>
+        <item>"Mock Location"</item>
+        <item>"Read Storage"</item>
+        <item>"Write Storage"</item>
+        <item>"Turn On Screen"</item>
+        <item>"Get Accounts"</item>
+        <item>"Run in Background"</item>
+        <item>"Accessibility Volume"</item>
+        <item>Read phone number</item>
+        <item>Install applications</item>
+        <item>Picture in picture</item>
+        <item>Instant app start foreground</item>
+        <item>Answer incoming phone calls</item>
+        <item>Run tasks in the background</item>
+        <item>Change Wifi connection state</item>
+        <item>Request package deletion through package installer</item>
+        <item>Bind an accessibility service</item>
+        <item>Continue handover of a call from another app</item>
+        <item>Create and Manage IPsec Tunnels</item>
+        <item>Any app start foreground service</item>
+        <item>Bluetooth scan</item>
+        <item>Use BiometricPrompt</item>
+        <item>Physical activity recognition</item>
+        <item>Financial app SMS read</item>
+        <item>Read media of audio type</item>
+        <item>Write media of audio type</item>
+        <item>Read media of video type</item>
+        <item>Write media of video type</item>
+        <item>Read media of image type</item>
+        <item>Write media of image type</item>
+        <item>Has a legacy view of storage</item>
+        <item>Use accessibility features</item>
+        <item>Read device information</item>
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Activate platform VPN</item>
+        <item>Loader usage stats</item>
+        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
+    </string-array>
+
+    <string name="module_ops2_ops_list_title">All Permissions</string>
+    <string name="module_ops2_perm_state_allow">Allow</string>
+    <string name="module_ops2_perm_state_deny">Deny</string>
+    <string name="module_ops2_perm_state_deny_summary">Deny permissions and do not ask again</string>
+    <string name="module_ops2_perm_state_ignore">Ignore</string>
+    <string name="module_ops2_perm_state_ignore_summary">Grant permission but ignore operations or return empty data</string>
+    <string name="module_ops2_perm_state_ask">Ask</string>
+    <string name="module_ops2_perm_state_foreground">Allow during use</string>
+    <string name="module_ops2_perm_state_default">Default</string>
+    <string name="module_ops2_perm_state_not_set">Not Set</string>
+    <string name="module_ops2_perm_state_unknown">Unknown</string>
 </resources>

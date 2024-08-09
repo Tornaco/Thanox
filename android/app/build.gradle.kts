@@ -5,6 +5,7 @@ import tornaco.project.android.thanox.Configs.keyStorePassword
 import tornaco.project.android.thanox.Configs.magiskModuleBuildDir
 import tornaco.project.android.thanox.aapt
 import tornaco.project.android.thanox.log
+import kotlin.random.Random
 
 plugins {
     alias(libs.plugins.agp.app)
@@ -47,7 +48,8 @@ android {
             isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
+                "proguard-rules-dynamic.pro"
             )
             signingConfig = signingConfigs.getByName("release")
         }
@@ -261,6 +263,37 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     rowImplementation("com.google.firebase:firebase-crashlytics")
     rowImplementation("com.google.firebase:firebase-analytics")
+}
+
+val generateProguardRules by tasks.registering {
+    doLast {
+        val ruleFile = file("proguard-rules-dynamic.pro")
+        ruleFile.writeText("")
+
+        ruleFile.apply {
+            appendText("-repackageclasses ${generateRandomPackageName()}")
+            appendText(System.lineSeparator())
+        }
+    }
+}
+
+fun generateRandomPackageName(): String {
+    val packageParts = mutableListOf<String>()
+    val partCount = Random.nextInt(2, 5)
+
+    for (i in 1..partCount) {
+        val partLength = Random.nextInt(3, 8)
+        val part = (1..partLength)
+            .map { ('a'..'z').random() } // 随机生成小写字母
+            .joinToString("")
+        packageParts.add(part)
+    }
+
+    return packageParts.joinToString(".")
+}
+
+tasks.named("preBuild") {
+    dependsOn(generateProguardRules)
 }
 
 typealias Properties = java.util.Properties

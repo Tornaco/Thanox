@@ -1,2 +1,3 @@
 /build
 src/row/google-services.json
+proguard-rules-dynamic.pro

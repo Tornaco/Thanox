@@ -1,5 +1,3 @@
--repackageclasses fortuitous
-
 -optimizationpasses 5
 -dontusemixedcaseclassnames
 -verbose

@@ -6,5 +6,5 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
 
-    compileOnly(libs.xposed.api)
+    compileOnly(files(project.rootProject.file("android_sdk/xposed-api-82.jar")))
 }

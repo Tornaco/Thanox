@@ -25,7 +25,7 @@ dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.kotlin.reflect)
 
-    compileOnly(libs.xposed.api)
+    compileOnly(files(project.rootProject.file("android_sdk/xposed-api-82.jar")))
 }
 
 

@@ -72,7 +72,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
 
-    compileOnly(libs.xposed.api)
+    compileOnly(files(project.rootProject.file("android_sdk/xposed-api-82.jar")))
 
     implementation(project(":android_framework:base"))
     implementation(project(":third_party:recyclerview-fastscroll"))

@@ -3,6 +3,6 @@ plugins {
 }
 
 dependencies {
-    compileOnly(libs.xposed.api)
+    compileOnly(files(project.rootProject.file("android_sdk/xposed-api-82.jar")))
 }
 

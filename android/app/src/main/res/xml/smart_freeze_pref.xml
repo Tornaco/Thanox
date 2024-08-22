@@ -53,4 +53,12 @@
             app:title="@string/pre_title_smart_freeze_hide_package_change_event" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/feature_category_app_clean_up">
+        <Preference
+            android:persistent="false"
+            app:icon="@drawable/ic_ac_unit_black_24dp"
+            app:key="@string/key_smart_freeze_create_freeze_all_shortcut"
+            app:title="@string/menu_title_create_shortcut" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

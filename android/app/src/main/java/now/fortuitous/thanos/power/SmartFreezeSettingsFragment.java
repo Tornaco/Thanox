@@ -23,6 +23,7 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.elvishew.xlog.XLog;
 import com.google.common.collect.Lists;
 
 import java.util.Objects;
@@ -49,6 +50,14 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
             getPreferenceScreen().setEnabled(false);
             return;
         }
+
+        Preference createShortcutPref = findPreference(R.string.key_smart_freeze_create_freeze_all_shortcut);
+        XLog.d("createShortcutPref: " + createShortcutPref);
+        Objects.requireNonNull(createShortcutPref).setOnPreferenceClickListener(preference -> {
+            XLog.d("addShortcutForFreezeAll");
+            ShortcutHelper.addShortcutForFreezeAll(requireContext());
+            return true;
+        });
 
         SwitchPreferenceCompat screenOffFreeze = findPreference(getString(R.string.key_smart_freeze_screen_off_clean_up));
         boolean screenOffFreezeEnabled = thanos.getPkgManager().isSmartFreezeScreenOffCheckEnabled();

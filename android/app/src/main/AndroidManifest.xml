@@ -161,6 +161,13 @@
             android:launchMode="singleTask"
             android:taskAffinity="ui.shortcut.freeze"
             android:theme="@style/AppThemeShortcut" />
+        <activity
+            android:name="now.fortuitous.thanos.power.FreezeAllShortcutActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity="ui.shortcut.freeze.all"
+            android:theme="@style/AppThemeShortcut" />
 
         <activity
             android:name="now.fortuitous.thanos.power.SmartFreezeSettingsActivity"

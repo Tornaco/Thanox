@@ -22,12 +22,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
 import com.bumptech.glide.request.target.CustomTarget;
@@ -43,6 +46,7 @@ import java.util.Objects;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.util.BitmapUtil;
 import github.tornaco.android.thanos.util.GlideApp;
 import github.tornaco.android.thanos.util.GlideUtils;
 import github.tornaco.android.thanos.util.ShortcutReceiver;
@@ -80,6 +84,28 @@ class ShortcutHelper {
                             // Noop.
                         }
                     });
+        }
+    }
+
+    static void addShortcutForFreezeAll(Context context) {
+        if (ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
+            Intent shortcutInfoIntent = FreezeAllShortcutActivity.createIntent(context);
+            shortcutInfoIntent.setAction(Intent.ACTION_VIEW);
+            Drawable drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_nav_smart_freeze, null);
+            LayerDrawable ld = (LayerDrawable) drawable;
+            Drawable layer = ld.findDrawableByLayerId(R.id.settings_ic_foreground);
+            if (layer != null) {
+                layer.setTint(ContextCompat.getColor(context, R.color.nav_icon_smart_freeze));
+                ld.setDrawableByLayerId(R.id.settings_ic_foreground, layer);
+            }
+            Bitmap resource = BitmapUtil.getBitmap(context, drawable);
+            ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(context, "Shortcut-freeze-all-" + System.currentTimeMillis())
+                    .setIcon(IconCompat.createWithBitmap(Objects.requireNonNull(resource)))
+                    .setShortLabel(context.getString(R.string.feature_category_app_clean_up))
+                    .setIntent(shortcutInfoIntent)
+                    .build();
+            ShortcutManagerCompat.requestPinShortcut(context, info, ShortcutReceiver.getPinRequestAcceptedIntent(context).getIntentSender());
+            XLog.d("addShortcutForFreezeAll done");
         }
     }
 

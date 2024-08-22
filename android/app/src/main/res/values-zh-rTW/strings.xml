@@ -174,7 +174,7 @@
     <string name="pref_title_dol_tips">DOL提示</string>
     <string name="pref_summary_enable_package_on_launch_by_default">當某個應用被加入智能凍結列表時，自動為這個應用開啟\"活檢解凍\"開關</string>
     <string name="feature_desc_smart_app_freeze">注意，凍結應用使用了Android系統的能力，意味著這些狀態會跟隨系統持久化，即使你移除了Thanox，這些狀態將依然會保留</string>
-    <string name="menu_title_create_shortcut">建立啟動快捷方式</string>
+    <string name="menu_title_create_shortcut">建立快捷方式</string>
     <string name="menu_title_create_shortcut_apk">產生代理應用</string>
     <string name="menu_title_broadcast_intent_shortcut">廣播意圖</string>
     <string name="menu_title_activity_intent_shortcut">活動意圖</string>

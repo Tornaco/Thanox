@@ -174,7 +174,7 @@
     <string name="menu_desc_smart_app_freeze_enable_all_apps">将会解冻你的系统中所有被冻结或挂起的应用，包含所有已安装或系统应用，你确定要这样做吗？</string>
     <string name="feature_summary_smart_app_freeze">把不常用的应用冻结起来</string>
     <string name="feature_desc_smart_app_freeze">注意，冻结应用使用了Android系统的能力，意味着这些状态会跟随系统持久化，即使你卸载了Thanox，这些状态将依然会保留</string>
-    <string name="menu_title_create_shortcut">创建启动快捷方式</string>
+    <string name="menu_title_create_shortcut">创建快捷方式</string>
     <string name="menu_title_create_shortcut_apk">生成代理应用</string>
     <string name="menu_title_broadcast_intent_shortcut">广播意图</string>
     <string name="menu_title_activity_intent_shortcut">活动意图</string>

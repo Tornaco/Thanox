@@ -240,4 +240,7 @@
     <string name="module_ops2_perm_state_default">Default</string>
     <string name="module_ops2_perm_state_not_set">Not Set</string>
     <string name="module_ops2_perm_state_unknown">Unknown</string>
+
+    <string name="active_method_chooser_summary_xposed_magisk">For rooted devices, requires Magisk or LSPosed framework; LSPosed mode provides the most features, while Magisk mode has relatively fewer features.</string>
+    <string name="active_method_chooser_summary_shizuku">For non-rooted devices, requires Shizuku and selecting Thanox within Shizuku; Note: Due to system permission restrictions, the Shizuku mode has very limited features.</string>
 </resources>

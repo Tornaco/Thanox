@@ -246,4 +246,7 @@
     <string name="module_ops2_perm_state_default">默认</string>
     <string name="module_ops2_perm_state_not_set">未设置</string>
     <string name="module_ops2_perm_state_unknown">未知</string>
+
+    <string name="active_method_chooser_summary_xposed_magisk">适用于Root设备，需要安装Magisk或LSPosed框架；LSPosed模式下功能最多，Magisk模式下相对较少</string>
+    <string name="active_method_chooser_summary_shizuku">适用于非Root设备，需要安装Shizuku，并在Shizuku中勾选Thanox；注意：受限于系统权限，Shizuku模式下功能非常少</string>
 </resources>

@@ -23,7 +23,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,12 +31,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.main.Analytics
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCardRoundedCornerShape
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.analytics.SelectActiveMethodShizuku
 import now.fortuitous.thanos.analytics.SelectActiveMethodXposedOrMagisk
@@ -85,25 +89,51 @@ class ChooserActivity : ComposeThemeActivity() {
                         LargeSpacer()
                     }
 
-                    Button(modifier = Modifier.fillMaxWidth(0.68f), onClick = {
-                        Analytics.reportEvent(SelectActiveMethodShizuku)
-                        AppPreference.setAppType(context, "thanos")
-                        NavActivity.Starter.start(context)
-                        finish()
-                    }) {
-                        Text(text = "Shizuku - " + stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_badge_text_experiment))
-                    }
+                    MethodCard(
+                        title = "Shizuku",
+                        summary = stringResource(id = github.tornaco.android.thanos.res.R.string.active_method_chooser_summary_shizuku),
+                        onClick = {
+                            Analytics.reportEvent(SelectActiveMethodShizuku)
+                            AppPreference.setAppType(context, "thanos")
+                            NavActivity.Starter.start(context)
+                            finish()
+                        })
+
                     LargeSpacer()
-                    Button(modifier = Modifier.fillMaxWidth(0.68f), onClick = {
-                        Analytics.reportEvent(SelectActiveMethodXposedOrMagisk)
-                        AppPreference.setAppType(context, "thanox")
-                        NavActivity.Starter.start(context)
-                        finish()
-                    }) {
-                        Text(text = "Xposed/Magisk")
-                    }
+
+
+                    MethodCard(
+                        title = "Xposed/Magisk",
+                        summary = stringResource(id = github.tornaco.android.thanos.res.R.string.active_method_chooser_summary_xposed_magisk),
+                        onClick = {
+                            Analytics.reportEvent(SelectActiveMethodXposedOrMagisk)
+                            AppPreference.setAppType(context, "thanox")
+                            NavActivity.Starter.start(context)
+                            finish()
+                        })
                 }
             }
         }
     }
+}
+
+@Composable
+fun MethodCard(
+    title: String,
+    summary: String,
+    onClick: () -> Unit = {}
+) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp),
+        shape = ThanoxCardRoundedCornerShape,
+        onClick = onClick,
+        content = {
+            Column(Modifier.padding(16.dp)) {
+                Text(text = title, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                StandardSpacer()
+                Text(text = summary)
+            }
+        }
+    )
 }

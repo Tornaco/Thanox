@@ -32,6 +32,7 @@ import github.tornaco.thanos.module.component.manager.initRules
 import io.reactivex.plugins.RxJavaPlugins
 import now.fortuitous.app.Init
 import now.fortuitous.app.Stats
+import now.fortuitous.thanos.power.ShortcutHelper
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import tornaco.apps.thanox.ThanosLite
 
@@ -74,5 +75,8 @@ class ThanosApp : MultipleModulesApp() {
             }
 
         ThanosLite.init(this)
+        ThanosLite.installShortcut = { context, app ->
+            ShortcutHelper.addShortcut(context, app)
+        }
     }
 }

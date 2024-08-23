@@ -52,13 +52,13 @@ import github.tornaco.android.thanos.util.GlideUtils;
 import github.tornaco.android.thanos.util.ShortcutReceiver;
 
 @SuppressWarnings("UnstableApiUsage")
-class ShortcutHelper {
+public class ShortcutHelper {
     private static final String STUB_APK_TEMPLATE_PATH = "shortcut_stub_template.apk";
     private static final String OUT_APK_PATH = "shortcut_stub_apks";
     private static final String WORK_DIR_PATH = "tmp_";
     private static final String ICON_DIR_PATH = "icon.png";
 
-    static void addShortcut(Context context, AppInfo appInfo) {
+    public static void addShortcut(Context context, AppInfo appInfo) {
         if (ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
             // Post load with glide.
             GlideApp.with(context)

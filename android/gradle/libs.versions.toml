@@ -43,7 +43,7 @@ androidx-test-runner = "1.5.2"
 # DO NOT UPGRADE
 rhino-runtime = "1.7.15"
 uiautomator = "2.3.0"
-espresso-core = "3.5.1"
+espresso-core = "3.6.1"
 androidx-junit = "1.1.5"
 libxposed-api = "100"
 libxposed-service = "100-1.0.0"

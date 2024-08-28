@@ -8,5 +8,5 @@ android {
 
 dependencies {
     implementation(project(":third_party:libxposed:interface"))
-    compileOnly("androidx.annotation:annotation:1.7.1")
+    compileOnly("androidx.annotation:annotation:1.8.2")
 }

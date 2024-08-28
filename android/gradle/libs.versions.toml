@@ -39,7 +39,7 @@ kotest-assertions = "5.9.0"
 libsu = "6.0.0"
 mmkv = "1.3.9"
 orbit = "9.0.0"
-androidx-test-runner = "1.5.2"
+androidx-test-runner = "1.6.2"
 # DO NOT UPGRADE
 rhino-runtime = "1.7.15"
 uiautomator = "2.3.0"

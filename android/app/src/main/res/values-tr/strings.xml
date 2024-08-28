@@ -9,7 +9,7 @@
     
     <string name="status_active">Aktif</string>
     <string name="status_not_active">Aktif değil</string>
-    <string name="message_active_needed">Thanox, hem Xposed hem de Magisk\'i destekler.\n\n Xposed kullanıcıları için (Xposed modülü ve Magisk zip\'i aynı anda kullanılamaz), sadece Xposed uygulaması modül ayarları sayfasında Thanox'u seçip işaretleyebilirsiniz. \n\nMagisk kullanıcıları için, indirilen Thanox apk dosyasını .apk'den .zip'e yeniden adlandırabilir ve ardından Magisk yöneticisine kurabilirsiniz, veya indirilen apk'yı bulamazsanız Ayarlar, Hakkında, Yama durumu'na gidip yamayı dışa aktarabilirsiniz.</string>
+    <string name="message_active_needed">Thanox support both Xposed and Magisk.\n\n For Xposed user (Xposed module and Magisk zip can not be used at the same time), you can just select and check Thanox in Xposed app module config page. \n\nFor Magisk user, you can rename downloaded Thanox apk from .apk to .zip and then install in Magisk manager, or if you can not find the downloaded apk, you can go to Settings, About, Patch status to export the patch</string>
     <string name="status_need_reboot">Yeniden başlat</string>
     <string name="title_framework_error">Framework hatası</string>
     <string name="message_framework_error">Thanox framework\'ünde bir hata var. Lütfen /data/system/thanos_xxx/log altında bulunan günlükleri geliştiriciye rapor edin.</string>
@@ -280,7 +280,7 @@
     
     <string name="pref_title_config_template_category">Şablonlar</string>
     <string name="pref_action_create_new_config_template">Şablon oluştur</string>
-    <string name="pref_action_edit_or_view_config_template">Görüntüle & Düzenle</string>
+    <string name="pref_action_edit_or_view_config_template">Görüntüle &amp; Düzenle</string>
     <string name="pref_action_delete_config_template">Sil</string>
     <string name="pref_action_apply_config_template">Şablondan uygula</string>
     
@@ -385,11 +385,11 @@
     <string name="badge_paid_app">Ücretli</string>
     <string name="badge_framework_err">Hata</string>
     <string name="badge_power_save_off">Pil</string>
-    
-    <string name="title_remember">Hatırla</string>
-    <string name="title_app_notice">Dikkat!</string>
-    <string name="message_app_notice">Bazı durumlarda, Thanox\'u yükledikten sonra cihazınızın tekrar açılmama ihtimali olabilir.\n\nEğer daha önce \"soft brick\" veya \"bootloop\" terimlerini duymadıysanız ya da bu durumdan nasıl kurtulacağınızı bilmiyorsanız, Thanox\'u <b>YÜKLEMEYİN!</b>\n\nHer durumda, güncel bir yedekleme yapmanız şiddetle önerilir.</string>
-    
+
+    <string name="title_remember">Remember</string>
+    <string name="title_app_notice">Be careful!</string>
+    <string name="message_app_notice">In some cases, your device might no longer boot after installing Thanox.\n\nIf you never heard about \"soft brick\" and \"bootloop\" before or if you don\'t know how to recover from such a situation, do <b>NOT</b> install Thanox!\n\nIn any case, having a recent backup is highly recommended.</string>
+
     <string name="menu_title_feature_desc">Özellik wiki</string>
     <string name="menu_title_start_restrict_charts_reset">Sıfırla</string>
     <string name="menu_title_start_restrict_charts_view_detailed_records">Detaylı kayıtları görüntüle</string>

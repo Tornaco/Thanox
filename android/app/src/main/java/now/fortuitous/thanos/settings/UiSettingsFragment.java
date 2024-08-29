@@ -57,7 +57,7 @@ public class UiSettingsFragment extends BasePreferenceFragmentCompat {
         DropDownPreference themePref = findPreference(getString(R.string.key_app_theme));
         Objects.requireNonNull(themePref).setValue(theme.name());
         themePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            Theme selectedTheme = Theme.valueOf(String.valueOf(newValue));
+            Theme selectedTheme = Theme.fromStringOrElse(String.valueOf(newValue), Theme.Light);
             AppThemePreferences.getInstance().setTheme(Objects.requireNonNull(getContext()), selectedTheme);
             AppThemePreferences.getInstance().setPreferLDTheme(Objects.requireNonNull(getContext()), selectedTheme);
             return true;

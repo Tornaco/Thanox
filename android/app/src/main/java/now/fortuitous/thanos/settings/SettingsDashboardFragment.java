@@ -136,7 +136,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
         DropDownPreference themePref = findPreference(getString(R.string.key_app_theme));
         Objects.requireNonNull(themePref).setValue(theme.name());
         themePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            Theme selectedTheme = Theme.valueOf(String.valueOf(newValue));
+            Theme selectedTheme = Theme.fromStringOrElse(String.valueOf(newValue), Theme.Light);
             AppThemePreferences.getInstance().setTheme(requireContext(), selectedTheme);
             AppThemePreferences.getInstance().setPreferLDTheme(requireContext(), selectedTheme);
             return true;

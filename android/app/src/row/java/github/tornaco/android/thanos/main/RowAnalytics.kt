@@ -4,9 +4,8 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.logEvent
 import com.google.firebase.ktx.Firebase
-import now.fortuitous.thanos.analytics.Analytics
-import now.fortuitous.thanos.analytics.Event
-
+import github.tornaco.android.thanos.core.analytics.Analytics
+import github.tornaco.android.thanos.core.analytics.Event
 
 class RowAnalytics : Analytics {
     private var firebaseAnalytics: FirebaseAnalytics? = null

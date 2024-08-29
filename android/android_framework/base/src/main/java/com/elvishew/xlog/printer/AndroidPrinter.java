@@ -100,7 +100,7 @@ public class AndroidPrinter implements Printer {
      * @param tag      the tag of log
      * @param msg      the msg of log
      */
-    void printChunk(int logLevel, String tag, String msg) {
+    protected void printChunk(int logLevel, String tag, String msg) {
         android.util.Log.println(logLevel, tag, msg);
     }
 }

@@ -1,6 +1,6 @@
-package now.fortuitous.thanos.analytics
+package github.tornaco.android.thanos.core.analytics
 
-import now.fortuitous.thanos.analytics.Event.SelectActiveMethod
+import github.tornaco.android.thanos.core.analytics.Event.SelectActiveMethod
 
 interface Analytics {
     fun reportEvent(event: Event)

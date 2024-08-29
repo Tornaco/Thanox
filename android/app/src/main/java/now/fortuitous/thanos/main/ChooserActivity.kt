@@ -42,8 +42,8 @@ import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCardRoundedCornerShape
 import github.tornaco.android.thanos.util.ActivityUtils
-import now.fortuitous.thanos.analytics.SelectActiveMethodShizuku
-import now.fortuitous.thanos.analytics.SelectActiveMethodXposedOrMagisk
+import github.tornaco.android.thanos.core.analytics.SelectActiveMethodShizuku
+import github.tornaco.android.thanos.core.analytics.SelectActiveMethodXposedOrMagisk
 import now.fortuitous.thanos.pref.AppPreference
 import tornaco.apps.thanox.base.ui.NiaGradientBackground
 import tornaco.apps.thanox.base.ui.theme.ThanosTheme

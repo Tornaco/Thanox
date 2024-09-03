@@ -73,6 +73,14 @@ class ThanosApp : MultipleModulesApp() {
             HiddenApiBypass.addHiddenApiExemptions("")
         }
 
+        // Init Lite ASAP.
+        ThanosLite.init(this)
+        ThanosLite.analytics = Analytics
+        ThanosLite.crashlytics = Crashlytics
+        ThanosLite.installShortcut = { context, app ->
+            ShortcutHelper.addShortcut(context, app)
+        }
+
         Init.init(this)
         AppFeatureManager.launchSubscribeActivity = { launchSubscribeActivity(it) {} }
         Stats.init(this)
@@ -85,13 +93,6 @@ class ThanosApp : MultipleModulesApp() {
                     now.fortuitous.thanos.apps.AppDetailsActivity.start(this@ThanosApp, it)
                 }
             }
-
-        ThanosLite.init(this)
-        ThanosLite.analytics = Analytics
-        ThanosLite.crashlytics = Crashlytics
-        ThanosLite.installShortcut = { context, app ->
-            ShortcutHelper.addShortcut(context, app)
-        }
     }
 
     private fun initLog(context: Context) {

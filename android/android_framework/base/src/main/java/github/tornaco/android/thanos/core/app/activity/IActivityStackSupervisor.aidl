@@ -68,4 +68,7 @@ interface IActivityStackSupervisor {
     void addLaunchOtherAppRule(String rule);
     void deleteLaunchOtherAppRule(String rule);
     String[] getAllLaunchOtherAppRules();
+    void removePkgFromLaunchOtherAppAllowList(in Pkg pkg, in Pkg pkgToRemove);
+    void addPkgToLaunchOtherAppAllowList(in Pkg pkg, in Pkg pkgToAdd);
+    List<Pkg> getLaunchOtherAppAllowListOrNull(in Pkg callerPkg);
 }

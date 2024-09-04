@@ -185,12 +185,16 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
     private void quickSwitch(AppInfo appInfo, int itemIndex) {
         String payload = appInfo.getStr();
         int mode = Integer.parseInt(payload);
-        int finalNewMode = getQuickSwitchMode(mode);
-        ThanosManager.from(thisActivity())
-                .ifServiceInstalled(thanosManager -> thanosManager.getActivityStackSupervisor()
-                        .setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), finalNewMode));
-        appInfo.setStr(String.valueOf(finalNewMode));
-        appListFilterAdapter.notifyItemChanged(itemIndex);
+        if (mode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED) {
+            AllowListActivity.start(this, appInfo);
+        } else {
+            int finalNewMode = getQuickSwitchMode(mode);
+            ThanosManager.from(thisActivity())
+                    .ifServiceInstalled(thanosManager -> thanosManager.getActivityStackSupervisor()
+                            .setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), finalNewMode));
+            appInfo.setStr(String.valueOf(finalNewMode));
+            appListFilterAdapter.notifyItemChanged(itemIndex);
+        }
     }
 
     private static int getQuickSwitchMode(int mode) {

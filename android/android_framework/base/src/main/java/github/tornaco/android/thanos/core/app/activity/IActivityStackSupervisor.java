@@ -147,6 +147,16 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     {
       return null;
     }
+    @Override public void removePkgFromLaunchOtherAppAllowList(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.pm.Pkg pkgToRemove) throws android.os.RemoteException
+    {
+    }
+    @Override public void addPkgToLaunchOtherAppAllowList(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.pm.Pkg pkgToAdd) throws android.os.RemoteException
+    {
+    }
+    @Override public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getLaunchOtherAppAllowListOrNull(github.tornaco.android.thanos.core.pm.Pkg callerPkg) throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -619,6 +629,63 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           java.lang.String[] _result = this.getAllLaunchOtherAppRules();
           reply.writeNoException();
           reply.writeStringArray(_result);
+          return true;
+        }
+        case TRANSACTION_removePkgFromLaunchOtherAppAllowList:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          github.tornaco.android.thanos.core.pm.Pkg _arg1;
+          if ((0!=data.readInt())) {
+            _arg1 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg1 = null;
+          }
+          this.removePkgFromLaunchOtherAppAllowList(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_addPkgToLaunchOtherAppAllowList:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          github.tornaco.android.thanos.core.pm.Pkg _arg1;
+          if ((0!=data.readInt())) {
+            _arg1 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg1 = null;
+          }
+          this.addPkgToLaunchOtherAppAllowList(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getLaunchOtherAppAllowListOrNull:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _result = this.getLaunchOtherAppAllowListOrNull(_arg0);
+          reply.writeNoException();
+          reply.writeTypedList(_result);
           return true;
         }
         default:
@@ -1498,6 +1565,97 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         }
         return _result;
       }
+      @Override public void removePkgFromLaunchOtherAppAllowList(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.pm.Pkg pkgToRemove) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          if ((pkgToRemove!=null)) {
+            _data.writeInt(1);
+            pkgToRemove.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_removePkgFromLaunchOtherAppAllowList, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().removePkgFromLaunchOtherAppAllowList(pkg, pkgToRemove);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void addPkgToLaunchOtherAppAllowList(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.pm.Pkg pkgToAdd) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          if ((pkgToAdd!=null)) {
+            _data.writeInt(1);
+            pkgToAdd.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_addPkgToLaunchOtherAppAllowList, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().addPkgToLaunchOtherAppAllowList(pkg, pkgToAdd);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getLaunchOtherAppAllowListOrNull(github.tornaco.android.thanos.core.pm.Pkg callerPkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((callerPkg!=null)) {
+            _data.writeInt(1);
+            callerPkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getLaunchOtherAppAllowListOrNull, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getLaunchOtherAppAllowListOrNull(callerPkg);
+          }
+          _reply.readException();
+          _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor sDefaultImpl;
     }
     static final int TRANSACTION_checkActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1540,6 +1698,9 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     static final int TRANSACTION_addLaunchOtherAppRule = (android.os.IBinder.FIRST_CALL_TRANSACTION + 37);
     static final int TRANSACTION_deleteLaunchOtherAppRule = (android.os.IBinder.FIRST_CALL_TRANSACTION + 38);
     static final int TRANSACTION_getAllLaunchOtherAppRules = (android.os.IBinder.FIRST_CALL_TRANSACTION + 39);
+    static final int TRANSACTION_removePkgFromLaunchOtherAppAllowList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 40);
+    static final int TRANSACTION_addPkgToLaunchOtherAppAllowList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 41);
+    static final int TRANSACTION_getLaunchOtherAppAllowListOrNull = (android.os.IBinder.FIRST_CALL_TRANSACTION + 42);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1600,4 +1761,7 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public void addLaunchOtherAppRule(java.lang.String rule) throws android.os.RemoteException;
   public void deleteLaunchOtherAppRule(java.lang.String rule) throws android.os.RemoteException;
   public java.lang.String[] getAllLaunchOtherAppRules() throws android.os.RemoteException;
+  public void removePkgFromLaunchOtherAppAllowList(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.pm.Pkg pkgToRemove) throws android.os.RemoteException;
+  public void addPkgToLaunchOtherAppAllowList(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.pm.Pkg pkgToAdd) throws android.os.RemoteException;
+  public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getLaunchOtherAppAllowListOrNull(github.tornaco.android.thanos.core.pm.Pkg callerPkg) throws android.os.RemoteException;
 }

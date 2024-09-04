@@ -46,8 +46,8 @@
 
         <activity
             android:name="now.fortuitous.thanos.process.v2.ProcessManageActivityV2Delegate"
-            android:exported="false"
             android:excludeFromRecents="true"
+            android:exported="false"
             android:launchMode="singleTask"
             android:taskAffinity="ui.shortcut.pm"
             android:theme="@style/AppThemeShortcut" />
@@ -274,6 +274,9 @@
         <activity
             android:name="now.fortuitous.thanos.main.ChooserActivity"
             android:exported="false" />
+        <activity
+            android:name="now.fortuitous.thanos.launchother.AllowListActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="xposedmodule"

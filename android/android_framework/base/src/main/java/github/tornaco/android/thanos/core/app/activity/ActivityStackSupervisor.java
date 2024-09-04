@@ -7,10 +7,8 @@ import java.util.List;
 
 import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
 import github.tornaco.android.thanos.core.pm.Pkg;
-import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
-@AllArgsConstructor
 public class ActivityStackSupervisor {
     public static final class LaunchOtherAppPkgSetting {
         public static final int ALLOW_LISTED = 2;
@@ -19,8 +17,11 @@ public class ActivityStackSupervisor {
         public static final int IGNORE = -1;
     }
 
-
     private final IActivityStackSupervisor supervisor;
+
+    public ActivityStackSupervisor(IActivityStackSupervisor supervisor) {
+        this.supervisor = supervisor;
+    }
 
     @SneakyThrows
     public boolean shouldVerifyActivityStarting(ComponentName componentName, String pkg, String source) {
@@ -190,5 +191,20 @@ public class ActivityStackSupervisor {
     @SneakyThrows
     public String[] getAllLaunchOtherAppRules() throws RemoteException {
         return supervisor.getAllLaunchOtherAppRules();
+    }
+
+    @SneakyThrows
+    public void removePkgFromLaunchOtherAppAllowList(Pkg pkg, Pkg pkgToRemove) {
+        supervisor.removePkgFromLaunchOtherAppAllowList(pkg, pkgToRemove);
+    }
+
+    @SneakyThrows
+    public void addPkgToLaunchOtherAppAllowList(Pkg pkg, Pkg pkgToAdd) {
+        supervisor.addPkgToLaunchOtherAppAllowList(pkg, pkgToAdd);
+    }
+
+    @SneakyThrows
+    public List<Pkg> getLaunchOtherAppAllowListOrNull(Pkg callerPkg) {
+        return supervisor.getLaunchOtherAppAllowListOrNull(callerPkg);
     }
 }

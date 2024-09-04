@@ -18,9 +18,31 @@
     <string name="module_locker_summary_re_verify_on_app_switch">When an already unlocked app goes to the background, the app will be re-locked.</string>
     <string name="module_locker_summary_white_list_components">Activity in Allow list will not be locked</string>
     <string name="module_locker_title_white_list_components">Allowed components</string>
+    <string name="module_locker_title_verify_method">Verify method</string>
+    <string name="module_locker_title_verify_system">Follow System</string>
+    <string name="module_locker_title_verify_custom_pattern">Custom Pattern</string>
+    <string name="module_locker_title_verify_custom_pin">Custom PIN</string>
+    <string name="module_locker_title_verify_custom_pattern_settings">Pattern settings</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_warn">Please remember your password. Once set, the password cannot be recovered.</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_1">Draw pattern</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_2">Draw pattern again</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_mismatch">Two patterns do not match.</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_set_complete">Patterns has been set</string>
 
     <string name="module_locker_biometric_not_set_dialog_title">Set a password</string>
     <string name="module_locker_biometric_not_set_dialog_message">Before enabling the app lock, please go to the system security settings and complete the setup of face recognition, fingerprint, PIN, or pattern password.</string>
+
+    <string-array name="module_locker_verify_method_entries">
+        <item>@string/module_locker_title_verify_system</item>
+        <item>@string/module_locker_title_verify_custom_pattern</item>
+        <item>@string/module_locker_title_verify_custom_pin</item>
+    </string-array>
+
+    <string-array name="module_locker_verify_method_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 
     <string-array name="module_ops2_app_ops_summaries" tools:ignore="InconsistentArrays">
         <item>""</item>

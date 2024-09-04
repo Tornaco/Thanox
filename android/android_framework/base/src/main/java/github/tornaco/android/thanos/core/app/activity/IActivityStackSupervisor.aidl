@@ -71,4 +71,9 @@ interface IActivityStackSupervisor {
     void removePkgFromLaunchOtherAppAllowList(in Pkg pkg, in Pkg pkgToRemove);
     void addPkgToLaunchOtherAppAllowList(in Pkg pkg, in Pkg pkgToAdd);
     List<Pkg> getLaunchOtherAppAllowListOrNull(in Pkg callerPkg);
+
+    int getLockMethod();
+    void setLockMethod(int method);
+    void setLockPattern(String pattern);
+    String getLockPattern();
 }

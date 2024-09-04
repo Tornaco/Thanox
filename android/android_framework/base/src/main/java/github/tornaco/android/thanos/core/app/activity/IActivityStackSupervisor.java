@@ -157,6 +157,20 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     {
       return null;
     }
+    @Override public int getLockMethod() throws android.os.RemoteException
+    {
+      return 0;
+    }
+    @Override public void setLockMethod(int method) throws android.os.RemoteException
+    {
+    }
+    @Override public void setLockPattern(java.lang.String pattern) throws android.os.RemoteException
+    {
+    }
+    @Override public java.lang.String getLockPattern() throws android.os.RemoteException
+    {
+      return null;
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -686,6 +700,40 @@ public interface IActivityStackSupervisor extends android.os.IInterface
           java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _result = this.getLaunchOtherAppAllowListOrNull(_arg0);
           reply.writeNoException();
           reply.writeTypedList(_result);
+          return true;
+        }
+        case TRANSACTION_getLockMethod:
+        {
+          data.enforceInterface(descriptor);
+          int _result = this.getLockMethod();
+          reply.writeNoException();
+          reply.writeInt(_result);
+          return true;
+        }
+        case TRANSACTION_setLockMethod:
+        {
+          data.enforceInterface(descriptor);
+          int _arg0;
+          _arg0 = data.readInt();
+          this.setLockMethod(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_setLockPattern:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _arg0;
+          _arg0 = data.readString();
+          this.setLockPattern(_arg0);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_getLockPattern:
+        {
+          data.enforceInterface(descriptor);
+          java.lang.String _result = this.getLockPattern();
+          reply.writeNoException();
+          reply.writeString(_result);
           return true;
         }
         default:
@@ -1656,6 +1704,84 @@ public interface IActivityStackSupervisor extends android.os.IInterface
         }
         return _result;
       }
+      @Override public int getLockMethod() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        int _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getLockMethod, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getLockMethod();
+          }
+          _reply.readException();
+          _result = _reply.readInt();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setLockMethod(int method) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(method);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setLockMethod, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setLockMethod(method);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public void setLockPattern(java.lang.String pattern) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeString(pattern);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setLockPattern, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setLockPattern(pattern);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public java.lang.String getLockPattern() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        java.lang.String _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getLockPattern, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getLockPattern();
+          }
+          _reply.readException();
+          _result = _reply.readString();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
       public static github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor sDefaultImpl;
     }
     static final int TRANSACTION_checkActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1701,6 +1827,10 @@ public interface IActivityStackSupervisor extends android.os.IInterface
     static final int TRANSACTION_removePkgFromLaunchOtherAppAllowList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 40);
     static final int TRANSACTION_addPkgToLaunchOtherAppAllowList = (android.os.IBinder.FIRST_CALL_TRANSACTION + 41);
     static final int TRANSACTION_getLaunchOtherAppAllowListOrNull = (android.os.IBinder.FIRST_CALL_TRANSACTION + 42);
+    static final int TRANSACTION_getLockMethod = (android.os.IBinder.FIRST_CALL_TRANSACTION + 43);
+    static final int TRANSACTION_setLockMethod = (android.os.IBinder.FIRST_CALL_TRANSACTION + 44);
+    static final int TRANSACTION_setLockPattern = (android.os.IBinder.FIRST_CALL_TRANSACTION + 45);
+    static final int TRANSACTION_getLockPattern = (android.os.IBinder.FIRST_CALL_TRANSACTION + 46);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1764,4 +1894,8 @@ public interface IActivityStackSupervisor extends android.os.IInterface
   public void removePkgFromLaunchOtherAppAllowList(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.pm.Pkg pkgToRemove) throws android.os.RemoteException;
   public void addPkgToLaunchOtherAppAllowList(github.tornaco.android.thanos.core.pm.Pkg pkg, github.tornaco.android.thanos.core.pm.Pkg pkgToAdd) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getLaunchOtherAppAllowListOrNull(github.tornaco.android.thanos.core.pm.Pkg callerPkg) throws android.os.RemoteException;
+  public int getLockMethod() throws android.os.RemoteException;
+  public void setLockMethod(int method) throws android.os.RemoteException;
+  public void setLockPattern(java.lang.String pattern) throws android.os.RemoteException;
+  public java.lang.String getLockPattern() throws android.os.RemoteException;
 }

@@ -17,6 +17,12 @@ public class ActivityStackSupervisor {
         public static final int IGNORE = -1;
     }
 
+    public static final class LockMethod {
+        public static final int SYSTEM = 0;
+        public static final int PATTERN = 1;
+        public static final int PIN = 2;
+    }
+
     private final IActivityStackSupervisor supervisor;
 
     public ActivityStackSupervisor(IActivityStackSupervisor supervisor) {
@@ -206,5 +212,25 @@ public class ActivityStackSupervisor {
     @SneakyThrows
     public List<Pkg> getLaunchOtherAppAllowListOrNull(Pkg callerPkg) {
         return supervisor.getLaunchOtherAppAllowListOrNull(callerPkg);
+    }
+
+    @SneakyThrows
+    public void setLockMethod(int method) {
+        supervisor.setLockMethod(method);
+    }
+
+    @SneakyThrows
+    public void setLockPattern(String pattern) {
+        supervisor.setLockPattern(pattern);
+    }
+
+    @SneakyThrows
+    public String getLockPattern() {
+        return supervisor.getLockPattern();
+    }
+
+    @SneakyThrows
+    public int getLockMethod() {
+        return supervisor.getLockMethod();
     }
 }

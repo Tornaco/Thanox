@@ -1,26 +1,59 @@
 package github.tornaco.practice.honeycomb.locker.ui.verify
 
-import android.os.Bundle
 import androidx.biometric.BiometricPrompt
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor
 import github.tornaco.android.thanos.core.app.activity.VerifyResult
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.util.ConfirmDeviceCredentialUtils
-import github.tornaco.android.thanos.theme.ThemeActivity
+import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 
-class VerifyActivity : ThemeActivity() {
+class VerifyActivity : ComposeThemeActivity() {
     private var requestCode = 0
     private var appInfo: AppInfo? = null
     private var biometricPrompt: BiometricPrompt? = null
 
-    private val thanox get() = ThanosManager.from(thisActivity())
+    private val thanox by lazy { ThanosManager.from(thisActivity()) }
+    private val lockMethod
+        get() = thanox.activityStackSupervisor.lockMethod.also {
+            XLog.d("lockMethod: $it")
+        }
+    private val lockPattern
+        get() = thanox.activityStackSupervisor.lockPattern.also {
+            XLog.d("lockPattern: $it")
+        }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (resolveIntent()) {
-            startVerifyWithBiometrics(appInfo!!)
+    private var misMatchTimes = 0
+
+    private fun canUseLockPattern(): Boolean {
+        return lockMethod == ActivityStackSupervisor.LockMethod.PATTERN && !lockPattern.isNullOrBlank()
+    }
+
+    @Composable
+    override fun Content() {
+        val isValidIntent = remember { resolveIntent() }
+        if (isValidIntent) {
+            if (canUseLockPattern()) {
+                LockPatternContent(appInfo = appInfo!!, onResult = {
+                    if (it == lockPattern) {
+                        verifySuccess()
+                    } else {
+                        if (misMatchTimes > 3) {
+                            verifyFail()
+                        }
+                        misMatchTimes += 1
+                    }
+                })
+            } else {
+                LaunchedEffect(Unit) {
+                    startVerifyWithBiometrics(appInfo!!)
+                }
+            }
         } else {
             XLog.e("VerifyActivity, bad intent.")
             finish()
@@ -33,10 +66,7 @@ class VerifyActivity : ThemeActivity() {
         requestCode =
             intent.getIntExtra(T.Actions.ACTION_LOCKER_VERIFY_EXTRA_REQUEST_CODE, Int.MIN_VALUE)
         appInfo = ThanosManager.from(this).pkgManager.getAppInfo(pkg)
-        if (appInfo == null) {
-            return false
-        }
-        return true
+        return appInfo != null
     }
 
     private fun startVerifyWithBiometrics(appInfo: AppInfo) {
@@ -56,25 +86,33 @@ class VerifyActivity : ThemeActivity() {
         biometricPrompt = authenticateWithBiometric(appInfo) { success: Boolean, message: String ->
             XLog.i("authenticateWithBiometric result: $success $message")
             if (success) {
-                XLog.d("setVerifyResult ALLOW")
-                thanox.activityStackSupervisor.setVerifyResult(
-                    requestCode,
-                    VerifyResult.ALLOW,
-                    VerifyResult.REASON_USER_INPUT_CORRECT
-                )
-                ConfirmDeviceCredentialUtils.checkForPendingIntent(this@VerifyActivity)
-                setResult(RESULT_OK)
-                finish()
+                verifySuccess()
             } else {
-                XLog.d("setVerifyResult DENY")
-                thanox.activityStackSupervisor.setVerifyResult(
-                    requestCode,
-                    VerifyResult.DENY,
-                    VerifyResult.REASON_USER_INPUT_INCORRECT
-                )
-                cancelVerifyAndFinish()
+                verifyFail()
             }
         }
+    }
+
+    private fun verifyFail() {
+        XLog.d("setVerifyResult DENY")
+        thanox.activityStackSupervisor.setVerifyResult(
+            requestCode,
+            VerifyResult.DENY,
+            VerifyResult.REASON_USER_INPUT_INCORRECT
+        )
+        cancelVerifyAndFinish()
+    }
+
+    private fun verifySuccess() {
+        XLog.d("setVerifyResult ALLOW")
+        thanox.activityStackSupervisor.setVerifyResult(
+            requestCode,
+            VerifyResult.ALLOW,
+            VerifyResult.REASON_USER_INPUT_CORRECT
+        )
+        ConfirmDeviceCredentialUtils.checkForPendingIntent(this@VerifyActivity)
+        setResult(RESULT_OK)
+        finish()
     }
 
     @Deprecated("Deprecated in Java")

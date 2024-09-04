@@ -4,4 +4,6 @@
     <string name="module_locker_key_re_verify_on_screen_off" translatable="false">key_re_verify_on_screen_off</string>
     <string name="module_locker_key_re_verify_on_task_removed" translatable="false">key_re_verify_on_task_removed</string>
     <string name="module_locker_key_white_list_components" translatable="false">module_locker_key_white_list_components</string>
+    <string name="module_locker_key_verify_method" translatable="false">module_locker_key_verify_method</string>
+    <string name="module_locker_key_verify_method_custom_pattern" translatable="false">module_locker_key_verify_method_custom_pattern</string>
 </resources>

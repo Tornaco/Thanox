@@ -1,7 +1,9 @@
 package github.tornaco.practice.honeycomb.locker.ui.setup;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 
+import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
@@ -11,6 +13,7 @@ import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.practice.honeycomb.locker.R;
+import github.tornaco.practice.honeycomb.locker.ui.verify.PatternSettingsActivity;
 
 public class SettingsFragment extends BasePreferenceFragmentCompat {
 
@@ -30,10 +33,11 @@ public class SettingsFragment extends BasePreferenceFragmentCompat {
     }
 
     private void bindPreferences() {
+        ThanosManager thanos = ThanosManager.from(getContext());
 
-        SwitchPreferenceCompat reVerifyScreenOff = (SwitchPreferenceCompat) findPreference(getString(R.string.module_locker_key_re_verify_on_screen_off));
-        SwitchPreferenceCompat reVerifyAppSwitch = (SwitchPreferenceCompat) findPreference(getString(R.string.module_locker_key_re_verify_on_app_switch));
-        SwitchPreferenceCompat reVerifyTaskRemoved = (SwitchPreferenceCompat) findPreference(getString(R.string.module_locker_key_re_verify_on_task_removed));
+        SwitchPreferenceCompat reVerifyScreenOff = findPreference(getString(R.string.module_locker_key_re_verify_on_screen_off));
+        SwitchPreferenceCompat reVerifyAppSwitch = findPreference(getString(R.string.module_locker_key_re_verify_on_app_switch));
+        SwitchPreferenceCompat reVerifyTaskRemoved = findPreference(getString(R.string.module_locker_key_re_verify_on_task_removed));
 
         ActivityStackSupervisor supervisor = ThanosManager.from(getContext()).getActivityStackSupervisor();
 
@@ -59,5 +63,26 @@ public class SettingsFragment extends BasePreferenceFragmentCompat {
             WhiteListComponentViewerActivity.Starter.INSTANCE.start(requireActivity());
             return true;
         });
+
+        Preference patternSettingsPref = findPreference(getString(R.string.module_locker_key_verify_method_custom_pattern));
+        if (TextUtils.isEmpty(thanos.getActivityStackSupervisor().getLockPattern())) {
+            patternSettingsPref.setSummary(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
+        } else {
+            patternSettingsPref.setSummary("******");
+        }
+        patternSettingsPref.setOnPreferenceClickListener(preference -> {
+            PatternSettingsActivity.start(requireContext());
+            return true;
+        });
+
+        DropDownPreference methodPref = findPreference(getString(R.string.module_locker_key_verify_method));
+        int currentMethod = thanos.getActivityStackSupervisor().getLockMethod();
+        methodPref.setValue(String.valueOf(currentMethod));
+        methodPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            int method = Integer.parseInt(String.valueOf(newValue));
+            thanos.getActivityStackSupervisor().setLockMethod(method);
+            return true;
+        });
+
     }
 }

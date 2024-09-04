@@ -27,6 +27,9 @@
         <activity
             android:name=".ui.setup.WhiteListComponentViewerActivity"
             android:excludeFromRecents="false" />
+        <activity
+            android:name="github.tornaco.practice.honeycomb.locker.ui.verify.PatternSettingsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

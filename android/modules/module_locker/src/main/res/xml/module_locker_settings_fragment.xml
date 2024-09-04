@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/module_locker_title_settings">
+        <DropDownPreference
+            android:entries="@array/module_locker_verify_method_entries"
+            android:entryValues="@array/module_locker_verify_method_values"
+            app:key="@string/module_locker_key_verify_method"
+            app:persistent="false"
+            app:title="@string/module_locker_title_verify_method"
+            app:useSimpleSummaryProvider="true" />
+        <Preference
+            app:key="@string/module_locker_key_verify_method_custom_pattern"
+            app:persistent="false"
+            app:title="@string/module_locker_title_verify_custom_pattern_settings" />
         <SwitchPreferenceCompat
             app:key="@string/module_locker_key_re_verify_on_screen_off"
             app:persistent="false"

@@ -86,6 +86,23 @@
             app:title="@string/feature_title_enable_package_on_launch" />
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/launch_other_app">
+        <DropDownPreference
+            android:entries="@array/launch_other_app_options"
+            android:entryValues="@array/launch_other_app_options_values"
+            app:key="@string/key_launch_other_app"
+            app:persistent="false"
+            app:title="@string/launch_other_app"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            app:isPreferenceVisible="false"
+            app:key="@string/key_launch_other_app_allow_list_settings"
+            app:persistent="false"
+            app:summary="@string/launch_other_app"
+            app:title="@string/launch_other_app_options_allow_listed" />
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/feature_category_privacy">
 
         <SwitchPreferenceCompat
@@ -177,14 +194,5 @@
             app:key="@string/key_app_feature_config_resident"
             app:summary="@string/pre_summary_resident"
             app:title="@string/pre_title_resident" />
-
-        <DropDownPreference
-            android:entries="@array/launch_other_app_options"
-            android:entryValues="@array/launch_other_app_options_values"
-            app:key="@string/key_launch_other_app"
-            app:persistent="false"
-            app:title="@string/launch_other_app"
-            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
-
 </PreferenceScreen>

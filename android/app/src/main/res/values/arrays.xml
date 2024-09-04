@@ -46,12 +46,14 @@
         <item>@string/launch_other_app_options_allow</item>
         <item>@string/launch_other_app_options_ask</item>
         <item>@string/launch_other_app_options_ignore</item>
+        <item>@string/launch_other_app_options_allow_listed</item>
     </string-array>
 
     <string-array name="launch_other_app_options_values">
         <item>0</item>
         <item>1</item>
         <item>-1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="recent_task_exclude_entry_default_include_exclude">

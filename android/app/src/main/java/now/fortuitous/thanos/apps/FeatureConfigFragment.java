@@ -47,6 +47,7 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
@@ -64,6 +65,7 @@ import github.tornaco.thanos.module.component.manager.ProviderListActivity;
 import github.tornaco.thanos.module.component.manager.ReceiverListActivity;
 import github.tornaco.thanos.module.component.manager.ServiceListActivity;
 import now.fortuitous.thanos.XposedScope;
+import now.fortuitous.thanos.launchother.AllowListActivity;
 import now.fortuitous.thanos.pref.AppPreference;
 
 public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
@@ -324,8 +326,9 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
     private void bindLaunchOtherAppPref() {
         ThanosManager thanos = ThanosManager.from(getContext());
         DropDownPreference pref = findPreference(getString(R.string.key_launch_other_app));
-
+        Preference allowListPref = findPreference(getString(R.string.key_launch_other_app_allow_list_settings));
         int currentMode = thanos.getActivityStackSupervisor().getLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo));
+        allowListPref.setVisible(currentMode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED);
 
         pref.setEnabled(thanos.getActivityStackSupervisor().isLaunchOtherAppBlockerEnabled());
         pref.setValue(String.valueOf(currentMode));
@@ -334,11 +337,17 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 if (isSubscribed) {
                     int mode = Integer.parseInt(String.valueOf(newValue));
                     thanos.getActivityStackSupervisor().setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), mode);
+                    allowListPref.setVisible(mode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED);
                 } else {
                     AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                 }
                 return null;
             });
+            return true;
+        });
+
+        allowListPref.setOnPreferenceClickListener(preference -> {
+            AllowListActivity.start(requireContext(), appInfo);
             return true;
         });
     }

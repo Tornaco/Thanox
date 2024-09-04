@@ -185,6 +185,7 @@
 
     <string name="key_recent_task_exclude_settings" translatable="false">key_recent_task_exclude_settings</string>
     <string name="key_launch_other_app" translatable="false">key_launch_other_app</string>
+    <string name="key_launch_other_app_allow_list_settings" translatable="false">key_launch_other_app_allow_list_settings</string>
 
     <string name="key_app_feature_config_app_info_detailed" translatable="false">key_app_feature_config_app_info_detailed</string>
 

@@ -46,7 +46,7 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
 
     @Override
     protected String getTitleString() {
-        return getString(github.tornaco.android.thanos.R.string.launch_other_app);
+        return getString(R.string.launch_other_app);
     }
 
     @NonNull
@@ -58,9 +58,11 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
     @SuppressLint("NotifyDataSetChanged")
     private void showModeSelectionDialog(AppInfo appInfo) {
         String[] items = Lists.newArrayList(
-                        getString(github.tornaco.android.thanos.R.string.launch_other_app_options_allow),
-                        getString(github.tornaco.android.thanos.R.string.launch_other_app_options_ask),
-                        getString(github.tornaco.android.thanos.R.string.launch_other_app_options_ignore))
+                        getString(R.string.launch_other_app_options_allow),
+                        getString(R.string.launch_other_app_options_ask),
+                        getString(R.string.launch_other_app_options_ignore),
+                        getString(R.string.launch_other_app_options_allow_listed)
+                )
                 .toArray(new String[0]);
         int currentMode = Integer.parseInt(appInfo.getStr());
         int currentSelection = 0;
@@ -70,27 +72,37 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
         if (currentMode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE) {
             currentSelection = 2;
         }
+        if (currentMode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED) {
+            currentSelection = 3;
+        }
         new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(appInfo.getAppLabel())
                 .setSingleChoiceItems(items, currentSelection, (dialog, which) -> {
                     dialog.dismiss();
-                    int newMode = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW;
-                    if (which == 1) {
-                        newMode = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ASK;
-                    }
-                    if (which == 2) {
-                        newMode = ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE;
-                    }
-                    int finalNewMode = newMode;
+                    int newMode = getNewModeFromDialogWhich(which);
                     ThanosManager.from(getApplicationContext())
                             .ifServiceInstalled(thanosManager -> thanosManager.getActivityStackSupervisor()
-                                    .setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), finalNewMode));
+                                    .setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), newMode));
 
                     appInfo.setStr(String.valueOf(newMode));
                     appListFilterAdapter.notifyDataSetChanged();
                 })
                 .setCancelable(true)
                 .show();
+    }
+
+    private static int getNewModeFromDialogWhich(int which) {
+        int newMode = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW;
+        if (which == 1) {
+            newMode = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ASK;
+        }
+        if (which == 2) {
+            newMode = ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE;
+        }
+        if (which == 3) {
+            newMode = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED;
+        }
+        return newMode;
     }
 
     @Override
@@ -108,6 +120,9 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
                 }
                 if (mode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE) {
                     return github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_forbid_2_fill_red;
+                }
+                if (mode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED) {
+                    return github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_checkbox_circle_fill_light_green;
                 }
                 return 0;
             }
@@ -127,9 +142,9 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
     @SuppressLint("RestrictedApi")
     protected void onSetupCustomFilter(Chip filterAnchor) {
         List<String> menuItemList = new ArrayList<>();
-        menuItemList.add(getString(github.tornaco.android.thanos.R.string.launch_other_app_options_allow));
-        menuItemList.add(getString(github.tornaco.android.thanos.R.string.launch_other_app_options_ask));
-        menuItemList.add(getString(github.tornaco.android.thanos.R.string.launch_other_app_options_ignore));
+        menuItemList.add(getString(R.string.launch_other_app_options_allow));
+        menuItemList.add(getString(R.string.launch_other_app_options_ask));
+        menuItemList.add(getString(R.string.launch_other_app_options_ignore));
         menuItemList.add(getString(github.tornaco.thanos.android.ops.R.string.module_ops_mode_all));
 
         currentModeFilter = getString(github.tornaco.thanos.android.ops.R.string.module_ops_mode_all);
@@ -212,19 +227,19 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
 
             if (currentModeFilter == null || currentModeFilter.equals(getString(github.tornaco.thanos.android.ops.R.string.module_ops_mode_all))) {
                 return res;
-            } else if (currentModeFilter.equals(getString(github.tornaco.android.thanos.R.string.launch_other_app_options_allow))) {
+            } else if (currentModeFilter.equals(getString(R.string.launch_other_app_options_allow))) {
                 return res.stream().filter(model -> {
                     String payload = model.appInfo.getStr();
                     int mode = Integer.parseInt(payload);
                     return mode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW;
                 }).collect(Collectors.toList());
-            } else if (currentModeFilter.equals(getString(github.tornaco.android.thanos.R.string.launch_other_app_options_ignore))) {
+            } else if (currentModeFilter.equals(getString(R.string.launch_other_app_options_ignore))) {
                 return res.stream().filter(model -> {
                     String payload = model.appInfo.getStr();
                     int mode = Integer.parseInt(payload);
                     return mode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE;
                 }).collect(Collectors.toList());
-            } else if (currentModeFilter.equals(getString(github.tornaco.android.thanos.R.string.launch_other_app_options_ask))) {
+            } else if (currentModeFilter.equals(getString(R.string.launch_other_app_options_ask))) {
                 return res.stream().filter(model -> {
                     String payload = model.appInfo.getStr();
                     int mode = Integer.parseInt(payload);
@@ -238,26 +253,26 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
 
     @Override
     protected void onInflateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(github.tornaco.android.thanos.R.menu.module_launch_other_app_list, menu);
+        getMenuInflater().inflate(R.menu.module_launch_other_app_list, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (github.tornaco.android.thanos.R.id.action_select_all_allow == item.getItemId()) {
+        if (R.id.action_select_all_allow == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
                     .setTitle(github.tornaco.thanos.android.ops.R.string.module_ops_mode_allow_all)
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW)).show();
             return true;
         }
-        if (github.tornaco.android.thanos.R.id.action_select_all_ask == item.getItemId()) {
+        if (R.id.action_select_all_ask == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
                     .setTitle(github.tornaco.thanos.android.ops.R.string.module_ops_mode_ask_all)
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(ActivityStackSupervisor.LaunchOtherAppPkgSetting.ASK)).show();
             return true;
         }
-        if (github.tornaco.android.thanos.R.id.action_un_select_all_ignore == item.getItemId()) {
+        if (R.id.action_un_select_all_ignore == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
                     .setTitle(github.tornaco.thanos.android.ops.R.string.module_ops_mode_ignore)
                     .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)

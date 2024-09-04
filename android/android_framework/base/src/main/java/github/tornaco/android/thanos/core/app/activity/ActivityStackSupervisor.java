@@ -13,6 +13,7 @@ import lombok.SneakyThrows;
 @AllArgsConstructor
 public class ActivityStackSupervisor {
     public static final class LaunchOtherAppPkgSetting {
+        public static final int ALLOW_LISTED = 2;
         public static final int ALLOW = 0;
         public static final int ASK = 1;
         public static final int IGNORE = -1;
@@ -25,7 +26,6 @@ public class ActivityStackSupervisor {
     public boolean shouldVerifyActivityStarting(ComponentName componentName, String pkg, String source) {
         return supervisor.shouldVerifyActivityStarting(componentName, pkg, source);
     }
-
 
     @SneakyThrows
     public String getCurrentFrontApp() {

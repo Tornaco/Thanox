@@ -368,6 +368,7 @@
     <string name="launch_other_app_options_allow">Allow</string>
     <string name="launch_other_app_options_ask">Ask</string>
     <string name="launch_other_app_options_ignore">Ignore</string>
+    <string name="launch_other_app_options_allow_listed">Allow listed</string>
     <string name="launch_other_app">Launch other App</string>
 
     <string name="start_record_allowed">Allowed</string>

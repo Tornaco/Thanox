@@ -20,11 +20,11 @@ package github.tornaco.android.thanos.main
 import android.app.Activity
 import android.content.Context
 import now.fortuitous.app.PLayLvlCheckActivity
-import now.fortuitous.app.donate.DonateSettings
+import now.fortuitous.app.donate.DonateSettingsKt
 
 inline fun blockOnCreate(activity: Activity, noop: () -> Unit = {}): Boolean {
     noop()
-    return if (!DonateSettings.isActivated(activity)) {
+    return if (!DonateSettingsKt.isActivated(activity)) {
         PLayLvlCheckActivity.Starter.start(activity)
         true
     } else false

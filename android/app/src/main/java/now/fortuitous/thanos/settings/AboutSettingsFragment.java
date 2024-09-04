@@ -40,7 +40,7 @@ import github.tornaco.android.thanos.main.NavActivityPluginKt;
 import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
-import now.fortuitous.app.donate.DonateSettings;
+import now.fortuitous.app.donate.DonateSettingsKt;
 
 @RuntimePermissions
 public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
@@ -117,7 +117,7 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
                     return true;
                 });
 
-        if (DonateSettings.isActivated(getContext())) {
+        if (DonateSettingsKt.INSTANCE.isActivated(getContext(), () -> null)) {
             donatePref.setSummary(github.tornaco.android.thanos.app.donate.R.string.module_donate_donated);
         }
 

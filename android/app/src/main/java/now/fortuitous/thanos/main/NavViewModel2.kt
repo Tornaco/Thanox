@@ -30,7 +30,6 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.BuildProp
-import now.fortuitous.app.donate.DonateSettings
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.util.OsUtils
@@ -42,6 +41,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import now.fortuitous.app.donate.DonateSettingsRegistry
 import now.fortuitous.thanos.dashboard.CpuUsage
 import now.fortuitous.thanos.dashboard.MemType
 import now.fortuitous.thanos.dashboard.MemUsage
@@ -326,12 +326,12 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     }
 
     private fun registerReceivers() {
-        DonateSettings.getRegistry().addObserver(donateObs)
+        DonateSettingsRegistry.addObserver(donateObs)
     }
 
     override fun onCleared() {
         super.onCleared()
-        DonateSettings.getRegistry().deleteObserver(donateObs)
+        DonateSettingsRegistry.deleteObserver(donateObs)
     }
 
     fun rebootDevice() {

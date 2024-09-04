@@ -8,11 +8,10 @@ import github.tornaco.android.thanos.core.analytics.Analytics
 import github.tornaco.android.thanos.core.analytics.Event
 
 class RowAnalytics : Analytics {
-    private var firebaseAnalytics: FirebaseAnalytics? = null
-
-    init {
-        // Obtain the FirebaseAnalytics instance.
-        firebaseAnalytics = Firebase.analytics
+    private val firebaseAnalytics: FirebaseAnalytics? by lazy {
+        runCatching {
+            Firebase.analytics
+        }.getOrNull()
     }
 
     override fun reportEvent(event: Event) {

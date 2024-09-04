@@ -86,7 +86,7 @@ import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
-import now.fortuitous.app.donate.DonateSettings;
+import now.fortuitous.app.donate.DonateSettingsKt;
 import now.fortuitous.thanos.apps.AppDetailsActivity;
 import now.fortuitous.thanos.pref.AppPreference;
 import now.fortuitous.thanos.settings.access.SettingsAccessRecordViewerActivity;
@@ -806,7 +806,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                     return true;
                 });
 
-        if (DonateSettings.isActivated(getContext())) {
+        if (DonateSettingsKt.INSTANCE.isActivated(requireContext(), () -> null)) {
             donatePref.setSummary(github.tornaco.android.thanos.app.donate.R.string.module_donate_donated);
         }
 

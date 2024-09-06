@@ -88,6 +88,7 @@ import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
 import now.fortuitous.app.donate.DonateSettingsKt;
 import now.fortuitous.thanos.apps.AppDetailsActivity;
+import now.fortuitous.thanos.main.ChooserActivity;
 import now.fortuitous.thanos.pref.AppPreference;
 import now.fortuitous.thanos.settings.access.SettingsAccessRecordViewerActivity;
 import rx2.android.schedulers.AndroidSchedulers;
@@ -793,7 +794,8 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                     buildInfoClickTimes += 1;
                     if (buildInfoClickTimes >= 10) {
                         buildInfoClickTimes = 0;
-                        showBuildProp();
+                        // showBuildProp();
+                        ChooserActivity.Starter.start(requireContext());
                     }
                     return false;
                 });

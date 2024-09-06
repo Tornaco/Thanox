@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
@@ -66,6 +67,16 @@ class NavActivity : ComposeThemeActivity() {
             return
         }
 
+        @Suppress("KotlinConstantConditions")
+        if (BuildProp.THANOS_BUILD_FLAVOR == "row") {
+            RowNav()
+        } else {
+            PRCNav()
+        }
+    }
+
+    @Composable
+    private fun RowNav() {
         val sx = AppPreference.getAppType(thisActivity())
         when (sx) {
             "thanox" -> {
@@ -79,6 +90,20 @@ class NavActivity : ComposeThemeActivity() {
             else -> {
                 ChooserActivity.Starter.start(thisActivity())
                 finish()
+            }
+        }
+    }
+
+    @Composable
+    private fun PRCNav() {
+        val sx = AppPreference.getAppType(thisActivity())
+        when (sx) {
+            "thanos" -> {
+                Thanos()
+            }
+
+            else -> {
+                Thanox()
             }
         }
     }

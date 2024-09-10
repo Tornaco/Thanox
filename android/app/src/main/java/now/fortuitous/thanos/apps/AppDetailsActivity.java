@@ -51,7 +51,6 @@ import java.util.List;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.R;
-import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
@@ -61,7 +60,8 @@ import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.databinding.ActivityAppDetailsBinding;
-import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.support.AppFeatureManager;
+import github.tornaco.android.thanos.support.ContextExtKt;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
@@ -192,47 +192,50 @@ public class AppDetailsActivity extends BaseTrustedActivity {
     }
 
     private void requestApplyTemplateSelection() {
-        ThanosManager thanos = ThanosManager.from(thisActivity());
-        ProfileManager profileManager = thanos.getProfileManager();
-        List<String> entries = new ArrayList<>();
-        List<String> values = new ArrayList<>();
+        ContextExtKt.withThanos(getApplicationContext(), thanos -> {
+            ProfileManager profileManager = thanos.getProfileManager();
+            List<String> entries = new ArrayList<>();
+            List<String> values = new ArrayList<>();
 
-        List<ConfigTemplate> allConfigTemplates = profileManager.getAllConfigTemplates();
+            List<ConfigTemplate> allConfigTemplates = profileManager.getAllConfigTemplates();
 
-        if (allConfigTemplates.isEmpty()) {
-            Toast.makeText(thisActivity(), R.string.pref_action_create_new_config_template, Toast.LENGTH_LONG).show();
-            StrategySettingsActivity.start(thisActivity());
-            return;
-        }
+            if (allConfigTemplates.isEmpty()) {
+                Toast.makeText(thisActivity(), R.string.pref_action_create_new_config_template, Toast.LENGTH_LONG).show();
+                StrategySettingsActivity.start(thisActivity());
+                return null;
+            }
 
-        for (int i = 0; i < allConfigTemplates.size(); i++) {
-            ConfigTemplate template = allConfigTemplates.get(i);
-            entries.add(template.getTitle());
-            values.add(template.getId());
-        }
+            for (int i = 0; i < allConfigTemplates.size(); i++) {
+                ConfigTemplate template = allConfigTemplates.get(i);
+                entries.add(template.getTitle());
+                values.add(template.getId());
+            }
 
-        new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.pref_action_apply_config_template)
-                .setItems(entries.toArray(new String[0]),
-                        (dialog, which) -> {
-                            dialog.dismiss();
+            new MaterialAlertDialogBuilder(thisActivity())
+                    .setTitle(R.string.pref_action_apply_config_template)
+                    .setItems(entries.toArray(new String[0]),
+                            (dialog, which) -> {
+                                dialog.dismiss();
 
-                            ConfigTemplate selectedTemplate = profileManager.getConfigTemplateById(values.get(which));
+                                ConfigTemplate selectedTemplate = profileManager.getConfigTemplateById(values.get(which));
 
-                            if (selectedTemplate == null) {
-                                ToastUtils.nook(getApplicationContext());
-                                return;
-                            }
+                                if (selectedTemplate == null) {
+                                    ToastUtils.nook(getApplicationContext());
+                                    return;
+                                }
 
-                            Toast.makeText(thisActivity(), selectedTemplate.getTitle(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(thisActivity(), selectedTemplate.getTitle(), Toast.LENGTH_SHORT).show();
 
-                            if (profileManager.applyConfigTemplateForPackage(Pkg.fromAppInfo(appInfo), selectedTemplate)) {
-                                ToastUtils.ok(getApplicationContext());
-                                reAddFragment();
-                            } else {
-                                ToastUtils.nook(getApplicationContext());
-                            }
-                        }).show();
+                                if (profileManager.applyConfigTemplateForPackage(Pkg.fromAppInfo(appInfo), selectedTemplate)) {
+                                    ToastUtils.ok(getApplicationContext());
+                                    reAddFragment();
+                                } else {
+                                    ToastUtils.nook(getApplicationContext());
+                                }
+                            }).show();
+
+            return null;
+        });
     }
 
     // ----------------------- BACK UP START ---------------------

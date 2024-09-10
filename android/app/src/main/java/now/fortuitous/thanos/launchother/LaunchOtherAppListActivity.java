@@ -32,6 +32,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
+import github.tornaco.android.thanos.support.ContextExtKt;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import util.CollectionUtils;
 
@@ -80,9 +81,10 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
                 .setSingleChoiceItems(items, currentSelection, (dialog, which) -> {
                     dialog.dismiss();
                     int newMode = getNewModeFromDialogWhich(which);
-                    ThanosManager.from(getApplicationContext())
-                            .ifServiceInstalled(thanosManager -> thanosManager.getActivityStackSupervisor()
-                                    .setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), newMode));
+                    ContextExtKt.withThanos(thisActivity(), thanosManager -> {
+                        thanosManager.getActivityStackSupervisor().setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), newMode);
+                        return null;
+                    });
 
                     appInfo.setStr(String.valueOf(newMode));
                     appListFilterAdapter.notifyDataSetChanged();

@@ -38,7 +38,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.secure.PrivacyManager;
 import github.tornaco.android.thanos.core.secure.field.Fields;
-import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;

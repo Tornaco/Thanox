@@ -20,8 +20,8 @@ package now.fortuitous.thanos.process.v2
 
 import android.app.Activity
 import android.os.Bundle
-import github.tornaco.android.thanos.feature.access.AppFeatureManager
-import github.tornaco.android.thanos.feature.access.AppFeatureManager.withSubscriptionStatus
+import github.tornaco.android.thanos.support.AppFeatureManager
+import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 
 class ProcessManageActivityV2Delegate : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {

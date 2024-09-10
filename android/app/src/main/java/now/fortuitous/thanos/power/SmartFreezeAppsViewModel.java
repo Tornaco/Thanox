@@ -56,7 +56,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 import github.tornaco.android.thanos.common.AppLabelSearchFilter;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.sort.AppSort;
@@ -67,6 +66,7 @@ import github.tornaco.android.thanos.core.pm.PackageSet;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.core.util.Rxs;
+import github.tornaco.android.thanos.support.ContextExtKt;
 import github.tornaco.android.thanos.util.InstallerUtils;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -76,6 +76,7 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import kotlin.jvm.functions.Function1;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
 import util.Consumer;
@@ -148,46 +149,43 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     }
 
     private List<AppListModel> getSmartFreezeApps() {
-        ThanosManager thanosManager = ThanosManager.from(getApplication());
-        if (!thanosManager.isServiceInstalled()) {
-            return new ArrayList<>(0);
-        }
-        PackageSet packageSet = pkgSetId == null ? null : thanosManager.getPkgManager().getPackageSetById(pkgSetId, true, false);
-        List<AppListModel> res = new ArrayList<>();
-        for (Pkg pkg : thanosManager.getPkgManager().getSmartFreezePkgs()) {
-            XLog.v("getSmartFreezeApps pkg: " + pkg);
-            AppInfo appInfo = thanosManager.getPkgManager().getAppInfoForUser(pkg.getPkgName(), pkg.getUserId());
-            if (appInfo != null && (packageSet == null || packageSet.getPkgList().contains(pkg))) {
-                XLog.v("getSmartFreezeApps app: %s, enabled: %s", appInfo.getPkgName(), !appInfo.disabled());
-                AppListModel model = new AppListModel(appInfo);
-                res.add(model);
-            }
-        }
-
-        AppSort sort = currentSort.get();
-        if (sort != null) {
-            // inflate usage stats if necessary.
-            if (sort.relyOnUsageStats()) {
-                inflateAppUsageStats(res);
-            }
-
-            AppSort.AppSorterProvider appSorterProvider = sort.provider;
-            if (appSorterProvider != null) {
-                res.sort(appSorterProvider.comparator(getApplication()));
-                if (sortReverse.get()) {
-                    Collections.reverse(res);
+        return ContextExtKt.withThanos(getApplication(), thanosManager -> {
+            PackageSet packageSet = pkgSetId == null ? null : thanosManager.getPkgManager().getPackageSetById(pkgSetId, true, false);
+            List<AppListModel> res = new ArrayList<>();
+            for (Pkg pkg : thanosManager.getPkgManager().getSmartFreezePkgs()) {
+                XLog.v("getSmartFreezeApps pkg: " + pkg);
+                AppInfo appInfo = thanosManager.getPkgManager().getAppInfoForUser(pkg.getPkgName(), pkg.getUserId());
+                if (appInfo != null && (packageSet == null || packageSet.getPkgList().contains(pkg))) {
+                    XLog.v("getSmartFreezeApps app: %s, enabled: %s", appInfo.getPkgName(), !appInfo.disabled());
+                    AppListModel model = new AppListModel(appInfo);
+                    res.add(model);
                 }
             }
-        }
 
-        return res;
+            AppSort sort = currentSort.get();
+            if (sort != null) {
+                // inflate usage stats if necessary.
+                if (sort.relyOnUsageStats()) {
+                    inflateAppUsageStats(res);
+                }
+
+                AppSort.AppSorterProvider appSorterProvider = sort.provider;
+                if (appSorterProvider != null) {
+                    res.sort(appSorterProvider.comparator(getApplication()));
+                    if (sortReverse.get()) {
+                        Collections.reverse(res);
+                    }
+                }
+            }
+
+            return res;
+        }, new ArrayList<>(0));
     }
 
     private void inflateAppUsageStats(List<AppListModel> res) {
         XLog.d("inflateAppUsageStats");
-        ThanosManager thanox = ThanosManager.from(getApplication());
-        if (thanox.isServiceInstalled()) {
-            Map<String, UsageStats> statsMap = thanox.getUsageStatsManager().queryAndAggregateUsageStats(0, System.currentTimeMillis());
+        ContextExtKt.withThanos(getApplication(), thanosManager -> {
+            Map<String, UsageStats> statsMap = thanosManager.getUsageStatsManager().queryAndAggregateUsageStats(0, System.currentTimeMillis());
             for (AppListModel app : res) {
                 if (statsMap.containsKey(app.appInfo.getPkgName())) {
                     UsageStats stats = statsMap.get(app.appInfo.getPkgName());
@@ -197,7 +195,8 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                     }
                 }
             }
-        }
+            return null;
+        });
     }
 
     void createShortcutStubApkForAsync(AppInfo appInfo, String appLabel, String versionName, int versionCode, Consumer<File> onApkFileReady) {
@@ -205,9 +204,7 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
                         emitter.onSuccess(ShortcutHelper.createShortcutStubApkFor(getApplication(), appInfo, appLabel, versionName, versionCode)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(file -> {
-                    onApkFileReady.accept(file);
-                }, throwable -> {
+                .subscribe(onApkFileReady::accept, throwable -> {
                     XLog.e("createShortcutStubApkForAsync error", throwable);
                     Toast.makeText(getApplication(), throwable.getMessage(), Toast.LENGTH_LONG).show();
                 }));
@@ -254,70 +251,64 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     }
 
     public void onRequestEnableAllApps(Consumer<AppInfo> onProgress, Consumer<Boolean> onComplete) {
-        ThanosManager thanosManager = ThanosManager.from(getApplication());
-        if (!thanosManager.isServiceInstalled()) {
-            onComplete.accept(false);
-            return;
-        }
-        disposables.add(Completable.fromRunnable(() -> CollectionUtils.consumeRemaining(thanosManager.getPkgManager().getInstalledPkgs(AppInfo.FLAGS_ALL), appInfo -> {
-            boolean enabled = thanosManager.getPkgManager().getApplicationEnableState(Pkg.fromAppInfo(appInfo));
-            if (!enabled) {
-                onProgress.accept(appInfo);
-                thanosManager.getPkgManager().setApplicationEnableState(Pkg.fromAppInfo(appInfo), true, false);
-                // Give system a rest
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException ignored) {
+        ContextExtKt.withThanos(getApplication(), thanosManager -> {
+            disposables.add(Completable.fromRunnable(() -> CollectionUtils.consumeRemaining(thanosManager.getPkgManager().getInstalledPkgs(AppInfo.FLAGS_ALL), appInfo -> {
+                boolean enabled = thanosManager.getPkgManager().getApplicationEnableState(Pkg.fromAppInfo(appInfo));
+                if (!enabled) {
+                    onProgress.accept(appInfo);
+                    thanosManager.getPkgManager().setApplicationEnableState(Pkg.fromAppInfo(appInfo), true, false);
+                    // Give system a rest
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException ignored) {
+                    }
                 }
-            }
-        })).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(() -> onComplete.accept(true)));
+            })).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(() -> onComplete.accept(true)));
+            return null;
+        });
     }
 
     public void enableAllThanoxDisabledPackages(boolean alsoDisableSmartFreezeForPkgs, Consumer<AppInfo> onProgress, Consumer<Boolean> onComplete) {
-        ThanosManager thanosManager = ThanosManager.from(getApplication());
-        if (!thanosManager.isServiceInstalled()) {
-            onComplete.accept(false);
-            return;
-        }
-        disposables.add(Completable.fromRunnable(() -> CollectionUtils.consumeRemaining(listModels, listModel -> {
-            AppInfo appInfo = listModel.appInfo;
-            boolean enabled = thanosManager.getPkgManager().getApplicationEnableState(Pkg.fromAppInfo(appInfo));
-            if (!enabled) {
-                onProgress.accept(appInfo);
-                thanosManager.getPkgManager().setApplicationEnableState(Pkg.fromAppInfo(appInfo), true, false);
-                if (alsoDisableSmartFreezeForPkgs) {
-                    thanosManager.getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), false);
+        ContextExtKt.withThanos(getApplication(), thanosManager -> {
+            disposables.add(Completable.fromRunnable(() -> CollectionUtils.consumeRemaining(listModels, listModel -> {
+                AppInfo appInfo = listModel.appInfo;
+                boolean enabled = thanosManager.getPkgManager().getApplicationEnableState(Pkg.fromAppInfo(appInfo));
+                if (!enabled) {
+                    onProgress.accept(appInfo);
+                    thanosManager.getPkgManager().setApplicationEnableState(Pkg.fromAppInfo(appInfo), true, false);
+                    if (alsoDisableSmartFreezeForPkgs) {
+                        thanosManager.getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), false);
+                    }
+                    // Give system a rest
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException ignored) {
+                    }
                 }
-                // Give system a rest
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException ignored) {
-                }
-            }
-        })).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(() -> onComplete.accept(true)));
+            })).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(() -> onComplete.accept(true)));
+            return null;
+        });
     }
 
     public void addToSmartFreezeList(List<AppInfo> appInfos, boolean alsoAddToPkgSet, Consumer<AppInfo> onProgress, Consumer<Boolean> onComplete) {
-        ThanosManager thanosManager = ThanosManager.from(getApplication());
-        if (!thanosManager.isServiceInstalled()) {
-            onComplete.accept(false);
-            return;
-        }
-        disposables.add(Completable.fromRunnable(() -> {
-            PackageSet packageSet = pkgSetId == null ? null : thanosManager.getPkgManager().getPackageSetById(pkgSetId, false, true);
-            CollectionUtils.consumeRemaining(appInfos, appInfo -> {
-                onProgress.accept(appInfo);
-                thanosManager.getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), true);
-                if (alsoAddToPkgSet && packageSet != null && !packageSet.isPrebuilt()) {
-                    thanosManager.getPkgManager().addToPackageSet(Pkg.fromAppInfo(appInfo), pkgSetId);
-                }
-                // Give system a rest
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException ignored) {
-                }
-            });
-        }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(() -> onComplete.accept(true)));
+        ContextExtKt.withThanos(getApplication(), thanosManager -> {
+            disposables.add(Completable.fromRunnable(() -> {
+                PackageSet packageSet = pkgSetId == null ? null : thanosManager.getPkgManager().getPackageSetById(pkgSetId, false, true);
+                CollectionUtils.consumeRemaining(appInfos, appInfo -> {
+                    onProgress.accept(appInfo);
+                    thanosManager.getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), true);
+                    if (alsoAddToPkgSet && packageSet != null && !packageSet.isPrebuilt()) {
+                        thanosManager.getPkgManager().addToPackageSet(Pkg.fromAppInfo(appInfo), pkgSetId);
+                    }
+                    // Give system a rest
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException ignored) {
+                    }
+                });
+            }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(() -> onComplete.accept(true)));
+            return null;
+        });
     }
 
     public void disableSmartFreeze(AppListModel model) {
@@ -441,25 +432,37 @@ public class SmartFreezeAppsViewModel extends AndroidViewModel {
     }
 
     public void freezeAllOnCurrentPage() {
-        ThanosManager.from(getApplication()).getPkgManager().freezeSmartFreezePackages(
-                listModels.stream().map(appListModel -> Pkg.fromAppInfo(appListModel.appInfo)).collect(Collectors.toList()),
-                new PackageEnableStateChangeListener() {
-                    @Override
-                    public void onPackageEnableStateChanged(List<Pkg> pkgs) {
-                        super.onPackageEnableStateChanged(pkgs);
-                        loadModels();
-                    }
-                });
+        ContextExtKt.withThanos(getApplication(), new Function1<>() {
+            @Override
+            public Object invoke(ThanosManager thanosManager) {
+                thanosManager.getPkgManager().freezeSmartFreezePackages(
+                        listModels.stream().map(appListModel -> Pkg.fromAppInfo(appListModel.appInfo)).collect(Collectors.toList()),
+                        new PackageEnableStateChangeListener() {
+                            @Override
+                            public void onPackageEnableStateChanged(List<Pkg> pkgs) {
+                                super.onPackageEnableStateChanged(pkgs);
+                                loadModels();
+                            }
+                        });
+                return null;
+            }
+        });
     }
 
     public void freezeAll() {
-        ThanosManager.from(getApplication()).getPkgManager().freezeAllSmartFreezePackages(
-                new PackageEnableStateChangeListener() {
-                    @Override
-                    public void onPackageEnableStateChanged(List<Pkg> pkgs) {
-                        super.onPackageEnableStateChanged(pkgs);
-                        loadModels();
-                    }
-                });
+        ContextExtKt.withThanos(getApplication(), new Function1<>() {
+            @Override
+            public Object invoke(ThanosManager thanosManager) {
+                thanosManager.getPkgManager().freezeAllSmartFreezePackages(
+                        new PackageEnableStateChangeListener() {
+                            @Override
+                            public void onPackageEnableStateChanged(List<Pkg> pkgs) {
+                                super.onPackageEnableStateChanged(pkgs);
+                                loadModels();
+                            }
+                        });
+                return null;
+            }
+        });
     }
 }

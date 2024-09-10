@@ -69,7 +69,7 @@ import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.Optional;
 import github.tornaco.android.thanos.core.util.OsUtils;
-import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.main.NavActivityPluginKt;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.theme.Theme;

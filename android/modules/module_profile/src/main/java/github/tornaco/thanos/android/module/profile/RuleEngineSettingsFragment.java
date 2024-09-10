@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.widget.EditTextDialog;
 import github.tornaco.thanos.android.module.profile.engine.DateTimeEngineActivity;
 import github.tornaco.thanos.android.module.profile.engine.danmu.DanmuUISettingsActivity;

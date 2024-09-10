@@ -27,16 +27,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
 import github.tornaco.android.thanos.common.CommonAppListFilterViewModel;
-import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
+import github.tornaco.android.thanos.support.ContextExtKt;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import io.reactivex.Observable;
@@ -66,11 +65,7 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
         AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
         String runningBadge = getString(R.string.badge_app_running);
         String idleBadge = getApplicationContext().getString(R.string.badge_app_idle);
-        return index -> {
-            ThanosManager thanos = ThanosManager.from(getApplicationContext());
-            if (!thanos.isServiceInstalled()) {
-                return Lists.newArrayList(new AppListModel(AppInfo.dummy()));
-            }
+        return index -> ContextExtKt.withThanos(getApplicationContext(), thanos -> {
             List<AppListModel> res = new ArrayList<>();
             CompositeDisposable disposable = new CompositeDisposable();
             disposable.add(Observable.fromIterable(thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId))
@@ -83,7 +78,7 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
                             composer.getAppItemDescription(appInfo)))));
             Collections.sort(res);
             return res;
-        };
+        }, Lists.newArrayList(new AppListModel(AppInfo.dummy())));
     }
 
     @Override

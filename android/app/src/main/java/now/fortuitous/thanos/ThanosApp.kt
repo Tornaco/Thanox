@@ -32,7 +32,7 @@ import github.tornaco.android.thanos.MultipleModulesApp
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter
 import github.tornaco.android.thanos.core.app.AppGlobals
-import github.tornaco.android.thanos.feature.access.AppFeatureManager
+import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.logFolderPath
 import github.tornaco.android.thanos.main.Analytics
 import github.tornaco.android.thanos.main.Crashlytics

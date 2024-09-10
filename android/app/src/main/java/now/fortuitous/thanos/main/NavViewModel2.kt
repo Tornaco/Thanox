@@ -31,10 +31,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
-import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.util.OsUtils
-import github.tornaco.android.thanos.feature.access.AppFeatureManager.showDonateIntroDialog
-import github.tornaco.android.thanos.feature.access.AppFeatureManager.withSubscriptionStatus
+import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
+import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
+import github.tornaco.android.thanos.support.withThanos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -107,8 +107,6 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     )
     val state = _state.asStateFlow()
 
-    private val thanox by lazy { ThanosManager.from(context) }
-
     private val donateObs = { _: Observable?, _: Any? -> loadPurchaseStatus() }
 
     init {
@@ -116,34 +114,34 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     }
 
     fun loadFeatures() {
-        viewModelScope.launch {
-            thanox.ifServiceInstalled { thanox ->
-                val feats = PrebuiltFeatures.all {
-                    now.fortuitous.thanos.pref.AppPreference.isAppFeatureEnabled(
-                        context,
-                        it.id
-                    ) && (it.requiredFeature == null || thanox.hasFeature(it.requiredFeature))
-                }.filter { it.items.isNotEmpty() }
-                _state.value = _state.value.copy(
-                    features = feats
-                )
-            }
+        context.withThanos {
+            val feats = PrebuiltFeatures.all {
+                now.fortuitous.thanos.pref.AppPreference.isAppFeatureEnabled(
+                    context,
+                    it.id
+                ) && (it.requiredFeature == null || hasFeature(it.requiredFeature))
+            }.filter { it.items.isNotEmpty() }
+            _state.value = _state.value.copy(
+                features = feats
+            )
         }
     }
 
     fun loadCoreStatus() {
-        viewModelScope.launch {
-            val status = if (!thanox.isServiceInstalled) {
-                ActiveStatus.InActive
-            } else if (BuildProp.THANOS_BUILD_FINGERPRINT != thanox.fingerPrint()) {
+        val handled = context.withThanos {
+            val status = if (BuildProp.THANOS_BUILD_FINGERPRINT != fingerPrint()) {
                 ActiveStatus.RebootNeeded
             } else {
                 ActiveStatus.Active
             }
-            val hasFrameworkError =
-                thanox.isServiceInstalled && thanox.hasFrameworkInitializeError()
+            val hasFrameworkError = hasFrameworkInitializeError()
             _state.value =
                 _state.value.copy(activeStatus = status, hasFrameworkError = hasFrameworkError)
+            true
+        } ?: false
+
+        if (!handled) {
+            _state.value = _state.value.copy(activeStatus = ActiveStatus.InActive)
         }
     }
 
@@ -161,7 +159,7 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         withSubscriptionStatus(context) { isSubscribed: Boolean? ->
             isSubscribed?.let {
                 if (it) {
-                    if (thanox.isServiceInstalled) {
+                    context.withThanos {
                         viewModelScope.launch {
                             if (showLoading) {
                                 _state.value = _state.value.copy(isLoading = true)
@@ -178,88 +176,96 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
 
     fun loadAppStatus() {
         viewModelScope.launch {
-            val isPrivacyStatementAccepted = isPrivacyStatementAccepted()
-            val isAndroidTooLowAccepted = isAndroidVersionTooLowAccepted()
-            _state.value = _state.value.copy(
-                showPrivacyStatement = !isPrivacyStatementAccepted,
-                showFirstRunTips = isPrivacyStatementAccepted && !thanox.isServiceInstalled && now.fortuitous.thanos.pref.AppPreference.isFirstRun(
-                    context
-                ),
-                patchSources = if (thanox.isServiceInstalled) thanox.patchingSource else emptyList(),
-                isAndroidVersionTooLow = !isAndroidTooLowAccepted && !OsUtils.isOOrAbove()
-            )
+            context.withThanos {
+                val isPrivacyStatementAccepted = isPrivacyStatementAccepted()
+                val isAndroidTooLowAccepted = isAndroidVersionTooLowAccepted()
+                _state.value = _state.value.copy(
+                    showPrivacyStatement = !isPrivacyStatementAccepted,
+                    showFirstRunTips = isPrivacyStatementAccepted && now.fortuitous.thanos.pref.AppPreference.isFirstRun(
+                        context
+                    ),
+                    patchSources = patchingSource,
+                    isAndroidVersionTooLow = !isAndroidTooLowAccepted && !OsUtils.isOOrAbove()
+                )
+            }
         }
     }
 
     private suspend fun getStatusHeaderInfo(): StatusHeaderInfo {
         return withContext(Dispatchers.IO) {
             kotlin.runCatching {
-                var memTotalSizeString = ""
-                var memUsageSizeString = ""
-                var memAvailableSizeString = ""
-                var memUsedPercent = 0
-                var swapTotalSizeString = ""
-                var swapUsageSizeString = ""
-                var swapAvailableSizeString = ""
-                var swapUsedPercent = 0
-                var swapEnabled = false
+                context.withThanos {
+                    var memTotalSizeString = ""
+                    var memUsageSizeString = ""
+                    var memAvailableSizeString = ""
+                    var memUsedPercent = 0
+                    var swapTotalSizeString = ""
+                    var swapUsageSizeString = ""
+                    var swapAvailableSizeString = ""
+                    var swapUsedPercent = 0
+                    var swapEnabled = false
 
-                val runningAppsCount: Int = thanox.activityManager.runningAppsCount
-                val memoryInfo = thanox.activityManager.memoryInfo
-                if (memoryInfo != null) {
-                    memTotalSizeString = Formatter.formatFileSize(context, memoryInfo.totalMem)
-                    memUsageSizeString =
-                        Formatter.formatFileSize(context, memoryInfo.totalMem - memoryInfo.availMem)
-                    memAvailableSizeString = Formatter.formatFileSize(context, memoryInfo.availMem)
-                    memUsedPercent =
-                        (100 * ((memoryInfo.totalMem - memoryInfo.availMem).toFloat() / memoryInfo.totalMem.toFloat()
-                            .coerceAtLeast(1f))).toInt()
-                }
-                val swapInfo = thanox.activityManager.swapInfo
-                if (swapInfo != null) {
-                    swapEnabled = swapInfo.totalSwap > 0
-                    if (swapEnabled) {
-                        swapTotalSizeString = Formatter.formatFileSize(context, swapInfo.totalSwap)
-                        swapUsageSizeString = Formatter.formatFileSize(
-                            context,
-                            swapInfo.totalSwap - swapInfo.freeSwap
-                        )
-                        swapAvailableSizeString =
-                            Formatter.formatFileSize(context, swapInfo.freeSwap)
-                        swapUsedPercent =
-                            (100 * ((swapInfo.totalSwap - swapInfo.freeSwap).toFloat() / swapInfo.totalSwap.toFloat()
+                    val runningAppsCount: Int = activityManager.runningAppsCount
+                    val memoryInfo = activityManager.memoryInfo
+                    if (memoryInfo != null) {
+                        memTotalSizeString = Formatter.formatFileSize(context, memoryInfo.totalMem)
+                        memUsageSizeString =
+                            Formatter.formatFileSize(
+                                context,
+                                memoryInfo.totalMem - memoryInfo.availMem
+                            )
+                        memAvailableSizeString =
+                            Formatter.formatFileSize(context, memoryInfo.availMem)
+                        memUsedPercent =
+                            (100 * ((memoryInfo.totalMem - memoryInfo.availMem).toFloat() / memoryInfo.totalMem.toFloat()
                                 .coerceAtLeast(1f))).toInt()
                     }
+                    val swapInfo = activityManager.swapInfo
+                    if (swapInfo != null) {
+                        swapEnabled = swapInfo.totalSwap > 0
+                        if (swapEnabled) {
+                            swapTotalSizeString =
+                                Formatter.formatFileSize(context, swapInfo.totalSwap)
+                            swapUsageSizeString = Formatter.formatFileSize(
+                                context,
+                                swapInfo.totalSwap - swapInfo.freeSwap
+                            )
+                            swapAvailableSizeString =
+                                Formatter.formatFileSize(context, swapInfo.freeSwap)
+                            swapUsedPercent =
+                                (100 * ((swapInfo.totalSwap - swapInfo.freeSwap).toFloat() / swapInfo.totalSwap.toFloat()
+                                    .coerceAtLeast(1f))).toInt()
+                        }
+                    }
+
+                    val cpuPercent =
+                        (activityManager.getTotalCpuPercent(true)).coerceAtLeast(1f).toInt()
+
+                    StatusHeaderInfo(
+                        runningAppsCount = runningAppsCount,
+                        memory = MemUsage(
+                            memType = MemType.MEMORY,
+                            memTotalSizeString = memTotalSizeString,
+                            memUsagePercent = memUsedPercent,
+                            memUsageSizeString = memUsageSizeString,
+                            memAvailableSizeString = memAvailableSizeString,
+                            isEnabled = true
+                        ),
+                        swap = MemUsage(
+                            memType = MemType.SWAP,
+                            memTotalSizeString = swapTotalSizeString,
+                            memUsagePercent = swapUsedPercent,
+                            memUsageSizeString = swapUsageSizeString,
+                            memAvailableSizeString = swapAvailableSizeString,
+                            isEnabled = swapEnabled
+                        ),
+                        cpu = CpuUsage(totalPercent = cpuPercent)
+                    )
                 }
-
-                val cpuPercent =
-                    (thanox.activityManager.getTotalCpuPercent(true)).coerceAtLeast(1f).toInt()
-
-                StatusHeaderInfo(
-                    runningAppsCount = runningAppsCount,
-                    memory = MemUsage(
-                        memType = MemType.MEMORY,
-                        memTotalSizeString = memTotalSizeString,
-                        memUsagePercent = memUsedPercent,
-                        memUsageSizeString = memUsageSizeString,
-                        memAvailableSizeString = memAvailableSizeString,
-                        isEnabled = true
-                    ),
-                    swap = MemUsage(
-                        memType = MemType.SWAP,
-                        memTotalSizeString = swapTotalSizeString,
-                        memUsagePercent = swapUsedPercent,
-                        memUsageSizeString = swapUsageSizeString,
-                        memAvailableSizeString = swapAvailableSizeString,
-                        isEnabled = swapEnabled
-                    ),
-                    cpu = CpuUsage(totalPercent = cpuPercent)
-                )
-
             }.getOrElse {
                 XLog.e("getStatusHeaderInfo error", it)
-                defaultStatusHeaderInfo
-            }
+                null
+            } ?: defaultStatusHeaderInfo
         }
     }
 
@@ -277,16 +283,18 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     }
 
     fun headerClick(activity: Activity) {
-        if (!thanox.isServiceInstalled) {
-            DialogUtils.showNotActivated(activity)
-            return
-        }
-        withSubscriptionStatus(activity) { isSubscribed: Boolean ->
-            if (isSubscribed) {
-                ProcessManageActivityV2.Starter.start(activity)
-            } else {
-                showDonateIntroDialog(activity)
+        val handled = context.withThanos {
+            withSubscriptionStatus(activity) { isSubscribed: Boolean ->
+                if (isSubscribed) {
+                    ProcessManageActivityV2.Starter.start(activity)
+                } else {
+                    showDonateIntroDialog(activity)
+                }
             }
+            true
+        } ?: false
+        if (!handled) {
+            DialogUtils.showNotActivated(activity)
         }
     }
 
@@ -335,6 +343,8 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     }
 
     fun rebootDevice() {
-        thanox.powerManager.reboot()
+        context.withThanos {
+            powerManager.reboot()
+        }
     }
 }

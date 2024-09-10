@@ -24,9 +24,9 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
-import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.ClipboardUtils
+import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.ToastUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,8 +41,6 @@ data class RunningAppDetailState(
 @HiltViewModel
 class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private val context: Context) :
     LifeCycleAwareViewModel() {
-    private val thanox by lazy { ThanosManager.from(context) }
-
     private val _state =
         MutableStateFlow(
             RunningAppDetailState(CpuUsageStatsState(emptyMap()))
@@ -58,9 +56,11 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
     }
 
     fun stopProcess(state: RunningProcessState): Boolean {
-        return (thanox.activityManager.killProcessByName(state.process.processName) > 0).also {
-            if (it) _appStateChanged = true
-        }
+        return context.withThanos {
+            (activityManager.killProcessByName(state.process.processName) > 0).also {
+                if (it) _appStateChanged = true
+            }
+        } ?: false
     }
 
     fun copyServiceName(service: RunningService) {
@@ -73,36 +73,42 @@ class RunningAppDetailViewModel @Inject constructor(@ApplicationContext private 
     }
 
     fun stopService(service: RunningService): Boolean {
-        return thanox.activityManager.stopService(Intent().apply {
-            component = service.running.service
-            putExtra("uid", service.running.uid)
-        }).also {
-            if (it) _appStateChanged = true
-        }
+        return context.withThanos {
+            activityManager.stopService(Intent().apply {
+                component = service.running.service
+                putExtra("uid", service.running.uid)
+            }).also {
+                if (it) _appStateChanged = true
+            }
+        } ?: false
     }
 
     fun forceStop(runningAppState: RunningAppState) {
-        thanox.activityManager.forceStopPackage(
-            Pkg.fromAppInfo(runningAppState.appInfo),
-            "RunningApp detail UI forceStop"
-        )
+        context.withThanos {
+            activityManager.forceStopPackage(
+                Pkg.fromAppInfo(runningAppState.appInfo),
+                "RunningApp detail UI forceStop"
+            )
+        }
     }
 
     suspend fun startQueryCpuUsage(runningAppState: RunningAppState) {
-        XLog.w("startQueryCpuUsage...$runningAppState")
-        val pids = runningAppState.processState.map { it.process.pid.toLong() }.toLongArray()
-        while (true) {
-            if (isResumed) {
-                kotlin.runCatching {
-                    val queryProcessCpuUsageStats =
-                        thanox.activityManager.queryProcessCpuUsageStats(pids, true)
-                    _state.value =
-                        _state.value.copy(cpuState = CpuUsageStatsState(statsMap = queryProcessCpuUsageStats.associateBy { it.pid }))
-                }.onFailure {
-                    XLog.e("startQueryCpuUsage error", it)
+        context.withThanos {
+            XLog.w("startQueryCpuUsage...$runningAppState")
+            val pids = runningAppState.processState.map { it.process.pid.toLong() }.toLongArray()
+            while (true) {
+                if (isResumed) {
+                    kotlin.runCatching {
+                        val queryProcessCpuUsageStats =
+                            activityManager.queryProcessCpuUsageStats(pids, true)
+                        _state.value =
+                            _state.value.copy(cpuState = CpuUsageStatsState(statsMap = queryProcessCpuUsageStats.associateBy { it.pid }))
+                    }.onFailure {
+                        XLog.e("startQueryCpuUsage error", it)
+                    }
                 }
+                delay(1000)
             }
-            delay(1000)
         }
     }
 }

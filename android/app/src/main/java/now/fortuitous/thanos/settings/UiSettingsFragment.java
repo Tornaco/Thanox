@@ -30,7 +30,7 @@ import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.CommonPreferences;
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.theme.Theme;
 import github.tornaco.android.thanos.util.GlideApp;

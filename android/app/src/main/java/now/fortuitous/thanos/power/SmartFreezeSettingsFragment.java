@@ -31,7 +31,7 @@ import java.util.Objects;
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
-import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.widget.ModernSingleChoiceDialog;
 import util.Consumer;
 

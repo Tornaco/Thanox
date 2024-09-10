@@ -76,7 +76,7 @@ import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivitySmartFreezeAppsBinding;
-import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.util.DialogUtils;
 import github.tornaco.android.thanos.util.IntentUtils;

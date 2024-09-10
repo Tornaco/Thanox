@@ -53,7 +53,8 @@ import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
-import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.support.AppFeatureManager;
+import github.tornaco.android.thanos.support.ContextExtKt;
 import github.tornaco.android.thanos.util.AppIconLoaderUtil;
 import github.tornaco.android.thanos.widget.EditTextDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
@@ -86,12 +87,6 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
     @Override
     protected void onBindPreferences() {
         super.onBindPreferences();
-        ThanosManager thanos = ThanosManager.from(getContext());
-        if (!thanos.isServiceInstalled()) {
-            getPreferenceScreen().setEnabled(false);
-            return;
-        }
-
         bindAppInfoPref();
         bindFeatureConfigPref();
         bindAppStatePref();
@@ -158,197 +153,215 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
     }
 
     private void bindProtectPrefs() {
-        ThanosManager thanos = ThanosManager.from(getContext());
-        SwitchPreferenceCompat preference = findPreference(getString(R.string.key_app_feature_config_block_uninstall));
-        Objects.requireNonNull(preference).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_UNINSTALL));
-        preference.setChecked(thanos.getPkgManager().isPackageBlockUninstallEnabled(appInfo.getPkgName()));
-        preference.setOnPreferenceChangeListener((preference12, newValue) -> {
-            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
-                if (isSubscribed) {
-                    thanos.getPkgManager().setPackageBlockUninstallEnabled(appInfo.getPkgName(), (Boolean) newValue);
-                } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
-                }
-                return null;
+        ContextExtKt.withThanos(requireContext(), thanos -> {
+            SwitchPreferenceCompat preference = findPreference(getString(R.string.key_app_feature_config_block_uninstall));
+            Objects.requireNonNull(preference).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_UNINSTALL));
+            preference.setChecked(thanos.getPkgManager().isPackageBlockUninstallEnabled(appInfo.getPkgName()));
+            preference.setOnPreferenceChangeListener((preference12, newValue) -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                    if (isSubscribed) {
+                        thanos.getPkgManager().setPackageBlockUninstallEnabled(appInfo.getPkgName(), (Boolean) newValue);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+                return true;
             });
-            return true;
-        });
 
-        preference = findPreference(getString(R.string.key_app_feature_config_block_clear_data));
-        Objects.requireNonNull(preference).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_CLEAR_DATA));
-        preference.setChecked(thanos.getPkgManager().isPackageBlockClearDataEnabled(appInfo.getPkgName()));
-        preference.setOnPreferenceChangeListener((preference1, newValue) -> {
-            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
-                if (isSubscribed) {
-                    thanos.getPkgManager().setPackageBlockClearDataEnabled(appInfo.getPkgName(), (Boolean) newValue);
-                } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
-                }
-                return null;
+            preference = findPreference(getString(R.string.key_app_feature_config_block_clear_data));
+            Objects.requireNonNull(preference).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_CLEAR_DATA));
+            preference.setChecked(thanos.getPkgManager().isPackageBlockClearDataEnabled(appInfo.getPkgName()));
+            preference.setOnPreferenceChangeListener((preference1, newValue) -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                    if (isSubscribed) {
+                        thanos.getPkgManager().setPackageBlockClearDataEnabled(appInfo.getPkgName(), (Boolean) newValue);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+                return true;
             });
-            return true;
+            return null;
         });
     }
 
     private void bindManagePref() {
-        ThanosManager thanos = ThanosManager.from(getContext());
-        Preference preference = findPreference(getString(R.string.key_app_feature_config_a_manage));
-        Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
-            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
-                if (isSubscribed) {
-                    ActivityListActivity.start(requireActivity(), appInfo);
-                } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
-                }
-                return null;
+        ContextExtKt.withThanos(requireContext(), thanos -> {
+            Preference preference = findPreference(getString(R.string.key_app_feature_config_a_manage));
+            Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                    if (isSubscribed) {
+                        ActivityListActivity.start(requireActivity(), appInfo);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+
+                return true;
+            });
+            int ac = thanos.getPkgManager().getActivitiesCount(appInfo.getPkgName());
+            preference.setSummary(ac == 0 ? null : String.valueOf(ac));
+
+            preference = findPreference(getString(R.string.key_app_feature_config_r_manage));
+            Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                    if (isSubscribed) {
+                        ReceiverListActivity.start(requireActivity(), appInfo);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+
+                return true;
             });
 
-            return true;
-        });
-        int ac = thanos.getPkgManager().getActivitiesCount(appInfo.getPkgName());
-        preference.setSummary(ac == 0 ? null : String.valueOf(ac));
-
-        preference = findPreference(getString(R.string.key_app_feature_config_r_manage));
-        Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
-            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
-                if (isSubscribed) {
-                    ReceiverListActivity.start(requireActivity(), appInfo);
-                } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
-                }
-                return null;
+            preference = findPreference(getString(R.string.key_app_feature_config_p_manage));
+            Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                    if (isSubscribed) {
+                        ProviderListActivity.start(requireActivity(), appInfo);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+                return true;
             });
 
-            return true;
-        });
+            int rc = thanos.getPkgManager().getReceiverCount(appInfo.getPkgName());
+            preference.setSummary(rc == 0 ? null : String.valueOf(rc));
 
-        preference = findPreference(getString(R.string.key_app_feature_config_p_manage));
-        Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
-            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
-                if (isSubscribed) {
-                    ProviderListActivity.start(requireActivity(), appInfo);
-                } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
-                }
-                return null;
+            preference = findPreference(getString(R.string.key_app_feature_config_s_manage));
+            Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                    if (isSubscribed) {
+                        ServiceListActivity.start(requireActivity(), appInfo);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+                return true;
             });
-            return true;
+            int sc = thanos.getPkgManager().getServiceCount(appInfo.getPkgName());
+            preference.setSummary(sc == 0 ? null : String.valueOf(sc));
+
+            if (appInfo.isDummy()) {
+                preference.setVisible(false);
+                Objects.requireNonNull(preference.getParent()).setVisible(false);
+            }
+
+            return null;
         });
 
-        int rc = thanos.getPkgManager().getReceiverCount(appInfo.getPkgName());
-        preference.setSummary(rc == 0 ? null : String.valueOf(rc));
-
-        preference = findPreference(getString(R.string.key_app_feature_config_s_manage));
-        Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
-            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
-                if (isSubscribed) {
-                    ServiceListActivity.start(requireActivity(), appInfo);
-                } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
-                }
-                return null;
-            });
-            return true;
-        });
-        int sc = thanos.getPkgManager().getServiceCount(appInfo.getPkgName());
-        preference.setSummary(sc == 0 ? null : String.valueOf(sc));
-
-        if (appInfo.isDummy()) {
-            preference.setVisible(false);
-            Objects.requireNonNull(preference.getParent()).setVisible(false);
-        }
     }
 
     private void bindPrivDataFieldsPref() {
-        ThanosManager thanos = ThanosManager.from(getContext());
-        ViewAwarePreference pref = findPreference(getString(R.string.key_app_feature_config_privacy_cheat));
-        Fields currentMode = thanos.getPrivacyManager().getSelectedFieldsProfileForPackage(appInfo.getPkgName(), PrivacyOp.OP_NO_OP);
-        String noSet = getString(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
-        Objects.requireNonNull(pref).setSummary(currentMode == null ? noSet : currentMode.getLabel());
+        ContextExtKt.withThanos(requireContext(), thanos -> {
 
-        pref.setOnPreferenceClickListener(preference -> {
-            ViewAwarePreference vp = (ViewAwarePreference) preference;
-            List<Fields> fields = ThanosManager.from(requireContext()).getPrivacyManager().getAllFieldsProfiles();
-            Fields dummyNoop = Fields.builder().label(noSet).id(null).build();
-            fields.add(dummyNoop);
-            QuickDropdown.show(requireActivity(), vp.getView(), index -> {
-                if (index + 1 > fields.size()) {
-                    return null;
-                }
-                Fields f = fields.get(index);
-                return f.getLabel();
-            }, id -> {
-                Fields f = fields.get(id);
-                boolean isDummyNoop = f.getId() == null;
-                ThanosManager.from(requireContext()).getPrivacyManager().selectFieldsProfileForPackage(appInfo.getPkgName(), isDummyNoop ? null : f.getId());
-                vp.setSummary(isDummyNoop ? noSet : f.getLabel());
-                XposedScope.INSTANCE.requestOrRemoveScope(requireContext(), Pkg.fromAppInfo(appInfo));
+            ViewAwarePreference pref = findPreference(getString(R.string.key_app_feature_config_privacy_cheat));
+            Fields currentMode = thanos.getPrivacyManager().getSelectedFieldsProfileForPackage(appInfo.getPkgName(), PrivacyOp.OP_NO_OP);
+            String noSet = getString(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
+            Objects.requireNonNull(pref).setSummary(currentMode == null ? noSet : currentMode.getLabel());
+
+            pref.setOnPreferenceClickListener(preference -> {
+                ViewAwarePreference vp = (ViewAwarePreference) preference;
+                List<Fields> fields = ThanosManager.from(requireContext()).getPrivacyManager().getAllFieldsProfiles();
+                Fields dummyNoop = Fields.builder().label(noSet).id(null).build();
+                fields.add(dummyNoop);
+                QuickDropdown.show(requireActivity(), vp.getView(), index -> {
+                    if (index + 1 > fields.size()) {
+                        return null;
+                    }
+                    Fields f = fields.get(index);
+                    return f.getLabel();
+                }, id -> {
+                    Fields f = fields.get(id);
+                    boolean isDummyNoop = f.getId() == null;
+                    ThanosManager.from(requireContext()).getPrivacyManager().selectFieldsProfileForPackage(appInfo.getPkgName(), isDummyNoop ? null : f.getId());
+                    vp.setSummary(isDummyNoop ? noSet : f.getLabel());
+                    XposedScope.INSTANCE.requestOrRemoveScope(requireContext(), Pkg.fromAppInfo(appInfo));
+                });
+
+                return true;
             });
 
-            return true;
+            return null;
         });
     }
 
     private void bindRecentTaskExcludePref() {
-        ThanosManager thanos = ThanosManager.from(getContext());
-        DropDownPreference pref = findPreference(getString(R.string.key_recent_task_exclude_settings));
+        ContextExtKt.withThanos(requireContext(), thanos -> {
 
-        boolean supportForceInclude = thanos.hasFeature(BuildProp.THANOX_FEATURE_RECENT_TASK_FORCE_INCLUDE);
-        Objects.requireNonNull(pref).setEntries(supportForceInclude ? R.array.recent_task_exclude_entry_default_include_exclude : R.array.recent_task_exclude_entry_default_exclude);
-        Objects.requireNonNull(pref).setEntryValues(supportForceInclude ? R.array.recent_task_exclude_value_default_include_exclude : R.array.recent_task_exclude_value_default_exclude);
+            DropDownPreference pref = findPreference(getString(R.string.key_recent_task_exclude_settings));
 
-        int currentMode = thanos.getActivityManager().getRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo));
+            boolean supportForceInclude = thanos.hasFeature(BuildProp.THANOX_FEATURE_RECENT_TASK_FORCE_INCLUDE);
+            Objects.requireNonNull(pref).setEntries(supportForceInclude ? R.array.recent_task_exclude_entry_default_include_exclude : R.array.recent_task_exclude_entry_default_exclude);
+            Objects.requireNonNull(pref).setEntryValues(supportForceInclude ? R.array.recent_task_exclude_value_default_include_exclude : R.array.recent_task_exclude_value_default_exclude);
 
-        if (!supportForceInclude && currentMode == ActivityManager.ExcludeRecentSetting.INCLUDE) {
-            // Force change to default mode since we can not support this mode.
-            currentMode = ActivityManager.ExcludeRecentSetting.NONE;
-            thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo), currentMode);
-        }
+            int currentMode = thanos.getActivityManager().getRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo));
 
-        pref.setValue(String.valueOf(currentMode));
-        pref.setOnPreferenceChangeListener((preference, newValue) -> {
-            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
-                if (isSubscribed) {
-                    int mode = Integer.parseInt(String.valueOf(newValue));
-                    thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo), mode);
-                } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
-                }
-                return null;
+            if (!supportForceInclude && currentMode == ActivityManager.ExcludeRecentSetting.INCLUDE) {
+                // Force change to default mode since we can not support this mode.
+                currentMode = ActivityManager.ExcludeRecentSetting.NONE;
+                thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo), currentMode);
+            }
+
+            pref.setValue(String.valueOf(currentMode));
+            pref.setOnPreferenceChangeListener((preference, newValue) -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                    if (isSubscribed) {
+                        int mode = Integer.parseInt(String.valueOf(newValue));
+                        thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo), mode);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+                return true;
             });
-            return true;
+            if (appInfo.isDummy()) {
+                pref.setVisible(false);
+            }
+
+            return null;
         });
-        if (appInfo.isDummy()) {
-            pref.setVisible(false);
-        }
     }
 
     private void bindLaunchOtherAppPref() {
-        ThanosManager thanos = ThanosManager.from(getContext());
-        DropDownPreference pref = findPreference(getString(R.string.key_launch_other_app));
-        Preference allowListPref = findPreference(getString(R.string.key_launch_other_app_allow_list_settings));
-        int currentMode = thanos.getActivityStackSupervisor().getLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo));
-        allowListPref.setVisible(currentMode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED);
+        ContextExtKt.withThanos(requireContext(), thanos -> {
 
-        pref.setEnabled(thanos.getActivityStackSupervisor().isLaunchOtherAppBlockerEnabled());
-        pref.setValue(String.valueOf(currentMode));
-        pref.setOnPreferenceChangeListener((preference, newValue) -> {
-            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
-                if (isSubscribed) {
-                    int mode = Integer.parseInt(String.valueOf(newValue));
-                    thanos.getActivityStackSupervisor().setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), mode);
-                    allowListPref.setVisible(mode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED);
-                } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
-                }
-                return null;
+            DropDownPreference pref = findPreference(getString(R.string.key_launch_other_app));
+            Preference allowListPref = findPreference(getString(R.string.key_launch_other_app_allow_list_settings));
+            int currentMode = thanos.getActivityStackSupervisor().getLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo));
+            allowListPref.setVisible(currentMode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED);
+
+            pref.setEnabled(thanos.getActivityStackSupervisor().isLaunchOtherAppBlockerEnabled());
+            pref.setValue(String.valueOf(currentMode));
+            pref.setOnPreferenceChangeListener((preference, newValue) -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                    if (isSubscribed) {
+                        int mode = Integer.parseInt(String.valueOf(newValue));
+                        thanos.getActivityStackSupervisor().setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), mode);
+                        allowListPref.setVisible(mode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+                return true;
             });
-            return true;
-        });
 
-        allowListPref.setOnPreferenceClickListener(preference -> {
-            AllowListActivity.start(requireContext(), appInfo);
-            return true;
+            allowListPref.setOnPreferenceClickListener(preference -> {
+                AllowListActivity.start(requireContext(), appInfo);
+                return true;
+            });
+
+            return null;
         });
     }
 
@@ -366,46 +379,49 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
     }
 
     private void bindNotificationPrefs() {
-        ThanosManager thanos = ThanosManager.from(getContext());
+        ContextExtKt.withThanos(requireContext(), thanos -> {
 
-        SwitchPreferenceCompat enablePref = findPreference(getString(R.string.key_app_feature_config_redaction_notification));
-        Preference textPref = findPreference(getString(R.string.key_app_feature_config_redaction_notification_text));
-        Preference titlePref = findPreference(getString(R.string.key_app_feature_config_redaction_notification_title));
+            SwitchPreferenceCompat enablePref = findPreference(getString(R.string.key_app_feature_config_redaction_notification));
+            Preference textPref = findPreference(getString(R.string.key_app_feature_config_redaction_notification_text));
+            Preference titlePref = findPreference(getString(R.string.key_app_feature_config_redaction_notification_title));
 
-        boolean isEnabled = thanos.getNotificationManager().isPackageRedactionNotificationEnabled(Pkg.fromAppInfo(appInfo));
-        Objects.requireNonNull(enablePref).setChecked(isEnabled);
-        enablePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
-                boolean enable = (boolean) newValue;
-                thanos.getNotificationManager().setPackageRedactionNotificationEnabled(Pkg.fromAppInfo(appInfo), enable);
-                Objects.requireNonNull(titlePref).setEnabled(enable);
-                Objects.requireNonNull(textPref).setEnabled(enable);
+            boolean isEnabled = thanos.getNotificationManager().isPackageRedactionNotificationEnabled(Pkg.fromAppInfo(appInfo));
+            Objects.requireNonNull(enablePref).setChecked(isEnabled);
+            enablePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    boolean enable = (boolean) newValue;
+                    thanos.getNotificationManager().setPackageRedactionNotificationEnabled(Pkg.fromAppInfo(appInfo), enable);
+                    Objects.requireNonNull(titlePref).setEnabled(enable);
+                    Objects.requireNonNull(textPref).setEnabled(enable);
+                    return true;
+                }
+            });
+
+
+            Objects.requireNonNull(textPref).setEnabled(isEnabled);
+            textPref.setSummary(thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo)));
+            textPref.setOnPreferenceClickListener(preference -> {
+                EditTextDialog.show(requireActivity(), getString(R.string.pre_title_redaction_notification_text), thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo)), newValue -> {
+                    thanos.getNotificationManager().setPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo), newValue);
+                    String newCurrentValue = thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo));
+                    textPref.setSummary(newCurrentValue);
+                });
                 return true;
-            }
-        });
-
-
-        Objects.requireNonNull(textPref).setEnabled(isEnabled);
-        textPref.setSummary(thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo)));
-        textPref.setOnPreferenceClickListener(preference -> {
-            EditTextDialog.show(requireActivity(), getString(R.string.pre_title_redaction_notification_text), thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo)), newValue -> {
-                thanos.getNotificationManager().setPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo), newValue);
-                String newCurrentValue = thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo));
-                textPref.setSummary(newCurrentValue);
             });
-            return true;
-        });
 
-        Objects.requireNonNull(titlePref).setEnabled(isEnabled);
-        titlePref.setSummary(thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo)));
-        titlePref.setOnPreferenceClickListener(preference -> {
-            EditTextDialog.show(requireActivity(), getString(R.string.pre_title_redaction_notification_title), thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo)), newValue -> {
-                thanos.getNotificationManager().setPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo), newValue);
-                String newCurrentValue = thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo));
-                titlePref.setSummary(newCurrentValue);
+            Objects.requireNonNull(titlePref).setEnabled(isEnabled);
+            titlePref.setSummary(thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo)));
+            titlePref.setOnPreferenceClickListener(preference -> {
+                EditTextDialog.show(requireActivity(), getString(R.string.pre_title_redaction_notification_title), thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo)), newValue -> {
+                    thanos.getNotificationManager().setPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo), newValue);
+                    String newCurrentValue = thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo));
+                    titlePref.setSummary(newCurrentValue);
+                });
+                return true;
             });
-            return true;
+
+            return null;
         });
     }
 
@@ -458,52 +474,55 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
     }
 
     private void bindAppStatePref() {
-        // Current is disabled.
-        Preference toEnablePref = findPreference(getString(R.string.key_app_feature_config_app_to_enable));
-        Preference toDisablePref = findPreference(getString(R.string.key_app_feature_config_app_to_disable));
-        SwitchPreferenceCompat smartFreezePref = findPreference(getString(R.string.key_app_feature_config_smart_freeze));
-        SwitchPreferenceCompat enableOnLaunchPref = findPreference(getString(R.string.key_app_feature_config_enable_package_on_launch));
+        ContextExtKt.withThanos(requireContext(), thanos -> {
+            // Current is disabled.
+            Preference toEnablePref = findPreference(getString(R.string.key_app_feature_config_app_to_enable));
+            Preference toDisablePref = findPreference(getString(R.string.key_app_feature_config_app_to_disable));
+            SwitchPreferenceCompat smartFreezePref = findPreference(getString(R.string.key_app_feature_config_smart_freeze));
+            SwitchPreferenceCompat enableOnLaunchPref = findPreference(getString(R.string.key_app_feature_config_enable_package_on_launch));
 
-        ThanosManager thanos = ThanosManager.from(getContext());
-        boolean disabled = !thanos.getPkgManager().getApplicationEnableState(Pkg.fromAppInfo(appInfo));
 
-        // Enable
-        Objects.requireNonNull(toEnablePref).setVisible(!appInfo.isDummy() && disabled);
-        toEnablePref.setOnPreferenceClickListener(preference -> {
-            thanos.getPkgManager().setApplicationEnableState(Pkg.fromAppInfo(appInfo), true, true);
-            // Reload.
-            bindAppStatePrefDelayed();
-            return true;
-        });
+            boolean disabled = !thanos.getPkgManager().getApplicationEnableState(Pkg.fromAppInfo(appInfo));
 
-        // Disable
-        // Current is enabled.
-        Objects.requireNonNull(toDisablePref).setVisible(!appInfo.isDummy() && !disabled);
-        toDisablePref.setOnPreferenceClickListener(preference -> {
-            thanos.getPkgManager().setApplicationEnableState(Pkg.fromAppInfo(appInfo), false, false);
-            // Reload.
-            bindAppStatePrefDelayed();
-            return true;
-        });
+            // Enable
+            Objects.requireNonNull(toEnablePref).setVisible(!appInfo.isDummy() && disabled);
+            toEnablePref.setOnPreferenceClickListener(preference -> {
+                thanos.getPkgManager().setApplicationEnableState(Pkg.fromAppInfo(appInfo), true, true);
+                // Reload.
+                bindAppStatePrefDelayed();
+                return true;
+            });
 
-        // Freeze
-        Objects.requireNonNull(smartFreezePref).setChecked(thanos.getPkgManager().isPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo)));
-        smartFreezePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            boolean enable = (boolean) newValue;
-            thanos.getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), enable);
-            // Reload.
-            // Wait 500ms for app state setup.
-            new Handler(Looper.getMainLooper()).postDelayed(FeatureConfigFragment.this::bindAppStatePref, 500);
-            return true;
-        });
+            // Disable
+            // Current is enabled.
+            Objects.requireNonNull(toDisablePref).setVisible(!appInfo.isDummy() && !disabled);
+            toDisablePref.setOnPreferenceClickListener(preference -> {
+                thanos.getPkgManager().setApplicationEnableState(Pkg.fromAppInfo(appInfo), false, false);
+                // Reload.
+                bindAppStatePrefDelayed();
+                return true;
+            });
 
-        // EOL
-        Objects.requireNonNull(enableOnLaunchPref).setVisible(!appInfo.isDummy());
-        Objects.requireNonNull(enableOnLaunchPref).setChecked(thanos.getPkgManager().isEnablePackageOnLaunchRequestEnabled(Pkg.fromAppInfo(appInfo)));
-        enableOnLaunchPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            boolean checked = (boolean) newValue;
-            thanos.getPkgManager().setEnablePackageOnLaunchRequestEnabled(Pkg.fromAppInfo(appInfo), checked);
-            return true;
+            // Freeze
+            Objects.requireNonNull(smartFreezePref).setChecked(thanos.getPkgManager().isPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo)));
+            smartFreezePref.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean enable = (boolean) newValue;
+                thanos.getPkgManager().setPkgSmartFreezeEnabled(Pkg.fromAppInfo(appInfo), enable);
+                // Reload.
+                // Wait 500ms for app state setup.
+                new Handler(Looper.getMainLooper()).postDelayed(FeatureConfigFragment.this::bindAppStatePref, 500);
+                return true;
+            });
+
+            // EOL
+            Objects.requireNonNull(enableOnLaunchPref).setVisible(!appInfo.isDummy());
+            Objects.requireNonNull(enableOnLaunchPref).setChecked(thanos.getPkgManager().isEnablePackageOnLaunchRequestEnabled(Pkg.fromAppInfo(appInfo)));
+            enableOnLaunchPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean checked = (boolean) newValue;
+                thanos.getPkgManager().setEnablePackageOnLaunchRequestEnabled(Pkg.fromAppInfo(appInfo), checked);
+                return true;
+            });
+            return null;
         });
     }
 

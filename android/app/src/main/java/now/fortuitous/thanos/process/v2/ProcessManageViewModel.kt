@@ -32,11 +32,11 @@ import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.AppLabelSearchFilter
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.T
-import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.net.TrafficStatsState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.loader.Loader
 import kotlinx.coroutines.Dispatchers
@@ -69,7 +69,6 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         )
     val state = _state.asStateFlow()
 
-    private val thanox by lazy { ThanosManager.from(context) }
     private val pm by lazy { context.packageManager }
 
     private var searchKeyword: String = ""
@@ -102,109 +101,113 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
     }
 
     private suspend fun loadProcessStates() {
-        val pkgManager = thanox.pkgManager
-        val audio = thanox.audioManager
-        val activityManager = thanox.activityManager
+        context.withThanos {
+            val pkgManager = pkgManager
+            val audio = audioManager
+            val activityManager = activityManager
 
-        withContext(Dispatchers.IO) {
-            updateLoadingState(true)
+            withContext(Dispatchers.IO) {
+                updateLoadingState(true)
 
-            val filterPackages: List<Pkg> = state.value.selectedAppSetFilterItem?.let {
-                pkgManager.getPackageSetById(
-                    it.id,
-                    true,
-                    true
-                ).pkgList.filterNot { pkg -> pkg.pkgName == BuildProp.THANOS_APP_PKG_NAME }
-            } ?: emptyList()
+                val filterPackages: List<Pkg> = state.value.selectedAppSetFilterItem?.let {
+                    pkgManager.getPackageSetById(
+                        it.id,
+                        true,
+                        true
+                    ).pkgList.filterNot { pkg -> pkg.pkgName == BuildProp.THANOS_APP_PKG_NAME }
+                } ?: emptyList()
 
-            val runningServices = activityManager.getRunningServiceLegacy(Int.MAX_VALUE)
-            val runningAppProcess =
-                activityManager.runningAppProcessLegacy.filter { it.pkgList != null && it.pkgList.isNotEmpty() }
-            val runningPackages =
-                runningAppProcess.map { Pkg.from(it.pkgList[0], it.uid) }.distinct()
+                val runningServices = activityManager.getRunningServiceLegacy(Int.MAX_VALUE)
+                val runningAppProcess =
+                    activityManager.runningAppProcessLegacy.filter { it.pkgList != null && it.pkgList.isNotEmpty() }
+                val runningPackages =
+                    runningAppProcess.map { Pkg.from(it.pkgList[0], it.uid) }.distinct()
 
-            val runningAppStates =
-                runningAppProcess.groupBy { Pkg.from(it.pkgList[0], it.uid) }.map { entry ->
-                    val pkg: Pkg = entry.key
-                    val runningProcessStates = entry.value.map { process ->
-                        val processPss =
-                            activityManager.getProcessPss(intArrayOf(process.pid)).sum()
-                        RunningProcessState(
-                            pkg = pkg,
-                            process = process,
-                            runningServices = runningServices.filter { service ->
-                                service.pid == process.pid
-                            }.map { runningServiceInfo ->
-                                val label = getServiceLabel(runningServiceInfo)
-                                val clientLabel =
-                                    if (runningServiceInfo.clientPackage != null && runningServiceInfo.clientLabel > 0) {
-                                        kotlin.runCatching {
-                                            val clientR: Resources =
-                                                pm.getResourcesForApplication(runningServiceInfo.clientPackage)
-                                            clientR.getString(runningServiceInfo.clientLabel)
-                                        }.getOrElse {
-                                            XLog.e("getResourcesForApplication error", it)
+                val runningAppStates =
+                    runningAppProcess.groupBy { Pkg.from(it.pkgList[0], it.uid) }.map { entry ->
+                        val pkg: Pkg = entry.key
+                        val runningProcessStates = entry.value.map { process ->
+                            val processPss =
+                                activityManager.getProcessPss(intArrayOf(process.pid)).sum()
+                            RunningProcessState(
+                                pkg = pkg,
+                                process = process,
+                                runningServices = runningServices.filter { service ->
+                                    service.pid == process.pid
+                                }.map { runningServiceInfo ->
+                                    val label = getServiceLabel(runningServiceInfo)
+                                    val clientLabel =
+                                        if (runningServiceInfo.clientPackage != null && runningServiceInfo.clientLabel > 0) {
+                                            kotlin.runCatching {
+                                                val clientR: Resources =
+                                                    pm.getResourcesForApplication(runningServiceInfo.clientPackage)
+                                                clientR.getString(runningServiceInfo.clientLabel)
+                                            }.getOrElse {
+                                                XLog.e("getResourcesForApplication error", it)
+                                                null
+                                            }
+                                        } else {
                                             null
                                         }
-                                    } else {
-                                        null
-                                    }
-                                RunningService(runningServiceInfo, label, clientLabel)
-                            },
-                            sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
-                        )
-                    }.sortedByDescending { it.runningServices.size }.sortedBy { !it.isMain }
+                                    RunningService(runningServiceInfo, label, clientLabel)
+                                },
+                                sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
+                            )
+                        }.sortedByDescending { it.runningServices.size }.sortedBy { !it.isMain }
 
-                    val isAllProcessCached =
-                        entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }
-                    val totalPss =
-                        activityManager.getProcessPss(entry.value.map { it.pid }.toIntArray()).sum()
+                        val isAllProcessCached =
+                            entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }
+                        val totalPss =
+                            activityManager.getProcessPss(entry.value.map { it.pid }.toIntArray())
+                                .sum()
 
-                    val runningTimeMillis = runningProcessStates.map {
-                        activityManager.getProcessStartTime(it.process.pid)
-                    }.filter { it > 0L }.minOrNull()?.let {
-                        SystemClock.elapsedRealtime() - it
+                        val runningTimeMillis = runningProcessStates.map {
+                            activityManager.getProcessStartTime(it.process.pid)
+                        }.filter { it > 0L }.minOrNull()?.let {
+                            SystemClock.elapsedRealtime() - it
+                        }
+
+                        val appInfo = pkgManager.getAppInfo(pkg)
+                        appInfo?.let { app ->
+                            RunningAppState(
+                                appInfo = app,
+                                processState = runningProcessStates,
+                                allProcessIsCached = isAllProcessCached,
+                                totalPss = totalPss,
+                                sizeStr = Formatter.formatShortFileSize(context, totalPss * 1024),
+                                runningTimeMillis = runningTimeMillis,
+                                isPlayingBack = audio.hasAudioFocus(pkg)
+                            )
+                        }
+
+                    }.filterNotNull().filter {
+                        filterPackages.contains(Pkg.fromAppInfo(it.appInfo))
+                    }.sortedByDescending { it.totalPss }
+
+                val runningAppStatesGroupByCached =
+                    runningAppStates.groupBy { it.allProcessIsCached }
+                XLog.d("startLoading: %s", runningAppStatesGroupByCached)
+
+                val notRunningApps =
+                    filterPackages.filterNot { runningPackages.contains(it) }.mapNotNull {
+                        pkgManager.getAppInfo(it)
+                    }.sortedWith { o1, o2 ->
+                        Collator.getInstance(Locale.CHINESE).compare(o1.appLabel, o2.appLabel)
                     }
 
-                    val appInfo = pkgManager.getAppInfo(pkg)
-                    appInfo?.let { app ->
-                        RunningAppState(
-                            appInfo = app,
-                            processState = runningProcessStates,
-                            allProcessIsCached = isAllProcessCached,
-                            totalPss = totalPss,
-                            sizeStr = Formatter.formatShortFileSize(context, totalPss * 1024),
-                            runningTimeMillis = runningTimeMillis,
-                            isPlayingBack = audio.hasAudioFocus(pkg)
-                        )
+                _state.value = _state.value.copy(
+                    isLoading = false,
+                    runningAppStates = runningAppStatesGroupByCached[false]?.filter {
+                        searchFilter(it.appInfo)
+                    } ?: emptyList(),
+                    runningAppStatesBg = runningAppStatesGroupByCached[true]?.filter {
+                        searchFilter(it.appInfo)
+                    } ?: emptyList(),
+                    appsNotRunning = notRunningApps.filter {
+                        searchFilter(it)
                     }
-
-                }.filterNotNull().filter {
-                    filterPackages.contains(Pkg.fromAppInfo(it.appInfo))
-                }.sortedByDescending { it.totalPss }
-
-            val runningAppStatesGroupByCached = runningAppStates.groupBy { it.allProcessIsCached }
-            XLog.d("startLoading: %s", runningAppStatesGroupByCached)
-
-            val notRunningApps =
-                filterPackages.filterNot { runningPackages.contains(it) }.mapNotNull {
-                    pkgManager.getAppInfo(it)
-                }.sortedWith { o1, o2 ->
-                    Collator.getInstance(Locale.CHINESE).compare(o1.appLabel, o2.appLabel)
-                }
-
-            _state.value = _state.value.copy(
-                isLoading = false,
-                runningAppStates = runningAppStatesGroupByCached[false]?.filter {
-                    searchFilter(it.appInfo)
-                } ?: emptyList(),
-                runningAppStatesBg = runningAppStatesGroupByCached[true]?.filter {
-                    searchFilter(it.appInfo)
-                } ?: emptyList(),
-                appsNotRunning = notRunningApps.filter {
-                    searchFilter(it)
-                }
-            )
+                )
+            }
         }
     }
 
@@ -267,17 +270,19 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         XLog.w("startQueryCpuUsage...")
         while (true) {
             if (isResumed) {
-                val cpuUsageMap = mutableMapOf<AppInfo, String>()
-                thanox.activityManager.updateProcessCpuUsageStats()
-                (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
-                    val appInfo = it.appInfo
-                    val pidsForThisApp =
-                        it.processState.map { process -> process.process.pid.toLong() }
-                            .toLongArray()
-                    val cpuRatio = thanox.activityManager.queryCpuUsageRatio(pidsForThisApp, false)
-                    cpuUsageMap[appInfo] = "${(cpuRatio * 100).toInt()}"
+                context.withThanos {
+                    val cpuUsageMap = mutableMapOf<AppInfo, String>()
+                    activityManager.updateProcessCpuUsageStats()
+                    (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
+                        val appInfo = it.appInfo
+                        val pidsForThisApp =
+                            it.processState.map { process -> process.process.pid.toLong() }
+                                .toLongArray()
+                        val cpuRatio = activityManager.queryCpuUsageRatio(pidsForThisApp, false)
+                        cpuUsageMap[appInfo] = "${(cpuRatio * 100).toInt()}"
+                    }
+                    _state.value = _state.value.copy(cpuUsageRatioStates = cpuUsageMap)
                 }
-                _state.value = _state.value.copy(cpuUsageRatioStates = cpuUsageMap)
             }
             delay(1000)
         }
@@ -287,22 +292,24 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
         XLog.w("startQueryNetUsage...")
         while (true) {
             if (isResumed) {
-                val netUsageMap = mutableMapOf<AppInfo, NetSpeedState>()
-                (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
-                    val appInfo = it.appInfo
-                    trafficStats.update(appInfo.uid)
-                    val uidStats = trafficStats.getUidStats(appInfo.uid)
-                    XLog.d("uidStats: ${appInfo.appLabel} $uidStats")
-                    uidStats?.let {
-                        if (uidStats.lastTxBytes > 0 && uidStats.lastRxBytes > 0) {
-                            val up = Formatter.formatFileSize(context, uidStats.lastTxBytes)
-                            val down = Formatter.formatFileSize(context, uidStats.lastRxBytes)
-                            val netSpeedState = NetSpeedState(up = up, down = down)
-                            netUsageMap[appInfo] = netSpeedState
+                context.withThanos {
+                    val netUsageMap = mutableMapOf<AppInfo, NetSpeedState>()
+                    (_state.value.runningAppStates + _state.value.runningAppStatesBg).map {
+                        val appInfo = it.appInfo
+                        trafficStats.update(appInfo.uid, this)
+                        val uidStats = trafficStats.getUidStats(appInfo.uid)
+                        XLog.d("uidStats: ${appInfo.appLabel} $uidStats")
+                        uidStats?.let {
+                            if (uidStats.lastTxBytes > 0 && uidStats.lastRxBytes > 0) {
+                                val up = Formatter.formatFileSize(context, uidStats.lastTxBytes)
+                                val down = Formatter.formatFileSize(context, uidStats.lastRxBytes)
+                                val netSpeedState = NetSpeedState(up = up, down = down)
+                                netUsageMap[appInfo] = netSpeedState
+                            }
                         }
                     }
+                    _state.value = _state.value.copy(netSpeedStates = netUsageMap)
                 }
-                _state.value = _state.value.copy(netSpeedStates = netUsageMap)
             }
             delay(1000)
         }

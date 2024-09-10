@@ -31,25 +31,24 @@ data class UidStats(
 
 class TrafficStatsState(val context: Context) {
     private val uidToStatMap: MutableMap<Int, UidStats> = mutableMapOf()
-    private val thanox by lazy { ThanosManager.from(context) }
 
-    fun update() {
+    fun update(thanox: ThanosManager) {
         thanox.activityManager.runningAppPackages.forEach { pkg ->
             val appInfo: AppInfo? = thanox.pkgManager.getAppInfoForUser(pkg.pkgName, pkg.userId)
             appInfo?.let {
                 val uid = appInfo.uid
-                updateUidStat(uid)
+                updateUidStat(uid, thanox)
             }
         }
     }
 
-    fun update(uid: Int) {
-        updateUidStat(uid)
+    fun update(uid: Int, thanox: ThanosManager) {
+        updateUidStat(uid, thanox)
     }
 
     fun getUidStats(uid: Int) = uidToStatMap[uid]
 
-    private fun updateUidStat(uid: Int) {
+    private fun updateUidStat(uid: Int, thanox: ThanosManager) {
         val trafficStats = thanox.networkManager.getUidTrafficStats(uid)
         val rx = trafficStats.rxBytes
         val tx = trafficStats.txBytes

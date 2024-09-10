@@ -58,7 +58,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.ActivityUtils
 
 class NeedToRestartActivity : ComponentActivity() {
@@ -134,7 +134,11 @@ class NeedToRestartActivity : ComponentActivity() {
                         }
 
                         TextButton(modifier = Modifier.padding(vertical = 16.dp),
-                            onClick = { ThanosManager.from(applicationContext).powerManager.reboot() }) {
+                            onClick = {
+                                withThanos {
+                                    powerManager.reboot()
+                                }
+                            }) {
                             Text(
                                 color = Color.White,
                                 text = AnnotatedString(stringResource(id = R.string.reboot_now)).capitalize(),

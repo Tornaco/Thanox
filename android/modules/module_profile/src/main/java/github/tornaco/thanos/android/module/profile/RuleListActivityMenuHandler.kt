@@ -20,7 +20,7 @@ package github.tornaco.thanos.android.module.profile
 import android.view.MenuItem
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.core.util.OsUtils
-import github.tornaco.android.thanos.feature.access.AppFeatureManager
+import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.thanos.android.module.profile.example.ProfileExampleActivity
 import github.tornaco.thanos.android.module.profile.online.OnlineProfileActivity

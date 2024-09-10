@@ -31,7 +31,7 @@ import github.tornaco.android.thanos.common.CommonFuncToggleAppListFilterViewMod
 import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.Pkg;
-import github.tornaco.android.thanos.feature.access.AppFeatureManager;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import now.fortuitous.thanos.start.chart.ComposeStartChartActivity;
 

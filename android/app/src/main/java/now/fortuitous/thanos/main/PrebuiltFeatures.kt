@@ -19,8 +19,8 @@ package now.fortuitous.thanos.main
 
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.feature.access.AppFeatureManager.showDonateIntroDialog
-import github.tornaco.android.thanos.feature.access.AppFeatureManager.withSubscriptionStatus
+import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
+import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.android.thanox.module.notification.recorder.NotificationRecordSettingsActivity
 import github.tornaco.android.thanox.module.notification.recorder.ui.stats.StatsActivity

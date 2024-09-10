@@ -32,12 +32,13 @@ import github.tornaco.android.thanos.MultipleModulesApp
 import github.tornaco.android.thanos.common.AppItemViewLongClickListener
 import github.tornaco.android.thanos.common.CommonAppListFilterAdapter
 import github.tornaco.android.thanos.core.app.AppGlobals
-import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.logFolderPath
 import github.tornaco.android.thanos.main.Analytics
 import github.tornaco.android.thanos.main.Crashlytics
 import github.tornaco.android.thanos.main.installCrashHandler
 import github.tornaco.android.thanos.main.launchSubscribeActivity
+import github.tornaco.android.thanos.support.AppFeatureManager
+import github.tornaco.android.thanos.support.initThanos
 import github.tornaco.thanos.module.component.manager.initRules
 import io.reactivex.plugins.RxJavaPlugins
 import now.fortuitous.app.Init
@@ -73,26 +74,28 @@ class ThanosApp : MultipleModulesApp() {
             HiddenApiBypass.addHiddenApiExemptions("")
         }
 
-        // Init Lite ASAP.
-        ThanosLite.init(this)
-        ThanosLite.analytics = Analytics
-        ThanosLite.crashlytics = Crashlytics
-        ThanosLite.installShortcut = { context, app ->
-            ShortcutHelper.addShortcut(context, app)
-        }
-
-        Init.init(this)
-        AppFeatureManager.launchSubscribeActivity = { launchSubscribeActivity(it) {} }
-        Stats.init(this)
-        initRules(this.applicationContext)
-        XposedScope.init()
-
-        CommonAppListFilterAdapter.fallbackAppItemLongClickListener =
-            AppItemViewLongClickListener { _, model ->
-                model?.appInfo?.let {
-                    now.fortuitous.thanos.apps.AppDetailsActivity.start(this@ThanosApp, it)
-                }
+        initThanos {
+            // Init Lite ASAP.
+            ThanosLite.init(this)
+            ThanosLite.analytics = Analytics
+            ThanosLite.crashlytics = Crashlytics
+            ThanosLite.installShortcut = { context, app ->
+                ShortcutHelper.addShortcut(context, app)
             }
+
+            Init.init(this)
+            AppFeatureManager.launchSubscribeActivity = { launchSubscribeActivity(it) {} }
+            Stats.init(this)
+            initRules(this.applicationContext)
+            XposedScope.init()
+
+            CommonAppListFilterAdapter.fallbackAppItemLongClickListener =
+                AppItemViewLongClickListener { _, model ->
+                    model?.appInfo?.let {
+                        now.fortuitous.thanos.apps.AppDetailsActivity.start(this@ThanosApp, it)
+                    }
+                }
+        }
     }
 
     private fun initLog(context: Context) {

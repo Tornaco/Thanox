@@ -37,14 +37,3 @@ fun Modifier.clickableWithRipple(onLongClick: (() -> Unit)? = null, onClick: () 
             onLongClick = onLongClick,
         )
     }
-
-fun Modifier.clickableWithRippleBorderless(onLongClick: (() -> Unit)? = null, onClick: () -> Unit) =
-    composed {
-        combinedClickable(
-            interactionSource = remember { MutableInteractionSource() },
-            // You can also change the color and radius of the ripple
-            indication = rememberRipple(bounded = false),
-            onClick = onClick,
-            onLongClick = onLongClick,
-        )
-    }

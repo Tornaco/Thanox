@@ -17,7 +17,6 @@
 
 package now.fortuitous.thanos.main
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
@@ -41,7 +40,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -68,34 +66,14 @@ import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
-import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.widget.productSansBoldTypography
+import github.tornaco.android.thanos.support.NavHeaderContainer
+import github.tornaco.android.thanos.support.clickableWithRippleBorderless
 import kotlinx.coroutines.delay
 import now.fortuitous.thanos.dashboard.AppCpuUsage
 import now.fortuitous.thanos.dashboard.MemType
 import now.fortuitous.thanos.dashboard.MemUsage
 import now.fortuitous.thanos.dashboard.StatusHeaderInfo
-
-
-@Composable
-private fun NavHeaderContainer(
-    modifier: Modifier = Modifier,
-    expandState: MutableState<ExpandableState>,
-    mainContent: @Composable () -> Unit,
-    expandContent: @Composable () -> Unit,
-) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.Center
-    ) {
-        mainContent()
-
-        AnimatedVisibility(visible = expandState.value == ExpandableState.Expand) {
-            expandContent()
-        }
-    }
-
-}
 
 @Composable
 fun NavHeaderContent(
@@ -134,7 +112,7 @@ private fun MainNavHeaderContent(
             .fillMaxWidth()
             .clip(RoundedCornerShape(cardCornerSize))
             .background(color = Color(cardBgColor))
-            .clickableWithRipple {
+            .clickableWithRippleBorderless {
                 onHeaderClick()
             }
             .padding(16.dp)

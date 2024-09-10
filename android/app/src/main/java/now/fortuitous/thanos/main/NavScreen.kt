@@ -97,8 +97,9 @@ import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
-import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRippleBorderless
 import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedString
+import github.tornaco.android.thanos.support.FlowLayout
+import github.tornaco.android.thanos.support.clickableWithRippleBorderless
 import kotlinx.coroutines.delay
 import util.AssetUtils
 

@@ -17,6 +17,7 @@ dependencyResolutionManagement {
         mavenCentral()
         mavenLocal()
         jcenter()
+        maven(url = "https://maven.aliyun.com/repository/public/")
         maven(url = "https://jitpack.io")
         maven(url = "https://oss.sonatype.org/content/repositories/snapshots")
     }

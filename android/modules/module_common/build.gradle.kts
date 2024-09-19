@@ -41,7 +41,7 @@ dependencies {
     implementation(libs.constraint.layout)
     implementation(libs.browser)
 
-    implementation("com.github.promeg:tinypinyin:3.0.0")
+    implementation(libs.tinypinyin)
 
     implementation(libs.glide)
     implementation(libs.glide.landscapist)

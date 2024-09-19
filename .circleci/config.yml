@@ -14,6 +14,7 @@ jobs:
     # See: https://circleci.com/docs/2.0/executor-types/
     executor:
       name: android/android-machine
+      tag: default
       resource-class: large
 
     working_directory: ~/thanox_workspace

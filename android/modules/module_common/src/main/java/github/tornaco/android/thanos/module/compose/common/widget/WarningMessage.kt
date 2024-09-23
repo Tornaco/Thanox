@@ -53,7 +53,7 @@ class ExperimentalFeatureWarningMessageAndroidView @JvmOverloads constructor(
 fun ExperimentalFeatureWarningMessage(modifier: Modifier = Modifier) {
     WarningMessage(
         modifier = modifier,
-        text = stringResource(id = R.string.common_experiment_feature_warning_message)
+        text = stringResource(id = github.tornaco.android.thanos.res.R.string.common_experiment_feature_warning_message)
     )
 }
 

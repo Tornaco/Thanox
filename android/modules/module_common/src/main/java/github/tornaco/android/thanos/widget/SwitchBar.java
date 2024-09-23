@@ -71,7 +71,7 @@ public class SwitchBar extends FrameLayout
         LayoutInflater.from(context).inflate(R.layout.switch_bar, this);
 
         mTextView = findViewById(R.id.switch_text);
-        mLabel = getResources().getString(R.string.switch_off_text);
+        mLabel = getResources().getString(github.tornaco.android.thanos.res.R.string.switch_off_text);
         mSummarySpan = new TextAppearanceSpan(getContext(), R.style.TextAppearance_Small_SwitchBar);
         updateText();
 
@@ -91,8 +91,8 @@ public class SwitchBar extends FrameLayout
 
     public void setTextViewLabel(boolean isChecked) {
         mLabel = isChecked ?
-                (onLabel == null ? getResources().getString(R.string.switch_on_text) : onLabel)
-                : (offLabel == null ? getResources().getString(R.string.switch_off_text) : offLabel);
+                (onLabel == null ? getResources().getString(github.tornaco.android.thanos.res.R.string.switch_on_text) : onLabel)
+                : (offLabel == null ? getResources().getString(github.tornaco.android.thanos.res.R.string.switch_off_text) : offLabel);
         updateText();
     }
 

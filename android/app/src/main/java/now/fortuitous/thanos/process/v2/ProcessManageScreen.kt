@@ -129,7 +129,7 @@ fun ProcessManageScreen(
     ThanoxSmallAppBarScaffold(
         title = {
             Text(
-                stringResource(id = R.string.feature_title_process_manage),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_process_manage),
             )
         },
         actions = {
@@ -159,7 +159,7 @@ fun ProcessManageScreen(
         floatingActionButton = {
             ExtendableFloatingActionButton(
                 extended = false,
-                text = { Text(text = stringResource(id = R.string.feature_title_one_key_boost)) },
+                text = { Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_one_key_boost)) },
                 icon = {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_rocket_line),
@@ -328,7 +328,7 @@ fun CachedGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> U
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val text = stringResource(id = R.string.running_process_background)
+                val text = stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_background)
                 Text(
                     text = "$text - $itemCount",
                     style = MaterialTheme.typography.titleMedium
@@ -358,7 +358,7 @@ fun RunningGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> 
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val text = stringResource(id = R.string.running_process_running)
+                val text = stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_running)
                 Text(
                     text = "$text - $itemCount",
                     style = MaterialTheme.typography.titleMedium
@@ -395,7 +395,7 @@ fun NotRunningGroupHeader(itemCount: Int) {
                 .padding(horizontal = 20.dp, vertical = 12.dp),
             contentAlignment = Alignment.CenterStart
         ) {
-            val text = stringResource(id = R.string.running_process_not_running)
+            val text = stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_not_running)
             Text(
                 text = "$text - $itemCount",
                 style = MaterialTheme.typography.titleMedium
@@ -487,7 +487,7 @@ private fun AppRunningTime(appState: RunningAppState) {
         Text(
             text = "${
                 stringResource(
-                    id = R.string.service_running_time
+                    id = github.tornaco.android.thanos.res.R.string.service_running_time
                 )
             } $runningTimeStr",
             style = MaterialTheme.typography.labelMedium
@@ -545,7 +545,7 @@ fun NetSpeedBadge(netSpeed: NetSpeedState) {
 fun PSText(appState: RunningAppState) {
     Text(
         text = stringResource(
-            id = R.string.running_processes_item_description_p_s,
+            id = github.tornaco.android.thanos.res.R.string.running_processes_item_description_p_s,
             appState.processState.size,
             appState.serviceCount
         ),
@@ -557,7 +557,7 @@ fun PSText(appState: RunningAppState) {
 fun PText(appState: RunningAppState) {
     Text(
         text = stringResource(
-            id = R.string.running_processes_item_description_p,
+            id = github.tornaco.android.thanos.res.R.string.running_processes_item_description_p,
             appState.processState.size
         ),
         fontSize = 12.sp

@@ -51,7 +51,7 @@ public class RecentTaskBlurListActivity extends CommonFuncToggleAppListFilterAct
     @NonNull
     @Override
     protected String getTitleString() {
-        return getString(R.string.feature_title_recent_task_blur);
+        return getString(github.tornaco.android.thanos.res.R.string.feature_title_recent_task_blur);
     }
 
     @Override

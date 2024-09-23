@@ -75,6 +75,7 @@ dependencies {
     compileOnly(files(project.rootProject.file("android_sdk/xposed-api-82.jar")))
 
     implementation(project(":android_framework:base"))
+    implementation(project(":android_framework:res"))
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
     implementation(project(":third_party:dateformatter"))

@@ -52,7 +52,7 @@ class FeatureToggleActivity : ComposeThemeActivity() {
         ThanoxSmallAppBarScaffold(
             title = {
                 androidx.compose.material3.Text(
-                    text = stringResource(id = R.string.pref_title_feature_toggle),
+                    text = stringResource(id = github.tornaco.android.thanos.res.R.string.pref_title_feature_toggle),
                     style = TypographyDefaults.appBarTitleTextStyle()
                 )
             },

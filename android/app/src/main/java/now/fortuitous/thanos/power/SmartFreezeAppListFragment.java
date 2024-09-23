@@ -76,8 +76,8 @@ import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivitySmartFreezeAppsBinding;
-import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.util.DialogUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
@@ -199,7 +199,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             menuPopupHelper.setForceShowIcon(true);
 
             int reverseItemId = 10086;
-            MenuItem reverseItem = menuBuilder.add(1000, reverseItemId, Menu.NONE, github.tornaco.android.thanos.module.common.R.string.common_sort_reverse);
+            MenuItem reverseItem = menuBuilder.add(1000, reverseItemId, Menu.NONE, github.tornaco.android.thanos.res.R.string.common_sort_reverse);
             reverseItem.setCheckable(true);
             reverseItem.setChecked(viewModel.isSortReverse());
             reverseItem.setIcon(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_arrow_up_down_line);
@@ -339,7 +339,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     private void onRequestAddToSmartFreezeList(List<AppInfo> appInfos, boolean alsoAddToPkgSet) {
         ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
-        progress.setTitle(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment);
+        progress.setTitle(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment);
         viewModel.addToSmartFreezeList(appInfos, alsoAddToPkgSet, appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
             progress.dismiss();
             viewModel.start();
@@ -349,12 +349,12 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     private void onRequestAddToSmartFreezeListAskIfAddToPkgSet(List<AppInfo> appInfos) {
         ModernAlertDialog dialog = new ModernAlertDialog(requireActivity());
-        dialog.setDialogTitle(getString(github.tornaco.android.thanos.module.common.R.string.common_fab_title_add));
-        dialog.setDialogMessage(getString(R.string.message_do_you_want_to_add_apps_to_pkg_set));
+        dialog.setDialogTitle(getString(github.tornaco.android.thanos.res.R.string.common_fab_title_add));
+        dialog.setDialogMessage(getString(github.tornaco.android.thanos.res.R.string.message_do_you_want_to_add_apps_to_pkg_set));
         dialog.setCancelable(false);
         dialog.setNegative(getString(android.R.string.no));
         dialog.setOnNegative(() -> onRequestAddToSmartFreezeList(appInfos, false));
-        dialog.setPositive(getString(github.tornaco.android.thanos.module.common.R.string.common_fab_title_add));
+        dialog.setPositive(getString(github.tornaco.android.thanos.res.R.string.common_fab_title_add));
         dialog.setOnPositive(() -> onRequestAddToSmartFreezeList(appInfos, true));
         dialog.show();
     }
@@ -383,7 +383,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         if (R.id.action_enable_all_smart_freeze == item.getItemId()) {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                 if (isSubscribed) {
-                    new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps).setMessage(R.string.menu_desc_smart_app_freeze_enable_all_smart_freeze_apps).setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    new MaterialAlertDialogBuilder(requireActivity()).setTitle(github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps).setMessage(github.tornaco.android.thanos.res.R.string.menu_desc_smart_app_freeze_enable_all_smart_freeze_apps).setPositiveButton(android.R.string.ok, (dialog, which) -> {
                         onRequestEnableAllSmartFreezeApps();
                     }).setNegativeButton(android.R.string.cancel, null).show();
                 } else {
@@ -396,7 +396,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         if (R.id.action_enable_all_smart_freeze_temp == item.getItemId()) {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                 if (isSubscribed) {
-                    new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp).setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp).setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    new MaterialAlertDialogBuilder(requireActivity()).setTitle(github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp).setMessage(github.tornaco.android.thanos.res.R.string.menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp).setPositiveButton(android.R.string.ok, (dialog, which) -> {
                         onRequestEnableAllSmartFreezeAppsTemp();
                     }).setNegativeButton(android.R.string.cancel, null).show();
                 } else {
@@ -409,7 +409,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         if (R.id.action_enable_all_apps == item.getItemId()) {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                 if (isSubscribed) {
-                    new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps).setMessage(R.string.menu_desc_smart_app_freeze_enable_all_apps).setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    new MaterialAlertDialogBuilder(requireActivity()).setTitle(github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_enable_all_apps).setMessage(github.tornaco.android.thanos.res.R.string.menu_desc_smart_app_freeze_enable_all_apps).setPositiveButton(android.R.string.ok, (dialog, which) -> {
                         onRequestEnableAllApps();
                     }).setNegativeButton(android.R.string.cancel, null).show();
                 } else {
@@ -449,8 +449,8 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     }
 
     private void onRequestImportPackageList() {
-        String[] items = getResources().getStringArray(github.tornaco.android.thanos.module.common.R.array.module_common_import_selections);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_import_package_list).setSingleChoiceItems(items, -1, (d, which) -> {
+        String[] items = getResources().getStringArray(github.tornaco.android.thanos.res.R.array.module_common_import_selections);
+        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).setTitle(github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_import_package_list).setSingleChoiceItems(items, -1, (d, which) -> {
             d.dismiss();
             if (which == 0) {
                 onRequestImportPackageListFromClipBoard();
@@ -500,8 +500,8 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     }
 
     private void onRequestExportPackageList() {
-        String[] items = getResources().getStringArray(github.tornaco.android.thanos.module.common.R.array.module_common_export_selections);
-        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).setTitle(R.string.menu_title_smart_app_freeze_export_package_list).setSingleChoiceItems(items, -1, (d, which) -> {
+        String[] items = getResources().getStringArray(github.tornaco.android.thanos.res.R.array.module_common_export_selections);
+        AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).setTitle(github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_export_package_list).setSingleChoiceItems(items, -1, (d, which) -> {
             d.dismiss();
             if (which == 0) {
                 onRequestExportPackageListToClipBoard();
@@ -592,7 +592,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     private void onRequestEnableAllSmartFreezeApps() {
         ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
-        progress.setTitle(R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps);
+        progress.setTitle(github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_enable_all_smart_freeze_apps);
         viewModel.enableAllThanoxDisabledPackages(true, appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
             progress.dismiss();
             viewModel.start();
@@ -602,7 +602,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     private void onRequestEnableAllSmartFreezeAppsTemp() {
         ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
-        progress.setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp);
+        progress.setTitle(github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp);
         viewModel.enableAllThanoxDisabledPackages(false, appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
             progress.dismiss();
             viewModel.start();
@@ -612,7 +612,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
 
     private void onRequestEnableAllApps() {
         ModernProgressDialog progress = new ModernProgressDialog(requireActivity());
-        progress.setTitle(R.string.menu_title_smart_app_freeze_enable_all_apps);
+        progress.setTitle(github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_enable_all_apps);
         viewModel.onRequestEnableAllApps(appInfo -> runOnUiThread(() -> progress.setMessage(appInfo.getAppLabel())), success -> {
             progress.dismiss();
             viewModel.start();
@@ -630,7 +630,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
         Objects.requireNonNull(appVersionNameView).setText(appInfo.getVersionName());
 
         new MaterialAlertDialogBuilder(requireActivity())
-                .setView(dialogView).setTitle(R.string.menu_title_create_shortcut_apk)
+                .setView(dialogView).setTitle(github.tornaco.android.thanos.res.R.string.menu_title_create_shortcut_apk)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     String appName = appNameView.getText().toString();
@@ -647,12 +647,12 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     @SuppressLint("CheckResult")
     private void onShortcutApkReady(AppInfo appInfo, File apkFile) {
         new MaterialAlertDialogBuilder(requireActivity())
-                .setTitle(R.string.menu_title_create_shortcut_apk)
+                .setTitle(github.tornaco.android.thanos.res.R.string.menu_title_create_shortcut_apk)
                 .setMessage(appInfo.getAppLabel() + "\n" + apkFile.getAbsolutePath())
                 .setNegativeButton(android.R.string.cancel, null)
                 .setNeutralButton("SILENT INSTALL", (dialog, which) -> {
                     ModernProgressDialog progressDialog = new ModernProgressDialog(requireActivity());
-                    progressDialog.setMessage(getString(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment));
+                    progressDialog.setMessage(getString(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment));
                     progressDialog.show();
                     Completable.fromRunnable(() -> {
                                 File tmpFile = new File("/data/local/tmp/" + appInfo.getPkgName() + "_proxy.apk");
@@ -677,7 +677,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                                 }
                             });
                 })
-                .setPositiveButton(R.string.title_install, (dialog, which) ->
+                .setPositiveButton(github.tornaco.android.thanos.res.R.string.title_install, (dialog, which) ->
                         viewModel.requestInstallStubApk(requireContext(), apkFile)).show();
     }
 

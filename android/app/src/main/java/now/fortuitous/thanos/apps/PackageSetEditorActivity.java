@@ -161,7 +161,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_rename == item.getItemId()) {
-            EditTextDialog.show(thisActivity(), getString(github.tornaco.android.thanos.module.common.R.string.common_menu_title_rename), packageSet.getLabel(),
+            EditTextDialog.show(thisActivity(), getString(github.tornaco.android.thanos.res.R.string.common_menu_title_rename), packageSet.getLabel(),
                     s -> {
                         ThanosManager.from(thisActivity()).getPkgManager().updatePackageSetLabel(s, packageSet.getId());
                         packageSet.setLabel(s);
@@ -212,9 +212,9 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
                     itemView,
                     index -> {
                         if (index == 0) {
-                            return getString(R.string.title_package_delete_set);
+                            return getString(github.tornaco.android.thanos.res.R.string.title_package_delete_set);
                         } else if (index == 1) {
-                            return getString(R.string.feature_title_apps_manager);
+                            return getString(github.tornaco.android.thanos.res.R.string.feature_title_apps_manager);
                         }
                         return null;
                     },

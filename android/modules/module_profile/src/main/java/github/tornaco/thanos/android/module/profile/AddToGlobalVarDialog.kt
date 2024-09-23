@@ -28,7 +28,7 @@ class AddToGlobalVarDialog(val context: Context, val value: String) {
     fun show() {
         val allVars = thanox.profileManager.allGlobalRuleVar
         val dialog = ModernSingleChoiceDialog(context)
-        dialog.setTitle(context.getString(R.string.module_profile_add_to_global_var))
+        dialog.setTitle(context.getString(github.tornaco.android.thanos.res.R.string.module_profile_add_to_global_var))
         dialog.setTips(value)
         dialog.setItems(
             allVars.map {

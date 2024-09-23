@@ -82,7 +82,7 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
             findPreference(getString(R.string.key_patch_info)).setSummary(String.join("\n", thanos.getPatchingSource()));
         } else {
             findPreference(getString(R.string.key_build_info_server))
-                    .setSummary(R.string.status_not_active);
+                    .setSummary(github.tornaco.android.thanos.res.R.string.status_not_active);
             findPreference(getString(R.string.key_patch_info)).setSummary("N/A");
         }
 
@@ -118,7 +118,7 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
                 });
 
         if (DonateSettingsKt.INSTANCE.isActivated(getContext(), () -> null)) {
-            donatePref.setSummary(github.tornaco.android.thanos.app.donate.R.string.module_donate_donated);
+            donatePref.setSummary(github.tornaco.android.thanos.res.R.string.module_donate_donated);
         }
 
         Preference licensePref = findPreference(getString(R.string.key_open_source_license));
@@ -140,11 +140,11 @@ public class AboutSettingsFragment extends BasePreferenceFragmentCompat {
 
     private void showTgAndQQDialog() {
         new MaterialAlertDialogBuilder(requireActivity())
-                .setTitle(R.string.pref_title_rss_e)
-                .setMessage(R.string.pref_summary_rss_e)
+                .setTitle(github.tornaco.android.thanos.res.R.string.pref_title_rss_e)
+                .setMessage(github.tornaco.android.thanos.res.R.string.pref_summary_rss_e)
                 .setPositiveButton("QQ", (dialog, which) -> {
                     ClipboardUtils.copyToClipboard(requireActivity(), "thanox QQ", BuildProp.THANOX_QQ_PRIMARY);
-                    Toast.makeText(requireContext(), github.tornaco.android.thanos.module.common.R.string.common_toast_copied_to_clipboard, Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), github.tornaco.android.thanos.res.R.string.common_toast_copied_to_clipboard, Toast.LENGTH_LONG).show();
                 }).setNegativeButton("TG", (dialog, which) -> BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL)).show();
     }
 

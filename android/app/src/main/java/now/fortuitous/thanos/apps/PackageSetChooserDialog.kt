@@ -39,7 +39,7 @@ class PackageSetChooserDialog(
         val toRemoveItemsId = mutableSetOf<String>()
 
         MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.title_package_sets)
+            .setTitle(github.tornaco.android.thanos.res.R.string.title_package_sets)
             .setMultiChoiceItems(
                 items, checked
             ) { _, which, isChecked ->

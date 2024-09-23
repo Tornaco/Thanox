@@ -89,7 +89,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
 
     @Override
     protected void onSetupChip(ViewGroup chipContainer, ChipGroup chipGroup, Chip chip1, Chip chip2, Chip chip3, Chip chip4) {
-        chip1.setText(R.string.title_allow);
+        chip1.setText(github.tornaco.android.thanos.res.R.string.title_allow);
         chip1.setChecked(showAllowed);
         chip1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             showAllowed = isChecked;
@@ -97,7 +97,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
         });
 
 
-        chip2.setText(R.string.title_block);
+        chip2.setText(github.tornaco.android.thanos.res.R.string.title_block);
         chip2.setChecked(showBlocked);
         chip2.setOnCheckedChangeListener((buttonView, isChecked) -> {
             showBlocked = isChecked;
@@ -110,7 +110,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
 
     @Override
     protected int getTitleRes() {
-        return R.string.menu_title_start_restrict_charts_view_detailed_records;
+        return github.tornaco.android.thanos.res.R.string.menu_title_start_restrict_charts_view_detailed_records;
     }
 
     @Override
@@ -132,8 +132,8 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
             new MaterialAlertDialogBuilder(thisActivity())
                     .setTitle(appInfo.getAppLabel())
                     .setMessage(appInfo.getStr())
-                    .setPositiveButton(R.string.feature_title_apps_manager,
-                            (dialog, which) -> AppDetailsActivity.start(thisActivity(), appInfo)).setNegativeButton(R.string.menu_title_start_restrict_charts_view_detailed_records_for_this_package,
+                    .setPositiveButton(github.tornaco.android.thanos.res.R.string.feature_title_apps_manager,
+                            (dialog, which) -> AppDetailsActivity.start(thisActivity(), appInfo)).setNegativeButton(github.tornaco.android.thanos.res.R.string.menu_title_start_restrict_charts_view_detailed_records_for_this_package,
                             (dialog, which) -> DetailedStartRecordsActivity.start(thisActivity(), appInfo.getPkgName()))
                     .show();
 
@@ -166,8 +166,8 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
             List<AppListModel> res = new ArrayList<>(startRecordList.size());
             PackageManager packageManager = thanosManager.getPkgManager();
 
-            String allowDesc = getString(R.string.title_allow);
-            String blockDesc = getString(R.string.title_block);
+            String allowDesc = getString(github.tornaco.android.thanos.res.R.string.title_allow);
+            String blockDesc = getString(github.tornaco.android.thanos.res.R.string.title_block);
 
             int colorGreen = ContextCompat.getColor(thisActivity(), github.tornaco.android.thanos.module.common.R.color.md_green_800);
             int colorRed = ContextCompat.getColor(thisActivity(), github.tornaco.android.thanos.module.common.R.color.md_red_500);

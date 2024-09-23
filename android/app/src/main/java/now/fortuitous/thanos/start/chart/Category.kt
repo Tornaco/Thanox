@@ -8,7 +8,7 @@ enum class Category(
     val withAllowed: Boolean,
     val withBlocked: Boolean,
 ) {
-    Allowed(R.string.start_record_allowed, true, false),
-    Blocked(R.string.start_record_blocked, false, true),
-    Merged(R.string.start_record_merged, true, true)
+    Allowed(github.tornaco.android.thanos.res.R.string.start_record_allowed, true, false),
+    Blocked(github.tornaco.android.thanos.res.R.string.start_record_blocked, false, true),
+    Merged(github.tornaco.android.thanos.res.R.string.start_record_merged, true, true)
 }

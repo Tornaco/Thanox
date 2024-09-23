@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="module_component_manager_disabled_by_thanox">تعطيل عبر thanox</string>
-    <string name="module_component_manager_component_running">ادارة</string>
-    <string name="module_component_manager_feature_desc">يستخدم Thanox واجهة برمجة تطبيقات نظام Android لتعطيل المكونات ، مما يعني أنه حتى إذا قمت بإلغاء تثبيت Thanox ، فستبقى حالة هذه المكونات. يمنع Thanox المكونات التي تم تعطيلها من خلال thanox من إعادة تمكينها بواسطة تطبيقات أخرى</string>
-    <string name="module_component_manager_keep_service_smart_standby">الاستيراد إلى وضع القطع ، احتفظ بالقائمة</string>
-</resources>

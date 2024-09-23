@@ -76,10 +76,10 @@ public class ExportLogUi {
     public void show(Runnable permissionRequester) {
         Context context = requireContext();
         ModernAlertDialog dialog = new ModernAlertDialog(requireContext());
-        dialog.setDialogTitle(context.getString(R.string.nav_title_feedback));
-        dialog.setDialogMessage(context.getString(R.string.dialog_message_feedback));
+        dialog.setDialogTitle(context.getString(github.tornaco.android.thanos.res.R.string.nav_title_feedback));
+        dialog.setDialogMessage(context.getString(github.tornaco.android.thanos.res.R.string.dialog_message_feedback));
         dialog.setCancelable(true);
-        dialog.setPositive(context.getString(R.string.feedback_export_log));
+        dialog.setPositive(context.getString(github.tornaco.android.thanos.res.R.string.feedback_export_log));
         dialog.setNegative(context.getString(android.R.string.cancel));
         dialog.setOnPositive(() -> {
             if (hasPermission(context)) {
@@ -133,16 +133,16 @@ public class ExportLogUi {
 
     private void onExportLogFilePickRequestResultQAsync(Intent data) {
         ModernProgressDialog dialog = new ModernProgressDialog(requireContext());
-        dialog.setMessage(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment);
+        dialog.setMessage(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment);
         dialog.show();
         Completable.fromAction(() -> {
             boolean success = onExportLogFilePickRequestResultQ(data);
             Completable.fromRunnable(() -> {
                 dialog.dismiss();
                 if (success) {
-                    Toast.makeText(requireContext(), R.string.feedback_export_log_success, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), github.tornaco.android.thanos.res.R.string.feedback_export_log_success, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(requireContext(), R.string.feedback_export_log_fail, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), github.tornaco.android.thanos.res.R.string.feedback_export_log_fail, Toast.LENGTH_SHORT).show();
                 }
             }).subscribeOn(AndroidSchedulers.mainThread()).subscribe();
         }).subscribeOn(Schedulers.io()).subscribe();

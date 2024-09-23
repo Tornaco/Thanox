@@ -1,66 +1,0 @@
-<resources>
-    <string name="module_profile_feature_name">الملف الشخصي</string>
-    <string name="module_profile_feature_summary">قم بتنفيذ إجراءات مخصصة بناءً على السيناريوهات</string>
-
-    <string name="module_profile_title_global_var">متغير عالمي</string>
-
-    <string name="module_profile_title_rule_engine">محرك</string>
-    <string name="module_profile_summary_rule_engine">المحرك هو أداة لنشر الحقائق. تم تمكين العديد من الناشرين في Thanox افتراضيًا. تدعم المحركات التالية التشغيل أو إيقاف التشغيل. يرجى الانتباه إلى وصف المحرك ، فقد يؤدي إيقاف تشغيل المحرك إلى عدم تشغيل بعض الملفات الشخصية أو تنفيذها بشكل طبيعي</string>
-    <string name="module_profile_pref_title_rule_engine_automation">أتمتة</string>
-    <string name="module_profile_pref_summary_rule_engine_automation">يدعم إجراء النقرات التلقائية للعثور على طرق العرض. 📢 ملاحظة: قد يتسبب هذا المحرك في عدم عمل بعض ميزات إمكانية الوصول للتطبيق</string>
-    <string name="module_profile_pref_title_rule_engine_push">أخبار إلى الأمام</string>
-    <string name="module_profile_pref_summary_rule_engine_push">نشر حقيقة رسالة الدفع ، تدعم حاليًا FCM و GCM</string>
-
-    <string name="module_profile_pref_summary_rule_engine_su">لتمكين دعم su API لملف تعريف Thanox ، يرجى النقر فوق السماح في طلب منح الإذن الفائق المنبثق ، إذا لم يتم تلقي أي طلب ، يرجى تشغيل إذن المستخدم الفائق يدويًا. سيتم تنفيذ الأمر su باعتباره تطبيق Thanox. لاستخدام su ، اسمح لتطبيق Thanox بالبدء تلقائيًا</string>
-    <string name="module_profile_pref_title_rule_engine_su">su API</string>
-    <string name="module_profile_should_enable_su">قد يحتاج ملف التعريف هذا إلى فتح su API للعمل ، يرجى إدخال إعدادات المحرك للتمكين</string>
-    <string name="module_profile_should_enable_push">قد يحتاج ملف التعريف هذا إلى فتح محرك رسائل الدفع ليعمل ، يرجى إدخال إعدادات المحرك لفتحه</string>
-    <string name="module_profile_miss_global_var">قد لا يعمل ملف التعريف هذا نظرًا لعدم وجود var العام أدناه ، فأنت بحاجة إلى إنشاء هذه المتغيرات.  %s</string>
-    <string name="module_profile_block_thread">This profile may call Thread.sleep, which may block the execution of other profiles; please adjust the priority of this profile to a negative number so that it will be executed in a new thread.</string>
-
-    <string name="module_profile_pref_title_rule_engine_shortcut">من الاختصار</string>
-    <string name="module_profile_pref_summary_rule_engine_shortcut">قم بإنشاء اختصار على سطح المكتب ، عندما يتم النقر فوق هذا الاختصار للبدء ، سينشر thanox حقيقة أن الاختصار يمثل</string>
-    <string name="module_profile_pref_title_rule_engine_date_time">الوقت و التاريخ</string>
-    <string name="module_profile_pref_summary_rule_engine_date_time">جدولة بعض المهام المتكررة أو المحددة بوقت</string>
-    <string name="module_profile_date_time_regular_interval">الفاصل الزمني الثابت</string>
-    <string name="module_profile_date_time_alarm">الوقت من اليوم</string>
-    <string name="module_profile_date_time_tag">يتم استخدام العلامة للحكم الشرطي على وضع المشهد. مثال على الاستخدام %s</string>
-    <string name="module_profile_date_time_min_interval">الحد الأدنى للفاصل الزمني المدعوم حاليًا هو 15 دقيقة</string>
-
-    <string name="module_profile_rule_edit_action_save">حفظ</string>
-    <string name="module_profile_rule_edit_action_discard">يلغي</string>
-    <string name="module_profile_rule_edit_action_text_size_inc">تكبير</string>
-    <string name="module_profile_rule_edit_action_text_size_dec">تصغير</string>
-
-    <string name="module_profile_rule_wiki">يرشد</string>
-    <string name="module_profile_rule_impor_from_file">حدد ملفًا للاستيراد</string>
-    <string name="module_profile_rule_impor_example">مثال الاستيراد</string>
-    <string name="module_profile_rule_online">عرض سيناريوهات على الإنترنت</string>
-
-    <string name="module_profile_rule_edit">تعديل</string>
-    <string name="module_profile_rule_new">الجديد</string>
-    <string name="module_profile_rule_example"></string>
-
-    <string name="module_profile_editor_select_format">اختر تنسيق الملف</string>
-    <string name="module_profile_editor_save_success">تم الحفظ بنجاح ، يرجى النقر فوق المفتاح للتمكين</string>
-    <string name="module_profile_editor_save_check_error">أخطاء قواعدية</string>
-
-    <string name="module_profile_editor_discard_dialog_title">إلغاء التحرير</string>
-    <string name="module_profile_editor_discard_dialog_message">هل أنت متأكد من أنك تريد الخروج؟ سيتم تجاهل مدخلاتك!</string>
-
-    <string name="module_profile_editor_delete_dialog_title">حذف</string>
-    <string name="module_profile_editor_delete_dialog_message">هل أنت متأكد أنك تريد حذفه ، لا يمكن استرجاع المحتوى بعد الحذف!</string>
-
-    <string name="module_profile_edit_delete">حذف</string>
-    <string name="module_profile_edit_show_hide_symbols">شريط الرموز</string>
-
-    <string name="module_profile_edit_var_title_hint">الرجاء إدخال اسم</string>
-    <string name="module_profile_var_list_item_size">%s متغيرات</string>
-    <string name="module_profile_title_shortcut_fact_value">Fact value</string>
-    <string name="module_profile_title_shortcut_label">اسم الاختصار</string>
-
-    <string name="module_profile_rule_format_tips_title">متطلبات التنسيق</string>
-    <string name="module_profile_rule_format_tips_message">name يجب أن تستخدم الحقول مجموعات أبجدية رقمية قدر الإمكان ، ويجب ألا تظهر أي أحرف خاصة ؛ description يمكن للحقول استخدام أي أحرف ، مع تقديم موجز للغرض من هذا السيناريو</string>
-
-    <string name="module_profile_add_to_global_var">إضافة إلى المتغير الشامل</string>
-</resources>

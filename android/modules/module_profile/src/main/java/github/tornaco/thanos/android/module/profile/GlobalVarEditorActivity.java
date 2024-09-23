@@ -84,7 +84,7 @@ public class GlobalVarEditorActivity extends ThemeActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        setTitle(globalVar == null ? R.string.module_profile_rule_new : R.string.module_profile_rule_edit);
+        setTitle(globalVar == null ? github.tornaco.android.thanos.res.R.string.module_profile_rule_new : github.tornaco.android.thanos.res.R.string.module_profile_rule_edit);
 
         if (globalVar != null) {
             checkRuleAndUpdateTips(globalVar.listToJson());
@@ -120,7 +120,7 @@ public class GlobalVarEditorActivity extends ThemeActivity {
                 List<String> stringList = GlobalVar.listFromJson(getCurrentEditingContent());
                 if (stringList == null) {
                     new MaterialAlertDialogBuilder(thisActivity())
-                            .setMessage(R.string.module_profile_editor_save_check_error)
+                            .setMessage(github.tornaco.android.thanos.res.R.string.module_profile_editor_save_check_error)
                             .setCancelable(true)
                             .setPositiveButton(android.R.string.ok, null)
                             .show();
@@ -210,8 +210,8 @@ public class GlobalVarEditorActivity extends ThemeActivity {
             return;
         }
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.module_profile_editor_discard_dialog_title)
-                .setMessage(R.string.module_profile_editor_discard_dialog_message)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_profile_editor_discard_dialog_title)
+                .setMessage(github.tornaco.android.thanos.res.R.string.module_profile_editor_discard_dialog_message)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
                 .setNegativeButton(android.R.string.cancel, null)
@@ -220,8 +220,8 @@ public class GlobalVarEditorActivity extends ThemeActivity {
 
     private void onRequestDelete() {
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.module_profile_editor_delete_dialog_title)
-                .setMessage(R.string.module_profile_editor_delete_dialog_message)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_profile_editor_delete_dialog_title)
+                .setMessage(github.tornaco.android.thanos.res.R.string.module_profile_editor_delete_dialog_message)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     if (globalVar != null) {

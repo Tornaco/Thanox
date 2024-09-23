@@ -69,8 +69,8 @@ import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.Optional;
 import github.tornaco.android.thanos.core.util.OsUtils;
-import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.main.NavActivityPluginKt;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.theme.Theme;
 import github.tornaco.android.thanos.util.ActivityUtils;
@@ -249,7 +249,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
         List<String> values = new ArrayList<>();
         String selectedId = profileManager.getAutoConfigTemplateSelectionId();
         ConfigTemplate selectedTemplate = profileManager.getConfigTemplateById(selectedId);
-        String valueNotSet = getString(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
+        String valueNotSet = getString(github.tornaco.android.thanos.res.R.string.common_text_value_not_set);
 
         CollectionUtils.consumeRemaining(
                 profileManager.getAllConfigTemplates(),
@@ -279,7 +279,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
         Objects.requireNonNull(templatesCategory).removeAll();
 
         ViewAwarePreference addPref = new ViewAwarePreference(requireContext());
-        addPref.setTitle(github.tornaco.android.thanos.module.common.R.string.common_fab_title_add);
+        addPref.setTitle(github.tornaco.android.thanos.res.R.string.common_fab_title_add);
         addPref.setIcon(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill);
         addPref.setOnPreferenceClickListener(preference -> {
             requestAddTemplate();
@@ -307,7 +307,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     private void requestAddTemplate() {
         EditTextDialog.show(
                 getActivity(),
-                getString(R.string.pref_action_create_new_config_template),
+                getString(github.tornaco.android.thanos.res.R.string.pref_action_create_new_config_template),
                 content -> {
                     if (TextUtils.isEmpty(content)) {
                         return;
@@ -339,9 +339,9 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                 input -> {
                     switch (input) {
                         case 0:
-                            return getString(R.string.pref_action_edit_or_view_config_template);
+                            return getString(github.tornaco.android.thanos.res.R.string.pref_action_edit_or_view_config_template);
                         case 1:
-                            return getString(R.string.pref_action_delete_config_template);
+                            return getString(github.tornaco.android.thanos.res.R.string.pref_action_delete_config_template);
                     }
                     return null;
                 },
@@ -421,14 +421,14 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
         });
         findPreference(getString(R.string.key_restore_default)).setOnPreferenceClickListener(preference -> {
             new MaterialAlertDialogBuilder(getActivity())
-                    .setTitle(R.string.pre_title_restore_default)
-                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                    .setTitle(github.tornaco.android.thanos.res.R.string.pre_title_restore_default)
+                    .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) ->
                             ThanosManager.from(getActivity())
                                     .ifServiceInstalled(thanosManager -> {
                                         if (thanosManager.getBackupAgent().restoreDefault()) {
                                             new MaterialAlertDialogBuilder(getActivity())
-                                                    .setMessage(getString(R.string.pre_message_restore_success))
+                                                    .setMessage(getString(github.tornaco.android.thanos.res.R.string.pre_message_restore_success))
                                                     .setCancelable(false)
                                                     .setPositiveButton(android.R.string.ok, null)
                                                     .show();
@@ -487,7 +487,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                                 if (getActivity() == null) return;
                                 Completable.fromAction(() ->
                                                 new MaterialAlertDialogBuilder(getActivity())
-                                                        .setMessage(getString(R.string.pre_message_restore_success))
+                                                        .setMessage(getString(github.tornaco.android.thanos.res.R.string.pre_message_restore_success))
                                                         .setCancelable(false)
                                                         .setPositiveButton(android.R.string.ok, null)
                                                         .show())
@@ -582,7 +582,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                             public void onSuccess() {
                                 if (getActivity() == null) return;
                                 new MaterialAlertDialogBuilder(getActivity())
-                                        .setMessage(getString(R.string.pre_message_backup_success) + "\n" + destPathToTellUser)
+                                        .setMessage(getString(github.tornaco.android.thanos.res.R.string.pre_message_backup_success) + "\n" + destPathToTellUser)
                                         .setCancelable(true)
                                         .setPositiveButton(android.R.string.ok, null)
                                         .show();
@@ -772,7 +772,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
             findPreference(getString(R.string.key_patch_info)).setSummary(String.join("\n", thanos.getPatchingSource()));
         } else {
             findPreference(getString(R.string.key_build_info_server))
-                    .setSummary(R.string.status_not_active);
+                    .setSummary(github.tornaco.android.thanos.res.R.string.status_not_active);
             findPreference(getString(R.string.key_patch_info)).setSummary("N/A");
         }
 
@@ -809,7 +809,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                 });
 
         if (DonateSettingsKt.INSTANCE.isActivated(requireContext(), () -> null)) {
-            donatePref.setSummary(github.tornaco.android.thanos.app.donate.R.string.module_donate_donated);
+            donatePref.setSummary(github.tornaco.android.thanos.res.R.string.module_donate_donated);
         }
 
         Preference licensePref = findPreference(getString(R.string.key_open_source_license));
@@ -831,11 +831,11 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
 
     private void showTgAndQQDialog() {
         new MaterialAlertDialogBuilder(requireActivity())
-                .setTitle(R.string.pref_title_rss_e)
-                .setMessage(R.string.pref_summary_rss_e)
+                .setTitle(github.tornaco.android.thanos.res.R.string.pref_title_rss_e)
+                .setMessage(github.tornaco.android.thanos.res.R.string.pref_summary_rss_e)
                 .setPositiveButton("QQ", (dialog, which) -> {
                     ClipboardUtils.copyToClipboard(requireActivity(), "thanox QQ", BuildProp.THANOX_QQ_PRIMARY);
-                    Toast.makeText(requireContext(), github.tornaco.android.thanos.module.common.R.string.common_toast_copied_to_clipboard, Toast.LENGTH_LONG).show();
+                    Toast.makeText(requireContext(), github.tornaco.android.thanos.res.R.string.common_toast_copied_to_clipboard, Toast.LENGTH_LONG).show();
                 }).setNegativeButton("TG", (dialog, which) -> BrowserUtils.launch(getActivity(), BuildProp.THANOX_TG_CHANNEL)).show();
     }
 

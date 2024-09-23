@@ -32,22 +32,22 @@ public class DialogUtils {
 
     public static void showError(Context context, Throwable error) {
         new MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.module_common_error_occur)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_common_error_occur)
                 .setMessage(Log.getStackTraceString(error))
                 .setCancelable(false)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.module_common_copy_error_message,
+                .setPositiveButton(github.tornaco.android.thanos.res.R.string.module_common_copy_error_message,
                         (dialog, which) -> ClipboardUtils.copyToClipboard(context, "error", Log.getStackTraceString(error)))
                 .show();
     }
 
     public static void showError(Context context, String error) {
         new MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.module_common_error_occur)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_common_error_occur)
                 .setMessage(error)
                 .setCancelable(false)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.module_common_copy_error_message,
+                .setPositiveButton(github.tornaco.android.thanos.res.R.string.module_common_copy_error_message,
                         (dialog, which) -> ClipboardUtils.copyToClipboard(context, "error", error))
                 .show();
     }

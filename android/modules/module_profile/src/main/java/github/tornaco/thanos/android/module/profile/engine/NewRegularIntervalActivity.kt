@@ -54,7 +54,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
-import github.tornaco.thanos.android.module.profile.R
 import kotlinx.parcelize.Parcelize
 import kotlin.math.min
 
@@ -93,7 +92,7 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
 
         ThanoxSmallAppBarScaffold(title = {
             Text(
-                text = stringResource(id = R.string.module_profile_date_time_regular_interval),
+                text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_date_time_regular_interval),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
@@ -102,11 +101,11 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
             }, floatingActionButton = {
                 ExtendableFloatingActionButton(
                     extended = true,
-                    text = { Text(text = stringResource(id = R.string.module_profile_rule_edit_action_save)) },
+                    text = { Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_edit_action_save)) },
                     icon = {
                         Icon(
                             imageVector = Icons.Filled.Check,
-                            contentDescription = stringResource(id = R.string.module_profile_rule_edit_action_save)
+                            contentDescription = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_edit_action_save)
                         )
                     }) {
                     val timeMillis = (state.h.value * 60 * 60 * 1000L
@@ -136,7 +135,7 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
                 Second(state)
                 Text(
                     text = stringResource(
-                        id = R.string.module_profile_date_time_min_interval
+                        id = github.tornaco.android.thanos.res.R.string.module_profile_date_time_min_interval
                     ), style = MaterialTheme.typography.labelSmall
                 )
 
@@ -161,7 +160,7 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
                 TinySpacer()
                 Text(
                     text = stringResource(
-                        id = R.string.module_profile_date_time_tag,
+                        id = github.tornaco.android.thanos.res.R.string.module_profile_date_time_tag,
                         "\ncondition: \"timeTick && tag == \"${state.tag}\"\""
                     ), style = MaterialTheme.typography.labelSmall
                 )

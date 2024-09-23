@@ -72,7 +72,7 @@ public class ProcessManageAdapter extends RecyclerView.Adapter<ProcessManageAdap
         XLog.v("mSizeStr: %s", model.mSizeStr);
         XLog.v("mSize: %s", model.mSize);
 
-        String idleBadge = holder.binding.appItemRoot.getContext().getString(R.string.badge_app_idle);
+        String idleBadge = holder.binding.appItemRoot.getContext().getString(github.tornaco.android.thanos.res.R.string.badge_app_idle);
         if (appInfo.isIdle()) {
             holder.binding.setBadge2Str(idleBadge);
         } else {

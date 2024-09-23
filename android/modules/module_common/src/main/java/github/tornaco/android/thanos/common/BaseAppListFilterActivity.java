@@ -142,8 +142,8 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
     protected abstract CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader();
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {
-        switchBar.setOnLabel(getString(R.string.common_switchbar_title_format, getTitleString()));
-        switchBar.setOffLabel(getString(R.string.common_switchbar_title_format, getTitleString()));
+        switchBar.setOnLabel(getString(github.tornaco.android.thanos.res.R.string.common_switchbar_title_format, getTitleString()));
+        switchBar.setOffLabel(getString(github.tornaco.android.thanos.res.R.string.common_switchbar_title_format, getTitleString()));
         switchBar.setChecked(getSwitchBarCheckState());
         switchBar.addOnSwitchChangeListener(this::onSwitchBarCheckChanged);
     }
@@ -171,7 +171,7 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
             MenuItem reverseItem = menuBuilder.add(1000,
                     reverseItemId,
                     Menu.NONE,
-                    R.string.common_sort_reverse);
+                    github.tornaco.android.thanos.res.R.string.common_sort_reverse);
             reverseItem.setCheckable(true);
             reverseItem.setChecked(viewModel.isSortReverse());
             reverseItem.setIcon(R.drawable.module_common_ic_arrow_up_down_line);

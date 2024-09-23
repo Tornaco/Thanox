@@ -23,6 +23,6 @@ public class ToastUtils {
     }
 
     public static void copiedToClipboard(Context context) {
-        Toast.makeText(context, context.getString(R.string.common_toast_copied_to_clipboard), Toast.LENGTH_LONG).show();
+        Toast.makeText(context, context.getString(github.tornaco.android.thanos.res.R.string.common_toast_copied_to_clipboard), Toast.LENGTH_LONG).show();
     }
 }

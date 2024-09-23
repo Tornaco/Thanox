@@ -49,7 +49,7 @@ class LaunchOtherAppRuleActivity : ComposeThemeActivity() {
         val state by viewModel.state.collectAsState()
 
         val inputDialog = rememberTextInputState(
-            title = stringResource(id = github.tornaco.android.thanos.R.string.menu_title_rules),
+            title = stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_rules),
             message = ""
         ) {
             viewModel.add(it)
@@ -59,7 +59,7 @@ class LaunchOtherAppRuleActivity : ComposeThemeActivity() {
         ThanoxSmallAppBarScaffold(
             title = {
                 Text(
-                    text = stringResource(id = github.tornaco.android.thanos.R.string.menu_title_rules),
+                    text = stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_rules),
                     style = TypographyDefaults.appBarTitleTextStyle()
                 )
             },
@@ -70,7 +70,7 @@ class LaunchOtherAppRuleActivity : ComposeThemeActivity() {
                 TextButton(onClick = {
                     BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_LAUNCH_OTHER_APP_RULES)
                 }) {
-                    Text(stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_wiki))
+                    Text(stringResource(id = github.tornaco.android.thanos.res.R.string.common_menu_title_wiki))
                 }
                 IconButton(onClick = {
                     inputDialog.show()

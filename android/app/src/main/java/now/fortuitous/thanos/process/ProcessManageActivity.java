@@ -77,7 +77,7 @@ public class ProcessManageActivity extends BaseTrustedActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        setTitle(R.string.feature_title_process_manage);
+        setTitle(github.tornaco.android.thanos.res.R.string.feature_title_process_manage);
         onSetupFilter(binding.filterChip);
 
         getSupportFragmentManager()

@@ -19,7 +19,6 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
-import github.tornaco.thanos.android.ops.R;
 import util.CollectionUtils;
 
 public class AppListActivity extends CommonAppListFilterActivity {
@@ -30,7 +29,7 @@ public class AppListActivity extends CommonAppListFilterActivity {
 
     @Override
     protected int getTitleRes() {
-        return R.string.module_ops_activity_title_app_ops_list;
+        return github.tornaco.android.thanos.res.R.string.module_ops_activity_title_app_ops_list;
     }
 
     @NonNull

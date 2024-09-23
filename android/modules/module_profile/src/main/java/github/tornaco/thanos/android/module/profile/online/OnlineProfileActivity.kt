@@ -121,7 +121,7 @@ class OnlineProfileActivity : ComposeThemeActivity() {
 
         ThanoxSmallAppBarScaffold(title = {
             Text(
-                text = stringResource(id = R.string.module_profile_rule_online),
+                text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_online),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
@@ -281,7 +281,7 @@ private fun ProfileItem(
                             contentDescription = "Import",
                             modifier = Modifier.padding(end = 8.dp)
                         )
-                        Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_import))
+                        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.common_menu_title_import))
                     }
                 } else {
                     if (profile.hasUpdate) {
@@ -295,7 +295,7 @@ private fun ProfileItem(
                                 contentDescription = "Update",
                                 modifier = Modifier.padding(end = 8.dp)
                             )
-                            Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_update))
+                            Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.common_menu_title_update))
                         }
                     } else {
                         OutlinedButton(
@@ -308,7 +308,7 @@ private fun ProfileItem(
                                 contentDescription = "Re-Import",
                                 modifier = Modifier.padding(end = 8.dp)
                             )
-                            Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_re_import))
+                            Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.common_menu_title_re_import))
                         }
                     }
                 }

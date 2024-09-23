@@ -25,7 +25,7 @@ class ShortcutInit(val context: Context) {
                 ID_THANOX_SF,
                 SmartFreezeActivity::class.java,
                 R.drawable.shortcut_smart_freeze,
-                context.getString(R.string.feature_title_smart_app_freeze)
+                context.getString(github.tornaco.android.thanos.res.R.string.feature_title_smart_app_freeze)
             )
         }
         if (!hasDynamicShortcut(ID_THANOX_PM)) {
@@ -33,7 +33,7 @@ class ShortcutInit(val context: Context) {
                 ID_THANOX_PM,
                 ProcessManageActivityV2Delegate::class.java,
                 R.drawable.ic_shortcut_process_manage,
-                context.getString(R.string.feature_title_process_manage)
+                context.getString(github.tornaco.android.thanos.res.R.string.feature_title_process_manage)
             )
         }
     }
@@ -44,7 +44,7 @@ class ShortcutInit(val context: Context) {
                 ID_THANOS_SF,
                 ThanosMainActivity::class.java,
                 R.drawable.shortcut_smart_freeze,
-                context.getString(R.string.feature_title_smart_app_freeze),
+                context.getString(github.tornaco.android.thanos.res.R.string.feature_title_smart_app_freeze),
                 "SF"
             )
         }
@@ -54,7 +54,7 @@ class ShortcutInit(val context: Context) {
                 ID_THANOS_PM,
                 ThanosMainActivity::class.java,
                 R.drawable.ic_shortcut_process_manage,
-                context.getString(R.string.feature_title_process_manage),
+                context.getString(github.tornaco.android.thanos.res.R.string.feature_title_process_manage),
                 "PM"
             )
         }

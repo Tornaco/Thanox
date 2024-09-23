@@ -39,13 +39,13 @@ public class CleanUpOnTaskRemovedActivity extends CommonFuncToggleAppListFilterA
     @NonNull
     @Override
     protected String getTitleString() {
-        return getString(R.string.activity_title_clean_when_task_removed);
+        return getString(github.tornaco.android.thanos.res.R.string.activity_title_clean_when_task_removed);
     }
 
     @Nullable
     @Override
     protected String provideFeatureDescText() {
-        return getString(R.string.feature_desc_clean_when_task_removed);
+        return getString(github.tornaco.android.thanos.res.R.string.feature_desc_clean_when_task_removed);
     }
 
     @NonNull

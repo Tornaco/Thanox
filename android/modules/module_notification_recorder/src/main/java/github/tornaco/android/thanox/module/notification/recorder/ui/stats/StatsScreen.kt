@@ -35,7 +35,7 @@ fun StatsChartScreen(
     }
     ThanoxSmallAppBarScaffold(title = {
         Text(
-            stringResource(id = R.string.module_notification_recorder_stats),
+            stringResource(id = github.tornaco.android.thanos.res.R.string.module_notification_recorder_stats),
             style = MaterialTheme.typography.titleMedium
         )
     }, onBackPressed = onBackPressed) {

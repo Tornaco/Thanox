@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleAddCallback;
@@ -180,7 +179,7 @@ public class RuleListViewModel extends AndroidViewModel {
                 protected void onRuleAddSuccess() {
                     super.onRuleAddSuccess();
                     Toast.makeText(getApplication(),
-                                    R.string.module_profile_editor_save_success,
+                                    github.tornaco.android.thanos.res.R.string.module_profile_editor_save_success,
                                     Toast.LENGTH_LONG)
                             .show();
                 }
@@ -195,7 +194,7 @@ public class RuleListViewModel extends AndroidViewModel {
                                 protected void onRuleAddSuccess() {
                                     super.onRuleAddSuccess();
                                     Toast.makeText(getApplication(),
-                                                    R.string.module_profile_editor_save_success,
+                                                    github.tornaco.android.thanos.res.R.string.module_profile_editor_save_success,
                                                     Toast.LENGTH_LONG)
                                             .show();
                                 }
@@ -244,7 +243,7 @@ public class RuleListViewModel extends AndroidViewModel {
                                     protected void onRuleAddFail(int errorCode, String errorMessage) {
                                         super.onRuleAddFail(errorCode, errorMessage);
                                         Toast.makeText(getApplication(),
-                                                        R.string.module_profile_editor_save_check_error,
+                                                        github.tornaco.android.thanos.res.R.string.module_profile_editor_save_check_error,
                                                         Toast.LENGTH_LONG)
                                                 .show();
                                     }
@@ -256,7 +255,7 @@ public class RuleListViewModel extends AndroidViewModel {
                                 }, type);
             }
             Toast.makeText(getApplication(),
-                            R.string.module_profile_editor_save_success,
+                            github.tornaco.android.thanos.res.R.string.module_profile_editor_save_success,
                             Toast.LENGTH_LONG)
                     .show();
         } catch (IOException e) {
@@ -292,24 +291,24 @@ public class RuleListViewModel extends AndroidViewModel {
         // Check for su.
         if (info.getRuleString().contains("su.exe(") && !thanosManager.getProfileManager().isShellSuSupportInstalled()) {
             // Missing su support.
-            String warn = getApplication().getString(R.string.module_profile_should_enable_su);
+            String warn = getApplication().getString(github.tornaco.android.thanos.res.R.string.module_profile_should_enable_su);
             return new RuleUiItem(info, warn);
         }
 
         if (info.getRuleString().contains("fcmPushMessageArrived") && !thanosManager.getProfileManager().isProfileEnginePushEnabled()) {
-            String warn = getApplication().getString(R.string.module_profile_should_enable_push);
+            String warn = getApplication().getString(github.tornaco.android.thanos.res.R.string.module_profile_should_enable_push);
             return new RuleUiItem(info, warn);
         }
 
         // facts.put("globalVarOf$$it", list)
         List<String> missingGlobalVarNames = RuleAnalyserKt.getMissingGlobalVarNames(getApplication(), info.getRuleString());
         if (!missingGlobalVarNames.isEmpty()) {
-            String warn = getApplication().getString(R.string.module_profile_miss_global_var, RuleAnalyserKt.formatGlobalVarNames(missingGlobalVarNames, System.lineSeparator()));
+            String warn = getApplication().getString(github.tornaco.android.thanos.res.R.string.module_profile_miss_global_var, RuleAnalyserKt.formatGlobalVarNames(missingGlobalVarNames, System.lineSeparator()));
             return new RuleUiItem(info, warn);
         }
 
         if (info.getRuleString().contains("Thread.sleep") && info.getPriority() >= 0) {
-            String warn = getApplication().getString(R.string.module_profile_block_thread);
+            String warn = getApplication().getString(github.tornaco.android.thanos.res.R.string.module_profile_block_thread);
             return new RuleUiItem(info, warn);
         }
 

@@ -47,7 +47,7 @@ public class ScreenOnNotificationActivity extends CommonFuncToggleAppListFilterA
     @NonNull
     @Override
     protected String getTitleString() {
-        return getString(R.string.feature_title_light_on_notification);
+        return getString(github.tornaco.android.thanos.res.R.string.feature_title_light_on_notification);
     }
 
     @NonNull

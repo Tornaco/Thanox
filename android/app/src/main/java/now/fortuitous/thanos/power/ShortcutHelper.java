@@ -101,7 +101,7 @@ public class ShortcutHelper {
             Bitmap resource = BitmapUtil.getBitmap(context, drawable);
             ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(context, "Shortcut-freeze-all-" + System.currentTimeMillis())
                     .setIcon(IconCompat.createWithBitmap(Objects.requireNonNull(resource)))
-                    .setShortLabel(context.getString(R.string.feature_category_app_clean_up))
+                    .setShortLabel(context.getString(github.tornaco.android.thanos.res.R.string.feature_category_app_clean_up))
                     .setIntent(shortcutInfoIntent)
                     .build();
             ShortcutManagerCompat.requestPinShortcut(context, info, ShortcutReceiver.getPinRequestAcceptedIntent(context).getIntentSender());

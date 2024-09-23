@@ -74,7 +74,7 @@ public class OneKeyBoostShortcutActivity extends Activity {
                 shortcutInfoIntent.setAction(Intent.ACTION_VIEW);
                 ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(context, "Shortcut-of-thanox-for-one-key-boost")
                         .setIcon(IconCompat.createWithBitmap(Objects.requireNonNull(resource)))
-                        .setShortLabel(context.getString(R.string.feature_title_one_key_boost))
+                        .setShortLabel(context.getString(github.tornaco.android.thanos.res.R.string.feature_title_one_key_boost))
                         .setIntent(shortcutInfoIntent)
                         .build();
                 ShortcutManagerCompat.requestPinShortcut(context, info, ShortcutReceiver.getPinRequestAcceptedIntent(context).getIntentSender());

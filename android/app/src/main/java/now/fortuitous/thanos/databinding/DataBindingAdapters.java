@@ -83,15 +83,15 @@ public class DataBindingAdapters {
     @BindingAdapter("android:mergeItemDesc")
     public static void setMergeItemDesc(TextView textView, RunningState.MergedItem mergeItem) {
         if (mergeItem.mBackground) {
-            textView.setText(R.string.title_cached_background_process);
+            textView.setText(github.tornaco.android.thanos.res.R.string.title_cached_background_process);
         } else {
-            int resid = R.string.running_processes_item_description_s_s;
+            int resid = github.tornaco.android.thanos.res.R.string.running_processes_item_description_s_s;
             if (mergeItem.mLastNumProcesses != 1) {
                 resid = mergeItem.mLastNumServices != 1
-                        ? R.string.running_processes_item_description_p_p
-                        : R.string.running_processes_item_description_p_s;
+                        ? github.tornaco.android.thanos.res.R.string.running_processes_item_description_p_p
+                        : github.tornaco.android.thanos.res.R.string.running_processes_item_description_p_s;
             } else if (mergeItem.mLastNumServices != 1) {
-                resid = R.string.running_processes_item_description_s_p;
+                resid = github.tornaco.android.thanos.res.R.string.running_processes_item_description_s_p;
             }
             String description = textView.getContext().getResources().getString(resid,
                     mergeItem.mLastNumProcesses,

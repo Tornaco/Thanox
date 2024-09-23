@@ -137,7 +137,7 @@ abstract class ComponentListActivity : ThemeActivity() {
                 )
                 Toast.makeText(
                     thisActivity(),
-                    R.string.common_toast_copied_to_clipboard,
+                    github.tornaco.android.thanos.res.R.string.common_toast_copied_to_clipboard,
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -169,8 +169,8 @@ abstract class ComponentListActivity : ThemeActivity() {
         }
         if (R.id.action_select_all == item.itemId) {
             MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.common_menu_title_select_all)
-                .setMessage(R.string.common_dialog_message_are_you_sure)
+                .setTitle(github.tornaco.android.thanos.res.R.string.common_menu_title_select_all)
+                .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                 .setPositiveButton(
                     android.R.string.ok
                 ) { _, _ ->
@@ -180,8 +180,8 @@ abstract class ComponentListActivity : ThemeActivity() {
         }
         if (R.id.action_un_select_all == item.itemId) {
             MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.common_menu_title_un_select_all)
-                .setMessage(R.string.common_dialog_message_are_you_sure)
+                .setTitle(github.tornaco.android.thanos.res.R.string.common_menu_title_un_select_all)
+                .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                 .setPositiveButton(
                     android.R.string.ok
                 ) { _, _ -> onRequestSelectAll(false) }
@@ -193,7 +193,7 @@ abstract class ComponentListActivity : ThemeActivity() {
 
     private fun onRequestSelectAll(isSelectAll: Boolean) {
         val progressDialog = ModernProgressDialog(thisActivity())
-        progressDialog.setTitle(getString(R.string.common_text_wait_a_moment))
+        progressDialog.setTitle(getString(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment))
         progressDialog.show()
         viewModel.selectAll(
             appInfo,
@@ -214,12 +214,12 @@ abstract class ComponentListActivity : ThemeActivity() {
 
     private fun showFeatureDesc() {
         MaterialAlertDialogBuilder(thisActivity())
-            .setTitle(github.tornaco.thanos.module.component.manager.R.string.module_component_manager_disabled_by_thanox)
-            .setMessage(github.tornaco.thanos.module.component.manager.R.string.module_component_manager_feature_desc)
+            .setTitle(github.tornaco.android.thanos.res.R.string.module_component_manager_disabled_by_thanox)
+            .setMessage(github.tornaco.android.thanos.res.R.string.module_component_manager_feature_desc)
             .setCancelable(false)
-            .setPositiveButton(android.R.string.ok, { dialogInterface, i ->
+            .setPositiveButton(android.R.string.ok) { _, _ ->
                 // Noop.
-            })
+            }
             .show()
     }
 

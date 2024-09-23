@@ -84,7 +84,7 @@ public class StrategySettingsFragment extends BasePreferenceFragmentCompat {
         List<String> values = new ArrayList<>();
         String selectedId = profileManager.getAutoConfigTemplateSelectionId();
         ConfigTemplate selectedTemplate = profileManager.getConfigTemplateById(selectedId);
-        String valueNotSet = getString(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
+        String valueNotSet = getString(github.tornaco.android.thanos.res.R.string.common_text_value_not_set);
 
         CollectionUtils.consumeRemaining(
                 profileManager.getAllConfigTemplates(),
@@ -114,7 +114,7 @@ public class StrategySettingsFragment extends BasePreferenceFragmentCompat {
         Objects.requireNonNull(templatesCategory).removeAll();
 
         ViewAwarePreference addPref = new ViewAwarePreference(requireContext());
-        addPref.setTitle(github.tornaco.android.thanos.module.common.R.string.common_fab_title_add);
+        addPref.setTitle(github.tornaco.android.thanos.res.R.string.common_fab_title_add);
         addPref.setIcon(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill);
         addPref.setOnPreferenceClickListener(preference -> {
             requestAddTemplate();
@@ -142,7 +142,7 @@ public class StrategySettingsFragment extends BasePreferenceFragmentCompat {
     private void requestAddTemplate() {
         EditTextDialog.show(
                 getActivity(),
-                getString(R.string.pref_action_create_new_config_template),
+                getString(github.tornaco.android.thanos.res.R.string.pref_action_create_new_config_template),
                 content -> {
                     if (TextUtils.isEmpty(content)) {
                         return;
@@ -174,9 +174,9 @@ public class StrategySettingsFragment extends BasePreferenceFragmentCompat {
                 input -> {
                     switch (input) {
                         case 0:
-                            return getString(R.string.pref_action_edit_or_view_config_template);
+                            return getString(github.tornaco.android.thanos.res.R.string.pref_action_edit_or_view_config_template);
                         case 1:
-                            return getString(R.string.pref_action_delete_config_template);
+                            return getString(github.tornaco.android.thanos.res.R.string.pref_action_delete_config_template);
                     }
                     return null;
                 },

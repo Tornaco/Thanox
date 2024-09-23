@@ -20,7 +20,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
-
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
@@ -109,7 +108,7 @@ public class AppOpsListActivity extends ThemeActivity {
     }
 
     private int getTitleRes() {
-        return R.string.module_ops_activity_title_app_ops_list;
+        return github.tornaco.android.thanos.res.R.string.module_ops_activity_title_app_ops_list;
     }
 
     private void setupViewModel() {
@@ -130,19 +129,19 @@ public class AppOpsListActivity extends ThemeActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_select_all_allow == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
-                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                    .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> viewModel.selectAll(appInfo, AppOpsManager.MODE_ALLOWED)).show();
             return true;
         }
         if (R.id.action_select_all_foreground == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
-                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                    .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> viewModel.selectAll(appInfo, AppOpsManager.MODE_FOREGROUND)).show();
             return true;
         }
         if (R.id.action_un_select_all_ignore == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
-                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                    .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> viewModel.selectAll(appInfo, AppOpsManager.MODE_IGNORED)).show();
             return true;
         }

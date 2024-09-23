@@ -35,7 +35,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemViewClickListener;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CategoryIndex;
@@ -84,7 +83,7 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
 
     @Override
     protected int getTitleRes() {
-        return R.string.priv_title_fields_template;
+        return github.tornaco.android.thanos.res.R.string.priv_title_fields_template;
     }
 
     @Override
@@ -104,7 +103,7 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
     private void onRequestAddTemplate() {
         EditTextDialog.show(
                 thisActivity(),
-                getString(R.string.pref_action_create_new_config_template),
+                getString(github.tornaco.android.thanos.res.R.string.pref_action_create_new_config_template),
                 new Consumer<String>() {
                     @Override
                     public void accept(String content) {
@@ -151,9 +150,9 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
                                     public String apply(Integer index) {
                                         switch (index) {
                                             case 0:
-                                                return getString(R.string.pref_action_edit_or_view_config_template);
+                                                return getString(github.tornaco.android.thanos.res.R.string.pref_action_edit_or_view_config_template);
                                             case 1:
-                                                return getString(R.string.pref_action_delete_config_template);
+                                                return getString(github.tornaco.android.thanos.res.R.string.pref_action_delete_config_template);
                                         }
                                         return null;
                                     }
@@ -216,9 +215,9 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
                                             null,
                                             null,
                                             usage == 0
-                                                    ? getString(R.string.priv_title_fields_usage_count_noop)
+                                                    ? getString(github.tornaco.android.thanos.res.R.string.priv_title_fields_usage_count_noop)
                                                     : getString(
-                                                    R.string.priv_title_fields_usage_count, String.valueOf(usage))));
+                                                    github.tornaco.android.thanos.res.R.string.priv_title_fields_usage_count, String.valueOf(usage))));
                         });
                 // Sort by usage.
                 Collections.sort(

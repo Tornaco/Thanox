@@ -40,9 +40,9 @@ class NotificationRecordRepository(private val context: Context) {
         return NotificationRecordModel.Separator(
             date,
             when {
-                isToday -> context.getString(R.string.module_notification_recorder_toady)
-                isYesterday -> context.getString(R.string.module_notification_recorder_yesterday)
-                isTheDayBeforeYesterday -> context.getString(R.string.module_notification_recorder_the_day_before_yesterday)
+                isToday -> context.getString(github.tornaco.android.thanos.res.R.string.module_notification_recorder_toady)
+                isYesterday -> context.getString(github.tornaco.android.thanos.res.R.string.module_notification_recorder_yesterday)
+                isTheDayBeforeYesterday -> context.getString(github.tornaco.android.thanos.res.R.string.module_notification_recorder_the_day_before_yesterday)
                 else -> after.formattedTime
             }
         )

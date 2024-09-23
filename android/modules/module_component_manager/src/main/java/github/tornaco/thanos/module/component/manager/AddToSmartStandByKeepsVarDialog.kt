@@ -30,7 +30,7 @@ class AddToSmartStandByKeepsVarDialog(val context: Context, val componentName: C
         val rule = "KEEP ${componentName.flattenToString()}"
 
         val dialog = ModernAlertDialog(context)
-        dialog.setDialogTitle(context.getString(R.string.module_component_manager_keep_service_smart_standby))
+        dialog.setDialogTitle(context.getString(github.tornaco.android.thanos.res.R.string.module_component_manager_keep_service_smart_standby))
         dialog.setDialogMessage(rule)
         dialog.setCancelable(false)
         dialog.setPositive(context.getString(android.R.string.ok))

@@ -76,10 +76,10 @@ public class ExportPatchUi {
     public void show(Runnable permissionRequester) {
         Context context = requireContext();
         ModernAlertDialog dialog = new ModernAlertDialog(requireContext());
-        dialog.setDialogTitle(context.getString(R.string.export_patch_title));
-        dialog.setDialogMessage(context.getString(R.string.export_patch_message));
+        dialog.setDialogTitle(context.getString(github.tornaco.android.thanos.res.R.string.export_patch_title));
+        dialog.setDialogMessage(context.getString(github.tornaco.android.thanos.res.R.string.export_patch_message));
         dialog.setCancelable(true);
-        dialog.setPositive(context.getString(R.string.export_patch_export_magisk));
+        dialog.setPositive(context.getString(github.tornaco.android.thanos.res.R.string.export_patch_export_magisk));
         dialog.setNegative(context.getString(android.R.string.cancel));
         dialog.setOnPositive(() -> {
             if (hasPermission(context)) {
@@ -133,7 +133,7 @@ public class ExportPatchUi {
 
     private void onExportMagiskFilePickRequestResultQAsync(Intent data) {
         ModernProgressDialog dialog = new ModernProgressDialog(requireContext());
-        dialog.setMessage(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment);
+        dialog.setMessage(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment);
         dialog.show();
         Completable.fromAction(() -> {
             boolean success = onExportMagiskFilePickRequestResultQ(data);

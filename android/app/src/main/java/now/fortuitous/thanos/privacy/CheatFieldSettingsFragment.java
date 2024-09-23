@@ -85,8 +85,8 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_fill_all_random == item.getItemId()) {
             new MaterialAlertDialogBuilder(requireActivity())
-                    .setTitle(R.string.cheat_field_auto_gen)
-                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                    .setTitle(github.tornaco.android.thanos.res.R.string.cheat_field_auto_gen)
+                    .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(
                             android.R.string.ok,
                             (dialog, which) -> {
@@ -670,7 +670,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
                     isOriginal
                             ? getOriginalValue()
                             : (TextUtils.isEmpty(currentValue)
-                            ? getString(R.string.pre_title_cheat_not_set)
+                            ? getString(github.tornaco.android.thanos.res.R.string.pre_title_cheat_not_set)
                             : currentValue));
             if (!isOriginal) {
                 editTextPreference.setOnPreferenceClickListener(preference -> {
@@ -685,7 +685,7 @@ public class CheatFieldSettingsFragment extends BasePreferenceFragmentCompat {
                                             isOriginal
                                                     ? getOriginalValue()
                                                     : (TextUtils.isEmpty(newCurrentValue)
-                                                    ? getString(R.string.pre_title_cheat_not_set)
+                                                    ? getString(github.tornaco.android.thanos.res.R.string.pre_title_cheat_not_set)
                                                     : newCurrentValue));
                                 }
                             });

@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="service_default_notification_channel">القناة الإفتراضية</string>
+    <string name="service_silence_notification_channel">قناة هادئة</string>
+    <string name="service_important_notification_channel">قناة مهمة</string>
+
+    <string name="service_notification_override_thanos">Thanox</string>
+
+    <string name="service_notification_title_bg_restrict_process_changed">تطبيقات قابلة للتنظيف</string>
+    <string name="service_notification_content_bg_restrict_process_changed">%s و %s لتنظيف التطبيقات</string>
+    <string name="service_notification_bg_tasks_clean_complete">تم تنظيف بعض مهام الخلفية</string>
+    <string name="service_notification_action_bg_restrict_process_changed_clear">عملية تنظيف</string>
+    <string name="service_notification_action_bg_restrict_process_changed_view">تفاصيل</string>
+
+    <string name="service_notification_title_op_start_remind">%s يستخدم %s</string>
+
+    <string name="service_op_label_camera">كاميرا</string>
+    <string name="service_op_label_record_audio">تسجيل</string>
+    <string name="service_op_label_play_audio">تشغيل الصوت</string>
+    <string name="service_op_label_location">احصل على معلومات الموقع</string>
+    <string name="service_op_label_read_clipboard">قراءة الحافظة</string>
+    <string name="service_op_label_write_clipboard">تعديل الحافظة</string>
+    <string name="service_op_remind_prefix">تذكير الخصوصية：</string>
+
+    <string name="service_toast_current_component_copied_to_clipboard">نسخ المحتوى إلى الحافظة</string>
+
+    <string name="service_notification_title_need_restart">أعد تشغيل الجهاز</string>
+    <string name="service_notification_message_need_restart">الرجاء إعادة تشغيل الجهاز</string>
+    <string name="service_notification_action_restart_now">اعادة التشغيل الان</string>
+
+    <string name="service_notification_title_data_restore">استعادة البيانات</string>
+    <string name="service_notification_message_data_restore_restore_component_states">استعادة حالة مكون التطبيق في الإعدادات</string>
+
+    <string name="service_notification_title_app_protect">حماية التطبيق</string>
+    <string name="service_notification_message_app_uninstall_blocked">تم حظر %s من إلغاء التثبيت</string>
+    <string name="service_notification_message_app_clear_data_blocked">تم مسح بيانات التطبيق %s المحظورة</string>
+
+    <string name="service_notification_title_thanox_active">تم تنشيط Thanox</string>
+    <string name="service_notification_message_thanox_active">تم تفعيل الإصدار %s بنجاح ، تهانينا</string>
+
+    <string name="service_notification_message_thanox_app_enabled_on_create">التجميد الذكي: تم تمكين %s بسبب الطلبات النشطة</string>
+
+    <string name="service_smart_freeze_app_freezed">Smart freeze: freezing %s</string>
+    <string name="service_smart_freeze_app_unfreezed">Smart freeze: un-freeze %s</string>
+
+    <string name="service_app_set_all">الكل</string>
+    <string name="service_app_set_system">النظام</string>
+    <string name="service_app_set_system_uid">جوهر النظام</string>
+    <string name="service_app_set_3rd">ثلاثي</string>
+    <string name="service_app_set_media">وسائط النظام</string>
+    <string name="service_app_set_phone">هاتف النظام</string>
+    <string name="service_app_set_web_provider">مزود WebView</string>
+    <string name="service_app_set_shortcut_proxy">وكيل صريح</string>
+    <string name="service_app_set_white_listed">القائمة البيضاء</string>
+    <string name="service_app_set_white_listed_user">القائمة البيضاء المخصصة</string>
+    <string name="service_app_set_white_listed_user_description">يمكنك تخصيص قائمة بيضاء ، ولن تظهر التطبيقات الموجودة فيها في قائمة التطبيقات في صفحة الميزات</string>
+    <string name="service_app_set_disabled">مجمدة</string>
+
+    <string name="service_dialog_title_thanox_removed">تم إلغاء تثبيت Thanox</string>
+    <string name="service_dialog_message_thanox_removed">هل تريد الاحتفاظ ببياناتها الأساسية؟ إذا لم تكن بحاجة إلى الاحتفاظ بها ، فسنقوم بتنظيفها.</string>
+    <string name="service_dialog_button_thanox_removed_keep_data">الاحتياطي</string>
+    <string name="service_dialog_button_thanox_removed_remove_data">إزالة</string>
+
+    <string name="billing_state_row_not_trust_title">حزمة التثبيت غير الموثوق بها</string>
+    <string name="billing_state_row_not_trust_message">قد يأتي Thanox من تثبيت غير موثوق به ، ولا يتم إصدار إصدار Pro إلا على متجر Google play ، يرجى عدم التثبيت من أي مصدر آخر. ملاحظة: سيؤدي التثبيت غير الموثوق به إلى تجميد الجهاز بشكل غير طبيعي وفقدان بيانات التكوين! ! !</string>
+
     <string name="app_select_activate_method">Which activation method do you prefer?</string>
 
     <!--    Locker-->
@@ -18,6 +82,1365 @@
 
     <string name="module_locker_biometric_not_set_dialog_title">ضبط كلمة السر</string>
     <string name="module_locker_biometric_not_set_dialog_message">قبل تمكين قفل التطبيقات ، يرجى الانتقال إلى إعدادات أمان النظام لإكمال إعدادات الوجه أو بصمة الإصبع أو رمز PIN أو نمط كلمة المرور</string>
+
+    <string name="module_locker_summary_white_list_components">Activity in Allow list will not be locked</string>
+    <string name="module_locker_title_white_list_components">Allowed components</string>
+    <string name="module_locker_title_verify_method">Verify method</string>
+    <string name="module_locker_title_verify_system">Follow System</string>
+    <string name="module_locker_title_verify_custom_pattern">Custom Pattern</string>
+    <string name="module_locker_title_verify_custom_pin">Custom PIN</string>
+    <string name="module_locker_title_verify_custom_pattern_settings">Pattern settings</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_warn">Please remember your password. Once set, the password cannot be recovered.</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_1">Draw pattern</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_2">Draw pattern again</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_mismatch">Two patterns do not match.</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_set_complete">Patterns has been set</string>
+
+    <string name="module_ops2_ops_list_title">All Permissions</string>
+    <string name="module_ops2_perm_state_allow">Allow</string>
+    <string name="module_ops2_perm_state_deny">Deny</string>
+    <string name="module_ops2_perm_state_deny_summary">Deny permissions and do not ask again</string>
+    <string name="module_ops2_perm_state_ignore">Ignore</string>
+    <string name="module_ops2_perm_state_ignore_summary">Grant permission but ignore operations or return empty data</string>
+    <string name="module_ops2_perm_state_ask">Ask</string>
+    <string name="module_ops2_perm_state_foreground">Allow during use</string>
+    <string name="module_ops2_perm_state_default">Default</string>
+    <string name="module_ops2_perm_state_not_set">Not Set</string>
+    <string name="module_ops2_perm_state_unknown">Unknown</string>
+
+    <string-array name="module_ops2_app_ops_summaries">
+        <item>""</item>
+        <item>""</item>
+        <item>""</item>
+        <item>"Vibration"</item>
+        <item>"Read Contacts"</item>
+        <item>"Modify Contacts"</item>
+        <item>"Read Call Logs"</item>
+        <item>"Modify Call Logs"</item>
+        <item>"Read Calendar"</item>
+        <item>"Modify Calendar"</item>
+        <item>"WLAN Scan"</item>
+        <item>"Notifications"</item>
+        <item>"Mobile Network Scan"</item>
+        <item>"Make Phone Calls"</item>
+        <item>"Read SMS"</item>
+        <item>"Write SMS"</item>
+        <item>"Receive SMS"</item>
+        <item>"Receive Emergency SMS"</item>
+        <item>"Receive MMS"</item>
+        <item>"Receive WAP PUSH Messages"</item>
+        <item>"Send SMS"</item>
+        <item>"Read ICC SMS"</item>
+        <item>"Write ICC SMS"</item>
+        <item>"Modify Settings"</item>
+        <item>"Display on Top"</item>
+        <item>"Access Notifications"</item>
+        <item>"Camera"</item>
+        <item>"Record Audio"</item>
+        <item>"Play Audio"</item>
+        <item>"Read Clipboard Content"</item>
+        <item>"Modify Clipboard Content"</item>
+        <item>"Media Buttons"</item>
+        <item>"Audio Focus"</item>
+        <item>"Master Volume"</item>
+        <item>"Voice Volume"</item>
+        <item>"Ringtone Volume"</item>
+        <item>"Media Volume"</item>
+        <item>"Alarm Volume"</item>
+        <item>"Notification Volume"</item>
+        <item>"Bluetooth Volume"</item>
+        <item>"Keep Awake"</item>
+        <item>"Monitor Location"</item>
+        <item>"Monitor High-Power Location Services"</item>
+        <item>"Get Usage Stats"</item>
+        <item>"Mute or Unmute Microphone"</item>
+        <item>"Display Greeting"</item>
+        <item>"Project Media"</item>
+        <item>"Activate VPN"</item>
+        <item>"Write Wallpaper"</item>
+        <item>"Assist Structure"</item>
+        <item>"Assist Screenshot"</item>
+        <item>"Read Phone State"</item>
+        <item>"Add Voicemail"</item>
+        <item>"Use SIP"</item>
+        <item>"Handle Outgoing Calls"</item>
+        <item>"Fingerprint"</item>
+        <item>"Body Sensors"</item>
+        <item>"Read Cell Broadcasts"</item>
+        <item>"Mock Location"</item>
+        <item>"Read Storage"</item>
+        <item>"Write Storage"</item>
+        <item>"Turn On Screen"</item>
+        <item>"Get Accounts"</item>
+        <item>"Run in Background"</item>
+        <item>"Accessibility Volume"</item>
+
+        <item>Read phone number</item>
+        <item>Request to install applications</item>
+        <item>Picture in picture</item>
+        <item>Instant app start foreground</item>
+        <item>Answer incoming phone calls</item>
+        <item>Run tasks in the background</item>
+        <item>Change Wifi connection state</item>
+        <item>Request package deletion through package installer</item>
+        <item>Bind an accessibility service</item>
+        <item>Continue handover of a call from another app</item>
+        <item>Create and manage IPsec tunnels</item>
+        <item>Any app start foreground service</item>
+        <item>Bluetooth scan</item>
+        <item>Use the BiometricPrompt/BiometricManager APIs</item>
+        <item>Physical activity recognition</item>
+        <item>Financial app SMS read</item>
+        <item>Read media of audio type</item>
+        <item>Write media of audio type</item>
+        <item>Read media of video type</item>
+        <item>Write media of video type</item>
+        <item>Read media of image type</item>
+        <item>Write media of image type</item>
+        <item>Has a legacy (non-isolated) view of storage</item>
+        <item>Use accessibility features</item>
+        <item>Read device information (IMEI/MEID, IMSI, SIM/Build serial)</item>
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Activate platform VPN</item>
+        <item>Loader usage stats</item>
+        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
+    </string-array>
+
+    <string-array name="module_ops2_app_ops_labels">
+        <item>"Coarse Location"</item>
+        <item>"Precise Location"</item>
+        <item>"GPS"</item>
+        <item>"Vibration"</item>
+        <item>"Read Contacts"</item>
+        <item>"Modify Contacts"</item>
+        <item>"Read Call Logs"</item>
+        <item>"Modify Call Logs"</item>
+        <item>"Read Calendar"</item>
+        <item>"Modify Calendar"</item>
+        <item>"Location"</item>
+        <item>"Post Notifications"</item>
+        <item>"Location"</item>
+        <item>"Make Phone Calls"</item>
+        <item>"Read SMS/MMS"</item>
+        <item>"Write SMS/MMS"</item>
+        <item>"Receive SMS/MMS"</item>
+        <item>"Receive SMS/MMS"</item>
+        <item>"Receive SMS/MMS"</item>
+        <item>"Receive SMS/MMS"</item>
+        <item>"Send SMS/MMS"</item>
+        <item>"Read SMS/MMS"</item>
+        <item>"Write SMS/MMS"</item>
+        <item>"Modify Settings"</item>
+        <item>"Display on Top"</item>
+        <item>"Access Notifications"</item>
+        <item>"Camera"</item>
+        <item>"Record Audio"</item>
+        <item>"Play Audio"</item>
+        <item>"Read Clipboard Content"</item>
+        <item>"Modify Clipboard Content"</item>
+        <item>"Media Buttons"</item>
+        <item>"Audio Focus"</item>
+        <item>"Master Volume"</item>
+        <item>"Voice Volume"</item>
+        <item>"Ringtone Volume"</item>
+        <item>"Media Volume"</item>
+        <item>"Alarm Volume"</item>
+        <item>"Notification Volume"</item>
+        <item>"Bluetooth Volume"</item>
+        <item>"Keep Awake"</item>
+        <item>"Location"</item>
+        <item>"Location Information"</item>
+        <item>"Get Usage Stats"</item>
+        <item>"Mute or Unmute Microphone"</item>
+        <item>"Display Greeting"</item>
+        <item>"Project Media"</item>
+        <item>"Activate VPN"</item>
+        <item>"Write Wallpaper"</item>
+        <item>"Assist Structure"</item>
+        <item>"Assist Screenshot"</item>
+        <item>"Read Phone State"</item>
+        <item>"Add Voicemail"</item>
+        <item>"Use SIP"</item>
+        <item>"Handle Outgoing Calls"</item>
+        <item>"Fingerprint"</item>
+        <item>"Body Sensors"</item>
+        <item>"Read Cell Broadcasts"</item>
+        <item>"Mock Location"</item>
+        <item>"Read Storage"</item>
+        <item>"Write Storage"</item>
+        <item>"Turn On Screen"</item>
+        <item>"Get Accounts"</item>
+        <item>"Run in Background"</item>
+        <item>"Accessibility Volume"</item>
+        <item>Read phone number</item>
+        <item>Install applications</item>
+        <item>Picture in picture</item>
+        <item>Instant app start foreground</item>
+        <item>Answer incoming phone calls</item>
+        <item>Run tasks in the background</item>
+        <item>Change Wifi connection state</item>
+        <item>Request package deletion through package installer</item>
+        <item>Bind an accessibility service</item>
+        <item>Continue handover of a call from another app</item>
+        <item>Create and Manage IPsec Tunnels</item>
+        <item>Any app start foreground service</item>
+        <item>Bluetooth scan</item>
+        <item>Use BiometricPrompt</item>
+        <item>Physical activity recognition</item>
+        <item>Financial app SMS read</item>
+        <item>Read media of audio type</item>
+        <item>Write media of audio type</item>
+        <item>Read media of video type</item>
+        <item>Write media of video type</item>
+        <item>Read media of image type</item>
+        <item>Write media of image type</item>
+        <item>Has a legacy view of storage</item>
+        <item>Use accessibility features</item>
+        <item>Read device information</item>
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Activate platform VPN</item>
+        <item>Loader usage stats</item>
+        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
+    </string-array>
+
+    <string name="active_method_chooser_summary_xposed_magisk">For rooted devices, requires Magisk or LSPosed framework; LSPosed mode provides the most features, while Magisk mode has relatively fewer features.</string>
+    <string name="active_method_chooser_summary_shizuku">For non-rooted devices, requires Shizuku and selecting Thanox within Shizuku; Note: Due to system permission restrictions, the Shizuku mode has very limited features.</string>
+
+    <string name="module_activity_trampoline_app_name_abbr">Activity Tramp</string>
+    <string name="module_activity_trampoline_app_name">الكسب غير المشروع</string>
+
+    <string name="module_activity_trampoline_app_not_installed">التطبيق غير مثبت</string>
+
+    <string name="module_activity_trampoline_edit_dialog_title">تعديل</string>
+    <string name="module_activity_trampoline_add_dialog_title">الجديد</string>
+    <string name="module_activity_trampoline_add_dialog_hint_from">الأصلي Activity</string>
+    <string name="module_activity_trampoline_add_dialog_hint_to">استبدل بـ Activity</string>
+    <string name="module_activity_trampoline_add_dialog_delete">إزالة</string>
+
+    <string name="module_activity_trampoline_add_empty_component">لا تدخل محتوى فارغ</string>
+    <string name="module_activity_trampoline_add_invalid_from_component">المحتوى الأصلي Activity خاطئ ، يرجى التحقق من الإدخال</string>
+    <string name="module_activity_trampoline_add_invalid_to_component">استبدال المحتوى Activity خاطئ ، يرجى التحقق من الإدخال</string>
+
+    <string name="module_activity_trampoline_title_pull_from_server">استيراد قواعد المباني الجاهزة</string>
+    <string name="module_activity_trampoline_title_export_comp_replacements">تصدير قائمة القواعد الخاصة بي</string>
+    <string name="module_activity_trampoline_title_export_comp_replacement_item">تصدير هذه القاعدة</string>
+    <string name="module_activity_trampoline_title_import_comp_replacements">قواعد الاستيراد</string>
+
+    <!-- Switch On/Off  -->
+    <string name="switch_on_text">مفعل</string>
+    <string name="switch_off_text">غير مفعل</string>
+
+    <string name="common_menu_title_batch_select">اختيار الدفعة</string>
+    <string name="common_menu_title_select_all">الكل</string>
+    <string name="common_menu_title_un_select_all">لا على الاطلاق</string>
+    <string name="common_menu_title_search">بحث</string>
+    <string name="common_menu_title_rename">إعادة تسمية</string>
+    <string name="common_menu_title_remove">إزالة</string>
+    <string name="common_menu_title_uninstall">الغاء التثبيت</string>
+    <string name="common_menu_title_wiki">يرشد</string>
+    <string name="common_menu_title_import_from_clipboard">الاستيراد من الحافظة</string>
+    <string name="common_menu_title_import">يستورد</string>
+    <string name="common_menu_title_re_import">إعادة الاستيراد</string>
+    <string name="common_menu_title_update">تجديد</string>
+    <string name="common_menu_title_export_to_clipboard">تصدير إلى الحافظة</string>
+    <string name="common_fab_title_done">إنهاء</string>
+    <string name="common_fab_title_add">اضف إليه</string>
+    <string name="common_dialog_message_are_you_sure">هل أنت واثق؟ الرجاء العمل بحذر!</string>
+    <string name="common_darg_sort">Drag to sort</string>
+    <string name="common_remember">لا مزيد من التذكيرات</string>
+    <string name="common_tips">ملحوظة</string>
+    <string name="common_tips_qut">ملحوظة:</string>
+    <string name="common_retry">أعد المحاولة</string>
+
+    <string name="common_badge_text_experiment">تجربة</string>
+    <string name="common_experiment_feature_warning_message">هذه الميزة هي ميزة تجريبية وليست مستقرة بعد. يوصى بعمل نسخة احتياطية من بياناتك قبل تمكين هذه الميزة لمنع فقدان البيانات بسبب عيوب غير متوقعة.</string>
+
+    <string name="common_toast_copied_to_clipboard">نسخ إلى الحافظة</string>
+
+    <string name="app_state_disabled">تجميد</string>
+
+    <string name="chip_title_app_only_disabled">مجمدة</string>
+    <string name="chip_title_app_only_enable">مفعل</string>
+    <string name="chip_title_app_only_running">ادارة</string>
+    <string name="chip_title_app_only_cloned_app">استنساخ</string>
+
+    <string name="app_picker_title">اختر التطبيق</string>
+
+    <string name="common_text_value_not_set">غير مضبوط</string>
+
+    <string name="common_network_error">الشبكة غير طبيعية ، يرجى التحقق من اتصال شبكة الجهاز والمحاولة مرة أخرى</string>
+    <string name="common_server_error">الخادم غير متاح مؤقتًا ، يرجى المحاولة مرة أخرى لاحقًا ، أو محاولة التحديث إلى أحدث إصدار من البرنامج</string>
+    <string name="common_generic_error">عذرا، هناك خطأ ما</string>
+
+    <string name="common_text_wait_a_moment">انتظر دقيقة</string>
+
+    <string name="common_sort_reverse">يعكس</string>
+    <string name="common_sort_by_default">إفتراضي</string>
+    <string name="common_sort_by_install_time">وقت التثبيت</string>
+    <string name="common_sort_by_update_time">تحديث الوقت</string>
+    <string name="common_sort_by_last_used_time">وقت آخر استخدام</string>
+    <string name="common_sort_by_total_used_time">إجمالي وقت الاستخدام</string>
+    <string name="common_sort_by_install_app_label">اسم التطبيق</string>
+    <string name="common_sort_by_install_sdk_version">الهدف SDK</string>
+    <string name="common_sort_by_install_apk_size">حجم التطبيق</string>
+    <string name="common_sort_by_install_app_uid">المعرف الفريد</string>
+
+    <string name="common_switchbar_title_format">استخدم "%s"</string>
+    <string name="module_common_title_tools">أداة</string>
+
+    <string name="module_common_error_occur">خطأ</string>
+    <string name="module_common_copy_error_message">نسخ رسالة الخطأ</string>
+
+    <string name="module_common_no_data">لايوجد بيانات</string>
+
+    <string name="module_common_user">المستخدم %s</string>
+
+    <string-array name="module_common_export_selections">
+        <item>الحافظة</item>
+        <item>تصدير إلى ملف</item>
+    </string-array>
+
+    <string-array name="module_common_import_selections">
+        <item>الحافظة</item>
+        <item>استيراد من ملف</item>
+    </string-array>
+
+    <string-array name="themes_entry">
+        <item>Light</item>
+        <item>Light indigo</item>
+        <item>Light red</item>
+        <item>Light green</item>
+        <item>Light amber</item>
+        <item>Light black</item>
+        <item>Light oppo</item>
+        <item>Light pink</item>
+        <item>Dark</item>
+        <item>Dark indigo</item>
+        <item>Dark red</item>
+        <item>Dark amber</item>
+        <item>Dark grey</item>
+        <item>Auto</item>
+        <item>Material you</item>
+    </string-array>
+
+    <string name="module_component_manager_disabled_by_thanox">تعطيل عبر thanox</string>
+    <string name="module_component_manager_component_running">ادارة</string>
+    <string name="module_component_manager_feature_desc">يستخدم Thanox واجهة برمجة تطبيقات نظام Android لتعطيل المكونات ، مما يعني أنه حتى إذا قمت بإلغاء تثبيت Thanox ، فستبقى حالة هذه المكونات. يمنع Thanox المكونات التي تم تعطيلها من خلال thanox من إعادة تمكينها بواسطة تطبيقات أخرى</string>
+    <string name="module_component_manager_keep_service_smart_standby">الاستيراد إلى وضع القطع ، احتفظ بالقائمة</string>
+    <string name="module_component_manager_add_lock_white_list">Add to App lock allow list</string>
+
+    <string name="nnf_new_folder">New folder</string>
+    <string name="nnf_create_folder_error">Create folder error</string>
+    <string name="nnf_name">Name</string>
+    <string name="nnf_select_something_first">Select first</string>
+    <string name="nnf_need_valid_filename">File name invalid</string>
+    <string name="nnf_permission_external_write_denied">No permission</string>
+    <string name="nnf_filename">File name</string>
+    <string name="nnf_list_ok">@android:string/ok</string>
+    <string name="nnf_list_cancel">@android:string/cancel</string>
+    <string name="nnf_new_folder_ok">@android:string/ok</string>
+    <string name="nnf_new_folder_cancel">@android:string/cancel</string>
+
+    <string name="module_notification_recorder_feature_title_notification_center">مركز إعلام</string>
+    <string name="module_notification_recorder_feature_title_notification_recorder">مسجل</string>
+    <string name="module_notification_recorder_item_no_title">بدون عنوان</string>
+    <string name="module_notification_recorder_item_type_toast">خبز محمص</string>
+    <string name="module_notification_recorder_item_type_n">يلاحظ</string>
+    <string name="module_notification_recorder_item_type_clip">الحافظة</string>
+    <string name="module_notification_recorder_item_no_content">هذا الإخطار ليس له محتوى</string>
+    <string name="module_notification_recorder_item_uninstalled_app">تم إلغاء تثبيت التطبيق</string>
+    <string name="module_notification_recorder_total_message_count">%s إخطارات في المجموع</string>
+    <string name="module_notification_recorder_clear_all">امسح الكل</string>
+    <string name="module_notification_recorder_toady">اليوم</string>
+    <string name="module_notification_recorder_before_today">ابكر</string>
+    <string name="module_notification_recorder_settings">اقامة</string>
+    <string name="module_notification_recorder_pref_summary_enable_toast_info">أضف أيقونة التطبيق إلى نخب النظام</string>
+    <string name="module_notification_recorder_pref_title_enable_toast_info">إظهار معلومات الخبز المحمص</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_n">سجل إخطارات شريط الحالة</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_for_all_apps">Record all apps</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_t">سجل نخب التطبيق</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_clip">سجل الحافظة</string>
+    <string name="module_notification_recorder_reproduce">إعادة إنتاج</string>
+    <string name="module_notification_recorder_zoom">تكبير</string>
+    <string name="module_notification_recorder_yesterday">في الامس</string>
+    <string name="module_notification_recorder_the_day_before_yesterday">أول أمس</string>
+    <string name="module_notification_recorder_stats">الإحصاء</string>
+
+    <string-array name="module_ops_app_ops_summaries">
+        <item>coarse location</item>
+        <item>fine location</item>
+        <item>GPS</item>
+        <item>vibrate</item>
+        <item>read contacts</item>
+        <item>modify contacts</item>
+        <item>read call log</item>
+        <item>modify call log</item>
+        <item>read calendar</item>
+        <item>modify calendar</item>
+        <item>wi-fi scan</item>
+        <item>notification</item>
+        <item>cell scan</item>
+        <item>call phone</item>
+        <item>read SMS</item>
+        <item>write SMS</item>
+        <item>receive SMS</item>
+        <item>receive emergency SMS</item>
+        <item>receive MMS</item>
+        <item>receive WAP push</item>
+        <item>send SMS</item>
+        <item>read ICC SMS</item>
+        <item>write ICC SMS</item>
+        <item>modify settings</item>
+        <item>draw on top</item>
+        <item>access notifications</item>
+        <item>camera</item>
+        <item>record audio</item>
+        <item>play audio</item>
+        <item>read clipboard</item>
+        <item>modify clipboard</item>
+        <item>media buttons</item>
+        <item>audio focus</item>
+        <item>master volume</item>
+        <item>voice volume</item>
+        <item>ring volume</item>
+        <item>media volume</item>
+        <item>alarm volume</item>
+        <item>notification volume</item>
+        <item>bluetooth volume</item>
+        <item>keep awake</item>
+        <item>monitor location</item>
+        <item>monitor high power location</item>
+        <item>get usage stats</item>
+        <item>mute/unmute microphone</item>
+        <item>show toast</item>
+        <item>project media</item>
+        <item>activate VPN</item>
+        <item>write wallpaper</item>
+        <item>assist structure</item>
+        <item>assist screenshot</item>
+        <item>read phone state</item>
+        <item>add voicemail</item>
+        <item>use sip</item>
+        <item>process outgoing call</item>
+        <item>fingerprint</item>
+        <item>body sensors</item>
+        <item>read cell broadcasts</item>
+        <item>mock location</item>
+        <item>read storage</item>
+        <item>write storage</item>
+        <item>turn on screen</item>
+        <item>get accounts</item>
+        <item>run in background</item>
+        <item>accessibility volume</item>
+        <item>Read phone number</item>
+        <item>Install packages</item>
+        <item>Picture in picture</item>
+        <item>Instant app start foreground</item>
+        <item>Answer incoming phone calls</item>
+        <item>Run jobs when in background</item>
+        <item>Change Wi-Fi connectivity state</item>
+        <item>Request package deletion through package installer</item>
+        <item>Bind an accessibility service</item>
+        <item>Continue handover of a call from another app</item>
+        <item>Create and Manage IPsec Tunnels</item>
+        <item>Any app start foreground service</item>
+        <item>Blue tooth scan</item>
+
+        <item>Use the BiometricPrompt/BiometricManager APIs</item>
+        <item>Physical activity recognition</item>
+        <item>Financial app sms read</item>
+        <item>Read media of audio type</item>
+        <item>Write media of audio type</item>
+        <item>Read media of video type</item>
+        <item>Write media of video type</item>
+        <item>Read media of image type</item>
+        <item>Write media of image type</item>
+        <item>Has a legacy (non-isolated) view of storage</item>
+        <item>Accessing accessibility features</item>
+        <item>Read the device identifiers (IMEI / MEID, IMSI, SIM / Build serial)</item>
+
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Active platform VPN</item>
+        <item>Loader usage stats</item>
+        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
+
+        <item>Query other installed package info by package name</item>
+        <item>Adjust screen brightness</item>
+        <item>Get installed apps</item>
+        <item>Query intent(LAUNCHER, usually used to query installed apps) activities</item>
+        <item>Access device location</item>
+        <item>Receive sensor event, remember select target app in scoped Xposed framework</item>
+    </string-array>
+
+    <string-array name="module_ops_app_ops_labels">
+        <item>Location</item>
+        <item>Location</item>
+        <item>Location</item>
+        <item>Vibrate</item>
+        <item>Read contacts</item>
+        <item>Modify contacts</item>
+        <item>Read call log</item>
+        <item>Modify call log</item>
+        <item>Read calendar</item>
+        <item>Modify calendar</item>
+        <item>Location</item>
+        <item>Post notification</item>
+        <item>Location</item>
+        <item>Call phone</item>
+        <item>Read SMS/MMS</item>
+        <item>Write SMS/MMS</item>
+        <item>Receive SMS/MMS</item>
+        <item>Receive SMS/MMS</item>
+        <item>Receive SMS/MMS</item>
+        <item>Receive SMS/MMS</item>
+        <item>Send SMS/MMS</item>
+        <item>Read SMS/MMS</item>
+        <item>Write SMS/MMS</item>
+        <item>Modify settings</item>
+        <item>Draw on top</item>
+        <item>Access notifications</item>
+        <item>Camera</item>
+        <item>Record audio</item>
+        <item>Play audio</item>
+        <item>Read clipboard</item>
+        <item>Modify clipboard</item>
+        <item>Media buttons</item>
+        <item>Audio focus</item>
+        <item>Master volume</item>
+        <item>Voice volume</item>
+        <item>Ring volume</item>
+        <item>Media volume</item>
+        <item>Alarm volume</item>
+        <item>Notification volume</item>
+        <item>Bluetooth volume</item>
+        <item>Keep awake</item>
+        <item>Location</item>
+        <item>Location</item>
+        <item>Get usage stats</item>
+        <item>Mute/unmute microphone</item>
+        <item>Show toast</item>
+        <item>Project media</item>
+        <item>Activate VPN</item>
+        <item>Write wallpaper</item>
+        <item>Assist structure</item>
+        <item>Assist screenshot</item>
+        <item>Read phone state</item>
+        <item>Add voicemail</item>
+        <item>Use sip</item>
+        <item>Process outgoing call</item>
+        <item>Fingerprint</item>
+        <item>Body sensors</item>
+        <item>Read cell broadcasts</item>
+        <item>Mock location</item>
+        <item>Read storage</item>
+        <item>Write storage</item>
+        <item>Turn on screen</item>
+        <item>Get accounts</item>
+        <item>Run in background</item>
+        <item>Accessibility volume</item>
+        <item>Read phone number</item>
+        <item>Install packages</item>
+        <item>Picture in picture</item>
+        <item>Instant app start foreground</item>
+        <item>Answer incoming phone calls</item>
+        <item>Run jobs when in background</item>
+        <item>Change Wi-Fi connectivity state</item>
+        <item>Request package deletion through package installer</item>
+        <item>Bind an accessibility service</item>
+        <item>Continue handover of a call from another app</item>
+        <item>Create and Manage IPsec Tunnels</item>
+        <item>Any app start foreground service</item>
+        <item>Blue tooth scan</item>
+
+        <item>Use BiometricPrompt</item>
+        <item>Physical activity recognition</item>
+        <item>Financial app sms read</item>
+        <item>Read media of audio type</item>
+        <item>Write media of audio type</item>
+        <item>Read media of video type</item>
+        <item>Write media of video type</item>
+        <item>Read media of image type</item>
+        <item>Write media of image type</item>
+        <item>Has a legacy view of storage</item>
+        <item>Accessing accessibility features</item>
+        <item>Read the device identifiers</item>
+
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Active platform VPN</item>
+        <item>Loader usage stats</item>
+        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
+
+        <item>Get package info</item>
+        <item>Screen brightness</item>
+        <item>Get installed apps</item>
+        <item>Query intent activities</item>
+        <item>Location</item>
+        <item>Receive sensor event</item>
+    </string-array>
+
+    <string name="module_ops_category_location">موقع</string>
+    <string name="module_ops_category_personal">شخصي</string>
+    <string name="module_ops_category_message">معلومة</string>
+    <string name="module_ops_category_media">وسائل الإعلام</string>
+    <string name="module_ops_category_device">معدات</string>
+    <string name="module_ops_category_bg">وراء الكواليس</string>
+    <string name="module_ops_category_remaining">آخر</string>
+    <string name="module_ops_category_thanox">Thanox</string>
+
+    <string name="module_ops_title_op_remind_apps">التطبيقات المراقبة</string>
+
+    <string name="module_ops_title_reset_ops_mode_for_all">إعادة ضبط تكوين جميع التطبيقات</string>
+
+    <string name="module_ops_feature_title_app_ops_list">إدارة السلطة</string>
+    <string name="module_ops_feature_summary_app_ops_list">حسب التطبيق</string>
+    <string name="module_ops_activity_title_app_ops_list">حسب التطبيق</string>
+
+    <string name="module_ops_feature_title_a_manage">أدارة الحدث</string>
+    <string name="module_ops_feature_title_s_manage">إدارة الخدمات</string>
+    <string name="module_ops_feature_title_r_manage">إدارة استقبال البث</string>
+    <string name="module_ops_feature_title_p_manage">إدارة مزود المحتوى</string>
+
+    <string name="module_ops_feature_title_block_uninstall">منع إلغاء التثبيت</string>
+    <string name="module_ops_feature_title_block_clear_data">كتلة مسح البيانات</string>
+
+    <string name="module_ops_feature_title_ops_app_list">إدارة السلطة</string>
+    <string name="module_ops_feature_summary_ops_app_list">عن طريق الأذونات</string>
+    <string name="module_ops_activity_title_ops_app_list">بإذن %s</string>
+
+    <string name="module_ops_feature_title_ops_remind_list">تذكير الخصوصية</string>
+    <string name="module_ops_feature_summary_ops_remind">تنبيهات عندما تستخدم التطبيقات أذونات معينة</string>
+
+    <string name="module_ops_mode_allow">اسمح دائما</string>
+    <string name="module_ops_mode_foreground">مكتب الجبهة مسموح به</string>
+    <string name="module_ops_mode_ignore">رفض</string>
+    <string name="module_ops_mode_all">الكل</string>
+
+    <string name="module_ops_mode_allow_all">كل هذا مسموح به دائمًا</string>
+    <string name="module_ops_mode_foreground_all">كل مكتب الجبهة مسموح به</string>
+    <string name="module_ops_mode_ignore_all">كل رفض</string>
+
+    <string name="module_ops_mode_ask_all">All ask</string>
+
+    <string name="module_profile_feature_name">Profile</string>
+    <string name="module_profile_feature_summary">Perform custom actions if match given condition</string>
+
+    <string name="module_profile_title_global_var">Global variant</string>
+    <string name="module_profile_title_rule_engine">Engine</string>
+    <string name="module_profile_title_action_console">Action Console</string>
+    <string name="module_profile_title_log">Log</string>
+
+    <string name="module_profile_summary_rule_engine">The engine is a tool for publishing facts. Thanox has multiple publishers enabled by default. The following engines support turning on or off. Please pay attention to the engine description, shutting down the engine may cause some profiles to not be triggered or executed normally</string>
+    <string name="module_profile_pref_title_rule_engine_automation">Automation</string>
+    <string name="module_profile_pref_summary_rule_engine_automation">Supports performing automatic clicks and find views. \n\n📢
+        Note: This engine may cause some app accessibility service to not work</string>
+    <string name="module_profile_pref_title_rule_engine_push">Push</string>
+    <string name="module_profile_pref_summary_rule_engine_push">Publish facts of push message arrival</string>
+
+    <string name="module_profile_pref_title_rule_engine_su">su API</string>
+    <string name="module_profile_pref_summary_rule_engine_su">Enable su API support for Thanox profile. please click Allow in the pop-up super permission grant request. If no request is received, please manually turn on the super user permission. \nsu command will be executed as Thanox application. \nPlease allow Thanox app to start in background</string>
+    <string name="module_profile_pref_title_rule_engine_custom_su">Custom su</string>
+    <string name="module_profile_pref_summary_rule_engine_custom_su">You can change default su path by input the custom su path</string>
+
+    <string name="module_profile_should_enable_su">This profile may not work since <b>su API</b> support not enabled, please go to Engine Settings to enable it</string>
+    <string name="module_profile_should_enable_push">This profile may not work since <b>Push Message Engine</b> not enabled, please go to Engine Settings to enable it</string>
+    <string name="module_profile_miss_global_var">This profile may not work since below global var is missing, you need to create these vars.\n%s</string>
+    <string name="module_profile_block_thread">This profile may call Thread.sleep, which may block the execution of other profiles; please adjust the priority of this profile to a negative number so that it will be executed in a new thread.</string>
+
+    <string name="module_profile_pref_title_rule_engine_shortcut">Create shortcut</string>
+    <string name="module_profile_pref_summary_rule_engine_shortcut">Create a launcher shortcut, when this shortcut launched, thanox will publish a fact with the shortcut fact value</string>
+
+    <string name="module_profile_pref_title_rule_engine_date_time">Date &amp; Time</string>
+    <string name="module_profile_pref_summary_rule_engine_date_time">Schedule some repeating or timed tasks</string>
+    <string name="module_profile_date_time_regular_interval">Regular interval</string>
+    <string name="module_profile_date_time_alarm">Time of a day</string>
+    <string name="module_profile_date_time_tag">Tag is for condition check. \nExample of use: %s</string>
+    <string name="module_profile_date_time_min_interval">Min interval is 15m</string>
+
+    <string name="module_profile_rule_edit_action_save">Save</string>
+    <string name="module_profile_rule_edit_action_discard">Discard</string>
+    <string name="module_profile_rule_edit_action_text_size_inc">Increase</string>
+    <string name="module_profile_rule_edit_action_text_size_dec">Decrease</string>
+
+    <string name="module_profile_rule_wiki">Wiki</string>
+    <string name="module_profile_rule_impor_from_file">Import from file</string>
+    <string name="module_profile_rule_impor_example">Import examples</string>
+    <string name="module_profile_rule_online">View Online Profiles</string>
+
+    <string name="module_profile_rule_edit">Edit</string>
+    <string name="module_profile_rule_new">New</string>
+    <string name="module_profile_rule_example"></string>
+
+    <string name="module_profile_editor_select_format">Choose format</string>
+    <string name="module_profile_editor_save_success">Save success, you can enable it</string>
+    <string name="module_profile_editor_save_check_error">Bad content</string>
+
+    <string name="module_profile_editor_discard_dialog_title">Discard</string>
+    <string name="module_profile_editor_discard_dialog_message">Are you sure?</string>
+
+    <string name="module_profile_editor_delete_dialog_title">Delete</string>
+    <string name="module_profile_editor_delete_dialog_message">Are you sure?</string>
+
+    <string name="module_profile_edit_delete">Delete</string>
+    <string name="module_profile_edit_show_hide_symbols">Symbol bar</string>
+
+    <string name="module_profile_edit_var_title_hint">Please input name</string>
+    <string name="module_profile_var_list_item_size">%s variants</string>
+    <string name="module_profile_title_shortcut_fact_value">Fact value</string>
+    <string name="module_profile_title_shortcut_label">Shortcut label</string>
+
+    <string name="module_profile_rule_format_tips_title">Format tips</string>
+    <string name="module_profile_rule_format_tips_message">The <b>name</b> field should use alphanumeric combinations as much as possible, and no special characters should appear; \n\nany characters can be used in the <b>description</b> field, just briefly introduce the purpose of this scenario</string>
+
+    <string name="module_profile_add_to_global_var">Add to Global Variant</string>
+
+    <string name="module_push_message_delegate_title_wechat">WeChat</string>
+    <string name="module_push_message_delegate_title_wechat_proxy">WeChat Push</string>
+    <string name="module_push_message_delegate_title_summary_proxy">You may install wechat app from Google play store</string>
+    <string name="module_push_message_delegate_title_sound">Sound</string>
+    <string name="module_push_message_delegate_title_vibrate">Vibrate</string>
+    <string name="module_push_message_delegate_title_content">Show message content</string>
+    <string name="module_push_message_delegate_title_mock">Mock</string>
+    <string name="module_push_message_delegate_title_skip_if_running">Skip notification</string>
+    <string name="module_push_message_delegate_summary_skip_if_running">No not send push notification if target app is running</string>
+    <string name="module_push_message_delegate_title_start_app">Start app process</string>
+    <string name="module_push_message_delegate_summary_start_app">Start app process if target app is not running</string>
+    <string name="module_push_message_delegate_title_gcm_diag">Diag</string>
+    <string name="module_push_message_delegate_notice_wechat_proxy">Please note that the collection function is currently in the experimental stage and is only for learning and research. At present, no one can guarantee that the push will be 100% received.</string>
+
+    <string name="app_name">Thanox</string>
+    <string name="app_description">I am Thanos! 😈👌</string>
+    <string name="privacy_agreement_file">privacy/privacy_agreement_en.html</string>
+
+    <string name="status_active">Active</string>
+    <string name="status_not_active">Not active</string>
+    <string name="message_active_needed">Thanox support both Xposed and Magisk.\n\n For Xposed user (Xposed module and Magisk zip can not be used at the same time), you can just select and check Thanox in Xposed app module config page. \n\nFor Magisk user, you can rename downloaded Thanox apk from .apk to .zip and then install in Magisk manager, or if you can not find the downloaded apk, you can go to Settings, About, Patch status to export the patch</string>
+    <string name="status_need_reboot">Reboot</string>
+    <string name="title_framework_error">Framework error</string>
+    <string name="message_framework_error">There is an error at the Thanox framework. Please report the logs under /data/system/thanos_xxx/log to the developer.</string>
+
+    <string name="title_multiple_patch_applied_error">Multiple patch applied</string>
+    <string name="message_multiple_patch_applied_error">You only needs to apply one patch to active Thanox, but you apply multiple patches at the same time: %s, be sure to read the usage guide</string>
+
+    <string name="nav_title_boost">Boost</string>
+    <string name="nav_title_secure">Privacy</string>
+    <string name="nav_title_settings">Settings</string>
+    <string name="nav_title_feedback">Feedback</string>
+    <string name="nav_title_exp">Extension</string>
+    <string name="nav_title_plugin">Plugin</string>
+    <string name="nav_title_plugin_repo">Plugin repo</string>
+    <string name="nav_title_thanox">Thanox</string>
+
+    <string name="pref_title_feature_toggle">Feature toggle</string>
+
+    <string name="priv_title_fields_template">Templates</string>
+    <string name="priv_title_fields_usage_count">Selected for %s apps</string>
+    <string name="priv_title_fields_usage_count_noop">Unused</string>
+
+    <string name="title_package_sets">Package sets</string>
+    <string name="title_package_add_set">Add Package set</string>
+    <string name="title_package_edit_set">View &amp; Edit</string>
+    <string name="title_package_delete_set">Delete</string>
+    <string name="title_package_count_set">%s Apps</string>
+
+    <string name="dialog_title_plugin_installing">Installing plugin</string>
+    <string name="dialog_title_plugin_updating">Updating plugin</string>
+    <string name="dialog_title_plugin_uninstalling">Uninstalling plugin</string>
+    <string name="dialog_title_plugin_uninstall_confirm">Are you sure to uninstall this plugin?</string>
+    <string name="menu_title_uninstall_plugin">Uninstall</string>
+    <string name="menu_title_view_plugin_info">Details</string>
+
+    <string name="title_download">Download</string>
+    <string name="title_install">Install</string>
+
+    <string name="tile_category_plugin_installed">Installed</string>
+    <string name="tile_category_plugin_already_installed">The current installation cannot be overrode, please uninstall then reinstall.</string>
+    <string name="tile_category_plugin_update_available">New version available</string>
+
+    <string name="tile_su_plugin_deprecated">The su Enabler plugin has been deprecated, now you don\'t need to install the su plugin. You can directly enable su API support in the Engine Settings of the Profile</string>
+
+    <string name="card_title_plugin_available">Install Thanox plugin</string>
+    <string name="card_message_plugin_available">Plugin consist of some unstable or non-critical functions.</string>
+
+    <string name="dialog_message_feedback">You can submit issues for feedback either in the Chat Groups in the Settings-About section or on GitHub/Thanox. When providing feedback, please make sure to include the following essential information: \n\n1. Clear description of the issue with accompanying screenshots or screen recordings. \n2. Log files exported by clicking the button below. \n\nBoth pieces of information are necessary.</string>
+    <string name="feedback_export_log">Export log</string>
+    <string name="feedback_export_log_success">Log has been exported</string>
+    <string name="feedback_export_log_fail">Fail to export log, pls grant Storage permission manually and try again</string>
+
+    <string name="title_no_plugins_installed">No plugin available</string>
+    <string name="title_plugin_reboot_take_effect">Please reboot for changes to take effect.</string>
+
+    <string name="title_show_current_activity">Current activity</string>
+    <string name="title_net_stats">Net stats</string>
+    <string name="message_reboot_needed">Reboot your device to update thanox-core</string>
+    <string name="reboot_now">Reboot now</string>
+    <string name="reboot_later">Not now</string>
+
+    <string name="badge_app_running">Running</string>
+    <string name="badge_app_idle">Idle</string>
+
+    <string name="secure_privacy_enabled_apps">apps has been restricted</string>
+    <string name="secure_privacy_request_count">Handled %s app privacy data requests</string>
+
+    <string name="boost_status_system_memory">Memory</string>
+    <string name="boost_status_system_storage">Storage</string>
+
+    <string name="feature_category_start_manage">Start</string>
+    <string name="feature_title_one_key_boost">One Key Boost</string>
+    <string name="feature_title_one_key_boost_abbr">Boost</string>
+    <string name="feature_title_start_restrict">Background Start</string>
+    <string name="feature_title_start_restrict_abbr">BG Start</string>
+    <string name="feature_desc_start_restrict">Allow apps to start from background</string>
+    <string name="feature_title_bg_restrict">Background Task</string>
+    <string name="feature_title_bg_restrict_abbr">BG Task</string>
+    <string name="feature_desc_bg_restrict_brief">Allow apps running in background</string>
+    <string name="feature_desc_bg_restrict">When the \"Background task\" feature is enabled, Thanox will perform a process cleanup after the screen is turned off. Allow selected apps to continue running even if the screen is locked, and exclude these apps from one-key boost</string>
+
+    <string name="menu_title_start_restrict_charts">Start record</string>
+    <string name="menu_title_rules">Rules</string>
+
+    <string name="feature_summary_start_restrict_rules">You can refine the association start control by making rules. For details, please refer to the novice manual. \n\nNote: The priority of the rule is greater than all other settings (for example, greening, associated startup list). \n\n Tip: Turning off rule checking may save device power.</string>
+    <string name="feature_summary_standby_restrict_rules">You can control to retain certain services, usage: KEEP $COMPONENT-NAME  \ne.g. KEEP xxx/.XService</string>
+
+    <string name="feature_category_app_clean_up">Clean</string>
+    <string name="feature_title_clean_when_task_removed">Clean Tasks</string>
+    <string name="feature_desc_clean_when_task_removed">Clean the background processes of selected apps when they are cleared from recent tasks</string>
+    <string name="feature_desc_clean_when_task_removed_brief">Clean background process on task removed</string>
+
+    <string name="activity_title_start_restrict">Background start</string>
+    <string name="activity_title_bg_restrict">Background task</string>
+    <string name="activity_title_clean_when_task_removed">Clean tasks</string>
+
+    <string name="feature_title_process_manage">Process Manager</string>
+    <string name="activity_title_process_manage">Running（%s）</string>
+    <string name="item_summary_process_count">%s processes</string>
+    <string name="item_summary_mem_size">%s</string>
+    <string name="snack_process_update_message">Process list changed, please update</string>
+    <string name="snack_process_update_refresh">Update</string>
+    <string name="title_cached_background_process">Cached background processes</string>
+
+    <string name="feature_category_app_manage">Apps</string>
+    <string name="feature_title_apps_manager">App Manager</string>
+    <string name="activity_title_apps_manager">App manager</string>
+    <string name="feature_summary_apps_manager">Per-app management and configuration</string>
+    <string name="titile_suggested_apps_recent_used">Recently used apps</string>
+    <string name="title_suggested_apps_view_all">Show all %s apps</string>
+
+    <string name="feature_category_privacy">Privacy</string>
+    <string name="feature_category_manage">Manage</string>
+    <string name="feature_category_protect">Protect</string>
+    <string name="feature_category_remind">Reminder</string>
+    <string name="feature_category_misc">Misc</string>
+
+    <string name="feature_title_recent_task_blur">Task Blur</string>
+    <string name="feature_summary_recent_task_blur">Add blur effect to recent tasks</string>
+
+    <string name="feature_title_wakelock_blocker">Wakelock Blocker</string>
+    <string name="wakelock_state_holding">Holding</string>
+    <string name="wakelock_view_held_only">Held only</string>
+    <string name="wakelock_count">%s wakelocks</string>
+
+    <string name="feature_title_app_lock">App Lock</string>
+    <string name="feature_summary_app_lock">Show lock interface before app launch</string>
+
+    <string name="feature_category_notification">Notification</string>
+    <string name="feature_title_light_on_notification">Light Up</string>
+    <string name="feature_summary_light_on_notification">Light up screen on new notification</string>
+    <string name="feature_title_push_delegate">Push Delegate</string>
+
+    <string name="feature_category_plugins">Available features</string>
+
+    <string name="feature_category_ext">Extension</string>
+    <string name="feature_category_power_save">Power</string>
+    <string name="feature_title_smart_app_standby">X Mode</string>
+    <string name="feature_summary_smart_app_standby">Affects selected app. When the app returns to the background, it will automatically stop all services or sets them into idle mode; if any service needs to be excluded, please use custom rules.</string>
+
+    <string name="feature_summary_smart_app_standby_brief">Stop service or inactive for bg apps</string>
+
+    <string name="feature_category_apps">Apps</string>
+    <string name="menu_title_smart_app_freeze_enable_all_smart_freeze_apps">Remove and de-freeze all listed</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">De-freeze all Smart Freeze apps and remove them from the Smart Freeze list. Are you sure you want to do this?</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp">De-freeze all listed temporary</string>
+    <string name="menu_title_smart_app_freeze_export_package_list">Export app list</string>
+    <string name="menu_title_smart_app_freeze_import_package_list">Import app list</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">Temporarily de-freeze all apps in the Smart Freeze list, are you sure you want to do this?</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps">De-freeze all apps</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps">Will de-freeze all disabled or suspended apps on your device, including all installed or system apps, are you sure you want to do this?</string>
+    <string name="feature_title_smart_app_freeze">Smart Freeze</string>
+    <string name="feature_title_enable_package_on_launch">DOL</string>
+    <string name="feature_summary_enable_package_on_launch">De-Freeze app on Activity Launch request</string>
+    <string name="pref_title_enable_package_on_launch_by_default">Enable DOL</string>
+    <string name="pref_title_dol_tips">Show DOL tips</string>
+    <string name="pref_summary_enable_package_on_launch_by_default">Enable \"DOL\" while app has been added to Smart Freeze list</string>
+    <string name="feature_summary_smart_app_freeze">Auto disable apps according to the profile</string>
+    <string name="feature_desc_smart_app_freeze">Note: app freeze makes use of built-in feature of Android. This means that even if Thanox is uninstalled, these effects will still remain.</string>
+    <string name="menu_title_create_shortcut">Create shortcut</string>
+    <string name="menu_title_create_shortcut_apk">Create proxy apk</string>
+    <string name="menu_title_broadcast_intent_shortcut">Broadcast intent shortcut</string>
+    <string name="menu_title_activity_intent_shortcut">Activity intent shortcut</string>
+    <string name="dialog_message_create_shortcut_apk">Create a shortcut stub apk, you can install this app to as a workaround of the launcher icon for disabling apps</string>
+
+    <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">Enabled Adaptive Battery</string>
+    <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">
+        This feature works only if Adaptive battery is enabled @Android Pie+.
+    </string>
+
+    <string name="message_do_you_want_to_add_apps_to_pkg_set">Also add these Apps to current Package Set?</string>
+
+    <string name="feature_title_infinite_z">App Clone</string>
+    <string name="feature_message_infinite_z_enable">App clone is implemented based on the Android multi-user mechanism. To enable the App clone, thanox will create a user Profile. Usually, a "Work" tab will be displayed on the Launcher. \nThis feature is currently experimental and not yet stable. \n\nDo you want to enable it?</string>
+    <string name="feature_message_infinite_z_disable">Will delete all the data of the app clone user and cannot be recovered. Are you sure you want to disable app clone?</string>
+    <string name="feature_message_infinite_z_uninstall">Are you sure you want to uninstall <b>%s</b>? The data of cloned app will be deleted and cannot be recovered</string>
+
+    <string name="menu_title_copy">Copy</string>
+
+    <string name="menu_title_copy_pkg_name">Copy package name</string>
+    <string name="menu_title_launch_app">Launch</string>
+    <string name="menu_title_launch_system_settings">System settings</string>
+
+    <string name="feature_title_data_cheat">Incognito</string>
+    <string name="feature_desc_data_cheat">Hide SIM info, serial id etc. please enable Xposed installer scope for selected app</string>
+    <string name="activity_title_data_cheat">Incognito</string>
+    <string name="feature_summary_pkg_data_cheat">Incognito</string>
+
+    <string name="title_allow">Allow</string>
+    <string name="title_block">Deny</string>
+
+    <string name="menu_start_manage_info">Help</string>
+    <string name="info_title_start_restrict">Tips</string>
+    <string name="info_message_start_restrict">Prevent apps start from background</string>
+    <string name="info_title_bg_restrict">Tips</string>
+    <string name="info_message_bg_restrict">Background process will be cleared if screen is locked</string>
+
+    <string name="pre_category_ui">Looks</string>
+    <string name="pre_title_ui">Themes and Icons</string>
+    <string name="pre_title_app_theme">Theme</string>
+    <string name="pre_title_app_icon_pack">Icon pack</string>
+    <string name="pre_title_app_icon_crop_to_circle">Circle icon</string>
+    <string name="pre_category_strategy">Strategy</string>
+    <string name="pre_title_strategy">Profiles and templates</string>
+    <string name="pre_category_profile">Profile</string>
+    <string name="pre_category_data">Data</string>
+    <string name="pre_title_data">Backup restore</string>
+    <string name="pre_category_about">About</string>
+    <string name="pre_title_about">About Thanox</string>
+    <string name="pre_category_dev_tools">Developers</string>
+    <string name="pre_title_developer">Developer tools</string>
+    <string name="pre_title_power">Power save settings</string>
+    <string name="pre_category_power">Power</string>
+    <string name="pre_category_app_feature_info">App info</string>
+    <string name="pre_category_app_feature_config">Configs</string>
+    <string name="pre_category_app_disable_enable">Disable</string>
+
+    <string name="pref_title_enable_logging">Enable logging</string>
+    <string name="pref_summary_enable_logging">Show logging info in console</string>
+    <string name="pref_title_show_current_activity">Show current activity</string>
+    <string name="pref_title_enable_global_white_list">Global whitelist</string>
+    <string name="pref_summary_enable_global_white_list">Warning: this setting is a dangerous setting. Inexperienced users should not experiment with this option. \nTo prevent fatal system errors due to misuse, Thanox maintains a global whitelist by default, containing some of the system\'s core applications such as components, phones, media, etc.\n If you strongly prefer not to enable this list, please turn off this option</string>
+    <string name="pref_title_build_info_app">App info</string>
+    <string name="pref_title_build_info_server">Core info</string>
+    <string name="pref_title_patch_info">Patch info</string>
+    <string name="pre_title_ignore_system_app">Exclude system apps</string>
+    <string name="pre_summary_ignore_system_app">Put system apps into white lists</string>
+    <string name="pref_title_enable_power_save">Power save</string>
+    <string name="dialog_title_battery_drain_fast_by_thanox">Battery drain</string>
+    <string name="dialog_message_battery_drain_fast_by_thanox">Thanox is starting boot logs, permission access logs and hidden logs. This data will be saved into files in real-time, which may speed up power consumption. It is recommended to enable power-saving mode on demand.</string>
+    <string name="pref_title_enable_high_battery_drain_app_reminding">High power consumption alert</string>
+    <string name="pref_summary_enable_high_battery_drain_app_reminding">Alert when highly power-consuming apps are detected</string>
+
+    <string name="pref_summary_enable_power_save">Stop recording app start, ops accessing, privacy data access to save battery as much as possible</string>
+
+    <string name="pref_title_open_source_license">Open source licenses</string>
+
+    <string name="pref_title_icon_maker_remix_icon">Icon provider</string>
+    <string name="pref_summary_icon_maker_remix_icon">Remix Design © 2018 https://remixicon.com</string>
+
+    <string name="pref_title_rss_e">Groups</string>
+    <string name="pref_summary_rss_e">Join group</string>
+
+    <string name="pref_title_app_state_enabled">App is enabled</string>
+    <string name="pref_title_app_to_disable">Disable</string>
+    <string name="pref_title_app_state_disabled">App is disabled</string>
+    <string name="pref_title_app_to_enable">Enable</string>
+
+    <string name="pre_title_backup">Backup</string>
+    <string name="pre_summary_backup">Backup thanox settings to external storage</string>
+    <string name="pre_title_restore">Restore</string>
+    <string name="pre_sumary_restore">Restore thanox settings from external file. If it fails, you can try to delete dir /data/system/thanos/ manually, or you can try to set the dir owner to 1000</string>
+    <string name="pre_title_restore_default">Restore default</string>
+    <string name="pre_summary_restore_default">Restore thanox default settings</string>
+
+    <string name="pref_title_new_installed_apps_config_enabled">Auto config</string>
+    <string name="pref_summary_new_installed_apps_config_enabled">Auto config new installed apps</string>
+    <string name="pref_title_new_installed_apps_config">Config template</string>
+    <string name="pref_summary_new_installed_apps_config">Edit template for auto configuration</string>
+
+    <string name="pref_title_auto_request_xposed_scope">Request Xposed scope</string>
+    <string name="pref_summary_auto_request_xposed_scope">When you enable the feature that relies on the Xposed scope for the app, Thanox will automatically request the Scope. Please pay attention to the system notification \nAttention, this feature depends on the latest version of the LSPosed framework \nPlease also check the system settings and the Thanox settings, allowing Thanox bg start</string>
+
+
+    <string name="pref_title_config_template_category">Templates</string>
+    <string name="pref_action_create_new_config_template">Create templates</string>
+    <string name="pref_action_edit_or_view_config_template">View &amp; Edit</string>
+    <string name="pref_action_delete_config_template">Delete</string>
+    <string name="pref_action_apply_config_template">Apply from template</string>
+
+    <string name="pref_action_backup_component_settings">Backup component settings</string>
+    <string name="pref_action_backup_component_settings_summary">Backup component settings, include Activity, Service, Receiver, Content Provider enable disable settings</string>
+    <string name="pref_action_restore_component_settings">Import component settings</string>
+
+    <string name="pre_message_restore_success">Restore success, please reboot for changes to take effect</string>
+    <string name="pre_message_backup_success">Backup success</string>
+
+    <string name="pre_cheat_field_category_original">Original field</string>
+    <string name="pre_cheat_field_category_cheated">Incognito field</string>
+    <string name="pre_cheat_field_category_others">Others</string>
+    <string name="pre_title_cheat_sim_serial">SIM serial</string>
+
+    <string name="pre_title_cheat_sim_country_iso">SIM Country ISO</string>
+    <string name="pre_title_cheat_net_country_iso">Network Country ISO</string>
+
+    <string name="pre_title_cheat_net_op_1">Network Operator(Slot 1)</string>
+    <string name="pre_title_cheat_net_op_2">Network Operator(Slot 2)</string>
+    <string name="pre_title_cheat_net_op_3">Network Operator(Slot 3)</string>
+    <string name="pre_title_cheat_net_op_name_1">Network Operator name(Slot 1)</string>
+    <string name="pre_title_cheat_net_op_name_2">Network Operator name(Slot 2)</string>
+    <string name="pre_title_cheat_net_op_name_3">Network Operator name(Slot 3)</string>
+
+    <string name="pre_title_cheat_sim_op_1">Sim Operator(Slot 1)</string>
+    <string name="pre_title_cheat_sim_op_2">Sim Operator(Slot 2)</string>
+    <string name="pre_title_cheat_sim_op_3">Sim Operator(Slot 3)</string>
+    <string name="pre_title_cheat_sim_op_name_1">Sim Operator name(Slot 1)</string>
+    <string name="pre_title_cheat_sim_op_name_2">Sim Operator name(Slot 2)</string>
+    <string name="pre_title_cheat_sim_op_name_3">Sim Operator name(Slot 3)</string>
+
+    <string name="pre_title_cheat_net_op_name">Network Operator name(Any Slots)</string>
+    <string name="pre_title_cheat_net_op">Network Operator(Any Slots)</string>
+
+    <string name="pre_title_cheat_sim_op_name">SIM Operator name(Any Slots)</string>
+    <string name="pre_title_cheat_sim_op">SIM Operator(Any Slots)</string>
+
+
+    <string name="pre_title_cheat_line_one_num">Phone number</string>
+    <string name="pre_title_cheat_device_id">Device ID(Deprecated API)</string>
+    <string name="pre_title_cheat_android_id">Android ID</string>
+
+    <string name="pre_title_cheat_imei_slot1">IMEI(Slot 1)</string>
+    <string name="pre_title_cheat_imei_slot2">IMEI(Slot 2)</string>
+    <string name="pre_title_cheat_imei_slot3">IMEI(Slot 3)</string>
+
+    <string name="pre_title_cheat_meid_slot1">MEID(Slot 1)</string>
+    <string name="pre_title_cheat_meid_slot2">MEID(Slot 2)</string>
+    <string name="pre_title_cheat_meid_slot3">MEID(Slot 3)</string>
+
+    <string name="pre_title_cheat_not_set">Not set, won\'t mock this field</string>
+    <string name="pre_title_cheat_installed_apps">Hide installed aps</string>
+    <string name="pre_title_cheat_show_cheated_apps_notifications">Show notification</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_delay">Delay clean up after screen is locked</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_audio">Do not clean up audio streams</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_audio">Keep audio playing apps</string>
+
+    <string name="pre_title_recent_task_blur_mask_mode">Hide content</string>
+    <string name="pre_summary_recent_task_blur_mask_mode">Totally hide content of the task, instead of blur</string>
+
+    <string name="pre_title_exclude_recent_task">Exclude recent task</string>
+    <string name="pre_summary_exclude_recent_task">Set force exclude or include recent task for this app</string>
+    <string name="pre_entry_exclude_recent_task_default">Default</string>
+    <string name="pre_entry_exclude_recent_task_include">Include</string>
+    <string name="pre_entry_exclude_recent_task_exclude">Exclude</string>
+
+    <string name="pre_title_force_dialog_cancelable">Dialog cancelable</string>
+    <string name="pre_summary_force_dialog_cancelable">Force app dialog to be cancelable for, please enable Xposed installer scope for this app</string>
+
+    <string name="pre_title_resident">Resident app</string>
+    <string name="pre_summary_resident">Prevent this app to be kill by LMK</string>
+
+    <string name="pre_title_redaction_notification">Notification Redaction</string>
+    <string name="pre_summary_redaction_notification">Override app notification with custom Title and Text</string>
+    <string name="pre_title_redaction_notification_title">Title</string>
+    <string name="pre_title_redaction_notification_text">Text</string>
+
+    <string name="cheat_field_auto_gen">Fill with random fields</string>
+
+    <string name="launch_other_app_options_allow">Allow</string>
+    <string name="launch_other_app_options_ask">Ask</string>
+    <string name="launch_other_app_options_ignore">Ignore</string>
+    <string name="launch_other_app_options_allow_listed">Allow listed</string>
+    <string name="launch_other_app">Launch other App</string>
+
+    <string name="start_record_allowed">Allowed</string>
+    <string name="start_record_blocked">Blocked</string>
+    <string name="start_record_merged">Merged</string>
+
+    <string name="privacy_record">Cheat Records</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_skip_notification">Keep apps that has notifications</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">Keep apps in recent tasks</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_skip_fg">Keep foreground app</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_fg">When enabled, apps in the foreground will not be cleaned up</string>
+
+    <string name="pre_title_bg_restrict_show_notification">Show notification</string>
+    <string name="pre_summary_bg_restrict_show_notification">Display notification when pending clean up process detected</string>
+
+    <string name="badge_trying_app">Trial</string>
+    <string name="badge_paid_app">Paid</string>
+    <string name="badge_framework_err">Error</string>
+    <string name="badge_power_save_off">Battery</string>
+
+    <string name="title_remember">Remember</string>
+    <string name="title_app_notice">Be careful!</string>
+    <string name="message_app_notice">In some cases, your device might no longer boot after installing Thanox.\n\nIf you never heard about \"soft brick\" and \"bootloop\" before or if you don\'t know how to recover from such a situation, do <b>NOT</b> install Thanox!\n\nIn any case, having a recent backup is highly recommended.</string>
+
+    <string name="menu_title_feature_desc">Feature wiki</string>
+    <string name="menu_title_start_restrict_charts_reset">Reset</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records">View detailed records</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">Only show those of current app</string>
+    <string name="pre_category_general">General</string>
+
+    <string name="pre_title_smart_freeze_screen_off_clean_up_delay">Freeze on screen off</string>
+    <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">Freeze all apps on screen off</string>
+    <string name="pre_title_smart_freeze_screen_off_clean_up">Screen off freeze delay</string>
+
+    <string name="pre_title_smart_freeze_tip">Show tip</string>
+    <string name="pre_summary_smart_freeze_tip">Show toast tip when freeze or unfreeze app</string>
+
+    <string name="pre_title_smart_freeze_hide_package_change_event">Hide in Launcher</string>
+    <string name="pre_summary_smart_freeze_hide_package_change_event">If this switch is enabled, Thanox will block PACKAGE CHANGED event for this package, so Launch apps will not be able to detect the package enable event.</string>
+
+    <string name="pre_title_smart_freeze_with_suspend">Suspend package</string>
+    <string name="pre_summary_smart_freeze_with_suspend">By default we freeze package by disabling package. If this switch is on we will use suspend instead of disable to package freeze it</string>
+
+    <string name="pre_category_summary_smart_freeze">By default, Thanox will freeze apps when it stopped running, task removed. \nThanox will freeze all apps during device booting up, process clean up. \nYou can also choose additional settings below.</string>
+
+    <string name="pre_category_summary_smart_standby">Applications in the background usually have services or processes that remain active, and these services or processes have their own purpose. Unfortunately, our users may not know exactly what these services and processes do.\n\nYou can pick an interference method for the applications that return to the background. It is worth mentioning that some apps may not work correctly after interfering with them.</string>
+    <string name="pre_title_smart_standby_stop_service">Stop service</string>
+    <string name="pre_summary_smart_standby_stop_service">This will attempt to stop all services that is not in the KEEP rule list</string>
+    <string name="pre_title_smart_standby_bypass_if_has_n">Skip apps with notifications</string>
+    <string name="pre_title_smart_standby_bypass_if_has_visible_windows">Skip apps has visible window</string>
+    <string name="pre_summary_smart_standby_bypass_if_has_n">Would not interfere applications with notifications</string>
+    <string name="pre_title_smart_standby_set_inactive">Standby apps</string>
+    <string name="pre_summary_smart_standby_set_inactive">Attempts to set the app to idle state. This is based on Android\'s default standby mechanism.</string>
+    <string name="pre_title_smart_standby_block_bg_service_start">Stop background processes from restarting.</string>
+    <string name="pre_summary_smart_standby_block_bg_service_start">Turning on this switch will prevent services that have been stopped from restarting in the background. Note that these blocking events will also appear in the blocking log in the background startup interface</string>
+
+
+    <string name="title_stub_apk_app_name">App label</string>
+    <string name="title_stub_apk_app_version_code">Version code</string>
+    <string name="title_stub_apk_app_version_name">Version name</string>
+
+
+    <string name="export_patch_title">Export patch</string>
+    <string name="export_patch_message">Thanox support both Xposed and Magisk.\n\n For Xposed user, you can just select and check Thanox in Xposed app module config page. \n\nFor Magisk user, you can rename downloaded Thanox apk from .apk to .zip and then install in Magisk manager, or if you can not find the downloaded apk, we also have option to export the patch zip to local external storage.</string>
+    <string name="export_patch_export_magisk">Export</string>
+
+    <string name="onboarding_text_complete">Let\'s Begin</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_xposed_tips_title">Xposed supported</string>
+    <string name="onboarding_xposed_tips_desc">1. Select and check Thanox in Xposed Manager \n2. Reboot and enjoy \n3. Remember, after every update, re-check thanox in Xposed manager and reboot!</string>
+
+    <string name="onboarding_magisk_tips_title">Magisk supported(experimental)</string>
+    <string name="onboarding_magisk_tips_desc">1. Thanox apk is also the magisk module, just rename it to zip \n2. You can also export magisk module from Settings-About-Patch info \n3. Remember, after every update, also update magisk module in Magisk manager and reboot!</string>
+
+    <string name="onboarding_github_tips_title">Update tracking</string>
+    <string name="onboarding_github_tips_desc">You can track our pre-release on \nGithub/Thanox</string>
+
+    <string name="onboarding_mode_tips_title">Activation methods</string>
+    <string name="onboarding_mode_tips_desc">Thanox currently supports two activation methods: Xposed patch or Magisk patch (experimental, supports Android11+); you can choose one of them to explore.</string>
+
+    <string name="onboarding_guide_tips_title">Wiki available</string>
+    <string name="onboarding_guide_tips_desc">You can find the instructions on the homepage of the settings. It is strongly recommended that you spend more time looking at these instructions. Maybe it will help you.</string>
+    <string name="title_package_prebuilt_set">Prebuilt</string>
+    <string name="pre_title_app_list_item_show_pkg">Show package name</string>
+    <string name="pre_title_app_list_item_show_version">Show version</string>
+    <string name="pre_title_app_list_item">App list item</string>
+    <string name="menu_title_app_info_detailed">Details</string>
+
+    <string name="device_admin_description" translatable="false">Device admin of Thanox Infinite Z profile.</string>
+
+    <string name="nav_title_guide">Guide</string>
+
+    <string name="pre_title_smart_freeze_freeze_method">Freeze method</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable">PM disable</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable is a function provided by the Android system that can \"disable\" an application; when using this method to \"freeze\" an application, the desktop icon of the frozen application will disappear. You may create a shortcut or proxy app to launch it directly from Launcher.</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend">PM suspend</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend is a function provided by Android for DPC management; the suspended application usually retains a gray icon at Launcher, but the activities of the application cannot be started directly, and a dialog usually pops up indicating that the application has been restricted from use by the Administrator. You can turn on the \"DOL\" switch for the app, which will cause Thanox to unfreeze the app when it detects a request to launch the activity.</string>
+
+    <string name="privacy_agreement_title">Privacy agreement</string>
+    <string name="privacy_agreement_accept">Accept</string>
+    <string name="privacy_agreement_discard">Discard</string>
+
+    <string name="feature_title_settings_access_record">Settings Access Record</string>
+    <string name="feature_summary_settings_access_record">View System Settings write and read records. Usually you should select the Settings, Settings Provider, and the Secure Manager app in Xposed scope.</string>
+
+    <string name="launch_other_pkg_title">Launch app</string>
+    <string name="launch_other_pkg_message"><b>%s</b> wants to launch <b>%s</b>, do you allow?</string>
+    <string name="launch_other_pkg_remember">Remember choice</string>
+    <string name="launch_other_pkg_allow">Allow</string>
+    <string name="launch_other_pkg_ignore">Ignore</string>
+    <string name="launch_other_pkg_allow_once">Allow this time</string>
+    <string name="launch_other_pkg_ignored_message">Deny %s to launch %s</string>
+
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
+    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
+    <string name="running_processes_item_description_p">%1$d process</string>
+    <string name="running_processes_item_description_s">%1$d service</string>
+    <string name="running_processes_header_title" msgid="6588371727640789560">"device memory"</string>
+    <string name="running_processes_header_footer" msgid="723908176275428442">"App memory usage"</string>
+    <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"System"</string>
+    <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"Apps"</string>
+    <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"Available"</string>
+    <string name="running_processes_header_used_prefix" msgid="5924288703085123978">"Used"</string>
+    <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"Cache"</string>
+    <string name="running_processes_header_ram">%1$s</string>
+    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"running apps"</string>
+    <string name="no_services" msgid="7133900764462288263">"No active service"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"Service"</string>
+    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Process"</string>
+    <string name="service_manage" msgid="1876642087421959194">"Settings"</string>
+    <string name="service_stop_description" msgid="9146619928198961643">"This service is started by its application. Stopping the service may render the app inoperable."</string>
+    <string name="heavy_weight_stop_description" msgid="6050413065144035971">"The app cannot be stopped safely. If you stop forcibly, some of your current work may be lost."</string>
+    <string name="background_process_stop_description" msgid="3834163804031287685">"This is the old app process, still running, just in case. Stopping is usually not recommended."</string>
+    <string name="service_manage_description" msgid="479683614471552426">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: currently in use. Tap Settings to manage it."</string>
+    <string name="main_running_process_description" msgid="1130702347066340890">"Using main process."</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"Using Service<xliff:g id="COMP_NAME">%1$s</xliff:g>."</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"Using Provider<xliff:g id="COMP_NAME">%1$s</xliff:g>."</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Do you want to stop system service?"</string>
+    <string name="runningservicedetails_stop_dlg_text" msgid="3920243762189484756" product="default">"If you stop this service, some features on your phone will also stop working and will not work until you turn your phone off and on again."</string>
+
+    <string name="no_default_apps" msgid="2915315663141025400">"No default app."</string>
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"Storage usage"</string>
+    <string name="storageuse_settings_summary" msgid="3748286507165697834">"See how much storage an app is using"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"Restarting"</string>
+    <string name="cached" msgid="1059590879740175019">"Cache"</string>
+    <string name="show_cached" msgid="1059590879740175019">"Show cached"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"No Service running."</string>
+    <string name="service_started_by_app" msgid="818675099014723551">"Start by app"</string>
+    <string name="service_client_name" msgid="818675099014723551">"Client %1$s"</string>
+    <string name="service_process_name" msgid="818675099014723551">"Process %1$s"</string>
+
+    <string name="running_process_not_running">Not running</string>
+    <string name="running_process_running">Running</string>
+    <string name="running_process_background">Cached</string>
+    <string name="running_process_all">All</string>
+    <string name="service_stop">Stop</string>
+    <string name="service_report">Report</string>
+    <string name="service_running_time">Elapsed</string>
+
+    <string name="boost_status_running_apps">个应用正在运行</string>
+    <string name="boost_status_blocked_start_count">已阻止%s次应用启动请求</string>
+    <string name="boost_status_mem_usage_percent">物理 %s</string>
+    <string name="boost_status_swap_usage_percent">虚拟 %s</string>
+    <string name="boost_status_available">可用 %s</string>
+    <string name="boost_status_not_enabled">未开启</string>
+
+    <string name="process_manager">进程管理</string>
+
+    <string name="smart_freeze">智能冻结</string>
+    <string name="apps_count">%s个应用</string>
+    <string name="sf_pkg_stats">%s个应用 %s个已冻结 %s个已启用</string>
+    <string name="sf_pkg_stats_all_freeze">%s个应用均已冻结</string>
+    <string name="pick_app">选择应用</string>
+
+    <string name="smart_freeze_on_screen_off">灭屏冻结</string>
+    <string name="smart_freeze_on_screen_off_summary">灭屏后冻结列表里的应用</string>
+    <string name="smart_freeze_on_task_removed">划卡冻结</string>
+    <string name="smart_freeze_on_task_removed_summary">当你从最近任务移除应用时冻结该应用</string>
+
+    <string name="bc_on_screen_off">灭屏清理</string>
+    <string name="bc_on_screen_off_summary">灭屏后强行停止列表里的应用</string>
+    <string name="bc_on_task_removed">划卡清理</string>
+    <string name="bc_on_task_removed_summary">当你从最近任务移除应用时强行停止该应用</string>
+
+    <string name="toast_copied_to_clipboard">已复制</string>
+
+    <string name="pkg_set">分类</string>
+    <string name="all">所有</string>
+    <string name="user">用户</string>
+    <string name="system">系统</string>
+    <string name="enabled">已启用</string>
+    <string name="disabled">未启用</string>
+
+    <string name="remove_from_pkg_set">分类中移除</string>
+    <string name="remove_from_sf">取消智冻</string>
+    <string name="add_to_pkg_set">添加到分类</string>
+    <string name="temp_unfreeze">解冻</string>
+    <string name="create_shortcut">快捷方式</string>
+
+    <string name="delete">删除</string>
+    <string name="rename">重命名</string>
+    <string name="sort">排序</string>
+    <string name="on">开启</string>
+    <string name="off">关闭</string>
+
+    <string name="subscribe">订阅</string>
+    <string name="sub_intro_unsub">尚未订阅</string>
+    <string name="sub_intro_message">为了更好地为您服务，Thanos 是一款需要订阅的付费软件。请点击下方的订阅按钮查看详细的订阅说明。\n\n如果您已经是 Thanox 或 Thanox Pro 的付费用户，无需再次订阅 Thanos。您可以在订阅页面使用 Thanox 激活码或通过 Play 商店验证您的资格。</string>
+
+    <string name="bg_clean">后台清理</string>
+    <string name="bg_clean_apps_count">禁止%s个应用后台运行</string>
+
+    <string name="lvl_checking_retry">重试</string>
+    <string name="lvl_checking">正在通过谷歌Play检查应用许可</string>
+    <string name="lvl_check_ok">很好！</string>
+    <string name="lvl_check_not_ok">错误！</string>
+    <string name="lvl_check_skip_for_now">暂时跳过</string>
+    <string name="lvl_unlicensed_dialog_body">你未获得许可</string>
+    <string name="lvl_unlicensed_dialog_retry_body">无法访问Google Play</string>
+    <string name="lvl_unlicensed_dialog_error_tips">1. 请检查你的设备网络情况，确保可以正常访问谷歌Play商店 \n2. 请检查你的谷歌服务框架，确保其处于启用状态 \n3. 请检查你的谷歌账号是否正确登录
+    </string>
+    <string name="wait_shizuku">等Shizuku就绪</string>
+    <string name="wait_shizuku_message">请安装Shizuku，并且授权Thanos</string>
+
+    <string name="module_donate_title">Get Premium</string>
+
+    <string name="module_donate_donated">Verified, thanks</string>
+    <string name="module_donate_donated_available">Premium feature</string>
+    <string name="module_donate_donated_available_message">Donated to get Premium to unlock this feature.\n\nTips: Try it out first, feel it is available and satisfied, and then purchase the advanced features~</string>
+
+    <string name="module_donate_suggestion_alipay_red_packet">领取支付宝红包</string>
+    <string name="module_donate_suggestion_summary_alipay_red_packet">感谢支持%1$s 你也可以去捐赠页面点击，每天都可以哦！</string>
+    <string name="module_donate_suggestion_action_alipay_red_packet">前往领取</string>
+
+    <string name="module_donate_toast_alipay_red_packet_copied">领取口令已经复制到剪贴板</string>
+
+    <string name="module_donate_get_play">Get play version</string>
+    <string name="module_donate_copy_email">Copy email</string>
+    <string name="module_donate_active_hidden_feature">激活隐藏功能</string>
+    <string name="module_donate_active_hidden_feature_activated">Activated</string>
+    <string name="module_donate_input_activation_code">Input activation code</string>
+    <string name="module_donate_activation_code_verify_success">验证成功，请妥善保存你的激活码，不要对外扩散，否则可能会被禁用，后续换机或者刷机后可以继续使用</string>
+    <string name="module_donate_activation_code_verify_fail">Verify failure.</string>
+    <string name="module_donate_activation_code_verify_fail_server_timeout">Server error~~~</string>
+    <string name="module_donate_activation_code_start_verify">Begin verify</string>
+    <string name="module_donate_activation_code_my_code">My Code</string>
 
 
 </resources>

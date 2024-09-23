@@ -96,7 +96,7 @@ fun SettingsAccessRecordViewerScreen(
     ThanoxSmallAppBarScaffold(
         title = {
             Text(
-                stringResource(id = R.string.feature_title_settings_access_record),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_settings_access_record),
                 style = appBarTitleTextStyle()
             )
         },
@@ -162,7 +162,7 @@ fun SettingsAccessRecordViewerScreen(
                         )
                         Toast.makeText(
                             context,
-                            github.tornaco.android.thanos.module.common.R.string.common_toast_copied_to_clipboard,
+                            github.tornaco.android.thanos.res.R.string.common_toast_copied_to_clipboard,
                             Toast.LENGTH_SHORT
                         ).show()
                     })

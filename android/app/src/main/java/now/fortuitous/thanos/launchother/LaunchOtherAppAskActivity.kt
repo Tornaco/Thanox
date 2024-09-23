@@ -49,10 +49,10 @@ class LaunchOtherAppAskActivity : AppCompatActivity() {
         MaterialAlertDialogBuilder(this)
             .setIcon(github.tornaco.android.thanos.R.mipmap.ic_launcher_round)
             .setView(root)
-            .setTitle(github.tornaco.android.thanos.R.string.launch_other_pkg_title)
+            .setTitle(github.tornaco.android.thanos.res.R.string.launch_other_pkg_title)
             .setMessage(
                 getString(
-                    github.tornaco.android.thanos.R.string.launch_other_pkg_message,
+                    github.tornaco.android.thanos.res.R.string.launch_other_pkg_message,
                     callerAppName,
                     targetAppName
                 )
@@ -60,7 +60,7 @@ class LaunchOtherAppAskActivity : AppCompatActivity() {
             .setOnDismissListener {
                 onBackPressed()
             }
-            .setPositiveButton(github.tornaco.android.thanos.R.string.launch_other_pkg_allow) { dialog, _ ->
+            .setPositiveButton(github.tornaco.android.thanos.res.R.string.launch_other_pkg_allow) { dialog, _ ->
                 dialog.dismiss()
                 launchApp()
                 val isRemember = rememberCheckBox.isChecked
@@ -71,7 +71,7 @@ class LaunchOtherAppAskActivity : AppCompatActivity() {
                     )
                 }
             }
-            .setNegativeButton(github.tornaco.android.thanos.R.string.launch_other_pkg_ignore) { dialog, _ ->
+            .setNegativeButton(github.tornaco.android.thanos.res.R.string.launch_other_pkg_ignore) { dialog, _ ->
                 dialog.dismiss()
                 val isRemember = rememberCheckBox.isChecked
                 if (isRemember) {

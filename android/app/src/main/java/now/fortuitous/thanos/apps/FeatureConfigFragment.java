@@ -123,7 +123,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         popupMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.action_copy_pkg_name) {
                 ClipboardUtils.copyToClipboard(requireContext(), appInfo.getAppLabel(), appInfo.getPkgName());
-                Toast.makeText(getContext(), github.tornaco.android.thanos.module.common.R.string.common_toast_copied_to_clipboard, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), github.tornaco.android.thanos.res.R.string.common_toast_copied_to_clipboard, Toast.LENGTH_SHORT).show();
                 return true;
             }
             if (item.getItemId() == R.id.action_launch_app) {
@@ -265,7 +265,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
             ViewAwarePreference pref = findPreference(getString(R.string.key_app_feature_config_privacy_cheat));
             Fields currentMode = thanos.getPrivacyManager().getSelectedFieldsProfileForPackage(appInfo.getPkgName(), PrivacyOp.OP_NO_OP);
-            String noSet = getString(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
+            String noSet = getString(github.tornaco.android.thanos.res.R.string.common_text_value_not_set);
             Objects.requireNonNull(pref).setSummary(currentMode == null ? noSet : currentMode.getLabel());
 
             pref.setOnPreferenceClickListener(preference -> {
@@ -402,7 +402,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             Objects.requireNonNull(textPref).setEnabled(isEnabled);
             textPref.setSummary(thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo)));
             textPref.setOnPreferenceClickListener(preference -> {
-                EditTextDialog.show(requireActivity(), getString(R.string.pre_title_redaction_notification_text), thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo)), newValue -> {
+                EditTextDialog.show(requireActivity(), getString(github.tornaco.android.thanos.res.R.string.pre_title_redaction_notification_text), thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo)), newValue -> {
                     thanos.getNotificationManager().setPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo), newValue);
                     String newCurrentValue = thanos.getNotificationManager().getPackageRedactionNotificationText(Pkg.fromAppInfo(appInfo));
                     textPref.setSummary(newCurrentValue);
@@ -413,7 +413,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             Objects.requireNonNull(titlePref).setEnabled(isEnabled);
             titlePref.setSummary(thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo)));
             titlePref.setOnPreferenceClickListener(preference -> {
-                EditTextDialog.show(requireActivity(), getString(R.string.pre_title_redaction_notification_title), thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo)), newValue -> {
+                EditTextDialog.show(requireActivity(), getString(github.tornaco.android.thanos.res.R.string.pre_title_redaction_notification_title), thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo)), newValue -> {
                     thanos.getNotificationManager().setPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo), newValue);
                     String newCurrentValue = thanos.getNotificationManager().getPackageRedactionNotificationTitle(Pkg.fromAppInfo(appInfo));
                     titlePref.setSummary(newCurrentValue);

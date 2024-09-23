@@ -98,8 +98,8 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
         Preference freezeMethodPref = findPreference(getString(R.string.key_smart_freeze_method));
         Runnable updatePrefSummary = () -> Objects.requireNonNull(freezeMethodPref).setSummary(
                 thanos.getPkgManager().isFreezePkgWithSuspendEnabled()
-                        ? R.string.pre_title_smart_freeze_freeze_method_suspend
-                        : R.string.pre_title_smart_freeze_freeze_method_disable);
+                        ? github.tornaco.android.thanos.res.R.string.pre_title_smart_freeze_freeze_method_suspend
+                        : github.tornaco.android.thanos.res.R.string.pre_title_smart_freeze_freeze_method_disable);
         updatePrefSummary.run();
         Objects.requireNonNull(freezeMethodPref).setOnPreferenceClickListener(preference -> {
             showSuspendOrDisablePackageDialog(res -> {
@@ -137,15 +137,15 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
     private void showSuspendOrDisablePackageDialog(Consumer<Boolean> suspendConsumer) {
         ThanosManager thanos = ThanosManager.from(getContext());
         ModernSingleChoiceDialog dialog = new ModernSingleChoiceDialog(requireActivity());
-        dialog.setTitle(getString(R.string.pre_title_smart_freeze_freeze_method));
+        dialog.setTitle(getString(github.tornaco.android.thanos.res.R.string.pre_title_smart_freeze_freeze_method));
         dialog.setItems(Lists.newArrayList(
                 new ModernSingleChoiceDialog.Item("disable",
-                        getString(R.string.pre_title_smart_freeze_freeze_method_disable),
-                        getString(R.string.pre_title_smart_freeze_freeze_method_disable_summary)),
+                        getString(github.tornaco.android.thanos.res.R.string.pre_title_smart_freeze_freeze_method_disable),
+                        getString(github.tornaco.android.thanos.res.R.string.pre_title_smart_freeze_freeze_method_disable_summary)),
 
                 new ModernSingleChoiceDialog.Item("suspend",
-                        getString(R.string.pre_title_smart_freeze_freeze_method_suspend),
-                        getString(R.string.pre_title_smart_freeze_freeze_method_suspend_summary))));
+                        getString(github.tornaco.android.thanos.res.R.string.pre_title_smart_freeze_freeze_method_suspend),
+                        getString(github.tornaco.android.thanos.res.R.string.pre_title_smart_freeze_freeze_method_suspend_summary))));
 
         dialog.setCheckedId(thanos.getPkgManager().isFreezePkgWithSuspendEnabled() ? "suspend" : "disable");
         dialog.setOnConfirm(id -> {

@@ -75,7 +75,7 @@ fun StartChartScreen(
     ThanoxSmallAppBarScaffold(
         title = {
             Text(
-                text = stringResource(id = R.string.menu_title_start_restrict_charts),
+                text = stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_start_restrict_charts),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },

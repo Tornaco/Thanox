@@ -42,8 +42,8 @@ public abstract class CommonFuncToggleAppListFilterActivity extends BaseAppListF
         if (android.R.id.home == item.getItemId()) finish();
         if (R.id.action_select_all == item.getItemId()) {
             ModernAlertDialog dialog = new ModernAlertDialog(thisActivity());
-            dialog.setDialogTitle(getString(R.string.common_menu_title_select_all));
-            dialog.setDialogMessage(getString(R.string.common_dialog_message_are_you_sure));
+            dialog.setDialogTitle(getString(github.tornaco.android.thanos.res.R.string.common_menu_title_select_all));
+            dialog.setDialogMessage(getString(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure));
             dialog.setPositive(getString(android.R.string.ok));
             dialog.setNegative(getString(android.R.string.cancel));
             dialog.setOnPositive(() -> viewModel.selectAll());
@@ -52,8 +52,8 @@ public abstract class CommonFuncToggleAppListFilterActivity extends BaseAppListF
         }
         if (R.id.action_un_select_all == item.getItemId()) {
             ModernAlertDialog dialog = new ModernAlertDialog(thisActivity());
-            dialog.setDialogTitle(getString(R.string.common_menu_title_un_select_all));
-            dialog.setDialogMessage(getString(R.string.common_dialog_message_are_you_sure));
+            dialog.setDialogTitle(getString(github.tornaco.android.thanos.res.R.string.common_menu_title_un_select_all));
+            dialog.setDialogMessage(getString(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure));
             dialog.setPositive(getString(android.R.string.ok));
             dialog.setNegative(getString(android.R.string.cancel));
             dialog.setOnPositive(() -> viewModel.unSelectAll());

@@ -44,10 +44,10 @@ public abstract class NewItemFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity());
         builder.setView(R.layout.nnf_dialog_folder_name)
-                .setTitle(R.string.nnf_new_folder)
-                .setNegativeButton(R.string.nnf_new_folder_cancel,
+                .setTitle(github.tornaco.android.thanos.res.R.string.nnf_new_folder)
+                .setNegativeButton(github.tornaco.android.thanos.res.R.string.nnf_new_folder_cancel,
                         null)
-                .setPositiveButton(R.string.nnf_new_folder_ok,
+                .setPositiveButton(github.tornaco.android.thanos.res.R.string.nnf_new_folder_ok,
                         null);
 
         final AlertDialog dialog = builder.create();

@@ -39,7 +39,7 @@ class NotificationCenterActivity : ComposeThemeActivity() {
     override fun Content() {
         ThanoxSmallAppBarScaffold(title = {
             Text(
-                text = stringResource(id = github.tornaco.android.thanox.module.notification.recorder.R.string.module_notification_recorder_feature_title_notification_recorder),
+                text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_notification_recorder_feature_title_notification_recorder),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },

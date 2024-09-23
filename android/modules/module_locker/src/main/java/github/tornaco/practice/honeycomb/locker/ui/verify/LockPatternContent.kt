@@ -24,7 +24,7 @@ import github.tornaco.practice.honeycomb.locker.ui.verify.composelock.Dot
 @Composable
 fun LockPatternContent(
     appInfo: AppInfo,
-    title: String = stringResource(id = R.string.module_locker_app_name),
+    title: String = stringResource(id = github.tornaco.android.thanos.res.R.string.module_locker_app_name),
     onResult: (String) -> Unit
 ) {
     Surface(Modifier.fillMaxSize()) {

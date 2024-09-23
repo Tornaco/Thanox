@@ -183,14 +183,14 @@ class SmartFreezeActivity : ThemeActivity() {
             return
         }
         val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle(R.string.feature_title_smart_app_freeze)
-            .setMessage(R.string.feature_desc_smart_app_freeze)
+            .setTitle(github.tornaco.android.thanos.res.R.string.feature_title_smart_app_freeze)
+            .setMessage(github.tornaco.android.thanos.res.R.string.feature_desc_smart_app_freeze)
             .setCancelable(false)
             .setPositiveButton(android.R.string.ok, null)
             .setNegativeButton(
                 android.R.string.cancel
             ) { _: DialogInterface?, _: Int -> finish() }
-            .setNeutralButton(R.string.title_remember) { _, _ ->
+            .setNeutralButton(github.tornaco.android.thanos.res.R.string.title_remember) { _, _ ->
                 now.fortuitous.thanos.pref.AppPreference.setFeatureNoticeAccepted(
                     this,
                     "SmartFreeze",

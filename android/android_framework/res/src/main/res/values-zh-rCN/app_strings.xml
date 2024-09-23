@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="service_default_notification_channel">默认频道</string>
+    <string name="service_silence_notification_channel">安静频道</string>
+    <string name="service_important_notification_channel">重要频道</string>
+
+    <string name="service_notification_override_thanos">Thanox</string>
+
+    <string name="service_notification_title_bg_restrict_process_changed">可清理应用</string>
+    <string name="service_notification_content_bg_restrict_process_changed">%1$s等%2$s个应用待清理</string>
+    <string name="service_notification_bg_tasks_clean_complete">已经清理部分后台任务</string>
+    <string name="service_notification_action_bg_restrict_process_changed_clear">清理</string>
+    <string name="service_notification_action_bg_restrict_process_changed_view">详情</string>
+
+    <string name="service_notification_title_op_start_remind">%1$s正在使用%2$s</string>
+
+    <string name="service_op_label_camera">相机</string>
+    <string name="service_op_label_record_audio">录音</string>
+    <string name="service_op_label_play_audio">播放音频</string>
+    <string name="service_op_label_location">获取位置信息</string>
+    <string name="service_op_label_read_clipboard">读取剪贴板</string>
+    <string name="service_op_label_write_clipboard">修改剪贴板</string>
+    <string name="service_op_remind_prefix">隐私提醒：</string>
+
+    <string name="service_toast_current_component_copied_to_clipboard">内容已复制到剪贴板</string>
+
+    <string name="service_notification_title_need_restart">重启设备</string>
+    <string name="service_notification_message_need_restart">请重新启动设备</string>
+    <string name="service_notification_action_restart_now">立即重启</string>
+
+    <string name="service_notification_title_data_restore">数据恢复</string>
+    <string name="service_notification_message_data_restore_restore_component_states">正在恢复设置中的应用组件状态</string>
+
+    <string name="service_notification_title_app_protect">应用保护</string>
+    <string name="service_notification_message_app_uninstall_blocked">已阻止%1$s被卸载/清除</string>
+    <string name="service_notification_message_app_clear_data_blocked">已阻止%1$s的应用数据被清除/卸载</string>
+
+    <string name="service_notification_title_thanox_active">Thanox已激活</string>
+    <string name="service_notification_message_thanox_active">版本%1$s已经成功激活，恭喜</string>
+
+    <string name="service_notification_message_thanox_app_enabled_on_create">智能冻结: %1$s 因活动请求而被启用</string>
+
+    <string name="service_app_set_all">全部</string>
+    <string name="service_app_set_system">系统</string>
+    <string name="service_app_set_system_uid">系统核心</string>
+    <string name="service_app_set_3rd">三方</string>
+    <string name="service_app_set_media">系统媒体</string>
+    <string name="service_app_set_phone">系统电话</string>
+    <string name="service_app_set_web_provider">WebView提供者</string>
+    <string name="service_app_set_shortcut_proxy">快捷代理</string>
+    <string name="service_app_set_white_listed">白名单</string>
+    <string name="service_app_set_white_listed_user">自定义白名单</string>
+    <string name="service_app_set_white_listed_user_description">你可以自定义一个白名单，里面的应用不会出现在功能页应用列表中</string>
+    <string name="service_app_set_disabled">已冻结</string>
+
+    <string name="service_dialog_title_thanox_removed">Thanox已被卸载</string>
+    <string name="service_dialog_message_thanox_removed">你希望保留它的核心数据吗？如不需保留，我们会把它清理干净。</string>
+    <string name="service_dialog_button_thanox_removed_keep_data">保留</string>
+    <string name="service_dialog_button_thanox_removed_remove_data">移除</string>
+
+    <string name="service_smart_freeze_app_freezed">智能冻结：冻结 %s</string>
+    <string name="service_smart_freeze_app_unfreezed">智能冻结：解冻 %s</string>
+
+    <string name="billing_state_row_not_trust_title">不受信任的安装包</string>
+    <string name="billing_state_row_not_trust_message">Thanox可能来自不受信任的安装，Pro版本仅在Google play商店发布，请不要从任何其他来源安装。\n\n注意：不受信任的安装会导致设备异常卡顿、配置数据丢失！！！</string>
+
+
     <string name="app_select_activate_method">你想用哪种激活方式使用Thanox？</string>
 
     <!--    Locker-->
@@ -33,7 +98,7 @@
     <string name="module_locker_biometric_not_set_dialog_message">启用应用锁之前，请前往系统安全设置，完成人脸、指纹、PIN或者图案密码设置</string>
 
     <!--    OPS-->
-    <string-array name="module_ops2_app_ops_summaries" tools:ignore="InconsistentArrays">
+    <string-array name="module_ops2_app_ops_summaries">
         <item>""</item>
         <item>""</item>
         <item>""</item>
@@ -142,7 +207,7 @@
 
     </string-array>
 
-    <string-array name="module_ops2_app_ops_labels" tools:ignore="InconsistentArrays">
+    <string-array name="module_ops2_app_ops_labels">
         <item>"粗略位置"</item>
         <item>"精确位置"</item>
         <item>"GPS"</item>
@@ -262,4 +327,1128 @@
 
     <string name="active_method_chooser_summary_xposed_magisk">适用于Root设备，需要安装Magisk或LSPosed框架；LSPosed模式下功能最多，Magisk模式下相对较少</string>
     <string name="active_method_chooser_summary_shizuku">适用于非Root设备，需要安装Shizuku，并在Shizuku中勾选Thanox；注意：受限于系统权限，Shizuku模式下功能非常少</string>
+
+    <string name="module_activity_trampoline_app_name">移花接木</string>
+    <string name="module_activity_trampoline_app_name_abbr">移花接木</string>
+
+    <string name="module_activity_trampoline_app_not_installed">未安装应用</string>
+
+    <string name="module_activity_trampoline_edit_dialog_title">编辑</string>
+    <string name="module_activity_trampoline_add_dialog_title">新增</string>
+    <string name="module_activity_trampoline_add_dialog_hint_from">原Activity</string>
+    <string name="module_activity_trampoline_add_dialog_hint_to">替换为Activity</string>
+    <string name="module_activity_trampoline_add_dialog_delete">移除</string>
+
+    <string name="module_activity_trampoline_add_empty_component">憋输入空白内容</string>
+    <string name="module_activity_trampoline_add_invalid_from_component">原Activity内容错误，请检查输入</string>
+    <string name="module_activity_trampoline_add_invalid_to_component">替换Activity内容错误，请检查输入</string>
+
+    <string name="module_activity_trampoline_title_pull_from_server">导入预制规则</string>
+    <string name="module_activity_trampoline_title_export_comp_replacements">导出我的规则列表</string>
+    <string name="module_activity_trampoline_title_export_comp_replacement_item">导出这条规则</string>
+    <string name="module_activity_trampoline_title_import_comp_replacements">导入规则</string>
+
+    <string-array name="module_common_export_selections">
+        <item>剪贴板</item>
+        <item>导出为文件</item>
+    </string-array>
+
+    <string-array name="module_common_import_selections">
+        <item>剪贴板</item>
+        <item>从文件导入</item>
+    </string-array>
+
+    <string name="common_menu_title_batch_select">批量选择</string>
+    <string name="common_menu_title_select_all">全部</string>
+    <string name="common_menu_title_un_select_all">全不</string>
+    <string name="common_menu_title_search">搜索</string>
+    <string name="common_menu_title_rename">重命名</string>
+    <string name="common_menu_title_remove">移除</string>
+    <string name="common_menu_title_uninstall">卸载</string>
+    <string name="common_menu_title_wiki">指南</string>
+    <string name="common_menu_title_import_from_clipboard">从剪贴板导入</string>
+    <string name="common_menu_title_import">导入</string>
+    <string name="common_menu_title_re_import">重新导入</string>
+    <string name="common_menu_title_update">更新</string>
+    <string name="common_menu_title_export_to_clipboard">导出到剪贴板</string>
+    <string name="common_fab_title_done">完成</string>
+    <string name="common_fab_title_add">添加</string>
+    <string name="common_dialog_message_are_you_sure">你确定吗？请谨慎操作！</string>
+
+    <string name="common_remember">不再提醒</string>
+    <string name="common_tips">提示</string>
+    <string name="common_tips_qut">提示：</string>
+    <string name="common_retry">重试</string>
+
+    <string name="common_badge_text_experiment">实验</string>
+    <string name="common_experiment_feature_warning_message">该功能为实验性功能，尚不稳定，建议你开启该功能之前，做好数据备份，防止出现意外缺陷而导致数据损失</string>
+
+    <string name="common_toast_copied_to_clipboard">已经复制到剪贴板</string>
+
+    <string name="app_state_disabled">冻结</string>
+
+    <string name="chip_title_app_only_disabled">已冻结</string>
+    <string name="chip_title_app_only_enable">已启用</string>
+    <string name="chip_title_app_only_running">运行中</string>
+    <string name="chip_title_app_only_cloned_app">分身</string>
+
+    <string name="app_picker_title">选取应用</string>
+
+    <string name="common_text_value_not_set">未设置</string>
+
+    <string name="common_network_error">网络异常，请检查设备网络连接后重试</string>
+    <string name="common_server_error">服务器暂时不可用，请稍后重试，或尝试更新到软件最新版本</string>
+    <string name="common_generic_error">抱歉，发生了一些错误</string>
+
+    <string name="common_text_wait_a_moment">稍等一下</string>
+
+    <string name="common_darg_sort">按住拖动排序</string>
+    <string name="common_sort_reverse">逆转</string>
+    <string name="common_sort_by_default">默认</string>
+    <string name="common_sort_by_install_time">安装时间</string>
+    <string name="common_sort_by_update_time">更新时间</string>
+    <string name="common_sort_by_last_used_time">上次使用时间</string>
+    <string name="common_sort_by_total_used_time">总共使用时长</string>
+    <string name="common_sort_by_install_app_label">应用名称</string>
+    <string name="common_sort_by_install_sdk_version">目标SDK</string>
+    <string name="common_sort_by_install_apk_size">应用体积</string>
+    <string name="common_sort_by_install_app_uid">UID</string>
+
+    <string name="common_switchbar_title_format">使用“%s”</string>
+    <string name="module_common_title_tools">工具</string>
+
+    <string name="module_common_error_occur">出错了</string>
+    <string name="module_common_copy_error_message">复制错误信息</string>
+
+    <string name="module_common_no_data">暂无数据</string>
+
+    <string name="module_common_user">用户%s</string>
+
+    <string-array name="themes_entry">
+        <item>浅色 蓝</item>
+        <item>浅色 靛青</item>
+        <item>浅色 红</item>
+        <item>浅色 绿</item>
+        <item>浅色 黄</item>
+        <item>浅色 黑</item>
+        <item>浅色 鸭绿</item>
+        <item>浅色 粉</item>
+        <item>深色 蓝</item>
+        <item>深色 靛青</item>
+        <item>深色 红</item>
+        <item>深色 黄</item>
+        <item>深色 灰</item>
+        <item>自动切换</item>
+        <item>材料设计 3</item>
+    </string-array>
+
+    <string name="module_component_manager_disabled_by_thanox">通过thanox禁用</string>
+    <string name="module_component_manager_component_running">运行中</string>
+    <string name="module_component_manager_feature_desc">Thanox使用了Android系统的API来禁用组件，这意味着哪怕你把Thanox卸载，这些组件的状态依然会保留\n\nThanox会阻止通过thanox禁用的组件被其他应用重新启用</string>
+    <string name="module_component_manager_keep_service_smart_standby">导入到乖巧模式KEEP清单</string>
+    <string name="module_component_manager_add_lock_white_list">添加到应用锁组件白名单</string>
+
+    <string name="nnf_new_folder">新建文件夹</string>
+    <string name="nnf_create_folder_error">文件夹创建失败</string>
+    <string name="nnf_name">名称</string>
+    <string name="nnf_select_something_first">请先选择</string>
+    <string name="nnf_need_valid_filename">请输入合法的文件名</string>
+    <string name="nnf_permission_external_write_denied">没有权限访问你的文件</string>
+    <string name="nnf_filename">文件名</string>
+    <string name="nnf_list_ok">@android:string/ok</string>
+    <string name="nnf_list_cancel">@android:string/cancel</string>
+    <string name="nnf_new_folder_ok">@android:string/ok</string>
+    <string name="nnf_new_folder_cancel">@android:string/cancel</string>
+
+    <string name="module_notification_recorder_feature_title_notification_center">通知中心</string>
+    <string name="module_notification_recorder_feature_title_notification_recorder">记录器</string>
+    <string name="module_notification_recorder_item_no_title">无标题</string>
+    <string name="module_notification_recorder_item_type_toast">吐司</string>
+    <string name="module_notification_recorder_item_type_n">通知</string>
+    <string name="module_notification_recorder_item_type_clip">剪贴板</string>
+    <string name="module_notification_recorder_item_no_content">这条通知没有内容</string>
+    <string name="module_notification_recorder_item_uninstalled_app">已卸载应用</string>
+    <string name="module_notification_recorder_total_message_count">总共%1$s条通知</string>
+    <string name="module_notification_recorder_clear_all">清空全部</string>
+    <string name="module_notification_recorder_toady">今天</string>
+    <string name="module_notification_recorder_before_today">更早些</string>
+    <string name="module_notification_recorder_settings">设置</string>
+
+    <string name="module_notification_recorder_pref_summary_enable_toast_info">在系统吐司中添加一个应用图标</string>
+    <string name="module_notification_recorder_pref_title_enable_toast_info">显示吐司信息</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_n">记录状态栏通知</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_for_all_apps">记录所有应用</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_t">记录应用吐司</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_clip">记录剪贴板</string>
+
+    <string name="module_notification_recorder_reproduce">重现</string>
+    <string name="module_notification_recorder_zoom">Zoom</string>
+    <string name="module_notification_recorder_yesterday">昨天</string>
+    <string name="module_notification_recorder_the_day_before_yesterday">前天</string>
+    <string name="module_notification_recorder_stats">统计</string>
+
+    <string-array name="module_ops_app_ops_summaries">
+        <item>"粗略位置"</item>
+        <item>"精确位置"</item>
+        <item>"GPS"</item>
+        <item>"振动"</item>
+        <item>"读取联系人"</item>
+        <item>"修改联系人"</item>
+        <item>"读取通话记录"</item>
+        <item>"修改通话记录"</item>
+        <item>"读取日历"</item>
+        <item>"修改日历"</item>
+        <item>"WLAN扫描"</item>
+        <item>"通知"</item>
+        <item>"手机网络扫描"</item>
+        <item>"拨打电话"</item>
+        <item>"读取短信"</item>
+        <item>"编写短信"</item>
+        <item>"接收短信"</item>
+        <item>"接收紧急短信"</item>
+        <item>"接收彩信"</item>
+        <item>"接收 WAP PUSH 消息"</item>
+        <item>"发送短信"</item>
+        <item>"读取 ICC 短信"</item>
+        <item>"写入 ICC 短信"</item>
+        <item>"修改设置"</item>
+        <item>"在最上层显示内容"</item>
+        <item>"访问通知"</item>
+        <item>"相机"</item>
+        <item>"录制音频"</item>
+        <item>"播放音频"</item>
+        <item>"读取剪贴板内容"</item>
+        <item>"修改剪贴板内容"</item>
+        <item>"媒体按钮"</item>
+        <item>"音频焦点"</item>
+        <item>"主音量"</item>
+        <item>"语音音量"</item>
+        <item>"铃声音量"</item>
+        <item>"媒体音量"</item>
+        <item>"闹钟音量"</item>
+        <item>"通知音量"</item>
+        <item>"蓝牙音量"</item>
+        <item>"保持唤醒状态"</item>
+        <item>"监测位置"</item>
+        <item>"监控高电耗位置信息服务"</item>
+        <item>"获取使用情况统计信息"</item>
+        <item>"将麦克风静音或取消静音"</item>
+        <item>"显示问候语"</item>
+        <item>"投影媒体"</item>
+        <item>"激活 VPN"</item>
+        <item>"写入壁纸"</item>
+        <item>"辅助结构"</item>
+        <item>"辅助屏幕截图"</item>
+        <item>"读取手机状态"</item>
+        <item>"添加语音邮件"</item>
+        <item>"使用 SIP"</item>
+        <item>"处理拨出电话"</item>
+        <item>"指纹"</item>
+        <item>"身体传感器"</item>
+        <item>"读取小区广播"</item>
+        <item>"模拟位置"</item>
+        <item>"读取存储空间"</item>
+        <item>"写入存储空间"</item>
+        <item>"开启屏幕"</item>
+        <item>"获取帐号"</item>
+        <item>"在后台运行"</item>
+        <item>"无障碍功能音量"</item>
+
+        <item>Read phone number</item>
+        <item>请求安装应用</item>
+        <item>Picture in picture</item>
+        <item>Instant app start foreground</item>
+        <item>Answer incoming phone calls</item>
+        <item>在后台运行任务</item>
+        <item>更改Wifi连接状态</item>
+        <item>Request package deletion through package installer</item>
+        <item>Bind an accessibility service</item>
+        <item>Continue handover of a call from another app</item>
+        <item>Create and Manage IPsec Tunnels</item>
+        <item>Any app start foreground service</item>
+        <item>Blue tooth scan</item>
+
+        <item>Use the BiometricPrompt/BiometricManager APIs</item>
+        <item>Physical activity recognition</item>
+        <item>Financial app sms read</item>
+        <item>Read media of audio type</item>
+        <item>Write media of audio type</item>
+        <item>Read media of video type</item>
+        <item>Write media of video type</item>
+        <item>Read media of image type</item>
+        <item>Write media of image type</item>
+        <item>Has a legacy (non-isolated) view of storage</item>
+        <item>使用辅助功能</item>
+        <item>读取设备信息(IMEI / MEID, IMSI, SIM / Build serial)</item>
+
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Active platform VPN</item>
+        <item>Loader usage stats</item>
+        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
+
+        <item>通过包名查询其他已安装应用的信息，请谨慎设定，禁用该权限可能导致该应用无法与其他应用交互，甚至造成其他异常问题</item>
+        <item>调节屏幕亮度</item>
+        <item>获取已安装应用</item>
+        <item>Query intent(LAUNCHER, 经常用于查询应用列表) activities</item>
+        <item>获取您的位置信息</item>
+        <item>接收传感器数据，禁止后应用的摇一摇等依赖传感器的功能将会失效；拒绝该权限需要xposed中勾选该目标应用的作用域</item>
+    </string-array>
+
+    <string-array name="module_ops_app_ops_labels">
+        <item>"位置"</item>
+        <item>"位置"</item>
+        <item>"位置"</item>
+        <item>"振动"</item>
+        <item>"读取联系人"</item>
+        <item>"修改联系人"</item>
+        <item>"读取通话记录"</item>
+        <item>"修改通话记录"</item>
+        <item>"读取日历"</item>
+        <item>"修改日历"</item>
+        <item>"位置"</item>
+        <item>"发布通知"</item>
+        <item>"位置"</item>
+        <item>"拨打电话"</item>
+        <item>"读取短信/彩信"</item>
+        <item>"编写短信/彩信"</item>
+        <item>"接收短信/彩信"</item>
+        <item>"接收短信/彩信"</item>
+        <item>"接收短信/彩信"</item>
+        <item>"接收短信/彩信"</item>
+        <item>"发送短信/彩信"</item>
+        <item>"读取短信/彩信"</item>
+        <item>"编写短信/彩信"</item>
+        <item>"修改设置"</item>
+        <item>"在最上层显示内容"</item>
+        <item>"访问通知"</item>
+        <item>"相机"</item>
+        <item>"录制音频"</item>
+        <item>"播放音频"</item>
+        <item>"读取剪贴板内容"</item>
+        <item>"修改剪贴板内容"</item>
+        <item>"媒体按钮"</item>
+        <item>"音频焦点"</item>
+        <item>"主音量"</item>
+        <item>"语音音量"</item>
+        <item>"铃声音量"</item>
+        <item>"媒体音量"</item>
+        <item>"闹钟音量"</item>
+        <item>"通知音量"</item>
+        <item>"蓝牙音量"</item>
+        <item>"保持唤醒状态"</item>
+        <item>"位置"</item>
+        <item>"位置信息"</item>
+        <item>"获取使用情况统计信息"</item>
+        <item>"将麦克风静音或取消静音"</item>
+        <item>"显示问候语"</item>
+        <item>"投影媒体"</item>
+        <item>"激活 VPN"</item>
+        <item>"写入壁纸"</item>
+        <item>"辅助结构"</item>
+        <item>"辅助屏幕截图"</item>
+        <item>"读取手机状态"</item>
+        <item>"添加语音邮件"</item>
+        <item>"使用 SIP"</item>
+        <item>"处理拨出电话"</item>
+        <item>"指纹"</item>
+        <item>"身体传感器"</item>
+        <item>"读取小区广播"</item>
+        <item>"模拟位置"</item>
+        <item>"读取存储空间"</item>
+        <item>"写入存储空间"</item>
+        <item>"开启屏幕"</item>
+        <item>"获取帐号"</item>
+        <item>"在后台运行"</item>
+        <item>"无障碍功能音量"</item>
+        <item>Read phone number</item>
+        <item>安装应用</item>
+        <item>Picture in picture</item>
+        <item>Instant app start foreground</item>
+        <item>Answer incoming phone calls</item>
+        <item>在后台运行任务</item>
+        <item>更改Wifi连接状态</item>
+        <item>Request package deletion through package installer</item>
+        <item>Bind an accessibility service</item>
+        <item>Continue handover of a call from another app</item>
+        <item>Create and Manage IPsec Tunnels</item>
+        <item>Any app start foreground service</item>
+        <item>Blue tooth scan</item>
+
+        <item>Use BiometricPrompt</item>
+        <item>Physical activity recognition</item>
+        <item>Financial app sms read</item>
+        <item>Read media of audio type</item>
+        <item>Write media of audio type</item>
+        <item>Read media of video type</item>
+        <item>Write media of video type</item>
+        <item>Read media of image type</item>
+        <item>Write media of image type</item>
+        <item>Has a legacy view of storage</item>
+        <item>使用辅助功能</item>
+        <item>读取设备信息</item>
+
+        <item>Access media location</item>
+        <item>Query all packages</item>
+        <item>Access all external storage</item>
+        <item>Interact across profiles</item>
+        <item>Active platform VPN</item>
+        <item>Loader usage stats</item>
+        <item>Placeholder</item>
+        <item>Auto revoke permissions if unused</item>
+        <item>Auto revoke managed by installer</item>
+        <item>No isolated storage</item>
+
+        <item>查询其他应用信息</item>
+        <item>屏幕亮度</item>
+        <item>获取已安装应用列表</item>
+        <item>查询意图活动</item>
+        <item>定位</item>
+        <item>接收传感器数据</item>
+    </string-array>
+
+    <string name="module_ops_category_location">位置</string>
+    <string name="module_ops_category_personal">个人</string>
+    <string name="module_ops_category_message">信息</string>
+    <string name="module_ops_category_media">媒体</string>
+    <string name="module_ops_category_device">设备</string>
+    <string name="module_ops_category_bg">后台</string>
+    <string name="module_ops_category_remaining">其他</string>
+    <string name="module_ops_category_thanox">Thanox</string>
+
+    <string name="module_ops_title_op_remind_apps">受监视的应用</string>
+
+    <string name="module_ops_title_reset_ops_mode_for_all">重置全部应用的配置</string>
+
+    <string name="module_ops_feature_title_app_ops_list">权限管理</string>
+    <string name="module_ops_feature_summary_app_ops_list">按应用</string>
+    <string name="module_ops_activity_title_app_ops_list">按应用</string>
+
+    <string name="module_ops_feature_title_a_manage">活动管理</string>
+    <string name="module_ops_feature_title_s_manage">服务管理</string>
+    <string name="module_ops_feature_title_r_manage">广播接收器管理</string>
+    <string name="module_ops_feature_title_p_manage">内容提供者管理</string>
+
+    <string name="module_ops_feature_title_block_uninstall">阻止卸载</string>
+    <string name="module_ops_feature_title_block_clear_data">阻止清除数据</string>
+
+    <string name="module_ops_feature_title_ops_app_list">权限管理</string>
+    <string name="module_ops_feature_summary_ops_app_list">按权限</string>
+    <string name="module_ops_activity_title_ops_app_list">按权限（%s）</string>
+
+    <string name="module_ops_feature_title_ops_remind_list">隐私提醒</string>
+    <string name="module_ops_feature_summary_ops_remind">应用使用某些权限时发出提醒</string>
+
+    <string name="module_ops_mode_allow">始终允许</string>
+    <string name="module_ops_mode_foreground">前台允许</string>
+    <string name="module_ops_mode_ignore">拒绝</string>
+    <string name="module_ops_mode_all">全部</string>
+
+    <string name="module_ops_mode_allow_all">全部 始终允许</string>
+    <string name="module_ops_mode_ask_all">全部 询问</string>
+    <string name="module_ops_mode_foreground_all">全部 前台允许</string>
+    <string name="module_ops_mode_ignore_all">全部 拒绝</string>
+
+    <string name="module_profile_feature_name">情景模式</string>
+    <string name="module_profile_feature_summary">基于场景执行自定义操作</string>
+
+    <string name="module_profile_title_global_var">全局变量</string>
+
+    <string name="module_profile_title_rule_engine">引擎</string>
+    <string name="module_profile_summary_rule_engine">引擎是发布事实的工具，Thanox默认启用了多个发布器，下面的引擎支持打开或者关闭。请注意引擎描述，关闭引擎可能会导致一些Profile无法正常被触发或执行</string>
+    <string name="module_profile_pref_title_rule_engine_automation">Automation</string>
+    <string name="module_profile_pref_summary_rule_engine_automation">支持执行自动点击，查找view。\n\n📢 注意：该引擎可能会导致一些应用的辅助功能无法生效</string>
+    <string name="module_profile_pref_title_rule_engine_push">推送消息</string>
+    <string name="module_profile_pref_summary_rule_engine_push">发布推送消息事实，目前支持FCM，GCM</string>
+
+    <string name="module_profile_pref_summary_rule_engine_su">为Thanox情景模式启用su API支持，请在弹出的超级权限授予请求中点击允许，如果未收到请求，请手动打开超级用户权限。
+        \nsu命令将会以Thanox应用的身份执行。\n要使用su，请允许Thanox应用自启</string>
+    <string name="module_profile_pref_title_rule_engine_su">su API</string>
+    <string name="module_profile_pref_title_rule_engine_custom_su">自定义su</string>
+    <string name="module_profile_pref_summary_rule_engine_custom_su">输入自定义的su路径以设置情景模式执行su命令时使用的命令</string>
+
+    <string name="module_profile_should_enable_su">这条情景模式可能需要打开<b>su API</b>才能工作, 请进入引擎设置中开启</string>
+    <string name="module_profile_should_enable_push">这条情景模式可能需要打开<b>推送消息引擎</b>才能工作, 请进入引擎设置中开启</string>
+    <string name="module_profile_miss_global_var">这条情景模式需要创建如下全局变量才能工作\n%s</string>
+    <string name="module_profile_block_thread">这条情景模式使用了线程休眠，可能会阻塞其他情景模式的执行；请调整该情景模式的priority为负数，使其在新线程中执行</string>
+
+
+    <string name="module_profile_pref_title_rule_engine_shortcut">从快捷方式</string>
+    <string name="module_profile_pref_summary_rule_engine_shortcut">创建一个桌面快捷方式，当这个快捷方式被点击启动时，thanox会发布该快捷方式表示的事实</string>
+    <string name="module_profile_pref_title_rule_engine_date_time">时间与日期</string>
+    <string name="module_profile_pref_summary_rule_engine_date_time">安排一些重复或定时任务</string>
+    <string name="module_profile_date_time_regular_interval">固定时间间隔</string>
+    <string name="module_profile_date_time_alarm">一天中的时间</string>
+    <string name="module_profile_date_time_tag">Tag用于情景模式的条件判断。\n使用举例：%s</string>
+    <string name="module_profile_date_time_min_interval">当前支持的最短时间间隔为15分钟</string>
+
+    <string name="module_profile_rule_edit_action_save">保存</string>
+    <string name="module_profile_rule_edit_action_discard">取消</string>
+    <string name="module_profile_rule_edit_action_text_size_inc">放大</string>
+    <string name="module_profile_rule_edit_action_text_size_dec">缩小</string>
+
+    <string name="module_profile_rule_wiki">指南</string>
+    <string name="module_profile_rule_impor_from_file">选择文件导入</string>
+    <string name="module_profile_rule_impor_example">导入示例</string>
+    <string name="module_profile_rule_online">查看在线情景</string>
+
+    <string name="module_profile_rule_edit">编辑</string>
+    <string name="module_profile_rule_new">新建</string>
+    <string name="module_profile_rule_example"></string>
+
+    <string name="module_profile_editor_select_format">选择文件格式</string>
+    <string name="module_profile_editor_save_success">保存成功，请点击开关以启用</string>
+    <string name="module_profile_editor_save_check_error">语法错误</string>
+
+    <string name="module_profile_editor_discard_dialog_title">取消编辑</string>
+    <string name="module_profile_editor_discard_dialog_message">确定退出吗？你输入的内容将被丢弃！</string>
+
+    <string name="module_profile_editor_delete_dialog_title">删除</string>
+    <string name="module_profile_editor_delete_dialog_message">确定删除吗，删除后内容无法找回！</string>
+
+    <string name="module_profile_edit_delete">删除</string>
+    <string name="module_profile_edit_show_hide_symbols">符号栏</string>
+
+    <string name="module_profile_edit_var_title_hint">请输入名称</string>
+    <string name="module_profile_var_list_item_size">%s个变量</string>
+    <string name="module_profile_title_shortcut_fact_value">Fact value</string>
+    <string name="module_profile_title_shortcut_label">快捷方式名称</string>
+
+    <string name="module_profile_rule_format_tips_title">格式要求</string>
+    <string name="module_profile_rule_format_tips_message"><b>name</b>字段尽量使用字母数字组合，不要出现特殊字符；\n\n<b>description</b>字段可以使用任意字符，简要介绍下这个情景的用途即可</string>
+
+    <string name="module_profile_add_to_global_var">添加到全局变量</string>
+
+    <string name="module_push_message_delegate_title_wechat">微信</string>
+    <string name="module_push_message_delegate_title_wechat_proxy">微信代收</string>
+    <string name="module_push_message_delegate_title_summary_proxy">建议安装Play版本的微信客户端</string>
+    <string name="module_push_message_delegate_title_sound">声音</string>
+    <string name="module_push_message_delegate_title_vibrate">振动</string>
+    <string name="module_push_message_delegate_title_content">显示消息内容</string>
+    <string name="module_push_message_delegate_title_mock">模拟消息</string>
+    <string name="module_push_message_delegate_title_start_app">拉起应用</string>
+    <string name="module_push_message_delegate_summary_start_app">当收到推送，应用未在运行时，主动拉起应用</string>
+    <string name="module_push_message_delegate_title_skip_if_running">自动略过</string>
+    <string name="module_push_message_delegate_summary_skip_if_running">目标应用在后台运行时，不发送Thanox代理通知</string>
+    <string name="module_push_message_delegate_title_gcm_diag">Diag</string>
+    <string name="module_push_message_delegate_notice_wechat_proxy">请注意，代收功能当前处于实验阶段，仅供学习研究。目前谁也不能保证会100%收到推送</string>
+
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g>个进程和<xliff:g id="NUMSERVICES">%2$d</xliff:g>个服务"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g>个进程和<xliff:g id="NUMSERVICES">%2$d</xliff:g>个服务"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g>个进程和<xliff:g id="NUMSERVICES">%2$d</xliff:g>个服务"</string>
+    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g>个进程和<xliff:g id="NUMSERVICES">%2$d</xliff:g>个服务"</string>
+    <string name="running_processes_item_description_p">%1$d个进程</string>
+    <string name="running_processes_item_description_s">%1$d个服务</string>
+    <string name="running_processes_header_title" msgid="6588371727640789560">"设备内存"</string>
+    <string name="running_processes_header_footer" msgid="723908176275428442">"应用内存使用情况"</string>
+    <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"系统"</string>
+    <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"应用"</string>
+    <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"可用"</string>
+    <string name="running_processes_header_used_prefix" msgid="5924288703085123978">"已用"</string>
+    <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"缓存"</string>
+    <string name="running_processes_header_ram">%1$s</string>
+    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"正在运行的应用"</string>
+    <string name="no_services" msgid="7133900764462288263">"无活动服务"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"服务"</string>
+    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"进程"</string>
+    <string name="service_manage" msgid="1876642087421959194">"设置"</string>
+    <string name="service_stop_description" msgid="9146619928198961643">"此服务由其应用启动。停止服务可能会导致应用无法运行。"</string>
+    <string name="heavy_weight_stop_description" msgid="6050413065144035971">"无法安全地停止该应用。如果强行停止，可能会导致您目前的部分工作内容丢失。"</string>
+    <string name="background_process_stop_description" msgid="3834163804031287685">"这是旧应用进程，仍在运行，以备不时之需。通常不建议停止。"</string>
+    <string name="service_manage_description" msgid="479683614471552426">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>：当前正在使用中。点按“设置”即可对其进行管理。"</string>
+    <string name="main_running_process_description" msgid="1130702347066340890">"正在使用的主要进程。"</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"正在使用服务<xliff:g id="COMP_NAME">%1$s</xliff:g>。"</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"正在使用提供商<xliff:g id="COMP_NAME">%1$s</xliff:g>。"</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"要停止系统服务吗？"</string>
+    <string name="runningservicedetails_stop_dlg_text" msgid="3920243762189484756" product="default">"如果停止此服务，您手机上的某些功能也将随之停止工作，并在您将手机关机然后再重新打开后才能使用。"</string>
+
+    <string name="no_default_apps" msgid="2915315663141025400">"没有任何默认应用。"</string>
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"存储空间使用情况"</string>
+    <string name="storageuse_settings_summary" msgid="3748286507165697834">"查看应用使用的存储空间"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"正在重新启动"</string>
+    <string name="cached" msgid="1059590879740175019">"缓存的后台进程"</string>
+    <string name="show_cached" msgid="1059590879740175019">"切换显示缓存进程"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"当前未运行任何服务。"</string>
+    <string name="service_started_by_app" msgid="818675099014723551">"由应用启动"</string>
+    <string name="service_client_name" msgid="818675099014723551">"客户端 %1$s"</string>
+    <string name="service_process_name" msgid="818675099014723551">"进程 %1$s"</string>
+
+    <string name="running_process_not_running">未在运行</string>
+    <string name="running_process_running">运行中</string>
+    <string name="running_process_background">缓存中</string>
+    <string name="running_process_all">全部</string>
+    <string name="service_stop">停止</string>
+    <string name="service_report">报告</string>
+    <string name="service_running_time">已运行</string>
+
+    <string name="app_name">Thanox</string>
+    <string name="privacy_agreement_file">privacy/privacy_agreement.html</string>
+
+    <!-- Switch On/Off  -->
+    <string name="switch_on_text">已启用</string>
+    <string name="switch_off_text">未启用</string>
+
+    <string name="status_active">已激活</string>
+    <string name="status_not_active">未激活</string>
+    <string name="message_active_needed">Thanox支持Xposed和Magisk两种激活方式（二选一，不可同时使用）。\n\n对于Xposed用户，在Xposed模块页面勾选Thanox即可。\n\n对于Magisk用户，你可以将下载的Thanox安装包文件拓展名，由.apk修改为.zip后通过MagiskManager刷入。\n如果你找不到Thanox安装包，你可以点击设置，关于，补丁状态按钮，导出Magisk模块的zip包</string>
+    <string name="status_need_reboot">请重启</string>
+    <string name="title_framework_error">核心初始化错误</string>
+    <string name="message_framework_error">Thanox遇到兼容性错误，可能会影响某些功能，请把/data/system/thanos_xxx/log下面的日志反馈给开发者</string>
+
+    <string name="title_multiple_patch_applied_error">应用了多个补丁</string>
+    <string name="message_multiple_patch_applied_error">Thanox激活只需要采用一种补丁，而你同时采用了多个补丁: %s，这会导致一些额外的使用故障，请务必参阅使用指南</string>
+
+    <string name="nav_title_boost">加速</string>
+    <string name="nav_title_secure">隐私</string>
+    <string name="nav_title_settings">设置</string>
+    <string name="nav_title_feedback">反馈</string>
+    <string name="nav_title_exp">拓展</string>
+    <string name="nav_title_plugin">插件</string>
+    <string name="nav_title_plugin_repo">插件仓库</string>
+    <string name="nav_title_thanox">Thanox</string>
+
+    <string name="pref_title_feature_toggle">功能开关</string>
+
+    <string name="priv_title_fields_template">模板</string>
+    <string name="priv_title_fields_usage_count">%s个应用使用该模板</string>
+    <string name="priv_title_fields_usage_count_noop">未使用</string>
+
+    <string name="title_package_sets">应用集</string>
+    <string name="title_package_add_set">创建应用集</string>
+    <string name="title_package_edit_set">查看或编辑</string>
+    <string name="title_package_delete_set">删除</string>
+    <string name="title_package_count_set">包含%s个应用</string>
+
+    <string name="card_title_plugin_available">安装Thanox插件</string>
+    <string name="card_message_plugin_available">插件主要承载一些不稳定或非关键功能。</string>
+
+    <string name="tile_category_plugin_installed">已安装</string>
+    <string name="tile_category_plugin_already_installed">该插件无法被覆盖安装，请卸载现有版本后重新安装</string>
+    <string name="tile_category_plugin_update_available">可更新</string>
+
+    <string name="tile_su_plugin_deprecated">su Enabler 插件已经被废弃，现在你不需要安装su插件了。你可以在情景模式的引擎设置中直接开启su API支持</string>
+
+    <string name="dialog_title_plugin_installing">正在安装插件</string>
+    <string name="dialog_title_plugin_updating">正在更新插件</string>
+    <string name="dialog_title_plugin_uninstalling">正在卸载插件</string>
+    <string name="dialog_title_plugin_uninstall_confirm">确定卸载该插件？</string>
+    <string name="menu_title_uninstall_plugin">卸载插件</string>
+    <string name="menu_title_view_plugin_info">详细信息</string>
+
+    <string name="title_download">下载</string>
+    <string name="title_install">安装</string>
+
+    <string name="dialog_message_feedback">可在设置-关于中的聊天群组或者github/Thanox中提交Issue进行反馈。反馈问题务必提供以下必要信息：\n\n1. 清晰的问题描述，配合截图或录屏 \n2. 点击下方按钮导出的日志文件。\n\n以上信息缺一不可。</string>
+    <string name="feedback_export_log">导出日志</string>
+    <string name="feedback_export_log_success">日志已导出</string>
+    <string name="feedback_export_log_fail">日志导出失败，请手动授予文件读写权限后重试</string>
+
+    <string name="title_no_plugins_installed">暂无插件可用</string>
+    <string name="title_plugin_reboot_take_effect">重启生效</string>
+
+    <string name="title_show_current_activity">当前活动</string>
+    <string name="title_net_stats">流量详情</string>
+    <string name="message_reboot_needed">核心已更新，请重启系统</string>
+    <string name="reboot_now">立即重启</string>
+    <string name="reboot_later">稍后重启</string>
+
+    <string name="badge_app_running">运行</string>
+    <string name="badge_app_idle">休眠</string>
+
+    <string name="secure_privacy_enabled_apps">个应用受限</string>
+    <string name="secure_privacy_request_count">已处理%s次身份信息请求</string>
+
+    <string name="boost_status_system_memory">内存</string>
+    <string name="boost_status_system_storage">存储空间</string>
+
+    <string name="feature_category_start_manage">启动</string>
+    <string name="feature_title_one_key_boost">一键加速</string>
+    <string name="feature_title_one_key_boost_abbr">一键加速</string>
+    <string name="feature_title_start_restrict">后台启动</string>
+    <string name="feature_title_start_restrict_abbr">后台启动</string>
+    <string name="feature_desc_start_restrict">允许选中的应用自启动、关联启动</string>
+    <string name="feature_title_bg_restrict">后台运行</string>
+    <string name="feature_title_bg_restrict_abbr">后台运行</string>
+    <string name="feature_desc_bg_restrict">\"后台运行\"开关打开后，Thanox会在屏幕熄灭后进行一次进程清理；勾选的应用锁屏后可以继续运行，也就是说锁屏清理时不清理这些应用，另外在执行一键加速（一键加速就是清理下面这些没勾选的应用的后台）时，保留这些应用</string>
+    <string name="feature_desc_bg_restrict_brief">允许应用后台运行</string>
+
+    <string name="menu_title_start_restrict_charts">启动记录</string>
+    <string name="menu_title_rules">规则</string>
+
+    <string name="feature_summary_start_restrict_rules">你可以通过制定规则来细化关联启动控制，详细使用方法请参考新手使用手册。\n\n注意：规则的优先级大于上一页的开关设定。\n\n提示：关闭规则检查或许可以节约设备电量。</string>
+    <string name="feature_summary_standby_restrict_rules">可以控制保留某些服务，语法：KEEP $组件名  \ne.g. KEEP xxx/.XService</string>
+
+    <string name="feature_category_app_clean_up">清理</string>
+    <string name="feature_title_clean_when_task_removed">任务清理</string>
+    <string name="feature_desc_clean_when_task_removed">对选中的应用生效，清除最近任务后同时清理应用后台</string>
+    <string name="feature_desc_clean_when_task_removed_brief">清除最近任务后同时清理应用后台</string>
+
+    <string name="activity_title_start_restrict">后台启动</string>
+    <string name="activity_title_bg_restrict">后台运行</string>
+    <string name="activity_title_clean_when_task_removed">任务清理</string>
+
+    <string name="feature_title_process_manage">进程管理</string>
+    <string name="activity_title_process_manage">运行中（%s）</string>
+    <string name="item_summary_process_count">%s个进程</string>
+    <string name="item_summary_mem_size">%s</string>
+    <string name="snack_process_update_message">正在运行的应用信息可更新</string>
+    <string name="snack_process_update_refresh">刷新</string>
+    <string name="title_cached_background_process">缓存的后台进程</string>
+
+    <string name="feature_category_app_manage">应用</string>
+    <string name="feature_title_apps_manager">应用管理</string>
+    <string name="activity_title_apps_manager">应用管理</string>
+    <string name="feature_summary_apps_manager">应用的单独配置与管理</string>
+    <string name="titile_suggested_apps_recent_used">最近打开的应用</string>
+    <string name="title_suggested_apps_view_all">查看全部%s个应用</string>
+
+    <string name="feature_category_privacy">隐私</string>
+    <string name="feature_category_manage">管理</string>
+    <string name="feature_category_protect">保护</string>
+    <string name="feature_category_remind">提醒</string>
+    <string name="feature_category_misc">杂项</string>
+
+    <string name="feature_title_recent_task_blur">卡片模糊</string>
+    <string name="feature_summary_recent_task_blur">给最近任务卡片加上模糊效果</string>
+
+    <string name="feature_title_wakelock_blocker">唤醒锁拦截</string>
+    <string name="wakelock_state_holding">持有中</string>
+    <string name="wakelock_view_held_only">只看持有中</string>
+    <string name="wakelock_count">%s个唤醒锁</string>
+
+    <string name="feature_title_app_lock">应用锁</string>
+    <string name="feature_summary_app_lock">使用密码锁定应用界面</string>
+
+    <string name="feature_category_notification">通知</string>
+    <string name="feature_title_light_on_notification">通知亮屏</string>
+    <string name="feature_summary_light_on_notification">收到通知点亮屏幕</string>
+    <string name="feature_title_push_delegate">消息代收</string>
+
+    <string name="feature_category_plugins">可用功能</string>
+
+    <string name="feature_category_ext">拓展</string>
+    <string name="feature_category_power_save">电源</string>
+    <string name="feature_title_smart_app_standby">乖巧模式</string>
+    <string name="feature_summary_smart_app_standby">对勾选的应用生效，应用回到后台自动停止所有服务或者使其处于待机状态；如需设置例外服务，请使用规则</string>
+    <string name="feature_summary_smart_app_standby_brief">应用回到后台接受处置</string>
+
+    <string name="feature_category_apps">应用</string>
+    <string name="feature_title_enable_package_on_launch">活检解冻（DOL）</string>
+    <string name="feature_summary_enable_package_on_launch">应用被智能冻结后，当检测到该应用的活动启动请求，Thanox会自动解冻该应用</string>
+    <string name="pref_title_enable_package_on_launch_by_default">自动打开\"活检解冻\"</string>
+    <string name="pref_title_dol_tips">DOL提示</string>
+    <string name="pref_summary_enable_package_on_launch_by_default">当某个应用被加入智能冻结列表时，自动为这个应用开启\"活检解冻\"开关</string>
+    <string name="feature_title_smart_app_freeze">智能冻结</string>
+    <string name="menu_title_smart_app_freeze_enable_all_smart_freeze_apps">全部解冻并移除列表中的应用</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">将智能冻结的应用全部解冻，并从智能冻结列表中移除，你确定要这样做吗？</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp">全部临时解冻列表中的应用</string>
+    <string name="menu_title_smart_app_freeze_export_package_list">导出应用列表</string>
+    <string name="menu_title_smart_app_freeze_import_package_list">导入应用列表</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">将智能冻结列表中的应用全部临时解冻，你确定要这样做吗？</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps">解冻所有应用</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps">将会解冻你的系统中所有被冻结或挂起的应用，包含所有已安装或系统应用，你确定要这样做吗？</string>
+    <string name="feature_summary_smart_app_freeze">把不常用的应用冻结起来</string>
+    <string name="feature_desc_smart_app_freeze">注意，冻结应用使用了Android系统的能力，意味着这些状态会跟随系统持久化，即使你卸载了Thanox，这些状态将依然会保留</string>
+    <string name="menu_title_create_shortcut">创建快捷方式</string>
+    <string name="menu_title_create_shortcut_apk">生成代理应用</string>
+    <string name="menu_title_broadcast_intent_shortcut">广播意图</string>
+    <string name="menu_title_activity_intent_shortcut">活动意图</string>
+    <string name="dialog_message_create_shortcut_apk">生成一个专门用于启动该冻结应用的绿色Android app，生成的应用将只包含一个Activity，大约30K。你可以安装代理应用来解决桌面没有冻结应用图标问题。</string>
+
+    <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">开启自适应电池</string>
+    <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">
+        Android 9+设备使用智能休眠需要开启系统设置中的电池-自适应电池选项才能正常工作。\n\nThanox当前无法准确判断你的系统是否支持并开启了该选项。
+    </string>
+
+    <string name="message_do_you_want_to_add_apps_to_pkg_set">还要将这些应用程序添加到当前的应用集中吗？</string>
+
+    <string name="feature_title_infinite_z">双开</string>
+    <string name="feature_message_infinite_z_enable">多开基于Android多用户机制实现，开启多开功能需要创建一个用户的Profile，通常桌面会显示一个“工作”页签。\n该功能目前处于实验阶段，尚不稳定。\n提示: 如果遇到分享界面，文件选择界面无法打开的问题，可以尝试添加IntentResolver到多开应用中。\n\n你是否要开启？</string>
+    <string name="feature_message_infinite_z_disable">关闭分身功能会删除分身用户的所有数据，不可恢复，你确定要关闭分身功能吗？</string>
+    <string name="feature_message_infinite_z_uninstall">你确定要卸载<b>%s</b>吗？该双开应用的数据将会被删除且无法恢复</string>
+
+    <string name="menu_title_copy">复制</string>
+
+    <string name="menu_title_copy_pkg_name">复制包名</string>
+    <string name="menu_title_launch_app">启动应用</string>
+    <string name="menu_title_launch_system_settings">系统设置</string>
+
+    <string name="feature_title_data_cheat">隐匿</string>
+    <string name="feature_desc_data_cheat">对勾选的应用生效，隐藏手机号，SIM序列等敏感信息。需要为应用开启Xposed作用域才能生效</string>
+    <string name="activity_title_data_cheat">隐匿</string>
+    <string name="feature_summary_pkg_data_cheat">身份隐藏</string>
+
+    <string name="title_allow">允许</string>
+    <string name="title_block">禁止</string>
+
+    <string name="menu_start_manage_info">帮助信息</string>
+    <string name="info_title_start_restrict">提示</string>
+    <string name="info_message_start_restrict">阻止应用自启动，关联启动</string>
+    <string name="info_title_bg_restrict">提示</string>
+    <string name="info_message_bg_restrict">屏幕锁定后，禁止的应用会被清理</string>
+
+    <string name="pre_category_ui">外观</string>
+    <string name="pre_title_ui">主题与图标</string>
+    <string name="pre_title_app_theme">主题</string>
+    <string name="pre_title_app_icon_pack">图标包</string>
+    <string name="pre_title_app_icon_crop_to_circle">圆形图标</string>
+    <string name="pre_category_strategy">策略</string>
+    <string name="pre_title_strategy">配置与模板</string>
+    <string name="pre_category_profile">情景</string>
+    <string name="pre_category_data">数据</string>
+    <string name="pre_title_data">备份与恢复</string>
+    <string name="pre_category_about">关于</string>
+    <string name="pre_title_about">Thanox信息</string>
+    <string name="pre_title_developer">开发者与极客选项</string>
+    <string name="pre_title_power">省电相关</string>
+    <string name="pre_category_power">电池</string>
+    <string name="pre_category_dev_tools">开发者</string>
+
+    <string name="pre_category_app_feature_info">应用信息</string>
+    <string name="pre_category_app_feature_config">配置项</string>
+    <string name="pre_category_app_disable_enable">冻结</string>
+
+    <string name="launch_other_app_options_allow">允许</string>
+    <string name="launch_other_app_options_ask">询问</string>
+    <string name="launch_other_app_options_ignore">拒绝</string>
+    <string name="launch_other_app_options_allow_listed">部分允许</string>
+    <string name="launch_other_app">打开其他应用</string>
+
+    <string name="start_record_allowed">允许</string>
+    <string name="start_record_blocked">阻止</string>
+    <string name="start_record_merged">合并</string>
+
+    <string name="privacy_record">隐匿记录</string>
+
+    <string name="pref_title_enable_logging">开启日志</string>
+    <string name="pref_summary_enable_logging">你可以从控制台或者劫持框架中获取到输出的日志内容</string>
+    <string name="pref_title_show_current_activity">显示当前活动</string>
+    <string name="pref_title_enable_global_white_list">全局白名单</string>
+    <string name="pref_summary_enable_global_white_list">注意，该设置为危险设置项，经验不够丰富的同学请不要轻易尝试关闭此开关。\n为防止误操作导致系统发生致命错误，Thanox默认维护一个全局白名单，包含系统的一部分组件、电话、媒体等核心应用。\n如果你强烈希望不启用这个名单，请关闭这个开关。</string>
+    <string name="pref_title_build_info_app">应用信息</string>
+    <string name="pref_title_build_info_server">核心信息</string>
+    <string name="pref_title_patch_info">补丁状态</string>
+    <string name="pre_title_ignore_system_app">排除系统应用</string>
+    <string name="pre_summary_ignore_system_app">在功能列表中不展示系统应用，这些系统应用也不会被干涉</string>
+
+    <string name="dialog_title_battery_drain_fast_by_thanox">可能会加快耗电</string>
+    <string name="dialog_message_battery_drain_fast_by_thanox">Thanox正在进行启动记录，权限访问记录，隐匿记录等，这些数据会被实时存储到文件中，这可能会加快电量的消耗速度，建议按需开启省电配置</string>
+    <string name="pref_title_enable_power_save">尽力省电</string>
+    <string name="pref_summary_enable_power_save">暂停后台启动记录，权限访问记录，隐匿记录以尽可能的节省系统资源和电量</string>
+    <string name="pref_title_enable_high_battery_drain_app_reminding">高耗电提醒</string>
+    <string name="pref_summary_enable_high_battery_drain_app_reminding">检测到耗电量高的应用之后发出通知进行提醒</string>
+
+    <string name="pref_title_open_source_license">开放源代码许可</string>
+
+    <string name="pref_title_icon_maker_remix_icon">图标提供者</string>
+    <string name="pref_summary_icon_maker_remix_icon">Remix Design © 2018 https://remixicon.com</string>
+
+    <string name="pref_title_rss_e">群组</string>
+    <string name="pref_summary_rss_e">加入群组</string>
+
+    <string name="pref_title_app_state_enabled">应用已启用</string>
+    <string name="pref_title_app_to_disable">冻结</string>
+    <string name="pref_title_app_state_disabled">应用已被冻结</string>
+    <string name="pref_title_app_to_enable">解冻</string>
+
+    <string name="pre_title_backup">备份</string>
+    <string name="pre_summary_backup">备份Thanox设置到外置存储中</string>
+    <string name="pre_title_restore">恢复</string>
+    <string name="pre_sumary_restore">选择一个备份包以恢复Thanox设置。如果恢复失败，请尝试手动把/data/system/thanos删除后重试，或者尝试将/data/system/thanos目录的owner改成1000</string>
+    <string name="pre_title_restore_default">恢复默认</string>
+    <string name="pre_summary_restore_default">恢复Thanox默认配置</string>
+
+    <string name="pref_title_new_installed_apps_config_enabled">启用自动配置</string>
+    <string name="pref_summary_new_installed_apps_config_enabled">为新安装的App自动使用模板配置</string>
+    <string name="pref_title_new_installed_apps_config">模板设置</string>
+    <string name="pref_summary_new_installed_apps_config">设置自动应用的模板</string>
+
+    <string name="pref_title_auto_request_xposed_scope">申请Xposed作用域</string>
+    <string name="pref_summary_auto_request_xposed_scope">【实验性功能】当你对应用启用了依赖Xposed scope的功能时，Thanox将会自动申请Scope，届时请留意系统通知 \n\n注意，此功能依赖最新版本的LSPosed框架 \n另外请允许Thanox的自启动与关联启动</string>
+
+
+    <string name="pref_title_config_template_category">配置模板</string>
+    <string name="pref_action_create_new_config_template">新建模板</string>
+    <string name="pref_action_edit_or_view_config_template">查看&amp;修改</string>
+    <string name="pref_action_delete_config_template">删除</string>
+    <string name="pref_action_apply_config_template">应用模板配置</string>
+
+    <string name="pref_action_backup_component_settings">备份组件设置</string>
+    <string name="pref_action_backup_component_settings_summary">备份活动、广播接收器、服务、内容提供者的启用禁用设置</string>
+    <string name="pref_action_restore_component_settings">导入组件设置</string>
+
+    <string name="pre_message_restore_success">恢复成功，请尽快重启设备以生效</string>
+    <string name="pre_message_backup_success">备份成功</string>
+
+    <string name="pre_cheat_field_category_original">原数据</string>
+    <string name="pre_cheat_field_category_cheated">隐匿数据</string>
+    <string name="pre_cheat_field_category_others">其他</string>
+    <string name="pre_title_cheat_sim_serial">SIM系列号</string>
+    <string name="pre_title_cheat_sim_country_iso">SIM国家码</string>
+    <string name="pre_title_cheat_net_country_iso">网络国家码</string>
+
+    <string name="pre_title_cheat_net_op_1">网络运营商（卡一）</string>
+    <string name="pre_title_cheat_net_op_2">网络运营商（卡二）</string>
+    <string name="pre_title_cheat_net_op_3">网络运营商（卡三）</string>
+    <string name="pre_title_cheat_net_op_name_1">网络运营商名称（卡一）</string>
+    <string name="pre_title_cheat_net_op_name_2">网络运营商名称（卡二）</string>
+    <string name="pre_title_cheat_net_op_name_3">网络运营商名称（卡三）</string>
+
+    <string name="pre_title_cheat_sim_op_1">SIM运营商（卡一）</string>
+    <string name="pre_title_cheat_sim_op_2">SIM运营商（卡二）</string>
+    <string name="pre_title_cheat_sim_op_3">SIM运营商（卡三）</string>
+    <string name="pre_title_cheat_sim_op_name_1">SIM运营商名称（卡一）</string>
+    <string name="pre_title_cheat_sim_op_name_2">SIM运营商名称（卡二）</string>
+    <string name="pre_title_cheat_sim_op_name_3">SIM运营商名称（卡三）</string>
+
+    <string name="pre_title_cheat_net_op_name">网络运营商名称（所有卡）</string>
+    <string name="pre_title_cheat_net_op">网络运营商（所有卡）</string>
+
+    <string name="pre_title_cheat_sim_op_name">SIM运营商名称（所有卡）</string>
+    <string name="pre_title_cheat_sim_op">SIM运营商（所有卡）</string>
+
+    <string name="pre_title_cheat_line_one_num">电话号码</string>
+    <string name="pre_title_cheat_device_id">设备ID（旧版接口）</string>
+    <string name="pre_title_cheat_android_id">Android ID</string>
+
+    <string name="pre_title_cheat_imei_slot1">IMEI（卡一）</string>
+    <string name="pre_title_cheat_imei_slot2">IMEI（卡二）</string>
+    <string name="pre_title_cheat_imei_slot3">IMEI（卡三）</string>
+
+    <string name="pre_title_cheat_meid_slot1">MEID（卡一）</string>
+    <string name="pre_title_cheat_meid_slot2">MEID（卡二）</string>
+    <string name="pre_title_cheat_meid_slot3">MEID（卡三）</string>
+
+    <string name="pre_title_cheat_not_set">未指定，该变量不会被欺骗</string>
+    <string name="pre_title_cheat_installed_apps">隐藏已安装应用</string>
+    <string name="pre_title_cheat_show_cheated_apps_notifications">显示隐匿通知</string>
+
+    <string name="cheat_field_auto_gen">全部随机填充</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_delay">锁屏清理延时</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_audio">不清理音频</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_audio">正在播放音频的App不会被清理</string>
+
+    <string name="pre_title_recent_task_blur_mask_mode">隐藏内容</string>
+    <string name="pre_summary_recent_task_blur_mask_mode">不用高斯模糊效果，而是完全隐藏页面内容</string>
+
+    <string name="pre_title_exclude_recent_task">最近任务</string>
+    <string name="pre_summary_exclude_recent_task">设置强制显示到最近任务或者强制从最近任务中隐藏</string>
+    <string name="pre_entry_exclude_recent_task_default">默认</string>
+    <string name="pre_entry_exclude_recent_task_include">强制显示</string>
+    <string name="pre_entry_exclude_recent_task_exclude">强制隐藏</string>
+
+    <string name="pre_title_force_dialog_cancelable">取消对话框</string>
+    <string name="pre_summary_force_dialog_cancelable">强制让该应用的原生弹出对话框可以取消，需要为该应用开启Xposed作用域才能生效</string>
+
+    <string name="pre_title_resident">后台保护</string>
+    <string name="pre_summary_resident">尽量阻止该app被LMK清理</string>
+
+    <string name="pre_title_redaction_notification">通知编辑</string>
+    <string name="pre_summary_redaction_notification">使用自定义标题和文本覆盖应用程序通知</string>
+    <string name="pre_title_redaction_notification_title">标题</string>
+    <string name="pre_title_redaction_notification_text">文本</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_skip_notification">不清理有通知应用</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">不清理最近任务里的应用</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_skip_fg">不清理前台应用</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_fg">开启该选项后，正在前台使用的应用不会被清理</string>
+
+    <string name="pre_title_bg_restrict_show_notification">显示通知</string>
+    <string name="pre_summary_bg_restrict_show_notification">有待清理应用时显示一个通知</string>
+
+    <string name="badge_trying_app">免费试用</string>
+    <string name="badge_paid_app">已购买</string>
+    <string name="badge_framework_err">不兼容</string>
+    <string name="badge_power_save_off">耗电</string>
+
+    <string name="title_remember">不再提醒</string>
+    <string name="title_app_notice">小心!</string>
+    <string name="message_app_notice">在某种情况下，安装激活Thanox后，你的设备可能无法启动.\n\n如果你之前从未听说过变砖、死机 或者不清楚发生上述问题后该如何恢复你的设备, 千万 <b>不要</b> 安装 Thanox!\n\n无论如何，使用之前请做好数据备份！</string>
+
+    <string name="menu_title_feature_desc">功能介绍</string>
+    <string name="menu_title_start_restrict_charts_reset">重置</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records">查看详细记录</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">只看当前应用</string>
+    <string name="pre_category_general">通用</string>
+
+    <string name="pre_category_summary_smart_freeze">针对智能冻结app，Thanox会在其结束进行或者任务被移除时将其冻结\n每次设备重新启动或者执行一键清理时，Thanox会做一次整理，将应用全部冻结\n你也可以选择启用下面的附加策略，或者使用情景模式的 <b>pkg</b> API来触发冻结操作！</string>
+
+    <string name="pre_category_summary_smart_standby">应用回到后台通常可能会有一些服务，进程保持活跃，这些服务或进程都有自己的使命，但遗憾的是我们用户可能无法准确的知道这些服务和进程的具体作用。\n\n你可以选择下面的干涉方式，对回到后台的应用做相应的操作，值得一提的是如果我们干涉了某个应用，它可能无法正确工作。</string>
+    <string name="pre_title_smart_standby_stop_service">停止服务</string>
+    <string name="pre_summary_smart_standby_stop_service">这会尝试停止它不在KEEP规则清单里的所有服务</string>
+    <string name="pre_title_smart_standby_bypass_if_has_n">跳过有通知的</string>
+    <string name="pre_title_smart_standby_bypass_if_has_visible_windows">跳过有可见窗口的</string>
+    <string name="pre_summary_smart_standby_bypass_if_has_n">不干涉有通知的应用</string>
+    <string name="pre_title_smart_standby_set_inactive">休眠应用</string>
+    <string name="pre_summary_smart_standby_set_inactive">尝试设置应用为idle状态，基于Android默认的app standby机制实现</string>
+    <string name="pre_title_smart_standby_block_bg_service_start">阻止后台服务重启</string>
+    <string name="pre_summary_smart_standby_block_bg_service_start">应用的服务被停止以后，很有可能还会触发再次启动，打开这个开关可以阻止回到后台被停止的服务重启。需要注意，这些阻止事件也会出现在后台启动界面的阻止记录中</string>
+
+    <string name="pre_title_smart_freeze_screen_off_clean_up_delay">锁屏后整理</string>
+    <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">锁屏后冻结列表中的全部应用</string>
+    <string name="pre_title_smart_freeze_screen_off_clean_up">锁屏后整理延时</string>
+
+    <string name="pre_title_smart_freeze_tip">显示提示</string>
+    <string name="pre_summary_smart_freeze_tip">当冻结或者解冻应用时显示土司提示</string>
+
+    <string name="pre_title_smart_freeze_hide_package_change_event">不在桌面显示</string>
+    <string name="pre_summary_smart_freeze_hide_package_change_event">打开这个开关后，Thanox会拦截该应用的包启用事件，这样一来，桌面应用就不会感知到应用的启用，达到隐藏应用的效果</string>
+
+    <string name="pre_title_smart_freeze_with_suspend">挂起应用</string>
+    <string name="pre_summary_smart_freeze_with_suspend">默认情况下我们使用禁用应用来冻结app，如果你打开这个开关，我们将会使用挂起app来达到冻结app的目的；稍微有些区别，挂起的应用桌面上仍然会保留一个图标</string>
+
+    <string name="title_stub_apk_app_name">应用名称</string>
+    <string name="title_stub_apk_app_version_code">版本号</string>
+    <string name="title_stub_apk_app_version_name">版本名称</string>
+
+    <string name="export_patch_title">导出补丁</string>
+    <string name="export_patch_message">Thanox支持Xposed和Magisk两种激活方式。\n\n对于Xposed用户，在Xposed模块页面勾选Thanox即可。\n\n对于Magisk用户，你可以将下载的Thanox安装包文件拓展名，由.apk修改为.zip后通过MagiskManager刷入。\n如果你找不到Thanox安装包，你可以点击下面导出按钮，导出Magisk模块的zip包</string>
+    <string name="export_patch_export_magisk">导出</string>
+
+    <string name="onboarding_text_complete">那就开始吧</string>
+    <string name="onboarding_next">继续</string>
+    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_xposed_tips_title">Xposed模式</string>
+    <string name="onboarding_xposed_tips_desc">1. 在Xposed管理器中勾选Thanox \n2. 重启设备 \n3. 记住一件事，每次更新Thanox之后都要在Xposed管理器中重新勾选之后再重启</string>
+
+    <string name="onboarding_magisk_tips_title">Magisk模式（实验性）</string>
+    <string name="onboarding_magisk_tips_desc">1. Thanox apk同时也是Magisk模块，只需要重命名为zip即可 \n2. 另外你也可以在设置-关于-补丁状态中导出Magisk模块 \n3. 记住一件事，每次更新Thanox后，请同时更新magisk模块并重启</string>
+
+
+    <string name="onboarding_github_tips_title">保持更新</string>
+    <string name="onboarding_github_tips_desc">你可以在Github/Thanox上追踪我们发布的预测试版本</string>
+
+    <string name="onboarding_mode_tips_title">两种激活模式</string>
+    <string name="onboarding_mode_tips_desc">Thanox目前支持Xposed补丁或Magisk补丁（实验性，支持Android11+）两种激活方式；你可以任选其中一种进行探索。</string>
+
+    <string name="onboarding_guide_tips_title">使用指导</string>
+    <string name="onboarding_guide_tips_desc">你可以在设置主页中找到使用指导，强烈建议你多花一些时间看看这些指导，说不定会帮到你。</string>
+    <string name="title_package_prebuilt_set">预设</string>
+
+    <string name="pre_title_app_list_item_show_pkg">显示包名</string>
+    <string name="pre_title_app_list_item_show_version">显示版本信息</string>
+    <string name="pre_title_app_list_item">应用列表项</string>
+
+    <string name="menu_title_app_info_detailed">详细信息</string>
+    <string name="nav_title_guide">入门</string>
+
+    <string name="pre_title_smart_freeze_freeze_method">冻结方式</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable">PM disable</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM disable 是Android系统提供的可以\"停用\"某个应用的功能；使用这种方式\"冻结\"应用的时候，被冻结应用的桌面图标会消失，只能通过智能冻结页面或创建的快捷方式、代理应用启动。</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend">PM suspend</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Suspend，是Android提供用于DPC管理的功能；被挂起的应用桌面通常会保留一个灰色的图标，但是无法直接启动该应用的活动，一般会弹出一个对话框提示这个应用已被管理员限制使用。你可以为该应用打开\"活检解冻\"开关，这样一来，Thanox检测到启动该应用活动页的请求会解冻该应用。</string>
+
+    <string name="privacy_agreement_title">隐私协议</string>
+    <string name="privacy_agreement_accept">接受</string>
+    <string name="privacy_agreement_discard">不接受</string>
+
+
+    <string name="feature_title_settings_access_record">设置访问记录</string>
+    <string name="feature_summary_settings_access_record">查看系统设置的读写记录。如果你用的是xposed，通常你需要在作用域中勾选Settings，Settings Provider以及安全管家，因为这些app通常会读写系统设置</string>
+
+    <string name="launch_other_pkg_title">启动应用</string>
+    <string name="launch_other_pkg_message"><b>%s</b> 想要打开 <b>%s</b>，是否允许？</string>
+    <string name="launch_other_pkg_remember">记住我的选择</string>
+    <string name="launch_other_pkg_allow">允许</string>
+    <string name="launch_other_pkg_ignore">拒绝</string>
+    <string name="launch_other_pkg_allow_once">仅允许这次</string>
+    <string name="launch_other_pkg_ignored_message">拒绝 %s 启动 %s</string>
+
+    <string name="boost_status_running_apps">个应用正在运行</string>
+    <string name="boost_status_blocked_start_count">已阻止%s次应用启动请求</string>
+    <string name="boost_status_mem_usage_percent">物理 %s</string>
+    <string name="boost_status_swap_usage_percent">虚拟 %s</string>
+    <string name="boost_status_available">可用 %s</string>
+    <string name="boost_status_not_enabled">未开启</string>
+
+    <string name="process_manager">进程管理</string>
+
+    <string name="smart_freeze">智能冻结</string>
+    <string name="apps_count">%s个应用</string>
+    <string name="sf_pkg_stats">%s个应用 %s个已冻结 %s个已启用</string>
+    <string name="sf_pkg_stats_all_freeze">%s个应用均已冻结</string>
+    <string name="pick_app">选择应用</string>
+
+    <string name="smart_freeze_on_screen_off">灭屏冻结</string>
+    <string name="smart_freeze_on_screen_off_summary">灭屏后冻结列表里的应用</string>
+    <string name="smart_freeze_on_task_removed">划卡冻结</string>
+    <string name="smart_freeze_on_task_removed_summary">当你从最近任务移除应用时冻结该应用</string>
+
+    <string name="bc_on_screen_off">灭屏清理</string>
+    <string name="bc_on_screen_off_summary">灭屏后强行停止列表里的应用</string>
+    <string name="bc_on_task_removed">划卡清理</string>
+    <string name="bc_on_task_removed_summary">当你从最近任务移除应用时强行停止该应用</string>
+
+    <string name="toast_copied_to_clipboard">已复制</string>
+
+    <string name="pkg_set">分类</string>
+    <string name="all">所有</string>
+    <string name="user">用户</string>
+    <string name="system">系统</string>
+    <string name="enabled">已启用</string>
+    <string name="disabled">未启用</string>
+
+    <string name="remove_from_pkg_set">分类中移除</string>
+    <string name="remove_from_sf">取消智冻</string>
+    <string name="add_to_pkg_set">添加到分类</string>
+    <string name="temp_unfreeze">解冻</string>
+    <string name="create_shortcut">快捷方式</string>
+
+    <string name="delete">删除</string>
+    <string name="rename">重命名</string>
+    <string name="sort">排序</string>
+    <string name="on">开启</string>
+    <string name="off">关闭</string>
+
+    <string name="subscribe">订阅</string>
+    <string name="sub_intro_unsub">尚未订阅</string>
+    <string name="sub_intro_message">为了更好地为您服务，Thanos 是一款需要订阅的付费软件。请点击下方的订阅按钮查看详细的订阅说明。\n\n如果您已经是 Thanox 或 Thanox Pro 的付费用户，无需再次订阅 Thanos。您可以在订阅页面使用 Thanox 激活码或通过 Play 商店验证您的资格。</string>
+
+    <string name="bg_clean">后台清理</string>
+    <string name="bg_clean_apps_count">禁止%s个应用后台运行</string>
+
+    <string name="lvl_checking_retry">重试</string>
+    <string name="lvl_checking">正在通过谷歌Play检查应用许可</string>
+    <string name="lvl_check_ok">很好！</string>
+    <string name="lvl_check_not_ok">错误！</string>
+    <string name="lvl_check_skip_for_now">暂时跳过</string>
+    <string name="lvl_unlicensed_dialog_body">你未获得许可</string>
+    <string name="lvl_unlicensed_dialog_retry_body">无法访问Google Play</string>
+    <string name="lvl_unlicensed_dialog_error_tips">1. 请检查你的设备网络情况，确保可以正常访问谷歌Play商店 \n2. 请检查你的谷歌服务框架，确保其处于启用状态 \n3. 请检查你的谷歌账号是否正确登录
+    </string>
+    <string name="wait_shizuku">等Shizuku就绪</string>
+    <string name="wait_shizuku_message">请安装Shizuku，并且授权Thanos</string>
+
+    <string name="module_donate_title">激活高级版</string>
+    <string name="module_donate_donated">已激活</string>
+    <string name="module_donate_donated_available">免费版不可用</string>
+    <string name="module_donate_donated_available_message">激活高级版后解锁该功能。\n\n提示：先试用，觉得可用、满意再购买高级功能~</string>
+
+    <string name="module_donate_suggestion_alipay_red_packet">领取支付宝红包</string>
+    <string name="module_donate_suggestion_summary_alipay_red_packet">感谢支持%1$s 你也可以去捐赠页面点击，每天都可以哦！</string>
+    <string name="module_donate_suggestion_action_alipay_red_packet">前往领取</string>
+
+    <string name="module_donate_toast_alipay_red_packet_copied">领取口令已经复制到剪贴板</string>
+
+    <string name="module_donate_get_play">获取Play版本</string>
+    <string name="module_donate_copy_email">复制邮箱地址</string>
+    <string name="module_donate_active_hidden_feature">激活高级版</string>
+    <string name="module_donate_active_hidden_feature_activated">已激活</string>
+    <string name="module_donate_input_activation_code">请输入激活码</string>
+    <string name="module_donate_activation_code_verify_success">验证成功，请妥善保存你的激活码，不要对外扩散，否则可能会被禁用，刷机后可以继续使用，换机后请务必卸载旧手机上的Thanox</string>
+    <string name="module_donate_activation_code_verify_fail">验证失败</string>
+    <string name="module_donate_activation_code_verify_fail_server_timeout">服务器开小差了~~~</string>
+    <string name="module_donate_activation_code_start_verify">开始验证</string>
+    <string name="module_donate_activation_code_my_code">我的激活码</string>
+    <string name="module_donate_activation_code_expire_date">永久生效</string>
+    <string name="module_donate_pay_alipay">支付宝</string>
+    <string name="module_donate_pay_wechat">微信</string>
+
 </resources>

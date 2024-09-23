@@ -141,7 +141,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
         AppCompatEditText editText = new AppCompatEditText(thisActivity());
         editText.setText(ruleIfEdit);
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.menu_title_rules)
+                .setTitle(github.tornaco.android.thanos.res.R.string.menu_title_rules)
                 .setView(editText)
                 .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -160,7 +160,7 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         if (!TextUtils.isEmpty(ruleIfEdit)) {
-            builder.setNeutralButton(github.tornaco.android.thanos.module.common.R.string.common_menu_title_remove, (dialog, which) -> {
+            builder.setNeutralButton(github.tornaco.android.thanos.res.R.string.common_menu_title_remove, (dialog, which) -> {
                 thanosManager.getActivityManager().deleteStartRule(ruleIfEdit);
                 viewModel.start();
             });
@@ -189,9 +189,9 @@ public class StartRuleActivity extends ThemeActivity implements StartRuleItemCli
 
     private void showInfoDialog() {
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.menu_title_rules)
-                .setMessage(R.string.feature_summary_start_restrict_rules)
-                .setNeutralButton(github.tornaco.android.thanos.module.common.R.string.common_menu_title_wiki,
+                .setTitle(github.tornaco.android.thanos.res.R.string.menu_title_rules)
+                .setMessage(github.tornaco.android.thanos.res.R.string.feature_summary_start_restrict_rules)
+                .setNeutralButton(github.tornaco.android.thanos.res.R.string.common_menu_title_wiki,
                         (dialog, which) -> BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_START_RULES))
                 .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, null)

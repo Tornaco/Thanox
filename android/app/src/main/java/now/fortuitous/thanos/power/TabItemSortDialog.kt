@@ -71,7 +71,7 @@ fun TabItemSortDialog(state: TabItemSortState) {
             mutableStateOf(state.actions)
         }
         ThanoxDialog(onDismissRequest = { state.dismiss() }, title = {
-            DialogTitle(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_darg_sort))
+            DialogTitle(text = stringResource(id = github.tornaco.android.thanos.res.R.string.common_darg_sort))
         }, buttons = {
             TextButton(onClick = {
                 state.applySorted(data.value)

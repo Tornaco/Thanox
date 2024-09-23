@@ -54,8 +54,8 @@ fun SwitchBar(modifier: Modifier = Modifier, isChecked: Boolean, onCheckChange: 
             modifier = Modifier
                 .padding(start = 16.dp)
                 .align(Alignment.CenterStart),
-            text = if (isChecked) stringResource(id = R.string.switch_on_text) else stringResource(
-                id = R.string.switch_off_text
+            text = if (isChecked) stringResource(id = github.tornaco.android.thanos.res.R.string.switch_on_text) else stringResource(
+                id = github.tornaco.android.thanos.res.R.string.switch_off_text
             )
         )
         Switch(

@@ -269,7 +269,7 @@ public abstract class AbstractFilePickerFragment<T> extends Fragment
 
         // Some invalid cases first
         /*if (MODE_NEW_FILE == mode && !isValidFileName(getNewFileName())) {
-            mToast = Toast.makeText(getActivity(), R.string.nnf_need_valid_filename,
+            mToast = Toast.makeText(getActivity(), github.tornaco.android.thanos.res.R.string.nnf_need_valid_filename,
                     Toast.LENGTH_SHORT);
             mToast.show();
             return;
@@ -277,7 +277,7 @@ public abstract class AbstractFilePickerFragment<T> extends Fragment
         if ((allowMultiple || mode == MODE_FILE) &&
                 (mCheckedItems.isEmpty() || getFirstCheckedItem() == null)) {
             if (mToast == null) {
-                mToast = Toast.makeText(getActivity(), R.string.nnf_select_something_first,
+                mToast = Toast.makeText(getActivity(), github.tornaco.android.thanos.res.R.string.nnf_select_something_first,
                         Toast.LENGTH_SHORT);
             }
             mToast.show();

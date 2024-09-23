@@ -1,7 +1,6 @@
 package github.tornaco.thanos.android.ops.model;
 
 import static github.tornaco.android.thanos.core.secure.ops.AppOpsManager._NUM_OP;
-import static github.tornaco.android.thanos.core.secure.ops.AppOpsManager._OP_THANOX_BASE;
 import static github.tornaco.android.thanos.core.secure.ops.AppOpsManager.getOpResIndex;
 
 import android.content.Context;
@@ -11,7 +10,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 import github.tornaco.android.thanos.core.annotation.Nullable;
-import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
 import github.tornaco.android.thanos.core.util.ArrayUtils;
 import github.tornaco.android.thanos.core.util.Preconditions;
 import github.tornaco.thanos.android.ops.R;
@@ -73,14 +71,14 @@ public class Ops {
 
     @NonNull
     public static String opLabel(@NonNull Context context, int op) {
-        String[] array = context.getResources().getStringArray(R.array.module_ops_app_ops_labels);
+        String[] array = context.getResources().getStringArray(github.tornaco.android.thanos.res.R.array.module_ops_app_ops_labels);
         Preconditions.checkArgument(array.length == _NUM_OP, "Bad label array, expected: " + _NUM_OP + ", got: " + array.length);
         return array[getOpResIndex(op)];
     }
 
     @NonNull
     public static String opSummary(@NonNull Context context, int op) {
-        String[] array = context.getResources().getStringArray(R.array.module_ops_app_ops_summaries);
+        String[] array = context.getResources().getStringArray(github.tornaco.android.thanos.res.R.array.module_ops_app_ops_summaries);
         Preconditions.checkArgument(array.length == _NUM_OP, "Bad summary array, expected: " + _NUM_OP + ", got: " + array.length);
         return array[getOpResIndex(op)];
     }

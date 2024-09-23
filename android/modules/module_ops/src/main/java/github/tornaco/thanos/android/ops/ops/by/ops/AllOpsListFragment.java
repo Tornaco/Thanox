@@ -55,7 +55,7 @@ public class AllOpsListFragment extends Fragment {
     }
 
     private void setupView() {
-        binding.toolbar.setTitle(getString(R.string.module_ops_feature_title_ops_app_list));
+        binding.toolbar.setTitle(getString(github.tornaco.android.thanos.res.R.string.module_ops_feature_title_ops_app_list));
 
         binding.apps.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.apps.setAdapter(new AllOpsListAdapter(new OpItemClickListener() {
@@ -76,8 +76,8 @@ public class AllOpsListFragment extends Fragment {
         binding.toolbar.setOnMenuItemClickListener(item -> {
             if (R.id.action_reset_all_modes == item.getItemId()) {
                 new MaterialAlertDialogBuilder(requireActivity())
-                        .setTitle(R.string.module_ops_title_reset_ops_mode_for_all)
-                        .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                        .setTitle(github.tornaco.android.thanos.res.R.string.module_ops_title_reset_ops_mode_for_all)
+                        .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                         .setPositiveButton(android.R.string.ok, (dialog, which) ->
                                 ThanosManager.from(requireContext())
                                         .ifServiceInstalled(thanosManager ->
@@ -91,10 +91,10 @@ public class AllOpsListFragment extends Fragment {
     }
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {
-        switchBar.setOnLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
-                getString(R.string.module_ops_feature_title_ops_app_list)));
-        switchBar.setOffLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
-                getString(R.string.module_ops_feature_title_ops_app_list)));
+        switchBar.setOnLabel(getString(github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                getString(github.tornaco.android.thanos.res.R.string.module_ops_feature_title_ops_app_list)));
+        switchBar.setOffLabel(getString(github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                getString(github.tornaco.android.thanos.res.R.string.module_ops_feature_title_ops_app_list)));
         switchBar.setChecked(getSwitchBarCheckState());
         switchBar.addOnSwitchChangeListener(this::onSwitchBarCheckChanged);
     }

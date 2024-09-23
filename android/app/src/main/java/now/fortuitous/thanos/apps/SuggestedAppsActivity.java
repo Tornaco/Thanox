@@ -84,7 +84,7 @@ public class SuggestedAppsActivity extends BaseTrustedActivity {
             @Override
             public void accept(ThanosManager thanosManager) {
                 binding.textViewAllApps.setText(
-                        getString(R.string.title_suggested_apps_view_all,
+                        getString(github.tornaco.android.thanos.res.R.string.title_suggested_apps_view_all,
                                 String.valueOf(thanosManager.getPkgManager().getInstalledPackagesCount(AppInfo.FLAGS_ALL))));
 
             }

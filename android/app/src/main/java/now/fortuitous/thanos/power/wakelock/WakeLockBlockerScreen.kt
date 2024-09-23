@@ -103,7 +103,7 @@ fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
     ThanoxSmallAppBarScaffold(
         title = {
             Text(
-                stringResource(id = R.string.feature_title_wakelock_blocker),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_wakelock_blocker),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
@@ -212,7 +212,7 @@ private fun WakeLockList(
                             contentDescription = "ShowHeldOnly"
                         )
                     }
-                    Text(text = stringResource(id = R.string.wakelock_view_held_only))
+                    Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.wakelock_view_held_only))
                 }
             }
         }
@@ -269,7 +269,7 @@ private fun AppInfoItem(
                         Text(
                             modifier = Modifier.alignByBaseline(),
                             text = stringResource(
-                                id = github.tornaco.android.thanos.module.common.R.string.module_common_user,
+                                id = github.tornaco.android.thanos.res.R.string.module_common_user,
                                 packageState.appInfo.userId
                             ),
                             fontSize = 10.sp
@@ -280,7 +280,7 @@ private fun AppInfoItem(
                 SmallSpacer()
                 Text(
                     text = stringResource(
-                        id = R.string.wakelock_count,
+                        id = github.tornaco.android.thanos.res.R.string.wakelock_count,
                         packageState.wakeLocks.size
                     ),
                     fontSize = 14.sp
@@ -319,7 +319,7 @@ private fun AppInfoItem(
                     FilledTonalButton(onClick = {
                         batchSelect(packageState)
                     }) {
-                        Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_batch_select))
+                        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.common_menu_title_batch_select))
                     }
                 }
 
@@ -397,7 +397,7 @@ fun WakeLockListItem(
 
                     if (wakeLock.isHeld) {
                         MD3Badge(
-                            text = stringResource(id = R.string.wakelock_state_holding)
+                            text = stringResource(id = github.tornaco.android.thanos.res.R.string.wakelock_state_holding)
                         )
                     }
                 }

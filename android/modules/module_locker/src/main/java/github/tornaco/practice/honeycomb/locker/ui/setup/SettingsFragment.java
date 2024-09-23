@@ -66,7 +66,7 @@ public class SettingsFragment extends BasePreferenceFragmentCompat {
 
         Preference patternSettingsPref = findPreference(getString(R.string.module_locker_key_verify_method_custom_pattern));
         if (TextUtils.isEmpty(thanos.getActivityStackSupervisor().getLockPattern())) {
-            patternSettingsPref.setSummary(github.tornaco.android.thanos.module.common.R.string.common_text_value_not_set);
+            patternSettingsPref.setSummary(github.tornaco.android.thanos.res.R.string.common_text_value_not_set);
         } else {
             patternSettingsPref.setSummary("******");
         }

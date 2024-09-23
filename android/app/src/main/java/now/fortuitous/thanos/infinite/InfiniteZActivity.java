@@ -158,8 +158,8 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void onRequestUninstall(AppInfo appInfo) {
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(getString(github.tornaco.android.thanos.module.common.R.string.common_menu_title_uninstall) + "\t" + appInfo.getAppLabel())
-                .setMessage(getString(R.string.feature_message_infinite_z_uninstall, appInfo.getAppLabel()))
+                .setTitle(getString(github.tornaco.android.thanos.res.R.string.common_menu_title_uninstall) + "\t" + appInfo.getAppLabel())
+                .setMessage(getString(github.tornaco.android.thanos.res.R.string.feature_message_infinite_z_uninstall, appInfo.getAppLabel()))
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> viewModel.uninstall(appInfo, this::onUninstallSuccess, this::onUninstallFail))
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
                 })
@@ -189,8 +189,8 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void requestEnableIZDialog(Runnable onYes, Runnable onNo) {
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.feature_title_infinite_z)
-                .setMessage(R.string.feature_message_infinite_z_enable)
+                .setTitle(github.tornaco.android.thanos.res.R.string.feature_title_infinite_z)
+                .setMessage(github.tornaco.android.thanos.res.R.string.feature_message_infinite_z_enable)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> onYes.run())
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> onNo.run())
                 .setCancelable(false)
@@ -199,8 +199,8 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void requestDisableIZDialog(Runnable onYes, Runnable onNo) {
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.feature_title_infinite_z)
-                .setMessage(R.string.feature_message_infinite_z_disable)
+                .setTitle(github.tornaco.android.thanos.res.R.string.feature_title_infinite_z)
+                .setMessage(github.tornaco.android.thanos.res.R.string.feature_message_infinite_z_disable)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> onYes.run())
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> onNo.run())
                 .setCancelable(false)
@@ -209,7 +209,7 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void enableIZ() {
         ModernProgressDialog p = new ModernProgressDialog(thisActivity());
-        p.setMessage(getString(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment));
+        p.setMessage(getString(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment));
         p.show();
         ThanosManager.from(getApplicationContext()).getInfiniteZ()
                 .setEnabled(true, new EnableCallback() {
@@ -222,7 +222,7 @@ public class InfiniteZActivity extends ThemeActivity {
                     @Override
                     public void onErrorMain(String errorMessage, int errorCode) {
                         XLog.e("Enable infiniteZ fail: %s %s", errorCode, errorMessage);
-                        DialogUtils.showMessage(thisActivity(), null, getString(github.tornaco.android.thanos.module.common.R.string.common_generic_error));
+                        DialogUtils.showMessage(thisActivity(), null, getString(github.tornaco.android.thanos.res.R.string.common_generic_error));
                         p.dismiss();
                         refreshState();
                     }
@@ -231,7 +231,7 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void disableIZ() {
         ModernProgressDialog p = new ModernProgressDialog(thisActivity());
-        p.setMessage(getString(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment));
+        p.setMessage(getString(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment));
         p.show();
         ThanosManager.from(getApplicationContext()).getInfiniteZ()
                 .setEnabled(false, new EnableCallback() {
@@ -244,7 +244,7 @@ public class InfiniteZActivity extends ThemeActivity {
                     @Override
                     public void onErrorMain(String errorMessage, int errorCode) {
                         XLog.e("Disable infiniteZ fail: %s %s", errorCode, errorMessage);
-                        DialogUtils.showMessage(thisActivity(), null, getString(github.tornaco.android.thanos.module.common.R.string.common_generic_error));
+                        DialogUtils.showMessage(thisActivity(), null, getString(github.tornaco.android.thanos.res.R.string.common_generic_error));
                         p.dismiss();
                         refreshState();
                     }
@@ -267,7 +267,7 @@ public class InfiniteZActivity extends ThemeActivity {
         if (REQ_PICK_APPS == requestCode && resultCode == RESULT_OK && data != null && data.hasExtra("apps")) {
             List<AppInfo> appInfos = data.getParcelableArrayListExtra("apps");
             ModernProgressDialog p = new ModernProgressDialog(thisActivity());
-            p.setMessage(getString(github.tornaco.android.thanos.module.common.R.string.common_text_wait_a_moment));
+            p.setMessage(getString(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment));
             p.show();
             CollectionUtils.consumeRemaining(appInfos, appInfo -> ThanosManager.from(getApplicationContext())
                     .getInfiniteZ()

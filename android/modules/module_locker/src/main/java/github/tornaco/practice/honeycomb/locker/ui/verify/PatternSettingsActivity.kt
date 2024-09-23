@@ -54,7 +54,7 @@ class PatternSettingsActivity : ComposeThemeActivity() {
         ThanoxSmallAppBarScaffold(
             title = {
                 Text(
-                    text = stringResource(id = R.string.module_locker_title_verify_custom_pattern_settings),
+                    text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_locker_title_verify_custom_pattern_settings),
                     style = TypographyDefaults.appBarTitleTextStyle()
                 )
             },
@@ -100,18 +100,18 @@ class PatternSettingsActivity : ComposeThemeActivity() {
                     }
 
                     Step.First -> {
-                        stringResource(id = R.string.module_locker_title_verify_custom_pattern_settings_draw_1)
+                        stringResource(id = github.tornaco.android.thanos.res.R.string.module_locker_title_verify_custom_pattern_settings_draw_1)
                     }
 
                     Step.Second -> {
-                        stringResource(id = R.string.module_locker_title_verify_custom_pattern_settings_draw_2)
+                        stringResource(id = github.tornaco.android.thanos.res.R.string.module_locker_title_verify_custom_pattern_settings_draw_2)
                     }
                 }
                 AnimatedTextContainer(text = tip) {
                     LargeTitle(text = it)
                 }
                 MediumSpacer()
-                TipBody(text = stringResource(id = R.string.module_locker_title_verify_custom_pattern_settings_warn))
+                TipBody(text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_locker_title_verify_custom_pattern_settings_warn))
 
                 BoxWithConstraints(Modifier.padding(top = 64.dp)) {
                     // Get the maximum width of the screen

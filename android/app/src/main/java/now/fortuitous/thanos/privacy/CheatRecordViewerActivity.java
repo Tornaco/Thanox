@@ -76,7 +76,7 @@ public class CheatRecordViewerActivity extends CommonAppListFilterActivity {
 
     @Override
     protected int getTitleRes() {
-        return R.string.privacy_record;
+        return github.tornaco.android.thanos.res.R.string.privacy_record;
     }
 
     @NonNull

@@ -200,7 +200,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
             List<ConfigTemplate> allConfigTemplates = profileManager.getAllConfigTemplates();
 
             if (allConfigTemplates.isEmpty()) {
-                Toast.makeText(thisActivity(), R.string.pref_action_create_new_config_template, Toast.LENGTH_LONG).show();
+                Toast.makeText(thisActivity(), github.tornaco.android.thanos.res.R.string.pref_action_create_new_config_template, Toast.LENGTH_LONG).show();
                 StrategySettingsActivity.start(thisActivity());
                 return null;
             }
@@ -212,7 +212,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
             }
 
             new MaterialAlertDialogBuilder(thisActivity())
-                    .setTitle(R.string.pref_action_apply_config_template)
+                    .setTitle(github.tornaco.android.thanos.res.R.string.pref_action_apply_config_template)
                     .setItems(entries.toArray(new String[0]),
                             (dialog, which) -> {
                                 dialog.dismiss();
@@ -242,10 +242,10 @@ public class AppDetailsActivity extends BaseTrustedActivity {
 
     private void backupComponentSettingsRequested() {
         ModernAlertDialog dialog = new ModernAlertDialog(thisActivity());
-        dialog.setDialogTitle(getString(R.string.pref_action_backup_component_settings));
-        dialog.setDialogMessage(getString(R.string.pref_action_backup_component_settings_summary));
+        dialog.setDialogTitle(getString(github.tornaco.android.thanos.res.R.string.pref_action_backup_component_settings));
+        dialog.setDialogMessage(getString(github.tornaco.android.thanos.res.R.string.pref_action_backup_component_settings_summary));
         dialog.setCancelable(true);
-        dialog.setPositive(getString(R.string.pre_title_backup));
+        dialog.setPositive(getString(github.tornaco.android.thanos.res.R.string.pre_title_backup));
         dialog.setNegative(getString(android.R.string.cancel));
         dialog.setOnPositive(() -> {
             if (OsUtils.isTOrAbove()) {
@@ -382,7 +382,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
                             @Override
                             public void onSuccess() {
                                 new MaterialAlertDialogBuilder(thisActivity())
-                                        .setMessage(getString(R.string.pre_message_backup_success))
+                                        .setMessage(getString(github.tornaco.android.thanos.res.R.string.pre_message_backup_success))
                                         .setCancelable(true)
                                         .setPositiveButton(android.R.string.ok, null)
                                         .show();

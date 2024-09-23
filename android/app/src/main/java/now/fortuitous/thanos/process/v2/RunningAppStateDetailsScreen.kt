@@ -173,7 +173,7 @@ private fun RunningAppStateDetailsScreen(
                     viewModel.forceStop(runningAppState)
                     closeScreen(true)
                 }) {
-                Text(text = "${stringResource(id = R.string.service_stop)} ${runningAppState.appInfo.appLabel}")
+                Text(text = "${stringResource(id = github.tornaco.android.thanos.res.R.string.service_stop)} ${runningAppState.appInfo.appLabel}")
             }
         }
     }
@@ -193,8 +193,8 @@ private fun ServiceSection(
         Row(modifier = Modifier.padding(horizontal = 16.dp), verticalAlignment = CenterVertically) {
             Text(
                 text = if (runningServiceCount > 0) stringResource(
-                    id = R.string.running_processes_item_description_s, runningServiceCount
-                ) else stringResource(id = R.string.runningservicedetails_services_title),
+                    id = github.tornaco.android.thanos.res.R.string.running_processes_item_description_s, runningServiceCount
+                ) else stringResource(id = github.tornaco.android.thanos.res.R.string.runningservicedetails_services_title),
                 style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp)
             )
         }
@@ -202,7 +202,7 @@ private fun ServiceSection(
         if (runningServiceCount == 0) {
             Text(
                 modifier = Modifier.padding(16.dp),
-                text = stringResource(id = R.string.no_running_services),
+                text = stringResource(id = github.tornaco.android.thanos.res.R.string.no_running_services),
                 style = MaterialTheme.typography.titleSmall
             )
         } else {
@@ -288,9 +288,9 @@ private fun ServiceRunningTime(service: RunningService) {
         }
         val runningTimeStr = DateUtils.formatElapsedTime(null, runningSeconds)
         Text(
-            text = "${service.clientLabel ?: stringResource(id = R.string.service_started_by_app)} • ${
+            text = "${service.clientLabel ?: stringResource(id = github.tornaco.android.thanos.res.R.string.service_started_by_app)} • ${
                 stringResource(
-                    id = R.string.service_running_time
+                    id = github.tornaco.android.thanos.res.R.string.service_running_time
                 )
             } $runningTimeStr",
             style = MaterialTheme.typography.labelMedium
@@ -313,22 +313,22 @@ private fun ServicePopupMenu(
         items = listOf(
             MenuItem(
                 "copy",
-                stringResource(id = R.string.menu_title_copy),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_copy),
                 github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_copy_fill
             ),
             MenuItem(
                 "stop",
-                stringResource(id = R.string.service_stop),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.service_stop),
                 github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_close_fill
             ),
             MenuItem(
                 "addToGlobalVar",
-                stringResource(id = github.tornaco.thanos.android.module.profile.R.string.module_profile_add_to_global_var),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_add_to_global_var),
                 R.drawable.ic_baseline_code_24
             ),
             MenuItem(
                 "addToSmartStandByKeeps",
-                stringResource(id = github.tornaco.thanos.module.component.manager.R.string.module_component_manager_keep_service_smart_standby),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.module_component_manager_keep_service_smart_standby),
                 R.drawable.ic_mickey_line
             )
         )
@@ -398,7 +398,7 @@ private fun ProcessSection(
                 }
                 Text(
                     modifier = Modifier.alignByBaseline(),
-                    text = stringResource(id = R.string.runningservicedetails_processes_title),
+                    text = stringResource(id = github.tornaco.android.thanos.res.R.string.runningservicedetails_processes_title),
                     style = MaterialTheme.typography.titleLarge
                 )
 
@@ -424,8 +424,8 @@ private fun ProcessSection(
                     AppLabelText(appLabel = runningProcessState.process.processName)
                     SmallSpacer()
                     Text(
-                        text = if (isCached) stringResource(id = R.string.cached) else stringResource(
-                            id = R.string.running_process_running
+                        text = if (isCached) stringResource(id = github.tornaco.android.thanos.res.R.string.cached) else stringResource(
+                            id = github.tornaco.android.thanos.res.R.string.running_process_running
                         ),
                         style = MaterialTheme.typography.labelMedium
                     )
@@ -462,17 +462,17 @@ private fun ProcessPopupMenu(
         items = listOf(
             MenuItem(
                 "copy",
-                stringResource(id = R.string.menu_title_copy),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_copy),
                 github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_copy_fill
             ),
             MenuItem(
                 "stop",
-                stringResource(id = R.string.service_stop),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.service_stop),
                 github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_close_fill
             ),
             MenuItem(
                 "addToGlobalVar",
-                stringResource(id = github.tornaco.thanos.android.module.profile.R.string.module_profile_add_to_global_var),
+                stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_add_to_global_var),
                 R.drawable.ic_baseline_code_24
             )
         )

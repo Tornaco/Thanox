@@ -58,13 +58,13 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
     @NonNull
     @Override
     protected String getTitleString() {
-        return getString(R.string.feature_title_smart_app_standby);
+        return getString(github.tornaco.android.thanos.res.R.string.feature_title_smart_app_standby);
     }
 
     @Nullable
     @Override
     protected String provideFeatureDescText() {
-        return getString(R.string.feature_summary_smart_app_standby);
+        return getString(github.tornaco.android.thanos.res.R.string.feature_summary_smart_app_standby);
     }
 
     @Override
@@ -98,8 +98,8 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
             if (!thanos.isServiceInstalled())
                 return Lists.newArrayListWithCapacity(0);
 
-            String runningBadge = getApplicationContext().getString(R.string.badge_app_running);
-            String idleBadge = getApplicationContext().getString(R.string.badge_app_idle);
+            String runningBadge = getApplicationContext().getString(github.tornaco.android.thanos.res.R.string.badge_app_running);
+            String idleBadge = getApplicationContext().getString(github.tornaco.android.thanos.res.R.string.badge_app_idle);
             ActivityManager am = thanos.getActivityManager();
             List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
             List<AppListModel> res = new ArrayList<>();

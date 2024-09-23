@@ -105,7 +105,7 @@ public class FilePickerFragment extends AbstractFilePickerFragment<File> {
                     refresh(mRequestedPath);
                 }
             } else {
-                Toast.makeText(getContext(), R.string.nnf_permission_external_write_denied,
+                Toast.makeText(getContext(), github.tornaco.android.thanos.res.R.string.nnf_permission_external_write_denied,
                         Toast.LENGTH_SHORT).show();
                 // Treat this as a cancel press
                 if (mListener != null) {
@@ -311,7 +311,7 @@ public class FilePickerFragment extends AbstractFilePickerFragment<File> {
         if (folder.mkdir()) {
             refresh(folder);
         } else {
-            Toast.makeText(getActivity(), R.string.nnf_create_folder_error,
+            Toast.makeText(getActivity(), github.tornaco.android.thanos.res.R.string.nnf_create_folder_error,
                     Toast.LENGTH_SHORT).show();
         }
     }

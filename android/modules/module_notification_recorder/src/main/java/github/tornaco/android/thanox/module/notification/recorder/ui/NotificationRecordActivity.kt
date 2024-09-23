@@ -69,7 +69,7 @@ class NotificationRecordActivity : ThemeActivity() {
     private fun initView() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setTitle(R.string.module_notification_recorder_feature_title_notification_recorder)
+        setTitle(github.tornaco.android.thanos.res.R.string.module_notification_recorder_feature_title_notification_recorder)
     }
 
     @OptIn(InternalCoroutinesApi::class)
@@ -98,14 +98,14 @@ class NotificationRecordActivity : ThemeActivity() {
     private fun onSetupSwitchBar(switchBar: SwitchBar) {
         switchBar.setOnLabel(
             getString(
-                github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
-                getString(R.string.module_notification_recorder_feature_title_notification_recorder)
+                github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                getString(github.tornaco.android.thanos.res.R.string.module_notification_recorder_feature_title_notification_recorder)
             )
         )
         switchBar.setOffLabel(
             getString(
-                github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
-                getString(R.string.module_notification_recorder_feature_title_notification_recorder)
+                github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                getString(github.tornaco.android.thanos.res.R.string.module_notification_recorder_feature_title_notification_recorder)
             )
         )
         switchBar.isChecked = getSwitchBarCheckState()
@@ -175,8 +175,8 @@ class NotificationRecordActivity : ThemeActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_clear_all) {
             MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.module_notification_recorder_clear_all)
-                .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_notification_recorder_clear_all)
+                .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(
                     android.R.string.ok

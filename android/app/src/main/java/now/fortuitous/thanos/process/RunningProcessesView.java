@@ -142,7 +142,7 @@ public class RunningProcessesView extends FrameLayout
                     }
                     if (isService) {
                         uptimeView.setText(context.getResources().getText(
-                                R.string.service_restarting));
+                                github.tornaco.android.thanos.res.R.string.service_restarting));
                     } else {
                         uptimeView.setText("");
                     }
@@ -189,7 +189,7 @@ public class RunningProcessesView extends FrameLayout
             ai.mHolder = this;
             ai.mFirstRunTime = item.mActiveSince;
             if (item.mBackground) {
-                description.setText(rootView.getContext().getText(R.string.cached));
+                description.setText(rootView.getContext().getText(github.tornaco.android.thanos.res.R.string.cached));
             } else {
                 description.setText(item.mDescription);
             }
@@ -199,7 +199,7 @@ public class RunningProcessesView extends FrameLayout
             }
             if (item instanceof RunningState.ProcessItem) {
                 RunningState.ProcessItem processItem = (RunningState.ProcessItem) item;
-                description.setText(description.getResources().getString(R.string.service_process_name, processItem.mProcessName));
+                description.setText(description.getResources().getString(github.tornaco.android.thanos.res.R.string.service_process_name, processItem.mProcessName));
             }
             item.mCurSizeStr = null;
             // icon.setImageDrawable(item.loadIcon(rootView.getContext(), state));
@@ -346,14 +346,14 @@ public class RunningProcessesView extends FrameLayout
             mCurShowCached = mAdapter.mShowBackground;
             if (mCurShowCached) {
                 mForegroundProcessPrefix.setText(getResources().getText(
-                        R.string.running_processes_header_used_prefix));
+                        github.tornaco.android.thanos.res.R.string.running_processes_header_used_prefix));
                 mAppsProcessPrefix.setText(getResources().getText(
-                        R.string.running_processes_header_cached_prefix));
+                        github.tornaco.android.thanos.res.R.string.running_processes_header_cached_prefix));
             } else {
                 mForegroundProcessPrefix.setText(getResources().getText(
-                        R.string.running_processes_header_system_prefix));
+                        github.tornaco.android.thanos.res.R.string.running_processes_header_system_prefix));
                 mAppsProcessPrefix.setText(getResources().getText(
-                        R.string.running_processes_header_apps_prefix));
+                        github.tornaco.android.thanos.res.R.string.running_processes_header_apps_prefix));
             }
         }
 
@@ -381,15 +381,15 @@ public class RunningProcessesView extends FrameLayout
             String sizeStr = bidiFormatter.unicodeWrap(
                     Formatter.formatShortFileSize(getContext(), lowRam));
             mBackgroundProcessText.setText(getResources().getString(
-                    R.string.running_processes_header_ram, sizeStr));
+                    github.tornaco.android.thanos.res.R.string.running_processes_header_ram, sizeStr));
             sizeStr = bidiFormatter.unicodeWrap(
                     Formatter.formatShortFileSize(getContext(), medRam));
             mAppsProcessText.setText(getResources().getString(
-                    R.string.running_processes_header_ram, sizeStr));
+                    github.tornaco.android.thanos.res.R.string.running_processes_header_ram, sizeStr));
             sizeStr = bidiFormatter.unicodeWrap(
                     Formatter.formatShortFileSize(getContext(), highRam));
             mForegroundProcessText.setText(getResources().getString(
-                    R.string.running_processes_header_ram, sizeStr));
+                    github.tornaco.android.thanos.res.R.string.running_processes_header_ram, sizeStr));
             mColorBar.setRatios(highRam / (float) totalRam,
                     medRam / (float) totalRam,
                     lowRam / (float) totalRam);
@@ -426,8 +426,8 @@ public class RunningProcessesView extends FrameLayout
         mListView.addHeaderView(mHeader, null, false /* set as not selectable */);
         mColorBar = mHeader.findViewById(R.id.color_bar);
         final Context context = getContext();
-        mColorBar.setColors(context.getResources().getColor(R.color.running_processes_system_ram),
-                Utils.getColorAccent(context), context.getResources().getColor(R.color.running_processes_free_ram));
+        mColorBar.setColors(context.getResources().getColor(github.tornaco.android.thanos.res.R.color.running_processes_system_ram),
+                Utils.getColorAccent(context), context.getResources().getColor(github.tornaco.android.thanos.res.R.color.running_processes_free_ram));
         mBackgroundProcessPrefix = mHeader.findViewById(R.id.freeSizePrefix);
         mAppsProcessPrefix = mHeader.findViewById(R.id.appsSizePrefix);
         mForegroundProcessPrefix = mHeader.findViewById(R.id.systemSizePrefix);

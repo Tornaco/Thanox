@@ -26,7 +26,7 @@ class LaunchOtherAppDenyActivity : ThemeActivity() {
         Toast.makeText(
             this,
             getString(
-                github.tornaco.android.thanos.R.string.launch_other_pkg_ignored_message,
+                github.tornaco.android.thanos.res.R.string.launch_other_pkg_ignored_message,
                 callerAppName,
                 targetAppName
             ),

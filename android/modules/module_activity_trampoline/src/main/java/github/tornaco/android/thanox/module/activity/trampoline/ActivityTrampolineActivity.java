@@ -147,10 +147,10 @@ public class ActivityTrampolineActivity extends ThemeActivity
     }
 
     private void onSetupSwitchBar(SwitchBar switchBar) {
-        switchBar.setOnLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
-                getString(R.string.module_activity_trampoline_app_name)));
-        switchBar.setOffLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
-                getString(R.string.module_activity_trampoline_app_name)));
+        switchBar.setOnLabel(getString(github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                getString(github.tornaco.android.thanos.res.R.string.module_activity_trampoline_app_name)));
+        switchBar.setOffLabel(getString(github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                getString(github.tornaco.android.thanos.res.R.string.module_activity_trampoline_app_name)));
         switchBar.setChecked(getSwitchBarCheckState());
         switchBar.addOnSwitchChangeListener(this::onSwitchBarCheckChanged);
     }
@@ -214,8 +214,8 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
         AlertDialog d = new MaterialAlertDialogBuilder(ActivityTrampolineActivity.this)
                 .setTitle(canDelete
-                        ? R.string.module_activity_trampoline_edit_dialog_title
-                        : R.string.module_activity_trampoline_add_dialog_title)
+                        ? github.tornaco.android.thanos.res.R.string.module_activity_trampoline_edit_dialog_title
+                        : github.tornaco.android.thanos.res.R.string.module_activity_trampoline_add_dialog_title)
                 .setView(layout)
                 .setCancelable(false)
                 .setPositiveButton(android.R.string.ok, (dialog, which) ->
@@ -226,7 +226,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
                 .create();
         if (canDelete) {
             d.setButton(DialogInterface.BUTTON_NEUTRAL,
-                    getString(R.string.module_activity_trampoline_add_dialog_delete),
+                    getString(github.tornaco.android.thanos.res.R.string.module_activity_trampoline_add_dialog_delete),
                     (dialog, which) -> onRequestDeleteNewReplacement(from, to));
         }
         d.show();
@@ -271,7 +271,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
     private void showComponentFromInvalidTips() {
         Toast.makeText(
                         ActivityTrampolineActivity.this,
-                        R.string.module_activity_trampoline_add_invalid_from_component
+                        github.tornaco.android.thanos.res.R.string.module_activity_trampoline_add_invalid_from_component
                         , Toast.LENGTH_LONG)
                 .show();
     }
@@ -279,7 +279,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
     private void showComponentToInvalidTips() {
         Toast.makeText(
                         ActivityTrampolineActivity.this,
-                        R.string.module_activity_trampoline_add_invalid_to_component
+                        github.tornaco.android.thanos.res.R.string.module_activity_trampoline_add_invalid_to_component
                         , Toast.LENGTH_LONG)
                 .show();
     }
@@ -287,7 +287,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
     private void showComponentEmptyTips() {
         Toast.makeText(
                         ActivityTrampolineActivity.this,
-                        R.string.module_activity_trampoline_add_empty_component
+                        github.tornaco.android.thanos.res.R.string.module_activity_trampoline_add_empty_component
                         , Toast.LENGTH_LONG)
                 .show();
     }
@@ -354,9 +354,9 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
     // Null means all.
     private void onRequestExport(@Nullable String componentReplacementKey) {
-        String[] items = getResources().getStringArray(github.tornaco.android.thanos.module.common.R.array.module_common_export_selections);
+        String[] items = getResources().getStringArray(github.tornaco.android.thanos.res.R.array.module_common_export_selections);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.module_activity_trampoline_title_export_comp_replacements)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_activity_trampoline_title_export_comp_replacements)
                 .setSingleChoiceItems(items, -1,
                         (d, which) -> {
                             d.dismiss();
@@ -422,9 +422,9 @@ public class ActivityTrampolineActivity extends ThemeActivity
     }
 
     private void onRequestImport() {
-        String[] items = getResources().getStringArray(github.tornaco.android.thanos.module.common.R.array.module_common_import_selections);
+        String[] items = getResources().getStringArray(github.tornaco.android.thanos.res.R.array.module_common_import_selections);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.module_activity_trampoline_title_import_comp_replacements)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_activity_trampoline_title_import_comp_replacements)
                 .setSingleChoiceItems(items, -1,
                         (d, which) -> {
                             d.dismiss();

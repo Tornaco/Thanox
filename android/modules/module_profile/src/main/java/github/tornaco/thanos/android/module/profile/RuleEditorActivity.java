@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleAddCallback;
@@ -92,7 +91,7 @@ public class RuleEditorActivity extends ThemeActivity {
         setSupportActionBar(binding.toolbar);
         showHomeAsUpNavigator();
 
-        setTitle(ruleInfo == null ? R.string.module_profile_rule_new : R.string.module_profile_rule_edit);
+        setTitle(ruleInfo == null ? github.tornaco.android.thanos.res.R.string.module_profile_rule_new : github.tornaco.android.thanos.res.R.string.module_profile_rule_edit);
         if (readOnly) {
             setTitle(ruleInfo.getName());
         }
@@ -168,7 +167,7 @@ public class RuleEditorActivity extends ThemeActivity {
                     protected void onRuleAddSuccess() {
                         super.onRuleAddSuccess();
                         Toast.makeText(getApplicationContext(),
-                                        R.string.module_profile_editor_save_success,
+                                        github.tornaco.android.thanos.res.R.string.module_profile_editor_save_success,
                                         Toast.LENGTH_LONG)
                                 .show();
                         // Disable rule since it has been changed.
@@ -184,7 +183,7 @@ public class RuleEditorActivity extends ThemeActivity {
                     protected void onRuleAddFail(int errorCode, String errorMessage) {
                         super.onRuleAddFail(errorCode, errorMessage);
                         new MaterialAlertDialogBuilder(thisActivity())
-                                .setTitle(R.string.module_profile_editor_save_check_error)
+                                .setTitle(github.tornaco.android.thanos.res.R.string.module_profile_editor_save_check_error)
                                 .setMessage(errorMessage)
                                 .setCancelable(true)
                                 .setPositiveButton(android.R.string.ok, null)
@@ -359,8 +358,8 @@ public class RuleEditorActivity extends ThemeActivity {
 
     private void showTipsInfo() {
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.module_profile_rule_format_tips_title)
-                .setMessage(R.string.module_profile_rule_format_tips_message)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_profile_rule_format_tips_title)
+                .setMessage(github.tornaco.android.thanos.res.R.string.module_profile_rule_format_tips_message)
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
     }
@@ -382,8 +381,8 @@ public class RuleEditorActivity extends ThemeActivity {
             return;
         }
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.module_profile_editor_discard_dialog_title)
-                .setMessage(R.string.module_profile_editor_discard_dialog_message)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_profile_editor_discard_dialog_title)
+                .setMessage(github.tornaco.android.thanos.res.R.string.module_profile_editor_discard_dialog_message)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
                 .setNegativeButton(android.R.string.cancel, null)
@@ -392,8 +391,8 @@ public class RuleEditorActivity extends ThemeActivity {
 
     private void onRequestDelete() {
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.module_profile_editor_delete_dialog_title)
-                .setMessage(R.string.module_profile_editor_delete_dialog_message)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_profile_editor_delete_dialog_title)
+                .setMessage(github.tornaco.android.thanos.res.R.string.module_profile_editor_delete_dialog_message)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     if (ruleInfo != null) {

@@ -20,10 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.elvishew.xlog.XLog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
-import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
@@ -93,20 +91,20 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
     private void onRequestDeleteRule(RuleInfo ruleInfo) {
         ModernAlertDialog dialog = new ModernAlertDialog(thisActivity());
-        dialog.setDialogTitle(getString( github.tornaco.android.thanos.module.common.R.string.common_menu_title_remove));
-        dialog.setDialogMessage(getString( github.tornaco.android.thanos.module.common.R.string.common_menu_title_remove) + "\t" + ruleInfo.getName());
+        dialog.setDialogTitle(getString(github.tornaco.android.thanos.res.R.string.common_menu_title_remove));
+        dialog.setDialogMessage(getString(github.tornaco.android.thanos.res.R.string.common_menu_title_remove) + "\t" + ruleInfo.getName());
         dialog.setNegative(getString(android.R.string.cancel));
-        dialog.setPositive(getString( github.tornaco.android.thanos.module.common.R.string.common_menu_title_remove));
+        dialog.setPositive(getString(github.tornaco.android.thanos.res.R.string.common_menu_title_remove));
         dialog.setOnPositive(() -> viewModel.deleteRule(ruleInfo));
         dialog.setCancelable(true);
         dialog.show();
     }
 
     private void onSetupSwitchBar(SwitchBar switchBar) {
-        switchBar.setOnLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
-                getString(R.string.module_profile_feature_name)));
-        switchBar.setOffLabel(getString(github.tornaco.android.thanos.module.common.R.string.common_switchbar_title_format,
-                getString(R.string.module_profile_feature_name)));
+        switchBar.setOnLabel(getString(github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                getString(github.tornaco.android.thanos.res.R.string.module_profile_feature_name)));
+        switchBar.setOffLabel(getString(github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                getString(github.tornaco.android.thanos.res.R.string.module_profile_feature_name)));
         switchBar.setChecked(getSwitchBarCheckState());
         switchBar.addOnSwitchChangeListener(this::onSwitchBarCheckChanged);
     }
@@ -193,7 +191,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
     void onRequestAddNewRule() {
         AtomicInteger format = new AtomicInteger(ProfileManager.RULE_FORMAT_JSON);
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(R.string.module_profile_editor_select_format)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_profile_editor_select_format)
                 .setSingleChoiceItems(new String[]{
                         "JSON",
                         "YAML"

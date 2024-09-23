@@ -20,7 +20,7 @@ import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 
 public enum AppSort {
 
-    Default(R.string.common_sort_by_default, new AppSorterProvider() {
+    Default(github.tornaco.android.thanos.res.R.string.common_sort_by_default, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {
@@ -33,7 +33,7 @@ public enum AppSort {
             return null;
         }
     }),
-    Running(R.string.chip_title_app_only_running, new AppSorterProvider() {
+    Running(github.tornaco.android.thanos.res.R.string.chip_title_app_only_running, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {
@@ -45,7 +45,7 @@ public enum AppSort {
             return null;
         }
     }),
-    AppLabel(R.string.common_sort_by_install_app_label, new AppSorterProvider() {
+    AppLabel(github.tornaco.android.thanos.res.R.string.common_sort_by_install_app_label, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {
@@ -57,7 +57,7 @@ public enum AppSort {
             return null;
         }
     }),
-    InstallTime(R.string.common_sort_by_install_time, new AppSorterProvider() {
+    InstallTime(github.tornaco.android.thanos.res.R.string.common_sort_by_install_time, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {
@@ -69,7 +69,7 @@ public enum AppSort {
             return DateUtils.formatLongForMessageTime(model.appInfo.firstInstallTime);
         }
     }),
-    UpdateTime(R.string.common_sort_by_update_time, new AppSorterProvider() {
+    UpdateTime(github.tornaco.android.thanos.res.R.string.common_sort_by_update_time, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {
@@ -81,7 +81,7 @@ public enum AppSort {
             return DateUtils.formatLongForMessageTime(model.appInfo.lastUpdateTime);
         }
     }),
-    LastUsedTime(R.string.common_sort_by_last_used_time, new AppSorterProvider() {
+    LastUsedTime(github.tornaco.android.thanos.res.R.string.common_sort_by_last_used_time, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {
@@ -93,7 +93,7 @@ public enum AppSort {
             return FuzzyDateTimeFormatter.getTimeAgo(context, new Date(model.lastUsedTimeMills));
         }
     }),
-    TotalUsedTime(R.string.common_sort_by_total_used_time, new AppSorterProvider() {
+    TotalUsedTime(github.tornaco.android.thanos.res.R.string.common_sort_by_total_used_time, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {
@@ -105,7 +105,7 @@ public enum AppSort {
             return DateUtils.formatDuration(Duration.ofMillis(model.totalUsedTimeMills));
         }
     }),
-    SdkVersion(R.string.common_sort_by_install_sdk_version, new AppSorterProvider() {
+    SdkVersion(github.tornaco.android.thanos.res.R.string.common_sort_by_install_sdk_version, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {
@@ -117,7 +117,7 @@ public enum AppSort {
             return String.valueOf(model.appInfo.getTargetSdkVersion());
         }
     }),
-    ApkSize(R.string.common_sort_by_install_apk_size, new AppSorterProvider() {
+    ApkSize(github.tornaco.android.thanos.res.R.string.common_sort_by_install_apk_size, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {
@@ -129,7 +129,7 @@ public enum AppSort {
             return Formatter.formatFileSize(context, getAppApkSize(context, model));
         }
     }),
-    AppUid(R.string.common_sort_by_install_app_uid, new AppSorterProvider() {
+    AppUid(github.tornaco.android.thanos.res.R.string.common_sort_by_install_app_uid, new AppSorterProvider() {
         @NonNull
         @Override
         public Comparator<AppListModel> comparator(@NonNull Context context) {

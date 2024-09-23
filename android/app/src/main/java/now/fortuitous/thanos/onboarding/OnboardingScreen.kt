@@ -18,7 +18,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import github.tornaco.android.thanos.R
 import kotlinx.coroutines.launch
 
 @Composable
@@ -69,10 +68,10 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
             ) {
                 Text(
                     text = if (pagerState.currentPage == onboardingList.size - 1) {
-                        stringResource(R.string.onboarding_text_complete)
+                        stringResource(github.tornaco.android.thanos.res.R.string.onboarding_text_complete)
                     } else {
                         stringResource(
-                            R.string.onboarding_next
+                            github.tornaco.android.thanos.res.R.string.onboarding_next
                         )
                     },
                     color = MaterialTheme.colorScheme.onSurface,
@@ -88,13 +87,13 @@ data class Onboard(val title: Int, val description: Int, val lottieFile: String)
 
 val onboardingList = listOf(
     Onboard(
-        R.string.onboarding_github_tips_title,
-        R.string.onboarding_github_tips_desc,
+        github.tornaco.android.thanos.res.R.string.onboarding_github_tips_title,
+        github.tornaco.android.thanos.res.R.string.onboarding_github_tips_desc,
         "lottie/28189-github-octocat.json"
     ),
     Onboard(
-        R.string.onboarding_guide_tips_title,
-        R.string.onboarding_guide_tips_desc,
+        github.tornaco.android.thanos.res.R.string.onboarding_guide_tips_title,
+        github.tornaco.android.thanos.res.R.string.onboarding_guide_tips_desc,
         "lottie/8617-open-book.json"
     ),
 )

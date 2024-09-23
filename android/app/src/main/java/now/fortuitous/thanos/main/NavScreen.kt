@@ -143,7 +143,7 @@ fun NavScreen() {
                 ),
                 title = {
                     Row(verticalAlignment = CenterVertically) {
-                        Text(stringResource(id = R.string.app_name))
+                        Text(stringResource(id = github.tornaco.android.thanos.res.R.string.app_name))
                         TinySpacer()
                         AppBarBadges(state = state, onInactiveClick = {
                             isShowActiveDialog = true
@@ -262,22 +262,22 @@ private fun AppBarBadges(
     onFrameworkErrorClick: () -> Unit,
 ) {
     if (state.activeStatus == ActiveStatus.InActive) {
-        ClickableBadge(text = stringResource(id = R.string.status_not_active)) {
+        ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.status_not_active)) {
             onInactiveClick()
         }
     }
     if (state.activeStatus == ActiveStatus.RebootNeeded) {
-        ClickableBadge(text = stringResource(id = R.string.status_need_reboot)) {
+        ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.status_need_reboot)) {
             onNeedRestartClick()
         }
     }
     if (state.hasFrameworkError) {
-        ClickableBadge(text = stringResource(id = R.string.badge_framework_err)) {
+        ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.badge_framework_err)) {
             onFrameworkErrorClick()
         }
     }
     if (!state.isPurchased) {
-        ClickableBadge(text = stringResource(id = R.string.badge_trying_app)) {
+        ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.badge_trying_app)) {
             onTryingAppClick()
         }
     }
@@ -392,7 +392,7 @@ private fun FeatureGroup(
 
                             DropdownMenuItem(
                                 text = {
-                                    Text(stringResource(id = R.string.menu_title_create_shortcut))
+                                    Text(stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_create_shortcut))
                                 },
                                 onClick = {
                                     isMenuOpen = false
@@ -476,9 +476,9 @@ private fun RestartDeviceConfirmationDialog(
     onDismissRequest: () -> Unit,
 ) {
     ThanoxAlertDialog(title = {
-        Text(text = stringResource(id = R.string.reboot_now))
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.reboot_now))
     }, text = {
-        Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure))
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure))
     }, onDismissRequest = onDismissRequest, confirmButton = {
         TextButton(onClick = {
             onRebootConfirmed()
@@ -498,9 +498,9 @@ private fun ActiveDialog(
     onDismissRequest: () -> Unit,
 ) {
     ThanoxAlertDialog(title = {
-        Text(text = stringResource(id = R.string.status_not_active))
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.status_not_active))
     }, text = {
-        Text(text = stringResource(id = R.string.message_active_needed))
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.message_active_needed))
     }, onDismissRequest = onDismissRequest, confirmButton = {
         TextButton(onClick = {
             onDismissRequest()
@@ -516,9 +516,9 @@ private fun FrameworkErrorDialog(
     onDismissRequest: () -> Unit,
 ) {
     ThanoxAlertDialog(title = {
-        Text(text = stringResource(id = R.string.title_framework_error))
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.title_framework_error))
     }, text = {
-        Text(text = stringResource(id = R.string.message_framework_error))
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.message_framework_error))
     }, onDismissRequest = onDismissRequest, confirmButton = {
         TextButton(onClick = {
             onDismissRequest()
@@ -533,12 +533,12 @@ fun PrivacyStatementDialog(
     onDismissRequest: () -> Unit,
 ) {
     val context = LocalContext.current
-    val fileName = context.getString(R.string.privacy_agreement_file)
+    val fileName = context.getString(github.tornaco.android.thanos.res.R.string.privacy_agreement_file)
     val privacyAgreement = remember {
         AssetUtils.readFileToStringOrThrow(context, fileName)
     }
     ThanoxAlertDialog(title = {
-        Text(text = stringResource(id = R.string.privacy_agreement_title))
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.privacy_agreement_title))
     }, text = {
         Column(
             modifier = Modifier
@@ -576,10 +576,10 @@ private fun FirstRunDialog(
     }
     ThanoxAlertDialog(
         title = {
-            Text(text = stringResource(id = R.string.title_app_notice))
+            Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.title_app_notice))
         },
         text = {
-            Text(text = stringResource(id = R.string.message_app_notice))
+            Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.message_app_notice))
         },
         onDismissRequest = onDeny,
         confirmButton = {
@@ -616,11 +616,11 @@ private fun MultiplePatchDialog(
     onDismissRequest: () -> Unit,
 ) {
     ThanoxAlertDialog(title = {
-        Text(text = stringResource(id = R.string.title_multiple_patch_applied_error))
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.title_multiple_patch_applied_error))
     }, text = {
         Text(
             text = stringResource(
-                id = R.string.message_multiple_patch_applied_error,
+                id = github.tornaco.android.thanos.res.R.string.message_multiple_patch_applied_error,
                 patchSources.joinToString(" ")
             )
         )

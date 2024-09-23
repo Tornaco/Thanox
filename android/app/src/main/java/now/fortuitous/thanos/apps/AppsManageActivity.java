@@ -49,7 +49,7 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
 
     @Override
     protected int getTitleRes() {
-        return R.string.activity_title_apps_manager;
+        return github.tornaco.android.thanos.res.R.string.activity_title_apps_manager;
     }
 
     @NonNull
@@ -63,8 +63,8 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
 
     protected CommonAppListFilterViewModel.ListModelLoader onCreateListModelLoader() {
         AppListItemDescriptionComposer composer = new AppListItemDescriptionComposer(thisActivity());
-        String runningBadge = getString(R.string.badge_app_running);
-        String idleBadge = getApplicationContext().getString(R.string.badge_app_idle);
+        String runningBadge = getString(github.tornaco.android.thanos.res.R.string.badge_app_running);
+        String idleBadge = getApplicationContext().getString(github.tornaco.android.thanos.res.R.string.badge_app_idle);
         return index -> ContextExtKt.withThanos(getApplicationContext(), thanos -> {
             List<AppListModel> res = new ArrayList<>();
             CompositeDisposable disposable = new CompositeDisposable();

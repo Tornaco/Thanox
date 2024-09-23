@@ -130,7 +130,7 @@ fun Activity.DateTimeEngineScreen() {
     ThanoxSmallAppBarScaffold(
         title = {
             Text(
-                text = stringResource(id = R.string.module_profile_pref_title_rule_engine_date_time),
+                text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_pref_title_rule_engine_date_time),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
@@ -143,11 +143,11 @@ fun Activity.DateTimeEngineScreen() {
         floatingActionButton = {
             ExtendableFloatingActionButton(
                 extended = false,
-                text = { Text(text = stringResource(id = R.string.module_profile_rule_new)) },
+                text = { Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_new)) },
                 icon = {
                     Icon(
                         imageVector = Icons.Filled.Add,
-                        contentDescription = stringResource(id = R.string.module_profile_rule_new)
+                        contentDescription = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_new)
                     )
                 }) {
 
@@ -261,7 +261,7 @@ private fun WorkList(
                         modifier = Modifier
                     ) {
                         val typeText = if (it.type == Type.Periodic) {
-                            stringResource(id = R.string.module_profile_date_time_regular_interval)
+                            stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_date_time_regular_interval)
                         } else {
                             "Unknown"
                         }
@@ -345,7 +345,7 @@ private fun AlarmList(
                             modifier = Modifier.weight(1f, fill = false)
                         ) {
                             val typeText =
-                                stringResource(id = R.string.module_profile_date_time_alarm)
+                                stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_date_time_alarm)
 
                             val repeatText = if (record.alarm.repeat.isNo) {
                                 "No repeat"

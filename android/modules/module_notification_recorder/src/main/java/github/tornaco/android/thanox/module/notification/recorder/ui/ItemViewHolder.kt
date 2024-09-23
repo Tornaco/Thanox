@@ -88,7 +88,7 @@ class ItemViewHolder(private val binding: ModuleNotificationRecorderItemBinding)
         )
         Toast.makeText(
             itemView.context,
-            github.tornaco.android.thanos.module.common.R.string.common_toast_copied_to_clipboard,
+            github.tornaco.android.thanos.res.R.string.common_toast_copied_to_clipboard,
             Toast.LENGTH_SHORT
         ).show()
     }

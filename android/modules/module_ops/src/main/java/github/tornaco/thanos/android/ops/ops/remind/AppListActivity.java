@@ -19,7 +19,6 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
-import github.tornaco.thanos.android.ops.R;
 import util.CollectionUtils;
 
 public class AppListActivity extends CommonFuncToggleAppListFilterActivity {
@@ -31,7 +30,7 @@ public class AppListActivity extends CommonFuncToggleAppListFilterActivity {
     @NonNull
     @Override
     protected String getTitleString() {
-        return getString(R.string.module_ops_title_op_remind_apps);
+        return getString(github.tornaco.android.thanos.res.R.string.module_ops_title_op_remind_apps);
     }
 
     @Override

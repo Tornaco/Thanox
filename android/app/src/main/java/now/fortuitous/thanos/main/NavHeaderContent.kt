@@ -138,7 +138,7 @@ private fun MainNavHeaderContent(
                         )
                     }
                     Text(
-                        text = stringResource(id = R.string.boost_status_running_apps),
+                        text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontSize = 18.sp,
                             fontWeight = W700
@@ -384,11 +384,11 @@ private fun MemStats(
 
             val extraDesc = if (memUsage.isEnabled) {
                 stringResource(
-                    id = R.string.boost_status_available,
+                    id = github.tornaco.android.thanos.res.R.string.boost_status_available,
                     memUsage.memAvailableSizeString
                 )
             } else {
-                stringResource(id = R.string.boost_status_not_enabled)
+                stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_not_enabled)
             }
             Text(
                 modifier = Modifier,

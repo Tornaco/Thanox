@@ -99,7 +99,7 @@ class ProfileExampleActivity : ComposeThemeActivity() {
 
         ThanoxSmallAppBarScaffold(title = {
             Text(
-                text = stringResource(id = R.string.module_profile_rule_impor_example),
+                text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_impor_example),
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
@@ -173,7 +173,7 @@ private fun ExampleItem(example: Example, import: (Example) -> Unit) {
                         contentDescription = "Import",
                         modifier = Modifier.padding(end = 8.dp)
                     )
-                    Text(text = stringResource(id = github.tornaco.android.thanos.module.common.R.string.common_menu_title_import))
+                    Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.common_menu_title_import))
                 }
             }
         }

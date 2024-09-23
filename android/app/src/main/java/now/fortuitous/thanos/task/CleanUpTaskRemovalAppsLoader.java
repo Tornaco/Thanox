@@ -55,7 +55,7 @@ public class CleanUpTaskRemovalAppsLoader implements CommonFuncToggleAppListFilt
         if (!thanos.isServiceInstalled())
             return Lists.newArrayListWithCapacity(0);
 
-        String runningBadge = context.getString(R.string.badge_app_running);
+        String runningBadge = context.getString(github.tornaco.android.thanos.res.R.string.badge_app_running);
         ActivityManager am = thanos.getActivityManager();
         List<AppInfo> installed = thanos.getPkgManager().getInstalledPkgsByPackageSetId(index.pkgSetId);
         List<AppListModel> res = new ArrayList<>();

@@ -114,7 +114,7 @@ class NeedToRestartActivity : ComponentActivity() {
                             modifier = Modifier.padding(16.dp),
                             color = Color.White,
                             textAlign = TextAlign.Center,
-                            text = stringResource(id = R.string.message_reboot_needed),
+                            text = stringResource(id = github.tornaco.android.thanos.res.R.string.message_reboot_needed),
                             style = MaterialTheme.typography.bodyLarge
                         )
                     }
@@ -128,7 +128,7 @@ class NeedToRestartActivity : ComponentActivity() {
                         TextButton(modifier = Modifier.padding(16.dp), onClick = { finish() }) {
                             Text(
                                 color = Color.White,
-                                text = AnnotatedString(stringResource(id = R.string.reboot_later)).capitalize(),
+                                text = AnnotatedString(stringResource(id = github.tornaco.android.thanos.res.R.string.reboot_later)).capitalize(),
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }
@@ -141,7 +141,7 @@ class NeedToRestartActivity : ComponentActivity() {
                             }) {
                             Text(
                                 color = Color.White,
-                                text = AnnotatedString(stringResource(id = R.string.reboot_now)).capitalize(),
+                                text = AnnotatedString(stringResource(id = github.tornaco.android.thanos.res.R.string.reboot_now)).capitalize(),
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }

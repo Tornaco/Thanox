@@ -43,13 +43,13 @@ public class BackgroundRestrictActivity extends CommonFuncToggleAppListFilterAct
     @Override
 
     protected String getTitleString() {
-        return getString(R.string.activity_title_bg_restrict);
+        return getString(github.tornaco.android.thanos.res.R.string.activity_title_bg_restrict);
     }
 
     @Nullable
     @Override
     protected String provideFeatureDescText() {
-        return getString(R.string.feature_desc_bg_restrict);
+        return getString(github.tornaco.android.thanos.res.R.string.feature_desc_bg_restrict);
     }
 
     @NonNull

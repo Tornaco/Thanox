@@ -104,7 +104,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
 
     @Override
     protected int getTitleRes() {
-        return R.string.title_package_sets;
+        return github.tornaco.android.thanos.res.R.string.title_package_sets;
     }
 
     @Override
@@ -129,7 +129,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
     private void onRequestAddPackageSet() {
         EditTextDialog.show(
                 thisActivity(),
-                getString(R.string.title_package_add_set),
+                getString(github.tornaco.android.thanos.res.R.string.title_package_add_set),
                 new Consumer<String>() {
                     @Override
                     public void accept(String content) {
@@ -172,7 +172,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
                                 // titleProvider
                                 index -> {
                                     if (index == 0) {
-                                        return getString(R.string.title_package_delete_set);
+                                        return getString(github.tornaco.android.thanos.res.R.string.title_package_delete_set);
                                     }
                                     return null;
                                 },
@@ -200,7 +200,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
             PackageManager pm = thanos.getPkgManager();
             List<PackageSet> packageSets = pm.getAllPackageSets(true);
             List<AppListModel> res = new ArrayList<>();
-            String prebuiltBadgeStr = getString(R.string.title_package_prebuilt_set);
+            String prebuiltBadgeStr = getString(github.tornaco.android.thanos.res.R.string.title_package_prebuilt_set);
             CollectionUtils.consumeRemaining(
                     packageSets,
                     packageSet -> {
@@ -214,7 +214,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
                         int count = packageSet.getPackageCount();
                         appInfo.setArg1(count);
 
-                        String description = getString(R.string.title_package_count_set, String.valueOf(count));
+                        String description = getString(github.tornaco.android.thanos.res.R.string.title_package_count_set, String.valueOf(count));
                         if (packageSet.getDescription() != null) {
                             description = description + "\n" + packageSet.getDescription();
                         }

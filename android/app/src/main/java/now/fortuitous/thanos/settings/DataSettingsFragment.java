@@ -93,14 +93,14 @@ public class DataSettingsFragment extends BasePreferenceFragmentCompat {
         });
         findPreference(getString(R.string.key_restore_default)).setOnPreferenceClickListener(preference -> {
             new MaterialAlertDialogBuilder(getActivity())
-                    .setTitle(R.string.pre_title_restore_default)
-                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                    .setTitle(github.tornaco.android.thanos.res.R.string.pre_title_restore_default)
+                    .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) ->
                             ThanosManager.from(getActivity())
                                     .ifServiceInstalled(thanosManager -> {
                                         if (thanosManager.getBackupAgent().restoreDefault()) {
                                             new MaterialAlertDialogBuilder(getActivity())
-                                                    .setMessage(getString(R.string.pre_message_restore_success))
+                                                    .setMessage(getString(github.tornaco.android.thanos.res.R.string.pre_message_restore_success))
                                                     .setCancelable(false)
                                                     .setPositiveButton(android.R.string.ok, null)
                                                     .show();
@@ -157,7 +157,7 @@ public class DataSettingsFragment extends BasePreferenceFragmentCompat {
                                 if (getActivity() == null) return;
                                 Completable.fromAction(() ->
                                                 new MaterialAlertDialogBuilder(getActivity())
-                                                        .setMessage(getString(R.string.pre_message_restore_success))
+                                                        .setMessage(getString(github.tornaco.android.thanos.res.R.string.pre_message_restore_success))
                                                         .setCancelable(false)
                                                         .setPositiveButton(android.R.string.ok, null)
                                                         .show())
@@ -252,7 +252,7 @@ public class DataSettingsFragment extends BasePreferenceFragmentCompat {
                             public void onSuccess() {
                                 if (getActivity() == null) return;
                                 new MaterialAlertDialogBuilder(getActivity())
-                                        .setMessage(getString(R.string.pre_message_backup_success) + "\n" + destPathToTellUser)
+                                        .setMessage(getString(github.tornaco.android.thanos.res.R.string.pre_message_backup_success) + "\n" + destPathToTellUser)
                                         .setCancelable(true)
                                         .setPositiveButton(android.R.string.ok, null)
                                         .show();

@@ -18,7 +18,6 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
 import github.tornaco.android.thanos.widget.section.SectioningAdapter;
-import github.tornaco.thanos.android.ops.R;
 import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemFooterBinding;
 import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemHeaderBinding;
 import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemOpsCheckableBinding;
@@ -98,9 +97,9 @@ public class AppOpsListAdapter extends SectioningAdapter implements Consumer<Lis
     private void showModeSelectionDialog(Op op, View view, int sectionIndex, int itemIndex) {
         Resources res = view.getResources();
         String[] items = Lists.newArrayList(
-                res.getString(R.string.module_ops_mode_allow),
-                res.getString(R.string.module_ops_mode_foreground),
-                res.getString(R.string.module_ops_mode_ignore))
+                        res.getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_allow),
+                        res.getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_foreground),
+                        res.getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_ignore))
                 .toArray(new String[0]);
         int currentMode = op.getMode();
         int currentSelection = 0;

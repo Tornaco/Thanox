@@ -25,8 +25,8 @@ fun PermState.displayLabel(): String {
 @Composable
 fun PermState.displaySummary(): String? {
     return when (this) {
-        PermState.DENY -> stringResource(id = R.string.module_ops2_perm_state_deny_summary)
-        PermState.IGNORE -> stringResource(id = R.string.module_ops2_perm_state_ignore_summary)
+        PermState.DENY -> stringResource(id = github.tornaco.android.thanos.res.R.string.module_ops2_perm_state_deny_summary)
+        PermState.IGNORE -> stringResource(id = github.tornaco.android.thanos.res.R.string.module_ops2_perm_state_ignore_summary)
         else -> {
             null
         }

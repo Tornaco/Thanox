@@ -274,7 +274,7 @@ public class RunningServiceDetails extends PreferenceFragment {
         if (mNumServices == 0) {
             mServicesHeader = (TextView) mInflater.inflate(R.layout.separator_label,
                     mAllDetails, false);
-            mServicesHeader.setText(R.string.runningservicedetails_services_title);
+            mServicesHeader.setText(github.tornaco.android.thanos.res.R.string.runningservicedetails_services_title);
             mAllDetails.addView(mServicesHeader);
         }
         mNumServices++;
@@ -284,7 +284,7 @@ public class RunningServiceDetails extends PreferenceFragment {
         if (mNumProcesses == 0) {
             mProcessesHeader = (TextView) mInflater.inflate(R.layout.separator_label,
                     mAllDetails, false);
-            mProcessesHeader.setText(R.string.runningservicedetails_processes_title);
+            mProcessesHeader.setText(github.tornaco.android.thanos.res.R.string.runningservicedetails_processes_title);
             mAllDetails.addView(mProcessesHeader);
         }
         mNumProcesses++;
@@ -342,27 +342,27 @@ public class RunningServiceDetails extends PreferenceFragment {
                         si.mServiceInfo.applicationInfo));
             } else {
                 if (mi.mBackground) {
-                    description.setText(R.string.background_process_stop_description);
+                    description.setText(github.tornaco.android.thanos.res.R.string.background_process_stop_description);
                 } else if (detail.mManageIntent != null) {
                     try {
                         Resources clientr = getActivity().getPackageManager().getResourcesForApplication(
                                 si.mRunningService.clientPackage);
                         String label = clientr.getString(si.mRunningService.clientLabel);
-                        description.setText(getActivity().getString(R.string.service_manage_description,
+                        description.setText(getActivity().getString(github.tornaco.android.thanos.res.R.string.service_manage_description,
                                 label));
                     } catch (NameNotFoundException e) {
                     }
                 } else {
                     description.setText(getActivity().getText(si != null
-                            ? R.string.service_stop_description
-                            : R.string.heavy_weight_stop_description));
+                            ? github.tornaco.android.thanos.res.R.string.service_stop_description
+                            : github.tornaco.android.thanos.res.R.string.heavy_weight_stop_description));
                 }
             }
 
             detail.mStopButton.setOnClickListener(detail);
-            detail.mStopButton.setText(getActivity().getText(detail.mManageIntent != null ? R.string.service_manage : R.string.service_stop));
+            detail.mStopButton.setText(getActivity().getText(detail.mManageIntent != null ? github.tornaco.android.thanos.res.R.string.service_manage : github.tornaco.android.thanos.res.R.string.service_stop));
             detail.mReportButton.setOnClickListener(detail);
-            detail.mReportButton.setText(R.string.service_report);
+            detail.mReportButton.setText(github.tornaco.android.thanos.res.R.string.service_report);
             // check if error reporting is enabled in secure settings
             detail.mReportButton.setEnabled(false);
         }
@@ -389,7 +389,7 @@ public class RunningServiceDetails extends PreferenceFragment {
             // no reason to have a description.
             description.setVisibility(View.GONE);
         } else if (isMain) {
-            description.setText(R.string.main_running_process_description);
+            description.setText(github.tornaco.android.thanos.res.R.string.main_running_process_description);
         } else {
             int textid = 0;
             CharSequence label = null;
@@ -399,7 +399,7 @@ public class RunningServiceDetails extends PreferenceFragment {
             //        + " pid=" + rpi.importanceReasonPid + " comp=" + comp);
             switch (rpi.importanceReasonCode) {
                 case ActivityManager.RunningAppProcessInfo.REASON_PROVIDER_IN_USE:
-                    textid = R.string.process_provider_in_use_description;
+                    textid = github.tornaco.android.thanos.res.R.string.process_provider_in_use_description;
                     if (rpi.importanceReasonComponent != null) {
                         try {
                             ProviderInfo prov = getActivity().getPackageManager().getProviderInfo(
@@ -411,7 +411,7 @@ public class RunningServiceDetails extends PreferenceFragment {
                     }
                     break;
                 case ActivityManager.RunningAppProcessInfo.REASON_SERVICE_IN_USE:
-                    textid = R.string.process_service_in_use_description;
+                    textid = github.tornaco.android.thanos.res.R.string.process_service_in_use_description;
                     if (rpi.importanceReasonComponent != null) {
                         try {
                             ServiceInfo serv = getActivity().getPackageManager().getServiceInfo(
@@ -513,7 +513,7 @@ public class RunningServiceDetails extends PreferenceFragment {
                 // Clear whatever is currently being shown.
                 mSnippetActiveItem.mHolder.size.setText("");
                 mSnippetActiveItem.mHolder.uptime.setText("");
-                mSnippetActiveItem.mHolder.description.setText(R.string.no_services);
+                mSnippetActiveItem.mHolder.description.setText(github.tornaco.android.thanos.res.R.string.no_services);
             } else {
                 // No merged item, never had one.  Nothing to do.
                 finish();
@@ -622,8 +622,8 @@ public class RunningServiceDetails extends PreferenceFragment {
                 }
 
                 return new MaterialAlertDialogBuilder(getActivity())
-                        .setTitle(getActivity().getString(R.string.runningservicedetails_stop_dlg_title))
-                        .setMessage(getActivity().getString(R.string.runningservicedetails_stop_dlg_text))
+                        .setTitle(getActivity().getString(github.tornaco.android.thanos.res.R.string.runningservicedetails_stop_dlg_title))
+                        .setMessage(getActivity().getString(github.tornaco.android.thanos.res.R.string.runningservicedetails_stop_dlg_text))
                         .setPositiveButton(android.R.string.ok,
                                 (dialog, which) -> {
                                     ActiveDetail ad = getOwner().activeDetailForService(comp);

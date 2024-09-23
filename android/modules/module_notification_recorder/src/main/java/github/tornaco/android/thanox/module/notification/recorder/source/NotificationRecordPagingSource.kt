@@ -59,7 +59,7 @@ class NotificationRecordPagingSource(
     private fun uninstalledAppInfo(record: NotificationRecord): AppInfo {
         val dummy = AppInfo.dummy()
         dummy.appLabel =
-            context.getString(R.string.module_notification_recorder_item_uninstalled_app)
+            context.getString(github.tornaco.android.thanos.res.R.string.module_notification_recorder_item_uninstalled_app)
         dummy.pkgName = record.pkgName
         return dummy
     }

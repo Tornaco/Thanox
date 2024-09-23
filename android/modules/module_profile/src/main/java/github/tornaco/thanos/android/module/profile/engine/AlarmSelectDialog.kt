@@ -77,7 +77,7 @@ fun rememberAlarmSelectorState(
 fun AlarmSelector(state: AlarmSelectorState) {
     if (state.isShow) {
         ThanoxDialog(onDismissRequest = { state.dismiss() }, title = {
-            DialogTitle(text = stringResource(id = R.string.module_profile_date_time_alarm))
+            DialogTitle(text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_date_time_alarm))
         }, buttons = {
             TextButton(onClick = {
                 state.selected(
@@ -134,7 +134,7 @@ private fun Tag(state: AlarmSelectorState) {
             })
         Text(
             text = stringResource(
-                id = R.string.module_profile_date_time_tag,
+                id = github.tornaco.android.thanos.res.R.string.module_profile_date_time_tag,
                 "\ncondition: \"timeTick && tag == \"${state.tag}\"\""
             ), style = MaterialTheme.typography.labelSmall
         )

@@ -50,14 +50,14 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
             if (customSu != null) {
                 customSuPref.setSummary(thanos.getProfileManager().getCustomSuCommand()
                         + "\n"
-                        + getString(R.string.module_profile_pref_summary_rule_engine_custom_su));
+                        + getString(github.tornaco.android.thanos.res.R.string.module_profile_pref_summary_rule_engine_custom_su));
             }
         };
         updateSummary.run();
 
         customSuPref.setOnPreferenceClickListener(preference -> {
             EditTextDialog.show(requireActivity(),
-                    getString(R.string.module_profile_pref_title_rule_engine_custom_su),
+                    getString(github.tornaco.android.thanos.res.R.string.module_profile_pref_title_rule_engine_custom_su),
                     thanos.getProfileManager().getCustomSuCommand(),
                     newValue -> {
                         thanos.getProfileManager().setCustomSuCommand(newValue);
@@ -120,7 +120,7 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
 
         new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()))
                 .setView(dialogView)
-                .setTitle(R.string.module_profile_pref_title_rule_engine_shortcut)
+                .setTitle(github.tornaco.android.thanos.res.R.string.module_profile_pref_title_rule_engine_shortcut)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     String factValue = factValueText.getText().toString();

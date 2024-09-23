@@ -46,14 +46,14 @@ public class StartRestrictActivity extends CommonFuncToggleAppListFilterActivity
     @Override
 
     protected String getTitleString() {
-        return getString(R.string.activity_title_start_restrict);
+        return getString(github.tornaco.android.thanos.res.R.string.activity_title_start_restrict);
     }
 
     @Nullable
     @Override
 
     protected String provideFeatureDescText() {
-        return getString(R.string.feature_desc_start_restrict);
+        return getString(github.tornaco.android.thanos.res.R.string.feature_desc_start_restrict);
     }
 
     @NonNull

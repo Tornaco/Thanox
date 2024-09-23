@@ -72,9 +72,9 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
 
     private void showModeSelectionDialog(AppInfo appInfo) {
         String[] items = Lists.newArrayList(
-                        getString(R.string.module_ops_mode_allow),
-                        getString(R.string.module_ops_mode_foreground),
-                        getString(R.string.module_ops_mode_ignore))
+                        getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_allow),
+                        getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_foreground),
+                        getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_ignore))
                 .toArray(new String[0]);
         int currentMode = Integer.parseInt(appInfo.getStr());
         int currentSelection = 0;
@@ -141,12 +141,12 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
     @SuppressLint("RestrictedApi")
     protected void onSetupCustomFilter(Chip filterAnchor) {
         List<String> menuItemList = new ArrayList<>();
-        menuItemList.add(getString(R.string.module_ops_mode_allow));
-        menuItemList.add(getString(R.string.module_ops_mode_ignore));
-        menuItemList.add(getString(R.string.module_ops_mode_foreground));
-        menuItemList.add(getString(R.string.module_ops_mode_all));
+        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_allow));
+        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_ignore));
+        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_foreground));
+        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_all));
 
-        currentOpsModeFilter = getString(R.string.module_ops_mode_all);
+        currentOpsModeFilter = getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_all);
         filterAnchor.setText(currentOpsModeFilter);
 
         filterAnchor.setOnClickListener(view -> {
@@ -209,21 +209,21 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
             @Override
             public List<AppListModel> load(@NonNull CategoryIndex index) {
                 List<AppListModel> res = super.load(index);
-                if (currentOpsModeFilter == null || currentOpsModeFilter.equals(getString(R.string.module_ops_mode_all))) {
+                if (currentOpsModeFilter == null || currentOpsModeFilter.equals(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_all))) {
                     return res;
-                } else if (currentOpsModeFilter.equals(getString(R.string.module_ops_mode_allow))) {
+                } else if (currentOpsModeFilter.equals(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_allow))) {
                     return res.stream().filter(model -> {
                         String payload = model.appInfo.getStr();
                         int mode = Integer.parseInt(payload);
                         return mode == AppOpsManager.MODE_ALLOWED;
                     }).collect(Collectors.toList());
-                } else if (currentOpsModeFilter.equals(getString(R.string.module_ops_mode_ignore))) {
+                } else if (currentOpsModeFilter.equals(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_ignore))) {
                     return res.stream().filter(model -> {
                         String payload = model.appInfo.getStr();
                         int mode = Integer.parseInt(payload);
                         return mode == AppOpsManager.MODE_IGNORED;
                     }).collect(Collectors.toList());
-                } else if (currentOpsModeFilter.equals(getString(R.string.module_ops_mode_foreground))) {
+                } else if (currentOpsModeFilter.equals(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_foreground))) {
                     return res.stream().filter(model -> {
                         String payload = model.appInfo.getStr();
                         int mode = Integer.parseInt(payload);
@@ -245,19 +245,19 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_select_all_allow == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
-                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                    .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(AppOpsManager.MODE_ALLOWED)).show();
             return true;
         }
         if (R.id.action_select_all_foreground == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
-                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                    .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(AppOpsManager.MODE_FOREGROUND)).show();
             return true;
         }
         if (R.id.action_un_select_all_ignore == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
-                    .setMessage(github.tornaco.android.thanos.module.common.R.string.common_dialog_message_are_you_sure)
+                    .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(AppOpsManager.MODE_IGNORED)).show();
             return true;
         }

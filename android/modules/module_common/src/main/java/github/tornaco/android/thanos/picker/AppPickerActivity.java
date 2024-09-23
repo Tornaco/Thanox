@@ -68,7 +68,7 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
 
     @Override
     protected int getTitleRes() {
-        return R.string.app_picker_title;
+        return github.tornaco.android.thanos.res.R.string.app_picker_title;
     }
 
     @Override

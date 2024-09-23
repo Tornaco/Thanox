@@ -1,5 +1,6 @@
 package github.tornaco.android.thanox.module.notification.recorder.ui
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -16,6 +17,7 @@ object TimeMachine {
         Toast.makeText(context, content, Toast.LENGTH_LONG).show()
     }
 
+    @SuppressLint("MissingPermission")
     fun mockNotification(context: Context, title: String?, content: String?, `when`: Long) {
         createNotificationChannelIfNeed(context)
         val n = NotificationCompat.Builder(context, "NR-Mock")

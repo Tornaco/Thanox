@@ -106,6 +106,9 @@
         <item>com.android.phone</item>
 
         <item>com.miui.securitycore</item>
+        <item>com.mobiletools.systemhelper</item>
+        <item>com.milink.service</item>
+        <item>com.xiaomi.finddevice</item>
 
     </string-array>
 

@@ -361,6 +361,8 @@
     <string name="common_menu_title_batch_select">批量选择</string>
     <string name="common_menu_title_select_all">全部</string>
     <string name="common_menu_title_un_select_all">全不</string>
+    <string name="common_menu_title_select_all_in_this_page">当前页全部</string>
+    <string name="common_menu_title_un_select_all_in_this_page">当前页全不</string>
     <string name="common_menu_title_search">搜索</string>
     <string name="common_menu_title_rename">重命名</string>
     <string name="common_menu_title_remove">移除</string>

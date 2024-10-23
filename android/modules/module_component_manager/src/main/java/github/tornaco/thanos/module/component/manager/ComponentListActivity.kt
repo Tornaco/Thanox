@@ -1,5 +1,6 @@
 package github.tornaco.thanos.module.component.manager
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -12,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.elvishew.xlog.XLog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.miguelcatalan.materialsearchview.MaterialSearchView
@@ -24,6 +26,8 @@ import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.widget.ModernProgressDialog
 import github.tornaco.thanos.module.component.manager.databinding.ModuleComponentManagerComponentListActivityBinding
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
+import kotlin.math.max
+import kotlin.math.min
 
 abstract class ComponentListActivity : ThemeActivity() {
 
@@ -174,7 +178,7 @@ abstract class ComponentListActivity : ThemeActivity() {
                 .setPositiveButton(
                     android.R.string.ok
                 ) { _, _ ->
-                    onRequestSelectAll(true)
+                    onRequestSelectAll(viewModel.componentModels, true)
                 }.show()
             return true
         }
@@ -184,19 +188,53 @@ abstract class ComponentListActivity : ThemeActivity() {
                 .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                 .setPositiveButton(
                     android.R.string.ok
-                ) { _, _ -> onRequestSelectAll(false) }
+                ) { _, _ -> onRequestSelectAll(viewModel.componentModels, false) }
+                .show()
+            return true
+        }
+        if (github.tornaco.thanos.module.component.manager.R.id.action_select_all_in_this_page == item.itemId) {
+            MaterialAlertDialogBuilder(thisActivity())
+                .setTitle(github.tornaco.android.thanos.res.R.string.common_menu_title_select_all_in_this_page)
+                .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
+                .setPositiveButton(
+                    android.R.string.ok
+                ) { _, _ -> onRequestSelectAllInThisPage(binding.componentListView, true) }
+                .show()
+            return true
+        }
+        if (github.tornaco.thanos.module.component.manager.R.id.action_un_select_all_in_this_page == item.itemId) {
+            MaterialAlertDialogBuilder(thisActivity())
+                .setTitle(github.tornaco.android.thanos.res.R.string.common_menu_title_un_select_all_in_this_page)
+                .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
+                .setPositiveButton(
+                    android.R.string.ok
+                ) { _, _ -> onRequestSelectAllInThisPage(binding.componentListView, false) }
                 .show()
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun onRequestSelectAll(isSelectAll: Boolean) {
+    private fun onRequestSelectAllInThisPage(recyclerView: RecyclerView, isSelectAll: Boolean) {
+        val models = viewModel.componentModels
+        val lm = recyclerView.layoutManager as LinearLayoutManager
+        val f = max(0, lm.findFirstVisibleItemPosition())
+        val l = min(models.size, lm.findLastVisibleItemPosition())
+        XLog.d("onRequestSelectAllInThisPage $f - $l")
+        val items = viewModel.componentModels.subList(f, l)
+        XLog.d("onRequestSelectAllInThisPage ${models.map { it.componentName.className }}")
+        XLog.d("onRequestSelectAllInThisPage ${items.map { it.componentName.className }}")
+        onRequestSelectAll(items, isSelectAll)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun onRequestSelectAll(modelList: List<ComponentModel>, isSelectAll: Boolean) {
         val progressDialog = ModernProgressDialog(thisActivity())
         progressDialog.setTitle(getString(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment))
         progressDialog.show()
         viewModel.selectAll(
             appInfo,
+            modelList,
             isSelectAll,
             {
                 runOnUiThread {
@@ -207,7 +245,7 @@ abstract class ComponentListActivity : ThemeActivity() {
                 runOnUiThread {
                     XLog.d("onRequestSelectAll, onComplete")
                     progressDialog.dismiss()
-                    viewModel.start()
+                    binding.componentListView.adapter?.notifyDataSetChanged()
                 }
             })
     }

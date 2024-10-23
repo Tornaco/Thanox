@@ -358,6 +358,8 @@
     <string name="common_menu_title_batch_select">Batch select</string>
     <string name="common_menu_title_select_all">All yes</string>
     <string name="common_menu_title_un_select_all">All no</string>
+    <string name="common_menu_title_select_all_in_this_page">Yes in this page</string>
+    <string name="common_menu_title_un_select_all_in_this_page">No in this page</string>
     <string name="common_menu_title_search">search</string>
     <string name="common_menu_title_rename">Rename</string>
     <string name="common_menu_title_remove">Remove</string>

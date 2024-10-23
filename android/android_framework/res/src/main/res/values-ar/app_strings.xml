@@ -345,6 +345,8 @@
     <string name="common_menu_title_batch_select">اختيار الدفعة</string>
     <string name="common_menu_title_select_all">الكل</string>
     <string name="common_menu_title_un_select_all">لا على الاطلاق</string>
+    <string name="common_menu_title_select_all_in_this_page">Yes in this page</string>
+    <string name="common_menu_title_un_select_all_in_this_page">No in this page</string>
     <string name="common_menu_title_search">بحث</string>
     <string name="common_menu_title_rename">إعادة تسمية</string>
     <string name="common_menu_title_remove">إزالة</string>

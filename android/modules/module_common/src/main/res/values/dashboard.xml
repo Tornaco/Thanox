@@ -67,7 +67,7 @@
 
     <style name="TextAppearance.TileSubTitle" parent="TextAppearance.Small">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">12sp</item>
         <!--        Medium-->
         <item name="android:fontWeight">500</item>
     </style>

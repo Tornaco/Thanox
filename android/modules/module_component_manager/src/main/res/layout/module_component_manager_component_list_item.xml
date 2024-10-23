@@ -56,12 +56,23 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/common_view_margin_small"
                 android:layout_marginEnd="@dimen/common_view_margin_default"
-                android:layout_toStartOf="@id/state_container"
                 android:ellipsize="middle"
                 android:fadingEdge="horizontal"
                 android:text="@{component.label}"
                 android:textAppearance="@style/TextAppearance.TileTitle"
                 tools:text="Service Name" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/badge1"
+                style="@style/MaterialButtonBadged"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_view_margin_small"
+                android:layout_marginEnd="@dimen/common_view_margin_default"
+                android:layout_toEndOf="@id/label"
+                android:text="@string/module_component_manager_disabled_by_thanox"
+                android:textSize="@dimen/list_item_main_text_size_ext_small"
+                android:visibility="@{component.disabledByThanox ? View.VISIBLE : View.GONE}" />
 
 
             <TextView
@@ -127,17 +138,6 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/badge1"
-                        style="@style/MaterialButtonBadged"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/common_view_margin_small"
-                        android:layout_marginEnd="@dimen/common_view_margin_default"
-                        android:text="@string/module_component_manager_disabled_by_thanox"
-                        android:textSize="@dimen/list_item_main_text_size_ext_small"
-                        android:visibility="@{component.disabledByThanox ? View.VISIBLE : View.GONE}" />
-
-                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/badge2"
                         style="@style/MaterialButtonBadged"
                         android:layout_width="wrap_content"
@@ -146,6 +146,7 @@
                         android:layout_marginEnd="@dimen/common_view_margin_default"
                         android:text="@string/module_component_manager_component_running"
                         android:textSize="@dimen/list_item_main_text_size_ext_small"
+                        tools:visibility="gone"
                         android:visibility="@{component.running ? View.VISIBLE : View.GONE}" />
 
                 </LinearLayout>

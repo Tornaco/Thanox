@@ -109,6 +109,13 @@
         <item>com.mobiletools.systemhelper</item>
         <item>com.milink.service</item>
         <item>com.xiaomi.finddevice</item>
+        <item>com.android.permissioncontroller</item>
+        <item>com.google.android.webview</item>
+        <item>com.google.android.ext.services</item>
+        <item>vendor.qti.imsrcs</item>
+        <item>com.android.providers.media.module</item>
+        <item>com.miui.contentcatcher</item>
+        <item>com.google.android.webview</item>
 
     </string-array>
 

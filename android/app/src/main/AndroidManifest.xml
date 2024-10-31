@@ -277,6 +277,9 @@
         <activity
             android:name="now.fortuitous.thanos.launchother.AllowListActivity"
             android:exported="true" />
+        <activity
+            android:name="now.fortuitous.thanos.resident.ResidentActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

@@ -266,6 +266,12 @@ object PrebuiltFeatures {
                 iconRes = R.drawable.ic_nav_launch_other_app,
                 titleRes = github.tornaco.android.thanos.res.R.string.launch_other_app,
                 themeColor = R.color.nav_icon_launch_other_app
+            ),
+            FeatureItem(
+                id = PrebuiltFeatureIds.ID_RESIDENT,
+                iconRes = R.drawable.ic_nav_resident,
+                titleRes = github.tornaco.android.thanos.res.R.string.pre_title_resident,
+                themeColor = R.color.nav_icon_resident
             )
         )
     )

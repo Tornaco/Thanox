@@ -37,6 +37,7 @@ import now.fortuitous.thanos.launchother.LaunchOtherAppListActivity
 import now.fortuitous.thanos.notification.NotificationCenterActivity
 import now.fortuitous.thanos.power.SmartFreezeActivity
 import now.fortuitous.thanos.power.wakelock.WakeLockBlockerActivity
+import now.fortuitous.thanos.resident.ResidentActivity
 
 class PrebuiltFeatureLauncher(
     private val context: Activity,
@@ -194,6 +195,16 @@ class PrebuiltFeatureLauncher(
                     AppFeatureManager.withSubscriptionStatus(context) {
                         if (it) {
                             LaunchOtherAppListActivity.start(context)
+                        } else {
+                            AppFeatureManager.showDonateIntroDialog(context)
+                        }
+                    }
+                }
+
+                PrebuiltFeatureIds.ID_RESIDENT -> {
+                    AppFeatureManager.withSubscriptionStatus(context) {
+                        if (it) {
+                            ResidentActivity.start(context)
                         } else {
                             AppFeatureManager.showDonateIntroDialog(context)
                         }

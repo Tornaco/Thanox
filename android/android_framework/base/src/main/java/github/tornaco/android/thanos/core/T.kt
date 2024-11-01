@@ -65,6 +65,8 @@ object T {
             "github.tornaco.action.launcher.other.app.caller"
         const val ACTION_LAUNCH_OTHER_APP_EXTRA_TARGET_PKG =
             "github.tornaco.action.launcher.other.app.target"
+        const val ACTION_LAUNCH_OTHER_APP_EXTRA_TARGET_INTENT_URI =
+            "github.tornaco.action.launcher.other.app.target.intent.uri"
         const val ACTION_LAUNCH_OTHER_APP_EXTRA_IS_FROM_CHECK =
             "github.tornaco.action.launcher.other.app.is.from.check"
 

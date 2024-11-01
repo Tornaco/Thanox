@@ -10,16 +10,19 @@
 
     <item
         android:id="@+id/action_select_all_default"
+        android:icon="@drawable/ic_full_selection"
         android:title="@string/sensor_off_default"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_select_all_on_start"
+        android:icon="@drawable/ic_full_selection"
         android:title="@string/sensor_off_on_start"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_un_select_all_always"
+        android:icon="@drawable/ic_full_selection"
         android:title="@string/sensor_off_always"
         app:showAsAction="never" />
 </menu>

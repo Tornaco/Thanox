@@ -78,14 +78,11 @@ public class SensorOffAppListActivity extends CommonAppListFilterActivity {
                 .toArray(new String[0]);
         int currentMode = Integer.parseInt(appInfo.getStr());
         int currentSelection = 0;
-        if (currentMode == PrivacyManager.SensorOffSettings.DEFAULT) {
+        if (currentMode == PrivacyManager.SensorOffSettings.ON_START) {
             currentSelection = 1;
         }
-        if (currentMode == PrivacyManager.SensorOffSettings.ON_START) {
-            currentSelection = 2;
-        }
         if (currentMode == PrivacyManager.SensorOffSettings.ALWAYS) {
-            currentSelection = 3;
+            currentSelection = 2;
         }
         new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(appInfo.getAppLabel())
@@ -149,12 +146,12 @@ public class SensorOffAppListActivity extends CommonAppListFilterActivity {
     @SuppressLint("RestrictedApi")
     protected void onSetupCustomFilter(Chip filterAnchor) {
         List<String> menuItemList = new ArrayList<>();
-        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.launch_other_app_options_allow));
-        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.launch_other_app_options_ask));
-        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.launch_other_app_options_ignore));
-        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_all));
+        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.sensor_off_default));
+        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.sensor_off_on_start));
+        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.sensor_off_always));
+        menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.sensor_off_all));
 
-        currentModeFilter = getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_all);
+        currentModeFilter = getString(github.tornaco.android.thanos.res.R.string.sensor_off_all);
         filterAnchor.setText(currentModeFilter);
 
         filterAnchor.setOnClickListener(view -> {
@@ -229,7 +226,7 @@ public class SensorOffAppListActivity extends CommonAppListFilterActivity {
             });
             Collections.sort(res);
 
-            if (currentModeFilter == null || currentModeFilter.equals(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_all))) {
+            if (currentModeFilter == null || currentModeFilter.equals(getString(github.tornaco.android.thanos.res.R.string.sensor_off_default))) {
                 return res;
             } else if (currentModeFilter.equals(getString(github.tornaco.android.thanos.res.R.string.sensor_off_default))) {
                 return res.stream().filter(model -> {

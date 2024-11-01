@@ -179,9 +179,9 @@ object PrebuiltFeatures {
             ),
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_SENSOR_OFF,
-                iconRes = R.drawable.ic_nav_resident,
-                titleRes = github.tornaco.android.thanos.res.R.string.pre_title_resident,
-                themeColor = R.color.nav_icon_resident
+                iconRes = R.drawable.ic_nav_sensor_off,
+                titleRes = github.tornaco.android.thanos.res.R.string.sensor_off,
+                themeColor = R.color.nav_icon_sensor_off
             )
         )
     )

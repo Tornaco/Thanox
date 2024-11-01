@@ -1126,6 +1126,7 @@
     <string name="sensor_off_default">不关闭</string>
     <string name="sensor_off_on_start">启动时关闭6秒</string>
     <string name="sensor_off_always">始终关闭</string>
+    <string name="sensor_off_all">全部</string>
 
     <string name="start_record_allowed">允許</string>
     <string name="start_record_blocked">阻止</string>

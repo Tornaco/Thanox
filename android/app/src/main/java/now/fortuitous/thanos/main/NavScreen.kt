@@ -143,7 +143,7 @@ fun NavScreen() {
                 ),
                 title = {
                     Row(verticalAlignment = CenterVertically) {
-                        Text(stringResource(id = github.tornaco.android.thanos.res.R.string.app_name))
+                        Text(stringResource(id = github.tornaco.android.thanos.res.R.string.app_name_thanox))
                         TinySpacer()
                         AppBarBadges(state = state, onInactiveClick = {
                             isShowActiveDialog = true

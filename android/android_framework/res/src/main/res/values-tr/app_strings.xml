@@ -803,7 +803,7 @@
     <string name="module_push_message_delegate_title_gcm_diag">Diag</string>
     <string name="module_push_message_delegate_notice_wechat_proxy">Please note that the collection function is currently in the experimental stage and is only for learning and research. At present, no one can guarantee that the push will be 100% received.</string>
 
-    <string name="app_name">Thanox</string>
+    <string name="app_name_thanox">Thanox</string>
     <string name="app_description">Ben Thanos\'um! 😈👌</string>
     <string name="privacy_agreement_file">privacy/privacy_agreement_tr.html</string>
 

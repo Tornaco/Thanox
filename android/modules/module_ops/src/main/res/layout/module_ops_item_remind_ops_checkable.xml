@@ -57,7 +57,7 @@
                 android:fadingEdge="horizontal"
                 android:text="@{op.title}"
                 android:textAppearance="@style/TextAppearance.TileTitle"
-                tools:text="@string/app_name" />
+                tools:text="@string/app_name_thanox" />
 
             <TextView
                 android:id="@+id/summary"

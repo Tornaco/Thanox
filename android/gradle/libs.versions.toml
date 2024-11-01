@@ -29,7 +29,7 @@ recyclerview = "1.3.2"
 rxjava = "2.2.21"
 sardine-android = "v0.9"
 timber = "5.0.1"
-xcrash-android-lib = "3.0.0"
+xcrash-android-lib = "3.1.0"
 zxing-core = "3.5.3"
 #noinspection GradleDependency
 tinypinyin = "3.0.0"

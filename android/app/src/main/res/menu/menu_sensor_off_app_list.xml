@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/module_common_ic_search_2_line"
+        android:title="@string/common_menu_title_search"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_select_all_default"
+        android:title="@string/sensor_off_default"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_select_all_on_start"
+        android:title="@string/sensor_off_on_start"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_un_select_all_always"
+        android:title="@string/sensor_off_always"
+        app:showAsAction="never" />
+</menu>

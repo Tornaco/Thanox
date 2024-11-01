@@ -48,4 +48,8 @@ interface IPrivacyManager {
     String getOriginalNetworkOp(int subId);
     String getOriginalNetworkOpName(int subId);
 
+    int getSensorOffSettingsForPackage(in Pkg pkg);
+    void setSensorOffSettingsForPackage(in Pkg pkg, int settings);
+    boolean isSensorOffEnabled();
+    void setSensorOffEnabled(boolean enable);
 }

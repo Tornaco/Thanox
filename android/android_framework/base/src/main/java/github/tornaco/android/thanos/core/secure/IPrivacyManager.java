@@ -132,6 +132,20 @@ public interface IPrivacyManager extends android.os.IInterface
     {
       return null;
     }
+    @Override public int getSensorOffSettingsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    {
+      return 0;
+    }
+    @Override public void setSensorOffSettingsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, int settings) throws android.os.RemoteException
+    {
+    }
+    @Override public boolean isSensorOffEnabled() throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public void setSensorOffEnabled(boolean enable) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -488,6 +502,54 @@ public interface IPrivacyManager extends android.os.IInterface
           java.lang.String _result = this.getOriginalNetworkOpName(_arg0);
           reply.writeNoException();
           reply.writeString(_result);
+          return true;
+        }
+        case TRANSACTION_getSensorOffSettingsForPackage:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          int _result = this.getSensorOffSettingsForPackage(_arg0);
+          reply.writeNoException();
+          reply.writeInt(_result);
+          return true;
+        }
+        case TRANSACTION_setSensorOffSettingsForPackage:
+        {
+          data.enforceInterface(descriptor);
+          github.tornaco.android.thanos.core.pm.Pkg _arg0;
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          int _arg1;
+          _arg1 = data.readInt();
+          this.setSensorOffSettingsForPackage(_arg0, _arg1);
+          reply.writeNoException();
+          return true;
+        }
+        case TRANSACTION_isSensorOffEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _result = this.isSensorOffEnabled();
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_setSensorOffEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          this.setSensorOffEnabled(_arg0);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -1187,6 +1249,98 @@ public interface IPrivacyManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public int getSensorOffSettingsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        int _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          boolean _status = mRemote.transact(Stub.TRANSACTION_getSensorOffSettingsForPackage, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSensorOffSettingsForPackage(pkg);
+          }
+          _reply.readException();
+          _result = _reply.readInt();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setSensorOffSettingsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, int settings) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(settings);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setSensorOffSettingsForPackage, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSensorOffSettingsForPackage(pkg, settings);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
+      @Override public boolean isSensorOffEnabled() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isSensorOffEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSensorOffEnabled();
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setSensorOffEnabled(boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setSensorOffEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSensorOffEnabled(enable);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.secure.IPrivacyManager sDefaultImpl;
     }
     static final int TRANSACTION_isPrivacyEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -1221,6 +1375,10 @@ public interface IPrivacyManager extends android.os.IInterface
     static final int TRANSACTION_getOriginalNetworkCountryIso = (android.os.IBinder.FIRST_CALL_TRANSACTION + 29);
     static final int TRANSACTION_getOriginalNetworkOp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
     static final int TRANSACTION_getOriginalNetworkOpName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
+    static final int TRANSACTION_getSensorOffSettingsForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 32);
+    static final int TRANSACTION_setSensorOffSettingsForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 33);
+    static final int TRANSACTION_isSensorOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 34);
+    static final int TRANSACTION_setSensorOffEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 35);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.secure.IPrivacyManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -1270,4 +1428,8 @@ public interface IPrivacyManager extends android.os.IInterface
   public java.lang.String getOriginalNetworkCountryIso() throws android.os.RemoteException;
   public java.lang.String getOriginalNetworkOp(int subId) throws android.os.RemoteException;
   public java.lang.String getOriginalNetworkOpName(int subId) throws android.os.RemoteException;
+  public int getSensorOffSettingsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public void setSensorOffSettingsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, int settings) throws android.os.RemoteException;
+  public boolean isSensorOffEnabled() throws android.os.RemoteException;
+  public void setSensorOffEnabled(boolean enable) throws android.os.RemoteException;
 }

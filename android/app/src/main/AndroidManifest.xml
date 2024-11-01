@@ -280,6 +280,9 @@
         <activity
             android:name="now.fortuitous.thanos.resident.ResidentActivity"
             android:exported="false" />
+        <activity
+            android:name="now.fortuitous.thanos.privacy.SensorOffAppListActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

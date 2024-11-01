@@ -1121,6 +1121,12 @@
     <string name="launch_other_app_options_allow_listed">部分允许</string>
     <string name="launch_other_app">打开其他应用</string>
 
+    <string name="sensor_off">关闭传感器</string>
+    <string name="sensor_off_summary">设置应用启动时关闭传感器以保护隐私</string>
+    <string name="sensor_off_default">不关闭</string>
+    <string name="sensor_off_on_start">启动时关闭6秒</string>
+    <string name="sensor_off_always">始终关闭</string>
+
     <string name="start_record_allowed">允许</string>
     <string name="start_record_blocked">阻止</string>
     <string name="start_record_merged">合并</string>

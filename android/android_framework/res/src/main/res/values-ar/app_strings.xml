@@ -1194,6 +1194,12 @@
     <string name="launch_other_app_options_allow_listed">Allow listed</string>
     <string name="launch_other_app">Launch other App</string>
 
+    <string name="sensor_off">Sensor off</string>
+    <string name="sensor_off_summary">Turn off all sensor when app is in foreground</string>
+    <string name="sensor_off_default">Don\'t turn off</string>
+    <string name="sensor_off_on_start">Turn off 6 seconds</string>
+    <string name="sensor_off_always">Always turn off</string>
+
     <string name="start_record_allowed">Allowed</string>
     <string name="start_record_blocked">Blocked</string>
     <string name="start_record_merged">Merged</string>

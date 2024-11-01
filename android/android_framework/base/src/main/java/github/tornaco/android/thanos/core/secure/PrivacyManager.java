@@ -5,6 +5,7 @@ import android.telephony.SubscriptionInfo;
 
 import java.util.List;
 
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.secure.field.Fields;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -31,6 +32,12 @@ public class PrivacyManager {
     public static final int OP_NETWORK_CONTRY_ISO = 0x10;
     public static final int OP_NETWORK_OPERATOR_NAME = 0x11;
     public static final int OP_NETWORK_OPERATOR = 0x12;
+  }
+
+  public static class SensorOffSettings {
+    public static final int DEFAULT = 0;
+    public static final int ON_START = 1;
+    public static final int ALWAYS = 2;
   }
 
   private final IPrivacyManager server;
@@ -193,5 +200,25 @@ public class PrivacyManager {
   @SneakyThrows
   public String getOriginalNetworkCountryIso() {
     return server.getOriginalNetworkCountryIso();
+  }
+
+  @SneakyThrows
+  public int getSensorOffSettingsForPackage(Pkg pkg) {
+    return server.getSensorOffSettingsForPackage(pkg);
+  }
+
+  @SneakyThrows
+  public void setSensorOffSettingsForPackage(Pkg pkg, int settings) {
+    server.setSensorOffSettingsForPackage(pkg, settings);
+  }
+
+  @SneakyThrows
+  public boolean isSensorOffEnabled() {
+    return server.isSensorOffEnabled();
+  }
+
+  @SneakyThrows
+  public void setSensorOffEnabled(boolean enable) {
+    server.setSensorOffEnabled(enable);
   }
 }

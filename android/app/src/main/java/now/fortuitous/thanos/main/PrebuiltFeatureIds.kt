@@ -55,6 +55,7 @@ object PrebuiltFeatureIds {
 
     const val ID_LAUNCH_OTHER_APP_BLOCKER = 25
     const val ID_RESIDENT = 26
+    const val ID_SENSOR_OFF = 27
 
     fun Int.isValidId() = this >= ID_ONE_KEY_CLEAR
 }

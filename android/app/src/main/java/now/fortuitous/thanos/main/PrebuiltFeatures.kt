@@ -176,6 +176,12 @@ object PrebuiltFeatures {
                 titleRes = github.tornaco.android.thanos.res.R.string.module_ops_feature_title_ops_remind_list,
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_OPS_REMINDER,
                 themeColor = R.color.nav_icon_op_remind
+            ),
+            FeatureItem(
+                id = PrebuiltFeatureIds.ID_SENSOR_OFF,
+                iconRes = R.drawable.ic_nav_resident,
+                titleRes = github.tornaco.android.thanos.res.R.string.pre_title_resident,
+                themeColor = R.color.nav_icon_resident
             )
         )
     )

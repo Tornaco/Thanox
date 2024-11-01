@@ -38,7 +38,7 @@ jotp = "1.3.0"
 jsoup = "1.17.2"
 kotest-assertions = "5.8.0"
 libsu = "5.2.2"
-mmkv = "1.3.3"
+mmkv = "2.0.0"
 orbit = "6.1.1"
 androidx-test-runner = "1.5.2"
 # DO NOT UPGRADE

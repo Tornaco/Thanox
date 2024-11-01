@@ -19,6 +19,7 @@ package now.fortuitous.thanos.main
 
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.core.util.OsUtils
 import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.util.BrowserUtils
@@ -122,7 +123,7 @@ object PrebuiltFeatures {
 
     private val secure = FeatureItemGroup(
         titleRes = github.tornaco.android.thanos.res.R.string.nav_title_secure,
-        items = listOf(
+        items = listOfNotNull(
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_PRIVACY_CHEAT,
                 iconRes = R.drawable.ic_nav_priv_cheat,
@@ -177,12 +178,14 @@ object PrebuiltFeatures {
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_OPS_REMINDER,
                 themeColor = R.color.nav_icon_op_remind
             ),
-            FeatureItem(
-                id = PrebuiltFeatureIds.ID_SENSOR_OFF,
-                iconRes = R.drawable.ic_nav_sensor_off,
-                titleRes = github.tornaco.android.thanos.res.R.string.sensor_off,
-                themeColor = R.color.nav_icon_sensor_off
-            )
+            if (OsUtils.isSOrAbove()) {
+                FeatureItem(
+                    id = PrebuiltFeatureIds.ID_SENSOR_OFF,
+                    iconRes = R.drawable.ic_nav_sensor_off,
+                    titleRes = github.tornaco.android.thanos.res.R.string.sensor_off,
+                    themeColor = R.color.nav_icon_sensor_off
+                )
+            } else null
         )
     )
 

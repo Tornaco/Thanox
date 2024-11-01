@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 if (Configs.thanoxBuildIsRow == true) {
@@ -87,10 +88,6 @@ android {
         shaders = false
         viewBinding = true
         dataBinding = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     applicationVariants.all {

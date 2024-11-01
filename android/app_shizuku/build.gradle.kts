@@ -6,6 +6,7 @@ import tornaco.project.android.thanox.log
 plugins {
     alias(libs.plugins.agp.app)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -68,10 +69,6 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     applicationVariants.all {

@@ -86,8 +86,6 @@ import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 import io.reactivex.Completable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import now.fortuitous.thanos.apps.AppDetailsActivity;
 import now.fortuitous.thanos.apps.PackageSetChooserDialog;
@@ -656,25 +654,17 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                     progressDialog.show();
                     Completable.fromRunnable(() -> {
                                 File tmpFile = new File("/data/local/tmp/" + appInfo.getPkgName() + "_proxy.apk");
-                                Shell.su("cp " + apkFile.getAbsolutePath() + " " + tmpFile.getAbsolutePath()).exec();
+                                Shell.cmd("cp " + apkFile.getAbsolutePath() + " " + tmpFile.getAbsolutePath()).exec();
                                 XLog.w("apk path: " + tmpFile.getAbsolutePath());
-                                Shell.Result installRes = Shell.su("pm install " + tmpFile.getAbsolutePath()).exec();
+                                Shell.Result installRes = Shell.cmd("pm install " + tmpFile.getAbsolutePath()).exec();
                                 XLog.w("Install res: " + installRes);
-                                Shell.su("rm " + tmpFile.getAbsolutePath()).exec();
+                                Shell.cmd("rm " + tmpFile.getAbsolutePath()).exec();
                             }).subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Action() {
-                                @Override
-                                public void run() throws Exception {
-                                    progressDialog.dismiss();
-                                }
-                            }, new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable e) throws Exception {
-                                    DialogUtils.showError(requireActivity(), e);
-                                    XLog.e("onShortcutApkReady error", e);
-                                    progressDialog.dismiss();
-                                }
+                            .subscribe(() -> progressDialog.dismiss(), e -> {
+                                DialogUtils.showError(requireActivity(), e);
+                                XLog.e("onShortcutApkReady error", e);
+                                progressDialog.dismiss();
                             });
                 })
                 .setPositiveButton(github.tornaco.android.thanos.res.R.string.title_install, (dialog, which) ->

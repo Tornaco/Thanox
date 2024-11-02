@@ -115,7 +115,7 @@ fun AllNewNavScreen() {
         viewModel.loadHeaderStatus()
         viewModel.autoRefresh()
     }
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             LargeTopAppBar(
@@ -124,8 +124,8 @@ fun AllNewNavScreen() {
                 title = {
                     Row(verticalAlignment = CenterVertically) {
                         Text(
-                            stringResource(id = github.tornaco.android.thanos.res.R.string.app_name_thanox),
-                            fontWeight = FontWeight.W600
+                            text = stringResource(id = github.tornaco.android.thanos.res.R.string.app_name_thanox),
+                            fontWeight = FontWeight.W500
                         )
                         TinySpacer()
                         AppBarBadges(state = state, onInactiveClick = {
@@ -351,34 +351,42 @@ private fun FeatureGroup(
                     FeatureItem(item = item, onItemClick = onItemClick, onItemLongClick = {
                         isMenuOpen = true
                     })
-                    DropdownMenu(
-                        modifier = Modifier.fillMaxWidth(.68f),
-                        expanded = isMenuOpen,
-                        onDismissRequest = {
-                            isMenuOpen = false
-                        },
+                    MaterialTheme(
+                        shapes = MaterialTheme.shapes.copy(
+                            extraSmall = RoundedCornerShape(
+                                cardCornerSize
+                            )
+                        )
                     ) {
-                        menuItems.forEach {
+                        DropdownMenu(
+                            modifier = Modifier.fillMaxWidth(.68f),
+                            expanded = isMenuOpen,
+                            onDismissRequest = {
+                                isMenuOpen = false
+                            },
+                        ) {
+                            menuItems.forEach {
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(stringResource(id = it.first))
+                                    },
+                                    onClick = {
+                                        isMenuOpen = false
+                                        it.second(activity)
+                                    }
+                                )
+                            }
+
                             DropdownMenuItem(
                                 text = {
-                                    Text(stringResource(id = it.first))
+                                    Text(stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_create_shortcut))
                                 },
                                 onClick = {
                                     isMenuOpen = false
-                                    it.second(activity)
+                                    createShortcut(item)
                                 }
                             )
                         }
-
-                        DropdownMenuItem(
-                            text = {
-                                Text(stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_create_shortcut))
-                            },
-                            onClick = {
-                                isMenuOpen = false
-                                createShortcut(item)
-                            }
-                        )
                     }
                 }
             }

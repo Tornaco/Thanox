@@ -18,6 +18,7 @@
 package now.fortuitous.thanos.main
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import com.elvishew.xlog.XLog
 import github.tornaco.android.plugin.push.message.delegate.WechatPushDeleteMainActivity
@@ -49,14 +50,7 @@ class PrebuiltFeatureLauncher(
         val handled = context.withThanos {
             when (featureId) {
                 PrebuiltFeatureIds.ID_ONE_KEY_CLEAR -> {
-                    AppFeatureManager.withSubscriptionStatus(context) {
-                        if (it) {
-                            context.sendBroadcast(Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR))
-                            onProcessCleared()
-                        } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
-                        }
-                    }
+                    onKeyClear(context, onProcessCleared)
                 }
 
                 PrebuiltFeatureIds.ID_BACKGROUND_START -> {
@@ -227,6 +221,19 @@ class PrebuiltFeatureLauncher(
 
         if (!handled) {
             DialogUtils.showNotActivated(context)
+        }
+    }
+
+
+}
+
+fun onKeyClear(context: Context, onProcessCleared: () -> Unit) {
+    AppFeatureManager.withSubscriptionStatus(context) {
+        if (it) {
+            context.sendBroadcast(Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR))
+            onProcessCleared()
+        } else {
+            AppFeatureManager.showDonateIntroDialog(context)
         }
     }
 }

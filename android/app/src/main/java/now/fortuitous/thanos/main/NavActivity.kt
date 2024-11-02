@@ -120,7 +120,7 @@ class NavActivity : ComposeThemeActivity() {
             ShortcutInit(thisActivity()).initOnBootThanox()
         }
 
-        NavScreen()
+        AllNewNavScreen()
     }
 
     @Composable

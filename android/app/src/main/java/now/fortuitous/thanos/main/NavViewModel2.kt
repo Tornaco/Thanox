@@ -58,6 +58,7 @@ enum class ActiveStatus {
 data class FeatureItem(
     val id: Int = 0,
     @StringRes val titleRes: Int,
+    @DrawableRes val packedIconRes: Int,
     @DrawableRes val iconRes: Int,
     val requiredFeature: String? = null,
     @ColorRes val themeColor: Int,

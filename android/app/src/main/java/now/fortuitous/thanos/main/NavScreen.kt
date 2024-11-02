@@ -442,7 +442,7 @@ private fun FeatureItem(
             }
         }
         val context = LocalContext.current
-        AsyncImage(model = item.iconRes,
+        AsyncImage(model = item.packedIconRes,
             placeholder = customPainter,
             contentDescription = null,
             filterQuality = FilterQuality.High,
@@ -471,7 +471,7 @@ private fun FeatureItem(
 }
 
 @Composable
-private fun RestartDeviceConfirmationDialog(
+fun RestartDeviceConfirmationDialog(
     onRebootConfirmed: () -> Unit,
     onDismissRequest: () -> Unit,
 ) {
@@ -494,7 +494,7 @@ private fun RestartDeviceConfirmationDialog(
 
 
 @Composable
-private fun ActiveDialog(
+fun ActiveDialog(
     onDismissRequest: () -> Unit,
 ) {
     ThanoxAlertDialog(title = {
@@ -512,7 +512,7 @@ private fun ActiveDialog(
 
 
 @Composable
-private fun FrameworkErrorDialog(
+fun FrameworkErrorDialog(
     onDismissRequest: () -> Unit,
 ) {
     ThanoxAlertDialog(title = {
@@ -561,7 +561,7 @@ fun PrivacyStatementDialog(
 
 
 @Composable
-private fun FirstRunDialog(
+fun FirstRunDialog(
     onAccept: () -> Unit,
     onDeny: () -> Unit,
 ) {
@@ -611,7 +611,7 @@ private fun FirstRunDialog(
 
 
 @Composable
-private fun MultiplePatchDialog(
+fun MultiplePatchDialog(
     patchSources: List<String>,
     onDismissRequest: () -> Unit,
 ) {
@@ -635,7 +635,7 @@ private fun MultiplePatchDialog(
 
 
 @Composable
-private fun AndroidVersionNotSupportedDialog(
+fun AndroidVersionNotSupportedDialog(
     onDismissRequest: () -> Unit
 ) {
     ThanoxAlertDialog(title = {

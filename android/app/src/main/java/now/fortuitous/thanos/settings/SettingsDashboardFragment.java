@@ -17,6 +17,8 @@
 
 package now.fortuitous.thanos.settings;
 
+import static now.fortuitous.thanos.pref.AppPreference.PREF_KEY_CLASSIC_HOME;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -129,6 +131,18 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     }
 
     protected void onBindUIPreferences() {
+        SwitchPreferenceCompat classicHomeStyle = findPreference(getString(R.string.key_classic_home));
+        classicHomeStyle.setChecked(AppPreference.isFeatureNoticeAccepted(getContext(), PREF_KEY_CLASSIC_HOME));
+        classicHomeStyle.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                boolean classicHomeChecked = (boolean) newValue;
+                AppPreference.setFeatureNoticeAccepted(getContext(), PREF_KEY_CLASSIC_HOME, classicHomeChecked);
+                requireActivity().finishAffinity();
+                return true;
+            }
+        });
+
         DropDownPreference iconPref = findPreference(getString(R.string.key_app_icon_pack));
         IconPackManager iconPackManager = IconPackManager.getInstance();
         final List<IconPack> packs = iconPackManager.getAvailableIconPacks(requireContext());

@@ -6,6 +6,11 @@
         android:key="@string/key_app_ui"
         app:title="@string/pre_category_ui">
 
+        <SwitchPreferenceCompat
+            app:key="@string/key_classic_home"
+            app:persistent="false"
+            app:title="Classic home style" />
+
         <DropDownPreference
             android:entries="@array/themes_entry"
             android:entryValues="@array/themes_value"

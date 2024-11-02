@@ -130,7 +130,7 @@ class NavActivity : ComposeThemeActivity() {
 
         val context = LocalContext.current
         val isClassicHome = remember {
-            AppPreference.isFeatureNoticeAccepted(context, AppPreference.PREF_KEY_CLASSIC_HOME)
+            AppPreference.useClassicHome(context)
         }
         if (isClassicHome) {
             NavScreen()

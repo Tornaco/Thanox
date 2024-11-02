@@ -29,7 +29,7 @@ import github.tornaco.android.thanos.core.pm.PackageSet;
 import now.fortuitous.thanos.main.PrebuiltFeatureIds;
 
 public class AppPreference {
-    public static final String PREF_KEY_CLASSIC_HOME = "PREF_KEY_CLASSIC_HOME";
+    private static final String PREF_KEY_CLASSIC_HOME = "PREF_KEY_CLASSIC_HOME_STYLE";
 
     private static final String PREF_KEY_FIRST_RUN = "PREF_KEY_FIRST_RUN";
     private static final String PREF_KEY_ON_BOARDING = "PREF_KEY_ON_BOARDING";
@@ -72,6 +72,18 @@ public class AppPreference {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(feature, first)
+                .apply();
+    }
+
+    public static boolean useClassicHome(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(PREF_KEY_CLASSIC_HOME, true);
+    }
+
+    public static void setUseClassicHome(Context context, boolean use) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(PREF_KEY_CLASSIC_HOME, use)
                 .apply();
     }
 

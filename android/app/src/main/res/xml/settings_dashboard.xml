@@ -10,15 +10,6 @@
             app:key="@string/key_classic_home"
             app:persistent="false"
             app:title="Classic home style" />
-
-        <DropDownPreference
-            android:entries="@array/themes_entry"
-            android:entryValues="@array/themes_value"
-            app:key="@string/key_app_theme"
-            app:persistent="false"
-            app:title="@string/pre_title_app_theme"
-            app:useSimpleSummaryProvider="true" />
-
         <DropDownPreference
             app:key="@string/key_app_icon_pack"
             app:persistent="false"

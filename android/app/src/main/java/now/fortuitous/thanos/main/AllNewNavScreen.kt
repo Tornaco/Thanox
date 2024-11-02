@@ -293,9 +293,6 @@ private fun NavContent(
             .verticalScroll(rememberScrollState())
     ) {
         AllNewNavHeaderContent(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp),
             headerInfo = state.statusHeaderInfo
         ) {
             onHeaderClick()
@@ -418,7 +415,7 @@ private fun FeatureItem(
                 color = itemColor,
             ) {
                 Icon(
-                    modifier = Modifier.size(8.dp),
+                    modifier = Modifier.size(12.dp),
                     painter = painterResource(item.iconRes),
                     tint = Color.White,
                     contentDescription = null

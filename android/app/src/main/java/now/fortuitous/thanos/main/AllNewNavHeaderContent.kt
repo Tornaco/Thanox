@@ -17,37 +17,27 @@
 
 package now.fortuitous.thanos.main
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
@@ -55,128 +45,118 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
-import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextContainer
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.CircularProgressBar
-import github.tornaco.android.thanos.module.compose.common.widget.ExpandableState
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.productSansBoldTypography
-import github.tornaco.android.thanos.support.NavHeaderContainer
-import github.tornaco.android.thanos.support.clickableWithRippleBorderless
-import kotlinx.coroutines.delay
 import now.fortuitous.thanos.dashboard.AppCpuUsage
-import now.fortuitous.thanos.dashboard.MemType
-import now.fortuitous.thanos.dashboard.MemUsage
 import now.fortuitous.thanos.dashboard.StatusHeaderInfo
+
+
+@Composable
+fun primaryProgressBarColor() = MaterialTheme.colorScheme.primary
+
+@Composable
+fun primaryProgressTrackColor() = MaterialTheme.colorScheme.secondaryContainer
+
+@Composable
+fun secondaryProgressBarColor() = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
+
+@Composable
+fun secondaryProgressTrackColor() = MaterialTheme.colorScheme.secondaryContainer
 
 @Composable
 fun AllNewNavHeaderContent(
-    modifier: Modifier = Modifier,
     headerInfo: StatusHeaderInfo,
     onHeaderClick: () -> Unit
 ) {
-    val expandState = remember { mutableStateOf(ExpandableState.Collapsed) }
-    NavHeaderContainer(expandState = expandState,
-        mainContent = {
-            MainNavHeaderContent(
-                modifier = modifier,
-                headerInfo = headerInfo,
-                onHeaderClick = onHeaderClick
-            )
-        },
-        expandContent = {
-            Text(text = "Coming soon~")
-        })
+    StandardSpacer()
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+        HeaderContentContainer(
+            background = Color(0xffFF5145).copy(alpha = 0.06f),
+            onClick = onHeaderClick
+        ) {
+            CpuProgressBar(headerInfo)
+        }
+
+        HeaderContentContainer(
+            background = Color(0xff00BBDF).copy(alpha = 0.06f),
+            modifier = Modifier.weight(1f, fill = true),
+            onClick = onHeaderClick
+        ) {
+            if (headerInfo.swap.isEnabled) {
+                FatMemProgressBar(headerInfo)
+            } else {
+                MemProgressBar(headerInfo)
+            }
+        }
+    }
+    StandardSpacer()
+    RunningApps(headerInfo, onHeaderClick)
 }
 
 @Composable
-private fun MainNavHeaderContent(
-    modifier: Modifier = Modifier,
-    headerInfo: StatusHeaderInfo,
-    onHeaderClick: () -> Unit,
-) {
-    val cardBgColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.appCardBackground)
-    val primaryContainerColor =
-        getColorAttribute(com.google.android.material.R.attr.colorPrimaryContainer)
-    val onSurfaceColor = getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
-
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(cardCornerSize))
-            .background(color = Color(cardBgColor))
-            .clickableWithRippleBorderless {
-                onHeaderClick()
-            }
-            .padding(16.dp)
-
+private fun RunningApps(headerInfo: StatusHeaderInfo, onClick: () -> Unit) {
+    HeaderContentContainer(
+        contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
+        background = Color(0xff35AA53).copy(alpha = 0.06f),
+        onClick = onClick
     ) {
-        Column {
-            Row {
-                FilledTonalButton(modifier = Modifier.animateContentSize(),
-                    colors = ButtonDefaults.filledTonalButtonColors(
-                        containerColor = Color(
-                            primaryContainerColor
-                        )
-                    ),
-                    onClick = {
-                        onHeaderClick()
-                    }) {
-                    AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
-                        Text(
-                            text = it,
-                            style = MaterialTheme.typography.titleLarge,
-                            color = Color(onSurfaceColor),
-                            fontWeight = W500
-                        )
-                    }
-                    Text(
-                        text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontSize = 18.sp,
-                            fontWeight = W700
-                        ),
-                        color = Color(onSurfaceColor)
-                    )
-                }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                painter = painterResource(github.tornaco.android.thanos.R.drawable.ic_apps_2_line),
+                tint = LocalContentColor.current,
+                contentDescription = null
+            )
+            AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = W500
+                )
             }
-
-            StandardSpacer()
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = if (headerInfo.swap.isEnabled) 0.dp else 12.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                CpuProgressBar(headerInfo, onSurfaceColor)
-                if (headerInfo.swap.isEnabled) {
-                    FatMemProgressBar(headerInfo, onSurfaceColor)
-                } else {
-                    MemProgressBar(headerInfo, onSurfaceColor)
-                }
-            }
+            Text(
+                text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontSize = 18.sp,
+                    fontWeight = W700
+                ),
+                color = MaterialTheme.colorScheme.onSurface,
+            )
         }
     }
 }
 
 @Composable
+private fun HeaderContentContainer(
+    background: Color,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(16.dp),
+    content: @Composable () -> Unit
+) {
+    Box(
+        modifier = modifier
+            .padding(horizontal = 16.dp)
+            .clip(RoundedCornerShape(cardCornerSize))
+            .background(background)
+            .clickable { onClick() }
+            .padding(contentPadding),
+    ) {
+        content()
+    }
+}
+
+
+@Composable
 private fun CpuProgressBar(
     headerInfo: StatusHeaderInfo,
-    onSurfaceColor: Int,
 ) {
-    val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
-    val progressTrackColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
-
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
         Box(
             modifier = Modifier.Companion.align(Alignment.CenterVertically),
@@ -189,9 +169,9 @@ private fun CpuProgressBar(
                     .size(mainProgressSize),
                 progress = headerInfo.cpu.totalPercent.toFloat(),
                 progressMax = 100f,
-                progressBarColor = Color(progressColor),
+                progressBarColor = primaryProgressBarColor(),
                 progressBarWidth = progressBarWidth,
-                backgroundProgressBarColor = Color(progressTrackColor),
+                backgroundProgressBarColor = primaryProgressTrackColor(),
                 backgroundProgressBarWidth = progressBarWidth,
                 roundBorder = true,
                 startAngle = 0f,
@@ -203,14 +183,14 @@ private fun CpuProgressBar(
                         Text(
                             text = "CPU",
                             style = productSansBoldTypography().caption,
-                            color = Color(onSurfaceColor)
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                         Text(
                             modifier = Modifier,
                             textAlign = TextAlign.Center,
                             text = "${headerInfo.cpu.totalPercent}%",
                             style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                            color = Color(onSurfaceColor)
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
@@ -228,56 +208,6 @@ private fun CpuProgressBar(
     }
 }
 
-@Composable
-private fun MemProgressBar(
-    headerInfo: StatusHeaderInfo,
-    onSurfaceColor: Int,
-) {
-    val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
-    val progressTrackColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
-
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
-        Box(
-            modifier = Modifier.Companion.align(Alignment.CenterVertically),
-            contentAlignment = Alignment.Center
-        ) {
-            val progressBarWidth = 16.dp
-            val mainProgressSize = 90.dp
-            CircularProgressBar(
-                modifier = Modifier
-                    .size(mainProgressSize),
-                progress = headerInfo.memory.memUsagePercent.toFloat(),
-                progressMax = 100f,
-                progressBarColor = Color(progressColor),
-                progressBarWidth = progressBarWidth,
-                backgroundProgressBarColor = Color(progressTrackColor),
-                backgroundProgressBarWidth = progressBarWidth,
-                roundBorder = true,
-                startAngle = 0f,
-                centerContent = {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Mem",
-                            style = productSansBoldTypography().caption,
-                            color = Color(onSurfaceColor)
-                        )
-                        Text(
-                            modifier = Modifier,
-                            textAlign = TextAlign.Center,
-                            text = "${headerInfo.memory.memUsagePercent}%",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                            color = Color(onSurfaceColor)
-                        )
-                    }
-                }
-            )
-        }
-    }
-}
 
 @Composable
 private fun AppCpuUsage(usage: AppCpuUsage) {
@@ -294,16 +224,58 @@ private fun AppCpuUsage(usage: AppCpuUsage) {
     }
 }
 
+
+@Composable
+private fun MemProgressBar(
+    headerInfo: StatusHeaderInfo,
+) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
+        Box(
+            modifier = Modifier.Companion.align(Alignment.CenterVertically),
+            contentAlignment = Alignment.Center
+        ) {
+            val progressBarWidth = 16.dp
+            val mainProgressSize = 90.dp
+            CircularProgressBar(
+                modifier = Modifier
+                    .size(mainProgressSize),
+                progress = headerInfo.memory.memUsagePercent.toFloat(),
+                progressMax = 100f,
+                progressBarColor = primaryProgressBarColor(),
+                progressBarWidth = progressBarWidth,
+                backgroundProgressBarColor = primaryProgressTrackColor(),
+                backgroundProgressBarWidth = progressBarWidth,
+                roundBorder = true,
+                startAngle = 0f,
+                centerContent = {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Mem",
+                            style = productSansBoldTypography().caption,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Text(
+                            modifier = Modifier,
+                            textAlign = TextAlign.Center,
+                            text = "${headerInfo.memory.memUsagePercent}%",
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+            )
+        }
+    }
+}
+
+
 @Composable
 private fun FatMemProgressBar(
     headerInfo: StatusHeaderInfo,
-    onSurfaceColor: Int,
 ) {
-    val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
-    val secondaryProgressColor = getColorAttribute(com.google.android.material.R.attr.colorTertiary)
-    val progressTrackColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
-
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
         Box(
             modifier = Modifier.Companion.align(Alignment.CenterVertically),
@@ -318,9 +290,9 @@ private fun FatMemProgressBar(
                     .size(mainProgressSize),
                 progress = headerInfo.memory.memUsagePercent.toFloat(),
                 progressMax = 100f,
-                progressBarColor = Color(progressColor),
+                progressBarColor = primaryProgressBarColor(),
                 progressBarWidth = progressBarWidth,
-                backgroundProgressBarColor = Color(progressTrackColor),
+                backgroundProgressBarColor = primaryProgressTrackColor(),
                 backgroundProgressBarWidth = progressBarWidth,
                 roundBorder = true,
                 startAngle = 0f,
@@ -331,9 +303,9 @@ private fun FatMemProgressBar(
                     .size(secondProgressSize),
                 progress = headerInfo.swap.memUsagePercent.toFloat(),
                 progressMax = 100f,
-                progressBarColor = Color(secondaryProgressColor),
+                progressBarColor = secondaryProgressBarColor(),
                 progressBarWidth = progressBarWidth,
-                backgroundProgressBarColor = Color(progressTrackColor),
+                backgroundProgressBarColor = secondaryProgressTrackColor(),
                 backgroundProgressBarWidth = progressBarWidth,
                 roundBorder = true,
                 startAngle = 0f,
@@ -341,92 +313,16 @@ private fun FatMemProgressBar(
                     Text(
                         text = "Mem",
                         style = productSansBoldTypography().caption.copy(fontSize = 8.sp),
-                        color = Color(onSurfaceColor)
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                 }
             )
         }
         MediumSpacer()
         Column {
-            MemStats(headerInfo.memory, Color(progressColor))
+            MemStats(headerInfo.memory, primaryProgressBarColor())
             MediumSpacer()
-            MemStats(headerInfo.swap, Color(secondaryProgressColor))
+            MemStats(headerInfo.swap, secondaryProgressBarColor())
         }
     }
-}
-
-@Composable
-private fun MemStats(
-    memUsage: MemUsage,
-    color: Color,
-) {
-    Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.Start) {
-        Box(
-            // For alignment.
-            modifier = Modifier
-                .offset(y = 2.dp)
-                .size(10.dp)
-                .clip(CircleShape)
-                .background(color)
-        )
-        TinySpacer()
-        Column(modifier = Modifier) {
-            val onSurfaceColor =
-                getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
-            Text(
-                modifier = Modifier,
-                textAlign = TextAlign.Center,
-                text = "${if (memUsage.memType == MemType.MEMORY) "Mem" else "Swap"} ${memUsage.memUsagePercent}%",
-                style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
-                color = Color(onSurfaceColor)
-            )
-            SmallSpacer()
-
-            val extraDesc = if (memUsage.isEnabled) {
-                stringResource(
-                    id = github.tornaco.android.thanos.res.R.string.boost_status_available,
-                    memUsage.memAvailableSizeString
-                )
-            } else {
-                stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_not_enabled)
-            }
-            Text(
-                modifier = Modifier,
-                textAlign = TextAlign.Center,
-                text = "($extraDesc)",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                color = Color(onSurfaceColor)
-            )
-        }
-    }
-}
-
-@Composable
-private fun AnimatedLinearProgressIndicator(
-    memUsage: MemUsage,
-    progressColor: Int,
-    progressTrackColor: Int,
-) {
-    var startAnim by remember {
-        mutableStateOf(false)
-    }
-    val animatePercent by animateFloatAsState(
-        targetValue = if (startAnim) 1f else 0f,
-        animationSpec = spring(stiffness = Spring.StiffnessLow)
-    )
-
-    LaunchedEffect(memUsage) {
-        delay(240)
-        startAnim = true
-    }
-    LinearProgressIndicator(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(end = 48.dp)
-            .height(8.dp)
-            .clip(RoundedCornerShape(6.dp)),
-        color = Color(progressColor),
-        trackColor = Color(progressTrackColor),
-        progress = memUsage.memUsagePercent.toFloat() / 100f * animatePercent
-    )
 }

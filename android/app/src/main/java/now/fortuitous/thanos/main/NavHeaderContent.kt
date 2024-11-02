@@ -356,7 +356,7 @@ private fun FatMemProgressBar(
 }
 
 @Composable
-private fun MemStats(
+fun MemStats(
     memUsage: MemUsage,
     color: Color,
 ) {

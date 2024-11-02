@@ -19,9 +19,7 @@ abstract class ComposeThemeActivity : ThemeActivity() {
         // insets
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-
-            val darkTheme =
-                if (appTheme.shouldApplyDynamic) isSystemInDarkTheme() else !appTheme.isLight
+            val darkTheme = isSystemInDarkTheme()
             ThanoxTheme(darkTheme) {
                 // Update the system bars to be translucent
                 val systemUiController = rememberSystemUiController()

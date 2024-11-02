@@ -10,10 +10,6 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import util.Singleton;
 
 public class AppThemePreferences extends Observable {
-
-    private static final String PREF_KEY_APP_THEME = "PREF_KEY_APP_THEME";
-    private static final String PREF_KEY_APP_THEME_PREFER_L = "PREF_KEY_APP_THEME_PREFER_L";
-    private static final String PREF_KEY_APP_THEME_PREFER_D = "PREF_KEY_APP_THEME_PREFER_D";
     private static final String PREF_KEY_APP_ICON_PACK = "PREF_KEY_APP_ICON_PACK";
     private static final String PREF_KEY_USE_ROUND_ICON = "github.tornaco.android.thanos.ui.used_round_icon";
 
@@ -29,58 +25,6 @@ public class AppThemePreferences extends Observable {
 
     public static AppThemePreferences getInstance() {
         return sPref.get();
-    }
-
-    public Theme getTheme(@NonNull Context context) {
-        ThanosManager thanos = ThanosManager.from(context);
-        if (!thanos.isServiceInstalled()) return defaultThemeForPlatform(true);
-        try {
-            return Theme.fromStringOrElse(thanos.getPrefManager().getString(PREF_KEY_APP_THEME, null), defaultThemeForPlatform(true));
-        } catch (Throwable e) {
-            return defaultThemeForPlatform(true);
-        }
-    }
-
-    private static Theme defaultThemeForPlatform(boolean isLight) {
-        return isLight ? Theme.Light : Theme.Dark;
-    }
-
-    public void setTheme(@NonNull Context context, @NonNull Theme theme) {
-        ThanosManager thanos = ThanosManager.from(context);
-        if (!thanos.isServiceInstalled()) return;
-        thanos.getPrefManager().putString(PREF_KEY_APP_THEME, theme.name());
-        setChanged();
-        notifyObservers();
-    }
-
-    public void setPreferLDTheme(@NonNull Context context, @NonNull Theme theme) {
-        ThanosManager thanos = ThanosManager.from(context);
-        if (!thanos.isServiceInstalled()) return;
-        if (theme.isLight) {
-            thanos.getPrefManager().putString(PREF_KEY_APP_THEME_PREFER_L, theme.name());
-        } else {
-            thanos.getPrefManager().putString(PREF_KEY_APP_THEME_PREFER_D, theme.name());
-        }
-    }
-
-    public Theme getPreferDarkTheme(@NonNull Context context) {
-        ThanosManager thanos = ThanosManager.from(context);
-        if (!thanos.isServiceInstalled()) return Theme.Dark;
-        try {
-            return Theme.fromStringOrElse(thanos.getPrefManager().getString(PREF_KEY_APP_THEME_PREFER_D, null), defaultThemeForPlatform(false));
-        } catch (Throwable e) {
-            return Theme.Dark;
-        }
-    }
-
-    public Theme getPreferLightTheme(@NonNull Context context) {
-        ThanosManager thanos = ThanosManager.from(context);
-        if (!thanos.isServiceInstalled()) return Theme.Light;
-        try {
-            return Theme.fromStringOrElse(thanos.getPrefManager().getString(PREF_KEY_APP_THEME_PREFER_L, null), defaultThemeForPlatform(true));
-        } catch (Throwable e) {
-            return Theme.Light;
-        }
     }
 
     public String getIconPack(@NonNull Context context, String defaultValue) {

@@ -107,8 +107,7 @@ class SmartFreezeActivity : ThemeActivity() {
 
         binding.bottomNavigation.selectTab(binding.bottomNavigation.getTabAt(0))
         binding.composeSort.setContent {
-            val darkTheme =
-                if (appTheme.shouldApplyDynamic) isSystemInDarkTheme() else !appTheme.isLight
+            val darkTheme = isSystemInDarkTheme()
             ThanoxTheme(darkTheme) {
                 val context = LocalContext.current
 

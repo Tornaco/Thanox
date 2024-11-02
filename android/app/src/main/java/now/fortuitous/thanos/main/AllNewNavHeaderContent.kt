@@ -172,16 +172,17 @@ private fun HeaderContentContainer(
     background: Color,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(16.dp),
+    contentPadding: PaddingValues = PaddingValues(12.dp),
     content: @Composable () -> Unit
 ) {
     Box(
         modifier = modifier
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 12.dp)
             .clip(RoundedCornerShape(cardCornerSize))
             .background(background)
             .clickable { onClick() }
             .padding(contentPadding),
+        contentAlignment = Alignment.Center
     ) {
         content()
     }
@@ -192,54 +193,42 @@ private fun HeaderContentContainer(
 private fun CpuProgressBar(
     headerInfo: StatusHeaderInfo,
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
-        Box(
-            modifier = Modifier.Companion.align(Alignment.CenterVertically),
-            contentAlignment = Alignment.Center
-        ) {
-            val progressBarWidth = 14.dp
-            val mainProgressSize = 80.dp
-            CircularProgressBar(
-                modifier = Modifier
-                    .size(mainProgressSize),
-                progress = headerInfo.cpu.totalPercent.toFloat(),
-                progressMax = 100f,
-                progressBarColor = primaryProgressBarColor(),
-                progressBarWidth = progressBarWidth,
-                backgroundProgressBarColor = primaryProgressTrackColor(),
-                backgroundProgressBarWidth = progressBarWidth,
-                roundBorder = true,
-                startAngle = 0f,
-                centerContent = {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "CPU",
-                            style = productSansBoldTypography().caption,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                        Text(
-                            modifier = Modifier,
-                            textAlign = TextAlign.Center,
-                            text = "${headerInfo.cpu.totalPercent}%",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                    }
+    Box(
+        contentAlignment = Alignment.Center
+    ) {
+        val progressBarWidth = 10.5.dp
+        val mainProgressSize = 68.dp
+        CircularProgressBar(
+            modifier = Modifier
+                .size(mainProgressSize),
+            progress = headerInfo.cpu.totalPercent.toFloat(),
+            progressMax = 100f,
+            progressBarColor = primaryProgressBarColor(),
+            progressBarWidth = progressBarWidth,
+            backgroundProgressBarColor = primaryProgressTrackColor(),
+            backgroundProgressBarWidth = progressBarWidth,
+            roundBorder = true,
+            startAngle = 0f,
+            centerContent = {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "CPU",
+                        style = productSansBoldTypography().caption,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        modifier = Modifier,
+                        textAlign = TextAlign.Center,
+                        text = "${headerInfo.cpu.totalPercent}%",
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
                 }
-            )
-        }
-        MediumSpacer()
-        Column(
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            headerInfo.cpu.topNPkgs.forEach {
-                AppCpuUsage(it)
             }
-        }
+        )
     }
 }
 
@@ -269,8 +258,8 @@ private fun MemProgressBar(
             modifier = Modifier.Companion.align(Alignment.CenterVertically),
             contentAlignment = Alignment.Center
         ) {
-            val progressBarWidth = 14.dp
-            val mainProgressSize = 80.dp
+            val progressBarWidth = 10.5.dp
+            val mainProgressSize = 68.dp
             CircularProgressBar(
                 modifier = Modifier
                     .size(mainProgressSize),
@@ -289,7 +278,9 @@ private fun MemProgressBar(
                     ) {
                         Text(
                             text = "Mem",
-                            style = productSansBoldTypography().caption,
+                            style = productSansBoldTypography().caption.copy(
+                                fontSize = 9.sp
+                            ),
                             color = MaterialTheme.colorScheme.onSurface
                         )
                         Text(
@@ -316,8 +307,8 @@ private fun FatMemProgressBar(
             modifier = Modifier.Companion.align(Alignment.CenterVertically),
             contentAlignment = Alignment.Center
         ) {
-            val progressBarWidth = 12.dp
-            val mainProgressSize = 80.dp
+            val progressBarWidth = 10.5.dp
+            val mainProgressSize = 68.dp
             val progressBarPadding = 4.dp
             val secondProgressSize = mainProgressSize - (2 * progressBarWidth) - progressBarPadding
             CircularProgressBar(
@@ -345,11 +336,6 @@ private fun FatMemProgressBar(
                 roundBorder = true,
                 startAngle = 0f,
                 centerContent = {
-                    Text(
-                        text = "Mem",
-                        style = productSansBoldTypography().caption.copy(fontSize = 8.sp),
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
                 }
             )
         }

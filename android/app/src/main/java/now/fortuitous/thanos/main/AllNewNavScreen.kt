@@ -86,7 +86,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
 import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
-import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 
 @Composable
@@ -328,14 +327,13 @@ private fun FeatureGroup(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 20.dp)
-            .padding(horizontal = 8.dp)
     ) {
         Text(
             text = stringResource(id = group.titleRes),
             fontSize = 14.sp,
             fontWeight = FontWeight.W500,
             color = themedTextColor(MaterialTheme.colorScheme.primary),
-            modifier = Modifier.padding(start = 8.dp)
+            modifier = Modifier.padding(start = 12.dp)
         )
 
         FlowRow(
@@ -413,7 +411,7 @@ private fun FeatureItem(
                 }, onClick = {
                     onItemClick(item)
                 })
-            .padding(vertical = 8.dp, horizontal = 14.dp),
+            .padding(vertical = 8.dp, horizontal = 10.dp),
     ) {
         Row(verticalAlignment = CenterVertically) {
             ColoredIcon(
@@ -429,16 +427,15 @@ private fun FeatureItem(
                     contentDescription = null
                 )
             }
-
-            MediumSpacer()
+            TinySpacer()
             AutoResizeText(
                 modifier = Modifier,
                 text = stringResource(id = item.titleRes),
                 textAlign = TextAlign.Center,
                 maxLines = 3,
                 fontSizeRange = FontSizeRange(
-                    min = 11.sp,
-                    max = 12.sp,
+                    min = 9.5.sp,
+                    max = 11.5.sp,
                 ),
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.titleMedium.copy(

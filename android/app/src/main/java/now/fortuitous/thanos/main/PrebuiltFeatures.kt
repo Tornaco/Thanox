@@ -191,7 +191,7 @@ object PrebuiltFeatures {
 
     private val ext = FeatureItemGroup(
         titleRes = github.tornaco.android.thanos.res.R.string.nav_title_exp,
-        items = listOf(
+        items = listOfNotNull(
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_TRAMPOLINE,
                 iconRes = R.drawable.ic_nav_activity_replacement,
@@ -270,12 +270,14 @@ object PrebuiltFeatures {
                 requiredFeature = BuildProp.THANOX_FEATURE_IZ,
                 themeColor = R.color.nav_icon_app_clone
             ),
-            FeatureItem(
-                id = PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER,
-                iconRes = R.drawable.ic_nav_launch_other_app,
-                titleRes = github.tornaco.android.thanos.res.R.string.launch_other_app,
-                themeColor = R.color.nav_icon_launch_other_app
-            ),
+            if (OsUtils.isROrAbove()) {
+                FeatureItem(
+                    id = PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER,
+                    iconRes = R.drawable.ic_nav_launch_other_app,
+                    titleRes = github.tornaco.android.thanos.res.R.string.launch_other_app,
+                    themeColor = R.color.nav_icon_launch_other_app
+                )
+            } else null,
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_RESIDENT,
                 iconRes = R.drawable.ic_nav_resident,

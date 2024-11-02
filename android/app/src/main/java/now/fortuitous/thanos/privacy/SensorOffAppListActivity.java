@@ -273,7 +273,7 @@ public class SensorOffAppListActivity extends CommonAppListFilterActivity {
                     .setPositiveButton(android.R.string.ok, (dialog, which) -> selectAll(PrivacyManager.SensorOffSettings.ON_START)).show();
             return true;
         }
-        if (R.id.action_select_all_allow == item.getItemId()) {
+        if (R.id.action_select_all_always == item.getItemId()) {
             new MaterialAlertDialogBuilder(thisActivity())
                     .setTitle(github.tornaco.android.thanos.res.R.string.sensor_off_always)
                     .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)

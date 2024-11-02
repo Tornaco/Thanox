@@ -1,5 +1,6 @@
 <!-- res/layout/custom_title_layout.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -25,10 +26,11 @@
         tools:src="@mipmap/ic_launcher_round" />
 
     <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginHorizontal="8dp"
-        android:src="@drawable/ic_remix_arrow_right_line" />
+        android:src="@drawable/ic_remix_arrow_right_line"
+        app:tint="@color/md_grey_600" />
 
     <ImageView
         android:id="@+id/rightIcon"

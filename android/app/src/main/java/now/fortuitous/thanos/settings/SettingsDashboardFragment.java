@@ -130,6 +130,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
 
     protected void onBindUIPreferences() {
         SwitchPreferenceCompat classicHomeStyle = findPreference(getString(R.string.key_classic_home));
+        classicHomeStyle.setVisible(BuildProp.THANOS_BUILD_DEBUG);
         classicHomeStyle.setChecked(AppPreference.useClassicHome(getContext()));
         classicHomeStyle.setOnPreferenceChangeListener((preference, newValue) -> {
             boolean classicHomeChecked = (boolean) newValue;

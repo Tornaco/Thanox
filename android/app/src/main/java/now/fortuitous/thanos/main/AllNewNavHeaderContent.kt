@@ -37,11 +37,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight.Companion.W400
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
+import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,7 +53,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.CircularProgre
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.productSansBoldTypography
-import now.fortuitous.thanos.apps.AppsManageActivity
 import now.fortuitous.thanos.dashboard.AppCpuUsage
 import now.fortuitous.thanos.dashboard.StatusHeaderInfo
 
@@ -103,22 +101,22 @@ fun AllNewNavHeaderContent(
 
 @Composable
 private fun RunningApps(headerInfo: StatusHeaderInfo, onClick: () -> Unit) {
-    val context = LocalContext.current
-
     HeaderContentContainer(
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp),
+        contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp),
         background = Color(0xff35AA53).copy(alpha = 0.06f),
         onClick = onClick
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                painter = painterResource(github.tornaco.android.thanos.R.drawable.ic_apps_2_line),
+                tint = LocalContentColor.current,
+                contentDescription = null
+            )
             AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
                 Text(
                     text = it,
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontSize = 22.sp,
-                        fontWeight = W400,
-                        color = themedTextColor(MaterialTheme.colorScheme.primary),
-                    ),
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
                     fontWeight = W500
                 )
             }
@@ -126,43 +124,10 @@ private fun RunningApps(headerInfo: StatusHeaderInfo, onClick: () -> Unit) {
                 text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontSize = 18.sp,
-                    fontWeight = W400
+                    fontWeight = W700
                 ),
                 color = MaterialTheme.colorScheme.onSurface,
             )
-
-            StandardSpacer()
-            ColoredIcon(
-                size = 32.dp,
-                padding = 0.dp,
-                onClick = {
-                    AppsManageActivity.start(context)
-                }
-            ) {
-                Icon(
-                    painter = painterResource(github.tornaco.android.thanos.R.drawable.ic_apps_2_line),
-                    tint = LocalContentColor.current,
-                    modifier = Modifier.size(16.dp),
-                    contentDescription = null
-                )
-            }
-
-            StandardSpacer()
-            ColoredIcon(
-                size = 32.dp,
-                padding = 0.dp,
-                onClick = {
-                    onKeyClear(context) {}
-
-                }
-            ) {
-                Icon(
-                    painter = painterResource(github.tornaco.android.thanos.R.drawable.ic_rocket_line),
-                    tint = LocalContentColor.current,
-                    modifier = Modifier.size(16.dp),
-                    contentDescription = null
-                )
-            }
         }
     }
 }
@@ -197,8 +162,8 @@ private fun CpuProgressBar(
             modifier = Modifier.Companion.align(Alignment.CenterVertically),
             contentAlignment = Alignment.Center
         ) {
-            val progressBarWidth = 14.dp
-            val mainProgressSize = 80.dp
+            val progressBarWidth = 16.dp
+            val mainProgressSize = 90.dp
             CircularProgressBar(
                 modifier = Modifier
                     .size(mainProgressSize),
@@ -269,8 +234,8 @@ private fun MemProgressBar(
             modifier = Modifier.Companion.align(Alignment.CenterVertically),
             contentAlignment = Alignment.Center
         ) {
-            val progressBarWidth = 14.dp
-            val mainProgressSize = 80.dp
+            val progressBarWidth = 16.dp
+            val mainProgressSize = 90.dp
             CircularProgressBar(
                 modifier = Modifier
                     .size(mainProgressSize),
@@ -317,7 +282,7 @@ private fun FatMemProgressBar(
             contentAlignment = Alignment.Center
         ) {
             val progressBarWidth = 12.dp
-            val mainProgressSize = 80.dp
+            val mainProgressSize = 90.dp
             val progressBarPadding = 4.dp
             val secondProgressSize = mainProgressSize - (2 * progressBarWidth) - progressBarPadding
             CircularProgressBar(

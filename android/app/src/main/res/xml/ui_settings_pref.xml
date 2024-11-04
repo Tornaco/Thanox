@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory android:key="@string/key_app_ui">
+
+        <DropDownPreference
+            android:entries="@array/themes_entry"
+            android:entryValues="@array/themes_value"
+            app:key="@string/key_app_theme"
+            app:persistent="false"
+            app:title="@string/pre_title_app_theme"
+            app:useSimpleSummaryProvider="true" />
+
         <DropDownPreference
             app:key="@string/key_app_icon_pack"
             app:persistent="false"
@@ -14,8 +23,7 @@
             app:title="@string/pre_title_app_icon_crop_to_circle" />
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="@string/key_app_list_item"
+    <PreferenceCategory android:key="@string/key_app_list_item"
         app:title="@string/pre_title_app_list_item">
         <SwitchPreferenceCompat
             android:persistent="false"

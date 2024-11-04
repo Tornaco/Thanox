@@ -72,6 +72,7 @@ import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.main.NavActivityPluginKt;
 import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
+import github.tornaco.android.thanos.theme.Theme;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.android.thanos.util.GlideApp;
@@ -129,6 +130,19 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     }
 
     protected void onBindUIPreferences() {
+        ThanosManager thanos = ThanosManager.from(requireContext());
+
+        // Theme.
+        Theme theme = AppThemePreferences.getInstance().getTheme(this.requireContext());
+        DropDownPreference themePref = findPreference(getString(R.string.key_app_theme));
+        Objects.requireNonNull(themePref).setValue(theme.name());
+        themePref.setOnPreferenceChangeListener((preference, newValue) -> {
+            Theme selectedTheme = Theme.fromStringOrElse(String.valueOf(newValue), Theme.Light);
+            AppThemePreferences.getInstance().setTheme(requireContext(), selectedTheme);
+            AppThemePreferences.getInstance().setPreferLDTheme(requireContext(), selectedTheme);
+            return true;
+        });
+
         DropDownPreference iconPref = findPreference(getString(R.string.key_app_icon_pack));
         IconPackManager iconPackManager = IconPackManager.getInstance();
         final List<IconPack> packs = iconPackManager.getAvailableIconPacks(requireContext());

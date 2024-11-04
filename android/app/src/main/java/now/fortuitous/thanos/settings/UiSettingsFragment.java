@@ -24,6 +24,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
 import github.tornaco.android.thanos.R;
@@ -31,6 +32,7 @@ import github.tornaco.android.thanos.common.CommonPreferences;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
+import github.tornaco.android.thanos.theme.Theme;
 import github.tornaco.android.thanos.util.GlideApp;
 import github.tornaco.android.thanos.util.iconpack.IconPack;
 import github.tornaco.android.thanos.util.iconpack.IconPackManager;
@@ -49,6 +51,18 @@ public class UiSettingsFragment extends BasePreferenceFragmentCompat {
     protected void onBindPreferences() {
         super.onBindPreferences();
         ThanosManager thanos = ThanosManager.from(getContext());
+
+        // Theme.
+        Theme theme = AppThemePreferences.getInstance().getTheme(Objects.requireNonNull(this.getContext()));
+        DropDownPreference themePref = findPreference(getString(R.string.key_app_theme));
+        Objects.requireNonNull(themePref).setValue(theme.name());
+        themePref.setOnPreferenceChangeListener((preference, newValue) -> {
+            Theme selectedTheme = Theme.fromStringOrElse(String.valueOf(newValue), Theme.Light);
+            AppThemePreferences.getInstance().setTheme(Objects.requireNonNull(getContext()), selectedTheme);
+            AppThemePreferences.getInstance().setPreferLDTheme(Objects.requireNonNull(getContext()), selectedTheme);
+            return true;
+        });
+
         DropDownPreference iconPref = findPreference(getString(R.string.key_app_icon_pack));
         IconPackManager iconPackManager = IconPackManager.getInstance();
         final List<IconPack> packs = iconPackManager.getAvailableIconPacks(getContext());

@@ -18,14 +18,12 @@
 package now.fortuitous.thanos.main
 
 import android.content.Context
-import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.BuildProp
@@ -51,11 +49,6 @@ class NavActivity : ComposeThemeActivity() {
 
     override fun isF(): Boolean {
         return false
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
-        super.onCreate(savedInstanceState)
     }
 
     @Composable

@@ -90,7 +90,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL,
                 packedIconRes = R.drawable.ic_nav_task_removal,
-                iconRes = R.drawable.ic_clear_all_black_24dp,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_clean_when_task_removed,
                 requiredFeature = BuildProp.THANOX_FEATURE_RECENT_TASK_REMOVAL,
                 themeColor = R.color.nav_icon_task_removal
@@ -98,7 +98,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_SMART_FREEZE,
                 packedIconRes = R.drawable.ic_nav_smart_freeze,
-                iconRes = R.drawable.ic_ac_unit_black_24dp,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_smart_app_freeze,
                 requiredFeature = BuildProp.THANOX_FEATURE_EXT_APP_SMART_FREEZE,
                 themeColor = R.color.nav_icon_smart_freeze,
@@ -111,7 +111,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_APPS_MANAGER,
                 packedIconRes = R.drawable.ic_nav_app_manager,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_apps_2_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_apps_manager,
                 requiredFeature = BuildProp.THANOX_FEATURE_COMPONENT_MANAGER,
                 themeColor = R.color.nav_icon_apps_manager,
@@ -133,7 +133,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_PRIVACY_CHEAT,
                 packedIconRes = R.drawable.ic_nav_priv_cheat,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_spy_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_data_cheat,
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_DATA_CHEAT,
                 themeColor = R.color.nav_icon_priv_cheat,
@@ -155,7 +155,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_OPS_BY_OPS,
                 packedIconRes = R.drawable.ic_nav_ops,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_star_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.module_ops_feature_title_ops_app_list,
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_OPS,
                 themeColor = R.color.nav_icon_ops
@@ -163,7 +163,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_APP_LOCK,
                 packedIconRes = R.drawable.ic_nav_app_lock,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_phone_lock_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_app_lock,
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_APPLOCK,
                 themeColor = R.color.nav_icon_app_lock,
@@ -176,7 +176,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_TASK_BLUR,
                 packedIconRes = R.drawable.ic_nav_task_blur,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_brush_2_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_recent_task_blur,
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_TASK_BLUR,
                 themeColor = R.color.nav_icon_task_blur
@@ -184,7 +184,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_OP_REMIND,
                 packedIconRes = R.drawable.ic_nav_op_remind,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_alarm_warning_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.module_ops_feature_title_ops_remind_list,
                 requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_OPS_REMINDER,
                 themeColor = R.color.nav_icon_op_remind
@@ -193,7 +193,7 @@ object PrebuiltFeatures {
                 FeatureItem(
                     id = PrebuiltFeatureIds.ID_SENSOR_OFF,
                     packedIconRes = R.drawable.ic_nav_sensor_off,
-                    iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_sensor_fill,
+                    iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                     titleRes = github.tornaco.android.thanos.res.R.string.sensor_off,
                     themeColor = R.color.nav_icon_sensor_off
                 )
@@ -207,7 +207,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_TRAMPOLINE,
                 packedIconRes = R.drawable.ic_nav_activity_replacement,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_guide_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.module_activity_trampoline_app_name_abbr,
                 requiredFeature = BuildProp.THANOX_FEATURE_APP_TRAMPOLINE,
                 themeColor = R.color.nav_icon_activity_replacement
@@ -215,7 +215,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_PROFILE,
                 packedIconRes = R.drawable.ic_nav_profile,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_thunderstorms_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.module_profile_feature_name,
                 requiredFeature = BuildProp.THANOX_FEATURE_PROFILE,
                 themeColor = R.color.nav_icon_profile,
@@ -258,7 +258,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_SMART_STANDBY,
                 packedIconRes = R.drawable.ic_nav_smart_standby,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_mickey_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_smart_app_standby,
                 requiredFeature = BuildProp.THANOX_FEATURE_APP_SMART_STAND_BY,
                 themeColor = R.color.nav_icon_smart_standby,
@@ -274,7 +274,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_WAKELOCK_REMOVER,
                 packedIconRes = R.drawable.ic_nav_wakelock_remover,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_scissors_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_wakelock_blocker,
                 requiredFeature = BuildProp.THANOX_FEATURE_WAKELOCK_REMOVER,
                 themeColor = R.color.nav_icon_wakelock_remover
@@ -282,7 +282,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_INFINITE_Z,
                 packedIconRes = R.drawable.ic_nav_app_clone,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_briefcase_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_infinite_z,
                 requiredFeature = BuildProp.THANOX_FEATURE_IZ,
                 themeColor = R.color.nav_icon_app_clone
@@ -291,7 +291,7 @@ object PrebuiltFeatures {
                 FeatureItem(
                     id = PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER,
                     packedIconRes = R.drawable.ic_nav_launch_other_app,
-                    iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_external_link_fill,
+                    iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                     titleRes = github.tornaco.android.thanos.res.R.string.launch_other_app,
                     themeColor = R.color.nav_icon_launch_other_app
                 )
@@ -299,7 +299,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_RESIDENT,
                 packedIconRes = R.drawable.ic_nav_resident,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_cross_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.pre_title_resident,
                 themeColor = R.color.nav_icon_resident
             )
@@ -312,7 +312,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION,
                 packedIconRes = R.drawable.ic_nav_screen_on_notification,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_notification_badge_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_light_on_notification,
                 requiredFeature = BuildProp.THANOX_FEATURE_EXT_N_UP,
                 themeColor = R.color.nav_icon_screen_on_notification
@@ -320,7 +320,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER,
                 packedIconRes = R.drawable.ic_nav_nr,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_chat_1_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.module_notification_recorder_feature_title_notification_recorder,
                 requiredFeature = BuildProp.THANOX_FEATURE_EXT_N_RECORDER,
                 themeColor = R.color.nav_icon_nr,
@@ -336,7 +336,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_WECHAT_PUSH,
                 packedIconRes = R.drawable.ic_nav_wechat_push,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_wechat_2_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.module_push_message_delegate_title_wechat_proxy,
                 requiredFeature = BuildProp.THANOX_FEATURE_PUSH_DELEGATE,
                 themeColor = R.color.nav_icon_wechat_push
@@ -350,7 +350,7 @@ object PrebuiltFeatures {
             FeatureItem(
                 id = PrebuiltFeatureIds.ID_GUIDE,
                 packedIconRes = R.drawable.ic_nav_guide,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_book_2_fill,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_refresh_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.common_menu_title_wiki,
                 themeColor = R.color.nav_icon_guide
             )

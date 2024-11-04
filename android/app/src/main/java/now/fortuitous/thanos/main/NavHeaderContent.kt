@@ -31,7 +31,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
@@ -56,6 +55,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
+import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextContainer
@@ -340,7 +340,7 @@ private fun FatMemProgressBar(
                 centerContent = {
                     Text(
                         text = "Mem",
-                        style = productSansBoldTypography().caption.copy(fontSize = 6.sp),
+                        style = productSansBoldTypography().caption.copy(fontSize = 8.sp),
                         color = Color(onSurfaceColor)
                     )
                 }
@@ -365,7 +365,7 @@ fun MemStats(
             // For alignment.
             modifier = Modifier
                 .offset(y = 2.dp)
-                .size(7.dp)
+                .size(10.dp)
                 .clip(CircleShape)
                 .background(color)
         )
@@ -374,10 +374,10 @@ fun MemStats(
             val onSurfaceColor =
                 getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
             Text(
-                modifier = Modifier.width(160.dp),
-                textAlign = TextAlign.Start,
+                modifier = Modifier,
+                textAlign = TextAlign.Center,
                 text = "${if (memUsage.memType == MemType.MEMORY) "Mem" else "Swap"} ${memUsage.memUsagePercent}%",
-                style = MaterialTheme.typography.bodySmall.copy(fontSize = 8.sp),
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
                 color = Color(onSurfaceColor)
             )
             SmallSpacer()
@@ -391,8 +391,8 @@ fun MemStats(
                 stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_not_enabled)
             }
             Text(
-                modifier = Modifier.width(160.dp),
-                textAlign = TextAlign.Start,
+                modifier = Modifier,
+                textAlign = TextAlign.Center,
                 text = "($extraDesc)",
                 style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
                 color = Color(onSurfaceColor)

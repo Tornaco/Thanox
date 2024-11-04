@@ -120,7 +120,8 @@ class NavActivity : ComposeThemeActivity() {
             ShortcutInit(thisActivity()).initOnBootThanox()
         }
 
-        AllNewNavScreen()
+        val applyNewHome = AppPreference.isFeatureNoticeAccepted(thisActivity(), "NEW_HOME")
+        if (applyNewHome) AllNewNavScreen() else NavScreen()
     }
 
     @Composable

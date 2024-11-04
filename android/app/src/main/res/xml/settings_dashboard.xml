@@ -130,6 +130,12 @@
                 app:persistent="false"
                 app:title="New OPS" />
 
+            <SwitchPreferenceCompat
+                android:summary="Test the new home screen"
+                app:key="@string/key_test_new_home"
+                app:persistent="false"
+                app:title="New Home" />
+
             <Preference
                 app:isPreferenceVisible="false"
                 app:key="@string/key_theme_attr_preview"

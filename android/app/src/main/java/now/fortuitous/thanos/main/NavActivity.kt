@@ -25,7 +25,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -128,15 +127,7 @@ class NavActivity : ComposeThemeActivity() {
             ShortcutInit(thisActivity()).initOnBootThanox()
         }
 
-        val context = LocalContext.current
-        val isClassicHome = remember {
-            AppPreference.isFeatureNoticeAccepted(context, AppPreference.PREF_KEY_CLASSIC_HOME)
-        }
-        if (isClassicHome) {
-            NavScreen()
-        } else {
-            AllNewNavScreen()
-        }
+        AllNewNavScreen()
     }
 
     @Composable

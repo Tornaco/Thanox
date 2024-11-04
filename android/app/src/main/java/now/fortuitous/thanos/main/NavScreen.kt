@@ -465,11 +465,7 @@ private fun FeatureItem(
                 max = 12.sp,
             ),
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.titleMedium.copy(
-                color = themedTextColor(
-                    Color(ContextCompat.getColor(context, item.themeColor))
-                )
-            ),
+            style = MaterialTheme.typography.titleMedium,
         )
     }
 }
@@ -537,8 +533,7 @@ fun PrivacyStatementDialog(
     onDismissRequest: () -> Unit,
 ) {
     val context = LocalContext.current
-    val fileName =
-        context.getString(github.tornaco.android.thanos.res.R.string.privacy_agreement_file)
+    val fileName = context.getString(github.tornaco.android.thanos.res.R.string.privacy_agreement_file)
     val privacyAgreement = remember {
         AssetUtils.readFileToStringOrThrow(context, fileName)
     }

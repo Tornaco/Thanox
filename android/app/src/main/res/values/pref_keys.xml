@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="key_app_ui" translatable="false">key_app_ui</string>
+    <string name="key_app_theme" translatable="false">key_app_theme</string>
     <string name="key_app_icon_pack" translatable="false">key_app_icon_pack</string>
     <string name="key_use_round_icon" translatable="false">key_use_round_icon</string>
 

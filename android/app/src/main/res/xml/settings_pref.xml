@@ -5,6 +5,15 @@
     <PreferenceCategory
             android:key="@string/key_app_ui"
             app:title="@string/pre_category_ui">
+
+        <DropDownPreference
+                android:entries="@array/themes_entry"
+                android:entryValues="@array/themes_value"
+                app:key="@string/key_app_theme"
+                app:persistent="false"
+                app:title="@string/pre_title_app_theme"
+                app:useSimpleSummaryProvider="true" />
+
         <DropDownPreference
                 app:key="@string/key_app_icon_pack"
                 app:persistent="false"

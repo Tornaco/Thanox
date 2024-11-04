@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
@@ -299,6 +300,7 @@ private fun FatMemProgressBar(
     onSurfaceColor: Int,
 ) {
     val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
+    val secondaryProgressColor = getColorAttribute(com.google.android.material.R.attr.colorTertiary)
     val progressTrackColor =
         getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
 
@@ -329,7 +331,7 @@ private fun FatMemProgressBar(
                     .size(secondProgressSize),
                 progress = headerInfo.swap.memUsagePercent.toFloat(),
                 progressMax = 100f,
-                progressBarColor = Color(progressColor).copy(alpha = 0.6f),
+                progressBarColor = Color(secondaryProgressColor),
                 progressBarWidth = progressBarWidth,
                 backgroundProgressBarColor = Color(progressTrackColor),
                 backgroundProgressBarWidth = progressBarWidth,
@@ -338,7 +340,7 @@ private fun FatMemProgressBar(
                 centerContent = {
                     Text(
                         text = "Mem",
-                        style = productSansBoldTypography().caption,
+                        style = productSansBoldTypography().caption.copy(fontSize = 6.sp),
                         color = Color(onSurfaceColor)
                     )
                 }
@@ -348,13 +350,13 @@ private fun FatMemProgressBar(
         Column {
             MemStats(headerInfo.memory, Color(progressColor))
             MediumSpacer()
-            MemStats(headerInfo.swap, Color(progressColor).copy(alpha = 0.6f))
+            MemStats(headerInfo.swap, Color(secondaryProgressColor))
         }
     }
 }
 
 @Composable
-private fun MemStats(
+fun MemStats(
     memUsage: MemUsage,
     color: Color,
 ) {
@@ -372,7 +374,8 @@ private fun MemStats(
             val onSurfaceColor =
                 getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
             Text(
-                textAlign = TextAlign.Center,
+                modifier = Modifier.width(160.dp),
+                textAlign = TextAlign.Start,
                 text = "${if (memUsage.memType == MemType.MEMORY) "Mem" else "Swap"} ${memUsage.memUsagePercent}%",
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 8.sp),
                 color = Color(onSurfaceColor)
@@ -388,7 +391,8 @@ private fun MemStats(
                 stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_not_enabled)
             }
             Text(
-                textAlign = TextAlign.Center,
+                modifier = Modifier.width(160.dp),
+                textAlign = TextAlign.Start,
                 text = "($extraDesc)",
                 style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
                 color = Color(onSurfaceColor)

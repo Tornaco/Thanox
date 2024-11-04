@@ -25,11 +25,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
@@ -55,14 +52,10 @@ import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextCo
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.CircularProgressBar
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.productSansBoldTypography
 import now.fortuitous.thanos.apps.AppsManageActivity
 import now.fortuitous.thanos.dashboard.AppCpuUsage
-import now.fortuitous.thanos.dashboard.MemType
-import now.fortuitous.thanos.dashboard.MemUsage
 import now.fortuitous.thanos.dashboard.StatusHeaderInfo
 
 
@@ -309,10 +302,7 @@ private fun MemProgressBar(
 private fun FatMemProgressBar(
     headerInfo: StatusHeaderInfo,
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
         Box(
             modifier = Modifier.Companion.align(Alignment.CenterVertically),
             contentAlignment = Alignment.Center
@@ -354,55 +344,6 @@ private fun FatMemProgressBar(
             MemStats(headerInfo.memory, primaryProgressBarColor())
             MediumSpacer()
             MemStats(headerInfo.swap, secondaryProgressBarColor())
-        }
-    }
-}
-
-
-@Composable
-private fun MemStats(
-    memUsage: MemUsage,
-    color: Color,
-) {
-    Row(
-        verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.Start,
-        modifier = Modifier
-            .width(100.dp)
-    ) {
-        Box(
-            // For alignment.
-            modifier = Modifier
-                .offset(y = 2.dp)
-                .size(7.dp)
-                .clip(CircleShape)
-                .background(color)
-        )
-        TinySpacer()
-        Column(modifier = Modifier) {
-            val onSurfaceColor =
-                getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
-            Text(
-                textAlign = TextAlign.Start,
-                text = "${if (memUsage.memType == MemType.MEMORY) "Mem" else "Swap"} ${memUsage.memUsagePercent}%",
-                style = MaterialTheme.typography.bodySmall.copy(fontSize = 8.sp),
-                color = Color(onSurfaceColor)
-            )
-            SmallSpacer()
-
-            val extraDesc = if (memUsage.isEnabled) {
-                stringResource(
-                    id = github.tornaco.android.thanos.res.R.string.boost_status_available,
-                    memUsage.memAvailableSizeString
-                )
-            } else {
-                stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_not_enabled)
-            }
-            Text(
-                textAlign = TextAlign.Start,
-                text = "($extraDesc)",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                color = Color(onSurfaceColor)
-            )
         }
     }
 }

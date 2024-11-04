@@ -179,7 +179,7 @@ private fun HeaderContentContainer(
     background: Color,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(16.dp),
+    contentPadding: PaddingValues = PaddingValues(12.dp),
     content: @Composable () -> Unit
 ) {
     Box(

@@ -30,16 +30,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
@@ -89,7 +87,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
-import github.tornaco.android.thanos.support.FlowLayout
 
 @Composable
 fun AllNewNavScreen() {
@@ -329,21 +326,21 @@ private fun FeatureGroup(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 20.dp),
+            .padding(top = 20.dp)
     ) {
         Text(
             text = stringResource(id = group.titleRes),
             fontSize = 14.sp,
             fontWeight = FontWeight.W500,
             color = themedTextColor(MaterialTheme.colorScheme.primary),
-            modifier = Modifier.padding(start = 16.dp)
+            modifier = Modifier.padding(start = 12.dp)
         )
 
-        FlowLayout(
-            lineSpacing = 16.dp,
+        FlowRow(
             modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .padding(top = 12.dp)
+                .fillMaxWidth()
+                .padding(top = 8.dp),
+            horizontalArrangement = Arrangement.Start
         ) {
             group.items.forEach { item ->
                 Box {
@@ -403,56 +400,48 @@ private fun FeatureItem(
 ) {
     val context = LocalContext.current
     val itemColor = Color(ContextCompat.getColor(context, item.themeColor))
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.width(64.dp)
+    Box(
+        modifier = Modifier
+            .padding(8.dp)
+            .clip(RoundedCornerShape(cardCornerSize))
+            .background(itemColor.copy(alpha = 0.08f))
+            .combinedClickable(
+                onLongClick = {
+                    onItemLongClick(item)
+                }, onClick = {
+                    onItemClick(item)
+                })
+            .padding(vertical = 8.dp, horizontal = 10.dp),
     ) {
-        Box(
-            modifier = Modifier
-                .size(54.dp)
-                .clip(CircleShape)
-                .background(itemColor.copy(alpha = 0.12f))
-                .combinedClickable(
-                    onLongClick = {
-                        onItemLongClick(item)
-                    }, onClick = {
-                        onItemClick(item)
-                    })
-                .padding(12.dp),
-            contentAlignment = Alignment.Center
-        ) {
+        Row(verticalAlignment = CenterVertically) {
             ColoredIcon(
                 modifier = Modifier,
-                size = 28.dp,
+                size = 24.dp,
                 padding = 0.dp,
                 color = itemColor,
             ) {
                 Icon(
-                    modifier = Modifier.size(14.dp),
+                    modifier = Modifier.size(12.dp),
                     painter = painterResource(item.iconRes),
                     tint = Color.White,
                     contentDescription = null
                 )
             }
+            TinySpacer()
+            AutoResizeText(
+                modifier = Modifier,
+                text = stringResource(id = item.titleRes),
+                textAlign = TextAlign.Center,
+                maxLines = 3,
+                fontSizeRange = FontSizeRange(
+                    min = 9.5.sp,
+                    max = 11.5.sp,
+                ),
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.titleMedium.copy(
+                    color = themedTextColor(itemColor)
+                ),
+            )
         }
-        TinySpacer()
-        AutoResizeText(
-            modifier = Modifier.wrapContentSize(),
-            text = stringResource(id = item.titleRes),
-            textAlign = TextAlign.Center,
-            maxLines = 3,
-            fontSizeRange = FontSizeRange(
-                min = 8.5.sp,
-                max = 12.5.sp,
-            ),
-            overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.titleMedium.copy(
-                color = themedTextColor(itemColor),
-                lineHeight = 13.5.sp
-            ),
-        )
-
     }
 }

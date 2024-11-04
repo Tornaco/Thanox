@@ -28,11 +28,11 @@ data class StatusHeaderInfo(
 
 data class MemUsage(
     val memType: MemType = MemType.MEMORY,
-    val memTotalSizeString: String = "",
+    val memTotalSizeString: String = "10240M",
     // 0-100
-    val memUsagePercent: Int = 8,
-    val memUsageSizeString: String = "",
-    val memAvailableSizeString: String = "",
+    val memUsagePercent: Int = 88,
+    val memUsageSizeString: String = "1024M",
+    val memAvailableSizeString: String = "1024M",
     val isEnabled: Boolean = true
 )
 
@@ -53,8 +53,8 @@ enum class MemType {
 }
 
 val defaultStatusHeaderInfo = StatusHeaderInfo(
-    9,
+    999,
     MemUsage(MemType.MEMORY),
     MemUsage(MemType.SWAP),
-    CpuUsage(9)
+    CpuUsage(88)
 )

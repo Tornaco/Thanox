@@ -124,7 +124,7 @@ fun AllNewNavScreen() {
                 title = {
                     Row(verticalAlignment = CenterVertically) {
                         Text(
-                            stringResource(id = github.tornaco.android.thanos.res.R.string.app_name_thanox),
+                            stringResource(id = github.tornaco.android.thanos.R.string.app_name_thanox),
                             fontWeight = FontWeight.W600
                         )
                         TinySpacer()

@@ -888,7 +888,6 @@
     <string name="service_report">报告</string>
     <string name="service_running_time">已运行</string>
 
-    <string name="app_name_thanox">Thanox</string>
     <string name="privacy_agreement_file">privacy/privacy_agreement.html</string>
 
     <!-- Switch On/Off  -->
@@ -912,7 +911,6 @@
     <string name="nav_title_exp">拓展</string>
     <string name="nav_title_plugin">插件</string>
     <string name="nav_title_plugin_repo">插件仓库</string>
-    <string name="nav_title_thanox">Thanox</string>
 
     <string name="pref_title_feature_toggle">功能开关</string>
 

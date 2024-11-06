@@ -86,7 +86,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
 import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
-import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 
 @Composable
@@ -421,16 +420,15 @@ private fun FeatureItem(
                     contentDescription = null
                 )
             }
-
-            MediumSpacer()
+            TinySpacer()
             AutoResizeText(
                 modifier = Modifier,
                 text = stringResource(id = item.titleRes),
                 textAlign = TextAlign.Center,
                 maxLines = 3,
                 fontSizeRange = FontSizeRange(
-                    min = 11.sp,
-                    max = 12.sp,
+                    min = 9.sp,
+                    max = 11.sp,
                 ),
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.titleMedium.copy(

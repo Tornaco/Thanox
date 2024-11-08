@@ -18,11 +18,7 @@
 package now.fortuitous.thanos.main
 
 import android.content.Context
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
@@ -38,7 +34,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PublishedWithChanges
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -57,11 +53,11 @@ import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.ActivityUtils
 
-class NeedToRestartActivity : ComponentActivity() {
+class NeedToRestartActivity : ComposeThemeActivity() {
 
     object Starter {
         fun start(context: Context?) {
@@ -69,21 +65,19 @@ class NeedToRestartActivity : ComponentActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            NeedToStartScreen()
-        }
+    @Composable
+    override fun Content() {
+        NeedToStartScreen()
     }
 
-    @OptIn(ExperimentalAnimationApi::class)
     @Composable
     @Preview(name = "NeedToStartScreen", showSystemUi = true, showBackground = true)
     private fun NeedToStartScreen() {
         var visible by remember { mutableStateOf(false) }
 
-        Surface(modifier = Modifier.fillMaxSize()) {
+        Scaffold(modifier = Modifier.fillMaxSize()) {
             AnimatedVisibility(
+                modifier = Modifier.padding(it),
                 visible = visible,
                 enter = slideInVertically(
                     initialOffsetY = {

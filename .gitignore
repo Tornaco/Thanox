@@ -13,3 +13,4 @@
 .externalNativeBuild
 .idea/
 out/
+.DS_Store

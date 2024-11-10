@@ -25,6 +25,8 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.RemoteException;
 
+import com.elvishew.xlog.XLog;
+
 // https://cs.android.com/android/platform/superproject/+/master:packages/apps/Settings/src/com/android/settings/password/ConfirmDeviceCredentialUtils.java;l=36?q=ConfirmDeviceCredentialUtils&ss=android
 public class ConfirmDeviceCredentialUtils {
     public static final int FLAG_THANOX_VERIFIED = 0x00200000;
@@ -43,11 +45,12 @@ public class ConfirmDeviceCredentialUtils {
             }
         }
         IntentSender intentSender = activity.getIntent().getParcelableExtra(Intent.EXTRA_INTENT);
+        XLog.d("intentSender: " + intentSender);
         if (intentSender != null) {
             try {
                 activity.startIntentSenderForResult(intentSender, -1, null, 0, FLAG_THANOX_VERIFIED, 0);
             } catch (IntentSender.SendIntentException e) {
-                /* ignore */
+                XLog.e(e, "startIntentSenderForResult error");
             }
         }
     }

@@ -532,6 +532,13 @@ public interface IActivityManager extends android.os.IInterface
     {
       return 0;
     }
+    @Override public boolean isSmartStandByUnbindServiceEnabled() throws android.os.RemoteException
+    {
+      return false;
+    }
+    @Override public void setSmartStandByUnbindServiceEnabled(boolean enable) throws android.os.RemoteException
+    {
+    }
     @Override
     public android.os.IBinder asBinder() {
       return null;
@@ -2134,6 +2141,23 @@ public interface IActivityManager extends android.os.IInterface
           int _result = this.getPkgRecentTaskBlurMode(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
+          return true;
+        }
+        case TRANSACTION_isSmartStandByUnbindServiceEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _result = this.isSmartStandByUnbindServiceEnabled();
+          reply.writeNoException();
+          reply.writeInt(((_result)?(1):(0)));
+          return true;
+        }
+        case TRANSACTION_setSmartStandByUnbindServiceEnabled:
+        {
+          data.enforceInterface(descriptor);
+          boolean _arg0;
+          _arg0 = (0!=data.readInt());
+          this.setSmartStandByUnbindServiceEnabled(_arg0);
+          reply.writeNoException();
           return true;
         }
         default:
@@ -5238,6 +5262,45 @@ public interface IActivityManager extends android.os.IInterface
         }
         return _result;
       }
+      @Override public boolean isSmartStandByUnbindServiceEnabled() throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        boolean _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartStandByUnbindServiceEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSmartStandByUnbindServiceEnabled();
+          }
+          _reply.readException();
+          _result = (0!=_reply.readInt());
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      @Override public void setSmartStandByUnbindServiceEnabled(boolean enable) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(((enable)?(1):(0)));
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartStandByUnbindServiceEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartStandByUnbindServiceEnabled(enable);
+            return;
+          }
+          _reply.readException();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+      }
       public static github.tornaco.android.thanos.core.app.IActivityManager sDefaultImpl;
     }
     static final int TRANSACTION_getCurrentFrontApp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
@@ -5376,6 +5439,8 @@ public interface IActivityManager extends android.os.IInterface
     static final int TRANSACTION_setPkgResident = (android.os.IBinder.FIRST_CALL_TRANSACTION + 133);
     static final int TRANSACTION_setPkgRecentTaskBlurMode = (android.os.IBinder.FIRST_CALL_TRANSACTION + 134);
     static final int TRANSACTION_getPkgRecentTaskBlurMode = (android.os.IBinder.FIRST_CALL_TRANSACTION + 135);
+    static final int TRANSACTION_isSmartStandByUnbindServiceEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 136);
+    static final int TRANSACTION_setSmartStandByUnbindServiceEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 137);
     public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.IActivityManager impl) {
       // Only one user of this interface can use this function
       // at a time. This is a heuristic to detect if two different
@@ -5561,4 +5626,6 @@ public interface IActivityManager extends android.os.IInterface
   public void setPkgResident(github.tornaco.android.thanos.core.pm.Pkg pkg, boolean resident) throws android.os.RemoteException;
   public void setPkgRecentTaskBlurMode(github.tornaco.android.thanos.core.pm.Pkg pkg, int mode) throws android.os.RemoteException;
   public int getPkgRecentTaskBlurMode(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public boolean isSmartStandByUnbindServiceEnabled() throws android.os.RemoteException;
+  public void setSmartStandByUnbindServiceEnabled(boolean enable) throws android.os.RemoteException;
 }

@@ -45,6 +45,7 @@ public class SmartStandbySettingsFragment extends BasePreferenceFragmentCompat {
         }
 
         bindStopService(thanos);
+        bindUnbindService(thanos);
         bindIdle(thanos);
         bindByPassN(thanos);
         bindByPassVisibleWindow(thanos);
@@ -59,6 +60,20 @@ public class SmartStandbySettingsFragment extends BasePreferenceFragmentCompat {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 boolean value = (boolean) newValue;
                 thanos.getActivityManager().setSmartStandByStopServiceEnabled(value);
+                return true;
+            }
+        });
+    }
+
+
+    private void bindUnbindService(ThanosManager thanos) {
+        SwitchPreferenceCompat ubServicePref = findPreference(getString(R.string.key_smart_standby_unbind_service));
+        Objects.requireNonNull(ubServicePref).setChecked(thanos.getActivityManager().isSmartStandByUnbindServiceEnabled());
+        ubServicePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                boolean value = (boolean) newValue;
+                thanos.getActivityManager().setSmartStandByUnbindServiceEnabled(value);
                 return true;
             }
         });

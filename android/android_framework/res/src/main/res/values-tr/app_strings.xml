@@ -1218,6 +1218,8 @@
 
     <string name="pre_title_smart_standby_stop_service">Hizmeti durdur</string>
     <string name="pre_summary_smart_standby_stop_service">Bu, KORUMA kural listesinde olmayan tüm hizmetleri durdurmaya çalışacaktır</string>
+    <string name="pre_title_smart_standby_unbind_service">Unbind service</string>
+    <string name="pre_summary_smart_standby_unbind_service">This will attempt to unbind all services that is not in the KEEP rule list</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">Bildirimleri olan uygulamaları atla</string>
     <string name="pre_title_smart_standby_bypass_if_has_visible_windows">Görünür pencere olan uygulamaları atla</string>
     <string name="pre_summary_smart_standby_bypass_if_has_n">Bildirimleri olan uygulamalara müdahale edilmez</string>

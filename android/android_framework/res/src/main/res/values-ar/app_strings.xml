@@ -1247,6 +1247,8 @@
     <string name="pre_category_summary_smart_standby">Applications in the background usually have services or processes that remain active, and these services or processes have their own purpose. Unfortunately, our users may not know exactly what these services and processes do.\n\nYou can pick an interference method for the applications that return to the background. It is worth mentioning that some apps may not work correctly after interfering with them.</string>
     <string name="pre_title_smart_standby_stop_service">Stop service</string>
     <string name="pre_summary_smart_standby_stop_service">This will attempt to stop all services that is not in the KEEP rule list</string>
+    <string name="pre_title_smart_standby_unbind_service">Unbind service</string>
+    <string name="pre_summary_smart_standby_unbind_service">This will attempt to unbind all services that is not in the KEEP rule list</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">Skip apps with notifications</string>
     <string name="pre_title_smart_standby_bypass_if_has_visible_windows">Skip apps has visible window</string>
     <string name="pre_summary_smart_standby_bypass_if_has_n">Would not interfere applications with notifications</string>

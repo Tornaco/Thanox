@@ -124,6 +124,14 @@
             app:summary="@string/pre_summary_exclude_recent_task"
             app:title="@string/pre_title_exclude_recent_task"
             app:useSimpleSummaryProvider="true" />
+
+        <DropDownPreference
+            android:entries="@array/sensor_off_options"
+            android:entryValues="@array/sensor_off_options_values"
+            app:key="@string/key_sensor_off"
+            app:persistent="false"
+            app:title="@string/sensor_off"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/feature_category_manage">

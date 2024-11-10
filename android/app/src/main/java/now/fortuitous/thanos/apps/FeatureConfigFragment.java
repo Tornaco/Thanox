@@ -98,6 +98,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         bindNotificationPrefs();
         bindMiscPrefs();
         bindLaunchOtherAppPref();
+        bindSensorOffPref();
     }
 
     private void bindAppInfoPref() {
@@ -361,6 +362,29 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 return true;
             });
 
+            return null;
+        });
+    }
+
+    private void bindSensorOffPref() {
+        ContextExtKt.withThanos(requireContext(), thanos -> {
+            DropDownPreference pref = findPreference(getString(R.string.key_sensor_off));
+            int currentMode = thanos.getPrivacyManager().getSensorOffSettingsForPackage(Pkg.fromAppInfo(appInfo));
+
+            pref.setEnabled(thanos.getPrivacyManager().isSensorOffEnabled());
+            pref.setValue(String.valueOf(currentMode));
+            pref.setOnPreferenceChangeListener((preference, newValue) -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                    if (isSubscribed) {
+                        int mode = Integer.parseInt(String.valueOf(newValue));
+                        thanos.getPrivacyManager().setSensorOffSettingsForPackage(Pkg.fromAppInfo(appInfo), mode);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+                return true;
+            });
             return null;
         });
     }

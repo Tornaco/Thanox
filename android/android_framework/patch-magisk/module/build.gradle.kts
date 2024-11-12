@@ -109,7 +109,7 @@ afterEvaluate {
             }
 
             val nativeOutDir =
-                file("$buildDir/intermediates/library_and_local_jars_jni/${variant.name}/jni")
+                file(layout.buildDirectory.file("intermediates/library_and_local_jars_jni/${variant.name}/copyReleaseJniLibsProjectAndLocalJars/jni"))
             log("nativeOutDir: $nativeOutDir")
             log("nativeOutDir list: ${nativeOutDir.list()?.map { it }}")
 

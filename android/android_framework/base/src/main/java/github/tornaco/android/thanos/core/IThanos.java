@@ -1,9 +1,9 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
+ * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/IThanos.aidl
  */
 package github.tornaco.android.thanos.core;
 // DO NOT CHANGE ORDER.
-
 public interface IThanos extends android.os.IInterface
 {
   /** Default implementation for IThanos. */
@@ -145,8 +145,8 @@ public interface IThanos extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.IThanos
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.IThanos";
     /** Construct the stub at attach it to the interface. */
+    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -173,302 +173,262 @@ public interface IThanos extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
+      if (code == INTERFACE_TRANSACTION) {
+        reply.writeString(descriptor);
+        return true;
+      }
       switch (code)
       {
-        case INTERFACE_TRANSACTION:
-        {
-          reply.writeString(descriptor);
-          return true;
-        }
         case TRANSACTION_getServiceManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.os.IServiceManager _result = this.getServiceManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getPrefManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pref.IPrefManager _result = this.getPrefManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getActivityManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.app.IActivityManager _result = this.getActivityManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getPkgManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.IPkgManager _result = this.getPkgManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getActivityStackSupervisor:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor _result = this.getActivityStackSupervisor();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getPrivacyManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.secure.IPrivacyManager _result = this.getPrivacyManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getAppOpsService:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.secure.ops.IAppOpsService _result = this.getAppOpsService();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getPushManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.push.IPushManager _result = this.getPushManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getNotificationManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.n.INotificationManager _result = this.getNotificationManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getAudioManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.audio.IAudioManager _result = this.getAudioManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getProfileManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.profile.IProfileManager _result = this.getProfileManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getBackupAgent:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.backup.IBackupAgent _result = this.getBackupAgent();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getWindowManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.wm.IWindowManager _result = this.getWindowManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getPowerManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.power.IPowerManager _result = this.getPowerManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getInputManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.input.IInputManager _result = this.getInputManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_registerEventSubscriber:
         {
-          data.enforceInterface(descriptor);
           android.content.IntentFilter _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = android.content.IntentFilter.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, android.content.IntentFilter.CREATOR);
           github.tornaco.android.thanos.core.app.event.IEventSubscriber _arg1;
           _arg1 = github.tornaco.android.thanos.core.app.event.IEventSubscriber.Stub.asInterface(data.readStrongBinder());
           this.registerEventSubscriber(_arg0, _arg1);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_unRegisterEventSubscriber:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.app.event.IEventSubscriber _arg0;
           _arg0 = github.tornaco.android.thanos.core.app.event.IEventSubscriber.Stub.asInterface(data.readStrongBinder());
           this.unRegisterEventSubscriber(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_fingerPrint:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _result = this.fingerPrint();
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getVersionName:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _result = this.getVersionName();
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_whoAreYou:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _result = this.whoAreYou();
           reply.writeNoException();
           reply.writeString(_result);
-          return true;
+          break;
         }
         case TRANSACTION_isLoggingEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _result = this.isLoggingEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_setLoggingEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setLoggingEnabled(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_hasFeature:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.hasFeature(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_hasFrameworkInitializeError:
         {
-          data.enforceInterface(descriptor);
           boolean _result = this.hasFrameworkInitializeError();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_getPluginLogger:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           github.tornaco.android.thanos.core.IPluginLogger _result = this.getPluginLogger(_arg0);
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getInfiniteZ:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.app.infinite.InfiniteZ _result = this.getInfiniteZ();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getPatchingSource:
         {
-          data.enforceInterface(descriptor);
           java.util.List<java.lang.String> _result = this.getPatchingSource();
           reply.writeNoException();
           reply.writeStringList(_result);
-          return true;
+          break;
         }
         case TRANSACTION_getRS:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.plus.IRS _result = this.getRS();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getUsageStatsManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.app.usage.IUsageStatsManager _result = this.getUsageStatsManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getPushDelegateManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager _result = this.getPushDelegateManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getNetworkManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.net.INetworkManager _result = this.getNetworkManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_getOpsManager:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.ops.IOps _result = this.getOpsManager();
           reply.writeNoException();
-          reply.writeStrongBinder((((_result!=null))?(_result.asBinder()):(null)));
-          return true;
+          reply.writeStrongInterface(_result);
+          break;
         }
         case TRANSACTION_writeLogsTo:
         {
-          data.enforceInterface(descriptor);
           android.os.ParcelFileDescriptor _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = android.os.ParcelFileDescriptor.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, android.os.ParcelFileDescriptor.CREATOR);
           this.writeLogsTo(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.IThanos
     {
@@ -493,9 +453,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServiceManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getServiceManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.os.IServiceManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -513,9 +470,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPrefManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPrefManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.pref.IPrefManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -533,9 +487,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivityManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getActivityManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.app.IActivityManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -553,9 +504,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPkgManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPkgManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.pm.IPkgManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -573,9 +521,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivityStackSupervisor, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getActivityStackSupervisor();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.app.activity.IActivityStackSupervisor.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -593,9 +538,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPrivacyManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPrivacyManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.secure.IPrivacyManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -613,9 +555,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAppOpsService, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAppOpsService();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.secure.ops.IAppOpsService.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -633,9 +572,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPushManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPushManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.push.IPushManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -653,9 +589,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getNotificationManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getNotificationManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.n.INotificationManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -673,9 +606,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAudioManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getAudioManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.audio.IAudioManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -693,9 +623,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getProfileManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getProfileManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.profile.IProfileManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -713,9 +640,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getBackupAgent, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getBackupAgent();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.backup.IBackupAgent.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -733,9 +657,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getWindowManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getWindowManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.wm.IWindowManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -753,9 +674,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPowerManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPowerManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.power.IPowerManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -773,9 +691,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInputManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getInputManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.input.IInputManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -791,19 +706,9 @@ public interface IThanos extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((filter!=null)) {
-            _data.writeInt(1);
-            filter.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
-          _data.writeStrongBinder((((subscriber!=null))?(subscriber.asBinder()):(null)));
+          _Parcel.writeTypedObject(_data, filter, 0);
+          _data.writeStrongInterface(subscriber);
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerEventSubscriber, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().registerEventSubscriber(filter, subscriber);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -817,12 +722,8 @@ public interface IThanos extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongBinder((((subscriber!=null))?(subscriber.asBinder()):(null)));
+          _data.writeStrongInterface(subscriber);
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterEventSubscriber, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().unRegisterEventSubscriber(subscriber);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -838,9 +739,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_fingerPrint, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().fingerPrint();
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -858,9 +756,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getVersionName, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getVersionName();
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -878,9 +773,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_whoAreYou, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().whoAreYou();
-          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -898,9 +790,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isLoggingEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isLoggingEnabled();
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -918,10 +807,6 @@ public interface IThanos extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setLoggingEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setLoggingEnabled(enable);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -938,9 +823,6 @@ public interface IThanos extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(feature);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasFeature, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasFeature(feature);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -958,9 +840,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasFrameworkInitializeError, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().hasFrameworkInitializeError();
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -979,9 +858,6 @@ public interface IThanos extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pluginAlias);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPluginLogger, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPluginLogger(pluginAlias);
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.IPluginLogger.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -999,9 +875,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInfiniteZ, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getInfiniteZ();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.app.infinite.InfiniteZ.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -1019,9 +892,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPatchingSource, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPatchingSource();
-          }
           _reply.readException();
           _result = _reply.createStringArrayList();
         }
@@ -1039,9 +909,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getRS, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getRS();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.plus.IRS.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -1059,9 +926,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getUsageStatsManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getUsageStatsManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.app.usage.IUsageStatsManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -1079,9 +943,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPushDelegateManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getPushDelegateManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -1099,9 +960,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getNetworkManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getNetworkManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.net.INetworkManager.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -1119,9 +977,6 @@ public interface IThanos extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getOpsManager, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getOpsManager();
-          }
           _reply.readException();
           _result = github.tornaco.android.thanos.core.ops.IOps.Stub.asInterface(_reply.readStrongBinder());
         }
@@ -1137,18 +992,8 @@ public interface IThanos extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((pfd!=null)) {
-            _data.writeInt(1);
-            pfd.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, pfd, 0);
           boolean _status = mRemote.transact(Stub.TRANSACTION_writeLogsTo, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().writeLogsTo(pfd);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -1156,7 +1001,6 @@ public interface IThanos extends android.os.IInterface
           _data.recycle();
         }
       }
-      public static github.tornaco.android.thanos.core.IThanos sDefaultImpl;
     }
     static final int TRANSACTION_getServiceManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_getPrefManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
@@ -1191,23 +1035,9 @@ public interface IThanos extends android.os.IInterface
     static final int TRANSACTION_getNetworkManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 30);
     static final int TRANSACTION_getOpsManager = (android.os.IBinder.FIRST_CALL_TRANSACTION + 31);
     static final int TRANSACTION_writeLogsTo = (android.os.IBinder.FIRST_CALL_TRANSACTION + 32);
-    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.IThanos impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static github.tornaco.android.thanos.core.IThanos getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  /** @hide */
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.IThanos";
   public github.tornaco.android.thanos.core.os.IServiceManager getServiceManager() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.pref.IPrefManager getPrefManager() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.app.IActivityManager getActivityManager() throws android.os.RemoteException;
@@ -1241,4 +1071,25 @@ public interface IThanos extends android.os.IInterface
   public github.tornaco.android.thanos.core.net.INetworkManager getNetworkManager() throws android.os.RemoteException;
   public github.tornaco.android.thanos.core.ops.IOps getOpsManager() throws android.os.RemoteException;
   public void writeLogsTo(android.os.ParcelFileDescriptor pfd) throws android.os.RemoteException;
+  /** @hide */
+  static class _Parcel {
+    static private <T> T readTypedObject(
+        android.os.Parcel parcel,
+        android.os.Parcelable.Creator<T> c) {
+      if (parcel.readInt() != 0) {
+          return c.createFromParcel(parcel);
+      } else {
+          return null;
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedObject(
+        android.os.Parcel parcel, T value, int parcelableFlags) {
+      if (value != null) {
+        parcel.writeInt(1);
+        value.writeToParcel(parcel, parcelableFlags);
+      } else {
+        parcel.writeInt(0);
+      }
+    }
+  }
 }

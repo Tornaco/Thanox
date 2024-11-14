@@ -395,3 +395,4 @@
 -dontwarn android.app.IProcessObserver
 -dontwarn com.android.internal.annotations.GuardedBy
 -dontwarn com.android.internal.annotations.VisibleForTesting
+-dontwarn lombok.Generated

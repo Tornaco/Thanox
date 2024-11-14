@@ -1,6 +1,5 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/wm/IWindowManager.aidl
  */
 package github.tornaco.android.thanos.core.wm;
 public interface IWindowManager extends android.os.IInterface
@@ -34,8 +33,8 @@ public interface IWindowManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.wm.IWindowManager
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.wm.IWindowManager";
     /** Construct the stub at attach it to the interface. */
-    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -62,62 +61,64 @@ public interface IWindowManager extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
-      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
-        data.enforceInterface(descriptor);
-      }
-      if (code == INTERFACE_TRANSACTION) {
-        reply.writeString(descriptor);
-        return true;
-      }
       switch (code)
       {
+        case INTERFACE_TRANSACTION:
+        {
+          reply.writeString(descriptor);
+          return true;
+        }
         case TRANSACTION_getScreenSize:
         {
+          data.enforceInterface(descriptor);
           int[] _result = this.getScreenSize();
           reply.writeNoException();
           reply.writeIntArray(_result);
-          break;
+          return true;
         }
         case TRANSACTION_setDialogForceCancelable:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setDialogForceCancelable(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isDialogForceCancelable:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.isDialogForceCancelable(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_reportDialogHasBeenForceSetCancelable:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.reportDialogHasBeenForceSetCancelable(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_getVisibleWindows:
         {
+          data.enforceInterface(descriptor);
           java.util.List<github.tornaco.android.thanos.core.wm.WindowState> _result = this.getVisibleWindows();
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
-      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.wm.IWindowManager
     {
@@ -142,6 +143,9 @@ public interface IWindowManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getScreenSize, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getScreenSize();
+          }
           _reply.readException();
           _result = _reply.createIntArray();
         }
@@ -160,6 +164,10 @@ public interface IWindowManager extends android.os.IInterface
           _data.writeString(packageName);
           _data.writeInt(((forceCancelable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setDialogForceCancelable, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setDialogForceCancelable(packageName, forceCancelable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -176,6 +184,9 @@ public interface IWindowManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isDialogForceCancelable, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isDialogForceCancelable(packageName);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -193,6 +204,10 @@ public interface IWindowManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_reportDialogHasBeenForceSetCancelable, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().reportDialogHasBeenForceSetCancelable(packageName);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -208,6 +223,9 @@ public interface IWindowManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getVisibleWindows, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getVisibleWindows();
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.wm.WindowState.CREATOR);
         }
@@ -217,53 +235,33 @@ public interface IWindowManager extends android.os.IInterface
         }
         return _result;
       }
+      public static github.tornaco.android.thanos.core.wm.IWindowManager sDefaultImpl;
     }
     static final int TRANSACTION_getScreenSize = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_setDialogForceCancelable = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_isDialogForceCancelable = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
     static final int TRANSACTION_reportDialogHasBeenForceSetCancelable = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
     static final int TRANSACTION_getVisibleWindows = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.wm.IWindowManager impl) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
+        Stub.Proxy.sDefaultImpl = impl;
+        return true;
+      }
+      return false;
+    }
+    public static github.tornaco.android.thanos.core.wm.IWindowManager getDefaultImpl() {
+      return Stub.Proxy.sDefaultImpl;
+    }
   }
-  /** @hide */
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.wm.IWindowManager";
   public int[] getScreenSize() throws android.os.RemoteException;
   public void setDialogForceCancelable(java.lang.String packageName, boolean forceCancelable) throws android.os.RemoteException;
   public boolean isDialogForceCancelable(java.lang.String packageName) throws android.os.RemoteException;
   public void reportDialogHasBeenForceSetCancelable(java.lang.String packageName) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.wm.WindowState> getVisibleWindows() throws android.os.RemoteException;
-  /** @hide */
-  static class _Parcel {
-    static private <T> T readTypedObject(
-        android.os.Parcel parcel,
-        android.os.Parcelable.Creator<T> c) {
-      if (parcel.readInt() != 0) {
-          return c.createFromParcel(parcel);
-      } else {
-          return null;
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedObject(
-        android.os.Parcel parcel, T value, int parcelableFlags) {
-      if (value != null) {
-        parcel.writeInt(1);
-        value.writeToParcel(parcel, parcelableFlags);
-      } else {
-        parcel.writeInt(0);
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedList(
-        android.os.Parcel parcel, java.util.List<T> value, int parcelableFlags) {
-      if (value == null) {
-        parcel.writeInt(-1);
-      } else {
-        int N = value.size();
-        int i = 0;
-        parcel.writeInt(N);
-        while (i < N) {
-    writeTypedObject(parcel, value.get(i), parcelableFlags);
-          i++;
-        }
-      }
-    }
-  }
 }

@@ -1,19 +1,21 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/plus/IRS.aidl
  */
 package github.tornaco.android.thanos.core.plus;
 // Remote Server
+
 public interface IRS extends android.os.IInterface
 {
   /** Default implementation for IRS. */
   public static class Default implements github.tornaco.android.thanos.core.plus.IRS
   {
     // Bind code.
+
     @Override public void bc(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException
     {
     }
     // Verify binding.
+
     @Override public void vb(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException
     {
     }
@@ -25,8 +27,8 @@ public interface IRS extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.plus.IRS
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.plus.IRS";
     /** Construct the stub at attach it to the interface. */
-    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -53,17 +55,16 @@ public interface IRS extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
-      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
-        data.enforceInterface(descriptor);
-      }
-      if (code == INTERFACE_TRANSACTION) {
-        reply.writeString(descriptor);
-        return true;
-      }
       switch (code)
       {
+        case INTERFACE_TRANSACTION:
+        {
+          reply.writeString(descriptor);
+          return true;
+        }
         case TRANSACTION_bc:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
@@ -72,10 +73,11 @@ public interface IRS extends android.os.IInterface
           _arg2 = github.tornaco.android.thanos.core.plus.ICallback.Stub.asInterface(data.readStrongBinder());
           this.bc(_arg0, _arg1, _arg2);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_vb:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
@@ -84,14 +86,13 @@ public interface IRS extends android.os.IInterface
           _arg2 = github.tornaco.android.thanos.core.plus.ICallback.Stub.asInterface(data.readStrongBinder());
           this.vb(_arg0, _arg1, _arg2);
           reply.writeNoException();
-          break;
+          return true;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
-      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.plus.IRS
     {
@@ -109,6 +110,7 @@ public interface IRS extends android.os.IInterface
         return DESCRIPTOR;
       }
       // Bind code.
+
       @Override public void bc(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -117,8 +119,12 @@ public interface IRS extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(code);
           _data.writeString(deviceId);
-          _data.writeStrongInterface(cb);
+          _data.writeStrongBinder((((cb!=null))?(cb.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_bc, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().bc(code, deviceId, cb);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -127,6 +133,7 @@ public interface IRS extends android.os.IInterface
         }
       }
       // Verify binding.
+
       @Override public void vb(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -135,8 +142,12 @@ public interface IRS extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(code);
           _data.writeString(deviceId);
-          _data.writeStrongInterface(cb);
+          _data.writeStrongBinder((((cb!=null))?(cb.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_vb, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().vb(code, deviceId, cb);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -144,14 +155,31 @@ public interface IRS extends android.os.IInterface
           _data.recycle();
         }
       }
+      public static github.tornaco.android.thanos.core.plus.IRS sDefaultImpl;
     }
     static final int TRANSACTION_bc = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_vb = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.plus.IRS impl) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
+        Stub.Proxy.sDefaultImpl = impl;
+        return true;
+      }
+      return false;
+    }
+    public static github.tornaco.android.thanos.core.plus.IRS getDefaultImpl() {
+      return Stub.Proxy.sDefaultImpl;
+    }
   }
-  /** @hide */
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.plus.IRS";
   // Bind code.
+
   public void bc(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException;
   // Verify binding.
+
   public void vb(java.lang.String code, java.lang.String deviceId, github.tornaco.android.thanos.core.plus.ICallback cb) throws android.os.RemoteException;
 }

@@ -1,6 +1,5 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/app/usage/IUsageStatsManager.aidl
  */
 package github.tornaco.android.thanos.core.app.usage;
 public interface IUsageStatsManager extends android.os.IInterface
@@ -24,8 +23,8 @@ public interface IUsageStatsManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.usage.IUsageStatsManager
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.usage.IUsageStatsManager";
     /** Construct the stub at attach it to the interface. */
-    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -52,17 +51,16 @@ public interface IUsageStatsManager extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
-      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
-        data.enforceInterface(descriptor);
-      }
-      if (code == INTERFACE_TRANSACTION) {
-        reply.writeString(descriptor);
-        return true;
-      }
       switch (code)
       {
+        case INTERFACE_TRANSACTION:
+        {
+          reply.writeString(descriptor);
+          return true;
+        }
         case TRANSACTION_queryUsageStats:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           long _arg1;
@@ -71,11 +69,12 @@ public interface IUsageStatsManager extends android.os.IInterface
           _arg2 = data.readLong();
           java.util.List<android.app.usage.UsageStats> _result = this.queryUsageStats(_arg0, _arg1, _arg2);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_queryAndAggregateUsageStats:
         {
+          data.enforceInterface(descriptor);
           long _arg0;
           _arg0 = data.readLong();
           long _arg1;
@@ -88,17 +87,22 @@ public interface IUsageStatsManager extends android.os.IInterface
             reply.writeInt(_result.size());
             _result.forEach((k, v) -> {
               reply.writeString(k);
-              _Parcel.writeTypedObject(reply, v, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+              if ((v!=null)) {
+                reply.writeInt(1);
+                v.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+              }
+              else {
+                reply.writeInt(0);
+              }
             });
           }
-          break;
+          return true;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
-      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.app.usage.IUsageStatsManager
     {
@@ -126,6 +130,9 @@ public interface IUsageStatsManager extends android.os.IInterface
           _data.writeLong(beginTime);
           _data.writeLong(endTime);
           boolean _status = mRemote.transact(Stub.TRANSACTION_queryUsageStats, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().queryUsageStats(intervalType, beginTime, endTime);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(android.app.usage.UsageStats.CREATOR);
         }
@@ -145,6 +152,9 @@ public interface IUsageStatsManager extends android.os.IInterface
           _data.writeLong(beginTime);
           _data.writeLong(endTime);
           boolean _status = mRemote.transact(Stub.TRANSACTION_queryAndAggregateUsageStats, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().queryAndAggregateUsageStats(beginTime, endTime);
+          }
           _reply.readException();
           {
             int N = _reply.readInt();
@@ -152,7 +162,12 @@ public interface IUsageStatsManager extends android.os.IInterface
             java.util.stream.IntStream.range(0, N).forEach(i -> {
               String k = _reply.readString();
               android.app.usage.UsageStats v;
-              v = _Parcel.readTypedObject(_reply, android.app.usage.UsageStats.CREATOR);
+              if ((0!=_reply.readInt())) {
+                v = android.app.usage.UsageStats.CREATOR.createFromParcel(_reply);
+              }
+              else {
+                v = null;
+              }
               _result.put(k, v);
             });
           }
@@ -163,47 +178,27 @@ public interface IUsageStatsManager extends android.os.IInterface
         }
         return _result;
       }
+      public static github.tornaco.android.thanos.core.app.usage.IUsageStatsManager sDefaultImpl;
     }
     static final int TRANSACTION_queryUsageStats = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_queryAndAggregateUsageStats = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.usage.IUsageStatsManager impl) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
+        Stub.Proxy.sDefaultImpl = impl;
+        return true;
+      }
+      return false;
+    }
+    public static github.tornaco.android.thanos.core.app.usage.IUsageStatsManager getDefaultImpl() {
+      return Stub.Proxy.sDefaultImpl;
+    }
   }
-  /** @hide */
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.usage.IUsageStatsManager";
   public java.util.List<android.app.usage.UsageStats> queryUsageStats(int intervalType, long beginTime, long endTime) throws android.os.RemoteException;
   public java.util.Map<java.lang.String,android.app.usage.UsageStats> queryAndAggregateUsageStats(long beginTime, long endTime) throws android.os.RemoteException;
-  /** @hide */
-  static class _Parcel {
-    static private <T> T readTypedObject(
-        android.os.Parcel parcel,
-        android.os.Parcelable.Creator<T> c) {
-      if (parcel.readInt() != 0) {
-          return c.createFromParcel(parcel);
-      } else {
-          return null;
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedObject(
-        android.os.Parcel parcel, T value, int parcelableFlags) {
-      if (value != null) {
-        parcel.writeInt(1);
-        value.writeToParcel(parcel, parcelableFlags);
-      } else {
-        parcel.writeInt(0);
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedList(
-        android.os.Parcel parcel, java.util.List<T> value, int parcelableFlags) {
-      if (value == null) {
-        parcel.writeInt(-1);
-      } else {
-        int N = value.size();
-        int i = 0;
-        parcel.writeInt(N);
-        while (i < N) {
-    writeTypedObject(parcel, value.get(i), parcelableFlags);
-          i++;
-        }
-      }
-    }
-  }
 }

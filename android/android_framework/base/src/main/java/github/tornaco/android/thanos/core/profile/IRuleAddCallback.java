@@ -1,6 +1,5 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/profile/IRuleAddCallback.aidl
  */
 package github.tornaco.android.thanos.core.profile;
 public interface IRuleAddCallback extends android.os.IInterface
@@ -22,8 +21,8 @@ public interface IRuleAddCallback extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.profile.IRuleAddCallback
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IRuleAddCallback";
     /** Construct the stub at attach it to the interface. */
-    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -50,35 +49,34 @@ public interface IRuleAddCallback extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
-      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
-        data.enforceInterface(descriptor);
-      }
-      if (code == INTERFACE_TRANSACTION) {
-        reply.writeString(descriptor);
-        return true;
-      }
       switch (code)
       {
+        case INTERFACE_TRANSACTION:
+        {
+          reply.writeString(descriptor);
+          return true;
+        }
         case TRANSACTION_onRuleAddSuccess:
         {
+          data.enforceInterface(descriptor);
           this.onRuleAddSuccess();
-          break;
+          return true;
         }
         case TRANSACTION_onRuleAddFail:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.onRuleAddFail(_arg0, _arg1);
-          break;
+          return true;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
-      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.profile.IRuleAddCallback
     {
@@ -101,6 +99,10 @@ public interface IRuleAddCallback extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onRuleAddSuccess, _data, null, android.os.IBinder.FLAG_ONEWAY);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onRuleAddSuccess();
+            return;
+          }
         }
         finally {
           _data.recycle();
@@ -114,17 +116,36 @@ public interface IRuleAddCallback extends android.os.IInterface
           _data.writeInt(errorCode);
           _data.writeString(errorMessage);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onRuleAddFail, _data, null, android.os.IBinder.FLAG_ONEWAY);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onRuleAddFail(errorCode, errorMessage);
+            return;
+          }
         }
         finally {
           _data.recycle();
         }
       }
+      public static github.tornaco.android.thanos.core.profile.IRuleAddCallback sDefaultImpl;
     }
     static final int TRANSACTION_onRuleAddSuccess = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_onRuleAddFail = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.profile.IRuleAddCallback impl) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
+        Stub.Proxy.sDefaultImpl = impl;
+        return true;
+      }
+      return false;
+    }
+    public static github.tornaco.android.thanos.core.profile.IRuleAddCallback getDefaultImpl() {
+      return Stub.Proxy.sDefaultImpl;
+    }
   }
-  /** @hide */
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.profile.IRuleAddCallback";
   public void onRuleAddSuccess() throws android.os.RemoteException;
   public void onRuleAddFail(int errorCode, java.lang.String errorMessage) throws android.os.RemoteException;
 }

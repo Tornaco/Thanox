@@ -1,6 +1,5 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/secure/ops/IAppOpsService.aidl
  */
 package github.tornaco.android.thanos.core.secure.ops;
 public interface IAppOpsService extends android.os.IInterface
@@ -87,8 +86,8 @@ public interface IAppOpsService extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.secure.ops.IAppOpsService
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.secure.ops.IAppOpsService";
     /** Construct the stub at attach it to the interface. */
-    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -115,17 +114,16 @@ public interface IAppOpsService extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
-      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
-        data.enforceInterface(descriptor);
-      }
-      if (code == INTERFACE_TRANSACTION) {
-        reply.writeString(descriptor);
-        return true;
-      }
       switch (code)
       {
+        case INTERFACE_TRANSACTION:
+        {
+          reply.writeString(descriptor);
+          return true;
+        }
         case TRANSACTION_setMode:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           int _arg1;
@@ -136,18 +134,20 @@ public interface IAppOpsService extends android.os.IInterface
           _arg3 = data.readInt();
           this.setMode(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_resetAllModes:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.resetAllModes(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_checkOperation:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           int _arg1;
@@ -157,25 +157,28 @@ public interface IAppOpsService extends android.os.IInterface
           int _result = this.checkOperation(_arg0, _arg1, _arg2);
           reply.writeNoException();
           reply.writeInt(_result);
-          break;
+          return true;
         }
         case TRANSACTION_isOpsEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isOpsEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setOpsEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setOpsEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_onStartOp:
         {
+          data.enforceInterface(descriptor);
           android.os.IBinder _arg0;
           _arg0 = data.readStrongBinder();
           int _arg1;
@@ -186,10 +189,11 @@ public interface IAppOpsService extends android.os.IInterface
           _arg3 = data.readString();
           this.onStartOp(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_onFinishOp:
         {
+          data.enforceInterface(descriptor);
           android.os.IBinder _arg0;
           _arg0 = data.readStrongBinder();
           int _arg1;
@@ -200,48 +204,53 @@ public interface IAppOpsService extends android.os.IInterface
           _arg3 = data.readString();
           this.onFinishOp(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_setOpRemindEnable:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setOpRemindEnable(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isOpRemindEnabled:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           boolean _result = this.isOpRemindEnabled(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setPkgOpRemindEnable:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setPkgOpRemindEnable(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isPkgOpRemindEnable:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.isPkgOpRemindEnable(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_checkOperationNonCheck:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           int _arg1;
@@ -251,18 +260,20 @@ public interface IAppOpsService extends android.os.IInterface
           int _result = this.checkOperationNonCheck(_arg0, _arg1, _arg2);
           reply.writeNoException();
           reply.writeInt(_result);
-          break;
+          return true;
         }
         case TRANSACTION_dump:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.IPrinter _arg0;
           _arg0 = github.tornaco.android.thanos.core.IPrinter.Stub.asInterface(data.readStrongBinder());
           this.dump(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_onSettingsGetString:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
@@ -271,10 +282,11 @@ public interface IAppOpsService extends android.os.IInterface
           _arg2 = data.readString();
           this.onSettingsGetString(_arg0, _arg1, _arg2);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_onSettingsPutString:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
@@ -283,59 +295,64 @@ public interface IAppOpsService extends android.os.IInterface
           _arg2 = data.readString();
           this.onSettingsPutString(_arg0, _arg1, _arg2);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_getSettingsReadRecords:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> _result = this.getSettingsReadRecords(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getSettingsWriteRecords:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.util.List<github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord> _result = this.getSettingsWriteRecords(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_clearSettingsReadRecords:
         {
+          data.enforceInterface(descriptor);
           this.clearSettingsReadRecords();
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_clearSettingsWriteRecords:
         {
+          data.enforceInterface(descriptor);
           this.clearSettingsWriteRecords();
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_setSettingsRecordEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setSettingsRecordEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isSettingsRecordEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isSettingsRecordEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
-      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.secure.ops.IAppOpsService
     {
@@ -363,6 +380,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeString(packageName);
           _data.writeInt(mode);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setMode, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setMode(code, uid, packageName, mode);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -378,6 +399,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(reqPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_resetAllModes, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().resetAllModes(reqPackageName);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -396,6 +421,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(uid);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkOperation, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().checkOperation(code, uid, packageName);
+          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -413,6 +441,9 @@ public interface IAppOpsService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isOpsEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isOpsEnabled();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -430,6 +461,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setOpsEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setOpsEnabled(enabled);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -448,6 +483,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(uid);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onStartOp, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onStartOp(token, code, uid, packageName);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -466,6 +505,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(uid);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onFinishOp, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onFinishOp(token, code, uid, packageName);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -482,6 +525,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(code);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setOpRemindEnable, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setOpRemindEnable(code, enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -498,6 +545,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(code);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isOpRemindEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isOpRemindEnabled(code);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -516,6 +566,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeString(pkg);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgOpRemindEnable, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPkgOpRemindEnable(pkg, enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -532,6 +586,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgOpRemindEnable, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPkgOpRemindEnable(pkg);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -552,6 +609,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInt(uid);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_checkOperationNonCheck, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().checkOperationNonCheck(code, uid, packageName);
+          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -567,8 +627,12 @@ public interface IAppOpsService extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongInterface(p);
+          _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_dump, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().dump(p);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -586,6 +650,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeString(value);
           _data.writeString(callerPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onSettingsGetString, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onSettingsGetString(name, value, callerPackageName);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -603,6 +671,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeString(value);
           _data.writeString(callerPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onSettingsPutString, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onSettingsPutString(name, value, callerPackageName);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -619,6 +691,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(filterCallerPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSettingsReadRecords, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSettingsReadRecords(filterCallerPackageName);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord.CREATOR);
         }
@@ -637,6 +712,9 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(filterCallerPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSettingsWriteRecords, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSettingsWriteRecords(filterCallerPackageName);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord.CREATOR);
         }
@@ -653,6 +731,10 @@ public interface IAppOpsService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_clearSettingsReadRecords, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().clearSettingsReadRecords();
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -667,6 +749,10 @@ public interface IAppOpsService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_clearSettingsWriteRecords, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().clearSettingsWriteRecords();
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -682,6 +768,10 @@ public interface IAppOpsService extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSettingsRecordEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSettingsRecordEnabled(enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -697,6 +787,9 @@ public interface IAppOpsService extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSettingsRecordEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSettingsRecordEnabled();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -706,6 +799,7 @@ public interface IAppOpsService extends android.os.IInterface
         }
         return _result;
       }
+      public static github.tornaco.android.thanos.core.secure.ops.IAppOpsService sDefaultImpl;
     }
     static final int TRANSACTION_setMode = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_resetAllModes = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
@@ -728,9 +822,23 @@ public interface IAppOpsService extends android.os.IInterface
     static final int TRANSACTION_clearSettingsWriteRecords = (android.os.IBinder.FIRST_CALL_TRANSACTION + 18);
     static final int TRANSACTION_setSettingsRecordEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 19);
     static final int TRANSACTION_isSettingsRecordEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 20);
+    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.secure.ops.IAppOpsService impl) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
+        Stub.Proxy.sDefaultImpl = impl;
+        return true;
+      }
+      return false;
+    }
+    public static github.tornaco.android.thanos.core.secure.ops.IAppOpsService getDefaultImpl() {
+      return Stub.Proxy.sDefaultImpl;
+    }
   }
-  /** @hide */
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.secure.ops.IAppOpsService";
   public void setMode(int code, int uid, java.lang.String packageName, int mode) throws android.os.RemoteException;
   public void resetAllModes(java.lang.String reqPackageName) throws android.os.RemoteException;
   public int checkOperation(int code, int uid, java.lang.String packageName) throws android.os.RemoteException;
@@ -752,39 +860,4 @@ public interface IAppOpsService extends android.os.IInterface
   public void clearSettingsWriteRecords() throws android.os.RemoteException;
   public void setSettingsRecordEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isSettingsRecordEnabled() throws android.os.RemoteException;
-  /** @hide */
-  static class _Parcel {
-    static private <T> T readTypedObject(
-        android.os.Parcel parcel,
-        android.os.Parcelable.Creator<T> c) {
-      if (parcel.readInt() != 0) {
-          return c.createFromParcel(parcel);
-      } else {
-          return null;
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedObject(
-        android.os.Parcel parcel, T value, int parcelableFlags) {
-      if (value != null) {
-        parcel.writeInt(1);
-        value.writeToParcel(parcel, parcelableFlags);
-      } else {
-        parcel.writeInt(0);
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedList(
-        android.os.Parcel parcel, java.util.List<T> value, int parcelableFlags) {
-      if (value == null) {
-        parcel.writeInt(-1);
-      } else {
-        int N = value.size();
-        int i = 0;
-        parcel.writeInt(N);
-        while (i < N) {
-    writeTypedObject(parcel, value.get(i), parcelableFlags);
-          i++;
-        }
-      }
-    }
-  }
 }

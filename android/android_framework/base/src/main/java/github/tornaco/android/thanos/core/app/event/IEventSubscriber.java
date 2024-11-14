@@ -1,6 +1,5 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/app/event/IEventSubscriber.aidl
  */
 package github.tornaco.android.thanos.core.app.event;
 public interface IEventSubscriber extends android.os.IInterface
@@ -19,8 +18,8 @@ public interface IEventSubscriber extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.event.IEventSubscriber
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.event.IEventSubscriber";
     /** Construct the stub at attach it to the interface. */
-    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -47,29 +46,32 @@ public interface IEventSubscriber extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
-      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
-        data.enforceInterface(descriptor);
-      }
-      if (code == INTERFACE_TRANSACTION) {
-        reply.writeString(descriptor);
-        return true;
-      }
       switch (code)
       {
+        case INTERFACE_TRANSACTION:
+        {
+          reply.writeString(descriptor);
+          return true;
+        }
         case TRANSACTION_onEvent:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.app.event.ThanosEvent _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.app.event.ThanosEvent.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.app.event.ThanosEvent.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           this.onEvent(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
-      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.app.event.IEventSubscriber
     {
@@ -92,8 +94,18 @@ public interface IEventSubscriber extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, e, 0);
+          if ((e!=null)) {
+            _data.writeInt(1);
+            e.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_onEvent, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().onEvent(e);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -101,31 +113,25 @@ public interface IEventSubscriber extends android.os.IInterface
           _data.recycle();
         }
       }
+      public static github.tornaco.android.thanos.core.app.event.IEventSubscriber sDefaultImpl;
     }
     static final int TRANSACTION_onEvent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
+    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.event.IEventSubscriber impl) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
+        Stub.Proxy.sDefaultImpl = impl;
+        return true;
+      }
+      return false;
+    }
+    public static github.tornaco.android.thanos.core.app.event.IEventSubscriber getDefaultImpl() {
+      return Stub.Proxy.sDefaultImpl;
+    }
   }
-  /** @hide */
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.event.IEventSubscriber";
   public void onEvent(github.tornaco.android.thanos.core.app.event.ThanosEvent e) throws android.os.RemoteException;
-  /** @hide */
-  static class _Parcel {
-    static private <T> T readTypedObject(
-        android.os.Parcel parcel,
-        android.os.Parcelable.Creator<T> c) {
-      if (parcel.readInt() != 0) {
-          return c.createFromParcel(parcel);
-      } else {
-          return null;
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedObject(
-        android.os.Parcel parcel, T value, int parcelableFlags) {
-      if (value != null) {
-        parcel.writeInt(1);
-        value.writeToParcel(parcel, parcelableFlags);
-      } else {
-        parcel.writeInt(0);
-      }
-    }
-  }
 }

@@ -1,6 +1,5 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/pm/IPkgManager.aidl
  */
 package github.tornaco.android.thanos.core.pm;
 public interface IPkgManager extends android.os.IInterface
@@ -17,6 +16,7 @@ public interface IPkgManager extends android.os.IInterface
       return 0;
     }
     // ApplicationInfo
+
     @Override public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgs(int flags) throws android.os.RemoteException
     {
       return null;
@@ -252,6 +252,7 @@ public interface IPkgManager extends android.os.IInterface
       return null;
     }
     // Wrap api to skip permission check
+
     @Override public java.lang.String[] getPackagesForUid(int uid) throws android.os.RemoteException
     {
       return null;
@@ -297,7 +298,7 @@ public interface IPkgManager extends android.os.IInterface
     {
       return false;
     }
-    @Override public java.util.List<android.content.ComponentName> getAllDisabledComponentsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+    @Override public java.util.List<android.content.ComponentName> getAllDisabledComponentsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
     {
       return null;
     }
@@ -316,8 +317,8 @@ public interface IPkgManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.pm.IPkgManager
   {
+    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pm.IPkgManager";
     /** Construct the stub at attach it to the interface. */
-    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -344,146 +345,194 @@ public interface IPkgManager extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
-      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
-        data.enforceInterface(descriptor);
-      }
-      if (code == INTERFACE_TRANSACTION) {
-        reply.writeString(descriptor);
-        return true;
-      }
       switch (code)
       {
+        case INTERFACE_TRANSACTION:
+        {
+          reply.writeString(descriptor);
+          return true;
+        }
         case TRANSACTION_getPkgNameForUid:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String[] _result = this.getPkgNameForUid(_arg0);
           reply.writeNoException();
           reply.writeStringArray(_result);
-          break;
+          return true;
         }
         case TRANSACTION_getUidForPkgName:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           int _result = this.getUidForPkgName(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
-          break;
+          return true;
         }
         case TRANSACTION_getInstalledPkgs:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> _result = this.getInstalledPkgs(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getAppInfo:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           github.tornaco.android.thanos.core.pm.AppInfo _result = this.getAppInfo(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
+          return true;
         }
         case TRANSACTION_getWhiteListPkgs:
         {
+          data.enforceInterface(descriptor);
           java.lang.String[] _result = this.getWhiteListPkgs();
           reply.writeNoException();
           reply.writeStringArray(_result);
-          break;
+          return true;
         }
         case TRANSACTION_isPkgInWhiteList:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.isPkgInWhiteList(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setComponentEnabledSetting:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           android.content.ComponentName _arg1;
-          _arg1 = _Parcel.readTypedObject(data, android.content.ComponentName.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg1 = android.content.ComponentName.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg1 = null;
+          }
           int _arg2;
           _arg2 = data.readInt();
           int _arg3;
           _arg3 = data.readInt();
           this.setComponentEnabledSetting(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_getComponentEnabledSetting:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           android.content.ComponentName _arg1;
-          _arg1 = _Parcel.readTypedObject(data, android.content.ComponentName.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg1 = android.content.ComponentName.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg1 = null;
+          }
           int _result = this.getComponentEnabledSetting(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(_result);
-          break;
+          return true;
         }
         case TRANSACTION_isComponentDisabledByThanox:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           android.content.ComponentName _arg1;
-          _arg1 = _Parcel.readTypedObject(data, android.content.ComponentName.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg1 = android.content.ComponentName.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg1 = null;
+          }
           boolean _result = this.isComponentDisabledByThanox(_arg0, _arg1);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_getApplicationEnableState:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.getApplicationEnableState(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setApplicationEnableState:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           boolean _arg2;
           _arg2 = (0!=data.readInt());
           this.setApplicationEnableState(_arg0, _arg1, _arg2);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_getActivities:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
           _arg1 = data.readString();
           java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getActivities(_arg0, _arg1);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getActivitiesCount:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           int _result = this.getActivitiesCount(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
-          break;
+          return true;
         }
         case TRANSACTION_getActivitiesInBatch:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
@@ -494,31 +543,34 @@ public interface IPkgManager extends android.os.IInterface
           _arg3 = data.readInt();
           java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getActivitiesInBatch(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getReceivers:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
           _arg1 = data.readString();
           java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getReceivers(_arg0, _arg1);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getReceiverCount:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           int _result = this.getReceiverCount(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
-          break;
+          return true;
         }
         case TRANSACTION_getReceiversInBatch:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
@@ -529,31 +581,34 @@ public interface IPkgManager extends android.os.IInterface
           _arg3 = data.readInt();
           java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getReceiversInBatch(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getServices:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
           _arg1 = data.readString();
           java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getServices(_arg0, _arg1);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getServiceCount:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           int _result = this.getServiceCount(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
-          break;
+          return true;
         }
         case TRANSACTION_getServicesInBatch:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
@@ -564,263 +619,321 @@ public interface IPkgManager extends android.os.IInterface
           _arg3 = data.readInt();
           java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getServicesInBatch(_arg0, _arg1, _arg2, _arg3);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_setSmartFreezeEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setSmartFreezeEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isSmartFreezeEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isSmartFreezeEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setPkgSmartFreezeEnabled:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setPkgSmartFreezeEnabled(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isPkgSmartFreezeEnabled:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.isPkgSmartFreezeEnabled(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_getSmartFreezePkgs:
         {
+          data.enforceInterface(descriptor);
           java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _result = this.getSmartFreezePkgs();
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_launchSmartFreezePkg:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.launchSmartFreezePkg(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_setSmartFreezeScreenOffCheckEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setSmartFreezeScreenOffCheckEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isSmartFreezeScreenOffCheckEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isSmartFreezeScreenOffCheckEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setSmartFreezeScreenOffCheckDelay:
         {
+          data.enforceInterface(descriptor);
           long _arg0;
           _arg0 = data.readLong();
           this.setSmartFreezeScreenOffCheckDelay(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_getSmartFreezeScreenOffCheckDelay:
         {
+          data.enforceInterface(descriptor);
           long _result = this.getSmartFreezeScreenOffCheckDelay();
           reply.writeNoException();
           reply.writeLong(_result);
-          break;
+          return true;
         }
         case TRANSACTION_queryLaunchIntentForPackage:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           android.content.Intent _result = this.queryLaunchIntentForPackage(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
+          return true;
         }
         case TRANSACTION_enableAllThanoxDisabledPackages:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _result = this.enableAllThanoxDisabledPackages(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_deviceHasGms:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.deviceHasGms();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_verifyBillingState:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.verifyBillingState();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_launchSmartFreezePkgThenKillOrigin:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.launchSmartFreezePkgThenKillOrigin(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isProtectedWhitelistEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isProtectedWhitelistEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setProtectedWhitelistEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setProtectedWhitelistEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_addPlugin:
         {
+          data.enforceInterface(descriptor);
           android.os.ParcelFileDescriptor _arg0;
-          _arg0 = _Parcel.readTypedObject(data, android.os.ParcelFileDescriptor.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = android.os.ParcelFileDescriptor.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.lang.String _arg1;
           _arg1 = data.readString();
           github.tornaco.android.thanos.core.pm.IAddPluginCallback _arg2;
           _arg2 = github.tornaco.android.thanos.core.pm.IAddPluginCallback.Stub.asInterface(data.readStrongBinder());
           this.addPlugin(_arg0, _arg1, _arg2);
-          break;
+          return true;
         }
         case TRANSACTION_removePlugin:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.removePlugin(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_hasPlugin:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.hasPlugin(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_isSmartFreezeHidePackageEventEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isSmartFreezeHidePackageEventEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setSmartFreezeHidePackageEventEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setSmartFreezeHidePackageEventEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_dump:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.IPrinter _arg0;
           _arg0 = github.tornaco.android.thanos.core.IPrinter.Stub.asInterface(data.readStrongBinder());
           this.dump(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_setPackageBlockUninstallEnabled:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setPackageBlockUninstallEnabled(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isPackageBlockUninstallEnabled:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.isPackageBlockUninstallEnabled(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setPackageBlockClearDataEnabled:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setPackageBlockClearDataEnabled(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isPackageBlockClearDataEnabled:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.isPackageBlockClearDataEnabled(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_getInstalledPackagesCount:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           int _result = this.getInstalledPackagesCount(_arg0);
           reply.writeNoException();
           reply.writeInt(_result);
-          break;
+          return true;
         }
         case TRANSACTION_createPackageSet:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           github.tornaco.android.thanos.core.pm.PackageSet _result = this.createPackageSet(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
+          return true;
         }
         case TRANSACTION_removePackageSet:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _result = this.removePackageSet(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_getPackageSetById:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           boolean _arg1;
@@ -829,277 +942,372 @@ public interface IPkgManager extends android.os.IInterface
           _arg2 = (0!=data.readInt());
           github.tornaco.android.thanos.core.pm.PackageSet _result = this.getPackageSetById(_arg0, _arg1, _arg2);
           reply.writeNoException();
-          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
+          return true;
         }
         case TRANSACTION_getAllPackageSets:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> _result = this.getAllPackageSets(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getAllPackageSetIds:
         {
+          data.enforceInterface(descriptor);
           java.util.List<java.lang.String> _result = this.getAllPackageSetIds();
           reply.writeNoException();
           reply.writeStringList(_result);
-          break;
+          return true;
         }
         case TRANSACTION_addToPackageSet:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.addToPackageSet(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_removeFromPackageSet:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.removeFromPackageSet(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_getPackageSetThatContainsPkg:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> _result = this.getPackageSetThatContainsPkg(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getPackageSetLabelsThatContainsPkg:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.util.List<java.lang.String> _result = this.getPackageSetLabelsThatContainsPkg(_arg0);
           reply.writeNoException();
           reply.writeStringList(_result);
-          break;
+          return true;
         }
         case TRANSACTION_setFreezePkgWithSuspendEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setFreezePkgWithSuspendEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isFreezePkgWithSuspendEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isFreezePkgWithSuspendEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_getInstalledPkgsByPackageSetId:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> _result = this.getInstalledPkgsByPackageSetId(_arg0);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_registerPackageSetChangeListener:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.IPackageSetChangeListener _arg0;
           _arg0 = github.tornaco.android.thanos.core.pm.IPackageSetChangeListener.Stub.asInterface(data.readStrongBinder());
           this.registerPackageSetChangeListener(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_unRegisterPackageSetChangeListener:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.IPackageSetChangeListener _arg0;
           _arg0 = github.tornaco.android.thanos.core.pm.IPackageSetChangeListener.Stub.asInterface(data.readStrongBinder());
           this.unRegisterPackageSetChangeListener(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_setEnablePackageOnLaunchRequestEnabled:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setEnablePackageOnLaunchRequestEnabled(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isEnablePackageOnLaunchRequestEnabled:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           boolean _result = this.isEnablePackageOnLaunchRequestEnabled(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_getProviders:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String _arg1;
           _arg1 = data.readString();
           java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> _result = this.getProviders(_arg0, _arg1);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_getPackagesForUid:
         {
+          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           java.lang.String[] _result = this.getPackagesForUid(_arg0);
           reply.writeNoException();
           reply.writeStringArray(_result);
-          break;
+          return true;
         }
         case TRANSACTION_mayEnableAppOnStartActivityIntent:
         {
+          data.enforceInterface(descriptor);
           android.content.Intent _arg0;
-          _arg0 = _Parcel.readTypedObject(data, android.content.Intent.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = android.content.Intent.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           int _arg1;
           _arg1 = data.readInt();
           java.lang.String _result = this.mayEnableAppOnStartActivityIntent(_arg0, _arg1);
           reply.writeNoException();
           reply.writeString(_result);
-          break;
+          return true;
         }
         case TRANSACTION_isEnablePkgOnLaunchByDefault:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isEnablePkgOnLaunchByDefault();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_setEnablePkgOnLaunchByDefaultEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setEnablePkgOnLaunchByDefaultEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_getAppInfoForUser:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           int _arg1;
           _arg1 = data.readInt();
           github.tornaco.android.thanos.core.pm.AppInfo _result = this.getAppInfoForUser(_arg0, _arg1);
           reply.writeNoException();
-          _Parcel.writeTypedObject(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          if ((_result!=null)) {
+            reply.writeInt(1);
+            _result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          }
+          else {
+            reply.writeInt(0);
+          }
+          return true;
         }
         case TRANSACTION_launchSmartFreezePkgForUser:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           this.launchSmartFreezePkgForUser(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_launchSmartFreezePkgThenKillOriginForUser:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.launchSmartFreezePkgThenKillOriginForUser(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_setDOLTipsEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setDOLTipsEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isDOLTipsEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isDOLTipsEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_updatePackageSetLabel:
         {
+          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           java.lang.String _arg1;
           _arg1 = data.readString();
           this.updatePackageSetLabel(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_freezeAllSmartFreezePackages:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener _arg0;
           _arg0 = github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener.Stub.asInterface(data.readStrongBinder());
           this.freezeAllSmartFreezePackages(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_freezeSmartFreezePackages:
         {
+          data.enforceInterface(descriptor);
           java.util.List<github.tornaco.android.thanos.core.pm.Pkg> _arg0;
           _arg0 = data.createTypedArrayList(github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
           github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener _arg1;
           _arg1 = github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener.Stub.asInterface(data.readStrongBinder());
           this.freezeSmartFreezePackages(_arg0, _arg1);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_hasFreezedPackageInUserWhiteListPkgSet:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.hasFreezedPackageInUserWhiteListPkgSet();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         case TRANSACTION_getAllDisabledComponentsForPackage:
         {
+          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
-          java.util.List<android.content.ComponentName> _result = this.getAllDisabledComponentsForPackage(_arg0);
+          if ((0!=data.readInt())) {
+            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
+          }
+          else {
+            _arg0 = null;
+          }
+          int _arg1;
+          _arg1 = data.readInt();
+          int _arg2;
+          _arg2 = data.readInt();
+          java.util.List<android.content.ComponentName> _result = this.getAllDisabledComponentsForPackage(_arg0, _arg1, _arg2);
           reply.writeNoException();
-          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
-          break;
+          reply.writeTypedList(_result);
+          return true;
         }
         case TRANSACTION_setFreezeTipEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setFreezeTipEnabled(_arg0);
           reply.writeNoException();
-          break;
+          return true;
         }
         case TRANSACTION_isFreezeTipEnabled:
         {
+          data.enforceInterface(descriptor);
           boolean _result = this.isFreezeTipEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          break;
+          return true;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
-      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.pm.IPkgManager
     {
@@ -1125,6 +1333,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(uid);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPkgNameForUid, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPkgNameForUid(uid);
+          }
           _reply.readException();
           _result = _reply.createStringArray();
         }
@@ -1141,8 +1352,17 @@ public interface IPkgManager extends android.os.IInterface
         int _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getUidForPkgName, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getUidForPkgName(pkg);
+          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -1153,6 +1373,7 @@ public interface IPkgManager extends android.os.IInterface
         return _result;
       }
       // ApplicationInfo
+
       @Override public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgs(int flags) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -1162,6 +1383,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(flags);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInstalledPkgs, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getInstalledPkgs(flags);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.AppInfo.CREATOR);
         }
@@ -1181,8 +1405,16 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAppInfo, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAppInfo(pkgName);
+          }
           _reply.readException();
-          _result = _Parcel.readTypedObject(_reply, github.tornaco.android.thanos.core.pm.AppInfo.CREATOR);
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.pm.AppInfo.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
         }
         finally {
           _reply.recycle();
@@ -1198,6 +1430,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getWhiteListPkgs, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getWhiteListPkgs();
+          }
           _reply.readException();
           _result = _reply.createStringArray();
         }
@@ -1216,6 +1451,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkg);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgInWhiteList, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPkgInWhiteList(pkg);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1232,10 +1470,20 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(userId);
-          _Parcel.writeTypedObject(_data, componentName, 0);
+          if ((componentName!=null)) {
+            _data.writeInt(1);
+            componentName.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeInt(newState);
           _data.writeInt(flags);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setComponentEnabledSetting, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setComponentEnabledSetting(userId, componentName, newState, flags);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1251,8 +1499,17 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(userId);
-          _Parcel.writeTypedObject(_data, componentName, 0);
+          if ((componentName!=null)) {
+            _data.writeInt(1);
+            componentName.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getComponentEnabledSetting, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getComponentEnabledSetting(userId, componentName);
+          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -1270,8 +1527,17 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(userId);
-          _Parcel.writeTypedObject(_data, componentName, 0);
+          if ((componentName!=null)) {
+            _data.writeInt(1);
+            componentName.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isComponentDisabledByThanox, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isComponentDisabledByThanox(userId, componentName);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1288,8 +1554,17 @@ public interface IPkgManager extends android.os.IInterface
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getApplicationEnableState, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getApplicationEnableState(pkg);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1305,10 +1580,20 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeInt(((enable)?(1):(0)));
           _data.writeInt(((tmp)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setApplicationEnableState, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setApplicationEnableState(pkg, enable, tmp);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1326,6 +1611,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(userId);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivities, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getActivities(userId, packageName);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
         }
@@ -1344,6 +1632,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivitiesCount, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getActivitiesCount(packageName);
+          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -1365,6 +1656,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(itemCountInEachBatch);
           _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getActivitiesInBatch, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getActivitiesInBatch(userId, packageName, itemCountInEachBatch, batchIndex);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
         }
@@ -1384,6 +1678,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(userId);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getReceivers, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getReceivers(userId, packageName);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
         }
@@ -1402,6 +1699,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getReceiverCount, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getReceiverCount(packageName);
+          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -1423,6 +1723,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(itemCountInEachBatch);
           _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getReceiversInBatch, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getReceiversInBatch(userId, packageName, itemCountInEachBatch, batchIndex);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
         }
@@ -1442,6 +1745,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(userId);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServices, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getServices(userId, packageName);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
         }
@@ -1460,6 +1766,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServiceCount, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getServiceCount(packageName);
+          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -1481,6 +1790,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(itemCountInEachBatch);
           _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getServicesInBatch, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getServicesInBatch(userId, packageName, itemCountInEachBatch, batchIndex);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
         }
@@ -1498,6 +1810,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartFreezeEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartFreezeEnabled(enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1513,6 +1829,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartFreezeEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSmartFreezeEnabled();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1528,9 +1847,19 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkgName, 0);
+          if ((pkgName!=null)) {
+            _data.writeInt(1);
+            pkgName.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPkgSmartFreezeEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPkgSmartFreezeEnabled(pkgName, enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1545,8 +1874,17 @@ public interface IPkgManager extends android.os.IInterface
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkgName, 0);
+          if ((pkgName!=null)) {
+            _data.writeInt(1);
+            pkgName.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPkgSmartFreezeEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPkgSmartFreezeEnabled(pkgName);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1564,6 +1902,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSmartFreezePkgs, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSmartFreezePkgs();
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
         }
@@ -1582,6 +1923,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkg, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().launchSmartFreezePkg(pkgName);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1597,6 +1942,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartFreezeScreenOffCheckEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartFreezeScreenOffCheckEnabled(enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1612,6 +1961,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartFreezeScreenOffCheckEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSmartFreezeScreenOffCheckEnabled();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1629,6 +1981,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeLong(delay);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartFreezeScreenOffCheckDelay, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartFreezeScreenOffCheckDelay(delay);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1644,6 +2000,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSmartFreezeScreenOffCheckDelay, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getSmartFreezeScreenOffCheckDelay();
+          }
           _reply.readException();
           _result = _reply.readLong();
         }
@@ -1662,8 +2021,16 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_queryLaunchIntentForPackage, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().queryLaunchIntentForPackage(pkgName);
+          }
           _reply.readException();
-          _result = _Parcel.readTypedObject(_reply, android.content.Intent.CREATOR);
+          if ((0!=_reply.readInt())) {
+            _result = android.content.Intent.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
         }
         finally {
           _reply.recycle();
@@ -1680,6 +2047,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((removeFromSmartFreezeList)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_enableAllThanoxDisabledPackages, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().enableAllThanoxDisabledPackages(removeFromSmartFreezeList);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
         }
@@ -1697,6 +2067,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_deviceHasGms, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().deviceHasGms();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1714,6 +2087,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_verifyBillingState, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().verifyBillingState();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1733,6 +2109,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeString(origin);
           boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkgThenKillOrigin, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().launchSmartFreezePkgThenKillOrigin(pkgName, origin);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1748,6 +2128,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isProtectedWhitelistEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isProtectedWhitelistEnabled();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1765,6 +2148,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setProtectedWhitelistEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setProtectedWhitelistEnabled(enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1777,10 +2164,20 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _data = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pfd, 0);
+          if ((pfd!=null)) {
+            _data.writeInt(1);
+            pfd.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeString(pluginPackageName);
-          _data.writeStrongInterface(callback);
+          _data.writeStrongBinder((((callback!=null))?(callback.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_addPlugin, _data, null, android.os.IBinder.FLAG_ONEWAY);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().addPlugin(pfd, pluginPackageName, callback);
+            return;
+          }
         }
         finally {
           _data.recycle();
@@ -1794,6 +2191,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pluginPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_removePlugin, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().removePlugin(pluginPackageName);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1810,6 +2211,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pluginPackageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasPlugin, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().hasPlugin(pluginPackageName);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1827,6 +2231,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isSmartFreezeHidePackageEventEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isSmartFreezeHidePackageEventEnabled();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1844,6 +2251,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enabled)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setSmartFreezeHidePackageEventEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setSmartFreezeHidePackageEventEnabled(enabled);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1857,8 +2268,12 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongInterface(p);
+          _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_dump, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().dump(p);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1875,6 +2290,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPackageBlockUninstallEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPackageBlockUninstallEnabled(pkgName, enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1891,6 +2310,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageBlockUninstallEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPackageBlockUninstallEnabled(pkgName);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1909,6 +2331,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPackageBlockClearDataEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setPackageBlockClearDataEnabled(pkgName, enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -1925,6 +2351,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPackageBlockClearDataEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isPackageBlockClearDataEnabled(pkgName);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1943,6 +2372,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(appFlags);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInstalledPackagesCount, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getInstalledPackagesCount(appFlags);
+          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -1961,8 +2393,16 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(label);
           boolean _status = mRemote.transact(Stub.TRANSACTION_createPackageSet, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().createPackageSet(label);
+          }
           _reply.readException();
-          _result = _Parcel.readTypedObject(_reply, github.tornaco.android.thanos.core.pm.PackageSet.CREATOR);
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.pm.PackageSet.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
         }
         finally {
           _reply.recycle();
@@ -1979,6 +2419,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_removePackageSet, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().removePackageSet(id);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -1999,8 +2442,16 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(((withPackages)?(1):(0)));
           _data.writeInt(((shouldFilterUserWhiteList)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetById, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPackageSetById(id, withPackages, shouldFilterUserWhiteList);
+          }
           _reply.readException();
-          _result = _Parcel.readTypedObject(_reply, github.tornaco.android.thanos.core.pm.PackageSet.CREATOR);
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.pm.PackageSet.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
         }
         finally {
           _reply.recycle();
@@ -2017,6 +2468,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((withPackages)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllPackageSets, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllPackageSets(withPackages);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.PackageSet.CREATOR);
         }
@@ -2034,6 +2488,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllPackageSetIds, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllPackageSetIds();
+          }
           _reply.readException();
           _result = _reply.createStringArrayList();
         }
@@ -2049,9 +2506,19 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_addToPackageSet, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().addToPackageSet(pkg, id);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2065,9 +2532,19 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_removeFromPackageSet, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().removeFromPackageSet(pkg, id);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2082,8 +2559,17 @@ public interface IPkgManager extends android.os.IInterface
         java.util.List<github.tornaco.android.thanos.core.pm.PackageSet> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetThatContainsPkg, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPackageSetThatContainsPkg(pkg);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.PackageSet.CREATOR);
         }
@@ -2100,8 +2586,17 @@ public interface IPkgManager extends android.os.IInterface
         java.util.List<java.lang.String> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackageSetLabelsThatContainsPkg, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPackageSetLabelsThatContainsPkg(pkg);
+          }
           _reply.readException();
           _result = _reply.createStringArrayList();
         }
@@ -2119,6 +2614,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setFreezePkgWithSuspendEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setFreezePkgWithSuspendEnabled(enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2134,6 +2633,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isFreezePkgWithSuspendEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isFreezePkgWithSuspendEnabled();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -2152,6 +2654,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(pkgSetId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getInstalledPkgsByPackageSetId, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getInstalledPkgsByPackageSetId(pkgSetId);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.AppInfo.CREATOR);
         }
@@ -2167,8 +2672,12 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongInterface(listener);
+          _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_registerPackageSetChangeListener, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().registerPackageSetChangeListener(listener);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2182,8 +2691,12 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongInterface(listener);
+          _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_unRegisterPackageSetChangeListener, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().unRegisterPackageSetChangeListener(listener);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2197,9 +2710,19 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setEnablePackageOnLaunchRequestEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setEnablePackageOnLaunchRequestEnabled(pkg, enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2214,8 +2737,17 @@ public interface IPkgManager extends android.os.IInterface
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_isEnablePackageOnLaunchRequestEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isEnablePackageOnLaunchRequestEnabled(pkg);
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -2235,6 +2767,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInt(userId);
           _data.writeString(packageName);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getProviders, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getProviders(userId, packageName);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.pm.ComponentInfo.CREATOR);
         }
@@ -2245,6 +2780,7 @@ public interface IPkgManager extends android.os.IInterface
         return _result;
       }
       // Wrap api to skip permission check
+
       @Override public java.lang.String[] getPackagesForUid(int uid) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
@@ -2254,6 +2790,9 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(uid);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getPackagesForUid, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getPackagesForUid(uid);
+          }
           _reply.readException();
           _result = _reply.createStringArray();
         }
@@ -2270,9 +2809,18 @@ public interface IPkgManager extends android.os.IInterface
         java.lang.String _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, intent, 0);
+          if ((intent!=null)) {
+            _data.writeInt(1);
+            intent.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeInt(userId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_mayEnableAppOnStartActivityIntent, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().mayEnableAppOnStartActivityIntent(intent, userId);
+          }
           _reply.readException();
           _result = _reply.readString();
         }
@@ -2290,6 +2838,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isEnablePkgOnLaunchByDefault, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isEnablePkgOnLaunchByDefault();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -2307,6 +2858,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((byDefault)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setEnablePkgOnLaunchByDefaultEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setEnablePkgOnLaunchByDefaultEnabled(byDefault);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2324,8 +2879,16 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(pkgName);
           _data.writeInt(userId);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAppInfoForUser, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAppInfoForUser(pkgName, userId);
+          }
           _reply.readException();
-          _result = _Parcel.readTypedObject(_reply, github.tornaco.android.thanos.core.pm.AppInfo.CREATOR);
+          if ((0!=_reply.readInt())) {
+            _result = github.tornaco.android.thanos.core.pm.AppInfo.CREATOR.createFromParcel(_reply);
+          }
+          else {
+            _result = null;
+          }
         }
         finally {
           _reply.recycle();
@@ -2339,8 +2902,18 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkgForUser, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().launchSmartFreezePkgForUser(pkg);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2354,9 +2927,19 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, targetPkg, 0);
+          if ((targetPkg!=null)) {
+            _data.writeInt(1);
+            targetPkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
           _data.writeString(origin);
           boolean _status = mRemote.transact(Stub.TRANSACTION_launchSmartFreezePkgThenKillOriginForUser, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().launchSmartFreezePkgThenKillOriginForUser(targetPkg, origin);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2372,6 +2955,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setDOLTipsEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setDOLTipsEnabled(enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2387,6 +2974,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isDOLTipsEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isDOLTipsEnabled();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -2405,6 +2995,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeString(newLabel);
           _data.writeString(id);
           boolean _status = mRemote.transact(Stub.TRANSACTION_updatePackageSetLabel, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().updatePackageSetLabel(newLabel, id);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2418,8 +3012,12 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongInterface(listener);
+          _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_freezeAllSmartFreezePackages, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().freezeAllSmartFreezePackages(listener);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2433,9 +3031,13 @@ public interface IPkgManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedList(_data, packages, 0);
-          _data.writeStrongInterface(listener);
+          _data.writeTypedList(packages);
+          _data.writeStrongBinder((((listener!=null))?(listener.asBinder()):(null)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_freezeSmartFreezePackages, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().freezeSmartFreezePackages(packages, listener);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2451,6 +3053,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_hasFreezedPackageInUserWhiteListPkgSet, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().hasFreezedPackageInUserWhiteListPkgSet();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -2460,15 +3065,26 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
-      @Override public java.util.List<android.content.ComponentName> getAllDisabledComponentsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException
+      @Override public java.util.List<android.content.ComponentName> getAllDisabledComponentsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException
       {
         android.os.Parcel _data = android.os.Parcel.obtain();
         android.os.Parcel _reply = android.os.Parcel.obtain();
         java.util.List<android.content.ComponentName> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _Parcel.writeTypedObject(_data, pkg, 0);
+          if ((pkg!=null)) {
+            _data.writeInt(1);
+            pkg.writeToParcel(_data, 0);
+          }
+          else {
+            _data.writeInt(0);
+          }
+          _data.writeInt(itemCountInEachBatch);
+          _data.writeInt(batchIndex);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getAllDisabledComponentsForPackage, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().getAllDisabledComponentsForPackage(pkg, itemCountInEachBatch, batchIndex);
+          }
           _reply.readException();
           _result = _reply.createTypedArrayList(android.content.ComponentName.CREATOR);
         }
@@ -2486,6 +3102,10 @@ public interface IPkgManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setFreezeTipEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            getDefaultImpl().setFreezeTipEnabled(enable);
+            return;
+          }
           _reply.readException();
         }
         finally {
@@ -2501,6 +3121,9 @@ public interface IPkgManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isFreezeTipEnabled, _data, _reply, 0);
+          if (!_status && getDefaultImpl() != null) {
+            return getDefaultImpl().isFreezeTipEnabled();
+          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -2510,6 +3133,7 @@ public interface IPkgManager extends android.os.IInterface
         }
         return _result;
       }
+      public static github.tornaco.android.thanos.core.pm.IPkgManager sDefaultImpl;
     }
     static final int TRANSACTION_getPkgNameForUid = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_getUidForPkgName = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
@@ -2592,15 +3216,29 @@ public interface IPkgManager extends android.os.IInterface
     static final int TRANSACTION_getAllDisabledComponentsForPackage = (android.os.IBinder.FIRST_CALL_TRANSACTION + 78);
     static final int TRANSACTION_setFreezeTipEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 79);
     static final int TRANSACTION_isFreezeTipEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 80);
+    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pm.IPkgManager impl) {
+      // Only one user of this interface can use this function
+      // at a time. This is a heuristic to detect if two different
+      // users in the same process use this function.
+      if (Stub.Proxy.sDefaultImpl != null) {
+        throw new IllegalStateException("setDefaultImpl() called twice");
+      }
+      if (impl != null) {
+        Stub.Proxy.sDefaultImpl = impl;
+        return true;
+      }
+      return false;
+    }
+    public static github.tornaco.android.thanos.core.pm.IPkgManager getDefaultImpl() {
+      return Stub.Proxy.sDefaultImpl;
+    }
   }
-  /** @hide */
-  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pm.IPkgManager";
   public java.lang.String[] getPkgNameForUid(int uid) throws android.os.RemoteException;
   public int getUidForPkgName(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   // ApplicationInfo
+
   public java.util.List<github.tornaco.android.thanos.core.pm.AppInfo> getInstalledPkgs(int flags) throws android.os.RemoteException;
   /** @deprecated use {@link #getAppInfoForUser} instead */
-  @Deprecated
   public github.tornaco.android.thanos.core.pm.AppInfo getAppInfo(java.lang.String pkgName) throws android.os.RemoteException;
   public java.lang.String[] getWhiteListPkgs() throws android.os.RemoteException;
   public boolean isPkgInWhiteList(java.lang.String pkg) throws android.os.RemoteException;
@@ -2624,7 +3262,6 @@ public interface IPkgManager extends android.os.IInterface
   public boolean isPkgSmartFreezeEnabled(github.tornaco.android.thanos.core.pm.Pkg pkgName) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.Pkg> getSmartFreezePkgs() throws android.os.RemoteException;
   /** @deprecated use {@link #launchSmartFreezePkgForUser} instead */
-  @Deprecated
   public void launchSmartFreezePkg(java.lang.String pkgName) throws android.os.RemoteException;
   public void setSmartFreezeScreenOffCheckEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isSmartFreezeScreenOffCheckEnabled() throws android.os.RemoteException;
@@ -2635,7 +3272,6 @@ public interface IPkgManager extends android.os.IInterface
   public boolean deviceHasGms() throws android.os.RemoteException;
   public boolean verifyBillingState() throws android.os.RemoteException;
   /** @deprecated use {@link #launchSmartFreezePkgThenKillOriginForUser} instead */
-  @Deprecated
   public void launchSmartFreezePkgThenKillOrigin(java.lang.String pkgName, java.lang.String origin) throws android.os.RemoteException;
   public boolean isProtectedWhitelistEnabled() throws android.os.RemoteException;
   public void setProtectedWhitelistEnabled(boolean enable) throws android.os.RemoteException;
@@ -2668,6 +3304,7 @@ public interface IPkgManager extends android.os.IInterface
   public boolean isEnablePackageOnLaunchRequestEnabled(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
   public java.util.List<github.tornaco.android.thanos.core.pm.ComponentInfo> getProviders(int userId, java.lang.String packageName) throws android.os.RemoteException;
   // Wrap api to skip permission check
+
   public java.lang.String[] getPackagesForUid(int uid) throws android.os.RemoteException;
   public java.lang.String mayEnableAppOnStartActivityIntent(android.content.Intent intent, int userId) throws android.os.RemoteException;
   public boolean isEnablePkgOnLaunchByDefault() throws android.os.RemoteException;
@@ -2681,42 +3318,7 @@ public interface IPkgManager extends android.os.IInterface
   public void freezeAllSmartFreezePackages(github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener listener) throws android.os.RemoteException;
   public void freezeSmartFreezePackages(java.util.List<github.tornaco.android.thanos.core.pm.Pkg> packages, github.tornaco.android.thanos.core.pm.IPackageEnableStateChangeListener listener) throws android.os.RemoteException;
   public boolean hasFreezedPackageInUserWhiteListPkgSet() throws android.os.RemoteException;
-  public java.util.List<android.content.ComponentName> getAllDisabledComponentsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg) throws android.os.RemoteException;
+  public java.util.List<android.content.ComponentName> getAllDisabledComponentsForPackage(github.tornaco.android.thanos.core.pm.Pkg pkg, int itemCountInEachBatch, int batchIndex) throws android.os.RemoteException;
   public void setFreezeTipEnabled(boolean enable) throws android.os.RemoteException;
   public boolean isFreezeTipEnabled() throws android.os.RemoteException;
-  /** @hide */
-  static class _Parcel {
-    static private <T> T readTypedObject(
-        android.os.Parcel parcel,
-        android.os.Parcelable.Creator<T> c) {
-      if (parcel.readInt() != 0) {
-          return c.createFromParcel(parcel);
-      } else {
-          return null;
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedObject(
-        android.os.Parcel parcel, T value, int parcelableFlags) {
-      if (value != null) {
-        parcel.writeInt(1);
-        value.writeToParcel(parcel, parcelableFlags);
-      } else {
-        parcel.writeInt(0);
-      }
-    }
-    static private <T extends android.os.Parcelable> void writeTypedList(
-        android.os.Parcel parcel, java.util.List<T> value, int parcelableFlags) {
-      if (value == null) {
-        parcel.writeInt(-1);
-      } else {
-        int N = value.size();
-        int i = 0;
-        parcel.writeInt(N);
-        while (i < N) {
-    writeTypedObject(parcel, value.get(i), parcelableFlags);
-          i++;
-        }
-      }
-    }
-  }
 }

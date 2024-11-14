@@ -1,5 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
+ * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/app/activity/IActivityLifecycleListener.aidl
  */
 package github.tornaco.android.thanos.core.app.activity;
 public interface IActivityLifecycleListener extends android.os.IInterface
@@ -18,8 +19,8 @@ public interface IActivityLifecycleListener extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener";
     /** Construct the stub at attach it to the interface. */
+    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -46,32 +47,29 @@ public interface IActivityLifecycleListener extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
+      if (code == INTERFACE_TRANSACTION) {
+        reply.writeString(descriptor);
+        return true;
+      }
       switch (code)
       {
-        case INTERFACE_TRANSACTION:
-        {
-          reply.writeString(descriptor);
-          return true;
-        }
         case TRANSACTION_onAboutToLaunchActivity:
         {
-          data.enforceInterface(descriptor);
           android.content.Intent _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = android.content.Intent.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, android.content.Intent.CREATOR);
           this.onAboutToLaunchActivity(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener
     {
@@ -94,18 +92,8 @@ public interface IActivityLifecycleListener extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((intent!=null)) {
-            _data.writeInt(1);
-            intent.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, intent, 0);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onAboutToLaunchActivity, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onAboutToLaunchActivity(intent);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -113,25 +101,31 @@ public interface IActivityLifecycleListener extends android.os.IInterface
           _data.recycle();
         }
       }
-      public static github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener sDefaultImpl;
     }
     static final int TRANSACTION_onAboutToLaunchActivity = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
-    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
+  }
+  /** @hide */
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener";
+  public void onAboutToLaunchActivity(android.content.Intent intent) throws android.os.RemoteException;
+  /** @hide */
+  static class _Parcel {
+    static private <T> T readTypedObject(
+        android.os.Parcel parcel,
+        android.os.Parcelable.Creator<T> c) {
+      if (parcel.readInt() != 0) {
+          return c.createFromParcel(parcel);
+      } else {
+          return null;
       }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
     }
-    public static github.tornaco.android.thanos.core.app.activity.IActivityLifecycleListener getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
+    static private <T extends android.os.Parcelable> void writeTypedObject(
+        android.os.Parcel parcel, T value, int parcelableFlags) {
+      if (value != null) {
+        parcel.writeInt(1);
+        value.writeToParcel(parcel, parcelableFlags);
+      } else {
+        parcel.writeInt(0);
+      }
     }
   }
-  public void onAboutToLaunchActivity(android.content.Intent intent) throws android.os.RemoteException;
 }

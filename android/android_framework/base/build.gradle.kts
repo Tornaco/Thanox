@@ -12,8 +12,8 @@ dependencies {
     // Framework
     compileOnly(files("../../android_sdk/30/android-30.jar"))
 
-    compileOnly("org.projectlombok:lombok:1.18.34")
-    annotationProcessor("org.projectlombok:lombok:1.18.34")
+    compileOnly("org.projectlombok:lombok:1.18.36")
+    annotationProcessor("org.projectlombok:lombok:1.18.36")
 
     implementation(libs.rxjava)
     implementation(libs.gson)

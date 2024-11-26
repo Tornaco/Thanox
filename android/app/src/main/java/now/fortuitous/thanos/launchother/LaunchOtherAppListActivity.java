@@ -46,6 +46,11 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
     }
 
     @Override
+    public boolean isADVF() {
+        return true;
+    }
+
+    @Override
     protected String getTitleString() {
         return getString(github.tornaco.android.thanos.res.R.string.launch_other_app);
     }
@@ -226,7 +231,6 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
             List<AppListModel> res = new ArrayList<>();
             CollectionUtils.consumeRemaining(installed, appInfo -> {
                 appInfo.setStr(String.valueOf(stackSupervisor.getLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo))));
-                appInfo.setSelected(thanos.getNotificationManager().isPkgNREnabled(Pkg.fromAppInfo(appInfo)));
                 res.add(new AppListModel(appInfo, null, null, composer.getAppItemDescription(appInfo)));
             });
             Collections.sort(res);

@@ -48,7 +48,7 @@
                     android:fadingEdge="horizontal"
                     android:text="@{rule.raw}"
                     android:textAppearance="@style/TextAppearance.TileTitle"
-                    tools:text="@string/app_name" />
+                    tools:text="@string/app_name_thanox" />
 
         </RelativeLayout>
 

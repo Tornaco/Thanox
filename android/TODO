@@ -1,1 +1,7 @@
 1. Move all strings.xml to a single module.
+
+
+### Tests
+1. Test http cache. [tornaco.app.thanox.lite.service.Api]
+2. Test Shizuku SF pager
+3. Test Compose Switch

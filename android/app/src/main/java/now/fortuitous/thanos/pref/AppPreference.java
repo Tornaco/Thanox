@@ -23,7 +23,6 @@ import androidx.preference.PreferenceManager;
 
 import java.util.List;
 
-import github.tornaco.android.thanos.BuildProp;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.n.NotificationRecord;
 import github.tornaco.android.thanos.core.pm.PackageSet;
@@ -32,7 +31,7 @@ import now.fortuitous.thanos.main.PrebuiltFeatureIds;
 public class AppPreference {
 
     private static final String PREF_KEY_FIRST_RUN = "PREF_KEY_FIRST_RUN";
-    private static final String PREF_KEY_ON_BOARDING = "PREF_KEY_ON_BOARDING_" + BuildProp.THANOS_BUILD_FINGERPRINT;
+    private static final String PREF_KEY_ON_BOARDING = "PREF_KEY_ON_BOARDING";
     private static final String PREF_KEY_PROCESS_MANAGE_UI_V2 = "PREF_KEY_PROCESS_MANAGE_UI_V2";
     private static final String PREF_KEY_CURRENT_TIP_INDEX = "PREF_KEY_CURRENT_TIP_INDEX";
     private static final String PREF_KEY_PKG_SET_SORT_PREFIX = "PREF_KEY_PKG_SORT_";

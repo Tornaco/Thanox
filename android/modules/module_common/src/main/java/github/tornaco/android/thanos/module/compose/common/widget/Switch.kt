@@ -29,7 +29,6 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -259,7 +258,10 @@ private fun BoxScope.SwitchImpl(
                 .offset { IntOffset(thumbOffset.roundToInt(), 0) }
                 .indication(
                     interactionSource = interactionSource,
-                    indication = rememberRipple(bounded = false, SwitchTokens.StateLayerSize / 2)
+                    indication = androidx.compose.material.ripple(
+                        bounded = false,
+                        SwitchTokens.StateLayerSize / 2
+                    )
                 )
                 .requiredSize(thumbSizeDp)
                 .background(thumbColor, thumbShape),

@@ -29,6 +29,8 @@ plugins {
     alias(libs.plugins.diffplug.spotless) apply true
     alias(libs.plugins.kover) apply false
 
+    alias(libs.plugins.compose.compiler) apply false
+
     id("com.google.gms.google-services") version "4.4.2" apply false
     id("com.google.firebase.crashlytics") version "3.0.2" apply false
 
@@ -38,10 +40,16 @@ plugins {
 androidGitVersion {
     prefix = "v"
     codeFormat = "MNPBB"
-    baseCode = 3029999
 }
 
-thanoxVersionCode = androidGitVersion.code()
+// Make sure new code > released.
+val legacyCodeBase = 2000000
+// 2000.1.1 millis
+val startOf2000 = 946684800000L
+// +1 10min
+val versionCodeByTime =
+    ((System.currentTimeMillis() - startOf2000) / 1000 / 60 / 10).toInt() + legacyCodeBase
+thanoxVersionCode = versionCodeByTime
 thanoxVersionName = androidGitVersion.name()
 
 printVersions()

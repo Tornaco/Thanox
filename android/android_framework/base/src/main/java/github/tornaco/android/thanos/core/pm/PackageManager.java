@@ -533,6 +533,12 @@ public class PackageManager {
 
     @SneakyThrows
     public List<ComponentName> getAllDisabledComponentsForPackage(Pkg pkg) {
-        return pm.getAllDisabledComponentsForPackage(pkg);
+        List<ComponentName> res = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            List<ComponentName> batch = pm.getAllDisabledComponentsForPackage(pkg, 10, i);
+            if (batch == null) return res;
+            res.addAll(batch);
+        }
+        return res;
     }
 }

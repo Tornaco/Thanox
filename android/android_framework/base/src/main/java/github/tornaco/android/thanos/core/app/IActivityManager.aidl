@@ -241,4 +241,7 @@ interface IActivityManager {
 
     void setPkgRecentTaskBlurMode(in Pkg pkg, int mode);
     int getPkgRecentTaskBlurMode(in Pkg pkg);
+
+    boolean isSmartStandByUnbindServiceEnabled();
+    void setSmartStandByUnbindServiceEnabled(boolean enable);
 }

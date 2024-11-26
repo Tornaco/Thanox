@@ -706,6 +706,16 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    public boolean isSmartStandByUnbindServiceEnabled() {
+        return server.isSmartStandByUnbindServiceEnabled();
+    }
+
+    @SneakyThrows
+    public void setSmartStandByUnbindServiceEnabled(boolean enable) {
+        server.setSmartStandByUnbindServiceEnabled(enable);
+    }
+
+    @SneakyThrows
     public boolean isSmartStandByInactiveEnabled() {
         return server.isSmartStandByInactiveEnabled();
     }

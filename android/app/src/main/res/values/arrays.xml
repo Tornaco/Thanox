@@ -56,6 +56,18 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="sensor_off_options">
+        <item>@string/sensor_off_default</item>
+        <item>@string/sensor_off_on_start</item>
+        <item>@string/sensor_off_always</item>
+    </string-array>
+
+    <string-array name="sensor_off_options_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
     <string-array name="recent_task_exclude_entry_default_include_exclude">
         <item>@string/pre_entry_exclude_recent_task_default</item>
         <item>@string/pre_entry_exclude_recent_task_include</item>

@@ -888,7 +888,6 @@
     <string name="service_report">报告</string>
     <string name="service_running_time">已运行</string>
 
-    <string name="app_name">Thanox</string>
     <string name="privacy_agreement_file">privacy/privacy_agreement.html</string>
 
     <!-- Switch On/Off  -->
@@ -912,7 +911,6 @@
     <string name="nav_title_exp">拓展</string>
     <string name="nav_title_plugin">插件</string>
     <string name="nav_title_plugin_repo">插件仓库</string>
-    <string name="nav_title_thanox">Thanox</string>
 
     <string name="pref_title_feature_toggle">功能开关</string>
 
@@ -1121,6 +1119,13 @@
     <string name="launch_other_app_options_allow_listed">部分允许</string>
     <string name="launch_other_app">打开其他应用</string>
 
+    <string name="sensor_off">关闭传感器</string>
+    <string name="sensor_off_summary">设置应用启动时关闭传感器以保护隐私</string>
+    <string name="sensor_off_default">不关闭</string>
+    <string name="sensor_off_on_start">启动时关闭6秒</string>
+    <string name="sensor_off_always">始终关闭</string>
+    <string name="sensor_off_all">全部</string>
+
     <string name="start_record_allowed">允许</string>
     <string name="start_record_blocked">阻止</string>
     <string name="start_record_merged">合并</string>
@@ -1285,6 +1290,8 @@
     <string name="pre_category_summary_smart_standby">应用回到后台通常可能会有一些服务，进程保持活跃，这些服务或进程都有自己的使命，但遗憾的是我们用户可能无法准确的知道这些服务和进程的具体作用。\n\n你可以选择下面的干涉方式，对回到后台的应用做相应的操作，值得一提的是如果我们干涉了某个应用，它可能无法正确工作。</string>
     <string name="pre_title_smart_standby_stop_service">停止服务</string>
     <string name="pre_summary_smart_standby_stop_service">这会尝试停止它不在KEEP规则清单里的所有服务</string>
+    <string name="pre_title_smart_standby_unbind_service">解绑服务</string>
+    <string name="pre_summary_smart_standby_unbind_service">这会尝试解绑它不在KEEP规则清单里的所有服务，可能会导致应用的某些功能无法正常工作</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">跳过有通知的</string>
     <string name="pre_title_smart_standby_bypass_if_has_visible_windows">跳过有可见窗口的</string>
     <string name="pre_summary_smart_standby_bypass_if_has_n">不干涉有通知的应用</string>

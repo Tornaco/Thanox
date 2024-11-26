@@ -66,7 +66,7 @@ public class PrebuiltFeatureShortcutActivity extends Activity {
 
         public static void addShortcut(Context context, FeatureItem tile) {
             if (ShortcutManagerCompat.isRequestPinShortcutSupported(context)) {
-                Drawable drawable = ResourcesCompat.getDrawable(context.getResources(), tile.getIconRes(), null);
+                Drawable drawable = ResourcesCompat.getDrawable(context.getResources(), tile.getPackedIconRes(), null);
                 LayerDrawable ld = (LayerDrawable) drawable;
                 Drawable layer = ld.findDrawableByLayerId(R.id.settings_ic_foreground);
                 if (layer != null) {

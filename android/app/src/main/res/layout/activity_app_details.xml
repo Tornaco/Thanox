@@ -17,7 +17,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -34,7 +35,7 @@
                 android:layout_height="?actionBarSize"
                 app:popupTheme="?appbarPopupTheme"
                 app:theme="?toolbarTheme"
-                app:title="@string/app_name"
+                app:title="@string/app_name_thanox"
                 app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
                 app:titleTextColor="?attr/colorControlNormal">
 

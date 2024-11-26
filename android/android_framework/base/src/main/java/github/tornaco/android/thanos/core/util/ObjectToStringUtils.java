@@ -59,7 +59,12 @@ public class ObjectToStringUtils {
             }
 
             b.append(key).append('=');
-            Object value = bundle.get(key);
+            Object value = key;
+            try {
+                value = bundle.get(key);
+            } catch (Throwable ignored) {
+
+            }
             if (value instanceof int[]) {
                 b.append(Arrays.toString((int[]) ((int[]) value)));
             } else if (value instanceof byte[]) {

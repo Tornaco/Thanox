@@ -175,3 +175,4 @@
 -dontwarn com.android.internal.appwidget.IAppWidgetService
 
 -dontwarn de.robv.android.xposed.XposedBridge
+-dontwarn lombok.Generated

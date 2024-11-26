@@ -803,7 +803,6 @@
     <string name="module_push_message_delegate_title_gcm_diag">Diag</string>
     <string name="module_push_message_delegate_notice_wechat_proxy">Please note that the collection function is currently in the experimental stage and is only for learning and research. At present, no one can guarantee that the push will be 100% received.</string>
 
-    <string name="app_name">Thanox</string>
     <string name="app_description">Ben Thanos\'um! 😈👌</string>
     <string name="privacy_agreement_file">privacy/privacy_agreement_tr.html</string>
 
@@ -828,7 +827,6 @@
     <string name="nav_title_exp">Genişletme</string>
     <string name="nav_title_plugin">Eklenti</string>
     <string name="nav_title_plugin_repo">Eklenti deposu</string>
-    <string name="nav_title_thanox">Thanox</string>
 
     <string name="pref_title_feature_toggle">Özellik aç/kapat</string>
 
@@ -1164,6 +1162,13 @@
     <string name="launch_other_app_options_allow_listed">Allow listed</string>
     <string name="launch_other_app">Başka bir uygulamayı başlat</string>
 
+    <string name="sensor_off">Sensor off</string>
+    <string name="sensor_off_summary">Turn off all sensor when app is in foreground</string>
+    <string name="sensor_off_default">Don\'t turn off</string>
+    <string name="sensor_off_on_start">Turn off 6 seconds</string>
+    <string name="sensor_off_always">Always turn off</string>
+    <string name="sensor_off_all">All</string>
+
     <string name="start_record_allowed">İzin verildi</string>
     <string name="start_record_blocked">Engellendi</string>
     <string name="start_record_merged">Birleştirildi</string>
@@ -1213,6 +1218,8 @@
 
     <string name="pre_title_smart_standby_stop_service">Hizmeti durdur</string>
     <string name="pre_summary_smart_standby_stop_service">Bu, KORUMA kural listesinde olmayan tüm hizmetleri durdurmaya çalışacaktır</string>
+    <string name="pre_title_smart_standby_unbind_service">Unbind service</string>
+    <string name="pre_summary_smart_standby_unbind_service">This will attempt to unbind all services that is not in the KEEP rule list</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">Bildirimleri olan uygulamaları atla</string>
     <string name="pre_title_smart_standby_bypass_if_has_visible_windows">Görünür pencere olan uygulamaları atla</string>
     <string name="pre_summary_smart_standby_bypass_if_has_n">Bildirimleri olan uygulamalara müdahale edilmez</string>

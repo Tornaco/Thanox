@@ -24,6 +24,8 @@
     <color name="nav_icon_guide">#ffb74d</color>
     <color name="nav_icon_wakelock_remover">#f06292</color>
     <color name="nav_icon_launch_other_app">#a1887f</color>
+    <color name="nav_icon_resident">#4ca522</color>
+    <color name="nav_icon_sensor_off">#ba68c8</color>
 
     <color name="app_widget_search_bg_color">#eaffffff</color>
     <color name="app_widget_search_stroke_color">#eaffffff</color>

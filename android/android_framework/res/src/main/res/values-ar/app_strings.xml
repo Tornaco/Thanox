@@ -833,7 +833,6 @@
     <string name="module_push_message_delegate_title_gcm_diag">Diag</string>
     <string name="module_push_message_delegate_notice_wechat_proxy">Please note that the collection function is currently in the experimental stage and is only for learning and research. At present, no one can guarantee that the push will be 100% received.</string>
 
-    <string name="app_name">Thanox</string>
     <string name="app_description">I am Thanos! 😈👌</string>
     <string name="privacy_agreement_file">privacy/privacy_agreement_en.html</string>
 
@@ -854,7 +853,6 @@
     <string name="nav_title_exp">Extension</string>
     <string name="nav_title_plugin">Plugin</string>
     <string name="nav_title_plugin_repo">Plugin repo</string>
-    <string name="nav_title_thanox">Thanox</string>
 
     <string name="pref_title_feature_toggle">Feature toggle</string>
 
@@ -1194,6 +1192,13 @@
     <string name="launch_other_app_options_allow_listed">Allow listed</string>
     <string name="launch_other_app">Launch other App</string>
 
+    <string name="sensor_off">Sensor off</string>
+    <string name="sensor_off_summary">Turn off all sensor when app is in foreground</string>
+    <string name="sensor_off_default">Don\'t turn off</string>
+    <string name="sensor_off_on_start">Turn off 6 seconds</string>
+    <string name="sensor_off_always">Always turn off</string>
+    <string name="sensor_off_all">All</string>
+
     <string name="start_record_allowed">Allowed</string>
     <string name="start_record_blocked">Blocked</string>
     <string name="start_record_merged">Merged</string>
@@ -1242,6 +1247,8 @@
     <string name="pre_category_summary_smart_standby">Applications in the background usually have services or processes that remain active, and these services or processes have their own purpose. Unfortunately, our users may not know exactly what these services and processes do.\n\nYou can pick an interference method for the applications that return to the background. It is worth mentioning that some apps may not work correctly after interfering with them.</string>
     <string name="pre_title_smart_standby_stop_service">Stop service</string>
     <string name="pre_summary_smart_standby_stop_service">This will attempt to stop all services that is not in the KEEP rule list</string>
+    <string name="pre_title_smart_standby_unbind_service">Unbind service</string>
+    <string name="pre_summary_smart_standby_unbind_service">This will attempt to unbind all services that is not in the KEEP rule list</string>
     <string name="pre_title_smart_standby_bypass_if_has_n">Skip apps with notifications</string>
     <string name="pre_title_smart_standby_bypass_if_has_visible_windows">Skip apps has visible window</string>
     <string name="pre_summary_smart_standby_bypass_if_has_n">Would not interfere applications with notifications</string>

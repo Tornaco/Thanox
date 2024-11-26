@@ -22,7 +22,7 @@ package github.tornaco.android.thanos.module.compose.common.widget
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material.ripple
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -32,7 +32,7 @@ fun Modifier.clickableWithRipple(onLongClick: (() -> Unit)? = null, onClick: () 
         combinedClickable(
             interactionSource = remember { MutableInteractionSource() },
             // You can also change the color and radius of the ripple
-            indication = rememberRipple(bounded = true),
+            indication = ripple(bounded = true),
             onClick = onClick,
             onLongClick = onLongClick,
         )

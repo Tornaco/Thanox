@@ -128,7 +128,7 @@ interface IPkgManager {
 
     boolean hasFreezedPackageInUserWhiteListPkgSet();
 
-    List<ComponentName> getAllDisabledComponentsForPackage(in Pkg pkg);
+    List<ComponentName> getAllDisabledComponentsForPackage(in Pkg pkg, int itemCountInEachBatch, int batchIndex);
 
     void setFreezeTipEnabled(boolean enable);
     boolean isFreezeTipEnabled();

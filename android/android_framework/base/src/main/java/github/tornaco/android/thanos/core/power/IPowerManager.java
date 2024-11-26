@@ -1,5 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
+ * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/power/IPowerManager.aidl
  */
 package github.tornaco.android.thanos.core.power;
 public interface IPowerManager extends android.os.IInterface
@@ -77,8 +78,8 @@ public interface IPowerManager extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.power.IPowerManager
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.power.IPowerManager";
     /** Construct the stub at attach it to the interface. */
+    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -105,197 +106,167 @@ public interface IPowerManager extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
+      if (code == INTERFACE_TRANSACTION) {
+        reply.writeString(descriptor);
+        return true;
+      }
       switch (code)
       {
-        case INTERFACE_TRANSACTION:
-        {
-          reply.writeString(descriptor);
-          return true;
-        }
         case TRANSACTION_reboot:
         {
-          data.enforceInterface(descriptor);
           this.reboot();
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_softReboot:
         {
-          data.enforceInterface(descriptor);
           this.softReboot();
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_goToSleep:
         {
-          data.enforceInterface(descriptor);
           long _arg0;
           _arg0 = data.readLong();
           this.goToSleep(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_setPowerSaveModeEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setPowerSaveModeEnabled(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_isPowerSaveModeEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _result = this.isPowerSaveModeEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_getSeenWakeLocks:
         {
-          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> _result = this.getSeenWakeLocks(_arg0);
           reply.writeNoException();
-          reply.writeTypedList(_result);
-          return true;
+          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_getSeenWakeLocksForPkg:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.pm.Pkg _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = github.tornaco.android.thanos.core.pm.Pkg.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.pm.Pkg.CREATOR);
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> _result = this.getSeenWakeLocksForPkg(_arg0, _arg1);
           reply.writeNoException();
-          reply.writeTypedList(_result);
-          return true;
+          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_getSeenWakeLocksStats:
         {
-          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           java.util.List<github.tornaco.android.thanos.core.power.WakeLockStats> _result = this.getSeenWakeLocksStats(_arg0, _arg1);
           reply.writeNoException();
-          reply.writeTypedList(_result);
-          return true;
+          _Parcel.writeTypedList(reply, _result, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+          break;
         }
         case TRANSACTION_isWakeLockHeld:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.power.SeenWakeLock _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR);
           boolean _result = this.isWakeLockHeld(_arg0);
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_dump:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.IPrinter _arg0;
           _arg0 = github.tornaco.android.thanos.core.IPrinter.Stub.asInterface(data.readStrongBinder());
           this.dump(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_wakeUp:
         {
-          data.enforceInterface(descriptor);
           long _arg0;
           _arg0 = data.readLong();
           this.wakeUp(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_setBrightness:
         {
-          data.enforceInterface(descriptor);
           int _arg0;
           _arg0 = data.readInt();
           this.setBrightness(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_getBrightness:
         {
-          data.enforceInterface(descriptor);
           int _result = this.getBrightness();
           reply.writeNoException();
           reply.writeInt(_result);
-          return true;
+          break;
         }
         case TRANSACTION_setAutoBrightnessEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setAutoBrightnessEnabled(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_isAutoBrightnessEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _result = this.isAutoBrightnessEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_isWakeLockBlockerEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _result = this.isWakeLockBlockerEnabled();
           reply.writeNoException();
           reply.writeInt(((_result)?(1):(0)));
-          return true;
+          break;
         }
         case TRANSACTION_setWakeLockBlockerEnabled:
         {
-          data.enforceInterface(descriptor);
           boolean _arg0;
           _arg0 = (0!=data.readInt());
           this.setWakeLockBlockerEnabled(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         case TRANSACTION_setBlockWakeLock:
         {
-          data.enforceInterface(descriptor);
           github.tornaco.android.thanos.core.power.SeenWakeLock _arg0;
-          if ((0!=data.readInt())) {
-            _arg0 = github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR.createFromParcel(data);
-          }
-          else {
-            _arg0 = null;
-          }
+          _arg0 = _Parcel.readTypedObject(data, github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR);
           boolean _arg1;
           _arg1 = (0!=data.readInt());
           this.setBlockWakeLock(_arg0, _arg1);
           reply.writeNoException();
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.power.IPowerManager
     {
@@ -319,10 +290,6 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_reboot, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().reboot();
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -337,10 +304,6 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_softReboot, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().softReboot();
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -356,10 +319,6 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeLong(delay);
           boolean _status = mRemote.transact(Stub.TRANSACTION_goToSleep, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().goToSleep(delay);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -375,10 +334,6 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setPowerSaveModeEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setPowerSaveModeEnabled(enable);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -394,9 +349,6 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isPowerSaveModeEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isPowerSaveModeEnabled();
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -415,9 +367,6 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((includeHistory)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSeenWakeLocks, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getSeenWakeLocks(includeHistory);
-          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR);
         }
@@ -434,18 +383,9 @@ public interface IPowerManager extends android.os.IInterface
         java.util.List<github.tornaco.android.thanos.core.power.SeenWakeLock> _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((pkg!=null)) {
-            _data.writeInt(1);
-            pkg.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, pkg, 0);
           _data.writeInt(((includeHistory)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSeenWakeLocksForPkg, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getSeenWakeLocksForPkg(pkg, includeHistory);
-          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.power.SeenWakeLock.CREATOR);
         }
@@ -465,9 +405,6 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInt(((includeHistory)?(1):(0)));
           _data.writeInt(((heldOnly)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_getSeenWakeLocksStats, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getSeenWakeLocksStats(includeHistory, heldOnly);
-          }
           _reply.readException();
           _result = _reply.createTypedArrayList(github.tornaco.android.thanos.core.power.WakeLockStats.CREATOR);
         }
@@ -484,17 +421,8 @@ public interface IPowerManager extends android.os.IInterface
         boolean _result;
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((wakelock!=null)) {
-            _data.writeInt(1);
-            wakelock.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, wakelock, 0);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isWakeLockHeld, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isWakeLockHeld(wakelock);
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -510,12 +438,8 @@ public interface IPowerManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          _data.writeStrongBinder((((p!=null))?(p.asBinder()):(null)));
+          _data.writeStrongInterface(p);
           boolean _status = mRemote.transact(Stub.TRANSACTION_dump, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().dump(p);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -531,10 +455,6 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeLong(delay);
           boolean _status = mRemote.transact(Stub.TRANSACTION_wakeUp, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().wakeUp(delay);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -550,10 +470,6 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(level);
           boolean _status = mRemote.transact(Stub.TRANSACTION_setBrightness, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setBrightness(level);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -569,9 +485,6 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_getBrightness, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().getBrightness();
-          }
           _reply.readException();
           _result = _reply.readInt();
         }
@@ -589,10 +502,6 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setAutoBrightnessEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setAutoBrightnessEnabled(enable);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -608,9 +517,6 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isAutoBrightnessEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isAutoBrightnessEnabled();
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -628,9 +534,6 @@ public interface IPowerManager extends android.os.IInterface
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
           boolean _status = mRemote.transact(Stub.TRANSACTION_isWakeLockBlockerEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            return getDefaultImpl().isWakeLockBlockerEnabled();
-          }
           _reply.readException();
           _result = (0!=_reply.readInt());
         }
@@ -648,10 +551,6 @@ public interface IPowerManager extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeInt(((enable)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setWakeLockBlockerEnabled, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setWakeLockBlockerEnabled(enable);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -665,19 +564,9 @@ public interface IPowerManager extends android.os.IInterface
         android.os.Parcel _reply = android.os.Parcel.obtain();
         try {
           _data.writeInterfaceToken(DESCRIPTOR);
-          if ((wl!=null)) {
-            _data.writeInt(1);
-            wl.writeToParcel(_data, 0);
-          }
-          else {
-            _data.writeInt(0);
-          }
+          _Parcel.writeTypedObject(_data, wl, 0);
           _data.writeInt(((block)?(1):(0)));
           boolean _status = mRemote.transact(Stub.TRANSACTION_setBlockWakeLock, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().setBlockWakeLock(wl, block);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -685,7 +574,6 @@ public interface IPowerManager extends android.os.IInterface
           _data.recycle();
         }
       }
-      public static github.tornaco.android.thanos.core.power.IPowerManager sDefaultImpl;
     }
     static final int TRANSACTION_reboot = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_softReboot = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
@@ -705,23 +593,9 @@ public interface IPowerManager extends android.os.IInterface
     static final int TRANSACTION_isWakeLockBlockerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 15);
     static final int TRANSACTION_setWakeLockBlockerEnabled = (android.os.IBinder.FIRST_CALL_TRANSACTION + 16);
     static final int TRANSACTION_setBlockWakeLock = (android.os.IBinder.FIRST_CALL_TRANSACTION + 17);
-    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.power.IPowerManager impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static github.tornaco.android.thanos.core.power.IPowerManager getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  /** @hide */
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.power.IPowerManager";
   public void reboot() throws android.os.RemoteException;
   public void softReboot() throws android.os.RemoteException;
   public void goToSleep(long delay) throws android.os.RemoteException;
@@ -740,4 +614,39 @@ public interface IPowerManager extends android.os.IInterface
   public boolean isWakeLockBlockerEnabled() throws android.os.RemoteException;
   public void setWakeLockBlockerEnabled(boolean enable) throws android.os.RemoteException;
   public void setBlockWakeLock(github.tornaco.android.thanos.core.power.SeenWakeLock wl, boolean block) throws android.os.RemoteException;
+  /** @hide */
+  static class _Parcel {
+    static private <T> T readTypedObject(
+        android.os.Parcel parcel,
+        android.os.Parcelable.Creator<T> c) {
+      if (parcel.readInt() != 0) {
+          return c.createFromParcel(parcel);
+      } else {
+          return null;
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedObject(
+        android.os.Parcel parcel, T value, int parcelableFlags) {
+      if (value != null) {
+        parcel.writeInt(1);
+        value.writeToParcel(parcel, parcelableFlags);
+      } else {
+        parcel.writeInt(0);
+      }
+    }
+    static private <T extends android.os.Parcelable> void writeTypedList(
+        android.os.Parcel parcel, java.util.List<T> value, int parcelableFlags) {
+      if (value == null) {
+        parcel.writeInt(-1);
+      } else {
+        int N = value.size();
+        int i = 0;
+        parcel.writeInt(N);
+        while (i < N) {
+    writeTypedObject(parcel, value.get(i), parcelableFlags);
+          i++;
+        }
+      }
+    }
+  }
 }

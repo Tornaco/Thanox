@@ -726,6 +726,14 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
             }
         });
 
+        SwitchPreferenceCompat newHomePref = findPreference(getString(R.string.key_test_new_home));
+        newHomePref.setChecked(AppPreference.isFeatureNoticeAccepted(getContext(), "NEW_HOME"));
+        newHomePref.setOnPreferenceChangeListener((preference, newValue) -> {
+            boolean newHome = (boolean) newValue;
+            AppPreference.setFeatureNoticeAccepted(getContext(), "NEW_HOME", newHome);
+            return true;
+        });
+
         findPreference(getString(R.string.key_theme_attr_preview)).setVisible(BuildProp.THANOS_BUILD_DEBUG);
         findPreference(getString(R.string.key_theme_attr_preview)).setOnPreferenceClickListener(preference -> {
             ActivityUtils.startActivity(requireActivity(), ThemeAttrPreviewActivity.class);

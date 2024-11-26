@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.compose.compiler)
 }
 
 if (Configs.thanoxBuildIsRow == true) {
@@ -87,10 +88,6 @@ android {
         shaders = false
         viewBinding = true
         dataBinding = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     applicationVariants.all {
@@ -258,7 +255,7 @@ dependencies {
 
     val rowImplementation by configurations
     // Import the BoM for the Firebase platform
-    rowImplementation(platform("com.google.firebase:firebase-bom:33.2.0"))
+    rowImplementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
     rowImplementation("com.google.firebase:firebase-crashlytics")

@@ -78,7 +78,7 @@
                     android:fadingEdge="horizontal"
                     android:text="@{app != null ? app.appLabel : @string/module_activity_trampoline_app_not_installed}"
                     android:textAppearance="@style/TextAppearance.TileTitle"
-                    tools:text="@string/app_name" />
+                    tools:text="@string/app_name_thanox" />
 
                 <TextView
                     android:id="@+id/from"
@@ -91,7 +91,7 @@
                     android:fadingEdge="horizontal"
                     android:text="@{replacement.from.flattenToString()}"
                     android:textAppearance="@style/TextAppearance.TileSubTitle"
-                    tools:text="@string/app_name" />
+                    tools:text="@string/app_name_thanox" />
 
                 <TextView
                     android:id="@+id/to"
@@ -108,7 +108,7 @@
                     android:text="@{replacement.to.flattenToString()}"
                     android:textAppearance="@style/TextAppearance.TileSubTitle"
                     android:textColor="?colorAccent"
-                    tools:text="@string/app_name" />
+                    tools:text="@string/app_name_thanox" />
 
             </RelativeLayout>
         </RelativeLayout>

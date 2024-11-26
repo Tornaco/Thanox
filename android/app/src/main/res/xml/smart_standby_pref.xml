@@ -13,6 +13,12 @@
                 app:title="@string/pre_title_smart_standby_stop_service" />
 
         <SwitchPreferenceCompat
+            android:persistent="false"
+            app:key="@string/key_smart_standby_unbind_service"
+            app:summary="@string/pre_summary_smart_standby_unbind_service"
+            app:title="@string/pre_title_smart_standby_unbind_service" />
+
+        <SwitchPreferenceCompat
                 android:persistent="false"
                 app:key="@string/key_smart_standby_set_inactive"
                 app:summary="@string/pre_summary_smart_standby_set_inactive"

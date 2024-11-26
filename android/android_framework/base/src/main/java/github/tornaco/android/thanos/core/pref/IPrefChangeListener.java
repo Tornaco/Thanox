@@ -1,5 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
+ * Using: /home/tornaco/Android/Sdk/build-tools/35.0.0/aidl -I/home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java -p/home/tornaco/Documents/Thanox/android/android_sdk/framework.aidl -p/home/tornaco/Documents/Thanox/android/android_sdk/thanos.aidl /home/tornaco/Documents/Thanox/android/android_framework/base/src/main/java/github/tornaco/android/thanos/core/pref/IPrefChangeListener.aidl
  */
 package github.tornaco.android.thanos.core.pref;
 public interface IPrefChangeListener extends android.os.IInterface
@@ -18,8 +19,8 @@ public interface IPrefChangeListener extends android.os.IInterface
   /** Local-side IPC implementation stub class. */
   public static abstract class Stub extends android.os.Binder implements github.tornaco.android.thanos.core.pref.IPrefChangeListener
   {
-    private static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pref.IPrefChangeListener";
     /** Construct the stub at attach it to the interface. */
+    @SuppressWarnings("this-escape")
     public Stub()
     {
       this.attachInterface(this, DESCRIPTOR);
@@ -46,27 +47,29 @@ public interface IPrefChangeListener extends android.os.IInterface
     @Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
     {
       java.lang.String descriptor = DESCRIPTOR;
+      if (code >= android.os.IBinder.FIRST_CALL_TRANSACTION && code <= android.os.IBinder.LAST_CALL_TRANSACTION) {
+        data.enforceInterface(descriptor);
+      }
+      if (code == INTERFACE_TRANSACTION) {
+        reply.writeString(descriptor);
+        return true;
+      }
       switch (code)
       {
-        case INTERFACE_TRANSACTION:
-        {
-          reply.writeString(descriptor);
-          return true;
-        }
         case TRANSACTION_onPrefChanged:
         {
-          data.enforceInterface(descriptor);
           java.lang.String _arg0;
           _arg0 = data.readString();
           this.onPrefChanged(_arg0);
           reply.writeNoException();
-          return true;
+          break;
         }
         default:
         {
           return super.onTransact(code, data, reply, flags);
         }
       }
+      return true;
     }
     private static class Proxy implements github.tornaco.android.thanos.core.pref.IPrefChangeListener
     {
@@ -91,10 +94,6 @@ public interface IPrefChangeListener extends android.os.IInterface
           _data.writeInterfaceToken(DESCRIPTOR);
           _data.writeString(key);
           boolean _status = mRemote.transact(Stub.TRANSACTION_onPrefChanged, _data, _reply, 0);
-          if (!_status && getDefaultImpl() != null) {
-            getDefaultImpl().onPrefChanged(key);
-            return;
-          }
           _reply.readException();
         }
         finally {
@@ -102,25 +101,10 @@ public interface IPrefChangeListener extends android.os.IInterface
           _data.recycle();
         }
       }
-      public static github.tornaco.android.thanos.core.pref.IPrefChangeListener sDefaultImpl;
     }
     static final int TRANSACTION_onPrefChanged = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
-    public static boolean setDefaultImpl(github.tornaco.android.thanos.core.pref.IPrefChangeListener impl) {
-      // Only one user of this interface can use this function
-      // at a time. This is a heuristic to detect if two different
-      // users in the same process use this function.
-      if (Stub.Proxy.sDefaultImpl != null) {
-        throw new IllegalStateException("setDefaultImpl() called twice");
-      }
-      if (impl != null) {
-        Stub.Proxy.sDefaultImpl = impl;
-        return true;
-      }
-      return false;
-    }
-    public static github.tornaco.android.thanos.core.pref.IPrefChangeListener getDefaultImpl() {
-      return Stub.Proxy.sDefaultImpl;
-    }
   }
+  /** @hide */
+  public static final java.lang.String DESCRIPTOR = "github.tornaco.android.thanos.core.pref.IPrefChangeListener";
   public void onPrefChanged(java.lang.String key) throws android.os.RemoteException;
 }

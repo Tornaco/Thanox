@@ -48,7 +48,7 @@
                     android:fadingEdge="horizontal"
                     android:text="@{var.name}"
                     android:textAppearance="@style/TextAppearance.TileTitle"
-                    tools:text="@string/app_name" />
+                    tools:text="@string/app_name_thanox" />
 
             <TextView
                     android:id="@+id/description"
@@ -62,7 +62,7 @@
                     android:maxLines="3"
                     android:text="@{String.format(@string/module_profile_var_list_item_size, var.stringList.size())}"
                     android:textAppearance="@style/TextAppearance.TileSubTitle"
-                    tools:text="@string/app_name" />
+                    tools:text="@string/app_name_thanox" />
 
         </RelativeLayout>
 

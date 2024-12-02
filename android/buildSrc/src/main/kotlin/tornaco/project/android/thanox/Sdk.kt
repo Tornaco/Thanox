@@ -24,7 +24,7 @@ fun buildTools(name: String): String {
     }
 
     val latestBuildTools =
-        File(buildToolsDir).listFiles()?.maxByOrNull { it.name.replace(".", "").toInt() }
+        File(buildToolsDir).listFiles()?.maxByOrNull { it.name.replace(".", "").toIntOrNull() ?: 0 }
             ?: throw FileNotFoundException("Can not find any build tools under: $buildToolsDir")
 
     return if (OperatingSystem.current().isWindows) {

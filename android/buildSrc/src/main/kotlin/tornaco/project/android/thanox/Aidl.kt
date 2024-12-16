@@ -7,6 +7,10 @@ import org.gradle.kotlin.dsl.the
 import java.io.File
 
 
+fun Project.aidlBuildDir(): File {
+    return File(layout.buildDirectory.asFile.get(), "generated/sources/aidl")
+}
+
 fun Project.addAidlTask() {
     tasks.register("idlGen") {
         group = "idl"
@@ -17,6 +21,8 @@ fun Project.addAidlTask() {
 
             println("aidl executable file: ${aidl()}, is it exists? ${File(aidl()).exists()}")
 
+            val outDir = aidlBuildDir()
+
             javaSrcDirs.forEach { srcDir ->
                 val tree = fileTree(srcDir)
                 tree.forEach { file ->
@@ -26,6 +32,7 @@ fun Project.addAidlTask() {
                             commandLine(
                                 aidl(),
                                 "-I$srcDir",
+                                "--out=$outDir",
                                 "-p$projectPrebuiltAndroidSdkDir/framework.aidl",
                                 "-p$projectPrebuiltAndroidSdkDir/thanos.aidl",
                                 aidlPath

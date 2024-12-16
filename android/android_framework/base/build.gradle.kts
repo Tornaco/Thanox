@@ -1,11 +1,19 @@
 import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.addAidlTask
+import tornaco.project.android.thanox.aidlBuildDir
 import java.util.Date
-import java.util.UUID
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.gmazzo.buildconfig)
+}
+
+sourceSets {
+    named("main") {
+        java {
+            setSrcDirs(srcDirs + aidlBuildDir())
+        }
+    }
 }
 
 dependencies {

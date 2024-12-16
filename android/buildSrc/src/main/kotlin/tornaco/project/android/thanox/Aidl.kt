@@ -47,6 +47,12 @@ fun Project.addAidlTask() {
     tasks.named("compileJava") {
         dependsOn("idlGen")
     }
+    tasks.named("compileKotlin") {
+        dependsOn("idlGen")
+        if (tasks.findByName("generateProto") != null) {
+            dependsOn("generateProto")
+        }
+    }
     tasks.named("build") {
         dependsOn("idlGen")
     }

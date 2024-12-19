@@ -1179,7 +1179,7 @@
 
     <string name="pref_title_config_template_category">配置模板</string>
     <string name="pref_action_create_new_config_template">新建模板</string>
-    <string name="pref_action_edit_or_view_config_template">查看&修改</string>
+    <string name="pref_action_edit_or_view_config_template">查看&amp;修改</string>
     <string name="pref_action_delete_config_template">刪除</string>
     <string name="pref_action_apply_config_template">應用程式模板配置</string>
 

@@ -20,5 +20,5 @@ gradlePlugin {
 }
 
 dependencies {
-    implementation("org.eclipse.jgit:org.eclipse.jgit:7.0.0.202409031743-r")
+    implementation("org.eclipse.jgit:org.eclipse.jgit:7.1.0.202411261347-r")
 }

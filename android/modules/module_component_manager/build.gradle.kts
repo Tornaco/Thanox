@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.kover)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -25,6 +27,10 @@ android {
 
 }
 dependencies {
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.dagger.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.android.compiler)
+
     implementation(libs.rxjava)
 
     implementation(libs.androidx.lifecycle.common)

@@ -61,10 +61,10 @@ import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.pref.ViewAwarePreference;
 import github.tornaco.thanos.android.ops.ops.by.app.AppOpsListActivity;
-import github.tornaco.thanos.module.component.manager.ActivityListActivity;
 import github.tornaco.thanos.module.component.manager.ProviderListActivity;
 import github.tornaco.thanos.module.component.manager.ReceiverListActivity;
 import github.tornaco.thanos.module.component.manager.ServiceListActivity;
+import github.tornaco.thanos.module.component.manager.redesign.ComponentsActivity;
 import now.fortuitous.thanos.XposedScope;
 import now.fortuitous.thanos.launchother.AllowListActivity;
 import now.fortuitous.thanos.pref.AppPreference;
@@ -194,7 +194,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
                 AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
                     if (isSubscribed) {
-                        ActivityListActivity.start(requireActivity(), appInfo);
+                        ComponentsActivity.startActivity(requireActivity(), appInfo);
                     } else {
                         AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                     }

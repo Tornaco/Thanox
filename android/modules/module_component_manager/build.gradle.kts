@@ -61,6 +61,7 @@ dependencies {
 
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
+    implementation(project(":third_party:remix"))
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)

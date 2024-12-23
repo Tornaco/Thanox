@@ -259,6 +259,7 @@ class SearchBarState {
     }
 
     fun closeSearchBar() {
+        inputKeyword("")
         _showSearchBar = false
     }
 

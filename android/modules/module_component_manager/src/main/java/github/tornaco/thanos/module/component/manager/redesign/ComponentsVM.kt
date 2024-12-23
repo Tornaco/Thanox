@@ -11,6 +11,7 @@ import github.tornaco.android.thanos.common.UiState
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.ComponentInfo
+import github.tornaco.android.thanos.core.pm.ComponentUtil
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.thanos.module.component.manager.ComponentRule
 import github.tornaco.thanos.module.component.manager.fallbackRule
@@ -27,6 +28,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import util.PinyinComparatorUtils
 import java.util.UUID
+
+enum class FilterState {
+    All,
+    Enabled,
+    Disabled,
+}
 
 data class ComponentGroup(
     val rule: ComponentRule = fallbackRule,
@@ -59,16 +66,18 @@ abstract class ComponentsVM(
 
     val selectState = MutableStateFlow(MultipleSelectState())
     val batchOpState = MutableStateFlow(BatchOpState())
+    val filterState = MutableStateFlow(FilterState.All)
 
     val components =
-        combineTransform<AppInfo, String, Long, UiState<List<ComponentGroup>>>(
+        combineTransform<AppInfo, String, FilterState, Long, UiState<List<ComponentGroup>>>(
             _appInfo,
             _searchQuery,
+            filterState,
             _refresh,
-            transform = { appInfo, query, _ ->
+            transform = { appInfo, query, filterState, _ ->
                 emit(UiState.Loading)
                 kotlin.runCatching {
-                    emit(UiState.Loaded(loadComponentsGroups(appInfo, query)))
+                    emit(UiState.Loaded(loadComponentsGroups(appInfo, filterState, query)))
                 }.onFailure {
                     emit(UiState.Error(it))
                 }
@@ -86,6 +95,7 @@ abstract class ComponentsVM(
 
     private suspend fun loadComponentsGroups(
         appInfo: AppInfo,
+        filterState: FilterState,
         query: String
     ): List<ComponentGroup> {
         return withContext(Dispatchers.IO) {
@@ -99,6 +109,15 @@ abstract class ComponentsVM(
                         /* batchIndex = */ i
                     ) ?: break
                 batch
+                    .filter {
+                        filterState == FilterState.All
+                                || filterState == FilterState.Enabled && ComponentUtil.isComponentEnabled(
+                            it.enableSetting
+                        )
+                                || filterState == FilterState.Disabled && ComponentUtil.isComponentDisabled(
+                            it.enableSetting
+                        )
+                    }
                     .filter {
                         TextUtils.isEmpty(query) || it.name.lowercase().contains(query.lowercase())
                     }
@@ -116,6 +135,7 @@ abstract class ComponentsVM(
                         )
                     }
             }
+
             res.sort()
 
             res.groupBy { it.componentRule }.toSortedMap { o1, o2 ->
@@ -147,6 +167,12 @@ abstract class ComponentsVM(
 
     fun refresh() {
         _refresh.update { System.currentTimeMillis() }
+    }
+
+    fun setFilter(filter: FilterState) {
+        filterState.update {
+            filter
+        }
     }
 
     fun expand(group: ComponentGroup, expand: Boolean) {

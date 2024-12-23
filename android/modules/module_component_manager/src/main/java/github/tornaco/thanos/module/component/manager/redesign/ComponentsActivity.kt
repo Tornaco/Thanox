@@ -227,13 +227,47 @@ class ComponentsActivity : ComposeThemeActivity() {
                             }
                         }
                     } else {
-                        IconButton(onClick = {
-                            searchBarState.showSearchBar()
-                        }) {
-                            Icon(
-                                imageVector = Icons.Filled.Search,
-                                contentDescription = "Search"
-                            )
+                        Row {
+                            val filterDropdownState = rememberDropdownSelectorState()
+                            Box {
+                                IconButton(onClick = {
+                                    filterDropdownState.open()
+                                }) {
+                                    Icon(
+                                        painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_filter_fill),
+                                        contentDescription = "Filter"
+                                    )
+                                }
+
+                                DropdownSelector(
+                                    state = filterDropdownState,
+                                    items = listOf(
+                                        DropdownItem(
+                                            data = FilterState.All,
+                                            labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.all))
+                                        ),
+                                        DropdownItem(
+                                            data = FilterState.Enabled,
+                                            labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.enabled))
+                                        ),
+                                        DropdownItem(
+                                            data = FilterState.Disabled,
+                                            labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.disabled))
+                                        )
+                                    )
+                                ) {
+                                    viewModel.setFilter(it.data)
+                                }
+                            }
+
+                            IconButton(onClick = {
+                                searchBarState.showSearchBar()
+                            }) {
+                                Icon(
+                                    imageVector = Icons.Filled.Search,
+                                    contentDescription = "Search"
+                                )
+                            }
                         }
                     }
                 }

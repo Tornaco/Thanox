@@ -2,13 +2,16 @@ package github.tornaco.thanos.module.component.manager.redesign
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.text.TextUtils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.common.UiState
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.ComponentInfo
+import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.thanos.module.component.manager.ComponentRule
 import github.tornaco.thanos.module.component.manager.fallbackRule
 import github.tornaco.thanos.module.component.manager.getActivityRule
@@ -21,6 +24,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.withContext
+import util.Consumer
 import util.PinyinComparatorUtils
 import java.util.UUID
 
@@ -49,13 +53,11 @@ abstract class ComponentsVM(
             _searchQuery,
             _refresh,
             transform = { appInfo, query, _ ->
-                withContext(Dispatchers.IO) {
-                    emit(UiState.Loading)
-                    kotlin.runCatching {
-                        emit(UiState.Loaded(loadComponentsGroups(appInfo, query)))
-                    }.onFailure {
-                        emit(UiState.Error(it))
-                    }
+                emit(UiState.Loading)
+                kotlin.runCatching {
+                    emit(UiState.Loaded(loadComponentsGroups(appInfo, query)))
+                }.onFailure {
+                    emit(UiState.Error(it))
                 }
             }
         ).onEach { uiState ->
@@ -69,48 +71,50 @@ abstract class ComponentsVM(
             }
         }.stateIn(viewModelScope, SharingStarted.Lazily, initialValue = UiState.Loading)
 
-    private fun loadComponentsGroups(
+    private suspend fun loadComponentsGroups(
         appInfo: AppInfo,
         query: String
     ): List<ComponentGroup> {
-        val res: MutableList<ComponentModel> = ArrayList()
-        for (i in 0 until Int.MAX_VALUE) {
-            val batch =
-                thanox.getComponentsInBatch(
-                    /* userId = */ appInfo.userId,
-                    /* packageName = */ appInfo.pkgName,
-                    /* itemCountInEachBatch = */ 20,
-                    /* batchIndex = */ i
-                ) ?: break
-            batch
-                .filter {
-                    TextUtils.isEmpty(query) || it.name.lowercase().contains(query.lowercase())
-                }
-                .forEach { info ->
-                    res.add(
-                        ComponentModel.builder()
-                            .name(info.name)
-                            .componentName(info.componentName)
-                            .isDisabledByThanox(info.isDisabledByThanox)
-                            .label(info.label)
-                            .componentObject(info)
-                            .enableSetting(info.enableSetting)
-                            .componentRule(getActivityRule(info.componentName))
-                            .build()
-                    )
-                }
-        }
-        res.sort()
+        return withContext(Dispatchers.IO) {
+            val res: MutableList<ComponentModel> = ArrayList()
+            for (i in 0 until Int.MAX_VALUE) {
+                val batch =
+                    thanox.getComponentsInBatch(
+                        /* userId = */ appInfo.userId,
+                        /* packageName = */ appInfo.pkgName,
+                        /* itemCountInEachBatch = */ 20,
+                        /* batchIndex = */ i
+                    ) ?: break
+                batch
+                    .filter {
+                        TextUtils.isEmpty(query) || it.name.lowercase().contains(query.lowercase())
+                    }
+                    .forEach { info ->
+                        res.add(
+                            ComponentModel.builder()
+                                .name(info.name)
+                                .componentName(info.componentName)
+                                .isDisabledByThanox(info.isDisabledByThanox)
+                                .label(info.label)
+                                .componentObject(info)
+                                .enableSetting(info.enableSetting)
+                                .componentRule(getActivityRule(info.componentName))
+                                .build()
+                        )
+                    }
+            }
+            res.sort()
 
-        return res.groupBy { it.componentRule }.toSortedMap { o1, o2 ->
-            if (o1 == fallbackRule && o2 != fallbackRule) return@toSortedMap 1
-            if (o1 != fallbackRule && o2 == fallbackRule) return@toSortedMap -1
-            PinyinComparatorUtils.compare(
-                o1?.label.orEmpty(),
-                o2?.label.orEmpty()
-            )
-        }.map {
-            ComponentGroup(it.key, it.value)
+            res.groupBy { it.componentRule }.toSortedMap { o1, o2 ->
+                if (o1 == fallbackRule && o2 != fallbackRule) return@toSortedMap 1
+                if (o1 != fallbackRule && o2 == fallbackRule) return@toSortedMap -1
+                PinyinComparatorUtils.compare(
+                    o1?.label.orEmpty(),
+                    o2?.label.orEmpty()
+                )
+            }.map {
+                ComponentGroup(it.key, it.value)
+            }
         }
     }
 
@@ -131,6 +135,57 @@ abstract class ComponentsVM(
     fun refresh() {
         _refresh.update { System.currentTimeMillis() }
     }
+
+    fun setComponentState(
+        componentModel: ComponentModel,
+        setToEnabled: Boolean
+    ): Boolean {
+        XLog.d("setComponentState: $componentModel $setToEnabled")
+        val appInfo = _appInfo.value
+        val newState =
+            if (setToEnabled) PackageManager.COMPONENT_ENABLED_STATE_ENABLED else PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+        if (newState == componentModel.enableSetting) {
+            return false
+        }
+        if (thanox.isServiceInstalled) {
+            componentModel.enableSetting = newState
+            thanox.pkgManager.setComponentEnabledSetting(
+                appInfo.userId,
+                componentModel.componentName,
+                newState,
+                0 /* Kill it */
+            )
+            return true
+        }
+        return false
+    }
+
+    fun selectAll(
+        modelList: List<ComponentModel>,
+        enabled: Boolean,
+        onUpdate: Consumer<String>,
+    ) {
+        val appInfo = _appInfo.value
+        val totalCount = modelList.size
+        thanox.activityManager.forceStopPackage(
+            Pkg.fromAppInfo(
+                appInfo
+            ), "ComponentList UI selectAll"
+        )
+        // Wait 1s.
+        for (i in modelList.indices) {
+            val componentModel = modelList[i]
+            onUpdate.accept((i + 1).toString() + "/" + totalCount)
+            if (setComponentState(componentModel, enabled)) {
+                try {
+                    // Maybe a short delay will make it safer.
+                    Thread.sleep(100)
+                } catch (ignored: InterruptedException) {
+                }
+            }
+        }
+    }
+
 
     fun expand(group: ComponentGroup, expand: Boolean) {
         collapsedGroups.update {

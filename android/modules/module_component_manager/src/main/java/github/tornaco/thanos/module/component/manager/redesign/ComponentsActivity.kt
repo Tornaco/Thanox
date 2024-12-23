@@ -51,16 +51,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.common.UiState
+import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
+import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
+import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
+import github.tornaco.android.thanos.module.compose.common.widget.DropdownItem
+import github.tornaco.android.thanos.module.compose.common.widget.DropdownSelector
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
+import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
+import github.tornaco.android.thanos.module.compose.common.widget.rememberDropdownSelectorState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import github.tornaco.android.thanos.util.BrowserUtils
+import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.module.component.manager.ComponentRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -241,12 +249,16 @@ class ComponentsActivity : ComposeThemeActivity() {
                                                 itemsIndexed(group.components, key = { index, com ->
                                                     "${com.name}-${index}"
                                                 }) { _, component ->
-                                                    ComponentItem(component = component, toggle = {
-                                                        viewModel.setComponentState(
-                                                            componentModel = it,
-                                                            setToEnabled = it.isDisabled
-                                                        )
-                                                    })
+                                                    ComponentItem(
+                                                        component = component,
+                                                        type = type,
+                                                        toggle = {
+                                                            viewModel.setComponentState(
+                                                                componentModel = it,
+                                                                setToEnabled = it.isDisabled
+                                                            )
+                                                        }
+                                                    )
                                                 }
                                             }
                                         }
@@ -256,12 +268,16 @@ class ComponentsActivity : ComposeThemeActivity() {
                                     itemsIndexed(group.components, key = { index, com ->
                                         "${com.name}-${index}"
                                     }) { _, component ->
-                                        ComponentItem(component = component, toggle = {
-                                            viewModel.setComponentState(
-                                                componentModel = it,
-                                                setToEnabled = it.isDisabled
-                                            )
-                                        })
+                                        ComponentItem(
+                                            component = component,
+                                            type = type,
+                                            toggle = {
+                                                viewModel.setComponentState(
+                                                    componentModel = it,
+                                                    setToEnabled = it.isDisabled
+                                                )
+                                            }
+                                        )
                                     }
                                 }
                             }
@@ -285,46 +301,121 @@ class ComponentsActivity : ComposeThemeActivity() {
     }
 
     @Composable
-    private fun ComponentItem(component: ComponentModel, toggle: (ComponentModel) -> Unit) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = 68.dp)
-                .clickableWithRipple {
-                }
-                .padding(horizontal = 16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            var isChecked by remember(component) { mutableStateOf(!component.isDisabled) }
+    private fun ComponentItem(
+        component: ComponentModel,
+        type: Type,
+        toggle: (ComponentModel) -> Unit,
+    ) {
+        val fullName = remember { component.componentName.flattenToString() }
+        val context = LocalContext.current
+        val dropdownState = rememberDropdownSelectorState()
+
+
+        val addToSmartStandByKeepsVarDialog = rememberConfirmDialogState()
+        ConfirmDialog(
+            title = stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_keep_service_smart_standby),
+            state = addToSmartStandByKeepsVarDialog,
+            data = "KEEP $fullName",
+            messageHint = { it },
+            onConfirm = {
+                ThanosManager.from(context).activityManager.addStandbyRule(it)
+                ToastUtils.ok(context)
+            }
+        )
+
+        val addToAppLockAllowDialog = rememberConfirmDialogState()
+        ConfirmDialog(
+            title = stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_add_lock_white_list),
+            state = addToAppLockAllowDialog,
+            data = component.componentName,
+            messageHint = { it.flattenToString() },
+            onConfirm = {
+                ThanosManager.from(context).activityStackSupervisor.addAppLockWhiteListComponents(
+                    listOf(it)
+                )
+                ToastUtils.ok(context)
+            }
+        )
+
+        Box {
             Row(
                 modifier = Modifier
-                    .weight(1f),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column {
-                    Row {
-                        Text(
-                            component.label,
-                            style = MaterialTheme.typography.titleSmall
-                        )
-                        if (!isChecked && component.isDisabledByThanox) {
-                            MD3Badge(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_disabled_by_thanox))
-                        }
-                        if (component.isRunning) {
-                            MD3Badge(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_component_running))
-                        }
+                    .fillMaxWidth()
+                    .heightIn(min = 68.dp)
+                    .clickableWithRipple {
+                        dropdownState.open()
                     }
-                    Text(
-                        component.name,
-                        style = MaterialTheme.typography.bodySmall
-                    )
+                    .padding(horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                var isChecked by remember(component) { mutableStateOf(!component.isDisabled) }
+                Row(
+                    modifier = Modifier
+                        .weight(1f),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Row {
+                            Text(
+                                component.label,
+                                style = MaterialTheme.typography.titleSmall
+                            )
+                            if (!isChecked && component.isDisabledByThanox) {
+                                MD3Badge(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_disabled_by_thanox))
+                            }
+                            if (component.isRunning) {
+                                MD3Badge(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_component_running))
+                            }
+                        }
+                        Text(
+                            component.name,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
                 }
+
+                Switch(checked = isChecked, onCheckedChange = {
+                    isChecked = !isChecked
+                    toggle(component)
+                })
             }
 
-            Switch(checked = isChecked, onCheckedChange = {
-                isChecked = !isChecked
-                toggle(component)
+            DropdownSelector(state = dropdownState, items = listOfNotNull(
+                DropdownItem(
+                    labelLines = listOf(stringResource(android.R.string.copy)),
+                    data = ComponentItemAction.Copy,
+                ),
+                if (type == Type.SERVICE) {
+                    DropdownItem(
+                        labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_keep_service_smart_standby)),
+                        data = ComponentItemAction.AddToSmartStandByKeepRules,
+                    )
+                } else null,
+                if (type == Type.ACTIVITY) {
+                    DropdownItem(
+                        labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_add_lock_white_list)),
+                        data = ComponentItemAction.AddToAppLockAllowList,
+                    )
+                } else null
+            ), onSelect = {
+                when (it.data) {
+                    ComponentItemAction.Copy -> {
+                        ClipboardUtils.copyToClipboard(
+                            context,
+                            "Name",
+                            fullName
+                        )
+                    }
+
+                    ComponentItemAction.AddToSmartStandByKeepRules -> {
+                        addToSmartStandByKeepsVarDialog.show()
+                    }
+
+                    ComponentItemAction.AddToAppLockAllowList -> {
+                        addToAppLockAllowDialog.show()
+                    }
+                }
             })
         }
     }
@@ -393,4 +484,8 @@ class ComponentsActivity : ComposeThemeActivity() {
             }
         }
     }
+}
+
+internal enum class ComponentItemAction {
+    Copy, AddToSmartStandByKeepRules, AddToAppLockAllowList
 }

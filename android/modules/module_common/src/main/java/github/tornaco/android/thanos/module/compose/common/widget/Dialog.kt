@@ -17,16 +17,28 @@
 
 package github.tornaco.android.thanos.module.compose.common.widget
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -82,27 +94,35 @@ fun ThanoxDialog(
     buttons: @Composable RowScope.() -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Dialog(onDismissRequest = onDismissRequest,
+    Dialog(
+        onDismissRequest = onDismissRequest,
         properties = DialogProperties(
             dismissOnBackPress = properties.dismissOnBackPress,
             dismissOnClickOutside = properties.dismissOnClickOutside,
             securePolicy = properties.securePolicy,
             usePlatformDefaultWidth = false
-        )) {
-        Surface(modifier = Modifier.fillMaxWidth(fraction = 0.82f),
+        )
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxWidth(fraction = 0.82f),
             shape = AlertDialogDefaults.shape,
             color = AlertDialogDefaults.containerColor,
-            tonalElevation = AlertDialogDefaults.TonalElevation) {
+            tonalElevation = AlertDialogDefaults.TonalElevation
+        ) {
 
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
                 title()
                 Spacer(modifier = Modifier.size(16.dp))
                 content()
-                Row(modifier = Modifier.fillMaxWidth(),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically) {
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     buttons()
                 }
             }
@@ -110,3 +130,51 @@ fun ThanoxDialog(
         }
     }
 }
+
+
+class ConfirmDialogState : CommonDialogState()
+
+@Composable
+fun rememberConfirmDialogState(): ConfirmDialogState {
+    return remember {
+        ConfirmDialogState()
+    }
+}
+
+@Composable
+fun <T> ConfirmDialog(
+    title: String,
+    state: ConfirmDialogState,
+    data: T,
+    messageHint: (T) -> String = { "" },
+    confirmButton: String = stringResource(id = android.R.string.ok),
+    dismissButton: String = stringResource(id = android.R.string.cancel),
+    onConfirm: (T) -> Unit
+) {
+    if (state.isShowing) {
+        ThanoxAlertDialog(
+            onDismissRequest = {
+                state.dismiss()
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    onConfirm(data)
+                    state.dismiss()
+                }) {
+                    Text(text = confirmButton)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { state.dismiss() }) {
+                    Text(text = dismissButton)
+                }
+            },
+            title = {
+                Text(text = title)
+            },
+            text = {
+                Text(text = messageHint(data))
+            })
+    }
+}
+

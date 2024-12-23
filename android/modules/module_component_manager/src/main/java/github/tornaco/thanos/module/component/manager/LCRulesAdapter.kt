@@ -19,9 +19,16 @@ package github.tornaco.thanos.module.component.manager
 
 import android.content.ComponentName
 import android.content.Context
+import android.content.res.Resources
 import androidx.annotation.DrawableRes
-import com.absinthe.rulesbundle.*
+import com.absinthe.rulesbundle.ACTIVITY
+import com.absinthe.rulesbundle.LCRules
+import com.absinthe.rulesbundle.PROVIDER
+import com.absinthe.rulesbundle.RECEIVER
+import com.absinthe.rulesbundle.Rule
+import com.absinthe.rulesbundle.SERVICE
 import com.elvishew.xlog.XLog
+import github.tornaco.android.thanos.core.app.AppGlobals
 import kotlinx.coroutines.runBlocking
 
 fun initRules(context: Context) = runCatching {
@@ -40,21 +47,23 @@ fun getReceiverRule(name: ComponentName) =
 fun getProviderRule(name: ComponentName) =
     getRule(name = name, type = PROVIDER)
 
-private fun getRule(name: ComponentName, type: Int): ComponentRule? =
+private fun getRule(name: ComponentName, type: Int): ComponentRule =
     runBlocking {
         val rule: Rule? = LCRules.getRule(libName = name.className, type = type, useRegex = false)
         val wrap = rule?.let {
+            val isValidRes = isResource(AppGlobals.context, it.iconRes)
             ComponentRule(
                 it.label,
-                it.iconRes,
+                it.iconRes.takeIf { isValidRes } ?: 0,
                 it.descriptionUrl,
                 it.regexName,
-                it.isSimpleColorIcon)
+                it.isSimpleColorIcon
+            )
         }
         if (BuildConfig.DEBUG) {
             XLog.v("getRule: $wrap")
         }
-        wrap
+        wrap ?: fallbackRule
     }
 
 data class ComponentRule(
@@ -64,3 +73,19 @@ data class ComponentRule(
     val regexName: String?,
     val isSimpleColorIcon: Boolean,
 )
+
+val fallbackRule = ComponentRule(
+    label = "Others",
+    iconRes = 0,
+    descriptionUrl = null,
+    regexName = null,
+    isSimpleColorIcon = false,
+)
+
+private fun isResource(context: Context, resId: Int): Boolean {
+    try {
+        return context.resources.getResourceName(resId) != null
+    } catch (ignore: Resources.NotFoundException) {
+    }
+    return false
+}

@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @SuppressLint("StaticFieldLeak")
 @HiltViewModel
-class ActivitiesVM @Inject constructor(
+class ServicesVM @Inject constructor(
     @ApplicationContext context: Context,
 ) : ComponentsVM(context) {
     override fun ThanosManager.getComponentsInBatch(
@@ -19,7 +19,7 @@ class ActivitiesVM @Inject constructor(
         itemCountInEachBatch: Int,
         batchIndex: Int
     ): List<ComponentInfo>? {
-        return pkgManager.getActivitiesInBatch(
+        return pkgManager.getServicesInBatch(
             userId,
             packageName,
             itemCountInEachBatch,

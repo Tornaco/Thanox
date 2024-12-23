@@ -61,9 +61,6 @@ import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.android.thanos.widget.QuickDropdown;
 import github.tornaco.android.thanos.widget.pref.ViewAwarePreference;
 import github.tornaco.thanos.android.ops.ops.by.app.AppOpsListActivity;
-import github.tornaco.thanos.module.component.manager.ProviderListActivity;
-import github.tornaco.thanos.module.component.manager.ReceiverListActivity;
-import github.tornaco.thanos.module.component.manager.ServiceListActivity;
 import github.tornaco.thanos.module.component.manager.redesign.ComponentsActivity;
 import now.fortuitous.thanos.XposedScope;
 import now.fortuitous.thanos.launchother.AllowListActivity;
@@ -210,7 +207,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
                 AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
                     if (isSubscribed) {
-                        ReceiverListActivity.start(requireActivity(), appInfo);
+                        ComponentsActivity.startBroadcastReceiver(requireActivity(), appInfo);
                     } else {
                         AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                     }
@@ -224,7 +221,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
                 AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
                     if (isSubscribed) {
-                        ProviderListActivity.start(requireActivity(), appInfo);
+                        ComponentsActivity.startProvider(requireActivity(), appInfo);
                     } else {
                         AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                     }
@@ -240,7 +237,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
                 AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
                     if (isSubscribed) {
-                        ServiceListActivity.start(requireActivity(), appInfo);
+                        ComponentsActivity.startService(requireActivity(), appInfo);
                     } else {
                         AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                     }

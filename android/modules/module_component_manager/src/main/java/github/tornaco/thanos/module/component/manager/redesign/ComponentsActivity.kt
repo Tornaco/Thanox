@@ -3,6 +3,12 @@ package github.tornaco.thanos.module.component.manager.redesign
 import android.content.Context
 import android.content.Intent
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,10 +18,12 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.ArrowDropDown
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -31,6 +39,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -44,10 +56,12 @@ import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
+import github.tornaco.android.thanos.util.BrowserUtils
+import github.tornaco.thanos.module.component.manager.ComponentRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @AndroidEntryPoint
 class ComponentsActivity : ComposeThemeActivity() {
     companion object {
@@ -57,6 +71,21 @@ class ComponentsActivity : ComposeThemeActivity() {
         @JvmStatic
         fun startActivity(context: Context, appInfo: AppInfo) {
             start(context, appInfo, Type.ACTIVITY)
+        }
+
+        @JvmStatic
+        fun startService(context: Context, appInfo: AppInfo) {
+            start(context, appInfo, Type.SERVICE)
+        }
+
+        @JvmStatic
+        fun startBroadcastReceiver(context: Context, appInfo: AppInfo) {
+            start(context, appInfo, Type.RECEIVER)
+        }
+
+        @JvmStatic
+        fun startProvider(context: Context, appInfo: AppInfo) {
+            start(context, appInfo, Type.PROVIDER)
         }
 
         private fun start(context: Context, appInfo: AppInfo, type: Type) {
@@ -96,15 +125,15 @@ class ComponentsActivity : ComposeThemeActivity() {
             }
 
             Type.RECEIVER -> {
-                hiltViewModel<ActivitiesVM>()
+                hiltViewModel<ReceiversVM>()
             }
 
             Type.SERVICE -> {
-                hiltViewModel<ActivitiesVM>()
+                hiltViewModel<ServicesVM>()
             }
 
             Type.PROVIDER -> {
-                hiltViewModel<ActivitiesVM>()
+                hiltViewModel<ProvidersVM>()
             }
         }
 
@@ -166,41 +195,45 @@ class ComponentsActivity : ComposeThemeActivity() {
                     .padding(paddings)
                     .pullRefresh(refreshState)
             ) {
+                val collapsedGroups by viewModel.collapsedGroups.collectAsStateWithLifecycle()
                 LazyColumn(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     when (components) {
                         is UiState.Error -> {
                             item {
-                                Text((components as UiState.Error).err.stackTraceToString())
+                                Box(
+                                    Modifier
+                                        .fillMaxSize()
+                                        .padding(16.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text((components as UiState.Error).err.stackTraceToString())
+                                }
                             }
                         }
 
                         is UiState.Loaded -> {
-                            items((components as UiState.Loaded<List<ComponentModel>>).data) { component ->
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .heightIn(min = 68.dp)
-                                        .clickableWithRipple {
+                            (components as UiState.Loaded<List<ComponentGroup>>).data.forEach { group ->
+                                stickyHeader {
+                                    RuleHeader(
+                                        rule = group.rule,
+                                        itemCount = group.components.size,
+                                        isExpand = !collapsedGroups.contains(group.id),
+                                        expand = {
+                                            viewModel.expand(group, it)
                                         }
-                                        .padding(horizontal = 16.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Row(
-                                        modifier = Modifier
-                                            .weight(1f),
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Column {
-                                            Text(
-                                                component.label,
-                                                style = MaterialTheme.typography.titleSmall
-                                            )
-                                            Text(
-                                                component.name,
-                                                style = MaterialTheme.typography.bodySmall
-                                            )
+                                    )
+                                }
+
+                                item {
+                                    AnimatedVisibility(!collapsedGroups.contains(group.id)) {
+                                        LazyColumn(Modifier.heightIn(max = 5000.dp)) {
+                                            itemsIndexed(group.components, key = { index, com ->
+                                                "${com.name}-${index}"
+                                            }) { _, component ->
+                                                ComponentItem(component)
+                                            }
                                         }
                                     }
                                 }
@@ -209,7 +242,9 @@ class ComponentsActivity : ComposeThemeActivity() {
 
                         UiState.Loading -> {
                             item {
-                                CircularProgressIndicator()
+                                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                    CircularProgressIndicator()
+                                }
                             }
                         }
                     }
@@ -223,6 +258,96 @@ class ComponentsActivity : ComposeThemeActivity() {
                 )
             }
 
+        }
+    }
+
+    @Composable
+    private fun ComponentItem(component: ComponentModel) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 68.dp)
+                .clickableWithRipple {
+                }
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(
+                modifier = Modifier
+                    .weight(1f),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        component.label,
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                    Text(
+                        component.name,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun RuleHeader(
+        rule: ComponentRule,
+        itemCount: Int,
+        isExpand: Boolean,
+        expand: (Boolean) -> Unit
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 40.dp)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
+                .clickable {
+
+                }
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(
+                Modifier.weight(1f, fill = false),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(
+                    painter = painterResource(rule.iconRes.takeIf { it > 0 }
+                        ?: github.tornaco.android.thanos.res.R.drawable.ic_logo_android_line),
+                    contentDescription = null,
+                    tint = Color.Unspecified
+                )
+                SmallSpacer()
+                Text(
+                    text = "${rule.label} (${itemCount})",
+                    style = MaterialTheme.typography.titleSmall
+                )
+                rule.descriptionUrl?.let {
+                    val context = LocalContext.current
+                    IconButton(onClick = {
+                        BrowserUtils.launch(context, it)
+                    }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = "Info"
+                        )
+                    }
+                }
+            }
+
+            IconButton(onClick = {
+                expand(!isExpand)
+            }) {
+                val rotate by animateFloatAsState(if (isExpand) 180f else 0f)
+                Icon(
+                    modifier = Modifier.rotate(rotate),
+                    imageVector = Icons.Outlined.ArrowDropDown,
+                    contentDescription = "Info"
+                )
+            }
         }
     }
 }

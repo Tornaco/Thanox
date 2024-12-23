@@ -23,8 +23,8 @@ import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import util.Consumer
 import util.PinyinComparatorUtils
 import java.util.UUID
 
@@ -32,6 +32,16 @@ data class ComponentGroup(
     val rule: ComponentRule = fallbackRule,
     val components: List<ComponentModel> = emptyList(),
     val id: String = UUID.randomUUID().toString()
+)
+
+data class MultipleSelectState(
+    val isSelectMode: Boolean = false,
+    val selectedItems: Set<ComponentModel> = emptySet(),
+)
+
+data class BatchOpState(
+    val isWorking: Boolean = false,
+    val progressText: String = ""
 )
 
 @SuppressLint("StaticFieldLeak")
@@ -46,6 +56,9 @@ abstract class ComponentsVM(
     private val _refresh = MutableStateFlow(System.currentTimeMillis())
 
     val collapsedGroups = MutableStateFlow(emptySet<String>())
+
+    val selectState = MutableStateFlow(MultipleSelectState())
+    val batchOpState = MutableStateFlow(BatchOpState())
 
     val components =
         combineTransform<AppInfo, String, Long, UiState<List<ComponentGroup>>>(
@@ -136,6 +149,55 @@ abstract class ComponentsVM(
         _refresh.update { System.currentTimeMillis() }
     }
 
+    fun expand(group: ComponentGroup, expand: Boolean) {
+        collapsedGroups.update {
+            if (expand) {
+                collapsedGroups.value.minus(group.id)
+            } else {
+                collapsedGroups.value.plus(group.id)
+            }
+        }
+    }
+
+    fun exitSelectionState() {
+        selectState.update {
+            it.copy(
+                isSelectMode = false,
+                selectedItems = emptySet()
+            )
+        }
+    }
+
+    fun select(model: ComponentModel, select: Boolean) {
+        val updatedItems = if (select) {
+            selectState.value.selectedItems + model
+        } else {
+            selectState.value.selectedItems - model
+        }
+        val isSelectMode = updatedItems.isNotEmpty()
+        selectState.update {
+            it.copy(
+                selectedItems = updatedItems,
+                isSelectMode = isSelectMode
+            )
+        }
+    }
+
+    fun select(group: ComponentGroup, select: Boolean) {
+        val updatedItems = if (select) {
+            selectState.value.selectedItems + group.components
+        } else {
+            selectState.value.selectedItems - group.components.toSet()
+        }
+        val isSelectMode = updatedItems.isNotEmpty()
+        selectState.update {
+            it.copy(
+                selectedItems = updatedItems,
+                isSelectMode = isSelectMode
+            )
+        }
+    }
+
     fun setComponentState(
         componentModel: ComponentModel,
         setToEnabled: Boolean
@@ -160,39 +222,42 @@ abstract class ComponentsVM(
         return false
     }
 
-    fun selectAll(
-        modelList: List<ComponentModel>,
-        enabled: Boolean,
-        onUpdate: Consumer<String>,
-    ) {
-        val appInfo = _appInfo.value
-        val totalCount = modelList.size
-        thanox.activityManager.forceStopPackage(
-            Pkg.fromAppInfo(
-                appInfo
-            ), "ComponentList UI selectAll"
-        )
-        // Wait 1s.
-        for (i in modelList.indices) {
-            val componentModel = modelList[i]
-            onUpdate.accept((i + 1).toString() + "/" + totalCount)
-            if (setComponentState(componentModel, enabled)) {
-                try {
-                    // Maybe a short delay will make it safer.
-                    Thread.sleep(100)
-                } catch (ignored: InterruptedException) {
+    fun appBatchOp(enabled: Boolean) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val appInfo = _appInfo.value
+                val modelList = selectState.value.selectedItems.toList()
+                val totalCount = modelList.size
+                thanox.activityManager.forceStopPackage(
+                    Pkg.fromAppInfo(
+                        appInfo
+                    ), "ComponentList UI selectAll"
+                )
+                // Wait 1s.
+                batchOpState.update { it.copy(isWorking = true, progressText = "") }
+                for (i in modelList.indices) {
+                    val componentModel = modelList[i]
+                    batchOpState.update {
+                        it.copy(
+                            progressText = (i + 1).toString() + "/" + totalCount
+                        )
+                    }
+                    if (enabled != componentModel.isEnabled && setComponentState(
+                            componentModel,
+                            enabled
+                        )
+                    ) {
+                        try {
+                            // Maybe a short delay will make it safer.
+                            Thread.sleep(30)
+                        } catch (ignored: InterruptedException) {
+                        }
+                    }
                 }
-            }
-        }
-    }
+                batchOpState.update { it.copy(isWorking = false, progressText = "") }
 
-
-    fun expand(group: ComponentGroup, expand: Boolean) {
-        collapsedGroups.update {
-            if (expand) {
-                collapsedGroups.value.minus(group.id)
-            } else {
-                collapsedGroups.value.plus(group.id)
+                exitSelectionState()
+                refresh()
             }
         }
     }

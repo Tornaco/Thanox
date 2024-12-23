@@ -44,6 +44,10 @@ public class ComponentModel implements Comparable<ComponentModel> {
                 && enableSetting != PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
     }
 
+    public boolean isEnabled() {
+        return !isDisabled();
+    }
+
     public String getName() {
         return name;
     }

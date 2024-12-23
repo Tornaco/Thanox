@@ -1,13 +1,17 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package github.tornaco.thanos.module.component.manager.redesign
 
 import android.content.Context
 import android.content.Intent
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +21,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
@@ -27,11 +33,17 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -63,13 +75,11 @@ import github.tornaco.android.thanos.module.compose.common.widget.DropdownSelect
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
-import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberDropdownSelectorState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.android.thanos.util.ToastUtils
-import github.tornaco.thanos.module.component.manager.ComponentRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 import kotlinx.coroutines.flow.distinctUntilChanged
 
@@ -170,29 +180,62 @@ class ComponentsActivity : ComposeThemeActivity() {
             searchBarState.closeSearchBar()
         }
 
+        val selectState by viewModel.selectState.collectAsStateWithLifecycle()
+        val batchOpState by viewModel.batchOpState.collectAsStateWithLifecycle()
+
         ThanoxSmallAppBarScaffold(
             title = {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    AppIcon(modifier = Modifier.size(32.dp), appInfo = app)
-                    SmallSpacer()
-                    Text(
-                        text = app.appLabel,
-                        style = TypographyDefaults.appBarTitleTextStyle()
-                    )
+                AnimatedContent(selectState.isSelectMode) {
+                    if (it) {
+                        Text(
+                            text = "${stringResource(github.tornaco.android.thanos.res.R.string.common_menu_title_batch_select)} ${selectState.selectedItems.size}",
+                            style = TypographyDefaults.appBarTitleTextStyle()
+                        )
+                    } else {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            AppIcon(modifier = Modifier.size(32.dp), appInfo = app)
+                            SmallSpacer()
+                            Text(
+                                text = app.appLabel,
+                                style = TypographyDefaults.appBarTitleTextStyle()
+                            )
+                        }
+                    }
                 }
             },
             searchBarState = searchBarState,
             onBackPressed = {
-                thisActivity().finish()
+                if (selectState.isSelectMode) {
+                    viewModel.exitSelectionState()
+                } else {
+                    thisActivity().finish()
+                }
             },
             actions = {
-                IconButton(onClick = {
-                    searchBarState.showSearchBar()
-                }) {
-                    Icon(
-                        imageVector = Icons.Filled.Search,
-                        contentDescription = "Search"
-                    )
+                AnimatedContent(selectState.isSelectMode) {
+                    if (it) {
+                        Row {
+                            TextButton(onClick = {
+                                viewModel.appBatchOp(true)
+                            }) {
+                                Text(text = stringResource(github.tornaco.android.thanos.res.R.string.on))
+                            }
+                            TextButton(onClick = {
+                                viewModel.appBatchOp(false)
+                            }) {
+                                Text(text = stringResource(github.tornaco.android.thanos.res.R.string.off))
+                            }
+                        }
+                    } else {
+                        IconButton(onClick = {
+                            searchBarState.showSearchBar()
+                        }) {
+                            Icon(
+                                imageVector = Icons.Filled.Search,
+                                contentDescription = "Search"
+                            )
+                        }
+                    }
                 }
             }
         ) { paddings ->
@@ -201,6 +244,27 @@ class ComponentsActivity : ComposeThemeActivity() {
             val refreshState = rememberPullRefreshState(refreshing, onRefresh = {
                 viewModel.refresh()
             })
+
+            if (batchOpState.isWorking) {
+                BasicAlertDialog(
+                    onDismissRequest = {
+                    },
+                    content = {
+                        Surface(
+                            modifier = Modifier
+                                .wrapContentWidth()
+                                .wrapContentHeight(),
+                            shape = MaterialTheme.shapes.large,
+                            tonalElevation = AlertDialogDefaults.TonalElevation
+                        ) {
+                            Column(Modifier.padding(16.dp)) {
+                                Text(text = batchOpState.progressText)
+                                LinearProgressIndicator()
+                            }
+                        }
+                    },
+                )
+            }
 
             Box(
                 Modifier
@@ -232,12 +296,18 @@ class ComponentsActivity : ComposeThemeActivity() {
 
                                 stickyHeader {
                                     RuleHeader(
-                                        rule = group.rule,
-                                        itemCount = group.components.size,
+                                        group = group,
                                         canExpand = !isLargeGroup,
                                         isExpand = !collapsedGroups.contains(group.id),
                                         expand = {
                                             viewModel.expand(group, it)
+                                        },
+                                        isInSelectMode = selectState.isSelectMode,
+                                        isGroupSelected = selectState.selectedItems.containsAll(
+                                            group.components
+                                        ),
+                                        updateGroupSelection = { componentGroup, b ->
+                                            viewModel.select(componentGroup, b)
                                         }
                                     )
                                 }
@@ -257,6 +327,13 @@ class ComponentsActivity : ComposeThemeActivity() {
                                                                 componentModel = it,
                                                                 setToEnabled = it.isDisabled
                                                             )
+                                                        },
+                                                        isInSelectMode = selectState.isSelectMode,
+                                                        isSelected = selectState.selectedItems.contains(
+                                                            component
+                                                        ),
+                                                        updateSelection = { componentModel: ComponentModel, b: Boolean ->
+                                                            viewModel.select(componentModel, b)
                                                         }
                                                     )
                                                 }
@@ -276,6 +353,13 @@ class ComponentsActivity : ComposeThemeActivity() {
                                                     componentModel = it,
                                                     setToEnabled = it.isDisabled
                                                 )
+                                            },
+                                            isInSelectMode = selectState.isSelectMode,
+                                            isSelected = selectState.selectedItems.contains(
+                                                component
+                                            ),
+                                            updateSelection = { componentModel: ComponentModel, b: Boolean ->
+                                                viewModel.select(componentModel, b)
                                             }
                                         )
                                     }
@@ -304,12 +388,14 @@ class ComponentsActivity : ComposeThemeActivity() {
     private fun ComponentItem(
         component: ComponentModel,
         type: Type,
+        isInSelectMode: Boolean,
+        isSelected: Boolean,
+        updateSelection: (ComponentModel, Boolean) -> Unit,
         toggle: (ComponentModel) -> Unit,
     ) {
         val fullName = remember { component.componentName.flattenToString() }
         val context = LocalContext.current
         val dropdownState = rememberDropdownSelectorState()
-
 
         val addToSmartStandByKeepsVarDialog = rememberConfirmDialogState()
         ConfirmDialog(
@@ -342,9 +428,22 @@ class ComponentsActivity : ComposeThemeActivity() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(min = 68.dp)
-                    .clickableWithRipple {
-                        dropdownState.open()
-                    }
+                    .combinedClickable(onClick = {
+                        if (isInSelectMode) {
+                            updateSelection(component, !isSelected)
+                        } else {
+                            dropdownState.open()
+                        }
+                    }, onLongClick = {
+                        updateSelection(component, true)
+                    })
+                    .then(
+                        if (isInSelectMode && isSelected) {
+                            Modifier.background(MaterialTheme.colorScheme.secondaryContainer)
+                        } else {
+                            Modifier
+                        }
+                    )
                     .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -422,11 +521,13 @@ class ComponentsActivity : ComposeThemeActivity() {
 
     @Composable
     private fun RuleHeader(
-        rule: ComponentRule,
-        itemCount: Int,
+        group: ComponentGroup,
         canExpand: Boolean,
         isExpand: Boolean,
-        expand: (Boolean) -> Unit
+        expand: (Boolean) -> Unit,
+        isInSelectMode: Boolean,
+        isGroupSelected: Boolean,
+        updateGroupSelection: (ComponentGroup, Boolean) -> Unit
     ) {
         Row(
             modifier = Modifier
@@ -434,7 +535,11 @@ class ComponentsActivity : ComposeThemeActivity() {
                 .heightIn(min = 40.dp)
                 .background(MaterialTheme.colorScheme.surfaceVariant)
                 .clickable {
-
+                    if (isInSelectMode) {
+                        updateGroupSelection(group, !isGroupSelected)
+                    } else {
+                        if (canExpand) expand(!isExpand)
+                    }
                 }
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -445,10 +550,10 @@ class ComponentsActivity : ComposeThemeActivity() {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
-                    painter = painterResource(rule.iconRes.takeIf { it > 0 }
+                    painter = painterResource(group.rule.iconRes.takeIf { it > 0 }
                         ?: github.tornaco.android.thanos.res.R.drawable.ic_logo_android_line),
                     contentDescription = null,
-                    tint = if (rule.isSimpleColorIcon) {
+                    tint = if (group.rule.isSimpleColorIcon) {
                         MaterialTheme.colorScheme.primary
                     } else {
                         Color.Unspecified
@@ -456,10 +561,10 @@ class ComponentsActivity : ComposeThemeActivity() {
                 )
                 SmallSpacer()
                 Text(
-                    text = "${rule.label} (${itemCount})",
+                    text = "${group.rule.label} (${group.components.size})",
                     style = MaterialTheme.typography.titleSmall
                 )
-                rule.descriptionUrl?.let {
+                group.rule.descriptionUrl?.let {
                     val context = LocalContext.current
                     IconButton(onClick = {
                         BrowserUtils.launch(context, it)

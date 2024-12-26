@@ -36,10 +36,6 @@ public class Package {
 
     public String packageName;
 
-    // The package name declared in the manifest as the package can be
-    // renamed, for example static shared libs use synthetic package names.
-    public String manifestPackageName;
-
     /**
      * Names of any split APKs, ordered by parsed splitName
      */

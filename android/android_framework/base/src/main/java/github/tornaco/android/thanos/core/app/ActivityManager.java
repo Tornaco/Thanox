@@ -1,5 +1,6 @@
 package github.tornaco.android.thanos.core.app;
 
+import android.app.ActivityManagerNative;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.IPkgManager;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.process.ProcessRecord;
+import github.tornaco.android.thanos.core.util.OsUtils;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import util.Singleton;
@@ -34,8 +36,7 @@ public class ActivityManager {
                 @Override
                 protected android.app.IActivityManager create() {
                     final IBinder b = ServiceManager.getService(Context.ACTIVITY_SERVICE);
-                    final android.app.IActivityManager am = android.app.IActivityManager.Stub.asInterface(b);
-                    return am;
+                    return android.app.IActivityManager.Stub.asInterface(b);
                 }
             };
 
@@ -55,7 +56,11 @@ public class ActivityManager {
     private IPkgManager pkg;
 
     public static android.app.IActivityManager getAndroidService() {
-        return IActivityManagerSingleton.get();
+        if (OsUtils.isOOrAbove()) {
+            return IActivityManagerSingleton.get();
+        } else {
+            return ActivityManagerNative.getDefault();
+        }
     }
 
     @SneakyThrows

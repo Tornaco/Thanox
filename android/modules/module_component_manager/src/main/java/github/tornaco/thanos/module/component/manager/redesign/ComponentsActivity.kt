@@ -78,8 +78,9 @@ import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallApp
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberDropdownSelectorState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
-import github.tornaco.android.thanos.util.BrowserUtils
+import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.util.ToastUtils
+import github.tornaco.thanos.module.component.manager.ComponentRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 import kotlinx.coroutines.flow.distinctUntilChanged
 
@@ -563,6 +564,15 @@ class ComponentsActivity : ComposeThemeActivity() {
         isGroupSelected: Boolean,
         updateGroupSelection: (ComponentGroup, Boolean) -> Unit
     ) {
+        var ruleInfoDialogState by remember { mutableStateOf(false) }
+        if (ruleInfoDialogState) {
+            BasicAlertDialog(onDismissRequest = { ruleInfoDialogState = false }) {
+                RuleInfoDialog(rule = group.rule) {
+                    ruleInfoDialogState = false
+                }
+            }
+        }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -583,25 +593,15 @@ class ComponentsActivity : ComposeThemeActivity() {
                 Modifier.weight(1f, fill = false),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(
-                    painter = painterResource(group.rule.iconRes.takeIf { it > 0 }
-                        ?: github.tornaco.android.thanos.res.R.drawable.ic_logo_android_line),
-                    contentDescription = null,
-                    tint = if (group.rule.isSimpleColorIcon) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        Color.Unspecified
-                    }
-                )
+                RuleIcon(group.rule)
                 SmallSpacer()
                 Text(
                     text = "${group.rule.label} (${group.components.size})",
                     style = MaterialTheme.typography.titleSmall
                 )
                 group.rule.descriptionUrl?.let {
-                    val context = LocalContext.current
                     IconButton(onClick = {
-                        BrowserUtils.launch(context, it)
+                        ruleInfoDialogState = true
                     }) {
                         Icon(
                             imageVector = Icons.Outlined.Info,
@@ -625,6 +625,21 @@ class ComponentsActivity : ComposeThemeActivity() {
     }
 }
 
+@Composable
+fun RuleIcon(rule: ComponentRule) {
+    Icon(
+        painter = painterResource(rule.iconRes.takeIf { it > 0 }
+            ?: R.drawable.ic_logo_android_line),
+        contentDescription = null,
+        tint = if (rule.isSimpleColorIcon) {
+            MaterialTheme.colorScheme.primary
+        } else {
+            Color.Unspecified
+        }
+    )
+}
+
 internal enum class ComponentItemAction {
     Copy, AddToSmartStandByKeepRules, AddToAppLockAllowList
 }
+

@@ -75,4 +75,5 @@ dependencies {
     implementation(libs.glide.landscapist)
     implementation(libs.glide)
     kapt(libs.glide.compiler)
+    implementation(libs.gson)
 }

@@ -22,6 +22,8 @@ import android.content.Context
 import android.content.res.Resources
 import androidx.annotation.DrawableRes
 import com.absinthe.rulesbundle.ACTIVITY
+import com.absinthe.rulesbundle.LCLocale
+import com.absinthe.rulesbundle.LCRemoteRepo
 import com.absinthe.rulesbundle.LCRules
 import com.absinthe.rulesbundle.PROVIDER
 import com.absinthe.rulesbundle.RECEIVER
@@ -30,9 +32,17 @@ import com.absinthe.rulesbundle.SERVICE
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.app.AppGlobals
 import kotlinx.coroutines.runBlocking
+import java.util.Locale
 
 fun initRules(context: Context) = runCatching {
     LCRules.init(context)
+
+    val locale = context.resources.configuration.locales[0]
+    val isSystemLanguageChinese = locale.language == Locale.CHINESE.language
+    XLog.w("initRules: $locale $isSystemLanguageChinese")
+
+    LCRules.setLocale(if (isSystemLanguageChinese) LCLocale.ZH else LCLocale.EN)
+    LCRules.setRemoteRepo(if (isSystemLanguageChinese) LCRemoteRepo.Gitlab else LCRemoteRepo.Github)
 }.onFailure { XLog.e(it) }
 
 fun getActivityRule(name: ComponentName) =

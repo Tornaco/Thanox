@@ -396,3 +396,4 @@
 -dontwarn com.android.internal.annotations.GuardedBy
 -dontwarn com.android.internal.annotations.VisibleForTesting
 -dontwarn lombok.Generated
+-dontwarn android.app.ActivityManagerNative

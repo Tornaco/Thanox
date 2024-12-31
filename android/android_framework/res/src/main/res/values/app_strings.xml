@@ -1392,63 +1392,65 @@
 
     <dimen name="settings_side_margin">0dip</dimen>
 
-    <string name="process_manager">进程管理</string>
+    <string name="process_manager">Process manager</string>
 
-    <string name="smart_freeze">智能冻结</string>
-    <string name="apps_count">%s个应用</string>
-    <string name="sf_pkg_stats">%s个应用 %s个已冻结 %s个已启用</string>
-    <string name="sf_pkg_stats_all_freeze">%s个应用均已冻结</string>
-    <string name="pick_app">选择应用</string>
+    <string name="smart_freeze">Smart freeze</string>
+    <string name="apps_count">%s Apps</string>
+    <string name="sf_pkg_stats">%s apps / %s freezed / %s enabled</string>
+    <string name="sf_pkg_stats_all_freeze">All %s apps freezed</string>
+    <string name="pick_app">Pick app</string>
 
-    <string name="smart_freeze_on_screen_off">灭屏冻结</string>
-    <string name="smart_freeze_on_screen_off_summary">灭屏后冻结列表里的应用</string>
-    <string name="smart_freeze_on_task_removed">划卡冻结</string>
-    <string name="smart_freeze_on_task_removed_summary">当你从最近任务移除应用时冻结该应用</string>
+    <string name="smart_freeze_on_screen_off">Freeze on screen off</string>
+    <string name="smart_freeze_on_screen_off_summary">Freeze apps when screen goes off</string>
+    <string name="smart_freeze_on_task_removed">Freeze on task removal</string>
+    <string name="smart_freeze_on_task_removed_summary">Freeze apps when the recent task was removed</string>
 
-    <string name="bc_on_screen_off">灭屏清理</string>
-    <string name="bc_on_screen_off_summary">灭屏后强行停止列表里的应用</string>
-    <string name="bc_on_task_removed">划卡清理</string>
-    <string name="bc_on_task_removed_summary">当你从最近任务移除应用时强行停止该应用</string>
+    <string name="bc_on_screen_off">Stop on screen off</string>
+    <string name="bc_on_screen_off_summary">Force stop apps when screen goes off</string>
+    <string name="bc_on_task_removed">Stop on task removal</string>
+    <string name="bc_on_task_removed_summary">Force stop apps when the recent task was removed</string>
 
-    <string name="toast_copied_to_clipboard">已复制</string>
+    <string name="toast_copied_to_clipboard">Copied</string>
 
-    <string name="pkg_set">分类</string>
-    <string name="all">所有</string>
-    <string name="user">用户</string>
-    <string name="system">系统</string>
-    <string name="enabled">已启用</string>
-    <string name="disabled">未启用</string>
+    <string name="pkg_set">Category</string>
+    <string name="all">All</string>
+    <string name="user">User</string>
+    <string name="system">System</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
 
-    <string name="remove_from_pkg_set">分类中移除</string>
-    <string name="remove_from_sf">取消智冻</string>
-    <string name="add_to_pkg_set">添加到分类</string>
-    <string name="temp_unfreeze">解冻</string>
-    <string name="create_shortcut">快捷方式</string>
+    <string name="remove_from_pkg_set">Remove from category</string>
+    <string name="remove_from_sf">Remove from SF</string>
+    <string name="add_to_pkg_set">Add to category</string>
+    <string name="temp_unfreeze">Un-Freeze</string>
+    <string name="create_shortcut">Create shortcut</string>
 
-    <string name="delete">删除</string>
-    <string name="rename">重命名</string>
-    <string name="sort">排序</string>
-    <string name="on">开启</string>
-    <string name="off">关闭</string>
+    <string name="delete">Delete</string>
+    <string name="rename">Rename</string>
+    <string name="sort">Sort</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
 
-    <string name="subscribe">订阅</string>
-    <string name="sub_intro_unsub">尚未订阅</string>
-    <string name="sub_intro_message">为了更好地为您服务，Thanos 是一款需要订阅的付费软件。请点击下方的订阅按钮查看详细的订阅说明。\n\n如果您已经是 Thanox 或 Thanox Pro 的付费用户，无需再次订阅 Thanos。您可以在订阅页面使用 Thanox 激活码或通过 Play 商店验证您的资格。</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="sub_intro_unsub">Unsubscribed</string>
+    <string name="sub_intro_message">To better serve you, Thanos is a paid software that requires a subscription. Please click the subscribe button below to view detailed subscription instructions.
+If you are already a paid user of Thanox or Thanox Pro, you do not need to subscribe to Thanos again. You can use your Thanox activation code on the subscription page or verify your eligibility through the Play Store.</string>
 
-    <string name="bg_clean">后台清理</string>
-    <string name="bg_clean_apps_count">禁止%s个应用后台运行</string>
+    <string name="bg_clean">Bg tasks</string>
+    <string name="bg_clean_apps_count">Prevent %s app from running in background</string>
 
-    <string name="lvl_checking_retry">重试</string>
-    <string name="lvl_checking">正在通过谷歌Play检查应用许可</string>
-    <string name="lvl_check_ok">很好！</string>
-    <string name="lvl_check_not_ok">错误！</string>
-    <string name="lvl_check_skip_for_now">暂时跳过</string>
-    <string name="lvl_unlicensed_dialog_body">你未获得许可</string>
-    <string name="lvl_unlicensed_dialog_retry_body">无法访问Google Play</string>
-    <string name="lvl_unlicensed_dialog_error_tips">1. 请检查你的设备网络情况，确保可以正常访问谷歌Play商店 \n2. 请检查你的谷歌服务框架，确保其处于启用状态 \n3. 请检查你的谷歌账号是否正确登录
-    </string>
-    <string name="wait_shizuku">等Shizuku就绪</string>
-    <string name="wait_shizuku_message">请安装Shizuku，并且授权Thanos</string>
+    <string name="lvl_checking_retry">Retry</string>
+    <string name="lvl_checking">Checking your license</string>
+    <string name="lvl_check_ok">Great</string>
+    <string name="lvl_check_not_ok">OOPS!</string>
+    <string name="lvl_check_skip_for_now">Skip for now</string>
+    <string name="lvl_unlicensed_dialog_body">You are not authorized</string>
+    <string name="lvl_unlicensed_dialog_retry_body">Can not access Google Play</string>
+    <string name="lvl_unlicensed_dialog_error_tips">Please check your device\'s network connection and ensure that you can access the Google Play Store normally.
+\nPlease check your Google Service Framework and ensure it is enabled.
+\nPlease check if your Google account is logged in correctly.</string>
+    <string name="wait_shizuku">Waiting for Shizuku</string>
+    <string name="wait_shizuku_message">Please install and active Shizuku. Then grant permission to Thanos</string>
 
     <string name="module_donate_title">Get Premium</string>
 
@@ -1456,24 +1458,18 @@
     <string name="module_donate_donated_available">Premium feature</string>
     <string name="module_donate_donated_available_message">Donated to get Premium to unlock this feature.\n\nTips: Try it out first, feel it is available and satisfied, and then purchase the advanced features~</string>
 
-    <string name="module_donate_suggestion_alipay_red_packet">领取支付宝红包</string>
-    <string name="module_donate_suggestion_summary_alipay_red_packet">感谢支持%1$s 你也可以去捐赠页面点击，每天都可以哦！</string>
-    <string name="module_donate_suggestion_action_alipay_red_packet">前往领取</string>
-
-    <string name="module_donate_toast_alipay_red_packet_copied">领取口令已经复制到剪贴板</string>
-
     <string name="module_donate_get_play">Get play version</string>
     <string name="module_donate_copy_email">Copy email</string>
-    <string name="module_donate_active_hidden_feature">激活隐藏功能</string>
+    <string name="module_donate_active_hidden_feature">Show hidden features</string>
     <string name="module_donate_active_hidden_feature_activated">Activated</string>
     <string name="module_donate_input_activation_code">Input activation code</string>
-    <string name="module_donate_activation_code_verify_success">验证成功，请妥善保存你的激活码，不要对外扩散，否则可能会被禁用，后续换机或者刷机后可以继续使用</string>
+    <string name="module_donate_activation_code_verify_success">Verification successful. Please keep your activation code safe and do not share it with others. Otherwise, it may be disabled. You can continue to use it after changing devices or flashing your device in the future.</string>
     <string name="module_donate_activation_code_verify_fail">Verify failure.</string>
     <string name="module_donate_activation_code_verify_fail_server_timeout">Server error~~~</string>
     <string name="module_donate_activation_code_start_verify">Begin verify</string>
     <string name="module_donate_activation_code_my_code">My Code</string>
 
-    <string name="module_donate_activation_code_expire_date">永久生效</string>
-    <string name="module_donate_pay_alipay">支付宝</string>
-    <string name="module_donate_pay_wechat">微信</string>
+    <string name="module_donate_activation_code_expire_date">Permanently</string>
+    <string name="module_donate_pay_alipay">Ali pay</string>
+    <string name="module_donate_pay_wechat">Wechat pay</string>
 </resources>

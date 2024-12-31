@@ -1434,12 +1434,6 @@
     <string name="module_donate_donated_available">Premium feature</string>
     <string name="module_donate_donated_available_message">Donated to get Premium to unlock this feature.\n\nTips: Try it out first, feel it is available and satisfied, and then purchase the advanced features~</string>
 
-    <string name="module_donate_suggestion_alipay_red_packet">领取支付宝红包</string>
-    <string name="module_donate_suggestion_summary_alipay_red_packet">感谢支持%1$s 你也可以去捐赠页面点击，每天都可以哦！</string>
-    <string name="module_donate_suggestion_action_alipay_red_packet">前往领取</string>
-
-    <string name="module_donate_toast_alipay_red_packet_copied">领取口令已经复制到剪贴板</string>
-
     <string name="module_donate_get_play">Get play version</string>
     <string name="module_donate_copy_email">Copy email</string>
     <string name="module_donate_active_hidden_feature">激活隐藏功能</string>

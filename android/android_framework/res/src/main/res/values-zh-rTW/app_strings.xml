@@ -1437,12 +1437,6 @@
     <string name="module_donate_donated_available">免費版不可用</string>
     <string name="module_donate_donated_available_message">啟動高級版後解鎖該功能。 \n\n提示：先試用，覺得可用、滿意再購買高級功能~</string>
 
-    <string name="module_donate_suggestion_alipay_red_packet">領取支付寶紅包</string>
-    <string name="module_donate_suggestion_summary_alipay_red_packet">感謝支持%1$s 你也可以去捐款頁面點擊，每天都可以哦！</string>
-    <string name="module_donate_suggestion_action_alipay_red_packet">前往領取</string>
-
-    <string name="module_donate_toast_alipay_red_packet_copied">領取口令已複製到剪貼簿</string>
-
     <string name="module_donate_get_play">取得Play版本</string>
     <string name="module_donate_copy_email">複製郵件地址</string>
     <string name="module_donate_active_hidden_feature">啟動高級版</string>

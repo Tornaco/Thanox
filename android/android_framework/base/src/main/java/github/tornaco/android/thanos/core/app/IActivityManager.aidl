@@ -244,4 +244,10 @@ interface IActivityManager {
 
     boolean isSmartStandByUnbindServiceEnabled();
     void setSmartStandByUnbindServiceEnabled(boolean enable);
+
+    boolean isAppStabilityUpKeepEnabled();
+    void setAppStabilityUpKeepEnabled(boolean enabled);
+    List<Pkg> getAppStabilityUpKeepExceptions();
+    void addAppStabilityUpKeepExceptions(in List<Pkg> pkgs);
+    void removeAppStabilityUpKeepExceptions(in List<Pkg> pkgs);
 }

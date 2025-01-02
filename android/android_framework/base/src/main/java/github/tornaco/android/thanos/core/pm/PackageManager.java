@@ -19,6 +19,8 @@ import util.EncryptUtils;
 public class PackageManager {
     private static final String SHORTCUT_PROXY_PKG_USERID_SPLITTER = "__";
 
+    public static final String RESTORE_ALL_APP_COMPONENT_SETTINGS_FILE_FLAGS = "RestoreAllAppComponentSettings";
+
     private IPkgManager pm;
 
     public static String packageNameOfAndroid() {

@@ -1132,6 +1132,9 @@
 
     <string name="privacy_record">隐匿记录</string>
 
+    <string name="pref_title_app_stability_upkeep">应用稳定性维护</string>
+    <string name="pref_summary_app_stability_upkeep">启动稳定性维护功能，可以在一定程度上防止由于禁用、干扰应用的某些组件、行为导致的应用或系统崩溃的问题</string>
+
     <string name="pref_title_enable_logging">开启日志</string>
     <string name="pref_summary_enable_logging">你可以从控制台或者劫持框架中获取到输出的日志内容</string>
     <string name="pref_title_show_current_activity">显示当前活动</string>

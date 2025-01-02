@@ -1078,6 +1078,9 @@
     <string name="pre_category_app_feature_config">Configs</string>
     <string name="pre_category_app_disable_enable">Disable</string>
 
+    <string name="pref_title_app_stability_upkeep">App stability upkeep</string>
+    <string name="pref_summary_app_stability_upkeep">Enabling the app stability maintenance feature can, to a certain extent, prevent app or system crashes caused by disabling or interfering with certain app components or behaviors.</string>
+
     <string name="pref_title_enable_logging">Enable logging</string>
     <string name="pref_summary_enable_logging">Show logging info in console</string>
     <string name="pref_title_show_current_activity">Show current activity</string>

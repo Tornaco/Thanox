@@ -90,6 +90,12 @@
                 app:title="@string/pref_title_feature_toggle" />
 
             <SwitchPreferenceCompat
+                app:key="@string/key_app_stability_upkeep_enabled"
+                app:persistent="false"
+                app:summary="@string/pref_summary_app_stability_upkeep"
+                app:title="@string/pref_title_app_stability_upkeep" />
+
+            <SwitchPreferenceCompat
                 app:key="@string/key_enable_power_save"
                 app:persistent="false"
                 app:summary="@string/pref_summary_enable_power_save"
@@ -107,7 +113,6 @@
                 app:persistent="false"
                 app:summary="@string/pref_summary_enable_global_white_list"
                 app:title="@string/pref_title_enable_global_white_list" />
-
         </PreferenceCategory>
 
         <PreferenceCategory

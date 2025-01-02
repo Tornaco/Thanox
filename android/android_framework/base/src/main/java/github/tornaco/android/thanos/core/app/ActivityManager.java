@@ -987,6 +987,31 @@ public class ActivityManager {
         return server.dumpHeap(process);
     }
 
+    @SneakyThrows
+    public boolean isAppStabilityUpKeepEnabled() {
+        return server.isAppStabilityUpKeepEnabled();
+    }
+
+    @SneakyThrows
+    public void setAppStabilityUpKeepEnabled(boolean enabled) {
+        server.setAppStabilityUpKeepEnabled(enabled);
+    }
+
+    @SneakyThrows
+    public List<Pkg> getAppStabilityUpKeepExceptions() {
+        return server.getAppStabilityUpKeepExceptions();
+    }
+
+    @SneakyThrows
+    public void addAppStabilityUpKeepExceptions(List<Pkg> pkgs) {
+        server.addAppStabilityUpKeepExceptions(pkgs);
+    }
+
+    @SneakyThrows
+    public void removeAppStabilityUpKeepExceptions(List<Pkg> pkgs) {
+        server.removeAppStabilityUpKeepExceptions(pkgs);
+    }
+
     public IBinder asBinder() {
         return server.asBinder();
     }

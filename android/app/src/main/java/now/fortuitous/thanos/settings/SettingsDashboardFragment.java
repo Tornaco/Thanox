@@ -374,6 +374,14 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
     protected void onBindGeneralPreferences() {
         ThanosManager thanos = ThanosManager.from(getContext());
         if (thanos.isServiceInstalled()) {
+            SwitchPreferenceCompat appSUKPref = findPreference(getString(R.string.key_app_stability_upkeep_enabled));
+            appSUKPref.setChecked(thanos.getActivityManager().isAppStabilityUpKeepEnabled());
+            appSUKPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean checked = (boolean) newValue;
+                thanos.getActivityManager().setAppStabilityUpKeepEnabled(checked);
+                return true;
+            });
+
             SwitchPreferenceCompat powerSavePref = findPreference(getString(R.string.key_enable_power_save));
             powerSavePref.setChecked(thanos.getPowerManager().isPowerSaveModeEnabled());
             powerSavePref.setOnPreferenceChangeListener((preference, newValue) -> {

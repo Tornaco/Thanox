@@ -17,6 +17,7 @@
     <string name="key_show_current_activity" translatable="false">key_show_current_activity</string>
     <string name="key_show_net_stat" translatable="false">key_show_net_stat</string>
     <string name="key_enable_global_white_list" translatable="false">key_enable_global_white_list</string>
+    <string name="key_app_stability_upkeep_enabled" translatable="false">key_app_stability_upkeep_enabled</string>
     <string name="key_enable_power_save" translatable="false">key_enable_power_save</string>
     <string name="key_enable_battery_drain_app_reminging" translatable="false">key_enable_battery_drain_app_reminging</string>
     <string name="key_process_manage_ui_v2" translatable="false">key_process_manage_ui_v2</string>

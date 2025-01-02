@@ -997,6 +997,8 @@
     <string name="pref_summary_enable_package_on_launch_by_default">Enable \"DOL\" while app has been added to Smart Freeze list</string>
     <string name="feature_summary_smart_app_freeze">Auto disable apps according to the profile</string>
     <string name="feature_desc_smart_app_freeze">Note: app freeze makes use of built-in feature of Android. This means that even if Thanox is uninstalled, these effects will still remain.</string>
+    <string name="feature_title_app_component_manager">Component Manager</string>
+    <string name="feature_desc_app_component_manager">Note: Component Manager uses Android system capabilities, which means these states will persist with the system. Even if you uninstall Thanox, these states will remain. Therefore, if you disable certain components of [System Apps], it may cause the system to fail to boot, and even uninstalling Thanox will not automatically restore them.</string>
     <string name="menu_title_create_shortcut">Create shortcut</string>
     <string name="menu_title_create_shortcut_apk">Create proxy apk</string>
     <string name="menu_title_broadcast_intent_shortcut">Broadcast intent shortcut</string>

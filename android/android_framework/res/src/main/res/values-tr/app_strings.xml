@@ -971,6 +971,8 @@
     <string name="pref_summary_enable_package_on_launch_by_default">Uygulama Smart Freeze listesine eklendiğinde \"DOL\" etkinleştir</string>
     <string name="feature_summary_smart_app_freeze">Profiline göre uygulamaları otomatik olarak devre dışı bırak</string>
     <string name="feature_desc_smart_app_freeze">Not: uygulama dondurma, Android\'in yerleşik özelliğini kullanır. Bu, Thanox kaldırılsa bile bu etkilerin devam edeceği anlamına gelir.</string>
+    <string name="feature_title_app_component_manager">Component Manager</string>
+    <string name="feature_desc_app_component_manager">Note: Component Manager uses Android system capabilities, which means these states will persist with the system. Even if you uninstall Thanox, these states will remain. Therefore, if you disable certain components of [System Apps], it may cause the system to fail to boot, and even uninstalling Thanox will not automatically restore them.</string>
     <string name="menu_title_create_shortcut">Kısayol oluştur</string>
     <string name="menu_title_create_shortcut_apk">Proxy apk oluştur</string>
     <string name="menu_title_broadcast_intent_shortcut">Niyet yayını kısayolu</string>

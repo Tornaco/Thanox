@@ -3,7 +3,10 @@
 package github.tornaco.thanos.module.component.manager.redesign
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -61,6 +64,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.preference.PreferenceManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.common.UiState
 import github.tornaco.android.thanos.core.app.ThanosManager
@@ -80,6 +85,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.rememberDropdo
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.util.ToastUtils
+import github.tornaco.android.thanos.util.pleaseReadCarefully
 import github.tornaco.thanos.module.component.manager.ComponentRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -129,6 +135,48 @@ class ComponentsActivity : ComposeThemeActivity() {
 
     override fun isADVF(): Boolean {
         return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showFeatureDialogIfNeed()
+    }
+
+    private fun showFeatureDialogIfNeed() {
+        val appInfo = intent.getParcelableExtra(EXTRA_APP) as AppInfo? ?: return
+        if (appInfo.flags == AppInfo.FLAGS_USER) return
+        val featName = "ComponentManager - ${appInfo.pkgName}"
+        fun isFeatureNoticeAccepted(context: Context, feature: String): Boolean {
+            return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(feature, false)
+        }
+
+        fun setFeatureNoticeAccepted(context: Context, feature: String, first: Boolean) {
+            PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(feature, first)
+                .apply()
+        }
+        if (isFeatureNoticeAccepted(this, featName)) {
+            return
+        }
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.feature_title_app_component_manager)
+            .setMessage(R.string.feature_desc_app_component_manager)
+            .setCancelable(false)
+            .setPositiveButton(android.R.string.ok, null)
+            .setNegativeButton(
+                android.R.string.cancel
+            ) { _: DialogInterface?, _: Int -> finish() }
+            .setNeutralButton(R.string.title_remember) { _, _ ->
+                setFeatureNoticeAccepted(
+                    this,
+                    featName,
+                    true
+                )
+            }
+            .show()
+
+        pleaseReadCarefully(Handler(Looper.getMainLooper()), dialog, 18)
     }
 
 
@@ -189,7 +237,7 @@ class ComponentsActivity : ComposeThemeActivity() {
                 AnimatedContent(selectState.isSelectMode) {
                     if (it) {
                         Text(
-                            text = "${stringResource(github.tornaco.android.thanos.res.R.string.common_menu_title_batch_select)} ${selectState.selectedItems.size}",
+                            text = "${stringResource(R.string.common_menu_title_batch_select)} ${selectState.selectedItems.size}",
                             style = TypographyDefaults.appBarTitleTextStyle()
                         )
                     } else {
@@ -219,12 +267,12 @@ class ComponentsActivity : ComposeThemeActivity() {
                             TextButton(onClick = {
                                 viewModel.appBatchOp(true)
                             }) {
-                                Text(text = stringResource(github.tornaco.android.thanos.res.R.string.on))
+                                Text(text = stringResource(R.string.on))
                             }
                             TextButton(onClick = {
                                 viewModel.appBatchOp(false)
                             }) {
-                                Text(text = stringResource(github.tornaco.android.thanos.res.R.string.off))
+                                Text(text = stringResource(R.string.off))
                             }
                         }
                     } else {
@@ -245,15 +293,15 @@ class ComponentsActivity : ComposeThemeActivity() {
                                     items = listOf(
                                         DropdownItem(
                                             data = FilterState.All,
-                                            labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.all))
+                                            labelLines = listOf(stringResource(R.string.all))
                                         ),
                                         DropdownItem(
                                             data = FilterState.Enabled,
-                                            labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.enabled))
+                                            labelLines = listOf(stringResource(R.string.enabled))
                                         ),
                                         DropdownItem(
                                             data = FilterState.Disabled,
-                                            labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.disabled))
+                                            labelLines = listOf(stringResource(R.string.disabled))
                                         )
                                     )
                                 ) {
@@ -434,7 +482,7 @@ class ComponentsActivity : ComposeThemeActivity() {
 
         val addToSmartStandByKeepsVarDialog = rememberConfirmDialogState()
         ConfirmDialog(
-            title = stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_keep_service_smart_standby),
+            title = stringResource(R.string.module_component_manager_keep_service_smart_standby),
             state = addToSmartStandByKeepsVarDialog,
             data = "KEEP $fullName",
             messageHint = { it },
@@ -446,7 +494,7 @@ class ComponentsActivity : ComposeThemeActivity() {
 
         val addToAppLockAllowDialog = rememberConfirmDialogState()
         ConfirmDialog(
-            title = stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_add_lock_white_list),
+            title = stringResource(R.string.module_component_manager_add_lock_white_list),
             state = addToAppLockAllowDialog,
             data = component.componentName,
             messageHint = { it.flattenToString() },
@@ -496,10 +544,10 @@ class ComponentsActivity : ComposeThemeActivity() {
                                 style = MaterialTheme.typography.titleSmall
                             )
                             if (!isChecked && component.isDisabledByThanox) {
-                                MD3Badge(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_disabled_by_thanox))
+                                MD3Badge(stringResource(R.string.module_component_manager_disabled_by_thanox))
                             }
                             if (component.isRunning) {
-                                MD3Badge(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_component_running))
+                                MD3Badge(stringResource(R.string.module_component_manager_component_running))
                             }
                         }
                         Text(
@@ -522,13 +570,13 @@ class ComponentsActivity : ComposeThemeActivity() {
                 ),
                 if (type == Type.SERVICE) {
                     DropdownItem(
-                        labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_keep_service_smart_standby)),
+                        labelLines = listOf(stringResource(R.string.module_component_manager_keep_service_smart_standby)),
                         data = ComponentItemAction.AddToSmartStandByKeepRules,
                     )
                 } else null,
                 if (type == Type.ACTIVITY) {
                     DropdownItem(
-                        labelLines = listOf(stringResource(github.tornaco.android.thanos.res.R.string.module_component_manager_add_lock_white_list)),
+                        labelLines = listOf(stringResource(R.string.module_component_manager_add_lock_white_list)),
                         data = ComponentItemAction.AddToAppLockAllowList,
                     )
                 } else null

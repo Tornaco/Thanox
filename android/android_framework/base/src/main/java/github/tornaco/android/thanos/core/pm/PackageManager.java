@@ -223,6 +223,11 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    public void restoreAllAppComponentSettings() {
+        pm.restoreAllAppComponentSettings();
+    }
+
+    @SneakyThrows
     public boolean isPkgSmartFreezeEnabled(Pkg pkgName) {
         return pm.isPkgSmartFreezeEnabled(pkgName);
     }

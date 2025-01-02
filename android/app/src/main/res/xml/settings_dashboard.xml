@@ -1,42 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <PreferenceCategory
-        android:key="@string/key_app_ui"
-        app:title="@string/pre_category_ui">
+        android:key="@string/key_general"
+        app:title="@string/pre_category_general">
 
-        <DropDownPreference
-            android:entries="@array/themes_entry"
-            android:entryValues="@array/themes_value"
-            app:key="@string/key_app_theme"
+        <Preference
+            app:key="@string/key_feature_toggle"
             app:persistent="false"
-            app:title="@string/pre_title_app_theme"
-            app:useSimpleSummaryProvider="true" />
+            app:title="@string/pref_title_feature_toggle" />
 
-        <DropDownPreference
-            app:key="@string/key_app_icon_pack"
+        <SwitchPreferenceCompat
+            app:key="@string/key_app_stability_upkeep_enabled"
             app:persistent="false"
-            app:title="@string/pre_title_app_icon_pack" />
+            app:summary="@string/pref_summary_app_stability_upkeep"
+            app:title="@string/pref_title_app_stability_upkeep" />
 
         <SwitchPreferenceCompat
-            android:persistent="false"
-            app:key="@string/key_use_round_icon"
-            app:title="@string/pre_title_app_icon_crop_to_circle" />
+            app:key="@string/key_enable_power_save"
+            app:persistent="false"
+            app:summary="@string/pref_summary_enable_power_save"
+            app:title="@string/pref_title_enable_power_save" />
 
         <SwitchPreferenceCompat
-            android:persistent="false"
-            app:key="@string/key_app_list_item_show_pkg"
-            app:title="@string/pre_title_app_list_item_show_pkg" />
+            app:isPreferenceVisible="false"
+            app:key="@string/key_enable_battery_drain_app_reminging"
+            app:persistent="false"
+            app:summary="@string/pref_summary_enable_high_battery_drain_app_reminding"
+            app:title="@string/pref_title_enable_high_battery_drain_app_reminding" />
 
         <SwitchPreferenceCompat
-            android:persistent="false"
-            app:key="@string/key_app_list_item_show_version"
-            app:title="@string/pre_title_app_list_item_show_version" />
-
+            app:key="@string/key_enable_global_white_list"
+            app:persistent="false"
+            app:title="@string/pref_title_enable_global_white_list" />
     </PreferenceCategory>
-
-
     <PreferenceCategory
         android:key="@string/key_strategy"
         app:title="@string/pre_category_strategy">
@@ -81,38 +78,37 @@
         </PreferenceCategory>
 
         <PreferenceCategory
-            android:key="@string/key_general"
-            app:title="@string/pre_category_general">
+            android:key="@string/key_app_ui"
+            app:title="@string/pre_category_ui">
 
-            <Preference
-                app:key="@string/key_feature_toggle"
+            <DropDownPreference
+                android:entries="@array/themes_entry"
+                android:entryValues="@array/themes_value"
+                app:key="@string/key_app_theme"
                 app:persistent="false"
-                app:title="@string/pref_title_feature_toggle" />
+                app:title="@string/pre_title_app_theme"
+                app:useSimpleSummaryProvider="true" />
 
-            <SwitchPreferenceCompat
-                app:key="@string/key_app_stability_upkeep_enabled"
+            <DropDownPreference
+                app:key="@string/key_app_icon_pack"
                 app:persistent="false"
-                app:summary="@string/pref_summary_app_stability_upkeep"
-                app:title="@string/pref_title_app_stability_upkeep" />
-
-            <SwitchPreferenceCompat
-                app:key="@string/key_enable_power_save"
-                app:persistent="false"
-                app:summary="@string/pref_summary_enable_power_save"
-                app:title="@string/pref_title_enable_power_save" />
+                app:title="@string/pre_title_app_icon_pack" />
 
             <SwitchPreferenceCompat
-                app:isPreferenceVisible="false"
-                app:key="@string/key_enable_battery_drain_app_reminging"
-                app:persistent="false"
-                app:summary="@string/pref_summary_enable_high_battery_drain_app_reminding"
-                app:title="@string/pref_title_enable_high_battery_drain_app_reminding" />
+                android:persistent="false"
+                app:key="@string/key_use_round_icon"
+                app:title="@string/pre_title_app_icon_crop_to_circle" />
 
             <SwitchPreferenceCompat
-                app:key="@string/key_enable_global_white_list"
-                app:persistent="false"
-                app:summary="@string/pref_summary_enable_global_white_list"
-                app:title="@string/pref_title_enable_global_white_list" />
+                android:persistent="false"
+                app:key="@string/key_app_list_item_show_pkg"
+                app:title="@string/pre_title_app_list_item_show_pkg" />
+
+            <SwitchPreferenceCompat
+                android:persistent="false"
+                app:key="@string/key_app_list_item_show_version"
+                app:title="@string/pre_title_app_list_item_show_version" />
+
         </PreferenceCategory>
 
         <PreferenceCategory

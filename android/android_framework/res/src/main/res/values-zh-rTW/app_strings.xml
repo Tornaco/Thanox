@@ -1062,6 +1062,12 @@
     <string name="menu_title_activity_intent_shortcut">活動意圖</string>
     <string name="dialog_message_create_shortcut_apk">產生一個專門用於啟動該凍結應用程式的綠色Android app，產生的應用程式將只包含一個Activity，大約30K。你可以安裝代理應用程式來解決桌面沒有凍結應用程式圖示問題。</string>
 
+    <string name="feature_title_recovery_tools">恢复工具</string>
+    <string name="feature_title_recovery_tools_component_settings">恢复应用组件设置</string>
+    <string name="feature_title_recovery_tools_component_settings_summary">恢复所有通过Thanox进行设置的应用的组件设置，包含活动、服务、广播、内容提供者</string>
+
+    <string name="feature_title_recovery_tools_component_settings_flags_summary">如果你的设备因为修改了系统组件，导致无法正常启动，你可以尝试通过recovery或者电脑adb工具，手动在/data/system/thanos目录下创建一个空文件，命名为：%s \nThanox在系统启动阶段会尝试恢复所有应用的所有组件设置</string>
+
     <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">開啟自適應電池</string>
     <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">Android 9+裝置使用智慧型休眠需要開啟系統設定中的電池-自適應電池選項才能正常運作。 \n\nThanox目前無法準確判斷你的系統是否支援並開啟了該選項。</string>
 

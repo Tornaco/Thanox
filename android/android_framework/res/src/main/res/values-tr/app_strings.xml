@@ -979,6 +979,12 @@
     <string name="menu_title_activity_intent_shortcut">Etkinlik niyeti kısayolu</string>
     <string name="dialog_message_create_shortcut_apk">Bir kısayol apksı oluştur, bu uygulamayı yükleyerek devre dışı bırakılmış uygulamalar için başlatıcı simgesi çözümü olarak kullanabilirsiniz</string>
 
+    <string name="feature_title_recovery_tools">Recovery tools</string>
+    <string name="feature_title_recovery_tools_component_settings">Restore app component settings</string>
+    <string name="feature_title_recovery_tools_component_settings_summary">Restores the component settings of all apps configured through Thanox, including activities, services, broadcasts, and content providers.</string>
+
+    <string name="feature_title_recovery_tools_component_settings_flags_summary">If your device fails to boot normally due to modifications to system components, you can try to manually create an empty file in the /data/system/thanos directory using recovery or ADB tools on your computer. Name the file: %s \n Thanox will attempt to restore all component settings for all apps during system startup.</string>
+
     <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">Adaptif Pil Etkinleştirildi</string>
     <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">Bu özellik yalnızca Adaptif Pil etkinse çalışır @Android Pie+.</string>
 

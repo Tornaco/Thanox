@@ -36,6 +36,7 @@ import github.tornaco.android.thanos.util.BrowserUtils;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 import now.fortuitous.thanos.onboarding.OnBoardingActivity;
+import now.fortuitous.thanos.recovery.RecoveryUtilsActivity;
 
 @RuntimePermissions
 public class SettingsDashboardActivity extends ThemeActivity {
@@ -67,6 +68,9 @@ public class SettingsDashboardActivity extends ThemeActivity {
         findViewById(R.id.guide).setOnLongClickListener(v -> {
             OnBoardingActivity.Starter.INSTANCE.start(thisActivity());
             return true;
+        });
+        findViewById(R.id.recovery_utils).setOnClickListener(v -> {
+            RecoveryUtilsActivity.Companion.start(thisActivity());
         });
     }
 

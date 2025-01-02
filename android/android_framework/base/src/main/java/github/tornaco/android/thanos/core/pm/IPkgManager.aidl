@@ -132,4 +132,6 @@ interface IPkgManager {
 
     void setFreezeTipEnabled(boolean enable);
     boolean isFreezeTipEnabled();
+
+    void restoreAllAppComponentSettings();
 }

@@ -12,8 +12,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
-            android:theme="?appbarTheme"
             android:background="?android:attr/windowBackground"
+            android:theme="?appbarTheme"
             app:elevation="@dimen/common_toolbar_elevation">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -21,9 +21,9 @@
                 style="?collapsingToolbarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?android:attr/windowBackground"
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                android:background="?android:attr/windowBackground"
                 app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleCollapseMode="scale"
@@ -68,6 +68,18 @@
                 android:text="@string/common_menu_title_wiki"
                 android:visibility="gone"
                 app:icon="@drawable/ic_book_3_fill" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/recovery_utils"
+                style="@style/FloatingActionButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/fab"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/common_view_margin_default"
+                android:layout_marginBottom="@dimen/common_view_margin_default"
+                android:text="@string/feature_title_recovery_tools"
+                app:icon="@drawable/ic_remix_device_recover_fill" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/fab"

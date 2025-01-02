@@ -283,6 +283,9 @@
         <activity
             android:name="now.fortuitous.thanos.privacy.SensorOffAppListActivity"
             android:exported="false" />
+        <activity
+            android:name="now.fortuitous.thanos.recovery.RecoveryUtilsActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="xposedmodule"

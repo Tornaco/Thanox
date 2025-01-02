@@ -395,7 +395,10 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                 globalWhitelistPref.setChecked(thanos.getPkgManager().isProtectedWhitelistEnabled());
                 globalWhitelistPref.setOnPreferenceChangeListener((preference, newValue) -> {
                     boolean checked = (boolean) newValue;
-                    thanos.getPkgManager().setProtectedWhitelistEnabled(checked);
+                    if (!checked) {
+                        globalWhitelistPref.setChecked(true);
+                        showDisableGlobalWhiteListConfirmDialog();
+                    }
                     return true;
                 });
             }
@@ -407,6 +410,23 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
         }
     }
 
+    private void showDisableGlobalWhiteListConfirmDialog() {
+        ThanosManager thanos = ThanosManager.from(getContext());
+        SwitchPreferenceCompat globalWhitelistPref = findPreference(getString(R.string.key_enable_global_white_list));
+        new MaterialAlertDialogBuilder(requireActivity())
+                .setTitle(getString(github.tornaco.android.thanos.res.R.string.pref_title_enable_global_white_list))
+                .setMessage(getString(github.tornaco.android.thanos.res.R.string.pref_summary_enable_global_white_list))
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    thanos.getPkgManager().setProtectedWhitelistEnabled(false);
+                    globalWhitelistPref.setChecked(thanos.getPkgManager().isProtectedWhitelistEnabled());
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                    thanos.getPkgManager().setProtectedWhitelistEnabled(true);
+                    globalWhitelistPref.setChecked(thanos.getPkgManager().isProtectedWhitelistEnabled());
+                })
+                .show();
+    }
 
     @SuppressWarnings("ConstantConditions")
     protected void onBindDataPreferences() {

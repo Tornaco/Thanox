@@ -84,7 +84,7 @@ protobuf-gradle-plugin = { id = "com.google.protobuf", version = "0.9.4" }
 # https://github.com/gmazzo/gradle-buildconfig-plugin
 gmazzo-buildconfig = { id = "com.github.gmazzo.buildconfig", version = "5.5.0" }
 gladed-androidgitversion = { id = "com.gladed.androidgitversion", version = "0.4.14" }
-diffplug-spotless = { id = "com.diffplug.spotless", version = "6.25.0" }
+diffplug-spotless = { id = "com.diffplug.spotless", version = "7.0.2" }
 kover = { id = "org.jetbrains.kotlinx.kover", version = "0.7.6" }
 
 [libraries]

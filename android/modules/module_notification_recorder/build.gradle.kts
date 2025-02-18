@@ -42,6 +42,7 @@ dependencies {
 
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.guava.android)
+    implementation(libs.gson)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)

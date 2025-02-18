@@ -419,7 +419,8 @@
     <string name="module_notification_recorder_toady">Bugün</string>
     <string name="module_notification_recorder_before_today">Daha önce</string>
     <string name="module_notification_recorder_settings">Ayarlar</string>
-
+    <string name="module_notification_recorder_export">Export</string>
+    <string name="module_notification_recorder_export_dialog_message">Export all notification records to Downloads</string>
     <string name="module_notification_recorder_pref_summary_enable_toast_info">Toast görünümünde uygulama bilgilerini göster</string>
     <string name="module_notification_recorder_pref_title_enable_toast_info">Toast bilgi</string>
     <string name="module_notification_recorder_pref_title_enable_nr_n">Bildirimleri kaydet</string>

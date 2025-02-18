@@ -468,6 +468,8 @@
     <string name="module_notification_recorder_toady">اليوم</string>
     <string name="module_notification_recorder_before_today">ابكر</string>
     <string name="module_notification_recorder_settings">اقامة</string>
+    <string name="module_notification_recorder_export">Export</string>
+    <string name="module_notification_recorder_export_dialog_message">Export all notification records to Downloads</string>
     <string name="module_notification_recorder_pref_summary_enable_toast_info">أضف أيقونة التطبيق إلى نخب النظام</string>
     <string name="module_notification_recorder_pref_title_enable_toast_info">إظهار معلومات الخبز المحمص</string>
     <string name="module_notification_recorder_pref_title_enable_nr_n">سجل إخطارات شريط الحالة</string>

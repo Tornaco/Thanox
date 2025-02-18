@@ -475,6 +475,8 @@
     <string name="module_notification_recorder_toady">今天</string>
     <string name="module_notification_recorder_before_today">更早些</string>
     <string name="module_notification_recorder_settings">設定</string>
+    <string name="module_notification_recorder_export">导出</string>
+    <string name="module_notification_recorder_export_dialog_message">导出所有通知记录到Downloads</string>
 
     <string name="module_notification_recorder_pref_summary_enable_toast_info">在系統吐司中新增一個應用圖標</string>
     <string name="module_notification_recorder_pref_title_enable_toast_info">顯示吐司訊息</string>

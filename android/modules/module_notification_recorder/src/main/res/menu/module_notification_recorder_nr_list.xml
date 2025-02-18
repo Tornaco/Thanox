@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/action_search"
-        android:title="@string/common_menu_title_search"
         android:icon="@drawable/module_common_ic_search_2_line"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/common_menu_title_search"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_clear_all"
@@ -18,6 +18,12 @@
         android:id="@+id/action_stats"
         android:icon="@drawable/module_common_ic_settings_fill"
         android:title="@string/module_notification_recorder_stats"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_export"
+        android:icon="@drawable/module_common_ic_settings_fill"
+        android:title="@string/module_notification_recorder_export"
         app:showAsAction="never" />
 
     <item

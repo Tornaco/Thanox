@@ -1,6 +1,7 @@
 package github.tornaco.android.thanox.module.notification.recorder.ui
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.savedstate.SavedStateRegistryOwner
+import com.elvishew.xlog.XLog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.miguelcatalan.materialsearchview.MaterialSearchView
@@ -18,6 +20,8 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView.SearchViewListene
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
+import github.tornaco.android.thanos.util.ToastUtils
+import github.tornaco.android.thanos.widget.ModernProgressDialog
 import github.tornaco.android.thanos.widget.SwitchBar
 import github.tornaco.android.thanox.module.notification.recorder.NotificationRecordSettingsActivity
 import github.tornaco.android.thanox.module.notification.recorder.R
@@ -26,6 +30,7 @@ import github.tornaco.android.thanox.module.notification.recorder.source.Notific
 import github.tornaco.android.thanox.module.notification.recorder.ui.stats.StatsActivity
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class NotificationRecordActivity : ThemeActivity() {
     private lateinit var binding: ModuleNotificationRecorderNrdListLayoutBinding
@@ -64,6 +69,29 @@ class NotificationRecordActivity : ThemeActivity() {
         initSearch()
 
         onSetupSwitchBar(binding.switchBarContainer.switchBar)
+
+        val progressDialog = ModernProgressDialog(thisActivity())
+        progressDialog.setTitle(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment)
+        lifecycleScope.launch {
+            model.effect.collectLatest {
+                when (it) {
+                    is Effect.ExportFail -> {
+                        progressDialog.dismiss()
+                        ToastUtils.nook(thisActivity())
+                        XLog.e(it.err, "ExportFail")
+                    }
+
+                    Effect.ExportSuccess -> {
+                        progressDialog.dismiss()
+                        ToastUtils.ok(thisActivity())
+                    }
+
+                    Effect.Exporting -> {
+                        progressDialog.show()
+                    }
+                }
+            }
+        }
     }
 
     private fun initView() {
@@ -191,7 +219,22 @@ class NotificationRecordActivity : ThemeActivity() {
         if (item.itemId == R.id.action_stats) {
             StatsActivity.Starter.start(thisActivity())
         }
+        if (item.itemId == R.id.action_export) {
+            showExportNRDialog()
+        }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showExportNRDialog() {
+        MaterialAlertDialogBuilder(thisActivity())
+            .setTitle(github.tornaco.android.thanos.res.R.string.module_notification_recorder_export)
+            .setMessage(github.tornaco.android.thanos.res.R.string.module_notification_recorder_export_dialog_message)
+
+            .setNegativeButton(android.R.string.cancel) { _: DialogInterface, _: Int -> }
+            .setPositiveButton(android.R.string.ok) { _: DialogInterface, _: Int ->
+                model.exportNRs(applicationContext)
+            }
+            .show()
     }
 
     companion object Starter {

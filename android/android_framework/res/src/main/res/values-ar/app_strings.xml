@@ -34,6 +34,7 @@
     <string name="service_notification_title_app_protect">حماية التطبيق</string>
     <string name="service_notification_message_app_uninstall_blocked">تم حظر %s من إلغاء التثبيت</string>
     <string name="service_notification_message_app_clear_data_blocked">تم مسح بيانات التطبيق %s المحظورة</string>
+    <string name="service_notification_message_app_update_blocked">Update %1$s app has been prevented</string>
 
     <string name="service_notification_title_thanox_active">تم تنشيط Thanox</string>
     <string name="service_notification_message_thanox_active">تم تفعيل الإصدار %s بنجاح ، تهانينا</string>

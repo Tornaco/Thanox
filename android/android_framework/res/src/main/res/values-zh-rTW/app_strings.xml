@@ -34,6 +34,7 @@
     <string name="service_notification_title_app_protect">應用程式保護</string>
     <string name="service_notification_message_app_uninstall_blocked">已阻止%1$s被卸載/清除</string>
     <string name="service_notification_message_app_clear_data_blocked">已阻止%1$s的應用程式資料被清除/卸載</string>
+    <string name="service_notification_message_app_update_blocked">已阻止%1$s的应用更新</string>
 
     <string name="service_notification_title_thanox_active">Thanox已激活</string>
     <string name="service_notification_message_thanox_active">版本%1$s已經成功激活，恭喜</string>

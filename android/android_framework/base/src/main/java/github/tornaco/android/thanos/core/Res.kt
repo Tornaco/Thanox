@@ -65,6 +65,9 @@ abstract class Res {
         const val STRING_SERVICE_NOTIFICATION_MESSAGE_UNINSTALL_BLOCKED =
             "service_notification_message_app_uninstall_blocked"
 
+        const val STRING_SERVICE_NOTIFICATION_MESSAGE_UPDATE_BLOCKED =
+            "service_notification_message_app_update_blocked"
+
         const val STRING_SERVICE_NOTIFICATION_MESSAGE_CLEAR_DATA_BLOCKED =
             "service_notification_message_app_clear_data_blocked"
 

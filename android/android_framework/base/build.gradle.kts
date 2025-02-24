@@ -94,6 +94,7 @@ buildConfig {
     buildConfigField("String", "THANOX_FEATURE_PLUGIN_SUPPORT", provider { "\"thanox.feature.plugin.support\"" });
     buildConfigField("String", "THANOX_FEATURE_PREVENT_UNINSTALL", provider { "\"thanox.feature.prevent.uninstall\"" });
     buildConfigField("String", "THANOX_FEATURE_PREVENT_CLEAR_DATA", provider { "\"thanox.feature.prevent.clear.data\"" });
+    buildConfigField("String", "THANOX_FEATURE_PREVENT_UPDATE", provider { "\"thanox.feature.prevent.update\"" });
     buildConfigField("String", "THANOX_FEATURE_DIALOG_FORCE_CANCELABLE", provider { "\"thanox.feature.dialog.force.cancelable\"" });
     buildConfigField("String", "THANOX_FEATURE_WAKELOCK_REMOVER", provider { "\"thanox.feature.dialog.wakelock.remover\"" });
     buildConfigField("String", "THANOX_FEATURE_IZ", provider { "\"thanox.feature.iz\"" });

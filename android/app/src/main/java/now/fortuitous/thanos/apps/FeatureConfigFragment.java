@@ -183,7 +183,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             });
 
             SwitchPreferenceCompat blockUpdate = findPreference(getString(R.string.key_app_feature_config_block_update));
-            Objects.requireNonNull(blockUpdate).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_CLEAR_DATA));
+            Objects.requireNonNull(blockUpdate).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_UPDATE));
             blockUpdate.setChecked(thanos.getPkgManager().isPackageBlockUpdateEnabled(appInfo.getPkgName()));
             blockUpdate.setOnPreferenceChangeListener((preference1, newValue) -> {
                 AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {

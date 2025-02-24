@@ -134,4 +134,7 @@ interface IPkgManager {
     boolean isFreezeTipEnabled();
 
     void restoreAllAppComponentSettings();
+
+    void setPackageBlockUpdateEnabled(String pkgName, boolean enable);
+    boolean isPackageBlockUpdateEnabled(String pkgName);
 }

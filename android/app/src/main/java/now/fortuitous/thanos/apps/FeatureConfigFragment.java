@@ -152,10 +152,10 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
     private void bindProtectPrefs() {
         ContextExtKt.withThanos(requireContext(), thanos -> {
-            SwitchPreferenceCompat preference = findPreference(getString(R.string.key_app_feature_config_block_uninstall));
-            Objects.requireNonNull(preference).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_UNINSTALL));
-            preference.setChecked(thanos.getPkgManager().isPackageBlockUninstallEnabled(appInfo.getPkgName()));
-            preference.setOnPreferenceChangeListener((preference12, newValue) -> {
+            SwitchPreferenceCompat blockUnInstall = findPreference(getString(R.string.key_app_feature_config_block_uninstall));
+            Objects.requireNonNull(blockUnInstall).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_UNINSTALL));
+            blockUnInstall.setChecked(thanos.getPkgManager().isPackageBlockUninstallEnabled(appInfo.getPkgName()));
+            blockUnInstall.setOnPreferenceChangeListener((preference12, newValue) -> {
                 AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                     if (isSubscribed) {
                         thanos.getPkgManager().setPackageBlockUninstallEnabled(appInfo.getPkgName(), (Boolean) newValue);
@@ -167,13 +167,28 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 return true;
             });
 
-            preference = findPreference(getString(R.string.key_app_feature_config_block_clear_data));
-            Objects.requireNonNull(preference).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_CLEAR_DATA));
-            preference.setChecked(thanos.getPkgManager().isPackageBlockClearDataEnabled(appInfo.getPkgName()));
-            preference.setOnPreferenceChangeListener((preference1, newValue) -> {
+            SwitchPreferenceCompat blockClearData = findPreference(getString(R.string.key_app_feature_config_block_clear_data));
+            Objects.requireNonNull(blockClearData).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_CLEAR_DATA));
+            blockClearData.setChecked(thanos.getPkgManager().isPackageBlockClearDataEnabled(appInfo.getPkgName()));
+            blockClearData.setOnPreferenceChangeListener((preference1, newValue) -> {
                 AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
                     if (isSubscribed) {
                         thanos.getPkgManager().setPackageBlockClearDataEnabled(appInfo.getPkgName(), (Boolean) newValue);
+                    } else {
+                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    }
+                    return null;
+                });
+                return true;
+            });
+
+            SwitchPreferenceCompat blockUpdate = findPreference(getString(R.string.key_app_feature_config_block_update));
+            Objects.requireNonNull(blockUpdate).setVisible(ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PREVENT_CLEAR_DATA));
+            blockUpdate.setChecked(thanos.getPkgManager().isPackageBlockUpdateEnabled(appInfo.getPkgName()));
+            blockUpdate.setOnPreferenceChangeListener((preference1, newValue) -> {
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireActivity(), isSubscribed -> {
+                    if (isSubscribed) {
+                        thanos.getPkgManager().setPackageBlockUpdateEnabled(appInfo.getPkgName(), (Boolean) newValue);
                     } else {
                         AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
                     }

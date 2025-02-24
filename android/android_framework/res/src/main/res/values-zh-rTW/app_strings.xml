@@ -740,6 +740,7 @@
 
     <string name="module_ops_feature_title_block_uninstall">阻止卸載</string>
     <string name="module_ops_feature_title_block_clear_data">阻止清除數據</string>
+    <string name="module_ops_feature_title_block_update">阻止应用更新</string>
 
     <string name="module_ops_feature_title_ops_app_list">權限管理</string>
     <string name="module_ops_feature_summary_ops_app_list">按權限</string>

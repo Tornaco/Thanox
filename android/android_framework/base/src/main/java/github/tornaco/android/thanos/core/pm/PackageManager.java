@@ -380,6 +380,16 @@ public class PackageManager {
     }
 
     @SneakyThrows
+    public void setPackageBlockUpdateEnabled(String pkgName, boolean enable) {
+        pm.setPackageBlockUpdateEnabled(pkgName, enable);
+    }
+
+    @SneakyThrows
+    public boolean isPackageBlockUpdateEnabled(String pkgName) {
+        return pm.isPackageBlockUpdateEnabled(pkgName);
+    }
+
+    @SneakyThrows
     public int getInstalledPackagesCount(int appFlags) {
         return pm.getInstalledPackagesCount(appFlags);
     }

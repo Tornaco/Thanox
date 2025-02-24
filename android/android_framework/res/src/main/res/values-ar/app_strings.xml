@@ -730,6 +730,7 @@
 
     <string name="module_ops_feature_title_block_uninstall">منع إلغاء التثبيت</string>
     <string name="module_ops_feature_title_block_clear_data">كتلة مسح البيانات</string>
+    <string name="module_ops_feature_title_block_update">Prevent app update</string>
 
     <string name="module_ops_feature_title_ops_app_list">إدارة السلطة</string>
     <string name="module_ops_feature_summary_ops_app_list">عن طريق الأذونات</string>

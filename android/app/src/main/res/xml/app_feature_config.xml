@@ -166,6 +166,10 @@
             android:persistent="false"
             app:key="@string/key_app_feature_config_block_clear_data"
             app:title="@string/module_ops_feature_title_block_clear_data" />
+        <SwitchPreferenceCompat
+            android:persistent="false"
+            app:key="@string/key_app_feature_config_block_update"
+            app:title="@string/module_ops_feature_title_block_update" />
 
     </PreferenceCategory>
 

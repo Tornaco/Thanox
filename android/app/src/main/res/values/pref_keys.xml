@@ -171,6 +171,7 @@
 
     <string name="key_app_feature_config_block_uninstall" translatable="false">key_app_feature_config_block_uninstall</string>
     <string name="key_app_feature_config_block_clear_data" translatable="false">key_app_feature_config_block_clear_data</string>
+    <string name="key_app_feature_config_block_update" translatable="false">key_app_feature_config_block_update</string>
 
     <string name="key_app_feature_config_dialog_force_cancelable" translatable="false">key_app_feature_config_dialog_force_cancelable</string>
 

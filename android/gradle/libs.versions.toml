@@ -70,6 +70,8 @@ retrofit = "2.11.0"
 room = "2.6.1"
 room-compiler = "2.6.1"
 swiperefreshlayout = "1.1.0"
+stringfog-xor = "5.0.0"
+stringfog-plugin = "5.2.0"
 
 [plugins]
 agp-lib = { id = "com.android.library", version.ref = "agp" }
@@ -197,3 +199,6 @@ retrofit-adapter-rxjava2 = { module = "com.squareup.retrofit2:adapter-rxjava2", 
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+
+stringfog-xor = { module = "com.github.megatronking.stringfog:xor", version.ref = "stringfog-xor" }
+stringfog-plugin = { module = "com.github.megatronking.stringfog:gradle-plugin", version.ref = "stringfog-plugin" }

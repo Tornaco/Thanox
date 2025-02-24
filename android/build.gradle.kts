@@ -1,3 +1,5 @@
+import com.android.build.gradle.api.AndroidBasePlugin
+import com.github.megatronking.stringfog.plugin.StringFogExtension
 import tornaco.project.android.thanox.Configs
 import tornaco.project.android.thanox.Configs.outDir
 import tornaco.project.android.thanox.Configs.thanoxVersionCode
@@ -9,6 +11,10 @@ buildscript {
         google()
         mavenCentral()
         mavenLocal()
+    }
+    dependencies {
+        classpath(libs.stringfog.plugin)
+        classpath(libs.stringfog.xor)
     }
 }
 
@@ -125,6 +131,26 @@ subprojects {
         extensions.configure(JavaPluginExtension::class.java) {
             sourceCompatibility = androidSourceCompatibility
             targetCompatibility = androidTargetCompatibility
+        }
+    }
+
+    project.afterEvaluate {
+        val hasAndroidPlugin = project.plugins.hasPlugin(AndroidBasePlugin::class)
+        log("Check publishing subproject: ${project.name}, hasAndroidPlugin: $hasAndroidPlugin")
+        val fogModules = listOf("")
+        if (fogModules.contains(project.name)) {
+            log("Fogging: ${project.name}")
+            project.plugins.apply("stringfog")
+
+            project.configure<StringFogExtension> {
+                implementation = "com.github.megatronking.stringfog.xor.StringFogImpl"
+                enable = true
+                kg = com.github.megatronking.stringfog.plugin.kg.RandomKeyGenerator()
+                mode = com.github.megatronking.stringfog.plugin.StringFogMode.bytes
+            }
+            project.dependencies {
+                add("implementation", libs.stringfog.xor)
+            }
         }
     }
 

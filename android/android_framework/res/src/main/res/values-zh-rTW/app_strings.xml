@@ -961,6 +961,10 @@
     <string name="reboot_now">立即重啟</string>
     <string name="reboot_later">稍後重啟</string>
 
+    <string name="legacy_ops_feature_summary">Thanox权限管理设置独立于系统自带的权限控制，因此只要任意一处拒绝，则为拒绝。\n\n兼容性提示：如果默认的权限管理功能不兼容你的设备，你可以在设置中开启新版权限管理进行体验。</string>
+    <string name="new_ops_feature">新版权限管理</string>
+    <string name="new_ops_feature_summary">测试新版本的权限管理功能，新版权限管理采用与系统同步的权限管理方案</string>
+
     <string name="badge_app_running">運行</string>
     <string name="badge_app_idle">休眠</string>
 

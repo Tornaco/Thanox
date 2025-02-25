@@ -876,6 +876,12 @@
     <string name="reboot_now">Şimdi yeniden başlat</string>
     <string name="reboot_later">Şimdi değil</string>
 
+    <string name="legacy_ops_feature_summary">The permission management settings in Thanox are independent of the system\'s built - in permission control. Therefore, if the permission is denied in any one place, it is considered denied.
+Compatibility notice: If the default permission management function is not compatible with your device, you can enable the new - version permission management in the settings for an experience.</string>
+    <string name="new_ops_feature">New OPS feature</string>
+    <string name="new_ops_feature_summary">Test the NEW permission management feature. The new version settings is synchronized with the Android system</string>
+
+
     <string name="badge_app_running">Çalışıyor</string>
     <string name="badge_app_idle">Boşta</string>
 

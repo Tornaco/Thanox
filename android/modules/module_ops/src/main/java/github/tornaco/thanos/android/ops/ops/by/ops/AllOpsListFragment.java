@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
+import github.tornaco.android.thanos.common.CommonPreferences;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import github.tornaco.thanos.android.ops.R;
@@ -87,6 +88,22 @@ public class AllOpsListFragment extends Fragment {
                 return true;
             }
             return false;
+        });
+
+        boolean alreadyRead =
+                CommonPreferences.getInstance()
+                        .isFeatureDescRead(requireContext(), "LegacyOps");
+        if (alreadyRead) {
+            binding.featureDescription.getRoot().setVisibility(View.GONE);
+            return;
+        }
+
+        binding.featureDescription.featureDescView.setDescription(getString(github.tornaco.android.thanos.res.R.string.legacy_ops_feature_summary));
+        binding.featureDescription.featureDescView.setOnCloseClickListener(() -> {
+            CommonPreferences.getInstance()
+                    .setFeatureDescRead(requireContext(), "LegacyOps", true);
+            binding.featureDescription.getRoot().setVisibility(View.GONE);
+            return null;
         });
     }
 

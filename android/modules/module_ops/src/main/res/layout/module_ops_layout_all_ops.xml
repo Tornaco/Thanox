@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_coll_appbar_height"
             android:layout_alignParentTop="true"
-            android:theme="?appbarTheme"
             android:background="?android:attr/windowBackground"
+            android:theme="?appbarTheme"
             app:elevation="@dimen/common_toolbar_elevation">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -32,9 +32,9 @@
                 style="?collapsingToolbarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?android:attr/windowBackground"
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
-                android:background="?android:attr/windowBackground"
                 app:expandedTitleTextAppearance="@style/ToolbarExpandedTitleTextAppearance"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:titleCollapseMode="scale"
@@ -64,6 +64,10 @@
             <include
                 android:id="@+id/switch_bar_container"
                 layout="@layout/module_common_switchbar_container" />
+
+            <include
+                android:id="@+id/feature_description"
+                layout="@layout/common_feature_description_bar_layout" />
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe"

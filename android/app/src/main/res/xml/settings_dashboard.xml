@@ -126,10 +126,10 @@
                 app:title="@string/title_net_stats" />
 
             <SwitchPreferenceCompat
-                android:summary="Test the new OPS feature, maybe unstable"
+                android:summary="@string/new_ops_feature_summary"
                 app:key="@string/key_test_new_ops"
                 app:persistent="false"
-                app:title="New OPS" />
+                app:title="@string/new_ops_feature" />
 
             <SwitchPreferenceCompat
                 android:summary="Test the new home screen"

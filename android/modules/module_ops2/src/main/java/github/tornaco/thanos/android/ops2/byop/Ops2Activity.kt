@@ -1,8 +1,12 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package github.tornaco.thanos.android.ops2.byop
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,10 +31,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
+import github.tornaco.android.thanos.module.compose.common.widget.CardContainer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.TipBody
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
-import github.tornaco.thanos.android.ops2.R
+
 
 @AndroidEntryPoint
 class Ops2Activity : ComposeThemeActivity() {
@@ -70,6 +76,17 @@ class Ops2Activity : ComposeThemeActivity() {
                     .fillMaxSize()
                     .padding(paddings)
             ) {
+                stickyHeader {
+                    CardContainer {
+                        Box(
+                            Modifier.padding(horizontal = 16.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            TipBody(stringResource(github.tornaco.android.thanos.res.R.string.new_ops_feature_summary))
+                        }
+                    }
+                }
+
                 items(state.opsItems) {
                     Row(
                         modifier = Modifier

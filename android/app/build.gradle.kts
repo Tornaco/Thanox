@@ -255,11 +255,11 @@ dependencies {
 
     val rowImplementation by configurations
     // Import the BoM for the Firebase platform
-    rowImplementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+    rowImplementation(platform(libs.firebase.bom))
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    rowImplementation("com.google.firebase:firebase-crashlytics")
-    rowImplementation("com.google.firebase:firebase-analytics")
+    rowImplementation(libs.firebase.crashlytics)
+    rowImplementation(libs.firebase.analytics)
 }
 
 val generateProguardRules by tasks.registering {

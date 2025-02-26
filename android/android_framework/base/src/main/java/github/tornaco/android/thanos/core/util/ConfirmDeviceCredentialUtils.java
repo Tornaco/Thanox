@@ -40,7 +40,7 @@ public class ConfirmDeviceCredentialUtils {
                 final ActivityOptions options = ActivityOptions.makeBasic();
                 activityManager.startActivityFromRecents(taskId, options.toBundle());
                 return;
-            } catch (RemoteException e) {
+            } catch (Throwable e) {
                 // Do nothing.
             }
         }
@@ -49,7 +49,7 @@ public class ConfirmDeviceCredentialUtils {
         if (intentSender != null) {
             try {
                 activity.startIntentSenderForResult(intentSender, -1, null, 0, FLAG_THANOX_VERIFIED, 0);
-            } catch (IntentSender.SendIntentException e) {
+            } catch (Throwable e) {
                 XLog.e(e, "startIntentSenderForResult error");
             }
         }

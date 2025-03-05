@@ -108,212 +108,212 @@
         <item>2</item>
     </string-array>
 
-<string-array name="module_ops2_app_ops_summaries">
-    <item>""</item>
-    <item>""</item>
-    <item>""</item>
-    <item>"Titreşim"</item>
-    <item>"Kişileri Okuma"</item>
-    <item>"Kişileri Değiştirme"</item>
-    <item>"Arama Kayıtlarını Okuma"</item>
-    <item>"Arama Kayıtlarını Değiştirme"</item>
-    <item>"Takvimi Okuma"</item>
-    <item>"Takvimi Değiştirme"</item>
-    <item>"WLAN Tarama"</item>
-    <item>"Bildirimler"</item>
-    <item>"Mobil Ağ Tarama"</item>
-    <item>"Telefon Görüşmesi Yapma"</item>
-    <item>"SMS Okuma"</item>
-    <item>"SMS Yazma"</item>
-    <item>"SMS Alma"</item>
-    <item>"Acil Durum SMS\'lerini Alma"</item>
-    <item>"MMS Alma"</item>
-    <item>"WAP PUSH Mesajlarını Alma"</item>
-    <item>"SMS Gönderme"</item>
-    <item>"ICC SMS Okuma"</item>
-    <item>"ICC SMS Yazma"</item>
-    <item>"Ayarları Değiştirme"</item>
-    <item>"Üstte Görüntüleme"</item>
-    <item>"Bildirimlere Erişim"</item>
-    <item>"Kamera"</item>
-    <item>"Ses Kaydı"</item>
-    <item>"Ses Çalma"</item>
-    <item>"Pano İçeriğini Okuma"</item>
-    <item>"Pano İçeriğini Değiştirme"</item>
-    <item>"Medya Düğmeleri"</item>
-    <item>"Ses Odaklanması"</item>
-    <item>"Ana Ses Seviyesi"</item>
-    <item>"Sesli Arama Ses Seviyesi"</item>
-    <item>"Zil Sesi Seviyesi"</item>
-    <item>"Medya Ses Seviyesi"</item>
-    <item>"Alarm Ses Seviyesi"</item>
-    <item>"Bildirim Ses Seviyesi"</item>
-    <item>"Bluetooth Ses Seviyesi"</item>
-    <item>"Uyanık Tut"</item>
-    <item>"Konumu İzleme"</item>
-    <item>"Yüksek Güçlü Konum Hizmetlerini İzleme"</item>
-    <item>"Kullanım İstatistiklerini Alma"</item>
-    <item>"Mikrofonu Sessize Alma veya Açma"</item>
-    <item>"Karşılama Mesajı Gösterme"</item>
-    <item>"Medyayı Yansıtma"</item>
-    <item>"VPN Etkinleştirme"</item>
-    <item>"Duvar Kağıdı Yazma"</item>
-    <item>"Asistan Yapısı"</item>
-    <item>"Asistan Ekran Görüntüsü"</item>
-    <item>"Telefon Durumunu Okuma"</item>
-    <item>"Sesli Mesaj Ekleme"</item>
-    <item>"SIP Kullanma"</item>
-    <item>"Giden Aramaları Yönetme"</item>
-    <item>"Parmak İzi"</item>
-    <item>"Vücut Sensörleri"</item>
-    <item>"Hücresel Yayınları Okuma"</item>
-    <item>"Sahte Konum Kullanma"</item>
-    <item>"Depolamayı Okuma"</item>
-    <item>"Depolamaya Yazma"</item>
-    <item>"Ekranı Açma"</item>
-    <item>"Hesapları Alma"</item>
-    <item>"Arka Planda Çalıştırma"</item>
-    <item>"Erişilebilirlik Ses Seviyesi"</item>
+    <string-array name="module_ops2_app_ops_summaries">
+        <item>""</item>
+        <item>""</item>
+        <item>""</item>
+        <item>"Titreşim"</item>
+        <item>"Kişileri Okuma"</item>
+        <item>"Kişileri Değiştirme"</item>
+        <item>"Arama Kayıtlarını Okuma"</item>
+        <item>"Arama Kayıtlarını Değiştirme"</item>
+        <item>"Takvimi Okuma"</item>
+        <item>"Takvimi Değiştirme"</item>
+        <item>"WLAN Tarama"</item>
+        <item>"Bildirimler"</item>
+        <item>"Mobil Ağ Tarama"</item>
+        <item>"Telefon Görüşmesi Yapma"</item>
+        <item>"SMS Okuma"</item>
+        <item>"SMS Yazma"</item>
+        <item>"SMS Alma"</item>
+        <item>"Acil Durum SMS\'lerini Alma"</item>
+        <item>"MMS Alma"</item>
+        <item>"WAP PUSH Mesajlarını Alma"</item>
+        <item>"SMS Gönderme"</item>
+        <item>"ICC SMS Okuma"</item>
+        <item>"ICC SMS Yazma"</item>
+        <item>"Ayarları Değiştirme"</item>
+        <item>"Üstte Görüntüleme"</item>
+        <item>"Bildirimlere Erişim"</item>
+        <item>"Kamera"</item>
+        <item>"Ses Kaydı"</item>
+        <item>"Ses Çalma"</item>
+        <item>"Pano İçeriğini Okuma"</item>
+        <item>"Pano İçeriğini Değiştirme"</item>
+        <item>"Medya Düğmeleri"</item>
+        <item>"Ses Odaklanması"</item>
+        <item>"Ana Ses Seviyesi"</item>
+        <item>"Sesli Arama Ses Seviyesi"</item>
+        <item>"Zil Sesi Seviyesi"</item>
+        <item>"Medya Ses Seviyesi"</item>
+        <item>"Alarm Ses Seviyesi"</item>
+        <item>"Bildirim Ses Seviyesi"</item>
+        <item>"Bluetooth Ses Seviyesi"</item>
+        <item>"Uyanık Tut"</item>
+        <item>"Konumu İzleme"</item>
+        <item>"Yüksek Güçlü Konum Hizmetlerini İzleme"</item>
+        <item>"Kullanım İstatistiklerini Alma"</item>
+        <item>"Mikrofonu Sessize Alma veya Açma"</item>
+        <item>"Karşılama Mesajı Gösterme"</item>
+        <item>"Medyayı Yansıtma"</item>
+        <item>"VPN Etkinleştirme"</item>
+        <item>"Duvar Kağıdı Yazma"</item>
+        <item>"Asistan Yapısı"</item>
+        <item>"Asistan Ekran Görüntüsü"</item>
+        <item>"Telefon Durumunu Okuma"</item>
+        <item>"Sesli Mesaj Ekleme"</item>
+        <item>"SIP Kullanma"</item>
+        <item>"Giden Aramaları Yönetme"</item>
+        <item>"Parmak İzi"</item>
+        <item>"Vücut Sensörleri"</item>
+        <item>"Hücresel Yayınları Okuma"</item>
+        <item>"Sahte Konum Kullanma"</item>
+        <item>"Depolamayı Okuma"</item>
+        <item>"Depolamaya Yazma"</item>
+        <item>"Ekranı Açma"</item>
+        <item>"Hesapları Alma"</item>
+        <item>"Arka Planda Çalıştırma"</item>
+        <item>"Erişilebilirlik Ses Seviyesi"</item>
 
-    <item>Telefon numarasını okuma</item>
-    <item>Uygulama yükleme isteğinde bulunma</item>
-    <item>Resim içinde resim (PiP) modu</item>
-    <item>Anlık uygulamayı ön planda başlatma</item>
-    <item>Gelen telefon çağrılarını yanıtlama</item>
-    <item>Arka planda görev çalıştırma</item>
-    <item>WiFi bağlantı durumunu değiştirme</item>
-    <item>Paket yükleyici aracılığıyla paket silme isteğinde bulunma</item>
-    <item>Bir erişilebilirlik hizmetine bağlanma</item>
-    <item>Başka bir uygulamadan gelen çağrıyı devretmeye devam etme</item>
-    <item>IPsec tünelleri oluşturma ve yönetme</item>
-    <item>Herhangi bir uygulamanın ön plan hizmetini başlatması</item>
-    <item>Bluetooth tarama</item>
-    <item>BiometricPrompt/BiometricManager API\'lerini kullanma</item>
-    <item>Fiziksel aktivite tanıma</item>
-    <item>Finansal uygulama SMS\'lerini okuma</item>
-    <item>Ses türündeki medyayı okuma</item>
-    <item>Ses türündeki medyaya yazma</item>
-    <item>Video türündeki medyayı okuma</item>
-    <item>Video türündeki medyaya yazma</item>
-    <item>Görsel (resim) türündeki medyayı okuma</item>
-    <item>Görsel (resim) türündeki medyaya yazma</item>
-    <item>Eski (izole olmayan) depolama görünümüne sahip</item>
-    <item>Erişilebilirlik özelliklerini kullanma</item>
-    <item>Cihaz bilgilerini okuma (IMEI/MEID, IMSI, SIM/Build seri numarası)</item>
-    <item>Medya konumuna erişim</item>
-    <item>Tüm paketleri sorgulama</item>
-    <item>Tüm harici depolamaya erişim</item>
-    <item>Profiller arası etkileşim</item>
-    <item>Platform VPN\'i etkinleştirme</item>
-    <item>Yükleyici kullanım istatistikleri</item>
-    <item>Yer tutucu</item>
-    <item>Kullanılmadığında izinleri otomatik iptal etme</item>
-    <item>Yükleyici tarafından yönetilen otomatik izin iptali</item>
-    <item>İzole depolama yok</item>
-</string-array>
+        <item>Telefon numarasını okuma</item>
+        <item>Uygulama yükleme isteğinde bulunma</item>
+        <item>Resim içinde resim (PiP) modu</item>
+        <item>Anlık uygulamayı ön planda başlatma</item>
+        <item>Gelen telefon çağrılarını yanıtlama</item>
+        <item>Arka planda görev çalıştırma</item>
+        <item>WiFi bağlantı durumunu değiştirme</item>
+        <item>Paket yükleyici aracılığıyla paket silme isteğinde bulunma</item>
+        <item>Bir erişilebilirlik hizmetine bağlanma</item>
+        <item>Başka bir uygulamadan gelen çağrıyı devretmeye devam etme</item>
+        <item>IPsec tünelleri oluşturma ve yönetme</item>
+        <item>Herhangi bir uygulamanın ön plan hizmetini başlatması</item>
+        <item>Bluetooth tarama</item>
+        <item>BiometricPrompt/BiometricManager API\'lerini kullanma</item>
+        <item>Fiziksel aktivite tanıma</item>
+        <item>Finansal uygulama SMS\'lerini okuma</item>
+        <item>Ses türündeki medyayı okuma</item>
+        <item>Ses türündeki medyaya yazma</item>
+        <item>Video türündeki medyayı okuma</item>
+        <item>Video türündeki medyaya yazma</item>
+        <item>Görsel (resim) türündeki medyayı okuma</item>
+        <item>Görsel (resim) türündeki medyaya yazma</item>
+        <item>Eski (izole olmayan) depolama görünümüne sahip</item>
+        <item>Erişilebilirlik özelliklerini kullanma</item>
+        <item>Cihaz bilgilerini okuma (IMEI/MEID, IMSI, SIM/Build seri numarası)</item>
+        <item>Medya konumuna erişim</item>
+        <item>Tüm paketleri sorgulama</item>
+        <item>Tüm harici depolamaya erişim</item>
+        <item>Profiller arası etkileşim</item>
+        <item>Platform VPN\'i etkinleştirme</item>
+        <item>Yükleyici kullanım istatistikleri</item>
+        <item>Yer tutucu</item>
+        <item>Kullanılmadığında izinleri otomatik iptal etme</item>
+        <item>Yükleyici tarafından yönetilen otomatik izin iptali</item>
+        <item>İzole depolama yok</item>
+    </string-array>
 
-<string-array name="module_ops2_app_ops_labels">
-    <item>"Yaklaşık Konum"</item>
-    <item>"Kesin Konum"</item>
-    <item>"GPS"</item>
-    <item>"Titreşim"</item>
-    <item>"Kişileri Okuma"</item>
-    <item>"Kişileri Değiştirme"</item>
-    <item>"Arama Kayıtlarını Okuma"</item>
-    <item>"Arama Kayıtlarını Değiştirme"</item>
-    <item>"Takvimi Okuma"</item>
-    <item>"Takvimi Değiştirme"</item>
-    <item>"Konum"</item>
-    <item>"Bildirim Gönderme"</item>
-    <item>"Konum"</item>
-    <item>"Telefon Araması Yapma"</item>
-    <item>"SMS/MMS Okuma"</item>
-    <item>"SMS/MMS Yazma"</item>
-    <item>"SMS/MMS Alma"</item>
-    <item>"SMS/MMS Alma"</item>
-    <item>"SMS/MMS Alma"</item>
-    <item>"SMS/MMS Alma"</item>
-    <item>"SMS/MMS Gönderme"</item>
-    <item>"SMS/MMS Okuma"</item>
-    <item>"SMS/MMS Yazma"</item>
-    <item>"Ayarları Değiştirme"</item>
-    <item>"Üstte Görüntüleme"</item>
-    <item>"Bildirimlere Erişim"</item>
-    <item>"Kamera"</item>
-    <item>"Ses Kaydı"</item>
-    <item>"Ses Çalma"</item>
-    <item>"Pano İçeriğini Okuma"</item>
-    <item>"Pano İçeriğini Değiştirme"</item>
-    <item>"Medya Düğmeleri"</item>
-    <item>"Ses Odaklanması"</item>
-    <item>"Ana Ses Seviyesi"</item>
-    <item>"Sesli Arama Ses Seviyesi"</item>
-    <item>"Zil Sesi Seviyesi"</item>
-    <item>"Medya Ses Seviyesi"</item>
-    <item>"Alarm Ses Seviyesi"</item>
-    <item>"Bildirim Ses Seviyesi"</item>
-    <item>"Bluetooth Ses Seviyesi"</item>
-    <item>"Uyanık Tut"</item>
-    <item>"Konum"</item>
-    <item>"Konum Bilgisi"</item>
-    <item>"Kullanım İstatistiklerini Alma"</item>
-    <item>"Mikrofonu Sessize Alma veya Açma"</item>
-    <item>"Karşılama Mesajı Gösterme"</item>
-    <item>"Medyayı Yansıtma"</item>
-    <item>"VPN Etkinleştirme"</item>
-    <item>"Duvar Kağıdı Yazma"</item>
-    <item>"Asistan Yapısı"</item>
-    <item>"Asistan Ekran Görüntüsü"</item>
-    <item>"Telefon Durumunu Okuma"</item>
-    <item>"Sesli Mesaj Ekleme"</item>
-    <item>"SIP Kullanma"</item>
-    <item>"Giden Aramaları Yönetme"</item>
-    <item>"Parmak İzi"</item>
-    <item>"Vücut Sensörleri"</item>
-    <item>"Hücresel Yayınları Okuma"</item>
-    <item>"Sahte Konum Kullanma"</item>
-    <item>"Depolamayı Okuma"</item>
-    <item>"Depolamaya Yazma"</item>
-    <item>"Ekranı Açma"</item>
-    <item>"Hesapları Alma"</item>
-    <item>"Arka Planda Çalıştırma"</item>
-    <item>"Erişilebilirlik Ses Seviyesi"</item>
-    <item>"Telefon Numarasını Okuma"</item>
-    <item>"Uygulama Yükleme"</item>
-    <item>"Resim İçinde Resim (PiP) Modu"</item>
-    <item>"Anlık Uygulamayı Ön Planda Başlatma"</item>
-    <item>"Gelen Telefon Çağrılarını Yanıtlama"</item>
-    <item>"Arka Planda Görev Çalıştırma"</item>
-    <item>"WiFi Bağlantı Durumunu Değiştirme"</item>
-    <item>"Paket Yükleyici Aracılığıyla Paket Silme İsteğinde Bulunma"</item>
-    <item>"Bir Erişilebilirlik Hizmetine Bağlanma"</item>
-    <item>"Başka Bir Uygulamadan Gelen Çağrıyı Devretmeye Devam Etme"</item>
-    <item>"IPsec Tünelleri Oluşturma ve Yönetme"</item>
-    <item>"Herhangi Bir Uygulamanın Ön Plan Hizmetini Başlatması"</item>
-    <item>"Bluetooth Tarama"</item>
-    <item>"BiometricPrompt Kullanma"</item>
-    <item>"Fiziksel Aktivite Tanıma"</item>
-    <item>"Finansal Uygulama SMS\'lerini Okuma"</item>
-    <item>"Ses Türündeki Medyayı Okuma"</item>
-    <item>"Ses Türündeki Medyaya Yazma"</item>
-    <item>"Video Türündeki Medyayı Okuma"</item>
-    <item>"Video Türündeki Medyaya Yazma"</item>
-    <item>"Görsel (Resim) Türündeki Medyayı Okuma"</item>
-    <item>"Görsel (Resim) Türündeki Medyaya Yazma"</item>
-    <item>"Eski Depolama Görünümüne Sahip"</item>
-    <item>"Erişilebilirlik Özelliklerini Kullanma"</item>
-    <item>"Cihaz Bilgilerini Okuma"</item>
-    <item>"Medya Konumuna Erişim"</item>
-    <item>"Tüm Paketleri Sorgulama"</item>
-    <item>"Tüm Harici Depolamaya Erişim"</item>
-    <item>"Profiller Arası Etkileşim"</item>
-    <item>"Platform VPN\'i Etkinleştirme"</item>
-    <item>"Yükleyici Kullanım İstatistikleri"</item>
-    <item>"Yer Tutucu"</item>
-    <item>"Kullanılmadığında İzinleri Otomatik İptal Etme"</item>
-    <item>"Yükleyici Tarafından Yönetilen Otomatik İzin İptali"</item>
-    <item>"İzole Depolama Yok"</item>
-</string-array>
+    <string-array name="module_ops2_app_ops_labels">
+        <item>"Yaklaşık Konum"</item>
+        <item>"Kesin Konum"</item>
+        <item>"GPS"</item>
+        <item>"Titreşim"</item>
+        <item>"Kişileri Okuma"</item>
+        <item>"Kişileri Değiştirme"</item>
+        <item>"Arama Kayıtlarını Okuma"</item>
+        <item>"Arama Kayıtlarını Değiştirme"</item>
+        <item>"Takvimi Okuma"</item>
+        <item>"Takvimi Değiştirme"</item>
+        <item>"Konum"</item>
+        <item>"Bildirim Gönderme"</item>
+        <item>"Konum"</item>
+        <item>"Telefon Araması Yapma"</item>
+        <item>"SMS/MMS Okuma"</item>
+        <item>"SMS/MMS Yazma"</item>
+        <item>"SMS/MMS Alma"</item>
+        <item>"SMS/MMS Alma"</item>
+        <item>"SMS/MMS Alma"</item>
+        <item>"SMS/MMS Alma"</item>
+        <item>"SMS/MMS Gönderme"</item>
+        <item>"SMS/MMS Okuma"</item>
+        <item>"SMS/MMS Yazma"</item>
+        <item>"Ayarları Değiştirme"</item>
+        <item>"Üstte Görüntüleme"</item>
+        <item>"Bildirimlere Erişim"</item>
+        <item>"Kamera"</item>
+        <item>"Ses Kaydı"</item>
+        <item>"Ses Çalma"</item>
+        <item>"Pano İçeriğini Okuma"</item>
+        <item>"Pano İçeriğini Değiştirme"</item>
+        <item>"Medya Düğmeleri"</item>
+        <item>"Ses Odaklanması"</item>
+        <item>"Ana Ses Seviyesi"</item>
+        <item>"Sesli Arama Ses Seviyesi"</item>
+        <item>"Zil Sesi Seviyesi"</item>
+        <item>"Medya Ses Seviyesi"</item>
+        <item>"Alarm Ses Seviyesi"</item>
+        <item>"Bildirim Ses Seviyesi"</item>
+        <item>"Bluetooth Ses Seviyesi"</item>
+        <item>"Uyanık Tut"</item>
+        <item>"Konum"</item>
+        <item>"Konum Bilgisi"</item>
+        <item>"Kullanım İstatistiklerini Alma"</item>
+        <item>"Mikrofonu Sessize Alma veya Açma"</item>
+        <item>"Karşılama Mesajı Gösterme"</item>
+        <item>"Medyayı Yansıtma"</item>
+        <item>"VPN Etkinleştirme"</item>
+        <item>"Duvar Kağıdı Yazma"</item>
+        <item>"Asistan Yapısı"</item>
+        <item>"Asistan Ekran Görüntüsü"</item>
+        <item>"Telefon Durumunu Okuma"</item>
+        <item>"Sesli Mesaj Ekleme"</item>
+        <item>"SIP Kullanma"</item>
+        <item>"Giden Aramaları Yönetme"</item>
+        <item>"Parmak İzi"</item>
+        <item>"Vücut Sensörleri"</item>
+        <item>"Hücresel Yayınları Okuma"</item>
+        <item>"Sahte Konum Kullanma"</item>
+        <item>"Depolamayı Okuma"</item>
+        <item>"Depolamaya Yazma"</item>
+        <item>"Ekranı Açma"</item>
+        <item>"Hesapları Alma"</item>
+        <item>"Arka Planda Çalıştırma"</item>
+        <item>"Erişilebilirlik Ses Seviyesi"</item>
+        <item>"Telefon Numarasını Okuma"</item>
+        <item>"Uygulama Yükleme"</item>
+        <item>"Resim İçinde Resim (PiP) Modu"</item>
+        <item>"Anlık Uygulamayı Ön Planda Başlatma"</item>
+        <item>"Gelen Telefon Çağrılarını Yanıtlama"</item>
+        <item>"Arka Planda Görev Çalıştırma"</item>
+        <item>"WiFi Bağlantı Durumunu Değiştirme"</item>
+        <item>"Paket Yükleyici Aracılığıyla Paket Silme İsteğinde Bulunma"</item>
+        <item>"Bir Erişilebilirlik Hizmetine Bağlanma"</item>
+        <item>"Başka Bir Uygulamadan Gelen Çağrıyı Devretmeye Devam Etme"</item>
+        <item>"IPsec Tünelleri Oluşturma ve Yönetme"</item>
+        <item>"Herhangi Bir Uygulamanın Ön Plan Hizmetini Başlatması"</item>
+        <item>"Bluetooth Tarama"</item>
+        <item>"BiometricPrompt Kullanma"</item>
+        <item>"Fiziksel Aktivite Tanıma"</item>
+        <item>"Finansal Uygulama SMS\'lerini Okuma"</item>
+        <item>"Ses Türündeki Medyayı Okuma"</item>
+        <item>"Ses Türündeki Medyaya Yazma"</item>
+        <item>"Video Türündeki Medyayı Okuma"</item>
+        <item>"Video Türündeki Medyaya Yazma"</item>
+        <item>"Görsel (Resim) Türündeki Medyayı Okuma"</item>
+        <item>"Görsel (Resim) Türündeki Medyaya Yazma"</item>
+        <item>"Eski Depolama Görünümüne Sahip"</item>
+        <item>"Erişilebilirlik Özelliklerini Kullanma"</item>
+        <item>"Cihaz Bilgilerini Okuma"</item>
+        <item>"Medya Konumuna Erişim"</item>
+        <item>"Tüm Paketleri Sorgulama"</item>
+        <item>"Tüm Harici Depolamaya Erişim"</item>
+        <item>"Profiller Arası Etkileşim"</item>
+        <item>"Platform VPN\'i Etkinleştirme"</item>
+        <item>"Yükleyici Kullanım İstatistikleri"</item>
+        <item>"Yer Tutucu"</item>
+        <item>"Kullanılmadığında İzinleri Otomatik İptal Etme"</item>
+        <item>"Yükleyici Tarafından Yönetilen Otomatik İzin İptali"</item>
+        <item>"İzole Depolama Yok"</item>
+    </string-array>
 
     <string name="module_ops2_ops_list_title">Tüm İzinler</string>
     <string name="module_ops2_perm_state_allow">İzin Ver</string>
@@ -495,229 +495,229 @@
     <string name="module_notification_recorder_the_day_before_yesterday">İki gün önce</string>
     <string name="module_notification_recorder_stats">İstatistikler</string>
 
-<string-array name="module_ops_app_ops_summaries">
-    <item>Yaklaşık konum</item>
-    <item>Kesin konum</item>
-    <item>GPS</item>
-    <item>Titreşim</item>
-    <item>Kişileri okuma</item>
-    <item>Kişileri değiştirme</item>
-    <item>Arama kaydını okuma</item>
-    <item>Arama kaydını değiştirme</item>
-    <item>Takvimi okuma</item>
-    <item>Takvimi değiştirme</item>
-    <item>Wi-Fi tarama</item>
-    <item>Bildirim</item>
-    <item>Hücresel tarama</item>
-    <item>Telefon araması yapma</item>
-    <item>SMS okuma</item>
-    <item>SMS yazma</item>
-    <item>SMS alma</item>
-    <item>Acil durum SMS alma</item>
-    <item>MMS alma</item>
-    <item>WAP push mesajlarını alma</item>
-    <item>SMS gönderme</item>
-    <item>ICC SMS okuma</item>
-    <item>ICC SMS yazma</item>
-    <item>Ayarları değiştirme</item>
-    <item>Üstte çizim yapma</item>
-    <item>Bildirimlere erişim</item>
-    <item>Kamera</item>
-    <item>Ses kaydı</item>
-    <item>Ses çalma</item>
-    <item>Panoyu okuma</item>
-    <item>Panoyu değiştirme</item>
-    <item>Medya düğmeleri</item>
-    <item>Ses odağı</item>
-    <item>Ana ses seviyesi</item>
-    <item>Sesli arama sesi</item>
-    <item>Zil sesi</item>
-    <item>Medya sesi</item>
-    <item>Alarm sesi</item>
-    <item>Bildirim sesi</item>
-    <item>Bluetooth sesi</item>
-    <item>Uyanık tut</item>
-    <item>Konumu izleme</item>
-    <item>Yüksek güç konum izleme</item>
-    <item>Kullanım istatistiklerini alma</item>
-    <item>Mikrofonu sessize alma/açma</item>
-    <item>Toast mesajı gösterme</item>
-    <item>Medyayı yansıtma</item>
-    <item>VPN etkinleştirme</item>
-    <item>Duvar kağıdı değiştirme</item>
-    <item>Asistan yapısı</item>
-    <item>Asistan ekran görüntüsü</item>
-    <item>Telefon durumunu okuma</item>
-    <item>Sesli mesaj ekleme</item>
-    <item>SIP kullanma</item>
-    <item>Giden çağrıyı işleme</item>
-    <item>Parmak izi</item>
-    <item>Vücut sensörleri</item>
-    <item>Hücresel yayınları okuma</item>
-    <item>Sahte konum</item>
-    <item>Depolamayı okuma</item>
-    <item>Depolamaya yazma</item>
-    <item>Ekranı aç</item>
-    <item>Hesapları alma</item>
-    <item>Arka planda çalıştırma</item>
-    <item>Erişilebilirlik ses seviyesi</item>
-    <item>Telefon numarasını okuma</item>
-    <item>Paket yükleme</item>
-    <item>Resim içinde resim (PiP) modu</item>
-    <item>Anlık uygulamayı ön planda başlatma</item>
-    <item>Gelen telefon çağrılarını yanıtlama</item>
-    <item>Arka planda görev çalıştırma</item>
-    <item>Wi-Fi bağlantı durumunu değiştirme</item>
-    <item>Paket yükleyici aracılığıyla paket silme isteğinde bulunma</item>
-    <item>Bir erişilebilirlik hizmetine bağlanma</item>
-    <item>Başka bir uygulamadan gelen çağrıyı devretmeye devam etme</item>
-    <item>IPsec tünelleri oluşturma ve yönetme</item>
-    <item>Herhangi bir uygulamanın ön plan hizmetini başlatması</item>
-    <item>Bluetooth tarama</item>
+    <string-array name="module_ops_app_ops_summaries">
+        <item>Yaklaşık konum</item>
+        <item>Kesin konum</item>
+        <item>GPS</item>
+        <item>Titreşim</item>
+        <item>Kişileri okuma</item>
+        <item>Kişileri değiştirme</item>
+        <item>Arama kaydını okuma</item>
+        <item>Arama kaydını değiştirme</item>
+        <item>Takvimi okuma</item>
+        <item>Takvimi değiştirme</item>
+        <item>Wi-Fi tarama</item>
+        <item>Bildirim</item>
+        <item>Hücresel tarama</item>
+        <item>Telefon araması yapma</item>
+        <item>SMS okuma</item>
+        <item>SMS yazma</item>
+        <item>SMS alma</item>
+        <item>Acil durum SMS alma</item>
+        <item>MMS alma</item>
+        <item>WAP push mesajlarını alma</item>
+        <item>SMS gönderme</item>
+        <item>ICC SMS okuma</item>
+        <item>ICC SMS yazma</item>
+        <item>Ayarları değiştirme</item>
+        <item>Üstte çizim yapma</item>
+        <item>Bildirimlere erişim</item>
+        <item>Kamera</item>
+        <item>Ses kaydı</item>
+        <item>Ses çalma</item>
+        <item>Panoyu okuma</item>
+        <item>Panoyu değiştirme</item>
+        <item>Medya düğmeleri</item>
+        <item>Ses odağı</item>
+        <item>Ana ses seviyesi</item>
+        <item>Sesli arama sesi</item>
+        <item>Zil sesi</item>
+        <item>Medya sesi</item>
+        <item>Alarm sesi</item>
+        <item>Bildirim sesi</item>
+        <item>Bluetooth sesi</item>
+        <item>Uyanık tut</item>
+        <item>Konumu izleme</item>
+        <item>Yüksek güç konum izleme</item>
+        <item>Kullanım istatistiklerini alma</item>
+        <item>Mikrofonu sessize alma/açma</item>
+        <item>Toast mesajı gösterme</item>
+        <item>Medyayı yansıtma</item>
+        <item>VPN etkinleştirme</item>
+        <item>Duvar kağıdı değiştirme</item>
+        <item>Asistan yapısı</item>
+        <item>Asistan ekran görüntüsü</item>
+        <item>Telefon durumunu okuma</item>
+        <item>Sesli mesaj ekleme</item>
+        <item>SIP kullanma</item>
+        <item>Giden çağrıyı işleme</item>
+        <item>Parmak izi</item>
+        <item>Vücut sensörleri</item>
+        <item>Hücresel yayınları okuma</item>
+        <item>Sahte konum</item>
+        <item>Depolamayı okuma</item>
+        <item>Depolamaya yazma</item>
+        <item>Ekranı aç</item>
+        <item>Hesapları alma</item>
+        <item>Arka planda çalıştırma</item>
+        <item>Erişilebilirlik ses seviyesi</item>
+        <item>Telefon numarasını okuma</item>
+        <item>Paket yükleme</item>
+        <item>Resim içinde resim (PiP) modu</item>
+        <item>Anlık uygulamayı ön planda başlatma</item>
+        <item>Gelen telefon çağrılarını yanıtlama</item>
+        <item>Arka planda görev çalıştırma</item>
+        <item>Wi-Fi bağlantı durumunu değiştirme</item>
+        <item>Paket yükleyici aracılığıyla paket silme isteğinde bulunma</item>
+        <item>Bir erişilebilirlik hizmetine bağlanma</item>
+        <item>Başka bir uygulamadan gelen çağrıyı devretmeye devam etme</item>
+        <item>IPsec tünelleri oluşturma ve yönetme</item>
+        <item>Herhangi bir uygulamanın ön plan hizmetini başlatması</item>
+        <item>Bluetooth tarama</item>
 
-    <item>BiometricPrompt/BiometricManager API\'lerini kullanma</item>
-    <item>Fiziksel aktivite tanıma</item>
-    <item>Finansal uygulama SMS okuma</item>
-    <item>Ses türündeki medyayı okuma</item>
-    <item>Ses türündeki medyaya yazma</item>
-    <item>Video türündeki medyayı okuma</item>
-    <item>Video türündeki medyaya yazma</item>
-    <item>Görsel (resim) türündeki medyayı okuma</item>
-    <item>Görsel (resim) türündeki medyaya yazma</item>
-    <item>Eski (izole olmayan) depolama görünümüne sahip</item>
-    <item>Erişilebilirlik özelliklerine erişim</item>
-    <item>Cihaz tanımlayıcılarını okuma (IMEI / MEID, IMSI, SIM / Yapı seri numarası)</item>
+        <item>BiometricPrompt/BiometricManager API\'lerini kullanma</item>
+        <item>Fiziksel aktivite tanıma</item>
+        <item>Finansal uygulama SMS okuma</item>
+        <item>Ses türündeki medyayı okuma</item>
+        <item>Ses türündeki medyaya yazma</item>
+        <item>Video türündeki medyayı okuma</item>
+        <item>Video türündeki medyaya yazma</item>
+        <item>Görsel (resim) türündeki medyayı okuma</item>
+        <item>Görsel (resim) türündeki medyaya yazma</item>
+        <item>Eski (izole olmayan) depolama görünümüne sahip</item>
+        <item>Erişilebilirlik özelliklerine erişim</item>
+        <item>Cihaz tanımlayıcılarını okuma (IMEI / MEID, IMSI, SIM / Yapı seri numarası)</item>
 
-    <item>Medya konumuna erişim</item>
-    <item>Tüm paketleri sorgulama</item>
-    <item>Tüm harici depolamaya erişim</item>
-    <item>Profiller arası etkileşim</item>
-    <item>Platform VPN\'i etkinleştirme</item>
-    <item>Yükleyici kullanım istatistikleri</item>
-    <item>Yer tutucu</item>
-    <item>Kullanılmadığında izinleri otomatik iptal etme</item>
-    <item>Yükleyici tarafından yönetilen otomatik izin iptali</item>
-    <item>İzole depolama yok</item>
+        <item>Medya konumuna erişim</item>
+        <item>Tüm paketleri sorgulama</item>
+        <item>Tüm harici depolamaya erişim</item>
+        <item>Profiller arası etkileşim</item>
+        <item>Platform VPN\'i etkinleştirme</item>
+        <item>Yükleyici kullanım istatistikleri</item>
+        <item>Yer tutucu</item>
+        <item>Kullanılmadığında izinleri otomatik iptal etme</item>
+        <item>Yükleyici tarafından yönetilen otomatik izin iptali</item>
+        <item>İzole depolama yok</item>
 
-    <item>Diğer yüklü paket bilgilerini paket adına göre sorgulama</item>
-    <item>Ekran parlaklığını ayarlama</item>
-    <item>Yüklü uygulamaları alma</item>
-    <item>Intent sorgulama (LAUNCHER, genellikle yüklü uygulamaları sorgulamak için kullanılır)</item>
-    <item>Cihaz konumuna erişim</item>
-    <item>Sensor olaylarını alma, hedef uygulamayı Scoped Xposed çerçevesinde seçmeyi unutmayın</item>
-</string-array>
+        <item>Diğer yüklü paket bilgilerini paket adına göre sorgulama</item>
+        <item>Ekran parlaklığını ayarlama</item>
+        <item>Yüklü uygulamaları alma</item>
+        <item>Intent sorgulama (LAUNCHER, genellikle yüklü uygulamaları sorgulamak için kullanılır)</item>
+        <item>Cihaz konumuna erişim</item>
+        <item>Sensor olaylarını alma, hedef uygulamayı Scoped Xposed çerçevesinde seçmeyi unutmayın</item>
+    </string-array>
 
-<string-array name="module_ops_app_ops_labels">
-    <item>Konum</item>
-    <item>Konum</item>
-    <item>Konum</item>
-    <item>Titreşim</item>
-    <item>Kişileri Okuma</item>
-    <item>Kişileri Değiştirme</item>
-    <item>Arama Kaydını Okuma</item>
-    <item>Arama Kaydını Değiştirme</item>
-    <item>Takvimi Okuma</item>
-    <item>Takvimi Değiştirme</item>
-    <item>Konum</item>
-    <item>Bildirim Gönderme</item>
-    <item>Konum</item>
-    <item>Telefon Araması Yapma</item>
-    <item>SMS/MMS Okuma</item>
-    <item>SMS/MMS Yazma</item>
-    <item>SMS/MMS Alma</item>
-    <item>SMS/MMS Alma</item>
-    <item>SMS/MMS Alma</item>
-    <item>SMS/MMS Alma</item>
-    <item>SMS/MMS Gönderme</item>
-    <item>SMS/MMS Okuma</item>
-    <item>SMS/MMS Yazma</item>
-    <item>Ayarları Değiştirme</item>
-    <item>Üstte Çizim Yapma</item>
-    <item>Bildirimlere Erişim</item>
-    <item>Kamera</item>
-    <item>Ses Kaydı</item>
-    <item>Ses Çalma</item>
-    <item>Panoyu Okuma</item>
-    <item>Panoyu Değiştirme</item>
-    <item>Medya Düğmeleri</item>
-    <item>Ses Odaklanması</item>
-    <item>Ana Ses Seviyesi</item>
-    <item>Sesli Arama Ses Seviyesi</item>
-    <item>Zil Sesi Seviyesi</item>
-    <item>Medya Ses Seviyesi</item>
-    <item>Alarm Ses Seviyesi</item>
-    <item>Bildirim Ses Seviyesi</item>
-    <item>Bluetooth Ses Seviyesi</item>
-    <item>Uyanık Tut</item>
-    <item>Konum</item>
-    <item>Konum</item>
-    <item>Kullanım İstatistiklerini Alma</item>
-    <item>Mikrofonu Sessize Alma/Açma</item>
-    <item>Toast Mesajı Gösterme</item>
-    <item>Medyayı Yansıtma</item>
-    <item>VPN Etkinleştirme</item>
-    <item>Duvar Kağıdı Yazma</item>
-    <item>Asistan Yapısı</item>
-    <item>Asistan Ekran Görüntüsü</item>
-    <item>Telefon Durumunu Okuma</item>
-    <item>Sesli Mesaj Ekleme</item>
-    <item>SIP Kullanma</item>
-    <item>Giden Çağrıyı İşleme</item>
-    <item>Parmak İzi</item>
-    <item>Vücut Sensörleri</item>
-    <item>Hücresel Yayınları Okuma</item>
-    <item>Sahte Konum</item>
-    <item>Depolamayı Okuma</item>
-    <item>Depolamaya Yazma</item>
-    <item>Ekranı Aç</item>
-    <item>Hesapları Alma</item>
-    <item>Arka Planda Çalıştırma</item>
-    <item>Erişilebilirlik Ses Seviyesi</item>
-    <item>Telefon Numarasını Okuma</item>
-    <item>Paket Yükleme</item>
-    <item>Resim İçinde Resim (PiP) Modu</item>
-    <item>Anlık Uygulamayı Ön Planda Başlatma</item>
-    <item>Gelen Telefon Çağrılarını Yanıtlama</item>
-    <item>Arka Planda Görev Çalıştırma</item>
-    <item>Wi-Fi Bağlantı Durumunu Değiştirme</item>
-    <item>Paket Yükleyici Aracılığıyla Paket Silme İsteğinde Bulunma</item>
-    <item>Bir Erişilebilirlik Hizmetine Bağlanma</item>
-    <item>Başka Bir Uygulamadan Gelen Çağrıyı Devretmeye Devam Etme</item>
-    <item>IPsec Tünelleri Oluşturma ve Yönetme</item>
-    <item>Herhangi Bir Uygulamanın Ön Plan Hizmetini Başlatması</item>
-    <item>Bluetooth Tarama</item>
+    <string-array name="module_ops_app_ops_labels">
+        <item>Konum</item>
+        <item>Konum</item>
+        <item>Konum</item>
+        <item>Titreşim</item>
+        <item>Kişileri Okuma</item>
+        <item>Kişileri Değiştirme</item>
+        <item>Arama Kaydını Okuma</item>
+        <item>Arama Kaydını Değiştirme</item>
+        <item>Takvimi Okuma</item>
+        <item>Takvimi Değiştirme</item>
+        <item>Konum</item>
+        <item>Bildirim Gönderme</item>
+        <item>Konum</item>
+        <item>Telefon Araması Yapma</item>
+        <item>SMS/MMS Okuma</item>
+        <item>SMS/MMS Yazma</item>
+        <item>SMS/MMS Alma</item>
+        <item>SMS/MMS Alma</item>
+        <item>SMS/MMS Alma</item>
+        <item>SMS/MMS Alma</item>
+        <item>SMS/MMS Gönderme</item>
+        <item>SMS/MMS Okuma</item>
+        <item>SMS/MMS Yazma</item>
+        <item>Ayarları Değiştirme</item>
+        <item>Üstte Çizim Yapma</item>
+        <item>Bildirimlere Erişim</item>
+        <item>Kamera</item>
+        <item>Ses Kaydı</item>
+        <item>Ses Çalma</item>
+        <item>Panoyu Okuma</item>
+        <item>Panoyu Değiştirme</item>
+        <item>Medya Düğmeleri</item>
+        <item>Ses Odaklanması</item>
+        <item>Ana Ses Seviyesi</item>
+        <item>Sesli Arama Ses Seviyesi</item>
+        <item>Zil Sesi Seviyesi</item>
+        <item>Medya Ses Seviyesi</item>
+        <item>Alarm Ses Seviyesi</item>
+        <item>Bildirim Ses Seviyesi</item>
+        <item>Bluetooth Ses Seviyesi</item>
+        <item>Uyanık Tut</item>
+        <item>Konum</item>
+        <item>Konum</item>
+        <item>Kullanım İstatistiklerini Alma</item>
+        <item>Mikrofonu Sessize Alma/Açma</item>
+        <item>Toast Mesajı Gösterme</item>
+        <item>Medyayı Yansıtma</item>
+        <item>VPN Etkinleştirme</item>
+        <item>Duvar Kağıdı Yazma</item>
+        <item>Asistan Yapısı</item>
+        <item>Asistan Ekran Görüntüsü</item>
+        <item>Telefon Durumunu Okuma</item>
+        <item>Sesli Mesaj Ekleme</item>
+        <item>SIP Kullanma</item>
+        <item>Giden Çağrıyı İşleme</item>
+        <item>Parmak İzi</item>
+        <item>Vücut Sensörleri</item>
+        <item>Hücresel Yayınları Okuma</item>
+        <item>Sahte Konum</item>
+        <item>Depolamayı Okuma</item>
+        <item>Depolamaya Yazma</item>
+        <item>Ekranı Aç</item>
+        <item>Hesapları Alma</item>
+        <item>Arka Planda Çalıştırma</item>
+        <item>Erişilebilirlik Ses Seviyesi</item>
+        <item>Telefon Numarasını Okuma</item>
+        <item>Paket Yükleme</item>
+        <item>Resim İçinde Resim (PiP) Modu</item>
+        <item>Anlık Uygulamayı Ön Planda Başlatma</item>
+        <item>Gelen Telefon Çağrılarını Yanıtlama</item>
+        <item>Arka Planda Görev Çalıştırma</item>
+        <item>Wi-Fi Bağlantı Durumunu Değiştirme</item>
+        <item>Paket Yükleyici Aracılığıyla Paket Silme İsteğinde Bulunma</item>
+        <item>Bir Erişilebilirlik Hizmetine Bağlanma</item>
+        <item>Başka Bir Uygulamadan Gelen Çağrıyı Devretmeye Devam Etme</item>
+        <item>IPsec Tünelleri Oluşturma ve Yönetme</item>
+        <item>Herhangi Bir Uygulamanın Ön Plan Hizmetini Başlatması</item>
+        <item>Bluetooth Tarama</item>
 
-    <item>BiometricPrompt Kullanımı</item>
-    <item>Fiziksel Aktivite Tanıma</item>
-    <item>Finansal Uygulama SMS Okuma</item>
-    <item>Ses Türündeki Medyayı Okuma</item>
-    <item>Ses Türündeki Medyaya Yazma</item>
-    <item>Video Türündeki Medyayı Okuma</item>
-    <item>Video Türündeki Medyaya Yazma</item>
-    <item>Görsel (Resim) Türündeki Medyayı Okuma</item>
-    <item>Görsel (Resim) Türündeki Medyaya Yazma</item>
-    <item>Eski Depolama Görünümüne Sahip</item>
-    <item>Erişilebilirlik Özelliklerine Erişim</item>
-    <item>Cihaz Tanımlayıcılarını Okuma</item>
+        <item>BiometricPrompt Kullanımı</item>
+        <item>Fiziksel Aktivite Tanıma</item>
+        <item>Finansal Uygulama SMS Okuma</item>
+        <item>Ses Türündeki Medyayı Okuma</item>
+        <item>Ses Türündeki Medyaya Yazma</item>
+        <item>Video Türündeki Medyayı Okuma</item>
+        <item>Video Türündeki Medyaya Yazma</item>
+        <item>Görsel (Resim) Türündeki Medyayı Okuma</item>
+        <item>Görsel (Resim) Türündeki Medyaya Yazma</item>
+        <item>Eski Depolama Görünümüne Sahip</item>
+        <item>Erişilebilirlik Özelliklerine Erişim</item>
+        <item>Cihaz Tanımlayıcılarını Okuma</item>
 
-    <item>Medya Konumuna Erişim</item>
-    <item>Tüm Paketleri Sorgulama</item>
-    <item>Tüm Harici Depolamaya Erişim</item>
-    <item>Profiller Arası Etkileşim</item>
-    <item>Platform VPN\'i Etkinleştirme</item>
-    <item>Yükleyici Kullanım İstatistikleri</item>
-    <item>Yer Tutucu</item>
-    <item>Kullanılmadığında İzinleri Otomatik İptal Etme</item>
-    <item>Yükleyici Tarafından Yönetilen Otomatik İzin İptali</item>
-    <item>İzole Depolama Yok</item>
+        <item>Medya Konumuna Erişim</item>
+        <item>Tüm Paketleri Sorgulama</item>
+        <item>Tüm Harici Depolamaya Erişim</item>
+        <item>Profiller Arası Etkileşim</item>
+        <item>Platform VPN\'i Etkinleştirme</item>
+        <item>Yükleyici Kullanım İstatistikleri</item>
+        <item>Yer Tutucu</item>
+        <item>Kullanılmadığında İzinleri Otomatik İptal Etme</item>
+        <item>Yükleyici Tarafından Yönetilen Otomatik İzin İptali</item>
+        <item>İzole Depolama Yok</item>
 
-    <item>Paket Bilgilerini Alma</item>
-    <item>Ekran Parlaklığı</item>
-    <item>Yüklü Uygulamaları Alma</item>
-    <item>Intent Etkinliklerini Sorgulama</item>
-    <item>Konum</item>
-    <item>Sensor Olaylarını Alma</item>
-</string-array>
+        <item>Paket Bilgilerini Alma</item>
+        <item>Ekran Parlaklığı</item>
+        <item>Yüklü Uygulamaları Alma</item>
+        <item>Intent Etkinliklerini Sorgulama</item>
+        <item>Konum</item>
+        <item>Sensor Olaylarını Alma</item>
+    </string-array>
 
     <string name="module_ops_category_location">Konum</string>
     <string name="module_ops_category_personal">Kişisel</string>

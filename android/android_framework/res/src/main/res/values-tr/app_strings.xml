@@ -1,827 +1,867 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="service_default_notification_channel">Default</string>
-    <string name="service_silence_notification_channel">Quiet</string>
-    <string name="service_important_notification_channel">Important</string>
+    <string name="service_default_notification_channel">Varsayılan</string>
+    <string name="service_silence_notification_channel">Sessiz</string>
+    <string name="service_important_notification_channel">Önemli</string>
 
     <string name="service_notification_override_thanos">Thanox</string>
 
-    <string name="service_notification_title_bg_restrict_process_changed">Process to clear</string>
-    <string name="service_notification_content_bg_restrict_process_changed">%1$s and %2$s background apps can be clean up</string>
-    <string name="service_notification_bg_tasks_clean_complete">Some app background process has been cleaned</string>
-    <string name="service_notification_action_bg_restrict_process_changed_clear">Clean up</string>
-    <string name="service_notification_action_bg_restrict_process_changed_view">Details</string>
+    <string name="service_notification_title_bg_restrict_process_changed">Temizlenecek işlem</string>
+    <string name="service_notification_content_bg_restrict_process_changed">%1$s ve %2$s arka plan uygulamaları temizlenebilir</string>
+    <string name="service_notification_bg_tasks_clean_complete">Bazı uygulamaların arka plan işlemleri temizlendi</string>
+    <string name="service_notification_action_bg_restrict_process_changed_clear">Temizle</string>
+    <string name="service_notification_action_bg_restrict_process_changed_view">Detaylar</string>
 
-    <string name="service_notification_title_op_start_remind">%1$s is using op %2$s</string>
+    <string name="service_notification_title_op_start_remind">%1$s, %2$s işlemini kullanıyor</string>
 
-    <string name="service_op_label_camera">Camera</string>
-    <string name="service_op_label_record_audio">Record audio</string>
-    <string name="service_op_label_play_audio">Play audio</string>
-    <string name="service_op_label_location">Location</string>
-    <string name="service_op_label_read_clipboard">Read clipboard</string>
-    <string name="service_op_label_write_clipboard">Write clipboard</string>
-    <string name="service_op_remind_prefix">Privacy Watcher: </string>
+    <string name="service_op_label_camera">Kamera</string>
+    <string name="service_op_label_record_audio">Ses kaydı</string>
+    <string name="service_op_label_play_audio">Ses çalma</string>
+    <string name="service_op_label_location">Konum</string>
+    <string name="service_op_label_read_clipboard">Panoyu okuma</string>
+    <string name="service_op_label_write_clipboard">Panoya yazma</string>
+    <string name="service_op_remind_prefix">Gizlilik İzleyicisi: </string>
 
-    <string name="service_toast_current_component_copied_to_clipboard">Content has been copied to clipboard</string>
+    <string name="service_toast_current_component_copied_to_clipboard">İçerik panoya kopyalandı</string>
 
-    <string name="service_notification_title_need_restart">Restart</string>
-    <string name="service_notification_message_need_restart">Please restart your device ASAP</string>
-    <string name="service_notification_action_restart_now">Restart now</string>
+    <string name="service_notification_title_need_restart">Yeniden Başlat</string>
+    <string name="service_notification_message_need_restart">Lütfen cihazınızı en kısa sürede yeniden başlatın</string>
+    <string name="service_notification_action_restart_now">Şimdi yeniden başlat</string>
 
-    <string name="service_notification_title_data_restore">Data restore</string>
-    <string name="service_notification_message_data_restore_restore_component_states">Restoring app component settings</string>
+    <string name="service_notification_title_data_restore">Veri Geri Yükleme</string>
+    <string name="service_notification_message_data_restore_restore_component_states">Uygulama bileşen ayarları geri yükleniyor</string>
 
-    <string name="service_notification_title_app_protect">App protect</string>
-    <string name="service_notification_message_app_uninstall_blocked">Uninstall/Clear %1$s has been prevented</string>
-    <string name="service_notification_message_app_clear_data_blocked">Uninstall/Clear %1$s app data has been prevented</string>
-    <string name="service_notification_message_app_update_blocked">Update %1$s app has been prevented</string>
+    <string name="service_notification_title_app_protect">Uygulama Koruması</string>
+    <string name="service_notification_message_app_uninstall_blocked">%1$s kaldırılması/temizlenmesi engellendi</string>
+    <string name="service_notification_message_app_clear_data_blocked">%1$s uygulama verilerinin temizlenmesi engellendi</string>
+    <string name="service_notification_message_app_update_blocked">%1$s uygulamasının güncellenmesi engellendi</string>
 
-    <string name="service_notification_title_thanox_active">Thanox is active</string>
-    <string name="service_notification_message_thanox_active">Thanox %1$s is up!</string>
+    <string name="service_notification_title_thanox_active">Thanox Aktif</string>
+    <string name="service_notification_message_thanox_active">Thanox %1$s çalışıyor!</string>
 
-    <string name="service_notification_message_thanox_app_enabled_on_create">Smart freeze: %1$s is enabled on Launch request</string>
+    <string name="service_notification_message_thanox_app_enabled_on_create">Akıllı dondurma: %1$s başlatma isteği üzerine etkinleştirildi</string>
 
-    <string name="service_app_set_all">All</string>
-    <string name="service_app_set_system">System</string>
-    <string name="service_app_set_system_uid">System Core</string>
-    <string name="service_app_set_3rd">3-rd</string>
-    <string name="service_app_set_media">System Media</string>
-    <string name="service_app_set_phone">System Phone</string>
-    <string name="service_app_set_web_provider">WebView Provider</string>
-    <string name="service_app_set_shortcut_proxy">Shortcut Proxy</string>
-    <string name="service_app_set_white_listed">Allow Listed</string>
-    <string name="service_app_set_white_listed_user">Custom Allow List</string>
-    <string name="service_app_set_white_listed_user_description">Your custom Allow list, will exclude these apps in all feature page app list</string>
-    <string name="service_app_set_disabled">Disabled</string>
+    <string name="service_app_set_all">Tümü</string>
+    <string name="service_app_set_system">Sistem</string>
+    <string name="service_app_set_system_uid">Sistem Çekirdeği</string>
+    <string name="service_app_set_3rd">Üçüncü Taraf</string>
+    <string name="service_app_set_media">Sistem Medya</string>
+    <string name="service_app_set_phone">Sistem Telefon</string>
+    <string name="service_app_set_web_provider">WebView Sağlayıcı</string>
+    <string name="service_app_set_shortcut_proxy">Kısayol Proxy</string>
+    <string name="service_app_set_white_listed">İzin Verilen</string>
+    <string name="service_app_set_white_listed_user">Özel İzin Listesi</string>
+    <string name="service_app_set_white_listed_user_description">Özel izin listeniz, bu uygulamaları tüm özellik sayfalarındaki uygulama listesinden hariç tutacaktır</string>
+    <string name="service_app_set_disabled">Devre Dışı</string>
 
-    <string name="service_dialog_title_thanox_removed">Thanox Uninstalled</string>
-    <string name="service_dialog_message_thanox_removed">Do you want to keep it\'s core data? the whole data will be removed if you don\'t want to keep it.</string>
-    <string name="service_dialog_button_thanox_removed_keep_data">Keep</string>
-    <string name="service_dialog_button_thanox_removed_remove_data">Remove</string>
+    <string name="service_dialog_title_thanox_removed">Thanox Kaldırıldı</string>
+    <string name="service_dialog_message_thanox_removed">Çekirdek verilerini saklamak istiyor musunuz? Eğer saklamazsanız tüm veriler kaldırılacaktır.</string>
+    <string name="service_dialog_button_thanox_removed_keep_data">Sakla</string>
+    <string name="service_dialog_button_thanox_removed_remove_data">Kaldır</string>
 
-    <string name="service_smart_freeze_app_freezed">Smart freeze: freezing %s</string>
-    <string name="service_smart_freeze_app_unfreezed">Smart freeze: un-freeze %s</string>
+    <string name="service_smart_freeze_app_freezed">Akıllı dondurma: %s donduruluyor</string>
+    <string name="service_smart_freeze_app_unfreezed">Akıllı dondurma: %s çözüldü</string>
 
-    <string name="billing_state_row_not_trust_title">Un-Trusted</string>
-    <string name="billing_state_row_not_trust_message">Thanox may come from untrusted installations, Pro versions are only available in the Google play store, and should not be installed from any other source. \n\nNote: Untrusted installations can cause devices to become abnormally stuck, configuration data loss!!!
-</string>
+    <string name="billing_state_row_not_trust_title">Güvenilmez</string>
+    <string name="billing_state_row_not_trust_message">Thanox, güvenilmeyen yüklemelerden gelmiş olabilir. Pro sürümleri yalnızca Google Play Store\'da mevcuttur ve başka kaynaklardan yüklenmemelidir. \n\nNot: Güvenilmeyen yüklemeler, cihazın anormal şekilde takılmasına ve yapılandırma verilerinin kaybolmasına neden olabilir!!!</string>
 
-    <string name="app_select_activate_method">Which activation method do you prefer?</string>
+    <string name="app_select_activate_method">Hangi etkinleştirme yöntemini tercih ediyorsunuz?</string>
 
     <!--    Locker-->
-    <string name="module_locker_app_name">Kilitle</string>
-    <string name="module_locker_verify_input_password">Kilidini aç %1$s</string>
-    <string name="module_locker_menu_search">Arama</string>
+    <string name="module_locker_app_name">Kilit</string>
+    <string name="module_locker_verify_input_password">%1$s Kilidini Aç</string>
+    <string name="module_locker_menu_search">Ara</string>
 
     <string name="module_locker_title_settings">Ayarlar</string>
     <string name="module_locker_title_security">Güvenlik</string>
-    <string name="module_locker_title_re_verify_on_screen_off">Kilit ekranından sonra yeniden kimlik doğrulaması yapın</string>
-    <string name="module_locker_title_re_verify_on_task_removed">görev kaldırma yeniden doğrulama</string>
-    <string name="module_locker_title_re_verify_on_app_switch">Uygulama anahtarı yeniden kimlik doğrulaması</string>
-    <string name="module_locker_title_verify_workaround_enabled">Kararlı kilit açma yöntemi</string>
-    <string name="module_locker_summary_re_verify_on_screen_off">Ekran kilitlendiğinde, kilidi açılmış uygulamalar yeniden kilitlenir</string>
-    <string name="module_locker_summary_re_verify_on_task_removed">Bir uygulama görevi kaldırıldığında, örneğin, son görevler sayfasında uygulama temizlendiğinde, uygulama yeniden kilitlenecektir.</string>
-    <string name="module_locker_summary_re_verify_on_app_switch">Kilidi açılmış bir uygulama arka plana sonlandırıldığında, uygulama yeniden kilitlenir</string>
+    <string name="module_locker_title_re_verify_on_screen_off">Ekran kapandığında doğrula</string>
+    <string name="module_locker_title_re_verify_on_task_removed">Görev kaldırıldığında doğrula</string>
+    <string name="module_locker_title_re_verify_on_app_switch">Uygulama değiştirildiğinde doğrula</string>
+    <string name="module_locker_title_verify_workaround_enabled">Geçici çözümü etkinleştir</string>
+    <string name="module_locker_summary_re_verify_on_screen_off">Ekran kilitlendiğinde, önceden açılmış uygulamalar tekrar kilitlenecektir.</string>
+    <string name="module_locker_summary_re_verify_on_task_removed">Bir uygulamanın görevi kaldırıldığında, örneğin son kullanılan uygulamalar listesinden temizlendiğinde, uygulama tekrar kilitlenecektir.</string>
+    <string name="module_locker_summary_re_verify_on_app_switch">Önceden açılmış bir uygulama arka plana alındığında, uygulama tekrar kilitlenecektir.</string>
+    <string name="module_locker_summary_white_list_components">İzin verilen listedeki aktiviteler kilitlenmeyecek</string>
+    <string name="module_locker_title_white_list_components">İzin verilen bileşenler</string>
+    <string name="module_locker_title_verify_method">Doğrulama yöntemi</string>
+    <string name="module_locker_title_verify_system">Sistemi Takip Et</string>
+    <string name="module_locker_title_verify_custom_pattern">Özel Desen</string>
+    <string name="module_locker_title_verify_custom_pin">Özel PIN</string>
+    <string name="module_locker_title_verify_custom_pattern_settings">Desen ayarları</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_warn">Lütfen şifrenizi hatırlayın. Bir kez ayarlandıktan sonra şifre geri alınamaz.</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_1">Deseni çizin</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_2">Deseni tekrar çizin</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_mismatch">İki desen eşleşmiyor.</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_set_complete">Desen ayarlandı</string>
 
-    <string name="module_locker_biometric_not_set_dialog_title">Şifreyi Belirle</string>
-    <string name="module_locker_biometric_not_set_dialog_message">Uygulama Kilidi\'ni etkinleştirmeden önce, yüz, parmak izi, PIN veya desen şifre ayarlarını tamamlamak için lütfen sistem güvenlik ayarlarına gidin.</string>
+    <string name="module_locker_biometric_not_set_dialog_title">Şifre belirleyin</string>
+    <string name="module_locker_biometric_not_set_dialog_message">Uygulama kilidini etkinleştirmeden önce, lütfen sistem güvenlik ayarlarına giderek yüz tanıma, parmak izi, PIN veya desen şifresini tamamlayın.</string>
 
-    <string name="module_locker_summary_white_list_components">Activity in Allow list will not be locked</string>
-    <string name="module_locker_title_white_list_components">Allowed components</string>
-    <string name="module_locker_title_verify_method">Verify method</string>
-    <string name="module_locker_title_verify_system">Follow System</string>
-    <string name="module_locker_title_verify_custom_pattern">Custom Pattern</string>
-    <string name="module_locker_title_verify_custom_pin">Custom PIN</string>
-    <string name="module_locker_title_verify_custom_pattern_settings">Pattern settings</string>
-    <string name="module_locker_title_verify_custom_pattern_settings_warn">Please remember your password. Once set, the password cannot be recovered.</string>
-    <string name="module_locker_title_verify_custom_pattern_settings_draw_1">Draw pattern</string>
-    <string name="module_locker_title_verify_custom_pattern_settings_draw_2">Draw pattern again</string>
-    <string name="module_locker_title_verify_custom_pattern_settings_draw_mismatch">Two patterns do not match.</string>
-    <string name="module_locker_title_verify_custom_pattern_settings_draw_set_complete">Patterns has been set</string>
-
-    <string name="module_ops2_ops_list_title">All Permissions</string>
-    <string name="module_ops2_perm_state_allow">Allow</string>
-    <string name="module_ops2_perm_state_deny">Deny</string>
-    <string name="module_ops2_perm_state_deny_summary">Deny permissions and do not ask again</string>
-    <string name="module_ops2_perm_state_ignore">Ignore</string>
-    <string name="module_ops2_perm_state_ignore_summary">Grant permission but ignore operations or return empty data</string>
-    <string name="module_ops2_perm_state_ask">Ask</string>
-    <string name="module_ops2_perm_state_foreground">Allow during use</string>
-    <string name="module_ops2_perm_state_default">Default</string>
-    <string name="module_ops2_perm_state_not_set">Not Set</string>
-    <string name="module_ops2_perm_state_unknown">Unknown</string>
-
-    <string-array name="module_ops2_app_ops_summaries">
-        <item>""</item>
-        <item>""</item>
-        <item>""</item>
-        <item>"Vibration"</item>
-        <item>"Read Contacts"</item>
-        <item>"Modify Contacts"</item>
-        <item>"Read Call Logs"</item>
-        <item>"Modify Call Logs"</item>
-        <item>"Read Calendar"</item>
-        <item>"Modify Calendar"</item>
-        <item>"WLAN Scan"</item>
-        <item>"Notifications"</item>
-        <item>"Mobile Network Scan"</item>
-        <item>"Make Phone Calls"</item>
-        <item>"Read SMS"</item>
-        <item>"Write SMS"</item>
-        <item>"Receive SMS"</item>
-        <item>"Receive Emergency SMS"</item>
-        <item>"Receive MMS"</item>
-        <item>"Receive WAP PUSH Messages"</item>
-        <item>"Send SMS"</item>
-        <item>"Read ICC SMS"</item>
-        <item>"Write ICC SMS"</item>
-        <item>"Modify Settings"</item>
-        <item>"Display on Top"</item>
-        <item>"Access Notifications"</item>
-        <item>"Camera"</item>
-        <item>"Record Audio"</item>
-        <item>"Play Audio"</item>
-        <item>"Read Clipboard Content"</item>
-        <item>"Modify Clipboard Content"</item>
-        <item>"Media Buttons"</item>
-        <item>"Audio Focus"</item>
-        <item>"Master Volume"</item>
-        <item>"Voice Volume"</item>
-        <item>"Ringtone Volume"</item>
-        <item>"Media Volume"</item>
-        <item>"Alarm Volume"</item>
-        <item>"Notification Volume"</item>
-        <item>"Bluetooth Volume"</item>
-        <item>"Keep Awake"</item>
-        <item>"Monitor Location"</item>
-        <item>"Monitor High-Power Location Services"</item>
-        <item>"Get Usage Stats"</item>
-        <item>"Mute or Unmute Microphone"</item>
-        <item>"Display Greeting"</item>
-        <item>"Project Media"</item>
-        <item>"Activate VPN"</item>
-        <item>"Write Wallpaper"</item>
-        <item>"Assist Structure"</item>
-        <item>"Assist Screenshot"</item>
-        <item>"Read Phone State"</item>
-        <item>"Add Voicemail"</item>
-        <item>"Use SIP"</item>
-        <item>"Handle Outgoing Calls"</item>
-        <item>"Fingerprint"</item>
-        <item>"Body Sensors"</item>
-        <item>"Read Cell Broadcasts"</item>
-        <item>"Mock Location"</item>
-        <item>"Read Storage"</item>
-        <item>"Write Storage"</item>
-        <item>"Turn On Screen"</item>
-        <item>"Get Accounts"</item>
-        <item>"Run in Background"</item>
-        <item>"Accessibility Volume"</item>
-
-        <item>Read phone number</item>
-        <item>Request to install applications</item>
-        <item>Picture in picture</item>
-        <item>Instant app start foreground</item>
-        <item>Answer incoming phone calls</item>
-        <item>Run tasks in the background</item>
-        <item>Change Wifi connection state</item>
-        <item>Request package deletion through package installer</item>
-        <item>Bind an accessibility service</item>
-        <item>Continue handover of a call from another app</item>
-        <item>Create and manage IPsec tunnels</item>
-        <item>Any app start foreground service</item>
-        <item>Bluetooth scan</item>
-        <item>Use the BiometricPrompt/BiometricManager APIs</item>
-        <item>Physical activity recognition</item>
-        <item>Financial app SMS read</item>
-        <item>Read media of audio type</item>
-        <item>Write media of audio type</item>
-        <item>Read media of video type</item>
-        <item>Write media of video type</item>
-        <item>Read media of image type</item>
-        <item>Write media of image type</item>
-        <item>Has a legacy (non-isolated) view of storage</item>
-        <item>Use accessibility features</item>
-        <item>Read device information (IMEI/MEID, IMSI, SIM/Build serial)</item>
-        <item>Access media location</item>
-        <item>Query all packages</item>
-        <item>Access all external storage</item>
-        <item>Interact across profiles</item>
-        <item>Activate platform VPN</item>
-        <item>Loader usage stats</item>
-        <item>Placeholder</item>
-        <item>Auto revoke permissions if unused</item>
-        <item>Auto revoke managed by installer</item>
-        <item>No isolated storage</item>
+    <string-array name="module_locker_verify_method_entries">
+        <item>@string/module_locker_title_verify_system</item>
+        <item>@string/module_locker_title_verify_custom_pattern</item>
+        <item>@string/module_locker_title_verify_custom_pin</item>
     </string-array>
 
-    <string-array name="module_ops2_app_ops_labels">
-        <item>"Coarse Location"</item>
-        <item>"Precise Location"</item>
-        <item>"GPS"</item>
-        <item>"Vibration"</item>
-        <item>"Read Contacts"</item>
-        <item>"Modify Contacts"</item>
-        <item>"Read Call Logs"</item>
-        <item>"Modify Call Logs"</item>
-        <item>"Read Calendar"</item>
-        <item>"Modify Calendar"</item>
-        <item>"Location"</item>
-        <item>"Post Notifications"</item>
-        <item>"Location"</item>
-        <item>"Make Phone Calls"</item>
-        <item>"Read SMS/MMS"</item>
-        <item>"Write SMS/MMS"</item>
-        <item>"Receive SMS/MMS"</item>
-        <item>"Receive SMS/MMS"</item>
-        <item>"Receive SMS/MMS"</item>
-        <item>"Receive SMS/MMS"</item>
-        <item>"Send SMS/MMS"</item>
-        <item>"Read SMS/MMS"</item>
-        <item>"Write SMS/MMS"</item>
-        <item>"Modify Settings"</item>
-        <item>"Display on Top"</item>
-        <item>"Access Notifications"</item>
-        <item>"Camera"</item>
-        <item>"Record Audio"</item>
-        <item>"Play Audio"</item>
-        <item>"Read Clipboard Content"</item>
-        <item>"Modify Clipboard Content"</item>
-        <item>"Media Buttons"</item>
-        <item>"Audio Focus"</item>
-        <item>"Master Volume"</item>
-        <item>"Voice Volume"</item>
-        <item>"Ringtone Volume"</item>
-        <item>"Media Volume"</item>
-        <item>"Alarm Volume"</item>
-        <item>"Notification Volume"</item>
-        <item>"Bluetooth Volume"</item>
-        <item>"Keep Awake"</item>
-        <item>"Location"</item>
-        <item>"Location Information"</item>
-        <item>"Get Usage Stats"</item>
-        <item>"Mute or Unmute Microphone"</item>
-        <item>"Display Greeting"</item>
-        <item>"Project Media"</item>
-        <item>"Activate VPN"</item>
-        <item>"Write Wallpaper"</item>
-        <item>"Assist Structure"</item>
-        <item>"Assist Screenshot"</item>
-        <item>"Read Phone State"</item>
-        <item>"Add Voicemail"</item>
-        <item>"Use SIP"</item>
-        <item>"Handle Outgoing Calls"</item>
-        <item>"Fingerprint"</item>
-        <item>"Body Sensors"</item>
-        <item>"Read Cell Broadcasts"</item>
-        <item>"Mock Location"</item>
-        <item>"Read Storage"</item>
-        <item>"Write Storage"</item>
-        <item>"Turn On Screen"</item>
-        <item>"Get Accounts"</item>
-        <item>"Run in Background"</item>
-        <item>"Accessibility Volume"</item>
-        <item>Read phone number</item>
-        <item>Install applications</item>
-        <item>Picture in picture</item>
-        <item>Instant app start foreground</item>
-        <item>Answer incoming phone calls</item>
-        <item>Run tasks in the background</item>
-        <item>Change Wifi connection state</item>
-        <item>Request package deletion through package installer</item>
-        <item>Bind an accessibility service</item>
-        <item>Continue handover of a call from another app</item>
-        <item>Create and Manage IPsec Tunnels</item>
-        <item>Any app start foreground service</item>
-        <item>Bluetooth scan</item>
-        <item>Use BiometricPrompt</item>
-        <item>Physical activity recognition</item>
-        <item>Financial app SMS read</item>
-        <item>Read media of audio type</item>
-        <item>Write media of audio type</item>
-        <item>Read media of video type</item>
-        <item>Write media of video type</item>
-        <item>Read media of image type</item>
-        <item>Write media of image type</item>
-        <item>Has a legacy view of storage</item>
-        <item>Use accessibility features</item>
-        <item>Read device information</item>
-        <item>Access media location</item>
-        <item>Query all packages</item>
-        <item>Access all external storage</item>
-        <item>Interact across profiles</item>
-        <item>Activate platform VPN</item>
-        <item>Loader usage stats</item>
-        <item>Placeholder</item>
-        <item>Auto revoke permissions if unused</item>
-        <item>Auto revoke managed by installer</item>
-        <item>No isolated storage</item>
+    <string-array name="module_locker_verify_method_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
-    <string name="active_method_chooser_summary_xposed_magisk">For rooted devices, requires Magisk or LSPosed framework; LSPosed mode provides the most features, while Magisk mode has relatively fewer features.</string>
-    <string name="active_method_chooser_summary_shizuku">For non-rooted devices, requires Shizuku and selecting Thanox within Shizuku; Note: Due to system permission restrictions, the Shizuku mode has very limited features.</string>
+<string-array name="module_ops2_app_ops_summaries">
+    <item>""</item>
+    <item>""</item>
+    <item>""</item>
+    <item>"Titreşim"</item>
+    <item>"Kişileri Okuma"</item>
+    <item>"Kişileri Değiştirme"</item>
+    <item>"Arama Kayıtlarını Okuma"</item>
+    <item>"Arama Kayıtlarını Değiştirme"</item>
+    <item>"Takvimi Okuma"</item>
+    <item>"Takvimi Değiştirme"</item>
+    <item>"WLAN Tarama"</item>
+    <item>"Bildirimler"</item>
+    <item>"Mobil Ağ Tarama"</item>
+    <item>"Telefon Görüşmesi Yapma"</item>
+    <item>"SMS Okuma"</item>
+    <item>"SMS Yazma"</item>
+    <item>"SMS Alma"</item>
+    <item>"Acil Durum SMS\'lerini Alma"</item>
+    <item>"MMS Alma"</item>
+    <item>"WAP PUSH Mesajlarını Alma"</item>
+    <item>"SMS Gönderme"</item>
+    <item>"ICC SMS Okuma"</item>
+    <item>"ICC SMS Yazma"</item>
+    <item>"Ayarları Değiştirme"</item>
+    <item>"Üstte Görüntüleme"</item>
+    <item>"Bildirimlere Erişim"</item>
+    <item>"Kamera"</item>
+    <item>"Ses Kaydı"</item>
+    <item>"Ses Çalma"</item>
+    <item>"Pano İçeriğini Okuma"</item>
+    <item>"Pano İçeriğini Değiştirme"</item>
+    <item>"Medya Düğmeleri"</item>
+    <item>"Ses Odaklanması"</item>
+    <item>"Ana Ses Seviyesi"</item>
+    <item>"Sesli Arama Ses Seviyesi"</item>
+    <item>"Zil Sesi Seviyesi"</item>
+    <item>"Medya Ses Seviyesi"</item>
+    <item>"Alarm Ses Seviyesi"</item>
+    <item>"Bildirim Ses Seviyesi"</item>
+    <item>"Bluetooth Ses Seviyesi"</item>
+    <item>"Uyanık Tut"</item>
+    <item>"Konumu İzleme"</item>
+    <item>"Yüksek Güçlü Konum Hizmetlerini İzleme"</item>
+    <item>"Kullanım İstatistiklerini Alma"</item>
+    <item>"Mikrofonu Sessize Alma veya Açma"</item>
+    <item>"Karşılama Mesajı Gösterme"</item>
+    <item>"Medyayı Yansıtma"</item>
+    <item>"VPN Etkinleştirme"</item>
+    <item>"Duvar Kağıdı Yazma"</item>
+    <item>"Asistan Yapısı"</item>
+    <item>"Asistan Ekran Görüntüsü"</item>
+    <item>"Telefon Durumunu Okuma"</item>
+    <item>"Sesli Mesaj Ekleme"</item>
+    <item>"SIP Kullanma"</item>
+    <item>"Giden Aramaları Yönetme"</item>
+    <item>"Parmak İzi"</item>
+    <item>"Vücut Sensörleri"</item>
+    <item>"Hücresel Yayınları Okuma"</item>
+    <item>"Sahte Konum Kullanma"</item>
+    <item>"Depolamayı Okuma"</item>
+    <item>"Depolamaya Yazma"</item>
+    <item>"Ekranı Açma"</item>
+    <item>"Hesapları Alma"</item>
+    <item>"Arka Planda Çalıştırma"</item>
+    <item>"Erişilebilirlik Ses Seviyesi"</item>
 
+    <item>Telefon numarasını okuma</item>
+    <item>Uygulama yükleme isteğinde bulunma</item>
+    <item>Resim içinde resim (PiP) modu</item>
+    <item>Anlık uygulamayı ön planda başlatma</item>
+    <item>Gelen telefon çağrılarını yanıtlama</item>
+    <item>Arka planda görev çalıştırma</item>
+    <item>WiFi bağlantı durumunu değiştirme</item>
+    <item>Paket yükleyici aracılığıyla paket silme isteğinde bulunma</item>
+    <item>Bir erişilebilirlik hizmetine bağlanma</item>
+    <item>Başka bir uygulamadan gelen çağrıyı devretmeye devam etme</item>
+    <item>IPsec tünelleri oluşturma ve yönetme</item>
+    <item>Herhangi bir uygulamanın ön plan hizmetini başlatması</item>
+    <item>Bluetooth tarama</item>
+    <item>BiometricPrompt/BiometricManager API\'lerini kullanma</item>
+    <item>Fiziksel aktivite tanıma</item>
+    <item>Finansal uygulama SMS\'lerini okuma</item>
+    <item>Ses türündeki medyayı okuma</item>
+    <item>Ses türündeki medyaya yazma</item>
+    <item>Video türündeki medyayı okuma</item>
+    <item>Video türündeki medyaya yazma</item>
+    <item>Görsel (resim) türündeki medyayı okuma</item>
+    <item>Görsel (resim) türündeki medyaya yazma</item>
+    <item>Eski (izole olmayan) depolama görünümüne sahip</item>
+    <item>Erişilebilirlik özelliklerini kullanma</item>
+    <item>Cihaz bilgilerini okuma (IMEI/MEID, IMSI, SIM/Build seri numarası)</item>
+    <item>Medya konumuna erişim</item>
+    <item>Tüm paketleri sorgulama</item>
+    <item>Tüm harici depolamaya erişim</item>
+    <item>Profiller arası etkileşim</item>
+    <item>Platform VPN\'i etkinleştirme</item>
+    <item>Yükleyici kullanım istatistikleri</item>
+    <item>Yer tutucu</item>
+    <item>Kullanılmadığında izinleri otomatik iptal etme</item>
+    <item>Yükleyici tarafından yönetilen otomatik izin iptali</item>
+    <item>İzole depolama yok</item>
+</string-array>
+
+<string-array name="module_ops2_app_ops_labels">
+    <item>"Yaklaşık Konum"</item>
+    <item>"Kesin Konum"</item>
+    <item>"GPS"</item>
+    <item>"Titreşim"</item>
+    <item>"Kişileri Okuma"</item>
+    <item>"Kişileri Değiştirme"</item>
+    <item>"Arama Kayıtlarını Okuma"</item>
+    <item>"Arama Kayıtlarını Değiştirme"</item>
+    <item>"Takvimi Okuma"</item>
+    <item>"Takvimi Değiştirme"</item>
+    <item>"Konum"</item>
+    <item>"Bildirim Gönderme"</item>
+    <item>"Konum"</item>
+    <item>"Telefon Araması Yapma"</item>
+    <item>"SMS/MMS Okuma"</item>
+    <item>"SMS/MMS Yazma"</item>
+    <item>"SMS/MMS Alma"</item>
+    <item>"SMS/MMS Alma"</item>
+    <item>"SMS/MMS Alma"</item>
+    <item>"SMS/MMS Alma"</item>
+    <item>"SMS/MMS Gönderme"</item>
+    <item>"SMS/MMS Okuma"</item>
+    <item>"SMS/MMS Yazma"</item>
+    <item>"Ayarları Değiştirme"</item>
+    <item>"Üstte Görüntüleme"</item>
+    <item>"Bildirimlere Erişim"</item>
+    <item>"Kamera"</item>
+    <item>"Ses Kaydı"</item>
+    <item>"Ses Çalma"</item>
+    <item>"Pano İçeriğini Okuma"</item>
+    <item>"Pano İçeriğini Değiştirme"</item>
+    <item>"Medya Düğmeleri"</item>
+    <item>"Ses Odaklanması"</item>
+    <item>"Ana Ses Seviyesi"</item>
+    <item>"Sesli Arama Ses Seviyesi"</item>
+    <item>"Zil Sesi Seviyesi"</item>
+    <item>"Medya Ses Seviyesi"</item>
+    <item>"Alarm Ses Seviyesi"</item>
+    <item>"Bildirim Ses Seviyesi"</item>
+    <item>"Bluetooth Ses Seviyesi"</item>
+    <item>"Uyanık Tut"</item>
+    <item>"Konum"</item>
+    <item>"Konum Bilgisi"</item>
+    <item>"Kullanım İstatistiklerini Alma"</item>
+    <item>"Mikrofonu Sessize Alma veya Açma"</item>
+    <item>"Karşılama Mesajı Gösterme"</item>
+    <item>"Medyayı Yansıtma"</item>
+    <item>"VPN Etkinleştirme"</item>
+    <item>"Duvar Kağıdı Yazma"</item>
+    <item>"Asistan Yapısı"</item>
+    <item>"Asistan Ekran Görüntüsü"</item>
+    <item>"Telefon Durumunu Okuma"</item>
+    <item>"Sesli Mesaj Ekleme"</item>
+    <item>"SIP Kullanma"</item>
+    <item>"Giden Aramaları Yönetme"</item>
+    <item>"Parmak İzi"</item>
+    <item>"Vücut Sensörleri"</item>
+    <item>"Hücresel Yayınları Okuma"</item>
+    <item>"Sahte Konum Kullanma"</item>
+    <item>"Depolamayı Okuma"</item>
+    <item>"Depolamaya Yazma"</item>
+    <item>"Ekranı Açma"</item>
+    <item>"Hesapları Alma"</item>
+    <item>"Arka Planda Çalıştırma"</item>
+    <item>"Erişilebilirlik Ses Seviyesi"</item>
+    <item>"Telefon Numarasını Okuma"</item>
+    <item>"Uygulama Yükleme"</item>
+    <item>"Resim İçinde Resim (PiP) Modu"</item>
+    <item>"Anlık Uygulamayı Ön Planda Başlatma"</item>
+    <item>"Gelen Telefon Çağrılarını Yanıtlama"</item>
+    <item>"Arka Planda Görev Çalıştırma"</item>
+    <item>"WiFi Bağlantı Durumunu Değiştirme"</item>
+    <item>"Paket Yükleyici Aracılığıyla Paket Silme İsteğinde Bulunma"</item>
+    <item>"Bir Erişilebilirlik Hizmetine Bağlanma"</item>
+    <item>"Başka Bir Uygulamadan Gelen Çağrıyı Devretmeye Devam Etme"</item>
+    <item>"IPsec Tünelleri Oluşturma ve Yönetme"</item>
+    <item>"Herhangi Bir Uygulamanın Ön Plan Hizmetini Başlatması"</item>
+    <item>"Bluetooth Tarama"</item>
+    <item>"BiometricPrompt Kullanma"</item>
+    <item>"Fiziksel Aktivite Tanıma"</item>
+    <item>"Finansal Uygulama SMS\'lerini Okuma"</item>
+    <item>"Ses Türündeki Medyayı Okuma"</item>
+    <item>"Ses Türündeki Medyaya Yazma"</item>
+    <item>"Video Türündeki Medyayı Okuma"</item>
+    <item>"Video Türündeki Medyaya Yazma"</item>
+    <item>"Görsel (Resim) Türündeki Medyayı Okuma"</item>
+    <item>"Görsel (Resim) Türündeki Medyaya Yazma"</item>
+    <item>"Eski Depolama Görünümüne Sahip"</item>
+    <item>"Erişilebilirlik Özelliklerini Kullanma"</item>
+    <item>"Cihaz Bilgilerini Okuma"</item>
+    <item>"Medya Konumuna Erişim"</item>
+    <item>"Tüm Paketleri Sorgulama"</item>
+    <item>"Tüm Harici Depolamaya Erişim"</item>
+    <item>"Profiller Arası Etkileşim"</item>
+    <item>"Platform VPN\'i Etkinleştirme"</item>
+    <item>"Yükleyici Kullanım İstatistikleri"</item>
+    <item>"Yer Tutucu"</item>
+    <item>"Kullanılmadığında İzinleri Otomatik İptal Etme"</item>
+    <item>"Yükleyici Tarafından Yönetilen Otomatik İzin İptali"</item>
+    <item>"İzole Depolama Yok"</item>
+</string-array>
+
+    <string name="module_ops2_ops_list_title">Tüm İzinler</string>
+    <string name="module_ops2_perm_state_allow">İzin Ver</string>
+    <string name="module_ops2_perm_state_deny">Reddet</string>
+    <string name="module_ops2_perm_state_deny_summary">İzinleri reddet ve tekrar sorma</string>
+    <string name="module_ops2_perm_state_ignore">Yoksay</string>
+    <string name="module_ops2_perm_state_ignore_summary">İzni ver ancak işlemleri yoksay veya boş veri döndür</string>
+    <string name="module_ops2_perm_state_ask">Sor</string>
+    <string name="module_ops2_perm_state_foreground">Kullanım sırasında izin ver</string>
+    <string name="module_ops2_perm_state_default">Varsayılan</string>
+    <string name="module_ops2_perm_state_not_set">Ayarlanmadı</string>
+    <string name="module_ops2_perm_state_unknown">Bilinmeyen</string>
+
+    <string name="active_method_chooser_summary_xposed_magisk">Root erişimli cihazlar için, Magisk veya LSPosed çerçevesi gereklidir; LSPosed modu en fazla özelliği sunarken, Magisk modu nispeten daha az özelliğe sahiptir.</string>
+    <string name="active_method_chooser_summary_shizuku">Root erişimi olmayan cihazlar için, Shizuku gereklidir ve Thanox\'un Shizuku içinde seçilmesi gerekir; Not: Sistem izin kısıtlamaları nedeniyle, Shizuku modu oldukça sınırlı özelliklere sahiptir.</string>
 
     <string name="module_activity_trampoline_app_name">Activity Trampoline</string>
     <string name="module_activity_trampoline_app_name_abbr">Activity Tramp</string>
 
-    <string name="module_activity_trampoline_app_not_installed">Yüklü değil</string>
+    <string name="module_activity_trampoline_app_not_installed">Yüklenmedi</string>
 
     <string name="module_activity_trampoline_edit_dialog_title">Düzenle</string>
     <string name="module_activity_trampoline_add_dialog_title">Yeni</string>
-    <string name="module_activity_trampoline_add_dialog_hint_from">Orijinal Etkinlik</string>
-    <string name="module_activity_trampoline_add_dialog_hint_to">Aktiviteye Değiştir</string>
+    <string name="module_activity_trampoline_add_dialog_hint_from">Orijinal Aktivite</string>
+    <string name="module_activity_trampoline_add_dialog_hint_to">Değiştirilecek Aktivite</string>
     <string name="module_activity_trampoline_add_dialog_delete">Sil</string>
 
     <string name="module_activity_trampoline_add_empty_component">Boş içerik</string>
-    <string name="module_activity_trampoline_add_invalid_from_component">Orijinal etkinlik adı hatası</string>
-    <string name="module_activity_trampoline_add_invalid_to_component">Değiştirme etkinliği adı hatası</string>
+    <string name="module_activity_trampoline_add_invalid_from_component">Orijinal aktivite adı hatalı</string>
+    <string name="module_activity_trampoline_add_invalid_to_component">Değiştirilecek aktivite adı hatalı</string>
 
-    <string name="module_activity_trampoline_title_pull_from_server">Biraz kural formu hizmeti alın</string>
+    <string name="module_activity_trampoline_title_pull_from_server">Bazı kuralları servisten al</string>
     <string name="module_activity_trampoline_title_export_comp_replacements">Kurallarımı dışa aktar</string>
-    <string name="module_activity_trampoline_title_export_comp_replacement_item">Bu kuralı dışa aktarın</string>
+    <string name="module_activity_trampoline_title_export_comp_replacement_item">Bu kuralı dışa aktar</string>
     <string name="module_activity_trampoline_title_import_comp_replacements">Kuralları içe aktar</string>
 
-    <string name="common_menu_title_batch_select">Batch select</string>
-    <string name="common_menu_title_select_all">All yes</string>
-    <string name="common_menu_title_un_select_all">All no</string>
-    <string name="common_menu_title_search">search</string>
-    <string name="common_menu_title_rename">Rename</string>
-    <string name="common_menu_title_remove">Remove</string>
-    <string name="common_menu_title_uninstall">Uninstall</string>
+    <!-- Switch On/Off  -->
+    <string name="switch_on_text">Açık</string>
+    <string name="switch_off_text">Kapalı</string>
+
+    <string name="common_menu_title_batch_select">Toplu Seçim</string>
+    <string name="common_menu_title_select_all">Tümünü Seç</string>
+    <string name="common_menu_title_un_select_all">Tümünü Kaldır</string>
+    <string name="common_menu_title_select_all_in_this_page">Bu Sayfadakileri Seç</string>
+    <string name="common_menu_title_un_select_all_in_this_page">Bu Sayfadakileri Kaldır</string>
+    <string name="common_menu_title_search">Ara</string>
+    <string name="common_menu_title_rename">Yeniden Adlandır</string>
+    <string name="common_menu_title_remove">Kaldır</string>
+    <string name="common_menu_title_uninstall">Kaldır</string>
     <string name="common_menu_title_wiki">Wiki</string>
-    <string name="common_menu_title_import_from_clipboard">Import from clipboard</string>
-    <string name="common_menu_title_import">Import</string>
-    <string name="common_menu_title_re_import">Re-Import</string>
-    <string name="common_menu_title_update">Update</string>
-    <string name="common_menu_title_export_to_clipboard">Export to clipboard</string>
-    <string name="common_fab_title_done">Done</string>
-    <string name="common_fab_title_add">Add</string>
-    <string name="common_dialog_message_are_you_sure">Are you sure? Take care!</string>
+    <string name="common_menu_title_import_from_clipboard">Panodan İçeri Aktar</string>
+    <string name="common_menu_title_import">İçeri Aktar</string>
+    <string name="common_menu_title_re_import">Yeniden İçeri Aktar</string>
+    <string name="common_menu_title_update">Güncelle</string>
+    <string name="common_menu_title_export_to_clipboard">Panoya Dışa Aktar</string>
+    <string name="common_fab_title_done">Tamam</string>
+    <string name="common_fab_title_add">Ekle</string>
+    <string name="common_dialog_message_are_you_sure">Emin misiniz? Dikkatli olun!</string>
 
-    <string name="common_retry">Retry</string>
-    <string name="common_remember">Got</string>
-    <string name="common_tips">Tips</string>
-    <string name="common_tips_qut">Tips:</string>
+    <string name="common_retry">Tekrar Dene</string>
+    <string name="common_remember">Anladım</string>
+    <string name="common_tips">İpuçları</string>
+    <string name="common_tips_qut">İpucu:</string>
 
-    <string name="common_badge_text_experiment">EXP</string>
-    <string name="common_experiment_feature_warning_message">This feature is an experimental feature and is not yet stable. It is recommended that you back up your data before enabling this feature to prevent data loss due to unexpected bugs.</string>
+    <string name="common_badge_text_experiment">DENEYSEL</string>
+    <string name="common_experiment_feature_warning_message">Bu özellik deneysel olup henüz kararlı değildir. Beklenmedik hatalar nedeniyle veri kaybını önlemek için bu özelliği etkinleştirmeden önce verilerinizi yedeklemeniz önerilir.</string>
 
-    <string name="common_toast_copied_to_clipboard">Copied to clipboard</string>
+    <string name="common_toast_copied_to_clipboard">Panoya kopyalandı</string>
 
-    <string name="app_state_disabled">Disabled</string>
+    <string name="app_state_disabled">Devre Dışı</string>
 
-    <string name="chip_title_app_only_disabled">Disabled</string>
-    <string name="chip_title_app_only_enable">Enabled</string>
-    <string name="chip_title_app_only_running">Running</string>
-    <string name="chip_title_app_only_cloned_app">Cloned</string>
+    <string name="chip_title_app_only_disabled">Devre Dışı</string>
+    <string name="chip_title_app_only_enable">Etkin</string>
+    <string name="chip_title_app_only_running">Çalışıyor</string>
+    <string name="chip_title_app_only_cloned_app">Klonlandı</string>
 
-    <string name="app_picker_title">Pick app</string>
+    <string name="app_picker_title">Uygulama Seç</string>
 
-    <string name="common_text_value_not_set">Not set</string>
+    <string name="common_text_value_not_set">Ayarlanmadı</string>
 
-    <string name="common_network_error">Network unavailable, Please check your internet connection.</string>
-    <string name="common_server_error">Server error, Please try again later.</string>
-    <string name="common_generic_error">Oops. Something went wrong</string>
+    <string name="common_network_error">Ağ kullanılamıyor, lütfen internet bağlantınızı kontrol edin.</string>
+    <string name="common_server_error">Sunucu hatası, lütfen daha sonra tekrar deneyin.</string>
+    <string name="common_generic_error">Oops! Bir şeyler ters gitti</string>
 
-    <string name="common_text_wait_a_moment">Wait a moment</string>
+    <string name="common_text_wait_a_moment">Biraz bekleyin</string>
 
-    <string name="common_darg_sort">Drag to sort</string>
-    <string name="common_sort_reverse">Reverse</string>
-    <string name="common_sort_by_default">Default</string>
-    <string name="common_sort_by_install_time">Install time</string>
-    <string name="common_sort_by_update_time">Update time</string>
-    <string name="common_sort_by_last_used_time">Last used time</string>
-    <string name="common_sort_by_total_used_time">Total use time</string>
-    <string name="common_sort_by_install_app_label">App label</string>
-    <string name="common_sort_by_install_sdk_version">Target SDK</string>
-    <string name="common_sort_by_install_apk_size">Apk size</string>
+    <string name="common_darg_sort">Sürükleyerek Sırala</string>
+    <string name="common_sort_reverse">Ters</string>
+    <string name="common_sort_by_default">Varsayılan</string>
+    <string name="common_sort_by_install_time">Yükleme Zamanı</string>
+    <string name="common_sort_by_update_time">Güncelleme Zamanı</string>
+    <string name="common_sort_by_last_used_time">Son Kullanım Zamanı</string>
+    <string name="common_sort_by_total_used_time">Toplam Kullanım Süresi</string>
+    <string name="common_sort_by_install_app_label">Uygulama Etiketi</string>
+    <string name="common_sort_by_install_sdk_version">Hedef SDK</string>
+    <string name="common_sort_by_install_apk_size">APK Boyutu</string>
     <string name="common_sort_by_install_app_uid">UID</string>
 
-    <string name="common_switchbar_title_format">Use \"%s\"</string>
-    <string name="module_common_title_tools">Tools</string>
+    <string name="common_switchbar_title_format">"%s" Kullan</string>
+    <string name="module_common_title_tools">Araçlar</string>
 
-    <string name="module_common_error_occur">Error occur</string>
-    <string name="module_common_copy_error_message">Copy error</string>
+    <string name="module_common_error_occur">Hata Oluştu</string>
+    <string name="module_common_copy_error_message">Hata Kopyala</string>
 
-    <string name="module_common_no_data">No data</string>
+    <string name="module_common_no_data">Veri Yok</string>
 
-    <string name="module_common_user">User %s</string>
+    <string name="module_common_user">Kullanıcı %s</string>
 
-    <string name="module_notification_recorder_feature_title_notification_center">Bildirim Merkezi</string>
-    <string name="module_notification_recorder_feature_title_notification_recorder">Kayıt</string>
-    <string name="module_notification_recorder_item_no_title">Başlık yok</string>
-    <string name="module_notification_recorder_item_type_toast">Toast</string>
-    <string name="module_notification_recorder_item_type_n">Bildirim</string>
-    <string name="module_notification_recorder_item_type_clip">Pano</string>
-    <string name="module_notification_recorder_item_no_content">Bu bildirimin içeriği yok</string>
-    <string name="module_notification_recorder_item_uninstalled_app">Kaldırılan uygulama</string>
-    <string name="module_notification_recorder_total_message_count">%1$s Bildirimler</string>
-    <string name="module_notification_recorder_clear_all">Tümünü Temizle</string>
-    <string name="module_notification_recorder_toady">Bugün</string>
-    <string name="module_notification_recorder_before_today">Daha önce</string>
-    <string name="module_notification_recorder_settings">Ayarlar</string>
-    <string name="module_notification_recorder_export">Export</string>
-    <string name="module_notification_recorder_export_dialog_message">Export all notification records to Downloads</string>
-    <string name="module_notification_recorder_pref_summary_enable_toast_info">Toast görünümünde uygulama bilgilerini göster</string>
-    <string name="module_notification_recorder_pref_title_enable_toast_info">Toast bilgi</string>
-    <string name="module_notification_recorder_pref_title_enable_nr_n">Bildirimleri kaydet</string>
-    <string name="module_notification_recorder_pref_title_enable_nr_for_all_apps">Record all apps</string>
-    <string name="module_notification_recorder_pref_title_enable_nr_t">Tosts Kaydet</string>
-    <string name="module_notification_recorder_pref_title_enable_nr_clip">Kayıt Panosu</string>
+    <string-array name="module_common_export_selections">
+        <item>Pano</item>
+        <item>Dosya Seç</item>
+    </string-array>
 
-    <string name="module_notification_recorder_reproduce">Reproduce</string>
-    <string name="module_notification_recorder_zoom">Yakınlaştır</string>
-    <string name="module_notification_recorder_yesterday">Dün</string>
-    <string name="module_notification_recorder_the_day_before_yesterday">İki gün önce</string>
-    <string name="module_notification_recorder_stats">İstatistikler</string>
+    <string-array name="module_common_import_selections">
+        <item>Pano</item>
+        <item>Dosya Seç</item>
+    </string-array>
 
-    <string name="module_component_manager_disabled_by_thanox">Disabled via thanox</string>
-    <string name="module_component_manager_component_running">Running</string>
-    <string name="module_component_manager_feature_desc">Thanox use Android API to disable components, which means the disabled components will keep it\'s state even if thanox is uninstalled.\n\nThanox will prevent disabled composed from being enable by their host app, and you will see a badge [disabled-by-thanox] on these components.</string>
-    <string name="module_component_manager_keep_service_smart_standby">导入到乖巧模式KEEP清单</string>
-    <string name="module_component_manager_add_lock_white_list">Add to App lock allow list</string>
+    <string-array name="themes_entry">
+        <item>Açık</item>
+        <item>Açık İndigo</item>
+        <item>Açık Kırmızı</item>
+        <item>Açık Yeşil</item>
+        <item>Açık Kehribar</item>
+        <item>Açık Siyah</item>
+        <item>Açık Oppo</item>
+        <item>Açık Pembe</item>
+        <item>Koyu</item>
+        <item>Koyu İndigo</item>
+        <item>Koyu Kırmızı</item>
+        <item>Koyu Kehribar</item>
+        <item>Koyu Gri</item>
+        <item>Otomatik</item>
+        <item>Material You</item>
+    </string-array>
 
-    <string name="nnf_new_folder">New folder</string>
-    <string name="nnf_create_folder_error">Failed to create folder</string>
-    <string name="nnf_name">Name</string>
-    <string name="nnf_select_something_first">Please select something first</string>
-    <string name="nnf_need_valid_filename">Please enter or select a valid filename</string>
-    <string name="nnf_permission_external_write_denied">Permission to access filesystem denied</string>
-    <string name="nnf_filename">Filename</string>
+    <string name="module_component_manager_disabled_by_thanox">Thanox tarafından devre dışı bırakıldı</string>
+    <string name="module_component_manager_component_running">Çalışıyor</string>
+    <string name="module_component_manager_feature_desc">Thanox, Android API\'yi kullanarak bileşenleri devre dışı bırakır, bu da Thanox kaldırılmış olsa bile devre dışı bırakılan bileşenlerin durumlarını koruyacağı anlamına gelir.\n\nThanox, devre dışı bırakılan bileşenlerin ana uygulamaları tarafından yeniden etkinleştirilmesini engelleyecek ve bu bileşenlerde [thanox tarafından devre dışı bırakıldı] etiketi göreceksiniz.</string>
+    <string name="module_component_manager_keep_service_smart_standby">Akıllı Bekleme Moduna Ekle</string>
+    <string name="module_component_manager_add_lock_white_list">Uygulama Kilit İzin Listesine Ekle</string>
+
+    <string name="nnf_new_folder">Yeni Klasör</string>
+    <string name="nnf_create_folder_error">Klasör oluşturulamadı</string>
+    <string name="nnf_name">Ad</string>
+    <string name="nnf_select_something_first">Lütfen önce bir şey seçin</string>
+    <string name="nnf_need_valid_filename">Lütfen geçerli bir dosya adı girin veya seçin</string>
+    <string name="nnf_permission_external_write_denied">Dosya sistemine erişim izni reddedildi</string>
+    <string name="nnf_filename">Dosya Adı</string>
     <string name="nnf_list_ok">@android:string/ok</string>
     <string name="nnf_list_cancel">@android:string/cancel</string>
     <string name="nnf_new_folder_ok">@android:string/ok</string>
     <string name="nnf_new_folder_cancel">@android:string/cancel</string>
 
-    <string-array name="module_ops_app_ops_summaries">
-        <item>coarse location</item>
-        <item>fine location</item>
-        <item>GPS</item>
-        <item>vibrate</item>
-        <item>read contacts</item>
-        <item>modify contacts</item>
-        <item>read call log</item>
-        <item>modify call log</item>
-        <item>read calendar</item>
-        <item>modify calendar</item>
-        <item>wi-fi scan</item>
-        <item>notification</item>
-        <item>cell scan</item>
-        <item>call phone</item>
-        <item>read SMS</item>
-        <item>write SMS</item>
-        <item>receive SMS</item>
-        <item>receive emergency SMS</item>
-        <item>receive MMS</item>
-        <item>receive WAP push</item>
-        <item>send SMS</item>
-        <item>read ICC SMS</item>
-        <item>write ICC SMS</item>
-        <item>modify settings</item>
-        <item>draw on top</item>
-        <item>access notifications</item>
-        <item>camera</item>
-        <item>record audio</item>
-        <item>play audio</item>
-        <item>read clipboard</item>
-        <item>modify clipboard</item>
-        <item>media buttons</item>
-        <item>audio focus</item>
-        <item>master volume</item>
-        <item>voice volume</item>
-        <item>ring volume</item>
-        <item>media volume</item>
-        <item>alarm volume</item>
-        <item>notification volume</item>
-        <item>bluetooth volume</item>
-        <item>keep awake</item>
-        <item>monitor location</item>
-        <item>monitor high power location</item>
-        <item>get usage stats</item>
-        <item>mute/unmute microphone</item>
-        <item>show toast</item>
-        <item>project media</item>
-        <item>activate VPN</item>
-        <item>write wallpaper</item>
-        <item>assist structure</item>
-        <item>assist screenshot</item>
-        <item>read phone state</item>
-        <item>add voicemail</item>
-        <item>use sip</item>
-        <item>process outgoing call</item>
-        <item>fingerprint</item>
-        <item>body sensors</item>
-        <item>read cell broadcasts</item>
-        <item>mock location</item>
-        <item>read storage</item>
-        <item>write storage</item>
-        <item>turn on screen</item>
-        <item>get accounts</item>
-        <item>run in background</item>
-        <item>accessibility volume</item>
-        <item>Read phone number</item>
-        <item>Install packages</item>
-        <item>Picture in picture</item>
-        <item>Instant app start foreground</item>
-        <item>Answer incoming phone calls</item>
-        <item>Run jobs when in background</item>
-        <item>Change Wi-Fi connectivity state</item>
-        <item>Request package deletion through package installer</item>
-        <item>Bind an accessibility service</item>
-        <item>Continue handover of a call from another app</item>
-        <item>Create and Manage IPsec Tunnels</item>
-        <item>Any app start foreground service</item>
-        <item>Blue tooth scan</item>
+    <string name="module_notification_recorder_feature_title_notification_center">Bildirim Merkezi</string>
+    <string name="module_notification_recorder_feature_title_notification_recorder">Kayıt</string>
+    <string name="module_notification_recorder_item_no_title">Başlık Yok</string>
+    <string name="module_notification_recorder_item_type_toast">Toast</string>
+    <string name="module_notification_recorder_item_type_n">Bildirim</string>
+    <string name="module_notification_recorder_item_type_clip">Pano</string>
+    <string name="module_notification_recorder_item_no_content">Bu bildirimin içeriği yok</string>
+    <string name="module_notification_recorder_item_uninstalled_app">Kaldırılmış Uygulama</string>
+    <string name="module_notification_recorder_total_message_count">%1$s bildirim</string>
+    <string name="module_notification_recorder_clear_all">Tümünü Temizle</string>
+    <string name="module_notification_recorder_toady">Bugün</string>
+    <string name="module_notification_recorder_before_today">Daha Önce</string>
+    <string name="module_notification_recorder_settings">Ayarlar</string>
+    <string name="module_notification_recorder_export">Dışa Aktar</string>
+    <string name="module_notification_recorder_export_dialog_message">Tüm bildirim kayıtlarını İndirilenler\'e dışa aktar</string>
+    <string name="module_notification_recorder_pref_summary_enable_toast_info">Toast görünümünde uygulama bilgilerini göster</string>
+    <string name="module_notification_recorder_pref_title_enable_toast_info">Toast Bilgisi</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_n">Bildirimleri Kaydet</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_t">Toastları Kaydet</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_clip">Panoyu Kaydet</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_for_all_apps">Tüm Uygulamaları Kaydet</string>
+    <string name="module_notification_recorder_reproduce">Yeniden Üret</string>
+    <string name="module_notification_recorder_zoom">Yakınlaştır</string>
+    <string name="module_notification_recorder_yesterday">Dün</string>
+    <string name="module_notification_recorder_the_day_before_yesterday">İki gün önce</string>
+    <string name="module_notification_recorder_stats">İstatistikler</string>
 
-        <item>Use the BiometricPrompt/BiometricManager APIs</item>
-        <item>Physical activity recognition</item>
-        <item>Financial app sms read</item>
-        <item>Read media of audio type</item>
-        <item>Write media of audio type</item>
-        <item>Read media of video type</item>
-        <item>Write media of video type</item>
-        <item>Read media of image type</item>
-        <item>Write media of image type</item>
-        <item>Has a legacy (non-isolated) view of storage</item>
-        <item>Accessing accessibility features</item>
-        <item>Read the device identifiers (IMEI / MEID, IMSI, SIM / Build serial)</item>
+<string-array name="module_ops_app_ops_summaries">
+    <item>Yaklaşık konum</item>
+    <item>Kesin konum</item>
+    <item>GPS</item>
+    <item>Titreşim</item>
+    <item>Kişileri okuma</item>
+    <item>Kişileri değiştirme</item>
+    <item>Arama kaydını okuma</item>
+    <item>Arama kaydını değiştirme</item>
+    <item>Takvimi okuma</item>
+    <item>Takvimi değiştirme</item>
+    <item>Wi-Fi tarama</item>
+    <item>Bildirim</item>
+    <item>Hücresel tarama</item>
+    <item>Telefon araması yapma</item>
+    <item>SMS okuma</item>
+    <item>SMS yazma</item>
+    <item>SMS alma</item>
+    <item>Acil durum SMS alma</item>
+    <item>MMS alma</item>
+    <item>WAP push mesajlarını alma</item>
+    <item>SMS gönderme</item>
+    <item>ICC SMS okuma</item>
+    <item>ICC SMS yazma</item>
+    <item>Ayarları değiştirme</item>
+    <item>Üstte çizim yapma</item>
+    <item>Bildirimlere erişim</item>
+    <item>Kamera</item>
+    <item>Ses kaydı</item>
+    <item>Ses çalma</item>
+    <item>Panoyu okuma</item>
+    <item>Panoyu değiştirme</item>
+    <item>Medya düğmeleri</item>
+    <item>Ses odağı</item>
+    <item>Ana ses seviyesi</item>
+    <item>Sesli arama sesi</item>
+    <item>Zil sesi</item>
+    <item>Medya sesi</item>
+    <item>Alarm sesi</item>
+    <item>Bildirim sesi</item>
+    <item>Bluetooth sesi</item>
+    <item>Uyanık tut</item>
+    <item>Konumu izleme</item>
+    <item>Yüksek güç konum izleme</item>
+    <item>Kullanım istatistiklerini alma</item>
+    <item>Mikrofonu sessize alma/açma</item>
+    <item>Toast mesajı gösterme</item>
+    <item>Medyayı yansıtma</item>
+    <item>VPN etkinleştirme</item>
+    <item>Duvar kağıdı değiştirme</item>
+    <item>Asistan yapısı</item>
+    <item>Asistan ekran görüntüsü</item>
+    <item>Telefon durumunu okuma</item>
+    <item>Sesli mesaj ekleme</item>
+    <item>SIP kullanma</item>
+    <item>Giden çağrıyı işleme</item>
+    <item>Parmak izi</item>
+    <item>Vücut sensörleri</item>
+    <item>Hücresel yayınları okuma</item>
+    <item>Sahte konum</item>
+    <item>Depolamayı okuma</item>
+    <item>Depolamaya yazma</item>
+    <item>Ekranı aç</item>
+    <item>Hesapları alma</item>
+    <item>Arka planda çalıştırma</item>
+    <item>Erişilebilirlik ses seviyesi</item>
+    <item>Telefon numarasını okuma</item>
+    <item>Paket yükleme</item>
+    <item>Resim içinde resim (PiP) modu</item>
+    <item>Anlık uygulamayı ön planda başlatma</item>
+    <item>Gelen telefon çağrılarını yanıtlama</item>
+    <item>Arka planda görev çalıştırma</item>
+    <item>Wi-Fi bağlantı durumunu değiştirme</item>
+    <item>Paket yükleyici aracılığıyla paket silme isteğinde bulunma</item>
+    <item>Bir erişilebilirlik hizmetine bağlanma</item>
+    <item>Başka bir uygulamadan gelen çağrıyı devretmeye devam etme</item>
+    <item>IPsec tünelleri oluşturma ve yönetme</item>
+    <item>Herhangi bir uygulamanın ön plan hizmetini başlatması</item>
+    <item>Bluetooth tarama</item>
 
-        <item>Access media location</item>
-        <item>Query all packages</item>
-        <item>Access all external storage</item>
-        <item>Interact across profiles</item>
-        <item>Active platform VPN</item>
-        <item>Loader usage stats</item>
-        <item>Placeholder</item>
-        <item>Auto revoke permissions if unused</item>
-        <item>Auto revoke managed by installer</item>
-        <item>No isolated storage</item>
+    <item>BiometricPrompt/BiometricManager API\'lerini kullanma</item>
+    <item>Fiziksel aktivite tanıma</item>
+    <item>Finansal uygulama SMS okuma</item>
+    <item>Ses türündeki medyayı okuma</item>
+    <item>Ses türündeki medyaya yazma</item>
+    <item>Video türündeki medyayı okuma</item>
+    <item>Video türündeki medyaya yazma</item>
+    <item>Görsel (resim) türündeki medyayı okuma</item>
+    <item>Görsel (resim) türündeki medyaya yazma</item>
+    <item>Eski (izole olmayan) depolama görünümüne sahip</item>
+    <item>Erişilebilirlik özelliklerine erişim</item>
+    <item>Cihaz tanımlayıcılarını okuma (IMEI / MEID, IMSI, SIM / Yapı seri numarası)</item>
 
-        <item>Query other installed package info by package name</item>
-        <item>Adjust screen brightness</item>
-        <item>Get installed apps</item>
-        <item>Query intent(LAUNCHER, usually used to query installed apps) activities</item>
-        <item>Access device location</item>
-        <item>Receive sensor event, remember select target app in scoped Xposed framework</item>
-    </string-array>
+    <item>Medya konumuna erişim</item>
+    <item>Tüm paketleri sorgulama</item>
+    <item>Tüm harici depolamaya erişim</item>
+    <item>Profiller arası etkileşim</item>
+    <item>Platform VPN\'i etkinleştirme</item>
+    <item>Yükleyici kullanım istatistikleri</item>
+    <item>Yer tutucu</item>
+    <item>Kullanılmadığında izinleri otomatik iptal etme</item>
+    <item>Yükleyici tarafından yönetilen otomatik izin iptali</item>
+    <item>İzole depolama yok</item>
 
-    <string-array name="module_ops_app_ops_labels">
-        <item>Location</item>
-        <item>Location</item>
-        <item>Location</item>
-        <item>Vibrate</item>
-        <item>Read contacts</item>
-        <item>Modify contacts</item>
-        <item>Read call log</item>
-        <item>Modify call log</item>
-        <item>Read calendar</item>
-        <item>Modify calendar</item>
-        <item>Location</item>
-        <item>Post notification</item>
-        <item>Location</item>
-        <item>Call phone</item>
-        <item>Read SMS/MMS</item>
-        <item>Write SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Receive SMS/MMS</item>
-        <item>Send SMS/MMS</item>
-        <item>Read SMS/MMS</item>
-        <item>Write SMS/MMS</item>
-        <item>Modify settings</item>
-        <item>Draw on top</item>
-        <item>Access notifications</item>
-        <item>Camera</item>
-        <item>Record audio</item>
-        <item>Play audio</item>
-        <item>Read clipboard</item>
-        <item>Modify clipboard</item>
-        <item>Media buttons</item>
-        <item>Audio focus</item>
-        <item>Master volume</item>
-        <item>Voice volume</item>
-        <item>Ring volume</item>
-        <item>Media volume</item>
-        <item>Alarm volume</item>
-        <item>Notification volume</item>
-        <item>Bluetooth volume</item>
-        <item>Keep awake</item>
-        <item>Location</item>
-        <item>Location</item>
-        <item>Get usage stats</item>
-        <item>Mute/unmute microphone</item>
-        <item>Show toast</item>
-        <item>Project media</item>
-        <item>Activate VPN</item>
-        <item>Write wallpaper</item>
-        <item>Assist structure</item>
-        <item>Assist screenshot</item>
-        <item>Read phone state</item>
-        <item>Add voicemail</item>
-        <item>Use sip</item>
-        <item>Process outgoing call</item>
-        <item>Fingerprint</item>
-        <item>Body sensors</item>
-        <item>Read cell broadcasts</item>
-        <item>Mock location</item>
-        <item>Read storage</item>
-        <item>Write storage</item>
-        <item>Turn on screen</item>
-        <item>Get accounts</item>
-        <item>Run in background</item>
-        <item>Accessibility volume</item>
-        <item>Read phone number</item>
-        <item>Install packages</item>
-        <item>Picture in picture</item>
-        <item>Instant app start foreground</item>
-        <item>Answer incoming phone calls</item>
-        <item>Run jobs when in background</item>
-        <item>Change Wi-Fi connectivity state</item>
-        <item>Request package deletion through package installer</item>
-        <item>Bind an accessibility service</item>
-        <item>Continue handover of a call from another app</item>
-        <item>Create and Manage IPsec Tunnels</item>
-        <item>Any app start foreground service</item>
-        <item>Blue tooth scan</item>
+    <item>Diğer yüklü paket bilgilerini paket adına göre sorgulama</item>
+    <item>Ekran parlaklığını ayarlama</item>
+    <item>Yüklü uygulamaları alma</item>
+    <item>Intent sorgulama (LAUNCHER, genellikle yüklü uygulamaları sorgulamak için kullanılır)</item>
+    <item>Cihaz konumuna erişim</item>
+    <item>Sensor olaylarını alma, hedef uygulamayı Scoped Xposed çerçevesinde seçmeyi unutmayın</item>
+</string-array>
 
-        <item>Use BiometricPrompt</item>
-        <item>Physical activity recognition</item>
-        <item>Financial app sms read</item>
-        <item>Read media of audio type</item>
-        <item>Write media of audio type</item>
-        <item>Read media of video type</item>
-        <item>Write media of video type</item>
-        <item>Read media of image type</item>
-        <item>Write media of image type</item>
-        <item>Has a legacy view of storage</item>
-        <item>Accessing accessibility features</item>
-        <item>Read the device identifiers</item>
+<string-array name="module_ops_app_ops_labels">
+    <item>Konum</item>
+    <item>Konum</item>
+    <item>Konum</item>
+    <item>Titreşim</item>
+    <item>Kişileri Okuma</item>
+    <item>Kişileri Değiştirme</item>
+    <item>Arama Kaydını Okuma</item>
+    <item>Arama Kaydını Değiştirme</item>
+    <item>Takvimi Okuma</item>
+    <item>Takvimi Değiştirme</item>
+    <item>Konum</item>
+    <item>Bildirim Gönderme</item>
+    <item>Konum</item>
+    <item>Telefon Araması Yapma</item>
+    <item>SMS/MMS Okuma</item>
+    <item>SMS/MMS Yazma</item>
+    <item>SMS/MMS Alma</item>
+    <item>SMS/MMS Alma</item>
+    <item>SMS/MMS Alma</item>
+    <item>SMS/MMS Alma</item>
+    <item>SMS/MMS Gönderme</item>
+    <item>SMS/MMS Okuma</item>
+    <item>SMS/MMS Yazma</item>
+    <item>Ayarları Değiştirme</item>
+    <item>Üstte Çizim Yapma</item>
+    <item>Bildirimlere Erişim</item>
+    <item>Kamera</item>
+    <item>Ses Kaydı</item>
+    <item>Ses Çalma</item>
+    <item>Panoyu Okuma</item>
+    <item>Panoyu Değiştirme</item>
+    <item>Medya Düğmeleri</item>
+    <item>Ses Odaklanması</item>
+    <item>Ana Ses Seviyesi</item>
+    <item>Sesli Arama Ses Seviyesi</item>
+    <item>Zil Sesi Seviyesi</item>
+    <item>Medya Ses Seviyesi</item>
+    <item>Alarm Ses Seviyesi</item>
+    <item>Bildirim Ses Seviyesi</item>
+    <item>Bluetooth Ses Seviyesi</item>
+    <item>Uyanık Tut</item>
+    <item>Konum</item>
+    <item>Konum</item>
+    <item>Kullanım İstatistiklerini Alma</item>
+    <item>Mikrofonu Sessize Alma/Açma</item>
+    <item>Toast Mesajı Gösterme</item>
+    <item>Medyayı Yansıtma</item>
+    <item>VPN Etkinleştirme</item>
+    <item>Duvar Kağıdı Yazma</item>
+    <item>Asistan Yapısı</item>
+    <item>Asistan Ekran Görüntüsü</item>
+    <item>Telefon Durumunu Okuma</item>
+    <item>Sesli Mesaj Ekleme</item>
+    <item>SIP Kullanma</item>
+    <item>Giden Çağrıyı İşleme</item>
+    <item>Parmak İzi</item>
+    <item>Vücut Sensörleri</item>
+    <item>Hücresel Yayınları Okuma</item>
+    <item>Sahte Konum</item>
+    <item>Depolamayı Okuma</item>
+    <item>Depolamaya Yazma</item>
+    <item>Ekranı Aç</item>
+    <item>Hesapları Alma</item>
+    <item>Arka Planda Çalıştırma</item>
+    <item>Erişilebilirlik Ses Seviyesi</item>
+    <item>Telefon Numarasını Okuma</item>
+    <item>Paket Yükleme</item>
+    <item>Resim İçinde Resim (PiP) Modu</item>
+    <item>Anlık Uygulamayı Ön Planda Başlatma</item>
+    <item>Gelen Telefon Çağrılarını Yanıtlama</item>
+    <item>Arka Planda Görev Çalıştırma</item>
+    <item>Wi-Fi Bağlantı Durumunu Değiştirme</item>
+    <item>Paket Yükleyici Aracılığıyla Paket Silme İsteğinde Bulunma</item>
+    <item>Bir Erişilebilirlik Hizmetine Bağlanma</item>
+    <item>Başka Bir Uygulamadan Gelen Çağrıyı Devretmeye Devam Etme</item>
+    <item>IPsec Tünelleri Oluşturma ve Yönetme</item>
+    <item>Herhangi Bir Uygulamanın Ön Plan Hizmetini Başlatması</item>
+    <item>Bluetooth Tarama</item>
 
-        <item>Access media location</item>
-        <item>Query all packages</item>
-        <item>Access all external storage</item>
-        <item>Interact across profiles</item>
-        <item>Active platform VPN</item>
-        <item>Loader usage stats</item>
-        <item>Placeholder</item>
-        <item>Auto revoke permissions if unused</item>
-        <item>Auto revoke managed by installer</item>
-        <item>No isolated storage</item>
+    <item>BiometricPrompt Kullanımı</item>
+    <item>Fiziksel Aktivite Tanıma</item>
+    <item>Finansal Uygulama SMS Okuma</item>
+    <item>Ses Türündeki Medyayı Okuma</item>
+    <item>Ses Türündeki Medyaya Yazma</item>
+    <item>Video Türündeki Medyayı Okuma</item>
+    <item>Video Türündeki Medyaya Yazma</item>
+    <item>Görsel (Resim) Türündeki Medyayı Okuma</item>
+    <item>Görsel (Resim) Türündeki Medyaya Yazma</item>
+    <item>Eski Depolama Görünümüne Sahip</item>
+    <item>Erişilebilirlik Özelliklerine Erişim</item>
+    <item>Cihaz Tanımlayıcılarını Okuma</item>
 
-        <item>Get package info</item>
-        <item>Screen brightness</item>
-        <item>Get installed apps</item>
-        <item>Query intent activities</item>
-        <item>Location</item>
-        <item>Receive sensor event</item>
-    </string-array>
+    <item>Medya Konumuna Erişim</item>
+    <item>Tüm Paketleri Sorgulama</item>
+    <item>Tüm Harici Depolamaya Erişim</item>
+    <item>Profiller Arası Etkileşim</item>
+    <item>Platform VPN\'i Etkinleştirme</item>
+    <item>Yükleyici Kullanım İstatistikleri</item>
+    <item>Yer Tutucu</item>
+    <item>Kullanılmadığında İzinleri Otomatik İptal Etme</item>
+    <item>Yükleyici Tarafından Yönetilen Otomatik İzin İptali</item>
+    <item>İzole Depolama Yok</item>
 
-    <string name="module_ops_category_location">Lokasyon</string>
-    <string name="module_ops_category_personal">Personel</string>
+    <item>Paket Bilgilerini Alma</item>
+    <item>Ekran Parlaklığı</item>
+    <item>Yüklü Uygulamaları Alma</item>
+    <item>Intent Etkinliklerini Sorgulama</item>
+    <item>Konum</item>
+    <item>Sensor Olaylarını Alma</item>
+</string-array>
+
+    <string name="module_ops_category_location">Konum</string>
+    <string name="module_ops_category_personal">Kişisel</string>
     <string name="module_ops_category_message">Mesaj</string>
     <string name="module_ops_category_media">Medya</string>
     <string name="module_ops_category_device">Cihaz</string>
-    <string name="module_ops_category_bg">Arka plam</string>
-    <string name="module_ops_category_remaining">Diğerleri</string>
+    <string name="module_ops_category_bg">Arka Plan</string>
+    <string name="module_ops_category_remaining">Diğer</string>
     <string name="module_ops_category_thanox">Thanox</string>
 
-    <string name="module_ops_title_op_remind_apps">Uygulamaları izle</string>
+    <string name="module_ops_title_op_remind_apps">İzlenen Uygulamalar</string>
 
     <string name="module_ops_title_reset_ops_mode_for_all">Tümünü Sıfırla</string>
 
-    <string name="module_ops_feature_title_app_ops_list">Uygulama operasyonları</string>
-    <string name="module_ops_feature_summary_app_ops_list">Uygulama tarafından</string>
-    <string name="module_ops_activity_title_app_ops_list">Uygulama tarafından</string>
+    <string name="module_ops_feature_title_app_ops_list">Uygulama İşlemleri</string>
+    <string name="module_ops_feature_summary_app_ops_list">Uygulamaya Göre</string>
+    <string name="module_ops_activity_title_app_ops_list">Uygulamaya Göre</string>
 
-    <string name="module_ops_feature_title_a_manage">Faaliyetleri yönetin</string>
-    <string name="module_ops_feature_title_s_manage">Hizmetleri yönetin</string>
-    <string name="module_ops_feature_title_r_manage">Alıcıları yönetin</string>
-    <string name="module_ops_feature_title_p_manage">Sağlayıcıları yönetin</string>
+    <string name="module_ops_feature_title_a_manage">Aktiviteleri Yönet</string>
+    <string name="module_ops_feature_title_s_manage">Servisleri Yönet</string>
+    <string name="module_ops_feature_title_r_manage">Alıcıları Yönet</string>
+    <string name="module_ops_feature_title_p_manage">Sağlayıcıları Yönet</string>
 
-    <string name="module_ops_feature_title_block_uninstall">Kaldırmayı önle</string>
-    <string name="module_ops_feature_title_block_clear_data">Net verileri önleyin</string>
-    <string name="module_ops_feature_title_block_update">Prevent app update</string>
+    <string name="module_ops_feature_title_block_uninstall">Kaldırmayı Engelle</string>
+    <string name="module_ops_feature_title_block_clear_data">Veri Temizlemeyi Engelle</string>
+    <string name="module_ops_feature_title_block_update">Uygulama Güncellemesini Engelle</string>
 
-    <string name="module_ops_feature_title_ops_app_list">Uygulama operasyonları</string>
-    <string name="module_ops_feature_summary_ops_app_list">Ops tarafından</string>
-    <string name="module_ops_activity_title_ops_app_list">Ops tarafından（%s）</string>
+    <string name="module_ops_feature_title_ops_app_list">Uygulama İşlemleri</string>
+    <string name="module_ops_feature_summary_ops_app_list">İşleme Göre</string>
+    <string name="module_ops_activity_title_ops_app_list">İşleme Göre (%s)</string>
 
-    <string name="module_ops_feature_title_ops_remind_list">Gizlilik Gözlemcisi</string>
-    <string name="module_ops_feature_summary_ops_remind">Operasyon sırasında size hatırlatır</string>
+    <string name="module_ops_feature_title_ops_remind_list">Gizlilik İzleyici</string>
+    <string name="module_ops_feature_summary_ops_remind">İşlem sırasında sizi uyarır</string>
 
-    <string name="module_ops_mode_allow">İzin ver</string>
-    <string name="module_ops_mode_foreground">Ön planda izin ver</string>
-    <string name="module_ops_mode_ignore">Görmezden gel</string>
-    <string name="module_ops_mode_all">Hepsi</string>
+    <string name="module_ops_mode_allow">İzin Ver</string>
+    <string name="module_ops_mode_foreground">Ön Planda İzin Ver</string>
+    <string name="module_ops_mode_ignore">Yoksay</string>
+    <string name="module_ops_mode_all">Tümü</string>
 
-    <string name="module_ops_mode_allow_all">Tüm izinler</string>
-    <string name="module_ops_mode_ask_all">All ask</string>
-    <string name="module_ops_mode_foreground_all">Ön plandaki tüm izinler</string>
-    <string name="module_ops_mode_ignore_all">Tümünü görmezden gel</string>
+    <string name="module_ops_mode_allow_all">Tümüne İzin Ver</string>
+    <string name="module_ops_mode_foreground_all">Tümüne Ön Planda İzin Ver</string>
+    <string name="module_ops_mode_ignore_all">Tümünü Yoksay</string>
+    <string name="module_ops_mode_ask_all">Tümünü Sor</string>
 
-    <string name="module_profile_feature_name">Profile</string>
-    <string name="module_profile_feature_summary">Perform custom actions if match given condition</string>
+    <string name="module_profile_feature_name">Profil</string>
+    <string name="module_profile_feature_summary">Belirtilen koşula uygunsa özel işlemler gerçekleştir</string>
 
-    <string name="module_profile_title_global_var">Global variant</string>
-    <string name="module_profile_title_rule_engine">Engine</string>
-    <string name="module_profile_title_action_console">Action Console</string>
-    <string name="module_profile_title_log">Log</string>
+    <string name="module_profile_title_global_var">Genel Değişken</string>
+    <string name="module_profile_title_rule_engine">Motor</string>
+    <string name="module_profile_title_action_console" translatable="false">İşlem Konsolu</string>
+    <string name="module_profile_title_log" translatable="false">Günlük</string>
 
-    <string name="module_profile_summary_rule_engine">The engine is a tool for publishing facts. Thanox has multiple publishers enabled by default. The following engines support turning on or off. Please pay attention to the engine description, shutting down the engine may cause some profiles to not be triggered or executed normally</string>
-    <string name="module_profile_pref_title_rule_engine_automation">Automation</string>
-    <string name="module_profile_pref_summary_rule_engine_automation">Supports performing automatic clicks and find views. \n\n📢
-        Note: This engine may cause some app accessibility service to not work</string>
-    <string name="module_profile_pref_title_rule_engine_push">Push</string>
-    <string name="module_profile_pref_summary_rule_engine_push">Publish facts of push message arrival</string>
+    <string name="module_profile_summary_rule_engine">Motor, gerçekleri yayınlamak için bir araçtır. Thanox varsayılan olarak birden fazla yayıncıyı etkinleştirir. Aşağıdaki motorlar açılıp kapatılabilir. Lütfen motor açıklamalarına dikkat edin, motorun kapatılması bazı profillerin tetiklenmemesine veya normal şekilde çalışmamasına neden olabilir.</string>
+
+    <string name="module_profile_pref_title_rule_engine_automation">Otomasyon</string>
+    <string name="module_profile_pref_summary_rule_engine_automation">Otomatik tıklamalar ve görünüm bulmayı destekler. \n\n📢
+    Not: Bu motor bazı uygulamaların erişilebilirlik hizmetlerinin çalışmamasına neden olabilir.</string>
+
+    <string name="module_profile_pref_title_rule_engine_push">Bildirim</string>
+    <string name="module_profile_pref_summary_rule_engine_push">Gelen bildirim mesajlarını yayınlar</string>
 
     <string name="module_profile_pref_title_rule_engine_su">su API</string>
-    <string name="module_profile_pref_summary_rule_engine_su">Enable su API support for Thanox profile. please click Allow in the pop-up super permission grant request. If no request is received, please manually turn on the super user permission. \nsu command will be executed as Thanox application. \nPlease allow Thanox app to start in background</string>
-    <string name="module_profile_pref_title_rule_engine_custom_su">Custom su</string>
-    <string name="module_profile_pref_summary_rule_engine_custom_su">You can change default su path by input the custom su path</string>
+    <string name="module_profile_pref_summary_rule_engine_su">Thanox profilinde su API desteğini etkinleştirin. Açılan süper izin verme isteğinde Lütfen İzin Ver düğmesine tıklayın. Eğer herhangi bir istek alınmazsa, süper kullanıcı iznini manuel olarak açın. \nsu komutu Thanox uygulaması olarak çalıştırılacaktır. \nLütfen Thanox uygulamasına arka planda çalışmasına izin verin.</string>
+    <string name="module_profile_pref_title_rule_engine_custom_su">Özel su</string>
+    <string name="module_profile_pref_summary_rule_engine_custom_su">Varsayılan su yolunu değiştirmek için özel bir su yolu girebilirsiniz.</string>
 
-    <string name="module_profile_should_enable_su">This profile may not work since <b>su API</b> support not enabled, please go to Engine Settings to enable it</string>
-    <string name="module_profile_should_enable_push">This profile may not work since <b>Push Message Engine</b> not enabled, please go to Engine Settings to enable it</string>
-    <string name="module_profile_miss_global_var">This profile may not work since below global var is missing, you need to create these vars.\n%s</string>
-    <string name="module_profile_block_thread">This profile may call Thread.sleep, which may block the execution of other profiles; please adjust the priority of this profile to a negative number so that it will be executed in a new thread.</string>
+    <string name="module_profile_should_enable_su">Bu profil çalışmayabilir çünkü <b>su API</b> desteği etkin değil, lütfen Motor Ayarlarına giderek etkinleştirin.</string>
+    <string name="module_profile_should_enable_push">Bu profil çalışmayabilir çünkü <b>Push Mesaj Motoru</b> etkin değil, lütfen Motor Ayarlarına giderek etkinleştirin.</string>
+    <string name="module_profile_miss_global_var">Bu profil çalışmayabilir çünkü aşağıdaki genel değişken eksik, bu değişkenleri oluşturmanız gerekiyor.\n%s</string>
+    <string name="module_profile_block_thread">Bu profil, Thread.sleep çağırabilir ve diğer profillerin çalışmasını engelleyebilir; lütfen bu profilin önceliğini negatif bir sayıya ayarlayın, böylece yeni bir iş parçacığında çalıştırılacaktır.</string>
 
-    <string name="module_profile_pref_title_rule_engine_shortcut">Create shortcut</string>
-    <string name="module_profile_pref_summary_rule_engine_shortcut">Create a launcher shortcut, when this shortcut launched, thanox will publish a fact with the shortcut fact value</string>
+    <string name="module_profile_pref_title_rule_engine_shortcut">Kısayol Oluştur</string>
+    <string name="module_profile_pref_summary_rule_engine_shortcut">Bir başlatıcı kısayolu oluşturun, bu kısayol başlatıldığında Thanox, kısayolun gerçek değerini içeren bir olay yayınlayacaktır.</string>
 
-    <string name="module_profile_pref_title_rule_engine_date_time">Date &amp; Time</string>
-    <string name="module_profile_pref_summary_rule_engine_date_time">Schedule some repeating or timed tasks</string>
-    <string name="module_profile_date_time_regular_interval">Regular interval</string>
-    <string name="module_profile_date_time_alarm">Time of a day</string>
-    <string name="module_profile_date_time_tag">Tag is for condition check. \nExample of use: %s</string>
-    <string name="module_profile_date_time_min_interval">Min interval is 15m</string>
+    <string name="module_profile_pref_title_rule_engine_date_time">Tarih &amp; Saat</string>
+    <string name="module_profile_pref_summary_rule_engine_date_time">Bazı tekrarlayan veya zamanlanmış görevleri ayarla</string>
+    <string name="module_profile_date_time_regular_interval">Düzenli aralık</string>
+    <string name="module_profile_date_time_alarm">Günün belirli bir saati</string>
+    <string name="module_profile_date_time_tag">Etiket, koşul kontrolü içindir. \nKullanım örneği: %s</string>
+    <string name="module_profile_date_time_min_interval">Minimum aralık 15 dakikadır</string>
 
-    <string name="module_profile_rule_edit_action_save">Save</string>
-    <string name="module_profile_rule_edit_action_discard">Discard</string>
-    <string name="module_profile_rule_edit_action_text_size_inc">Increase</string>
-    <string name="module_profile_rule_edit_action_text_size_dec">Decrease</string>
+    <string name="module_profile_rule_edit_action_save">Kaydet</string>
+    <string name="module_profile_rule_edit_action_discard">Vazgeç</string>
+    <string name="module_profile_rule_edit_action_text_size_inc">Büyüt</string>
+    <string name="module_profile_rule_edit_action_text_size_dec">Küçült</string>
 
     <string name="module_profile_rule_wiki">Wiki</string>
-    <string name="module_profile_rule_impor_from_file">Import from file</string>
-    <string name="module_profile_rule_impor_example">Import examples</string>
-    <string name="module_profile_rule_online">View Online Profiles</string>
+    <string name="module_profile_rule_impor_from_file">Dosyadan İçeri Aktar</string>
+    <string name="module_profile_rule_impor_example">Örnekleri İçeri Aktar</string>
+    <string name="module_profile_rule_online">Çevrimiçi Profilleri Görüntüle</string>
 
-    <string name="module_profile_rule_edit">Edit</string>
-    <string name="module_profile_rule_new">New</string>
+    <string name="module_profile_rule_edit">Düzenle</string>
+    <string name="module_profile_rule_new">Yeni</string>
     <string name="module_profile_rule_example"></string>
 
-    <string name="module_profile_editor_select_format">Choose format</string>
-    <string name="module_profile_editor_save_success">Save success, you can enable it</string>
-    <string name="module_profile_editor_save_check_error">Bad content</string>
+    <string name="module_profile_editor_select_format">Format Seç</string>
+    <string name="module_profile_editor_save_success">Başarıyla kaydedildi, etkinleştirebilirsiniz</string>
+    <string name="module_profile_editor_save_check_error">Geçersiz içerik</string>
 
-    <string name="module_profile_editor_discard_dialog_title">Discard</string>
-    <string name="module_profile_editor_discard_dialog_message">Are you sure?</string>
+    <string name="module_profile_editor_discard_dialog_title">Vazgeç</string>
+    <string name="module_profile_editor_discard_dialog_message">Emin misiniz?</string>
 
-    <string name="module_profile_editor_delete_dialog_title">Delete</string>
-    <string name="module_profile_editor_delete_dialog_message">Are you sure?</string>
+    <string name="module_profile_editor_delete_dialog_title">Sil</string>
+    <string name="module_profile_editor_delete_dialog_message">Emin misiniz?</string>
 
-    <string name="module_profile_edit_delete">Delete</string>
-    <string name="module_profile_edit_show_hide_symbols">Symbol bar</string>
+    <string name="module_profile_edit_delete">Sil</string>
+    <string name="module_profile_edit_show_hide_symbols">Sembol Çubuğu</string>
 
-    <string name="module_profile_edit_var_title_hint">Please input name</string>
-    <string name="module_profile_var_list_item_size">%s variants</string>
-    <string name="module_profile_title_shortcut_fact_value">Fact value</string>
-    <string name="module_profile_title_shortcut_label">Shortcut label</string>
+    <string name="module_profile_edit_var_title_hint">Lütfen ad girin</string>
+    <string name="module_profile_var_list_item_size">%s değişken</string>
+    <string name="module_profile_title_shortcut_fact_value">Gerçek Değer</string>
+    <string name="module_profile_title_shortcut_label">Kısayol Etiketi</string>
 
-    <string name="module_profile_rule_format_tips_title">Format tips</string>
-    <string name="module_profile_rule_format_tips_message">The <b>name</b> field should use alphanumeric combinations as much as possible, and no special characters should appear; \n\nany characters can be used in the <b>description</b> field, just briefly introduce the purpose of this scenario</string>
+    <string name="module_profile_rule_format_tips_title">Format İpuçları</string>
+    <string name="module_profile_rule_format_tips_message"><b>Ad</b> alanı mümkün olduğunca alfasayısal karakterler içermelidir, özel karakterler kullanılmamalıdır. \n\n<b>Açıklama</b> alanında herhangi bir karakter kullanılabilir, sadece bu senaryonun amacını kısaca belirtin.</string>
 
-    <string name="module_profile_add_to_global_var">Add to Global Variant</string>
+    <string name="module_profile_add_to_global_var">Genel Değişkene Ekle</string>
 
     <string name="module_push_message_delegate_title_wechat">WeChat</string>
     <string name="module_push_message_delegate_title_wechat_proxy">WeChat Push</string>
-    <string name="module_push_message_delegate_title_summary_proxy">You may install wechat app from Google play store</string>
-    <string name="module_push_message_delegate_title_sound">Sound</string>
-    <string name="module_push_message_delegate_title_vibrate">Vibrate</string>
-    <string name="module_push_message_delegate_title_content">Show message content</string>
-    <string name="module_push_message_delegate_title_mock">Mock</string>
-    <string name="module_push_message_delegate_title_skip_if_running">Skip notification</string>
-    <string name="module_push_message_delegate_summary_skip_if_running">No not send push notification if target app is running</string>
-    <string name="module_push_message_delegate_title_start_app">Start app process</string>
-    <string name="module_push_message_delegate_summary_start_app">Start app process if target app is not running</string>
-    <string name="module_push_message_delegate_title_gcm_diag">Diag</string>
-    <string name="module_push_message_delegate_notice_wechat_proxy">Please note that the collection function is currently in the experimental stage and is only for learning and research. At present, no one can guarantee that the push will be 100% received.</string>
+    <string name="module_push_message_delegate_title_summary_proxy">WeChat uygulamasını Google Play Store\'dan yükleyebilirsiniz</string>
+    <string name="module_push_message_delegate_title_sound">Ses</string>
+    <string name="module_push_message_delegate_title_vibrate">Titreşim</string>
+    <string name="module_push_message_delegate_title_content">Mesaj içeriğini göster</string>
+    <string name="module_push_message_delegate_title_mock">Sahte</string>
+    <string name="module_push_message_delegate_title_skip_if_running">Bildirim atla</string>
+    <string name="module_push_message_delegate_summary_skip_if_running">Hedef uygulama çalışıyorsa push bildirimi gönderme</string>
+    <string name="module_push_message_delegate_title_start_app">Uygulama sürecini başlat</string>
+    <string name="module_push_message_delegate_summary_start_app">Hedef uygulama çalışmıyorsa uygulama sürecini başlat</string>
+    <string name="module_push_message_delegate_title_gcm_diag">Tanılama</string>
+    <string name="module_push_message_delegate_notice_wechat_proxy">Lütfen unutmayın, toplama işlevi şu anda deneysel aşamadadır ve yalnızca öğrenme ve araştırma amaçlıdır. Şu anda hiç kimse bildirimin %100 alınacağını garanti edemez.</string>
 
-    <string name="app_description">Ben Thanos\'um! 😈👌</string>
-    <string name="privacy_agreement_file">privacy/privacy_agreement_tr.html</string>
-
-    <!-- Aç/Kapat  -->
-    <string name="switch_on_text">Açık</string>
-    <string name="switch_off_text">Kapalı</string>
+    <string name="app_description" translatable="false">Ben Thanos\'um! 😈👌</string>
+    <string name="privacy_agreement_file">privacy/privacy_agreement_en.html</string>
 
     <string name="status_active">Aktif</string>
     <string name="status_not_active">Aktif değil</string>
-    <string name="message_active_needed">Thanox support both Xposed and Magisk.\n\n For Xposed user (Xposed module and Magisk zip can not be used at the same time), you can just select and check Thanox in Xposed app module config page. \n\nFor Magisk user, you can rename downloaded Thanox apk from .apk to .zip and then install in Magisk manager, or if you can not find the downloaded apk, you can go to Settings, About, Patch status to export the patch</string>
-    <string name="status_need_reboot">Yeniden başlat</string>
-    <string name="title_framework_error">Framework hatası</string>
-    <string name="message_framework_error">Thanox framework\'ünde bir hata var. Lütfen /data/system/thanos_xxx/log altında bulunan günlükleri geliştiriciye rapor edin.</string>
+    <string name="message_active_needed">Thanox hem Xposed hem de Magisk\'i destekler.\n\nXposed kullanıcıları için (Xposed modülü ve Magisk zip aynı anda kullanılamaz), Xposed uygulama modül yapılandırma sayfasında Thanox\'u seçerek etkinleştirebilirsiniz.\n\nMagisk kullanıcıları için, indirilen Thanox apk dosyasını .apk\'dan .zip\'e yeniden adlandırarak Magisk yöneticisinde yükleyebilir veya apk dosyanızı bulamazsanız, Ayarlar > Hakkında > Yama durumu kısmına giderek yama dosyanızı dışa aktarabilirsiniz.</string>
+    <string name="status_need_reboot">Yeniden Başlat</string>
+    <string name="title_framework_error">Çerçeve Hatası</string>
+    <string name="message_framework_error">Thanox çerçevesinde bir hata oluştu. Lütfen /data/system/thanos_xxx/log dizinindeki günlükleri geliştiriciye bildirin.</string>
 
-    <string name="title_multiple_patch_applied_error">Birden fazla yama uygulandı</string>
-    <string name="message_multiple_patch_applied_error">Thanox\'u etkinleştirmek için sadece bir yama uygulamanız gerekiyor, ancak aynı anda birden fazla yama uyguladınız: %s, kullanım kılavuzunu okuduğunuzdan emin olun.</string>
+    <string name="title_multiple_patch_applied_error">Birden Fazla Yama Uygulandı</string>
+    <string name="message_multiple_patch_applied_error">Thanox\'u etkinleştirmek için yalnızca bir yama uygulamanız gerekir, ancak aynı anda birden fazla yama uyguladınız: %s, lütfen kullanım kılavuzunu dikkatlice okuyun.</string>
 
     <string name="nav_title_boost">Hızlandır</string>
     <string name="nav_title_secure">Gizlilik</string>
@@ -829,23 +869,23 @@
     <string name="nav_title_feedback">Geri Bildirim</string>
     <string name="nav_title_exp">Genişletme</string>
     <string name="nav_title_plugin">Eklenti</string>
-    <string name="nav_title_plugin_repo">Eklenti deposu</string>
+    <string name="nav_title_plugin_repo">Eklenti Deposu</string>
 
-    <string name="pref_title_feature_toggle">Özellik aç/kapat</string>
+    <string name="pref_title_feature_toggle">Özellik Geçişi</string>
 
     <string name="priv_title_fields_template">Şablonlar</string>
     <string name="priv_title_fields_usage_count">%s uygulama için seçildi</string>
-    <string name="priv_title_fields_usage_count_noop">Kullanılmadı</string>
+    <string name="priv_title_fields_usage_count_noop">Kullanılmıyor</string>
 
-    <string name="title_package_sets">Paket setleri</string>
-    <string name="title_package_add_set">Paket seti ekle</string>
+    <string name="title_package_sets">Paket Grupları</string>
+    <string name="title_package_add_set">Paket Grubu Ekle</string>
     <string name="title_package_edit_set">Görüntüle &amp; Düzenle</string>
     <string name="title_package_delete_set">Sil</string>
-    <string name="title_package_count_set">%s Uygulamalar</string>
+    <string name="title_package_count_set">%s Uygulama</string>
 
-    <string name="dialog_title_plugin_installing">Eklenti yükleniyor</string>
-    <string name="dialog_title_plugin_updating">Eklenti güncelleniyor</string>
-    <string name="dialog_title_plugin_uninstalling">Eklenti kaldırılıyor</string>
+    <string name="dialog_title_plugin_installing">Eklenti Yükleniyor</string>
+    <string name="dialog_title_plugin_updating">Eklenti Güncelleniyor</string>
+    <string name="dialog_title_plugin_uninstalling">Eklenti Kaldırılıyor</string>
     <string name="dialog_title_plugin_uninstall_confirm">Bu eklentiyi kaldırmak istediğinizden emin misiniz?</string>
     <string name="menu_title_uninstall_plugin">Kaldır</string>
     <string name="menu_title_view_plugin_info">Detaylar</string>
@@ -853,73 +893,79 @@
     <string name="title_download">İndir</string>
     <string name="title_install">Yükle</string>
 
-    <string name="tile_category_plugin_installed">Yüklendi</string>
-    <string name="tile_category_plugin_already_installed">Mevcut yükleme üzerine yazılamaz, lütfen kaldırın ve ardından yeniden yükleyin.</string>
+    <string name="tile_category_plugin_installed">Yüklü</string>
+    <string name="tile_category_plugin_already_installed">Mevcut kurulum üzerine yükleme yapılamaz, lütfen kaldırıp yeniden yükleyin.</string>
     <string name="tile_category_plugin_update_available">Yeni sürüm mevcut</string>
 
-    <string name="tile_su_plugin_deprecated">Su Etkinleştirici eklentisi kullanımdan kaldırıldı, artık su eklentisini yüklemenize gerek yok. Su API desteğini Profil\'in Motor Ayarları\'ndan doğrudan etkinleştirebilirsiniz.</string>
+    <string name="tile_su_plugin_deprecated">su Etkinleştirici eklentisi kullanımdan kaldırıldı, artık su eklentisini yüklemenize gerek yok. su API desteğini doğrudan Profilin Motor Ayarlarında etkinleştirebilirsiniz.</string>
 
     <string name="card_title_plugin_available">Thanox eklentisini yükleyin</string>
-    <string name="card_message_plugin_available">Eklenti, bazı kararsız veya kritik olmayan işlevler içerir.</string>
+    <string name="card_message_plugin_available">Eklenti, bazı kararsız veya kritik olmayan işlevlerden oluşur.</string>
 
-    <string name="dialog_message_feedback">Geri bildirim için sorunları Ayarlar-Hakkında bölümündeki Sohbet Gruplarında veya GitHub/Thanox\'ta gönderebilirsiniz. Geri bildirim sağlarken aşağıdaki temel bilgileri eklediğinizden emin olun: \n\n1. Sorunun açık bir açıklaması ve eşlik eden ekran görüntüleri veya ekran kayıtları. \n2. Aşağıdaki düğmeye tıklayarak dışa aktarılan günlük dosyaları. \n\nBu iki bilgi gereklidir.</string>
+    <string name="dialog_message_feedback">Geri bildirim için sorunları, Ayarlar-Hakkında bölümündeki Sohbet Gruplarında veya GitHub/Thanox\'ta bildirebilirsiniz. Geri bildirim sağlarken aşağıdaki önemli bilgileri eklediğinizden emin olun: \n\n1. Sorunun net bir açıklaması ve ekran görüntüleri veya ekran kayıtları. \n2. Aşağıdaki düğmeye tıklayarak dışa aktarılan günlük dosyaları. \n\nHer iki bilgi de gereklidir.</string>
     <string name="feedback_export_log">Günlüğü dışa aktar</string>
     <string name="feedback_export_log_success">Günlük dışa aktarıldı</string>
-    <string name="feedback_export_log_fail">Günlük dışa aktarma başarısız oldu, lütfen Depolama iznini manuel olarak verin ve tekrar deneyin</string>
+    <string name="feedback_export_log_fail">Günlük dışa aktarılamadı, lütfen Depolama iznini manuel olarak verin ve tekrar deneyin</string>
 
-    <string name="title_no_plugins_installed">Kullanılabilir eklenti yok</string>
-    <string name="title_plugin_reboot_take_effect">Değişikliklerin etkili olması için lütfen yeniden başlatın.</string>
+    <string name="title_no_plugins_installed">Eklenti mevcut değil</string>
+    <string name="title_plugin_reboot_take_effect">Değişikliklerin etkili olması için lütfen cihazınızı yeniden başlatın.</string>
 
-    <string name="title_show_current_activity">Mevcut aktivite</string>
+    <string name="title_show_current_activity">Mevcut etkinlik</string>
     <string name="title_net_stats">Ağ istatistikleri</string>
-    <string name="message_reboot_needed">Thanox çekirdeğini güncellemek için cihazınızı yeniden başlatın</string>
+    <string name="message_reboot_needed">thanox-core\'u güncellemek için cihazınızı yeniden başlatın</string>
     <string name="reboot_now">Şimdi yeniden başlat</string>
     <string name="reboot_later">Şimdi değil</string>
 
-    <string name="legacy_ops_feature_summary">The permission management settings in Thanox are independent of the system\'s built - in permission control. Therefore, if the permission is denied in any one place, it is considered denied.
-Compatibility notice: If the default permission management function is not compatible with your device, you can enable the new - version permission management in the settings for an experience.</string>
-    <string name="new_ops_feature">New OPS feature</string>
-    <string name="new_ops_feature_summary">Test the NEW permission management feature. The new version settings is synchronized with the Android system</string>
-
+    <string name="legacy_ops_feature_summary">Thanox\'taki izin yönetim ayarları, sistemin yerleşik izin kontrolünden bağımsızdır. Bu nedenle, izin herhangi bir yerde reddedildiğinde, reddedilmiş olarak kabul edilir.
+    Uyumluluk notu: Varsayılan izin yönetimi işlevi cihazınızla uyumlu değilse, ayarlardan yeni sürüm izin yönetimini etkinleştirerek deneyimleyebilirsiniz.</string>
+    <string name="new_ops_feature">Yeni OPS özelliği</string>
+    <string name="new_ops_feature_summary">YENİ izin yönetimi özelliğini test edin. Yeni sürüm ayarları Android sistemiyle senkronizedir.</string>
 
     <string name="badge_app_running">Çalışıyor</string>
     <string name="badge_app_idle">Boşta</string>
 
+    <string name="boost_status_running_apps">&#160; uygulama çalışıyor</string>
+    <string name="boost_status_blocked_start_count">%s uygulama başlangıç isteği engellendi</string>
+    <string name="boost_status_mem_usage_percent">Bellek %s</string>
+    <string name="boost_status_swap_usage_percent">Takas Alanı %s</string>
+    <string name="boost_status_available">Mevcut %s</string>
+    <string name="boost_status_not_enabled">Etkin değil</string>
+
     <string name="secure_privacy_enabled_apps">uygulamalar kısıtlandı</string>
-    <string name="secure_privacy_request_count">%s uygulama gizlilik veri talepleri işlendi</string>
+    <string name="secure_privacy_request_count">%s uygulama gizlilik verisi isteği işlendi</string>
 
     <string name="boost_status_system_memory">Bellek</string>
     <string name="boost_status_system_storage">Depolama</string>
 
-    <string name="feature_category_start_manage">Başlat</string>
+    <string name="feature_category_start_manage">Başlangıç</string>
     <string name="feature_title_one_key_boost">Tek Tuşla Hızlandır</string>
     <string name="feature_title_one_key_boost_abbr">Hızlandır</string>
-    <string name="feature_title_start_restrict">Arka Plan Başlat</string>
-    <string name="feature_title_start_restrict_abbr">BG Başlat</string>
-    <string name="feature_desc_start_restrict">Uygulamaların arka plandan başlatılmasına izin ver</string>
+    <string name="feature_title_start_restrict">Arka Plan Başlangıcı</string>
+    <string name="feature_title_start_restrict_abbr">BG Başlangıç</string>
+    <string name="feature_desc_start_restrict">Uygulamaların arka planda başlamasına izin ver</string>
     <string name="feature_title_bg_restrict">Arka Plan Görevi</string>
     <string name="feature_title_bg_restrict_abbr">BG Görevi</string>
     <string name="feature_desc_bg_restrict_brief">Uygulamaların arka planda çalışmasına izin ver</string>
-    <string name="feature_desc_bg_restrict">"Arka plan görevi" özelliği etkinleştirildiğinde, Thanox ekran kapandıktan sonra bir işlem temizliği yapar. Ekran kilitlendiğinde bile seçili uygulamaların çalışmaya devam etmesine izin verin ve bu uygulamaları tek tuşla hızlandırmadan hariç tutun</string>
+    <string name="feature_desc_bg_restrict">"Arka plan görevi" özelliği etkinleştirildiğinde, Thanox ekran kapatıldığında işlem temizliği yapacaktır. Seçili uygulamaların ekran kilitlendiğinde bile çalışmaya devam etmesine izin verin ve bu uygulamaları tek tuşla hızlandırmadan hariç tutun.</string>
 
-    <string name="menu_title_start_restrict_charts">Başlatma kaydı</string>
+    <string name="menu_title_start_restrict_charts">Başlangıç kaydı</string>
     <string name="menu_title_rules">Kurallar</string>
 
-    <string name="feature_summary_start_restrict_rules">Başlatma kontrolünü daha ayrıntılı hale getirmek için kurallar oluşturabilirsiniz. Detaylar için lütfen başlangıç kılavuzuna başvurun. \n\nNot: Kuralın önceliği, diğer tüm ayarlardan (örneğin, yeşillendirme, ilişkili başlatma listesi) daha yüksektir. \n\n İpucu: Kural denetimini kapatmak cihazın gücünden tasarruf sağlayabilir.</string>
-    <string name="feature_summary_standby_restrict_rules">Belirli servisleri korumayı kontrol edebilirsiniz, kullanım: KEEP $COMPONENT-NAME \nörneğin KEEP xxx/.XService</string>
+    <string name="feature_summary_start_restrict_rules">Başlangıç kontrolünü daha ayrıntılı hale getirmek için kurallar oluşturabilirsiniz. Detaylar için lütfen yeni başlayanlar kılavuzuna bakın. \n\nNot: Kuralın önceliği, diğer tüm ayarlardan (örneğin, yeşillendirme, ilişkili başlangıç listesi) daha yüksektir. \n\n İpucu: Kural denetimini kapatmak cihazınızın pil tasarrufu yapmasına yardımcı olabilir.</string>
+    <string name="feature_summary_standby_restrict_rules">Belirli hizmetleri tutmayı kontrol edebilirsiniz, kullanım: KEEP $COMPONENT-NAME  \nÖrn: KEEP xxx/.XService</string>
 
-    <string name="feature_category_app_clean_up">Temizle</string>
+    <string name="feature_category_app_clean_up">Temizleme</string>
     <string name="feature_title_clean_when_task_removed">Görevleri Temizle</string>
-    <string name="feature_desc_clean_when_task_removed">Seçilen uygulamalar, son görevlerden kaldırıldığında arka plan süreçlerini temizleyin</string>
-    <string name="feature_desc_clean_when_task_removed_brief">Görev kaldırıldığında arka plan sürecini temizleyin</string>
+    <string name="feature_desc_clean_when_task_removed">Seçilen uygulamalar, son kullanılan uygulamalardan temizlendiğinde arka plan süreçlerini temizleyin</string>
+    <string name="feature_desc_clean_when_task_removed_brief">Görev kaldırıldığında arka plan sürecini temizle</string>
 
-    <string name="activity_title_start_restrict">Arka Plan Başlatma</string>
+    <string name="activity_title_start_restrict">Arka Plan Başlangıcı</string>
     <string name="activity_title_bg_restrict">Arka Plan Görevi</string>
     <string name="activity_title_clean_when_task_removed">Görevleri Temizle</string>
 
     <string name="feature_title_process_manage">Süreç Yöneticisi</string>
-    <string name="activity_title_process_manage">Çalışanlar（%s）</string>
-    <string name="item_summary_process_count">%s süreçler</string>
+    <string name="activity_title_process_manage">Çalışıyor (%s)</string>
+    <string name="item_summary_process_count">%s süreç</string>
     <string name="item_summary_mem_size">%s</string>
     <string name="snack_process_update_message">Süreç listesi değişti, lütfen güncelleyin</string>
     <string name="snack_process_update_refresh">Güncelle</string>
@@ -927,91 +973,90 @@ Compatibility notice: If the default permission management function is not compa
 
     <string name="feature_category_app_manage">Uygulamalar</string>
     <string name="feature_title_apps_manager">Uygulama Yöneticisi</string>
-    <string name="activity_title_apps_manager">Uygulama yöneticisi</string>
-    <string name="feature_summary_apps_manager">Uygulama bazında yönetim ve yapılandırma</string>
+    <string name="activity_title_apps_manager">Uygulama Yöneticisi</string>
+    <string name="feature_summary_apps_manager">Uygulamaya özel yönetim ve yapılandırma</string>
     <string name="titile_suggested_apps_recent_used">Son Kullanılan Uygulamalar</string>
-    <string name="title_suggested_apps_view_all">%s uygulamaların tümünü göster</string>
+    <string name="title_suggested_apps_view_all">Tüm %s uygulamayı göster</string>
 
     <string name="feature_category_privacy">Gizlilik</string>
-    <string name="feature_category_manage">Yönet</string>
+    <string name="feature_category_manage">Yönetim</string>
     <string name="feature_category_protect">Koruma</string>
-    <string name="feature_category_remind">Hatırlatıcı</string>
+    <string name="feature_category_remind">Hatırlatma</string>
     <string name="feature_category_misc">Diğer</string>
 
-    <string name="feature_title_recent_task_blur">Görev Bulanıklaştırma</string>
-    <string name="feature_summary_recent_task_blur">Son görevlerde bulanıklaştırma efekti ekleyin</string>
+    <string name="feature_title_recent_task_blur">Görev Bulanıklığı</string>
+    <string name="feature_summary_recent_task_blur">Son kullanılan uygulamalara bulanıklık efekti ekleyin</string>
 
     <string name="feature_title_wakelock_blocker">Wakelock Engelleyici</string>
     <string name="wakelock_state_holding">Tutuluyor</string>
     <string name="wakelock_view_held_only">Sadece Tutulanlar</string>
-    <string name="wakelock_count">%s wakelocks</string>
+    <string name="wakelock_count">%s wakelock</string>
 
     <string name="feature_title_app_lock">Uygulama Kilidi</string>
-    <string name="feature_summary_app_lock">Uygulama başlatılmadan önce kilit ekranını göster</string>
+    <string name="feature_summary_app_lock">Uygulama başlatılmadan önce kilit arayüzünü göster</string>
 
     <string name="feature_category_notification">Bildirim</string>
-    <string name="feature_title_light_on_notification">Ekranı Aydınlat</string>
-    <string name="feature_summary_light_on_notification">Yeni bildirim geldiğinde ekranı aydınlat</string>
-    <string name="feature_title_push_delegate">Bildirim Vekili</string>
+    <string name="feature_title_light_on_notification">Ekranı Aç</string>
+    <string name="feature_summary_light_on_notification">Yeni bildirim geldiğinde ekranı aç</string>
+    <string name="feature_title_push_delegate">Push Yetkilisi</string>
 
     <string name="feature_category_plugins">Mevcut Özellikler</string>
 
     <string name="feature_category_ext">Genişletme</string>
     <string name="feature_category_power_save">Güç</string>
     <string name="feature_title_smart_app_standby">X Modu</string>
-    <string name="feature_summary_smart_app_standby">Seçilen uygulamayı etkiler. Uygulama arka plana geçtiğinde, tüm servisler otomatik olarak durdurulur veya durgun moda alınır; herhangi bir servisin hariç tutulması gerekiyorsa, özel kuralları kullanın.</string>
+    <string name="feature_summary_smart_app_standby">Seçili uygulamaları etkiler. Uygulama arka plana geçtiğinde, tüm hizmetleri otomatik olarak durdurur veya onları boşta moduna alır; herhangi bir hizmetin hariç tutulması gerekiyorsa, lütfen özel kurallar kullanın.</string>
 
-    <string name="feature_summary_smart_app_standby_brief">Arka plan uygulamaları için servis durdurma veya inaktif hale getirme</string>
+    <string name="feature_summary_smart_app_standby_brief">Arka plan uygulamaları için hizmetleri durdur veya devre dışı bırak</string>
 
     <string name="feature_category_apps">Uygulamalar</string>
     <string name="menu_title_smart_app_freeze_enable_all_smart_freeze_apps">Tümünü kaldır ve çöz</string>
-    <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">Smart Freeze listesine eklenmiş tüm uygulamaları çöz ve listeden kaldır. Bunu yapmak istediğinizden emin misiniz?</string>
-    <string name="menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp">Geçici olarak tüm listeyi çöz</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">Tüm Smart Freeze uygulamalarını çözüp, bunları Smart Freeze listesinden kaldıracaktır. Bunu yapmak istediğinizden emin misiniz?</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp">Tümünü geçici olarak çöz</string>
     <string name="menu_title_smart_app_freeze_export_package_list">Uygulama listesini dışa aktar</string>
     <string name="menu_title_smart_app_freeze_import_package_list">Uygulama listesini içe aktar</string>
-    <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">Smart Freeze listesinde olan tüm uygulamaları geçici olarak çözecektir, bunu yapmak istediğinizden emin misiniz?</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">Smart Freeze listesindeki tüm uygulamaları geçici olarak çözecektir, bunu yapmak istediğinizden emin misiniz?</string>
     <string name="menu_title_smart_app_freeze_enable_all_apps">Tüm uygulamaları çöz</string>
-    <string name="menu_desc_smart_app_freeze_enable_all_apps">Cihazınızdaki tüm devre dışı bırakılmış veya askıya alınmış uygulamaları, yüklü veya sistem uygulamaları dahil olmak üzere çözecektir. Bunu yapmak istediğinizden emin misiniz?</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps">Cihazınızdaki devre dışı bırakılmış veya askıya alınmış tüm uygulamaları, sistem uygulamaları da dahil olmak üzere çözecektir. Bunu yapmak istediğinizden emin misiniz?</string>
     <string name="feature_title_smart_app_freeze">Smart Freeze</string>
     <string name="feature_title_enable_package_on_launch">DOL</string>
-    <string name="feature_summary_enable_package_on_launch">Etkinlik başlatma isteğinde uygulamayı çöz</string>
-    <string name="pref_title_enable_package_on_launch_by_default">DOL\'u Etkinleştir</string>
-    <string name="pref_title_dol_tips">DOL İpuçlarını Göster</string>
-    <string name="pref_summary_enable_package_on_launch_by_default">Uygulama Smart Freeze listesine eklendiğinde \"DOL\" etkinleştir</string>
-    <string name="feature_summary_smart_app_freeze">Profiline göre uygulamaları otomatik olarak devre dışı bırak</string>
-    <string name="feature_desc_smart_app_freeze">Not: uygulama dondurma, Android\'in yerleşik özelliğini kullanır. Bu, Thanox kaldırılsa bile bu etkilerin devam edeceği anlamına gelir.</string>
-    <string name="feature_title_app_component_manager">Component Manager</string>
-    <string name="feature_desc_app_component_manager">Note: Component Manager uses Android system capabilities, which means these states will persist with the system. Even if you uninstall Thanox, these states will remain. Therefore, if you disable certain components of [System Apps], it may cause the system to fail to boot, and even uninstalling Thanox will not automatically restore them.</string>
+    <string name="feature_summary_enable_package_on_launch">Etkinlik Başlatma isteğinde uygulamayı çöz</string>
+    <string name="pref_title_enable_package_on_launch_by_default">DOL\'u etkinleştir</string>
+    <string name="pref_title_dol_tips">DOL ipuçlarını göster</string>
+    <string name="pref_summary_enable_package_on_launch_by_default">Uygulama Smart Freeze listesine eklendiğinde "DOL" özelliğini etkinleştir</string>
+    <string name="feature_summary_smart_app_freeze">Profili baz alarak uygulamaları otomatik devre dışı bırak</string>
+    <string name="feature_desc_smart_app_freeze">Not: Uygulama dondurma, Android\'in yerleşik özelliğini kullanır. Bu, Thanox kaldırılsa bile bu etkilerin devam edeceği anlamına gelir.</string>
+    <string name="feature_title_app_component_manager">Bileşen Yöneticisi</string>
+    <string name="feature_desc_app_component_manager">Not: Bileşen Yöneticisi, Android sistem yeteneklerini kullanır. Bu nedenle, bu durumlar sistemle birlikte devam edecektir. Thanox\'u kaldırsanız bile bu ayarlar kalacaktır. Bu yüzden, [Sistem Uygulamaları] bileşenlerini devre dışı bırakmanız sistemin başlatılamamasına neden olabilir ve Thanox\'u kaldırmanız bile bunu otomatik olarak geri getirmeyecektir.</string>
+
     <string name="menu_title_create_shortcut">Kısayol oluştur</string>
-    <string name="menu_title_create_shortcut_apk">Proxy apk oluştur</string>
-    <string name="menu_title_broadcast_intent_shortcut">Niyet yayını kısayolu</string>
-    <string name="menu_title_activity_intent_shortcut">Etkinlik niyeti kısayolu</string>
-    <string name="dialog_message_create_shortcut_apk">Bir kısayol apksı oluştur, bu uygulamayı yükleyerek devre dışı bırakılmış uygulamalar için başlatıcı simgesi çözümü olarak kullanabilirsiniz</string>
+    <string name="menu_title_create_shortcut_apk">Proxy APK oluştur</string>
+    <string name="menu_title_broadcast_intent_shortcut">Yayın intent kısayolu</string>
+    <string name="menu_title_activity_intent_shortcut">Etkinlik intent kısayolu</string>
+    <string name="dialog_message_create_shortcut_apk">Kısayol yedeği APK oluştur, bu uygulamayı yükleyerek devre dışı bırakılmış uygulamalar için başlatıcı simgesi olarak kullanabilirsiniz</string>
 
-    <string name="feature_title_recovery_tools">Recovery tools</string>
-    <string name="feature_title_recovery_tools_component_settings">Restore app component settings</string>
-    <string name="feature_title_recovery_tools_component_settings_summary">Restores the component settings of all apps configured through Thanox, including activities, services, broadcasts, and content providers.</string>
+    <string name="feature_title_recovery_tools">Kurtarma Araçları</string>
+    <string name="feature_title_recovery_tools_component_settings">Uygulama bileşen ayarlarını geri yükle</string>
+    <string name="feature_title_recovery_tools_component_settings_summary">Thanox aracılığıyla yapılandırılmış tüm uygulamaların bileşen ayarlarını geri yükler, aktiviteler, servisler, yayınlar ve içerik sağlayıcılar dahil.</string>
+    <string name="feature_title_recovery_tools_component_settings_flags_summary">Sistem bileşenlerinde yapılan değişiklikler nedeniyle cihazınız normal şekilde başlatılamıyorsa, bilgisayarınızda Recovery veya ADB araçlarını kullanarak /data/system/thanos dizinine boş bir dosya oluşturabilirsiniz. Dosya adı: %s \nThanox, sistem başlangıcında tüm bileşen ayarlarını geri yüklemeye çalışacaktır.</string>
 
-    <string name="feature_title_recovery_tools_component_settings_flags_summary">If your device fails to boot normally due to modifications to system components, you can try to manually create an empty file in the /data/system/thanos directory using recovery or ADB tools on your computer. Name the file: %s \n Thanox will attempt to restore all component settings for all apps during system startup.</string>
-
-    <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">Adaptif Pil Etkinleştirildi</string>
-    <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">Bu özellik yalnızca Adaptif Pil etkinse çalışır @Android Pie+.</string>
+    <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">Uyarlanabilir Pil Etkinleştirildi</string>
+    <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">Bu özellik yalnızca Android Pie+ sürümlerinde Uyarlanabilir Pil etkinleştirildiğinde çalışır.</string>
 
     <string name="message_do_you_want_to_add_apps_to_pkg_set">Bu uygulamaları mevcut Paket Setine de eklemek istiyor musunuz?</string>
 
-    <string name="feature_title_infinite_z">Uygulama Klonla</string>
-    <string name="feature_message_infinite_z_enable">Uygulama klonlama, Android\'in çoklu kullanıcı mekanizmasına dayanarak uygulanmıştır. Uygulama klonlamayı etkinleştirmek için Thanox bir kullanıcı profili oluşturacaktır. Genellikle, Başlatıcı\'da bir "İş" sekmesi görüntülenir. \nBu özellik şu anda deneysel olup henüz kararlı değildir. \n\nEtkinleştirmek istiyor musunuz?</string>
-    <string name="feature_message_infinite_z_disable">Uygulama klonlama kullanıcısının tüm verileri silinecek ve geri getirilemeyecektir. Uygulama klonlamayı devre dışı bırakmak istediğinizden emin misiniz?</string>
-    <string name="feature_message_infinite_z_uninstall"><b>%s</b>\'i kaldırmak istediğinizden emin misiniz? Klonlanmış uygulamanın verileri silinecek ve geri getirilemeyecek</string>
+    <string name="feature_title_infinite_z">Uygulama Klonlama</string>
+    <string name="feature_message_infinite_z_enable">Uygulama klonlama, Android çoklu kullanıcı mekanizmasına dayalı olarak uygulanmaktadır. Uygulama klonlamayı etkinleştirmek için, Thanox bir kullanıcı Profili oluşturacaktır. Genellikle, Başlatıcı\'da bir "İş" sekmesi görünecektir. \nBu özellik şu anda deneysel olup henüz kararlı değildir. \n\nBunu etkinleştirmek istiyor musunuz?</string>
+    <string name="feature_message_infinite_z_disable">Uygulama klon kullanıcı verileri tamamen silinecek ve geri alınamayacaktır. Uygulama klonunu devre dışı bırakmak istediğinizden emin misiniz?</string>
+    <string name="feature_message_infinite_z_uninstall"><b>%s</b> uygulamasını kaldırmak istediğinizden emin misiniz? Klonlanmış uygulamanın verileri silinecek ve geri alınamayacaktır.</string>
 
     <string name="menu_title_copy">Kopyala</string>
-
     <string name="menu_title_copy_pkg_name">Paket adını kopyala</string>
     <string name="menu_title_launch_app">Başlat</string>
     <string name="menu_title_launch_system_settings">Sistem ayarları</string>
 
     <string name="feature_title_data_cheat">Gizli Mod</string>
-    <string name="feature_desc_data_cheat">SIM bilgilerini, seri numarasını vb. gizleyin. Seçili uygulama için Xposed yükleyici kapsamını etkinleştirin</string>
+    <string name="feature_desc_data_cheat">SIM bilgilerini, seri kimlik numarasını vb. gizle. Lütfen seçili uygulama için Xposed yükleyici kapsamını etkinleştirin.</string>
     <string name="activity_title_data_cheat">Gizli Mod</string>
     <string name="feature_summary_pkg_data_cheat">Gizli Mod</string>
 
@@ -1020,54 +1065,67 @@ Compatibility notice: If the default permission management function is not compa
 
     <string name="menu_start_manage_info">Yardım</string>
     <string name="info_title_start_restrict">İpuçları</string>
-    <string name="info_message_start_restrict">Uygulamaların arka plandan başlatılmasını önleyin</string>
+    <string name="info_message_start_restrict">Uygulamaların arka planda başlamasını engelle</string>
     <string name="info_title_bg_restrict">İpuçları</string>
-    <string name="info_message_bg_restrict">Ekran kilitlenirse arka plan işlemi temizlenecektir</string>
+    <string name="info_message_bg_restrict">Ekran kilitlendiğinde arka plan süreci temizlenecek</string>
 
     <string name="pre_category_ui">Görünüm</string>
     <string name="pre_title_ui">Temalar ve Simgeler</string>
     <string name="pre_title_app_theme">Tema</string>
-    <string name="pre_title_app_icon_pack">Simge paketi</string>
-    <string name="pre_title_app_icon_crop_to_circle">Daire simge</string>
+    <string name="pre_title_app_icon_pack">Simge Paketi</string>
+    <string name="pre_title_app_icon_crop_to_circle">Yuvarlak Simge</string>
+
     <string name="pre_category_strategy">Strateji</string>
-    <string name="pre_title_strategy">Profiller ve şablonlar</string>
+    <string name="pre_title_strategy">Profiller ve Şablonlar</string>
+
     <string name="pre_category_profile">Profil</string>
     <string name="pre_category_data">Veri</string>
-    <string name="pre_title_data">Yedekleme geri yükleme</string>
+    <string name="pre_title_data">Yedekleme ve Geri Yükleme</string>
+
     <string name="pre_category_about">Hakkında</string>
     <string name="pre_title_about">Thanox Hakkında</string>
+
     <string name="pre_category_dev_tools">Geliştiriciler</string>
-    <string name="pre_title_developer">Geliştirici araçları</string>
-    <string name="pre_title_power">Güç tasarrufu ayarları</string>
+    <string name="pre_title_developer">Geliştirici Araçları</string>
+
+    <string name="pre_title_power">Güç Tasarrufu Ayarları</string>
     <string name="pre_category_power">Güç</string>
-    <string name="pre_category_app_feature_info">Uygulama bilgisi</string>
+
+    <string name="pre_category_app_feature_info">Uygulama Bilgisi</string>
     <string name="pre_category_app_feature_config">Yapılandırmalar</string>
-    <string name="pre_category_app_disable_enable">Devre dışı bırak</string>
+    <string name="pre_category_app_disable_enable">Devre Dışı Bırak</string>
 
-    <string name="pref_title_app_stability_upkeep">App stability upkeep</string>
-    <string name="pref_summary_app_stability_upkeep">Enabling the app stability maintenance feature can, to a certain extent, prevent app or system crashes caused by disabling or interfering with certain app components or behaviors.</string>
+    <string name="pref_title_app_stability_upkeep">Uygulama Kararlılık Bakımı</string>
+    <string name="pref_summary_app_stability_upkeep">Uygulama kararlılığı bakım özelliğini etkinleştirmek, belirli uygulama bileşenlerini veya davranışlarını devre dışı bırakmaktan veya değiştirmekten kaynaklanan uygulama veya sistem çökmesini belirli bir ölçüde önleyebilir.</string>
 
-    <string name="pref_title_enable_logging">Kaydı etkinleştir</string>
-    <string name="pref_summary_enable_logging">Konsolda kayıt bilgilerini göster</string>
-    <string name="pref_title_show_current_activity">Mevcut etkinliği göster</string>
-    <string name="pref_title_enable_global_white_list">Genel beyaz liste</string>
-    <string name="pref_summary_enable_global_white_list">Uyarı: bu ayar tehlikelidir. Deneyimsiz kullanıcılar bu seçeneği denememelidir. \nYanlış kullanım nedeniyle ciddi sistem hatalarını önlemek için, Thanox varsayılan olarak bazı temel sistem uygulamalarını (bileşenler, telefon, medya vb.) içeren bir genel beyaz listeyi korur. \nBu listeyi etkinleştirmek istemiyorsanız, bu seçeneği kapatabilirsiniz</string>
-    <string name="pref_title_build_info_app">Uygulama bilgisi</string>
-    <string name="pref_title_build_info_server">Çekirdek bilgisi</string>
-    <string name="pref_title_patch_info">Yama bilgisi</string>
-    <string name="pre_title_ignore_system_app">Sistem uygulamalarını hariç tut</string>
-    <string name="pre_summary_ignore_system_app">Sistem uygulamalarını beyaz listeye ekleyin</string>
-    <string name="pref_title_enable_power_save">Güç tasarrufu</string>
-    <string name="dialog_title_battery_drain_fast_by_thanox">Pil tüketimi</string>
-    <string name="dialog_message_battery_drain_fast_by_thanox">Thanox, başlangıç ​​kayıtları, izin erişim kayıtları ve gizli kayıtları başlatıyor. Bu veriler gerçek zamanlı olarak dosyalara kaydedilecek ve bu da güç tüketimini hızlandırabilir. İhtiyaç duyulduğunda güç tasarrufu modunu etkinleştirmeniz önerilir.</string>
-    <string name="pref_title_enable_high_battery_drain_app_reminding">Yüksek güç tüketimi uyarısı</string>
-    <string name="pref_summary_enable_high_battery_drain_app_reminding">Yüksek güç tüketen uygulamalar algılandığında uyarı ver</string>
+    <string name="pref_title_enable_logging">Günlük Kaydını Etkinleştir</string>
+    <string name="pref_summary_enable_logging">Konsolda günlük bilgilerini göster</string>
 
-    <string name="pref_summary_enable_power_save">Uygulama başlangıçlarını, işlemlerini, gizlilik verilerine erişimlerini kaydetmeyi durdurarak mümkün olduğunca pil tasarrufu yapın</string>
+    <string name="pref_title_show_current_activity">Geçerli Etkinliği Göster</string>
 
-    <string name="pref_title_open_source_license">Açık kaynak lisansları</string>
+    <string name="pref_title_enable_global_white_list">Genel Beyaz Liste</string>
+    <string name="pref_summary_enable_global_white_list">Uyarı: Bu ayar tehlikelidir. Deneyimsiz kullanıcılar bu seçeneği denememelidir. \nYanlış kullanım nedeniyle sistem hatalarını önlemek için, Thanox varsayılan olarak sistemin temel bileşenlerini, telefon uygulamalarını, medya oynatıcılarını vb. içeren bir genel beyaz listeyi korur.\nBu listeyi etkinleştirmek istemiyorsanız, bu seçeneği kapatabilirsiniz.</string>
 
-    <string name="pref_title_icon_maker_remix_icon">Simge sağlayıcısı</string>
+    <string name="pref_title_build_info_app">Uygulama Bilgisi</string>
+    <string name="pref_title_build_info_server">Çekirdek Bilgisi</string>
+    <string name="pref_title_patch_info">Yama Bilgisi</string>
+
+    <string name="pre_title_ignore_system_app">Sistem Uygulamalarını Hariç Tut</string>
+    <string name="pre_summary_ignore_system_app">Sistem uygulamalarını beyaz listeye ekle</string>
+
+    <string name="pref_title_enable_power_save">Güç Tasarrufu</string>
+
+    <string name="dialog_title_battery_drain_fast_by_thanox">Pil Tüketimi</string>
+    <string name="dialog_message_battery_drain_fast_by_thanox">Thanox, başlangıç günlükleri, izin erişim günlükleri ve gizli günlükleri kaydediyor. Bu veriler gerçek zamanlı olarak dosyalara kaydedilecek ve güç tüketimini hızlandırabilir. Güç tasarruf modunu gerektiğinde etkinleştirmeniz önerilir.</string>
+
+    <string name="pref_title_enable_high_battery_drain_app_reminding">Yüksek Pil Tüketim Uyarısı</string>
+    <string name="pref_summary_enable_high_battery_drain_app_reminding">Yüksek güç tüketimi olan uygulamalar algılandığında uyarı göster</string>
+
+    <string name="pref_summary_enable_power_save">Pili mümkün olduğunca korumak için uygulama başlatma, izin erişimi ve gizlilik verisi erişimi kayıtlarını durdur</string>
+
+    <string name="pref_title_open_source_license">Açık Kaynak Lisansları</string>
+
+    <string name="pref_title_icon_maker_remix_icon">Simge Sağlayıcı</string>
     <string name="pref_summary_icon_maker_remix_icon">Remix Design © 2018 https://remixicon.com</string>
 
     <string name="pref_title_rss_e">Gruplar</string>
@@ -1078,63 +1136,63 @@ Compatibility notice: If the default permission management function is not compa
     <string name="pref_title_app_state_disabled">Uygulama devre dışı</string>
     <string name="pref_title_app_to_enable">Etkinleştir</string>
 
-    <string name="pre_title_backup">Yedekle</string>
-    <string name="pre_summary_backup">Thanox ayarlarını harici depolamaya yedekleyin</string>
-    <string name="pre_title_restore">Geri yükle</string>
-    <string name="pre_sumary_restore">Thanox ayarlarını harici dosyadan geri yükleyin. Başarısız olursa, /data/system/thanos/ dizinini manuel olarak silmeyi deneyebilir veya dizin sahibini 1000 olarak ayarlamayı deneyebilirsiniz</string>
-    <string name="pre_title_restore_default">Varsayılanı geri yükle</string>
-    <string name="pre_summary_restore_default">Thanox varsayılan ayarlarını geri yükleyin</string>
+    <string name="pre_title_backup">Yedekleme</string>
+    <string name="pre_summary_backup">Thanox ayarlarını harici depolamaya yedekle</string>
+    <string name="pre_title_restore">Geri Yükle</string>
+    <string name="pre_sumary_restore">Thanox ayarlarını harici bir dosyadan geri yükle. Eğer başarısız olursa, /data/system/thanos/ dizinini manuel olarak silebilir veya dizin sahibini 1000 olarak ayarlamayı deneyebilirsiniz.</string>
+    <string name="pre_title_restore_default">Varsayılanı Geri Yükle</string>
+    <string name="pre_summary_restore_default">Thanox varsayılan ayarlarını geri yükle</string>
 
     <string name="pref_title_new_installed_apps_config_enabled">Otomatik yapılandırma</string>
-    <string name="pref_summary_new_installed_apps_config_enabled">Yeni yüklenen uygulamaları otomatik olarak yapılandır</string>
+    <string name="pref_summary_new_installed_apps_config_enabled">Yeni yüklenen uygulamaları otomatik yapılandır</string>
     <string name="pref_title_new_installed_apps_config">Yapılandırma şablonu</string>
     <string name="pref_summary_new_installed_apps_config">Otomatik yapılandırma için şablonu düzenle</string>
 
     <string name="pref_title_auto_request_xposed_scope">Xposed kapsamı iste</string>
-    <string name="pref_summary_auto_request_xposed_scope">Uygulama için Xposed kapsamına dayanan bir özelliği etkinleştirdiğinizde, Thanox otomatik olarak Kapsamı isteyecektir. Lütfen sistem bildirimine dikkat edin \nDikkat, bu özellik LSPosed framework\'ünün en son sürümüne bağlıdır \nThanox\'un arka plan başlatmasını sağlayarak sistem ayarlarını ve Thanox ayarlarını da kontrol etmeyi unutmayın</string>
+    <string name="pref_summary_auto_request_xposed_scope">Xposed kapsamına bağlı bir özelliği etkinleştirdiğinizde, Thanox otomatik olarak kapsam isteğinde bulunacaktır. Lütfen sistem bildirimlerine dikkat edin. \nDikkat: Bu özellik, LSPosed çerçevesinin en son sürümüne bağlıdır. \nLütfen ayrıca sistem ayarlarını ve Thanox ayarlarını kontrol ederek Thanox\'un arka planda başlamasına izin verin.</string>
 
     <string name="pref_title_config_template_category">Şablonlar</string>
-    <string name="pref_action_create_new_config_template">Şablon oluştur</string>
+    <string name="pref_action_create_new_config_template">Yeni şablon oluştur</string>
     <string name="pref_action_edit_or_view_config_template">Görüntüle &amp; Düzenle</string>
     <string name="pref_action_delete_config_template">Sil</string>
     <string name="pref_action_apply_config_template">Şablondan uygula</string>
 
     <string name="pref_action_backup_component_settings">Bileşen ayarlarını yedekle</string>
-    <string name="pref_action_backup_component_settings_summary">Bileşen ayarlarını yedekle, Aktivite, Servis, Alıcı, İçerik Sağlayıcı etkinleştirme ve devre dışı bırakma ayarlarını dahil et</string>
+    <string name="pref_action_backup_component_settings_summary">Bileşen ayarlarını yedekle, Etkinlik, Servis, Alıcı ve İçerik Sağlayıcı etkin/devre dışı bırakma ayarlarını içerir</string>
     <string name="pref_action_restore_component_settings">Bileşen ayarlarını içe aktar</string>
 
-    <string name="pre_message_restore_success">Geri yükleme başarılı, değişikliklerin geçerli olması için lütfen yeniden başlatın</string>
+    <string name="pre_message_restore_success">Geri yükleme başarılı, değişikliklerin etkili olması için lütfen yeniden başlatın</string>
     <string name="pre_message_backup_success">Yedekleme başarılı</string>
 
-    <string name="pre_cheat_field_category_original">Orijinal alan</string>
-    <string name="pre_cheat_field_category_cheated">Gizli alan</string>
-    <string name="pre_cheat_field_category_others">Diğerleri</string>
-    <string name="pre_title_cheat_sim_serial">SIM seri numarası</string>
+    <string name="pre_cheat_field_category_original">Orijinal Alan</string>
+    <string name="pre_cheat_field_category_cheated">Gizli Alan</string>
+    <string name="pre_cheat_field_category_others">Diğer</string>
+    <string name="pre_title_cheat_sim_serial">SIM Seri Numarası</string>
 
-    <string name="pre_title_cheat_sim_country_iso">SIM Ülke ISO Kodu</string>
-    <string name="pre_title_cheat_net_country_iso">Ağ Ülke ISO Kodu</string>
+    <string name="pre_title_cheat_sim_country_iso">SIM Ülke ISO</string>
+    <string name="pre_title_cheat_net_country_iso">Ağ Ülke ISO</string>
 
     <string name="pre_title_cheat_net_op_1">Ağ Operatörü (Slot 1)</string>
     <string name="pre_title_cheat_net_op_2">Ağ Operatörü (Slot 2)</string>
     <string name="pre_title_cheat_net_op_3">Ağ Operatörü (Slot 3)</string>
-    <string name="pre_title_cheat_net_op_name_1">Ağ Operatör adı (Slot 1)</string>
-    <string name="pre_title_cheat_net_op_name_2">Ağ Operatör adı (Slot 2)</string>
-    <string name="pre_title_cheat_net_op_name_3">Ağ Operatör adı (Slot 3)</string>
+    <string name="pre_title_cheat_net_op_name_1">Ağ Operatörü Adı (Slot 1)</string>
+    <string name="pre_title_cheat_net_op_name_2">Ağ Operatörü Adı (Slot 2)</string>
+    <string name="pre_title_cheat_net_op_name_3">Ağ Operatörü Adı (Slot 3)</string>
 
     <string name="pre_title_cheat_sim_op_1">SIM Operatörü (Slot 1)</string>
     <string name="pre_title_cheat_sim_op_2">SIM Operatörü (Slot 2)</string>
     <string name="pre_title_cheat_sim_op_3">SIM Operatörü (Slot 3)</string>
-    <string name="pre_title_cheat_sim_op_name_1">SIM Operatör adı (Slot 1)</string>
-    <string name="pre_title_cheat_sim_op_name_2">SIM Operatör adı (Slot 2)</string>
-    <string name="pre_title_cheat_sim_op_name_3">SIM Operatör adı (Slot 3)</string>
+    <string name="pre_title_cheat_sim_op_name_1">SIM Operatörü Adı (Slot 1)</string>
+    <string name="pre_title_cheat_sim_op_name_2">SIM Operatörü Adı (Slot 2)</string>
+    <string name="pre_title_cheat_sim_op_name_3">SIM Operatörü Adı (Slot 3)</string>
 
-    <string name="pre_title_cheat_net_op_name">Ağ Operatör adı (Herhangi bir Slot)</string>
-    <string name="pre_title_cheat_net_op">Ağ Operatörü (Herhangi bir Slot)</string>
+    <string name="pre_title_cheat_net_op_name">Ağ Operatörü Adı (Tüm Slotlar)</string>
+    <string name="pre_title_cheat_net_op">Ağ Operatörü (Tüm Slotlar)</string>
 
-    <string name="pre_title_cheat_sim_op_name">SIM Operatör adı (Herhangi bir Slot)</string>
-    <string name="pre_title_cheat_sim_op">SIM Operatörü (Herhangi bir Slot)</string>
+    <string name="pre_title_cheat_sim_op_name">SIM Operatörü Adı (Tüm Slotlar)</string>
+    <string name="pre_title_cheat_sim_op">SIM Operatörü (Tüm Slotlar)</string>
 
-    <string name="pre_title_cheat_line_one_num">Telefon numarası</string>
+    <string name="pre_title_cheat_line_one_num">Telefon Numarası</string>
     <string name="pre_title_cheat_device_id">Cihaz Kimliği (Eski API)</string>
     <string name="pre_title_cheat_android_id">Android Kimliği</string>
 
@@ -1146,77 +1204,77 @@ Compatibility notice: If the default permission management function is not compa
     <string name="pre_title_cheat_meid_slot2">MEID (Slot 2)</string>
     <string name="pre_title_cheat_meid_slot3">MEID (Slot 3)</string>
 
-    <string name="pre_title_cheat_not_set">Ayarlanmamış, bu alan taklit edilmeyecek</string>
+    <string name="pre_title_cheat_not_set">Ayarlanmadı, bu alan taklit edilmeyecek</string>
     <string name="pre_title_cheat_installed_apps">Yüklü uygulamaları gizle</string>
-    <string name="pre_title_cheat_show_cheated_apps_notifications">Bildirim göster</string>
+    <string name="pre_title_cheat_show_cheated_apps_notifications">Bildirimleri göster</string>
 
-    <string name="pre_title_bg_screen_off_clean_up_delay">Ekran kilitlendikten sonra temizleme gecikmesi</string>
+    <string name="pre_title_bg_screen_off_clean_up_delay">Ekran kilitlendiğinde temizlemeyi geciktir</string>
     <string name="pre_title_bg_screen_off_clean_up_skip_audio">Ses akışlarını temizleme</string>
     <string name="pre_summary_bg_screen_off_clean_up_skip_audio">Ses çalan uygulamaları açık tut</string>
 
     <string name="pre_title_recent_task_blur_mask_mode">İçeriği gizle</string>
-    <string name="pre_summary_recent_task_blur_mask_mode">Görevin içeriğini tamamen gizle, bulanıklaştırmak yerine</string>
+    <string name="pre_summary_recent_task_blur_mask_mode">Bulanıklaştırma yerine görevin içeriğini tamamen gizle</string>
 
-    <string name="pre_title_exclude_recent_task">Son görevden çıkar</string>
-    <string name="pre_summary_exclude_recent_task">Bu uygulama için son görevi zorla çıkar veya dahil et</string>
+    <string name="pre_title_exclude_recent_task">Son görevlerden hariç tut</string>
+    <string name="pre_summary_exclude_recent_task">Bu uygulama için son görevleri zorla hariç tut veya dahil et</string>
     <string name="pre_entry_exclude_recent_task_default">Varsayılan</string>
-    <string name="pre_entry_exclude_recent_task_include">Dahil et</string>
-    <string name="pre_entry_exclude_recent_task_exclude">Çıkar</string>
+    <string name="pre_entry_exclude_recent_task_include">Dahil Et</string>
+    <string name="pre_entry_exclude_recent_task_exclude">Hariç Tut</string>
 
-    <string name="pre_title_force_dialog_cancelable">İptal edilebilir diyalog</string>
-    <string name="pre_summary_force_dialog_cancelable">Bu uygulama için diyalogların iptal edilebilir olmasını zorla, lütfen Xposed yükleyici kapsamını etkinleştirin</string>
+    <string name="pre_title_force_dialog_cancelable">İptal Edilebilir Diyalog</string>
+    <string name="pre_summary_force_dialog_cancelable">Uygulama diyaloglarını iptal edilebilir hale getir, lütfen bu uygulama için Xposed yükleyici kapsamını etkinleştir</string>
 
-    <string name="pre_title_resident">Sabit uygulama</string>
-    <string name="pre_summary_resident">Bu uygulamanın LMK tarafından kapatılmasını engelle</string>
+    <string name="pre_title_resident">Kalıcı Uygulama</string>
+    <string name="pre_summary_resident">Bu uygulamanın Düşük Bellek Katili (LMK) tarafından sonlandırılmasını önle</string>
 
-    <string name="pre_title_redaction_notification">Bildirim Redaksiyonu</string>
-    <string name="pre_summary_redaction_notification">Bildirim başlığını ve metnini özel bir şekilde değiştir</string>
+    <string name="pre_title_redaction_notification">Bildirim Düzenleme</string>
+    <string name="pre_summary_redaction_notification">Uygulama bildirimlerini özel Başlık ve Metin ile değiştir</string>
     <string name="pre_title_redaction_notification_title">Başlık</string>
     <string name="pre_title_redaction_notification_text">Metin</string>
 
     <string name="cheat_field_auto_gen">Rastgele alanlarla doldur</string>
 
-    <string name="launch_other_app_options_allow">İzin ver</string>
+    <string name="launch_other_app_options_allow">İzin Ver</string>
     <string name="launch_other_app_options_ask">Sor</string>
     <string name="launch_other_app_options_ignore">Yoksay</string>
-    <string name="launch_other_app_options_allow_listed">Allow listed</string>
-    <string name="launch_other_app">Başka bir uygulamayı başlat</string>
+    <string name="launch_other_app_options_allow_listed">İzin Listesi</string>
+    <string name="launch_other_app">Başka Bir Uygulama Başlat</string>
 
-    <string name="sensor_off">Sensor off</string>
-    <string name="sensor_off_summary">Turn off all sensor when app is in foreground</string>
-    <string name="sensor_off_default">Don\'t turn off</string>
-    <string name="sensor_off_on_start">Turn off 6 seconds</string>
-    <string name="sensor_off_always">Always turn off</string>
-    <string name="sensor_off_all">All</string>
+    <string name="sensor_off">Sensör Kapalı</string>
+    <string name="sensor_off_summary">Uygulama ön planda olduğunda tüm sensörleri kapat</string>
+    <string name="sensor_off_default">Kapatma</string>
+    <string name="sensor_off_on_start">6 Saniye Kapat</string>
+    <string name="sensor_off_always">Her Zaman Kapat</string>
+    <string name="sensor_off_all">Tümü</string>
 
-    <string name="start_record_allowed">İzin verildi</string>
+    <string name="start_record_allowed">İzin Verildi</string>
     <string name="start_record_blocked">Engellendi</string>
     <string name="start_record_merged">Birleştirildi</string>
 
     <string name="privacy_record">Hile Kayıtları</string>
 
-    <string name="pre_title_bg_screen_off_clean_up_skip_notification">Bildirimleri olan uygulamaları sakla</string>
-    <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">Son görevlerdeki uygulamaları sakla</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_notification">Bildirimleri Olan Uygulamaları Koru</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">Son Görevlerdeki Uygulamaları Koru</string>
 
-    <string name="pre_title_bg_screen_off_clean_up_skip_fg">Ön plandaki uygulamayı sakla</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_fg">Ön Plandaki Uygulamayı Koru</string>
     <string name="pre_summary_bg_screen_off_clean_up_skip_fg">Etkinleştirildiğinde, ön plandaki uygulamalar temizlenmeyecek</string>
 
-    <string name="pre_title_bg_restrict_show_notification">Bildirim göster</string>
-    <string name="pre_summary_bg_restrict_show_notification">Bekleyen temizleme işlemi tespit edildiğinde bildirim göster</string>
+    <string name="pre_title_bg_restrict_show_notification">Bildirim Göster</string>
+    <string name="pre_summary_bg_restrict_show_notification">Bekleyen temizleme işlemi algılandığında bildirim göster</string>
 
     <string name="badge_trying_app">Deneme</string>
     <string name="badge_paid_app">Ücretli</string>
     <string name="badge_framework_err">Hata</string>
     <string name="badge_power_save_off">Pil</string>
 
-    <string name="title_remember">Remember</string>
-    <string name="title_app_notice">Be careful!</string>
-    <string name="message_app_notice">In some cases, your device might no longer boot after installing Thanox.\n\nIf you never heard about \"soft brick\" and \"bootloop\" before or if you don\'t know how to recover from such a situation, do <b>NOT</b> install Thanox!\n\nIn any case, having a recent backup is highly recommended.</string>
+    <string name="title_remember">Hatırla</string>
+    <string name="title_app_notice">Dikkatli Olun!</string>
+    <string name="message_app_notice">Bazı durumlarda, Thanox\'u yükledikten sonra cihazınız artık başlamayabilir.\n\nEğer \"soft brick\" ve \"bootloop\" terimlerini daha önce duymadıysanız veya böyle bir durumdan nasıl kurtulacağınızı bilmiyorsanız, Thanox\'u <b>KURMAYIN!</b>\n\nHer durumda, güncel bir yedeğinizin olması şiddetle tavsiye edilir.</string>
 
-    <string name="menu_title_feature_desc">Özellik wiki</string>
+    <string name="menu_title_feature_desc">Özellik Wiki</string>
     <string name="menu_title_start_restrict_charts_reset">Sıfırla</string>
-    <string name="menu_title_start_restrict_charts_view_detailed_records">Detaylı kayıtları görüntüle</string>
-    <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">Sadece bu uygulamanın kayıtlarını göster</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records">Detaylı Kayıtları Görüntüle</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">Yalnızca Mevcut Uygulama İçin Göster</string>
     <string name="pre_category_general">Genel</string>
 
     <string name="pre_title_smart_freeze_screen_off_clean_up_delay">Ekran kapandığında dondur</string>
@@ -1224,216 +1282,228 @@ Compatibility notice: If the default permission management function is not compa
     <string name="pre_title_smart_freeze_screen_off_clean_up">Ekran kapandıktan sonra dondurma gecikmesi</string>
 
     <string name="pre_title_smart_freeze_tip">İpucu göster</string>
-    <string name="pre_summary_smart_freeze_tip">Uygulama dondurulurken veya dondurma kaldırıldığında bildirim ipucu göster</string>
+    <string name="pre_summary_smart_freeze_tip">Bir uygulama dondurulduğunda veya çözüldüğünde bilgilendirme mesajı göster</string>
 
-    <string name="pre_title_smart_freeze_hide_package_change_event">Launcher\'da gizle</string>
-    <string name="pre_summary_smart_freeze_hide_package_change_event">Bu anahtar etkinleştirildiğinde, Thanox bu paketteki PAKET DEĞİŞTİRİLDİ olayını engelleyecek, böylece Uygulama Başlatıcılar paketin etkinleştirilme olayını tespit edemeyecek.</string>
+    <string name="pre_title_smart_freeze_hide_package_change_event">Başlatıcıda gizle</string>
+    <string name="pre_summary_smart_freeze_hide_package_change_event">Bu anahtar etkinleştirildiğinde, Thanox bu paket için "PACKAGE CHANGED" olayını engelleyecektir. Böylece başlatıcılar paketin etkinleştirilme olayını algılayamaz.</string>
 
     <string name="pre_title_smart_freeze_with_suspend">Paketi askıya al</string>
-    <string name="pre_summary_smart_freeze_with_suspend">Varsayılan olarak paketi devre dışı bırakarak donduruyoruz. Bu anahtar etkinse, paketi dondurmak için devre dışı bırakmak yerine askıya almayı kullanacağız</string>
+    <string name="pre_summary_smart_freeze_with_suspend">Varsayılan olarak, paketleri devre dışı bırakarak donduruyoruz. Bu anahtar açık olduğunda, dondurma işlemi için devre dışı bırakmak yerine askıya alma yöntemi kullanılacaktır.</string>
 
-    <string name="pre_category_summary_smart_freeze">Varsayılan olarak, Thanox uygulamaları çalışmayı durdurduğunda veya görev sonlandırıldığında dondurur. \nThanox cihaz açılırken, işlem temizliği sırasında tüm uygulamaları dondurur. \nAşağıdaki ek ayarları da seçebilirsiniz.</string>
+    <string name="pre_category_summary_smart_freeze">Varsayılan olarak, Thanox uygulamalar çalışmayı durdurduğunda ve görevler kapatıldığında dondurur. \nAyrıca cihaz açılırken ve işlem temizliği sırasında tüm uygulamaları donduracaktır. \nAşağıda ek ayarları seçebilirsiniz.</string>
 
-    <string name="pre_category_summary_smart_standby">Arka plandaki uygulamaların genellikle hizmetleri veya aktif kalan süreçleri vardır ve bu hizmetler veya süreçler kendi amaçlarına sahiptir. Ne yazık ki, kullanıcılarımız bu hizmetlerin ve süreçlerin tam olarak ne yaptığını bilmiyor olabilir.\n\nArka plana dönen uygulamalar için bir müdahale yöntemi seçebilirsiniz. Bazı uygulamaların müdahaleden sonra düzgün çalışmayabileceğini belirtmek gerekir.</string>
+    <string name="pre_category_summary_smart_standby">Arka planda çalışan uygulamalar genellikle aktif hizmetler veya işlemler barındırır ve bu hizmetlerin/işlemlerin belirli amaçları vardır. Ne yazık ki, kullanıcılarımız bu hizmetlerin tam olarak ne yaptığını bilmeyebilir.\n\nArka plana alınan uygulamalar için bir müdahale yöntemi seçebilirsiniz. Ancak unutmayın, bazı uygulamalar müdahale sonrası düzgün çalışmayabilir.</string>
 
     <string name="pre_title_smart_standby_stop_service">Hizmeti durdur</string>
-    <string name="pre_summary_smart_standby_stop_service">Bu, KORUMA kural listesinde olmayan tüm hizmetleri durdurmaya çalışacaktır</string>
-    <string name="pre_title_smart_standby_unbind_service">Unbind service</string>
-    <string name="pre_summary_smart_standby_unbind_service">This will attempt to unbind all services that is not in the KEEP rule list</string>
-    <string name="pre_title_smart_standby_bypass_if_has_n">Bildirimleri olan uygulamaları atla</string>
-    <string name="pre_title_smart_standby_bypass_if_has_visible_windows">Görünür pencere olan uygulamaları atla</string>
-    <string name="pre_summary_smart_standby_bypass_if_has_n">Bildirimleri olan uygulamalara müdahale edilmez</string>
-    <string name="pre_title_smart_standby_set_inactive">Uygulamaları beklet</string>
-    <string name="pre_summary_smart_standby_set_inactive">Uygulamayı bekleme moduna almaya çalışır. Bu, Android\'in varsayılan bekletme mekanizmasına dayanmaktadır.</string>
-    <string name="pre_title_smart_standby_block_bg_service_start">Arka plan süreçlerinin yeniden başlatılmasını durdur.</string>
-    <string name="pre_summary_smart_standby_block_bg_service_start">Bu anahtarı açmak, durdurulmuş hizmetlerin arka planda yeniden başlatılmasını engelleyecektir. Bu engelleme olaylarının, arka plan başlangıç arayüzündeki engelleme günlüğünde de görüneceğini unutmayın</string>
+    <string name="pre_summary_smart_standby_stop_service">"KORUMA" kurallar listesinde olmayan tüm hizmetleri durdurmaya çalışacaktır.</string>
 
-    <string name="title_stub_apk_app_name">Uygulama adı</string>
+    <string name="pre_title_smart_standby_unbind_service">Hizmeti bağlantıdan çıkar</string>
+    <string name="pre_summary_smart_standby_unbind_service">"KORUMA" kurallar listesinde olmayan tüm hizmetleri bağlantıdan çıkarmaya çalışacaktır.</string>
+
+    <string name="pre_title_smart_standby_bypass_if_has_n">Bildirimleri olan uygulamaları atla</string>
+    <string name="pre_title_smart_standby_bypass_if_has_visible_windows">Görünür penceresi olan uygulamaları atla</string>
+    <string name="pre_summary_smart_standby_bypass_if_has_n">Bildirimleri olan uygulamalara müdahale etmeyecektir.</string>
+
+    <string name="pre_title_smart_standby_set_inactive">Uygulamaları bekleme moduna al</string>
+    <string name="pre_summary_smart_standby_set_inactive">Uygulamayı boşta duruma getirmeye çalışır. Bu işlem Android’in varsayılan bekleme mekanizmasına dayanır.</string>
+
+    <string name="pre_title_smart_standby_block_bg_service_start">Arka plan süreçlerinin yeniden başlamasını engelle</string>
+    <string name="pre_summary_smart_standby_block_bg_service_start">Bu anahtar açıldığında, durdurulan hizmetlerin arka planda yeniden başlaması önlenecektir. Engellenen olaylar, arka plan başlatma arayüzündeki engelleme günlüğünde görünecektir.</string>
+
+    <string name="title_stub_apk_app_name">Uygulama etiketi</string>
     <string name="title_stub_apk_app_version_code">Sürüm kodu</string>
     <string name="title_stub_apk_app_version_name">Sürüm adı</string>
 
     <string name="export_patch_title">Yama dışa aktar</string>
-    <string name="export_patch_message">Thanox hem Xposed hem de Magisk\'i desteklemektedir.\n\n Xposed kullanıcıları için, Xposed uygulaması modül yapılandırma sayfasında sadece Thanox\'u seçip onaylamanız yeterlidir. \n\nMagisk kullanıcıları için, indirilen Thanox apk\'sini .apk uzantısından .zip uzantısına değiştirebilir ve ardından Magisk yöneticisinde kurulum yapabilirsiniz. Veya indirilen apk\'yı bulamıyorsanız, yama zip dosyasını yerel harici depolamaya dışa aktarma seçeneğimiz de mevcuttur.</string>
-    <string name="export_patch_export_magisk">Dışa Aktar</string>
+    <string name="export_patch_message">Thanox, hem Xposed hem de Magisk\'i destekler.\n\nXposed kullanıcıları için, sadece Xposed uygulaması modül yapılandırma sayfasında Thanox\'u seçip işaretleyebilirsiniz. \n\nMagisk kullanıcıları için, indirilen Thanox APK dosyasının uzantısını .apk’den .zip’e değiştirerek Magisk yöneticisine yükleyebilirsiniz. Eğer indirilen APK dosyasını bulamıyorsanız, yama zip dosyasını yerel depolamaya aktarma seçeneğimiz de mevcuttur.</string>
+
+    <string name="export_patch_export_magisk">Dışa aktar</string>
 
     <string name="onboarding_text_complete">Başlayalım</string>
     <string name="onboarding_next">İleri</string>
     <string name="onboarding_skip">Atla</string>
-    <string name="onboarding_xposed_tips_title">Xposed destekleniyor</string>
-    <string name="onboarding_xposed_tips_desc">1. Xposed Manager\'da Thanox\'u seçip onaylayın \n2. Yeniden başlatın ve keyfini çıkarın \n3. Unutmayın, her güncellemeden sonra Xposed Manager\'da Thanox\'u yeniden kontrol edin ve yeniden başlatın!</string>
 
-    <string name="onboarding_magisk_tips_title">Magisk destekleniyor (deneysel)</string>
-    <string name="onboarding_magisk_tips_desc">1. Thanox apk\'si aynı zamanda bir Magisk modülüdür, sadece zip\'e yeniden adlandırın \n2. Ayrıca Ayarlar-Hakkında-Yama Bilgileri bölümünden Magisk modülünü dışa aktarabilirsiniz \n3. Unutmayın, her güncellemeden sonra Magisk yöneticisinde modülü de güncelleyin ve yeniden başlatın!</string>
+    <string name="onboarding_xposed_tips_title">Xposed desteği</string>
+    <string name="onboarding_xposed_tips_desc">1. Xposed Yöneticisi’nde Thanox\'u seçip işaretleyin \n2. Cihazı yeniden başlatın ve kullanmaya başlayın \n3. Güncellemelerden sonra Thanox\'u tekrar işaretleyip yeniden başlatmayı unutmayın!</string>
+
+    <string name="onboarding_magisk_tips_title">Magisk desteği (deneysel)</string>
+    <string name="onboarding_magisk_tips_desc">1. Thanox APK\'sı aynı zamanda Magisk modülüdür, sadece adını .zip olarak değiştirin \n2. Magisk modülünü Ayarlar > Hakkında > Yama Bilgisi kısmından dışa aktarabilirsiniz \n3. Güncellemelerden sonra Magisk modülünü de güncelleyip cihazı yeniden başlatmayı unutmayın!</string>
 
     <string name="onboarding_github_tips_title">Güncelleme takibi</string>
-    <string name="onboarding_github_tips_desc">Ön sürümlerimizi Github/Thanox üzerinde takip edebilirsiniz</string>
+    <string name="onboarding_github_tips_desc">Ön sürümlerimizi \nGithub/Thanox adresinden takip edebilirsiniz.</string>
 
-    <string name="onboarding_mode_tips_title">Aktivasyon yöntemleri</string>
-    <string name="onboarding_mode_tips_desc">Thanox şu anda iki aktivasyon yöntemini desteklemektedir: Xposed yaması veya Magisk yaması (deneysel, Android 11+ destekler); keşfetmek için bunlardan birini seçebilirsiniz.</string>
+    <string name="onboarding_mode_tips_title">Etkinleştirme yöntemleri</string>
+    <string name="onboarding_mode_tips_desc">Thanox şu anda iki etkinleştirme yöntemini destekliyor: Xposed yaması veya Magisk yaması (deneysel, Android 11+ destekler). Bunlardan birini seçerek keşfetmeye başlayabilirsiniz.</string>
 
     <string name="onboarding_guide_tips_title">Wiki mevcut</string>
-    <string name="onboarding_guide_tips_desc">Talimatları ayarlar ana sayfasında bulabilirsiniz. Bu talimatlara daha fazla zaman ayırmanızı şiddetle tavsiye ederiz. Belki size yardımcı olabilir.</string>
-    <string name="title_package_prebuilt_set">Önceden hazırlanmış</string>
+    <string name="onboarding_guide_tips_desc">Talimatları ayarlar ana sayfasında bulabilirsiniz. Bu talimatlara göz atmanız şiddetle tavsiye edilir, belki size yardımcı olabilir.</string>
+
+    <string name="title_package_prebuilt_set">Önceden oluşturulmuş</string>
     <string name="pre_title_app_list_item_show_pkg">Paket adını göster</string>
     <string name="pre_title_app_list_item_show_version">Sürümü göster</string>
     <string name="pre_title_app_list_item">Uygulama listesi öğesi</string>
-    <string name="menu_title_app_info_detailed">Detaylar</string>
+    <string name="menu_title_app_info_detailed">Ayrıntılar</string>
 
-    <string name="device_admin_description" translatable="false">Thanox Infinite Z profili cihaz yöneticisi.</string>
+    <string name="device_admin_description" translatable="false">Thanox Infinite Z profili için cihaz yöneticisi.</string>
 
-    <string name="nav_title_guide">Rehber</string>
+    <string name="nav_title_guide">Kılavuz</string>
 
     <string name="pre_title_smart_freeze_freeze_method">Dondurma yöntemi</string>
     <string name="pre_title_smart_freeze_freeze_method_disable">PM devre dışı bırak</string>
-    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM devre dışı bırak, Android sistemi tarafından sağlanan ve bir uygulamayı "devre dışı bırakabilen" bir işlevdir; bu yöntemi kullanarak bir uygulamayı "dondurduğunuzda", dondurulan uygulamanın masaüstü simgesi kaybolur. Başlatıcıdan doğrudan başlatmak için bir kısayol veya vekil uygulama oluşturabilirsiniz.</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">PM devre dışı bırakma, Android sisteminin sunduğu bir işlevdir ve bir uygulamayı "devre dışı bırakabilir"; bu yöntemi kullanarak bir uygulamayı "dondurduğunuzda", dondurulan uygulamanın masaüstü simgesi kaybolacaktır. Uygulamayı doğrudan Başlatıcıdan açmak için bir kısayol veya vekil uygulama oluşturabilirsiniz.</string>
+
     <string name="pre_title_smart_freeze_freeze_method_suspend">PM askıya al</string>
-    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Askıya alma, Android\'in DPC yönetimi için sağladığı bir işlevdir; askıya alınan uygulama genellikle Başlatıcı\'da gri bir simgeyi korur, ancak uygulamanın etkinlikleri doğrudan başlatılamaz ve genellikle uygulamanın Yönetici tarafından kullanımının kısıtlandığını belirten bir diyalog penceresi açılır. Uygulama için "DOL" anahtarını açabilirsiniz, bu, Thanox\'un bir etkinliği başlatma talebi algıladığında uygulamayı çözmesini sağlar.</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">Askıya alma, Android tarafından DPC yönetimi için sağlanan bir işlevdir; askıya alınan uygulama genellikle Başlatıcıda gri bir simge olarak kalır, ancak uygulamanın etkinlikleri doğrudan başlatılamaz ve genellikle "Yönetici tarafından kullanımı kısıtlandı" uyarısını içeren bir iletişim kutusu açılır. "DOL" anahtarını etkinleştirerek, Thanox\'un etkinlik başlatma isteğini algıladığında uygulamanın donmasını çözmesini sağlayabilirsiniz.</string>
 
     <string name="privacy_agreement_title">Gizlilik sözleşmesi</string>
     <string name="privacy_agreement_accept">Kabul et</string>
     <string name="privacy_agreement_discard">Reddet</string>
 
     <string name="feature_title_settings_access_record">Ayarlar Erişim Kaydı</string>
-    <string name="feature_summary_settings_access_record">Sistem Ayarları yazma ve okuma kayıtlarını görüntüleyin. Genellikle, Xposed kapsamına Ayarlar, Ayarlar Sağlayıcı ve Güvenli Yönetici uygulamasını seçmelisiniz.</string>
+    <string name="feature_summary_settings_access_record">Sistem Ayarları okuma ve yazma kayıtlarını görüntüleyin. Genellikle Xposed kapsamındaki Ayarlar, Ayarlar Sağlayıcısı ve Güvenli Yönetici uygulamalarını seçmelisiniz.</string>
 
     <string name="launch_other_pkg_title">Uygulama başlat</string>
-    <string name="launch_other_pkg_message"><b>%s</b>, <b>%s</b> uygulamasını başlatmak istiyor, izin veriyor musunuz?</string>
+    <string name="launch_other_pkg_message"><b>%s</b>, <b>%s</b> uygulamasını başlatmak istiyor. İzin veriyor musunuz?</string>
     <string name="launch_other_pkg_remember">Seçimi hatırla</string>
     <string name="launch_other_pkg_allow">İzin ver</string>
     <string name="launch_other_pkg_ignore">Yoksay</string>
     <string name="launch_other_pkg_allow_once">Bu sefer izin ver</string>
     <string name="launch_other_pkg_ignored_message">%s uygulamasının %s uygulamasını başlatmasına izin verilmedi</string>
 
-
-    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
-    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
-    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
-    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
-    <string name="running_processes_item_description_p">%1$d process</string>
-    <string name="running_processes_item_description_s">%1$d service</string>
-    <string name="running_processes_header_title" msgid="6588371727640789560">"device memory"</string>
-    <string name="running_processes_header_footer" msgid="723908176275428442">"App memory usage"</string>
-    <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"System"</string>
-    <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"Apps"</string>
-    <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"Available"</string>
-    <string name="running_processes_header_used_prefix" msgid="5924288703085123978">"Used"</string>
-    <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"Cache"</string>
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> işlem ve <xliff:g id="NUMSERVICES">%2$d</xliff:g> servis"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> işlem ve <xliff:g id="NUMSERVICES">%2$d</xliff:g> servis"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> işlem ve <xliff:g id="NUMSERVICES">%2$d</xliff:g> servis"</string>
+    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> işlem ve <xliff:g id="NUMSERVICES">%2$d</xliff:g> servis"</string>
+    <string name="running_processes_item_description_p">%1$d işlem</string>
+    <string name="running_processes_item_description_s">%1$d servis</string>
+    <string name="running_processes_header_title" msgid="6588371727640789560">"Cihaz belleği"</string>
+    <string name="running_processes_header_footer" msgid="723908176275428442">"Uygulama bellek kullanımı"</string>
+    <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"Sistem"</string>
+    <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"Uygulamalar"</string>
+    <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"Kullanılabilir"</string>
+    <string name="running_processes_header_used_prefix" msgid="5924288703085123978">"Kullanılan"</string>
+    <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"Önbellek"</string>
     <string name="running_processes_header_ram">%1$s</string>
-    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"running apps"</string>
-    <string name="no_services" msgid="7133900764462288263">"No active service"</string>
-    <string name="runningservicedetails_services_title" msgid="391168243725357375">"Service"</string>
-    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Process"</string>
-    <string name="service_manage" msgid="1876642087421959194">"Settings"</string>
-    <string name="service_stop_description" msgid="9146619928198961643">"This service is started by its application. Stopping the service may render the app inoperable."</string>
-    <string name="heavy_weight_stop_description" msgid="6050413065144035971">"The app cannot be stopped safely. If you stop forcibly, some of your current work may be lost."</string>
-    <string name="background_process_stop_description" msgid="3834163804031287685">"This is the old app process, still running, just in case. Stopping is usually not recommended."</string>
-    <string name="service_manage_description" msgid="479683614471552426">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: currently in use. Tap Settings to manage it."</string>
-    <string name="main_running_process_description" msgid="1130702347066340890">"Using main process."</string>
-    <string name="process_service_in_use_description" msgid="8993335064403217080">"Using Service<xliff:g id="COMP_NAME">%1$s</xliff:g>."</string>
-    <string name="process_provider_in_use_description" msgid="5586603325677678940">"Using Provider<xliff:g id="COMP_NAME">%1$s</xliff:g>."</string>
-    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Do you want to stop system service?"</string>
-    <string name="runningservicedetails_stop_dlg_text" msgid="3920243762189484756" product="default">"If you stop this service, some features on your phone will also stop working and will not work until you turn your phone off and on again."</string>
+    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"Çalışan uygulamalar"</string>
+    <string name="no_services" msgid="7133900764462288263">"Aktif servis yok"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"Servis"</string>
+    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"İşlem"</string>
+    <string name="service_manage" msgid="1876642087421959194">"Ayarlar"</string>
+    <string name="service_stop_description" msgid="9146619928198961643">"Bu servis, uygulama tarafından başlatılmıştır. Servisi durdurmak uygulamanın çalışmasını engelleyebilir."</string>
+    <string name="heavy_weight_stop_description" msgid="6050413065144035971">"Uygulama güvenli bir şekilde durdurulamaz. Zorla durdurursanız, mevcut çalışmalarınızın bir kısmı kaybolabilir."</string>
+    <string name="background_process_stop_description" msgid="3834163804031287685">"Bu, hâlâ çalışmakta olan eski bir uygulama işlemidir. Durdurulması genellikle önerilmez."</string>
+    <string name="service_manage_description" msgid="479683614471552426">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: şu anda kullanımda. Yönetmek için Ayarlar’a dokunun."</string>
+    <string name="main_running_process_description" msgid="1130702347066340890">"Ana işlem kullanılıyor."</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"<xliff:g id="COMP_NAME">%1$s</xliff:g> servisi kullanılıyor."</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"<xliff:g id="COMP_NAME">%1$s</xliff:g> sağlayıcısı kullanılıyor."</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Sistem servisini durdurmak istiyor musunuz?"</string>
+    <string name="runningservicedetails_stop_dlg_text" msgid="3920243762189484756" product="default">"Bu servisi durdurursanız, telefonunuzdaki bazı özellikler çalışmayı durduracaktır ve telefonunuzu kapatıp açana kadar tekrar çalışmayacaktır."</string>
 
-    <string name="no_default_apps" msgid="2915315663141025400">"No default app."</string>
-    <string name="storageuse_settings_title" msgid="5657014373502630403">"Storage usage"</string>
-    <string name="storageuse_settings_summary" msgid="3748286507165697834">"See how much storage an app is using"</string>
-    <string name="service_restarting" msgid="2242747937372354306">"Restarting"</string>
-    <string name="cached" msgid="1059590879740175019">"Cache"</string>
-    <string name="show_cached" msgid="1059590879740175019">"Show cached"</string>
-    <string name="no_running_services" msgid="2059536495597645347">"No Service running."</string>
-    <string name="service_started_by_app" msgid="818675099014723551">"Start by app"</string>
-    <string name="service_client_name" msgid="818675099014723551">"Client %1$s"</string>
-    <string name="service_process_name" msgid="818675099014723551">"Process %1$s"</string>
+    <string name="no_default_apps" msgid="2915315663141025400">"Varsayılan uygulama yok."</string>
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"Depolama kullanımı"</string>
+    <string name="storageuse_settings_summary" msgid="3748286507165697834">"Bir uygulamanın ne kadar depolama kullandığını görün"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"Yeniden başlatılıyor"</string>
+    <string name="cached" msgid="1059590879740175019">"Önbellek"</string>
+    <string name="show_cached" msgid="1059590879740175019">"Önbelleği göster"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"Çalışan servis yok."</string>
+    <string name="service_started_by_app" msgid="818675099014723551">"Uygulama tarafından başlatıldı"</string>
+    <string name="service_client_name" msgid="818675099014723551">"Müşteri %1$s"</string>
+    <string name="service_process_name" msgid="818675099014723551">"İşlem %1$s"</string>
 
-    <string name="running_process_not_running">Not running</string>
-    <string name="running_process_running">Running</string>
-    <string name="running_process_background">Cached</string>
-    <string name="running_process_all">All</string>
-    <string name="service_stop">Stop</string>
-    <string name="service_report">Report</string>
-    <string name="service_running_time">Elapsed</string>
+    <string name="running_process_not_running">Çalışmıyor</string>
+    <string name="running_process_running">Çalışıyor</string>
+    <string name="running_process_background">Önbelleğe alınmış</string>
+    <string name="running_process_all">Tümü</string>
+    <string name="service_stop">Durdur</string>
+    <string name="service_report">Bildir</string>
+    <string name="service_running_time">Geçen süre</string>
 
-    <string name="boost_status_running_apps">&#160;apps running</string>
-    <string name="boost_status_blocked_start_count">Blocked %s app startup requests</string>
-    <string name="boost_status_mem_usage_percent">Memory  %s</string>
-    <string name="boost_status_swap_usage_percent">Swap  %s</string>
-    <string name="boost_status_available">Available %s</string>
-    <string name="boost_status_not_enabled">Not enabled</string>
+    <!-- Colors -->
+    <color name="running_processes_system_ram">#ff384248</color>
+    <color name="running_processes_free_ram">#ffced7db</color>
 
-    <string name="process_manager">进程管理</string>
+    <dimen name="settings_side_margin">0dip</dimen>
 
-    <string name="smart_freeze">智能冻结</string>
-    <string name="apps_count">%s个应用</string>
-    <string name="sf_pkg_stats">%s个应用 %s个已冻结 %s个已启用</string>
-    <string name="sf_pkg_stats_all_freeze">%s个应用均已冻结</string>
-    <string name="pick_app">选择应用</string>
+    <string name="process_manager">İşlem yöneticisi</string>
 
-    <string name="smart_freeze_on_screen_off">灭屏冻结</string>
-    <string name="smart_freeze_on_screen_off_summary">灭屏后冻结列表里的应用</string>
-    <string name="smart_freeze_on_task_removed">划卡冻结</string>
-    <string name="smart_freeze_on_task_removed_summary">当你从最近任务移除应用时冻结该应用</string>
+    <string name="smart_freeze">Akıllı dondurma</string>
+    <string name="apps_count">%s Uygulama</string>
+    <string name="sf_pkg_stats">%s uygulama / %s dondurulmuş / %s etkin</string>
+    <string name="sf_pkg_stats_all_freeze">Tüm %s uygulamalar donduruldu</string>
+    <string name="pick_app">Uygulama seç</string>
 
-    <string name="bc_on_screen_off">灭屏清理</string>
-    <string name="bc_on_screen_off_summary">灭屏后强行停止列表里的应用</string>
-    <string name="bc_on_task_removed">划卡清理</string>
-    <string name="bc_on_task_removed_summary">当你从最近任务移除应用时强行停止该应用</string>
+    <string name="smart_freeze_on_screen_off">Ekran kapandığında dondur</string>
+    <string name="smart_freeze_on_screen_off_summary">Ekran kapandığında uygulamaları dondur</string>
+    <string name="smart_freeze_on_task_removed">Görev kaldırıldığında dondur</string>
+    <string name="smart_freeze_on_task_removed_summary">Son görev kaldırıldığında uygulamaları dondur</string>
 
-    <string name="toast_copied_to_clipboard">已复制</string>
+    <string name="bc_on_screen_off">Ekran kapandığında durdur</string>
+    <string name="bc_on_screen_off_summary">Ekran kapandığında uygulamaları zorla durdur</string>
+    <string name="bc_on_task_removed">Görev kaldırıldığında durdur</string>
+    <string name="bc_on_task_removed_summary">Son görev kaldırıldığında uygulamaları zorla durdur</string>
 
-    <string name="pkg_set">分类</string>
-    <string name="all">所有</string>
-    <string name="user">用户</string>
-    <string name="system">系统</string>
-    <string name="enabled">已启用</string>
-    <string name="disabled">未启用</string>
+    <string name="toast_copied_to_clipboard">Kopyalandı</string>
 
-    <string name="remove_from_pkg_set">分类中移除</string>
-    <string name="remove_from_sf">取消智冻</string>
-    <string name="add_to_pkg_set">添加到分类</string>
-    <string name="temp_unfreeze">解冻</string>
-    <string name="create_shortcut">快捷方式</string>
+    <string name="pkg_set">Kategori</string>
+    <string name="all">Tümü</string>
+    <string name="user">Kullanıcı</string>
+    <string name="system">Sistem</string>
+    <string name="enabled">Etkin</string>
+    <string name="disabled">Devre dışı</string>
 
-    <string name="delete">删除</string>
-    <string name="rename">重命名</string>
-    <string name="sort">排序</string>
-    <string name="on">开启</string>
-    <string name="off">关闭</string>
+    <string name="remove_from_pkg_set">Kategoriden çıkar</string>
+    <string name="remove_from_sf">SF\'den kaldır</string>
+    <string name="add_to_pkg_set">Kategoriye ekle</string>
+    <string name="temp_unfreeze">Dondurmayı kaldır</string>
+    <string name="create_shortcut">Kısayol oluştur</string>
 
-    <string name="subscribe">订阅</string>
-    <string name="sub_intro_unsub">尚未订阅</string>
-    <string name="sub_intro_message">为了更好地为您服务，Thanos 是一款需要订阅的付费软件。请点击下方的订阅按钮查看详细的订阅说明。\n\n如果您已经是 Thanox 或 Thanox Pro 的付费用户，无需再次订阅 Thanos。您可以在订阅页面使用 Thanox 激活码或通过 Play 商店验证您的资格。</string>
+    <string name="delete">Sil</string>
+    <string name="rename">Yeniden adlandır</string>
+    <string name="sort">Sırala</string>
+    <string name="on">Açık</string>
+    <string name="off">Kapalı</string>
 
-    <string name="bg_clean">后台清理</string>
-    <string name="bg_clean_apps_count">禁止%s个应用后台运行</string>
+    <string name="subscribe">Abone ol</string>
+    <string name="sub_intro_unsub">Abonelik iptal edildi</string>
+    <string name="sub_intro_message">Size daha iyi hizmet verebilmek için Thanos, abonelik gerektiren ücretli bir yazılımdır. Abonelikle ilgili ayrıntılı talimatları görmek için lütfen aşağıdaki abone ol düğmesine tıklayın.
+    Eğer zaten Thanox veya Thanox Pro\'nun ücretli bir kullanıcısıysanız, Thanos\'a tekrar abone olmanıza gerek yoktur. Abonelik sayfasında Thanox etkinleştirme kodunuzu kullanabilir veya Play Store üzerinden uygunluğunuzu doğrulayabilirsiniz.</string>
 
-    <string name="lvl_checking_retry">重试</string>
-    <string name="lvl_checking">正在通过谷歌Play检查应用许可</string>
-    <string name="lvl_check_ok">很好！</string>
-    <string name="lvl_check_not_ok">错误！</string>
-    <string name="lvl_check_skip_for_now">暂时跳过</string>
-    <string name="lvl_unlicensed_dialog_body">你未获得许可</string>
-    <string name="lvl_unlicensed_dialog_retry_body">无法访问Google Play</string>
-    <string name="lvl_unlicensed_dialog_error_tips">1. 请检查你的设备网络情况，确保可以正常访问谷歌Play商店 \n2. 请检查你的谷歌服务框架，确保其处于启用状态 \n3. 请检查你的谷歌账号是否正确登录
-    </string>
-    <string name="wait_shizuku">等Shizuku就绪</string>
-    <string name="wait_shizuku_message">请安装Shizuku，并且授权Thanos</string>
+    <string name="bg_clean">Arka plan görevleri</string>
+    <string name="bg_clean_apps_count">Arka planda çalışmasını önlemek için %s uygulama</string>
 
-    <string name="module_donate_title">Get Premium</string>
+    <string name="lvl_checking_retry">Tekrar dene</string>
+    <string name="lvl_checking">Lisansınız kontrol ediliyor</string>
+    <string name="lvl_check_ok">Harika</string>
+    <string name="lvl_check_not_ok">HATA!</string>
+    <string name="lvl_check_skip_for_now">Şimdilik atla</string>
+    <string name="lvl_unlicensed_dialog_body">Yetkiniz yok</string>
+    <string name="lvl_unlicensed_dialog_retry_body">Google Play\'e erişilemiyor</string>
+    <string name="lvl_unlicensed_dialog_error_tips">Lütfen cihazınızın ağ bağlantısını kontrol edin ve Google Play Store\'a normal şekilde erişebildiğinizden emin olun.
+    \nLütfen Google Servis Çerçevenizi (Google Service Framework) kontrol edin ve etkin olduğundan emin olun.
+    \nGoogle hesabınızın doğru şekilde oturum açtığını kontrol edin.</string>
 
-    <string name="module_donate_donated">Verified, thanks</string>
-    <string name="module_donate_donated_available">Premium feature</string>
-    <string name="module_donate_donated_available_message">Donated to get Premium to unlock this feature.\n\nTips: Try it out first, feel it is available and satisfied, and then purchase the advanced features~</string>
+    <string name="wait_shizuku">Shizuku bekleniyor</string>
+    <string name="wait_shizuku_message">Lütfen Shizuku\'yu yükleyin ve etkinleştirin. Ardından Thanos\'a izin verin.</string>
 
-    <string name="module_donate_get_play">Get play version</string>
-    <string name="module_donate_copy_email">Copy email</string>
-    <string name="module_donate_active_hidden_feature">激活隐藏功能</string>
-    <string name="module_donate_active_hidden_feature_activated">Activated</string>
-    <string name="module_donate_input_activation_code">Input activation code</string>
-    <string name="module_donate_activation_code_verify_success">验证成功，请妥善保存你的激活码，不要对外扩散，否则可能会被禁用，后续换机或者刷机后可以继续使用</string>
-    <string name="module_donate_activation_code_verify_fail">Verify failure.</string>
-    <string name="module_donate_activation_code_verify_fail_server_timeout">Server error~~~</string>
-    <string name="module_donate_activation_code_start_verify">Begin verify</string>
-    <string name="module_donate_activation_code_my_code">My Code</string>
+    <string name="module_donate_title">Premium Al</string>
 
+    <string name="module_donate_donated">Doğrulandı, teşekkürler</string>
+    <string name="module_donate_donated_available">Premium özellik</string>
+    <string name="module_donate_donated_available_message">Bu özelliğin kilidini açmak için Premium satın aldınız.\n\nİpucu: Önce deneyin, uygun olup olmadığını görün, memnun kaldıktan sonra gelişmiş özellikleri satın alın~</string>
 
+    <string name="module_donate_get_play">Play sürümünü al</string>
+    <string name="module_donate_copy_email">E-postayı kopyala</string>
+    <string name="module_donate_active_hidden_feature">Gizli özellikleri göster</string>
+    <string name="module_donate_active_hidden_feature_activated">Etkinleştirildi</string>
+    <string name="module_donate_input_activation_code">Etkinleştirme kodunu gir</string>
+
+    <string name="module_donate_activation_code_verify_success">Doğrulama başarılı. Lütfen etkinleştirme kodunuzu güvende tutun ve başkalarıyla paylaşmayın. Aksi takdirde devre dışı bırakılabilir. Gelecekte cihaz değiştirseniz veya cihazınızı sıfırlasanız bile kullanmaya devam edebilirsiniz.</string>
+    <string name="module_donate_activation_code_verify_fail">Doğrulama başarısız.</string>
+    <string name="module_donate_activation_code_verify_fail_server_timeout">Sunucu hatası~~~</string>
+    <string name="module_donate_activation_code_start_verify">Doğrulamayı başlat</string>
+    <string name="module_donate_activation_code_my_code">Kodu Göster</string>
+
+    <string name="module_donate_activation_code_expire_date">Süresiz</string>
+    <string name="module_donate_pay_alipay">AliPay</string>
+    <string name="module_donate_pay_wechat">WeChat Pay</string>
 </resources>

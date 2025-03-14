@@ -12,6 +12,10 @@ object AMSLifeCycleHelper {
     }
 
     fun getService(lifecycle: Any): Any? {
-        return XposedHelpers.callMethod(lifecycle, "getService")
+        return (kotlin.runCatching {
+            XposedHelpers.callMethod(lifecycle, "getService")
+        }.getOrNull()) ?: (kotlin.runCatching {
+            XposedHelpers.getObjectField(lifecycle, "mService")
+        }.getOrNull())
     }
 }

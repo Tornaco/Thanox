@@ -89,6 +89,9 @@ abstract class Res {
         const val STRING_UNTRUSTED_PACKAGE_TITLE = "billing_state_row_not_trust_title"
         const val STRING_UNTRUSTED_PACKAGE_MSG = "billing_state_row_not_trust_message"
 
+        const val STRING_APPLY_TEMPLATE_N_TITLE = "service_notification_apply_auto_template_title"
+        const val STRING_APPLY_TEMPLATE_N_MESSAGE = "service_notification_apply_auto_template_message"
+
 
         const val SERVICE_SMART_FREEZE_APP = "service_smart_freeze_app_freezed"
         const val SERVICE_SMART_UNFREEZE_APP = "service_smart_freeze_app_unfreezed"

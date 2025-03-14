@@ -39,6 +39,9 @@
     <string name="service_notification_title_thanox_active">Thanox is active</string>
     <string name="service_notification_message_thanox_active">Thanox %1$s is up!</string>
 
+    <string name="service_notification_apply_auto_template_title">Apply template</string>
+    <string name="service_notification_apply_auto_template_message">Template config was applied for %s</string>
+
     <string name="service_notification_message_thanox_app_enabled_on_create">Smart freeze: %1$s is enabled on Launch request</string>
 
     <string name="service_app_set_all">All</string>

@@ -39,6 +39,10 @@
     <string name="service_notification_title_thanox_active">تم تنشيط Thanox</string>
     <string name="service_notification_message_thanox_active">تم تفعيل الإصدار %s بنجاح ، تهانينا</string>
 
+    <string name="service_notification_apply_auto_template_title">Apply template</string>
+    <string name="service_notification_apply_auto_template_message">Template config was applied for %s</string>
+
+
     <string name="service_notification_message_thanox_app_enabled_on_create">التجميد الذكي: تم تمكين %s بسبب الطلبات النشطة</string>
 
     <string name="service_smart_freeze_app_freezed">Smart freeze: freezing %s</string>

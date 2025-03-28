@@ -62,6 +62,7 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.CommonPreferences;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.util.ClipboardUtils;
@@ -710,6 +711,7 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
 
         Preference crashPref = findPreference(getString(R.string.key_crash));
         crashPref.setOnPreferenceClickListener(preference -> {
+            thanos.getActivityManager().forceStopPackage(Pkg.systemUserPkg("android"), "CrashSystem");
             throw new RuntimeException("Crash");
         });
         crashPref.setVisible(BuildProp.THANOS_BUILD_DEBUG);

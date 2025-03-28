@@ -76,4 +76,6 @@ interface IActivityStackSupervisor {
     void setLockMethod(int method);
     void setLockPattern(String pattern);
     String getLockPattern();
+    boolean isLockPatternLineHidden();
+    void setLockPatternLineHidden(boolean hide);
 }

@@ -91,6 +91,7 @@
     <string name="module_locker_title_verify_custom_pattern">Özel Desen</string>
     <string name="module_locker_title_verify_custom_pin">Özel PIN</string>
     <string name="module_locker_title_verify_custom_pattern_settings">Desen ayarları</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_hide_line">Hide pattern lines</string>
     <string name="module_locker_title_verify_custom_pattern_settings_warn">Lütfen şifrenizi hatırlayın. Bir kez ayarlandıktan sonra şifre geri alınamaz.</string>
     <string name="module_locker_title_verify_custom_pattern_settings_draw_1">Deseni çizin</string>
     <string name="module_locker_title_verify_custom_pattern_settings_draw_2">Deseni tekrar çizin</string>

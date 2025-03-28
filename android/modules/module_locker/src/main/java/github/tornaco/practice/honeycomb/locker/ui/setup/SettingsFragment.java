@@ -74,6 +74,12 @@ public class SettingsFragment extends BasePreferenceFragmentCompat {
             PatternSettingsActivity.start(requireContext());
             return true;
         });
+        SwitchPreferenceCompat hidePatternLinesPref = findPreference(getString(R.string.module_locker_key_verify_method_custom_pattern_hide_line));
+        hidePatternLinesPref.setChecked(thanos.getActivityStackSupervisor().isLockPatternLineHidden());
+        hidePatternLinesPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            thanos.getActivityStackSupervisor().setLockPatternLineHidden((boolean) newValue);
+            return true;
+        });
 
         DropDownPreference methodPref = findPreference(getString(R.string.module_locker_key_verify_method));
         int currentMethod = thanos.getActivityStackSupervisor().getLockMethod();

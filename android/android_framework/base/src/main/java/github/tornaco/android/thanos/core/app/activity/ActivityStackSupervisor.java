@@ -233,4 +233,14 @@ public class ActivityStackSupervisor {
     public int getLockMethod() {
         return supervisor.getLockMethod();
     }
+
+    @SneakyThrows
+    public void setLockPatternLineHidden(boolean hidden) {
+        supervisor.setLockPatternLineHidden(hidden);
+    }
+
+    @SneakyThrows
+    public boolean isLockPatternLineHidden() {
+        return supervisor.isLockPatternLineHidden();
+    }
 }

@@ -6,4 +6,5 @@
     <string name="module_locker_key_white_list_components" translatable="false">module_locker_key_white_list_components</string>
     <string name="module_locker_key_verify_method" translatable="false">module_locker_key_verify_method</string>
     <string name="module_locker_key_verify_method_custom_pattern" translatable="false">module_locker_key_verify_method_custom_pattern</string>
+    <string name="module_locker_key_verify_method_custom_pattern_hide_line" translatable="false">module_locker_key_verify_method_custom_pattern_hide_line</string>
 </resources>

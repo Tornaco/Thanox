@@ -92,6 +92,7 @@
     <string name="module_locker_title_verify_custom_pattern">自訂圖案</string>
     <string name="module_locker_title_verify_custom_pin">自訂PIN</string>
     <string name="module_locker_title_verify_custom_pattern_settings">設定圖案</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_hide_line">隐藏图案轨迹</string>
     <string name="module_locker_title_verify_custom_pattern_settings_warn">請牢記密碼，密碼設定後不可找回</string>
     <string name="module_locker_title_verify_custom_pattern_settings_draw_1">請繪製圖案</string>
     <string name="module_locker_title_verify_custom_pattern_settings_draw_2">請再次繪製圖案</string>

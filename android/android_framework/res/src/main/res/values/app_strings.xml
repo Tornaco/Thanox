@@ -92,6 +92,7 @@
     <string name="module_locker_title_verify_custom_pattern">Custom Pattern</string>
     <string name="module_locker_title_verify_custom_pin">Custom PIN</string>
     <string name="module_locker_title_verify_custom_pattern_settings">Pattern settings</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_hide_line">Hide pattern lines</string>
     <string name="module_locker_title_verify_custom_pattern_settings_warn">Please remember your password. Once set, the password cannot be recovered.</string>
     <string name="module_locker_title_verify_custom_pattern_settings_draw_1">Draw pattern</string>
     <string name="module_locker_title_verify_custom_pattern_settings_draw_2">Draw pattern again</string>

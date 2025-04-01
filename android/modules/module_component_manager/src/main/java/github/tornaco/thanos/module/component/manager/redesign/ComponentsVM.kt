@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.text.TextUtils
+import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elvishew.xlog.XLog
@@ -14,7 +15,7 @@ import github.tornaco.android.thanos.core.pm.ComponentInfo
 import github.tornaco.android.thanos.core.pm.ComponentUtil
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.thanos.module.component.manager.ComponentRule
-import github.tornaco.thanos.module.component.manager.fallbackRule
+import github.tornaco.thanos.module.component.manager.fallbackRuleCategory
 import github.tornaco.thanos.module.component.manager.getActivityRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 import kotlinx.coroutines.Dispatchers
@@ -36,9 +37,21 @@ enum class FilterState {
 }
 
 data class ComponentGroup(
-    val rule: ComponentRule = fallbackRule,
+    val ruleCategory: ComponentRuleCategory = fallbackRuleCategory,
     val components: List<ComponentModel> = emptyList(),
     val id: String = UUID.randomUUID().toString()
+)
+
+data class ComponentRuleCategory(
+    val label: String,
+    @DrawableRes val iconRes: Int,
+    val isSimpleColorIcon: Boolean,
+)
+
+fun ComponentRule.toCategory() = ComponentRuleCategory(
+    label,
+    iconRes,
+    isSimpleColorIcon
 )
 
 data class MultipleSelectState(
@@ -84,7 +97,8 @@ abstract class ComponentsVM(
             }
         ).onEach { uiState ->
             if (uiState is UiState.Loaded) {
-                val fallbackGroup = uiState.data.firstOrNull { it.rule == fallbackRule }
+                val fallbackGroup =
+                    uiState.data.firstOrNull { it.ruleCategory == fallbackRuleCategory }
                 val fallbackSize =
                     fallbackGroup?.components?.size ?: 0
                 if (fallbackSize > 100) {
@@ -138,9 +152,9 @@ abstract class ComponentsVM(
 
             res.sort()
 
-            res.groupBy { it.componentRule }.toSortedMap { o1, o2 ->
-                if (o1 == fallbackRule && o2 != fallbackRule) return@toSortedMap 1
-                if (o1 != fallbackRule && o2 == fallbackRule) return@toSortedMap -1
+            res.groupBy { it.componentRule.toCategory() }.toSortedMap { o1, o2 ->
+                if (o1 == fallbackRuleCategory && o2 != fallbackRuleCategory) return@toSortedMap 1
+                if (o1 != fallbackRuleCategory && o2 == fallbackRuleCategory) return@toSortedMap -1
                 PinyinComparatorUtils.compare(
                     o1?.label.orEmpty(),
                     o2?.label.orEmpty()
@@ -228,7 +242,7 @@ abstract class ComponentsVM(
         componentModel: ComponentModel,
         setToEnabled: Boolean
     ): Boolean {
-        XLog.d("setComponentState: $componentModel $setToEnabled")
+        XLog.w("setComponentState: $componentModel $setToEnabled")
         val appInfo = _appInfo.value
         val newState =
             if (setToEnabled) PackageManager.COMPONENT_ENABLED_STATE_ENABLED else PackageManager.COMPONENT_ENABLED_STATE_DISABLED

@@ -28,11 +28,11 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.ArrowDropDown
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -56,6 +56,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -80,6 +81,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.DropdownSelect
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberDropdownSelectorState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
@@ -534,25 +536,51 @@ class ComponentsActivity : ComposeThemeActivity() {
                 var isChecked by remember(component) { mutableStateOf(!component.isDisabled) }
                 Row(
                     modifier = Modifier
-                        .weight(1f),
+                        .weight(1f)
+                        .padding(end = 16.dp)
+                        .padding(vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column {
-                        Row {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
                                 component.label,
-                                style = MaterialTheme.typography.titleSmall
+                                style = MaterialTheme.typography.titleMedium
                             )
+                            if (component.componentRule.descriptionUrl?.isNotEmpty() == true) {
+                                var ruleInfoDialogState by remember { mutableStateOf(false) }
+                                if (ruleInfoDialogState) {
+                                    BasicAlertDialog(onDismissRequest = {
+                                        ruleInfoDialogState = false
+                                    }) {
+                                        RuleInfoDialog(rule = component.componentRule) {
+                                            ruleInfoDialogState = false
+                                        }
+                                    }
+                                }
+                                TinySpacer()
+                                RuleIcon(
+                                    component.componentRule,
+                                    modifier = Modifier
+                                        .padding(2.dp)
+                                        .clip(CircleShape)
+                                        .clickable {
+                                            ruleInfoDialogState = true
+                                        }
+                                )
+                            }
                             if (!isChecked && component.isDisabledByThanox) {
+                                TinySpacer()
                                 MD3Badge(stringResource(R.string.module_component_manager_disabled_by_thanox))
                             }
                             if (component.isRunning) {
+                                TinySpacer()
                                 MD3Badge(stringResource(R.string.module_component_manager_component_running))
                             }
                         }
                         Text(
                             component.name,
-                            style = MaterialTheme.typography.bodySmall
+                            style = MaterialTheme.typography.bodySmall,
                         )
                     }
                 }
@@ -563,42 +591,43 @@ class ComponentsActivity : ComposeThemeActivity() {
                 })
             }
 
-            DropdownSelector(state = dropdownState, items = listOfNotNull(
-                DropdownItem(
-                    labelLines = listOf(stringResource(android.R.string.copy)),
-                    data = ComponentItemAction.Copy,
-                ),
-                if (type == Type.SERVICE) {
+            DropdownSelector(
+                state = dropdownState, items = listOfNotNull(
                     DropdownItem(
-                        labelLines = listOf(stringResource(R.string.module_component_manager_keep_service_smart_standby)),
-                        data = ComponentItemAction.AddToSmartStandByKeepRules,
-                    )
-                } else null,
-                if (type == Type.ACTIVITY) {
-                    DropdownItem(
-                        labelLines = listOf(stringResource(R.string.module_component_manager_add_lock_white_list)),
-                        data = ComponentItemAction.AddToAppLockAllowList,
-                    )
-                } else null
-            ), onSelect = {
-                when (it.data) {
-                    ComponentItemAction.Copy -> {
-                        ClipboardUtils.copyToClipboard(
-                            context,
-                            "Name",
-                            fullName
+                        labelLines = listOf(stringResource(android.R.string.copy)),
+                        data = ComponentItemAction.Copy,
+                    ),
+                    if (type == Type.SERVICE) {
+                        DropdownItem(
+                            labelLines = listOf(stringResource(R.string.module_component_manager_keep_service_smart_standby)),
+                            data = ComponentItemAction.AddToSmartStandByKeepRules,
                         )
-                    }
+                    } else null,
+                    if (type == Type.ACTIVITY) {
+                        DropdownItem(
+                            labelLines = listOf(stringResource(R.string.module_component_manager_add_lock_white_list)),
+                            data = ComponentItemAction.AddToAppLockAllowList,
+                        )
+                    } else null
+                ), onSelect = {
+                    when (it.data) {
+                        ComponentItemAction.Copy -> {
+                            ClipboardUtils.copyToClipboard(
+                                context,
+                                "Name",
+                                fullName
+                            )
+                        }
 
-                    ComponentItemAction.AddToSmartStandByKeepRules -> {
-                        addToSmartStandByKeepsVarDialog.show()
-                    }
+                        ComponentItemAction.AddToSmartStandByKeepRules -> {
+                            addToSmartStandByKeepsVarDialog.show()
+                        }
 
-                    ComponentItemAction.AddToAppLockAllowList -> {
-                        addToAppLockAllowDialog.show()
+                        ComponentItemAction.AddToAppLockAllowList -> {
+                            addToAppLockAllowDialog.show()
+                        }
                     }
-                }
-            })
+                })
         }
     }
 
@@ -612,15 +641,6 @@ class ComponentsActivity : ComposeThemeActivity() {
         isGroupSelected: Boolean,
         updateGroupSelection: (ComponentGroup, Boolean) -> Unit
     ) {
-        var ruleInfoDialogState by remember { mutableStateOf(false) }
-        if (ruleInfoDialogState) {
-            BasicAlertDialog(onDismissRequest = { ruleInfoDialogState = false }) {
-                RuleInfoDialog(rule = group.rule) {
-                    ruleInfoDialogState = false
-                }
-            }
-        }
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -641,22 +661,12 @@ class ComponentsActivity : ComposeThemeActivity() {
                 Modifier.weight(1f, fill = false),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                RuleIcon(group.rule)
+                RuleIcon(group.ruleCategory)
                 SmallSpacer()
                 Text(
-                    text = "${group.rule.label} (${group.components.size})",
+                    text = "${group.ruleCategory.label} (${group.components.size})",
                     style = MaterialTheme.typography.titleSmall
                 )
-                group.rule.descriptionUrl?.let {
-                    IconButton(onClick = {
-                        ruleInfoDialogState = true
-                    }) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = "Info"
-                        )
-                    }
-                }
             }
 
             if (canExpand) IconButton(onClick = {
@@ -674,12 +684,27 @@ class ComponentsActivity : ComposeThemeActivity() {
 }
 
 @Composable
-fun RuleIcon(rule: ComponentRule) {
+fun RuleIcon(rule: ComponentRule, modifier: Modifier = Modifier) {
     Icon(
         painter = painterResource(rule.iconRes.takeIf { it > 0 }
             ?: R.drawable.ic_logo_android_line),
         contentDescription = null,
         tint = if (rule.isSimpleColorIcon) {
+            MaterialTheme.colorScheme.primary
+        } else {
+            Color.Unspecified
+        },
+        modifier = modifier
+    )
+}
+
+@Composable
+fun RuleIcon(category: ComponentRuleCategory) {
+    Icon(
+        painter = painterResource(category.iconRes.takeIf { it > 0 }
+            ?: R.drawable.ic_logo_android_line),
+        contentDescription = null,
+        tint = if (category.isSimpleColorIcon) {
             MaterialTheme.colorScheme.primary
         } else {
             Color.Unspecified

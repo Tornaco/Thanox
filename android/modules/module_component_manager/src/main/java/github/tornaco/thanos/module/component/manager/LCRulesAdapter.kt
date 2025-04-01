@@ -31,6 +31,7 @@ import com.absinthe.rulesbundle.Rule
 import com.absinthe.rulesbundle.SERVICE
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.app.AppGlobals
+import github.tornaco.thanos.module.component.manager.redesign.toCategory
 import kotlinx.coroutines.runBlocking
 import java.util.Locale
 
@@ -91,6 +92,8 @@ val fallbackRule = ComponentRule(
     regexName = null,
     isSimpleColorIcon = false,
 )
+
+val fallbackRuleCategory = fallbackRule.toCategory()
 
 private fun isResource(context: Context, resId: Int): Boolean {
     try {

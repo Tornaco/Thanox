@@ -448,6 +448,8 @@
     <string name="module_component_manager_feature_desc">يستخدم Thanox واجهة برمجة تطبيقات نظام Android لتعطيل المكونات ، مما يعني أنه حتى إذا قمت بإلغاء تثبيت Thanox ، فستبقى حالة هذه المكونات. يمنع Thanox المكونات التي تم تعطيلها من خلال thanox من إعادة تمكينها بواسطة تطبيقات أخرى</string>
     <string name="module_component_manager_keep_service_smart_standby">الاستيراد إلى وضع القطع ، احتفظ بالقائمة</string>
     <string name="module_component_manager_add_lock_white_list">Add to App lock allow list</string>
+    <string name="module_component_manager_click_header_to_select_all">Click category to select all</string>
+
 
     <string name="nnf_new_folder">New folder</string>
     <string name="nnf_create_folder_error">Create folder error</string>

@@ -460,6 +460,7 @@
     <string name="module_component_manager_feature_desc">Thanox, Android API\'yi kullanarak bileşenleri devre dışı bırakır, bu da Thanox kaldırılmış olsa bile devre dışı bırakılan bileşenlerin durumlarını koruyacağı anlamına gelir.\n\nThanox, devre dışı bırakılan bileşenlerin ana uygulamaları tarafından yeniden etkinleştirilmesini engelleyecek ve bu bileşenlerde [thanox tarafından devre dışı bırakıldı] etiketi göreceksiniz.</string>
     <string name="module_component_manager_keep_service_smart_standby">Akıllı Bekleme Moduna Ekle</string>
     <string name="module_component_manager_add_lock_white_list">Uygulama Kilit İzin Listesine Ekle</string>
+    <string name="module_component_manager_click_header_to_select_all">Click category to select all</string>
 
     <string name="nnf_new_folder">Yeni Klasör</string>
     <string name="nnf_create_folder_error">Klasör oluşturulamadı</string>

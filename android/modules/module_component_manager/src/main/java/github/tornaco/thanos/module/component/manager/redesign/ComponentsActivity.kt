@@ -63,6 +63,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.preference.PreferenceManager
@@ -238,10 +239,18 @@ class ComponentsActivity : ComposeThemeActivity() {
             title = {
                 AnimatedContent(selectState.isSelectMode) {
                     if (it) {
-                        Text(
-                            text = "${stringResource(R.string.common_menu_title_batch_select)} ${selectState.selectedItems.size}",
-                            style = TypographyDefaults.appBarTitleTextStyle()
-                        )
+                        Column {
+                            Text(
+                                text = "${stringResource(R.string.common_menu_title_batch_select)} ${selectState.selectedItems.size}",
+                                style = TypographyDefaults.appBarTitleTextStyle()
+                            )
+                            Text(
+                                text = stringResource(R.string.module_component_manager_click_header_to_select_all),
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    fontSize = 11.5.sp
+                                )
+                            )
+                        }
                     } else {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             AppIcon(modifier = Modifier.size(32.dp), appInfo = app)
@@ -263,8 +272,8 @@ class ComponentsActivity : ComposeThemeActivity() {
                 }
             },
             actions = {
-                AnimatedContent(selectState.isSelectMode) {
-                    if (it) {
+                AnimatedContent(selectState.isSelectMode) { selectMode ->
+                    if (selectMode) {
                         Row {
                             TextButton(onClick = {
                                 viewModel.appBatchOp(true)
@@ -279,6 +288,15 @@ class ComponentsActivity : ComposeThemeActivity() {
                         }
                     } else {
                         Row {
+                            IconButton(onClick = {
+                                viewModel.toggleExpandAll()
+                            }) {
+                                Icon(
+                                    painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_arrow_expand_up_down_fill),
+                                    contentDescription = "Search"
+                                )
+                            }
+
                             val filterDropdownState = rememberDropdownSelectorState()
                             Box {
                                 IconButton(onClick = {

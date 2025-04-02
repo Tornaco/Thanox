@@ -189,6 +189,15 @@ abstract class ComponentsVM(
         }
     }
 
+    fun toggleExpandAll() {
+        val anyColl = collapsedGroups.value.isNotEmpty()
+        (components.value as? UiState.Loaded)?.let { loaded ->
+            loaded.data.forEach {
+                expand(it, anyColl)
+            }
+        }
+    }
+
     fun expand(group: ComponentGroup, expand: Boolean) {
         collapsedGroups.update {
             if (expand) {

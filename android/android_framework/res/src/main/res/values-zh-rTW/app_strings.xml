@@ -454,6 +454,7 @@
     <string name="module_component_manager_feature_desc">Thanox使用了Android系統的API來停用元件，這表示即使你把Thanox卸載，這些元件的狀態依然會保留\n\nThanox會阻止透過thanox停用的元件被其他應用程式重新啟用</string>
     <string name="module_component_manager_keep_service_smart_standby">匯入到乖巧模式KEEP清單</string>
     <string name="module_component_manager_add_lock_white_list">新增至應用鎖定元件白名單</string>
+    <string name="module_component_manager_click_header_to_select_all">点击分类标题可全选该分类</string>
 
     <string name="nnf_new_folder">新建資料夾</string>
     <string name="nnf_create_folder_error">資料夾建立失敗</string>

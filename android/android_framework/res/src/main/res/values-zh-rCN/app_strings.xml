@@ -454,6 +454,7 @@
     <string name="module_component_manager_feature_desc">Thanox使用了Android系统的API来禁用组件，这意味着哪怕你把Thanox卸载，这些组件的状态依然会保留\n\nThanox会阻止通过thanox禁用的组件被其他应用重新启用</string>
     <string name="module_component_manager_keep_service_smart_standby">导入到乖巧模式KEEP清单</string>
     <string name="module_component_manager_add_lock_white_list">添加到应用锁组件白名单</string>
+    <string name="module_component_manager_click_header_to_select_all">点击分类标题可全选该分类</string>
 
     <string name="nnf_new_folder">新建文件夹</string>
     <string name="nnf_create_folder_error">文件夹创建失败</string>

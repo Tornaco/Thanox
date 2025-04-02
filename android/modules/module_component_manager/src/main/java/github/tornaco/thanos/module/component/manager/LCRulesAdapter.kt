@@ -60,7 +60,7 @@ fun getProviderRule(name: ComponentName) =
 
 private fun getRule(name: ComponentName, type: Int): ComponentRule =
     runBlocking {
-        val rule: Rule? = LCRules.getRule(libName = name.className, type = type, useRegex = false)
+        val rule: Rule? = LCRules.getRule(libName = name.className, type = type, useRegex = true)
         val wrap = rule?.let {
             val isValidRes = isResource(AppGlobals.context, it.iconRes)
             ComponentRule(
@@ -72,7 +72,7 @@ private fun getRule(name: ComponentName, type: Int): ComponentRule =
             )
         }
         if (BuildConfig.DEBUG) {
-            XLog.v("getRule: $wrap")
+            XLog.v("getRule: ${name.className} ${wrap?.label}")
         }
         wrap ?: fallbackRule
     }

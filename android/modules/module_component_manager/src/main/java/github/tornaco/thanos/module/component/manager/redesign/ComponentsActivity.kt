@@ -234,6 +234,7 @@ class ComponentsActivity : ComposeThemeActivity() {
 
         val selectState by viewModel.selectState.collectAsStateWithLifecycle()
         val batchOpState by viewModel.batchOpState.collectAsStateWithLifecycle()
+        val viewType by viewModel.viewType.collectAsStateWithLifecycle()
 
         ThanoxSmallAppBarScaffold(
             title = {
@@ -289,12 +290,22 @@ class ComponentsActivity : ComposeThemeActivity() {
                     } else {
                         Row {
                             IconButton(onClick = {
-                                viewModel.toggleExpandAll()
+                                viewModel.toggleViewType()
                             }) {
                                 Icon(
-                                    painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_arrow_expand_up_down_fill),
-                                    contentDescription = "Search"
+                                    painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_list_settings_fill),
+                                    contentDescription = "View"
                                 )
+                            }
+                            AnimatedVisibility(viewType == ViewType.Categorized) {
+                                IconButton(onClick = {
+                                    viewModel.toggleExpandAll()
+                                }) {
+                                    Icon(
+                                        painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_arrow_expand_up_down_fill),
+                                        contentDescription = "Expand"
+                                    )
+                                }
                             }
 
                             val filterDropdownState = rememberDropdownSelectorState()

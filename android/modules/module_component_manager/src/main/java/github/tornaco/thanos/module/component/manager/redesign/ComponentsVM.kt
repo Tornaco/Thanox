@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.text.TextUtils
 import androidx.annotation.DrawableRes
+import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.preference.PreferenceManager
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.common.UiState
 import github.tornaco.android.thanos.core.app.ThanosManager
@@ -14,6 +16,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.ComponentInfo
 import github.tornaco.android.thanos.core.pm.ComponentUtil
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.android.thanos.res.R
 import github.tornaco.thanos.module.component.manager.ComponentRule
 import github.tornaco.thanos.module.component.manager.fallbackRuleCategory
 import github.tornaco.thanos.module.component.manager.getActivityRule
@@ -29,6 +32,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import util.PinyinComparatorUtils
 import java.util.UUID
+
+private const val PREFS_KEY_VIEW_TYPE = "ComponentList.ViewType"
 
 enum class FilterState {
     All,
@@ -64,6 +69,11 @@ data class BatchOpState(
     val progressText: String = ""
 )
 
+enum class ViewType {
+    Categorized,
+    Flatten
+}
+
 @SuppressLint("StaticFieldLeak")
 abstract class ComponentsVM(
     val context: Context,
@@ -80,17 +90,33 @@ abstract class ComponentsVM(
     val selectState = MutableStateFlow(MultipleSelectState())
     val batchOpState = MutableStateFlow(BatchOpState())
     val filterState = MutableStateFlow(FilterState.All)
+    val viewType = MutableStateFlow(
+        PreferenceManager.getDefaultSharedPreferences(context).getInt(
+            PREFS_KEY_VIEW_TYPE, ViewType.Categorized.ordinal
+        ).let {
+            runCatching { ViewType.entries[it] }.getOrDefault(ViewType.Categorized)
+        })
 
     val components =
-        combineTransform<AppInfo, String, FilterState, Long, UiState<List<ComponentGroup>>>(
+        combineTransform<AppInfo, String, FilterState, ViewType, Long, UiState<List<ComponentGroup>>>(
             _appInfo,
             _searchQuery,
             filterState,
+            viewType,
             _refresh,
-            transform = { appInfo, query, filterState, _ ->
+            transform = { appInfo, query, filterState, viewType, _ ->
                 emit(UiState.Loading)
                 kotlin.runCatching {
-                    emit(UiState.Loaded(loadComponentsGroups(appInfo, filterState, query)))
+                    emit(
+                        UiState.Loaded(
+                            loadComponentsGroups(
+                                appInfo = appInfo,
+                                filterState = filterState,
+                                query = query,
+                                viewType = viewType
+                            )
+                        )
+                    )
                 }.onFailure {
                     emit(UiState.Error(it))
                 }
@@ -110,7 +136,8 @@ abstract class ComponentsVM(
     private suspend fun loadComponentsGroups(
         appInfo: AppInfo,
         filterState: FilterState,
-        query: String
+        query: String,
+        viewType: ViewType
     ): List<ComponentGroup> {
         return withContext(Dispatchers.IO) {
             val res: MutableList<ComponentModel> = ArrayList()
@@ -152,15 +179,28 @@ abstract class ComponentsVM(
 
             res.sort()
 
-            res.groupBy { it.componentRule.toCategory() }.toSortedMap { o1, o2 ->
-                if (o1 == fallbackRuleCategory && o2 != fallbackRuleCategory) return@toSortedMap 1
-                if (o1 != fallbackRuleCategory && o2 == fallbackRuleCategory) return@toSortedMap -1
-                PinyinComparatorUtils.compare(
-                    o1?.label.orEmpty(),
-                    o2?.label.orEmpty()
+            if (viewType == ViewType.Categorized) {
+                res.groupBy { it.componentRule.toCategory() }.toSortedMap { o1, o2 ->
+                    if (o1 == fallbackRuleCategory && o2 != fallbackRuleCategory) return@toSortedMap 1
+                    if (o1 != fallbackRuleCategory && o2 == fallbackRuleCategory) return@toSortedMap -1
+                    PinyinComparatorUtils.compare(
+                        o1?.label.orEmpty(),
+                        o2?.label.orEmpty()
+                    )
+                }.map {
+                    ComponentGroup(it.key, it.value)
+                }
+            } else {
+                listOf(
+                    ComponentGroup(
+                        ruleCategory = ComponentRuleCategory(
+                            context.getString(R.string.all),
+                            0,
+                            false
+                        ),
+                        components = res
+                    )
                 )
-            }.map {
-                ComponentGroup(it.key, it.value)
             }
         }
     }
@@ -187,6 +227,23 @@ abstract class ComponentsVM(
         filterState.update {
             filter
         }
+    }
+
+    fun toggleViewType() {
+        setViewType(
+            if (viewType.value == ViewType.Categorized) {
+                ViewType.Flatten
+            } else {
+                ViewType.Categorized
+            }
+        )
+    }
+
+    private fun setViewType(type: ViewType) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit {
+            putInt(PREFS_KEY_VIEW_TYPE, type.ordinal)
+        }
+        viewType.update { type }
     }
 
     fun toggleExpandAll() {

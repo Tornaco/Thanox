@@ -7,7 +7,18 @@
 ## Thanox
 **Thanox**的名字灵感来自(The name of **Thanox** is inspired by) [Thanos😈](https://en.wikipedia.org/wiki/Thanos) + [Xposed🧩](https://en.wikipedia.org/wiki/Xposed) 
 
-当前已支持使用Shizuku激活（功能较少），激活后变身为Thanos。
+### Android版本支持
+目前已支持 Android 16
+
+
+### 激活方式
+- 推荐使用Xposed框架（LSP等）激活 ✅
+- 也可以使用Magisk补丁激活（当前不维护）
+- 当前已支持使用Shizuku激活 
+
+> [!TIP]
+> Shizuku模式功能较少，在App设置里一直点核心信息可选择该模式
+
 
 ## 文档 (Documents)
 

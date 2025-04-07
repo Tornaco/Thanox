@@ -94,7 +94,7 @@ public class UsageStatsManagerInternalHooks {
                 ComponentName component = (ComponentName) args[0];
                 if (type == UsageEvents.Event.MOVE_TO_BACKGROUND) {
                     XLog.d("UsageStatsManagerInternalHooks, MOVE_TO_BACKGROUND: %s", component);
-                    BootStrap.THANOS_X.getActivityStackSupervisor().reportOnActivityStopped(new Intent().setComponent(component));
+                    BootStrap.THANOS_X.getActivityStackSupervisor().reportOnActivityStopped(new Intent().setComponent(component), userId);
                 } else if (type == UsageEvents.Event.MOVE_TO_FOREGROUND) {
                     XLog.d("UsageStatsManagerInternalHooks, MOVE_TO_FOREGROUND: %s", component);
                     BootStrap.THANOS_X.getActivityStackSupervisor().reportOnActivityResumed(new Intent().setComponent(component), userId);

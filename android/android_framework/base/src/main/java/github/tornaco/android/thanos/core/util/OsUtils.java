@@ -55,6 +55,10 @@ public abstract class OsUtils {
         return Build.VERSION.SDK_INT >= 28;
     }
 
+    public static boolean isPOrBelow() {
+        return Build.VERSION.SDK_INT <= 28;
+    }
+
     // android 10
     public static boolean isQOrAbove() {
         return Build.VERSION.SDK_INT >= 29;
@@ -62,6 +66,10 @@ public abstract class OsUtils {
 
     public static boolean isQ() {
         return Build.VERSION.SDK_INT == 29;
+    }
+
+    public static boolean isR() {
+        return Build.VERSION.SDK_INT == 30;
     }
 
     // android 11

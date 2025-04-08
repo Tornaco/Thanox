@@ -30,7 +30,8 @@ import github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampoli
 import github.tornaco.android.thanox.module.notification.recorder.ui.NotificationRecordActivity
 import github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity
 import github.tornaco.thanos.android.module.profile.RuleListActivity
-import github.tornaco.thanos.android.ops.OpsBottomNavActivity
+import github.tornaco.thanos.android.ops.ops.by.ops.OpsBottomNavActivity
+import github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
 import github.tornaco.thanos.android.ops2.byop.Ops2Activity
 import now.fortuitous.thanos.launchother.LaunchOtherAppListActivity
@@ -132,6 +133,10 @@ class PrebuiltFeatureLauncher(
                     } else {
                         OpsBottomNavActivity.start(context)
                     }
+                }
+
+                PrebuiltFeatureIds.ID_THANOX_OPS -> {
+                    ThanoxOpsBottomNavActivity.start(context)
                 }
 
                 PrebuiltFeatureIds.ID_TASK_BLUR -> {

@@ -1,0 +1,32 @@
+package github.tornaco.thanos.android.ops.ops.by.ops
+
+import android.content.Context
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import github.tornaco.android.thanos.theme.ThemeActivity
+import github.tornaco.android.thanos.util.ActivityUtils
+import github.tornaco.thanos.android.ops.R
+import github.tornaco.thanos.android.ops.databinding.ModuleOpsLayoutBottomNavBinding
+
+class OpsBottomNavActivity : ThemeActivity() {
+
+    companion object Starter {
+        fun start(context: Context) {
+            ActivityUtils.startActivity(context, OpsBottomNavActivity::class.java)
+        }
+    }
+
+    private lateinit var binding: ModuleOpsLayoutBottomNavBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ModuleOpsLayoutBottomNavBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        replaceFragment(AllOpsListFragment.newInstance())
+    }
+
+    private fun replaceFragment(newFragment: Fragment) {
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.fragment_container, newFragment).commit()
+    }
+}

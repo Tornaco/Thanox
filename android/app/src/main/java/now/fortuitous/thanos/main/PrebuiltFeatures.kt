@@ -161,6 +161,14 @@ object PrebuiltFeatures {
                 themeColor = R.color.nav_icon_ops
             ),
             FeatureItem(
+                id = PrebuiltFeatureIds.ID_THANOX_OPS,
+                packedIconRes = R.drawable.ic_nav_ops,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_star_fill,
+                titleRes = github.tornaco.android.thanos.res.R.string.module_ops_feature_title_thanox_ops,
+                requiredFeature = BuildProp.THANOX_FEATURE_PRIVACY_OPS,
+                themeColor = R.color.nav_icon_ops
+            ),
+            FeatureItem(
                 id = PrebuiltFeatureIds.ID_APP_LOCK,
                 packedIconRes = R.drawable.ic_nav_app_lock,
                 iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_phone_lock_fill,

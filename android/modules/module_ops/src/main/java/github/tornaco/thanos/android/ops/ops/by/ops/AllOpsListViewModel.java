@@ -1,6 +1,7 @@
 package github.tornaco.thanos.android.ops.ops.by.ops;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
@@ -43,12 +44,16 @@ public class AllOpsListViewModel extends AndroidViewModel {
         isDataLoading.set(true);
         disposables.add(Single
                 .create((SingleOnSubscribe<List<OpGroup>>) emitter ->
-                        emitter.onSuccess(new AllOpsLoader().getAllOps(getApplication())))
+                        emitter.onSuccess(getOpsLoader().apply(getApplication())))
                 .flatMapObservable((Function<List<OpGroup>, ObservableSource<OpGroup>>) Observable::fromIterable)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> opGroups.clear())
                 .subscribe(opGroups::add, Rxs.ON_ERROR_LOGGING, () -> isDataLoading.set(false)));
+    }
+
+    public github.tornaco.android.thanos.core.util.function.Function<Context, List<OpGroup>> getOpsLoader() {
+        return input -> new AllOpsLoader().getAllOps(getApplication());
     }
 
     private void registerEventReceivers() {

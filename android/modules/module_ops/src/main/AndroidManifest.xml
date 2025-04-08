@@ -21,7 +21,10 @@
             android:exported="false"
             android:label="@string/module_ops_title_op_remind_apps" />
         <activity
-            android:name=".OpsBottomNavActivity"
+            android:name=".ops.by.ops.OpsBottomNavActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity"
             android:exported="false" />
     </application>
 </manifest>

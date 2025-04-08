@@ -147,7 +147,7 @@ public class AppPreference {
                 thanos.getActivityStackSupervisor().setAppLockEnabled(false);
             } else if (featureId == PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT) {
                 thanos.getActivityManager().setBgRestrictEnabled(false);
-            } else if (featureId == PrebuiltFeatureIds.ID_OPS_BY_APP || featureId == PrebuiltFeatureIds.ID_OPS_BY_OPS) {
+            } else if (featureId == PrebuiltFeatureIds.ID_OPS_BY_APP || featureId == PrebuiltFeatureIds.ID_OPS_BY_OPS || featureId == PrebuiltFeatureIds.ID_THANOX_OPS) {
                 thanos.getAppOpsManager().setOpsEnabled(false);
             } else if (featureId == PrebuiltFeatureIds.ID_BACKGROUND_START) {
                 thanos.getActivityManager().setStartBlockEnabled(false);

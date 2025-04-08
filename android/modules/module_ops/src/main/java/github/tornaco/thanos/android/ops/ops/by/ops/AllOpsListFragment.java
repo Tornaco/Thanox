@@ -55,8 +55,12 @@ public class AllOpsListFragment extends Fragment {
         viewModel.start();
     }
 
+    protected String getAppBarTitle() {
+        return getString(github.tornaco.android.thanos.res.R.string.module_ops_feature_title_ops_app_list);
+    }
+
     private void setupView() {
-        binding.toolbar.setTitle(getString(github.tornaco.android.thanos.res.R.string.module_ops_feature_title_ops_app_list));
+        binding.toolbar.setTitle(getAppBarTitle());
 
         binding.apps.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.apps.setAdapter(new AllOpsListAdapter(new OpItemClickListener() {
@@ -136,7 +140,7 @@ public class AllOpsListFragment extends Fragment {
         binding.executePendingBindings();
     }
 
-    public static AllOpsListViewModel obtainViewModel(FragmentActivity activity) {
+    public AllOpsListViewModel obtainViewModel(FragmentActivity activity) {
         ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory
                 .getInstance(activity.getApplication());
         return ViewModelProviders.of(activity, factory).get(AllOpsListViewModel.class);

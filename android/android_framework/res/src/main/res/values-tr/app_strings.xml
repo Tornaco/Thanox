@@ -751,6 +751,7 @@
     <string name="module_ops_feature_title_block_clear_data">Veri Temizlemeyi Engelle</string>
     <string name="module_ops_feature_title_block_update">Uygulama Güncellemesini Engelle</string>
 
+    <string name="module_ops_feature_title_thanox_ops">Thanox ops</string>
     <string name="module_ops_feature_title_ops_app_list">Uygulama İşlemleri</string>
     <string name="module_ops_feature_summary_ops_app_list">İşleme Göre</string>
     <string name="module_ops_activity_title_ops_app_list">İşleme Göre (%s)</string>

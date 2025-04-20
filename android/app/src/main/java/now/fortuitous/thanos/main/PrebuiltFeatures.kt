@@ -306,13 +306,15 @@ object PrebuiltFeatures {
                     themeColor = R.color.nav_icon_launch_other_app
                 )
             } else null,
-            FeatureItem(
-                id = PrebuiltFeatureIds.ID_RESIDENT,
-                packedIconRes = R.drawable.ic_nav_resident,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_cross_fill,
-                titleRes = github.tornaco.android.thanos.res.R.string.pre_title_resident,
-                themeColor = R.color.nav_icon_resident
-            )
+            if (OsUtils.isOOrAbove()) {
+                FeatureItem(
+                    id = PrebuiltFeatureIds.ID_RESIDENT,
+                    packedIconRes = R.drawable.ic_nav_resident,
+                    iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_cross_fill,
+                    titleRes = github.tornaco.android.thanos.res.R.string.pre_title_resident,
+                    themeColor = R.color.nav_icon_resident
+                )
+            } else null
         )
     )
 

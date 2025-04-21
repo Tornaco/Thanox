@@ -11,13 +11,13 @@ import java.util.Locale
 data class BlockerRule(
     val id: Int,
     val name: String,
-    val iconUrl: String,
-    val company: String,
+    val iconUrl: String?,
+    val company: String?,
     val searchKeyword: List<String>,
     val useRegexSearch: Boolean,
-    val description: String,
+    val description: String?,
     val safeToBlock: Boolean,
-    val sideEffect: String,
+    val sideEffect: String?,
     val contributors: List<String>
 )
 

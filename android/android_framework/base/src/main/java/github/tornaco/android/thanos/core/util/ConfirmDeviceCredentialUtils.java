@@ -23,13 +23,16 @@ import android.app.ActivityOptions;
 import android.app.IActivityManager;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.os.RemoteException;
 
 import com.elvishew.xlog.XLog;
+
+import util.XposedHelpers;
 
 // https://cs.android.com/android/platform/superproject/+/master:packages/apps/Settings/src/com/android/settings/password/ConfirmDeviceCredentialUtils.java;l=36?q=ConfirmDeviceCredentialUtils&ss=android
 public class ConfirmDeviceCredentialUtils {
     public static final int FLAG_THANOX_VERIFIED = 0x00200000;
+    // https://github.com/crdroidandroid/android_frameworks_base/blob/f860420b16089ca9fe5ce6f2c52c6fe89bb50bff/core/java/android/app/ActivityOptions.java#L135
+    public static final int MODE_BACKGROUND_ACTIVITY_START_ALLOWED = 1;
 
     public static void checkForPendingIntent(Activity activity) {
         // See Change-Id I52c203735fa9b53fd2f7df971824747eeb930f36 for context
@@ -48,7 +51,19 @@ public class ConfirmDeviceCredentialUtils {
         XLog.d("intentSender: " + intentSender);
         if (intentSender != null) {
             try {
-                activity.startIntentSenderForResult(intentSender, -1, null, 0, FLAG_THANOX_VERIFIED, 0);
+                ActivityOptions activityOptions =
+                        ActivityOptions.makeBasic();
+                // setPendingIntentBackgroundActivityStartMode(
+                //                                        MODE_BACKGROUND_ACTIVITY_START_ALLOWED);
+                if (OsUtils.is15OrAbove()) {
+                    activityOptions = (ActivityOptions) XposedHelpers.callMethod(
+                            activityOptions,
+                            "setPendingIntentBackgroundActivityStartMode",
+                            MODE_BACKGROUND_ACTIVITY_START_ALLOWED);
+                    XLog.i("activityOptions.setPendingIntentBackgroundActivityStartMode: " + activityOptions);
+                }
+
+                activity.startIntentSenderForResult(intentSender, -1, null, 0, FLAG_THANOX_VERIFIED, 0, activityOptions.toBundle());
             } catch (Throwable e) {
                 XLog.e(e, "startIntentSenderForResult error");
             }

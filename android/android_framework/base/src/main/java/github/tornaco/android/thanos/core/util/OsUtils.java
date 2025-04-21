@@ -92,6 +92,11 @@ public abstract class OsUtils {
         return Build.VERSION.SDK_INT >= 34;
     }
 
+    // android 15
+    public static boolean is15OrAbove() {
+        return Build.VERSION.SDK_INT >= 35;
+    }
+
     public static boolean hasTvFeature(Context context) {
         PackageManager pm = context.getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_LIVE_TV);

@@ -1434,6 +1434,9 @@
     <string name="process_manager">İşlem yöneticisi</string>
 
     <string name="smart_freeze">Akıllı dondurma</string>
+    <string name="smart_freeze_on_one_key_boost">Freeze apps</string>
+    <string name="smart_freeze_on_one_key_boost_summary">Also freeze the smart freeze apps</string>
+    <string name="create_one_key_freeze_shortcut">Create 1 key freeze shortcut</string>
     <string name="apps_count">%s Uygulama</string>
     <string name="sf_pkg_stats">%s uygulama / %s dondurulmuş / %s etkin</string>
     <string name="sf_pkg_stats_all_freeze">Tüm %s uygulamalar donduruldu</string>

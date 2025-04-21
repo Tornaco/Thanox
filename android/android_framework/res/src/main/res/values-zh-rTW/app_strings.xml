@@ -1403,6 +1403,9 @@
     <string name="process_manager">行程管理</string>
 
     <string name="smart_freeze">智慧凍結</string>
+    <string name="smart_freeze_on_one_key_boost">冻结应用</string>
+    <string name="smart_freeze_on_one_key_boost_summary">一键清理时同时执行智能冻结，冻结其列表里的应用</string>
+    <string name="create_one_key_freeze_shortcut">创建一键冻结快捷方式</string>
     <string name="apps_count">%s個應用</string>
     <string name="sf_pkg_stats">%s個應用 %s個已凍結 %s個已啟用</string>
     <string name="sf_pkg_stats_all_freeze">%s個應用已凍結</string>

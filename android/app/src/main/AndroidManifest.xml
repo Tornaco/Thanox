@@ -286,6 +286,9 @@
         <activity
             android:name="now.fortuitous.thanos.recovery.RecoveryUtilsActivity"
             android:exported="true" />
+        <activity
+            android:name="now.fortuitous.thanos.main.OneKeyBoostSettingsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

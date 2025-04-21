@@ -1421,6 +1421,9 @@ Compatibility notice: If the default permission management function is not compa
     <string name="process_manager">Process manager</string>
 
     <string name="smart_freeze">Smart freeze</string>
+    <string name="smart_freeze_on_one_key_boost">Freeze apps</string>
+    <string name="smart_freeze_on_one_key_boost_summary">Also freeze the smart freeze apps</string>
+    <string name="create_one_key_freeze_shortcut">Create 1 key freeze shortcut</string>
     <string name="apps_count">%s Apps</string>
     <string name="sf_pkg_stats">%s apps / %s freezed / %s enabled</string>
     <string name="sf_pkg_stats_all_freeze">All %s apps freezed</string>

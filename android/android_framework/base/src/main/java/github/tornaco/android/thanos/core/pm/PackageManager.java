@@ -558,4 +558,14 @@ public class PackageManager {
         }
         return res;
     }
+
+    @SneakyThrows
+    public void setOneKeyBoostFreezeAppEnabled(boolean enabled) {
+        pm.setOneKeyBoostFreezeAppEnabled(enabled);
+    }
+
+    @SneakyThrows
+    public boolean isOneKeyBoostFreezeAppEnabled() {
+        return pm.isOneKeyBoostFreezeAppEnabled();
+    }
 }

@@ -137,4 +137,7 @@ interface IPkgManager {
 
     void setPackageBlockUpdateEnabled(String pkgName, boolean enable);
     boolean isPackageBlockUpdateEnabled(String pkgName);
+
+    void setOneKeyBoostFreezeAppEnabled(boolean enable);
+    boolean isOneKeyBoostFreezeAppEnabled();
 }

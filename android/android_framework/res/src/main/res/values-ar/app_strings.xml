@@ -1403,6 +1403,9 @@ Compatibility notice: If the default permission management function is not compa
     <string name="process_manager">进程管理</string>
 
     <string name="smart_freeze">智能冻结</string>
+    <string name="smart_freeze_on_one_key_boost">Freeze apps</string>
+    <string name="smart_freeze_on_one_key_boost_summary">Also freeze the smart freeze apps</string>
+    <string name="create_one_key_freeze_shortcut">Create 1 key freeze shortcut</string>
     <string name="apps_count">%s个应用</string>
     <string name="sf_pkg_stats">%s个应用 %s个已冻结 %s个已启用</string>
     <string name="sf_pkg_stats_all_freeze">%s个应用均已冻结</string>

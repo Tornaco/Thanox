@@ -4,24 +4,33 @@ import android.content.ComponentName;
 import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import github.tornaco.thanos.module.component.manager.ComponentRule;
+import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRule;
 import util.PinyinComparatorUtils;
 
 public class ComponentModel implements Comparable<ComponentModel> {
-    private String name;
-    private ComponentName componentName;
-    private String label;
+    private final String name;
+    private final ComponentName componentName;
+    private final String label;
     private int enableSetting;
-    private Object componentObject;
-    private boolean isDisabledByThanox;
-    private boolean isRunning;
-    private ComponentRule componentRule;
+    private final Object componentObject;
+    private final boolean isDisabledByThanox;
+    private final boolean isRunning;
+    private final ComponentRule componentRule;
+    @Nullable
+    private final BlockerRule blockerRule;
 
-    public ComponentModel(String name, ComponentName componentName, String label,
-                          int enableSetting, Object componentObject,
-                          boolean isDisabledByThanox, boolean isRunning,
-                          ComponentRule componentRule) {
+    public ComponentModel(String name,
+                          ComponentName componentName,
+                          String label,
+                          int enableSetting,
+                          Object componentObject,
+                          boolean isDisabledByThanox,
+                          boolean isRunning,
+                          ComponentRule componentRule,
+                          @Nullable BlockerRule blockerRule) {
         this.name = name;
         this.componentName = componentName;
         this.label = label;
@@ -30,13 +39,7 @@ public class ComponentModel implements Comparable<ComponentModel> {
         this.isDisabledByThanox = isDisabledByThanox;
         this.isRunning = isRunning;
         this.componentRule = componentRule;
-    }
-
-    public ComponentModel() {
-    }
-
-    public static ComponentModelBuilder builder() {
-        return new ComponentModelBuilder();
+        this.blockerRule = blockerRule;
     }
 
     public boolean isDisabled() {
@@ -84,6 +87,11 @@ public class ComponentModel implements Comparable<ComponentModel> {
         this.enableSetting = enableSetting;
     }
 
+    @Nullable
+    public BlockerRule getBlockerRule() {
+        return blockerRule;
+    }
+
     @Override
     public int compareTo(@NonNull ComponentModel o) {
         int thisScore = 0;
@@ -100,63 +108,5 @@ public class ComponentModel implements Comparable<ComponentModel> {
         }
 
         return PinyinComparatorUtils.compare(this.name, o.name);
-    }
-
-    public static class ComponentModelBuilder {
-        private String name;
-        private ComponentName componentName;
-        private String label;
-        private int enableSetting;
-        private Object componentObject;
-        private boolean isDisabledByThanox;
-        private boolean isRunning;
-        private ComponentRule componentRule;
-
-        ComponentModelBuilder() {
-        }
-
-        public ComponentModel.ComponentModelBuilder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public ComponentModel.ComponentModelBuilder componentName(ComponentName componentName) {
-            this.componentName = componentName;
-            return this;
-        }
-
-        public ComponentModel.ComponentModelBuilder componentRule(ComponentRule componentRule) {
-            this.componentRule = componentRule;
-            return this;
-        }
-
-        public ComponentModel.ComponentModelBuilder label(String label) {
-            this.label = label;
-            return this;
-        }
-
-        public ComponentModel.ComponentModelBuilder enableSetting(int enableSetting) {
-            this.enableSetting = enableSetting;
-            return this;
-        }
-
-        public ComponentModel.ComponentModelBuilder componentObject(Object componentObject) {
-            this.componentObject = componentObject;
-            return this;
-        }
-
-        public ComponentModel.ComponentModelBuilder isDisabledByThanox(boolean isDisabledByThanox) {
-            this.isDisabledByThanox = isDisabledByThanox;
-            return this;
-        }
-
-        public ComponentModel.ComponentModelBuilder isRunning(boolean isRunning) {
-            this.isRunning = isRunning;
-            return this;
-        }
-
-        public ComponentModel build() {
-            return new ComponentModel(name, componentName, label, enableSetting, componentObject, isDisabledByThanox, isRunning, componentRule);
-        }
     }
 }

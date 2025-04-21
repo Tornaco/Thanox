@@ -21,6 +21,7 @@ import github.tornaco.thanos.module.component.manager.ComponentRule
 import github.tornaco.thanos.module.component.manager.fallbackRuleCategory
 import github.tornaco.thanos.module.component.manager.getActivityRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
+import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRules.classNameToRule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -164,15 +165,17 @@ abstract class ComponentsVM(
                     }
                     .forEach { info ->
                         res.add(
-                            ComponentModel.builder()
-                                .name(info.name)
-                                .componentName(info.componentName)
-                                .isDisabledByThanox(info.isDisabledByThanox)
-                                .label(info.label)
-                                .componentObject(info)
-                                .enableSetting(info.enableSetting)
-                                .componentRule(getActivityRule(info.componentName))
-                                .build()
+                            ComponentModel(
+                                /* name = */ info.name,
+                                /* componentName = */ info.componentName,
+                                /* label = */ info.label,
+                                /* enableSetting = */ info.enableSetting,
+                                /* componentObject = */ info,
+                                /* isDisabledByThanox = */ info.isDisabledByThanox,
+                                /* isRunning = */ false,
+                                /* componentRule = */ getActivityRule(info.componentName),
+                                /* blockerRule = */ info.componentName.className.classNameToRule()
+                            )
                         )
                     }
             }

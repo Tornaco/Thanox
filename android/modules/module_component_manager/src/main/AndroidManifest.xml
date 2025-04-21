@@ -3,18 +3,6 @@
 
     <application>
         <activity
-            android:name=".ActivityListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ReceiverListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ServiceListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProviderListActivity"
-            android:exported="false" />
-        <activity
             android:name="github.tornaco.thanos.module.component.manager.redesign.ComponentsActivity"
             android:exported="false" />
     </application>

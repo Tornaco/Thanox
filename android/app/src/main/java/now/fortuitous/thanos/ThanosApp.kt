@@ -40,6 +40,7 @@ import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.support.initThanos
 import github.tornaco.thanos.module.component.manager.initRules
+import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRules
 import io.reactivex.plugins.RxJavaPlugins
 import now.fortuitous.app.Init
 import now.fortuitous.app.Stats
@@ -87,6 +88,7 @@ class ThanosApp : MultipleModulesApp() {
             AppFeatureManager.launchSubscribeActivity = { launchSubscribeActivity(it) {} }
             Stats.init(this)
             initRules(this.applicationContext)
+            BlockerRules.initPrebuiltRules(this.applicationContext)
             XposedScope.init()
 
             CommonAppListFilterAdapter.fallbackAppItemLongClickListener =

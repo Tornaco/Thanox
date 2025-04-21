@@ -1,4 +1,5 @@
 import tornaco.project.android.thanox.Configs.resPrefix
+import tornaco.project.android.thanox.addGetBlockerRulesTask
 
 plugins {
     alias(libs.plugins.agp.lib)
@@ -77,3 +78,5 @@ dependencies {
     kapt(libs.glide.compiler)
     implementation(libs.gson)
 }
+
+addGetBlockerRulesTask()

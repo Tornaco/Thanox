@@ -58,7 +58,7 @@
             android:persistent="false"
             app:icon="@drawable/ic_ac_unit_black_24dp"
             app:key="@string/key_smart_freeze_create_freeze_all_shortcut"
-            app:title="@string/menu_title_create_shortcut" />
+            app:title="@string/create_one_key_freeze_shortcut" />
     </PreferenceCategory>
 
 </PreferenceScreen>

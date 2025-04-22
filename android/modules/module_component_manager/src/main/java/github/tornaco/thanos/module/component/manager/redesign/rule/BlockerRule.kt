@@ -10,15 +10,15 @@ import java.util.Locale
 @DoNotStrip
 data class BlockerRule(
     val id: Int,
-    val name: String,
+    val name: String?,
     val iconUrl: String?,
     val company: String?,
-    val searchKeyword: List<String>,
+    val searchKeyword: List<String>?,
     val useRegexSearch: Boolean,
     val description: String?,
     val safeToBlock: Boolean,
     val sideEffect: String?,
-    val contributors: List<String>
+    val contributors: List<String>?
 )
 
 data class CompiledRule(val rule: BlockerRule, val searchKeywordRegex: List<Regex>) {
@@ -64,7 +64,7 @@ object BlockerRules {
                 object : TypeToken<List<BlockerRule>>() {}.type
             )
             rules = rawRules.map { rule ->
-                CompiledRule(rule, rule.searchKeyword.map { Regex(it) })
+                CompiledRule(rule, rule.searchKeyword?.map { Regex(it) } ?: emptyList())
             }
         }.onFailure {
             XLog.e(it, "BlockerRules, parse rules err")

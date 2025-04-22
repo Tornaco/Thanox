@@ -37,13 +37,13 @@ import github.tornaco.android.thanos.core.util.GsonUtils
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.thanos.module.component.manager.ComponentRule
+import github.tornaco.thanos.module.component.manager.redesign.rule.ComponentRule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.URL
 
 @Composable
-internal fun RuleInfoDialog(rule: ComponentRule, dismiss: () -> Unit) {
+internal fun LCRuleInfoDialog(rule: ComponentRule, dismiss: () -> Unit) {
     Surface(
         modifier = Modifier
             .wrapContentWidth()
@@ -82,7 +82,7 @@ internal fun RuleInfoDialog(rule: ComponentRule, dismiss: () -> Unit) {
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.W500)
                 )
                 SmallSpacer()
-                RuleIcon(rule)
+                LCRuleIcon(rule)
             }
             LargeSpacer()
             AnimatedContent(description) { rd ->

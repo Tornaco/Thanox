@@ -64,6 +64,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.edit
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.preference.PreferenceManager
@@ -89,8 +90,9 @@ import github.tornaco.android.thanos.module.compose.common.widget.rememberSearch
 import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.android.thanos.util.pleaseReadCarefully
-import github.tornaco.thanos.module.component.manager.ComponentRule
+import github.tornaco.thanos.module.component.manager.redesign.rule.ComponentRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
+import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRule
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
@@ -155,9 +157,9 @@ class ComponentsActivity : ComposeThemeActivity() {
 
         fun setFeatureNoticeAccepted(context: Context, feature: String, first: Boolean) {
             PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putBoolean(feature, first)
-                .apply()
+                .edit {
+                    putBoolean(feature, first)
+                }
         }
         if (isFeatureNoticeAccepted(this, featName)) {
             return
@@ -582,13 +584,13 @@ class ComponentsActivity : ComposeThemeActivity() {
                                     BasicAlertDialog(onDismissRequest = {
                                         ruleInfoDialogState = false
                                     }) {
-                                        RuleInfoDialog(rule = component.componentRule) {
+                                        LCRuleInfoDialog(rule = component.componentRule) {
                                             ruleInfoDialogState = false
                                         }
                                     }
                                 }
                                 TinySpacer()
-                                RuleIcon(
+                                LCRuleIcon(
                                     component.componentRule,
                                     modifier = Modifier
                                         .padding(2.dp)
@@ -598,6 +600,29 @@ class ComponentsActivity : ComposeThemeActivity() {
                                         }
                                 )
                             }
+
+                            component.blockerRule?.let {
+                                var ruleInfoDialogState by remember { mutableStateOf(false) }
+                                if (ruleInfoDialogState) {
+                                    BasicAlertDialog(onDismissRequest = {
+                                        ruleInfoDialogState = false
+                                    }) {
+                                        BlockerRuleInfoDialog(rule = it) {
+                                            ruleInfoDialogState = false
+                                        }
+                                    }
+                                }
+                                BlockerRuleIcon(
+                                    rule = it,
+                                    modifier = Modifier
+                                        .padding(2.dp)
+                                        .clip(CircleShape)
+                                        .clickable {
+                                            ruleInfoDialogState = true
+                                        }
+                                )
+                            }
+
                             if (!isChecked && component.isDisabledByThanox) {
                                 TinySpacer()
                                 MD3Badge(stringResource(R.string.module_component_manager_disabled_by_thanox))
@@ -713,7 +738,7 @@ class ComponentsActivity : ComposeThemeActivity() {
 }
 
 @Composable
-fun RuleIcon(rule: ComponentRule, modifier: Modifier = Modifier) {
+fun LCRuleIcon(rule: ComponentRule, modifier: Modifier = Modifier) {
     Icon(
         painter = painterResource(rule.iconRes.takeIf { it > 0 }
             ?: R.drawable.ic_logo_android_line),
@@ -725,6 +750,18 @@ fun RuleIcon(rule: ComponentRule, modifier: Modifier = Modifier) {
         },
         modifier = modifier
     )
+}
+
+@Composable
+fun BlockerRuleIcon(rule: BlockerRule, modifier: Modifier = Modifier) {
+    if (rule.safeToBlock) {
+        Icon(
+            modifier = modifier,
+            painter = painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_check_fill),
+            contentDescription = null,
+            tint = Color(0xFF32CD32)
+        )
+    }
 }
 
 @Composable

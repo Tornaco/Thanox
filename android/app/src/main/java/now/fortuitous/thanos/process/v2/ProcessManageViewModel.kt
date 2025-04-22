@@ -36,9 +36,10 @@ import github.tornaco.android.thanos.core.net.TrafficStatsState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import github.tornaco.android.thanos.core.pm.Pkg
-import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.loader.Loader
+import github.tornaco.android.thanos.support.withThanos
+import github.tornaco.thanos.module.component.manager.redesign.rule.RuleInit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -79,6 +80,8 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
     private val trafficStats by lazy { TrafficStatsState(context) }
 
     fun init() {
+        RuleInit.init(context)
+
         viewModelScope.launch {
             loadDefaultAppFilterItems()
             loadProcessStates()

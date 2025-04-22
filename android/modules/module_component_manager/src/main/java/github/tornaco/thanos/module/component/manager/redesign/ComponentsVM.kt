@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import com.elvishew.xlog.XLog
+import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.UiState
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
@@ -17,11 +18,12 @@ import github.tornaco.android.thanos.core.pm.ComponentInfo
 import github.tornaco.android.thanos.core.pm.ComponentUtil
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.res.R
-import github.tornaco.thanos.module.component.manager.ComponentRule
-import github.tornaco.thanos.module.component.manager.fallbackRuleCategory
-import github.tornaco.thanos.module.component.manager.getActivityRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRules.classNameToRule
+import github.tornaco.thanos.module.component.manager.redesign.rule.ComponentRule
+import github.tornaco.thanos.module.component.manager.redesign.rule.RuleInit
+import github.tornaco.thanos.module.component.manager.redesign.rule.fallbackRuleCategory
+import github.tornaco.thanos.module.component.manager.redesign.rule.getActivityRule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -107,6 +109,8 @@ abstract class ComponentsVM(
             _refresh,
             transform = { appInfo, query, filterState, viewType, _ ->
                 emit(UiState.Loading)
+                RuleInit.init(context)
+
                 kotlin.runCatching {
                     emit(
                         UiState.Loaded(
@@ -167,14 +171,26 @@ abstract class ComponentsVM(
                         res.add(
                             ComponentModel(
                                 /* name = */ info.name,
-                                /* componentName = */ info.componentName,
-                                /* label = */ info.label,
-                                /* enableSetting = */ info.enableSetting,
-                                /* componentObject = */ info,
-                                /* isDisabledByThanox = */ info.isDisabledByThanox,
-                                /* isRunning = */ false,
-                                /* componentRule = */ getActivityRule(info.componentName),
-                                /* blockerRule = */ info.componentName.className.classNameToRule()
+                                /* componentName = */
+                                info.componentName,
+                                /* label = */
+                                info.label,
+                                /* enableSetting = */
+                                info.enableSetting,
+                                /* componentObject = */
+                                info,
+                                /* isDisabledByThanox = */
+                                info.isDisabledByThanox,
+                                /* isRunning = */
+                                false,
+                                /* componentRule = */
+                                getActivityRule(info.componentName),
+                                /* blockerRule = */
+                                info.componentName.className.classNameToRule().also {
+                                    if (BuildProp.THANOS_BUILD_DEBUG) {
+                                        XLog.d("classNameToRule: ${info.componentName.className} $it")
+                                    }
+                                }
                             )
                         )
                     }

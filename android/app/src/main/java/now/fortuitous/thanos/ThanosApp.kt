@@ -39,13 +39,7 @@ import github.tornaco.android.thanos.main.installCrashHandler
 import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.support.initThanos
-import github.tornaco.thanos.module.component.manager.initRules
-import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRules
 import io.reactivex.plugins.RxJavaPlugins
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import now.fortuitous.app.Init
 import now.fortuitous.app.Stats
 import now.fortuitous.thanos.power.ShortcutHelper
@@ -91,14 +85,6 @@ class ThanosApp : MultipleModulesApp() {
             Init.init(this)
             AppFeatureManager.launchSubscribeActivity = { launchSubscribeActivity(it) {} }
             Stats.init(this)
-
-            @Suppress("OPT_IN_USAGE")
-            GlobalScope.launch {
-                withContext(Dispatchers.IO) {
-                    initRules(applicationContext)
-                    BlockerRules.initPrebuiltRules(applicationContext)
-                }
-            }
 
             XposedScope.init()
 

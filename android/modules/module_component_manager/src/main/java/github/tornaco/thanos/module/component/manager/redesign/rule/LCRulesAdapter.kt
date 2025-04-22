@@ -15,7 +15,7 @@
  *
  */
 
-package github.tornaco.thanos.module.component.manager
+package github.tornaco.thanos.module.component.manager.redesign.rule
 
 import android.content.ComponentName
 import android.content.Context
@@ -31,20 +31,23 @@ import com.absinthe.rulesbundle.Rule
 import com.absinthe.rulesbundle.SERVICE
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.app.AppGlobals
+import github.tornaco.thanos.module.component.manager.BuildConfig
 import github.tornaco.thanos.module.component.manager.redesign.toCategory
 import kotlinx.coroutines.runBlocking
 import java.util.Locale
 
-fun initRules(context: Context) = runCatching {
-    LCRules.init(context)
+object LCRules {
+    fun initRules(context: Context) = runCatching {
+        LCRules.init(context)
 
-    val locale = context.resources.configuration.locales[0]
-    val isSystemLanguageChinese = locale.language == Locale.CHINESE.language
-    XLog.w("initRules: $locale $isSystemLanguageChinese")
+        val locale = context.resources.configuration.locales[0]
+        val isSystemLanguageChinese = locale.language == Locale.CHINESE.language
+        XLog.w("initRules: $locale $isSystemLanguageChinese")
 
-    LCRules.setLocale(if (isSystemLanguageChinese) LCLocale.ZH else LCLocale.EN)
-    LCRules.setRemoteRepo(if (isSystemLanguageChinese) LCRemoteRepo.Gitlab else LCRemoteRepo.Github)
-}.onFailure { XLog.e(it) }
+        LCRules.setLocale(if (isSystemLanguageChinese) LCLocale.ZH else LCLocale.EN)
+        LCRules.setRemoteRepo(if (isSystemLanguageChinese) LCRemoteRepo.Gitlab else LCRemoteRepo.Github)
+    }.onFailure { XLog.e(it) }
+}
 
 fun getActivityRule(name: ComponentName) =
     getRule(name = name, type = ACTIVITY)

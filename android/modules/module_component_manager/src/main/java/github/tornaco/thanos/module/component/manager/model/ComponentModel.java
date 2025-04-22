@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import github.tornaco.thanos.module.component.manager.ComponentRule;
+import github.tornaco.thanos.module.component.manager.redesign.rule.ComponentRule;
 import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRule;
 import util.PinyinComparatorUtils;
 

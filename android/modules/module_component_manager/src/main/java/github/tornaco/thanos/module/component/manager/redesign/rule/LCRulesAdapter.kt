@@ -20,6 +20,7 @@ package github.tornaco.thanos.module.component.manager.redesign.rule
 import android.content.ComponentName
 import android.content.Context
 import android.content.res.Resources
+import android.os.Parcelable
 import androidx.annotation.DrawableRes
 import com.absinthe.rulesbundle.ACTIVITY
 import com.absinthe.rulesbundle.LCLocale
@@ -34,6 +35,7 @@ import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.thanos.module.component.manager.BuildConfig
 import github.tornaco.thanos.module.component.manager.redesign.toCategory
 import kotlinx.coroutines.runBlocking
+import kotlinx.parcelize.Parcelize
 import java.util.Locale
 
 object LCRules {
@@ -80,13 +82,14 @@ private fun getRule(name: ComponentName, type: Int): ComponentRule =
         wrap ?: fallbackRule
     }
 
+@Parcelize
 data class ComponentRule(
     val label: String,
     @DrawableRes val iconRes: Int,
     val descriptionUrl: String?,
     val regexName: String?,
     val isSimpleColorIcon: Boolean,
-)
+) : Parcelable
 
 val fallbackRule = ComponentRule(
     label = "Others",

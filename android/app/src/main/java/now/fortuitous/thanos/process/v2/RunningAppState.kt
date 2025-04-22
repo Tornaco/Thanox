@@ -25,6 +25,8 @@ import androidx.compose.runtime.setValue
 import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRule
+import github.tornaco.thanos.module.component.manager.redesign.rule.ComponentRule
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
@@ -58,7 +60,10 @@ data class RunningProcessState(
 data class RunningService(
     val running: ActivityManager.RunningServiceInfo,
     val serviceLabel: String,
-    val clientLabel: String? = null
+    val clientLabel: String? = null,
+    val lcRule: ComponentRule? = null,
+    val blockRule: BlockerRule? = null
+
 ) : Parcelable {
     @IgnoredOnParcel
     var isStopped by mutableStateOf(false)

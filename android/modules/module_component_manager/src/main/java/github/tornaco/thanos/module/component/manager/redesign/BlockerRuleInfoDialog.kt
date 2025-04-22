@@ -23,7 +23,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRule
 
 @Composable
-internal fun BlockerRuleInfoDialog(rule: BlockerRule, dismiss: () -> Unit) {
+fun BlockerRuleInfoDialog(rule: BlockerRule, dismiss: () -> Unit) {
     Surface(
         modifier = Modifier
             .wrapContentWidth()

@@ -1,13 +1,16 @@
 package github.tornaco.thanos.module.component.manager.redesign.rule
 
 import android.content.Context
+import android.os.Parcelable
 import com.elvishew.xlog.XLog
 import com.google.gson.reflect.TypeToken
 import github.tornaco.android.thanos.core.annotation.DoNotStrip
 import github.tornaco.android.thanos.core.util.GsonUtils
+import kotlinx.parcelize.Parcelize
 import java.util.Locale
 
 @DoNotStrip
+@Parcelize
 data class BlockerRule(
     val id: Int,
     val name: String?,
@@ -19,7 +22,7 @@ data class BlockerRule(
     val safeToBlock: Boolean,
     val sideEffect: String?,
     val contributors: List<String>?
-)
+) : Parcelable
 
 data class CompiledRule(val rule: BlockerRule, val searchKeywordRegex: List<Regex>) {
     fun match(className: String): Boolean {

@@ -39,7 +39,10 @@ import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.loader.Loader
 import github.tornaco.android.thanos.support.withThanos
+import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRules.classNameToRule
 import github.tornaco.thanos.module.component.manager.redesign.rule.RuleInit
+import github.tornaco.thanos.module.component.manager.redesign.rule.fallbackRule
+import github.tornaco.thanos.module.component.manager.redesign.rule.getServiceRule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -152,7 +155,17 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                                         } else {
                                             null
                                         }
-                                    RunningService(runningServiceInfo, label, clientLabel)
+                                    val lcRule =
+                                        runningServiceInfo?.service?.let { name -> getServiceRule(name).takeIf { it != fallbackRule } }
+                                    val blockerRule =
+                                        runningServiceInfo?.service?.className?.classNameToRule()
+                                    RunningService(
+                                        running = runningServiceInfo,
+                                        serviceLabel = label,
+                                        clientLabel = clientLabel,
+                                        lcRule = lcRule,
+                                        blockRule = blockerRule
+                                    )
                                 },
                                 sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
                             )

@@ -43,7 +43,7 @@ import kotlinx.coroutines.withContext
 import java.net.URL
 
 @Composable
-internal fun LCRuleInfoDialog(rule: ComponentRule, dismiss: () -> Unit) {
+fun LCRuleInfoDialog(rule: ComponentRule, dismiss: () -> Unit) {
     Surface(
         modifier = Modifier
             .wrapContentWidth()

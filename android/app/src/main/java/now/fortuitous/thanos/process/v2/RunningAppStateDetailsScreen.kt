@@ -15,6 +15,8 @@
  *
  */
 
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package now.fortuitous.thanos.process.v2
 
 import android.app.ActivityManager
@@ -80,6 +82,8 @@ import github.tornaco.android.thanos.module.compose.common.widget.clickableWithR
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.android.module.profile.AddToGlobalVarDialog
 import github.tornaco.thanos.module.component.manager.AddToSmartStandByKeepsVarDialog
+import github.tornaco.thanos.module.component.manager.redesign.BlockerRuleIconWithInfoDialog
+import github.tornaco.thanos.module.component.manager.redesign.LCRuleIconWithInfoDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -193,7 +197,8 @@ private fun ServiceSection(
         Row(modifier = Modifier.padding(horizontal = 16.dp), verticalAlignment = CenterVertically) {
             Text(
                 text = if (runningServiceCount > 0) stringResource(
-                    id = github.tornaco.android.thanos.res.R.string.running_processes_item_description_s, runningServiceCount
+                    id = github.tornaco.android.thanos.res.R.string.running_processes_item_description_s,
+                    runningServiceCount
                 ) else stringResource(id = github.tornaco.android.thanos.res.R.string.runningservicedetails_services_title),
                 style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp)
             )
@@ -249,6 +254,18 @@ private fun ServiceTile(
             text = service.running.service.flattenToShortString(),
             style = MaterialTheme.typography.labelMedium
         )
+        if (service.lcRule != null || service.blockRule != null) {
+            StandardSpacer()
+            Row(verticalAlignment = CenterVertically) {
+                service.lcRule?.let {
+                    LCRuleIconWithInfoDialog(it)
+                }
+                service.blockRule?.let {
+                    StandardSpacer()
+                    BlockerRuleIconWithInfoDialog(it)
+                }
+            }
+        }
         Spacer(modifier = Modifier.size(12.dp))
         ServicePopupMenu(
             popMenuExpend = popMenuExpend,

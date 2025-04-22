@@ -90,9 +90,9 @@ import github.tornaco.android.thanos.module.compose.common.widget.rememberSearch
 import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.android.thanos.util.pleaseReadCarefully
-import github.tornaco.thanos.module.component.manager.redesign.rule.ComponentRule
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRule
+import github.tornaco.thanos.module.component.manager.redesign.rule.ComponentRule
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
@@ -579,48 +579,11 @@ class ComponentsActivity : ComposeThemeActivity() {
                                 style = MaterialTheme.typography.titleMedium
                             )
                             if (component.componentRule.descriptionUrl?.isNotEmpty() == true) {
-                                var ruleInfoDialogState by remember { mutableStateOf(false) }
-                                if (ruleInfoDialogState) {
-                                    BasicAlertDialog(onDismissRequest = {
-                                        ruleInfoDialogState = false
-                                    }) {
-                                        LCRuleInfoDialog(rule = component.componentRule) {
-                                            ruleInfoDialogState = false
-                                        }
-                                    }
-                                }
-                                TinySpacer()
-                                LCRuleIcon(
-                                    component.componentRule,
-                                    modifier = Modifier
-                                        .padding(2.dp)
-                                        .clip(CircleShape)
-                                        .clickable {
-                                            ruleInfoDialogState = true
-                                        }
-                                )
+                                LCRuleIconWithInfoDialog(component.componentRule)
                             }
 
                             component.blockerRule?.let {
-                                var ruleInfoDialogState by remember { mutableStateOf(false) }
-                                if (ruleInfoDialogState) {
-                                    BasicAlertDialog(onDismissRequest = {
-                                        ruleInfoDialogState = false
-                                    }) {
-                                        BlockerRuleInfoDialog(rule = it) {
-                                            ruleInfoDialogState = false
-                                        }
-                                    }
-                                }
-                                BlockerRuleIcon(
-                                    rule = it,
-                                    modifier = Modifier
-                                        .padding(2.dp)
-                                        .clip(CircleShape)
-                                        .clickable {
-                                            ruleInfoDialogState = true
-                                        }
-                                )
+                                BlockerRuleIconWithInfoDialog(rule = it)
                             }
 
                             if (!isChecked && component.isDisabledByThanox) {
@@ -753,15 +716,61 @@ fun LCRuleIcon(rule: ComponentRule, modifier: Modifier = Modifier) {
 }
 
 @Composable
+fun LCRuleIconWithInfoDialog(rule: ComponentRule) {
+    var ruleInfoDialogState by remember { mutableStateOf(false) }
+    if (ruleInfoDialogState) {
+        BasicAlertDialog(onDismissRequest = {
+            ruleInfoDialogState = false
+        }) {
+            LCRuleInfoDialog(rule = rule) {
+                ruleInfoDialogState = false
+            }
+        }
+    }
+    LCRuleIcon(
+        rule = rule,
+        modifier = Modifier
+            .padding(2.dp)
+            .clip(CircleShape)
+            .clickable {
+                ruleInfoDialogState = true
+            }
+    )
+}
+
+@Composable
 fun BlockerRuleIcon(rule: BlockerRule, modifier: Modifier = Modifier) {
     if (rule.safeToBlock) {
         Icon(
             modifier = modifier,
-            painter = painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_check_fill),
+            painter = painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_forbid_fill),
             contentDescription = null,
             tint = Color(0xFF32CD32)
         )
     }
+}
+
+@Composable
+fun BlockerRuleIconWithInfoDialog(rule: BlockerRule) {
+    var ruleInfoDialogState by remember { mutableStateOf(false) }
+    if (ruleInfoDialogState) {
+        BasicAlertDialog(onDismissRequest = {
+            ruleInfoDialogState = false
+        }) {
+            BlockerRuleInfoDialog(rule = rule) {
+                ruleInfoDialogState = false
+            }
+        }
+    }
+    BlockerRuleIcon(
+        rule = rule,
+        modifier = Modifier
+            .padding(2.dp)
+            .clip(CircleShape)
+            .clickable {
+                ruleInfoDialogState = true
+            }
+    )
 }
 
 @Composable

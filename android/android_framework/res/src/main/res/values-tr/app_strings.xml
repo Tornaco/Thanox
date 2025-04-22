@@ -461,6 +461,9 @@
     <string name="module_component_manager_keep_service_smart_standby">Akıllı Bekleme Moduna Ekle</string>
     <string name="module_component_manager_add_lock_white_list">Uygulama Kilit İzin Listesine Ekle</string>
     <string name="module_component_manager_click_header_to_select_all">Click category to select all</string>
+    <string name="module_component_manager_safe_to_block">Safe to block</string>
+    <string name="module_component_manager_safe_to_block_tip">The rule comes from the blocker-rules open source project.</string>
+    <string name="module_component_manager_safe_to_block_select">Select all components that it\'s safe in blocker rules</string>
 
     <string name="nnf_new_folder">Yeni Klasör</string>
     <string name="nnf_create_folder_error">Klasör oluşturulamadı</string>

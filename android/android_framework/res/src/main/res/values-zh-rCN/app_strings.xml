@@ -455,6 +455,9 @@
     <string name="module_component_manager_keep_service_smart_standby">导入到乖巧模式KEEP清单</string>
     <string name="module_component_manager_add_lock_white_list">添加到应用锁组件白名单</string>
     <string name="module_component_manager_click_header_to_select_all">点击分类标题可全选该分类</string>
+    <string name="module_component_manager_safe_to_block">可以放心禁用该组件</string>
+    <string name="module_component_manager_safe_to_block_tip">本组件规则来自blocker-rules开源项目</string>
+    <string name="module_component_manager_safe_to_block_select">选择blocker-rules提示可安全禁用的组件</string>
 
     <string name="nnf_new_folder">新建文件夹</string>
     <string name="nnf_create_folder_error">文件夹创建失败</string>

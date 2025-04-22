@@ -743,7 +743,7 @@ fun BlockerRuleIcon(rule: BlockerRule, modifier: Modifier = Modifier) {
     if (rule.safeToBlock) {
         Icon(
             modifier = modifier,
-            painter = painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_forbid_fill),
+            painter = painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_check_fill),
             contentDescription = null,
             tint = Color(0xFF32CD32)
         )

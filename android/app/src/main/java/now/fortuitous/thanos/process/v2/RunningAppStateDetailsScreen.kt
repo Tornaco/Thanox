@@ -73,6 +73,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownPopUpMenu
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
+import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MenuItem
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
@@ -261,7 +262,7 @@ private fun ServiceTile(
                     LCRuleIconWithInfoDialog(it)
                 }
                 service.blockRule?.let {
-                    StandardSpacer()
+                    MediumSpacer()
                     BlockerRuleIconWithInfoDialog(it)
                 }
             }

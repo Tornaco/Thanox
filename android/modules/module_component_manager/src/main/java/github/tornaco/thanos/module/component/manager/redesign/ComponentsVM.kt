@@ -386,4 +386,39 @@ abstract class ComponentsVM(
             }
         }
     }
+
+    fun selectAllAgainstBlockRules() {
+        val groups = components.value as? UiState.Loaded ?: return
+        batchOpState.update {
+            it.copy(isWorking = true)
+        }
+        viewModelScope.launch {
+            groups.data.flatMap { it.components }.forEach { model ->
+                if (model.blockerRule?.safeToBlock == true) {
+                    batchOpState.update {
+                        it.copy(progressText = model.label.orEmpty())
+                    }
+                    select(model, true)
+                }
+            }
+        }
+        batchOpState.update {
+            it.copy(isWorking = false, progressText = "")
+        }
+    }
+
+    fun selectAll(select: Boolean) {
+        val groups = components.value as? UiState.Loaded ?: return
+        batchOpState.update {
+            it.copy(isWorking = true)
+        }
+        if (select) {
+            groups.data.forEach { select(it, true) }
+        } else {
+            groups.data.forEach { select(it, false) }
+        }
+        batchOpState.update {
+            it.copy(isWorking = false, progressText = "")
+        }
+    }
 }

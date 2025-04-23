@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 
 package github.tornaco.thanos.module.component.manager.redesign
 
@@ -18,6 +18,8 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,6 +39,7 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -382,119 +385,146 @@ class ComponentsActivity : ComposeThemeActivity() {
                 )
             }
 
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .padding(paddings)
-                    .pullRefresh(refreshState)
-            ) {
-                val collapsedGroups by viewModel.collapsedGroups.collectAsStateWithLifecycle()
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize()
+            Column(Modifier.padding(paddings)) {
+                AnimatedVisibility(components is UiState.Loaded && selectState.isSelectMode) {
+                    FlowRow {
+                        AssistChip(modifier = Modifier.padding(start = 12.dp), onClick = {
+                            viewModel.selectAll(true)
+                        }, label = {
+                            Text(stringResource(R.string.common_menu_title_select_all))
+                        })
+                        AssistChip(modifier = Modifier.padding(start = 12.dp), onClick = {
+                            viewModel.selectAll(false)
+                        }, label = {
+                            Text(stringResource(R.string.common_menu_title_un_select_all))
+                        })
+                        AssistChip(modifier = Modifier.padding(start = 12.dp), onClick = {
+                            viewModel.selectAllAgainstBlockRules()
+                        }, label = {
+                            Text(stringResource(R.string.module_component_manager_safe_to_block_select))
+                        })
+                    }
+                }
+                Box(
+                    Modifier
+                        .fillMaxSize()
+
+                        .pullRefresh(refreshState)
                 ) {
-                    when (components) {
-                        is UiState.Error -> {
-                            item {
-                                Box(
-                                    Modifier
-                                        .fillMaxSize()
-                                        .padding(16.dp),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Text((components as UiState.Error).err.stackTraceToString())
+                    val collapsedGroups by viewModel.collapsedGroups.collectAsStateWithLifecycle()
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        when (components) {
+                            is UiState.Error -> {
+                                item {
+                                    Box(
+                                        Modifier
+                                            .fillMaxSize()
+                                            .padding(16.dp),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text((components as UiState.Error).err.stackTraceToString())
+                                    }
                                 }
                             }
-                        }
 
-                        is UiState.Loaded -> {
-                            (components as UiState.Loaded<List<ComponentGroup>>).data.forEach { group ->
-                                val isLargeGroup = group.components.size > 100
+                            is UiState.Loaded -> {
+                                (components as UiState.Loaded<List<ComponentGroup>>).data.forEach { group ->
+                                    val isLargeGroup = group.components.size > 100
 
-                                stickyHeader {
-                                    RuleHeader(
-                                        group = group,
-                                        canExpand = !isLargeGroup,
-                                        isExpand = !collapsedGroups.contains(group.id),
-                                        expand = {
-                                            viewModel.expand(group, it)
-                                        },
-                                        isInSelectMode = selectState.isSelectMode,
-                                        isGroupSelected = selectState.selectedItems.containsAll(
-                                            group.components
-                                        ),
-                                        updateGroupSelection = { componentGroup, b ->
-                                            viewModel.select(componentGroup, b)
-                                        }
-                                    )
-                                }
-
-                                if (!isLargeGroup) {
-                                    item {
-                                        AnimatedVisibility(!collapsedGroups.contains(group.id)) {
-                                            LazyColumn(Modifier.heightIn(max = 2000.dp)) {
-                                                itemsIndexed(group.components, key = { index, com ->
-                                                    "${com.name}-${index}"
-                                                }) { _, component ->
-                                                    ComponentItem(
-                                                        component = component,
-                                                        type = type,
-                                                        toggle = {
-                                                            viewModel.setComponentState(
-                                                                componentModel = it,
-                                                                setToEnabled = it.isDisabled
-                                                            )
-                                                        },
-                                                        isInSelectMode = selectState.isSelectMode,
-                                                        isSelected = selectState.selectedItems.contains(
-                                                            component
-                                                        ),
-                                                        updateSelection = { componentModel: ComponentModel, b: Boolean ->
-                                                            viewModel.select(componentModel, b)
-                                                        }
-                                                    )
-                                                }
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    // Large group, always show.
-                                    itemsIndexed(group.components, key = { index, com ->
-                                        "${com.name}-${index}"
-                                    }) { _, component ->
-                                        ComponentItem(
-                                            component = component,
-                                            type = type,
-                                            toggle = {
-                                                viewModel.setComponentState(
-                                                    componentModel = it,
-                                                    setToEnabled = it.isDisabled
-                                                )
+                                    stickyHeader {
+                                        RuleHeader(
+                                            group = group,
+                                            canExpand = !isLargeGroup,
+                                            isExpand = !collapsedGroups.contains(group.id),
+                                            expand = {
+                                                viewModel.expand(group, it)
                                             },
                                             isInSelectMode = selectState.isSelectMode,
-                                            isSelected = selectState.selectedItems.contains(
-                                                component
+                                            isGroupSelected = selectState.selectedItems.containsAll(
+                                                group.components
                                             ),
-                                            updateSelection = { componentModel: ComponentModel, b: Boolean ->
-                                                viewModel.select(componentModel, b)
+                                            updateGroupSelection = { componentGroup, b ->
+                                                viewModel.select(componentGroup, b)
                                             }
                                         )
                                     }
+
+                                    if (!isLargeGroup) {
+                                        item {
+                                            androidx.compose.animation.AnimatedVisibility(
+                                                !collapsedGroups.contains(
+                                                    group.id
+                                                )
+                                            ) {
+                                                LazyColumn(Modifier.heightIn(max = 2000.dp)) {
+                                                    itemsIndexed(
+                                                        group.components,
+                                                        key = { index, com ->
+                                                            "${com.name}-${index}"
+                                                        }) { _, component ->
+                                                        ComponentItem(
+                                                            component = component,
+                                                            type = type,
+                                                            toggle = {
+                                                                viewModel.setComponentState(
+                                                                    componentModel = it,
+                                                                    setToEnabled = it.isDisabled
+                                                                )
+                                                            },
+                                                            isInSelectMode = selectState.isSelectMode,
+                                                            isSelected = selectState.selectedItems.contains(
+                                                                component
+                                                            ),
+                                                            updateSelection = { componentModel: ComponentModel, b: Boolean ->
+                                                                viewModel.select(componentModel, b)
+                                                            }
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        // Large group, always show.
+                                        itemsIndexed(group.components, key = { index, com ->
+                                            "${com.name}-${index}"
+                                        }) { _, component ->
+                                            ComponentItem(
+                                                component = component,
+                                                type = type,
+                                                toggle = {
+                                                    viewModel.setComponentState(
+                                                        componentModel = it,
+                                                        setToEnabled = it.isDisabled
+                                                    )
+                                                },
+                                                isInSelectMode = selectState.isSelectMode,
+                                                isSelected = selectState.selectedItems.contains(
+                                                    component
+                                                ),
+                                                updateSelection = { componentModel: ComponentModel, b: Boolean ->
+                                                    viewModel.select(componentModel, b)
+                                                }
+                                            )
+                                        }
+                                    }
                                 }
                             }
-                        }
 
-                        UiState.Loading -> {
-                            // No op.
+                            UiState.Loading -> {
+                                // No op.
+                            }
                         }
                     }
-                }
 
-                PullRefreshIndicator(
-                    refreshing = refreshing,
-                    state = refreshState,
-                    modifier = Modifier.align(Alignment.TopCenter),
-                    contentColor = MaterialTheme.colorScheme.secondary
-                )
+                    PullRefreshIndicator(
+                        refreshing = refreshing,
+                        state = refreshState,
+                        modifier = Modifier.align(Alignment.TopCenter),
+                        contentColor = MaterialTheme.colorScheme.secondary
+                    )
+                }
             }
 
         }

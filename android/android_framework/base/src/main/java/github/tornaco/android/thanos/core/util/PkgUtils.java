@@ -55,7 +55,7 @@ public class PkgUtils {
         }
         PackageManager pm = context.getPackageManager();
         try {
-            return pm.getApplicationInfoAsUser(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES | PackageManager.GET_META_DATA, userId);
+            return pm.getApplicationInfoAsUser(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES, userId);
         } catch (PackageManager.NameNotFoundException e) {
             return null;
         } catch (Throwable e) {
@@ -68,7 +68,7 @@ public class PkgUtils {
         PackageManager pm = context.getPackageManager();
         try {
             ApplicationInfo info;
-            info = pm.getApplicationInfo(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES | PackageManager.GET_META_DATA);
+            info = pm.getApplicationInfo(pkg, PackageManager.MATCH_UNINSTALLED_PACKAGES);
             return info;
         } catch (PackageManager.NameNotFoundException e) {
             return null;

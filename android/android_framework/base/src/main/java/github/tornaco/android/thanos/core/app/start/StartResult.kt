@@ -69,6 +69,8 @@ class StartResult : Parcelable {
         @JvmField
         val BY_PASS_WALLPAPER_COMPONENT = StartResult(true, "BY_PASS_WALLPAPER_COMPONENT")
         @JvmField
+        val BY_PASS_XPOSED_MODULE = StartResult(true, "BY_PASS_XPOSED_MODULE")
+        @JvmField
         val BLOCKED_STRUGGLE = StartResult(false, "BLOCKED_STRUGGLE")
         @JvmField
         val BLOCKED_PROCESS_IS_KILLED = StartResult(false, "BLOCKED_PROCESS_IS_KILLED")

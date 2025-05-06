@@ -1,7 +1,6 @@
 package github.tornaco.android.thanos.services.patch.common.am
 
 import android.annotation.SuppressLint
-import com.elvishew.xlog.XLog
 import util.XposedHelpers
 
 object XActivityAssistInfo {
@@ -15,14 +14,31 @@ object XActivityAssistInfo {
     @SuppressLint("PrivateApi")
     @JvmStatic
     fun getActivityToken(info: Any?): Any? {
-        return if (info == null) null else try {
-            XposedHelpers.callMethod(
-                info,
-                "getActivityToken"
-            )
-        } catch (e: Throwable) {
-            XLog.e("XActivityAssistInfo#getActivityToken error", e)
-            null
+        return if (info == null) null else {
+            kotlin.runCatching {
+                XposedHelpers.callMethod(
+                    info,
+                    "getActivityToken"
+                )
+            }.getOrElse {
+                // One UI 7 has no getter method
+                // public final class ActivityAssistInfo {
+                //    public final IBinder mActivityToken;
+                //    public final IBinder mAssistToken;
+                //    public final ComponentName mComponentName;
+                //    public final int mTaskId;
+                //    public final int mUserId;
+                //
+                //    public ActivityAssistInfo(ActivityRecord activityRecord) {
+                //        this.mActivityToken = activityRecord.token;
+                //        this.mAssistToken = activityRecord.assistToken;
+                //        this.mTaskId = activityRecord.task.mTaskId;
+                //        this.mComponentName = activityRecord.mActivityComponent;
+                //        this.mUserId = activityRecord.mUserId;
+                //    }
+                //}
+                XposedHelpers.getObjectField(info, "mActivityToken")
+            }
         }
     }
 }

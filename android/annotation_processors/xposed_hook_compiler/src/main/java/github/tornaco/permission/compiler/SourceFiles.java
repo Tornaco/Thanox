@@ -1,11 +1,11 @@
 package github.tornaco.permission.compiler;
 
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.lang.model.element.TypeElement;
-import javax.tools.Diagnostic;
-import javax.tools.JavaFileObject;
 import java.io.IOException;
 import java.io.Writer;
+
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.tools.Diagnostic;
+import javax.tools.JavaFileObject;
 
 /**
  * Created by Nick@NewStand.org on 2017/4/12 17:01
@@ -16,9 +16,9 @@ import java.io.Writer;
 public class SourceFiles {
 
     public static void writeSourceFile(ProcessingEnvironment processingEnv,
-                                       String className, String text, TypeElement originatingType) {
+                                       String className, String text) {
         try {
-            JavaFileObject sourceFile = processingEnv.getFiler().createSourceFile(className, originatingType);
+            JavaFileObject sourceFile = processingEnv.getFiler().createSourceFile(className);
             Writer writer = sourceFile.openWriter();
             try {
                 writer.write(text);

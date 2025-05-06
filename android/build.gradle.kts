@@ -70,8 +70,8 @@ fun printVersions() {
 }
 
 
-val androidSourceCompatibility by extra(JavaVersion.VERSION_17)
-val androidTargetCompatibility by extra(JavaVersion.VERSION_17)
+val androidSourceCompatibility by extra(JavaVersion.VERSION_21)
+val androidTargetCompatibility by extra(JavaVersion.VERSION_21)
 
 subprojects {
     log("subprojects: ${this.name}")

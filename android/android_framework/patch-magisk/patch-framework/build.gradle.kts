@@ -5,8 +5,8 @@ plugins {
 dependencies {
     implementation(libs.rxjava)
 
-    compileOnly("org.projectlombok:lombok:1.18.36")
-    annotationProcessor("org.projectlombok:lombok:1.18.36")
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 
     implementation(project(":android_framework:base"))
     implementation(project(":android_framework:services"))

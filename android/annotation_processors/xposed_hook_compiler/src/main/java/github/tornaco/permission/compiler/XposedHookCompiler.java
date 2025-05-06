@@ -104,7 +104,7 @@ public class XposedHookCompiler extends AbstractProcessor {
 
         source = Reformatter.fixup(source);
 
-        SourceFiles.writeSourceFile(processingEnv, pkgName + "." + className, source, null);
+        SourceFiles.writeSourceFile(processingEnv, pkgName + "." + className, source);
     }
 
     private String generateClass(String pkgName, String className) {

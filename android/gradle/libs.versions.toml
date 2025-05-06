@@ -5,6 +5,7 @@ activity-compose = "1.10.1"
 adapter-rxjava2 = "2.11.0"
 agp = "8.8.2"
 firebase-bom = "33.9.0"
+javapoet = "1.13.0"
 ksp = "2.0.21-1.0.26"
 biometric = "1.4.0-alpha02"
 datastore = "1.1.3"
@@ -20,6 +21,7 @@ easy-rules-mvel = "4.1.0"
 easy-rules-core = "4.1.0"
 guava-android = "33.0.0-android"
 interpolator = "1.0.0"
+lombok = "1.18.36"
 paging-runtime = "3.3.6"
 licensesdialog = "2.2.0"
 lifecycle-extensions = "2.2.0"
@@ -124,8 +126,10 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 guava-android = { module = "com.google.guava:guava", version.ref = "guava-android" }
+javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
 licensesdialog = { module = "de.psdev.licensesdialog:licensesdialog", version.ref = "licensesdialog" }
 listenablefuture = { module = "com.google.guava:listenablefuture", version.ref = "listenablefuture" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 relinker = { module = "com.getkeepsafe.relinker:relinker", version.ref = "relinker" }
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }

@@ -25,7 +25,7 @@ jobs:
       - run: ls -l /opt/android/sdk/build-tools
 
       - android/change-java-version:
-          java-version: 17
+          java-version: 21
     
       # Checkout the code as the first step.
       - checkout

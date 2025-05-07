@@ -86,7 +86,7 @@ kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref =
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
-protobuf-gradle-plugin = { id = "com.google.protobuf", version = "0.9.4" }
+protobuf-gradle-plugin = { id = "com.google.protobuf", version = "0.9.5" }
 # https://github.com/gmazzo/gradle-buildconfig-plugin
 gmazzo-buildconfig = { id = "com.github.gmazzo.buildconfig", version = "5.5.0" }
 gladed-androidgitversion = { id = "com.gladed.androidgitversion", version = "0.4.14" }

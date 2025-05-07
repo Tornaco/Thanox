@@ -34,7 +34,7 @@ fun LazyItemScope.ReorderableItem(
     index: Int? = null,
     orientationLocked: Boolean = true,
     content: @Composable BoxScope.(isDragging: Boolean) -> Unit
-) = ReorderableItem(reorderableState, key, modifier, Modifier.animateItemPlacement(), orientationLocked, index, content)
+) = ReorderableItem(reorderableState, key, modifier, Modifier.animateItem(), orientationLocked, index, content)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -44,7 +44,7 @@ fun LazyGridItemScope.ReorderableItem(
     modifier: Modifier = Modifier,
     index: Int? = null,
     content: @Composable BoxScope.(isDragging: Boolean) -> Unit
-) = ReorderableItem(reorderableState, key, modifier, Modifier.animateItemPlacement(), false, index, content)
+) = ReorderableItem(reorderableState, key, modifier, Modifier.animateItem(), false, index, content)
 
 @Composable
 fun ReorderableItem(

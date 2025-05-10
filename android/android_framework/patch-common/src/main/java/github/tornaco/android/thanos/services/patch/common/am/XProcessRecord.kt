@@ -42,11 +42,26 @@ object XProcessRecordHelper {
 
         if (hasProcessStateRecordField) {
             val processStateRecord = XposedHelpers.getObjectField(this, "mState")
-            XposedHelpers.callMethod(processStateRecord, "setMaxAdj", adj)
+            kotlin.runCatching {
+                XposedHelpers.callMethod(processStateRecord, "setMaxAdj", adj)
+            }.onFailure {
+                // OneUI 7
+                XposedHelpers.setIntField(processStateRecord, "mMaxAdj", adj)
+            }
             XposedHelpers.callMethod(processStateRecord, "setCurRawAdj", adj)
-            XposedHelpers.callMethod(processStateRecord, "setSetRawAdj", adj)
+            runCatching {
+                XposedHelpers.callMethod(processStateRecord, "setSetRawAdj", adj)
+            }.onFailure {
+                // OneUI 7
+                XposedHelpers.setIntField(processStateRecord, "mSetRawAdj", adj)
+            }
             XposedHelpers.callMethod(processStateRecord, "setCurAdj", adj)
-            XposedHelpers.callMethod(processStateRecord, "setSetAdj", adj)
+            runCatching {
+                XposedHelpers.callMethod(processStateRecord, "setSetAdj", adj)
+            }.onFailure {
+                // OneUI 7
+                XposedHelpers.setIntField(processStateRecord, "mSetAdj", adj)
+            }
             XLog.d("setOOMADJ - ProcessStateRecordField - $this - $adj")
         } else if (hasADJFields) {
             XposedHelpers.setIntField(this, "maxAdj", adj)

@@ -48,7 +48,13 @@ object XProcessRecordHelper {
                 // OneUI 7
                 XposedHelpers.setIntField(processStateRecord, "mMaxAdj", adj)
             }
-            XposedHelpers.callMethod(processStateRecord, "setCurRawAdj", adj)
+            kotlin.runCatching {
+                XposedHelpers.callMethod(processStateRecord, "setCurRawAdj", adj)
+            }.onFailure {
+                // OneUI 7
+                // boolean setCurRawAdj(int curRawAdj, boolean dryRun)
+                XposedHelpers.callMethod(processStateRecord, "setCurRawAdj", adj, false)
+            }
             runCatching {
                 XposedHelpers.callMethod(processStateRecord, "setSetRawAdj", adj)
             }.onFailure {

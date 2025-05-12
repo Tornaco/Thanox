@@ -19,7 +19,6 @@ package now.fortuitous.thanos
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import com.elvishew.xlog.LogConfiguration
 import com.elvishew.xlog.LogLevel
 import com.elvishew.xlog.XLog
@@ -102,27 +101,13 @@ class ThanosApp : MultipleModulesApp() {
         val filePrinter: Printer = FilePrinter.Builder(context.logFolderPath)
             .fileNameGenerator(DateFileNameGenerator())
             .build()
-        val firebasePrinter = FirebasePrinter
         XLog.init(
             LogConfiguration.Builder()
                 .logLevel(LogLevel.ALL)
                 .tag("ThanoxApp")
                 .build(),
-            firebasePrinter,
             filePrinter,
             androidPrinter
         )
-    }
-}
-
-data object FirebasePrinter : AndroidPrinter() {
-    override fun println(logLevel: Int, tag: String?, msg: String) {
-        if (logLevel == Log.ERROR) {
-            super.println(logLevel, tag, msg)
-        }
-    }
-
-    override fun printChunk(logLevel: Int, tag: String?, msg: String?) {
-        Crashlytics.log("$tag $msg")
     }
 }

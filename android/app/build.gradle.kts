@@ -16,11 +16,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
-if (Configs.thanoxBuildIsRow == true) {
-    plugins.apply("com.google.gms.google-services")
-    plugins.apply("com.google.firebase.crashlytics")
-}
-
 android {
     defaultConfig {
         namespace = "github.tornaco.android.thanos"
@@ -252,14 +247,6 @@ dependencies {
     implementation(project(":third_party:reorderable"))
 
     implementation(project("::third_party:libxposed:service"))
-
-    val rowImplementation by configurations
-    // Import the BoM for the Firebase platform
-    rowImplementation(platform(libs.firebase.bom))
-    // Add the dependencies for the Crashlytics and Analytics libraries
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    rowImplementation(libs.firebase.crashlytics)
-    rowImplementation(libs.firebase.analytics)
 }
 
 val generateProguardRules by tasks.registering {

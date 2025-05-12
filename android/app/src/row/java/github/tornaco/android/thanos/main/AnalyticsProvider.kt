@@ -1,5 +1,18 @@
 package github.tornaco.android.thanos.main
 
-val Analytics = RowAnalytics()
+import github.tornaco.android.thanos.core.analytics.Analytics
+import github.tornaco.android.thanos.core.analytics.Crashlytics
+import github.tornaco.android.thanos.core.analytics.Event
 
-val Crashlytics = RowCrashlytics()
+val Analytics = object : Analytics {
+    override fun reportEvent(event: Event) {
+    }
+}
+
+val Crashlytics = object : Crashlytics {
+    override fun log(message: String) {
+    }
+
+    override fun logError(e: Throwable) {
+    }
+}

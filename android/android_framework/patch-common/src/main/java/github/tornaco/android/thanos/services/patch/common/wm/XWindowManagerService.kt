@@ -14,6 +14,14 @@ object XWindowManagerService {
     }
 
     @JvmStatic
+    fun wpcClass(classLoader: ClassLoader): Class<*> {
+        return XposedHelpers.findClass(
+            "com.android.server.wm.ConfigurationContainer",
+            classLoader
+        )
+    }
+
+    @JvmStatic
     fun getRoot(wms: Any): Any? {
         return kotlin.runCatching {
             XposedHelpers.getObjectField(

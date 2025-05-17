@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.elvishew.xlog.XLog;
 
+import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.ApkUtil;
 import github.tornaco.android.thanos.theme.AppThemePreferences;
 import github.tornaco.android.thanos.util.iconpack.IconPack;
@@ -19,13 +20,27 @@ public class AppIconLoaderUtil {
 
     @Nullable
     public static Bitmap loadAppIconBitmapWithIconPack(Context context, String pkgName, int pkgUid) {
+        Bitmap iconInApp = loadAppIconBitmapWithIconPackInApp(context, pkgName, pkgUid);
+        if (iconInApp == null) {
+            try {
+                iconInApp = ThanosManager.from(context).getPkgManager().getAppIcon(pkgName, pkgUid);
+            } catch (Throwable e) {
+                XLog.e(e, "AppIconLoaderUtil getAppIcon error");
+            }
+        }
+        return iconInApp;
+    }
+
+    @Nullable
+    private static Bitmap loadAppIconBitmapWithIconPackInApp(Context context, String pkgName, int pkgUid) {
         try {
             Drawable icon = loadAppIconDrawableWithIconPack(context, pkgName);
-            XLog.d("loadAppIconBitmapWithIconPack, icon: " + icon);
+            XLog.w("AppIconLoaderUtil loadAppIconBitmapWithIconPack, icon: " + icon);
+            if (icon == null) return null;
             Drawable badged = context.getPackageManager().getUserBadgedIcon(icon, UserHandle.getUserHandleForUid(pkgUid));
             return BitmapUtil.getBitmap(context, badged);
         } catch (Throwable e) {
-            XLog.e("loadAppIconBitmapWithIconPack error: " + Log.getStackTraceString(e));
+            XLog.e("AppIconLoaderUtil loadAppIconBitmapWithIconPack error: " + Log.getStackTraceString(e));
             return null;
         }
     }
@@ -42,7 +57,7 @@ public class AppIconLoaderUtil {
                     boolean installed = pack.isInstalled();
                     if (installed) {
                         Drawable iconPackDrawable = pack.getDrawableIconForPackage(pkgName);
-                        XLog.d("IconPack iconPackDrawable: " + iconPackDrawable);
+                        XLog.d("AppIconLoaderUtil IconPack iconPackDrawable: " + iconPackDrawable);
                         if (iconPackDrawable != null) {
                             return iconPackDrawable;
                         }
@@ -50,10 +65,10 @@ public class AppIconLoaderUtil {
                 }
             }
             Drawable d = ApkUtil.loadIconByPkgName(context, pkgName);
-            XLog.d("loadIconByPkgName, res: " + d);
+            XLog.d("AppIconLoaderUtil loadIconByPkgName, res: " + d);
             return d;
         } catch (Throwable e) {
-            XLog.e("loadAppIconDrawableWithIconPack error: " + Log.getStackTraceString(e));
+            XLog.e("AppIconLoaderUtil loadAppIconDrawableWithIconPack error: " + Log.getStackTraceString(e));
             return null;
         }
     }

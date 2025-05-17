@@ -140,4 +140,6 @@ interface IPkgManager {
 
     void setOneKeyBoostFreezeAppEnabled(boolean enable);
     boolean isOneKeyBoostFreezeAppEnabled();
+
+    Bitmap getAppIcon(String pkgName, int pkgUid);
 }

@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.core.pm;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.ParcelFileDescriptor;
 import android.os.UserHandle;
 
@@ -567,5 +568,10 @@ public class PackageManager {
     @SneakyThrows
     public boolean isOneKeyBoostFreezeAppEnabled() {
         return pm.isOneKeyBoostFreezeAppEnabled();
+    }
+
+    @SneakyThrows
+    public Bitmap getAppIcon(String pkgName, int pkgUid) {
+        return pm.getAppIcon(pkgName, pkgUid);
     }
 }

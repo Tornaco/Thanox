@@ -58,7 +58,6 @@ import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
-import github.tornaco.android.thanos.core.util.PkgUtils;
 import github.tornaco.android.thanos.databinding.ActivityAppDetailsBinding;
 import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.support.ContextExtKt;
@@ -129,10 +128,15 @@ public class AppDetailsActivity extends BaseTrustedActivity {
 
     private boolean resolveIntent() {
         if (getIntent() == null) {
+            Toast.makeText(this, "ERROR, Intent is null!!!", Toast.LENGTH_SHORT).show();
             return false;
         }
         appInfo = getIntent().getParcelableExtra("app");
-        return appInfo != null && (appInfo.isDummy() || PkgUtils.isPkgInstalled(thisActivity(), appInfo.getPkgName()));
+        if (appInfo == null) {
+            Toast.makeText(this, "ERROR, App info is null!!!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     private void initView() {

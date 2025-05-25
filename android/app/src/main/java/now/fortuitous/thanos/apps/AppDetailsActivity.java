@@ -20,8 +20,10 @@ package now.fortuitous.thanos.apps;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -51,6 +53,7 @@ import java.util.List;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
@@ -85,6 +88,10 @@ public class AppDetailsActivity extends BaseTrustedActivity {
     private ModernProgressDialog progressDialog;
 
     public static void start(Context context, AppInfo appInfo) {
+        ThanosManager.from(context).getPkgManager().setComponentEnabledSetting(
+                new ComponentName(context.getPackageName(), AppDetailsActivity.class.getName()),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
+        );
         Bundle data = new Bundle();
         data.putParcelable("app", appInfo);
         ActivityUtils.startActivity(context, AppDetailsActivity.class, data);

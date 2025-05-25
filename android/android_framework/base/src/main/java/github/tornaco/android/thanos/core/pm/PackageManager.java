@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.core.pm;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Binder;
 import android.os.ParcelFileDescriptor;
 import android.os.UserHandle;
 
@@ -104,9 +105,8 @@ public class PackageManager {
     }
 
     @SneakyThrows
-    @Deprecated
     public void setComponentEnabledSetting(ComponentName componentName, int newState, int flags) {
-        pm.setComponentEnabledSetting(UserHandle.USER_SYSTEM, componentName, newState, flags);
+        pm.setComponentEnabledSetting(UserHandle.getUserId(Binder.getCallingUid()), componentName, newState, flags);
     }
 
     @SneakyThrows

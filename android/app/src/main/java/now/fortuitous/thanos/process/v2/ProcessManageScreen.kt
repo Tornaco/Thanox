@@ -44,6 +44,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -66,9 +68,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.elvishew.xlog.XLog
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
@@ -79,6 +78,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloatingActionButton
 import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
+import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
@@ -171,27 +171,16 @@ fun ProcessManageScreen(
         },
         onBackPressed = onBackPressed
     ) { contentPadding ->
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(state.isLoading),
-            onRefresh = { viewModel.refresh() },
-            // Shift the indicator to match the list content padding
-            indicatorPadding = contentPadding,
-            // We want the indicator to draw within the padding
-            clipIndicatorToPadding = false,
-            // Tweak the indicator to scale up/down
-            indicator = { state, refreshTriggerDistance ->
-                SwipeRefreshIndicator(
-                    state = state,
-                    refreshTriggerDistance = refreshTriggerDistance,
-                    scale = true,
-                    arrowEnabled = false,
-                    contentColor = MaterialTheme.colorScheme.primary
-                )
-            }
+        val pullRefreshState = rememberPullRefreshState(state.isLoading, { viewModel.refresh() })
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .pullRefresh(pullRefreshState),
         ) {
             val context = LocalContext.current
             RunningAppList(
-                modifier = Modifier.padding(contentPadding),
+                modifier = Modifier,
                 lazyListState = listState,
                 state = state,
                 onRunningItemClick = {
@@ -214,6 +203,12 @@ fun ProcessManageScreen(
                 setCachedExpand = {
                     viewModel.expandCached(it)
                 })
+
+            Md3ExpPullRefreshIndicator(
+                state.isLoading,
+                pullRefreshState,
+                Modifier.align(Alignment.TopCenter)
+            )
         }
     }
 }
@@ -328,7 +323,8 @@ fun CachedGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> U
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val text = stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_background)
+                val text =
+                    stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_background)
                 Text(
                     text = "$text - $itemCount",
                     style = MaterialTheme.typography.titleMedium
@@ -358,7 +354,8 @@ fun RunningGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> 
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val text = stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_running)
+                val text =
+                    stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_running)
                 Text(
                     text = "$text - $itemCount",
                     style = MaterialTheme.typography.titleMedium
@@ -395,7 +392,8 @@ fun NotRunningGroupHeader(itemCount: Int) {
                 .padding(horizontal = 20.dp, vertical = 12.dp),
             contentAlignment = Alignment.CenterStart
         ) {
-            val text = stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_not_running)
+            val text =
+                stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_not_running)
             Text(
                 text = "$text - $itemCount",
                 style = MaterialTheme.typography.titleMedium

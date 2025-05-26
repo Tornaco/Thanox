@@ -36,6 +36,8 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
@@ -80,9 +82,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.module.compose.common.requireActivity
@@ -93,6 +92,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
 import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
+import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
@@ -132,7 +132,8 @@ fun NavScreen() {
     }
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
-    Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             MediumTopAppBar(
                 scrollBehavior = scrollBehavior,
@@ -178,21 +179,15 @@ fun NavScreen() {
                 })
         }
     ) { contentPadding ->
-        SwipeRefresh(state = rememberSwipeRefreshState(state.isLoading),
-            onRefresh = { viewModel.refresh() },
-            indicatorPadding = contentPadding,
-            clipIndicatorToPadding = false,
-            indicator = { state, refreshTriggerDistance ->
-                SwipeRefreshIndicator(
-                    state = state,
-                    refreshTriggerDistance = refreshTriggerDistance,
-                    scale = true,
-                    arrowEnabled = false,
-                    contentColor = MaterialTheme.colorScheme.primary
-                )
-            }) {
+        val pullRefreshState = rememberPullRefreshState(state.isLoading, { viewModel.refresh() })
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .pullRefresh(pullRefreshState),
+        ) {
             NavContent(
-                contentPadding = contentPadding,
+                contentPadding = PaddingValues(0.dp),
                 state = state,
                 onFeatureItemClick = {
                     viewModel.featureItemClick(activity, it.id)
@@ -249,6 +244,12 @@ fun NavScreen() {
                     viewModel.androidVersionTooLowAccepted()
                 }
             }
+
+            Md3ExpPullRefreshIndicator(
+                state.isLoading,
+                pullRefreshState,
+                Modifier.align(Alignment.TopCenter)
+            )
         }
     }
 }
@@ -413,14 +414,15 @@ private fun FeatureItem(
     onItemClick: (FeatureItem) -> Unit,
     onItemLongClick: (FeatureItem) -> Unit,
 ) {
-    Column(modifier = Modifier
-        .width(64.dp)
-        .clickableWithRippleBorderless(
-            onLongClick = {
-                onItemLongClick(item)
-            }, onClick = {
-                onItemClick(item)
-            }),
+    Column(
+        modifier = Modifier
+            .width(64.dp)
+            .clickableWithRippleBorderless(
+                onLongClick = {
+                    onItemLongClick(item)
+                }, onClick = {
+                    onItemClick(item)
+                }),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
@@ -442,7 +444,8 @@ private fun FeatureItem(
             }
         }
         val context = LocalContext.current
-        AsyncImage(model = item.packedIconRes,
+        AsyncImage(
+            model = item.packedIconRes,
             placeholder = customPainter,
             contentDescription = null,
             filterQuality = FilterQuality.High,
@@ -533,7 +536,8 @@ fun PrivacyStatementDialog(
     onDismissRequest: () -> Unit,
 ) {
     val context = LocalContext.current
-    val fileName = context.getString(github.tornaco.android.thanos.res.R.string.privacy_agreement_file)
+    val fileName =
+        context.getString(github.tornaco.android.thanos.res.R.string.privacy_agreement_file)
     val privacyAgreement = remember {
         AssetUtils.readFileToStringOrThrow(context, fileName)
     }

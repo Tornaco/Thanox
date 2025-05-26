@@ -1,6 +1,7 @@
 package github.tornaco.android.thanos.core.profile;
 
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 
 import java.util.List;
 
@@ -355,5 +356,15 @@ public class ProfileManager {
     @SneakyThrows
     public DanmuUISettings getDanmuUISettings() {
         return server.getDanmuUISettings();
+    }
+
+    @SneakyThrows
+    public void setAutoConfigTemplateNotificationEnabled(boolean enabled) {
+        server.setAutoConfigTemplateNotificationEnabled(enabled);
+    }
+
+    @SneakyThrows
+    public boolean isAutoConfigTemplateNotificationEnabled() {
+        return server.isAutoConfigTemplateNotificationEnabled();
     }
 }

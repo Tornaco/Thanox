@@ -1147,6 +1147,8 @@ Compatibility notice: If the default permission management function is not compa
 
     <string name="pref_title_new_installed_apps_config_enabled">Auto config</string>
     <string name="pref_summary_new_installed_apps_config_enabled">Auto config new installed apps</string>
+    <string name="pref_title_new_installed_apps_config_notification_enabled">Show config notification</string>
+    <string name="pref_summary_new_installed_apps_config_notification_enabled">Show Notification when an config template is applied</string>
     <string name="pref_title_new_installed_apps_config">Config template</string>
     <string name="pref_summary_new_installed_apps_config">Edit template for auto configuration</string>
 

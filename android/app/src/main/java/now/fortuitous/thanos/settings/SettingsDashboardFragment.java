@@ -239,6 +239,22 @@ public class SettingsDashboardFragment extends BasePreferenceFragmentCompat {
                     }
                     return true;
                 });
+
+        // Noti.
+        SwitchPreferenceCompat autoConfigPrefNotification =
+                findPreference(getString(R.string.key_new_installed_apps_config_notification_enabled));
+        autoConfigPrefNotification.setChecked(
+                thanos.isServiceInstalled()
+                        && thanos.getProfileManager().isAutoConfigTemplateNotificationEnabled());
+        autoConfigPrefNotification.setOnPreferenceChangeListener(
+                (preference, newValue) -> {
+                    if (thanos.isServiceInstalled()) {
+                        boolean checked = (boolean) newValue;
+                        thanos.getProfileManager().setAutoConfigTemplateNotificationEnabled(checked);
+                    }
+                    return true;
+                });
+
         updateAutoConfigSelection();
         updateConfigTemplatePrefs();
     }

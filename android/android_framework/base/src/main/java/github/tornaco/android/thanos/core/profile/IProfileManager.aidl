@@ -102,4 +102,6 @@ interface IProfileManager {
     void setDanmuUISettings(in DanmuUISettings settings);
     DanmuUISettings getDanmuUISettings();
 
+    void setAutoConfigTemplateNotificationEnabled(boolean enabled);
+    boolean isAutoConfigTemplateNotificationEnabled();
 }

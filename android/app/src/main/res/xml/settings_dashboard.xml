@@ -44,6 +44,12 @@
             app:summary="@string/pref_summary_new_installed_apps_config_enabled"
             app:title="@string/pref_title_new_installed_apps_config_enabled" />
 
+        <SwitchPreferenceCompat
+            app:key="@string/key_new_installed_apps_config_notification_enabled"
+            app:persistent="false"
+            app:summary="@string/pref_summary_new_installed_apps_config_notification_enabled"
+            app:title="@string/pref_title_new_installed_apps_config_notification_enabled" />
+
         <DropDownPreference
             app:key="@string/key_new_installed_apps_config"
             app:persistent="false"

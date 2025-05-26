@@ -1157,6 +1157,8 @@
     <string name="pref_summary_new_installed_apps_config_enabled">Yeni yüklenen uygulamaları otomatik yapılandır</string>
     <string name="pref_title_new_installed_apps_config">Yapılandırma şablonu</string>
     <string name="pref_summary_new_installed_apps_config">Otomatik yapılandırma için şablonu düzenle</string>
+    <string name="pref_title_new_installed_apps_config_notification_enabled">Show config notification</string>
+    <string name="pref_summary_new_installed_apps_config_notification_enabled">Show Notification when an config template is applied</string>
 
     <string name="pref_title_auto_request_xposed_scope">Xposed kapsamı iste</string>
     <string name="pref_summary_auto_request_xposed_scope">Xposed kapsamına bağlı bir özelliği etkinleştirdiğinizde, Thanox otomatik olarak kapsam isteğinde bulunacaktır. Lütfen sistem bildirimlerine dikkat edin. \nDikkat: Bu özellik, LSPosed çerçevesinin en son sürümüne bağlıdır. \nLütfen ayrıca sistem ayarlarını ve Thanox ayarlarını kontrol ederek Thanox\'un arka planda başlamasına izin verin.</string>

@@ -20,14 +20,11 @@ package github.tornaco.android.thanos.module.compose.common.widget
 import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -59,21 +56,16 @@ fun <T : FilterItem> FilterDropDown(
             modifier = Modifier.wrapContentSize(Alignment.TopStart)
         ) {
             var expanded by remember { mutableStateOf(false) }
-            FilledTonalButton(
-                onClick = { expanded = true }) {
-                icon?.let {
-                    Icon(
-                        it,
-                        contentDescription = "FilterDropDown",
-                        modifier = Modifier.size(ButtonDefaults.IconSize)
-                    )
-                    Spacer(Modifier.size(4.dp))
-                }
-                Text(
-                    text = selectedItem.label(context),
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
+
+            DropdownButtonLayout(
+                text = selectedItem.label(context),
+                isMenuOpen = expanded,
+                open = {
+                    expanded = true
+                },
+                icon = icon ?: Icons.Filled.KeyboardArrowDown
+            )
+
             MaterialTheme(
                 shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(18.dp))
             ) {
@@ -86,9 +78,7 @@ fun <T : FilterItem> FilterDropDown(
                         DropdownMenuItem(onClick = {
                             onItemSelected(item)
                             expanded = false
-                        }) {
-                            Text(text = item.label(context))
-                        }
+                        }, text = { Text(text = item.label(context)) })
                     }
                 }
             }

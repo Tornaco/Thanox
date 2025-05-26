@@ -17,46 +17,13 @@
 
 package github.tornaco.android.thanos.module.compose.common.theme
 
-import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
-import com.google.android.material.composethemeadapter3.Mdc3Theme
 
 @Composable
 fun ThanoxTheme(
-    darkTheme: Boolean,
     content: @Composable () -> Unit
 ) {
-    val view = LocalView.current
-    val context = LocalContext.current
-    SideEffect {
-        WindowCompat.getInsetsController(
-            context.findActivity().window,
-            view
-        )?.isAppearanceLightStatusBars = !darkTheme
-    }
-
-    // TODO: Remove M2 MaterialTheme when using only M3 components
-    androidx.compose.material.MaterialTheme(
-        colors = if (darkTheme) darkColors() else lightColors()
-    ) {
-        Mdc3Theme(
-            content = content,
-        )
+    ThanoxExpressiveTheme {
+        content()
     }
 }
-
-private tailrec fun Context.findActivity(): Activity =
-    when (this) {
-        is Activity -> this
-        is ContextWrapper -> this.baseContext.findActivity()
-        else -> throw IllegalArgumentException("Could not find activity!")
-    }
-

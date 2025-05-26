@@ -24,7 +24,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Parcelable
 import androidx.activity.viewModels
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -107,9 +106,7 @@ class SmartFreezeActivity : ThemeActivity() {
 
         binding.bottomNavigation.selectTab(binding.bottomNavigation.getTabAt(0))
         binding.composeSort.setContent {
-            val darkTheme =
-                if (appTheme.shouldApplyDynamic) isSystemInDarkTheme() else !appTheme.isLight
-            ThanoxTheme(darkTheme) {
+            ThanoxTheme {
                 val context = LocalContext.current
 
                 val tabSortDialogState =

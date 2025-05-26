@@ -24,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.BuildProp
@@ -49,6 +50,11 @@ class NavActivity : ComposeThemeActivity() {
 
     override fun isF(): Boolean {
         return false
+    }
+
+    override fun beforeOnCreate() {
+        super.beforeOnCreate()
+        installSplashScreen()
     }
 
     @Composable

@@ -49,6 +49,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.requireActivity
+import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
@@ -132,15 +133,13 @@ fun ExampleList(contentPadding: PaddingValues, state: ExampleState, import: (Exa
 
 @Composable
 private fun ExampleItem(example: Example, import: (Example) -> Unit) {
-    val cardBgColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.appCardBackground)
     val activity = LocalContext.current.requireActivity()
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(color = Color(cardBgColor))
+            .background(color = LocalThanoxColorSchema.current.cardBgColor)
             .clickableWithRipple {
                 RuleEditorActivity.start(activity, example.ruleInfo, example.ruleInfo.format, true)
             }

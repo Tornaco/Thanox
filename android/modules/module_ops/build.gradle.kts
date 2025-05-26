@@ -28,7 +28,6 @@ android {
 dependencies {
     implementation(libs.rxjava)
 
-    implementation(libs.compose.theme.adapter)
     implementation(libs.accompanist.appcompat.theme)
 
     implementation(libs.androidx.lifecycle.common)

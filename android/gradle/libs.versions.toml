@@ -92,7 +92,7 @@ gmazzo-buildconfig = { id = "com.github.gmazzo.buildconfig", version = "5.5.0" }
 gladed-androidgitversion = { id = "com.gladed.androidgitversion", version = "0.4.14" }
 
 [libraries]
-accompanist-appcompat-theme = { module = "com.google.accompanist:accompanist-appcompat-theme", version.ref = "accompanist-appcompat-theme" }
+accompanist-appcompat-theme = { module = "com.google.accompanist:accompanist-themeadapter-appcompat", version.ref = "accompanist-appcompat-theme" }
 accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
@@ -115,7 +115,6 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose
 colormath = { module = "com.github.ajalt.colormath:colormath", version.ref = "colormath" }
 commons-codec = { module = "commons-codec:commons-codec", version.ref = "commons-codec" }
 commons-io = { module = "commons-io:commons-io", version.ref = "commons-io" }
-compose-theme-adapter = { module = "com.google.android.material:compose-theme-adapter-3", version.ref = "compose-theme-adapter3" }
 constraint-layout = { module = "com.android.support.constraint:constraint-layout", version.ref = "constraint-layout" }
 easy-rules-support = { module = "org.jeasy:easy-rules-support", version.ref = "easy-rules-support" }
 easy-rules-mvel = { module = "org.jeasy:easy-rules-mvel", version.ref = "easy-rules-mvel" }

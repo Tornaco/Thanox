@@ -55,7 +55,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
-import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextContainer
@@ -82,7 +82,8 @@ fun NavHeaderContent(
     onHeaderClick: () -> Unit
 ) {
     val expandState = remember { mutableStateOf(ExpandableState.Collapsed) }
-    NavHeaderContainer(expandState = expandState,
+    NavHeaderContainer(
+        expandState = expandState,
         mainContent = {
             MainNavHeaderContent(
                 modifier = modifier,
@@ -101,8 +102,6 @@ private fun MainNavHeaderContent(
     headerInfo: StatusHeaderInfo,
     onHeaderClick: () -> Unit,
 ) {
-    val cardBgColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.appCardBackground)
     val primaryContainerColor =
         getColorAttribute(com.google.android.material.R.attr.colorPrimaryContainer)
     val onSurfaceColor = getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
@@ -111,7 +110,7 @@ private fun MainNavHeaderContent(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(cardCornerSize))
-            .background(color = Color(cardBgColor))
+            .background(color = LocalThanoxColorSchema.current.cardBgColor)
             .clickableWithRippleBorderless {
                 onHeaderClick()
             }
@@ -120,7 +119,8 @@ private fun MainNavHeaderContent(
     ) {
         Column {
             Row {
-                FilledTonalButton(modifier = Modifier.animateContentSize(),
+                FilledTonalButton(
+                    modifier = Modifier.animateContentSize(),
                     colors = ButtonDefaults.filledTonalButtonColors(
                         containerColor = Color(
                             primaryContainerColor

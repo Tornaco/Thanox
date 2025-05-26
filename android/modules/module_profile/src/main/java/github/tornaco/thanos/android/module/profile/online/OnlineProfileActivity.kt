@@ -61,8 +61,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.requireActivity
+import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.NoContent
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
@@ -71,7 +71,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.android.thanos.util.ToastUtils
-import github.tornaco.thanos.android.module.profile.R
 import github.tornaco.thanos.android.module.profile.RuleEditorActivity
 
 @AndroidEntryPoint
@@ -119,12 +118,13 @@ class OnlineProfileActivity : ComposeThemeActivity() {
             }
         }
 
-        ThanoxSmallAppBarScaffold(title = {
-            Text(
-                text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_online),
-                style = TypographyDefaults.appBarTitleTextStyle()
-            )
-        },
+        ThanoxSmallAppBarScaffold(
+            title = {
+                Text(
+                    text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_online),
+                    style = TypographyDefaults.appBarTitleTextStyle()
+                )
+            },
             onBackPressed = { finish() },
             actions = {
 
@@ -154,7 +154,8 @@ class OnlineProfileActivity : ComposeThemeActivity() {
                             .fillMaxSize()
                     )
                 } else {
-                    ProfileList(contentPadding, state,
+                    ProfileList(
+                        contentPadding, state,
                         import = {
                             viewModel.import(it)
                         },
@@ -198,15 +199,13 @@ private fun ProfileItem(
     update: (OnlineProfileItem) -> Unit
 ) {
     val activity = LocalContext.current.requireActivity()
-    val cardBgColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.appCardBackground)
     val secondaryTextColor = Color(0xFF757575)
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(color = Color(cardBgColor))
+            .background(color = LocalThanoxColorSchema.current.cardBgColor)
             .clickableWithRipple {
                 RuleEditorActivity.start(
                     activity,

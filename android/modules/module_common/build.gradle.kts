@@ -53,8 +53,6 @@ dependencies {
     implementation(libs.compose.material)
     implementation(libs.compose.material.icons.core)
     implementation(libs.navigation.compose)
-    implementation(libs.compose.theme.adapter)
-
     implementation(libs.accompanist.appcompat.theme)
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.accompanist.pager)

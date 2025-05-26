@@ -110,7 +110,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.compose.theme.adapter)
     implementation(libs.accompanist.appcompat.theme)
 
     implementation(libs.dagger.hilt.android)

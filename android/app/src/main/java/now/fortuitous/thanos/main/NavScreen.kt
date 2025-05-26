@@ -21,7 +21,6 @@
 package now.fortuitous.thanos.main
 
 import android.graphics.drawable.LayerDrawable
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,7 +61,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
@@ -85,8 +83,8 @@ import coil.compose.AsyncImage
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.module.compose.common.requireActivity
+import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
-import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextContainer
 import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
 import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
@@ -131,17 +129,12 @@ fun NavScreen() {
         viewModel.autoRefresh()
     }
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             MediumTopAppBar(
                 scrollBehavior = scrollBehavior,
-                colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = Color(
-                        windowBgColor
-                    )
-                ),
+                colors = TopAppBarDefaults.topAppBarColors(),
                 title = {
                     Row(verticalAlignment = CenterVertically) {
                         Text(stringResource(id = github.tornaco.android.thanos.R.string.app_name_thanox))
@@ -304,12 +297,10 @@ private fun NavContent(
     onFeatureItemClick: (FeatureItem) -> Unit,
     createShortcut: (FeatureItem) -> Unit,
 ) {
-    val windowBgColor = getColorAttribute(android.R.attr.windowBackground)
     Column(
         modifier = Modifier
             .padding(contentPadding)
             .fillMaxSize()
-            .background(color = Color(windowBgColor))
             .verticalScroll(rememberScrollState())
     ) {
         NavHeaderContent(
@@ -344,15 +335,13 @@ private fun FeatureGroup(
     onItemClick: (FeatureItem) -> Unit,
     createShortcut: (FeatureItem) -> Unit,
 ) {
-    val cardBgColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.appCardBackground)
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
             .padding(top = 16.dp),
         shape = RoundedCornerShape(cardCornerSize),
-        colors = CardDefaults.cardColors(containerColor = Color(cardBgColor))
+        colors = CardDefaults.cardColors(containerColor = LocalThanoxColorSchema.current.cardBgColor)
     ) {
         val activity = LocalContext.current.requireActivity()
 

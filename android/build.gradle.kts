@@ -32,8 +32,6 @@ plugins {
     alias(libs.plugins.gmazzo.buildconfig) apply false
 
     alias(libs.plugins.gladed.androidgitversion) apply true
-    alias(libs.plugins.diffplug.spotless) apply true
-    alias(libs.plugins.kover) apply false
 
     alias(libs.plugins.compose.compiler) apply false
 
@@ -77,8 +75,6 @@ subprojects {
         mavenCentral()
         mavenLocal()
     }
-
-    apply(plugin = "com.diffplug.spotless")
 
     tasks.withType<JavaCompile> {
         options.compilerArgs.addAll(
@@ -155,7 +151,3 @@ subprojects {
 }
 
 rootProject.buildDir = outDir
-tasks["clean"].doLast {
-    delete(outDir)
-}
-

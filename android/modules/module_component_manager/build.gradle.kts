@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.dagger.hilt.android)
-    alias(libs.plugins.kover)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -46,6 +45,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.preference)
     implementation(libs.constraint.layout)
+    implementation(libs.compose.material.icons.core)
 
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.guava.android)

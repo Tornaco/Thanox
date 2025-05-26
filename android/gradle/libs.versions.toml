@@ -4,17 +4,16 @@ accompanist-appcompat-theme = "0.36.0"
 activity-compose = "1.10.1"
 adapter-rxjava2 = "2.11.0"
 agp = "8.10.0"
-firebase-bom = "33.13.0"
 javapoet = "1.13.0"
 ksp = "2.0.21-1.0.26"
-biometric = "1.4.0-alpha03"
+biometric = "1.4.0-alpha04"
 datastore = "1.1.5"
 androidx-work = "2.10.1"
 coil-compose = "2.7.0"
-colormath = "3.3.3"
+colormath = "3.6.1"
 commons-codec = "1.18.0"
 commons-io = "2.19.0"
-compose-theme-adapter-3 = "1.1.1"
+compose-theme-adapter3 = "1.1.1"
 constraint-layout = "2.0.4"
 easy-rules-support = "4.1.0"
 easy-rules-mvel = "4.1.0"
@@ -36,8 +35,8 @@ xcrash-android-lib = "3.1.0"
 tinypinyin = "3.0.0"
 kotest-assertions = "5.9.1"
 libsu = "6.0.0"
-mmkv = "2.0.2"
-orbit = "6.1.1"
+mmkv = "2.2.2"
+orbit = "9.0.0"
 androidx-test-runner = "1.6.2"
 uiautomator = "2.3.0"
 espresso-core = "3.6.1"
@@ -45,10 +44,11 @@ androidx-junit = "1.2.1"
 appcompat = "1.7.0"
 browser = "1.8.0"
 codeview = "1.3.9"
-compose-bom = "2025.04.01"
-compose-material = "1.7.8"
-compose-material3 = "1.3.2"
-compose-ui = "1.8.0"
+compose-bom = "2025.05.01"
+compose-material = "1.8.2"
+compose-icon-ext = "1.7.8"
+compose-material3 = "1.4.0-alpha15"
+compose-ui = "1.8.2"
 converter-gson = "2.11.0"
 junit = "4.13.2"
 libchecker-rules-bundle = "40.2"
@@ -61,14 +61,14 @@ kotlinx-coroutines = "1.10.1"
 kotlin-reflect = "2.1.20"
 kotlinx-serialization-json-jvm = "1.8.1"
 chucker = "4.1.0"
-lifecycle-runtime-ktx = "2.8.7"
+lifecycle-runtime-ktx = "2.9.0"
 material = "1.12.0"
 mockk = "1.14.2"
-navigation-compose = "2.8.9"
+navigation-compose = "2.9.0"
 glide = "4.16.0"
 okhttp = "4.12.0"
 dagger = "2.56.2"
-protobuf-java = "3.25.3"
+protobuf-java = "3.25.5"
 retrofit = "2.11.0"
 room = "2.7.1"
 room-compiler = "2.7.1"
@@ -90,8 +90,6 @@ protobuf-gradle-plugin = { id = "com.google.protobuf", version = "0.9.5" }
 # https://github.com/gmazzo/gradle-buildconfig-plugin
 gmazzo-buildconfig = { id = "com.github.gmazzo.buildconfig", version = "5.5.0" }
 gladed-androidgitversion = { id = "com.gladed.androidgitversion", version = "0.4.14" }
-diffplug-spotless = { id = "com.diffplug.spotless", version = "6.25.0" }
-kover = { id = "org.jetbrains.kotlinx.kover", version = "0.7.6" }
 
 [libraries]
 accompanist-appcompat-theme = { module = "com.google.accompanist:accompanist-appcompat-theme", version.ref = "accompanist-appcompat-theme" }
@@ -117,14 +115,11 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose
 colormath = { module = "com.github.ajalt.colormath:colormath", version.ref = "colormath" }
 commons-codec = { module = "commons-codec:commons-codec", version.ref = "commons-codec" }
 commons-io = { module = "commons-io:commons-io", version.ref = "commons-io" }
-compose-theme-adapter = { module = "com.google.android.material:compose-theme-adapter-3", version.ref = "compose-theme-adapter-3" }
+compose-theme-adapter = { module = "com.google.android.material:compose-theme-adapter-3", version.ref = "compose-theme-adapter3" }
 constraint-layout = { module = "com.android.support.constraint:constraint-layout", version.ref = "constraint-layout" }
 easy-rules-support = { module = "org.jeasy:easy-rules-support", version.ref = "easy-rules-support" }
 easy-rules-mvel = { module = "org.jeasy:easy-rules-mvel", version.ref = "easy-rules-mvel" }
 easy-rules-core = { module = "org.jeasy:easy-rules-core", version.ref = "easy-rules-core" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 guava-android = { module = "com.google.guava:guava", version.ref = "guava-android" }
 javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
 licensesdialog = { module = "de.psdev.licensesdialog:licensesdialog", version.ref = "licensesdialog" }
@@ -157,8 +152,8 @@ core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = 
 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose-material" }
-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "compose-material" }
-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-material" }
+compose-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "compose-icon-ext" }
+compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-icon-ext" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose-ui" }
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose-ui" }

@@ -24,7 +24,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -34,12 +33,9 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomSheetScaffold
-import androidx.compose.material.BottomSheetScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -59,36 +55,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-
-
-@OptIn(androidx.compose.material.ExperimentalMaterialApi::class)
-@Composable
-fun ThanoxBottomSheetScaffold(
-    title: @Composable () -> Unit,
-    actions: @Composable (RowScope.() -> Unit) = {},
-    onBackPressed: (() -> Unit)?,
-    scaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState(),
-    searchBarState: SearchBarState = rememberSearchBarState(),
-    sheetContent: @Composable ColumnScope.() -> Unit = {},
-    content: @Composable (PaddingValues) -> Unit,
-) {
-    BottomSheetScaffold(
-        scaffoldState = scaffoldState,
-        topBar = {
-            ThanoxSmallTopAppBarContainer(
-                searchBarState,
-                title,
-                actions,
-                onBackPressed
-            )
-        },
-        sheetContent = sheetContent,
-        sheetPeekHeight = 0.dp,
-        content = {
-            content(it)
-        }
-    )
-}
 
 @Composable
 fun ThanoxSmallAppBarScaffold(

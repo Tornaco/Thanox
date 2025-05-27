@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.compose.material)
+    implementation(libs.compose.material.icons.extended)
     implementation(libs.compose.material.icons.core)
     implementation(libs.navigation.compose)
     implementation(libs.accompanist.appcompat.theme)

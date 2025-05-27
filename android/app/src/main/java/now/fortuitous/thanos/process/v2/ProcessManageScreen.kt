@@ -41,7 +41,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -219,7 +218,6 @@ private fun AppFilterDropDown(
     onFilterItemSelected: (AppSetFilterItem) -> Unit
 ) {
     FilterDropDown(
-        icon = Icons.Filled.FilterAlt,
         selectedItem = state.selectedAppSetFilterItem,
         allItems = state.appFilterItems,
         onItemSelected = onFilterItemSelected

@@ -5,6 +5,7 @@ package github.tornaco.android.thanos.module.compose.common.widget
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.SplitButtonDefaults
@@ -65,7 +66,8 @@ fun DropdownButtonLayout(
     isMenuOpen: Boolean,
     open: () -> Unit,
     modifier: Modifier = Modifier,
-    icon: ImageVector = Icons.Filled.KeyboardArrowDown
+    leadingIcon: ImageVector = Icons.Filled.FilterAlt,
+    trailingIcon: ImageVector = Icons.Filled.KeyboardArrowDown
 ) {
     SplitButtonLayout(
         modifier = modifier,
@@ -73,6 +75,10 @@ fun DropdownButtonLayout(
             SplitButtonDefaults.TonalLeadingButton(
                 onClick = { /* Do Nothing */ },
             ) {
+                androidx.compose.material3.Icon(
+                    imageVector = leadingIcon,
+                    contentDescription = ""
+                )
                 Text(text)
             }
         },
@@ -89,7 +95,7 @@ fun DropdownButtonLayout(
                     label = "Trailing Icon Rotation"
                 )
                 androidx.compose.material3.Icon(
-                    icon,
+                    trailingIcon,
                     modifier =
                         Modifier
                             .size(SplitButtonDefaults.TrailingIconSize)

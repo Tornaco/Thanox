@@ -42,7 +42,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.outlined.Block
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.FileCopy
@@ -72,7 +71,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
@@ -428,7 +426,6 @@ private fun AppFilterDropDown(
     onFilterItemSelected: (AppSetFilterItem) -> Unit
 ) {
     FilterDropDown(
-        icon = Icons.Filled.FilterAlt,
         selectedItem = state.selectedAppSetFilterItem,
         allItems = state.appFilterItems,
         onItemSelected = onFilterItemSelected

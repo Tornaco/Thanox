@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -180,7 +178,6 @@ class AppListActivity : ComposeThemeActivity() {
         onFilterItemSelected: (AppSetFilterItem) -> Unit
     ) {
         FilterDropDown(
-            icon = Icons.Filled.FilterAlt,
             selectedItem = state.selectedAppSetFilterItem,
             allItems = state.appFilterItems,
             onItemSelected = onFilterItemSelected

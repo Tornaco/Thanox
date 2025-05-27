@@ -17,11 +17,14 @@
 
 package github.tornaco.android.thanos.module.compose.common.theme
 
+import androidx.annotation.ColorInt
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlin.math.ln
@@ -119,3 +122,27 @@ val md_theme_dark_shadow = Color(0xFF000000)
 val md_theme_dark_surfaceTint = Color(0xFFFFB4AA)
 val md_theme_dark_outlineVariant = Color(0xFF534341)
 val md_theme_dark_scrim = Color(0xFF000000)
+
+
+@Composable
+fun themedTextColor(color: Color): Color {
+    val isDarkTheme = isSystemInDarkTheme()
+    return if (isDarkTheme) Color.Unspecified else darkenColor(color)
+}
+
+@ColorInt
+fun darkenColor(color: Color, factor: Float = 0.27f): Color {
+    return darkenColor(color.toArgb(), factor).toComposeColor()
+}
+
+@ColorInt
+fun darkenColor(@ColorInt color: Int, factor: Float): Int {
+    return android.graphics.Color.HSVToColor(FloatArray(3).apply {
+        android.graphics.Color.colorToHSV(color, this)
+        this[2] *= factor
+    })
+}
+
+fun Int.toComposeColor(): Color {
+    return Color(this)
+}

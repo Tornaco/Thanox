@@ -61,6 +61,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
@@ -348,8 +349,9 @@ private fun FeatureGroup(
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
                 text = stringResource(id = group.titleRes),
-                fontSize = 14.sp,
-                fontWeight = FontWeight.W600
+                fontSize = 15.sp,
+                fontWeight = FontWeight.W600,
+                color = themedTextColor(MaterialTheme.colorScheme.primary)
             )
             StandardSpacer()
 
@@ -458,6 +460,7 @@ private fun FeatureItem(
             ),
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.titleMedium,
+            color = themedTextColor(Color(ContextCompat.getColor(context, item.themeColor)))
         )
     }
 }

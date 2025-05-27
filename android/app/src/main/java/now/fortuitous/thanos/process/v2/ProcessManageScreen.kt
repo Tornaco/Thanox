@@ -72,7 +72,7 @@ import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.requireActivity
-import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
+import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloatingActionButton
@@ -310,7 +310,7 @@ fun CachedGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> U
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(ColorDefaults.backgroundSurfaceColor())
+                .background(LocalThanoxColorSchema.current.cardBgColor)
                 .clickableWithRipple {
                     setExpand(!expand)
                 }
@@ -341,7 +341,7 @@ fun RunningGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(ColorDefaults.backgroundSurfaceColor())
+                .background(LocalThanoxColorSchema.current.cardBgColor)
                 .clickableWithRipple {
                     setExpand(!expand)
                 }
@@ -388,7 +388,7 @@ fun NotRunningGroupHeader(itemCount: Int) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(ColorDefaults.backgroundSurfaceColor())
+                .background(LocalThanoxColorSchema.current.cardBgColor)
                 .padding(horizontal = 20.dp, vertical = 12.dp),
             contentAlignment = Alignment.CenterStart
         ) {

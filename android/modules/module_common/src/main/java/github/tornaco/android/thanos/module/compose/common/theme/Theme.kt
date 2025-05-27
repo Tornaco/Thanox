@@ -134,7 +134,7 @@ fun ThanoxExpressiveTheme(
 
     val thanoxColorScheme = when {
         darkTheme -> ThanoxColorScheme(
-            cardBgColor = Color(0x72101010)
+            cardBgColor = Color(0x72555555)
         )
 
         else -> ThanoxColorScheme(

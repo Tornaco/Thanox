@@ -67,7 +67,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.requireActivity
-import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
+import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
@@ -151,7 +151,7 @@ private fun RunningAppStateDetailsScreen(
                     Card(
                         modifier = Modifier.padding(16.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = ColorDefaults.backgroundSurfaceColor()
+                            containerColor = LocalThanoxColorSchema.current.cardBgColor
                         )
                     ) {
                         Column {

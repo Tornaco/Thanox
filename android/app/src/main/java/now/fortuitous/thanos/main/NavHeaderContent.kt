@@ -34,9 +34,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -60,7 +62,6 @@ import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextContainer
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
-import github.tornaco.android.thanos.module.compose.common.widget.CircularProgressBar
 import github.tornaco.android.thanos.module.compose.common.widget.ExpandableState
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
@@ -173,10 +174,6 @@ private fun CpuProgressBar(
     headerInfo: StatusHeaderInfo,
     onSurfaceColor: Int,
 ) {
-    val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
-    val progressTrackColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
-
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
         Box(
             modifier = Modifier.Companion.align(Alignment.CenterVertically),
@@ -184,37 +181,35 @@ private fun CpuProgressBar(
         ) {
             val progressBarWidth = 16.dp
             val mainProgressSize = 90.dp
-            CircularProgressBar(
-                modifier = Modifier
-                    .size(mainProgressSize),
-                progress = headerInfo.cpu.totalPercent.toFloat(),
-                progressMax = 100f,
-                progressBarColor = Color(progressColor),
-                progressBarWidth = progressBarWidth,
-                backgroundProgressBarColor = Color(progressTrackColor),
-                backgroundProgressBarWidth = progressBarWidth,
-                roundBorder = true,
-                startAngle = 0f,
-                centerContent = {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "CPU",
-                            style = productSansBoldTypography().caption,
-                            color = Color(onSurfaceColor)
-                        )
-                        Text(
-                            modifier = Modifier,
-                            textAlign = TextAlign.Center,
-                            text = "${headerInfo.cpu.totalPercent}%",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                            color = Color(onSurfaceColor)
-                        )
-                    }
-                }
+            val animatedProgress by
+            animateFloatAsState(
+                targetValue = headerInfo.cpu.totalPercent.toFloat() / 100f,
+                animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
             )
+            Box(contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(
+                    progress = { animatedProgress },
+                    modifier = Modifier.size(mainProgressSize),
+                    strokeWidth = progressBarWidth
+                )
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "CPU",
+                        style = productSansBoldTypography().caption,
+                        color = Color(onSurfaceColor)
+                    )
+                    Text(
+                        modifier = Modifier,
+                        textAlign = TextAlign.Center,
+                        text = "${headerInfo.cpu.totalPercent}%",
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
+                        color = Color(onSurfaceColor)
+                    )
+                }
+            }
         }
         MediumSpacer()
         Column(
@@ -233,48 +228,37 @@ private fun MemProgressBar(
     headerInfo: StatusHeaderInfo,
     onSurfaceColor: Int,
 ) {
-    val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
-    val progressTrackColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
-
+    val progressBarWidth = 16.dp
+    val mainProgressSize = 90.dp
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
-        Box(
-            modifier = Modifier.Companion.align(Alignment.CenterVertically),
-            contentAlignment = Alignment.Center
-        ) {
-            val progressBarWidth = 16.dp
-            val mainProgressSize = 90.dp
-            CircularProgressBar(
-                modifier = Modifier
-                    .size(mainProgressSize),
-                progress = headerInfo.memory.memUsagePercent.toFloat(),
-                progressMax = 100f,
-                progressBarColor = Color(progressColor),
-                progressBarWidth = progressBarWidth,
-                backgroundProgressBarColor = Color(progressTrackColor),
-                backgroundProgressBarWidth = progressBarWidth,
-                roundBorder = true,
-                startAngle = 0f,
-                centerContent = {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "Mem",
-                            style = productSansBoldTypography().caption,
-                            color = Color(onSurfaceColor)
-                        )
-                        Text(
-                            modifier = Modifier,
-                            textAlign = TextAlign.Center,
-                            text = "${headerInfo.memory.memUsagePercent}%",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                            color = Color(onSurfaceColor)
-                        )
-                    }
-                }
+        val animatedProgress by
+        animateFloatAsState(
+            targetValue = headerInfo.memory.memUsagePercent.toFloat() / 100f,
+            animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+        )
+        Box(contentAlignment = Alignment.Center) {
+            CircularProgressIndicator(
+                progress = { animatedProgress },
+                modifier = Modifier.size(mainProgressSize),
+                strokeWidth = progressBarWidth
             )
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Mem",
+                    style = productSansBoldTypography().caption,
+                    color = Color(onSurfaceColor)
+                )
+                Text(
+                    modifier = Modifier,
+                    textAlign = TextAlign.Center,
+                    text = "${headerInfo.memory.memUsagePercent}%",
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
+                    color = Color(onSurfaceColor)
+                )
+            }
         }
     }
 }
@@ -299,10 +283,8 @@ private fun FatMemProgressBar(
     headerInfo: StatusHeaderInfo,
     onSurfaceColor: Int,
 ) {
-    val progressColor = getColorAttribute(com.google.android.material.R.attr.colorPrimary)
-    val secondaryProgressColor = getColorAttribute(com.google.android.material.R.attr.colorTertiary)
-    val progressTrackColor =
-        getColorAttribute(github.tornaco.android.thanos.module.common.R.attr.progressTrackColor)
+    val progressColor = MaterialTheme.colorScheme.primary
+    val secondaryProgressColor = MaterialTheme.colorScheme.tertiary
 
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
         Box(
@@ -313,44 +295,44 @@ private fun FatMemProgressBar(
             val mainProgressSize = 90.dp
             val progressBarPadding = 4.dp
             val secondProgressSize = mainProgressSize - (2 * progressBarWidth) - progressBarPadding
-            CircularProgressBar(
-                modifier = Modifier
-                    .size(mainProgressSize),
-                progress = headerInfo.memory.memUsagePercent.toFloat(),
-                progressMax = 100f,
-                progressBarColor = Color(progressColor),
-                progressBarWidth = progressBarWidth,
-                backgroundProgressBarColor = Color(progressTrackColor),
-                backgroundProgressBarWidth = progressBarWidth,
-                roundBorder = true,
-                startAngle = 0f,
-                centerContent = {}
+
+            val animatedMemUsagePercentProgress by
+            animateFloatAsState(
+                targetValue = headerInfo.memory.memUsagePercent.toFloat() / 100f,
+                animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
             )
-            CircularProgressBar(
-                modifier = Modifier
-                    .size(secondProgressSize),
-                progress = headerInfo.swap.memUsagePercent.toFloat(),
-                progressMax = 100f,
-                progressBarColor = Color(secondaryProgressColor),
-                progressBarWidth = progressBarWidth,
-                backgroundProgressBarColor = Color(progressTrackColor),
-                backgroundProgressBarWidth = progressBarWidth,
-                roundBorder = true,
-                startAngle = 0f,
-                centerContent = {
-                    Text(
-                        text = "Mem",
-                        style = productSansBoldTypography().caption.copy(fontSize = 8.sp),
-                        color = Color(onSurfaceColor)
-                    )
-                }
+            CircularProgressIndicator(
+                progress = { animatedMemUsagePercentProgress },
+                modifier = Modifier.size(mainProgressSize),
+                strokeWidth = progressBarWidth,
+                color = progressColor
             )
+
+
+            val animatedSwapUsagePercentProgress by
+            animateFloatAsState(
+                targetValue = headerInfo.swap.memUsagePercent.toFloat() / 100f,
+                animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+            )
+            Box(contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(
+                    progress = { animatedSwapUsagePercentProgress },
+                    modifier = Modifier.size(secondProgressSize),
+                    strokeWidth = progressBarWidth,
+                    color = secondaryProgressColor
+                )
+                Text(
+                    text = "Mem",
+                    style = productSansBoldTypography().caption.copy(fontSize = 8.sp),
+                    color = Color(onSurfaceColor)
+                )
+            }
         }
         MediumSpacer()
         Column {
-            MemStats(headerInfo.memory, Color(progressColor))
+            MemStats(headerInfo.memory, progressColor)
             MediumSpacer()
-            MemStats(headerInfo.swap, Color(secondaryProgressColor))
+            MemStats(headerInfo.swap, secondaryProgressColor)
         }
     }
 }

@@ -21,6 +21,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo
 
 data class StatusHeaderInfo(
     val runningAppsCount: Int,
+    val runningApps: List<AppInfo>,
     val memory: MemUsage,
     val swap: MemUsage,
     val cpu: CpuUsage
@@ -54,6 +55,7 @@ enum class MemType {
 
 val defaultStatusHeaderInfo = StatusHeaderInfo(
     0,
+    emptyList(),
     MemUsage(MemType.MEMORY),
     MemUsage(MemType.SWAP),
     CpuUsage(0)

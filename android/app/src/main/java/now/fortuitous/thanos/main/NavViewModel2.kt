@@ -31,6 +31,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
+import github.tornaco.android.thanos.core.pm.AppInfo
+import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.OsUtils
 import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
@@ -206,8 +208,11 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                     var swapUsedPercent = 0
                     var swapEnabled = false
 
-                    val runningAppsCount: Int = activityManager.runningAppsCount
-                    val memoryInfo = activityManager.memoryInfo
+                    val am = activityManager
+                    val pm = pkgManager
+
+                    val runningAppsCount: Int = am.runningAppsCount
+                    val memoryInfo = am.memoryInfo
                     if (memoryInfo != null) {
                         memTotalSizeString = Formatter.formatFileSize(context, memoryInfo.totalMem)
                         memUsageSizeString =
@@ -221,7 +226,7 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                             (100 * ((memoryInfo.totalMem - memoryInfo.availMem).toFloat() / memoryInfo.totalMem.toFloat()
                                 .coerceAtLeast(1f))).toInt()
                     }
-                    val swapInfo = activityManager.swapInfo
+                    val swapInfo = am.swapInfo
                     if (swapInfo != null) {
                         swapEnabled = swapInfo.totalSwap > 0
                         if (swapEnabled) {
@@ -240,10 +245,24 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                     }
 
                     val cpuPercent =
-                        (activityManager.getTotalCpuPercent(true)).coerceAtLeast(1f).toInt()
+                        (am.getTotalCpuPercent(true)).coerceAtLeast(1f).toInt()
 
+                    val runningAppProcess =
+                        activityManager.runningAppProcessLegacy.filter { it.pkgList != null && it.pkgList.isNotEmpty() }
+                            .sortedBy { it.importance }
+                    val runningPackages =
+                        runningAppProcess.map { Pkg.from(it.pkgList[0], it.uid) }.distinct()
+                    val runningUserApps = runningPackages
+                        .mapNotNull {
+                            pm.getAppInfo(it)
+                        }.filter {
+                            it.flags == AppInfo.FLAGS_USER
+                        }.filterNot {
+                            it.pkgName == BuildProp.THANOS_APP_PKG_NAME
+                        }
                     StatusHeaderInfo(
                         runningAppsCount = runningAppsCount,
+                        runningApps = runningUserApps,
                         memory = MemUsage(
                             memType = MemType.MEMORY,
                             memTotalSizeString = memTotalSizeString,

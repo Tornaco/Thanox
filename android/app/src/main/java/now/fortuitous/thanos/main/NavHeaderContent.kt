@@ -22,6 +22,7 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,11 +32,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProgressIndicatorDefaults
@@ -65,11 +66,9 @@ import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.ExpandableState
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.productSansBoldTypography
 import github.tornaco.android.thanos.support.NavHeaderContainer
-import github.tornaco.android.thanos.support.clickableWithRippleBorderless
 import kotlinx.coroutines.delay
 import now.fortuitous.thanos.dashboard.AppCpuUsage
 import now.fortuitous.thanos.dashboard.MemType
@@ -103,66 +102,79 @@ private fun MainNavHeaderContent(
     headerInfo: StatusHeaderInfo,
     onHeaderClick: () -> Unit,
 ) {
-    val primaryContainerColor =
-        getColorAttribute(com.google.android.material.R.attr.colorPrimaryContainer)
-    val onSurfaceColor = getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(cardCornerSize))
+            .background(color = LocalThanoxColorSchema.current.cardBgColor)
+            .clickable {
+                onHeaderClick()
+            }
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = if (headerInfo.swap.isEnabled) 0.dp else 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            CpuProgressBar(headerInfo)
+            if (headerInfo.swap.isEnabled) {
+                FatMemProgressBar(headerInfo)
+            } else {
+                MemProgressBar(headerInfo)
+            }
+        }
+    }
 
     Box(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(cardCornerSize))
             .background(color = LocalThanoxColorSchema.current.cardBgColor)
-            .clickableWithRippleBorderless {
+            .clickable {
                 onHeaderClick()
             }
             .padding(16.dp)
-
     ) {
-        Column {
-            Row {
-                FilledTonalButton(
-                    modifier = Modifier.animateContentSize(),
-                    colors = ButtonDefaults.filledTonalButtonColors(
-                        containerColor = Color(
-                            primaryContainerColor
-                        )
-                    ),
-                    onClick = {
-                        onHeaderClick()
-                    }) {
-                    AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
-                        Text(
-                            text = it,
-                            style = MaterialTheme.typography.titleLarge,
-                            color = Color(onSurfaceColor),
-                            fontWeight = W500
-                        )
-                    }
-                    Text(
-                        text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontSize = 18.sp,
-                            fontWeight = W700
-                        ),
-                        color = Color(onSurfaceColor)
-                    )
-                }
-            }
-
-            StandardSpacer()
-
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = if (headerInfo.swap.isEnabled) 0.dp else 12.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                CpuProgressBar(headerInfo, onSurfaceColor)
-                if (headerInfo.swap.isEnabled) {
-                    FatMemProgressBar(headerInfo, onSurfaceColor)
-                } else {
-                    MemProgressBar(headerInfo, onSurfaceColor)
+                    .weight(1f, fill = false)
+                    .animateContentSize()
+                    .clickable {
+                        onHeaderClick()
+                    }) {
+                AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontWeight = W700
+                    )
+                }
+                Text(
+                    text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontSize = 18.sp,
+                        fontWeight = W500
+                    ),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            LazyRow(modifier = Modifier.padding(start = 32.dp)) {
+                items(headerInfo.runningApps) {
+                    AppIcon(
+                        Modifier
+                            .padding(start = 4.dp)
+                            .size(18.dp), it
+                    )
                 }
             }
         }
@@ -172,7 +184,6 @@ private fun MainNavHeaderContent(
 @Composable
 private fun CpuProgressBar(
     headerInfo: StatusHeaderInfo,
-    onSurfaceColor: Int,
 ) {
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start) {
         Box(
@@ -199,14 +210,14 @@ private fun CpuProgressBar(
                     Text(
                         text = "CPU",
                         style = productSansBoldTypography().caption,
-                        color = Color(onSurfaceColor)
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
                         modifier = Modifier,
                         textAlign = TextAlign.Center,
                         text = "${headerInfo.cpu.totalPercent}%",
                         style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                        color = Color(onSurfaceColor)
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -225,8 +236,7 @@ private fun CpuProgressBar(
 
 @Composable
 private fun MemProgressBar(
-    headerInfo: StatusHeaderInfo,
-    onSurfaceColor: Int,
+    headerInfo: StatusHeaderInfo
 ) {
     val progressBarWidth = 16.dp
     val mainProgressSize = 90.dp
@@ -249,14 +259,14 @@ private fun MemProgressBar(
                 Text(
                     text = "Mem",
                     style = productSansBoldTypography().caption,
-                    color = Color(onSurfaceColor)
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     modifier = Modifier,
                     textAlign = TextAlign.Center,
                     text = "${headerInfo.memory.memUsagePercent}%",
                     style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                    color = Color(onSurfaceColor)
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }
@@ -281,7 +291,6 @@ private fun AppCpuUsage(usage: AppCpuUsage) {
 @Composable
 private fun FatMemProgressBar(
     headerInfo: StatusHeaderInfo,
-    onSurfaceColor: Int,
 ) {
     val progressColor = MaterialTheme.colorScheme.primary
     val secondaryProgressColor = MaterialTheme.colorScheme.tertiary
@@ -324,7 +333,7 @@ private fun FatMemProgressBar(
                 Text(
                     text = "Mem",
                     style = productSansBoldTypography().caption.copy(fontSize = 8.sp),
-                    color = Color(onSurfaceColor)
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }

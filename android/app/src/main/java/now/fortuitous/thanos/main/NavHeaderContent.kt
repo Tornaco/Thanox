@@ -149,22 +149,22 @@ private fun MainNavHeaderContent(
                     .animateContentSize()
                     .clickable {
                         onHeaderClick()
-                    }) {
+                    },
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
                     Text(
                         text = it,
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = W700
                     )
                 }
                 Text(
                     text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontSize = 18.sp,
-                        fontWeight = W500
-                    ),
-                    color = MaterialTheme.colorScheme.onSurface
+                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = W500
                 )
             }
 

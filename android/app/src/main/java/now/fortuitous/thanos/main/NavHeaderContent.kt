@@ -35,6 +35,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Badge
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalButton
@@ -50,8 +51,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight.Companion.W500
-import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -145,24 +144,20 @@ private fun MainNavHeaderContent(
                 modifier = Modifier
                     .wrapContentWidth()
                     .animateContentSize(),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.Bottom
             ) {
                 FilledTonalButton(onClick = { onHeaderClick() }) {
-                    AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
-                        Text(
-                            text = it,
-                            style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
-                            color = MaterialTheme.colorScheme.onSurface,
-                            fontWeight = W700
-                        )
-                    }
-                    SmallSpacer()
                     Text(
                         text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
-                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 16.sp),
+                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 16.5.sp),
                         color = MaterialTheme.colorScheme.onSurface,
-                        fontWeight = W500
                     )
+                    StandardSpacer()
+                    Badge(containerColor = MaterialTheme.colorScheme.primary) {
+                        AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
+                            Text(text = it)
+                        }
+                    }
                 }
             }
 

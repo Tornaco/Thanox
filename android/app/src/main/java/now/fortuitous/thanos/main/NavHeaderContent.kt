@@ -32,16 +32,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.MaterialShapes
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -65,6 +64,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.ExpandableState
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.productSansBoldTypography
 import github.tornaco.android.thanos.support.NavHeaderContainer
@@ -134,22 +134,20 @@ private fun MainNavHeaderContent(
             .clickable {
                 onHeaderClick()
             }
-            .padding(16.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
-        Column(
+        Row(
             modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Row(
-                modifier = Modifier.animateContentSize(),
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .animateContentSize(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
-                    Modifier
-                        .widthIn(min = 36.dp)
-                        .clip(MaterialShapes.Cookie6Sided.toShape())
-                        .background(color = MaterialTheme.colorScheme.secondaryContainer)
-                        .padding(vertical = 6.dp, horizontal = 12.dp)
-                ) {
+                FilledTonalButton(onClick = { onHeaderClick() }) {
                     AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
                         Text(
                             text = it,
@@ -158,25 +156,33 @@ private fun MainNavHeaderContent(
                             fontWeight = W700
                         )
                     }
+                    SmallSpacer()
+                    Text(
+                        text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
+                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 16.sp),
+                        color = MaterialTheme.colorScheme.onSurface,
+                        fontWeight = W500
+                    )
                 }
-                Text(
-                    text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
-                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
-                    color = MaterialTheme.colorScheme.onSurface,
-                    fontWeight = W500
-                )
             }
 
-            FlowRow(modifier = Modifier.padding(top = 4.dp)) {
+            StandardSpacer()
+
+            FlowRow(
+                modifier = Modifier
+                    .weight(1f, fill = false)
+                    .padding(top = 4.dp)
+            ) {
                 headerInfo.runningApps.forEach {
                     AppIcon(
                         Modifier
-                            .padding(end = 4.dp)
-                            .size(18.dp), it
+                            .padding(2.dp)
+                            .size(if (headerInfo.runningApps.size > 6) 14.dp else 18.dp), it
                     )
                 }
             }
         }
+
     }
 }
 

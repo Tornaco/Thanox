@@ -1398,7 +1398,7 @@
     <string name="launch_other_pkg_allow_once">僅允許這次</string>
     <string name="launch_other_pkg_ignored_message">拒絕 %s 啟動 %s</string>
 
-    <string name="boost_status_running_apps">個應用程式正在運行</string>
+    <string name="boost_status_running_apps">正在運行</string>
     <string name="boost_status_blocked_start_count">已阻止%s次應用程式啟動請求</string>
     <string name="boost_status_mem_usage_percent">物理 %s</string>
     <string name="boost_status_swap_usage_percent">虛擬 %s</string>

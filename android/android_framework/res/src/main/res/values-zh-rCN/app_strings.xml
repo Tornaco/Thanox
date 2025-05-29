@@ -1400,7 +1400,7 @@
     <string name="launch_other_pkg_allow_once">仅允许这次</string>
     <string name="launch_other_pkg_ignored_message">拒绝 %s 启动 %s</string>
 
-    <string name="boost_status_running_apps">个应用正在运行</string>
+    <string name="boost_status_running_apps">正在运行</string>
     <string name="boost_status_blocked_start_count">已阻止%s次应用启动请求</string>
     <string name="boost_status_mem_usage_percent">物理 %s</string>
     <string name="boost_status_swap_usage_percent">虚拟 %s</string>

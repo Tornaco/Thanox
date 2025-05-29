@@ -17,12 +17,19 @@
 
 package github.tornaco.android.thanos.module.compose.common.widget
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.with
 import androidx.compose.runtime.Composable
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AnimatedTextContainer(text: String, content: @Composable (String) -> Unit) {
+inline fun AnimatedTextContainer(text: String, crossinline content: @Composable (String) -> Unit) {
     AnimatedContent(
         targetState = text,
         transitionSpec = {

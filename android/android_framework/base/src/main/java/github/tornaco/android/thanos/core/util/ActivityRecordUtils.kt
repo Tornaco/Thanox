@@ -92,23 +92,21 @@ object ActivityRecordUtils {
         }
     }
 
-    private var getTaskRecordMethodName: String? = null
-
     fun getTaskRecord(activityRecord: Any?): Any? {
         if (activityRecord == null) return null
-
-        if (getTaskRecordMethodName != null) {
-            return XposedHelpers.callMethod(activityRecord, getTaskRecordMethodName)
-        }
-
-        getTaskRecordMethodName = runCatching {
-            XposedHelpers.callMethod(activityRecord, "getTask")
-            "getTask"
+        return kotlin.runCatching {
+            XposedHelpers.getObjectField(activityRecord, "task").also {
+                XLog.d("getTaskRecord .task: $it")
+            }
         }.getOrElse {
-            XLog.e("Fallback to use #getTaskRecord.")
-            "getTaskRecord"
+            kotlin.runCatching {
+                XLog.e(it, "getTaskRecord err, fallback to use #getTask.")
+                XposedHelpers.callMethod(activityRecord, "getTask")
+            }.getOrElse {
+                XLog.e(it, "getTaskRecord err, fallback to use #getTaskRecord.")
+                XposedHelpers.callMethod(activityRecord, "getTaskRecord")
+            }
         }
-        return XposedHelpers.callMethod(activityRecord, getTaskRecordMethodName)
     }
 
     fun getTaskId(activityRecord: Any?): Int {

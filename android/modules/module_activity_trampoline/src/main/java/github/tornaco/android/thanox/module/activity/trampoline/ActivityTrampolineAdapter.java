@@ -17,7 +17,7 @@ class ActivityTrampolineAdapter extends RecyclerView.Adapter<ActivityTrampolineA
 
     private final List<ActivityTrampolineModel> replacements = new ArrayList<>();
 
-    private ActivityTrampolineItemClickListener listener;
+    private final ActivityTrampolineItemClickListener listener;
 
     ActivityTrampolineAdapter(ActivityTrampolineItemClickListener listener) {
         this.listener = listener;

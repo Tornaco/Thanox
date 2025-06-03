@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/common_view_margin_default">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_view_margin_default"
+        android:text="@string/module_activity_trampoline_add_dialog_hint_from" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/from_comp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/common_view_margin_default">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/common_view_margin_default"
+        tools:text="From" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_view_margin_default"
+        android:layout_marginTop="@dimen/common_view_margin_default"
+        android:text="@string/module_activity_trampoline_add_dialog_hint_to" />
 
     <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/from_comp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_view_margin_default"
-            android:background="@android:color/transparent"
-            android:hint="@string/module_activity_trampoline_add_dialog_hint_from" />
+        android:id="@+id/to_comp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/common_view_margin_default"
+        tools:text="To" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_view_margin_default"
+        android:layout_marginTop="@dimen/common_view_margin_default"
+        android:text="@string/module_activity_trampoline_add_dialog_hint_note" />
 
     <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/to_comp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_view_margin_default"
-            android:background="@android:color/transparent"
-            android:hint="@string/module_activity_trampoline_add_dialog_hint_to" />
+        android:id="@+id/note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/common_view_margin_default"
+        tools:text="Note" />
 
 </LinearLayout>

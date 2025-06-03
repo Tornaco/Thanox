@@ -10,15 +10,18 @@ import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 public final class ComponentReplacement implements Parcelable {
 
     public ComponentNameBrief from, to;
+    public String note;
 
     private ComponentReplacement(Parcel in) {
         from = in.readParcelable(ComponentNameBrief.class.getClassLoader());
         to = in.readParcelable(ComponentNameBrief.class.getClassLoader());
+        note = in.readString();
     }
 
-    public ComponentReplacement(ComponentNameBrief from, ComponentNameBrief to) {
+    public ComponentReplacement(ComponentNameBrief from, ComponentNameBrief to, String note) {
         this.from = from;
         this.to = to;
+        this.note = note;
     }
 
     public ComponentReplacement() {
@@ -28,6 +31,7 @@ public final class ComponentReplacement implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(from, flags);
         dest.writeParcelable(to, flags);
+        dest.writeString(note);
     }
 
     @Override
@@ -49,6 +53,10 @@ public final class ComponentReplacement implements Parcelable {
 
     @Override
     public String toString() {
-        return "ComponentReplacement(from=" + this.from + ", to=" + this.to + ")";
+        return "ComponentReplacement{" +
+                "from=" + from +
+                ", to=" + to +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

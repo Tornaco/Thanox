@@ -142,7 +142,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
         binding.fab.setOnClickListener(v -> {
             ThanosManager.from(getApplicationContext())
-                    .ifServiceInstalled(thanosManager -> showAddReplacementDialog(null, null, false));
+                    .ifServiceInstalled(thanosManager -> showAddReplacementDialog(null, null, null, false));
         });
     }
 
@@ -201,7 +201,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
         binding.executePendingBindings();
     }
 
-    private void showAddReplacementDialog(String from, String to, boolean canDelete) {
+    private void showAddReplacementDialog(String from, String to, String note, boolean canDelete) {
         View layout = LayoutInflater.from(this).inflate(R.layout.module_activity_trampoline_comp_replace_editor, null, false);
 
         final AppCompatEditText fromEditText = layout.findViewById(R.id.from_comp);
@@ -212,6 +212,9 @@ public class ActivityTrampolineActivity extends ThemeActivity
         toEditText.setFilters(new InputFilter[]{new EmojiExcludeFilter()});
         toEditText.setText(to);
 
+        final AppCompatEditText noteEditText = layout.findViewById(R.id.note);
+        noteEditText.setText(note);
+
         AlertDialog d = new MaterialAlertDialogBuilder(ActivityTrampolineActivity.this)
                 .setTitle(canDelete
                         ? github.tornaco.android.thanos.res.R.string.module_activity_trampoline_edit_dialog_title
@@ -221,7 +224,8 @@ public class ActivityTrampolineActivity extends ThemeActivity
                 .setPositiveButton(android.R.string.ok, (dialog, which) ->
                         onRequestAddNewReplacement(
                                 fromEditText.getEditableText().toString(),
-                                toEditText.getEditableText().toString()))
+                                toEditText.getEditableText().toString(),
+                                noteEditText.getEditableText().toString()))
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
         if (canDelete) {
@@ -250,7 +254,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
         viewModel.onRequestRemoveNewReplacement(fromCompName, toCompName);
     }
 
-    private void onRequestAddNewReplacement(String f, String t) {
+    private void onRequestAddNewReplacement(String f, String t, String note) {
         if (TextUtils.isEmpty(f) || TextUtils.isEmpty(t) || TextUtils.isEmpty(f.trim()) || TextUtils.isEmpty(t.trim())) {
             showComponentEmptyTips();
             return;
@@ -265,7 +269,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
             showComponentToInvalidTips();
             return;
         }
-        viewModel.onRequestAddNewReplacement(fromCompName, toCompName);
+        viewModel.onRequestAddNewReplacement(fromCompName, toCompName, note);
     }
 
     private void showComponentFromInvalidTips() {
@@ -302,7 +306,7 @@ public class ActivityTrampolineActivity extends ThemeActivity
         popupMenu.inflate(R.menu.module_activity_trampoline_menu_trampoline_item);
         popupMenu.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.action_edit) {
-                showAddReplacementDialog(replacement.from.flattenToString(), replacement.to.flattenToString(), true);
+                showAddReplacementDialog(replacement.from.flattenToString(), replacement.to.flattenToString(), replacement.note, true);
                 return true;
             }
             if (item.getItemId() == R.id.action_export) {

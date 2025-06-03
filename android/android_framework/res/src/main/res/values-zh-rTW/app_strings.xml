@@ -342,6 +342,7 @@
     <string name="module_activity_trampoline_add_dialog_title">新增</string>
     <string name="module_activity_trampoline_add_dialog_hint_from">原Activity</string>
     <string name="module_activity_trampoline_add_dialog_hint_to">替換為Activity</string>
+    <string name="module_activity_trampoline_add_dialog_hint_note">备注</string>
     <string name="module_activity_trampoline_add_dialog_delete">移除</string>
 
     <string name="module_activity_trampoline_add_empty_component">憋輸入空白內容</string>

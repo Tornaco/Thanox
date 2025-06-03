@@ -10,7 +10,7 @@ public class ActivityTrampolineModel {
     @Nullable
     private final AppInfo app;
 
-    public ActivityTrampolineModel(ComponentReplacement replacement, AppInfo app) {
+    public ActivityTrampolineModel(ComponentReplacement replacement, @Nullable AppInfo app) {
         this.replacement = replacement;
         this.app = app;
     }

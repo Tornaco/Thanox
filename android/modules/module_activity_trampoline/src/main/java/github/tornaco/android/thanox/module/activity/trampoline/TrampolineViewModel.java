@@ -21,7 +21,6 @@ import com.elvishew.xlog.XLog;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.CharSource;
 import com.google.common.io.CharStreams;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
@@ -135,11 +134,11 @@ public class TrampolineViewModel extends AndroidViewModel {
         unRegisterEventReceivers();
     }
 
-    void onRequestAddNewReplacement(ComponentNameBrief f, ComponentNameBrief t) {
+    void onRequestAddNewReplacement(ComponentNameBrief f, ComponentNameBrief t, String note) {
         ThanosManager.from(getApplication())
                 .ifServiceInstalled(thanosManager -> {
                     thanosManager.getActivityStackSupervisor()
-                            .addComponentReplacement(new ComponentReplacement(f, t));
+                            .addComponentReplacement(new ComponentReplacement(f, t, note));
                     // Reload.
                     loadModels();
                 });
@@ -149,7 +148,7 @@ public class TrampolineViewModel extends AndroidViewModel {
         ThanosManager.from(getApplication())
                 .ifServiceInstalled(thanosManager -> {
                     thanosManager.getActivityStackSupervisor()
-                            .removeComponentReplacement(new ComponentReplacement(f, t));
+                            .removeComponentReplacement(new ComponentReplacement(f, t, null));
                     // Reload.
                     loadModels();
                 });

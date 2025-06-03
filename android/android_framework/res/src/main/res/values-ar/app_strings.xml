@@ -333,6 +333,7 @@
     <string name="module_activity_trampoline_add_dialog_title">الجديد</string>
     <string name="module_activity_trampoline_add_dialog_hint_from">الأصلي Activity</string>
     <string name="module_activity_trampoline_add_dialog_hint_to">استبدل بـ Activity</string>
+    <string name="module_activity_trampoline_add_dialog_hint_note">Note</string>
     <string name="module_activity_trampoline_add_dialog_delete">إزالة</string>
 
     <string name="module_activity_trampoline_add_empty_component">لا تدخل محتوى فارغ</string>

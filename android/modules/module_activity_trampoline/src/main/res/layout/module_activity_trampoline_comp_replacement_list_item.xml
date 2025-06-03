@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -78,7 +79,7 @@
                     android:fadingEdge="horizontal"
                     android:text="@{app != null ? app.appLabel : @string/module_activity_trampoline_app_not_installed}"
                     android:textAppearance="@style/TextAppearance.TileTitle"
-                    tools:text="@string/app_name_thanox" />
+                    tools:text="Label" />
 
                 <TextView
                     android:id="@+id/from"
@@ -91,7 +92,7 @@
                     android:fadingEdge="horizontal"
                     android:text="@{replacement.from.flattenToString()}"
                     android:textAppearance="@style/TextAppearance.TileSubTitle"
-                    tools:text="@string/app_name_thanox" />
+                    tools:text="From" />
 
                 <TextView
                     android:id="@+id/to"
@@ -101,14 +102,31 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/common_view_margin_default"
                     android:layout_marginBottom="@dimen/common_view_margin_small"
-                    android:drawableStart="@drawable/module_activity_trampoline__ic_arrow_right_fill"
                     android:ellipsize="middle"
                     android:fadingEdge="horizontal"
                     android:gravity="center|start"
                     android:text="@{replacement.to.flattenToString()}"
                     android:textAppearance="@style/TextAppearance.TileSubTitle"
                     android:textColor="?colorAccent"
-                    tools:text="@string/app_name_thanox" />
+                    app:drawableStartCompat="@drawable/module_activity_trampoline__ic_arrow_right_fill"
+                    tools:text="To" />
+
+                <TextView
+                    android:id="@+id/note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/to"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="@dimen/common_view_margin_default"
+                    android:layout_marginBottom="@dimen/common_view_margin_small"
+                    android:visibility="@{(replacement.note == null || replacement.note.length == 0) ? View.GONE : View.VISIBLE}"
+                    android:ellipsize="middle"
+                    android:fadingEdge="horizontal"
+                    android:gravity="center|start"
+                    android:text="@{replacement.note}"
+                    android:textAppearance="@style/TextAppearance.TileSubTitle"
+                    android:textColor="?colorAccent"
+                    tools:text="Note" />
 
             </RelativeLayout>
         </RelativeLayout>

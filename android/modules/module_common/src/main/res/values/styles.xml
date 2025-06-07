@@ -134,20 +134,6 @@
         <item name="iconTint">?colorPrimary</item>
     </style>
 
-    <style name="SwitchStyleMD">
-        <item name="android:thumb">@drawable/module_common_switch_thumb_apple</item>
-        <item name="android:track">@drawable/module_common_switch_track_apple</item>
-        <item name="track">@drawable/module_common_switch_track_apple</item>
-        <item name="useMaterialThemeColors">false</item>
-        <item name="thumbTint">@color/switch_thumb_tint_color</item>
-        <item name="trackTint">@color/switch_track_tint_color</item>
-    </style>
-
-    <style name="SwitchStyleMD.SwitchBar">
-        <item name="trackTint">@color/switch_track_tint_color_switchbar</item>
-        <item name="thumbTint">@color/switch_thumb_tint_color_switchbar</item>
-    </style>
-
     <style name="SwitchPrefTheme" parent="@style/Preference.SwitchPreferenceCompat.Material">
         <item name="android:widgetLayout">@layout/preference_widget_switch_compat_oos</item>
     </style>

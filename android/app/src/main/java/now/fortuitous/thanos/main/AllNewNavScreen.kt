@@ -115,11 +115,12 @@ fun AllNewNavScreen() {
         viewModel.autoRefresh()
     }
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             LargeTopAppBar(
                 scrollBehavior = scrollBehavior,
-                colors = TopAppBarDefaults.largeTopAppBarColors(),
+                colors = TopAppBarDefaults.topAppBarColors(),
                 title = {
                     Row(verticalAlignment = CenterVertically) {
                         Text(

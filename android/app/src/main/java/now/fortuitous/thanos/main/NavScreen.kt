@@ -68,7 +68,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -80,6 +79,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import coil.compose.AsyncImage
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.main.launchSubscribeActivity
@@ -157,7 +157,7 @@ fun NavScreen() {
                             isShowRebootConfirmationDialog = true
                         }) {
                             Icon(
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_restart_line),
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_restart_fill),
                                 contentDescription = "Reboot"
                             )
                         }
@@ -165,7 +165,7 @@ fun NavScreen() {
                             now.fortuitous.thanos.settings.SettingsDashboardActivity.start(activity)
                         }) {
                             Icon(
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_line),
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_4_fill),
                                 contentDescription = "Settings"
                             )
                         }

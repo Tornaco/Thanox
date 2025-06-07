@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.button.MaterialSplitButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -36,8 +37,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-
-import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.common.CommonAppListFilterActivity;
@@ -82,7 +81,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupSorter(Chip sorterAnchor) {
+    protected void onSetupSorter(MaterialSplitButton sorterAnchor) {
         sorterAnchor.setVisibility(View.GONE);
         viewModel.setAppSort(null);
     }
@@ -114,7 +113,7 @@ public class DetailedStartRecordsActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupFilter(Chip filterAnchor) {
+    protected void onSetupFilter(MaterialSplitButton filterAnchor) {
         if (targetPackageName != null) {
             filterAnchor.setVisibility(View.GONE);
             setTitle(getTitleRes());

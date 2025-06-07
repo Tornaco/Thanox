@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.material.button.MaterialSplitButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -68,6 +70,10 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
         onSetupFilter(binding.filterChipContainer.filterChip);
         onSetupCustomFilter(binding.customFilterChipContainer.filterChip);
         onSetupSorter(binding.sortChipContainer.sortChip);
+
+        if (hasCustomFilter()) {
+
+        }
 
         onSetupChip(
                 binding.chipContainer,
@@ -157,12 +163,13 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
     }
 
     @SuppressLint("RestrictedApi")
-    protected void onSetupSorter(Chip sorterAnchor) {
+    protected void onSetupSorter(MaterialSplitButton sorterAnchor) {
+        Button leading = sorterAnchor.findViewById(R.id.leading_button);
         AppSort[] appSortArray = AppSort.values();
         AppSort currentSort = viewModel.getCurrentAppSort();
-        sorterAnchor.setText(currentSort.labelRes);
+        leading.setText(currentSort.labelRes);
 
-        sorterAnchor.setOnClickListener(view -> {
+        leading.setOnClickListener(view -> {
             MenuBuilder menuBuilder = new MenuBuilder(this);
             MenuPopupHelper menuPopupHelper = new MenuPopupHelper(this, menuBuilder, view);
             menuPopupHelper.setForceShowIcon(true);
@@ -196,7 +203,7 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
                         item.setChecked(viewModel.isSortReverse());
                     } else {
                         viewModel.setAppSort(appSortArray[index]);
-                        sorterAnchor.setText(appSortArray[index].labelRes);
+                        leading.setText(appSortArray[index].labelRes);
                     }
                     return true;
                 }
@@ -211,7 +218,8 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
     }
 
     @SuppressLint("RestrictedApi")
-    protected void onSetupFilter(Chip filterAnchor) {
+    protected void onSetupFilter(MaterialSplitButton filterAnchor) {
+        Button leading = filterAnchor.findViewById(R.id.leading_button);
         // Creating the ArrayAdapter instance having the categoryArray list
         List<PackageSet> menuItemList = viewModel.getAllPackageSetFilterItems();
         menuItemList.sort(new Comparator<PackageSet>() {
@@ -226,10 +234,10 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
 
         PackageSet currentPackageSet = viewModel.getCurrentPackageSet();
         if (currentPackageSet != null) {
-            filterAnchor.setText(currentPackageSet.getLabel());
+            leading.setText(currentPackageSet.getLabel());
         }
 
-        filterAnchor.setOnClickListener(view -> {
+        leading.setOnClickListener(view -> {
             MenuBuilder menuBuilder = new MenuBuilder(this);
             MenuPopupHelper menuPopupHelper = new MenuPopupHelper(this, menuBuilder, view);
             menuPopupHelper.setForceShowIcon(true);
@@ -249,7 +257,7 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
                 public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
                     int index = item.getItemId();
                     viewModel.setAppCategoryFilter(menuItemList.get(index).getId());
-                    filterAnchor.setText(menuItemList.get(index).getLabel());
+                    leading.setText(menuItemList.get(index).getLabel());
                     return true;
                 }
 
@@ -262,7 +270,7 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
         });
     }
 
-    protected void onSetupCustomFilter(Chip filterAnchor) {
+    protected void onSetupCustomFilter(MaterialSplitButton filterAnchor) {
         filterAnchor.setVisibility(View.GONE);
     }
 
@@ -313,6 +321,10 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
     @NonNull
     protected String provideFeatureDescKey() {
         return getClass().getName();
+    }
+
+    protected boolean hasCustomFilter() {
+        return false;
     }
 
     @Override

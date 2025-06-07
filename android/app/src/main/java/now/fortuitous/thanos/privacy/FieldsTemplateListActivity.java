@@ -25,6 +25,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.button.MaterialSplitButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.common.collect.Lists;
@@ -69,14 +70,14 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupFilter(Chip filterAnchor) {
+    protected void onSetupFilter(MaterialSplitButton filterAnchor) {
         super.onSetupFilter(filterAnchor);
         filterAnchor.setVisibility(View.GONE);
         setTitle(getTitleRes());
     }
 
     @Override
-    protected void onSetupSorter(Chip sorterAnchor) {
+    protected void onSetupSorter(MaterialSplitButton sorterAnchor) {
         super.onSetupSorter(sorterAnchor);
         sorterAnchor.setVisibility(View.GONE);
     }

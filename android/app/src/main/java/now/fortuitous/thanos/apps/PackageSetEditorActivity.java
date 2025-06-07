@@ -28,7 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.elvishew.xlog.XLog;
-import com.google.android.material.chip.Chip;
+import com.google.android.material.button.MaterialSplitButton;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.common.collect.Lists;
 
@@ -103,7 +103,7 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupFilter(Chip filterAnchor) {
+    protected void onSetupFilter(MaterialSplitButton filterAnchor) {
         super.onSetupFilter(filterAnchor);
         filterAnchor.setVisibility(View.GONE);
         setTitle(getTitleString());

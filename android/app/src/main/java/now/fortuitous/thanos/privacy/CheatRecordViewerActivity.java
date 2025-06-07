@@ -24,7 +24,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.material.chip.Chip;
+import com.google.android.material.button.MaterialSplitButton;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class CheatRecordViewerActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupFilter(Chip filterAnchor) {
+    protected void onSetupFilter(MaterialSplitButton filterAnchor) {
         super.onSetupFilter(filterAnchor);
         filterAnchor.setVisibility(View.GONE);
         setTitle(getTitleRes());

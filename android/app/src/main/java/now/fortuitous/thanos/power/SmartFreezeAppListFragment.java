@@ -31,6 +31,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -48,7 +49,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.elvishew.xlog.XLog;
-import com.google.android.material.chip.Chip;
+import com.google.android.material.button.MaterialSplitButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
@@ -186,12 +187,13 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     }
 
     @SuppressLint("RestrictedApi")
-    protected void onSetupSorter(Chip sorterAnchor) {
+    protected void onSetupSorter(MaterialSplitButton sorterAnchor) {
+        Button leading = sorterAnchor.findViewById(github.tornaco.android.thanos.module.common.R.id.leading_button);
         AppSort[] appSortArray = AppSort.values();
         AppSort currentSort = viewModel.getCurrentAppSort();
-        sorterAnchor.setText(currentSort.labelRes);
+        leading.setText(currentSort.labelRes);
 
-        sorterAnchor.setOnClickListener(view -> {
+        leading.setOnClickListener(view -> {
             MenuBuilder menuBuilder = new MenuBuilder(requireActivity());
             MenuPopupHelper menuPopupHelper = new MenuPopupHelper(requireActivity(), menuBuilder, view);
             menuPopupHelper.setForceShowIcon(true);
@@ -219,7 +221,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                         item.setChecked(viewModel.isSortReverse());
                     } else {
                         viewModel.setAppSort(appSortArray[index]);
-                        sorterAnchor.setText(appSortArray[index].labelRes);
+                        leading.setText(appSortArray[index].labelRes);
                     }
                     return true;
                 }

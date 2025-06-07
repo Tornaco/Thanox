@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
 
-import com.google.android.material.chip.Chip;
+import com.google.android.material.button.MaterialSplitButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.collect.Lists;
 
@@ -138,8 +139,13 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
     }
 
     @Override
+    protected boolean hasCustomFilter() {
+        return true;
+    }
+
+    @Override
     @SuppressLint("RestrictedApi")
-    protected void onSetupCustomFilter(Chip filterAnchor) {
+    protected void onSetupCustomFilter(MaterialSplitButton filterAnchor) {
         List<String> menuItemList = new ArrayList<>();
         menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_allow));
         menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_ignore));
@@ -147,9 +153,10 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
         menuItemList.add(getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_all));
 
         currentOpsModeFilter = getString(github.tornaco.android.thanos.res.R.string.module_ops_mode_all);
-        filterAnchor.setText(currentOpsModeFilter);
+        Button leading = filterAnchor.findViewById(github.tornaco.android.thanos.module.common.R.id.leading_button);
+        leading.setText(currentOpsModeFilter);
 
-        filterAnchor.setOnClickListener(view -> {
+        leading.setOnClickListener(view -> {
             MenuBuilder menuBuilder = new MenuBuilder(this);
             MenuPopupHelper menuPopupHelper = new MenuPopupHelper(this, menuBuilder, view);
             menuPopupHelper.setForceShowIcon(true);
@@ -166,7 +173,7 @@ public class OpsAppListActivity extends CommonAppListFilterActivity {
                 public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
                     int index = item.getItemId();
                     currentOpsModeFilter = menuItemList.get(index);
-                    filterAnchor.setText(currentOpsModeFilter);
+                    leading.setText(currentOpsModeFilter);
 
                     viewModel.start();
                     return true;

@@ -22,8 +22,8 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,7 +49,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -58,6 +57,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -79,9 +79,9 @@ import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCardRoundedCornerShape
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
-import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import kotlinx.coroutines.flow.distinctUntilChanged
 
@@ -201,7 +201,11 @@ fun ProcessManageScreen(
                 },
                 setCachedExpand = {
                     viewModel.expandCached(it)
-                })
+                },
+                setNotRunningExpand = {
+                    viewModel.expandNotRunning(it)
+                }
+            )
 
             Md3ExpPullRefreshIndicator(
                 state.isLoading,
@@ -224,7 +228,6 @@ private fun AppFilterDropDown(
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RunningAppList(
     modifier: Modifier,
@@ -234,7 +237,8 @@ fun RunningAppList(
     onNotRunningItemClick: (AppInfo) -> Unit,
     onFilterItemSelected: (AppSetFilterItem) -> Unit,
     setRunningExpand: (Boolean) -> Unit,
-    setCachedExpand: (Boolean) -> Unit
+    setCachedExpand: (Boolean) -> Unit,
+    setNotRunningExpand: (Boolean) -> Unit,
 ) {
     LazyColumn(
         state = lazyListState,
@@ -294,9 +298,17 @@ fun RunningAppList(
         }
 
         if (state.appsNotRunning.isNotEmpty()) {
-            stickyHeader { NotRunningGroupHeader(state.appsNotRunning.size) }
+            stickyHeader {
+                NotRunningGroupHeader(
+                    state.appsNotRunning.size,
+                    state.isNotRunningExpand,
+                    setNotRunningExpand
+                )
+            }
             items(state.appsNotRunning) {
-                NotRunningAppItem(it, onNotRunningItemClick)
+                AnimatedVisibility(visible = state.isNotRunningExpand) {
+                    NotRunningAppItem(it, onNotRunningItemClick)
+                }
             }
         }
     }
@@ -304,71 +316,69 @@ fun RunningAppList(
 
 @Composable
 fun CachedGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> Unit) {
-    Surface(tonalElevation = 2.dp) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(LocalThanoxColorSchema.current.cardBgColor)
-                .clickableWithRipple {
-                    setExpand(!expand)
-                }
-                .padding(horizontal = 20.dp, vertical = 12.dp),
-            contentAlignment = Alignment.CenterStart
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                val text =
-                    stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_background)
-                Text(
-                    text = "$text - $itemCount",
-                    style = MaterialTheme.typography.titleMedium
-                )
-                ExpandIndicator(expand = expand)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(ThanoxCardRoundedCornerShape)
+            .background(LocalThanoxColorSchema.current.cardBgColor)
+            .clickable {
+                setExpand(!expand)
             }
+            .padding(horizontal = 20.dp, vertical = 12.dp),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            val text =
+                stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_background)
+            Text(
+                text = "$text - $itemCount",
+                style = MaterialTheme.typography.titleMedium
+            )
+            ExpandIndicator(expand = expand)
         }
     }
 }
 
 @Composable
 fun RunningGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> Unit) {
-    Surface(tonalElevation = 2.dp) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(LocalThanoxColorSchema.current.cardBgColor)
-                .clickableWithRipple {
-                    setExpand(!expand)
-                }
-                .padding(horizontal = 20.dp, vertical = 12.dp),
-            contentAlignment = Alignment.CenterStart
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                val text =
-                    stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_running)
-                Text(
-                    text = "$text - $itemCount",
-                    style = MaterialTheme.typography.titleMedium
-                )
-                ExpandIndicator(expand = expand)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(ThanoxCardRoundedCornerShape)
+            .background(LocalThanoxColorSchema.current.cardBgColor)
+            .clickable {
+                setExpand(!expand)
             }
-
+            .padding(horizontal = 20.dp, vertical = 12.dp),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            val text =
+                stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_running)
+            Text(
+                text = "$text - $itemCount",
+                style = MaterialTheme.typography.titleMedium
+            )
+            ExpandIndicator(expand = expand)
         }
+
     }
 }
 
 @Composable
 private fun ExpandIndicator(expand: Boolean) {
     Icon(
-        modifier = Modifier.size(24.dp),
+        modifier = Modifier.size(32.dp),
         painter = painterResource(
             id = if (expand) {
                 github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_arrow_drop_down_fill
@@ -381,14 +391,23 @@ private fun ExpandIndicator(expand: Boolean) {
 }
 
 @Composable
-fun NotRunningGroupHeader(itemCount: Int) {
-    Surface(tonalElevation = 2.dp) {
-        Box(
+fun NotRunningGroupHeader(itemCount: Int, expand: Boolean, setExpand: (Boolean) -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(ThanoxCardRoundedCornerShape)
+            .background(LocalThanoxColorSchema.current.cardBgColor)
+            .clickable {
+                setExpand(!expand)
+            }
+            .padding(horizontal = 20.dp, vertical = 12.dp),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(LocalThanoxColorSchema.current.cardBgColor)
-                .padding(horizontal = 20.dp, vertical = 12.dp),
-            contentAlignment = Alignment.CenterStart
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             val text =
                 stringResource(id = github.tornaco.android.thanos.res.R.string.running_process_not_running)
@@ -396,7 +415,9 @@ fun NotRunningGroupHeader(itemCount: Int) {
                 text = "$text - $itemCount",
                 style = MaterialTheme.typography.titleMedium
             )
+            ExpandIndicator(expand)
         }
+
     }
 }
 
@@ -409,7 +430,7 @@ fun RunningAppItem(
 ) {
     Box(
         modifier = Modifier
-            .clickableWithRipple {
+            .clickable {
                 onItemClick(appState)
             }
     ) {
@@ -491,12 +512,11 @@ private fun AppRunningTime(appState: RunningAppState) {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NotRunningAppItem(appInfo: AppInfo, onItemClick: (AppInfo) -> Unit) {
     Box(
         modifier = Modifier
-            .clickableWithRipple {
+            .clickable {
                 onItemClick(appInfo)
             }
     ) {

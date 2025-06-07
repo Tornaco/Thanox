@@ -14,5 +14,6 @@ data class ProcessManageState(
     val netSpeedStates: Map<AppInfo, NetSpeedState>,
 
     val isRunningExpand: Boolean = true,
-    val isCacheExpand: Boolean = true
+    val isCacheExpand: Boolean = true,
+    val isNotRunningExpand: Boolean = false
 )

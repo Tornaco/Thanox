@@ -156,7 +156,11 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                                             null
                                         }
                                     val lcRule =
-                                        runningServiceInfo?.service?.let { name -> getServiceRule(name).takeIf { it != fallbackRule } }
+                                        runningServiceInfo?.service?.let { name ->
+                                            getServiceRule(
+                                                name
+                                            ).takeIf { it != fallbackRule }
+                                        }
                                     val blockerRule =
                                         runningServiceInfo?.service?.className?.classNameToRule()
                                     RunningService(
@@ -350,5 +354,9 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
 
     fun expandCached(expand: Boolean) {
         _state.value = _state.value.copy(isCacheExpand = expand)
+    }
+
+    fun expandNotRunning(expand: Boolean) {
+        _state.value = _state.value.copy(isNotRunningExpand = expand)
     }
 }

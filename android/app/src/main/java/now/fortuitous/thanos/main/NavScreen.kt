@@ -26,10 +26,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
@@ -92,10 +94,10 @@ import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
-import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import github.tornaco.android.thanos.module.compose.common.widget.fontFamilyProductSans
 import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedString
 import github.tornaco.android.thanos.support.FlowLayout
 import github.tornaco.android.thanos.support.clickableWithRippleBorderless
@@ -138,7 +140,10 @@ fun NavScreen() {
                 colors = TopAppBarDefaults.topAppBarColors(),
                 title = {
                     Row(verticalAlignment = CenterVertically) {
-                        Text(stringResource(id = github.tornaco.android.thanos.R.string.app_name_thanox))
+                        Text(
+                            stringResource(id = R.string.app_name_thanox),
+                            fontFamily = fontFamilyProductSans()
+                        )
                         TinySpacer()
                         AppBarBadges(state = state, onInactiveClick = {
                             isShowActiveDialog = true
@@ -347,14 +352,15 @@ private fun FeatureGroup(
         val activity = LocalContext.current.requireActivity()
 
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(
-                text = stringResource(id = group.titleRes),
-                fontSize = 15.sp,
-                fontWeight = FontWeight.W500,
-                color = themedTextColor(MaterialTheme.colorScheme.primary)
-            )
-            StandardSpacer()
-
+            if (false) {
+                Text(
+                    text = stringResource(id = group.titleRes),
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.W500,
+                    color = themedTextColor(MaterialTheme.colorScheme.primary)
+                )
+                StandardSpacer()
+            }
             FlowLayout(lineSpacing = 16.dp) {
                 group.items.forEach { item ->
                     Box {
@@ -448,7 +454,7 @@ private fun FeatureItem(
                     ld.setDrawableByLayerId(R.id.settings_ic_foreground, layer)
                 }
             })
-        TinySpacer()
+        Spacer(modifier = Modifier.size(6.dp))
         AutoResizeText(
             modifier = Modifier,
             text = stringResource(id = item.titleRes),
@@ -460,7 +466,8 @@ private fun FeatureItem(
             ),
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.titleMedium,
-            color = themedTextColor(Color(ContextCompat.getColor(context, item.themeColor)))
+            color = themedTextColor(Color(ContextCompat.getColor(context, item.themeColor))),
+            lineHeight = 12.sp
         )
     }
 }

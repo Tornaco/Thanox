@@ -359,7 +359,7 @@ private fun MemStats(
             // For alignment.
             modifier = Modifier
                 .offset(y = 2.dp)
-                .size(10.dp)
+                .size(8.dp)
                 .clip(CircleShape)
                 .background(color)
         )
@@ -371,7 +371,7 @@ private fun MemStats(
                 modifier = Modifier,
                 textAlign = TextAlign.Center,
                 text = "${if (memUsage.memType == MemType.MEMORY) "Mem" else "Swap"} ${memUsage.memUsagePercent}%",
-                style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 9.5.sp),
                 color = Color(onSurfaceColor)
             )
             SmallSpacer()

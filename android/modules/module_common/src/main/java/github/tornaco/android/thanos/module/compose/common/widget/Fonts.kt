@@ -3,20 +3,17 @@ package github.tornaco.android.thanos.module.compose.common.widget
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-@OptIn(ExperimentalTextApi::class)
 @Composable
 fun fontFamilyProductSans() = FontFamily(
     Font(assetManager = LocalContext.current.assets, path = "fonts/google/ProductSansBold.ttf")
 )
 
-@OptIn(ExperimentalTextApi::class)
 @Composable
 fun fontFamilyJetBrainsMono() = FontFamily(
     Font(

@@ -56,6 +56,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -81,6 +82,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.module.compose.common.requireActivity
+import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
+import github.tornaco.android.thanos.module.compose.common.theme.ThanoxColorScheme
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
 import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
@@ -292,10 +295,17 @@ private fun NavContent(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        AllNewNavHeaderContent(
-            headerInfo = state.statusHeaderInfo
+        CompositionLocalProvider(
+            LocalThanoxColorSchema provides ThanoxColorScheme(
+                cardBgColor = Color(0xff64b5f6).copy(alpha = 0.08f)
+            )
         ) {
-            onHeaderClick()
+            NavHeaderContent(
+                modifier = Modifier.padding(16.dp),
+                headerInfo = state.statusHeaderInfo
+            ) {
+                onHeaderClick()
+            }
         }
 
         Features(state = state, onItemClick = onFeatureItemClick, createShortcut = createShortcut)

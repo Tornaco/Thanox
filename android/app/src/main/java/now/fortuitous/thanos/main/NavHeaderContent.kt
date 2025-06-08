@@ -99,85 +99,88 @@ private fun MainNavHeaderContent(
     headerInfo: StatusHeaderInfo,
     onHeaderClick: () -> Unit,
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(cardCornerSize))
-            .background(color = LocalThanoxColorSchema.current.cardBgColor)
-            .clickable {
-                onHeaderClick()
-            }
-            .padding(16.dp)
-    ) {
-        Row(
+    Column(modifier = modifier) {
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = if (headerInfo.swap.isEnabled) 0.dp else 12.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            CpuProgressBar(headerInfo)
-            if (headerInfo.swap.isEnabled) {
-                FatMemProgressBar(headerInfo)
-            } else {
-                MemProgressBar(headerInfo)
-            }
-        }
-    }
-
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(cardCornerSize))
-            .background(color = LocalThanoxColorSchema.current.cardBgColor)
-            .clickable {
-                onHeaderClick()
-            }
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+                .clip(RoundedCornerShape(cardCornerSize))
+                .background(color = LocalThanoxColorSchema.current.cardBgColor)
+                .clickable {
+                    onHeaderClick()
+                }
+                .padding(16.dp)
         ) {
             Row(
                 modifier = Modifier
-                    .wrapContentWidth()
-                    .animateContentSize(),
-                verticalAlignment = Alignment.Bottom
+                    .fillMaxWidth()
+                    .padding(horizontal = if (headerInfo.swap.isEnabled) 0.dp else 12.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                FilledTonalButton(onClick = { onHeaderClick() }) {
-                    Text(
-                        text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
-                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 16.5.sp),
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                    StandardSpacer()
-                    Badge(containerColor = MaterialTheme.colorScheme.primary) {
-                        AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
-                            Text(text = it)
+                CpuProgressBar(headerInfo)
+                if (headerInfo.swap.isEnabled) {
+                    FatMemProgressBar(headerInfo)
+                } else {
+                    MemProgressBar(headerInfo)
+                }
+            }
+        }
+
+        Box(
+            modifier = Modifier
+                .padding(top = 12.dp)
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(cardCornerSize))
+                .background(color = LocalThanoxColorSchema.current.cardBgColor)
+                .clickable {
+                    onHeaderClick()
+                }
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .animateContentSize(),
+                    verticalAlignment = Alignment.Bottom
+                ) {
+                    FilledTonalButton(onClick = { onHeaderClick() }) {
+                        Text(
+                            text = stringResource(id = github.tornaco.android.thanos.res.R.string.boost_status_running_apps),
+                            style = MaterialTheme.typography.titleMedium.copy(fontSize = 16.5.sp),
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                        StandardSpacer()
+                        Badge(containerColor = MaterialTheme.colorScheme.primary) {
+                            AnimatedTextContainer(text = "${headerInfo.runningAppsCount}") {
+                                Text(text = it)
+                            }
                         }
+                    }
+                }
+
+                StandardSpacer()
+
+                FlowRow(
+                    modifier = Modifier
+                        .weight(1f, fill = false)
+                        .padding(top = 4.dp)
+                ) {
+                    headerInfo.runningApps.forEach {
+                        AppIcon(
+                            Modifier
+                                .padding(2.dp)
+                                .size(if (headerInfo.runningApps.size > 6) 14.dp else 18.dp), it
+                        )
                     }
                 }
             }
 
-            StandardSpacer()
-
-            FlowRow(
-                modifier = Modifier
-                    .weight(1f, fill = false)
-                    .padding(top = 4.dp)
-            ) {
-                headerInfo.runningApps.forEach {
-                    AppIcon(
-                        Modifier
-                            .padding(2.dp)
-                            .size(if (headerInfo.runningApps.size > 6) 14.dp else 18.dp), it
-                    )
-                }
-            }
         }
-
     }
 }
 

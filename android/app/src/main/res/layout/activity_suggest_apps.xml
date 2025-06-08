@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:theme="?appbarTheme"
+
             android:background="?android:attr/windowBackground"
             app:elevation="@dimen/common_toolbar_elevation">
 
@@ -29,8 +29,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:popupTheme="?appbarPopupTheme"
-                app:theme="?toolbarTheme"
+
+
                 app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
                 app:titleTextColor="?attr/colorControlNormal">
 

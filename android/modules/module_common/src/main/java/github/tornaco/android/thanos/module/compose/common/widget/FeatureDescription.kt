@@ -30,7 +30,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -42,8 +45,6 @@ import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import github.tornaco.android.thanos.module.common.R
-import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 
 class FeatureDescriptionAndroidView @JvmOverloads constructor(
     context: Context,
@@ -79,25 +80,26 @@ class FeatureDescriptionAndroidView @JvmOverloads constructor(
 
 @Composable
 fun FeatureDescription(modifier: Modifier = Modifier, text: String, close: () -> Unit) {
-    val primaryColor = getColorAttribute(R.attr.appCardBackground)
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(24.dp))
+            .background(color = Color(0XFFFFECB3))
+            .padding(16.dp)
+    ) {
 
-    Box(modifier = modifier
-        .fillMaxWidth()
-        .clip(RoundedCornerShape(24.dp))
-        .background(color = Color(0XFFFFECB3))
-        .padding(16.dp)) {
-
-        Text(modifier = Modifier
-            .align(Alignment.CenterStart)
-            .padding(end = 32.dp),
+        Text(
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .padding(end = 32.dp),
             text = text,
-            fontSize = 10.sp)
+            fontSize = 10.sp
+        )
 
         FilledTonalIconButton(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .size(24.dp),
-            colors = IconButtonDefaults.filledTonalIconButtonColors(Color(primaryColor)),
             onClick = { close() }) {
             Icon(
                 modifier = Modifier

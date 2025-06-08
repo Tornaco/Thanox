@@ -12,7 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:theme="?appbarTheme"
             android:background="?android:attr/windowBackground"
             app:elevation="@dimen/common_toolbar_elevation">
 
@@ -20,8 +19,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:popupTheme="?appbarPopupTheme"
-                app:theme="?toolbarTheme"
+
+
                 app:titleTextColor="?attr/colorControlNormal">
 
             </androidx.appcompat.widget.Toolbar>
@@ -32,8 +31,7 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/appbar"
-             />
+            android:layout_below="@+id/appbar" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/app_config"
@@ -44,7 +42,7 @@
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/common_view_margin_default"
             android:text="@string/feature_title_apps_manager"
-            app:icon="@drawable/module_common_ic_settings_fill"/>
+            app:icon="@drawable/module_common_ic_settings_fill" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/stop_app"

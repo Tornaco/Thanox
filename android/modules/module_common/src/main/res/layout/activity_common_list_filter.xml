@@ -25,12 +25,12 @@
             android:layout_alignParentTop="true"
             android:background="?android:attr/windowBackground"
             android:fitsSystemWindows="false"
-            android:theme="?appbarTheme"
+
             app:elevation="@dimen/common_toolbar_elevation">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/toolbar_layout"
-                style="?collapsingToolbarTheme"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?android:attr/windowBackground"
@@ -51,8 +51,8 @@
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
-                        app:popupTheme="?appbarPopupTheme"
-                        app:theme="?toolbarTheme"
+
+
                         app:titleTextAppearance="@style/ToolbarCollapsedTitleTextAppearance"
                         app:titleTextColor="?attr/colorControlNormal"
                         tools:title="Title of Toolbar" />

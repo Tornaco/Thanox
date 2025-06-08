@@ -43,8 +43,8 @@
             android:layout_above="@id/editor_actions_toolbar_symbols2"
             android:gravity="center"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="?appbarPopupTheme"
-            app:theme="?toolbarTheme" />
+
+             />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/editor_actions_toolbar_symbols2"
@@ -53,8 +53,8 @@
             android:layout_above="@id/editor_actions_toolbar_symbols3"
             android:gravity="center"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="?appbarPopupTheme"
-            app:theme="?toolbarTheme" />
+
+             />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/editor_actions_toolbar_symbols3"
@@ -63,7 +63,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="?appbarPopupTheme"
-            app:theme="?toolbarTheme" />
+
+             />
     </RelativeLayout>
 </layout>

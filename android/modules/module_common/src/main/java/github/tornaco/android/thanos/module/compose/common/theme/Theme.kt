@@ -22,7 +22,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import com.google.accompanist.themeadapter.appcompat.AppCompatTheme
 import github.tornaco.android.thanos.core.util.OsUtils
 
 val LightColors = lightColorScheme(
@@ -138,7 +137,7 @@ fun ThanoxExpressiveTheme(
         )
 
         else -> ThanoxColorScheme(
-            cardBgColor = Color.White,
+            cardBgColor = Color(0xeaffffff),
         )
     }
 
@@ -149,9 +148,7 @@ fun ThanoxExpressiveTheme(
             typography = Typography,
             shapes = shapes,
         ) {
-            AppCompatTheme(
-                content = content,
-            )
+            content()
         }
     }
 }

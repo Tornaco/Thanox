@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_alignParentTop="true"
-            app:popupTheme="?appbarPopupTheme"
-            app:theme="?toolbarTheme"
+
+
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:titleTextColor="?attr/colorControlNormal">
 

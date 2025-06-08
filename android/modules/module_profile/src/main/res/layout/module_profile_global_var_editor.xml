@@ -17,7 +17,7 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="?appbarTheme"
+
             android:background="?android:attr/windowBackground"
             app:elevation="@dimen/common_toolbar_elevation"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -27,8 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="?appbarPopupTheme"
-                app:theme="?toolbarTheme"
+
+
                 app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
                 app:titleTextColor="?attr/colorControlNormal">
 
@@ -65,8 +65,8 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="?appbarPopupTheme"
-            app:theme="?toolbarTheme">
+
+            >
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/badge1"

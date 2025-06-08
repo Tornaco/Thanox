@@ -350,7 +350,7 @@ private fun FeatureGroup(
             Text(
                 text = stringResource(id = group.titleRes),
                 fontSize = 15.sp,
-                fontWeight = FontWeight.W600,
+                fontWeight = FontWeight.W500,
                 color = themedTextColor(MaterialTheme.colorScheme.primary)
             )
             StandardSpacer()
@@ -448,7 +448,7 @@ private fun FeatureItem(
                     ld.setDrawableByLayerId(R.id.settings_ic_foreground, layer)
                 }
             })
-        MediumSpacer()
+        TinySpacer()
         AutoResizeText(
             modifier = Modifier,
             text = stringResource(id = item.titleRes),

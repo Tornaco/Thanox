@@ -316,6 +316,11 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    public long fastGetProcessPss(int pid) {
+        return server.fastGetProcessPss(pid);
+    }
+
+    @SneakyThrows
     public boolean isStartBlockEnabled() {
         return server.isStartBlockEnabled();
     }

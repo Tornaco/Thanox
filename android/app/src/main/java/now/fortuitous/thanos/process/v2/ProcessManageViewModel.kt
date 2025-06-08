@@ -50,6 +50,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import now.fortuitous.thanos.process.Stopwatch
 import java.text.Collator
 import java.util.Locale
 import javax.inject.Inject
@@ -115,33 +116,55 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
             withContext(Dispatchers.IO) {
                 updateLoadingState(true)
 
-                val filterPackages: List<Pkg> = state.value.selectedAppSetFilterItem?.let {
+                val stopwatch = Stopwatch()
+
+                val filterPackages: Set<Pkg> = state.value.selectedAppSetFilterItem?.let {
                     pkgManager.getPackageSetById(
                         it.id,
                         true,
                         true
                     ).pkgList.filterNot { pkg -> pkg.pkgName == BuildProp.THANOS_APP_PKG_NAME }
-                } ?: emptyList()
+                }?.toSet() ?: emptySet()
+                stopwatch.step("Load filterPackages")
 
                 val runningServices = activityManager.getRunningServiceLegacy(Int.MAX_VALUE)
+                    .filter { service ->
+                        filterPackages.contains(Pkg.from(service.clientPackage, service.uid))
+                    }
+                stopwatch.step("Load runningServices")
                 val runningAppProcess =
-                    activityManager.runningAppProcessLegacy.filter { it.pkgList != null && it.pkgList.isNotEmpty() }
+                    activityManager.runningAppProcessLegacy.filter {
+                        it.pkgList != null && it.pkgList.isNotEmpty() && filterPackages.contains(
+                            Pkg.from(it.pkgList[0], it.uid)
+                        )
+                    }
+                stopwatch.step("Load runningAppProcess")
                 val runningPackages =
-                    runningAppProcess.map { Pkg.from(it.pkgList[0], it.uid) }.distinct()
+                    runningAppProcess.map { Pkg.from(it.pkgList[0], it.uid) }
+                        .filter {
+                            filterPackages.contains(it)
+                        }
+                        .distinct()
+                stopwatch.step("Map runningPackages")
 
                 val runningAppStates =
                     runningAppProcess.groupBy { Pkg.from(it.pkgList[0], it.uid) }.map { entry ->
+                        val appStopwatch = Stopwatch("Stopwatch-${entry.key.pkgName}")
                         val pkg: Pkg = entry.key
                         val runningProcessStates = entry.value.map { process ->
                             val processPss =
                                 activityManager.getProcessPss(intArrayOf(process.pid)).sum()
+                            appStopwatch.step("Load processPss: $processPss")
                             RunningProcessState(
                                 pkg = pkg,
                                 process = process,
                                 runningServices = runningServices.filter { service ->
                                     service.pid == process.pid
                                 }.map { runningServiceInfo ->
+                                    val serviceWatch =
+                                        Stopwatch("Stopwatch-Service")
                                     val label = getServiceLabel(runningServiceInfo)
+                                    serviceWatch.step("Load getServiceLabel")
                                     val clientLabel =
                                         if (runningServiceInfo.clientPackage != null && runningServiceInfo.clientLabel > 0) {
                                             kotlin.runCatching {
@@ -155,14 +178,19 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                                         } else {
                                             null
                                         }
+                                    serviceWatch.step("Load clientLabel")
                                     val lcRule =
                                         runningServiceInfo?.service?.let { name ->
                                             getServiceRule(
                                                 name
                                             ).takeIf { it != fallbackRule }
                                         }
+                                    serviceWatch.step("Load lcRule")
                                     val blockerRule =
                                         runningServiceInfo?.service?.className?.classNameToRule()
+                                    serviceWatch.step("Load blockerRule")
+                                    serviceWatch.log()
+
                                     RunningService(
                                         running = runningServiceInfo,
                                         serviceLabel = label,
@@ -172,22 +200,26 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                                     )
                                 },
                                 sizeStr = Formatter.formatShortFileSize(context, processPss * 1024),
+                                processPss = processPss
                             )
                         }.sortedByDescending { it.runningServices.size }.sortedBy { !it.isMain }
+                        appStopwatch.step("Load runningProcessStates.")
 
                         val isAllProcessCached =
                             entry.value.all { it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_CACHED }
-                        val totalPss =
-                            activityManager.getProcessPss(entry.value.map { it.pid }.toIntArray())
-                                .sum()
+                        val totalPss = runningProcessStates.sumOf { it.processPss }
+                        appStopwatch.step("Load totalPss.")
 
                         val runningTimeMillis = runningProcessStates.map {
                             activityManager.getProcessStartTime(it.process.pid)
                         }.filter { it > 0L }.minOrNull()?.let {
                             SystemClock.elapsedRealtime() - it
                         }
+                        appStopwatch.step("Load runningTimeMillis.")
 
                         val appInfo = pkgManager.getAppInfo(pkg)
+                        appStopwatch.step("Load appInfo.")
+                        appStopwatch.log()
                         appInfo?.let { app ->
                             RunningAppState(
                                 appInfo = app,
@@ -203,6 +235,7 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                     }.filterNotNull().filter {
                         filterPackages.contains(Pkg.fromAppInfo(it.appInfo))
                     }.sortedByDescending { it.totalPss }
+                stopwatch.step("Group runningAppProcess")
 
                 val runningAppStatesGroupByCached =
                     runningAppStates.groupBy { it.allProcessIsCached }
@@ -214,6 +247,8 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                     }.sortedWith { o1, o2 ->
                         Collator.getInstance(Locale.CHINESE).compare(o1.appLabel, o2.appLabel)
                     }
+                stopwatch.step("Filter notRunningApps")
+                stopwatch.log()
 
                 _state.value = _state.value.copy(
                     isLoading = false,

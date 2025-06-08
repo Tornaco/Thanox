@@ -49,6 +49,7 @@ data class RunningProcessState(
     val process: RunningAppProcessInfoCompat,
     val runningServices: List<RunningService>,
     val sizeStr: String,
+    val processPss: Long,
 ) : Parcelable {
     @IgnoredOnParcel
     var isStopped by mutableStateOf(false)

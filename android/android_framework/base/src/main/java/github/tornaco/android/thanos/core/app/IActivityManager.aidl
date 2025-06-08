@@ -250,4 +250,6 @@ interface IActivityManager {
     List<Pkg> getAppStabilityUpKeepExceptions();
     void addAppStabilityUpKeepExceptions(in List<Pkg> pkgs);
     void removeAppStabilityUpKeepExceptions(in List<Pkg> pkgs);
+
+    long fastGetProcessPss(int pid);
 }

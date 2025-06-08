@@ -15,6 +15,8 @@
  *
  */
 
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package now.fortuitous.thanos.start.chart
 
 import androidx.compose.foundation.background
@@ -31,11 +33,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearWavyProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -51,8 +53,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
+import github.tornaco.android.thanos.module.compose.common.widget.DropdownButtonLayout
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.pie.CenterText
 import github.tornaco.android.thanos.module.compose.common.widget.pie.ChartItem
@@ -115,7 +117,7 @@ fun StartChartContent(
             .padding(paddings)
     ) {
         if (startChartState.isLoading) {
-            LinearProgressIndicator(
+            LinearWavyProgressIndicator(
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -180,15 +182,17 @@ fun FilterDropDown(
             .padding(16.dp)
             .wrapContentSize(Alignment.TopStart)
     ) {
-        FilledTonalButton(onClick = { expanded = true }) {
-            Text(text = stringResource(id = selectedCategory.labelRes))
-        }
+        DropdownButtonLayout(
+            text = stringResource(id = selectedCategory.labelRes),
+            isMenuOpen = expanded,
+            open = { expanded = true }
+        )
         DropdownMenu(
             modifier = Modifier.background(MaterialTheme.colorScheme.surface),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            Category.values().forEach { category ->
+            Category.entries.forEach { category ->
                 DropdownMenuItem(onClick = {
                     onCategorySelected(category)
                     expanded = false

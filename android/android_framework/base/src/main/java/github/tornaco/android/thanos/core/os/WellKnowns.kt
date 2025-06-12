@@ -204,6 +204,13 @@ object Classes {
             this
         )
 
+    @Throws(ClassNotFoundException::class)
+    fun ClassLoader.shortcutServiceLocalServiceClass(): Class<*> =
+        XposedHelpers.findClass(
+            "com.android.server.pm.ShortcutService\$LocalService",
+            this
+        )
+
     fun Class<*>.activityStoppedMethod(): Method? {
         return declaredMethods.firstOrNull { it.name == Methods.activityStopped || it.name == Methods.activityStoppedLocked }
     }

@@ -128,16 +128,10 @@ class ProcessManageViewModel @Inject constructor(@ApplicationContext private val
                 stopwatch.step("Load filterPackages")
 
                 val runningServices = activityManager.getRunningServiceLegacy(Int.MAX_VALUE)
-                    .filter { service ->
-                        filterPackages.contains(Pkg.from(service.clientPackage, service.uid))
-                    }
                 stopwatch.step("Load runningServices")
                 val runningAppProcess =
-                    activityManager.runningAppProcessLegacy.filter {
-                        it.pkgList != null && it.pkgList.isNotEmpty() && filterPackages.contains(
-                            Pkg.from(it.pkgList[0], it.uid)
-                        )
-                    }
+                    activityManager.runningAppProcessLegacy
+                        .filter { it.pkgList != null && it.pkgList.isNotEmpty() }
                 stopwatch.step("Load runningAppProcess")
                 val runningPackages =
                     runningAppProcess.map { Pkg.from(it.pkgList[0], it.uid) }

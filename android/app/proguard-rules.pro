@@ -397,3 +397,4 @@
 -dontwarn com.android.internal.annotations.VisibleForTesting
 -dontwarn lombok.Generated
 -dontwarn android.app.ActivityManagerNative
+-dontwarn android.content.pm.ShortcutQueryWrapper

@@ -197,6 +197,12 @@ object Classes {
         "com.android.server.statusbar.StatusBarManagerService", this
     )
 
+    @Throws(ClassNotFoundException::class)
+    fun ClassLoader.launcherAppsServiceImplClass(): Class<*> =
+        XposedHelpers.findClass(
+            "com.android.server.pm.LauncherAppsService\$LauncherAppsImpl",
+            this
+        )
 
     fun Class<*>.activityStoppedMethod(): Method? {
         return declaredMethods.firstOrNull { it.name == Methods.activityStopped || it.name == Methods.activityStoppedLocked }

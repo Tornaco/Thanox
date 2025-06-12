@@ -142,4 +142,7 @@ interface IPkgManager {
     boolean isOneKeyBoostFreezeAppEnabled();
 
     Bitmap getAppIcon(String pkgName, int pkgUid);
+
+    boolean isPkgShortcutsBlockerEnabled(in Pkg pkg);
+    void setPkgShortcutsBlockerEnabled(in Pkg pkg, boolean enable);
 }

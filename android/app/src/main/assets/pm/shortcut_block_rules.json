@@ -1,0 +1,16 @@
+{
+  "commonRules": [
+    {
+      "labelRegex": "Regex1"
+    },
+    {
+      "labelRegex": "Regex2"
+    }
+  ],
+  "appRules": [
+    {
+      "pkgName": "com.xx.xx",
+      "label": "Label"
+    }
+  ]
+}

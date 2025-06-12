@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.os.UserHandle;
 
 import java.util.ArrayList;
@@ -573,5 +574,15 @@ public class PackageManager {
     @SneakyThrows
     public Bitmap getAppIcon(String pkgName, int pkgUid) {
         return pm.getAppIcon(pkgName, pkgUid);
+    }
+
+    @SneakyThrows
+    public void setPkgShortcutsBlockerEnabled(Pkg pkg, boolean enable) {
+        pm.setPkgShortcutsBlockerEnabled(pkg, enable);
+    }
+
+    @SneakyThrows
+    public boolean isPkgShortcutsBlockerEnabled(Pkg pkg) {
+        return pm.isPkgShortcutsBlockerEnabled(pkg);
     }
 }

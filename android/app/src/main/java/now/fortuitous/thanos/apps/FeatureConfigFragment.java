@@ -96,6 +96,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         bindMiscPrefs();
         bindLaunchOtherAppPref();
         bindSensorOffPref();
+        bindShortcutBlockOffPref();
     }
 
     private void bindAppInfoPref() {
@@ -397,6 +398,23 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 });
                 return true;
             });
+            return null;
+        });
+    }
+
+    private void bindShortcutBlockOffPref() {
+        ContextExtKt.withThanos(requireContext(), thanos -> {
+
+            SwitchPreferenceCompat enablePref = findPreference(getString(R.string.key_shortcut_block));
+
+            boolean isEnabled = thanos.getPkgManager().isPkgShortcutsBlockerEnabled(Pkg.fromAppInfo(appInfo));
+            Objects.requireNonNull(enablePref).setChecked(isEnabled);
+            enablePref.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean enable = (boolean) newValue;
+                thanos.getPkgManager().setPkgShortcutsBlockerEnabled(Pkg.fromAppInfo(appInfo), enable);
+                return true;
+            });
+
             return null;
         });
     }

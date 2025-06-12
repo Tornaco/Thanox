@@ -1285,6 +1285,9 @@
     <string name="pre_title_resident">後台保護</string>
     <string name="pre_summary_resident">盡量阻止該app被LMK清理</string>
 
+    <string name="pre_title_shortcut_block">净化快捷方式</string>
+    <string name="pre_summary_shortcut_block">移除不必要的桌面动态快捷方式</string>
+
     <string name="pre_title_redaction_notification">通知編輯</string>
     <string name="pre_summary_redaction_notification">使用自訂標題和文字覆蓋應用程式通知</string>
     <string name="pre_title_redaction_notification_title">標題</string>

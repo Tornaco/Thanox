@@ -1234,6 +1234,9 @@ Compatibility notice: If the default permission management function is not compa
     <string name="pre_title_resident">Resident app</string>
     <string name="pre_summary_resident">Prevent this app to be kill by LMK</string>
 
+    <string name="pre_title_shortcut_block">Shortcut trim</string>
+    <string name="pre_summary_shortcut_block">Remove useless dynamic Launcher shortcuts</string>
+
     <string name="pre_title_redaction_notification">Notification Redaction</string>
     <string name="pre_summary_redaction_notification">Override app notification with custom Title and Text</string>
     <string name="pre_title_redaction_notification_title">Title</string>

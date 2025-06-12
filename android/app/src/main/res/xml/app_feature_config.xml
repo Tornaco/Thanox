@@ -206,5 +206,11 @@
             app:key="@string/key_app_feature_config_resident"
             app:summary="@string/pre_summary_resident"
             app:title="@string/pre_title_resident" />
+
+        <SwitchPreferenceCompat
+            android:persistent="false"
+            app:key="@string/key_shortcut_block"
+            app:summary="@string/pre_summary_shortcut_block"
+            app:title="@string/pre_title_shortcut_block" />
     </PreferenceCategory>
 </PreferenceScreen>

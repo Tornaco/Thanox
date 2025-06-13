@@ -218,6 +218,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
+            android:layout_marginBottom="@dimen/common_view_margin_default"
             android:orientation="vertical">
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

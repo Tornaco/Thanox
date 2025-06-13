@@ -26,7 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.button.MaterialSplitButton;
-import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.common.collect.Lists;
 
@@ -88,17 +87,13 @@ public class FieldsTemplateListActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupFab(ExtendedFloatingActionButton fab) {
-        fab.setText(null);
-        fab.setIconResource(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill);
-        fab.show();
-        fab.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onRequestAddTemplate();
-                    }
-                });
+    protected void onSetupFab(ExtendedFloatingActionButton fab1, ExtendedFloatingActionButton fab2) {
+        super.onSetupFab(fab1, fab2);
+        fab1.setText(null);
+        fab1.setIconResource(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill);
+        fab1.show();
+        fab1.setOnClickListener(
+                v -> onRequestAddTemplate());
     }
 
     private void onRequestAddTemplate() {

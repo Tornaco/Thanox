@@ -90,9 +90,10 @@ public class AppPickerActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupFab(ExtendedFloatingActionButton fab) {
-        fab.show();
-        fab.setOnClickListener(v -> {
+    protected void onSetupFab(ExtendedFloatingActionButton fab1, ExtendedFloatingActionButton fab2) {
+        super.onSetupFab(fab1, fab2);
+        fab1.show();
+        fab1.setOnClickListener(v -> {
             setResult(Activity.RESULT_OK, new Intent().putParcelableArrayListExtra(
                     "apps",
                     Lists.newArrayList(selectedAppInfoMap.values())));

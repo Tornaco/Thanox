@@ -117,7 +117,7 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
                     }
                 });
 
-        onSetupFab(binding.fab);
+        onSetupFab(binding.fab1, binding.fab2);
 
         onSetupDescription(binding.featureDescContainer);
     }
@@ -285,8 +285,9 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
         chipContainer.setVisibility(View.GONE);
     }
 
-    protected void onSetupFab(ExtendedFloatingActionButton fab) {
-        fab.hide();
+    protected void onSetupFab(ExtendedFloatingActionButton fab1, ExtendedFloatingActionButton fab2) {
+        fab1.hide();
+        fab2.hide();
     }
 
     protected void onSetupDescription(CommonFeatureDescriptionBarLayoutBinding featureDescContainer) {

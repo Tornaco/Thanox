@@ -73,7 +73,7 @@ class PrebuiltFeatureLauncher(
                 }
 
                 PrebuiltFeatureIds.ID_APPS_MANAGER -> {
-                    now.fortuitous.thanos.apps.SuggestedAppsActivity.start(context)
+                    now.fortuitous.thanos.apps.AppsManageActivity.start(context)
                 }
 
                 PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {

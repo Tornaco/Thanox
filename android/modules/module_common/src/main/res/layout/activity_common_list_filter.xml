@@ -120,7 +120,6 @@
                     android:id="@+id/swipe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     app:refreshing="@{viewModel.isDataLoading}">
 
                     <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
@@ -128,10 +127,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:clipChildren="true"
-                        android:clipToPadding="true"
-                        android:listModels="@{viewModel.listModels}" />
-
-
+                        android:clipToPadding="false"
+                        android:listModels="@{viewModel.listModels}"
+                        android:paddingBottom="100dp" />
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             </LinearLayout>
 
@@ -216,17 +214,35 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fab"
-            style="@style/FloatingActionButtonStyle"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/common_view_margin_default"
-            android:text="@string/common_fab_title_done"
-            app:icon="@drawable/module_common_ic_check_fill_white"
-            tools:ignore="RelativeOverlap" />
+            android:layout_gravity="end|bottom"
+            android:orientation="vertical">
 
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fab2"
+                style="@style/FloatingActionButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginHorizontal="@dimen/common_view_margin_default"
+                android:text="@string/common_fab_title_done"
+                app:icon="@drawable/module_common_ic_check_fill_white"
+                tools:ignore="RelativeOverlap" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fab1"
+                style="@style/FloatingActionButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/common_view_margin_default"
+                android:text="@string/common_fab_title_done"
+                app:icon="@drawable/module_common_ic_check_fill_white"
+                tools:ignore="RelativeOverlap" />
+
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

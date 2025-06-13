@@ -30,8 +30,6 @@ import androidx.annotation.Nullable;
 
 import com.elvishew.xlog.XLog;
 import com.google.android.material.button.MaterialSplitButton;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -105,11 +103,6 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
     @Override
     protected int getTitleRes() {
         return github.tornaco.android.thanos.res.R.string.title_package_sets;
-    }
-
-    @Override
-    protected void onSetupFab(ExtendedFloatingActionButton fab) {
-        fab.hide();
     }
 
     @Override

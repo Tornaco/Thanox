@@ -110,15 +110,16 @@ public class PackageSetEditorActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    protected void onSetupFab(ExtendedFloatingActionButton fab) {
+    protected void onSetupFab(ExtendedFloatingActionButton fab1, ExtendedFloatingActionButton fab2) {
+        super.onSetupFab(fab1, fab2);
         if (packageSet.isPrebuilt()) {
-            fab.hide();
+            fab1.hide();
             return;
         }
-        fab.setText(null);
-        fab.setIconResource(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill);
-        fab.show();
-        fab.setOnClickListener(
+        fab1.setText(null);
+        fab1.setIconResource(github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_add_fill);
+        fab1.show();
+        fab1.setOnClickListener(
                 v -> {
                     List<Pkg> exclude = packageSet.getPkgList();
                     AppPickerActivity.start(thisActivity(), REQ_PICK_APPS, exclude);

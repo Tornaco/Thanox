@@ -21,13 +21,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemClickListener;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
@@ -50,6 +50,15 @@ public class AppsManageActivity extends CommonAppListFilterActivity {
     @Override
     protected int getTitleRes() {
         return github.tornaco.android.thanos.res.R.string.activity_title_apps_manager;
+    }
+
+    @Override
+    protected void onSetupFab(ExtendedFloatingActionButton fab1, ExtendedFloatingActionButton fab2) {
+        super.onSetupFab(fab1, fab2);
+        fab1.show();
+        fab1.setText(github.tornaco.android.thanos.res.R.string.title_package_sets);
+        fab1.setIconResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_folder_2_line);
+        fab1.setOnClickListener(v -> PackageSetListActivity.start(thisActivity()));
     }
 
     @NonNull

@@ -19,52 +19,91 @@ package github.tornaco.android.thanos.module.compose.common.widget
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import github.tornaco.android.thanos.module.common.R
-import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
+import androidx.compose.ui.unit.sp
+import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
+
 
 @Composable
 fun SwitchBar(
+    modifier: Modifier = Modifier,
     isChecked: Boolean,
-    onCheckChange: (Boolean) -> Unit,
-    title: String,
-    modifier: Modifier = Modifier
+    title: String? = null,
+    tip: String? = null,
+    onCheckChange: (Boolean) -> Unit
 ) {
-    val bgColor = Color(getColorAttribute(attr = R.attr.switchBarBackground))
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 72.dp)
+            .heightIn(min = 64.dp)
             .clip(
                 RoundedCornerShape(32.dp)
             )
             .clickableWithRipple {
                 onCheckChange(!isChecked)
             }
-            .background(color = bgColor)
-            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .background(color = ColorDefaults.backgroundSurfaceColor(4.dp))
+            .padding(horizontal = 12.dp, vertical = 12.dp)
     ) {
-        Text(
+        val tipDialogState = rememberTipDialogState(
+            title = title ?: "",
+            tip = tip.orEmpty()
+        )
+        tip?.let {
+            TipDialog(state = tipDialogState)
+        }
+        Row(
             modifier = Modifier
                 .padding(start = 16.dp)
                 .align(Alignment.CenterStart),
-            text = stringResource(
-                id = github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
-                title
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = title?.let {
+                    stringResource(
+                        id = github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                        it
+                    )
+                } ?: if (isChecked) {
+                    stringResource(id = github.tornaco.android.thanos.res.R.string.on)
+                } else {
+                    stringResource(id = github.tornaco.android.thanos.res.R.string.off)
+                },
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.W500,
+                    fontSize = 18.sp
+                )
             )
-        )
-        Switch(
+            tip?.let {
+                IconButton(onClick = {
+                    tipDialogState.show()
+                }) {
+                    Icon(
+                        painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_information_line),
+                        contentDescription = "Info"
+                    )
+                }
+            }
+        }
+        androidx.compose.material3.Switch(
             modifier = Modifier
                 .padding(end = 16.dp)
                 .align(Alignment.CenterEnd),
@@ -72,5 +111,16 @@ fun SwitchBar(
             onCheckedChange = {
                 onCheckChange(it)
             })
+    }
+}
+
+
+@Preview
+@Composable
+private fun SwitchBarPreview() {
+    Column {
+        SwitchBar(isChecked = true, onCheckChange = {})
+        StandardSpacer()
+        SwitchBar(isChecked = false, onCheckChange = {})
     }
 }

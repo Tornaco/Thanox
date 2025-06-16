@@ -2,10 +2,7 @@ package github.tornaco.android.thanos.module.compose.common.widget
 
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 
 @Composable
@@ -80,17 +77,3 @@ fun <T> rememberMenuDialogState(
         MenuDialogState(title, message, menuItems, onItemSelected)
     }
 }
-
-open class CommonDialogState {
-    private var _isShow by mutableStateOf(false)
-    val isShowing get() = _isShow
-
-    fun show() {
-        _isShow = true
-    }
-
-    fun dismiss() {
-        _isShow = false
-    }
-}
-

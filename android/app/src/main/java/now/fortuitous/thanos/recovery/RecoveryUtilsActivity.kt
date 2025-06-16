@@ -19,15 +19,15 @@ import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
+import github.tornaco.android.thanos.module.compose.common.widget.ProgressDialog
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
+import github.tornaco.android.thanos.module.compose.common.widget.rememberProgressDialogState
 import github.tornaco.android.thanos.res.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import tornaco.apps.thanox.base.ui.ProgressDialog
-import tornaco.apps.thanox.base.ui.rememberProgressDialogState
 import tornaco.apps.thanox.util.ToastUtils
 
 @AndroidEntryPoint
@@ -56,7 +56,8 @@ class RecoveryUtilsActivity : ComposeThemeActivity() {
         ProgressDialog(progressDialogState)
 
         val scope = rememberCoroutineScope()
-        ConfirmDialog(title = stringResource(R.string.feature_title_recovery_tools_component_settings),
+        ConfirmDialog(
+            title = stringResource(R.string.feature_title_recovery_tools_component_settings),
             state = restoreAllAppComponentSettingsDialog,
             data = stringResource(R.string.feature_title_recovery_tools_component_settings_summary),
             messageHint = {

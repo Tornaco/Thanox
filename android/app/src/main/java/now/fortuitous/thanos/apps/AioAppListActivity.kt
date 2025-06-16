@@ -6,6 +6,7 @@ import github.tornaco.android.thanos.common.AppListItemDescriptionComposer
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.android.thanos.module.compose.common.infra.AppBarConfig
 import github.tornaco.android.thanos.module.compose.common.infra.AppItemConfig
 import github.tornaco.android.thanos.module.compose.common.infra.AppUiModel
 import github.tornaco.android.thanos.module.compose.common.infra.BaseAppListFilterActivity
@@ -13,8 +14,12 @@ import github.tornaco.android.thanos.module.compose.common.infra.BaseAppListFilt
 import github.tornaco.android.thanos.module.compose.common.infra.FabItemConfig
 import github.tornaco.android.thanos.module.compose.common.infra.SwitchBarConfig
 import github.tornaco.android.thanos.res.R
+import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
+import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
+import now.fortuitous.thanos.start.StartRuleActivity
+import now.fortuitous.thanos.start.chart.ComposeStartChartActivity
 
 class AioAppListActivity : BaseAppListFilterActivity() {
     companion object {
@@ -37,10 +42,12 @@ class AioAppListActivity : BaseAppListFilterActivity() {
 
     private val appsManagerConfig
         get() = BaseAppListFilterContainerConfig(
-            title = {
-                it.getString(R.string.activity_title_apps_manager)
-            },
             featureId = "AppsManageActivity2",
+            appBarConfig = AppBarConfig(
+                title = {
+                    it.getString(R.string.activity_title_apps_manager)
+                },
+            ),
             appItemConfig = AppItemConfig(
                 loader = { context, pkgSetId ->
                     val composer = AppListItemDescriptionComposer(thisActivity())
@@ -83,13 +90,45 @@ class AioAppListActivity : BaseAppListFilterActivity() {
 
     private val bgStartConfig
         get() = BaseAppListFilterContainerConfig(
-            title = {
-                it.getString(R.string.activity_title_start_restrict)
-            },
             featureId = "bgStart",
             featureDescription = {
                 it.getString(R.string.feature_desc_start_restrict)
             },
+            appBarConfig = AppBarConfig(
+                title = {
+                    it.getString(R.string.activity_title_start_restrict)
+                },
+                actions = { context ->
+                    listOf(
+                        AppBarConfig.AppBarAction(
+                            title = context.getString(R.string.menu_title_start_restrict_charts),
+                            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_line_chart_fill,
+                            onClick = {
+                                withSubscriptionStatus(this) { subscribed: Boolean ->
+                                    if (subscribed) {
+                                        ComposeStartChartActivity.Starter.start(thisActivity())
+                                    } else {
+                                        showDonateIntroDialog(thisActivity())
+                                    }
+                                }
+                            }
+                        ),
+                        AppBarConfig.AppBarAction(
+                            title = context.getString(R.string.menu_title_rules),
+                            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_list_2_line,
+                            onClick = {
+                                withSubscriptionStatus(this) { subscribed: Boolean ->
+                                    if (subscribed) {
+                                        StartRuleActivity.start(this)
+                                    } else {
+                                        showDonateIntroDialog(thisActivity())
+                                    }
+                                }
+                            },
+                        )
+                    )
+                }
+            ),
             switchBarConfig = SwitchBarConfig(
                 title = { context, _ ->
                     context.getString(R.string.activity_title_start_restrict)

@@ -34,7 +34,7 @@ data class AppListUiState(
 class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val context: Context) :
     StateViewModel<AppListUiState>(initState = { AppListUiState() }) {
     private var config: BaseAppListFilterContainerConfig = BaseAppListFilterContainerConfig(
-        title = { "" },
+        appBarConfig = AppBarConfig(title = { "" }),
         featureId = "",
         appItemConfig = AppItemConfig(loader = { _, _ -> emptyList() })
     )

@@ -30,13 +30,24 @@ abstract class BaseAppListFilterActivity : ComposeThemeActivity() {
 }
 
 data class BaseAppListFilterContainerConfig(
-    val title: (Context) -> String,
     val featureId: String,
-    val featureDescription: (Context) -> String? = { null },
+    val appBarConfig: AppBarConfig,
     val appItemConfig: AppItemConfig,
+    val featureDescription: (Context) -> String? = { null },
     val fabs: List<FabItemConfig> = emptyList(),
-    val switchBarConfig: SwitchBarConfig? = null
+    val switchBarConfig: SwitchBarConfig? = null,
 )
+
+data class AppBarConfig(
+    val title: (Context) -> String,
+    val actions: (Context) -> List<AppBarAction> = { emptyList() }
+) {
+    data class AppBarAction(
+        val title: String,
+        val icon: Int,
+        val onClick: () -> Unit,
+    )
+}
 
 data class FabItemConfig(
     val title: (Context) -> String,

@@ -21,9 +21,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.AppBarRow
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -41,6 +43,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -65,7 +68,7 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
     LaunchedEffect(Unit) { vm.installIn(config) }
 
     val context = LocalContext.current
-    val title = remember { config.title(context) }
+    val title = remember { config.appBarConfig.title(context) }
     val searchBarState = rememberSearchBarState()
     LaunchedEffect(searchBarState) {
         snapshotFlow { searchBarState.keyword }
@@ -89,13 +92,46 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
             finish()
         },
         actions = {
-            IconButton(onClick = {
-                searchBarState.showSearchBar()
+            val customActions = remember(config.appBarConfig) {
+                config.appBarConfig.actions(context)
+            }
+            val sizeClass =
+                androidx.compose.material3.adaptive.currentWindowAdaptiveInfo().windowSizeClass
+            // Material guidelines state 3 items max in compact, and 5 items max elsewhere.
+            // To test this, try a resizable emulator, or a phone in landscape and portrait orientation.
+            val maxItemCount =
+                if (sizeClass.minWidthDp >= androidx.window.core.layout.WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) {
+                    5
+                } else {
+                    3
+                }
+            AppBarRow(maxItemCount = maxItemCount, overflowIndicator = {
+                IconButton(onClick = { it.show() }) {
+                    Icon(
+                        imageVector = Icons.Filled.MoreVert,
+                        contentDescription = "More"
+                    )
+                }
             }) {
-                Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = "Search"
-                )
+                customActions.forEach { ca ->
+                    clickableItem(onClick = {
+                        ca.onClick()
+                    }, icon = {
+                        Icon(
+                            painter = painterResource(ca.icon),
+                            contentDescription = ca.title
+                        )
+                    }, label = ca.title)
+                }
+
+                clickableItem(onClick = {
+                    searchBarState.showSearchBar()
+                }, icon = {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "Search"
+                    )
+                }, label = "Search")
             }
         },
         floatingActionButton = {

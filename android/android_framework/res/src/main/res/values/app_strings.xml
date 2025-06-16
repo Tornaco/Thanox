@@ -896,6 +896,9 @@
     <string name="title_package_delete_set">Delete</string>
     <string name="title_package_count_set">%s Apps</string>
 
+    <string name="title_batch_tools">Batch tools</string>
+    <string name="title_batch_tools_apply_config_template">Batch apply config template</string>
+
     <string name="dialog_title_plugin_installing">Installing plugin</string>
     <string name="dialog_title_plugin_updating">Updating plugin</string>
     <string name="dialog_title_plugin_uninstalling">Uninstalling plugin</string>

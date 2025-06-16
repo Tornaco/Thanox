@@ -11,12 +11,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.BuildProp
-import github.tornaco.android.thanos.common.UiState
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.ComponentInfo
 import github.tornaco.android.thanos.core.pm.ComponentUtil
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.android.thanos.module.compose.common.infra.UiState
 import github.tornaco.android.thanos.res.R
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
 import github.tornaco.thanos.module.component.manager.redesign.rule.BlockerRules.classNameToRule

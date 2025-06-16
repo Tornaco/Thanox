@@ -1,4 +1,4 @@
-package github.tornaco.android.thanos.common
+package github.tornaco.android.thanos.module.compose.common.infra
 
 sealed interface UiState<out R> {
     data object Loading : UiState<Nothing>

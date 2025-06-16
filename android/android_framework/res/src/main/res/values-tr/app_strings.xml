@@ -894,6 +894,9 @@
     <string name="title_package_delete_set">Sil</string>
     <string name="title_package_count_set">%s Uygulama</string>
 
+    <string name="title_batch_tools">Batch tools</string>
+    <string name="title_batch_tools_apply_config_template">Batch apply config template</string>
+
     <string name="dialog_title_plugin_installing">Eklenti Yükleniyor</string>
     <string name="dialog_title_plugin_updating">Eklenti Güncelleniyor</string>
     <string name="dialog_title_plugin_uninstalling">Eklenti Kaldırılıyor</string>

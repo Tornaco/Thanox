@@ -938,6 +938,9 @@
     <string name="title_package_delete_set">刪除</string>
     <string name="title_package_count_set">包含%s個應用</string>
 
+    <string name="title_batch_tools">批量设置</string>
+    <string name="title_batch_tools_apply_config_template">批量应用配置模板</string>
+
     <string name="card_title_plugin_available">安裝Thanox插件</string>
     <string name="card_message_plugin_available">插件主要承載一些不穩定或非關鍵功能。</string>
 

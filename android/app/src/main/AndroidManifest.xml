@@ -289,6 +289,9 @@
         <activity
             android:name="now.fortuitous.thanos.main.OneKeyBoostSettingsActivity"
             android:exported="false" />
+        <activity
+            android:name="now.fortuitous.thanos.apps.BatchToolsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

@@ -73,11 +73,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.common.UiState
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.infra.UiState
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog

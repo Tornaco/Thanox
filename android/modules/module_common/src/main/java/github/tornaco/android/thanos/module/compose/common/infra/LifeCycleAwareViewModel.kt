@@ -15,17 +15,17 @@
  *
  */
 
-package github.tornaco.android.thanos.common
+package github.tornaco.android.thanos.module.compose.common.infra
 
 import androidx.annotation.CallSuper
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
-import com.elvishew.xlog.XLog
+import github.tornaco.android.thanos.core.Logger
 
 open class LifeCycleAwareViewModel : ViewModel() {
-    private val logTag get() = "${javaClass.name}-lifecycle"
+    private val logger = Logger("${javaClass.name}-lifecycle")
 
     private var _isResumed = false
     val isResumed get() = _isResumed
@@ -33,25 +33,24 @@ open class LifeCycleAwareViewModel : ViewModel() {
     private val obs = object : DefaultLifecycleObserver {
         override fun onResume(owner: LifecycleOwner) {
             super.onResume(owner)
-            XLog.w("$logTag onResume")
+            logger.w("onResume")
             this@LifeCycleAwareViewModel.onResume()
         }
 
         override fun onStop(owner: LifecycleOwner) {
             super.onStop(owner)
-            XLog.w("$logTag onStop")
+            logger.w("onStop")
             this@LifeCycleAwareViewModel.onStop()
         }
 
         override fun onDestroy(owner: LifecycleOwner) {
             super.onDestroy(owner)
-            XLog.w("$logTag onDestroy")
+            logger.w("onDestroy")
             owner.lifecycle.removeObserver(this)
         }
     }
 
     fun bindLifecycle(lifecycle: Lifecycle) {
-        XLog.w("$logTag bindLifecycle: $lifecycle")
         lifecycle.addObserver(obs)
     }
 

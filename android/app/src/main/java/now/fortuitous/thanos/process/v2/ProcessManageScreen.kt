@@ -41,11 +41,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -85,11 +83,10 @@ import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ProcessManageScreen(
     onBackPressed: () -> Unit,
-    toLegacyUi: () -> Unit
 ) {
     val viewModel = hiltViewModel<ProcessManageViewModel>(LocalContext.current.requireActivity())
     val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -136,14 +133,6 @@ fun ProcessManageScreen(
                 modifier = Modifier,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = {
-                    toLegacyUi()
-                }) {
-                    Icon(
-                        imageVector = Icons.Filled.OpenInNew,
-                        contentDescription = "Back to legacy ui"
-                    )
-                }
                 IconButton(onClick = {
                     searchBarState.showSearchBar()
                 }) {

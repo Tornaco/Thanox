@@ -58,12 +58,6 @@
             android:label="@string/activity_title_process_manage" />
 
         <activity
-            android:name="now.fortuitous.thanos.process.ProcessManageActivity"
-            android:exported="false"
-            android:label="@string/activity_title_process_manage">
-
-        </activity>
-        <activity
             android:name="now.fortuitous.thanos.start.StartRestrictActivity"
             android:exported="false" />
 
@@ -133,13 +127,6 @@
             android:exported="false" />
         <activity
             android:name="now.fortuitous.thanos.power.SmartStandbyV2Activity"
-            android:exported="false" />
-        <activity
-            android:name="now.fortuitous.thanos.apps.SuggestedAppsActivity"
-            android:exported="false"
-            android:label="@string/feature_title_apps_manager" />
-        <activity
-            android:name="now.fortuitous.thanos.start.StartChartActivity"
             android:exported="false" />
         <activity
             android:name="now.fortuitous.thanos.start.StartRuleActivity"
@@ -288,9 +275,6 @@
             android:exported="true" />
         <activity
             android:name="now.fortuitous.thanos.main.OneKeyBoostSettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name="now.fortuitous.thanos.apps.BatchToolsActivity"
             android:exported="false" />
 
         <meta-data

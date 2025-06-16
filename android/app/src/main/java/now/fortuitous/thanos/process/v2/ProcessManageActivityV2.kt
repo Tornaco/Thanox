@@ -47,9 +47,6 @@ class ProcessManageActivityV2 : ComposeThemeActivity() {
             ProcessManageScreen(
                 onBackPressed = {
                     finish()
-                },
-                toLegacyUi = {
-                    now.fortuitous.thanos.process.ProcessManageActivity.start(thisActivity())
                 })
         }
     }

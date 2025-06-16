@@ -29,7 +29,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextCo
 import github.tornaco.android.thanos.module.compose.common.widget.LargeTitle
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SmallTitle
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.res.R
 import github.tornaco.practice.honeycomb.locker.ui.verify.composelock.ComposeLock
 import github.tornaco.practice.honeycomb.locker.ui.verify.composelock.ComposeLockCallback
@@ -52,7 +52,7 @@ class PatternSettingsActivity : ComposeThemeActivity() {
         val viewModel = hiltViewModel<PatternSettingsVM>()
         val state by viewModel.state.collectAsState()
 
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 Text(
                     text = stringResource(id = R.string.module_locker_title_verify_custom_pattern_settings),

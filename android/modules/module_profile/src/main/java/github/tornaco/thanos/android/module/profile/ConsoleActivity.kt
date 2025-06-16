@@ -50,7 +50,7 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.android.thanos.util.TypefaceHelper
 import github.tornaco.thanos.android.module.profile.codeditor.syntax.LanguageManager
@@ -74,7 +74,7 @@ class ConsoleActivity : ComposeThemeActivity() {
         val state by viewModel.state.collectAsState()
 
 
-        ThanoxSmallAppBarScaffold(title = {
+        ThanoxMediumAppBarScaffold(title = {
             Text(
                 text = "Action Console",
                 style = TypographyDefaults.appBarTitleTextStyle()

@@ -34,6 +34,7 @@ import github.tornaco.thanos.android.ops.ops.by.ops.OpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
 import github.tornaco.thanos.android.ops2.byop.Ops2Activity
+import now.fortuitous.thanos.apps.AioAppListActivity
 import now.fortuitous.thanos.launchother.LaunchOtherAppListActivity
 import now.fortuitous.thanos.notification.NotificationCenterActivity
 import now.fortuitous.thanos.power.SmartFreezeActivity
@@ -73,7 +74,7 @@ class PrebuiltFeatureLauncher(
                 }
 
                 PrebuiltFeatureIds.ID_APPS_MANAGER -> {
-                    now.fortuitous.thanos.apps.AppsManageActivity.start(context)
+                    AioAppListActivity.start(context, PrebuiltFeatureIds.ID_APPS_MANAGER)
                 }
 
                 PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {

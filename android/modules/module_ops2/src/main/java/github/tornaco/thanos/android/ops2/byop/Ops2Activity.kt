@@ -33,7 +33,7 @@ import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.CardContainer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TipBody
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 
@@ -50,7 +50,7 @@ class Ops2Activity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 androidx.compose.material3.Text(
                     text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_ops2_ops_list_title),

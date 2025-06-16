@@ -1,25 +1,164 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package github.tornaco.android.thanos.module.compose.common.infra
 
-import android.app.Activity
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import github.tornaco.android.thanos.common.AppListModel
+import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
+import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
+import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
+import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
-fun Activity.BaseAppListFilterContent() {
-    ThanoxSmallAppBarScaffold(
+fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilterContainerConfig) {
+    val vm = hiltViewModel<BaseAppListFilterVM>()
+    val context = LocalContext.current
+    val title = remember { config.title(context) }
+    val searchBarState = rememberSearchBarState()
+    LaunchedEffect(searchBarState) {
+        snapshotFlow { searchBarState.keyword }
+            .distinctUntilChanged()
+            .collect {
+                vm.keywordChanged(it)
+            }
+    }
+    BackHandler(searchBarState.showSearchBar) {
+        searchBarState.closeSearchBar()
+    }
+    ThanoxMediumAppBarScaffold(
         title = {
             Text(
-                text = stringResource(github.tornaco.android.thanos.res.R.string.common_menu_title_batch_select),
+                text = title,
                 style = TypographyDefaults.appBarTitleTextStyle()
             )
         },
+        searchBarState = searchBarState,
         onBackPressed = {
             finish()
+        },
+        actions = {
+            IconButton(onClick = {
+                searchBarState.showSearchBar()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = "Search"
+                )
+            }
         }
     ) { paddings ->
-
+        val uiState by vm.state.collectAsState()
+        val pullRefreshState = rememberPullRefreshState(uiState.isLoading, { vm.refresh() })
+        LaunchedEffect(Unit) {
+            vm.installIn(config)
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddings)
+                .pullRefresh(pullRefreshState),
+        ) {
+            LazyColumn(Modifier.fillMaxSize()) {
+                item {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        AppFilterDropDown(
+                            state = uiState,
+                            onFilterItemSelected = { vm.onFilterItemSelected(it) }
+                        )
+                        Spacer(modifier = Modifier.size(16.dp))
+                    }
+                }
+                items(uiState.apps) {
+                    AppListItem(it)
+                }
+            }
+            Md3ExpPullRefreshIndicator(
+                uiState.isLoading,
+                pullRefreshState,
+                Modifier.align(Alignment.TopCenter)
+            )
+        }
     }
+}
+
+@Composable
+private fun AppListItem(model: AppListModel) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+            .heightIn(min = 72.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            modifier = Modifier,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ) {
+            AppIcon(modifier = Modifier.size(38.dp), model.appInfo)
+            Spacer(modifier = Modifier.size(12.dp))
+            Column(verticalArrangement = Arrangement.Center) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    AppLabelText(
+                        Modifier.sizeIn(maxWidth = 240.dp),
+                        model.appInfo.appLabel
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AppFilterDropDown(
+    state: AppListUiState,
+    onFilterItemSelected: (AppSetFilterItem) -> Unit
+) {
+    FilterDropDown(
+        selectedItem = state.selectedAppSetFilterItem,
+        allItems = state.appFilterItems,
+        onItemSelected = onFilterItemSelected
+    )
 }

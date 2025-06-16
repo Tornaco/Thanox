@@ -29,7 +29,7 @@ import github.tornaco.android.thanos.module.compose.common.DisposableEffectWithL
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ListItem
 import github.tornaco.android.thanos.module.compose.common.widget.TextInputDialog
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.util.BrowserUtils
 
@@ -56,7 +56,7 @@ class LaunchOtherAppRuleActivity : ComposeThemeActivity() {
         }
         TextInputDialog(state = inputDialog)
 
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 Text(
                     text = stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_rules),

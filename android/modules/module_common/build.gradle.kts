@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
@@ -39,6 +40,11 @@ dependencies {
     implementation(libs.browser)
 
     implementation(libs.tinypinyin)
+
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.dagger.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.android.compiler)
+    implementation(libs.dagger.hilt.android)
 
     implementation(libs.glide)
     implementation(libs.glide.landscapist)

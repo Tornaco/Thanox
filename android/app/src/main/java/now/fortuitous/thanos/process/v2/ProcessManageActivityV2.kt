@@ -18,7 +18,7 @@
 package now.fortuitous.thanos.process.v2
 
 import android.content.Context
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity

@@ -43,6 +43,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -54,10 +56,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ThanoxSmallAppBarScaffold(
+fun ThanoxMediumAppBarScaffold(
     modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit) = {},
@@ -67,14 +70,16 @@ fun ThanoxSmallAppBarScaffold(
     bottomBar: @Composable () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            ThanoxSmallTopAppBarContainer(
-                searchBarState,
-                title,
-                actions,
-                onBackPressed
+            ThanoxMediumTopAppBarContainer(
+                title = title,
+                actions = actions,
+                onBackPressed = onBackPressed,
+                searchBarState = searchBarState,
+                scrollBehavior = scrollBehavior
             )
         },
         floatingActionButton = floatingActionButton,
@@ -94,11 +99,12 @@ fun ThanoxSmallAppBarScaffold(
 }
 
 @Composable
-private fun ThanoxSmallTopAppBarContainer(
-    searchBarState: SearchBarState = rememberSearchBarState(),
+private fun ThanoxMediumTopAppBarContainer(
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
     onBackPressed: (() -> Unit)? = null,
+    searchBarState: SearchBarState = rememberSearchBarState(),
+    scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
     Surface {
         AnimatedVisibility(
@@ -112,21 +118,23 @@ private fun ThanoxSmallTopAppBarContainer(
             enter = fadeIn(),
             exit = fadeOut()
         ) {
-            ThanoxSmallTopAppBar(title, actions, onBackPressed)
+            ThanoxMediumTopAppBar(title, actions, onBackPressed, scrollBehavior)
         }
     }
 }
 
 @Composable
-private fun ThanoxSmallTopAppBar(
+private fun ThanoxMediumTopAppBar(
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
     onBackPressed: (() -> Unit)? = null,
+    scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
-    androidx.compose.material3.TopAppBar(
+    androidx.compose.material3.MediumTopAppBar(
         modifier = Modifier,
         title = title,
         actions = actions,
+        scrollBehavior = scrollBehavior,
         navigationIcon = {
             onBackPressed?.let {
                 IconButton(onClick = {

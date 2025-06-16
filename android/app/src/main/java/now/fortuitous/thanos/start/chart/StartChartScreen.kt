@@ -55,7 +55,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownButtonLayout
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.pie.CenterText
 import github.tornaco.android.thanos.module.compose.common.widget.pie.ChartItem
 import github.tornaco.android.thanos.module.compose.common.widget.pie.Legend
@@ -74,7 +74,7 @@ fun StartChartScreen(
     LaunchedEffect(viewModel) {
         viewModel.startLoading()
     }
-    ThanoxSmallAppBarScaffold(
+    ThanoxMediumAppBarScaffold(
         title = {
             Text(
                 text = stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_start_restrict_charts),

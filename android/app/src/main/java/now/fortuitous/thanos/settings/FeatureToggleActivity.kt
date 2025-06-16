@@ -30,12 +30,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ListItem
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import now.fortuitous.thanos.main.PrebuiltFeatures
 
 class FeatureToggleActivity : ComposeThemeActivity() {
@@ -49,7 +48,7 @@ class FeatureToggleActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 androidx.compose.material3.Text(
                     text = stringResource(id = github.tornaco.android.thanos.res.R.string.pref_title_feature_toggle),

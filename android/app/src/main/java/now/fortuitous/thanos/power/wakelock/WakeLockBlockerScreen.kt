@@ -82,7 +82,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SwitchBar
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 
@@ -98,7 +98,7 @@ fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
         viewModel.init()
     }
 
-    ThanoxSmallAppBarScaffold(
+    ThanoxMediumAppBarScaffold(
         title = {
             Text(
                 stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_wakelock_blocker),

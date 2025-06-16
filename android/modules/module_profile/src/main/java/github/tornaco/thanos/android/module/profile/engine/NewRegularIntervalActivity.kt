@@ -52,7 +52,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloatingActionButton
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import kotlinx.parcelize.Parcelize
 import kotlin.math.min
@@ -90,7 +90,7 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
     private fun NewRegularIntervalContent() {
         val state = DurationState()
 
-        ThanoxSmallAppBarScaffold(title = {
+        ThanoxMediumAppBarScaffold(title = {
             Text(
                 text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_date_time_regular_interval),
                 style = TypographyDefaults.appBarTitleTextStyle()

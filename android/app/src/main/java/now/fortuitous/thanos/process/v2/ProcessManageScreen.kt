@@ -78,7 +78,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCardRoundedCornerShape
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -122,7 +122,7 @@ fun ProcessManageScreen(
         searchBarState.closeSearchBar()
     }
 
-    ThanoxSmallAppBarScaffold(
+    ThanoxMediumAppBarScaffold(
         title = {
             Text(
                 stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_process_manage),

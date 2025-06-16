@@ -13,12 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.pie.CenterText
 import github.tornaco.android.thanos.module.compose.common.widget.pie.ChartItem
 import github.tornaco.android.thanos.module.compose.common.widget.pie.Legend
 import github.tornaco.android.thanos.module.compose.common.widget.pie.PieChart
-import github.tornaco.android.thanox.module.notification.recorder.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +32,7 @@ fun StatsChartScreen(
     LaunchedEffect(viewModel) {
         viewModel.startLoading()
     }
-    ThanoxSmallAppBarScaffold(title = {
+    ThanoxMediumAppBarScaffold(title = {
         Text(
             stringResource(id = github.tornaco.android.thanos.res.R.string.module_notification_recorder_stats),
             style = MaterialTheme.typography.titleMedium

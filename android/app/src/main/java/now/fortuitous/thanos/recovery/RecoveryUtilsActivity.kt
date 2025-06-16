@@ -19,7 +19,7 @@ import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.res.R
 import kotlinx.coroutines.Dispatchers
@@ -107,7 +107,7 @@ class RecoveryUtilsActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 Text(
                     text = stringResource(R.string.feature_title_recovery_tools),

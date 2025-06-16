@@ -85,7 +85,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.DropdownItem
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownSelector
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberDropdownSelectorState
@@ -241,7 +241,7 @@ class ComponentsActivity : ComposeThemeActivity() {
         val batchOpState by viewModel.batchOpState.collectAsStateWithLifecycle()
         val viewType by viewModel.viewType.collectAsStateWithLifecycle()
 
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 AnimatedContent(selectState.isSelectMode) {
                     if (it) {

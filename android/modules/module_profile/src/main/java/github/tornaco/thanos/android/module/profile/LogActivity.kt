@@ -46,7 +46,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.SwitchBar
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.util.ActivityUtils
 import kotlinx.coroutines.launch
 
@@ -70,7 +70,7 @@ class LogActivity : ComposeThemeActivity() {
         val listState = rememberLazyListState()
         val scope = rememberCoroutineScope()
 
-        ThanoxSmallAppBarScaffold(title = {
+        ThanoxMediumAppBarScaffold(title = {
             Text(
                 text = "Logs",
                 style = TypographyDefaults.appBarTitleTextStyle()

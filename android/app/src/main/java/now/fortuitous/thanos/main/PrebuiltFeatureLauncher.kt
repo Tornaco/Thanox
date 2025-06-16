@@ -121,7 +121,13 @@ class PrebuiltFeatureLauncher(
                 }
 
                 PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
-                    now.fortuitous.thanos.privacy.DataCheatActivity.start(context)
+                    AppFeatureManager.withSubscriptionStatus(context) {
+                        if (it) {
+                            now.fortuitous.thanos.privacy.DataCheatActivity.start(context)
+                        } else {
+                            AppFeatureManager.showDonateIntroDialog(context)
+                        }
+                    }
                 }
 
                 PrebuiltFeatureIds.ID_OPS_BY_OPS -> {

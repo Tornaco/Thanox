@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.common.AppListModel
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 
 @AndroidEntryPoint
@@ -33,6 +32,7 @@ abstract class BaseAppListFilterActivity : ComposeThemeActivity() {
 data class BaseAppListFilterContainerConfig(
     val title: (Context) -> String,
     val featureId: String,
-    val loader: suspend (Context, pkgSetId: String) -> List<AppListModel>,
-    val featureDescription: (Context) -> String? = { null }
+    val loader: suspend (Context, pkgSetId: String) -> List<AppUiModel>,
+    val featureDescription: (Context) -> String? = { null },
+    val onAppClick: (AppUiModel) -> Unit = {}
 )

@@ -3,9 +3,9 @@ package now.fortuitous.thanos.apps
 import android.content.Context
 import android.content.Intent
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer
-import github.tornaco.android.thanos.common.AppListModel
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.android.thanos.module.compose.common.infra.AppUiModel
 import github.tornaco.android.thanos.module.compose.common.infra.BaseAppListFilterActivity
 import github.tornaco.android.thanos.module.compose.common.infra.BaseAppListFilterContainerConfig
 import github.tornaco.android.thanos.res.R
@@ -41,31 +41,29 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                 val runningBadge = context.getString(R.string.badge_app_running)
                 val idleBadge = context.getString(R.string.badge_app_idle)
 
-                val res: List<AppListModel> = context.withThanos {
+                val res: List<AppUiModel> = context.withThanos {
                     val am = activityManager
                     return@withThanos pkgManager.getInstalledPkgsByPackageSetId(pkgSetId)
                         .distinct()
                         .map { appInfo ->
-                            AppListModel(
-                                /* appInfo = */ appInfo,
-                                /* badge = */ if (am.isPackageRunning(
-                                        Pkg.fromAppInfo(
-                                            appInfo
-                                        )
-                                    )
-                                ) runningBadge else null,
-                                /* badge2 = */ if (am.isPackageIdle(
-                                        Pkg.fromAppInfo(
-                                            appInfo
-                                        )
-                                    )
-                                ) idleBadge else null,
-                                /* description = */ composer.getAppItemDescription(appInfo)
+                            AppUiModel(
+                                appInfo = appInfo,
+                                description = composer.getAppItemDescription(appInfo),
+                                badges = listOfNotNull(
+                                    if (am.isPackageRunning(Pkg.fromAppInfo(appInfo))) {
+                                        runningBadge
+                                    } else {
+                                        null
+                                    },
+                                    if (am.isPackageIdle(Pkg.fromAppInfo(appInfo))) idleBadge else null,
+                                )
                             )
                         }
-                } ?: listOf(AppListModel(AppInfo.dummy()))
-
-                res.sorted()
+                } ?: listOf(AppUiModel(AppInfo.dummy()))
+                res
+            },
+            onAppClick = {
+                AppDetailsActivity.start(this, it.appInfo)
             }
         )
 }

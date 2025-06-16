@@ -3,6 +3,7 @@
 package github.tornaco.android.thanos.module.compose.common.infra
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,14 +35,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import github.tornaco.android.thanos.common.AppListModel
+import github.tornaco.android.thanos.module.compose.common.infra.sort.AppSortTools
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
+import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
+import github.tornaco.android.thanos.module.compose.common.widget.SortToolDropdown
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -49,6 +53,8 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 @Composable
 fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilterContainerConfig) {
     val vm = hiltViewModel<BaseAppListFilterVM>()
+    LaunchedEffect(Unit) { vm.installIn(config) }
+
     val context = LocalContext.current
     val title = remember { config.title(context) }
     val searchBarState = rememberSearchBarState()
@@ -85,10 +91,8 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
         }
     ) { paddings ->
         val uiState by vm.state.collectAsState()
-        val pullRefreshState = rememberPullRefreshState(uiState.isLoading, { vm.refresh() })
-        LaunchedEffect(Unit) {
-            vm.installIn(config)
-        }
+        val pullRefreshState =
+            rememberPullRefreshState(uiState.isLoading, { vm.refresh("pullRefreshState") })
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -107,10 +111,22 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                             onFilterItemSelected = { vm.onFilterItemSelected(it) }
                         )
                         Spacer(modifier = Modifier.size(16.dp))
+
+                        SortToolDropdown(
+                            selectedItem = uiState.appSort,
+                            allItems = AppSortTools.entries,
+                            isReverse = uiState.sortReverse,
+                            setReverse = {
+                                vm.updateSortReverse(it)
+                            },
+                            onItemSelected = {
+                                vm.updateSort(it)
+                            }
+                        )
                     }
                 }
-                items(uiState.apps) {
-                    AppListItem(it)
+                items(uiState.apps) { model ->
+                    AppListItem(model, onClick = { config.onAppClick(it) })
                 }
             }
             Md3ExpPullRefreshIndicator(
@@ -123,17 +139,20 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
 }
 
 @Composable
-private fun AppListItem(model: AppListModel) {
+private fun AppListItem(model: AppUiModel, onClick: (AppUiModel) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable {
+                onClick(model)
+            }
             .padding(horizontal = 16.dp, vertical = 4.dp)
             .heightIn(min = 72.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Row(
-            modifier = Modifier,
+            modifier = Modifier.weight(1f, fill = false),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
@@ -146,6 +165,19 @@ private fun AppListItem(model: AppListModel) {
                         model.appInfo.appLabel
                     )
                 }
+                model.description?.let {
+                    Text(it, fontSize = 12.sp, lineHeight = 12.5.sp)
+                }
+            }
+        }
+
+        Row(
+            modifier = Modifier,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End
+        ) {
+            model.badges.forEach {
+                MD3Badge(text = it, modifier = Modifier.padding(start = 6.dp))
             }
         }
     }

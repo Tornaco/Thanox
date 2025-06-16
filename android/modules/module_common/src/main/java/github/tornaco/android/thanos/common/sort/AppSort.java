@@ -3,6 +3,7 @@ package github.tornaco.android.thanos.common.sort;
 import static github.tornaco.android.thanos.common.sort.AppApkSizeComparator.getAppApkSize;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.format.Formatter;
 
 import androidx.annotation.NonNull;
@@ -15,9 +16,9 @@ import java.util.Date;
 
 import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.util.DateUtils;
-import github.tornaco.android.thanos.module.common.R;
 import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 
+@Deprecated
 public enum AppSort {
 
     Default(github.tornaco.android.thanos.res.R.string.common_sort_by_default, new AppSorterProvider() {
@@ -102,7 +103,9 @@ public enum AppSort {
 
         @Override
         public String getAppSortDescription(@NonNull Context context, @NonNull AppListModel model) {
-            return DateUtils.formatDuration(Duration.ofMillis(model.totalUsedTimeMills));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                return DateUtils.formatDuration(Duration.ofMillis(model.totalUsedTimeMills));
+            } else return DateUtils.formatLongForMessageTime(model.totalUsedTimeMills);
         }
     }),
     SdkVersion(github.tornaco.android.thanos.res.R.string.common_sort_by_install_sdk_version, new AppSorterProvider() {
@@ -144,10 +147,10 @@ public enum AppSort {
 
     @StringRes
     public final int labelRes;
-    @Nullable
+    @NonNull
     public final AppSorterProvider provider;
 
-    AppSort(@StringRes int labelRes, @Nullable AppSorterProvider provider) {
+    AppSort(@StringRes int labelRes, @NonNull AppSorterProvider provider) {
         this.labelRes = labelRes;
         this.provider = provider;
     }

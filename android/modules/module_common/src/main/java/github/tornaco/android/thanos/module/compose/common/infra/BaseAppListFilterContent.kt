@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +23,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -88,6 +90,17 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                     contentDescription = "Search"
                 )
             }
+        },
+        floatingActionButton = {
+            config.fabs.forEach {
+                ExtendedFloatingActionButton(
+                    onClick = {
+                        it.onClick()
+                    }
+                ) {
+                    Text(it.title(context))
+                }
+            }
         }
     ) { paddings ->
         val uiState by vm.state.collectAsState()
@@ -99,7 +112,10 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                 .padding(paddings)
                 .pullRefresh(pullRefreshState),
         ) {
-            LazyColumn(Modifier.fillMaxSize()) {
+            LazyColumn(
+                Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(bottom = if (config.fabs.isEmpty()) 0.dp else (100 * config.fabs.size).dp)
+            ) {
                 item {
                     Row(
                         modifier = Modifier

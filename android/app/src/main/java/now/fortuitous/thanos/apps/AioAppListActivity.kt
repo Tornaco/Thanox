@@ -8,6 +8,7 @@ import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.module.compose.common.infra.AppUiModel
 import github.tornaco.android.thanos.module.compose.common.infra.BaseAppListFilterActivity
 import github.tornaco.android.thanos.module.compose.common.infra.BaseAppListFilterContainerConfig
+import github.tornaco.android.thanos.module.compose.common.infra.FabItemConfig
 import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.support.withThanos
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
@@ -64,6 +65,13 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             },
             onAppClick = {
                 AppDetailsActivity.start(this, it.appInfo)
-            }
+            },
+            fabs = listOf(
+                FabItemConfig(
+                    title = { it.getString(R.string.title_package_sets) },
+                    onClick = {
+                        PackageSetListActivity.start(this)
+                    })
+            )
         )
 }

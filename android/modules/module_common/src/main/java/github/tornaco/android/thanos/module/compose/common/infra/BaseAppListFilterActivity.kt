@@ -34,5 +34,11 @@ data class BaseAppListFilterContainerConfig(
     val featureId: String,
     val loader: suspend (Context, pkgSetId: String) -> List<AppUiModel>,
     val featureDescription: (Context) -> String? = { null },
-    val onAppClick: (AppUiModel) -> Unit = {}
+    val onAppClick: (AppUiModel) -> Unit = {},
+    val fabs: List<FabItemConfig> = emptyList()
+)
+
+data class FabItemConfig(
+    val title: (Context) -> String,
+    val onClick: () -> Unit
 )

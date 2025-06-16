@@ -36,7 +36,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -101,6 +100,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDia
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.fontFamilyProductSans
 import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedString
+import github.tornaco.android.thanos.support.FeatureGrid
 import github.tornaco.android.thanos.support.clickableWithRippleBorderless
 import kotlinx.coroutines.delay
 import util.AssetUtils
@@ -351,16 +351,16 @@ private fun FeatureGroup(
         colors = CardDefaults.cardColors(containerColor = LocalThanoxColorSchema.current.cardBgColor)
     ) {
         val activity = LocalContext.current.requireActivity()
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 80.dp),
+        FeatureGrid(
             modifier = Modifier
+                .padding(8.dp)
                 .fillMaxWidth()
                 .heightIn(max = 1000.dp),
             horizontalArrangement = Arrangement.Center,
             verticalArrangement = Arrangement.Center
         ) {
             items(group.items) { item ->
-                Box(Modifier.padding(16.dp)) {
+                Box(Modifier.padding(8.dp)) {
                     var isMenuOpen by remember(item) { mutableStateOf(false) }
                     val menuItems = remember(item) { item.menuItems }
                     FeatureItem(item = item, onItemClick = onItemClick, onItemLongClick = {
@@ -467,7 +467,7 @@ private fun FeatureItem(
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.titleMedium,
             color = themedTextColor(Color(ContextCompat.getColor(context, item.themeColor))),
-            lineHeight = 12.sp
+            lineHeight = 12.5.sp
         )
     }
 }

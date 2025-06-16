@@ -28,6 +28,19 @@ enum class AppSortTools(
                 return null
             }
         }),
+    CheckState(
+        R.string.enabled,
+        object : AppSorterProvider {
+            override fun comparator(context: Context): Comparator<AppUiModel> {
+                return Comparator { obj: AppUiModel, listModel: AppUiModel ->
+                    listModel.isChecked.compareTo(obj.isChecked)
+                }
+            }
+
+            override fun getAppSortDescription(context: Context, model: AppUiModel): String? {
+                return null
+            }
+        }),
     Running(
         R.string.chip_title_app_only_running,
         object : AppSorterProvider {

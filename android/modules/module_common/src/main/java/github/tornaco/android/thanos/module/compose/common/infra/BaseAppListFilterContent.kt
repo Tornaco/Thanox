@@ -168,6 +168,7 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                             .background(MaterialTheme.colorScheme.background)
                     ) {
                         config.switchBarConfig?.let { sc ->
+                            StandardSpacer()
                             var isChecked by remember(sc) { mutableStateOf(sc.isChecked) }
                             SwitchBar(
                                 title = sc.title(context, isChecked),
@@ -193,7 +194,13 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
 
                             SortToolDropdown(
                                 selectedItem = uiState.appSort,
-                                allItems = AppSortTools.entries,
+                                allItems = AppSortTools.entries.filter {
+                                    if (config.appItemConfig.isCheckable) {
+                                        true
+                                    } else {
+                                        it != AppSortTools.CheckState
+                                    }
+                                },
                                 isReverse = uiState.sortReverse,
                                 setReverse = {
                                     vm.updateSortReverse(it)

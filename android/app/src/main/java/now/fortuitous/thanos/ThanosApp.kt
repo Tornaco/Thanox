@@ -37,10 +37,10 @@ import github.tornaco.android.thanos.main.Crashlytics
 import github.tornaco.android.thanos.main.installCrashHandler
 import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.support.AppFeatureManager
+import github.tornaco.android.thanos.support.Stats
 import github.tornaco.android.thanos.support.initThanos
 import io.reactivex.plugins.RxJavaPlugins
 import now.fortuitous.app.Init
-import now.fortuitous.app.Stats
 import now.fortuitous.thanos.power.ShortcutHelper
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import tornaco.apps.thanox.ThanosLite

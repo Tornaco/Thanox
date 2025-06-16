@@ -27,8 +27,9 @@ import androidx.annotation.Nullable;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.R;
-import now.fortuitous.app.BaseTrustedActivity;
+import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.util.ActivityUtils;
+import now.fortuitous.app.BaseTrustedActivity;
 
 public class DataSettingsActivity extends BaseTrustedActivity {
 
@@ -37,8 +38,8 @@ public class DataSettingsActivity extends BaseTrustedActivity {
     }
 
     @Override
-    public boolean isADVF() {
-        return true;
+    public Context getApplicationContext() {
+        return new ThanoxAppContext(super.getApplicationContext());
     }
 
     @Override

@@ -91,6 +91,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.rememberConfir
 import github.tornaco.android.thanos.module.compose.common.widget.rememberDropdownSelectorState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import github.tornaco.android.thanos.res.R
+import github.tornaco.android.thanos.support.ThanoxAppContext
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.android.thanos.util.pleaseReadCarefully
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
@@ -141,8 +142,8 @@ class ComponentsActivity : ComposeThemeActivity() {
         }
     }
 
-    override fun isADVF(): Boolean {
-        return true
+    override fun getApplicationContext(): Context {
+        return ThanoxAppContext(super.getApplicationContext())
     }
 
     override fun onResume() {
@@ -274,7 +275,7 @@ class ComponentsActivity : ComposeThemeActivity() {
                 if (selectState.isSelectMode) {
                     viewModel.exitSelectionState()
                 } else {
-                    thisActivity().finish()
+                    finish()
                 }
             },
             actions = {

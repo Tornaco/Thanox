@@ -56,7 +56,7 @@ class FeatureToggleActivity : ComposeThemeActivity() {
                 )
             },
             onBackPressed = {
-                thisActivity().finish()
+                finish()
             },
             actions = {
 

@@ -58,9 +58,7 @@ class SmartFreezeActivity : ThemeActivity() {
 
     private lateinit var binding: SmartFreezeLayoutBottomNavBinding
 
-    override fun isF(): Boolean {
-        return true
-    }
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

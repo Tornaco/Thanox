@@ -58,7 +58,7 @@ class Ops2Activity : ComposeThemeActivity() {
                 )
             },
             onBackPressed = {
-                thisActivity().finish()
+                finish()
             },
             actions = {
 

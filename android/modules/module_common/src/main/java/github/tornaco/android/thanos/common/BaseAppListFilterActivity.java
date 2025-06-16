@@ -41,10 +41,6 @@ public abstract class BaseAppListFilterActivity<VM extends CommonAppListFilterVi
     protected VM viewModel;
     ActivityCommonListFilterBinding binding;
 
-    @Override
-    public boolean isF() {
-        return true;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

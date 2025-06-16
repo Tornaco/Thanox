@@ -54,6 +54,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import github.tornaco.android.thanos.support.ThanoxAppContext
 import kotlinx.parcelize.Parcelize
 import kotlin.math.min
 
@@ -73,12 +74,9 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
         }
     }
 
-    override fun isF(): Boolean {
-        return true
-    }
 
-    override fun isADVF(): Boolean {
-        return true
+    override fun getApplicationContext(): Context {
+        return ThanoxAppContext(super.getApplicationContext())
     }
 
     @Composable
@@ -90,7 +88,8 @@ class NewRegularIntervalActivity : ComposeThemeActivity() {
     private fun NewRegularIntervalContent() {
         val state = DurationState()
 
-        ThanoxMediumAppBarScaffold(title = {
+        ThanoxMediumAppBarScaffold(
+            title = {
             Text(
                 text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_date_time_regular_interval),
                 style = TypographyDefaults.appBarTitleTextStyle()

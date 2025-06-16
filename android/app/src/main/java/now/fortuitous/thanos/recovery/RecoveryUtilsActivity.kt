@@ -24,6 +24,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAp
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberProgressDialogState
 import github.tornaco.android.thanos.res.R
+import github.tornaco.android.thanos.support.ThanoxAppContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -40,8 +41,8 @@ class RecoveryUtilsActivity : ComposeThemeActivity() {
         }
     }
 
-    override fun isADVF(): Boolean {
-        return false
+    override fun getApplicationContext(): Context {
+        return ThanoxAppContext(super.getApplicationContext())
     }
 
     @Composable
@@ -116,7 +117,7 @@ class RecoveryUtilsActivity : ComposeThemeActivity() {
                 )
             },
             onBackPressed = {
-                thisActivity().finish()
+                finish()
             },
             actions = {
             }

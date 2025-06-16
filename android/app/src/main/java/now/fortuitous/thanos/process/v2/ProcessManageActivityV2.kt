@@ -22,6 +22,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.support.ThanoxAppContext
 import github.tornaco.android.thanos.util.ActivityUtils
 
 @AndroidEntryPoint
@@ -33,12 +34,9 @@ class ProcessManageActivityV2 : ComposeThemeActivity() {
         }
     }
 
-    override fun isF(): Boolean {
-        return true
-    }
 
-    override fun isADVF(): Boolean {
-        return true
+    override fun getApplicationContext(): Context {
+        return ThanoxAppContext(super.getApplicationContext())
     }
 
     @Composable

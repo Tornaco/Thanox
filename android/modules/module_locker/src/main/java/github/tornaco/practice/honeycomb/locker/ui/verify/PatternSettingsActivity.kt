@@ -60,7 +60,7 @@ class PatternSettingsActivity : ComposeThemeActivity() {
                 )
             },
             onBackPressed = {
-                thisActivity().finish()
+                finish()
             },
             actions = {
             }

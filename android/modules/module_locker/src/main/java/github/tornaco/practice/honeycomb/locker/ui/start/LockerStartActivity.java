@@ -23,6 +23,7 @@ import github.tornaco.android.thanos.common.OnAppItemSelectStateChangeListener;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.pm.AppInfo;
+import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.practice.honeycomb.locker.R;
@@ -37,8 +38,8 @@ public class LockerStartActivity extends CommonFuncToggleAppListFilterActivity {
     }
 
     @Override
-    public boolean isADVF() {
-        return true;
+    public Context getApplicationContext() {
+        return new ThanoxAppContext(super.getApplicationContext());
     }
 
     @NonNull

@@ -50,7 +50,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             ),
             appItemConfig = AppItemConfig(
                 loader = { context, pkgSetId ->
-                    val composer = AppListItemDescriptionComposer(thisActivity())
+                    val composer = AppListItemDescriptionComposer(this)
                     val runningBadge = context.getString(R.string.badge_app_running)
                     val idleBadge = context.getString(R.string.badge_app_idle)
 
@@ -106,9 +106,9 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                             onClick = {
                                 withSubscriptionStatus(this) { subscribed: Boolean ->
                                     if (subscribed) {
-                                        ComposeStartChartActivity.Starter.start(thisActivity())
+                                        ComposeStartChartActivity.Starter.start(this)
                                     } else {
-                                        showDonateIntroDialog(thisActivity())
+                                        showDonateIntroDialog(this)
                                     }
                                 }
                             }
@@ -121,7 +121,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                                     if (subscribed) {
                                         StartRuleActivity.start(this)
                                     } else {
-                                        showDonateIntroDialog(thisActivity())
+                                        showDonateIntroDialog(this)
                                     }
                                 }
                             },
@@ -149,7 +149,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     )
                 },
                 loader = { context, pkgSetId ->
-                    val composer = AppListItemDescriptionComposer(thisActivity())
+                    val composer = AppListItemDescriptionComposer(this)
                     val runningBadge = context.getString(R.string.badge_app_running)
                     val idleBadge = context.getString(R.string.badge_app_idle)
 

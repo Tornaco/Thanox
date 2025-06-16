@@ -76,7 +76,7 @@ class AppOpsListActivity : ComposeThemeActivity() {
                 }
             },
             onBackPressed = {
-                thisActivity().finish()
+                finish()
             },
             actions = {
 

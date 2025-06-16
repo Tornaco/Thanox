@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 
@@ -21,13 +22,8 @@ public class WechatPushDeleteMainActivity extends ThemeActivity {
     }
 
     @Override
-    public boolean isADVF() {
-        return true;
-    }
-
-    @Override
-    public boolean isF() {
-        return true;
+    public Context getApplicationContext() {
+        return new ThanoxAppContext(super.getApplicationContext());
     }
 
     @Override

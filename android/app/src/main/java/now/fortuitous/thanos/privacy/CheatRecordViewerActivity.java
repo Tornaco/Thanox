@@ -44,6 +44,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.PrivacyCheatRecord;
 import github.tornaco.android.thanos.core.secure.PrivacyManager;
 import github.tornaco.android.thanos.core.secure.PrivacyManager.PrivacyOp;
+import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
@@ -57,8 +58,8 @@ public class CheatRecordViewerActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    public boolean isADVF() {
-        return true;
+    public Context getApplicationContext() {
+        return new ThanoxAppContext(super.getApplicationContext());
     }
 
     @Override

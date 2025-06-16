@@ -36,14 +36,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.core.analytics.SelectActiveMethodShizuku
+import github.tornaco.android.thanos.core.analytics.SelectActiveMethodXposedOrMagisk
 import github.tornaco.android.thanos.main.Analytics
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCardRoundedCornerShape
 import github.tornaco.android.thanos.util.ActivityUtils
-import github.tornaco.android.thanos.core.analytics.SelectActiveMethodShizuku
-import github.tornaco.android.thanos.core.analytics.SelectActiveMethodXposedOrMagisk
 import now.fortuitous.thanos.pref.AppPreference
 import tornaco.apps.thanox.base.ui.NiaGradientBackground
 import tornaco.apps.thanox.base.ui.theme.ThanosTheme
@@ -56,10 +56,6 @@ class ChooserActivity : ComposeThemeActivity() {
         fun start(context: Context?) {
             ActivityUtils.startActivity(context, ChooserActivity::class.java)
         }
-    }
-
-    override fun isF(): Boolean {
-        return false
     }
 
     @Composable

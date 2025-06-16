@@ -60,6 +60,8 @@ dependencies {
     kapt(libs.glide.compiler)
 
     implementation(project(":modules:module_common"))
+    implementation(project(":modules:module_feature_launcher"))
+
     implementation(project(":android_framework:base"))
     implementation(project(":android_framework:res"))
 

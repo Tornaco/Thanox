@@ -37,9 +37,6 @@ class NotificationRecordActivity : ThemeActivity() {
 
     val owner: SavedStateRegistryOwner get() = this
 
-    override fun isF(): Boolean {
-        return true
-    }
 
     private val model: NotificationRecordViewModel by viewModels {
         object : AbstractSavedStateViewModelFactory(owner, null) {
@@ -70,20 +67,20 @@ class NotificationRecordActivity : ThemeActivity() {
 
         onSetupSwitchBar(binding.switchBarContainer.switchBar)
 
-        val progressDialog = ModernProgressDialog(thisActivity())
+        val progressDialog = ModernProgressDialog(this)
         progressDialog.setTitle(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment)
         lifecycleScope.launch {
             model.effect.collectLatest {
                 when (it) {
                     is Effect.ExportFail -> {
                         progressDialog.dismiss()
-                        ToastUtils.nook(thisActivity())
+                        ToastUtils.nook(this@NotificationRecordActivity)
                         XLog.e(it.err, "ExportFail")
                     }
 
                     Effect.ExportSuccess -> {
                         progressDialog.dismiss()
-                        ToastUtils.ok(thisActivity())
+                        ToastUtils.ok(this@NotificationRecordActivity)
                     }
 
                     Effect.Exporting -> {
@@ -202,7 +199,7 @@ class NotificationRecordActivity : ThemeActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_clear_all) {
-            MaterialAlertDialogBuilder(thisActivity())
+            MaterialAlertDialogBuilder(this)
                 .setTitle(github.tornaco.android.thanos.res.R.string.module_notification_recorder_clear_all)
                 .setMessage(github.tornaco.android.thanos.res.R.string.common_dialog_message_are_you_sure)
                 .setNegativeButton(android.R.string.cancel, null)
@@ -214,10 +211,10 @@ class NotificationRecordActivity : ThemeActivity() {
                 }.show()
         }
         if (item.itemId == R.id.action_settings) {
-            NotificationRecordSettingsActivity.start(thisActivity())
+            NotificationRecordSettingsActivity.start(this)
         }
         if (item.itemId == R.id.action_stats) {
-            StatsActivity.Starter.start(thisActivity())
+            StatsActivity.Starter.start(this)
         }
         if (item.itemId == R.id.action_export) {
             showExportNRDialog()
@@ -226,7 +223,7 @@ class NotificationRecordActivity : ThemeActivity() {
     }
 
     private fun showExportNRDialog() {
-        MaterialAlertDialogBuilder(thisActivity())
+        MaterialAlertDialogBuilder(this)
             .setTitle(github.tornaco.android.thanos.res.R.string.module_notification_recorder_export)
             .setMessage(github.tornaco.android.thanos.res.R.string.module_notification_recorder_export_dialog_message)
 

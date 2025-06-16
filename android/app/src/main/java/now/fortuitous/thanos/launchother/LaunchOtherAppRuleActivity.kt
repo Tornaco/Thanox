@@ -16,6 +16,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -64,11 +65,15 @@ class LaunchOtherAppRuleActivity : ComposeThemeActivity() {
                 )
             },
             onBackPressed = {
-                thisActivity().finish()
+                finish()
             },
             actions = {
+                val context = LocalContext.current
                 TextButton(onClick = {
-                    BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_LAUNCH_OTHER_APP_RULES)
+                    BrowserUtils.launch(
+                        context,
+                        BuildProp.THANOX_URL_DOCS_LAUNCH_OTHER_APP_RULES
+                    )
                 }) {
                     Text(stringResource(id = github.tornaco.android.thanos.res.R.string.common_menu_title_wiki))
                 }
@@ -112,7 +117,8 @@ class LaunchOtherAppRuleActivity : ComposeThemeActivity() {
                         .padding(paddings)
                 ) {
                     items(state.ruleItems) {
-                        ListItem(modifier = Modifier, title = it.rule,
+                        ListItem(
+                            modifier = Modifier, title = it.rule,
                             action1 = {
                                 IconButton(onClick = {
                                     viewModel.remove(it.rule)

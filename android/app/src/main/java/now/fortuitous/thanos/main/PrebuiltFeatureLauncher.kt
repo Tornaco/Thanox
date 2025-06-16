@@ -62,7 +62,7 @@ class PrebuiltFeatureLauncher(
                 }
 
                 PrebuiltFeatureIds.ID_BACKGROUND_START -> {
-                    now.fortuitous.thanos.start.StartRestrictActivity.start(context)
+                    AioAppListActivity.start(context, PrebuiltFeatureIds.ID_BACKGROUND_START)
                 }
 
                 PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> {

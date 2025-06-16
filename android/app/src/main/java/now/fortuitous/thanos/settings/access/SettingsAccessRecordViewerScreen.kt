@@ -140,10 +140,10 @@ fun SettingsAccessRecordViewerScreen(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .padding(top = 16.dp),
-                    isChecked = state.isRecordEnabled
-                ) {
-                    viewModel.setRecordEnabled(it)
-                }
+                    title = stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_settings_access_record),
+                    isChecked = state.isRecordEnabled,
+                    onCheckChange = { viewModel.setRecordEnabled(it) }
+                )
 
                 RecordList(
                     modifier = Modifier,

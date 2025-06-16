@@ -15,13 +15,11 @@
  *
  */
 
-@file:OptIn(ExperimentalMaterial3Api::class)
+@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 
 package github.tornaco.android.thanos.module.compose.common.widget
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -37,8 +35,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MediumFlexibleTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextField
@@ -106,18 +106,10 @@ private fun ThanoxMediumTopAppBarContainer(
     searchBarState: SearchBarState = rememberSearchBarState(),
     scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
-    Surface {
-        AnimatedVisibility(
-            visible = searchBarState.showSearchBar,
-            enter = fadeIn(), exit = fadeOut()
-        ) {
+    AnimatedContent(searchBarState.showSearchBar) {
+        if (it) {
             SearchBar(searchBarState)
-        }
-        AnimatedVisibility(
-            visible = !searchBarState.showSearchBar,
-            enter = fadeIn(),
-            exit = fadeOut()
-        ) {
+        } else {
             ThanoxMediumTopAppBar(title, actions, onBackPressed, scrollBehavior)
         }
     }
@@ -130,9 +122,10 @@ private fun ThanoxMediumTopAppBar(
     onBackPressed: (() -> Unit)? = null,
     scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
-    androidx.compose.material3.MediumTopAppBar(
+    MediumFlexibleTopAppBar(
         modifier = Modifier,
         title = title,
+        titleHorizontalAlignment = Alignment.Start,
         actions = actions,
         scrollBehavior = scrollBehavior,
         navigationIcon = {

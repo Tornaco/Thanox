@@ -36,7 +36,7 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
     private var config: BaseAppListFilterContainerConfig = BaseAppListFilterContainerConfig(
         title = { "" },
         featureId = "",
-        loader = { _, _ -> emptyList() }
+        appItemConfig = AppItemConfig(loader = { _, _ -> emptyList() })
     )
 
     private val thanox by lazy { ThanosManager.from(context) }
@@ -61,7 +61,7 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
                 val sort = state.value.appSort
                 val sortReverse = state.value.sortReverse
 
-                val appModels = loader(
+                val appModels = appItemConfig.loader(
                     context,
                     state.value.selectedAppSetFilterItem?.id ?: PREBUILT_PACKAGE_SET_ID_3RD
                 ).filter {
@@ -91,6 +91,12 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
                                 it + System.lineSeparator() + appSortDescription
                             } ?: appSortDescription
                         )
+                    }
+                }.let {
+                    if (sort.relyOnUsageStats()) {
+                        inflateAppUsageStats(it)
+                    } else {
+                        it
                     }
                 }
                 updateState {
@@ -161,5 +167,16 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
     fun updateSortReverse(reverse: Boolean) {
         updateState { copy(sortReverse = reverse) }
         refresh("updateSortReverse")
+    }
+
+    fun updateAppCheckState(app: AppUiModel, checked: Boolean) {
+        updateState {
+            copy(apps = apps.toMutableList().apply {
+                val index = indexOfFirst { app.appInfo.pkgName == it.appInfo.pkgName }
+                if (index >= 0) {
+                    set(index, get(index).copy(isChecked = checked))
+                }
+            })
+        }
     }
 }

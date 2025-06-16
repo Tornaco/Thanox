@@ -3,6 +3,7 @@
 package github.tornaco.android.thanos.module.compose.common.infra
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,12 +27,16 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,6 +53,8 @@ import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.SortToolDropdown
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.SwitchBar
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -116,33 +123,75 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                 Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(bottom = if (config.fabs.isEmpty()) 0.dp else (100 * config.fabs.size).dp)
             ) {
-                item {
-                    Row(
+                stickyHeader {
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                            .background(MaterialTheme.colorScheme.background)
                     ) {
-                        AppFilterDropDown(
-                            state = uiState,
-                            onFilterItemSelected = { vm.onFilterItemSelected(it) }
-                        )
-                        Spacer(modifier = Modifier.size(16.dp))
+                        config.switchBarConfig?.let { sc ->
+                            var isChecked by remember(sc) { mutableStateOf(sc.isChecked) }
+                            SwitchBar(
+                                title = sc.title(context, isChecked),
+                                isChecked = isChecked,
+                                onCheckChange = {
+                                    isChecked = it
+                                    sc.onCheckChanged(it)
+                                },
+                                modifier = Modifier.padding(horizontal = 16.dp)
+                            )
+                        }
 
-                        SortToolDropdown(
-                            selectedItem = uiState.appSort,
-                            allItems = AppSortTools.entries,
-                            isReverse = uiState.sortReverse,
-                            setReverse = {
-                                vm.updateSortReverse(it)
-                            },
-                            onItemSelected = {
-                                vm.updateSort(it)
-                            }
-                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        ) {
+                            AppFilterDropDown(
+                                state = uiState,
+                                onFilterItemSelected = { vm.onFilterItemSelected(it) }
+                            )
+                            Spacer(modifier = Modifier.size(16.dp))
+
+                            SortToolDropdown(
+                                selectedItem = uiState.appSort,
+                                allItems = AppSortTools.entries,
+                                isReverse = uiState.sortReverse,
+                                setReverse = {
+                                    vm.updateSortReverse(it)
+                                },
+                                onItemSelected = {
+                                    vm.updateSort(it)
+                                }
+                            )
+                        }
                     }
                 }
+
+                val onAppItemCheckChange: (AppUiModel, Boolean) -> Unit = { app, check ->
+                    vm.updateAppCheckState(app, check)
+                    config.appItemConfig.onCheckChanged(app, check)
+                }
+
                 items(uiState.apps) { model ->
-                    AppListItem(model, onClick = { config.onAppClick(it) })
+                    if (config.appItemConfig.isCheckable) {
+                        AppListItem(
+                            model,
+                            onClick = {
+                                if (config.appItemConfig.isCheckable) {
+                                    onAppItemCheckChange(model, !model.isChecked)
+                                } else {
+                                    config.appItemConfig.onAppClick(it)
+                                }
+                            },
+                            actions = {
+                                Switch(checked = model.isChecked, onCheckedChange = {
+                                    onAppItemCheckChange(model, it)
+                                })
+                            })
+                    } else {
+                        AppListItem(model, onClick = { config.appItemConfig.onAppClick(it) })
+                    }
                 }
             }
             Md3ExpPullRefreshIndicator(
@@ -155,7 +204,11 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
 }
 
 @Composable
-private fun AppListItem(model: AppUiModel, onClick: (AppUiModel) -> Unit) {
+private fun AppListItem(
+    model: AppUiModel,
+    onClick: (AppUiModel) -> Unit,
+    actions: @Composable (() -> Unit)? = null
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -194,6 +247,10 @@ private fun AppListItem(model: AppUiModel, onClick: (AppUiModel) -> Unit) {
         ) {
             model.badges.forEach {
                 MD3Badge(text = it, modifier = Modifier.padding(start = 6.dp))
+            }
+            if (actions != null) {
+                StandardSpacer()
+                actions()
             }
         }
     }

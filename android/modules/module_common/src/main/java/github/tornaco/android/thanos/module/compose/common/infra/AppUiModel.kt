@@ -7,5 +7,6 @@ data class AppUiModel(
     val description: String? = null,
     val badges: List<String> = emptyList(),
     val lastUsedTimeMills: Long = 0L,
-    val totalUsedTimeMills: Long = 0L
+    val totalUsedTimeMills: Long = 0L,
+    val isChecked: Boolean = false
 )

@@ -35,7 +35,12 @@ import github.tornaco.android.thanos.module.common.R
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 
 @Composable
-fun SwitchBar(modifier: Modifier = Modifier, isChecked: Boolean, onCheckChange: (Boolean) -> Unit) {
+fun SwitchBar(
+    isChecked: Boolean,
+    onCheckChange: (Boolean) -> Unit,
+    title: String,
+    modifier: Modifier = Modifier
+) {
     val bgColor = Color(getColorAttribute(attr = R.attr.switchBarBackground))
     Box(
         modifier = modifier
@@ -54,8 +59,9 @@ fun SwitchBar(modifier: Modifier = Modifier, isChecked: Boolean, onCheckChange: 
             modifier = Modifier
                 .padding(start = 16.dp)
                 .align(Alignment.CenterStart),
-            text = if (isChecked) stringResource(id = github.tornaco.android.thanos.res.R.string.switch_on_text) else stringResource(
-                id = github.tornaco.android.thanos.res.R.string.switch_off_text
+            text = stringResource(
+                id = github.tornaco.android.thanos.res.R.string.common_switchbar_title_format,
+                title
             )
         )
         Switch(

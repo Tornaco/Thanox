@@ -32,13 +32,26 @@ abstract class BaseAppListFilterActivity : ComposeThemeActivity() {
 data class BaseAppListFilterContainerConfig(
     val title: (Context) -> String,
     val featureId: String,
-    val loader: suspend (Context, pkgSetId: String) -> List<AppUiModel>,
     val featureDescription: (Context) -> String? = { null },
-    val onAppClick: (AppUiModel) -> Unit = {},
-    val fabs: List<FabItemConfig> = emptyList()
+    val appItemConfig: AppItemConfig,
+    val fabs: List<FabItemConfig> = emptyList(),
+    val switchBarConfig: SwitchBarConfig? = null
 )
 
 data class FabItemConfig(
     val title: (Context) -> String,
     val onClick: () -> Unit
+)
+
+data class SwitchBarConfig(
+    val title: (Context, Boolean) -> String,
+    val isChecked: Boolean,
+    val onCheckChanged: (Boolean) -> Unit
+)
+
+data class AppItemConfig(
+    val isCheckable: Boolean = false,
+    val onCheckChanged: (AppUiModel, Boolean) -> Unit = { _, _ -> },
+    val loader: suspend (Context, pkgSetId: String) -> List<AppUiModel>,
+    val onAppClick: (AppUiModel) -> Unit = {},
 )

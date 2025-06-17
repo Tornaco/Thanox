@@ -8,5 +8,7 @@ data class AppUiModel(
     val badges: List<String> = emptyList(),
     val lastUsedTimeMills: Long = 0L,
     val totalUsedTimeMills: Long = 0L,
-    val isChecked: Boolean = false
+
+    val isChecked: Boolean = false,
+    val selectedOptionId: String? = null
 )

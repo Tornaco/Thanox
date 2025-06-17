@@ -196,7 +196,7 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                             SortToolDropdown(
                                 selectedItem = uiState.appSort,
                                 allItems = AppSortTools.entries.filter {
-                                    if (config.appItemConfig.isCheckable) {
+                                    if (config.appItemConfig.itemType is AppItemConfig.ItemType.Checkable) {
                                         true
                                     } else {
                                         it != AppSortTools.CheckState
@@ -214,29 +214,33 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                     }
                 }
 
-                val onAppItemCheckChange: (AppUiModel, Boolean) -> Unit = { app, check ->
-                    vm.updateAppCheckState(app, check)
-                    config.appItemConfig.onCheckChanged(app, check)
-                }
-
                 items(uiState.apps) { model ->
-                    if (config.appItemConfig.isCheckable) {
-                        AppListItem(
-                            model,
-                            onClick = {
-                                if (config.appItemConfig.isCheckable) {
-                                    onAppItemCheckChange(model, !model.isChecked)
-                                } else {
-                                    config.appItemConfig.onAppClick(it)
+                    when (val itemType = config.appItemConfig.itemType) {
+                        is AppItemConfig.ItemType.Checkable -> {
+                            val onAppItemCheckChange: (AppUiModel, Boolean) -> Unit =
+                                { app, check ->
+                                    vm.updateAppCheckState(app, check)
+                                    itemType.onCheckChanged(app, check)
                                 }
-                            },
-                            actions = {
-                                Switch(checked = model.isChecked, onCheckedChange = {
-                                    onAppItemCheckChange(model, it)
+                            AppListItem(
+                                model,
+                                onClick = {
+                                    onAppItemCheckChange(model, !model.isChecked)
+                                },
+                                actions = {
+                                    Switch(checked = model.isChecked, onCheckedChange = {
+                                        onAppItemCheckChange(model, it)
+                                    })
                                 })
-                            })
-                    } else {
-                        AppListItem(model, onClick = { config.appItemConfig.onAppClick(it) })
+                        }
+
+                        is AppItemConfig.ItemType.Plain -> {
+                            AppListItem(model, onClick = { itemType.onAppClick(it) })
+                        }
+
+                        else -> {
+
+                        }
                     }
                 }
             }

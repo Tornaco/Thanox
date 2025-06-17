@@ -61,8 +61,27 @@ data class SwitchBarConfig(
 )
 
 data class AppItemConfig(
-    val isCheckable: Boolean = false,
-    val onCheckChanged: (AppUiModel, Boolean) -> Unit = { _, _ -> },
+    val itemType: ItemType,
     val loader: suspend (Context, pkgSetId: String) -> List<AppUiModel>,
-    val onAppClick: (AppUiModel) -> Unit = {},
-)
+) {
+    sealed interface ItemType {
+        data class Plain(
+            val onAppClick: (AppUiModel) -> Unit
+        ) : ItemType
+
+        data class Checkable(
+            val onCheckChanged: (AppUiModel, Boolean) -> Unit,
+        ) : ItemType
+
+        data class OptionSelectable(
+            val options: List<Option>
+        ) : ItemType {
+            data class Option(
+                val title: String,
+                val icon: String,
+                val id: String
+            )
+        }
+
+    }
+}

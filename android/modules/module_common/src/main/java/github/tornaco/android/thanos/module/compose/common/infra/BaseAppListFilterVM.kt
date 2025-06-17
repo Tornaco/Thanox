@@ -36,7 +36,10 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
     private var config: BaseAppListFilterContainerConfig = BaseAppListFilterContainerConfig(
         appBarConfig = AppBarConfig(title = { "" }),
         featureId = "",
-        appItemConfig = AppItemConfig(loader = { _, _ -> emptyList() })
+        appItemConfig = AppItemConfig(
+            itemType = AppItemConfig.ItemType.Plain(onAppClick = {}),
+            loader = { _, _ -> emptyList() }
+        )
     )
 
     private val thanox by lazy { ThanosManager.from(context) }

@@ -58,6 +58,11 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                 },
             ),
             appItemConfig = AppItemConfig(
+                itemType = AppItemConfig.ItemType.Plain(
+                    onAppClick = {
+                        AppDetailsActivity.start(this, it.appInfo)
+                    },
+                ),
                 loader = { context, pkgSetId ->
                     val composer = AppListItemDescriptionComposer(this)
                     val runningBadge = context.getString(R.string.badge_app_running)
@@ -83,9 +88,6 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                             }
                     } ?: listOf(AppUiModel(AppInfo.dummy()))
                     res
-                },
-                onAppClick = {
-                    AppDetailsActivity.start(this, it.appInfo)
                 },
             ),
             fabs = listOf(
@@ -151,15 +153,16 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     }
                 ),
                 appItemConfig = AppItemConfig(
-                    isCheckable = true,
-                    onCheckChanged = { app, isCheck ->
-                        am.setPkgStartBlockEnabled(
-                            Pkg.fromAppInfo(
-                                app.appInfo
-                            ),
-                            !isCheck
-                        )
-                    },
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            am.setPkgStartBlockEnabled(
+                                Pkg.fromAppInfo(
+                                    app.appInfo
+                                ),
+                                !isCheck
+                            )
+                        },
+                    ),
                     loader = { context, pkgSetId ->
                         commonTogglableAppLoader(context, pkgSetId) { !am.isPkgStartBlocking(it) }
                     },
@@ -203,15 +206,16 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     }
                 ),
                 appItemConfig = AppItemConfig(
-                    isCheckable = true,
-                    onCheckChanged = { app, isCheck ->
-                        am.setPkgBgRestrictEnabled(
-                            Pkg.fromAppInfo(
-                                app.appInfo
-                            ),
-                            !isCheck
-                        )
-                    },
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            am.setPkgBgRestrictEnabled(
+                                Pkg.fromAppInfo(
+                                    app.appInfo
+                                ),
+                                !isCheck
+                            )
+                        },
+                    ),
                     loader = { context, pkgSetId ->
                         commonTogglableAppLoader(context, pkgSetId) { !am.isPkgBgRestricted(it) }
                     },
@@ -243,15 +247,16 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     }
                 ),
                 appItemConfig = AppItemConfig(
-                    isCheckable = true,
-                    onCheckChanged = { app, isCheck ->
-                        am.setPkgCleanUpOnTaskRemovalEnabled(
-                            Pkg.fromAppInfo(
-                                app.appInfo
-                            ),
-                            isCheck
-                        )
-                    },
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            am.setPkgCleanUpOnTaskRemovalEnabled(
+                                Pkg.fromAppInfo(
+                                    app.appInfo
+                                ),
+                                isCheck
+                            )
+                        },
+                    ),
                     loader = { context, pkgSetId ->
                         commonTogglableAppLoader(
                             context,
@@ -304,13 +309,14 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     }
                 ),
                 appItemConfig = AppItemConfig(
-                    isCheckable = true,
-                    onCheckChanged = { app, isCheck ->
-                        stack.setPackageLocked(
-                            app.appInfo.pkgName,
-                            isCheck
-                        )
-                    },
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            stack.setPackageLocked(
+                                app.appInfo.pkgName,
+                                isCheck
+                            )
+                        },
+                    ),
                     loader = { context, pkgSetId ->
                         commonTogglableAppLoader(
                             context,
@@ -353,13 +359,14 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     }
                 ),
                 appItemConfig = AppItemConfig(
-                    isCheckable = true,
-                    onCheckChanged = { app, isCheck ->
-                        am.setPkgRecentTaskBlurEnabled(
-                            Pkg.fromAppInfo(app.appInfo),
-                            isCheck
-                        )
-                    },
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            am.setPkgRecentTaskBlurEnabled(
+                                Pkg.fromAppInfo(app.appInfo),
+                                isCheck
+                            )
+                        },
+                    ),
                     loader = { context, pkgSetId ->
                         commonTogglableAppLoader(
                             context,

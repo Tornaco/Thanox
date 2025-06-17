@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderItemHeaderBinding
+import github.tornaco.android.thanos.databinding.ModuleNotificationRecorderItemHeaderBinding
 import github.tornaco.android.thanox.module.notification.recorder.model.NotificationRecordModel
 
 class HeaderViewHolder(private val binding: ModuleNotificationRecorderItemHeaderBinding) :

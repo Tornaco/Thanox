@@ -17,15 +17,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import com.miguelcatalan.materialsearchview.MaterialSearchView.SearchViewListener
+import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.databinding.ModuleNotificationRecorderNrdListLayoutBinding
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.android.thanos.widget.ModernProgressDialog
 import github.tornaco.android.thanos.widget.SwitchBar
 import github.tornaco.android.thanox.module.notification.recorder.NotificationRecordSettingsActivity
-import github.tornaco.android.thanox.module.notification.recorder.R
-import github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderNrdListLayoutBinding
 import github.tornaco.android.thanox.module.notification.recorder.source.NotificationRecordRepository
 import github.tornaco.android.thanox.module.notification.recorder.ui.stats.StatsActivity
 import kotlinx.coroutines.InternalCoroutinesApi

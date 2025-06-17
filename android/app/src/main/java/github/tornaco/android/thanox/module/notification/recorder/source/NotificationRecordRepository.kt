@@ -5,7 +5,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.insertSeparators
 import github.tornaco.android.thanos.core.util.DateUtils
-import github.tornaco.android.thanox.module.notification.recorder.R
 import github.tornaco.android.thanox.module.notification.recorder.model.NotificationRecordModel
 import kotlinx.coroutines.flow.map
 

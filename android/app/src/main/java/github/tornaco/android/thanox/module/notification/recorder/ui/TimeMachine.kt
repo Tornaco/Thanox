@@ -8,9 +8,9 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
+import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.compat.NotificationCompat
 import github.tornaco.android.thanos.core.util.OsUtils
-import github.tornaco.android.thanox.module.notification.recorder.R
 
 object TimeMachine {
     fun mockToast(context: Context, content: String) {

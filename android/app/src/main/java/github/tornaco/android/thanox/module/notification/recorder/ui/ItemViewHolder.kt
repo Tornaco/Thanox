@@ -9,9 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.util.ClipboardUtils
-import github.tornaco.android.thanox.module.notification.recorder.R
-import github.tornaco.android.thanox.module.notification.recorder.databinding.ModuleNotificationRecorderItemBinding
+import github.tornaco.android.thanos.databinding.ModuleNotificationRecorderItemBinding
 import github.tornaco.android.thanox.module.notification.recorder.model.NotificationRecordModel
 
 class ItemViewHolder(private val binding: ModuleNotificationRecorderItemBinding) :

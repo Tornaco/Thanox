@@ -46,4 +46,20 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">24dp</item>
     </style>
+
+    <style name="ModuleNotificationRecorderTextAppearance.NRAppLabel" parent="TextAppearance.Small">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ModuleNotificationRecorderTextAppearance.NRAppTime" parent="TextAppearance.Small">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="ModuleNotificationRecorderTextAppearance.NRContent" parent="TextAppearance.Small">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">13sp</item>
+    </style>
 </resources>

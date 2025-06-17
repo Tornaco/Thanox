@@ -210,4 +210,11 @@
     <string name="key_smart_standby_bypass_if_has_n" translatable="false">key_smart_standby_bypass_if_has_n</string>
     <string name="key_smart_standby_bypass_if_has_visible_windows" translatable="false">key_smart_standby_bypass_if_has_visible_windows</string>
     <string name="key_smart_standby_block_bg_service_start" translatable="false">key_smart_standby_block_bg_service_start</string>
+
+    <string name="key_enable_toast_info" translatable="false">key_enable_toast_info</string>
+    <string name="key_enable_nr_n" translatable="false">key_enable_nr_n</string>
+    <string name="key_enable_nr_t" translatable="false">key_enable_nr_t</string>
+    <string name="key_enable_nr_clip" translatable="false">key_enable_nr_clip</string>
+    <string name="key_nr_apps" translatable="false">key_nr_apps</string>
+    <string name="key_persist_all_apps" translatable="false">key_persist_all_apps</string>
 </resources>

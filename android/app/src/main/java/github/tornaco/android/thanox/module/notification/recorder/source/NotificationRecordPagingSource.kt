@@ -9,11 +9,10 @@ import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.n.NotificationRecord
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.util.DateUtils
-import github.tornaco.android.thanox.module.notification.recorder.R
 import github.tornaco.android.thanox.module.notification.recorder.model.NotificationRecordModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.*
+import java.util.Date
 
 class NotificationRecordPagingSource(
     private val context: Context,

@@ -2,7 +2,7 @@ package github.tornaco.android.thanox.module.notification.recorder.model
 
 import github.tornaco.android.thanos.core.n.NotificationRecord
 import github.tornaco.android.thanos.core.pm.AppInfo
-import java.util.*
+import java.util.Date
 
 sealed class NotificationRecordModel(val date: Date, val formattedTime: String) {
     class Item(

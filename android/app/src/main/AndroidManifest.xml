@@ -262,6 +262,22 @@
             android:name="now.fortuitous.thanos.apps.AioAppListActivity"
             android:exported="false" />
 
+        <activity
+            android:name="github.tornaco.android.thanox.module.notification.recorder.NotificationRecordSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.android.thanox.module.notification.recorder.ui.NotificationRecordActivity"
+            android:exported="false"
+            android:label="@string/module_notification_recorder_feature_title_notification_recorder" />
+        <activity
+            android:name="github.tornaco.android.thanox.module.notification.recorder.ui.stats.StatsActivity"
+            android:exported="false"
+            android:label="@string/module_notification_recorder_stats" />
+        <activity
+            android:name="github.tornaco.android.thanox.module.notification.recorder.AppListActivity"
+            android:exported="false"
+            android:label="@string/app_picker_title" />
+
         <meta-data
             android:name="xposedmodule"
             android:value="true" />

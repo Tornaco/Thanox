@@ -63,7 +63,8 @@ class PrebuiltFeatureLauncher(
                 PrebuiltFeatureIds.ID_APPS_MANAGER,
                 PrebuiltFeatureIds.ID_BACKGROUND_START,
                 PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT,
-                PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {
+                PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL,
+                PrebuiltFeatureIds.ID_TASK_BLUR -> {
                     AioAppListActivity.start(context, featureId)
                 }
 
@@ -144,10 +145,6 @@ class PrebuiltFeatureLauncher(
 
                 PrebuiltFeatureIds.ID_THANOX_OPS -> {
                     ThanoxOpsBottomNavActivity.start(context)
-                }
-
-                PrebuiltFeatureIds.ID_TASK_BLUR -> {
-                    now.fortuitous.thanos.task.RecentTaskBlurListActivity.start(context)
                 }
 
                 PrebuiltFeatureIds.ID_OP_REMIND -> {

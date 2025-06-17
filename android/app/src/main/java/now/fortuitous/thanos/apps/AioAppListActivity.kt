@@ -24,6 +24,7 @@ import now.fortuitous.thanos.main.PrebuiltFeatureIds
 import now.fortuitous.thanos.start.BgRestrictSettingsActivity
 import now.fortuitous.thanos.start.StartRuleActivity
 import now.fortuitous.thanos.start.chart.ComposeStartChartActivity
+import now.fortuitous.thanos.task.RecentTaskBlurSettingsActivity
 
 class AioAppListActivity : BaseAppListFilterActivity() {
     companion object {
@@ -42,6 +43,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> bgRestrictConfig
             PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> cleanTaskConfig
             PrebuiltFeatureIds.ID_APP_LOCK -> appLockConfig
+            PrebuiltFeatureIds.ID_TASK_BLUR -> taskBlurConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -314,6 +316,55 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                             context,
                             pkgSetId
                         ) { stack.isPackageLocked(it.pkgName) }
+                    },
+                ),
+            )
+        }
+
+    private val taskBlurConfig: BaseAppListFilterContainerConfig
+        get() {
+            val am = ThanosManager.from(this).activityManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "appLock",
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.feature_title_recent_task_blur)
+                    },
+                    actions = {
+                        listOf(
+                            AppBarConfig.AppBarAction(
+                                title = it.getString(R.string.nav_title_settings),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill,
+                                onClick = {
+                                    RecentTaskBlurSettingsActivity.start(this)
+                                }
+                            )
+                        )
+                    }
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.feature_title_recent_task_blur)
+                    },
+                    isChecked = am.isRecentTaskBlurEnabled,
+                    onCheckChanged = { isChecked ->
+                        am.isRecentTaskBlurEnabled = isChecked
+                        true
+                    }
+                ),
+                appItemConfig = AppItemConfig(
+                    isCheckable = true,
+                    onCheckChanged = { app, isCheck ->
+                        am.setPkgRecentTaskBlurEnabled(
+                            Pkg.fromAppInfo(app.appInfo),
+                            isCheck
+                        )
+                    },
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) { am.isPkgRecentTaskBlurEnabled(it) }
                     },
                 ),
             )

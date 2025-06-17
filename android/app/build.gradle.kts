@@ -257,6 +257,13 @@ val generateProguardRules by tasks.registering {
             appendText("-repackageclasses ${generateRandomPackageName()}")
             appendText(System.lineSeparator())
         }
+
+        ruleFile.appendText(System.lineSeparator())
+        ruleFile.appendText("""
+            -obfuscationdictionary proguard_dict.txt
+            -classobfuscationdictionary proguard_dict.txt
+            -packageobfuscationdictionary proguard_dict.txt
+        """.trimIndent())
     }
 }
 

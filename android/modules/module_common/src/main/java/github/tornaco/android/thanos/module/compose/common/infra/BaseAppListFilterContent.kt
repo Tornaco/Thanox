@@ -174,8 +174,9 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                                 title = sc.title(context, isChecked),
                                 isChecked = isChecked,
                                 onCheckChange = {
-                                    isChecked = it
-                                    sc.onCheckChanged(it)
+                                    if (sc.onCheckChanged(it)) {
+                                        isChecked = it
+                                    }
                                 },
                                 modifier = Modifier.padding(horizontal = 16.dp)
                             )

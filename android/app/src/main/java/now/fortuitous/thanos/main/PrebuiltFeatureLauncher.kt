@@ -28,7 +28,6 @@ import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampolineActivity
 import github.tornaco.android.thanox.module.notification.recorder.ui.NotificationRecordActivity
-import github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity
 import github.tornaco.thanos.android.module.profile.RuleListActivity
 import github.tornaco.thanos.android.ops.ops.by.ops.OpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity
@@ -66,6 +65,16 @@ class PrebuiltFeatureLauncher(
                 PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT,
                 PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {
                     AioAppListActivity.start(context, featureId)
+                }
+
+                PrebuiltFeatureIds.ID_APP_LOCK -> {
+                    AppFeatureManager.withSubscriptionStatus(context) {
+                        if (it) {
+                            AioAppListActivity.start(context, featureId)
+                        } else {
+                            AppFeatureManager.showDonateIntroDialog(context)
+                        }
+                    }
                 }
 
                 PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {
@@ -143,16 +152,6 @@ class PrebuiltFeatureLauncher(
 
                 PrebuiltFeatureIds.ID_OP_REMIND -> {
                     RemindOpsActivity.start(context)
-                }
-
-                PrebuiltFeatureIds.ID_APP_LOCK -> {
-                    AppFeatureManager.withSubscriptionStatus(context) {
-                        if (it) {
-                            LockerStartActivity.start(context)
-                        } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
-                        }
-                    }
                 }
 
                 PrebuiltFeatureIds.ID_INFINITE_Z -> {

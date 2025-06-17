@@ -2,6 +2,7 @@ package now.fortuitous.thanos.apps
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
@@ -17,6 +18,8 @@ import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos
+import github.tornaco.practice.honeycomb.locker.ui.setup.LockSettingsActivity
+import github.tornaco.practice.honeycomb.locker.ui.verify.isBiometricReady
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
 import now.fortuitous.thanos.start.BgRestrictSettingsActivity
 import now.fortuitous.thanos.start.StartRuleActivity
@@ -38,6 +41,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_BACKGROUND_START -> bgStartConfig
             PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> bgRestrictConfig
             PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> cleanTaskConfig
+            PrebuiltFeatureIds.ID_APP_LOCK -> appLockConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -141,6 +145,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     isChecked = am.isStartBlockEnabled,
                     onCheckChanged = {
                         am.isStartBlockEnabled = it
+                        true
                     }
                 ),
                 appItemConfig = AppItemConfig(
@@ -192,6 +197,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     isChecked = am.isBgRestrictEnabled,
                     onCheckChanged = {
                         am.isBgRestrictEnabled = it
+                        true
                     }
                 ),
                 appItemConfig = AppItemConfig(
@@ -231,6 +237,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     isChecked = am.isCleanUpOnTaskRemovalEnabled,
                     onCheckChanged = {
                         am.isCleanUpOnTaskRemovalEnabled = it
+                        true
                     }
                 ),
                 appItemConfig = AppItemConfig(
@@ -248,6 +255,65 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                             context,
                             pkgSetId
                         ) { am.isPkgCleanUpOnTaskRemovalEnabled(it) }
+                    },
+                ),
+            )
+        }
+
+    private val appLockConfig: BaseAppListFilterContainerConfig
+        get() {
+            val stack = ThanosManager.from(this).activityStackSupervisor
+            return BaseAppListFilterContainerConfig(
+                featureId = "appLock",
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.module_locker_app_name)
+                    },
+                    actions = {
+                        listOf(
+                            AppBarConfig.AppBarAction(
+                                title = it.getString(R.string.nav_title_settings),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill,
+                                onClick = {
+                                    LockSettingsActivity.start(this)
+                                }
+                            )
+                        )
+                    }
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.module_locker_app_name)
+                    },
+                    isChecked = stack.isAppLockEnabled,
+                    onCheckChanged = { isChecked ->
+                        if (isChecked && !isBiometricReady(this)) {
+                            Toast.makeText(
+                                this,
+                                R.string.module_locker_biometric_not_set_dialog_message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                            stack.isAppLockEnabled = false
+                            false
+                        } else {
+                            stack.isAppLockEnabled = isChecked
+                            true
+                        }
+                    }
+                ),
+                appItemConfig = AppItemConfig(
+                    isCheckable = true,
+                    onCheckChanged = { app, isCheck ->
+                        stack.setPackageLocked(
+                            app.appInfo.pkgName,
+                            isCheck
+                        )
+                    },
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) { stack.isPackageLocked(it.pkgName) }
                     },
                 ),
             )

@@ -57,7 +57,7 @@ data class FabItemConfig(
 data class SwitchBarConfig(
     val title: (Context, Boolean) -> String,
     val isChecked: Boolean,
-    val onCheckChanged: (Boolean) -> Unit
+    val onCheckChanged: (Boolean) -> Boolean
 )
 
 data class AppItemConfig(

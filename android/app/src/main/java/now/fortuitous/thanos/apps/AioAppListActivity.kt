@@ -37,6 +37,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_APPS_MANAGER -> appsManagerConfig
             PrebuiltFeatureIds.ID_BACKGROUND_START -> bgStartConfig
             PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> bgRestrictConfig
+            PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> cleanTaskConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -205,6 +206,48 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     },
                     loader = { context, pkgSetId ->
                         commonTogglableAppLoader(context, pkgSetId) { !am.isPkgBgRestricted(it) }
+                    },
+                ),
+            )
+        }
+
+    private val cleanTaskConfig: BaseAppListFilterContainerConfig
+        get() {
+            val am = ThanosManager.from(this).activityManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "cleanTask",
+                featureDescription = {
+                    it.getString(R.string.feature_desc_clean_when_task_removed)
+                },
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.activity_title_clean_when_task_removed)
+                    },
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.activity_title_clean_when_task_removed)
+                    },
+                    isChecked = am.isCleanUpOnTaskRemovalEnabled,
+                    onCheckChanged = {
+                        am.isCleanUpOnTaskRemovalEnabled = it
+                    }
+                ),
+                appItemConfig = AppItemConfig(
+                    isCheckable = true,
+                    onCheckChanged = { app, isCheck ->
+                        am.setPkgCleanUpOnTaskRemovalEnabled(
+                            Pkg.fromAppInfo(
+                                app.appInfo
+                            ),
+                            isCheck
+                        )
+                    },
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) { am.isPkgCleanUpOnTaskRemovalEnabled(it) }
                     },
                 ),
             )

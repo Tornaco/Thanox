@@ -61,20 +61,11 @@ class PrebuiltFeatureLauncher(
                     }
                 }
 
-                PrebuiltFeatureIds.ID_BACKGROUND_START -> {
-                    AioAppListActivity.start(context, PrebuiltFeatureIds.ID_BACKGROUND_START)
-                }
-
-                PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> {
-                    AioAppListActivity.start(context, PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT)
-                }
-
+                PrebuiltFeatureIds.ID_APPS_MANAGER,
+                PrebuiltFeatureIds.ID_BACKGROUND_START,
+                PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT,
                 PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {
-                    now.fortuitous.thanos.task.CleanUpOnTaskRemovedActivity.start(context)
-                }
-
-                PrebuiltFeatureIds.ID_APPS_MANAGER -> {
-                    AioAppListActivity.start(context, PrebuiltFeatureIds.ID_APPS_MANAGER)
+                    AioAppListActivity.start(context, featureId)
                 }
 
                 PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {

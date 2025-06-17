@@ -18,6 +18,7 @@ import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDi
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
+import now.fortuitous.thanos.start.BgRestrictSettingsActivity
 import now.fortuitous.thanos.start.StartRuleActivity
 import now.fortuitous.thanos.start.chart.ComposeStartChartActivity
 
@@ -35,6 +36,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
         return when (featureId) {
             PrebuiltFeatureIds.ID_APPS_MANAGER -> appsManagerConfig
             PrebuiltFeatureIds.ID_BACKGROUND_START -> bgStartConfig
+            PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> bgRestrictConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -88,93 +90,155 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             )
         )
 
-    private val bgStartConfig
-        get() = BaseAppListFilterContainerConfig(
-            featureId = "bgStart",
-            featureDescription = {
-                it.getString(R.string.feature_desc_start_restrict)
-            },
-            appBarConfig = AppBarConfig(
-                title = {
-                    it.getString(R.string.activity_title_start_restrict)
+    private val bgStartConfig: BaseAppListFilterContainerConfig
+        get() {
+            val am = ThanosManager.from(this).activityManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "bgStart",
+                featureDescription = {
+                    it.getString(R.string.feature_desc_start_restrict)
                 },
-                actions = { context ->
-                    listOf(
-                        AppBarConfig.AppBarAction(
-                            title = context.getString(R.string.menu_title_start_restrict_charts),
-                            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_line_chart_fill,
-                            onClick = {
-                                withSubscriptionStatus(this) { subscribed: Boolean ->
-                                    if (subscribed) {
-                                        ComposeStartChartActivity.Starter.start(this)
-                                    } else {
-                                        showDonateIntroDialog(this)
-                                    }
-                                }
-                            }
-                        ),
-                        AppBarConfig.AppBarAction(
-                            title = context.getString(R.string.menu_title_rules),
-                            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_list_2_line,
-                            onClick = {
-                                withSubscriptionStatus(this) { subscribed: Boolean ->
-                                    if (subscribed) {
-                                        StartRuleActivity.start(this)
-                                    } else {
-                                        showDonateIntroDialog(this)
-                                    }
-                                }
-                            },
-                        )
-                    )
-                }
-            ),
-            switchBarConfig = SwitchBarConfig(
-                title = { context, _ ->
-                    context.getString(R.string.activity_title_start_restrict)
-                },
-                isChecked = ThanosManager.from(this).activityManager.isStartBlockEnabled,
-                onCheckChanged = {
-                    ThanosManager.from(this).activityManager.isStartBlockEnabled = it
-                }
-            ),
-            appItemConfig = AppItemConfig(
-                isCheckable = true,
-                onCheckChanged = { app, isCheck ->
-                    ThanosManager.from(this).activityManager.setPkgStartBlockEnabled(
-                        Pkg.fromAppInfo(
-                            app.appInfo
-                        ),
-                        !isCheck
-                    )
-                },
-                loader = { context, pkgSetId ->
-                    val composer = AppListItemDescriptionComposer(this)
-                    val runningBadge = context.getString(R.string.badge_app_running)
-                    val idleBadge = context.getString(R.string.badge_app_idle)
-
-                    val res: List<AppUiModel> = context.withThanos {
-                        val am = activityManager
-                        return@withThanos pkgManager.getInstalledPkgsByPackageSetId(pkgSetId)
-                            .distinct()
-                            .map { appInfo ->
-                                AppUiModel(
-                                    appInfo = appInfo,
-                                    description = composer.getAppItemDescription(appInfo),
-                                    badges = listOfNotNull(
-                                        if (am.isPackageRunning(Pkg.fromAppInfo(appInfo))) {
-                                            runningBadge
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.activity_title_start_restrict)
+                    },
+                    actions = { context ->
+                        listOf(
+                            AppBarConfig.AppBarAction(
+                                title = context.getString(R.string.menu_title_start_restrict_charts),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_line_chart_fill,
+                                onClick = {
+                                    withSubscriptionStatus(this) { subscribed: Boolean ->
+                                        if (subscribed) {
+                                            ComposeStartChartActivity.Starter.start(this)
                                         } else {
-                                            null
-                                        },
-                                        if (am.isPackageIdle(Pkg.fromAppInfo(appInfo))) idleBadge else null,
-                                    ),
-                                    isChecked = !am.isPkgStartBlocking(Pkg.fromAppInfo(appInfo))
-                                )
-                            }
-                    } ?: listOf(AppUiModel(AppInfo.dummy()))
-                    res.sortedBy { it.appInfo }
+                                            showDonateIntroDialog(this)
+                                        }
+                                    }
+                                }
+                            ),
+                            AppBarConfig.AppBarAction(
+                                title = context.getString(R.string.menu_title_rules),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_list_2_line,
+                                onClick = {
+                                    withSubscriptionStatus(this) { subscribed: Boolean ->
+                                        if (subscribed) {
+                                            StartRuleActivity.start(this)
+                                        } else {
+                                            showDonateIntroDialog(this)
+                                        }
+                                    }
+                                },
+                            )
+                        )
+                    }
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.activity_title_start_restrict)
+                    },
+                    isChecked = am.isStartBlockEnabled,
+                    onCheckChanged = {
+                        am.isStartBlockEnabled = it
+                    }
+                ),
+                appItemConfig = AppItemConfig(
+                    isCheckable = true,
+                    onCheckChanged = { app, isCheck ->
+                        am.setPkgStartBlockEnabled(
+                            Pkg.fromAppInfo(
+                                app.appInfo
+                            ),
+                            !isCheck
+                        )
+                    },
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(context, pkgSetId) { !am.isPkgStartBlocking(it) }
+                    },
+                ),
+            )
+        }
+
+
+    private val bgRestrictConfig: BaseAppListFilterContainerConfig
+        get() {
+            val am = ThanosManager.from(this).activityManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "bgRestrict",
+                featureDescription = {
+                    it.getString(R.string.feature_desc_bg_restrict)
                 },
-            ),
-        )
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.activity_title_bg_restrict)
+                    },
+                    actions = { context ->
+                        listOf(
+                            AppBarConfig.AppBarAction(
+                                title = context.getString(R.string.nav_title_settings),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill,
+                                onClick = {
+                                    BgRestrictSettingsActivity.start(this)
+                                }
+                            )
+                        )
+                    }
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.activity_title_bg_restrict)
+                    },
+                    isChecked = am.isBgRestrictEnabled,
+                    onCheckChanged = {
+                        am.isBgRestrictEnabled = it
+                    }
+                ),
+                appItemConfig = AppItemConfig(
+                    isCheckable = true,
+                    onCheckChanged = { app, isCheck ->
+                        am.setPkgBgRestrictEnabled(
+                            Pkg.fromAppInfo(
+                                app.appInfo
+                            ),
+                            !isCheck
+                        )
+                    },
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(context, pkgSetId) { !am.isPkgBgRestricted(it) }
+                    },
+                ),
+            )
+        }
+
+    private fun commonTogglableAppLoader(
+        context: Context,
+        pkgSetId: String,
+        isChecked: ThanosManager.(Pkg) -> Boolean
+    ): List<AppUiModel> {
+        val composer = AppListItemDescriptionComposer(this)
+        val runningBadge = context.getString(R.string.badge_app_running)
+        val idleBadge = context.getString(R.string.badge_app_idle)
+
+        val res: List<AppUiModel> = context.withThanos {
+            val am = activityManager
+            return@withThanos pkgManager.getInstalledPkgsByPackageSetId(pkgSetId)
+                .distinct()
+                .map { appInfo ->
+                    AppUiModel(
+                        appInfo = appInfo,
+                        description = composer.getAppItemDescription(appInfo),
+                        badges = listOfNotNull(
+                            if (am.isPackageRunning(Pkg.fromAppInfo(appInfo))) {
+                                runningBadge
+                            } else {
+                                null
+                            },
+                            if (am.isPackageIdle(Pkg.fromAppInfo(appInfo))) idleBadge else null,
+                        ),
+                        isChecked = isChecked(Pkg.fromAppInfo(appInfo))
+                    )
+                }
+        } ?: listOf(AppUiModel(AppInfo.dummy()))
+        return res.sortedBy { it.appInfo }
+    }
 }

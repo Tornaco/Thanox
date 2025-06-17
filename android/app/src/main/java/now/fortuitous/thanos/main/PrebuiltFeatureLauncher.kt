@@ -66,7 +66,7 @@ class PrebuiltFeatureLauncher(
                 }
 
                 PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> {
-                    now.fortuitous.thanos.start.BackgroundRestrictActivity.start(context)
+                    AioAppListActivity.start(context, PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT)
                 }
 
                 PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {

@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.SplitButtonDefaults
 import androidx.compose.material3.SplitButtonLayout
 import androidx.compose.material3.Text
@@ -67,43 +68,60 @@ fun DropdownButtonLayout(
     open: () -> Unit,
     modifier: Modifier = Modifier,
     leadingIcon: ImageVector = Icons.Filled.FilterAlt,
-    trailingIcon: ImageVector = Icons.Filled.KeyboardArrowDown
+    trailingIcon: ImageVector = Icons.Filled.KeyboardArrowDown,
+    isCompatMode: Boolean = false
 ) {
     SplitButtonLayout(
         modifier = modifier,
         leadingButton = {
-            SplitButtonDefaults.TonalLeadingButton(
-                onClick = { /* Do Nothing */ },
-            ) {
-                androidx.compose.material3.Icon(
-                    imageVector = leadingIcon,
-                    contentDescription = ""
-                )
-                Text(text)
+            if (isCompatMode) {
+                FilledTonalButton(onClick = {
+                    open()
+                }) {
+                    androidx.compose.material3.Icon(
+                        imageVector = leadingIcon,
+                        contentDescription = ""
+                    )
+                    Text(text, maxLines = 1)
+                }
+            } else {
+                SplitButtonDefaults.TonalLeadingButton(
+                    onClick = { /* Do Nothing */ },
+                ) {
+                    androidx.compose.material3.Icon(
+                        imageVector = leadingIcon,
+                        contentDescription = ""
+                    )
+                    Text(text)
+                }
             }
         },
         trailingButton = {
-            SplitButtonDefaults.TonalTrailingButton(
-                checked = isMenuOpen,
-                onCheckedChange = {
-                    open()
-                },
-            ) {
-                val rotation: Float by
-                animateFloatAsState(
-                    targetValue = if (isMenuOpen) 180f else 0f,
-                    label = "Trailing Icon Rotation"
-                )
-                androidx.compose.material3.Icon(
-                    trailingIcon,
-                    modifier =
-                        Modifier
-                            .size(SplitButtonDefaults.TrailingIconSize)
-                            .graphicsLayer {
-                                this.rotationZ = rotation
-                            },
-                    contentDescription = ""
-                )
+            if (isCompatMode) {
+
+            } else {
+                SplitButtonDefaults.TonalTrailingButton(
+                    checked = isMenuOpen,
+                    onCheckedChange = {
+                        open()
+                    },
+                ) {
+                    val rotation: Float by
+                    animateFloatAsState(
+                        targetValue = if (isMenuOpen) 180f else 0f,
+                        label = "Trailing Icon Rotation"
+                    )
+                    androidx.compose.material3.Icon(
+                        trailingIcon,
+                        modifier =
+                            Modifier
+                                .size(SplitButtonDefaults.TrailingIconSize)
+                                .graphicsLayer {
+                                    this.rotationZ = rotation
+                                },
+                        contentDescription = ""
+                    )
+                }
             }
         }
     )

@@ -45,6 +45,7 @@ fun <T : FilterItem> FilterDropDown(
     selectedItem: T?,
     allItems: List<T>,
     onItemSelected: (T) -> Unit = {},
+    isCompatMode: Boolean = false
 ) {
     val context = LocalContext.current
     if (selectedItem != null && allItems.isNotEmpty()) {
@@ -59,6 +60,7 @@ fun <T : FilterItem> FilterDropDown(
                 open = {
                     expanded = true
                 },
+                isCompatMode = isCompatMode
             )
 
             MaterialTheme(

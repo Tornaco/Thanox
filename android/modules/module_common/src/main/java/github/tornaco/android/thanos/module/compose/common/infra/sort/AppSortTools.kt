@@ -41,6 +41,19 @@ enum class AppSortTools(
                 return null
             }
         }),
+    OptionState(
+        R.string.nav_title_settings,
+        object : AppSorterProvider {
+            override fun comparator(context: Context): Comparator<AppUiModel> {
+                return Comparator { obj: AppUiModel, listModel: AppUiModel ->
+                    listModel.selectedOptionId.orEmpty().compareTo(obj.selectedOptionId.orEmpty())
+                }
+            }
+
+            override fun getAppSortDescription(context: Context, model: AppUiModel): String? {
+                return null
+            }
+        }),
     Running(
         R.string.chip_title_app_only_running,
         object : AppSorterProvider {

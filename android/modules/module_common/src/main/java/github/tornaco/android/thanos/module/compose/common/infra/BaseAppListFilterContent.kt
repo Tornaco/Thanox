@@ -49,7 +49,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import github.tornaco.android.thanos.core.pm.AppInfo
-import github.tornaco.android.thanos.module.compose.common.infra.sort.AppSortTools
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
@@ -192,29 +191,36 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         ) {
+                            val isCompatMode =
+                                config.appItemConfig.itemType is AppItemConfig.ItemType.OptionSelectable
                             AppFilterDropDown(
                                 state = uiState,
-                                onFilterItemSelected = { vm.onFilterItemSelected(it) }
+                                onFilterItemSelected = { vm.onFilterItemSelected(it) },
+                                isCompatMode = isCompatMode
                             )
-                            Spacer(modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.size(if (isCompatMode) 8.dp else 16.dp))
 
                             SortToolDropdown(
                                 selectedItem = uiState.appSort,
-                                allItems = AppSortTools.entries.filter {
-                                    if (config.appItemConfig.itemType is AppItemConfig.ItemType.Checkable) {
-                                        true
-                                    } else {
-                                        it != AppSortTools.CheckState
-                                    }
-                                },
+                                allItems = uiState.sortToolItems,
                                 isReverse = uiState.sortReverse,
                                 setReverse = {
                                     vm.updateSortReverse(it)
                                 },
                                 onItemSelected = {
                                     vm.updateSort(it)
-                                }
+                                },
+                                isCompatMode = isCompatMode
                             )
+                            Spacer(modifier = Modifier.size(if (isCompatMode) 8.dp else 16.dp))
+
+                            if (uiState.optionsFilterItems.isNotEmpty()) {
+                                OptionsFilterDropDown(
+                                    state = uiState,
+                                    onFilterItemSelected = { vm.onOptionFilterItemSelected(it) },
+                                    isCompatMode = isCompatMode
+                                )
+                            }
                         }
                     }
                 }
@@ -258,7 +264,7 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                         }
 
                         is AppItemConfig.ItemType.OptionSelectable -> {
-                            val optionDialog = optionMenuDialog(itemType) {
+                            val optionDialog = optionMenuDialog(model.appInfo.appLabel, itemType) {
                                 itemType.onSelected(model, it)
                                 vm.updateAppOptionState(model, it)
                             }
@@ -361,23 +367,41 @@ private fun AppListItem(
 @Composable
 private fun AppFilterDropDown(
     state: AppListUiState,
-    onFilterItemSelected: (AppSetFilterItem) -> Unit
+    onFilterItemSelected: (AppSetFilterItem) -> Unit,
+    isCompatMode: Boolean
 ) {
     FilterDropDown(
         selectedItem = state.selectedAppSetFilterItem,
         allItems = state.appFilterItems,
-        onItemSelected = onFilterItemSelected
+        onItemSelected = onFilterItemSelected,
+        isCompatMode = isCompatMode
+    )
+}
+
+
+@Composable
+private fun OptionsFilterDropDown(
+    state: AppListUiState,
+    onFilterItemSelected: (AppSetFilterItem) -> Unit,
+    isCompatMode: Boolean
+) {
+    FilterDropDown(
+        selectedItem = state.selectedOptionFilterItem,
+        allItems = state.optionsFilterItems,
+        onItemSelected = onFilterItemSelected,
+        isCompatMode = isCompatMode
     )
 }
 
 @Composable
 private fun optionMenuDialog(
+    title: String,
     selectable: AppItemConfig.ItemType.OptionSelectable,
     onSelected: (String) -> Unit
 ): MenuDialogState<Unit> {
     val context = LocalContext.current
     val state = rememberMenuDialogState<Unit>(
-        title = "",
+        title = title,
         menuItems = selectable.options.map {
             MenuDialogItem(
                 id = it.id,

@@ -47,6 +47,7 @@ fun SortToolDropdown(
     isReverse: Boolean,
     setReverse: (Boolean) -> Unit,
     onItemSelected: (AppSortTools) -> Unit = {},
+    isCompatMode: Boolean
 ) {
     if (allItems.isNotEmpty()) {
         Box(
@@ -61,6 +62,7 @@ fun SortToolDropdown(
                 open = {
                     expanded = true
                 },
+                isCompatMode = isCompatMode
             )
 
             MaterialTheme(

@@ -8,9 +8,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.common.AppLabelSearchFilter
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
+import github.tornaco.android.thanos.module.compose.common.infra.AppListUiState.Companion.filterOptionsAll
 import github.tornaco.android.thanos.module.compose.common.infra.sort.AppSortTools
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.loader.Loader
+import github.tornaco.android.thanos.res.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -24,11 +26,19 @@ data class AppListUiState(
     val appFilterItems: List<AppSetFilterItem> = emptyList(),
     val selectedAppSetFilterItem: AppSetFilterItem? = null,
 
+    val optionsFilterItems: List<AppSetFilterItem> = emptyList(),
+    val selectedOptionFilterItem: AppSetFilterItem? = filterOptionsAll,
+
     val appSort: AppSortTools = AppSortTools.Default,
     val sortReverse: Boolean = false,
+    val sortToolItems: List<AppSortTools> = emptyList(),
 
     val searchKeyword: String = ""
-)
+) {
+    companion object {
+        val filterOptionsAll = AppSetFilterItem("") { it.getString(R.string.all) }
+    }
+}
 
 @HiltViewModel
 class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val context: Context) :
@@ -51,6 +61,8 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
         this.config = config
         viewModelScope.launch {
             loadDefaultAppFilterItems()
+            loadOptionsFilterItems()
+            loadSortToolItems()
             loadApps("installIn")
         }
     }
@@ -64,6 +76,8 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
                 val sort = state.value.appSort
                 val sortReverse = state.value.sortReverse
 
+                val selectedOptionFilter = state.value.selectedOptionFilterItem ?: filterOptionsAll
+
                 val appModels = appItemConfig.loader(
                     context,
                     state.value.selectedAppSetFilterItem?.id ?: PREBUILT_PACKAGE_SET_ID_3RD
@@ -71,6 +85,8 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
                     searchKeyword.isEmpty() || (searchKeyword.length > 2 && it.appInfo.pkgName.contains(
                         searchKeyword
                     )) || appLabelSearchFilter.matches(searchKeyword, it.appInfo.appLabel)
+                }.filter {
+                    selectedOptionFilter == filterOptionsAll || it.selectedOptionId == selectedOptionFilter.id
                 }.let {
                     val appSorterProvider = sort.provider
                     val sortApplied =
@@ -116,6 +132,13 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
         refresh("onFilterItemSelected")
     }
 
+    fun onOptionFilterItemSelected(appSetFilterItem: AppSetFilterItem) {
+        updateState {
+            copy(selectedOptionFilterItem = appSetFilterItem)
+        }
+        refresh("onOptionFilterItemSelected")
+    }
+
     private suspend fun loadDefaultAppFilterItems() {
         val appFilterListItems = Loader.loadAllFromAppSet(context)
         updateState {
@@ -126,6 +149,54 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
                 },
                 appFilterItems = appFilterListItems
             )
+        }
+    }
+
+    private fun loadOptionsFilterItems() {
+        val itemType = config.appItemConfig.itemType
+        val extraItems: List<AppSetFilterItem> = when (itemType) {
+            is AppItemConfig.ItemType.OptionSelectable -> {
+                itemType.options.map { op ->
+                    AppSetFilterItem(op.id) { op.title(it) }
+                }.toMutableList().apply {
+                    add(filterOptionsAll)
+                }
+            }
+
+            else -> {
+                emptyList()
+            }
+        }
+        updateState {
+            copy(
+                selectedOptionFilterItem = filterOptionsAll,
+                optionsFilterItems = extraItems
+            )
+        }
+    }
+
+    private fun loadSortToolItems() {
+        val items = when (config.appItemConfig.itemType) {
+            is AppItemConfig.ItemType.Plain -> {
+                AppSortTools.entries.filter {
+                    it != AppSortTools.CheckState && it != AppSortTools.OptionState
+                }
+            }
+
+            is AppItemConfig.ItemType.Checkable -> {
+                AppSortTools.entries.filter {
+                    it != AppSortTools.OptionState
+                }
+            }
+
+            is AppItemConfig.ItemType.OptionSelectable -> {
+                AppSortTools.entries.filter {
+                    it != AppSortTools.CheckState
+                }
+            }
+        }
+        updateState {
+            copy(sortToolItems = items)
         }
     }
 

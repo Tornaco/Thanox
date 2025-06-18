@@ -6,6 +6,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.push.wechat.PushDelegateManager;
 

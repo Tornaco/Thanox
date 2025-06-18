@@ -41,7 +41,6 @@ include(":modules:module_ops2")
 include(":modules:module_profile")
 include(":modules:module_common")
 include(":modules:module_filepicker")
-include(":modules:module_push_message_delegate")
 
 include(":third_party:dateformatter")
 include(":third_party:recyclerview-fastscroll")

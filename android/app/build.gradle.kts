@@ -220,7 +220,6 @@ dependencies {
     implementation(project(":modules:module_ops2"))
     implementation(project(":modules:module_filepicker"))
     implementation(project(":modules:module_profile"))
-    implementation(project(":modules:module_push_message_delegate"))
     implementation(project(":modules:module_donate"))
     implementation(project(":modules:module_feature_launcher"))
 

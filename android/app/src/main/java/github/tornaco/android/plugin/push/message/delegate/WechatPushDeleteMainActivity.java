@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;

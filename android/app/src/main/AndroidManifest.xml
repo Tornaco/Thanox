@@ -277,6 +277,9 @@
             android:name="github.tornaco.android.thanox.module.notification.recorder.AppListActivity"
             android:exported="false"
             android:label="@string/app_picker_title" />
+        <activity
+            android:name="github.tornaco.thanos.module.component.manager.redesign.ComponentsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

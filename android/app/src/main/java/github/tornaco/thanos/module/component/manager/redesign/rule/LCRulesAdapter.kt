@@ -31,8 +31,8 @@ import com.absinthe.rulesbundle.RECEIVER
 import com.absinthe.rulesbundle.Rule
 import com.absinthe.rulesbundle.SERVICE
 import com.elvishew.xlog.XLog
+import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.core.app.AppGlobals
-import github.tornaco.thanos.module.component.manager.BuildConfig
 import github.tornaco.thanos.module.component.manager.redesign.toCategory
 import kotlinx.coroutines.runBlocking
 import kotlinx.parcelize.Parcelize
@@ -76,7 +76,7 @@ private fun getRule(name: ComponentName, type: Int): ComponentRule =
                 it.isSimpleColorIcon
             )
         }
-        if (BuildConfig.DEBUG) {
+        if (BuildProp.THANOS_BUILD_DEBUG) {
             XLog.v("getRule: ${name.className} ${wrap?.label}")
         }
         wrap ?: fallbackRule

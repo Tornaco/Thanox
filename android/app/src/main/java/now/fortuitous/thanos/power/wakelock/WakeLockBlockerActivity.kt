@@ -33,9 +33,7 @@ class WakeLockBlockerActivity : ComposeThemeActivity() {
         }
     }
 
-    override fun isF(): Boolean {
-        return true
-    }
+    
 
     @Composable
     override fun Content() {

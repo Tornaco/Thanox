@@ -54,11 +54,10 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.android.thanos.util.ToastUtils
-import github.tornaco.thanos.android.module.profile.R
 import github.tornaco.thanos.android.module.profile.RuleEditorActivity
 
 @AndroidEntryPoint
@@ -98,7 +97,7 @@ class ProfileExampleActivity : ComposeThemeActivity() {
             }
         }
 
-        ThanoxSmallAppBarScaffold(title = {
+        ThanoxMediumAppBarScaffold(title = {
             Text(
                 text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_impor_example),
                 style = TypographyDefaults.appBarTitleTextStyle()

@@ -63,7 +63,6 @@ import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults.appBarTitleTextStyle
@@ -71,7 +70,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SwitchBar
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 
@@ -93,7 +92,7 @@ fun SettingsAccessRecordViewerScreen(
 
     val listState = rememberLazyListState()
 
-    ThanoxSmallAppBarScaffold(
+    ThanoxMediumAppBarScaffold(
         title = {
             Text(
                 stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_settings_access_record),
@@ -141,10 +140,10 @@ fun SettingsAccessRecordViewerScreen(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .padding(top = 16.dp),
-                    isChecked = state.isRecordEnabled
-                ) {
-                    viewModel.setRecordEnabled(it)
-                }
+                    title = stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_settings_access_record),
+                    isChecked = state.isRecordEnabled,
+                    onCheckChange = { viewModel.setRecordEnabled(it) }
+                )
 
                 RecordList(
                     modifier = Modifier,

@@ -24,7 +24,7 @@ import androidx.compose.ui.res.stringResource
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.util.ActivityUtils
 
 @AndroidEntryPoint
@@ -37,7 +37,7 @@ class NotificationCenterActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
-        ThanoxSmallAppBarScaffold(title = {
+        ThanoxMediumAppBarScaffold(title = {
             Text(
                 text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_notification_recorder_feature_title_notification_recorder),
                 style = TypographyDefaults.appBarTitleTextStyle()

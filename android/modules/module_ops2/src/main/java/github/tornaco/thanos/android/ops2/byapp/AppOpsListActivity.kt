@@ -36,7 +36,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.thanos.android.ops2.byop.displayColor
 import github.tornaco.thanos.android.ops2.byop.displayLabel
@@ -64,7 +64,7 @@ class AppOpsListActivity : ComposeThemeActivity() {
             requireNotNull(intent.getParcelableExtra(EXTRA_APP)) { "App info is null." } as AppInfo
         }
 
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     AppIcon(modifier = Modifier.size(32.dp), appInfo = app)
@@ -76,7 +76,7 @@ class AppOpsListActivity : ComposeThemeActivity() {
                 }
             },
             onBackPressed = {
-                thisActivity().finish()
+                finish()
             },
             actions = {
 

@@ -30,10 +30,10 @@ import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.BuildProp
-import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.OsUtils
+import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos

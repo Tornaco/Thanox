@@ -20,6 +20,7 @@ package now.fortuitous.thanos.infinite;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +41,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppItemActionListener;
 import github.tornaco.android.thanos.common.AppListModel;
@@ -52,6 +52,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.databinding.ActivityIniniteZAppsBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
+import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.DialogUtils;
@@ -67,13 +68,8 @@ public class InfiniteZActivity extends ThemeActivity {
     private ActivityIniniteZAppsBinding binding;
 
     @Override
-    public boolean isADVF() {
-        return true;
-    }
-
-    @Override
-    public boolean isF() {
-        return true;
+    public Context getApplicationContext() {
+        return new ThanoxAppContext(super.getApplicationContext());
     }
 
 
@@ -274,7 +270,7 @@ public class InfiniteZActivity extends ThemeActivity {
                     .addPackage(appInfo.getPkgName(), new AddPackageCallback() {
                         @Override
                         public void onSuccessMain(int userId) {
-                            postOnUiDelayed(p::dismiss, 2400);
+                            new Handler().postDelayed(p::dismiss, 2400);
                             viewModel.start();
                         }
 

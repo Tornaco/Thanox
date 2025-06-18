@@ -17,7 +17,9 @@
 
 package now.fortuitous.thanos.main
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -48,27 +50,23 @@ class NavActivity : ComposeThemeActivity() {
         }
     }
 
-    override fun isF(): Boolean {
-        return false
-    }
-
-    override fun beforeOnCreate() {
-        super.beforeOnCreate()
+    override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
+        super.onCreate(savedInstanceState)
     }
 
     @Composable
     override fun Content() {
         // OnBoarding
-        if (!AppPreference.hasOnBoarding(thisActivity())) {
-            OnBoardingActivity.Starter.start(thisActivity())
+        if (!AppPreference.hasOnBoarding(this)) {
+            OnBoardingActivity.Starter.start(this)
             finish()
             return
         }
 
         // Check if x is available
-        if (ThanosManager.from(thisActivity()).isServiceInstalled) {
-            AppPreference.setAppType(thisActivity(), "ask")
+        if (ThanosManager.from(this).isServiceInstalled) {
+            AppPreference.setAppType(this, "ask")
             Thanox()
             return
         }
@@ -83,7 +81,7 @@ class NavActivity : ComposeThemeActivity() {
 
     @Composable
     private fun RowNav() {
-        val sx = AppPreference.getAppType(thisActivity())
+        val sx = AppPreference.getAppType(this)
         when (sx) {
             "thanox" -> {
                 Thanox()
@@ -94,7 +92,7 @@ class NavActivity : ComposeThemeActivity() {
             }
 
             else -> {
-                ChooserActivity.Starter.start(thisActivity())
+                ChooserActivity.Starter.start(this)
                 finish()
             }
         }
@@ -102,7 +100,7 @@ class NavActivity : ComposeThemeActivity() {
 
     @Composable
     private fun PRCNav() {
-        val sx = AppPreference.getAppType(thisActivity())
+        val sx = AppPreference.getAppType(this)
         when (sx) {
             "thanos" -> {
                 Thanos()
@@ -117,23 +115,24 @@ class NavActivity : ComposeThemeActivity() {
     @Composable
     private fun Thanox() {
         // Block
-        if (blockOnCreate(thisActivity())) {
+        if (blockOnCreate(this)) {
             finish()
             return
         }
 
         LaunchedEffect(Unit) {
-            ShortcutInit(thisActivity()).initOnBootThanox()
+            ShortcutInit(this@NavActivity).initOnBootThanox()
         }
 
-        val applyNewHome = AppPreference.isFeatureNoticeAccepted(thisActivity(), "NEW_HOME")
+        val applyNewHome = AppPreference.isFeatureNoticeAccepted(this, "NEW_HOME")
         if (applyNewHome) AllNewNavScreen() else NavScreen()
     }
 
+    @SuppressLint("UseKtx")
     @Composable
     private fun Thanos() {
         LaunchedEffect(Unit) {
-            ShortcutInit(thisActivity()).initOnBootThanos()
+            ShortcutInit(this@NavActivity).initOnBootThanos()
         }
 
         ThanosApp {
@@ -143,13 +142,13 @@ class NavActivity : ComposeThemeActivity() {
                 }
                 LaunchedEffect(Unit) {
                     privacyAgreementAccept =
-                        PreferenceManager.getDefaultSharedPreferences(thisActivity())
+                        PreferenceManager.getDefaultSharedPreferences(this@NavActivity)
                             .getBoolean(privacyAgreementKey, false)
                 }
 
                 if (!privacyAgreementAccept) {
                     PrivacyStatementDialog(onDismissRequest = {
-                        PreferenceManager.getDefaultSharedPreferences(thisActivity()).edit()
+                        PreferenceManager.getDefaultSharedPreferences(this).edit()
                             .putBoolean(privacyAgreementKey, true).apply()
                         privacyAgreementAccept = true
                     })

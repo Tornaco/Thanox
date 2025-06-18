@@ -47,10 +47,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
         ActivityUtils.startActivity(context, RuleListActivity.class);
     }
 
-    @Override
-    public boolean isF() {
-        return true;
-    }
+
 
     @Override
 

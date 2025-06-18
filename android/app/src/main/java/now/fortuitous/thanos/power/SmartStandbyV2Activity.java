@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer;
 import github.tornaco.android.thanos.common.AppListModel;
@@ -41,6 +40,7 @@ import github.tornaco.android.thanos.core.app.ActivityManager;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
+import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import util.CollectionUtils;
 
@@ -51,8 +51,8 @@ public class SmartStandbyV2Activity extends CommonFuncToggleAppListFilterActivit
     }
 
     @Override
-    public boolean isADVF() {
-        return true;
+    public Context getApplicationContext() {
+        return new ThanoxAppContext(super.getApplicationContext());
     }
 
     @NonNull

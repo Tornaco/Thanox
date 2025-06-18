@@ -28,12 +28,12 @@ import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampolineActivity
 import github.tornaco.android.thanox.module.notification.recorder.ui.NotificationRecordActivity
-import github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity
 import github.tornaco.thanos.android.module.profile.RuleListActivity
 import github.tornaco.thanos.android.ops.ops.by.ops.OpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
 import github.tornaco.thanos.android.ops2.byop.Ops2Activity
+import now.fortuitous.thanos.apps.AioAppListActivity
 import now.fortuitous.thanos.launchother.LaunchOtherAppListActivity
 import now.fortuitous.thanos.notification.NotificationCenterActivity
 import now.fortuitous.thanos.power.SmartFreezeActivity
@@ -60,20 +60,22 @@ class PrebuiltFeatureLauncher(
                     }
                 }
 
-                PrebuiltFeatureIds.ID_BACKGROUND_START -> {
-                    now.fortuitous.thanos.start.StartRestrictActivity.start(context)
+                PrebuiltFeatureIds.ID_APPS_MANAGER,
+                PrebuiltFeatureIds.ID_BACKGROUND_START,
+                PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT,
+                PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL,
+                PrebuiltFeatureIds.ID_TASK_BLUR -> {
+                    AioAppListActivity.start(context, featureId)
                 }
 
-                PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> {
-                    now.fortuitous.thanos.start.BackgroundRestrictActivity.start(context)
-                }
-
-                PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {
-                    now.fortuitous.thanos.task.CleanUpOnTaskRemovedActivity.start(context)
-                }
-
-                PrebuiltFeatureIds.ID_APPS_MANAGER -> {
-                    now.fortuitous.thanos.apps.AppsManageActivity.start(context)
+                PrebuiltFeatureIds.ID_APP_LOCK -> {
+                    AppFeatureManager.withSubscriptionStatus(context) {
+                        if (it) {
+                            AioAppListActivity.start(context, featureId)
+                        } else {
+                            AppFeatureManager.showDonateIntroDialog(context)
+                        }
+                    }
                 }
 
                 PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {
@@ -120,7 +122,13 @@ class PrebuiltFeatureLauncher(
                 }
 
                 PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
-                    now.fortuitous.thanos.privacy.DataCheatActivity.start(context)
+                    AppFeatureManager.withSubscriptionStatus(context) {
+                        if (it) {
+                            now.fortuitous.thanos.privacy.DataCheatActivity.start(context)
+                        } else {
+                            AppFeatureManager.showDonateIntroDialog(context)
+                        }
+                    }
                 }
 
                 PrebuiltFeatureIds.ID_OPS_BY_OPS -> {
@@ -139,22 +147,8 @@ class PrebuiltFeatureLauncher(
                     ThanoxOpsBottomNavActivity.start(context)
                 }
 
-                PrebuiltFeatureIds.ID_TASK_BLUR -> {
-                    now.fortuitous.thanos.task.RecentTaskBlurListActivity.start(context)
-                }
-
                 PrebuiltFeatureIds.ID_OP_REMIND -> {
                     RemindOpsActivity.start(context)
-                }
-
-                PrebuiltFeatureIds.ID_APP_LOCK -> {
-                    AppFeatureManager.withSubscriptionStatus(context) {
-                        if (it) {
-                            LockerStartActivity.start(context)
-                        } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
-                        }
-                    }
                 }
 
                 PrebuiltFeatureIds.ID_INFINITE_Z -> {

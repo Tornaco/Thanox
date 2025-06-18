@@ -38,7 +38,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
 
@@ -64,7 +64,7 @@ class AppListActivity : ComposeThemeActivity() {
             intent.getIntExtra(EXTRA_CODE, Int.MIN_VALUE)
         }
 
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 androidx.compose.material3.Text(
                     text = state.opLabel,
@@ -72,7 +72,7 @@ class AppListActivity : ComposeThemeActivity() {
                 )
             },
             onBackPressed = {
-                thisActivity().finish()
+                finish()
             },
             actions = {
 

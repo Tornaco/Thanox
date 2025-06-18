@@ -140,6 +140,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.interpolator)
     implementation(libs.androidx.preference)
+    implementation(libs.androidx.paging.runtime)
     implementation(libs.constraint.layout)
     implementation(libs.browser)
     implementation(libs.androidx.biometric)
@@ -219,13 +220,12 @@ dependencies {
     implementation(project(":modules:module_ops2"))
     implementation(project(":modules:module_activity_trampoline"))
     implementation(project(":modules:module_component_manager"))
-    implementation(project(":modules:module_notification_recorder"))
     implementation(project(":modules:module_locker"))
     implementation(project(":modules:module_filepicker"))
     implementation(project(":modules:module_profile"))
     implementation(project(":modules:module_push_message_delegate"))
     implementation(project(":modules:module_donate"))
-    implementation(project(":modules:module_feature_access"))
+    implementation(project(":modules:module_feature_launcher"))
 
     implementation(project(":android_framework:base"))
     implementation(project(":android_framework:res"))
@@ -257,6 +257,13 @@ val generateProguardRules by tasks.registering {
             appendText("-repackageclasses ${generateRandomPackageName()}")
             appendText(System.lineSeparator())
         }
+
+        ruleFile.appendText(System.lineSeparator())
+        ruleFile.appendText("""
+            -obfuscationdictionary proguard_dict.txt
+            -classobfuscationdictionary proguard_dict.txt
+            -packageobfuscationdictionary proguard_dict.txt
+        """.trimIndent())
     }
 }
 

@@ -36,11 +36,10 @@ import com.godaddy.android.colorpicker.ClassicColorPicker
 import com.godaddy.android.colorpicker.HsvColor
 import com.godaddy.android.colorpicker.toColorInt
 import github.tornaco.android.thanos.core.profile.DanmuUISettings
-import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 
 @Composable
 fun Activity.DanmuUISettingsScreen() {
@@ -51,7 +50,7 @@ fun Activity.DanmuUISettingsScreen() {
         viewModel.loadUISettings()
     }
 
-    ThanoxSmallAppBarScaffold(title = {
+    ThanoxMediumAppBarScaffold(title = {
         Text(text = "Danmu",
             style = TypographyDefaults.appBarTitleTextStyle())
     }, onBackPressed = { finish() }, actions = {}) { contentPadding ->

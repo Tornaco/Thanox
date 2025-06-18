@@ -32,9 +32,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MD3Badge(text: String) {
+fun MD3Badge(text: String, modifier: Modifier = Modifier) {
     MD3Badge(
         text = text,
+        modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         textSize = 10.sp
     )
@@ -43,11 +44,13 @@ fun MD3Badge(text: String) {
 @Composable
 fun MD3Badge(
     text: String,
+    modifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
     textSize: TextUnit = 10.sp,
     padding: Dp = 2.dp
 ) {
     androidx.compose.material3.Badge(
+        modifier = modifier,
         containerColor = containerColor
     ) {
         Text(

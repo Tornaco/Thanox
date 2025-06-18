@@ -29,11 +29,11 @@ class RuleListActivityMenuHandler {
 
     fun RuleListActivity.handleOptionsItemSelected(item: MenuItem): Boolean {
         if (R.id.action_view_wiki == item.itemId) {
-            BrowserUtils.launch(thisActivity(), BuildProp.THANOX_URL_DOCS_PROFILE)
+            BrowserUtils.launch(this, BuildProp.THANOX_URL_DOCS_PROFILE)
             return true
         }
         if (R.id.action_import_from_file == item.itemId) {
-            AppFeatureManager.withSubscriptionStatus(thisActivity()) {
+            AppFeatureManager.withSubscriptionStatus(this) {
                 if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
                     if (OsUtils.isTOrAbove()) {
                         RuleListActivityPermissionRequester.importFromFileTOrAboveChecked(this)
@@ -47,13 +47,13 @@ class RuleListActivityMenuHandler {
             return true
         }
         if (R.id.action_import_examples == item.itemId) {
-            ProfileExampleActivity.Starter.start(thisActivity())
+            ProfileExampleActivity.Starter.start(this)
             return true
         }
         if (R.id.action_online == item.itemId) {
-            AppFeatureManager.withSubscriptionStatus(thisActivity()) {
+            AppFeatureManager.withSubscriptionStatus(this) {
                 if (it) {
-                    OnlineProfileActivity.Starter.start(thisActivity())
+                    OnlineProfileActivity.Starter.start(this)
                 } else {
                     AppFeatureManager.showDonateIntroDialog(this)
                 }
@@ -65,7 +65,7 @@ class RuleListActivityMenuHandler {
             return true
         }
         if (R.id.action_add == item.itemId) {
-            AppFeatureManager.withSubscriptionStatus(thisActivity()) {
+            AppFeatureManager.withSubscriptionStatus(this) {
                 if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
                     onRequestAddNewRule()
                 } else {
@@ -75,13 +75,13 @@ class RuleListActivityMenuHandler {
             return true
         }
         if (R.id.action_rule_engine == item.itemId) {
-            RuleEngineSettingsActivity.start(thisActivity())
+            RuleEngineSettingsActivity.start(this)
             return true
         }
         if (R.id.action_rule_console == item.itemId) {
-            AppFeatureManager.withSubscriptionStatus(thisActivity()) {
+            AppFeatureManager.withSubscriptionStatus(this) {
                 if (it) {
-                    ConsoleActivity.Starter.start(thisActivity())
+                    ConsoleActivity.Starter.start(this)
                 } else {
                     AppFeatureManager.showDonateIntroDialog(this)
                 }
@@ -89,7 +89,7 @@ class RuleListActivityMenuHandler {
             return true
         }
         if (R.id.action_rule_log == item.itemId) {
-            LogActivity.Starter.start(thisActivity())
+            LogActivity.Starter.start(this)
             return true
         }
         return false

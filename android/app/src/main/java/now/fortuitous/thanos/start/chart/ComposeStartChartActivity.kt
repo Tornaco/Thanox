@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.support.ThanoxAppContext
 import github.tornaco.android.thanos.util.ActivityUtils
 
 @AndroidEntryPoint
@@ -36,8 +37,8 @@ class ComposeStartChartActivity : ComposeThemeActivity() {
         }
     }
 
-    override fun isADVF(): Boolean {
-        return true
+    override fun getApplicationContext(): Context {
+        return ThanoxAppContext(super.getApplicationContext())
     }
 
     @Composable
@@ -53,7 +54,7 @@ class ComposeStartChartActivity : ComposeThemeActivity() {
                     )
                 )
             }, onCenterSelected = {
-                now.fortuitous.thanos.start.DetailedStartRecordsActivity.start(thisActivity(), null)
+                now.fortuitous.thanos.start.DetailedStartRecordsActivity.start(this, null)
             })
     }
 }

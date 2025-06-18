@@ -22,10 +22,10 @@ import android.content.Context
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.secure.ops.SettingsAccessRecord
 import github.tornaco.android.thanos.core.util.DateUtils
+import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

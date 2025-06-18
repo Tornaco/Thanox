@@ -73,11 +73,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.common.UiState
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.infra.UiState
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
@@ -85,12 +85,13 @@ import github.tornaco.android.thanos.module.compose.common.widget.DropdownItem
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownSelector
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberDropdownSelectorState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import github.tornaco.android.thanos.res.R
+import github.tornaco.android.thanos.support.ThanoxAppContext
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.android.thanos.util.pleaseReadCarefully
 import github.tornaco.thanos.module.component.manager.model.ComponentModel
@@ -141,8 +142,8 @@ class ComponentsActivity : ComposeThemeActivity() {
         }
     }
 
-    override fun isADVF(): Boolean {
-        return true
+    override fun getApplicationContext(): Context {
+        return ThanoxAppContext(super.getApplicationContext())
     }
 
     override fun onResume() {
@@ -241,7 +242,7 @@ class ComponentsActivity : ComposeThemeActivity() {
         val batchOpState by viewModel.batchOpState.collectAsStateWithLifecycle()
         val viewType by viewModel.viewType.collectAsStateWithLifecycle()
 
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 AnimatedContent(selectState.isSelectMode) {
                     if (it) {
@@ -274,7 +275,7 @@ class ComponentsActivity : ComposeThemeActivity() {
                 if (selectState.isSelectMode) {
                     viewModel.exitSelectionState()
                 } else {
-                    thisActivity().finish()
+                    finish()
                 }
             },
             actions = {

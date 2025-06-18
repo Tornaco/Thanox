@@ -39,6 +39,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -65,8 +66,7 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.CardContainer
 import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloatingActionButton
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.Switch
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.thanos.android.module.profile.R
 import java.util.Calendar
@@ -127,7 +127,7 @@ fun Activity.DateTimeEngineScreen() {
     val navController = rememberNavController()
     val context = LocalContext.current
 
-    ThanoxSmallAppBarScaffold(
+    ThanoxMediumAppBarScaffold(
         title = {
             Text(
                 text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_pref_title_rule_engine_date_time),
@@ -225,7 +225,8 @@ fun NavigationGraph(
 ) {
     NavHost(navController, startDestination = BottomNavItem.TimeOfADay.screenRoute) {
         composable(BottomNavItem.TimeOfADay.screenRoute) {
-            AlarmList(state = state.alarms,
+            AlarmList(
+                state = state.alarms,
                 delete = { viewModel.deleteAlarm(it) },
                 onCheckChange = { record, checked ->
                     viewModel.setAlarmEnabled(record.alarm, checked)

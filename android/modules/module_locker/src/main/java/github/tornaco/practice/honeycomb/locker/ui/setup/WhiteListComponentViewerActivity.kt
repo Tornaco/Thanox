@@ -44,7 +44,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.TextInputDialog
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.util.ActivityUtils
 
@@ -75,7 +75,7 @@ class WhiteListComponentViewerActivity : ComposeThemeActivity() {
         TextInputDialog(state = inputState)
 
 
-        ThanoxSmallAppBarScaffold(title = {
+        ThanoxMediumAppBarScaffold(title = {
             Text(
                 text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_locker_title_white_list_components),
                 style = TypographyDefaults.appBarTitleTextStyle()

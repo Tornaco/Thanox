@@ -66,9 +66,10 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.NoContent
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
+import github.tornaco.android.thanos.support.ThanoxAppContext
 import github.tornaco.android.thanos.util.ActivityUtils
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.android.module.profile.RuleEditorActivity
@@ -82,12 +83,8 @@ class OnlineProfileActivity : ComposeThemeActivity() {
         }
     }
 
-    override fun isADVF(): Boolean {
-        return true
-    }
-
-    override fun isF(): Boolean {
-        return true
+    override fun getApplicationContext(): Context {
+        return ThanoxAppContext(super.getApplicationContext())
     }
 
     @Composable
@@ -118,7 +115,7 @@ class OnlineProfileActivity : ComposeThemeActivity() {
             }
         }
 
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 Text(
                     text = stringResource(id = github.tornaco.android.thanos.res.R.string.module_profile_rule_online),

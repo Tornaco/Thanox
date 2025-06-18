@@ -1,5 +1,6 @@
 package github.tornaco.practice.honeycomb.locker.ui.verify
 
+import android.annotation.SuppressLint
 import androidx.biometric.BiometricPrompt
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,7 +19,7 @@ class VerifyActivity : ComposeThemeActivity() {
     private var appInfo: AppInfo? = null
     private var biometricPrompt: BiometricPrompt? = null
 
-    private val thanox by lazy { ThanosManager.from(thisActivity()) }
+    private val thanox by lazy { ThanosManager.from(this) }
     private val lockMethod
         get() = thanox.activityStackSupervisor.lockMethod.also {
             XLog.d("lockMethod: $it")
@@ -115,6 +116,7 @@ class VerifyActivity : ComposeThemeActivity() {
         finish()
     }
 
+    @SuppressLint("MissingSuperCall")
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         thanox.activityStackSupervisor.setVerifyResult(

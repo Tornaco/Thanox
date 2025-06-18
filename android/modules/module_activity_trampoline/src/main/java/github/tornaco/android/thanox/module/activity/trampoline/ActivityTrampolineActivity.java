@@ -51,6 +51,7 @@ import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
 import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 import github.tornaco.android.thanos.core.util.DateUtils;
 import github.tornaco.android.thanos.core.util.OsUtils;
+import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
@@ -78,8 +79,8 @@ public class ActivityTrampolineActivity extends ThemeActivity
     }
 
     @Override
-    public boolean isADVF() {
-        return true;
+    public Context getApplicationContext() {
+        return new ThanoxAppContext(super.getApplicationContext());
     }
 
     @Override

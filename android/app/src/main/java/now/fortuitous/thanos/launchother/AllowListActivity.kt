@@ -36,9 +36,10 @@ import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefau
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 import github.tornaco.android.thanos.picker.AppPickerActivity
+import github.tornaco.android.thanos.support.ThanoxAppContext
 
 @AndroidEntryPoint
 class AllowListActivity : ComposeThemeActivity() {
@@ -54,8 +55,8 @@ class AllowListActivity : ComposeThemeActivity() {
         }
     }
 
-    override fun isADVF(): Boolean {
-        return true
+    override fun getApplicationContext(): Context {
+        return ThanoxAppContext(super.getApplicationContext())
     }
 
     @Composable
@@ -79,7 +80,7 @@ class AllowListActivity : ComposeThemeActivity() {
             }
         )
 
-        ThanoxSmallAppBarScaffold(
+        ThanoxMediumAppBarScaffold(
             title = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     AppIcon(modifier = Modifier.size(32.dp), appInfo = app)
@@ -91,7 +92,7 @@ class AllowListActivity : ComposeThemeActivity() {
                 }
             },
             onBackPressed = {
-                thisActivity().finish()
+                finish()
             },
             actions = {
                 IconButton(onClick = {

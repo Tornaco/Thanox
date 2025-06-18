@@ -82,7 +82,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SwitchBar
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxSmallAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
 
@@ -98,7 +98,7 @@ fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
         viewModel.init()
     }
 
-    ThanoxSmallAppBarScaffold(
+    ThanoxMediumAppBarScaffold(
         title = {
             Text(
                 stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_wakelock_blocker),
@@ -139,10 +139,12 @@ fun WakeLockBlockerScreen(onBackPressed: () -> Unit) {
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .padding(top = 16.dp),
-                    isChecked = state.isWakeLockBlockerEnabled
-                ) {
-                    viewModel.setWakeLockBlockerEnabled(it)
-                }
+                    isChecked = state.isWakeLockBlockerEnabled,
+                    title = stringResource(id = github.tornaco.android.thanos.res.R.string.feature_title_wakelock_blocker),
+                    onCheckChange = {
+                        viewModel.setWakeLockBlockerEnabled(it)
+                    }
+                )
 
                 ExperimentalFeatureWarningMessage(
                     modifier = Modifier
@@ -292,7 +294,8 @@ private fun AppInfoItem(
                 !isExpand && packageState.hasBlock -> AppInfoItemAction.BlockIcon(isAllBlocked = packageState.isAllBlock)
                 else -> AppInfoItemAction.Noop
             }
-        AnimatedContent(targetState = appInfoItemAction,
+        AnimatedContent(
+            targetState = appInfoItemAction,
             transitionSpec = {
                 fadeIn(animationSpec = tween(150, 150)) with
                         fadeOut(animationSpec = tween(150)) using

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
@@ -40,6 +41,11 @@ dependencies {
 
     implementation(libs.tinypinyin)
 
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.dagger.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.android.compiler)
+    implementation(libs.dagger.hilt.android)
+
     implementation(libs.glide)
     implementation(libs.glide.landscapist)
     kapt(libs.glide.compiler)
@@ -51,6 +57,7 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.compose.material)
+    implementation(libs.androidx.adaptive)
     implementation(libs.compose.material.icons.extended)
     implementation(libs.compose.material.icons.core)
     implementation(libs.navigation.compose)
@@ -76,6 +83,7 @@ dependencies {
     implementation(project(":third_party:recyclerview-fastscroll"))
     implementation(project(":third_party:search"))
     implementation(project(":third_party:dateformatter"))
+    implementation(project(":third_party:remix"))
 
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.junit)

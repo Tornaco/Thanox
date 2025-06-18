@@ -34,6 +34,7 @@ import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.support.ContextExtKt;
+import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import util.CollectionUtils;
 
@@ -47,8 +48,8 @@ public class LaunchOtherAppListActivity extends CommonAppListFilterActivity {
     }
 
     @Override
-    public boolean isADVF() {
-        return true;
+    public Context getApplicationContext() {
+        return new ThanoxAppContext(super.getApplicationContext());
     }
 
     @Override

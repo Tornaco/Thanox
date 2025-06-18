@@ -23,9 +23,9 @@ import android.content.Intent
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import github.tornaco.android.thanos.common.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.ClipboardUtils
+import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.ToastUtils
 import kotlinx.coroutines.delay

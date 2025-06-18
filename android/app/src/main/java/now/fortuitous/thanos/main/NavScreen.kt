@@ -30,10 +30,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -94,12 +97,11 @@ import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
-import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.fontFamilyProductSans
 import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedString
-import github.tornaco.android.thanos.support.FlowLayout
+import github.tornaco.android.thanos.support.FeatureGrid
 import github.tornaco.android.thanos.support.clickableWithRippleBorderless
 import kotlinx.coroutines.delay
 import util.AssetUtils
@@ -350,25 +352,33 @@ private fun FeatureGroup(
         colors = CardDefaults.cardColors(containerColor = LocalThanoxColorSchema.current.cardBgColor)
     ) {
         val activity = LocalContext.current.requireActivity()
-
-        Column(modifier = Modifier.padding(16.dp)) {
-            if (false) {
+        FeatureGrid(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+                .heightIn(max = 1000.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Center
+        ) {
+            item(span = { GridItemSpan(maxLineSpan) }) {
                 Text(
                     text = stringResource(id = group.titleRes),
                     fontSize = 15.sp,
                     fontWeight = FontWeight.W500,
-                    color = themedTextColor(MaterialTheme.colorScheme.primary)
+                    color = themedTextColor(MaterialTheme.colorScheme.primary),
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
                 )
-                StandardSpacer()
             }
-            FlowLayout(lineSpacing = 16.dp) {
-                group.items.forEach { item ->
-                    Box {
-                        var isMenuOpen by remember(item) { mutableStateOf(false) }
-                        val menuItems = remember(item) { item.menuItems }
-                        FeatureItem(item = item, onItemClick = onItemClick, onItemLongClick = {
-                            isMenuOpen = true
-                        })
+            items(group.items) { item ->
+                Box(Modifier.padding(8.dp)) {
+                    var isMenuOpen by remember(item) { mutableStateOf(false) }
+                    val menuItems = remember(item) { item.menuItems }
+                    FeatureItem(item = item, onItemClick = onItemClick, onItemLongClick = {
+                        isMenuOpen = true
+                    })
+                    MaterialTheme(
+                        shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(18.dp))
+                    ) {
                         DropdownMenu(
                             modifier = Modifier.fillMaxWidth(.68f),
                             expanded = isMenuOpen,
@@ -467,7 +477,7 @@ private fun FeatureItem(
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.titleMedium,
             color = themedTextColor(Color(ContextCompat.getColor(context, item.themeColor))),
-            lineHeight = 12.sp
+            lineHeight = 12.5.sp
         )
     }
 }

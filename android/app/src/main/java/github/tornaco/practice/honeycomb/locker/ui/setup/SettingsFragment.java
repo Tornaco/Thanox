@@ -10,9 +10,9 @@ import androidx.preference.SwitchPreferenceCompat;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
-import github.tornaco.practice.honeycomb.locker.R;
 import github.tornaco.practice.honeycomb.locker.ui.verify.PatternSettingsActivity;
 
 public class SettingsFragment extends BasePreferenceFragmentCompat {

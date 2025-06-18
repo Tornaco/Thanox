@@ -284,6 +284,27 @@
             android:name="github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampolineActivity"
             android:exported="false"
             android:label="@string/module_activity_trampoline_app_name" />
+        <activity
+            android:name="github.tornaco.practice.honeycomb.locker.ui.verify.VerifyActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="ui.verify.VerifyActivity">
+            <intent-filter>
+                <action android:name="github.tornaco.practice.honeycomb.locker.action.VERIFY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="github.tornaco.practice.honeycomb.locker.ui.setup.LockSettingsActivity"
+            android:label="@string/module_locker_title_settings" />
+        <activity
+            android:name="github.tornaco.practice.honeycomb.locker.ui.setup.WhiteListComponentViewerActivity"
+            android:excludeFromRecents="false" />
+        <activity
+            android:name="github.tornaco.practice.honeycomb.locker.ui.verify.PatternSettingsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

@@ -218,7 +218,6 @@ dependencies {
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_ops"))
     implementation(project(":modules:module_ops2"))
-    implementation(project(":modules:module_locker"))
     implementation(project(":modules:module_filepicker"))
     implementation(project(":modules:module_profile"))
     implementation(project(":modules:module_push_message_delegate"))

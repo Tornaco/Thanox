@@ -280,6 +280,10 @@
         <activity
             android:name="github.tornaco.thanos.module.component.manager.redesign.ComponentsActivity"
             android:exported="false" />
+        <activity
+            android:name="github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampolineActivity"
+            android:exported="false"
+            android:label="@string/module_activity_trampoline_app_name" />
 
         <meta-data
             android:name="xposedmodule"

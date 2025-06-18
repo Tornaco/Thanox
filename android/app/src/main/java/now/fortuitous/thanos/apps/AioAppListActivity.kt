@@ -14,6 +14,7 @@ import github.tornaco.android.thanos.module.compose.common.infra.AppItemConfig
 import github.tornaco.android.thanos.module.compose.common.infra.AppUiModel
 import github.tornaco.android.thanos.module.compose.common.infra.BaseAppListFilterActivity
 import github.tornaco.android.thanos.module.compose.common.infra.BaseAppListFilterContainerConfig
+import github.tornaco.android.thanos.module.compose.common.infra.BatchOperationConfig
 import github.tornaco.android.thanos.module.compose.common.infra.FabItemConfig
 import github.tornaco.android.thanos.module.compose.common.infra.SwitchBarConfig
 import github.tornaco.android.thanos.res.R
@@ -22,6 +23,7 @@ import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionS
 import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.practice.honeycomb.locker.ui.setup.LockSettingsActivity
 import github.tornaco.practice.honeycomb.locker.ui.verify.isBiometricReady
+import now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
 import now.fortuitous.thanos.start.BgRestrictSettingsActivity
 import now.fortuitous.thanos.start.StartRuleActivity
@@ -392,10 +394,10 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     actions = {
                         listOf(
                             AppBarConfig.AppBarAction(
-                                title = it.getString(R.string.nav_title_settings),
-                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill,
+                                title = it.getString(R.string.menu_title_rules),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_list_2_line,
                                 onClick = {
-                                    RecentTaskBlurSettingsActivity.start(this)
+                                    LaunchOtherAppRuleActivity.start(this)
                                 }
                             )
                         )
@@ -410,6 +412,43 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         am.isLaunchOtherAppBlockerEnabled = isChecked
                         true
                     }
+                ),
+                batchOperationConfig = BatchOperationConfig(
+                    operations = listOf(
+                        BatchOperationConfig.Operation(
+                            title = { it.getString(R.string.module_ops_mode_allow_all) },
+                            onClick = {
+                                it.forEach {
+                                    am.setLaunchOtherAppSetting(
+                                        Pkg.fromAppInfo(it.appInfo),
+                                        ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW
+                                    )
+                                }
+                            }
+                        ),
+                        BatchOperationConfig.Operation(
+                            title = { it.getString(R.string.module_ops_mode_ask_all) },
+                            onClick = {
+                                it.forEach {
+                                    am.setLaunchOtherAppSetting(
+                                        Pkg.fromAppInfo(it.appInfo),
+                                        ActivityStackSupervisor.LaunchOtherAppPkgSetting.ASK
+                                    )
+                                }
+                            }
+                        ),
+                        BatchOperationConfig.Operation(
+                            title = { it.getString(R.string.module_ops_mode_ignore_all) },
+                            onClick = {
+                                it.forEach {
+                                    am.setLaunchOtherAppSetting(
+                                        Pkg.fromAppInfo(it.appInfo),
+                                        ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE
+                                    )
+                                }
+                            }
+                        ),
+                    )
                 ),
                 appItemConfig = AppItemConfig(
                     itemType = AppItemConfig.ItemType.OptionSelectable(

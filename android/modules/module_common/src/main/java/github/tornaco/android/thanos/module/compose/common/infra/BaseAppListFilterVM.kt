@@ -33,7 +33,10 @@ data class AppListUiState(
     val sortReverse: Boolean = false,
     val sortToolItems: List<AppSortTools> = emptyList(),
 
-    val searchKeyword: String = ""
+    val searchKeyword: String = "",
+
+    val isInSelectionMode: Boolean = false,
+    val selectedAppItems: List<AppUiModel> = emptyList()
 ) {
     companion object {
         val filterOptionsAll = AppSetFilterItem("") { it.getString(R.string.all) }
@@ -263,5 +266,44 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
                 }
             })
         }
+    }
+
+    fun enterSelectionMode(isEnter: Boolean) {
+        updateState {
+            copy(
+                isInSelectionMode = isEnter
+            )
+        }
+        if (!isEnter) {
+            updateState {
+                copy(selectedAppItems = emptyList())
+            }
+        }
+    }
+
+    fun selectApp(select: Boolean, app: AppUiModel) {
+        updateState {
+            copy(
+                selectedAppItems = selectedAppItems.toMutableList().apply {
+                    if (select) {
+                        add(app)
+                    } else {
+                        remove(app)
+                    }
+                }
+            )
+        }
+
+        enterSelectionMode(state.value.selectedAppItems.isNotEmpty())
+    }
+
+    fun selectAll() {
+        updateState {
+            copy(selectedAppItems = apps.toList())
+        }
+    }
+
+    fun unSelectAll() {
+        updateState { copy(selectedAppItems = emptyList()) }
     }
 }

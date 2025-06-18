@@ -1,13 +1,15 @@
-@file:OptIn(ExperimentalMaterialApi::class)
+@file:OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3ExpressiveApi::class)
 
 package github.tornaco.android.thanos.module.compose.common.infra
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,7 +29,11 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.AppBarRow
+import androidx.compose.material3.Badge
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -43,13 +49,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
+import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
@@ -65,6 +74,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.SwitchBar
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
+import github.tornaco.android.thanos.res.R
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
@@ -163,7 +173,13 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(minSize = 270.dp),
                 modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(bottom = if (config.fabs.isEmpty()) 0.dp else (100 * config.fabs.size).dp)
+                contentPadding = PaddingValues(
+                    bottom = if (config.fabs.isEmpty() && !uiState.isInSelectionMode) {
+                        0.dp
+                    } else {
+                        200.dp
+                    }
+                )
             ) {
                 stickyHeader {
                     Column(
@@ -233,15 +249,24 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                                     vm.updateAppCheckState(app, check)
                                     itemType.onCheckChanged(app, check)
                                 }
+                            val isSelected = uiState.selectedAppItems.contains(model)
                             AppListItem(
                                 appInfo = model.appInfo,
+                                isSelected = isSelected,
                                 description1 = model.description?.let {
                                     { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
                                 },
                                 description2 = null,
                                 badges = model.badges,
                                 onClick = {
-                                    onAppItemCheckChange(model, !model.isChecked)
+                                    if (uiState.isInSelectionMode) {
+                                        vm.selectApp(!isSelected, model)
+                                    } else {
+                                        onAppItemCheckChange(model, !model.isChecked)
+                                    }
+                                },
+                                onLongClick = {
+                                    vm.selectApp(!isSelected, model)
                                 },
                                 actions = {
                                     Switch(checked = model.isChecked, onCheckedChange = {
@@ -252,14 +277,25 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                         }
 
                         is AppItemConfig.ItemType.Plain -> {
+                            val isSelected = uiState.selectedAppItems.contains(model)
                             AppListItem(
                                 appInfo = model.appInfo,
+                                isSelected = isSelected,
                                 description1 = model.description?.let {
                                     { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
                                 },
                                 description2 = null,
                                 badges = model.badges,
-                                onClick = { itemType.onAppClick(model) }
+                                onClick = {
+                                    if (uiState.isInSelectionMode) {
+                                        vm.selectApp(!isSelected, model)
+                                    } else {
+                                        itemType.onAppClick(model)
+                                    }
+                                },
+                                onLongClick = {
+                                    vm.selectApp(!isSelected, model)
+                                },
                             )
                         }
 
@@ -270,8 +306,10 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                             }
                             val selectedOption =
                                 itemType.options.firstOrNull { it.id == model.selectedOptionId }
+                            val isSelected = uiState.selectedAppItems.contains(model)
                             AppListItem(
                                 appInfo = model.appInfo,
+                                isSelected = isSelected,
                                 description1 = model.description?.let {
                                     { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
                                 },
@@ -293,8 +331,15 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                                 },
                                 badges = model.badges,
                                 onClick = {
-                                    optionDialog.show()
-                                }
+                                    if (uiState.isInSelectionMode) {
+                                        vm.selectApp(!isSelected, model)
+                                    } else {
+                                        optionDialog.show()
+                                    }
+                                },
+                                onLongClick = {
+                                    vm.selectApp(!isSelected, model)
+                                },
                             )
                         }
                     }
@@ -305,14 +350,95 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                 pullRefreshState,
                 Modifier.align(Alignment.TopCenter)
             )
+
+            if (config.batchOperationConfig != null) {
+                SelectionModeToolbar(
+                    config = config.batchOperationConfig,
+                    uiState = uiState,
+                    modifier = Modifier
+                        .padding(bottom = 32.dp)
+                        .fillMaxWidth()
+                        .align(Alignment.BottomCenter),
+                    opApplied = {
+                        vm.enterSelectionMode(false)
+                        vm.refresh("batchOperationConfig.opApplied")
+                    },
+                    selectAll = {
+                        vm.selectAll()
+                    },
+                    unselectAll = {
+                        vm.unSelectAll()
+                    }
+                )
+                BackHandler(uiState.isInSelectionMode) {
+                    vm.enterSelectionMode(false)
+                }
+            }
         }
+    }
+}
+
+@Composable
+private fun SelectionModeToolbar(
+    config: BatchOperationConfig,
+    uiState: AppListUiState,
+    modifier: Modifier,
+    selectAll: () -> Unit,
+    unselectAll: () -> Unit,
+    opApplied: () -> Unit,
+) {
+    AnimatedVisibility(modifier = modifier, visible = uiState.isInSelectionMode) {
+        HorizontalFloatingToolbar(
+            modifier = Modifier.padding(horizontal = 12.dp),
+            expanded = true,
+            expandedShadowElevation = 4.dp,
+            leadingContent = {
+                Badge {
+                    Text("${uiState.selectedAppItems.size}")
+                }
+            },
+            trailingContent = { },
+            content = {
+                FlowRow {
+                    Button(
+                        modifier = Modifier.padding(horizontal = 4.dp),
+                        onClick = {
+                            selectAll()
+                        }
+                    ) {
+                        Text(stringResource(R.string.common_menu_title_select_all))
+                    }
+                    Button(
+                        modifier = Modifier.padding(horizontal = 4.dp),
+                        onClick = {
+                            unselectAll()
+                        }
+                    ) {
+                        Text(stringResource(R.string.common_menu_title_un_select_all))
+                    }
+                    config.operations.forEach {
+                        Button(
+                            modifier = Modifier.padding(horizontal = 4.dp),
+                            onClick = {
+                                it.onClick(uiState.selectedAppItems)
+                                opApplied()
+                            }
+                        ) {
+                            Text(it.title(LocalContext.current))
+                        }
+                    }
+                }
+            }
+        )
     }
 }
 
 @Composable
 private fun AppListItem(
     appInfo: AppInfo,
+    isSelected: Boolean,
     onClick: () -> Unit,
+    onLongClick: () -> Unit,
     badges: List<String>,
     description1: @Composable (() -> Unit)?,
     description2: @Composable (() -> Unit)?,
@@ -321,9 +447,8 @@ private fun AppListItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable {
-                onClick()
-            }
+            .background(if (isSelected) ColorDefaults.backgroundSurfaceColor(6.dp) else Color.Unspecified)
+            .combinedClickable(onClick = onClick, onLongClick = onLongClick)
             .padding(horizontal = 16.dp, vertical = 4.dp)
             .heightIn(min = 72.dp),
         horizontalArrangement = Arrangement.SpaceBetween,

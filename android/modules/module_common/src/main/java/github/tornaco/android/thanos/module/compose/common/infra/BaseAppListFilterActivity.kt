@@ -37,6 +37,7 @@ data class BaseAppListFilterContainerConfig(
     val featureDescription: (Context) -> String? = { null },
     val fabs: List<FabItemConfig> = emptyList(),
     val switchBarConfig: SwitchBarConfig? = null,
+    val batchOperationConfig: BatchOperationConfig? = null
 )
 
 data class AppBarConfig(
@@ -54,6 +55,15 @@ data class FabItemConfig(
     val title: (Context) -> String,
     val onClick: () -> Unit
 )
+
+data class BatchOperationConfig(
+    val operations: List<Operation>
+) {
+    data class Operation(
+        val title: (Context) -> String,
+        val onClick: (List<AppUiModel>) -> Unit
+    )
+}
 
 data class SwitchBarConfig(
     val title: (Context, Boolean) -> String,

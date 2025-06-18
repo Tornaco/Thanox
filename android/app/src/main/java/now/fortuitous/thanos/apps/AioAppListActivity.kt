@@ -172,6 +172,16 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         commonTogglableAppLoader(context, pkgSetId) { !am.isPkgStartBlocking(it) }
                     },
                 ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(
+                    toggle = { app, checked ->
+                        am.setPkgStartBlockEnabled(
+                            Pkg.fromAppInfo(
+                                app.appInfo
+                            ),
+                            !checked
+                        )
+                    }
+                )
             )
         }
 
@@ -225,6 +235,14 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         commonTogglableAppLoader(context, pkgSetId) { !am.isPkgBgRestricted(it) }
                     },
                 ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, checked ->
+                    am.setPkgBgRestrictEnabled(
+                        Pkg.fromAppInfo(
+                            app.appInfo
+                        ),
+                        !checked
+                    )
+                })
             )
         }
 
@@ -269,6 +287,14 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         ) { am.isPkgCleanUpOnTaskRemovalEnabled(it) }
                     },
                 ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    am.setPkgCleanUpOnTaskRemovalEnabled(
+                        Pkg.fromAppInfo(
+                            app.appInfo
+                        ),
+                        isCheck
+                    )
+                })
             )
         }
 
@@ -329,6 +355,12 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         ) { stack.isPackageLocked(it.pkgName) }
                     },
                 ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    stack.setPackageLocked(
+                        app.appInfo.pkgName,
+                        isCheck
+                    )
+                })
             )
         }
 
@@ -379,6 +411,12 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         ) { am.isPkgRecentTaskBlurEnabled(it) }
                     },
                 ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    am.setPkgRecentTaskBlurEnabled(
+                        Pkg.fromAppInfo(app.appInfo),
+                        isCheck
+                    )
+                })
             )
         }
 
@@ -557,4 +595,27 @@ class AioAppListActivity : BaseAppListFilterActivity() {
         } ?: listOf(AppUiModel(AppInfo.dummy()))
         return res.sortedBy { it.appInfo }
     }
+
+    private fun commonToggleableAppListBatchOpsConfig(
+        toggle: (AppUiModel, Boolean) -> Unit
+    ) = BatchOperationConfig(
+        operations = listOf(
+            BatchOperationConfig.Operation(
+                title = { it.getString(R.string.on) },
+                onClick = { models ->
+                    models.forEach {
+                        toggle(it, true)
+                    }
+                }
+            ),
+            BatchOperationConfig.Operation(
+                title = { it.getString(R.string.off) },
+                onClick = { models ->
+                    models.forEach {
+                        toggle(it, false)
+                    }
+                }
+            ),
+        )
+    )
 }

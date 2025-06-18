@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 
@@ -74,12 +75,15 @@ data class AppItemConfig(
         ) : ItemType
 
         data class OptionSelectable(
-            val options: List<Option>
+            val options: List<Option>,
+            val onSelected: (AppUiModel, String) -> Unit
         ) : ItemType {
             data class Option(
-                val title: String,
-                val icon: String,
-                val id: String
+                val title: (Context) -> String,
+                val iconRes: Int,
+                val iconTintColor: Color,
+                val id: String,
+                val summary: String? = null,
             )
         }
 

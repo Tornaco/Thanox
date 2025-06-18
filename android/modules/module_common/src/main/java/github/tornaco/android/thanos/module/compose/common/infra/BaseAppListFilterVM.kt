@@ -182,4 +182,15 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
             })
         }
     }
+
+    fun updateAppOptionState(app: AppUiModel, id: String) {
+        updateState {
+            copy(apps = apps.toMutableList().apply {
+                val index = indexOfFirst { app.appInfo.pkgName == it.appInfo.pkgName }
+                if (index >= 0) {
+                    set(index, get(index).copy(selectedOptionId = id))
+                }
+            })
+        }
+    }
 }

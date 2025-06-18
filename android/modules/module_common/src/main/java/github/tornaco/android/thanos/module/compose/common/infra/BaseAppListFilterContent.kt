@@ -48,6 +48,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.module.compose.common.infra.sort.AppSortTools
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
@@ -56,10 +57,14 @@ import github.tornaco.android.thanos.module.compose.common.widget.AppLabelText
 import github.tornaco.android.thanos.module.compose.common.widget.FilterDropDown
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
+import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
+import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
+import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.SortToolDropdown
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SwitchBar
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
+import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import kotlinx.coroutines.flow.distinctUntilChanged
 
@@ -223,7 +228,12 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                                     itemType.onCheckChanged(app, check)
                                 }
                             AppListItem(
-                                model,
+                                appInfo = model.appInfo,
+                                description1 = model.description?.let {
+                                    { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
+                                },
+                                description2 = null,
+                                badges = model.badges,
                                 onClick = {
                                     onAppItemCheckChange(model, !model.isChecked)
                                 },
@@ -231,15 +241,55 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                                     Switch(checked = model.isChecked, onCheckedChange = {
                                         onAppItemCheckChange(model, it)
                                     })
-                                })
+                                }
+                            )
                         }
 
                         is AppItemConfig.ItemType.Plain -> {
-                            AppListItem(model, onClick = { itemType.onAppClick(it) })
+                            AppListItem(
+                                appInfo = model.appInfo,
+                                description1 = model.description?.let {
+                                    { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
+                                },
+                                description2 = null,
+                                badges = model.badges,
+                                onClick = { itemType.onAppClick(model) }
+                            )
                         }
 
-                        else -> {
-
+                        is AppItemConfig.ItemType.OptionSelectable -> {
+                            val optionDialog = optionMenuDialog(itemType) {
+                                itemType.onSelected(model, it)
+                                vm.updateAppOptionState(model, it)
+                            }
+                            val selectedOption =
+                                itemType.options.firstOrNull { it.id == model.selectedOptionId }
+                            AppListItem(
+                                appInfo = model.appInfo,
+                                description1 = model.description?.let {
+                                    { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
+                                },
+                                description2 = selectedOption?.let {
+                                    {
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Icon(
+                                                painter = painterResource(it.iconRes),
+                                                tint = it.iconTintColor,
+                                                contentDescription = null
+                                            )
+                                            Text(
+                                                it.title(LocalContext.current),
+                                                fontSize = 12.sp,
+                                                lineHeight = 12.5.sp
+                                            )
+                                        }
+                                    }
+                                },
+                                badges = model.badges,
+                                onClick = {
+                                    optionDialog.show()
+                                }
+                            )
                         }
                     }
                 }
@@ -255,15 +305,18 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
 
 @Composable
 private fun AppListItem(
-    model: AppUiModel,
-    onClick: (AppUiModel) -> Unit,
+    appInfo: AppInfo,
+    onClick: () -> Unit,
+    badges: List<String>,
+    description1: @Composable (() -> Unit)?,
+    description2: @Composable (() -> Unit)?,
     actions: @Composable (() -> Unit)? = null
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                onClick(model)
+                onClick()
             }
             .padding(horizontal = 16.dp, vertical = 4.dp)
             .heightIn(min = 72.dp),
@@ -275,18 +328,17 @@ private fun AppListItem(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start
         ) {
-            AppIcon(modifier = Modifier.size(38.dp), model.appInfo)
+            AppIcon(modifier = Modifier.size(38.dp), appInfo)
             Spacer(modifier = Modifier.size(12.dp))
             Column(verticalArrangement = Arrangement.Center) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     AppLabelText(
                         Modifier.sizeIn(maxWidth = 240.dp),
-                        model.appInfo.appLabel
+                        appInfo.appLabel
                     )
                 }
-                model.description?.let {
-                    Text(it, fontSize = 12.sp, lineHeight = 12.5.sp)
-                }
+                description1?.invoke()
+                description2?.invoke()
             }
         }
 
@@ -295,7 +347,7 @@ private fun AppListItem(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.End
         ) {
-            model.badges.forEach {
+            badges.forEach {
                 MD3Badge(text = it, modifier = Modifier.padding(start = 6.dp))
             }
             if (actions != null) {
@@ -316,4 +368,27 @@ private fun AppFilterDropDown(
         allItems = state.appFilterItems,
         onItemSelected = onFilterItemSelected
     )
+}
+
+@Composable
+private fun optionMenuDialog(
+    selectable: AppItemConfig.ItemType.OptionSelectable,
+    onSelected: (String) -> Unit
+): MenuDialogState<Unit> {
+    val context = LocalContext.current
+    val state = rememberMenuDialogState<Unit>(
+        title = "",
+        menuItems = selectable.options.map {
+            MenuDialogItem(
+                id = it.id,
+                title = it.title(context),
+                summary = it.summary
+            )
+        },
+        onItemSelected = { _, id ->
+            onSelected(id)
+        }
+    )
+    MenuDialog(state = state)
+    return state
 }

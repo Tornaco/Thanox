@@ -188,7 +188,7 @@
             android:exported="false"
             android:launchMode="singleTask"
             android:taskAffinity="ui.shortcut.feat"
-            android:theme="@style/AppThemeShortcut" />
+            android:theme="@style/UiTheme.ActivityDialog" />
         <activity
             android:name="now.fortuitous.thanos.settings.ThemeAttrPreviewActivity"
             android:exported="false" />

@@ -3,8 +3,10 @@ package now.fortuitous.thanos.apps
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import androidx.compose.ui.graphics.Color
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer
 import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.module.compose.common.infra.AppBarConfig
@@ -44,6 +46,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> cleanTaskConfig
             PrebuiltFeatureIds.ID_APP_LOCK -> appLockConfig
             PrebuiltFeatureIds.ID_TASK_BLUR -> taskBlurConfig
+            PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER -> launchOtherConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -377,6 +380,81 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             )
         }
 
+    private val launchOtherConfig: BaseAppListFilterContainerConfig
+        get() {
+            val am = ThanosManager.from(this).activityStackSupervisor
+            return BaseAppListFilterContainerConfig(
+                featureId = "launchOther",
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.launch_other_app)
+                    },
+                    actions = {
+                        listOf(
+                            AppBarConfig.AppBarAction(
+                                title = it.getString(R.string.nav_title_settings),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill,
+                                onClick = {
+                                    RecentTaskBlurSettingsActivity.start(this)
+                                }
+                            )
+                        )
+                    }
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.launch_other_app)
+                    },
+                    isChecked = am.isLaunchOtherAppBlockerEnabled,
+                    onCheckChanged = { isChecked ->
+                        am.isLaunchOtherAppBlockerEnabled = isChecked
+                        true
+                    }
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.OptionSelectable(
+                        options = listOf(
+                            AppItemConfig.ItemType.OptionSelectable.Option(
+                                title = { it.getString(R.string.launch_other_app_options_allow) },
+                                iconRes = github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_checkbox_circle_fill_green,
+                                iconTintColor = Color.Unspecified,
+                                id = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW.toString(),
+                            ),
+                            AppItemConfig.ItemType.OptionSelectable.Option(
+                                title = { it.getString(R.string.launch_other_app_options_ask) },
+                                iconRes = github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_remix_question_fill_amber,
+                                iconTintColor = Color.Unspecified,
+                                id = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ASK.toString(),
+                            ),
+                            AppItemConfig.ItemType.OptionSelectable.Option(
+                                title = { it.getString(R.string.launch_other_app_options_ignore) },
+                                iconRes = github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_forbid_2_fill_red,
+                                iconTintColor = Color.Unspecified,
+                                id = ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE.toString(),
+                            ),
+                            AppItemConfig.ItemType.OptionSelectable.Option(
+                                title = { it.getString(R.string.launch_other_app_options_allow_listed) },
+                                iconRes = github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_checkbox_circle_fill_light_green,
+                                iconTintColor = Color.Unspecified,
+                                id = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED.toString(),
+                            )
+                        ),
+                        onSelected = { app, id ->
+                            val mode = id.toIntOrNull()
+                                ?: ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW
+                            am.setLaunchOtherAppSetting(Pkg.fromAppInfo(app.appInfo), mode)
+                        }
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonOptionsAppLoader(
+                            context,
+                            pkgSetId
+                        ) { am.getLaunchOtherAppSetting(it).toString() }
+                    },
+                ),
+            )
+        }
+
     private fun commonTogglableAppLoader(
         context: Context,
         pkgSetId: String,
@@ -403,6 +481,38 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                             if (am.isPackageIdle(Pkg.fromAppInfo(appInfo))) idleBadge else null,
                         ),
                         isChecked = isChecked(Pkg.fromAppInfo(appInfo))
+                    )
+                }
+        } ?: listOf(AppUiModel(AppInfo.dummy()))
+        return res.sortedBy { it.appInfo }
+    }
+
+    private fun commonOptionsAppLoader(
+        context: Context,
+        pkgSetId: String,
+        getSelectedOptionId: ThanosManager.(Pkg) -> String
+    ): List<AppUiModel> {
+        val composer = AppListItemDescriptionComposer(this)
+        val runningBadge = context.getString(R.string.badge_app_running)
+        val idleBadge = context.getString(R.string.badge_app_idle)
+
+        val res: List<AppUiModel> = context.withThanos {
+            val am = activityManager
+            return@withThanos pkgManager.getInstalledPkgsByPackageSetId(pkgSetId)
+                .distinct()
+                .map { appInfo ->
+                    AppUiModel(
+                        appInfo = appInfo,
+                        description = composer.getAppItemDescription(appInfo),
+                        badges = listOfNotNull(
+                            if (am.isPackageRunning(Pkg.fromAppInfo(appInfo))) {
+                                runningBadge
+                            } else {
+                                null
+                            },
+                            if (am.isPackageIdle(Pkg.fromAppInfo(appInfo))) idleBadge else null,
+                        ),
+                        selectedOptionId = getSelectedOptionId(Pkg.fromAppInfo(appInfo))
                     )
                 }
         } ?: listOf(AppUiModel(AppInfo.dummy()))

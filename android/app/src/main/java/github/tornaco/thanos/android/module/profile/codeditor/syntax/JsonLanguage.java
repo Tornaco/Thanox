@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import github.tornaco.thanos.android.module.profile.R;
+import github.tornaco.android.thanos.R;
+
 
 public class JsonLanguage {
 

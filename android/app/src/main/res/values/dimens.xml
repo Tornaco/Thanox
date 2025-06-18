@@ -16,4 +16,9 @@
     <dimen name="fab_standard_45">45dp</dimen>
     <dimen name="fab_standard_60">68dp</dimen>
     <dimen name="fab_standard_120">138dp</dimen>
+
+    <dimen name="module_profile_editor_text_size">12sp</dimen>
+    <dimen name="module_profile_editor_rule_checker_indicator_size">12dp</dimen>
+    <dimen name="module_profile_rule_list_switch_container_width">96dp</dimen>
+    <dimen name="module_profile_editor_symbol_bar_height">32dp</dimen>
 </resources>

@@ -13,15 +13,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-
 import github.tornaco.android.thanos.core.profile.GlobalVar;
+import github.tornaco.android.thanos.databinding.ModuleProfileGlobalVarListActivityBinding;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
-import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileGlobalVarListActivityBinding;
 
 public class GlobalVarListActivity extends ThemeActivity implements VarItemClickListener {
 
-    private GlobalVarViewModel viewModel;
+    private github.tornaco.thanos.android.module.profile.GlobalVarViewModel viewModel;
     private ModuleProfileGlobalVarListActivityBinding binding;
 
 
@@ -50,7 +49,7 @@ public class GlobalVarListActivity extends ThemeActivity implements VarItemClick
 
         // List.
         binding.varListView.setLayoutManager(new LinearLayoutManager(this));
-        binding.varListView.setAdapter(new VarListAdapter(this));
+        binding.varListView.setAdapter(new github.tornaco.thanos.android.module.profile.VarListAdapter(this));
         binding.swipe.setOnRefreshListener(() -> viewModel.start());
         binding.swipe.setColorSchemeColors(getResources().getIntArray(
                 github.tornaco.android.thanos.module.common.R.array.common_swipe_refresh_colors));
@@ -79,7 +78,7 @@ public class GlobalVarListActivity extends ThemeActivity implements VarItemClick
         GlobalVarEditorActivity.start(thisActivity(), var);
     }
 
-    public static GlobalVarViewModel obtainViewModel(FragmentActivity activity) {
+    public static github.tornaco.thanos.android.module.profile.GlobalVarViewModel obtainViewModel(FragmentActivity activity) {
         ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory
                 .getInstance(activity.getApplication());
         return ViewModelProviders.of(activity, factory).get(GlobalVarViewModel.class);

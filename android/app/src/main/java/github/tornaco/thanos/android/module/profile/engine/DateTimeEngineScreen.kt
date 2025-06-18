@@ -58,6 +58,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.alarm.AlarmRecord
 import github.tornaco.android.thanos.core.alarm.TimeOfADay
 import github.tornaco.android.thanos.core.alarm.WeekDay
@@ -68,7 +69,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloa
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
-import github.tornaco.thanos.android.module.profile.R
 import java.util.Calendar
 import java.util.UUID
 import kotlin.math.min

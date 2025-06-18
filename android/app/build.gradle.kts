@@ -146,6 +146,8 @@ dependencies {
     implementation(libs.androidx.biometric)
     implementation(libs.androidx.lifecycle.common)
     implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.work.runtime.ktx)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
@@ -219,7 +221,6 @@ dependencies {
     implementation(project(":modules:module_ops"))
     implementation(project(":modules:module_ops2"))
     implementation(project(":modules:module_filepicker"))
-    implementation(project(":modules:module_profile"))
     implementation(project(":modules:module_donate"))
     implementation(project(":modules:module_feature_launcher"))
 
@@ -240,7 +241,7 @@ dependencies {
     implementation(project(":third_party:search"))
     implementation(project(":third_party:remix"))
     implementation(project(":third_party:reorderable"))
-
+    implementation(project(":third_party:compose-color-picker"))
     implementation(project("::third_party:libxposed:service"))
 }
 

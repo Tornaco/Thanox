@@ -19,6 +19,7 @@ package github.tornaco.thanos.android.module.profile
 
 import android.view.MenuItem
 import github.tornaco.android.thanos.BuildProp
+import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.util.OsUtils
 import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.util.BrowserUtils

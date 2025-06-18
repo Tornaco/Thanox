@@ -48,6 +48,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.amrdeveloper.codeview.CodeView
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.AndroidEntryPoint
+import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.databinding.ModuleProfileConsoleEditorBinding
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
@@ -56,7 +58,6 @@ import github.tornaco.android.thanos.util.TypefaceHelper
 import github.tornaco.thanos.android.module.profile.codeditor.syntax.LanguageManager
 import github.tornaco.thanos.android.module.profile.codeditor.syntax.LanguageName
 import github.tornaco.thanos.android.module.profile.codeditor.syntax.ThemeName
-import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileConsoleEditorBinding
 import kotlin.math.max
 import kotlin.math.min
 
@@ -74,12 +75,13 @@ class ConsoleActivity : ComposeThemeActivity() {
         val state by viewModel.state.collectAsState()
 
 
-        ThanoxMediumAppBarScaffold(title = {
-            Text(
-                text = "Action Console",
-                style = TypographyDefaults.appBarTitleTextStyle()
-            )
-        },
+        ThanoxMediumAppBarScaffold(
+            title = {
+                Text(
+                    text = "Action Console",
+                    style = TypographyDefaults.appBarTitleTextStyle()
+                )
+            },
             onBackPressed = { finish() },
             actions = {
                 IconButton(onClick = {

@@ -15,16 +15,16 @@ import java.util.Date;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.profile.RuleInfo;
-import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileRuleListItemBinding;
+import github.tornaco.android.thanos.databinding.ModuleProfileRuleListItemBinding;
 import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter;
 import util.Consumer;
 
 class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
-        implements Consumer<List<RuleUiItem>>
+        implements Consumer<List<github.tornaco.thanos.android.module.profile.RuleUiItem>>
         , FastScrollRecyclerView.SectionedAdapter,
         FastScrollRecyclerView.MeasurableAdapter<RuleListAdapter.VH> {
 
-    private final List<RuleUiItem> ruleInfoList = new ArrayList<>();
+    private final List<github.tornaco.thanos.android.module.profile.RuleUiItem> ruleInfoList = new ArrayList<>();
 
     private final RuleItemClickListener ruleItemClickListener;
     private final RuleItemSwitchChangeListener ruleItemSwitchChangeListener;
@@ -47,7 +47,7 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        RuleUiItem item = ruleInfoList.get(position);
+        github.tornaco.thanos.android.module.profile.RuleUiItem item = ruleInfoList.get(position);
         RuleInfo model = item.ruleInfo;
         holder.itemBinding.setRule(item);
         holder.itemBinding.setRuleItemClickListener(ruleItemClickListener);
@@ -98,7 +98,7 @@ class RuleListAdapter extends RecyclerView.Adapter<RuleListAdapter.VH>
             this.itemBinding = itemBinding;
         }
 
-        public github.tornaco.thanos.android.module.profile.databinding.ModuleProfileRuleListItemBinding getItemBinding() {
+        public ModuleProfileRuleListItemBinding getItemBinding() {
             return this.itemBinding;
         }
     }

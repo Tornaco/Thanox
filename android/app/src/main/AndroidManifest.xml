@@ -308,6 +308,50 @@
         <activity
             android:name="github.tornaco.android.plugin.push.message.delegate.WechatPushDeleteMainActivity"
             android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.RuleListActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.RuleEditorActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.RuleEngineSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.GlobalVarListActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.GlobalVarEditorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.ProfileShortcutEngineActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/AppThemeShortcut" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.LogActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.engine.DateTimeEngineActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.ConsoleActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.engine.NewRegularIntervalActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.example.ProfileExampleActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.online.OnlineProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.module.profile.engine.danmu.DanmuUISettingsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

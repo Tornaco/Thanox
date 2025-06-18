@@ -10,14 +10,16 @@ import java.util.List;
 
 import github.tornaco.android.thanos.core.profile.GlobalVar;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
+import github.tornaco.thanos.android.module.profile.RuleItemSwitchChangeListener;
+import github.tornaco.thanos.android.module.profile.RuleUiItem;
 import util.Consumer;
 
 public class DataBindingAdapters {
 
     @SuppressWarnings({"unchecked", "ConstantConditions"})
     @BindingAdapter("android:ruleInfoList")
-    public static void setRuleInfoList(RecyclerView view, List<RuleUiItem> models) {
-        Consumer<List<RuleUiItem>> consumer = (Consumer<List<RuleUiItem>>) view.getAdapter();
+    public static void setRuleInfoList(RecyclerView view, List<github.tornaco.thanos.android.module.profile.RuleUiItem> models) {
+        Consumer<List<github.tornaco.thanos.android.module.profile.RuleUiItem>> consumer = (Consumer<List<RuleUiItem>>) view.getAdapter();
         consumer.accept(models);
     }
 

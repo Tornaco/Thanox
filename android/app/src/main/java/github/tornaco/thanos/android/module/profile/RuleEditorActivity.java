@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleAddCallback;
@@ -34,6 +35,7 @@ import github.tornaco.android.thanos.core.profile.RuleCheckCallback;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
 import github.tornaco.android.thanos.core.profile.RuleInfoKt;
 import github.tornaco.android.thanos.core.util.TextWatcherAdapter;
+import github.tornaco.android.thanos.databinding.ModuleProfileWorkflowEditorBinding;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.TypefaceHelper;
@@ -41,7 +43,6 @@ import github.tornaco.thanos.android.module.profile.codeditor.plugin.UndoRedoMan
 import github.tornaco.thanos.android.module.profile.codeditor.syntax.LanguageManager;
 import github.tornaco.thanos.android.module.profile.codeditor.syntax.LanguageName;
 import github.tornaco.thanos.android.module.profile.codeditor.syntax.ThemeName;
-import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileWorkflowEditorBinding;
 import util.JsonFormatter;
 import util.ObjectsUtils;
 

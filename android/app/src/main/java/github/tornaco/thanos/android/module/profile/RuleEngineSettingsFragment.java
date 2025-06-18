@@ -13,6 +13,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.BasePreferenceFragmentCompat;
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.widget.EditTextDialog;
@@ -118,7 +119,7 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
         EditText factValueText = dialogView.findViewById(R.id.fact_value);
         EditText labelText = dialogView.findViewById(R.id.label);
 
-        new MaterialAlertDialogBuilder(Objects.requireNonNull(getActivity()))
+        new MaterialAlertDialogBuilder(requireActivity())
                 .setView(dialogView)
                 .setTitle(github.tornaco.android.thanos.res.R.string.module_profile_pref_title_rule_engine_shortcut)
                 .setNegativeButton(android.R.string.cancel, null)

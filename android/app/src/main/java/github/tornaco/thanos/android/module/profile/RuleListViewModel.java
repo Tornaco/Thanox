@@ -29,6 +29,8 @@ import github.tornaco.android.thanos.core.profile.RuleChangeListener;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
 import github.tornaco.android.thanos.core.profile.RuleInfoKt;
 import github.tornaco.android.thanos.core.util.Rxs;
+import github.tornaco.thanos.android.module.profile.RuleAnalyserKt;
+import github.tornaco.thanos.android.module.profile.RuleUiItem;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;
@@ -43,7 +45,7 @@ public class RuleListViewModel extends AndroidViewModel {
 
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final CompositeDisposable disposables = new CompositeDisposable();
-    private final ObservableArrayList<RuleUiItem> ruleInfoList = new ObservableArrayList<>();
+    private final ObservableArrayList<github.tornaco.thanos.android.module.profile.RuleUiItem> ruleInfoList = new ObservableArrayList<>();
 
     private final ThanosManager thanosManager;
 
@@ -69,7 +71,7 @@ public class RuleListViewModel extends AndroidViewModel {
         protected void onRuleEnabledStateChanged(int ruleId, boolean enabled) {
             super.onRuleEnabledStateChanged(ruleId, enabled);
             for (int index = 0; index < ruleInfoList.size(); index++) {
-                RuleUiItem item = ruleInfoList.get(index);
+                github.tornaco.thanos.android.module.profile.RuleUiItem item = ruleInfoList.get(index);
                 RuleInfo info = item.ruleInfo;
                 if (info.getId() == ruleId) {
                     XLog.i("RuleListViewModel onRuleEnabledStateChanged update enable state");
@@ -83,7 +85,7 @@ public class RuleListViewModel extends AndroidViewModel {
         protected void onRuleUpdated(int ruleId) {
             super.onRuleUpdated(ruleId);
             for (int index = 0; index < ruleInfoList.size(); index++) {
-                RuleUiItem item = ruleInfoList.get(index);
+                github.tornaco.thanos.android.module.profile.RuleUiItem item = ruleInfoList.get(index);
                 RuleInfo info = item.ruleInfo;
                 if (info.getId() == ruleId) {
                     RuleInfo updatedRule = thanosManager.getProfileManager().getRuleById(ruleId);
@@ -100,7 +102,7 @@ public class RuleListViewModel extends AndroidViewModel {
             super.onRuleRemoved(ruleId);
             int index = -1;
             for (int i = 0; i < ruleInfoList.size(); i++) {
-                RuleUiItem item = ruleInfoList.get(i);
+                github.tornaco.thanos.android.module.profile.RuleUiItem item = ruleInfoList.get(i);
                 RuleInfo info = item.ruleInfo;
                 if (info.getId() == ruleId) {
                     index = i;
@@ -274,7 +276,7 @@ public class RuleListViewModel extends AndroidViewModel {
         return this.isDataLoading;
     }
 
-    public ObservableArrayList<RuleUiItem> getRuleInfoList() {
+    public ObservableArrayList<github.tornaco.thanos.android.module.profile.RuleUiItem> getRuleInfoList() {
         return this.ruleInfoList;
     }
 
@@ -287,29 +289,29 @@ public class RuleListViewModel extends AndroidViewModel {
         List<RuleInfo> load();
     }
 
-    private RuleUiItem toRuleItem(RuleInfo info) {
+    private github.tornaco.thanos.android.module.profile.RuleUiItem toRuleItem(RuleInfo info) {
         // Check for su.
         if (info.getRuleString().contains("su.exe(") && !thanosManager.getProfileManager().isShellSuSupportInstalled()) {
             // Missing su support.
             String warn = getApplication().getString(github.tornaco.android.thanos.res.R.string.module_profile_should_enable_su);
-            return new RuleUiItem(info, warn);
+            return new github.tornaco.thanos.android.module.profile.RuleUiItem(info, warn);
         }
 
         if (info.getRuleString().contains("fcmPushMessageArrived") && !thanosManager.getProfileManager().isProfileEnginePushEnabled()) {
             String warn = getApplication().getString(github.tornaco.android.thanos.res.R.string.module_profile_should_enable_push);
-            return new RuleUiItem(info, warn);
+            return new github.tornaco.thanos.android.module.profile.RuleUiItem(info, warn);
         }
 
         // facts.put("globalVarOf$$it", list)
-        List<String> missingGlobalVarNames = RuleAnalyserKt.getMissingGlobalVarNames(getApplication(), info.getRuleString());
+        List<String> missingGlobalVarNames = github.tornaco.thanos.android.module.profile.RuleAnalyserKt.getMissingGlobalVarNames(getApplication(), info.getRuleString());
         if (!missingGlobalVarNames.isEmpty()) {
             String warn = getApplication().getString(github.tornaco.android.thanos.res.R.string.module_profile_miss_global_var, RuleAnalyserKt.formatGlobalVarNames(missingGlobalVarNames, System.lineSeparator()));
-            return new RuleUiItem(info, warn);
+            return new github.tornaco.thanos.android.module.profile.RuleUiItem(info, warn);
         }
 
         if (info.getRuleString().contains("Thread.sleep") && info.getPriority() >= 0) {
             String warn = getApplication().getString(github.tornaco.android.thanos.res.R.string.module_profile_block_thread);
-            return new RuleUiItem(info, warn);
+            return new github.tornaco.thanos.android.module.profile.RuleUiItem(info, warn);
         }
 
 

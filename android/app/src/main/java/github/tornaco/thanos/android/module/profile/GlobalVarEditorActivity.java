@@ -27,11 +27,11 @@ import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.profile.GlobalVar;
 import github.tornaco.android.thanos.core.util.TextWatcherAdapter;
+import github.tornaco.android.thanos.databinding.ModuleProfileGlobalVarEditorBinding;
 import github.tornaco.android.thanos.picker.AppPickerActivity;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.TypefaceHelper;
-import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileGlobalVarEditorBinding;
 import util.CollectionUtils;
 import util.ObjectsUtils;
 
@@ -108,9 +108,9 @@ public class GlobalVarEditorActivity extends ThemeActivity {
             }
         });
 
-        binding.editorActionsToolbar.inflateMenu(R.menu.module_profile_var_actions);
+        binding.editorActionsToolbar.inflateMenu(github.tornaco.android.thanos.R.menu.module_profile_var_actions);
         binding.editorActionsToolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_save_apply) {
+            if (item.getItemId() == github.tornaco.android.thanos.R.id.action_save_apply) {
                 if (TextUtils.isEmpty(getCurrentEditingContent())) {
                     return false;
                 }
@@ -135,15 +135,15 @@ public class GlobalVarEditorActivity extends ThemeActivity {
                 finish();
                 return true;
             }
-            if (item.getItemId() == R.id.action_text_size_inc) {
+            if (item.getItemId() == github.tornaco.android.thanos.R.id.action_text_size_inc) {
                 binding.codeView.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.codeView.getTextSize() + 5f);
                 return true;
             }
-            if (item.getItemId() == R.id.action_text_size_dec) {
+            if (item.getItemId() == github.tornaco.android.thanos.R.id.action_text_size_dec) {
                 binding.codeView.setTextSize(TypedValue.COMPLEX_UNIT_PX, binding.codeView.getTextSize() - 5f);
                 return true;
             }
-            if (R.id.action_delete == item.getItemId()) {
+            if (github.tornaco.android.thanos.R.id.action_delete == item.getItemId()) {
                 onRequestDelete();
                 return true;
             }
@@ -171,19 +171,19 @@ public class GlobalVarEditorActivity extends ThemeActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        binding.editorActionsToolbar.getMenu().findItem(R.id.action_delete).setVisible(globalVar != null);
+        binding.editorActionsToolbar.getMenu().findItem(github.tornaco.android.thanos.R.id.action_delete).setVisible(globalVar != null);
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.module_profile_var_editor, menu);
+        getMenuInflater().inflate(github.tornaco.android.thanos.R.menu.module_profile_var_editor, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (R.id.action_pick_app == item.getItemId()) {
+        if (github.tornaco.android.thanos.R.id.action_pick_app == item.getItemId()) {
             ArrayList<String> exclude = GlobalVar.listFromJson(getCurrentEditingContent());
             if (exclude == null) exclude = new ArrayList<>(0);
             ArrayList<Pkg> pkgs = exclude.stream().map(Pkg::systemUserPkg).collect(Collectors.toCollection(Lists::newArrayList));
@@ -237,9 +237,9 @@ public class GlobalVarEditorActivity extends ThemeActivity {
 
     private void checkRuleAndUpdateTips(String rule) {
         if (GlobalVar.listFromJson(rule) != null) {
-            binding.checkIndicator.setImageResource(R.drawable.module_profile_ic_rule_valid_green_fill);
+            binding.checkIndicator.setImageResource(github.tornaco.android.thanos.R.drawable.module_profile_ic_rule_valid_green_fill);
         } else {
-            binding.checkIndicator.setImageResource(R.drawable.module_profile_ic_rule_invalid_red_fill);
+            binding.checkIndicator.setImageResource(github.tornaco.android.thanos.R.drawable.module_profile_ic_rule_invalid_red_fill);
         }
     }
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import github.tornaco.android.thanos.core.profile.GlobalVar;
-import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileVarListItemBinding;
+import github.tornaco.android.thanos.databinding.ModuleProfileVarListItemBinding;
 import util.Consumer;
 
 class VarListAdapter extends RecyclerView.Adapter<VarListAdapter.VH>
@@ -60,7 +60,7 @@ class VarListAdapter extends RecyclerView.Adapter<VarListAdapter.VH>
             this.itemBinding = itemBinding;
         }
 
-        public github.tornaco.thanos.android.module.profile.databinding.ModuleProfileVarListItemBinding getItemBinding() {
+        public ModuleProfileVarListItemBinding getItemBinding() {
             return this.itemBinding;
         }
     }

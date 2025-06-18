@@ -23,9 +23,11 @@ import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.profile.RuleInfo;
+import github.tornaco.android.thanos.databinding.ModuleProfileRuleListActivityBinding;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
@@ -33,7 +35,6 @@ import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.SwitchBar;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
-import github.tornaco.thanos.android.module.profile.databinding.ModuleProfileRuleListActivityBinding;
 
 @RuntimePermissions
 public class RuleListActivity extends ThemeActivity implements RuleItemClickListener {
@@ -46,7 +47,6 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
     public static void start(Context context) {
         ActivityUtils.startActivity(context, RuleListActivity.class);
     }
-
 
 
     @Override

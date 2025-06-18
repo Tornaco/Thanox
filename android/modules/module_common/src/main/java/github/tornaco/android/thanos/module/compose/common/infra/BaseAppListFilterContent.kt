@@ -192,6 +192,7 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                             var isChecked by remember(sc) { mutableStateOf(sc.isChecked) }
                             SwitchBar(
                                 title = sc.title(context, isChecked),
+                                tip = config.featureDescription(LocalContext.current),
                                 isChecked = isChecked,
                                 onCheckChange = {
                                     if (sc.onCheckChanged(it)) {

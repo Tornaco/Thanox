@@ -24,8 +24,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.AppBarRow
@@ -367,7 +369,7 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                     config = config.batchOperationConfig,
                     uiState = uiState,
                     modifier = Modifier
-                        .padding(bottom = 32.dp)
+                        .padding(16.dp)
                         .fillMaxWidth()
                         .align(Alignment.BottomCenter),
                     opApplied = {
@@ -400,9 +402,9 @@ private fun SelectionModeToolbar(
 ) {
     AnimatedVisibility(modifier = modifier, visible = uiState.isInSelectionMode) {
         HorizontalFloatingToolbar(
-            modifier = Modifier.padding(horizontal = 12.dp),
+            modifier = Modifier,
             expanded = true,
-            expandedShadowElevation = 4.dp,
+            expandedShadowElevation = 0.dp,
             leadingContent = {
                 Badge {
                     Text("${uiState.selectedAppItems.size}")
@@ -411,21 +413,21 @@ private fun SelectionModeToolbar(
             trailingContent = { },
             content = {
                 FlowRow {
-                    Button(
+                    IconButton(
                         modifier = Modifier.padding(horizontal = 4.dp),
                         onClick = {
                             selectAll()
                         }
                     ) {
-                        Text(stringResource(R.string.common_menu_title_select_all))
+                        Icon(Icons.Filled.SelectAll, contentDescription = null)
                     }
-                    Button(
+                    IconButton(
                         modifier = Modifier.padding(horizontal = 4.dp),
                         onClick = {
                             unselectAll()
                         }
                     ) {
-                        Text(stringResource(R.string.common_menu_title_un_select_all))
+                        Icon(Icons.Filled.ClearAll, contentDescription = null)
                     }
                     val scope = rememberCoroutineScope()
                     config.operations.forEach {

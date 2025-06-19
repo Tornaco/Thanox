@@ -21,6 +21,9 @@
 package now.fortuitous.thanos.main
 
 import android.graphics.drawable.LayerDrawable
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,27 +43,34 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumTopAppBar
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
@@ -70,7 +80,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -97,13 +106,16 @@ import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
-import github.tornaco.android.thanos.module.compose.common.widget.fontFamilyProductSans
 import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedString
 import github.tornaco.android.thanos.support.FeatureGrid
 import github.tornaco.android.thanos.support.clickableWithRippleBorderless
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import now.fortuitous.thanos.settings.v2.SettingsScreen
 import util.AssetUtils
 
 @Composable
@@ -133,19 +145,27 @@ fun NavScreen() {
         viewModel.loadHeaderStatus()
         viewModel.autoRefresh()
     }
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            MediumTopAppBar(
-                scrollBehavior = scrollBehavior,
-                colors = TopAppBarDefaults.topAppBarColors(),
+
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet(
+                drawerTonalElevation = 0.5.dp
+            ) {
+                StandardSpacer()
+                SettingsScreen()
+                BackHandler(enabled = drawerState.isOpen) {
+                    scope.launch { drawerState.close() }
+                }
+            }
+        },
+        content = {
+            ThanoxMediumAppBarScaffold(
                 title = {
                     Row(verticalAlignment = CenterVertically) {
-                        Text(
-                            stringResource(id = R.string.app_name_thanox),
-                            fontFamily = fontFamilyProductSans()
-                        )
+                        Text(stringResource(id = R.string.app_name_thanox))
                         TinySpacer()
                         AppBarBadges(state = state, onInactiveClick = {
                             isShowActiveDialog = true
@@ -157,6 +177,9 @@ fun NavScreen() {
                             isShowFrameworkErrorDialog = true
                         })
                     }
+                },
+                navigationIcon = {
+                    SettingsAppBarActions(drawerState, false)
                 },
                 actions = {
                     Row(modifier = Modifier, verticalAlignment = CenterVertically) {
@@ -177,79 +200,105 @@ fun NavScreen() {
                             )
                         }
                     }
-                })
-        }
-    ) { contentPadding ->
-        val pullRefreshState = rememberPullRefreshState(state.isLoading, { viewModel.refresh() })
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(contentPadding)
-                .pullRefresh(pullRefreshState),
-        ) {
-            NavContent(
-                contentPadding = PaddingValues(0.dp),
-                state = state,
-                onFeatureItemClick = {
-                    viewModel.featureItemClick(activity, it.id)
-                },
-                onHeaderClick = {
-                    viewModel.headerClick(activity)
-                },
-                createShortcut = {
-                    PrebuiltFeatureShortcutActivity.ShortcutHelper.addShortcut(
-                        activity,
-                        it
+                }
+            ) { contentPadding ->
+                val pullRefreshState =
+                    rememberPullRefreshState(state.isLoading, { viewModel.refresh() })
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(contentPadding)
+                        .pullRefresh(pullRefreshState),
+                ) {
+                    NavContent(
+                        contentPadding = PaddingValues(0.dp),
+                        state = state,
+                        onFeatureItemClick = {
+                            viewModel.featureItemClick(activity, it.id)
+                        },
+                        onHeaderClick = {
+                            viewModel.headerClick(activity)
+                        },
+                        createShortcut = {
+                            PrebuiltFeatureShortcutActivity.ShortcutHelper.addShortcut(
+                                activity,
+                                it
+                            )
+                        })
+
+                    if (isShowRebootConfirmationDialog) {
+                        RestartDeviceConfirmationDialog(onRebootConfirmed = {
+                            isShowRebootConfirmationDialog = false
+                            viewModel.rebootDevice()
+                        }, onDismissRequest = {
+                            isShowRebootConfirmationDialog = false
+                        })
+                    }
+                    if (isShowActiveDialog) {
+                        ActiveDialog(onDismissRequest = {
+                            isShowActiveDialog = false
+                        })
+                    }
+                    if (isShowFrameworkErrorDialog) {
+                        FrameworkErrorDialog(onDismissRequest = {
+                            isShowFrameworkErrorDialog = false
+                        })
+                    }
+                    if (state.showPrivacyStatement) {
+                        PrivacyStatementDialog(onDismissRequest = {
+                            viewModel.privacyStatementAccepted()
+                        })
+                    }
+                    if (state.showFirstRunTips) {
+                        FirstRunDialog(
+                            onAccept = {
+                                viewModel.firstRunTipNoticed()
+                            }, onDeny = {
+                                activity.finish()
+                            })
+                    }
+                    if (state.patchSources.size > 1) {
+                        MultiplePatchDialog(patchSources = state.patchSources, onDismissRequest = {
+                            activity.finish()
+                        })
+                    }
+
+                    if (state.isAndroidVersionTooLow) {
+                        AndroidVersionNotSupportedDialog {
+                            viewModel.androidVersionTooLowAccepted()
+                        }
+                    }
+
+                    Md3ExpPullRefreshIndicator(
+                        state.isLoading,
+                        pullRefreshState,
+                        Modifier.align(Alignment.TopCenter)
                     )
-                })
-
-            if (isShowRebootConfirmationDialog) {
-                RestartDeviceConfirmationDialog(onRebootConfirmed = {
-                    isShowRebootConfirmationDialog = false
-                    viewModel.rebootDevice()
-                }, onDismissRequest = {
-                    isShowRebootConfirmationDialog = false
-                })
-            }
-            if (isShowActiveDialog) {
-                ActiveDialog(onDismissRequest = {
-                    isShowActiveDialog = false
-                })
-            }
-            if (isShowFrameworkErrorDialog) {
-                FrameworkErrorDialog(onDismissRequest = {
-                    isShowFrameworkErrorDialog = false
-                })
-            }
-            if (state.showPrivacyStatement) {
-                PrivacyStatementDialog(onDismissRequest = {
-                    viewModel.privacyStatementAccepted()
-                })
-            }
-            if (state.showFirstRunTips) {
-                FirstRunDialog(
-                    onAccept = {
-                        viewModel.firstRunTipNoticed()
-                    }, onDeny = {
-                        activity.finish()
-                    })
-            }
-            if (state.patchSources.size > 1) {
-                MultiplePatchDialog(patchSources = state.patchSources, onDismissRequest = {
-                    activity.finish()
-                })
-            }
-
-            if (state.isAndroidVersionTooLow) {
-                AndroidVersionNotSupportedDialog {
-                    viewModel.androidVersionTooLowAccepted()
                 }
             }
+        }
+    )
+}
 
-            Md3ExpPullRefreshIndicator(
-                state.isLoading,
-                pullRefreshState,
-                Modifier.align(Alignment.TopCenter)
+@Composable
+private fun SettingsAppBarActions(localDrawerState: DrawerState, hasUnReadMsg: Boolean) {
+    val scope = rememberCoroutineScope()
+    IconButton(onClick = {
+        scope.launch { localDrawerState.open() }
+    }) {
+        BadgedBox(badge = {
+            if (hasUnReadMsg) {
+                Badge(containerColor = Color.Red)
+            }
+        }) {
+            val iconSize by animateDpAsState(
+                targetValue = if (hasUnReadMsg) 18.dp else 24.dp,
+                animationSpec = tween(durationMillis = 300), label = "Icon size"
+            )
+            Icon(
+                imageVector = Icons.Outlined.Menu,
+                modifier = Modifier.size(iconSize),
+                contentDescription = null
             )
         }
     }

@@ -1,15 +1,19 @@
 package github.tornaco.android.thanos.common.settings
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -105,13 +110,15 @@ private fun CategoryUi(preference: Preference.Category) {
 @Composable
 private fun ExpandablePreferenceUi(preference: Preference.ExpandablePreference) {
     ExpandableContainer(
-        mainContent = {
+        mainContent = { exp ->
             TextPreferenceUi(
                 preference = Preference.TextPreference(
                     title = preference.title,
                     summary = preference.summary,
                     icon = preference.icon,
-                    onClick = preference.onClick
+                    onClick = preference.onClick ?: {
+                        exp()
+                    }
                 )
             )
         }, expandContent = {
@@ -183,7 +190,7 @@ private fun PreferenceIcon(preference: Preference) {
             tint = MaterialTheme.colorScheme.primary,
             contentDescription = null
         )
-    }
+    } ?: Spacer(modifier = Modifier.size(24.dp))
 }
 
 
@@ -272,7 +279,7 @@ private enum class ExpandableState { Expand, Collapsed }
 
 @Composable
 private fun ExpandableContainer(
-    mainContent: @Composable () -> Unit,
+    mainContent: @Composable (expand: () -> Unit) -> Unit,
     expandContent: @Composable () -> Unit,
 ) {
     var expandState by remember {
@@ -289,7 +296,16 @@ private fun ExpandableContainer(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column(modifier = Modifier.weight(1f, fill = false)) {
-                mainContent()
+                mainContent(
+                    {
+                        expandState =
+                            if (expandState == ExpandableState.Expand) {
+                                ExpandableState.Collapsed
+                            } else {
+                                ExpandableState.Expand
+                            }
+                    }
+                )
             }
 
             IconButton(
@@ -303,7 +319,21 @@ private fun ExpandableContainer(
                             ExpandableState.Expand
                         }
                 }) {
-                // Maybe later...
+                val rotation: Float by
+                animateFloatAsState(
+                    targetValue = if (expandState == ExpandableState.Expand) 180f else 0f,
+                    label = "Trailing Icon Rotation"
+                )
+                Icon(
+                    Icons.Filled.KeyboardArrowDown,
+                    modifier =
+                        Modifier
+                            .size(24.dp)
+                            .graphicsLayer {
+                                this.rotationZ = rotation
+                            },
+                    contentDescription = ""
+                )
             }
 
         }

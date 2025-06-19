@@ -16,7 +16,7 @@ fun <T> MenuDialog(
             },
 
             title = {
-                DialogTitle(text = state.title)
+                DialogTitle(text = state.title(state._data))
             }) {
 
             state.message?.let {
@@ -51,7 +51,7 @@ data class MenuDialogItem(
 )
 
 open class MenuDialogState<DATA>(
-    val title: String,
+    val title: (DATA?) -> String,
     val message: String? = null,
     val menuItems: List<MenuDialogItem>,
     val onItemSelected: (DATA?, String) -> Unit
@@ -68,7 +68,7 @@ open class MenuDialogState<DATA>(
 
 @Composable
 fun <T> rememberMenuDialogState(
-    title: String,
+    title: (T?) -> String,
     message: String? = null,
     menuItems: List<MenuDialogItem>,
     onItemSelected: (T?, String) -> Unit

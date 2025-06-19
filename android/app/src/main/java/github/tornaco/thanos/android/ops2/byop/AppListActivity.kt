@@ -195,7 +195,7 @@ fun opModeMenuDialog(
     setMode: (AppInfo, PermState) -> Unit
 ): MenuDialogState<AppInfo> {
     val modeSelectDialogState = rememberMenuDialogState<AppInfo>(
-        title = appInfo.appLabel,
+        title = { appInfo.appLabel },
         menuItems = if (isRuntimePermission) {
             listOfNotNull(
                 PermState.ALLOW_ALWAYS,

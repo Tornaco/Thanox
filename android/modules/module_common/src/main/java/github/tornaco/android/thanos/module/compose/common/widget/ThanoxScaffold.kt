@@ -64,7 +64,8 @@ fun ThanoxMediumAppBarScaffold(
     modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit) = {},
-    onBackPressed: (() -> Unit)?,
+    navigationIcon: (@Composable () -> Unit)? = null,
+    onBackPressed: (() -> Unit)? = null,
     floatingActionButton: @Composable () -> Unit = {},
     searchBarState: SearchBarState = rememberSearchBarState(),
     bottomBar: @Composable () -> Unit = {},
@@ -77,6 +78,7 @@ fun ThanoxMediumAppBarScaffold(
             ThanoxMediumTopAppBarContainer(
                 title = title,
                 actions = actions,
+                navigationIcon = navigationIcon,
                 onBackPressed = onBackPressed,
                 searchBarState = searchBarState,
                 scrollBehavior = scrollBehavior
@@ -102,6 +104,7 @@ fun ThanoxMediumAppBarScaffold(
 private fun ThanoxMediumTopAppBarContainer(
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
+    navigationIcon: (@Composable () -> Unit)? = null,
     onBackPressed: (() -> Unit)? = null,
     searchBarState: SearchBarState = rememberSearchBarState(),
     scrollBehavior: TopAppBarScrollBehavior? = null,
@@ -110,7 +113,13 @@ private fun ThanoxMediumTopAppBarContainer(
         if (it) {
             SearchBar(searchBarState)
         } else {
-            ThanoxMediumTopAppBar(title, actions, onBackPressed, scrollBehavior)
+            ThanoxMediumTopAppBar(
+                title = title,
+                actions = actions,
+                navigationIcon = navigationIcon,
+                onBackPressed = onBackPressed,
+                scrollBehavior = scrollBehavior
+            )
         }
     }
 }
@@ -119,6 +128,7 @@ private fun ThanoxMediumTopAppBarContainer(
 private fun ThanoxMediumTopAppBar(
     title: @Composable () -> Unit,
     actions: @Composable (RowScope.() -> Unit),
+    navigationIcon: (@Composable () -> Unit)? = null,
     onBackPressed: (() -> Unit)? = null,
     scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
@@ -138,7 +148,7 @@ private fun ThanoxMediumTopAppBar(
                         contentDescription = "Back"
                     )
                 }
-            }
+            } ?: navigationIcon?.invoke()
         },
     )
 }

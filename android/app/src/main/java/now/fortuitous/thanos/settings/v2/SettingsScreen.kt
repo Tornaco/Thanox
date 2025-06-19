@@ -1,0 +1,273 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
+package now.fortuitous.thanos.settings.v2
+
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import github.tornaco.android.thanos.common.settings.Preference
+import github.tornaco.android.thanos.common.settings.PreferenceUi
+import github.tornaco.android.thanos.core.pm.AppInfo
+import github.tornaco.android.thanos.core.profile.ConfigTemplate
+import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
+import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
+import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
+import github.tornaco.android.thanos.res.R
+import github.tornaco.android.thanos.support.withThanos
+import now.fortuitous.thanos.apps.AppDetailsActivity
+
+@Composable
+fun SettingsScreen() {
+    ThanoxTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            val vm = hiltViewModel<SettingsViewModel>()
+            val state by vm.state.collectAsStateWithLifecycle()
+
+            LaunchedEffect(vm) {
+                vm.loadState()
+            }
+
+            val snackbarHostState = remember { SnackbarHostState() }
+            val scope = rememberCoroutineScope()
+
+            val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+            Scaffold(
+                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+                snackbarHost = { SnackbarHost(snackbarHostState) },
+                topBar = {
+                    TopAppBar(
+                        modifier = Modifier,
+                        scrollBehavior = scrollBehavior,
+                        title = {
+                            Text(stringResource(R.string.nav_title_settings))
+                        }
+                    )
+                }
+            ) { paddingValues ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
+                        .verticalScroll(rememberScrollState())
+                        .consumeWindowInsets(paddingValues)
+                        .padding(bottom = 32.dp)
+                        .animateContentSize()
+
+                ) {
+                    Spacer(Modifier.size(paddingValues.calculateTopPadding()))
+
+                    PreferenceUi(mutableListOf<Preference>().apply {
+                        addAll(
+                            generalSettings(
+                                state = state,
+                                vm = vm,
+                            )
+                        )
+                        addAll(
+                            strategySettings(
+                                state = state,
+                                vm = vm,
+                            )
+                        )
+                    })
+                    StandardSpacer()
+                    Spacer(Modifier.size(paddingValues.calculateBottomPadding()))
+                }
+            }
+        }
+    }
+
+}
+
+
+@Composable
+private fun generalSettings(
+    state: SettingsState,
+    vm: SettingsViewModel,
+): List<Preference> {
+    val context = LocalContext.current
+    return context.withThanos {
+        listOf(
+            Preference.Category(stringResource(R.string.pre_category_general)),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_battery_saver_fill,
+                title = stringResource(R.string.pref_title_enable_power_save),
+                summary = stringResource(R.string.pref_summary_enable_power_save),
+                hasLongSummary = false,
+                value = state.isPowerSaveModeEnabled,
+                onCheckChanged = { enable ->
+                    powerManager.isPowerSaveModeEnabled = enable
+                    vm.loadState()
+                }
+            ),
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_cross_fill,
+                title = stringResource(R.string.pref_title_app_stability_upkeep),
+                summary = stringResource(R.string.pref_summary_app_stability_upkeep),
+                hasLongSummary = false,
+                value = state.isAppStabilityUpKeepEnabled,
+                onCheckChanged = { enable ->
+                    activityManager.isAppStabilityUpKeepEnabled = enable
+                    vm.loadState()
+                }
+            ),
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_list_3_fill,
+                title = stringResource(R.string.pref_title_enable_global_white_list),
+                summary = stringResource(R.string.pref_summary_enable_global_white_list),
+                hasLongSummary = true,
+                value = state.isProtectedWhitelistEnabled,
+                onCheckChanged = { enable ->
+                    pkgManager.isProtectedWhitelistEnabled = enable
+                    vm.loadState()
+                }
+            ),
+        )
+    } ?: emptyList()
+}
+
+@Composable
+private fun strategySettings(
+    state: SettingsState,
+    vm: SettingsViewModel,
+): List<Preference> {
+    val context = LocalContext.current
+    return context.withThanos {
+        val templateSelectDialog = rememberMenuDialogState<Unit>(
+            title = { context.getString(R.string.pref_title_new_installed_apps_config) },
+            message = null,
+            menuItems = state.allConfigTemplateSelection.map {
+                MenuDialogItem(id = it.id, title = it.title)
+            }
+        ) { _, id ->
+            profileManager.setAutoConfigTemplateSelection(id)
+            vm.loadState()
+        }
+        MenuDialog(templateSelectDialog)
+
+        val templateEditDialog = rememberMenuDialogState<ConfigTemplate>(
+            title = { it?.title.orEmpty() },
+            message = null,
+            menuItems = listOf(
+                MenuDialogItem(
+                    id = "Edit",
+                    title = stringResource(R.string.pref_action_edit_or_view_config_template)
+                ),
+                MenuDialogItem(
+                    id = "Delete",
+                    title = stringResource(R.string.pref_action_delete_config_template)
+                )
+            )
+        ) { template, id ->
+            if (template != null) {
+                if (id == "Delete") {
+                    profileManager.deleteConfigTemplate(template)
+                } else {
+                    val appInfo = AppInfo()
+                    appInfo.isSelected = false
+                    appInfo.pkgName = template.dummyPackageName
+                    appInfo.appLabel = template.title
+                    appInfo.isDummy = true
+                    appInfo.versionCode = -1
+                    appInfo.versionCode = -1
+                    appInfo.uid = -1
+                    appInfo.userId = 0
+                    AppDetailsActivity.start(context, appInfo)
+                }
+                vm.loadState()
+            }
+
+        }
+        MenuDialog(templateEditDialog)
+
+        listOf(
+            Preference.Category(stringResource(R.string.pre_category_strategy)),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_tools_fill,
+                title = stringResource(R.string.pref_title_new_installed_apps_config_enabled),
+                summary = stringResource(R.string.pref_summary_new_installed_apps_config_enabled),
+                hasLongSummary = false,
+                value = state.isAutoApplyForNewInstalledAppsEnabled,
+                onCheckChanged = { enable ->
+                    profileManager.isAutoApplyForNewInstalledAppsEnabled = enable
+                    vm.loadState()
+                }
+            ),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_notification_4_fill,
+                title = stringResource(R.string.pref_title_new_installed_apps_config_notification_enabled),
+                summary = stringResource(R.string.pref_summary_new_installed_apps_config_notification_enabled),
+                hasLongSummary = false,
+                value = state.isAutoConfigTemplateNotificationEnabled,
+                onCheckChanged = { enable ->
+                    profileManager.isAutoConfigTemplateNotificationEnabled = enable
+                    vm.loadState()
+                }
+            ),
+
+            Preference.TextPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_code_fill,
+                title = stringResource(R.string.pref_title_new_installed_apps_config),
+                summary = state.autoConfigTemplateSelection?.title
+                    ?: stringResource(R.string.common_text_value_not_set),
+                onClick = {
+                    templateSelectDialog.show()
+                }
+            ),
+
+            Preference.ExpandablePreference(
+                title = stringResource(R.string.pref_title_config_template_category),
+                preferences = state.allConfigTemplateSelection.map {
+                    Preference.TextPreference(
+                        title = it.title,
+                        onClick = {
+                            templateEditDialog.show(it)
+                        }
+                    )
+                } + listOf(
+                    Preference.TextPreference(
+                        icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_add_fill,
+                        title = stringResource(R.string.common_fab_title_add),
+                        onClick = {
+                        }
+                    ),
+                ),
+            ),
+        )
+    } ?: emptyList()
+}

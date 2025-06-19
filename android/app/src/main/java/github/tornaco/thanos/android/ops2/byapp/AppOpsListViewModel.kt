@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.ops.OpsManager
 import github.tornaco.android.thanos.core.ops.PermInfo
@@ -14,7 +15,6 @@ import github.tornaco.android.thanos.core.ops.PermState
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.PkgUtils
-import github.tornaco.thanos.android.ops2.R
 import github.tornaco.thanos.android.ops2.byop.opLabel
 import github.tornaco.thanos.android.ops2.byop.opSummary
 import kotlinx.coroutines.Dispatchers

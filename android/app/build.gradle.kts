@@ -218,7 +218,6 @@ dependencies {
     implementation(libs.xcrash.android.lib)
 
     implementation(project(":modules:module_common"))
-    implementation(project(":modules:module_ops2"))
     implementation(project(":modules:module_filepicker"))
     implementation(project(":modules:module_donate"))
     implementation(project(":modules:module_feature_launcher"))

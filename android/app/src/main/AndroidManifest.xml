@@ -365,6 +365,16 @@
             android:name="github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity"
             android:exported="false" />
 
+        <activity
+            android:name="github.tornaco.thanos.android.ops2.byop.Ops2Activity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.ops2.byop.AppListActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.ops2.byapp.AppOpsListActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="xposedmodule"
             android:value="true" />

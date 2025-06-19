@@ -25,6 +25,8 @@ import github.tornaco.practice.honeycomb.locker.ui.setup.LockSettingsActivity
 import github.tornaco.practice.honeycomb.locker.ui.verify.isBiometricReady
 import now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
+import now.fortuitous.thanos.privacy.CheatRecordViewerActivity
+import now.fortuitous.thanos.privacy.FieldsTemplateListActivity
 import now.fortuitous.thanos.start.BgRestrictSettingsActivity
 import now.fortuitous.thanos.start.StartRuleActivity
 import now.fortuitous.thanos.start.chart.ComposeStartChartActivity
@@ -49,6 +51,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_APP_LOCK -> appLockConfig
             PrebuiltFeatureIds.ID_TASK_BLUR -> taskBlurConfig
             PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER -> launchOtherConfig
+            PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> dataCheatConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -532,6 +535,115 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             )
         }
 
+
+    private val dataCheatConfig: BaseAppListFilterContainerConfig
+        get() {
+            val priv = ThanosManager.from(this).privacyManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "dataCheat",
+                featureDescription = {
+                    it.getString(R.string.feature_desc_data_cheat)
+                },
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.activity_title_data_cheat)
+                    },
+                    actions = {
+                        listOf(
+                            AppBarConfig.AppBarAction(
+                                title = it.getString(R.string.priv_title_fields_template),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_list_2_line,
+                                onClick = {
+                                    FieldsTemplateListActivity.start(this, 10086)
+                                }
+                            ),
+                            AppBarConfig.AppBarAction(
+                                title = it.getString(R.string.privacy_record),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_history_line,
+                                onClick = {
+                                    withSubscriptionStatus(this) { isSubscribed: Boolean ->
+                                        if (isSubscribed) {
+                                            CheatRecordViewerActivity.start(this)
+                                        } else {
+                                            showDonateIntroDialog(this)
+                                        }
+                                    }
+                                }
+                            )
+                        )
+                    }
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.activity_title_data_cheat)
+                    },
+                    isChecked = priv.isPrivacyEnabled,
+                    onCheckChanged = { isChecked ->
+                        priv.isPrivacyEnabled = isChecked
+                        true
+                    }
+                ),
+                batchOperationConfig = BatchOperationConfig(
+                    operations = priv.allFieldsProfiles.map { profile ->
+                        BatchOperationConfig.Operation(
+                            title = { profile.label },
+                            onClick = { models ->
+                                models.forEach {
+                                    priv.selectFieldsProfileForPackage(
+                                        it.appInfo.pkgName,
+                                        profile.id
+                                    )
+                                }
+                            }
+                        )
+                    } + listOf(
+                        BatchOperationConfig.Operation(
+                            title = { it.getString(R.string.common_text_value_not_set) },
+                            onClick = { models ->
+                                models.forEach {
+                                    priv.selectFieldsProfileForPackage(
+                                        it.appInfo.pkgName,
+                                        null
+                                    )
+                                }
+                            }
+                        )
+                    )
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.OptionSelectable(
+                        options = priv.allFieldsProfiles.map { profile ->
+                            AppItemConfig.ItemType.OptionSelectable.Option(
+                                title = { profile.label },
+                                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_list_2_line,
+                                iconTintColor = Color.Unspecified,
+                                id = profile.id
+                            )
+                        } + listOf(
+                            AppItemConfig.ItemType.OptionSelectable.Option(
+                                title = { it.getString(R.string.common_text_value_not_set) },
+                                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_list_2_line,
+                                iconTintColor = Color.Unspecified,
+                                id = "",
+                                showOnAppListItem = false
+                            )
+                        ),
+                        onSelected = { app, id ->
+                            priv.selectFieldsProfileForPackage(
+                                app.appInfo.pkgName,
+                                id.takeIf { it.isNotEmpty() })
+                        }
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonOptionsAppLoader(
+                            context,
+                            pkgSetId
+                        ) { priv.getSelectedFieldsProfileIdForPackage(it.pkgName).orEmpty() }
+                    },
+                ),
+            )
+        }
+
     private fun commonTogglableAppLoader(
         context: Context,
         pkgSetId: String,
@@ -567,7 +679,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
     private fun commonOptionsAppLoader(
         context: Context,
         pkgSetId: String,
-        getSelectedOptionId: ThanosManager.(Pkg) -> String
+        getSelectedOptionId: ThanosManager.(Pkg) -> String?
     ): List<AppUiModel> {
         val composer = AppListItemDescriptionComposer(this)
         val runningBadge = context.getString(R.string.badge_app_running)

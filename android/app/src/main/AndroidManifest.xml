@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeMD3.App.NoActionBar"
-        tools:ignore="GoogleAppIndexingWarning"
+        tools:ignore="GoogleAppIndexingWarning,SelectedPhotoAccess"
         tools:replace="android:allowBackup">
 
         <activity
@@ -56,9 +56,6 @@
             android:name="now.fortuitous.thanos.process.v2.RunningAppStateDetailsActivity"
             android:exported="false"
             android:label="@string/activity_title_process_manage" />
-        <activity
-            android:name="now.fortuitous.thanos.privacy.DataCheatActivity"
-            android:exported="false" />
         <activity
             android:name="now.fortuitous.thanos.settings.SettingsDashboardActivity"
             android:exported="false">
@@ -233,10 +230,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="now.fortuitous.thanos.launchother.LaunchOtherAppListActivity"
-            android:exported="false" />
         <activity
             android:name="now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity"
             android:exported="false" />

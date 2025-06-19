@@ -67,7 +67,9 @@ class PrebuiltFeatureLauncher(
                     AioAppListActivity.start(context, featureId)
                 }
 
-                PrebuiltFeatureIds.ID_APP_LOCK, PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER -> {
+                PrebuiltFeatureIds.ID_APP_LOCK,
+                PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER,
+                PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
                     AppFeatureManager.withSubscriptionStatus(context) {
                         if (it) {
                             AioAppListActivity.start(context, featureId)
@@ -118,16 +120,6 @@ class PrebuiltFeatureLauncher(
 
                 PrebuiltFeatureIds.ID_SMART_FREEZE -> {
                     SmartFreezeActivity.start(context)
-                }
-
-                PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
-                    AppFeatureManager.withSubscriptionStatus(context) {
-                        if (it) {
-                            now.fortuitous.thanos.privacy.DataCheatActivity.start(context)
-                        } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
-                        }
-                    }
                 }
 
                 PrebuiltFeatureIds.ID_OPS_BY_OPS -> {

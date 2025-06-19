@@ -61,7 +61,7 @@ data class BatchOperationConfig(
 ) {
     data class Operation(
         val title: (Context) -> String,
-        val onClick: (List<AppUiModel>) -> Unit
+        val onClick: suspend (List<AppUiModel>) -> Unit
     )
 }
 
@@ -94,6 +94,7 @@ data class AppItemConfig(
                 val iconTintColor: Color,
                 val id: String,
                 val summary: String? = null,
+                val showOnAppListItem: Boolean = true,
             )
         }
 

@@ -45,6 +45,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -68,14 +69,20 @@ import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefr
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogState
+import github.tornaco.android.thanos.module.compose.common.widget.ProgressDialog
+import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SortToolDropdown
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.SwitchBar
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
+import github.tornaco.android.thanos.module.compose.common.widget.rememberProgressDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import github.tornaco.android.thanos.res.R
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilterContainerConfig) {
@@ -314,22 +321,25 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                                 description1 = model.description?.let {
                                     { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
                                 },
-                                description2 = selectedOption?.let {
-                                    {
-                                        Row(verticalAlignment = Alignment.CenterVertically) {
-                                            Icon(
-                                                painter = painterResource(it.iconRes),
-                                                tint = it.iconTintColor,
-                                                contentDescription = null
-                                            )
-                                            Text(
-                                                it.title(LocalContext.current),
-                                                fontSize = 12.sp,
-                                                lineHeight = 12.5.sp
-                                            )
+                                description2 = selectedOption?.takeIf { it.showOnAppListItem }
+                                    ?.let {
+                                        {
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Icon(
+                                                    painter = painterResource(it.iconRes),
+                                                    tint = it.iconTintColor,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(16.dp)
+                                                )
+                                                SmallSpacer()
+                                                Text(
+                                                    it.title(LocalContext.current),
+                                                    fontSize = 12.sp,
+                                                    lineHeight = 12.5.sp
+                                                )
+                                            }
                                         }
-                                    }
-                                },
+                                    },
                                 badges = model.badges,
                                 onClick = {
                                     if (uiState.isInSelectionMode) {
@@ -417,12 +427,25 @@ private fun SelectionModeToolbar(
                     ) {
                         Text(stringResource(R.string.common_menu_title_un_select_all))
                     }
+                    val scope = rememberCoroutineScope()
                     config.operations.forEach {
+                        val progressDialogState =
+                            rememberProgressDialogState(
+                                stringResource(R.string.title_batch_tools),
+                                it.title(LocalContext.current)
+                            )
+                        ProgressDialog(progressDialogState)
                         Button(
                             modifier = Modifier.padding(horizontal = 4.dp),
                             onClick = {
-                                it.onClick(uiState.selectedAppItems)
-                                opApplied()
+                                scope.launch {
+                                    progressDialogState.show()
+                                    withContext(Dispatchers.IO) {
+                                        it.onClick(uiState.selectedAppItems)
+                                    }
+                                    opApplied()
+                                    progressDialogState.dismiss()
+                                }
                             }
                         ) {
                             Text(it.title(LocalContext.current))

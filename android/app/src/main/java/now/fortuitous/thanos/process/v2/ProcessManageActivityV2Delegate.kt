@@ -31,7 +31,7 @@ class ProcessManageActivityV2Delegate : Activity() {
                 ProcessManageActivityV2.Starter.start(this)
                 finish()
             } else {
-                AppFeatureManager.showDonateIntroDialog(this)
+                AppFeatureManager.showSubscribeDialog(this)
             }
         }
     }

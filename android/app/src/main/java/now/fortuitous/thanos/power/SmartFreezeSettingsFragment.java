@@ -87,7 +87,7 @@ public class SmartFreezeSettingsFragment extends BasePreferenceFragmentCompat {
                     boolean checked = (boolean) newValue;
                     thanos.getPkgManager().setSmartFreezeHidePackageEventEnabled(checked);
                 } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                 }
                 return null;
             });

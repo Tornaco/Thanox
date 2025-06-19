@@ -161,7 +161,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                     if (isSubscribed) {
                         thanos.getPkgManager().setPackageBlockUninstallEnabled(appInfo.getPkgName(), (Boolean) newValue);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -176,7 +176,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                     if (isSubscribed) {
                         thanos.getPkgManager().setPackageBlockClearDataEnabled(appInfo.getPkgName(), (Boolean) newValue);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -191,7 +191,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                     if (isSubscribed) {
                         thanos.getPkgManager().setPackageBlockUpdateEnabled(appInfo.getPkgName(), (Boolean) newValue);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -209,7 +209,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                     if (isSubscribed) {
                         ComponentsActivity.startActivity(requireActivity(), appInfo);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -225,7 +225,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                     if (isSubscribed) {
                         ComponentsActivity.startBroadcastReceiver(requireActivity(), appInfo);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -239,7 +239,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                     if (isSubscribed) {
                         ComponentsActivity.startProvider(requireActivity(), appInfo);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -255,7 +255,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                     if (isSubscribed) {
                         ComponentsActivity.startService(requireActivity(), appInfo);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -332,7 +332,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                         int mode = Integer.parseInt(String.valueOf(newValue));
                         thanos.getActivityManager().setRecentTaskExcludeSettingForPackage(Pkg.fromAppInfo(appInfo), mode);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -363,7 +363,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                         thanos.getActivityStackSupervisor().setLaunchOtherAppSetting(Pkg.fromAppInfo(appInfo), mode);
                         allowListPref.setVisible(mode == ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -392,7 +392,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                         int mode = Integer.parseInt(String.valueOf(newValue));
                         thanos.getPrivacyManager().setSensorOffSettingsForPackage(Pkg.fromAppInfo(appInfo), mode);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -741,7 +741,7 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
                 if (isSubscribed) {
                     ThanosManager.from(getContext()).getActivityStackSupervisor().setPackageLocked(appInfo.getPkgName(), value);
                 } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                 }
                 return null;
             });

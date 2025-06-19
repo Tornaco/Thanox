@@ -42,7 +42,7 @@ class RuleListActivityMenuHandler {
                         RuleListActivityPermissionRequester.importFromFileTBelowChecked(this)
                     }
                 } else {
-                    AppFeatureManager.showDonateIntroDialog(this)
+                    AppFeatureManager.showSubscribeDialog(this)
                 }
             }
             return true
@@ -56,7 +56,7 @@ class RuleListActivityMenuHandler {
                 if (it) {
                     OnlineProfileActivity.Starter.start(this)
                 } else {
-                    AppFeatureManager.showDonateIntroDialog(this)
+                    AppFeatureManager.showSubscribeDialog(this)
                 }
             }
             return true
@@ -70,7 +70,7 @@ class RuleListActivityMenuHandler {
                 if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
                     onRequestAddNewRule()
                 } else {
-                    AppFeatureManager.showDonateIntroDialog(this)
+                    AppFeatureManager.showSubscribeDialog(this)
                 }
             }
             return true
@@ -84,7 +84,7 @@ class RuleListActivityMenuHandler {
                 if (it) {
                     ConsoleActivity.Starter.start(this)
                 } else {
-                    AppFeatureManager.showDonateIntroDialog(this)
+                    AppFeatureManager.showSubscribeDialog(this)
                 }
             }
             return true

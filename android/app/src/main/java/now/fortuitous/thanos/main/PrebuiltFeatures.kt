@@ -20,7 +20,7 @@ package now.fortuitous.thanos.main
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.util.OsUtils
-import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
+import github.tornaco.android.thanos.support.AppFeatureManager.showSubscribeDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.android.thanox.module.notification.recorder.NotificationRecordSettingsActivity
@@ -64,7 +64,7 @@ object PrebuiltFeatures {
                             if (subscribed) {
                                 ComposeStartChartActivity.Starter.start(it)
                             } else {
-                                showDonateIntroDialog(it)
+                                showSubscribeDialog(it)
                             }
                         }
                     },
@@ -73,7 +73,7 @@ object PrebuiltFeatures {
                             if (subscribed) {
                                 now.fortuitous.thanos.start.StartRuleActivity.start(it)
                             } else {
-                                showDonateIntroDialog(it)
+                                showSubscribeDialog(it)
                             }
                         }
                     }
@@ -151,7 +151,7 @@ object PrebuiltFeatures {
                             if (isSubscribed) {
                                 now.fortuitous.thanos.privacy.CheatRecordViewerActivity.start(it)
                             } else {
-                                showDonateIntroDialog(it)
+                                showSubscribeDialog(it)
                             }
                         }
                     }
@@ -244,7 +244,7 @@ object PrebuiltFeatures {
                             if (it) {
                                 OnlineProfileActivity.Starter.start(activity)
                             } else {
-                                showDonateIntroDialog(activity)
+                                showSubscribeDialog(activity)
                             }
                         }
                     },
@@ -259,7 +259,7 @@ object PrebuiltFeatures {
                             if (it) {
                                 ConsoleActivity.Starter.start(activity)
                             } else {
-                                showDonateIntroDialog(activity)
+                                showSubscribeDialog(activity)
                             }
                         }
                     },

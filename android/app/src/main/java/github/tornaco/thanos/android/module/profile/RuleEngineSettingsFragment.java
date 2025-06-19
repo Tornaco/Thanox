@@ -104,7 +104,7 @@ public class RuleEngineSettingsFragment extends BasePreferenceFragmentCompat {
                         if (isSubscribed) {
                             DanmuUISettingsActivity.Starter.INSTANCE.start(requireActivity());
                         } else {
-                            AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                            AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                         }
                         return null;
                     });

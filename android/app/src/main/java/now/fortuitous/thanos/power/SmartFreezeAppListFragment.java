@@ -254,7 +254,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                     if (isSubscribed) {
                         onRequestShortcutStubApk(appInfo);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -265,7 +265,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                     if (isSubscribed) {
                         AppDetailsActivity.start(requireContext(), appInfo);
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -281,7 +281,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                             return null;
                         }).show();
                     } else {
-                        AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                     }
                     return null;
                 });
@@ -387,7 +387,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                         onRequestEnableAllSmartFreezeApps();
                     }).setNegativeButton(android.R.string.cancel, null).show();
                 } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                 }
                 return null;
             });
@@ -400,7 +400,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                         onRequestEnableAllSmartFreezeAppsTemp();
                     }).setNegativeButton(android.R.string.cancel, null).show();
                 } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                 }
                 return null;
             });
@@ -413,7 +413,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                         onRequestEnableAllApps();
                     }).setNegativeButton(android.R.string.cancel, null).show();
                 } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                 }
                 return null;
             });
@@ -425,7 +425,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                 if (isSubscribed) {
                     onRequestExportPackageList();
                 } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                 }
                 return null;
             });
@@ -437,7 +437,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
                 if (isSubscribed) {
                     onRequestImportPackageList();
                 } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                 }
                 return null;
             });
@@ -693,7 +693,7 @@ public class SmartFreezeAppListFragment extends BaseFragment {
             AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
                 if (isSubscribed) {
                 } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(requireActivity());
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
                 }
                 return null;
             });

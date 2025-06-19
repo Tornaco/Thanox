@@ -19,7 +19,7 @@ import github.tornaco.android.thanos.module.compose.common.infra.BatchOperationC
 import github.tornaco.android.thanos.module.compose.common.infra.FabItemConfig
 import github.tornaco.android.thanos.module.compose.common.infra.SwitchBarConfig
 import github.tornaco.android.thanos.res.R
-import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
+import github.tornaco.android.thanos.support.AppFeatureManager.showSubscribeDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.practice.honeycomb.locker.ui.setup.LockSettingsActivity
@@ -58,6 +58,8 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_OP_REMIND -> opRemindConfig
             PrebuiltFeatureIds.ID_SENSOR_OFF -> sensorOffConfig
             PrebuiltFeatureIds.ID_SMART_STANDBY -> smartStandbyConfig
+            PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> screenOnNotiConfig
+            PrebuiltFeatureIds.ID_RESIDENT -> residentConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -135,7 +137,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                                         if (subscribed) {
                                             ComposeStartChartActivity.Starter.start(this)
                                         } else {
-                                            showDonateIntroDialog(this)
+                                            showSubscribeDialog(this)
                                         }
                                     }
                                 }
@@ -148,7 +150,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                                         if (subscribed) {
                                             StartRuleActivity.start(this)
                                         } else {
-                                            showDonateIntroDialog(this)
+                                            showSubscribeDialog(this)
                                         }
                                     }
                                 },
@@ -495,6 +497,86 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             )
         }
 
+    private val screenOnNotiConfig: BaseAppListFilterContainerConfig
+        get() {
+            val nm = ThanosManager.from(this).notificationManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "screenOnNoti",
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.feature_title_light_on_notification)
+                    },
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.feature_title_light_on_notification)
+                    },
+                    isChecked = nm.isScreenOnNotificationEnabled,
+                    onCheckChanged = { isChecked ->
+                        nm.isScreenOnNotificationEnabled = isChecked
+                        true
+                    }
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            nm.setScreenOnNotificationEnabledForPkg(
+                                app.appInfo.pkgName,
+                                isCheck
+                            )
+                        },
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) { nm.isScreenOnNotificationEnabledForPkg(it.pkgName) }
+                    },
+                ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    nm.setScreenOnNotificationEnabledForPkg(
+                        app.appInfo.pkgName,
+                        isCheck
+                    )
+                })
+            )
+        }
+
+    private val residentConfig: BaseAppListFilterContainerConfig
+        get() {
+            val am = ThanosManager.from(this).activityManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "resident",
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.pre_title_resident)
+                    },
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            am.setPkgResident(
+                                Pkg.fromAppInfo(app.appInfo),
+                                isCheck
+                            )
+                        },
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) { am.isPkgResident(it) }
+                    },
+                ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    am.setPkgResident(
+                        Pkg.fromAppInfo(app.appInfo),
+                        isCheck
+                    )
+                })
+            )
+        }
+
     private val opRemindConfig: BaseAppListFilterContainerConfig
         get() {
             val ops = ThanosManager.from(this).appOpsManager
@@ -769,7 +851,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                                         if (isSubscribed) {
                                             CheatRecordViewerActivity.start(this)
                                         } else {
-                                            showDonateIntroDialog(this)
+                                            showSubscribeDialog(this)
                                         }
                                     }
                                 }

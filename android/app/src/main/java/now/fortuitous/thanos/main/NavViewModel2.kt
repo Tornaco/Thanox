@@ -34,7 +34,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.OsUtils
 import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
-import github.tornaco.android.thanos.support.AppFeatureManager.showDonateIntroDialog
+import github.tornaco.android.thanos.support.AppFeatureManager.showSubscribeDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos
 import kotlinx.coroutines.Dispatchers
@@ -308,7 +308,7 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                 if (isSubscribed) {
                     ProcessManageActivityV2.Starter.start(activity)
                 } else {
-                    showDonateIntroDialog(activity)
+                    showSubscribeDialog(activity)
                 }
             }
             true

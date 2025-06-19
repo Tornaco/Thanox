@@ -106,9 +106,6 @@
             android:enabled="true"
             android:exported="true" />
         <activity
-            android:name="now.fortuitous.thanos.notification.ScreenOnNotificationActivity"
-            android:exported="false" />
-        <activity
             android:name="now.fortuitous.thanos.start.StartRuleActivity"
             android:exported="false" />
         <activity
@@ -193,10 +190,6 @@
             android:name="now.fortuitous.thanos.settings.access.SettingsAccessRecordViewerActivity"
             android:exported="false" />
         <activity
-            android:name="now.fortuitous.thanos.notification.NotificationCenterActivity"
-            android:exported="false"
-            android:label="@string/module_notification_recorder_feature_title_notification_center" />
-        <activity
             android:name="now.fortuitous.thanos.settings.FeatureToggleActivity"
             android:exported="false" />
 
@@ -236,9 +229,6 @@
         <activity
             android:name="now.fortuitous.thanos.launchother.AllowListActivity"
             android:exported="true" />
-        <activity
-            android:name="now.fortuitous.thanos.resident.ResidentActivity"
-            android:exported="false" />
         <activity
             android:name="now.fortuitous.thanos.recovery.RecoveryUtilsActivity"
             android:exported="true" />
@@ -509,6 +499,8 @@
     <!-- Required permission to check licensing. -->
     <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
 
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
 
 </manifest>

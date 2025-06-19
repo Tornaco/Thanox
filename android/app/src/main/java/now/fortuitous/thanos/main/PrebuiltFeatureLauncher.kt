@@ -34,10 +34,8 @@ import github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
 import github.tornaco.thanos.android.ops2.byop.Ops2Activity
 import now.fortuitous.thanos.apps.AioAppListActivity
-import now.fortuitous.thanos.notification.NotificationCenterActivity
 import now.fortuitous.thanos.power.SmartFreezeActivity
 import now.fortuitous.thanos.power.wakelock.WakeLockBlockerActivity
-import now.fortuitous.thanos.resident.ResidentActivity
 
 class PrebuiltFeatureLauncher(
     private val context: Activity,
@@ -53,7 +51,7 @@ class PrebuiltFeatureLauncher(
                             context.sendBroadcast(Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR))
                             onProcessCleared()
                         } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
+                            AppFeatureManager.showSubscribeDialog(context)
                         }
                     }
                 }
@@ -70,26 +68,20 @@ class PrebuiltFeatureLauncher(
                 PrebuiltFeatureIds.ID_APP_LOCK,
                 PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER,
                 PrebuiltFeatureIds.ID_SENSOR_OFF,
-                PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
+                PrebuiltFeatureIds.ID_PRIVACY_CHEAT,
+                PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION,
+                PrebuiltFeatureIds.ID_RESIDENT -> {
                     AppFeatureManager.withSubscriptionStatus(context) {
                         if (it) {
                             AioAppListActivity.start(context, featureId)
                         } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
+                            AppFeatureManager.showSubscribeDialog(context)
                         }
                     }
                 }
 
-                PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> {
-                    now.fortuitous.thanos.notification.ScreenOnNotificationActivity.start(context)
-                }
-
                 PrebuiltFeatureIds.ID_NOTIFICATION_RECORDER -> {
                     NotificationRecordActivity.start(context)
-                }
-
-                PrebuiltFeatureIds.ID_NOTIFICATION_CENTER -> {
-                    NotificationCenterActivity.Starter.start(context)
                 }
 
                 PrebuiltFeatureIds.ID_TRAMPOLINE -> {
@@ -97,7 +89,7 @@ class PrebuiltFeatureLauncher(
                         if (it) {
                             ActivityTrampolineActivity.start(context)
                         } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
+                            AppFeatureManager.showSubscribeDialog(context)
                             // Disable this feature, since it is free to use before.
                             XLog.w("Disabling ActivityTrampoline.")
                             activityStackSupervisor.isActivityTrampolineEnabled = false
@@ -138,15 +130,9 @@ class PrebuiltFeatureLauncher(
                         if (it) {
                             now.fortuitous.thanos.infinite.InfiniteZActivity.start(context)
                         } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
+                            AppFeatureManager.showSubscribeDialog(context)
                         }
                     }
-                }
-
-                PrebuiltFeatureIds.ID_PLUGINS -> {
-                }
-
-                PrebuiltFeatureIds.ID_FEEDBACK -> {
                 }
 
                 PrebuiltFeatureIds.ID_GUIDE -> {
@@ -158,7 +144,7 @@ class PrebuiltFeatureLauncher(
                         if (it) {
                             WechatPushDeleteMainActivity.start(context)
                         } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
+                            AppFeatureManager.showSubscribeDialog(context)
                         }
                     }
                 }
@@ -168,17 +154,7 @@ class PrebuiltFeatureLauncher(
                         if (it) {
                             WakeLockBlockerActivity.Starter.start(context)
                         } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
-                        }
-                    }
-                }
-
-                PrebuiltFeatureIds.ID_RESIDENT -> {
-                    AppFeatureManager.withSubscriptionStatus(context) {
-                        if (it) {
-                            ResidentActivity.start(context)
-                        } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
+                            AppFeatureManager.showSubscribeDialog(context)
                         }
                     }
                 }

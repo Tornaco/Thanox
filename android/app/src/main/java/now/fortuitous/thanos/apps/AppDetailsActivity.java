@@ -177,7 +177,7 @@ public class AppDetailsActivity extends BaseTrustedActivity {
                 if (isSubscribed) {
                     requestApplyTemplateSelection();
                 } else {
-                    AppFeatureManager.INSTANCE.showDonateIntroDialog(thisActivity());
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(thisActivity());
                 }
                 return null;
             });

@@ -52,6 +52,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_TASK_BLUR -> taskBlurConfig
             PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER -> launchOtherConfig
             PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> dataCheatConfig
+            PrebuiltFeatureIds.ID_OP_REMIND -> opRemindConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -417,6 +418,41 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                 batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
                     am.setPkgRecentTaskBlurEnabled(
                         Pkg.fromAppInfo(app.appInfo),
+                        isCheck
+                    )
+                })
+            )
+        }
+
+    private val opRemindConfig: BaseAppListFilterContainerConfig
+        get() {
+            val ops = ThanosManager.from(this).appOpsManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "opRemind",
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.module_ops_title_op_remind_apps)
+                    }
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            ops.setPkgOpRemindEnable(
+                                app.appInfo.pkgName,
+                                isCheck
+                            )
+                        },
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) { ops.isPkgOpRemindEnable(it.pkgName) }
+                    },
+                ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    ops.setPkgOpRemindEnable(
+                        app.appInfo.pkgName,
                         isCheck
                     )
                 })

@@ -249,7 +249,8 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
     fun updateAppCheckState(app: AppUiModel, checked: Boolean) {
         updateState {
             copy(apps = apps.toMutableList().apply {
-                val index = indexOfFirst { app.appInfo.pkgName == it.appInfo.pkgName }
+                val index =
+                    indexOfFirst { app.appInfo.pkgName == it.appInfo.pkgName && app.appInfo.userId == it.appInfo.userId }
                 if (index >= 0) {
                     set(index, get(index).copy(isChecked = checked))
                 }
@@ -260,7 +261,8 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
     fun updateAppOptionState(app: AppUiModel, id: String) {
         updateState {
             copy(apps = apps.toMutableList().apply {
-                val index = indexOfFirst { app.appInfo.pkgName == it.appInfo.pkgName }
+                val index =
+                    indexOfFirst { app.appInfo.pkgName == it.appInfo.pkgName && app.appInfo.userId == it.appInfo.userId }
                 if (index >= 0) {
                     set(index, get(index).copy(selectedOptionId = id))
                 }

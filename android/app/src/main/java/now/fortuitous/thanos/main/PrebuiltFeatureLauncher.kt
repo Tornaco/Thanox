@@ -62,6 +62,7 @@ class PrebuiltFeatureLauncher(
                 PrebuiltFeatureIds.ID_BACKGROUND_START,
                 PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT,
                 PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL,
+                PrebuiltFeatureIds.ID_SMART_STANDBY,
                 PrebuiltFeatureIds.ID_TASK_BLUR -> {
                     AioAppListActivity.start(context, featureId)
                 }
@@ -106,16 +107,6 @@ class PrebuiltFeatureLauncher(
 
                 PrebuiltFeatureIds.ID_PROFILE -> {
                     RuleListActivity.start(context)
-                }
-
-                PrebuiltFeatureIds.ID_SMART_STANDBY -> {
-                    AppFeatureManager.withSubscriptionStatus(context) {
-                        if (it) {
-                            now.fortuitous.thanos.power.SmartStandbyV2Activity.start(context)
-                        } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
-                        }
-                    }
                 }
 
                 PrebuiltFeatureIds.ID_SMART_FREEZE -> {

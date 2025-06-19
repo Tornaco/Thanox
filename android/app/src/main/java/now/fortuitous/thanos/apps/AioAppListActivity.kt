@@ -26,6 +26,8 @@ import github.tornaco.practice.honeycomb.locker.ui.setup.LockSettingsActivity
 import github.tornaco.practice.honeycomb.locker.ui.verify.isBiometricReady
 import now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
+import now.fortuitous.thanos.power.SmartStandbySettingsActivity
+import now.fortuitous.thanos.power.StandByRuleActivity
 import now.fortuitous.thanos.privacy.CheatRecordViewerActivity
 import now.fortuitous.thanos.privacy.FieldsTemplateListActivity
 import now.fortuitous.thanos.start.BgRestrictSettingsActivity
@@ -55,6 +57,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> dataCheatConfig
             PrebuiltFeatureIds.ID_OP_REMIND -> opRemindConfig
             PrebuiltFeatureIds.ID_SENSOR_OFF -> sensorOffConfig
+            PrebuiltFeatureIds.ID_SMART_STANDBY -> smartStandbyConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -419,6 +422,72 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                 ),
                 batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
                     am.setPkgRecentTaskBlurEnabled(
+                        Pkg.fromAppInfo(app.appInfo),
+                        isCheck
+                    )
+                })
+            )
+        }
+
+    private val smartStandbyConfig: BaseAppListFilterContainerConfig
+        get() {
+            val am = ThanosManager.from(this).activityManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "smartStandby",
+                featureDescription = {
+                    it.getString(R.string.feature_summary_smart_app_standby)
+                },
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.feature_title_smart_app_standby)
+                    },
+                    actions = {
+                        listOf(
+                            AppBarConfig.AppBarAction(
+                                title = it.getString(R.string.menu_title_rules),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_list_2_line,
+                                onClick = {
+                                    StandByRuleActivity.start(this)
+                                }
+                            ),
+                            AppBarConfig.AppBarAction(
+                                title = it.getString(R.string.nav_title_settings),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill,
+                                onClick = {
+                                    SmartStandbySettingsActivity.start(this)
+                                }
+                            )
+                        )
+                    }
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.feature_title_smart_app_standby)
+                    },
+                    isChecked = am.isSmartStandByEnabled,
+                    onCheckChanged = { isChecked ->
+                        am.isSmartStandByEnabled = isChecked
+                        true
+                    }
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            am.setPkgSmartStandByEnabled(
+                                Pkg.fromAppInfo(app.appInfo),
+                                isCheck
+                            )
+                        },
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) { am.isPkgSmartStandByEnabled(it) }
+                    },
+                ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    am.setPkgSmartStandByEnabled(
                         Pkg.fromAppInfo(app.appInfo),
                         isCheck
                     )

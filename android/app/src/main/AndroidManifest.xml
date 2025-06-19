@@ -109,9 +109,6 @@
             android:name="now.fortuitous.thanos.notification.ScreenOnNotificationActivity"
             android:exported="false" />
         <activity
-            android:name="now.fortuitous.thanos.power.SmartStandbyV2Activity"
-            android:exported="false" />
-        <activity
             android:name="now.fortuitous.thanos.start.StartRuleActivity"
             android:exported="false" />
         <activity

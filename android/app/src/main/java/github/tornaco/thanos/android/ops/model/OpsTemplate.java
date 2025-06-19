@@ -3,8 +3,6 @@ package github.tornaco.thanos.android.ops.model;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
-import github.tornaco.thanos.android.ops.R;
-
 public class OpsTemplate {
 
     public github.tornaco.android.thanos.core.secure.ops.OpsTemplate legacy;
@@ -22,7 +20,7 @@ public class OpsTemplate {
             github.tornaco.android.thanos.core.secure.ops.OpsTemplate.THANOX_TEMPLATE,
             github.tornaco.android.thanos.res.R.string.module_ops_category_thanox,
             github.tornaco.android.thanos.res.R.string.module_ops_category_thanox,
-            R.drawable.module_ops_ic_shield_cross_line,
+            github.tornaco.android.thanos.R.drawable.module_ops_ic_shield_cross_line,
             -1
     );
 

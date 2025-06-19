@@ -17,10 +17,10 @@ import java.util.List;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
+import github.tornaco.android.thanos.databinding.ModuleOpsItemFooterBinding;
+import github.tornaco.android.thanos.databinding.ModuleOpsItemHeaderBinding;
+import github.tornaco.android.thanos.databinding.ModuleOpsItemOpsCheckableBinding;
 import github.tornaco.android.thanos.widget.section.SectioningAdapter;
-import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemFooterBinding;
-import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemHeaderBinding;
-import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemOpsCheckableBinding;
 import github.tornaco.thanos.android.ops.model.Op;
 import github.tornaco.thanos.android.ops.model.OpGroup;
 import util.Consumer;
@@ -171,7 +171,7 @@ public class AppOpsListAdapter extends SectioningAdapter implements Consumer<Lis
             this.binding = binding;
         }
 
-        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemHeaderBinding getBinding() {
+        public ModuleOpsItemHeaderBinding getBinding() {
             return this.binding;
         }
     }
@@ -184,7 +184,7 @@ public class AppOpsListAdapter extends SectioningAdapter implements Consumer<Lis
             this.binding = binding;
         }
 
-        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemOpsCheckableBinding getBinding() {
+        public ModuleOpsItemOpsCheckableBinding getBinding() {
             return this.binding;
         }
     }
@@ -197,7 +197,7 @@ public class AppOpsListAdapter extends SectioningAdapter implements Consumer<Lis
             this.binding = binding;
         }
 
-        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemFooterBinding getBinding() {
+        public ModuleOpsItemFooterBinding getBinding() {
             return this.binding;
         }
     }

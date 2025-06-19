@@ -14,11 +14,13 @@ import androidx.lifecycle.ViewModelProviders;
 
 import java.util.Objects;
 
+import github.tornaco.android.thanos.R;
+import github.tornaco.android.thanos.databinding.ModuleOpsLayoutRemindOpsListBinding;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.section.StickyHeaderLayoutManager;
-import github.tornaco.thanos.android.ops.R;
-import github.tornaco.thanos.android.ops.databinding.ModuleOpsLayoutRemindOpsListBinding;
+import now.fortuitous.thanos.apps.AioAppListActivity;
+import now.fortuitous.thanos.main.PrebuiltFeatureIds;
 
 public class RemindOpsActivity extends ThemeActivity {
 
@@ -78,7 +80,7 @@ public class RemindOpsActivity extends ThemeActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_op_remind_apps) {
-            AppListActivity.start(this);
+            AioAppListActivity.start(this, PrebuiltFeatureIds.ID_OP_REMIND);
         }
         return super.onOptionsItemSelected(item);
     }

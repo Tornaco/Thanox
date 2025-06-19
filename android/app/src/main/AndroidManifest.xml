@@ -346,6 +346,28 @@
             android:name="github.tornaco.thanos.android.module.profile.engine.danmu.DanmuUISettingsActivity"
             android:exported="false" />
 
+        <activity
+            android:name="github.tornaco.thanos.android.ops.ops.by.app.AppOpsListActivity"
+            android:exported="false"
+            android:label="@string/module_ops_activity_title_app_ops_list" />
+        <activity
+            android:name="github.tornaco.thanos.android.ops.ops.by.app.AppListActivity"
+            android:exported="false"
+            android:label="@string/module_ops_activity_title_app_ops_list" />
+        <activity
+            android:name="github.tornaco.thanos.android.ops.ops.by.ops.OpsAppListActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity"
+            android:exported="false"
+            android:label="@string/module_ops_feature_title_ops_remind_list" />
+        <activity
+            android:name="github.tornaco.thanos.android.ops.ops.by.ops.OpsBottomNavActivity"
+            android:exported="false" />
+        <activity
+            android:name="github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="xposedmodule"
             android:value="true" />

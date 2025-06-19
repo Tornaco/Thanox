@@ -114,32 +114,32 @@ public class Op implements Parcelable {
         OpBuilder() {
         }
 
-        public Op.OpBuilder title(String title) {
+        public OpBuilder title(String title) {
             this.title = title;
             return this;
         }
 
-        public Op.OpBuilder summary(String summary) {
+        public OpBuilder summary(String summary) {
             this.summary = summary;
             return this;
         }
 
-        public Op.OpBuilder iconRes(int iconRes) {
+        public OpBuilder iconRes(int iconRes) {
             this.iconRes = iconRes;
             return this;
         }
 
-        public Op.OpBuilder code(int code) {
+        public OpBuilder code(int code) {
             this.code = code;
             return this;
         }
 
-        public Op.OpBuilder mode(int mode) {
+        public OpBuilder mode(int mode) {
             this.mode = mode;
             return this;
         }
 
-        public Op.OpBuilder remind(boolean remind) {
+        public OpBuilder remind(boolean remind) {
             this.remind = remind;
             return this;
         }

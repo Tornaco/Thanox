@@ -122,13 +122,13 @@ public class SensorOffAppListActivity extends CommonAppListFilterActivity {
                 String payload = model.appInfo.getStr();
                 int mode = Integer.parseInt(payload);
                 if (mode == PrivacyManager.SensorOffSettings.DEFAULT) {
-                    return github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_checkbox_circle_fill_green;
+                    return github.tornaco.android.thanos.R.drawable.module_ops_ic_checkbox_circle_fill_green;
                 }
                 if (mode == PrivacyManager.SensorOffSettings.ON_START) {
-                    return github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_checkbox_circle_fill_grey;
+                    return github.tornaco.android.thanos.R.drawable.module_ops_ic_checkbox_circle_fill_grey;
                 }
                 if (mode == PrivacyManager.SensorOffSettings.ALWAYS) {
-                    return github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_forbid_2_fill_red;
+                    return github.tornaco.android.thanos.R.drawable.module_ops_ic_forbid_2_fill_red;
                 }
                 return 0;
             }

@@ -218,7 +218,6 @@ dependencies {
     implementation(libs.xcrash.android.lib)
 
     implementation(project(":modules:module_common"))
-    implementation(project(":modules:module_ops"))
     implementation(project(":modules:module_ops2"))
     implementation(project(":modules:module_filepicker"))
     implementation(project(":modules:module_donate"))
@@ -256,11 +255,13 @@ val generateProguardRules by tasks.registering {
         }
 
         ruleFile.appendText(System.lineSeparator())
-        ruleFile.appendText("""
+        ruleFile.appendText(
+            """
             -obfuscationdictionary proguard_dict.txt
             -classobfuscationdictionary proguard_dict.txt
             -packageobfuscationdictionary proguard_dict.txt
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 }
 

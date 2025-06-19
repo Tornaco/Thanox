@@ -17,11 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.common.CommonPreferences;
 import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.databinding.ModuleOpsLayoutAllOpsBinding;
 import github.tornaco.android.thanos.widget.SwitchBar;
-import github.tornaco.thanos.android.ops.R;
-import github.tornaco.thanos.android.ops.databinding.ModuleOpsLayoutAllOpsBinding;
 import github.tornaco.thanos.android.ops.model.Op;
 import github.tornaco.thanos.android.ops.ops.OpItemClickListener;
 

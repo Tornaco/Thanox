@@ -9,10 +9,10 @@ import android.content.res.TypedArray;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.annotation.Nullable;
 import github.tornaco.android.thanos.core.util.ArrayUtils;
 import github.tornaco.android.thanos.core.util.Preconditions;
-import github.tornaco.thanos.android.ops.R;
 
 @SuppressWarnings("WeakerAccess")
 public class Ops {

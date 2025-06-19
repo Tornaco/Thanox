@@ -20,14 +20,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
+import github.tornaco.android.thanos.databinding.ModuleOpsLayoutOpsListBinding;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.widget.section.StickyHeaderLayoutManager;
-import github.tornaco.thanos.android.ops.R;
-import github.tornaco.thanos.android.ops.databinding.ModuleOpsLayoutOpsListBinding;
 
 public class AppOpsListActivity extends ThemeActivity {
 

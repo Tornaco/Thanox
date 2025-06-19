@@ -532,25 +532,25 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         options = listOf(
                             AppItemConfig.ItemType.OptionSelectable.Option(
                                 title = { it.getString(R.string.launch_other_app_options_allow) },
-                                iconRes = github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_checkbox_circle_fill_green,
+                                iconRes = github.tornaco.android.thanos.R.drawable.module_ops_ic_checkbox_circle_fill_green,
                                 iconTintColor = Color.Unspecified,
                                 id = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW.toString(),
                             ),
                             AppItemConfig.ItemType.OptionSelectable.Option(
                                 title = { it.getString(R.string.launch_other_app_options_ask) },
-                                iconRes = github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_remix_question_fill_amber,
+                                iconRes = github.tornaco.android.thanos.R.drawable.module_ops_ic_remix_question_fill_amber,
                                 iconTintColor = Color.Unspecified,
                                 id = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ASK.toString(),
                             ),
                             AppItemConfig.ItemType.OptionSelectable.Option(
                                 title = { it.getString(R.string.launch_other_app_options_ignore) },
-                                iconRes = github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_forbid_2_fill_red,
+                                iconRes = github.tornaco.android.thanos.R.drawable.module_ops_ic_forbid_2_fill_red,
                                 iconTintColor = Color.Unspecified,
                                 id = ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE.toString(),
                             ),
                             AppItemConfig.ItemType.OptionSelectable.Option(
                                 title = { it.getString(R.string.launch_other_app_options_allow_listed) },
-                                iconRes = github.tornaco.thanos.android.ops.R.drawable.module_ops_ic_checkbox_circle_fill_light_green,
+                                iconRes = github.tornaco.android.thanos.R.drawable.module_ops_ic_checkbox_circle_fill_light_green,
                                 iconTintColor = Color.Unspecified,
                                 id = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED.toString(),
                             )

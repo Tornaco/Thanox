@@ -1,36 +1,33 @@
-package github.tornaco.thanos.android.ops.ops.remind;
+package github.tornaco.thanos.android.ops.ops.by.ops;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Checkable;
-
-import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import github.tornaco.android.thanos.databinding.ModuleOpsItemFooterBinding;
+import github.tornaco.android.thanos.databinding.ModuleOpsItemHeaderBinding;
+import github.tornaco.android.thanos.databinding.ModuleOpsItemOpsBinding;
 import github.tornaco.android.thanos.widget.section.SectioningAdapter;
-import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemFooterBinding;
-import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemHeaderBinding;
-import github.tornaco.thanos.android.ops.databinding.ModuleOpsItemRemindOpsCheckableBinding;
 import github.tornaco.thanos.android.ops.model.Op;
 import github.tornaco.thanos.android.ops.model.OpGroup;
+import github.tornaco.thanos.android.ops.ops.OpItemClickListener;
 import util.Consumer;
 
-public class RemindOpsListAdapter extends SectioningAdapter implements Consumer<List<OpGroup>> {
-
-    private final OpItemSwitchChangeListener itemSwitchChangeListener;
+public class AllOpsListAdapter extends SectioningAdapter implements Consumer<List<OpGroup>> {
 
     private final List<OpGroup> opGroups = new ArrayList<>();
 
-    RemindOpsListAdapter(@NonNull OpItemSwitchChangeListener itemSwitchChangeListener) {
-        this.itemSwitchChangeListener = itemSwitchChangeListener;
+    private OpItemClickListener listener;
+
+    AllOpsListAdapter(OpItemClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
     public ItemViewHolder onCreateItemViewHolder(ViewGroup parent, int itemUserType) {
-        return new IVH(ModuleOpsItemRemindOpsCheckableBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new IVH(ModuleOpsItemOpsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
@@ -58,9 +55,8 @@ public class RemindOpsListAdapter extends SectioningAdapter implements Consumer<
         OpGroup opGroup = opGroups.get(sectionIndex);
         Op op = opGroup.getOpList().get(itemIndex);
         ivh.binding.setOp(op);
-        ivh.binding.appItemRoot.setOnClickListener(v -> ivh.binding.itemSwitch.performClick());
+        ivh.binding.card.setOnClickListener(v -> listener.onOpItemClick(op, v));
         ivh.binding.executePendingBindings();
-        ivh.binding.itemSwitch.setOnClickListener(v -> itemSwitchChangeListener.onOpItemSwitchChanged(op, ((Checkable) v).isChecked()));
     }
 
     @Override
@@ -103,20 +99,20 @@ public class RemindOpsListAdapter extends SectioningAdapter implements Consumer<
             this.binding = binding;
         }
 
-        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemHeaderBinding getBinding() {
+        public ModuleOpsItemHeaderBinding getBinding() {
             return this.binding;
         }
     }
 
     final static class IVH extends ItemViewHolder {
-        private ModuleOpsItemRemindOpsCheckableBinding binding;
+        private ModuleOpsItemOpsBinding binding;
 
-        IVH(ModuleOpsItemRemindOpsCheckableBinding binding) {
+        IVH(ModuleOpsItemOpsBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemRemindOpsCheckableBinding getBinding() {
+        public ModuleOpsItemOpsBinding getBinding() {
             return this.binding;
         }
     }
@@ -129,7 +125,7 @@ public class RemindOpsListAdapter extends SectioningAdapter implements Consumer<
             this.binding = binding;
         }
 
-        public github.tornaco.thanos.android.ops.databinding.ModuleOpsItemFooterBinding getBinding() {
+        public ModuleOpsItemFooterBinding getBinding() {
             return this.binding;
         }
     }

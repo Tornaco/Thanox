@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import java.util.Objects;
 
+import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.secure.ops.AppOpsManager;
-import github.tornaco.thanos.android.ops.R;
 import github.tornaco.thanos.android.ops.model.Op;
 import github.tornaco.thanos.android.ops.model.OpGroup;
 import util.Consumer;

@@ -37,7 +37,6 @@ import now.fortuitous.thanos.apps.AioAppListActivity
 import now.fortuitous.thanos.notification.NotificationCenterActivity
 import now.fortuitous.thanos.power.SmartFreezeActivity
 import now.fortuitous.thanos.power.wakelock.WakeLockBlockerActivity
-import now.fortuitous.thanos.privacy.SensorOffAppListActivity
 import now.fortuitous.thanos.resident.ResidentActivity
 
 class PrebuiltFeatureLauncher(
@@ -69,6 +68,7 @@ class PrebuiltFeatureLauncher(
 
                 PrebuiltFeatureIds.ID_APP_LOCK,
                 PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER,
+                PrebuiltFeatureIds.ID_SENSOR_OFF,
                 PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> {
                     AppFeatureManager.withSubscriptionStatus(context) {
                         if (it) {
@@ -186,16 +186,6 @@ class PrebuiltFeatureLauncher(
                     AppFeatureManager.withSubscriptionStatus(context) {
                         if (it) {
                             ResidentActivity.start(context)
-                        } else {
-                            AppFeatureManager.showDonateIntroDialog(context)
-                        }
-                    }
-                }
-
-                PrebuiltFeatureIds.ID_SENSOR_OFF -> {
-                    AppFeatureManager.withSubscriptionStatus(context) {
-                        if (it) {
-                            SensorOffAppListActivity.start(context)
                         } else {
                             AppFeatureManager.showDonateIntroDialog(context)
                         }

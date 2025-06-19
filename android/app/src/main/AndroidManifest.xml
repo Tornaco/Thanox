@@ -243,9 +243,6 @@
             android:name="now.fortuitous.thanos.resident.ResidentActivity"
             android:exported="false" />
         <activity
-            android:name="now.fortuitous.thanos.privacy.SensorOffAppListActivity"
-            android:exported="false" />
-        <activity
             android:name="now.fortuitous.thanos.recovery.RecoveryUtilsActivity"
             android:exported="true" />
         <activity

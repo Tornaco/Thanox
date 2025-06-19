@@ -9,6 +9,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.android.thanos.core.secure.PrivacyManager
 import github.tornaco.android.thanos.module.compose.common.infra.AppBarConfig
 import github.tornaco.android.thanos.module.compose.common.infra.AppItemConfig
 import github.tornaco.android.thanos.module.compose.common.infra.AppUiModel
@@ -53,6 +54,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER -> launchOtherConfig
             PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> dataCheatConfig
             PrebuiltFeatureIds.ID_OP_REMIND -> opRemindConfig
+            PrebuiltFeatureIds.ID_SENSOR_OFF -> sensorOffConfig
 
             else -> error("Unknown feature id: $featureId")
         }
@@ -566,6 +568,103 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                             context,
                             pkgSetId
                         ) { am.getLaunchOtherAppSetting(it).toString() }
+                    },
+                ),
+            )
+        }
+
+
+    private val sensorOffConfig: BaseAppListFilterContainerConfig
+        get() {
+            val priv = ThanosManager.from(this).privacyManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "sensorOff",
+                featureDescription = { it.getString(R.string.sensor_off_summary) },
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.sensor_off)
+                    }
+                ),
+                switchBarConfig = SwitchBarConfig(
+                    title = { context, _ ->
+                        context.getString(R.string.sensor_off)
+                    },
+                    isChecked = priv.isSensorOffEnabled,
+                    onCheckChanged = { isChecked ->
+                        priv.isSensorOffEnabled = isChecked
+                        true
+                    }
+                ),
+                batchOperationConfig = BatchOperationConfig(
+                    operations = listOf(
+                        BatchOperationConfig.Operation(
+                            title = { it.getString(R.string.sensor_off_default) },
+                            onClick = { models ->
+                                models.forEach {
+                                    priv.setSensorOffSettingsForPackage(
+                                        Pkg.fromAppInfo(it.appInfo),
+                                        PrivacyManager.SensorOffSettings.DEFAULT
+                                    )
+                                }
+                            }
+                        ),
+                        BatchOperationConfig.Operation(
+                            title = { it.getString(R.string.sensor_off_on_start) },
+                            onClick = { models ->
+                                models.forEach {
+                                    priv.setSensorOffSettingsForPackage(
+                                        Pkg.fromAppInfo(it.appInfo),
+                                        PrivacyManager.SensorOffSettings.ON_START
+                                    )
+                                }
+                            }
+                        ),
+                        BatchOperationConfig.Operation(
+                            title = { it.getString(R.string.sensor_off_always) },
+                            onClick = { models ->
+                                models.forEach {
+                                    priv.setSensorOffSettingsForPackage(
+                                        Pkg.fromAppInfo(it.appInfo),
+                                        PrivacyManager.SensorOffSettings.ALWAYS
+                                    )
+                                }
+                            }
+                        ),
+                    )
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.OptionSelectable(
+                        options = listOf(
+                            AppItemConfig.ItemType.OptionSelectable.Option(
+                                title = { it.getString(R.string.sensor_off_default) },
+                                iconRes = github.tornaco.android.thanos.R.drawable.module_ops_ic_checkbox_circle_fill_green,
+                                iconTintColor = Color.Unspecified,
+                                id = PrivacyManager.SensorOffSettings.DEFAULT.toString(),
+                            ),
+                            AppItemConfig.ItemType.OptionSelectable.Option(
+                                title = { it.getString(R.string.sensor_off_on_start) },
+                                iconRes = github.tornaco.android.thanos.R.drawable.module_ops_ic_checkbox_circle_fill_grey,
+                                iconTintColor = Color.Unspecified,
+                                id = PrivacyManager.SensorOffSettings.ON_START.toString(),
+                            ),
+                            AppItemConfig.ItemType.OptionSelectable.Option(
+                                title = { it.getString(R.string.sensor_off_always) },
+                                iconRes = github.tornaco.android.thanos.R.drawable.module_ops_ic_forbid_2_fill_red,
+                                iconTintColor = Color.Unspecified,
+                                id = PrivacyManager.SensorOffSettings.ALWAYS.toString(),
+                            )
+                        ),
+                        onSelected = { app, id ->
+                            val mode = id.toIntOrNull()
+                                ?: PrivacyManager.SensorOffSettings.DEFAULT
+                            priv.setSensorOffSettingsForPackage(Pkg.fromAppInfo(app.appInfo), mode)
+                        }
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonOptionsAppLoader(
+                            context,
+                            pkgSetId
+                        ) { priv.getSensorOffSettingsForPackage(it).toString() }
                     },
                 ),
             )

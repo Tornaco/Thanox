@@ -37,14 +37,18 @@ import github.tornaco.android.thanos.common.settings.Preference
 import github.tornaco.android.thanos.common.settings.PreferenceUi
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.profile.ConfigTemplate
+import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.TextInputDialog
 import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
+import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.support.withThanos
 import now.fortuitous.thanos.apps.AppDetailsActivity
+import java.util.UUID
 
 @Composable
 fun SettingsScreen() {
@@ -167,6 +171,7 @@ private fun strategySettings(
     val context = LocalContext.current
     return context.withThanos {
         val templateSelectDialog = rememberMenuDialogState<Unit>(
+            key1 = state.allConfigTemplateSelection,
             title = { context.getString(R.string.pref_title_new_installed_apps_config) },
             message = null,
             menuItems = state.allConfigTemplateSelection.map {
@@ -212,6 +217,27 @@ private fun strategySettings(
 
         }
         MenuDialog(templateEditDialog)
+
+        val addTemplateDialog = rememberTextInputState(
+            title = stringResource(R.string.common_fab_title_add),
+            message = null
+        ) {
+            val uuid = UUID.randomUUID().toString()
+            val template =
+                ConfigTemplate.builder()
+                    .title(it)
+                    .id(uuid)
+                    .dummyPackageName(
+                        ProfileManager
+                            .PROFILE_AUTO_APPLY_NEW_INSTALLED_APPS_CONFIG_TEMPLATE_PACKAGE_PREFIX
+                                + uuid
+                    )
+                    .createAt(System.currentTimeMillis())
+                    .build()
+            profileManager.addConfigTemplate(template)
+            vm.loadState()
+        }
+        TextInputDialog(addTemplateDialog)
 
         listOf(
             Preference.Category(stringResource(R.string.pre_category_strategy)),
@@ -264,6 +290,7 @@ private fun strategySettings(
                         icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_add_fill,
                         title = stringResource(R.string.common_fab_title_add),
                         onClick = {
+                            addTemplateDialog.show()
                         }
                     ),
                 ),

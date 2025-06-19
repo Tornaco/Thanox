@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -60,7 +59,7 @@ class TextInputState(
 @Composable
 fun rememberTextInputState(
     title: String,
-    message: String?,
+    message: String? = null,
     showSymbolButton: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     inputValidator: ((String) -> Pair<Boolean, String>) = { it.isNotEmpty() to "" },
@@ -78,7 +77,6 @@ fun rememberTextInputState(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextInputDialog(state: TextInputState) {
     if (state.isShow) {

@@ -77,3 +77,16 @@ fun <T> rememberMenuDialogState(
         MenuDialogState(title, message, menuItems, onItemSelected)
     }
 }
+
+@Composable
+fun <T> rememberMenuDialogState(
+    key1: Any?,
+    title: (T?) -> String,
+    message: String? = null,
+    menuItems: List<MenuDialogItem>,
+    onItemSelected: (T?, String) -> Unit
+): MenuDialogState<T> {
+    return remember(key1) {
+        MenuDialogState(title, message, menuItems, onItemSelected)
+    }
+}

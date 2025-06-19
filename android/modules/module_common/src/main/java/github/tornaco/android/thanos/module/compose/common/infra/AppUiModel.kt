@@ -9,6 +9,10 @@ data class AppUiModel(
     val lastUsedTimeMills: Long = 0L,
     val totalUsedTimeMills: Long = 0L,
 
+    val isRunning: Boolean = false,
+    val isIdle: Boolean = false,
+    val isPlayingSound: Boolean = false,
+
     val isChecked: Boolean = false,
-    val selectedOptionId: String? = null
+    val selectedOptionId: String? = null,
 )

@@ -56,6 +56,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -448,9 +449,9 @@ fun RunningAppItem(
                             TinySpacer()
                             Icon(
                                 modifier = Modifier.size(16.dp),
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_music_2_fill),
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_netease_cloud_music_fill),
                                 contentDescription = "Playing",
-                                tint = MaterialTheme.colorScheme.primary
+                                tint = Color.Red
                             )
                         }
                     }

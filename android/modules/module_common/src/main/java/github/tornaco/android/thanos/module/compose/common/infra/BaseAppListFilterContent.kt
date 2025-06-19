@@ -33,6 +33,7 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.AppBarRow
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularWavyProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.HorizontalFloatingToolbar
@@ -263,6 +264,9 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                             AppListItem(
                                 appInfo = model.appInfo,
                                 isSelected = isSelected,
+                                isRunning = model.isRunning,
+                                isIdle = model.isIdle,
+                                isPlayingSound = model.isPlayingSound,
                                 description1 = model.description?.let {
                                     { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
                                 },
@@ -291,6 +295,9 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                             AppListItem(
                                 appInfo = model.appInfo,
                                 isSelected = isSelected,
+                                isRunning = model.isRunning,
+                                isIdle = model.isIdle,
+                                isPlayingSound = model.isPlayingSound,
                                 description1 = model.description?.let {
                                     { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
                                 },
@@ -320,6 +327,9 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                             AppListItem(
                                 appInfo = model.appInfo,
                                 isSelected = isSelected,
+                                isRunning = model.isRunning,
+                                isIdle = model.isIdle,
+                                isPlayingSound = model.isPlayingSound,
                                 description1 = model.description?.let {
                                     { Text(it, fontSize = 12.sp, lineHeight = 12.5.sp) }
                                 },
@@ -463,6 +473,9 @@ private fun SelectionModeToolbar(
 private fun AppListItem(
     appInfo: AppInfo,
     isSelected: Boolean,
+    isRunning: Boolean,
+    isIdle: Boolean,
+    isPlayingSound: Boolean,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     badges: List<String>,
@@ -507,6 +520,35 @@ private fun AppListItem(
             badges.forEach {
                 MD3Badge(text = it, modifier = Modifier.padding(start = 6.dp))
             }
+
+            if (isRunning) {
+                CircularWavyProgressIndicator(
+                    modifier = Modifier
+                        .padding(start = 6.dp)
+                        .size(18.dp)
+                )
+            }
+            if (isIdle) {
+                Icon(
+                    painter = painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_zzz_fill),
+                    contentDescription = null,
+                    tint = Color.Gray,
+                    modifier = Modifier
+                        .padding(start = 6.dp)
+                        .size(18.dp)
+                )
+            }
+            if (isPlayingSound) {
+                Icon(
+                    painter = painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_netease_cloud_music_fill),
+                    contentDescription = null,
+                    tint = Color.Red,
+                    modifier = Modifier
+                        .padding(start = 6.dp)
+                        .size(18.dp)
+                )
+            }
+
             if (actions != null) {
                 StandardSpacer()
                 actions()

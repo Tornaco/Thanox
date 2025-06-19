@@ -80,30 +80,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     },
                 ),
                 loader = { context, pkgSetId ->
-                    val composer = AppListItemDescriptionComposer(this)
-                    val runningBadge = context.getString(R.string.badge_app_running)
-                    val idleBadge = context.getString(R.string.badge_app_idle)
-
-                    val res: List<AppUiModel> = context.withThanos {
-                        val am = activityManager
-                        return@withThanos pkgManager.getInstalledPkgsByPackageSetId(pkgSetId)
-                            .distinct()
-                            .map { appInfo ->
-                                AppUiModel(
-                                    appInfo = appInfo,
-                                    description = composer.getAppItemDescription(appInfo),
-                                    badges = listOfNotNull(
-                                        if (am.isPackageRunning(Pkg.fromAppInfo(appInfo))) {
-                                            runningBadge
-                                        } else {
-                                            null
-                                        },
-                                        if (am.isPackageIdle(Pkg.fromAppInfo(appInfo))) idleBadge else null,
-                                    )
-                                )
-                            }
-                    } ?: listOf(AppUiModel(AppInfo.dummy()))
-                    res
+                    commonTogglableAppLoader(context, pkgSetId) { false }
                 },
             ),
             fabs = listOf(
@@ -647,8 +624,8 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     operations = listOf(
                         BatchOperationConfig.Operation(
                             title = { it.getString(R.string.module_ops_mode_allow_all) },
-                            onClick = {
-                                it.forEach {
+                            onClick = { models ->
+                                models.forEach {
                                     am.setLaunchOtherAppSetting(
                                         Pkg.fromAppInfo(it.appInfo),
                                         ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW
@@ -658,8 +635,8 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         ),
                         BatchOperationConfig.Operation(
                             title = { it.getString(R.string.module_ops_mode_ask_all) },
-                            onClick = {
-                                it.forEach {
+                            onClick = { models ->
+                                models.forEach {
                                     am.setLaunchOtherAppSetting(
                                         Pkg.fromAppInfo(it.appInfo),
                                         ActivityStackSupervisor.LaunchOtherAppPkgSetting.ASK
@@ -669,8 +646,8 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         ),
                         BatchOperationConfig.Operation(
                             title = { it.getString(R.string.module_ops_mode_ignore_all) },
-                            onClick = {
-                                it.forEach {
+                            onClick = { models ->
+                                models.forEach {
                                     am.setLaunchOtherAppSetting(
                                         Pkg.fromAppInfo(it.appInfo),
                                         ActivityStackSupervisor.LaunchOtherAppPkgSetting.IGNORE
@@ -936,26 +913,20 @@ class AioAppListActivity : BaseAppListFilterActivity() {
         isChecked: ThanosManager.(Pkg) -> Boolean
     ): List<AppUiModel> {
         val composer = AppListItemDescriptionComposer(this)
-        val runningBadge = context.getString(R.string.badge_app_running)
-        val idleBadge = context.getString(R.string.badge_app_idle)
-
         val res: List<AppUiModel> = context.withThanos {
             val am = activityManager
+            val audio = audioManager
             return@withThanos pkgManager.getInstalledPkgsByPackageSetId(pkgSetId)
                 .distinct()
                 .map { appInfo ->
+                    val pkg = Pkg.fromAppInfo(appInfo)
                     AppUiModel(
                         appInfo = appInfo,
                         description = composer.getAppItemDescription(appInfo),
-                        badges = listOfNotNull(
-                            if (am.isPackageRunning(Pkg.fromAppInfo(appInfo))) {
-                                runningBadge
-                            } else {
-                                null
-                            },
-                            if (am.isPackageIdle(Pkg.fromAppInfo(appInfo))) idleBadge else null,
-                        ),
-                        isChecked = isChecked(Pkg.fromAppInfo(appInfo))
+                        isRunning = am.isPackageRunning(pkg),
+                        isIdle = am.isPackageIdle(pkg),
+                        isPlayingSound = audio.hasAudioFocus(pkg),
+                        isChecked = isChecked(pkg)
                     )
                 }
         } ?: listOf(AppUiModel(AppInfo.dummy()))
@@ -968,25 +939,19 @@ class AioAppListActivity : BaseAppListFilterActivity() {
         getSelectedOptionId: ThanosManager.(Pkg) -> String?
     ): List<AppUiModel> {
         val composer = AppListItemDescriptionComposer(this)
-        val runningBadge = context.getString(R.string.badge_app_running)
-        val idleBadge = context.getString(R.string.badge_app_idle)
-
         val res: List<AppUiModel> = context.withThanos {
             val am = activityManager
+            val audio = audioManager
             return@withThanos pkgManager.getInstalledPkgsByPackageSetId(pkgSetId)
                 .distinct()
                 .map { appInfo ->
+                    val pkg = Pkg.fromAppInfo(appInfo)
                     AppUiModel(
                         appInfo = appInfo,
                         description = composer.getAppItemDescription(appInfo),
-                        badges = listOfNotNull(
-                            if (am.isPackageRunning(Pkg.fromAppInfo(appInfo))) {
-                                runningBadge
-                            } else {
-                                null
-                            },
-                            if (am.isPackageIdle(Pkg.fromAppInfo(appInfo))) idleBadge else null,
-                        ),
+                        isRunning = am.isPackageRunning(pkg),
+                        isIdle = am.isPackageIdle(pkg),
+                        isPlayingSound = audio.hasAudioFocus(pkg),
                         selectedOptionId = getSelectedOptionId(Pkg.fromAppInfo(appInfo))
                     )
                 }

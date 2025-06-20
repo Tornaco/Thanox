@@ -38,7 +38,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeFlexibleTopAppBar
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MediumFlexibleTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextField
@@ -46,6 +47,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,6 +60,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
+import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 
 @Composable
 fun ThanoxMediumAppBarScaffold(
@@ -76,7 +79,11 @@ fun ThanoxMediumAppBarScaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             ThanoxMediumTopAppBarContainer(
-                title = title,
+                title = {
+                    CompositionLocalProvider(LocalTextStyle provides TypographyDefaults.appBarTitleTextStyle()) {
+                        title()
+                    }
+                },
                 actions = actions,
                 navigationIcon = navigationIcon,
                 onBackPressed = onBackPressed,
@@ -132,7 +139,7 @@ private fun ThanoxMediumTopAppBar(
     onBackPressed: (() -> Unit)? = null,
     scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
-    LargeFlexibleTopAppBar(
+    MediumFlexibleTopAppBar(
         modifier = Modifier,
         title = title,
         titleHorizontalAlignment = Alignment.Start,

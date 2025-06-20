@@ -2,6 +2,7 @@
 
 package now.fortuitous.thanos.settings.v2
 
+import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -35,16 +36,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.common.settings.Preference
 import github.tornaco.android.thanos.common.settings.PreferenceUi
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.profile.ConfigTemplate
 import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
+import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TextInputDialog
+import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.res.R
@@ -74,6 +78,9 @@ fun SettingsScreen() {
             val backupSuccessMsg = stringResource(R.string.pre_message_backup_success)
             val backupErrorTitle = stringResource(R.string.pre_message_backup_error)
             val actionLabel = stringResource(android.R.string.ok)
+
+            val restoreSuccessMsg = stringResource(R.string.pre_message_restore_success)
+
             LaunchedEffect(vm) {
                 vm.backupPerformed.collectLatest {
                     when (it) {
@@ -93,6 +100,28 @@ fun SettingsScreen() {
                                     message = "$backupErrorTitle ${it.tmpFile}",
                                     duration = SnackbarDuration.Indefinite,
                                     actionLabel = actionLabel
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            LaunchedEffect(vm) {
+                vm.restorePerformed.collectLatest {
+                    when (it) {
+                        is RestoreResult.Success, RestoreResult.ResetComplete -> {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = restoreSuccessMsg,
+                                )
+                            }
+                        }
+
+                        is RestoreResult.Failed -> {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "ERROR: ${it.error}",
                                 )
                             }
                         }
@@ -352,11 +381,31 @@ private fun dataSettings(
         })
     TextInputDialog(state = backUpFileNameDialogState)
 
+    val context = LocalContext.current
     val storageHelper = LocalSimpleStorageHelper.current
     SideEffect {
         storageHelper.onFileCreated = { code, file ->
             vm.backup(file)
         }
+
+        storageHelper.onFileSelected = { code, files ->
+            XLog.d("storageHelper onFileSelected- $files")
+            val file = files.firstOrNull()
+            file?.let {
+                vm.restore(file)
+            } ?: Toast.makeText(context, "Canceled.", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    val resetConfigDialog = rememberConfirmDialogState()
+    ConfirmDialog(
+        title = stringResource(R.string.pre_title_restore_default),
+        state = resetConfigDialog,
+        messageHint = { it },
+        data = stringResource(R.string.pre_summary_restore_default)
+    ) {
+        vm.restoreDefault()
     }
 
     return listOf(
@@ -373,17 +422,24 @@ private fun dataSettings(
             }
         ),
         Preference.ExpandablePreference(
-            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_upload_cloud_2_fill,
-            title = stringResource(R.string.pre_title_backup),
-            summary = stringResource(R.string.pre_summary_backup),
+            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_download_cloud_fill,
+            title = stringResource(R.string.pre_title_restore),
+            summary = stringResource(R.string.pre_sumary_restore),
             onClick = {
-
+                XLog.d("storageHelper openFilePicker")
+                storageHelper.openFilePicker(
+                    requestCode = 100,
+                    allowMultiple = false,
+                    initialPath = null,
+                    "application/zip"
+                )
             },
             preferences = listOf(
                 Preference.TextPreference(
                     title = stringResource(R.string.pre_title_restore_default),
                     summary = stringResource(R.string.pre_summary_restore_default),
                     onClick = {
+                        resetConfigDialog.show()
                     }
                 ),
             ),

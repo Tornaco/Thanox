@@ -7,6 +7,7 @@ import android.os.RemoteException
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.viewModelScope
 import com.anggrayudi.storage.file.fullName
+import com.anggrayudi.storage.file.openInputStream
 import com.anggrayudi.storage.file.openOutputStream
 import com.elvishew.xlog.XLog
 import com.google.common.io.Files
@@ -18,7 +19,9 @@ import github.tornaco.android.thanos.core.backup.IFileDescriptorConsumer
 import github.tornaco.android.thanos.core.backup.IFileDescriptorInitializer
 import github.tornaco.android.thanos.core.profile.ConfigTemplate
 import github.tornaco.android.thanos.core.util.DateUtils
+import github.tornaco.android.thanos.core.util.FileUtils
 import github.tornaco.android.thanos.module.compose.common.infra.ContextViewModel
+import github.tornaco.android.thanos.support.withThanos
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
@@ -50,6 +53,7 @@ sealed interface BackupResult {
 
 sealed interface RestoreResult {
     data object Success : RestoreResult
+    data object ResetComplete : RestoreResult
     data class Failed(val error: String) : RestoreResult
 }
 
@@ -179,6 +183,72 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
                     override fun onProgress(progressMessage: String?) {
                     }
                 })
+    }
+
+    fun restore(pickedFile: DocumentFile) {
+        XLog.d("storageHelper restore.")
+        val tmpDir = File(context.externalCacheDir, "restore_tmp")
+        try {
+            val tmpZipFile = File(
+                tmpDir,
+                String.format("tem_restore_%s.zip", System.currentTimeMillis())
+            )
+            Files.createParentDirs(tmpZipFile)
+
+            val inputStream = pickedFile.openInputStream(context)
+
+            if (inputStream == null) {
+                viewModelScope.launch {
+                    _restorePerformed.emit(RestoreResult.Failed("Unable to open file input: ${pickedFile.fullName}"))
+                }
+                return
+            }
+
+            val buffer = ByteArray(inputStream.available())
+            inputStream.read(buffer)
+            Files.write(buffer, tmpZipFile)
+
+            val pfd = ParcelFileDescriptor.open(tmpZipFile, ParcelFileDescriptor.MODE_READ_ONLY)
+            thanos.backupAgent
+                .performRestore(pfd, null, null, object : IBackupCallback.Stub() {
+                    override fun onBackupFinished(domain: String?, path: String?) {
+                        // Not for us.
+                    }
+
+                    override fun onRestoreFinished(domain: String?, path: String?) {
+                        XLog.d("onRestoreFinished: $path")
+                        viewModelScope.launch {
+                            _restorePerformed.emit(RestoreResult.Success)
+                        }
+                    }
+
+                    override fun onFail(message: String?) {
+                        XLog.d("onFail: $message")
+                        viewModelScope.launch {
+                            _restorePerformed.emit(RestoreResult.Failed(message ?: "Unknown error"))
+                        }
+                    }
+
+                    override fun onProgress(progressMessage: String?) {
+                    }
+                })
+        } catch (e: Exception) {
+            viewModelScope.launch {
+                _restorePerformed.emit(RestoreResult.Failed(e.message ?: e.toString()))
+            }
+        } finally {
+            FileUtils.deleteDirQuiet(tmpDir)
+        }
+    }
+
+    fun restoreDefault() {
+        context.withThanos {
+            backupAgent.restoreDefault()
+            viewModelScope.launch {
+                _restorePerformed.emit(RestoreResult.ResetComplete)
+            }
+            loadState()
+        }
     }
 }
 

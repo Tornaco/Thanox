@@ -26,6 +26,7 @@ import github.tornaco.android.thanos.support.withThanos
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import now.fortuitous.thanos.pref.AppPreference
 import java.io.File
 import java.io.IOException
 import java.io.OutputStream
@@ -48,6 +49,11 @@ data class SettingsState(
     val isAutoConfigTemplateNotificationEnabled: Boolean = false,
     val autoConfigTemplateSelection: ConfigTemplate? = null,
     val allConfigTemplateSelection: List<ConfigTemplate> = emptyList(),
+
+    val showCurrentComponent: Boolean = false,
+    val showTrafficStats: Boolean = false,
+    val newOPS: Boolean = false,
+    val newHome: Boolean = false,
 )
 
 sealed interface BackupResult {
@@ -97,7 +103,12 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
                 uiShowAppVersion = CommonPreferences.getInstance()
                     .isAppListShowVersionEnabled(context),
                 uiShowAppPkgName = CommonPreferences.getInstance()
-                    .isAppListShowPkgNameEnabled(context)
+                    .isAppListShowPkgNameEnabled(context),
+
+                showCurrentComponent = thanos.activityStackSupervisor.isShowCurrentComponentViewEnabled,
+                showTrafficStats = thanos.activityManager.isNetStatTrackerEnabled,
+                newOPS = AppPreference.isFeatureNoticeAccepted(context, "NEW_OPS"),
+                newHome = AppPreference.isFeatureNoticeAccepted(context, "NEW_HOME"),
             )
         }
     }

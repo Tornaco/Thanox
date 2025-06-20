@@ -361,23 +361,9 @@ object PrebuiltFeatures {
         )
     )
 
-    private val guide = FeatureItemGroup(
-        titleRes = github.tornaco.android.thanos.res.R.string.nav_title_guide,
-        items = listOf(
-            FeatureItem(
-                id = PrebuiltFeatureIds.ID_GUIDE,
-                packedIconRes = R.drawable.ic_nav_guide,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_book_2_fill,
-                titleRes = github.tornaco.android.thanos.res.R.string.common_menu_title_wiki,
-                themeColor = R.color.nav_icon_guide
-            )
-        )
-    )
-
-
     fun all(filter: (FeatureItem) -> Boolean = { true }): List<FeatureItemGroup> {
         return listOf(
-            boost, secure, ext, notification, guide
+            boost, secure, ext, notification
         ).map {
             it.copy(items = it.items.filter(filter))
         }

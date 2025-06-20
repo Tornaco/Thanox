@@ -2,7 +2,10 @@
 
 package now.fortuitous.thanos.settings.v2
 
+import android.content.Intent
+import android.os.Build
 import android.widget.Toast
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -26,21 +29,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.elvishew.xlog.XLog
+import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.CommonPreferences
 import github.tornaco.android.thanos.common.settings.Preference
 import github.tornaco.android.thanos.common.settings.PreferenceUi
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.profile.ConfigTemplate
 import github.tornaco.android.thanos.core.profile.ProfileManager
+import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
@@ -52,10 +60,14 @@ import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDi
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.support.withThanos
+import github.tornaco.android.thanos.util.BrowserUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.apps.AppDetailsActivity
+import now.fortuitous.thanos.main.ChooserActivity
 import now.fortuitous.thanos.main.LocalSimpleStorageHelper
+import now.fortuitous.thanos.pref.AppPreference
+import now.fortuitous.thanos.settings.LicenseHelper
 import java.util.UUID
 
 @Composable
@@ -176,6 +188,18 @@ fun SettingsScreen() {
                                 vm = vm,
                             )
                         )
+                        addAll(
+                            devSettings(
+                                state = state,
+                                vm = vm,
+                            )
+                        )
+                        addAll(
+                            aboutSettings(
+                                state = state,
+                                vm = vm,
+                            )
+                        )
                     })
                     StandardSpacer()
                     Spacer(Modifier.size(paddingValues.calculateBottomPadding()))
@@ -263,6 +287,165 @@ private fun uiSettings(
                     CommonPreferences.getInstance().setAppListShowPkgNameEnabled(context, enable)
                     vm.loadState()
                 }
+            ),
+        )
+    } ?: emptyList()
+}
+
+
+@Composable
+private fun devSettings(
+    state: SettingsState,
+    vm: SettingsViewModel,
+): List<Preference> {
+    val context = LocalContext.current
+    return context.withThanos {
+        listOf(
+            Preference.Category(stringResource(R.string.pre_category_dev_tools)),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_code_box_line,
+                title = stringResource(R.string.pref_title_show_current_activity),
+                value = state.showCurrentComponent,
+                onCheckChanged = { enable ->
+                    activityStackSupervisor.isShowCurrentComponentViewEnabled = enable
+                    vm.loadState()
+                }
+            ),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_earth_fill,
+                title = stringResource(R.string.title_net_stats),
+                value = state.showTrafficStats,
+                onCheckChanged = { enable ->
+                    activityManager.isNetStatTrackerEnabled = enable
+                    vm.loadState()
+                }
+            ),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_task_fill,
+                title = stringResource(R.string.new_ops_feature),
+                summary = stringResource(R.string.new_ops_feature_summary),
+                value = state.newOPS,
+                onCheckChanged = { enable ->
+                    AppPreference.setFeatureNoticeAccepted(context, "NEW_OPS", enable)
+                    if (enable) {
+                        appOpsManager.isOpsEnabled = false
+                    }
+                    vm.loadState()
+                }
+            ),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_home_fill,
+                title = "Test New home screen",
+                value = state.newHome,
+                onCheckChanged = { enable ->
+                    AppPreference.setFeatureNoticeAccepted(context, "NEW_HOME", enable)
+                    vm.loadState()
+                }
+            ),
+        )
+    } ?: emptyList()
+}
+
+
+@Composable
+private fun aboutSettings(
+    state: SettingsState,
+    vm: SettingsViewModel,
+): List<Preference> {
+    val activity = LocalActivity.current
+    val context = LocalContext.current
+    var clickTimes by remember { mutableIntStateOf(0) }
+    return context.withThanos {
+        listOf(
+            Preference.Category(stringResource(R.string.pre_category_about)),
+            Preference.TextPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_information_fill,
+                title = stringResource(R.string.pre_category_app_feature_info),
+                summary = listOf(
+                    BuildProp.THANOS_VERSION_NAME,
+                    BuildProp.THANOS_VERSION_CODE,
+                    BuildProp.THANOS_BUILD_FINGERPRINT,
+                    BuildProp.THANOS_BUILD_DATE,
+                    "Built on: ${BuildProp.THANOS_BUILD_HOST}"
+                ).joinToString(),
+                onClick = {
+                    clickTimes += 1
+                    if (clickTimes >= 12) {
+                        clickTimes = 0
+                        ChooserActivity.Starter.start(context)
+                    }
+                },
+            ),
+
+            Preference.ExpandablePreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_group_fill,
+                title = stringResource(R.string.pref_title_rss_e),
+                preferences = listOf(
+                    Preference.TextPreference(
+                        icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_qq_fill,
+                        title = "QQ",
+                        onClick = {
+                            ClipboardUtils.copyToClipboard(
+                                context,
+                                "thanox QQ",
+                                BuildProp.THANOX_QQ_PRIMARY
+                            )
+                            Toast.makeText(
+                                context,
+                                R.string.common_toast_copied_to_clipboard,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        },
+                    ),
+                    Preference.TextPreference(
+                        icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_telegram_fill,
+                        title = "Telegram",
+                        onClick = {
+                            BrowserUtils.launch(context, BuildProp.THANOX_TG_CHANNEL)
+                        },
+                    ),
+
+                    Preference.TextPreference(
+                        icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_mail_fill,
+                        title = "Email",
+                        onClick = {
+                            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                                data = "mailto:".toUri()
+                                putExtra(
+                                    Intent.EXTRA_EMAIL,
+                                    arrayOf(BuildProp.THANOX_CONTACT_EMAIL)
+                                )
+                                putExtra(Intent.EXTRA_SUBJECT, "Thanox")
+                                putExtra(
+                                    Intent.EXTRA_TEXT,
+                                    "${BuildProp.THANOS_VERSION_NAME} ${Build.VERSION.SDK_INT} ${Build.DEVICE} ${Build.MODEL}"
+                                )
+                            }
+                            context.startActivity(intent)
+                        },
+                    ),
+
+                    Preference.TextPreference(
+                        icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_github_fill,
+                        title = "Github",
+                        summary = "Tornaco/Thanox",
+                        onClick = {
+
+                        },
+                    ),
+                ),
+            ),
+
+            Preference.TextPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_open_source_fill,
+                title = stringResource(R.string.pref_title_open_source_license),
+                onClick = {
+                    LicenseHelper.showLicenseDialog(activity)
+                },
             ),
         )
     } ?: emptyList()

@@ -31,7 +31,7 @@ import de.psdev.licensesdialog.model.Notices;
 
 public class LicenseHelper {
 
-    static void showLicenseDialog(Activity activity) {
+    public static void showLicenseDialog(Activity activity) {
         final Notices notices = new Notices();
 
         notices.addNotice(

@@ -23,6 +23,7 @@
 
 package now.fortuitous.thanos.main
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -44,6 +45,9 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.DismissibleDrawerSheet
+import androidx.compose.material3.DismissibleNavigationDrawer
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -55,6 +59,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -62,6 +67,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
@@ -89,7 +95,10 @@ import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
 import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
+import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import kotlinx.coroutines.launch
+import now.fortuitous.thanos.settings.v2.SettingsScreen
 
 @Composable
 fun AllNewNavScreen() {
@@ -117,128 +126,143 @@ fun AllNewNavScreen() {
         viewModel.loadHeaderStatus()
         viewModel.autoRefresh()
     }
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            LargeTopAppBar(
-                scrollBehavior = scrollBehavior,
-                colors = TopAppBarDefaults.topAppBarColors(),
-                title = {
-                    Row(verticalAlignment = CenterVertically) {
-                        Text(
-                            stringResource(id = github.tornaco.android.thanos.R.string.app_name_thanox),
-                            fontWeight = FontWeight.W600
-                        )
-                        TinySpacer()
-                        AppBarBadges(state = state, onInactiveClick = {
-                            isShowActiveDialog = true
-                        }, onNeedRestartClick = {
-                            NeedToRestartActivity.Starter.start(activity)
-                        }, onTryingAppClick = {
-                            launchSubscribeActivity(activity) {}
-                        }, onFrameworkErrorClick = {
-                            isShowFrameworkErrorDialog = true
-                        })
-                    }
-                },
-                actions = {
-                    Row(modifier = Modifier, verticalAlignment = CenterVertically) {
-                        IconButton(onClick = {
-                            isShowRebootConfirmationDialog = true
-                        }) {
-                            Icon(
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_restart_fill),
-                                contentDescription = "Reboot"
-                            )
-                        }
-                        IconButton(onClick = {
-                            now.fortuitous.thanos.settings.SettingsDashboardActivity.start(activity)
-                        }) {
-                            Icon(
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_4_fill),
-                                contentDescription = "Settings"
-                            )
-                        }
-                    }
-                })
-        }
-    ) { contentPadding ->
-        val pullRefreshState =
-            rememberPullRefreshState(state.isLoading, {
-                viewModel.refresh()
-            })
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(contentPadding)
-                .pullRefresh(pullRefreshState),
-        ) {
-            NavContent(
-                state = state,
-                onFeatureItemClick = {
-                    viewModel.featureItemClick(activity, it.id)
-                },
-                onHeaderClick = {
-                    viewModel.headerClick(activity)
-                },
-                createShortcut = {
-                    PrebuiltFeatureShortcutActivity.ShortcutHelper.addShortcut(
-                        activity,
-                        it
-                    )
-                })
 
-            if (isShowRebootConfirmationDialog) {
-                RestartDeviceConfirmationDialog(onRebootConfirmed = {
-                    isShowRebootConfirmationDialog = false
-                    viewModel.rebootDevice()
-                }, onDismissRequest = {
-                    isShowRebootConfirmationDialog = false
-                })
-            }
-            if (isShowActiveDialog) {
-                ActiveDialog(onDismissRequest = {
-                    isShowActiveDialog = false
-                })
-            }
-            if (isShowFrameworkErrorDialog) {
-                FrameworkErrorDialog(onDismissRequest = {
-                    isShowFrameworkErrorDialog = false
-                })
-            }
-            if (state.showPrivacyStatement) {
-                PrivacyStatementDialog(onDismissRequest = {
-                    viewModel.privacyStatementAccepted()
-                })
-            }
-            if (state.showFirstRunTips) {
-                FirstRunDialog(
-                    onAccept = {
-                        viewModel.firstRunTipNoticed()
-                    }, onDeny = {
-                        activity.finish()
-                    })
-            }
-            if (state.patchSources.size > 1) {
-                MultiplePatchDialog(patchSources = state.patchSources, onDismissRequest = {
-                    activity.finish()
-                })
-            }
 
-            if (state.isAndroidVersionTooLow) {
-                AndroidVersionNotSupportedDialog {
-                    viewModel.androidVersionTooLowAccepted()
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+    DismissibleNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            DismissibleDrawerSheet(
+                drawerTonalElevation = 0.5.dp
+            ) {
+                StandardSpacer()
+                SettingsScreen()
+                BackHandler(enabled = drawerState.isOpen) {
+                    scope.launch { drawerState.close() }
                 }
             }
+        },
+        content = {
+            val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+            Scaffold(
+                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+                topBar = {
+                    LargeTopAppBar(
+                        scrollBehavior = scrollBehavior,
+                        colors = TopAppBarDefaults.topAppBarColors(),
+                        title = {
+                            Row(verticalAlignment = CenterVertically) {
+                                Text(
+                                    stringResource(id = github.tornaco.android.thanos.R.string.app_name_thanox),
+                                    fontWeight = FontWeight.W600
+                                )
+                                TinySpacer()
+                                AppBarBadges(state = state, onInactiveClick = {
+                                    isShowActiveDialog = true
+                                }, onNeedRestartClick = {
+                                    NeedToRestartActivity.Starter.start(activity)
+                                }, onTryingAppClick = {
+                                    launchSubscribeActivity(activity) {}
+                                }, onFrameworkErrorClick = {
+                                    isShowFrameworkErrorDialog = true
+                                })
+                            }
+                        },
+                        navigationIcon = {
+                            SettingsAppBarActions(drawerState, false)
+                        },
+                        actions = {
+                            Row(modifier = Modifier, verticalAlignment = CenterVertically) {
+                                IconButton(onClick = {
+                                    isShowRebootConfirmationDialog = true
+                                }) {
+                                    Icon(
+                                        painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_restart_fill),
+                                        contentDescription = "Reboot"
+                                    )
+                                }
+                            }
+                        })
+                }
+            ) { contentPadding ->
+                val pullRefreshState =
+                    rememberPullRefreshState(state.isLoading, {
+                        viewModel.refresh()
+                    })
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(contentPadding)
+                        .pullRefresh(pullRefreshState),
+                ) {
+                    NavContent(
+                        state = state,
+                        onFeatureItemClick = {
+                            viewModel.featureItemClick(activity, it.id)
+                        },
+                        onHeaderClick = {
+                            viewModel.headerClick(activity)
+                        },
+                        createShortcut = {
+                            PrebuiltFeatureShortcutActivity.ShortcutHelper.addShortcut(
+                                activity,
+                                it
+                            )
+                        })
 
-            PullRefreshIndicator(
-                state.isLoading,
-                pullRefreshState,
-                Modifier.align(Alignment.TopCenter)
-            )
+                    if (isShowRebootConfirmationDialog) {
+                        RestartDeviceConfirmationDialog(onRebootConfirmed = {
+                            isShowRebootConfirmationDialog = false
+                            viewModel.rebootDevice()
+                        }, onDismissRequest = {
+                            isShowRebootConfirmationDialog = false
+                        })
+                    }
+                    if (isShowActiveDialog) {
+                        ActiveDialog(onDismissRequest = {
+                            isShowActiveDialog = false
+                        })
+                    }
+                    if (isShowFrameworkErrorDialog) {
+                        FrameworkErrorDialog(onDismissRequest = {
+                            isShowFrameworkErrorDialog = false
+                        })
+                    }
+                    if (state.showPrivacyStatement) {
+                        PrivacyStatementDialog(onDismissRequest = {
+                            viewModel.privacyStatementAccepted()
+                        })
+                    }
+                    if (state.showFirstRunTips) {
+                        FirstRunDialog(
+                            onAccept = {
+                                viewModel.firstRunTipNoticed()
+                            }, onDeny = {
+                                activity.finish()
+                            })
+                    }
+                    if (state.patchSources.size > 1) {
+                        MultiplePatchDialog(patchSources = state.patchSources, onDismissRequest = {
+                            activity.finish()
+                        })
+                    }
+
+                    if (state.isAndroidVersionTooLow) {
+                        AndroidVersionNotSupportedDialog {
+                            viewModel.androidVersionTooLowAccepted()
+                        }
+                    }
+
+                    PullRefreshIndicator(
+                        state.isLoading,
+                        pullRefreshState,
+                        Modifier.align(Alignment.TopCenter)
+                    )
+                }
+            }
         }
-    }
+    )
 }
 
 @Composable

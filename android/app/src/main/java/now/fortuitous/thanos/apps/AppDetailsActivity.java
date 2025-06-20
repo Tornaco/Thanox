@@ -72,7 +72,6 @@ import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
 import now.fortuitous.app.BaseTrustedActivity;
-import now.fortuitous.thanos.settings.StrategySettingsActivity;
 import util.CollectionUtils;
 
 @RuntimePermissions
@@ -212,7 +211,6 @@ public class AppDetailsActivity extends BaseTrustedActivity {
 
             if (allConfigTemplates.isEmpty()) {
                 Toast.makeText(thisActivity(), github.tornaco.android.thanos.res.R.string.pref_action_create_new_config_template, Toast.LENGTH_LONG).show();
-                StrategySettingsActivity.start(thisActivity());
                 return null;
             }
 

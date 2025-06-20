@@ -41,6 +41,9 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -66,37 +69,6 @@
             android:name="now.fortuitous.thanos.process.v2.RunningAppStateDetailsActivity"
             android:exported="false"
             android:label="@string/activity_title_process_manage" />
-        <activity
-            android:name="now.fortuitous.thanos.settings.SettingsDashboardActivity"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="now.fortuitous.thanos.settings.UiSettingsActivity"
-            android:exported="false"
-            android:label="@string/pre_title_ui" />
-        <activity
-            android:name="now.fortuitous.thanos.settings.StrategySettingsActivity"
-            android:exported="false"
-            android:label="@string/pre_title_strategy" />
-        <activity
-            android:name="now.fortuitous.thanos.settings.GeneralSettingsActivity"
-            android:exported="false"
-            android:label="@string/pre_title_power" />
-        <activity
-            android:name="now.fortuitous.thanos.settings.DataSettingsActivity"
-            android:exported="false"
-            android:label="@string/pre_title_data" />
-        <activity
-            android:name="now.fortuitous.thanos.settings.DevSettingsActivity"
-            android:exported="false"
-            android:label="@string/pre_title_developer" />
-        <activity
-            android:name="now.fortuitous.thanos.settings.AboutSettingsActivity"
-            android:exported="false"
-            android:label="@string/pre_title_about" />
         <activity
             android:name="now.fortuitous.thanos.apps.AppsManageActivity"
             android:exported="false" />
@@ -191,13 +163,7 @@
             android:taskAffinity="ui.shortcut.feat"
             android:theme="@style/UiTheme.ActivityDialog" />
         <activity
-            android:name="now.fortuitous.thanos.settings.ThemeAttrPreviewActivity"
-            android:exported="false" />
-        <activity
             android:name="now.fortuitous.thanos.power.wakelock.WakeLockBlockerActivity"
-            android:exported="false" />
-        <activity
-            android:name="now.fortuitous.thanos.settings.access.SettingsAccessRecordViewerActivity"
             android:exported="false" />
         <activity
             android:name="now.fortuitous.thanos.settings.FeatureToggleActivity"

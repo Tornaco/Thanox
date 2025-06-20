@@ -191,14 +191,6 @@ fun NavScreen() {
                                 contentDescription = "Reboot"
                             )
                         }
-                        IconButton(onClick = {
-                            now.fortuitous.thanos.settings.SettingsDashboardActivity.start(activity)
-                        }) {
-                            Icon(
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_4_fill),
-                                contentDescription = "Settings"
-                            )
-                        }
                     }
                 }
             ) { contentPadding ->
@@ -281,7 +273,7 @@ fun NavScreen() {
 }
 
 @Composable
-private fun SettingsAppBarActions(localDrawerState: DrawerState, hasUnReadMsg: Boolean) {
+fun SettingsAppBarActions(localDrawerState: DrawerState, hasUnReadMsg: Boolean) {
     val scope = rememberCoroutineScope()
     IconButton(onClick = {
         scope.launch { localDrawerState.open() }

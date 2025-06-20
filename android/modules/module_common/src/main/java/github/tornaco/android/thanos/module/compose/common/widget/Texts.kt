@@ -4,6 +4,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -11,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -101,7 +104,14 @@ fun CategoryTitle(title: String) {
 fun LinkText(
     text: String,
     color: Color = MaterialTheme.colorScheme.primary,
-    icon: @Composable () -> Unit,
+    icon: @Composable () -> Unit = {
+        Icon(
+            modifier = Modifier.size(12.dp),
+            tint = color,
+            painter = painterResource(github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_external_link_fill),
+            contentDescription = null
+        )
+    },
     onClick: () -> Unit
 ) {
     Row(

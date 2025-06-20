@@ -8,15 +8,19 @@ import android.widget.Toast
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -33,6 +37,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -51,6 +56,7 @@ import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
+import github.tornaco.android.thanos.module.compose.common.widget.LinkText
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
@@ -67,6 +73,8 @@ import now.fortuitous.thanos.apps.AppDetailsActivity
 import now.fortuitous.thanos.main.ChooserActivity
 import now.fortuitous.thanos.main.LocalSimpleStorageHelper
 import now.fortuitous.thanos.pref.AppPreference
+import now.fortuitous.thanos.recovery.RecoveryUtilsActivity
+import now.fortuitous.thanos.settings.FeatureToggleActivity
 import now.fortuitous.thanos.settings.LicenseHelper
 import java.util.UUID
 
@@ -139,16 +147,34 @@ fun SettingsScreen() {
                     }
                 }
             }
-
+            val context = LocalContext.current
             Scaffold(
                 snackbarHost = { SnackbarHost(snackbarHostState) },
                 topBar = {
                     TopAppBar(
                         modifier = Modifier,
                         title = {
-                            Text(stringResource(R.string.nav_title_settings))
+                            Row(
+                                modifier = Modifier
+                                    .padding(end = 16.dp)
+                                    .fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(stringResource(R.string.nav_title_settings))
+                                LinkText(stringResource(R.string.onboarding_guide_tips_title)) {
+                                    BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME)
+                                }
+                            }
                         }
                     )
+                },
+                floatingActionButton = {
+                    ExtendedFloatingActionButton(onClick = {
+                        RecoveryUtilsActivity.start(context)
+                    }) {
+                        Text(stringResource(R.string.feature_title_recovery_tools))
+                    }
                 }
             ) { paddingValues ->
                 Column(
@@ -161,8 +187,6 @@ fun SettingsScreen() {
                         .animateContentSize()
 
                 ) {
-                    Spacer(Modifier.size(paddingValues.calculateTopPadding()))
-
                     PreferenceUi(mutableListOf<Preference>().apply {
                         addAll(
                             generalSettings(
@@ -252,6 +276,14 @@ private fun generalSettings(
                 onCheckChanged = { enable ->
                     pkgManager.isProtectedWhitelistEnabled = enable
                     vm.loadState()
+                }
+            ),
+            Preference.TextPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_toggle_fill,
+                title = stringResource(R.string.pref_title_feature_toggle),
+                hasLongSummary = false,
+                onClick = {
+                    FeatureToggleActivity.start(context)
                 }
             ),
         )

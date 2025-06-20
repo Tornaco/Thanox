@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -47,6 +48,8 @@ import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDi
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.support.withThanos
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import now.fortuitous.thanos.apps.AppDetailsActivity
 import java.util.UUID
 
@@ -65,6 +68,33 @@ fun SettingsScreen() {
 
             val snackbarHostState = remember { SnackbarHostState() }
             val scope = rememberCoroutineScope()
+
+            val backupSuccessMsg = stringResource(R.string.pre_message_backup_success)
+            val backupErrorTitle = stringResource(R.string.pre_message_backup_error)
+
+            LaunchedEffect(vm) {
+                vm.backupPerformed.collectLatest {
+                    when (it) {
+                        is BackupResult.Success -> {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "$backupSuccessMsg ${it.path}",
+                                    duration = SnackbarDuration.Indefinite
+                                )
+                            }
+                        }
+
+                        is BackupResult.Failed -> {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "$backupErrorTitle ${it.tmpFile}",
+                                    duration = SnackbarDuration.Indefinite
+                                )
+                            }
+                        }
+                    }
+                }
+            }
 
             val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
             Scaffold(
@@ -101,6 +131,12 @@ fun SettingsScreen() {
                         )
                         addAll(
                             strategySettings(
+                                state = state,
+                                vm = vm,
+                            )
+                        )
+                        addAll(
+                            dataSettings(
                                 state = state,
                                 vm = vm,
                             )
@@ -297,4 +333,47 @@ private fun strategySettings(
             ),
         )
     } ?: emptyList()
+}
+
+
+@Composable
+private fun dataSettings(
+    state: SettingsState,
+    vm: SettingsViewModel,
+): List<Preference> {
+    val backUpFileNameDialogState = rememberTextInputState(
+        title = stringResource(R.string.pre_title_backup),
+        showSymbolButton = false,
+        onSelected = {
+            vm.backup(it)
+        })
+    TextInputDialog(state = backUpFileNameDialogState)
+
+    return listOf(
+        Preference.Category(stringResource(R.string.pre_category_data)),
+        Preference.TextPreference(
+            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_upload_cloud_2_fill,
+            title = stringResource(R.string.pre_title_backup),
+            summary = stringResource(R.string.pre_summary_backup),
+            onClick = {
+                backUpFileNameDialogState.show(autoGenBackupFileName())
+            }
+        ),
+        Preference.ExpandablePreference(
+            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_upload_cloud_2_fill,
+            title = stringResource(R.string.pre_title_backup),
+            summary = stringResource(R.string.pre_summary_backup),
+            onClick = {
+
+            },
+            preferences = listOf(
+                Preference.TextPreference(
+                    title = stringResource(R.string.pre_title_restore_default),
+                    summary = stringResource(R.string.pre_summary_restore_default),
+                    onClick = {
+                    }
+                ),
+            ),
+        ),
+    )
 }

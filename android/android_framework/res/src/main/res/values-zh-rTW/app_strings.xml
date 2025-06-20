@@ -1224,6 +1224,8 @@
     <string name="pre_message_restore_success">恢復成功，請盡快重新啟動設備以生效</string>
     <string name="pre_message_backup_success">備份成功</string>
 
+    <string name="pre_message_backup_error">备份失败，可能是缺少文件读写权限。备份文件已临时存入</string>
+
     <string name="pre_cheat_field_category_original">原數據</string>
     <string name="pre_cheat_field_category_cheated">隱匿數據</string>
     <string name="pre_cheat_field_category_others">其他</string>

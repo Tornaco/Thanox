@@ -115,7 +115,9 @@ fun TextInputDialog(state: TextInputState) {
                         state.currentValue = it
                         state.isValid = validate.first
                         state.errorMsg = validate.second
-                    })
+                    },
+                    shape = ThanoxCardRoundedCornerShape
+                )
 
                 MediumSpacer()
                 AnimatedVisibility(visible = !state.isValid && state.errorMsg.isNotEmpty()) {

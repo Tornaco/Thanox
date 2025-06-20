@@ -1180,6 +1180,8 @@
     <string name="pre_message_restore_success">Geri yükleme başarılı, değişikliklerin etkili olması için lütfen yeniden başlatın</string>
     <string name="pre_message_backup_success">Yedekleme başarılı</string>
 
+    <string name="pre_message_backup_error">Unable back up to Downloads dir, pls check Storage permission. Backup file has been saved to</string>
+
     <string name="pre_cheat_field_category_original">Orijinal Alan</string>
     <string name="pre_cheat_field_category_cheated">Gizli Alan</string>
     <string name="pre_cheat_field_category_others">Diğer</string>

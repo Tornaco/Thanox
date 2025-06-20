@@ -1173,6 +1173,8 @@ Compatibility notice: If the default permission management function is not compa
     <string name="pre_message_restore_success">Restore success, please reboot for changes to take effect</string>
     <string name="pre_message_backup_success">Backup success</string>
 
+    <string name="pre_message_backup_error">Unable back up to Downloads dir, pls check Storage permission. Backup file has been saved to</string>
+
     <string name="pre_cheat_field_category_original">Original field</string>
     <string name="pre_cheat_field_category_cheated">Incognito field</string>
     <string name="pre_cheat_field_category_others">Others</string>

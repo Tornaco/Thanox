@@ -13,6 +13,7 @@ import com.elvishew.xlog.XLog
 import com.google.common.io.Files
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import github.tornaco.android.thanos.common.CommonPreferences
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.backup.IBackupCallback
 import github.tornaco.android.thanos.core.backup.IFileDescriptorConsumer
@@ -39,6 +40,9 @@ data class SettingsState(
     val isAppStabilityUpKeepEnabled: Boolean = false,
     val isPowerSaveModeEnabled: Boolean = false,
     val isProtectedWhitelistEnabled: Boolean = false,
+
+    val uiShowAppVersion: Boolean = false,
+    val uiShowAppPkgName: Boolean = false,
 
     val isAutoApplyForNewInstalledAppsEnabled: Boolean = false,
     val isAutoConfigTemplateNotificationEnabled: Boolean = false,
@@ -89,7 +93,11 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
                 autoConfigTemplateSelection = thanos.profileManager.autoConfigTemplateSelectionId?.let {
                     thanos.profileManager.getConfigTemplateById(it)
                 },
-                allConfigTemplateSelection = thanos.profileManager.allConfigTemplates
+                allConfigTemplateSelection = thanos.profileManager.allConfigTemplates,
+                uiShowAppVersion = CommonPreferences.getInstance()
+                    .isAppListShowVersionEnabled(context),
+                uiShowAppPkgName = CommonPreferences.getInstance()
+                    .isAppListShowPkgNameEnabled(context)
             )
         }
     }

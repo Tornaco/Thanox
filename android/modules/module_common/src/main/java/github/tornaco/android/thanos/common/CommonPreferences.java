@@ -5,11 +5,9 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 
-import java.util.Observable;
-
 import util.Singleton;
 
-public class CommonPreferences extends Observable {
+public class CommonPreferences {
 
     private static final String PREF_KEY_FEATURE_DESC_READ_PREFIX = "PREF_FEATURE_DESC_READ_";
     private static final String PREF_KEY_APP_LIST_SHOW_PKG_NAME = "PREF_KEY_APP_LIST_SHOW_PKG_NAME";

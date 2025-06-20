@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.elvishew.xlog.XLog
+import github.tornaco.android.thanos.common.CommonPreferences
 import github.tornaco.android.thanos.common.settings.Preference
 import github.tornaco.android.thanos.common.settings.PreferenceUi
 import github.tornaco.android.thanos.core.pm.AppInfo
@@ -169,6 +170,12 @@ fun SettingsScreen() {
                                 vm = vm,
                             )
                         )
+                        addAll(
+                            uiSettings(
+                                state = state,
+                                vm = vm,
+                            )
+                        )
                     })
                     StandardSpacer()
                     Spacer(Modifier.size(paddingValues.calculateBottomPadding()))
@@ -220,6 +227,40 @@ private fun generalSettings(
                 value = state.isProtectedWhitelistEnabled,
                 onCheckChanged = { enable ->
                     pkgManager.isProtectedWhitelistEnabled = enable
+                    vm.loadState()
+                }
+            ),
+        )
+    } ?: emptyList()
+}
+
+
+@Composable
+private fun uiSettings(
+    state: SettingsState,
+    vm: SettingsViewModel,
+): List<Preference> {
+    val context = LocalContext.current
+    return context.withThanos {
+        listOf(
+            Preference.Category(stringResource(R.string.pre_category_ui)),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_number_9,
+                title = stringResource(R.string.pre_title_app_list_item_show_version),
+                value = state.uiShowAppVersion,
+                onCheckChanged = { enable ->
+                    CommonPreferences.getInstance().setAppListShowVersionEnabled(context, enable)
+                    vm.loadState()
+                }
+            ),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_more_fill,
+                title = stringResource(R.string.pre_title_app_list_item_show_pkg),
+                value = state.uiShowAppPkgName,
+                onCheckChanged = { enable ->
+                    CommonPreferences.getInstance().setAppListShowPkgNameEnabled(context, enable)
                     vm.loadState()
                 }
             ),

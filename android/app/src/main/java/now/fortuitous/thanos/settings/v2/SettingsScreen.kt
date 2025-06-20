@@ -24,6 +24,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -51,6 +52,7 @@ import github.tornaco.android.thanos.support.withThanos
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.apps.AppDetailsActivity
+import now.fortuitous.thanos.main.LocalSimpleStorageHelper
 import java.util.UUID
 
 @Composable
@@ -71,7 +73,7 @@ fun SettingsScreen() {
 
             val backupSuccessMsg = stringResource(R.string.pre_message_backup_success)
             val backupErrorTitle = stringResource(R.string.pre_message_backup_error)
-
+            val actionLabel = stringResource(android.R.string.ok)
             LaunchedEffect(vm) {
                 vm.backupPerformed.collectLatest {
                     when (it) {
@@ -79,7 +81,8 @@ fun SettingsScreen() {
                             scope.launch {
                                 snackbarHostState.showSnackbar(
                                     message = "$backupSuccessMsg ${it.path}",
-                                    duration = SnackbarDuration.Indefinite
+                                    duration = SnackbarDuration.Indefinite,
+                                    actionLabel = actionLabel
                                 )
                             }
                         }
@@ -88,7 +91,8 @@ fun SettingsScreen() {
                             scope.launch {
                                 snackbarHostState.showSnackbar(
                                     message = "$backupErrorTitle ${it.tmpFile}",
-                                    duration = SnackbarDuration.Indefinite
+                                    duration = SnackbarDuration.Indefinite,
+                                    actionLabel = actionLabel
                                 )
                             }
                         }
@@ -345,9 +349,15 @@ private fun dataSettings(
         title = stringResource(R.string.pre_title_backup),
         showSymbolButton = false,
         onSelected = {
-            vm.backup(it)
         })
     TextInputDialog(state = backUpFileNameDialogState)
+
+    val storageHelper = LocalSimpleStorageHelper.current
+    SideEffect {
+        storageHelper.onFileCreated = { code, file ->
+            vm.backup(file)
+        }
+    }
 
     return listOf(
         Preference.Category(stringResource(R.string.pre_category_data)),
@@ -356,7 +366,10 @@ private fun dataSettings(
             title = stringResource(R.string.pre_title_backup),
             summary = stringResource(R.string.pre_summary_backup),
             onClick = {
-                backUpFileNameDialogState.show(autoGenBackupFileName())
+                storageHelper.createFile(
+                    "application/zip",
+                    autoGenBackupFileName() + ".zip"
+                )
             }
         ),
         Preference.ExpandablePreference(

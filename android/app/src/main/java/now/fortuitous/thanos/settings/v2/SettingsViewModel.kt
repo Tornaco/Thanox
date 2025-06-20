@@ -2,10 +2,12 @@ package now.fortuitous.thanos.settings.v2
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Environment
 import android.os.ParcelFileDescriptor
 import android.os.RemoteException
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.viewModelScope
+import com.anggrayudi.storage.file.fullName
+import com.anggrayudi.storage.file.openOutputStream
 import com.elvishew.xlog.XLog
 import com.google.common.io.Files
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,6 +24,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
+import java.io.OutputStream
 import javax.inject.Inject
 
 data class SettingsState(
@@ -87,13 +90,20 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
         }
     }
 
-    fun backup(name: String) {
+    fun backup(pickedFile: DocumentFile) {
+        val pickedFileOS = pickedFile.openOutputStream(context)
+        if (pickedFileOS == null) {
+            viewModelScope.launch {
+                _backupPerformed.emit(
+                    BackupResult.Failed(
+                        "Unable to open output stream.",
+                        File(pickedFile.fullName)
+                    )
+                )
+            }
+            return
+        }
         val backupTmpDir = File(context.externalCacheDir, "backup")
-        val externalBackupFile =
-            File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                "$name.zip"
-            )
         thanos.backupAgent
             .performBackup(
                 object : IFileDescriptorInitializer.Stub() {
@@ -129,10 +139,14 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
                         val subFile = File(backupTmpDir, path)
                         // Move it to dest.
                         try {
-                            subFile.copyTo(externalBackupFile)
+                            copyFileToOutputStream(subFile, pickedFileOS)
                             runCatching { backupTmpDir.deleteRecursively() }
                             viewModelScope.launch {
-                                _backupPerformed.emit(BackupResult.Success(externalBackupFile.path))
+                                _backupPerformed.emit(
+                                    BackupResult.Success(
+                                        pickedFile.fullName
+                                    )
+                                )
                             }
                         } catch (e: Throwable) {
                             XLog.e(e, "copy err")
@@ -148,6 +162,7 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
                     }
 
                     override fun onRestoreFinished(domain: String?, path: String?) {
+
                     }
 
                     override fun onFail(message: String) {
@@ -161,13 +176,20 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
                         }
                     }
 
-                    override fun onProgress(progressMessage: String) {
+                    override fun onProgress(progressMessage: String?) {
                     }
                 })
     }
-
 }
 
 
 fun autoGenBackupFileName() =
     "Thanox-Backup-${DateUtils.formatForFileName(System.currentTimeMillis())}"
+
+fun copyFileToOutputStream(file: File, outputStream: OutputStream) {
+    file.inputStream().use { input ->
+        outputStream.use { output ->
+            input.copyTo(output)
+        }
+    }
+}

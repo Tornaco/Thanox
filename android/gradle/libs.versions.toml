@@ -31,6 +31,7 @@ preference = "1.2.1"
 recyclerview = "1.4.0"
 relinker = "1.4.5"
 rxjava = "2.2.21"
+storage = "2.1.0"
 timber = "5.0.1"
 xcrash-android-lib = "3.1.0"
 tinypinyin = "3.0.0"
@@ -129,6 +130,7 @@ lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 relinker = { module = "com.getkeepsafe.relinker:relinker", version.ref = "relinker" }
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
+storage = { module = "com.anggrayudi:storage", version.ref = "storage" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 xcrash-android-lib = { module = "com.iqiyi.xcrash:xcrash-android-lib", version.ref = "xcrash-android-lib" }
 tinypinyin = { module = "com.github.promeg:tinypinyin", version.ref = "tinypinyin" }

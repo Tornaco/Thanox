@@ -217,6 +217,8 @@ dependencies {
 
     implementation(libs.xcrash.android.lib)
 
+    implementation(libs.storage)
+
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_filepicker"))
     implementation(project(":modules:module_donate"))

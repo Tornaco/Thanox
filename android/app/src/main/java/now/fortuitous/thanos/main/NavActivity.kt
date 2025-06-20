@@ -21,6 +21,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.preference.PreferenceManager
+import com.anggrayudi.storage.SimpleStorageHelper
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.core.app.ThanosManager
@@ -42,6 +44,7 @@ import tornaco.apps.thanox.subscribe.ThanosApp
 
 @AndroidEntryPoint
 class NavActivity : ComposeThemeActivity() {
+    private val storageHelper = SimpleStorageHelper(this)
 
     object Starter {
         @JvmStatic
@@ -64,18 +67,19 @@ class NavActivity : ComposeThemeActivity() {
             return
         }
 
-        // Check if x is available
-        if (ThanosManager.from(this).isServiceInstalled) {
-            AppPreference.setAppType(this, "ask")
-            Thanox()
-            return
-        }
-
-        @Suppress("KotlinConstantConditions")
-        if (BuildProp.THANOS_BUILD_FLAVOR == "row") {
-            RowNav()
-        } else {
-            PRCNav()
+        CompositionLocalProvider(LocalSimpleStorageHelper provides storageHelper) {
+            // Check if x is available
+            if (ThanosManager.from(this).isServiceInstalled) {
+                AppPreference.setAppType(this, "ask")
+                Thanox()
+            } else {
+                @Suppress("KotlinConstantConditions")
+                if (BuildProp.THANOS_BUILD_FLAVOR == "row") {
+                    RowNav()
+                } else {
+                    PRCNav()
+                }
+            }
         }
     }
 

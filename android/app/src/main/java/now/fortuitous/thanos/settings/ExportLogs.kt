@@ -9,33 +9,28 @@ import github.tornaco.android.thanos.core.util.ZipUtils
 import github.tornaco.android.thanos.logFolderPath
 import java.io.File
 
-fun exportLogs(context: Context, manager: ThanosManager): File? {
-    return runCatching {
-        val tempDir = File(context.cacheDir, "Thanox-Log-${System.currentTimeMillis()}")
+fun exportLogs(context: Context, manager: ThanosManager): File {
+    val tempDir = File(context.cacheDir, "Thanox-Log-${System.currentTimeMillis()}")
 
-        val zipRootDir = requireNotNull(context.externalCacheDir ?: context.cacheDir) {
-            "context.cache is null"
-        }
-        val name = autoGenLogFileName()
+    val zipRootDir = requireNotNull(context.externalCacheDir ?: context.cacheDir) {
+        "context.cache is null"
+    }
+    val name = autoGenLogFileName()
 
-        // App log.
-        File(context.logFolderPath).copyRecursively(tempDir)
+    // App log.
+    File(context.logFolderPath).copyRecursively(tempDir)
 
-        // Service log.
-        val serviceLogFile = File(tempDir, "service.zip").apply { createNewFile() }
-        val pfd =
-            ParcelFileDescriptor.open(serviceLogFile, ParcelFileDescriptor.MODE_READ_WRITE)
-        manager.writeLogsTo(pfd)
+    // Service log.
+    val serviceLogFile = File(tempDir, "service.zip").apply { createNewFile() }
+    val pfd =
+        ParcelFileDescriptor.open(serviceLogFile, ParcelFileDescriptor.MODE_READ_WRITE)
+    manager.writeLogsTo(pfd)
 
-        ZipUtils.zip(tempDir.absolutePath, zipRootDir.absolutePath, name)
+    ZipUtils.zip(tempDir.absolutePath, zipRootDir.absolutePath, name)
 
-        tempDir.deleteRecursively()
-        File(zipRootDir, name).also {
-            XLog.d("Done exportLogs: $it")
-        }
-    }.getOrElse {
-        XLog.e(it, "Error exportLogs")
-        null
+    tempDir.deleteRecursively()
+    return File(zipRootDir, name).also {
+        XLog.d("Done exportLogs: $it")
     }
 }
 

@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -54,6 +53,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.profile.ConfigTemplate
 import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.core.util.ClipboardUtils
+import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
 import github.tornaco.android.thanos.module.compose.common.widget.LinkText
@@ -72,6 +72,8 @@ import kotlinx.coroutines.launch
 import now.fortuitous.thanos.apps.AppDetailsActivity
 import now.fortuitous.thanos.main.ChooserActivity
 import now.fortuitous.thanos.main.LocalSimpleStorageHelper
+import now.fortuitous.thanos.main.REQUEST_CODE_CREATE_BACKUP
+import now.fortuitous.thanos.main.REQUEST_CODE_CREATE_LOG
 import now.fortuitous.thanos.pref.AppPreference
 import now.fortuitous.thanos.recovery.RecoveryUtilsActivity
 import now.fortuitous.thanos.settings.FeatureToggleActivity
@@ -91,6 +93,7 @@ fun SettingsScreen() {
                 vm.loadState()
             }
 
+            val context = LocalContext.current
             val snackbarHostState = remember { SnackbarHostState() }
             val scope = rememberCoroutineScope()
 
@@ -99,6 +102,37 @@ fun SettingsScreen() {
             val actionLabel = stringResource(android.R.string.ok)
 
             val restoreSuccessMsg = stringResource(R.string.pre_message_restore_success)
+            val logSuccess = stringResource(R.string.feedback_export_log_success)
+            val logFail = stringResource(R.string.feedback_export_log_fail)
+
+            val storageHelper = LocalSimpleStorageHelper.current
+
+            SideEffect {
+                storageHelper.onFileCreated = { code, file ->
+                    if (code == REQUEST_CODE_CREATE_BACKUP) {
+                        vm.backup(file)
+                    } else if (code == REQUEST_CODE_CREATE_LOG) {
+                        vm.log(file)
+                    }
+                }
+
+                storageHelper.onFileSelected = { code, files ->
+                    XLog.d("storageHelper onFileSelected- $files")
+                    val file = files.firstOrNull()
+                    file?.let {
+                        vm.restore(file)
+                    } ?: Toast.makeText(context, "Canceled.", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            val exportLog = {
+                storageHelper.createFile(
+                    mimeType = "application/zip",
+                    fileName = "Thanox-Log-${DateUtils.formatForFileName(System.currentTimeMillis())}.zip",
+                    requestCode = REQUEST_CODE_CREATE_LOG
+                )
+            }
 
             LaunchedEffect(vm) {
                 vm.backupPerformed.collectLatest {
@@ -147,7 +181,28 @@ fun SettingsScreen() {
                     }
                 }
             }
-            val context = LocalContext.current
+
+            LaunchedEffect(vm) {
+                vm.logExportPerformed.collectLatest {
+                    when (it) {
+                        is ExportLogResult.Success -> {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = logSuccess,
+                                )
+                            }
+                        }
+
+                        is ExportLogResult.Failed -> {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "ERROR: ${it.error}",
+                                )
+                            }
+                        }
+                    }
+                }
+            }
             Scaffold(
                 snackbarHost = { SnackbarHost(snackbarHostState) },
                 topBar = {
@@ -169,13 +224,6 @@ fun SettingsScreen() {
                         }
                     )
                 },
-                floatingActionButton = {
-                    ExtendedFloatingActionButton(onClick = {
-                        RecoveryUtilsActivity.start(context)
-                    }) {
-                        Text(stringResource(R.string.feature_title_recovery_tools))
-                    }
-                }
             ) { paddingValues ->
                 Column(
                     modifier = Modifier
@@ -187,11 +235,13 @@ fun SettingsScreen() {
                         .animateContentSize()
 
                 ) {
+                    Spacer(Modifier.size(paddingValues.calculateTopPadding()))
                     PreferenceUi(mutableListOf<Preference>().apply {
                         addAll(
                             generalSettings(
                                 state = state,
                                 vm = vm,
+                                exportLog = exportLog
                             )
                         )
                         addAll(
@@ -216,6 +266,7 @@ fun SettingsScreen() {
                             devSettings(
                                 state = state,
                                 vm = vm,
+                                exportLog = exportLog,
                             )
                         )
                         addAll(
@@ -239,12 +290,31 @@ fun SettingsScreen() {
 private fun generalSettings(
     state: SettingsState,
     vm: SettingsViewModel,
+    exportLog: () -> Unit,
 ): List<Preference> {
     val context = LocalContext.current
+    val feedbackDialog = rememberConfirmDialogState()
+    ConfirmDialog(
+        title = stringResource(R.string.nav_title_feedback),
+        messageHint = { it },
+        data = stringResource(R.string.dialog_message_feedback),
+        state = feedbackDialog,
+        onConfirm = {
+            exportLog()
+        },
+        confirmButton = stringResource(R.string.feedback_export_log),
+    )
     return context.withThanos {
         listOf(
             Preference.Category(stringResource(R.string.pre_category_general)),
-
+            Preference.TextPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_toggle_fill,
+                title = stringResource(R.string.pref_title_feature_toggle),
+                hasLongSummary = false,
+                onClick = {
+                    FeatureToggleActivity.start(context)
+                }
+            ),
             Preference.SwitchPreference(
                 icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_battery_saver_fill,
                 title = stringResource(R.string.pref_title_enable_power_save),
@@ -278,12 +348,22 @@ private fun generalSettings(
                     vm.loadState()
                 }
             ),
+
             Preference.TextPreference(
-                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_toggle_fill,
-                title = stringResource(R.string.pref_title_feature_toggle),
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_device_recover_fill,
+                title = stringResource(R.string.feature_title_recovery_tools),
                 hasLongSummary = false,
                 onClick = {
-                    FeatureToggleActivity.start(context)
+                    RecoveryUtilsActivity.start(context)
+                }
+            ),
+
+            Preference.TextPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_feedback_fill,
+                title = stringResource(R.string.nav_title_feedback),
+                hasLongSummary = false,
+                onClick = {
+                    feedbackDialog.show()
                 }
             ),
         )
@@ -329,6 +409,7 @@ private fun uiSettings(
 private fun devSettings(
     state: SettingsState,
     vm: SettingsViewModel,
+    exportLog: () -> Unit,
 ): List<Preference> {
     val context = LocalContext.current
     return context.withThanos {
@@ -377,6 +458,11 @@ private fun devSettings(
                     AppPreference.setFeatureNoticeAccepted(context, "NEW_HOME", enable)
                     vm.loadState()
                 }
+            ),
+            Preference.TextPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_save_fill,
+                title = stringResource(R.string.feedback_export_log),
+                onClick = exportLog
             ),
         )
     } ?: emptyList()
@@ -632,22 +718,7 @@ private fun dataSettings(
         })
     TextInputDialog(state = backUpFileNameDialogState)
 
-    val context = LocalContext.current
     val storageHelper = LocalSimpleStorageHelper.current
-    SideEffect {
-        storageHelper.onFileCreated = { code, file ->
-            vm.backup(file)
-        }
-
-        storageHelper.onFileSelected = { code, files ->
-            XLog.d("storageHelper onFileSelected- $files")
-            val file = files.firstOrNull()
-            file?.let {
-                vm.restore(file)
-            } ?: Toast.makeText(context, "Canceled.", Toast.LENGTH_SHORT).show()
-        }
-
-    }
 
     val resetConfigDialog = rememberConfirmDialogState()
     ConfirmDialog(
@@ -667,8 +738,9 @@ private fun dataSettings(
             summary = stringResource(R.string.pre_summary_backup),
             onClick = {
                 storageHelper.createFile(
-                    "application/zip",
-                    autoGenBackupFileName() + ".zip"
+                    mimeType = "application/zip",
+                    fileName = autoGenBackupFileName() + ".zip",
+                    requestCode = REQUEST_CODE_CREATE_BACKUP
                 )
             }
         ),

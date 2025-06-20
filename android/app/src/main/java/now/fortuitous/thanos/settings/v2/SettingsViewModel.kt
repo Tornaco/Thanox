@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.pref.AppPreference
+import now.fortuitous.thanos.settings.exportLogs
 import java.io.File
 import java.io.IOException
 import java.io.OutputStream
@@ -202,6 +203,38 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
                     override fun onProgress(progressMessage: String?) {
                     }
                 })
+    }
+
+    fun log(pickedFile: DocumentFile) {
+        val pickedFileOS = pickedFile.openOutputStream(context)
+        if (pickedFileOS == null) {
+            viewModelScope.launch {
+                _logExportPerformed.emit(
+                    ExportLogResult.Failed(
+                        "Unable to open output stream.",
+                    )
+                )
+            }
+            return
+        }
+
+        runCatching {
+            val logZipFile = exportLogs(context, thanos)
+            copyFileToOutputStream(logZipFile, pickedFileOS)
+            viewModelScope.launch {
+                _logExportPerformed.emit(
+                    ExportLogResult.Success(pickedFile.fullName)
+                )
+            }
+        }.onFailure {
+            viewModelScope.launch {
+                _logExportPerformed.emit(
+                    ExportLogResult.Failed(
+                        it.toString()
+                    )
+                )
+            }
+        }
     }
 
     fun restore(pickedFile: DocumentFile) {

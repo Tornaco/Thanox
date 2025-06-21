@@ -54,7 +54,8 @@ import github.tornaco.android.thanos.core.profile.ConfigTemplate
 import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.core.util.DateUtils
-import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
+import github.tornaco.android.thanos.module.compose.common.infra.Pref
+import github.tornaco.android.thanos.module.compose.common.theme.ThemeSettings
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
 import github.tornaco.android.thanos.module.compose.common.widget.LinkText
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
@@ -82,209 +83,205 @@ import java.util.UUID
 
 @Composable
 fun SettingsScreen() {
-    ThanoxTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            val vm = hiltViewModel<SettingsViewModel>()
-            val state by vm.state.collectAsStateWithLifecycle()
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        val vm = hiltViewModel<SettingsViewModel>()
+        val state by vm.state.collectAsStateWithLifecycle()
 
-            LaunchedEffect(vm) {
-                vm.loadState()
-            }
+        LaunchedEffect(vm) {
+            vm.loadState()
+        }
 
-            val context = LocalContext.current
-            val snackbarHostState = remember { SnackbarHostState() }
-            val scope = rememberCoroutineScope()
+        val context = LocalContext.current
+        val snackbarHostState = remember { SnackbarHostState() }
+        val scope = rememberCoroutineScope()
 
-            val backupSuccessMsg = stringResource(R.string.pre_message_backup_success)
-            val backupErrorTitle = stringResource(R.string.pre_message_backup_error)
-            val actionLabel = stringResource(android.R.string.ok)
+        val backupSuccessMsg = stringResource(R.string.pre_message_backup_success)
+        val backupErrorTitle = stringResource(R.string.pre_message_backup_error)
+        val actionLabel = stringResource(android.R.string.ok)
 
-            val restoreSuccessMsg = stringResource(R.string.pre_message_restore_success)
-            val logSuccess = stringResource(R.string.feedback_export_log_success)
-            val logFail = stringResource(R.string.feedback_export_log_fail)
+        val restoreSuccessMsg = stringResource(R.string.pre_message_restore_success)
+        val logSuccess = stringResource(R.string.feedback_export_log_success)
+        val logFail = stringResource(R.string.feedback_export_log_fail)
 
-            val storageHelper = LocalSimpleStorageHelper.current
+        val storageHelper = LocalSimpleStorageHelper.current
 
-            SideEffect {
-                storageHelper.onFileCreated = { code, file ->
-                    if (code == REQUEST_CODE_CREATE_BACKUP) {
-                        vm.backup(file)
-                    } else if (code == REQUEST_CODE_CREATE_LOG) {
-                        vm.log(file)
-                    }
+        SideEffect {
+            storageHelper.onFileCreated = { code, file ->
+                if (code == REQUEST_CODE_CREATE_BACKUP) {
+                    vm.backup(file)
+                } else if (code == REQUEST_CODE_CREATE_LOG) {
+                    vm.log(file)
                 }
-
-                storageHelper.onFileSelected = { code, files ->
-                    XLog.d("storageHelper onFileSelected- $files")
-                    val file = files.firstOrNull()
-                    file?.let {
-                        vm.restore(file)
-                    } ?: Toast.makeText(context, "Canceled.", Toast.LENGTH_SHORT).show()
-                }
-
             }
 
-            val exportLog = {
-                storageHelper.createFile(
-                    mimeType = "application/zip",
-                    fileName = "Thanox-Log-${DateUtils.formatForFileName(System.currentTimeMillis())}.zip",
-                    requestCode = REQUEST_CODE_CREATE_LOG
-                )
+            storageHelper.onFileSelected = { code, files ->
+                XLog.d("storageHelper onFileSelected- $files")
+                val file = files.firstOrNull()
+                file?.let {
+                    vm.restore(file)
+                } ?: Toast.makeText(context, "Canceled.", Toast.LENGTH_SHORT).show()
             }
 
-            LaunchedEffect(vm) {
-                vm.backupPerformed.collectLatest {
-                    when (it) {
-                        is BackupResult.Success -> {
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "$backupSuccessMsg ${it.path}",
-                                    duration = SnackbarDuration.Indefinite,
-                                    actionLabel = actionLabel
-                                )
-                            }
-                        }
+        }
 
-                        is BackupResult.Failed -> {
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "$backupErrorTitle ${it.tmpFile}",
-                                    duration = SnackbarDuration.Indefinite,
-                                    actionLabel = actionLabel
-                                )
-                            }
+        val exportLog = {
+            storageHelper.createFile(
+                mimeType = "application/zip",
+                fileName = "Thanox-Log-${DateUtils.formatForFileName(System.currentTimeMillis())}.zip",
+                requestCode = REQUEST_CODE_CREATE_LOG
+            )
+        }
+
+        LaunchedEffect(vm) {
+            vm.backupPerformed.collectLatest {
+                when (it) {
+                    is BackupResult.Success -> {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "$backupSuccessMsg ${it.path}",
+                                duration = SnackbarDuration.Indefinite,
+                                actionLabel = actionLabel
+                            )
                         }
                     }
-                }
-            }
 
-            LaunchedEffect(vm) {
-                vm.restorePerformed.collectLatest {
-                    when (it) {
-                        is RestoreResult.Success, RestoreResult.ResetComplete -> {
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = restoreSuccessMsg,
-                                )
-                            }
-                        }
-
-                        is RestoreResult.Failed -> {
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "ERROR: ${it.error}",
-                                )
-                            }
+                    is BackupResult.Failed -> {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "$backupErrorTitle ${it.tmpFile}",
+                                duration = SnackbarDuration.Indefinite,
+                                actionLabel = actionLabel
+                            )
                         }
                     }
-                }
-            }
-
-            LaunchedEffect(vm) {
-                vm.logExportPerformed.collectLatest {
-                    when (it) {
-                        is ExportLogResult.Success -> {
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = logSuccess,
-                                )
-                            }
-                        }
-
-                        is ExportLogResult.Failed -> {
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "ERROR: ${it.error}",
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-            Scaffold(
-                snackbarHost = { SnackbarHost(snackbarHostState) },
-                topBar = {
-                    TopAppBar(
-                        modifier = Modifier,
-                        title = {
-                            Row(
-                                modifier = Modifier
-                                    .padding(end = 16.dp)
-                                    .fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(stringResource(R.string.nav_title_settings))
-                                LinkText(stringResource(R.string.onboarding_guide_tips_title)) {
-                                    BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME)
-                                }
-                            }
-                        }
-                    )
-                },
-            ) { paddingValues ->
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background)
-                        .verticalScroll(rememberScrollState())
-                        .consumeWindowInsets(paddingValues)
-                        .padding(bottom = 32.dp)
-                        .animateContentSize()
-
-                ) {
-                    Spacer(Modifier.size(paddingValues.calculateTopPadding()))
-                    PreferenceUi(mutableListOf<Preference>().apply {
-                        addAll(
-                            generalSettings(
-                                state = state,
-                                vm = vm,
-                                exportLog = exportLog
-                            )
-                        )
-                        addAll(
-                            strategySettings(
-                                state = state,
-                                vm = vm,
-                            )
-                        )
-                        addAll(
-                            dataSettings(
-                                state = state,
-                                vm = vm,
-                            )
-                        )
-                        addAll(
-                            uiSettings(
-                                state = state,
-                                vm = vm,
-                            )
-                        )
-                        addAll(
-                            devSettings(
-                                state = state,
-                                vm = vm,
-                                exportLog = exportLog,
-                            )
-                        )
-                        addAll(
-                            aboutSettings(
-                                state = state,
-                                vm = vm,
-                            )
-                        )
-                    })
-                    StandardSpacer()
-                    Spacer(Modifier.size(paddingValues.calculateBottomPadding()))
                 }
             }
         }
+
+        LaunchedEffect(vm) {
+            vm.restorePerformed.collectLatest {
+                when (it) {
+                    is RestoreResult.Success, RestoreResult.ResetComplete -> {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = restoreSuccessMsg,
+                            )
+                        }
+                    }
+
+                    is RestoreResult.Failed -> {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "ERROR: ${it.error}",
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        LaunchedEffect(vm) {
+            vm.logExportPerformed.collectLatest {
+                when (it) {
+                    is ExportLogResult.Success -> {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = logSuccess,
+                            )
+                        }
+                    }
+
+                    is ExportLogResult.Failed -> {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "ERROR: ${it.error}",
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        Scaffold(
+            snackbarHost = { SnackbarHost(snackbarHostState) },
+            topBar = {
+                TopAppBar(
+                    modifier = Modifier,
+                    title = {
+                        Row(
+                            modifier = Modifier
+                                .padding(end = 16.dp)
+                                .fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(stringResource(R.string.nav_title_settings))
+                            LinkText(stringResource(R.string.onboarding_guide_tips_title)) {
+                                BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME)
+                            }
+                        }
+                    }
+                )
+            },
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+                    .verticalScroll(rememberScrollState())
+                    .consumeWindowInsets(paddingValues)
+                    .padding(bottom = 32.dp)
+                    .animateContentSize()
+
+            ) {
+                Spacer(Modifier.size(paddingValues.calculateTopPadding()))
+                PreferenceUi(mutableListOf<Preference>().apply {
+                    addAll(
+                        generalSettings(
+                            state = state,
+                            vm = vm,
+                            exportLog = exportLog
+                        )
+                    )
+                    addAll(
+                        strategySettings(
+                            state = state,
+                            vm = vm,
+                        )
+                    )
+                    addAll(
+                        dataSettings(
+                            state = state,
+                            vm = vm,
+                        )
+                    )
+                    addAll(
+                        uiSettings(
+                            state = state,
+                            vm = vm,
+                        )
+                    )
+                    addAll(
+                        devSettings(
+                            state = state,
+                            vm = vm,
+                            exportLog = exportLog,
+                        )
+                    )
+                    addAll(
+                        aboutSettings(
+                            state = state,
+                            vm = vm,
+                        )
+                    )
+                })
+                StandardSpacer()
+                Spacer(Modifier.size(paddingValues.calculateBottomPadding()))
+            }
+        }
     }
-
 }
-
 
 @Composable
 private fun generalSettings(
@@ -376,7 +373,20 @@ private fun uiSettings(
     state: SettingsState,
     vm: SettingsViewModel,
 ): List<Preference> {
+    val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val pref = Pref(context)
+    val dynamicColor by pref.uiThemeDynamicColor.collectAsStateWithLifecycle(true)
+    val darkConfig by pref.uiThemeDarkModeConfig.collectAsStateWithLifecycle(ThemeSettings.DarkThemeConfig.FOLLOW_SYSTEM)
+    val darkModeDialog = rememberMenuDialogState<Unit>(
+        title = { "Dark mode" }, menuItems = ThemeSettings.DarkThemeConfig.entries.map {
+            MenuDialogItem(id = it.name, title = it.name)
+        }
+    ) { _, id ->
+        val config = ThemeSettings.DarkThemeConfig.valueOf(id)
+        scope.launch { pref.serUiThemeDarkModeConfig(config) }
+    }
+    MenuDialog(darkModeDialog)
     return context.withThanos {
         listOf(
             Preference.Category(stringResource(R.string.pre_category_ui)),
@@ -398,6 +408,23 @@ private fun uiSettings(
                 onCheckChanged = { enable ->
                     CommonPreferences.getInstance().setAppListShowPkgNameEnabled(context, enable)
                     vm.loadState()
+                }
+            ),
+
+            Preference.SwitchPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_palette_fill,
+                title = "Dynamic color schema",
+                value = dynamicColor,
+                onCheckChanged = { enable ->
+                    scope.launch { pref.setUiThemeDynamicColor(enable) }
+                }
+            ),
+            Preference.TextPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_moon_fill,
+                title = "Dark mode",
+                summary = darkConfig.name,
+                onClick = {
+                    darkModeDialog.show()
                 }
             ),
         )

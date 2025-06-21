@@ -17,13 +17,16 @@
 
 package github.tornaco.android.thanos.module.compose.common.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 
 @Composable
 fun ThanoxTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    disableDynamicTheming: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    ThanoxExpressiveTheme {
+    ThanoxExpressiveTheme(darkTheme = darkTheme, disableDynamicTheming = disableDynamicTheming) {
         content()
     }
 }

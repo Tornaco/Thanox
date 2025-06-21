@@ -38,6 +38,7 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.constraint.layout)
     implementation(libs.browser)
+    implementation(libs.datastore.preferences)
 
     implementation(libs.tinypinyin)
 

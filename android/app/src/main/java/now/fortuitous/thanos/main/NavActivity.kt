@@ -54,7 +54,7 @@ class NavActivity : ComposeThemeActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
+        val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
     }
 

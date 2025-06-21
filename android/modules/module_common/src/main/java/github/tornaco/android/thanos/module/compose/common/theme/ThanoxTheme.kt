@@ -23,7 +23,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun ThanoxTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    disableDynamicTheming: Boolean = true,
+    disableDynamicTheming: Boolean = false,
     content: @Composable () -> Unit
 ) {
     ThanoxExpressiveTheme(darkTheme = darkTheme, disableDynamicTheming = disableDynamicTheming) {

@@ -36,6 +36,7 @@ import github.tornaco.android.thanos.main.Analytics
 import github.tornaco.android.thanos.main.Crashlytics
 import github.tornaco.android.thanos.main.installCrashHandler
 import github.tornaco.android.thanos.main.launchSubscribeActivity
+import github.tornaco.android.thanos.module.compose.common.ThemeActivityVM
 import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.support.Stats
 import github.tornaco.android.thanos.support.initThanos
@@ -93,6 +94,8 @@ class ThanosApp : MultipleModulesApp() {
                         now.fortuitous.thanos.apps.AppDetailsActivity.start(this@ThanosApp, it)
                     }
                 }
+
+            ThemeActivityVM.init(this)
         }
     }
 

@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
+import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.util.OsUtils
 
 private val lightScheme = lightColorScheme(
@@ -104,13 +105,15 @@ private val darkScheme = darkColorScheme(
 @Composable
 fun ThanoxExpressiveTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    disableDynamicTheming: Boolean = true,
+    disableDynamicTheming: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
 
     // Dynamic color is available on Android 12+
     val applyDynamicColor: Boolean = !disableDynamicTheming && OsUtils.isSOrAbove()
+
+    XLog.d("applyDynamicColor: $applyDynamicColor")
 
     val colorScheme = when {
         applyDynamicColor -> {

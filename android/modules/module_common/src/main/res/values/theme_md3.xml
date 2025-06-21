@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="ThemeMD3" parent="Theme.Material3Expressive.DayNight">
+    <style name="ThemeMD3Light" parent="Theme.Material3Expressive.Light">
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="switchPreferenceCompatStyle">@style/SwitchPrefTheme</item>
@@ -12,13 +12,34 @@
 
     </style>
 
-    <style name="ThemeMD3.App">
+    <style name="ThemeMD3Light.App">
         <item name="appCardBackground">@color/md_white</item>
         <item name="android:windowBackground">@color/md_grey_100</item>
         <item name="android:statusBarColor">@color/md_grey_100</item>
     </style>
 
-    <style name="ThemeMD3.App.NoActionBar">
+    <style name="ThemeMD3Light.App.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="ThemeMD3Dark" parent="Theme.Material3Expressive.Dark">
+        <item name="switchPreferenceCompatStyle">@style/SwitchPrefTheme</item>
+        <item name="preferenceFragmentCompatStyle">@style/PrefFragmentCompatThemeCommon</item>
+
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="appCardBackground">#72101010</item>
+        <item name="switchBarBackground">@color/md_grey_800</item>
+
+    </style>
+
+    <style name="ThemeMD3Dark.App">
+        <item name="android:windowBackground">@color/md_black</item>
+    </style>
+
+    <style name="ThemeMD3Dark.App.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

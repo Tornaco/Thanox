@@ -4,7 +4,7 @@
     <style name="Theme.AppSplash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#1E1E1E</item>
         <item name="windowSplashScreenAnimationDuration">500</item>
-        <item name="postSplashScreenTheme">@style/ThemeMD3.App.NoActionBar</item>
+        <item name="postSplashScreenTheme">@style/ThemeMD3Dark.App.NoActionBar</item>
 
         <item name="android:windowLightStatusBar">false</item>
 

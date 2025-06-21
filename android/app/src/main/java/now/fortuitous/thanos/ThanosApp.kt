@@ -41,6 +41,7 @@ import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.support.Stats
 import github.tornaco.android.thanos.support.initThanos
 import io.reactivex.plugins.RxJavaPlugins
+import kotlinx.coroutines.runBlocking
 import now.fortuitous.app.Init
 import now.fortuitous.thanos.power.ShortcutHelper
 import org.lsposed.hiddenapibypass.HiddenApiBypass
@@ -95,7 +96,10 @@ class ThanosApp : MultipleModulesApp() {
                     }
                 }
 
-            ThemeActivityVM.init(this)
+            runBlocking {
+                ThemeActivityVM.init(this@ThanosApp)
+                XLog.d("ThemeActivityVM: ${ThemeActivityVM.state.value}")
+            }
         }
     }
 

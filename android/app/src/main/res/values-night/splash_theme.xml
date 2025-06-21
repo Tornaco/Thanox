@@ -5,7 +5,7 @@
         <item name="windowSplashScreenBackground">@color/md_blue_a700</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_background</item>
         <item name="windowSplashScreenAnimationDuration">300</item>
-        <item name="postSplashScreenTheme">@style/ThemeMD3.App.NoActionBar</item>
+        <item name="postSplashScreenTheme">@style/ThemeMD3Dark.App.NoActionBar</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">@color/md_blue_a700</item>
         <item name="android:navigationBarColor">@color/md_blue_a700</item>

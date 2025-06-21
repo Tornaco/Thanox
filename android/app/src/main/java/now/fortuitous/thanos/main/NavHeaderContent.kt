@@ -57,7 +57,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
 import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
-import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextContainer
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.ExpandableState
@@ -278,7 +277,6 @@ private fun MemProgressBar(
 
 @Composable
 private fun AppCpuUsage(usage: AppCpuUsage) {
-    val onSurfaceColor = getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
     Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
         AppIcon(modifier = Modifier.size(16.dp), usage.appInfo)
         Text(
@@ -286,7 +284,7 @@ private fun AppCpuUsage(usage: AppCpuUsage) {
             textAlign = TextAlign.Center,
             text = "${usage.percent}%",
             style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
-            color = Color(onSurfaceColor)
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }
@@ -365,14 +363,12 @@ private fun MemStats(
         )
         TinySpacer()
         Column(modifier = Modifier) {
-            val onSurfaceColor =
-                getColorAttribute(com.google.android.material.R.attr.colorOnSurface)
             Text(
                 modifier = Modifier,
                 textAlign = TextAlign.Center,
                 text = "${if (memUsage.memType == MemType.MEMORY) "Mem" else "Swap"} ${memUsage.memUsagePercent}%",
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 9.5.sp),
-                color = Color(onSurfaceColor)
+                color = MaterialTheme.colorScheme.onSurface
             )
             SmallSpacer()
 
@@ -389,7 +385,7 @@ private fun MemStats(
                 textAlign = TextAlign.Center,
                 text = "($extraDesc)",
                 style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
-                color = Color(onSurfaceColor)
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

@@ -69,7 +69,7 @@ include(":android_framework:patch-magisk:patch-framework")
 //include(":shortcut_stub")
 
 val internalProjects = listOf(
-    ":modules:module_donate",
+    ":modules:module_sub",
     ":modules:module_feature_launcher",
     ":third_party:sec_net",
     ":android_framework:tests",

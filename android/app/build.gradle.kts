@@ -221,7 +221,7 @@ dependencies {
 
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_filepicker"))
-    implementation(project(":modules:module_donate"))
+    implementation(project(":modules:module_sub"))
     implementation(project(":modules:module_feature_launcher"))
 
     implementation(project(":android_framework:base"))

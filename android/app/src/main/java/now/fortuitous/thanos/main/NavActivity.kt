@@ -40,7 +40,7 @@ import now.fortuitous.thanos.onboarding.OnBoardingActivity
 import now.fortuitous.thanos.pref.AppPreference
 import tornaco.apps.thanox.MainGraph
 import tornaco.apps.thanox.base.ui.theme.ThanosTheme
-import tornaco.apps.thanox.subscribe.ThanosApp
+import github.tornaco.android.thanos.support.subscribe.ThanosApp
 
 @AndroidEntryPoint
 class NavActivity : ComposeThemeActivity() {

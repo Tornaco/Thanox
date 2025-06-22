@@ -9,23 +9,26 @@ import github.tornaco.android.thanos.core.annotation.Keep;
  * Remote res.
  */
 @Keep
-public final class RR implements Parcelable {
+public class RR implements Parcelable {
     public static final int SUCCESS = 0;
 
     private final int result;
     private final String msg;
     private final String k;
+    private final String i;
 
     protected RR(Parcel in) {
         result = in.readInt();
         msg = in.readString();
         k = in.readString();
+        i = in.readString();
     }
 
-    public RR(int result, String msg, String k) {
+    public RR(int result, String msg, String k, String i) {
         this.result = result;
         this.msg = msg;
         this.k = k;
+        this.i = i;
     }
 
     public int getResult() {
@@ -38,6 +41,10 @@ public final class RR implements Parcelable {
 
     public String getK() {
         return k;
+    }
+
+    public String getI() {
+        return i;
     }
 
     public static final Creator<RR> CREATOR = new Creator<RR>() {
@@ -58,10 +65,11 @@ public final class RR implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeInt(result);
         parcel.writeString(msg);
         parcel.writeString(k);
+        parcel.writeString(i);
     }
 
     public boolean isSuccess() {

@@ -18,15 +18,13 @@
 package now.fortuitous.thanos.onboarding
 
 import android.content.Context
-import android.os.Bundle
-import androidx.activity.compose.setContent
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.main.NavActivity
-import tornaco.apps.thanox.base.BaseActivity
-import tornaco.apps.thanox.base.ui.theme.ThanosTheme
 
-class OnBoardingActivity : BaseActivity() {
+class OnBoardingActivity : ComposeThemeActivity() {
 
     object Starter {
         fun start(context: Context?) {
@@ -34,17 +32,13 @@ class OnBoardingActivity : BaseActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ThanosTheme {
-                val context = LocalContext.current
-                OnBoardingScreen {
-                    now.fortuitous.thanos.pref.AppPreference.setHasOnBoarding(context, true)
-                    NavActivity.Starter.start(context)
-                    finish()
-                }
-            }
+    @Composable
+    override fun Content() {
+        val context = LocalContext.current
+        OnBoardingScreen {
+            now.fortuitous.thanos.pref.AppPreference.setHasOnBoarding(context, true)
+            NavActivity.Starter.start(context)
+            finish()
         }
     }
 }

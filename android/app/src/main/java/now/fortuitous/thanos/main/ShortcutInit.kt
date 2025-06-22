@@ -9,7 +9,7 @@ import androidx.core.net.toUri
 import github.tornaco.android.thanos.R
 import now.fortuitous.thanos.power.SmartFreezeActivity
 import now.fortuitous.thanos.process.v2.ProcessManageActivityV2Delegate
-import tornaco.apps.thanox.ThanosMainActivity
+import tornaco.apps.thanox.ThanosShizukuMainActivity
 
 class ShortcutInit(val context: Context) {
     companion object {
@@ -42,7 +42,7 @@ class ShortcutInit(val context: Context) {
         if (!hasDynamicShortcut(ID_THANOS_SF)) {
             addDynamicShortcut(
                 ID_THANOS_SF,
-                ThanosMainActivity::class.java,
+                ThanosShizukuMainActivity::class.java,
                 R.drawable.shortcut_smart_freeze,
                 context.getString(github.tornaco.android.thanos.res.R.string.feature_title_smart_app_freeze),
                 "SF"
@@ -52,7 +52,7 @@ class ShortcutInit(val context: Context) {
         if (!hasDynamicShortcut(ID_THANOS_PM)) {
             addDynamicShortcut(
                 ID_THANOS_PM,
-                ThanosMainActivity::class.java,
+                ThanosShizukuMainActivity::class.java,
                 R.drawable.ic_shortcut_process_manage,
                 context.getString(github.tornaco.android.thanos.res.R.string.feature_title_process_manage),
                 "PM"

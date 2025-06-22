@@ -31,16 +31,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.preference.PreferenceManager
 import com.anggrayudi.storage.SimpleStorageHelper
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.support.subscribe.ThanosApp
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.onboarding.OnBoardingActivity
 import now.fortuitous.thanos.pref.AppPreference
 import tornaco.apps.thanox.MainGraph
 import tornaco.apps.thanox.base.ui.theme.ThanosTheme
-import github.tornaco.android.thanos.support.subscribe.ThanosApp
 
 @AndroidEntryPoint
 class NavActivity : ComposeThemeActivity() {
@@ -68,56 +67,27 @@ class NavActivity : ComposeThemeActivity() {
         }
 
         CompositionLocalProvider(LocalSimpleStorageHelper provides storageHelper) {
-            // Check if x is available
+            // Check if xopsed mode is running.
             if (ThanosManager.from(this).isServiceInstalled) {
                 AppPreference.setAppType(this, "ask")
-                Thanox()
+                ThanoxXposed()
             } else {
-                @Suppress("KotlinConstantConditions")
-                if (BuildProp.THANOS_BUILD_FLAVOR == "row") {
-                    RowNav()
-                } else {
-                    PRCNav()
+                val sx = AppPreference.getAppType(this)
+                when (sx) {
+                    "thanox" -> {
+                        ThanoxXposed()
+                    }
+
+                    "thanos" -> {
+                        ThanoxShizuku()
+                    }
                 }
             }
         }
     }
 
     @Composable
-    private fun RowNav() {
-        val sx = AppPreference.getAppType(this)
-        when (sx) {
-            "thanox" -> {
-                Thanox()
-            }
-
-            "thanos" -> {
-                Thanos()
-            }
-
-            else -> {
-                ChooserActivity.Starter.start(this)
-                finish()
-            }
-        }
-    }
-
-    @Composable
-    private fun PRCNav() {
-        val sx = AppPreference.getAppType(this)
-        when (sx) {
-            "thanos" -> {
-                Thanos()
-            }
-
-            else -> {
-                Thanox()
-            }
-        }
-    }
-
-    @Composable
-    private fun Thanox() {
+    private fun ThanoxXposed() {
         // Block
         if (blockOnCreate(this)) {
             finish()
@@ -134,7 +104,7 @@ class NavActivity : ComposeThemeActivity() {
 
     @SuppressLint("UseKtx")
     @Composable
-    private fun Thanos() {
+    private fun ThanoxShizuku() {
         LaunchedEffect(Unit) {
             ShortcutInit(this@NavActivity).initOnBootThanos()
         }

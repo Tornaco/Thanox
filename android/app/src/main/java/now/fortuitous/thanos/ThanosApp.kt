@@ -45,7 +45,7 @@ import kotlinx.coroutines.runBlocking
 import now.fortuitous.app.Init
 import now.fortuitous.thanos.power.ShortcutHelper
 import org.lsposed.hiddenapibypass.HiddenApiBypass
-import tornaco.apps.thanox.ThanosLite
+import tornaco.apps.thanox.ThanosShizuku
 
 
 @HiltAndroidApp
@@ -76,10 +76,10 @@ class ThanosApp : MultipleModulesApp() {
 
         initThanos {
             // Init Lite ASAP.
-            ThanosLite.init(this)
-            ThanosLite.analytics = Analytics
-            ThanosLite.crashlytics = Crashlytics
-            ThanosLite.installShortcut = { context, app ->
+            ThanosShizuku.init(this)
+            ThanosShizuku.analytics = Analytics
+            ThanosShizuku.crashlytics = Crashlytics
+            ThanosShizuku.installShortcut = { context, app ->
                 ShortcutHelper.addShortcut(context, app)
             }
 

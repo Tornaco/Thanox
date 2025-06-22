@@ -27,7 +27,7 @@ import androidx.annotation.Nullable;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.Pkg;
-import tornaco.apps.thanox.ThanosLite;
+import tornaco.apps.thanox.ThanosShizuku;
 
 public class ShortcutStubActivity extends Activity {
 
@@ -69,7 +69,7 @@ public class ShortcutStubActivity extends Activity {
         if (ThanosManager.from(getApplicationContext()).isServiceInstalled()) {
             ThanosManager.from(getApplicationContext()).getPkgManager().launchSmartFreezePkg(new Pkg(target, userId));
         } else {
-            ThanosLite.Companion.launchShortcut(new Pkg(target, userId));
+            ThanosShizuku.Companion.launchShortcut(new Pkg(target, userId));
         }
     }
 }

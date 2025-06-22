@@ -9,6 +9,7 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -27,12 +29,14 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -40,9 +44,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.BuildProp
@@ -57,9 +64,12 @@ import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.module.compose.common.infra.Pref
 import github.tornaco.android.thanos.module.compose.common.theme.ThemeSettings
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
+import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.LinkText
+import github.tornaco.android.thanos.module.compose.common.widget.LottieLoadingView
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
 import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
+import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TextInputDialog
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
@@ -70,6 +80,8 @@ import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.BrowserUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import now.fortuitous.app.donate.DonateActivity
+import now.fortuitous.app.donate.DonateSettingsKt
 import now.fortuitous.thanos.apps.AppDetailsActivity
 import now.fortuitous.thanos.main.ChooserActivity
 import now.fortuitous.thanos.main.LocalSimpleStorageHelper
@@ -277,6 +289,12 @@ fun SettingsScreen() {
                     )
                 })
                 StandardSpacer()
+
+                SubscriptionStatus()
+
+                LargeSpacer()
+                FooterText()
+
                 Spacer(Modifier.size(paddingValues.calculateBottomPadding()))
             }
         }
@@ -793,6 +811,45 @@ private fun dataSettings(
                     }
                 ),
             ),
+        ),
+    )
+}
+
+
+@Composable
+private fun SubscriptionStatus() {
+    val context = LocalContext.current
+    var isSubscribed by remember { mutableStateOf(DonateSettingsKt.isActivated(context)) }
+    LifecycleResumeEffect(Unit) {
+        isSubscribed = DonateSettingsKt.isActivated(context)
+        onPauseOrDispose { }
+    }
+    Box(modifier = Modifier) {
+        if (isSubscribed) {
+            TextButton(
+                colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onPrimaryContainer),
+                onClick = {
+                    DonateActivity.start(context)
+                }) {
+                LottieLoadingView(
+                    file = "47603-twinkle-crown.json",
+                    modifier = Modifier.size(30.dp),
+                )
+                SmallSpacer()
+                Text(text = stringResource(R.string.module_donate_donated), fontSize = 12.5.sp)
+            }
+        }
+    }
+}
+
+@Composable
+private fun FooterText() {
+    Text(
+        modifier = Modifier.padding(horizontal = 16.dp),
+        text = "Since 2016",
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = 11.sp,
+            fontStyle = FontStyle.Italic
         ),
     )
 }

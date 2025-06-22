@@ -1474,15 +1474,15 @@
     <string name="wait_shizuku">等Shizuku就緒</string>
     <string name="wait_shizuku_message">請安裝Shizuku，並且授權Thanos</string>
 
-    <string name="module_donate_title">啟動高級版</string>
-    <string name="module_donate_donated">已啟用</string>
+    <string name="module_donate_title">订阅高級版</string>
+    <string name="module_donate_donated">已订阅</string>
     <string name="module_donate_donated_available">免費版不可用</string>
     <string name="module_donate_donated_available_message">啟動高級版後解鎖該功能。 \n\n提示：先試用，覺得可用、滿意再購買高級功能~</string>
 
     <string name="module_donate_get_play">取得Play版本</string>
     <string name="module_donate_copy_email">複製郵件地址</string>
-    <string name="module_donate_active_hidden_feature">啟動高級版</string>
-    <string name="module_donate_active_hidden_feature_activated">已啟用</string>
+    <string name="module_donate_active_hidden_feature">订阅高級版</string>
+    <string name="module_donate_active_hidden_feature_activated">已订阅</string>
     <string name="module_donate_input_activation_code">請輸入啟動碼</string>
     <string name="module_donate_activation_code_verify_success">要驗證成功，請妥善保存你的啟動碼，不要對外擴散，否則可能會被禁用，刷機後可以繼續使用，換機後請務必卸載舊手機上的Thanox</string>
     <string name="module_donate_activation_code_verify_fail">驗證失敗</string>

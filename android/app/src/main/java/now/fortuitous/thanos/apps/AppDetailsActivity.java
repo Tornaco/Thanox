@@ -64,6 +64,7 @@ import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivityAppDetailsBinding;
 import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.support.ContextExtKt;
+import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
@@ -71,11 +72,10 @@ import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
 import github.tornaco.permission.requester.RequiresPermission;
 import github.tornaco.permission.requester.RuntimePermissions;
-import now.fortuitous.app.BaseTrustedActivity;
 import util.CollectionUtils;
 
 @RuntimePermissions
-public class AppDetailsActivity extends BaseTrustedActivity {
+public class AppDetailsActivity extends ThemeActivity {
     private final static int REQUEST_CODE_BACKUP_FILE_PICK = 0x100;
     private final static int REQUEST_CODE_RESTORE_FILE_PICK = 0x200;
     private final static int REQUEST_CODE_BACKUP_FILE_PICK_Q = 0x300;

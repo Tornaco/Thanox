@@ -19,7 +19,7 @@ package github.tornaco.android.thanos.main
 
 import android.app.Activity
 import android.content.Context
-import now.fortuitous.app.donate.DonateActivity
+import github.tornaco.android.thanos.support.subscribe.SubscribeActivity
 
 inline fun blockOnCreate(activity: Activity, noop: () -> Unit = {}): Boolean {
     noop()
@@ -28,5 +28,5 @@ inline fun blockOnCreate(activity: Activity, noop: () -> Unit = {}): Boolean {
 
 inline fun launchSubscribeActivity(activity: Context, noop: () -> Unit = {}) {
     noop()
-    DonateActivity.start(activity)
+    SubscribeActivity.start(activity)
 }

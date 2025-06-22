@@ -43,14 +43,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import now.fortuitous.app.donate.DonateSettingsRegistry
 import now.fortuitous.thanos.dashboard.CpuUsage
 import now.fortuitous.thanos.dashboard.MemType
 import now.fortuitous.thanos.dashboard.MemUsage
 import now.fortuitous.thanos.dashboard.StatusHeaderInfo
 import now.fortuitous.thanos.dashboard.defaultStatusHeaderInfo
 import now.fortuitous.thanos.process.v2.ProcessManageActivityV2
-import java.util.Observable
 import javax.inject.Inject
 
 enum class ActiveStatus {
@@ -79,7 +77,6 @@ data class NavState(
     val statusHeaderInfo: StatusHeaderInfo,
     val activeStatus: ActiveStatus,
     val hasFrameworkError: Boolean,
-    val isPurchased: Boolean,
     val showPrivacyStatement: Boolean,
     val showFirstRunTips: Boolean,
     val patchSources: List<String>,
@@ -101,7 +98,6 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
             statusHeaderInfo = defaultStatusHeaderInfo,
             activeStatus = ActiveStatus.Unknown,
             hasFrameworkError = false,
-            isPurchased = true,
             showPrivacyStatement = false,
             showFirstRunTips = false,
             isAndroidVersionTooLow = false,
@@ -109,12 +105,6 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         )
     )
     val state = _state.asStateFlow()
-
-    private val donateObs = { _: Observable?, _: Any? -> loadPurchaseStatus() }
-
-    init {
-        registerReceivers()
-    }
 
     fun loadFeatures() {
         context.withThanos {
@@ -145,16 +135,6 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
 
         if (!handled) {
             _state.value = _state.value.copy(activeStatus = ActiveStatus.InActive)
-        }
-    }
-
-    fun loadPurchaseStatus() {
-        viewModelScope.launch {
-            withSubscriptionStatus(context) { isSubscribed: Boolean? ->
-                isSubscribed?.let {
-                    _state.value = _state.value.copy(isPurchased = it)
-                }
-            }
         }
     }
 
@@ -322,17 +302,19 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         PrebuiltFeatureLauncher(activity) {}.launch(featureId)
     }
 
+    @SuppressLint("UseKtx")
     fun privacyStatementAccepted() {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
-            .putBoolean(privacyAgreementKey, true).commit()
+            .putBoolean(privacyAgreementKey, true).apply()
         // Dismiss right now.
         _state.value = _state.value.copy(showPrivacyStatement = false)
         loadAppStatus()
     }
 
+    @SuppressLint("UseKtx")
     fun androidVersionTooLowAccepted() {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
-            .putBoolean(androidVersionTooLowKey, true).commit()
+            .putBoolean(androidVersionTooLowKey, true).apply()
         // Dismiss right now.
         _state.value = _state.value.copy(isAndroidVersionTooLow = false)
         loadAppStatus()
@@ -351,15 +333,6 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     private suspend fun isAndroidVersionTooLowAccepted(): Boolean = withContext(Dispatchers.IO) {
         PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean(androidVersionTooLowKey, false)
-    }
-
-    private fun registerReceivers() {
-        DonateSettingsRegistry.addObserver(donateObs)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        DonateSettingsRegistry.deleteObserver(donateObs)
     }
 
     fun rebootDevice() {

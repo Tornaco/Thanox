@@ -160,6 +160,9 @@ dependencies {
     implementation(libs.compose.material.icons.core)
     implementation(libs.compose.material.icons.extended)
 
+    implementation(libs.orbit.compose)
+    implementation(libs.orbit.viewmodel)
+
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp)

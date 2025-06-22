@@ -42,7 +42,6 @@ import github.tornaco.android.thanos.support.Stats
 import github.tornaco.android.thanos.support.initThanos
 import io.reactivex.plugins.RxJavaPlugins
 import kotlinx.coroutines.runBlocking
-import now.fortuitous.app.Init
 import now.fortuitous.thanos.power.ShortcutHelper
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import tornaco.apps.thanox.ThanosShizuku
@@ -83,7 +82,6 @@ class ThanosApp : MultipleModulesApp() {
                 ShortcutHelper.addShortcut(context, app)
             }
 
-            Init.init(this)
             AppFeatureManager.launchSubscribeActivity = { launchSubscribeActivity(it) {} }
             Stats.init(this)
 

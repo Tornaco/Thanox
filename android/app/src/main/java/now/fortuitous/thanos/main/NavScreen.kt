@@ -113,9 +113,11 @@ import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedString
 import github.tornaco.android.thanos.support.FeatureGrid
 import github.tornaco.android.thanos.support.clickableWithRippleBorderless
+import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.settings.v2.SettingsScreen
+import org.orbitmvi.orbit.compose.collectAsState
 import util.AssetUtils
 
 @Composable
@@ -139,7 +141,6 @@ fun NavScreen() {
 
     LaunchedEffect(viewModel) {
         viewModel.loadCoreStatus()
-        viewModel.loadPurchaseStatus()
         viewModel.loadFeatures()
         viewModel.loadAppStatus()
         viewModel.loadHeaderStatus()
@@ -148,6 +149,8 @@ fun NavScreen() {
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val subState by LVLStateHolder.collectAsState()
+
     DismissibleNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -167,15 +170,18 @@ fun NavScreen() {
                     Row(verticalAlignment = CenterVertically) {
                         Text(stringResource(id = R.string.app_name_thanox))
                         TinySpacer()
-                        AppBarBadges(state = state, onInactiveClick = {
-                            isShowActiveDialog = true
-                        }, onNeedRestartClick = {
-                            NeedToRestartActivity.Starter.start(activity)
-                        }, onTryingAppClick = {
-                            launchSubscribeActivity(activity) {}
-                        }, onFrameworkErrorClick = {
-                            isShowFrameworkErrorDialog = true
-                        })
+                        AppBarBadges(
+                            state = state,
+                            subState = subState,
+                            onInactiveClick = {
+                                isShowActiveDialog = true
+                            }, onNeedRestartClick = {
+                                NeedToRestartActivity.Starter.start(activity)
+                            }, onTryingAppClick = {
+                                launchSubscribeActivity(activity) {}
+                            }, onFrameworkErrorClick = {
+                                isShowFrameworkErrorDialog = true
+                            })
                     }
                 },
                 navigationIcon = {
@@ -299,6 +305,7 @@ fun SettingsAppBarActions(localDrawerState: DrawerState, hasUnReadMsg: Boolean) 
 @Composable
 private fun AppBarBadges(
     state: NavState,
+    subState: LVLStateHolder.State,
     onInactiveClick: () -> Unit,
     onNeedRestartClick: () -> Unit,
     onTryingAppClick: () -> Unit,
@@ -319,7 +326,7 @@ private fun AppBarBadges(
             onFrameworkErrorClick()
         }
     }
-    if (!state.isPurchased) {
+    if (!subState.isSubscribed) {
         ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.badge_trying_app)) {
             onTryingAppClick()
         }

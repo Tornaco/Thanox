@@ -36,7 +36,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -49,7 +48,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.BuildProp
@@ -76,12 +74,12 @@ import github.tornaco.android.thanos.module.compose.common.widget.rememberConfir
 import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.res.R
+import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
+import github.tornaco.android.thanos.support.subscribe.SubscribeActivity
 import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.BrowserUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import now.fortuitous.app.donate.DonateActivity
-import now.fortuitous.app.donate.DonateSettingsKt
 import now.fortuitous.thanos.apps.AppDetailsActivity
 import now.fortuitous.thanos.main.ChooserActivity
 import now.fortuitous.thanos.main.LocalSimpleStorageHelper
@@ -91,6 +89,7 @@ import now.fortuitous.thanos.pref.AppPreference
 import now.fortuitous.thanos.recovery.RecoveryUtilsActivity
 import now.fortuitous.thanos.settings.FeatureToggleActivity
 import now.fortuitous.thanos.settings.LicenseHelper
+import org.orbitmvi.orbit.compose.collectAsState
 import java.util.UUID
 
 @Composable
@@ -247,6 +246,8 @@ fun SettingsScreen() {
                     .animateContentSize()
 
             ) {
+                val subscribeState by LVLStateHolder.collectAsState()
+
                 Spacer(Modifier.size(paddingValues.calculateTopPadding()))
                 PreferenceUi(mutableListOf<Preference>().apply {
                     addAll(
@@ -290,7 +291,7 @@ fun SettingsScreen() {
                 })
                 StandardSpacer()
 
-                SubscriptionStatus()
+                SubscriptionStatus(subscribeState)
 
                 LargeSpacer()
                 FooterText()
@@ -817,19 +818,14 @@ private fun dataSettings(
 
 
 @Composable
-private fun SubscriptionStatus() {
-    val context = LocalContext.current
-    var isSubscribed by remember { mutableStateOf(DonateSettingsKt.isActivated(context)) }
-    LifecycleResumeEffect(Unit) {
-        isSubscribed = DonateSettingsKt.isActivated(context)
-        onPauseOrDispose { }
-    }
+private fun SubscriptionStatus(subscribeState: LVLStateHolder.State) {
     Box(modifier = Modifier) {
-        if (isSubscribed) {
+        val context = LocalContext.current
+        if (subscribeState.isSubscribed) {
             TextButton(
                 colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onPrimaryContainer),
                 onClick = {
-                    DonateActivity.start(context)
+                    SubscribeActivity.start(context)
                 }) {
                 LottieLoadingView(
                     file = "47603-twinkle-crown.json",

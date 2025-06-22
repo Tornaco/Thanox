@@ -97,8 +97,10 @@ import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.settings.v2.SettingsScreen
+import org.orbitmvi.orbit.compose.collectAsState
 
 @Composable
 fun AllNewNavScreen() {
@@ -120,7 +122,6 @@ fun AllNewNavScreen() {
 
     LaunchedEffect(viewModel) {
         viewModel.loadCoreStatus()
-        viewModel.loadPurchaseStatus()
         viewModel.loadFeatures()
         viewModel.loadAppStatus()
         viewModel.loadHeaderStatus()
@@ -130,6 +131,8 @@ fun AllNewNavScreen() {
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+
+    val subState by LVLStateHolder.collectAsState()
     DismissibleNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -158,7 +161,7 @@ fun AllNewNavScreen() {
                                     fontWeight = FontWeight.W600
                                 )
                                 TinySpacer()
-                                AppBarBadges(state = state, onInactiveClick = {
+                                AppBarBadges(state = state, subState = subState, onInactiveClick = {
                                     isShowActiveDialog = true
                                 }, onNeedRestartClick = {
                                     NeedToRestartActivity.Starter.start(activity)
@@ -268,6 +271,7 @@ fun AllNewNavScreen() {
 @Composable
 private fun AppBarBadges(
     state: NavState,
+    subState: LVLStateHolder.State,
     onInactiveClick: () -> Unit,
     onNeedRestartClick: () -> Unit,
     onTryingAppClick: () -> Unit,
@@ -288,7 +292,7 @@ private fun AppBarBadges(
             onFrameworkErrorClick()
         }
     }
-    if (!state.isPurchased) {
+    if (!subState.isSubscribed) {
         ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.badge_trying_app)) {
             onTryingAppClick()
         }

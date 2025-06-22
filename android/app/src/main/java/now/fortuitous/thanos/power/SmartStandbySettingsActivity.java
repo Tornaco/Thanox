@@ -27,10 +27,10 @@ import androidx.annotation.Nullable;
 import java.util.Objects;
 
 import github.tornaco.android.thanos.R;
-import now.fortuitous.app.BaseTrustedActivity;
+import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
 
-public class SmartStandbySettingsActivity extends BaseTrustedActivity {
+public class SmartStandbySettingsActivity extends ThemeActivity {
 
     public static void start(Context context) {
         ActivityUtils.startActivity(context, SmartStandbySettingsActivity.class);

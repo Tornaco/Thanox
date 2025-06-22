@@ -1496,16 +1496,16 @@ Compatibility notice: If the default permission management function is not compa
     <string name="module_donate_pay_wechat">Wechat pay</string>
     <string name="module_donate_sku">SKU</string>
     <string name="module_donate_guide">
-        ### Purchase Process
-        After payment, send an email to %s
-        Write %s Premium Version Application in the email
-        Attach a payment screenshot with the payment order number
-        Send the email
-
-        Tips:
-        > We will reply with the premium version activation code as soon as possible, generally within 12 hours;
-        > If you haven’t received it beyond the time limit, please check the spam folder or contact Q: %s;
-        > Email services like QQ, 163, Gmail, etc., can be used for sending. Please do not use mobile MMS or Outlook email.
+        ### Purchase Process\n
+        After payment, send an email to %s \n
+        Write %s Premium Version Application in the email\n
+        Attach a payment screenshot with the payment order number\n
+        Send the email\n
+        \n
+        Tips:\n
+        > We will reply with the premium version activation code as soon as possible, generally within 12 hours;\n
+        > If you haven’t received it beyond the time limit, please check the spam folder or contact Q: %s;\n
+        > Email services like QQ, 163, Gmail, etc., can be used for sending. Please do not use mobile MMS or Outlook email.\n
 </string>
 
 </resources>

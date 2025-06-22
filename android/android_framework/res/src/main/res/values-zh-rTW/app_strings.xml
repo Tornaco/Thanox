@@ -1487,23 +1487,23 @@
     <string name="module_donate_activation_code_verify_success">要驗證成功，請妥善保存你的啟動碼，不要對外擴散，否則可能會被禁用，刷機後可以繼續使用，換機後請務必卸載舊手機上的Thanox</string>
     <string name="module_donate_activation_code_verify_fail">驗證失敗</string>
     <string name="module_donate_activation_code_verify_fail_server_timeout">伺服器開小差了~~~</string>
-    <string name="module_donate_activation_code_start_verify">開始驗證</string>
+    <string name="module_donate_activation_code_start_verify">驗證啟動碼</string>
     <string name="module_donate_activation_code_my_code">我的啟動碼</string>
     <string name="module_donate_activation_code_valid_remain_time">有效期剩余</string>
     <string name="module_donate_pay_alipay">支付寶</string>
     <string name="module_donate_pay_wechat">微信</string>
     <string name="module_donate_sku">产品与价格</string>
     <string name="module_donate_guide">
-        ### 购买流程
-        1. 支付后发邮件至 **%s**
-        2. 邮件写**%s高级版本申请**
-        3. 加上带**支付订单号**的支付截图附件
-        4. 发送邮件
-
-        > Tips:
-        > 我们会尽快回复高级版激活码，一般不会超过12小时；
-        > 如果超时未收到请检查下垃圾箱，或者联系Q: %s；
-        > 发邮件时可以使用QQ、163、gmail等邮箱，不要使用手机彩信、outlook邮箱。
+        ### 购买流程\n
+        1. 支付后发邮件至 **%s**\n
+        2. 邮件写**%s高级版本申请**\n
+        3. 加上带**支付订单号**的支付截图附件\n
+        4. 发送邮件\n
+        \n
+        > Tips:\n
+        > 我们会尽快回复高级版激活码，一般不会超过12小时；\n
+        > 如果超时未收到请检查下垃圾箱，或者联系Q: %s；\n
+        > 发邮件时可以使用QQ、163、gmail等邮箱，不要使用手机彩信、outlook邮箱。\n
     </string>
 
 </resources>

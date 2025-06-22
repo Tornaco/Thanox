@@ -31,8 +31,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.CardContainer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCard
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TipBody
 import github.tornaco.android.thanos.module.compose.common.widget.clickableWithRipple
@@ -77,7 +77,7 @@ class Ops2Activity : ComposeThemeActivity() {
                     .padding(paddings)
             ) {
                 stickyHeader {
-                    CardContainer {
+                    ThanoxCard {
                         Box(
                             Modifier.padding(horizontal = 16.dp),
                             contentAlignment = Alignment.Center

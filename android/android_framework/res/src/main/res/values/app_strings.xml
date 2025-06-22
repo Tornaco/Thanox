@@ -868,7 +868,8 @@
 
     <string name="status_active">Active</string>
     <string name="status_not_active">Not active</string>
-    <string name="message_active_needed">Please enable Thanox in Xposed Manager app and restart your device</string>    <string name="status_need_reboot">Reboot</string>
+    <string name="message_active_needed">Please enable Thanox in Xposed Manager app and restart your device</string>
+    <string name="status_need_reboot">Reboot</string>
     <string name="title_framework_error">Framework error</string>
     <string name="message_framework_error">There is an error at the Thanox framework. Please report the logs under /data/system/thanos_xxx/log to the developer.</string>
 
@@ -1511,7 +1512,21 @@ If you are already a paid user of Thanox or Thanox Pro, you do not need to subsc
     <string name="module_donate_activation_code_start_verify">Begin verify</string>
     <string name="module_donate_activation_code_my_code">My Code</string>
 
-    <string name="module_donate_activation_code_expire_date">Permanently</string>
+    <string name="module_donate_activation_code_valid_remain_time">Remaining</string>
     <string name="module_donate_pay_alipay">Ali pay</string>
     <string name="module_donate_pay_wechat">Wechat pay</string>
+    <string name="module_donate_sku">SKU</string>
+    <string name="module_donate_guide">
+        ### Purchase Process
+        After payment, send an email to %s
+        Write %s Premium Version Application in the email
+        Attach a payment screenshot with the payment order number
+        Send the email
+
+        Tips:
+        > We will reply with the premium version activation code as soon as possible, generally within 12 hours;
+        > If you haven’t received it beyond the time limit, please check the spam folder or contact Q: %s;
+        > Email services like QQ, 163, Gmail, etc., can be used for sending. Please do not use mobile MMS or Outlook email.
+</string>
+
 </resources>

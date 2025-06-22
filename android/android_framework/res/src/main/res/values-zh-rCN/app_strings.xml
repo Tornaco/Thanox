@@ -1492,8 +1492,21 @@
     <string name="module_donate_activation_code_verify_fail_server_timeout">服务器开小差了~~~</string>
     <string name="module_donate_activation_code_start_verify">开始验证</string>
     <string name="module_donate_activation_code_my_code">我的激活码</string>
-    <string name="module_donate_activation_code_expire_date">永久生效</string>
+    <string name="module_donate_activation_code_valid_remain_time">有效期剩余</string>
     <string name="module_donate_pay_alipay">支付宝</string>
     <string name="module_donate_pay_wechat">微信</string>
+    <string name="module_donate_sku">产品与价格</string>
+    <string name="module_donate_guide">
+        ### 购买流程
+        1. 支付后发邮件至 **%s**
+        2. 邮件写**%s高级版本申请**
+        3. 加上带**支付订单号**的支付截图附件
+        4. 发送邮件
+
+        > Tips:
+        > 我们会尽快回复高级版激活码，一般不会超过12小时；
+        > 如果超时未收到请检查下垃圾箱，或者联系Q: %s；
+        > 发邮件时可以使用QQ、163、gmail等邮箱，不要使用手机彩信、outlook邮箱。
+    </string>
 
 </resources>

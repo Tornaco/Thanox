@@ -52,6 +52,7 @@ compose-material = "1.8.2"
 compose-icon-ext = "1.7.8"
 compose-material3 = "1.4.0-alpha15"
 compose-ui = "1.8.2"
+compose-markdown = "0.5.4"
 converter-gson = "2.11.0"
 junit = "4.13.2"
 libchecker-rules-bundle = "40.2"
@@ -165,6 +166,7 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose-ui" }
 compose-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose-ui" }
 compose-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "compose-ui" }
+compose-markdown = { module = "com.github.jeziellago:compose-markdown", version.ref = "compose-markdown" }
 
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }

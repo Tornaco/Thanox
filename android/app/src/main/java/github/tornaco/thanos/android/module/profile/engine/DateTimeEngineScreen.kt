@@ -64,9 +64,9 @@ import github.tornaco.android.thanos.core.alarm.TimeOfADay
 import github.tornaco.android.thanos.core.alarm.WeekDay
 import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.CardContainer
 import github.tornaco.android.thanos.module.compose.common.widget.ExtendableFloatingActionButton
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCard
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import java.util.Calendar
@@ -249,7 +249,7 @@ private fun WorkList(
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(state) {
-            CardContainer {
+            ThanoxCard {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -329,7 +329,7 @@ private fun AlarmList(
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(state) { record ->
-            CardContainer {
+            ThanoxCard {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()

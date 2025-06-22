@@ -299,3 +299,13 @@ fun darkenColor(@ColorInt color: Int, factor: Float): Int {
 fun Int.toComposeColor(): Color {
     return Color(this)
 }
+
+val NoteTextColor = Color(0xFF777777)
+val VipColorGold = Color(0XFFFF8F00)
+val WeChatGreen = Color(0XFF4CAF50)
+val AliBlue = Color(0XFF2962ff)
+val PayPalBlue = Color(0XFF0277BD)
+val VerifiedGreen = Color(0XFF43a047)
+val ExperimentalYellow = Color(0xFFF8B62E)
+val GoogleBlue = Color(0xFF2962ff)
+val ThanoxBlue = Color(0xFF2962ff)

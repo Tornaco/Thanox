@@ -69,6 +69,8 @@ dependencies {
     implementation(libs.accompanist.flowlayout)
     implementation(libs.accompanist.navigation.animation)
 
+    implementation(libs.compose.markdown)
+
     implementation(libs.lottie.compose)
     implementation(libs.lottie)
 

@@ -47,3 +47,8 @@ fun StandardSpacer() {
 fun LargeSpacer() {
     Spacer(modifier = Modifier.size(20.dp))
 }
+
+@Composable
+fun SectionSpacer() {
+    Spacer(modifier = Modifier.size(36.dp))
+}

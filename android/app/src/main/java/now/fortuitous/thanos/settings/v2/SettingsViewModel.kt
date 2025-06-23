@@ -100,7 +100,8 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
                 autoConfigTemplateSelection = thanos.profileManager.autoConfigTemplateSelectionId?.let {
                     thanos.profileManager.getConfigTemplateById(it)
                 },
-                allConfigTemplateSelection = thanos.profileManager.allConfigTemplates,
+                allConfigTemplateSelection = thanos.profileManager.allConfigTemplates
+                    ?: emptyList(),
                 uiShowAppVersion = CommonPreferences.getInstance()
                     .isAppListShowVersionEnabled(context),
                 uiShowAppPkgName = CommonPreferences.getInstance()

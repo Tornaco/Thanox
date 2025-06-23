@@ -398,3 +398,5 @@
 -dontwarn lombok.Generated
 -dontwarn android.app.ActivityManagerNative
 -dontwarn android.content.pm.ShortcutQueryWrapper
+-dontwarn android.os.ICancellationSignal$Stub
+-dontwarn android.os.ICancellationSignal

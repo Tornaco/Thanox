@@ -7,7 +7,6 @@ agp = "8.10.0"
 javapoet = "1.13.0"
 ksp = "2.0.21-1.0.26"
 biometric = "1.4.0-alpha04"
-datastore = "1.1.5"
 adaptive = "1.2.0-alpha06"
 androidx-work = "2.10.1"
 coil-compose = "2.7.0"
@@ -105,7 +104,6 @@ accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiper
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
 
 androidx-adaptive = { module = "androidx.compose.material3.adaptive:adaptive-android", version.ref = "adaptive" }
-androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "androidx-work" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }

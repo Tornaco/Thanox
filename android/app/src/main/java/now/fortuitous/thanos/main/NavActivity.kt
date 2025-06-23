@@ -30,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.preference.PreferenceManager
 import com.anggrayudi.storage.SimpleStorageHelper
+import com.elvishew.xlog.XLog
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.main.blockOnCreate
@@ -53,33 +54,38 @@ class NavActivity : ComposeThemeActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        XLog.w("onCreate.$this")
         val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
     }
 
     @Composable
     override fun Content() {
+        XLog.w("Content")
         // OnBoarding
         if (!AppPreference.hasOnBoarding(this)) {
             OnBoardingActivity.Starter.start(this)
             finish()
             return
         }
-
+        XLog.w("CompositionLocalProvider.")
         CompositionLocalProvider(LocalSimpleStorageHelper provides storageHelper) {
             // Check if xopsed mode is running.
             if (ThanosManager.from(this).isServiceInstalled) {
+                XLog.w("isServiceInstalled.")
                 AppPreference.setAppType(this, "ask")
                 ThanoxXposed()
             } else {
+                XLog.w("isServiceInstalled false.")
                 val sx = AppPreference.getAppType(this)
+                XLog.w("sx: $sx")
                 when (sx) {
-                    "thanox" -> {
-                        ThanoxXposed()
-                    }
-
                     "thanos" -> {
                         ThanoxShizuku()
+                    }
+
+                    else -> {
+                        ThanoxXposed()
                     }
                 }
             }
@@ -88,6 +94,7 @@ class NavActivity : ComposeThemeActivity() {
 
     @Composable
     private fun ThanoxXposed() {
+        XLog.w("ThanoxXposed")
         // Block
         if (blockOnCreate(this)) {
             finish()
@@ -99,12 +106,14 @@ class NavActivity : ComposeThemeActivity() {
         }
 
         val applyNewHome = AppPreference.isFeatureNoticeAccepted(this, "NEW_HOME")
+        XLog.w("applyNewHome: $applyNewHome")
         if (applyNewHome) AllNewNavScreen() else NavScreen()
     }
 
     @SuppressLint("UseKtx")
     @Composable
     private fun ThanoxShizuku() {
+        XLog.w("ThanoxShizuku")
         LaunchedEffect(Unit) {
             ShortcutInit(this@NavActivity).initOnBootThanos()
         }

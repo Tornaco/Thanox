@@ -70,6 +70,8 @@ class ThanosApp : MultipleModulesApp() {
             HiddenApiBypass.addHiddenApiExemptions("")
         }
 
+        XLog.w("onCreate.$this")
+
         initThanos {
             // Init Shizuku.
             ThanosShizuku.init(this)

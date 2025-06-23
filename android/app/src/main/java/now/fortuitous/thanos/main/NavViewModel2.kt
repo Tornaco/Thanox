@@ -298,10 +298,6 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         }
     }
 
-    fun featureItemClick(activity: Activity, featureId: Int) {
-        PrebuiltFeatureLauncher(activity) {}.launch(featureId)
-    }
-
     @SuppressLint("UseKtx")
     fun privacyStatementAccepted() {
         PreferenceManager.getDefaultSharedPreferences(context).edit()

@@ -57,7 +57,10 @@ public class PrebuiltFeatureShortcutActivity extends Activity {
         int featId = getIntent().getIntExtra(KEY_FEATURE_ID, Integer.MIN_VALUE);
         XLog.d("PrebuiltFeatureShortcutActivity, featId: " + featId);
         if (PrebuiltFeatureIds.INSTANCE.isValidId(featId)) {
-            new PrebuiltFeatureLauncher(this, () -> null).launch(featId);
+            try {
+                new PrebuiltFeatureLauncher(this, () -> null).launch(featId);
+            } catch (Throwable ignored) {
+            }
         }
         finish();
     }

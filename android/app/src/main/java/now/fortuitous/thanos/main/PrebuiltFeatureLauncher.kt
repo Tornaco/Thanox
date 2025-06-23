@@ -51,7 +51,7 @@ class PrebuiltFeatureLauncher(
                             context.sendBroadcast(Intent(T.Actions.ACTION_RUNNING_PROCESS_CLEAR))
                             onProcessCleared()
                         } else {
-                            AppFeatureManager.showSubscribeDialog(context)
+                            throw AccessBlocked
                         }
                     }
                 }
@@ -75,7 +75,7 @@ class PrebuiltFeatureLauncher(
                         if (it) {
                             AioAppListActivity.start(context, featureId)
                         } else {
-                            AppFeatureManager.showSubscribeDialog(context)
+                            throw AccessBlocked
                         }
                     }
                 }
@@ -89,10 +89,10 @@ class PrebuiltFeatureLauncher(
                         if (it) {
                             ActivityTrampolineActivity.start(context)
                         } else {
-                            AppFeatureManager.showSubscribeDialog(context)
                             // Disable this feature, since it is free to use before.
                             XLog.w("Disabling ActivityTrampoline.")
                             activityStackSupervisor.isActivityTrampolineEnabled = false
+                            throw AccessBlocked
                         }
                     }
                 }
@@ -130,7 +130,7 @@ class PrebuiltFeatureLauncher(
                         if (it) {
                             now.fortuitous.thanos.infinite.InfiniteZActivity.start(context)
                         } else {
-                            AppFeatureManager.showSubscribeDialog(context)
+                            throw AccessBlocked
                         }
                     }
                 }
@@ -144,7 +144,7 @@ class PrebuiltFeatureLauncher(
                         if (it) {
                             WechatPushDeleteMainActivity.start(context)
                         } else {
-                            AppFeatureManager.showSubscribeDialog(context)
+                            throw AccessBlocked
                         }
                     }
                 }
@@ -154,7 +154,7 @@ class PrebuiltFeatureLauncher(
                         if (it) {
                             WakeLockBlockerActivity.Starter.start(context)
                         } else {
-                            AppFeatureManager.showSubscribeDialog(context)
+                            throw AccessBlocked
                         }
                     }
                 }
@@ -167,3 +167,5 @@ class PrebuiltFeatureLauncher(
         }
     }
 }
+
+data object AccessBlocked : Error()

@@ -110,7 +110,9 @@ import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import github.tornaco.android.thanos.module.compose.common.widget.rememberThanoxBottomSheetState
 import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedString
+import github.tornaco.android.thanos.support.FeatureAccessDialog
 import github.tornaco.android.thanos.support.FeatureGrid
 import github.tornaco.android.thanos.support.clickableWithRippleBorderless
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
@@ -200,6 +202,9 @@ fun NavScreen() {
                     }
                 }
             ) { contentPadding ->
+                val subscribeDialogState = rememberThanoxBottomSheetState()
+                FeatureAccessDialog(subscribeDialogState)
+
                 val pullRefreshState =
                     rememberPullRefreshState(state.isLoading, { viewModel.refresh() })
                 Box(
@@ -212,7 +217,11 @@ fun NavScreen() {
                         contentPadding = PaddingValues(0.dp),
                         state = state,
                         onFeatureItemClick = {
-                            viewModel.featureItemClick(activity, it.id)
+                            runCatching {
+                                PrebuiltFeatureLauncher(activity) {}.launch(it.id)
+                            }.onFailure {
+                                subscribeDialogState.show()
+                            }
                         },
                         onHeaderClick = {
                             viewModel.headerClick(activity)

@@ -1479,8 +1479,8 @@
 
     <string name="module_donate_title">订阅高级版</string>
     <string name="module_donate_donated">已订阅</string>
-    <string name="module_donate_donated_available">免费版不可用</string>
-    <string name="module_donate_donated_available_message">激活高级版后解锁该功能。\n\n提示：先试用，觉得可用、满意再购买高级功能~</string>
+    <string name="module_donate_donated_available">高级版</string>
+    <string name="module_donate_donated_available_message">激活高级版后解锁该功能。</string>
 
     <string name="module_donate_get_play">获取Play版本</string>
     <string name="module_donate_copy_email">复制邮箱地址</string>

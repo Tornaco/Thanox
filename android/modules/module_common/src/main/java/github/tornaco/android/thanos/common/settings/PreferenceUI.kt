@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.CategoryTitle
 import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
+import github.tornaco.android.thanos.module.compose.common.widget.OutlineBadge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCardRoundedCornerShape
@@ -176,7 +177,7 @@ private fun TextPreferenceUi(preference: Preference.TextPreference) {
         }
 
         preference.badge?.let {
-            // OutlineBadge(modifier = Modifier.padding(end = 16.dp), text = it)
+            OutlineBadge(modifier = Modifier.padding(end = 16.dp), text = it)
         }
     }
 }
@@ -238,7 +239,7 @@ private fun SwitchPreferenceUi(preference: Preference.SwitchPreference) {
                     )
                     StandardSpacer()
                     preference.badge?.let {
-                        //    OutlineBadge(text = it)
+                        OutlineBadge(text = it)
                     }
                 }
                 SmallSpacer()

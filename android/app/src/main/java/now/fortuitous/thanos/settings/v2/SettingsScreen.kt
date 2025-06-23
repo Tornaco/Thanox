@@ -73,7 +73,9 @@ import github.tornaco.android.thanos.module.compose.common.widget.TextInputDialo
 import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
+import github.tornaco.android.thanos.module.compose.common.widget.rememberThanoxBottomSheetState
 import github.tornaco.android.thanos.res.R
+import github.tornaco.android.thanos.support.FeatureAccessDialog
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import github.tornaco.android.thanos.support.subscribe.SubscribeActivity
 import github.tornaco.android.thanos.support.withThanos
@@ -259,12 +261,14 @@ fun SettingsScreen() {
                     )
                     addAll(
                         strategySettings(
+                            subState = subscribeState,
                             state = state,
                             vm = vm,
                         )
                     )
                     addAll(
                         dataSettings(
+                            subState = subscribeState,
                             state = state,
                             vm = vm,
                         )
@@ -617,10 +621,17 @@ private fun aboutSettings(
 
 @Composable
 private fun strategySettings(
+    subState: LVLStateHolder.State,
     state: SettingsState,
     vm: SettingsViewModel,
 ): List<Preference> {
     val context = LocalContext.current
+    val badge = if (subState.isSubscribed) {
+        null
+    } else stringResource(R.string.module_donate_donated_available)
+
+    val subscribeDialogState = rememberThanoxBottomSheetState()
+    FeatureAccessDialog(subscribeDialogState)
     return context.withThanos {
         val templateSelectDialog = rememberMenuDialogState<Unit>(
             key1 = state.allConfigTemplateSelection,
@@ -701,8 +712,12 @@ private fun strategySettings(
                 hasLongSummary = false,
                 value = state.isAutoApplyForNewInstalledAppsEnabled,
                 onCheckChanged = { enable ->
-                    profileManager.isAutoApplyForNewInstalledAppsEnabled = enable
-                    vm.loadState()
+                    if (subState.isSubscribed) {
+                        profileManager.isAutoApplyForNewInstalledAppsEnabled = enable
+                        vm.loadState()
+                    } else {
+                        subscribeDialogState.show()
+                    }
                 }
             ),
 
@@ -724,7 +739,11 @@ private fun strategySettings(
                 summary = state.autoConfigTemplateSelection?.title
                     ?: stringResource(R.string.common_text_value_not_set),
                 onClick = {
-                    templateSelectDialog.show()
+                    if (subState.isSubscribed) {
+                        templateSelectDialog.show()
+                    } else {
+                        subscribeDialogState.show()
+                    }
                 }
             ),
 
@@ -734,7 +753,11 @@ private fun strategySettings(
                     Preference.TextPreference(
                         title = it.title,
                         onClick = {
-                            templateEditDialog.show(it)
+                            if (subState.isSubscribed) {
+                                templateEditDialog.show(it)
+                            } else {
+                                subscribeDialogState.show()
+                            }
                         }
                     )
                 } + listOf(
@@ -742,7 +765,11 @@ private fun strategySettings(
                         icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_add_fill,
                         title = stringResource(R.string.common_fab_title_add),
                         onClick = {
-                            addTemplateDialog.show()
+                            if (subState.isSubscribed) {
+                                addTemplateDialog.show()
+                            } else {
+                                subscribeDialogState.show()
+                            }
                         }
                     ),
                 ),
@@ -754,9 +781,19 @@ private fun strategySettings(
 
 @Composable
 private fun dataSettings(
+    subState: LVLStateHolder.State,
     state: SettingsState,
     vm: SettingsViewModel,
 ): List<Preference> {
+    val context = LocalContext.current
+
+    val badge = if (subState.isSubscribed) {
+        null
+    } else stringResource(R.string.module_donate_donated_available)
+
+    val subscribeDialogState = rememberThanoxBottomSheetState()
+    FeatureAccessDialog(subscribeDialogState)
+
     val backUpFileNameDialogState = rememberTextInputState(
         title = stringResource(R.string.pre_title_backup),
         showSymbolButton = false,
@@ -783,12 +820,17 @@ private fun dataSettings(
             title = stringResource(R.string.pre_title_backup),
             summary = stringResource(R.string.pre_summary_backup),
             onClick = {
-                storageHelper.createFile(
-                    mimeType = "application/zip",
-                    fileName = autoGenBackupFileName() + ".zip",
-                    requestCode = REQUEST_CODE_CREATE_BACKUP
-                )
-            }
+                if (subState.isSubscribed) {
+                    storageHelper.createFile(
+                        mimeType = "application/zip",
+                        fileName = autoGenBackupFileName() + ".zip",
+                        requestCode = REQUEST_CODE_CREATE_BACKUP
+                    )
+                } else {
+                    subscribeDialogState.show()
+                }
+            },
+            badge = badge
         ),
         Preference.ExpandablePreference(
             icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_download_cloud_fill,
@@ -796,12 +838,12 @@ private fun dataSettings(
             summary = stringResource(R.string.pre_sumary_restore),
             onClick = {
                 XLog.d("storageHelper openFilePicker")
-                storageHelper.openFilePicker(
+                if (subState.isSubscribed) storageHelper.openFilePicker(
                     requestCode = 100,
                     allowMultiple = false,
                     initialPath = null,
                     "application/zip"
-                )
+                ) else subscribeDialogState.show()
             },
             preferences = listOf(
                 Preference.TextPreference(
@@ -812,6 +854,7 @@ private fun dataSettings(
                     }
                 ),
             ),
+            badge = badge
         ),
     )
 }

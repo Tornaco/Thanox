@@ -1512,7 +1512,7 @@
     <string name="module_donate_title">Premium Al</string>
 
     <string name="module_donate_donated">Doğrulandı, teşekkürler</string>
-    <string name="module_donate_donated_available">Premium özellik</string>
+    <string name="module_donate_donated_available">Premium</string>
     <string name="module_donate_donated_available_message">Bu özelliğin kilidini açmak için Premium satın aldınız.\n\nİpucu: Önce deneyin, uygun olup olmadığını görün, memnun kaldıktan sonra gelişmiş özellikleri satın alın~</string>
 
     <string name="module_donate_get_play">Play sürümünü al</string>

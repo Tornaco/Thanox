@@ -1477,8 +1477,8 @@ Compatibility notice: If the default permission management function is not compa
     <string name="module_donate_title">Get Premium</string>
 
     <string name="module_donate_donated">Verified, thanks</string>
-    <string name="module_donate_donated_available">Premium feature</string>
-    <string name="module_donate_donated_available_message">Donated to get Premium to unlock this feature.\n\nTips: Try it out first, feel it is available and satisfied, and then purchase the advanced features~</string>
+    <string name="module_donate_donated_available">Premium</string>
+    <string name="module_donate_donated_available_message">Donated to get Premium to unlock this feature.</string>
 
     <string name="module_donate_get_play">Get play version</string>
     <string name="module_donate_copy_email">Copy email</string>

@@ -7,6 +7,7 @@ import github.tornaco.android.thanos.core.IPrinter;
 import github.tornaco.android.thanos.core.app.RunningAppProcessInfoCompat;
 import github.tornaco.android.thanos.core.app.usage.ProcessCpuUsageStats;
 import github.tornaco.android.thanos.core.os.SwapInfo;
+import github.tornaco.android.thanos.core.os.SynchronousResultReceiver;
 
 interface IActivityManager {
     String getCurrentFrontApp();
@@ -252,4 +253,5 @@ interface IActivityManager {
     void removeAppStabilityUpKeepExceptions(in List<Pkg> pkgs);
 
     long fastGetProcessPss(int pid);
+    long setupService(int taskId, in Intent intent, in SynchronousResultReceiver receiver);
 }

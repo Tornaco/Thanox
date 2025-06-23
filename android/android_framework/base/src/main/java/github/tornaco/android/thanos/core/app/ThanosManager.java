@@ -35,8 +35,6 @@ import github.tornaco.android.thanos.core.ops.IOps;
 import github.tornaco.android.thanos.core.ops.OpsManager;
 import github.tornaco.android.thanos.core.os.IServiceManager;
 import github.tornaco.android.thanos.core.os.ServiceManager;
-import github.tornaco.android.thanos.core.plus.IRS;
-import github.tornaco.android.thanos.core.plus.RSManager;
 import github.tornaco.android.thanos.core.pm.IPkgManager;
 import github.tornaco.android.thanos.core.pm.PackageManager;
 import github.tornaco.android.thanos.core.power.IPowerManager;
@@ -160,11 +158,6 @@ public class ThanosManager {
         }
 
         @Override
-        public IRS getRS() throws RemoteException {
-            return new IRS.Default();
-        }
-
-        @Override
         public IUsageStatsManager getUsageStatsManager() throws RemoteException {
             return new IUsageStatsManager.Default();
         }
@@ -187,6 +180,10 @@ public class ThanosManager {
     public ThanosManager(Context context, IThanos service) {
         this.context = context;
         this.service = service;
+    }
+
+    public IThanos getService() {
+        return service;
     }
 
     public boolean isServiceInstalled() {
@@ -281,11 +278,6 @@ public class ThanosManager {
     @SneakyThrows
     public PowerManager getPowerManager() {
         return new PowerManager(service.getPowerManager());
-    }
-
-    @SneakyThrows
-    public RSManager getRSManager() {
-        return new RSManager(service.getRS());
     }
 
     @SneakyThrows

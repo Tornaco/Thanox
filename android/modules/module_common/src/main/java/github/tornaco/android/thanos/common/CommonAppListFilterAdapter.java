@@ -24,7 +24,8 @@ public class CommonAppListFilterAdapter extends RecyclerView.Adapter<CommonAppLi
         FastScrollRecyclerView.SectionedAdapter,
         FastScrollRecyclerView.MeasurableAdapter<CommonAppListFilterAdapter.VH> {
 
-    public static AppItemViewLongClickListener fallbackAppItemLongClickListener;
+    public static AppItemViewLongClickListener fallbackAppItemLongClickListener = (view, model) -> {
+    };
 
     private final List<AppListModel> listModels = new ArrayList<>();
 

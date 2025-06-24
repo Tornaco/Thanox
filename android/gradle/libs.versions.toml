@@ -78,6 +78,7 @@ room-compiler = "2.7.1"
 swiperefreshlayout = "1.1.0"
 stringfog-xor = "5.0.0"
 stringfog-plugin = "5.2.0"
+material3-jvmstubs = "1.4.0-alpha16"
 
 [plugins]
 agp-lib = { id = "com.android.library", version.ref = "agp" }
@@ -209,3 +210,4 @@ swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout"
 
 stringfog-xor = { module = "com.github.megatronking.stringfog:xor", version.ref = "stringfog-xor" }
 stringfog-plugin = { module = "com.github.megatronking.stringfog:gradle-plugin", version.ref = "stringfog-plugin" }
+androidx-material3-jvmstubs = { group = "androidx.compose.material3", name = "material3-jvmstubs", version.ref = "material3-jvmstubs" }

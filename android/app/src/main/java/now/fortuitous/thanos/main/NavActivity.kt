@@ -40,7 +40,6 @@ import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.onboarding.OnBoardingActivity
 import now.fortuitous.thanos.pref.AppPreference
 import tornaco.apps.thanox.MainGraph
-import tornaco.apps.thanox.base.ui.theme.ThanosTheme
 
 @AndroidEntryPoint
 class NavActivity : ComposeThemeActivity() {
@@ -117,29 +116,26 @@ class NavActivity : ComposeThemeActivity() {
         LaunchedEffect(Unit) {
             ShortcutInit(this@NavActivity).initOnBootThanos()
         }
-
         ThanosApp {
-            ThanosTheme {
-                var privacyAgreementAccept by remember {
-                    mutableStateOf(false)
-                }
-                LaunchedEffect(Unit) {
-                    privacyAgreementAccept =
-                        PreferenceManager.getDefaultSharedPreferences(this@NavActivity)
-                            .getBoolean(privacyAgreementKey, false)
-                }
-
-                if (!privacyAgreementAccept) {
-                    PrivacyStatementDialog(onDismissRequest = {
-                        PreferenceManager.getDefaultSharedPreferences(this).edit()
-                            .putBoolean(privacyAgreementKey, true).apply()
-                        privacyAgreementAccept = true
-                    })
-                }
-
-
-                MainGraph()
+            var privacyAgreementAccept by remember {
+                mutableStateOf(false)
             }
+            LaunchedEffect(Unit) {
+                privacyAgreementAccept =
+                    PreferenceManager.getDefaultSharedPreferences(this@NavActivity)
+                        .getBoolean(privacyAgreementKey, false)
+            }
+
+            if (!privacyAgreementAccept) {
+                PrivacyStatementDialog(onDismissRequest = {
+                    PreferenceManager.getDefaultSharedPreferences(this).edit()
+                        .putBoolean(privacyAgreementKey, true).apply()
+                    privacyAgreementAccept = true
+                })
+            }
+
+
+            MainGraph()
         }
     }
 }

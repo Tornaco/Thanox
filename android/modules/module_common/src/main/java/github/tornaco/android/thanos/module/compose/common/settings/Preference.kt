@@ -1,4 +1,4 @@
-package github.tornaco.android.thanos.common.settings
+package github.tornaco.android.thanos.module.compose.common.settings
 
 
 sealed interface Preference {

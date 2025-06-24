@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.common.settings.Preference
-import github.tornaco.android.thanos.common.settings.PreferenceUi
+import github.tornaco.android.thanos.module.compose.common.settings.Preference
+import github.tornaco.android.thanos.module.compose.common.settings.PreferenceUi
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.PackageManager
 import github.tornaco.android.thanos.core.util.ClipboardUtils

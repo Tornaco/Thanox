@@ -52,8 +52,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.CommonPreferences
-import github.tornaco.android.thanos.common.settings.Preference
-import github.tornaco.android.thanos.common.settings.PreferenceUi
+import github.tornaco.android.thanos.module.compose.common.settings.Preference
+import github.tornaco.android.thanos.module.compose.common.settings.PreferenceUi
+import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.profile.ConfigTemplate
 import github.tornaco.android.thanos.core.profile.ProfileManager
@@ -78,7 +79,6 @@ import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.support.FeatureAccessDialog
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import github.tornaco.android.thanos.support.subscribe.SubscribeActivity
-import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.BrowserUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -324,7 +324,7 @@ private fun generalSettings(
         },
         confirmButton = stringResource(R.string.feedback_export_log),
     )
-    return context.withThanos {
+    return with(ThanosManager.from(context)) {
         listOf(
             Preference.Category(stringResource(R.string.pre_category_general)),
             Preference.TextPreference(
@@ -387,7 +387,7 @@ private fun generalSettings(
                 }
             ),
         )
-    } ?: emptyList()
+    }
 }
 
 
@@ -410,48 +410,46 @@ private fun uiSettings(
         scope.launch { pref.serUiThemeDarkModeConfig(config) }
     }
     MenuDialog(darkModeDialog)
-    return context.withThanos {
-        listOf(
-            Preference.Category(stringResource(R.string.pre_category_ui)),
+    return listOf(
+        Preference.Category(stringResource(R.string.pre_category_ui)),
 
-            Preference.SwitchPreference(
-                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_number_9,
-                title = stringResource(R.string.pre_title_app_list_item_show_version),
-                value = state.uiShowAppVersion,
-                onCheckChanged = { enable ->
-                    CommonPreferences.getInstance().setAppListShowVersionEnabled(context, enable)
-                    vm.loadState()
-                }
-            ),
+        Preference.SwitchPreference(
+            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_number_9,
+            title = stringResource(R.string.pre_title_app_list_item_show_version),
+            value = state.uiShowAppVersion,
+            onCheckChanged = { enable ->
+                CommonPreferences.getInstance().setAppListShowVersionEnabled(context, enable)
+                vm.loadState()
+            }
+        ),
 
-            Preference.SwitchPreference(
-                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_more_fill,
-                title = stringResource(R.string.pre_title_app_list_item_show_pkg),
-                value = state.uiShowAppPkgName,
-                onCheckChanged = { enable ->
-                    CommonPreferences.getInstance().setAppListShowPkgNameEnabled(context, enable)
-                    vm.loadState()
-                }
-            ),
+        Preference.SwitchPreference(
+            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_more_fill,
+            title = stringResource(R.string.pre_title_app_list_item_show_pkg),
+            value = state.uiShowAppPkgName,
+            onCheckChanged = { enable ->
+                CommonPreferences.getInstance().setAppListShowPkgNameEnabled(context, enable)
+                vm.loadState()
+            }
+        ),
 
-            Preference.SwitchPreference(
-                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_palette_fill,
-                title = "Dynamic color schema",
-                value = dynamicColor,
-                onCheckChanged = { enable ->
-                    scope.launch { pref.setUiThemeDynamicColor(enable) }
-                }
-            ),
-            Preference.TextPreference(
-                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_moon_fill,
-                title = "Dark mode",
-                summary = darkConfig.name,
-                onClick = {
-                    darkModeDialog.show()
-                }
-            ),
-        )
-    } ?: emptyList()
+        Preference.SwitchPreference(
+            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_palette_fill,
+            title = "Dynamic color schema",
+            value = dynamicColor,
+            onCheckChanged = { enable ->
+                scope.launch { pref.setUiThemeDynamicColor(enable) }
+            }
+        ),
+        Preference.TextPreference(
+            icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_moon_fill,
+            title = "Dark mode",
+            summary = darkConfig.name,
+            onClick = {
+                darkModeDialog.show()
+            }
+        ),
+    )
 }
 
 
@@ -462,7 +460,7 @@ private fun devSettings(
     exportLog: () -> Unit,
 ): List<Preference> {
     val context = LocalContext.current
-    return context.withThanos {
+    return with(ThanosManager.from(context)) {
         listOf(
             Preference.Category(stringResource(R.string.pre_category_dev_tools)),
 
@@ -527,7 +525,7 @@ private fun aboutSettings(
     val activity = LocalActivity.current
     val context = LocalContext.current
     var clickTimes by remember { mutableIntStateOf(0) }
-    return context.withThanos {
+    return with(ThanosManager.from(context)) {
         listOf(
             Preference.Category(stringResource(R.string.pre_category_about)),
             Preference.TextPreference(
@@ -632,7 +630,7 @@ private fun strategySettings(
 
     val subscribeDialogState = rememberThanoxBottomSheetState()
     FeatureAccessDialog(subscribeDialogState)
-    return context.withThanos {
+    return with(ThanosManager.from(context)) {
         val templateSelectDialog = rememberMenuDialogState<Unit>(
             key1 = state.allConfigTemplateSelection,
             title = { context.getString(R.string.pref_title_new_installed_apps_config) },

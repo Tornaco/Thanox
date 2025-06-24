@@ -22,18 +22,23 @@ package github.tornaco.android.thanos.module.compose.common.widget
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
@@ -46,6 +51,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
@@ -250,4 +256,41 @@ class SearchBarState {
     fun showSearchBar() {
         _showSearchBar = true
     }
+}
+
+
+@OptIn(androidx.compose.material.ExperimentalMaterialApi::class)
+@Composable
+fun ThanoxBottomSheetScaffold(
+    title: @Composable () -> Unit,
+    actions: @Composable (RowScope.() -> Unit) = {},
+    onBackPressed: (() -> Unit)?,
+    scaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState(),
+    searchBarState: SearchBarState = rememberSearchBarState(),
+    sheetContent: @Composable ColumnScope.() -> Unit = {},
+    content: @Composable () -> Unit,
+) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    BottomSheetScaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        scaffoldState = scaffoldState,
+        topBar = {
+            ThanoxMediumTopAppBarContainer(
+                searchBarState = searchBarState,
+                title = title,
+                actions = actions,
+                onBackPressed = onBackPressed,
+                scrollBehavior = scrollBehavior
+            )
+        },
+        sheetContent = sheetContent,
+        sheetPeekHeight = 0.dp,
+        content = {
+            Column(Modifier.consumeWindowInsets(it)) {
+                Spacer(modifier = Modifier.size(it.calculateTopPadding()))
+                content()
+                Spacer(modifier = Modifier.size(it.calculateBottomPadding()))
+            }
+        }
+    )
 }

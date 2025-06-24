@@ -62,7 +62,7 @@ fun ListItem(
 }
 
 @Composable
-fun ListItem(
+fun CheckableListItem(
     title: String? = null,
     text1: String? = null,
     text2: String? = null,
@@ -202,7 +202,7 @@ fun ListItem(
 fun ListItemPreview() {
     LazyColumn {
         items(10) {
-            ListItem(title = "Title",
+            CheckableListItem(title = "Title",
                 text1 = "Text1",
                 text2 = "Text2",
                 checked = true,

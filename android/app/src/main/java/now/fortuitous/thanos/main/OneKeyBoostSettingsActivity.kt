@@ -12,10 +12,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
-import tornaco.apps.thanox.base.ui.Preference
-import tornaco.apps.thanox.base.ui.PreferenceUi
-import tornaco.apps.thanox.base.ui.ThanoxSmallAppBarScaffold
-import tornaco.apps.thanox.base.ui.theme.ThanosTheme
+import github.tornaco.android.thanos.module.compose.common.settings.Preference
+import github.tornaco.android.thanos.module.compose.common.settings.PreferenceUi
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
+import github.tornaco.android.thanos.res.R
 
 class OneKeyBoostSettingsActivity : ComposeThemeActivity() {
     companion object {
@@ -28,31 +28,29 @@ class OneKeyBoostSettingsActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
-        ThanosTheme {
-            ThanoxSmallAppBarScaffold(title = {
-                Text(stringResource(github.tornaco.android.thanos.res.R.string.feature_title_one_key_boost))
-            }, onBackPressed = {
-                finish()
-            }) {
-                val context = LocalContext.current
-                var isFreezeOnBoost by remember {
-                    mutableStateOf(ThanosManager.from(context).pkgManager.isOneKeyBoostFreezeAppEnabled)
-                }
-                PreferenceUi(
-                    listOf(
-                        Preference.SwitchPreference(
-                            title = stringResource(github.tornaco.android.thanos.res.R.string.smart_freeze_on_one_key_boost),
-                            summary = stringResource(github.tornaco.android.thanos.res.R.string.smart_freeze_on_one_key_boost_summary),
-                            value = isFreezeOnBoost,
-                            onCheckChanged = {
-                                ThanosManager.from(context).pkgManager.isOneKeyBoostFreezeAppEnabled =
-                                    it
-                                isFreezeOnBoost = it
-                            }
-                        )
+        ThanoxMediumAppBarScaffold(title = {
+            Text(stringResource(R.string.feature_title_one_key_boost))
+        }, onBackPressed = {
+            finish()
+        }) {
+            val context = LocalContext.current
+            var isFreezeOnBoost by remember {
+                mutableStateOf(ThanosManager.from(context).pkgManager.isOneKeyBoostFreezeAppEnabled)
+            }
+            PreferenceUi(
+                listOf(
+                    Preference.SwitchPreference(
+                        title = stringResource(R.string.smart_freeze_on_one_key_boost),
+                        summary = stringResource(R.string.smart_freeze_on_one_key_boost_summary),
+                        value = isFreezeOnBoost,
+                        onCheckChanged = {
+                            ThanosManager.from(context).pkgManager.isOneKeyBoostFreezeAppEnabled =
+                                it
+                            isFreezeOnBoost = it
+                        }
                     )
                 )
-            }
+            )
         }
     }
 }

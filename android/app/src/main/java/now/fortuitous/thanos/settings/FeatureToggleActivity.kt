@@ -33,7 +33,7 @@ import androidx.compose.ui.res.stringResource
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
-import github.tornaco.android.thanos.module.compose.common.widget.ListItem
+import github.tornaco.android.thanos.module.compose.common.widget.CheckableListItem
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import now.fortuitous.thanos.main.PrebuiltFeatures
 
@@ -81,7 +81,7 @@ class FeatureToggleActivity : ComposeThemeActivity() {
                             )
                         )
                     }
-                    ListItem(title = stringResource(id = feature.titleRes),
+                    CheckableListItem(title = stringResource(id = feature.titleRes),
                         checked = isEnabled,
                         onCheckedChange = {
                             now.fortuitous.thanos.pref.AppPreference.setAppFeatureEnabled(

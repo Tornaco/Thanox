@@ -1,4 +1,4 @@
-package github.tornaco.android.thanos.common.settings
+package github.tornaco.android.thanos.module.compose.common.settings
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState

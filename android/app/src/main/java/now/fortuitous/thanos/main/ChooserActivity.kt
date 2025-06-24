@@ -40,13 +40,12 @@ import github.tornaco.android.thanos.core.analytics.SelectActiveMethodShizuku
 import github.tornaco.android.thanos.core.analytics.SelectActiveMethodXposedOrMagisk
 import github.tornaco.android.thanos.main.Analytics
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.theme.NiaGradientBackground
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCardRoundedCornerShape
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.pref.AppPreference
-import tornaco.apps.thanox.base.ui.NiaGradientBackground
-import tornaco.apps.thanox.base.ui.theme.ThanosTheme
 
 @AndroidEntryPoint
 class ChooserActivity : ComposeThemeActivity() {
@@ -66,48 +65,46 @@ class ChooserActivity : ComposeThemeActivity() {
     @Composable
     private fun AppChooser() {
         val context = LocalContext.current
-        ThanosTheme {
-            NiaGradientBackground(modifier = Modifier.fillMaxSize()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        text = stringResource(id = github.tornaco.android.thanos.res.R.string.app_select_activate_method),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
-                    repeat(4) {
-                        LargeSpacer()
-                    }
-
-                    MethodCard(
-                        title = "Shizuku",
-                        summary = stringResource(id = github.tornaco.android.thanos.res.R.string.active_method_chooser_summary_shizuku),
-                        onClick = {
-                            Analytics.reportEvent(SelectActiveMethodShizuku)
-                            AppPreference.setAppType(context, "thanos")
-                            NavActivity.Starter.start(context)
-                            finish()
-                        })
-
+        NiaGradientBackground(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    text = stringResource(id = github.tornaco.android.thanos.res.R.string.app_select_activate_method),
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                repeat(4) {
                     LargeSpacer()
-
-
-                    MethodCard(
-                        title = "Xposed/Magisk",
-                        summary = stringResource(id = github.tornaco.android.thanos.res.R.string.active_method_chooser_summary_xposed_magisk),
-                        onClick = {
-                            Analytics.reportEvent(SelectActiveMethodXposedOrMagisk)
-                            AppPreference.setAppType(context, "thanox")
-                            NavActivity.Starter.start(context)
-                            finish()
-                        })
                 }
+
+                MethodCard(
+                    title = "Shizuku",
+                    summary = stringResource(id = github.tornaco.android.thanos.res.R.string.active_method_chooser_summary_shizuku),
+                    onClick = {
+                        Analytics.reportEvent(SelectActiveMethodShizuku)
+                        AppPreference.setAppType(context, "thanos")
+                        NavActivity.Starter.start(context)
+                        finish()
+                    })
+
+                LargeSpacer()
+
+
+                MethodCard(
+                    title = "Xposed/Magisk",
+                    summary = stringResource(id = github.tornaco.android.thanos.res.R.string.active_method_chooser_summary_xposed_magisk),
+                    onClick = {
+                        Analytics.reportEvent(SelectActiveMethodXposedOrMagisk)
+                        AppPreference.setAppType(context, "thanox")
+                        NavActivity.Starter.start(context)
+                        finish()
+                    })
             }
         }
     }

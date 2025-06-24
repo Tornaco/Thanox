@@ -19,18 +19,18 @@ package github.tornaco.android.thanos.main
 
 import android.app.Activity
 import android.content.Context
-import now.fortuitous.app.PLayLvlCheckActivity
-import now.fortuitous.app.donate.DonateSettingsKt
+import github.tornaco.android.thanos.support.subscribe.LVLCheckActivity
+import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 
 inline fun blockOnCreate(activity: Activity, noop: () -> Unit = {}): Boolean {
     noop()
-    return if (!DonateSettingsKt.isActivated(activity)) {
-        PLayLvlCheckActivity.Starter.start(activity)
+    return if (!LVLStateHolder.container.stateFlow.value.isSubscribed) {
+        LVLCheckActivity.start(activity)
         true
     } else false
 }
 
 inline fun launchSubscribeActivity(activity: Context, noop: () -> Unit = {}) {
     noop()
-    PLayLvlCheckActivity.Starter.start(activity)
+    LVLCheckActivity.start(activity)
 }

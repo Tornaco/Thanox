@@ -38,7 +38,6 @@ import github.tornaco.android.thanos.BaseFragment
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.databinding.SmartFreezeLayoutBottomNavBinding
-import github.tornaco.android.thanos.module.compose.common.theme.ThanoxTheme
 import github.tornaco.android.thanos.module.compose.common.theme.getColorAttribute
 import github.tornaco.android.thanos.theme.ThemeActivity
 import github.tornaco.android.thanos.util.ActivityUtils
@@ -103,27 +102,24 @@ class SmartFreezeActivity : ThemeActivity() {
 
         binding.bottomNavigation.selectTab(binding.bottomNavigation.getTabAt(0))
         binding.composeSort.setContent {
-            ThanoxTheme {
-                val context = LocalContext.current
+            val context = LocalContext.current
+            val tabSortDialogState =
+                rememberTabItemSortState(apply = {
+                    viewModel.applySort(context, it)
+                    refreshTabs()
+                })
+            TabItemSortDialog(tabSortDialogState)
 
-                val tabSortDialogState =
-                    rememberTabItemSortState(apply = {
-                        viewModel.applySort(context, it)
-                        refreshTabs()
-                    })
-                TabItemSortDialog(tabSortDialogState)
-
-                val tintColor = getColorAttribute(android.R.attr.colorControlNormal)
-                Column {
-                    IconButton(onClick = {
-                        tabSortDialogState.show(viewModel.tabItems)
-                    }) {
-                        Icon(
-                            painter = painterResource(id = github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_outline_sort_24),
-                            contentDescription = "Sort",
-                            tint = Color(tintColor)
-                        )
-                    }
+            val tintColor = getColorAttribute(android.R.attr.colorControlNormal)
+            Column {
+                IconButton(onClick = {
+                    tabSortDialogState.show(viewModel.tabItems)
+                }) {
+                    Icon(
+                        painter = painterResource(id = github.tornaco.android.thanos.module.common.R.drawable.module_common_ic_outline_sort_24),
+                        contentDescription = "Sort",
+                        tint = Color(tintColor)
+                    )
                 }
             }
         }

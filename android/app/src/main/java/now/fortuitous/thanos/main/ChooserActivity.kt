@@ -88,7 +88,7 @@ class ChooserActivity : ComposeThemeActivity() {
                     summary = stringResource(id = github.tornaco.android.thanos.res.R.string.active_method_chooser_summary_shizuku),
                     onClick = {
                         Analytics.reportEvent(SelectActiveMethodShizuku)
-                        AppPreference.setAppType(context, "thanos")
+                        AppPreference.setAppType(context, AppType.BasedOnShizuku.prefValue)
                         NavActivity.Starter.start(context)
                         finish()
                     })
@@ -97,11 +97,11 @@ class ChooserActivity : ComposeThemeActivity() {
 
 
                 MethodCard(
-                    title = "Xposed/Magisk",
+                    title = "Xposed",
                     summary = stringResource(id = github.tornaco.android.thanos.res.R.string.active_method_chooser_summary_xposed_magisk),
                     onClick = {
                         Analytics.reportEvent(SelectActiveMethodXposedOrMagisk)
-                        AppPreference.setAppType(context, "thanox")
+                        AppPreference.setAppType(context, AppType.BasedOnXposed.prefValue)
                         NavActivity.Starter.start(context)
                         finish()
                     })

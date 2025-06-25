@@ -18,6 +18,7 @@
 package now.fortuitous.thanos.main
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import androidx.compose.runtime.Composable
@@ -32,7 +33,7 @@ import androidx.preference.PreferenceManager
 import com.anggrayudi.storage.SimpleStorageHelper
 import com.elvishew.xlog.XLog
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.main.NavEntry
 import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.support.subscribe.ThanosApp
@@ -69,73 +70,63 @@ class NavActivity : ComposeThemeActivity() {
         }
         XLog.w("CompositionLocalProvider.")
         CompositionLocalProvider(LocalSimpleStorageHelper provides storageHelper) {
-            // Check if xopsed mode is running.
-            if (ThanosManager.from(this).isServiceInstalled) {
-                XLog.w("isServiceInstalled.")
-                AppPreference.setAppType(this, "ask")
-                ThanoxXposed()
-            } else {
-                XLog.w("isServiceInstalled false.")
-                val sx = AppPreference.getAppType(this)
-                XLog.w("sx: $sx")
-                when (sx) {
-                    "thanos" -> {
-                        ThanoxShizuku()
-                    }
-
-                    else -> {
-                        ThanoxXposed()
-                    }
-                }
-            }
+            NavEntry()
         }
     }
 
-    @Composable
-    private fun ThanoxXposed() {
-        XLog.w("ThanoxXposed")
-        // Block
-        if (blockOnCreate(this)) {
-            finish()
-            return
-        }
+}
 
+
+@Composable
+fun Activity.ThanoxXposed() {
+    XLog.w("ThanoxXposed")
+    // Block
+    if (blockOnCreate(this)) {
+        finish()
+        return
+    }
+
+    LaunchedEffect(Unit) {
+        ShortcutInit(this@ThanoxXposed).initOnBootThanox()
+    }
+
+    val applyNewHome = AppPreference.isFeatureNoticeAccepted(this, "NEW_HOME")
+    XLog.w("applyNewHome: $applyNewHome")
+    if (applyNewHome) AllNewNavScreen() else NavScreen()
+}
+
+@SuppressLint("UseKtx")
+@Composable
+fun Activity.ThanoxShizuku() {
+    XLog.w("ThanoxShizuku")
+    LaunchedEffect(Unit) {
+        ShortcutInit(this@ThanoxShizuku).initOnBootThanos()
+    }
+    ThanosApp {
+        var privacyAgreementAccept by remember {
+            mutableStateOf(false)
+        }
         LaunchedEffect(Unit) {
-            ShortcutInit(this@NavActivity).initOnBootThanox()
+            privacyAgreementAccept =
+                PreferenceManager.getDefaultSharedPreferences(this@ThanoxShizuku)
+                    .getBoolean(privacyAgreementKey, false)
         }
 
-        val applyNewHome = AppPreference.isFeatureNoticeAccepted(this, "NEW_HOME")
-        XLog.w("applyNewHome: $applyNewHome")
-        if (applyNewHome) AllNewNavScreen() else NavScreen()
+        if (!privacyAgreementAccept) {
+            PrivacyStatementDialog(onDismissRequest = {
+                PreferenceManager.getDefaultSharedPreferences(this).edit()
+                    .putBoolean(privacyAgreementKey, true).apply()
+                privacyAgreementAccept = true
+            })
+        }
+
+
+        MainGraph()
     }
+}
 
-    @SuppressLint("UseKtx")
-    @Composable
-    private fun ThanoxShizuku() {
-        XLog.w("ThanoxShizuku")
-        LaunchedEffect(Unit) {
-            ShortcutInit(this@NavActivity).initOnBootThanos()
-        }
-        ThanosApp {
-            var privacyAgreementAccept by remember {
-                mutableStateOf(false)
-            }
-            LaunchedEffect(Unit) {
-                privacyAgreementAccept =
-                    PreferenceManager.getDefaultSharedPreferences(this@NavActivity)
-                        .getBoolean(privacyAgreementKey, false)
-            }
-
-            if (!privacyAgreementAccept) {
-                PrivacyStatementDialog(onDismissRequest = {
-                    PreferenceManager.getDefaultSharedPreferences(this).edit()
-                        .putBoolean(privacyAgreementKey, true).apply()
-                    privacyAgreementAccept = true
-                })
-            }
-
-
-            MainGraph()
-        }
-    }
+enum class AppType(val prefValue: String) {
+    BasedOnXposed("thanox"),
+    BasedOnShizuku("thanos"),
+    Ask("ask"),
 }

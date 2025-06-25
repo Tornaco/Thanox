@@ -28,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.preference.PreferenceManager
 import com.anggrayudi.storage.SimpleStorageHelper
@@ -36,6 +37,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.main.NavEntry
 import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
+import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberThanoxBottomSheetState
 import github.tornaco.android.thanos.support.FeatureAccessDialog
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
@@ -97,6 +100,15 @@ fun Activity.ThanoxXposed() {
     val subscribeDialogState = rememberThanoxBottomSheetState()
     FeatureAccessDialog(subscribeDialogState)
 
+    val activeDialog = rememberConfirmDialogState()
+    ConfirmDialog(
+        state = activeDialog,
+        title = stringResource(github.tornaco.android.thanos.res.R.string.status_not_active),
+        messageHint = { it },
+        data = stringResource(github.tornaco.android.thanos.res.R.string.message_active_needed),
+        dismissButton = ""
+    ) { }
+
     LVLStateHolder.collectSideEffect {
         when (it) {
             LVLStateHolder.Effect.FAB -> {
@@ -104,6 +116,10 @@ fun Activity.ThanoxXposed() {
             }
 
             is LVLStateHolder.Effect.StateChanged -> {
+            }
+
+            LVLStateHolder.Effect.LNA -> {
+                activeDialog.show()
             }
         }
     }

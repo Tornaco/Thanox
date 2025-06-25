@@ -23,6 +23,7 @@ import com.elvishew.xlog.XLog
 import github.tornaco.android.plugin.push.message.delegate.WechatPushDeleteMainActivity
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.core.T
+import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import github.tornaco.android.thanos.support.withThanos
@@ -44,6 +45,11 @@ class PrebuiltFeatureLauncher(
     private val onProcessCleared: () -> Unit,
 ) {
     fun launch(featureId: Int) {
+        if (!ThanosManager.from(context).isServiceInstalled) {
+            LVLStateHolder.lna()
+            return
+        }
+
         runCatching { launchOrThrow(featureId) }.onFailure {
             if (it is AccessBlocked) {
                 LVLStateHolder.fab()

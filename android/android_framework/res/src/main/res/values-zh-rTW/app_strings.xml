@@ -1480,6 +1480,8 @@
     <string name="module_donate_donated_available_message">啟動高級版後解鎖該功能。</string>
 
     <string name="module_donate_get_play">取得Play版本</string>
+    <string name="module_donate_get_play_message">Thanox Pro已在Play store发布，不限设备数，功能和Thanox一样。如果你没有Play的支付渠道，可以通过国内支付渠道购买兑换码。</string>
+
     <string name="module_donate_copy_email">複製郵件地址</string>
     <string name="module_donate_active_hidden_feature">订阅高級版</string>
     <string name="module_donate_active_hidden_feature_activated">已订阅</string>

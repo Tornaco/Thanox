@@ -1481,6 +1481,7 @@ Compatibility notice: If the default permission management function is not compa
     <string name="module_donate_donated_available_message">Donated to get Premium to unlock this feature.</string>
 
     <string name="module_donate_get_play">Get play version</string>
+    <string name="module_donate_get_play_message">Search Thanox Pro in Google play store</string>
     <string name="module_donate_copy_email">Copy email</string>
     <string name="module_donate_active_hidden_feature">激活隐藏功能</string>
     <string name="module_donate_active_hidden_feature_activated">Activated</string>

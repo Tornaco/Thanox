@@ -331,6 +331,11 @@ private fun AppBarBadges(
             onFrameworkErrorClick()
         }
     }
+    if (!subState.isSubscribed) {
+        ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.badge_trying_app)) {
+            onTryingAppClick()
+        }
+    }
 }
 
 @Composable

@@ -689,19 +689,16 @@ public class SmartFreezeAppListFragment extends BaseFragment {
     private void onRequestAddNewApps() {
         int size = viewModel.listModels.size();
         // Limit free to add at most 9 apps.
-        if (size > 3) {
-            AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
-                if (isSubscribed) {
-                } else {
-                    AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
-                }
-                return null;
-            });
-        }
-
-        ThanosManager.from(requireContext()).ifServiceInstalled(thanosManager -> {
-            ArrayList<Pkg> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
-            pickApps.launch(AppPickerActivity.getIntent(requireContext(), exclude));
+        AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+            if (isSubscribed || size <= 3) {
+                ThanosManager.from(requireContext()).ifServiceInstalled(thanosManager -> {
+                    ArrayList<Pkg> exclude = Lists.newArrayList(thanosManager.getPkgManager().getSmartFreezePkgs());
+                    pickApps.launch(AppPickerActivity.getIntent(requireContext(), exclude));
+                });
+            } else {
+                AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
+            }
+            return null;
         });
     }
 

@@ -1309,7 +1309,7 @@
     <string name="pre_title_bg_restrict_show_notification">显示通知</string>
     <string name="pre_summary_bg_restrict_show_notification">有待清理应用时显示一个通知</string>
 
-    <string name="badge_trying_app">免费试用</string>
+    <string name="badge_trying_app">未订阅</string>
     <string name="badge_paid_app">已购买</string>
     <string name="badge_framework_err">不兼容</string>
     <string name="badge_power_save_off">耗电</string>

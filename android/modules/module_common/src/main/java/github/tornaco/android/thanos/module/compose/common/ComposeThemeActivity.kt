@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.module.compose.common
 
 import android.content.Context
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -91,59 +92,64 @@ abstract class ComposeThemeActivity : ThemeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        // We keep this as a mutable state, so that we can track changes inside the composition.
-        // This allows us to react to dark/light mode changes.
-        var themeState by mutableStateOf(
-            ThemeState(
-                darkTheme = resources.configuration.isSystemInDarkTheme,
-                disableDynamicTheming = false
-            ),
-        )
-
-        // Update the uiState
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                combine(
-                    isSystemInDarkTheme(),
-                    ThemeActivityVM.state.filter { it.themeSettings != null },
-                ) { systemDark, uiState ->
-                    uiState.themeSettings?.let {
-                        ThemeState(
-                            darkTheme = uiState.shouldUseDarkTheme(systemDark),
-                            disableDynamicTheming = it.disableDynamicTheming,
-                        )
-                    }
-                }.filterNotNull().onEach { themeState = it }
-                    .map { it.darkTheme }
-                    .distinctUntilChanged()
-                    .collect { darkTheme ->
-                        trace("thanoxEdgeToEdge") {
-                            enableEdgeToEdge(
-                                statusBarStyle = SystemBarStyle.auto(
-                                    lightScrim = android.graphics.Color.TRANSPARENT,
-                                    darkScrim = android.graphics.Color.TRANSPARENT,
-                                ) { darkTheme },
-                                navigationBarStyle = SystemBarStyle.auto(
-                                    lightScrim = lightScrim,
-                                    darkScrim = darkScrim,
-                                ) { darkTheme },
-                            )
-                        }
-                    }
-            }
-        }
-
-        setContent {
-            ThanoxTheme(
-                darkTheme = themeState.darkTheme,
-                disableDynamicTheming = themeState.disableDynamicTheming,
-            ) {
-                Content()
-            }
+        ThemeStateContainer {
+            Content()
         }
     }
 
     @Composable
     abstract fun Content()
+}
+
+fun ComponentActivity.ThemeStateContainer(content: @Composable () -> Unit) {
+    // We keep this as a mutable state, so that we can track changes inside the composition.
+    // This allows us to react to dark/light mode changes.
+    var themeState by mutableStateOf(
+        ThemeState(
+            darkTheme = resources.configuration.isSystemInDarkTheme,
+            disableDynamicTheming = false
+        ),
+    )
+
+    // Update the uiState
+    lifecycleScope.launch {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            combine(
+                isSystemInDarkTheme(),
+                ThemeActivityVM.state.filter { it.themeSettings != null },
+            ) { systemDark, uiState ->
+                uiState.themeSettings?.let {
+                    ThemeState(
+                        darkTheme = uiState.shouldUseDarkTheme(systemDark),
+                        disableDynamicTheming = it.disableDynamicTheming,
+                    )
+                }
+            }.filterNotNull().onEach { themeState = it }
+                .map { it.darkTheme }
+                .distinctUntilChanged()
+                .collect { darkTheme ->
+                    trace("thanoxEdgeToEdge") {
+                        enableEdgeToEdge(
+                            statusBarStyle = SystemBarStyle.auto(
+                                lightScrim = android.graphics.Color.TRANSPARENT,
+                                darkScrim = android.graphics.Color.TRANSPARENT,
+                            ) { darkTheme },
+                            navigationBarStyle = SystemBarStyle.auto(
+                                lightScrim = lightScrim,
+                                darkScrim = darkScrim,
+                            ) { darkTheme },
+                        )
+                    }
+                }
+        }
+    }
+
+    setContent {
+        ThanoxTheme(
+            darkTheme = themeState.darkTheme,
+            disableDynamicTheming = themeState.disableDynamicTheming,
+        ) {
+            content()
+        }
+    }
 }

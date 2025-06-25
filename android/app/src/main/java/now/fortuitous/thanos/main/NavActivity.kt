@@ -28,7 +28,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.preference.PreferenceManager
 import com.anggrayudi.storage.SimpleStorageHelper
@@ -37,16 +36,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.main.NavEntry
 import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
-import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
-import github.tornaco.android.thanos.module.compose.common.widget.rememberConfirmDialogState
-import github.tornaco.android.thanos.module.compose.common.widget.rememberThanoxBottomSheetState
-import github.tornaco.android.thanos.support.FeatureAccessDialog
-import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
+import github.tornaco.android.thanos.support.subscribe.LVLStateEffects
 import github.tornaco.android.thanos.support.subscribe.ThanosApp
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.onboarding.OnBoardingActivity
 import now.fortuitous.thanos.pref.AppPreference
-import org.orbitmvi.orbit.compose.collectSideEffect
 import tornaco.apps.thanox.MainGraph
 
 @AndroidEntryPoint
@@ -96,34 +90,7 @@ fun Activity.ThanoxXposed() {
     LaunchedEffect(Unit) {
         ShortcutInit(this@ThanoxXposed).initOnBootThanox()
     }
-
-    val subscribeDialogState = rememberThanoxBottomSheetState()
-    FeatureAccessDialog(subscribeDialogState)
-
-    val activeDialog = rememberConfirmDialogState()
-    ConfirmDialog(
-        state = activeDialog,
-        title = stringResource(github.tornaco.android.thanos.res.R.string.status_not_active),
-        messageHint = { it },
-        data = stringResource(github.tornaco.android.thanos.res.R.string.message_active_needed),
-        dismissButton = ""
-    ) { }
-
-    LVLStateHolder.collectSideEffect {
-        when (it) {
-            LVLStateHolder.Effect.FAB -> {
-                subscribeDialogState.show()
-            }
-
-            is LVLStateHolder.Effect.StateChanged -> {
-            }
-
-            LVLStateHolder.Effect.LNA -> {
-                activeDialog.show()
-            }
-        }
-    }
-
+    LVLStateEffects()
     val applyNewHome = AppPreference.isFeatureNoticeAccepted(this, "NEW_HOME")
     XLog.w("applyNewHome: $applyNewHome")
     if (applyNewHome) AllNewNavScreen() else NavScreen()

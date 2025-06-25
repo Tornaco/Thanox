@@ -25,8 +25,8 @@ import android.os.Looper
 import android.os.Parcelable
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -58,7 +58,6 @@ class SmartFreezeActivity : ThemeActivity() {
 
     private lateinit var binding: SmartFreezeLayoutBottomNavBinding
 
-    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

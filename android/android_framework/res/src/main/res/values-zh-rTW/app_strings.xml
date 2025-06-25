@@ -1307,7 +1307,7 @@
     <string name="pre_title_bg_restrict_show_notification">顯示通知</string>
     <string name="pre_summary_bg_restrict_show_notification">有待清理應用程式時顯示通知</string>
 
-    <string name="badge_trying_app">免費試用</string>
+    <string name="badge_trying_app">未订阅</string>
     <string name="badge_paid_app">已購買</string>
     <string name="badge_framework_err">不相容</string>
     <string name="badge_power_save_off">耗電</string>

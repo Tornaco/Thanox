@@ -217,11 +217,7 @@ fun NavScreen() {
                         contentPadding = PaddingValues(0.dp),
                         state = state,
                         onFeatureItemClick = {
-                            runCatching {
-                                PrebuiltFeatureLauncher(activity) {}.launch(it.id)
-                            }.onFailure {
-                                subscribeDialogState.show()
-                            }
+                            PrebuiltFeatureLauncher(activity) {}.launch(it.id)
                         },
                         onHeaderClick = {
                             viewModel.headerClick(activity)
@@ -333,11 +329,6 @@ private fun AppBarBadges(
     if (state.hasFrameworkError) {
         ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.badge_framework_err)) {
             onFrameworkErrorClick()
-        }
-    }
-    if (!subState.isSubscribed) {
-        ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.badge_trying_app)) {
-            onTryingAppClick()
         }
     }
 }

@@ -36,10 +36,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.main.NavEntry
 import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.widget.rememberThanoxBottomSheetState
+import github.tornaco.android.thanos.support.FeatureAccessDialog
+import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import github.tornaco.android.thanos.support.subscribe.ThanosApp
 import github.tornaco.android.thanos.util.ActivityUtils
 import now.fortuitous.thanos.onboarding.OnBoardingActivity
 import now.fortuitous.thanos.pref.AppPreference
+import org.orbitmvi.orbit.compose.collectSideEffect
 import tornaco.apps.thanox.MainGraph
 
 @AndroidEntryPoint
@@ -88,6 +92,20 @@ fun Activity.ThanoxXposed() {
 
     LaunchedEffect(Unit) {
         ShortcutInit(this@ThanoxXposed).initOnBootThanox()
+    }
+
+    val subscribeDialogState = rememberThanoxBottomSheetState()
+    FeatureAccessDialog(subscribeDialogState)
+
+    LVLStateHolder.collectSideEffect {
+        when (it) {
+            LVLStateHolder.Effect.FAB -> {
+                subscribeDialogState.show()
+            }
+
+            is LVLStateHolder.Effect.StateChanged -> {
+            }
+        }
     }
 
     val applyNewHome = AppPreference.isFeatureNoticeAccepted(this, "NEW_HOME")

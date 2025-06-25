@@ -24,6 +24,7 @@ import github.tornaco.android.plugin.push.message.delegate.WechatPushDeleteMainA
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.core.T
 import github.tornaco.android.thanos.support.AppFeatureManager
+import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampolineActivity
@@ -36,14 +37,25 @@ import github.tornaco.thanos.android.ops2.byop.Ops2Activity
 import now.fortuitous.thanos.apps.AioAppListActivity
 import now.fortuitous.thanos.power.SmartFreezeActivity
 import now.fortuitous.thanos.power.wakelock.WakeLockBlockerActivity
+import now.fortuitous.thanos.process.v2.ProcessManageActivityV2
 
 class PrebuiltFeatureLauncher(
     private val context: Activity,
     private val onProcessCleared: () -> Unit,
 ) {
     fun launch(featureId: Int) {
+        runCatching { launchOrThrow(featureId) }.onFailure {
+            if (it is AccessBlocked) {
+                LVLStateHolder.fab()
+            } else {
+                XLog.e(it, "Launch error")
+            }
+        }
+    }
+
+    private fun launchOrThrow(featureId: Int) {
         XLog.d("PrebuiltFeatureLauncher, launch: %s", featureId)
-        val handled = context.withThanos {
+        context.withThanos {
             when (featureId) {
                 PrebuiltFeatureIds.ID_ONE_KEY_CLEAR -> {
                     AppFeatureManager.withSubscriptionStatus(context) {
@@ -59,12 +71,12 @@ class PrebuiltFeatureLauncher(
                 PrebuiltFeatureIds.ID_APPS_MANAGER,
                 PrebuiltFeatureIds.ID_BACKGROUND_START,
                 PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT,
-                PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL,
-                PrebuiltFeatureIds.ID_SMART_STANDBY,
-                PrebuiltFeatureIds.ID_TASK_BLUR -> {
+                PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {
                     AioAppListActivity.start(context, featureId)
                 }
 
+                PrebuiltFeatureIds.ID_TASK_BLUR,
+                PrebuiltFeatureIds.ID_SMART_STANDBY,
                 PrebuiltFeatureIds.ID_APP_LOCK,
                 PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER,
                 PrebuiltFeatureIds.ID_SENSOR_OFF,
@@ -158,14 +170,22 @@ class PrebuiltFeatureLauncher(
                         }
                     }
                 }
+
+                PrebuiltFeatureIds.ID_PROCESS_MANAGER -> {
+                    AppFeatureManager.withSubscriptionStatus(context) {
+                        if (it) {
+                            ProcessManageActivityV2.Starter.start(context)
+                        } else {
+                            throw AccessBlocked
+                        }
+                    }
+                }
             }
             true
-        } ?: false
-
-        if (!handled) {
-            DialogUtils.showNotActivated(context)
-        }
+        } == true
     }
 }
 
-data object AccessBlocked : Error()
+data object AccessBlocked : Error() {
+    private fun readResolve(): Any = AccessBlocked
+}

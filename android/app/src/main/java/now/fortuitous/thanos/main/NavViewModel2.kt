@@ -34,7 +34,6 @@ import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.OsUtils
 import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
-import github.tornaco.android.thanos.support.AppFeatureManager.showSubscribeDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +47,6 @@ import now.fortuitous.thanos.dashboard.MemType
 import now.fortuitous.thanos.dashboard.MemUsage
 import now.fortuitous.thanos.dashboard.StatusHeaderInfo
 import now.fortuitous.thanos.dashboard.defaultStatusHeaderInfo
-import now.fortuitous.thanos.process.v2.ProcessManageActivityV2
 import javax.inject.Inject
 
 enum class ActiveStatus {
@@ -283,19 +281,9 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     }
 
     fun headerClick(activity: Activity) {
-        val handled = context.withThanos {
-            withSubscriptionStatus(activity) { isSubscribed: Boolean ->
-                if (isSubscribed) {
-                    ProcessManageActivityV2.Starter.start(activity)
-                } else {
-                    showSubscribeDialog(activity)
-                }
-            }
-            true
-        } ?: false
-        if (!handled) {
-            DialogUtils.showNotActivated(activity)
-        }
+        PrebuiltFeatureLauncher(
+            context = activity,
+            onProcessCleared = {}).launch(PrebuiltFeatureIds.ID_PROCESS_MANAGER)
     }
 
     @SuppressLint("UseKtx")

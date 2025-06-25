@@ -30,13 +30,19 @@ fun Project.addAidlTask() {
                         val aidlPath = file.path
                         exec {
                             commandLine(
-                                aidl(),
-                                "-I$srcDir",
-                                "--out=$outDir",
-                                "-p$projectPrebuiltAndroidSdkDir/framework.aidl",
-                                "-p$projectPrebuiltAndroidSdkDir/thanos.aidl",
-                                aidlPath
+                                *arrayOf(
+                                    aidl(),
+                                    "-I$srcDir",
+                                    "--out=$outDir",
+                                    "-p$projectPrebuiltAndroidSdkDir/framework.aidl",
+                                    "-p$projectPrebuiltAndroidSdkDir/thanos.aidl",
+                                    aidlPath
+                                ).also {
+                                    println("Commnand: ${it.joinToString(" ")}")
+                                }
                             )
+                        }.apply {
+                            println("********* $this")
                         }
                     }
                 }

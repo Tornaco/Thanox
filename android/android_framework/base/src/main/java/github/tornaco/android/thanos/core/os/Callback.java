@@ -5,8 +5,6 @@ import android.os.Looper;
 
 import com.elvishew.xlog.XLog;
 
-import github.tornaco.android.thanos.core.plus.ICallback;
-
 public class Callback extends ICallback.Stub {
     private final Handler handler = new Handler(Looper.getMainLooper());
 

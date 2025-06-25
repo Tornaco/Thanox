@@ -3,10 +3,14 @@ package github.tornaco.android.thanos.module.compose.common.infra
 import android.content.Context
 import android.content.Intent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.OnResumeEffect
 
 @AndroidEntryPoint
 abstract class BaseAppListFilterActivity : ComposeThemeActivity() {
@@ -23,7 +27,19 @@ abstract class BaseAppListFilterActivity : ComposeThemeActivity() {
     @Composable
     override fun Content() {
         val featId = intent.getIntExtra(KEY_FEAT_ID, -1)
-        val config = remember { getConfig(featId) }
+        // 用于强制重新执行 getConfig
+        var configKey by remember { mutableIntStateOf(0) }
+
+        @Composable
+        fun getConfigWithKey(featId: Int, key: Int): BaseAppListFilterContainerConfig {
+            return getConfig(featId) // 原始方法内部可以感知 key 的变化
+        }
+
+        val config = getConfigWithKey(featId, configKey)
+        OnResumeEffect {
+            configKey++
+        }
+
         BaseAppListFilterContent(config)
     }
 

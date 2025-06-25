@@ -594,6 +594,7 @@ private fun optionMenuDialog(
 ): MenuDialogState<Unit> {
     val context = LocalContext.current
     val state = rememberMenuDialogState<Unit>(
+        key1 = selectable,
         title = { title },
         menuItems = selectable.options.map {
             MenuDialogItem(

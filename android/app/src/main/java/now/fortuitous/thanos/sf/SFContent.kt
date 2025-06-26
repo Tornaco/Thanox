@@ -34,7 +34,9 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Button
@@ -179,7 +181,7 @@ fun SFContent(back: () -> Unit) {
         sfVM.bindLifecycle(lifecycle)
     }
 
-    val sfPkgs by sfVM.sfPkgs.collectAsState()
+    val allSFPkgs by sfVM.allSFPkgs.collectAsState()
     val sfPkgMapping by sfVM.sfPkgMapping.collectAsState()
     val state by sfVM.state.collectAsState()
 
@@ -236,8 +238,7 @@ fun SFContent(back: () -> Unit) {
     val pkgSets by sfVM.pkgSets.collectAsState()
     val selectedPkgSet by sfVM.selectedPkgSetId.collectAsState()
 
-    val apps =
-        sfPkgMapping[pkgSets.firstOrNull { selectedPkgSet == it.id }] ?: emptyList()
+    val apps = sfPkgMapping
 
     ThanoxMediumAppBarScaffold(
         title = {
@@ -272,7 +273,7 @@ fun SFContent(back: () -> Unit) {
                 subState = subState,
                 pkgSets = pkgSets,
                 sfVM = sfVM,
-                selectedPkgSet = selectedPkgSet,
+                selectedPkgSet = selectedPkgSet.orEmpty(),
             )
         },
         actions = {
@@ -296,11 +297,11 @@ fun SFContent(back: () -> Unit) {
                         )
                     }
                     IconButton(onClick = {
-                        if (sfPkgs.size > 3 && !subState.isSubscribed) {
+                        if (allSFPkgs.size > 3 && !subState.isSubscribed) {
                             LVLStateHolder.fab()
                         } else {
                             val exclude: ArrayList<Pkg> =
-                                ArrayList(sfPkgs.map { Pkg.fromAppInfo(it) })
+                                ArrayList(allSFPkgs.map { Pkg.fromAppInfo(it) })
                             pickPkgLauncher.launch(AppPickerActivity.getIntent(context, exclude))
                         }
                     }) {
@@ -409,6 +410,24 @@ private fun BottomToolbar(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 16.dp),
             ) {
+                IconButton(
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    onClick = {
+                        sfVM.selectAll()
+                    }
+                ) {
+                    Icon(Icons.Filled.SelectAll, contentDescription = null)
+                }
+                IconButton(
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    onClick = {
+                        sfVM.unselectAll()
+                    }
+                ) {
+                    Icon(Icons.Filled.ClearAll, contentDescription = null)
+                }
+
+
                 if (state.selectedApps.size == 1) {
                     val appInfo =
                         ThanosManager.from(context).pkgManager.getAppInfo(state.selectedApps.first())

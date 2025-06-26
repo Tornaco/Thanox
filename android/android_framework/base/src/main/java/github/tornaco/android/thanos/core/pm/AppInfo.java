@@ -225,7 +225,7 @@ public class AppInfo implements Parcelable, Comparable<AppInfo> {
             return false;
         }
         AppInfo appInfo = (AppInfo) o;
-        return pkgName.equals(appInfo.pkgName) && userId == appInfo.userId && flags == appInfo.flags;
+        return pkgName.equals(appInfo.pkgName) && userId == appInfo.userId && disabled() == appInfo.disabled();
     }
 
     @Override

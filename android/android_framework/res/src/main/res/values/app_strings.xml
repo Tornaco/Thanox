@@ -1462,9 +1462,9 @@ Compatibility notice: If the default permission management function is not compa
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
 
-    <string name="remove_from_pkg_set">Remove from category</string>
+    <string name="remove_from_pkg_set">Remove from set</string>
     <string name="remove_from_sf">Remove from SF</string>
-    <string name="add_to_pkg_set">Add to category</string>
+    <string name="add_to_pkg_set">Add to set</string>
     <string name="temp_unfreeze">Un-Freeze</string>
     <string name="create_shortcut">Create shortcut</string>
 

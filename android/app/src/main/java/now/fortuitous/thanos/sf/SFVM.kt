@@ -36,6 +36,7 @@ import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_SYSTEM
 import github.tornaco.android.thanos.core.pm.PackageEnableStateChangeListener
 import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.android.thanos.core.pm.PrebuiltPkgSets.isPrebuiltId
 import github.tornaco.android.thanos.core.pm.USER_PACKAGE_SET_ID_USER_WHITELISTED
 import github.tornaco.android.thanos.core.util.PkgUtils
 import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
@@ -44,6 +45,7 @@ import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.InstallerUtils
 import github.tornaco.android.thanos.util.sortByIndex
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -66,7 +68,7 @@ data class SFState(
     val isSFLoading: Boolean = false,
     val isSFMapLoading: Boolean = false,
     val isEditingMode: Boolean = false,
-    val selectedApps: Set<Pkg> = emptySet()
+    val selectedApps: Set<Pkg> = emptySet(),
 )
 
 sealed interface StubApkEffect {
@@ -97,33 +99,14 @@ class SFVM @Inject constructor(
     val stubApkEffect = _stubApkEffect.asSharedFlow()
 
     private val searchQuery = savedStateHandle.getStateFlow(KEY_QUERY, "")
-    val selectedPkgSetId =
-        savedStateHandle.getStateFlow(KEY_SELECTED_PKG_SET_ID, PREBUILT_PACKAGE_SET_ID_3RD)
+    val selectedPkgSetId: StateFlow<String?> =
+        savedStateHandle.getStateFlow(KEY_SELECTED_PKG_SET_ID, null)
     private val appLabelSearchFilter by lazy { AppLabelSearchFilter() }
 
-    val sfPkgs by lazy {
+    val allSFPkgs by lazy {
         repo.freezePkgListFlow()
             .onStart {
-                // When the flow starts, set isLoading to true
                 _state.update { it.copy(isSFLoading = true) }
-            }
-            .combine(selectedPkgSetId) { list, pkgSetId ->
-                val targetSet =
-                    pkgSets.value.firstOrNull { it.id == pkgSetId }
-                list.filter {
-                    targetSet == null || targetSet.pkgList.contains(Pkg.fromAppInfo(it))
-                }
-            }
-            .combine(searchQuery) { list, query ->
-                if (query.isBlank()) {
-                    list
-                } else {
-                    list.filter {
-                        query.isEmpty() || (query.length > 2 && it.pkgName.contains(
-                            query
-                        )) || appLabelSearchFilter.matches(query, it.appLabel)
-                    }
-                }
             }
             .onEach {
                 _state.update { it.copy(isSFLoading = false) }
@@ -131,17 +114,18 @@ class SFVM @Inject constructor(
             .stateIn(viewModelScope, SharingStarted.Lazily, initialValue = emptyList())
     }
 
-    val sfPkgMapping: StateFlow<Map<PackageSet, List<AppInfo>>> by lazy {
-        repo.freezePkgListFlow()
+    val sfPkgMapping: StateFlow<List<AppInfo>> by lazy {
+        allSFPkgs
             .onStart {
                 // When the flow starts, set isLoading to true
                 _state.update { it.copy(isSFMapLoading = true) }
             }
-            .combine(pkgSets) { list, pkgSets ->
-                pkgSets.associateWith { targetSet ->
-                    list.filter {
-                        targetSet.pkgList.contains(Pkg.fromAppInfo(it))
-                    }
+            .combine(selectedPkgSetId) { list, selectedId ->
+                val pkgSets = pkgSets.value
+                val selectedSet = pkgSets.firstOrNull { it.id == selectedId }
+                    ?: return@combine emptyList()
+                list.filter {
+                    selectedSet.pkgList.contains(Pkg.fromAppInfo(it))
                 }
             }
             .onEach {
@@ -151,26 +135,20 @@ class SFVM @Inject constructor(
                 if (query.isBlank()) {
                     list
                 } else {
-                    list.mapValues { entry ->
-                        if (entry.key.id == selectedPkgSetId.value) {
-                            entry.value.filter { appInfo ->
-                                query.isEmpty() || (query.length > 2 && appInfo.pkgName.contains(
-                                    query
-                                )) || appLabelSearchFilter.matches(query, appInfo.appLabel)
-                            }
-                        } else {
-                            entry.value
-                        }
+                    list.filter { appInfo ->
+                        query.isEmpty() || (query.length > 2 && appInfo.pkgName.contains(
+                            query
+                        )) || appLabelSearchFilter.matches(query, appInfo.appLabel)
                     }
                 }
             }
-            .stateIn(viewModelScope, SharingStarted.Lazily, initialValue = emptyMap())
+            .stateIn(viewModelScope, SharingStarted.Lazily, initialValue = emptyList())
     }
 
     val pkgSets by lazy {
         repo.pkgSetListFlow()
-            .map {
-                it.filter {
+            .map { list ->
+                list.filter {
                     (!it.isPrebuilt && USER_PACKAGE_SET_ID_USER_WHITELISTED != it.id) || arrayOf(
                         PREBUILT_PACKAGE_SET_ID_ALL,
                         PREBUILT_PACKAGE_SET_ID_3RD,
@@ -178,8 +156,11 @@ class SFVM @Inject constructor(
                     ).contains(it.id)
                 }
             }
-            .onEach {
-                logger.d("pkgSets: $it")
+            .onEach { allSets ->
+                logger.d("pkgSets: $allSets")
+                if (selectedPkgSetId.value == null) {
+                    allSets.firstOrNull()?.let { selectPkgSet(it) }
+                }
             }
             .stateIn(viewModelScope, SharingStarted.Lazily, initialValue = emptyList())
     }
@@ -225,10 +206,14 @@ class SFVM @Inject constructor(
 
     fun removeSelectedAppsFromPkgSet() {
         viewModelScope.launch {
-            repo.removePkgFromSet(
-                selectedPkgSetId.value,
-                state.value.selectedApps.toList()
-            )
+            selectedPkgSetId.value?.let {
+                if (!it.isPrebuiltId()) {
+                    repo.removePkgFromSet(
+                        it,
+                        state.value.selectedApps.toList()
+                    )
+                }
+            }
         }
     }
 
@@ -239,6 +224,8 @@ class SFVM @Inject constructor(
                     pkgManager.setApplicationEnableState(it, true, false)
                 }
                 finishEdit()
+                _state.update { it.copy(isSFLoading = true) }
+                delay(500)
                 refresh()
             }
         }
@@ -250,7 +237,6 @@ class SFVM @Inject constructor(
         }
     }
 
-
     fun addPkgs(list: List<AppInfo>) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -258,9 +244,10 @@ class SFVM @Inject constructor(
                     Pkg.fromAppInfo(it)
                 }
                 repo.addPkgs(apps)
-
-                if (selectedPkgSetId.value != PREBUILT_PACKAGE_SET_ID_ALL) {
-                    repo.addPkgToSet(selectedPkgSetId.value, apps)
+                selectedPkgSetId.value?.let {
+                    if (!it.isPrebuiltId()) {
+                        repo.addPkgToSet(it, apps)
+                    }
                 }
             }
         }
@@ -400,4 +387,18 @@ class SFVM @Inject constructor(
             InstallerUtils.uninstallUserAppWithIntent(context, stubPkgName)
         }
     }
+
+    fun selectAll() {
+        val all = sfPkgMapping.value.map { Pkg.fromAppInfo(it) }
+        _state.update {
+            it.copy(selectedApps = all.toHashSet())
+        }
+    }
+
+    fun unselectAll() {
+        _state.update {
+            it.copy(selectedApps = emptySet())
+        }
+    }
 }
+

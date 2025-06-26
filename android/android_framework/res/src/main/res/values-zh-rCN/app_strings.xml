@@ -1446,9 +1446,9 @@
     <string name="enabled">已启用</string>
     <string name="disabled">未启用</string>
 
-    <string name="remove_from_pkg_set">分类中移除</string>
+    <string name="remove_from_pkg_set">应用集中移除</string>
     <string name="remove_from_sf">取消智冻</string>
-    <string name="add_to_pkg_set">添加到分类</string>
+    <string name="add_to_pkg_set">添加到应用集</string>
     <string name="temp_unfreeze">解冻</string>
     <string name="create_shortcut">快捷方式</string>
 

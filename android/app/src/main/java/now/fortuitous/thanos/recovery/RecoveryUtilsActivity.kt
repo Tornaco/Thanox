@@ -11,12 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import dagger.hilt.android.AndroidEntryPoint
-import github.tornaco.android.thanos.module.compose.common.settings.Preference
-import github.tornaco.android.thanos.module.compose.common.settings.PreferenceUi
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.PackageManager
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.settings.Preference
+import github.tornaco.android.thanos.module.compose.common.settings.PreferenceUi
 import github.tornaco.android.thanos.module.compose.common.theme.TypographyDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
 import github.tornaco.android.thanos.module.compose.common.widget.ProgressDialog
@@ -25,11 +25,11 @@ import github.tornaco.android.thanos.module.compose.common.widget.rememberConfir
 import github.tornaco.android.thanos.module.compose.common.widget.rememberProgressDialogState
 import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.support.ThanoxAppContext
+import github.tornaco.android.thanos.util.ToastUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import tornaco.apps.thanox.util.ToastUtils
 
 @AndroidEntryPoint
 class RecoveryUtilsActivity : ComposeThemeActivity() {

@@ -10,6 +10,7 @@ package now.fortuitous.thanos.sf
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,7 +24,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -35,10 +35,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ClearAll
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.AppBarRow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -53,6 +55,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -73,6 +76,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.anggrayudi.storage.SimpleStorageHelper
+import com.elvishew.xlog.XLog
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.app.ThanosManager
@@ -106,6 +110,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import now.fortuitous.thanos.apps.PackageSetListActivity
 import now.fortuitous.thanos.main.LocalSimpleStorageHelper
+import now.fortuitous.thanos.main.REQUEST_CODE_EXPORT_SF_APPS
+import now.fortuitous.thanos.main.REQUEST_CODE_IMPORT_SF_APPS
 import now.fortuitous.thanos.power.ShortcutHelper
 import now.fortuitous.thanos.power.SmartFreezeSettingsActivity
 import now.fortuitous.thanos.pref.AppPreference
@@ -181,6 +187,24 @@ fun SFContent(back: () -> Unit) {
         sfVM.bindLifecycle(lifecycle)
     }
 
+    val storageHelper = LocalSimpleStorageHelper.current
+    SideEffect {
+        storageHelper.onFileCreated = { code, file ->
+            if (code == REQUEST_CODE_EXPORT_SF_APPS) {
+                sfVM.export(file)
+            }
+        }
+
+        storageHelper.onFileSelected = { code, files ->
+            XLog.d("storageHelper onFileSelected- $files")
+            val file = files.firstOrNull()
+            file?.let {
+                sfVM.import(file)
+            } ?: Toast.makeText(context, "Canceled.", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
     val allSFPkgs by sfVM.allSFPkgs.collectAsState()
     val sfPkgMapping by sfVM.sfPkgMapping.collectAsState()
     val state by sfVM.state.collectAsState()
@@ -191,7 +215,7 @@ fun SFContent(back: () -> Unit) {
             if (result.resultCode == Activity.RESULT_OK) {
                 val list =
                     result.data?.getParcelableArrayListExtra<AppInfo>("apps")
-                list?.let { sfVM.addPkgs(it) }
+                list?.let { sfVM.addApps(it) }
             }
         }
     )
@@ -278,25 +302,31 @@ fun SFContent(back: () -> Unit) {
         },
         actions = {
             AnimatedVisibility(visible = !state.isEditingMode) {
-                Row {
-                    IconButton(onClick = {
-                        SmartFreezeSettingsActivity.start(context)
-                    }) {
+                val maxItemCount = 3
+                val settingsLabel =
+                    stringResource(github.tornaco.android.thanos.res.R.string.nav_title_settings)
+                val importLabel =
+                    stringResource(github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_import_package_list)
+
+                AppBarRow(maxItemCount = maxItemCount, overflowIndicator = {
+                    IconButton(onClick = { it.show() }) {
                         Icon(
-                            painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_line),
-                            contentDescription = "Settings"
+                            imageVector = Icons.Filled.MoreVert,
+                            contentDescription = "More"
                         )
                     }
-                    IconButton(onClick = {
+                }) {
+                    clickableItem(onClick = {
                         searchBarState.showSearchBar()
                         sfVM.finishEdit()
-                    }) {
+                    }, icon = {
                         Icon(
                             imageVector = Icons.Filled.Search,
                             contentDescription = "Search"
                         )
-                    }
-                    IconButton(onClick = {
+                    }, label = "Search")
+
+                    clickableItem(onClick = {
                         if (allSFPkgs.size > 3 && !subState.isSubscribed) {
                             LVLStateHolder.fab()
                         } else {
@@ -304,12 +334,47 @@ fun SFContent(back: () -> Unit) {
                                 ArrayList(allSFPkgs.map { Pkg.fromAppInfo(it) })
                             pickPkgLauncher.launch(AppPickerActivity.getIntent(context, exclude))
                         }
-                    }) {
+                    }, icon = {
                         Icon(
                             painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_add_fill),
                             contentDescription = "Add"
                         )
-                    }
+                    }, label = "Add")
+
+                    clickableItem(
+                        onClick = {
+                            if (subState.isSubscribed) {
+                                storageHelper.openFilePicker(
+                                    requestCode = REQUEST_CODE_IMPORT_SF_APPS,
+                                    allowMultiple = false,
+                                    initialPath = null,
+                                    "application/json"
+                                )
+                            } else {
+                                LVLStateHolder.fab()
+                            }
+                        },
+                        icon = {
+                            Icon(
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_file_download_fill),
+                                contentDescription = "Import"
+                            )
+                        },
+                        label = importLabel
+                    )
+
+                    clickableItem(
+                        onClick = {
+                            SmartFreezeSettingsActivity.start(context)
+                        },
+                        icon = {
+                            Icon(
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_line),
+                                contentDescription = "Settings"
+                            )
+                        },
+                        label = settingsLabel
+                    )
                 }
             }
         }) {
@@ -476,6 +541,21 @@ private fun BottomToolbar(
                     sfVM.tempUnFreezeSelectedApps()
                 }) {
                     Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.temp_unfreeze))
+                }
+
+                val storageHelper = LocalSimpleStorageHelper.current
+                Button(onClick = {
+                    if (subState.isSubscribed) {
+                        storageHelper.createFile(
+                            mimeType = "application/json",
+                            fileName = autoGenExportJsonFileName() + ".json",
+                            requestCode = REQUEST_CODE_EXPORT_SF_APPS
+                        )
+                    } else {
+                        LVLStateHolder.fab()
+                    }
+                }) {
+                    Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_smart_app_freeze_export_package_list))
                 }
             }
         } else {

@@ -128,7 +128,7 @@ dependencies {
     implementation(libs.accompanist.placeholder.material)
 
     implementation(libs.core.splashscreen)
-
+    implementation(libs.androidx.adaptive)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.core.ktx)

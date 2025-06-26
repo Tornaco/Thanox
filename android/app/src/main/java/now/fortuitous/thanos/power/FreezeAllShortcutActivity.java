@@ -31,7 +31,7 @@ import java.util.List;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.pm.PackageEnableStateChangeListener;
 import github.tornaco.android.thanos.core.pm.Pkg;
-import tornaco.apps.thanox.util.ToastUtils;
+import github.tornaco.android.thanos.util.ToastUtils;
 
 public class FreezeAllShortcutActivity extends Activity {
 

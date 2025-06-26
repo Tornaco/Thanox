@@ -20,9 +20,13 @@ package now.fortuitous.thanos.sf
 import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.anggrayudi.storage.file.openInputStream
+import com.anggrayudi.storage.file.openOutputStream
 import com.elvishew.xlog.XLog
+import com.google.gson.reflect.TypeToken
 import com.topjohnwu.superuser.Shell
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -38,11 +42,14 @@ import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.pm.PrebuiltPkgSets.isPrebuiltId
 import github.tornaco.android.thanos.core.pm.USER_PACKAGE_SET_ID_USER_WHITELISTED
+import github.tornaco.android.thanos.core.util.DateUtils
+import github.tornaco.android.thanos.core.util.GsonUtils
 import github.tornaco.android.thanos.core.util.PkgUtils
 import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.module.compose.common.widget.SortItem
 import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.InstallerUtils
+import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.android.thanos.util.sortByIndex
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -61,6 +68,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import now.fortuitous.thanos.power.ShortcutHelper
+import util.JsonFormatter
 import java.io.File
 import javax.inject.Inject
 
@@ -115,34 +123,33 @@ class SFVM @Inject constructor(
     }
 
     val sfPkgMapping: StateFlow<List<AppInfo>> by lazy {
-        allSFPkgs
-            .onStart {
-                // When the flow starts, set isLoading to true
-                _state.update { it.copy(isSFMapLoading = true) }
+        combine(
+            allSFPkgs,
+            pkgSets,
+            selectedPkgSetId,
+            searchQuery
+        ) { list, allSets, selectedId, query ->
+            val selectedSet = allSets.firstOrNull { it.id == selectedId }
+                ?: return@combine emptyList()
+            val listOfSet = list.filter {
+                selectedSet.pkgList.contains(Pkg.fromAppInfo(it))
             }
-            .combine(selectedPkgSetId) { list, selectedId ->
-                val pkgSets = pkgSets.value
-                val selectedSet = pkgSets.firstOrNull { it.id == selectedId }
-                    ?: return@combine emptyList()
-                list.filter {
-                    selectedSet.pkgList.contains(Pkg.fromAppInfo(it))
+
+            if (query.isBlank()) {
+                listOfSet
+            } else {
+                listOfSet.filter { appInfo ->
+                    query.isEmpty() || (query.length > 2 && appInfo.pkgName.contains(
+                        query
+                    )) || appLabelSearchFilter.matches(query, appInfo.appLabel)
                 }
             }
-            .onEach {
-                _state.update { it.copy(isSFMapLoading = false) }
-            }
-            .combine(searchQuery) { list, query ->
-                if (query.isBlank()) {
-                    list
-                } else {
-                    list.filter { appInfo ->
-                        query.isEmpty() || (query.length > 2 && appInfo.pkgName.contains(
-                            query
-                        )) || appLabelSearchFilter.matches(query, appInfo.appLabel)
-                    }
-                }
-            }
-            .stateIn(viewModelScope, SharingStarted.Lazily, initialValue = emptyList())
+        }.onStart {
+            // When the flow starts, set isLoading to true
+            _state.update { it.copy(isSFMapLoading = true) }
+        }.onEach {
+            _state.update { it.copy(isSFMapLoading = false) }
+        }.stateIn(viewModelScope, SharingStarted.Lazily, initialValue = emptyList())
     }
 
     val pkgSets by lazy {
@@ -201,6 +208,8 @@ class SFVM @Inject constructor(
                 repo.removePkg(pkg)
                 toggleSelectApp(pkg)
             }
+
+            delayRefresh()
         }
     }
 
@@ -214,6 +223,7 @@ class SFVM @Inject constructor(
                     )
                 }
             }
+            delayRefresh()
         }
     }
 
@@ -224,9 +234,7 @@ class SFVM @Inject constructor(
                     pkgManager.setApplicationEnableState(it, true, false)
                 }
                 finishEdit()
-                _state.update { it.copy(isSFLoading = true) }
-                delay(500)
-                refresh()
+                delayRefresh()
             }
         }
     }
@@ -234,15 +242,19 @@ class SFVM @Inject constructor(
     fun addSelectedAppsToPkgSet(id: String) {
         viewModelScope.launch {
             repo.addPkgToSet(id, state.value.selectedApps.toList())
+            delayRefresh()
         }
     }
 
-    fun addPkgs(list: List<AppInfo>) {
+    fun addApps(list: List<AppInfo>) {
+        addPkgs(list.map {
+            Pkg.fromAppInfo(it)
+        })
+    }
+
+    private fun addPkgs(apps: List<Pkg>) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val apps = list.map {
-                    Pkg.fromAppInfo(it)
-                }
                 repo.addPkgs(apps)
                 selectedPkgSetId.value?.let {
                     if (!it.isPrebuiltId()) {
@@ -250,12 +262,14 @@ class SFVM @Inject constructor(
                     }
                 }
             }
+            delayRefresh()
         }
     }
 
     fun addPkgSet(label: String) {
         viewModelScope.launch {
             repo.addPkgSet(label)
+            delayRefresh()
         }
     }
 
@@ -271,6 +285,7 @@ class SFVM @Inject constructor(
             newSet.forEachIndexed { index, pkgSet ->
                 repo.sortPkgSet(pkgSet.id, index)
             }
+            delayRefresh()
         }
     }
 
@@ -325,13 +340,23 @@ class SFVM @Inject constructor(
                             super.onPackageEnableStateChanged(pkgs)
                             repo.update()
                         }
-                    });
+                    })
+
+                delayRefresh()
             }
         }
     }
 
     fun refresh() {
         repo.update()
+    }
+
+    private fun delayRefresh() {
+        viewModelScope.launch {
+            _state.update { it.copy(isSFLoading = true) }
+            delay(500)
+            refresh()
+        }
     }
 
     fun createShortcutStubApk(
@@ -400,5 +425,56 @@ class SFVM @Inject constructor(
             it.copy(selectedApps = emptySet())
         }
     }
+
+    private fun getExportPackageListContent(): String {
+        return JsonFormatter.toPrettyJson(state.value.selectedApps.map { it.pkgName })
+    }
+
+    fun export(pickedFile: DocumentFile) {
+        val pickedFileOS = pickedFile.openOutputStream(context)
+        if (pickedFileOS == null) {
+            Toast.makeText(context, "Unable to open output stream.", Toast.LENGTH_LONG).show()
+            return
+        }
+        pickedFileOS.use {
+            it.write(getExportPackageListContent().toByteArray())
+        }
+        ToastUtils.ok(context)
+    }
+
+    fun import(file: DocumentFile) {
+        val pickedFileIS = file.openInputStream(context)
+        if (pickedFileIS == null) {
+            Toast.makeText(context, "Unable to open input stream.", Toast.LENGTH_LONG).show()
+            return
+        }
+        val thanos = ThanosManager.from(context).pkgManager
+        pickedFileIS.use {
+            runCatching {
+                val json = it.reader(Charsets.UTF_8).readText()
+                val pkgs = parseJsonToPackages(json)
+                addPkgs(pkgs.mapNotNull {
+                    val pkg = Pkg.systemUserPkg(it)
+                    val appInfo = thanos.getAppInfo(pkg)
+                    if (appInfo == null) null else pkg
+                })
+            }.onFailure {
+                Toast.makeText(context, "Unable to read file. ${it.toString()}", Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
+    }
+
+    private fun parseJsonToPackages(content: String): Set<String> {
+        return GsonUtils.GSON.fromJson<Set<String>>(
+            content,
+            object : TypeToken<Set<String>>() {
+            }.type
+        )
+    }
 }
+
+fun autoGenExportJsonFileName() =
+    "SmartFreeze-Apps-${DateUtils.formatForFileName(System.currentTimeMillis())}"
+
 

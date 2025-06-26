@@ -57,17 +57,14 @@ class SFRepoImpl @Inject constructor(@ApplicationContext val context: Context) :
 
     override suspend fun addPkg(pkg: Pkg) {
         pm.setPkgSmartFreezeEnabled(pkg, true)
-        update()
     }
 
     override suspend fun addPkgs(pkg: List<Pkg>) {
         pkg.forEach { addPkg(it) }
-        update()
     }
 
     override suspend fun removePkg(pkg: Pkg) {
         pm.setPkgSmartFreezeEnabled(pkg, false)
-        update()
     }
 
     override fun isScreenOffEnabled(): Flow<Boolean> {
@@ -95,19 +92,16 @@ class SFRepoImpl @Inject constructor(@ApplicationContext val context: Context) :
 
     override suspend fun addPkgSet(label: String) {
         pm.createPackageSet(label)
-        update()
     }
 
     override suspend fun removePkgSet(id: String) {
         pm.removePackageSet(id)
-        update()
     }
 
     override suspend fun removePkgFromSet(id: String, pkgs: List<Pkg>) {
         pkgs.forEach {
             pm.removeFromPackageSet(it, id)
         }
-        update()
     }
 
     override suspend fun renamePkgSet(id: String, newLabel: String) {
@@ -116,13 +110,11 @@ class SFRepoImpl @Inject constructor(@ApplicationContext val context: Context) :
 
     override suspend fun sortPkgSet(id: String, sort: Int) {
         AppPreference.setPkgSetSort(context, id, sort)
-        update()
     }
 
     override suspend fun addPkgToSet(id: String, pkgs: List<Pkg>) {
         pkgs.forEach {
             pm.addToPackageSet(it, id)
         }
-        update()
     }
 }

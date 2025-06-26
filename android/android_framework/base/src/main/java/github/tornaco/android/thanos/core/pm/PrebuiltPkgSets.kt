@@ -21,4 +21,17 @@ object PrebuiltPkgSets {
             else -> AppInfo.FLAGS_NONE
         }
     }
+
+    fun String.isPrebuiltId(): Boolean {
+        return when (this) {
+            PREBUILT_PACKAGE_SET_ID_SYSTEM,
+            PREBUILT_PACKAGE_SET_ID_3RD,
+            PREBUILT_PACKAGE_SET_ID_SHORTCUT,
+            PREBUILT_PACKAGE_SET_ID_WHITELISTED,
+            PREBUILT_PACKAGE_SET_ID_DISABLED,
+            PREBUILT_PACKAGE_SET_ID_ALL -> true
+
+            else -> false
+        }
+    }
 }

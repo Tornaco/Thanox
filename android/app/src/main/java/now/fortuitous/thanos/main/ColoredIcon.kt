@@ -18,7 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import tornaco.apps.thanox.base.ui.thenIf
+import github.tornaco.android.thanos.module.compose.common.widget.thenIf
 
 @Composable
 fun ColoredIcon(

@@ -36,9 +36,9 @@ import github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.remind.RemindOpsActivity
 import github.tornaco.thanos.android.ops2.byop.Ops2Activity
 import now.fortuitous.thanos.apps.AioAppListActivity
-import now.fortuitous.thanos.power.SmartFreezeActivity
 import now.fortuitous.thanos.power.wakelock.WakeLockBlockerActivity
 import now.fortuitous.thanos.process.v2.ProcessManageActivityV2
+import now.fortuitous.thanos.sf.SFActivity
 
 class PrebuiltFeatureLauncher(
     private val context: Activity,
@@ -120,7 +120,7 @@ class PrebuiltFeatureLauncher(
                 }
 
                 PrebuiltFeatureIds.ID_SMART_FREEZE -> {
-                    SmartFreezeActivity.start(context)
+                    SFActivity.start(context)
                 }
 
                 PrebuiltFeatureIds.ID_OPS_BY_OPS -> {
@@ -188,7 +188,7 @@ class PrebuiltFeatureLauncher(
                 }
             }
             true
-        } == true
+        }
     }
 }
 

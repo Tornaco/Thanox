@@ -87,6 +87,8 @@ dependencies {
     implementation(project(":third_party:search"))
     implementation(project(":third_party:dateformatter"))
     implementation(project(":third_party:remix"))
+    implementation(project(":third_party:reorderable"))
+
 
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.junit)

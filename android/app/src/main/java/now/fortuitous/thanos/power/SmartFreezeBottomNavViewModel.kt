@@ -49,6 +49,8 @@ class SmartFreezeBottomNavViewModel : ViewModel() {
     }
 
     fun applySort(context: Context, items: List<TabItem>) {
-        now.fortuitous.thanos.pref.AppPreference.setPkgSetSort(context, items.map { it.pkgSet })
+        now.fortuitous.thanos.pref.AppPreference.setPkgSetSort(
+            context,
+            items.map { it.pkgSet.label })
     }
 }

@@ -118,16 +118,22 @@ public class AppPreference {
                 .getInt(PREF_KEY_PKG_SET_SORT_PREFIX + packageSet.getId(), Integer.MAX_VALUE);
     }
 
-    public static void setPkgSetSort(Context context, List<PackageSet> packageSets) {
-        for (int i = 0; i < packageSets.size(); i++) {
-            PackageSet p = packageSets.get(i);
+    public static void setPkgSetSort(Context context, List<String> packageSetIds) {
+        for (int i = 0; i < packageSetIds.size(); i++) {
+            String p = packageSetIds.get(i);
             PreferenceManager.getDefaultSharedPreferences(context)
                     .edit()
-                    .putInt(PREF_KEY_PKG_SET_SORT_PREFIX + p.getId(), i * 100)
+                    .putInt(PREF_KEY_PKG_SET_SORT_PREFIX + p, i * 100)
                     .apply();
         }
     }
 
+    public static void setPkgSetSort(Context context, String id, int sort) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putInt(PREF_KEY_PKG_SET_SORT_PREFIX + id, sort * 100)
+                .apply();
+    }
 
     public static boolean isAppFeatureEnabled(Context context, int featureId) {
         return PreferenceManager.getDefaultSharedPreferences(context)

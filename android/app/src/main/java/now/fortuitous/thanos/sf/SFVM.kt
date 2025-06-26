@@ -32,6 +32,7 @@ import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_SYSTEM
 import github.tornaco.android.thanos.core.pm.PackageEnableStateChangeListener
 import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.core.pm.Pkg
+import github.tornaco.android.thanos.core.pm.USER_PACKAGE_SET_ID_USER_WHITELISTED
 import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.module.compose.common.widget.SortItem
 import github.tornaco.android.thanos.support.withThanos
@@ -49,7 +50,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import now.fortuitous.thanos.sf.data.SFRepoImpl
 import javax.inject.Inject
 
 data class SFState(
@@ -154,7 +154,7 @@ class SFVM @Inject constructor(
         repo.pkgSetListFlow()
             .map {
                 it.filter {
-                    !it.isPrebuilt || arrayOf(
+                    (!it.isPrebuilt && USER_PACKAGE_SET_ID_USER_WHITELISTED != it.id) || arrayOf(
                         PREBUILT_PACKAGE_SET_ID_ALL,
                         PREBUILT_PACKAGE_SET_ID_3RD,
                         PREBUILT_PACKAGE_SET_ID_SYSTEM
@@ -219,8 +219,10 @@ class SFVM @Inject constructor(
         viewModelScope.launch {
             context.withThanos {
                 state.value.selectedApps.forEach {
-                    pkgManager.setApplicationEnableState(it, true, false);
+                    pkgManager.setApplicationEnableState(it, true, false)
                 }
+                finishEdit()
+                refresh()
             }
         }
     }

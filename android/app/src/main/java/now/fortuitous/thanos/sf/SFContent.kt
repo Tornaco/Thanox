@@ -13,6 +13,7 @@ import android.content.Intent
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -68,13 +69,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.R
 import github.tornaco.android.thanos.core.pm.AppInfo
+import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.pm.PrebuiltPkgSets.isPrebuiltId
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.CommonSortDialog
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownPopUpMenu
-import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.MenuItem
 import github.tornaco.android.thanos.module.compose.common.widget.SortItem
@@ -150,6 +151,12 @@ fun SFContent(back: () -> Unit) {
         searchBarState.closeSearchBar()
     }
 
+    val pkgSets by sfVM.pkgSets.collectAsState()
+    val selectedPkgSet by sfVM.selectedPkgSetId.collectAsState()
+
+    val apps =
+        sfPkgMapping[pkgSets.firstOrNull { selectedPkgSet == it.id }] ?: emptyList()
+
     ThanoxMediumAppBarScaffold(
         title = {
             AnimatedVisibility(state.isEditingMode) {
@@ -178,7 +185,12 @@ fun SFContent(back: () -> Unit) {
             }
         },
         bottomBar = {
-
+            BottomToolbar(
+                state = state,
+                pkgSets = pkgSets,
+                sfVM = sfVM,
+                selectedPkgSet = selectedPkgSet,
+            )
         },
         actions = {
             AnimatedVisibility(visible = !state.isEditingMode) {
@@ -225,198 +237,52 @@ fun SFContent(back: () -> Unit) {
             BackHandler(state.isEditingMode) {
                 sfVM.finishEdit()
             }
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceBetween
+
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(80.dp),
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentPadding = PaddingValues(bottom = 64.dp)
             ) {
-                val pkgSets by sfVM.pkgSets.collectAsState()
-                val selectedPkgSet by sfVM.selectedPkgSetId.collectAsState()
-                val inputDialogState = rememberTextInputState(
-                    title = stringResource(id = github.tornaco.android.thanos.res.R.string.pkg_set),
-                    message = null
-                ) {
-                    sfVM.addPkgSet(it)
-                }
-                TextInputDialog(state = inputDialogState)
-
-                val apps =
-                    sfPkgMapping[pkgSets.firstOrNull { selectedPkgSet == it.id }] ?: emptyList()
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(80.dp),
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .weight(1f, fill = false),
-                    contentPadding = PaddingValues(bottom = 32.dp)
-                ) {
-                    items(apps, key = {
-                        it.pkgName + it.versionName + it.state + it.userId
-                    }) {
-                        val isSelected = state.selectedApps.contains(Pkg.fromAppInfo(it))
-                        Column(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(20.dp))
-                                .thenIf(
-                                    Modifier.background(MaterialTheme.colorScheme.secondaryContainer),
-                                    isSelected
-                                )
-                                .combinedClickable(
-                                    onClick = {
-                                        if (state.isEditingMode) {
-                                            sfVM.toggleSelectApp(it)
-                                        } else {
-                                            sfVM.launchApp(
-                                                Pkg.newPkg(it.pkgName, it.userId)
-                                            )
-                                        }
-                                    }, onLongClick = {
-                                        if (state.isEditingMode) {
-                                            sfVM.finishEdit()
-                                        } else {
-                                            sfVM.startEdit()
-                                            sfVM.toggleSelectApp(it)
-                                        }
-                                    })
-                                .padding(6.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
-                        ) {
-                            AppIcon(modifier = Modifier.size(50.dp), appInfo = it)
-                            Text(
-                                text = it.appLabel,
-                                fontSize = 12.5.sp,
-                                textAlign = TextAlign.Center,
-                                maxLines = 2
-                            )
-                        }
-
-
-                    }
-                }
-
-                AnimatedVisibility(visible = !state.isEditingMode) {
-                    val updatedSets by rememberUpdatedState(pkgSets)
-                    val sortDialogState = rememberCommonSortState {
-                        sfVM.applySort(it)
-                    }
-                    CommonSortDialog(
-                        state = sortDialogState,
-                        items = updatedSets.mapIndexed { i, x ->
-                            SortItem(index = i, title = x.label)
-                        })
-
-                    FlowRow(
+                items(apps, key = {
+                    it.pkgName + it.versionName + it.state + it.userId
+                }) {
+                    val isSelected = state.selectedApps.contains(Pkg.fromAppInfo(it))
+                    Column(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.Start
-                    ) {
-                        updatedSets.forEachIndexed { index, pkgSet ->
-                            val updatedSet by rememberUpdatedState(pkgSet)
-                            OutlinedToggleButton(
-                                checked = selectedPkgSet == updatedSet.id,
-                                onCheckedChange = {
-                                    if (it) {
-                                        sfVM.selectPkgSet(pkgSet)
+                            .clip(RoundedCornerShape(20.dp))
+                            .thenIf(
+                                Modifier.background(MaterialTheme.colorScheme.secondaryContainer),
+                                isSelected
+                            )
+                            .combinedClickable(
+                                onClick = {
+                                    if (state.isEditingMode) {
+                                        sfVM.toggleSelectApp(it)
+                                    } else {
+                                        sfVM.launchApp(
+                                            Pkg.newPkg(it.pkgName, it.userId)
+                                        )
                                     }
-                                },
-                                modifier = Modifier
-                                    .padding(start = 2.dp),
-                                shapes =
-                                    when (index) {
-                                        0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
-                                        updatedSets.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
-                                        else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
+                                }, onLongClick = {
+                                    if (state.isEditingMode) {
+                                        sfVM.finishEdit()
+                                    } else {
+                                        sfVM.startEdit()
+                                        sfVM.toggleSelectApp(it)
                                     }
-                            ) {
-                                Text(updatedSet.label)
-                            }
-                        }
-
-                        LargeSpacer()
-                        // Actions
-                        IconButton(onClick = {
-                            PackageSetListActivity.start(context)
-                        }) {
-                            Icon(
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_apps_fill),
-                                contentDescription = "Set"
-                            )
-                        }
-                        IconButton(onClick = {
-                            inputDialogState.show()
-                        }) {
-                            Icon(
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_add_fill),
-                                contentDescription = "Add"
-                            )
-                        }
-                        IconButton(onClick = {
-                            sortDialogState.show()
-                        }) {
-                            Icon(
-                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_sort_asc),
-                                contentDescription = "Sort"
-                            )
-                        }
-                    }
-                }
-                AnimatedVisibility(visible = state.isEditingMode) {
-                    FlowRow(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp, vertical = 16.dp),
+                                })
+                            .padding(6.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        if (state.selectedApps.size == 1) {
-                            Button(onClick = {
-                                // HAO todo
-                            }) {
-                                Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.create_shortcut))
-                            }
-                            TinySpacer()
-                        }
-
-                        Button(onClick = {
-                            sfVM.removeSelectedAppsFromSF()
-                        }) {
-                            Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.remove_from_sf))
-                        }
-                        if (!selectedPkgSet.isPrebuiltId()) {
-                            TinySpacer()
-                            Button(onClick = {
-                                sfVM.removeSelectedAppsFromPkgSet()
-                            }) {
-                                Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.remove_from_pkg_set))
-                            }
-                        }
-                        TinySpacer()
-                        Box(modifier = Modifier) {
-                            val pkgSetMenu = remember {
-                                mutableStateOf(false)
-                            }
-                            DropdownPopUpMenu(
-                                pkgSetMenu,
-                                items = pkgSets.filterNot { it.isPrebuilt }.map {
-                                    MenuItem(
-                                        it.id,
-                                        it.label,
-                                        github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_folder_line
-                                    )
-                                }
-                            ) {
-                                sfVM.addSelectedAppsToPkgSet(it.id)
-                            }
-                            Button(onClick = {
-                                pkgSetMenu.value = true
-                            }) {
-                                Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.add_to_pkg_set))
-                            }
-                        }
-                        TinySpacer()
-                        Button(onClick = {
-                            sfVM.tempUnFreezeSelectedApps()
-                        }) {
-                            Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.temp_unfreeze))
-                        }
+                        AppIcon(modifier = Modifier.size(50.dp), appInfo = it)
+                        Text(
+                            text = it.appLabel,
+                            fontSize = 12.5.sp,
+                            textAlign = TextAlign.Center,
+                            maxLines = 2
+                        )
                     }
                 }
             }
@@ -427,6 +293,167 @@ fun SFContent(back: () -> Unit) {
                 modifier = Modifier.align(Alignment.TopCenter),
                 contentColor = MaterialTheme.colorScheme.secondary
             )
+        }
+    }
+}
+
+@Composable
+private fun BottomToolbar(
+    state: SFState,
+    pkgSets: List<PackageSet>,
+    sfVM: SFVM,
+    selectedPkgSet: String,
+) {
+    val context = LocalContext.current
+    val inputDialogState = rememberTextInputState(
+        title = stringResource(id = github.tornaco.android.thanos.res.R.string.title_package_sets),
+        message = null
+    ) {
+        sfVM.addPkgSet(it)
+    }
+    TextInputDialog(state = inputDialogState)
+
+    AnimatedContent(state.isEditingMode) { isEdit ->
+        if (isEdit) {
+            FlowRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 16.dp),
+            ) {
+                if (state.selectedApps.size == 1) {
+                    Button(onClick = {
+                        // HAO todo
+                    }) {
+                        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.create_shortcut))
+                    }
+                    TinySpacer()
+                }
+
+                Button(onClick = {
+                    sfVM.removeSelectedAppsFromSF()
+                }) {
+                    Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.remove_from_sf))
+                }
+                if (!selectedPkgSet.isPrebuiltId()) {
+                    TinySpacer()
+                    Button(onClick = {
+                        sfVM.removeSelectedAppsFromPkgSet()
+                    }) {
+                        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.remove_from_pkg_set))
+                    }
+                }
+                TinySpacer()
+                Box(modifier = Modifier) {
+                    val pkgSetMenu = remember {
+                        mutableStateOf(false)
+                    }
+                    DropdownPopUpMenu(
+                        pkgSetMenu,
+                        items = pkgSets.filterNot { it.isPrebuilt }.map {
+                            MenuItem(
+                                it.id,
+                                it.label,
+                                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_folder_line
+                            )
+                        }
+                    ) {
+                        sfVM.addSelectedAppsToPkgSet(it.id)
+                    }
+                    Button(onClick = {
+                        pkgSetMenu.value = true
+                    }) {
+                        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.add_to_pkg_set))
+                    }
+                }
+                TinySpacer()
+                Button(onClick = {
+                    sfVM.tempUnFreezeSelectedApps()
+                }) {
+                    Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.temp_unfreeze))
+                }
+            }
+        } else {
+            val updatedSets by rememberUpdatedState(pkgSets)
+            val sortDialogState = rememberCommonSortState {
+                sfVM.applySort(it)
+            }
+            CommonSortDialog(
+                state = sortDialogState,
+                items = updatedSets.mapIndexed { i, x ->
+                    SortItem(index = i, title = x.label)
+                })
+
+            FlowRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                updatedSets.forEachIndexed { index, pkgSet ->
+                    val updatedSet by rememberUpdatedState(pkgSet)
+                    OutlinedToggleButton(
+                        checked = selectedPkgSet == updatedSet.id,
+                        onCheckedChange = {
+                            if (it) {
+                                sfVM.selectPkgSet(pkgSet)
+                            }
+                        },
+                        modifier = Modifier
+                            .padding(start = 2.dp),
+                        shapes =
+                            when (index) {
+                                0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
+                                updatedSets.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
+                                else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
+                            }
+                    ) {
+                        Text(updatedSet.label)
+                    }
+                }
+
+
+                Box(modifier = Modifier) {
+                    val bottomToolMenu = remember {
+                        mutableStateOf(false)
+                    }
+                    DropdownPopUpMenu(
+                        bottomToolMenu,
+                        items = listOf(
+                            MenuItem(
+                                "pkgSet",
+                                stringResource(github.tornaco.android.thanos.res.R.string.title_package_sets),
+                                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_folder_line
+                            ),
+                            MenuItem(
+                                "addSet",
+                                stringResource(github.tornaco.android.thanos.res.R.string.title_package_add_set),
+                                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_add_fill
+                            ),
+                            MenuItem(
+                                "sort",
+                                stringResource(github.tornaco.android.thanos.res.R.string.sort),
+                                github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_sort_asc
+                            )
+                        )
+                    ) {
+                        if (it.id == "pkgSet") {
+                            PackageSetListActivity.start(context)
+                        } else if (it.id == "addSet") {
+                            inputDialogState.show()
+                        } else if (it.id == "sort") {
+                            sortDialogState.show()
+                        }
+                    }
+                    IconButton(onClick = {
+                        bottomToolMenu.value = true
+                    }) {
+                        Icon(
+                            painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_more_2_fill),
+                            contentDescription = "Sort"
+                        )
+                    }
+                }
+            }
         }
     }
 }

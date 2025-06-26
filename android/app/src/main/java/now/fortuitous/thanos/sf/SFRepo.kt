@@ -1,4 +1,4 @@
-package now.fortuitous.thanos.sf.data
+package now.fortuitous.thanos.sf
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -87,7 +87,9 @@ class SFRepoImpl @Inject constructor(@ApplicationContext val context: Context) :
 
     override fun pkgSetListFlow(): Flow<List<PackageSet>> {
         return updateFlags.map {
-            pm.getAllPackageSets(true)
+            pm.getAllPackageSets(true).sortedBy {
+                AppPreference.getPkgSetSort(context, it)
+            }
         }
     }
 

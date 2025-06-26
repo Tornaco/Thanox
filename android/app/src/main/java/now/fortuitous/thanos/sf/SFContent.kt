@@ -47,13 +47,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedToggleButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -66,8 +70,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.anggrayudi.storage.SimpleStorageHelper
 import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.R
+import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.core.pm.Pkg
@@ -77,24 +83,37 @@ import github.tornaco.android.thanos.module.compose.common.widget.AppIcon
 import github.tornaco.android.thanos.module.compose.common.widget.CommonSortDialog
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownPopUpMenu
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
+import github.tornaco.android.thanos.module.compose.common.widget.MenuDialog
+import github.tornaco.android.thanos.module.compose.common.widget.MenuDialogItem
 import github.tornaco.android.thanos.module.compose.common.widget.MenuItem
 import github.tornaco.android.thanos.module.compose.common.widget.SortItem
 import github.tornaco.android.thanos.module.compose.common.widget.TextInputDialog
+import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.rememberCommonSortState
+import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDialogState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.module.compose.common.widget.thenIf
 import github.tornaco.android.thanos.picker.AppPickerActivity
+import github.tornaco.android.thanos.support.subscribe.LVLStateEffects
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import now.fortuitous.thanos.apps.PackageSetListActivity
+import now.fortuitous.thanos.main.LocalSimpleStorageHelper
+import now.fortuitous.thanos.power.ShortcutHelper
 import now.fortuitous.thanos.power.SmartFreezeSettingsActivity
+import now.fortuitous.thanos.pref.AppPreference
 import org.orbitmvi.orbit.compose.collectAsState
+import java.io.File
 
 @AndroidEntryPoint
 class SFActivity : ComposeThemeActivity() {
+    private val storageHelper = SimpleStorageHelper(this)
+
     companion object {
         @JvmStatic
         fun start(context: Context) {
@@ -105,16 +124,54 @@ class SFActivity : ComposeThemeActivity() {
 
     @Composable
     override fun Content() {
-        SFContent { finish() }
+        CompositionLocalProvider(LocalSimpleStorageHelper provides storageHelper) {
+            SFContent { finish() }
+        }
+        FeatureAlert()
+        LVLStateEffects()
     }
+}
 
+@Composable
+private fun SFActivity.FeatureAlert() {
+    var showAlert by remember {
+        mutableStateOf(
+            !AppPreference.isFeatureNoticeAccepted(
+                this,
+                "sf2"
+            )
+        )
+    }
+    var countdown by remember { mutableIntStateOf(10) }
+    if (showAlert) {
+        ThanoxAlertDialog(onDismissRequest = {}, confirmButton = {
+            TextButton(onClick = {
+                AppPreference.setFeatureNoticeAccepted(this, "sf2", true)
+                showAlert = false
+            }, enabled = countdown <= 0) {
+                Text("${stringResource(android.R.string.ok)} ${countdown}s")
+            }
+        }, dismissButton = {
+            TextButton(onClick = { finish() }) {
+                Text(stringResource(android.R.string.cancel))
+            }
+        }, title = {
+            Text(stringResource(github.tornaco.android.thanos.res.R.string.feature_title_smart_app_freeze))
+        }, text = {
+            Text(stringResource(github.tornaco.android.thanos.res.R.string.feature_desc_smart_app_freeze))
+        })
+        LaunchedEffect(Unit) {
+            while (countdown > 0) {
+                delay(1000)
+                countdown--
+            }
+        }
+    }
 }
 
 @Composable
 fun SFContent(back: () -> Unit) {
     val subState by LVLStateHolder.collectAsState()
-    if (subState.isInited) require(subState.isSubscribed)
-
     val context = LocalContext.current
     val sfVM = hiltViewModel<SFVM>()
     val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -145,6 +202,31 @@ fun SFContent(back: () -> Unit) {
             .collect {
                 sfVM.search(it)
             }
+    }
+
+    val installTitle =
+        stringResource(github.tornaco.android.thanos.res.R.string.menu_title_create_shortcut_apk)
+    val installStubApkDialog = rememberMenuDialogState<File>(
+        title = { installTitle },
+        message = null,
+        menuItems = listOf(
+            MenuDialogItem(id = "install", title = "Install"),
+            MenuDialogItem(id = "silent_install", title = "Silent Install"),
+        )
+    ) { file, id ->
+        file?.let { sfVM.requestInstallStubApk(it, id == "silent_install") }
+    }
+    MenuDialog(installStubApkDialog)
+
+
+    LaunchedEffect(Unit) {
+        sfVM.stubApkEffect.collectLatest {
+            when (it) {
+                is StubApkEffect.ApkCreated -> {
+                    installStubApkDialog.show(it.path)
+                }
+            }
+        }
     }
 
     BackHandler(searchBarState.showSearchBar) {
@@ -187,6 +269,7 @@ fun SFContent(back: () -> Unit) {
         bottomBar = {
             BottomToolbar(
                 state = state,
+                subState = subState,
                 pkgSets = pkgSets,
                 sfVM = sfVM,
                 selectedPkgSet = selectedPkgSet,
@@ -213,8 +296,13 @@ fun SFContent(back: () -> Unit) {
                         )
                     }
                     IconButton(onClick = {
-                        val exclude: ArrayList<Pkg> = ArrayList(sfPkgs.map { Pkg.fromAppInfo(it) })
-                        pickPkgLauncher.launch(AppPickerActivity.getIntent(context, exclude))
+                        if (sfPkgs.size > 3 && !subState.isSubscribed) {
+                            LVLStateHolder.fab()
+                        } else {
+                            val exclude: ArrayList<Pkg> =
+                                ArrayList(sfPkgs.map { Pkg.fromAppInfo(it) })
+                            pickPkgLauncher.launch(AppPickerActivity.getIntent(context, exclude))
+                        }
                     }) {
                         Icon(
                             painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_add_fill),
@@ -300,6 +388,7 @@ fun SFContent(back: () -> Unit) {
 @Composable
 private fun BottomToolbar(
     state: SFState,
+    subState: LVLStateHolder.State,
     pkgSets: List<PackageSet>,
     sfVM: SFVM,
     selectedPkgSet: String,
@@ -321,11 +410,9 @@ private fun BottomToolbar(
                     .padding(horizontal = 16.dp, vertical = 16.dp),
             ) {
                 if (state.selectedApps.size == 1) {
-                    Button(onClick = {
-                        // HAO todo
-                    }) {
-                        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.create_shortcut))
-                    }
+                    val appInfo =
+                        ThanosManager.from(context).pkgManager.getAppInfo(state.selectedApps.first())
+                    CreateShortcutButtons(state, subState, appInfo, sfVM)
                     TinySpacer()
                 }
 
@@ -439,9 +526,17 @@ private fun BottomToolbar(
                         if (it.id == "pkgSet") {
                             PackageSetListActivity.start(context)
                         } else if (it.id == "addSet") {
-                            inputDialogState.show()
+                            if (subState.isSubscribed) {
+                                inputDialogState.show()
+                            } else {
+                                LVLStateHolder.fab()
+                            }
                         } else if (it.id == "sort") {
-                            sortDialogState.show()
+                            if (subState.isSubscribed) {
+                                sortDialogState.show()
+                            } else {
+                                LVLStateHolder.fab()
+                            }
                         }
                     }
                     IconButton(onClick = {
@@ -457,3 +552,37 @@ private fun BottomToolbar(
         }
     }
 }
+
+@Composable
+private fun CreateShortcutButtons(
+    state: SFState,
+    subState: LVLStateHolder.State,
+    appInfo: AppInfo,
+    vm: SFVM
+) {
+    val context = LocalContext.current
+    Button(onClick = {
+        ShortcutHelper.addShortcut(context, appInfo)
+    }) {
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.create_shortcut))
+    }
+    TinySpacer()
+
+    // APK
+    val stubApkCreateInfoDialog =
+        rememberTextInputState(title = stringResource(github.tornaco.android.thanos.res.R.string.menu_title_create_shortcut_apk)) {
+            vm.createShortcutStubApk(appInfo, it, appInfo.versionName, appInfo.versionCode)
+        }
+    TextInputDialog(stubApkCreateInfoDialog)
+    Button(onClick = {
+        if (subState.isSubscribed) {
+            stubApkCreateInfoDialog.show(initialValue = appInfo.appLabel)
+        } else {
+            LVLStateHolder.fab()
+        }
+    }) {
+        Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_create_shortcut_apk))
+    }
+}
+
+// TODO Hao 1. Dialog 2. shortcut 3. export 4. subscribe

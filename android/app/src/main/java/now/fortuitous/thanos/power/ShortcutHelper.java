@@ -110,7 +110,7 @@ public class ShortcutHelper {
     }
 
     @WorkerThread
-    static File createShortcutStubApkFor(Context context,
+    public static File createShortcutStubApkFor(Context context,
                                          AppInfo appInfo,
                                          String appLabel,
                                          String versionName,

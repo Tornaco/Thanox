@@ -19,12 +19,16 @@ package now.fortuitous.thanos.sf
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.elvishew.xlog.XLog
+import com.topjohnwu.superuser.Shell
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.common.AppLabelSearchFilter
 import github.tornaco.android.thanos.core.Logger
+import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_ALL
@@ -33,14 +37,18 @@ import github.tornaco.android.thanos.core.pm.PackageEnableStateChangeListener
 import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.pm.USER_PACKAGE_SET_ID_USER_WHITELISTED
+import github.tornaco.android.thanos.core.util.PkgUtils
 import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.module.compose.common.widget.SortItem
 import github.tornaco.android.thanos.support.withThanos
+import github.tornaco.android.thanos.util.InstallerUtils
 import github.tornaco.android.thanos.util.sortByIndex
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
@@ -50,6 +58,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import now.fortuitous.thanos.power.ShortcutHelper
+import java.io.File
 import javax.inject.Inject
 
 data class SFState(
@@ -58,6 +68,10 @@ data class SFState(
     val isEditingMode: Boolean = false,
     val selectedApps: Set<Pkg> = emptySet()
 )
+
+sealed interface StubApkEffect {
+    data class ApkCreated(val path: File) : StubApkEffect
+}
 
 @SuppressLint("StaticFieldLeak")
 @HiltViewModel
@@ -78,6 +92,9 @@ class SFVM @Inject constructor(
         SFState()
     )
     val state = _state.asStateFlow()
+
+    private val _stubApkEffect = MutableSharedFlow<StubApkEffect>()
+    val stubApkEffect = _stubApkEffect.asSharedFlow()
 
     private val searchQuery = savedStateHandle.getStateFlow(KEY_QUERY, "")
     val selectedPkgSetId =
@@ -328,5 +345,59 @@ class SFVM @Inject constructor(
 
     fun refresh() {
         repo.update()
+    }
+
+    fun createShortcutStubApk(
+        appInfo: AppInfo,
+        appLabel: String,
+        versionName: String,
+        versionCode: Int,
+    ) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                runCatching {
+                    val apkFile = ShortcutHelper.createShortcutStubApkFor(
+                        context,
+                        appInfo,
+                        appLabel,
+                        versionName,
+                        versionCode
+                    )
+                    _stubApkEffect.emit(StubApkEffect.ApkCreated(apkFile))
+                }.onFailure {
+                    XLog.e(it, "createShortcutStubApkFor")
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            context,
+                            it.message ?: it.toString(),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
+    fun requestInstallStubApk(apkFile: File, silent: Boolean) {
+        if (silent) {
+            val tmpFile = File("/data/local/tmp/" + apkFile.nameWithoutExtension + "_proxy.apk")
+            Shell.cmd("cp " + apkFile.absolutePath + " " + tmpFile.absolutePath).exec()
+            XLog.w("apk path: " + tmpFile.absolutePath)
+            val installRes = Shell.cmd("pm install " + tmpFile.absolutePath).exec()
+            XLog.w("Install res: $installRes")
+            Shell.cmd("rm " + tmpFile.absolutePath).exec()
+        } else {
+            InstallerUtils.installUserAppWithIntent(context, apkFile)
+        }
+    }
+
+    fun requestUnInstallStubApkIfInstalled(context: Context?, appInfo: AppInfo?) {
+        XLog.v("requestUnInstallStubApkIfInstalled: %s", appInfo)
+        val stubPkgName =
+            ThanosManager.from(context).pkgManager.createShortcutStubPkgName(appInfo)
+        XLog.v("requestUnInstallStubApkIfInstalled: %s", stubPkgName)
+        if (PkgUtils.isPkgInstalled(context, stubPkgName)) {
+            InstallerUtils.uninstallUserAppWithIntent(context, stubPkgName)
+        }
     }
 }

@@ -28,6 +28,7 @@ import github.tornaco.android.thanos.core.Logger
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_3RD
 import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_ALL
+import github.tornaco.android.thanos.core.pm.PREBUILT_PACKAGE_SET_ID_SYSTEM
 import github.tornaco.android.thanos.core.pm.PackageEnableStateChangeListener
 import github.tornaco.android.thanos.core.pm.PackageSet
 import github.tornaco.android.thanos.core.pm.Pkg
@@ -36,13 +37,14 @@ import github.tornaco.android.thanos.module.compose.common.widget.SortItem
 import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.sortByIndex
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -51,7 +53,8 @@ import now.fortuitous.thanos.sf.data.SFRepoImpl
 import javax.inject.Inject
 
 data class SFState(
-    val isLoading: Boolean = false,
+    val isSFLoading: Boolean = false,
+    val isSFMapLoading: Boolean = false,
     val isEditingMode: Boolean = false,
     val selectedApps: Set<Pkg> = emptySet()
 )
@@ -72,7 +75,7 @@ class SFVM @Inject constructor(
     private val logger = Logger("SFVM")
 
     private val _state = MutableStateFlow(
-        SFState(isLoading = false)
+        SFState()
     )
     val state = _state.asStateFlow()
 
@@ -83,6 +86,10 @@ class SFVM @Inject constructor(
 
     val sfPkgs by lazy {
         repo.freezePkgListFlow()
+            .onStart {
+                // When the flow starts, set isLoading to true
+                _state.update { it.copy(isSFLoading = true) }
+            }
             .combine(selectedPkgSetId) { list, pkgSetId ->
                 val targetSet =
                     pkgSets.value.firstOrNull { it.id == pkgSetId }
@@ -102,13 +109,17 @@ class SFVM @Inject constructor(
                 }
             }
             .onEach {
-                delay(300)
+                _state.update { it.copy(isSFLoading = false) }
             }
             .stateIn(viewModelScope, SharingStarted.Lazily, initialValue = emptyList())
     }
 
     val sfPkgMapping: StateFlow<Map<PackageSet, List<AppInfo>>> by lazy {
         repo.freezePkgListFlow()
+            .onStart {
+                // When the flow starts, set isLoading to true
+                _state.update { it.copy(isSFMapLoading = true) }
+            }
             .combine(pkgSets) { list, pkgSets ->
                 pkgSets.associateWith { targetSet ->
                     list.filter {
@@ -117,7 +128,7 @@ class SFVM @Inject constructor(
                 }
             }
             .onEach {
-                delay(300)
+                _state.update { it.copy(isSFMapLoading = false) }
             }
             .combine(searchQuery) { list, query ->
                 if (query.isBlank()) {
@@ -141,6 +152,15 @@ class SFVM @Inject constructor(
 
     val pkgSets by lazy {
         repo.pkgSetListFlow()
+            .map {
+                it.filter {
+                    !it.isPrebuilt || arrayOf(
+                        PREBUILT_PACKAGE_SET_ID_ALL,
+                        PREBUILT_PACKAGE_SET_ID_3RD,
+                        PREBUILT_PACKAGE_SET_ID_SYSTEM
+                    ).contains(it.id)
+                }
+            }
             .onEach {
                 logger.d("pkgSets: $it")
             }
@@ -302,5 +322,9 @@ class SFVM @Inject constructor(
                     });
             }
         }
+    }
+
+    fun refresh() {
+        repo.update()
     }
 }

@@ -17,7 +17,7 @@
 
 package now.fortuitous.thanos.apps;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -65,7 +65,7 @@ public class PackageSetListActivity extends CommonAppListFilterActivity {
         }
     };
 
-    public static void start(Activity activity) {
+    public static void start(Context activity) {
         ActivityUtils.startActivity(activity, PackageSetListActivity.class);
     }
 

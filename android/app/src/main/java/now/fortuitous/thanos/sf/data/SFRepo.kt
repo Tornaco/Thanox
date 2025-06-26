@@ -10,6 +10,7 @@ import github.tornaco.android.thanos.core.pm.Pkg
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import now.fortuitous.thanos.pref.AppPreference
 import javax.inject.Inject
@@ -47,21 +48,26 @@ class SFRepoImpl @Inject constructor(@ApplicationContext val context: Context) :
     }
 
     override fun freezePkgListFlow(): Flow<List<AppInfo>> {
-        return flowOf(pm.smartFreezePkgs.mapNotNull {
-            pm.getAppInfo(it)
-        })
+        return updateFlags.map {
+            pm.smartFreezePkgs.mapNotNull {
+                pm.getAppInfo(it)
+            }
+        }
     }
 
     override suspend fun addPkg(pkg: Pkg) {
         pm.setPkgSmartFreezeEnabled(pkg, true)
+        update()
     }
 
     override suspend fun addPkgs(pkg: List<Pkg>) {
         pkg.forEach { addPkg(it) }
+        update()
     }
 
     override suspend fun removePkg(pkg: Pkg) {
         pm.setPkgSmartFreezeEnabled(pkg, false)
+        update()
     }
 
     override fun isScreenOffEnabled(): Flow<Boolean> {
@@ -80,21 +86,26 @@ class SFRepoImpl @Inject constructor(@ApplicationContext val context: Context) :
     }
 
     override fun pkgSetListFlow(): Flow<List<PackageSet>> {
-        return flowOf(pm.getAllPackageSets(true))
+        return updateFlags.map {
+            pm.getAllPackageSets(true)
+        }
     }
 
     override suspend fun addPkgSet(label: String) {
         pm.createPackageSet(label)
+        update()
     }
 
     override suspend fun removePkgSet(id: String) {
         pm.removePackageSet(id)
+        update()
     }
 
     override suspend fun removePkgFromSet(id: String, pkgs: List<Pkg>) {
         pkgs.forEach {
             pm.removeFromPackageSet(it, id)
         }
+        update()
     }
 
     override suspend fun renamePkgSet(id: String, newLabel: String) {
@@ -103,11 +114,13 @@ class SFRepoImpl @Inject constructor(@ApplicationContext val context: Context) :
 
     override suspend fun sortPkgSet(id: String, sort: Int) {
         AppPreference.setPkgSetSort(context, id, sort)
+        update()
     }
 
     override suspend fun addPkgToSet(id: String, pkgs: List<Pkg>) {
         pkgs.forEach {
             pm.addToPackageSet(it, id)
         }
+        update()
     }
 }

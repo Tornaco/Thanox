@@ -17,17 +17,10 @@
 
 package now.fortuitous.thanos.apps;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,19 +28,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.elvishew.xlog.XLog;
+import com.anggrayudi.storage.SimpleStorageHelper;
+import com.anggrayudi.storage.file.FileFullPath;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.common.io.Files;
-import com.nononsenseapps.filepicker.FilePickerActivity;
-import com.nononsenseapps.filepicker.Utils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -59,32 +48,26 @@ import github.tornaco.android.thanos.core.pm.Pkg;
 import github.tornaco.android.thanos.core.profile.ConfigTemplate;
 import github.tornaco.android.thanos.core.profile.ProfileManager;
 import github.tornaco.android.thanos.core.util.DateUtils;
-import github.tornaco.android.thanos.core.util.ObjectToStringUtils;
-import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ActivityAppDetailsBinding;
 import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.support.ContextExtKt;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
-import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.util.ToastUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.ModernProgressDialog;
-import github.tornaco.permission.requester.RequiresPermission;
-import github.tornaco.permission.requester.RuntimePermissions;
-import util.CollectionUtils;
 
-@RuntimePermissions
 public class AppDetailsActivity extends ThemeActivity {
     private final static int REQUEST_CODE_BACKUP_FILE_PICK = 0x100;
     private final static int REQUEST_CODE_RESTORE_FILE_PICK = 0x200;
-    private final static int REQUEST_CODE_BACKUP_FILE_PICK_Q = 0x300;
 
     private ActivityAppDetailsBinding binding;
     private AppInfo appInfo;
     private FeatureConfigFragment featureConfigFragment;
 
     private ModernProgressDialog progressDialog;
+
+    private final SimpleStorageHelper storageHelper = new SimpleStorageHelper(this);
 
     public static void start(Context context, AppInfo appInfo) {
         ThanosManager.from(context).getPkgManager().setComponentEnabledSetting(
@@ -107,6 +90,18 @@ public class AppDetailsActivity extends ThemeActivity {
         setContentView(binding.getRoot());
         initView();
         initViewModel();
+
+        storageHelper.setOnFileCreated((code, documentFile) -> {
+            invokeComponentsBackup(documentFile);
+            return null;
+        });
+        storageHelper.setOnFileSelected((code, documentFiles) -> {
+            if (documentFiles == null || documentFiles.isEmpty()) return null;
+            //noinspection SequencedCollectionMethodCanBeUsed
+            DocumentFile firstFile = documentFiles.get(0);
+            restoreComponentsFile(firstFile);
+            return null;
+        });
 
         if (savedInstanceState == null) {
             reAddFragment();
@@ -190,11 +185,19 @@ public class AppDetailsActivity extends ThemeActivity {
         }
 
         if (R.id.action_restore_component_settings == item.getItemId()) {
-            if (OsUtils.isTOrAbove()) {
-                AppDetailsActivityPermissionRequester.restoreComponentsRequestedTOrAboveChecked(AppDetailsActivity.this);
-            } else {
-                AppDetailsActivityPermissionRequester.restoreComponentsRequestedTBelowChecked(AppDetailsActivity.this);
-            }
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(this, isSub -> {
+                if (isSub) {
+                    storageHelper.openFilePicker(
+                            REQUEST_CODE_RESTORE_FILE_PICK,
+                            false,
+                            (FileFullPath) null,
+                            "application/json"
+                    );
+                } else {
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(AppDetailsActivity.this);
+                }
+                return null;
+            });
             return true;
         }
 
@@ -257,132 +260,26 @@ public class AppDetailsActivity extends ThemeActivity {
         dialog.setPositive(getString(github.tornaco.android.thanos.res.R.string.pre_title_backup));
         dialog.setNegative(getString(android.R.string.cancel));
         dialog.setOnPositive(() -> {
-            if (OsUtils.isTOrAbove()) {
-                AppDetailsActivityPermissionRequester.backupComponentsRequestedTOrAboveChecked(AppDetailsActivity.this);
-            } else {
-                AppDetailsActivityPermissionRequester.backupComponentsRequestedTBelowChecked(AppDetailsActivity.this);
-            }
+            AppFeatureManager.INSTANCE.withSubscriptionStatus(this, isSub -> {
+                if (isSub) {
+                    String backupFileNameWithExt = appInfo.getAppLabel() + "-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
+                    storageHelper.createFile(
+                            "application/json",
+                            backupFileNameWithExt,
+                            null,
+                            REQUEST_CODE_BACKUP_FILE_PICK
+                    );
+                } else {
+                    AppFeatureManager.INSTANCE.showSubscribeDialog(AppDetailsActivity.this);
+                }
+                return null;
+            });
+
         });
         dialog.show();
     }
 
-    @RequiresPermission({
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.READ_MEDIA_VIDEO,
-    })
-    void backupComponentsRequestedTOrAbove() {
-        if (OsUtils.isQOrAbove()) {
-            backupComponentsRequestedQAndAbove();
-        } else {
-            backupComponentsRequestedQBelow();
-        }
-    }
-
-    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void backupComponentsRequestedTBelow() {
-        if (OsUtils.isQOrAbove()) {
-            backupComponentsRequestedQAndAbove();
-        } else {
-            backupComponentsRequestedQBelow();
-        }
-    }
-
-
-    private void backupComponentsRequestedQAndAbove() {
-        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        // you can set file mime-type
-        intent.setType("*/*");
-        // default file name
-        String backupFileNameWithExt = appInfo.getAppLabel() + "-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
-        intent.putExtra(Intent.EXTRA_TITLE, backupFileNameWithExt);
-        try {
-            startActivityForResult(intent, REQUEST_CODE_BACKUP_FILE_PICK_Q);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(thisActivity(), "Activity not found, please install Files app", Toast.LENGTH_LONG).show();
-        }
-
-    }
-
-    private void backupComponentsRequestedQBelow() {
-        Intent i = new Intent(thisActivity(), FilePickerActivity.class);
-        i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
-        i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true);
-        i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
-        i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
-        try {
-            startActivityForResult(i, REQUEST_CODE_BACKUP_FILE_PICK);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(thisActivity(), "Activity not found, please install Files app", Toast.LENGTH_LONG).show();
-        }
-    }
-
-
-    private void onBackupComponentsFilePickRequestResultQ(Intent data) {
-        if (data == null) {
-            XLog.e("No data.");
-            return;
-        }
-
-        Uri fileUri = data.getData();
-
-        if (fileUri == null) {
-            Toast.makeText(thisActivity(), "fileUri == null", Toast.LENGTH_LONG).show();
-            XLog.e("No fileUri.");
-            return;
-        }
-
-        XLog.d("fileUri == %s", fileUri);
-
-        try {
-            OutputStream os = thisActivity().getContentResolver().openOutputStream(fileUri);
-            invokeComponentsBackup(os);
-        } catch (IOException e) {
-            XLog.e(e);
-            Toast.makeText(thisActivity(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void onBackupComponentsFilePickRequestResult(Intent data) {
-        if (data == null) {
-            XLog.e("No data.");
-            return;
-        }
-
-        if (thisActivity() == null) return;
-
-        List<Uri> files = Utils.getSelectedFilesFromResult(data);
-        if (CollectionUtils.isNullOrEmpty(files)) {
-            Toast.makeText(thisActivity(), "No selection", Toast.LENGTH_LONG).show();
-            return;
-        }
-        File file = Utils.getFileForUriNoThrow(files.get(0));
-        XLog.w("onBackupFilePickRequestResult file is: %s", file);
-
-        if (file == null) {
-            Toast.makeText(thisActivity(), "file == null", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (!file.isDirectory()) {
-            Toast.makeText(thisActivity(), "file is not dir", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        try {
-            String backupFileNameWithExt = appInfo.getAppLabel() + "-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
-            File destFile = new File(file, backupFileNameWithExt);
-            Files.createParentDirs(destFile);
-            //noinspection UnstableApiUsage
-            invokeComponentsBackup(Files.asByteSink(destFile).openStream());
-        } catch (IOException e) {
-            XLog.e(e);
-            Toast.makeText(thisActivity(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void invokeComponentsBackup(OutputStream os) {
+    private void invokeComponentsBackup(DocumentFile file) {
         progressDialog.show();
         obtainViewModel(this)
                 .performComponentsBackup(
@@ -408,7 +305,7 @@ public class AppDetailsActivity extends ThemeActivity {
                                 progressDialog.dismiss();
                             }
                         },
-                        os,
+                        file,
                         appInfo);
     }
 
@@ -416,33 +313,7 @@ public class AppDetailsActivity extends ThemeActivity {
 
 
     // -----------------------  RESTORE START ---------------------
-    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void restoreComponentsRequestedTBelow() {
-        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_RESTORE_FILE_PICK);
-    }
-
-    @RequiresPermission({
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.READ_MEDIA_VIDEO,
-    })
-    void restoreComponentsRequestedTOrAbove() {
-        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_RESTORE_FILE_PICK);
-    }
-
-    private void onRestoreComponentsFilePickRequestResult(@Nullable Intent data) {
-        if (data == null) {
-            XLog.e("No data.");
-            return;
-        }
-
-        Uri uri = data.getData();
-        if (uri == null) {
-            Toast.makeText(thisActivity(), "uri == null", Toast.LENGTH_LONG).show();
-            XLog.e("No uri.");
-            return;
-        }
-
+    private void restoreComponentsFile(DocumentFile file) {
         progressDialog.show();
         obtainViewModel(this).performComponentsRestore(thisActivity(),
                 new AppDetailsViewModel.RestoreListener() {
@@ -461,29 +332,9 @@ public class AppDetailsActivity extends ThemeActivity {
                                 .show();
                         progressDialog.dismiss();
                     }
-                }, uri, appInfo);
+                }, file, appInfo);
     }
 // -----------------------  RESTORE END ---------------------
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        XLog.d("onActivityResult: %s %s %s", requestCode, resultCode, ObjectToStringUtils.intentToString(data));
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_RESTORE_FILE_PICK) {
-            onRestoreComponentsFilePickRequestResult(data);
-        } else if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_BACKUP_FILE_PICK) {
-            onBackupComponentsFilePickRequestResult(data);
-        } else if (requestCode == REQUEST_CODE_BACKUP_FILE_PICK_Q && resultCode == Activity.RESULT_OK) {
-            onBackupComponentsFilePickRequestResultQ(data);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        AppDetailsActivityPermissionRequester.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
 
     public static AppDetailsViewModel obtainViewModel(FragmentActivity activity) {
         ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory

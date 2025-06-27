@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -14,21 +13,12 @@ import androidx.annotation.WorkerThread;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
-import androidx.databinding.ObservableInt;
+import androidx.documentfile.provider.DocumentFile;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.elvishew.xlog.XLog;
-import com.google.common.io.ByteStreams;
-import com.google.common.io.CharSource;
-import com.google.common.io.CharStreams;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,6 +32,7 @@ import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 import github.tornaco.android.thanos.core.util.GsonUtils;
 import github.tornaco.android.thanos.core.util.Rxs;
+import github.tornaco.android.thanos.util.ToastUtils;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;
@@ -51,7 +42,6 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import rx2.android.schedulers.AndroidSchedulers;
 import util.CollectionUtils;
-import util.IoUtils;
 import util.JsonFormatter;
 import util.PinyinComparatorUtils;
 
@@ -60,11 +50,6 @@ public class TrampolineViewModel extends AndroidViewModel {
     private final ObservableBoolean isDataLoading = new ObservableBoolean(false);
     private final List<Disposable> disposables = new ArrayList<>();
     private final ObservableArrayList<ActivityTrampolineModel> replacements = new ObservableArrayList<>();
-
-    private final ObservableInt exportSuccessSignal = new ObservableInt();
-    private final ObservableInt exportFailSignal = new ObservableInt();
-    private final ObservableInt importSuccessSignal = new ObservableInt();
-    private final ObservableInt importFailSignal = new ObservableInt();
 
     private final ObservableField<String> queryText = new ObservableField<>("");
     private final AppLabelSearchFilter appLabelSearchFilter = new AppLabelSearchFilter();
@@ -174,35 +159,14 @@ public class TrampolineViewModel extends AndroidViewModel {
                     if (cmb != null) {
                         XLog.w("content: " + content);
                         cmb.setPrimaryClip(ClipData.newPlainText("trampoline", content));
-                        exportSuccessSignal.set(exportSuccessSignal.get() + 1);
+                        ToastUtils.ok(getApplication());
                     }
                 }));
     }
 
-    void exportToFile(OutputStream os, @Nullable String componentReplacementKey) {
+    void exportToFile(DocumentFile pickedFile, @Nullable String componentReplacementKey) {
         XLog.d("exportToFile: %s", componentReplacementKey);
-        disposables.add(Single.create((SingleOnSubscribe<Boolean>) emitter -> {
-                    List<ComponentReplacement> componentReplacements = new ArrayList<>();
-                    for (ActivityTrampolineModel model : replacements) {
-                        if (componentReplacementKey == null
-                                || componentReplacementKey.equals(model.getReplacement().from.flattenToString())) {
-                            componentReplacements.add(model.getReplacement());
-                        }
-                    }
-                    String contentToWrite = JsonFormatter.toPrettyJson(componentReplacements);
-                    //noinspection UnstableApiUsage
-                    InputStream in = CharSource.wrap(contentToWrite).asByteSource(Charset.defaultCharset()).openStream();
-                    //noinspection UnstableApiUsage
-                    emitter.onSuccess(ByteStreams.copy(in, os) > 0);
-
-                    IoUtils.closeQuietly(in);
-                    IoUtils.closeQuietly(os);
-                }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(res -> {
-                    if (res) exportSuccessSignal.set(exportSuccessSignal.get() + 1);
-                    else exportFailSignal.set(exportFailSignal.get() + 1);
-                }));
+        TrampolineViewModelHelperKt.helperExportToFile(this, pickedFile, componentReplacementKey, replacements);
     }
 
     void importFromClipboard() {
@@ -232,48 +196,20 @@ public class TrampolineViewModel extends AndroidViewModel {
                     emitter.onSuccess(false);
                 }
             }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(res -> {
-                if (res) importSuccessSignal.set(importSuccessSignal.get() + 1);
-                else importFailSignal.set(importFailSignal.get() + 1);
+                if (res) {
+                    ToastUtils.ok(getApplication());
+                } else {
+                    ToastUtils.nook(getApplication());
+                }
             }));
         }
     }
 
-    void importFromFile(Uri uri) {
-        disposables.add(Single.create((SingleOnSubscribe<Boolean>) emitter -> {
-            try {
-                InputStream inputStream = getApplication()
-                        .getContentResolver()
-                        .openInputStream(uri);
-                if (inputStream == null) {
-                    return;
-                }
-                @SuppressWarnings("UnstableApiUsage")
-                String content = CharStreams.toString(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-                XLog.w("content: " + content);
-                List<ComponentReplacement> componentReplacements = parseJson(content);
-                if (!CollectionUtils.isNullOrEmpty(componentReplacements)) {
-                    ThanosManager.from(getApplication())
-                            .ifServiceInstalled(thanosManager ->
-                                    CollectionUtils.consumeRemaining(componentReplacements, replacement ->
-                                            thanosManager
-                                                    .getActivityStackSupervisor()
-                                                    .addComponentReplacement(replacement)));
-                    emitter.onSuccess(true);
-                    start();
-                } else {
-                    emitter.onSuccess(false);
-                }
-            } catch (IOException ioe) {
-                XLog.e(Log.getStackTraceString(ioe));
-                emitter.onSuccess(false);
-            }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(res -> {
-            if (res) importSuccessSignal.set(importSuccessSignal.get() + 1);
-            else importFailSignal.set(importFailSignal.get() + 1);
-        }));
+    void importFromFile(DocumentFile file) {
+        TrampolineViewModelHelperKt.helperImportFromFile(this, file);
     }
 
-    private List<ComponentReplacement> parseJson(String content) {
+    List<ComponentReplacement> parseJson(String content) {
         try {
             List<ComponentReplacement> componentReplacements = GsonUtils.GSON
                     .fromJson(content, new TypeToken<List<ComponentReplacement>>() {
@@ -293,22 +229,6 @@ public class TrampolineViewModel extends AndroidViewModel {
 
     public ObservableArrayList<ActivityTrampolineModel> getReplacements() {
         return this.replacements;
-    }
-
-    public ObservableInt getExportSuccessSignal() {
-        return this.exportSuccessSignal;
-    }
-
-    public ObservableInt getExportFailSignal() {
-        return this.exportFailSignal;
-    }
-
-    public ObservableInt getImportSuccessSignal() {
-        return this.importSuccessSignal;
-    }
-
-    public ObservableInt getImportFailSignal() {
-        return this.importFailSignal;
     }
 
     void clearSearchText() {

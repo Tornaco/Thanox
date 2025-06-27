@@ -1,19 +1,14 @@
 package github.tornaco.android.thanox.module.activity.trampoline;
 
-import static com.nononsenseapps.filepicker.FilePickerActivityUtils.pickSingleDirIntent;
+import static now.fortuitous.thanos.main.LocalSimpleStorageHelperKt.REQUEST_CODE_PICK_TRAMP_EXPORT_PATH;
+import static now.fortuitous.thanos.main.LocalSimpleStorageHelperKt.REQUEST_CODE_PICK_TRAMP_IMPORT_PATH;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,54 +21,38 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.databinding.Observable;
+import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.elvishew.xlog.XLog;
+import com.anggrayudi.storage.SimpleStorageHelper;
+import com.anggrayudi.storage.file.FileFullPath;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
-import com.google.common.io.Files;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-import com.nononsenseapps.filepicker.Utils;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.component.ComponentReplacement;
 import github.tornaco.android.thanos.core.pm.ComponentNameBrief;
 import github.tornaco.android.thanos.core.util.DateUtils;
-import github.tornaco.android.thanos.core.util.OsUtils;
 import github.tornaco.android.thanos.databinding.ModuleActivityTrampolineActivityBinding;
+import github.tornaco.android.thanos.support.AppFeatureManager;
 import github.tornaco.android.thanos.support.ThanoxAppContext;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
-import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.widget.SwitchBar;
-import github.tornaco.permission.requester.RequiresPermission;
-import github.tornaco.permission.requester.RuntimePermissions;
 
-@RuntimePermissions
 public class ActivityTrampolineActivity extends ThemeActivity
         implements ActivityTrampolineItemClickListener {
-
-    private static final int REQUEST_CODE_PICK_IMPORT_PATH = 0x111;
-
-    private static final SparseArray<String> requestCodeExportMapping = new SparseArray<>();
-    private static final SparseArray<String> requestCodeExportMappingQ = new SparseArray<>();
-
-    private static final AtomicInteger _REQ_ID = new AtomicInteger(0x222);
+    private static String sExportComponentKeyOrNull = null;
 
     private ModuleActivityTrampolineActivityBinding binding;
     private TrampolineViewModel viewModel;
+
+    private final SimpleStorageHelper storageHelper = new SimpleStorageHelper(this);
 
     public static void start(Context context) {
         ActivityUtils.startActivity(context, ActivityTrampolineActivity.class);
@@ -92,6 +71,18 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
         setupView();
         setupViewModel();
+
+        storageHelper.setOnFileCreated((code, documentFile) -> {
+            viewModel.exportToFile(documentFile, sExportComponentKeyOrNull);
+            return null;
+        });
+        storageHelper.setOnFileSelected((code, documentFiles) -> {
+            if (documentFiles == null || documentFiles.isEmpty()) return null;
+            //noinspection SequencedCollectionMethodCanBeUsed
+            DocumentFile firstFile = documentFiles.get(0);
+            viewModel.importFromFile(firstFile);
+            return null;
+        });
     }
 
     private void setupView() {
@@ -172,31 +163,6 @@ public class ActivityTrampolineActivity extends ThemeActivity
     private void setupViewModel() {
         viewModel = obtainViewModel(this);
         viewModel.start();
-
-        viewModel.getExportSuccessSignal().addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                Toast.makeText(thisActivity(), "\uD83D\uDC4D", Toast.LENGTH_SHORT).show();
-            }
-        });
-        viewModel.getExportFailSignal().addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                Toast.makeText(thisActivity(), "\uD83D\uDC4E", Toast.LENGTH_SHORT).show();
-            }
-        });
-        viewModel.getImportSuccessSignal().addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                Toast.makeText(thisActivity(), "\uD83D\uDC4D", Toast.LENGTH_SHORT).show();
-            }
-        });
-        viewModel.getImportFailSignal().addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                Toast.makeText(thisActivity(), "\uD83D\uDC4E", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
@@ -369,11 +335,21 @@ public class ActivityTrampolineActivity extends ThemeActivity
                             if (which == 0) {
                                 exportToClipboard(componentReplacementKey);
                             } else {
-                                if (OsUtils.isTOrAbove()) {
-                                    ActivityTrampolineActivityPermissionRequester.exportToFileTOrAboveChecked(componentReplacementKey, this);
-                                } else {
-                                    ActivityTrampolineActivityPermissionRequester.exportToFileTBelowChecked(componentReplacementKey, this);
-                                }
+                                AppFeatureManager.INSTANCE.withSubscriptionStatus(this, isSub -> {
+                                    if (isSub) {
+                                        String expFileNameWithExt = "Replacements-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
+                                        sExportComponentKeyOrNull = componentReplacementKey;
+                                        storageHelper.createFile(
+                                                "application/json",
+                                                expFileNameWithExt,
+                                                null,
+                                                REQUEST_CODE_PICK_TRAMP_EXPORT_PATH
+                                        );
+                                    } else {
+                                        AppFeatureManager.INSTANCE.showSubscribeDialog(ActivityTrampolineActivity.this);
+                                    }
+                                    return null;
+                                });
                             }
                         }).create();
         dialog.show();
@@ -381,50 +357,6 @@ public class ActivityTrampolineActivity extends ThemeActivity
 
     private void exportToClipboard(@Nullable String componentReplacementKey) {
         viewModel.exportToClipboard(componentReplacementKey);
-    }
-
-    @RequiresPermission({
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.READ_MEDIA_VIDEO,
-    })
-    void exportToFileTOrAbove(@Nullable String componentReplacementKey) {
-        if (OsUtils.isQOrAbove()) {
-            exportToFileQAndAbove(componentReplacementKey);
-        } else {
-            exportToFileQBelow(componentReplacementKey);
-        }
-    }
-
-    @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    void exportToFileTBelow(@Nullable String componentReplacementKey) {
-        if (OsUtils.isQOrAbove()) {
-            exportToFileQAndAbove(componentReplacementKey);
-        } else {
-            exportToFileQBelow(componentReplacementKey);
-        }
-    }
-
-    private void exportToFileQBelow(@Nullable String componentReplacementKey) {
-        Intent intent = pickSingleDirIntent(thisActivity());
-        intent.putExtra("componentReplacementKey", componentReplacementKey);
-        int reqCode = _REQ_ID.incrementAndGet();
-        requestCodeExportMapping.put(reqCode, componentReplacementKey);
-        startActivityForResult(intent, reqCode);
-    }
-
-    private void exportToFileQAndAbove(@Nullable String componentReplacementKey) {
-        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        // you can set file mime-type
-        intent.setType("*/*");
-        // default file name
-        String expFileNameWithExt = "Replacements-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
-        intent.putExtra(Intent.EXTRA_TITLE, expFileNameWithExt);
-        intent.putExtra("componentReplacementKey", componentReplacementKey);
-        int reqCode = _REQ_ID.incrementAndGet();
-        requestCodeExportMappingQ.put(reqCode, componentReplacementKey);
-        startActivityForResult(intent, reqCode);
     }
 
     private void onRequestImport() {
@@ -437,11 +369,19 @@ public class ActivityTrampolineActivity extends ThemeActivity
                             if (which == 0) {
                                 importFromClipboard();
                             } else {
-                                if (OsUtils.isTOrAbove()) {
-                                    ActivityTrampolineActivityPermissionRequester.importFromFileTOrAboveChecked(this);
-                                } else {
-                                    ActivityTrampolineActivityPermissionRequester.importFromFileTBelowChecked(this);
-                                }
+                                AppFeatureManager.INSTANCE.withSubscriptionStatus(this, isSub -> {
+                                    if (isSub) {
+                                        storageHelper.openFilePicker(
+                                                REQUEST_CODE_PICK_TRAMP_IMPORT_PATH,
+                                                false,
+                                                (FileFullPath) null,
+                                                "application/json"
+                                        );
+                                    } else {
+                                        AppFeatureManager.INSTANCE.showSubscribeDialog(ActivityTrampolineActivity.this);
+                                    }
+                                    return null;
+                                });
                             }
                         }).create();
         dialog.show();
@@ -451,123 +391,13 @@ public class ActivityTrampolineActivity extends ThemeActivity
         viewModel.importFromClipboard();
     }
 
-    @RequiresPermission({
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.READ_MEDIA_VIDEO,
-    })
-    void importFromFileTOrAbove() {
-        if (OsUtils.isQOrAbove()) {
-            importToFileQAndAbove();
-        } else {
-            importToFileQBelow();
-        }
-    }
-
-    @RequiresPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-    void importFromFileTBelow() {
-        if (OsUtils.isQOrAbove()) {
-            importToFileQAndAbove();
-        } else {
-            importToFileQBelow();
-        }
-    }
-
-    private void importToFileQAndAbove() {
-        importToFileQBelow();
-    }
-
-    private void importToFileQBelow() {
-        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PICK_IMPORT_PATH);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCodeExportMapping.indexOfKey(requestCode) >= 0 && resultCode == Activity.RESULT_OK) {
-            // Use the provided utility method to parse the result
-            List<Uri> files = Utils.getSelectedFilesFromResult(data);
-            File file = Utils.getFileForUri(files.get(0));
-            String componentReplacementKey = requestCodeExportMapping.get(requestCode);
-            XLog.d("componentReplacementKey=%s", componentReplacementKey);
-            onExportFilePick(file, componentReplacementKey);
-        }
-
-        if (requestCode == REQUEST_CODE_PICK_IMPORT_PATH && resultCode == Activity.RESULT_OK) {
-            onImportFilePick(data);
-        }
-
-        if (requestCodeExportMappingQ.indexOfKey(requestCode) >= 0 && resultCode == Activity.RESULT_OK) {
-            String componentReplacementKey = requestCodeExportMapping.get(requestCode);
-            onExportFilePickQ(data, componentReplacementKey);
-        }
-    }
-
-    private void onExportFilePick(final File file, @Nullable String componentReplacementKey) {
-        try {
-            String expFileNameWithExt = "Replacements-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".json";
-            File expFile = new File(file, expFileNameWithExt);
-            //noinspection UnstableApiUsage
-            Files.createParentDirs(expFile);
-            //noinspection UnstableApiUsage
-            viewModel.exportToFile(Files.asByteSink(expFile).openStream(), componentReplacementKey);
-        } catch (IOException e) {
-            Toast.makeText(thisActivity(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void onExportFilePickQ(Intent data, String componentReplacementKey) {
-        if (data == null) {
-            XLog.e("onExportFilePickQ, No data.");
-            return;
-        }
-
-        Uri fileUri = data.getData();
-
-        if (fileUri == null) {
-            Toast.makeText(thisActivity(), "fileUri == null", Toast.LENGTH_LONG).show();
-            XLog.e("onExportFilePickQ, No fileUri.");
-            return;
-        }
-
-        XLog.d("onExportFilePickQ, fileUri == %s", fileUri);
-        XLog.d("onExportFilePickQ, componentReplacementKey=%s", componentReplacementKey);
-
-        onExportFilePickAvailableQ(fileUri, componentReplacementKey);
-    }
-
-    private void onExportFilePickAvailableQ(@NonNull Uri fileUri, @Nullable String componentReplacementKey) {
-        try {
-            OutputStream os = Objects.requireNonNull(thisActivity()).getContentResolver().openOutputStream(fileUri);
-            viewModel.exportToFile(os, componentReplacementKey);
-        } catch (IOException e) {
-            XLog.e(e);
-            Toast.makeText(thisActivity(), Log.getStackTraceString(e), Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void onImportFilePick(final Intent data) {
-        if (data == null) {
-            XLog.e("No data.");
-            return;
-        }
-        Uri uri = data.getData();
-        if (uri == null) {
-            Toast.makeText(thisActivity(), "uri == null", Toast.LENGTH_LONG).show();
-            XLog.e("No uri.");
-            return;
-        }
-        viewModel.importFromFile(uri);
-    }
-
     public static TrampolineViewModel obtainViewModel(FragmentActivity activity) {
         ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory
                 .getInstance(activity.getApplication());
         return ViewModelProviders.of(activity, factory).get(TrampolineViewModel.class);
     }
 
-    private class EmojiExcludeFilter implements InputFilter {
+    private static class EmojiExcludeFilter implements InputFilter {
 
         @Override
         public CharSequence filter(CharSequence source,

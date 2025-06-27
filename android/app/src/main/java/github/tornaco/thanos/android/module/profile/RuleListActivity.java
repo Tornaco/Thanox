@@ -1,10 +1,8 @@
 package github.tornaco.thanos.android.module.profile;
 
-import android.Manifest;
-import android.app.Activity;
+import static github.tornaco.thanos.android.module.profile.RuleListActivityMenuHandlerKt.handleOptionsItemSelected;
+
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,12 +10,13 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.elvishew.xlog.XLog;
+import com.anggrayudi.storage.SimpleStorageHelper;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
@@ -30,17 +29,11 @@ import github.tornaco.android.thanos.core.profile.RuleInfo;
 import github.tornaco.android.thanos.databinding.ModuleProfileRuleListActivityBinding;
 import github.tornaco.android.thanos.theme.ThemeActivity;
 import github.tornaco.android.thanos.util.ActivityUtils;
-import github.tornaco.android.thanos.util.IntentUtils;
 import github.tornaco.android.thanos.widget.ModernAlertDialog;
 import github.tornaco.android.thanos.widget.SwitchBar;
-import github.tornaco.permission.requester.RequiresPermission;
-import github.tornaco.permission.requester.RuntimePermissions;
 
-@RuntimePermissions
 public class RuleListActivity extends ThemeActivity implements RuleItemClickListener {
-
-    private static final int REQUEST_CODE_PICK_FILE_TO_IMPORT = 6;
-
+    SimpleStorageHelper storageHelper = new SimpleStorageHelper(this);
     private ModuleProfileRuleListActivityBinding binding;
     RuleListViewModel viewModel;
 
@@ -48,9 +41,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
         ActivityUtils.startActivity(context, RuleListActivity.class);
     }
 
-
     @Override
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ModuleProfileRuleListActivityBinding.inflate(LayoutInflater.from(this));
@@ -58,6 +49,17 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
         setupView();
         setupViewModel();
+
+        storageHelper.setOnFileCreated((code, documentFile) -> {
+            return null;
+        });
+        storageHelper.setOnFileSelected((code, documentFiles) -> {
+            if (documentFiles == null || documentFiles.isEmpty()) return null;
+            //noinspection SequencedCollectionMethodCanBeUsed
+            DocumentFile firstFile = documentFiles.get(0);
+            viewModel.importRule(firstFile);
+            return null;
+        });
     }
 
     private void setupView() {
@@ -140,49 +142,10 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (new RuleListActivityMenuHandler().handleOptionsItemSelected(this, item)) {
+        if (handleOptionsItemSelected(this, item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_PICK_FILE_TO_IMPORT) {
-            if (data == null) {
-                XLog.e("No data.");
-                return;
-            }
-
-            Uri uri = data.getData();
-            if (uri == null) {
-                XLog.e("No uri.");
-                return;
-            }
-
-            viewModel.importRuleFromUri(uri);
-        }
-    }
-
-    @RequiresPermission({
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.READ_MEDIA_VIDEO,
-    })
-    void importFromFileTOrAbove() {
-        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PICK_FILE_TO_IMPORT);
-    }
-
-    @RequiresPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void importFromFileTBelow() {
-        IntentUtils.startFilePickerActivityForRes(this, REQUEST_CODE_PICK_FILE_TO_IMPORT);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        RuleListActivityPermissionRequester.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     void onRequestAddNewRule() {

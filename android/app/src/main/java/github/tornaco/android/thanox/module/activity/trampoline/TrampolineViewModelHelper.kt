@@ -48,16 +48,20 @@ fun TrampolineViewModel.helperImportFromFile(pickedFile: DocumentFile) {
         Toast.makeText(application, "Unable to open input stream.", Toast.LENGTH_LONG).show()
         return
     }
-    val componentReplacements = parseJson(pickedFileIS.reader().readText())
-    if (!componentReplacements.isNullOrEmpty()) {
-        application.withThanos {
-            componentReplacements.forEach {
-                activityStackSupervisor.addComponentReplacement(it)
+    runCatching {
+        val componentReplacements = parseJson(pickedFileIS.reader().readText())
+        if (!componentReplacements.isNullOrEmpty()) {
+            application.withThanos {
+                componentReplacements.forEach {
+                    activityStackSupervisor.addComponentReplacement(it)
+                }
             }
+            ToastUtils.ok(application)
+            start()
+        } else {
+            ToastUtils.nook(application, "No component replacements found.")
         }
-        ToastUtils.ok(application)
-        start()
-    } else {
-        ToastUtils.nook(application, "No component replacements found.")
+    }.onFailure {
+        ToastUtils.nook(application, it.toString())
     }
 }

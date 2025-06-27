@@ -18,81 +18,154 @@
 package github.tornaco.thanos.android.module.profile
 
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.documentfile.provider.DocumentFile
+import androidx.lifecycle.application
+import com.anggrayudi.storage.file.FileFullPath
+import com.anggrayudi.storage.file.openInputStream
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.R
-import github.tornaco.android.thanos.core.util.OsUtils
+import github.tornaco.android.thanos.core.app.ThanosManager
+import github.tornaco.android.thanos.core.profile.DEFAULT_RULE_VERSION
+import github.tornaco.android.thanos.core.profile.ProfileManager
+import github.tornaco.android.thanos.core.profile.RuleAddCallback
 import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.util.BrowserUtils
+import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.android.module.profile.example.ProfileExampleActivity
 import github.tornaco.thanos.android.module.profile.online.OnlineProfileActivity
+import now.fortuitous.thanos.main.REQUEST_CODE_PICK_PROFILE_IMPORT_PATH
 
-class RuleListActivityMenuHandler {
+fun RuleListActivity.handleOptionsItemSelected(item: MenuItem): Boolean {
+    if (R.id.action_view_wiki == item.itemId) {
+        BrowserUtils.launch(this, BuildProp.THANOX_URL_DOCS_PROFILE)
+        return true
+    }
+    if (R.id.action_import_from_file == item.itemId) {
+        AppFeatureManager.withSubscriptionStatus(this) {
+            if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
+                storageHelper.openFilePicker(
+                    REQUEST_CODE_PICK_PROFILE_IMPORT_PATH,
+                    false,
+                    null as FileFullPath?,
+                    "application/json"
+                )
+            } else {
+                AppFeatureManager.showSubscribeDialog(this)
+            }
+        }
+        return true
+    }
+    if (R.id.action_import_examples == item.itemId) {
+        ProfileExampleActivity.Starter.start(this)
+        return true
+    }
+    if (R.id.action_online == item.itemId) {
+        AppFeatureManager.withSubscriptionStatus(this) {
+            if (it) {
+                OnlineProfileActivity.Starter.start(this)
+            } else {
+                AppFeatureManager.showSubscribeDialog(this)
+            }
+        }
+        return true
+    }
+    if (R.id.action_global_var == item.itemId) {
+        GlobalVarListActivity.start(this)
+        return true
+    }
+    if (R.id.action_add == item.itemId) {
+        AppFeatureManager.withSubscriptionStatus(this) {
+            if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
+                onRequestAddNewRule()
+            } else {
+                AppFeatureManager.showSubscribeDialog(this)
+            }
+        }
+        return true
+    }
+    if (R.id.action_rule_engine == item.itemId) {
+        RuleEngineSettingsActivity.start(this)
+        return true
+    }
+    if (R.id.action_rule_console == item.itemId) {
+        AppFeatureManager.withSubscriptionStatus(this) {
+            if (it) {
+                ConsoleActivity.Starter.start(this)
+            } else {
+                AppFeatureManager.showSubscribeDialog(this)
+            }
+        }
+        return true
+    }
+    if (R.id.action_rule_log == item.itemId) {
+        LogActivity.Starter.start(this)
+        return true
+    }
+    return false
+}
 
-    fun RuleListActivity.handleOptionsItemSelected(item: MenuItem): Boolean {
-        if (R.id.action_view_wiki == item.itemId) {
-            BrowserUtils.launch(this, BuildProp.THANOX_URL_DOCS_PROFILE)
-            return true
-        }
-        if (R.id.action_import_from_file == item.itemId) {
-            AppFeatureManager.withSubscriptionStatus(this) {
-                if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
-                    if (OsUtils.isTOrAbove()) {
-                        RuleListActivityPermissionRequester.importFromFileTOrAboveChecked(this)
-                    } else {
-                        RuleListActivityPermissionRequester.importFromFileTBelowChecked(this)
-                    }
-                } else {
-                    AppFeatureManager.showSubscribeDialog(this)
-                }
+fun RuleListViewModel.helperImportFromFile(pickedFile: DocumentFile) {
+    val pickedFileIS = pickedFile.openInputStream(application)
+    if (pickedFileIS == null) {
+        Toast.makeText(application, "Unable to open input stream.", Toast.LENGTH_LONG).show()
+        return
+    }
+    runCatching {
+        val ruleString = pickedFileIS.reader().readText()
+        val callback: RuleAddCallback = object : RuleAddCallback() {
+            override fun onRuleAddSuccess() {
+                super.onRuleAddSuccess()
+                Toast.makeText(
+                    application,
+                    github.tornaco.android.thanos.res.R.string.module_profile_editor_save_success,
+                    Toast.LENGTH_LONG
+                ).show()
             }
-            return true
-        }
-        if (R.id.action_import_examples == item.itemId) {
-            ProfileExampleActivity.Starter.start(this)
-            return true
-        }
-        if (R.id.action_online == item.itemId) {
-            AppFeatureManager.withSubscriptionStatus(this) {
-                if (it) {
-                    OnlineProfileActivity.Starter.start(this)
-                } else {
-                    AppFeatureManager.showSubscribeDialog(this)
-                }
+
+            override fun onRuleAddFail(errorCode: Int, errorMessage: String?) {
+                super.onRuleAddFail(errorCode, errorMessage)
+                ThanosManager.from(application)
+                    .profileManager
+                    .addRule(
+                        "Thanox",
+                        DEFAULT_RULE_VERSION,
+                        ruleString,
+                        object : RuleAddCallback() {
+                            override fun onRuleAddSuccess() {
+                                super.onRuleAddSuccess()
+                                Toast.makeText(
+                                    application,
+                                    github.tornaco.android.thanos.res.R.string.module_profile_editor_save_success,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                            override fun onRuleAddFail(errorCode: Int, errorMessage: String?) {
+                                super.onRuleAddFail(errorCode, errorMessage)
+                                Toast.makeText(
+                                    application,
+                                    errorMessage,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        },
+                        ProfileManager.RULE_FORMAT_YAML
+                    )
             }
-            return true
         }
-        if (R.id.action_global_var == item.itemId) {
-            GlobalVarListActivity.start(this)
-            return true
-        }
-        if (R.id.action_add == item.itemId) {
-            AppFeatureManager.withSubscriptionStatus(this) {
-                if (it || viewModel.ruleInfoList != null && viewModel.ruleInfoList.size <= 3) {
-                    onRequestAddNewRule()
-                } else {
-                    AppFeatureManager.showSubscribeDialog(this)
-                }
-            }
-            return true
-        }
-        if (R.id.action_rule_engine == item.itemId) {
-            RuleEngineSettingsActivity.start(this)
-            return true
-        }
-        if (R.id.action_rule_console == item.itemId) {
-            AppFeatureManager.withSubscriptionStatus(this) {
-                if (it) {
-                    ConsoleActivity.Starter.start(this)
-                } else {
-                    AppFeatureManager.showSubscribeDialog(this)
-                }
-            }
-            return true
-        }
-        if (R.id.action_rule_log == item.itemId) {
-            LogActivity.Starter.start(this)
-            return true
-        }
-        return false
+
+        // Try json first.
+        ThanosManager.from(application)
+            .profileManager
+            .addRule(
+                "Thanox",
+                DEFAULT_RULE_VERSION,
+                ruleString,
+                callback,
+                ProfileManager.RULE_FORMAT_JSON
+            )
+    }.onFailure {
+        ToastUtils.nook(application, it.toString())
     }
 }

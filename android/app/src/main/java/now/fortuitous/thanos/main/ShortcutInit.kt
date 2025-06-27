@@ -7,8 +7,8 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
 import github.tornaco.android.thanos.R
-import now.fortuitous.thanos.power.SmartFreezeActivity
 import now.fortuitous.thanos.process.v2.ProcessManageActivityV2Delegate
+import now.fortuitous.thanos.sf.SFActivity
 import tornaco.apps.thanox.ThanosShizukuMainActivity
 
 class ShortcutInit(val context: Context) {
@@ -23,7 +23,7 @@ class ShortcutInit(val context: Context) {
         if (!hasDynamicShortcut(ID_THANOX_SF)) {
             addDynamicShortcut(
                 ID_THANOX_SF,
-                SmartFreezeActivity::class.java,
+                SFActivity::class.java,
                 R.drawable.shortcut_smart_freeze,
                 context.getString(github.tornaco.android.thanos.res.R.string.feature_title_smart_app_freeze)
             )

@@ -98,9 +98,6 @@
             android:exported="false"
             android:theme="@style/AppThemeNeedRestart" />
         <activity
-            android:name="now.fortuitous.thanos.power.SmartFreezeActivity"
-            android:exported="true" />
-        <activity
             android:name="now.fortuitous.thanos.power.ShortcutStubActivity"
             android:excludeFromRecents="true"
             android:exported="false"

@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import github.tornaco.android.thanos.R
-import now.fortuitous.thanos.power.SmartFreezeActivity
+import now.fortuitous.thanos.sf.SFActivity
 
 class SmartFreezeAppWidgetProvider : AppWidgetProvider() {
 
@@ -20,8 +20,8 @@ class SmartFreezeAppWidgetProvider : AppWidgetProvider() {
             val pendingIntent: PendingIntent = PendingIntent.getActivity(
                 /* context = */ context,
                 /* requestCode = */  0,
-                /* intent = */ Intent(context, SmartFreezeActivity::class.java).apply {
-                    putExtra(SmartFreezeActivity.EXTRA_EXPAND_SEARCH, true)
+                /* intent = */ Intent(context, SFActivity::class.java).apply {
+                    putExtra(SFActivity.EXTRA_EXPAND_SEARCH, true)
                     addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 },
                 /* flags = */ PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE

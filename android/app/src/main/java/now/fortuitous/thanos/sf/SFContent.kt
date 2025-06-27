@@ -123,6 +123,8 @@ class SFActivity : ComposeThemeActivity() {
     private val storageHelper = SimpleStorageHelper(this)
 
     companion object {
+        const val EXTRA_EXPAND_SEARCH = "expand.search"
+
         @JvmStatic
         fun start(context: Context) {
             val starter = Intent(context, SFActivity::class.java)
@@ -133,7 +135,7 @@ class SFActivity : ComposeThemeActivity() {
     @Composable
     override fun Content() {
         CompositionLocalProvider(LocalSimpleStorageHelper provides storageHelper) {
-            SFContent { finish() }
+            SFContent(intent.getBooleanExtra(EXTRA_EXPAND_SEARCH, false)) { finish() }
         }
         FeatureAlert()
         LVLStateEffects()
@@ -178,7 +180,7 @@ private fun SFActivity.FeatureAlert() {
 }
 
 @Composable
-fun SFContent(back: () -> Unit) {
+fun SFContent(expandSearch: Boolean, back: () -> Unit) {
     val subState by LVLStateHolder.collectAsState()
     val context = LocalContext.current
     val sfVM = hiltViewModel<SFVM>()
@@ -228,6 +230,12 @@ fun SFContent(back: () -> Unit) {
             .collect {
                 sfVM.search(it)
             }
+    }
+    LaunchedEffect(Unit) {
+        if (expandSearch) {
+            delay(500)
+            searchBarState.showSearchBar()
+        }
     }
 
     val installTitle =
@@ -683,5 +691,3 @@ private fun CreateShortcutButtons(
         Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.menu_title_create_shortcut_apk))
     }
 }
-
-// TODO Hao 1. Dialog 2. shortcut 3. export 4. subscribe

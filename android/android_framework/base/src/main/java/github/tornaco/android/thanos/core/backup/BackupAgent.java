@@ -10,13 +10,13 @@ public class BackupAgent {
     private final IBackupAgent server;
 
     @SneakyThrows
-    public void performBackup(IFileDescriptorInitializer init, String domain, String path, IBackupCallback callback) {
-        server.performBackup(init, domain, path, callback);
+    public void performBackup(ParcelFileDescriptor init) {
+        server.performBackup(init);
     }
 
     @SneakyThrows
-    public void performRestore(ParcelFileDescriptor pfd, String domain, String path, IBackupCallback callback) {
-        server.performRestore(pfd, domain, path, callback);
+    public void performRestore(ParcelFileDescriptor pfd) {
+        server.performRestore(pfd);
     }
 
     @SneakyThrows

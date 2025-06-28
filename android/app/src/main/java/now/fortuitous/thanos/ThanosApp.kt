@@ -30,6 +30,7 @@ import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator
 import dagger.hilt.android.HiltAndroidApp
 import github.tornaco.android.thanos.MultipleModulesApp
 import github.tornaco.android.thanos.core.app.AppGlobals
+import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.logAdapter
 import github.tornaco.android.thanos.logFolderPath
 import github.tornaco.android.thanos.main.installCrashHandler
@@ -73,11 +74,6 @@ class ThanosApp : MultipleModulesApp() {
         XLog.w("onCreate.$this")
 
         initThanos {
-            // Init Shizuku.
-            ThanosShizuku.init(this)
-            ThanosShizuku.installShortcut = { context, app ->
-                ShortcutHelper.addShortcut(context, app)
-            }
             AppFeatureManager.launchSubscribeActivity = { launchSubscribeActivity(it) {} }
 
             XposedScope.init()
@@ -85,6 +81,14 @@ class ThanosApp : MultipleModulesApp() {
             runBlocking {
                 ThemeActivityVM.init(this@ThanosApp)
                 XLog.d("ThemeActivityVM: ${ThemeActivityVM.state.value}")
+            }
+
+            // Init Shizuku. if xposed mod is not available.
+            if (!ThanosManager.from(this).isServiceInstalled) {
+                ThanosShizuku.init(this)
+                ThanosShizuku.installShortcut = { context, app ->
+                    ShortcutHelper.addShortcut(context, app)
+                }
             }
         }
     }

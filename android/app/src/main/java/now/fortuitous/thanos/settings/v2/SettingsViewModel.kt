@@ -3,7 +3,6 @@ package now.fortuitous.thanos.settings.v2
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.ParcelFileDescriptor
-import android.os.RemoteException
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.viewModelScope
 import com.anggrayudi.storage.file.fullName
@@ -15,9 +14,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import github.tornaco.android.thanos.common.CommonPreferences
 import github.tornaco.android.thanos.core.app.ThanosManager
-import github.tornaco.android.thanos.core.backup.IBackupCallback
-import github.tornaco.android.thanos.core.backup.IFileDescriptorConsumer
-import github.tornaco.android.thanos.core.backup.IFileDescriptorInitializer
 import github.tornaco.android.thanos.core.profile.ConfigTemplate
 import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.core.util.FileUtils
@@ -29,7 +25,6 @@ import kotlinx.coroutines.launch
 import now.fortuitous.thanos.pref.AppPreference
 import now.fortuitous.thanos.settings.exportLogs
 import java.io.File
-import java.io.IOException
 import java.io.OutputStream
 import javax.inject.Inject
 
@@ -116,6 +111,7 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
     }
 
     fun backup(pickedFile: DocumentFile) {
+        XLog.w("backup: $pickedFile")
         val pickedFileOS = pickedFile.openOutputStream(context)
         if (pickedFileOS == null) {
             viewModelScope.launch {
@@ -128,82 +124,44 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
             }
             return
         }
-        val backupTmpDir = File(context.externalCacheDir, "backup")
-        thanos.backupAgent
-            .performBackup(
-                object : IFileDescriptorInitializer.Stub() {
-                    @Throws(RemoteException::class)
-                    override fun initParcelFileDescriptor(
-                        domain: String, path: String,
-                        consumer: IFileDescriptorConsumer
-                    ) {
-                        val subFile = File(backupTmpDir, path)
-                        XLog.d("create sub file: $subFile")
-                        try {
-                            Files.createParentDirs(subFile)
-                            if (subFile.createNewFile()) {
-                                val pfd = ParcelFileDescriptor.open(
-                                    subFile,
-                                    ParcelFileDescriptor.MODE_READ_WRITE
-                                )
-                                consumer.acceptAppParcelFileDescriptor(pfd)
-                            } else {
-                                consumer.acceptAppParcelFileDescriptor(null)
-                            }
-                        } catch (e: IOException) {
-                            XLog.e(e, "createParentDirs fail")
-                            consumer.acceptAppParcelFileDescriptor(null)
-                        }
-                    }
-                },
-                null,
-                null,
-                object : IBackupCallback.Stub() {
-                    override fun onBackupFinished(domain: String?, path: String) {
-                        XLog.d("onBackupFinished: $path")
-                        val subFile = File(backupTmpDir, path)
-                        // Move it to dest.
-                        try {
-                            copyFileToOutputStream(subFile, pickedFileOS)
-                            runCatching { backupTmpDir.deleteRecursively() }
-                            viewModelScope.launch {
-                                _backupPerformed.emit(
-                                    BackupResult.Success(
-                                        pickedFile.fullName
-                                    )
-                                )
-                            }
-                        } catch (e: Throwable) {
-                            XLog.e(e, "copy err")
-                            viewModelScope.launch {
-                                _backupPerformed.emit(
-                                    BackupResult.Failed(
-                                        e.message ?: "Unknown err.",
-                                        subFile
-                                    )
-                                )
-                            }
-                        }
-                    }
-
-                    override fun onRestoreFinished(domain: String?, path: String?) {
-
-                    }
-
-                    override fun onFail(message: String) {
-                        viewModelScope.launch {
-                            _backupPerformed.emit(
-                                BackupResult.Failed(
-                                    message,
-                                    backupTmpDir
-                                )
-                            )
-                        }
-                    }
-
-                    override fun onProgress(progressMessage: String?) {
-                    }
-                })
+        val backupTmpDir = File(context.cacheDir, "backup")
+        XLog.w("backup, backupTmpDir: $backupTmpDir")
+        val name =
+            "Thanox-Backup-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".zip"
+        val subFile = File(backupTmpDir, name)
+        XLog.d("backup create sub file: $subFile")
+        try {
+            Files.createParentDirs(subFile)
+            XLog.d("backup createParentDirs success")
+            require(subFile.createNewFile()) { "backup, create new file failed. $subFile" }
+            XLog.d("backup createNewFile success")
+            val pfd = ParcelFileDescriptor.open(
+                subFile,
+                ParcelFileDescriptor.MODE_READ_WRITE
+            )
+            XLog.d("backup pfd: $pfd")
+            thanos.backupAgent.performBackup(pfd)
+            // Move it to dest.
+            copyFileToOutputStream(subFile, pickedFileOS)
+            runCatching { backupTmpDir.deleteRecursively() }
+            viewModelScope.launch {
+                _backupPerformed.emit(
+                    BackupResult.Success(
+                        pickedFile.fullName
+                    )
+                )
+            }
+        } catch (e: Throwable) {
+            XLog.e(e, "Backup fail")
+            viewModelScope.launch {
+                _backupPerformed.emit(
+                    BackupResult.Failed(
+                        e.message ?: "Unknown err.",
+                        subFile
+                    )
+                )
+            }
+        }
     }
 
     fun log(pickedFile: DocumentFile) {
@@ -262,29 +220,10 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
             Files.write(buffer, tmpZipFile)
 
             val pfd = ParcelFileDescriptor.open(tmpZipFile, ParcelFileDescriptor.MODE_READ_ONLY)
-            thanos.backupAgent
-                .performRestore(pfd, null, null, object : IBackupCallback.Stub() {
-                    override fun onBackupFinished(domain: String?, path: String?) {
-                        // Not for us.
-                    }
-
-                    override fun onRestoreFinished(domain: String?, path: String?) {
-                        XLog.d("onRestoreFinished: $path")
-                        viewModelScope.launch {
-                            _restorePerformed.emit(RestoreResult.Success)
-                        }
-                    }
-
-                    override fun onFail(message: String?) {
-                        XLog.d("onFail: $message")
-                        viewModelScope.launch {
-                            _restorePerformed.emit(RestoreResult.Failed(message ?: "Unknown error"))
-                        }
-                    }
-
-                    override fun onProgress(progressMessage: String?) {
-                    }
-                })
+            thanos.backupAgent.performRestore(pfd)
+            viewModelScope.launch {
+                _restorePerformed.emit(RestoreResult.Success)
+            }
         } catch (e: Exception) {
             viewModelScope.launch {
                 _restorePerformed.emit(RestoreResult.Failed(e.message ?: e.toString()))

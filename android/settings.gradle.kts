@@ -32,8 +32,6 @@ include(":shortcut_stub")
 
 include(":annotation_processors:xposed_hook_annotation")
 include(":annotation_processors:xposed_hook_compiler")
-include(":annotation_processors:permission-requester-annotation")
-include(":annotation_processors:permission-requester-compiler")
 
 // Modules.
 include(":modules:module_common")

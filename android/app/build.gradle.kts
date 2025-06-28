@@ -211,10 +211,6 @@ dependencies {
 
     implementation(libs.libsu.core)
 
-    compileOnly(project(":annotation_processors:permission-requester-annotation"))
-    kapt(project(":annotation_processors:permission-requester-compiler"))
-    annotationProcessor(project(":annotation_processors:permission-requester-compiler"))
-
     implementation(libs.lottie.compose)
     implementation(libs.lottie)
 

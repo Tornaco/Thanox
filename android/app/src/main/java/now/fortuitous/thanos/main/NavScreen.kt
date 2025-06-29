@@ -131,6 +131,12 @@ fun NavScreen() {
     val state by viewModel.state.collectAsState()
     val activity = LocalContext.current.requireActivity()
 
+    LaunchedEffect(state) {
+        if (state.activeStatus == ActiveStatus.RebootNeeded && NeedToRestartActivity.Starter.FORCE_RESTART) {
+            NeedToRestartActivity.Starter.start(activity)
+        }
+    }
+
     var isShowRebootConfirmationDialog by remember {
         mutableStateOf(false)
     }

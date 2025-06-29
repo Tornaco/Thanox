@@ -18,6 +18,7 @@
 package now.fortuitous.thanos.main
 
 import android.content.Context
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.tween
@@ -58,8 +59,9 @@ import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.ActivityUtils
 
 class NeedToRestartActivity : ComposeThemeActivity() {
-
     object Starter {
+        const val FORCE_RESTART = true
+
         fun start(context: Context?) {
             ActivityUtils.startActivity(context, NeedToRestartActivity::class.java)
         }
@@ -74,6 +76,10 @@ class NeedToRestartActivity : ComposeThemeActivity() {
     @Preview(name = "NeedToStartScreen", showSystemUi = true, showBackground = true)
     private fun NeedToStartScreen() {
         var visible by remember { mutableStateOf(false) }
+
+        BackHandler(Starter.FORCE_RESTART) {
+            finishAffinity()
+        }
 
         Scaffold(modifier = Modifier.fillMaxSize()) {
             AnimatedVisibility(
@@ -119,15 +125,20 @@ class NeedToRestartActivity : ComposeThemeActivity() {
                             .padding(end = 32.dp, bottom = 12.dp)
                     ) {
 
-                        TextButton(modifier = Modifier.padding(16.dp), onClick = { finish() }) {
-                            Text(
-                                color = Color.White,
-                                text = AnnotatedString(stringResource(id = github.tornaco.android.thanos.res.R.string.reboot_later)).capitalize(),
-                                style = MaterialTheme.typography.bodyMedium
-                            )
+                        if (!Starter.FORCE_RESTART) {
+                            TextButton(
+                                modifier = Modifier.padding(16.dp),
+                                onClick = { finish() }) {
+                                Text(
+                                    color = Color.White,
+                                    text = AnnotatedString(stringResource(id = github.tornaco.android.thanos.res.R.string.reboot_later)).capitalize(),
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
                         }
 
-                        TextButton(modifier = Modifier.padding(vertical = 16.dp),
+                        TextButton(
+                            modifier = Modifier.padding(vertical = 16.dp),
                             onClick = {
                                 withThanos {
                                     powerManager.reboot()

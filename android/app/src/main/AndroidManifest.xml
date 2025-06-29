@@ -96,6 +96,7 @@
         <activity
             android:name="now.fortuitous.thanos.main.NeedToRestartActivity"
             android:exported="false"
+            android:launchMode="singleTask"
             android:theme="@style/AppThemeNeedRestart" />
         <activity
             android:name="now.fortuitous.thanos.power.ShortcutStubActivity"

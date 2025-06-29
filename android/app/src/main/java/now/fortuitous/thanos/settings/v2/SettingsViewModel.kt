@@ -126,24 +126,24 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
         }
         val backupTmpDir = File(context.cacheDir, "backup")
         XLog.w("backup, backupTmpDir: $backupTmpDir")
-        val name =
-            "Thanox-Backup-" + DateUtils.formatForFileName(System.currentTimeMillis()) + ".zip"
-        val subFile = File(backupTmpDir, name)
-        XLog.d("backup create sub file: $subFile")
+        val name = autoGenBackupFileName() + ".zip"
+        val tmpBackupFile = File(backupTmpDir, name)
         try {
-            Files.createParentDirs(subFile)
-            XLog.d("backup createParentDirs success")
-            require(subFile.createNewFile()) { "backup, create new file failed. $subFile" }
+            // Clean old tmp backups
+            backupTmpDir.deleteRecursively()
+            backupTmpDir.mkdirs()
+            XLog.d("backup create tmp backup file: $tmpBackupFile")
+            require(tmpBackupFile.createNewFile()) { "backup, create new file failed. $tmpBackupFile" }
             XLog.d("backup createNewFile success")
             val pfd = ParcelFileDescriptor.open(
-                subFile,
+                tmpBackupFile,
                 ParcelFileDescriptor.MODE_READ_WRITE
             )
             XLog.d("backup pfd: $pfd")
             thanos.backupAgent.performBackup(pfd)
             // Move it to dest.
-            copyFileToOutputStream(subFile, pickedFileOS)
-            runCatching { backupTmpDir.deleteRecursively() }
+            copyFileToOutputStream(tmpBackupFile, pickedFileOS)
+            XLog.d("backup complete.")
             viewModelScope.launch {
                 _backupPerformed.emit(
                     BackupResult.Success(
@@ -157,7 +157,7 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
                 _backupPerformed.emit(
                     BackupResult.Failed(
                         e.message ?: "Unknown err.",
-                        subFile
+                        tmpBackupFile
                     )
                 )
             }
@@ -198,7 +198,7 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
 
     fun restore(pickedFile: DocumentFile) {
         XLog.d("storageHelper restore.")
-        val tmpDir = File(context.externalCacheDir, "restore_tmp")
+        val tmpDir = File(context.cacheDir, "restore_tmp")
         try {
             val tmpZipFile = File(
                 tmpDir,
@@ -221,10 +221,12 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
 
             val pfd = ParcelFileDescriptor.open(tmpZipFile, ParcelFileDescriptor.MODE_READ_ONLY)
             thanos.backupAgent.performRestore(pfd)
+            XLog.d("restore complete.")
             viewModelScope.launch {
                 _restorePerformed.emit(RestoreResult.Success)
             }
         } catch (e: Exception) {
+            XLog.e(e, "restore fail")
             viewModelScope.launch {
                 _restorePerformed.emit(RestoreResult.Failed(e.message ?: e.toString()))
             }

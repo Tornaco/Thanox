@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class DateUtils {
 
-    private static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd-HH:mm:ss";
+    private static final String DATE_FORMAT_PATTERN = "yyyyMMddHHmmss";
     private static final String DATE_FORMAT_PATTERN_MESSAGE_TIME_SHORT = "HH:mm:ss";
     private static final String DATE_FORMAT_PATTERN_MESSAGE_TIME_LONG = "yyyy-MM-dd HH:mm:ss";
 

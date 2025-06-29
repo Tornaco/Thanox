@@ -492,7 +492,7 @@ private fun FeatureItem(
                 52.dp.toPx()
             }
         }
-        val color = MaterialTheme.colorScheme.surface
+        val color = Color.Transparent
         val customPainter = remember {
             object : Painter() {
                 override val intrinsicSize: Size

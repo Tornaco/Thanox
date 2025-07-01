@@ -42,7 +42,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.DismissibleDrawerSheet
@@ -89,12 +88,12 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.module.compose.common.requireActivity
 import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColorSchema
-import github.tornaco.android.thanos.module.compose.common.theme.ThanoxColorScheme
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
 import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
+import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
@@ -263,7 +262,7 @@ fun AllNewNavScreen() {
                         }
                     }
 
-                    PullRefreshIndicator(
+                    Md3ExpPullRefreshIndicator(
                         state.isLoading,
                         pullRefreshState,
                         Modifier.align(Alignment.TopCenter)
@@ -330,9 +329,13 @@ private fun NavContent(
             .verticalScroll(rememberScrollState())
     ) {
         CompositionLocalProvider(
-            LocalThanoxColorSchema provides ThanoxColorScheme(
-                cardBgColor = Color(0xff64b5f6).copy(alpha = 0.08f)
-            )
+            LocalThanoxColorSchema provides if (LocalThanoxColorSchema.current.isDarkTheme) {
+                LocalThanoxColorSchema.current
+            } else {
+                LocalThanoxColorSchema.current.copy(
+                    cardBgColor = Color(0xff64b5f6).copy(alpha = 0.08f)
+                )
+            }
         ) {
             NavHeaderContent(
                 modifier = Modifier.padding(16.dp),
@@ -442,7 +445,15 @@ private fun FeatureItem(
         modifier = Modifier
             .padding(8.dp)
             .clip(RoundedCornerShape(cardCornerSize))
-            .background(itemColor.copy(alpha = 0.08f))
+            .background(
+                if (LocalThanoxColorSchema.current.isDarkTheme) {
+                    LocalThanoxColorSchema.current.cardBgColor
+                } else {
+                    itemColor.copy(
+                        alpha = 0.08f
+                    )
+                }
+            )
             .combinedClickable(
                 onLongClick = {
                     onItemLongClick(item)

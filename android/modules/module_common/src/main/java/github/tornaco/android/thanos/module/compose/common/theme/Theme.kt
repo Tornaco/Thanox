@@ -155,11 +155,13 @@ fun ThanoxExpressiveTheme(
 
     val thanoxColorScheme = when {
         darkTheme -> ThanoxColorScheme(
-            cardBgColor = Color(0x72555555)
+            cardBgColor = Color(0x72555555),
+            isDarkTheme = true
         )
 
         else -> ThanoxColorScheme(
             cardBgColor = Color(0xeaffffff),
+            isDarkTheme = false
         )
     }
 
@@ -186,4 +188,5 @@ private fun noLocalProvidedFor(name: String): Nothing {
 @Stable
 data class ThanoxColorScheme(
     val cardBgColor: Color,
+    val isDarkTheme: Boolean
 )

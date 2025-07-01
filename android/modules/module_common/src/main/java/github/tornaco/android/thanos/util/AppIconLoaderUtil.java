@@ -12,7 +12,7 @@ import com.elvishew.xlog.XLog;
 
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.util.ApkUtil;
-import github.tornaco.android.thanos.theme.AppThemePreferences;
+import github.tornaco.android.thanos.theme.CommonAppPrefs;
 import github.tornaco.android.thanos.util.iconpack.IconPack;
 import github.tornaco.android.thanos.util.iconpack.IconPackManager;
 
@@ -48,7 +48,7 @@ public class AppIconLoaderUtil {
     @Nullable
     public static Drawable loadAppIconDrawableWithIconPack(Context context, String pkgName) {
         try {
-            String iconPackPackage = AppThemePreferences.getInstance().getIconPack(context, null);
+            String iconPackPackage = CommonAppPrefs.getInstance().getIconPack(context, null);
             if (iconPackPackage != null) {
                 IconPackManager iconPackManager = IconPackManager.getInstance();
                 IconPack pack = iconPackManager.getIconPackage(context, iconPackPackage);

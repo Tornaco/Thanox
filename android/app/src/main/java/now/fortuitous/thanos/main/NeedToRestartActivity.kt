@@ -54,13 +54,14 @@ import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
 import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.ActivityUtils
 
 class NeedToRestartActivity : ComposeThemeActivity() {
     object Starter {
-        const val FORCE_RESTART = true
+        const val FORCE_RESTART = true && !BuildProp.THANOS_BUILD_DEBUG
 
         fun start(context: Context?) {
             ActivityUtils.startActivity(context, NeedToRestartActivity::class.java)

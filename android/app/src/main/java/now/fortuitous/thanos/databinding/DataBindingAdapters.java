@@ -28,10 +28,9 @@ import com.bumptech.glide.GenericTransitionOptions;
 
 import java.util.List;
 
-import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.process.RunningState;
-import github.tornaco.android.thanos.theme.AppThemePreferences;
+import github.tornaco.android.thanos.theme.CommonAppPrefs;
 import github.tornaco.android.thanos.util.GlideApp;
 import github.tornaco.android.thanos.util.GlideRequest;
 import now.fortuitous.thanos.power.StandbyRule;
@@ -74,7 +73,7 @@ public class DataBindingAdapters {
                 .error(github.tornaco.android.thanos.module.common.R.mipmap.ic_fallback_app_icon)
                 .fallback(github.tornaco.android.thanos.module.common.R.mipmap.ic_fallback_app_icon)
                 .transition(GenericTransitionOptions.with(github.tornaco.android.thanos.module.common.R.anim.grow_fade_in));
-        if (AppThemePreferences.getInstance().useRoundIcon(imageView.getContext())) {
+        if (CommonAppPrefs.getInstance().useRoundIcon(imageView.getContext())) {
             request = request.circleCrop();
         }
         request.into(imageView);

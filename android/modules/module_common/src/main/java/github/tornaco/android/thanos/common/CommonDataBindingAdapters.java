@@ -21,7 +21,7 @@ import java.util.List;
 
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.module.common.R;
-import github.tornaco.android.thanos.theme.AppThemePreferences;
+import github.tornaco.android.thanos.theme.CommonAppPrefs;
 import github.tornaco.android.thanos.util.GlideApp;
 import github.tornaco.android.thanos.util.GlideRequest;
 import github.tornaco.android.thanos.widget.GrayscaleTransformation;
@@ -58,7 +58,7 @@ public class CommonDataBindingAdapters {
                         .error(R.mipmap.ic_fallback_app_icon)
                         .fallback(R.mipmap.ic_fallback_app_icon)
                         .transition(GenericTransitionOptions.with(R.anim.grow_fade_in));
-        if (AppThemePreferences.getInstance().useRoundIcon(imageView.getContext())) {
+        if (CommonAppPrefs.getInstance().useRoundIcon(imageView.getContext())) {
             request = request.circleCrop();
         }
         if (appInfo != null && appInfo.disabled()) {

@@ -13,6 +13,7 @@ import github.tornaco.android.thanos.module.compose.common.infra.sort.AppSortToo
 import github.tornaco.android.thanos.module.compose.common.loader.AppSetFilterItem
 import github.tornaco.android.thanos.module.compose.common.loader.Loader
 import github.tornaco.android.thanos.res.R
+import github.tornaco.android.thanos.theme.CommonAppPrefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -129,6 +130,8 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
     }
 
     fun onFilterItemSelected(appSetFilterItem: AppSetFilterItem) {
+        CommonAppPrefs.getInstance()
+            .setFeatureAppFilterId(context, config.featureId, appSetFilterItem.id)
         updateState {
             copy(selectedAppSetFilterItem = appSetFilterItem)
         }
@@ -144,11 +147,13 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
 
     private suspend fun loadDefaultAppFilterItems() {
         val appFilterListItems = Loader.loadAllFromAppSet(context)
+        val filterPref = CommonAppPrefs.getInstance()
+            .getFeatureAppFilterId(context, config.featureId, PREBUILT_PACKAGE_SET_ID_3RD)
         updateState {
             copy(
                 // Default select 3-rd
                 selectedAppSetFilterItem = appFilterListItems.find {
-                    it.id == PREBUILT_PACKAGE_SET_ID_3RD
+                    it.id == filterPref
                 },
                 appFilterItems = appFilterListItems
             )
@@ -198,8 +203,12 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
                 }
             }
         }
+
+        val prefSort = CommonAppPrefs.getInstance()
+            .getFeatureSortSelection(context, config.featureId, AppSortTools.Default)
+
         updateState {
-            copy(sortToolItems = items)
+            copy(sortToolItems = items, appSort = prefSort)
         }
     }
 
@@ -237,6 +246,7 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
     }
 
     fun updateSort(sort: AppSortTools) {
+        CommonAppPrefs.getInstance().setFeatureSortSelection(context, config.featureId, sort)
         updateState { copy(appSort = sort) }
         refresh("updateSort")
     }

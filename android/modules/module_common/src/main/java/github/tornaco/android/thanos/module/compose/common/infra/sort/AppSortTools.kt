@@ -8,8 +8,10 @@ import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.module.compose.common.infra.AppUiModel
 import github.tornaco.android.thanos.res.R
 import si.virag.fuzzydateformatter.FuzzyDateTimeFormatter
+import java.text.Collator
 import java.time.Duration
 import java.util.Date
+import java.util.Locale
 
 enum class AppSortTools(
     @field:StringRes @param:StringRes val labelRes: Int,
@@ -18,10 +20,13 @@ enum class AppSortTools(
     Default(
         R.string.common_sort_by_default,
         object : AppSorterProvider {
+            private val collator = Collator.getInstance(Locale.CHINESE)
+
             override fun comparator(context: Context): Comparator<AppUiModel> {
-                return Comparator { obj: AppUiModel, listModel: AppUiModel ->
-                    obj.appInfo.compareTo(listModel.appInfo)
-                }
+                return compareByDescending<AppUiModel> { it.isChecked }
+                    .thenComparator { a, b ->
+                        collator.compare(a.appInfo.appLabel, b.appInfo.appLabel)
+                    }
             }
 
             override fun getAppSortDescription(context: Context, model: AppUiModel): String? {

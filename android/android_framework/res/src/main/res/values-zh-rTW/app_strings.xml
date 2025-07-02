@@ -1458,6 +1458,7 @@
 
     <string name="subscribe">訂閱</string>
     <string name="sub_intro_unsub">尚未訂閱</string>
+    <string name="sub_intro_unsub_content_limit">您尚未订阅，仅展示部分内容。</string>
     <string name="sub_intro_message">為了更好地為您服務，Thanos 是一款需要訂閱的付費軟體。請點擊下方的訂閱按鈕以查看詳細的訂閱說明。 \n\n如果您已經是 Thanox 或 Thanox Pro 的付費用戶，無需再次訂閱 Thanos。您可以在訂閱頁面使用 Thanox 啟動碼或透過 Play 商店驗證您的資格。</string>
 
     <string name="bg_clean">後台清理</string>

@@ -1457,6 +1457,7 @@ Compatibility notice: If the default permission management function is not compa
 
     <string name="subscribe">订阅</string>
     <string name="sub_intro_unsub">尚未订阅</string>
+    <string name="sub_intro_unsub_content_limit">您尚未订阅，仅展示部分内容。</string>
     <string name="sub_intro_message">为了更好地为您服务，Thanos 是一款需要订阅的付费软件。请点击下方的订阅按钮查看详细的订阅说明。\n\n如果您已经是 Thanox 或 Thanox Pro 的付费用户，无需再次订阅 Thanos。您可以在订阅页面使用 Thanox 激活码或通过 Play 商店验证您的资格。</string>
 
     <string name="bg_clean">后台清理</string>

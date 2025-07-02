@@ -100,6 +100,7 @@ fun Activity.ThanoxXposed() {
 @Composable
 fun Activity.ThanoxShizuku() {
     XLog.w("ThanoxShizuku")
+    LVLStateEffects()
     LaunchedEffect(Unit) {
         ShortcutInit(this@ThanoxShizuku).initOnBootThanos()
     }

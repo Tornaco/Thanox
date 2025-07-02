@@ -105,7 +105,7 @@ fun Md3ExpPullRefreshIndicator(
         ) { refreshing ->
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 ContainedLoadingIndicator(
-                    modifier = Modifier.size(56.dp),
+                    modifier = Modifier.size(72.dp),
                     indicatorColor = MaterialTheme.colorScheme.primary,
                     polygons = if (refreshing) {
                         LoadingIndicatorDefaults.IndeterminateIndicatorPolygons

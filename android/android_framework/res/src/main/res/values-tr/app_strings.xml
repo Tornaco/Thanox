@@ -1489,6 +1489,7 @@
 
     <string name="subscribe">Abone ol</string>
     <string name="sub_intro_unsub">Abonelik iptal edildi</string>
+    <string name="sub_intro_unsub_content_limit">您尚未订阅，仅展示部分内容。</string>
     <string name="sub_intro_message">Size daha iyi hizmet verebilmek için Thanos, abonelik gerektiren ücretli bir yazılımdır. Abonelikle ilgili ayrıntılı talimatları görmek için lütfen aşağıdaki abone ol düğmesine tıklayın.
     Eğer zaten Thanox veya Thanox Pro\'nun ücretli bir kullanıcısıysanız, Thanos\'a tekrar abone olmanıza gerek yoktur. Abonelik sayfasında Thanox etkinleştirme kodunuzu kullanabilir veya Play Store üzerinden uygunluğunuzu doğrulayabilirsiniz.</string>
 

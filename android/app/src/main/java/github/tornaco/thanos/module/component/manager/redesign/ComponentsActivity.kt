@@ -35,7 +35,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.ArrowDropDown
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.AlertDialogDefaults
@@ -84,6 +83,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownItem
 import github.tornaco.android.thanos.module.compose.common.widget.DropdownSelector
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
+import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
@@ -519,7 +519,7 @@ class ComponentsActivity : ComposeThemeActivity() {
                         }
                     }
 
-                    PullRefreshIndicator(
+                    Md3ExpPullRefreshIndicator(
                         refreshing = refreshing,
                         state = refreshState,
                         modifier = Modifier.align(Alignment.TopCenter),

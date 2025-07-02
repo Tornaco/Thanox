@@ -1476,6 +1476,7 @@ Compatibility notice: If the default permission management function is not compa
 
     <string name="subscribe">Subscribe</string>
     <string name="sub_intro_unsub">Unsubscribed</string>
+    <string name="sub_intro_unsub_content_limit">Unsubscribed, page content is limited.</string>
     <string name="sub_intro_message">To better serve you, Thanos is a paid software that requires a subscription. Please click the subscribe button below to view detailed subscription instructions.
 If you are already a paid user of Thanox or Thanox Pro, you do not need to subscribe to Thanos again. You can use your Thanox activation code on the subscription page or verify your eligibility through the Play Store.</string>
 

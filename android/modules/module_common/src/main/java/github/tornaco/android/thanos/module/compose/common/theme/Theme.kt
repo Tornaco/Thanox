@@ -166,7 +166,17 @@ fun ThanoxExpressiveTheme(
     }
 
     val shapes = Shapes(largeIncreased = RoundedCornerShape(36.0.dp))
-    CompositionLocalProvider(LocalThanoxColorSchema provides thanoxColorScheme) {
+
+    val defaultGradientColors = GradientColors(
+        top = colorScheme.inverseOnSurface,
+        bottom = colorScheme.primaryContainer,
+        container = colorScheme.surface,
+    )
+
+    CompositionLocalProvider(
+        LocalThanoxColorSchema provides thanoxColorScheme,
+        LocalGradientColors provides defaultGradientColors
+    ) {
         MaterialExpressiveTheme(
             colorScheme = colorScheme,
             typography = Typography,

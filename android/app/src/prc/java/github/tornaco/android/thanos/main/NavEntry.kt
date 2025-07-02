@@ -2,9 +2,11 @@ package github.tornaco.android.thanos.main
 
 import android.app.Activity
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.core.app.ThanosManager
 import now.fortuitous.thanos.main.AppType
+import now.fortuitous.thanos.main.ChooserActivity
 import now.fortuitous.thanos.main.ThanoxShizuku
 import now.fortuitous.thanos.main.ThanoxXposed
 import now.fortuitous.thanos.pref.AppPreference
@@ -24,8 +26,15 @@ fun Activity.NavEntry() {
                 ThanoxShizuku()
             }
 
-            else -> {
+            AppType.BasedOnXposed.prefValue -> {
                 ThanoxXposed()
+            }
+
+            else -> {
+                SideEffect {
+                    ChooserActivity.Starter.start(this)
+                    finish()
+                }
             }
         }
     }

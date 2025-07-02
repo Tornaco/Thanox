@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import github.tornaco.android.thanos.module.compose.common.theme.NiaGradientBackground
 import kotlinx.coroutines.launch
 
 @Composable
@@ -26,59 +27,62 @@ fun OnBoardingScreen(onComplete: () -> Unit) {
     val scope = rememberCoroutineScope()
 
     Scaffold { padding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .consumeWindowInsets(padding)
-        ) {
-            HorizontalPager(
-                state = pagerState,
-                modifier = Modifier.fillMaxSize(),
-                count = onboardingList.size,
-                userScrollEnabled = false
-            ) {
-                OnboardingPagerItem(onboardingList[pagerState.currentPage])
-            }
-            Row(
+        NiaGradientBackground(modifier = Modifier.fillMaxSize()) {
+            Box(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 120.dp)
+                    .fillMaxSize()
+                    .consumeWindowInsets(padding)
             ) {
-                onboardingList.forEachIndexed { index, _ ->
-                    OnboardingPagerSlide(
-                        selected = index == pagerState.currentPage,
-                        MaterialTheme.colorScheme.secondary
+                HorizontalPager(
+                    state = pagerState,
+                    modifier = Modifier.fillMaxSize(),
+                    count = onboardingList.size,
+                    userScrollEnabled = false
+                ) {
+                    OnboardingPagerItem(onboardingList[pagerState.currentPage])
+                }
+                Row(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 120.dp)
+                ) {
+                    onboardingList.forEachIndexed { index, _ ->
+                        OnboardingPagerSlide(
+                            selected = index == pagerState.currentPage,
+                            MaterialTheme.colorScheme.secondary
+                        )
+                    }
+                }
+                FilledTonalButton(
+                    modifier = Modifier
+                        .animateContentSize()
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 32.dp),
+                    onClick = {
+                        if (pagerState.currentPage != onboardingList.size - 1) {
+                            scope.launch {
+                                pagerState.scrollToPage(page = pagerState.currentPage + 1)
+                            }
+                        } else {
+                            onComplete()
+                        }
+                    }
+                ) {
+                    Text(
+                        text = if (pagerState.currentPage == onboardingList.size - 1) {
+                            stringResource(github.tornaco.android.thanos.res.R.string.onboarding_text_complete)
+                        } else {
+                            stringResource(
+                                github.tornaco.android.thanos.res.R.string.onboarding_next
+                            )
+                        },
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(horizontal = 32.dp)
                     )
                 }
             }
-            FilledTonalButton(
-                modifier = Modifier
-                    .animateContentSize()
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 32.dp),
-                onClick = {
-                    if (pagerState.currentPage != onboardingList.size - 1) {
-                        scope.launch {
-                            pagerState.scrollToPage(page = pagerState.currentPage + 1)
-                        }
-                    } else {
-                        onComplete()
-                    }
-                }
-            ) {
-                Text(
-                    text = if (pagerState.currentPage == onboardingList.size - 1) {
-                        stringResource(github.tornaco.android.thanos.res.R.string.onboarding_text_complete)
-                    } else {
-                        stringResource(
-                            github.tornaco.android.thanos.res.R.string.onboarding_next
-                        )
-                    },
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.padding(horizontal = 32.dp)
-                )
-            }
         }
+
     }
 }
 

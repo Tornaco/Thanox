@@ -881,12 +881,23 @@ private fun SubscriptionStatus(subscribeState: LVLStateHolder.State) {
 
 @Composable
 private fun FooterText() {
-    Text(
-        modifier = Modifier.padding(horizontal = 16.dp),
-        text = "Since 2016",
-        style = MaterialTheme.typography.bodySmall.copy(
-            fontSize = 11.sp,
-            fontStyle = FontStyle.Italic
-        ),
-    )
+    Column {
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = "Since 2016",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 11.sp,
+                fontStyle = FontStyle.Italic
+            ),
+        )
+        StandardSpacer()
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = "备案号：陕ICP备20012350号-3A",
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = 11.sp,
+                fontStyle = FontStyle.Italic
+            ),
+        )
+    }
 }

@@ -49,6 +49,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -252,7 +253,8 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                     }
                 }
 
-                items(uiState.apps) { model ->
+                items(uiState.apps) { modelItem ->
+                    val model by rememberUpdatedState(modelItem)
                     when (val itemType = config.appItemConfig.itemType) {
                         is AppItemConfig.ItemType.Checkable -> {
                             val onAppItemCheckChange: (AppUiModel, Boolean) -> Unit =

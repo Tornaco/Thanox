@@ -385,7 +385,7 @@ fun SFContent(expandSearch: Boolean, back: () -> Unit) {
                     )
                 }
             }
-        }) {
+        }) { paddingValues ->
         val refreshing = state.isSFLoading
         val refreshState = rememberPullRefreshState(refreshing, onRefresh = {
             sfVM.refresh()
@@ -393,7 +393,7 @@ fun SFContent(expandSearch: Boolean, back: () -> Unit) {
         Box(
             Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(paddingValues)
                 .pullRefresh(refreshState)
         ) {
             BackHandler(state.isEditingMode) {

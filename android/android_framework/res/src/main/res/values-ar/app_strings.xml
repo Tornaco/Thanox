@@ -1447,6 +1447,7 @@ Compatibility notice: If the default permission management function is not compa
     <string name="remove_from_sf">取消智冻</string>
     <string name="add_to_pkg_set">添加到应用集</string>
     <string name="temp_unfreeze">解冻</string>
+    <string name="freeze">Freeze</string>
     <string name="create_shortcut">快捷方式</string>
 
     <string name="delete">删除</string>

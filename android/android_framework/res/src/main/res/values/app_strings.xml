@@ -1466,6 +1466,7 @@ Compatibility notice: If the default permission management function is not compa
     <string name="remove_from_sf">Remove from SF</string>
     <string name="add_to_pkg_set">Add to set</string>
     <string name="temp_unfreeze">Un-Freeze</string>
+    <string name="freeze">Freeze</string>
     <string name="create_shortcut">Create shortcut</string>
 
     <string name="delete">Delete</string>

@@ -1479,6 +1479,7 @@
     <string name="remove_from_sf">SF\'den kaldır</string>
     <string name="add_to_pkg_set">Kategoriye ekle</string>
     <string name="temp_unfreeze">Dondurmayı kaldır</string>
+    <string name="freeze">Freeze</string>
     <string name="create_shortcut">Kısayol oluştur</string>
 
     <string name="delete">Sil</string>

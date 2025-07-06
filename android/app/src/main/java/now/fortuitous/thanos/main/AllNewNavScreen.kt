@@ -96,6 +96,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
+import github.tornaco.android.thanos.support.main.NavHeaderContent
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.settings.v2.SettingsScreen

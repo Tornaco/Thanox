@@ -35,6 +35,11 @@ import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.OsUtils
 import github.tornaco.android.thanos.module.compose.common.infra.LifeCycleAwareViewModel
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
+import github.tornaco.android.thanos.support.main.CpuUsage
+import github.tornaco.android.thanos.support.main.MemType
+import github.tornaco.android.thanos.support.main.MemUsage
+import github.tornaco.android.thanos.support.main.StatusHeaderInfo
+import github.tornaco.android.thanos.support.main.defaultStatusHeaderInfo
 import github.tornaco.android.thanos.support.withThanos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -42,11 +47,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import now.fortuitous.thanos.dashboard.CpuUsage
-import now.fortuitous.thanos.dashboard.MemType
-import now.fortuitous.thanos.dashboard.MemUsage
-import now.fortuitous.thanos.dashboard.StatusHeaderInfo
-import now.fortuitous.thanos.dashboard.defaultStatusHeaderInfo
 import javax.inject.Inject
 
 enum class ActiveStatus {

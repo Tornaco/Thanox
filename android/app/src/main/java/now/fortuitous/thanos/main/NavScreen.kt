@@ -115,6 +115,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.toAnnotatedStr
 import github.tornaco.android.thanos.support.FeatureAccessDialog
 import github.tornaco.android.thanos.support.FeatureGrid
 import github.tornaco.android.thanos.support.clickableWithRippleBorderless
+import github.tornaco.android.thanos.support.main.NavHeaderContent
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

@@ -319,7 +319,7 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                         }
 
                         is AppItemConfig.ItemType.OptionSelectable -> {
-                            val optionDialog = optionMenuDialog(model.appInfo.appLabel, itemType) {
+                            val optionDialog = optionMenuDialog(model, itemType) {
                                 itemType.onSelected(model, it)
                                 vm.updateAppOptionState(model, it)
                             }
@@ -590,14 +590,15 @@ private fun OptionsFilterDropDown(
 
 @Composable
 private fun optionMenuDialog(
-    title: String,
+    model: AppUiModel,
     selectable: AppItemConfig.ItemType.OptionSelectable,
     onSelected: (String) -> Unit
 ): MenuDialogState<Unit> {
     val context = LocalContext.current
     val state = rememberMenuDialogState<Unit>(
         key1 = selectable,
-        title = { title },
+        key2 = model,
+        title = { model.appInfo.appLabel },
         menuItems = selectable.options.map {
             MenuDialogItem(
                 id = it.id,

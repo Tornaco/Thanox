@@ -21,10 +21,12 @@ package github.tornaco.android.thanos.module.compose.common.widget
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -82,6 +84,19 @@ fun OutlineBadge(modifier: Modifier = Modifier, text: String) {
             fontSize = 9.sp,
             fontFamily = fontFamilyProductSans(),
             color = MaterialTheme.colorScheme.primary
+        )
+    }
+}
+
+
+@Composable
+fun ClickableBadge(text: String, onClick: () -> Unit) {
+    TextButton(contentPadding = PaddingValues(4.dp), onClick = { onClick() }) {
+        MD3Badge(
+            text = text,
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+            textSize = 12.sp,
+            padding = 6.dp
         )
     }
 }

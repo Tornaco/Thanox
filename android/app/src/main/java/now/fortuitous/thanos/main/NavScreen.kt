@@ -102,9 +102,9 @@ import github.tornaco.android.thanos.module.compose.common.theme.LocalThanoxColo
 import github.tornaco.android.thanos.module.compose.common.theme.cardCornerSize
 import github.tornaco.android.thanos.module.compose.common.widget.AnimatedTextContainer
 import github.tornaco.android.thanos.module.compose.common.widget.AutoResizeText
+import github.tornaco.android.thanos.module.compose.common.widget.ClickableBadge
 import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
@@ -341,18 +341,6 @@ private fun AppBarBadges(
         ClickableBadge(text = stringResource(id = github.tornaco.android.thanos.res.R.string.badge_trying_app)) {
             onTryingAppClick()
         }
-    }
-}
-
-@Composable
-private fun ClickableBadge(text: String, onClick: () -> Unit) {
-    TextButton(contentPadding = PaddingValues(4.dp), onClick = { onClick() }) {
-        MD3Badge(
-            text = text,
-            containerColor = MaterialTheme.colorScheme.errorContainer,
-            textSize = 12.sp,
-            padding = 6.dp
-        )
     }
 }
 
@@ -637,9 +625,7 @@ fun FirstRunDialog(
     onAccept: () -> Unit,
     onDeny: () -> Unit,
 ) {
-    var remainingTimeSec by remember {
-        mutableStateOf(6)
-    }
+    var remainingTimeSec by remember { androidx.compose.runtime.mutableIntStateOf(6) }
     LaunchedEffect(true) {
         while (remainingTimeSec > 0) {
             delay(1000L)

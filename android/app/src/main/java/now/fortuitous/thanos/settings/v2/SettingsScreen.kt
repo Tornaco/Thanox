@@ -52,8 +52,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.elvishew.xlog.XLog
 import github.tornaco.android.thanos.BuildProp
 import github.tornaco.android.thanos.common.CommonPreferences
-import github.tornaco.android.thanos.module.compose.common.settings.Preference
-import github.tornaco.android.thanos.module.compose.common.settings.PreferenceUi
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.pm.AppInfo
 import github.tornaco.android.thanos.core.profile.ConfigTemplate
@@ -61,6 +59,8 @@ import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.module.compose.common.infra.Pref
+import github.tornaco.android.thanos.module.compose.common.settings.Preference
+import github.tornaco.android.thanos.module.compose.common.settings.PreferenceUi
 import github.tornaco.android.thanos.module.compose.common.theme.ThemeSettings
 import github.tornaco.android.thanos.module.compose.common.widget.ConfirmDialog
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
@@ -76,9 +76,9 @@ import github.tornaco.android.thanos.module.compose.common.widget.rememberMenuDi
 import github.tornaco.android.thanos.module.compose.common.widget.rememberTextInputState
 import github.tornaco.android.thanos.module.compose.common.widget.rememberThanoxBottomSheetState
 import github.tornaco.android.thanos.res.R
+import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.support.FeatureAccessDialog
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
-import github.tornaco.android.thanos.support.subscribe.SubscribeActivity
 import github.tornaco.android.thanos.util.BrowserUtils
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -866,7 +866,7 @@ private fun SubscriptionStatus(subscribeState: LVLStateHolder.State) {
             TextButton(
                 colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onPrimaryContainer),
                 onClick = {
-                    SubscribeActivity.start(context)
+                    AppFeatureManager.launchSubscribeActivity?.invoke(context)
                 }) {
                 LottieLoadingView(
                     file = "47603-twinkle-crown.json",
@@ -891,13 +891,16 @@ private fun FooterText() {
             ),
         )
         StandardSpacer()
-        Text(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = "备案号：陕ICP备20012350号-3A",
-            style = MaterialTheme.typography.bodySmall.copy(
-                fontSize = 11.sp,
-                fontStyle = FontStyle.Italic
-            ),
-        )
+        @Suppress("KotlinConstantConditions")
+        if (BuildProp.THANOS_BUILD_FLAVOR != "row") {
+            Text(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = "备案号：陕ICP备20012350号-3A",
+                style = MaterialTheme.typography.bodySmall.copy(
+                    fontSize = 11.sp,
+                    fontStyle = FontStyle.Italic
+                ),
+            )
+        }
     }
 }

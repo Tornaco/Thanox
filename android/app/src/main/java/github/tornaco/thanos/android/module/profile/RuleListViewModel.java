@@ -1,6 +1,7 @@
 package github.tornaco.thanos.android.module.profile;
 
 import android.app.Application;
+import android.content.Context;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
@@ -165,8 +166,8 @@ public class RuleListViewModel extends AndroidViewModel {
         }
     }
 
-    void importRule(DocumentFile file) {
-        RuleListActivityMenuHandlerKt.helperImportFromFile(this, file);
+    void importRule(DocumentFile file, Context context) {
+        RuleListActivityMenuHandlerKt.helperImportFromFile(this, file, context);
     }
 
     @Override

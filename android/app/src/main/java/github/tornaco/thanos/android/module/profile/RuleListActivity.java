@@ -57,7 +57,7 @@ public class RuleListActivity extends ThemeActivity implements RuleItemClickList
             if (documentFiles == null || documentFiles.isEmpty()) return null;
             //noinspection SequencedCollectionMethodCanBeUsed
             DocumentFile firstFile = documentFiles.get(0);
-            viewModel.importRule(firstFile);
+            viewModel.importRule(firstFile, this);
             return null;
         });
     }

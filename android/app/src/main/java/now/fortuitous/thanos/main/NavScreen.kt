@@ -22,8 +22,6 @@ package now.fortuitous.thanos.main
 
 import android.graphics.drawable.LayerDrawable
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,17 +41,12 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DismissibleDrawerSheet
 import androidx.compose.material3.DismissibleNavigationDrawer
-import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -106,6 +99,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.ClickableBadge
 import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
+import github.tornaco.android.thanos.module.compose.common.widget.SettingsAppBarActions
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
@@ -288,30 +282,6 @@ fun NavScreen() {
             }
         }
     )
-}
-
-@Composable
-fun SettingsAppBarActions(localDrawerState: DrawerState, hasUnReadMsg: Boolean) {
-    val scope = rememberCoroutineScope()
-    IconButton(onClick = {
-        scope.launch { localDrawerState.open() }
-    }) {
-        BadgedBox(badge = {
-            if (hasUnReadMsg) {
-                Badge(containerColor = Color.Red)
-            }
-        }) {
-            val iconSize by animateDpAsState(
-                targetValue = if (hasUnReadMsg) 18.dp else 24.dp,
-                animationSpec = tween(durationMillis = 300), label = "Icon size"
-            )
-            Icon(
-                imageVector = Icons.Outlined.Menu,
-                modifier = Modifier.size(iconSize),
-                contentDescription = null
-            )
-        }
-    }
 }
 
 @Composable

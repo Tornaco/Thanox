@@ -79,6 +79,8 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
 
+    implementation(libs.storage)
+
     compileOnly(files(project.rootProject.file("android_sdk/xposed-api-82.jar")))
 
     implementation(project(":android_framework:base"))

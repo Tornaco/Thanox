@@ -94,6 +94,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
+import github.tornaco.android.thanos.module.compose.common.widget.SettingsAppBarActions
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.support.main.NavHeaderContent

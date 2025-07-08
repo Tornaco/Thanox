@@ -19,11 +19,11 @@ import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.core.util.FileUtils
 import github.tornaco.android.thanos.module.compose.common.infra.ContextViewModel
 import github.tornaco.android.thanos.support.withThanos
+import github.tornaco.android.thanos.util.exportLogs
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.pref.AppPreference
-import now.fortuitous.thanos.settings.exportLogs
 import java.io.File
 import java.io.OutputStream
 import javax.inject.Inject
@@ -178,7 +178,9 @@ class SettingsViewModel @Inject constructor(@ApplicationContext context: Context
         }
 
         runCatching {
-            val logZipFile = exportLogs(context, thanos)
+            val logZipFile = exportLogs(context) {
+                thanos.writeLogsTo(it)
+            }
             copyFileToOutputStream(logZipFile, pickedFileOS)
             viewModelScope.launch {
                 _logExportPerformed.emit(

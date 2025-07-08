@@ -1,7 +1,7 @@
 package github.tornaco.android.thanox.module.activity.trampoline;
 
-import static now.fortuitous.thanos.main.LocalSimpleStorageHelperKt.REQUEST_CODE_PICK_TRAMP_EXPORT_PATH;
-import static now.fortuitous.thanos.main.LocalSimpleStorageHelperKt.REQUEST_CODE_PICK_TRAMP_IMPORT_PATH;
+import static github.tornaco.android.thanos.module.compose.common.LocalSimpleStorageHelperKt.REQUEST_CODE_PICK_TRAMP_EXPORT_PATH;
+import static github.tornaco.android.thanos.module.compose.common.LocalSimpleStorageHelperKt.REQUEST_CODE_PICK_TRAMP_IMPORT_PATH;
 
 import android.content.Context;
 import android.content.DialogInterface;

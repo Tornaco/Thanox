@@ -58,6 +58,9 @@ import github.tornaco.android.thanos.core.profile.ConfigTemplate
 import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.core.util.ClipboardUtils
 import github.tornaco.android.thanos.core.util.DateUtils
+import github.tornaco.android.thanos.module.compose.common.LocalSimpleStorageHelper
+import github.tornaco.android.thanos.module.compose.common.REQUEST_CODE_CREATE_BACKUP
+import github.tornaco.android.thanos.module.compose.common.REQUEST_CODE_CREATE_LOG
 import github.tornaco.android.thanos.module.compose.common.infra.Pref
 import github.tornaco.android.thanos.module.compose.common.settings.Preference
 import github.tornaco.android.thanos.module.compose.common.settings.PreferenceUi
@@ -84,9 +87,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.apps.AppDetailsActivity
 import now.fortuitous.thanos.main.ChooserActivity
-import now.fortuitous.thanos.main.LocalSimpleStorageHelper
-import now.fortuitous.thanos.main.REQUEST_CODE_CREATE_BACKUP
-import now.fortuitous.thanos.main.REQUEST_CODE_CREATE_LOG
 import now.fortuitous.thanos.pref.AppPreference
 import now.fortuitous.thanos.recovery.RecoveryUtilsActivity
 import now.fortuitous.thanos.settings.FeatureToggleActivity
@@ -513,7 +513,7 @@ private fun devSettings(
                 onClick = exportLog
             ),
         )
-    } ?: emptyList()
+    }
 }
 
 
@@ -614,7 +614,7 @@ private fun aboutSettings(
                 },
             ),
         )
-    } ?: emptyList()
+    }
 }
 
 @Composable
@@ -773,7 +773,7 @@ private fun strategySettings(
                 ),
             ),
         )
-    } ?: emptyList()
+    }
 }
 
 

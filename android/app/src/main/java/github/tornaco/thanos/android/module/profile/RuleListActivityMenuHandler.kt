@@ -17,10 +17,10 @@
 
 package github.tornaco.thanos.android.module.profile
 
+import android.content.Context
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.documentfile.provider.DocumentFile
-import androidx.lifecycle.application
 import com.anggrayudi.storage.file.FileFullPath
 import com.anggrayudi.storage.file.openInputStream
 import github.tornaco.android.thanos.BuildProp
@@ -29,12 +29,12 @@ import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.profile.DEFAULT_RULE_VERSION
 import github.tornaco.android.thanos.core.profile.ProfileManager
 import github.tornaco.android.thanos.core.profile.RuleAddCallback
+import github.tornaco.android.thanos.module.compose.common.REQUEST_CODE_PICK_PROFILE_IMPORT_PATH
 import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.android.thanos.util.ToastUtils
 import github.tornaco.thanos.android.module.profile.example.ProfileExampleActivity
 import github.tornaco.thanos.android.module.profile.online.OnlineProfileActivity
-import now.fortuitous.thanos.main.REQUEST_CODE_PICK_PROFILE_IMPORT_PATH
 
 fun RuleListActivity.handleOptionsItemSelected(item: MenuItem): Boolean {
     if (R.id.action_view_wiki == item.itemId) {
@@ -105,10 +105,10 @@ fun RuleListActivity.handleOptionsItemSelected(item: MenuItem): Boolean {
     return false
 }
 
-fun RuleListViewModel.helperImportFromFile(pickedFile: DocumentFile) {
-    val pickedFileIS = pickedFile.openInputStream(application)
+fun RuleListViewModel.helperImportFromFile(pickedFile: DocumentFile, context: Context) {
+    val pickedFileIS = pickedFile.openInputStream(context)
     if (pickedFileIS == null) {
-        Toast.makeText(application, "Unable to open input stream.", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Unable to open input stream.", Toast.LENGTH_LONG).show()
         return
     }
     runCatching {
@@ -117,7 +117,7 @@ fun RuleListViewModel.helperImportFromFile(pickedFile: DocumentFile) {
             override fun onRuleAddSuccess() {
                 super.onRuleAddSuccess()
                 Toast.makeText(
-                    application,
+                    context,
                     github.tornaco.android.thanos.res.R.string.module_profile_editor_save_success,
                     Toast.LENGTH_LONG
                 ).show()
@@ -125,7 +125,7 @@ fun RuleListViewModel.helperImportFromFile(pickedFile: DocumentFile) {
 
             override fun onRuleAddFail(errorCode: Int, errorMessage: String?) {
                 super.onRuleAddFail(errorCode, errorMessage)
-                ThanosManager.from(application)
+                ThanosManager.from(context)
                     .profileManager
                     .addRule(
                         "Thanox",
@@ -135,7 +135,7 @@ fun RuleListViewModel.helperImportFromFile(pickedFile: DocumentFile) {
                             override fun onRuleAddSuccess() {
                                 super.onRuleAddSuccess()
                                 Toast.makeText(
-                                    application,
+                                    context,
                                     github.tornaco.android.thanos.res.R.string.module_profile_editor_save_success,
                                     Toast.LENGTH_LONG
                                 ).show()
@@ -144,7 +144,7 @@ fun RuleListViewModel.helperImportFromFile(pickedFile: DocumentFile) {
                             override fun onRuleAddFail(errorCode: Int, errorMessage: String?) {
                                 super.onRuleAddFail(errorCode, errorMessage)
                                 Toast.makeText(
-                                    application,
+                                    context,
                                     errorMessage,
                                     Toast.LENGTH_LONG
                                 ).show()
@@ -156,7 +156,7 @@ fun RuleListViewModel.helperImportFromFile(pickedFile: DocumentFile) {
         }
 
         // Try json first.
-        ThanosManager.from(application)
+        ThanosManager.from(context)
             .profileManager
             .addRule(
                 "Thanox",
@@ -166,6 +166,6 @@ fun RuleListViewModel.helperImportFromFile(pickedFile: DocumentFile) {
                 ProfileManager.RULE_FORMAT_JSON
             )
     }.onFailure {
-        ToastUtils.nook(application, it.toString())
+        ToastUtils.nook(context, it.toString())
     }
 }

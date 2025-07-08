@@ -1,4 +1,4 @@
-package now.fortuitous.thanos.main
+package github.tornaco.android.thanos.module.compose.common
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.anggrayudi.storage.SimpleStorageHelper

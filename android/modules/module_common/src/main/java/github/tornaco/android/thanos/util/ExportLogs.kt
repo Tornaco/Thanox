@@ -1,15 +1,14 @@
-package now.fortuitous.thanos.settings
+package github.tornaco.android.thanos.util
 
 import android.content.Context
 import android.os.ParcelFileDescriptor
 import com.elvishew.xlog.XLog
-import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.util.DateUtils
 import github.tornaco.android.thanos.core.util.ZipUtils
 import github.tornaco.android.thanos.logFolderPath
 import java.io.File
 
-fun exportLogs(context: Context, manager: ThanosManager): File {
+fun exportLogs(context: Context, export: (ParcelFileDescriptor) -> Unit): File {
     val tempDir = File(context.cacheDir, "Thanox-Log-${System.currentTimeMillis()}")
 
     val zipRootDir = requireNotNull(context.externalCacheDir ?: context.cacheDir) {
@@ -24,7 +23,7 @@ fun exportLogs(context: Context, manager: ThanosManager): File {
     val serviceLogFile = File(tempDir, "service.zip").apply { createNewFile() }
     val pfd =
         ParcelFileDescriptor.open(serviceLogFile, ParcelFileDescriptor.MODE_READ_WRITE)
-    manager.writeLogsTo(pfd)
+    export.invoke(pfd)
 
     ZipUtils.zip(tempDir.absolutePath, zipRootDir.absolutePath, name)
 
@@ -35,4 +34,4 @@ fun exportLogs(context: Context, manager: ThanosManager): File {
 }
 
 private fun autoGenLogFileName() =
-    "ShortX-Log-${DateUtils.formatForFileName(System.currentTimeMillis())}.zip"
+    "Thanox-Log-${DateUtils.formatForFileName(System.currentTimeMillis())}.zip"

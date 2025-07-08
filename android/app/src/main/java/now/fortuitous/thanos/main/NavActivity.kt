@@ -36,6 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import github.tornaco.android.thanos.main.NavEntry
 import github.tornaco.android.thanos.main.blockOnCreate
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.module.compose.common.LocalSimpleStorageHelper
 import github.tornaco.android.thanos.support.subscribe.LVLStateEffects
 import github.tornaco.android.thanos.support.subscribe.ThanosApp
 import github.tornaco.android.thanos.util.ActivityUtils
@@ -101,9 +102,11 @@ fun Activity.ThanoxXposed() {
 fun Activity.ThanoxShizuku() {
     XLog.w("ThanoxShizuku")
     LVLStateEffects()
+
     LaunchedEffect(Unit) {
         ShortcutInit(this@ThanoxShizuku).initOnBootThanos()
     }
+
     ThanosApp {
         var privacyAgreementAccept by remember {
             mutableStateOf(false)

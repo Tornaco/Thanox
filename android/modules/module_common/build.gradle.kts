@@ -62,7 +62,6 @@ dependencies {
     implementation(libs.compose.material.icons.extended)
     implementation(libs.compose.material.icons.core)
     implementation(libs.navigation.compose)
-    implementation(libs.accompanist.appcompat.theme)
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.swiperefresh)

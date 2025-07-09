@@ -110,8 +110,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.accompanist.appcompat.theme)
-
     implementation(libs.dagger.hilt.android)
     implementation(libs.dagger.hilt.navigation.compose)
     kapt(libs.dagger.hilt.android.compiler)
@@ -184,7 +182,6 @@ dependencies {
 
     implementation(libs.glide.landscapist)
 
-    implementation(libs.accompanist.appcompat.theme)
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.swiperefresh)

@@ -1,6 +1,5 @@
 [versions]
 accompanist = "0.36.0"
-accompanist-appcompat-theme = "0.36.0"
 activity-compose = "1.10.1"
 adapter-rxjava2 = "2.11.0"
 agp = "8.10.0"
@@ -96,7 +95,6 @@ gmazzo-buildconfig = { id = "com.github.gmazzo.buildconfig", version = "5.5.0" }
 gladed-androidgitversion = { id = "com.gladed.androidgitversion", version = "0.4.14" }
 
 [libraries]
-accompanist-appcompat-theme = { module = "com.google.accompanist:accompanist-themeadapter-appcompat", version.ref = "accompanist-appcompat-theme" }
 accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }

@@ -89,7 +89,7 @@ fun Activity.ThanoxXposed() {
     }
 
     LaunchedEffect(Unit) {
-        ShortcutInit(this@ThanoxXposed).initOnBootThanox()
+        ShortcutInit(this@ThanoxXposed).initOnBootXposed()
     }
     LVLStateEffects()
     val applyNewHome = AppPreference.isFeatureNoticeAccepted(this, "NEW_HOME")
@@ -104,7 +104,7 @@ fun Activity.ThanoxShizuku() {
     LVLStateEffects()
 
     LaunchedEffect(Unit) {
-        ShortcutInit(this@ThanoxShizuku).initOnBootThanos()
+        ShortcutInit(this@ThanoxShizuku).initOnBootShizuku()
     }
 
     ThanosApp {

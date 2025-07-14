@@ -13,24 +13,29 @@ import tornaco.apps.thanox.ThanosShizukuMainActivity
 
 class ShortcutInit(val context: Context) {
     companion object {
-        const val ID_THANOX_PM = "thanox_pm"
-        const val ID_THANOX_SF = "thanox_sf"
-        const val ID_THANOS_PM = "thanos_pm"
-        const val ID_THANOS_SF = "thanos_sf"
+        const val ID_XPOSED_PM = "thanox_pm"
+        const val ID_XPOSED_SF = "thanox_sf"
+
+        // Refactor-version
+        const val ID_XPOSED_SF_2 = "thanox_sf_2"
+
+        const val ID_SHIZUKU_PM = "thanos_pm"
+        const val ID_SHIZUKU_SF = "thanos_sf"
     }
 
-    private fun installForThanox() {
-        if (!hasDynamicShortcut(ID_THANOX_SF)) {
+    private fun installForXposed() {
+        if (!hasDynamicShortcut(ID_XPOSED_SF_2)) {
+            removeDynamicShortcuts(listOf(ID_XPOSED_SF))
             addDynamicShortcut(
-                ID_THANOX_SF,
+                ID_XPOSED_SF,
                 SFActivity::class.java,
                 R.drawable.shortcut_smart_freeze,
                 context.getString(github.tornaco.android.thanos.res.R.string.feature_title_smart_app_freeze)
             )
         }
-        if (!hasDynamicShortcut(ID_THANOX_PM)) {
+        if (!hasDynamicShortcut(ID_XPOSED_PM)) {
             addDynamicShortcut(
-                ID_THANOX_PM,
+                ID_XPOSED_PM,
                 ProcessManageActivityV2Delegate::class.java,
                 R.drawable.ic_shortcut_process_manage,
                 context.getString(github.tornaco.android.thanos.res.R.string.feature_title_process_manage)
@@ -38,10 +43,10 @@ class ShortcutInit(val context: Context) {
         }
     }
 
-    private fun installForThanos() {
-        if (!hasDynamicShortcut(ID_THANOS_SF)) {
+    private fun installForShizuku() {
+        if (!hasDynamicShortcut(ID_SHIZUKU_SF)) {
             addDynamicShortcut(
-                ID_THANOS_SF,
+                ID_SHIZUKU_SF,
                 ThanosShizukuMainActivity::class.java,
                 R.drawable.shortcut_smart_freeze,
                 context.getString(github.tornaco.android.thanos.res.R.string.feature_title_smart_app_freeze),
@@ -49,9 +54,9 @@ class ShortcutInit(val context: Context) {
             )
         }
 
-        if (!hasDynamicShortcut(ID_THANOS_PM)) {
+        if (!hasDynamicShortcut(ID_SHIZUKU_PM)) {
             addDynamicShortcut(
-                ID_THANOS_PM,
+                ID_SHIZUKU_PM,
                 ThanosShizukuMainActivity::class.java,
                 R.drawable.ic_shortcut_process_manage,
                 context.getString(github.tornaco.android.thanos.res.R.string.feature_title_process_manage),
@@ -60,14 +65,14 @@ class ShortcutInit(val context: Context) {
         }
     }
 
-    fun initOnBootThanos() {
-        installForThanos()
-        removeDynamicShortcuts(listOf(ID_THANOX_PM, ID_THANOX_SF))
+    fun initOnBootShizuku() {
+        installForShizuku()
+        removeDynamicShortcuts(listOf(ID_XPOSED_PM, ID_XPOSED_SF))
     }
 
-    fun initOnBootThanox() {
-        installForThanox()
-        removeDynamicShortcuts(listOf(ID_THANOS_PM, ID_THANOS_SF))
+    fun initOnBootXposed() {
+        installForXposed()
+        removeDynamicShortcuts(listOf(ID_SHIZUKU_PM, ID_SHIZUKU_SF))
     }
 
     fun addDynamicShortcut(

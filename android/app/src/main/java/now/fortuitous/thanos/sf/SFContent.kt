@@ -107,12 +107,13 @@ import github.tornaco.android.thanos.module.compose.common.widget.thenIf
 import github.tornaco.android.thanos.picker.AppPickerActivity
 import github.tornaco.android.thanos.support.subscribe.LVLStateEffects
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
+import github.tornaco.android.thanos.util.ShortcutUtil
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import now.fortuitous.thanos.apps.PackageSetListActivity
-import now.fortuitous.thanos.power.ShortcutHelper
+import now.fortuitous.thanos.power.ShortcutStubActivity
 import now.fortuitous.thanos.power.SmartFreezeSettingsActivity
 import now.fortuitous.thanos.pref.AppPreference
 import org.orbitmvi.orbit.compose.collectAsState
@@ -669,7 +670,13 @@ private fun CreateShortcutButtons(
 ) {
     val context = LocalContext.current
     Button(onClick = {
-        ShortcutHelper.addShortcut(context, appInfo)
+        ShortcutUtil.addShortcut(context, appInfo) {
+            ShortcutStubActivity.createIntent(
+                context,
+                appInfo.pkgName,
+                appInfo.userId
+            )
+        }
     }) {
         Text(text = stringResource(id = github.tornaco.android.thanos.res.R.string.create_shortcut))
     }

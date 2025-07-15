@@ -85,6 +85,7 @@ val internalProjects = listOf(
     ":shizuku:core",
     ":shizuku:services",
     ":shizuku:ui",
+    ":shizuku:app",
 )
 
 internalProjects.forEach {

@@ -38,9 +38,10 @@ import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.module.compose.common.ThemeActivityVM
 import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.support.initThanos
+import github.tornaco.android.thanos.util.ShortcutUtil
 import io.reactivex.plugins.RxJavaPlugins
 import kotlinx.coroutines.runBlocking
-import now.fortuitous.thanos.power.ShortcutHelper
+import now.fortuitous.thanos.power.ShortcutStubActivity
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import tornaco.apps.thanox.ThanosShizuku
 
@@ -87,7 +88,13 @@ class ThanosApp : MultipleModulesApp() {
             if (!ThanosManager.from(this).isServiceInstalled) {
                 ThanosShizuku.init(this)
                 ThanosShizuku.installShortcut = { context, app ->
-                    ShortcutHelper.addShortcut(context, app)
+                    ShortcutUtil.addShortcut(context, app) {
+                        ShortcutStubActivity.createIntent(
+                            context,
+                            app.pkgName,
+                            app.userId
+                        )
+                    }
                 }
             }
         }

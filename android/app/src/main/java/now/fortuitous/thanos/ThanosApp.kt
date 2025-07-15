@@ -19,26 +19,18 @@ package now.fortuitous.thanos
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
-import com.elvishew.xlog.LogConfiguration
-import com.elvishew.xlog.LogLevel
 import com.elvishew.xlog.XLog
-import com.elvishew.xlog.printer.AndroidPrinter
-import com.elvishew.xlog.printer.Printer
-import com.elvishew.xlog.printer.file.FilePrinter
-import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator
 import dagger.hilt.android.HiltAndroidApp
 import github.tornaco.android.thanos.MultipleModulesApp
 import github.tornaco.android.thanos.core.app.AppGlobals
 import github.tornaco.android.thanos.core.app.ThanosManager
-import github.tornaco.android.thanos.core.logAdapter
-import github.tornaco.android.thanos.logFolderPath
 import github.tornaco.android.thanos.main.installCrashHandler
 import github.tornaco.android.thanos.main.launchSubscribeActivity
 import github.tornaco.android.thanos.module.compose.common.ThemeActivityVM
 import github.tornaco.android.thanos.support.AppFeatureManager
 import github.tornaco.android.thanos.support.initThanos
 import github.tornaco.android.thanos.util.ShortcutUtil
+import github.tornaco.android.thanos.util.initAppLog
 import io.reactivex.plugins.RxJavaPlugins
 import kotlinx.coroutines.runBlocking
 import now.fortuitous.thanos.power.ShortcutStubActivity
@@ -51,7 +43,7 @@ class ThanosApp : MultipleModulesApp() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         AppGlobals.setContext(base)
-        initLog(base)
+        initAppLog(base, "ThanosApp")
         this.installCrashHandler()
     }
 
@@ -96,31 +88,6 @@ class ThanosApp : MultipleModulesApp() {
                         )
                     }
                 }
-            }
-        }
-    }
-
-    private fun initLog(context: Context) {
-        val androidPrinter: Printer = AndroidPrinter()
-        val filePrinter: Printer = FilePrinter.Builder(context.logFolderPath)
-            .fileNameGenerator(DateFileNameGenerator())
-            .build()
-        XLog.init(
-            LogConfiguration.Builder()
-                .logLevel(LogLevel.ALL)
-                .tag("ThanoxApp")
-                .build(),
-            filePrinter,
-            androidPrinter
-        )
-
-        logAdapter = { level: Int, tag: String, msg: String ->
-            when (level) {
-                Log.VERBOSE -> XLog.v("$tag $msg")
-                Log.DEBUG -> XLog.d("$tag $msg")
-                Log.INFO -> XLog.i("$tag $msg")
-                Log.WARN -> XLog.w("$tag $msg")
-                Log.ERROR -> XLog.e("$tag $msg")
             }
         }
     }

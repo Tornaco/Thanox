@@ -211,6 +211,13 @@ object Classes {
             this
         )
 
+    @Throws(ClassNotFoundException::class)
+    fun ClassLoader.UserTypeFactoryClass(): Class<*> =
+        XposedHelpers.findClass(
+            "com.android.server.pm.UserTypeFactory",
+            this
+        )
+
     fun Class<*>.activityStoppedMethod(): Method? {
         return declaredMethods.firstOrNull { it.name == Methods.activityStopped || it.name == Methods.activityStoppedLocked }
     }

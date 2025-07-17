@@ -9,6 +9,7 @@ import lombok.SneakyThrows;
 
 @AllArgsConstructor
 public class InfiniteZManager {
+    public static final String PROFILE_INF = "android.os.usertype.profile.THANOX.INFZ";
     private final InfiniteZ server;
 
     @SneakyThrows

@@ -13,6 +13,8 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import now.fortuitous.thanos.pref.AppPreference
+import java.text.Collator
+import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -51,6 +53,8 @@ class SFRepoImpl @Inject constructor(@ApplicationContext val context: Context) :
         return updateFlags.map {
             pm.smartFreezePkgs.mapNotNull {
                 pm.getAppInfo(it)
+            }.sortedWith { o1, o2 ->
+                Collator.getInstance(Locale.CHINESE).compare(o1.appLabel, o2.appLabel)
             }
         }
     }

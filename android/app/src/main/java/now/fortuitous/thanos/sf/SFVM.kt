@@ -70,6 +70,8 @@ import kotlinx.coroutines.withContext
 import now.fortuitous.thanos.power.ShortcutHelper
 import util.JsonFormatter
 import java.io.File
+import java.text.Collator
+import java.util.Locale
 import javax.inject.Inject
 
 data class SFState(

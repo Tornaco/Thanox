@@ -9,6 +9,8 @@ sealed interface Preference {
     val icon: Int?
     val badge: String?
 
+    val isDecor: Boolean
+
     data object Divider : Preference {
         override val title: String = "Divider"
         override val summary: String? = null
@@ -16,6 +18,7 @@ sealed interface Preference {
             get() = false
         override val icon: Int? = null
         override val badge: String? = null
+        override val isDecor: Boolean = true
     }
 
     data class Category(
@@ -26,6 +29,7 @@ sealed interface Preference {
             get() = false
         override val icon: Int? = null
         override val badge: String? = null
+        override val isDecor: Boolean = true
     }
 
     data class TextPreference(
@@ -36,6 +40,7 @@ sealed interface Preference {
         override val badge: String? = null,
         val withCardBg: Boolean = false,
         val onClick: (() -> Unit)? = null,
+        override val isDecor: Boolean = false
     ) : Preference
 
     data class SwitchPreference(
@@ -46,7 +51,8 @@ sealed interface Preference {
         override val badge: String? = null,
         val value: Boolean,
         val onClick: (() -> Unit)? = null,
-        val onCheckChanged: (Boolean) -> Unit
+        val onCheckChanged: (Boolean) -> Unit,
+        override val isDecor: Boolean = false
     ) : Preference
 
     data class ExpandablePreference(
@@ -56,6 +62,7 @@ sealed interface Preference {
         override val icon: Int? = null,
         override val badge: String? = null,
         val preferences: List<Preference>,
-        val onClick: (() -> Unit)? = null
+        val onClick: (() -> Unit)? = null,
+        override val isDecor: Boolean = false
     ) : Preference
 }

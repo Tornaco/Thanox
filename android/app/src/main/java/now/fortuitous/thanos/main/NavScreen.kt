@@ -45,7 +45,6 @@ import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.DismissibleDrawerSheet
 import androidx.compose.material3.DismissibleNavigationDrawer
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
@@ -100,7 +99,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.FontSizeRange
 import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.SettingsAppBarActions
-import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxAlertDialog
 import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAppBarScaffold
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
@@ -157,10 +155,9 @@ fun NavScreen() {
     DismissibleNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            DismissibleDrawerSheet(
-                drawerTonalElevation = 0.5.dp
+            Box(
+                Modifier.fillMaxSize()
             ) {
-                StandardSpacer()
                 SettingsScreen()
                 BackHandler(enabled = drawerState.isOpen) {
                     scope.launch { drawerState.close() }

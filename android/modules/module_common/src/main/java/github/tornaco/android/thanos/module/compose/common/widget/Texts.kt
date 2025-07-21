@@ -93,7 +93,7 @@ fun CategoryTitle(title: String) {
             text = title,
             style = MaterialTheme.typography.titleSmall.copy(
                 color = MaterialTheme.colorScheme.primary,
-                fontSize = 12.sp
+                fontSize = 14.sp
             )
         )
     }

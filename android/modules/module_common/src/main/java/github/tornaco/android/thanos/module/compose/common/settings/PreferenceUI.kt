@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Divider
@@ -35,25 +37,56 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import github.tornaco.android.thanos.module.compose.common.theme.ColorDefaults
 import github.tornaco.android.thanos.module.compose.common.widget.CategoryTitle
-import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.OutlineBadge
 import github.tornaco.android.thanos.module.compose.common.widget.SmallSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
-import github.tornaco.android.thanos.module.compose.common.widget.ThanoxCardRoundedCornerShape
+import github.tornaco.android.thanos.module.compose.common.widget.thenIf
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun PreferenceUi(preferences: List<Preference>) {
     splitListByCategory(preferences).forEach { group ->
-        Column {
-            group.forEach {
-                PreferenceUi(preference = it)
-                MediumSpacer()
+        val firstPrefIndex = group.indexOfFirst { !it.isDecor }
+        val lastPrefIndex = group.indexOfLast { !it.isDecor }
+        Column(Modifier.padding(top = 16.dp)) {
+            group.forEachIndexed { index, pref ->
+                Box(
+                    Modifier
+                        .thenIf(Modifier.padding(horizontal = 16.dp), !pref.isDecor)
+                        .clip(
+                            when (index) {
+                                firstPrefIndex -> RoundedCornerShape(
+                                    topStart = 24.dp,
+                                    topEnd = 24.dp,
+                                    bottomStart = 4.dp,
+                                    bottomEnd = 4.dp
+                                )
+
+                                lastPrefIndex -> RoundedCornerShape(
+                                    topStart = 4.dp,
+                                    topEnd = 4.dp,
+                                    bottomStart = 24.dp,
+                                    bottomEnd = 24.dp
+                                )
+
+                                else -> RoundedCornerShape(4.dp)
+                            }
+                        )
+                        .thenIf(
+                            Modifier.background(ColorDefaults.backgroundSurfaceColor(0.8.dp)),
+                            !pref.isDecor
+                        )
+                ) {
+                    PreferenceUi(preference = pref)
+                }
+                SmallSpacer()
             }
         }
     }
 }
+
 
 private fun splitListByCategory(list: List<Preference>): List<List<Preference>> {
     val result = mutableListOf<MutableList<Preference>>()
@@ -138,7 +171,6 @@ private fun TextPreferenceUi(preference: Preference.TextPreference) {
         modifier = Modifier
             .padding(horizontal = if (preference.withCardBg) 16.dp else 0.dp)
             .fillMaxWidth()
-            .clip(ThanoxCardRoundedCornerShape)
             .then(if (preference.withCardBg) Modifier.background(ColorDefaults.backgroundSurfaceColor()) else Modifier)
             .clickable {
                 scope.launch {
@@ -205,7 +237,6 @@ private fun SwitchPreferenceUi(preference: Preference.SwitchPreference) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(ThanoxCardRoundedCornerShape)
             .clickable {
                 if (preference.onClick != null) {
                     preference.onClick.invoke()
@@ -287,8 +318,7 @@ private fun ExpandableContainer(
         mutableStateOf(ExpandableState.Collapsed)
     }
     Column(
-        modifier = Modifier
-            .clip(ThanoxCardRoundedCornerShape),
+        modifier = Modifier,
         verticalArrangement = Arrangement.Center
     ) {
         Row(

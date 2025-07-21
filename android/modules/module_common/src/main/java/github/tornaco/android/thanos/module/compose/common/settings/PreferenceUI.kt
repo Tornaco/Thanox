@@ -183,7 +183,7 @@ private fun TextPreferenceUi(preference: Preference.TextPreference) {
     ) {
         Row(
             modifier = Modifier
-                .heightIn(min = 60.dp)
+                .heightIn(min = 64.dp)
                 .weight(1f, fill = false)
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -252,7 +252,7 @@ private fun SwitchPreferenceUi(preference: Preference.SwitchPreference) {
     ) {
         Row(
             modifier = Modifier
-                .heightIn(min = 60.dp)
+                .heightIn(min = 64.dp)
                 .weight(1f, fill = false)
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically

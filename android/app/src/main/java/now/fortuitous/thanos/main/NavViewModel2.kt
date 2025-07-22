@@ -269,7 +269,7 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
 
     suspend fun autoRefresh() {
         while (true) {
-            delay(2000)
+            delay(5000)
             if (isResumed) {
                 loadHeaderStatus(showLoading = false)
             }

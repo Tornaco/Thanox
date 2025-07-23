@@ -500,7 +500,15 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             residentPref.setChecked(ThanosManager.from(getContext()).getActivityManager().isPkgResident(Pkg.fromAppInfo(appInfo)));
             residentPref.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean isChecked = (boolean) newValue;
-                ThanosManager.from(getContext()).getActivityManager().setPkgResident(Pkg.fromAppInfo(appInfo), isChecked);
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                    if (isSubscribed) {
+                        ThanosManager.from(getContext()).getActivityManager().setPkgResident(Pkg.fromAppInfo(appInfo), isChecked);
+                    } else {
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
+                    }
+                    return null;
+                });
+
                 return true;
             });
         }
@@ -634,6 +642,11 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         boolean visible() {
             return ThanosManager.from(getContext()).hasFeature(BuildProp.THANOX_FEATURE_PRIVACY_TASK_BLUR);
         }
+
+        @Override
+        protected boolean isSub() {
+            return true;
+        }
     }
 
     class TaskCleanUp extends FeaturePref {
@@ -703,7 +716,6 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
     }
 
     class SmartStandBy extends FeaturePref {
-
         SmartStandBy(Context context) {
             super(context.getString(R.string.key_app_feature_config_smart_standby));
         }
@@ -720,6 +732,11 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
 
         @Override
         boolean visible() {
+            return true;
+        }
+
+        @Override
+        protected boolean isSub() {
             return true;
         }
     }
@@ -751,6 +768,11 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
         boolean visible() {
             return ThanosManager.from(getContext()).hasFeature(BuildProp.ACTION_APP_LOCK);
         }
+
+        @Override
+        protected boolean isSub() {
+            return true;
+        }
     }
 
     abstract class FeaturePref {
@@ -769,13 +791,25 @@ public class FeatureConfigFragment extends BasePreferenceFragmentCompat {
             return true;
         }
 
+        protected boolean isSub() {
+            return false;
+        }
+
         void bind() {
             SwitchPreferenceCompat preference = findPreference(key);
             Objects.requireNonNull(preference).setVisible(visible());
             Objects.requireNonNull(preference).setChecked(current());
             preference.setOnPreferenceChangeListener((preference1, newValue) -> {
                 boolean checked = (boolean) newValue;
-                setTo(checked);
+                AppFeatureManager.INSTANCE.withSubscriptionStatus(requireContext(), isSubscribed -> {
+                    if (!isSub() || isSubscribed) {
+                        setTo(checked);
+                    } else {
+                        AppFeatureManager.INSTANCE.showSubscribeDialog(requireActivity());
+                    }
+                    return null;
+                });
+
                 return true;
             });
         }

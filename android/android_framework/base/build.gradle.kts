@@ -53,6 +53,7 @@ buildConfig {
     buildConfigField("String", "THANOS_BUILD_HOST", provider { "\"${Configs.thanoxBuildHostName}\"" })
     buildConfigField("String", "THANOS_BUILD_FINGERPRINT", provider { "\"${Configs.thanoxBuildFP}\"" })
     buildConfigField("String", "THANOS_BUILD_DATE", provider { "\"${Date()}\"" })
+    buildConfigField("long", "THANOS_BUILD_DATE_MILLIS", provider { "${System.currentTimeMillis()}" })
     buildConfigField("boolean", "THANOS_BUILD_DEBUG", provider { "${Configs.thanoxBuildIsDebug}" })
 
 

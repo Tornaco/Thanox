@@ -71,4 +71,8 @@ interface IThanos {
     IOps getOpsManager();
 
     void writeLogsTo(in ParcelFileDescriptor pfd);
+
+    InfiniteZ getInfiniteZ2();
+    InfiniteZ getInfiniteZ3();
+    InfiniteZ getInfiniteZ4();
 }

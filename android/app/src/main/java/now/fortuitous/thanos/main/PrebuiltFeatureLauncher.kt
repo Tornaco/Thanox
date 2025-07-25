@@ -153,6 +153,16 @@ class PrebuiltFeatureLauncher(
                     }
                 }
 
+                PrebuiltFeatureIds.ID_INFINITE_Z2 -> {
+                    AppFeatureManager.withSubscriptionStatus(context) {
+                        if (it) {
+                            now.fortuitous.thanos.infinite.InfiniteZActivity2.start(context)
+                        } else {
+                            throw AccessBlocked
+                        }
+                    }
+                }
+
                 PrebuiltFeatureIds.ID_GUIDE -> {
                     BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME)
                 }

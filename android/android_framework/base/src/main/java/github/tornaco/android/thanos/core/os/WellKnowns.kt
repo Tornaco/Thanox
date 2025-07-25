@@ -218,6 +218,13 @@ object Classes {
             this
         )
 
+    @Throws(ClassNotFoundException::class)
+    fun ClassLoader.userControllerClass(): Class<*> =
+        XposedHelpers.findClass(
+            "com.android.server.am.UserController",
+            this
+        )
+
     fun Class<*>.activityStoppedMethod(): Method? {
         return declaredMethods.firstOrNull { it.name == Methods.activityStopped || it.name == Methods.activityStoppedLocked }
     }

@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="now.fortuitous.thanos.infinite.InfiniteZAppsViewModel" />
+            type="now.fortuitous.thanos.infinite.BaseInfiniteZAppsViewModel" />
 
     </data>
 

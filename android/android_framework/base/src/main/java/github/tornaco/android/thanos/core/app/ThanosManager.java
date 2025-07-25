@@ -306,6 +306,21 @@ public class ThanosManager {
     }
 
     @SneakyThrows
+    public InfiniteZManager getInfiniteZ2() {
+        return new InfiniteZManager(service.getInfiniteZ2());
+    }
+
+    @SneakyThrows
+    public InfiniteZManager getInfiniteZ3() {
+        return new InfiniteZManager(service.getInfiniteZ3());
+    }
+
+    @SneakyThrows
+    public InfiniteZManager getInfiniteZ4() {
+        return new InfiniteZManager(service.getInfiniteZ4());
+    }
+
+    @SneakyThrows
     public PushDelegateManager getPushDelegateManager() {
         return new PushDelegateManager(service.getPushDelegateManager());
     }

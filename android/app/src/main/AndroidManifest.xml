@@ -136,6 +136,9 @@
             android:name="now.fortuitous.thanos.infinite.InfiniteZActivity"
             android:exported="false" />
         <activity
+            android:name="now.fortuitous.thanos.infinite.InfiniteZActivity2"
+            android:exported="false" />
+        <activity
             android:name="now.fortuitous.thanos.privacy.FieldsTemplateListActivity"
             android:exported="false" />
         <activity

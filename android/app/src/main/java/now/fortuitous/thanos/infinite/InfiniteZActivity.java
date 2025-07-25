@@ -47,6 +47,7 @@ import github.tornaco.android.thanos.common.AppListModel;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.infinite.AddPackageCallback;
 import github.tornaco.android.thanos.core.app.infinite.EnableCallback;
+import github.tornaco.android.thanos.core.app.infinite.InfiniteZManager;
 import github.tornaco.android.thanos.core.app.infinite.LaunchPackageCallback;
 import github.tornaco.android.thanos.core.pm.AppInfo;
 import github.tornaco.android.thanos.core.pm.Pkg;
@@ -64,7 +65,7 @@ import util.CollectionUtils;
 public class InfiniteZActivity extends ThemeActivity {
     private static final int REQ_PICK_APPS = 0x100;
 
-    private InfiniteZAppsViewModel viewModel;
+    private BaseInfiniteZAppsViewModel viewModel;
     private ActivityIniniteZAppsBinding binding;
 
     @Override
@@ -84,6 +85,7 @@ public class InfiniteZActivity extends ThemeActivity {
         binding = ActivityIniniteZAppsBinding.inflate(
                 LayoutInflater.from(this), null, false);
         setContentView(binding.getRoot());
+        initViewModel();
         setupView();
         setupViewModel();
     }
@@ -105,8 +107,7 @@ public class InfiniteZActivity extends ThemeActivity {
         binding.apps.setAdapter(new InfiniteZAppsAdapter(new AppItemActionListener() {
             @Override
             public void onAppItemClick(AppInfo appInfo) {
-                ThanosManager.from(getApplicationContext())
-                        .getInfiniteZ()
+                viewModel.infiniteZManager()
                         .launchPackage(appInfo.getPkgName(), new LaunchPackageCallback() {
                             @Override
                             public void onSuccessMain() {
@@ -172,9 +173,9 @@ public class InfiniteZActivity extends ThemeActivity {
     }
 
     protected void onSetupSwitchBar(SwitchBar switchBar) {
-        switchBar.setChecked(ThanosManager.from(thisActivity()).getInfiniteZ().isEnabled());
+        switchBar.setChecked(viewModel.infiniteZManager().isEnabled());
         switchBar.addOnSwitchChangeListener((switchView, isChecked) -> {
-            boolean isEnable = ThanosManager.from(thisActivity()).getInfiniteZ().isEnabled();
+            boolean isEnable = viewModel.infiniteZManager().isEnabled();
             if (isChecked && !isEnable) {
                 requestEnableIZDialog(this::enableIZ, () -> switchBar.setChecked(false));
             } else if (!isChecked && isEnable) {
@@ -207,7 +208,7 @@ public class InfiniteZActivity extends ThemeActivity {
         ModernProgressDialog p = new ModernProgressDialog(thisActivity());
         p.setMessage(getString(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment));
         p.show();
-        ThanosManager.from(getApplicationContext()).getInfiniteZ()
+        viewModel.infiniteZManager()
                 .setEnabled(true, new EnableCallback() {
                     @Override
                     public void onSuccessMain(int userId) {
@@ -229,7 +230,7 @@ public class InfiniteZActivity extends ThemeActivity {
         ModernProgressDialog p = new ModernProgressDialog(thisActivity());
         p.setMessage(getString(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment));
         p.show();
-        ThanosManager.from(getApplicationContext()).getInfiniteZ()
+        viewModel.infiniteZManager()
                 .setEnabled(false, new EnableCallback() {
                     @Override
                     public void onSuccessMain(int userId) {
@@ -247,9 +248,11 @@ public class InfiniteZActivity extends ThemeActivity {
                 });
     }
 
+    private void initViewModel() {
+        viewModel = obtainViewModel(this);
+    }
 
     private void setupViewModel() {
-        viewModel = obtainViewModel(this);
         viewModel.start();
 
         binding.setViewmodel(viewModel);
@@ -265,9 +268,9 @@ public class InfiniteZActivity extends ThemeActivity {
             ModernProgressDialog p = new ModernProgressDialog(thisActivity());
             p.setMessage(getString(github.tornaco.android.thanos.res.R.string.common_text_wait_a_moment));
             p.show();
-            CollectionUtils.consumeRemaining(appInfos, appInfo -> ThanosManager.from(getApplicationContext())
-                    .getInfiniteZ()
-                    .addPackage(appInfo.getPkgName(), new AddPackageCallback() {
+            InfiniteZManager infiniteZManager = viewModel.infiniteZManager();
+            CollectionUtils.consumeRemaining(appInfos, appInfo ->
+                    infiniteZManager.addPackage(appInfo.getPkgName(), new AddPackageCallback() {
                         @Override
                         public void onSuccessMain(int userId) {
                             new Handler().postDelayed(p::dismiss, 2400);
@@ -306,7 +309,7 @@ public class InfiniteZActivity extends ThemeActivity {
         });
     }
 
-    public static InfiniteZAppsViewModel obtainViewModel(FragmentActivity activity) {
+    protected BaseInfiniteZAppsViewModel obtainViewModel(FragmentActivity activity) {
         ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory
                 .getInstance(activity.getApplication());
         return ViewModelProviders.of(activity, factory).get(InfiniteZAppsViewModel.class);

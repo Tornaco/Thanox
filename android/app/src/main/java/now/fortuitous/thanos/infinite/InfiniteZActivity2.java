@@ -17,12 +17,15 @@
 
 package now.fortuitous.thanos.infinite;
 
-import android.app.Application;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
-import androidx.annotation.NonNull;
-
-public class InfiniteZAppsViewModel extends BaseInfiniteZAppsViewModel {
-    public InfiniteZAppsViewModel(@NonNull Application application) {
-        super(application);
+public class InfiniteZActivity2 extends InfiniteZActivity {
+    @Override
+    protected BaseInfiniteZAppsViewModel obtainViewModel(FragmentActivity activity) {
+        ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory
+                .getInstance(activity.getApplication());
+        return ViewModelProviders.of(activity, factory).get(InfiniteZAppsViewModel2.class);
     }
 }

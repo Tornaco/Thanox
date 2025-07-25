@@ -21,8 +21,16 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-public class InfiniteZAppsViewModel extends BaseInfiniteZAppsViewModel {
-    public InfiniteZAppsViewModel(@NonNull Application application) {
+import github.tornaco.android.thanos.core.app.ThanosManager;
+import github.tornaco.android.thanos.core.app.infinite.InfiniteZManager;
+
+public class InfiniteZAppsViewModel2 extends BaseInfiniteZAppsViewModel {
+    public InfiniteZAppsViewModel2(@NonNull Application application) {
         super(application);
+    }
+
+    @Override
+    protected InfiniteZManager infiniteZManager() {
+        return ThanosManager.from(getApplication()).getInfiniteZ2();
     }
 }

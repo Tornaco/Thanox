@@ -68,6 +68,22 @@ public class InfiniteZActivity extends ThemeActivity {
     private BaseInfiniteZAppsViewModel viewModel;
     private ActivityIniniteZAppsBinding binding;
 
+    protected int getTitleRes() {
+        return github.tornaco.android.thanos.res.R.string.feature_title_infinite_z;
+    }
+
+    protected int getEnableDialogMsgRes() {
+        return github.tornaco.android.thanos.res.R.string.feature_message_infinite_z_enable;
+    }
+
+    protected int getDisableDialogMsgRes() {
+        return github.tornaco.android.thanos.res.R.string.feature_message_infinite_z_disable;
+    }
+
+    protected int getUninstallDialogMsgRes() {
+        return github.tornaco.android.thanos.res.R.string.feature_message_infinite_z_uninstall;
+    }
+
     @Override
     public Context getApplicationContext() {
         return new ThanoxAppContext(super.getApplicationContext());
@@ -97,6 +113,7 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void setupView() {
         setSupportActionBar(binding.toolbar);
+        binding.toolbar.setTitle(getTitleRes());
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -156,7 +173,7 @@ public class InfiniteZActivity extends ThemeActivity {
     private void onRequestUninstall(AppInfo appInfo) {
         new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(getString(github.tornaco.android.thanos.res.R.string.common_menu_title_uninstall) + "\t" + appInfo.getAppLabel())
-                .setMessage(getString(github.tornaco.android.thanos.res.R.string.feature_message_infinite_z_uninstall, appInfo.getAppLabel()))
+                .setMessage(getString(getUninstallDialogMsgRes(), appInfo.getAppLabel()))
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> viewModel.uninstall(appInfo, this::onUninstallSuccess, this::onUninstallFail))
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
                 })
@@ -186,8 +203,8 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void requestEnableIZDialog(Runnable onYes, Runnable onNo) {
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(github.tornaco.android.thanos.res.R.string.feature_title_infinite_z)
-                .setMessage(github.tornaco.android.thanos.res.R.string.feature_message_infinite_z_enable)
+                .setTitle(getTitleRes())
+                .setMessage(getEnableDialogMsgRes())
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> onYes.run())
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> onNo.run())
                 .setCancelable(false)
@@ -196,8 +213,8 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void requestDisableIZDialog(Runnable onYes, Runnable onNo) {
         new MaterialAlertDialogBuilder(thisActivity())
-                .setTitle(github.tornaco.android.thanos.res.R.string.feature_title_infinite_z)
-                .setMessage(github.tornaco.android.thanos.res.R.string.feature_message_infinite_z_disable)
+                .setTitle(getTitleRes())
+                .setMessage(getDisableDialogMsgRes())
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> onYes.run())
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> onNo.run())
                 .setCancelable(false)
@@ -250,6 +267,9 @@ public class InfiniteZActivity extends ThemeActivity {
 
     private void initViewModel() {
         viewModel = obtainViewModel(this);
+        XLog.w("InF viewModel " + viewModel);
+        XLog.w("InF viewModel.infiniteZManager " + viewModel.infiniteZManager());
+        XLog.w("InF viewModel.infiniteZManager.server¬ " + viewModel.infiniteZManager().getServer());
     }
 
     private void setupViewModel() {

@@ -1094,10 +1094,15 @@
 
     <string name="message_do_you_want_to_add_apps_to_pkg_set">還要將這些應用程式新增到目前的應用程式集中嗎？</string>
 
-    <string name="feature_title_infinite_z">雙開</string>
-    <string name="feature_message_infinite_z_enable">多開基於Android多使用者機制實現，開啟多開功能需要建立一個使用者的Profile，通常桌面會顯示一個「工作」頁籤。 \n此功能目前處於實驗階段，尚不穩定。 \n提示: 如果遇到分享介面，檔案選擇介面無法開啟的問題，可以嘗試新增IntentResolver到多開應用程式中。 \n\n你是否要開啟？</string>
-    <string name="feature_message_infinite_z_disable">關閉分身功能會刪除分身用戶的所有數據，不可恢復，你確定要關閉分身功能嗎？</string>
-    <string name="feature_message_infinite_z_uninstall">你確定要卸載<b>%s</b>嗎？該雙開應用程式的資料將會被刪除且無法恢復</string>
+    <string name="feature_title_infinite_z">经典双开</string>
+    <string name="feature_message_infinite_z_enable">双开基于Android多用户机制实现，与克隆双开功能实现方案有一些细微差异。通常桌面会显示一个“工作”页签。\n该功能目前处于实验阶段，尚不稳定，开启前请确保手机重要数据已经备份。\n\n你是否要开启？</string>
+    <string name="feature_message_infinite_z_disable">关闭双开功能会删除分身用户的所有数据，不可恢复，你确定要关闭双开功能吗？</string>
+    <string name="feature_message_infinite_z_uninstall">你确定要卸载<b>%s</b>吗？该双开应用的数据将会被删除且无法恢复</string>
+
+    <string name="feature_title_infinite_z2">克隆双开</string>
+    <string name="feature_message_infinite_z2_enable">克隆双开基于Android多用户机制实现，与经典双开功能实现方案有一些细微差异。\n该功能目前处于实验阶段，尚不稳定，开启前请确保手机重要数据已经备份。\n\n你是否要开启？</string>
+    <string name="feature_message_infinite_z2_disable">关闭克隆双开功能会删除分身用户的所有数据，不可恢复，你确定吗？</string>
+    <string name="feature_message_infinite_z2_uninstall">你确定要卸载<b>%s</b>吗？该克隆应用的数据将会被删除且无法恢复</string>
 
     <string name="menu_title_copy">複製</string>
 

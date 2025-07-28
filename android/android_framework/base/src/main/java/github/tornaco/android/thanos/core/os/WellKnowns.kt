@@ -225,6 +225,34 @@ object Classes {
             this
         )
 
+    @Throws(ClassNotFoundException::class)
+    fun ClassLoader.lockSettingsServiceClass(): Class<*> =
+        XposedHelpers.findClass(
+            "com.android.server.locksettings.LockSettingsService",
+            this
+        )
+
+    @Throws(ClassNotFoundException::class)
+    fun ClassLoader.colorosLockSettingsServiceExtImplClass(): Class<*> =
+        XposedHelpers.findClass(
+            "com.android.server.locksettings.LockSettingsServiceExtImpl",
+            this
+        )
+
+    @Throws(ClassNotFoundException::class)
+    fun ClassLoader.SyntheticPasswordManagerClass(): Class<*> =
+        XposedHelpers.findClass(
+            "com.android.server.locksettings.SyntheticPasswordManager",
+            this
+        )
+
+    @Throws(ClassNotFoundException::class)
+    fun ClassLoader.SystemServiceManagerClass(): Class<*> =
+        XposedHelpers.findClass(
+            "com.android.server.SystemServiceManager",
+            this
+        )
+
     fun Class<*>.activityStoppedMethod(): Method? {
         return declaredMethods.firstOrNull { it.name == Methods.activityStopped || it.name == Methods.activityStoppedLocked }
     }

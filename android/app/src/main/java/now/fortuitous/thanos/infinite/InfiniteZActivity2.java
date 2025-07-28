@@ -17,15 +17,43 @@
 
 package now.fortuitous.thanos.infinite;
 
+import android.content.Context;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import github.tornaco.android.thanos.util.ActivityUtils;
+
 public class InfiniteZActivity2 extends InfiniteZActivity {
+    public static void start(Context context) {
+        ActivityUtils.startActivity(context, InfiniteZActivity2.class);
+    }
+
     @Override
     protected BaseInfiniteZAppsViewModel obtainViewModel(FragmentActivity activity) {
         ViewModelProvider.AndroidViewModelFactory factory = ViewModelProvider.AndroidViewModelFactory
                 .getInstance(activity.getApplication());
         return ViewModelProviders.of(activity, factory).get(InfiniteZAppsViewModel2.class);
+    }
+
+    @Override
+    protected int getTitleRes() {
+        return github.tornaco.android.thanos.res.R.string.feature_title_infinite_z2;
+    }
+
+    @Override
+    protected int getEnableDialogMsgRes() {
+        return github.tornaco.android.thanos.res.R.string.feature_message_infinite_z2_enable;
+    }
+
+    @Override
+    protected int getDisableDialogMsgRes() {
+        return github.tornaco.android.thanos.res.R.string.feature_message_infinite_z2_disable;
+    }
+
+    @Override
+    protected int getUninstallDialogMsgRes() {
+        return github.tornaco.android.thanos.res.R.string.feature_message_infinite_z2_uninstall;
     }
 }

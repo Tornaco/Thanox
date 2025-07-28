@@ -31,8 +31,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-
-
                 app:title="@string/feature_title_infinite_z"
                 app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
                 app:titleTextColor="?attr/colorControlNormal">

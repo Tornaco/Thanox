@@ -1059,10 +1059,31 @@
 
     <string name="message_do_you_want_to_add_apps_to_pkg_set">Bu uygulamaları mevcut Paket Setine de eklemek istiyor musunuz?</string>
 
-    <string name="feature_title_infinite_z">Uygulama Klonlama</string>
-    <string name="feature_message_infinite_z_enable">Uygulama klonlama, Android çoklu kullanıcı mekanizmasına dayalı olarak uygulanmaktadır. Uygulama klonlamayı etkinleştirmek için, Thanox bir kullanıcı Profili oluşturacaktır. Genellikle, Başlatıcı\'da bir "İş" sekmesi görünecektir. \nBu özellik şu anda deneysel olup henüz kararlı değildir. \n\nBunu etkinleştirmek istiyor musunuz?</string>
-    <string name="feature_message_infinite_z_disable">Uygulama klon kullanıcı verileri tamamen silinecek ve geri alınamayacaktır. Uygulama klonunu devre dışı bırakmak istediğinizden emin misiniz?</string>
-    <string name="feature_message_infinite_z_uninstall"><b>%s</b> uygulamasını kaldırmak istediğinizden emin misiniz? Klonlanmış uygulamanın verileri silinecek ve geri alınamayacaktır.</string>
+    <string name="feature_title_infinite_z">Classic Multiple Apps</string>
+    <string name="feature_message_infinite_z_enable">
+Multiple apps are implemented based on Android\'s multi-user mechanism and differ slightly from the Clone Multiple Apps implementation.
+Typically, a “Work” tab will appear on the home screen.
+This feature is currently experimental and unstable. Please ensure all important data is backed up before enabling.
+Do you want to enable it?
+</string>
+    <string name="feature_message_infinite_z_disable">
+Disabling multiple apps will delete all data of the cloned user and cannot be recovered. Are you sure you want to disable multiple apps?
+</string>
+    <string name="feature_message_infinite_z_uninstall">
+Are you sure you want to uninstall <b>%s</b>? All data of this multiple app instance will be deleted and cannot be recovered.
+</string>
+
+    <string name="feature_title_infinite_z2">Clone Multiple Apps</string>
+    <string name="feature_message_infinite_z2_enable">
+Clone Multiple Apps are implemented based on Android\'s multi-user mechanism and differ slightly from the Classic Multiple Apps implementation.
+This feature is currently experimental and unstable. Please ensure all important data is backed up before enabling.Do you want to enable it?
+</string>
+    <string name="feature_message_infinite_z2_disable">
+Disabling Clone Multiple Apps will delete all data of the cloned user and cannot be recovered. Are you sure?
+</string>
+    <string name="feature_message_infinite_z2_uninstall">
+Are you sure you want to uninstall <b>%s</b>? All data of this clone app instance will be deleted and cannot be recovered.
+</string>
 
     <string name="menu_title_copy">Kopyala</string>
     <string name="menu_title_copy_pkg_name">Paket adını kopyala</string>

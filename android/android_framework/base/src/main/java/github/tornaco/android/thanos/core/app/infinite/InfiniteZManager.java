@@ -12,6 +12,10 @@ public class InfiniteZManager {
     public static final String PROFILE_INF = "android.os.usertype.profile.THANOX.INFZ";
     private final InfiniteZ server;
 
+    public InfiniteZ getServer() {
+        return server;
+    }
+
     @SneakyThrows
     public boolean isEnabled() {
         return server.isEnabled();

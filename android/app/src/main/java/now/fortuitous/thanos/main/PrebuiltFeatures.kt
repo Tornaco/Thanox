@@ -307,7 +307,7 @@ object PrebuiltFeatures {
                     id = PrebuiltFeatureIds.ID_INFINITE_Z2,
                     packedIconRes = R.drawable.ic_nav_app_clone,
                     iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_briefcase_fill,
-                    titleRes = github.tornaco.android.thanos.res.R.string.feature_title_infinite_z,
+                    titleRes = github.tornaco.android.thanos.res.R.string.feature_title_infinite_z2,
                     requiredFeature = BuildProp.THANOX_FEATURE_IZ,
                     themeColor = R.color.nav_icon_app_clone
                 )

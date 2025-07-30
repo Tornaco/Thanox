@@ -302,7 +302,7 @@ object PrebuiltFeatures {
                     themeColor = R.color.nav_icon_app_clone
                 )
             } else null,
-            if (OsUtils.isROrAbove() && BuildProp.THANOS_BUILD_DEBUG) {
+            if (OsUtils.isROrAbove() && OsUtils.isTOrAbove()) {
                 FeatureItem(
                     id = PrebuiltFeatureIds.ID_INFINITE_Z2,
                     packedIconRes = R.drawable.ic_nav_app_clone,

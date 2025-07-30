@@ -1026,7 +1026,7 @@
     <string name="activity_title_apps_manager">應用程式管理</string>
     <string name="feature_summary_apps_manager">應用程式的單獨配置與管理</string>
     <string name="titile_suggested_apps_recent_used">最近打開的應用</string>
-    <string name="title_suggested_apps_view_all">看全部%s個應用</string>
+    <string name="title_suggested_apps_view_all">看全部應用</string>
 
     <string name="feature_category_privacy">隱私</string>
     <string name="feature_category_manage">管理</string>

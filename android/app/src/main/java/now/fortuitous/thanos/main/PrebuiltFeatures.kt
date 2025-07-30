@@ -114,11 +114,25 @@ object PrebuiltFeatures {
                 )
             ),
             FeatureItem(
+                id = PrebuiltFeatureIds.ID_APPS_MANAGER_RECENT_USED,
+                packedIconRes = R.drawable.ic_nav_app_manager_recent_used,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_history_fill,
+                titleRes = github.tornaco.android.thanos.res.R.string.titile_suggested_apps_recent_used,
+                themeColor = R.color.nav_icon_apps_manager,
+                menuItems = listOf(
+                    github.tornaco.android.thanos.res.R.string.feature_title_apps_manager to {
+                        now.fortuitous.thanos.apps.AppsManageActivity.start(it)
+                    },
+                    github.tornaco.android.thanos.res.R.string.title_package_sets to {
+                        now.fortuitous.thanos.apps.PackageSetListActivity.start(it)
+                    },
+                )
+            ),
+            FeatureItem(
                 id = PrebuiltFeatureIds.ID_APPS_MANAGER,
                 packedIconRes = R.drawable.ic_nav_app_manager,
                 iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_apps_2_fill,
-                titleRes = github.tornaco.android.thanos.res.R.string.feature_title_apps_manager,
-                requiredFeature = BuildProp.THANOX_FEATURE_COMPONENT_MANAGER,
+                titleRes = github.tornaco.android.thanos.res.R.string.title_suggested_apps_view_all,
                 themeColor = R.color.nav_icon_apps_manager,
                 menuItems = listOf(
                     github.tornaco.android.thanos.res.R.string.feature_title_apps_manager to {

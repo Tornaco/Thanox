@@ -990,7 +990,7 @@
     <string name="activity_title_apps_manager">Uygulama Yöneticisi</string>
     <string name="feature_summary_apps_manager">Uygulamaya özel yönetim ve yapılandırma</string>
     <string name="titile_suggested_apps_recent_used">Son Kullanılan Uygulamalar</string>
-    <string name="title_suggested_apps_view_all">Tüm %s uygulamayı göster</string>
+    <string name="title_suggested_apps_view_all">Tüm uygulamayı göster</string>
 
     <string name="feature_category_privacy">Gizlilik</string>
     <string name="feature_category_manage">Yönetim</string>

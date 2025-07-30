@@ -58,5 +58,7 @@ object PrebuiltFeatureIds {
     const val ID_THANOX_OPS = 28
     const val ID_PROCESS_MANAGER = 29
 
+    const val ID_APPS_MANAGER_RECENT_USED = 31
+
     fun Int.isValidId() = this >= ID_ONE_KEY_CLEAR
 }

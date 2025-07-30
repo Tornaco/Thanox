@@ -971,7 +971,7 @@ Compatibility notice: If the default permission management function is not compa
     <string name="activity_title_apps_manager">App manager</string>
     <string name="feature_summary_apps_manager">Per-app management and configuration</string>
     <string name="titile_suggested_apps_recent_used">Recently used apps</string>
-    <string name="title_suggested_apps_view_all">Show all %s apps</string>
+    <string name="title_suggested_apps_view_all">Show all apps</string>
 
     <string name="feature_category_privacy">Privacy</string>
     <string name="feature_category_manage">Manage</string>

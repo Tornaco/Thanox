@@ -7,6 +7,7 @@
     <color name="nav_icon_task_removal">#ba68c8</color>
     <color name="nav_icon_smart_freeze">#64b5f6</color>
     <color name="nav_icon_apps_manager">#ffb74d</color>
+    <color name="nav_icon_apps_manager_recent_used">#ff3232</color>
     <color name="nav_icon_priv_cheat">#9575cd</color>
     <color name="nav_icon_ops">#90a4ae</color>
     <color name="nav_icon_app_lock">#81c784</color>

@@ -75,6 +75,7 @@ class PrebuiltFeatureLauncher(
                 }
 
                 PrebuiltFeatureIds.ID_APPS_MANAGER,
+                PrebuiltFeatureIds.ID_APPS_MANAGER_RECENT_USED,
                 PrebuiltFeatureIds.ID_BACKGROUND_START,
                 PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT,
                 PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> {

@@ -48,6 +48,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
     override fun getConfig(featureId: Int): BaseAppListFilterContainerConfig {
         return when (featureId) {
             PrebuiltFeatureIds.ID_APPS_MANAGER -> appsManagerConfig
+            PrebuiltFeatureIds.ID_APPS_MANAGER_RECENT_USED -> appsManagerRecentUsedConfig
             PrebuiltFeatureIds.ID_BACKGROUND_START -> bgStartConfig
             PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> bgRestrictConfig
             PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> cleanTaskConfig
@@ -70,7 +71,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             featureId = "AppsManageActivity2",
             appBarConfig = AppBarConfig(
                 title = {
-                    it.getString(R.string.activity_title_apps_manager)
+                    it.getString(R.string.title_suggested_apps_view_all)
                 },
             ),
             appItemConfig = AppItemConfig(
@@ -88,6 +89,38 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     title = { it.getString(R.string.title_package_sets) },
                     onClick = {
                         PackageSetListActivity.start(this)
+                    })
+            )
+        )
+
+    private val appsManagerRecentUsedConfig
+        get() = BaseAppListFilterContainerConfig(
+            featureId = "appsManagerRecentUsedConfig",
+            appBarConfig = AppBarConfig(
+                title = {
+                    it.getString(R.string.titile_suggested_apps_recent_used)
+                },
+            ),
+            appItemConfig = AppItemConfig(
+                itemType = AppItemConfig.ItemType.Plain(
+                    onAppClick = {
+                        AppDetailsActivity.start(this, it.appInfo)
+                    },
+                ),
+                loader = { context, pkgSetId ->
+                    recentAppsAppLoader(context, pkgSetId) { false }
+                },
+            ),
+            fabs = listOf(
+                FabItemConfig(
+                    title = { it.getString(R.string.title_package_sets) },
+                    onClick = {
+                        PackageSetListActivity.start(this)
+                    }),
+                FabItemConfig(
+                    title = { it.getString(R.string.title_suggested_apps_view_all) },
+                    onClick = {
+                        AioAppListActivity.start(this, PrebuiltFeatureIds.ID_APPS_MANAGER)
                     })
             )
         )
@@ -928,6 +961,39 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         isPlayingSound = audio.hasAudioFocus(pkg),
                         isChecked = isChecked(pkg)
                     )
+                }
+        } ?: listOf(AppUiModel(AppInfo.dummy()))
+        return res.sortedBy { it.appInfo }
+    }
+
+    private fun recentAppsAppLoader(
+        context: Context,
+        pkgSetId: String,
+        isChecked: ThanosManager.(Pkg) -> Boolean
+    ): List<AppUiModel> {
+        val composer = AppListItemDescriptionComposer(this)
+        val res: List<AppUiModel> = context.withThanos {
+            val am = activityManager
+            val audio = audioManager
+            val pm = pkgManager
+            val pkgSetPkgs = pm.getPackageSetById(
+                pkgSetId, true, true
+            )
+            return@withThanos am.getLastRecentUsedPackages(100)
+                .filter { pkgSetPkgs.pkgList.contains(it) }
+                .distinct()
+                .mapNotNull { pkg ->
+                    val appInfo = pm.getAppInfo(pkg)
+                    appInfo?.let {
+                        AppUiModel(
+                            appInfo = appInfo,
+                            description = composer.getAppItemDescription(appInfo),
+                            isRunning = am.isPackageRunning(pkg),
+                            isIdle = am.isPackageIdle(pkg),
+                            isPlayingSound = audio.hasAudioFocus(pkg),
+                            isChecked = isChecked(pkg)
+                        )
+                    }
                 }
         } ?: listOf(AppUiModel(AppInfo.dummy()))
         return res.sortedBy { it.appInfo }

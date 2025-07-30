@@ -70,9 +70,6 @@
             android:exported="false"
             android:label="@string/activity_title_process_manage" />
         <activity
-            android:name="now.fortuitous.thanos.apps.AppsManageActivity"
-            android:exported="false" />
-        <activity
             android:name="now.fortuitous.thanos.privacy.CheatFieldSettingsActivity"
             android:exported="false" />
         <activity

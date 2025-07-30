@@ -121,7 +121,10 @@ object PrebuiltFeatures {
                 themeColor = R.color.nav_icon_apps_manager,
                 menuItems = listOf(
                     github.tornaco.android.thanos.res.R.string.feature_title_apps_manager to {
-                        now.fortuitous.thanos.apps.AppsManageActivity.start(it)
+                        now.fortuitous.thanos.apps.AioAppListActivity.start(
+                            it,
+                            PrebuiltFeatureIds.ID_APPS_MANAGER
+                        )
                     },
                     github.tornaco.android.thanos.res.R.string.title_package_sets to {
                         now.fortuitous.thanos.apps.PackageSetListActivity.start(it)
@@ -136,7 +139,10 @@ object PrebuiltFeatures {
                 themeColor = R.color.nav_icon_apps_manager,
                 menuItems = listOf(
                     github.tornaco.android.thanos.res.R.string.feature_title_apps_manager to {
-                        now.fortuitous.thanos.apps.AppsManageActivity.start(it)
+                        now.fortuitous.thanos.apps.AioAppListActivity.start(
+                            it,
+                            PrebuiltFeatureIds.ID_APPS_MANAGER
+                        )
                     },
                     github.tornaco.android.thanos.res.R.string.title_package_sets to {
                         now.fortuitous.thanos.apps.PackageSetListActivity.start(it)

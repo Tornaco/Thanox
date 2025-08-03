@@ -342,13 +342,14 @@ private fun NavContent(
 }
 
 @Composable
-private fun Features(
+fun Features(
     state: NavState,
     onItemClick: (FeatureItem) -> Unit,
-    createShortcut: (FeatureItem) -> Unit,
+    createShortcut: ((FeatureItem) -> Unit)?,
+    showCategory: Boolean = true
 ) {
     state.features.forEach { group ->
-        FeatureGroup(group, onItemClick, createShortcut)
+        FeatureGroup(group, onItemClick, createShortcut, showCategory)
     }
 }
 
@@ -356,7 +357,8 @@ private fun Features(
 private fun FeatureGroup(
     group: FeatureItemGroup,
     onItemClick: (FeatureItem) -> Unit,
-    createShortcut: (FeatureItem) -> Unit,
+    createShortcut: ((FeatureItem) -> Unit)?,
+    showCategory: Boolean
 ) {
     Card(
         modifier = Modifier
@@ -375,21 +377,25 @@ private fun FeatureGroup(
             horizontalArrangement = Arrangement.Center,
             verticalArrangement = Arrangement.Center
         ) {
-            item(span = { GridItemSpan(maxLineSpan) }) {
-                Text(
-                    text = stringResource(id = group.titleRes),
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.W500,
-                    color = themedTextColor(MaterialTheme.colorScheme.primary),
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-                )
+            if (showCategory) {
+                item(span = { GridItemSpan(maxLineSpan) }) {
+                    Text(
+                        text = stringResource(id = group.titleRes),
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.W500,
+                        color = themedTextColor(MaterialTheme.colorScheme.primary),
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                    )
+                }
             }
             items(group.items) { item ->
                 Box(Modifier.padding(8.dp)) {
                     var isMenuOpen by remember(item) { mutableStateOf(false) }
                     val menuItems = remember(item) { item.menuItems }
                     FeatureItem(item = item, onItemClick = onItemClick, onItemLongClick = {
-                        isMenuOpen = true
+                        if (createShortcut != null) {
+                            isMenuOpen = true
+                        }
                     })
                     MaterialTheme(
                         shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(18.dp))
@@ -419,7 +425,7 @@ private fun FeatureGroup(
                                 },
                                 onClick = {
                                     isMenuOpen = false
-                                    createShortcut(item)
+                                    createShortcut?.invoke(item)
                                 }
                             )
                         }
@@ -431,7 +437,7 @@ private fun FeatureGroup(
 }
 
 @Composable
-private fun FeatureItem(
+fun FeatureItem(
     item: FeatureItem,
     onItemClick: (FeatureItem) -> Unit,
     onItemLongClick: (FeatureItem) -> Unit,

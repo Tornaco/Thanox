@@ -3,7 +3,11 @@ package now.fortuitous.thanos.apps
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import github.tornaco.android.thanos.common.AppListItemDescriptionComposer
 import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor
@@ -26,6 +30,7 @@ import github.tornaco.practice.honeycomb.locker.ui.setup.LockSettingsActivity
 import github.tornaco.practice.honeycomb.locker.ui.verify.isBiometricReady
 import now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
+import now.fortuitous.thanos.main.SuggestedFeatEntries
 import now.fortuitous.thanos.power.SmartStandbySettingsActivity
 import now.fortuitous.thanos.power.StandByRuleActivity
 import now.fortuitous.thanos.privacy.CheatRecordViewerActivity
@@ -63,7 +68,12 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_RESIDENT -> residentConfig
 
             else -> error("Unknown feature id: $featureId")
-        }
+        }.copy(
+            footContent = {
+                Spacer(modifier = Modifier.size(120.dp))
+                SuggestedFeatEntries()
+            }
+        )
     }
 
     private val appsManagerConfig

@@ -83,6 +83,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.ThanoxMediumAp
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.module.compose.common.widget.rememberSearchBarState
 import kotlinx.coroutines.flow.distinctUntilChanged
+import now.fortuitous.thanos.main.SuggestedFeatEntries
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -299,6 +300,13 @@ fun RunningAppList(
                 AnimatedVisibility(visible = state.isNotRunningExpand) {
                     NotRunningAppItem(it, onNotRunningItemClick)
                 }
+            }
+        }
+
+        if (!state.isLoading) {
+            item {
+                Spacer(modifier = Modifier.size(120.dp))
+                SuggestedFeatEntries()
             }
         }
     }

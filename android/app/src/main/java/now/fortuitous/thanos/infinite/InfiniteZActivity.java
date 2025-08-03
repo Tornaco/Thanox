@@ -17,10 +17,13 @@
 
 package now.fortuitous.thanos.infinite;
 
+import static github.tornaco.android.thanos.util.DialogExtKt.pleaseReadCarefully;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +32,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -202,23 +206,25 @@ public class InfiniteZActivity extends ThemeActivity {
     }
 
     private void requestEnableIZDialog(Runnable onYes, Runnable onNo) {
-        new MaterialAlertDialogBuilder(thisActivity())
+        AlertDialog alertDialog = new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(getTitleRes())
                 .setMessage(getEnableDialogMsgRes())
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> onYes.run())
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> onNo.run())
                 .setCancelable(false)
                 .show();
+        pleaseReadCarefully(new Handler(Looper.getMainLooper()), alertDialog, 10);
     }
 
     private void requestDisableIZDialog(Runnable onYes, Runnable onNo) {
-        new MaterialAlertDialogBuilder(thisActivity())
+        AlertDialog alertDialog = new MaterialAlertDialogBuilder(thisActivity())
                 .setTitle(getTitleRes())
                 .setMessage(getDisableDialogMsgRes())
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> onYes.run())
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> onNo.run())
                 .setCancelable(false)
                 .show();
+        pleaseReadCarefully(new Handler(Looper.getMainLooper()), alertDialog, 10);
     }
 
     private void enableIZ() {

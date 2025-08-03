@@ -369,6 +369,10 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                         }
                     }
                 }
+
+                item {
+                    config.footContent()
+                }
             }
             Md3ExpPullRefreshIndicator(
                 uiState.isLoading,

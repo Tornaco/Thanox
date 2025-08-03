@@ -473,3 +473,18 @@ fun ImageDialog(state: CommonDialogState, resId: Int) {
 }
 
 
+@Composable
+fun CommonDialog(state: CommonDialogState, content: @Composable () -> Unit) {
+    if (state.isShowing) {
+        ShortXDialog(
+            onDismissRequest = {
+                state.dismiss()
+            },
+            title = {}
+        ) {
+            content()
+        }
+    }
+}
+
+

@@ -7,6 +7,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -93,7 +94,9 @@ abstract class ComposeThemeActivity : ThemeActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         ThemeStateContainer {
-            Content()
+            CompositionLocalProvider(LocalActivity provides this) {
+                Content()
+            }
         }
     }
 

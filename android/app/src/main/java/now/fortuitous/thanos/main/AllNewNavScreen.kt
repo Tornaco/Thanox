@@ -94,7 +94,6 @@ import github.tornaco.android.thanos.module.compose.common.widget.LargeSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.SettingsAppBarActions
-import github.tornaco.android.thanos.module.compose.common.widget.StandardSpacer
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
 import github.tornaco.android.thanos.support.main.NavHeaderContent
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
@@ -345,7 +344,11 @@ private fun NavContent(
             }
         }
 
-        Features(state = state, onItemClick = onFeatureItemClick, createShortcut = createShortcut)
+        AllNewFeatures(
+            state = state,
+            onItemClick = onFeatureItemClick,
+            createShortcut = createShortcut
+        )
 
         LargeSpacer()
         LargeSpacer()
@@ -353,7 +356,7 @@ private fun NavContent(
 }
 
 @Composable
-private fun Features(
+private fun AllNewFeatures(
     state: NavState,
     onItemClick: (FeatureItem) -> Unit,
     createShortcut: (FeatureItem) -> Unit,
@@ -395,7 +398,7 @@ private fun FeatureGroup(
                 Box {
                     var isMenuOpen by remember(item) { mutableStateOf(false) }
                     val menuItems = remember(item) { item.menuItems }
-                    FeatureItem(item = item, onItemClick = onItemClick, onItemLongClick = {
+                    AllNewFeatureItem(item = item, onItemClick = onItemClick, onItemLongClick = {
                         isMenuOpen = true
                     })
                     DropdownMenu(
@@ -434,7 +437,7 @@ private fun FeatureGroup(
 }
 
 @Composable
-private fun FeatureItem(
+private fun AllNewFeatureItem(
     item: FeatureItem,
     onItemClick: (FeatureItem) -> Unit,
     onItemLongClick: (FeatureItem) -> Unit,

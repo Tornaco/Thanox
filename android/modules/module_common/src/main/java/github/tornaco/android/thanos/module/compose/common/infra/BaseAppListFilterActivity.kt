@@ -2,6 +2,7 @@ package github.tornaco.android.thanos.module.compose.common.infra
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -53,7 +54,8 @@ data class BaseAppListFilterContainerConfig(
     val featureDescription: (Context) -> String? = { null },
     val fabs: List<FabItemConfig> = emptyList(),
     val switchBarConfig: SwitchBarConfig? = null,
-    val batchOperationConfig: BatchOperationConfig? = null
+    val batchOperationConfig: BatchOperationConfig? = null,
+    val footContent: @Composable () -> Unit = {}
 )
 
 data class AppBarConfig(

@@ -389,7 +389,7 @@
     <string name="common_retry">重试</string>
 
     <string name="common_badge_text_experiment">实验</string>
-    <string name="common_experiment_feature_warning_message">该功能为实验性功能，尚不稳定，建议你开启该功能之前，做好数据备份，防止出现意外缺陷而导致数据损失 \n分身开启后如果无法输入文字，可尝试点击右上角+号，自行安装输入法到分身系统中</string>
+    <string name="common_experiment_feature_warning_message">该功能为实验性功能，尚不稳定，建议你开启该功能之前，做好数据备份，防止出现意外缺陷而导致数据损失 \n分身开启后如果无法输入文字，可尝试点击右上角+号，自行安装输入法到分身系统中 \n\n部分设备开启分身后可能需要重启设备才能正常使用</string>
 
     <string name="common_toast_copied_to_clipboard">已经复制到剪贴板</string>
 

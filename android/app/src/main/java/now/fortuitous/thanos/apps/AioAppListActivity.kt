@@ -70,7 +70,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             else -> error("Unknown feature id: $featureId")
         }.copy(
             footContent = {
-                Spacer(modifier = Modifier.size(120.dp))
+                Spacer(modifier = Modifier.size(150.dp))
                 SuggestedFeatEntries()
             }
         )

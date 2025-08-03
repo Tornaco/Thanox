@@ -100,6 +100,12 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
                     } else {
                         sortApplied
                     }
+                }.let {
+                    if (sort.relyOnUsageStats()) {
+                        inflateAppUsageStats(it)
+                    } else {
+                        it
+                    }
                 }.map { model ->
                     val appSorterProvider = sort.provider
                     val appSortDescription = appSorterProvider.getAppSortDescription(
@@ -114,12 +120,6 @@ class BaseAppListFilterVM @Inject constructor(@ApplicationContext private val co
                                 it + System.lineSeparator() + appSortDescription
                             } ?: appSortDescription
                         )
-                    }
-                }.let {
-                    if (sort.relyOnUsageStats()) {
-                        inflateAppUsageStats(it)
-                    } else {
-                        it
                     }
                 }
                 updateState {

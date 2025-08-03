@@ -137,7 +137,7 @@ public class AppPreference {
 
     public static boolean isAppFeatureEnabled(Context context, int featureId) {
         return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(PREF_KEY_FEATURE_FLAG_ + featureId, true);
+                .getBoolean(PREF_KEY_FEATURE_FLAG_ + featureId, featureId != PrebuiltFeatureIds.ID_INFINITE_Z2);
     }
 
 

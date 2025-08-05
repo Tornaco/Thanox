@@ -30,6 +30,7 @@ import github.tornaco.android.thanos.support.withThanos
 import github.tornaco.android.thanos.util.BrowserUtils
 import github.tornaco.android.thanox.module.activity.trampoline.ActivityTrampolineActivity
 import github.tornaco.android.thanox.module.notification.recorder.ui.NotificationRecordActivity
+import github.tornaco.practice.honeycomb.locker.ui.setup.AppLockListActivity
 import github.tornaco.thanos.android.module.profile.RuleListActivity
 import github.tornaco.thanos.android.ops.ops.by.ops.OpsBottomNavActivity
 import github.tornaco.thanos.android.ops.ops.by.ops.ThanoxOpsBottomNavActivity
@@ -82,9 +83,12 @@ class PrebuiltFeatureLauncher(
                     AioAppListActivity.start(context, featureId)
                 }
 
+                PrebuiltFeatureIds.ID_APP_LOCK -> {
+                    AppLockListActivity.start(context)
+                }
+
                 PrebuiltFeatureIds.ID_TASK_BLUR,
                 PrebuiltFeatureIds.ID_SMART_STANDBY,
-                PrebuiltFeatureIds.ID_APP_LOCK,
                 PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER,
                 PrebuiltFeatureIds.ID_SENSOR_OFF,
                 PrebuiltFeatureIds.ID_PRIVACY_CHEAT,

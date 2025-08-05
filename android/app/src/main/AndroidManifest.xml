@@ -338,6 +338,9 @@
         <activity
             android:name="now.fortuitous.thanos.sf.SFActivity"
             android:exported="false" />
+        <activity
+            android:name="github.tornaco.practice.honeycomb.locker.ui.setup.AppLockListActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="xposedmodule"

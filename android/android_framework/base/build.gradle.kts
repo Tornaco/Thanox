@@ -59,6 +59,7 @@ buildConfig {
 
     buildConfigField("String", "ACTIVITY_APP_LOCK_VERIFIER", provider { "\"github.tornaco.practice.honeycomb.locker.ui.verify.VerifyActivity\"" })
     buildConfigField("String", "ACTIVITY_APP_LOCK_SETTINGS", provider { "\"github.tornaco.practice.honeycomb.locker.ui.start.LockerStartActivity\"" })
+    buildConfigField("String", "ACTIVITY_APP_LOCK_FEATURE_ENTRY", provider { "\"github.tornaco.practice.honeycomb.locker.ui.setup.AppLockListActivity\"" })
     buildConfigField("String", "ACTION_APP_LOCK", provider { "\"github.tornaco.practice.honeycomb.bee.action.START\"" })
     buildConfigField("String", "ACTIVITY_APP_DETAILS", provider { "\"now.fortuitous.thanos.apps.AppDetailsActivity\"" })
     buildConfigField("String", "SU_SERVICE_CLASS", provider { "\"now.fortuitous.thanos.service.SuSupportService\"" })

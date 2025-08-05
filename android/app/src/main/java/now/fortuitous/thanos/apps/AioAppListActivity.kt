@@ -2,7 +2,6 @@ package now.fortuitous.thanos.apps
 
 import android.content.Context
 import android.content.Intent
-import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
@@ -26,8 +25,6 @@ import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.support.AppFeatureManager.showSubscribeDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos
-import github.tornaco.practice.honeycomb.locker.ui.setup.LockSettingsActivity
-import github.tornaco.practice.honeycomb.locker.ui.verify.isBiometricReady
 import now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
 import now.fortuitous.thanos.main.SuggestedFeatEntries
@@ -57,7 +54,6 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_BACKGROUND_START -> bgStartConfig
             PrebuiltFeatureIds.ID_BACKGROUND_RESTRICT -> bgRestrictConfig
             PrebuiltFeatureIds.ID_CLEAN_TASK_REMOVAL -> cleanTaskConfig
-            PrebuiltFeatureIds.ID_APP_LOCK -> appLockConfig
             PrebuiltFeatureIds.ID_TASK_BLUR -> taskBlurConfig
             PrebuiltFeatureIds.ID_LAUNCH_OTHER_APP_BLOCKER -> launchOtherConfig
             PrebuiltFeatureIds.ID_PRIVACY_CHEAT -> dataCheatConfig
@@ -323,72 +319,6 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                         Pkg.fromAppInfo(
                             app.appInfo
                         ),
-                        isCheck
-                    )
-                })
-            )
-        }
-
-    private val appLockConfig: BaseAppListFilterContainerConfig
-        get() {
-            val stack = ThanosManager.from(this).activityStackSupervisor
-            return BaseAppListFilterContainerConfig(
-                featureId = "appLock",
-                appBarConfig = AppBarConfig(
-                    title = {
-                        it.getString(R.string.module_locker_app_name)
-                    },
-                    actions = {
-                        listOf(
-                            AppBarConfig.AppBarAction(
-                                title = it.getString(R.string.nav_title_settings),
-                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill,
-                                onClick = {
-                                    LockSettingsActivity.start(this)
-                                }
-                            )
-                        )
-                    }
-                ),
-                switchBarConfig = SwitchBarConfig(
-                    title = { context, _ ->
-                        context.getString(R.string.module_locker_app_name)
-                    },
-                    isChecked = stack.isAppLockEnabled,
-                    onCheckChanged = { isChecked ->
-                        if (isChecked && !isBiometricReady(this)) {
-                            Toast.makeText(
-                                this,
-                                R.string.module_locker_biometric_not_set_dialog_message,
-                                Toast.LENGTH_LONG
-                            ).show()
-                            stack.isAppLockEnabled = false
-                            false
-                        } else {
-                            stack.isAppLockEnabled = isChecked
-                            true
-                        }
-                    }
-                ),
-                appItemConfig = AppItemConfig(
-                    itemType = AppItemConfig.ItemType.Checkable(
-                        onCheckChanged = { app, isCheck ->
-                            stack.setPackageLocked(
-                                app.appInfo.pkgName,
-                                isCheck
-                            )
-                        },
-                    ),
-                    loader = { context, pkgSetId ->
-                        commonTogglableAppLoader(
-                            context,
-                            pkgSetId
-                        ) { stack.isPackageLocked(it.pkgName) }
-                    },
-                ),
-                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
-                    stack.setPackageLocked(
-                        app.appInfo.pkgName,
                         isCheck
                     )
                 })
@@ -950,32 +880,6 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             )
         }
 
-    private fun commonTogglableAppLoader(
-        context: Context,
-        pkgSetId: String,
-        isChecked: ThanosManager.(Pkg) -> Boolean
-    ): List<AppUiModel> {
-        val composer = AppListItemDescriptionComposer(this)
-        val res: List<AppUiModel> = context.withThanos {
-            val am = activityManager
-            val audio = audioManager
-            return@withThanos pkgManager.getInstalledPkgsByPackageSetId(pkgSetId)
-                .distinct()
-                .map { appInfo ->
-                    val pkg = Pkg.fromAppInfo(appInfo)
-                    AppUiModel(
-                        appInfo = appInfo,
-                        description = composer.getAppItemDescription(appInfo),
-                        isRunning = am.isPackageRunning(pkg),
-                        isIdle = am.isPackageIdle(pkg),
-                        isPlayingSound = audio.hasAudioFocus(pkg),
-                        isChecked = isChecked(pkg)
-                    )
-                }
-        } ?: listOf(AppUiModel(AppInfo.dummy()))
-        return res.sortedBy { it.appInfo }
-    }
-
     private fun recentAppsAppLoader(
         context: Context,
         pkgSetId: String,
@@ -1034,27 +938,53 @@ class AioAppListActivity : BaseAppListFilterActivity() {
         } ?: listOf(AppUiModel(AppInfo.dummy()))
         return res.sortedBy { it.appInfo }
     }
-
-    private fun commonToggleableAppListBatchOpsConfig(
-        toggle: (AppUiModel, Boolean) -> Unit
-    ) = BatchOperationConfig(
-        operations = listOf(
-            BatchOperationConfig.Operation(
-                title = { it.getString(R.string.on) },
-                onClick = { models ->
-                    models.forEach {
-                        toggle(it, true)
-                    }
-                }
-            ),
-            BatchOperationConfig.Operation(
-                title = { it.getString(R.string.off) },
-                onClick = { models ->
-                    models.forEach {
-                        toggle(it, false)
-                    }
-                }
-            ),
-        )
-    )
 }
+
+fun commonTogglableAppLoader(
+    context: Context,
+    pkgSetId: String,
+    isChecked: ThanosManager.(Pkg) -> Boolean
+): List<AppUiModel> {
+    val composer = AppListItemDescriptionComposer(context)
+    val res: List<AppUiModel> = context.withThanos {
+        val am = activityManager
+        val audio = audioManager
+        return@withThanos pkgManager.getInstalledPkgsByPackageSetId(pkgSetId)
+            .distinct()
+            .map { appInfo ->
+                val pkg = Pkg.fromAppInfo(appInfo)
+                AppUiModel(
+                    appInfo = appInfo,
+                    description = composer.getAppItemDescription(appInfo),
+                    isRunning = am.isPackageRunning(pkg),
+                    isIdle = am.isPackageIdle(pkg),
+                    isPlayingSound = audio.hasAudioFocus(pkg),
+                    isChecked = isChecked(pkg)
+                )
+            }
+    } ?: listOf(AppUiModel(AppInfo.dummy()))
+    return res.sortedBy { it.appInfo }
+}
+
+fun commonToggleableAppListBatchOpsConfig(
+    toggle: (AppUiModel, Boolean) -> Unit
+) = BatchOperationConfig(
+    operations = listOf(
+        BatchOperationConfig.Operation(
+            title = { it.getString(R.string.on) },
+            onClick = { models ->
+                models.forEach {
+                    toggle(it, true)
+                }
+            }
+        ),
+        BatchOperationConfig.Operation(
+            title = { it.getString(R.string.off) },
+            onClick = { models ->
+                models.forEach {
+                    toggle(it, false)
+                }
+            }
+        ),
+    )
+)

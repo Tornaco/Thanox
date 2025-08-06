@@ -25,6 +25,7 @@ import github.tornaco.android.thanos.res.R
 import github.tornaco.android.thanos.support.AppFeatureManager.showSubscribeDialog
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos
+import now.fortuitous.thanos.XposedScope.requestOrRemoveScope
 import now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
 import now.fortuitous.thanos.main.SuggestedFeatEntries
@@ -868,6 +869,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                             priv.selectFieldsProfileForPackage(
                                 app.appInfo.pkgName,
                                 id.takeIf { it.isNotEmpty() })
+                            requestOrRemoveScope(this, Pkg.fromAppInfo(app.appInfo))
                         }
                     ),
                     loader = { context, pkgSetId ->

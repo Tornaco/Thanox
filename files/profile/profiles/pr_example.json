@@ -1,0 +1,14 @@
+{
+    "author": "Author",
+    "version": 1,
+    "tags": [
+        "app_opt"
+    ],
+    "profile": {
+        "name": "Name here",
+        "description": "Description here",
+        "priority": 1,
+        "condition": "...",
+        "actions": [...]
+    }
+}

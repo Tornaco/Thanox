@@ -1,0 +1,1 @@
+system management tool with functions for privacy and system optimization

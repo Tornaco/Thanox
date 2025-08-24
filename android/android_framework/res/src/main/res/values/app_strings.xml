@@ -105,13 +105,11 @@
     <string-array name="module_locker_verify_method_entries">
         <item>@string/module_locker_title_verify_system</item>
         <item>@string/module_locker_title_verify_custom_pattern</item>
-        <item>@string/module_locker_title_verify_custom_pin</item>
     </string-array>
 
     <string-array name="module_locker_verify_method_values">
         <item>0</item>
         <item>1</item>
-        <item>2</item>
     </string-array>
 
     <string-array name="module_ops2_app_ops_summaries">

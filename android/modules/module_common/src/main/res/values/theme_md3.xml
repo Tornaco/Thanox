@@ -84,6 +84,7 @@
 
     <style name="ThemeMD3Dark.App">
         <item name="android:windowBackground">@color/md_black</item>
+        <item name="android:statusBarColor">@color/md_black</item>
     </style>
 
     <style name="ThemeMD3Dark.App.NoActionBar">

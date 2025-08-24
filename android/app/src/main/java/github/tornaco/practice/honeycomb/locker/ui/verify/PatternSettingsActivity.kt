@@ -1,5 +1,6 @@
 package github.tornaco.practice.honeycomb.locker.ui.verify
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
@@ -46,6 +47,7 @@ class PatternSettingsActivity : ComposeThemeActivity() {
         }
     }
 
+    @SuppressLint("UnusedBoxWithConstraintsScope")
     @Composable
     override fun Content() {
         val context = LocalContext.current

@@ -1,6 +1,8 @@
 package github.tornaco.android.thanos.module.compose.common.widget
 
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.painterResource
@@ -32,6 +34,13 @@ fun <T> MenuDialog(
                             Icon(painterResource(id = it), contentDescription = null)
                         }
                     },
+                    overflow = {
+                        dialogItem.action?.let {
+                            Button(onClick = { it.second() }) {
+                                Text(it.first)
+                            }
+                        }
+                    },
                     onClick = {
                         state.dismiss()
                         state.onItemSelected(state._data, dialogItem.id)
@@ -47,7 +56,8 @@ data class MenuDialogItem(
     val id: String,
     val title: String,
     val summary: String? = null,
-    val iconRes: Int? = null
+    val iconRes: Int? = null,
+    val action: Pair<String, () -> Unit>? = null
 )
 
 open class MenuDialogState<DATA>(

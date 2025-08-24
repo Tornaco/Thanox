@@ -2,7 +2,6 @@ package github.tornaco.android.thanos.module.compose.common.infra
 
 import android.content.Context
 import android.content.Intent
-import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -113,6 +112,7 @@ data class AppItemConfig(
                 val id: String,
                 val summary: String? = null,
                 val showOnAppListItem: Boolean = true,
+                val action: Pair<String, (AppUiModel) -> Unit>? = null
             )
         }
 

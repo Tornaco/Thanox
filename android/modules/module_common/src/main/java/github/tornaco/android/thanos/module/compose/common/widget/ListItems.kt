@@ -178,10 +178,10 @@ fun ListItem(
                         maxLines = 12
                     )
                 }
-                TinySpacer()
-                TinySpacer()
-                TinySpacer()
                 text2?.let {
+                    TinySpacer()
+                    TinySpacer()
+                    TinySpacer()
                     Text(
                         text = text2,
                         style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
@@ -202,7 +202,8 @@ fun ListItem(
 fun ListItemPreview() {
     LazyColumn {
         items(10) {
-            CheckableListItem(title = "Title",
+            CheckableListItem(
+                title = "Title",
                 text1 = "Text1",
                 text2 = "Text2",
                 checked = true,
@@ -218,7 +219,8 @@ fun ListItemPreview() {
 fun ListItem2Preview() {
     LazyColumn {
         items(10) {
-            ListItem(title = "Title",
+            ListItem(
+                title = "Title",
                 text1 = "Text1",
                 text2 = "Text2",
                 onClick = {}

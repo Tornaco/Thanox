@@ -26,6 +26,7 @@ import github.tornaco.android.thanos.support.AppFeatureManager.showSubscribeDial
 import github.tornaco.android.thanos.support.AppFeatureManager.withSubscriptionStatus
 import github.tornaco.android.thanos.support.withThanos
 import now.fortuitous.thanos.XposedScope.requestOrRemoveScope
+import now.fortuitous.thanos.launchother.AllowListActivity
 import now.fortuitous.thanos.launchother.LaunchOtherAppRuleActivity
 import now.fortuitous.thanos.main.PrebuiltFeatureIds
 import now.fortuitous.thanos.main.SuggestedFeatEntries
@@ -657,6 +658,9 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                                 iconRes = github.tornaco.android.thanos.R.drawable.module_ops_ic_checkbox_circle_fill_light_green,
                                 iconTintColor = Color.Unspecified,
                                 id = ActivityStackSupervisor.LaunchOtherAppPkgSetting.ALLOW_LISTED.toString(),
+                                action = getString(R.string.nav_title_settings) to {
+                                    AllowListActivity.start(this, it.appInfo)
+                                },
                             )
                         ),
                         onSelected = { app, id ->

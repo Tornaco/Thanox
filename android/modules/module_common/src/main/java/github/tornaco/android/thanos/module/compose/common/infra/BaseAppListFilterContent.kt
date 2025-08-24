@@ -603,11 +603,16 @@ private fun optionMenuDialog(
         key1 = selectable,
         key2 = model,
         title = { model.appInfo.appLabel },
-        menuItems = selectable.options.map {
+        menuItems = selectable.options.map { op ->
             MenuDialogItem(
-                id = it.id,
-                title = it.title(context),
-                summary = it.summary
+                id = op.id,
+                title = op.title(context),
+                summary = op.summary,
+                action = op.action?.let {
+                    it.first to {
+                        it.second(model)
+                    }
+                }
             )
         },
         onItemSelected = { _, id ->

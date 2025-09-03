@@ -400,3 +400,6 @@
 -dontwarn android.content.pm.ShortcutQueryWrapper
 -dontwarn android.os.ICancellationSignal$Stub
 -dontwarn android.os.ICancellationSignal
+
+-dontwarn android.app.IUidObserver$Stub
+-dontwarn android.app.IUidObserver

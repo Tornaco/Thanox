@@ -9,8 +9,6 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 
-import com.elvishew.xlog.XLog;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -1021,24 +1019,24 @@ public class ActivityManager {
         return server.asBinder();
     }
 
+
     public static String procStateToString(int procState) {
-        XLog.w("procStateToString: " + procState);
         final String procStateStr;
         switch (procState) {
             case ProcessStateEnum.PROCESS_STATE_PERSISTENT:
-                procStateStr = "PER";
+                procStateStr = "PER ";
                 break;
             case ProcessStateEnum.PROCESS_STATE_PERSISTENT_UI:
                 procStateStr = "PERU";
                 break;
             case ProcessStateEnum.PROCESS_STATE_TOP:
-                procStateStr = "TOP";
+                procStateStr = "TOP ";
                 break;
             case ProcessStateEnum.PROCESS_STATE_BOUND_TOP:
                 procStateStr = "BTOP";
                 break;
             case ProcessStateEnum.PROCESS_STATE_FOREGROUND_SERVICE:
-                procStateStr = "FGS";
+                procStateStr = "FGS ";
                 break;
             case ProcessStateEnum.PROCESS_STATE_BOUND_FOREGROUND_SERVICE:
                 procStateStr = "BFGS";
@@ -1056,7 +1054,7 @@ public class ActivityManager {
                 procStateStr = "BKUP";
                 break;
             case ProcessStateEnum.PROCESS_STATE_SERVICE:
-                procStateStr = "SVC";
+                procStateStr = "SVC ";
                 break;
             case ProcessStateEnum.PROCESS_STATE_RECEIVER:
                 procStateStr = "RCVR";
@@ -1074,7 +1072,7 @@ public class ActivityManager {
                 procStateStr = "LAST";
                 break;
             case ProcessStateEnum.PROCESS_STATE_CACHED_ACTIVITY:
-                procStateStr = "CAC";
+                procStateStr = "CAC ";
                 break;
             case ProcessStateEnum.PROCESS_STATE_CACHED_ACTIVITY_CLIENT:
                 procStateStr = "CACC";
@@ -1083,7 +1081,7 @@ public class ActivityManager {
                 procStateStr = "CRE ";
                 break;
             case ProcessStateEnum.PROCESS_STATE_CACHED_EMPTY:
-                procStateStr = "CEM";
+                procStateStr = "CEM ";
                 break;
             case ProcessStateEnum.PROCESS_STATE_NONEXISTENT:
                 procStateStr = "NONE";
@@ -1096,67 +1094,27 @@ public class ActivityManager {
     }
 
     interface ProcessStateEnum {
-        // Unlike the ActivityManager PROCESS_STATE values, the ordering and numerical values
-        // here are completely fixed and arbitrary. Order is irrelevant.
-        // No attempt need be made to keep them in sync.
-        // The values here must not be modified. Any new process states can be appended to the end.
-
-        // Process state that is unknown to this proto file (i.e. is not mapped
-        // by ActivityManager.processStateAmToProto()). Can only happen if there's a bug in the mapping.
-        int PROCESS_STATE_UNKNOWN_TO_PROTO = 998;
-        // Not a real process state.
-        int PROCESS_STATE_UNKNOWN = 999;
-        // Process is a persistent system process.
-        int PROCESS_STATE_PERSISTENT = 1000;
-        // Process is a persistent system process and is doing UI.
-        int PROCESS_STATE_PERSISTENT_UI = 1001;
-        // Process is hosting the current top activities. Note that this covers
-        // all activities that are visible to the user.
-        int PROCESS_STATE_TOP = 1002;
-        // Process is bound to a TOP app.
-        int PROCESS_STATE_BOUND_TOP = 1020;
-        // Process is hosting a foreground service.
-        int PROCESS_STATE_FOREGROUND_SERVICE = 1003;
-        // Process is hosting a service bound by the system or another foreground app.
-        int PROCESS_STATE_BOUND_FOREGROUND_SERVICE = 1004;
-        // Process is important to the user, and something they are aware of.
-        int PROCESS_STATE_IMPORTANT_FOREGROUND = 1005;
-        // Process is important to the user, but not something they are aware of.
-        int PROCESS_STATE_IMPORTANT_BACKGROUND = 1006;
-        // Process is in the background transient so we will try to keep running.
-        int PROCESS_STATE_TRANSIENT_BACKGROUND = 1007;
-        // Process is in the background running a backup/restore operation.
-        int PROCESS_STATE_BACKUP = 1008;
-        // Process is in the background running a service. Unlike oom_adj, this
-        // level is used for both the normal running in background state and the
-        // executing operations state.
-        int PROCESS_STATE_SERVICE = 1009;
-        // Process is in the background running a receiver. Note that from the
-        // perspective of oom_adj, receivers run at a higher foreground level, but
-        // for our prioritization here that is not necessary and putting them
-        // below services means many fewer changes in some process states as they
-        // receive broadcasts.
-        int PROCESS_STATE_RECEIVER = 1010;
-        // Same as PROCESS_STATE_TOP but while device is sleeping.
-        int PROCESS_STATE_TOP_SLEEPING = 1011;
-        // Process is in the background, but it can't restore its state so we want
-        // to try to avoid killing it.
-        int PROCESS_STATE_HEAVY_WEIGHT = 1012;
-        // Process is in the background but hosts the home activity.
-        int PROCESS_STATE_HOME = 1013;
-        // Process is in the background but hosts the last shown activity.
-        int PROCESS_STATE_LAST_ACTIVITY = 1014;
-        // Process is being cached for later use and contains activities.
-        int PROCESS_STATE_CACHED_ACTIVITY = 1015;
-        // Process is being cached for later use and is a client of another cached
-        // process that contains activities.
-        int PROCESS_STATE_CACHED_ACTIVITY_CLIENT = 1016;
-        // Process is being cached for later use and has an activity that corresponds
-        // to an existing recent task.
-        int PROCESS_STATE_CACHED_RECENT = 1017;
-        // Process is being cached for later use and is empty.
-        int PROCESS_STATE_CACHED_EMPTY = 1018;
-        // Process does not exist.
-        int PROCESS_STATE_NONEXISTENT = 1019;
+        int PROCESS_STATE_UNKNOWN = -1;
+        int PROCESS_STATE_PERSISTENT = 0;
+        int PROCESS_STATE_PERSISTENT_UI = 1;
+        int PROCESS_STATE_TOP = 2;
+        int PROCESS_STATE_BOUND_TOP = 3;
+        int PROCESS_STATE_FOREGROUND_SERVICE = 4;
+        int PROCESS_STATE_BOUND_FOREGROUND_SERVICE = 5;
+        int PROCESS_STATE_IMPORTANT_FOREGROUND = 6;
+        int PROCESS_STATE_IMPORTANT_BACKGROUND = 7;
+        int PROCESS_STATE_TRANSIENT_BACKGROUND = 8;
+        int PROCESS_STATE_BACKUP = 9;
+        int PROCESS_STATE_SERVICE = 10;
+        int PROCESS_STATE_RECEIVER = 11;
+        int PROCESS_STATE_TOP_SLEEPING = 12;
+        int PROCESS_STATE_HEAVY_WEIGHT = 13;
+        int PROCESS_STATE_HOME = 14;
+        int PROCESS_STATE_LAST_ACTIVITY = 15;
+        int PROCESS_STATE_CACHED_ACTIVITY = 16;
+        int PROCESS_STATE_CACHED_ACTIVITY_CLIENT = 17;
+        int PROCESS_STATE_CACHED_RECENT = 18;
+        int PROCESS_STATE_CACHED_EMPTY = 19;
+        int PROCESS_STATE_NONEXISTENT = 20;
     }
 }

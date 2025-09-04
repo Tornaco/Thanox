@@ -117,6 +117,23 @@
         <item>com.miui.contentcatcher</item>
         <item>com.google.android.webview</item>
 
+        <!--        MIUI-->
+        <item>com.miui.securitycenter</item>
+        <item>com.miui.powerkeeper</item>
+        <item>com.xiaomi.mirror</item>
+        <item>com.xiaomi.NetworkBoost</item>
+        <item>com.qualcomm.qti.devicestatisticsservice</item>
+        <item>com.android.se</item>
+        <item>com.qti.phone</item>
+        <item>com.miui.home</item>
+        <item>com.android.settings</item>
+        <item>com.qualcomm.qti.poweroffalarm</item>
+        <item>com.xiaomi.bluetooth</item>
+        <item>com.qti.qcc</item>
+        <item>com.qualcomm.timeservice</item>
+        <item>com.android.providers.settings</item>
+
+
     </string-array>
 
     <string-array name="white_list_packages_hooks">

@@ -2,7 +2,6 @@ package now.fortuitous.thanos.apps
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.widget.Toast
 import androidx.annotation.UiThread
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.ViewModel
@@ -28,12 +27,14 @@ class AppDetailsViewModel : ViewModel() {
         pickedFile: DocumentFile,
         app: AppInfo
     ) {
-        val pickedFileOS = pickedFile.openOutputStream(context)
-        if (pickedFileOS == null) {
-            Toast.makeText(context, "Unable to open output stream.", Toast.LENGTH_LONG).show()
-            return
-        }
         viewModelScope.launch {
+            val pickedFileOS = pickedFile.openOutputStream(context)
+            if (pickedFileOS == null) {
+                withContext(Dispatchers.Main) {
+                    listener.onFail("Unable to open output stream.")
+                }
+                return@launch
+            }
             withContext(Dispatchers.IO) {
                 runCatching {
                     val thanos = ThanosManager.from(context)
@@ -70,12 +71,14 @@ class AppDetailsViewModel : ViewModel() {
         pickedFile: DocumentFile,
         app: AppInfo
     ) {
-        val pickedFileIS = pickedFile.openInputStream(context)
-        if (pickedFileIS == null) {
-            Toast.makeText(context, "Unable to open input stream.", Toast.LENGTH_LONG).show()
-            return
-        }
         viewModelScope.launch {
+            val pickedFileIS = pickedFile.openInputStream(context)
+            if (pickedFileIS == null) {
+                withContext(Dispatchers.Main) {
+                    listener.onFail("Unable to open input stream")
+                }
+                return@launch
+            }
             withContext(Dispatchers.IO) {
                 runCatching {
                     pickedFileIS.use { stream ->
@@ -200,12 +203,9 @@ class AppDetailsViewModel : ViewModel() {
                             }
 
                         }.onFailure {
-                            Toast.makeText(
-                                context,
-                                "Unable to read file. ${it.toString()}",
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
+                            withContext(Dispatchers.Main) {
+                                listener.onFail(it.stackTraceToString())
+                            }
                         }
                     }
                 }.onFailure {

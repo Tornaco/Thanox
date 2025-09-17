@@ -130,6 +130,11 @@ object Classes {
     )
 
     @Throws(ClassNotFoundException::class)
+    fun ClassLoader.batteryStatsService(): Class<*> = XposedHelpers.findClass(
+        "com.android.server.am.BatteryStatsService", this
+    )
+
+    @Throws(ClassNotFoundException::class)
     fun ClassLoader.activityRecordClass(): Class<*> = XposedHelpersExt.anyClassFromNames(
         this, arrayOf(
             ACTIVITY_RECORD_WM, ACTIVITY_RECORD_AM

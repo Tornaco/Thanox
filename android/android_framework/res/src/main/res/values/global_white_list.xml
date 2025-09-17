@@ -60,6 +60,7 @@
         <item>com.android.keychain</item>
         <item>com.android.wallpaper.livepicker</item>
         <item>com.android.nfc</item>
+        <item>com.android.localtransport</item>
 
 
         <!--providers-->

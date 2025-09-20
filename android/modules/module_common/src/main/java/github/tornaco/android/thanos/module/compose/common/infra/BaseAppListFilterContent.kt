@@ -25,10 +25,10 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ClearAll
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.SelectAll
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.AlertDialog
@@ -111,49 +111,51 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
     }
     ThanoxMediumAppBarScaffold(
         title = {
-            Row {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = title,
                     style = TypographyDefaults.appBarTitleTextStyle()
                 )
-                config.featureDescription(LocalContext.current)?.let { description ->
-                    var showTipDialog by remember { mutableStateOf(false) }
-                    
-                    IconButton(
-                        onClick = { showTipDialog = true },
-                        modifier = Modifier.size(24.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Info,
-                            contentDescription = "Feature Information",
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(20.dp)
-                        )
-                    }
-                    
-                    if (showTipDialog) {
-                        AlertDialog(
-                            onDismissRequest = { showTipDialog = false },
-                            title = {
-                                Text(
-                                    text = title,
-                                    style = MaterialTheme.typography.headlineSmall
-                                )
-                            },
-                            text = {
-                                Text(
-                                    text = description,
-                                    style = MaterialTheme.typography.bodyMedium
-                                )
-                            },
-                            confirmButton = {
-                                TextButton(
-                                    onClick = { showTipDialog = false }
-                                ) {
-                                    Text("确定")
+                if (config.switchBarConfig == null) {
+                    config.featureDescription(LocalContext.current)?.let { description ->
+                        var showTipDialog by remember { mutableStateOf(false) }
+
+                        IconButton(
+                            onClick = { showTipDialog = true },
+                            modifier = Modifier.size(24.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                contentDescription = "Feature Information",
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
+
+                        if (showTipDialog) {
+                            AlertDialog(
+                                onDismissRequest = { showTipDialog = false },
+                                title = {
+                                    Text(
+                                        text = title,
+                                        style = MaterialTheme.typography.headlineSmall
+                                    )
+                                },
+                                text = {
+                                    Text(
+                                        text = description,
+                                        style = MaterialTheme.typography.bodyMedium
+                                    )
+                                },
+                                confirmButton = {
+                                    TextButton(
+                                        onClick = { showTipDialog = false }
+                                    ) {
+                                        Text("确定")
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }

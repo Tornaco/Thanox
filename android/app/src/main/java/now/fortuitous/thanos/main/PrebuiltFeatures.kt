@@ -244,7 +244,7 @@ object PrebuiltFeatures {
                 iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_clear_data_blocker,
                 themeColor = R.color.nav_icon_clear_data_blocker
-            )
+            ),
         )
     )
 
@@ -363,7 +363,14 @@ object PrebuiltFeatures {
                     titleRes = github.tornaco.android.thanos.res.R.string.pre_title_resident,
                     themeColor = R.color.nav_icon_resident
                 )
-            } else null
+            } else null,
+            FeatureItem(
+                id = PrebuiltFeatureIds.ID_SHORTCUT_CLEANER,
+                packedIconRes = R.drawable.ic_nav_shortcut_cleaner,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_scissors_cut_fill,
+                titleRes = github.tornaco.android.thanos.res.R.string.feature_title_shortcut_cleaner,
+                themeColor = R.color.nav_icon_shortcut_cleaner
+            )
         )
     )
 

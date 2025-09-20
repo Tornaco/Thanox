@@ -2,7 +2,8 @@
   "commonRule": {
     "labelRegexes": [
       "卸载",
-      "福气兑红包"
+      "福气兑红包",
+      "福利"
     ]
   },
   "appRules": [

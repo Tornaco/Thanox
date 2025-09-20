@@ -1542,4 +1542,8 @@
     <string name="feature_clear_data_blocker_enabled">已启用阻止清除数据</string>
     <string name="feature_clear_data_blocker_disabled">已禁用阻止清除数据</string>
 
+    <!-- Shortcut Cleaner -->
+    <string name="feature_title_shortcut_cleaner">净化快捷方式</string>
+    <string name="feature_summary_shortcut_cleaner">清理和管理应用快捷方式</string>
+
 </resources>

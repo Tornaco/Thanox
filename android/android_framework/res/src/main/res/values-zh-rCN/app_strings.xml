@@ -98,6 +98,12 @@
     <string name="module_locker_title_verify_custom_pattern_settings_draw_2">请再次绘制图案</string>
     <string name="module_locker_title_verify_custom_pattern_settings_draw_mismatch">图案不一致</string>
     <string name="module_locker_title_verify_custom_pattern_settings_draw_set_complete">图案已设置</string>
+    <string name="module_locker_title_verify_custom_pin_settings">设置PIN</string>
+    <string name="module_locker_title_verify_custom_pin_settings_warn">请牢记PIN码，PIN码设置后不可找回</string>
+    <string name="module_locker_title_verify_custom_pin_settings_input_1">请输入PIN码</string>
+    <string name="module_locker_title_verify_custom_pin_settings_input_2">请再次输入PIN码</string>
+    <string name="module_locker_title_verify_custom_pin_settings_mismatch">PIN码不一致</string>
+    <string name="module_locker_title_verify_custom_pin_settings_complete">PIN码已设置</string>
 
     <string name="module_locker_biometric_not_set_dialog_title">设置密码</string>
     <string name="module_locker_biometric_not_set_dialog_message">启用应用锁之前，请前往系统安全设置，完成人脸、指纹、PIN或者图案密码设置</string>

@@ -230,6 +230,16 @@ public class ActivityStackSupervisor {
     }
 
     @SneakyThrows
+    public void setLockPin(String pin) {
+        supervisor.setLockPin(pin);
+    }
+
+    @SneakyThrows
+    public String getLockPin() {
+        return supervisor.getLockPin();
+    }
+
+    @SneakyThrows
     public int getLockMethod() {
         return supervisor.getLockMethod();
     }

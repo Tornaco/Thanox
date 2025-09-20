@@ -18,6 +18,10 @@
             app:key="@string/module_locker_key_verify_method_custom_pattern_hide_line"
             app:persistent="false"
             app:title="@string/module_locker_title_verify_custom_pattern_settings_hide_line" />
+        <Preference
+            app:key="@string/module_locker_key_verify_method_custom_pin"
+            app:persistent="false"
+            app:title="@string/module_locker_title_verify_custom_pin_settings" />
 
         <SwitchPreferenceCompat
             app:key="@string/module_locker_key_re_verify_on_screen_off"

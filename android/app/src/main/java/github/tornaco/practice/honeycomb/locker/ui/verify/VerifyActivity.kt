@@ -28,11 +28,19 @@ class VerifyActivity : ComposeThemeActivity() {
         get() = thanox.activityStackSupervisor.lockPattern.also {
             XLog.d("lockPattern: $it")
         }
+    private val lockPin
+        get() = thanox.activityStackSupervisor.lockPin.also {
+            XLog.d("lockPin: $it")
+        }
 
     private var misMatchTimes = 0
 
     private fun canUseLockPattern(): Boolean {
         return lockMethod == ActivityStackSupervisor.LockMethod.PATTERN && !lockPattern.isNullOrBlank()
+    }
+
+    private fun canUseLockPin(): Boolean {
+        return lockMethod == ActivityStackSupervisor.LockMethod.PIN && !lockPin.isNullOrBlank()
     }
 
     @Composable
@@ -42,6 +50,17 @@ class VerifyActivity : ComposeThemeActivity() {
             if (canUseLockPattern()) {
                 LockPatternContent(appInfo = appInfo!!, onResult = {
                     if (it == lockPattern) {
+                        verifySuccess()
+                    } else {
+                        if (misMatchTimes > 3) {
+                            verifyFail()
+                        }
+                        misMatchTimes += 1
+                    }
+                })
+            } else if (canUseLockPin()) {
+                PinInputContent(appInfo = appInfo!!, onResult = {
+                    if (it == lockPin) {
                         verifySuccess()
                     } else {
                         if (misMatchTimes > 3) {

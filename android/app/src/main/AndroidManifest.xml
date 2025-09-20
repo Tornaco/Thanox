@@ -341,6 +341,10 @@
         <activity
             android:name="github.tornaco.practice.honeycomb.locker.ui.setup.AppLockListActivity"
             android:exported="false" />
+        <activity
+            android:name="github.tornaco.practice.honeycomb.locker.ui.verify.PinSettingsActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"/>
 
         <meta-data
             android:name="xposedmodule"

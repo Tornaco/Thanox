@@ -14,6 +14,7 @@ import github.tornaco.android.thanos.R;
 import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.practice.honeycomb.locker.ui.verify.PatternSettingsActivity;
+import github.tornaco.practice.honeycomb.locker.ui.verify.PinSettingsActivity;
 
 public class SettingsFragment extends BasePreferenceFragmentCompat {
 
@@ -78,6 +79,17 @@ public class SettingsFragment extends BasePreferenceFragmentCompat {
         hidePatternLinesPref.setChecked(thanos.getActivityStackSupervisor().isLockPatternLineHidden());
         hidePatternLinesPref.setOnPreferenceChangeListener((preference, newValue) -> {
             thanos.getActivityStackSupervisor().setLockPatternLineHidden((boolean) newValue);
+            return true;
+        });
+
+        Preference pinSettingsPref = findPreference(getString(R.string.module_locker_key_verify_method_custom_pin));
+        if (TextUtils.isEmpty(thanos.getActivityStackSupervisor().getLockPin())) {
+            pinSettingsPref.setSummary(github.tornaco.android.thanos.res.R.string.common_text_value_not_set);
+        } else {
+            pinSettingsPref.setSummary("******");
+        }
+        pinSettingsPref.setOnPreferenceClickListener(preference -> {
+            PinSettingsActivity.start(requireContext());
             return true;
         });
 

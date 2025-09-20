@@ -25,11 +25,13 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ClearAll
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AppBarRow
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Button
@@ -42,6 +44,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -113,8 +116,45 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
                     text = title,
                     style = TypographyDefaults.appBarTitleTextStyle()
                 )
-                config.featureDescription(LocalContext.current)?.let {
-                        // TODO showTipDialog
+                config.featureDescription(LocalContext.current)?.let { description ->
+                    var showTipDialog by remember { mutableStateOf(false) }
+                    
+                    IconButton(
+                        onClick = { showTipDialog = true },
+                        modifier = Modifier.size(24.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Info,
+                            contentDescription = "Feature Information",
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                    
+                    if (showTipDialog) {
+                        AlertDialog(
+                            onDismissRequest = { showTipDialog = false },
+                            title = {
+                                Text(
+                                    text = title,
+                                    style = MaterialTheme.typography.headlineSmall
+                                )
+                            },
+                            text = {
+                                Text(
+                                    text = description,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            },
+                            confirmButton = {
+                                TextButton(
+                                    onClick = { showTipDialog = false }
+                                ) {
+                                    Text("确定")
+                                }
+                            }
+                        )
+                    }
                 }
             }
         },

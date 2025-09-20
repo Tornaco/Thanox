@@ -1530,4 +1530,10 @@
     <string name="settings_history_versions_title">历史版本</string>
     <string name="settings_history_versions_summary">下载历史版本</string>
 
+    <!-- Uninstall Blocker -->
+    <string name="feature_title_uninstall_blocker">阻止卸载</string>
+    <string name="feature_summary_uninstall_blocker">防止应用被意外卸载或清除数据</string>
+    <string name="feature_uninstall_blocker_enabled">已启用阻止卸载</string>
+    <string name="feature_uninstall_blocker_disabled">已禁用阻止卸载</string>
+
 </resources>

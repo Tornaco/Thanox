@@ -130,10 +130,6 @@ class PinSettingsActivity : ComposeThemeActivity() {
                         },
                         onFailure = {
                             // PIN不匹配，ViewModel已经处理了状态更新
-                        },
-                        shouldClearInput = state.shouldClearInput,
-                        onClearInputHandled = {
-                            viewModel.clearInputHandled()
                         }
                     )
                 }

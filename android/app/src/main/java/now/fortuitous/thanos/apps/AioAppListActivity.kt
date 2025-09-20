@@ -64,6 +64,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_SMART_STANDBY -> smartStandbyConfig
             PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> screenOnNotiConfig
             PrebuiltFeatureIds.ID_RESIDENT -> residentConfig
+            PrebuiltFeatureIds.ID_UNINSTALL_BLOCKER -> uninstallBlockerConfig
 
             else -> error("Unknown feature id: $featureId")
         }.copy(
@@ -523,6 +524,44 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                 batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
                     am.setPkgResident(
                         Pkg.fromAppInfo(app.appInfo),
+                        isCheck
+                    )
+                })
+            )
+        }
+
+    private val uninstallBlockerConfig: BaseAppListFilterContainerConfig
+        get() {
+            val pm = ThanosManager.from(this).pkgManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "uninstallBlocker",
+                featureDescription = {
+                    it.getString(R.string.feature_summary_uninstall_blocker)
+                },
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.feature_title_uninstall_blocker)
+                    },
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            pm.setPackageBlockUninstallEnabled(
+                                app.appInfo.pkgName,
+                                isCheck
+                            )
+                        },
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) { pm.isPackageBlockUninstallEnabled(it.pkgName) }
+                    },
+                ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    pm.setPackageBlockUninstallEnabled(
+                        app.appInfo.pkgName,
                         isCheck
                     )
                 })

@@ -1519,4 +1519,10 @@
     <string name="settings_history_versions_title">歷史版本</string>
     <string name="settings_history_versions_summary">下載歷史版本</string>
 
+    <!-- Uninstall Blocker -->
+    <string name="feature_title_uninstall_blocker">阻止卸載</string>
+    <string name="feature_summary_uninstall_blocker">防止應用程式被意外卸載或清除資料</string>
+    <string name="feature_uninstall_blocker_enabled">已啟用阻止卸載</string>
+    <string name="feature_uninstall_blocker_disabled">已停用阻止卸載</string>
+
 </resources>

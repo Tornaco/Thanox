@@ -16,7 +16,8 @@ import javax.inject.Inject
 
 data class PinState(
     val step: PinStep = PinStep.First,
-    val pin: String = ""
+    val pin: String = "",
+    val shouldClearInput: Boolean = false
 )
 
 sealed interface PinStep {
@@ -48,19 +49,19 @@ class PinSettingsVM @Inject constructor(@ApplicationContext private val context:
         when (state.value.step) {
             PinStep.First -> {
                 _state.update {
-                    it.copy(pin = pin, step = PinStep.Second)
+                    it.copy(pin = pin, step = PinStep.Second, shouldClearInput = true)
                 }
             }
 
             PinStep.Second -> {
                 if (pin != state.value.pin) {
                     _state.update {
-                        it.copy(pin = "", step = PinStep.First)
+                        it.copy(pin = "", step = PinStep.First, shouldClearInput = true)
                     }
                     viewModelScope.launch { events.emit(PinSettingsEvent.PinMisMatch) }
                 } else {
                     _state.update {
-                        it.copy(step = PinStep.Done)
+                        it.copy(step = PinStep.Done, shouldClearInput = false)
                     }
                     thanox.activityStackSupervisor.setLockPin(pin)
                     viewModelScope.launch { events.emit(PinSettingsEvent.Done) }
@@ -70,6 +71,12 @@ class PinSettingsVM @Inject constructor(@ApplicationContext private val context:
             else -> {
 
             }
+        }
+    }
+    
+    fun clearInputHandled() {
+        _state.update {
+            it.copy(shouldClearInput = false)
         }
     }
 }

@@ -104,6 +104,7 @@
     <string name="module_locker_title_verify_custom_pin_settings_input_2">Enter PIN again</string>
     <string name="module_locker_title_verify_custom_pin_settings_mismatch">Two PINs do not match.</string>
     <string name="module_locker_title_verify_custom_pin_settings_complete">PIN has been set</string>
+    <string name="module_locker_verify_error_pin_mismatch">Incorrect PIN. Please try again.</string>
 
     <string name="module_locker_biometric_not_set_dialog_title">Set a password</string>
     <string name="module_locker_biometric_not_set_dialog_message">Before enabling the app lock, please go to the system security settings and complete the setup of face recognition, fingerprint, PIN, or pattern password.</string>

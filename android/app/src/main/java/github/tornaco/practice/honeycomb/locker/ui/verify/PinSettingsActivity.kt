@@ -114,8 +114,26 @@ class PinSettingsActivity : ComposeThemeActivity() {
                 Box(Modifier.padding(top = 64.dp)) {
                     PinInputContent(
                         appInfo = null,
-                        onResult = { pin ->
+                        onVerifyPin = { pin ->
+                            // 根据当前步骤决定验证结果
+                            val isValid = when (state.step) {
+                                PinStep.First -> true  // 第一次输入总是成功
+                                PinStep.Second -> pin == state.pin  // 第二次输入检查是否匹配
+                                else -> true
+                            }
+                            // 调用ViewModel处理输入
                             viewModel.inputPin(pin)
+                            isValid
+                        },
+                        onSuccess = {
+                            // PIN验证成功，不需要额外处理
+                        },
+                        onFailure = {
+                            // PIN不匹配，ViewModel已经处理了状态更新
+                        },
+                        shouldClearInput = state.shouldClearInput,
+                        onClearInputHandled = {
+                            viewModel.clearInputHandled()
                         }
                     )
                 }

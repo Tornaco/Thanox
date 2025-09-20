@@ -59,16 +59,21 @@ class VerifyActivity : ComposeThemeActivity() {
                     }
                 })
             } else if (canUseLockPin()) {
-                PinInputContent(appInfo = appInfo!!, onResult = {
-                    if (it == lockPin) {
+                PinInputContent(
+                    appInfo = appInfo!!,
+                    onVerifyPin = { pin ->
+                        pin == lockPin
+                    },
+                    onSuccess = {
                         verifySuccess()
-                    } else {
+                    },
+                    onFailure = {
+                        misMatchTimes += 1
                         if (misMatchTimes > 3) {
                             verifyFail()
                         }
-                        misMatchTimes += 1
                     }
-                })
+                )
             } else {
                 LaunchedEffect(Unit) {
                     startVerifyWithBiometrics(appInfo!!)

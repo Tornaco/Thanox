@@ -94,6 +94,7 @@ class PrebuiltFeatureLauncher(
                 PrebuiltFeatureIds.ID_PRIVACY_CHEAT,
                 PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION,
                 PrebuiltFeatureIds.ID_UNINSTALL_BLOCKER,
+                PrebuiltFeatureIds.ID_CLEAR_DATA_BLOCKER,
                 PrebuiltFeatureIds.ID_RESIDENT -> {
                     AppFeatureManager.withSubscriptionStatus(context) {
                         if (it) {

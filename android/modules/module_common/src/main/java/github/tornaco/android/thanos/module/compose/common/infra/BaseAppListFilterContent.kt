@@ -108,10 +108,15 @@ fun BaseAppListFilterActivity.BaseAppListFilterContent(config: BaseAppListFilter
     }
     ThanoxMediumAppBarScaffold(
         title = {
-            Text(
-                text = title,
-                style = TypographyDefaults.appBarTitleTextStyle()
-            )
+            Row {
+                Text(
+                    text = title,
+                    style = TypographyDefaults.appBarTitleTextStyle()
+                )
+                config.featureDescription(LocalContext.current)?.let {
+                        // TODO showTipDialog
+                }
+            }
         },
         searchBarState = searchBarState,
         onBackPressed = {

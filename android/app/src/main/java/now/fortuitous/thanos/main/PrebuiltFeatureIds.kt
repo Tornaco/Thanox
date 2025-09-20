@@ -60,6 +60,7 @@ object PrebuiltFeatureIds {
 
     const val ID_APPS_MANAGER_RECENT_USED = 31
     const val ID_UNINSTALL_BLOCKER = 32
+    const val ID_CLEAR_DATA_BLOCKER = 33
 
     fun Int.isValidId() = this >= ID_ONE_KEY_CLEAR
 }

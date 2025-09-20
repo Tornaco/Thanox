@@ -237,6 +237,13 @@ object PrebuiltFeatures {
                 iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_check_fill,
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_uninstall_blocker,
                 themeColor = R.color.nav_icon_uninstall_blocker
+            ),
+            FeatureItem(
+                id = PrebuiltFeatureIds.ID_CLEAR_DATA_BLOCKER,
+                packedIconRes = R.drawable.ic_nav_clear_data_blocker,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_shield_fill,
+                titleRes = github.tornaco.android.thanos.res.R.string.feature_title_clear_data_blocker,
+                themeColor = R.color.nav_icon_clear_data_blocker
             )
         )
     )

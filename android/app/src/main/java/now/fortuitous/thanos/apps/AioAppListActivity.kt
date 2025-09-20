@@ -65,6 +65,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_SCREEN_ON_NOTIFICATION -> screenOnNotiConfig
             PrebuiltFeatureIds.ID_RESIDENT -> residentConfig
             PrebuiltFeatureIds.ID_UNINSTALL_BLOCKER -> uninstallBlockerConfig
+            PrebuiltFeatureIds.ID_CLEAR_DATA_BLOCKER -> clearDataBlockerConfig
 
             else -> error("Unknown feature id: $featureId")
         }.copy(
@@ -561,6 +562,44 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                 ),
                 batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
                     pm.setPackageBlockUninstallEnabled(
+                        app.appInfo.pkgName,
+                        isCheck
+                    )
+                })
+            )
+        }
+
+    private val clearDataBlockerConfig: BaseAppListFilterContainerConfig
+        get() {
+            val pm = ThanosManager.from(this).pkgManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "clearDataBlocker",
+                featureDescription = {
+                    it.getString(R.string.feature_summary_clear_data_blocker)
+                },
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.feature_title_clear_data_blocker)
+                    },
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            pm.setPackageBlockClearDataEnabled(
+                                app.appInfo.pkgName,
+                                isCheck
+                            )
+                        },
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) { pm.isPackageBlockClearDataEnabled(it.pkgName) }
+                    },
+                ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    pm.setPackageBlockClearDataEnabled(
                         app.appInfo.pkgName,
                         isCheck
                     )

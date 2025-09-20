@@ -1515,4 +1515,8 @@
         > 发邮件时可以使用QQ、163、gmail等邮箱，不要使用手机彩信、outlook邮箱。\n
     </string>
 
+    <!-- Settings - History Versions -->
+    <string name="settings_history_versions_title">歷史版本</string>
+    <string name="settings_history_versions_summary">下載歷史版本</string>
+
 </resources>

@@ -607,6 +607,15 @@ private fun aboutSettings(
             ),
 
             Preference.TextPreference(
+                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_history_fill,
+                title = stringResource(R.string.settings_history_versions_title),
+                summary = stringResource(R.string.settings_history_versions_summary),
+                onClick = {
+                    BrowserUtils.launch(context, "https://github.com/Tornaco/Thanox/discussions/1371")
+                },
+            ),
+
+            Preference.TextPreference(
                 icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_open_source_fill,
                 title = stringResource(R.string.pref_title_open_source_license),
                 onClick = {

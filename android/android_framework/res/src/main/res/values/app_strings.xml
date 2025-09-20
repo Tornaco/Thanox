@@ -1562,4 +1562,8 @@ If you are already a paid user of Thanox or Thanox Pro, you do not need to subsc
         > Email services like QQ, 163, Gmail, etc., can be used for sending. Please do not use mobile MMS or Outlook email.\n
 </string>
 
+    <!-- Settings - History Versions -->
+    <string name="settings_history_versions_title">History Versions</string>
+    <string name="settings_history_versions_summary">Download history versions</string>
+
 </resources>

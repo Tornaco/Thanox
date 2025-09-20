@@ -10,6 +10,6 @@
     </item>
     <item
         android:id="@+id/settings_ic_foreground"
-        android:drawable="@drawable/ic_remix_uninstall_fill"
+        android:drawable="@drawable/ic_remix_uninstall_line"
         android:gravity="center" />
 </layer-list>

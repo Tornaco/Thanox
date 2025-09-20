@@ -364,13 +364,15 @@ object PrebuiltFeatures {
                     themeColor = R.color.nav_icon_resident
                 )
             } else null,
-            FeatureItem(
-                id = PrebuiltFeatureIds.ID_SHORTCUT_CLEANER,
-                packedIconRes = R.drawable.ic_nav_shortcut_cleaner,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_scissors_cut_fill,
-                titleRes = github.tornaco.android.thanos.res.R.string.feature_title_shortcut_cleaner,
-                themeColor = R.color.nav_icon_shortcut_cleaner
-            )
+            if (OsUtils.isSOrAbove()) {
+                FeatureItem(
+                    id = PrebuiltFeatureIds.ID_SHORTCUT_CLEANER,
+                    packedIconRes = R.drawable.ic_nav_shortcut_cleaner,
+                    iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_scissors_cut_fill,
+                    titleRes = github.tornaco.android.thanos.res.R.string.feature_title_shortcut_cleaner,
+                    themeColor = R.color.nav_icon_shortcut_cleaner
+                )
+            } else null
         )
     )
 

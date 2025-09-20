@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.preference.DropDownPreference;
+import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
@@ -99,6 +100,26 @@ public class SettingsFragment extends BasePreferenceFragmentCompat {
         methodPref.setOnPreferenceChangeListener((preference, newValue) -> {
             int method = Integer.parseInt(String.valueOf(newValue));
             thanos.getActivityStackSupervisor().setLockMethod(method);
+            return true;
+        });
+
+        // 自定义提示语配置
+        EditTextPreference customHintPref = findPreference(getString(R.string.module_locker_key_custom_hint));
+        String currentHint = thanos.getActivityStackSupervisor().getLockCustomHint();
+        if (!TextUtils.isEmpty(currentHint)) {
+            customHintPref.setText(currentHint);
+            customHintPref.setSummary(currentHint);
+        } else {
+            customHintPref.setSummary(github.tornaco.android.thanos.res.R.string.common_text_value_not_set);
+        }
+        customHintPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            String hint = String.valueOf(newValue);
+            thanos.getActivityStackSupervisor().setLockCustomHint(hint);
+            if (!TextUtils.isEmpty(hint)) {
+                customHintPref.setSummary(hint);
+            } else {
+                customHintPref.setSummary(github.tornaco.android.thanos.res.R.string.common_text_value_not_set);
+            }
             return true;
         });
 

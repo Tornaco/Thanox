@@ -32,6 +32,12 @@ class VerifyActivity : ComposeThemeActivity() {
         get() = thanox.activityStackSupervisor.lockPin.also {
             XLog.d("lockPin: $it")
         }
+    private val lockCustomHint
+        get() = try {
+            thanox.activityStackSupervisor.lockCustomHint
+        } catch (e: Throwable) {
+            null
+        }
 
     private var misMatchTimes = 0
 
@@ -48,19 +54,24 @@ class VerifyActivity : ComposeThemeActivity() {
         val isValidIntent = remember { resolveIntent() }
         if (isValidIntent) {
             if (canUseLockPattern()) {
-                LockPatternContent(appInfo = appInfo!!, onResult = {
-                    if (it == lockPattern) {
-                        verifySuccess()
-                    } else {
-                        if (misMatchTimes > 3) {
-                            verifyFail()
+                LockPatternContent(
+                    appInfo = appInfo!!, 
+                    customHint = lockCustomHint,
+                    onResult = {
+                        if (it == lockPattern) {
+                            verifySuccess()
+                        } else {
+                            if (misMatchTimes > 3) {
+                                verifyFail()
+                            }
+                            misMatchTimes += 1
                         }
-                        misMatchTimes += 1
                     }
-                })
+                )
             } else if (canUseLockPin()) {
                 PinInputContent(
                     appInfo = appInfo!!,
+                    customHint = lockCustomHint,
                     onVerifyPin = { pin ->
                         pin == lockPin
                     },

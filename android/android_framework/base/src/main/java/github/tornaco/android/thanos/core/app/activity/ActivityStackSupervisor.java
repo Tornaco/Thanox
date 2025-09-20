@@ -240,6 +240,16 @@ public class ActivityStackSupervisor {
     }
 
     @SneakyThrows
+    public void setLockCustomHint(String hint) {
+        supervisor.setLockCustomHint(hint);
+    }
+
+    @SneakyThrows
+    public String getLockCustomHint() {
+        return supervisor.getLockCustomHint();
+    }
+
+    @SneakyThrows
     public int getLockMethod() {
         return supervisor.getLockMethod();
     }

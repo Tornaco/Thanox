@@ -105,6 +105,8 @@
     <string name="module_locker_title_verify_custom_pin_settings_mismatch">PIN码不一致</string>
     <string name="module_locker_title_verify_custom_pin_settings_complete">PIN码已设置</string>
     <string name="module_locker_verify_error_pin_mismatch">PIN码错误，请重试</string>
+    <string name="module_locker_title_custom_hint">自定义提示语</string>
+    <string name="module_locker_summary_custom_hint">为锁定验证设置自定义提示信息</string>
 
     <string name="module_locker_biometric_not_set_dialog_title">设置密码</string>
     <string name="module_locker_biometric_not_set_dialog_message">启用应用锁之前，请前往系统安全设置，完成人脸、指纹、PIN或者图案密码设置</string>

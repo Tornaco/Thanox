@@ -81,4 +81,7 @@ interface IActivityStackSupervisor {
     void setLockPatternLineHidden(boolean hide);
     void setLockPin(String pin);
     String getLockPin();
+    
+    void setLockCustomHint(String hint);
+    String getLockCustomHint();
 }

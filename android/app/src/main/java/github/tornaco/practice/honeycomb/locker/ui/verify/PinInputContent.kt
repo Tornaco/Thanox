@@ -40,6 +40,7 @@ import github.tornaco.android.thanos.module.compose.common.widget.MediumSpacer
 fun PinInputContent(
     appInfo: AppInfo?,
     title: String = stringResource(id = github.tornaco.android.thanos.res.R.string.module_locker_app_name),
+    customHint: String? = null,
     onVerifyPin: (pin: String) -> Boolean,
     onSuccess: () -> Unit,
     onFailure: () -> Unit = {},
@@ -89,6 +90,17 @@ fun PinInputContent(
             appInfo?.let { AppIcon(modifier = Modifier.size(80.dp), appInfo = it) }
             MediumSpacer()
             LargeTitle(text = title)
+            
+            // Custom hint display
+            customHint?.let { hint ->
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = hint,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+            }
 
             Spacer(modifier = Modifier.height(32.dp))
 

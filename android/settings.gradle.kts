@@ -86,6 +86,7 @@ val internalProjects = listOf(
     ":android_framework:patchx-29",
     ":android_framework:patchx-30",
     ":android_framework:patchx-31",
+    ":android_framework:utils",
     // Shizuku
     ":shizuku:core",
     ":shizuku:services",

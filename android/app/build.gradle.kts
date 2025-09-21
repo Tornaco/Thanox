@@ -226,6 +226,7 @@ dependencies {
     implementation(project(":android_framework:services"))
     implementation(project(":android_framework:db"))
     implementation(project(":android_framework:patchx-entry"))
+    implementation(project(":android_framework:utils"))
 
     implementation(project(":shizuku:ui"))
 

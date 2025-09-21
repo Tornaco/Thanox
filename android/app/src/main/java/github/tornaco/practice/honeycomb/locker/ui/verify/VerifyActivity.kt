@@ -11,8 +11,8 @@ import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor
 import github.tornaco.android.thanos.core.app.activity.VerifyResult
 import github.tornaco.android.thanos.core.pm.AppInfo
-import github.tornaco.android.thanos.core.util.ConfirmDeviceCredentialUtils
 import github.tornaco.android.thanos.module.compose.common.ComposeThemeActivity
+import github.tornaco.android.thanos.util.ConfirmDeviceCredentialUtils
 
 class VerifyActivity : ComposeThemeActivity() {
     private var requestCode = 0
@@ -55,7 +55,7 @@ class VerifyActivity : ComposeThemeActivity() {
         if (isValidIntent) {
             if (canUseLockPattern()) {
                 LockPatternContent(
-                    appInfo = appInfo!!, 
+                    appInfo = appInfo!!,
                     customHint = lockCustomHint,
                     onResult = {
                         if (it == lockPattern) {

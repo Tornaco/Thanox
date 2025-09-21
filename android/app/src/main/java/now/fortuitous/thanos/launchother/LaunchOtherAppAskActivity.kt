@@ -15,7 +15,6 @@ import github.tornaco.android.thanos.core.app.ThanosManager
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor
 import github.tornaco.android.thanos.core.pm.Pkg
 import github.tornaco.android.thanos.core.util.ClipboardUtils
-import github.tornaco.android.thanos.core.util.ConfirmDeviceCredentialUtils
 import github.tornaco.android.thanos.util.GlideApp
 
 class LaunchOtherAppAskActivity : AppCompatActivity() {

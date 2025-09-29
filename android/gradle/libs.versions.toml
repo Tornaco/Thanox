@@ -168,7 +168,7 @@ compose-markdown = { module = "com.github.jeziellago:compose-markdown", version.
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
-glide-landscapist = { module = "com.github.skydoves:landscapist-glide", version = "2.4.7" }
+glide-landscapist = { module = "com.github.skydoves:landscapist-glide", version = "2.6.1" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-reflect" }

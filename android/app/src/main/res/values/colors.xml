@@ -30,7 +30,7 @@
     <color name="nav_icon_uninstall_blocker">#ba68c8</color>
     <color name="nav_icon_clear_data_blocker">#ffb74d</color>
     <color name="nav_icon_shortcut_cleaner">#2196f3</color>
-    <color name="nav_icon_update_blocker">#ff3232</color>
+    <color name="nav_icon_update_blocker">#81c784</color>
 
     <color name="app_widget_search_bg_color">#eaffffff</color>
     <color name="app_widget_search_stroke_color">#eaffffff</color>

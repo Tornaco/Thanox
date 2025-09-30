@@ -245,6 +245,13 @@ object PrebuiltFeatures {
                 titleRes = github.tornaco.android.thanos.res.R.string.feature_title_clear_data_blocker,
                 themeColor = R.color.nav_icon_clear_data_blocker
             ),
+            FeatureItem(
+                id = PrebuiltFeatureIds.ID_UPDATE_BLOCKER,
+                packedIconRes = R.drawable.ic_nav_update_blocker,
+                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_download_cloud_2_fill,
+                titleRes = github.tornaco.android.thanos.res.R.string.feature_title_update_blocker,
+                themeColor = R.color.nav_icon_update_blocker
+            ),
         )
     )
 

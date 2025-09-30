@@ -67,6 +67,7 @@ class AioAppListActivity : BaseAppListFilterActivity() {
             PrebuiltFeatureIds.ID_UNINSTALL_BLOCKER -> uninstallBlockerConfig
             PrebuiltFeatureIds.ID_CLEAR_DATA_BLOCKER -> clearDataBlockerConfig
             PrebuiltFeatureIds.ID_SHORTCUT_CLEANER -> shortcutCleanerConfig
+            PrebuiltFeatureIds.ID_UPDATE_BLOCKER -> updateBlockerConfig
 
             else -> error("Unknown feature id: $featureId")
         }.copy(
@@ -642,6 +643,46 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                 batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
                     pm.setPkgShortcutsBlockerEnabled(
                         Pkg.fromAppInfo(app.appInfo),
+                        isCheck
+                    )
+                })
+            )
+        }
+
+    private val updateBlockerConfig: BaseAppListFilterContainerConfig
+        get() {
+            val pm = ThanosManager.from(this).pkgManager
+            return BaseAppListFilterContainerConfig(
+                featureId = "updateBlocker",
+                featureDescription = {
+                    it.getString(R.string.feature_summary_update_blocker)
+                },
+                appBarConfig = AppBarConfig(
+                    title = {
+                        it.getString(R.string.feature_title_update_blocker)
+                    },
+                ),
+                appItemConfig = AppItemConfig(
+                    itemType = AppItemConfig.ItemType.Checkable(
+                        onCheckChanged = { app, isCheck ->
+                            pm.setPackageBlockUpdateEnabled(
+                                app.appInfo.pkgName,
+                                isCheck
+                            )
+                        },
+                    ),
+                    loader = { context, pkgSetId ->
+                        commonTogglableAppLoader(
+                            context,
+                            pkgSetId
+                        ) {
+                            pm.isPackageBlockUpdateEnabled(it.pkgName)
+                        }
+                    },
+                ),
+                batchOperationConfig = commonToggleableAppListBatchOpsConfig(toggle = { app, isCheck ->
+                    pm.setPackageBlockUpdateEnabled(
+                        app.appInfo.pkgName,
                         isCheck
                     )
                 })

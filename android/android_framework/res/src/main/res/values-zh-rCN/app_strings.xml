@@ -1546,4 +1546,10 @@
     <string name="feature_title_shortcut_cleaner">净化快捷方式</string>
     <string name="feature_summary_shortcut_cleaner">清理和管理应用快捷方式</string>
 
+    <!-- Update Blocker -->
+    <string name="feature_title_update_blocker">阻止更新</string>
+    <string name="feature_summary_update_blocker">防止应用被意外更新</string>
+    <string name="feature_title_update_blocker_enabled">已启用阻止更新</string>
+    <string name="feature_title_update_blocker_disabled">已禁用阻止更新</string>
+
 </resources>

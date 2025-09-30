@@ -1582,4 +1582,10 @@ If you are already a paid user of Thanox or Thanox Pro, you do not need to subsc
     <string name="feature_title_shortcut_cleaner">Shortcut Cleaner</string>
     <string name="feature_summary_shortcut_cleaner">Clean and manage app shortcuts</string>
 
+    <!-- Update Blocker Feature -->
+    <string name="feature_title_update_blocker">Update Blocker</string>
+    <string name="feature_summary_update_blocker">Prevent apps from being updated</string>
+    <string name="feature_title_update_blocker_enabled">Update blocking enabled</string>
+    <string name="feature_title_update_blocker_disabled">Update blocking disabled</string>
+
 </resources>

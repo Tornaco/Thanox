@@ -84,4 +84,7 @@ interface IActivityStackSupervisor {
     
     void setLockCustomHint(String hint);
     String getLockCustomHint();
+
+    void setLockTimeFormula(String formula);
+    String getLockTimeFormula();
 }

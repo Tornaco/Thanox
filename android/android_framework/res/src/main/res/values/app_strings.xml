@@ -91,6 +91,7 @@
     <string name="module_locker_title_verify_system">Follow System</string>
     <string name="module_locker_title_verify_custom_pattern">Custom Pattern</string>
     <string name="module_locker_title_verify_custom_pin">Custom PIN</string>
+    <string name="module_locker_title_verify_custom_time">Custom Time Formula</string>
     <string name="module_locker_title_verify_custom_pattern_settings">Pattern settings</string>
     <string name="module_locker_title_verify_custom_pattern_settings_hide_line">Hide pattern lines</string>
     <string name="module_locker_title_verify_custom_pattern_settings_warn">Please remember your password. Once set, the password cannot be recovered.</string>
@@ -107,6 +108,15 @@
     <string name="module_locker_verify_error_pin_mismatch">Incorrect PIN. Please try again.</string>
     <string name="module_locker_title_custom_hint">Custom hint</string>
     <string name="module_locker_summary_custom_hint">Set a custom hint message for lock verification</string>
+    <string name="module_locker_summary_custom_time">Use current time formula to generate dynamic password</string>
+    <string name="module_locker_title_verify_custom_time_settings">Time formula settings</string>
+    <string name="module_locker_title_verify_custom_time_settings_hint">Supported tokens: yyyy, MM, dd, HH, hh, mm</string>
+    <string name="module_locker_title_verify_custom_time_settings_example">Example: HHmm -&gt; 0930; yyyyMMddHHmm -&gt; 202510011325</string>
+    <string name="module_locker_title_verify_custom_time_settings_test">Test</string>
+    <string name="module_locker_title_verify_custom_time_settings_preview">Current result</string>
+    <string name="module_locker_title_verify_custom_time_settings_save">Save</string>
+    <string name="module_locker_title_verify_custom_time_settings_complete">Time formula has been set</string>
+    <string name="module_locker_title_verify_custom_time_settings_invalid">Seconds (ss) are not supported</string>
 
     <string name="module_locker_biometric_not_set_dialog_title">Set a password</string>
     <string name="module_locker_biometric_not_set_dialog_message">Before enabling the app lock, please go to the system security settings and complete the setup of face recognition, fingerprint, PIN, or pattern password.</string>
@@ -115,12 +125,14 @@
         <item>@string/module_locker_title_verify_system</item>
         <item>@string/module_locker_title_verify_custom_pattern</item>
         <item>@string/module_locker_title_verify_custom_pin</item>
+        <item>@string/module_locker_title_verify_custom_time</item>
     </string-array>
 
     <string-array name="module_locker_verify_method_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
     <string-array name="module_ops2_app_ops_summaries">

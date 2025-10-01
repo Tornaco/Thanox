@@ -226,6 +226,7 @@
     <string name="module_locker_key_verify_method_custom_pattern" translatable="false">module_locker_key_verify_method_custom_pattern</string>
     <string name="module_locker_key_verify_method_custom_pattern_hide_line" translatable="false">module_locker_key_verify_method_custom_pattern_hide_line</string>
     <string name="module_locker_key_verify_method_custom_pin" translatable="false">module_locker_key_verify_method_custom_pin</string>
+    <string name="module_locker_key_verify_method_custom_time" translatable="false">module_locker_key_verify_method_custom_time</string>
     <string name="module_locker_key_custom_hint" translatable="false">module_locker_key_custom_hint</string>
 
     <string name="module_push_message_delegate_pref_category_wechat" translatable="false">pref_category_wechat</string>

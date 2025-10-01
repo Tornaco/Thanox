@@ -346,6 +346,11 @@
             android:exported="false"
             android:excludeFromRecents="true"/>
 
+        <activity
+            android:name="github.tornaco.practice.honeycomb.locker.ui.verify.TimeSettingsActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"/>
+
         <meta-data
             android:name="xposedmodule"
             android:value="true" />

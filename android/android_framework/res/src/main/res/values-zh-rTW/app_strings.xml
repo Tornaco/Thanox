@@ -91,6 +91,16 @@
     <string name="module_locker_title_verify_system">跟隨系統</string>
     <string name="module_locker_title_verify_custom_pattern">自訂圖案</string>
     <string name="module_locker_title_verify_custom_pin">自訂PIN</string>
+    <string name="module_locker_title_verify_custom_time">自訂時間公式</string>
+    <string name="module_locker_summary_custom_time">使用當前時間公式生成動態密碼</string>
+    <string name="module_locker_title_verify_custom_time_settings">時間公式設定</string>
+    <string name="module_locker_title_verify_custom_time_settings_hint">支援令牌：yyyy、MM、dd、HH、hh、mm</string>
+    <string name="module_locker_title_verify_custom_time_settings_example">例如：HHmm -&gt; 0930；yyyyMMddHHmm -&gt; 202510011325</string>
+    <string name="module_locker_title_verify_custom_time_settings_test">測試</string>
+    <string name="module_locker_title_verify_custom_time_settings_preview">當前結果</string>
+    <string name="module_locker_title_verify_custom_time_settings_save">儲存</string>
+    <string name="module_locker_title_verify_custom_time_settings_complete">時間公式已設定</string>
+    <string name="module_locker_title_verify_custom_time_settings_invalid">不支援秒（ss）</string>
     <string name="module_locker_title_verify_custom_pattern_settings">設定圖案</string>
     <string name="module_locker_title_verify_custom_pattern_settings_hide_line">隐藏图案轨迹</string>
     <string name="module_locker_title_verify_custom_pattern_settings_warn">請牢記密碼，密碼設定後不可找回</string>

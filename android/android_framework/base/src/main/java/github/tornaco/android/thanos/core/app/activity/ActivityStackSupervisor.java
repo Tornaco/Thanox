@@ -21,6 +21,7 @@ public class ActivityStackSupervisor {
         public static final int SYSTEM = 0;
         public static final int PATTERN = 1;
         public static final int PIN = 2;
+        public static final int TIME = 3;
     }
 
     private final IActivityStackSupervisor supervisor;
@@ -247,6 +248,16 @@ public class ActivityStackSupervisor {
     @SneakyThrows
     public String getLockCustomHint() {
         return supervisor.getLockCustomHint();
+    }
+
+    @SneakyThrows
+    public void setLockTimeFormula(String formula) {
+        supervisor.setLockTimeFormula(formula);
+    }
+
+    @SneakyThrows
+    public String getLockTimeFormula() {
+        return supervisor.getLockTimeFormula();
     }
 
     @SneakyThrows

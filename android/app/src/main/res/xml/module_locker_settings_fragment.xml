@@ -29,6 +29,12 @@
             app:persistent="false"
             app:title="@string/module_locker_title_verify_custom_pin_settings" />
 
+        <Preference
+            app:key="@string/module_locker_key_verify_method_custom_time"
+            app:persistent="false"
+            app:summary="@string/module_locker_summary_custom_time"
+            app:title="@string/module_locker_title_verify_custom_time_settings" />
+
         <SwitchPreferenceCompat
             app:key="@string/module_locker_key_re_verify_on_screen_off"
             app:persistent="false"

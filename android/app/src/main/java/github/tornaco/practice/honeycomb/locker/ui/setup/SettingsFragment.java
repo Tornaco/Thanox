@@ -16,6 +16,7 @@ import github.tornaco.android.thanos.core.app.ThanosManager;
 import github.tornaco.android.thanos.core.app.activity.ActivityStackSupervisor;
 import github.tornaco.practice.honeycomb.locker.ui.verify.PatternSettingsActivity;
 import github.tornaco.practice.honeycomb.locker.ui.verify.PinSettingsActivity;
+import github.tornaco.practice.honeycomb.locker.ui.verify.TimeSettingsActivity;
 
 public class SettingsFragment extends BasePreferenceFragmentCompat {
 
@@ -91,6 +92,18 @@ public class SettingsFragment extends BasePreferenceFragmentCompat {
         }
         pinSettingsPref.setOnPreferenceClickListener(preference -> {
             PinSettingsActivity.start(requireContext());
+            return true;
+        });
+
+        Preference timeSettingsPref = findPreference(getString(R.string.module_locker_key_verify_method_custom_time));
+        String currentFormula = thanos.getActivityStackSupervisor().getLockTimeFormula();
+        if (TextUtils.isEmpty(currentFormula)) {
+            timeSettingsPref.setSummary(github.tornaco.android.thanos.res.R.string.common_text_value_not_set);
+        } else {
+            timeSettingsPref.setSummary(currentFormula);
+        }
+        timeSettingsPref.setOnPreferenceClickListener(preference -> {
+            TimeSettingsActivity.start(requireContext());
             return true;
         });
 

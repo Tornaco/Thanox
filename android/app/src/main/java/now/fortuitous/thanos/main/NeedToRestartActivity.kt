@@ -61,7 +61,7 @@ import github.tornaco.android.thanos.util.ActivityUtils
 
 class NeedToRestartActivity : ComposeThemeActivity() {
     object Starter {
-        const val FORCE_RESTART = true && !BuildProp.THANOS_BUILD_DEBUG
+        const val FORCE_RESTART = false
 
         fun start(context: Context?) {
             ActivityUtils.startActivity(context, NeedToRestartActivity::class.java)

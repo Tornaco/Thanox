@@ -96,9 +96,14 @@ class VerifyActivity : ComposeThemeActivity() {
                     }
                 )
             } else if (canUseLockTime()) {
+                // 计算当前时间公式的预期长度，作为输入位数上限
                 PinInputContent(
                     appInfo = appInfo!!,
                     customHint = lockCustomHint,
+                    maxPinLength = run {
+                        val formula = lockTimeFormula ?: ""
+                        evaluateTimeFormula(formula).length
+                    },
                     onVerifyPin = { pin ->
                         val formula = lockTimeFormula ?: ""
                         val expected = evaluateTimeFormula(formula)

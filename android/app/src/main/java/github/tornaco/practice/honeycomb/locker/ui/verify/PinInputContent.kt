@@ -45,7 +45,8 @@ fun PinInputContent(
     onSuccess: () -> Unit,
     onFailure: () -> Unit = {},
     shouldClearInput: Boolean = false,
-    onClearInputHandled: () -> Unit = {}
+    onClearInputHandled: () -> Unit = {},
+    maxPinLength: Int = 6
 ) {
     var pinInput by remember { mutableStateOf("") }
     var showError by remember { mutableStateOf(false) }
@@ -66,7 +67,7 @@ fun PinInputContent(
             onClearInputHandled()
         }
     }
-    val maxPinLength = 6
+    // maxPinLength 由调用方决定，默认为6；时间公式可传入动态长度
 
     // Handle PIN input completion
     fun handlePinComplete(pin: String) {

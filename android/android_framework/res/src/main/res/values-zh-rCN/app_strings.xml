@@ -979,7 +979,12 @@
     <string name="title_download">下载</string>
     <string name="title_install">安装</string>
 
-    <string name="dialog_message_feedback">可在设置-关于中的聊天群组或者github/Thanox中提交Issue进行反馈。反馈问题务必提供以下必要信息：\n\n1. 清晰的问题描述，配合截图或录屏 \n2. 点击下方按钮导出的日志文件。\n\n以上信息缺一不可。</string>
+    <string name="dialog_message_feedback">可在设置-关于中的聊天群组或者github/Thanox中提交Issue进行反馈。反馈问题务必提供以下必要信息：
+
+1. 清晰的问题描述，配合截图或录屏 
+2. 点击下方按钮导出的日志文件。
+
+以上信息缺一不可。</string>
     <string name="feedback_export_log">导出日志</string>
     <string name="feedback_export_log_success">日志已导出</string>
     <string name="feedback_export_log_fail">日志导出失败，请手动授予文件读写权限后重试</string>
@@ -1020,7 +1025,11 @@
     <string name="menu_title_start_restrict_charts">启动记录</string>
     <string name="menu_title_rules">规则</string>
 
-    <string name="feature_summary_start_restrict_rules">你可以通过制定规则来细化关联启动控制，详细使用方法请参考新手使用手册。\n\n注意：规则的优先级大于上一页的开关设定。\n\n提示：关闭规则检查或许可以节约设备电量。</string>
+    <string name="feature_summary_start_restrict_rules">你可以通过制定规则来细化关联启动控制，详细使用方法请参考新手使用手册。
+
+注意：规则的优先级大于上一页的开关设定。
+
+提示：关闭规则检查或许可以节约设备电量。</string>
     <string name="feature_summary_standby_restrict_rules">可以控制保留某些服务，语法：KEEP $组件名  \ne.g. KEEP xxx/.XService</string>
 
     <string name="feature_category_app_clean_up">清理</string>
@@ -1346,7 +1355,11 @@
 
     <string name="title_remember">不再提醒</string>
     <string name="title_app_notice">小心!</string>
-    <string name="message_app_notice">在某种情况下，安装激活Thanox后，你的设备可能无法启动.\n\n如果你之前从未听说过变砖、死机 或者不清楚发生上述问题后该如何恢复你的设备, 千万 <b>不要</b> 安装 Thanox!\n\n无论如何，使用之前请做好数据备份！</string>
+    <string name="message_app_notice">在某种情况下，安装激活Thanox后，你的设备可能无法启动.
+
+如果你之前从未听说过变砖、死机 或者不清楚发生上述问题后该如何恢复你的设备, 千万 <b>不要</b> 安装 Thanox!
+
+无论如何，使用之前请做好数据备份！</string>
 
     <string name="menu_title_feature_desc">功能介绍</string>
     <string name="menu_title_start_restrict_charts_reset">重置</string>
@@ -1387,7 +1400,12 @@
     <string name="title_stub_apk_app_version_name">版本名称</string>
 
     <string name="export_patch_title">导出补丁</string>
-    <string name="export_patch_message">Thanox支持Xposed和Magisk两种激活方式。\n\n对于Xposed用户，在Xposed模块页面勾选Thanox即可。\n\n对于Magisk用户，你可以将下载的Thanox安装包文件拓展名，由.apk修改为.zip后通过MagiskManager刷入。\n如果你找不到Thanox安装包，你可以点击下面导出按钮，导出Magisk模块的zip包</string>
+    <string name="export_patch_message">Thanox支持Xposed和Magisk两种激活方式。
+
+对于Xposed用户，在Xposed模块页面勾选Thanox即可。
+
+对于Magisk用户，你可以将下载的Thanox安装包文件拓展名，由.apk修改为.zip后通过MagiskManager刷入。
+如果你找不到Thanox安装包，你可以点击下面导出按钮，导出Magisk模块的zip包</string>
     <string name="export_patch_export_magisk">导出</string>
 
     <string name="onboarding_text_complete">那就开始吧</string>
@@ -1567,5 +1585,9 @@
     <string name="feature_summary_update_blocker">防止应用被意外更新</string>
     <string name="feature_title_update_blocker_enabled">已启用阻止更新</string>
     <string name="feature_title_update_blocker_disabled">已禁用阻止更新</string>
+
+    <!-- Position Travel -->
+    <string name="feature_title_position_travel">位置穿越</string>
+    <string name="feature_summary_position_travel">全局伪装设备位置</string>
 
 </resources>

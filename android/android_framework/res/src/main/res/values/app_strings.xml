@@ -939,7 +939,12 @@
     <string name="card_title_plugin_available">Install Thanox plugin</string>
     <string name="card_message_plugin_available">Plugin consist of some unstable or non-critical functions.</string>
 
-    <string name="dialog_message_feedback">You can submit issues for feedback either in the Chat Groups in the Settings-About section or on GitHub/Thanox. When providing feedback, please make sure to include the following essential information: \n\n1. Clear description of the issue with accompanying screenshots or screen recordings. \n2. Log files exported by clicking the button below. \n\nBoth pieces of information are necessary.</string>
+    <string name="dialog_message_feedback">You can submit issues for feedback either in the Chat Groups in the Settings-About section or on GitHub/Thanox. When providing feedback, please make sure to include the following essential information: 
+
+1. Clear description of the issue with accompanying screenshots or screen recordings. 
+2. Log files exported by clicking the button below. 
+
+Both pieces of information are necessary.</string>
     <string name="feedback_export_log">Export log</string>
     <string name="feedback_export_log_success">Log has been exported</string>
     <string name="feedback_export_log_fail">Fail to export log, pls grant Storage permission manually and try again</string>
@@ -988,7 +993,11 @@ Compatibility notice: If the default permission management function is not compa
     <string name="menu_title_start_restrict_charts">Start record</string>
     <string name="menu_title_rules">Rules</string>
 
-    <string name="feature_summary_start_restrict_rules">You can refine the association start control by making rules. For details, please refer to the novice manual. \n\nNote: The priority of the rule is greater than all other settings (for example, greening, associated startup list). \n\n Tip: Turning off rule checking may save device power.</string>
+    <string name="feature_summary_start_restrict_rules">You can refine the association start control by making rules. For details, please refer to the novice manual. 
+
+Note: The priority of the rule is greater than all other settings (for example, greening, associated startup list). 
+
+ Tip: Turning off rule checking may save device power.</string>
     <string name="feature_summary_standby_restrict_rules">You can control to retain certain services, usage: KEEP $COMPONENT-NAME  \ne.g. KEEP xxx/.XService</string>
 
     <string name="feature_category_app_clean_up">Clean</string>
@@ -1332,7 +1341,11 @@ Are you sure you want to uninstall <b>%s</b>? All data of this clone app instanc
 
     <string name="title_remember">Remember</string>
     <string name="title_app_notice">Be careful!</string>
-    <string name="message_app_notice">In some cases, your device might no longer boot after installing Thanox.\n\nIf you never heard about \"soft brick\" and \"bootloop\" before or if you don\'t know how to recover from such a situation, do <b>NOT</b> install Thanox!\n\nIn any case, having a recent backup is highly recommended.</string>
+    <string name="message_app_notice">In some cases, your device might no longer boot after installing Thanox.
+
+If you never heard about \"soft brick\" and \"bootloop\" before or if you don\'t know how to recover from such a situation, do <b>NOT</b> install Thanox!
+
+In any case, having a recent backup is highly recommended.</string>
 
     <string name="menu_title_feature_desc">Feature wiki</string>
     <string name="menu_title_start_restrict_charts_reset">Reset</string>
@@ -1375,7 +1388,11 @@ Are you sure you want to uninstall <b>%s</b>? All data of this clone app instanc
 
 
     <string name="export_patch_title">Export patch</string>
-    <string name="export_patch_message">Thanox support both Xposed and Magisk.\n\n For Xposed user, you can just select and check Thanox in Xposed app module config page. \n\nFor Magisk user, you can rename downloaded Thanox apk from .apk to .zip and then install in Magisk manager, or if you can not find the downloaded apk, we also have option to export the patch zip to local external storage.</string>
+    <string name="export_patch_message">Thanox support both Xposed and Magisk.
+
+ For Xposed user, you can just select and check Thanox in Xposed app module config page. 
+
+For Magisk user, you can rename downloaded Thanox apk from .apk to .zip and then install in Magisk manager, or if you can not find the downloaded apk, we also have option to export the patch zip to local external storage.</string>
     <string name="export_patch_export_magisk">Export</string>
 
     <string name="onboarding_text_complete">Let\'s Begin</string>
@@ -1605,5 +1622,9 @@ If you are already a paid user of Thanox or Thanox Pro, you do not need to subsc
     <string name="feature_summary_update_blocker">Prevent apps from being updated</string>
     <string name="feature_title_update_blocker_enabled">Update blocking enabled</string>
     <string name="feature_title_update_blocker_disabled">Update blocking disabled</string>
+
+    <!-- Position Travel Feature -->
+    <string name="feature_title_position_travel">Position Travel</string>
+    <string name="feature_summary_position_travel">Spoof device location globally</string>
 
 </resources>

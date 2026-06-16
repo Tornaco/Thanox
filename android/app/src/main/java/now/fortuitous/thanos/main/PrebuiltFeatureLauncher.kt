@@ -205,6 +205,10 @@ class PrebuiltFeatureLauncher(
                         }
                     }
                 }
+
+                PrebuiltFeatureIds.ID_POSITION_TRAVEL -> {
+                    now.fortuitous.thanos.positiontravel.PositionTravelActivity.start(context)
+                }
             }
             true
         }

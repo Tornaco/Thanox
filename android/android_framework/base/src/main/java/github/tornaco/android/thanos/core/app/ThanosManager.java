@@ -27,6 +27,8 @@ import github.tornaco.android.thanos.core.backup.BackupAgent;
 import github.tornaco.android.thanos.core.backup.IBackupAgent;
 import github.tornaco.android.thanos.core.input.IInputManager;
 import github.tornaco.android.thanos.core.input.InputManager;
+import github.tornaco.android.thanos.core.location.IPositionTravelManager;
+import github.tornaco.android.thanos.core.location.PositionTravelManager;
 import github.tornaco.android.thanos.core.n.INotificationManager;
 import github.tornaco.android.thanos.core.n.NotificationManager;
 import github.tornaco.android.thanos.core.net.INetworkManager;
@@ -170,6 +172,11 @@ public class ThanosManager {
         @Override
         public List<String> getPatchingSource() throws RemoteException {
             return Collections.emptyList();
+        }
+
+        @Override
+        public IPositionTravelManager getPositionTravelManager() throws RemoteException {
+            return new IPositionTravelManager.Default();
         }
     };
 
@@ -328,6 +335,11 @@ public class ThanosManager {
     @SneakyThrows
     public OpsManager getOpsManager() {
         return new OpsManager(service.getOpsManager());
+    }
+
+    @SneakyThrows
+    public PositionTravelManager getPositionTravelManager() {
+        return new PositionTravelManager(service.getPositionTravelManager());
     }
 
     @SneakyThrows

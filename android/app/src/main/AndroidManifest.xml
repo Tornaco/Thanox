@@ -339,6 +339,9 @@
             android:name="now.fortuitous.thanos.sf.SFActivity"
             android:exported="false" />
         <activity
+            android:name="now.fortuitous.thanos.positiontravel.PositionTravelActivity"
+            android:exported="false" />
+        <activity
             android:name="github.tornaco.practice.honeycomb.locker.ui.setup.AppLockListActivity"
             android:exported="false" />
         <activity

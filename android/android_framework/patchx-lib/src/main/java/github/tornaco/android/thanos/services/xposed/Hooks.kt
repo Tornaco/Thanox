@@ -1,16 +1,18 @@
 package github.tornaco.android.thanos.services.xposed
 
+import github.tornaco.android.thanos.services.xposed.XposedAdapter.ExceptionModeCompat
 import java.lang.reflect.Method
 
 fun beforeConstruct(
     clazz: Class<*>,
     log: (String) -> Unit,
+    exceptionModeCompat: ExceptionModeCompat = ExceptionModeCompat.PROTECTIVE,
     beforeConstruct: (param: ThanoxHookParam) -> Unit,
 ) {
     val constructors = clazz.declaredConstructors
     constructors.forEach { constructor ->
         kotlin.runCatching {
-            XposedRuntime.current().hookBefore(constructor) { param ->
+            XposedRuntime.current().hookBefore(constructor, exceptionModeCompat) { param ->
                 kotlin.runCatching {
                     beforeConstruct(param)
                 }.onFailure {
@@ -26,12 +28,13 @@ fun beforeConstruct(
 fun afterConstruct(
     clazz: Class<*>,
     log: (String) -> Unit,
+    exceptionModeCompat: ExceptionModeCompat = ExceptionModeCompat.PROTECTIVE,
     afterConstruct: (param: ThanoxHookParam) -> Unit,
 ) {
     val constructors = clazz.declaredConstructors
     constructors.forEach { constructor ->
         kotlin.runCatching {
-            XposedRuntime.current().hookAfter(constructor) { param ->
+            XposedRuntime.current().hookAfter(constructor, exceptionModeCompat) { param ->
                 kotlin.runCatching {
                     afterConstruct(param)
                 }.onFailure {
@@ -48,6 +51,7 @@ fun beforeMethod(
     clazz: Class<*>,
     methodName: String,
     log: (String) -> Unit,
+    exceptionModeCompat: ExceptionModeCompat = ExceptionModeCompat.PROTECTIVE,
     beforeMethod: (param: ThanoxHookParam) -> Unit,
 ) {
     val methods = clazz.declaredMethods.filter { it.name == methodName }
@@ -55,7 +59,7 @@ fun beforeMethod(
         "beforeMethod, unable to hook this method: $clazz#$methodName"
     }
     methods.forEach { method ->
-        XposedRuntime.current().hookBefore(method) { param ->
+        XposedRuntime.current().hookBefore(method, exceptionModeCompat) { param ->
             kotlin.runCatching {
                 beforeMethod(param)
             }.onFailure {
@@ -70,6 +74,7 @@ fun afterMethod(
     clazz: Class<*>,
     methodName: String,
     log: (String) -> Unit,
+    exceptionModeCompat: ExceptionModeCompat = ExceptionModeCompat.PROTECTIVE,
     afterMethod: (param: ThanoxHookParam) -> Unit,
 ) {
     val methods = clazz.declaredMethods.filter { it.name == methodName }
@@ -77,7 +82,7 @@ fun afterMethod(
         "afterMethod, unable to hook this method: $clazz#$methodName"
     }
     methods.forEach { method ->
-        XposedRuntime.current().hookAfter(method) { param ->
+        XposedRuntime.current().hookAfter(method, exceptionModeCompat) { param ->
             kotlin.runCatching {
                 afterMethod(param)
             }.onFailure {
@@ -91,9 +96,10 @@ fun afterMethod(
 fun afterMethod(
     method: Method,
     log: (String) -> Unit,
+    exceptionModeCompat: ExceptionModeCompat = ExceptionModeCompat.PROTECTIVE,
     afterMethod: (param: ThanoxHookParam) -> Unit,
 ) {
-    XposedRuntime.current().hookAfter(method) { param ->
+    XposedRuntime.current().hookAfter(method, exceptionModeCompat) { param ->
         kotlin.runCatching {
             afterMethod(param)
         }.onFailure {

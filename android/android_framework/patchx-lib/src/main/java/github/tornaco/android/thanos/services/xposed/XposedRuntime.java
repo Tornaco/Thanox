@@ -29,11 +29,20 @@ public final class XposedRuntime {
         return isSystemServer;
     }
 
+    public static void hookBefore(Class<?> clazz, String methodName, XposedAdapter.ExceptionModeCompat exceptionModeCompat, Consumer<ThanoxHookParam> callback) {
+        XposedAdapter a = current();
+        for (Method method : clazz.getDeclaredMethods()) {
+            if (method.getName().equals(methodName)) {
+                a.hookBefore(method, exceptionModeCompat, callback);
+            }
+        }
+    }
+
     public static void hookBefore(Class<?> clazz, String methodName, Consumer<ThanoxHookParam> callback) {
         XposedAdapter a = current();
         for (Method method : clazz.getDeclaredMethods()) {
             if (method.getName().equals(methodName)) {
-                a.hookBefore(method, callback);
+                a.hookBefore(method, XposedAdapter.ExceptionModeCompat.PROTECTIVE, callback);
             }
         }
     }
@@ -42,38 +51,38 @@ public final class XposedRuntime {
         XposedAdapter a = current();
         for (Method method : clazz.getDeclaredMethods()) {
             if (method.getName().equals(methodName)) {
-                a.hookAfter(method, callback);
+                a.hookAfter(method, XposedAdapter.ExceptionModeCompat.PROTECTIVE, callback);
             }
         }
     }
 
     public static void hookBefore(Method method, Consumer<ThanoxHookParam> callback) {
-        current().hookBefore(method, callback);
+        current().hookBefore(method, XposedAdapter.ExceptionModeCompat.PROTECTIVE, callback);
     }
 
     public static void hookAfter(Method method, Consumer<ThanoxHookParam> callback) {
-        current().hookAfter(method, callback);
+        current().hookAfter(method, XposedAdapter.ExceptionModeCompat.PROTECTIVE, callback);
     }
 
     public static void hookBefore(Constructor<?> constructor, Consumer<ThanoxHookParam> callback) {
-        current().hookBefore(constructor, callback);
+        current().hookBefore(constructor, XposedAdapter.ExceptionModeCompat.PROTECTIVE, callback);
     }
 
     public static void hookAfter(Constructor<?> constructor, Consumer<ThanoxHookParam> callback) {
-        current().hookAfter(constructor, callback);
+        current().hookAfter(constructor, XposedAdapter.ExceptionModeCompat.PROTECTIVE, callback);
     }
 
     public static void hookAllConstructorsBefore(Class<?> clazz, Consumer<ThanoxHookParam> callback) {
         XposedAdapter a = current();
         for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
-            a.hookBefore(constructor, callback);
+            a.hookBefore(constructor, XposedAdapter.ExceptionModeCompat.PROTECTIVE, callback);
         }
     }
 
     public static void hookAllConstructorsAfter(Class<?> clazz, Consumer<ThanoxHookParam> callback) {
         XposedAdapter a = current();
         for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
-            a.hookAfter(constructor, callback);
+            a.hookAfter(constructor, XposedAdapter.ExceptionModeCompat.PROTECTIVE, callback);
         }
     }
 }

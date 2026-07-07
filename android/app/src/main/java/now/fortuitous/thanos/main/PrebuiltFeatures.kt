@@ -383,14 +383,7 @@ object PrebuiltFeatures {
                     titleRes = github.tornaco.android.thanos.res.R.string.feature_title_shortcut_cleaner,
                     themeColor = R.color.nav_icon_shortcut_cleaner
                 )
-            } else null,
-            FeatureItem(
-                id = PrebuiltFeatureIds.ID_POSITION_TRAVEL,
-                packedIconRes = R.drawable.ic_nav_position_travel,
-                iconRes = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_map_pin_fill,
-                titleRes = github.tornaco.android.thanos.res.R.string.feature_title_position_travel,
-                themeColor = R.color.nav_icon_position_travel
-            )
+            } else null
         )
     )
 

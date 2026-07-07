@@ -22,7 +22,6 @@ import github.tornaco.android.thanos.core.IPluginLogger;
 import github.tornaco.android.thanos.core.app.infinite.InfiniteZ;
 import github.tornaco.android.thanos.core.push.wechat.IPushDelegateManager;
 import github.tornaco.android.thanos.core.ops.IOps;
-import github.tornaco.android.thanos.core.location.IPositionTravelManager;
 
 import android.content.IntentFilter;
 
@@ -76,6 +75,4 @@ interface IThanos {
     InfiniteZ getInfiniteZ2();
     InfiniteZ getInfiniteZ3();
     InfiniteZ getInfiniteZ4();
-
-    IPositionTravelManager getPositionTravelManager();
 }

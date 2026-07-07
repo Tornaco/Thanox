@@ -63,7 +63,6 @@ object PrebuiltFeatureIds {
     const val ID_CLEAR_DATA_BLOCKER = 33
     const val ID_SHORTCUT_CLEANER = 34
     const val ID_UPDATE_BLOCKER = 35
-    const val ID_POSITION_TRAVEL = 36
 
     fun Int.isValidId() = this >= ID_ONE_KEY_CLEAR
 }

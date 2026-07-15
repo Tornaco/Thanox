@@ -124,6 +124,10 @@
         key_bg_restrict_show_notification
     </string>
 
+    <string name="key_clean_task_removal_skip_notification" translatable="false">key_clean_task_removal_skip_notification</string>
+    <string name="key_clean_task_removal_skip_audio" translatable="false">key_clean_task_removal_skip_audio</string>
+    <string name="key_clean_task_removal_skip_vpn" translatable="false">key_clean_task_removal_skip_vpn</string>
+
     <string name="key_data" translatable="false">key_data</string>
     <string name="key_data_backup" translatable="false">key_data_backup</string>
     <string name="key_data_restore" translatable="false">key_data_restore</string>

@@ -1330,6 +1330,12 @@ Are you sure you want to uninstall <b>%s</b>? All data of this clone app instanc
     <string name="pre_title_bg_restrict_show_notification">Show notification</string>
     <string name="pre_summary_bg_restrict_show_notification">Display notification when pending clean up process detected</string>
 
+    <string name="pre_title_clean_task_removal_skip_notification">Keep apps with notifications</string>
+    <string name="pre_title_clean_task_removal_skip_audio">Keep audio playing apps</string>
+    <string name="pre_summary_clean_task_removal_skip_audio">Do not clean up apps that are playing audio</string>
+    <string name="pre_title_clean_task_removal_skip_vpn">Keep VPN apps</string>
+    <string name="pre_summary_clean_task_removal_skip_vpn">Do not clean up apps that are providing VPN or network proxy</string>
+
     <string name="badge_trying_app">Trial</string>
     <string name="badge_paid_app">Paid</string>
     <string name="badge_framework_err">Error</string>

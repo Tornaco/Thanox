@@ -371,6 +371,36 @@ public class ActivityManager {
     }
 
     @SneakyThrows
+    public boolean isCleanUpOnTaskRemovalSkipNotificationEnabled() {
+        return server.isCleanUpOnTaskRemovalSkipNotificationEnabled();
+    }
+
+    @SneakyThrows
+    public void setCleanUpOnTaskRemovalSkipNotificationEnabled(boolean enable) {
+        server.setCleanUpOnTaskRemovalSkipNotificationEnabled(enable);
+    }
+
+    @SneakyThrows
+    public boolean isCleanUpOnTaskRemovalSkipAudioFocusedEnabled() {
+        return server.isCleanUpOnTaskRemovalSkipAudioFocusedEnabled();
+    }
+
+    @SneakyThrows
+    public void setCleanUpOnTaskRemovalSkipAudioFocusedEnabled(boolean enable) {
+        server.setCleanUpOnTaskRemovalSkipAudioFocusedEnabled(enable);
+    }
+
+    @SneakyThrows
+    public boolean isCleanUpOnTaskRemovalSkipVpnEnabled() {
+        return server.isCleanUpOnTaskRemovalSkipVpnEnabled();
+    }
+
+    @SneakyThrows
+    public void setCleanUpOnTaskRemovalSkipVpnEnabled(boolean enable) {
+        server.setCleanUpOnTaskRemovalSkipVpnEnabled(enable);
+    }
+
+    @SneakyThrows
     public boolean isBgTaskCleanUpSkipForegroundEnabled() {
         return server.isBgTaskCleanUpSkipForegroundEnabled();
     }

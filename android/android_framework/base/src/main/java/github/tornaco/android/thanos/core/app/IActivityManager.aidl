@@ -58,6 +58,14 @@ interface IActivityManager {
     void setPkgCleanUpOnTaskRemovalEnabled(in Pkg pkg, boolean enable);
     boolean isPkgCleanUpOnTaskRemovalEnabled(in Pkg pkg);
 
+    // Task removal skip conditions
+    boolean isCleanUpOnTaskRemovalSkipNotificationEnabled();
+    void setCleanUpOnTaskRemovalSkipNotificationEnabled(boolean enable);
+    boolean isCleanUpOnTaskRemovalSkipAudioFocusedEnabled();
+    void setCleanUpOnTaskRemovalSkipAudioFocusedEnabled(boolean enable);
+    boolean isCleanUpOnTaskRemovalSkipVpnEnabled();
+    void setCleanUpOnTaskRemovalSkipVpnEnabled(boolean enable);
+
     // 后台运行设置
     boolean isBgRestrictEnabled();
     void setBgRestrictEnabled(boolean enable);

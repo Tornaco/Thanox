@@ -1344,6 +1344,12 @@
     <string name="pre_title_bg_restrict_show_notification">显示通知</string>
     <string name="pre_summary_bg_restrict_show_notification">有待清理应用时显示一个通知</string>
 
+    <string name="pre_title_clean_task_removal_skip_notification">不清理有通知的应用</string>
+    <string name="pre_title_clean_task_removal_skip_audio">不清理正在播放音频的应用</string>
+    <string name="pre_summary_clean_task_removal_skip_audio">保留正在播放音频的应用</string>
+    <string name="pre_title_clean_task_removal_skip_vpn">不清理VPN应用</string>
+    <string name="pre_summary_clean_task_removal_skip_vpn">保留正在提供VPN或网络代理的应用</string>
+
     <string name="badge_trying_app">未订阅</string>
     <string name="badge_paid_app">已购买</string>
     <string name="badge_framework_err">不兼容</string>

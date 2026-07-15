@@ -38,6 +38,7 @@ import now.fortuitous.thanos.privacy.FieldsTemplateListActivity
 import now.fortuitous.thanos.start.BgRestrictSettingsActivity
 import now.fortuitous.thanos.start.StartRuleActivity
 import now.fortuitous.thanos.start.chart.ComposeStartChartActivity
+import now.fortuitous.thanos.task.CleanTaskRemovalSettingsActivity
 import now.fortuitous.thanos.task.RecentTaskBlurSettingsActivity
 
 class AioAppListActivity : BaseAppListFilterActivity() {
@@ -370,6 +371,17 @@ class AioAppListActivity : BaseAppListFilterActivity() {
                     title = {
                         it.getString(R.string.activity_title_clean_when_task_removed)
                     },
+                    actions = {
+                        listOf(
+                            AppBarConfig.AppBarAction(
+                                title = it.getString(R.string.nav_title_settings),
+                                icon = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_settings_2_fill,
+                                onClick = {
+                                    CleanTaskRemovalSettingsActivity.start(this)
+                                }
+                            )
+                        )
+                    }
                 ),
                 switchBarConfig = SwitchBarConfig(
                     title = { context, _ ->

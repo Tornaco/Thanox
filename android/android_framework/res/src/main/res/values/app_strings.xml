@@ -1305,6 +1305,9 @@ Are you sure you want to uninstall <b>%s</b>? All data of this clone app instanc
     <string name="launch_other_app_rule_cascade">Cascade mode</string>
     <string name="launch_other_app_rule_cascade_summary">When enabled, ALLOW rules will also check per-app settings. Only explicitly configured per-app settings can override ALLOW rules. DENY rules always take priority.</string>
 
+    <string name="nav_edit_title">Edit Layout</string>
+    <string name="nav_edit_reset">Reset</string>
+
     <string name="sensor_off">Sensor off</string>
     <string name="sensor_off_summary">Turn off all sensor when app is in foreground</string>
     <string name="sensor_off_default">Don\'t turn off</string>

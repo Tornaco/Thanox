@@ -22,6 +22,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -42,6 +44,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
@@ -87,6 +90,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.apps.AppDetailsActivity
 import now.fortuitous.thanos.main.ChooserActivity
+import now.fortuitous.thanos.main.NavEditActivity
 import now.fortuitous.thanos.pref.AppPreference
 import now.fortuitous.thanos.recovery.RecoveryUtilsActivity
 import now.fortuitous.thanos.settings.FeatureToggleActivity
@@ -233,6 +237,14 @@ fun SettingsScreen() {
                             LinkText(stringResource(R.string.onboarding_guide_tips_title)) {
                                 BrowserUtils.launch(context, BuildProp.THANOX_URL_DOCS_HOME)
                             }
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = { NavEditActivity.start(context) }) {
+                            Icon(
+                                painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_apps_2_fill),
+                                contentDescription = stringResource(id = R.string.nav_edit_title)
+                            )
                         }
                     }
                 )

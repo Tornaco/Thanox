@@ -35,7 +35,13 @@ import github.tornaco.thanos.android.module.profile.online.OnlineProfileActivity
 import now.fortuitous.thanos.start.chart.ComposeStartChartActivity
 
 object PrebuiltFeatures {
+    const val GROUP_KEY_BOOST = "boost"
+    const val GROUP_KEY_SECURE = "secure"
+    const val GROUP_KEY_EXT = "ext"
+    const val GROUP_KEY_NOTIFICATION = "notification"
+
     private val boost = FeatureItemGroup(
+        key = GROUP_KEY_BOOST,
         titleRes = github.tornaco.android.thanos.res.R.string.nav_title_boost,
         items = listOf(
             FeatureItem(
@@ -153,6 +159,7 @@ object PrebuiltFeatures {
     )
 
     private val secure = FeatureItemGroup(
+        key = GROUP_KEY_SECURE,
         titleRes = github.tornaco.android.thanos.res.R.string.nav_title_secure,
         items = listOfNotNull(
             FeatureItem(
@@ -260,6 +267,7 @@ object PrebuiltFeatures {
     )
 
     private val ext = FeatureItemGroup(
+        key = GROUP_KEY_EXT,
         titleRes = github.tornaco.android.thanos.res.R.string.nav_title_exp,
         items = listOfNotNull(
             FeatureItem(
@@ -388,6 +396,7 @@ object PrebuiltFeatures {
     )
 
     private val notification = FeatureItemGroup(
+        key = GROUP_KEY_NOTIFICATION,
         titleRes = github.tornaco.android.thanos.res.R.string.module_notification_recorder_feature_title_notification_center,
         items = listOf(
             FeatureItem(

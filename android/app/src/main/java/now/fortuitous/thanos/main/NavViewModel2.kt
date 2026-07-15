@@ -65,6 +65,7 @@ data class FeatureItem(
 )
 
 data class FeatureItemGroup(
+    val key: String = "",
     @StringRes val titleRes: Int,
     val items: List<FeatureItem>,
 )
@@ -104,6 +105,11 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
     )
     val state = _state.asStateFlow()
 
+    override fun onResume() {
+        super.onResume()
+        loadFeatures()
+    }
+
     fun loadFeatures() {
         context.withThanos {
             val feats = PrebuiltFeatures.all {
@@ -112,8 +118,9 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                     it.id
                 ) && (it.requiredFeature == null || hasFeature(it.requiredFeature))
             }.filter { it.items.isNotEmpty() }
+            val orderedFeats = NavOrderPreference.applyOrder(context, feats)
             _state.value = _state.value.copy(
-                features = feats
+                features = orderedFeats
             )
         }
     }

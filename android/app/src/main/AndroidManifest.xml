@@ -166,6 +166,9 @@
         <activity
             android:name="now.fortuitous.thanos.settings.FeatureToggleActivity"
             android:exported="false" />
+        <activity
+            android:name="now.fortuitous.thanos.main.NavEditActivity"
+            android:exported="false" />
 
         <activity
             android:name="now.fortuitous.thanos.launchother.LaunchOtherAppAskActivity"

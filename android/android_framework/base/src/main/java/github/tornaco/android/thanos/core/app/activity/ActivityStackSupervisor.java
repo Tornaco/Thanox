@@ -186,6 +186,16 @@ public class ActivityStackSupervisor {
     }
 
     @SneakyThrows
+    public boolean isLaunchOtherAppRuleCascadeEnabled() {
+        return supervisor.isLaunchOtherAppRuleCascadeEnabled();
+    }
+
+    @SneakyThrows
+    public void setLaunchOtherAppRuleCascadeEnabled(boolean enable) {
+        supervisor.setLaunchOtherAppRuleCascadeEnabled(enable);
+    }
+
+    @SneakyThrows
     public void addLaunchOtherAppRule(String rule) throws RemoteException {
         supervisor.addLaunchOtherAppRule(rule);
     }

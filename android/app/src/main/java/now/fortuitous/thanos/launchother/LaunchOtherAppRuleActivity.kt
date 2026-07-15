@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
@@ -116,6 +118,28 @@ class LaunchOtherAppRuleActivity : ComposeThemeActivity() {
                         .fillMaxSize()
                         .padding(paddings)
                 ) {
+                    item {
+                        ListItem(
+                            modifier = Modifier,
+                            title = stringResource(id = github.tornaco.android.thanos.res.R.string.launch_other_app_rule_cascade),
+                            action1 = {
+                                Switch(
+                                    checked = state.isCascadeEnabled,
+                                    onCheckedChange = { viewModel.setCascadeEnabled(it) }
+                                )
+                            }
+                        )
+                    }
+                    if (state.isCascadeEnabled) {
+                        item {
+                            Text(
+                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                                text = stringResource(id = github.tornaco.android.thanos.res.R.string.launch_other_app_rule_cascade_summary),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
                     items(state.ruleItems) {
                         ListItem(
                             modifier = Modifier, title = it.rule,

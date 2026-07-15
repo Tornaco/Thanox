@@ -18,7 +18,8 @@ data class RuleItem(val rule: String)
 
 data class OpsState(
     val isLoading: Boolean,
-    val ruleItems: List<RuleItem>
+    val ruleItems: List<RuleItem>,
+    val isCascadeEnabled: Boolean = false
 )
 
 @SuppressLint("StaticFieldLeak")
@@ -44,7 +45,14 @@ class LaunchOtherAppRuleViewModel @Inject constructor(@ApplicationContext privat
             val rules = withContext(Dispatchers.IO) {
                 supervisor.allLaunchOtherAppRules.map { RuleItem(it) }
             }
-            _state.value = _state.value.copy(ruleItems = rules, isLoading = false)
+            val cascadeEnabled = withContext(Dispatchers.IO) {
+                supervisor.isLaunchOtherAppRuleCascadeEnabled
+            }
+            _state.value = _state.value.copy(
+                ruleItems = rules,
+                isLoading = false,
+                isCascadeEnabled = cascadeEnabled
+            )
         }
     }
 
@@ -56,5 +64,10 @@ class LaunchOtherAppRuleViewModel @Inject constructor(@ApplicationContext privat
     fun remove(rule: String) {
         supervisor.deleteLaunchOtherAppRule(rule)
         refresh()
+    }
+
+    fun setCascadeEnabled(enabled: Boolean) {
+        supervisor.setLaunchOtherAppRuleCascadeEnabled(enabled)
+        _state.value = _state.value.copy(isCascadeEnabled = enabled)
     }
 }

@@ -77,17 +77,78 @@ class NavEditActivity : ComposeThemeActivity() {
                     .padding(paddings)
                     .padding(horizontal = 16.dp)
             ) {
-                itemsIndexed(state.groups, key = { _, g -> g.key }) { index, group ->
-                    GroupEditCard(
-                        group = group,
-                        isFirst = index == 0,
-                        isLast = index == state.groups.size - 1,
-                        isExpanded = state.expandedGroupKey == group.key,
-                        onToggleExpand = { viewModel.toggleExpand(group.key) },
-                        onMoveUp = { viewModel.moveGroupUp(group.key) },
-                        onMoveDown = { viewModel.moveGroupDown(group.key) },
-                        onFeatureMoveUp = { viewModel.moveFeatureUp(group.key, it) },
-                        onFeatureMoveDown = { viewModel.moveFeatureDown(group.key, it) },
+                itemsIndexed(state.sections, key = { _, g -> g.key }) { index, section ->
+                    val isExpandable = section.items.isNotEmpty()
+                    if (isExpandable) {
+                        GroupEditCard(
+                            group = section,
+                            isFirst = index == 0,
+                            isLast = index == state.sections.size - 1,
+                            isExpanded = state.expandedGroupKey == section.key,
+                            onToggleExpand = { viewModel.toggleExpand(section.key) },
+                            onMoveUp = { viewModel.moveSectionUp(section.key) },
+                            onMoveDown = { viewModel.moveSectionDown(section.key) },
+                            onFeatureMoveUp = { viewModel.moveFeatureUp(section.key, it) },
+                            onFeatureMoveDown = { viewModel.moveFeatureDown(section.key, it) },
+                        )
+                    } else {
+                        SectionEditCard(
+                            section = section,
+                            isFirst = index == 0,
+                            isLast = index == state.sections.size - 1,
+                            onMoveUp = { viewModel.moveSectionUp(section.key) },
+                            onMoveDown = { viewModel.moveSectionDown(section.key) },
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SectionEditCard(
+    section: FeatureItemGroup,
+    isFirst: Boolean,
+    isLast: Boolean,
+    onMoveUp: () -> Unit,
+    onMoveDown: () -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainerLow)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = stringResource(id = section.titleRes),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.W600,
+                modifier = Modifier.weight(1f)
+            )
+            Row {
+                IconButton(onClick = onMoveUp, enabled = !isFirst) {
+                    Icon(
+                        painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_arrow_up_s_fill),
+                        contentDescription = "Move up",
+                        tint = if (!isFirst) MaterialTheme.colorScheme.onSurface
+                        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+                    )
+                }
+                IconButton(onClick = onMoveDown, enabled = !isLast) {
+                    Icon(
+                        painter = painterResource(id = github.tornaco.android.thanos.icon.remix.R.drawable.ic_remix_arrow_down_s_fill),
+                        contentDescription = "Move down",
+                        tint = if (!isLast) MaterialTheme.colorScheme.onSurface
+                        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
                     )
                 }
             }

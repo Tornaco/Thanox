@@ -95,7 +95,8 @@ import github.tornaco.android.thanos.module.compose.common.widget.MD3Badge
 import github.tornaco.android.thanos.module.compose.common.widget.Md3ExpPullRefreshIndicator
 import github.tornaco.android.thanos.module.compose.common.widget.SettingsAppBarActions
 import github.tornaco.android.thanos.module.compose.common.widget.TinySpacer
-import github.tornaco.android.thanos.support.main.NavHeaderContent
+import github.tornaco.android.thanos.support.main.NavCpuMemCard
+import github.tornaco.android.thanos.support.main.NavRunningAppsCard
 import github.tornaco.android.thanos.support.subscribe.LVLStateHolder
 import kotlinx.coroutines.launch
 import now.fortuitous.thanos.settings.v2.SettingsScreen
@@ -322,6 +323,7 @@ private fun NavContent(
     onFeatureItemClick: (FeatureItem) -> Unit,
     createShortcut: (FeatureItem) -> Unit,
 ) {
+    val featureMap = state.features.associateBy { it.key }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -336,19 +338,30 @@ private fun NavContent(
                 )
             }
         ) {
-            NavHeaderContent(
-                modifier = Modifier.padding(16.dp),
-                headerInfo = state.statusHeaderInfo
-            ) {
-                onHeaderClick()
+            state.sectionOrder.forEach { sectionKey ->
+                when (sectionKey) {
+                    PrebuiltFeatures.SECTION_KEY_CPU_MEM -> {
+                        NavCpuMemCard(
+                            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
+                            headerInfo = state.statusHeaderInfo,
+                            onHeaderClick = onHeaderClick
+                        )
+                    }
+                    PrebuiltFeatures.SECTION_KEY_RUNNING -> {
+                        NavRunningAppsCard(
+                            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 12.dp),
+                            headerInfo = state.statusHeaderInfo,
+                            onHeaderClick = onHeaderClick
+                        )
+                    }
+                    else -> {
+                        featureMap[sectionKey]?.let { group ->
+                            FeatureGroup(group, onFeatureItemClick, createShortcut)
+                        }
+                    }
+                }
             }
         }
-
-        AllNewFeatures(
-            state = state,
-            onItemClick = onFeatureItemClick,
-            createShortcut = createShortcut
-        )
 
         LargeSpacer()
         LargeSpacer()

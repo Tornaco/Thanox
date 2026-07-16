@@ -6,6 +6,28 @@ import androidx.preference.PreferenceManager
 object NavOrderPreference {
     private const val KEY_GROUP_ORDER = "NAV_GROUP_ORDER"
     private const val KEY_FEATURE_ORDER_PREFIX = "NAV_FEATURE_ORDER_"
+    private const val KEY_SECTION_ORDER = "NAV_SECTION_ORDER"
+
+    fun getSectionOrder(context: Context): List<String>? {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val str = prefs.getString(KEY_SECTION_ORDER, null)
+        if (str != null) {
+            return str.split(",").filter { it.isNotEmpty() }
+        }
+        val groupOrderStr = prefs.getString(KEY_GROUP_ORDER, null) ?: return null
+        val groupOrder = groupOrderStr.split(",").filter { it.isNotEmpty() }
+        return listOf(
+            PrebuiltFeatures.SECTION_KEY_CPU_MEM,
+            PrebuiltFeatures.SECTION_KEY_RUNNING
+        ) + groupOrder
+    }
+
+    fun setSectionOrder(context: Context, order: List<String>) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit()
+            .putString(KEY_SECTION_ORDER, order.joinToString(","))
+            .apply()
+    }
 
     fun getGroupOrder(context: Context): List<String>? {
         val str = PreferenceManager.getDefaultSharedPreferences(context)
@@ -37,6 +59,7 @@ object NavOrderPreference {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = prefs.edit()
         editor.remove(KEY_GROUP_ORDER)
+        editor.remove(KEY_SECTION_ORDER)
         prefs.all.keys.filter { it.startsWith(KEY_FEATURE_ORDER_PREFIX) }.forEach {
             editor.remove(it)
         }
@@ -64,6 +87,17 @@ object NavOrderPreference {
             } else {
                 group
             }
+        }
+    }
+
+    fun applySectionOrder(context: Context, allSectionKeys: List<String>): List<String> {
+        val savedOrder = getSectionOrder(context)
+        return if (savedOrder != null) {
+            val known = savedOrder.filter { it in allSectionKeys }
+            val remaining = allSectionKeys.filter { it !in savedOrder }
+            known + remaining
+        } else {
+            allSectionKeys
         }
     }
 }

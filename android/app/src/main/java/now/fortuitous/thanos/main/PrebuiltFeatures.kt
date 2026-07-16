@@ -35,10 +35,22 @@ import github.tornaco.thanos.android.module.profile.online.OnlineProfileActivity
 import now.fortuitous.thanos.start.chart.ComposeStartChartActivity
 
 object PrebuiltFeatures {
+    const val SECTION_KEY_CPU_MEM = "cpu_mem"
+    const val SECTION_KEY_RUNNING = "running"
+
     const val GROUP_KEY_BOOST = "boost"
     const val GROUP_KEY_SECURE = "secure"
     const val GROUP_KEY_EXT = "ext"
     const val GROUP_KEY_NOTIFICATION = "notification"
+
+    val defaultSectionOrder = listOf(
+        SECTION_KEY_CPU_MEM,
+        SECTION_KEY_RUNNING,
+        GROUP_KEY_BOOST,
+        GROUP_KEY_SECURE,
+        GROUP_KEY_EXT,
+        GROUP_KEY_NOTIFICATION,
+    )
 
     private val boost = FeatureItemGroup(
         key = GROUP_KEY_BOOST,

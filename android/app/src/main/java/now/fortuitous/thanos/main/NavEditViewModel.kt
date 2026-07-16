@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 data class NavEditState(
-    val groups: List<FeatureItemGroup>,
+    val sections: List<FeatureItemGroup>,
     val expandedGroupKey: String? = null,
 )
 
@@ -19,13 +19,30 @@ data class NavEditState(
 class NavEditViewModel @Inject constructor(@ApplicationContext private val context: Context) :
     ViewModel() {
 
-    private val _state = MutableStateFlow(NavEditState(groups = emptyList()))
+    private val _state = MutableStateFlow(NavEditState(sections = emptyList()))
     val state = _state.asStateFlow()
 
     fun load() {
-        val groups = PrebuiltFeatures.all()
-        val ordered = NavOrderPreference.applyOrder(context, groups)
-        _state.value = _state.value.copy(groups = ordered)
+        val featureGroups = PrebuiltFeatures.all()
+        val orderedFeatures = NavOrderPreference.applyOrder(context, featureGroups)
+        val headerSections = listOf(
+            FeatureItemGroup(
+                key = PrebuiltFeatures.SECTION_KEY_CPU_MEM,
+                titleRes = github.tornaco.android.thanos.res.R.string.section_title_cpu_mem,
+                items = emptyList()
+            ),
+            FeatureItemGroup(
+                key = PrebuiltFeatures.SECTION_KEY_RUNNING,
+                titleRes = github.tornaco.android.thanos.res.R.string.section_title_running,
+                items = emptyList()
+            ),
+        )
+        val allSections = headerSections + orderedFeatures
+        val allKeys = allSections.map { it.key }
+        val orderedKeys = NavOrderPreference.applySectionOrder(context, allKeys)
+        val sectionMap = allSections.associateBy { it.key }
+        val orderedSections = orderedKeys.mapNotNull { sectionMap[it] }
+        _state.value = _state.value.copy(sections = orderedSections)
     }
 
     fun toggleExpand(groupKey: String) {
@@ -35,50 +52,50 @@ class NavEditViewModel @Inject constructor(@ApplicationContext private val conte
         )
     }
 
-    fun moveGroupUp(groupKey: String) {
-        val groups = _state.value.groups.toMutableList()
-        val index = groups.indexOfFirst { it.key == groupKey }
+    fun moveSectionUp(sectionKey: String) {
+        val sections = _state.value.sections.toMutableList()
+        val index = sections.indexOfFirst { it.key == sectionKey }
         if (index > 0) {
-            groups[index] = groups[index - 1].also { groups[index - 1] = groups[index] }
-            _state.value = _state.value.copy(groups = groups)
-            saveGroupOrder(groups)
+            sections[index] = sections[index - 1].also { sections[index - 1] = sections[index] }
+            _state.value = _state.value.copy(sections = sections)
+            saveSectionOrder(sections)
         }
     }
 
-    fun moveGroupDown(groupKey: String) {
-        val groups = _state.value.groups.toMutableList()
-        val index = groups.indexOfFirst { it.key == groupKey }
-        if (index >= 0 && index < groups.size - 1) {
-            groups[index] = groups[index + 1].also { groups[index + 1] = groups[index] }
-            _state.value = _state.value.copy(groups = groups)
-            saveGroupOrder(groups)
+    fun moveSectionDown(sectionKey: String) {
+        val sections = _state.value.sections.toMutableList()
+        val index = sections.indexOfFirst { it.key == sectionKey }
+        if (index >= 0 && index < sections.size - 1) {
+            sections[index] = sections[index + 1].also { sections[index + 1] = sections[index] }
+            _state.value = _state.value.copy(sections = sections)
+            saveSectionOrder(sections)
         }
     }
 
     fun moveFeatureUp(groupKey: String, featureId: Int) {
-        val groups = _state.value.groups.toMutableList()
-        val groupIndex = groups.indexOfFirst { it.key == groupKey }
+        val sections = _state.value.sections.toMutableList()
+        val groupIndex = sections.indexOfFirst { it.key == groupKey }
         if (groupIndex < 0) return
-        val items = groups[groupIndex].items.toMutableList()
+        val items = sections[groupIndex].items.toMutableList()
         val index = items.indexOfFirst { it.id == featureId }
         if (index > 0) {
             items[index] = items[index - 1].also { items[index - 1] = items[index] }
-            groups[groupIndex] = groups[groupIndex].copy(items = items)
-            _state.value = _state.value.copy(groups = groups)
+            sections[groupIndex] = sections[groupIndex].copy(items = items)
+            _state.value = _state.value.copy(sections = sections)
             saveFeatureOrder(groupKey, items)
         }
     }
 
     fun moveFeatureDown(groupKey: String, featureId: Int) {
-        val groups = _state.value.groups.toMutableList()
-        val groupIndex = groups.indexOfFirst { it.key == groupKey }
+        val sections = _state.value.sections.toMutableList()
+        val groupIndex = sections.indexOfFirst { it.key == groupKey }
         if (groupIndex < 0) return
-        val items = groups[groupIndex].items.toMutableList()
+        val items = sections[groupIndex].items.toMutableList()
         val index = items.indexOfFirst { it.id == featureId }
         if (index >= 0 && index < items.size - 1) {
             items[index] = items[index + 1].also { items[index + 1] = items[index] }
-            groups[groupIndex] = groups[groupIndex].copy(items = items)
-            _state.value = _state.value.copy(groups = groups)
+            sections[groupIndex] = sections[groupIndex].copy(items = items)
+            _state.value = _state.value.copy(sections = sections)
             saveFeatureOrder(groupKey, items)
         }
     }
@@ -88,8 +105,8 @@ class NavEditViewModel @Inject constructor(@ApplicationContext private val conte
         load()
     }
 
-    private fun saveGroupOrder(groups: List<FeatureItemGroup>) {
-        NavOrderPreference.setGroupOrder(context, groups.map { it.key })
+    private fun saveSectionOrder(sections: List<FeatureItemGroup>) {
+        NavOrderPreference.setSectionOrder(context, sections.map { it.key })
     }
 
     private fun saveFeatureOrder(groupKey: String, items: List<FeatureItem>) {

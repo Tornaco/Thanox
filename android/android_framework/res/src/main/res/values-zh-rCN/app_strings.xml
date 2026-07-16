@@ -1182,6 +1182,8 @@
 
     <string name="nav_edit_title">编辑布局</string>
     <string name="nav_edit_reset">重置</string>
+    <string name="section_title_cpu_mem">CPU 和 内存</string>
+    <string name="section_title_running">正在运行</string>
 
     <string name="sensor_off">关闭传感器</string>
     <string name="sensor_off_summary">设置应用启动时关闭传感器以保护隐私</string>

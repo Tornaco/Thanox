@@ -1307,6 +1307,8 @@ Are you sure you want to uninstall <b>%s</b>? All data of this clone app instanc
 
     <string name="nav_edit_title">Edit Layout</string>
     <string name="nav_edit_reset">Reset</string>
+    <string name="section_title_cpu_mem">CPU &amp; Memory</string>
+    <string name="section_title_running">Running Apps</string>
 
     <string name="sensor_off">Sensor off</string>
     <string name="sensor_off_summary">Turn off all sensor when app is in foreground</string>

@@ -73,6 +73,7 @@ data class FeatureItemGroup(
 data class NavState(
     val isLoading: Boolean,
     val features: List<FeatureItemGroup>,
+    val sectionOrder: List<String>,
     val statusHeaderInfo: StatusHeaderInfo,
     val activeStatus: ActiveStatus,
     val hasFrameworkError: Boolean,
@@ -94,6 +95,7 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
         NavState(
             isLoading = false,
             features = PrebuiltFeatures.all(),
+            sectionOrder = PrebuiltFeatures.defaultSectionOrder,
             statusHeaderInfo = defaultStatusHeaderInfo,
             activeStatus = ActiveStatus.Unknown,
             hasFrameworkError = false,
@@ -119,8 +121,14 @@ class NavViewModel2 @Inject constructor(@ApplicationContext private val context:
                 ) && (it.requiredFeature == null || hasFeature(it.requiredFeature))
             }.filter { it.items.isNotEmpty() }
             val orderedFeats = NavOrderPreference.applyOrder(context, feats)
+            val allSectionKeys = listOf(
+                PrebuiltFeatures.SECTION_KEY_CPU_MEM,
+                PrebuiltFeatures.SECTION_KEY_RUNNING
+            ) + orderedFeats.map { it.key }
+            val sectionOrder = NavOrderPreference.applySectionOrder(context, allSectionKeys)
             _state.value = _state.value.copy(
-                features = orderedFeats
+                features = orderedFeats,
+                sectionOrder = sectionOrder
             )
         }
     }

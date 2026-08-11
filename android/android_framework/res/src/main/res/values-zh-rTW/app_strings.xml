@@ -1513,18 +1513,18 @@
     <string name="module_donate_pay_alipay">支付寶</string>
     <string name="module_donate_pay_wechat">微信</string>
     <string name="module_donate_sku">产品与价格</string>
-    <string name="module_donate_guide">
-        ### 购买流程\n
-        1. 支付后发邮件至 **%s**\n
-        2. 邮件写**%s高级版本申请**\n
-        3. 加上带**支付订单号**的支付截图附件\n
-        4. 发送邮件\n
-        \n
-        > Tips:\n
-        > 我们会尽快回复高级版激活码，一般不会超过12小时；\n
-        > 如果超时未收到请检查下垃圾箱，或者联系Q: %s；\n
-        > 发邮件时可以使用QQ、163、gmail等邮箱，不要使用手机彩信、outlook邮箱。\n
-    </string>
+    <string name="module_donate_contact_qq">联系客服QQ</string>
+    <string name="module_donate_contact_qq_message">未检测到QQ，客服QQ：%s 已复制，请手动添加后直接支付或发送支付凭证。</string>
+    <string name="module_donate_pay_after_send_to_qq">支付完成后，请将支付凭证（含订单号）发送给客服QQ：%s，客服核对后回复激活码。</string>
+    <string name="module_donate_email_alternative">备用：通过邮件获取激活码</string>
+    <string name="module_donate_email_alternative_message">如果不方便使用QQ，也可以通过邮件获取激活码：\n1. 支付后发邮件至 **%s**；\n2. 邮件标题写 **Thanox 高级版本申请**；\n3. 附上带**支付订单号**的支付截图；\n4. 我们会尽快通过邮件回复激活码（一般不超过12小时）。</string>
+    <string name="module_donate_purchase_process">购买流程</string>
+    <string name="module_donate_method_1_title">方式一：添加客服QQ直接支付</string>
+    <string name="module_donate_method_1_desc">添加客服QQ %s 直接支付，客服会在QQ直接回复激活码。</string>
+    <string name="module_donate_method_2_title">方式二：微信/支付宝支付后发凭证给客服QQ</string>
+    <string name="module_donate_method_2_desc">通过微信/支付宝支付后，将带支付订单号的支付凭证发送给客服QQ %s，客服核对后回复激活码。</string>
+    <string name="module_donate_method_1_action_hint">点击添加客服</string>
+    <string name="module_donate_method_2_action_hint">点击复制QQ</string>
 
     <!-- Settings - History Versions -->
     <string name="settings_history_versions_title">歷史版本</string>

@@ -1588,10 +1588,11 @@ If you are already a paid user of Thanox or Thanox Pro, you do not need to subsc
     <string name="module_donate_purchase_process">Purchase Process</string>
     <string name="module_donate_method_1_title">Option 1: Pay directly via customer service QQ</string>
     <string name="module_donate_method_1_desc">Add customer service QQ %s and pay directly, the code will be replied directly in QQ.</string>
-    <string name="module_donate_method_2_title">Option 2: Pay via WeChat/Alipay and send the proof to customer service QQ</string>
-    <string name="module_donate_method_2_desc">After paying via WeChat/Alipay, send the payment proof with the order number to customer service QQ %s, the code will be replied after verification.</string>
+    <string name="module_donate_method_2_title">Pay via WeChat/Alipay and send the proof to customer service QQ</string>
+    <string name="module_donate_method_2_desc">After paying via WeChat/Alipay, send the payment proof with the order number to customer service QQ %s, the code will be replied after verification. You can also tap the button at the bottom right to view the corresponding payment QR code.</string>
     <string name="module_donate_method_1_action_hint">Tap to add</string>
-    <string name="module_donate_method_2_action_hint">Tap to copy QQ</string>
+    <string name="module_donate_method_2_action_hint">Tap to add</string>
+    <string name="module_donate_pay_qr">QR Code</string>
 
     <!-- Settings - History Versions -->
     <string name="settings_history_versions_title">History Versions</string>

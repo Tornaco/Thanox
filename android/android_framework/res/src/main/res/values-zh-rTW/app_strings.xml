@@ -1521,10 +1521,11 @@
     <string name="module_donate_purchase_process">购买流程</string>
     <string name="module_donate_method_1_title">方式一：添加客服QQ直接支付</string>
     <string name="module_donate_method_1_desc">添加客服QQ %s 直接支付，客服会在QQ直接回复激活码。</string>
-    <string name="module_donate_method_2_title">方式二：微信/支付宝支付后发凭证给客服QQ</string>
-    <string name="module_donate_method_2_desc">通过微信/支付宝支付后，将带支付订单号的支付凭证发送给客服QQ %s，客服核对后回复激活码。</string>
+    <string name="module_donate_method_2_title">微信/支付宝支付后发凭证给客服QQ</string>
+    <string name="module_donate_method_2_desc">通过微信/支付宝支付后，将带支付订单号的支付凭证发送给客服QQ %s，客服核对后回复激活码。可点击右下方的按钮查看对应的付款码。</string>
     <string name="module_donate_method_1_action_hint">点击添加客服</string>
-    <string name="module_donate_method_2_action_hint">点击复制QQ</string>
+    <string name="module_donate_method_2_action_hint">点击添加客服</string>
+    <string name="module_donate_pay_qr">付款碼</string>
 
     <!-- Settings - History Versions -->
     <string name="settings_history_versions_title">歷史版本</string>

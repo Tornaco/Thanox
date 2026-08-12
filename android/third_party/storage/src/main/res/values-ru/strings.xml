@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ss_please_grant_storage_permission">Пожалуйста, предоставьте разрешения на чтение и запись для внешнего хранилища.</string>
+    <string name="ss_please_select_root_storage_primary">Чтобы предоставить доступ к хранилищу, пожалуйста, сначала выберите корневой путь к внутреннему хранилищу.</string>
+    <string name="ss_please_select_root_storage_primary_with_location">Чтобы предоставить доступ к хранилищу, пожалуйста, сначала выберите корневой путь к внутреннему хранилищу, расположенный в %s</string>
+    <string name="ss_please_select_root_storage_sdcard">Чтобы предоставить доступ к хранилищу, пожалуйста, сначала выберите корневой путь SD-карты.</string>
+    <string name="ss_please_select_root_storage_sdcard_with_location">Чтобы предоставить доступ к хранилищу, пожалуйста, сначала выберите корневой путь SD-карты, расположенный в %s</string>
+    <string name="ss_selecting_root_path_success_with_open_folder_picker">Теперь вы можете выбрать любые папки в разделе %s</string>
+    <string name="ss_selecting_root_path_success_without_open_folder_picker">Доступ к хранилищу был предоставлен для %s</string>
+    <string name="ss_storage_access_denied_confirm">У вас нет доступа на запись к этому хранилищу, поэтому выбирать эту папку бесполезно.
+        Хотели бы вы предоставить доступ к этому хранилищу, выбрав его корневой путь?</string>
+    <string name="ss_missing_saf_activity_handler">Storage Access Framework в данный момент недоступен.</string>
+    <string name="ss_storage_permission_permanently_disabled">Разрешение на хранение было отключено навсегда.
+        Вы хотите включить его в системных настройках?</string>
+    <string name="ss_please_select_base_path">Пожалуйста, выберите путь: %s</string>
+    <string name="ss_please_select_base_path_with_storage_type_primary">Пожалуйста, выберите внутреннее хранилище с указанием пути: %s</string>
+    <string name="ss_please_select_base_path_with_storage_type_sd_card">Пожалуйста, выберите SD-карту с указанием пути: %s</string>
+</resources>

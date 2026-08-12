@@ -78,7 +78,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
 
-    implementation(libs.storage)
+    implementation(project(":third_party:storage"))
 
     compileOnly(libs.libxposed.api)
 

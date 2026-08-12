@@ -30,7 +30,8 @@ preference = "1.2.1"
 recyclerview = "1.4.0"
 relinker = "1.4.5"
 rxjava = "2.2.21"
-storage = "2.2.2-SNAPSHOT"
+document-file = "1.0.1"
+fragment = "1.8.9"
 timber = "5.0.1"
 xcrash-android-lib = "3.1.0"
 tinypinyin = "3.0.0"
@@ -131,7 +132,6 @@ lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 relinker = { module = "com.getkeepsafe.relinker:relinker", version.ref = "relinker" }
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
-storage = { module = "com.anggrayudi:storage", version.ref = "storage" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 # Does not support 16KB
 xcrash-android-lib = { module = "com.iqiyi.xcrash:xcrash-android-lib", version.ref = "xcrash-android-lib" }
@@ -148,6 +148,9 @@ ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit"
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-runner" }
 
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+androidx-activity = { module = "androidx.activity:activity", version.ref = "activity-compose" }
+androidx-document-file = { module = "androidx.documentfile:documentfile", version.ref = "document-file" }
+androidx-fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
 # https://github.com/AmrDeveloper/CodeView
@@ -161,6 +164,7 @@ compose-material-icons-core = { module = "androidx.compose.material:material-ico
 compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-icon-ext" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose-ui" }
+compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose-ui" }
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose-ui" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-ui" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose-ui" }

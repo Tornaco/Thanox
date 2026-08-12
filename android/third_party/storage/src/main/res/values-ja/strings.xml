@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ss_please_grant_storage_permission">外部ストレージへの読み取りおよび書き込みを許可してください。</string>
+    <string name="ss_please_select_root_storage_primary">ストレージへのアクセスを許可するには、まず内部ストレージのルートパスを選択してください。</string>
+    <string name="ss_please_select_root_storage_primary_with_location">ストレージへのアクセスを許可するには、最初に％sにある内部ストレージのルートパスを選択してください</string>
+    <string name="ss_please_select_root_storage_sdcard">ストレージへのアクセスを許可するには、まずSDカードのルートパスを選択してください。</string>
+    <string name="ss_please_select_root_storage_sdcard_with_location">ストレージへのアクセスを許可するには、最初に％sにあるSDカードのルートパスを選択してください</string>
+    <string name="ss_selecting_root_path_success_with_open_folder_picker">これで%s以下の任意のフォルダを選択できるようになりました。</string>
+    <string name="ss_selecting_root_path_success_without_open_folder_picker">ストレージへのアクセスは%sに対して付与されています</string>
+    <string name="ss_storage_access_denied_confirm">このストレージへの書き込みが許可されていないため、このフォルダを選択しても意味がありません。
+        ルートパスを選択して、このストレージへのアクセスを許可しますか？</string>
+    <string name="ss_missing_saf_activity_handler">現在、ストレージアクセスフレームワークは利用できません。</string>
+    <string name="ss_storage_permission_permanently_disabled">ストレージ権限が永久に無効になっています。
+        システム設定から有効にしますか？</string>
+    <string name="ss_please_select_base_path">パスを選択してください：%s</string>
+    <string name="ss_please_select_base_path_with_storage_type_primary">パス：%sで内部ストレージを選択してください。</string>
+    <string name="ss_please_select_base_path_with_storage_type_sd_card">パス：%sでSDカードを選択してください。</string>
+</resources>

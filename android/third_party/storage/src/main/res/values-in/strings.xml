@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ss_please_grant_storage_permission">Berikan izin baca dan tulis pada media penyimpanan.</string>
+    <string name="ss_please_select_root_storage_primary">Untuk memberikan akses penyimpanan, pertama-tama silakan pilih jalur root dari penyimpanan internal.</string>
+    <string name="ss_please_select_root_storage_primary_with_location">Untuk memberikan akses penyimpanan, pertama-tama silakan pilih jalur root dari penyimpanan internal, terletak di %s</string>
+    <string name="ss_please_select_root_storage_sdcard">Untuk memberikan akses penyimpanan, pertama-tama silakan pilih jalur root dari kartu SD.</string>
+    <string name="ss_please_select_root_storage_sdcard_with_location">Untuk memberikan akses penyimpanan, pertama-tama silakan pilih jalur root dari kartu SD, terletak di %s</string>
+    <string name="ss_selecting_root_path_success_with_open_folder_picker">Sekarang kamu bisa memilih folder apapun di bawah %s</string>
+    <string name="ss_selecting_root_path_success_without_open_folder_picker">Akses penyimpanan sudah diberikan untuk %s</string>
+    <string name="ss_storage_access_denied_confirm">Kamu tidak punya akses tulis ke penyimpanan ini, sehingga tidak ada gunanya memilih folder ini.
+        Maukah kamu memberikan akses ke penyimpanan ini dengan memilih jalur root-nya?</string>
+    <string name="ss_missing_saf_activity_handler">Storage Access Framework tidak tersedia untuk saat ini.</string>
+    <string name="ss_storage_permission_permanently_disabled">Izin penyimpanan telah dinonaktifkan secara permanen.
+        Apakah Anda ingin mengaktifkannya di pengaturan sistem?</string>
+    <string name="ss_please_select_base_path">Silakan pilih jalur: %s</string>
+    <string name="ss_please_select_base_path_with_storage_type_primary">Silakan pilih penyimpanan internal dengan jalur: %s</string>
+    <string name="ss_please_select_base_path_with_storage_type_sd_card">Silakan pilih kartu SD dengan jalur: %s</string>
+</resources>

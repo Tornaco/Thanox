@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ss_please_grant_storage_permission">Please grant read and write permissions for external storage.</string>
+    <string name="ss_please_select_root_storage_primary">To grant storage access, please firstly select root path of internal storage.</string>
+    <string name="ss_please_select_root_storage_primary_with_location">To grant storage access, please firstly select root path of internal storage, located in %s</string>
+    <string name="ss_please_select_root_storage_sdcard">To grant storage access, please firstly select root path of SD card.</string>
+    <string name="ss_please_select_root_storage_sdcard_with_location">To grant storage access, please firstly select root path of SD card, located in %s</string>
+    <string name="ss_selecting_root_path_success_with_open_folder_picker">Now you can select any folders under %s</string>
+    <string name="ss_selecting_root_path_success_without_open_folder_picker">Storage access has been granted for %s</string>
+    <string name="ss_storage_access_denied_confirm">You have no write access to this storage, thus selecting this folder is useless.
+        Would you like to grant access to this storage by selecting its root path?</string>
+    <string name="ss_missing_saf_activity_handler">Storage Access Framework is currently not available.</string>
+    <string name="ss_storage_permission_permanently_disabled">Storage permission was disabled permanently.
+        Do you want to enable it from system settings?</string>
+    <string name="ss_please_select_base_path">Please select path: %s</string>
+    <string name="ss_please_select_base_path_with_storage_type_primary">Please select internal storage with path: %s</string>
+    <string name="ss_please_select_base_path_with_storage_type_sd_card">Please select SD card with path: %s</string>
+</resources>

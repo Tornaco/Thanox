@@ -45,6 +45,8 @@ include(":third_party:time-duration-picker")
 include(":third_party:remix")
 include(":third_party:compose-color-picker")
 include(":third_party:reorderable")
+include(":third_party:storage")
+include(":third_party:storage-compose")
 
 include(":android_framework:base")
 include(":android_framework:res")

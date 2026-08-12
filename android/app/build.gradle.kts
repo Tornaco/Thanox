@@ -212,7 +212,7 @@ dependencies {
     implementation(libs.lottie.compose)
     implementation(libs.lottie)
 
-    implementation(libs.storage)
+    implementation(project(":third_party:storage"))
 
     implementation(project(":modules:module_common"))
     implementation(project(":modules:module_filepicker"))

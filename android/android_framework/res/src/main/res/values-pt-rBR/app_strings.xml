@@ -1,0 +1,1619 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="service_default_notification_channel">Padrão</string>
+    <string name="service_silence_notification_channel">Silencioso</string>
+    <string name="service_important_notification_channel">Importante</string>
+
+    <string name="service_notification_override_thanos">Thanox</string>
+
+    <string name="service_notification_title_bg_restrict_process_changed">Processo a limpar</string>
+    <string name="service_notification_content_bg_restrict_process_changed">Os apps em segundo plano %1$s e %2$s podem ser limpos</string>
+    <string name="service_notification_bg_tasks_clean_complete">Alguns processos de apps em segundo plano foram limpos</string>
+    <string name="service_notification_action_bg_restrict_process_changed_clear">Limpar</string>
+    <string name="service_notification_action_bg_restrict_process_changed_view">Detalhes</string>
+
+    <string name="service_notification_title_op_start_remind">%1$s está usando a operação %2$s</string>
+
+    <string name="service_op_label_camera">Câmera</string>
+    <string name="service_op_label_record_audio">Gravar áudio</string>
+    <string name="service_op_label_play_audio">Reproduzir áudio</string>
+    <string name="service_op_label_location">Localização</string>
+    <string name="service_op_label_read_clipboard">Ler área de transferência</string>
+    <string name="service_op_label_write_clipboard">Gravar na área de transferência</string>
+    <string name="service_op_remind_prefix">Monitor de privacidade: </string>
+
+    <string name="service_toast_current_component_copied_to_clipboard">O conteúdo foi copiado para a área de transferência</string>
+
+    <string name="service_notification_title_need_restart">Reiniciar</string>
+    <string name="service_notification_message_need_restart">Reinicie o dispositivo o quanto antes</string>
+    <string name="service_notification_action_restart_now">Reiniciar agora</string>
+
+    <string name="service_notification_title_data_restore">Restauração de dados</string>
+    <string name="service_notification_message_data_restore_restore_component_states">Restaurando configurações de componentes do app</string>
+
+    <string name="service_notification_title_app_protect">Proteção de app</string>
+    <string name="service_notification_message_app_uninstall_blocked">A desinstalação/limpeza de %1$s foi impedida</string>
+    <string name="service_notification_message_app_clear_data_blocked">A desinstalação/limpeza dos dados do app %1$s foi impedida</string>
+    <string name="service_notification_message_app_update_blocked">A atualização do app %1$s foi impedida</string>
+
+    <string name="service_notification_title_thanox_active">O Thanox está ativo</string>
+    <string name="service_notification_message_thanox_active">O Thanox %1$s está em execução!</string>
+
+    <string name="service_notification_apply_auto_template_title">Aplicar modelo</string>
+    <string name="service_notification_apply_auto_template_message">A configuração do modelo foi aplicada para %s</string>
+
+    <string name="service_notification_message_thanox_app_enabled_on_create">Congelamento inteligente: %1$s foi ativado por solicitação de inicialização</string>
+
+    <string name="service_app_set_all">Todos</string>
+    <string name="service_app_set_system">Sistema</string>
+    <string name="service_app_set_system_uid">Núcleo do sistema</string>
+    <string name="service_app_set_3rd">Terceiros</string>
+    <string name="service_app_set_media">Mídia do sistema</string>
+    <string name="service_app_set_phone">Telefone do sistema</string>
+    <string name="service_app_set_web_provider">Provedor de WebView</string>
+    <string name="service_app_set_shortcut_proxy">Proxy de atalho</string>
+    <string name="service_app_set_white_listed">Na lista de permissões</string>
+    <string name="service_app_set_white_listed_user">Lista de permissões personalizada</string>
+    <string name="service_app_set_white_listed_user_description">Sua lista de permissões personalizada; estes apps serão excluídos da lista de apps em todas as páginas de recursos</string>
+    <string name="service_app_set_disabled">Desativado</string>
+
+    <string name="service_dialog_title_thanox_removed">Thanox desinstalado</string>
+    <string name="service_dialog_message_thanox_removed">Deseja manter os dados principais? Todos os dados serão removidos se você não quiser mantê-los.</string>
+    <string name="service_dialog_button_thanox_removed_keep_data">Manter</string>
+    <string name="service_dialog_button_thanox_removed_remove_data">Remover</string>
+
+    <string name="service_smart_freeze_app_freezed">Congelamento inteligente: congelando %s</string>
+    <string name="service_smart_freeze_app_unfreezed">Congelamento inteligente: descongelando %s</string>
+
+    <string name="billing_state_row_not_trust_title">Não confiável</string>
+    <string name="billing_state_row_not_trust_message">O Thanox pode ter vindo de instalações não confiáveis. As versões Pro estão disponíveis apenas na Google Play Store e não devem ser instaladas de nenhuma outra fonte. \n\nObservação: instalações não confiáveis podem fazer com que os dispositivos travem de forma anormal e causar a perda dos dados de configuração!!!
+</string>
+
+    <string name="app_select_activate_method">Qual método de ativação você prefere?</string>
+
+    <!--    Locker-->
+    <string name="module_locker_app_name">locker</string>
+    <string name="module_locker_verify_input_password">Desbloquear %1$s</string>
+    <string name="module_locker_menu_search">Pesquisar</string>
+
+    <string name="module_locker_title_settings">Configurações</string>
+    <string name="module_locker_title_security">Segurança</string>
+    <string name="module_locker_title_re_verify_on_screen_off">Verificar ao desligar a tela</string>
+    <string name="module_locker_title_re_verify_on_task_removed">Verificar ao remover a tarefa</string>
+    <string name="module_locker_title_re_verify_on_app_switch">Verificar ao alternar de app</string>
+    <string name="module_locker_title_verify_workaround_enabled">Ativar solução alternativa</string>
+    <string name="module_locker_summary_re_verify_on_screen_off">Quando a tela é bloqueada, os apps já desbloqueados serão bloqueados novamente.</string>
+    <string name="module_locker_summary_re_verify_on_task_removed">Quando a tarefa de um app é removida, por exemplo, quando o app é fechado na tela de tarefas recentes, o app será bloqueado novamente.</string>
+    <string name="module_locker_summary_re_verify_on_app_switch">Quando um app já desbloqueado vai para o segundo plano, ele será bloqueado novamente.</string>
+    <string name="module_locker_summary_white_list_components">As activities na lista de permissões não serão bloqueadas</string>
+    <string name="module_locker_title_white_list_components">Componentes permitidos</string>
+    <string name="module_locker_title_verify_method">Método de verificação</string>
+    <string name="module_locker_title_verify_system">Seguir o sistema</string>
+    <string name="module_locker_title_verify_custom_pattern">Padrão personalizado</string>
+    <string name="module_locker_title_verify_custom_pin">PIN personalizado</string>
+    <string name="module_locker_title_verify_custom_time">Fórmula de tempo personalizada</string>
+    <string name="module_locker_title_verify_custom_pattern_settings">Configurações do padrão</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_hide_line">Ocultar linhas do padrão</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_warn">Lembre-se da sua senha. Depois de definida, a senha não pode ser recuperada.</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_1">Desenhe o padrão</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_2">Desenhe o padrão novamente</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_mismatch">Os dois padrões não coincidem.</string>
+    <string name="module_locker_title_verify_custom_pattern_settings_draw_set_complete">O padrão foi definido</string>
+    <string name="module_locker_title_verify_custom_pin_settings">Configurações do PIN</string>
+    <string name="module_locker_title_verify_custom_pin_settings_warn">Lembre-se do seu PIN. Depois de definido, o PIN não pode ser recuperado.</string>
+    <string name="module_locker_title_verify_custom_pin_settings_input_1">Digite o PIN</string>
+    <string name="module_locker_title_verify_custom_pin_settings_input_2">Digite o PIN novamente</string>
+    <string name="module_locker_title_verify_custom_pin_settings_mismatch">Os dois PINs não coincidem.</string>
+    <string name="module_locker_title_verify_custom_pin_settings_complete">O PIN foi definido</string>
+    <string name="module_locker_verify_error_pin_mismatch">PIN incorreto. Tente novamente.</string>
+    <string name="module_locker_title_custom_hint">Dica personalizada</string>
+    <string name="module_locker_summary_custom_hint">Defina uma mensagem de dica personalizada para a verificação do bloqueio</string>
+    <string name="module_locker_summary_custom_time">Use a fórmula com o horário atual para gerar uma senha dinâmica</string>
+    <string name="module_locker_title_verify_custom_time_settings">Configurações da fórmula de tempo</string>
+    <string name="module_locker_title_verify_custom_time_settings_hint">Tokens suportados: yyyy, MM, dd, HH, hh, mm</string>
+    <string name="module_locker_title_verify_custom_time_settings_example">Exemplo: HHmm -&gt; 0930; yyyyMMddHHmm -&gt; 202510011325</string>
+    <string name="module_locker_title_verify_custom_time_settings_test">Testar</string>
+    <string name="module_locker_title_verify_custom_time_settings_preview">Resultado atual</string>
+    <string name="module_locker_title_verify_custom_time_settings_save">Salvar</string>
+    <string name="module_locker_title_verify_custom_time_settings_complete">A fórmula de tempo foi definida</string>
+    <string name="module_locker_title_verify_custom_time_settings_invalid">Segundos (ss) não são suportados</string>
+
+    <string name="module_locker_biometric_not_set_dialog_title">Defina uma senha</string>
+    <string name="module_locker_biometric_not_set_dialog_message">Antes de ativar o bloqueio de apps, acesse as configurações de segurança do sistema e conclua a configuração do reconhecimento facial, impressão digital, PIN ou senha padrão.</string>
+
+    <string-array name="module_locker_verify_method_entries">
+        <item>@string/module_locker_title_verify_system</item>
+        <item>@string/module_locker_title_verify_custom_pattern</item>
+        <item>@string/module_locker_title_verify_custom_pin</item>
+        <item>@string/module_locker_title_verify_custom_time</item>
+    </string-array>
+
+    <string-array name="module_locker_verify_method_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="module_ops2_app_ops_summaries">
+        <item>""</item>
+        <item>""</item>
+        <item>""</item>
+        <item>"Vibração"</item>
+        <item>"Ler contatos"</item>
+        <item>"Modificar contatos"</item>
+        <item>"Ler registros de chamadas"</item>
+        <item>"Modificar registros de chamadas"</item>
+        <item>"Ler agenda"</item>
+        <item>"Modificar agenda"</item>
+        <item>"Busca de WLAN"</item>
+        <item>"Notificações"</item>
+        <item>"Busca de rede móvel"</item>
+        <item>"Fazer chamadas"</item>
+        <item>"Ler SMS"</item>
+        <item>"Escrever SMS"</item>
+        <item>"Receber SMS"</item>
+        <item>"Receber SMS de emergência"</item>
+        <item>"Receber MMS"</item>
+        <item>"Receber mensagens WAP PUSH"</item>
+        <item>"Enviar SMS"</item>
+        <item>"Ler SMS do ICC"</item>
+        <item>"Escrever SMS no ICC"</item>
+        <item>"Modificar configurações"</item>
+        <item>"Exibir sobre outros apps"</item>
+        <item>"Acessar notificações"</item>
+        <item>"Câmera"</item>
+        <item>"Gravar áudio"</item>
+        <item>"Reproduzir áudio"</item>
+        <item>"Ler conteúdo da área de transferência"</item>
+        <item>"Modificar conteúdo da área de transferência"</item>
+        <item>"Botões de mídia"</item>
+        <item>"Foco de áudio"</item>
+        <item>"Volume principal"</item>
+        <item>"Volume de voz"</item>
+        <item>"Volume do toque"</item>
+        <item>"Volume de mídia"</item>
+        <item>"Volume do alarme"</item>
+        <item>"Volume de notificação"</item>
+        <item>"Volume do Bluetooth"</item>
+        <item>"Manter ativo"</item>
+        <item>"Monitorar localização"</item>
+        <item>"Monitorar serviços de localização de alto consumo"</item>
+        <item>"Obter estatísticas de uso"</item>
+        <item>"Ativar/silenciar microfone"</item>
+        <item>"Exibir saudação"</item>
+        <item>"Projetar mídia"</item>
+        <item>"Ativar VPN"</item>
+        <item>"Definir papel de parede"</item>
+        <item>"Estrutura de assistência"</item>
+        <item>"Captura de assistência"</item>
+        <item>"Ler estado do telefone"</item>
+        <item>"Adicionar correio de voz"</item>
+        <item>"Usar SIP"</item>
+        <item>"Gerenciar chamadas efetuadas"</item>
+        <item>"Impressão digital"</item>
+        <item>"Sensores corporais"</item>
+        <item>"Ler difusões de célula"</item>
+        <item>"Simular localização"</item>
+        <item>"Ler armazenamento"</item>
+        <item>"Gravar no armazenamento"</item>
+        <item>"Ligar a tela"</item>
+        <item>"Obter contas"</item>
+        <item>"Executar em segundo plano"</item>
+        <item>"Volume de acessibilidade"</item>
+
+        <item>Ler número de telefone</item>
+        <item>Solicitar instalação de aplicativos</item>
+        <item>Picture-in-picture</item>
+        <item>Início em primeiro plano de app instantâneo</item>
+        <item>Atender chamadas recebidas</item>
+        <item>Executar tarefas em segundo plano</item>
+        <item>Alterar estado da conexão Wi-Fi</item>
+        <item>Solicitar exclusão de pacote pelo instalador de pacotes</item>
+        <item>Vincular um serviço de acessibilidade</item>
+        <item>Continuar a transferência de uma chamada de outro app</item>
+        <item>Criar e gerenciar túneis IPsec</item>
+        <item>Qualquer app iniciar serviço em primeiro plano</item>
+        <item>Busca de Bluetooth</item>
+        <item>Usar as APIs BiometricPrompt/BiometricManager</item>
+        <item>Reconhecimento de atividade física</item>
+        <item>Leitura de SMS de app financeiro</item>
+        <item>Ler mídia do tipo áudio</item>
+        <item>Gravar mídia do tipo áudio</item>
+        <item>Ler mídia do tipo vídeo</item>
+        <item>Gravar mídia do tipo vídeo</item>
+        <item>Ler mídia do tipo imagem</item>
+        <item>Gravar mídia do tipo imagem</item>
+        <item>Tem uma visão legada (não isolada) do armazenamento</item>
+        <item>Usar recursos de acessibilidade</item>
+        <item>Ler informações do dispositivo (IMEI/MEID, IMSI, série do SIM/Build)</item>
+        <item>Acessar localização da mídia</item>
+        <item>Consultar todos os pacotes</item>
+        <item>Acessar todo o armazenamento externo</item>
+        <item>Interagir entre perfis</item>
+        <item>Ativar VPN da plataforma</item>
+        <item>Estatísticas de uso do carregador</item>
+        <item>Espaço reservado</item>
+        <item>Revogar permissões automaticamente se não usadas</item>
+        <item>Revogação automática gerenciada pelo instalador</item>
+        <item>Sem armazenamento isolado</item>
+    </string-array>
+
+    <string-array name="module_ops2_app_ops_labels">
+        <item>"Localização aproximada"</item>
+        <item>"Localização precisa"</item>
+        <item>"GPS"</item>
+        <item>"Vibração"</item>
+        <item>"Ler contatos"</item>
+        <item>"Modificar contatos"</item>
+        <item>"Ler registros de chamadas"</item>
+        <item>"Modificar registros de chamadas"</item>
+        <item>"Ler agenda"</item>
+        <item>"Modificar agenda"</item>
+        <item>"Localização"</item>
+        <item>"Enviar notificações"</item>
+        <item>"Localização"</item>
+        <item>"Fazer chamadas"</item>
+        <item>"Ler SMS/MMS"</item>
+        <item>"Escrever SMS/MMS"</item>
+        <item>"Receber SMS/MMS"</item>
+        <item>"Receber SMS/MMS"</item>
+        <item>"Receber SMS/MMS"</item>
+        <item>"Receber SMS/MMS"</item>
+        <item>"Enviar SMS/MMS"</item>
+        <item>"Ler SMS/MMS"</item>
+        <item>"Escrever SMS/MMS"</item>
+        <item>"Modificar configurações"</item>
+        <item>"Exibir sobre outros apps"</item>
+        <item>"Acessar notificações"</item>
+        <item>"Câmera"</item>
+        <item>"Gravar áudio"</item>
+        <item>"Reproduzir áudio"</item>
+        <item>"Ler conteúdo da área de transferência"</item>
+        <item>"Modificar conteúdo da área de transferência"</item>
+        <item>"Botões de mídia"</item>
+        <item>"Foco de áudio"</item>
+        <item>"Volume principal"</item>
+        <item>"Volume de voz"</item>
+        <item>"Volume do toque"</item>
+        <item>"Volume de mídia"</item>
+        <item>"Volume do alarme"</item>
+        <item>"Volume de notificação"</item>
+        <item>"Volume do Bluetooth"</item>
+        <item>"Manter ativo"</item>
+        <item>"Localização"</item>
+        <item>"Informações de localização"</item>
+        <item>"Obter estatísticas de uso"</item>
+        <item>"Ativar/silenciar microfone"</item>
+        <item>"Exibir saudação"</item>
+        <item>"Projetar mídia"</item>
+        <item>"Ativar VPN"</item>
+        <item>"Definir papel de parede"</item>
+        <item>"Estrutura de assistência"</item>
+        <item>"Captura de assistência"</item>
+        <item>"Ler estado do telefone"</item>
+        <item>"Adicionar correio de voz"</item>
+        <item>"Usar SIP"</item>
+        <item>"Gerenciar chamadas efetuadas"</item>
+        <item>"Impressão digital"</item>
+        <item>"Sensores corporais"</item>
+        <item>"Ler difusões de célula"</item>
+        <item>"Simular localização"</item>
+        <item>"Ler armazenamento"</item>
+        <item>"Gravar no armazenamento"</item>
+        <item>"Ligar a tela"</item>
+        <item>"Obter contas"</item>
+        <item>"Executar em segundo plano"</item>
+        <item>"Volume de acessibilidade"</item>
+        <item>Ler número de telefone</item>
+        <item>Instalar aplicativos</item>
+        <item>Picture-in-picture</item>
+        <item>Início em primeiro plano de app instantâneo</item>
+        <item>Atender chamadas recebidas</item>
+        <item>Executar tarefas em segundo plano</item>
+        <item>Alterar estado da conexão Wi-Fi</item>
+        <item>Solicitar exclusão de pacote pelo instalador de pacotes</item>
+        <item>Vincular um serviço de acessibilidade</item>
+        <item>Continuar a transferência de uma chamada de outro app</item>
+        <item>Criar e gerenciar túneis IPsec</item>
+        <item>Qualquer app iniciar serviço em primeiro plano</item>
+        <item>Busca de Bluetooth</item>
+        <item>Usar BiometricPrompt</item>
+        <item>Reconhecimento de atividade física</item>
+        <item>Leitura de SMS de app financeiro</item>
+        <item>Ler mídia do tipo áudio</item>
+        <item>Gravar mídia do tipo áudio</item>
+        <item>Ler mídia do tipo vídeo</item>
+        <item>Gravar mídia do tipo vídeo</item>
+        <item>Ler mídia do tipo imagem</item>
+        <item>Gravar mídia do tipo imagem</item>
+        <item>Tem uma visão legada do armazenamento</item>
+        <item>Usar recursos de acessibilidade</item>
+        <item>Ler informações do dispositivo</item>
+        <item>Acessar localização da mídia</item>
+        <item>Consultar todos os pacotes</item>
+        <item>Acessar todo o armazenamento externo</item>
+        <item>Interagir entre perfis</item>
+        <item>Ativar VPN da plataforma</item>
+        <item>Estatísticas de uso do carregador</item>
+        <item>Espaço reservado</item>
+        <item>Revogar permissões automaticamente se não usadas</item>
+        <item>Revogação automática gerenciada pelo instalador</item>
+        <item>Sem armazenamento isolado</item>
+    </string-array>
+
+    <string name="module_ops2_ops_list_title">Todas as permissões</string>
+    <string name="module_ops2_perm_state_allow">Permitir</string>
+    <string name="module_ops2_perm_state_deny">Negar</string>
+    <string name="module_ops2_perm_state_deny_summary">Negar permissões e não perguntar novamente</string>
+    <string name="module_ops2_perm_state_ignore">Ignorar</string>
+    <string name="module_ops2_perm_state_ignore_summary">Conceder a permissão, mas ignorar as operações ou retornar dados vazios</string>
+    <string name="module_ops2_perm_state_ask">Perguntar</string>
+    <string name="module_ops2_perm_state_foreground">Permitir durante o uso</string>
+    <string name="module_ops2_perm_state_default">Padrão</string>
+    <string name="module_ops2_perm_state_not_set">Não definido</string>
+    <string name="module_ops2_perm_state_unknown">Desconhecido</string>
+
+    <string name="active_method_chooser_summary_xposed_magisk">Para dispositivos com root, requer o framework Magisk ou LSPosed; o modo LSPosed oferece mais recursos, enquanto o modo Magisk tem relativamente menos recursos.</string>
+    <string name="active_method_chooser_summary_shizuku">Para dispositivos sem root, requer o Shizuku e a seleção do Thanox dentro do Shizuku; Observação: devido às restrições de permissão do sistema, o modo Shizuku tem recursos muito limitados.</string>
+
+    <string name="module_activity_trampoline_app_name">Trampolim de Activity</string>
+    <string name="module_activity_trampoline_app_name_abbr">Tramp. Activity</string>
+
+    <string name="module_activity_trampoline_app_not_installed">Não instalado</string>
+
+    <string name="module_activity_trampoline_edit_dialog_title">Editar</string>
+    <string name="module_activity_trampoline_add_dialog_title">Nova</string>
+    <string name="module_activity_trampoline_add_dialog_hint_from">Activity original</string>
+    <string name="module_activity_trampoline_add_dialog_hint_to">Substituir pela Activity</string>
+    <string name="module_activity_trampoline_add_dialog_hint_note">Observação</string>
+    <string name="module_activity_trampoline_add_dialog_delete">Excluir</string>
+
+    <string name="module_activity_trampoline_add_empty_component">Conteúdo vazio</string>
+    <string name="module_activity_trampoline_add_invalid_from_component">Erro no nome da activity original</string>
+    <string name="module_activity_trampoline_add_invalid_to_component">Erro no nome da activity de substituição</string>
+
+    <string name="module_activity_trampoline_title_pull_from_server">Obter algumas regras do serviço</string>
+    <string name="module_activity_trampoline_title_export_comp_replacements">Exportar minhas regras</string>
+    <string name="module_activity_trampoline_title_export_comp_replacement_item">Exportar esta regra</string>
+    <string name="module_activity_trampoline_title_import_comp_replacements">Importar regras</string>
+
+    <!-- Switch On/Off  -->
+    <string name="switch_on_text">Ativado</string>
+    <string name="switch_off_text">Desativado</string>
+
+    <string name="common_menu_title_batch_select">Seleção em lote</string>
+    <string name="common_menu_title_select_all">Marcar todos</string>
+    <string name="common_menu_title_un_select_all">Desmarcar todos</string>
+    <string name="common_menu_title_select_all_in_this_page">Marcar nesta página</string>
+    <string name="common_menu_title_un_select_all_in_this_page">Desmarcar nesta página</string>
+    <string name="common_menu_title_search">pesquisar</string>
+    <string name="common_menu_title_rename">Renomear</string>
+    <string name="common_menu_title_remove">Remover</string>
+    <string name="common_menu_title_uninstall">Desinstalar</string>
+    <string name="common_menu_title_wiki">Wiki</string>
+    <string name="common_menu_title_import_from_clipboard">Importar da área de transferência</string>
+    <string name="common_menu_title_import">Importar</string>
+    <string name="common_menu_title_re_import">Reimportar</string>
+    <string name="common_menu_title_update">Atualizar</string>
+    <string name="common_menu_title_export_to_clipboard">Exportar para a área de transferência</string>
+    <string name="common_fab_title_done">Concluído</string>
+    <string name="common_fab_title_add">Adicionar</string>
+    <string name="common_dialog_message_are_you_sure">Tem certeza? Cuidado!</string>
+
+    <string name="common_retry">Tentar novamente</string>
+    <string name="common_remember">Entendi</string>
+    <string name="common_tips">Dicas</string>
+    <string name="common_tips_qut">Dicas:</string>
+
+    <string name="common_badge_text_experiment">EXP</string>
+    <string name="common_experiment_feature_warning_message">Este é um recurso experimental e ainda não está estável. É recomendável fazer backup dos seus dados antes de ativar este recurso para evitar a perda de dados por bugs inesperados.</string>
+
+    <string name="common_toast_copied_to_clipboard">Copiado para a área de transferência</string>
+
+    <string name="app_state_disabled">Desativado</string>
+
+    <string name="chip_title_app_only_disabled">Desativado</string>
+    <string name="chip_title_app_only_enable">Ativado</string>
+    <string name="chip_title_app_only_running">Em execução</string>
+    <string name="chip_title_app_only_cloned_app">Clonado</string>
+
+    <string name="app_picker_title">Escolher app</string>
+
+    <string name="common_text_value_not_set">Não definido</string>
+
+    <string name="common_network_error">Rede indisponível. Verifique sua conexão com a internet.</string>
+    <string name="common_server_error">Erro no servidor. Tente novamente mais tarde.</string>
+    <string name="common_generic_error">Ops. Algo deu errado</string>
+
+    <string name="common_text_wait_a_moment">Aguarde um momento</string>
+
+    <string name="common_darg_sort">Arraste para ordenar</string>
+    <string name="common_sort_reverse">Inverter</string>
+    <string name="common_sort_by_default">Padrão</string>
+    <string name="common_sort_by_install_time">Data de instalação</string>
+    <string name="common_sort_by_update_time">Data de atualização</string>
+    <string name="common_sort_by_last_used_time">Último uso</string>
+    <string name="common_sort_by_total_used_time">Tempo total de uso</string>
+    <string name="common_sort_by_install_app_label">Nome do app</string>
+    <string name="common_sort_by_install_sdk_version">SDK de destino</string>
+    <string name="common_sort_by_install_apk_size">Tamanho do APK</string>
+    <string name="common_sort_by_install_app_uid">UID</string>
+
+    <string name="common_switchbar_title_format">Usar \"%s\"</string>
+    <string name="module_common_title_tools">Ferramentas</string>
+
+    <string name="module_common_error_occur">Ocorreu um erro</string>
+    <string name="module_common_copy_error_message">Copiar erro</string>
+
+    <string name="module_common_no_data">Sem dados</string>
+
+    <string name="module_common_user">Usuário %s</string>
+
+    <string-array name="module_common_export_selections">
+        <item>Área de transferência</item>
+        <item>Escolher um arquivo</item>
+    </string-array>
+
+
+    <string-array name="module_common_import_selections">
+        <item>Área de transferência</item>
+        <item>Escolher um arquivo</item>
+    </string-array>
+
+    <string-array name="themes_entry">
+        <item>Claro</item>
+        <item>Índigo claro</item>
+        <item>Vermelho claro</item>
+        <item>Verde claro</item>
+        <item>Âmbar claro</item>
+        <item>Preto claro</item>
+        <item>Oppo claro</item>
+        <item>Rosa claro</item>
+        <item>Escuro</item>
+        <item>Índigo escuro</item>
+        <item>Vermelho escuro</item>
+        <item>Âmbar escuro</item>
+        <item>Cinza escuro</item>
+        <item>Automático</item>
+        <item>Material You</item>
+    </string-array>
+
+    <string name="module_component_manager_disabled_by_thanox">Desativado pelo Thanox</string>
+    <string name="module_component_manager_component_running">Em execução</string>
+    <string name="module_component_manager_feature_desc">O Thanox usa a API do Android para desativar componentes, o que significa que os componentes desativados manterão seu estado mesmo que o Thanox seja desinstalado.\n\nO Thanox impedirá que os componentes desativados sejam reativados pelo app de origem, e você verá um selo [desativado-pelo-thanox] nesses componentes.</string>
+    <string name="module_component_manager_keep_service_smart_standby">Importar para a lista KEEP do modo de descanso inteligente</string>
+    <string name="module_component_manager_add_lock_white_list">Adicionar à lista de permissões do bloqueio de apps</string>
+    <string name="module_component_manager_click_header_to_select_all">Toque na categoria para selecionar tudo</string>
+    <string name="module_component_manager_safe_to_block">Seguro para bloquear</string>
+    <string name="module_component_manager_safe_to_block_tip">A regra vem do projeto de código aberto blocker-rules.</string>
+    <string name="module_component_manager_safe_to_block_select">Selecionar todos os componentes seguros segundo as regras do blocker</string>
+
+    <string name="nnf_new_folder">Nova pasta</string>
+    <string name="nnf_create_folder_error">Falha ao criar a pasta</string>
+    <string name="nnf_name">Nome</string>
+    <string name="nnf_select_something_first">Selecione algo primeiro</string>
+    <string name="nnf_need_valid_filename">Digite ou selecione um nome de arquivo válido</string>
+    <string name="nnf_permission_external_write_denied">Permissão para acessar o sistema de arquivos negada</string>
+    <string name="nnf_filename">Nome do arquivo</string>
+    <string name="nnf_list_ok">@android:string/ok</string>
+    <string name="nnf_list_cancel">@android:string/cancel</string>
+    <string name="nnf_new_folder_ok">@android:string/ok</string>
+    <string name="nnf_new_folder_cancel">@android:string/cancel</string>
+
+    <string name="module_notification_recorder_feature_title_notification_center">Central de notificações</string>
+    <string name="module_notification_recorder_feature_title_notification_recorder">Gravador</string>
+    <string name="module_notification_recorder_item_no_title">Sem título</string>
+    <string name="module_notification_recorder_item_type_toast">Toast</string>
+    <string name="module_notification_recorder_item_type_n">Notificação</string>
+    <string name="module_notification_recorder_item_type_clip">Área de transferência</string>
+    <string name="module_notification_recorder_item_no_content">Esta notificação não tem conteúdo</string>
+    <string name="module_notification_recorder_item_uninstalled_app">App desinstalado</string>
+    <string name="module_notification_recorder_total_message_count">%1$s notificações</string>
+    <string name="module_notification_recorder_clear_all">Limpar tudo</string>
+    <string name="module_notification_recorder_toady">Hoje</string>
+    <string name="module_notification_recorder_before_today">Anteriores</string>
+    <string name="module_notification_recorder_settings">Configurações</string>
+    <string name="module_notification_recorder_export">Exportar</string>
+    <string name="module_notification_recorder_export_dialog_message">Exportar todos os registros de notificação para a pasta Downloads</string>
+    <string name="module_notification_recorder_pref_summary_enable_toast_info">Mostrar informações do app na visualização do Toast</string>
+    <string name="module_notification_recorder_pref_title_enable_toast_info">Informações do Toast</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_n">Gravar notificações</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_t">Gravar Toasts</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_clip">Gravar área de transferência</string>
+    <string name="module_notification_recorder_pref_title_enable_nr_for_all_apps">Gravar todos os apps</string>
+    <string name="module_notification_recorder_reproduce">Reproduzir</string>
+    <string name="module_notification_recorder_zoom">Ampliar</string>
+    <string name="module_notification_recorder_yesterday">Ontem</string>
+    <string name="module_notification_recorder_the_day_before_yesterday">Anteontem</string>
+    <string name="module_notification_recorder_stats">Estatísticas</string>
+
+
+    <string-array name="module_ops_app_ops_summaries">
+        <item>localização aproximada</item>
+        <item>localização precisa</item>
+        <item>GPS</item>
+        <item>vibrar</item>
+        <item>ler contatos</item>
+        <item>modificar contatos</item>
+        <item>ler registro de chamadas</item>
+        <item>modificar registro de chamadas</item>
+        <item>ler agenda</item>
+        <item>modificar agenda</item>
+        <item>busca de Wi-Fi</item>
+        <item>notificação</item>
+        <item>busca de célula</item>
+        <item>fazer chamada</item>
+        <item>ler SMS</item>
+        <item>escrever SMS</item>
+        <item>receber SMS</item>
+        <item>receber SMS de emergência</item>
+        <item>receber MMS</item>
+        <item>receber WAP push</item>
+        <item>enviar SMS</item>
+        <item>ler SMS do ICC</item>
+        <item>escrever SMS no ICC</item>
+        <item>modificar configurações</item>
+        <item>exibir sobre outros apps</item>
+        <item>acessar notificações</item>
+        <item>câmera</item>
+        <item>gravar áudio</item>
+        <item>reproduzir áudio</item>
+        <item>ler área de transferência</item>
+        <item>modificar área de transferência</item>
+        <item>botões de mídia</item>
+        <item>foco de áudio</item>
+        <item>volume principal</item>
+        <item>volume de voz</item>
+        <item>volume do toque</item>
+        <item>volume de mídia</item>
+        <item>volume do alarme</item>
+        <item>volume de notificação</item>
+        <item>volume do Bluetooth</item>
+        <item>manter ativo</item>
+        <item>monitorar localização</item>
+        <item>monitorar localização de alto consumo</item>
+        <item>obter estatísticas de uso</item>
+        <item>ativar/silenciar microfone</item>
+        <item>mostrar toast</item>
+        <item>projetar mídia</item>
+        <item>ativar VPN</item>
+        <item>definir papel de parede</item>
+        <item>estrutura de assistência</item>
+        <item>captura de assistência</item>
+        <item>ler estado do telefone</item>
+        <item>adicionar correio de voz</item>
+        <item>usar sip</item>
+        <item>processar chamada efetuada</item>
+        <item>impressão digital</item>
+        <item>sensores corporais</item>
+        <item>ler difusões de célula</item>
+        <item>simular localização</item>
+        <item>ler armazenamento</item>
+        <item>gravar no armazenamento</item>
+        <item>ligar a tela</item>
+        <item>obter contas</item>
+        <item>executar em segundo plano</item>
+        <item>volume de acessibilidade</item>
+        <item>Ler número de telefone</item>
+        <item>Instalar pacotes</item>
+        <item>Picture-in-picture</item>
+        <item>Início em primeiro plano de app instantâneo</item>
+        <item>Atender chamadas recebidas</item>
+        <item>Executar jobs em segundo plano</item>
+        <item>Alterar estado de conectividade Wi-Fi</item>
+        <item>Solicitar exclusão de pacote pelo instalador de pacotes</item>
+        <item>Vincular um serviço de acessibilidade</item>
+        <item>Continuar a transferência de uma chamada de outro app</item>
+        <item>Criar e gerenciar túneis IPsec</item>
+        <item>Qualquer app iniciar serviço em primeiro plano</item>
+        <item>Busca de Bluetooth</item>
+
+        <item>Usar as APIs BiometricPrompt/BiometricManager</item>
+        <item>Reconhecimento de atividade física</item>
+        <item>Leitura de SMS de app financeiro</item>
+        <item>Ler mídia do tipo áudio</item>
+        <item>Gravar mídia do tipo áudio</item>
+        <item>Ler mídia do tipo vídeo</item>
+        <item>Gravar mídia do tipo vídeo</item>
+        <item>Ler mídia do tipo imagem</item>
+        <item>Gravar mídia do tipo imagem</item>
+        <item>Tem uma visão legada (não isolada) do armazenamento</item>
+        <item>Acessar recursos de acessibilidade</item>
+        <item>Ler os identificadores do dispositivo (IMEI / MEID, IMSI, série do SIM / Build)</item>
+
+        <item>Acessar localização da mídia</item>
+        <item>Consultar todos os pacotes</item>
+        <item>Acessar todo o armazenamento externo</item>
+        <item>Interagir entre perfis</item>
+        <item>VPN de plataforma ativa</item>
+        <item>Estatísticas de uso do carregador</item>
+        <item>Espaço reservado</item>
+        <item>Revogar permissões automaticamente se não usadas</item>
+        <item>Revogação automática gerenciada pelo instalador</item>
+        <item>Sem armazenamento isolado</item>
+
+        <item>Consultar informações de outros pacotes instalados pelo nome do pacote</item>
+        <item>Ajustar o brilho da tela</item>
+        <item>Obter apps instalados</item>
+        <item>Consultar activities de intent (LAUNCHER, geralmente usado para consultar apps instalados)</item>
+        <item>Acessar a localização do dispositivo</item>
+        <item>Receber eventos de sensor; lembre-se de selecionar o app alvo no escopo do framework Xposed</item>
+    </string-array>
+
+    <string-array name="module_ops_app_ops_labels">
+        <item>Localização</item>
+        <item>Localização</item>
+        <item>Localização</item>
+        <item>Vibrar</item>
+        <item>Ler contatos</item>
+        <item>Modificar contatos</item>
+        <item>Ler registro de chamadas</item>
+        <item>Modificar registro de chamadas</item>
+        <item>Ler agenda</item>
+        <item>Modificar agenda</item>
+        <item>Localização</item>
+        <item>Enviar notificação</item>
+        <item>Localização</item>
+        <item>Fazer chamada</item>
+        <item>Ler SMS/MMS</item>
+        <item>Escrever SMS/MMS</item>
+        <item>Receber SMS/MMS</item>
+        <item>Receber SMS/MMS</item>
+        <item>Receber SMS/MMS</item>
+        <item>Receber SMS/MMS</item>
+        <item>Enviar SMS/MMS</item>
+        <item>Ler SMS/MMS</item>
+        <item>Escrever SMS/MMS</item>
+        <item>Modificar configurações</item>
+        <item>Exibir sobre outros apps</item>
+        <item>Acessar notificações</item>
+        <item>Câmera</item>
+        <item>Gravar áudio</item>
+        <item>Reproduzir áudio</item>
+        <item>Ler área de transferência</item>
+        <item>Modificar área de transferência</item>
+        <item>Botões de mídia</item>
+        <item>Foco de áudio</item>
+        <item>Volume principal</item>
+        <item>Volume de voz</item>
+        <item>Volume do toque</item>
+        <item>Volume de mídia</item>
+        <item>Volume do alarme</item>
+        <item>Volume de notificação</item>
+        <item>Volume do Bluetooth</item>
+        <item>Manter ativo</item>
+        <item>Localização</item>
+        <item>Localização</item>
+        <item>Obter estatísticas de uso</item>
+        <item>Ativar/silenciar microfone</item>
+        <item>Mostrar toast</item>
+        <item>Projetar mídia</item>
+        <item>Ativar VPN</item>
+        <item>Definir papel de parede</item>
+        <item>Estrutura de assistência</item>
+        <item>Captura de assistência</item>
+        <item>Ler estado do telefone</item>
+        <item>Adicionar correio de voz</item>
+        <item>Usar sip</item>
+        <item>Processar chamada efetuada</item>
+        <item>Impressão digital</item>
+        <item>Sensores corporais</item>
+        <item>Ler difusões de célula</item>
+        <item>Simular localização</item>
+        <item>Ler armazenamento</item>
+        <item>Gravar no armazenamento</item>
+        <item>Ligar a tela</item>
+        <item>Obter contas</item>
+        <item>Executar em segundo plano</item>
+        <item>Volume de acessibilidade</item>
+        <item>Ler número de telefone</item>
+        <item>Instalar pacotes</item>
+        <item>Picture-in-picture</item>
+        <item>Início em primeiro plano de app instantâneo</item>
+        <item>Atender chamadas recebidas</item>
+        <item>Executar jobs em segundo plano</item>
+        <item>Alterar estado de conectividade Wi-Fi</item>
+        <item>Solicitar exclusão de pacote pelo instalador de pacotes</item>
+        <item>Vincular um serviço de acessibilidade</item>
+        <item>Continuar a transferência de uma chamada de outro app</item>
+        <item>Criar e gerenciar túneis IPsec</item>
+        <item>Qualquer app iniciar serviço em primeiro plano</item>
+        <item>Busca de Bluetooth</item>
+
+        <item>Usar BiometricPrompt</item>
+        <item>Reconhecimento de atividade física</item>
+        <item>Leitura de SMS de app financeiro</item>
+        <item>Ler mídia do tipo áudio</item>
+        <item>Gravar mídia do tipo áudio</item>
+        <item>Ler mídia do tipo vídeo</item>
+        <item>Gravar mídia do tipo vídeo</item>
+        <item>Ler mídia do tipo imagem</item>
+        <item>Gravar mídia do tipo imagem</item>
+        <item>Tem uma visão legada do armazenamento</item>
+        <item>Acessar recursos de acessibilidade</item>
+        <item>Ler os identificadores do dispositivo</item>
+
+        <item>Acessar localização da mídia</item>
+        <item>Consultar todos os pacotes</item>
+        <item>Acessar todo o armazenamento externo</item>
+        <item>Interagir entre perfis</item>
+        <item>VPN de plataforma ativa</item>
+        <item>Estatísticas de uso do carregador</item>
+        <item>Espaço reservado</item>
+        <item>Revogar permissões automaticamente se não usadas</item>
+        <item>Revogação automática gerenciada pelo instalador</item>
+        <item>Sem armazenamento isolado</item>
+
+        <item>Obter informações do pacote</item>
+        <item>Brilho da tela</item>
+        <item>Obter apps instalados</item>
+        <item>Consultar activities de intent</item>
+        <item>Localização</item>
+        <item>Receber evento de sensor</item>
+    </string-array>
+
+    <string name="module_ops_category_location">Localização</string>
+    <string name="module_ops_category_personal">Pessoal</string>
+    <string name="module_ops_category_message">Mensagens</string>
+    <string name="module_ops_category_media">Mídia</string>
+    <string name="module_ops_category_device">Dispositivo</string>
+    <string name="module_ops_category_bg">Segundo plano</string>
+    <string name="module_ops_category_remaining">Outros</string>
+    <string name="module_ops_category_thanox">Thanox</string>
+
+    <string name="module_ops_title_op_remind_apps">Apps monitorados</string>
+
+    <string name="module_ops_title_reset_ops_mode_for_all">Redefinir tudo</string>
+
+    <string name="module_ops_feature_title_app_ops_list">Operações de app</string>
+    <string name="module_ops_feature_summary_app_ops_list">Por app</string>
+    <string name="module_ops_activity_title_app_ops_list">Por app</string>
+
+    <string name="module_ops_feature_title_a_manage">Gerenciar activities</string>
+    <string name="module_ops_feature_title_s_manage">Gerenciar serviços</string>
+    <string name="module_ops_feature_title_r_manage">Gerenciar receivers</string>
+    <string name="module_ops_feature_title_p_manage">Gerenciar providers</string>
+
+    <string name="module_ops_feature_title_block_uninstall">Impedir desinstalação</string>
+    <string name="module_ops_feature_title_block_clear_data">Impedir limpeza de dados</string>
+    <string name="module_ops_feature_title_block_update">Impedir atualização do app</string>
+
+    <string name="module_ops_feature_title_thanox_ops">Operações do Thanox</string>
+    <string name="module_ops_feature_title_ops_app_list">Operações de app</string>
+    <string name="module_ops_feature_summary_ops_app_list">Por operação</string>
+    <string name="module_ops_activity_title_ops_app_list">Por operação（%s）</string>
+
+    <string name="module_ops_feature_title_ops_remind_list">Monitor de privacidade</string>
+    <string name="module_ops_feature_summary_ops_remind">Avisa durante a operação</string>
+
+    <string name="module_ops_mode_allow">Permitir</string>
+    <string name="module_ops_mode_foreground">Permitir em primeiro plano</string>
+    <string name="module_ops_mode_ignore">Ignorar</string>
+    <string name="module_ops_mode_all">Todos</string>
+
+    <string name="module_ops_mode_allow_all">Permitir tudo</string>
+    <string name="module_ops_mode_foreground_all">Permitir tudo em primeiro plano</string>
+    <string name="module_ops_mode_ignore_all">Ignorar tudo</string>
+    <string name="module_ops_mode_ask_all">Perguntar tudo</string>
+
+    <string name="module_profile_feature_name">Perfil</string>
+    <string name="module_profile_feature_summary">Executa ações personalizadas se a condição especificada for atendida</string>
+
+    <string name="module_profile_title_global_var">Variável global</string>
+    <string name="module_profile_title_rule_engine">Motor</string>
+    <string name="module_profile_title_action_console" translatable="false">Action Console</string>
+    <string name="module_profile_title_log" translatable="false">Log</string>
+
+    <string name="module_profile_summary_rule_engine">O motor é uma ferramenta para publicar fatos. O Thanox tem vários publicadores ativados por padrão. Os motores a seguir podem ser ativados ou desativados. Preste atenção à descrição do motor; desligar o motor pode fazer com que alguns perfis não sejam acionados ou executados normalmente</string>
+    <string name="module_profile_pref_title_rule_engine_automation">Automação</string>
+    <string name="module_profile_pref_summary_rule_engine_automation">Permite executar cliques automáticos e localizar views. \n\n📢
+        Observação: este motor pode fazer com que o serviço de acessibilidade de alguns apps não funcione</string>
+    <string name="module_profile_pref_title_rule_engine_push">Push</string>
+    <string name="module_profile_pref_summary_rule_engine_push">Publica fatos sobre a chegada de mensagens push</string>
+
+    <string name="module_profile_pref_title_rule_engine_su">API su</string>
+    <string name="module_profile_pref_summary_rule_engine_su">Ative o suporte à API su para o perfil do Thanox. Toque em Permitir na solicitação de superpermissão que aparecer. Se nenhuma solicitação for recebida, ative manualmente a permissão de superusuário. \nO comando su será executado como o aplicativo Thanox. \nPermita que o app Thanox inicie em segundo plano</string>
+    <string name="module_profile_pref_title_rule_engine_custom_su">su personalizado</string>
+    <string name="module_profile_pref_summary_rule_engine_custom_su">Você pode alterar o caminho padrão do su informando um caminho personalizado</string>
+
+    <string name="module_profile_should_enable_su">Este perfil pode não funcionar porque o suporte à <b>API su</b> não está ativado. Acesse as Configurações do motor para ativá-lo</string>
+    <string name="module_profile_should_enable_push">Este perfil pode não funcionar porque o <b>Motor de mensagens push</b> não está ativado. Acesse as Configurações do motor para ativá-lo</string>
+    <string name="module_profile_miss_global_var">Este perfil pode não funcionar porque a variável global abaixo está ausente. Você precisa criar estas variáveis.\n%s</string>
+    <string name="module_profile_block_thread">Este perfil pode chamar Thread.sleep, o que pode bloquear a execução de outros perfis; ajuste a prioridade deste perfil para um número negativo para que ele seja executado em uma nova thread.</string>
+
+    <string name="module_profile_pref_title_rule_engine_shortcut">Criar atalho</string>
+    <string name="module_profile_pref_summary_rule_engine_shortcut">Cria um atalho na tela inicial; quando este atalho for iniciado, o Thanox publicará um fato com o valor de fato do atalho</string>
+
+    <string name="module_profile_pref_title_rule_engine_date_time">Data e hora</string>
+    <string name="module_profile_pref_summary_rule_engine_date_time">Agende tarefas repetidas ou programadas</string>
+    <string name="module_profile_date_time_regular_interval">Intervalo regular</string>
+    <string name="module_profile_date_time_alarm">Horário do dia</string>
+    <string name="module_profile_date_time_tag">A tag é usada para a verificação de condição. \nExemplo de uso: %s</string>
+    <string name="module_profile_date_time_min_interval">O intervalo mínimo é de 15m</string>
+
+    <string name="module_profile_rule_edit_action_save">Salvar</string>
+    <string name="module_profile_rule_edit_action_discard">Descartar</string>
+    <string name="module_profile_rule_edit_action_text_size_inc">Aumentar</string>
+    <string name="module_profile_rule_edit_action_text_size_dec">Diminuir</string>
+
+    <string name="module_profile_rule_wiki">Wiki</string>
+    <string name="module_profile_rule_impor_from_file">Importar de arquivo</string>
+    <string name="module_profile_rule_impor_example">Importar exemplos</string>
+    <string name="module_profile_rule_online">Ver perfis online</string>
+
+    <string name="module_profile_rule_edit">Editar</string>
+    <string name="module_profile_rule_new">Novo</string>
+    <string name="module_profile_rule_example"></string>
+
+    <string name="module_profile_editor_select_format">Escolher formato</string>
+    <string name="module_profile_editor_save_success">Salvo com sucesso, você pode ativá-lo</string>
+    <string name="module_profile_editor_save_check_error">Conteúdo inválido</string>
+
+    <string name="module_profile_editor_discard_dialog_title">Descartar</string>
+    <string name="module_profile_editor_discard_dialog_message">Tem certeza?</string>
+
+    <string name="module_profile_editor_delete_dialog_title">Excluir</string>
+    <string name="module_profile_editor_delete_dialog_message">Tem certeza?</string>
+
+    <string name="module_profile_edit_delete">Excluir</string>
+    <string name="module_profile_edit_show_hide_symbols">Barra de símbolos</string>
+
+    <string name="module_profile_edit_var_title_hint">Digite o nome</string>
+    <string name="module_profile_var_list_item_size">%s variáveis</string>
+    <string name="module_profile_title_shortcut_fact_value">Valor de fato</string>
+    <string name="module_profile_title_shortcut_label">Rótulo do atalho</string>
+
+    <string name="module_profile_rule_format_tips_title">Dicas de formato</string>
+    <string name="module_profile_rule_format_tips_message">O campo <b>name</b> deve usar combinações alfanuméricas sempre que possível, e nenhum caractere especial deve aparecer; \n\nqualquer caractere pode ser usado no campo <b>description</b>; apenas descreva brevemente a finalidade deste cenário</string>
+
+    <string name="module_profile_add_to_global_var">Adicionar à variável global</string>
+
+    <string name="module_push_message_delegate_title_wechat">WeChat</string>
+    <string name="module_push_message_delegate_title_wechat_proxy">Push do WeChat</string>
+    <string name="module_push_message_delegate_title_summary_proxy">Você pode instalar o app WeChat pela Google Play Store</string>
+    <string name="module_push_message_delegate_title_sound">Som</string>
+    <string name="module_push_message_delegate_title_vibrate">Vibrar</string>
+    <string name="module_push_message_delegate_title_content">Mostrar conteúdo da mensagem</string>
+    <string name="module_push_message_delegate_title_mock">Simular</string>
+    <string name="module_push_message_delegate_title_skip_if_running">Ignorar notificação</string>
+    <string name="module_push_message_delegate_summary_skip_if_running">Não enviar notificação push se o app alvo estiver em execução</string>
+    <string name="module_push_message_delegate_title_start_app">Iniciar processo do app</string>
+    <string name="module_push_message_delegate_summary_start_app">Inicia o processo do app se o app alvo não estiver em execução</string>
+    <string name="module_push_message_delegate_title_gcm_diag">Diagnóstico</string>
+    <string name="module_push_message_delegate_notice_wechat_proxy">Observe que a função de coleta está atualmente em fase experimental e serve apenas para estudo e pesquisa. No momento, ninguém pode garantir que o push será recebido 100% das vezes.</string>
+
+    <string name="app_description" translatable="false">I am Thanos! 😈👌</string>
+    <string name="privacy_agreement_file">privacy/privacy_agreement_en.html</string>
+
+
+    <string name="status_active">Ativo</string>
+    <string name="status_not_active">Inativo</string>
+    <string name="message_active_needed">Ative o Thanox no app Xposed Manager e reinicie o dispositivo</string>
+    <string name="status_need_reboot">Reiniciar</string>
+    <string name="title_framework_error">Erro no framework</string>
+    <string name="message_framework_error">Há um erro no framework do Thanox. Reporte os logs em /data/system/thanos_xxx/log ao desenvolvedor.</string>
+
+    <string name="title_multiple_patch_applied_error">Vários patches aplicados</string>
+    <string name="message_multiple_patch_applied_error">Você só precisa aplicar um patch para ativar o Thanox, mas aplicou vários patches ao mesmo tempo: %s; leia atentamente o guia de uso</string>
+
+    <string name="nav_title_boost">Boost</string>
+    <string name="nav_title_secure">Privacidade</string>
+    <string name="nav_title_settings">Configurações</string>
+    <string name="nav_title_feedback">Feedback</string>
+    <string name="nav_title_exp">Extensão</string>
+    <string name="nav_title_plugin">Plugin</string>
+    <string name="nav_title_plugin_repo">Repositório de plugins</string>
+
+    <string name="pref_title_feature_toggle">Ativar recursos</string>
+
+    <string name="priv_title_fields_template">Modelos</string>
+    <string name="priv_title_fields_usage_count">Selecionado para %s apps</string>
+    <string name="priv_title_fields_usage_count_noop">Não usado</string>
+
+    <string name="title_package_sets">Conjuntos de pacotes</string>
+    <string name="title_package_add_set">Adicionar conjunto de pacotes</string>
+    <string name="title_package_edit_set">Ver e editar</string>
+    <string name="title_package_delete_set">Excluir</string>
+    <string name="title_package_count_set">%s apps</string>
+
+    <string name="title_batch_tools">Ferramentas em lote</string>
+    <string name="title_batch_tools_apply_config_template">Aplicar modelo de configuração em lote</string>
+
+    <string name="dialog_title_plugin_installing">Instalando plugin</string>
+    <string name="dialog_title_plugin_updating">Atualizando plugin</string>
+    <string name="dialog_title_plugin_uninstalling">Desinstalando plugin</string>
+    <string name="dialog_title_plugin_uninstall_confirm">Tem certeza de que deseja desinstalar este plugin?</string>
+    <string name="menu_title_uninstall_plugin">Desinstalar</string>
+    <string name="menu_title_view_plugin_info">Detalhes</string>
+
+    <string name="title_download">Baixar</string>
+    <string name="title_install">Instalar</string>
+
+    <string name="tile_category_plugin_installed">Instalado</string>
+    <string name="tile_category_plugin_already_installed">A instalação atual não pode ser sobrescrita; desinstale e reinstale.</string>
+    <string name="tile_category_plugin_update_available">Nova versão disponível</string>
+
+    <string name="tile_su_plugin_deprecated">O plugin su Enabler foi descontinuado; agora você não precisa instalar o plugin su. Você pode ativar o suporte à API su diretamente nas Configurações do motor do Perfil</string>
+
+    <string name="card_title_plugin_available">Instalar plugin do Thanox</string>
+    <string name="card_message_plugin_available">Os plugins consistem em algumas funções instáveis ou não essenciais.</string>
+
+    <string name="dialog_message_feedback">Você pode enviar relatos de feedback nos grupos de chat na seção Configurações-Sobre ou no GitHub/Thanox. Ao enviar feedback, inclua as seguintes informações essenciais: \n\n1. Descrição clara do problema com capturas de tela ou gravações de tela. \n2. Arquivos de log exportados tocando no botão abaixo. \n\nAmbas as informações são necessárias.</string>
+    <string name="feedback_export_log">Exportar log</string>
+    <string name="feedback_export_log_success">O log foi exportado</string>
+    <string name="feedback_export_log_fail">Falha ao exportar o log; conceda a permissão de armazenamento manualmente e tente novamente</string>
+
+    <string name="title_no_plugins_installed">Nenhum plugin disponível</string>
+    <string name="title_plugin_reboot_take_effect">Reinicie para que as alterações tenham efeito.</string>
+
+    <string name="title_show_current_activity">Activity atual</string>
+    <string name="title_net_stats">Estatísticas de rede</string>
+    <string name="message_reboot_needed">Reinicie o dispositivo para atualizar o thanox-core</string>
+    <string name="reboot_now">Reiniciar agora</string>
+    <string name="reboot_later">Agora não</string>
+
+    <string name="legacy_ops_feature_summary">As configurações de gerenciamento de permissões do Thanox são independentes do controle de permissões integrado do sistema. Portanto, se a permissão for negada em qualquer um dos lugares, ela é considerada negada.
+Aviso de compatibilidade: se a função padrão de gerenciamento de permissões não for compatível com o seu dispositivo, você pode ativar o gerenciamento de permissões da nova versão nas configurações para experimentar.</string>
+    <string name="new_ops_feature">Novo recurso de operações</string>
+    <string name="new_ops_feature_summary">Teste o NOVO recurso de gerenciamento de permissões. As configurações da nova versão são sincronizadas com o sistema Android</string>
+
+    <string name="badge_app_running">Em execução</string>
+    <string name="badge_app_idle">Inativo</string>
+
+    <string name="boost_status_running_apps">&#160;em execução</string>
+    <string name="boost_status_blocked_start_count">Bloqueou %s solicitações de inicialização de apps</string>
+    <string name="boost_status_mem_usage_percent">Memória  %s</string>
+    <string name="boost_status_swap_usage_percent">Swap  %s</string>
+    <string name="boost_status_available">Disp. %s</string>
+    <string name="boost_status_not_enabled">Não ativado</string>
+
+    <string name="secure_privacy_enabled_apps">apps foram restringidos</string>
+    <string name="secure_privacy_request_count">Tratou %s solicitações de dados de privacidade de apps</string>
+
+    <string name="boost_status_system_memory">Memória</string>
+    <string name="boost_status_system_storage">Armazenamento</string>
+
+    <string name="feature_category_start_manage">Inicialização</string>
+    <string name="feature_title_one_key_boost">Boost com um toque</string>
+    <string name="feature_title_one_key_boost_abbr">Boost</string>
+    <string name="feature_title_start_restrict">Inicialização em segundo plano</string>
+    <string name="feature_title_start_restrict_abbr">Início BG</string>
+    <string name="feature_desc_start_restrict">Permite que os apps iniciem a partir do segundo plano</string>
+    <string name="feature_title_bg_restrict">Tarefa em segundo plano</string>
+    <string name="feature_title_bg_restrict_abbr">Tarefa BG</string>
+    <string name="feature_desc_bg_restrict_brief">Permite que os apps sejam executados em segundo plano</string>
+    <string name="feature_desc_bg_restrict">Quando o recurso \"Tarefa em segundo plano\" está ativado, o Thanox executa uma limpeza de processos depois que a tela é desligada. Permita que os apps selecionados continuem em execução mesmo com a tela bloqueada e exclua esses apps do boost com um toque</string>
+
+    <string name="menu_title_start_restrict_charts">Registro de inicialização</string>
+    <string name="menu_title_rules">Regras</string>
+
+    <string name="feature_summary_start_restrict_rules">Você pode refinar o controle de inicialização associada criando regras. Para mais detalhes, consulte o manual para iniciantes. \n\nObservação: a prioridade da regra é maior que a de todas as outras configurações (por exemplo, hibernação, lista de inicialização associada). \n\n Dica: desativar a verificação de regras pode economizar bateria do dispositivo.</string>
+    <string name="feature_summary_standby_restrict_rules">Você pode controlar quais serviços manter; uso: KEEP $NOME-DO-COMPONENTE  \nex.: KEEP xxx/.XService</string>
+
+    <string name="feature_category_app_clean_up">Limpeza</string>
+    <string name="feature_title_clean_when_task_removed">Limpar tarefas</string>
+    <string name="feature_desc_clean_when_task_removed">Limpa os processos em segundo plano dos apps selecionados quando eles são fechados nas tarefas recentes</string>
+    <string name="feature_desc_clean_when_task_removed_brief">Limpar processo em segundo plano ao remover a tarefa</string>
+
+    <string name="activity_title_start_restrict">Inicialização em segundo plano</string>
+    <string name="activity_title_bg_restrict">Tarefa em segundo plano</string>
+    <string name="activity_title_clean_when_task_removed">Limpar tarefas</string>
+
+    <string name="feature_title_process_manage">Gerenciador de processos</string>
+    <string name="activity_title_process_manage">Em execução（%s）</string>
+    <string name="item_summary_process_count">%s processos</string>
+    <string name="item_summary_mem_size">%s</string>
+    <string name="snack_process_update_message">A lista de processos mudou, atualize</string>
+    <string name="snack_process_update_refresh">Atualizar</string>
+    <string name="title_cached_background_process">Processos em segundo plano em cache</string>
+
+    <string name="feature_category_app_manage">Apps</string>
+    <string name="feature_title_apps_manager">Gerenciador de apps</string>
+    <string name="activity_title_apps_manager">Gerenciador de apps</string>
+    <string name="feature_summary_apps_manager">Gerenciamento e configuração por app</string>
+    <string name="titile_suggested_apps_recent_used">Apps usados recentemente</string>
+    <string name="title_suggested_apps_view_all">Mostrar todos os apps</string>
+
+    <string name="feature_category_privacy">Privacidade</string>
+    <string name="feature_category_manage">Gerenciar</string>
+    <string name="feature_category_protect">Proteção</string>
+    <string name="feature_category_remind">Lembrete</string>
+    <string name="feature_category_misc">Diversos</string>
+
+    <string name="feature_title_recent_task_blur">Desfoque de tarefas</string>
+    <string name="feature_summary_recent_task_blur">Adiciona efeito de desfoque às tarefas recentes</string>
+
+    <string name="feature_title_wakelock_blocker">Bloqueador de Wakelock</string>
+    <string name="wakelock_state_holding">Ativo</string>
+    <string name="wakelock_view_held_only">Apenas ativos</string>
+    <string name="wakelock_count">%s wakelocks</string>
+
+    <string name="feature_title_app_lock">Bloqueio de apps</string>
+    <string name="feature_summary_app_lock">Exibe a tela de bloqueio antes de abrir o app</string>
+
+    <string name="feature_category_notification">Notificação</string>
+    <string name="feature_title_light_on_notification">Acender tela</string>
+    <string name="feature_summary_light_on_notification">Acende a tela ao receber uma nova notificação</string>
+    <string name="feature_title_push_delegate">Delegado de push</string>
+
+    <string name="feature_category_plugins">Recursos disponíveis</string>
+
+    <string name="feature_category_ext">Extensão</string>
+    <string name="feature_category_power_save">Energia</string>
+    <string name="feature_title_smart_app_standby">Modo X</string>
+    <string name="feature_summary_smart_app_standby">Afeta o app selecionado. Quando o app retorna ao segundo plano, todos os serviços são automaticamente parados ou colocados em modo inativo; se algum serviço precisar ser excluído, use regras personalizadas.</string>
+
+    <string name="feature_summary_smart_app_standby_brief">Parar serviço ou deixar inativos os apps em segundo plano</string>
+
+    <string name="feature_category_apps">Apps</string>
+    <string name="menu_title_smart_app_freeze_enable_all_smart_freeze_apps">Remover e descongelar todos os listados</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_smart_freeze_apps">Descongelar todos os apps do Congelamento Inteligente e removê-los da lista. Tem certeza de que deseja fazer isso?</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps_smart_freeze_temp">Descongelar temporariamente todos os listados</string>
+    <string name="menu_title_smart_app_freeze_export_package_list">Exportar lista de apps</string>
+    <string name="menu_title_smart_app_freeze_import_package_list">Importar lista de apps</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps_smart_freeze_temp">Descongelar temporariamente todos os apps da lista do Congelamento Inteligente. Tem certeza de que deseja fazer isso?</string>
+    <string name="menu_title_smart_app_freeze_enable_all_apps">Descongelar todos os apps</string>
+    <string name="menu_desc_smart_app_freeze_enable_all_apps">Vai descongelar todos os apps desativados ou suspensos no seu dispositivo, incluindo todos os apps instalados ou do sistema. Tem certeza de que deseja fazer isso?</string>
+    <string name="feature_title_smart_app_freeze">Congelamento Inteligente</string>
+    <string name="feature_title_enable_package_on_launch">DOL</string>
+    <string name="feature_summary_enable_package_on_launch">Descongelar o app ao receber uma solicitação de inicialização de activity</string>
+    <string name="pref_title_enable_package_on_launch_by_default">Ativar DOL</string>
+    <string name="pref_title_dol_tips">Mostrar dicas do DOL</string>
+    <string name="pref_summary_enable_package_on_launch_by_default">Ativa o \"DOL\" quando o app é adicionado à lista do Congelamento Inteligente</string>
+    <string name="feature_summary_smart_app_freeze">Desativa apps automaticamente conforme o perfil</string>
+    <string name="feature_desc_smart_app_freeze">Observação: o congelamento de apps usa um recurso integrado do Android. Isso significa que, mesmo que o Thanox seja desinstalado, esses efeitos permanecerão.</string>
+    <string name="feature_title_app_component_manager">Gerenciador de componentes</string>
+    <string name="feature_desc_app_component_manager">Observação: o Gerenciador de componentes usa recursos do sistema Android, o que significa que esses estados permanecerão com o sistema. Mesmo que você desinstale o Thanox, esses estados permanecerão. Portanto, se você desativar certos componentes de [Apps do sistema], isso pode fazer com que o sistema não inicialize, e nem mesmo desinstalar o Thanox os restaurará automaticamente.</string>
+    <string name="menu_title_create_shortcut">Criar atalho</string>
+    <string name="menu_title_create_shortcut_apk">Criar APK de proxy</string>
+    <string name="menu_title_broadcast_intent_shortcut">Atalho de intent de broadcast</string>
+    <string name="menu_title_activity_intent_shortcut">Atalho de intent de activity</string>
+    <string name="dialog_message_create_shortcut_apk">Cria um APK stub de atalho; você pode instalar este app como uma solução alternativa para o ícone na tela inicial de apps desativados</string>
+
+    <string name="feature_title_recovery_tools">Ferramentas de recuperação</string>
+    <string name="feature_title_recovery_tools_component_settings">Restaurar configurações de componentes dos apps</string>
+    <string name="feature_title_recovery_tools_component_settings_summary">Restaura as configurações de componentes de todos os apps configurados pelo Thanox, incluindo activities, serviços, broadcasts e content providers.</string>
+
+    <string name="feature_title_recovery_tools_component_settings_flags_summary">Se o seu dispositivo não inicializar normalmente devido a modificações em componentes do sistema, você pode tentar criar manualmente um arquivo vazio no diretório /data/system/thanos usando o recovery ou ferramentas ADB no computador. Nomeie o arquivo: %s \nO Thanox tentará restaurar todas as configurações de componentes de todos os apps durante a inicialização do sistema.</string>
+
+    <string name="dialog_title_smart_app_standby_need_enable_platform_app_idle">Bateria adaptável ativada</string>
+    <string name="dialog_message_smart_app_standby_need_enable_platform_app_idle">
+        Este recurso só funciona se a Bateria adaptável estiver ativada no Android Pie+.
+    </string>
+
+    <string name="message_do_you_want_to_add_apps_to_pkg_set">Adicionar também estes apps ao conjunto de pacotes atual?</string>
+
+    <string name="feature_title_infinite_z">Apps múltiplos clássico</string>
+    <string name="feature_message_infinite_z_enable">
+Os apps múltiplos são implementados com base no mecanismo multiusuário do Android e diferem um pouco da implementação de Apps múltiplos clonados.
+Normalmente, uma aba \"Trabalho\" aparecerá na tela inicial.
+Este recurso é atualmente experimental e instável. Faça backup de todos os dados importantes antes de ativá-lo.
+Deseja ativá-lo?
+</string>
+    <string name="feature_message_infinite_z_disable">
+Desativar os apps múltiplos excluirá todos os dados do usuário clonado e não poderá ser recuperado. Tem certeza de que deseja desativar os apps múltiplos?
+</string>
+    <string name="feature_message_infinite_z_uninstall">
+Tem certeza de que deseja desinstalar <b>%s</b>? Todos os dados desta instância de app múltiplo serão excluídos e não poderão ser recuperados.
+</string>
+
+    <string name="feature_title_infinite_z2">Clonar apps múltiplos</string>
+    <string name="feature_message_infinite_z2_enable">
+Os Apps múltiplos clonados são implementados com base no mecanismo multiusuário do Android e diferem um pouco da implementação de Apps múltiplos clássico.
+Este recurso é atualmente experimental e instável. Faça backup de todos os dados importantes antes de ativá-lo. Deseja ativá-lo?
+</string>
+    <string name="feature_message_infinite_z2_disable">
+Desativar os Apps múltiplos clonados excluirá todos os dados do usuário clonado e não poderá ser recuperado. Tem certeza?
+</string>
+    <string name="feature_message_infinite_z2_uninstall">
+Tem certeza de que deseja desinstalar <b>%s</b>? Todos os dados desta instância de app clonado serão excluídos e não poderão ser recuperados.
+</string>
+
+    <string name="menu_title_copy">Copiar</string>
+    <string name="menu_title_send_email">Enviar e-mail</string>
+
+    <string name="menu_title_copy_pkg_name">Copiar nome do pacote</string>
+    <string name="menu_title_launch_app">Abrir</string>
+    <string name="menu_title_launch_system_settings">Configurações do sistema</string>
+
+    <string name="feature_title_data_cheat">Anônimo</string>
+    <string name="feature_desc_data_cheat">Oculta informações do SIM, número de série etc. Ative o escopo do instalador Xposed para o app selecionado</string>
+    <string name="activity_title_data_cheat">Anônimo</string>
+    <string name="feature_summary_pkg_data_cheat">Anônimo</string>
+
+    <string name="title_allow">Permitir</string>
+    <string name="title_block">Negar</string>
+
+    <string name="menu_start_manage_info">Ajuda</string>
+    <string name="info_title_start_restrict">Dicas</string>
+    <string name="info_message_start_restrict">Impede que os apps iniciem a partir do segundo plano</string>
+    <string name="info_title_bg_restrict">Dicas</string>
+    <string name="info_message_bg_restrict">O processo em segundo plano será limpo se a tela estiver bloqueada</string>
+
+    <string name="pre_category_ui">Aparência</string>
+    <string name="pre_title_ui">Temas e ícones</string>
+    <string name="pre_title_app_theme">Tema</string>
+    <string name="settings_ui_dynamic_color_scheme">Esquema de cores dinâmico</string>
+    <string name="settings_ui_dark_mode_title">Modo escuro</string>
+    <string name="settings_ui_dark_mode_follow_system">Seguir o sistema</string>
+    <string name="settings_ui_dark_mode_light">Claro</string>
+    <string name="settings_ui_dark_mode_dark">Escuro</string>
+    <string name="pre_title_app_icon_pack">Pacote de ícones</string>
+    <string name="pre_title_app_icon_crop_to_circle">Ícone circular</string>
+    <string name="pre_category_strategy">Estratégia</string>
+    <string name="pre_title_strategy">Perfis e modelos</string>
+    <string name="pre_category_profile">Perfil</string>
+    <string name="pre_category_data">Dados</string>
+    <string name="pre_title_data">Backup e restauração</string>
+    <string name="pre_category_about">Sobre</string>
+    <string name="pre_title_about">Sobre o Thanox</string>
+    <string name="pre_category_dev_tools">Desenvolvedores</string>
+    <string name="pre_title_developer">Ferramentas de desenvolvedor</string>
+    <string name="pre_title_power">Configurações de economia de energia</string>
+    <string name="pre_category_power">Energia</string>
+    <string name="pre_category_app_feature_info">Informações do app</string>
+    <string name="pre_category_app_feature_config">Configurações</string>
+    <string name="pre_category_app_disable_enable">Desativar</string>
+
+    <string name="pref_title_app_stability_upkeep">Manutenção de estabilidade do app</string>
+    <string name="pref_summary_app_stability_upkeep">Ativar o recurso de manutenção de estabilidade do app pode, em certa medida, evitar travamentos do app ou do sistema causados pela desativação ou interferência em certos componentes ou comportamentos do app.</string>
+
+    <string name="pref_title_enable_logging">Ativar registro de logs</string>
+    <string name="pref_summary_enable_logging">Mostrar informações de log no console</string>
+    <string name="pref_title_show_current_activity">Mostrar activity atual</string>
+    <string name="pref_title_enable_global_white_list">Lista de permissões global</string>
+    <string name="pref_summary_enable_global_white_list">Aviso: esta é uma configuração perigosa. Usuários inexperientes não devem experimentar esta opção. \nPara evitar erros fatais do sistema por mau uso, o Thanox mantém uma lista de permissões global por padrão, contendo alguns dos aplicativos principais do sistema, como componentes, telefone, mídia etc.\n Se você realmente preferir não ativar esta lista, desative esta opção</string>
+    <string name="pref_title_build_info_app">Informações do app</string>
+    <string name="pref_title_build_info_server">Informações do núcleo</string>
+    <string name="pref_title_patch_info">Informações do patch</string>
+    <string name="pre_title_ignore_system_app">Excluir apps do sistema</string>
+    <string name="pre_summary_ignore_system_app">Coloca os apps do sistema na lista de permissões</string>
+    <string name="pref_title_enable_power_save">Economia de energia</string>
+    <string name="dialog_title_battery_drain_fast_by_thanox">Consumo de bateria</string>
+    <string name="dialog_message_battery_drain_fast_by_thanox">O Thanox está iniciando logs de boot, logs de acesso a permissões e logs ocultos. Esses dados serão salvos em arquivos em tempo real, o que pode acelerar o consumo de energia. É recomendável ativar o modo de economia de energia conforme a necessidade.</string>
+    <string name="pref_title_enable_high_battery_drain_app_reminding">Alerta de alto consumo de energia</string>
+    <string name="pref_summary_enable_high_battery_drain_app_reminding">Alerta quando apps de alto consumo de energia são detectados</string>
+
+    <string name="pref_summary_enable_power_save">Para de registrar inicializações de apps, acessos a operações e acessos a dados de privacidade para economizar o máximo de bateria possível</string>
+
+    <string name="pref_title_open_source_license">Licenças de código aberto</string>
+
+    <string name="pref_title_icon_maker_remix_icon">Provedor de ícones</string>
+    <string name="pref_summary_icon_maker_remix_icon">Remix Design © 2018 https://remixicon.com</string>
+
+    <string name="pref_title_rss_e">Grupos</string>
+    <string name="pref_summary_rss_e">Entrar no grupo</string>
+
+    <string name="pref_title_app_state_enabled">O app está ativado</string>
+    <string name="pref_title_app_to_disable">Desativar</string>
+    <string name="pref_title_app_state_disabled">O app está desativado</string>
+    <string name="pref_title_app_to_enable">Ativar</string>
+
+    <string name="pre_title_backup">Backup</string>
+    <string name="pre_summary_backup">Faz backup das configurações do Thanox no armazenamento externo</string>
+    <string name="pre_title_restore">Restaurar</string>
+    <string name="pre_sumary_restore">Restaura as configurações do Thanox a partir de um arquivo externo. Se falhar, você pode tentar excluir manualmente o diretório /data/system/thanos/, ou definir o proprietário do diretório como 1000</string>
+    <string name="pre_title_restore_default">Restaurar padrões</string>
+    <string name="pre_summary_restore_default">Restaura as configurações padrão do Thanox</string>
+
+    <string name="pref_title_new_installed_apps_config_enabled">Configuração automática</string>
+    <string name="pref_summary_new_installed_apps_config_enabled">Configura automaticamente os apps recém-instalados</string>
+    <string name="pref_title_new_installed_apps_config_notification_enabled">Mostrar notificação de configuração</string>
+    <string name="pref_summary_new_installed_apps_config_notification_enabled">Mostra uma notificação quando um modelo de configuração é aplicado</string>
+    <string name="pref_title_new_installed_apps_config">Modelo de configuração</string>
+    <string name="pref_summary_new_installed_apps_config">Edite o modelo para a configuração automática</string>
+
+    <string name="pref_title_auto_request_xposed_scope">Solicitar escopo do Xposed</string>
+    <string name="pref_summary_auto_request_xposed_scope">Quando você ativa um recurso que depende do escopo do Xposed para o app, o Thanox solicitará automaticamente o escopo. Preste atenção à notificação do sistema. \nAtenção: este recurso depende da versão mais recente do framework LSPosed. \nVerifique também as configurações do sistema e as configurações do Thanox, permitindo a inicialização em segundo plano do Thanox</string>
+
+
+    <string name="pref_title_config_template_category">Modelos</string>
+    <string name="pref_action_create_new_config_template">Criar modelos</string>
+    <string name="pref_action_edit_or_view_config_template">Ver e editar</string>
+    <string name="pref_action_delete_config_template">Excluir</string>
+    <string name="pref_action_apply_config_template">Aplicar a partir do modelo</string>
+
+    <string name="pref_action_backup_component_settings">Backup das configurações de componentes</string>
+    <string name="pref_action_backup_component_settings_summary">Faz backup das configurações de componentes, incluindo as configurações de ativação/desativação de Activity, Service, Receiver e Content Provider</string>
+    <string name="pref_action_restore_component_settings">Importar configurações de componentes</string>
+
+    <string name="pre_message_restore_success">Restauração concluída. Reinicie para que as alterações tenham efeito</string>
+    <string name="pre_message_backup_success">Backup concluído</string>
+
+    <string name="pre_message_backup_error">Não foi possível fazer backup na pasta Downloads. Verifique a permissão de armazenamento. O arquivo de backup foi salvo em</string>
+
+    <string name="pre_cheat_field_category_original">Campo original</string>
+    <string name="pre_cheat_field_category_cheated">Campo anônimo</string>
+    <string name="pre_cheat_field_category_others">Outros</string>
+    <string name="pre_title_cheat_sim_serial">Número de série do SIM</string>
+
+    <string name="pre_title_cheat_sim_country_iso">ISO do país do SIM</string>
+    <string name="pre_title_cheat_net_country_iso">ISO do país da rede</string>
+
+    <string name="pre_title_cheat_net_op_1">Operadora de rede (Slot 1)</string>
+    <string name="pre_title_cheat_net_op_2">Operadora de rede (Slot 2)</string>
+    <string name="pre_title_cheat_net_op_3">Operadora de rede (Slot 3)</string>
+    <string name="pre_title_cheat_net_op_name_1">Nome da operadora de rede (Slot 1)</string>
+    <string name="pre_title_cheat_net_op_name_2">Nome da operadora de rede (Slot 2)</string>
+    <string name="pre_title_cheat_net_op_name_3">Nome da operadora de rede (Slot 3)</string>
+
+    <string name="pre_title_cheat_sim_op_1">Operadora do SIM (Slot 1)</string>
+    <string name="pre_title_cheat_sim_op_2">Operadora do SIM (Slot 2)</string>
+    <string name="pre_title_cheat_sim_op_3">Operadora do SIM (Slot 3)</string>
+    <string name="pre_title_cheat_sim_op_name_1">Nome da operadora do SIM (Slot 1)</string>
+    <string name="pre_title_cheat_sim_op_name_2">Nome da operadora do SIM (Slot 2)</string>
+    <string name="pre_title_cheat_sim_op_name_3">Nome da operadora do SIM (Slot 3)</string>
+
+    <string name="pre_title_cheat_net_op_name">Nome da operadora de rede (Qualquer slot)</string>
+    <string name="pre_title_cheat_net_op">Operadora de rede (Qualquer slot)</string>
+
+    <string name="pre_title_cheat_sim_op_name">Nome da operadora do SIM (Qualquer slot)</string>
+    <string name="pre_title_cheat_sim_op">Operadora do SIM (Qualquer slot)</string>
+
+
+    <string name="pre_title_cheat_line_one_num">Número de telefone</string>
+    <string name="pre_title_cheat_device_id">ID do dispositivo (API descontinuada)</string>
+    <string name="pre_title_cheat_android_id">Android ID</string>
+
+    <string name="pre_title_cheat_imei_slot1">IMEI (Slot 1)</string>
+    <string name="pre_title_cheat_imei_slot2">IMEI (Slot 2)</string>
+    <string name="pre_title_cheat_imei_slot3">IMEI (Slot 3)</string>
+
+    <string name="pre_title_cheat_meid_slot1">MEID (Slot 1)</string>
+    <string name="pre_title_cheat_meid_slot2">MEID (Slot 2)</string>
+    <string name="pre_title_cheat_meid_slot3">MEID (Slot 3)</string>
+
+    <string name="pre_title_cheat_not_set">Não definido, este campo não será simulado</string>
+    <string name="pre_title_cheat_installed_apps">Ocultar apps instalados</string>
+    <string name="pre_title_cheat_show_cheated_apps_notifications">Mostrar notificação</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_delay">Atrasar a limpeza após a tela ser bloqueada</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_audio">Não limpar fluxos de áudio</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_audio">Manter apps que estão reproduzindo áudio</string>
+
+    <string name="pre_title_recent_task_blur_mask_mode">Ocultar conteúdo</string>
+    <string name="pre_summary_recent_task_blur_mask_mode">Oculta totalmente o conteúdo da tarefa, em vez de desfocá-lo</string>
+
+    <string name="pre_title_exclude_recent_task">Excluir das tarefas recentes</string>
+    <string name="pre_summary_exclude_recent_task">Define forçar a exclusão ou inclusão deste app nas tarefas recentes</string>
+    <string name="pre_entry_exclude_recent_task_default">Padrão</string>
+    <string name="pre_entry_exclude_recent_task_include">Incluir</string>
+    <string name="pre_entry_exclude_recent_task_exclude">Excluir</string>
+
+    <string name="pre_title_force_dialog_cancelable">Diálogo cancelável</string>
+    <string name="pre_summary_force_dialog_cancelable">Força os diálogos do app a serem canceláveis; ative o escopo do instalador Xposed para este app</string>
+
+    <string name="pre_title_resident">App residente</string>
+    <string name="pre_summary_resident">Impede que este app seja encerrado pelo LMK</string>
+
+    <string name="pre_title_shortcut_block">Remoção de atalhos</string>
+    <string name="pre_summary_shortcut_block">Remove atalhos dinâmicos inúteis da tela inicial</string>
+
+    <string name="pre_title_redaction_notification">Ocultação de notificação</string>
+    <string name="pre_summary_redaction_notification">Substitui a notificação do app por um título e texto personalizados</string>
+    <string name="pre_title_redaction_notification_title">Título</string>
+    <string name="pre_title_redaction_notification_text">Texto</string>
+
+    <string name="cheat_field_auto_gen">Preencher com campos aleatórios</string>
+
+    <string name="launch_other_app_options_allow">Permitir</string>
+    <string name="launch_other_app_options_ask">Perguntar</string>
+    <string name="launch_other_app_options_ignore">Ignorar</string>
+    <string name="launch_other_app_options_allow_listed">Na lista de permissões</string>
+    <string name="launch_other_app">Abrir outro app</string>
+    <string name="launch_other_app_rule_cascade">Modo em cascata</string>
+    <string name="launch_other_app_rule_cascade_summary">Quando ativado, as regras PERMITIR também verificam as configurações por app. Apenas configurações por app definidas explicitamente podem sobrepor as regras PERMITIR. As regras NEGAR sempre têm prioridade.</string>
+
+    <string name="nav_edit_title">Editar layout</string>
+    <string name="nav_edit_reset">Redefinir</string>
+    <string name="section_title_cpu_mem">CPU e memória</string>
+    <string name="section_title_running">Apps em execução</string>
+
+    <string name="sensor_off">Desligar sensores</string>
+    <string name="sensor_off_summary">Desliga todos os sensores quando o app está em primeiro plano</string>
+    <string name="sensor_off_default">Não desligar</string>
+    <string name="sensor_off_on_start">Desligar por 6 segundos</string>
+    <string name="sensor_off_always">Sempre desligar</string>
+    <string name="sensor_off_all">Todos</string>
+
+    <string name="start_record_allowed">Permitido</string>
+    <string name="start_record_blocked">Bloqueado</string>
+    <string name="start_record_merged">Mesclado</string>
+
+    <string name="privacy_record">Registros de anonimato</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_skip_notification">Manter apps que têm notificações</string>
+    <string name="pre_title_bg_screen_off_clean_up_skip_recent_task">Manter apps nas tarefas recentes</string>
+
+    <string name="pre_title_bg_screen_off_clean_up_skip_fg">Manter app em primeiro plano</string>
+    <string name="pre_summary_bg_screen_off_clean_up_skip_fg">Quando ativado, os apps em primeiro plano não serão limpos</string>
+
+    <string name="pre_title_bg_restrict_show_notification">Mostrar notificação</string>
+    <string name="pre_summary_bg_restrict_show_notification">Exibe uma notificação quando um processo pendente de limpeza é detectado</string>
+
+    <string name="pre_title_clean_task_removal_skip_notification">Manter apps com notificações</string>
+    <string name="pre_title_clean_task_removal_skip_audio">Manter apps que estão reproduzindo áudio</string>
+    <string name="pre_summary_clean_task_removal_skip_audio">Não limpar apps que estão reproduzindo áudio</string>
+    <string name="pre_title_clean_task_removal_skip_vpn">Manter apps de VPN</string>
+    <string name="pre_summary_clean_task_removal_skip_vpn">Não limpar apps que estão fornecendo VPN ou proxy de rede</string>
+
+    <string name="badge_trying_app">Teste</string>
+    <string name="badge_paid_app">Pago</string>
+    <string name="badge_framework_err">Erro</string>
+    <string name="badge_power_save_off">Bateria</string>
+
+    <string name="title_remember">Lembrar</string>
+    <string name="title_app_notice">Cuidado!</string>
+    <string name="message_app_notice">Em alguns casos, seu dispositivo pode não inicializar mais após instalar o Thanox.\n\nSe você nunca ouviu falar de \"soft brick\" e \"bootloop\" antes, ou se não sabe como se recuperar de uma situação dessas, <b>NÃO</b> instale o Thanox!\n\nEm qualquer caso, é altamente recomendável ter um backup recente.</string>
+
+    <string name="menu_title_feature_desc">Wiki do recurso</string>
+    <string name="menu_title_start_restrict_charts_reset">Redefinir</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records">Ver registros detalhados</string>
+    <string name="menu_title_start_restrict_charts_view_detailed_records_for_this_package">Mostrar apenas os do app atual</string>
+    <string name="pre_category_general">Geral</string>
+
+    <string name="pre_title_smart_freeze_screen_off_clean_up_delay">Congelar ao desligar a tela</string>
+    <string name="pre_summary_smart_freeze_screen_off_clean_up_delay">Congela todos os apps ao desligar a tela</string>
+    <string name="pre_title_smart_freeze_screen_off_clean_up">Atraso do congelamento ao desligar a tela</string>
+
+    <string name="pre_title_smart_freeze_tip">Mostrar dica</string>
+    <string name="pre_summary_smart_freeze_tip">Mostra uma dica em toast ao congelar ou descongelar um app</string>
+
+    <string name="pre_title_smart_freeze_hide_package_change_event">Ocultar na tela inicial</string>
+    <string name="pre_summary_smart_freeze_hide_package_change_event">Se esta opção estiver ativada, o Thanox bloqueará o evento PACKAGE CHANGED deste pacote, de modo que os apps de tela inicial não consigam detectar o evento de ativação do pacote.</string>
+
+    <string name="pre_title_smart_freeze_with_suspend">Suspender pacote</string>
+    <string name="pre_summary_smart_freeze_with_suspend">Por padrão, congelamos o pacote desativando-o. Se esta opção estiver ativada, usaremos a suspensão em vez da desativação para congelar o pacote</string>
+
+    <string name="pre_category_summary_smart_freeze">Por padrão, o Thanox congela os apps quando eles param de ser executados ou a tarefa é removida. \nO Thanox congela todos os apps durante a inicialização do dispositivo e a limpeza de processos. \nVocê também pode escolher as configurações adicionais abaixo.</string>
+
+    <string name="pre_category_summary_smart_standby">Os aplicativos em segundo plano normalmente têm serviços ou processos que permanecem ativos, e esses serviços ou processos têm seu próprio propósito. Infelizmente, nossos usuários podem não saber exatamente o que esses serviços e processos fazem.\n\nVocê pode escolher um método de interferência para os aplicativos que retornam ao segundo plano. Vale mencionar que alguns apps podem não funcionar corretamente após a interferência.</string>
+    <string name="pre_title_smart_standby_stop_service">Parar serviço</string>
+    <string name="pre_summary_smart_standby_stop_service">Isso tentará parar todos os serviços que não estão na lista de regras KEEP</string>
+    <string name="pre_title_smart_standby_unbind_service">Desvincular serviço</string>
+    <string name="pre_summary_smart_standby_unbind_service">Isso tentará desvincular todos os serviços que não estão na lista de regras KEEP</string>
+    <string name="pre_title_smart_standby_bypass_if_has_n">Ignorar apps com notificações</string>
+    <string name="pre_title_smart_standby_bypass_if_has_visible_windows">Ignorar apps com janela visível</string>
+    <string name="pre_summary_smart_standby_bypass_if_has_n">Não interfere em aplicativos com notificações</string>
+    <string name="pre_title_smart_standby_set_inactive">Deixar apps inativos</string>
+    <string name="pre_summary_smart_standby_set_inactive">Tenta colocar o app em estado inativo. Isso se baseia no mecanismo padrão de descanso do Android.</string>
+    <string name="pre_title_smart_standby_block_bg_service_start">Impedir que processos em segundo plano reiniciem.</string>
+    <string name="pre_summary_smart_standby_block_bg_service_start">Ativar esta opção impedirá que serviços já parados reiniciem em segundo plano. Observe que esses eventos de bloqueio também aparecerão no log de bloqueios na tela de inicialização em segundo plano</string>
+
+
+    <string name="title_stub_apk_app_name">Nome do app</string>
+    <string name="title_stub_apk_app_version_code">Código da versão</string>
+    <string name="title_stub_apk_app_version_name">Nome da versão</string>
+
+
+    <string name="export_patch_title">Exportar patch</string>
+    <string name="export_patch_message">O Thanox suporta tanto Xposed quanto Magisk.\n\n Para usuários do Xposed, basta selecionar e marcar o Thanox na página de configuração de módulos do app Xposed. \n\nPara usuários do Magisk, você pode renomear o APK baixado do Thanox de .apk para .zip e depois instalá-lo no gerenciador do Magisk; ou, se não encontrar o APK baixado, também temos a opção de exportar o patch zip para o armazenamento externo local.</string>
+    <string name="export_patch_export_magisk">Exportar</string>
+
+    <string name="onboarding_text_complete">Vamos começar</string>
+    <string name="onboarding_next">Próximo</string>
+    <string name="onboarding_skip">Pular</string>
+    <string name="onboarding_xposed_tips_title">Xposed suportado</string>
+    <string name="onboarding_xposed_tips_desc">1. Selecione e marque o Thanox no Xposed Manager \n2. Reinicie e aproveite \n3. Lembre-se: após cada atualização, marque o Thanox novamente no Xposed Manager e reinicie!</string>
+
+    <string name="onboarding_magisk_tips_title">Magisk suportado (experimental)</string>
+    <string name="onboarding_magisk_tips_desc">1. O APK do Thanox também é o módulo do Magisk; basta renomeá-lo para zip \n2. Você também pode exportar o módulo do Magisk em Configurações-Sobre-Informações do patch \n3. Lembre-se: após cada atualização, atualize também o módulo do Magisk no gerenciador do Magisk e reinicie!</string>
+
+    <string name="onboarding_github_tips_title">Acompanhamento de atualizações</string>
+    <string name="onboarding_github_tips_desc">Você pode acompanhar nossas versões de pré-lançamento no \nGithub/Thanox</string>
+
+    <string name="onboarding_mode_tips_title">Métodos de ativação</string>
+    <string name="onboarding_mode_tips_desc">Atualmente o Thanox suporta dois métodos de ativação: patch do Xposed ou patch do Magisk (experimental, suporta Android 11+); você pode escolher um deles para explorar.</string>
+
+    <string name="onboarding_guide_tips_title">Wiki disponível</string>
+    <string name="onboarding_guide_tips_desc">Você encontra as instruções na página inicial das configurações. É altamente recomendável dedicar mais tempo a essas instruções. Talvez elas ajudem você.</string>
+    <string name="title_package_prebuilt_set">Predefinido</string>
+    <string name="pre_title_app_list_item_show_pkg">Mostrar nome do pacote</string>
+    <string name="pre_title_app_list_item_show_version">Mostrar versão</string>
+    <string name="pre_title_app_list_item">Item da lista de apps</string>
+    <string name="menu_title_app_info_detailed">Detalhes</string>
+
+    <string name="device_admin_description" translatable="false">Device admin of Thanox Infinite Z profile.</string>
+
+    <string name="nav_title_guide">Guia</string>
+
+    <string name="pre_title_smart_freeze_freeze_method">Método de congelamento</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable">Desativar via PM</string>
+    <string name="pre_title_smart_freeze_freeze_method_disable_summary">Desativar via PM é uma função fornecida pelo sistema Android que pode \"desativar\" um aplicativo; ao usar este método para \"congelar\" um aplicativo, o ícone do app congelado desaparecerá da tela inicial. Você pode criar um atalho ou app de proxy para abri-lo diretamente da tela inicial.</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend">Suspender via PM</string>
+    <string name="pre_title_smart_freeze_freeze_method_suspend_summary">A suspensão é uma função fornecida pelo Android para gerenciamento DPC; o aplicativo suspenso geralmente mantém um ícone acinzentado na tela inicial, mas as activities do aplicativo não podem ser iniciadas diretamente, e normalmente aparece um diálogo indicando que o app foi restringido pelo Administrador. Você pode ativar a opção \"DOL\" para o app, o que fará com que o Thanox o descongele quando detectar uma solicitação de inicialização da activity.</string>
+
+    <string name="privacy_agreement_title">Acordo de privacidade</string>
+    <string name="privacy_agreement_accept">Aceitar</string>
+    <string name="privacy_agreement_discard">Descartar</string>
+
+    <string name="feature_title_settings_access_record">Registro de acesso às configurações</string>
+    <string name="feature_summary_settings_access_record">Veja os registros de leitura e gravação das Configurações do sistema. Geralmente, você deve selecionar o app Configurações, o Settings Provider e o Secure Manager no escopo do Xposed.</string>
+
+    <string name="launch_other_pkg_title">Abrir app</string>
+    <string name="launch_other_pkg_message"><b>%s</b> quer abrir <b>%s</b>, você permite?</string>
+    <string name="launch_other_pkg_remember">Lembrar escolha</string>
+    <string name="launch_other_pkg_allow">Permitir</string>
+    <string name="launch_other_pkg_ignore">Ignorar</string>
+    <string name="launch_other_pkg_allow_once">Permitir desta vez</string>
+    <string name="launch_other_pkg_ignored_message">Negar que %s abra %s</string>
+
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processo e <xliff:g id="NUMSERVICES">%2$d</xliff:g> serviço"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processo e <xliff:g id="NUMSERVICES">%2$d</xliff:g> serviço"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processo e <xliff:g id="NUMSERVICES">%2$d</xliff:g> serviço"</string>
+    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processo e <xliff:g id="NUMSERVICES">%2$d</xliff:g> serviço"</string>
+    <string name="running_processes_item_description_p">%1$d processo</string>
+    <string name="running_processes_item_description_s">%1$d serviço</string>
+    <string name="running_processes_header_title" msgid="6588371727640789560">"memória do dispositivo"</string>
+    <string name="running_processes_header_footer" msgid="723908176275428442">"Uso de memória dos apps"</string>
+    <string name="running_processes_header_system_prefix" msgid="6104153299581682047">"Sistema"</string>
+    <string name="running_processes_header_apps_prefix" msgid="5787594452716832727">"Apps"</string>
+    <string name="running_processes_header_free_prefix" msgid="4620613031737078415">"Disponível"</string>
+    <string name="running_processes_header_used_prefix" msgid="5924288703085123978">"Usado"</string>
+    <string name="running_processes_header_cached_prefix" msgid="7950853188089434987">"Cache"</string>
+    <string name="running_processes_header_ram">%1$s</string>
+    <string name="runningservicedetails_settings_title" msgid="3224004818524731568">"apps em execução"</string>
+    <string name="no_services" msgid="7133900764462288263">"Nenhum serviço ativo"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"Serviço"</string>
+    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Processo"</string>
+    <string name="service_manage" msgid="1876642087421959194">"Configurações"</string>
+    <string name="service_stop_description" msgid="9146619928198961643">"Este serviço é iniciado pelo próprio aplicativo. Parar o serviço pode deixar o app inoperável."</string>
+    <string name="heavy_weight_stop_description" msgid="6050413065144035971">"O app não pode ser parado com segurança. Se você forçar a parada, parte do seu trabalho atual pode ser perdida."</string>
+    <string name="background_process_stop_description" msgid="3834163804031287685">"Este é o processo antigo do app, ainda em execução, por precaução. Geralmente não é recomendável pará-lo."</string>
+    <string name="service_manage_description" msgid="479683614471552426">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: em uso no momento. Toque em Configurações para gerenciá-lo."</string>
+    <string name="main_running_process_description" msgid="1130702347066340890">"Usando o processo principal."</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"Usando o Serviço<xliff:g id="COMP_NAME">%1$s</xliff:g>."</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"Usando o Provider<xliff:g id="COMP_NAME">%1$s</xliff:g>."</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Deseja parar o serviço do sistema?"</string>
+    <string name="runningservicedetails_stop_dlg_text" msgid="3920243762189484756" product="default">"Se você parar este serviço, alguns recursos do seu telefone também deixarão de funcionar e não funcionarão até que você desligue e ligue o telefone novamente."</string>
+
+    <string name="no_default_apps" msgid="2915315663141025400">"Nenhum app padrão."</string>
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"Uso de armazenamento"</string>
+    <string name="storageuse_settings_summary" msgid="3748286507165697834">"Veja quanto armazenamento um app está usando"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"Reiniciando"</string>
+    <string name="cached" msgid="1059590879740175019">"Cache"</string>
+    <string name="show_cached" msgid="1059590879740175019">"Mostrar em cache"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"Nenhum serviço em execução."</string>
+    <string name="service_started_by_app" msgid="818675099014723551">"Iniciado pelo app"</string>
+    <string name="service_client_name" msgid="818675099014723551">"Cliente %1$s"</string>
+    <string name="service_process_name" msgid="818675099014723551">"Processo %1$s"</string>
+
+    <string name="running_process_not_running">Não em execução</string>
+    <string name="running_process_running">Em execução</string>
+    <string name="running_process_background">Em cache</string>
+    <string name="running_process_all">Todos</string>
+    <string name="service_stop">Parar</string>
+    <string name="service_report">Reportar</string>
+    <string name="service_running_time">Tempo decorrido</string>
+
+    <!--Colors-->
+    <color name="running_processes_system_ram">#ff384248</color>
+    <color name="running_processes_free_ram">#ffced7db</color>
+
+    <dimen name="settings_side_margin">0dip</dimen>
+
+    <string name="process_manager">Gerenciador de processos</string>
+
+    <string name="smart_freeze">Congelamento inteligente</string>
+    <string name="smart_freeze_on_one_key_boost">Congelar apps</string>
+    <string name="smart_freeze_on_one_key_boost_summary">Também congela os apps do congelamento inteligente</string>
+    <string name="create_one_key_freeze_shortcut">Criar atalho de congelamento com 1 toque</string>
+    <string name="apps_count">%s apps</string>
+    <string name="sf_pkg_stats">%s apps / %s congelados / %s ativados</string>
+    <string name="sf_pkg_stats_all_freeze">Todos os %s apps congelados</string>
+    <string name="pick_app">Escolher app</string>
+
+    <string name="smart_freeze_on_screen_off">Congelar ao desligar a tela</string>
+    <string name="smart_freeze_on_screen_off_summary">Congela os apps quando a tela desliga</string>
+    <string name="smart_freeze_on_task_removed">Congelar ao remover a tarefa</string>
+    <string name="smart_freeze_on_task_removed_summary">Congela os apps quando a tarefa recente é removida</string>
+
+    <string name="bc_on_screen_off">Parar ao desligar a tela</string>
+    <string name="bc_on_screen_off_summary">Força a parada dos apps quando a tela desliga</string>
+    <string name="bc_on_task_removed">Parar ao remover a tarefa</string>
+    <string name="bc_on_task_removed_summary">Força a parada dos apps quando a tarefa recente é removida</string>
+
+    <string name="toast_copied_to_clipboard">Copiado</string>
+
+    <string name="pkg_set">Categoria</string>
+    <string name="all">Todos</string>
+    <string name="user">Usuário</string>
+    <string name="system">Sistema</string>
+    <string name="enabled">Ativado</string>
+    <string name="disabled">Desativado</string>
+
+    <string name="remove_from_pkg_set">Remover do conjunto</string>
+    <string name="remove_from_sf">Remover do CI</string>
+    <string name="add_to_pkg_set">Adicionar ao conjunto</string>
+    <string name="temp_unfreeze">Descongelar</string>
+    <string name="freeze">Congelar</string>
+    <string name="create_shortcut">Criar atalho</string>
+
+    <string name="delete">Excluir</string>
+    <string name="rename">Renomear</string>
+    <string name="sort">Ordenar</string>
+    <string name="on">Ativado</string>
+    <string name="off">Desativado</string>
+
+    <string name="subscribe">Assinar</string>
+    <string name="sub_intro_unsub">Não assinante</string>
+    <string name="sub_intro_unsub_content_limit">Não assinante, o conteúdo da página é limitado.</string>
+    <string name="sub_intro_message">Para melhor atendê-lo, o Thanos é um software pago que requer uma assinatura. Toque no botão de assinatura abaixo para ver as instruções detalhadas de assinatura.
+Se você já é um usuário pagante do Thanox ou do Thanox Pro, não precisa assinar o Thanos novamente. Você pode usar seu código de ativação do Thanox na página de assinatura ou verificar sua elegibilidade pela Play Store.</string>
+
+    <string name="bg_clean">Tarefas em 2º plano</string>
+    <string name="bg_clean_apps_count">Impede que %s app seja executado em segundo plano</string>
+
+    <string name="lvl_checking_retry">Tentar novamente</string>
+    <string name="lvl_checking">Verificando sua licença</string>
+    <string name="lvl_check_ok">Ótimo</string>
+    <string name="lvl_check_not_ok">OPS!</string>
+    <string name="lvl_check_skip_for_now">Pular por enquanto</string>
+    <string name="lvl_unlicensed_dialog_body">Você não está autorizado</string>
+    <string name="lvl_unlicensed_dialog_retry_body">Não é possível acessar a Google Play</string>
+    <string name="lvl_unlicensed_dialog_error_tips">Verifique a conexão de rede do seu dispositivo e certifique-se de que consegue acessar a Google Play Store normalmente.
+\nVerifique o Google Service Framework e certifique-se de que está ativado.
+\nVerifique se a sua conta do Google está conectada corretamente.</string>
+    <string name="wait_shizuku">Aguardando o Shizuku</string>
+    <string name="wait_shizuku_message">Instale e ative o Shizuku. Depois, conceda a permissão ao Thanos</string>
+
+    <string name="module_donate_title">Obter Premium</string>
+
+    <string name="module_donate_donated">Verificado, obrigado</string>
+    <string name="module_donate_donated_available">Premium</string>
+    <string name="module_donate_donated_available_message">Doe para obter o Premium e desbloquear este recurso.</string>
+
+    <string name="module_donate_get_play">Obter versão da Play</string>
+    <string name="module_donate_get_play_message">Pesquise Thanox Pro na Google Play Store</string>
+    <string name="module_donate_copy_email">Copiar e-mail</string>
+    <string name="module_donate_active_hidden_feature">Mostrar recursos ocultos</string>
+    <string name="module_donate_active_hidden_feature_activated">Ativado</string>
+    <string name="module_donate_input_activation_code">Digite o código de ativação</string>
+    <string name="module_donate_activation_code_verify_success">Verificação bem-sucedida. Guarde bem o seu código de ativação e não o compartilhe com outras pessoas, caso contrário ele poderá ser desativado. Você poderá continuar usando-o após trocar de dispositivo ou fazer flash no futuro.</string>
+    <string name="module_donate_activation_code_verify_fail">Falha na verificação.</string>
+    <string name="module_donate_activation_code_verify_fail_server_timeout">Erro no servidor~~~</string>
+    <string name="module_donate_activation_code_start_verify">Iniciar verificação</string>
+    <string name="module_donate_activation_code_my_code">Meu código</string>
+
+    <string name="module_donate_activation_code_valid_remain_time">Restante</string>
+    <string name="module_donate_pay_alipay">Alipay</string>
+    <string name="module_donate_pay_wechat">WeChat Pay</string>
+    <string name="module_donate_sku">SKU</string>
+    <string name="module_donate_purchase_process">Processo de compra</string>
+    <string name="module_donate_email_method_title">Código de ativação por e-mail</string>
+    <string name="module_donate_email_step_1">Pague via WeChat/Alipay e envie um e-mail para o endereço acima com o comprovante de pagamento (com o número do pedido) anexado.</string>
+    <string name="module_donate_email_step_2">Use "Thanox Premium Subscription" como assunto do e-mail.</string>
+    <string name="module_donate_email_step_3">Responderemos com o código de ativação por e-mail o mais rápido possível (geralmente dentro de 12 horas).</string>
+    <string name="module_donate_email_qq_consult">Adicione o QQ de atendimento ao cliente %s para obter ajuda.</string>
+    <string name="module_donate_email_qq_consult_hint">Sem resposta há muito tempo?</string>
+    <string name="module_donate_pay_after_send_to_email">Após o pagamento, envie o comprovante (com o número do pedido) para %s; o código de ativação será respondido por e-mail após a verificação.</string>
+    <string name="module_donate_pay_qr">Código QR</string>
+
+    <!-- Settings - History Versions -->
+    <string name="settings_history_versions_title">Versões anteriores</string>
+    <string name="settings_history_versions_summary">Baixar versões anteriores</string>
+
+    <!-- Uninstall Blocker Feature -->
+    <string name="feature_title_uninstall_blocker">Bloqueador de desinstalação</string>
+    <string name="feature_summary_uninstall_blocker">Impede que os apps sejam desinstalados</string>
+    <string name="feature_title_uninstall_blocker_enabled">Bloqueio de desinstalação ativado</string>
+    <string name="feature_title_uninstall_blocker_disabled">Bloqueio de desinstalação desativado</string>
+
+    <!-- Clear Data Blocker Feature -->
+    <string name="feature_title_clear_data_blocker">Bloqueador de limpeza de dados</string>
+    <string name="feature_summary_clear_data_blocker">Impede que os dados dos apps sejam limpos</string>
+    <string name="feature_title_clear_data_blocker_enabled">Bloqueio de limpeza de dados ativado</string>
+    <string name="feature_title_clear_data_blocker_disabled">Bloqueio de limpeza de dados desativado</string>
+
+    <!-- Shortcut Cleaner Feature -->
+    <string name="feature_title_shortcut_cleaner">Limpador de atalhos</string>
+    <string name="feature_summary_shortcut_cleaner">Limpa e gerencia os atalhos dos apps</string>
+
+    <!-- Update Blocker Feature -->
+    <string name="feature_title_update_blocker">Bloqueador de atualização</string>
+    <string name="feature_summary_update_blocker">Impede que os apps sejam atualizados</string>
+    <string name="feature_title_update_blocker_enabled">Bloqueio de atualização ativado</string>
+    <string name="feature_title_update_blocker_disabled">Bloqueio de atualização desativado</string>
+
+</resources>
